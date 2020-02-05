@@ -18746,6 +18746,152 @@
         }
       }
     },
+    "/adoxio_licenceses({adoxio_licencesid})/adoxio_licences_SharePointDocumentLocations": {
+      "get": {
+        "tags": [
+          "licences_sharepointdocumentlocations"
+        ],
+        "summary": "Get adoxio_licences_SharePointDocumentLocations from adoxio_licenceses",
+        "operationId": "licencessharepointdocumentlocations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_licencesid",
+            "description": "key: adoxio_licencesid of adoxio_licences",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocationCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_licenceses({adoxio_licencesid})/adoxio_licences_SharePointDocumentLocations({sharepointdocumentlocationid})": {
+      "get": {
+        "tags": [
+          "licences_sharepointdocumentlocations"
+        ],
+        "summary": "Get adoxio_licences_SharePointDocumentLocations from adoxio_licenceses",
+        "operationId": "licencessharepointdocumentlocations_Getadoxio_licences_SharePointDocumentLocationsByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_licencesid",
+            "description": "key: adoxio_licencesid of adoxio_licences",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "sharepointdocumentlocationid",
+            "description": "key: sharepointdocumentlocationid of sharepointdocumentlocation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocation"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_licencetypes": {
       "get": {
         "tags": [
@@ -29129,6 +29275,58 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/sharepointdocumentlocations({sharepointdocumentlocationid})/regardingobjectid_adoxio_licences": {
+      "get": {
+        "tags": [
+          "regardingobjectid_licences"
+        ],
+        "summary": "Get regardingobjectid_adoxio_licences from sharepointdocumentlocations",
+        "operationId": "Regardingobjectidadoxiolicences_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sharepointdocumentlocationid",
+            "description": "key: sharepointdocumentlocationid of sharepointdocumentlocation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+            }
           },
           "default": {
             "description": "OData Error"
@@ -43655,6 +43853,11 @@
           "description": "",
           "type": "boolean"
         },
+        "adoxio_sitephotographs": {
+          "format": "int32",
+          "description": "Add site photographs of the site to the application page",
+          "type": "integer"
+        },
         "adoxio_isdefault": {
           "description": "",
           "type": "boolean"
@@ -43663,14 +43866,10 @@
           "description": "",
           "type": "boolean"
         },
-        "timezoneruleversionnumber": {
+        "adoxio_connectedgrocerystore": {
           "format": "int32",
-          "description": "For internal use only.",
+          "description": "Show whether this application type can be connected to a Grocery Store or not",
           "type": "integer"
-        },
-        "_owningbusinessunit_value": {
-          "description": "Unique identifier for the business unit that owns the record",
-          "type": "string"
         },
         "adoxio_isshowhoursofsale": {
           "description": "",
@@ -43692,14 +43891,17 @@
           "description": "The name of the custom entity.",
           "type": "string"
         },
+        "_adoxio_renewalapplicationtype_value": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_newestablishmentaddress": {
           "format": "int32",
           "description": "",
           "type": "integer"
         },
-        "createdon": {
-          "format": "date-time",
-          "description": "Date and time when the record was created.",
+        "_owningbusinessunit_value": {
+          "description": "Unique identifier for the business unit that owns the record",
           "type": "string"
         },
         "adoxio_signage": {
@@ -43752,6 +43954,11 @@
           "description": "Unique identifier for the team that owns the record.",
           "type": "string"
         },
+        "createdon": {
+          "format": "date-time",
+          "description": "Date and time when the record was created.",
+          "type": "string"
+        },
         "adoxio_validinterest": {
           "format": "int32",
           "description": "",
@@ -43791,6 +43998,11 @@
           "description": "",
           "type": "string"
         },
+        "adoxio_publiccoolerspace": {
+          "format": "int32",
+          "description": "Is the public permitted to walk into the cooler space?",
+          "type": "integer"
+        },
         "adoxio_isshowsupportingdocuments": {
           "description": "",
           "type": "boolean"
@@ -43802,6 +44014,11 @@
         "adoxio_category": {
           "format": "int32",
           "description": "",
+          "type": "integer"
+        },
+        "timezoneruleversionnumber": {
+          "format": "int32",
+          "description": "For internal use only.",
           "type": "integer"
         },
         "versionnumber": {
@@ -43834,6 +44051,11 @@
           "description": "",
           "type": "boolean"
         },
+        "adoxio_liquorsiteplan": {
+          "format": "int32",
+          "description": "Basic site plan description for liquor.",
+          "type": "integer"
+        },
         "utcconversiontimezonecode": {
           "format": "int32",
           "description": "Time zone code that was in use when the record was created.",
@@ -43856,10 +44078,6 @@
           "type": "boolean"
         },
         "_adoxio_licencetype_value": {
-          "description": "",
-          "type": "string"
-        },
-        "_adoxio_renewalapplicationtype_value": {
           "description": "",
           "type": "string"
         },
@@ -45763,6 +45981,10 @@
           "format": "int32",
           "description": "",
           "type": "integer"
+        },
+        "adoxio_isanonymous": {
+          "description": "",
+          "type": "boolean"
         },
         "adoxio_unlawfulpossessionsalesupply": {
           "description": "",
@@ -48986,8 +49208,8 @@
           "description": "",
           "type": "string"
         },
-        "_owningbusinessunit_value": {
-          "description": "Unique identifier for the business unit that owns the record",
+        "_createdby_value": {
+          "description": "Unique identifier of the user who created the record.",
           "type": "string"
         },
         "adoxio_startdate": {
@@ -49047,11 +49269,11 @@
           "description": "Status of the Event",
           "type": "integer"
         },
-        "_createdby_value": {
-          "description": "Unique identifier of the user who created the record.",
+        "adoxio_externalid": {
+          "description": "",
           "type": "string"
         },
-        "adoxio_externalid": {
+        "adoxio_city": {
           "description": "",
           "type": "string"
         },
@@ -49085,6 +49307,10 @@
           "description": "",
           "type": "string"
         },
+        "adoxio_postalcode": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_eventnumber": {
           "description": "",
           "type": "string"
@@ -49099,12 +49325,20 @@
           "description": "For internal use only.",
           "type": "integer"
         },
+        "adoxio_province": {
+          "description": "",
+          "type": "string"
+        },
         "_modifiedby_value": {
           "description": "Unique identifier of the user who modified the record.",
           "type": "string"
         },
         "_modifiedonbehalfby_value": {
           "description": "Unique identifier of the delegate user who modified the record.",
+          "type": "string"
+        },
+        "adoxio_street2": {
+          "description": "",
           "type": "string"
         },
         "adoxio_specificlocation": {
@@ -49128,6 +49362,10 @@
         },
         "adoxio_liquorserviceenddate": {
           "format": "date-time",
+          "description": "",
+          "type": "string"
+        },
+        "adoxio_street1": {
           "description": "",
           "type": "string"
         },
@@ -49174,6 +49412,10 @@
         },
         "adoxio_eventtypedescription": {
           "description": "",
+          "type": "string"
+        },
+        "_owningbusinessunit_value": {
+          "description": "Unique identifier for the business unit that owns the record",
           "type": "string"
         },
         "adoxio_foodservice": {
@@ -52382,6 +52624,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+          }
+        },
+        "adoxio_licences_SharePointDocumentLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocation"
           }
         }
       }
@@ -75948,10 +76196,6 @@
       "description": "Microsoft.Dynamics.CRM.incident",
       "type": "object",
       "properties": {
-        "_slainvokedid_value": {
-          "description": "Last SLA that was applied to this case. This field is for internal use only.",
-          "type": "string"
-        },
         "adoxio_inspchecklistphototakennotes": {
           "description": "",
           "type": "string"
@@ -75962,10 +76206,6 @@
           "type": "integer"
         },
         "adoxio_noeasection1penaltychoice": {
-          "description": "",
-          "type": "string"
-        },
-        "adoxio_mapagentid2": {
           "description": "",
           "type": "string"
         },
@@ -76094,10 +76334,13 @@
           "description": "Shows whether terms of the associated entitlement should be decremented or not.",
           "type": "boolean"
         },
-        "adoxio_inspchecklistphysicalsecurityoperating": {
-          "format": "int32",
+        "adoxio_inspchecklistsignmeetsrequirementsnotes": {
           "description": "",
-          "type": "integer"
+          "type": "string"
+        },
+        "adoxio_routinechecklistcateringrecordsnotes": {
+          "description": "",
+          "type": "string"
         },
         "adoxio_duedatechangereason": {
           "description": "",
@@ -76109,7 +76352,7 @@
         },
         "adoxio_inspchecklistdepictsaipfloorplan": {
           "format": "int32",
-          "description": "",
+          "description": "1.29.2020: contains legacy values replaced with simple Yes/No. Data maintenance as part of release 3.6.0 will render this field obsolete.",
           "type": "integer"
         },
         "adoxio_inspchecklistnootherbusinessnotes": {
@@ -76133,11 +76376,6 @@
           "description": "Choose the local currency for the record to make sure budgets are reported in the correct currency.",
           "type": "string"
         },
-        "adoxio_mktrchecklistadvertisingreviewed": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
-        },
         "adoxio_createfollowup": {
           "description": "",
           "type": "boolean"
@@ -76153,10 +76391,14 @@
         },
         "adoxio_inspchecklistproductnoselfservice": {
           "format": "int32",
-          "description": "",
+          "description": "1.29.2020: contains legacy values replaced with simple Yes/No. Data maintenance as part of release 3.6.0 will render this field obsolete.",
           "type": "integer"
         },
         "adoxio_pschecklistproductstoragesecurednotes": {
+          "description": "",
+          "type": "string"
+        },
+        "_adoxio_inspector_value": {
           "description": "",
           "type": "string"
         },
@@ -76179,6 +76421,10 @@
           "description": "",
           "type": "integer"
         },
+        "incidentid": {
+          "description": "Unique identifier of the case.",
+          "type": "string"
+        },
         "adoxio_inspectionliquorservice": {
           "format": "int32",
           "description": "",
@@ -76197,19 +76443,27 @@
           "description": "Tells whether customer service representative has contacted the customer or not.",
           "type": "boolean"
         },
+        "adoxio_inspectiontimeinmm": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
+        "adoxio_checklistdiscusscateringrequirementsnotes": {
+          "description": "",
+          "type": "string"
+        },
         "_modifiedbyexternalparty_value": {
           "description": "Shows the external party who modified the record.",
           "type": "string"
         },
         "adoxio_inspchecklistnootherbusinessassociated": {
           "format": "int32",
-          "description": "",
+          "description": "1.29.2020: contains legacy values replaced with simple Yes/No. Data maintenance as part of release 3.6.0 will render this field obsolete.",
           "type": "integer"
         },
-        "adoxio_inspectionintoxication": {
-          "format": "int32",
+        "adoxio_routinechecklisteventcontractsnotes": {
           "description": "",
-          "type": "integer"
+          "type": "string"
         },
         "adoxio_servicehoursfridayopen": {
           "format": "int32",
@@ -76280,6 +76534,11 @@
           "description": "",
           "type": "string"
         },
+        "adoxio_routinecheckliststaffresponsibility": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "adoxio_inspchecklistworkersverifiedroutine": {
           "format": "int32",
           "description": "",
@@ -76297,6 +76556,10 @@
         },
         "_primarycontactid_value": {
           "description": "Select a primary contact for this case.",
+          "type": "string"
+        },
+        "adoxio_routinechecklistliquorstoragenotes": {
+          "description": "",
           "type": "string"
         },
         "adoxio_inspchecklistcannabisregisterroutine": {
@@ -76350,6 +76613,10 @@
           "format": "int32",
           "description": "",
           "type": "integer"
+        },
+        "adoxio_routinecheckliststaffresponsibilitynotes": {
+          "description": "",
+          "type": "string"
         },
         "adoxio_inspectionovercrowding": {
           "format": "int32",
@@ -76412,7 +76679,7 @@
         },
         "adoxio_inspchecklistaccordancewithaipletter": {
           "format": "int32",
-          "description": "",
+          "description": "1.29.2020: contains legacy values replaced with simple Yes/No. Data maintenance as part of release 3.6.0 will render this field obsolete.",
           "type": "integer"
         },
         "adoxio_pschecklistcommunitydisturbancenotes": {
@@ -76423,9 +76690,10 @@
           "description": "Unique identifier for Application Type associated with Inspection.",
           "type": "string"
         },
-        "adoxio_inspchecklistsignmeetsrequirementsnotes": {
+        "adoxio_routinechecklistequipmentchecks": {
+          "format": "int32",
           "description": "",
-          "type": "string"
+          "type": "integer"
         },
         "adoxio_ismarketer": {
           "format": "int32",
@@ -76486,6 +76754,10 @@
           "description": "Shows whether the post originated as a public or private message.",
           "type": "integer"
         },
+        "adoxio_checklistequipmentchecksnotes": {
+          "description": "",
+          "type": "string"
+        },
         "firstresponseslastatus": {
           "format": "int32",
           "description": "Shows the status of the initial response time for the case according to the terms of the SLA.",
@@ -76519,6 +76791,10 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_routinechecklistliquorregisternotes": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_checklistsignandlogomeetsrequirements": {
           "format": "int32",
           "description": "",
@@ -76545,6 +76821,16 @@
         "onholdtime": {
           "format": "int32",
           "description": "Shows the duration in minutes for which the case was on hold.",
+          "type": "integer"
+        },
+        "adoxio_servicehourssaturdayclose": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
+        "adoxio_inspectionintoxication": {
+          "format": "int32",
+          "description": "",
           "type": "integer"
         },
         "resolveby": {
@@ -76586,6 +76872,10 @@
           "format": "int32",
           "description": "",
           "type": "integer"
+        },
+        "adoxio_routinechecklistequipmentchecksnotes": {
+          "description": "",
+          "type": "string"
         },
         "activitiescomplete": {
           "description": "This attribute is used for Sample Service Business Processes.",
@@ -76638,9 +76928,14 @@
           "description": "",
           "type": "string"
         },
+        "adoxio_inspchecklistphysicalsecurityoperating": {
+          "format": "int32",
+          "description": "1.29.2020: contains legacy values replaced with simple Yes/No. Data maintenance as part of release 3.6.0 will render this field obsolete.",
+          "type": "integer"
+        },
         "adoxio_inspchecklistproductnotvisible": {
           "format": "int32",
-          "description": "",
+          "description": "1.29.2020: contains legacy values replaced with simple Yes/No. Data maintenance as part of release 3.6.0 will render this field obsolete.",
           "type": "integer"
         },
         "contractservicelevelcode": {
@@ -76679,6 +76974,15 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_checklistphysicalsecurityoperating": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
+        "adoxio_routinechecklistpricingsizingnotes": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_inspectionnumberofpatrons": {
           "format": "int32",
           "description": "",
@@ -76694,6 +76998,11 @@
           "type": "string"
         },
         "adoxio_checklistnootherbusinessassociated": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
+        "adoxio_servicehourstuesdayopen": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -76717,7 +77026,7 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_inspectiontimeinmm": {
+        "adoxio_mktrchecklistadvertisingreviewed": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -76737,6 +77046,10 @@
           "description": "",
           "type": "string"
         },
+        "adoxio_checklistminorsaspatronsnotes": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_checklistminorspatrons": {
           "format": "int32",
           "description": "",
@@ -76749,7 +77062,7 @@
         },
         "adoxio_inspchecklistsignmeetsrequirements": {
           "format": "int32",
-          "description": "",
+          "description": "1.29.2020: contains legacy values replaced with simple Yes/No. Data maintenance as part of release 3.6.0 will render this field obsolete.",
           "type": "integer"
         },
         "adoxio_externalinvestigationfilenumber": {
@@ -76761,10 +77074,9 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_checklistphysicalsecurityoperating": {
-          "format": "int32",
+        "adoxio_routinechecklistminorsaspatronsnotes": {
           "description": "",
-          "type": "integer"
+          "type": "string"
         },
         "adoxio_inspchecklistfloorplanroutine": {
           "format": "int32",
@@ -76773,7 +77085,7 @@
         },
         "adoxio_inspchecklisttakeandsendphotos": {
           "format": "int32",
-          "description": "",
+          "description": "1.29.2020: contains legacy values replaced with simple Yes/No. Data maintenance as part of release 3.6.0 will render this field obsolete.",
           "type": "integer"
         },
         "adoxio_pschecklistidchecking": {
@@ -77005,10 +77317,9 @@
           "description": "",
           "type": "string"
         },
-        "adoxio_servicehourssaturdayclose": {
-          "format": "int32",
+        "adoxio_mapagentid2": {
           "description": "",
-          "type": "integer"
+          "type": "string"
         },
         "escalatedon": {
           "format": "date-time",
@@ -77019,6 +77330,10 @@
           "format": "int32",
           "description": "",
           "type": "integer"
+        },
+        "adoxio_routinechecklistservingitrightnotes": {
+          "description": "",
+          "type": "string"
         },
         "adoxio_inspectionliquorregister": {
           "format": "int32",
@@ -77039,9 +77354,10 @@
           "description": "Unique identifier of the data import or data migration that created this record.",
           "type": "integer"
         },
-        "incidentid": {
-          "description": "Unique identifier of the case.",
-          "type": "string"
+        "adoxio_routinechecklistminorsaspatrons": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "adoxio_pschecklistintoxicationidentifiednotes": {
           "description": "",
@@ -77097,18 +77413,13 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_servicehourstuesdayopen": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
-        },
         "adoxio_routinechecklistcateringrecords": {
           "format": "int32",
           "description": "",
           "type": "integer"
         },
-        "_adoxio_inspector_value": {
-          "description": "",
+        "_slainvokedid_value": {
+          "description": "Last SLA that was applied to this case. This field is for internal use only.",
           "type": "string"
         },
         "adoxio_servicehourssundayclose": {
@@ -98520,6 +98831,9 @@
         },
         "regardingobjectid_adoxio_complianceinvestigation": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
+        },
+        "regardingobjectid_adoxio_licences": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
         }
       }
     },
@@ -114869,6 +115183,19 @@
         }
       }
     },
+    "Microsoft.Dynamics.CRM.sharepointdocumentlocationCollection": {
+      "title": "Collection of sharepointdocumentlocation",
+      "description": "Microsoft.Dynamics.CRM.sharepointdocumentlocationCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocation"
+          }
+        }
+      }
+    },
     "Microsoft.Dynamics.CRM.adoxio_licencetypeCollection": {
       "title": "Collection of adoxio_licencetype",
       "description": "Microsoft.Dynamics.CRM.adoxio_licencetypeCollection",
@@ -115242,19 +115569,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.savedquery"
-          }
-        }
-      }
-    },
-    "Microsoft.Dynamics.CRM.sharepointdocumentlocationCollection": {
-      "title": "Collection of sharepointdocumentlocation",
-      "description": "Microsoft.Dynamics.CRM.sharepointdocumentlocationCollection",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocation"
           }
         }
       }

@@ -1,13 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
 
     <StartupObject></StartupObject>
 
     <RootNamespace>Gov.Lclb.Cllb.Public.Test</RootNamespace>
+
+    <UserSecretsId>2e46a2d2-8967-4012-a950-ea24e91569d5</UserSecretsId>
     
   </PropertyGroup>
 

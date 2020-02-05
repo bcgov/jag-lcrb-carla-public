@@ -114,7 +114,6 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * @param parentNode 'A LicenseeChangeLog to add the shareholder to'
    */
   addShareholder(parentNode: LicenseeChangeLog) {
-    debugger;
     let rootBusinessType = 'shareholder';
     if (parentNode.isRoot && Account.getBusinessTypeFromName(parentNode.businessType) === 'Partnership') {
       rootBusinessType = 'partnership';
