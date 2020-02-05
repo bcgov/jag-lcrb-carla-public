@@ -1,5 +1,5 @@
 <div class="form-wrapper row" style="position:relative;">
-  <div [ngBusy]="[busy]"></div>
+  <div [ngBusy]="[busy, busyPromise]"></div>
   <section class="col-md-8">
     <app-org-structure [node]="treeRoot" [account]="account"></app-org-structure>
 
@@ -7,87 +7,100 @@
   <section class="col-md-4">
     <h1>&nbsp;</h1><br>
 
-    <section class="large-screen-only">
+    <section class="large-screen-only position-reletaive" *ngIf="treeRoot">
+      <div [ngBusy]="[busy, busyPromise]"></div>
+
       <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0; padding-left:10px;">Organization Information
         Completeness</h3>
       <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-          <div style="font-size:20px;" *ngIf="account?.businessType === 'PrivateCorporation' || account?.businessType === 'PublicCorporation'">
-        
-              <a [routerLink]="[ '/account-profile/']" class="completeness">
-                <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
-                </i>Notice of Articles Uploaded
-              </a> <br>
-            </div>
-    
-            <div style="font-size:20px;" *ngIf="account?.businessType === 'PrivateCorporation'">
-              <a [routerLink]="[ '/org-structure/']" class="completeness">
-                <i class="far fa-times-circle" style="margin-right: 10px; color: red;">
-                </i>Central Securities Register Uploaded
-              </a><br>
-            </div>
-            
-            <div style="font-size:20px;" *ngIf="account?.businessType === 'Partnership'">
-                
-                <a [routerLink]="[ '/account-profile/']" class="completeness">
-                  <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
-                  </i>Partnership Agreement Uploaded
-                </a> <br>
-              </div>
-            <hr>
-            <div *ngIf="LicenseeChangeLog.HasChanges(treeRoot)">
-              <h4>You have identified the following changes:</h4>
-              <table class="smallGridTable" style="font-size:10px;">
-                <thead>
-                  <tr style="height:50px;">
-                  <th>Type</th>
-                  <th>Cannabis<br>Licences</th>
-                  <th>Liquor<br>Licences</th>
-                  <th>Total</th>
-                </tr>
-                </thead>
-                <tr *ngIf="LicenseeChangeLog.GetKeyPersonnelDecendents(treeRoot).length > 0" style="height:50px;">
-                  <td><strong>Leadership Changes</strong></td>
-                  <td>$500 x 0 licences</td>
-                  <td>$220 x 0 licences</td>
-                  <td>$0</td>
-                </tr>
-    
-                  <tr *ngIf="LicenseeChangeLog.GetIndividualShareholderDecendents(treeRoot).length > 0" style="height:50px;">
-                      <td><strong>External Share Transfers</strong></td>
-                      <td>$500 x 0 licences</td>
-                      <td>$220 x 0 licences</td>
-                      <td>$0</td>
-                    </tr>
-                  <tfoot><tr>
-                    <td colspan=3 style="text-align: right;">Total:</td>
-                    <td><strong>$0</strong></td>
-                  </tr>
-                </tfoot>
-              </table>
-              <p>&nbsp;</p>
-      
-    
-            </div>
-        <div style="text-align:center;" *ngIf="LicenseeChangeLog.HasChanges(treeRoot)">
-          <button class="btn btn-primary" (click)="save()">Save</button>
+        <div style="font-size:20px;"
+          *ngIf="account?.businessType === 'PrivateCorporation' || account?.businessType === 'PublicCorporation'">
+
+          <a [routerLink]="[ '/account-profile/']" class="completeness">
+            <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
+            </i>Notice of Articles Uploaded
+          </a> <br>
+        </div>
+
+        <div style="font-size:20px;" *ngIf="account?.businessType === 'PrivateCorporation'">
+          <a [routerLink]="[ '/org-structure/']" class="completeness">
+            <i class="far fa-times-circle" style="margin-right: 10px; color: red;">
+            </i>Central Securities Register Uploaded
+          </a><br>
+        </div>
+
+        <div style="font-size:20px;" *ngIf="account?.businessType === 'Partnership'">
+
+          <a [routerLink]="[ '/account-profile/']" class="completeness">
+            <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
+            </i>Partnership Agreement Uploaded
+          </a> <br>
+        </div>
+        <hr>
+        <div *ngIf="LicenseeChangeLog.HasChanges(treeRoot)">
+          <h4>You have identified the following changes:</h4>
+          <table class="smallGridTable" style="font-size:10px;">
+            <thead>
+              <tr style="height:50px;">
+                <th>Type</th>
+                <th>Cannabis<br>Licences</th>
+                <th>Liquor<br>Licences</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tr *ngIf="LicenseeChangeLog.GetKeyPersonnelDecendents(treeRoot).length > 0" style="height:50px;">
+              <td><strong>Leadership Changes</strong></td>
+              <td>$500 x 0 licences</td>
+              <td>$220 x 0 licences</td>
+              <td>$0</td>
+            </tr>
+
+            <tr *ngIf="LicenseeChangeLog.GetIndividualShareholderDecendents(treeRoot).length > 0" style="height:50px;">
+              <td><strong>External Share Transfers</strong></td>
+              <td>$500 x 0 licences</td>
+              <td>$220 x 0 licences</td>
+              <td>$0</td>
+            </tr>
+            <tfoot>
+              <tr>
+                <td colspan=3 style="text-align: right;">Total:</td>
+                <td><strong>$0</strong></td>
+              </tr>
+            </tfoot>
+          </table>
+          <p>&nbsp;</p>
+
+
+        </div>
+        <div style="text-align:center;" *ngIf="true || LicenseeChangeLog.HasChanges(treeRoot)">
+          <button class="btn btn-primary" (click)="save()">{{getSaveLabel()}}</button>
         </div>
       </div>
 
 
     </section>
-    <section class="submit-container" style="background-color: #F2F2F2; color:#000; border: none;">
-        <h2 style="color: #000">Collection Notice:</h2>
-        <div class="submit-content">
-          <p>
-            The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under
-            Sections 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act
-            for the purpose of cannabis licensing, compliance and enforcement matters in accordance with the Cannabis
-            Control and Licensing Act. Should you have any questions about the collection,
-            use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292
-            STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
-          </p>
-        </div>
-      </section>
+    <section class="error" *ngIf="validationErrors?.length">
+      <p *ngFor="let message of validationErrors">
+        <span class="app-cancel">
+          <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+          {{message}}
+        </span>
+      </p>
+    </section>
+
+    <section class="submit-container" style="background-color: #F2F2F2; color:#000; border: none; padding-left: 20px; padding-top: 5px;">
+      <h2 style="color: #000">Collection Notice:</h2>
+      <div class="submit-content">
+        <p style="padding: 20px; padding-top: 10px;">
+          The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under
+          Sections 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act
+          for the purpose of cannabis licensing, compliance and enforcement matters in accordance with the Cannabis
+          Control and Licensing Act. Should you have any questions about the collection,
+          use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292
+          STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
+        </p>
+      </div>
+    </section>
 
   </section>
 </div>

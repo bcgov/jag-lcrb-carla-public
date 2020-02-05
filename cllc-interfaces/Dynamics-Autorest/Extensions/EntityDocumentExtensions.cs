@@ -15,9 +15,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static string CleanGuidForSharePoint(string guidString)
         {
             string result = null;
-            if (result != null)
+            if (guidString != null)
             {
-                guidString.ToUpper().Replace("-", "");
+                result = guidString.ToUpper().Replace("-", "");
             }
             return result;
         }
@@ -25,7 +25,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static string GetDocumentFolderName(this MicrosoftDynamicsCRMaccount account)
         {
             string accountIdCleaned = CleanGuidForSharePoint(account.Accountid);
-            string folderName = $"{account.Accountid}_{accountIdCleaned}";
+            string folderName = $"{account.Name}_{accountIdCleaned}";
             return folderName;
         }
 
@@ -38,8 +38,8 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public static string GetDocumentFolderName(this MicrosoftDynamicsCRMcontact contact)
         {
-            string applicationIdCleaned = CleanGuidForSharePoint(contact.Contactid);
-            string folderName = $"contact_{applicationIdCleaned}";
+            string contactIdCleaned = CleanGuidForSharePoint(contact.Contactid);
+            string folderName = $"contact_{contactIdCleaned}";
             return folderName;
         }
 
