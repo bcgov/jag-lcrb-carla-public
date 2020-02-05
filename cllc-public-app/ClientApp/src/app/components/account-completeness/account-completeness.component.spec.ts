@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientModule } from '@angular/common/http';
 import { AccountCompletenessComponent } from './account-completeness.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FileDataService } from '@services/file-data.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FileDataService } from '../../services/file-data.service';
 
-const httpClientSpy: { get: jasmine.Spy } = jasmine.createSpyObj('HttpClient', ['get']);
+const fileDataServiceStub: Partial<FileDataService> = {};
 
 describe('AccountCompletenessComponent', () => {
   let component: AccountCompletenessComponent;
@@ -13,15 +13,23 @@ describe('AccountCompletenessComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountCompletenessComponent ],
-      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        RouterTestingModule.withRoutes(
+          [{ path: '', component: AccountCompletenessComponent }, { path: 'simple', component: AccountCompletenessComponent }]
+        ),
+        HttpClientTestingModule
+      ],
+      declarations: [AccountCompletenessComponent],
       providers: [
-        {provide: HttpClient, useValue: httpClientSpy},
-        {provide: FileDataService, useValue: {}},
-      ]
+        {
+            provide: FileDataService, useValue: fileDataServiceStub
+        }
+        ]
     })
     .compileComponents();
   }));
+
+  // TODO - add a test that passes parameters to the component
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AccountCompletenessComponent);
