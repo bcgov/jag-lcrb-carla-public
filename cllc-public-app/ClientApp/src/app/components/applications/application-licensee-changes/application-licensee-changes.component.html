@@ -73,7 +73,7 @@
 
         </div>
         <div style="text-align:center;" *ngIf="true || LicenseeChangeLog.HasChanges(treeRoot)">
-          <button class="btn btn-primary" (click)="save()">{{getSaveLabel()}}</button>
+          <button class="btn btn-primary" [disabled]="disableSaveLabel()" (click)="save()">{{getSaveLabel()}}</button>
         </div>
       </div>
 
