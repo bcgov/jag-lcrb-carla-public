@@ -6,11 +6,11 @@
                     <th style="width: 200px;">First Name</th>
                     <th style="width: 200px;">Last Name</th>
                     <th *ngIf="showPosition()" style="width: 200px;">Position</th>
-                    <th style="width: 200px;">Email</th>
+                    <th style="min-width: 200px;">Email</th>
                     <th style="width: 150px;">Date of Birth</th>
                     <th *ngIf="showPHSLevel1()">Level 1 Personal History Summary </th>
                     <th *ngIf="false">Level 2 Personal History Summary </th>
-                    <th style="background-color: transparent;"></th>
+                    <th style="background-color: transparent; width: 50px;"></th>
                 </tr>
             </thead>
             <ng-container formArrayName="associates">
@@ -104,12 +104,14 @@
                                 (click)="associate.get('edit').value = true;" class="fas fa-pencil-alt"
                                 style="margin-right: 10px;"></i>
                             <i class="fas fa-save save" *ngIf="associate.get('edit').value"
-                                (click)="saveLog(associate.value, i)" style="margin-right: 10px;"></i> <br>
+                                (click)="saveLog(associate.value, i)" style="margin-right: 10px;"></i>
                             <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"></i>
                         </td>
                     </tr>
-                    <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()" style="height:20px;">
-                        <td colspan="7">
+
+    <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType() &&  isNameChangePerformed(associate.value.refObjec) && !associate.get('edit').value"
+                        style="height:20px;">
+                        <td colspan="6">
                             <div (click)="associate.get('collapse').value = !associate.get('collapse').value"
                                 style="padding-left: 20px;">
                                 <mat-expansion-panel class="mat-elevation-z1">
@@ -126,7 +128,7 @@
                                             this list: </p>
                                         <app-file-uploader *ngIf="account" documentType="Name Change Documents"
                                             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
-                                            entityName="application"
+                                            entityName="account"
                                             (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
                                             [entityId]="account.id"
                                             [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
@@ -148,11 +150,11 @@
                     <th style="width: 200px;">First Name</th>
                     <th style="width: 200px;">Last Name</th>
                     <th style="width: 200px;">Shares (%)</th>
-                    <th style="width: 200px;">Email</th>
+                    <th style="min-width: 200px;">Email</th>
                     <th style="width: 150px;">Date of Birth</th>
                     <th *ngIf="false">Liquor Associate Status </th>
                     <th *ngIf="false">Cannabis Associate Status </th>
-                    <th style="background-color: transparent;"></th>
+                    <th style="background-color: transparent; width: 50px;"></th>
                 </tr>
             </thead>
             <ng-container formArrayName="associates">
@@ -211,7 +213,7 @@
                                 [valid]="!associate.get('dateofBirthNew').touched || associate.get('dateofBirthNew').valid"
                                 errorMessage="Please enter Birth Date">
                                 <input type="text" formControlName="dateofBirthNew"
-                                    style="width: 120px; background-color: #fff;" autocomplete="false"
+                                    style="width: 120px; background-color: #fff;" autocomplete="false" [max]="YearsAgo19"
                                     placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker"
                                     (focus)="picker.open()" (click)="picker.open()">
                                 <mat-datepicker #picker></mat-datepicker>
@@ -235,13 +237,13 @@
         <ng-container *ngIf="changeTypeSuffix === 'BusinessShareholder'">
             <thead>
                 <tr *ngIf="associates?.length > 0">
-                    <th style="width: 200px;">Business Name</th>
+                    <th style="min-width: 200px;">Business Name</th>
                     <th style="width: 200px;">Shares (%)</th>
                     <th style="width: 200px;">Business Type</th>
                     <th style="width: 200px;">Email</th>
                     <th *ngIf="false">Liquor Associate Status </th>
                     <th *ngIf="false">Cannabis Associate Status </th>
-                    <th style="background-color: transparent;"></th>
+                    <th style="background-color: transparent; width: 50px;"></th>
                 </tr>
             </thead>
 
