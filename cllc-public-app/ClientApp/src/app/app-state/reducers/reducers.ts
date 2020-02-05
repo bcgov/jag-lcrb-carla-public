@@ -7,6 +7,7 @@ import * as currentLegalEnityReducer from './current-legal-entity-reducer';
 import * as applicationsStateReducer from './indigenous-nation-reducer';
 import * as currentApplicationStateReducer from './current-application-reducer';
 import * as currentUserStateReducer from './current-user-reducer';
+import * as ongoingLicenseeApplicationIdStateReducer from './ongoing-licensee-application-id-reducer';
 
 export const metaReducers: MetaReducer<AppState>[] = !environment.production
     ? [logger]
@@ -18,7 +19,8 @@ export const reducers: ActionReducerMap<AppState> = {
     currentAccountState: currentAccountReducer.reducer,
     indigenousNationState:  applicationsStateReducer.reducer,
     currentApplicaitonState: currentApplicationStateReducer.reducer,
-    currentUserState: currentUserStateReducer.reducer
+    currentUserState: currentUserStateReducer.reducer,
+    onGoingLicenseeChangesApplicationIdState: ongoingLicenseeApplicationIdStateReducer.reducer
 };
 
 export function logger(reducer: ActionReducer<AppState>): ActionReducer<AppState> {

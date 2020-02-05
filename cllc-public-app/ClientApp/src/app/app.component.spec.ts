@@ -15,6 +15,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { VersionInfoDataService } from '@services/version-info-data.service';
 import { BreadcrumbComponent } from '@components/breadcrumb/breadcrumb.component';
 import { MonthlyReportDataService } from '@services/monthly-report.service';
+import { MatSnackBar } from '@angular/material';
+import { ApplicationDataService } from '@services/application-data.service';
 
 let accountDataServiceStub: Partial<AccountDataService>;
 let featureFlagServiceStub: Partial<FeatureFlagService>;
@@ -22,14 +24,14 @@ let featureFlagServiceStub: Partial<FeatureFlagService>;
 describe('AppComponent', () => {
 
   const initialState = {
-    currentAccountState: {currentAccount: new Account()},
-    currentUserState: { currentUser: {}}
+    currentAccountState: { currentAccount: new Account() },
+    currentUserState: { currentUser: {} }
   } as AppState;
 
   beforeEach(async(() => {
 
     accountDataServiceStub = {};
-    featureFlagServiceStub = {featureOn: () => of(true)};
+    featureFlagServiceStub = { featureOn: () => of(true) };
 
     TestBed.configureTestingModule({
       declarations: [
@@ -38,12 +40,14 @@ describe('AppComponent', () => {
       ],
       imports: [
         RouterTestingModule,
-        HttpClientTestingModule
+        HttpClientTestingModule 
       ],
       providers: [
+        { provide: MatSnackBar, useValue: {} },
+        { provide: ApplicationDataService, useValue: { getOngoingLicenseeChangeApplicationId: () => of({}) } },
         provideMockStore({ initialState }),
-        { provide: VersionInfoDataService, useValue: {getVersionInfo: () => of({})} },
-        { provide: MonthlyReportDataService, useValue: {getAllCurrentMonthlyReports: () => of([])} },
+        { provide: VersionInfoDataService, useValue: { getVersionInfo: () => of({}) } },
+        { provide: MonthlyReportDataService, useValue: { getAllCurrentMonthlyReports: () => of([]) } },
         { provide: MatDialog, useValue: {} },
         { provide: FeatureFlagService, useValue: featureFlagServiceStub },
         { provide: AccountDataService, useValue: accountDataServiceStub }

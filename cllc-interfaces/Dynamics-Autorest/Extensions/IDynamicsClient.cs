@@ -20,6 +20,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         string GetCreatedRecord(HttpOperationException httpOperationException, string errorMessage);
 
         Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationById(Guid id);
+        Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationById(string id);
+
         Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationByIdWithChildren(Guid id);
         Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationByIdWithChildren(string id);
 
@@ -45,5 +47,8 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         MicrosoftDynamicsCRMadoxioLicences GetLicenceByIdWithChildren(Guid id);
         MicrosoftDynamicsCRMadoxioLicences GetLicenceByIdWithChildren(string id);
+
+        MicrosoftDynamicsCRMadoxioEvent GetEventByIdWithChildren(string id);
+        MicrosoftDynamicsCRMadoxioEvent GetEventById(string id);
     }
 }
