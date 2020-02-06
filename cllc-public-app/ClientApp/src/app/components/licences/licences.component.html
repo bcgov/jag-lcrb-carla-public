@@ -6,6 +6,9 @@
               <p *ngIf="licensedApplications?.length == 0">
                   <span>You do not have any Licences.</span>
               </p>
+              <p *ngIf="licensedApplications?.length > 0">
+                <span>You have {{licensedApplications?.length}} licences, they are listed below.</span>
+            </p>              
           </section>
         <form [formGroup]="licenceForms[item.licenseId]" *ngFor="let item of licensedApplications; let i = index;">
           <table class="eq-table">
@@ -58,10 +61,7 @@
                     <a [routerLink]="[ '/licence-event/' + item.licenseId]">
                       <i class="fas fa-calendar-alt" style="margin-right: 10px;">
                           </i>Request Event Authorization
-                      </a>
-  
-                      
-                  
+                        </a>                  
                </div>
                 <div *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore">
                   <mat-checkbox
