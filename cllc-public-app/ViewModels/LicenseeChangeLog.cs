@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
@@ -55,6 +56,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string TitleOld { get; set; }
         public System.DateTimeOffset? DateofBirthNew { get; set; }
         public System.DateTimeOffset? DateofBirthOld { get; set; }
+
+        public Decimal? AnnualMembershipFee { get; set; }
+        public int? NumberOfMembers { get; set; }
 
         public Account BusinessAccount { get; set; }
         public Contact Contact { get; set; }
