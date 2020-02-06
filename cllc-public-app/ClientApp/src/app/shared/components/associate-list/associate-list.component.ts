@@ -296,11 +296,16 @@ export class AssociateListComponent extends FormBase implements OnInit {
       || this.businessType === 'PublicCorporation';
   }
 
-  showPHSLevel1(item: LicenseeChangeLog): boolean {
+  // check to see if there is a link in any child records; when set to true the Level 1 Personal History Summary column will show.
+  showPHSLevel1(): boolean {
     let show = false;
-    if (this.rootNode && this.rootNode.children) {
-      this.rootNode.children.length > 0;
+
+    // get associates with a phsLink
+    const links = this.associates.value.filter( item => !!item.refObject.phsLink  && !item.refObject.isRemoveChangeType());
+    if (links.length > 0) {
+      show = true;
     }
+    console.log(this.associates);
     return show;
   }
 

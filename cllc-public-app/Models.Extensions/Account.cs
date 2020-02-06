@@ -140,7 +140,7 @@ string accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", ""
             }
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddressPostalCode != null))
             {
-                toDynamics.Address1Postalcode = fromVM.mailingAddressPostalCode;
+                toDynamics.Address1Postalcode = fromVM.mailingAddressPostalCode.Replace(" ", "");
             }
 
             if (copyIfNull || (!copyIfNull && fromVM.physicalAddressName != null))
@@ -169,7 +169,7 @@ string accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", ""
             }
             if (copyIfNull || (!copyIfNull && fromVM.physicalAddressPostalCode != null))
             {
-                toDynamics.Address2Postalcode = fromVM.physicalAddressPostalCode;
+                toDynamics.Address2Postalcode = fromVM.physicalAddressPostalCode.Replace(" ", "");
             }
 
             // business type must be set only during creation, not in update (removed from copyValues() )
@@ -221,6 +221,8 @@ string accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", ""
                 accountVM.mailingAddressCity = account.Address1City;
                 accountVM.mailingAddressCountry = account.Address1Country;
                 accountVM.mailingAddressProvince = account.Address1Stateorprovince;
+
+
                 accountVM.mailingAddressPostalCode = account.Address1Postalcode;
 
                 accountVM.physicalAddressName = account.Address2Name;
