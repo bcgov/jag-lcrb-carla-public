@@ -35,7 +35,6 @@ const RENEWAL_DUE = 'Renewal Due';
 })
 export class LicencesComponent extends FormBase implements OnInit {
   applications: ApplicationSummary[] = [];
-  licensedApplications: ApplicationLicenseSummary[] = [];
   licenceForms = {};
 
   readonly ACTIVE = ACTIVE;
@@ -49,6 +48,7 @@ export class LicencesComponent extends FormBase implements OnInit {
   dataLoaded = false;
   ApplicationTypeNames = ApplicationTypeNames;
   licenceTransferFeatureOn = false;
+  licenceMappings = {};
 
   constructor(
     private applicationDataService: ApplicationDataService,
@@ -76,7 +76,6 @@ export class LicencesComponent extends FormBase implements OnInit {
    *
    * */
   private displayApplications() {
-    this.licensedApplications = [];
     this.busy =
       forkJoin(this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()
       ).pipe(takeWhile(() => this.componentActive))
@@ -188,11 +187,19 @@ export class LicencesComponent extends FormBase implements OnInit {
       });
     });
 
-    const licenceIndex = this.licensedApplications.findIndex(l => l.licenseId === licence.licenseId);
+    if (typeof this.licenceMappings[licence.licenceTypeName] === 'undefined') {
+      this.licenceMappings[licence.licenceTypeName] = [];
+    }
+    const licenceIndex = this.licenceMappings[licence.licenceTypeName].findIndex(l => l.licenseId === licence.licenseId);
     if (licenceIndex >= 0) {
-      this.licensedApplications[licenceIndex] = licence;
+      this.licenceMappings[licence.licenceTypeName][licenceIndex] = licence;
     } else {
-      this.licensedApplications.push(licence);
+      // this.licensedApplications.push(licence);
+      // const index = this.licensedApplications.length - 1;
+      // if (typeof this.licenceMappings[licence.licenceTypeName] === 'undefined') {
+      //   this.licenceMappings[licence.licenceTypeName] = [];
+      // }
+      this.licenceMappings[licence.licenceTypeName].push(licence);
     }
     this.licenceForms[licence.licenseId] = this.fb.group({
       phone: [licence.establishmentPhoneNumber],
@@ -255,7 +262,7 @@ export class LicencesComponent extends FormBase implements OnInit {
     this.busy = this.establishmentService.upEstablishment(establishment).subscribe();
   }
 
-  toggleStoreOpen(index: number, establishmentId: string, isOpen: boolean) {
+  toggleStoreOpen(licenceType: string, index: number, establishmentId: string, isOpen: boolean) {
     const establishment = {
       id: establishmentId,
       isOpen: isOpen,
@@ -267,7 +274,7 @@ export class LicencesComponent extends FormBase implements OnInit {
       this.establishmentService.upEstablishment(establishment)
       )
     .subscribe(([establishmentResp]) => {
-      this.licensedApplications[index].establishmentIsOpen = establishmentResp.isOpen;
+      this.licenceMappings[licenceType][index].establishmentIsOpen = establishmentResp.isOpen;
     });
   }
 }
