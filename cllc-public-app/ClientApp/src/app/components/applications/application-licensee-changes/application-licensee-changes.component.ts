@@ -75,20 +75,19 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     });
 
     this.store.select(state => state.onGoingLicenseeChangesApplicationIdState.onGoingLicenseeChangesApplicationId)
-    .pipe(takeWhile(() => this.componentActive))
-    .pipe(filter(id => !!id))
-    .subscribe(id => {
-      this.applicationId = id;
-      this.loadData();
-    });
-    
+      .pipe(takeWhile(() => this.componentActive))
+      .pipe(filter(id => !!id))
+      .subscribe(id => {
+        this.applicationId = id;
+        this.loadData();
+      });
+
     this.store.select(state => state.currentAccountState.currentAccount)
-    .pipe(takeWhile(() => this.componentActive))
-    .pipe(filter(account => !!account))
+      .pipe(takeWhile(() => this.componentActive))
+      .pipe(filter(account => !!account))
       .subscribe((account) => {
         this.account = account;
       });
-
     // this.loadData();
   }
 
@@ -111,7 +110,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
         this.addDynamicContent();
         this.form.patchValue(this.application);
-      }  );
+      });
   }
 
   getSaveLabel(): string {
@@ -119,16 +118,27 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     if (!this.thereIsExistingOrgStructure) {
       label = 'Submit Org Structure';
     }
-
     if (LicenseeChangeLog.HasChanges(this.treeRoot)) {
       label = 'Save Changes to Org Structure';
     }
-
     if (!this.thereIsExistingOrgStructure && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
       label = 'Confirm No Changes to Current Org Structure';
     }
-
     return label;
+  }
+
+  disableSaveLabel(): boolean {
+    let disable = false;
+    if (!this.thereIsExistingOrgStructure) {
+      disable = true;
+    }
+    if (LicenseeChangeLog.HasChanges(this.treeRoot)) {
+      disable = false;
+    }
+    if (!this.thereIsExistingOrgStructure && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
+      disable = false;
+    }
+    return disable;
   }
 
 
@@ -136,93 +146,93 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
    * Gets the number of applications owned by the current user that are not terminated
    */
   private GetNotTerminatedCRSApplicationCount() {
-    this.busy =
-      this.applicationDataService.getAllCurrentApplications()
-        .pipe(takeWhile(() => this.componentActive))
-        .subscribe((applications: ApplicationSummary[]) => {
-          // filter out approved applications
-          const notTerminatedApplications =
-            applications.filter(app => {
-              let noneTerminatedCRSApplications: boolean = ['Terminated and refunded'].indexOf(app.applicationStatus) === -1
-                && app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore;
-              return noneTerminatedCRSApplications;
-            });
-          this.numberOfNonTerminatedApplications = notTerminatedApplications.length;
-        });
-  }
-
-  validateNonIndividauls() {
-    this.validationErrors = this.validateRecursive(this.treeRoot);
-  }
-
-  validateRecursive(node: LicenseeChangeLog): string[] {
-    node = Object.assign(new LicenseeChangeLog, node);
-    let validationMessages = [];
-    if (!node.isRemoveChangeType()) {
-      validationMessages = LicenseeChangeLog.ValidateNonIndividaul(node);
-      node.children = node.children || [];
-      node.children.forEach((child: LicenseeChangeLog) => {
-        validationMessages = validationMessages.concat(this.validateRecursive(child));
+  this.busy =
+    this.applicationDataService.getAllCurrentApplications()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((applications: ApplicationSummary[]) => {
+        // filter out approved applications
+        const notTerminatedApplications =
+          applications.filter(app => {
+            let noneTerminatedCRSApplications: boolean = ['Terminated and refunded'].indexOf(app.applicationStatus) === -1
+              && app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore;
+            return noneTerminatedCRSApplications;
+          });
+        this.numberOfNonTerminatedApplications = notTerminatedApplications.length;
       });
-    }
-    return validationMessages;
+}
+
+validateNonIndividauls() {
+  this.validationErrors = this.validateRecursive(this.treeRoot);
+}
+
+validateRecursive(node: LicenseeChangeLog): string[] {
+  node = Object.assign(new LicenseeChangeLog, node);
+  let validationMessages = [];
+  if (!node.isRemoveChangeType()) {
+    validationMessages = LicenseeChangeLog.ValidateNonIndividaul(node);
+    node.children = node.children || [];
+    node.children.forEach((child: LicenseeChangeLog) => {
+      validationMessages = validationMessages.concat(this.validateRecursive(child));
+    });
   }
+  return validationMessages;
+}
 
-  /**
-   * Sends data to dynamics
-   */
-  save() {
-    this.validateNonIndividauls();
-    if (this.validationErrors.length === 0) {
-      const data = this.cleanSaveData(this.treeRoot);
-      this.busySave = forkJoin(
-        this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, isApplicationComplete: 'Yes' }),
-        this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId),
-        this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges))
-        .subscribe(() => {
-          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-          this.saveComplete.emit(true);
-          this.loadData();
-        });
-    }
+/**
+ * Sends data to dynamics
+ */
+save() {
+  this.validateNonIndividauls();
+  if (this.validationErrors.length === 0) {
+    const data = this.cleanSaveData(this.treeRoot);
+    this.busySave = forkJoin(
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, isApplicationComplete: 'Yes' }),
+      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId),
+      this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges))
+      .subscribe(() => {
+        this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+        this.saveComplete.emit(true);
+        this.loadData();
+      });
   }
+}
 
-  addCancelledChange(change: LicenseeChangeLog) {
-    this.cancelledLicenseeChanges.push(change);
+addCancelledChange(change: LicenseeChangeLog) {
+  this.cancelledLicenseeChanges.push(change);
+}
+
+cancelApplication() {
+}
+
+/**
+ * Returns true if there is an ongoing or approved (but not terminated)
+ * CRS application
+ */
+aNonTerminatedCrsApplicationExistOnAccount(): boolean {
+  return this.numberOfNonTerminatedApplications > 0;
+}
+
+cleanSaveData(data: LicenseeChangeLog): LicenseeChangeLog {
+  const result = { ...data } as LicenseeChangeLog;
+  this.removeParentReferences(result);
+  return result;
+}
+
+removeParentReferences(node: LicenseeChangeLog) {
+  //Form the parent account relationship
+  if (node.parentLinceseeChangeLog && node.parentLinceseeChangeLog.businessAccountId) {
+    node.parentBusinessAccountId = node.parentLinceseeChangeLog.businessAccountId;
   }
+  // remove parent reference
+  node.parentLinceseeChangeLog = undefined;
+  node.refObject = undefined;
 
-  cancelApplication() {
+
+  if (node.children && node.children.length) {
+    node.children.forEach(child => {
+      this.removeParentReferences(child)
+    })
   }
-
-  /**
-   * Returns true if there is an ongoing or approved (but not terminated)
-   * CRS application
-   */
-  aNonTerminatedCrsApplicationExistOnAccount(): boolean {
-    return this.numberOfNonTerminatedApplications > 0;
-  }
-
-  cleanSaveData(data: LicenseeChangeLog): LicenseeChangeLog {
-    const result = { ...data } as LicenseeChangeLog;
-    this.removeParentReferences(result);
-    return result;
-  }
-
-  removeParentReferences(node: LicenseeChangeLog) {
-    //Form the parent account relationship
-    if (node.parentLinceseeChangeLog && node.parentLinceseeChangeLog.businessAccountId) {
-      node.parentBusinessAccountId = node.parentLinceseeChangeLog.businessAccountId;
-    }
-    // remove parent reference
-    node.parentLinceseeChangeLog = undefined;
-    node.refObject = undefined;
-
-
-    if (node.children && node.children.length) {
-      node.children.forEach(child => {
-        this.removeParentReferences(child)
-      })
-    }
-  }
+}
 }
 
