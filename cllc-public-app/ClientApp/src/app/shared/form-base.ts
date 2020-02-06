@@ -5,7 +5,7 @@ import { ApplicationHTMLContent } from '@components/applications/application/app
 import { ApplicationTypeNames } from '@models/application-type.model';
 
 
-export const CanadaPostalRegex = '^[A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9]$';
+export const CanadaPostalRegex = '^[A-Za-z][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$';
 export const USPostalRegex = '^\\d{5}([\-]\\d{4})?$';
 
 export class FormBase implements OnDestroy {

@@ -2385,154 +2385,6 @@
         </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="" />
       </EntityType>
-      <EntityType Name="adoxio_applicationbpfmvpv2" BaseType="mscrm.crmbaseentity">
-        <Key>
-          <PropertyRef Name="businessprocessflowinstanceid" />
-        </Key>
-        <Property Name="completedon" Type="Edm.DateTimeOffset">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time when Business Process Flow instance is completed." />
-        </Property>
-        <Property Name="_bpf_adoxio_applicationid_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="bpf_duration" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Duration of Business Process Flow" />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="versionnumber" Type="Edm.Int64" ConcurrencyMode="Fixed">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Version Number" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="_processid_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the workflow associated to the Business Process Flow instance." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="traversedpath" Type="Edm.String" Unicode="false">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Comma delimited string of process stage ids that represent visited stages of the Business Process Flow instance." />
-        </Property>
-        <Property Name="_organizationid_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the organization" />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="businessprocessflowinstanceid" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for entity instances" />
-        </Property>
-        <Property Name="_modifiedonbehalfby_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the delegate user who modified the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="_createdonbehalfby_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the delegate user who created the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="statuscode" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Reason for the status of the Application BPF MVP v2.0" />
-        </Property>
-        <Property Name="bpf_name" Type="Edm.String" Unicode="false">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Description" />
-        </Property>
-        <Property Name="_activestageid_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the active stage for the Business Process Flow instance." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="createdon" Type="Edm.DateTimeOffset">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time when the record was created." />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="timezoneruleversionnumber" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="For internal use only." />
-        </Property>
-        <Property Name="_createdby_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who created the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="statecode" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Status of the Application BPF MVP v2.0" />
-        </Property>
-        <Property Name="overriddencreatedon" Type="Edm.DateTimeOffset">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time that the record was migrated." />
-        </Property>
-        <Property Name="utcconversiontimezonecode" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Time zone code that was in use when the record was created." />
-        </Property>
-        <Property Name="_modifiedby_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who modified the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="modifiedon" Type="Edm.DateTimeOffset">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time when the record was modified." />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="activestagestartedon" Type="Edm.DateTimeOffset">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time when current active stage is started" />
-        </Property>
-        <Property Name="importsequencenumber" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Sequence number of the import that created this record." />
-        </Property>
-        <NavigationProperty Name="createdbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_applicationbpfmvpv2_createdby">
-          <ReferentialConstraint Property="_createdby_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="createdonbehalfbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_applicationbpfmvpv2_createdonbehalfby">
-          <ReferentialConstraint Property="_createdonbehalfby_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="modifiedbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_applicationbpfmvpv2_modifiedby">
-          <ReferentialConstraint Property="_modifiedby_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="modifiedonbehalfbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_applicationbpfmvpv2_modifiedonbehalfby">
-          <ReferentialConstraint Property="_modifiedonbehalfby_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="organizationid" Type="mscrm.organization" Nullable="false" Partner="organization_adoxio_applicationbpfmvpv2">
-          <ReferentialConstraint Property="_organizationid_value" ReferencedProperty="organizationid" />
-        </NavigationProperty>
-        <NavigationProperty Name="activestageidname" Type="mscrm.processstage" Nullable="false" Partner="lk_adoxio_applicationbpfmvpv2_activestageid">
-          <ReferentialConstraint Property="_activestageid_value" ReferencedProperty="processstageid" />
-        </NavigationProperty>
-        <NavigationProperty Name="processidname" Type="mscrm.workflow" Nullable="false" Partner="lk_adoxio_applicationbpfmvpv2_processid">
-          <ReferentialConstraint Property="_processid_value" ReferencedProperty="workflowid" />
-        </NavigationProperty>
-        <NavigationProperty Name="adoxio_applicationbpfmvpv2_SyncErrors" Type="Collection(mscrm.syncerror)" Partner="regardingobjectid_adoxio_applicationbpfmvpv2" />
-        <NavigationProperty Name="adoxio_applicationbpfmvpv2_AsyncOperations" Type="Collection(mscrm.asyncoperation)" Partner="regardingobjectid_adoxio_applicationbpfmvpv2" />
-        <NavigationProperty Name="adoxio_applicationbpfmvpv2_WorkflowLogs" Type="Collection(mscrm.workflowlog)" Partner="asyncoperationid_adoxio_applicationbpfmvpv2" />
-        <NavigationProperty Name="adoxio_applicationbpfmvpv2_BulkDeleteFailures" Type="Collection(mscrm.bulkdeletefailure)" Partner="regardingobjectid_adoxio_applicationbpfmvpv2" />
-        <NavigationProperty Name="bpf_adoxio_applicationid" Type="mscrm.adoxio_application" Nullable="false" Partner="bpf_adoxio_application_adoxio_applicationbpfmvpv2">
-          <ReferentialConstraint Property="_bpf_adoxio_applicationid_value" ReferencedProperty="adoxio_applicationid" />
-        </NavigationProperty>
-        <Annotation Term="Org.OData.Core.V1.Description" String="Base entity for process Application BPF MVP v2.0" />
-      </EntityType>
       <EntityType Name="adoxio_applicationbpfv3" BaseType="mscrm.crmbaseentity">
         <Key>
           <PropertyRef Name="businessprocessflowinstanceid" />
@@ -3315,9 +3167,6 @@
         <Property Name="adoxio_checklistunreportedsaleofbusiness" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_establishmentcomplytozoningregulations" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
         <Property Name="adoxio_establishmentaddressstreet" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3352,9 +3201,6 @@
         <Property Name="adoxio_otherbusinesssamelocationdetails" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_appchecklistvalidinterestreceived" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Tied to the Revised WFs?" />
-        </Property>
         <Property Name="adoxio_checklistaipdecision" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
         </Property>
@@ -3364,11 +3210,8 @@
         <Property Name="adoxio_establishmentlayoutapplyingforpatio" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_checklistverifybusinessprofile" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
-        </Property>
-        <Property Name="adoxio_checklistresolutionassessment" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
+        <Property Name="adoxio_triggertogeneratesecurityclearance" Type="Edm.Boolean">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="traversedpath" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="A comma separated list of string values representing the unique identifiers of stages in a Business Process Flow Instance in the order that they occur." />
@@ -3487,9 +3330,6 @@
         <Property Name="adoxio_establishmentaddresscountry" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_dateaipdecisionlettersent" Type="Edm.DateTimeOffset">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
         <Property Name="adoxio_dateaipexpiredlongdatestring" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3588,7 +3428,7 @@
         <Property Name="adoxio_name" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="The name of the custom entity." />
         </Property>
-        <Property Name="adoxio_checklistassociatescontacted" Type="Edm.Int32">
+        <Property Name="adoxio_checklistassociatesconsentreceived" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_establishmentpropsedname" Type="Edm.String" Unicode="false">
@@ -3650,19 +3490,19 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
+        <Property Name="adoxio_refusedreason" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_datesentinvestigations" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_addresscity" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_checklistfloorplanassessed" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
-        </Property>
-        <Property Name="adoxio_liquorindustryconnectionsdetails" Type="Edm.String" Unicode="false">
+        <Property Name="adoxio_dateaipdecisionlettersent" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_triggertogeneratesecurityclearance" Type="Edm.Boolean">
+        <Property Name="adoxio_liquorindustryconnectionsdetails" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_isreadyvalidinterest" Type="Edm.Boolean">
@@ -3671,7 +3511,7 @@
         <Property Name="adoxio_inspectionchecklistdate" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="Used to store the date that the Inspector conducted the checklist and the notes were added to the parent application. Applicable only for AIP inspections." />
         </Property>
-        <Property Name="adoxio_sharepointanchorforpersonalhistory" Type="Edm.String" Unicode="false">
+        <Property Name="adoxio_fitandpropercomplete" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_initialcapassessmentdate" Type="Edm.DateTimeOffset">
@@ -3695,12 +3535,8 @@
         <Property Name="adoxio_checklisttiedhouseassess" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_contactpersonfullname" Type="Edm.String" Unicode="false">
+        <Property Name="adoxio_sharepointanchorforpersonalhistory" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
         </Property>
         <Property Name="adoxio_checklistzoningaip" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -3708,7 +3544,7 @@
         <Property Name="adoxio_uploadedimageofestablishment" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_checklistsentforfisla" Type="Edm.Int32">
+        <Property Name="adoxio_establishmentcomplytozoningregulations" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_establishmentaddress" Type="Edm.String" Unicode="false">
@@ -3718,7 +3554,7 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
-        <Property Name="adoxio_fitandpropercomplete" Type="Edm.Boolean">
+        <Property Name="adoxio_securityclearancegenerateddate" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_jobnumber" Type="Edm.String" Unicode="false">
@@ -3777,9 +3613,6 @@
         <Property Name="adoxio_renewaltiedhousefederalinterest" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_checklistfloorplanlined" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
-        </Property>
         <Property Name="adoxio_businessinfoemail" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3821,9 +3654,6 @@
           <Annotation Term="Org.OData.Core.V1.Permissions">
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
-        </Property>
-        <Property Name="adoxio_refusedreason" Type="Edm.String" Unicode="false">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_invoicetrigger" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -3994,9 +3824,6 @@
         <Property Name="adoxio_progressstatus" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_checklisttiedhouseassessed" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
-        </Property>
         <Property Name="lastonholdtime" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="Contains the date and time stamp of the last on-hold time" />
         </Property>
@@ -4019,9 +3846,6 @@
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_checklistsignageassessed" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
-        <Property Name="adoxio_checklistverifyapplication" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_establishmentdeclarationoption1" Type="Edm.Int32">
@@ -4077,9 +3901,6 @@
         <Property Name="adoxio_email" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_eligibilityassessmentresult" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
         <Property Name="adoxio_renewalkeypersonnel" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -4090,9 +3911,6 @@
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_appchecklistpaymentreceived" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
-        <Property Name="adoxio_appchecklistvalidinterestreceivedfinal" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_dateaip" Type="Edm.DateTimeOffset">
@@ -4132,8 +3950,12 @@
         <Property Name="adoxio_checklistfinalreviewcomplete" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_checklistcorporatedocsassessed" Type="Edm.Int32">
+        <Property Name="adoxio_contactpersonfullname" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
         </Property>
         <Property Name="adoxio_renewalshareholders" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -4190,8 +4012,11 @@
         <Property Name="adoxio_otherbusinessesatthesamelocation" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_checklistbrandingassessed" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
+        <Property Name="adoxio_eligibilityassessmentresult" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_appchecklistinspectionreviewcomplete" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_checklistnoticeofarticles" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -4214,12 +4039,6 @@
         <Property Name="adoxio_dateappealed" Type="Edm.Date">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_checklistassociatesconsentreceived" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
-        <Property Name="adoxio_checklistsitemapassessed" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
-        </Property>
         <Property Name="adoxio_checklistlicencefeepaid" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
         </Property>
@@ -4233,9 +4052,6 @@
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_renewalunreportedsaleofbusiness" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
-        <Property Name="adoxio_securityclearancegenerateddate" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_checklistsecuritiesregister" Type="Edm.Int32">
@@ -4274,7 +4090,7 @@
         <Property Name="adoxio_uploadedlegalentitystructure" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_appchecklistinspectionreviewcomplete" Type="Edm.Int32">
+        <Property Name="adoxio_checklistcorporatedocsassessed" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_adoxio_invoice_value" Type="Edm.Guid">
@@ -4349,9 +4165,6 @@
         </Property>
         <Property Name="adoxio_establishmentcomplytoallbylaws" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
-        <Property Name="adoxio_checklistvalidinterestassessed" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
         </Property>
         <Property Name="adoxio_contactpersonphone" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -4510,7 +4323,6 @@
         <NavigationProperty Name="adoxio_Inspector" Type="mscrm.systemuser" Nullable="false" Partner="adoxio_systemuser_adoxio_application_Inspector">
           <ReferentialConstraint Property="_adoxio_inspector_value" ReferencedProperty="systemuserid" />
         </NavigationProperty>
-        <NavigationProperty Name="bpf_adoxio_application_adoxio_applicationbpfmvpv2" Type="Collection(mscrm.adoxio_applicationbpfmvpv2)" Partner="bpf_adoxio_applicationid" />
         <NavigationProperty Name="adoxio_application_documents" Type="Collection(mscrm.adoxio_document)" Partner="adoxio_ApplicationId" />
         <NavigationProperty Name="adoxio_ApplicationTypeId" Type="mscrm.adoxio_applicationtype" Nullable="false" Partner="adoxio_applicationtype_applications">
           <ReferentialConstraint Property="_adoxio_applicationtypeid_value" ReferencedProperty="adoxio_applicationtypeid" />
@@ -5225,6 +5037,9 @@
         <Property Name="adoxio_name" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="The name of the custom entity." />
         </Property>
+        <Property Name="adoxio_siteplan" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="_adoxio_renewalapplicationtype_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
           <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
@@ -5351,7 +5166,7 @@
         <Property Name="adoxio_defaultbpmid" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_siteplan" Type="Edm.Int32">
+        <Property Name="adoxio_proofofzoning" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_modifiedonbehalfby_value" Type="Edm.Guid">
@@ -12739,12 +12554,6 @@
         <Property Name="adoxio_ismanagernew" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="versionnumber" Type="Edm.Int64" ConcurrencyMode="Fixed">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Version Number" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
         <Property Name="utcconversiontimezonecode" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Time zone code that was in use when the record was created." />
         </Property>
@@ -12784,6 +12593,9 @@
           </Annotation>
         </Property>
         <Property Name="adoxio_ismanagerold" Type="Edm.Boolean">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_numberofmembers" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_businessaccounttype" Type="Edm.Int32">
@@ -12864,8 +12676,8 @@
         <Property Name="adoxio_ispartnerold" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="_createdby_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who created the record." />
+        <Property Name="_transactioncurrencyid_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the currency associated with the entity." />
           <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
           <Annotation Term="Org.OData.Core.V1.Permissions">
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
@@ -12877,6 +12689,9 @@
           <Annotation Term="Org.OData.Core.V1.Permissions">
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
+        </Property>
+        <Property Name="adoxio_annualmembershipfee" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_isshareholdernew" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -12928,8 +12743,20 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
+        <Property Name="exchangerate" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Exchange rate for the currency associated with the entity with respect to the base currency." />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="adoxio_istrusteeold" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="versionnumber" Type="Edm.Int64" ConcurrencyMode="Fixed">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Version Number" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
         </Property>
         <Property Name="overriddencreatedon" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="Date and time that the record was migrated." />
@@ -12955,6 +12782,19 @@
         </Property>
         <Property Name="adoxio_lastnameold" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_annualmembershipfee_base" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Value of the Annual Membership Fee in base currency." />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="_createdby_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who created the record." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
         </Property>
         <Property Name="adoxio_jobnumber" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -13032,6 +12872,9 @@
         </NavigationProperty>
         <NavigationProperty Name="adoxio_LegalEntityId" Type="mscrm.adoxio_legalentity" Nullable="false" Partner="adoxio_legalentity_changelogs">
           <ReferentialConstraint Property="_adoxio_legalentityid_value" ReferencedProperty="adoxio_legalentityid" />
+        </NavigationProperty>
+        <NavigationProperty Name="transactioncurrencyid" Type="mscrm.transactioncurrency" Nullable="false" Partner="TransactionCurrency_adoxio_licenseechangelog">
+          <ReferentialConstraint Property="_transactioncurrencyid_value" ReferencedProperty="transactioncurrencyid" />
         </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="" />
       </EntityType>
@@ -17849,9 +17692,6 @@
         <NavigationProperty Name="regardingobjectid_adoxio_application" Type="mscrm.adoxio_application" Nullable="false" Partner="adoxio_application_AsyncOperations">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_applicationid" />
         </NavigationProperty>
-        <NavigationProperty Name="regardingobjectid_adoxio_applicationbpfmvpv2" Type="mscrm.adoxio_applicationbpfmvpv2" Nullable="false" Partner="adoxio_applicationbpfmvpv2_AsyncOperations">
-          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="businessprocessflowinstanceid" />
-        </NavigationProperty>
         <NavigationProperty Name="regardingobjectid_adoxio_applicationinvoicehistory" Type="mscrm.adoxio_applicationinvoicehistory" Nullable="false" Partner="adoxio_applicationinvoicehistory_AsyncOperations">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_applicationinvoicehistoryid" />
         </NavigationProperty>
@@ -19866,9 +19706,6 @@
         </NavigationProperty>
         <NavigationProperty Name="regardingobjectid_adoxio_application" Type="mscrm.adoxio_application" Nullable="false" Partner="adoxio_application_BulkDeleteFailures">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_applicationid" />
-        </NavigationProperty>
-        <NavigationProperty Name="regardingobjectid_adoxio_applicationbpfmvpv2" Type="mscrm.adoxio_applicationbpfmvpv2" Nullable="false" Partner="adoxio_applicationbpfmvpv2_BulkDeleteFailures">
-          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="businessprocessflowinstanceid" />
         </NavigationProperty>
         <NavigationProperty Name="regardingobjectid_adoxio_applicationinvoicehistory" Type="mscrm.adoxio_applicationinvoicehistory" Nullable="false" Partner="adoxio_applicationinvoicehistory_BulkDeleteFailures">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_applicationinvoicehistoryid" />
@@ -41512,7 +41349,6 @@
         <NavigationProperty Name="languagelocale_organization" Type="Collection(mscrm.languagelocale)" Partner="organizationid" />
         <NavigationProperty Name="organization_products" Type="Collection(mscrm.product)" Partner="organizationid" />
         <NavigationProperty Name="organization_subjects" Type="Collection(mscrm.subject)" Partner="organizationid" />
-        <NavigationProperty Name="organization_adoxio_applicationbpfmvpv2" Type="Collection(mscrm.adoxio_applicationbpfmvpv2)" Partner="organizationid" />
         <NavigationProperty Name="organization_adoxio_customautonumberdefinition" Type="Collection(mscrm.adoxio_customautonumberdefinition)" Partner="organizationid" />
         <NavigationProperty Name="organization_adoxio_customautonumberrequest" Type="Collection(mscrm.adoxio_customautonumberrequest)" Partner="organizationid" />
         <NavigationProperty Name="organization_adoxio_localgovindigenousnation" Type="Collection(mscrm.adoxio_localgovindigenousnation)" Partner="organizationid" />
@@ -43466,7 +43302,6 @@
         <NavigationProperty Name="processstage_translationprocess" Type="Collection(mscrm.translationprocess)" Partner="activestageid" />
         <NavigationProperty Name="processstage_account" Type="Collection(mscrm.account)" Partner="stageid_processstage" />
         <NavigationProperty Name="processstage_adoxio_application" Type="Collection(mscrm.adoxio_application)" Partner="stageid" />
-        <NavigationProperty Name="lk_adoxio_applicationbpfmvpv2_activestageid" Type="Collection(mscrm.adoxio_applicationbpfmvpv2)" Partner="activestageidname" />
         <NavigationProperty Name="processstage_adoxio_complaint" Type="Collection(mscrm.adoxio_complaint)" Partner="stageid" />
         <NavigationProperty Name="lk_adoxio_applicationbpfv3_activestageid" Type="Collection(mscrm.adoxio_applicationbpfv3)" Partner="activestageidname" />
         <NavigationProperty Name="lk_adoxio_applicationlicenseechangesv10_activestageid" Type="Collection(mscrm.adoxio_applicationlicenseechangesv10)" Partner="activestageidname" />
@@ -53373,9 +53208,6 @@
         <NavigationProperty Name="regardingobjectid_adoxio_application" Type="mscrm.adoxio_application" Nullable="false" Partner="adoxio_application_SyncErrors">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_applicationid" />
         </NavigationProperty>
-        <NavigationProperty Name="regardingobjectid_adoxio_applicationbpfmvpv2" Type="mscrm.adoxio_applicationbpfmvpv2" Nullable="false" Partner="adoxio_applicationbpfmvpv2_SyncErrors">
-          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="businessprocessflowinstanceid" />
-        </NavigationProperty>
         <NavigationProperty Name="regardingobjectid_adoxio_applicationinvoicehistory" Type="mscrm.adoxio_applicationinvoicehistory" Nullable="false" Partner="adoxio_applicationinvoicehistory_SyncErrors">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_applicationinvoicehistoryid" />
         </NavigationProperty>
@@ -55164,10 +54996,6 @@
         <NavigationProperty Name="lk_adoxio_application_modifiedby" Type="Collection(mscrm.adoxio_application)" Partner="modifiedbyname" />
         <NavigationProperty Name="lk_adoxio_application_modifiedonbehalfby" Type="Collection(mscrm.adoxio_application)" Partner="modifiedonbehalfbyname" />
         <NavigationProperty Name="user_adoxio_application" Type="Collection(mscrm.adoxio_application)" Partner="owninguser" />
-        <NavigationProperty Name="lk_adoxio_applicationbpfmvpv2_createdby" Type="Collection(mscrm.adoxio_applicationbpfmvpv2)" Partner="createdbyname" />
-        <NavigationProperty Name="lk_adoxio_applicationbpfmvpv2_createdonbehalfby" Type="Collection(mscrm.adoxio_applicationbpfmvpv2)" Partner="createdonbehalfbyname" />
-        <NavigationProperty Name="lk_adoxio_applicationbpfmvpv2_modifiedby" Type="Collection(mscrm.adoxio_applicationbpfmvpv2)" Partner="modifiedbyname" />
-        <NavigationProperty Name="lk_adoxio_applicationbpfmvpv2_modifiedonbehalfby" Type="Collection(mscrm.adoxio_applicationbpfmvpv2)" Partner="modifiedonbehalfbyname" />
         <NavigationProperty Name="lk_adoxio_applicationinvoicehistory_createdby" Type="Collection(mscrm.adoxio_applicationinvoicehistory)" Partner="createdbyname" />
         <NavigationProperty Name="lk_adoxio_applicationinvoicehistory_createdonbehalfby" Type="Collection(mscrm.adoxio_applicationinvoicehistory)" Partner="createdonbehalfbyname" />
         <NavigationProperty Name="lk_adoxio_applicationinvoicehistory_modifiedby" Type="Collection(mscrm.adoxio_applicationinvoicehistory)" Partner="modifiedbyname" />
@@ -57443,6 +57271,7 @@
         <NavigationProperty Name="TransactionCurrency_adoxio_interest" Type="Collection(mscrm.adoxio_interest)" Partner="transactioncurrencyid" />
         <NavigationProperty Name="TransactionCurrency_adoxio_contraventionadmin" Type="Collection(mscrm.adoxio_contraventionadmin)" Partner="transactioncurrencyid" />
         <NavigationProperty Name="TransactionCurrency_adoxio_cannabisinventoryreport" Type="Collection(mscrm.adoxio_cannabisinventoryreport)" Partner="transactioncurrencyid" />
+        <NavigationProperty Name="TransactionCurrency_adoxio_licenseechangelog" Type="Collection(mscrm.adoxio_licenseechangelog)" Partner="transactioncurrencyid" />
         <Annotation Term="Org.OData.Core.V1.Description" String="Currency in which a financial transaction is carried out." />
       </EntityType>
       <EntityType Name="translationprocess" BaseType="mscrm.crmbaseentity">
@@ -59021,9 +58850,6 @@
         <NavigationProperty Name="createdby" Type="mscrm.systemuser" Nullable="false" Partner="lk_workflowlog_createdby">
           <ReferentialConstraint Property="_createdby_value" ReferencedProperty="systemuserid" />
         </NavigationProperty>
-        <NavigationProperty Name="asyncoperationid_adoxio_applicationbpfmvpv2" Type="mscrm.adoxio_applicationbpfmvpv2" Nullable="false" Partner="adoxio_applicationbpfmvpv2_WorkflowLogs">
-          <ReferentialConstraint Property="_asyncoperationid_value" ReferencedProperty="businessprocessflowinstanceid" />
-        </NavigationProperty>
         <NavigationProperty Name="asyncoperationid_adoxio_applicationbpfv3" Type="mscrm.adoxio_applicationbpfv3" Nullable="false" Partner="adoxio_applicationbpfv3_WorkflowLogs">
           <ReferentialConstraint Property="_asyncoperationid_value" ReferencedProperty="businessprocessflowinstanceid" />
         </NavigationProperty>
@@ -59356,7 +59182,6 @@
           <ReferentialConstraint Property="_owninguser_value" ReferencedProperty="systemuserid" />
         </NavigationProperty>
         <NavigationProperty Name="abs_workflow_scheduledprocess" Type="Collection(mscrm.abs_scheduledprocess)" Partner="abs_ProcessId" />
-        <NavigationProperty Name="lk_adoxio_applicationbpfmvpv2_processid" Type="Collection(mscrm.adoxio_applicationbpfmvpv2)" Partner="processidname" />
         <NavigationProperty Name="lk_adoxio_applicationbpfv3_processid" Type="Collection(mscrm.adoxio_applicationbpfv3)" Partner="processidname" />
         <NavigationProperty Name="lk_adoxio_applicationlicenseechangesv10_processid" Type="Collection(mscrm.adoxio_applicationlicenseechangesv10)" Partner="processidname" />
         <NavigationProperty Name="lk_adoxio_applicationrelocationv1_processid" Type="Collection(mscrm.adoxio_applicationrelocationv1)" Partner="processidname" />
@@ -63658,44 +63483,6 @@
             </Record>
           </Annotation>
         </EntitySet>
-        <EntitySet Name="adoxio_applicationbpfmvpv2s" EntityType="Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2">
-          <NavigationPropertyBinding Path="createdbyname" Target="systemusers" />
-          <NavigationPropertyBinding Path="createdonbehalfbyname" Target="systemusers" />
-          <NavigationPropertyBinding Path="modifiedbyname" Target="systemusers" />
-          <NavigationPropertyBinding Path="modifiedonbehalfbyname" Target="systemusers" />
-          <NavigationPropertyBinding Path="organizationid" Target="organizations" />
-          <NavigationPropertyBinding Path="activestageidname" Target="processstages" />
-          <NavigationPropertyBinding Path="processidname" Target="workflows" />
-          <NavigationPropertyBinding Path="adoxio_applicationbpfmvpv2_SyncErrors" Target="syncerrors" />
-          <NavigationPropertyBinding Path="adoxio_applicationbpfmvpv2_AsyncOperations" Target="asyncoperations" />
-          <NavigationPropertyBinding Path="adoxio_applicationbpfmvpv2_WorkflowLogs" Target="workflowlogs" />
-          <NavigationPropertyBinding Path="adoxio_applicationbpfmvpv2_BulkDeleteFailures" Target="bulkdeletefailures" />
-          <NavigationPropertyBinding Path="bpf_adoxio_applicationid" Target="adoxio_applications" />
-          <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
-          <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
-          <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
-            <Record>
-              <PropertyValue Property="Searchable" Bool="false" />
-            </Record>
-          </Annotation>
-          <Annotation Term="Org.OData.Capabilities.V1.CountRestrictions">
-            <Record>
-              <PropertyValue Property="Countable" Bool="true" />
-            </Record>
-          </Annotation>
-          <Annotation Term="Org.OData.Capabilities.V1.NavigationRestrictions">
-            <Record>
-              <PropertyValue Property="Navigability">
-                <EnumMember>Org.OData.Capabilities.V1.NavigationType/Single</EnumMember>
-              </PropertyValue>
-            </Record>
-          </Annotation>
-          <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
-            <Record>
-              <PropertyValue Property="Supported" Bool="true" />
-            </Record>
-          </Annotation>
-        </EntitySet>
         <EntitySet Name="adoxio_applicationbpfv3s" EntityType="Microsoft.Dynamics.CRM.adoxio_applicationbpfv3">
           <NavigationPropertyBinding Path="createdbyname" Target="systemusers" />
           <NavigationPropertyBinding Path="createdonbehalfbyname" Target="systemusers" />
@@ -63948,7 +63735,6 @@
           <NavigationPropertyBinding Path="adoxio_SLA" Target="slakpiinstances" />
           <NavigationPropertyBinding Path="adoxio_CaseManagerSupervisor" Target="systemusers" />
           <NavigationPropertyBinding Path="adoxio_Inspector" Target="systemusers" />
-          <NavigationPropertyBinding Path="bpf_adoxio_application_adoxio_applicationbpfmvpv2" Target="adoxio_applicationbpfmvpv2s" />
           <NavigationPropertyBinding Path="adoxio_application_documents" Target="adoxio_documents" />
           <NavigationPropertyBinding Path="adoxio_ApplicationTypeId" Target="adoxio_applicationtypes" />
           <NavigationPropertyBinding Path="bpf_adoxio_application_adoxio_applicationbpfv3" Target="adoxio_applicationbpfv3s" />
@@ -65854,6 +65640,7 @@
           <NavigationPropertyBinding Path="adoxio_ShareholderBusinessAccount" Target="accounts" />
           <NavigationPropertyBinding Path="adoxio_ParentLegalEntityId" Target="adoxio_legalentities" />
           <NavigationPropertyBinding Path="adoxio_LegalEntityId" Target="adoxio_legalentities" />
+          <NavigationPropertyBinding Path="transactioncurrencyid" Target="transactioncurrencies" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -67104,7 +66891,6 @@
           <NavigationPropertyBinding Path="regardingobjectid_abs_scheduledprocessexecution" Target="abs_scheduledprocessexecutions" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_alias" Target="adoxio_aliases" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_application" Target="adoxio_applications" />
-          <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationbpfmvpv2" Target="adoxio_applicationbpfmvpv2s" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationinvoicehistory" Target="adoxio_applicationinvoicehistories" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationtermsconditionslimitation" Target="adoxio_applicationtermsconditionslimitations" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_area" Target="adoxio_areas" />
@@ -67705,7 +67491,6 @@
           <NavigationPropertyBinding Path="regardingobjectid_abs_scheduledprocessexecution" Target="abs_scheduledprocessexecutions" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_alias" Target="adoxio_aliases" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_application" Target="adoxio_applications" />
-          <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationbpfmvpv2" Target="adoxio_applicationbpfmvpv2s" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationinvoicehistory" Target="adoxio_applicationinvoicehistories" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationtermsconditionslimitation" Target="adoxio_applicationtermsconditionslimitations" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_area" Target="adoxio_areas" />
@@ -73008,7 +72793,6 @@
           <NavigationPropertyBinding Path="languagelocale_organization" Target="languagelocale" />
           <NavigationPropertyBinding Path="organization_products" Target="products" />
           <NavigationPropertyBinding Path="organization_subjects" Target="subjects" />
-          <NavigationPropertyBinding Path="organization_adoxio_applicationbpfmvpv2" Target="adoxio_applicationbpfmvpv2s" />
           <NavigationPropertyBinding Path="organization_adoxio_customautonumberdefinition" Target="adoxio_customautonumberdefinitions" />
           <NavigationPropertyBinding Path="organization_adoxio_customautonumberrequest" Target="adoxio_customautonumberrequests" />
           <NavigationPropertyBinding Path="organization_adoxio_localgovindigenousnation" Target="adoxio_localgovindigenousnations" />
@@ -73677,7 +73461,6 @@
           <NavigationPropertyBinding Path="processstage_translationprocess" Target="translationprocesses" />
           <NavigationPropertyBinding Path="processstage_account" Target="accounts" />
           <NavigationPropertyBinding Path="processstage_adoxio_application" Target="adoxio_applications" />
-          <NavigationPropertyBinding Path="lk_adoxio_applicationbpfmvpv2_activestageid" Target="adoxio_applicationbpfmvpv2s" />
           <NavigationPropertyBinding Path="processstage_adoxio_complaint" Target="adoxio_complaints" />
           <NavigationPropertyBinding Path="lk_adoxio_applicationbpfv3_activestageid" Target="adoxio_applicationbpfv3s" />
           <NavigationPropertyBinding Path="lk_adoxio_applicationlicenseechangesv10_activestageid" Target="adoxio_applicationlicenseechangesv10s" />
@@ -76301,7 +76084,6 @@
           <NavigationPropertyBinding Path="regardingobjectid_abs_scheduledprocessexecution" Target="abs_scheduledprocessexecutions" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_alias" Target="adoxio_aliases" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_application" Target="adoxio_applications" />
-          <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationbpfmvpv2" Target="adoxio_applicationbpfmvpv2s" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationinvoicehistory" Target="adoxio_applicationinvoicehistories" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationtermsconditionslimitation" Target="adoxio_applicationtermsconditionslimitations" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_area" Target="adoxio_areas" />
@@ -77369,10 +77151,6 @@
           <NavigationPropertyBinding Path="lk_adoxio_application_modifiedby" Target="adoxio_applications" />
           <NavigationPropertyBinding Path="lk_adoxio_application_modifiedonbehalfby" Target="adoxio_applications" />
           <NavigationPropertyBinding Path="user_adoxio_application" Target="adoxio_applications" />
-          <NavigationPropertyBinding Path="lk_adoxio_applicationbpfmvpv2_createdby" Target="adoxio_applicationbpfmvpv2s" />
-          <NavigationPropertyBinding Path="lk_adoxio_applicationbpfmvpv2_createdonbehalfby" Target="adoxio_applicationbpfmvpv2s" />
-          <NavigationPropertyBinding Path="lk_adoxio_applicationbpfmvpv2_modifiedby" Target="adoxio_applicationbpfmvpv2s" />
-          <NavigationPropertyBinding Path="lk_adoxio_applicationbpfmvpv2_modifiedonbehalfby" Target="adoxio_applicationbpfmvpv2s" />
           <NavigationPropertyBinding Path="lk_adoxio_applicationinvoicehistory_createdby" Target="adoxio_applicationinvoicehistories" />
           <NavigationPropertyBinding Path="lk_adoxio_applicationinvoicehistory_createdonbehalfby" Target="adoxio_applicationinvoicehistories" />
           <NavigationPropertyBinding Path="lk_adoxio_applicationinvoicehistory_modifiedby" Target="adoxio_applicationinvoicehistories" />
@@ -78552,6 +78330,7 @@
           <NavigationPropertyBinding Path="TransactionCurrency_adoxio_interest" Target="adoxio_interests" />
           <NavigationPropertyBinding Path="TransactionCurrency_adoxio_contraventionadmin" Target="adoxio_contraventionadmins" />
           <NavigationPropertyBinding Path="TransactionCurrency_adoxio_cannabisinventoryreport" Target="adoxio_cannabisinventoryreports" />
+          <NavigationPropertyBinding Path="TransactionCurrency_adoxio_licenseechangelog" Target="adoxio_licenseechangelogs" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -78919,7 +78698,6 @@
           <NavigationPropertyBinding Path="asyncoperationid_asyncoperation" Target="asyncoperations" />
           <NavigationPropertyBinding Path="NewProcess_asyncoperationid" Target="newprocesses" />
           <NavigationPropertyBinding Path="createdby" Target="systemusers" />
-          <NavigationPropertyBinding Path="asyncoperationid_adoxio_applicationbpfmvpv2" Target="adoxio_applicationbpfmvpv2s" />
           <NavigationPropertyBinding Path="asyncoperationid_adoxio_applicationbpfv3" Target="adoxio_applicationbpfv3s" />
           <NavigationPropertyBinding Path="asyncoperationid_adoxio_applicationlicenseechangesv10" Target="adoxio_applicationlicenseechangesv10s" />
           <NavigationPropertyBinding Path="asyncoperationid_adoxio_applicationrelocationv1" Target="adoxio_applicationrelocationv1s" />
@@ -78977,7 +78755,6 @@
           <NavigationPropertyBinding Path="modifiedby" Target="systemusers" />
           <NavigationPropertyBinding Path="owninguser" Target="systemusers" />
           <NavigationPropertyBinding Path="abs_workflow_scheduledprocess" Target="abs_scheduledprocesses" />
-          <NavigationPropertyBinding Path="lk_adoxio_applicationbpfmvpv2_processid" Target="adoxio_applicationbpfmvpv2s" />
           <NavigationPropertyBinding Path="lk_adoxio_applicationbpfv3_processid" Target="adoxio_applicationbpfv3s" />
           <NavigationPropertyBinding Path="lk_adoxio_applicationlicenseechangesv10_processid" Target="adoxio_applicationlicenseechangesv10s" />
           <NavigationPropertyBinding Path="lk_adoxio_applicationrelocationv1_processid" Target="adoxio_applicationrelocationv1s" />
