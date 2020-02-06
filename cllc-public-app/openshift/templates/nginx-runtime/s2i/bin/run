@@ -27,6 +27,10 @@ getApiProxyConfigSection (){
             proxy_pass ${_LOGIN_URL};
         }
 		
+		location /login/ {
+            proxy_pass ${_LOGIN_URL};
+        }
+		
 		location /logout {
             proxy_pass ${_LOGOUT_URL};
         }
@@ -34,6 +38,11 @@ getApiProxyConfigSection (){
 		location /bcservice {
             proxy_pass ${_BCSERVICE_URL};
         }
+		
+		location /bcservice/ {
+            proxy_pass ${_BCSERVICE_URL};
+        }
+		
 		
 		location /hc/ {
             proxy_pass ${_HEALTH_CHECK_URL};
@@ -47,11 +56,19 @@ getApiProxyConfigSection (){
             proxy_pass ${_LOGIN_URL};
         }
 		
+		location ${1}login/ {
+            proxy_pass ${_LOGIN_URL};
+        }
+		
 		location ${1}logout {
             proxy_pass ${_LOGOUT_URL};
         }
 		
 		location ${1}bcservice {
+            proxy_pass ${_BCSERVICE_URL};
+        }
+		
+		location ${1}bcservice/ {
             proxy_pass ${_BCSERVICE_URL};
         }
 		
