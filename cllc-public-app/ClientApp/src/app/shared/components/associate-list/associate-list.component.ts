@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { LicenseeChangeLog } from '@models/licensee-change-log.model';
+import { LicenseeChangeLog, LicenseeChangeType } from '@models/licensee-change-log.model';
 import { FormBuilder, Validators, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
@@ -254,6 +254,23 @@ export class AssociateListComponent extends FormBase implements OnInit {
     this.emitValue();
   }
 
+  isNameChangePerformed(changeLog: LicenseeChangeLog): boolean {
+    let changed = false;
+    if (changeLog &&
+      (
+        changeLog.changeType === LicenseeChangeType.updateLeadership ||
+        changeLog.changeType === LicenseeChangeType.updateIndividualShareholder
+      )
+      &&
+      (
+        changeLog.firstNameNew !== changeLog.firstNameOld ||
+        changeLog.lastNameNew !== changeLog.lastNameOld
+      )) {
+      changed = true;
+    }
+    return changed;
+  }
+
   getBusinessTypeName(typeValue: string) {
     let typeName = '';
 
@@ -280,8 +297,10 @@ export class AssociateListComponent extends FormBase implements OnInit {
   }
 
   showPHSLevel1(item: LicenseeChangeLog): boolean {
-    let show = this.rootNode.children.length > 0;
-
+    let show = false;
+    if (this.rootNode && this.rootNode.children) {
+      this.rootNode.children.length > 0;
+    }
     return show;
   }
 
