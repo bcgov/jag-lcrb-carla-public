@@ -274,7 +274,10 @@ namespace Gov.Lclb.Cllb.Public.Models
         public static void CopyContactUserSettings(this MicrosoftDynamicsCRMcontact contact, ViewModels.Contact NewContact)
         {
             contact.Address1Line1 = NewContact.address1_line1;
-            contact.Address1Postalcode = NewContact.address1_postalcode.Replace(" ","");
+            if (!string.IsNullOrEmpty(NewContact.address1_postalcode))
+            {
+                contact.Address1Postalcode = NewContact.address1_postalcode.Replace(" ", "");
+            }
             contact.Address1City = NewContact.address1_city;
             contact.Address1Stateorprovince = NewContact.address1_stateorprovince;
             contact.Address1Country = NewContact.address1_country;
@@ -299,7 +302,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Address1City = from.address1_city;
             to.Address1Country = from.address1_country;
             to.Address1Line1 = from.address1_line1;
-            to.Address1Postalcode = from.address1_postalcode.Replace(" ","");
+            if (!string.IsNullOrEmpty(from.address1_postalcode))
+            {
+                to.Address1Postalcode = from.address1_postalcode.Replace(" ", "");
+            }
             to.Address1Stateorprovince = from.address1_stateorprovince;
             to.Address2City = from.address2_city;
             to.Address2Country = from.address2_country;
