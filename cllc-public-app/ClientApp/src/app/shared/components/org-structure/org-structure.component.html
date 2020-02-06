@@ -63,14 +63,17 @@
     </section>
   </ng-container>
 
-  <ng-container *ngIf="node?.businessType === 'Society'">
+  <ng-container [formGroup]="form" *ngIf="node?.businessType === 'Society'">
     <section class="padded-section">
       <h3 class="blue-header">Provide Society Information</h3>
-      <app-field label="Annual Membership Fee">
-        <input type="text" class="form-control">
+      <app-field label="Annual Membership Fee" errorMessage="Please enter value"
+      [valid]="!form.get('annualMembershipFee').touched || form.get('annualMembershipFee').touched">
+        <input type="number" formControlName="annualMembershipFee" class="form-control">
       </app-field>
-      <app-field label="Number of Members">
-        <input type="text" class="form-control">
+      <app-field label="Number of Members"
+      errorMessage="Please enter value"
+      [valid]="!form.get('numberOfMembers').touched || form.get('numberOfMembers').touched">
+        <input type="number" formControlName="numberOfMembers" re class="form-control">
       </app-field>
     </section>
   </ng-container>
