@@ -39,6 +39,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             toDynamics.AdoxioDateofbirthold = fromVM.DateofBirthOld;
             toDynamics.AdoxioInterestpercentagenew = fromVM.InterestPercentageNew;
             toDynamics.AdoxioInterestpercentageold = fromVM.InterestPercentageOld;
+            toDynamics.AdoxioNumberofmembers = fromVM.NumberOfMembers;
+            toDynamics.AdoxioAnnualmembershipfee = fromVM.AnnualMembershipFee;
         }
 
         public static LicenseeChangeLog ToViewModel(this MicrosoftDynamicsCRMadoxioLicenseechangelog changeLog)
@@ -79,6 +81,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 LegalEntityId = changeLog._adoxioLegalentityidValue,
                 ParentLegalEntityId = changeLog._adoxioParentlegalentityidValue,
                 ParentLinceseeChangeLogId = changeLog._adoxioParentlinceseechangelogidValue,
+                NumberOfMembers = changeLog.AdoxioNumberofmembers,
+                AnnualMembershipFee = changeLog.AdoxioAnnualmembershipfee
             };
             return result;
         }
