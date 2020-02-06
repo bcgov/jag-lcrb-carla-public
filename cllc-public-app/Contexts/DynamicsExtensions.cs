@@ -320,6 +320,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        // Does not return application of type "Licensee Changes"
         public static IEnumerable<MicrosoftDynamicsCRMadoxioApplication> GetApplicationListByApplicant(this IDynamicsClient _dynamicsClient, string applicantId)
         {
             var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType", "adoxio_ApplicationTypeId" };
@@ -335,6 +336,12 @@ namespace Gov.Lclb.Cllb.Interfaces
                 filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Denied}";
                 filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
                 filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+
+                var applicationType = _dynamicsClient.GetApplicationTypeByName("Licensee Changes");
+                if (applicationType != null)
+                {
+                    filter += $" and _adoxio_applicationtypeid_value ne {applicationType.AdoxioApplicationtypeid} ";
+                }
 
                 try
                 {
