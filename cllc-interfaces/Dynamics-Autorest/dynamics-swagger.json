@@ -846,236 +846,6 @@
         }
       }
     },
-    "/adoxio_applicationbpfmvpv2s": {
-      "get": {
-        "tags": [
-          "applicationbpfmvpv2s"
-        ],
-        "summary": "Get entities from adoxio_applicationbpfmvpv2s",
-        "operationId": "applicationbpfmvpv2s_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "description": "Order items by property values",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "description": "Select properties to be returned",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "description": "Expand related entities",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Retrieved entities",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2Collection"
-            }
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "adoxio_applicationbpfmvpv2s.adoxio_applicationbpfmvpv2"
-        ],
-        "summary": "Add new entity to adoxio_applicationbpfmvpv2s",
-        "operationId": "applicationbpfmvpv2s_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Prefer",
-            "description": "Required in order for the service to return a JSON representation of the object.",
-            "type": "string",
-            "default": "return=representation"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "New entity",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created entity",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
-            }
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      }
-    },
-    "/adoxio_applicationbpfmvpv2s({businessprocessflowinstanceid})": {
-      "get": {
-        "tags": [
-          "applicationbpfmvpv2s"
-        ],
-        "summary": "Get entity from adoxio_applicationbpfmvpv2s by key",
-        "operationId": "applicationbpfmvpv2s_GetByKey",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessprocessflowinstanceid",
-            "description": "key: businessprocessflowinstanceid of adoxio_applicationbpfmvpv2",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "description": "Select properties to be returned",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "description": "Expand related entities",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Retrieved entity",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
-            }
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "adoxio_applicationbpfmvpv2s.adoxio_applicationbpfmvpv2"
-        ],
-        "summary": "Update entity in adoxio_applicationbpfmvpv2s",
-        "operationId": "applicationbpfmvpv2s_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessprocessflowinstanceid",
-            "description": "key: businessprocessflowinstanceid of adoxio_applicationbpfmvpv2",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "New property values",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "adoxio_applicationbpfmvpv2s.adoxio_applicationbpfmvpv2"
-        ],
-        "summary": "Delete entity from adoxio_applicationbpfmvpv2s",
-        "operationId": "applicationbpfmvpv2s_Delete",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "businessprocessflowinstanceid",
-            "description": "key: businessprocessflowinstanceid of adoxio_applicationbpfmvpv2",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "header",
-            "name": "If-Match",
-            "description": "ETag",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      }
-    },
     "/adoxio_applicationbpfv3s": {
       "get": {
         "tags": [
@@ -40272,164 +40042,6 @@
         }
       }
     },
-    "Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2": {
-      "description": "Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2",
-      "type": "object",
-      "properties": {
-        "completedon": {
-          "format": "date-time",
-          "description": "Date and time when Business Process Flow instance is completed.",
-          "type": "string"
-        },
-        "_bpf_adoxio_applicationid_value": {
-          "description": "",
-          "type": "string"
-        },
-        "bpf_duration": {
-          "format": "int32",
-          "description": "Duration of Business Process Flow",
-          "type": "integer"
-        },
-        "versionnumber": {
-          "format": "int64",
-          "description": "Version Number",
-          "type": "string"
-        },
-        "_processid_value": {
-          "description": "Unique identifier of the workflow associated to the Business Process Flow instance.",
-          "type": "string"
-        },
-        "traversedpath": {
-          "description": "Comma delimited string of process stage ids that represent visited stages of the Business Process Flow instance.",
-          "type": "string"
-        },
-        "_organizationid_value": {
-          "description": "Unique identifier for the organization",
-          "type": "string"
-        },
-        "businessprocessflowinstanceid": {
-          "description": "Unique identifier for entity instances",
-          "type": "string"
-        },
-        "_modifiedonbehalfby_value": {
-          "description": "Unique identifier of the delegate user who modified the record.",
-          "type": "string"
-        },
-        "_createdonbehalfby_value": {
-          "description": "Unique identifier of the delegate user who created the record.",
-          "type": "string"
-        },
-        "statuscode": {
-          "format": "int32",
-          "description": "Reason for the status of the Application BPF MVP v2.0",
-          "type": "integer"
-        },
-        "bpf_name": {
-          "description": "Description",
-          "type": "string"
-        },
-        "_activestageid_value": {
-          "description": "Unique identifier of the active stage for the Business Process Flow instance.",
-          "type": "string"
-        },
-        "createdon": {
-          "format": "date-time",
-          "description": "Date and time when the record was created.",
-          "type": "string"
-        },
-        "timezoneruleversionnumber": {
-          "format": "int32",
-          "description": "For internal use only.",
-          "type": "integer"
-        },
-        "_createdby_value": {
-          "description": "Unique identifier of the user who created the record.",
-          "type": "string"
-        },
-        "statecode": {
-          "format": "int32",
-          "description": "Status of the Application BPF MVP v2.0",
-          "type": "integer"
-        },
-        "overriddencreatedon": {
-          "format": "date-time",
-          "description": "Date and time that the record was migrated.",
-          "type": "string"
-        },
-        "utcconversiontimezonecode": {
-          "format": "int32",
-          "description": "Time zone code that was in use when the record was created.",
-          "type": "integer"
-        },
-        "_modifiedby_value": {
-          "description": "Unique identifier of the user who modified the record.",
-          "type": "string"
-        },
-        "modifiedon": {
-          "format": "date-time",
-          "description": "Date and time when the record was modified.",
-          "type": "string"
-        },
-        "activestagestartedon": {
-          "format": "date-time",
-          "description": "Date and time when current active stage is started",
-          "type": "string"
-        },
-        "importsequencenumber": {
-          "format": "int32",
-          "description": "Sequence number of the import that created this record.",
-          "type": "integer"
-        },
-        "createdbyname": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "createdonbehalfbyname": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "modifiedbyname": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "modifiedonbehalfbyname": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "organizationid": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.organization"
-        },
-        "activestageidname": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.processstage"
-        },
-        "processidname": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.workflow"
-        },
-        "adoxio_applicationbpfmvpv2_SyncErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
-          }
-        },
-        "adoxio_applicationbpfmvpv2_AsyncOperations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
-          }
-        },
-        "adoxio_applicationbpfmvpv2_WorkflowLogs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.workflowlog"
-          }
-        },
-        "adoxio_applicationbpfmvpv2_BulkDeleteFailures": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
-          }
-        },
-        "bpf_adoxio_applicationid": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
-        }
-      }
-    },
     "Microsoft.Dynamics.CRM.adoxio_applicationbpfv3": {
       "description": "Microsoft.Dynamics.CRM.adoxio_applicationbpfv3",
       "type": "object",
@@ -41276,11 +40888,6 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_establishmentcomplytozoningregulations": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
-        },
         "adoxio_establishmentaddressstreet": {
           "description": "",
           "type": "string"
@@ -41325,11 +40932,6 @@
           "description": "",
           "type": "string"
         },
-        "adoxio_appchecklistvalidinterestreceived": {
-          "format": "int32",
-          "description": "Tied to the Revised WFs?",
-          "type": "integer"
-        },
         "adoxio_checklistaipdecision": {
           "format": "int32",
           "description": "BPF Refactoring 1.17.2019",
@@ -41344,15 +40946,9 @@
           "description": "",
           "type": "boolean"
         },
-        "adoxio_checklistverifybusinessprofile": {
-          "format": "int32",
-          "description": "BPF Refactoring 1.17.2019",
-          "type": "integer"
-        },
-        "adoxio_checklistresolutionassessment": {
-          "format": "int32",
-          "description": "BPF Refactoring 1.17.2019",
-          "type": "integer"
+        "adoxio_triggertogeneratesecurityclearance": {
+          "description": "",
+          "type": "boolean"
         },
         "traversedpath": {
           "description": "A comma separated list of string values representing the unique identifiers of stages in a Business Process Flow Instance in the order that they occur.",
@@ -41527,11 +41123,6 @@
           "description": "",
           "type": "string"
         },
-        "adoxio_dateaipdecisionlettersent": {
-          "format": "date-time",
-          "description": "",
-          "type": "string"
-        },
         "adoxio_dateaipexpiredlongdatestring": {
           "description": "",
           "type": "string"
@@ -41666,7 +41257,7 @@
           "description": "The name of the custom entity.",
           "type": "string"
         },
-        "adoxio_checklistassociatescontacted": {
+        "adoxio_checklistassociatesconsentreceived": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -41745,6 +41336,10 @@
           "description": "",
           "type": "string"
         },
+        "adoxio_refusedreason": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_datesentinvestigations": {
           "format": "date-time",
           "description": "",
@@ -41754,18 +41349,14 @@
           "description": "",
           "type": "string"
         },
-        "adoxio_checklistfloorplanassessed": {
-          "format": "int32",
-          "description": "BPF Refactoring 1.17.2019",
-          "type": "integer"
+        "adoxio_dateaipdecisionlettersent": {
+          "format": "date-time",
+          "description": "",
+          "type": "string"
         },
         "adoxio_liquorindustryconnectionsdetails": {
           "description": "",
           "type": "string"
-        },
-        "adoxio_triggertogeneratesecurityclearance": {
-          "description": "",
-          "type": "boolean"
         },
         "adoxio_isreadyvalidinterest": {
           "description": "",
@@ -41776,9 +41367,9 @@
           "description": "Used to store the date that the Inspector conducted the checklist and the notes were added to the parent application. Applicable only for AIP inspections.",
           "type": "string"
         },
-        "adoxio_sharepointanchorforpersonalhistory": {
+        "adoxio_fitandpropercomplete": {
           "description": "",
-          "type": "string"
+          "type": "boolean"
         },
         "adoxio_initialcapassessmentdate": {
           "format": "date-time",
@@ -41814,7 +41405,7 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_contactpersonfullname": {
+        "adoxio_sharepointanchorforpersonalhistory": {
           "description": "",
           "type": "string"
         },
@@ -41828,7 +41419,7 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_checklistsentforfisla": {
+        "adoxio_establishmentcomplytozoningregulations": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -41837,9 +41428,10 @@
           "description": "",
           "type": "string"
         },
-        "adoxio_fitandpropercomplete": {
+        "adoxio_securityclearancegenerateddate": {
+          "format": "date-time",
           "description": "",
-          "type": "boolean"
+          "type": "string"
         },
         "adoxio_jobnumber": {
           "description": "",
@@ -41915,11 +41507,6 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_checklistfloorplanlined": {
-          "format": "int32",
-          "description": "BPF Refactoring 1.17.2019",
-          "type": "integer"
-        },
         "adoxio_businessinfoemail": {
           "description": "",
           "type": "string"
@@ -41962,10 +41549,6 @@
         },
         "_slaid_value": {
           "description": "Choose the service level agreement (SLA) that you want to apply to the record.",
-          "type": "string"
-        },
-        "adoxio_refusedreason": {
-          "description": "",
           "type": "string"
         },
         "adoxio_invoicetrigger": {
@@ -42185,11 +41768,6 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_checklisttiedhouseassessed": {
-          "format": "int32",
-          "description": "BPF Refactoring 1.17.2019",
-          "type": "integer"
-        },
         "lastonholdtime": {
           "format": "date-time",
           "description": "Contains the date and time stamp of the last on-hold time",
@@ -42223,11 +41801,6 @@
           "type": "integer"
         },
         "adoxio_checklistsignageassessed": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
-        },
-        "adoxio_checklistverifyapplication": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -42300,11 +41873,6 @@
           "description": "",
           "type": "string"
         },
-        "adoxio_eligibilityassessmentresult": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
-        },
         "adoxio_renewalkeypersonnel": {
           "format": "int32",
           "description": "",
@@ -42321,11 +41889,6 @@
           "type": "integer"
         },
         "adoxio_appchecklistpaymentreceived": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
-        },
-        "adoxio_appchecklistvalidinterestreceivedfinal": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -42382,10 +41945,9 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_checklistcorporatedocsassessed": {
-          "format": "int32",
+        "adoxio_contactpersonfullname": {
           "description": "",
-          "type": "integer"
+          "type": "string"
         },
         "adoxio_renewalshareholders": {
           "format": "int32",
@@ -42468,9 +42030,14 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_checklistbrandingassessed": {
+        "adoxio_eligibilityassessmentresult": {
           "format": "int32",
-          "description": "BPF Refactoring 1.17.2019",
+          "description": "",
+          "type": "integer"
+        },
+        "adoxio_appchecklistinspectionreviewcomplete": {
+          "format": "int32",
+          "description": "",
           "type": "integer"
         },
         "adoxio_checklistnoticeofarticles": {
@@ -42507,16 +42074,6 @@
           "description": "",
           "type": "string"
         },
-        "adoxio_checklistassociatesconsentreceived": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
-        },
-        "adoxio_checklistsitemapassessed": {
-          "format": "int32",
-          "description": "BPF Refactoring 1.17.2019",
-          "type": "integer"
-        },
         "adoxio_checklistlicencefeepaid": {
           "format": "int32",
           "description": "BPF Refactoring 1.17.2019",
@@ -42539,11 +42096,6 @@
           "format": "int32",
           "description": "",
           "type": "integer"
-        },
-        "adoxio_securityclearancegenerateddate": {
-          "format": "date-time",
-          "description": "",
-          "type": "string"
         },
         "adoxio_checklistsecuritiesregister": {
           "format": "int32",
@@ -42600,7 +42152,7 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_appchecklistinspectionreviewcomplete": {
+        "adoxio_checklistcorporatedocsassessed": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -42712,11 +42264,6 @@
         "adoxio_establishmentcomplytoallbylaws": {
           "format": "int32",
           "description": "",
-          "type": "integer"
-        },
-        "adoxio_checklistvalidinterestassessed": {
-          "format": "int32",
-          "description": "BPF Refactoring 1.17.2019",
           "type": "integer"
         },
         "adoxio_contactpersonphone": {
@@ -43058,12 +42605,6 @@
         },
         "adoxio_Inspector": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "bpf_adoxio_application_adoxio_applicationbpfmvpv2": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
-          }
         },
         "adoxio_application_documents": {
           "type": "array",
@@ -43891,6 +43432,11 @@
           "description": "The name of the custom entity.",
           "type": "string"
         },
+        "adoxio_siteplan": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "_adoxio_renewalapplicationtype_value": {
           "description": "",
           "type": "string"
@@ -44030,7 +43576,7 @@
           "description": "",
           "type": "string"
         },
-        "adoxio_siteplan": {
+        "adoxio_proofofzoning": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -52940,11 +52486,6 @@
           "description": "",
           "type": "boolean"
         },
-        "versionnumber": {
-          "format": "int64",
-          "description": "Version Number",
-          "type": "string"
-        },
         "utcconversiontimezonecode": {
           "format": "int32",
           "description": "Time zone code that was in use when the record was created.",
@@ -52990,6 +52531,11 @@
         "adoxio_ismanagerold": {
           "description": "",
           "type": "boolean"
+        },
+        "adoxio_numberofmembers": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "adoxio_businessaccounttype": {
           "format": "int32",
@@ -53068,13 +52614,18 @@
           "description": "",
           "type": "boolean"
         },
-        "_createdby_value": {
-          "description": "Unique identifier of the user who created the record.",
+        "_transactioncurrencyid_value": {
+          "description": "Unique identifier of the currency associated with the entity.",
           "type": "string"
         },
         "_adoxio_parentlegalentityid_value": {
           "description": "Unique identifier for Legal Entity associated with Licensee Change Log.",
           "type": "string"
+        },
+        "adoxio_annualmembershipfee": {
+          "format": "decimal",
+          "description": "",
+          "type": "number"
         },
         "adoxio_isshareholdernew": {
           "description": "",
@@ -53131,9 +52682,19 @@
           "description": "Unique identifier for Legal Entity associated with Licensee Change Log.",
           "type": "string"
         },
+        "exchangerate": {
+          "format": "decimal",
+          "description": "Exchange rate for the currency associated with the entity with respect to the base currency.",
+          "type": "number"
+        },
         "adoxio_istrusteeold": {
           "description": "",
           "type": "boolean"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "description": "Version Number",
+          "type": "string"
         },
         "overriddencreatedon": {
           "format": "date-time",
@@ -53164,6 +52725,15 @@
         },
         "adoxio_lastnameold": {
           "description": "",
+          "type": "string"
+        },
+        "adoxio_annualmembershipfee_base": {
+          "format": "decimal",
+          "description": "Value of the Annual Membership Fee in base currency.",
+          "type": "number"
+        },
+        "_createdby_value": {
+          "description": "Unique identifier of the user who created the record.",
           "type": "string"
         },
         "adoxio_jobnumber": {
@@ -53265,6 +52835,9 @@
         },
         "adoxio_LegalEntityId": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_legalentity"
+        },
+        "transactioncurrencyid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.transactioncurrency"
         }
       }
     },
@@ -58994,9 +58567,6 @@
         "regardingobjectid_adoxio_application": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
         },
-        "regardingobjectid_adoxio_applicationbpfmvpv2": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
-        },
         "regardingobjectid_adoxio_applicationinvoicehistory": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationinvoicehistory"
         },
@@ -61311,9 +60881,6 @@
         },
         "regardingobjectid_adoxio_application": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
-        },
-        "regardingobjectid_adoxio_applicationbpfmvpv2": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
         },
         "regardingobjectid_adoxio_applicationinvoicehistory": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationinvoicehistory"
@@ -87460,12 +87027,6 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.subject"
           }
         },
-        "organization_adoxio_applicationbpfmvpv2": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
-          }
-        },
         "organization_adoxio_customautonumberdefinition": {
           "type": "array",
           "items": {
@@ -90367,12 +89928,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
-          }
-        },
-        "lk_adoxio_applicationbpfmvpv2_activestageid": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
           }
         },
         "processstage_adoxio_complaint": {
@@ -107054,30 +106609,6 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
           }
         },
-        "lk_adoxio_applicationbpfmvpv2_createdby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
-          }
-        },
-        "lk_adoxio_applicationbpfmvpv2_createdonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
-          }
-        },
-        "lk_adoxio_applicationbpfmvpv2_modifiedby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
-          }
-        },
-        "lk_adoxio_applicationbpfmvpv2_modifiedonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
-          }
-        },
         "lk_adoxio_applicationinvoicehistory_createdby": {
           "type": "array",
           "items": {
@@ -113262,9 +112793,6 @@
         "createdby": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
         },
-        "asyncoperationid_adoxio_applicationbpfmvpv2": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
-        },
         "asyncoperationid_adoxio_applicationbpfv3": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfv3"
         },
@@ -113668,12 +113196,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
-          }
-        },
-        "lk_adoxio_applicationbpfmvpv2_processid": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
           }
         },
         "lk_adoxio_applicationbpfv3_processid": {
@@ -114490,19 +114012,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_alias"
-          }
-        }
-      }
-    },
-    "Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2Collection": {
-      "title": "Collection of adoxio_applicationbpfmvpv2",
-      "description": "Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2Collection",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
           }
         }
       }
