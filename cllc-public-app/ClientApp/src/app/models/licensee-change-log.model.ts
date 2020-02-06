@@ -36,6 +36,8 @@ export class LicenseeChangeLog {
   dateofBirthOld: Date;
   titleNew: string;
   titleOld: string;
+  numberOfMembers: number;
+  annualMembershipFee: number;
 
   applicationId: string;
   applicationType: string;
@@ -149,7 +151,7 @@ export class LicenseeChangeLog {
 
   public static ValidateNonIndividaul(node: LicenseeChangeLog): string[] {
     let validationResult: string[] = [];
-    if (!node.isIndividual) {
+    if (!node.isIndividual && node.isShareholderNew) {
       if (node.businessType === 'PrivateCorporation' && node.keyPersonnelChildrenNoRemoves.length === 0) {
         validationResult.push(`${node.businessNameNew} needs to have one or more key personnel`);
       }
