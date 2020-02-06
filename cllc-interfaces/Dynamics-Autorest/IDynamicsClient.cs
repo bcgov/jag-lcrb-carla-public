@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top188 { get; set; }
+        int? Top187 { get; set; }
 
         /// <summary>
         /// Skip the first n items
@@ -43,12 +43,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count188 { get; set; }
+        bool? Count187 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter188 { get; set; }
+        string Filter187 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
@@ -81,11 +81,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAliases.
         /// </summary>
         IAliases Aliases { get; }
-
-        /// <summary>
-        /// Gets the IApplicationbpfmvpv2s.
-        /// </summary>
-        IApplicationbpfmvpv2s Applicationbpfmvpv2s { get; }
 
         /// <summary>
         /// Gets the IApplicationbpfv3s.
