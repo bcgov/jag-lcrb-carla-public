@@ -5,7 +5,7 @@
 Scenario: Start Application
     Given I SEE the Dashboard
     And I CLICK Start Application
-    # And I SEE Review Account Profile - not needed
     And I CLICK on Continue to Application
     And I COMPLETE the Application
-    Then I CLICK on 'SUBMIT & PAY'
+    And I CLICK on 'SUBMIT & PAY'
+    Then I enter the payment information

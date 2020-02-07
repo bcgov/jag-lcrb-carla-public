@@ -33,55 +33,22 @@ namespace bdd_tests
         [Given(@"I SEE the Dashboard")]
         public void I_view_the_dashboard()
         {
-
             CarlaLogin();
-
-            //NgWebElement welcomeMessage = ngDriver.FindElement(By.ClassName("dashboard-spacing"));
-
-            //welcomeMessage.
-
-            //IWebElement welcomeMessage = driver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-dashboard/div/h1"));
-
-            //Assert.Contains("Welcome to Cannabis Licensing", welcomeMessage.Text);
-
         }
 
         [And(@"I am not a marketer")]
         public void check_marketer()
         {
-            // see if there is a marketing licence or
-            // see if there is an application for a marketing licence
-
         }
 
         [And(@"I CLICK Start Application")]
         public void I_start_application()
         {
-
             ngDriver.WaitForAngular();
 
             NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
 
             startApp_button.Click();
-
-            // click start CRS application button
-            //NgWebElement butt = ngDriver.FindElement(By.TagName("button"));
-
-            // for (b)
-
-
-            //butt.Click();
-
-
-            //IWebElement startApp = driver.FindElementByXPath("(.//*[normalize-space(text()) and normalize-space(.)='APPLICATIONS AND LICENCES'])[1]/following::div[1]");
-
-            //IWebElement sub = driver.FindElement(By.XPath(""));
-
-            //startApp.Click();
-
-            //driver.
-
-
         }
 
         [And(@"I CLICK on Continue to Application")]
@@ -135,6 +102,15 @@ namespace bdd_tests
             NgWebElement estabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             estabPhone.SendKeys(estPhone);
 
+            NgWebElement uploadAssociates = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div[1]/div[1]/div[2]/div[1]/section/app-file-uploader/div/ngx-file-drop/div/div/div/input[1]"));
+            uploadAssociates.SendKeys(path1);
+
+            NgWebElement uploadFinIntegrity = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div[1]/div[1]/div[2]/div[2]/section/app-file-uploader/div/ngx-file-drop/div/div/div/input[1]"));
+            uploadFinIntegrity.SendKeys(path2);
+
+            NgWebElement uploadChecklistDocs = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div[1]/div[1]/div[2]/section[4]/section/app-file-uploader/div/ngx-file-drop/div/div/div/input[1]"));
+            uploadChecklistDocs.SendKeys(path3);
+
             NgWebElement contactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
             contactGiven.SendKeys(conGiven);
 
@@ -152,18 +128,9 @@ namespace bdd_tests
 
             NgWebElement signatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
             signatureAgree.Click();
-
-            //NgWebElement uploadAssociates = ngDriver.FindElement(By.CssSelector("input[type=file]"));
-            //uploadAssociates.SendKeys(path1);
-
-            //NgWebElement uploadFinIntegrity = ngDriver.FindElement(By.CssSelector("input[type=file]"));
-            //uploadFinIntegrity.SendKeys(path2);
-
-            //NgWebElement uploadChecklistDocs = ngDriver.FindElement(By.CssSelector("input[type=file]"));
-            //uploadChecklistDocs.SendKeys(path3);
         }
 
-        [Then(@"I CLICK on 'SUBMIT & PAY'")]
+        [And(@"I CLICK on 'SUBMIT & PAY'")]
         public void click_on_submit_and_pay()
         {
             NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
@@ -177,6 +144,18 @@ namespace bdd_tests
             saveforlater_button.Click();
         }
 
+        [Then(@"I enter the payment information")]
+        public void enter_payment_info()
+        {
+            string testCC = "4030000010001234";
+            string testCVD = "123";
+
+            //driver.FindElementByName("trnCardNumber").SendKeys(testCC);
+
+            //driver.FindElementByName("trnCardCvd").SendKeys(testCVD);
+
+            //driver.FindElementByName("submitButton").Click();
+        }
 
         [And(@"I SEE Review Account Profile")]
         public void see_account_profile()
