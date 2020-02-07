@@ -108,7 +108,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
             if (crsApplication != null)
             {
-                licenseSummary.StoreInspected = crsApplication.AdoxioAppchecklistinspectionresults == (int)InspectionStatus.Pass;
+                // 2-7-2020 set the criteria to be No Contraventions rather than Pass.  LCSD-2524
+                licenseSummary.StoreInspected = crsApplication.AdoxioAppchecklistinspectionresults == (int)InspectionStatus.NoContraventions;
             }
 
             if (licence.AdoxioLicenceType != null)
