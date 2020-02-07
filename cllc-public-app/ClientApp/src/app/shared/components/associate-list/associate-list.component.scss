@@ -21,7 +21,7 @@
 }
 
 table.greyGridTable {
-  border: 2px solid #000000;
+  border: 2px solid #757575;
   width: 100%;
   
   text-align: center;
@@ -44,14 +44,14 @@ table.greyGridTable tr:nth-child(odd) {
 }
 table.greyGridTable thead {
   background: #FFFFFF;
-  border-bottom: 2px solid #333333;
+  border-bottom: 2px solid #757575;
 }
 table.greyGridTable thead th {
   font-size: 15px;
   font-weight: bold;
   color: #333333;
   text-align: center;
-  border-left: 2px solid #333333;
+  border-left: 2px solid #757575;
 }
 table.greyGridTable thead th:first-child {
   border-left: none;
@@ -59,4 +59,23 @@ table.greyGridTable thead th:first-child {
 
 table.greyGridTable tfoot td {
   font-size: 14px;
+}
+
+.save {
+  color: #38598a;
+}
+
+
+.fa-trash-alt {
+  color: #ee220e;
+}
+
+::ng-deep {
+  mat-expansion-panel-header.mat-expanded:hover,
+  mat-expansion-panel-header:hover,
+  mat-expansion-panel-header:active,
+  mat-expansion-panel-header{
+    background-color: #F1F4FA !important;
+    height: 30px !important;
+  }
 }

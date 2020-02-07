@@ -185,16 +185,8 @@ namespace Gov.Lclb.Cllb.Public
             string ssgPassword = _configuration["SSG_PASSWORD"];
 
             AuthenticationResult authenticationResult = null;
-            // authenticate using ADFS.
-            if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
-            {
-                var authenticationContext = new AuthenticationContext(
-                    "https://login.windows.net/" + aadTenantId);
-                ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
-                var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientCredential);
-                task.Wait();
-                authenticationResult = task.Result;
-            }
+            
+            
 
             services.AddCors(options =>
             {

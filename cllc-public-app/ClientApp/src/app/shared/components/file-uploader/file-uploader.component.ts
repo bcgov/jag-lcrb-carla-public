@@ -28,9 +28,11 @@ export class FileUploaderComponent implements OnInit {
   @Input() enableFileDeletion = true;
   @Input() maxNumberOfFiles = 10;
   @Input() useDocumentTypeForName = false;
+  @Input() publicAccess = false;
   @Output() numberOfUploadedFiles: EventEmitter<number> = new EventEmitter<number>();
   busy: Subscription;
   attachmentURL: string;
+  actionPrefix: string;
   Math = Math;
   public files: FileSystemItem[] = [];
 
@@ -39,8 +41,13 @@ export class FileUploaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.attachmentURL = `api/file/${this.entityId}/attachments/${this.entityName}`;
-
+    if (this.publicAccess) {
+      this.actionPrefix = "public-";
+    }
+    else {
+      this.actionPrefix = "";
+    }
+    this.attachmentURL = `api/file/${this.entityId}/${this.actionPrefix}attachments/${this.entityName}`;
     this.getUploadedFileData();
   }
 
@@ -167,7 +174,7 @@ export class FileUploaderComponent implements OnInit {
         // convert bytes to KB
         data.forEach((entry) => {
           entry.size = Math.ceil(entry.size / 1024);
-          entry.downloadUrl = `api/file/${this.entityId}/download-file/${this.entityName}/${entry.name}`;
+          entry.downloadUrl = `api/file/${this.entityId}/${this.actionPrefix}download-file/${this.entityName}/${entry.name}`;
           entry.downloadUrl += `?serverRelativeUrl=${encodeURIComponent(entry.serverrelativeurl)}&documentType=${this.documentType}`;
         });
         this.files = data;

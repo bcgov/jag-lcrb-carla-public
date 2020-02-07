@@ -1,11 +1,11 @@
-import { ValidatorFn, AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { ValidatorFn, AbstractControl, FormControl, FormGroup, FormArray } from '@angular/forms';
 import { OnDestroy } from '@angular/core';
 import { Application } from '@models/application.model';
 import { ApplicationHTMLContent } from '@components/applications/application/application.component';
 import { ApplicationTypeNames } from '@models/application-type.model';
 
 
-export const CanadaPostalRegex = '^[A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9]$';
+export const CanadaPostalRegex = '^[A-Za-z][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$';
 export const USPostalRegex = '^\\d{5}([\-]\\d{4})?$';
 
 export class FormBase implements OnDestroy {

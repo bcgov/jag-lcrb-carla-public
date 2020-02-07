@@ -182,6 +182,7 @@ import { CateringDemoComponent } from './components/catering-demo/catering-demo.
 import { PersonalHistorySummaryComponent } from './components/personal-history-summary/personal-history-summary.component';
 import { AccountCompletenessComponent } from './components/account-completeness/account-completeness.component';
 import { PhsConfirmationComponent } from './components/phs-confirmation/phs-confirmation.component';
+import { MultiStageApplicationFlowComponent } from './components/multi-stage-application-flow/multi-stage-application-flow.component';
 
 
 @NgModule({
@@ -282,7 +283,8 @@ import { PhsConfirmationComponent } from './components/phs-confirmation/phs-conf
     CateringDemoComponent,
     PersonalHistorySummaryComponent,
     AccountCompletenessComponent,
-    PhsConfirmationComponent
+    PhsConfirmationComponent,
+    MultiStageApplicationFlowComponent
   ],
   imports: [
     ChartsModule,

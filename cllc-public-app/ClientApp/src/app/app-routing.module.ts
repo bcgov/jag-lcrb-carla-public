@@ -41,6 +41,7 @@ import { AssociateListComponent } from '@shared/components/associate-list/associ
 import { OrganizationStructureComponent } from '@components/account-profile/tabs/organization-structure/organization-structure.component';
 import { PersonalHistorySummaryComponent } from '@components/personal-history-summary/personal-history-summary.component';
 import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confirmation.component';
+import { MultiStageApplicationFlowComponent } from '@components/multi-stage-application-flow/multi-stage-application-flow.component';
 
 
 const routes: Routes = [
@@ -52,19 +53,19 @@ const routes: Routes = [
     path: 'org-structure',
     component: OrganizationStructureComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-
+    data: { feature: 'LicenseeChanges' }
   },
   {
     path: 'personal-history-summary/confirmation',
     component: PhsConfirmationComponent,
     canActivate: [FeatureGuard],
-    data: { feature: 'OrgStructure' }
+    data: { feature: 'LicenseeChanges' }
   },
   {
     path: 'personal-history-summary/:token',
     component: PersonalHistorySummaryComponent,
     canActivate: [FeatureGuard],
-    data: { feature: 'OrgStructure' }
+    data: { feature: 'LicenseeChanges' }
   },
   {
     path: 'catering-demo',
@@ -87,13 +88,15 @@ const routes: Routes = [
     path: 'federal-reporting/:licenceId',
     component: FederalReportingComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-    data: { feature: 'FederalReporting' }
-  },
-  {
-    path: 'federal-reporting/:licenceId/:monthlyReportId',
-    component: FederalReportingComponent,
-    canActivate: [BCeidAuthGuard, FeatureGuard],
-    data: { feature: 'FederalReporting' }
+    data: { feature: 'FederalReporting' },
+    children: [
+      {
+        path: ':monthlyReportId',
+        component: FederalReportingComponent,
+        canActivate: [BCeidAuthGuard, FeatureGuard],
+        data: { feature: 'FederalReporting' }
+      }
+    ]
   },
   {
     path: 'licensee-changes/:applicationId',
@@ -110,6 +113,12 @@ const routes: Routes = [
     path: 'renew-crs-licence/application/:applicationId',
     component: LicenceRenewalStepsComponent,
     canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'multi-step-application/:applicationId',
+    component: MultiStageApplicationFlowComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'LicenseeChanges' }
   },
   {
     path: 'account-profile/:applicationId',

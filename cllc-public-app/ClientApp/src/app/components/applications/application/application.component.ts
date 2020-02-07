@@ -403,8 +403,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   private submitPayment() {
     this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(res => {
-        const jsonUrl = res;
+      .subscribe(jsonUrl => {
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
       }, err => {

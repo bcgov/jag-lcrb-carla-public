@@ -38,7 +38,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip106 { get; set; }
+        int? Skip107 { get; set; }
 
         /// <summary>
         /// Include count of items
@@ -53,7 +53,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search106 { get; set; }
+        string Search107 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -81,11 +81,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAliases.
         /// </summary>
         IAliases Aliases { get; }
-
-        /// <summary>
-        /// Gets the IApplicationbpfmvpv2s.
-        /// </summary>
-        IApplicationbpfmvpv2s Applicationbpfmvpv2s { get; }
 
         /// <summary>
         /// Gets the IApplicationbpfv3s.
@@ -573,6 +568,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicencesadoxioeventlicence Licencesadoxioeventlicence { get; }
 
         /// <summary>
+        /// Gets the ILicencessharepointdocumentlocations.
+        /// </summary>
+        ILicencessharepointdocumentlocations Licencessharepointdocumentlocations { get; }
+
+        /// <summary>
         /// Gets the ILicencetypes.
         /// </summary>
         ILicencetypes Licencetypes { get; }
@@ -871,6 +871,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISharepointdocumentlocations.
         /// </summary>
         ISharepointdocumentlocations Sharepointdocumentlocations { get; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiolicences.
+        /// </summary>
+        IRegardingobjectidadoxiolicences Regardingobjectidadoxiolicences { get; }
 
         /// <summary>
         /// Gets the ISharepointsites.

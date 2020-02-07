@@ -57,11 +57,17 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public async Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationById(Guid id)
         {
+            return await GetApplicationById(id.ToString());
+        }
+
+
+        public async Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationById(string id)
+        {
             MicrosoftDynamicsCRMadoxioApplication result;
             try
             {
                 // fetch from Dynamics.
-                result = await Applications.GetByKeyAsync(id.ToString());
+                result = await Applications.GetByKeyAsync(id);
 
                 if (result._adoxioLicencetypeValue != null)
                 {
@@ -389,6 +395,37 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
             }
 
+            return result;
+        }
+
+        public MicrosoftDynamicsCRMadoxioEvent GetEventByIdWithChildren(string id)
+        {
+            MicrosoftDynamicsCRMadoxioEvent result;
+            try
+            {
+                var expand = new List<string> { "adoxio_Account", "adoxio_Licence" };
+                result = this.Events.GetByKey(adoxioEventid: id, expand: expand);
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+            
+            return result;
+        }
+
+        public MicrosoftDynamicsCRMadoxioEvent GetEventById(string id)
+        {
+            MicrosoftDynamicsCRMadoxioEvent result;
+            try
+            {
+                result = this.Events.GetByKey(adoxioEventid: id);
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+            
             return result;
         }
     }
