@@ -1,232 +1,346 @@
-<div>
-    <!-- <ng-container>
-        <input type="radio" name="bt" value="Society" [(ngModel)]="businessType"> Society <br>
-        <input type="radio" name="bt" value="SoleProprietor" [(ngModel)]="businessType"> Sole Prop <br>
-        <input type="radio" name="bt" value="PublicCorporation" [(ngModel)]="businessType"> Public Corporation <br>
-    </ng-container>
-
-    <section *ngIf="businessType === 'Society'">
-        <ul>
-            <li>Society: <br>
-                <ul>
-                    <li>Annual membership fee</li>
-                    <li>Number of members</li>
-                    <li>Directors and Officers:</li>
-                </ul>
-            </li>
-        </ul>
-    </section>
-    <section  *ngIf="businessType === 'SoleProprietor'">
-        <ul>
-            <li>Sole Proprietorshiop: <br>
-                <ul>
-                    <li>Individual Personal History Summary:</li>
-                </ul>
-            </li>
-        </ul>
-    </section>
-    <section  *ngIf="businessType === 'Public Corporation'">
-        <ul>
-            <li>Public Corporation: <br>
-                <ul>
-                    <li>Indicate shares are publicly traded</li>
-                    <li>Directors and Officers:</li>
-                </ul>
-            </li>
-        </ul>
-    </section> -->
-
-
+<div [formGroup]="form">
     <table class="greyGridTable">
         <ng-container *ngIf="changeTypeSuffix === 'Leadership'">
-        <thead>
-            <tr *ngIf="personalHistoryItems.length > 0">
-                <th style="width: 200px;">First Name</th>
-                <th style="width: 200px;">Last Name</th>
-                <th *ngIf="showPosition()" style="width: 200px;">Position</th>
-                <th style="width: 200px;">Email</th>
-                <th style="width: 150px;">Date of Birth</th>
-                <th>Level 1 Personal History Summary </th>
-                <th *ngIf="1==2">Level 2 Personal History Summary </th>
-                <th style="background-color: transparent;"></th>
-            </tr>
-        </thead>
-            <ng-container *ngFor="let item of personalHistoryItems; let i = index;">
-                <tr [ngClass]="{'alt-row': i%2 === 0}">
-                    <td>
-                        <span *ngIf="!item.edit">{{item.firstNameNew}}</span>
-                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.firstNameNew">
-                    </td>
-                    <td>
-                        <span *ngIf="!item.edit">{{item.lastNameNew}}</span>
-                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.lastNameNew">
-                    </td>
-                    <td *ngIf="showPosition()">
-                        <span *ngIf="!item.edit">{{item.getNewLeadershipPosition()}}</span>
-                        <ng-container *ngIf="item.edit">
-                            <table>
-                                <tr><td nowrap>
-                            <input type="checkbox" style="margin-right: 5px;" [(ngModel)]="item.isDirectorNew"> <label
-                                style="padding-right: 10px;" for="" style="font-size:10px;">Director</label> <br>
-                            <input type="checkbox" style="margin-right: 5px;" [(ngModel)]="item.isOfficerNew"> <label
-                                style="padding-right: 10px; font-size:10px;" for="">Officer</label><br>
-                            </td><td nowrap>
-                                <div *ngIf="rootNode?.businessType !== 'Society'"> <input type="checkbox"
-                                style="margin-right: 5px;" [(ngModel)]="item.isManagerNew"> <label 
-                                style="padding-right: 10px; font-size:10px;" for="" >Senior Manager</label></div>
-                            </td>
-                            </tr>
-                            </table>
-                        </ng-container>
-                    </td>
-                    <td>
-                        <span *ngIf="!item.edit">{{item.emailNew}}</span>
-                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.emailNew">
-                    </td>
-                    <td>
-                        <span *ngIf="!item.edit">{{item.dateofBirthNew | date}}</span>
-                        <input *ngIf="item.edit" type="text" [(ngModel)]='item.dateofBirthNew'
-                            style="width: 100px; background-color: #fff;" autocomplete="false" placeholder="yyyy-mm-dd"
-                            class="form-control" [matDatepicker]="picker" (focus)="picker.open()"
-                            (click)="picker.open()">
-                        <mat-datepicker #picker></mat-datepicker>
-                    </td>
-                    <td>
-                        <button *ngIf="item.phsLink" class="btn btn-primary" (click)="copyMessage(item.phsLink)">Copy Link</button>
-                    </td>
-                    <td *ngIf="1==2"></td>
-                    <td>
-                        <i *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true;"
-                            class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
-                        <i class="fas fa-save" *ngIf="item.edit" (click)="saveLog(item)"
-                            style="margin-right: 10px;"></i>
-                        <i class="fas fa-trash-alt" (click)="deleteChange(item)" style=""></i>
-                    </td>
-
+            <thead>
+                <tr *ngIf="associates?.length > 0">
+                    <th style="width: 200px;">First Name</th>
+                    <th style="width: 200px;">Last Name</th>
+                    <th *ngIf="showPosition()" style="width: 200px;">Position</th>
+                    <th style="min-width: 200px;">Email</th>
+                    <th style="width: 150px;">Date of Birth</th>
+                    <th *ngIf="showPHSLevel1()">Level 1 Personal History Summary </th>
+                    <th *ngIf="false">Level 2 Personal History Summary </th>
+                    <th style="background-color: transparent; width: 50px;"></th>
                 </tr>
+            </thead>
+            <ng-container formArrayName="associates">
+                <ng-container *ngFor="let associate of associates.controls; let i = index;">
+                    <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()" [formGroupName]="i"
+                        [ngClass]="{'alt-row': i%2 === 0}">
+                        <td>
+                            <span *ngIf="!associate.get('edit').value || associate.get('id').value">
+                                {{associate.get('firstNameNew').value}}
+                            </span>
+                            <app-field [showChevrons]="false"
+                                *ngIf="associate.get('edit').value && !associate.get('id').value"
+                                [valid]="!associate.get('firstNameNew').touched || associate.get('firstNameNew').valid"
+                                errorMessage="Please enter First Name">
+                                <input class="form-control" type="text" formControlName="firstNameNew">
+                            </app-field>
+                        </td>
+                        <td>
+                            <span *ngIf="!associate.get('edit').value || associate.get('id').value">
+                                {{associate.get('lastNameNew').value}}
+                            </span>
+                            <app-field [showChevrons]="false"
+                                *ngIf="associate.get('edit').value && !associate.get('id').value"
+                                [valid]="!associate.get('lastNameNew').touched || associate.get('lastNameNew').valid"
+                                errorMessage="Please enter Last Name">
+                                <input class="form-control" type="text" formControlName="lastNameNew">
+                            </app-field>
+                        </td>
+                        <td *ngIf="showPosition()">
+                            <span
+                                *ngIf="!associate.get('edit').value">{{getNewLeadershipPosition(associate.value)}}</span>
+                            <app-field [showChevrons]="false" [valid]="isPositionValid(associate)"
+                                errorMessage="Please choose a position">
+                                <ng-container *ngIf="associate.get('edit').value">
+                                    <table>
+                                        <tr>
+                                            <td nowrap>
+                                                <input type="checkbox" style="margin-right: 5px;"
+                                                    formControlName="isDirectorNew"> <label style="padding-right: 10px;"
+                                                    for="" style="font-size:10px;">Director</label> <br>
+                                                <input type="checkbox" style="margin-right: 5px;"
+                                                    formControlName="isOfficerNew"> <label
+                                                    style="padding-right: 10px; font-size:10px;"
+                                                    for="">Officer</label><br>
+                                            </td>
+                                            <td nowrap>
+                                                <div *ngIf="rootNode?.businessType !== 'Society'"> <input
+                                                        type="checkbox" style="margin-right: 5px;"
+                                                        formControlName="isManagerNew"> <label
+                                                        style="padding-right: 10px; font-size:10px;" for="">Senior
+                                                        Manager</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </ng-container>
+                            </app-field>
+                        </td>
+                        <td>
+                            <span *ngIf="!associate.get('edit').value">{{associate.get('emailNew').value}}</span>
+                            <app-field *ngIf="associate.get('edit').value" [showChevrons]="false"
+                                [valid]="!associate.get('emailNew').touched || associate.get('emailNew').valid"
+                                errorMessage="Please enter email">
+                                <input class="form-control" type="text" formControlName="emailNew">
+                            </app-field>
+                        </td>
+                        <td>
+                            <span
+                                *ngIf="!associate.get('edit').value || associate.get('id').value">{{associate.get('dateofBirthNew').value | date}}</span>
+                            <app-field [showChevrons]="false"
+                                *ngIf="associate.get('edit').value && !associate.get('id').value"
+                                [valid]="!associate.get('dateofBirthNew').touched || associate.get('dateofBirthNew').valid"
+                                errorMessage="Please enter Bith Date">
+                                <input type="text" formControlName="dateofBirthNew"
+                                    style="width: 120px; background-color: #fff;" autocomplete="false"
+                                    placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker2"
+                                    [max]="YearsAgo19" (focus)="picker2.open()" (click)="picker2.open()">
+                                <mat-datepicker #picker2></mat-datepicker>
+                            </app-field>
+                        </td>
+                        <td *ngIf="showPHSLevel1()">
+                            <span *ngIf="associate.get('isContactComplete').value === 'Yes'">Information Received</span>
+                            <button
+                                *ngIf="associate.get('isContactComplete').value !== 'Yes' && associate.get('phsLink').value"
+                                class="btn btn-primary" (click)="copyMessage(associate.get('phsLink').value)">Copy
+                                Link</button>
+                        </td>
+                        <td *ngIf="false"></td>
+                        <td>
+                            <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
+                                (click)="associate.get('edit').value = true;" class="fas fa-pencil-alt"
+                                style="margin-right: 10px;"></i>
+                            <i class="fas fa-save save" *ngIf="associate.get('edit').value"
+                                (click)="saveLog(associate.value, i)" style="margin-right: 10px;"></i>
+                            <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"></i>
+                        </td>
+                    </tr>
+
+    <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType() &&  isNameChangePerformed(associate.value.refObjec) && !associate.get('edit').value"
+                        style="height:20px;">
+                        <td colspan="6">
+                            <div (click)="associate.get('collapse').value = !associate.get('collapse').value"
+                                style="padding-left: 20px;">
+                                <mat-expansion-panel class="mat-elevation-z1">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            {{associate.get('businessNameNew').value}} Name Change Upload
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            Click to expand or collapse
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <section style="text-align: left; padding-top: 15px;">
+                                        <p>Please provide name change documents for the people identified in
+                                            this list: </p>
+                                        <app-file-uploader *ngIf="account" documentType="Name Change Documents"
+                                            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+                                            entityName="account"
+                                            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
+                                            [entityId]="account.id"
+                                            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
+                                            #financialIntegrityDocuments>
+                                        </app-file-uploader>
+                                    </section>
+                                </mat-expansion-panel>
+                            </div>
+                        </td>
+                    </tr>
+
+                </ng-container>
             </ng-container>
         </ng-container>
 
         <ng-container *ngIf="changeTypeSuffix === 'IndividualShareholder'">
             <thead>
-            <tr *ngIf="personalHistoryItems.length > 0">
-                <th style="width: 200px;">First Name</th>
-                <th style="width: 200px;">Last Name</th>
-                <th style="width: 200px;">Shares (%)</th>
-                <th style="width: 150px;">Date of Birth</th>
-                <th style="width: 200px;">Email</th>
-                <th *ngIf="1==2">Liquor Associate Status </th>
-                <th *ngIf="1==2">Cannabis Associate Status </th>
-                <th style="background-color: transparent;"></th>
-            </tr>
-            </thead>
-            
-            <ng-container *ngFor="let item of personalHistoryItems; let i = index;">
-                <tr [ngClass]="{'alt-row': i%2 === 0}">
-                    <td>
-                        <span *ngIf="!item.edit">{{item.firstNameNew}}</span>
-                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.firstNameNew">
-                    </td>
-                    <td>
-                        <span *ngIf="!item.edit">{{item.lastNameNew}}</span>
-                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.lastNameNew">
-                    </td>
-                    <td>
-                        <span *ngIf="!item.edit">{{item.interestPercentageNew}}</span>
-                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.interestPercentageNew">
-                    </td>
-                    <td>
-                        <span *ngIf="!item.edit">{{item.dateofBirthNew | date}}</span>
-                        <input *ngIf="item.edit" type="text" [(ngModel)]='item.dateofBirthNew'
-                            style="width: 100px; background-color: #fff;" autocomplete="false" placeholder="yyyy-mm-dd"
-                            class="form-control" [matDatepicker]="picker" (focus)="picker.open()"
-                            (click)="picker.open()">
-                        <mat-datepicker #picker></mat-datepicker>
-                    </td>
-                    <td>
-                        <span *ngIf="!item.edit">{{item.emailNew}}</span>
-                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.emailNew">
-                    </td>
-                    <td *ngIf="1==2"></td>
-                    <td *ngIf="1==2"></td>
-                    <td>
-                        <i *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true;"
-                            class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
-                        <i class="fas fa-save" *ngIf="item.edit" (click)="saveLog(item)"
-                            style="margin-right: 10px;"></i>
-                        <i class="fas fa-trash-alt" (click)="deleteChange(item)" style=""></i>
-                    </td>
+                <tr *ngIf="associates?.length > 0">
+                    <th style="width: 200px;">First Name</th>
+                    <th style="width: 200px;">Last Name</th>
+                    <th style="width: 200px;">Shares (%)</th>
+                    <th style="min-width: 200px;">Email</th>
+                    <th style="width: 150px;">Date of Birth</th>
+                    <th *ngIf="false">Liquor Associate Status </th>
+                    <th *ngIf="false">Cannabis Associate Status </th>
+                    <th style="background-color: transparent; width: 50px;"></th>
                 </tr>
+            </thead>
+            <ng-container formArrayName="associates">
+                <ng-container *ngFor="let associate of associates.controls; let i = index;">
+                    <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()" [formGroupName]="i"
+                        [ngClass]="{'alt-row': i%2 === 0}">
+                        <td>
+                            <span
+                                *ngIf="!associate.get('edit').value || associate.get('id').value">{{associate.get('firstNameNew').value}}</span>
+                            <app-field [showChevrons]="false"
+                                *ngIf="associate.get('edit').value && !associate.get('id').value"
+                                [valid]="!associate.get('firstNameNew').touched || associate.get('firstNameNew').valid"
+                                errorMessage="Please enter First Name">
+                                <input class="form-control" type="text" formControlName="firstNameNew">
+                            </app-field>
+                        </td>
+                        <td>
+                            <span
+                                *ngIf="!associate.get('edit').value || associate.get('id').value">{{associate.get('lastNameNew').value}}</span>
+                            <app-field [showChevrons]="false"
+                                *ngIf="associate.get('edit').value && !associate.get('id').value"
+                                [valid]="!associate.get('lastNameNew').touched || associate.get('lastNameNew').valid"
+                                errorMessage="Please enter Last Name">
+                                <input class="form-control" type="text" formControlName="lastNameNew">
+                            </app-field>
+                        </td>
+                        <td>
+                            <span *ngIf="!associate.get('edit').value">
+                                {{associate.get('interestPercentageNew').value}}
+                            </span>
+
+                            <app-field [showChevrons]="false" *ngIf="associate.get('edit').value"
+                                [valid]="!associate.get('interestPercentageNew').touched || associate.get('interestPercentageNew').valid"
+                                errorMessage="Please enter Shares">
+                                <div class="d-flex">
+                                    <input class="form-control" type="text" formControlName="interestPercentageNew">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                            </app-field>
+
+                        </td>
+                        <td>
+                            <span *ngIf="!associate.get('edit').value">{{associate.get('emailNew').value}}</span>
+                            <input *ngIf="associate.get('edit').value" class="form-control" type="text"
+                                formControlName="emailNew">
+                        </td>
+                        <td>
+                            <span *ngIf="!associate.get('edit').value || associate.get('id').value">
+                                {{associate.get('dateofBirthNew').value | date}}
+                            </span>
+
+                            <app-field [showChevrons]="false"
+                                *ngIf="associate.get('edit').value && !associate.get('id').value"
+                                [valid]="!associate.get('dateofBirthNew').touched || associate.get('dateofBirthNew').valid"
+                                errorMessage="Please enter Birth Date">
+                                <input type="text" formControlName="dateofBirthNew"
+                                    style="width: 120px; background-color: #fff;" autocomplete="false" [max]="YearsAgo19"
+                                    placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker"
+                                    (focus)="picker.open()" (click)="picker.open()">
+                                <mat-datepicker #picker></mat-datepicker>
+                            </app-field>
+                        </td>
+                        <td *ngIf="false"></td>
+                        <td *ngIf="false"></td>
+                        <td>
+                            <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
+                                (click)="associate.get('edit').value = true;" class="fas fa-pencil-alt"
+                                style="margin-right: 10px;"></i>
+                            <i class="fas fa-save" *ngIf="associate.get('edit').value"
+                                (click)="saveLog(associate.value, i)" style="margin-right: 10px;"></i>
+                            <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"></i>
+                        </td>
+                    </tr>
+                </ng-container>
             </ng-container>
         </ng-container>
 
         <ng-container *ngIf="changeTypeSuffix === 'BusinessShareholder'">
             <thead>
-            <tr *ngIf="personalHistoryItems.length > 0">
-                <th style="width: 200px;">Business Name</th>
-                <th style="width: 200px;">Shares (%)</th>
-                <th style="width: 200px;">Business Type</th>
-                <th style="width: 200px;">Email</th>
-                <th *ngIf="1==2">Liquor Associate Status </th>
-                <th *ngIf="1==2">Cannabis Associate Status </th>
-                <th style="background-color: transparent;"></th>
-            </tr>
+                <tr *ngIf="associates?.length > 0">
+                    <th style="min-width: 200px;">Business Name</th>
+                    <th style="width: 200px;">Shares (%)</th>
+                    <th style="width: 200px;">Business Type</th>
+                    <th style="width: 200px;">Email</th>
+                    <th *ngIf="false">Liquor Associate Status </th>
+                    <th *ngIf="false">Cannabis Associate Status </th>
+                    <th style="background-color: transparent; width: 50px;"></th>
+                </tr>
             </thead>
-            
-            <ng-container *ngFor="let item of personalHistoryItems; let i = index;">
 
-                <tr [ngClass]="{'alt-row': i%2 === 0}">
-                    <td>
-                        <i class="far fa-caret-square-down" *ngIf="item.collapse && !item.edit" (click)="item.collapse = false;"
-                            style="margin-right: 10px;"></i>
-                        <i class="far fa-caret-square-up" *ngIf="!item.collapse && !item.edit" (click)="item.collapse = true;"
-                            style="margin-right: 10px;"></i>
-                        <span *ngIf="!item.edit">{{item.businessNameNew}}</span>
-                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.businessNameNew">
-                    </td>
-                    <td>
-                        <span *ngIf="!item.edit">{{item.interestPercentageNew}}</span>
-                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.interestPercentageNew">
-                    </td>
-                    <td>
-                        <select class="form-control" style="width: 250px;" [(ngModel)]="item.businessType">
-                            <option value="">Choose the organization type</option>
-                            <option value="PrivateCorporation">Private Corporation</option>
-                            <option value="PublicCorporation">Public Corporation</option>
-                            <option value="Partnership">Partnership</option>
-                            <option value="SoleProprietor">Sole Proprietor</option>
-                            <option value="Society">Society</option>
-                        </select>
-                    </td>
-                    <td>
-                        <span *ngIf="!item.edit">{{item.emailNew}}</span>
-                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.emailNew">
-                    </td>
-                    <td *ngIf="1==2"></td>
-                    <td *ngIf="1==2"></td>
-                    <td>
-                        <i *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true; item.collapse = true;"
-                            class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
-                        <i class="fas fa-save" *ngIf="item.edit" (click)="saveLog(item); item.collapse = false;"
-                            style="margin-right: 10px;"></i>
-                        <i class="fas fa-trash-alt" (click)="deleteChange(item)" style=""></i>
-                    </td>
+            <ng-container formArrayName="associates">
+                <ng-container *ngFor="let associate of associates.controls; let i = index;">
+                    <ng-container *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()">
+                        <tr [formGroupName]="i" [ngClass]="{'alt-row': i%2 === 0}">
+                            <td>
+                                <span *ngIf="!associate.get('edit').value || associate.get('id').value">
+                                    {{associate.get('businessNameNew').value}}
+                                </span>
 
-                </tr>
-                <tr *ngIf="item.collapse;" style="height:20px;">
-                        <td colspan="10" style="background-color: black; text-align:left; color:white; font-size:9px;">
-                            Click to Expand Business Information
-                        </td>
-                    </tr>
-                <tr *ngIf="!item.collapse;">
-                    <td colspan="10" style="background-color: transparent; text-align:left;">
-                        <app-org-structure [node]="item" [account]="account"></app-org-structure>
-                    </td>
-                </tr>
+                                <app-field *ngIf="associate.get('edit').value && !associate.get('id').value"
+                                    [showChevrons]="false"
+                                    [valid]="!associate.get('businessNameNew').touched || associate.get('businessNameNew').valid"
+                                    errorMessage="Please enter Business Name">
+                                    <input class="form-control" type="text" formControlName="businessNameNew">
+                                </app-field>
+                            </td>
+                            <td>
+                                <span
+                                    *ngIf="!associate.get('edit').value">{{associate.get('interestPercentageNew').value}}</span>
+                                <app-field *ngIf="associate.get('edit').value" [showChevrons]="false"
+                                    [valid]="!associate.get('interestPercentageNew').touched || associate.get('interestPercentageNew').valid"
+                                    errorMessage="Please enter Shares">
+                                    <input class="form-control" type="text" formControlName="interestPercentageNew">
+                                </app-field>
+                            </td>
+                            <td>
+                                <span *ngIf="!associate.get('edit').value || associate.get('id').value">
+                                    {{getBusinessTypeName(associate.get('businessType').value)}}
+                                </span>
+                                <app-field [showChevrons]="false"
+                                    *ngIf="associate.get('edit').value && !associate.get('id').value"
+                                    [valid]="!associate.get('businessType').touched || associate.get('businessType').valid"
+                                    errorMessage="Please select Business Type">
+                                    <select class="form-control" style="width: 250px;" formControlName="businessType">
+                                        <option value="">Choose the organization type</option>
+                                        <option value="PrivateCorporation">Private Corporation</option>
+                                        <option value="PublicCorporation">Public Corporation</option>
+                                        <option value="Partnership">Partnership</option>
+                                        <option value="SoleProprietor">Sole Proprietor</option>
+                                        <option value="Society">Society</option>
+                                    </select>
+                                </app-field>
+
+                            </td>
+                            <td>
+                                <span *ngIf="!associate.get('edit').value">{{associate.get('emailNew').value}}</span>
+                                <app-field *ngIf="associate.get('edit').value" [showChevrons]="false"
+                                    [valid]="!associate.get('emailNew').touched || associate.get('emailNew').valid"
+                                    errorMessage="Please enter email">
+                                    <input class="form-control" type="text" formControlName="emailNew">
+                                </app-field>
+                            </td>
+                            <td *ngIf="false"></td>
+                            <td *ngIf="false"></td>
+                            <td>
+                                <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
+                                    (click)="associate.get('edit').value = true; associate.get('collapse').value = true;"
+                                    class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
+                                <i class="fas fa-save" *ngIf="associate.get('edit').value"
+                                    (click)="saveLog(associate.value, i); associate.get('collapse').value = false;"
+                                    style="margin-right: 10px;"></i>
+                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"></i>
+                            </td>
+
+                        </tr>
+
+                        <tr *ngIf="!associate.get('edit').value" style="height:20px;">
+                            <td colspan="5">
+                                <div (click)="associate.get('collapse').value = !associate.get('collapse').value"
+                                    style="padding-left: 20px;">
+                                    <mat-expansion-panel class="mat-elevation-z1">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                {{associate.get('businessNameNew').value}} Business Information
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                Click to expand or collapse
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <section style="text-align: left;">
+                                            <app-org-structure [node]="associate.value.refObject" [account]="account">
+                                            </app-org-structure>
+                                        </section>
+                                    </mat-expansion-panel>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
             </ng-container>
         </ng-container>
     </table>
+    <br>
     <button class="btn btn-secondary" (click)="addAssociate()">
-            <i class="fas fa-plus"></i>
-            {{addLabel}}</button>
+        <i class="fas fa-plus"></i>
+        {{addLabel}}</button>
 </div>
