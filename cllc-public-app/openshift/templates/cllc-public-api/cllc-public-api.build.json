@@ -6,23 +6,7 @@
     "name": "${NAME}-build-template",
     "creationTimestamp": null
   },
-  "objects": [
-  {
-    "kind": "NetworkSecurityPolicy",
-	"apiVersion": "secops.pathfinder.gov.bc.ca/v1alpha1",
-	"metadata": {
-		"name": "pods-to-external-network",
-		"labels": { "name": "pods-to-external-network",
-				    "env": "tools"
-				  }
-	},
-	"spec": {"description": "Allow the builds to access the internet.\n    This only needs to be specified once per environment.",
-	"source": " - - $namespace=yuumcs-${ENV_NAME}",
-	"destination": " - - ext:network=any"
-    }
-  },
-
-  
+  "objects": [   
     {
       "kind": "ImageStream",
       "apiVersion": "v1",
@@ -179,7 +163,7 @@
       "displayName": "Source Image Name",
       "description": "The name of the source image.",
       "required": true,
-      "value": "registry.access.redhat.com/dotnet/dotnet-22-rhel7"
+      "value": "registry.access.redhat.com/dotnet/dotnet-31-rhel7"
     },
     {
       "name": "SOURCE_IMAGE_TAG",

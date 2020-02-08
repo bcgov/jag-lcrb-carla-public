@@ -51,7 +51,12 @@
         {
           "type": "Docker",
           "dockerStrategy":
-          {                       
+          {           
+            "from":
+            {
+              "kind": "${SOURCE_IMAGE_KIND}",
+              "name": "${SOURCE_IMAGE_NAME}:${SOURCE_IMAGE_TAG}"              
+            },
             "dockerfilePath": "${DOCKER_FILE_PATH}"            
           }
         },
@@ -72,14 +77,14 @@
       "displayName": "Name",
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
-      "value": "dotnet-21-rhel7"
+      "value": "dotnet-sonar"
     },
     {
       "name": "GIT_REPO_URL",
       "displayName": "Git Repo URL",
       "description": "The URL to your GIT repo.",
       "required": true,
-      "value": "https://github.com/redhat-developer/s2i-dotnetcore.git"
+      "value": "https://github.com/bcgov/jag-lcrb-carla-public.git"
     },
     {
       "name": "GIT_REF",
@@ -93,21 +98,21 @@
       "displayName": "Source Context Directory",
       "description": "The source context directory.",
       "required": false,
-      "value": "/2.1/build"
+      "value": "/dotnet-sonar"
     },
     {
       "name": "SOURCE_IMAGE_KIND",
       "displayName": "Source Image Kind",
       "description": "The 'kind' (type) of the  source image; typically ImageStreamTag, or DockerImage.",
       "required": true,
-      "value": "ImageStreamTag"
+      "value": "DockerImage"
     },
     {
       "name": "SOURCE_IMAGE_NAME",
       "displayName": "Source Image Name",
       "description": "The name of the source image.",
       "required": true,
-      "value": "dotnet-21-runtime-centos7"
+      "value": "registry.access.redhat.com/dotnet/dotnet-22-rhel7"
     },
     {
       "name": "SOURCE_IMAGE_TAG",
@@ -121,7 +126,7 @@
       "displayName": "Docker File Path",
       "description": "The path to the docker file defining the build.",
       "required": false,
-      "value": "Dockerfile.rhel7"
+      "value": "Dockerfile.RHEL"
     },
     {
       "name": "OUTPUT_IMAGE_TAG",
