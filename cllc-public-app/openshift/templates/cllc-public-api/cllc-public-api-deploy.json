@@ -436,11 +436,11 @@
                     "name": "FEATURE_CRS_RENEWAL",
                     "value": "1"
                   },
-				  {
+				          {
                     "name": "FEATURE_INDIGENOUS_NATION",
                     "value": "1"
                   },
-				  {
+				          {
                     "name": "FEATURE_MARKETER",
                     "value": "1"
                   }
