@@ -1,10 +1,10 @@
-FROM dotnet-21-rhel7:latest
-# This image provides a .NET Core 2.0 environment you can use to run your .NET
+FROM dotnet-31-rhel7:latest
+# This image provides a .NET Core 3.1 environment you can use to run your .NET
 # applications.
 
 USER 0
 
-# Install Mono, Java JDK 8
+# Install sonar dependencies
 
 RUN pushd /opt \
     && yum install -y yum-utils \

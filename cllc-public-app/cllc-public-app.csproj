@@ -70,6 +70,30 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="openshift\templates\cllc-public-angular\cllc-public-angular-build.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="openshift\templates\cllc-public-api\cllc-public-api-deploy.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="openshift\templates\cllc-public-api\cllc-public-api.build.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="openshift\templates\cllc-public-frontend\cllc-public-frontend-build.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="openshift\templates\cllc-public-frontend\cllc-public-frontend-deploy.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="openshift\templates\dotnet-sonar\dotnet-sonar-build.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="openshift\templates\network-security-policies\network-security-policies.build.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="openshift\templates\nginx-runtime\nginx-runtime-build.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
     <Content Update="SeedData\PolicyDocuments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
