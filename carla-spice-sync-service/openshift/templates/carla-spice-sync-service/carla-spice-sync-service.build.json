@@ -55,6 +55,7 @@
             "from":
             {
               "kind": "${SOURCE_IMAGE_KIND}",
+              "namespace": "${SOURCE_IMAGE_NAMESPACE}",
               "name": "${SOURCE_IMAGE_NAME}:${SOURCE_IMAGE_TAG}"              
             },
             "env": [
@@ -127,7 +128,13 @@
       "displayName": "Source Image Name",
       "description": "The name of the source image.",
       "required": true,
-      "value": "dotnet-22-rhel7"
+      "value": "dotnet-31-rhel7"
+    },
+    {
+      "name": "SOURCE_IMAGE_NAMESPACE",
+      "displayName": "Source Image Namespace",
+      "description": "The namespace containing the source image.",
+      "value": ""
     },
     {
       "name": "SOURCE_IMAGE_TAG",
