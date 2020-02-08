@@ -127,7 +127,7 @@
       "displayName": "Source Image Name",
       "description": "The name of the source image.",
       "required": true,
-      "value": "registry.access.redhat.com/dotnet/dotnet-22-rhel7"
+      "value": "registry.access.redhat.com/dotnet/dotnet-31-rhel7"
     },
     {
       "name": "SOURCE_IMAGE_TAG",
@@ -141,7 +141,7 @@
       "displayName": "DotNet Startup Project",
       "description": "The path to the startup project for the .Net application.",
       "required": true,
-      "value": "geocoder-service/geocoder-service/geocoder-service.csproj"
+      "value": "geocoder-service/geocoder-service.csproj"
     },
     {
       "name": "OUTPUT_IMAGE_TAG",
