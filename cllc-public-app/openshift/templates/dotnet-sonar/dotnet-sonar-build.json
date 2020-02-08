@@ -55,6 +55,7 @@
             "from":
             {
               "kind": "${SOURCE_IMAGE_KIND}",
+              "namespace": "${SOURCE_IMAGE_NAMESPACE}",
               "name": "${SOURCE_IMAGE_NAME}:${SOURCE_IMAGE_TAG}"              
             },
             "dockerfilePath": "${DOCKER_FILE_PATH}"            
@@ -111,8 +112,7 @@
       "name": "SOURCE_IMAGE_NAMESPACE",
       "displayName": "Source Image Namespace",
       "description": "The namespace containing the source image.",
-      "required": true,
-      "value": "yuumcs-tools"
+      "value": ""
     },
     {
       "name": "SOURCE_IMAGE_NAME",
