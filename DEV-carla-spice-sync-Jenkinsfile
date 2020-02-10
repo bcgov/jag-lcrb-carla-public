@@ -1,5 +1,5 @@
 APP_NAME = "carla-spice-sync-service"
-PROJECT_NAMESPACE = "lclb-cllc"
+PROJECT_NAMESPACE = "yuumcs"
 
 class AppEnvironment {
   String name
