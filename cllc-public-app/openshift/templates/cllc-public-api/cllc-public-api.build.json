@@ -6,23 +6,7 @@
     "name": "${NAME}-build-template",
     "creationTimestamp": null
   },
-  "objects": [
-  {
-    "kind": "NetworkSecurityPolicy",
-	"apiVersion": "secops.pathfinder.gov.bc.ca/v1alpha1",
-	"metadata": {
-		"name": "pods-to-external-network",
-		"labels": { "name": "pods-to-external-network",
-				    "env": "tools"
-				  }
-	},
-	"spec": {"description": "Allow the builds to access the internet.\n    This only needs to be specified once per environment.",
-	"source": " - - $namespace=yuumcs-${ENV_NAME}",
-	"destination": " - - ext:network=any"
-    }
-  },
-
-  
+  "objects": [   
     {
       "kind": "ImageStream",
       "apiVersion": "v1",
@@ -71,6 +55,7 @@
             "from":
             {
               "kind": "${SOURCE_IMAGE_KIND}",
+              "namespace": "${SOURCE_IMAGE_NAMESPACE}",
               "name": "${SOURCE_IMAGE_NAME}:${SOURCE_IMAGE_TAG}"              
             },
             "env": [
@@ -172,14 +157,20 @@
       "displayName": "Source Image Kind",
       "description": "The 'kind' (type) of the  source image; typically ImageStreamTag, or DockerImage.",
       "required": true,
-      "value": "DockerImage"
+      "value": "ImageStreamTag"
+    },
+    {
+      "name": "SOURCE_IMAGE_NAMESPACE",
+      "displayName": "Source Image Namespace",
+      "description": "The namespace containing the source image.",
+      "value": ""
     },
     {
       "name": "SOURCE_IMAGE_NAME",
       "displayName": "Source Image Name",
       "description": "The name of the source image.",
       "required": true,
-      "value": "registry.access.redhat.com/dotnet/dotnet-22-rhel7"
+      "value": "dotnet-31-rhel7"
     },
     {
       "name": "SOURCE_IMAGE_TAG",
