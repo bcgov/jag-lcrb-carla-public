@@ -105,8 +105,7 @@
       "name": "SOURCE_IMAGE_NAMESPACE",
       "displayName": "Source Image Namespace",
       "description": "The namespace containing the source image.",
-      "required": true,
-      "value": "lclb-cllc-tools"
+      "value": ""
     },
     {
       "name": "SOURCE_IMAGE_NAME",

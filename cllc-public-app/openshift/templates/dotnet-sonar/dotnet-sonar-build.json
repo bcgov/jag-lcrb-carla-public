@@ -51,7 +51,13 @@
         {
           "type": "Docker",
           "dockerStrategy":
-          {                       
+          {           
+            "from":
+            {
+              "kind": "${SOURCE_IMAGE_KIND}",
+              "namespace": "${SOURCE_IMAGE_NAMESPACE}",
+              "name": "${SOURCE_IMAGE_NAME}:${SOURCE_IMAGE_TAG}"              
+            },
             "dockerfilePath": "${DOCKER_FILE_PATH}"            
           }
         },
@@ -72,14 +78,14 @@
       "displayName": "Name",
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
-      "value": "dotnet-30-rhel7-runtime"
+      "value": "dotnet-sonar"
     },
     {
       "name": "GIT_REPO_URL",
       "displayName": "Git Repo URL",
       "description": "The URL to your GIT repo.",
       "required": true,
-      "value": "https://github.com/redhat-developer/s2i-dotnetcore.git"
+      "value": "https://github.com/bcgov/jag-lcrb-carla-public.git"
     },
     {
       "name": "GIT_REF",
@@ -93,7 +99,7 @@
       "displayName": "Source Context Directory",
       "description": "The source context directory.",
       "required": false,
-      "value": "/3.0/runtime"
+      "value": "/dotnet-sonar"
     },
     {
       "name": "SOURCE_IMAGE_KIND",
@@ -103,11 +109,17 @@
       "value": "ImageStreamTag"
     },
     {
+      "name": "SOURCE_IMAGE_NAMESPACE",
+      "displayName": "Source Image Namespace",
+      "description": "The namespace containing the source image.",
+      "value": ""
+    },
+    {
       "name": "SOURCE_IMAGE_NAME",
       "displayName": "Source Image Name",
       "description": "The name of the source image.",
       "required": true,
-      "value": "dotnet-21-runtime-centos7"
+      "value": "dotnet-31-rhel7"
     },
     {
       "name": "SOURCE_IMAGE_TAG",
@@ -121,7 +133,7 @@
       "displayName": "Docker File Path",
       "description": "The path to the docker file defining the build.",
       "required": false,
-      "value": "Dockerfile.rhel7"
+      "value": "Dockerfile.RHEL"
     },
     {
       "name": "OUTPUT_IMAGE_TAG",

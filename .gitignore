@@ -35,3 +35,5 @@ node_modules/
 /openshift/cllc-public-api-deploy_DeploymentConfig.json
 /openshift/carla-spice-sync-service-deploy_DeploymentConfig.json
 /file-service/obj
+/openshift/file-manager-service-deploy_DeploymentConfig.json
+/openshift/geocoder-deploy_DeploymentConfig.json
