@@ -45,9 +45,7 @@ namespace bdd_tests
         public void I_start_application()
         {
             ngDriver.WaitForAngular();
-
             NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
-
             startApp_button.Click();
         }
 
@@ -55,11 +53,8 @@ namespace bdd_tests
         public void I_continue_to_application()
         {
             ngDriver.WaitForAngular();
-
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
-
             continueApp_button.Click();
-
             ngDriver.WaitForAngular();
         }
 
@@ -134,7 +129,10 @@ namespace bdd_tests
         public void click_on_submit_and_pay()
         {
             NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
+            System.Threading.Thread.Sleep(7000);
+
             submitpay_button.Click();
+            System.Threading.Thread.Sleep(7000);
         }
 
         [Then(@"I CLICK on 'SAVE FOR LATER'")]
@@ -150,11 +148,25 @@ namespace bdd_tests
             string testCC = "4030000010001234";
             string testCVD = "123";
 
-            //driver.FindElementByName("trnCardNumber").SendKeys(testCC);
+            //find out what browser equivalent is in this context
+            //browser sync - don't wait for Angular
+            ngDriver.IgnoreSynchronization = true;
 
-            //driver.FindElementByName("trnCardCvd").SendKeys(testCVD);
+            driver.FindElementByName("trnCardNumber").SendKeys(testCC);
 
-            //driver.FindElementByName("submitButton").Click();
+            driver.FindElementByName("trnCardCvd").SendKeys(testCVD);
+
+            driver.FindElementByName("submitButton").Click();
+            System.Threading.Thread.Sleep(7000);
+
+            //turn back on when returning to Angular
+            ngDriver.IgnoreSynchronization = false;
+
+            /* Examples
+            browser.driver.findElement(by.name('userId')).sendKeys('xxxx');
+            browser.driver.findElement(by.name('password')).sendKeys('yyyy');
+            browser.driver.findElement(by.id('loginFormSubmit')).click();
+            */
         }
 
         [And(@"I SEE Review Account Profile")]
