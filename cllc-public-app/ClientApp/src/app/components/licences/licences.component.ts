@@ -229,20 +229,22 @@ export class LicencesComponent extends FormBase implements OnInit {
   }
 
   updatePhone(licenceId: string, establishmentId: string, event: any) {
-    if (event.target.value === null) {
+    if (event.target.value === null || typeof this.licenceForms[123] === 'undefined') {
       return false;
     }
+
+    const phone = this.licenceForms[licenceId].controls['phone'].value;
 
     const establishment = {
       id: establishmentId,
       email: null,
-      phone: event.target.value,
+      phone: phone,
       isOpen: null
     };
 
     const licence = Object.assign( new ApplicationLicenseSummary(), {
       licenseId: licenceId,
-      establishmentPhoneNumber: event.target.value
+      establishmentPhoneNumber: phone
     });
 
     this.updateEstablishment(establishment);
@@ -250,9 +252,9 @@ export class LicencesComponent extends FormBase implements OnInit {
   }
 
   updateLicence(licence: ApplicationLicenseSummary) {
-    this.busy = forkJoin(
+    this.busy = forkJoin([
       this.licenceDataService.updateLicenceEstablishment(licence.licenseId, licence)
-      )
+    ])
     .subscribe(([licenceResp]) => {
       this.addOrUpdateLicence(licenceResp);
     });
@@ -270,11 +272,26 @@ export class LicencesComponent extends FormBase implements OnInit {
       email: null
     };
 
-    this.busy = forkJoin(
+    this.busy = forkJoin([
       this.establishmentService.upEstablishment(establishment)
-      )
+    ])
     .subscribe(([establishmentResp]) => {
       this.licenceMappings[licenceType][index].establishmentIsOpen = establishmentResp.isOpen;
     });
+  }
+
+  getHandbookLink(licenceType: string) {
+    switch (licenceType) {
+      case 'Cannabis Retail Store':
+        return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/cannabis-retail-store-licence-handbook.pdf';
+      case 'Marketing':
+        return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/marketing-handbook.pdf';
+      case 'Catering':
+        return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/catering-handbook.pdf';
+      case 'Wine Store':
+        return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/winestore-handbook.pdf';
+      default:
+        return '404';
+    }
   }
 }
