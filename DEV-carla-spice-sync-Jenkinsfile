@@ -131,10 +131,11 @@ def notifyError(title, description) {
 }
 
 node('master') {
+    if (changeset("carla-spice-sync-service/*")) {
 
-    stage('Startup') {
+stage('Startup') {
         // stop pending builds.
-        sh 'oc cancel-build bc/embcess'        
+        sh 'oc cancel-build bc/carla-spice-sync-service'        
     }
     stage('Build') {        
 		echo "Building Application image..."
@@ -208,4 +209,8 @@ podTemplate(label: 'owasp-zap2', name: 'owasp-zap2', serviceAccount: 'jenkins', 
             }
         }
     }
+  }    
+
+	
 }
+    
