@@ -18,19 +18,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(Policy = "Business-User")]
-    public class LiquorEventsController : ControllerBase
+    public class LicenceEventsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
 
-        public LiquorEventsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public LicenceEventsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _dynamicsClient = dynamicsClient;
-            _logger = loggerFactory.CreateLogger(typeof(LiquorEventsController));
+            _logger = loggerFactory.CreateLogger(typeof(LicenceEventsController));
         }
 
 
@@ -39,7 +39,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost()]
-        public async Task<IActionResult> CreateLiquorEvent([FromBody] ViewModels.LiquorEvent item)
+        public async Task<IActionResult> CreateLicenceEvent([FromBody] ViewModels.LicenceEvent item)
         {
             MicrosoftDynamicsCRMadoxioEvent dynamicsEvent = new MicrosoftDynamicsCRMadoxioEvent();
             dynamicsEvent.CopyValues(item);
@@ -70,7 +70,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetLiquorEvent(string id)
+        public async Task<IActionResult> GetLicenceEvent(string id)
         {
             if (string.IsNullOrEmpty(id))
             {
@@ -101,7 +101,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateLiquorEvent([FromBody] ViewModels.LiquorEvent item, string id)
+        public async Task<IActionResult> UpdateLicenceEvent([FromBody] ViewModels.LicenceEvent item, string id)
         {
             if (string.IsNullOrEmpty(id))
             {
@@ -142,7 +142,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLiquorEvent(string id)
+        public async Task<IActionResult> DeleteLicenceEvent(string id)
         {
             if (string.IsNullOrEmpty(id))
             {
@@ -175,13 +175,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet()]
-        public async Task<IActionResult> GetLiquorEventsList()
+        public async Task<IActionResult> GetLicenceEventsList()
         {
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             MicrosoftDynamicsCRMadoxioEventCollection dynamicsEvents;
-            List<ViewModels.LiquorEvent> responseEvents = new List<ViewModels.LiquorEvent>();
+            List<ViewModels.LicenceEvent> responseEvents = new List<ViewModels.LicenceEvent>();
             
             string filter = "_adoxio_account_value eq " + userSettings.AccountId;
             try

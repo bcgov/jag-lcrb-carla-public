@@ -52,12 +52,9 @@
 
           <td>
             <div *ngIf="item?.licenceTypeName === ApplicationTypeNames.Catering">
-              <a [routerLink]="[ '/licence-event/' + item.licenseId]">
-                <i class="fas fa-calendar-alt" style="margin-right: 10px;">
-                </i>Request Event Authorization
+              <a [routerLink]="[ '/licence/' + item.licenseId + '/event']">
+                <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Event Authorization
               </a>
-
-
 
             </div>
             <div *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore">

@@ -11,13 +11,13 @@ using Xunit;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-    public class LiquorEventsTests :  ApiIntegrationTestBaseWithLogin
+    public class LicenceEventsTests :  ApiIntegrationTestBaseWithLogin
     {
-        public LiquorEventsTests(CustomWebApplicationFactory<Startup> factory)
+        public LicenceEventsTests(CustomWebApplicationFactory<Startup> factory)
           : base(factory) 
         { }
 
-        const string service = "liquorevents";
+        const string service = "LicenceEvents";
         
         [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // try a random GET, should return unauthorized
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
-            Assert.Equal(request.RequestUri.ToString(), "/api/liquorevents/" + id);
+            Assert.Equal(request.RequestUri.ToString(), "/api/LicenceEvents/" + id);
 
             var response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
@@ -48,7 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-            ViewModels.LiquorEvent viewmodel_adoxio_event = new ViewModels.LiquorEvent()
+            ViewModels.LicenceEvent viewmodel_adoxio_event = new ViewModels.LicenceEvent()
             {
                 Name = initialName
             };
@@ -62,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // parse as JSON.
             jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.LiquorEvent responseViewModel = JsonConvert.DeserializeObject<ViewModels.LiquorEvent>(jsonString);
+            ViewModels.LicenceEvent responseViewModel = JsonConvert.DeserializeObject<ViewModels.LicenceEvent>(jsonString);
 
             // name should match.
             Assert.Equal(initialName, responseViewModel.Name);
@@ -75,11 +75,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.LiquorEvent>(jsonString);
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.LicenceEvent>(jsonString);
             Assert.Equal(initialName, responseViewModel.Name);
 
             // U - Update            
-            ViewModels.LiquorEvent patchModel = new ViewModels.LiquorEvent()
+            ViewModels.LicenceEvent patchModel = new ViewModels.LicenceEvent()
             {
                 Id = id.ToString(),
                 Name = changedName
@@ -101,7 +101,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             jsonString = await response.Content.ReadAsStringAsync();
 
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.LiquorEvent>(jsonString);
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.LicenceEvent>(jsonString);
             Assert.Equal(changedName, responseViewModel.Name);
 
             // D - Delete
@@ -136,7 +136,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create first
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-            ViewModels.LiquorEvent viewmodel_adoxio_event = new ViewModels.LiquorEvent()
+            ViewModels.LicenceEvent viewmodel_adoxio_event = new ViewModels.LicenceEvent()
             {
                 Name = firstName
             };
@@ -151,7 +151,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Create second
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-            ViewModels.LiquorEvent viewmodel_adoxio_event2 = new ViewModels.LiquorEvent()
+            ViewModels.LicenceEvent viewmodel_adoxio_event2 = new ViewModels.LicenceEvent()
             {
                 Name = secondName
             };
