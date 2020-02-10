@@ -34,7 +34,7 @@ Where `<SECRETNAME>` is the name you specified in step 7 when you imported the s
 
 9) You can now import images from the Redhat repository.  For example:
 
-`oc import-image dotnet/dotnet-30-rhel7 --from=registry.redhat.io/dotnet/dotnet-30-rhel7 --confirm` 
+`oc import-image dotnet/dotnet-31-rhel7 --from=registry.redhat.io/dotnet/dotnet-31-rhel7 --confirm` 
 
 10) Adjust your builds to use this imported image
 
