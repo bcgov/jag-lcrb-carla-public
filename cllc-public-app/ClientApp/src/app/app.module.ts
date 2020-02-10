@@ -130,6 +130,7 @@ import { WorkerInformationComponent } from '@components/worker-qualification/wor
 import { AssosiateWizardComponent } from '@components/associate-wizard/associate-wizard.component';
 import { SolePropResultsComponent } from '@components/associate-wizard/sole-prop-results/sole-prop-results.component';
 import { NgxFileDropModule  } from 'ngx-file-drop';
+import { NgxMaskModule } from 'ngx-mask';
 import {
   IndividualAssociatesResultsComponent
 } from '@components/associate-wizard/individual-associates-results/individual-associates-results.component';
@@ -174,7 +175,6 @@ import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponen
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
 import { ModalComponent } from '@shared/components/modal/modal.component';
-import { PhoneMaskDirective } from './directives/phone-mask.directive';
 import { AssociateListComponent } from './shared/components/associate-list/associate-list.component';
 import { OrgStructureComponent } from './shared/components/org-structure/org-structure.component';
 import { DynamicApplicationComponent } from './components/applications/dynamic-application/dynamic-application.component';
@@ -204,7 +204,7 @@ import { MultiStageApplicationFlowComponent } from './components/multi-stage-app
     DashboardComponent,
     DirectorAndOfficerPersonDialogComponent,
     DirectorsAndOfficersComponent,
-    DynamicsFormComponent,    
+    DynamicsFormComponent,
     EditShareholdersComponent,
     FieldComponent,
     FileUploaderComponent,
@@ -254,7 +254,6 @@ import { MultiStageApplicationFlowComponent } from './components/multi-stage-app
     AppRemoveIfFeatureOnDirective,
     AppRemoveIfFeatureOffDirective,
     InputThousandsDirective,
-    PhoneMaskDirective,
     AssociateContentComponent,
     ConnectionToNonMedicalStoresComponent,
     KeyPersonnelDialogComponent,
@@ -278,7 +277,7 @@ import { MultiStageApplicationFlowComponent } from './components/multi-stage-app
     LicencesComponent,
     ApplicationsComponent,
     AssociateListComponent,
-    OrgStructureComponent,    
+    OrgStructureComponent,
     DynamicApplicationComponent,
     CateringDemoComponent,
     PersonalHistorySummaryComponent,
@@ -332,6 +331,7 @@ import { MultiStageApplicationFlowComponent } from './components/multi-stage-app
     MatBadgeModule,
     NgBusyModule,
     NgxFileDropModule,
+    NgxMaskModule.forRoot(),
     ReactiveFormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument
@@ -382,8 +382,7 @@ import { MultiStageApplicationFlowComponent } from './components/multi-stage-app
     MatStepperModule,
     NgxFileDropModule,
     ReactiveFormsModule,
-    MatBadgeModule,
-    PhoneMaskDirective
+    MatBadgeModule
   ],
   providers: [
     AccountDataService,
