@@ -183,6 +183,8 @@ import { PersonalHistorySummaryComponent } from './components/personal-history-s
 import { AccountCompletenessComponent } from './components/account-completeness/account-completeness.component';
 import { PhsConfirmationComponent } from './components/phs-confirmation/phs-confirmation.component';
 import { MultiStageApplicationFlowComponent } from './components/multi-stage-application-flow/multi-stage-application-flow.component';
+import { EventFormComponent } from '@components/event-form/event-form.component';
+import { LicenceEventsService } from '@services/licence-events.service';
 
 
 @NgModule({
@@ -389,6 +391,7 @@ import { MultiStageApplicationFlowComponent } from './components/multi-stage-app
     ApplicationDataService,
     LegalEntityDataService,
     LicenseDataService,
+    LicenceEventsService,
     MonthlyReportDataService,
     AliasDataService,
     BCeidAuthGuard,
