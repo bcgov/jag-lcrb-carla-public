@@ -41616,7 +41616,7 @@
         },
         "adoxio_appchecklistinspectionresults": {
           "format": "int32",
-          "description": "",
+          "description": "No Contravention(s) = Passed",
           "type": "integer"
         },
         "adoxio_isreadystorage": {
@@ -48741,9 +48741,8 @@
           "description": "",
           "type": "string"
         },
-        "modifiedon": {
-          "format": "date-time",
-          "description": "Date and time when the record was modified.",
+        "_owningbusinessunit_value": {
+          "description": "Unique identifier for the business unit that owns the record",
           "type": "string"
         },
         "_owningteam_value": {
@@ -48776,6 +48775,10 @@
           "description": "",
           "type": "string"
         },
+        "adoxio_additionlocationinfo": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_foodservicedescription": {
           "description": "",
           "type": "string"
@@ -48794,8 +48797,8 @@
           "description": "",
           "type": "string"
         },
-        "adoxio_eventid": {
-          "description": "Unique identifier for entity instances",
+        "adoxio_entertainmentdetails": {
+          "description": "",
           "type": "string"
         },
         "adoxio_entertainmentdescription": {
@@ -48808,6 +48811,11 @@
         },
         "adoxio_contactphone": {
           "description": "",
+          "type": "string"
+        },
+        "modifiedon": {
+          "format": "date-time",
+          "description": "Date and time when the record was modified.",
           "type": "string"
         },
         "statecode": {
@@ -48836,6 +48844,10 @@
           "description": "",
           "type": "string"
         },
+        "adoxio_eventdescription": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_notifyeventinspector": {
           "description": "",
           "type": "boolean"
@@ -48845,12 +48857,20 @@
           "description": "Date and time when the record was created.",
           "type": "string"
         },
+        "adoxio_venuenamedescription": {
+          "description": "",
+          "type": "string"
+        },
         "_adoxio_account_value": {
           "description": "Licensee",
           "type": "string"
         },
         "adoxio_os_session_pk": {
           "description": "",
+          "type": "string"
+        },
+        "adoxio_eventid": {
+          "description": "Unique identifier for entity instances",
           "type": "string"
         },
         "adoxio_postalcode": {
@@ -48958,10 +48978,6 @@
         },
         "adoxio_eventtypedescription": {
           "description": "",
-          "type": "string"
-        },
-        "_owningbusinessunit_value": {
-          "description": "Unique identifier for the business unit that owns the record",
           "type": "string"
         },
         "adoxio_foodservice": {
