@@ -557,4 +557,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
       .indexOf(state) !== -1;
   }
 
+  getEstablishmentLabel(applicationTypeName: ApplicationTypeNames): string {
+    let label = 'Establishment Name';
+    if ([ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(applicationTypeName) !== -1) {
+      label = 'Name of the Proposed Establishment';
+    } else if (applicationTypeName === ApplicationTypeNames.CRSEstablishmentNameChange) {
+      label = 'Proposed New Name';
+    }
+    return label;
+  }
+
 }
