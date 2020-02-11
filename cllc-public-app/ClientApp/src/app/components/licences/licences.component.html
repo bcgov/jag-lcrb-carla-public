@@ -2,7 +2,7 @@
   <div [ngBusy]="busy"></div>
   <h1>Licences</h1>
   <section *ngFor="let mappingItem of licenceMappings | keyvalue">
-    <form>
+    <form [formGroup]="mainForm">
       <table class="eq-table">
         <tr>
           <th></th>
