@@ -41,26 +41,41 @@
         </section>
         <h2 class="blue-header">DECLARATION AND CONSENT</h2>
         <section style="padding-left: 10px;">
-          <h3 appRemoveIfFeatureOff="NoWetSignature">WAIVER AND RELEASE</h3>
+
           <p appRemoveIfFeatureOff="NoWetSignature">
-            The information on this form is required for the purpose of conducting a security screening assessment. It
-            is
-            a collected pursuant to section 8(1) fo the Privacy Act of Canada, and Section s.26(c) and 33.1(1)(b) of the
-            British Columbia Freedom of Information and Protection of Privacy Act (FOIPPA).
+            <span>
+              <input type="checkbox" formControlName="consentValidated">
+                  I
+                  <span style="text-decoration: underline;">{{contact?.firstname}} {{contact?.lastname}} </span>
+                  authorize the collection of my personal information on this application by the Royal Canadian Mounted Police (RCMP) 
+                  and other federal government institution under the Privacy Act for the purpose of conducting a check of criminal investigations, 
+                  charges and convictions. I also authorize the provision of my personal information on this application by the BC Municipal Law 
+                  Enforcement Agencies as well as other authorized public bodies under FoIPPA for the same purpose.
+                <div *ngIf="!isConcentValidatedValid() && form.get('consentValidated').touched" style="color: #A12622;  margin-top: 2px;">
+                  ! Please provide your consent to proceed -- a security screening is required in order to become a
+                  qualified cannabis worker.
+                </div>
+            </span>
           </p>
-          <div appRemoveIfFeatureOn="NoWetSignature" *ngIf="showValidationMessages && !isDeclarationValid()"
-            style="color: #A12622; margin-top: 2px;">
-            <div *ngIf="!name.valid && name.touched ">
-              Please read the declaration and consent and select the check boxes.
-            </div>
-          </div>
+          <p appRemoveIfFeatureOff="NoWetSignature">
+              Additionally, I consent to the disclosure to the Ministry of Public Safety and Solicitor General by the RCMP, the BC Municipal Law 
+              Enforcement Agencies as well as other authorized public body agencies of any personal information related to my security screening 
+              checks under the Privacy Act, FoIPPA, and other relevant applicable provincial and federal legislation. The information may include: 
+              (a) criminal record check or fingerprint-based criminal record verification by searching the Canadian Police Information Centre 
+              database; (b) a police information check, including the Police Records Information Management Environment (PRIME-BC) and the 
+              Police Reporting and Occurrence System (PROS); (c) a check of intelligence databases maintained by law enforcement agencies.
+          </p>
+
+          <p appRemoveIfFeatureOff="NoWetSignature">
+              I certify that, to the best of my knowledge, the information I have provided on my application, and will provide as necessary, is complete, honest and accurate. I understand that a false statement or omission of facts may lead to a denial of a cannabis retail licence pursuant to the CCLA. I am also aware that later discovery of an omission or misrepresentation may be grounds for any finding of suitability to be suspended or revoked. 
+          </p>          
           <section style="display: flex">
             <span appRemoveIfFeatureOn="NoWetSignature">
               <input style="flex: 1 0 15px;" type="checkbox" [(ngModel)]="consentToCollection"
                 [ngModelOptions]="{standalone: true}">
               &nbsp;
             </span>
-            <span>
+            <span appRemoveIfFeatureOn="NoWetSignature">
               I, the undersigned, do hereby consent to the collection and disclosure by the Royal Canadian Mounted
               Police (RCMP) and other law enforcement agencies, as well as other duly authorized agencies of the
               government, of any and all information related to the security screening checks in support of this
@@ -79,7 +94,7 @@
                 [ngModelOptions]="{standalone: true}">
               &nbsp;
             </span>
-            <span>
+            <span  appRemoveIfFeatureOn="NoWetSignature">
               I certify that, to the best of my knowledge, the information I have provided on my application and will
               provide as necessary is complete, honest and accurate. I understand that a false statement or omission of
               facts herein may lead to a denial of a worker qualification. I am also aware that later discovery of an
@@ -87,19 +102,7 @@
               prosecuted under provincial law.
             </span>
           </section>
-          <p></p>
-          <div appRemoveIfFeatureOff="NoWetSignature">
-            <input type="checkbox" formControlName="consentValidated"> <span>
-              I
-              <span style="text-decoration: underline;">{{contact?.firstname}} {{contact?.lastname}} </span>
-              have read the above declaration and conset to collection and disclosure of information related
-              to security screening.</span>
-            <div *ngIf="!isConcentValidatedValid() && form.get('consentValidated').touched" style="color: #A12622;  margin-top: 2px;">
-              ! Please provide your consent to proceed -- a security screening is required in order to become a
-              qualified cannabis worker.
-            </div>
-            <p></p>
-          </div>
+          
           <div appRemoveIfFeatureOn="NoWetSignature">
             <label for="">Applicant Name</label>
             <br>
@@ -199,17 +202,13 @@
         <h2 style="color: #000">Collection Notice:</h2>
         <div class="submit-content">
           <p>
-            The Security Programs Division (SPD) will collect your personal information for the purpose of fulfilling
-            the
-            requirements of the Cannabis Control and Licensing Act (CCLA) and associated regulations in cannabis
-            licensing,
-            compliance and enforcement matters in accordance with Sections 26 (a) and (c) of the Freedom of Information
-            and
-            Protection of Privacy Act. Should you have any questions about the collection, use, or disclosure of
-            personal
-            information, please contact the Liquor and Cannabis Regulation Branch via mail to PO Box 9292 Stn Prov Govt
-            Victoria B.C. V8W 9J8; email to <a
-              href="mailto:CannabisWorker@gov.bc.ca?Subject=Collection Notice">CannabisWorker@gov.bc.ca;</a>.
+              The Liquor and Cannabis Regulation Branch (LCRB) will collect your personal information for the purpose of fulfilling 
+              the requirements of the Cannabis Control and Licensing Act (CCLA) and associated regulations in cannabis licensing, 
+              compliance and enforcement matters in accordance with sections 26(a) and (c) of the Freedom of Information and 
+              Protection of Privacy Act (FoIPPA) and section 10 of the CCLA. Additionally, LCRB may collect personal information under 
+              section 26(e) of FoIPPA for the purpose of evaluating LCRB programs and activities to better serve you. Should you have 
+              any questions about the collection, use, or disclosure of personal information, please contact the Freedom of Information 
+              Officer at PO Box 9292 STN PROV GOVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
           </p>
         </div>
       </section>
