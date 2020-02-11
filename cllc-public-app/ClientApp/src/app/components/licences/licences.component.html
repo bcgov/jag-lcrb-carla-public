@@ -37,7 +37,7 @@
             <div *ngIf="item?.licenceTypeName !== 'Marketer'">
               {{item?.establishmentAddressStreet}} <br>
               {{item?.establishmentAddressCity}} BC {{item?.establishmentAddressPostalCode}}<br>
-              <input class="form-control" type="text" formControlName="phone" appPhoneMask placeholder="Store Phone Number"
+              <input class="form-control" type="text" formControlName="phone" mask="(000) 000-0000" placeholder="Store Phone Number"
                 (focusout)="updatePhone(item?.licenseId, item?.establishmentId, $event)"> <br>
               <input class="form-control" type="text" formControlName="email" placeholder="Store Email Address"
                 (focusout)="updateEmail(item?.licenseId, item?.establishmentId, $event)"> <br>
@@ -125,12 +125,10 @@
             </section>
 
           </td>
-
-
-
         </tr>
       </table>
     </form>
+    <p style="text-align: center; font-style: italic;">All {{mappingItem.key}} licence holders must follow the terms and conditions of their licence as set out in the <a href="{{getHandbookLink(mappingItem.key)}}" target="_blank">{{mappingItem.key}} Terms and Conditions Handbook</a></p>
     <p>&nbsp;</p>
   </section>
 </div>
