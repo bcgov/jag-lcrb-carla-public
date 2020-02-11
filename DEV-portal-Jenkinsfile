@@ -72,7 +72,7 @@ stage('Automated Tests and code analysis') {
             node('nodejs') 
                 {
                     stages {
-                        stage("Angular Test) {
+                        stage('Angular Test') {
                             steps {
                                 //the checkout is mandatory, otherwise functional test would fail
                                 echo "checking out source"
