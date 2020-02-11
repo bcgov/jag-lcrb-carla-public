@@ -101,6 +101,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Application</param>
         /// <param name="timezoneruleversionnumber">For internal use
         /// only.</param>
+        /// <param name="adoxioAppchecklistinspectionresults">No
+        /// Contravention(s) = Passed</param>
         /// <param name="_createdonbehalfbyValue">Unique identifier of the
         /// delegate user who created the record.</param>
         /// <param name="_adoxioPolicejurisdictionidValue">Unique identifier
@@ -1443,6 +1445,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public int? AdoxioServicehourstuesdayopen { get; set; }
 
         /// <summary>
+        /// Gets or sets no Contravention(s) = Passed
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_appchecklistinspectionresults")]
         public int? AdoxioAppchecklistinspectionresults { get; set; }
