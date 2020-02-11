@@ -84,6 +84,7 @@ export class LicencesComponent extends FormBase implements OnInit {
           licenses.forEach((licence: ApplicationLicenseSummary) => {
             this.addOrUpdateLicence(licence);
           });
+          this.dataLoaded = true;
         });
   }
 
@@ -194,11 +195,6 @@ export class LicencesComponent extends FormBase implements OnInit {
     if (licenceIndex >= 0) {
       this.licenceMappings[licence.licenceTypeName][licenceIndex] = licence;
     } else {
-      // this.licensedApplications.push(licence);
-      // const index = this.licensedApplications.length - 1;
-      // if (typeof this.licenceMappings[licence.licenceTypeName] === 'undefined') {
-      //   this.licenceMappings[licence.licenceTypeName] = [];
-      // }
       this.licenceMappings[licence.licenceTypeName].push(licence);
     }
     this.licenceForms[licence.licenseId] = this.fb.group({
