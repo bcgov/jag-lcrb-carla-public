@@ -22,7 +22,7 @@ describe('FederalReportingComponent', () => {
       imports: [MatDialogModule],
       providers: [
         FormBuilder,
-        { provide: MonthlyReportDataService, useValue: { getMonthlyReportsByLicence: () => of([]) } },
+        { provide: MonthlyReportDataService, useValue: { getAllCurrentMonthlyReports: () => of([]), getMonthlyReportsByLicence: () => of([]) } },
         { provide: Router, useValue: {} },
         { provide: ActivatedRoute, useValue: activatedRouteStub },
         { provide: LicenseDataService, useValue: { getAllCurrentLicenses: () => of([]) } },
