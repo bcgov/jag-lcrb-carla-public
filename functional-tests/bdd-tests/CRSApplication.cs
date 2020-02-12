@@ -157,16 +157,10 @@ namespace bdd_tests
             driver.FindElementByName("trnCardCvd").SendKeys(testCVD);
 
             driver.FindElementByName("submitButton").Click();
-            System.Threading.Thread.Sleep(7000);
+            System.Threading.Thread.Sleep(10000);
 
             //turn back on when returning to Angular
             ngDriver.IgnoreSynchronization = false;
-
-            /* Examples
-            browser.driver.findElement(by.name('userId')).sendKeys('xxxx');
-            browser.driver.findElement(by.name('password')).sendKeys('yyyy');
-            browser.driver.findElement(by.id('loginFormSubmit')).click();
-            */
         }
 
         [And(@"I SEE Review Account Profile")]
