@@ -98,7 +98,7 @@
       "displayName": "Source Context Directory",
       "description": "The source context directory.",
       "required": false,
-      "value": "openshift/other-templates/dotnet-22-bzip"
+      "value": "/pdf-service/openshift/templates/dotnet-22-bzip/"
     },
     {
       "name": "SOURCE_IMAGE_KIND",
