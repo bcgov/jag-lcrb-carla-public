@@ -42,7 +42,7 @@ export class AppComponent extends FormBase implements OnInit {
   public versionInfo: VersionInfo;
   isAssociate = false;
   account: Account;
-  showMessageCenterContent = true;
+  showMessageCenterContent = false;
   linkedFederalReports: MonthlyReport[];
   Months = Months;  // make available in template
   parseInt = parseInt; // make available in template
