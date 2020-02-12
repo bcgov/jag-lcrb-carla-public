@@ -17,7 +17,7 @@ import { AppState } from '@app/app-state/models/app-state';
 import * as moment from 'moment';
 import { PaymentDataService } from '@services/payment-data.service';
 import { EstablishmentDataService } from '@services/establishment-data.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Establishment } from '@models/establishment.model';
 
 
@@ -36,6 +36,7 @@ const RENEWAL_DUE = 'Renewal Due';
 export class LicencesComponent extends FormBase implements OnInit {
   applications: ApplicationSummary[] = [];
   licenceForms = {};
+  mainForm: FormGroup;
 
   readonly ACTIVE = ACTIVE;
   readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
@@ -66,6 +67,7 @@ export class LicencesComponent extends FormBase implements OnInit {
       .subscribe((featureOn: boolean) => {
         this.licenceTransferFeatureOn = featureOn;
       });
+    this.mainForm = new FormGroup({});
   }
 
   ngOnInit() {
@@ -194,11 +196,6 @@ export class LicencesComponent extends FormBase implements OnInit {
     if (licenceIndex >= 0) {
       this.licenceMappings[licence.licenceTypeName][licenceIndex] = licence;
     } else {
-      // this.licensedApplications.push(licence);
-      // const index = this.licensedApplications.length - 1;
-      // if (typeof this.licenceMappings[licence.licenceTypeName] === 'undefined') {
-      //   this.licenceMappings[licence.licenceTypeName] = [];
-      // }
       this.licenceMappings[licence.licenceTypeName].push(licence);
     }
     this.licenceForms[licence.licenseId] = this.fb.group({
@@ -229,7 +226,7 @@ export class LicencesComponent extends FormBase implements OnInit {
   }
 
   updatePhone(licenceId: string, establishmentId: string, event: any) {
-    if (event.target.value === null || typeof this.licenceForms[123] === 'undefined') {
+    if (event.target.value === null || typeof this.licenceForms[licenceId] === 'undefined') {
       return false;
     }
 
