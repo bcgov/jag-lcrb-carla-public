@@ -68,9 +68,6 @@
             }
           },
           "spec": {
-            "nodeSelector": {
-              "aporeto-enforcerd": "true"
-            },
             "containers": [
               {
                 "image": "${NAME}",
