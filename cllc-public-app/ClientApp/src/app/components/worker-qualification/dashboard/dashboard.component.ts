@@ -52,7 +52,6 @@ export class WorkerDashboardComponent extends FormBase implements OnInit {
     this.dataLoaded = true;
     if (this.currentUser && this.currentUser.contactid) {
       this.busy = this.workerDataService.getWorkerByContactId(this.currentUser.contactid).subscribe(res => {
-        console.log(res);
         this.dataSource = res;
         this.currentApplication = res[0];
         this.dataTable = [
