@@ -79,6 +79,7 @@ export class EventFormComponent extends FormBase implements OnInit {
           this.isEditMode = true;
           this.retrieveSavedEvent(params.get('eventId'));
         } else {
+          console.log(this.getOptionFromLabel(this.eventStatus, 'Draft').value);
           this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Draft').value);
         }
       });
@@ -117,6 +118,13 @@ export class EventFormComponent extends FormBase implements OnInit {
     }
   }
 
+  clearRelatedFormFieldIfNotOther(options: any, fieldName: string, relatedField: string) {
+    const option = this.getOptionFromValue(options, this.eventForm.controls[fieldName].value);
+    if (option.label !== 'Other') {
+      this.eventForm.controls[relatedField].setValue('');
+    }
+  }
+
   updateLicence() {
     this.busy = this.licenceEvents.updateLicenceEvent(this.eventForm.get('id').value, this.eventForm.value)
     .subscribe((licenceEvent) => {
@@ -125,6 +133,7 @@ export class EventFormComponent extends FormBase implements OnInit {
   }
 
   createLicence() {
+    this.eventForm.removeControl('id');
     this.busy = this.licenceEvents.createLicenceEvent(this.eventForm.value)
     .subscribe((licenceEvent) => {
       this.router.navigate(['/licences']);
@@ -135,10 +144,10 @@ export class EventFormComponent extends FormBase implements OnInit {
     return c1 && c2 ? c1.value === c2.value : c1 === c2;
   }
 
-  getOptionFromValue(option: any, value: number) {
-    const idx = option.findIndex(opt => opt.value === value);
+  getOptionFromValue(options: any, value: number) {
+    const idx = options.findIndex(opt => opt.value === value);
     if (idx >= 0) {
-      return option[idx];
+      return options[idx];
     }
     return {
       value: null,
