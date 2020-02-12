@@ -26,7 +26,11 @@ export class EventFormComponent extends FormBase implements OnInit {
   eventClass = EventClass;
   eventType = EventType;
   eventStatus = EventStatus;
+  startDateMinimum: Date;
+  endDateMinimum: Date;
+  scheduleIsInconsistent = false;
 
+  dateForms = this.fb.array([]);
   eventForm = this.fb.group({
     status: ['', [Validators.required]],
     id: ['', []],
@@ -79,10 +83,20 @@ export class EventFormComponent extends FormBase implements OnInit {
           this.isEditMode = true;
           this.retrieveSavedEvent(params.get('eventId'));
         } else {
-          console.log(this.getOptionFromLabel(this.eventStatus, 'Draft').value);
+          this.dateForms.push(this.fb.group({
+            dateTitle: ['Default Times', []],
+            startTime: [new Date(), [Validators.required]],
+            endTime: [new Date(), [Validators.required]],
+            liquorStartTime: [new Date(), [Validators.required]],
+            liquorEndTime: [new Date(), [Validators.required]]
+          }));
           this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Draft').value);
         }
       });
+      this.startDateMinimum = new Date();
+      this.startDateMinimum.setDate(this.startDateMinimum.getDate() + 21);
+      this.endDateMinimum = new Date();
+      this.endDateMinimum.setDate(this.endDateMinimum.getDate() + 21);
     }
 
   ngOnInit() {
@@ -164,5 +178,18 @@ export class EventFormComponent extends FormBase implements OnInit {
       value: null,
       label: ''
     };
+  }
+
+  toggleScheduleConsistency() {
+    this.scheduleIsInconsistent = !this.scheduleIsInconsistent;
+  }
+
+  updateEndDateMinimum() {
+    if (this.eventForm.controls['startDate'].value === null) {
+      this.endDateMinimum = new Date();
+      this.endDateMinimum.setDate(this.endDateMinimum.getDate() + 21);
+    } else {
+      this.endDateMinimum = this.eventForm.controls['startDate'].value;
+    }
   }
 }
