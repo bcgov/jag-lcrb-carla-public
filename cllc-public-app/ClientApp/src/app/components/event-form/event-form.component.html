@@ -173,12 +173,36 @@
       </div>
     </div>
 
-    <h3 class="blue-header">Time and Date of Event</h3>
-    <div class="padded-section">
-      <h2>Time and Date of Event</h2>
-      <label>Event Start:</label>
-      <label>Event End:</label>
-      <label>Default Times:</label>
+    <h3 class="blue-header">TIME AND DATE OF EVENT</h3>
+    <div class="padded-section clearfix">
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Start Date" [required]="true"
+          [valid]="eventForm.get('startDate').valid || !eventForm.get('startDate').touched"
+          [isFullWidth]="false">
+          <input type="text" formControlName='startDate'
+            style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" class="form-control"
+            [min]="startDateMinimum" [matDatepicker]="startPicker" (focus)="startPicker.open()" (click)="startPicker.open()"
+            (dateChange)="updateEndDateMinimum()">
+          <mat-datepicker #startPicker></mat-datepicker>
+        </app-field>
+        <app-field class="col-md-4 col-xs-12" label="End Date" [required]="true"
+          [valid]="eventForm.get('endDate').valid || !eventForm.get('endDate').touched"
+          [isFullWidth]="false">
+          <input type="text" formControlName='endDate'
+            style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" class="form-control"
+            [min]="endDateMinimum" [matDatepicker]="endPicker" (focus)="endPicker.open()" (click)="endPicker.open()">
+          <mat-datepicker #endPicker></mat-datepicker>
+        </app-field>
+      </div>
+      <div class="row" *ngFor="let form of dateForms.controls">
+        <h1>{{form}}</h1>
+      </div>
+      <h1 *ngIf="scheduleIsInconsistent">inconsistent</h1>
+      <div class="row">
+        <app-field class="col-xs-12">
+          <mat-checkbox (change)="toggleScheduleConsistency()">The event and liquor service times are different on specific dates.</mat-checkbox>
+        </app-field>
+      </div>
     </div>
 
     <h3 class="blue-header">AGREEMENT</h3>
@@ -192,8 +216,7 @@
       </ul>
       <p>- Liquor Control and Licensing Act, Section 50.</p>
       <div>
-        <input type="checkbox" formControlName="agreement" name="agreement" id="agreement">
-        <label for="agreement" class="ml-2">I understand and agree to abide by the terms and conditions of the catering authorization.</label>
+        <mat-checkbox formControlName="agreement">I understand and agree to abide by the terms and conditions of the catering authorization.</mat-checkbox>
       </div>
     </div>
 
