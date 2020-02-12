@@ -23,8 +23,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Name = item.AdoxioName;
                 result.StartDate = item.AdoxioStartdate;
                 result.EndDate = item.AdoxioEnddate;
-                result.VenueDescription = item.AdoxioVenuedescription;
-                result.AdditionalLocationInformation = item.AdoxioAdditionallocationinformation;
+                result.VenueDescription = item.AdoxioVenuenamedescription;
+                result.AdditionalLocationInformation = item.AdoxioAdditionallocationinfo;
                 result.FoodService = (FoodService?)item.AdoxioFoodservice;
                 result.FoodServiceDescription = item.AdoxioFoodservicedescription;
                 result.Entertainment = (Entertainment?)item.AdoxioEntertainment;
@@ -36,7 +36,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.EventNumber = item.AdoxioEventnumber;
                 result.ClientHostname = item.AdoxioClienthostname;
                 result.EventType = (EventType?)item.AdoxioEventtype;
-                result.EventTypeDescription = item.AdoxioEventtypedescription;
+                result.EventTypeDescription = item.AdoxioEventdescription;
                 result.ImportSequenceNumber = item.Importsequencenumber;
                 result.SpecificLocation = (SpecificLocation?)item.AdoxioSpecificlocation;
                 result.EventClass = (EventClass?)item.AdoxioClass;
@@ -64,8 +64,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioName = from.Name;
             to.AdoxioStartdate = from.StartDate;
             to.AdoxioEnddate = from.EndDate;
-            to.AdoxioVenuedescription = from.VenueDescription;
-            to.AdoxioAdditionallocationinformation = from.AdditionalLocationInformation;
+            to.AdoxioVenuenamedescription = from.VenueDescription;
+            to.AdoxioAdditionallocationinfo = from.AdditionalLocationInformation;
             to.AdoxioFoodservice = (int?)from.FoodService;
             to.AdoxioFoodservicedescription = from.FoodServiceDescription;
             to.AdoxioEntertainment = (int?)from.Entertainment;
@@ -77,7 +77,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEventnumber = from.EventNumber;
             to.AdoxioClienthostname = from.ClientHostname;
             to.AdoxioEventtype = (int?)from.EventType;
-            to.AdoxioEventtypedescription = from.EventTypeDescription;
+            to.AdoxioEventdescription = from.EventTypeDescription;
             to.Importsequencenumber = from.ImportSequenceNumber;
             to.AdoxioSpecificlocation = (int?)from.SpecificLocation;
             to.AdoxioClass = (int?)from.EventClass;
