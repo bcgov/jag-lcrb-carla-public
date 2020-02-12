@@ -90,7 +90,7 @@
         <app-field class="col-md-4 col-xs-12" label="Food Service Provided" [required]="true"
           [valid]="eventForm.get('foodService').valid || !eventForm.get('foodService').touched"
           errorMessage="Please enter food service provided" [isFullWidth]="true">
-          <select class="form-control" formControlName="foodService">
+          <select class="form-control" formControlName="foodService" (change)="clearRelatedFormFieldIfNotOther(foodService, 'foodService', 'foodServiceDescription')">
             <option *ngFor="let item of foodService" [ngValue]="item.value">{{item.label}}</option>
           </select>
         </app-field>
@@ -106,7 +106,7 @@
         <app-field class="col-md-4 col-xs-12" label="Entertainment Provided" [required]="true"
           [valid]="eventForm.get('entertainment').valid || !eventForm.get('entertainment').touched"
           errorMessage="Please enter the entertainment provided" [isFullWidth]="true">
-          <select class="form-control" formControlName="entertainment">
+          <select class="form-control" formControlName="entertainment" (change)="clearRelatedFormFieldIfNotOther(entertainment, 'entertainment', 'entertainmentDescription')">
             <option *ngFor="let item of entertainment" [ngValue]="item.value">{{item.label}}</option>
           </select>
         </app-field>
@@ -154,9 +154,9 @@
           <input class="form-control" type="text" formControlName="street1">
         </app-field>
         <app-field class="col-md-4 col-xs-12" label="Address 2"
-          [valid]="eventForm.get('street1').valid || !eventForm.get('street1').touched"
+          [valid]="eventForm.get('street2').valid || !eventForm.get('street2').touched"
           [isFullWidth]="true">
-          <input class="form-control" type="text" formControlName="street1">
+          <input class="form-control" type="text" formControlName="street2">
         </app-field>
       </div>
       <div class="row">
