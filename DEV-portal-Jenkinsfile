@@ -19,6 +19,7 @@ node('master') {
         }, 'C# API': {
             if (changeset("cllc-public-app/*")) {
                 openshiftBuild bldCfg: 'cllc-public-api', showBuildLogs: 'true'
+                openshiftTag destStream: 'cllc-public-api', verbose: 'true', destTag: 'dev', srcStream: 'cllc-public-api', srcTag: 'latest'
             }
         })
 
@@ -71,42 +72,38 @@ stage('Automated Tests and code analysis') {
         }, 'Angular': {
             node('nodejs') 
                 {
-                    stages {
-                        stage('Angular Test') {
-                            steps {
-                                //the checkout is mandatory, otherwise functional test would fail
-                                echo "checking out source"
-                                echo "Build: ${BUILD_ID}"
-                                checkout scm
-                                dir('cllc-public-app/ClientApp') {
-                                    
-                                    // sh 'Xvfb :1 -screen 0 1024x768x24 &'
-                                    // sh 'export DISPLAY=:1'
-                                    sh 'npm install -g @angular/cli'
-                                    sh 'npm install'
-                                    sh 'npm run test-headless'
-                                    
-                                }
-                            }
-                        }
+                    
+                    //the checkout is mandatory, otherwise the functional test would fail
+                    echo "checking out source"
+                    echo "Build: ${BUILD_ID}"
+                    checkout scm
+                    dir('cllc-public-app/ClientApp') {
+                    try {
+                        // sh 'Xvfb :1 -screen 0 1024x768x24 &'
+                        // sh 'export DISPLAY=:1'
+                        sh 'npm install -g @angular/cli'
+                        sh 'npm install'
+                        sh 'npm run test-headless'
                     } 
-                    post {
-                        always {
-                            dir('cllc-public-app/ClientApp') {
-                                archiveArtifacts allowEmptyArchive: true, artifacts: '*.xml'
-                                junit 'junit.xml'
-                                publishHTML(target: [
-                                    allowMissing: false,
-                                    alwaysLinkToLastBuild: false,
-                                    keepAll: true,
-                                    reportDir: '.',
-                                    reportFiles: 'unit-tests.html',
-                                    reportName: "Unit Test Report"
-                                ])
-                            }
-                        }
-                    }                                       
+                    catch (err) {
+                        echo err
+                    }        
+                    finally {
+
+                        archiveArtifacts allowEmptyArchive: true, artifacts: '*.xml'
+                        junit 'junit.xml'
+                        publishHTML(target: [
+                            allowMissing: false,
+                            alwaysLinkToLastBuild: false,
+                            keepAll: true,
+                            reportDir: '.',
+                            reportFiles: 'unit-tests.html',
+                            reportName: "Unit Test Report"
+                        ]) 
+                            
+                    }                    
                 }
             }
-    )
+        )
+    }
 }
