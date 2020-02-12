@@ -11,7 +11,7 @@
     </div>
 
     <div class="padded-section">
-      <h2>Status <b>{{eventForm.get('status').value}}</b></h2>
+      <h2>Status <b>{{getOptionFromValue(eventStatus, eventForm.get('status').value) === null ? '' : getOptionFromValue(eventStatus, eventForm.get('status').value).label}}</b></h2>
     </div>
 
     <h3 class="blue-header">EVENT CONTACT INFORMATION</h3>
@@ -32,6 +32,18 @@
       </div>
     </div>
 
+    <h3 class="blue-header">NOTIFICATIONS</h3>
+    <div class="padded-section">
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Email"
+          [valid]="eventForm.get('contactEmail').valid || !eventForm.get('contactEmail').touched"
+          [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="contactEmail" readonly>
+        </app-field>
+      </div>
+      <p>To update this email address, please see your Account Profile</p>
+    </div>
+
     <h3 class="blue-header">EVENT DETAILS</h3>
     <div class="padded-section clearfix">
       <div class="row">
@@ -39,16 +51,15 @@
           [valid]="eventForm.get('eventType').valid || !eventForm.get('eventType').touched"
           errorMessage="Please enter the type of event" [isFullWidth]="true">
           <select class="form-control" formControlName="eventType">
-            <option value="">Select</option>
-            <option *ngFor="let item of eventType | keyvalue" [value]="item.value">{{item.value}}</option>
+            <option *ngFor="let item of eventType" [ngValue]="item.value">{{item.label}}</option>
           </select>
         </app-field>
       </div>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Description" [required]="true"
-          [valid]="eventForm.get('description').valid || !eventForm.get('description').touched"
+          [valid]="eventForm.get('eventTypeDescription').valid || !eventForm.get('eventTypeDescription').touched"
           errorMessage="Please enter a description of the event" [isFullWidth]="true">
-          <textarea class="form-control" formControlName="description"></textarea>
+          <textarea class="form-control" formControlName="eventTypeDescription"></textarea>
         </app-field>
       </div>
       <div class="row">
@@ -70,7 +81,6 @@
           [valid]="eventForm.get('minorsAttending').valid || !eventForm.get('minorsAttending').touched"
           errorMessage="Please indicate if minors are attending" [isFullWidth]="true">
           <select class="form-control" formControlName="minorsAttending">
-            <option value="">Select</option>
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
@@ -81,12 +91,11 @@
           [valid]="eventForm.get('foodService').valid || !eventForm.get('foodService').touched"
           errorMessage="Please enter food service provided" [isFullWidth]="true">
           <select class="form-control" formControlName="foodService">
-            <option value="">Select</option>
-            <option *ngFor="let item of foodService | keyvalue" [value]="item.value">{{item.value}}</option>
+            <option *ngFor="let item of foodService" [ngValue]="item.value">{{item.label}}</option>
           </select>
         </app-field>
       </div>
-      <div class="row" *ngIf="eventForm.get('foodService').value === 'Other'">
+      <div class="row" *ngIf="getOptionFromValue(foodService, eventForm.get('foodService').value).label === 'Other'">
         <app-field class="col-md-4 col-xs-12" label="Food Service Description"
           [valid]="eventForm.get('foodServiceDescription').valid || !eventForm.get('foodServiceDescription').touched"
           [isFullWidth]="true">
@@ -95,15 +104,14 @@
       </div>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Entertainment Provided" [required]="true"
-          [valid]="eventForm.get('entertainmentProvided').valid || !eventForm.get('entertainmentProvided').touched"
+          [valid]="eventForm.get('entertainment').valid || !eventForm.get('entertainment').touched"
           errorMessage="Please enter the entertainment provided" [isFullWidth]="true">
-          <select class="form-control" formControlName="entertainmentProvided">
-            <option value="">Select</option>
-            <option *ngFor="let item of entertainment | keyvalue" [value]="item.value">{{item.value}}</option>
+          <select class="form-control" formControlName="entertainment">
+            <option *ngFor="let item of entertainment" [ngValue]="item.value">{{item.label}}</option>
           </select>
         </app-field>
       </div>
-      <div class="row" *ngIf="eventForm.get('entertainmentProvided').value === 'Other'">
+      <div class="row" *ngIf="getOptionFromValue(entertainment, eventForm.get('entertainment').value).label === 'Other'">
         <app-field class="col-md-4 col-xs-12" label="Entertainment Description"
           [valid]="eventForm.get('entertainmentDescription').valid || !eventForm.get('entertainmentDescription').touched"
           [isFullWidth]="true">
@@ -125,17 +133,16 @@
         <app-field class="col-md-4 col-xs-12" label="Location" [required]="true"
           [valid]="eventForm.get('specificLocation').valid || !eventForm.get('specificLocation').touched"
           errorMessage="Please enter the location" [isFullWidth]="true">
-          <select class="form-control" formControlName="specificLocation">
-            <option value="">Select</option>
-            <option *ngFor="let item of specificLocation | keyvalue" [value]="item.value">{{item.value}}</option>
+          <select class="form-control" formControlName="specificLocation" [compareWith]="compareFn">
+            <option *ngFor="let item of specificLocation" [ngValue]="item.value">{{item.label}}</option>
           </select>
         </app-field>
       </div>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Additional Information"
-          [valid]="eventForm.get('additionalInformation').valid || !eventForm.get('additionalInformation').touched"
+          [valid]="eventForm.get('additionalLocationInformation').valid || !eventForm.get('additionalLocationInformation').touched"
           [isFullWidth]="true">
-          <textarea class="form-control" formControlName="additionalInformation"></textarea>
+          <textarea class="form-control" formControlName="additionalLocationInformation"></textarea>
         </app-field>
       </div>
 
@@ -172,18 +179,6 @@
       <label>Event Start:</label>
       <label>Event End:</label>
       <label>Default Times:</label>
-    </div>
-
-    <h3 class="blue-header">NOTIFICATIONS</h3>
-    <div class="padded-section">
-      <div class="row">
-        <app-field class="col-md-4 col-xs-12" label="Email"
-          [valid]="eventForm.get('contactEmail').valid || !eventForm.get('contactEmail').touched"
-          [isFullWidth]="true">
-          <input class="form-control" type="text" formControlName="contactEmail" readonly>
-        </app-field>
-      </div>
-      <p>To update this email address, please see your Account Profile</p>
     </div>
 
     <h3 class="blue-header">AGREEMENT</h3>

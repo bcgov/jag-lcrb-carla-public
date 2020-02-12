@@ -2,85 +2,163 @@ export class LicenceEvent {
   id: string;
   name: string;
   contactName: string;
-        // public string Name { get; set; }
-        // public DateTimeOffset? StartDate { get; set; }
-        // public DateTimeOffset? EndDate { get; set; }
-        // public string VenueDescription { get; set; }
-        // public string AdditionalLocationInformation { get; set; }
-        // [JsonConverter(typeof(StringEnumConverter))]
-        // public FoodService? FoodService { get; set; }
-        // public string FoodServiceDescription { get; set; }
-        // [JsonConverter(typeof(StringEnumConverter))]
-        // public Entertainment? Entertainment { get; set; }
-        // public string EntertainmentDescription { get; set; }
-        // public string ContactPhone { get; set; }
-        // public string ExternalId { get; set; }
-        // public string ContactName { get; set; }
-        // public string ContactEmail { get; set; }
-        // public string EventNumber { get; set; }
-        // public string ClientHostname { get; set; }
-        // [JsonConverter(typeof(StringEnumConverter))]
-        // public EventType? EventType { get; set; }
-        // public string EventTypeDescription { get; set; }
-        // public int? ImportSequenceNumber { get; set; }
-        // [JsonConverter(typeof(StringEnumConverter))]
-        // public SpecificLocation? SpecificLocation { get; set; }
-        // [JsonConverter(typeof(StringEnumConverter))]
-        // public EventClass? EventClass { get; set; }
-        // public int? MaxAttendance { get; set; }
-        // public bool? CommunityApproval { get; set; }
-        // public bool? NotifyEventInspector { get; set; }
-        // public string LicenceId { get; set; }
-        // public string AccountId { get; set; }
+  contactPhone: string;
+  contactEmail: string;
+  startDate: Date;
+  endDate: Date;
+  venueDescription: string;
+  AdditionalLocationInformation: string;
+  foodServiceDescription: string;
+  entertainmentDescription: string;
+  clientHostname: string;
+  eventTypeDescription: string;
+  maxAttendance: number;
+  minorsAttending: boolean;
+  communityApproval: boolean;
+  licenceId: string;
+  accountId: string;
+  street1: string;
+  street2: string;
+  city: string;
+  postalCode: string;
 
-        // public string Street1 { get; set; }
-        // public string Street2 { get; set; }
-        // public string City { get; set; }
-        // public string Province { get; set; }
-        // public string PostalCode { get; set; }
+  // picklists
+  status: number;
+  specificLocation: number;
+  eventType: number;
+  entertainment: number;
+  foodService: number;
+  eventClass: number;
+
+  // unused
+  eventNumber: string;
+  externalId: string;
+  importSequenceNumber: number;
+  notifyEventInspector: boolean;
 }
 
-export enum EventStatus {
-  Draft = 'Draft',
-  InReview = 'In Review',
-  Approved = 'Approved',
-  Denied = 'Denied',
-  Terminated = 'Terminated',
-  Cancelled = 'Cancelled'
-}
+export const EventStatus = [
+  {
+    label: 'Draft',
+    value: 845280004,
+  },
+  {
+    label: 'In Review',
+    value: 1
+  },
+  {
+    label: 'Approved',
+    value: 845280000
+  },
+  {
+    label: 'Denied',
+    value: 845280001
+  },
+  {
+    label: 'Terminated',
+    value: 845280002
+  },
+  {
+    label: 'Cancelled',
+    value: 845280003
+  }
+];
 
-export enum SpecificLocation {
-    Indoors = 'Indoors',
-    Outdoors = 'Outdoors',
-    Both = 'Both'
-}
+export const SpecificLocation = [
+  {
+    label: 'Indoors',
+    value: 845280000,
+  },
+  {
+    label: 'Outdoors',
+    value: 845280001,
+  },
+  {
+    label: 'Both',
+    value: 845280002
+  }
+];
 
-export enum EventClass {
-  Approval = 'Approval',
-  Notice = 'Notice'
-}
+export const EventClass = [
+  {
+    label: 'Approval',
+    value: 845280000
+  },
+  {
+    label: 'Notice',
+    value: 845280001
+  }
+];
 
-export enum FoodService {
-  AppetizersHorsDOeuvres = 'Appetizers / Hors D\'Oeuvres',
-  Buffet = 'Buffet',
-  FullServiceMeal = 'Full Service Meal',
-  Other = 'Other'
-}
+export const FoodService = [
+  {
+    label: 'Appetizers / Hors D\'Oeuvres',
+    value: 845280000,
+  },
+  {
+    label: 'Buffet',
+    value: 845280001,
+  },
+  {
+    label: 'Full Service Meal',
+    value: 845280002,
+  },
+  {
+    label: 'Other',
+    value: 845280003,
+  }
+];
 
-export enum Entertainment {
-  AdultEntertainment = 'Adult Entertainment',
-  Dance = 'Dance',
-  Gambling = 'Gambling',
-  LiveEntertainment = 'Live Entertainment',
-  LiveMusic = 'Live Music',
-  None = 'None',
-  Other = 'Other'
-}
+export const Entertainment = [
+  {
+    label: 'Adult Entertainment',
+    value: 845280000
+  },
+  {
+    label: 'Dance',
+    value: 845280001
+  },
+  {
+    label: 'Gambling',
+    value: 845280002
+  },
+  {
+    label: 'Live Entertainment',
+    value: 845280003
+  },
+  {
+    label: 'Live Music',
+    value: 845280004
+  },
+  {
+    label: 'None',
+    value: 845280005
+  },
+  {
+    label: 'Other',
+    value: 845280006
+  }
+];
 
-export enum EventType {
-  CaterersStaffCustomerAppreciation = 'Caterer\'s Staff / Customer Appreciation',
-  Community = 'Community',
-  Corporate = 'Corporate',
-  Other = 'Other',
-  Personal = 'Personal'
-}
+export const EventType = [
+  {
+    label: 'Caterer\'s Staff / Customer Appreciation',
+    value: 845280000
+  },
+  {
+    label: 'Community',
+    value: 845280001
+  },
+  {
+    label: 'Corporate',
+    value: 845280002
+  },
+  {
+    label: 'Other',
+    value: 845280003
+  },
+  {
+    label: 'Personal',
+    value: 845280004
+  }
+];
