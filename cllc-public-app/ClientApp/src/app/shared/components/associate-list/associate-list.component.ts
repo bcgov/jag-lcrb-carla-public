@@ -52,6 +52,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
 
   addFormArray(item: LicenseeChangeLog = null) {
     item = item || <LicenseeChangeLog>{};
+    item.refObject = item;
     const group = this.fb.group({
       id: [''],
       changeType: [''],
@@ -131,7 +132,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
     }
 
     group.patchValue(item);
-    group.get('refObject').setValue(item);
+
     this.associates.push(group);
   }
 
@@ -182,6 +183,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
       item = Object.assign(new LicenseeChangeLog(), item || {}) as LicenseeChangeLog;
       if (!item.isAddChangeType()) {
         item.changeType = `update${this.changeTypeSuffix}`;
+        this.associates.at(index).get('changeType').setValue(item.changeType);
       }
       this.associates.at(index).get('edit').setValue(false);
       this.associates.at(index).get('saved').setValue(true);

@@ -108,9 +108,9 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       .then((data: [Application, LicenseeChangeLog[], LegalEntity]) => {
         this.application = data[0];
         const currentChangeLogs = data[1] || [];
-        const currentLegalEntities = data[2];
-        this.thereIsExistingOrgStructure = currentLegalEntities.children.length > 0;
-        this.treeRoot = LicenseeChangeLog.processLegalEntityTree(currentLegalEntities);
+        this.currentLegalEntities = data[2];
+        this.thereIsExistingOrgStructure = this.currentLegalEntities.children.length > 0;
+        this.treeRoot = LicenseeChangeLog.processLegalEntityTree(this.currentLegalEntities);
         this.treeRoot.isRoot = true;
         this.treeRoot.applySavedChangeLogs(currentChangeLogs);
 
@@ -121,32 +121,27 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
   getSaveLabel(): string {
     let label = 'Save';
-    if (!this.thereIsExistingOrgStructure) {
-      label = 'Submit Org Structure';
+    const licencesOnFile = (this.licenses && this.licenses.length > 0);
+
+    //if No Organizational Information on File  OR changes made
+    if (!this.thereIsExistingOrgStructure || (this.treeRoot && LicenseeChangeLog.HasChanges(this.treeRoot))) {
+      label = 'Submit Organization Information';
     }
-    if (LicenseeChangeLog.HasChanges(this.treeRoot)) {
-      label = 'Save Changes to Org Structure';
-    }
-    if (!this.thereIsExistingOrgStructure && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
-      label = 'Confirm No Changes to Current Org Structure';
+    // if Organization Information on File  AND no changes
+    else if (this.thereIsExistingOrgStructure && this.treeRoot && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
+      label = 'Confirm Organization Information Is Complete';
     }
     return label;
   }
 
   disableSaveLabel(): boolean {
     let disable = false;
-    if (!this.thereIsExistingOrgStructure) {
+    const errors = this.validateNonIndividauls(this.treeRoot);
+    if (errors.length > 0) {
       disable = true;
-    }
-    if (LicenseeChangeLog.HasChanges(this.treeRoot)) {
-      disable = false;
-    }
-    if (!this.thereIsExistingOrgStructure && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
-      disable = false;
     }
     return disable;
   }
-
 
   /**
    * Gets the number of applications owned by the current user that are not terminated
@@ -167,18 +162,15 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         });
   }
 
-  validateNonIndividauls() {
-    this.validationErrors = this.validateRecursive(this.treeRoot);
-  }
 
-  validateRecursive(node: LicenseeChangeLog): string[] {
+  validateNonIndividauls(node: LicenseeChangeLog): string[] {
     node = Object.assign(new LicenseeChangeLog, node);
     let validationMessages = [];
     if (!node.isRemoveChangeType()) {
       validationMessages = LicenseeChangeLog.ValidateNonIndividaul(node);
       node.children = node.children || [];
       node.children.forEach((child: LicenseeChangeLog) => {
-        validationMessages = validationMessages.concat(this.validateRecursive(child));
+        validationMessages = validationMessages.concat(this.validateNonIndividauls(child));
       });
     }
     return validationMessages;
@@ -188,7 +180,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
    * Sends data to dynamics
    */
   save() {
-    this.validateNonIndividauls();
+    this.validationErrors = this.validateNonIndividauls(this.treeRoot);
     if (this.validationErrors.length === 0) {
       this.busySave = this.prepareSaveRequest()
         .subscribe(() => {
@@ -205,7 +197,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, isApplicationComplete: 'Yes' }),
       this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId) // ,
       // this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges)
-      );
+    );
   }
 
   saveForLater() {
