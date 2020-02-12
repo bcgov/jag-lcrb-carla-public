@@ -52,6 +52,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
 
   addFormArray(item: LicenseeChangeLog = null) {
     item = item || <LicenseeChangeLog>{};
+    item.refObject = item;
     const group = this.fb.group({
       id: [''],
       changeType: [''],
@@ -131,7 +132,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
     }
 
     group.patchValue(item);
-    group.get('refObject').setValue(item);
+
     this.associates.push(group);
   }
 
@@ -182,6 +183,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
       item = Object.assign(new LicenseeChangeLog(), item || {}) as LicenseeChangeLog;
       if (!item.isAddChangeType()) {
         item.changeType = `update${this.changeTypeSuffix}`;
+        this.associates.at(index).get('changeType').setValue(item.changeType);
       }
       this.associates.at(index).get('edit').setValue(false);
       this.associates.at(index).get('saved').setValue(true);
@@ -299,13 +301,11 @@ export class AssociateListComponent extends FormBase implements OnInit {
   // check to see if there is a link in any child records; when set to true the Level 1 Personal History Summary column will show.
   showPHSLevel1(): boolean {
     let show = false;
-
     // get associates with a phsLink
     const links = this.associates.value.filter( item => !!item.refObject.phsLink  && !item.refObject.isRemoveChangeType());
     if (links.length > 0) {
       show = true;
     }
-    console.log(this.associates);
     return show;
   }
 
