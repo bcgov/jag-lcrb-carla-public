@@ -1,0 +1,214 @@
+<div class="form-wrapper" style="position: relative;">
+  <div [ngBusy]="[busy]"></div>
+  <form [formGroup]="eventForm">
+    <div class="padded-section">
+      <h1>Catered Event Authorization Request</h1>
+    </div>
+
+
+    <div class="padded-section">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+
+    <div class="padded-section">
+      <h2>Status <b>{{getOptionFromValue(eventStatus, eventForm.get('status').value) === null ? '' : getOptionFromValue(eventStatus, eventForm.get('status').value).label}}</b></h2>
+    </div>
+
+    <h3 class="blue-header">EVENT CONTACT INFORMATION</h3>
+    <div class="padded-section clearfix">
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Name" [required]="true"
+          [valid]="eventForm.get('contactName').valid || !eventForm.get('contactName').touched"
+          errorMessage="Please enter the contact name" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="contactName">
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Phone" [required]="true"
+          [valid]="eventForm.get('contactPhone').valid || !eventForm.get('contactPhone').touched"
+          errorMessage="Please enter the contact phone number" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="contactPhone" mask="(000) 000-0000">
+        </app-field>
+      </div>
+    </div>
+
+    <h3 class="blue-header">NOTIFICATIONS</h3>
+    <div class="padded-section">
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Email"
+          [valid]="eventForm.get('contactEmail').valid || !eventForm.get('contactEmail').touched"
+          [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="contactEmail" readonly>
+        </app-field>
+      </div>
+      <p>To update this email address, please see your Account Profile</p>
+    </div>
+
+    <h3 class="blue-header">EVENT DETAILS</h3>
+    <div class="padded-section clearfix">
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Type" [required]="true"
+          [valid]="eventForm.get('eventType').valid || !eventForm.get('eventType').touched"
+          errorMessage="Please enter the type of event" [isFullWidth]="true">
+          <select class="form-control" formControlName="eventType">
+            <option *ngFor="let item of eventType" [ngValue]="item.value">{{item.label}}</option>
+          </select>
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Description" [required]="true"
+          [valid]="eventForm.get('eventTypeDescription').valid || !eventForm.get('eventTypeDescription').touched"
+          errorMessage="Please enter a description of the event" [isFullWidth]="true">
+          <textarea class="form-control" formControlName="eventTypeDescription"></textarea>
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Client or Host Name" [required]="true"
+          [valid]="eventForm.get('clientHostname').valid || !eventForm.get('clientHostname').touched"
+          errorMessage="Please enter the client or host name" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="clientHostname">
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Maximum Attendance" [required]="true"
+          [valid]="eventForm.get('maxAttendance').valid || !eventForm.get('maxAttendance').touched"
+          errorMessage="Please enter the maximum attendance (must be a number)" [isFullWidth]="true">
+          <input class="form-control" type="number" formControlName="maxAttendance">
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Minors Attending" [required]="true"
+          [valid]="eventForm.get('minorsAttending').valid || !eventForm.get('minorsAttending').touched"
+          errorMessage="Please indicate if minors are attending" [isFullWidth]="true">
+          <select class="form-control" formControlName="minorsAttending">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Food Service Provided" [required]="true"
+          [valid]="eventForm.get('foodService').valid || !eventForm.get('foodService').touched"
+          errorMessage="Please enter food service provided" [isFullWidth]="true">
+          <select class="form-control" formControlName="foodService" (change)="clearRelatedFormFieldIfNotOther(foodService, 'foodService', 'foodServiceDescription')">
+            <option *ngFor="let item of foodService" [ngValue]="item.value">{{item.label}}</option>
+          </select>
+        </app-field>
+      </div>
+      <div class="row" *ngIf="getOptionFromValue(foodService, eventForm.get('foodService').value).label === 'Other'">
+        <app-field class="col-md-4 col-xs-12" label="Food Service Description"
+          [valid]="eventForm.get('foodServiceDescription').valid || !eventForm.get('foodServiceDescription').touched"
+          [isFullWidth]="true">
+          <textarea class="form-control" formControlName="foodServiceDescription"></textarea>
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Entertainment Provided" [required]="true"
+          [valid]="eventForm.get('entertainment').valid || !eventForm.get('entertainment').touched"
+          errorMessage="Please enter the entertainment provided" [isFullWidth]="true">
+          <select class="form-control" formControlName="entertainment" (change)="clearRelatedFormFieldIfNotOther(entertainment, 'entertainment', 'entertainmentDescription')">
+            <option *ngFor="let item of entertainment" [ngValue]="item.value">{{item.label}}</option>
+          </select>
+        </app-field>
+      </div>
+      <div class="row" *ngIf="getOptionFromValue(entertainment, eventForm.get('entertainment').value).label === 'Other'">
+        <app-field class="col-md-4 col-xs-12" label="Entertainment Description"
+          [valid]="eventForm.get('entertainmentDescription').valid || !eventForm.get('entertainmentDescription').touched"
+          [isFullWidth]="true">
+          <textarea class="form-control" formControlName="entertainmentDescription"></textarea>
+        </app-field>
+      </div>
+    </div>
+
+    <h3 class="blue-header">VENUE LOCATION</h3>
+    <div class="padded-section clearfix">
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Venue Name/Description" [required]="true"
+          [valid]="eventForm.get('venueDescription').valid || !eventForm.get('venueDescription').touched"
+          errorMessage="Please enter the name and a description of the venue" [isFullWidth]="true">
+          <textarea class="form-control" formControlName="venueDescription"></textarea>
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Location" [required]="true"
+          [valid]="eventForm.get('specificLocation').valid || !eventForm.get('specificLocation').touched"
+          errorMessage="Please enter the location" [isFullWidth]="true">
+          <select class="form-control" formControlName="specificLocation" [compareWith]="compareFn">
+            <option *ngFor="let item of specificLocation" [ngValue]="item.value">{{item.label}}</option>
+          </select>
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Additional Information"
+          [valid]="eventForm.get('additionalLocationInformation').valid || !eventForm.get('additionalLocationInformation').touched"
+          [isFullWidth]="true">
+          <textarea class="form-control" formControlName="additionalLocationInformation"></textarea>
+        </app-field>
+      </div>
+
+      <h3>Physical Address</h3>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Address 1" [required]="true"
+          [valid]="eventForm.get('street1').valid || !eventForm.get('street1').touched"
+          errorMessage="Please enter the address line 1" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="street1">
+        </app-field>
+        <app-field class="col-md-4 col-xs-12" label="Address 2"
+          [valid]="eventForm.get('street2').valid || !eventForm.get('street2').touched"
+          [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="street2">
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="City" [required]="true"
+          [valid]="eventForm.get('city').valid || !eventForm.get('city').touched"
+          errorMessage="Please enter the city" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="city">
+        </app-field>
+        <app-field class="col-md-4 col-xs-12" label="Postal Code" [required]="true"
+          [valid]="eventForm.get('postalCode').valid || !eventForm.get('postalCode').touched"
+          errorMessage="Please enter the postal code" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="postalCode">
+        </app-field>
+      </div>
+    </div>
+
+    <h3 class="blue-header">Time and Date of Event</h3>
+    <div class="padded-section">
+      <h2>Time and Date of Event</h2>
+      <label>Event Start:</label>
+      <label>Event End:</label>
+      <label>Default Times:</label>
+    </div>
+
+    <h3 class="blue-header">AGREEMENT</h3>
+    <div class="padded-section">
+      <p>A person commits an offence if the person provides false or misleading information in the following circumstances: (i) when making an application referred to in section 12; (ii) when making a report or when required and as specified by the general manager under section 59. - Liquor Control and Licensing Act, Section 57(1)(c).</p>
+      <p>The Branch may cancel a catering authorization if:</p>
+      <ul>
+        <li>The event circumstances which the authorization was based on change and no longer meet the requirements of the Act or regulation;</li>
+        <li>The event circumstances which the authorization was based on did not exist at the time the catering authorization was issued; or</li>
+        <li>The catering authorization was issued in error.</li>
+      </ul>
+      <p>- Liquor Control and Licensing Act, Section 50.</p>
+      <div>
+        <input type="checkbox" formControlName="agreement" name="agreement" id="agreement">
+        <label for="agreement" class="ml-2">I understand and agree to abide by the terms and conditions of the catering authorization.</label>
+      </div>
+    </div>
+
+    <div class="p-3" style="background-color: #E1E8F2; border-bottom: 4px solid #E4E4E4">
+      <p>The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Section 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act and will be used for the purpose of liquor licensing and compliance and enforcement matters in accordance with the Liquor Control and Licensing Act. Should you have any questions about the collection, use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.</p>
+    </div>
+
+    <div class="p-4 d-flex justify-content-between">
+      <button class="btn btn-primary" style="margin-right:10px;" (click)="save(false);">
+        <span>
+          <i class="fa fa-save" style="color: #fff;"></i>
+          SAVE FOR LATER
+        </span>
+      </button>
+      <button class="btn btn-primary" (click)="save(true)" [disabled]="eventForm.invalid">SUBMIT</button>
+    </div>
+  </form>
+</div>
