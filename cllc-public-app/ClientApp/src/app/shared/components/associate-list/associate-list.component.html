@@ -109,9 +109,9 @@
                         </td>
                     </tr>
 
-                    <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType() &&  isNameChangePerformed(associate.value.refObjec) && !associate.get('edit').value"
+                    <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType() &&  isNameChangePerformed(associate.value.refObject) && !associate.get('edit').value"
                         style="height:20px;">
-                        <td colspan="6">
+                        <td colspan="7">
                             <div (click)="associate.get('collapse').value = !associate.get('collapse').value"
                                 style="padding-left: 20px;">
                                 <mat-expansion-panel [expanded]="true" class="mat-elevation-z1">
