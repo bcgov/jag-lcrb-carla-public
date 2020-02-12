@@ -81,14 +81,12 @@ const routes: Routes = [
   {
     path: 'licence/:licenceId/event',
     component: EventFormComponent,
-    canActivate: [BCeidAuthGuard],
-    children: [
-      {
-        path: ':eventId',
-        component: EventFormComponent,
-        canActivate: [BCeidAuthGuard]
-      }
-    ]
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'licence/:licenceId/event/:eventId',
+    component: EventFormComponent,
+    canActivate: [BCeidAuthGuard]
   },
   {
     path: 'federal-reporting/:licenceId',

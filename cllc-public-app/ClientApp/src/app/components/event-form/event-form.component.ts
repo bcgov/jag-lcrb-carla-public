@@ -16,6 +16,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./event-form.component.scss']
 })
 export class EventFormComponent extends FormBase implements OnInit {
+  isEditMode = false;
   licenceEvent: LicenceEvent;
 
   busy: Subscription;
@@ -28,27 +29,40 @@ export class EventFormComponent extends FormBase implements OnInit {
 
   eventForm = this.fb.group({
     status: ['', [Validators.required]],
+    id: ['', []],
+    name: ['', []],
     licenceId: ['', []],
+    accountId: ['', []],
     contactName: ['', [Validators.required]],
     contactPhone: ['', [Validators.required]],
     contactEmail: ['', [Validators.required]],
+    eventClass: ['', [Validators.required]],
     eventType: ['', [Validators.required]],
-    description: ['', [Validators.required]],
+    eventTypeDescription: ['', [Validators.required]],
     clientHostname: ['', [Validators.required]],
     maxAttendance: ['', [Validators.required]],
     minorsAttending: ['', [Validators.required]],
     foodService: ['', [Validators.required]],
     foodServiceDescription: ['', []],
-    entertainmentProvided: ['', [Validators.required]],
+    entertainment: ['', [Validators.required]],
     entertainmentDescription: ['', []],
     venueDescription: ['', [Validators.required]],
     specificLocation: ['', [Validators.required]],
-    additionalInformation: ['', []],
+    additionalLocationInformation: ['', []],
     street1: ['', [Validators.required]],
     street2: ['', []],
     city: ['', [Validators.required]],
+    province: ['BC', [Validators.required]],
     postalCode: ['', [Validators.required]],
-    agreement: ['', [Validators.required]]
+    startDate: ['', [Validators.required]],
+    endDate: ['', [Validators.required]],
+    agreement: [false, [Validators.required]],
+    // unused
+    externalId: ['', []],
+    eventNumber: ['', []],
+    importSequenceNumber: ['', []],
+    communityApproval: ['', []],
+    notifyEventInspector: ['', []]
   });
 
   constructor(
@@ -61,9 +75,12 @@ export class EventFormComponent extends FormBase implements OnInit {
       super();
       this.route.paramMap.subscribe(params => {
         this.eventForm.controls['licenceId'].setValue(params.get('licenceId'));
-        console.log(params);
-        // if (params.get('licenceId')) {
-        // }
+        if (params.get('eventId')) {
+          this.isEditMode = true;
+          this.retrieveSavedEvent(params.get('eventId'));
+        } else {
+          this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Draft').value);
+        }
       });
     }
 
@@ -73,20 +90,70 @@ export class EventFormComponent extends FormBase implements OnInit {
       .subscribe((data: User) => {
         this.eventForm.controls['contactEmail'].setValue(data.email);
       });
+  }
 
-    if (true) {
-      this.eventForm.controls['status'].setValue(this.eventStatus.Draft.toString());
-    }
+  retrieveSavedEvent(eventId: string) {
+    this.busy = this.licenceEvents.getLicenceEvent(eventId)
+    .subscribe((licenceEvent) => {
+      this.setFormToLicenceEvent(licenceEvent);
+    });
+  }
+
+  setFormToLicenceEvent(licenceEvent: LicenceEvent) {
+    this.eventForm.setValue({
+      ...licenceEvent,
+      agreement: false
+    });
   }
 
   save(submit = false) {
     if (submit) {
-      this.eventForm.controls['status'].setValue(this.eventStatus.InReview.toString());
+      this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'In Review').value);
     }
-    this.busy = this.licenceEvents.createLicenceEvent(this.eventForm.value)
+    if (this.isEditMode) {
+      this.updateLicence();
+    } else {
+      this.createLicence();
+    }
+  }
+
+  updateLicence() {
+    this.busy = this.licenceEvents.updateLicenceEvent(this.eventForm.get('id').value, this.eventForm.value)
     .subscribe((licenceEvent) => {
-      console.log(licenceEvent);
       this.router.navigate(['/licences']);
     });
+  }
+
+  createLicence() {
+    this.busy = this.licenceEvents.createLicenceEvent(this.eventForm.value)
+    .subscribe((licenceEvent) => {
+      this.router.navigate(['/licences']);
+    });
+  }
+
+  compareFn(c1: any, c2: any): boolean {
+    return c1 && c2 ? c1.value === c2.value : c1 === c2;
+  }
+
+  getOptionFromValue(option: any, value: number) {
+    const idx = option.findIndex(opt => opt.value === value);
+    if (idx >= 0) {
+      return option[idx];
+    }
+    return {
+      value: null,
+      label: ''
+    };
+  }
+
+  getOptionFromLabel(options: any, label: string) {
+    const idx = options.findIndex(opt => opt.label === label);
+    if (idx >= 0) {
+      return options[idx];
+    }
+    return {
+      value: null,
+      label: ''
+    };
   }
 }
