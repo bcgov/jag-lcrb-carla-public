@@ -25,4 +25,6 @@ describe('BeforeYouStartComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => { fixture.destroy(); });
+
 });

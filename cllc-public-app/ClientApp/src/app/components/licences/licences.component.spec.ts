@@ -58,9 +58,15 @@ describe('LicencesComponent', () => {
     })
       .compileComponents();
     store = TestBed.get(Store);
+  }));
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(LicencesComponent);
     component = fixture.componentInstance;
-  }));
+    fixture.detectChanges();
+  });
+
+  afterEach(() => { fixture.destroy(); });
 
   it('should create', () => {
     expect(component).toBeTruthy();
