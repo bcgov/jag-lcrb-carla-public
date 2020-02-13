@@ -235,27 +235,6 @@
           "weight": 100
         }
       }
-    },
-    {
-      "kind": "HorizontalPodAutoscaler",
-      "apiVersion": "autoscaling/v1",
-      "metadata": {
-        "name": "${NAME}",
-        "labels": {
-          "name": "${NAME}",
-          "app": "${APP_NAME}",
-          "role": "${ROLE}",
-          "env": "${TAG_NAME}"
-        }
-      },
-      "spec": {
-        "scaleTargetRef": {
-          "kind": "DeploymentConfig",
-          "name": "${NAME}"
-        },
-        "minReplicas": 2,
-        "maxReplicas": 6
-      }
     }
   ],
   "parameters": [
