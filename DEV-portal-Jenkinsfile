@@ -84,10 +84,7 @@ parallel('SonarQube Scan': {
                     sh 'npm install -g @angular/cli'
                     sh 'npm install'
                     sh 'npm run test-headless'
-                } 
-                catch (err) {
-                    echo err
-                }        
+                }                         
                 finally {
 
                     archiveArtifacts allowEmptyArchive: true, artifacts: '*.xml'
