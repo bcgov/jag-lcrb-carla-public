@@ -18,9 +18,16 @@ export class OrgStructureComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    let numberOfMembers: number = null;
+    let annualMembershipFee: number = null;
+    if (this.node) {
+      numberOfMembers = this.node.numberOfMembers;
+      annualMembershipFee = this.node.annualMembershipFee;
+    }
+
     this.form = this.fb.group({
-      numberOfMembers: [this.node.numberOfMembers, [Validators.required]],
-      annualMembershipFee: [this.node.annualMembershipFee, [Validators.required]]
+      numberOfMembers: [numberOfMembers, [Validators.required]],
+      annualMembershipFee: [annualMembershipFee, [Validators.required]]
     })
 
     this.form.valueChanges

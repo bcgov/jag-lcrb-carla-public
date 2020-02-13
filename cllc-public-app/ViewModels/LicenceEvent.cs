@@ -5,6 +5,21 @@ using Newtonsoft.Json.Converters;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
+    public enum LicenceEventStatus
+    {
+        [EnumMember(Value = "Draft")]
+        Draft = 845280004,
+        [EnumMember(Value = "In Review")]
+        InReview = 1,
+        [EnumMember(Value = "Approved")]
+        Approved = 845280000,
+        [EnumMember(Value = "Denied")]
+        Denied = 845280001,
+        [EnumMember(Value = "Terminated")]
+        Terminated = 845280002,
+        [EnumMember(Value = "Cancelled")]
+        Cancelled = 845280003
+    }
     public enum EventType
     {
         [EnumMember(Value = "Caterer's Staff / Customer Appreciation")]
@@ -67,10 +82,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Other = 845280006
     }
 
-    public class LiquorEvent
+    public class LicenceEvent
     {
         // string form of the guid.
         public string Id { get; set; }
+        public LicenceEventStatus? Status { get; set; }
         public string Name { get; set; }
         public DateTimeOffset? StartDate { get; set; }
         public DateTimeOffset? EndDate { get; set; }
@@ -96,6 +112,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public SpecificLocation? SpecificLocation { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public EventClass? EventClass { get; set; }
+        public bool? MinorsAttending { get; set; }
         public int? MaxAttendance { get; set; }
         public bool? CommunityApproval { get; set; }
         public bool? NotifyEventInspector { get; set; }
