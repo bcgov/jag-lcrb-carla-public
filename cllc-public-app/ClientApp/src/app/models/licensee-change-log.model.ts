@@ -59,6 +59,7 @@ export class LicenseeChangeLog {
   collapse: boolean; // This is only used on the client side
   refObject: LicenseeChangeLog; // This is only used on the client side
   saved: boolean; // This is only used on the client side
+  fileUploads: any = {}; // This is only used on the client side
 
 
   public get percentageShares(): number {
@@ -179,15 +180,9 @@ export class LicenseeChangeLog {
     return validationResult;
   }
 
-  // construct file name prefix from name and names of parents
+  // construct file name prefix from name
   public get fileUploadPrefix(): string {
     let prefix = this.nameToFilePrefix();
-    // let parent = this.parentLinceseeChangeLog;
-    // while (parent) {
-    //   prefix = `${parent.nameToFilePrefix()} ${prefix}`;
-    //   parent = parent.parentLinceseeChangeLog;
-    // }
-
     return prefix;
   }
 
@@ -274,6 +269,78 @@ export class LicenseeChangeLog {
     position = position.substring(0, position.length - 2);
     return position;
   }
+
+  getFileUploadValidationErrors(): string[] {
+    let errors = [
+      ...this.privateCorpFileErrors(),
+      ...this.publicCorpFileErrors(),
+      ...this.partnershipFileErrors(),
+      ...this.nameChangeFileErrors()
+    ];
+    return errors;
+  }
+
+  private privateCorpFileErrors(): string[] {
+    let errors = [];
+    if(this.businessType === 'PrivateCorporation'){
+      if(this.fileUploads['NOA'] <= 0){
+        errors.push(`${this.businessNameNew}: Please upload the Corporation Notice of Articles`);
+      }
+      if(this.fileUploads['SECREG'] <= 0){
+        errors.push(`${this.businessNameNew}: Please upload the Central Securities Register`);
+      }
+    }
+    return errors;
+  }
+
+  private publicCorpFileErrors(): string[] {
+    let errors = [];
+    if(this.businessType === 'PublicCorporation'){
+      if(this.fileUploads['NOA'] <= 0){
+        errors.push(`${this.businessNameNew}: Please upload the Corporation Notice of Articles`);
+      }
+    }
+    return errors;
+  }
+  
+  private partnershipFileErrors(): string[] {
+    let errors = [];
+    if(this.businessType === 'Partnership'){
+      if(this.fileUploads['NOA'] <= 0){
+        errors.push(`${this.businessNameNew}: Please upload the Partnership Agreement`);
+      }
+    }
+    return errors;
+  }
+
+  private nameChangeFileErrors(): string[] {
+    let errors = [];
+
+    if(this.isNameChangePerformed()){
+      if(this.fileUploads['Name Change Documents'] <= 0){
+        errors.push(`${this.firstNameNew} ${this.lastNameNew}: Please upload the Name Change Documents`);
+      }
+    }
+    return errors;
+  }
+
+  isNameChangePerformed(): boolean {
+    let changed = false;
+    if (this.isIndividual &&
+      (
+        this.changeType === LicenseeChangeType.updateLeadership ||
+        this.changeType === LicenseeChangeType.updateIndividualShareholder
+      )
+      &&
+      (
+        this.firstNameNew !== this.firstNameOld ||
+        this.lastNameNew !== this.lastNameOld
+      )) {
+      changed = true;
+    }
+    return changed;
+  }
+
 
   getOldLeadershipPosition(): string {
     let position = '';
