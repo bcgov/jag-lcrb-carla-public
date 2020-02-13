@@ -6,24 +6,25 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// <summary>
     /// ViewModel transforms.
     /// </summary>
-    public static class LiquorEventExtensions
+    public static class LicenceEventExtensions
     {
         // Converts a dynamics entity into a view model
-        public static ViewModels.LiquorEvent ToViewModel(this MicrosoftDynamicsCRMadoxioEvent item)
+        public static ViewModels.LicenceEvent ToViewModel(this MicrosoftDynamicsCRMadoxioEvent item)
         {
-            ViewModels.LiquorEvent result = null;
+            ViewModels.LicenceEvent result = null;
             if (item != null)
             {
-                result = new ViewModels.LiquorEvent();
+                result = new ViewModels.LicenceEvent();
                 if (item.AdoxioEventid != null)
                 {
                     result.Id = item.AdoxioEventid;
                 }
+                result.Status = (LicenceEventStatus?)item.Statuscode;
                 result.Name = item.AdoxioName;
                 result.StartDate = item.AdoxioStartdate;
                 result.EndDate = item.AdoxioEnddate;
-                result.VenueDescription = item.AdoxioVenuedescription;
-                result.AdditionalLocationInformation = item.AdoxioAdditionallocationinformation;
+                result.VenueDescription = item.AdoxioVenuenamedescription;
+                result.AdditionalLocationInformation = item.AdoxioAdditionallocationinfo;
                 result.FoodService = (FoodService?)item.AdoxioFoodservice;
                 result.FoodServiceDescription = item.AdoxioFoodservicedescription;
                 result.Entertainment = (Entertainment?)item.AdoxioEntertainment;
@@ -35,11 +36,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.EventNumber = item.AdoxioEventnumber;
                 result.ClientHostname = item.AdoxioClienthostname;
                 result.EventType = (EventType?)item.AdoxioEventtype;
-                result.EventTypeDescription = item.AdoxioEventtypedescription;
+                result.EventTypeDescription = item.AdoxioEventdescription;
                 result.ImportSequenceNumber = item.Importsequencenumber;
                 result.SpecificLocation = (SpecificLocation?)item.AdoxioSpecificlocation;
                 result.EventClass = (EventClass?)item.AdoxioClass;
                 result.MaxAttendance = item.AdoxioMaxattendance;
+                result.MinorsAttending = item.AdoxioAttendanceminors;
                 result.CommunityApproval = item.AdoxioCommunityapproval;
                 result.NotifyEventInspector = item.AdoxioNotifyeventinspector;
                 result.LicenceId = item._adoxioLicenceValue;
@@ -56,14 +58,14 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 
         // Converts a view model into a dynamics entity
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioEvent to, ViewModels.LiquorEvent from)
+        public static void CopyValues(this MicrosoftDynamicsCRMadoxioEvent to, ViewModels.LicenceEvent from)
         {
             to.AdoxioEventid = from.Id;
             to.AdoxioName = from.Name;
             to.AdoxioStartdate = from.StartDate;
             to.AdoxioEnddate = from.EndDate;
-            to.AdoxioVenuedescription = from.VenueDescription;
-            to.AdoxioAdditionallocationinformation = from.AdditionalLocationInformation;
+            to.AdoxioVenuenamedescription = from.VenueDescription;
+            to.AdoxioAdditionallocationinfo = from.AdditionalLocationInformation;
             to.AdoxioFoodservice = (int?)from.FoodService;
             to.AdoxioFoodservicedescription = from.FoodServiceDescription;
             to.AdoxioEntertainment = (int?)from.Entertainment;
@@ -75,11 +77,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEventnumber = from.EventNumber;
             to.AdoxioClienthostname = from.ClientHostname;
             to.AdoxioEventtype = (int?)from.EventType;
-            to.AdoxioEventtypedescription = from.EventTypeDescription;
+            to.AdoxioEventdescription = from.EventTypeDescription;
             to.Importsequencenumber = from.ImportSequenceNumber;
             to.AdoxioSpecificlocation = (int?)from.SpecificLocation;
             to.AdoxioClass = (int?)from.EventClass;
             to.AdoxioMaxattendance = from.MaxAttendance;
+            to.AdoxioAttendanceminors = from.MinorsAttending;
             to.AdoxioCommunityapproval = from.CommunityApproval;
             to.AdoxioNotifyeventinspector = from.NotifyEventInspector;
             to.AdoxioStreet1 = from.Street1;
