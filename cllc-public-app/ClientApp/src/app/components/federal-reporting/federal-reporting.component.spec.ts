@@ -9,19 +9,27 @@ import { of } from 'rxjs';
 import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialogModule } from '@angular/material';
+import { provideMockStore } from '@ngrx/store/testing';
+import { AppState } from '@app/app-state/models/app-state';
+import { Account } from '@models/account.model';
+import { ProductInventorySalesReportComponent } from './product-inventory-sales-report/product-inventory-sales-report.component';
 
 describe('FederalReportingComponent', () => {
   let component: FederalReportingComponent;
   let fixture: ComponentFixture<FederalReportingComponent>;
   let activatedRouteStub = new ActivatedRouteStub({ applicationId: 1 });
+  const initialState = {
+    currentUserState: { currentUser: {}}
+  } as AppState;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FederalReportingComponent],
+      declarations: [FederalReportingComponent, ProductInventorySalesReportComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [MatDialogModule],
       providers: [
         FormBuilder,
+        provideMockStore({initialState}),
         { provide: MonthlyReportDataService, useValue: { getAllCurrentMonthlyReports: () => of([]), getMonthlyReportsByLicence: () => of([]) } },
         { provide: Router, useValue: {} },
         { provide: ActivatedRoute, useValue: activatedRouteStub },
@@ -36,6 +44,8 @@ describe('FederalReportingComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+  
+  afterEach(() => { fixture.destroy(); });
 
   it('should create', () => {
     expect(component).toBeTruthy();
