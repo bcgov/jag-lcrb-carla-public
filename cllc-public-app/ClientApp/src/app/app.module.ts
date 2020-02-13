@@ -98,6 +98,7 @@ import { FinancialInformationComponent } from '@components/account-profile/tabs/
 import { AccountProfileSummaryComponent } from '@components/account-profile/account-profile-summary/account-profile-summary.component';
 
 import { NgBusyModule } from 'ng-busy';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { KeyPersonnelComponent, KeyPersonnelDialogComponent } from '@components/account-profile/tabs/key-personnel/key-personnel.component';
 import { ConnectionToProducersComponent } from '@components/account-profile/tabs/connection-to-producers/connection-to-producers.component';
 import { PaymentConfirmationComponent } from '@components/payment-confirmation/payment-confirmation.component';
@@ -332,6 +333,7 @@ import { LicenceEventsService } from '@services/licence-events.service';
     MatBadgeModule,
     NgBusyModule,
     NgxFileDropModule,
+    NgbModule,
     NgxMaskModule.forRoot(),
     ReactiveFormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),

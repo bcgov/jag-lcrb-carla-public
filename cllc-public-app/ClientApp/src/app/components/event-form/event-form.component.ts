@@ -10,6 +10,15 @@ import { User } from '@models/user.model';
 import { FormBase } from '@shared/form-base';
 import { Router, ActivatedRoute } from '@angular/router';
 
+const DEFAULT_START_TIME = {
+  hour: 9,
+  minute: 0
+};
+const DEFAULT_END_TIME = {
+  hour: 2,
+  minute: 0
+};
+
 @Component({
   selector: 'app-event-form',
   templateUrl: './event-form.component.html',
@@ -83,13 +92,7 @@ export class EventFormComponent extends FormBase implements OnInit {
           this.isEditMode = true;
           this.retrieveSavedEvent(params.get('eventId'));
         } else {
-          this.dateForms.push(this.fb.group({
-            dateTitle: ['Default Times', []],
-            startTime: [new Date(), [Validators.required]],
-            endTime: [new Date(), [Validators.required]],
-            liquorStartTime: [new Date(), [Validators.required]],
-            liquorEndTime: [new Date(), [Validators.required]]
-          }));
+          this.resetDateFormsToDefault();
           this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Draft').value);
         }
       });
@@ -182,14 +185,72 @@ export class EventFormComponent extends FormBase implements OnInit {
 
   toggleScheduleConsistency() {
     this.scheduleIsInconsistent = !this.scheduleIsInconsistent;
+    this.refreshTimeDays();
+  }
+
+  refreshTimeDays() {
+    if (this.scheduleIsInconsistent) {
+      const days = this.getDaysArray(this.eventForm.controls['startDate'].value, this.eventForm.controls['endDate'].value);
+      this.resetDateFormsToArray(days);
+    } else {
+      this.resetDateFormsToDefault();
+    }
+  }
+
+  startDateChanged() {
+    this.updateEndDateMinimum();
+    this.refreshTimeDays();
+  }
+  endDateChanged() {
+    this.refreshTimeDays();
+  }
+
+  resetDateFormsToDefault() {
+    this.dateForms = this.fb.array([]);
+    this.dateForms.push(this.fb.group({
+      dateTitle: ['Default Times', []],
+      startTime: [DEFAULT_START_TIME, [Validators.required]],
+      endTime: [DEFAULT_END_TIME, [Validators.required]],
+      liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
+      liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
+    }));
+  }
+
+  resetDateFormsToArray(datesArray) {
+    this.dateForms = this.fb.array([]);
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    datesArray.forEach(element => {
+      this.dateForms.push(this.fb.group({
+        dateTitle: [days[element.getDay()] + ', ' + element.toLocaleDateString('en-US'), []],
+        date: [element, []],
+        startTime: [DEFAULT_START_TIME, [Validators.required]],
+        endTime: [DEFAULT_END_TIME, [Validators.required]],
+        liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
+        liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
+      }));
+    });
   }
 
   updateEndDateMinimum() {
-    if (this.eventForm.controls['startDate'].value === null) {
+    if (this.eventForm.controls['startDate'].value === null || this.eventForm.controls['startDate'].value === '') {
       this.endDateMinimum = new Date();
       this.endDateMinimum.setDate(this.endDateMinimum.getDate() + 21);
+    } else if (this.eventForm.controls['endDate'].value === null || this.eventForm.controls['endDate'].value === '') {
+      this.endDateMinimum = this.eventForm.controls['startDate'].value;
     } else {
+      if (this.eventForm.controls['endDate'].value.getTime() < this.eventForm.controls['startDate'].value.getTime()) {
+        this.eventForm.controls['endDate'].setValue(null);
+      }
       this.endDateMinimum = this.eventForm.controls['startDate'].value;
     }
+  }
+
+  getDaysArray(start, end) {
+    start = new Date(start);
+    end = new Date(end);
+    for(var arr = [], dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
+        arr.push(new Date(dt));
+    }
+    return arr;
   }
 }
