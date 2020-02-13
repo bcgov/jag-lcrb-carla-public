@@ -1,4 +1,14 @@
 {
+    "kind": "Template",
+    "apiVersion": "v1",
+    "metadata":
+    {
+      "name": "${NAME}-build-template",
+      "creationTimestamp": null
+    },
+    "objects": [ 
+
+{
     "kind": "BuildConfig",
     "apiVersion": "v1",
     "metadata": {
@@ -18,7 +28,7 @@
         "source": {
             "type": "Git",
             "git": {
-                "uri": "https://github.com/bcgov/ag-lclb-cllc-public.git",
+                "uri": "https://github.com/bcgov/jag-lcrb-carla-public.git",
                 "ref": "develop"
             }
         },
@@ -63,11 +73,11 @@
         "resources": {
             "limits": {
                 "cpu": "2",
-                "memory": "10Gi"
+                "memory": "8Gi"
             },
             "requests": {
                 "cpu": "2",
-                "memory": "10Gi"
+                "memory": "8Gi"
             }
         },
         "postCommit": {},
@@ -76,4 +86,6 @@
     "status": {
         "lastVersion": 0
     }
+}
+]
 }
