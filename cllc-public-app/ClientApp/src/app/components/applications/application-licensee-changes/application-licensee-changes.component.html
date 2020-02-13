@@ -21,7 +21,7 @@
         </span>
       </button>
       <button *ngIf="true || LicenseeChangeLog.HasChanges(treeRoot)" class="btn btn-primary"
-        [disabled]="disableSaveLabel()" (click)="save()">
+         (click)="save()">
         <i class="fa fa-save" style="color: #fff;"></i>
         {{getSaveLabel()}}</button>
     </section>

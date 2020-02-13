@@ -41,6 +41,10 @@ export class OrgStructureComponent implements OnInit {
   }
 
   asLicenseeChangeLog(val): LicenseeChangeLog { return val };
+  
+  updateNumberOfFiles(numberOfFiles: number, docType: string){
+      this.node.fileUploads[docType] =  numberOfFiles;
+  }
 
   updateChildred(children: LicenseeChangeLog[], changeType: string) {
     children = children || [];

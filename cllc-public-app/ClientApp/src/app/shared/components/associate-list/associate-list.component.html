@@ -129,7 +129,7 @@
                                         <app-file-uploader *ngIf="account" documentType="Name Change Documents"
                                             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
                                             entityName="account"
-                                            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
+                                            (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Name Change Documents', associate?.value?.refObject)"
                                             [entityId]="account.id"
                                             [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
                                             #financialIntegrityDocuments>
