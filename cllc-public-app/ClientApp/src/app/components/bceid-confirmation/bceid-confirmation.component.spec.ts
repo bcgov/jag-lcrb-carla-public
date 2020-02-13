@@ -35,6 +35,8 @@ describe('bceid-confirmation component', () => {
         component = fixture.componentInstance;
     }));
 
+    afterEach(() => { fixture.destroy(); });
+
     it('should do something', async(() => {
         expect(true).toEqual(true);
     }));
