@@ -34,7 +34,6 @@ import { FederalReportingComponent } from '@components/federal-reporting/federal
 import { ApplicationLicenseeChangesComponent } from '@components/applications/application-licensee-changes/application-licensee-changes.component';
 import { LicencesComponent } from '@components/licences/licences.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
-import { LicenceEventComponent } from '@components/licences/licence-event/licence-event.component';
 import { CateringDemoComponent } from './components/catering-demo/catering-demo.component';
 import { DynamicApplicationComponent } from './components/applications/dynamic-application/dynamic-application.component';
 import { AssociateListComponent } from '@shared/components/associate-list/associate-list.component';
@@ -42,6 +41,7 @@ import { OrganizationStructureComponent } from '@components/account-profile/tabs
 import { PersonalHistorySummaryComponent } from '@components/personal-history-summary/personal-history-summary.component';
 import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confirmation.component';
 import { MultiStageApplicationFlowComponent } from '@components/multi-stage-application-flow/multi-stage-application-flow.component';
+import { EventFormComponent } from '@components/event-form/event-form.component';
 
 
 const routes: Routes = [
@@ -79,10 +79,14 @@ const routes: Routes = [
     data: { feature: 'FederalReporting' }
   },
   {
-    path: 'licence-event',
-    component: LicenceEventComponent,
-    canActivate: [BCeidAuthGuard],
-
+    path: 'licence/:licenceId/event',
+    component: EventFormComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'licence/:licenceId/event/:eventId',
+    component: EventFormComponent,
+    canActivate: [BCeidAuthGuard]
   },
   {
     path: 'federal-reporting/:licenceId',

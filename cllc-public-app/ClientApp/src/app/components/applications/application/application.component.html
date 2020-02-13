@@ -56,7 +56,7 @@
             </section>
             <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
                 <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
-                          [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) === -1 ? 'Establishment Name' : 'Name of the Proposed Establishment'"
+                          [label]="getEstablishmentLabel(application?.applicationType)"
                           [required]="true" [valid]="isValidOrNotTouched('establishmentName')"
                           errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
                   <input class="form-control" style="width: 500px;" type="text"
@@ -71,7 +71,7 @@
             </div>
             <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
                 <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
-                          [label]="Establishment"
+                          label="Establishment"
                           [required]="true">
                   <input class="form-control" style="width: 500px;" type="text"
                           [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"

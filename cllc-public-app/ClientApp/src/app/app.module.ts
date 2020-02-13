@@ -169,7 +169,6 @@ import { VersionInfoDataService } from '@services/version-info-data.service';
 import { VersionInfoDialogComponent } from '@components/version-info/version-info-dialog.component';
 import { FederalReportingComponent } from '@components/federal-reporting/federal-reporting.component';
 import { LicencesComponent } from '@components/licences/licences.component';
-import { LicenceEventComponent} from '@components/licences/licence-event/licence-event.component';
 import { ApplicationsComponent } from '@components/applications/applications.component';
 import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
@@ -183,6 +182,8 @@ import { PersonalHistorySummaryComponent } from './components/personal-history-s
 import { AccountCompletenessComponent } from './components/account-completeness/account-completeness.component';
 import { PhsConfirmationComponent } from './components/phs-confirmation/phs-confirmation.component';
 import { MultiStageApplicationFlowComponent } from './components/multi-stage-application-flow/multi-stage-application-flow.component';
+import { EventFormComponent } from '@components/event-form/event-form.component';
+import { LicenceEventsService } from '@services/licence-events.service';
 
 
 @NgModule({
@@ -215,7 +216,7 @@ import { MultiStageApplicationFlowComponent } from './components/multi-stage-app
     InsertComponent,
     KeyPersonnelComponent,
     LicenceFeePaymentConfirmationComponent,
-    LicenceEventComponent,
+    EventFormComponent,
     NewsletterConfirmationComponent,
     NewsletterSignupComponent,
     NotFoundComponent,
@@ -389,6 +390,7 @@ import { MultiStageApplicationFlowComponent } from './components/multi-stage-app
     ApplicationDataService,
     LegalEntityDataService,
     LicenseDataService,
+    LicenceEventsService,
     MonthlyReportDataService,
     AliasDataService,
     BCeidAuthGuard,
