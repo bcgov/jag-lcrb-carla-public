@@ -257,20 +257,16 @@ export class AssociateListComponent extends FormBase implements OnInit {
   }
 
   isNameChangePerformed(changeLog: LicenseeChangeLog): boolean {
-    let changed = false;
-    if (changeLog &&
-      (
-        changeLog.changeType === LicenseeChangeType.updateLeadership ||
-        changeLog.changeType === LicenseeChangeType.updateIndividualShareholder
-      )
-      &&
-      (
-        changeLog.firstNameNew !== changeLog.firstNameOld ||
-        changeLog.lastNameNew !== changeLog.lastNameOld
-      )) {
-      changed = true;
+    let res = false;
+    if (changeLog) {
+      changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
+      res = changeLog.isNameChangePerformed();
     }
-    return changed;
+    return res;
+  }
+
+  updateNumberOfFiles(numberOfFiles: number, docType: string, node: LicenseeChangeLog) {
+    node.fileUploads[docType] = numberOfFiles;
   }
 
   getBusinessTypeName(typeValue: string) {
@@ -302,7 +298,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
   showPHSLevel1(): boolean {
     let show = false;
     // get associates with a phsLink
-    const links = this.associates.value.filter( item => !!item.refObject.phsLink  && !item.refObject.isRemoveChangeType());
+    const links = this.associates.value.filter(item => !!item.refObject.phsLink && !item.refObject.isRemoveChangeType());
     if (links.length > 0) {
       show = true;
     }
