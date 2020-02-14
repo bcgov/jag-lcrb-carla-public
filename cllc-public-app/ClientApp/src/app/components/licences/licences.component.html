@@ -82,7 +82,7 @@
             </div>
             <div>
               <p *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore">
-                <a [routerLink]="[ '/federal-reporting/' + item.licenseId]">
+                <a [routerLink]="[ '/federal-reporting/' + item.licenseId + '/default']">
                   <span><i class="fas fa-business-time" style="margin-right: 10px;"></i>Review Federal Reports</span>
                 </a>
               </p>
