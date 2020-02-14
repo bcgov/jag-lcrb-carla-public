@@ -104,13 +104,17 @@ export class FederalReportingComponent implements OnInit {
     const licenceIndex = (params.licenceId === null) ? 0 : this.licenses.findIndex(l => l.licenseId === params.licenceId);
     if (licenceIndex !== -1) {
       this.selectedLicenceIndex = licenceIndex;
+    } else {
+      this.selectedLicenceIndex = 0;
     }
 
     this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === params.licenceId);
 
-    const reportIndex = (params.monthlyReportId === null) ? 0 : this.shownMonthlyReports.findIndex(r => r.monthlyReportId === params.monthlyReportId);
+    const reportIndex = (params.monthlyReportId === null || params.monthlyReportId === 'default') ? 0 : this.shownMonthlyReports.findIndex(r => r.monthlyReportId === params.monthlyReportId);
     if (reportIndex !== -1) {
       this.selectedMonthlyReportIndex = reportIndex;
+    } else {
+      this.selectedMonthlyReportIndex = 0;
     }
 
     this.renderMonthlyReport();
@@ -183,14 +187,14 @@ export class FederalReportingComponent implements OnInit {
   handleMonthlyReportTabChanged(event) {
     this.selectedMonthlyReportIndex = event.index;
     this.router.navigate([
-      `/federal-reporting/${this.licenses[this.selectedLicenceIndex].licenseId}/${this.monthlyReports[event.index].monthlyReportId}`
+      `/federal-reporting/${this.licenses[this.selectedLicenceIndex].licenseId}/${this.shownMonthlyReports[event.index].monthlyReportId}`
     ]);
   }
 
   handleLicenceTabChanged(event) {
     if (this.selectedLicenceIndex !== event.index) {
       this.router.navigate([
-        `/federal-reporting/${this.licenses[event.index].licenseId}`
+        `/federal-reporting/${this.licenses[event.index].licenseId}/default`
       ]);
     }
   }
