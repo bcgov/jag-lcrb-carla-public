@@ -89,18 +89,10 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
-    path: 'federal-reporting/:licenceId',
+    path: 'federal-reporting/:licenceId/:monthlyReportId',
     component: FederalReportingComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-    data: { feature: 'FederalReporting' },
-    children: [
-      {
-        path: ':monthlyReportId',
-        component: FederalReportingComponent,
-        canActivate: [BCeidAuthGuard, FeatureGuard],
-        data: { feature: 'FederalReporting' }
-      }
-    ]
+    data: { feature: 'FederalReporting' }
   },
   {
     path: 'licensee-changes/:applicationId',
