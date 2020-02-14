@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef, Input, Output, EventEm
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { LicenseeChangeLog, LicenseeChangeType } from '@models/licensee-change-log.model';
-import { MatTreeNestedDataSource, MatTree, MatDialog, MatSnackBar } from '@angular/material';
+import { MatTreeNestedDataSource, MatTree, MatDialog, MatSnackBar, ErrorStateMatcher } from '@angular/material';
 import { Application } from '@models/application.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
@@ -60,11 +60,10 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     private applicationDataService: ApplicationDataService,
     private legalEntityDataService: LegalEntityDataService) {
     super();
-    licenseService.getAllCurrentLicenses()
+    this.licenseService.getAllCurrentLicenses()
       .subscribe(data => {
         this.licenses = data;
-      })
-
+      });
   }
 
 
@@ -163,8 +162,33 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
 
+  validateFormData() {
+    let errors = [];
+    if (this.treeRoot) {
+      errors = [
+        ...this.validateNonIndividauls(this.treeRoot),
+        ...this.validateFileUploads(this.treeRoot)
+      ]
+    }
+    return errors;
+  }
+
+  validateFileUploads(node: LicenseeChangeLog): string[] {
+    let errors = [];
+    node = Object.assign(new LicenseeChangeLog(), node);
+
+    errors = errors.concat(node.getFileUploadValidationErrors());
+    node.children = node.children || [];
+    node.children.forEach(child => {
+      errors  = errors.concat(this.validateFileUploads(child));
+    });
+
+    return errors;
+  }
+
+
   validateNonIndividauls(node: LicenseeChangeLog): string[] {
-    node = Object.assign(new LicenseeChangeLog, node);
+    node = Object.assign(new LicenseeChangeLog(), node);
     let validationMessages = [];
     if (!node.isRemoveChangeType()) {
       validationMessages = LicenseeChangeLog.ValidateNonIndividaul(node);
@@ -180,7 +204,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
    * Sends data to dynamics
    */
   save() {
-    this.validationErrors = this.validateNonIndividauls(this.treeRoot);
+    this.validationErrors = this.validateFormData();
     if (this.validationErrors.length === 0) {
       this.busySave = this.prepareSaveRequest()
         .subscribe(() => {
