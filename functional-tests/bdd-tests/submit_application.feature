@@ -77,7 +77,7 @@ Scenario: Check required fields on application page
 
 
 Scenario Outline: Confirm establishment watch words verification
-    When I enter an "<watch_word>" on the application page
+    When I enter a "<watch_word>" on the application page
     Then the message "The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed." is displayed
    
 
