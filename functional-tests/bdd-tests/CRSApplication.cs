@@ -19,7 +19,11 @@ Feature: CRSApplication
 Scenario: Start Application
     Given I SEE the Dashboard
     And I CLICK Start Application
-    Then I SEE Review Account Profile
+    And I CLICK on Continue to Application
+    And I COMPLETE the Application
+    And I CLICK on 'SUBMIT & PAY'
+    And I enter the payment information
+    Then I return to the dashboard
 */
 
 namespace bdd_tests
@@ -142,7 +146,7 @@ namespace bdd_tests
             saveforlater_button.Click();
         }
 
-        [Then(@"I enter the payment information")]
+        [And(@"I enter the payment information")]
         public void enter_payment_info()
         {
             string testCC = "4030000010001234";
@@ -161,6 +165,14 @@ namespace bdd_tests
 
             //turn back on when returning to Angular
             ngDriver.IgnoreSynchronization = false;
+        }
+
+        [Then(@"I return to the dashboard")]
+        public void return_to_dashboard()
+        {
+            string retDash = "Return to Dashboard";
+            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
+            returnDash.Click();
         }
 
         [And(@"I SEE Review Account Profile")]
