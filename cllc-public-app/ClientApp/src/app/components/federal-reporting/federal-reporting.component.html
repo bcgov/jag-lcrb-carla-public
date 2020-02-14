@@ -20,7 +20,7 @@
         <h3 *ngIf="shownMonthlyReports.length < 1; else elseBlock" [class.hidden]="loadingMonthlyReports">There is not yet any monthly reports to report on. Please check back later.</h3>
         <ng-template #elseBlock><h4 class="bold">Select Monthly Report:</h4></ng-template>
         <mat-tab-group
-          [selectedIndex]="0"
+          [selectedIndex]="selectedMonthlyReportIndex"
           (selectedTabChange)="handleMonthlyReportTabChanged($event);"
           *ngIf="shownMonthlyReports.length > 0"
           [class.hidden]="loadingMonthlyReports"
