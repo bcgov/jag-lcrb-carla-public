@@ -124,5 +124,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string City { get; set; }
         public string Province { get; set; }
         public string PostalCode { get; set; }
+
+        public LicenceEventSchedule[] Schedules { get; set; }
     }
 }
