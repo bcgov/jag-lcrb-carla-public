@@ -37,9 +37,10 @@ export class EventFormComponent extends FormBase implements OnInit {
   eventStatus = EventStatus;
   startDateMinimum: Date;
   endDateMinimum: Date;
+  endDateMaximum: Date;
   scheduleIsInconsistent = false;
 
-  dateForms = this.fb.array([]);
+  timeForms = this.fb.array([]);
   eventForm = this.fb.group({
     status: ['', [Validators.required]],
     id: ['', []],
@@ -128,12 +129,20 @@ export class EventFormComponent extends FormBase implements OnInit {
     if (submit) {
       this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'In Review').value);
     }
+    // this.packageUpTimeForms();
     if (this.isEditMode) {
       this.updateLicence();
     } else {
       this.createLicence();
     }
   }
+
+  // packageUpTimeForms() {
+  //   for(var i; i < this.timeForms.length; i++) {
+  //   this.timeForms.forEach((form) => {
+
+  //   });
+  // }
 
   clearRelatedFormFieldIfNotOther(options: any, fieldName: string, relatedField: string) {
     const option = this.getOptionFromValue(options, this.eventForm.controls[fieldName].value);
@@ -206,8 +215,8 @@ export class EventFormComponent extends FormBase implements OnInit {
   }
 
   resetDateFormsToDefault() {
-    this.dateForms = this.fb.array([]);
-    this.dateForms.push(this.fb.group({
+    this.timeForms = this.fb.array([]);
+    this.timeForms.push(this.fb.group({
       dateTitle: ['Default Times', []],
       startTime: [DEFAULT_START_TIME, [Validators.required]],
       endTime: [DEFAULT_END_TIME, [Validators.required]],
@@ -217,10 +226,10 @@ export class EventFormComponent extends FormBase implements OnInit {
   }
 
   resetDateFormsToArray(datesArray) {
-    this.dateForms = this.fb.array([]);
+    this.timeForms = this.fb.array([]);
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     datesArray.forEach(element => {
-      this.dateForms.push(this.fb.group({
+      this.timeForms.push(this.fb.group({
         dateTitle: [days[element.getDay()] + ', ' + element.toLocaleDateString('en-US'), []],
         date: [element, []],
         startTime: [DEFAULT_START_TIME, [Validators.required]],
@@ -235,13 +244,19 @@ export class EventFormComponent extends FormBase implements OnInit {
     if (this.eventForm.controls['startDate'].value === null || this.eventForm.controls['startDate'].value === '') {
       this.endDateMinimum = new Date();
       this.endDateMinimum.setDate(this.endDateMinimum.getDate() + 21);
+      this.endDateMaximum = null;
     } else if (this.eventForm.controls['endDate'].value === null || this.eventForm.controls['endDate'].value === '') {
       this.endDateMinimum = this.eventForm.controls['startDate'].value;
+      this.endDateMaximum = new Date(this.eventForm.controls['startDate'].value);
+      this.endDateMaximum.setDate(this.eventForm.controls['startDate'].value.getDate() + 30);
     } else {
+      // start and end date
       if (this.eventForm.controls['endDate'].value.getTime() < this.eventForm.controls['startDate'].value.getTime()) {
         this.eventForm.controls['endDate'].setValue(null);
       }
       this.endDateMinimum = this.eventForm.controls['startDate'].value;
+      this.endDateMaximum = new Date(this.eventForm.controls['startDate'].value);
+      this.endDateMaximum.setDate(this.eventForm.controls['startDate'].value.getDate() + 30);
     }
   }
 
