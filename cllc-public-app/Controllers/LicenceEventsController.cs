@@ -62,7 +62,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
 
-            return new JsonResult(dynamicsEvent.ToViewModel());
+            LicenceEvent viewModelEvent = dynamicsEvent.ToViewModel();
+
+            if (item.Schedules != null && item.Schedules.Count > 0) {
+                foreach (LicenceEventSchedule eventSchedule in item.Schedules)
+                {
+                    MicrosoftDynamicsCRMadoxioEventschedule dynamicsSchedule = new MicrosoftDynamicsCRMadoxioEventschedule();
+                    dynamicsSchedule.CopyValues(eventSchedule);
+                    dynamicsSchedule.AdoxioEventid = dynamicsEvent.AdoxioEventid;
+                    (??) newEventSchedule = _dynamicsClent.EventSchedules.Create(dynamicsSchedule);
+                    viewModelEvent.append(newEventSchedule.ToViewModel());
+                }
+            }
+
+            return new JsonResult(viewModelEvent);
         }
 
         /// <summary>
@@ -81,6 +94,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 dynamicsEvent = _dynamicsClient.GetEventByIdWithChildren(id);
+                dynamicsEventSchedule = _dynamicsClient.GetEventSchedulesByEventId(id);
             }
             catch (HttpOperationException ex)
             {
@@ -93,7 +107,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            return new JsonResult(dynamicsEvent.ToViewModel());
+            result = dynamicsEvent.ToViewModel();
+            foreach (MicrosoftDynamicsCRMAdoxioEventschedule schedule in dynamicsEventSchedule)
+            {
+                result.Schedules = schedule.ToViewModel();
+            }
+
+            return new JsonResult(result);
         }
 
         /// <summary>
@@ -166,6 +186,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             _dynamicsClient.Events.Delete(id);
+            
 
             return NoContent();
         }

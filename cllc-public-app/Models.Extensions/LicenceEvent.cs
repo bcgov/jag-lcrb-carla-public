@@ -9,7 +9,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     public static class LicenceEventExtensions
     {
         // Converts a dynamics entity into a view model
-        public static ViewModels.LicenceEvent ToViewModel(this MicrosoftDynamicsCRMadoxioEvent item)
+        public static ViewModels.LicenceEvent ToViewModel(this MicrosoftDynamicsCRMadoxioEvent item, IDynamicsClient dynamicsClient)
         {
             ViewModels.LicenceEvent result = null;
             if (item != null)
@@ -51,6 +51,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.City = item.AdoxioCity;
                 result.Province = item.AdoxioProvince;
                 result.PostalCode = item.AdoxioPostalcode;
+            }
+
+            IEnumerable<HEREGOESNEW> eventSchedules = dynamicsClient.GetEventScheduleForEvent(result.Id);
+            foreach (var schedule in eventSchedules)
+            {
+                result.Schedules.append(schedule.ToViewModel());
             }
 
             return result;
