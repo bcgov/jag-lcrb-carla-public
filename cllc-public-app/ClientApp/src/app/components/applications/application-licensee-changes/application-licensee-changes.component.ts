@@ -7,8 +7,8 @@ import { Application } from '@models/application.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';
-import { forkJoin } from 'rxjs';
-import { takeWhile, filter } from 'rxjs/operators';
+import { forkJoin, of } from 'rxjs';
+import { takeWhile, filter, mergeMap, switchMap } from 'rxjs/operators';
 import { LegalEntity } from '@models/legal-entity.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -16,7 +16,7 @@ import { AppState } from '@app/app-state/models/app-state';
 import { Account } from '@models/account.model';
 import { LicenseeTreeComponent } from '@shared/components/licensee-tree/licensee-tree.component';
 import { ApplicationSummary } from '@models/application-summary.model';
-import { ApplicationTypeNames } from '@models/application-type.model';
+import { ApplicationTypeNames, ApplicationType } from '@models/application-type.model';
 import { LicenseDataService } from '@services/license-data.service';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 
@@ -31,7 +31,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   individualShareholderChanges: LicenseeChangeLog[];
   organizationShareholderChanges: LicenseeChangeLog[];
   leadershipChanges: LicenseeChangeLog[];
-  @Input() applicationId: string;
+  applicationId: string;
   application: Application;
   currentChangeLogs: LicenseeChangeLog[];
   currentLegalEntities: LegalEntity;
@@ -68,6 +68,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
 
   ngOnInit() {
+
     this.form = this.fb.group({
       id: [''],
       contactPersonFirstName: ['', Validators.required],
@@ -80,8 +81,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
 
-    this.store.select(state => state.onGoingLicenseeChangesApplicationIdState.onGoingLicenseeChangesApplicationId)
-      .pipe(takeWhile(() => this.componentActive))
+    this.busy = this.loadLicenseeApplication()
       .pipe(filter(id => !!id))
       .subscribe(id => {
         this.applicationId = id;
@@ -116,6 +116,26 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.addDynamicContent();
         this.form.patchValue(this.application);
       });
+  }
+
+  /**
+   * Gets licensee application id. Create the applicaiton and return id if it does not exist
+   */
+  loadLicenseeApplication() {
+    return this.applicationDataService.getOngoingLicenseeChangeApplicationId()
+      .pipe(mergeMap(id => {
+        if (id) {
+          return of(id);
+        } else { // create licensee application and return its id
+          const newLicenceApplicationData = <Application>{
+            applicantType: this.account.businessType,
+            applicationType: <ApplicationType>{ name: ApplicationTypeNames.LicenseeChanges },
+            account: this.account,
+          };
+          return this.applicationDataService.createApplication(newLicenceApplicationData)
+            .pipe(switchMap(app => of(app.id)));
+        }
+      }));
   }
 
   getSaveLabel(): string {
@@ -180,7 +200,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     errors = errors.concat(node.getFileUploadValidationErrors());
     node.children = node.children || [];
     node.children.forEach(child => {
-      errors  = errors.concat(this.validateFileUploads(child));
+      errors = errors.concat(this.validateFileUploads(child));
     });
 
     return errors;
@@ -210,7 +230,6 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         .subscribe(() => {
           this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
           this.saveComplete.emit(true);
-          this.loadData();
         });
     }
   }
