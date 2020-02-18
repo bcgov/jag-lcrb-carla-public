@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top187 { get; set; }
+        int? Top201 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip107 { get; set; }
+        int? Skip120 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count187 { get; set; }
+        bool? Count201 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter187 { get; set; }
+        string Filter201 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search107 { get; set; }
+        string Search120 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -413,6 +413,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEventduplicatematchingrecord Eventduplicatematchingrecord { get; }
 
         /// <summary>
+        /// Gets the IEventschedules.
+        /// </summary>
+        IEventschedules Eventschedules { get; }
+
+        /// <summary>
         /// Gets the IEventsyncerrors.
         /// </summary>
         IEventsyncerrors Eventsyncerrors { get; }
@@ -426,6 +431,36 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicence.
         /// </summary>
         ILicence Licence { get; }
+
+        /// <summary>
+        /// Gets the IEventid.
+        /// </summary>
+        IEventid Eventid { get; }
+
+        /// <summary>
+        /// Gets the IEventscheduleasyncoperations.
+        /// </summary>
+        IEventscheduleasyncoperations Eventscheduleasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IEventschedulebulkdeletefailures.
+        /// </summary>
+        IEventschedulebulkdeletefailures Eventschedulebulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IEventscheduleduplicatebaserecord.
+        /// </summary>
+        IEventscheduleduplicatebaserecord Eventscheduleduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IEventscheduleduplicatematchingrecord.
+        /// </summary>
+        IEventscheduleduplicatematchingrecord Eventscheduleduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IEventschedulesyncerrors.
+        /// </summary>
+        IEventschedulesyncerrors Eventschedulesyncerrors { get; }
 
         /// <summary>
         /// Gets the IExhibits.
@@ -723,6 +758,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegardingobjectidadoxioevent Regardingobjectidadoxioevent { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioeventschedule.
+        /// </summary>
+        IRegardingobjectidadoxioeventschedule Regardingobjectidadoxioeventschedule { get; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioexhibit.
         /// </summary>
         IRegardingobjectidadoxioexhibit Regardingobjectidadoxioexhibit { get; }
@@ -736,6 +776,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBusinessunitadoxioevent.
         /// </summary>
         IBusinessunitadoxioevent Businessunitadoxioevent { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioeventschedule.
+        /// </summary>
+        IBusinessunitadoxioeventschedule Businessunitadoxioeventschedule { get; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxioexhibit.
@@ -763,6 +808,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IBaserecordidadoxioevent Baserecordidadoxioevent { get; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxioeventschedule.
+        /// </summary>
+        IBaserecordidadoxioeventschedule Baserecordidadoxioeventschedule { get; }
+
+        /// <summary>
         /// Gets the IBaserecordidadoxioexhibit.
         /// </summary>
         IBaserecordidadoxioexhibit Baserecordidadoxioexhibit { get; }
@@ -776,6 +826,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IDuplicaterecordidadoxioevent.
         /// </summary>
         IDuplicaterecordidadoxioevent Duplicaterecordidadoxioevent { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioeventschedule.
+        /// </summary>
+        IDuplicaterecordidadoxioeventschedule Duplicaterecordidadoxioeventschedule { get; }
 
         /// <summary>
         /// Gets the IDuplicaterecordidadoxioexhibit.
@@ -1013,6 +1068,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILkadoxioeventmodifiedonbehalfby Lkadoxioeventmodifiedonbehalfby { get; }
 
         /// <summary>
+        /// Gets the ILkadoxioeventschedulecreatedby.
+        /// </summary>
+        ILkadoxioeventschedulecreatedby Lkadoxioeventschedulecreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioeventschedulecreatedonbehalfby.
+        /// </summary>
+        ILkadoxioeventschedulecreatedonbehalfby Lkadoxioeventschedulecreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioeventschedulemodifiedby.
+        /// </summary>
+        ILkadoxioeventschedulemodifiedby Lkadoxioeventschedulemodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioeventschedulemodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioeventschedulemodifiedonbehalfby Lkadoxioeventschedulemodifiedonbehalfby { get; }
+
+        /// <summary>
         /// Gets the ILkadoxioexhibitcreatedby.
         /// </summary>
         ILkadoxioexhibitcreatedby Lkadoxioexhibitcreatedby { get; }
@@ -1058,6 +1133,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IUseradoxioevent Useradoxioevent { get; }
 
         /// <summary>
+        /// Gets the IUseradoxioeventschedule.
+        /// </summary>
+        IUseradoxioeventschedule Useradoxioeventschedule { get; }
+
+        /// <summary>
         /// Gets the IUseradoxioexhibit.
         /// </summary>
         IUseradoxioexhibit Useradoxioexhibit { get; }
@@ -1081,6 +1161,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITeamadoxioevent.
         /// </summary>
         ITeamadoxioevent Teamadoxioevent { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioeventschedule.
+        /// </summary>
+        ITeamadoxioeventschedule Teamadoxioeventschedule { get; }
 
         /// <summary>
         /// Gets the ITeamadoxioexhibit.
