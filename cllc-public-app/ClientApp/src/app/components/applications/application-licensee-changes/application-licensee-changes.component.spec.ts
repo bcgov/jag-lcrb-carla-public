@@ -37,10 +37,17 @@ describe('ApplicationLicenseeChangesComponent', () => {
         provideMockStore({}),
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub({}) },
         { provide: MatSnackBar, useValue: {} },
-        { provide: LicenseDataService, useValue: {getAllCurrentLicenses: () => of([])} },
+        { provide: LicenseDataService, useValue: { getAllCurrentLicenses: () => of([]) } },
         { provide: Router, useValue: {} },
         { provide: LegalEntityDataService, useValue: { getChangeApplicationLogs: () => of([]), getCurrentHierachy: () => of({}) } },
-        { provide: ApplicationDataService, useValue: { getApplicationById: () => of({}), getAllCurrentApplications: () => of([]) } },
+        {
+          provide: ApplicationDataService,
+          useValue: {
+            getApplicationById: () => of({}),
+            getAllCurrentApplications: () => of([]),
+            getOngoingLicenseeChangeApplicationId: () => of('1')
+          }
+        },
       ]
     })
       .compileComponents();
