@@ -8,4 +8,5 @@ Scenario: Start Application
     And I CLICK on Continue to Application
     And I COMPLETE the Application
     And I CLICK on 'SUBMIT & PAY'
-    Then I enter the payment information
+    And I enter the payment information
+    Then I return to the dashboard
