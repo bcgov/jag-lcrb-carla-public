@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Alias } from '@models/alias.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContactDataService } from '@services/contact-data.service';
 import { PHSContact } from '@models/contact.model';
 import { FormBase } from '@shared/form-base';
@@ -24,6 +24,7 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
 
   constructor(private fb: FormBuilder,
     private contactDataService: ContactDataService,
+    private router: Router,
     private route: ActivatedRoute) {
     super();
     this.route.paramMap.subscribe(pmap => this.contactToken = pmap.get('token'));
@@ -71,7 +72,7 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
       .subscribe(contact => {
         this.contact = contact;
         this.form.get('contact.shortName').setValue(contact.shortName);
-      })
+      });
 
   }
 
@@ -125,6 +126,7 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
   save() {
     const contact = this.form.value.contact;
     contact.phsDateSubmitted = new Date();
+    contact.phsComplete = true;
     if (this.form.value.firstNameAtBirth && this.form.value.lastNameAtBirth) {
       contact.aliases.push({
         firstname: this.form.value.firstNameAtBirth,
@@ -134,6 +136,7 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
 
     this.contactDataService.updatePHSContact(contact, this.contactToken)
       .subscribe(res => {
+        this.router.navigateByUrl('/personal-history-summary/confirmation');
       })
   }
 

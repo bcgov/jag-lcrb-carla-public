@@ -230,6 +230,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // GET all licensee change applications in Dynamics by applicant using the account Id assigned to the user logged in
             var filter = $"_adoxio_applicant_value eq {userSettings.AccountId} and adoxio_paymentrecieved ne true and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+            filter += $" and adoxio_isapplicationcomplete ne 1";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Denied}";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
