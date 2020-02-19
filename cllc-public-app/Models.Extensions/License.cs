@@ -101,7 +101,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
 
             var mainApplication = applications.Where(app => app.Statuscode == (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved).FirstOrDefault();
-            var crsApplication = applications.Where(app => app.AdoxioApplicationTypeId.AdoxioName == "Cannabis Retail Store").FirstOrDefault();
+
+            // 2-13-2020 adjust criteria so that we get the first approved CRS rather than simply the first CRS, to ensure that we get the correct record.
+            var crsApplication = applications.Where(app => app.Statuscode == (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved && app.AdoxioApplicationTypeId.AdoxioName == "Cannabis Retail Store").FirstOrDefault();
             if (mainApplication != null)
             {
                 licenseSummary.ApplicationId = mainApplication.AdoxioApplicationid;

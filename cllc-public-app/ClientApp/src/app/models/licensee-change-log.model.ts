@@ -59,25 +59,26 @@ export class LicenseeChangeLog {
   collapse: boolean; // This is only used on the client side
   refObject: LicenseeChangeLog; // This is only used on the client side
   saved: boolean; // This is only used on the client side
+  fileUploads: any = {}; // This is only used on the client side
 
 
-  public get percentageShares(): number {
-    let percent = 0;
-    if (this.parentLinceseeChangeLog && this.parentLinceseeChangeLog.totalSharesNew && this.numberofSharesNew) {
-      percent = this.numberofSharesNew / this.parentLinceseeChangeLog.totalSharesNew * 100;
-      percent = Math.round(percent * 100) / 100; // round to two decimal places
-    }
-    return percent;
-  }
+  // public get percentageShares(): number {
+  //   let percent = 0;
+  //   if (this.parentLinceseeChangeLog && this.parentLinceseeChangeLog.totalSharesNew && this.numberofSharesNew) {
+  //     percent = this.numberofSharesNew / this.parentLinceseeChangeLog.totalSharesNew * 100;
+  //     percent = Math.round(percent * 100) / 100; // round to two decimal places
+  //   }
+  //   return percent;
+  // }
 
 
-  public get totalChildShares(): number {
-    let totalShares = 0;
-    if (this.children && this.children.length) {
-      totalShares = this.children.map(v => v.numberofSharesNew || 0).reduce((previous, current) => previous + current);
-    }
-    return totalShares;
-  }
+  // public get totalChildShares(): number {
+  //   let totalShares = 0;
+  //   if (this.children && this.children.length) {
+  //     totalShares = this.children.map(v => v.numberofSharesNew || 0).reduce((previous, current) => previous + current);
+  //   }
+  //   return totalShares;
+  // }
 
   public get keyPersonnelChildren(): LicenseeChangeLog[] {
     const leaders = (this.children || []).filter(item => item.isIndividual && !item.isShareholderNew);
@@ -179,15 +180,9 @@ export class LicenseeChangeLog {
     return validationResult;
   }
 
-  // construct file name prefix from name and names of parents
+  // construct file name prefix from name
   public get fileUploadPrefix(): string {
     let prefix = this.nameToFilePrefix();
-    // let parent = this.parentLinceseeChangeLog;
-    // while (parent) {
-    //   prefix = `${parent.nameToFilePrefix()} ${prefix}`;
-    //   parent = parent.parentLinceseeChangeLog;
-    // }
-
     return prefix;
   }
 
@@ -275,25 +270,75 @@ export class LicenseeChangeLog {
     return position;
   }
 
-  getOldLeadershipPosition(): string {
-    let position = '';
-    if (this.isDirectorOld) {
-      position += 'Director, ';
+  getFileUploadValidationErrors(): string[] {
+    let errors = [
+      ...this.privateCorpFileErrors(),
+      ...this.publicCorpFileErrors(),
+      ...this.partnershipFileErrors(),
+      ...this.nameChangeFileErrors()
+    ];
+    return errors;
+  }
+
+  private privateCorpFileErrors(): string[] {
+    let errors = [];
+    if(this.businessType === 'PrivateCorporation'){
+      if(this.fileUploads['NOA'] <= 0){
+        errors.push(`${this.businessNameNew}: Please upload the Corporation Notice of Articles`);
+      }
+      if(this.fileUploads['SECREG'] <= 0){
+        errors.push(`${this.businessNameNew}: Please upload the Central Securities Register`);
+      }
     }
-    if (this.isManagerOld) {
-      position += 'Manager, ';
+    return errors;
+  }
+
+  private publicCorpFileErrors(): string[] {
+    let errors = [];
+    if(this.businessType === 'PublicCorporation'){
+      if(this.fileUploads['NOA'] <= 0){
+        errors.push(`${this.businessNameNew}: Please upload the Corporation Notice of Articles`);
+      }
     }
-    if (this.isOfficerOld) {
-      position += 'Officer, ';
+    return errors;
+  }
+  
+  private partnershipFileErrors(): string[] {
+    let errors = [];
+    if(this.businessType === 'Partnership'){
+      if(this.fileUploads['NOA'] <= 0){
+        errors.push(`${this.businessNameNew}: Please upload the Partnership Agreement`);
+      }
     }
-    if (this.isTrusteeOld) {
-      position += 'Trustee, ';
+    return errors;
+  }
+
+  private nameChangeFileErrors(): string[] {
+    let errors = [];
+
+    if(this.isNameChangePerformed()){
+      if(this.fileUploads['Name Change Documents'] <= 0){
+        errors.push(`${this.firstNameNew} ${this.lastNameNew}: Please upload the Name Change Documents`);
+      }
     }
-    if (this.titleOld) {
-      position += `${this.titleOld}, `;
+    return errors;
+  }
+
+  isNameChangePerformed(): boolean {
+    let changed = false;
+    if (this.isIndividual &&
+      (
+        this.changeType === LicenseeChangeType.updateLeadership ||
+        this.changeType === LicenseeChangeType.updateIndividualShareholder
+      )
+      &&
+      (
+        this.firstNameNew !== this.firstNameOld ||
+        this.lastNameNew !== this.lastNameOld
+      )) {
+      changed = true;
     }
-    position = position.substring(0, position.length - 2);
-    return position;
+    return changed;
   }
 
   /*
@@ -460,252 +505,6 @@ export class LicenseeChangeLog {
     return result;
   }
 
-  getChageTypeVerb() {
-    let change = '';
-    if (this.isAddChangeType()) {
-      change = 'Added';
-    } else if (this.isRemoveChangeType()) {
-      change = 'Removed';
-    } else if (this.isUpdateChangeType()) {
-      change = 'Updated';
-    }
-    return change;
-  }
-
-
-  cancelChange(node: LicenseeChangeLog) {
-    // delete change log record
-    // ??What to do with children when their parent add is cancelled
-    //
-  }
-
-  /**
-   * Returns true if a leader (e.g. a director or  manager) was added in
-   * the application
-   */
-  public static leadershipWasAdded(treeRoot: LicenseeChangeLog): boolean {
-    const isLeaderAddChange = (node: LicenseeChangeLog) => node.changeType === LicenseeChangeType.addLeadership;
-    const result = !!this.findNodeInTree(treeRoot, isLeaderAddChange);
-    return result;
-  }
-
-  /**
-   * Returns true if a business shareholder  was added in
-   * the application
-   */
-  public static businessShareholderWasAdded(treeRoot: LicenseeChangeLog): boolean {
-    const businessShareholderWasAdded = (node: LicenseeChangeLog) => node.changeType === LicenseeChangeType.addBusinessShareholder;
-    const result = !!this.findNodeInTree(treeRoot, businessShareholderWasAdded);
-    return result;
-  }
-
-  /**
-   * Returns true if an individual shareholder  was added in
-   * the application
-   */
-  public static individualShareholderWasAdded(treeRoot: LicenseeChangeLog): boolean {
-    const individualShareholderWasAdded = (node: LicenseeChangeLog) => node.changeType === LicenseeChangeType.addIndividualShareholder;
-    const result = !!this.findNodeInTree(treeRoot, individualShareholderWasAdded);
-    return result;
-  }
-
-  /**
-  * Returns true iff a shareholder  was added in
-  * the application
-  */
-  public static shareholderWasAdded(treeRoot: LicenseeChangeLog): boolean {
-    return this.businessShareholderWasAdded(treeRoot) || this.individualShareholderWasAdded(treeRoot);
-  }
-
-  /**
-  * Returns true iff there is a delete-type in
-  * the application
-  */
-  public static shareholderWasRemoved(treeRoot: LicenseeChangeLog): boolean {
-    const shareholderWasRemoved = (node: LicenseeChangeLog) => node.changeType === LicenseeChangeType.removeBusinessShareholder
-      || node.changeType === LicenseeChangeType.removeIndividualShareholder;
-    const result = !!this.findNodeInTree(treeRoot, shareholderWasRemoved);
-    return result;
-  }
-
-  /**
-  * Returns true iff a share amount was changed in any of the edit type change-logs in
-  * the application
-  */
-  public static someShareAmountWasChanged(treeRoot: LicenseeChangeLog): boolean {
-    const shareAmoutWasChanged = (node: LicenseeChangeLog) => node.isUpdateChangeType() && node.numberofSharesOld !== node.numberofSharesNew;
-    const result = !!this.findNodeInTree(treeRoot, shareAmoutWasChanged);
-    return result;
-  }
-
-  /**
-   * Returns true if a name of was changed in any of the edit type change-logs
-   * the application
-   */
-  public static aNameChangeWasPerformed(treeRoot: LicenseeChangeLog): boolean {
-    const nameWasChanged = (node: LicenseeChangeLog) => {
-      const isNameChange = node.isUpdateChangeType() &&
-        (
-          // check for individual name change
-          (node.isIndividualFromChangeType() &&
-            (node.firstNameNew !== node.firstNameOld || node.lastNameNew !== node.lastNameOld))
-
-          // check for busines type name change
-          // || (!node.isIndividualFromChangeType() && node.businessNameNew !== node.businessNameOld)
-        );
-      return isNameChange;
-    };
-    const result = !!this.findNodeInTree(treeRoot, nameWasChanged);
-    return result;
-  }
-
-  public static getIndivialNameChanges(treeRoot: LicenseeChangeLog): LicenseeChangeLog[] {
-    const nameWasChanged = (node: LicenseeChangeLog) => {
-      const isNameChange = node.isUpdateChangeType() &&
-        (
-          // check for individual name change
-          node.isIndividualFromChangeType() &&
-          (node.firstNameNew !== node.firstNameOld || node.lastNameNew !== node.lastNameOld)
-        );
-      return isNameChange;
-    };
-    const result = LicenseeChangeLog.findNodesInTree(treeRoot, nameWasChanged);
-    return result;
-  }
-
-  public static getNewShareholderOrganizations(treeRoot: LicenseeChangeLog): LicenseeChangeLog[] {
-    const isOrganizationShareholder = (node: LicenseeChangeLog) => node.changeType === LicenseeChangeType.addBusinessShareholder;
-    const result = LicenseeChangeLog.findNodesInTree(treeRoot, isOrganizationShareholder);
-    return result;
-  }
-
-  public static getListNeedingSupportingDocument(treeRoot: LicenseeChangeLog): DocumentGroup {
-    const result = new DocumentGroup();
-
-    //notice of articles predicate
-    const needsNoticeOfArticels = (node: LicenseeChangeLog): boolean =>
-      (
-        (
-          (treeRoot.businessType === 'PublicCorporation' || treeRoot.businessType === 'PrivateCorporation') &&
-          (
-            node.changeType === LicenseeChangeType.addLeadership ||
-            node.changeType === LicenseeChangeType.removeLeadership ||
-            node.changeType === LicenseeChangeType.updateLeadership
-          )
-        )
-      );
-    result.noticeOfArticles = LicenseeChangeLog.findNodesInTree(treeRoot, needsNoticeOfArticels);
-
-    //central securities register predicate
-    const needsCentralSecuritiesRegister = (node: LicenseeChangeLog): boolean =>
-      (treeRoot.businessType === 'PrivateCorporation' &&
-        (
-          node.changeType === LicenseeChangeType.addBusinessShareholder ||
-          node.changeType === LicenseeChangeType.removeBusinessShareholder ||
-          node.changeType === LicenseeChangeType.updateIndividualShareholder ||
-          node.changeType === LicenseeChangeType.addIndividualShareholder ||
-          node.changeType === LicenseeChangeType.removeIndividualShareholder ||
-          node.changeType === LicenseeChangeType.updateIndividualShareholder
-        )
-      );
-    result.centralSecuritiesResgister = LicenseeChangeLog.findNodesInTree(treeRoot, needsCentralSecuritiesRegister);
-
-    //shareholder list predicate
-    const needsShareholderRecord = (node: LicenseeChangeLog): boolean =>
-      (treeRoot.businessType === 'PublicCorporation' &&
-        (
-          node.changeType === LicenseeChangeType.addBusinessShareholder ||
-          node.changeType === LicenseeChangeType.removeBusinessShareholder ||
-          node.changeType === LicenseeChangeType.updateIndividualShareholder ||
-          node.changeType === LicenseeChangeType.addIndividualShareholder ||
-          node.changeType === LicenseeChangeType.removeIndividualShareholder ||
-          node.changeType === LicenseeChangeType.updateIndividualShareholder
-        )
-      );
-    result.shareholderList = LicenseeChangeLog.findNodesInTree(treeRoot, needsShareholderRecord);
-
-    //partnership agreement
-    const needsParnershipAgreement = (node: LicenseeChangeLog): boolean =>
-      (treeRoot.businessType === 'Partnership' &&
-        (
-          node.changeType === LicenseeChangeType.addBusinessShareholder ||
-          node.changeType === LicenseeChangeType.removeBusinessShareholder ||
-          node.changeType === LicenseeChangeType.updateIndividualShareholder ||
-          node.changeType === LicenseeChangeType.addIndividualShareholder ||
-          node.changeType === LicenseeChangeType.removeIndividualShareholder ||
-          node.changeType === LicenseeChangeType.updateIndividualShareholder
-        )
-      );
-    result.partnershipAgreement = LicenseeChangeLog.findNodesInTree(treeRoot, needsParnershipAgreement);
-
-    return result;
-  }
-
-  public static getNewShareholderDocumentList(treeRoot: LicenseeChangeLog): DocumentGroup {
-    const result = new DocumentGroup();
-
-    //notice of articles predicate
-    const needsNoticeOfArticels = (node: LicenseeChangeLog): boolean =>
-      (
-        (node.businessType === 'PublicCorporation' || node.businessType === 'PrivateCorporation') &&
-        node.changeType === LicenseeChangeType.addBusinessShareholder
-      );
-    result.noticeOfArticles = LicenseeChangeLog.findNodesInTree(treeRoot, needsNoticeOfArticels);
-
-    //central securities register predicate
-    const needsCentralSecuritiesRegister = (node: LicenseeChangeLog): boolean =>
-      (
-        node.businessType === 'PrivateCorporation' &&
-        node.changeType === LicenseeChangeType.addBusinessShareholder
-      );
-    result.centralSecuritiesResgister = LicenseeChangeLog.findNodesInTree(treeRoot, needsCentralSecuritiesRegister);
-
-    //shareholder list predicate
-    const needsShareholderRecord = (node: LicenseeChangeLog): boolean =>
-      (
-        node.businessType === 'PublicCorporation' &&
-        node.changeType === LicenseeChangeType.addBusinessShareholder
-      );
-    result.shareholderList = LicenseeChangeLog.findNodesInTree(treeRoot, needsShareholderRecord);
-
-    //partnership agreement
-    const needsParnershipAgreement = (node: LicenseeChangeLog): boolean =>
-      (
-        node.businessType === 'Partnership' &&
-        node.changeType === LicenseeChangeType.addBusinessShareholder
-      );
-    result.partnershipAgreement = LicenseeChangeLog.findNodesInTree(treeRoot, needsParnershipAgreement);
-
-    //trust agreement
-    const needsTrustAgreement = (node: LicenseeChangeLog): boolean =>
-      (
-        node.businessType === 'Trust' &&
-        node.changeType === LicenseeChangeType.addBusinessShareholder
-      );
-    result.trustAgreement = LicenseeChangeLog.findNodesInTree(treeRoot, needsTrustAgreement);
-
-    //society documents
-    const needsSocietyDocuments = (node: LicenseeChangeLog): boolean =>
-      (
-        node.businessType === 'Society' &&
-        node.changeType === LicenseeChangeType.addBusinessShareholder
-      );
-    result.societyDocuments = LicenseeChangeLog.findNodesInTree(treeRoot, needsSocietyDocuments);
-
-    return result;
-  }
-
-  public static getNewIndividualAssociateList(treeRoot: LicenseeChangeLog): LicenseeChangeLog[] {
-    let result = [];
-
-    //new individual associate predicate
-    const newIndividualAssociate = (node: LicenseeChangeLog): boolean =>
-      (
-        node.changeType === LicenseeChangeType.addIndividualShareholder
-      );
-    result = LicenseeChangeLog.findNodesInTree(treeRoot, newIndividualAssociate);
-    return result;
-  }
 }
 
 class DocumentGroup {

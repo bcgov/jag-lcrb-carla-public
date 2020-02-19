@@ -19,7 +19,11 @@ Feature: CRSApplication
 Scenario: Start Application
     Given I SEE the Dashboard
     And I CLICK Start Application
-    Then I SEE Review Account Profile
+    And I CLICK on Continue to Application
+    And I COMPLETE the Application
+    And I CLICK on 'SUBMIT & PAY'
+    And I enter the payment information
+    Then I return to the dashboard
 */
 
 namespace bdd_tests
@@ -72,9 +76,6 @@ namespace bdd_tests
             string conSurname = "Surname";
             string conRole = "CEO";
             string conPhone = "2508888888";
-            string path1 = "C:/LCRB/associates.pdf";
-            string path2 = "C:/LCRB/fin_integrity.pdf";
-            string path3 = "C:/LCRB/checklist.pdf";
 
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
             estabName.SendKeys(estName);
@@ -97,14 +98,21 @@ namespace bdd_tests
             NgWebElement estabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             estabPhone.SendKeys(estPhone);
 
-            NgWebElement uploadAssociates = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div[1]/div[1]/div[2]/div[1]/section/app-file-uploader/div/ngx-file-drop/div/div/div/input[1]"));
-            uploadAssociates.SendKeys(path1);
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+            
+            string associatesPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
+            NgWebElement uploadAssociates = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
+            uploadAssociates.SendKeys(associatesPath);
 
-            NgWebElement uploadFinIntegrity = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div[1]/div[1]/div[2]/div[2]/section/app-file-uploader/div/ngx-file-drop/div/div/div/input[1]"));
-            uploadFinIntegrity.SendKeys(path2);
+            string finIntegrityPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "fin_integrity.pdf");
+            NgWebElement uploadFinIntegrity = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
+            uploadFinIntegrity.SendKeys(finIntegrityPath);
 
-            NgWebElement uploadChecklistDocs = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div[1]/div[1]/div[2]/section[4]/section/app-file-uploader/div/ngx-file-drop/div/div/div/input[1]"));
-            uploadChecklistDocs.SendKeys(path3);
+            string checklistPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "checklist.pdf");
+            NgWebElement uploadChecklistDocs = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
+            uploadChecklistDocs.SendKeys(checklistPath);
 
             NgWebElement contactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
             contactGiven.SendKeys(conGiven);
@@ -142,7 +150,7 @@ namespace bdd_tests
             saveforlater_button.Click();
         }
 
-        [Then(@"I enter the payment information")]
+        [And(@"I enter the payment information")]
         public void enter_payment_info()
         {
             string testCC = "4030000010001234";
@@ -161,6 +169,14 @@ namespace bdd_tests
 
             //turn back on when returning to Angular
             ngDriver.IgnoreSynchronization = false;
+        }
+
+        [Then(@"I return to the dashboard")]
+        public void return_to_dashboard()
+        {
+            string retDash = "Return to Dashboard";
+            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
+            returnDash.Click();
         }
 
         [And(@"I SEE Review Account Profile")]
