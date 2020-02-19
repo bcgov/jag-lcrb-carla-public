@@ -8,8 +8,8 @@
                     <th *ngIf="showPosition()" style="width: 200px;">Position</th>
                     <th style="min-width: 200px;">Email</th>
                     <th style="width: 150px;">Date of Birth</th>
-                    <th *ngIf="showPHSLevel1()">Level 1 Personal History Summary </th>
-                    <th *ngIf="false">Level 2 Personal History Summary </th>
+                    <!-- <th *ngIf="showPHSLevel1()">Level 1 Personal History Summary </th>
+                    <th *ngIf="false">Level 2 Personal History Summary </th> -->
                     <th style="background-color: transparent; width: 50px;"></th>
                 </tr>
             </thead>
@@ -91,14 +91,14 @@
                                 <mat-datepicker #picker2></mat-datepicker>
                             </app-field>
                         </td>
-                        <td *ngIf="showPHSLevel1()">
+                        <!-- <td *ngIf="showPHSLevel1()">
                             <span *ngIf="associate.get('isContactComplete').value === 'Yes'">Information Received</span>
                             <button
                                 *ngIf="associate.get('isContactComplete').value !== 'Yes' && associate.get('phsLink').value"
                                 class="btn btn-primary" (click)="copyMessage(associate.get('phsLink').value)">Copy
                                 Link</button>
                         </td>
-                        <td *ngIf="false"></td>
+                        <td *ngIf="false"></td> -->
                         <td>
                             <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
                                 (click)="associate.get('edit').value = true;" class="fas fa-pencil-alt"
@@ -129,7 +129,7 @@
                                         <app-file-uploader *ngIf="account" documentType="Name Change Documents"
                                             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
                                             entityName="account"
-                                            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
+                                            (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Name Change Documents', associate?.value?.refObject)"
                                             [entityId]="account.id"
                                             [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
                                             #financialIntegrityDocuments>
@@ -152,8 +152,8 @@
                     <th style="width: 200px;">Shares (%)</th>
                     <th style="min-width: 200px;">Email</th>
                     <th style="width: 150px;">Date of Birth</th>
-                    <th *ngIf="false">Liquor Associate Status </th>
-                    <th *ngIf="false">Cannabis Associate Status </th>
+                    <!-- <th *ngIf="false">Liquor Associate Status </th>
+                    <th *ngIf="false">Cannabis Associate Status </th> -->
                     <th style="background-color: transparent; width: 50px;"></th>
                 </tr>
             </thead>
@@ -222,8 +222,8 @@
                                 <mat-datepicker #picker></mat-datepicker>
                             </app-field>
                         </td>
-                        <td *ngIf="false"></td>
-                        <td *ngIf="false"></td>
+                        <!-- <td *ngIf="false"></td>
+                        <td *ngIf="false"></td> -->
                         <td>
                             <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
                                 (click)="associate.get('edit').value = true;" class="fas fa-pencil-alt"
@@ -244,8 +244,8 @@
                     <th style="width: 200px;">Shares (%)</th>
                     <th style="width: 200px;">Business Type</th>
                     <th style="width: 200px;">Email</th>
-                    <th *ngIf="false">Liquor Associate Status </th>
-                    <th *ngIf="false">Cannabis Associate Status </th>
+                    <!-- <th *ngIf="false">Liquor Associate Status </th>
+                    <th *ngIf="false">Cannabis Associate Status </th> -->
                     <th style="background-color: transparent; width: 50px;"></th>
                 </tr>
             </thead>
@@ -302,8 +302,8 @@
                                     <input class="form-control" type="text" formControlName="emailNew">
                                 </app-field>
                             </td>
-                            <td *ngIf="false"></td>
-                            <td *ngIf="false"></td>
+                            <!-- <td *ngIf="false"></td>
+                            <td *ngIf="false"></td> -->
                             <td>
                                 <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
                                     (click)="associate.get('edit').value = true; associate.get('collapse').value = true;"

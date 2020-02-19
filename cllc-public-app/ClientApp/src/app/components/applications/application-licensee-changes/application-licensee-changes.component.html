@@ -1,7 +1,7 @@
 <div class="form-wrapper row" style="position:relative;">
   <div [ngBusy]="[busy]"></div>
   <section class="col-md-8">
-    <app-org-structure [node]="treeRoot" [account]="account"></app-org-structure>
+    <app-org-structure *ngIf="applicationId" [node]="treeRoot" [account]="account"></app-org-structure>
 
     <section class="error mt-3" *ngIf="validationErrors?.length">
       <p *ngFor="let message of validationErrors">
@@ -21,7 +21,7 @@
         </span>
       </button>
       <button *ngIf="true || LicenseeChangeLog.HasChanges(treeRoot)" class="btn btn-primary"
-        [disabled]="disableSaveLabel()" (click)="save()">
+         (click)="save()">
         <i class="fa fa-save" style="color: #fff;"></i>
         {{getSaveLabel()}}</button>
     </section>

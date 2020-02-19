@@ -153,30 +153,10 @@ export class AppComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(account => {
         this.account = account;
-        if (this.account && this.licenseeChangeFeatureOn) {
-          // load ongoing licensee changes application id
-          this.loadLicenseeApplication();
-        }
       });
   }
 
-  loadLicenseeApplication(retry: number = 1) {
-    this.applicationDataService.getOngoingLicenseeChangeApplicationId()
-      .subscribe(id => {
-        if (id) {
-          this.store.dispatch(new SetOngoingLicenseeApplicationIdAction(id));
-        } else if (retry > 0) {
-          const newLicenceApplicationData: Application = <Application>{
-            applicantType: this.account.businessType,
-            applicationType: <ApplicationType>{ name: ApplicationTypeNames.LicenseeChanges },
-            account: this.account,
-          };
-          // create licensee application and upload state
-          this.applicationDataService.createApplication(newLicenceApplicationData)
-            .subscribe(res => this.loadLicenseeApplication(retry - 1));
-        }
-      })
-  }
+  
 
   showBceidTermsOfUse(): boolean {
     const result = (this.currentUser
