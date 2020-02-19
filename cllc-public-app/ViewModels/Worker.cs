@@ -62,9 +62,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public StatusCode StateCode { get; set; }
 
-        [JsonConverter(typeof(StringEnumConverter))]
-        public ConsentValidatedValue? ConsentValidated {get; set;}
-
         public bool? ConsentToSecurityScreening { get; set; }
         public bool? CertifyInformationIsCorrect { get; set; }
         public string ElectronicSignature { get; set; }
