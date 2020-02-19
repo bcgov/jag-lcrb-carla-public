@@ -11,6 +11,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public DateTimeOffset? DateSubmitted { get; set; }
-        public string PhsLink { get; set; }
+        public string ScreeningLink { get; set; }
     }
 }
