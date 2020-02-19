@@ -7,8 +7,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 {
     public class SecurityScreeningSummary
     {
-        SecurityScreeningCategorySummary[] Cannabis { get; set; }
+        public SecurityScreeningCategorySummary Cannabis { get; set; }
 
-        SecurityScreeningCategorySummary[] Liquor { get; set; }
+        public SecurityScreeningCategorySummary Liquor { get; set; }
     }
 }

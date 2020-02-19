@@ -18,6 +18,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -30,11 +31,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
+        private readonly IMemoryCache _cache;
         private readonly string _encryptionKey;
         private readonly FileManagerClient _fileManagerClient;
 
-        public LegalEntitiesController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient)
+        public LegalEntitiesController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IMemoryCache memoryCache)
         {
+            _cache = memoryCache;
             _configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
@@ -125,8 +128,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(legalEntity);
         }
 
+        private SecurityScreeningCategorySummary GetCannabisScreeningData(LegalEntity legalEntity)
+        {
+            SecurityScreeningCategorySummary result = new SecurityScreeningCategorySummary();
+            // TODO: Add screening data here
+            return result;
+        }
+
+        private SecurityScreeningCategorySummary GetLiquorScreeningData(LegalEntity legalEntity)
+        {
+            SecurityScreeningCategorySummary result = new SecurityScreeningCategorySummary();
+            return result;
+        }
+
         [HttpGet("current-security-summary")]
-        public JsonResult GetCurrentSecuritySummary()
+        public JsonResult GetCurrentSecurityScreeningSummary()
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -134,12 +150,36 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // check that the session is setup correctly.
             userSettings.Validate();
 
+            // get data for the current account. 
+
+            string currentAccountId = userSettings.AccountId;
+
             LegalEntity legalEntity = GetLegalEntityTree(userSettings.AccountId);
+
+            // get the current user's applications and licences
+            var licences = _dynamicsClient.GetLicensesByLicencee(_cache, currentAccountId);
+            var applications = _dynamicsClient.GetApplicationsForLicenceByApplicant(currentAccountId);
 
             SecurityScreeningSummary result = new SecurityScreeningSummary();
 
+            // determine how many of each licence there are.
+            int cannabisLicenceCount = licences.Count(x => x.AdoxioLicenceType.AdoxioName.ToUpper().Contains("CANNABIS"));
+            int liquorLicenceCount = licences.Count() - cannabisLicenceCount;
 
+            // determine how many applications of each type there are.
+            int cannabisApplicationCount = applications.Count(x => x.AdoxioApplicationTypeId.AdoxioName.ToUpper().Contains("CANNABIS"));
+            int liquorApplicationCount = applications.Count() - cannabisApplicationCount;
 
+            if (cannabisLicenceCount > 0 || cannabisApplicationCount > 0)
+            {
+                result.Cannabis = GetCannabisScreeningData(legalEntity);
+            }
+
+            if (liquorLicenceCount > 0 || liquorApplicationCount > 0)
+            {
+                result.Liquor = GetLiquorScreeningData(legalEntity);
+            }
+     
             return new JsonResult(result);
 
         }
