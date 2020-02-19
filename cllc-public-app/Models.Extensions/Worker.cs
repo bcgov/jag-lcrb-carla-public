@@ -68,7 +68,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.ConsentToSecurityScreening = worker.AdoxioConsenttosecurityscreening;
                 result.CertifyInformationIsCorrect = worker.AdoxioCertifyinformationiscorrect;
                 result.ElectronicSignature = worker.AdoxioElectronicsignature;
-                result.ConsentValidated = (ViewModels.ConsentValidatedValue?)worker.AdoxioConsentvalidated;
             }
             return result;
         }
@@ -127,17 +126,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 to.AdoxioTriggerphs = from.triggerphs == true ? 1 : 0;
             }
-            if (from.paymentReceived != null)
-            {
-                to.AdoxioPaymentreceived = from.paymentReceived == true ? 1 : 0;
-            }
-            to.AdoxioPaymentreceiveddate = from.paymentRecievedDate;
+            
             to.AdoxioWorkerid = from.workerId;
             to.AdoxioCurrentaddressdatefrom = from.fromdate;
             to.AdoxioConsenttosecurityscreening = from.ConsentToSecurityScreening;
             to.AdoxioCertifyinformationiscorrect = from.CertifyInformationIsCorrect;
             to.AdoxioElectronicsignature = from.ElectronicSignature;
-            to.AdoxioConsentvalidated = (int?)from.ConsentValidated;
         }
     }
 }
