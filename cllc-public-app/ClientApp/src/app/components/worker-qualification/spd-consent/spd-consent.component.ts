@@ -76,12 +76,7 @@ export class SpdConsentComponent implements OnInit {
         this.currentUser = data;
       });
 
-    this.busy = this.workerDataService.getWorker(this.workerId).subscribe(res => {
-      if (res.consentValidated) {
-        res.consentValidated = true;
-      } else {
-        res.consentValidated = false;
-      }
+    this.busy = this.workerDataService.getWorker(this.workerId).subscribe(res => {     
       this.form.patchValue(res);
       this.contact = res.contact;
       this.workerStatus = res.status;
@@ -95,14 +90,10 @@ export class SpdConsentComponent implements OnInit {
     if (!this.noWetSignature && !this.isFileUploadValid()) {
       valid = false;
     }
-    if (!this.noWetSignature && !this.isDeclarationValid()) {
+    if (!this.isDeclarationValid()) {
       valid = false;
     }
     if (!this.isCriminalBackgroundValid()) {
-      valid = false;
-    }
-
-    if(this.noWetSignature && !this.isConcentValidatedValid()){
       valid = false;
     }
 
@@ -149,9 +140,6 @@ export class SpdConsentComponent implements OnInit {
     const subResult = new Subject<boolean>();
     const worker = this.form.value;
     worker.selfdisclosure = worker.contact.selfDisclosure;
-    if (worker.consentValidated) {
-      worker.consentValidated = 'Yes';
-    }
 
     const busy = forkJoin(
       this.contactDataService.updateContact(this.form.value.contact),
