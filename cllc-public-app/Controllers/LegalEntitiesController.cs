@@ -125,6 +125,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(legalEntity);
         }
 
+        [HttpGet("current-security-summary")]
+        public JsonResult GetCurrentSecuritySummary()
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // check that the session is setup correctly.
+            userSettings.Validate();
+
+            LegalEntity legalEntity = GetLegalEntityTree(userSettings.AccountId);
+
+            SecurityScreeningSummary result = new SecurityScreeningSummary();
+
+
+
+            return new JsonResult(result);
+
+        }
+
+
         [HttpGet("legal-entity-change-logs/application/{applicationId}")]
         public ActionResult GetChangeLogsForApplication(string applicationId)
         {
