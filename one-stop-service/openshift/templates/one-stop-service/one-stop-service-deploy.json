@@ -73,28 +73,77 @@
                     "value": "${SMTP_HOST}"
                   },
                   {
-                    "name": "SSG_USERNAME",
-                    "value": "${SSG_USERNAME}"
+                    "name": "ADFS_OAUTH2_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "ADFS_OAUTH2_URI",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+				  {
+                    "name": "DYNAMICS_APP_GROUP_CLIENT_ID",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "DYNAMICS_APP_GROUP_CLIENT_ID",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
                   },
                   {
-                    "name": "SSG_PASSWORD",
-                    "value": "${SSG_PASSWORD}"
-                  },                 
+                    "name": "DYNAMICS_APP_GROUP_RESOURCE",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "DYNAMICS_APP_GROUP_RESOURCE",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_APP_GROUP_SECRET",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "DYNAMICS_APP_GROUP_SECRET",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_NATIVE_ODATA_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "DYNAMICS_NATIVE_ODATA_URI",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
                   {
                     "name": "DYNAMICS_ODATA_URI",
-                    "value": "${DYNAMICS_ODATA_URI}"
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "DYNAMICS_ODATA_URI",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
                   },
-				  {
-                    "name": "DYNAMICS_CLIENT_KEY",
-                    "value": "${DYNAMICS_CLIENT_KEY}"
+                  
+                  {
+                    "name": "DYNAMICS_PASSWORD",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "DYNAMICS_PASSWORD",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
                   },
-				  {
-                    "name": "DYNAMICS_AAD_TENANT_ID",
-                    "value": "${DYNAMICS_AAD_TENANT_ID}"
-                  },
-				  {
-                    "name": "DYNAMICS_CLIENT_ID",
-                    "value": "${DYNAMICS_CLIENT_ID}"
+                  {
+                    "name": "DYNAMICS_USERNAME",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "DYNAMICS_USERNAME",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
                   },
 				  {
                     "name": "JWT_VALID_ISSUER",
@@ -108,10 +157,11 @@
                     "name": "JWT_TOKEN_KEY",
                     "value": "${JWT_TOKEN_KEY}"
                   },
-				  {
-                    "name": "SPD_EXPORT_EMAIL",
-                    "value": "${SPD_EXPORT_EMAIL}"
-                  }				                    
+                  {
+                    "name": "ENABLE_HANGFIRE_JOBS",
+                    "value": ""
+                  }
+				  			                    
                 ],
                 "resources": {
                   "limits": {
@@ -227,7 +277,7 @@
       "displayName": "Image Namespace",
       "description": "The namespace of the OpenShift project containing the imagestream for the application.",
       "required": true,
-      "value": "lclb-cllc-tools"
+      "value": "yuumcs-tools"
     },
     {
       "name": "TAG_NAME",
@@ -279,82 +329,27 @@
       "required": true,
       "value": "apps.smtp.gov.bc.ca"
     },    
-    {
-      "description": "Username for SSG, e.g., clb_uat, if left blank a value will be defaulted.",
-      "displayName": "SSG Username",
-      "name": "SSG_USERNAME",
-      "required": true,
-      "value": "clb_uat"
-    },
-    {
-      "description": "Password for SSG.",
-      "displayName": "SSG Password",
-      "name": "SSG_PASSWORD",
-      "required": true,
-	  "value": " "
-    },
-    {
-      "description": "URI for Dynamics OData, e.g., https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.2/, if left blank a value will be defaulted.",
-      "displayName": "Dynamics OData URI",
-      "name": "DYNAMICS_ODATA_URI",
-      "required": true,
-      "value": "https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.2/"
-    },
-	{
-		"description": "ADFS Dynamics Client Key (Property of an application user)",
-		"displayName": "DYNAMICS CLIENT KEY",
-		"name": "DYNAMICS_CLIENT_KEY",
-		"required": true,
-		"value": ""
-	},
-	{
-		"description": "ADFS Dynamics Tenant ID",
-		"displayName": "DYNAMICS AAD TENANT ID",
-		"name": "DYNAMICS_AAD_TENANT_ID",
-		"required": true,
-        "value": ""
-	},
-	{
-		"description": "ADFS Dynamics Client ID",
-		"displayName": "DYNAMICS CLIENT ID",
-		"name": "DYNAMICS_CLIENT_ID",
-		"required": true,
-        "value": ""
-    },
+    
     {
 		"description": "String used to identify the issuer.  Usually a URL to a website.",
 		"displayName": "JWT VALID ISSUER",
         "name": "JWT_VALID_ISSUER",
 		"required": true,
-        "value": ""
+        "value": "CHANGEME"
     },
     {
 		"description": "String used to identify the audience.",
 		"displayName": "JWT VALID AUDIENCE",
         "name": "JWT_VALID_AUDIENCE",
 		"required": true,
-        "value": ""
+        "value": "CHANGEME"
     },
     {
 		"description": "Secret/Key used to generate tokens.  Can be any text string, including the text form of a GUID.",
 		"displayName": "JWT Token Key",
 		"name": "JWT_TOKEN_KEY",
 		"required": true,
-		"value": ""
-    },
-	{
-		"description": "Email address where exports will be sent to.",
-		"displayName": "SPD EXPORT EMAIL",
-        "name": "SPD_EXPORT_EMAIL",
-		"required": true,
-        "value": "${SPD_EXPORT_EMAIL}"
-	},		
-	{
-      "description": "Route Host",
-      "displayName": "Route Host",
-      "name": "ROUTE_HOST",
-      "required": true,
-      "value": "lcrb-spd-sync-test.pathfinder.bcgov"
-    }	
+		"value": "CHANGEME"
+    }
   ]
 }
