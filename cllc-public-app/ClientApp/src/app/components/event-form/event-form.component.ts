@@ -18,11 +18,12 @@ const DEFAULT_END_TIME = {
   hour: 2,
   minute: 0
 };
+const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 @Component({
   selector: 'app-event-form',
   templateUrl: './event-form.component.html',
-  styleUrls: ['./event-form.component.scss']
+  styleUrls: ['./event-form.component.scss'],
 })
 export class EventFormComponent extends FormBase implements OnInit {
   isEditMode = false;
@@ -119,9 +120,38 @@ export class EventFormComponent extends FormBase implements OnInit {
   }
 
   setFormToLicenceEvent(licenceEvent: LicenceEvent) {
+    const schedules = licenceEvent['schedules'];
+    delete licenceEvent['schedules'];
     this.eventForm.setValue({
       ...licenceEvent,
       agreement: false
+    });
+
+    if (schedules.length > 0) {
+      this.setTimeFormsToLicenceEventSchedule(schedules);
+    }
+  }
+
+  setTimeFormsToLicenceEventSchedule(schedules: []) {
+    schedules.forEach(sched => {
+      const startDate = (new Date(sched['eventStartDateTime']));
+      const endDate = (new Date(sched['eventEndDateTime']));
+      const liquorStart = (new Date(sched['serviceStartDateTime']));
+      const liquorEnd = (new Date(sched['serviceEndDateTime']));
+
+      const isDefault = ((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) > 1;
+      if (!isDefault) {
+        this.scheduleIsInconsistent = true;
+      }
+
+      this.timeForms.push(this.fb.group({
+        dateTitle: [isDefault ? null : DAYS[startDate.getDay()] + ', ' + startDate.toLocaleDateString('en-US'), []],
+        date: [isDefault ? null : startDate, []],
+        startTime: [{hour: startDate.getHours(), minute: startDate.getMinutes()}, [Validators.required]],
+        endTime: [{hour: endDate.getHours(), minute: endDate.getMinutes()}, [Validators.required]],
+        liquorStartTime: [{hour: liquorStart.getHours(), minute: liquorStart.getMinutes()}, [Validators.required]],
+        liquorEndTime: [{hour: liquorEnd.getHours(), minute: liquorEnd.getMinutes()}, [Validators.required]]
+      }));
     });
   }
 
@@ -129,20 +159,69 @@ export class EventFormComponent extends FormBase implements OnInit {
     if (submit) {
       this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'In Review').value);
     }
-    // this.packageUpTimeForms();
+
+    const schedules = this.packageUpTimeForms();
     if (this.isEditMode) {
-      this.updateLicence();
+      this.updateLicence(schedules);
     } else {
-      this.createLicence();
+      this.createLicence(schedules);
     }
   }
 
-  // packageUpTimeForms() {
-  //   for(var i; i < this.timeForms.length; i++) {
-  //   this.timeForms.forEach((form) => {
+  /* Packages up time forms and combines with dates for submission to API */
+  packageUpTimeForms() {
+    let dateArray = new Array();
 
-  //   });
-  // }
+    for (var i = 0; i < this.timeForms.controls.length; i++) {
+      if (this.timeForms.controls[i].invalid) {
+        return new Array();
+      }
+      let eventBegin, eventEnd, serviceBegin, serviceEnd;
+
+      if (this.timeForms.controls[i]['controls']['dateTitle'].value === null) {
+        const beginDate = this.eventForm.controls['startDate'].value;
+        const endDate = this.eventForm.controls['endDate'].value;
+
+        eventBegin = new Date(beginDate);
+        eventEnd = new Date(endDate);
+        serviceBegin = new Date(beginDate);
+        serviceEnd = new Date(endDate);
+      } else {
+        const date = this.timeForms.controls[i]['controls']['date'].value;
+
+        eventBegin = new Date(date);
+        eventEnd = new Date(date);
+        serviceBegin = new Date(date);
+        serviceEnd = new Date(date);
+      }
+
+      eventBegin.setHours(this.timeForms.controls[i]['controls']['startTime'].value['hour']);
+      eventBegin.setMinutes(this.timeForms.controls[i]['controls']['startTime'].value['minute']);
+      eventEnd.setHours(this.timeForms.controls[i]['controls']['endTime'].value['hour']);
+      eventEnd.setMinutes(this.timeForms.controls[i]['controls']['endTime'].value['minute']);
+      serviceBegin.setHours(this.timeForms.controls[i]['controls']['liquorStartTime'].value['hour']);
+      serviceBegin.setMinutes(this.timeForms.controls[i]['controls']['liquorStartTime'].value['minute']);
+      serviceEnd.setHours(this.timeForms.controls[i]['controls']['liquorEndTime'].value['hour']);
+      serviceEnd.setMinutes(this.timeForms.controls[i]['controls']['liquorEndTime'].value['minute']);
+
+      if ((eventEnd.getTime() - eventBegin.getTime()) < 0) {
+        eventEnd.setDate(eventEnd.getDate() + 1);
+      }
+
+      if ((serviceEnd.getTime() - serviceBegin.getTime()) < 0) {
+        serviceEnd.setDate(serviceEnd.getDate() + 1);
+      }
+
+      dateArray.push({
+        'eventStartDateTime': eventBegin,
+        'eventEndDateTime': eventEnd,
+        'serviceStartDateTime': serviceBegin,
+        'serviceEndDateTime': serviceEnd
+      });
+    }
+
+    return dateArray;
+  }
 
   clearRelatedFormFieldIfNotOther(options: any, fieldName: string, relatedField: string) {
     const option = this.getOptionFromValue(options, this.eventForm.controls[fieldName].value);
@@ -151,16 +230,16 @@ export class EventFormComponent extends FormBase implements OnInit {
     }
   }
 
-  updateLicence() {
-    this.busy = this.licenceEvents.updateLicenceEvent(this.eventForm.get('id').value, this.eventForm.value)
+  updateLicence(schedules) {
+    this.busy = this.licenceEvents.updateLicenceEvent(this.eventForm.get('id').value, {...this.eventForm.value, schedules})
     .subscribe((licenceEvent) => {
       this.router.navigate(['/licences']);
     });
   }
 
-  createLicence() {
+  createLicence(schedules) {
     this.eventForm.removeControl('id');
-    this.busy = this.licenceEvents.createLicenceEvent(this.eventForm.value)
+    this.busy = this.licenceEvents.createLicenceEvent({...this.eventForm.value, schedules: schedules})
     .subscribe((licenceEvent) => {
       this.router.navigate(['/licences']);
     });
@@ -207,6 +286,7 @@ export class EventFormComponent extends FormBase implements OnInit {
   }
 
   startDateChanged() {
+    console.log(this.eventForm.controls['startDate'].value);
     this.updateEndDateMinimum();
     this.refreshTimeDays();
   }
@@ -217,7 +297,8 @@ export class EventFormComponent extends FormBase implements OnInit {
   resetDateFormsToDefault() {
     this.timeForms = this.fb.array([]);
     this.timeForms.push(this.fb.group({
-      dateTitle: ['Default Times', []],
+      dateTitle: [null, []],
+      date: [null, []],
       startTime: [DEFAULT_START_TIME, [Validators.required]],
       endTime: [DEFAULT_END_TIME, [Validators.required]],
       liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
@@ -227,10 +308,9 @@ export class EventFormComponent extends FormBase implements OnInit {
 
   resetDateFormsToArray(datesArray) {
     this.timeForms = this.fb.array([]);
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     datesArray.forEach(element => {
       this.timeForms.push(this.fb.group({
-        dateTitle: [days[element.getDay()] + ', ' + element.toLocaleDateString('en-US'), []],
+        dateTitle: [DAYS[element.getDay()] + ', ' + element.toLocaleDateString('en-US'), []],
         date: [element, []],
         startTime: [DEFAULT_START_TIME, [Validators.required]],
         endTime: [DEFAULT_END_TIME, [Validators.required]],
