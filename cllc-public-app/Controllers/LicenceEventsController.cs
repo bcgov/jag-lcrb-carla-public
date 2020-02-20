@@ -202,6 +202,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(ex, "Failed to delete event");
                 return new NotFoundResult();
             }
+            if (dynamicsEvent == null || !CurrentUserHasAccessToEventOwnedBy(dynamicsEvent.AdoxioAccount.Accountid))
+            {
+                return new NotFoundResult();
+            }
 
             /* Get current event schedules and delete */
             LicenceEvent viewModelEvent = dynamicsEvent.ToViewModel(_dynamicsClient);
@@ -213,10 +217,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            if (dynamicsEvent == null || !CurrentUserHasAccessToEventOwnedBy(dynamicsEvent.AdoxioAccount.Accountid))
-            {
-                return new NotFoundResult();
-            }
+            
 
             _dynamicsClient.Events.Delete(id);
 
