@@ -1,5 +1,8 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Gov.Lclb.Cllb.Public.Utils;
+using System.Collections.Generic;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -51,12 +54,13 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.City = item.AdoxioCity;
                 result.Province = item.AdoxioProvince;
                 result.PostalCode = item.AdoxioPostalcode;
+                result.Schedules = new List<LicenceEventSchedule>();
             }
 
-            IEnumerable<HEREGOESNEW> eventSchedules = dynamicsClient.GetEventScheduleForEvent(result.Id);
-            foreach (var schedule in eventSchedules)
+            MicrosoftDynamicsCRMadoxioEventscheduleCollection eventSchedules = dynamicsClient.GetEventSchedulesByEventId(result.Id);
+            foreach (var schedule in eventSchedules.Value)
             {
-                result.Schedules.append(schedule.ToViewModel());
+                result.Schedules.Add(schedule.ToViewModel());
             }
 
             return result;

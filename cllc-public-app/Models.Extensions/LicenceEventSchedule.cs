@@ -1,5 +1,6 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Gov.Lclb.Cllb.Public.Utils;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -11,7 +12,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         // Converts a dynamics entity into a view model
         public static ViewModels.LicenceEventSchedule ToViewModel(this MicrosoftDynamicsCRMadoxioEventschedule item)
         {
-            ViewModels.LicenceEvent result = null;
+            ViewModels.LicenceEventSchedule result = null;
             if (item != null)
             {
                 result = new ViewModels.LicenceEventSchedule();
@@ -19,11 +20,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.Id = item.AdoxioEventscheduleid;
                 }
-                result.EventId = schedule.AdoxioEventid,
-                result.EventStartDateTime = schedule.AdoxioEventstartdatetime,
-                result.EventEndDateTime = schedule.AdoxioEventenddatetime,
-                result.ServiceStartDateTime = schedule.AdoxioServicestartdatetime,
-                result.ServiceStartDateTime = schedule.AdoxioServicestartdatetime
+                result.EventId = item._adoxioEventidValue;
+                result.EventStartDateTime = item.AdoxioEventstartdatetime;
+                result.EventEndDateTime = item.AdoxioEventenddatetime;
+                result.ServiceStartDateTime = item.AdoxioServicestartdatetime;
+                result.ServiceEndDateTime = item.AdoxioServiceenddatetime;
             }
             return result;
         }
@@ -33,7 +34,6 @@ namespace Gov.Lclb.Cllb.Public.Models
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioEventschedule to, ViewModels.LicenceEventSchedule from)
         {
             to.AdoxioEventscheduleid = from.Id;
-            to.AdoxioEventid = from.EventId;
             to.AdoxioEventstartdatetime = from.EventStartDateTime;
             to.AdoxioEventenddatetime = from.EventEndDateTime;
             to.AdoxioServicestartdatetime = from.ServiceStartDateTime;

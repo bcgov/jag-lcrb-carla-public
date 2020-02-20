@@ -123,58 +123,5 @@ namespace Gov.Lclb.Cllb.Public.Test
             await LogoutAndCleanupTestUser(strId);
 
         }
-
-        [Fact]
-        public async System.Threading.Tasks.Task TestList()
-        {
-            string firstName = "firstName";
-            string secondName = "secondName";
-
-            var loginUser = randomNewUserName("NewLoginUser", 6);
-            var strId = await LoginAndRegisterAsNewUser(loginUser);
-
-            // C - Create first
-            var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
-
-            ViewModels.LicenceEvent viewmodel_adoxio_event = new ViewModels.LicenceEvent()
-            {
-                Name = firstName
-            };
-
-            string jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_event);
-
-            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-            var response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-
-            // Create second
-            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
-
-            ViewModels.LicenceEvent viewmodel_adoxio_event2 = new ViewModels.LicenceEvent()
-            {
-                Name = secondName
-            };
-
-            jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_event2);
-
-            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-            var response2 = await _client.SendAsync(request);
-            response2.EnsureSuccessStatusCode();
-
-            // List
-
-            var listRequest = new HttpRequestMessage(HttpMethod.Get, "/api/" + service);
-            var listResponse = await _client.SendAsync(listRequest);
-            listResponse.EnsureSuccessStatusCode();
-
-            jsonString = await response.Content.ReadAsStringAsync();
-
-            response.EnsureSuccessStatusCode();
-
-            await LogoutAndCleanupTestUser(strId);
-
-        }
     }
 }

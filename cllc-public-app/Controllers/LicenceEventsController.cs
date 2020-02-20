@@ -12,6 +12,7 @@ using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.Rest;
+using Gov.Lclb.Cllb.Public.ViewModels;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -62,16 +63,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
 
-            LicenceEvent viewModelEvent = dynamicsEvent.ToViewModel();
+            LicenceEvent viewModelEvent = dynamicsEvent.ToViewModel(_dynamicsClient);
 
             if (item.Schedules != null && item.Schedules.Count > 0) {
+                viewModelEvent.Schedules = new List<LicenceEventSchedule>();
                 foreach (LicenceEventSchedule eventSchedule in item.Schedules)
                 {
                     MicrosoftDynamicsCRMadoxioEventschedule dynamicsSchedule = new MicrosoftDynamicsCRMadoxioEventschedule();
                     dynamicsSchedule.CopyValues(eventSchedule);
-                    dynamicsSchedule.AdoxioEventid = dynamicsEvent.AdoxioEventid;
-                    (??) newEventSchedule = _dynamicsClent.EventSchedules.Create(dynamicsSchedule);
-                    viewModelEvent.append(newEventSchedule.ToViewModel());
+                    dynamicsSchedule.EventODataBind = _dynamicsClient.GetEntityURI("adoxio_events", dynamicsEvent.AdoxioEventid);
+                    MicrosoftDynamicsCRMadoxioEventschedule newEventSchedule = _dynamicsClient.Eventschedules.Create(dynamicsSchedule);
+                    viewModelEvent.Schedules.Add(newEventSchedule.ToViewModel());
                 }
             }
 
@@ -91,10 +93,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             
             MicrosoftDynamicsCRMadoxioEvent dynamicsEvent;
+            MicrosoftDynamicsCRMadoxioEventscheduleCollection dynamicsEventScheduleCollection;
             try
             {
                 dynamicsEvent = _dynamicsClient.GetEventByIdWithChildren(id);
-                dynamicsEventSchedule = _dynamicsClient.GetEventSchedulesByEventId(id);
+                // dynamicsEventScheduleCollection = _dynamicsClient.GetEventSchedulesByEventId(id);
             }
             catch (HttpOperationException ex)
             {
@@ -107,11 +110,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            result = dynamicsEvent.ToViewModel();
-            foreach (MicrosoftDynamicsCRMAdoxioEventschedule schedule in dynamicsEventSchedule)
-            {
-                result.Schedules = schedule.ToViewModel();
-            }
+            LicenceEvent result = dynamicsEvent.ToViewModel(_dynamicsClient);
 
             return new JsonResult(result);
         }
@@ -150,9 +149,33 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             dynamicsEvent = _dynamicsClient.GetEventByIdWithChildren(id);
+
+            /* Get current event schedules and delete */
+            LicenceEvent viewModelEvent = dynamicsEvent.ToViewModel(_dynamicsClient);
+            
+            if (viewModelEvent.Schedules != null && viewModelEvent.Schedules.Count > 0) {
+                foreach (LicenceEventSchedule eventSchedule in viewModelEvent.Schedules)
+                {
+                    _dynamicsClient.Eventschedules.Delete(eventSchedule.Id);
+                }
+            }
+
+            /* Create new event schedules */
+            if (item.Schedules != null && item.Schedules.Count > 0) {
+                viewModelEvent.Schedules = new List<LicenceEventSchedule>();
+                foreach (LicenceEventSchedule eventSchedule in item.Schedules)
+                {
+                    MicrosoftDynamicsCRMadoxioEventschedule dynamicsSchedule = new MicrosoftDynamicsCRMadoxioEventschedule();
+                    dynamicsSchedule.CopyValues(eventSchedule);
+                    dynamicsSchedule.EventODataBind = _dynamicsClient.GetEntityURI("adoxio_events", dynamicsEvent.AdoxioEventid);
+                    MicrosoftDynamicsCRMadoxioEventschedule newEventSchedule = _dynamicsClient.Eventschedules.Create(dynamicsSchedule);
+                    viewModelEvent.Schedules.Add(newEventSchedule.ToViewModel());
+                }
+            }
+
             if (dynamicsEvent != null)
             {
-                return new JsonResult(dynamicsEvent.ToViewModel());
+                return new JsonResult(dynamicsEvent.ToViewModel(_dynamicsClient));
             }
             return new NotFoundResult();
         }
@@ -180,13 +203,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
+            /* Get current event schedules and delete */
+            LicenceEvent viewModelEvent = dynamicsEvent.ToViewModel(_dynamicsClient);
+            
+            if (viewModelEvent.Schedules != null && viewModelEvent.Schedules.Count > 0) {
+                foreach (LicenceEventSchedule eventSchedule in viewModelEvent.Schedules)
+                {
+                    _dynamicsClient.Eventschedules.Delete(eventSchedule.Id);
+                }
+            }
+
             if (dynamicsEvent == null || !CurrentUserHasAccessToEventOwnedBy(dynamicsEvent.AdoxioAccount.Accountid))
             {
                 return new NotFoundResult();
             }
 
             _dynamicsClient.Events.Delete(id);
-            
 
             return NoContent();
         }
@@ -219,7 +251,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 foreach (MicrosoftDynamicsCRMadoxioEvent evt in dynamicsEvents.Value)
                 {
-                    responseEvents.Add(evt.ToViewModel());
+                    responseEvents.Add(evt.ToViewModel(_dynamicsClient));
                 }
             }
 
