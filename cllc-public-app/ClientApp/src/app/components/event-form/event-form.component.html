@@ -205,7 +205,7 @@
           </div>
           <div class="row">
             <div class="col-md-2 time-picker-title">
-              <h4>{{form.get('dateTitle').value}}</h4>
+              <h4>{{form.get('dateTitle').value === null ? 'Default Times' : form.get('dateTitle').value}}</h4>
             </div>
             <div class="col-md-2">
               <ngb-timepicker [meridian]="true" formControlName="startTime"></ngb-timepicker>
@@ -224,7 +224,7 @@
       </div>
       <div class="row">
         <app-field class="col-xs-12">
-          <mat-checkbox (change)="toggleScheduleConsistency()" [disabled]="eventForm.controls['startDate'].invalid || eventForm.controls['endDate'].invalid ">The event and liquor service times are different on specific dates.</mat-checkbox>
+          <mat-checkbox [checked]="scheduleIsInconsistent" (change)="toggleScheduleConsistency()" [disabled]="eventForm.controls['startDate'].invalid || eventForm.controls['endDate'].invalid ">The event and liquor service times are different on specific dates.</mat-checkbox>
         </app-field>
       </div>
     </div>
