@@ -7,7 +7,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 {
     public class SecurityScreeningCategorySummary
     {
-        public SecurityScreeningStatusItem[] OutstandingItems { get; set; }
-        public SecurityScreeningStatusItem[] CompletedItems { get; set; }
+        public List<SecurityScreeningStatusItem> OutstandingItems { get; set; }
+        public List<SecurityScreeningStatusItem> CompletedItems { get; set; }
     }
 }
