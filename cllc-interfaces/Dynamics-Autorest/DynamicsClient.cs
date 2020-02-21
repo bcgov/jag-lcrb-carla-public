@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top187 { get; set; }
+        public int? Top201 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip107 { get; set; }
+        public int? Skip120 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count187 { get; set; }
+        public bool? Count201 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter187 { get; set; }
+        public string Filter201 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search107 { get; set; }
+        public string Search120 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -416,6 +416,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEventduplicatematchingrecord Eventduplicatematchingrecord { get; private set; }
 
         /// <summary>
+        /// Gets the IEventschedules.
+        /// </summary>
+        public virtual IEventschedules Eventschedules { get; private set; }
+
+        /// <summary>
         /// Gets the IEventsyncerrors.
         /// </summary>
         public virtual IEventsyncerrors Eventsyncerrors { get; private set; }
@@ -429,6 +434,36 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicence.
         /// </summary>
         public virtual ILicence Licence { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventid.
+        /// </summary>
+        public virtual IEventid Eventid { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventscheduleasyncoperations.
+        /// </summary>
+        public virtual IEventscheduleasyncoperations Eventscheduleasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventschedulebulkdeletefailures.
+        /// </summary>
+        public virtual IEventschedulebulkdeletefailures Eventschedulebulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventscheduleduplicatebaserecord.
+        /// </summary>
+        public virtual IEventscheduleduplicatebaserecord Eventscheduleduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventscheduleduplicatematchingrecord.
+        /// </summary>
+        public virtual IEventscheduleduplicatematchingrecord Eventscheduleduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventschedulesyncerrors.
+        /// </summary>
+        public virtual IEventschedulesyncerrors Eventschedulesyncerrors { get; private set; }
 
         /// <summary>
         /// Gets the IExhibits.
@@ -726,6 +761,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRegardingobjectidadoxioevent Regardingobjectidadoxioevent { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioeventschedule.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioeventschedule Regardingobjectidadoxioeventschedule { get; private set; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioexhibit.
         /// </summary>
         public virtual IRegardingobjectidadoxioexhibit Regardingobjectidadoxioexhibit { get; private set; }
@@ -739,6 +779,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBusinessunitadoxioevent.
         /// </summary>
         public virtual IBusinessunitadoxioevent Businessunitadoxioevent { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioeventschedule.
+        /// </summary>
+        public virtual IBusinessunitadoxioeventschedule Businessunitadoxioeventschedule { get; private set; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxioexhibit.
@@ -766,6 +811,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IBaserecordidadoxioevent Baserecordidadoxioevent { get; private set; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxioeventschedule.
+        /// </summary>
+        public virtual IBaserecordidadoxioeventschedule Baserecordidadoxioeventschedule { get; private set; }
+
+        /// <summary>
         /// Gets the IBaserecordidadoxioexhibit.
         /// </summary>
         public virtual IBaserecordidadoxioexhibit Baserecordidadoxioexhibit { get; private set; }
@@ -779,6 +829,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IDuplicaterecordidadoxioevent.
         /// </summary>
         public virtual IDuplicaterecordidadoxioevent Duplicaterecordidadoxioevent { get; private set; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioeventschedule.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxioeventschedule Duplicaterecordidadoxioeventschedule { get; private set; }
 
         /// <summary>
         /// Gets the IDuplicaterecordidadoxioexhibit.
@@ -1016,6 +1071,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILkadoxioeventmodifiedonbehalfby Lkadoxioeventmodifiedonbehalfby { get; private set; }
 
         /// <summary>
+        /// Gets the ILkadoxioeventschedulecreatedby.
+        /// </summary>
+        public virtual ILkadoxioeventschedulecreatedby Lkadoxioeventschedulecreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioeventschedulecreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioeventschedulecreatedonbehalfby Lkadoxioeventschedulecreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioeventschedulemodifiedby.
+        /// </summary>
+        public virtual ILkadoxioeventschedulemodifiedby Lkadoxioeventschedulemodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioeventschedulemodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioeventschedulemodifiedonbehalfby Lkadoxioeventschedulemodifiedonbehalfby { get; private set; }
+
+        /// <summary>
         /// Gets the ILkadoxioexhibitcreatedby.
         /// </summary>
         public virtual ILkadoxioexhibitcreatedby Lkadoxioexhibitcreatedby { get; private set; }
@@ -1061,6 +1136,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IUseradoxioevent Useradoxioevent { get; private set; }
 
         /// <summary>
+        /// Gets the IUseradoxioeventschedule.
+        /// </summary>
+        public virtual IUseradoxioeventschedule Useradoxioeventschedule { get; private set; }
+
+        /// <summary>
         /// Gets the IUseradoxioexhibit.
         /// </summary>
         public virtual IUseradoxioexhibit Useradoxioexhibit { get; private set; }
@@ -1084,6 +1164,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITeamadoxioevent.
         /// </summary>
         public virtual ITeamadoxioevent Teamadoxioevent { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioeventschedule.
+        /// </summary>
+        public virtual ITeamadoxioeventschedule Teamadoxioeventschedule { get; private set; }
 
         /// <summary>
         /// Gets the ITeamadoxioexhibit.
@@ -1456,9 +1541,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             Eventbulkdeletefailures = new Eventbulkdeletefailures(this);
             Eventduplicatebaserecord = new Eventduplicatebaserecord(this);
             Eventduplicatematchingrecord = new Eventduplicatematchingrecord(this);
+            Eventschedules = new Eventschedules(this);
             Eventsyncerrors = new Eventsyncerrors(this);
             Inspector = new Inspector(this);
             Licence = new Licence(this);
+            Eventid = new Eventid(this);
+            Eventscheduleasyncoperations = new Eventscheduleasyncoperations(this);
+            Eventschedulebulkdeletefailures = new Eventschedulebulkdeletefailures(this);
+            Eventscheduleduplicatebaserecord = new Eventscheduleduplicatebaserecord(this);
+            Eventscheduleduplicatematchingrecord = new Eventscheduleduplicatematchingrecord(this);
+            Eventschedulesyncerrors = new Eventschedulesyncerrors(this);
             Exhibits = new Exhibits(this);
             Exhibitasyncoperations = new Exhibitasyncoperations(this);
             Exhibitbulkdeletefailures = new Exhibitbulkdeletefailures(this);
@@ -1518,17 +1610,21 @@ namespace Gov.Lclb.Cllb.Interfaces
             Regardingobjectidadoxioapplicationstructurechangev1 = new Regardingobjectidadoxioapplicationstructurechangev1(this);
             Regardingobjectidadoxioapplicationtransferownershipv1 = new Regardingobjectidadoxioapplicationtransferownershipv1(this);
             Regardingobjectidadoxioevent = new Regardingobjectidadoxioevent(this);
+            Regardingobjectidadoxioeventschedule = new Regardingobjectidadoxioeventschedule(this);
             Regardingobjectidadoxioexhibit = new Regardingobjectidadoxioexhibit(this);
             Regardingobjectidadoxioformelementuploadfield = new Regardingobjectidadoxioformelementuploadfield(this);
             Businessunitadoxioevent = new Businessunitadoxioevent(this);
+            Businessunitadoxioeventschedule = new Businessunitadoxioeventschedule(this);
             Businessunitadoxioexhibit = new Businessunitadoxioexhibit(this);
             Businessunitadoxioformelementuploadfield = new Businessunitadoxioformelementuploadfield(this);
             Contacts = new Contacts(this);
             Contacttaskcontact = new Contacttaskcontact(this);
             Baserecordidadoxioevent = new Baserecordidadoxioevent(this);
+            Baserecordidadoxioeventschedule = new Baserecordidadoxioeventschedule(this);
             Baserecordidadoxioexhibit = new Baserecordidadoxioexhibit(this);
             Baserecordidadoxioformelementuploadfield = new Baserecordidadoxioformelementuploadfield(this);
             Duplicaterecordidadoxioevent = new Duplicaterecordidadoxioevent(this);
+            Duplicaterecordidadoxioeventschedule = new Duplicaterecordidadoxioeventschedule(this);
             Duplicaterecordidadoxioexhibit = new Duplicaterecordidadoxioexhibit(this);
             Duplicaterecordidadoxioformelementuploadfield = new Duplicaterecordidadoxioformelementuploadfield(this);
             Entitydefinitions = new Entitydefinitions(this);
@@ -1576,6 +1672,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lkadoxioeventcreatedonbehalfby = new Lkadoxioeventcreatedonbehalfby(this);
             Lkadoxioeventmodifiedby = new Lkadoxioeventmodifiedby(this);
             Lkadoxioeventmodifiedonbehalfby = new Lkadoxioeventmodifiedonbehalfby(this);
+            Lkadoxioeventschedulecreatedby = new Lkadoxioeventschedulecreatedby(this);
+            Lkadoxioeventschedulecreatedonbehalfby = new Lkadoxioeventschedulecreatedonbehalfby(this);
+            Lkadoxioeventschedulemodifiedby = new Lkadoxioeventschedulemodifiedby(this);
+            Lkadoxioeventschedulemodifiedonbehalfby = new Lkadoxioeventschedulemodifiedonbehalfby(this);
             Lkadoxioexhibitcreatedby = new Lkadoxioexhibitcreatedby(this);
             Lkadoxioexhibitcreatedonbehalfby = new Lkadoxioexhibitcreatedonbehalfby(this);
             Lkadoxioexhibitmodifiedby = new Lkadoxioexhibitmodifiedby(this);
@@ -1585,11 +1685,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lkadoxioformelementuploadfieldmodifiedby = new Lkadoxioformelementuploadfieldmodifiedby(this);
             Lkadoxioformelementuploadfieldmodifiedonbehalfby = new Lkadoxioformelementuploadfieldmodifiedonbehalfby(this);
             Useradoxioevent = new Useradoxioevent(this);
+            Useradoxioeventschedule = new Useradoxioeventschedule(this);
             Useradoxioexhibit = new Useradoxioexhibit(this);
             Useradoxioformelementuploadfield = new Useradoxioformelementuploadfield(this);
             Contacttask = new Contacttask(this);
             Legalentitytask = new Legalentitytask(this);
             Teamadoxioevent = new Teamadoxioevent(this);
+            Teamadoxioeventschedule = new Teamadoxioeventschedule(this);
             Teamadoxioexhibit = new Teamadoxioexhibit(this);
             Teamadoxioformelementuploadfield = new Teamadoxioformelementuploadfield(this);
             Asyncoperationidadoxioapplicationlicenseechangesv10 = new Asyncoperationidadoxioapplicationlicenseechangesv10(this);

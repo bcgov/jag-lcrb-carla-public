@@ -5,7 +5,7 @@
 @import '~@angular/material/theming';
 @import "~mygovbc-bootstrap-theme/dist/mygovbc-bootstrap-theme.min.css";
 @include mat-core();
-$primary: mat-palette($mat-grey, 400);
+$primary: mat-palette($mat-blue, 900);
 $accent: mat-palette($mat-indigo, 500, A200, A400);
 $warn: mat-palette($mat-red, 500);
 $theme: mat-light-theme($primary, $accent, $warn);
@@ -167,7 +167,7 @@ select.form-control:not([size]):not([multiple]) {
 .plain-header {
     
     color: #000000;
-    padding: 10px 7px 7px 15px;
+    padding: 5px 7px 7px 5px;
     font-weight: semi-bold;    
 }
 

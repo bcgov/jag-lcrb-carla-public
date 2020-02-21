@@ -1,13 +1,36 @@
 <div class="form-wrapper row" style="position:relative;">
-  <div [ngBusy]="[busy, busyPromise]"></div>
+  <div [ngBusy]="[busy]"></div>
   <section class="col-md-8">
-    <app-org-structure [node]="treeRoot" [account]="account"></app-org-structure>
+    <app-org-structure *ngIf="applicationId" [node]="treeRoot" [account]="account"></app-org-structure>
 
+    <section class="error mt-3" *ngIf="validationErrors?.length">
+      <p *ngFor="let message of validationErrors">
+        <span class="app-cancel">
+          <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+          {{message}}
+        </span>
+      </p>
+    </section>
+
+    <section class="mt-5" style="position: relative;">
+      <div [ngBusy]="[busyPromise]"></div>
+      <button class="btn btn-secondary" style="margin-right:10px;" (click)="saveForLater()">
+        <span>
+          <i class="fa fa-save"></i>
+          SAVE FOR LATER
+        </span>
+      </button>
+      <button *ngIf="true || LicenseeChangeLog.HasChanges(treeRoot)" class="btn btn-primary"
+         (click)="save()">
+        <i class="fa fa-save" style="color: #fff;"></i>
+        {{getSaveLabel()}}</button>
+    </section>
   </section>
+  
   <section class="col-md-4">
     <h1>&nbsp;</h1><br>
 
-    <section class="large-screen-only position-reletaive" *ngIf="treeRoot">
+    <!-- <section class="large-screen-only position-reletaive" *ngIf="treeRoot">
       <div [ngBusy]="[busy, busyPromise]"></div>
 
       <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0; padding-left:10px;">Organization Information
@@ -69,26 +92,16 @@
             </tfoot>
           </table>
           <p>&nbsp;</p>
-
-
         </div>
         <div style="text-align:center;" *ngIf="true || LicenseeChangeLog.HasChanges(treeRoot)">
           <button class="btn btn-primary" [disabled]="disableSaveLabel()" (click)="save()">{{getSaveLabel()}}</button>
         </div>
       </div>
+    </section> -->
 
 
-    </section>
-    <section class="error" *ngIf="validationErrors?.length">
-      <p *ngFor="let message of validationErrors">
-        <span class="app-cancel">
-          <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-          {{message}}
-        </span>
-      </p>
-    </section>
-
-    <section class="submit-container" style="background-color: #F2F2F2; color:#000; border: none; padding-left: 20px; padding-top: 5px;">
+    <section class="submit-container"
+      style="background-color: #F2F2F2; color:#000; border: none; padding-left: 20px; padding-top: 5px;">
       <h2 style="color: #000">Collection Notice:</h2>
       <div class="submit-content">
         <p style="padding: 20px; padding-top: 10px;">

@@ -212,7 +212,7 @@
       "displayName": "Image Namespace",
       "description": "The namespace of the OpenShift project containing the imagestream for the application.",
       "required": true,
-      "value": "lclb-cllc-tools"
+      "value": "yuumcs-tools"
     },
     {
       "name": "TAG_NAME",

@@ -116,8 +116,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
         private void SetupSharePoint(IServiceCollection services)
         {
-            string ssgUsername = _configuration["SSG_USERNAME"];
-            string ssgPassword = _configuration["SSG_PASSWORD"];
 
             // add SharePoint.
             
