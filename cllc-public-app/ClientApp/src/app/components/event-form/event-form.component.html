@@ -7,7 +7,9 @@
 
 
     <div class="padded-section">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>If you plan to sell or serve liquor purchased under your licence at a catered event, you must fill out the below fields to submit a request for a catering authorization. Caterers do not require a catering authorization for events events for a client and their invited guests held at a residence where the caterer sells liquor, such as a dinner party or wedding.</p>
+      <p>You may be asked to submit further details, including a Safety and Security Plan for your liquor inspector’s approval if your event is deemed to be high risk. For more information, please refer to the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/catering-handbook.pdf" target="_blank">Catering Terms and Conditions Handbook</a>.</p>
+      <p><b>Please note:</b> If your event will be attended by more than 500 people or if your event will be held at an outdoor venue, you must submit your event authorization request 21 days before the event. </p>
     </div>
 
     <div class="padded-section">
@@ -22,6 +24,8 @@
           errorMessage="Please enter the contact name" [isFullWidth]="true">
           <input class="form-control" type="text" formControlName="contactName">
         </app-field>
+        <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
+        matTooltip="The name of the contact person for the event." ></i>
       </div>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Phone" [required]="true"
@@ -53,7 +57,10 @@
           <select class="form-control" formControlName="eventType">
             <option *ngFor="let item of eventType" [ngValue]="item.value">{{item.label}}</option>
           </select>
+
         </app-field>
+        <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
+        matTooltip="Select the type of event that you are catering." ></i>
       </div>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Description" [required]="true"
@@ -61,6 +68,9 @@
           errorMessage="Please enter a description of the event" [isFullWidth]="true">
           <textarea class="form-control" formControlName="eventTypeDescription"></textarea>
         </app-field>
+        <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
+        matTooltip="Briefly describe the event." ></i>
+
       </div>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Client or Host Name" [required]="true"
@@ -128,6 +138,8 @@
           errorMessage="Please enter the name and a description of the venue" [isFullWidth]="true">
           <textarea class="form-control" formControlName="venueDescription"></textarea>
         </app-field>
+        <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
+        matTooltip="Provide the name of and briefly describe the venue." ></i>
       </div>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Location" [required]="true"
@@ -137,6 +149,8 @@
             <option *ngFor="let item of specificLocation" [ngValue]="item.value">{{item.label}}</option>
           </select>
         </app-field>
+        <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
+        matTooltip="Select whether the event is being held indoors, outdoors, or both." ></i>
       </div>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Additional Information"
@@ -146,7 +160,7 @@
         </app-field>
       </div>
 
-      <h3>Physical Address</h3>
+      <h3>Physical Address of Venue</h3>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Address 1" [required]="true"
           [valid]="eventForm.get('street1').valid || !eventForm.get('street1').touched"
