@@ -14,15 +14,28 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Eventid operations.
+    /// Eventsharepointdocumentlocations operations.
     /// </summary>
-    public partial interface IEventid
+    public partial interface IEventsharepointdocumentlocations
     {
         /// <summary>
-        /// Get adoxio_EventId from adoxio_eventschedules
+        /// Get adoxio_event_SharePointDocumentLocations from adoxio_events
         /// </summary>
-        /// <param name='adoxioEventscheduleid'>
-        /// key: adoxio_eventscheduleid of adoxio_eventschedule
+        /// <param name='adoxioEventid'>
+        /// key: adoxio_eventid of adoxio_event
+        /// </param>
+        /// <param name='top'>
+        /// </param>
+        /// <param name='skip'>
+        /// </param>
+        /// <param name='search'>
+        /// </param>
+        /// <param name='filter'>
+        /// </param>
+        /// <param name='count'>
+        /// </param>
+        /// <param name='orderby'>
+        /// Order items by property values
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -45,12 +58,15 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEvent>> GetWithHttpMessagesAsync(string adoxioEventscheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMsharepointdocumentlocationCollection>> GetWithHttpMessagesAsync(string adoxioEventid, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get adoxio_EventId from incidents
+        /// Get adoxio_event_SharePointDocumentLocations from adoxio_events
         /// </summary>
-        /// <param name='incidentid'>
-        /// key: incidentid of incident
+        /// <param name='adoxioEventid'>
+        /// key: adoxio_eventid of adoxio_event
+        /// </param>
+        /// <param name='sharepointdocumentlocationid'>
+        /// key: sharepointdocumentlocationid of sharepointdocumentlocation
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -73,6 +89,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEvent>> Get1WithHttpMessagesAsync(string incidentid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMsharepointdocumentlocation>> SharePointDocumentLocationsByKeyWithHttpMessagesAsync(string adoxioEventid, string sharepointdocumentlocationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
