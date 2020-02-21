@@ -234,15 +234,11 @@
             
               <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
                 Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis (e.g. a
-                green cross).
+                green cross).  It must not imply an association with another business (other than another non-medical cannabis
+                retail store).
               </p>
               <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-                Signage must not imply an association with another business (other than another non-medical cannabis
-                retail
-                store).
-              </p>
-              <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-                If submitting renderings, renderings may be either printed or hand-drawn (as long as they are legible)
+                <b>Note:</b> If submitting renderings, renderings may be either printed or hand-drawn (as long as they are legible)
               </p>
           
         </section>
@@ -287,24 +283,17 @@
         <section *ngIf="application?.applicationType?.validInterest === FormControlState.Show">
             <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
             <p>
-              If the applicant currently owns or leases the proposed store location, submit Option 1.
-            </p>
-          
+              If the applicant currently owns or leases the proposed store location, submit <b>Option 1</b>. If the applicant doesn't currently own or lease the proposed store location, submit <b>Option 2</b>.
+              </p>
+              <p>Leases or other arrangements must not expire for at least 12 months from the date the licence is issued. Option 1 will be required before the licence is issued.
+                </p>
               <p>
-                If the applicant doesn't currently own or lease the proposed store location, submit Option 2.
+                <b>Option 1</b>: Submit a copy of the lease, sub-lease, or proof of ownership of the proposed store location.
               </p>
               <p>
-                Leases or other arrangements must not expire for at least 12 months from the date the licence is issued
+                <b>Option 2</b>: Submit a copy of the offer to purchase, lease, or sub-lease the proposed store location. Note,
               </p>
-              <p>
-                Option 1: Submit a copy of the lease, sub-lease, or proof of ownership of the proposed store location.
-              </p>
-              <p>
-                Option 2: Submit a copy of the offer to purchase, lease, or sub-lease the proposed store location. Note,
-              </p>
-              <p>
-                Option 1 will be required before the licence is issued.
-              </p>
+              
             </div>
             <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
                 <p>Any one of the following documents can be used to show valid interest in the property:</p>
