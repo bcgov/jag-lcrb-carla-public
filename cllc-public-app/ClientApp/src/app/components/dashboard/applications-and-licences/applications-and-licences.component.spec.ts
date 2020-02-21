@@ -64,6 +64,8 @@ describe('ApplicationsAndLicencesComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => { fixture.destroy(); });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });

@@ -1,0 +1,91 @@
+{
+    "kind": "Template",
+    "apiVersion": "v1",
+    "metadata":
+    {
+      "name": "${NAME}-build-template",
+      "creationTimestamp": null
+    },
+    "objects": [ 
+
+{
+    "kind": "BuildConfig",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "cllc-public-sonar",
+        "creationTimestamp": null,
+        "labels": {
+            "app": "cllc-public-sonar"
+        }
+    },
+    "spec": {
+        "triggers": [
+            {
+                "type": "ConfigChange"
+            }
+        ],
+        "runPolicy": "Serial",
+        "source": {
+            "type": "Git",
+            "git": {
+                "uri": "https://github.com/bcgov/jag-lcrb-carla-public.git",
+                "ref": "develop"
+            }
+        },
+        "strategy": {
+            "type": "Source",
+            "sourceStrategy": {
+                "from": {
+                    "kind": "ImageStreamTag",
+                    "name": "dotnet-sonar:latest"
+                },
+                "env": [
+                    {
+                        "name": "DOTNET_STARTUP_PROJECT",
+                        "value": "cllc-public-app/cllc-public-app.csproj"
+                    },
+                    {
+                        "name": "DOTNET_SDK_VERSION",
+                        "value": "latest"
+                    },
+                    {
+                        "name": "MSBuildEmitSolution",
+                        "value": "1"
+                    },
+                    {
+                        "name": "SONAR_TOKEN",
+                        "value": "CHANGEME"
+                    },
+                    {
+                        "name": "SONAR_PROJECT",
+                        "value": "CHANGEME"
+                    },
+                    {
+                        "name": "SONAR_URL",
+                        "value": "CHANGEME"
+                    }
+                ],
+                "forcePull": true
+            }
+        },
+        "output": {
+        },
+        "resources": {
+            "limits": {
+                "cpu": "2",
+                "memory": "8Gi"
+            },
+            "requests": {
+                "cpu": "2",
+                "memory": "8Gi"
+            }
+        },
+        "postCommit": {},
+        "nodeSelector": null
+    },
+    "status": {
+        "lastVersion": 0
+    }
+}
+]
+}

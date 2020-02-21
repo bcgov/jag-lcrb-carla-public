@@ -74,7 +74,6 @@ describe('ApplicationCancelOwnershipTransferComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
-
   }));
 
   beforeEach(() => {
@@ -82,6 +81,8 @@ describe('ApplicationCancelOwnershipTransferComponent', () => {
     component = fixture.debugElement.componentInstance;
     fixture.detectChanges();
   });
+
+  afterEach(() => { fixture.destroy(); });
 
   it('should create', () => {
     expect(component).toBeTruthy();

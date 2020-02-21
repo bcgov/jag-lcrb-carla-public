@@ -2,13 +2,13 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef, Input, Output, EventEm
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { LicenseeChangeLog, LicenseeChangeType } from '@models/licensee-change-log.model';
-import { MatTreeNestedDataSource, MatTree, MatDialog, MatSnackBar } from '@angular/material';
+import { MatTreeNestedDataSource, MatTree, MatDialog, MatSnackBar, ErrorStateMatcher } from '@angular/material';
 import { Application } from '@models/application.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';
-import { forkJoin } from 'rxjs';
-import { takeWhile, filter } from 'rxjs/operators';
+import { forkJoin, of } from 'rxjs';
+import { takeWhile, filter, mergeMap, switchMap } from 'rxjs/operators';
 import { LegalEntity } from '@models/legal-entity.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -16,7 +16,9 @@ import { AppState } from '@app/app-state/models/app-state';
 import { Account } from '@models/account.model';
 import { LicenseeTreeComponent } from '@shared/components/licensee-tree/licensee-tree.component';
 import { ApplicationSummary } from '@models/application-summary.model';
-import { ApplicationTypeNames } from '@models/application-type.model';
+import { ApplicationTypeNames, ApplicationType } from '@models/application-type.model';
+import { LicenseDataService } from '@services/license-data.service';
+import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 
 @Component({
   selector: 'app-application-licensee-changes',
@@ -29,7 +31,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   individualShareholderChanges: LicenseeChangeLog[];
   organizationShareholderChanges: LicenseeChangeLog[];
   leadershipChanges: LicenseeChangeLog[];
-  @Input() applicationId: string;
+  applicationId: string;
   application: Application;
   currentChangeLogs: LicenseeChangeLog[];
   currentLegalEntities: LegalEntity;
@@ -45,6 +47,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   validationErrors: string[];
   thereIsExistingOrgStructure: boolean;
   busyPromise: Promise<any>;
+  licenses: ApplicationLicenseSummary[];
 
   constructor(public dialog: MatDialog,
     public snackBar: MatSnackBar,
@@ -53,15 +56,19 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     public router: Router,
     private store: Store<AppState>,
     private route: ActivatedRoute,
+    private licenseService: LicenseDataService,
     private applicationDataService: ApplicationDataService,
     private legalEntityDataService: LegalEntityDataService) {
     super();
-    // this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('licenseeChangeAppId'));
-
+    this.licenseService.getAllCurrentLicenses()
+      .subscribe(data => {
+        this.licenses = data;
+      });
   }
 
 
   ngOnInit() {
+
     this.form = this.fb.group({
       id: [''],
       contactPersonFirstName: ['', Validators.required],
@@ -74,8 +81,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
 
-    this.store.select(state => state.onGoingLicenseeChangesApplicationIdState.onGoingLicenseeChangesApplicationId)
-      .pipe(takeWhile(() => this.componentActive))
+    this.busy = this.loadLicenseeApplication()
       .pipe(filter(id => !!id))
       .subscribe(id => {
         this.applicationId = id;
@@ -88,7 +94,6 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       .subscribe((account) => {
         this.account = account;
       });
-    // this.loadData();
   }
 
   loadData() {
@@ -102,9 +107,9 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       .then((data: [Application, LicenseeChangeLog[], LegalEntity]) => {
         this.application = data[0];
         const currentChangeLogs = data[1] || [];
-        const currentLegalEntities = data[2];
-        this.thereIsExistingOrgStructure = currentLegalEntities.children.length > 0;
-        this.treeRoot = LicenseeChangeLog.processLegalEntityTree(currentLegalEntities);
+        this.currentLegalEntities = data[2];
+        this.thereIsExistingOrgStructure = this.currentLegalEntities.children.length > 0;
+        this.treeRoot = LicenseeChangeLog.processLegalEntityTree(this.currentLegalEntities);
         this.treeRoot.isRoot = true;
         this.treeRoot.applySavedChangeLogs(currentChangeLogs);
 
@@ -113,126 +118,176 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       });
   }
 
+  /**
+   * Gets licensee application id. Create the applicaiton and return id if it does not exist
+   */
+  loadLicenseeApplication() {
+    return this.applicationDataService.getOngoingLicenseeChangeApplicationId()
+      .pipe(mergeMap(id => {
+        if (id) {
+          return of(id);
+        } else { // create licensee application and return its id
+          const newLicenceApplicationData = <Application>{
+            applicantType: this.account.businessType,
+            applicationType: <ApplicationType>{ name: ApplicationTypeNames.LicenseeChanges },
+            account: this.account,
+          };
+          return this.applicationDataService.createApplication(newLicenceApplicationData)
+            .pipe(switchMap(app => of(app.id)));
+        }
+      }));
+  }
+
   getSaveLabel(): string {
     let label = 'Save';
-    if (!this.thereIsExistingOrgStructure) {
-      label = 'Submit Org Structure';
+    const licencesOnFile = (this.licenses && this.licenses.length > 0);
+
+    //if No Organizational Information on File  OR changes made
+    if (!this.thereIsExistingOrgStructure || (this.treeRoot && LicenseeChangeLog.HasChanges(this.treeRoot))) {
+      label = 'Submit Organization Information';
     }
-    if (LicenseeChangeLog.HasChanges(this.treeRoot)) {
-      label = 'Save Changes to Org Structure';
-    }
-    if (!this.thereIsExistingOrgStructure && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
-      label = 'Confirm No Changes to Current Org Structure';
+    // if Organization Information on File  AND no changes
+    else if (this.thereIsExistingOrgStructure && this.treeRoot && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
+      label = 'Confirm Organization Information Is Complete';
     }
     return label;
   }
 
   disableSaveLabel(): boolean {
     let disable = false;
-    if (!this.thereIsExistingOrgStructure) {
+    const errors = this.validateNonIndividauls(this.treeRoot);
+    if (errors.length > 0) {
       disable = true;
-    }
-    if (LicenseeChangeLog.HasChanges(this.treeRoot)) {
-      disable = false;
-    }
-    if (!this.thereIsExistingOrgStructure && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
-      disable = false;
     }
     return disable;
   }
-
 
   /**
    * Gets the number of applications owned by the current user that are not terminated
    */
   private GetNotTerminatedCRSApplicationCount() {
-  this.busy =
-    this.applicationDataService.getAllCurrentApplications()
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((applications: ApplicationSummary[]) => {
-        // filter out approved applications
-        const notTerminatedApplications =
-          applications.filter(app => {
-            let noneTerminatedCRSApplications: boolean = ['Terminated and refunded'].indexOf(app.applicationStatus) === -1
-              && app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore;
-            return noneTerminatedCRSApplications;
-          });
-        this.numberOfNonTerminatedApplications = notTerminatedApplications.length;
-      });
-}
+    this.busy =
+      this.applicationDataService.getAllCurrentApplications()
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe((applications: ApplicationSummary[]) => {
+          // filter out approved applications
+          const notTerminatedApplications =
+            applications.filter(app => {
+              let noneTerminatedCRSApplications: boolean = ['Terminated and refunded'].indexOf(app.applicationStatus) === -1
+                && app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore;
+              return noneTerminatedCRSApplications;
+            });
+          this.numberOfNonTerminatedApplications = notTerminatedApplications.length;
+        });
+  }
 
-validateNonIndividauls() {
-  this.validationErrors = this.validateRecursive(this.treeRoot);
-}
 
-validateRecursive(node: LicenseeChangeLog): string[] {
-  node = Object.assign(new LicenseeChangeLog, node);
-  let validationMessages = [];
-  if (!node.isRemoveChangeType()) {
-    validationMessages = LicenseeChangeLog.ValidateNonIndividaul(node);
+  validateFormData() {
+    let errors = [];
+    if (this.treeRoot) {
+      errors = [
+        ...this.validateNonIndividauls(this.treeRoot),
+        ...this.validateFileUploads(this.treeRoot)
+      ]
+    }
+    return errors;
+  }
+
+  validateFileUploads(node: LicenseeChangeLog): string[] {
+    let errors = [];
+    node = Object.assign(new LicenseeChangeLog(), node);
+
+    errors = errors.concat(node.getFileUploadValidationErrors());
     node.children = node.children || [];
-    node.children.forEach((child: LicenseeChangeLog) => {
-      validationMessages = validationMessages.concat(this.validateRecursive(child));
+    node.children.forEach(child => {
+      errors = errors.concat(this.validateFileUploads(child));
     });
-  }
-  return validationMessages;
-}
 
-/**
- * Sends data to dynamics
- */
-save() {
-  this.validateNonIndividauls();
-  if (this.validationErrors.length === 0) {
+    return errors;
+  }
+
+
+  validateNonIndividauls(node: LicenseeChangeLog): string[] {
+    node = Object.assign(new LicenseeChangeLog(), node);
+    let validationMessages = [];
+    if (!node.isRemoveChangeType()) {
+      validationMessages = LicenseeChangeLog.ValidateNonIndividaul(node);
+      node.children = node.children || [];
+      node.children.forEach((child: LicenseeChangeLog) => {
+        validationMessages = validationMessages.concat(this.validateNonIndividauls(child));
+      });
+    }
+    return validationMessages;
+  }
+
+  /**
+   * Sends data to dynamics
+   */
+  save() {
+    this.validationErrors = this.validateFormData();
+    if (this.validationErrors.length === 0) {
+      this.busySave = this.prepareSaveRequest()
+        .subscribe(() => {
+          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.saveComplete.emit(true);
+        });
+    }
+  }
+
+  private prepareSaveRequest() {
     const data = this.cleanSaveData(this.treeRoot);
-    this.busySave = forkJoin(
+    return forkJoin(
       this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, isApplicationComplete: 'Yes' }),
-      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId),
-      this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges))
-      .subscribe(() => {
+      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId) // ,
+      // this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges)
+    );
+  }
+
+  saveForLater() {
+    this.busyPromise = this.prepareSaveRequest()
+      .toPromise()
+      .then(() => {
         this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-        this.saveComplete.emit(true);
-        this.loadData();
+        this.router.navigateByUrl('/dashboard');
       });
   }
-}
 
-addCancelledChange(change: LicenseeChangeLog) {
-  this.cancelledLicenseeChanges.push(change);
-}
-
-cancelApplication() {
-}
-
-/**
- * Returns true if there is an ongoing or approved (but not terminated)
- * CRS application
- */
-aNonTerminatedCrsApplicationExistOnAccount(): boolean {
-  return this.numberOfNonTerminatedApplications > 0;
-}
-
-cleanSaveData(data: LicenseeChangeLog): LicenseeChangeLog {
-  const result = { ...data } as LicenseeChangeLog;
-  this.removeParentReferences(result);
-  return result;
-}
-
-removeParentReferences(node: LicenseeChangeLog) {
-  //Form the parent account relationship
-  if (node.parentLinceseeChangeLog && node.parentLinceseeChangeLog.businessAccountId) {
-    node.parentBusinessAccountId = node.parentLinceseeChangeLog.businessAccountId;
+  addCancelledChange(change: LicenseeChangeLog) {
+    this.cancelledLicenseeChanges.push(change);
   }
-  // remove parent reference
-  node.parentLinceseeChangeLog = undefined;
-  node.refObject = undefined;
 
-
-  if (node.children && node.children.length) {
-    node.children.forEach(child => {
-      this.removeParentReferences(child)
-    })
+  cancelApplication() {
   }
-}
+
+  /**
+   * Returns true if there is an ongoing or approved (but not terminated)
+   * CRS application
+   */
+  aNonTerminatedCrsApplicationExistOnAccount(): boolean {
+    return this.numberOfNonTerminatedApplications > 0;
+  }
+
+  cleanSaveData(data: LicenseeChangeLog): LicenseeChangeLog {
+    const result = { ...data } as LicenseeChangeLog;
+    this.removeParentReferences(result);
+    return result;
+  }
+
+  removeParentReferences(node: LicenseeChangeLog) {
+    //Form the parent account relationship
+    if (node.parentLinceseeChangeLog && node.parentLinceseeChangeLog.businessAccountId) {
+      node.parentBusinessAccountId = node.parentLinceseeChangeLog.businessAccountId;
+    }
+    // remove parent reference
+    node.parentLinceseeChangeLog = undefined;
+    node.refObject = undefined;
+
+
+    if (node.children && node.children.length) {
+      node.children.forEach(child => {
+        this.removeParentReferences(child)
+      })
+    }
+  }
 }
 

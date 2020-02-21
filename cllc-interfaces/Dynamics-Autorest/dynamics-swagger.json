@@ -13190,6 +13190,152 @@
         }
       }
     },
+    "/adoxio_events({adoxio_eventid})/adoxio_event_schedules": {
+      "get": {
+        "tags": [
+          "event_schedules"
+        ],
+        "summary": "Get adoxio_event_schedules from adoxio_events",
+        "operationId": "eventschedules_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventid",
+            "description": "key: adoxio_eventid of adoxio_event",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventscheduleCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_events({adoxio_eventid})/adoxio_event_schedules({adoxio_eventscheduleid})": {
+      "get": {
+        "tags": [
+          "event_schedules"
+        ],
+        "summary": "Get adoxio_event_schedules from adoxio_events",
+        "operationId": "eventschedules_Getadoxio_event_schedulesByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventid",
+            "description": "key: adoxio_eventid of adoxio_event",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_events({adoxio_eventid})/adoxio_event_SyncErrors": {
       "get": {
         "tags": [
@@ -13432,6 +13578,1018 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_eventschedules": {
+      "get": {
+        "tags": [
+          "eventschedules"
+        ],
+        "summary": "Get entities from adoxio_eventschedules",
+        "operationId": "eventschedules_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventscheduleCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "adoxio_eventschedules.adoxio_eventschedule"
+        ],
+        "summary": "Add new entity to adoxio_eventschedules",
+        "operationId": "eventschedules_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Prefer",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New entity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_eventschedules({adoxio_eventscheduleid})": {
+      "get": {
+        "tags": [
+          "eventschedules"
+        ],
+        "summary": "Get entity from adoxio_eventschedules by key",
+        "operationId": "eventschedules_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "adoxio_eventschedules.adoxio_eventschedule"
+        ],
+        "summary": "Update entity in adoxio_eventschedules",
+        "operationId": "eventschedules_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New property values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "adoxio_eventschedules.adoxio_eventschedule"
+        ],
+        "summary": "Delete entity from adoxio_eventschedules",
+        "operationId": "eventschedules_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_eventschedules({adoxio_eventscheduleid})/adoxio_EventId": {
+      "get": {
+        "tags": [
+          "eventid"
+        ],
+        "summary": "Get adoxio_EventId from adoxio_eventschedules",
+        "operationId": "eventid_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_eventschedules({adoxio_eventscheduleid})/adoxio_eventschedule_AsyncOperations": {
+      "get": {
+        "tags": [
+          "eventschedule_asyncoperations"
+        ],
+        "summary": "Get adoxio_eventschedule_AsyncOperations from adoxio_eventschedules",
+        "operationId": "eventscheduleasyncoperations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperationCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_eventschedules({adoxio_eventscheduleid})/adoxio_eventschedule_AsyncOperations({asyncoperationid})": {
+      "get": {
+        "tags": [
+          "eventschedule_asyncoperations"
+        ],
+        "summary": "Get adoxio_eventschedule_AsyncOperations from adoxio_eventschedules",
+        "operationId": "eventscheduleasyncoperations_Getadoxio_eventschedule_AsyncOperationsByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "asyncoperationid",
+            "description": "key: asyncoperationid of asyncoperation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_eventschedules({adoxio_eventscheduleid})/adoxio_eventschedule_BulkDeleteFailures": {
+      "get": {
+        "tags": [
+          "eventschedule_bulkdeletefailures"
+        ],
+        "summary": "Get adoxio_eventschedule_BulkDeleteFailures from adoxio_eventschedules",
+        "operationId": "eventschedulebulkdeletefailures_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailureCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_eventschedules({adoxio_eventscheduleid})/adoxio_eventschedule_BulkDeleteFailures({bulkdeletefailureid})": {
+      "get": {
+        "tags": [
+          "eventschedule_bulkdeletefailures"
+        ],
+        "summary": "Get adoxio_eventschedule_BulkDeleteFailures from adoxio_eventschedules",
+        "operationId": "eventschedulebulkdeletefailures_Getadoxio_eventschedule_BulkDeleteFailuresByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "bulkdeletefailureid",
+            "description": "key: bulkdeletefailureid of bulkdeletefailure",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_eventschedules({adoxio_eventscheduleid})/adoxio_eventschedule_DuplicateBaseRecord": {
+      "get": {
+        "tags": [
+          "eventschedule_duplicatebaserecord"
+        ],
+        "summary": "Get adoxio_eventschedule_DuplicateBaseRecord from adoxio_eventschedules",
+        "operationId": "eventscheduleduplicatebaserecord_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecordCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_eventschedules({adoxio_eventscheduleid})/adoxio_eventschedule_DuplicateBaseRecord({duplicateid})": {
+      "get": {
+        "tags": [
+          "eventschedule_duplicatebaserecord"
+        ],
+        "summary": "Get adoxio_eventschedule_DuplicateBaseRecord from adoxio_eventschedules",
+        "operationId": "eventscheduleduplicatebaserecord_Getadoxio_eventschedule_DuplicateBaseRecordByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_eventschedules({adoxio_eventscheduleid})/adoxio_eventschedule_DuplicateMatchingRecord": {
+      "get": {
+        "tags": [
+          "eventschedule_duplicatematchingrecord"
+        ],
+        "summary": "Get adoxio_eventschedule_DuplicateMatchingRecord from adoxio_eventschedules",
+        "operationId": "eventscheduleduplicatematchingrecord_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecordCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_eventschedules({adoxio_eventscheduleid})/adoxio_eventschedule_DuplicateMatchingRecord({duplicateid})": {
+      "get": {
+        "tags": [
+          "eventschedule_duplicatematchingrecord"
+        ],
+        "summary": "Get adoxio_eventschedule_DuplicateMatchingRecord from adoxio_eventschedules",
+        "operationId": "eventscheduleduplicatematchingrecord_Getadoxio_eventschedule_DuplicateMatchingRecordByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_eventschedules({adoxio_eventscheduleid})/adoxio_eventschedule_SyncErrors": {
+      "get": {
+        "tags": [
+          "eventschedule_syncerrors"
+        ],
+        "summary": "Get adoxio_eventschedule_SyncErrors from adoxio_eventschedules",
+        "operationId": "eventschedulesyncerrors_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerrorCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_eventschedules({adoxio_eventscheduleid})/adoxio_eventschedule_SyncErrors({syncerrorid})": {
+      "get": {
+        "tags": [
+          "eventschedule_syncerrors"
+        ],
+        "summary": "Get adoxio_eventschedule_SyncErrors from adoxio_eventschedules",
+        "operationId": "eventschedulesyncerrors_Getadoxio_eventschedule_SyncErrorsByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "syncerrorid",
+            "description": "key: syncerrorid of syncerror",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
             }
           },
           "default": {
@@ -24316,6 +25474,58 @@
         }
       }
     },
+    "/asyncoperations({asyncoperationid})/regardingobjectid_adoxio_eventschedule": {
+      "get": {
+        "tags": [
+          "regardingobjectid_eventschedule"
+        ],
+        "summary": "Get regardingobjectid_adoxio_eventschedule from asyncoperations",
+        "operationId": "Regardingobjectidadoxioeventschedule_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "asyncoperationid",
+            "description": "key: asyncoperationid of asyncoperation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/asyncoperations({asyncoperationid})/regardingobjectid_adoxio_exhibit": {
       "get": {
         "tags": [
@@ -24732,6 +25942,58 @@
         }
       }
     },
+    "/bulkdeletefailures({bulkdeletefailureid})/regardingobjectid_adoxio_eventschedule": {
+      "get": {
+        "tags": [
+          "regardingobjectid_eventschedule"
+        ],
+        "summary": "Get regardingobjectid_adoxio_eventschedule from bulkdeletefailures",
+        "operationId": "Regardingobjectidadoxioeventschedule_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bulkdeletefailureid",
+            "description": "key: bulkdeletefailureid of bulkdeletefailure",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/bulkdeletefailures({bulkdeletefailureid})/regardingobjectid_adoxio_exhibit": {
       "get": {
         "tags": [
@@ -24974,6 +26236,152 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/businessunits({businessunitid})/business_unit_adoxio_eventschedule": {
+      "get": {
+        "tags": [
+          "business_unit_eventschedule"
+        ],
+        "summary": "Get business_unit_adoxio_eventschedule from businessunits",
+        "operationId": "Businessunitadoxioeventschedule_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessunitid",
+            "description": "key: businessunitid of businessunit",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventscheduleCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/businessunits({businessunitid})/business_unit_adoxio_eventschedule({adoxio_eventscheduleid})": {
+      "get": {
+        "tags": [
+          "business_unit_eventschedule"
+        ],
+        "summary": "Get business_unit_adoxio_eventschedule from businessunits",
+        "operationId": "Businessunitadoxioeventschedule_Getbusiness_unit_adoxio_eventscheduleByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessunitid",
+            "description": "key: businessunitid of businessunit",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
             }
           },
           "default": {
@@ -25702,6 +27110,58 @@
         }
       }
     },
+    "/duplicaterecords({duplicateid})/baserecordid_adoxio_eventschedule": {
+      "get": {
+        "tags": [
+          "baserecordid_eventschedule"
+        ],
+        "summary": "Get baserecordid_adoxio_eventschedule from duplicaterecords",
+        "operationId": "Baserecordidadoxioeventschedule_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/duplicaterecords({duplicateid})/baserecordid_adoxio_exhibit": {
       "get": {
         "tags": [
@@ -25850,6 +27310,58 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/duplicaterecords({duplicateid})/duplicaterecordid_adoxio_eventschedule": {
+      "get": {
+        "tags": [
+          "duplicaterecordid_eventschedule"
+        ],
+        "summary": "Get duplicaterecordid_adoxio_eventschedule from duplicaterecords",
+        "operationId": "Duplicaterecordidadoxioeventschedule_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
             }
           },
           "default": {
@@ -29638,6 +31150,58 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/syncerrors({syncerrorid})/regardingobjectid_adoxio_eventschedule": {
+      "get": {
+        "tags": [
+          "regardingobjectid_eventschedule"
+        ],
+        "summary": "Get regardingobjectid_adoxio_eventschedule from syncerrors",
+        "operationId": "Regardingobjectidadoxioeventschedule_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "syncerrorid",
+            "description": "key: syncerrorid of syncerror",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
             }
           },
           "default": {
@@ -33630,6 +35194,590 @@
         }
       }
     },
+    "/systemusers({ownerid})/lk_adoxio_eventschedule_createdby": {
+      "get": {
+        "tags": [
+          "lk_eventschedule_createdby"
+        ],
+        "summary": "Get lk_adoxio_eventschedule_createdby from systemusers",
+        "operationId": "Lkadoxioeventschedulecreatedby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventscheduleCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_eventschedule_createdby({adoxio_eventscheduleid})": {
+      "get": {
+        "tags": [
+          "lk_eventschedule_createdby"
+        ],
+        "summary": "Get lk_adoxio_eventschedule_createdby from systemusers",
+        "operationId": "Lkadoxioeventschedulecreatedby_Getlk_adoxio_eventschedule_createdbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_eventschedule_createdonbehalfby": {
+      "get": {
+        "tags": [
+          "lk_eventschedule_createdonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_eventschedule_createdonbehalfby from systemusers",
+        "operationId": "Lkadoxioeventschedulecreatedonbehalfby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventscheduleCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_eventschedule_createdonbehalfby({adoxio_eventscheduleid})": {
+      "get": {
+        "tags": [
+          "lk_eventschedule_createdonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_eventschedule_createdonbehalfby from systemusers",
+        "operationId": "Lkadoxioeventschedulecreatedonbehalfby_Getlk_adoxio_eventschedule_createdonbehalfbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_eventschedule_modifiedby": {
+      "get": {
+        "tags": [
+          "lk_eventschedule_modifiedby"
+        ],
+        "summary": "Get lk_adoxio_eventschedule_modifiedby from systemusers",
+        "operationId": "Lkadoxioeventschedulemodifiedby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventscheduleCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_eventschedule_modifiedby({adoxio_eventscheduleid})": {
+      "get": {
+        "tags": [
+          "lk_eventschedule_modifiedby"
+        ],
+        "summary": "Get lk_adoxio_eventschedule_modifiedby from systemusers",
+        "operationId": "Lkadoxioeventschedulemodifiedby_Getlk_adoxio_eventschedule_modifiedbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_eventschedule_modifiedonbehalfby": {
+      "get": {
+        "tags": [
+          "lk_eventschedule_modifiedonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_eventschedule_modifiedonbehalfby from systemusers",
+        "operationId": "Lkadoxioeventschedulemodifiedonbehalfby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventscheduleCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_eventschedule_modifiedonbehalfby({adoxio_eventscheduleid})": {
+      "get": {
+        "tags": [
+          "lk_eventschedule_modifiedonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_eventschedule_modifiedonbehalfby from systemusers",
+        "operationId": "Lkadoxioeventschedulemodifiedonbehalfby_Getlk_adoxio_eventschedule_modifiedonbehalfbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/systemusers({ownerid})/lk_adoxio_exhibit_createdby": {
       "get": {
         "tags": [
@@ -34944,6 +37092,152 @@
         }
       }
     },
+    "/systemusers({ownerid})/user_adoxio_eventschedule": {
+      "get": {
+        "tags": [
+          "user_eventschedule"
+        ],
+        "summary": "Get user_adoxio_eventschedule from systemusers",
+        "operationId": "Useradoxioeventschedule_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventscheduleCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/user_adoxio_eventschedule({adoxio_eventscheduleid})": {
+      "get": {
+        "tags": [
+          "user_eventschedule"
+        ],
+        "summary": "Get user_adoxio_eventschedule from systemusers",
+        "operationId": "Useradoxioeventschedule_Getuser_adoxio_eventscheduleByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/systemusers({ownerid})/user_adoxio_exhibit": {
       "get": {
         "tags": [
@@ -35478,6 +37772,152 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/teams({ownerid})/team_adoxio_eventschedule": {
+      "get": {
+        "tags": [
+          "team_eventschedule"
+        ],
+        "summary": "Get team_adoxio_eventschedule from teams",
+        "operationId": "Teamadoxioeventschedule_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of team",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventscheduleCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/teams({ownerid})/team_adoxio_eventschedule({adoxio_eventscheduleid})": {
+      "get": {
+        "tags": [
+          "team_eventschedule"
+        ],
+        "summary": "Get team_adoxio_eventschedule from teams",
+        "operationId": "Teamadoxioeventschedule_Getteam_adoxio_eventscheduleByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of team",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_eventscheduleid",
+            "description": "key: adoxio_eventscheduleid of adoxio_eventschedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
             }
           },
           "default": {
@@ -41616,7 +44056,7 @@
         },
         "adoxio_appchecklistinspectionresults": {
           "format": "int32",
-          "description": "",
+          "description": "No Contravention(s) = Passed",
           "type": "integer"
         },
         "adoxio_isreadystorage": {
@@ -48750,24 +51190,11 @@
           "description": "Unique identifier for the team that owns the record.",
           "type": "string"
         },
-        "adoxio_venuedescription": {
-          "description": "",
-          "type": "string"
-        },
         "_createdby_value": {
           "description": "Unique identifier of the user who created the record.",
           "type": "string"
         },
         "adoxio_startdate": {
-          "format": "date-time",
-          "description": "",
-          "type": "string"
-        },
-        "adoxio_additionallocationinformation": {
-          "description": "",
-          "type": "string"
-        },
-        "adoxio_liquorservicestartdate": {
           "format": "date-time",
           "description": "",
           "type": "string"
@@ -48836,6 +51263,10 @@
           "description": "",
           "type": "string"
         },
+        "adoxio_eventdescription": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_notifyeventinspector": {
           "description": "",
           "type": "boolean"
@@ -48845,8 +51276,16 @@
           "description": "Date and time when the record was created.",
           "type": "string"
         },
+        "adoxio_venuenamedescription": {
+          "description": "",
+          "type": "string"
+        },
         "_adoxio_account_value": {
           "description": "Licensee",
+          "type": "string"
+        },
+        "adoxio_additionallocationinfo": {
+          "description": "",
           "type": "string"
         },
         "adoxio_os_session_pk": {
@@ -48906,11 +51345,6 @@
           "description": "Reason for the status of the Event",
           "type": "integer"
         },
-        "adoxio_liquorserviceenddate": {
-          "format": "date-time",
-          "description": "",
-          "type": "string"
-        },
         "adoxio_street1": {
           "description": "",
           "type": "string"
@@ -48955,10 +51389,6 @@
           "format": "int32",
           "description": "",
           "type": "integer"
-        },
-        "adoxio_eventtypedescription": {
-          "description": "",
-          "type": "string"
         },
         "_owningbusinessunit_value": {
           "description": "Unique identifier for the business unit that owns the record",
@@ -49031,6 +51461,184 @@
         },
         "adoxio_Account": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
+        },
+        "adoxio_event_schedules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.adoxio_eventschedule": {
+      "description": "Microsoft.Dynamics.CRM.adoxio_eventschedule",
+      "type": "object",
+      "properties": {
+        "timezoneruleversionnumber": {
+          "format": "int32",
+          "description": "For internal use only.",
+          "type": "integer"
+        },
+        "overriddencreatedon": {
+          "format": "date-time",
+          "description": "Date and time that the record was migrated.",
+          "type": "string"
+        },
+        "statuscode": {
+          "format": "int32",
+          "description": "Reason for the status of the Event Schedule",
+          "type": "integer"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "description": "Version Number",
+          "type": "string"
+        },
+        "_ownerid_value": {
+          "description": "Owner Id",
+          "type": "string"
+        },
+        "_owninguser_value": {
+          "description": "Unique identifier for the user that owns the record.",
+          "type": "string"
+        },
+        "adoxio_eventenddatetime": {
+          "format": "date-time",
+          "description": "",
+          "type": "string"
+        },
+        "_createdonbehalfby_value": {
+          "description": "Unique identifier of the delegate user who created the record.",
+          "type": "string"
+        },
+        "adoxio_servicestartdatetime": {
+          "format": "date-time",
+          "description": "",
+          "type": "string"
+        },
+        "_owningbusinessunit_value": {
+          "description": "Unique identifier for the business unit that owns the record",
+          "type": "string"
+        },
+        "createdon": {
+          "format": "date-time",
+          "description": "Date and time when the record was created.",
+          "type": "string"
+        },
+        "utcconversiontimezonecode": {
+          "format": "int32",
+          "description": "Time zone code that was in use when the record was created.",
+          "type": "integer"
+        },
+        "_adoxio_eventid_value": {
+          "description": "Unique identifier for Event associated with Event Schedule.",
+          "type": "string"
+        },
+        "modifiedon": {
+          "format": "date-time",
+          "description": "Date and time when the record was modified.",
+          "type": "string"
+        },
+        "_modifiedonbehalfby_value": {
+          "description": "Unique identifier of the delegate user who modified the record.",
+          "type": "string"
+        },
+        "importsequencenumber": {
+          "format": "int32",
+          "description": "Sequence number of the import that created this record.",
+          "type": "integer"
+        },
+        "_createdby_value": {
+          "description": "Unique identifier of the user who created the record.",
+          "type": "string"
+        },
+        "_owningteam_value": {
+          "description": "Unique identifier for the team that owns the record.",
+          "type": "string"
+        },
+        "_modifiedby_value": {
+          "description": "Unique identifier of the user who modified the record.",
+          "type": "string"
+        },
+        "adoxio_eventstartdatetime": {
+          "format": "date-time",
+          "description": "",
+          "type": "string"
+        },
+        "adoxio_name": {
+          "description": "The name of the custom entity.",
+          "type": "string"
+        },
+        "adoxio_eventscheduleid": {
+          "description": "Unique identifier for entity instances",
+          "type": "string"
+        },
+        "statecode": {
+          "format": "int32",
+          "description": "Status of the Event Schedule",
+          "type": "integer"
+        },
+        "adoxio_serviceenddatetime": {
+          "format": "date-time",
+          "description": "",
+          "type": "string"
+        },
+        "createdbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "createdonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owninguser": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owningteam": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+        },
+        "ownerid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+        },
+        "owningbusinessunit": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+        },
+        "adoxio_eventschedule_SyncErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+          }
+        },
+        "adoxio_eventschedule_DuplicateMatchingRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_eventschedule_DuplicateBaseRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_eventschedule_AsyncOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+          }
+        },
+        "adoxio_eventschedule_BulkDeleteFailures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+          }
+        },
+        "adoxio_EventId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
         }
       }
     },
@@ -58761,6 +61369,9 @@
         },
         "regardingobjectid_adoxio_event": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+        },
+        "regardingobjectid_adoxio_eventschedule": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
         }
       }
     },
@@ -61076,6 +63687,9 @@
         },
         "regardingobjectid_adoxio_event": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+        },
+        "regardingobjectid_adoxio_eventschedule": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
         }
       }
     },
@@ -62843,6 +65457,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+          }
+        },
+        "business_unit_adoxio_eventschedule": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
           }
         }
       }
@@ -70026,6 +72646,12 @@
         },
         "baserecordid_adoxio_event": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+        },
+        "duplicaterecordid_adoxio_eventschedule": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+        },
+        "baserecordid_adoxio_eventschedule": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
         }
       }
     },
@@ -75965,10 +78591,6 @@
           "description": "",
           "type": "string"
         },
-        "_adoxio_inspector_value": {
-          "description": "",
-          "type": "string"
-        },
         "_adoxio_licencetypeid_value": {
           "description": "Unique identifier for Licence Type associated with Inspection.",
           "type": "string"
@@ -76380,10 +79002,6 @@
           "format": "int32",
           "description": "",
           "type": "integer"
-        },
-        "_adoxio_adjudicator_value": {
-          "description": "",
-          "type": "string"
         },
         "onholdtime": {
           "format": "int32",
@@ -77337,12 +79955,6 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
           }
-        },
-        "adoxio_Adjudicator": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "adoxio_Inspector": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
         },
         "adoxio_RegionalManager": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
@@ -87815,6 +90427,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+          }
+        },
+        "owner_adoxio_eventschedule": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
           }
         }
       }
@@ -107755,18 +110373,6 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
           }
         },
-        "adoxio_systemuser_incident_Adjudicator": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
-          }
-        },
-        "adoxio_systemuser_incident_Inspector": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
-          }
-        },
         "adoxio_systemuser_incident_RegionalManager": {
           "type": "array",
           "items": {
@@ -108659,6 +111265,36 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+          }
+        },
+        "lk_adoxio_eventschedule_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+          }
+        },
+        "lk_adoxio_eventschedule_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+          }
+        },
+        "lk_adoxio_eventschedule_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+          }
+        },
+        "lk_adoxio_eventschedule_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
+          }
+        },
+        "user_adoxio_eventschedule": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
           }
         }
       }
@@ -109915,6 +112551,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+          }
+        },
+        "team_adoxio_eventschedule": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
           }
         }
       }
@@ -114519,6 +117161,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.adoxio_eventscheduleCollection": {
+      "title": "Collection of adoxio_eventschedule",
+      "description": "Microsoft.Dynamics.CRM.adoxio_eventscheduleCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventschedule"
           }
         }
       }

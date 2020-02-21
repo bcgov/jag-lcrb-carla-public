@@ -98,6 +98,7 @@ import { FinancialInformationComponent } from '@components/account-profile/tabs/
 import { AccountProfileSummaryComponent } from '@components/account-profile/account-profile-summary/account-profile-summary.component';
 
 import { NgBusyModule } from 'ng-busy';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { KeyPersonnelComponent, KeyPersonnelDialogComponent } from '@components/account-profile/tabs/key-personnel/key-personnel.component';
 import { ConnectionToProducersComponent } from '@components/account-profile/tabs/connection-to-producers/connection-to-producers.component';
 import { PaymentConfirmationComponent } from '@components/payment-confirmation/payment-confirmation.component';
@@ -169,7 +170,6 @@ import { VersionInfoDataService } from '@services/version-info-data.service';
 import { VersionInfoDialogComponent } from '@components/version-info/version-info-dialog.component';
 import { FederalReportingComponent } from '@components/federal-reporting/federal-reporting.component';
 import { LicencesComponent } from '@components/licences/licences.component';
-import { LicenceEventComponent} from '@components/licences/licence-event/licence-event.component';
 import { ApplicationsComponent } from '@components/applications/applications.component';
 import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
@@ -183,6 +183,8 @@ import { PersonalHistorySummaryComponent } from './components/personal-history-s
 import { AccountCompletenessComponent } from './components/account-completeness/account-completeness.component';
 import { PhsConfirmationComponent } from './components/phs-confirmation/phs-confirmation.component';
 import { MultiStageApplicationFlowComponent } from './components/multi-stage-application-flow/multi-stage-application-flow.component';
+import { EventFormComponent } from '@components/event-form/event-form.component';
+import { LicenceEventsService } from '@services/licence-events.service';
 
 
 @NgModule({
@@ -215,7 +217,7 @@ import { MultiStageApplicationFlowComponent } from './components/multi-stage-app
     InsertComponent,
     KeyPersonnelComponent,
     LicenceFeePaymentConfirmationComponent,
-    LicenceEventComponent,
+    EventFormComponent,
     NewsletterConfirmationComponent,
     NewsletterSignupComponent,
     NotFoundComponent,
@@ -331,6 +333,7 @@ import { MultiStageApplicationFlowComponent } from './components/multi-stage-app
     MatBadgeModule,
     NgBusyModule,
     NgxFileDropModule,
+    NgbModule,
     NgxMaskModule.forRoot(),
     ReactiveFormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
@@ -389,6 +392,7 @@ import { MultiStageApplicationFlowComponent } from './components/multi-stage-app
     ApplicationDataService,
     LegalEntityDataService,
     LicenseDataService,
+    LicenceEventsService,
     MonthlyReportDataService,
     AliasDataService,
     BCeidAuthGuard,

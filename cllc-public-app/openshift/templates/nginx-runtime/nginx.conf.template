@@ -81,9 +81,8 @@ http {
 		%API_CONFIG_SECTION%
 
         # Remove path prefix when handling files
-        rewrite ^/cannabislicensing/(.*)$ /$1 last;
-
-        
+        rewrite ^\/cannabislicensing\/(.*) /$1 last;
+    
         # serve our angular app here
         location / {
             root   /tmp/app/dist;

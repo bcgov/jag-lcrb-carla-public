@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Alias } from '@models/alias.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContactDataService } from '@services/contact-data.service';
 import { PHSContact } from '@models/contact.model';
 import { FormBase } from '@shared/form-base';
@@ -17,6 +17,9 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
   form: FormGroup;
   contactToken: string;
   contact: PHSContact;
+  showErrors: boolean;
+  fileCount: any = {};
+  validationErrors: string[] = [];
 
   public get aliases(): FormArray {
     return this.form.get('contact.aliases') as FormArray;
@@ -24,6 +27,7 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
 
   constructor(private fb: FormBuilder,
     private contactDataService: ContactDataService,
+    private router: Router,
     private route: ActivatedRoute) {
     super();
     this.route.paramMap.subscribe(pmap => this.contactToken = pmap.get('token'));
@@ -38,7 +42,7 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
         id: [''],
         fullname: [''],
         shortName: [{ value: '', disabled: true }],
-        emailaddress1: [''],
+        emailaddress1: ['', [Validators.required, Validators.email]],
         telephone1: [''],
         address1_line1: ['', [Validators.required, Validators.minLength(5)]],
         address1_city: ['', Validators.required],
@@ -67,11 +71,44 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
       })
     });
 
+    this.form.get('sameNameAtBirth').valueChanges
+      .subscribe(value => {
+        if (value) {
+          this.form.get('firstNameAtBirth').clearValidators();
+          this.form.get('firstNameAtBirth').reset();
+          this.form.get('lastNameAtBirth').clearValidators();
+          this.form.get('lastNameAtBirth').reset();
+        } else {
+          this.form.get('firstNameAtBirth').setValidators([Validators.required]);
+          this.form.get('lastNameAtBirth').setValidators([Validators.required]);
+        }
+      });
+
+    this.form.get('contact.phsLivesInCanada').valueChanges
+      .subscribe(value => {
+        if (value === 'Yes') {
+          this.form.get('contact.phsHasLivedInCanada').clearValidators();
+          this.form.get('contact.phsHasLivedInCanada').reset();
+        } else {
+          this.form.get('contact.phsHasLivedInCanada').setValidators([Validators.required]);
+        }
+      });
+
+    this.form.get('contact.phsConnectionsToOtherLicences').valueChanges
+      .subscribe(value => {
+        if (value === 'No') {
+          this.form.get('contact.phsConnectionsDetails').clearValidators();
+          this.form.get('contact.phsConnectionsDetails').reset();
+        } else {
+          this.form.get('contact.phsConnectionsDetails').setValidators([Validators.required]);
+        }
+      });
+
     this.contactDataService.getContactByPhsToken(this.contactToken)
       .subscribe(contact => {
         this.contact = contact;
         this.form.get('contact.shortName').setValue(contact.shortName);
-      })
+      });
 
   }
 
@@ -80,10 +117,6 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
   }
 
   deleteAlias(index: number) {
-    const alias = this.aliases.controls[index];
-    // if (alias.value.id) {
-    //   this.aliasesToDelete.push(alias.value);
-    // }
     this.aliases.removeAt(index);
   }
 
@@ -101,13 +134,13 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
     };
     return this.fb.group({
       id: [alias.id],
-      firstname: [alias.firstname, Validators.required],
+      firstname: [alias.firstname],
       middlename: [alias.middlename],
       lastname: [alias.lastname, Validators.required],
     });
   }
 
-  showStatutoryDeclaration() {
+  showStatutoryDeclaration(): boolean {
     let show = (
       this.form.get('contact.phsLivesInCanada').value === 'No' ||
       this.form.get('contact.phsCanadianDrugAlchoholDrivingOffence').value === 'Yes' ||
@@ -116,25 +149,64 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
     return show;
   }
 
+  showCRCUpload(): boolean {
+    let show = (
+      this.form.get('contact.phsLivesInCanada').value === 'Yes' ||
+      this.form.get('contact.phsHasLivedInCanada').value === 'Yes'
+    );
+    return show;
+  }
 
-  isQuestionnaireValid(): boolean {
-    const valid = false;
-    return valid;
+  updateUploadedFiles(uploadedNumber: number, docType: string) {
+    this.fileCount[docType] = uploadedNumber;
+  }
+
+  uploadsValid(): boolean {
+    this.validationErrors = [];
+    if (this.showCRCUpload() && !(this.fileCount['CRC'] > 0)) {
+      this.validationErrors.push("Please Upload Your Completed Criminal Record Check ");
+    }
+    if (this.showStatutoryDeclaration() && !(this.fileCount['StatDeclaration'] > 0)) {
+      this.validationErrors.push("Please Upload Your Statutory Declaration");
+    }
+    return this.validationErrors.length <= 0;
   }
 
   save() {
-    const contact = this.form.value.contact;
-    contact.phsDateSubmitted = new Date();
-    if (this.form.value.firstNameAtBirth && this.form.value.lastNameAtBirth) {
-      contact.aliases.push({
-        firstname: this.form.value.firstNameAtBirth,
-        lastname: this.form.value.lastNameAtBirth
+    this.showErrors = false;
+
+    if (this.uploadsValid() && this.form.valid) {
+      const contact = this.form.value.contact;
+      contact.phsDateSubmitted = new Date();
+      contact.phsComplete = 'Yes';
+
+      if (this.form.value.firstNameAtBirth && this.form.value.lastNameAtBirth) {
+        contact.aliases.push({
+          firstname: this.form.value.firstNameAtBirth,
+          lastname: this.form.value.lastNameAtBirth
+        });
+      }
+
+      this.contactDataService.updatePHSContact(contact, this.contactToken)
+        .subscribe(res => {
+          this.router.navigateByUrl('/personal-history-summary/confirmation');
+        });
+    } else {
+      // show error messages
+      this.showErrors = true;
+      let controls = this.form.controls;
+      for (let c in controls) {
+        controls[c].markAsTouched();
+      }
+      controls = (<FormGroup>this.form.get('contact')).controls;
+      for (let c in controls) {
+        controls[c].markAsTouched();
+      }
+
+      this.aliases.controls.forEach(group => {
+        group.get('lastname').markAsTouched();
       });
     }
-
-    this.contactDataService.updatePHSContact(contact, this.contactToken)
-      .subscribe(res => {
-      })
   }
 
 }

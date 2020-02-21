@@ -2,8 +2,8 @@
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
-
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
 using Newtonsoft.Json;
@@ -230,6 +230,37 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public static IEnumerable<MicrosoftDynamicsCRMadoxioLicences> GetLicensesByLicencee(this IDynamicsClient _dynamicsClient, IMemoryCache _cache, string licenceeId)
+        {
+            var expand = new List<string> { "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_LicenceType", "adoxio_establishment" };
+
+            IEnumerable<MicrosoftDynamicsCRMadoxioLicences> licences = null;
+
+            var filter = $"_adoxio_licencee_value eq {licenceeId}";
+
+            try
+            {
+                licences = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
+                licences = licences
+                    .Where(licence =>
+                    {
+                        return licence.Statuscode != (int)Public.ViewModels.LicenceStatusCodes.Cancelled
+                            && licence.Statuscode != (int)Public.ViewModels.LicenceStatusCodes.Inactive;
+
+                    })
+                    .Select(licence =>
+                    {
+                        licence.AdoxioLicenceType = ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
+                        return licence;
+                    });
+            }
+            catch (HttpOperationException)
+            {
+                licences = null;
+            }
+            return licences;
+        }
+
         public static async Task<MicrosoftDynamicsCRMadoxioTiedhouseconnection> GetTiedHouseConnectionById(this IDynamicsClient system, Guid id)
         {
             MicrosoftDynamicsCRMadoxioTiedhouseconnection result;
@@ -320,6 +351,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        // Does not return application of type "Licensee Changes"
         public static IEnumerable<MicrosoftDynamicsCRMadoxioApplication> GetApplicationListByApplicant(this IDynamicsClient _dynamicsClient, string applicantId)
         {
             var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType", "adoxio_ApplicationTypeId" };
@@ -335,6 +367,12 @@ namespace Gov.Lclb.Cllb.Interfaces
                 filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Denied}";
                 filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
                 filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+
+                var applicationType = _dynamicsClient.GetApplicationTypeByName("Licensee Changes");
+                if (applicationType != null)
+                {
+                    filter += $" and _adoxio_applicationtypeid_value ne {applicationType.AdoxioApplicationtypeid} ";
+                }
 
                 try
                 {

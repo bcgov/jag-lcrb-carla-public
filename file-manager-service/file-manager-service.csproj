@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="openshift\**" />
+    <Content Remove="openshift\**" />
+    <EmbeddedResource Remove="openshift\**" />
+    <None Remove="openshift\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Protobuf Include="Protos\fileManager.proto" GrpcServices="Server" />
   </ItemGroup>
 
