@@ -19,12 +19,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Eventid operations.
+    /// Areaevents operations.
     /// </summary>
-    public partial class Eventid : IServiceOperations<DynamicsClient>, IEventid
+    public partial class Areaevents : IServiceOperations<DynamicsClient>, IAreaevents
     {
         /// <summary>
-        /// Initializes a new instance of the Eventid class.
+        /// Initializes a new instance of the Areaevents class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public Eventid(DynamicsClient client)
+        public Areaevents(DynamicsClient client)
         {
             if (client == null)
             {
@@ -47,10 +47,23 @@ namespace Gov.Lclb.Cllb.Interfaces
         public DynamicsClient Client { get; private set; }
 
         /// <summary>
-        /// Get adoxio_EventId from adoxio_eventschedules
+        /// Get adoxio_area_events from adoxio_areas
         /// </summary>
-        /// <param name='adoxioEventscheduleid'>
-        /// key: adoxio_eventscheduleid of adoxio_eventschedule
+        /// <param name='adoxioAreaid'>
+        /// key: adoxio_areaid of adoxio_area
+        /// </param>
+        /// <param name='top'>
+        /// </param>
+        /// <param name='skip'>
+        /// </param>
+        /// <param name='search'>
+        /// </param>
+        /// <param name='filter'>
+        /// </param>
+        /// <param name='count'>
+        /// </param>
+        /// <param name='orderby'>
+        /// Order items by property values
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -79,11 +92,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEvent>> GetWithHttpMessagesAsync(string adoxioEventscheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEventCollection>> GetWithHttpMessagesAsync(string adoxioAreaid, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioEventscheduleid == null)
+            if (adoxioAreaid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioEventscheduleid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioAreaid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -92,7 +105,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioEventscheduleid", adoxioEventscheduleid);
+                tracingParameters.Add("adoxioAreaid", adoxioAreaid);
+                tracingParameters.Add("top", top);
+                tracingParameters.Add("skip", skip);
+                tracingParameters.Add("search", search);
+                tracingParameters.Add("filter", filter);
+                tracingParameters.Add("count", count);
+                tracingParameters.Add("orderby", orderby);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
@@ -100,9 +119,33 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_eventschedules({adoxio_eventscheduleid})/adoxio_EventId").ToString();
-            _url = _url.Replace("{adoxio_eventscheduleid}", System.Uri.EscapeDataString(adoxioEventscheduleid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_areas({adoxio_areaid})/adoxio_area_events").ToString();
+            _url = _url.Replace("{adoxio_areaid}", System.Uri.EscapeDataString(adoxioAreaid));
             List<string> _queryParameters = new List<string>();
+            if (top != null)
+            {
+                _queryParameters.Add(string.Format("$top={0}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(top, Client.SerializationSettings).Trim('"'))));
+            }
+            if (skip != null)
+            {
+                _queryParameters.Add(string.Format("$skip={0}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(skip, Client.SerializationSettings).Trim('"'))));
+            }
+            if (search != null)
+            {
+                _queryParameters.Add(string.Format("$search={0}", System.Uri.EscapeDataString(search)));
+            }
+            if (filter != null)
+            {
+                _queryParameters.Add(string.Format("$filter={0}", System.Uri.EscapeDataString(filter)));
+            }
+            if (count != null)
+            {
+                _queryParameters.Add(string.Format("$count={0}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(count, Client.SerializationSettings).Trim('"'))));
+            }
+            if (orderby != null)
+            {
+                _queryParameters.Add(string.Format("$orderby={0}", System.Uri.EscapeDataString(string.Join(",", orderby))));
+            }
             if (select != null)
             {
                 _queryParameters.Add(string.Format("$select={0}", System.Uri.EscapeDataString(string.Join(",", select))));
@@ -180,7 +223,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioEvent>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioEventCollection>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -189,7 +232,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioEvent>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioEventCollection>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -209,10 +252,13 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Get adoxio_EventId from incidents
+        /// Get adoxio_area_events from adoxio_areas
         /// </summary>
-        /// <param name='incidentid'>
-        /// key: incidentid of incident
+        /// <param name='adoxioAreaid'>
+        /// key: adoxio_areaid of adoxio_area
+        /// </param>
+        /// <param name='adoxioEventid'>
+        /// key: adoxio_eventid of adoxio_event
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -241,11 +287,15 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEvent>> Get1WithHttpMessagesAsync(string incidentid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEvent>> EventsByKeyWithHttpMessagesAsync(string adoxioAreaid, string adoxioEventid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (incidentid == null)
+            if (adoxioAreaid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "incidentid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioAreaid");
+            }
+            if (adoxioEventid == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioEventid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -254,16 +304,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("incidentid", incidentid);
+                tracingParameters.Add("adoxioAreaid", adoxioAreaid);
+                tracingParameters.Add("adoxioEventid", adoxioEventid);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "Get1", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "EventsByKey", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "incidents({incidentid})/adoxio_EventId").ToString();
-            _url = _url.Replace("{incidentid}", System.Uri.EscapeDataString(incidentid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_areas({adoxio_areaid})/adoxio_area_events({adoxio_eventid})").ToString();
+            _url = _url.Replace("{adoxio_areaid}", System.Uri.EscapeDataString(adoxioAreaid));
+            _url = _url.Replace("{adoxio_eventid}", System.Uri.EscapeDataString(adoxioEventid));
             List<string> _queryParameters = new List<string>();
             if (select != null)
             {
