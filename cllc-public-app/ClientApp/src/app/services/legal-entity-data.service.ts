@@ -5,6 +5,7 @@ import { DataService } from './data.service';
 import { LegalEntity } from '@models/legal-entity.model';
 import { LicenseeChangeLog } from '@models/licensee-change-log.model';
 import { Observable } from 'rxjs';
+import { SecurityScreeningSummary } from '@models/security-screening-summary.model';
 
 @Injectable()
 export class LegalEntityDataService extends DataService {
@@ -48,6 +49,15 @@ export class LegalEntityDataService extends DataService {
   getApplicationChangeLogs(applicationId: string): Observable<LicenseeChangeLog[]> {
     const apiPath = `api/legalentities/legal-entity-change-logs/application/${applicationId}`;
     return this.http.get<LicenseeChangeLog[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
+   * Gets the list of security screening records
+   */
+  getCurrentSecurityScreeningItems(): Observable<SecurityScreeningSummary> {
+    const apiPath = 'api/legalentities/current-security-summary';
+    return this.http.get<SecurityScreeningSummary>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
