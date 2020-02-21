@@ -1,6 +1,7 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Gov.Lclb.Cllb.Public.Utils;
+using System;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
