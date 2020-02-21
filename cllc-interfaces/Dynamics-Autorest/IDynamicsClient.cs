@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top201 { get; set; }
+        int? Top206 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip120 { get; set; }
+        int? Skip125 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count201 { get; set; }
+        bool? Count206 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter201 { get; set; }
+        string Filter206 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search120 { get; set; }
+        string Search125 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -278,6 +278,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAreas Areas { get; }
 
         /// <summary>
+        /// Gets the IAreaevents.
+        /// </summary>
+        IAreaevents Areaevents { get; }
+
+        /// <summary>
         /// Gets the IAuditlogrequests.
         /// </summary>
         IAuditlogrequests Auditlogrequests { get; }
@@ -393,6 +398,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAccount Account { get; }
 
         /// <summary>
+        /// Gets the IAreaid.
+        /// </summary>
+        IAreaid Areaid { get; }
+
+        /// <summary>
+        /// Gets the IEventannotations.
+        /// </summary>
+        IEventannotations Eventannotations { get; }
+
+        /// <summary>
         /// Gets the IEventasyncoperations.
         /// </summary>
         IEventasyncoperations Eventasyncoperations { get; }
@@ -413,9 +428,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEventduplicatematchingrecord Eventduplicatematchingrecord { get; }
 
         /// <summary>
+        /// Gets the IEventinspections.
+        /// </summary>
+        IEventinspections Eventinspections { get; }
+
+        /// <summary>
         /// Gets the IEventschedules.
         /// </summary>
         IEventschedules Eventschedules { get; }
+
+        /// <summary>
+        /// Gets the IEventsharepointdocumentlocations.
+        /// </summary>
+        IEventsharepointdocumentlocations Eventsharepointdocumentlocations { get; }
 
         /// <summary>
         /// Gets the IEventsyncerrors.
@@ -431,6 +456,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicence.
         /// </summary>
         ILicence Licence { get; }
+
+        /// <summary>
+        /// Gets the IRegionid.
+        /// </summary>
+        IRegionid Regionid { get; }
 
         /// <summary>
         /// Gets the IEventid.
@@ -663,6 +693,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegions Regions { get; }
 
         /// <summary>
+        /// Gets the IRegionevents.
+        /// </summary>
+        IRegionevents Regionevents { get; }
+
+        /// <summary>
         /// Gets the IRelatedparties.
         /// </summary>
         IRelatedparties Relatedparties { get; }
@@ -726,6 +761,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IWorkers.
         /// </summary>
         IWorkers Workers { get; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioevent.
+        /// </summary>
+        IObjectidadoxioevent Objectidadoxioevent { get; }
 
         /// <summary>
         /// Gets the IRegardingobjectidadoxioapplicationlicenseechangesv10.
