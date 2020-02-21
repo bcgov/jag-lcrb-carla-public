@@ -39,6 +39,7 @@ describe('ApplicationOwnershipTransferComponent', () => {
   account.businessType = 'PublicCorporation';
   const initialState = {
     currentAccountState: { currentAccount: account },
+    onGoingLicenseeChangesApplicationIdState: { onGoingLicenseeChangesApplicationId: '1' },
     currentUserState: { currentUser: {} }
   } as AppState;
 
@@ -85,6 +86,8 @@ describe('ApplicationOwnershipTransferComponent', () => {
     component = fixture.debugElement.componentInstance;
     fixture.detectChanges();
   });
+
+  afterEach(() => { fixture.destroy(); });
 
   it('should create', () => {
     expect(component).toBeTruthy();

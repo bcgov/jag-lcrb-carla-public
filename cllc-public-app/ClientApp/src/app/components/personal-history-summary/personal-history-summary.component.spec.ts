@@ -6,7 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
 import { ContactDataService } from '@services/contact-data.service';
 import { of } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -20,6 +20,7 @@ describe('PersonalHistorySummaryComponent', () => {
       declarations: [PersonalHistorySummaryComponent],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRouteStub },
+        { provide: Router, useValue: {} },
         {
           provide: ContactDataService, useValue: {
             getContactByPhsToken: () => of({})

@@ -8,8 +8,8 @@
                     <th *ngIf="showPosition()" style="width: 200px;">Position</th>
                     <th style="min-width: 200px;">Email</th>
                     <th style="width: 150px;">Date of Birth</th>
-                    <th *ngIf="showPHSLevel1()">Level 1 Personal History Summary </th>
-                    <th *ngIf="false">Level 2 Personal History Summary </th>
+                    <!-- <th *ngIf="showPHSLevel1()">Level 1 Personal History Summary </th>
+                    <th *ngIf="false">Level 2 Personal History Summary </th> -->
                     <th style="background-color: transparent; width: 50px;"></th>
                 </tr>
             </thead>
@@ -21,7 +21,7 @@
                             <span *ngIf="!associate.get('edit').value || associate.get('id').value">
                                 {{associate.get('firstNameNew').value}}
                             </span>
-                            <app-field [showChevrons]="false"
+                            <app-field [showChevrons]="false" [isFullWidth]="true"
                                 *ngIf="associate.get('edit').value && !associate.get('id').value"
                                 [valid]="!associate.get('firstNameNew').touched || associate.get('firstNameNew').valid"
                                 errorMessage="Please enter First Name">
@@ -32,7 +32,7 @@
                             <span *ngIf="!associate.get('edit').value || associate.get('id').value">
                                 {{associate.get('lastNameNew').value}}
                             </span>
-                            <app-field [showChevrons]="false"
+                            <app-field [showChevrons]="false" [isFullWidth]="true"
                                 *ngIf="associate.get('edit').value && !associate.get('id').value"
                                 [valid]="!associate.get('lastNameNew').touched || associate.get('lastNameNew').valid"
                                 errorMessage="Please enter Last Name">
@@ -71,7 +71,7 @@
                         </td>
                         <td>
                             <span *ngIf="!associate.get('edit').value">{{associate.get('emailNew').value}}</span>
-                            <app-field *ngIf="associate.get('edit').value" [showChevrons]="false"
+                            <app-field *ngIf="associate.get('edit').value" [showChevrons]="false" [isFullWidth]="true"
                                 [valid]="!associate.get('emailNew').touched || associate.get('emailNew').valid"
                                 errorMessage="Please enter email">
                                 <input class="form-control" type="text" formControlName="emailNew">
@@ -91,14 +91,14 @@
                                 <mat-datepicker #picker2></mat-datepicker>
                             </app-field>
                         </td>
-                        <td *ngIf="showPHSLevel1()">
+                        <!-- <td *ngIf="showPHSLevel1()">
                             <span *ngIf="associate.get('isContactComplete').value === 'Yes'">Information Received</span>
                             <button
                                 *ngIf="associate.get('isContactComplete').value !== 'Yes' && associate.get('phsLink').value"
                                 class="btn btn-primary" (click)="copyMessage(associate.get('phsLink').value)">Copy
                                 Link</button>
                         </td>
-                        <td *ngIf="false"></td>
+                        <td *ngIf="false"></td> -->
                         <td>
                             <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
                                 (click)="associate.get('edit').value = true;" class="fas fa-pencil-alt"
@@ -109,12 +109,12 @@
                         </td>
                     </tr>
 
-    <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType() &&  isNameChangePerformed(associate.value.refObjec) && !associate.get('edit').value"
+                    <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType() &&  isNameChangePerformed(associate.value.refObject) && !associate.get('edit').value"
                         style="height:20px;">
-                        <td colspan="6">
+                        <td colspan="7">
                             <div (click)="associate.get('collapse').value = !associate.get('collapse').value"
                                 style="padding-left: 20px;">
-                                <mat-expansion-panel class="mat-elevation-z1">
+                                <mat-expansion-panel [expanded]="true" class="mat-elevation-z1">
                                     <mat-expansion-panel-header>
                                         <mat-panel-title>
                                             {{associate.get('businessNameNew').value}} Name Change Upload
@@ -129,7 +129,7 @@
                                         <app-file-uploader *ngIf="account" documentType="Name Change Documents"
                                             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
                                             entityName="account"
-                                            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
+                                            (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Name Change Documents', associate?.value?.refObject)"
                                             [entityId]="account.id"
                                             [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
                                             #financialIntegrityDocuments>
@@ -152,8 +152,8 @@
                     <th style="width: 200px;">Shares (%)</th>
                     <th style="min-width: 200px;">Email</th>
                     <th style="width: 150px;">Date of Birth</th>
-                    <th *ngIf="false">Liquor Associate Status </th>
-                    <th *ngIf="false">Cannabis Associate Status </th>
+                    <!-- <th *ngIf="false">Liquor Associate Status </th>
+                    <th *ngIf="false">Cannabis Associate Status </th> -->
                     <th style="background-color: transparent; width: 50px;"></th>
                 </tr>
             </thead>
@@ -165,7 +165,7 @@
                             <span
                                 *ngIf="!associate.get('edit').value || associate.get('id').value">{{associate.get('firstNameNew').value}}</span>
                             <app-field [showChevrons]="false"
-                                *ngIf="associate.get('edit').value && !associate.get('id').value"
+                                *ngIf="associate.get('edit').value && !associate.get('id').value" [isFullWidth]="true"
                                 [valid]="!associate.get('firstNameNew').touched || associate.get('firstNameNew').valid"
                                 errorMessage="Please enter First Name">
                                 <input class="form-control" type="text" formControlName="firstNameNew">
@@ -174,7 +174,7 @@
                         <td>
                             <span
                                 *ngIf="!associate.get('edit').value || associate.get('id').value">{{associate.get('lastNameNew').value}}</span>
-                            <app-field [showChevrons]="false"
+                            <app-field [showChevrons]="false" [isFullWidth]="true"
                                 *ngIf="associate.get('edit').value && !associate.get('id').value"
                                 [valid]="!associate.get('lastNameNew').touched || associate.get('lastNameNew').valid"
                                 errorMessage="Please enter Last Name">
@@ -186,7 +186,7 @@
                                 {{associate.get('interestPercentageNew').value}}
                             </span>
 
-                            <app-field [showChevrons]="false" *ngIf="associate.get('edit').value"
+                            <app-field [showChevrons]="false" *ngIf="associate.get('edit').value" [isFullWidth]="true"
                                 [valid]="!associate.get('interestPercentageNew').touched || associate.get('interestPercentageNew').valid"
                                 errorMessage="Please enter Shares">
                                 <div class="d-flex">
@@ -200,8 +200,11 @@
                         </td>
                         <td>
                             <span *ngIf="!associate.get('edit').value">{{associate.get('emailNew').value}}</span>
-                            <input *ngIf="associate.get('edit').value" class="form-control" type="text"
-                                formControlName="emailNew">
+                            <app-field *ngIf="associate.get('edit').value" [showChevrons]="false" [isFullWidth]="true"
+                                [valid]="!associate.get('emailNew').touched || associate.get('emailNew').valid"
+                                errorMessage="Please enter email">
+                                <input class="form-control" type="text" formControlName="emailNew">
+                            </app-field>
                         </td>
                         <td>
                             <span *ngIf="!associate.get('edit').value || associate.get('id').value">
@@ -213,14 +216,14 @@
                                 [valid]="!associate.get('dateofBirthNew').touched || associate.get('dateofBirthNew').valid"
                                 errorMessage="Please enter Birth Date">
                                 <input type="text" formControlName="dateofBirthNew"
-                                    style="width: 120px; background-color: #fff;" autocomplete="false" [max]="YearsAgo19"
-                                    placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker"
-                                    (focus)="picker.open()" (click)="picker.open()">
+                                    style="width: 120px; background-color: #fff;" autocomplete="false"
+                                    [max]="YearsAgo19" placeholder="yyyy-mm-dd" class="form-control"
+                                    [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
                                 <mat-datepicker #picker></mat-datepicker>
                             </app-field>
                         </td>
-                        <td *ngIf="false"></td>
-                        <td *ngIf="false"></td>
+                        <!-- <td *ngIf="false"></td>
+                        <td *ngIf="false"></td> -->
                         <td>
                             <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
                                 (click)="associate.get('edit').value = true;" class="fas fa-pencil-alt"
@@ -241,8 +244,8 @@
                     <th style="width: 200px;">Shares (%)</th>
                     <th style="width: 200px;">Business Type</th>
                     <th style="width: 200px;">Email</th>
-                    <th *ngIf="false">Liquor Associate Status </th>
-                    <th *ngIf="false">Cannabis Associate Status </th>
+                    <!-- <th *ngIf="false">Liquor Associate Status </th>
+                    <th *ngIf="false">Cannabis Associate Status </th> -->
                     <th style="background-color: transparent; width: 50px;"></th>
                 </tr>
             </thead>
@@ -257,7 +260,7 @@
                                 </span>
 
                                 <app-field *ngIf="associate.get('edit').value && !associate.get('id').value"
-                                    [showChevrons]="false"
+                                    [showChevrons]="false" [isFullWidth]="true"
                                     [valid]="!associate.get('businessNameNew').touched || associate.get('businessNameNew').valid"
                                     errorMessage="Please enter Business Name">
                                     <input class="form-control" type="text" formControlName="businessNameNew">
@@ -266,7 +269,7 @@
                             <td>
                                 <span
                                     *ngIf="!associate.get('edit').value">{{associate.get('interestPercentageNew').value}}</span>
-                                <app-field *ngIf="associate.get('edit').value" [showChevrons]="false"
+                                <app-field *ngIf="associate.get('edit').value" [showChevrons]="false" [isFullWidth]="true"
                                     [valid]="!associate.get('interestPercentageNew').touched || associate.get('interestPercentageNew').valid"
                                     errorMessage="Please enter Shares">
                                     <input class="form-control" type="text" formControlName="interestPercentageNew">
@@ -276,7 +279,7 @@
                                 <span *ngIf="!associate.get('edit').value || associate.get('id').value">
                                     {{getBusinessTypeName(associate.get('businessType').value)}}
                                 </span>
-                                <app-field [showChevrons]="false"
+                                <app-field [showChevrons]="false" [isFullWidth]="true"
                                     *ngIf="associate.get('edit').value && !associate.get('id').value"
                                     [valid]="!associate.get('businessType').touched || associate.get('businessType').valid"
                                     errorMessage="Please select Business Type">
@@ -293,14 +296,14 @@
                             </td>
                             <td>
                                 <span *ngIf="!associate.get('edit').value">{{associate.get('emailNew').value}}</span>
-                                <app-field *ngIf="associate.get('edit').value" [showChevrons]="false"
-                                    [valid]="!associate.get('emailNew').touched || associate.get('emailNew').valid"
+                                <app-field *ngIf="associate.get('edit').value" [showChevrons]="false" [isFullWidth]="true"
+                                    [valid]="!associate.get('emailNew').touched || associate.get('emailNew ').valid"
                                     errorMessage="Please enter email">
                                     <input class="form-control" type="text" formControlName="emailNew">
                                 </app-field>
                             </td>
-                            <td *ngIf="false"></td>
-                            <td *ngIf="false"></td>
+                            <!-- <td *ngIf="false"></td>
+                            <td *ngIf="false"></td> -->
                             <td>
                                 <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
                                     (click)="associate.get('edit').value = true; associate.get('collapse').value = true;"
@@ -317,7 +320,7 @@
                             <td colspan="5">
                                 <div (click)="associate.get('collapse').value = !associate.get('collapse').value"
                                     style="padding-left: 20px;">
-                                    <mat-expansion-panel class="mat-elevation-z1">
+                                    <mat-expansion-panel [expanded]="true" class="mat-elevation-z1">
                                         <mat-expansion-panel-header>
                                             <mat-panel-title>
                                                 {{associate.get('businessNameNew').value}} Business Information

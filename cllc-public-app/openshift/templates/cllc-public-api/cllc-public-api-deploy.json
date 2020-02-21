@@ -72,7 +72,7 @@
                     "name": "ADFS_OAUTH2_URI",
                     "valueFrom": {
                       "secretKeyRef": {
-                        "key": "adfs-oauth2-uri",
+                        "key": "ADFS_OAUTH2_URI",
                         "name": "${SECRET_RESOURCE_NAME}"
                       }
                     }
@@ -81,7 +81,7 @@
                     "name": "DYNAMICS_APP_GROUP_CLIENT_ID",
                     "valueFrom": {
                       "secretKeyRef": {
-                        "key": "dynamics-app-group-client-id",
+                        "key": "DYNAMICS_APP_GROUP_CLIENT_ID",
                         "name": "${SECRET_RESOURCE_NAME}"
                       }
                     }
@@ -90,7 +90,7 @@
                     "name": "DYNAMICS_APP_GROUP_RESOURCE",
                     "valueFrom": {
                       "secretKeyRef": {
-                        "key": "dynamics-app-group-resource",
+                        "key": "DYNAMICS_APP_GROUP_RESOURCE",
                         "name": "${SECRET_RESOURCE_NAME}"
                       }
                     }
@@ -99,7 +99,7 @@
                     "name": "DYNAMICS_APP_GROUP_SECRET",
                     "valueFrom": {
                       "secretKeyRef": {
-                        "key": "dynamics-app-group-secret",
+                        "key": "DYNAMICS_APP_GROUP_SECRET",
                         "name": "${SECRET_RESOURCE_NAME}"
                       }
                     }
@@ -108,7 +108,7 @@
                     "name": "DYNAMICS_NATIVE_ODATA_URI",
                     "valueFrom": {
                       "secretKeyRef": {
-                        "key": "dynamics-native-odata-uri",
+                        "key": "DYNAMICS_NATIVE_ODATA_URI",
                         "name": "${SECRET_RESOURCE_NAME}"
                       }
                     }
@@ -117,25 +117,17 @@
                     "name": "DYNAMICS_ODATA_URI",
                     "valueFrom": {
                       "secretKeyRef": {
-                        "key": "dynamics-odata-uri",
+                        "key": "DYNAMICS_ODATA_URI",
                         "name": "${SECRET_RESOURCE_NAME}"
                       }
                     }
                   },
-                  {
-                    "name": "DYNAMICS_NATIVE_ODATA_URI",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "dynamics-native-odata-uri",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },
+                  
                   {
                     "name": "DYNAMICS_PASSWORD",
                     "valueFrom": {
                       "secretKeyRef": {
-                        "key": "dynamics-password",
+                        "key": "DYNAMICS_PASSWORD",
                         "name": "${SECRET_RESOURCE_NAME}"
                       }
                     }
@@ -144,65 +136,12 @@
                     "name": "DYNAMICS_USERNAME",
                     "valueFrom": {
                       "secretKeyRef": {
-                        "key": "dynamics-username",
+                        "key": "DYNAMICS_USERNAME",
                         "name": "${SECRET_RESOURCE_NAME}"
                       }
                     }
                   },
-                  {
-                    "name": "SHAREPOINT_NATIVE_BASE_URI",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "sharepoint-native-base-uri",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },                  
-                  {
-                    "name": "SHAREPOINT_ODATA_URI",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "sharepoint-odata-uri",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },                  
-                  {
-                    "name": "SHAREPOINT_PASSWORD",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "sharepoint-password",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },               
-                  {
-                    "name": "SHAREPOINT_RELYING_PARTY_IDENTIFIER",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "sharepoint-relying-party-identifier",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },
-                  {
-                    "name": "SHAREPOINT_STS_TOKEN_URI",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "sharepoint-sts-token-uri",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },				  
-                  {
-                    "name": "SHAREPOINT_USERNAME",
-					"valueFrom": {
-                      "secretKeyRef": {
-                        "key": "sharepoint-username",
-						"name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },
+                  
 				  {
                     "name": "SPLUNK_COLLECTOR_URL",
 					"valueFrom": {
@@ -557,24 +496,6 @@
           "name": "${NAME}",
           "weight": 100
         }
-      }
-    },
-    {
-      "kind": "HorizontalPodAutoscaler",
-      "apiVersion": "autoscaling/v1",
-      "metadata": {
-        "name": "${NAME}",
-        "labels": {
-          "app": "${NAME}"
-        }
-      },
-      "spec": {
-        "scaleTargetRef": {
-          "kind": "DeploymentConfig",
-          "name": "${NAME}"
-        },
-        "minReplicas": 2,
-        "maxReplicas": 2
       }
     },
     {

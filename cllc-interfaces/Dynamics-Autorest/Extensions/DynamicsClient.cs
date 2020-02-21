@@ -428,5 +428,20 @@ namespace Gov.Lclb.Cllb.Interfaces
             
             return result;
         }
+
+        public MicrosoftDynamicsCRMadoxioEventscheduleCollection GetEventSchedulesByEventId(string id)
+        {
+            MicrosoftDynamicsCRMadoxioEventscheduleCollection results;
+            try
+            {
+                results = this.Eventschedules.Get(id);
+            }
+            catch (HttpOperationException)
+            {
+                results = null;
+            }
+            
+            return results;
+        }
     }
 }
