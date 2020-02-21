@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top201 { get; set; }
+        public int? Top206 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip120 { get; set; }
+        public int? Skip125 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count201 { get; set; }
+        public bool? Count206 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter201 { get; set; }
+        public string Filter206 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search120 { get; set; }
+        public string Search125 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -281,6 +281,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAreas Areas { get; private set; }
 
         /// <summary>
+        /// Gets the IAreaevents.
+        /// </summary>
+        public virtual IAreaevents Areaevents { get; private set; }
+
+        /// <summary>
         /// Gets the IAuditlogrequests.
         /// </summary>
         public virtual IAuditlogrequests Auditlogrequests { get; private set; }
@@ -396,6 +401,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAccount Account { get; private set; }
 
         /// <summary>
+        /// Gets the IAreaid.
+        /// </summary>
+        public virtual IAreaid Areaid { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventannotations.
+        /// </summary>
+        public virtual IEventannotations Eventannotations { get; private set; }
+
+        /// <summary>
         /// Gets the IEventasyncoperations.
         /// </summary>
         public virtual IEventasyncoperations Eventasyncoperations { get; private set; }
@@ -416,9 +431,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEventduplicatematchingrecord Eventduplicatematchingrecord { get; private set; }
 
         /// <summary>
+        /// Gets the IEventinspections.
+        /// </summary>
+        public virtual IEventinspections Eventinspections { get; private set; }
+
+        /// <summary>
         /// Gets the IEventschedules.
         /// </summary>
         public virtual IEventschedules Eventschedules { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventsharepointdocumentlocations.
+        /// </summary>
+        public virtual IEventsharepointdocumentlocations Eventsharepointdocumentlocations { get; private set; }
 
         /// <summary>
         /// Gets the IEventsyncerrors.
@@ -434,6 +459,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicence.
         /// </summary>
         public virtual ILicence Licence { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegionid.
+        /// </summary>
+        public virtual IRegionid Regionid { get; private set; }
 
         /// <summary>
         /// Gets the IEventid.
@@ -666,6 +696,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRegions Regions { get; private set; }
 
         /// <summary>
+        /// Gets the IRegionevents.
+        /// </summary>
+        public virtual IRegionevents Regionevents { get; private set; }
+
+        /// <summary>
         /// Gets the IRelatedparties.
         /// </summary>
         public virtual IRelatedparties Relatedparties { get; private set; }
@@ -729,6 +764,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IWorkers.
         /// </summary>
         public virtual IWorkers Workers { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioevent.
+        /// </summary>
+        public virtual IObjectidadoxioevent Objectidadoxioevent { get; private set; }
 
         /// <summary>
         /// Gets the IRegardingobjectidadoxioapplicationlicenseechangesv10.
@@ -1514,6 +1554,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationtypes = new Applicationtypes(this);
             Applicationtypeformelementuploadfields = new Applicationtypeformelementuploadfields(this);
             Areas = new Areas(this);
+            Areaevents = new Areaevents(this);
             Auditlogrequests = new Auditlogrequests(this);
             Businessaccounts = new Businessaccounts(this);
             Cannabisinventoryreports = new Cannabisinventoryreports(this);
@@ -1537,14 +1578,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             Establishmentwatchwords = new Establishmentwatchwords(this);
             Events = new Events(this);
             Account = new Account(this);
+            Areaid = new Areaid(this);
+            Eventannotations = new Eventannotations(this);
             Eventasyncoperations = new Eventasyncoperations(this);
             Eventbulkdeletefailures = new Eventbulkdeletefailures(this);
             Eventduplicatebaserecord = new Eventduplicatebaserecord(this);
             Eventduplicatematchingrecord = new Eventduplicatematchingrecord(this);
+            Eventinspections = new Eventinspections(this);
             Eventschedules = new Eventschedules(this);
+            Eventsharepointdocumentlocations = new Eventsharepointdocumentlocations(this);
             Eventsyncerrors = new Eventsyncerrors(this);
             Inspector = new Inspector(this);
             Licence = new Licence(this);
+            Regionid = new Regionid(this);
             Eventid = new Eventid(this);
             Eventscheduleasyncoperations = new Eventscheduleasyncoperations(this);
             Eventschedulebulkdeletefailures = new Eventschedulebulkdeletefailures(this);
@@ -1591,6 +1637,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Postalcodes = new Postalcodes(this);
             Previousaddresses = new Previousaddresses(this);
             Regions = new Regions(this);
+            Regionevents = new Regionevents(this);
             Relatedparties = new Relatedparties(this);
             Compliancemeetingid = new Compliancemeetingid(this);
             Settings = new Settings(this);
@@ -1604,6 +1651,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Witnesses = new Witnesses(this);
             Workerinvoicehistories = new Workerinvoicehistories(this);
             Workers = new Workers(this);
+            Objectidadoxioevent = new Objectidadoxioevent(this);
             Regardingobjectidadoxioapplicationlicenseechangesv10 = new Regardingobjectidadoxioapplicationlicenseechangesv10(this);
             Regardingobjectidadoxioapplicationliquorbpf = new Regardingobjectidadoxioapplicationliquorbpf(this);
             Regardingobjectidadoxioapplicationrelocationv1 = new Regardingobjectidadoxioapplicationrelocationv1(this);
