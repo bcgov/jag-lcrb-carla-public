@@ -51,7 +51,7 @@
                   and other federal government institution under the Privacy Act for the purpose of conducting a check of criminal investigations, 
                   charges and convictions. I also authorize the provision of my personal information on this application by the BC Municipal Law 
                   Enforcement Agencies as well as other authorized public bodies under FoIPPA for the same purpose.
-                <div *ngIf="!isConcentValidatedValid() && form.get('consentToCollection').touched" style="color: #A12622;  margin-top: 2px;">
+                <div *ngIf="!isDeclarationValid() && form.get('consentToCollection').touched" style="color: #A12622;  margin-top: 2px;">
                   ! Please provide your consent to proceed -- a security screening is required in order to become a
                   qualified cannabis worker.
                 </div>

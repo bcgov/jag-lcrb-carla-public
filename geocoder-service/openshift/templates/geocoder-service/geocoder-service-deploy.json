@@ -96,6 +96,79 @@
                   {
                     "name": "GEOCODER_API_KEY",
                     "value": "${GEOCODER_API_KEY}"
+                  },
+                  {
+                    "name": "ADFS_OAUTH2_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "ADFS_OAUTH2_URI",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+				  {
+                    "name": "DYNAMICS_APP_GROUP_CLIENT_ID",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "DYNAMICS_APP_GROUP_CLIENT_ID",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_APP_GROUP_RESOURCE",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "DYNAMICS_APP_GROUP_RESOURCE",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_APP_GROUP_SECRET",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "DYNAMICS_APP_GROUP_SECRET",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_NATIVE_ODATA_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "DYNAMICS_NATIVE_ODATA_URI",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_ODATA_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "DYNAMICS_ODATA_URI",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  
+                  {
+                    "name": "DYNAMICS_PASSWORD",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "DYNAMICS_PASSWORD",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_USERNAME",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "DYNAMICS_USERNAME",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
                   }	
                   
                 ],
@@ -196,7 +269,7 @@
       "displayName": "Image Namespace",
       "description": "The namespace of the OpenShift project containing the imagestream for the application.",
       "required": true,
-      "value": "lclb-cllc-tools"
+      "value": "yummcs-tools"
     },
     {
       "name": "TAG_NAME",

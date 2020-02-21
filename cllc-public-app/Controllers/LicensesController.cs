@@ -289,39 +289,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private List<ApplicationLicenseSummary> GetLicensesByLicencee(string licenceeId)
         {
-            var expand = new List<string> { "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_LicenceType", "adoxio_establishment" };
+
+            var licences = _dynamicsClient.GetLicensesByLicencee(_cache, licenceeId);
+
             List<ApplicationLicenseSummary> licenseSummaryList = new List<ApplicationLicenseSummary>();
-            IEnumerable<MicrosoftDynamicsCRMadoxioLicences> licences = null;
-            if (string.IsNullOrEmpty(licenceeId))
-            {
-                licences = _dynamicsClient.Licenceses.Get(expand: expand).Value;
-            }
-            else
-            {
-                var filter = $"_adoxio_licencee_value eq {licenceeId}";
-
-                try
-                {
-                    licences = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
-                    licences = licences
-                        .Where(licence =>
-                        {
-                            return licence.Statuscode != (int)LicenceStatusCodes.Cancelled
-                             && licence.Statuscode != (int)LicenceStatusCodes.Inactive;
-
-                        })
-                        .Select(licence =>
-                        {
-                            licence.AdoxioLicenceType = ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
-                            return licence;
-                        });
-                }
-                catch (HttpOperationException)
-                {
-                    licences = null;
-                }
-
-            }
 
             if (licences != null)
             {

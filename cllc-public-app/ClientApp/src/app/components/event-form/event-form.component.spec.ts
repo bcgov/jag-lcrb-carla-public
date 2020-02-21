@@ -11,6 +11,7 @@ import { AppState } from '@app/app-state/models/app-state';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
 import { MatCheckboxModule } from '@angular/material';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
 
 
@@ -23,7 +24,7 @@ describe('EventFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, MatCheckboxModule],
+      imports: [ReactiveFormsModule, MatCheckboxModule, NgbModule],
       declarations: [EventFormComponent],
       providers: [
         provideMockStore({}),
