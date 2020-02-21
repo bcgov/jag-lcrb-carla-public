@@ -18,6 +18,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -30,11 +31,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
+        private readonly IMemoryCache _cache;
         private readonly string _encryptionKey;
         private readonly FileManagerClient _fileManagerClient;
 
-        public LegalEntitiesController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient)
+        public LegalEntitiesController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IMemoryCache memoryCache)
         {
+            _cache = memoryCache;
             _configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
@@ -64,7 +67,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // set account filter
             accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
             _logger.LogDebug("Account filter = " + accountfilter);
-
             try
             {
                 legalEntities = _dynamicsClient.Legalentities.Get(filter: accountfilter).Value;
@@ -124,6 +126,108 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             LegalEntity legalEntity = GetLegalEntityTree(userSettings.AccountId);
             return new JsonResult(legalEntity);
         }
+
+        private void GetScreeningData(ref SecurityScreeningCategorySummary securityScreeningCategorySummarycannabisSummary, LegalEntity legalEntity, bool isLiquor)
+        {
+            // if the current legal entity is an individual, add it.
+
+            if (legalEntity.isindividual != null && true == legalEntity.isindividual)
+            {
+                bool isComplete = false;
+                DateTimeOffset? dateSubmitted = null;
+                // determine if there is a completed change log for this item.
+                if (! string.IsNullOrEmpty (legalEntity.contactId))
+                {
+                    var contact = _dynamicsClient.GetContactById(legalEntity.contactId).GetAwaiter().GetResult();
+                    if (contact != null && contact.AdoxioPhscomplete != null && contact.AdoxioPhscomplete == 845280001)
+                    {
+                        isComplete = true;
+                        dateSubmitted = contact.AdoxioPhsdatesubmitted;
+                    }
+                }
+                var newItem = new SecurityScreeningStatusItem()
+                {
+                    FirstName = legalEntity.firstname,
+                    MiddleName = legalEntity.middlename,
+                    LastName = legalEntity.lastname,
+                    ScreeningLink = legalEntity.PhsLink,
+                    DateSubmitted = dateSubmitted
+                };
+                if (isComplete)
+                {
+                    if (securityScreeningCategorySummarycannabisSummary.CompletedItems == null)
+                    {
+                        securityScreeningCategorySummarycannabisSummary.CompletedItems = new List<SecurityScreeningStatusItem>();
+                    }
+                    securityScreeningCategorySummarycannabisSummary.CompletedItems.Add(newItem);
+                }
+                else
+                {
+                    if (securityScreeningCategorySummarycannabisSummary.OutstandingItems == null)
+                    {
+                        securityScreeningCategorySummarycannabisSummary.OutstandingItems = new List<SecurityScreeningStatusItem>();
+                    }
+                    securityScreeningCategorySummarycannabisSummary.OutstandingItems.Add(newItem);
+                }
+            }
+            if (legalEntity.children != null )
+            {
+                foreach (var item in legalEntity.children)
+                {
+                    GetScreeningData(ref securityScreeningCategorySummarycannabisSummary, item, isLiquor);
+                }
+            }
+                
+        }
+
+
+        [HttpGet("current-security-summary")]
+        public JsonResult GetCurrentSecurityScreeningSummary()
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // check that the session is setup correctly.
+            userSettings.Validate();
+
+            // get data for the current account. 
+
+            string currentAccountId = userSettings.AccountId;
+
+            LegalEntity legalEntity = GetLegalEntityTree(userSettings.AccountId);
+
+            // get the current user's applications and licences
+            var licences = _dynamicsClient.GetLicensesByLicencee(_cache, currentAccountId);
+            var applications = _dynamicsClient.GetApplicationsForLicenceByApplicant(currentAccountId);
+
+            SecurityScreeningSummary result = new SecurityScreeningSummary();
+
+            // determine how many of each licence there are.
+            int cannabisLicenceCount = licences.Count(x => x.AdoxioLicenceType.AdoxioName.ToUpper().Contains("CANNABIS"));
+            int liquorLicenceCount = licences.Count() - cannabisLicenceCount;
+
+            // determine how many applications of each type there are.
+            int cannabisApplicationCount = applications.Count(x => x.AdoxioApplicationTypeId.AdoxioName.ToUpper().Contains("CANNABIS"));
+            int liquorApplicationCount = applications.Count() - cannabisApplicationCount;
+
+            if (cannabisLicenceCount > 0 || cannabisApplicationCount > 0)
+            {
+                SecurityScreeningCategorySummary cannabisSummary = new SecurityScreeningCategorySummary();
+                GetScreeningData(ref cannabisSummary, legalEntity, false);
+                result.Cannabis = cannabisSummary;
+            }
+
+            if (liquorLicenceCount > 0 || liquorApplicationCount > 0)
+            {
+                SecurityScreeningCategorySummary liquorSummary = new SecurityScreeningCategorySummary();
+                GetScreeningData(ref liquorSummary, legalEntity, false);
+                result.Liquor = liquorSummary;
+            }
+     
+            return new JsonResult(result);
+
+        }
+
 
         [HttpGet("legal-entity-change-logs/application/{applicationId}")]
         public ActionResult GetChangeLogsForApplication(string applicationId)

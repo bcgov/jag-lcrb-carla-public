@@ -39,8 +39,8 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task TestCRUD()
         {
-            string initialName = "InitialName";
-            string changedName = "ChangedName";
+            string venue = "Venue Description";
+            string changedVenue = "New Venue Description";
 
             var loginUser = randomNewUserName("NewLoginUser", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser);
@@ -50,7 +50,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             ViewModels.LicenceEvent viewmodel_adoxio_event = new ViewModels.LicenceEvent()
             {
-                Name = initialName
+                VenueDescription = venue
             };
             
             string jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_event);
@@ -64,8 +64,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
             ViewModels.LicenceEvent responseViewModel = JsonConvert.DeserializeObject<ViewModels.LicenceEvent>(jsonString);
 
-            // name should match.
-            Assert.Equal(initialName, responseViewModel.Name);
+            Assert.Equal(venue, responseViewModel.VenueDescription);
             Guid id = new Guid(responseViewModel.Id);
 
             // R - Read
@@ -76,13 +75,13 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             jsonString = await response.Content.ReadAsStringAsync();
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.LicenceEvent>(jsonString);
-            Assert.Equal(initialName, responseViewModel.Name);
+            Assert.Equal(venue, responseViewModel.VenueDescription);
 
             // U - Update            
             ViewModels.LicenceEvent patchModel = new ViewModels.LicenceEvent()
             {
                 Id = id.ToString(),
-                Name = changedName
+                VenueDescription = changedVenue
             };            
 
             request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
@@ -102,7 +101,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
 
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.LicenceEvent>(jsonString);
-            Assert.Equal(changedName, responseViewModel.Name);
+            Assert.Equal(responseViewModel.VenueDescription, changedVenue);
 
             // D - Delete
 
@@ -122,6 +121,95 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             await LogoutAndCleanupTestUser(strId);
 
+        }
+
+        [Fact]
+        public async System.Threading.Tasks.Task TestDates()
+        {
+
+            string venue = "Venue Description";
+
+            // January 1, 1970 - 00:00 with Pacific time.
+            // note that this field expects no time.
+
+            DateTimeOffset startDate = DateTimeOffset.Parse("01/01/1970 00:00 -8:00");
+            DateTimeOffset endDate = DateTimeOffset.Parse("02/02/1970 00:00 -8:00");
+            List<ViewModels.LicenceEventSchedule> schedule = new List<ViewModels.LicenceEventSchedule>();
+            schedule.Add(new ViewModels.LicenceEventSchedule()
+            {
+                EventStartDateTime = DateTimeOffset.Parse("01/01/1970 09:00 -8:00"),
+                EventEndDateTime = DateTimeOffset.Parse("02/02/1970 17:00 -8:00"),
+                ServiceStartDateTime = DateTimeOffset.Parse("01/01/1970 09:00 -8:00"),
+                ServiceEndDateTime = DateTimeOffset.Parse("02/02/1970 17:00 -8:00")
+            });
+
+            var loginUser = randomNewUserName("NewLoginUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
+
+            // C - Create
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
+
+            ViewModels.LicenceEvent viewmodel_adoxio_event = new ViewModels.LicenceEvent()
+            {
+                VenueDescription = venue,
+                StartDate = startDate,
+                EndDate = endDate,
+                Schedules = schedule
+            };
+
+            string jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_event);
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            var response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+
+            viewmodel_adoxio_event = JsonConvert.DeserializeObject<ViewModels.LicenceEvent>(jsonString);
+
+            Assert.Equal(((DateTimeOffset)viewmodel_adoxio_event.StartDate).Month, startDate.Month);
+            Assert.Equal(((DateTimeOffset)viewmodel_adoxio_event.StartDate).Day, startDate.Day);
+            Assert.Equal(((DateTimeOffset)viewmodel_adoxio_event.StartDate).Year, startDate.Year);
+            Assert.Equal(((DateTimeOffset)viewmodel_adoxio_event.EndDate).Month, endDate.Month);
+            Assert.Equal(((DateTimeOffset)viewmodel_adoxio_event.EndDate).Day, endDate.Day);
+            Assert.Equal(((DateTimeOffset)viewmodel_adoxio_event.EndDate).Year, endDate.Year);
+            
+
+
+            // R -Read
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{service}/{viewmodel_adoxio_event.Id}");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            jsonString = await response.Content.ReadAsStringAsync();
+            viewmodel_adoxio_event = JsonConvert.DeserializeObject<ViewModels.LicenceEvent>(jsonString);
+            Assert.NotNull(viewmodel_adoxio_event?.Id);
+            
+            Assert.Equal(startDate.Month, ((DateTimeOffset)viewmodel_adoxio_event.StartDate).Month);
+            Assert.Equal(startDate.Year, ((DateTimeOffset)viewmodel_adoxio_event.StartDate).Year);
+            Assert.Equal(startDate.Day, ((DateTimeOffset)viewmodel_adoxio_event.StartDate).Day);
+
+            Assert.Equal(endDate.Month, ((DateTimeOffset)viewmodel_adoxio_event.EndDate).Month);
+            Assert.Equal(endDate.Year, ((DateTimeOffset)viewmodel_adoxio_event.EndDate).Year);
+            Assert.Equal(endDate.Day, ((DateTimeOffset)viewmodel_adoxio_event.EndDate).Day);
+
+            // D - Delete
+
+            request = new HttpRequestMessage(HttpMethod.Delete, $"/api/{service}/" + viewmodel_adoxio_event.Id);
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            // second delete should return a 404.
+            request = new HttpRequestMessage(HttpMethod.Delete, $"/api/{service}/" + viewmodel_adoxio_event.Id);
+            response = await _client.SendAsync(request);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+
+            // should get a 404 if we try a get now.
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{service}/" + viewmodel_adoxio_event.Id);
+            response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+            await Logout();
         }
 
         [Fact]
