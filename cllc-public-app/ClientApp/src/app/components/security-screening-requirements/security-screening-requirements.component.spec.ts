@@ -4,6 +4,8 @@ import { SecurityScreeningRequirementsComponent } from './security-screening-req
 import { MatSnackBar } from '@angular/material';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';
 import { of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
 
 describe('SecurityScreeningRequirementsComponent', () => {
   let component: SecurityScreeningRequirementsComponent;
@@ -14,6 +16,7 @@ describe('SecurityScreeningRequirementsComponent', () => {
       declarations: [SecurityScreeningRequirementsComponent],
       providers: [
         { provide: MatSnackBar, useValue: {} },
+        { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
         { provide: LegalEntityDataService, useValue: { getCurrentSecurityScreeningItems: () => of({})} }
       ]
     })
