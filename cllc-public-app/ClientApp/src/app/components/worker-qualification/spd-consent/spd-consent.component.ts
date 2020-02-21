@@ -63,7 +63,7 @@ export class SpdConsentComponent implements OnInit {
       consentToSecurityScreening: [],
       certifyInformationIsCorrect: [],
       electronicSignature: [],
-      consentValidated: [false],
+      consentToCollection: [false],
     });
     this.reloadUser();
 
@@ -112,10 +112,6 @@ export class SpdConsentComponent implements OnInit {
 
   isFileUploadValid(): boolean {
     return (this.uploadedDocuments === 1);
-  }
-
-  isConcentValidatedValid(): boolean {
-    return this.form.get('consentValidated').value;
   }
 
 
