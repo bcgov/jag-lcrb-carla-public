@@ -47,15 +47,19 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="openshift\**" />
     <Compile Remove="Test\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="openshift\**" />
     <Content Remove="Test\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
 
   <ItemGroup>
+    <EmbeddedResource Remove="openshift\**" />
     <EmbeddedResource Remove="Test\**" />
+    <None Remove="openshift\**" />
     <None Remove="Test\**" />
   </ItemGroup>
 
@@ -70,30 +74,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="openshift\templates\cllc-public-angular\cllc-public-angular-build.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
-    <Content Update="openshift\templates\cllc-public-api\cllc-public-api-deploy.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
-    <Content Update="openshift\templates\cllc-public-api\cllc-public-api.build.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
-    <Content Update="openshift\templates\cllc-public-frontend\cllc-public-frontend-build.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
-    <Content Update="openshift\templates\cllc-public-frontend\cllc-public-frontend-deploy.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
-    <Content Update="openshift\templates\dotnet-sonar\dotnet-sonar-build.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
-    <Content Update="openshift\templates\network-security-policies\network-security-policies.build.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
-    <Content Update="openshift\templates\nginx-runtime\nginx-runtime-build.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
     <Content Update="SeedData\PolicyDocuments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
