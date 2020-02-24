@@ -295,9 +295,9 @@
 
                             </td>
                             <td>
-                                <span *ngIf="!associate.get('edit').value">{{associate.get('emailNew').value}}</span>
-                                <app-field *ngIf="associate.get('edit').value" [showChevrons]="false" [isFullWidth]="true"
-                                    [valid]="!associate.get('emailNew').touched || associate.get('emailNew ').valid"
+                                <span *ngIf=" !associate.get('edit').value">{{associate.get('emailNew').value}}</span>
+                                <app-field *ngIf="associate.get('edit') && associate.get('edit').value" [showChevrons]="false" [isFullWidth]="true"
+                                    [valid]="!associate.get('emailNew').touched || associate.get('emailNew').valid"
                                     errorMessage="Please enter email">
                                     <input class="form-control" type="text" formControlName="emailNew">
                                 </app-field>
