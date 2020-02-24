@@ -294,18 +294,333 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var id = Guid.Parse(entityId);
             switch (entityName.ToLower())
             {
-                case "worker":
-                    var worker = await _dynamicsClient.GetWorkerByIdWithChildren(entityId).ConfigureAwait(true);
-                    var location = worker.AdoxioWorkerSharePointDocumentLocations.FirstOrDefault();
-                    if (location != null && !string.IsNullOrEmpty(location.Relativeurl))
+                case "account":
+                    var account = _dynamicsClient.GetAccountById(entityId);
+                    var accountLocation = account.AccountSharepointDocumentLocation.FirstOrDefault();
+                    if (accountLocation != null && !string.IsNullOrEmpty(accountLocation.Relativeurl))
                     {
-                        result = location.Relativeurl;
+                        result = accountLocation.Relativeurl;
                     }
                     break;
+                case "application":
+                    var application = await _dynamicsClient.GetApplicationByIdWithChildren(entityId).ConfigureAwait(true);
+                    var applicationLocation = application.AdoxioApplicationSharePointDocumentLocations.FirstOrDefault();
+                    if (applicationLocation != null && !string.IsNullOrEmpty(applicationLocation.Relativeurl))
+                    {
+                        result = applicationLocation.Relativeurl;
+                    }
+                    break;
+                case "contact":
+                    var contact = await _dynamicsClient.GetContactById(entityId).ConfigureAwait(true);
+                    var contactLocation = contact.ContactSharePointDocumentLocations.FirstOrDefault();
+                    if (contactLocation != null && !string.IsNullOrEmpty(contactLocation.Relativeurl))
+                    {
+                        result = contactLocation.Relativeurl;
+                    }
+                    break;
+                case "worker":
+                    var worker = await _dynamicsClient.GetWorkerByIdWithChildren(entityId).ConfigureAwait(true);
+                    var workerLocation = worker.AdoxioWorkerSharePointDocumentLocations.FirstOrDefault();
+                    if (workerLocation != null && !string.IsNullOrEmpty(workerLocation.Relativeurl))
+                    {
+                        result = workerLocation.Relativeurl;
+                    }
+                    break;
+                
+
+
                 default:
                     break;
             }
             return result;
+        }
+
+        async void CreateEntitySharePointDocumentLocation(string entityName, string entityId, string folderName, string name)
+        {
+            
+            var id = Guid.Parse(entityId);
+            switch (entityName.ToLower())
+            {
+                case "account":
+                    var account = _dynamicsClient.GetAccountById(entityId);
+                    await CreateAccountDocumentLocation(account, folderName, name).ConfigureAwait(true);
+                    break;
+                case "application":
+                    var application = await _dynamicsClient.GetApplicationByIdWithChildren(entityId).ConfigureAwait(true);
+                    await CreateApplicationDocumentLocation(application, folderName, name).ConfigureAwait(true);
+                    break;
+                case "contact":
+                    var contact = await _dynamicsClient.GetContactById(entityId).ConfigureAwait(true);
+                    await CreateContactDocumentLocation(contact, folderName, name).ConfigureAwait(true);
+                    break;
+                case "worker":
+                    var worker = await _dynamicsClient.GetWorkerByIdWithChildren(entityId).ConfigureAwait(true);
+                    await CreateWorkerDocumentLocation(worker, folderName, name).ConfigureAwait(true);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private async Task CreateAccountDocumentLocation(MicrosoftDynamicsCRMaccount account, string folderName, string name )
+        {           
+
+            // now create a document location to link them.
+
+            // Create the SharePointDocumentLocation entity
+            MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+            {
+                Relativeurl = folderName,
+                Description = "Account Files",
+                Name = name
+            };
+
+
+            try
+            {
+                mdcsdl = _dynamicsClient.Sharepointdocumentlocations.Create(mdcsdl);
+            }
+            catch (HttpOperationException odee)
+            {
+                _logger.LogError(odee, "Error creating SharepointDocumentLocation");
+                mdcsdl = null;
+            }
+            if (mdcsdl != null)
+            {
+
+                // set the parent document library.
+                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL("account");
+
+                string accountUri = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
+                // add a regardingobjectid.
+                var patchSharePointDocumentLocationIncident = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+                {
+                    RegardingobjectIdAccountODataBind = accountUri,
+                    ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference),
+                    Relativeurl = folderName,
+                    Description = "Account Files",
+                };
+
+                try
+                {
+                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocationIncident);
+                }
+                catch (HttpOperationException odee)
+                {
+                    _logger.LogError(odee, "Error adding reference SharepointDocumentLocation to account");
+                }
+
+                string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
+
+                Odataid oDataId = new Odataid()
+                {
+                     OdataidProperty = sharePointLocationData
+                };
+                try
+                {
+                    _dynamicsClient.Accounts.AddReference(account.Accountid, "Account_SharepointDocumentLocation", oDataId);
+                }
+                catch (HttpOperationException odee)
+                {
+                    _logger.LogError(odee, "Error adding reference to SharepointDocumentLocation");
+                }
+            }
+        }
+
+        private async Task CreateApplicationDocumentLocation(MicrosoftDynamicsCRMadoxioApplication application, string folderName, string name)
+        {
+
+            // now create a document location to link them.
+
+            // Create the SharePointDocumentLocation entity
+            MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+            {
+                Relativeurl = folderName,
+                Description = "Application Files",
+                Name = name
+            };
+
+
+            try
+            {
+                mdcsdl = _dynamicsClient.Sharepointdocumentlocations.Create(mdcsdl);
+            }
+            catch (HttpOperationException odee)
+            {
+                _logger.LogError(odee, "Error creating SharepointDocumentLocation");
+                mdcsdl = null;
+            }
+            if (mdcsdl != null)
+            {
+
+                // set the parent document library.
+                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL("adoxio_application");
+
+                string accountUri = _dynamicsClient.GetEntityURI("adoxio_applications", application.AdoxioApplicationid);
+                // add a regardingobjectid.
+                var patchSharePointDocumentLocationIncident = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+                {
+                    RegardingobjectIdAccountODataBind = accountUri,
+                    ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference),
+                    Relativeurl = folderName,
+                    Description = "Application Files",
+                };
+
+                try
+                {
+                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocationIncident);
+                }
+                catch (HttpOperationException odee)
+                {
+                    _logger.LogError(odee, "Error adding reference SharepointDocumentLocation to application");
+                }
+
+                string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
+
+                Odataid oDataId = new Odataid()
+                {
+                    OdataidProperty = sharePointLocationData
+                };
+                try
+                {
+                    _dynamicsClient.Applications.AddReference(application.AdoxioApplicationid, "adoxio_application_SharePointDocumentLocations", oDataId);
+                }
+                catch (HttpOperationException odee)
+                {
+                    _logger.LogError(odee, "Error adding reference to SharepointDocumentLocation");
+                }
+            }
+        }
+
+        private async Task CreateContactDocumentLocation(MicrosoftDynamicsCRMcontact contact, string folderName, string name)
+        {
+
+            // now create a document location to link them.
+
+            // Create the SharePointDocumentLocation entity
+            MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+            {
+                Relativeurl = folderName,
+                Description = "Contact Files",
+                Name = name
+            };
+
+
+            try
+            {
+                mdcsdl = _dynamicsClient.Sharepointdocumentlocations.Create(mdcsdl);
+            }
+            catch (HttpOperationException odee)
+            {
+                _logger.LogError(odee, "Error creating SharepointDocumentLocation");
+                mdcsdl = null;
+            }
+            if (mdcsdl != null)
+            {
+
+                // set the parent document library.
+                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL("contact");
+
+                string accountUri = _dynamicsClient.GetEntityURI("contacts", contact.Contactid);
+                // add a regardingobjectid.
+                var patchSharePointDocumentLocationIncident = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+                {
+                    RegardingobjectIdAccountODataBind = accountUri,
+                    ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference),
+                    Relativeurl = folderName,
+                    Description = "Contact Files",
+                };
+
+                try
+                {
+                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocationIncident);
+                }
+                catch (HttpOperationException odee)
+                {
+                    _logger.LogError(odee, "Error adding reference SharepointDocumentLocation to contact");
+                }
+
+                string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
+
+                Odataid oDataId = new Odataid()
+                {
+                    OdataidProperty = sharePointLocationData
+                };
+                try
+                {
+                    _dynamicsClient.Contacts.AddReference(contact.Contactid, "adoxio_application_SharePointDocumentLocations", oDataId);
+                }
+                catch (HttpOperationException odee)
+                {
+                    _logger.LogError(odee, "Error adding reference to SharepointDocumentLocation");
+                }
+            }
+        }
+
+        private async Task CreateWorkerDocumentLocation(MicrosoftDynamicsCRMadoxioWorker worker, string folderName, string name)
+        {
+
+            // now create a document location to link them.
+
+            // Create the SharePointDocumentLocation entity
+            MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+            {
+                Relativeurl = folderName,
+                Description = "Worker Files",
+                Name = name
+            };
+
+
+            try
+            {
+                mdcsdl = _dynamicsClient.Sharepointdocumentlocations.Create(mdcsdl);
+            }
+            catch (HttpOperationException odee)
+            {
+                _logger.LogError(odee, "Error creating SharepointDocumentLocation");
+                mdcsdl = null;
+            }
+            if (mdcsdl != null)
+            {
+
+                // set the parent document library.
+                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL("adoxio_worker");
+
+                string accountUri = _dynamicsClient.GetEntityURI("adoxio_worker", worker.AdoxioWorkerid);
+                // add a regardingobjectid.
+                var patchSharePointDocumentLocationIncident = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+                {
+                    RegardingobjectIdAccountODataBind = accountUri,
+                    ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference),
+                    Relativeurl = folderName,
+                    Description = "Application Files",
+                };
+
+                try
+                {
+                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocationIncident);
+                }
+                catch (HttpOperationException odee)
+                {
+                    _logger.LogError(odee, "Error adding reference SharepointDocumentLocation to worker");
+                }
+
+                string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
+
+                Odataid oDataId = new Odataid()
+                {
+                    OdataidProperty = sharePointLocationData
+                };
+                try
+                {
+                    _dynamicsClient.Workers.AddReference(worker.AdoxioWorkerid, "adoxio_worker_SharePointDocumentLocations", oDataId);
+                }
+                catch (HttpOperationException odee)
+                {
+                    _logger.LogError(odee, "Error adding reference to SharepointDocumentLocation");
+                }
+            }
         }
 
         /// <summary>
@@ -539,6 +854,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 case "application":
                     var application = await _dynamicsClient.GetApplicationById(entityId);
                     folderName = application.GetDocumentFolderName();
+                    break;
+
+                case "contact":
+                    var contact = await _dynamicsClient.GetContactById(entityId);
+                    folderName = contact.GetDocumentFolderName();
+                    break;
+
+                case "worker":
+                    var worker = await _dynamicsClient.GetWorkerById(entityId);
+                    folderName = worker.GetDocumentFolderName();
                     break;
 
                 default:
@@ -792,6 +1117,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (folderName == null)
             {
                 folderName = await GetFolderName(entityName, entityId, _dynamicsClient).ConfigureAwait(true);
+
+                CreateEntitySharePointDocumentLocation(entityName, entityId, folderName, folderName);
             }
 
             MemoryStream ms = new MemoryStream();
