@@ -1,0 +1,74 @@
+.form-wrapper {
+    max-width: 100vw;
+}
+
+.intro {
+    background-color: #F1F4FA;
+    border-left: 20px solid #E1E8F2;
+    margin: 0 15px;
+    padding: 15px;
+    
+    p {
+        margin-bottom: 0;
+    }
+}
+
+.field-label {
+    display: block;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.padded-section {
+    padding-right: 15px;
+}
+
+.signature {
+    padding: 20px 0 20px 0;
+    .app-field {
+        display: flex;
+        align-items: end;
+        justify-content: stretch;
+        label {
+            min-width: 65px;
+        }
+        input {
+            flex-grow: 1;
+        }
+    }
+    label {
+        font-weight: normal;
+        margin-right: 15px;
+    }
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+::ng-deep .mat-radio-group .mat-radio-button {
+    padding: 20px 20px 20px 0;
+    &.mat-radio-checked {
+        .mat-radio-outer-circle {
+            border-color: #38598a;
+        }
+        .mat-radio-inner-circle {
+            background-color: #38598a;
+        }
+    }
+}
+
+::ng-deep .ngb-tp-input-container input {
+    padding: 0;
+}
+
+::ng-deep .certify .mat-checkbox-layout .mat-checkbox-label {
+    font-weight: normal;
+    white-space: normal;
+    font-size: 12px;
+    line-height: 14px;
+    padding: 0 20px 0 10px;
+}

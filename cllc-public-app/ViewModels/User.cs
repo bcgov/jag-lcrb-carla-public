@@ -18,6 +18,7 @@
         public string contactid { get; set; }
         public string accountid { get; set; }
         public string UserType { get; set; }
+        public bool isEligibilityRequired { get; set; }
 
     }
 }

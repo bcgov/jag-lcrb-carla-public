@@ -1,5 +1,6 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
+using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -12,11 +13,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class UserController : ControllerBase
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IConfiguration _configuration;
 
 
-        public UserController(IHttpContextAccessor httpContextAccessor)
+        public UserController(IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
         {
             _httpContextAccessor = httpContextAccessor;
+            _configuration = configuration;
         }
 
         protected ClaimsPrincipal CurrentUser => _httpContextAccessor.HttpContext.User;
@@ -65,6 +68,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 user.isNewUser = false;
 
             }
+
+            user.isEligibilityRequired = EligibilityController.IsEligibilityCheckRequired("testId", _configuration);
 
             return new JsonResult(user);
         }
