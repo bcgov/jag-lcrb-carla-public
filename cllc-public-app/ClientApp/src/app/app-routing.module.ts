@@ -43,6 +43,7 @@ import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confi
 import { MultiStageApplicationFlowComponent } from '@components/multi-stage-application-flow/multi-stage-application-flow.component';
 import { EventFormComponent } from '@components/event-form/event-form.component';
 import { SecurityScreeningRequirementsComponent } from '@components/security-screening-requirements/security-screening-requirements.component';
+import { EligibilityFormComponent } from '@components/eligibility-form/eligibility-form.component';
 
 
 const routes: Routes = [
@@ -270,6 +271,10 @@ const routes: Routes = [
     component: MapComponent,
     canActivate: [FeatureGuard],
     data: { feature: 'Maps' }
+  },
+  {
+    path: 'eligibility',
+    component: EligibilityFormComponent
   },
   { path: '**', component: NotFoundComponent }
 ];
