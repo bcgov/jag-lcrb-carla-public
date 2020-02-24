@@ -241,7 +241,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   private prepareSaveRequest() {
     const data = this.cleanSaveData(this.treeRoot);
     return forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, isApplicationComplete: 'Yes' }),
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value}),
       this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId) // ,
       // this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges)
     );
