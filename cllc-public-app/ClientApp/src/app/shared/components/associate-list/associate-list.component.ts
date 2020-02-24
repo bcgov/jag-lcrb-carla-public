@@ -250,7 +250,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
   }
 
   showNameChangeSection(associate): boolean {
-    const show = !this.asLicenseeChangeLog(associate?.value).isRemoveChangeType()
+    const show = associate && !this.asLicenseeChangeLog(associate.value).isRemoveChangeType()
       && this.licencesOnFile
       && this.isNameChangePerformed(associate.value.refObject)
       && !associate.get('edit').value;
