@@ -12,6 +12,7 @@ export class User {
   contactid: string;
   accountid: string;
   userType: string;
+  isEligibilityRequired: boolean;
 
   constructor() { }
 }
