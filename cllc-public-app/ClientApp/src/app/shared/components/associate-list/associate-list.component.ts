@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material';
 export class AssociateListComponent extends FormBase implements OnInit {
   @Input() rootNode: LicenseeChangeLog;
   @Input() account: Account;
+  @Input() licencesOnFile: boolean;
   @Input() changeTypeSuffix: string;
   @Input() addLabel: string = 'Add Associate';
   @Output() childAdded = new EventEmitter<LicenseeChangeLog>();
@@ -246,6 +247,14 @@ export class AssociateListComponent extends FormBase implements OnInit {
       res = changeLog.isNameChangePerformed();
     }
     return res;
+  }
+
+  showNameChangeSection(associate): boolean {
+    const show = !this.asLicenseeChangeLog(associate?.value).isRemoveChangeType()
+      && this.licencesOnFile
+      && this.isNameChangePerformed(associate.value.refObject)
+      && !associate.get('edit').value;
+    return show;
   }
 
   updateNumberOfFiles(numberOfFiles: number, docType: string, node: LicenseeChangeLog) {

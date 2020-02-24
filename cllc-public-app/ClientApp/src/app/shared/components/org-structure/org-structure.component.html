@@ -119,8 +119,8 @@
         security screening
         related information.
       </p>
-      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
-        [account]="account" (personalHistoryItemsChange)="updateChildred($event, 'Leadership')"
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node" 
+        [account]="account" (personalHistoryItemsChange)="updateChildred($event, 'Leadership')" [licencesOnFile]="licencesOnFile"
         changeTypeSuffix="Leadership" addLabel="Add Key Personnel"></app-associate-list>
     </section>
   </ng-container>
@@ -134,7 +134,7 @@
         licence, they will each be
         required to provide security screening related information.
       </p>
-      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [licencesOnFile]="licencesOnFile"
         (personalHistoryItemsChange)="updateChildred($event, 'Leadership')" [rootNode]="node" [account]="account"
         changeTypeSuffix="Leadership" addLabel="Add Director or Officer"></app-associate-list>
     </section>
@@ -152,7 +152,7 @@
         security screening
         related information.
       </p>
-      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"  [licencesOnFile]="licencesOnFile"
         (personalHistoryItemsChange)="updateChildred( $event, 'IndividualShareholder')" [rootNode]="node" [account]="account"
         changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Partner"></app-associate-list>
     </section>
@@ -165,7 +165,7 @@
         the type of business partner, additional supporting documents will be required.
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"
-        [rootNode]="node" [account]="account"
+        [rootNode]="node" [account]="account"  [licencesOnFile]="licencesOnFile"
         (personalHistoryItemsChange)="updateChildred($event, 'BusinessShareholder')"
         changeTypeSuffix="BusinessShareholder" addLabel="Add Business Partner"></app-associate-list>
     </section>
@@ -186,7 +186,7 @@
         owned, and email address.
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"
-        (personalHistoryItemsChange)="updateChildred($event, 'IndividualShareholder')" [rootNode]="node"
+        (personalHistoryItemsChange)="updateChildred($event, 'IndividualShareholder')" [rootNode]="node"  [licencesOnFile]="licencesOnFile"
         [account]="account" changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Shareholder">
       </app-associate-list>
     </section>
@@ -198,7 +198,7 @@
         the type of business shareholder, additional supporting documents will be required.
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"
-        [rootNode]="node" [account]="account"
+        [rootNode]="node" [account]="account"  [licencesOnFile]="licencesOnFile"
         (personalHistoryItemsChange)="updateChildred($event, 'BusinessShareholder')"
         changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder"></app-associate-list>
     </section>
