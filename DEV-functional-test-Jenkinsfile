@@ -23,6 +23,8 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
 
             dir('functional-tests\bdd-tests') {               
 				try {
+					set
+					dotnet restore
 					dotnet test --logger "junit;LogFilePath=functionalResults.xml"					
 				}
                 finally {
