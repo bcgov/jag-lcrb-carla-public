@@ -21,6 +21,8 @@ import { MonthlyReport, monthlyReportStatus } from '@models/monthly-report.model
 import { ApplicationDataService } from '@services/application-data.service';
 import { Application } from '@models/application.model';
 import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
+import { ModalComponent } from '@shared/components/modal/modal.component';
+import { EligibilityFormComponent } from '@components/eligibility-form/eligibility-form.component';
 
 const Months = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'];
@@ -128,6 +130,16 @@ export class AppComponent extends FormBase implements OnInit {
     const dialogRef = this.dialog.open(VersionInfoDialogComponent, dialogConfig);
   }
 
+  openEligibilityModal() {
+    // set dialogConfig settings
+    const dialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+    };
+
+    this.dialog.open(EligibilityFormComponent, dialogConfig);
+  }
+
 
   reloadUser() {
     this.store.select(state => state.currentUserState.currentUser)
@@ -137,7 +149,11 @@ export class AppComponent extends FormBase implements OnInit {
         this.isNewUser = this.currentUser && this.currentUser.isNewUser;
         if (this.currentUser && this.currentUser.accountid && this.currentUser.accountid !== '00000000-0000-0000-0000-000000000000') {
           this.accountDataService.loadCurrentAccountToStore(this.currentUser.accountid)
-            .subscribe(() => { });
+            .subscribe(() => {
+              if (data.isEligibilityRequired) {
+                this.openEligibilityModal();
+              }
+            });
 
           // load federal reports after the user logs in
           this.monthlyReportDataService.getAllCurrentMonthlyReports()
@@ -156,7 +172,6 @@ export class AppComponent extends FormBase implements OnInit {
       });
   }
 
-  
 
   showBceidTermsOfUse(): boolean {
     const result = (this.currentUser

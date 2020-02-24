@@ -1,0 +1,153 @@
+<div class="form-wrapper">
+    <h1>Security Screening Requirements</h1>
+
+    <div class="row">
+        <section class="col-md-8">
+
+            <ng-container *ngIf="liquorLicenceExist || isLiquorApplication">
+                <h3 class="blue-header">LIQUOR</h3>
+                <div class="content">
+                    <p>
+                        Each liquor licence associate must provide a completed Personal History Summary form along with
+                        required
+                        documents, including a copy of a recent Criminal Record
+                        Search performed by a local RCMP or police detachment.
+                    </p>
+
+                    <h3>Outstanding Personal History Summary Forms</h3>
+                    <p>
+                        The following associates have not provided completed personal history summary forms. The forms
+                        can
+                        be
+                        completed using the provided link, which can be emailed or
+                        sent by SMS to associates as needed:
+                    </p>
+                    <ng-container *ngIf="data?.liquor?.outstandingItems?.length">
+                        <table class="w-100">
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr [ngClass]="{'alt-row': i%2 === 0}"
+                                *ngFor="let item of data?.liquor?.outstandingItems; let i=index;">
+                                <td>{{item.firstName}}</td>
+                                <td>{{item.lastName}} </td>
+                                <td style="text-align: center;">Not Submitted</td>
+                                <td style="text-align: center;"><a href="javascript: void(0)"
+                                        (click)="copyMessage(item.screeningLink)">
+                                        <i class="fas fa-copy"></i>
+                                        Copy Link</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </ng-container>
+
+                    <h3>Completed Personal History Summary Forms</h3>
+                    <p>
+                        The following associates have completed their personal history summary forms. No further
+                        information
+                        is
+                        required at this time.
+                    </p>
+
+                    <table *ngIf="data?.liquor?.completedItems?.length" class="w-100">
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Date Submitted</th>
+                        </tr>
+                        <tr [ngClass]="{'alt-row': i%2 === 0}"
+                            *ngFor="let item of data?.liquor?.completedItems; let i=index;">
+                            <td>{{item.firstName}}</td>
+                            <td>{{item.lastName}} </td>
+                            <td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </ng-container>
+
+            <ng-container  *ngIf="cannabisLicenceExist || isCannabisApplication">
+                <h3 class="blue-header">CANNABIS</h3>
+                <div class="content">
+                    <p>
+                        Each liquor licence associate must provide a completed Personal History Summary form along with
+                        required
+                        documents, including a copy of a recent Criminal Record
+                        Search performed by a local RCMP or police detachment.
+                    </p>
+
+                    <h3>Outstanding Personal History Summary Forms</h3>
+                    <p>
+                        The following associates have not provided completed personal history summary forms. The forms
+                        can
+                        be
+                        completed using the provided link, which can be emailed or
+                        sent by SMS to associates as needed:
+                    </p>
+                    <ng-container *ngIf="data?.cannabis?.outstandingItems?.length">
+                        <table class="w-100">
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr [ngClass]="{'alt-row': i%2 === 0}"
+                                *ngFor="let item of data?.cannabis?.outstandingItems; let i=index">
+                                <td>{{item.firstName}}</td>
+                                <td>{{item.lastName}} </td>
+                                <td style="text-align: center;">Not Submitted</td>
+                                <td style="text-align: center;"><a href="javascript: void(0)"
+                                        (click)="copyMessage(item.screeningLink)">
+                                        <i class="fas fa-copy"></i>
+                                        Copy Link</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </ng-container>
+
+                    <h3>Completed Personal History Summary Forms</h3>
+                    <p>
+                        The following associates have completed their personal history summary forms. No further
+                        information
+                        is
+                        required at this time.
+                    </p>
+
+                    <table *ngIf="data?.cannabis?.completedItems?.length" class="w-100">
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Date Submitted</th>
+                        </tr>
+                        <tr [ngClass]="{'alt-row': i%2 === 0}"
+                            *ngFor="let item of data?.cannabis?.completedItems; let i=index;">
+                            <td>{{item.firstName}}</td>
+                            <td>{{item.lastName}} </td>
+                            <td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </ng-container>
+
+            <p class="mt-2">
+                All associates must submit the above required security screening forms prior to completing their
+                application.
+            </p>
+        </section>
+
+        <section class="col-md-4"></section>
+
+        <section class="col-md-8 mt-3">
+            <section class="d-flex justify-content-between">
+                <button class="btn btn-primary">Back to Org Structure</button>
+                <button class="btn btn-primary">Continue to Application</button>
+            </section>
+        </section>
+
+    </div>
+</div>

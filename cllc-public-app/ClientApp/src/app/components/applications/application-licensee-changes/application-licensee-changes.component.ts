@@ -48,6 +48,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   thereIsExistingOrgStructure: boolean;
   busyPromise: Promise<any>;
   licenses: ApplicationLicenseSummary[];
+  licencesOnFile: boolean;
 
   constructor(public dialog: MatDialog,
     public snackBar: MatSnackBar,
@@ -63,6 +64,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     this.licenseService.getAllCurrentLicenses()
       .subscribe(data => {
         this.licenses = data;
+        this.licencesOnFile = (this.licenses && this.licenses.length > 0);
       });
   }
 
@@ -140,8 +142,6 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
   getSaveLabel(): string {
     let label = 'Save';
-    const licencesOnFile = (this.licenses && this.licenses.length > 0);
-
     //if No Organizational Information on File  OR changes made
     if (!this.thereIsExistingOrgStructure || (this.treeRoot && LicenseeChangeLog.HasChanges(this.treeRoot))) {
       label = 'Submit Organization Information';
@@ -226,10 +226,14 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   save() {
     this.validationErrors = this.validateFormData();
     if (this.validationErrors.length === 0) {
-      this.busySave = this.prepareSaveRequest()
-        .subscribe(() => {
+      this.busyPromise = this.prepareSaveRequest()
+      .toPromise()
+        .then(() => {
           this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
           this.saveComplete.emit(true);
+        })
+        .catch( () => {
+          this.snackBar.open('Error saving application', 'Error', { duration: 2500, panelClass: ['red-snackbar'] });
         });
     }
   }
@@ -237,7 +241,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   private prepareSaveRequest() {
     const data = this.cleanSaveData(this.treeRoot);
     return forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, isApplicationComplete: 'Yes' }),
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value}),
       this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId) // ,
       // this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges)
     );
