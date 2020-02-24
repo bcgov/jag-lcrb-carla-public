@@ -97,7 +97,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                     "adoxio_AssignedLicence",
                     "adoxio_ApplicationTypeId",
                     "adoxio_LicenceFeeInvoice",
-                    "adoxio_Invoice"
+                    "adoxio_Invoice",
+                    "adoxio_application_SharePointDocumentLocations"
                 };
 
                 // fetch from Dynamics.
@@ -216,7 +217,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMaccount result;
             try
             {
-                string[] expand = { "primarycontactid" };
+                string[] expand = { "primarycontactid", "Account_SharepointDocumentLocation" };
                 // fetch from Dynamics.
                 result = Accounts.GetByKey(accountid: id, expand: expand);
             }
@@ -265,10 +266,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<MicrosoftDynamicsCRMcontact> GetContactById(string id)
         {
             MicrosoftDynamicsCRMcontact result;
+            string[] expand = { "contact_SharePointDocumentLocations" };
             try
             {
                 // fetch from Dynamics.
-                result = await Contacts.GetByKeyAsync(id);
+                result = await Contacts.GetByKeyAsync(contactid: id, expand: expand);
             }
             catch (HttpOperationException)
             {
