@@ -226,10 +226,14 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   save() {
     this.validationErrors = this.validateFormData();
     if (this.validationErrors.length === 0) {
-      this.busySave = this.prepareSaveRequest()
-        .subscribe(() => {
+      this.busyPromise = this.prepareSaveRequest()
+      .toPromise()
+        .then(() => {
           this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
           this.saveComplete.emit(true);
+        })
+        .catch( () => {
+          this.snackBar.open('Error saving application', 'Error', { duration: 2500, panelClass: ['red-snackbar'] });
         });
     }
   }

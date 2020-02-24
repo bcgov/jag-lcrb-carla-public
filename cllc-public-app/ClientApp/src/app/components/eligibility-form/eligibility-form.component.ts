@@ -7,6 +7,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./eligibility-form.component.scss']
 })
 export class EligibilityFormComponent implements OnInit {
+  busy: any;
   eligibilityForm = this.fb.group({
     isConnectedToUnlicencedStore: [null, [Validators.required]],
     isInvolvedIllegalDistribution: [null, [Validators.required]],
