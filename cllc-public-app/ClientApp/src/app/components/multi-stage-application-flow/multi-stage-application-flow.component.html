@@ -1,5 +1,5 @@
 <div>
-    <h1></h1>
+    <!-- <h1></h1> -->
     <mat-horizontal-stepper [linear]="true" (selectionChange)="selectionChange($event)" #stepper>
         <ng-template matStepperIcon="edit">
             <i class="fas fa-check"></i>
@@ -18,7 +18,7 @@
             <app-application *ngIf="stepper.selectedIndex === 2" class="w-100"
                 (saveComplete)="stepper.selectedIndex = 3"></app-application>
         </mat-step>
-        <mat-step label="Complete Application">
+        <mat-step label="Security Screening Requirements">
             <app-security-screening-requirements *ngIf="stepper.selectedIndex === 3" class="w-100">
             </app-security-screening-requirements>
         </mat-step>
