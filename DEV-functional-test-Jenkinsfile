@@ -23,11 +23,15 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
 
             dir('functional-tests/bdd-tests') {               
 				try {
-					sh 'set'
-                    sh 'echo ${FOO}'
-					sh 'dotnet restore'
-					sh 'dotnet test --logger "junit;LogFilePath=functionalResults.xml"'					
-				}
+                    withEnv(["FOO=${FOO}"])
+                    {
+                        echo "FOO: ${FOO}"
+	    				sh 'set'
+                        sh "echo ${FOO}"
+			    		sh 'dotnet restore'
+				    	sh 'dotnet test --logger "junit;LogFilePath=functionalResults.xml"'					
+                    }
+                }
                 finally {
 					junit 'functionalResults.xml'
 				}
