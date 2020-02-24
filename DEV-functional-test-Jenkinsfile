@@ -21,7 +21,7 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
             echo "Build: ${BUILD_ID}"
             checkout scm
 
-            dir('functional-tests\bdd-tests') {               
+            dir('functional-tests/bdd-tests') {               
 				try {
 					set
 					dotnet restore
