@@ -185,6 +185,8 @@ import { PhsConfirmationComponent } from './components/phs-confirmation/phs-conf
 import { MultiStageApplicationFlowComponent } from './components/multi-stage-application-flow/multi-stage-application-flow.component';
 import { EventFormComponent } from '@components/event-form/event-form.component';
 import { LicenceEventsService } from '@services/licence-events.service';
+import { SecurityScreeningRequirementsComponent } from './components/security-screening-requirements/security-screening-requirements.component';
+import { EligibilityFormComponent } from './components/eligibility-form/eligibility-form.component';
 
 
 @NgModule({
@@ -285,7 +287,9 @@ import { LicenceEventsService } from '@services/licence-events.service';
     PersonalHistorySummaryComponent,
     AccountCompletenessComponent,
     PhsConfirmationComponent,
-    MultiStageApplicationFlowComponent
+    MultiStageApplicationFlowComponent,
+    SecurityScreeningRequirementsComponent,
+    EligibilityFormComponent
   ],
   imports: [
     ChartsModule,
