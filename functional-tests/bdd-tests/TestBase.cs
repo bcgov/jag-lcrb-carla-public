@@ -29,6 +29,11 @@ namespace bdd_tests
         {
             string path = Directory.GetCurrentDirectory();
 
+            configuration = new ConfigurationBuilder()
+                .AddEnvironmentVariables()
+                .AddUserSecrets("a004e634-29c7-48b6-becc-87fe16be7538")
+                .Build();
+
             //bool runlocal = true;
             ChromeOptions options = new ChromeOptions();
             // run headless when in CI
@@ -44,10 +49,7 @@ namespace bdd_tests
 
             ngDriver = new NgWebDriver(driver);
 
-            configuration = new ConfigurationBuilder()
-                .AddEnvironmentVariables()
-                .AddUserSecrets("a004e634-29c7-48b6-becc-87fe16be7538")
-                .Build();
+            
 
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
