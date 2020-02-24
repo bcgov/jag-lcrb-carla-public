@@ -15,7 +15,7 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
     )
 ]) {
     stage('BDD Test') {
-        node('owasp-zap2') {
+        node('agent-dotnet') {
             //the checkout is mandatory
             echo "checking out source"
             echo "Build: ${BUILD_ID}"
