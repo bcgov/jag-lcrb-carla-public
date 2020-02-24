@@ -101,8 +101,8 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
   }
   applicationId: string;
   applicationType: ApplicationType;
-  liquorLicencesExist: boolean;
-  cannabisLicencesExist: boolean;
+  liquorLicenceExist: boolean;
+  cannabisLicenceExist: boolean;
   isLiquorApplication: boolean;
   isCannabisApplication: boolean;
 
@@ -136,8 +136,8 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
 
     this.licenseDataService.getAllCurrentLicenses()
     .subscribe(licences => {
-      this.liquorLicencesExist = licences.filter(lc => lc.licenceTypeName === 'Liquor Primary').length > 0;
-      this.cannabisLicencesExist = licences.filter(lc => lc.licenceTypeName === 'Cannabis Retail Store').length > 0;
+      this.liquorLicenceExist = licences.filter(lc => lc.licenceTypeName === 'Liquor Primary').length > 0;
+      this.cannabisLicenceExist = licences.filter(lc => lc.licenceTypeName === 'Cannabis Retail Store').length > 0;
     });
   }
   
