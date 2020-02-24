@@ -30,8 +30,15 @@ namespace bdd_tests
             string path = Directory.GetCurrentDirectory();
 
             //bool runlocal = true;
-
+            ChromeOptions options = new ChromeOptions();
+            // run headless when in CI
+            if (!string.IsNullOrEmpty(configuration["OPENSHIFT_BUILD_COMMIT"]) || !string.IsNullOrEmpty(configuration["Build.BuildNumber"]))
+            {
+                options.AddArguments("headless");
+            }
+            
             driver = new ChromeDriver(path);
+            
             //driver = new FirefoxDriver(FirefoxDriverService);
             driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(60);
 
