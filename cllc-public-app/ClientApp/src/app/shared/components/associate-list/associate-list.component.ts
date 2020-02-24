@@ -210,22 +210,6 @@ export class AssociateListComponent extends FormBase implements OnInit {
     }
   }
 
-  // Copy value to clipboard
-  copyMessage(value: string) {
-    const selBox = document.createElement('textarea');
-    selBox.style.position = 'fixed';
-    selBox.style.left = '0';
-    selBox.style.top = '0';
-    selBox.style.opacity = '0';
-    selBox.value = value;
-    document.body.appendChild(selBox);
-    selBox.focus();
-    selBox.select();
-    document.execCommand('copy');
-    document.body.removeChild(selBox);
-    this.snackBar.open('The link is copied to the clipboard', '', { duration: 2500, panelClass: ['green-snackbar'] });
-  }
-
   deleteChange(node: LicenseeChangeLog, index: number) {
     node.businessNameNew = node.nameOld;
     node.isDirectorNew = node.isDirectorOld;
