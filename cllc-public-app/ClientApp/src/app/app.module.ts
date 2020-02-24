@@ -186,6 +186,7 @@ import { MultiStageApplicationFlowComponent } from './components/multi-stage-app
 import { EventFormComponent } from '@components/event-form/event-form.component';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { SecurityScreeningRequirementsComponent } from './components/security-screening-requirements/security-screening-requirements.component';
+import { EligibilityFormComponent } from './components/eligibility-form/eligibility-form.component';
 
 
 @NgModule({
@@ -287,7 +288,8 @@ import { SecurityScreeningRequirementsComponent } from './components/security-sc
     AccountCompletenessComponent,
     PhsConfirmationComponent,
     MultiStageApplicationFlowComponent,
-    SecurityScreeningRequirementsComponent
+    SecurityScreeningRequirementsComponent,
+    EligibilityFormComponent
   ],
   imports: [
     ChartsModule,
