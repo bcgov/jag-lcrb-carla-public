@@ -15,7 +15,6 @@ export class AssociateListComponent extends FormBase implements OnInit {
   @Input() account: Account;
   @Input() changeTypeSuffix: string;
   @Input() addLabel: string = 'Add Associate';
-  businessType: string = 'Society';
   @Output() childAdded = new EventEmitter<LicenseeChangeLog>();
   items: LicenseeChangeLog[] = [];
   @Input('personalHistoryItems') set personalHistoryItems(value: LicenseeChangeLog[]) {
@@ -274,8 +273,9 @@ export class AssociateListComponent extends FormBase implements OnInit {
   }
 
   showPosition(): boolean {
-    return this.businessType === 'Society'
-      || this.businessType === 'PublicCorporation';
+    return this.rootNode && (
+      this.rootNode.businessType === 'Society'
+      || this.rootNode.businessType === 'PublicCorporation');
   }
 
   // check to see if there is a link in any child records; when set to true the Level 1 Personal History Summary column will show.
