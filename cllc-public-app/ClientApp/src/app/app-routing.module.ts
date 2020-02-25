@@ -251,7 +251,7 @@ const routes: Routes = [
     component: WorkerQualificationComponent
   },
   {
-    path: 'security-screening-requirements',
+    path: 'security-screening',
     component: SecurityScreeningRequirementsComponent
   },
   {

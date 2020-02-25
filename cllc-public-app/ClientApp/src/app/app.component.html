@@ -114,10 +114,13 @@
                   <li class="nav-item active">
                     <a *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
                       class="nav-link" routerLink="/dashboard">Dashboard</a>
-                    <a *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()"
-                      class="nav-link" routerLink="/worker-qualification/dashboard">Dashboard</a>
                     <a *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
                       class="nav-link" routerLink="/licences">Licences</a>
+                    <a appRemoveIfFeatureOff="SecurityScreening" *ngIf="currentUser.userType == 'Business'"
+                      (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/security-screening">Security
+                      Screening</a>
+                    <a *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()"
+                      class="nav-link" routerLink="/worker-qualification/dashboard">Dashboard</a>
                   </li>
                 </ul>
               </div>
@@ -138,7 +141,8 @@
         <mat-card *ngFor="let item of linkedFederalReports" style="margin-bottom: 5px;">
           <i class="fas fa-2x fa-business-time"></i> &nbsp;
           <strong>Federal Tracking Report</strong> for <strong>{{item.establishmentName}}</strong> for
-          <strong>{{Months[parseInt(item.reportingPeriodMonth, 10) -1]}} {{item.reportingPeriodYear}}</strong> has not been submitted. The report
+          <strong>{{Months[parseInt(item.reportingPeriodMonth, 10) -1]}} {{item.reportingPeriodYear}}</strong> has not
+          been submitted. The report
           is due on the 10th of each month.
           <a style="color: #1a5a96;" (click)="showMessageCenterContent = !showMessageCenterContent"
             [routerLink]="['/federal-reporting/' + item.licenseId + '/' + item.monthlyReportId]">Click to action</a>.

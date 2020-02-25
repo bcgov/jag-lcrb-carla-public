@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         {
             this.Configuration = Configuration;
             _logger = loggerFactory.CreateLogger(typeof(SpiceUtils));
-            _dynamicsClient = DynamicsUtil.SetupDynamics(Configuration);
+            _dynamicsClient = DynamicsSetupUtil.SetupDynamics(Configuration);
             SpiceClient = SetupSpiceClient(Configuration);
         }
 

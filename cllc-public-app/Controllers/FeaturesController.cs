@@ -61,6 +61,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("NoWetSignature");
             }
 
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_SECURITY_SCREENING"]))
+            {
+                features.Add("SecurityScreening");
+            }
+
             return new JsonResult(features);
         }
 

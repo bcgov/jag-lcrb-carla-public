@@ -66,13 +66,11 @@ export class AppComponent extends FormBase implements OnInit {
     featureFlagService.featureOn('Maps')
       .subscribe(x => this.showMap = x);
 
-      featureFlagService.featureOn('LicenseeChanges')
+    featureFlagService.featureOn('LicenseeChanges')
       .subscribe(x => this.licenseeChangeFeatureOn = x);
 
     featureFlagService.featureOn('FederalReporting')
       .subscribe(x => this.showFederalReporting = x);
-
-
 
     this.isDevMode = isDevMode();
     this.router.events
@@ -134,7 +132,8 @@ export class AppComponent extends FormBase implements OnInit {
     // set dialogConfig settings
     const dialogConfig = {
       disableClose: true,
-      autoFocus: true,
+      autoFocus: false,
+      maxHeight: '90vh'
     };
 
     this.dialog.open(EligibilityFormComponent, dialogConfig);

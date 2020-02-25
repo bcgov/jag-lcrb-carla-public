@@ -1,0 +1,57 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {},
+    "items": [
+        {
+            "apiVersion": "build.openshift.io/v1",
+            "kind": "BuildConfig",
+            "metadata": {
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "prod-pipeline",
+                    "name": "prod-pipeline",
+                    "template": "prod-pipeline"
+                },
+                "name": "prod-pipeline"
+            },
+            "spec": {
+                "output": {},
+                "postCommit": {},
+                "resources": {},
+                "runPolicy": "Parallel",
+                "source": {
+                    "contextDir": "",
+                    "git": {
+                        "ref": "master",
+                        "uri": "https://github.com/bcgov/jag-lcrb-carla-public.git"
+                    },
+                    "type": "Git"
+                },
+                "strategy": {
+                    "jenkinsPipelineStrategy": {
+                        "jenkinsfilePath": "PROD-Jenkinsfile"
+                    },
+                    "type": "JenkinsPipeline"
+                },
+                "triggers": [
+                    {
+                        "github": {
+                            "secret": "rPUjp0Up4gpCMxWIpK8IgPtYaqaR4IJJMBitJeSO"
+                        },
+                        "type": "GitHub"
+                    },
+                    {
+                        "generic": {
+                            "secret": "JObF2d1SG23yAgRq5INExuapyOV0HfoQJbTT5Iro"
+                        },
+                        "type": "Generic"
+                    }
+                ]
+            },
+            "status": {
+                "lastVersion": 0
+            }
+        }
+    ]
+}
