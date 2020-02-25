@@ -132,7 +132,8 @@ export class AppComponent extends FormBase implements OnInit {
     // set dialogConfig settings
     const dialogConfig = {
       disableClose: true,
-      autoFocus: true,
+      autoFocus: false,
+      maxHeight: '90vh'
     };
 
     this.dialog.open(EligibilityFormComponent, dialogConfig);
