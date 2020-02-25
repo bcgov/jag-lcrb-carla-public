@@ -284,6 +284,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
   showPosition(): boolean {
     return this.rootNode && (
       this.rootNode.businessType === 'Society'
+      || this.rootNode.businessType === 'PrivateCorporation'
       || this.rootNode.businessType === 'PublicCorporation');
   }
 
