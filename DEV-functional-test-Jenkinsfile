@@ -26,7 +26,6 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
                     withEnv(["baseUri=${baseUri}"])
                     {
 	    				sh 'set'
-                        sh "echo ${FOO}"
 				    	sh 'dotnet test --logger "junit;LogFilePath=functionalResults.xml"'					
                     }
                 }
