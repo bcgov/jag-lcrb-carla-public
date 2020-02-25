@@ -8,18 +8,23 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class EligibilityFormComponent implements OnInit {
   eligibilityForm = this.fb.group({
+    // question 1
     isConnectedToUnlicencedStore: [null, [Validators.required]],
-    isInvolvedIllegalDistribution: [null, [Validators.required]],
-    isEligibilityCertified: [null, [Validators.required]],
-    eligibilitySignature: [null, [Validators.required]],
-    dateSignedOrDismissed: [null, [Validators.required]],
     nameLocationUnlicencedRetailer: [null, []],
     isRetailerStillOperating: [null, []],
     dateOperationsCeased: [null, []],
-    illegalDistributionInvolvementDetails: [null, []],
+
+    // question 2
+    isInvolvedIllegalDistribution: [null, [Validators.required]],
     nameLocationRetailer: [null, []],
+    illegalDistributionInvolvementDetails: [null, []],
     isInvolvementContinuing: [null, []],
-    dateInvolvementCeased: [null, []]
+    dateInvolvementCeased: [null, []],
+
+    // "e-sig"
+    isEligibilityCertified: [null, [Validators.required]],
+    eligibilitySignature: [null, [Validators.required]],
+    dateSignedOrDismissed: [null, [Validators.required]]
   });
 
   constructor(
@@ -29,6 +34,5 @@ export class EligibilityFormComponent implements OnInit {
   ngOnInit() {
     this.eligibilityForm.controls['dateSignedOrDismissed'].setValue(new Date());
   }
-
 
 }
