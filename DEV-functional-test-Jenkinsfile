@@ -23,7 +23,7 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
 
             dir('functional-tests/bdd-tests') {               
 				try {
-                    withEnv(["baseUri=${baseUri}"])
+                    withEnv(["baseUri=${baseUri}","test_start=${test_start}"])
                     {
 				    	sh 'dotnet test --logger "junit;LogFilePath=functionalResults.xml"'					
                     }
