@@ -43,7 +43,7 @@ namespace bdd_tests
                 options.AddArguments("headless", "no-sandbox", "disable-web-security",  "no-zygote", "disable-gpu");
             }
             
-            driver = new ChromeDriver(path);
+            driver = new ChromeDriver(path, options);
             
             //driver = new FirefoxDriver(FirefoxDriverService);
             driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(60);
