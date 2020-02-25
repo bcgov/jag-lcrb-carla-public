@@ -34,9 +34,10 @@
           </section>
           <section class="app-field" [hidden]="eligibilityForm.get('isRetailerStillOperating').value !== false">
             <span class="field-label">Please indicate the date that operations ceased</span>
-            <input type="text" placeholder="yyyy-mm-dd" class="form-control"
-            [matDatepicker]="ceasedOperationsPicker" (focus)="ceasedOperationsPicker.open()" (click)="ceasedOperationsPicker.open()">
-            <mat-datepicker #ceasedOperationsPicker></mat-datepicker>
+            <input type="text" placeholder="yyyy-mm-dd" class="form-control" formControlName="dateOperationsCeased"
+            [max]="maxDate"
+            [matDatepicker]="dateOperationsCeased" (focus)="dateOperationsCeased.open()" (click)="dateOperationsCeased.open()">
+            <mat-datepicker #dateOperationsCeased></mat-datepicker>
           </section>
         </div>
       </div>
@@ -72,7 +73,8 @@
           </section>
           <section class="app-field" [hidden]="eligibilityForm.get('isInvolvementContinuing').value !== false">
             <span class="field-label">The date your involvement ceased</span>
-            <input type="text" placeholder="yyyy-mm-dd" class="form-control"
+            <input type="text" placeholder="yyyy-mm-dd" class="form-control" formControlName="dateInvolvementCeased"
+            [max]="maxDate"
             [matDatepicker]="dateInvolvementCeased" (focus)="dateInvolvementCeased.open()" (click)="dateInvolvementCeased.open()">
             <mat-datepicker #dateInvolvementCeased></mat-datepicker>
           </section>
@@ -98,8 +100,8 @@
       </div>
   
       <div class="p-4 d-flex justify-content-between">
-        <button class="btn btn-secondary" style="margin-right:10px;" mat-dialog-close>DECLINE TO ANSWER</button>
-        <button class="btn btn-primary" mat-dialog-close>SUBMIT</button>
+        <button class="btn btn-secondary" style="margin-right:10px;" (click)="closeForm()">DECLINE TO ANSWER</button>
+        <button class="btn btn-primary" (click)="submitForm()">SUBMIT</button>
       </div>
     </form>
   </div>

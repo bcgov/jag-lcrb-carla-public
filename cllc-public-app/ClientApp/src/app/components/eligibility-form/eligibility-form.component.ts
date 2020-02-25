@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { EligibilityFormDataService } from '@services/eligibility-data.service';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-eligibility-form',
@@ -8,6 +10,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class EligibilityFormComponent implements OnInit {
   busy: any;
+  maxDate: Date;
   eligibilityForm = this.fb.group({
     // question 1
     isConnectedToUnlicencedStore: [null, [Validators.required]],
@@ -29,11 +32,31 @@ export class EligibilityFormComponent implements OnInit {
   });
 
   constructor(
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    private service: EligibilityFormDataService,
+    private dialogRef: MatDialogRef<EligibilityFormComponent>,
+  ) {
+    this.maxDate = new Date();
+  }
 
   ngOnInit() {
     this.eligibilityForm.controls['dateSignedOrDismissed'].setValue(new Date());
   }
 
+  submitForm() {
+    this.busy = this.service.submit({...this.eligibilityForm.value})
+    .subscribe(() => {
+      this.dialogRef.close();
+    });
+  }
+
+  closeForm() {
+    this.busy = this.service.submit({
+      dateSignedOrDismissed: this.eligibilityForm.get('dateSignedOrDismissed').value,
+      isEligibilityCertified: false
+    })
+    .subscribe(() => {
+      this.dialogRef.close();
+    });
+  }
 }

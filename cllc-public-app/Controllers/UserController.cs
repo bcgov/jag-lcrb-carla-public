@@ -14,12 +14,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _configuration;
+        private readonly IDynamicsClient _dynamicsClient;
 
 
-        public UserController(IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
+        public UserController(IHttpContextAccessor httpContextAccessor, IConfiguration configuration, IDynamicsClient dynamics)
         {
             _httpContextAccessor = httpContextAccessor;
             _configuration = configuration;
+            _dynamicsClient = dynamics;
         }
 
         protected ClaimsPrincipal CurrentUser => _httpContextAccessor.HttpContext.User;
@@ -58,7 +60,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 user.contactid = string.IsNullOrEmpty(siteminderUserGuid) ? userSettings.ContactId : siteminderUserGuid;
                 user.accountid = string.IsNullOrEmpty(siteminderBusinessGuid) ? userSettings.AccountId : siteminderBusinessGuid;
-
+                user.isEligibilityRequired = true;
             }
             else
             {
@@ -66,10 +68,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 user.firstname = userSettings.AuthenticatedUser.GivenName;
                 user.email = userSettings.AuthenticatedUser.Email;
                 user.isNewUser = false;
-
+                user.isEligibilityRequired = EligibilityController.IsEligibilityCheckRequired(user.accountid, _configuration, _dynamicsClient);
             }
 
-            user.isEligibilityRequired = EligibilityController.IsEligibilityCheckRequired("testId", _configuration);
 
             return new JsonResult(user);
         }
