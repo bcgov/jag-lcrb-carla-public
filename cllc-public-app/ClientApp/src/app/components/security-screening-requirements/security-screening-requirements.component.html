@@ -143,7 +143,7 @@
         <section class="col-md-4"></section>
 
         <section class="col-md-8 mt-3">
-            <section class="d-flex justify-content-between">
+            <section *ngIf="applicationId" class="d-flex justify-content-between">
                 <button class="btn btn-primary">Back to Org Structure</button>
                 <button class="btn btn-primary">Continue to Application</button>
             </section>
