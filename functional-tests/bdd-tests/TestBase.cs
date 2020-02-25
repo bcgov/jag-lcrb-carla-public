@@ -39,7 +39,8 @@ namespace bdd_tests
             // run headless when in CI
             if (!string.IsNullOrEmpty(configuration["OPENSHIFT_BUILD_COMMIT"]) || !string.IsNullOrEmpty(configuration["Build.BuildNumber"]))
             {
-                options.AddArguments("headless", "no-sandbox", "user-data-dir=/tmp/chrome-test-profile", "disable-web-security",  "no-zygote", "disable-gpu");
+                Console.Out.WriteLine("Enabling Headless Mode");
+                options.AddArguments("headless", "no-sandbox", "disable-web-security",  "no-zygote", "disable-gpu");
             }
             
             driver = new ChromeDriver(path);
