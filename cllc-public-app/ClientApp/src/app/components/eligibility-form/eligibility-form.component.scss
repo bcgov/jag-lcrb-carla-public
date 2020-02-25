@@ -1,5 +1,6 @@
 .form-wrapper {
     max-width: 100vw;
+    padding: 0;
 }
 
 .intro {
@@ -26,7 +27,7 @@
 }
 
 .signature {
-    padding: 20px 0 20px 0;
+    padding: 20px 15px 20px 0;
     .app-field {
         display: flex;
         align-items: end;
