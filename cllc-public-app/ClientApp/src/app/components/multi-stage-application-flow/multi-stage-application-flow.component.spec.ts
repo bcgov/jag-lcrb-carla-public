@@ -7,6 +7,8 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { ApplicationLicenseeChangesComponent } from '@components/applications/application-licensee-changes/application-licensee-changes.component';
 import { AccountProfileComponent } from '@components/account-profile/account-profile.component';
 import { ApplicationComponent } from '@components/applications/application/application.component';
+import { FeatureFlagService } from '@services/feature-flag.service';
+import { of } from 'rxjs';
 
 describe('MultiStageApplicationFlowComponent', () => {
   let component: MultiStageApplicationFlowComponent;
@@ -20,7 +22,8 @@ describe('MultiStageApplicationFlowComponent', () => {
       declarations: [ MultiStageApplicationFlowComponent, ApplicationLicenseeChangesComponent, AccountProfileComponent, ApplicationComponent ],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
-        provideMockStore({initialState})
+        provideMockStore({initialState}),
+        { provide: FeatureFlagService, useValue: {featureOn: () => of(true)} }
       ]
     })
     .compileComponents();
