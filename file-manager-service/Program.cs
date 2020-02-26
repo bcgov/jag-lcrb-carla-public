@@ -38,6 +38,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 })
                 .UseSerilog()
                 .UseOpenShiftIntegration(_ => _.CertificateMountPoint = "/var/run/secrets/service-cert")
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .UseKestrel(options => {
+                    options.Limits.MaxRequestBodySize = 512 * 1024 * 1024; // allow large transfers
+                });
     }
 }
