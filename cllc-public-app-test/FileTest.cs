@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Gov.Lclb.Cllb.Public.Test
@@ -403,7 +404,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
             Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
-            Assert.Equal("V1X 1X1", responseViewModel.EstablishmentAddressPostalCode);
+            Assert.Equal("V1X1X1", responseViewModel.EstablishmentAddressPostalCode); // postal code now has spaces removed by system
 
             Guid applicationId = new Guid(responseViewModel.Id);
 
@@ -498,7 +499,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ,
                 EstablishmentAddressCity = "Victoria, BC"
                 ,
-                EstablishmentAddressPostalCode = "V1X 1X1"
+                EstablishmentAddressPostalCode = "V1X1X1"
             };
 
             var jsonString = JsonConvert.SerializeObject(viewmodel_application);
@@ -512,7 +513,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
             Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
-            Assert.Equal("V1X 1X1", responseViewModel.EstablishmentAddressPostalCode);
+            Assert.Equal("V1X1X1", responseViewModel.EstablishmentAddressPostalCode); // postal code now has spaces removed by system
 
             Guid applicationId = new Guid(responseViewModel.Id);
 
@@ -567,6 +568,124 @@ namespace Gov.Lclb.Cllb.Public.Test
             });
 
             await LogoutAndCleanupTestUser(strId);
+        }
+
+        private async Task FileSizeTest (int size)
+        {
+            // Create application
+            string initialName = randomNewUserName("Application Initial Name ", 6);
+            string changedName = randomNewUserName("Application Changed Name ", 6);
+
+            // login as default and get account for current user
+            string loginUser = randomNewUserName("TestAppUser_", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
+
+            User user = await GetCurrentUser();
+            Account currentAccount = await GetAccountForCurrentUser();
+
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + applicationService);
+
+            Application viewmodel_application = new Application()
+            {
+                LicenseType = "Cannabis Retail Store"
+                ,
+                ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation
+                ,
+                RegisteredEstablishment = GeneralYesNo.No
+                ,
+                Applicant = currentAccount
+                ,
+                ApplicationType = await GetDefaultCannabisApplicationType(),
+                EstablishmentName = "Not a Dispensary"
+                ,
+                EstablishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1"
+                ,
+                EstablishmentAddressStreet = "123 Any Street"
+                ,
+                EstablishmentAddressCity = "Victoria, BC"
+                ,
+                EstablishmentAddressPostalCode = "V1X 1X1"
+            };
+
+            var jsonString = JsonConvert.SerializeObject(viewmodel_application);
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            var response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            jsonString = await response.Content.ReadAsStringAsync();
+            Application responseViewModel = JsonConvert.DeserializeObject<Application>(jsonString);
+
+            Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
+            Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
+            Assert.Equal("V1X1X1", responseViewModel.EstablishmentAddressPostalCode);
+
+            Guid applicationId = new Guid(responseViewModel.Id);
+
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + applicationService + "/" + applicationId);
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            jsonString = await response.Content.ReadAsStringAsync();
+            responseViewModel = JsonConvert.DeserializeObject<Application>(jsonString);
+            Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
+            Assert.True(responseViewModel.Applicant != null);
+            Assert.Equal(currentAccount.id, responseViewModel.Applicant.id);
+
+            // Test upload, get, delete attachment
+            string documentType = "Licence Application Main";
+
+
+            // Upload
+            string fileType = ".pdf";
+
+            using (var formData = new MultipartFormDataContent())
+            {
+                var randomNum = new Random();
+                byte[] buffer = new byte[size]; // 25 MB
+                randomNum.NextBytes(buffer); // randomize
+                var fileContent = new ByteArrayContent(buffer);
+                fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+                {
+                    Name = "file",
+                    FileName = $"test-{Guid.NewGuid().ToString()}{fileType}"
+                };
+                formData.Add(fileContent);
+                formData.Add(new StringContent(documentType, Encoding.UTF8, "application/json"), "documentType");
+                response = _client.PostAsync("/api/" + fileService + "/" + applicationId + "/attachments/application", formData).Result;
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            }
+
+
+            // Get
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{fileService}/{applicationId}/attachments/application/{System.Uri.EscapeDataString(documentType)}");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            jsonString = await response.Content.ReadAsStringAsync();
+            var files = JsonConvert.DeserializeObject<List<FileSystemItem>>(jsonString);
+            var numberOfFiles = files.Count;
+            files.ForEach(async file =>
+            {
+                // Delete
+                request = new HttpRequestMessage(HttpMethod.Delete, "/api/" + fileService + "/" + applicationId + $"/attachments/application?serverRelativeUrl={System.Uri.EscapeDataString(files[0].serverrelativeurl)}&documentType={System.Uri.EscapeDataString(documentType)}");
+                response = await _client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+            });
+
+            await LogoutAndCleanupTestUser(strId);
+        }
+
+        [Fact]
+        public async System.Threading.Tasks.Task Test25MBFileUpload()
+        {
+            await FileSizeTest(25 * 1024 * 1024); // 25 MB
+        }
+
+        [Fact]
+        public async System.Threading.Tasks.Task Test50MBFileUpload()
+        {
+            await FileSizeTest(50 * 1024 * 1024); // 50 MB
         }
 
         [Fact]
