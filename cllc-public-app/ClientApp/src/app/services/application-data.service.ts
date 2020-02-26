@@ -80,10 +80,10 @@ export class ApplicationDataService extends DataService {
    * Update the Dynamics Application
    * @param applicationData
    */
-  updateApplication(applicationData: Application) {
+  updateApplication(applicationData: Application): Observable<Application> {
     // call API
     // console.log("===== AdoxioApplicationDataService.updateApplication: ", applicationData);
-    return this.http.put(this.apiPath + applicationData.id, applicationData, { headers: this.headers })
+    return this.http.put<Application>(this.apiPath + applicationData.id, applicationData, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
