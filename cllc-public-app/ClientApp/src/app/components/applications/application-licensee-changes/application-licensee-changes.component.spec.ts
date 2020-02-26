@@ -17,6 +17,7 @@ import { LicenseDataService } from '@services/license-data.service';
 import { AppState } from '@app/app-state/models/app-state';
 import { Account } from '@models/account.model';
 import { FeatureFlagService } from '@services/feature-flag.service';
+import { PaymentDataService } from '@services/payment-data.service';
 
 describe('ApplicationLicenseeChangesComponent', () => {
   let component: ApplicationLicenseeChangesComponent;
@@ -40,6 +41,7 @@ describe('ApplicationLicenseeChangesComponent', () => {
         { provide: MatSnackBar, useValue: {} },
         { provide: LicenseDataService, useValue: { getAllCurrentLicenses: () => of([]) } },
         { provide: Router, useValue: {} },
+        { provide: PaymentDataService, useValue: {} },
         { provide: FeatureFlagService, useValue: {featureOn: () => of(true)} },
         { provide: LegalEntityDataService, useValue: { getChangeApplicationLogs: () => of([]), getCurrentHierachy: () => of({}) } },
         {
