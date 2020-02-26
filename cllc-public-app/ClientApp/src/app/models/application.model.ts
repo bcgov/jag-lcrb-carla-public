@@ -13,8 +13,10 @@ export class Application {
   liquorIndustryConnectionsDetails: string;
   otherBusinesses: number;
   otherBusinessesDetails: string;
+  invoicetrigger: number;
 
   id: string;
+  adoxioInvoiceId: string;
   account: Account;
   additionalPropertyInformation: string;
   applicantType: string;
