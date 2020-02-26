@@ -448,6 +448,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                     Name = "file",
                     FileName = "test.pdf"
                 };
+                fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 formData.Add(fileContent);
                 formData.Add(new StringContent(documentType, Encoding.UTF8, "application/json"), "documentType");
                 response = _client.PostAsync($"/api/file/{id}/attachments/application", formData).Result;
@@ -549,6 +550,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                     Name = "file",
                     FileName = "test.pdf"
                 };
+                fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 formData.Add(fileContent);
                 formData.Add(new StringContent(documentType, Encoding.UTF8, "application/json"), "documentType");
                 response = _client.PostAsync($"/api/file/{id}/attachments/application", formData).Result;

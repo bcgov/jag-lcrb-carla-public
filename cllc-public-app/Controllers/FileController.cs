@@ -335,7 +335,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        async void CreateEntitySharePointDocumentLocation(string entityName, string entityId, string folderName, string name)
+        async Task CreateEntitySharePointDocumentLocation(string entityName, string entityId, string folderName, string name)
         {
             
             var id = Guid.Parse(entityId);
@@ -351,7 +351,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     break;
                 case "contact":
                     var contact = await _dynamicsClient.GetContactById(entityId).ConfigureAwait(true);
-                    await CreateContactDocumentLocation(contact, folderName, name).ConfigureAwait(true);
+                    await CreateContactDocumentLocation(contact, folderName, name);
                     break;
                 case "worker":
                     var worker = await _dynamicsClient.GetWorkerByIdWithChildren(entityId).ConfigureAwait(true);
@@ -522,11 +522,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // set the parent document library.
                 string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL("contact");
 
-                string accountUri = _dynamicsClient.GetEntityURI("contacts", contact.Contactid);
+                string contactUri = _dynamicsClient.GetEntityURI("contacts", contact.Contactid);
                 // add a regardingobjectid.
-                var patchSharePointDocumentLocationIncident = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+                var patchSharePointDocumentLocationContact = new MicrosoftDynamicsCRMsharepointdocumentlocation()
                 {
-                    RegardingobjectIdAccountODataBind = accountUri,
+                    RegardingobjectIdContactODataBind = contactUri,
                     ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference),
                     Relativeurl = folderName,
                     Description = "Contact Files",
@@ -534,7 +534,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 try
                 {
-                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocationIncident);
+                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocationContact);
                 }
                 catch (HttpOperationException odee)
                 {
@@ -1118,7 +1118,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 folderName = await GetFolderName(entityName, entityId, _dynamicsClient).ConfigureAwait(true);
 
-                CreateEntitySharePointDocumentLocation(entityName, entityId, folderName, folderName);
+                await CreateEntitySharePointDocumentLocation(entityName, entityId, folderName, folderName);
             }
 
             MemoryStream ms = new MemoryStream();
