@@ -88,7 +88,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             //Assert.Equal("Applying Person", responseViewModel.applyingPerson);
             Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
             Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
-            Assert.Equal("V1X 1X1", responseViewModel.EstablishmentAddressPostalCode);
+            Assert.Equal("V1X1X1", responseViewModel.EstablishmentAddressPostalCode); // postal code now has spaces removed by system
             
 			string id = responseViewModel.Id;
 
@@ -129,7 +129,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.Application>(jsonString);
 			string invoiceId = responseViewModel.AdoxioInvoiceId;
-			Assert.Equal(ViewModels.GeneralYesNo.Yes, responseViewModel.AdoxioInvoiceTrigger);
+			Assert.Equal(ViewModels.GeneralYesNo.Yes, responseViewModel.InvoiceTrigger);
 
 			// delete invoice - note we can't delete an invoice created by Dynamics
             //request = new HttpRequestMessage(HttpMethod.Post, "/api/invoice/" + invoiceId + "/delete");
@@ -200,7 +200,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             //Assert.Equal("Applying Person", responseViewModel.applyingPerson);
             Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
             Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
-            Assert.Equal("V1X 1X1", responseViewModel.EstablishmentAddressPostalCode);
+            Assert.Equal("V1X1X1", responseViewModel.EstablishmentAddressPostalCode); // postal code now has spaces removed by system
             
             string id = responseViewModel.Id;
             
@@ -295,7 +295,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
             Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
-            Assert.Equal("V1X 1X1", responseViewModel.EstablishmentAddressPostalCode);
+            Assert.Equal("V1X1X1", responseViewModel.EstablishmentAddressPostalCode); // postal code now has spaces removed by system
 
             string id = responseViewModel.Id;
 
@@ -332,7 +332,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             string invoiceId = responseViewModel.AdoxioInvoiceId;
 
 			// check application status
-			Assert.Equal(ViewModels.GeneralYesNo.No, responseViewModel.AdoxioInvoiceTrigger);
+			Assert.Equal(ViewModels.GeneralYesNo.No, responseViewModel.InvoiceTrigger);
 
             // submit a second time to get it paid
 			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/submit/" + id);
@@ -369,7 +369,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.Application>(jsonString);
             string invoiceId2 = responseViewModel.AdoxioInvoiceId;
 			Assert.NotEqual(invoiceId2, invoiceId);
-			Assert.Equal(ViewModels.GeneralYesNo.Yes, responseViewModel.AdoxioInvoiceTrigger);
+			Assert.Equal(ViewModels.GeneralYesNo.Yes, responseViewModel.InvoiceTrigger);
 
             // delete invoice - note we can't delete an invoice created by Dynamics
             //request = new HttpRequestMessage(HttpMethod.Post, "/api/invoice/" + invoiceId + "/delete");

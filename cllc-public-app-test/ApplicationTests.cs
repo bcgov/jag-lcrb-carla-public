@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             //Assert.Equal("Applying Person", responseViewModel.applyingPerson);
             Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
             Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
-            Assert.Equal("V1X 1X1", responseViewModel.EstablishmentAddressPostalCode);
+            Assert.Equal("V1X1X1", responseViewModel.EstablishmentAddressPostalCode); // postal code now has spaces removed by system
 
             Guid id = new Guid(responseViewModel.Id);
             //return;
@@ -210,7 +210,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             //Assert.Equal("Applying Person", responseViewModel.applyingPerson);
             Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
             Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
-            Assert.Equal("V1X 1X1", responseViewModel.EstablishmentAddressPostalCode);
+            Assert.Equal("V1X1X1", responseViewModel.EstablishmentAddressPostalCode); // postal code now has spaces removed by system
 
             Guid id = new Guid(responseViewModel.Id);
 
@@ -313,7 +313,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // name should match.
             Assert.Equal("Shared Retail Store", responseViewModel.EstablishmentName);
             Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
-            Assert.Equal("V1X 1X1", responseViewModel.EstablishmentAddressPostalCode);
+            Assert.Equal("V1X1X1", responseViewModel.EstablishmentAddressPostalCode); // postal code now has spaces removed by system
 
             Guid id = new Guid(responseViewModel.Id);
 
@@ -421,7 +421,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
             Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
-            Assert.Equal("V1X 1X1", responseViewModel.EstablishmentAddressPostalCode);
+            Assert.Equal("V1X1X1", responseViewModel.EstablishmentAddressPostalCode); // postal code now has spaces removed by system
 
             Guid id = new Guid(responseViewModel.Id);
 
@@ -522,7 +522,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
             Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
-            Assert.Equal("V1X 1X1", responseViewModel.EstablishmentAddressPostalCode);
+            Assert.Equal("V1X1X1", responseViewModel.EstablishmentAddressPostalCode); // postal code now has spaces removed by system
 
             Guid id = new Guid(responseViewModel.Id);
 
