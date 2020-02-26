@@ -645,6 +645,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 byte[] buffer = new byte[size]; // 25 MB
                 randomNum.NextBytes(buffer); // randomize
                 var fileContent = new ByteArrayContent(buffer);
+                fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
                 {
                     Name = "file",
@@ -683,9 +684,9 @@ namespace Gov.Lclb.Cllb.Public.Test
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task Test50MBFileUpload()
+        public async System.Threading.Tasks.Task Test45MBFileUpload()
         {
-            await FileSizeTest(50 * 1024 * 1024); // 50 MB
+            await FileSizeTest(45 * 1024 * 1024); // API gateway does not support a 50 MB upload, but 45 MB should work.
         }
 
         [Fact]
