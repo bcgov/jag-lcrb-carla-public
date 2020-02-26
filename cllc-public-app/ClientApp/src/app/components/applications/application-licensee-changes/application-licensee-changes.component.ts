@@ -284,7 +284,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     saveOverrideValue = saveOverrideValue || {};
     const data = this.cleanSaveData(this.treeRoot);
     return forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, }),
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue }),
       this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId) // ,
       // this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges)
     );
