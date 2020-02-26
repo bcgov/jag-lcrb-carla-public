@@ -89,19 +89,19 @@
       </div>
 
       <div class="signature">
-        <section class="app-field col-xs-12 col-md-8">
+        <section class="app-field col-xs-12 col-md-8 sig-controls">
           <label for="eligibilitySignature">Electronic Signature:</label>
           <input id="eligibilitySignature" formControlName="eligibilitySignature"/>
         </section>
-        <section class="app-field col-xs-12 col-md-4">
+        <section class="app-field col-xs-12 col-md-4 sig-controls">
           <label for="dateSignedOrDismissed">Signed on:</label>
-          <input id="dateSignedOrDismissed" type="text" readonly [value]="eligibilityForm.get('dateSignedOrDismissed').value | date: 'yyyy-MM-dd' : '+00:00'">
+          <input id="dateSignedOrDismissed" type="text" disabled [value]="eligibilityForm.get('dateSignedOrDismissed').value | date: 'yyyy-MM-dd' : '+00:00'">
         </section>
       </div>
   
-      <div class="p-4 d-flex justify-content-between">
+      <div class="p-4 d-flex justify-content-between button-row">
         <button class="btn btn-secondary" style="margin-right:10px;" (click)="closeForm()">DECLINE TO ANSWER</button>
-        <button class="btn btn-primary" (click)="submitForm()">SUBMIT</button>
+        <button class="btn btn-primary" (click)="submitForm()" [disabled]="eligibilityForm.invalid">SUBMIT</button>
       </div>
     </form>
   </div>
