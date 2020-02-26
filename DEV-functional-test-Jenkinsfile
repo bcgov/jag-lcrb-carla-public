@@ -22,15 +22,20 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
             checkout scm
 
             dir('functional-tests/bdd-tests') {               
-				try {
-                    withEnv(["baseUri=${baseUri}","test_start=${test_start}"])
-                    {
-				    	sh 'dotnet test --logger "junit;LogFilePath=functionalResults.xml"'					
+                withEnv(["baseUri=${baseUri}","test_start=${test_start}"])
+                {
+                    try {                        
+                        sh 'dotnet test --logger "junit;LogFilePath=functionalResults.xml"'					
                     }
-                }
-                finally {
-					junit 'functionalResults.xml'
-				}
+                    catch (err)
+                    {
+                        echo "Error encountered:"
+                        echo err.getMessage()
+                    }
+                    finally {
+                        junit 'functionalResults.xml'
+                    }					
+                }            
             }
         }
     }
