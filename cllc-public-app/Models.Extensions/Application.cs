@@ -387,12 +387,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             //get payment info
             if (dynamicsApplication.AdoxioInvoicetrigger != null && dynamicsApplication.AdoxioInvoicetrigger == 1)
             {
-                applicationVM.AdoxioInvoiceTrigger = GeneralYesNo.Yes;
+                applicationVM.InvoiceTrigger = GeneralYesNo.Yes;
                 applicationVM.IsSubmitted = true;
             }
             else
             {
-                applicationVM.AdoxioInvoiceTrigger = GeneralYesNo.No;
+                applicationVM.InvoiceTrigger = GeneralYesNo.No;
                 applicationVM.IsSubmitted = false;
             }
 
