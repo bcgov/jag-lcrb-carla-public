@@ -187,6 +187,7 @@ import { EventFormComponent } from '@components/event-form/event-form.component'
 import { LicenceEventsService } from '@services/licence-events.service';
 import { SecurityScreeningRequirementsComponent } from './components/security-screening-requirements/security-screening-requirements.component';
 import { EligibilityFormComponent } from './components/eligibility-form/eligibility-form.component';
+import { EligibilityFormDataService } from '@services/eligibility-data.service';
 
 
 @NgModule({
@@ -412,6 +413,7 @@ import { EligibilityFormComponent } from './components/eligibility-form/eligibil
     PolicyDocumentDataService,
     PreviousAddressDataService,
     ServiceCardAuthGuard,
+    EligibilityFormDataService,
     SurveyDataService,
     TiedHouseConnectionsDataService,
     EstablishmentWatchWordsService,
