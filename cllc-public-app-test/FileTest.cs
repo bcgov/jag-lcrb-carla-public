@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Xunit;
 
 namespace Gov.Lclb.Cllb.Public.Test
@@ -84,7 +85,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             MultipartFormDataContent multiPartContent = new MultipartFormDataContent("----TestBoundary");
             var fileContent = new MultipartContent { new ByteArrayContent(bytes) };
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
             fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
             fileContent.Headers.ContentDisposition.Name = "File";
             fileContent.Headers.ContentDisposition.FileName = filename;
@@ -222,8 +223,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             var uploadResponse = await _client.SendAsync(requestMessage);
 
-            // should be a 404.
-            Assert.Equal(HttpStatusCode.NotFound, uploadResponse.StatusCode);
+            // should be OK as the API will reformat an invalid name.
+            response.EnsureSuccessStatusCode();
 
             // Cleanup the Application
 
@@ -297,7 +298,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             MultipartFormDataContent multiPartContent = new MultipartFormDataContent("----TestBoundary");
             var fileContent = new MultipartContent { new ByteArrayContent(bytes) };
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
             fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
             fileContent.Headers.ContentDisposition.Name = "File";
             fileContent.Headers.ContentDisposition.FileName = filename;
@@ -539,6 +540,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 {
                     var randomNum = new Random().Next(1000) + 100;
                     var fileContent = new ByteArrayContent(Encoding.ASCII.GetBytes(randomNewUserName("test data", randomNum)));
+                    fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                     fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
                     {
                         Name = "file",
@@ -748,7 +750,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             MultipartFormDataContent multiPartContent = new MultipartFormDataContent("----TestBoundary");
             var fileContent = new MultipartContent { new ByteArrayContent(bytes) };
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
             fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
             {
                 Name = "File",
@@ -881,7 +883,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             MultipartFormDataContent multiPartContent = new MultipartFormDataContent("----TestBoundary");
             var fileContent = new MultipartContent { new ByteArrayContent(bytes) };
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
             fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
             {
                 Name = "File",
@@ -914,13 +916,13 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // Verify that the file can be downloaded and the contents match
             // {entityId}/download-file/{entityName}"
-            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{fileService}/{id}/download-file/application/{fileName}?serverRelativeUrl={serverrelativeurl}&documentType={documentType}");
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{fileService}/{id}/download-file/application/{fileName}?serverRelativeUrl=" + Uri.EscapeDataString (serverrelativeurl) + "&documentType=" + Uri.EscapeDataString(documentType));
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             // Cleanup the Application
 
-            request = new HttpRequestMessage(HttpMethod.Delete, "/api/" + fileService + "/" + id + $"/attachments/application/?serverRelativeUrl={serverrelativeurl}&documentType={documentType}");
+            request = new HttpRequestMessage(HttpMethod.Delete, "/api/" + fileService + "/" + id + $"/attachments/application?serverRelativeUrl=" + Uri.EscapeDataString(serverrelativeurl) + "&documentType=" + Uri.EscapeDataString(documentType));
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
