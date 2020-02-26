@@ -10,6 +10,8 @@ using Gov.Lclb.Cllb.Public.Authentication;
 using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using System;
+using System.Collections.Generic;
+using Gov.Lclb.Cllb.Public.ViewModels;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -33,15 +35,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _env = env;
         }
 
-        public static bool IsEligibilityCheckRequired(string userId, IConfiguration config, IDynamicsClient dynamics)
+        public static bool IsEligibilityCheckRequired(string accountId, IConfiguration config, IDynamicsClient dynamics)
         {
             if (config["FEATURE_ELIGIBILITY"] == null)
             {
                 return false;
             }
 
-            MicrosoftDynamicsCRMaccount account = dynamics.Accounts.GetByKey(userId);
-            return account.AdoxioIseligibilitycertified == null;
+            bool cannabisApplicationInProgress = false;
+            var expand = new List<string> {
+                "adoxio_LicenceType",
+            };
+            string filter = $"_adoxio_applicant_value eq {accountId}";
+            MicrosoftDynamicsCRMadoxioApplicationCollection dynamicsApplicationListCollection = dynamics.Applications.Get(filter: filter, expand: expand);
+            if (dynamicsApplicationListCollection.Value.Count > 0)
+            {
+                foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationListCollection.Value)
+                {
+                    if ((dynamicsApplication.Statuscode == (int)AdoxioApplicationStatusCodes.InProgress || dynamicsApplication.Statuscode == (int)AdoxioApplicationStatusCodes.Intake)
+                        && dynamicsApplication.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
+                    {
+                        cannabisApplicationInProgress = true;
+                        break;
+                    }
+                }
+            }
+
+            MicrosoftDynamicsCRMaccount account = dynamics.Accounts.GetByKey(accountId);
+            return (account.AdoxioIseligibilitycertified == null || account.AdoxioIseligibilitycertified == false) && cannabisApplicationInProgress;
         }
 
         /// <summary>
