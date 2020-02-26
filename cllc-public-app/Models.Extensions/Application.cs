@@ -78,6 +78,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioServicehourssaturdayclose = (int?)from.ServiceHoursSaturdayClose;
             to.AdoxioServicehourssundayopen = (int?)from.ServiceHoursSundayOpen;
             to.AdoxioServicehourssundayclose = (int?)from.ServiceHoursSundayClose;
+            to.AdoxioInvoicetrigger = (int?)from.InvoiceTrigger;
 
             to.AdoxioRenewalcriminaloffencecheck = (int?)from.RenewalCriminalOffenceCheck;
             to.AdoxioRenewalunreportedsaleofbusiness = (int?)from.RenewalUnreportedSaleOfBusiness;
