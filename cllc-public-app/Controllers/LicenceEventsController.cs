@@ -228,8 +228,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Get events that the user has access to
         /// </summary>
         /// <returns></returns>
-        [HttpGet()]
-        public async Task<IActionResult> GetLicenceEventsList()
+        [HttpGet("list/{licenceId}/{num}")]
+        public async Task<IActionResult> GetLicenceEventsList(string licenceId, int num)
         {
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
@@ -237,10 +237,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioEventCollection dynamicsEvents;
             List<ViewModels.LicenceEvent> responseEvents = new List<ViewModels.LicenceEvent>();
             
-            string filter = "_adoxio_account_value eq " + userSettings.AccountId;
+            string filter = $"_adoxio_account_value eq {userSettings.AccountId} and _adoxio_licence_value eq {licenceId}";
             try
             {
-                dynamicsEvents = _dynamicsClient.Events.Get(filter: filter);
+                dynamicsEvents = _dynamicsClient.Events.Get(filter: filter, top: num, orderby: new List<string> { "modifiedon desc" });
             }
             catch (HttpOperationException ex)
             {
