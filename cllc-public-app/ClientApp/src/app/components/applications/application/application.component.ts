@@ -24,6 +24,9 @@ import { FileUploaderComponent } from '@shared/components/file-uploader/file-upl
 import { ConnectionToNonMedicalStoresComponent } from '@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
+import { AccountDataService } from '@services/account-data.service';
+import { EligibilityFormComponent } from '@components/eligibility-form/eligibility-form.component';
+import { User } from '@models/user.model';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -97,7 +100,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     private fb: FormBuilder,
     private tiedHouseService: TiedHouseConnectionsDataService,
     public dialog: MatDialog,
-    public establishmentWatchWordsService: EstablishmentWatchWordsService) {
+    public establishmentWatchWordsService: EstablishmentWatchWordsService,
+    private accountDataService: AccountDataService
+  ) {
     super();
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
     this.route.paramMap.subscribe(pmap => this.mode = pmap.get('mode'));
@@ -207,6 +212,19 @@ export class ApplicationComponent extends FormBase implements OnInit {
           this.form.disable();
         }
         this.savedFormData = this.form.value;
+
+        if (this.application.applicationType.name === ApplicationTypeNames.CannabisRetailStore) {
+          this.store.select(state => state.currentUserState.currentUser)
+            .pipe(takeWhile(() => this.componentActive))
+            .subscribe((data: User) => {
+              this.accountDataService.loadCurrentAccountToStore(data.accountid)
+                .subscribe(() => {
+                  if (data.isEligibilityRequired) {
+                    this.openEligibilityModal();
+                  }
+                });
+            });
+        }
       },
         () => {
           console.log('Error occured');
@@ -580,4 +598,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return label;
   }
 
+  openEligibilityModal() {
+    this.dialog.open(EligibilityFormComponent, {
+      disableClose: true,
+      autoFocus: false,
+      maxHeight: '95vh'
+    });
+  }
 }
