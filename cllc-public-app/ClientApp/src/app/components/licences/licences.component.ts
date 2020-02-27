@@ -19,6 +19,7 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { EstablishmentDataService } from '@services/establishment-data.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Establishment } from '@models/establishment.model';
+import { LicenceEventsService } from '@services/licence-events.service';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -60,6 +61,7 @@ export class LicencesComponent extends FormBase implements OnInit {
     private paymentService: PaymentDataService,
     private establishmentService: EstablishmentDataService,
     public featureFlagService: FeatureFlagService,
+    private licenceEventsService: LicenceEventsService,
     public fb: FormBuilder) {
     super();
     featureFlagService.featureOn('LicenceTransfer')
@@ -181,13 +183,22 @@ export class LicencesComponent extends FormBase implements OnInit {
     licence.actionApplications = [];
     const relatedApplications = this.applications.filter(l => l.licenceId === licence.licenseId);
     relatedApplications.forEach(app => {
-      licence.actionApplications.push({
+      let action = {
         applicationId: app.id,
         applicationTypeName: app.applicationTypeName,
         applicationStatus: app.applicationStatus,
         isPaid: app.isPaid
-      });
+      };
+      licence.actionApplications.push(action);
     });
+    if (licence.licenceTypeName === 'Catering') {
+      forkJoin([
+        this.licenceEventsService.getLicenceEventsList(licence.licenseId)
+      ])
+      .subscribe(data => {
+        licence.events = data[0];
+      });
+    }
 
     if (typeof this.licenceMappings[licence.licenceTypeName] === 'undefined') {
       this.licenceMappings[licence.licenceTypeName] = [];
