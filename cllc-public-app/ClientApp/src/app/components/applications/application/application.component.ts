@@ -25,7 +25,6 @@ import { ConnectionToNonMedicalStoresComponent } from '@components/account-profi
 import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AccountDataService } from '@services/account-data.service';
-import { EligibilityFormComponent } from '@components/eligibility-form/eligibility-form.component';
 import { User } from '@models/user.model';
 
 const ServiceHours = [
@@ -212,19 +211,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
           this.form.disable();
         }
         this.savedFormData = this.form.value;
-
-        if (this.application.applicationType.name === ApplicationTypeNames.CannabisRetailStore) {
-          this.store.select(state => state.currentUserState.currentUser)
-            .pipe(takeWhile(() => this.componentActive))
-            .subscribe((data: User) => {
-              this.accountDataService.loadCurrentAccountToStore(data.accountid)
-                .subscribe(() => {
-                  if (data.isEligibilityRequired) {
-                    this.openEligibilityModal();
-                  }
-                });
-            });
-        }
       },
         () => {
           console.log('Error occured');
@@ -596,13 +582,5 @@ export class ApplicationComponent extends FormBase implements OnInit {
       label = 'Proposed New Name';
     }
     return label;
-  }
-
-  openEligibilityModal() {
-    this.dialog.open(EligibilityFormComponent, {
-      disableClose: true,
-      autoFocus: false,
-      maxHeight: '95vh'
-    });
   }
 }
