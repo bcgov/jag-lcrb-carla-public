@@ -66,6 +66,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("SecurityScreening");
             }
 
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_DISABLE_LOGIN"]))
+            {
+                features.Add("DisableLogin");
+            }
+
             return new JsonResult(features);
         }
 
