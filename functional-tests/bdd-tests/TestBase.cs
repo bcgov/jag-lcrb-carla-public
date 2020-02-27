@@ -29,18 +29,28 @@ namespace bdd_tests
         {
             string path = Directory.GetCurrentDirectory();
 
-            //bool runlocal = true;
+            configuration = new ConfigurationBuilder()
+                .AddEnvironmentVariables()
+                .AddUserSecrets("a004e634-29c7-48b6-becc-87fe16be7538")
+                .Build();
 
-            driver = new ChromeDriver(path);
+            //bool runlocal = true;
+            ChromeOptions options = new ChromeOptions();
+            // run headless when in CI
+            if (!string.IsNullOrEmpty(configuration["OPENSHIFT_BUILD_COMMIT"]) || !string.IsNullOrEmpty(configuration["Build.BuildNumber"]))
+            {
+                Console.Out.WriteLine("Enabling Headless Mode");
+                options.AddArguments("headless", "no-sandbox", "disable-web-security",  "no-zygote", "disable-gpu");
+            }
+            
+            driver = new ChromeDriver(path, options);
+            
             //driver = new FirefoxDriver(FirefoxDriverService);
             driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(60);
 
             ngDriver = new NgWebDriver(driver);
 
-            configuration = new ConfigurationBuilder()
-                .AddEnvironmentVariables()
-                .AddUserSecrets("a004e634-29c7-48b6-becc-87fe16be7538")
-                .Build();
+            
 
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }

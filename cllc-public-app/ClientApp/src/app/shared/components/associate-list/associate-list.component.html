@@ -109,7 +109,7 @@
                         </td>
                     </tr>
 
-                    <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType() &&  isNameChangePerformed(associate.value.refObject) && !associate.get('edit').value"
+                    <tr *ngIf="showNameChangeSection(associate)"
                         style="height:20px;">
                         <td colspan="7">
                             <div (click)="associate.get('collapse').value = !associate.get('collapse').value"
@@ -269,7 +269,8 @@
                             <td>
                                 <span
                                     *ngIf="!associate.get('edit').value">{{associate.get('interestPercentageNew').value}}</span>
-                                <app-field *ngIf="associate.get('edit').value" [showChevrons]="false" [isFullWidth]="true"
+                                <app-field *ngIf="associate.get('edit').value" [showChevrons]="false"
+                                    [isFullWidth]="true"
                                     [valid]="!associate.get('interestPercentageNew').touched || associate.get('interestPercentageNew').valid"
                                     errorMessage="Please enter Shares">
                                     <input class="form-control" type="text" formControlName="interestPercentageNew">
@@ -295,9 +296,10 @@
 
                             </td>
                             <td>
-                                <span *ngIf="!associate.get('edit').value">{{associate.get('emailNew').value}}</span>
-                                <app-field *ngIf="associate.get('edit').value" [showChevrons]="false" [isFullWidth]="true"
-                                    [valid]="!associate.get('emailNew').touched || associate.get('emailNew ').valid"
+                                <span *ngIf=" !associate.get('edit').value">{{associate.get('emailNew').value}}</span>
+                                <app-field *ngIf="associate.get('edit') && associate.get('edit').value"
+                                    [showChevrons]="false" [isFullWidth]="true"
+                                    [valid]="!associate.get('emailNew').touched || associate.get('emailNew').valid"
                                     errorMessage="Please enter email">
                                     <input class="form-control" type="text" formControlName="emailNew">
                                 </app-field>

@@ -13,9 +13,9 @@ import { MatSnackBar } from '@angular/material';
 export class AssociateListComponent extends FormBase implements OnInit {
   @Input() rootNode: LicenseeChangeLog;
   @Input() account: Account;
+  @Input() licencesOnFile: boolean;
   @Input() changeTypeSuffix: string;
   @Input() addLabel: string = 'Add Associate';
-  businessType: string = 'Society';
   @Output() childAdded = new EventEmitter<LicenseeChangeLog>();
   items: LicenseeChangeLog[] = [];
   @Input('personalHistoryItems') set personalHistoryItems(value: LicenseeChangeLog[]) {
@@ -210,22 +210,6 @@ export class AssociateListComponent extends FormBase implements OnInit {
     }
   }
 
-  // Copy value to clipboard
-  copyMessage(value: string) {
-    const selBox = document.createElement('textarea');
-    selBox.style.position = 'fixed';
-    selBox.style.left = '0';
-    selBox.style.top = '0';
-    selBox.style.opacity = '0';
-    selBox.value = value;
-    document.body.appendChild(selBox);
-    selBox.focus();
-    selBox.select();
-    document.execCommand('copy');
-    document.body.removeChild(selBox);
-    this.snackBar.open('The link is copied to the clipboard', '', { duration: 2500, panelClass: ['green-snackbar'] });
-  }
-
   deleteChange(node: LicenseeChangeLog, index: number) {
     node.businessNameNew = node.nameOld;
     node.isDirectorNew = node.isDirectorOld;
@@ -265,6 +249,14 @@ export class AssociateListComponent extends FormBase implements OnInit {
     return res;
   }
 
+  showNameChangeSection(associate): boolean {
+    const show = associate && !this.asLicenseeChangeLog(associate.value).isRemoveChangeType()
+      && this.licencesOnFile
+      && this.isNameChangePerformed(associate.value.refObject)
+      && !associate.get('edit').value;
+    return show;
+  }
+
   updateNumberOfFiles(numberOfFiles: number, docType: string, node: LicenseeChangeLog) {
     node.fileUploads[docType] = numberOfFiles;
   }
@@ -290,8 +282,10 @@ export class AssociateListComponent extends FormBase implements OnInit {
   }
 
   showPosition(): boolean {
-    return this.businessType === 'Society'
-      || this.businessType === 'PublicCorporation';
+    return this.rootNode && (
+      this.rootNode.businessType === 'Society'
+      || this.rootNode.businessType === 'PrivateCorporation'
+      || this.rootNode.businessType === 'PublicCorporation');
   }
 
   // check to see if there is a link in any child records; when set to true the Level 1 Personal History Summary column will show.

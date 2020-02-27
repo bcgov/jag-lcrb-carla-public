@@ -62,7 +62,12 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
             services.AddAuthorization();
 
-            services.AddGrpc();
+            services.AddGrpc(options =>
+            {
+                options.EnableDetailedErrors = true;
+                options.MaxReceiveMessageSize = 256 * 1024 * 1024; // 256 MB
+                options.MaxSendMessageSize = 256 * 1024 * 1024; // 256 MB
+            });
 
             // health checks. 
             services.AddHealthChecks()

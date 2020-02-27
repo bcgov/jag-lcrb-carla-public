@@ -21,6 +21,8 @@ import { MonthlyReport, monthlyReportStatus } from '@models/monthly-report.model
 import { ApplicationDataService } from '@services/application-data.service';
 import { Application } from '@models/application.model';
 import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
+import { ModalComponent } from '@shared/components/modal/modal.component';
+import { EligibilityFormComponent } from '@components/eligibility-form/eligibility-form.component';
 
 const Months = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'];
@@ -64,13 +66,11 @@ export class AppComponent extends FormBase implements OnInit {
     featureFlagService.featureOn('Maps')
       .subscribe(x => this.showMap = x);
 
-      featureFlagService.featureOn('LicenseeChanges')
+    featureFlagService.featureOn('LicenseeChanges')
       .subscribe(x => this.licenseeChangeFeatureOn = x);
 
     featureFlagService.featureOn('FederalReporting')
       .subscribe(x => this.showFederalReporting = x);
-
-
 
     this.isDevMode = isDevMode();
     this.router.events
@@ -128,6 +128,14 @@ export class AppComponent extends FormBase implements OnInit {
     const dialogRef = this.dialog.open(VersionInfoDialogComponent, dialogConfig);
   }
 
+  openEligibilityModal() {
+    this.dialog.open(EligibilityFormComponent, {
+      disableClose: true,
+      autoFocus: false,
+      maxHeight: '95vh'
+    });
+  }
+
 
   reloadUser() {
     this.store.select(state => state.currentUserState.currentUser)
@@ -137,7 +145,11 @@ export class AppComponent extends FormBase implements OnInit {
         this.isNewUser = this.currentUser && this.currentUser.isNewUser;
         if (this.currentUser && this.currentUser.accountid && this.currentUser.accountid !== '00000000-0000-0000-0000-000000000000') {
           this.accountDataService.loadCurrentAccountToStore(this.currentUser.accountid)
-            .subscribe(() => { });
+            .subscribe(() => {
+              if (data.isEligibilityRequired) {
+                this.openEligibilityModal();
+              }
+            });
 
           // load federal reports after the user logs in
           this.monthlyReportDataService.getAllCurrentMonthlyReports()
@@ -156,7 +168,6 @@ export class AppComponent extends FormBase implements OnInit {
       });
   }
 
-  
 
   showBceidTermsOfUse(): boolean {
     const result = (this.currentUser

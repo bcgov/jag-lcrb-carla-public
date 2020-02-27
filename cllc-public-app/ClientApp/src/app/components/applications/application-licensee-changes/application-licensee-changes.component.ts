@@ -19,6 +19,8 @@ import { ApplicationSummary } from '@models/application-summary.model';
 import { ApplicationTypeNames, ApplicationType } from '@models/application-type.model';
 import { LicenseDataService } from '@services/license-data.service';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
+import { FeatureFlagService } from '@services/feature-flag.service';
+import { PaymentDataService } from '@services/payment-data.service';
 
 @Component({
   selector: 'app-application-licensee-changes',
@@ -48,6 +50,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   thereIsExistingOrgStructure: boolean;
   busyPromise: Promise<any>;
   licenses: ApplicationLicenseSummary[];
+  licencesOnFile: boolean;
+  securityScreeningEnabled: boolean;
 
   constructor(public dialog: MatDialog,
     public snackBar: MatSnackBar,
@@ -57,12 +61,19 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     private store: Store<AppState>,
     private route: ActivatedRoute,
     private licenseService: LicenseDataService,
+    private paymentDataService: PaymentDataService,
     private applicationDataService: ApplicationDataService,
-    private legalEntityDataService: LegalEntityDataService) {
+    private legalEntityDataService: LegalEntityDataService,
+    public featureFlagService: FeatureFlagService) {
     super();
+
+    featureFlagService.featureOn('SecurityScreening')
+      .subscribe(featureOn => this.securityScreeningEnabled = featureOn);
+
     this.licenseService.getAllCurrentLicenses()
       .subscribe(data => {
         this.licenses = data;
+        this.licencesOnFile = (this.licenses && this.licenses.length > 0);
       });
   }
 
@@ -139,16 +150,17 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
   getSaveLabel(): string {
-    let label = 'Save';
-    const licencesOnFile = (this.licenses && this.licenses.length > 0);
+    let label = 'Continue to Application';
+    if (!this.securityScreeningEnabled) {
 
-    //if No Organizational Information on File  OR changes made
-    if (!this.thereIsExistingOrgStructure || (this.treeRoot && LicenseeChangeLog.HasChanges(this.treeRoot))) {
-      label = 'Submit Organization Information';
-    }
-    // if Organization Information on File  AND no changes
-    else if (this.thereIsExistingOrgStructure && this.treeRoot && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
-      label = 'Confirm Organization Information Is Complete';
+      //if No Organizational Information on File  OR changes made
+      if (!this.thereIsExistingOrgStructure || (this.treeRoot && LicenseeChangeLog.HasChanges(this.treeRoot))) {
+        label = 'Submit Organization Information';
+      }
+      // if Organization Information on File  AND no changes
+      else if (this.thereIsExistingOrgStructure && this.treeRoot && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
+        label = 'Confirm Organization Information Is Complete';
+      }
     }
     return label;
   }
@@ -226,31 +238,67 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   save() {
     this.validationErrors = this.validateFormData();
     if (this.validationErrors.length === 0) {
-      this.busySave = this.prepareSaveRequest()
-        .subscribe(() => {
+
+      // set value to cause invoice generationP
+      this.busyPromise = this.prepareSaveRequest({ invoicetrigger: 1 })
+        .pipe(mergeMap(results => {
+          const app: Application = results[0];
+          // payment is required
+          if (app && app.adoxioInvoiceId) {
+            this.submitPayment();
+          }
+          // else go to the application page
+          else if (app) {
+            this.saveComplete.emit(true);
+          }
+          return of(app);
+        }))
+        .toPromise()
+        .then(() => {
           this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-          this.saveComplete.emit(true);
+
+        })
+        .catch(() => {
+          this.snackBar.open('Error saving application', 'Error', { duration: 2500, panelClass: ['red-snackbar'] });
         });
     }
   }
 
-  private prepareSaveRequest() {
+  /**
+ * Redirect to payment processing page (Express Pay / Bambora service)
+ * */
+  private submitPayment() {
+    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(jsonUrl => {
+        window.location.href = jsonUrl['url'];
+        return jsonUrl['url'];
+      }, err => {
+        if (err._body === 'Payment already made') {
+          this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        }
+      });
+  }
+
+  private prepareSaveRequest(saveOverrideValue: Partial<Application>) {
+    saveOverrideValue = saveOverrideValue || {};
     const data = this.cleanSaveData(this.treeRoot);
     return forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, isApplicationComplete: 'Yes' }),
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue }),
       this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId) // ,
       // this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges)
     );
   }
 
   saveForLater() {
-    this.busyPromise = this.prepareSaveRequest()
+    this.busyPromise = this.prepareSaveRequest({})
       .toPromise()
       .then(() => {
         this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
         this.router.navigateByUrl('/dashboard');
       });
   }
+
 
   addCancelledChange(change: LicenseeChangeLog) {
     this.cancelledLicenseeChanges.push(change);
