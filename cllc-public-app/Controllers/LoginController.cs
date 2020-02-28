@@ -109,5 +109,39 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Redirect(basePath);
         }
 
+        /// <summary>
+        /// Injects an authentication token cookie into the response for use with the 
+        /// SiteMinder authentication middleware
+        /// </summary>
+        [HttpGet]
+        [Route("cleanup/{userid}")]
+        [AllowAnonymous]
+        public virtual IActionResult Cleanup(string userId)
+        {
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
+
+            if (string.IsNullOrEmpty(userId)) return BadRequest("Missing required userid query parameter.");
+
+            if (userId.ToLower() == "default")
+                userId = _options.DevDefaultUserId;
+
+
+
+            // clear session
+            HttpContext.Session.Clear();
+
+            // expire "dev" user cookie
+            string temp = HttpContext.Request.Cookies[_options.DevBCSCAuthenticationTokenKey];
+            if (temp == null)
+            {
+                temp = "";
+            }
+            
+
+            string basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "" : _configuration["BASE_PATH"];          
+
+            return Redirect(basePath);
+        }
+
     }
 }
