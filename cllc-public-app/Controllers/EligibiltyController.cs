@@ -44,22 +44,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             bool cannabisApplicationInProgress = false;
-            var expand = new List<string> {
-                "adoxio_LicenceType",
-            };
-            string filter = $"_adoxio_applicant_value eq {accountId}";
-            MicrosoftDynamicsCRMadoxioApplicationCollection dynamicsApplicationListCollection = dynamics.Applications.Get(filter: filter, expand: expand);
+            var applicationType = dynamics.GetApplicationTypeByName("Cannabis Retail Store");
+            if (applicationType == null)
+            {
+                return false;
+            }
+            string filter = $"_adoxio_applicant_value eq {accountId} and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} and ( statuscode eq {(int)AdoxioApplicationStatusCodes.InProgress} or statuscode eq {(int)AdoxioApplicationStatusCodes.Intake} )";
+            MicrosoftDynamicsCRMadoxioApplicationCollection dynamicsApplicationListCollection = dynamics.Applications.Get(filter: filter);
             if (dynamicsApplicationListCollection.Value.Count > 0)
             {
-                foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationListCollection.Value)
-                {
-                    if ((dynamicsApplication.Statuscode == (int)AdoxioApplicationStatusCodes.InProgress || dynamicsApplication.Statuscode == (int)AdoxioApplicationStatusCodes.Intake)
-                        && dynamicsApplication.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
-                    {
-                        cannabisApplicationInProgress = true;
-                        break;
-                    }
-                }
+                cannabisApplicationInProgress = true;
             }
             try
             {
