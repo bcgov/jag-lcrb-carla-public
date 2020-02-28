@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Newtonsoft.Json;
@@ -60,9 +61,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
             }
-
-            MicrosoftDynamicsCRMaccount account = dynamics.Accounts.GetByKey(accountId);
-            return (account.AdoxioIseligibilitycertified == null || account.AdoxioIseligibilitycertified == false) && cannabisApplicationInProgress;
+            try
+            {
+                MicrosoftDynamicsCRMaccount account = dynamics.Accounts.GetByKey(accountId);
+                return (account.AdoxioIseligibilitycertified == null || account.AdoxioIseligibilitycertified == false) && cannabisApplicationInProgress;
+            }
+            catch (HttpOperationException)
+            {
+                return false;
+            }
         }
 
         /// <summary>
