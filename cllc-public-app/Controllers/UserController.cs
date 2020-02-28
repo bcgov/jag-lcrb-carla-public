@@ -68,7 +68,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 user.firstname = userSettings.AuthenticatedUser.GivenName;
                 user.email = userSettings.AuthenticatedUser.Email;
                 user.isNewUser = false;
-                user.isEligibilityRequired = EligibilityController.IsEligibilityCheckRequired(user.accountid, _configuration, _dynamicsClient);
+                user.isEligibilityRequired = user.accountid != null ? EligibilityController.IsEligibilityCheckRequired(user.accountid, _configuration, _dynamicsClient) : false;
             }
 
 
