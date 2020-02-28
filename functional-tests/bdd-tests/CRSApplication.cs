@@ -29,7 +29,7 @@ Scenario: Start Application
 namespace bdd_tests
 {
     [FeatureFile("./CRSApplication.feature")]
-    public sealed class CRSApplication : TestBase
+    public sealed class CRSApplication : TestBaseCRS
     {
 
         // Dashboard related common actions
@@ -161,7 +161,9 @@ namespace bdd_tests
         [And(@"I enter the payment information")]
         public void enter_payment_info()
         {
-            string testCC = "4030000010001234";
+            MakeCRSPayment();
+            
+            /*string testCC = "4030000010001234";
             string testCVD = "123";
 
             //find out what browser equivalent is in this context
@@ -176,7 +178,7 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(10000);
 
             //turn back on when returning to Angular
-            ngDriver.IgnoreSynchronization = false;
+            ngDriver.IgnoreSynchronization = false;*/
         }
 
         [Then(@"I return to the dashboard")]

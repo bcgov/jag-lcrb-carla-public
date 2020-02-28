@@ -30,19 +30,21 @@ Scenario: Worker Application
 namespace bdd_tests
 {
     [FeatureFile("./WorkerApplication.feature")]
-    public sealed class WorkerApplication : TestBase
+    public sealed class WorkerApplication : TestBaseWorker
     {
 
         [Given(@"I SEE the Dashboard")]
         public void I_view_the_dashboard()
         {
-            CarlaLogin();
+            CarlaLoginWorker();
         }
 
         [And(@"I click on my name")]
         public void I_click_on_my_name()
         {
-            //to do
+            //to do 
+            //NgWebElement uiNameLink = ngDriver.FindElement(By.XPath("(//"));
+            //uiNameLink.Click();
         }
 
         [And(@"I complete Step 1 of the application")]
@@ -98,11 +100,11 @@ namespace bdd_tests
             NgWebElement uiSelfDisclosure = ngDriver.FindElement(By.XPath("((//input[@name='selfDisclosure'])[2]"));
             uiSelfDisclosure.Click();
 
-            NgWebElement noWetSignature1 = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
-            noWetSignature1.Click();
+            NgWebElement uiNoWetSignature1 = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            uiNoWetSignature1.Click();
 
-            NgWebElement noWetSignature2 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
-            noWetSignature2.Click();
+            NgWebElement uiNoWetSignature2 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
+            uiNoWetSignature2.Click();
 
             NgWebElement uiApplicantName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
             uiApplicantName.SendKeys(applicantName);
@@ -129,7 +131,9 @@ namespace bdd_tests
         [And(@"I enter the payment information")]
         public void enter_payment_info()
         {
-            string testCC = "4030000010001234";
+            MakeWorkerPayment();
+
+            /*string testCC = "4030000010001234";
             string testCVD = "123";
 
             //browser sync - don't wait for Angular
@@ -144,7 +148,7 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(10000);
 
             //turn back on when returning to Angular
-            ngDriver.IgnoreSynchronization = false;
+            ngDriver.IgnoreSynchronization = false;*/
         }
 
         [And(@"I return to the dashboard")]
