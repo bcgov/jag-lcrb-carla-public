@@ -38,7 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         public static bool IsEligibilityCheckRequired(string accountId, IConfiguration config, IDynamicsClient dynamics)
         {
-            if (config["FEATURE_ELIGIBILITY"] == null)
+            if (config["FEATURE_ELIGIBILITY"] == null || string.IsNullOrEmpty(accountId))
             {
                 return false;
             }
