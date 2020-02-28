@@ -17,6 +17,7 @@ using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Gov.Lclb.Cllb.Services.FileManager;
 using System.Collections.Generic;
 using Microsoft.Extensions.Primitives;
+using Microsoft.Extensions.Configuration;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {
@@ -56,6 +57,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
         private const string ConstInactivegDbUserIdError = "Database UserId is inactive";
         private const string ConstInvalidPermissions = "UserId does not have valid permissions";
+        private const string ConstLoginDisabledError = "Login Disabled";
 
         /// <summary>
         /// DEfault Constructor
@@ -80,6 +82,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             DevBCSCAuthenticationTokenKey = ConstDevBCSCAuthenticationTokenKey;
             DevDefaultUserId = ConstDevDefaultUserId;
             UnderageError = ConstUnderageError;
+            LoginDisabledError = ConstLoginDisabledError;
         }
 
         /// <summary>
@@ -178,6 +181,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         /// Development Environment efault UserId
         /// </summary>
         public string DevDefaultUserId { get; set; }
+
+        public string LoginDisabledError { get; set; }
     }
     #endregion    
 
@@ -234,13 +239,21 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             {
                 ClaimsPrincipal principal;
                 HttpContext context = Request.HttpContext;
+
+                IConfiguration _configuration = (IConfiguration)context.RequestServices.GetService(typeof(IConfiguration));
+
                 IDynamicsClient _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
 
-                FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
+                FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));              
 
                 IWebHostEnvironment hostingEnv = (IWebHostEnvironment)context.RequestServices.GetService(typeof(IWebHostEnvironment));
 
                 UserSettings userSettings = new UserSettings();
+
+                if (!string.IsNullOrEmpty(_configuration["FEATURE_DISABLE_LOGIN"]))
+                {
+                    return AuthenticateResult.Fail(options.LoginDisabledError);
+                }
 
                 string userId = null;
                 string devCompanyId = null;
