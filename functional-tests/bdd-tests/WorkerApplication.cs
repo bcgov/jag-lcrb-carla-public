@@ -132,23 +132,6 @@ namespace bdd_tests
         public void enter_payment_info()
         {
             MakeWorkerPayment();
-
-            /*string testCC = "4030000010001234";
-            string testCVD = "123";
-
-            //browser sync - don't wait for Angular
-            ngDriver.IgnoreSynchronization = true;
-
-            driver.FindElementByName("trnCardNumber").SendKeys(testCC);
-
-            driver.FindElementByName("trnCardCvd").SendKeys(testCVD);
-
-            driver.FindElementByName("submitButton").Click();
-           
-            System.Threading.Thread.Sleep(10000);
-
-            //turn back on when returning to Angular
-            ngDriver.IgnoreSynchronization = false;*/
         }
 
         [And(@"I return to the dashboard")]

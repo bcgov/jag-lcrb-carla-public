@@ -68,6 +68,8 @@ namespace bdd_tests
             string testCC = configuration["test_cc"];
             string testCVD = configuration["test_ccv"];
 
+            System.Threading.Thread.Sleep(10000);
+
             //browser sync - don't wait for Angular
             ngDriver.IgnoreSynchronization = true;
 
