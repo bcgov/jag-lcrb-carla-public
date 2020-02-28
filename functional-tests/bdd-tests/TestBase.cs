@@ -79,5 +79,13 @@ namespace bdd_tests
 
             //sub.Click();
         }
+
+        public void CarlaDeleteCurrentAccount()
+        {
+            string deleteAccountURL = $"{baseUri}/api/accounts/delete/current";
+            ngDriver.ExecuteScript($"var xhr = new XMLHttpRequest(); xhr.open(\"POST\", \"{deleteAccountURL}\" , true); xhr.send();");
+
+            ngDriver.Navigate().GoToUrl($"{baseUri}/logout");
+        }
     }
 }
