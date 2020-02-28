@@ -34,7 +34,7 @@ namespace bdd_tests
 
         // Dashboard related common actions
 
-        [Given(@"I SEE the Dashboard")]
+        [Given(@"I am logged in to the dashboard")]
         public void I_view_the_dashboard()
         {
             CarlaLogin();
@@ -45,7 +45,7 @@ namespace bdd_tests
         {
         }
 
-        [And(@"I CLICK Start Application")]
+        [And(@"I click on the Start Application button")]
         public void I_start_application()
         {
             ngDriver.WaitForAngular();
@@ -53,7 +53,7 @@ namespace bdd_tests
             startApp_button.Click();
         }
 
-        [And(@"I CLICK on Continue to Application")]
+        [And(@"I click on the Continue to Application button")]
         public void I_continue_to_application()
         {
             ngDriver.WaitForAngular();
@@ -62,7 +62,7 @@ namespace bdd_tests
             ngDriver.WaitForAngular();
         }
 
-        [And(@"I COMPLETE the Application")]
+        [And(@"I complete the application")]
         public void I_complete_the_application()
         {
             string estName = "Point Ellis Greenhouse";
@@ -141,7 +141,7 @@ namespace bdd_tests
             signatureAgree.Click();
         }
 
-        [And(@"I CLICK on 'SUBMIT & PAY'")]
+        [And(@"I click on the Submit & Pay button")]
         public void click_on_submit_and_pay()
         {
             NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
@@ -162,23 +162,6 @@ namespace bdd_tests
         public void enter_payment_info()
         {
             MakeCRSPayment();
-            
-            /*string testCC = "4030000010001234";
-            string testCVD = "123";
-
-            //find out what browser equivalent is in this context
-            //browser sync - don't wait for Angular
-            ngDriver.IgnoreSynchronization = true;
-
-            driver.FindElementByName("trnCardNumber").SendKeys(testCC);
-
-            driver.FindElementByName("trnCardCvd").SendKeys(testCVD);
-
-            driver.FindElementByName("submitButton").Click();
-            System.Threading.Thread.Sleep(10000);
-
-            //turn back on when returning to Angular
-            ngDriver.IgnoreSynchronization = false;*/
         }
 
         [Then(@"I return to the dashboard")]
