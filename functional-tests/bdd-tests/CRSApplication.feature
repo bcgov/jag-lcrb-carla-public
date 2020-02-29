@@ -10,3 +10,7 @@ Scenario: Start Application
     And I CLICK on 'SUBMIT & PAY'
     And I enter the payment information
     Then I return to the dashboard
+
+Scenario: Cleanup
+   Given I delete my account
+   Then I see login
