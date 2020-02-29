@@ -33,7 +33,7 @@ namespace bdd_tests
     public sealed class WorkerApplication : TestBaseWorker
     {
 
-        [Given(@"I SEE the Dashboard")]
+        [Given(@"I am logged in to the dashboard")]
         public void I_view_the_dashboard()
         {
             CarlaLoginWorker();
@@ -117,7 +117,7 @@ namespace bdd_tests
             uploadSignatureForm.SendKeys(signatureFormPath);
         }
 
-        [And(@"I CLICK on 'SUBMIT & PAY'")]
+        [And(@"I click on the Submit & Pay button")]
         public void click_on_submit_and_pay()
         {
             NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
