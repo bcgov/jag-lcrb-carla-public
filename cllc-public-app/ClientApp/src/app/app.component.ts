@@ -23,6 +23,7 @@ import { Application } from '@models/application.model';
 import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { EligibilityFormComponent } from '@components/eligibility-form/eligibility-form.component';
+import { UserDataService } from '@services/user-data.service';
 
 const Months = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'];
@@ -49,6 +50,7 @@ export class AppComponent extends FormBase implements OnInit {
   Months = Months;  // make available in template
   parseInt = parseInt; // make available in template
   licenseeChangeFeatureOn: boolean;
+  isEligibilityDialogOpen: boolean;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -61,6 +63,7 @@ export class AppComponent extends FormBase implements OnInit {
     public featureFlagService: FeatureFlagService,
     private monthlyReportDataService: MonthlyReportDataService,
     private versionInfoDataService: VersionInfoDataService,
+    private userDataService: UserDataService,
   ) {
     super();
     featureFlagService.featureOn('Maps')
@@ -79,6 +82,8 @@ export class AppComponent extends FormBase implements OnInit {
         if (event instanceof NavigationEnd) {
           if (event.url.search('federal-reporting') >= 0) {
             this.showMessageCenterContent = false;
+          } else if (event.url.search('application') >= 0) {
+            this.reloadUser();
           }
           const prevSlug = this.previousUrl;
           let nextSlug = event.url.slice(1);
@@ -129,46 +134,49 @@ export class AppComponent extends FormBase implements OnInit {
   }
 
   openEligibilityModal() {
-    // set dialogConfig settings
-    const dialogConfig = {
-      disableClose: true,
-      autoFocus: false,
-      maxHeight: '90vh'
-    };
-
-    this.dialog.open(EligibilityFormComponent, dialogConfig);
+    if (!this.isEligibilityDialogOpen) {
+      const dialogRef = this.dialog.open(EligibilityFormComponent, {
+        disableClose: true,
+        autoFocus: false,
+        maxHeight: '95vh'
+      });
+      this.isEligibilityDialogOpen = true;
+      dialogRef.afterClosed().subscribe(() => this.isEligibilityDialogOpen = false);
+    }
   }
 
 
   reloadUser() {
-    this.store.select(state => state.currentUserState.currentUser)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: User) => {
-        this.currentUser = data;
-        this.isNewUser = this.currentUser && this.currentUser.isNewUser;
-        if (this.currentUser && this.currentUser.accountid && this.currentUser.accountid !== '00000000-0000-0000-0000-000000000000') {
-          this.accountDataService.loadCurrentAccountToStore(this.currentUser.accountid)
-            .subscribe(() => {
-              if (data.isEligibilityRequired) {
-                this.openEligibilityModal();
-              }
-            });
+    this.userDataService.loadUserToStore().then(() => {
+      this.store.select(state => state.currentUserState.currentUser)
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe((data: User) => {
+          this.currentUser = data;
+          this.isNewUser = this.currentUser && this.currentUser.isNewUser;
+          if (this.currentUser && this.currentUser.accountid && this.currentUser.accountid !== '00000000-0000-0000-0000-000000000000') {
+            this.accountDataService.loadCurrentAccountToStore(this.currentUser.accountid)
+              .subscribe(() => {
+                if (data.isEligibilityRequired) {
+                  this.openEligibilityModal();
+                }
+              });
 
-          // load federal reports after the user logs in
-          this.monthlyReportDataService.getAllCurrentMonthlyReports()
-            .subscribe(data => {
-              this.linkedFederalReports = data.filter(report => report.statusCode === monthlyReportStatus.Draft);
-            });
-        } else {
-          this.store.dispatch(new SetCurrentAccountAction(null));
-        }
-      });
+            // load federal reports after the user logs in
+            this.monthlyReportDataService.getAllCurrentMonthlyReports()
+              .subscribe(data => {
+                this.linkedFederalReports = data.filter(report => report.statusCode === monthlyReportStatus.Draft);
+              });
+          } else {
+            this.store.dispatch(new SetCurrentAccountAction(null));
+          }
+        });
 
-    this.store.select(state => state.currentAccountState.currentAccount)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(account => {
-        this.account = account;
-      });
+      this.store.select(state => state.currentAccountState.currentAccount)
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe(account => {
+          this.account = account;
+        });
+    });
   }
 
 
