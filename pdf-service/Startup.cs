@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +48,7 @@ namespace Pdf
 
             services.AddMvc(config =>
             {
+                config.EnableEndpointRouting = false;
                 if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
                 {
                     var policy = new AuthorizationPolicyBuilder()
@@ -60,7 +62,7 @@ namespace Pdf
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "JAG LCRB PDF Service", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG LCRB PDF Service", Version = "v1" });
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>()
