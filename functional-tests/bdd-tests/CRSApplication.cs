@@ -10,6 +10,7 @@ using System;
 using Xunit.Gherkin.Quick;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using System.IO;
+using Xunit;
 
 /*
 Feature: CRSApplication
@@ -101,7 +102,7 @@ namespace bdd_tests
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
             string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-            
+
             string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
             NgWebElement uploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
             uploadSignage.SendKeys(signagePath);
@@ -127,7 +128,7 @@ namespace bdd_tests
 
             NgWebElement contactSurname = ngDriver.FindElement(By.Id("contactPersonLastName"));
             contactSurname.SendKeys(conSurname);
-            
+
             NgWebElement contactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
             contactRole.SendKeys(conRole);
 
@@ -164,7 +165,7 @@ namespace bdd_tests
             MakeCRSPayment();
         }
 
-        [Then(@"I return to the dashboard")]
+        [And(@"I return to the dashboard")]
         public void return_to_dashboard()
         {
             string retDash = "Return to Dashboard";
@@ -280,5 +281,17 @@ namespace bdd_tests
             //Assert.Equal("build an angular app", elements[1].Text);
         }
         */
+
+        [And(@"I delete my account")]
+        public void Delete_my_account()
+        {
+            this.CarlaDeleteCurrentAccount();
+        }
+
+        [Then(@"I see login")]
+        public void I_see_login()
+        {
+            Assert.True (ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
+        }
     }
 }

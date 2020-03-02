@@ -236,6 +236,34 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="system"></param>
         /// <param name="id"></param>
         /// <returns></returns>
+        public MicrosoftDynamicsCRMaccount GetAccountByIdWithChildren(string id)
+        {
+            MicrosoftDynamicsCRMaccount result;
+            try
+            {
+                string[] expand = { "primarycontactid", 
+                    "Account_SharepointDocumentLocation", 
+                    "adoxio_account_adoxio_legalentity_Account", 
+                    "adoxio_account_adoxio_establishment_Licencee",
+                    "adoxio_account_adoxio_application_Applicant",
+                    "adoxio_licenseechangelog_BusinessAccount"};
+                // fetch from Dynamics.
+                result = Accounts.GetByKey(accountid: id, expand: expand);
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Get a Account by their Guid
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public MicrosoftDynamicsCRMaccount GetAccountByNameWithEstablishments(string name)
         {
             name = name.Replace("'", "''");
