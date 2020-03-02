@@ -132,7 +132,6 @@ export class AssociateListComponent extends FormBase implements OnInit {
     }
 
     group.patchValue(item);
-
     this.associates.push(group);
   }
 
