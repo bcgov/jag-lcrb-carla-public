@@ -10,6 +10,7 @@ import { MatSnackBar, MatDialog } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ApplicationDataService } from '@services/application-data.service';
+import { AccountDataService } from '@services/account-data.service';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { FormBuilder } from '@angular/forms';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
@@ -74,6 +75,7 @@ describe('ApplicationComponent', () => {
         provideMockStore({ initialState }),
         FormBuilder,
         { provide: PaymentDataService, useValue: paymentDataServiceStub },
+        { provide: AccountDataService, useValue: {} },
         { provide: ApplicationDataService, useValue: applicationDataServiceStub },
         { provide: DynamicsDataService, useValue: dynamicsDataServiceStub },
         { provide: TiedHouseConnectionsDataService, useValue: tiedHouseConnectionsDataServiceStub },

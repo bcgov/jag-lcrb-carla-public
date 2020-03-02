@@ -122,6 +122,7 @@ export class EventFormComponent extends FormBase implements OnInit {
   setFormToLicenceEvent(licenceEvent: LicenceEvent) {
     const schedules = licenceEvent['schedules'];
     delete licenceEvent['schedules'];
+    delete licenceEvent['modifiedOn'];
     this.eventForm.setValue({
       ...licenceEvent,
       agreement: false
