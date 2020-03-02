@@ -14,6 +14,7 @@ import { Store } from '@ngrx/store';
 import { Account } from '@models/account.model';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { LicenceEventsService } from '@services/licence-events.service';
 
 const applicationDataServiceStub: Partial<ApplicationDataService> = {
   getAllCurrentApplications: () => of([]),
@@ -48,6 +49,7 @@ describe('LicencesComponent', () => {
       providers: [
         { provide: ApplicationDataService, useValue: applicationDataServiceStub },
         { provide: LicenseDataService, useValue: licenceDataServiceStub },
+        { provide: LicenceEventsService, useValue: {} },
         { provide: PaymentDataService, useValue: paymentServiceStub },
         { provide: MatSnackBar, useValue: snackBarStub },
         { provide: FeatureFlagService, useValue: featureFlagServiceStub },
