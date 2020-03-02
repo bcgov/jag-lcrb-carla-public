@@ -6,16 +6,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     
     class MicrosoftDynamicsCRMaccountMetadata
     {
-        [JsonConverter(typeof(DateFormatConverter), "yyyy-MM-dd")]
         [JsonProperty(PropertyName = "adoxio_dateoperationsceased")]
+        [JsonConverter(typeof(SimpleDateTimeConverter))]
         public System.DateTimeOffset? AdoxioDateoperationsceased { get; set; }
 
-        [JsonConverter(typeof(DateFormatConverter), "yyyy-MM-dd")]
         [JsonProperty(PropertyName = "adoxio_dateinvolvementceased")]
+        [JsonConverter(typeof(SimpleDateTimeConverter))]
         public System.DateTimeOffset? AdoxioDateinvolvementceased { get; set; }
 
-        [JsonConverter(typeof(DateFormatConverter), "yyyy-MM-dd")]
         [JsonProperty(PropertyName = "adoxio_datesignordismissed")]
+        [JsonConverter(typeof(SimpleDateTimeConverter))]
         public System.DateTimeOffset? AdoxioDatesignordismissed { get; set; }
     }
     
