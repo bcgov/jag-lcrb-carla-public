@@ -24,4 +24,8 @@ export class LicenceEventsService extends DataService {
     return this.http.put<LicenceEvent>(this.apiPath + eventId, licenceEvent, {headers: this.headers });
   }
 
+  getLicenceEventsList(licenceId: string, num: number): Observable<LicenceEvent[]> {
+    return this.http.get<LicenceEvent[]>(`${this.apiPath}list/${licenceId}/${num}`, { headers: this.headers });
+  }
+
 }

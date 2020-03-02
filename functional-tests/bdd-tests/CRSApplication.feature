@@ -9,4 +9,6 @@ Scenario: Start Application
     And I complete the application
     And I click on the Submit & Pay button
     And I enter the payment information
-    Then I return to the dashboard
+    And I return to the dashboard
+    And I delete my account
+    Then I see login
