@@ -1,5 +1,6 @@
 import { License } from './license.model';
 import { ApplicationType } from './application-type.model';
+import { LicenceEvent } from './licence-event.model';
 
 export class ApplicationLicenseSummary {
 
@@ -31,6 +32,7 @@ export class ApplicationLicenseSummary {
   storeInspected: boolean;
 
   actionApplications: LicenceActionApplication[];
+  events: LicenceEvent[];
   transferRequested: string;
 }
 

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Newtonsoft.Json;
@@ -37,32 +38,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         public static bool IsEligibilityCheckRequired(string accountId, IConfiguration config, IDynamicsClient dynamics)
         {
-            if (config["FEATURE_ELIGIBILITY"] == null)
+            if (config["FEATURE_ELIGIBILITY"] == null || string.IsNullOrEmpty(accountId))
             {
                 return false;
             }
 
             bool cannabisApplicationInProgress = false;
-            var expand = new List<string> {
-                "adoxio_LicenceType",
-            };
-            string filter = $"_adoxio_applicant_value eq {accountId}";
-            MicrosoftDynamicsCRMadoxioApplicationCollection dynamicsApplicationListCollection = dynamics.Applications.Get(filter: filter, expand: expand);
+            var applicationType = dynamics.GetApplicationTypeByName("Cannabis Retail Store");
+            if (applicationType == null)
+            {
+                return false;
+            }
+            string filter = $"_adoxio_applicant_value eq {accountId} and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} and ( statuscode eq {(int)AdoxioApplicationStatusCodes.InProgress} or statuscode eq {(int)AdoxioApplicationStatusCodes.Intake} )";
+            MicrosoftDynamicsCRMadoxioApplicationCollection dynamicsApplicationListCollection = dynamics.Applications.Get(filter: filter);
             if (dynamicsApplicationListCollection.Value.Count > 0)
             {
-                foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationListCollection.Value)
-                {
-                    if ((dynamicsApplication.Statuscode == (int)AdoxioApplicationStatusCodes.InProgress || dynamicsApplication.Statuscode == (int)AdoxioApplicationStatusCodes.Intake)
-                        && dynamicsApplication.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
-                    {
-                        cannabisApplicationInProgress = true;
-                        break;
-                    }
-                }
+                cannabisApplicationInProgress = true;
             }
-
-            MicrosoftDynamicsCRMaccount account = dynamics.Accounts.GetByKey(accountId);
-            return (account.AdoxioIseligibilitycertified == null || account.AdoxioIseligibilitycertified == false) && cannabisApplicationInProgress;
+            try
+            {
+                MicrosoftDynamicsCRMaccount account = dynamics.Accounts.GetByKey(accountId);
+                return (account.AdoxioIseligibilitycertified == null || account.AdoxioIseligibilitycertified == false) && cannabisApplicationInProgress;
+            }
+            catch (HttpOperationException)
+            {
+                return false;
+            }
         }
 
         /// <summary>

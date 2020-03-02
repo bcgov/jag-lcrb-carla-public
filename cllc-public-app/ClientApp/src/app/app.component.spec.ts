@@ -10,16 +10,19 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app-state/models/app-state';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { Account } from '@models/account.model';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { VersionInfoDataService } from '@services/version-info-data.service';
 import { BreadcrumbComponent } from '@components/breadcrumb/breadcrumb.component';
 import { MonthlyReportDataService } from '@services/monthly-report.service';
 import { MatSnackBar } from '@angular/material';
 import { ApplicationDataService } from '@services/application-data.service';
+import { UserDataService } from '@services/user-data.service';
+import { User } from '@models/user.model';
 
 let accountDataServiceStub: Partial<AccountDataService>;
 let featureFlagServiceStub: Partial<FeatureFlagService>;
+let userDataServiceStub: Partial<UserDataService>;
 
 describe('AppComponent', () => {
 
@@ -33,6 +36,7 @@ describe('AppComponent', () => {
 
     accountDataServiceStub = {};
     featureFlagServiceStub = { featureOn: () => of(true) };
+    userDataServiceStub = { getCurrentUser: () => new Observable(), loadUserToStore: () => new Observable().toPromise().then()};
 
     TestBed.configureTestingModule({
       declarations: [
@@ -51,7 +55,8 @@ describe('AppComponent', () => {
         { provide: MonthlyReportDataService, useValue: { getAllCurrentMonthlyReports: () => of([]) } },
         { provide: MatDialog, useValue: {} },
         { provide: FeatureFlagService, useValue: featureFlagServiceStub },
-        { provide: AccountDataService, useValue: accountDataServiceStub }
+        { provide: AccountDataService, useValue: accountDataServiceStub },
+        { provide: UserDataService, useValue: userDataServiceStub }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
