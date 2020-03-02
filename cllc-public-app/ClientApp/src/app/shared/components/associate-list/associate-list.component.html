@@ -109,8 +109,7 @@
                         </td>
                     </tr>
 
-                    <tr *ngIf="showNameChangeSection(associate)"
-                        style="height:20px;">
+                    <tr *ngIf="showNameChangeSection(associate)" style="height:20px;">
                         <td colspan="7">
                             <div (click)="associate.get('collapse').value = !associate.get('collapse').value"
                                 style="padding-left: 20px;">
@@ -182,21 +181,40 @@
                             </app-field>
                         </td>
                         <td>
-                            <span *ngIf="!associate.get('edit').value">
-                                {{associate.get('interestPercentageNew').value}}
-                            </span>
+                            <ng-container *ngIf="rootNode.businessType === 'Partnership'">
+                                <span *ngIf="!associate.get('edit').value">
+                                    {{associate.get('interestPercentageNew').value}}
+                                </span>
 
-                            <app-field [showChevrons]="false" *ngIf="associate.get('edit').value" [isFullWidth]="true"
-                                [valid]="!associate.get('interestPercentageNew').touched || associate.get('interestPercentageNew').valid"
-                                errorMessage="Please enter Shares">
-                                <div class="d-flex">
-                                    <input class="form-control" type="text" formControlName="interestPercentageNew">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">%</span>
+                                <app-field [showChevrons]="false" *ngIf="associate.get('edit').value"
+                                    [isFullWidth]="true"
+                                    [valid]="!associate.get('interestPercentageNew').touched || associate.get('interestPercentageNew').valid"
+                                    errorMessage="Please enter Shares">
+                                    <div class="d-flex">
+                                        <input class="form-control" type="text" formControlName="interestPercentageNew">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </app-field>
+                                </app-field>
+                            </ng-container>
+                            <ng-container *ngIf="rootNode.businessType !== 'Partnership'">
+                                <span *ngIf="!associate.get('edit').value">
+                                    {{associate.get('numberofSharesNew').value}}
+                                </span>
 
+                                <app-field [showChevrons]="false" *ngIf="associate.get('edit').value"
+                                    [isFullWidth]="true"
+                                    [valid]="!associate.get('numberofSharesNew').touched || associate.get('numberofSharesNew').valid"
+                                    errorMessage="Please enter Shares">
+                                    <div class="d-flex">
+                                        <input class="form-control" type="text" formControlName="numberofSharesNew">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                </app-field>
+                            </ng-container>
                         </td>
                         <td>
                             <span *ngIf="!associate.get('edit').value">{{associate.get('emailNew').value}}</span>
@@ -267,14 +285,28 @@
                                 </app-field>
                             </td>
                             <td>
-                                <span
-                                    *ngIf="!associate.get('edit').value">{{associate.get('interestPercentageNew').value}}</span>
-                                <app-field *ngIf="associate.get('edit').value" [showChevrons]="false"
-                                    [isFullWidth]="true"
-                                    [valid]="!associate.get('interestPercentageNew').touched || associate.get('interestPercentageNew').valid"
-                                    errorMessage="Please enter Shares">
-                                    <input class="form-control" type="text" formControlName="interestPercentageNew">
-                                </app-field>
+                                <ng-container *ngIf="rootNode.businessType === 'Partnership'">
+                                    <span *ngIf="!associate.get('edit').value">
+                                        {{associate.get('interestPercentageNew').value}}
+                                    </span>
+                                    <app-field *ngIf="associate.get('edit').value" [showChevrons]="false"
+                                        [isFullWidth]="true"
+                                        [valid]="!associate.get('interestPercentageNew').touched || associate.get('interestPercentageNew').valid"
+                                        errorMessage="Please enter Shares">
+                                        <input class="form-control" type="text" formControlName="interestPercentageNew">
+                                    </app-field>
+                                </ng-container>
+                                <ng-container *ngIf="rootNode.businessType !== 'Partnership'">
+                                    <span *ngIf="!associate.get('edit').value">
+                                        {{associate.get('numberofSharesNew').value}}
+                                    </span>
+                                    <app-field *ngIf="associate.get('edit').value" [showChevrons]="false"
+                                        [isFullWidth]="true"
+                                        [valid]="!associate.get('numberofSharesNew').touched || associate.get('numberofSharesNew').valid"
+                                        errorMessage="Please enter Shares">
+                                        <input class="form-control" type="text" formControlName="numberofSharesNew">
+                                    </app-field>
+                                </ng-container>
                             </td>
                             <td>
                                 <span *ngIf="!associate.get('edit').value || associate.get('id').value">
