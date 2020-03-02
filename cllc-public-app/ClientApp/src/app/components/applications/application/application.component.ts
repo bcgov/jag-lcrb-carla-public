@@ -154,7 +154,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       applicantType: ['', Validators.required],
       description1: ['', [Validators.required]],
       proposedChange: ['', [Validators.required]],
-      connectedGrocery: ['',[Validators.required]],
+      connectedGrocery: ['', []],
     });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: boolean) => {
@@ -272,11 +272,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (!this.application.applicationType.showDescription1) {
       this.form.get('description1').disable();
     }
-    if (this.application.applicationType.connectedGroceryStore !== FormControlState.Show) {
-      this.form.get('connectedGrocery').clearValidators();
-    } else {
-      this.form.get('connectedGrocery').setValidators([Validators.required]);
-    }
+    
+    // 03/01/2020 - Disabled until connected grocery store feature is ready
+    // if (this.application.applicationType.connectedGroceryStore !== FormControlState.Show) {
+    //   this.form.get('connectedGrocery').clearValidators();
+    // } else {
+    //   this.form.get('connectedGrocery').setValidators([Validators.required]);
+    // }
 
   }
 
@@ -342,8 +344,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   showGroceryStore(){
-    let show = (this.application && this.showFormControl(this.application.applicationType.connectedGroceryStore));    
-    show = show && this.form.get('connectedGrocery').value == 'Yes';
+    let show = (this.application && this.showFormControl(this.application.applicationType.connectedGroceryStore));
+    show = show && this.form.get('connectedGrocery').value === 'Yes';
     return show;
   }
 
