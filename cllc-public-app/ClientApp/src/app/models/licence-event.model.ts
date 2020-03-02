@@ -21,6 +21,7 @@ export class LicenceEvent {
   street2: string;
   city: string;
   postalCode: string;
+  modifiedOn: Date;
   schedules: [];
 
   // picklists
