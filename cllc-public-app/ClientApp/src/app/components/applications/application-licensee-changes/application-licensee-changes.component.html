@@ -20,7 +20,9 @@
           SAVE FOR LATER
         </span>
       </button>
-      <button *ngIf="true || LicenseeChangeLog.HasChanges(treeRoot)" class="btn btn-primary"
+
+      
+      <button *ngIf="true || LicenseeChangeLog.HasChanges(treeRoot)" class="btn btn-primary" style="float: right;"
          (click)="save()">
         <i class="fa fa-save" style="color: #fff;"></i>
         {{getSaveLabel()}}</button>
