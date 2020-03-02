@@ -6,12 +6,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 {
     class MicrosoftDynamicsCRMadoxioeventMetadata
     {
-        [JsonConverter(typeof(DateFormatConverter), "yyyy-MM-dd")]
         [JsonProperty(PropertyName = "adoxio_startdate")]
+        [JsonConverter(typeof(SimpleDateTimeConverter))]
+
         public System.DateTimeOffset? AdoxioStartdate { get; set; }
 
-        [JsonConverter(typeof(DateFormatConverter), "yyyy-MM-dd")]
         [JsonProperty(PropertyName = "adoxio_enddate")]
+        [JsonConverter(typeof(SimpleDateTimeConverter))]
+
         public System.DateTimeOffset? AdoxioEnddate { get; set; }
     }
     
