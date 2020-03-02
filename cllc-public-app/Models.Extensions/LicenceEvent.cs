@@ -54,6 +54,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.City = item.AdoxioCity;
                 result.Province = item.AdoxioProvince;
                 result.PostalCode = item.AdoxioPostalcode;
+                result.ModifiedOn = item.Modifiedon;
                 result.Schedules = new List<LicenceEventSchedule>();
             }
 

@@ -125,6 +125,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string City { get; set; }
         public string Province { get; set; }
         public string PostalCode { get; set; }
+        public DateTimeOffset? ModifiedOn { get; set; }
 
         public List<LicenceEventSchedule> Schedules { get; set; }
     }
