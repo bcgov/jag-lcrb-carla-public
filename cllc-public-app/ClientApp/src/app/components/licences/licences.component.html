@@ -125,7 +125,7 @@
           </td>
           <td *ngIf="mappingItem.key === 'Catering'">
             <ul>
-              <li *ngFor="let event of item?.events"><a [routerLink]="[ '/licence/' + item.licenseId + '/event/' + event.id]">{{event.clientHostname}}</a></li>
+              <li *ngFor="let event of item?.events"><a [routerLink]="[ '/licence/' + item.licenseId + '/event/' + event.id]">{{getOptionFromValue(eventStatus, event.status).label}} {{event.clientHostname === null ? null : '- ' + event.clientHostname}} - Saved on {{event.modifiedOn | date:'mediumDate'}}</a></li>
             </ul>
           </td>
         </tr>
