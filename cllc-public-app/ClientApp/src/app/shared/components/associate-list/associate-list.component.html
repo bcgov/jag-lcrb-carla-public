@@ -6,6 +6,7 @@
                     <th style="width: 200px;">First Name</th>
                     <th style="width: 200px;">Last Name</th>
                     <th *ngIf="showPosition()" style="width: 200px;">Position</th>
+                    <th *ngIf="showPosition()" style="width: 200px;">Title</th>
                     <th style="min-width: 200px;">Email</th>
                     <th style="width: 150px;">Date of Birth</th>
                     <!-- <th *ngIf="showPHSLevel1()">Level 1 Personal History Summary </th>
@@ -68,6 +69,18 @@
                                     </table>
                                 </ng-container>
                             </app-field>
+                        </td>
+                        <td *ngIf="showPosition()">
+                            <span
+                                *ngIf="!associate.get('edit').value">{{associate.get('titleNew').value}}</span>
+                  
+                                <ng-container *ngIf="associate.get('edit').value">
+                                    <app-field [showChevrons]="false" [isFullWidth]="true"
+                                    [valid]="!associate.get('titleNew').touched || associate.get('titleNew').valid"
+                                    errorMessage="Please enter Title">
+                                    <input class="form-control" type="text" formControlName="titleNew">
+                                </app-field>
+                                </ng-container>
                         </td>
                         <td>
                             <span *ngIf="!associate.get('edit').value">{{associate.get('emailNew').value}}</span>
