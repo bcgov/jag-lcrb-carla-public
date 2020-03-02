@@ -5,6 +5,7 @@ using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -32,17 +34,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly FileManagerClient _fileManagerClient;
+        private readonly IWebHostEnvironment _env;
 
         public AccountsController(IConfiguration configuration,
             IHttpContextAccessor httpContextAccessor,
             IOrgBookClient orgBookClient,
             BCeIDBusinessQuery bceid,
             ILoggerFactory loggerFactory,
-            IDynamicsClient dynamicsClient)
+            IDynamicsClient dynamicsClient,
+            IWebHostEnvironment env)
         {
             _configuration = configuration;
             _bceid = bceid;
             _dynamicsClient = dynamicsClient;
+            _env = env;
             _orgBookclient = orgBookClient;
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(AccountsController));
@@ -784,17 +789,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // get the account
-            MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(accountId);
+            MicrosoftDynamicsCRMaccount account = _dynamicsClient.GetAccountByIdWithChildren(id);
             if (account == null)
             {
                 _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");
                 return new NotFoundResult();
             }
+            
 
-            // delete the associated LegalEntity
-            string accountFilter = "_adoxio_account_value eq " + id.ToString();
-            var legalEntities = _dynamicsClient.Legalentities.Get(filter: accountFilter).Value.ToList();
-            legalEntities.ForEach(le =>
+              
+            foreach (var le in account.AdoxioAccountAdoxioLegalentityAccount)
             {
                 try
                 {
@@ -811,8 +815,90 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError(e, "Error deleting the Legal Entity");
                     throw new Exception("Error deleting the Legal Entity");
                 }
-            });
+            }
 
+            // adoxio_account_adoxio_establishment_Licencee
+            foreach (var establishment in account.AdoxioAccountAdoxioEstablishmentLicencee)
+            {
+                try
+                {
+                    _dynamicsClient.Establishments.Delete(establishment.AdoxioEstablishmentid);
+                    _logger.LogDebug(LoggingEvents.HttpDelete, "Establishment deleted: " + establishment.AdoxioEstablishmentid);
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    _logger.LogError(httpOperationException, "Error deleting the Establishment: ");
+                    throw new Exception("Error deleting the Establishment");
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error deleting the Establishment");
+                    throw new Exception("Error deleting the Establishment");
+                }
+            }
+
+            // adoxio_account_adoxio_establishment_Licencee
+            foreach (var application in account.AdoxioAccountAdoxioApplicationApplicant)
+            {
+                try
+                {
+                    _dynamicsClient.Applications.Delete(application.AdoxioApplicationid);
+                    _logger.LogDebug(LoggingEvents.HttpDelete, "Application deleted: " + application.AdoxioApplicationid);
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    _logger.LogError(httpOperationException, "Error deleting the Application: ");
+                    throw new Exception("Error deleting the Application");
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error deleting the Application");
+                    throw new Exception("Error deleting the Application");
+                }
+            }
+
+            // change logs
+            foreach (var changelog in account.AdoxioLicenseechangelogBusinessAccount)
+            {
+                try
+                {
+                    _dynamicsClient.Licenseechangelogs.Delete(changelog.AdoxioLicenseechangelogid);
+                    _logger.LogDebug(LoggingEvents.HttpDelete, "Application deleted: " + changelog.AdoxioLicenseechangelogid);
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    _logger.LogError(httpOperationException, "Error deleting the Application: ");
+                    throw new Exception("Error deleting the Application");
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error deleting the Application");
+                    throw new Exception("Error deleting the Application");
+                }
+            }
+
+
+            // delete related licences
+            foreach (var license in account.AdoxioAccountAdoxioLicencesLicencee)
+            {
+                try
+                {
+                    _dynamicsClient.Licenseechangelogs.Delete(license.AdoxioLicencesid);
+                    _logger.LogDebug(LoggingEvents.HttpDelete, "License deleted: " + license.AdoxioLicencesid);
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    _logger.LogError(httpOperationException, "Error deleting the License: ");
+                    throw new Exception("Error deleting the License");
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error deleting the License");
+                    throw new Exception("Error deleting the License");
+                }
+            }
+
+            // delete the account
             try
             {
                 await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
@@ -837,6 +923,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("delete/current")]
         public async Task<IActionResult> DeleteCurrentAccount()
         {
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
+
             _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
 
             // get the current user.
