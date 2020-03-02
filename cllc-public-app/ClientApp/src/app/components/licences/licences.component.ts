@@ -19,6 +19,8 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { EstablishmentDataService } from '@services/establishment-data.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Establishment } from '@models/establishment.model';
+import { LicenceEventsService } from '@services/licence-events.service';
+import { EventStatus } from '@models/licence-event.model';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -37,6 +39,7 @@ export class LicencesComponent extends FormBase implements OnInit {
   applications: ApplicationSummary[] = [];
   licenceForms = {};
   mainForm: FormGroup;
+  eventStatus = EventStatus;
 
   readonly ACTIVE = ACTIVE;
   readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
@@ -60,6 +63,7 @@ export class LicencesComponent extends FormBase implements OnInit {
     private paymentService: PaymentDataService,
     private establishmentService: EstablishmentDataService,
     public featureFlagService: FeatureFlagService,
+    private licenceEventsService: LicenceEventsService,
     public fb: FormBuilder) {
     super();
     featureFlagService.featureOn('LicenceTransfer')
@@ -109,7 +113,6 @@ export class LicencesComponent extends FormBase implements OnInit {
           () => {
             this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail',
               { duration: 3500, panelClass: ['red-snackbar'] });
-            console.log('Error starting a Change Licence Location Application');
           }
         );
     }
@@ -181,13 +184,23 @@ export class LicencesComponent extends FormBase implements OnInit {
     licence.actionApplications = [];
     const relatedApplications = this.applications.filter(l => l.licenceId === licence.licenseId);
     relatedApplications.forEach(app => {
-      licence.actionApplications.push({
+      let action = {
         applicationId: app.id,
         applicationTypeName: app.applicationTypeName,
         applicationStatus: app.applicationStatus,
         isPaid: app.isPaid
-      });
+      };
+      licence.actionApplications.push(action);
     });
+    if (licence.licenceTypeName === 'Catering') {
+      forkJoin([
+        this.licenceEventsService.getLicenceEventsList(licence.licenseId, 10)
+      ])
+      .subscribe(data => {
+        console.log(data[0]);
+        licence.events = data[0];
+      });
+    }
 
     if (typeof this.licenceMappings[licence.licenceTypeName] === 'undefined') {
       this.licenceMappings[licence.licenceTypeName] = [];
@@ -290,5 +303,16 @@ export class LicencesComponent extends FormBase implements OnInit {
       default:
         return '404';
     }
+  }
+
+  getOptionFromValue(options: any, value: number) {
+    const idx = options.findIndex(opt => opt.value === value);
+    if (idx >= 0) {
+      return options[idx];
+    }
+    return {
+      value: null,
+      label: ''
+    };
   }
 }
