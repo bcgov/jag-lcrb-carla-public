@@ -46,7 +46,7 @@ namespace bdd_tests
             driver = new ChromeDriver(path, options);
             
             //driver = new FirefoxDriver(FirefoxDriverService);
-            driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(60);
+            driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(10);  // max 10 seconds for any page, to allow for slow test servers
 
             ngDriver = new NgWebDriver(driver);
 
@@ -62,7 +62,7 @@ namespace bdd_tests
             
             ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
 
-            ngDriver.WaitForAngular();
+            //ngDriver.WaitForAngular();
 
             //ngDriver.Navigate().GoToUrl($"{baseUri}");
             //NgWebElement butt = ngDriver.FindElement(By.XPath("(.//*[normalize-space(text()) and normalize-space(.)='OR'])[1]/following::strong[1]"));
@@ -82,10 +82,14 @@ namespace bdd_tests
 
         public void CarlaDeleteCurrentAccount()
         {
-            string deleteAccountURL = $"{baseUri}/api/accounts/delete/current";
-            ngDriver.ExecuteScript($"var xhr = new XMLHttpRequest(); xhr.open(\"POST\", \"{deleteAccountURL}\" , true); xhr.send();");
+            string deleteAccountURL = $"{baseUri}api/accounts/delete/current";
+            string script = $"fetch(\"{deleteAccountURL}\", {{method: \"POST\", body: {{}}}})";
 
-            ngDriver.Navigate().GoToUrl($"{baseUri}/logout");
+            ngDriver.ExecuteScript(script);
+
+            // note that the above call to delete the account will take a period of time to execute.
+
+            ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
     }
 }
