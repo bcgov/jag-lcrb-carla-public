@@ -280,11 +280,17 @@
       <p>The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Section 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act and will be used for the purpose of liquor licensing and compliance and enforcement matters in accordance with the Liquor Control and Licensing Act. Should you have any questions about the collection, use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.</p>
     </div>
 
-    <div class="p-4 d-flex justify-content-between">
+    <div class="p-4 button-row">
       <button class="btn btn-primary" style="margin-right:10px;" (click)="save(false);">
         <span>
           <i class="fa fa-save" style="color: #fff;"></i>
           SAVE FOR LATER
+        </span>
+      </button>
+      <button class="btn btn-primary" style="margin-right:10px;" (click)="cancel();">
+        <span>
+          <i class="fa fa-trash" style="color: #fff;"></i>
+          CANCEL
         </span>
       </button>
       <button class="btn btn-primary" (click)="save(true)" [disabled]="isFormValid()">SUBMIT</button>
