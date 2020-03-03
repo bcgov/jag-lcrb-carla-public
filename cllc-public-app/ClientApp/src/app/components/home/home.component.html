@@ -13,15 +13,33 @@
               British Columbia. A cannabis marketing licence allows marketers to promote a cannabis producer’s products
               to licensed cannabis retail stores. To use the online application service, you must have a Business BCeID.
             </p>
-            <div class="text-left">
+            <div class="text-left" appRemoveIfFeatureOff="DisableLogin">
               <button style="margin-bottom: 10px;" class="btn btn-primary"
-                (click)="window.location.href='https://www.bceid.ca/register/'" tabindex="3">
+                      (click)="window.location.href='https://www.bceid.ca/register/'" tabindex="3">
+                <strong>REGISTER FOR A BUSINESS BCeID</strong>
+                <br>
+              </button>
+              <span style="padding: 10px;"></span>
+              <p>
+                <strong>
+                  The Cannabis Licensing portal is down for maintenance. It will be available again Monday, March 16, 2020.  During this time, you will not be able to log in to the site.
+                </strong>
+              </p>
+              <p>
+                <strong>                  
+                  We apologize for any inconvenience.
+                </strong>
+                </p>
+            </div>
+            <div class="text-left" appRemoveIfFeatureOn="DisableLogin">
+              <button style="margin-bottom: 10px;" class="btn btn-primary"
+                      (click)="window.location.href='https://www.bceid.ca/register/'" tabindex="3">
                 <strong>REGISTER FOR A BUSINESS BCeID</strong>
                 <br>
               </button>
               <span style="padding: 10px;">OR</span>
               <button style="margin-bottom: 10px;" class="btn btn-primary" (click)="window.location.href='login'"
-                tabindex="3">
+                      tabindex="3">
                 <strong>LOG IN</strong>
                 <br>
               </button>
