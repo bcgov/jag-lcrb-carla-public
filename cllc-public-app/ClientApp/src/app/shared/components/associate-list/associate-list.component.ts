@@ -121,13 +121,21 @@ export class AssociateListComponent extends FormBase implements OnInit {
       group.get('lastNameNew').setValidators([Validators.required]);
       group.get('emailNew').setValidators([Validators.required, Validators.email]);
       group.get('dateofBirthNew').setValidators([Validators.required]);
-      group.get('interestPercentageNew').setValidators([Validators.required]);
+      if (this.rootNode.businessType === 'Partnership') {
+        group.get('interestPercentageNew').setValidators([Validators.required]);
+      } else {
+        group.get('numberofSharesNew').setValidators([Validators.required]);
+      }
     }
 
     if (this.changeTypeSuffix === 'BusinessShareholder') {
       group.get('businessNameNew').setValidators([Validators.required]);
       group.get('businessType').setValidators([Validators.required]);
-      group.get('interestPercentageNew').setValidators([Validators.required]);
+      if (this.rootNode.businessType === 'Partnership') {
+        group.get('interestPercentageNew').setValidators([Validators.required]);
+      } else {
+        group.get('numberofSharesNew').setValidators([Validators.required]);
+      }
       group.get('emailNew').setValidators([Validators.required, Validators.email]);
     }
 
