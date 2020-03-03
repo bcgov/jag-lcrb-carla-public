@@ -25,7 +25,10 @@
             </span>
           </span>
           <span class="sign" *ngIf="!currentUser">
-            <span class="text-right signin">
+            <span appRemoveIfFeatureOff="DisableLogin" class="text-right signin">
+              <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>              
+            </span>
+            <span appRemoveIfFeatureOn="DisableLogin" class="text-right signin">
               <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>
               or
               <a href="login" tabindex="1">Log In</a>
