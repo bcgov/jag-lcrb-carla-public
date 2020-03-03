@@ -50,8 +50,6 @@ namespace bdd_tests
 
             ngDriver = new NgWebDriver(driver);
 
-            
-
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
 
@@ -63,7 +61,26 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
 
             ngDriver.WaitForAngular();
+
+            NgWebElement termsOfUseCheckbox = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/app-bceid-confirmation/div/app-terms-of-use/div/section[2]/input"));
+            termsOfUseCheckbox.Click();
+
+            NgWebElement continueButton = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/app-bceid-confirmation/div/app-terms-of-use/div/section[3]/button"));
+            continueButton.Click();
+
+            NgWebElement confirmationButton = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/app-bceid-confirmation/div/div[2]/div/div/div/button[1]"));
+            confirmationButton.Click();
+
+            NgWebElement orgTypeRadio = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/app-bceid-confirmation/div/div[2]/section[1]/input[1]"));
+            orgTypeRadio.Click();
+            
+            NgWebElement nextButton = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/app-bceid-confirmation/div/div[2]/section[2]/button"));
+            nextButton.Click();
+
+            NgWebElement confirmNameButton = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/app-bceid-confirmation/div/div[2]/div/div/div/button[1]"));
+            confirmNameButton.Click();
         }
+
         public void MakeCRSPayment()
         {
             string testCC = configuration["test_cc"];
@@ -84,6 +101,17 @@ namespace bdd_tests
 
             //turn back on when returning to Angular
             ngDriver.IgnoreSynchronization = false;
+        }
+        public void CarlaDeleteCurrentAccount()
+        {
+            string deleteAccountURL = $"{baseUri}api/accounts/delete/current";
+            string script = $"fetch(\"{deleteAccountURL}\", {{method: \"POST\", body: {{}}}})";
+
+            ngDriver.ExecuteScript(script);
+
+            // note that the above call to delete the account will take a period of time to execute.
+
+            ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
     }
 }
