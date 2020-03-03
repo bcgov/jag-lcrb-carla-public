@@ -84,7 +84,7 @@ export const SpecificLocation = [
 
 export const EventClass = [
   {
-    label: 'Approval',
+    label: 'Authorization',
     value: 845280000
   },
   {
