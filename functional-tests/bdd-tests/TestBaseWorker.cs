@@ -84,5 +84,17 @@ namespace bdd_tests
             //turn back on when returning to Angular
             ngDriver.IgnoreSynchronization = false;
         }
+
+        public void CarlaDeleteCurrentAccount()
+        {
+            string deleteAccountURL = $"{baseUri}api/accounts/delete/current";
+            string script = $"fetch(\"{deleteAccountURL}\", {{method: \"POST\", body: {{}}}})";
+
+            ngDriver.ExecuteScript(script);
+
+            // note that the above call to delete the account will take a period of time to execute.
+
+            ngDriver.Navigate().GoToUrl($"{baseUri}logout");
+        }
     }
 }
