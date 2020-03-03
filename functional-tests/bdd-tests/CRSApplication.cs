@@ -69,37 +69,37 @@ namespace bdd_tests
             string corpContactPhone = "7781811818";
             string corpContactEmail = "automated@test.com";
 
-            NgWebElement uiBizNumber = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-account-profile/div/div[2]/div[1]/div/div/div[1]/app-field[3]/section/div[1]/section/input"));
+            NgWebElement uiBizNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
             uiBizNumber.SendKeys(bizNumber);
 
-            NgWebElement uiStreetAddress = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-account-profile/div/div[2]/div[1]/div/div/div[2]/div[1]/app-field[1]/section/div[1]/section/input"));
+            NgWebElement uiStreetAddress = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
             uiStreetAddress.SendKeys(streetAddress);
 
-            NgWebElement uiCity = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-account-profile/div/div[2]/div[1]/div/div/div[2]/div[1]/app-field[3]/section/div[1]/section/input"));
+            NgWebElement uiCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
             uiCity.SendKeys(city);
 
-            NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-account-profile/div/div[2]/div[1]/div/div/div[2]/div[1]/section[2]/app-field/section/div[1]/section/input"));
+            NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
             uiPostalCode.SendKeys(postalCode);
 
-            NgWebElement uiSameAsMailingAddress = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-account-profile/div/div[2]/div[1]/div/div/div[2]/div[2]/section/input"));
+            NgWebElement uiSameAsMailingAddress = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
             uiSameAsMailingAddress.Click();
 
-            NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-account-profile/div/div[2]/div[1]/div/div/div[2]/app-field[1]/section/div[1]/section/input"));
+            NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
             uiBizPhoneNumber.SendKeys(bizPhoneNumber);
 
-            NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-account-profile/div/div[2]/div[1]/div/div/div[2]/app-field[2]/section/div[1]/section/input"));
+            NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
             uiBizEmail.SendKeys(bizEmail);
 
-            NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-account-profile/div/div[2]/div[1]/div/div/div[3]/app-field[4]/section/div[1]/section/input"));
+            NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[23]"));
             uiCorpContactPhone.SendKeys(corpContactPhone);
 
-            NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-account-profile/div/div[2]/div[1]/div/div/div[3]/app-field[5]/section/div[1]/section/input"));
+            NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[24]"));
             uiCorpContactEmail.SendKeys(corpContactEmail);
 
-            NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-account-profile/div/div[2]/div[1]/div/div/div[4]/app-connection-to-producers/div[2]/div/section[1]/input[2]"));
+            NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
             corpConnectionFederalProducer.Click();
 
-            NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-account-profile/div/div[2]/div[1]/div/div/div[4]/app-connection-to-producers/div[2]/div/section[2]/input[2]"));
+            NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
             federalProducerConnectionToCorp.Click();
 
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
@@ -115,13 +115,13 @@ namespace bdd_tests
 
             string electricSignature = "Automated Test";
 
-            NgWebElement noRadio1 = ngDriver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/mat-dialog-container/app-eligibility-form/div/form/div[3]/section/mat-radio-group/mat-radio-button[2]"));
+            NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
             noRadio1.Click();
 
-            NgWebElement noRadio2 = ngDriver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/mat-dialog-container/app-eligibility-form/div/form/div[4]/section/mat-radio-group/mat-radio-button[2]"));
+            NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
             noRadio2.Click();
 
-            NgWebElement matCheckbox = ngDriver.FindElement(By.XPath("//mat-checkbox[@id='mat-checkbox-1']/label/div"));
+            NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
             matCheckbox.Click();
 
             NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
