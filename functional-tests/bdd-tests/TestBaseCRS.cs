@@ -62,22 +62,22 @@ namespace bdd_tests
 
             ngDriver.WaitForAngular();
 
-            NgWebElement termsOfUseCheckbox = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/app-bceid-confirmation/div/app-terms-of-use/div/section[2]/input"));
+            NgWebElement termsOfUseCheckbox = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
             termsOfUseCheckbox.Click();
 
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/app-bceid-confirmation/div/app-terms-of-use/div/section[3]/button"));
+            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//section[3]/button"));
             continueButton.Click();
 
-            NgWebElement confirmationButton = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/app-bceid-confirmation/div/div[2]/div/div/div/button[1]"));
+            NgWebElement confirmationButton = ngDriver.FindElement(By.XPath("//button"));
             confirmationButton.Click();
 
-            NgWebElement orgTypeRadio = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/app-bceid-confirmation/div/div[2]/section[1]/input[1]"));
+            NgWebElement orgTypeRadio = ngDriver.FindElement(By.Name("InitialBusinessType"));
             orgTypeRadio.Click();
-            
-            NgWebElement nextButton = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/app-bceid-confirmation/div/div[2]/section[2]/button"));
+
+            NgWebElement nextButton = ngDriver.FindElement(By.XPath("//button[contains(.,'Next')]"));
             nextButton.Click();
 
-            NgWebElement confirmNameButton = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/app-bceid-confirmation/div/div[2]/div/div/div/button[1]"));
+            NgWebElement confirmNameButton = ngDriver.FindElement(By.XPath("//button"));
             confirmNameButton.Click();
         }
 
