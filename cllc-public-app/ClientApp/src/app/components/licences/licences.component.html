@@ -81,6 +81,13 @@
                 <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay Licence Fee</span>
               </a>
             </div>
+            <div
+              *ngIf="item.status == PAYMENT_REQUIRED  && item?.licenceTypeName === ApplicationTypeNames.Catering"
+              style="min-width: 10px; margin-bottom: 10px;">
+              <a href="javascript:void(0);" (click)="payLicenceFee(item)">
+                <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay First Year Licensing Fee</span>
+              </a>
+            </div>
             <div>
               <p *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore">
                 <a [routerLink]="[ '/federal-reporting/' + item.licenseId + '/default']">
