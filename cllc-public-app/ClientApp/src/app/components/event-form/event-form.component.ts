@@ -159,7 +159,11 @@ export class EventFormComponent extends FormBase implements OnInit {
 
   save(submit = false) {
     if (submit) {
-      this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'In Review').value);
+      if (this.getOptionFromValue(this.eventClass, this.eventForm.controls['eventClass'].value).label === 'Notice') {
+        this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Approved').value);
+      } else {
+        this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'In Review').value);
+      }
     }
 
     const schedules = this.packageUpTimeForms();
@@ -402,5 +406,17 @@ export class EventFormComponent extends FormBase implements OnInit {
 
   getEventClassLabel() {
     return this.getOptionFromValue(this.eventClass, this.eventForm.get('eventClass').value).label;
+  }
+
+  cancel() {
+    if (this.isEditMode) {
+      const id = this.eventForm.get('id').value;
+      this.eventForm.reset();
+      this.eventForm.controls['id'].setValue(id);
+      this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Cancelled').value);
+      this.updateLicence([]);
+    } else {
+      this.router.navigate(['/licences']);
+    }
   }
 }
