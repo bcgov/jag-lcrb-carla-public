@@ -9,22 +9,17 @@
               <p>All licensees and applicants must maintain a complete and current list of key personnel and businesses associated with their organization.</p> 
               <p>You are required to notify the LCRB of any changes to your organization’s structure within ten business days of the change being made. These changes include:</p>
                   <ul><li>Change of directors, officers, or senior managers</li>
-                  <li>Name change, licensee or sole proprietor</li>
+                  <li>Name changes</li>
                   <li>Internal transfer of shares</li>
                   <li>External transfer of shares</li>
                   </ul>
               <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences dashboard.</p>
                   
               <p>Fees are calculated based on the type of change reported and the number of licences impacted. If no changes are made, or no licences are held, you will not be charged a fee for submitting this information.</p>
-                  
-              <p>Changes to an existing licence may be submitted through the Licences dashboard. Depending on the licence type, these changes may include:</p>
-                  <ul><li>Structural alterations or additions to a licensed establishment</li>
-                  <li>Adding or changing a third-party operator, including a management firm or lessee (liquor licences only)</li>
-                  <li>Name changes</li>
-                  <li>Changes to hours of sale</li>
-                  <li>Adding an entertainment or catering endorsement (liquor licences only)</li>
-                  </ul>
-              
+              <ul>
+                <li>Applicable fees for cannabis licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1" target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.</li>
+                <li>Applicable fees for liquor licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1" target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
+              </ul>
             </div>
           </section>
       </div>
@@ -51,7 +46,7 @@
     </section>
   </ng-container>
 
-  <ng-container *ngIf="node?.businessType === 'PrivateCorporation'">
+  <ng-container *ngIf="node?.businessType === 'PrivateCorporation'" [formGroup]="form">
     <h3 class="plain-header">Central Securities Register</h3>
     <section class="padded-section">
       <p>Please upload the {{node?.businessNameNew}} Central Securities Register.</p>
@@ -74,7 +69,12 @@
         [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
         [entityId]="account?.id" [uploadHeader]="'TO UPLOAD SPECIAL RIGHTS AND RESTRICTIONS, DRAG FILE HERE OR'">
       </app-file-uploader>
+      <app-field label="Total Number of Voting Shares" errorMessage="Please enter value"
+      [valid]="!form.get('totalShares').touched || form.get('totalShares').touched">
+      <input type="number" formControlName="totalShares" class="form-control">
+      </app-field>
     </section>
+
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'Partnership'">
@@ -189,7 +189,7 @@
     <h4 class="plain-header">Individual Shareholders</h4>
     <section class="padded-section">
       <p>
-        Please list any individual shareholders including their full legal name, date of birth, percentage of shares
+        Please list any individual shareholders including their full legal name, date of birth, number of voting shares
         owned, and email address.
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"
@@ -199,15 +199,16 @@
     </section>
     <h4 class="plain-header">Business Shareholders</h4>
     <section class="padded-section">
+
       <p>
-        Please list any business shareholders including their name, type of business, percentage of shares owned, and
-        email address. Depending on
-        the type of business shareholder, additional supporting documents will be required.
+        Please list any business shareholders including their name, type of business, number of voting shares owned, and
+        email address. Depending on the type of business shareholder, additional supporting documents will be required.
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"
         [rootNode]="node" [account]="account"  [licencesOnFile]="licencesOnFile"
         (personalHistoryItemsChange)="updateChildred($event, 'BusinessShareholder')"
         changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder"></app-associate-list>
+        <p>&nbsp;</p>
     </section>
   </ng-container>
 </ng-template>
