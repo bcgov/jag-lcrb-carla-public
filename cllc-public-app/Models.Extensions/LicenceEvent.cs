@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.FoodServiceDescription = item.AdoxioFoodservicedescription;
                 result.Entertainment = (Entertainment?)item.AdoxioEntertainment;
                 result.EntertainmentDescription = item.AdoxioEntertainmentdescription;
-                result.ContactPhone = item.AdoxioContactphone;
+                result.ContactPhone = item.AdoxioContactphonenumber;
                 result.ExternalId = item.AdoxioExternalid;
                 result.ContactName = item.AdoxioContactname;
                 result.ContactEmail = item.AdoxioContactemail;
@@ -44,6 +44,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.SpecificLocation = (SpecificLocation?)item.AdoxioSpecificlocation;
                 result.EventClass = (EventClass?)item.AdoxioClass;
                 result.MaxAttendance = item.AdoxioMaxattendance;
+                result.MaxStaffAttendance = item.AdoxioMaxstaffattendance;
                 result.MinorsAttending = item.AdoxioAttendanceminors;
                 result.CommunityApproval = item.AdoxioCommunityapproval;
                 result.NotifyEventInspector = item.AdoxioNotifyeventinspector;
@@ -54,6 +55,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.City = item.AdoxioCity;
                 result.Province = item.AdoxioProvince;
                 result.PostalCode = item.AdoxioPostalcode;
+                result.ModifiedOn = item.Modifiedon;
                 result.Schedules = new List<LicenceEventSchedule>();
             }
 
@@ -80,7 +82,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioFoodservicedescription = from.FoodServiceDescription;
             to.AdoxioEntertainment = (int?)from.Entertainment;
             to.AdoxioEntertainmentdescription = from.EntertainmentDescription;
-            to.AdoxioContactphone = from.ContactPhone;
+            to.AdoxioContactphonenumber = from.ContactPhone;
             to.AdoxioContactname = from.ContactName;
             to.AdoxioExternalid = from.ExternalId;
             to.AdoxioContactemail = from.ContactEmail;
@@ -92,6 +94,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSpecificlocation = (int?)from.SpecificLocation;
             to.AdoxioClass = (int?)from.EventClass;
             to.AdoxioMaxattendance = from.MaxAttendance;
+            to.AdoxioMaxstaffattendance = from.MaxStaffAttendance;
             to.AdoxioAttendanceminors = from.MinorsAttending;
             to.AdoxioCommunityapproval = from.CommunityApproval;
             to.AdoxioNotifyeventinspector = from.NotifyEventInspector;

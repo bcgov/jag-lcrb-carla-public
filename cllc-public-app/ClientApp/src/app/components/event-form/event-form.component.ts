@@ -48,14 +48,15 @@ export class EventFormComponent extends FormBase implements OnInit {
     name: ['', []],
     licenceId: ['', []],
     accountId: ['', []],
+    eventClass: ['', []],
     contactName: ['', [Validators.required]],
     contactPhone: ['', [Validators.required]],
     contactEmail: ['', [Validators.required]],
-    eventClass: ['', [Validators.required]],
     eventType: ['', [Validators.required]],
     eventTypeDescription: ['', [Validators.required]],
     clientHostname: ['', [Validators.required]],
     maxAttendance: ['', [Validators.required]],
+    maxStaffAttendance: ['', [Validators.required]],
     minorsAttending: ['', [Validators.required]],
     foodService: ['', [Validators.required]],
     foodServiceDescription: ['', []],
@@ -122,6 +123,7 @@ export class EventFormComponent extends FormBase implements OnInit {
   setFormToLicenceEvent(licenceEvent: LicenceEvent) {
     const schedules = licenceEvent['schedules'];
     delete licenceEvent['schedules'];
+    delete licenceEvent['modifiedOn'];
     this.eventForm.setValue({
       ...licenceEvent,
       agreement: false
@@ -227,7 +229,11 @@ export class EventFormComponent extends FormBase implements OnInit {
     const option = this.getOptionFromValue(options, this.eventForm.controls[fieldName].value);
     if (option.label !== 'Other') {
       this.eventForm.controls[relatedField].setValue('');
+      this.eventForm.controls[relatedField].setValidators([]);
+    } else {
+      this.eventForm.controls[relatedField].setValidators([Validators.required]);
     }
+    this.eventForm.controls[relatedField].updateValueAndValidity();
   }
 
   updateLicence(schedules) {
@@ -286,7 +292,6 @@ export class EventFormComponent extends FormBase implements OnInit {
   }
 
   startDateChanged() {
-    console.log(this.eventForm.controls['startDate'].value);
     this.updateEndDateMinimum();
     this.refreshTimeDays();
   }
@@ -347,5 +352,9 @@ export class EventFormComponent extends FormBase implements OnInit {
         arr.push(new Date(dt));
     }
     return arr;
+  }
+
+  isFormValid() {
+    return this.eventForm.invalid || !this.eventForm.controls['agreement'].value;
   }
 }

@@ -180,7 +180,7 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = false;
         }
 
-        [Then(@"I return to the dashboard")]
+        [And(@"I return to the dashboard")]
         public void return_to_dashboard()
         {
             string retDash = "Return to Dashboard";
@@ -297,7 +297,7 @@ namespace bdd_tests
         }
         */
 
-        [Given(@"I delete my account")]
+        [And(@"I delete my account")]
         public void Delete_my_account()
         {
             this.CarlaDeleteCurrentAccount();

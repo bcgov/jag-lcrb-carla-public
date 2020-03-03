@@ -115,6 +115,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public EventClass? EventClass { get; set; }
         public bool? MinorsAttending { get; set; }
         public int? MaxAttendance { get; set; }
+        public int? MaxStaffAttendance { get; set; }
         public bool? CommunityApproval { get; set; }
         public bool? NotifyEventInspector { get; set; }
         public string LicenceId { get; set; }
@@ -125,6 +126,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string City { get; set; }
         public string Province { get; set; }
         public string PostalCode { get; set; }
+        public DateTimeOffset? ModifiedOn { get; set; }
 
         public List<LicenceEventSchedule> Schedules { get; set; }
     }
