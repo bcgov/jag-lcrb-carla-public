@@ -10,6 +10,7 @@
           <th>Location</th>
           <th>Operate</th>
           <th>Request Changes</th>
+          <th *ngIf="mappingItem.key === 'Catering'">Event History</th>
         </tr>
         <tr [formGroup]="licenceForms[item.licenseId]"  *ngFor="let item of licenceMappings[mappingItem.key]; let i = index;" style="border: 1px solid #ccc; ">
           <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
@@ -121,6 +122,11 @@
               </a>
             </section>
 
+          </td>
+          <td *ngIf="mappingItem.key === 'Catering'">
+            <ul>
+              <li *ngFor="let event of item?.events"><a [routerLink]="[ '/licence/' + item.licenseId + '/event/' + event.id]">{{getOptionFromValue(eventStatus, event.status).label}} {{event.clientHostname === null ? null : '- ' + event.clientHostname}} - Saved on {{event.modifiedOn | date:'mediumDate'}}</a></li>
+            </ul>
           </td>
         </tr>
       </table>
