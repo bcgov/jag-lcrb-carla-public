@@ -74,6 +74,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             to.AdoxioEventid = from.Id;
             to.AdoxioName = from.Name;
+            to.Statuscode = (int)from.Status;
             to.AdoxioStartdate = from.StartDate;
             to.AdoxioEnddate = from.EndDate;
             to.AdoxioVenuenamedescription = from.VenueDescription;
