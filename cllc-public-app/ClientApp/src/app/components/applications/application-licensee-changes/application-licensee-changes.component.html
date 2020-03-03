@@ -20,7 +20,9 @@
           SAVE FOR LATER
         </span>
       </button>
-      <button *ngIf="true || LicenseeChangeLog.HasChanges(treeRoot)" class="btn btn-primary"
+
+      
+      <button *ngIf="true || LicenseeChangeLog.HasChanges(treeRoot)" class="btn btn-primary" style="float: right;"
          (click)="save()">
         <i class="fa fa-save" style="color: #fff;"></i>
         {{getSaveLabel()}}</button>
@@ -28,7 +30,6 @@
   </section>
   
   <section class="col-md-4">
-    <h1>&nbsp;</h1><br>
 
     <!-- <section class="large-screen-only position-reletaive" *ngIf="treeRoot">
       <div [ngBusy]="[busy, busyPromise]"></div>
@@ -99,9 +100,37 @@
       </div>
     </section> -->
 
+    <section class="submit-container" _ngcontent-ekk-c6="" style="background-color:#38598A; border-bottom: solid 4px #FFCC00; color: #fff; margin-bottom: 20px; padding: 30px; padding-top:20px;">
+      <table>
+        <tr>
+          <td><h2 class="round-icon-wrapper"><i class="fas fa-info-circle" _ngcontent-jyo-c6="" style="color:#fff;"></i></h2></td>
+          <td style="padding-left: 10px;"><h2 style="color:#fff" _ngcontent-jyo-c6="">Instructions:</h2></td>
+        </tr>
+      </table>
+  
+      <div class="submit-content">
+        <p>
+          If your details are complete, you can click confirm at the bottom of the page to continue. 
+          Otherwise, update the information by providing the required documents and use the controls 
+          on the page to enter your organization structure:</p>
+          <ul>
+            <li>Add associates using the <i class="fas fa-plus">Add</i> buttons.</li>
+            <li>Clicking the <i _ngcontent-ema-c17="" class="fas fa-pencil-alt ng-star-inserted"></i> icon will allow you to <strong>update associate names</strong> and <strong>modify share amounts</strong> to indicate share transfers.</li>
+            <li>Confirm changes by clicking <i _ngcontent-dqh-c17="" class="fas fa-save save ng-star-inserted"></i>.</li>
+            <li>Clicking the <i _ngcontent-ema-c17="" class="fas fa-trash-alt"></i> icon will <strong>remove</strong> an associate from your organization structure.</li>
+          </ul>
+
+          <hr>
+          <p >
+              <strong>Fees</strong> are calculated based on the types of changes you have made, multiplied by the number of licences you currently have. <strong>If you do not yet have a licence there is no charge for submitting changes</strong>.
+            </p>
+
+      </div>
+    </section>
 
     <section class="submit-container"
       style="background-color: #F2F2F2; color:#000; border: none; padding-left: 20px; padding-top: 5px;">
+
       <h2 style="color: #000">Collection Notice:</h2>
       <div class="submit-content">
         <p style="padding: 20px; padding-top: 10px;">
