@@ -24,7 +24,9 @@ Scenario: Start Application
     And I complete the application
     And I click on the Submit & Pay button
     And I enter the payment information
-    Then I return to the dashboard
+    And I return to the dashboard
+    And I delete my account
+    Then I see login
 */
 
 namespace bdd_tests
@@ -56,27 +58,6 @@ namespace bdd_tests
             NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
             startApp_button.Click();
 
-            string electricSignature = "Automated Test";
-
-            NgWebElement noRadio1 = ngDriver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/mat-dialog-container/app-eligibility-form/div/form/div[3]/section/mat-radio-group/mat-radio-button[2]"));
-            noRadio1.Click();
-
-            NgWebElement noRadio2 = ngDriver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/mat-dialog-container/app-eligibility-form/div/form/div[4]/section/mat-radio-group/mat-radio-button[2]"));
-            noRadio2.Click();
-
-            NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
-            noRadio2.Click();
-
-            NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
-            sigCheckbox.SendKeys(electricSignature);
-
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
-            submit_button.Click();
-        }
-
-        [And(@"I click on the Continue to Application button")]
-        public void I_continue_to_application()
-        {
             ngDriver.WaitForAngular();
 
             string bizNumber = "012345678";
@@ -123,7 +104,32 @@ namespace bdd_tests
 
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
             continueApp_button.Click();
-            
+
+            ngDriver.WaitForAngular();
+        }
+
+        [And(@"I click on the Continue to Application button")]
+        public void I_continue_to_application()
+        {
+            ngDriver.WaitForAngular();
+
+            string electricSignature = "Automated Test";
+
+            NgWebElement noRadio1 = ngDriver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/mat-dialog-container/app-eligibility-form/div/form/div[3]/section/mat-radio-group/mat-radio-button[2]"));
+            noRadio1.Click();
+
+            NgWebElement noRadio2 = ngDriver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/mat-dialog-container/app-eligibility-form/div/form/div[4]/section/mat-radio-group/mat-radio-button[2]"));
+            noRadio2.Click();
+
+            NgWebElement matCheckbox = ngDriver.FindElement(By.XPath("//mat-checkbox[@id='mat-checkbox-1']/label/div"));
+            matCheckbox.Click();
+
+            NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
+            sigCheckbox.SendKeys(electricSignature);
+
+            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
+            submit_button.Click();
+
             ngDriver.WaitForAngular();
         }
 
@@ -141,6 +147,7 @@ namespace bdd_tests
             string conSurname = "Surname";
             string conRole = "CEO";
             string conPhone = "2508888888";
+            string conEmail = "contact@email.com";
 
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
             estabName.SendKeys(estName);
@@ -199,6 +206,9 @@ namespace bdd_tests
             NgWebElement contactPhone = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonPhone]"));
             contactPhone.SendKeys(conPhone);
 
+            NgWebElement contactEmail = ngDriver.FindElement(By.Id("contactPersonEmail"));
+            contactEmail.SendKeys(conEmail);
+
             NgWebElement authorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
             authorizedSubmit.Click();
 
@@ -236,115 +246,6 @@ namespace bdd_tests
             NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
             returnDash.Click();
         }
-
-        [And(@"I SEE Review Account Profile")]
-        public void see_account_profile()
-        {
-            // on the update account profile page
-        }
-
-        [And(@"a CRS Application exists")]
-        public void application_exists()
-        {
-            // click start application
-        }
-
-        [And(@"I CLICK Complete Application")]
-        public void I_complete_application()
-        {
-            // click the link for the application
-        }
-
-        [And(@"I CLICK Cancel Application")]
-        public void I_cancel_application()
-        {
-            // click the link to cancel from the dashboard
-            // confirm popup
-        }
-
-        [Then(@"the Application is Cancelled")]
-        public void cancel_from_dashboard()
-        {
-            // application is removed from dashboard
-            // application is marked as terminated
-        }
-
-        /*
-        // Account Profile common activities
-
-
-        [Given(@"I SEE the Account Profile")]
-        public void I_view_the_dashboard()
-        {
-            // navigate to the map page.
-            //ngDriver.Navigate().GoToUrl($"{baseUri}/map");
-        }
-
-
-        [And(@"I CLICK Continue to Application")]
-        public void I_continue_application()
-        {
-            // navigate to the map page.
-            //ngDriver.Navigate().GoToUrl($"{baseUri}/map");
-        }
-
-        [Then(@"I am navigated the Application Page")]
-        public void See_Application_page()
-        {
-            // application is removed from dashboard
-            // application is marked as terminated
-        }
-
-
-        // Application common activities
-
-        [Given(@"I SEE the Application Form")]
-        public void I_see_application()
-        {
-            // navigate to the map page.
-            //ngDriver.Navigate().GoToUrl($"{baseUri}/map");
-        }
-
-        //[And(@"I CLICK Save for Later")]
-        //public void I_save_for_later(string search)
-        //{
-        //    //var elements = ngDriver.FindElements(NgBy.Repeater("todo in todoList.todos"));
-        //}
-
-        //[And(@"I CLICK Cancel Application")]
-        //public void I_cancel_application(string search)
-        //{
-        //    //var elements = ngDriver.FindElements(NgBy.Repeater("todo in todoList.todos"));
-        //}
-
-        [And(@"I UPLOAD an Associate Form")]
-        public void upload_associate_form(string search)
-        {
-            //var elements = ngDriver.FindElements(NgBy.Repeater("todo in todoList.todos"));
-        }
-
-        [And(@"I CLICK Submit and Pay")]
-        public void I_submit_application(string search)
-        {
-            //var elements = ngDriver.FindElements(NgBy.Repeater("todo in todoList.todos"));
-        }
-
-        [Then(@"the page shows a map")]
-        public void The_page_shows_a_map()
-        {
-            // verify that the results are in the right area
-            //var elements = ngDriver.FindElements(NgBy.Repeater("todo in todoList.todos"));
-            //Assert.Equal("build an angular app", elements[1].Text);
-        }
-
-        [Then(@"the page shows search results including (.*)")]
-        public void The_page_shows_search_results_including(string expectedResult)
-        {
-            // verify that the results are in the right area
-            //var elements = ngDriver.FindElements(NgBy.Repeater("todo in todoList.todos"));
-            //Assert.Equal("build an angular app", elements[1].Text);
-        }
-        */
 
         [And(@"I delete my account")]
         public void Delete_my_account()
