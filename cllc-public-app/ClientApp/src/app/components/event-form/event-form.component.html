@@ -87,6 +87,13 @@
         </app-field>
       </div>
       <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Maximum Staff Attendance" [required]="true"
+          [valid]="eventForm.get('maxStaffAttendance').valid || !eventForm.get('maxStaffAttendance').touched"
+          errorMessage="Please enter the maximum staff attendance (must be a number)" [isFullWidth]="true">
+          <input class="form-control" type="number" formControlName="maxStaffAttendance">
+        </app-field>
+      </div>
+      <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Minors Attending" [required]="true"
           [valid]="eventForm.get('minorsAttending').valid || !eventForm.get('minorsAttending').touched"
           errorMessage="Please indicate if minors are attending" [isFullWidth]="true">
@@ -106,7 +113,7 @@
         </app-field>
       </div>
       <div class="row" *ngIf="getOptionFromValue(foodService, eventForm.get('foodService').value).label === 'Other'">
-        <app-field class="col-md-4 col-xs-12" label="Food Service Description"
+        <app-field class="col-md-4 col-xs-12" label="Food Service Description" [required]="true"
           [valid]="eventForm.get('foodServiceDescription').valid || !eventForm.get('foodServiceDescription').touched"
           [isFullWidth]="true">
           <textarea class="form-control" formControlName="foodServiceDescription"></textarea>
@@ -122,7 +129,7 @@
         </app-field>
       </div>
       <div class="row" *ngIf="getOptionFromValue(entertainment, eventForm.get('entertainment').value).label === 'Other'">
-        <app-field class="col-md-4 col-xs-12" label="Entertainment Description"
+        <app-field class="col-md-4 col-xs-12" label="Entertainment Description" [required]="true"
           [valid]="eventForm.get('entertainmentDescription').valid || !eventForm.get('entertainmentDescription').touched"
           [isFullWidth]="true">
           <textarea class="form-control" formControlName="entertainmentDescription"></textarea>
@@ -269,7 +276,7 @@
           SAVE FOR LATER
         </span>
       </button>
-      <button class="btn btn-primary" (click)="save(true)" [disabled]="eventForm.invalid">SUBMIT</button>
+      <button class="btn btn-primary" (click)="save(true)" [disabled]="isFormValid()">SUBMIT</button>
     </div>
   </form>
 </div>

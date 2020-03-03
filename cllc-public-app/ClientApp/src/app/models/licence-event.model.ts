@@ -13,6 +13,7 @@ export class LicenceEvent {
   clientHostname: string;
   eventTypeDescription: string;
   maxAttendance: number;
+  maxStaffAttendance: number;
   minorsAttending: boolean;
   communityApproval: boolean;
   licenceId: string;
