@@ -17,6 +17,7 @@ export class ApplicationLicenseSummary {
   licenseId: string;
   applicationId: string;
   licenceTypeName: string;
+  applicationTypeName: string;
   licenseNumber: string;
   name: string;
   jobNumber: string;
