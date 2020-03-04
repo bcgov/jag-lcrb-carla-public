@@ -50,6 +50,7 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
 
   ngOnInit() {
     this.form = this.fb.group({
+      licenseNumber: [''],
       establishmentName: [''],
       establishmentAddressStreet: [''],
       establishmentAddressCity: [''],

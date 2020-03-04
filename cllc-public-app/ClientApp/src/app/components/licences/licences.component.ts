@@ -129,7 +129,10 @@ export class LicencesComponent extends FormBase implements OnInit {
   }
 
   payLicenceFee(licence: ApplicationLicenseSummary) {
-    const crsApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore);
+    //console.log("here");
+    
+    // locate the application associated with the issuance of this licence
+    const crsApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore || app.applicationTypeName === ApplicationTypeNames.Catering);
     if (crsApplication) {
       this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(crsApplication.applicationId)
         .pipe(takeWhile(() => this.componentActive))
