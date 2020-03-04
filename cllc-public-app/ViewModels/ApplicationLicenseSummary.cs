@@ -28,6 +28,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     {
         public string LicenseId { get; set; }
         public string ApplicationId { get; set; }
+        public string ApplicationTypeName { get; set; }
         public string EstablishmentId {get; set; }
         public string EstablishmentName { get; set; }
         public string EstablishmentAddressStreet { get; set; }

@@ -76,7 +76,7 @@
                 (click)="toggleStoreOpen(item?.licenceTypeName, i, item?.establishmentId, !item.establishmentIsOpen);">
                 <a href="#">Show Store as Open on Map</a></mat-checkbox>
             </div>
-            <div *ngIf="!item.storeInspected  && item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore"
+            <div *ngIf="showPlanStoreOpening(item)"
               style="min-width: 10px; margin-bottom: 10px;">
               <a href="javascript:void(0);" (click)="planStoreOpening(item)">
                 <span *ngIf="item.status == PAYMENT_REQUIRED">
