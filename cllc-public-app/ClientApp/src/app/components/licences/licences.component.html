@@ -134,7 +134,7 @@
           </td>
           <td *ngIf="mappingItem.key === 'Catering'" style="vertical-align: top;">
             <ul>
-              <li *ngFor="let event of item?.events"><a [routerLink]="[ '/licence/' + item.licenseId + '/event/' + event.id]">{{event.clientHostname === null ? 'New Event' : event.clientHostname}}</a> - {{getOptionFromValue(eventStatus, event.status).label}}<br><small>last updated {{event.modifiedOn | date:'mediumDate'}}</small></li>
+              <li *ngFor="let event of item?.events"><a [routerLink]="[ '/licence/' + item.licenseId + '/event/' + event.id]">{{event.clientHostname === null ? 'New Event' : event.clientHostname}}</a> - Status: {{getOptionFromValue(eventStatus, event.status).label}} <small> <br>last updated {{event.modifiedOn | date:'mediumDate'}}</small></li>
             </ul>
           </td>
           <td *ngIf="mappingItem.key !== 'Catering'">
