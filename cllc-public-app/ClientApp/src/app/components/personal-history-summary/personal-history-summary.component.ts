@@ -108,6 +108,9 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
       .subscribe(contact => {
         this.contact = contact;
         this.form.get('contact.shortName').setValue(contact.shortName);
+        if (this.contact.isComplete) {
+          this.router.navigateByUrl('/personal-history-summary/confirmation');
+        }
       });
 
   }
