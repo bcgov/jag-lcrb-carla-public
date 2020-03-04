@@ -12,7 +12,7 @@
               <th>ACTIONS</th>
             </tr>
             <tr *ngIf="!(submittedApplications >= 8 || marketerExists)">
-              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"></td>
+              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><i class="fas fa-cannabis"></i></td>
               <td>
                 <h3>Cannabis Retail Store Licence</h3>
                 <p>To sell non-medical cannabis and accessories</p>
@@ -26,7 +26,7 @@
               </td>
             </tr>
             <tr *ngIf="!(nonMarketerExists || marketerExists)">
-              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"></td>
+              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><i class="fas fa-bullhorn"></i></td>
               <td>
                 <h3>Cannabis Marketing Licence</h3>
                 <p>To promote non-medical cannabis to licensed cannabis retail stores and the adult public</p>
@@ -38,6 +38,21 @@
                   APPLICATION</button>
               </td>
             </tr>
+            <tr>
+                <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><i class="fas fa-glass-cheers"></i></td>
+                <td>
+                  <h3>Catering Licence</h3>
+                  <p>Catering licences are for catering businesses that provide a full range of food and beverage services to their clients. Licensed caterers can sell liquor and maintain a liquor inventory.  </p>
+                  <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/catering-liquor-licence" target="_blank">Learn
+                    more about this licence</a>
+                </td>
+                <td>
+                  <button *ngIf="liquorOne" class="btn btn-primary" (click)="startNewCateringApplication()" id="startCatering">START
+                    APPLICATION</button>
+                  <span *ngIf="!liquorOne">COMING SOON</span>
+                </td>
+              </tr>
+  
           </table>
         </section>
       </div>
