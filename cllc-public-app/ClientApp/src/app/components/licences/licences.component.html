@@ -6,7 +6,14 @@
     <form [formGroup]="mainForm">
       <table class="eq-table">
         <tr>
-          <th></th>
+          <th class="p-0">
+            <img *ngIf="mappingItem.key === 'Cannabis Retail Store'" class="icon"
+              src="assets/Cannabis-store-icon-40px.png" alt="">
+            <img *ngIf="mappingItem.key === 'Marketing'" class="icon" src="assets/Cannabis-marketing-icon-40px.png"
+              alt="">
+            <img *ngIf="mappingItem.key === 'Catering'" class="icon" src="assets/Catering-icon-40px.png" alt="">
+            <img *ngIf="mappingItem.key === 'Wine Store'" class="icon" src="assets/Wine-Store-icon-40px.png" alt="">
+          </th>
           <th style="width:250px;">Licence Details</th>
           <th style="width:250px;">Location</th>
           <th style="width:250px;">Operate</th>
@@ -14,16 +21,19 @@
           <th *ngIf="mappingItem.key === 'Catering'">Event History</th>
           <th *ngIf="mappingItem.key !== 'Catering'"></th>
         </tr>
-        <tr [formGroup]="licenceForms[item.licenseId]"  *ngFor="let item of licenceMappings[mappingItem.key]; let i = index;" style="border: 1px solid #ccc; ">
+        <tr [formGroup]="licenceForms[item.licenseId]"
+          *ngFor="let item of licenceMappings[mappingItem.key]; let i = index;" style="border: 1px solid #ccc; ">
           <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
 
           <td style="padding: 10px;">
             <div>
-              <strong *ngIf="item?.licenceTypeName !== 'Marketer'"
-                style="color: #1a5a96;">{{item.establishmentName}}</strong>
+              <strong *ngIf="item?.licenceTypeName !== 'Marketing'" style="color: #1a5a96;">
+                {{item.establishmentName}}</strong>
             </div>
-            <span *ngIf="item?.licenceTypeName === 'Marketer'" style="color: #1a5a96;">Marketing Licence</span>
-            <span>Licence Number: </span> <i>{{item.licenseNumber}}</i> <br>
+            <strong *ngIf="item?.licenceTypeName === 'Marketing'" style="color: #1a5a96;">
+              Marketing Licence</strong>
+            <span *ngIf="item?.licenceTypeName !== 'Marketing'">Licence Number:  <i>{{item.licenseNumber}}</i></span>
+            <br>
             <span>Expiry / Renewal Date: {{item.expiryDate | date: 'MM/dd/yyyy'}}</span> <br>
             <div *ngIf="item.status !== PAYMENT_REQUIRED && !isAboutToExpire(item.expiryDate) "
               style="min-width: 10px; margin-bottom: 10px;">
@@ -37,15 +47,16 @@
           </td>
 
           <td style="padding: 10px;">
-            <div *ngIf="item?.licenceTypeName !== 'Marketer'">
+            <div *ngIf="item?.licenceTypeName !== 'Marketing'">
               {{item?.establishmentAddressStreet}} <br>
               {{item?.establishmentAddressCity}} BC {{item?.establishmentAddressPostalCode}}<br>
-              <input class="form-control" type="text" formControlName="phone" mask="(000) 000-0000" placeholder="Store Phone Number"
+              <input class="form-control" type="text" formControlName="phone" mask="(000) 000-0000"
+                placeholder="Store Phone Number"
                 (focusout)="updatePhone(item?.licenseId, item?.establishmentId, $event)"> <br>
               <input class="form-control" type="text" formControlName="email" placeholder="Store Email Address"
                 (focusout)="updateEmail(item?.licenseId, item?.establishmentId, $event)"> <br>
             </div>
-            <div *ngIf="item?.licenceTypeName === 'Marketer'">
+            <div *ngIf="item?.licenceTypeName === 'Marketing'">
               {{account?.physicalAddressStreet}} <br>
               {{account?.physicalAddressCity}} {{account?.physicalAddressProvince}}
               {{account?.physicalAddressPostalCode}}<br>
@@ -65,7 +76,7 @@
                 (click)="toggleStoreOpen(item?.licenceTypeName, i, item?.establishmentId, !item.establishmentIsOpen);">
                 <a href="#">Show Store as Open on Map</a></mat-checkbox>
             </div>
-            <div *ngIf="!item.storeInspected  && item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore"
+            <div *ngIf="showPlanStoreOpening(item)"
               style="min-width: 10px; margin-bottom: 10px;">
               <a href="javascript:void(0);" (click)="planStoreOpening(item)">
                 <span *ngIf="item.status == PAYMENT_REQUIRED">
@@ -143,7 +154,9 @@
         </tr>
       </table>
     </form>
-    <p style="text-align: center; font-style: italic;">All {{mappingItem.key}} licence holders must follow the terms and conditions of their licence as set out in the <a href="{{getHandbookLink(mappingItem.key)}}" target="_blank">{{mappingItem.key}} Terms and Conditions Handbook</a></p>
+    <p style="text-align: center; font-style: italic;">All {{mappingItem.key}} licence holders must follow the terms and
+      conditions of their licence as set out in the <a href="{{getHandbookLink(mappingItem.key)}}"
+        target="_blank">{{mappingItem.key}} Terms and Conditions Handbook</a></p>
     <p>&nbsp;</p>
   </section>
 </div>
