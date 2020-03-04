@@ -47,8 +47,9 @@
                     more about this licence</a>
                 </td>
                 <td>
-                  <button class="btn btn-primary" (click)="startNewCateringApplication()" id="startCatering">START
+                  <button *ngIf="liquorOne" class="btn btn-primary" (click)="startNewCateringApplication()" id="startCatering">START
                     APPLICATION</button>
+                  <span *ngIf="!liquorOne">COMING SOON</span>
                 </td>
               </tr>
   
