@@ -70,11 +70,6 @@ const routes: Routes = [
     data: { feature: 'LicenseeChanges' }
   },
   {
-    path: 'catering-demo',
-    component: CateringDemoComponent,
-    canActivate: [BCeidAuthGuard]
-  },
-  {
     path: 'licences',
     component: LicencesComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
@@ -141,12 +136,6 @@ const routes: Routes = [
   {
     path: 'application/:applicationId',
     component: ApplicationComponent,
-    canDeactivate: [CanDeactivateGuard],
-    canActivate: [BCeidAuthGuard]
-  },
-  {
-    path: 'application/:formmName/:applicationId',
-    component: DynamicApplicationComponent,
     canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]
   },
