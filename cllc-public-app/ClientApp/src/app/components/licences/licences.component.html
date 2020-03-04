@@ -2,15 +2,17 @@
   <div [ngBusy]="busy"></div>
   <h1>Licences</h1>
   <section *ngFor="let mappingItem of licenceMappings | keyvalue">
+    <h2>{{mappingItem.key}} Licences</h2>
     <form [formGroup]="mainForm">
       <table class="eq-table">
         <tr>
           <th></th>
-          <th>{{mappingItem.key}}</th>
-          <th>Location</th>
-          <th>Operate</th>
-          <th>Request Changes</th>
+          <th style="width:250px;">Licence Details</th>
+          <th style="width:250px;">Location</th>
+          <th style="width:250px;">Operate</th>
+          <th style="width:300px;">Request Changes</th>
           <th *ngIf="mappingItem.key === 'Catering'">Event History</th>
+          <th *ngIf="mappingItem.key !== 'Catering'"></th>
         </tr>
         <tr [formGroup]="licenceForms[item.licenseId]"  *ngFor="let item of licenceMappings[mappingItem.key]; let i = index;" style="border: 1px solid #ccc; ">
           <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
@@ -81,6 +83,13 @@
                 <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay Licence Fee</span>
               </a>
             </div>
+            <div
+              *ngIf="item.status == PAYMENT_REQUIRED  && item?.licenceTypeName === ApplicationTypeNames.Catering"
+              style="min-width: 10px; margin-bottom: 10px;">
+              <a href="javascript:void(0);" (click)="payLicenceFee(item)">
+                <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay First Year Licensing Fee</span>
+              </a>
+            </div>
             <div>
               <p *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore">
                 <a [routerLink]="[ '/federal-reporting/' + item.licenseId + '/default']">
@@ -123,11 +132,14 @@
             </section>
 
           </td>
-          <td *ngIf="mappingItem.key === 'Catering'">
+          <td *ngIf="mappingItem.key === 'Catering'" style="vertical-align: top;">
             <ul>
-              <li *ngFor="let event of item?.events"><a [routerLink]="[ '/licence/' + item.licenseId + '/event/' + event.id]">{{getOptionFromValue(eventStatus, event.status).label}} {{event.clientHostname === null ? null : '- ' + event.clientHostname}} - Saved on {{event.modifiedOn | date:'mediumDate'}}</a></li>
+              <li *ngFor="let event of item?.events"><a [routerLink]="[ '/licence/' + item.licenseId + '/event/' + event.id]">{{event.clientHostname === null ? 'New Event' : event.clientHostname}}</a> - Status: {{getOptionFromValue(eventStatus, event.status).label}} <small> <br>last updated {{event.modifiedOn | date:'mediumDate'}}</small></li>
             </ul>
           </td>
+          <td *ngIf="mappingItem.key !== 'Catering'">
+
+            </td>          
         </tr>
       </table>
     </form>

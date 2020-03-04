@@ -285,6 +285,25 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     );
   }
 
+  startNewCateringApplication() {
+    const newLicenceApplicationData: Application = <Application>{
+      licenseType: 'Catering',
+      applicantType: this.account.businessType,
+      applicationType: <ApplicationType>{ name: ApplicationTypeNames.Catering },
+      account: this.account,
+    };
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        this.router.navigateByUrl(`/multi-step-application/${data.id}`);
+      },
+      () => {
+        this.snackBar.open('Error starting a Catering Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a Catering Application');
+      }
+    );
+  }
+
   startRenewal(licence: ApplicationLicenseSummary) {
     const renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === 'CRS Renewal');
     if (renewalApplication && !renewalApplication.isPaid) {
