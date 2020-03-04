@@ -47,8 +47,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
     public enum EventClass
     {
-        [EnumMember(Value = "Approval")]
-        Approval = 845280000,
+        [EnumMember(Value = "Authorization")]
+        Authorization = 845280000,
         [EnumMember(Value = "Notice")]
         Notice = 845280001
     }
