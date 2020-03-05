@@ -14,7 +14,7 @@ getApiProxyConfigSection (){
   _LOGIN_URL="${1}login/"
   _HEALTH_CHECK_URL="${1}hc/"
   _LOGOUT_URL="${1}logout/"
-  _BCSERVICE_URL="${1}/bcservice/"
+  _BCSERVICE_URL="${1}bcservice/"
 
   read -r -d '' _CONFIG_SECTION << EOF
 # proxy requests to the API
