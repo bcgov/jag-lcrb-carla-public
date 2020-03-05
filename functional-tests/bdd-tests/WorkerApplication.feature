@@ -4,6 +4,7 @@
 
 Scenario: Worker Application
     Given I am logged in to the dashboard
+    And I complete the Terms of Use
     And I click on my name
     And I complete Step 1 of the application
     And I complete Step 2 of the application
