@@ -71,8 +71,29 @@ namespace bdd_tests
             NgWebElement confirmationButton = ngDriver.FindElement(By.XPath("//button"));
             confirmationButton.Click();
 
-            NgWebElement orgTypeRadio = ngDriver.FindElement(By.Name("InitialBusinessType"));
-            orgTypeRadio.Click();
+            // Private Corporation
+            NgWebElement privateCorporationRadio = ngDriver.FindElement(By.Name("InitialBusinessType"));
+            privateCorporationRadio.Click();
+
+            // Public Corporation
+            //NgWebElement publicCorporationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[2]"));
+            //publicCorporationRadio.Click();
+
+            // Sole Proprietorship - has different fields!
+            //NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[3]"));
+            //soleProprietorshipRadio.Click();
+
+            // Partnership
+            //NgWebElement partnershipRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[4]"));
+            //partnershipRadio.Click();
+
+            // Society
+            //NgWebElement societyRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[5]"));
+            //societyRadio.Click();
+
+            // Indigenous nation
+            //NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[6]"));
+            //indigenousNationRadio.Click();
 
             NgWebElement nextButton = ngDriver.FindElement(By.XPath("//button[contains(.,'Next')]"));
             nextButton.Click();
