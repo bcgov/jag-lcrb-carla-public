@@ -443,6 +443,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
     let valid = true;
     this.validationMessages = [];
 
+    // handle supporting documents for sole proprietor who submit marketing applications 
+    let marketing_soleprop = this.application.applicationType.name === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietor";
+
+
     if (this.application.applicationType.showAssociatesFormUpload &&
       ((this.uploadedAssociateDocuments || 0) < 1)) {
       valid = false;
@@ -455,7 +459,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Financial Integrity form is required.');
     }
 
-    if (this.application.applicationType.showSupportingDocuments &&
+    // if we're showing supporting documents and it's not a marketing soleprop application add validation
+    if (this.application.applicationType.showSupportingDocuments && !marketing_soleprop &&
       ((this.uploadedSupportingDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one supporting document is required.');
