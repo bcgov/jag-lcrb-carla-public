@@ -10,22 +10,25 @@ import * as currentApplicationActions from '@app/app-state/actions/current-appli
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
+import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { Application } from '@models/application.model';
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
 import { DynamicsDataService } from '@services/dynamics-data.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import {
+  ApplicationCancellationDialogComponent,
+  UPLOAD_FILES_MODE
+} from '@app/applications-and-licences/applications-and-licences.component';
 import { Account } from '@models/account.model';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
-import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
+import { EstablishmentWatchWordsService } from '../services/establishment-watch-words.service';
 import { KeyValue } from '@angular/common';
-import { FeatureFlagService } from '@services/feature-flag.service';
-import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
-import { ConnectionToNonMedicalStoresComponent } from '@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
-import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
-import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
-import { AccountDataService } from '@services/account-data.service';
-import { User } from '@models/user.model';
+import { FeatureFlagService } from './../services/feature-flag.service';
+import {
+  ConnectionToNonMedicalStoresComponent
+} from '@app/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -47,6 +50,7 @@ export class ApplicationHTMLContent {
   nextSteps: string;
 }
 
+
 @Component({
   selector: 'app-application',
   templateUrl: './application.component.html',
@@ -56,10 +60,10 @@ export class ApplicationHTMLContent {
 export class ApplicationComponent extends FormBase implements OnInit {
   establishmentWatchWords: KeyValue<string, boolean>[];
   application: Application;
-  @ViewChild('mainForm', { static: false }) mainForm: FileUploaderComponent;
-  @ViewChild('financialIntegrityDocuments', { static: false }) financialIntegrityDocuments: FileUploaderComponent;
-  @ViewChild('supportingDocuments', { static: false }) supportingDocuments: FileUploaderComponent;
-  @ViewChild(ConnectionToNonMedicalStoresComponent, { static: false }) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
+  @ViewChild('mainForm') mainForm: FileUploaderComponent;
+  @ViewChild('financialIntegrityDocuments') financialIntegrityDocuments: FileUploaderComponent;
+  @ViewChild('supportingDocuments') supportingDocuments: FileUploaderComponent;
+  @ViewChild(ConnectionToNonMedicalStoresComponent) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
   form: FormGroup;
   savedFormData: any;
   applicationId: string;
@@ -75,6 +79,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
   indigenousNations: { id: string, name: string }[] = [];
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
+  ApplicationTypeNames = ApplicationTypeNames;
   FormControlState = FormControlState;
   mode: string;
   account: Account;
@@ -99,9 +104,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     private fb: FormBuilder,
     private tiedHouseService: TiedHouseConnectionsDataService,
     public dialog: MatDialog,
-    public establishmentWatchWordsService: EstablishmentWatchWordsService,
-    private accountDataService: AccountDataService
-  ) {
+    public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
     this.route.paramMap.subscribe(pmap => this.mode = pmap.get('mode'));
@@ -154,7 +157,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       applicantType: ['', Validators.required],
       description1: ['', [Validators.required]],
       proposedChange: ['', [Validators.required]],
-      connectedGrocery: ['', []],
     });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: boolean) => {
@@ -218,6 +220,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
       );
   }
 
+  private addDynamicContent() {
+    if (this.application.applicationType) {
+      this.htmlContent = {
+        title: this.application.applicationType.title,
+        preamble: this.getApplicationContent('Preamble'),
+        beforeStarting: this.getApplicationContent('BeforeStarting'),
+        nextSteps: this.getApplicationContent('NextSteps'),
+      };
+    }
+  }
+
   private hideFormControlByType() {
     if (!this.application.applicationType.showPropertyDetails) {
       this.form.get('establishmentAddressStreet').disable();
@@ -272,16 +285,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (!this.application.applicationType.showDescription1) {
       this.form.get('description1').disable();
     }
-    
-    // 03/01/2020 - Disabled until connected grocery store feature is ready
-    // if (this.application.applicationType.connectedGroceryStore !== FormControlState.Show) {
-    //   this.form.get('connectedGrocery').clearValidators();
-    // } else {
-    //   this.form.get('connectedGrocery').setValidators([Validators.required]);
-    // }
-
   }
 
+  private getApplicationContent(contentCartegory: string) {
+    let body = '';
+    const contents =
+      this.application.applicationType.contentTypes
+        .filter(t => t.category === contentCartegory && t.businessTypes.indexOf(this.application.applicantType) !== -1);
+    if (contents.length > 0) {
+      body = contents[0].body;
+    }
+    return body;
+  }
 
   private isHoursOfSaleValid(): boolean {
     return !this.application.applicationType.showHoursOfSale ||
@@ -340,12 +355,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
         || this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange);
     show = show && this.form.get('proposedChange').value === 'Yes';
-    return show;
-  }
-
-  showGroceryStore(){
-    let show = (this.application && this.showFormControl(this.application.applicationType.connectedGroceryStore));
-    show = show && this.form.get('connectedGrocery').value === 'Yes';
     return show;
   }
 
@@ -422,7 +431,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   private submitPayment() {
     this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(jsonUrl => {
+      .subscribe(res => {
+        const jsonUrl = res;
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
       }, err => {
@@ -446,7 +456,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     // handle supporting documents for sole proprietor who submit marketing applications 
     let marketing_soleprop = this.application.applicationType.name === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietor";
 
-
     if (this.application.applicationType.showAssociatesFormUpload &&
       ((this.uploadedAssociateDocuments || 0) < 1)) {
       valid = false;
@@ -459,7 +468,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Financial Integrity form is required.');
     }
 
-    // if we're showing supporting documents and it's not a marketing soleprop application add validation
     if (this.application.applicationType.showSupportingDocuments && !marketing_soleprop &&
       ((this.uploadedSupportingDocuments || 0) < 1)) {
       valid = false;
@@ -581,13 +589,4 @@ export class ApplicationComponent extends FormBase implements OnInit {
       .indexOf(state) !== -1;
   }
 
-  getEstablishmentLabel(applicationTypeName: ApplicationTypeNames): string {
-    let label = 'Establishment Name';
-    if ([ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(applicationTypeName) !== -1) {
-      label = 'Name of the Proposed Establishment';
-    } else if (applicationTypeName === ApplicationTypeNames.CRSEstablishmentNameChange) {
-      label = 'Proposed New Name';
-    }
-    return label;
-  }
 }
