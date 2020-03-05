@@ -162,7 +162,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         label = 'Confirm Organization Information Is Complete';
       }
     }
-    return label;
+    return label.toUpperCase();
   }
 
   disableSaveLabel(): boolean {

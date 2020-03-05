@@ -71,6 +71,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("DisableLogin");
             }
 
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_LIQUOR_ONE"]))
+            {
+                features.Add("LiquorOne");
+            }
+
             return new JsonResult(features);
         }
 

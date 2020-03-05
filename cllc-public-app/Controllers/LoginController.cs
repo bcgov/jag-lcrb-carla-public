@@ -84,7 +84,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 new CookieOptions
                 {
                     Path = "/",
-                    SameSite = SameSiteMode.None,
+                    SameSite = SameSiteMode.Lax,
                     Expires = DateTime.UtcNow.AddDays(-1)
                 }
             );
@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 new CookieOptions
                 {
                     Path = "/",
-                    SameSite = SameSiteMode.None,
+                    SameSite = SameSiteMode.Lax,
                     Expires = DateTime.UtcNow.AddDays(7)
                 }
             );

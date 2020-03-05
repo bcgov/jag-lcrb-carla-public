@@ -25,7 +25,7 @@
                 class="form-control px-1"
                 type="text"
                 formControlName="openingInventory"
-                appInputThousands
+                mask="separator" thousandSeparator=","
               >
               <div class="input-group-append">
                 <span class="input-group-text">units</span>
@@ -48,7 +48,7 @@
                 class="form-control px-1"
                 type="text"
                 formControlName="domesticAdditions"
-                appInputThousands
+                mask="separator" thousandSeparator=","
               >
               <div class="input-group-append">
                 <span class="input-group-text">units</span>
@@ -66,7 +66,7 @@
                 class="form-control px-1"
                 type="text"
                 formControlName="returnsAdditions"
-                appInputThousands
+                mask="separator" thousandSeparator=","
               >
               <div class="input-group-append">
                 <span class="input-group-text">units</span>
@@ -84,7 +84,7 @@
                 class="form-control px-1"
                 type="text"
                 formControlName="otherAdditions"
-                appInputThousands
+                mask="separator" thousandSeparator=","
               >
               <div class="input-group-append">
                 <span class="input-group-text">units</span>
@@ -107,7 +107,7 @@
                 class="form-control px-1"
                 type="text"
                 formControlName="domesticReductions"
-                appInputThousands
+                mask="separator" thousandSeparator=","
               >
               <div class="input-group-append">
                 <span class="input-group-text">units</span>
@@ -125,7 +125,7 @@
                 class="form-control px-1"
                 type="text"
                 formControlName="returnsReductions"
-                appInputThousands
+                mask="separator" thousandSeparator=","
               >
               <div class="input-group-append">
                 <span class="input-group-text">units</span>
@@ -143,7 +143,7 @@
                 class="form-control px-1"
                 type="text"
                 formControlName="destroyedReductions"
-                appInputThousands
+                mask="separator" thousandSeparator=","
               >
               <div class="input-group-append">
                 <span class="input-group-text">units</span>
@@ -160,7 +160,7 @@
               <input class="form-control px-1"
                 type="text"
                 formControlName="lostReductions"
-                appInputThousands
+                mask="separator" thousandSeparator=","
               >
               <div class="input-group-append">
                 <span class="input-group-text">units</span>
@@ -178,7 +178,7 @@
                 class="form-control px-1"
                 type="text"
                 formControlName="otherReductions"
-                appInputThousands
+                mask="separator" thousandSeparator=","
               >
               <div class="input-group-append">
                 <span class="input-group-text">units</span>
@@ -201,7 +201,7 @@
                 class="form-control px-1"
                 type="text"
                 formControlName="closingNumber"
-                appInputThousands
+                mask="separator" thousandSeparator=","
               >
               <div class="input-group-append">
                 <span class="input-group-text">units</span>
@@ -222,7 +222,7 @@
                 class="form-control px-1"
                 type="text"
                 formControlName="closingValue"
-                appInputThousands
+                mask="separator" thousandSeparator=","
               >
               <div *ngIf="isFieldInvalid('closingValue')" style="flex: 0 0 15px; align-self: center;">
                 <i class="fas fa-chevron-left error-states"></i>
@@ -237,7 +237,7 @@
                 class="form-control px-1"
                 type="text"
                 formControlName="closingWeight"
-                appInputThousands
+                mask="separator" thousandSeparator=","
               >
               <div class="input-group-append">
                 <span class="input-group-text">kg</span>
@@ -255,7 +255,7 @@
                 class="form-control px-1"
                 type="text"
                 formControlName="totalSeeds"
-                appInputThousands
+                mask="separator" thousandSeparator=","
               >
               <div class="input-group-append">
                 <span class="input-group-text">#</span>
@@ -277,7 +277,7 @@
               class="form-control px-1"
               type="text"
               formControlName="totalSalesToConsumerQty"
-              appInputThousands
+              mask="separator" thousandSeparator=","
             >
             <div class="input-group-append">
               <span class="input-group-text">units</span>
@@ -295,7 +295,7 @@
               class="form-control px-1"
               type="text"
               formControlName="totalSalesToConsumerValue"
-              appInputThousands
+              mask="separator" thousandSeparator=","
             >
             <div *ngIf="isFieldInvalid('totalSalesToConsumerValue')" style="flex: 0 0 15px; align-self: center;">
               <i class="fas fa-chevron-left error-states"></i>
