@@ -48,7 +48,7 @@ namespace bdd_tests
             NgWebElement uiCheckTwo = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'][2]"));
             uiCheckTwo.Click();
 
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE')]");
+            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE')]"));
             continueButton.Click();
         }
 
