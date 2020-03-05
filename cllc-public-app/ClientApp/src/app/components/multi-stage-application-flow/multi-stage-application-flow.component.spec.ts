@@ -9,6 +9,8 @@ import { AccountProfileComponent } from '@components/account-profile/account-pro
 import { ApplicationComponent } from '@components/applications/application/application.component';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
 
 describe('MultiStageApplicationFlowComponent', () => {
   let component: MultiStageApplicationFlowComponent;
@@ -23,6 +25,7 @@ describe('MultiStageApplicationFlowComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
         provideMockStore({initialState}),
+        { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
         { provide: FeatureFlagService, useValue: {featureOn: () => of(true)} }
       ]
     })
