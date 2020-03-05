@@ -78,6 +78,18 @@ export class LicencesComponent extends FormBase implements OnInit {
     this.displayApplications();
   }
 
+  showPlanStoreOpening(item: ApplicationLicenseSummary): boolean {
+    let show = (
+      item &&
+      !item.storeInspected
+      && (
+        item.applicationTypeName === ApplicationTypeNames.CannabisRetailStore
+        || item.applicationTypeName === ApplicationTypeNames.CRSLocationChange
+      )
+    );
+    return show;
+  }
+
   /**
    *
    * */
@@ -129,7 +141,10 @@ export class LicencesComponent extends FormBase implements OnInit {
   }
 
   payLicenceFee(licence: ApplicationLicenseSummary) {
-    const crsApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore);
+    //console.log("here");
+
+    // locate the application associated with the issuance of this licence
+    const crsApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore || app.applicationTypeName === ApplicationTypeNames.Catering);
     if (crsApplication) {
       this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(crsApplication.applicationId)
         .pipe(takeWhile(() => this.componentActive))
@@ -196,10 +211,10 @@ export class LicencesComponent extends FormBase implements OnInit {
       forkJoin([
         this.licenceEventsService.getLicenceEventsList(licence.licenseId, 10)
       ])
-      .subscribe(data => {
-        console.log(data[0]);
-        licence.events = data[0];
-      });
+        .subscribe(data => {
+          console.log(data[0]);
+          licence.events = data[0];
+        });
     }
 
     if (typeof this.licenceMappings[licence.licenceTypeName] === 'undefined') {
@@ -229,7 +244,7 @@ export class LicencesComponent extends FormBase implements OnInit {
       isOpen: null
     };
 
-    const licence = Object.assign( new ApplicationLicenseSummary(), {
+    const licence = Object.assign(new ApplicationLicenseSummary(), {
       licenseId: licenceId,
       establishmentEmail: event.target.value
     });
@@ -252,7 +267,7 @@ export class LicencesComponent extends FormBase implements OnInit {
       isOpen: null
     };
 
-    const licence = Object.assign( new ApplicationLicenseSummary(), {
+    const licence = Object.assign(new ApplicationLicenseSummary(), {
       licenseId: licenceId,
       establishmentPhoneNumber: phone
     });
@@ -265,9 +280,9 @@ export class LicencesComponent extends FormBase implements OnInit {
     this.busy = forkJoin([
       this.licenceDataService.updateLicenceEstablishment(licence.licenseId, licence)
     ])
-    .subscribe(([licenceResp]) => {
-      this.addOrUpdateLicence(licenceResp);
-    });
+      .subscribe(([licenceResp]) => {
+        this.addOrUpdateLicence(licenceResp);
+      });
   }
 
   updateEstablishment(establishment: Establishment) {
@@ -285,9 +300,9 @@ export class LicencesComponent extends FormBase implements OnInit {
     this.busy = forkJoin([
       this.establishmentService.upEstablishment(establishment)
     ])
-    .subscribe(([establishmentResp]) => {
-      this.licenceMappings[licenceType][index].establishmentIsOpen = establishmentResp.isOpen;
-    });
+      .subscribe(([establishmentResp]) => {
+        this.licenceMappings[licenceType][index].establishmentIsOpen = establishmentResp.isOpen;
+      });
   }
 
   getHandbookLink(licenceType: string) {

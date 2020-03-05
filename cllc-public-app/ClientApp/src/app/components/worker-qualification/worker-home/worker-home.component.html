@@ -9,10 +9,24 @@
         <div class="col-md-9 offset-md-2 mobile-spacing" style="margin-left:24%;">
           <br>
           <p>Please select an option below:</p>
-          <p class="login-cont">
-            <strong style="margin-top: 10px">I have a BC Services Card set-up to use online</strong>
+          <div appRemoveIfFeatureOn="DisableLogin">
+            <p class="login-cont">
+              <strong style="margin-top: 10px">I have a BC Services Card set-up to use online</strong>
               <a class="btn btn-primary" href="bcservice">Login with a BC Services Card</a>
-          </p>
+            </p>
+          </div>
+          <div appRemoveIfFeatureOff="DisableLogin">
+            <p class="login-cont">
+              <strong style="margin-top: 10px">
+                The Cannabis Licensing portal is down for maintenance. It will be available again Monday, March 16, 2020.  During this time, you will not be able to log in to the site.
+              </strong>
+            </p>
+            <p class="login-cont">
+              <strong style="margin-top: 10px">
+                We apologize for any inconvenience.
+              </strong>
+            </p>
+          </div>
           <p class="login-cont">
             <strong style="margin-top: 10px">I don’t have a BC Services Card; send me a Worker Security Verification form</strong>
                 <a class="btn btn-primary" href="mailto:CannabisWorker@gov.bc.ca?subject=Send me a Worker Security Verification Application Form">Request

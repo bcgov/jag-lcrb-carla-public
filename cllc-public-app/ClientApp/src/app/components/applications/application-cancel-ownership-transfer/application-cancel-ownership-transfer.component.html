@@ -4,14 +4,14 @@
   <div *ngIf="account?.businessType">
     <div [formGroup]="form" style="padding-left: 45px; position: relative">
       <!-- Title -->
-      <h1 class="ngtest-page-title">Cancel Cannabis Retail Store Licence Transfer</h1>
+      <h1 class="ngtest-page-title">Cancel Licence Transfer</h1>
     </div>
 
     <div [formGroup]="form" class="application-wrapper">
       <!-- Preamble -->
       
 
-      <h3 class="blue-header">STORE DETAILS</h3>
+      <h3 class="blue-header">LICENCE DETAILS</h3>
       <section class="padded-section">
         <app-field label="Establishment Name" [required]="false" [valid]="isValidOrNotTouched('establishmentName')"
           errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
@@ -60,7 +60,7 @@
           <section style="display: flex">
             <input type="checkbox" formControlName="transferConsent">
             <!-- <span class="error-states">*</span> -->
-            <div style="padding-left: 10px;"> I agree to cancel the transfer of my cannabis retail store licence.
+            <div style="padding-left: 10px;"> I agree to cancel the transfer of my {{licence.licenseType}}} licence.
             </div>
           </section>
         </app-field>

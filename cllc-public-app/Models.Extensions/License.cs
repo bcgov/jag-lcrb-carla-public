@@ -107,6 +107,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (mainApplication != null)
             {
                 licenseSummary.ApplicationId = mainApplication.AdoxioApplicationid;
+                if (mainApplication.AdoxioApplicationTypeId != null)
+                {
+                    licenseSummary.ApplicationTypeName = mainApplication.AdoxioApplicationTypeId.AdoxioName;
+                }
             }
             if (crsApplication != null)
             {

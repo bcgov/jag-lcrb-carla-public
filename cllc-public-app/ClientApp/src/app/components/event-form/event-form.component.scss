@@ -17,3 +17,9 @@
   }
 }
 
+.button-row {
+  display: flex;
+  button:last-child {
+    margin-left: auto;
+  }
+}
