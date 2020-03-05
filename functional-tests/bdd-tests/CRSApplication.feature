@@ -3,11 +3,11 @@
     I want to submit a CRS Application
 
 Scenario: Start Application
-    Given I SEE the Dashboard
-    And I CLICK Start Application
-    And I CLICK on Continue to Application
-    And I COMPLETE the Application
-    And I CLICK on 'SUBMIT & PAY'
+    Given I am logged in to the dashboard
+    And I click on the Start Application button
+    And I click on the Continue to Application button
+    And I complete the application
+    And I click on the Submit & Pay button
     And I enter the payment information
     And I return to the dashboard
     And I delete my account
