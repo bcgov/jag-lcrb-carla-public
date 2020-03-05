@@ -151,7 +151,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
   getSaveLabel(): string {
     let label = 'Continue to Application';
-    if (!this.securityScreeningEnabled) {
+    //if (!this.securityScreeningEnabled) {
 
       //if No Organizational Information on File  OR changes made
       if (!this.thereIsExistingOrgStructure || (this.treeRoot && LicenseeChangeLog.HasChanges(this.treeRoot))) {
@@ -161,7 +161,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       else if (this.thereIsExistingOrgStructure && this.treeRoot && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
         label = 'Confirm Organization Information Is Complete';
       }
-    }
+    //}
     return label.toUpperCase();
   }
 
