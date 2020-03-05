@@ -72,8 +72,8 @@ namespace bdd_tests
             confirmationButton.Click();
 
             // Private Corporation
-            NgWebElement privateCorporationRadio = ngDriver.FindElement(By.Name("InitialBusinessType"));
-            privateCorporationRadio.Click();
+            //NgWebElement privateCorporationRadio = ngDriver.FindElement(By.Name("InitialBusinessType"));
+            //privateCorporationRadio.Click();
 
             // Public Corporation
             //NgWebElement publicCorporationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[2]"));
@@ -88,8 +88,8 @@ namespace bdd_tests
             //partnershipRadio.Click();
 
             // Society
-            //NgWebElement societyRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[5]"));
-            //societyRadio.Click();
+            NgWebElement societyRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[5]"));
+            societyRadio.Click();
 
             // Indigenous nation
             //NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[6]"));
