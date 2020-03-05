@@ -39,6 +39,19 @@ namespace bdd_tests
             CarlaLoginWorker();
         }
 
+        [And(@"I complete the Terms of Use")]
+        public void I_complete_the_terms_of_use()
+        {
+            NgWebElement uiCheckOne = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            uiCheckOne.Click();
+
+            NgWebElement uiCheckTwo = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'][2]"));
+            uiCheckTwo.Click();
+
+            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE')]");
+            continueButton.Click();
+        }
+
         [And(@"I click on my name")]
         public void I_click_on_my_name()
         {
@@ -74,7 +87,14 @@ namespace bdd_tests
             NgWebElement uiEmail = ngDriver.FindElement(By.XPath("//input[@type='email']"));
             uiEmail.SendKeys(email);
 
-            //select the calendar date - to do 
+            NgWebElement uiCalendarYear = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span"));
+            uiCalendarYear.Click();
+
+            NgWebElement uiCalendarMonth = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr/td/div"));
+            uiCalendarMonth.Click();
+
+            NgWebElement uiCalendarDay = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-year-view/table/tbody/tr[2]/td/div"));
+            uiCalendarDay.Click();
 
             NgWebElement uiMailingStreet = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
             uiMailingStreet.SendKeys(mailingStreet);
@@ -88,7 +108,9 @@ namespace bdd_tests
             NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
             uiPostalCode.SendKeys(postalCode);
 
-            //select the country - to do 
+            //todo: sort out label value
+            NgWebElement uiCountry = ngDriver.FindElement(By.XPath("(//select"));
+            uiCountry.Click();
         }
 
         [And(@"I complete Step 2 of the application")]
