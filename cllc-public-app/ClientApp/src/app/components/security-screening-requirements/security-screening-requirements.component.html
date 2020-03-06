@@ -9,18 +9,15 @@
                 <div class="content">
                     <p>
                         Each liquor licence associate must provide a completed Personal History Summary form along with
-                        required
-                        documents, including a copy of a recent Criminal Record
-                        Search performed by a local RCMP or police detachment.
+                        required documents, including a copy of a recent Criminal Record Search performed by a local
+                        RCMP or police detachment.
                     </p>
 
                     <h3>Outstanding Personal History Summary Forms</h3>
                     <p>
                         The following associates have not provided completed personal history summary forms. The forms
-                        can
-                        be
-                        completed using the provided link, which can be emailed or
-                        sent by SMS to associates as needed:
+                        can be completed using the provided link, which can be emailed or sent by SMS to associates as
+                        needed:
                     </p>
                     <ng-container *ngIf="data?.liquor?.outstandingItems?.length">
                         <table class="w-100">
@@ -47,9 +44,7 @@
                     <h3>Completed Personal History Summary Forms</h3>
                     <p>
                         The following associates have completed their personal history summary forms. No further
-                        information
-                        is
-                        required at this time.
+                        information is required at this time.
                     </p>
 
                     <table *ngIf="data?.liquor?.completedItems?.length" class="w-100">
@@ -69,23 +64,19 @@
                 </div>
             </ng-container>
 
-            <ng-container  *ngIf="cannabisLicenceExist || isCannabisApplication">
+            <ng-container *ngIf="cannabisLicenceExist || isCannabisApplication">
                 <h3 class="blue-header">CANNABIS</h3>
                 <div class="content">
                     <p>
-                        Each liquor licence associate must provide a completed Personal History Summary form along with
-                        required
-                        documents, including a copy of a recent Criminal Record
-                        Search performed by a local RCMP or police detachment.
+                        Each cannabis associate must provide a completed Cannabis Associate Security Screening form
+                        along with required documents.
                     </p>
 
                     <h3>Outstanding Personal History Summary Forms</h3>
                     <p>
-                        The following associates have not provided completed personal history summary forms. The forms
-                        can
-                        be
-                        completed using the provided link, which can be emailed or
-                        sent by SMS to associates as needed:
+                        The following associates have not provided completed cannabis associate security screening
+                        forms. The forms can be completed using the provided link, which can be emailed or sent by SMS
+                        to associates as needed:
                     </p>
                     <ng-container *ngIf="data?.cannabis?.outstandingItems?.length">
                         <table class="w-100">
@@ -100,10 +91,10 @@
                                 <td>{{item.firstName}}</td>
                                 <td>{{item.lastName}} </td>
                                 <td style="text-align: center;">Not Submitted</td>
-                                <td style="text-align: center;"><a href="javascript: void(0)"
-                                        (click)="copyMessage(item.screeningLink)">
+                                <td style="text-align: center;">
+                                    <!-- <a href="javascript: void(0)" (click)="copyMessage(item.screeningLink)">
                                         <i class="fas fa-copy"></i>
-                                        Copy Link</a>
+                                        Copy Link</a> -->
                                 </td>
                             </tr>
                         </table>
@@ -111,10 +102,8 @@
 
                     <h3>Completed Personal History Summary Forms</h3>
                     <p>
-                        The following associates have completed their personal history summary forms. No further
-                        information
-                        is
-                        required at this time.
+                        The following associates have completed their cannabis associate security screening forms. No
+                        further information is required at this time.
                     </p>
 
                     <table *ngIf="data?.cannabis?.completedItems?.length" class="w-100">
