@@ -69,11 +69,16 @@
         [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
         [entityId]="account?.id" [uploadHeader]="'TO UPLOAD SPECIAL RIGHTS AND RESTRICTIONS, DRAG FILE HERE OR'">
       </app-file-uploader>
-      <app-field label="Total Number of Voting Shares" errorMessage="Please enter value"
+    </section>
+
+    <!--h3 class="plain-header">Total Number of Voting Shares</h3>
+    <section class="padded-section">
+    <p>Please enter the total number of voting shares in your corporation.</p>
+      <app-field errorMessage="Please enter value"
       [valid]="!form.get('totalShares').touched || form.get('totalShares').touched">
       <input type="number" formControlName="totalShares" class="form-control">
       </app-field>
-    </section>
+    </section-->
 
   </ng-container>
 
