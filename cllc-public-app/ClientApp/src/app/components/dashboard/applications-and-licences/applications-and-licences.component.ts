@@ -56,6 +56,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   ApplicationTypeNames = ApplicationTypeNames;
   licenceTransferFeatureOn = false;
   licenseeChangeFeatureOn: boolean;
+  liquorOne: boolean;
 
 
   constructor(
@@ -81,7 +82,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       this.licenceTransferFeatureOn = featureOn;
     });
     featureFlagService.featureOn('LicenseeChanges')
-    .subscribe(x => this.licenseeChangeFeatureOn = x);
+      .subscribe(x => this.licenseeChangeFeatureOn = x);
+    featureFlagService.featureOn('LiquorOne')
+      .subscribe(x => this.liquorOne = x);
   }
 
   ngOnInit() {
@@ -281,6 +284,29 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       () => {
         this.snackBar.open('Error starting a New Marketer Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         console.log('Error starting a New Marketer Application');
+      }
+    );
+  }
+
+  startNewCateringApplication() {
+    const newLicenceApplicationData: Application = <Application>{
+      licenseType: 'Catering',
+      applicantType: this.account.businessType,
+      applicationType: <ApplicationType>{ name: ApplicationTypeNames.Catering },
+      account: this.account,
+    };
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        const route: any[] = [`/multi-step-application/${data.id}`];
+ 
+        route.push({ useDynamicFormMode: true });
+        
+        this.router.navigate(route);        
+      },
+      () => {
+        this.snackBar.open('Error starting a Catering Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a Catering Application');
       }
     );
   }

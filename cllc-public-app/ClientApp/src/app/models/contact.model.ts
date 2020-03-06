@@ -38,4 +38,5 @@ export class PHSContact {
   id: string;
   token: string;
   shortName: string;
+  isComplete: boolean;
 }

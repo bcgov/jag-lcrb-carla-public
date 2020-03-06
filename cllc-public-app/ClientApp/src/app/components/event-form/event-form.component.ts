@@ -48,14 +48,15 @@ export class EventFormComponent extends FormBase implements OnInit {
     name: ['', []],
     licenceId: ['', []],
     accountId: ['', []],
+    eventClass: ['', []],
     contactName: ['', [Validators.required]],
     contactPhone: ['', [Validators.required]],
     contactEmail: ['', [Validators.required]],
-    eventClass: ['', [Validators.required]],
     eventType: ['', [Validators.required]],
     eventTypeDescription: ['', [Validators.required]],
     clientHostname: ['', [Validators.required]],
     maxAttendance: ['', [Validators.required]],
+    maxStaffAttendance: ['', [Validators.required]],
     minorsAttending: ['', [Validators.required]],
     foodService: ['', [Validators.required]],
     foodServiceDescription: ['', []],
@@ -122,6 +123,7 @@ export class EventFormComponent extends FormBase implements OnInit {
   setFormToLicenceEvent(licenceEvent: LicenceEvent) {
     const schedules = licenceEvent['schedules'];
     delete licenceEvent['schedules'];
+    delete licenceEvent['modifiedOn'];
     this.eventForm.setValue({
       ...licenceEvent,
       agreement: false
@@ -157,7 +159,11 @@ export class EventFormComponent extends FormBase implements OnInit {
 
   save(submit = false) {
     if (submit) {
-      this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'In Review').value);
+      if (this.getOptionFromValue(this.eventClass, this.eventForm.controls['eventClass'].value).label === 'Notice') {
+        this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Approved').value);
+      } else {
+        this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'In Review').value);
+      }
     }
 
     const schedules = this.packageUpTimeForms();
@@ -227,7 +233,11 @@ export class EventFormComponent extends FormBase implements OnInit {
     const option = this.getOptionFromValue(options, this.eventForm.controls[fieldName].value);
     if (option.label !== 'Other') {
       this.eventForm.controls[relatedField].setValue('');
+      this.eventForm.controls[relatedField].setValidators([]);
+    } else {
+      this.eventForm.controls[relatedField].setValidators([Validators.required]);
     }
+    this.eventForm.controls[relatedField].updateValueAndValidity();
   }
 
   updateLicence(schedules) {
@@ -286,7 +296,6 @@ export class EventFormComponent extends FormBase implements OnInit {
   }
 
   startDateChanged() {
-    console.log(this.eventForm.controls['startDate'].value);
     this.updateEndDateMinimum();
     this.refreshTimeDays();
   }
@@ -347,5 +356,67 @@ export class EventFormComponent extends FormBase implements OnInit {
         arr.push(new Date(dt));
     }
     return arr;
+  }
+
+  isFormValid() {
+    return this.eventForm.invalid || !this.eventForm.controls['agreement'].value;
+  }
+
+  handleFormChange() {
+    let isHighRisk = false;
+
+    // Attendance > 500
+    const maxAttendance = this.eventForm.controls['maxAttendance'].value === '' ? 0 : this.eventForm.controls['maxAttendance'].value;
+    const maxStaffAttendance = this.eventForm.controls['maxStaffAttendance'].value === '' ? 0 : this.eventForm.controls['maxStaffAttendance'].value;
+    if (maxAttendance + maxStaffAttendance >= 500) {
+      isHighRisk = true;
+    }
+
+    // Location is outdoors
+    const location = this.getOptionFromValue(this.specificLocation, this.eventForm.controls['specificLocation'].value);
+    if (location.label === 'Outdoors' || location.label === 'Both') {
+      isHighRisk = true;
+    }
+
+    // liquor service > 2 hours (but not community event)
+    if (this.getOptionFromValue(this.eventType, this.eventForm.controls['eventType'].value).label !== 'Community') {
+      this.timeForms.value.forEach((form) => {
+        const endDate = new Date();
+        endDate.setHours(form.liquorEndTime.hour);
+        endDate.setMinutes(form.liquorEndTime.minute);
+        const startDate = new Date();
+        startDate.setHours(form.liquorStartTime.hour);
+        startDate.setMinutes(form.liquorStartTime.minute);
+
+        const diff = (endDate.getTime() - startDate.getTime()) / 1000 / 60 / 60;
+        if ((diff < 0 && 24 - diff > 2) || (diff > 2)) {
+          isHighRisk = true;
+        }
+      });
+    }
+
+    if (isHighRisk) {
+      const authorizationVal = this.getOptionFromLabel(this.eventClass, 'Authorization').value;
+      this.eventForm.controls['eventClass'].setValue(authorizationVal);
+    } else {
+      const noticeVal = this.getOptionFromLabel(this.eventClass, 'Notice').value;
+      this.eventForm.controls['eventClass'].setValue(noticeVal);
+    }
+  }
+
+  getEventClassLabel() {
+    return this.getOptionFromValue(this.eventClass, this.eventForm.get('eventClass').value).label;
+  }
+
+  cancel() {
+    if (this.isEditMode) {
+      const id = this.eventForm.get('id').value;
+      this.eventForm.reset();
+      this.eventForm.controls['id'].setValue(id);
+      this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Cancelled').value);
+      this.updateLicence([]);
+    } else {
+      this.router.navigate(['/licences']);
+    }
   }
 }

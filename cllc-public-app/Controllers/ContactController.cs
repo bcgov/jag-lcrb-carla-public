@@ -21,6 +21,7 @@ using System.Net;
 using Google.Protobuf;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using System.Web;
+using Gov.Lclb.Cllb.Public.ViewModels;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -141,7 +142,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // get the contact
-            string contactId = EncryptionUtility.DecryptString(token, _encryptionKey);
+            string contactId = EncryptionUtility.DecryptStringHex(token, _encryptionKey);
             Guid contactGuid = Guid.Parse(contactId);
 
             MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(contactGuid);
@@ -456,7 +457,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task CreateSharepointDynamicsLink(MicrosoftDynamicsCRMadoxioWorker worker)
         {
             // create a SharePointDocumentLocation link
-            string folderName = worker.GetDocumentFolderName(); 
+            string folderName = worker.GetDocumentFolderName();
             string name = worker.AdoxioWorkerid + " Files";
 
             _fileManagerClient.CreateFolderIfNotExist(_logger, WorkerDocumentUrlTitle, folderName);
@@ -620,7 +621,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         Id = contact.Contactid,
                         token = code,
-                        shortName = (contact.Firstname.First().ToString() + " " + contact.Lastname)
+                        shortName = (contact.Firstname.First().ToString() + " " + contact.Lastname),
+                        isComplete = (contact.AdoxioPhscomplete == (int)YesNoOptions.Yes)
                     };
                     return new JsonResult(result);
                 }
@@ -641,5 +643,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public string Id { get; set; }
         public string token { get; set; }
         public string shortName { get; set; }
+
+        public bool isComplete { get; set; }
     }
 }

@@ -169,7 +169,8 @@ namespace Gov.Lclb.Cllb.Public
                 .AddCheck<DynamicsHealthCheck>("Dynamics")
                 .AddCheck<GeocoderHealthCheck>("Geocoder");
 
-            services.AddSession();
+            services.AddSession(x => x.IdleTimeout = TimeSpan.FromHours(4.0));
+
         }
 
         private void SetupServices(IServiceCollection services)
