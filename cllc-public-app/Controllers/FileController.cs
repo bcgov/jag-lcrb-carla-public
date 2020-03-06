@@ -70,11 +70,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 case "account":
                     var account = await _dynamicsClient.GetAccountByIdAsync(id).ConfigureAwait(true);
-                    result = account != null && CurrentUserHasAccessToApplicationOwnedBy(account.Accountid);
+                    result = account != null && CurrentUserHasAccessToAccount(account.Accountid);
                     break;
                 case "application":
                     var application = await _dynamicsClient.GetApplicationById(id).ConfigureAwait(true);
-                    result = application != null && CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue);
+                    result = application != null && CurrentUserHasAccessToAccount(application._adoxioApplicantValue);
                     break;
                 case "contact":
                     var contact = await _dynamicsClient.GetContactById(id).ConfigureAwait(true);
@@ -83,6 +83,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 case "worker":
                     var worker = await _dynamicsClient.GetWorkerById(id).ConfigureAwait(true);
                     result = worker != null && CurrentUserHasAccessToContactOwnedBy(worker._adoxioContactidValue);
+                    break;
+                case "event":
+                    var eventEntity = _dynamicsClient.GetEventById(id);
+                    result = eventEntity != null && CurrentUserHasAccessToAccount(eventEntity._adoxioAccountValue);
                     break;
                 default:
                     break;
@@ -133,7 +137,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Verify whether currently logged in user has access to this account id
         /// </summary>
         /// <returns>boolean</returns>
-        private bool CurrentUserHasAccessToApplicationOwnedBy(string accountId)
+        private bool CurrentUserHasAccessToAccount(string accountId)
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -292,45 +296,59 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             string result = null;
             var id = Guid.Parse(entityId);
-            switch (entityName.ToLower())
+            try
             {
-                case "account":
-                    var account = _dynamicsClient.GetAccountById(entityId);
-                    var accountLocation = account.AccountSharepointDocumentLocation.FirstOrDefault();
-                    if (accountLocation != null && !string.IsNullOrEmpty(accountLocation.Relativeurl))
-                    {
-                        result = accountLocation.Relativeurl;
-                    }
-                    break;
-                case "application":
-                    var application = await _dynamicsClient.GetApplicationByIdWithChildren(entityId).ConfigureAwait(true);
-                    var applicationLocation = application.AdoxioApplicationSharePointDocumentLocations.FirstOrDefault();
-                    if (applicationLocation != null && !string.IsNullOrEmpty(applicationLocation.Relativeurl))
-                    {
-                        result = applicationLocation.Relativeurl;
-                    }
-                    break;
-                case "contact":
-                    var contact = await _dynamicsClient.GetContactById(entityId).ConfigureAwait(true);
-                    var contactLocation = contact.ContactSharePointDocumentLocations.FirstOrDefault();
-                    if (contactLocation != null && !string.IsNullOrEmpty(contactLocation.Relativeurl))
-                    {
-                        result = contactLocation.Relativeurl;
-                    }
-                    break;
-                case "worker":
-                    var worker = await _dynamicsClient.GetWorkerByIdWithChildren(entityId).ConfigureAwait(true);
-                    var workerLocation = worker.AdoxioWorkerSharePointDocumentLocations.FirstOrDefault();
-                    if (workerLocation != null && !string.IsNullOrEmpty(workerLocation.Relativeurl))
-                    {
-                        result = workerLocation.Relativeurl;
-                    }
-                    break;
-                
+                switch (entityName.ToLower())
+                {
+                    case "account":
+                        var account = _dynamicsClient.GetAccountById(entityId);
+                        var accountLocation = account.AccountSharepointDocumentLocation.FirstOrDefault();
+                        if (accountLocation != null && !string.IsNullOrEmpty(accountLocation.Relativeurl))
+                        {
+                            result = accountLocation.Relativeurl;
+                        }
+                        break;
+                    case "application":
+                        var application = await _dynamicsClient.GetApplicationByIdWithChildren(entityId).ConfigureAwait(true);
+                        var applicationLocation = application.AdoxioApplicationSharePointDocumentLocations.FirstOrDefault();
+                        if (applicationLocation != null && !string.IsNullOrEmpty(applicationLocation.Relativeurl))
+                        {
+                            result = applicationLocation.Relativeurl;
+                        }
+                        break;
+                    case "contact":
+                        var contact = await _dynamicsClient.GetContactById(entityId).ConfigureAwait(true);
+                        var contactLocation = contact.ContactSharePointDocumentLocations.FirstOrDefault();
+                        if (contactLocation != null && !string.IsNullOrEmpty(contactLocation.Relativeurl))
+                        {
+                            result = contactLocation.Relativeurl;
+                        }
+                        break;
+                    case "worker":
+                        var worker = await _dynamicsClient.GetWorkerByIdWithChildren(entityId).ConfigureAwait(true);
+                        var workerLocation = worker.AdoxioWorkerSharePointDocumentLocations.FirstOrDefault();
+                        if (workerLocation != null && !string.IsNullOrEmpty(workerLocation.Relativeurl))
+                        {
+                            result = workerLocation.Relativeurl;
+                        }
+                        break;
+                    case "event":
+                        var eventEntity = _dynamicsClient.GetEventByIdWithChildren(entityId);
+                        var eventLocation = eventEntity.AdoxioEventSharePointDocumentLocations.FirstOrDefault();
+                        if (eventLocation != null && !string.IsNullOrEmpty(eventLocation.Relativeurl))
+                        {
+                            result = eventLocation.Relativeurl;
+                        }
+                        break;
 
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
+            }
+            catch (System.ArgumentNullException)
+            {
+                return null;
             }
             return result;
         }
@@ -356,6 +374,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 case "worker":
                     var worker = await _dynamicsClient.GetWorkerByIdWithChildren(entityId).ConfigureAwait(true);
                     await CreateWorkerDocumentLocation(worker, folderName, name).ConfigureAwait(true);
+                    break;
+                case "event":
+                    var eventEntity = _dynamicsClient.GetEventByIdWithChildren(entityId);
+                    await CreateEventDocumentLocation(eventEntity, folderName, name).ConfigureAwait(true);
                     break;
 
                 default:
@@ -623,6 +645,71 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
+        private async Task CreateEventDocumentLocation(MicrosoftDynamicsCRMadoxioEvent eventEntity, string folderName, string name)
+        {
+
+            // now create a document location to link them.
+
+            // Create the SharePointDocumentLocation entity
+            MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+            {
+                Relativeurl = folderName,
+                Description = "Event Files",
+                Name = name
+            };
+
+
+            try
+            {
+                mdcsdl = _dynamicsClient.Sharepointdocumentlocations.Create(mdcsdl);
+            }
+            catch (HttpOperationException odee)
+            {
+                _logger.LogError(odee, "Error creating SharepointDocumentLocation");
+                mdcsdl = null;
+            }
+            if (mdcsdl != null)
+            {
+
+                // set the parent document library.
+                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL("adoxio_event");
+
+                string eventUri = _dynamicsClient.GetEntityURI("adoxio_event", eventEntity.AdoxioEventid);
+                // add a regardingobjectid.
+                var patchSharePointDocumentLocationContact = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+                {
+                    RegardingobjectIdContactODataBind = eventUri,
+                    ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference),
+                    Relativeurl = folderName,
+                    Description = "Event Files",
+                };
+
+                try
+                {
+                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocationContact);
+                }
+                catch (HttpOperationException odee)
+                {
+                    _logger.LogError(odee, "Error adding reference SharepointDocumentLocation to contact");
+                }
+
+                string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
+
+                Odataid oDataId = new Odataid()
+                {
+                    OdataidProperty = sharePointLocationData
+                };
+                try
+                {
+                    _dynamicsClient.Events.AddReference(eventEntity.AdoxioEventid, "adoxio_application_SharePointDocumentLocations", oDataId);
+                }
+                catch (HttpOperationException odee)
+                {
+                    _logger.LogError(odee, "Error adding reference to SharepointDocumentLocation");
+                }
+            }
+        }
+
         /// <summary>
         /// Returns the folder name for a given entity
         /// </summary>
@@ -650,6 +737,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 case "worker":
                     var worker = await _dynamicsClient.GetWorkerById(Guid.Parse(entityId)).ConfigureAwait(true);
                     folderName = worker.GetDocumentFolderName();
+                    break;
+                case "event":
+                    var eventEntity = _dynamicsClient.GetEventById(Guid.Parse(entityId));
+                    folderName = eventEntity.GetDocumentFolderName();
                     break;
                 default:
                     break;
