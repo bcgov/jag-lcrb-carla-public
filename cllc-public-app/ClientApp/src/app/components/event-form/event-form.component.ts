@@ -72,13 +72,7 @@ export class EventFormComponent extends FormBase implements OnInit {
     postalCode: ['', [Validators.required]],
     startDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]],
-    agreement: [false, [Validators.required]],
-    // unused
-    externalId: ['', []],
-    eventNumber: ['', []],
-    importSequenceNumber: ['', []],
-    communityApproval: ['', []],
-    notifyEventInspector: ['', []]
+    agreement: [false, [Validators.required]]
   });
 
   constructor(
@@ -100,9 +94,9 @@ export class EventFormComponent extends FormBase implements OnInit {
         }
       });
       this.startDateMinimum = new Date();
-      this.startDateMinimum.setDate(this.startDateMinimum.getDate() + 21);
+      this.startDateMinimum.setDate(this.startDateMinimum.getDate());
       this.endDateMinimum = new Date();
-      this.endDateMinimum.setDate(this.endDateMinimum.getDate() + 21);
+      this.endDateMinimum.setDate(this.endDateMinimum.getDate());
     }
 
   ngOnInit() {
@@ -122,10 +116,36 @@ export class EventFormComponent extends FormBase implements OnInit {
 
   setFormToLicenceEvent(licenceEvent: LicenceEvent) {
     const schedules = licenceEvent['schedules'];
-    delete licenceEvent['schedules'];
-    delete licenceEvent['modifiedOn'];
     this.eventForm.setValue({
-      ...licenceEvent,
+      status: licenceEvent.status,
+      id: licenceEvent.id,
+      name: licenceEvent.name,
+      licenceId: licenceEvent.licenceId,
+      accountId: licenceEvent.accountId,
+      eventClass: licenceEvent.eventClass,
+      contactName: licenceEvent.contactName,
+      contactPhone: licenceEvent.contactPhone,
+      contactEmail: licenceEvent.contactEmail,
+      eventType: licenceEvent.eventType,
+      eventTypeDescription: licenceEvent.eventTypeDescription,
+      clientHostname: licenceEvent.clientHostname,
+      maxAttendance: licenceEvent.maxAttendance,
+      maxStaffAttendance: licenceEvent.maxStaffAttendance,
+      minorsAttending: licenceEvent.minorsAttending,
+      foodService: licenceEvent.foodService,
+      foodServiceDescription: licenceEvent.foodServiceDescription,
+      entertainment: licenceEvent.entertainment,
+      entertainmentDescription: licenceEvent.entertainmentDescription,
+      venueDescription: licenceEvent.venueDescription,
+      specificLocation: licenceEvent.specificLocation,
+      additionalLocationInformation: licenceEvent.additionalLocationInformation,
+      street1: licenceEvent.street1,
+      street2: licenceEvent.street2,
+      city: licenceEvent.city,
+      province: licenceEvent.province,
+      postalCode: licenceEvent.postalCode,
+      startDate: new Date(licenceEvent.startDate),
+      endDate: new Date(licenceEvent.endDate),
       agreement: false
     });
 
@@ -331,8 +351,6 @@ export class EventFormComponent extends FormBase implements OnInit {
 
   updateEndDateMinimum() {
     if (this.eventForm.controls['startDate'].value === null || this.eventForm.controls['startDate'].value === '') {
-      this.endDateMinimum = new Date();
-      this.endDateMinimum.setDate(this.endDateMinimum.getDate() + 21);
       this.endDateMaximum = null;
     } else if (this.eventForm.controls['endDate'].value === null || this.eventForm.controls['endDate'].value === '') {
       this.endDateMinimum = this.eventForm.controls['startDate'].value;
