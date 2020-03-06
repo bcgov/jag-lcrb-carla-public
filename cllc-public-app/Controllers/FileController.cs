@@ -674,11 +674,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // set the parent document library.
                 string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL("adoxio_event");
 
-                string eventUri = _dynamicsClient.GetEntityURI("adoxio_event", eventEntity.AdoxioEventid);
+                string eventUri = _dynamicsClient.GetEntityURI("adoxio_events", eventEntity.AdoxioEventid);
                 // add a regardingobjectid.
-                var patchSharePointDocumentLocationContact = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+                var patchSharePointDocumentLocationEvent = new MicrosoftDynamicsCRMsharepointdocumentlocation()
                 {
-                    RegardingobjectIdContactODataBind = eventUri,
+                    RegardingobjectIdEventODataBind = eventUri,
                     ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference),
                     Relativeurl = folderName,
                     Description = "Event Files",
@@ -686,11 +686,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 try
                 {
-                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocationContact);
+                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocationEvent);
                 }
                 catch (HttpOperationException odee)
                 {
-                    _logger.LogError(odee, "Error adding reference SharepointDocumentLocation to contact");
+                    _logger.LogError(odee, "Error adding reference SharepointDocumentLocation to event");
                 }
 
                 string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
@@ -701,7 +701,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 };
                 try
                 {
-                    _dynamicsClient.Events.AddReference(eventEntity.AdoxioEventid, "adoxio_application_SharePointDocumentLocations", oDataId);
+                    _dynamicsClient.Events.AddReference(eventEntity.AdoxioEventid, "adoxio_event_SharePointDocumentLocations", oDataId);
                 }
                 catch (HttpOperationException odee)
                 {

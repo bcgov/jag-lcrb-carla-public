@@ -173,7 +173,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     listTitle = "adoxio_worker";
                     break;
                 case "event":
-                    listTitle = SharePointFileManager.EventDocumentUrlTitle;
+                    listTitle = SharePointFileManager.EventDocumentListTitle;
                     break;
                 default:
                     break;
