@@ -99,9 +99,6 @@ namespace bdd_tests
             NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
             corpConnectionFederalProducer.Click();
 
-            //NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
-            //federalProducerConnectionToCorp.Click();
-
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
             continueApp_button.Click();
 
