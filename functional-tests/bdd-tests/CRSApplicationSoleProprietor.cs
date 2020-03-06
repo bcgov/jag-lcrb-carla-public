@@ -37,10 +37,10 @@ namespace bdd_tests
 
         // Dashboard related common actions
 
-        [Given(@"I am logged in to the dashboard as a sole proprietor")]
-        public void I_view_the_dashboard()
+        [Given(@"I am logged in to the dashboard as a (.*)")]
+        public void I_view_the_dashboard(string businessType)
         {
-            CarlaLogin();
+            CarlaLogin(businessType);
         }
 
         [And(@"I am not a marketer")]

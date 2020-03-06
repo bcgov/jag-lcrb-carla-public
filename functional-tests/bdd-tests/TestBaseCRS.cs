@@ -53,7 +53,7 @@ namespace bdd_tests
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
 
-        public void CarlaLogin()
+        public void CarlaLogin(string businessType)
         {
             // load the dashboard page
             string test_start = configuration["test_start"];
@@ -72,28 +72,46 @@ namespace bdd_tests
             confirmationButton.Click();
 
             // Private Corporation
-            //NgWebElement privateCorporationRadio = ngDriver.FindElement(By.Name("InitialBusinessType"));
-            //privateCorporationRadio.Click();
+            if (businessType == "private corporation")
+            {
+                NgWebElement privateCorporationRadio = ngDriver.FindElement(By.Name("InitialBusinessType"));
+                privateCorporationRadio.Click();
+            }
 
             // Public Corporation
-            //NgWebElement publicCorporationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[2]"));
-            //publicCorporationRadio.Click();
+            if (businessType == "public corporation")
+            {
+                NgWebElement publicCorporationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[2]"));
+                publicCorporationRadio.Click();
+            }
 
-            // Sole Proprietorship - has different fields!
-            //NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[3]"));
-            //soleProprietorshipRadio.Click();
+            // Sole Proprietorship
+            if (businessType == "sole proprietorship")
+            {
+                NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[3]"));
+                soleProprietorshipRadio.Click();
+            }
 
             // Partnership
-            //NgWebElement partnershipRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[4]"));
-            //partnershipRadio.Click();
+            if (businessType == "partnership")
+            {
+                NgWebElement partnershipRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[4]"));
+                partnershipRadio.Click();
+            }
 
             // Society
-            NgWebElement societyRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[5]"));
-            societyRadio.Click();
+            if (businessType == "society")
+            {
+                NgWebElement societyRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[5]"));
+                societyRadio.Click();
+            }
 
             // Indigenous nation
-            //NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[6]"));
-            //indigenousNationRadio.Click();
+            if (businessType == "indigenous nation")
+            {
+                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[6]"));
+                indigenousNationRadio.Click();
+            }
 
             NgWebElement nextButton = ngDriver.FindElement(By.XPath("//button[contains(.,'Next')]"));
             nextButton.Click();
