@@ -149,12 +149,7 @@ namespace bdd_tests
             string conEmail = "contact@email.com";
             string indigenousNation = "Ashcroft Indian Band";
 
-            //select an indigenous nation from the dropdown
-
-            //find the dropdown
             NgWebElement uiSelectNation = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select"));
-            //select the correct value ='Ashcroft Indian Band'
-            //uiSelectNation.Click();
             uiSelectNation.SendKeys(indigenousNation);
 
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
