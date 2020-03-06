@@ -13,7 +13,7 @@ using System.IO;
 
 namespace bdd_tests
 {
-    public abstract class TestBase : Feature
+    public abstract class TestBaseWorker : Feature
     {
         protected RemoteWebDriver driver;
         // Protractor driver
@@ -25,7 +25,7 @@ namespace bdd_tests
 
         protected string baseUri;
 
-        protected TestBase()
+        protected TestBaseWorker()
         {
             string path = Directory.GetCurrentDirectory();
 
@@ -46,38 +46,43 @@ namespace bdd_tests
             driver = new ChromeDriver(path, options);
             
             //driver = new FirefoxDriver(FirefoxDriverService);
-            driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(10);  // max 10 seconds for any page, to allow for slow test servers
+            driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(60);
 
             ngDriver = new NgWebDriver(driver);
-
-            
 
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
 
-        public void CarlaLogin()
+        public void CarlaLoginWorker()
         {
             // load the dashboard page
-            string test_start = configuration["test_start"];
+            string test_start = configuration["test_start_worker"];
             
             ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
 
-            //ngDriver.WaitForAngular();
+            ngDriver.WaitForAngular();
+        }
 
-            //ngDriver.Navigate().GoToUrl($"{baseUri}");
-            //NgWebElement butt = ngDriver.FindElement(By.XPath("(.//*[normalize-space(text()) and normalize-space(.)='OR'])[1]/following::strong[1]"));
+        public void MakeWorkerPayment()
+        {
+            string testCC = configuration["test_cc"];
+            string testCVD = configuration["test_ccv"];
 
-            //butt.Click();
+            System.Threading.Thread.Sleep(10000);
 
-            //IWebElement username = driver.FindElement(By.Id("user"));
-            //username.SendKeys(configuration["testUser1"]);
-            //IWebElement password = driver.FindElement(By.Id("password"));
+            //browser sync - don't wait for Angular
+            ngDriver.IgnoreSynchronization = true;
 
-            //password.SendKeys(configuration["testPass1"]);
+            driver.FindElementByName("trnCardNumber").SendKeys(testCC);
 
-            //IWebElement sub = driver.FindElement(By.Name("btnSubmit"));
+            driver.FindElementByName("trnCardCvd").SendKeys(testCVD);
 
-            //sub.Click();
+            driver.FindElementByName("submitButton").Click();
+
+            System.Threading.Thread.Sleep(10000);
+
+            //turn back on when returning to Angular
+            ngDriver.IgnoreSynchronization = false;
         }
 
         public void CarlaDeleteCurrentAccount()

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FeatureFlagService } from '@services/feature-flag.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-multi-stage-application-flow',
@@ -8,10 +9,17 @@ import { FeatureFlagService } from '@services/feature-flag.service';
 })
 export class MultiStageApplicationFlowComponent implements OnInit {
   securityScreeningEnabled: boolean;
+  useDynamicFormMode: boolean = false;
 
-  constructor(public featureFlagService: FeatureFlagService) {
+  constructor(public featureFlagService: FeatureFlagService, private route: ActivatedRoute, ) {
+
     featureFlagService.featureOn('SecurityScreening')
-    .subscribe(featureOn => this.securityScreeningEnabled = featureOn);
+      .subscribe(featureOn => this.securityScreeningEnabled = featureOn);
+
+    this.route.paramMap.subscribe(params => {
+      
+      this.useDynamicFormMode = params.get('useDynamicFormMode') === 'true';
+    });
    }
 
   ngOnInit() {

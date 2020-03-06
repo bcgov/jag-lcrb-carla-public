@@ -14,7 +14,7 @@ getApiProxyConfigSection (){
   _LOGIN_URL="${1}login/"
   _HEALTH_CHECK_URL="${1}hc/"
   _LOGOUT_URL="${1}logout/"
-  _BCSERVICE_URL="${1}/bcservice/"
+  _BCSERVICE_URL="${1}bcservice/"
 
   read -r -d '' _CONFIG_SECTION << EOF
 # proxy requests to the API
@@ -126,7 +126,7 @@ getApiUrl (){
   #   Results in API_URL=https://django-devex-von-dev.pathfinder.gov.bc.ca/api/v1/   
   # ================================================================================
   if [ ! -z "${API_SERVICE_NAME}" ]; then
-    _SERVICE_NAME="$(tr '[:lower:]' '[:upper:]' <<< ${API_SERVICE_NAME/-/_})"
+    _SERVICE_NAME="$(tr '[:lower:]' '[:upper:]' <<< ${API_SERVICE_NAME//-/_})"
     _SERVICE_HOST_NAME=${_SERVICE_NAME}_SERVICE_HOST
     _SERVICE_PORT_NAME=${_SERVICE_NAME}_SERVICE_PORT
 

@@ -13,6 +13,7 @@ export class LicenceEvent {
   clientHostname: string;
   eventTypeDescription: string;
   maxAttendance: number;
+  maxStaffAttendance: number;
   minorsAttending: boolean;
   communityApproval: boolean;
   licenceId: string;
@@ -21,6 +22,7 @@ export class LicenceEvent {
   street2: string;
   city: string;
   postalCode: string;
+  modifiedOn: Date;
   schedules: [];
 
   // picklists
@@ -82,7 +84,7 @@ export const SpecificLocation = [
 
 export const EventClass = [
   {
-    label: 'Approval',
+    label: 'Authorization',
     value: 845280000
   },
   {

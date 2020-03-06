@@ -21,14 +21,17 @@ export class OrgStructureComponent implements OnInit {
   ngOnInit() {
     let numberOfMembers: number = null;
     let annualMembershipFee: number = null;
+    let totalShares: number = null;
     if (this.node) {
       numberOfMembers = this.node.numberOfMembers;
       annualMembershipFee = this.node.annualMembershipFee;
+      totalShares = this.node.totalSharesOld;
     }
 
     this.form = this.fb.group({
       numberOfMembers: [numberOfMembers, [Validators.required]],
-      annualMembershipFee: [annualMembershipFee, [Validators.required]]
+      annualMembershipFee: [annualMembershipFee, [Validators.required]],
+      totalShares: [totalShares, [Validators.required]]
     })
 
     this.form.valueChanges
@@ -36,6 +39,7 @@ export class OrgStructureComponent implements OnInit {
         if (this.node) {
           this.node.numberOfMembers = value.numberOfMembers;
           this.node.annualMembershipFee = value.annualMembershipFee;
+          this.node.totalSharesNew = value.totalShares;
         }
       });
 
