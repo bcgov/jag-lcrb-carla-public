@@ -57,6 +57,45 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.PostalCode = item.AdoxioPostalcode;
                 result.ModifiedOn = item.Modifiedon;
                 result.Schedules = new List<LicenceEventSchedule>();
+                // Security Plan
+                result.SecurityPlanRequested = item.AdoxioRequestsafetysecurityplan;
+                result.EventLiquorLayout = item.AdoxioEventliquorlayout;
+                result.DailyEventAttendees = item.AdoxioNumberdailyeventattendees;
+                result.DailyMinorAttendees = item.AdoxioNumberdailyminorattendees;
+                result.OccupantLoad = item.AdoxioEventoccupantload;
+                result.OccupantLoadAvailable = item.AdoxioIseventloadavailable;
+                result.OccupantLoadServiceArea = item.AdoxioEventoccupantloadservicesarea;
+                result.OccupantLoadServiceAreaAvailable = item.AdoxioIsservicearealoadavailable;
+                result.ServiceAreaControlledDetails = item.AdoxioEventliquorcontainment;
+                result.StaffingManagers = item.AdoxioEventstaffingmanagers;
+                result.StaffingBartenders = item.AdoxioEventstaffingbartenders;
+                result.StaffingServers = item.AdoxioEventstaffingservers;
+                result.SecurityPersonnel = item.AdoxioSecuritycompanysummary;
+                result.SecurityPersonnelThroughCompany = item.AdoxioSecuritypersonnelnumberhired;
+                result.SecurityCompanyName = item.AdoxioSecuritycompanyname;
+                result.SecurityCompanyAddress = item.AdoxioSecuritycompanystreet;
+                result.SecurityCompanyCity = item.AdoxioSecuritycompanycity;
+                result.SecurityCompanyPostalCode = item.AdoxioSecuritycompanypostal;
+                result.SecurityCompanyContactPerson = item.AdoxioSecuritycompanycontactname;
+                result.SecurityCompanyPhoneNumber = item.AdoxioSecuritycompanycontactphone;
+                result.SecurityCompanyEmail = item.AdoxioSecuritycompanycontactemail;
+                result.SecurityPoliceOfficerSummary = item.AdoxioPoliceofficersummary;
+                result.SafeAndResponsibleMinorsNotAttending = item.AdoxioIsminorsattending;
+                result.SafeAndResponsibleLiquorAreaControlled = item.AdoxioIsliquorareacontrolled;
+                result.SafeAndResponsibleLiquorAreaControlledDescription = item.AdoxioLiquorareacontrolleddetails;
+                result.SafeAndResponsibleMandatoryID = item.AdoxioIstwopiecesidrequired;
+                result.SafeAndResponsibleSignsAdvisingMinors = item.AdoxioIssignsadvisingminors;
+                result.SafeAndResponsibleMinorsOther = item.AdoxioIsotherminorssafety;
+                result.SafeAndResponsibleMinorsOtherDescription = item.AdoxioIsotherminorssafetydetails;
+                result.SafeAndResponsibleSignsAdvisingRemoval = item.AdoxioIssignsintoxicatedpersons;
+                result.SafeAndResponsibleSignsAdvisingTwoDrink = item.AdoxioIssignstwodrinkmax;
+                result.SafeAndResponsibleOverConsumptionOther = item.AdoxioIsotherconsumptionsafety;
+                result.SafeAndResponsibleOverConsumptionOtherDescription = item.AdoxioIsotherconsumptionsafetydetails;
+                result.SafeAndResponsibleReadAppendix2 = item.AdoxioIsdisturbanceappendix2;
+                result.SafeAndResponsibleDisturbancesOther = item.AdoxioIsotherdisturbance;
+                result.SafeAndResponsibleDisturbancesOtherDescription = item.AdoxioIsotherdisturbancedetails;
+                result.SafeAndResponsibleAdditionalSafetyMeasures = item.AdoxioAdditionalsafetydetails;
+                result.DeclarationIsAccurate = item.AdoxioIsdeclarationaccurate;
             }
 
             MicrosoftDynamicsCRMadoxioEventscheduleCollection eventSchedules = dynamicsClient.GetEventSchedulesByEventId(result.Id);
@@ -74,7 +113,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             to.AdoxioEventid = from.Id;
             to.AdoxioName = from.Name;
-            to.Statuscode = (int)from.Status;
+            to.Statuscode = (int?)from.Status;
             to.AdoxioStartdate = from.StartDate;
             to.AdoxioEnddate = from.EndDate;
             to.AdoxioVenuenamedescription = from.VenueDescription;
@@ -104,6 +143,46 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioCity = from.City;
             to.AdoxioProvince = from.Province;
             to.AdoxioPostalcode = from.PostalCode;
+            
+            // Security Plan
+            to.AdoxioRequestsafetysecurityplan = from.SecurityPlanRequested;
+            to.AdoxioEventliquorlayout = from.EventLiquorLayout;
+            to.AdoxioNumberdailyeventattendees = from.DailyEventAttendees;
+            to.AdoxioNumberdailyminorattendees = from.DailyMinorAttendees;
+            to.AdoxioEventoccupantload = from.OccupantLoad;
+            to.AdoxioIseventloadavailable = from.OccupantLoadAvailable;
+            to.AdoxioEventoccupantloadservicesarea = from.OccupantLoadServiceArea;
+            to.AdoxioIsservicearealoadavailable = from.OccupantLoadServiceAreaAvailable;
+            to.AdoxioEventliquorcontainment = from.ServiceAreaControlledDetails;
+            to.AdoxioEventstaffingmanagers = from.StaffingManagers;
+            to.AdoxioEventstaffingbartenders = from.StaffingBartenders;
+            to.AdoxioEventstaffingservers = from.StaffingServers;
+            to.AdoxioSecuritycompanysummary = from.SecurityPersonnel;
+            to.AdoxioSecuritypersonnelnumberhired = from.SecurityPersonnelThroughCompany;
+            to.AdoxioSecuritycompanyname = from.SecurityCompanyName;
+            to.AdoxioSecuritycompanystreet = from.SecurityCompanyAddress;
+            to.AdoxioSecuritycompanycity = from.SecurityCompanyCity;
+            to.AdoxioSecuritycompanypostal = from.SecurityCompanyPostalCode;
+            to.AdoxioSecuritycompanycontactname = from.SecurityCompanyContactPerson;
+            to.AdoxioSecuritycompanycontactphone = from.SecurityCompanyPhoneNumber;
+            to.AdoxioSecuritycompanycontactemail = from.SecurityCompanyEmail;
+            to.AdoxioPoliceofficersummary = from.SecurityPoliceOfficerSummary;
+            to.AdoxioIsminorsattending  = from.SafeAndResponsibleMinorsNotAttending;
+            to.AdoxioIsliquorareacontrolled = from.SafeAndResponsibleLiquorAreaControlled;
+            to.AdoxioLiquorareacontrolleddetails = from.SafeAndResponsibleLiquorAreaControlledDescription;
+            to.AdoxioIstwopiecesidrequired = from.SafeAndResponsibleMandatoryID;
+            to.AdoxioIssignsadvisingminors = from.SafeAndResponsibleSignsAdvisingMinors;
+            to.AdoxioIsotherminorssafety = from.SafeAndResponsibleMinorsOther;
+            to.AdoxioIsotherminorssafetydetails = from.SafeAndResponsibleMinorsOtherDescription;
+            to.AdoxioIssignsintoxicatedpersons = from.SafeAndResponsibleSignsAdvisingRemoval;
+            to.AdoxioIssignstwodrinkmax = from.SafeAndResponsibleSignsAdvisingTwoDrink;
+            to.AdoxioIsotherconsumptionsafety = from.SafeAndResponsibleOverConsumptionOther;
+            to.AdoxioIsotherconsumptionsafetydetails = from.SafeAndResponsibleOverConsumptionOtherDescription;
+            to.AdoxioIsdisturbanceappendix2 = from.SafeAndResponsibleReadAppendix2;
+            to.AdoxioIsotherdisturbance = from.SafeAndResponsibleDisturbancesOther;
+            to.AdoxioIsotherdisturbancedetails = from.SafeAndResponsibleDisturbancesOtherDescription;
+            to.AdoxioAdditionalsafetydetails = from.SafeAndResponsibleAdditionalSafetyMeasures;
+            to.AdoxioIsdeclarationaccurate = from.DeclarationIsAccurate;
         }
     }
 }
