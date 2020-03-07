@@ -54,54 +54,132 @@ namespace bdd_tests
             ngDriver.WaitForAngular();
 
             //System.Threading.Thread.Sleep(7000);
-            
+
+            /* 
+            Page Title: Welcome to Cannabis Licensing
+            */
+
+            // click on the Start Application button
             NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
             startApp_button.Click();
 
             ngDriver.WaitForAngular();
 
+            /* 
+            Page Title: Please Review the Account Profile
+            */
+
             string bizNumber = "012345678";
-            string streetAddress = "645 Tyee Road";
-            string city = "Victoria";
-            string postalCode = "V8V4Y3";
+            string incorporationNumber = "BC1234567";
+            //string incorporationDate = "1999-01-01";
+
+            string physStreetAddress1 = "645 Tyee Road";
+            string physStreetAddress2 = "West of Victoria";
+            string physCity = "Victoria";
+            string physPostalCode = "V8V4Y3";
+
+            string mailStreet1 = "P.O. Box 123";
+            string mailStreet2 = "303 Prideaux St.";
+            string mailCity = "Nanaimo";
+            string mailProvince = "B.C.";
+            string mailPostalCode = "V9R2N3";
+            string mailCountry = "Switzerland";
+
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
+            string corpTitle = "CEO";
             string corpContactPhone = "7781811818";
             string corpContactEmail = "automated@test.com";
 
+            // enter the business number
             NgWebElement uiBizNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
             uiBizNumber.SendKeys(bizNumber);
 
-            NgWebElement uiStreetAddress = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
-            uiStreetAddress.SendKeys(streetAddress);
+            // enter the incorporation number
+            NgWebElement uiCorpNumber = ngDriver.FindElement(By.Id("bcIncorporationNumber"));
+            uiCorpNumber.SendKeys(incorporationNumber);
 
-            NgWebElement uiCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
-            uiCity.SendKeys(city);
+            // enter the date of incorporation in B.C. - todo
+            //NgWebElement uiCorpDate = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            //uiCorpDate.SendKeys(incorporationDate);
 
-            NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
-            uiPostalCode.SendKeys(postalCode);
+            // enter the physical street address 1
+            NgWebElement uiPhysStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
+            uiPhysStreetAddress1.SendKeys(physStreetAddress1);
 
+            // enter the physical street address 2
+            NgWebElement uiPhysStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
+            uiPhysStreetAddress2.SendKeys(physStreetAddress2);
+
+            // enter the physical city
+            NgWebElement uiPhysCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
+            uiPhysCity.SendKeys(physCity);
+
+            // enter the physical postal code
+            NgWebElement uiPhysPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
+            uiPhysPostalCode.SendKeys(physPostalCode);
+
+            /* checkbox not used to allow mailing address fields to be completed
             NgWebElement uiSameAsMailingAddress = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
-            uiSameAsMailingAddress.Click();
+            uiSameAsMailingAddress.Click(); */
 
+            // enter the mailing street address 1
+            NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+            uiMailingStreetAddress1.SendKeys(mailStreet1);
+
+            // enter the mailing street address 2
+            NgWebElement uiMailingStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
+            uiMailingStreetAddress2.SendKeys(mailStreet2);
+
+            // enter the mailing city
+            NgWebElement uiMailingCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[14]"));
+            uiMailingCity.SendKeys(mailCity);
+
+            // enter the mailing province
+            NgWebElement uiMailingProvince = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
+            uiMailingProvince.SendKeys(mailProvince);
+
+            // enter the mailing postal code
+            NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[16]"));
+            uiMailingPostalCode.SendKeys(mailPostalCode);
+
+            // enter the mailing country
+            NgWebElement uiMailingCountry = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
+            uiMailingCountry.SendKeys(mailCountry);
+
+            // enter the business phone number
             NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
             uiBizPhoneNumber.SendKeys(bizPhoneNumber);
 
+            // enter the business email
             NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
             uiBizEmail.SendKeys(bizEmail);
 
+            // enter the corporation contact title
+            NgWebElement uiCorpTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
+            uiCorpTitle.SendKeys(corpTitle);
+
+            // enter the corporation contact phone number
             NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[23]"));
             uiCorpContactPhone.SendKeys(corpContactPhone);
 
+            // enter the corporation contact phone email
             NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[24]"));
             uiCorpContactEmail.SendKeys(corpContactEmail);
 
+            // select 'No' for corporation's connection to a federal producer
             NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
             corpConnectionFederalProducer.Click();
 
+            // select 'No' for federal producer's connection to corporation
             NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
             federalProducerConnectionToCorp.Click();
 
+            // select 'No' for immediate family members
+            NgWebElement immediateFamilyMembers = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[6]"));
+            immediateFamilyMembers.Click();
+
+            // click on CONTINUE TO APPLICATION button
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
             continueApp_button.Click();
 
