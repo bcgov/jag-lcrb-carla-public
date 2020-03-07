@@ -100,8 +100,17 @@ namespace bdd_tests
             uiCorpNumber.SendKeys(incorporationNumber);
 
             // enter the Date of Incorporation in B.C. - to be fixed
-            //NgWebElement uiCorpDate = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td/div"));
-            //uiCorpDate.SendKeys(incorporationDate);
+            // select the year
+            //NgWebElement uiCalendarYear = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr[3]"));
+            //uiCalendarYear.Click();
+
+            // select the month
+            //NgWebElement uiCalendarMonth = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-year-view/table/tbody/tr[3]/td[4]/div"));
+            //uiCalendarMonth.Click();
+
+            // select the day
+            //NgWebElement uiCalendarDay = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[4]/td[5]/div"));
+            //uiCalendarDay.Click();
 
             // enter the physical street address 1
             NgWebElement uiPhysStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
