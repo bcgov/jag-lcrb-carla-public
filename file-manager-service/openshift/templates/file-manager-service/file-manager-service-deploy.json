@@ -93,6 +93,63 @@
                     "value": "${JWT_TOKEN_KEY}"
                   },
 				  {
+					"name": "SHAREPOINT_NATIVE_BASE_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "SHAREPOINT_NATIVE_BASE_URI",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }					
+				  },
+				  {
+					"name": "SHAREPOINT_USERNAME",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "SHAREPOINT_USERNAME",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }					
+				  },
+				  {
+					"name": "SHAREPOINT_PASSWORD",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "SHAREPOINT_PASSWORD",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }					
+				  },
+				  {
+					"name": "SHAREPOINT_ODATA_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "SHAREPOINT_ODATA_URI",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }					
+				  },					  
+				  {
+					"name": "SHAREPOINT_STS_TOKEN_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "SHAREPOINT_STS_TOKEN_URI",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }					
+				  },				  
+				  {
+					"name": "SHAREPOINT_RELYING_PARTY_IDENTIFIER",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "SHAREPOINT_RELYING_PARTY_IDENTIFIER",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }					
+				  },
+				  
+				  
+				  
+				  {
                     "name": "SHAREPOINT_ODATA_URI",
                     "value": ""
                   },
@@ -279,6 +336,13 @@
 		"name": "DYNAMICS_NATIVE_ODATA_URI",
 		"required": true,
 		"value": "CHANGEME"
+    },
+    {
+      "name": "SECRET_RESOURCE_NAME",
+      "displayName": "Secret resource name",
+      "description": "Secret resource name",
+      "required": true,
+      "value": "cllc-public"
     }	
   ]
 }
