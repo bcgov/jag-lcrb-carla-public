@@ -103,7 +103,7 @@
                   "successThreshold": 1,
                   "failureThreshold": 3
                 },
-                "liveinessProbe": {
+                "livenessProbe": {
                   "tcpSocket": {
                     "path": "/hc",
                     "port": 8080,
