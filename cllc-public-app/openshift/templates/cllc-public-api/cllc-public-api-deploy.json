@@ -653,7 +653,7 @@
       "displayName": "Secret resource name",
       "description": "Secret resource name",
       "required": true,
-      "value": "cllc-public-preprod"
+      "value": "cllc-public"
     },
     {
       "name": "SITEMINDER_LOGOUT_URL",
