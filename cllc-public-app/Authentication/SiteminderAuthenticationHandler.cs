@@ -577,6 +577,14 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                     userSettings.NewContact = new ViewModels.Contact();
                     userSettings.NewContact.CopyHeaderValues(context.Request.Headers);
+
+                    if (isBCSCDeveloperLogin)
+                    {
+                        userSettings.NewWorker.firstname = userId;
+                        userSettings.NewWorker.lastname = "Associate";
+                        userSettings.NewContact.firstname = userId;
+                        userSettings.NewContact.lastname = "Associate";                        
+                    }
                 }
                 else if (siteMinderUserType == "VerifiedIndividual")
                 {
