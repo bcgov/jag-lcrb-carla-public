@@ -1,22 +1,22 @@
 <div [formGroup]="form">
     <ng-container *ngIf="changeTypeSuffix === 'Leadership'">
         <ng-container formArrayName="associates">
-            <ng-container *ngFor="let associate of associates.controls; let i = index;">
-                <ng-container *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()">
-                    <table class="greyGridTable">
-                        <thead>
-                            <tr *ngIf="associates?.length > 0">
-                                <th style="width: 200px;">First Name</th>
-                                <th style="width: 200px;">Last Name</th>
-                                <th *ngIf="showPosition()" style="width: 200px;">Position</th>
-                                <th *ngIf="showPosition()" style="width: 200px;">Title</th>
-                                <th style="min-width: 200px;">Email</th>
-                                <th style="width: 150px;">Date of Birth</th>
-                                <!-- <th *ngIf="showPHSLevel1()">Level 1 Personal History Summary </th>
+            <table class="greyGridTable">
+                <thead>
+                    <tr *ngIf="associates?.length > 0">
+                        <th style="width: 200px;">First Name</th>
+                        <th style="width: 200px;">Last Name</th>
+                        <th *ngIf="showPosition()" style="width: 200px;">Position</th>
+                        <th *ngIf="showPosition()" style="width: 200px;">Title</th>
+                        <th style="min-width: 200px;">Email</th>
+                        <th style="width: 150px;">Date of Birth</th>
+                        <!-- <th *ngIf="showPHSLevel1()">Level 1 Personal History Summary </th>
                                 <th *ngIf="false">Level 2 Personal History Summary </th> -->
-                                <th style="background-color: transparent; width: 50px;"></th>
-                            </tr>
-                        </thead>
+                        <th style="background-color: transparent; width: 50px;"></th>
+                    </tr>
+                </thead>
+                <ng-container *ngFor="let associate of associates.controls; let i = index;">
+                    <ng-container *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()">
                         <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()" [formGroupName]="i"
                             [ngClass]="{'alt-row': i%2 === 0}">
                             <td>
@@ -153,31 +153,32 @@
                                 </div>
                             </td>
                         </tr>
-
-                    </table>
+                    </ng-container>
                 </ng-container>
-            </ng-container>
+            </table>
         </ng-container>
     </ng-container>
 
     <ng-container *ngIf="changeTypeSuffix === 'IndividualShareholder'">
         <ng-container formArrayName="associates">
-            <ng-container *ngFor="let associate of associates.controls; let i = index;">
-                <ng-container *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()">
-                    <table class="greyGridTable">
-                        <thead>
-                            <tr *ngIf="associates?.length > 0">
-                                <th style="width: 200px;">First Name</th>
-                                <th style="width: 200px;">Last Name</th>
-                                <th style="width: 200px;" *ngIf="rootNode.businessType !== 'Partnership'">Number of Voting Shares</th>
-                                <th style="width: 200px;" *ngIf="rootNode.businessType === 'Partnership'">Interest (%)</th>    
-                                <th style="min-width: 200px;">Email</th>
-                                <th style="width: 150px;">Date of Birth</th>
-                                <!-- <th *ngIf="false">Liquor Associate Status </th>
+            <table class="greyGridTable">
+                <thead>
+                    <tr *ngIf="associates?.length > 0">
+                        <th style="width: 200px;">First Name</th>
+                        <th style="width: 200px;">Last Name</th>
+                        <th style="width: 200px;" *ngIf="rootNode.businessType !== 'Partnership'">Number of
+                            Voting Shares</th>
+                        <th style="width: 200px;" *ngIf="rootNode.businessType === 'Partnership'">Interest (%)
+                        </th>
+                        <th style="min-width: 200px;">Email</th>
+                        <th style="width: 150px;">Date of Birth</th>
+                        <!-- <th *ngIf="false">Liquor Associate Status </th>
                                 <th *ngIf="false">Cannabis Associate Status </th> -->
-                                <th style="background-color: transparent; width: 50px;"></th>
-                            </tr>
-                        </thead>
+                        <th style="background-color: transparent; width: 50px;"></th>
+                    </tr>
+                </thead>
+                <ng-container *ngFor="let associate of associates.controls; let i = index;">
+                    <ng-container *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()">
 
                         <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()" [formGroupName]="i"
                             [ngClass]="{'alt-row': i%2 === 0}">
@@ -269,29 +270,31 @@
                                 <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"></i>
                             </td>
                         </tr>
-                    </table>
+                    </ng-container>
                 </ng-container>
-            </ng-container>
+            </table>
         </ng-container>
     </ng-container>
 
     <ng-container *ngIf="changeTypeSuffix === 'BusinessShareholder'">
         <ng-container formArrayName="associates">
-            <ng-container *ngFor="let associate of associates.controls; let i = index;">
-                <ng-container *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()">
-                    <table class="greyGridTable">
-                        <thead>
-                            <tr *ngIf="associates?.length > 0">
-                                <th style="min-width: 200px;">Business Name</th>
-                                <th style="width: 200px;" *ngIf="rootNode.businessType !== 'Partnership'">Number of Voting Shares</th>
-                                <th style="width: 200px;" *ngIf="rootNode.businessType === 'Partnership'">Interest (%)</th>                                
-                                <th style="width: 200px;">Business Type</th>
-                                <th style="width: 200px;">Email</th>
-                                <!-- <th *ngIf="false">Liquor Associate Status </th>
+            <table class="greyGridTable">
+                <thead>
+                    <tr *ngIf="associates?.length > 0">
+                        <th style="min-width: 200px;">Business Name</th>
+                        <th style="width: 200px;" *ngIf="rootNode.businessType !== 'Partnership'">Number of
+                            Voting Shares</th>
+                        <th style="width: 200px;" *ngIf="rootNode.businessType === 'Partnership'">Interest (%)
+                        </th>
+                        <th style="width: 200px;">Business Type</th>
+                        <th style="width: 200px;">Email</th>
+                        <!-- <th *ngIf="false">Liquor Associate Status </th>
                                 <th *ngIf="false">Cannabis Associate Status </th> -->
-                                <th style="background-color: transparent; width: 50px;"></th>
-                            </tr>
-                        </thead>
+                        <th style="background-color: transparent; width: 50px;"></th>
+                    </tr>
+                </thead>
+                <ng-container *ngFor="let associate of associates.controls; let i = index;">
+                    <ng-container *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()">
                         <tr [formGroupName]="i" [ngClass]="{'alt-row': i%2 === 0}">
                             <td>
                                 <span *ngIf="!associate.get('edit').value || associate.get('id').value">
@@ -389,9 +392,9 @@
                                 </mat-expansion-panel>
                             </td>
                         </tr>
-                    </table>
+                    </ng-container>
                 </ng-container>
-            </ng-container>
+            </table>
         </ng-container>
     </ng-container>
 

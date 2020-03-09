@@ -23,6 +23,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                     Name = applicationType.AdoxioName,
                     Title = applicationType.AdoxioTitletext,
+                    Category = (ApplicationTypeCategory?)applicationType.AdoxioCategory,
 
                     ShowPropertyDetails = applicationType.AdoxioIsshowpropertydetails,
                     EstablishmentName = (FormControlState?)applicationType.AdoxioEstablishmentname,

@@ -13,19 +13,22 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
     public class ApplicationType
     {
-        public string Id;
-        public string ActionText;
-        public string Name;
-        public string Title;
+        public string Id { get; set; }
+        public string ActionText { get; set; }
+        public string Name { get; set; }
 
-        public bool? ShowPropertyDetails;
-        public bool? ShowCurrentProperty;
-        public bool? ShowHoursOfSale;
-        public bool? ShowAssociatesFormUpload;
-        public bool? ShowFinancialIntegrityFormUpload;
-        public bool? ShowSupportingDocuments;
-        public bool? ShowDeclarations;
-        public bool? EstablishmetNameIsReadOnly;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ApplicationTypeCategory? Category { get; set; }
+        public string Title { get; set; }
+
+        public bool? ShowPropertyDetails { get; set; }
+        public bool? ShowCurrentProperty { get; set; }
+        public bool? ShowHoursOfSale { get; set; }
+        public bool? ShowAssociatesFormUpload { get; set; }
+        public bool? ShowFinancialIntegrityFormUpload { get; set; }
+        public bool? ShowSupportingDocuments { get; set; }
+        public bool? ShowDeclarations { get; set; }
+        public bool? EstablishmetNameIsReadOnly { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public FormControlState? StoreContactInfo { get; set; }
@@ -45,7 +48,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public FormControlState? SitePlan { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public FormControlState? ShowLiquorSitePlan { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public FormControlState? SitePhotos { get; set; }
 
@@ -58,8 +61,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public bool? ShowDescription1 { get; set; }
 
-        public LicenseType LicenseType;
+        public LicenseType LicenseType { get; set; }
 
-        public List<ApplicationTypeContent> contentTypes;
+        public List<ApplicationTypeContent> contentTypes { get; set; }
     }
 }
