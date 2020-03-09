@@ -169,8 +169,6 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             string smgov_useremail = headers["smgov_useremail"];
             // the following fields appear to just have a guid in them, not a driver's licence.
-            string smgov_useridentifier = headers["smgov_useridentifier"];
-            string smgov_useridentifiertype = headers["smgov_useridentifiertype"];
 
             // birthdate is YYYY-MM-DD
             string smgov_birthdate = headers["smgov_birthdate"];
