@@ -41,10 +41,10 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
       this.applicationDataService.getApplicationById(this.applicationId)
       .subscribe((application) => {
         this.applicationType = application.applicationType;
-        if( application.applicationType.name === 'Liquor Primary'){
+      if( application.applicationType.category === 'Liquor'){
           this.isLiquorApplication = true;
         }
-        if( application.applicationType.name === 'Cannabis Retail Store'){
+        if( application.applicationType.category === 'Cannabis'){
           this.isCannabisApplication = true;
         }
       });
@@ -52,8 +52,8 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
 
     this.licenseDataService.getAllCurrentLicenses()
     .subscribe(licences => {
-      this.liquorLicenceExist = licences.filter(lc => lc.licenceTypeName === 'Liquor Primary').length > 0;
-      this.cannabisLicenceExist = licences.filter(lc => lc.licenceTypeName === 'Cannabis Retail Store').length > 0;
+      this.liquorLicenceExist = licences.filter(lc => lc.applicationTypeCategory === 'Liquor').length > 0;
+      this.cannabisLicenceExist = licences.filter(lc => lc.applicationTypeCategory === 'Cannabis').length > 0;
     });
   }
   
