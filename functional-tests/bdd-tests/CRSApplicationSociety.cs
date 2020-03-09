@@ -54,7 +54,11 @@ namespace bdd_tests
             ngDriver.WaitForAngular();
 
             //System.Threading.Thread.Sleep(7000);
-            
+
+            /* 
+            Page Title: Welcome to Cannabis Licensing
+            */
+
             NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
             startApp_button.Click();
 
