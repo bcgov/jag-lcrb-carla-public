@@ -5,18 +5,14 @@
     <section>
       <div *ngIf="submittedApplications < 8  && !marketerExists">
         <p>
-          Use the list below to find the application type you are looking for. Read the requirements to see what
-          information must be completed before you can submit the application.
-          If you do not have all of the required information marked as complete, <strong>you cannot submit the
-            application</strong>.
-          <a href="">To access and edit your account profile information click here</a>.
+          Use the list below to find the application type you are looking for:
         </p>
 
         <section>
           <h3>CANNABIS LICENCE APPLICATIONS</h3>
-          <p>
+          <div *ngIf="!(nonMarketerExists || marketerExists)"><p>
             <i>*You cannot apply for both cannabis licences, you can apply for one or other.</i>
-          </p>
+          </p></div>
 
           <table class="start-application">
             <!-- <tr>
@@ -27,14 +23,14 @@
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
                 <img class="icon" src="assets/Cannabis-store-icon-blue-40px.png" alt="">
               </td>
-              <td>
+              <td style="width:700px;">
                 <h3>Cannabis Retail Store Licence</h3>
                 <p>To sell non-medical cannabis and accessories</p>
                 <P>(A separate application must be submitted for each proposed store)</P>
                 <a href="https://justice.gov.bc.ca/cannabislicensing/policy-document/cannabis-retail-licence"
                   target="_blank" rel="noopener noreferrer">Learn more about this licence</a>
               </td>
-              <td>
+              <td style="text-align: center;">
                 <button class="btn btn-primary" (click)="startNewLicenceApplication()" id="startCRS">START
                   APPLICATION</button>
               </td>
@@ -44,13 +40,13 @@
 
                 <img class="icon" src="assets/Cannabis-marketing-icon-blue-40px.png" alt="">
               </td>
-              <td>
+              <td style="width:700px;">
                 <h3>Cannabis Marketing Licence</h3>
                 <p>To promote non-medical cannabis to licensed cannabis retail stores and the adult public</p>
                 <a href="https://justice.gov.bc.ca/cannabislicensing/policy-document/cannabis-marketing-licence">Learn
                   more about this licence</a>
               </td>
-              <td>
+              <td style="text-align: center;">
                 <button class="btn btn-primary" (click)="startNewMarketerApplication()" id="startMarketing">START
                   APPLICATION</button>
               </td>
@@ -65,7 +61,7 @@
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
                 <img class="icon" src="assets/Catering-icon-blue-40px.png" alt="">
               </td>
-              <td>
+              <td style="width:700px;">
                 <h3>Catering Licence</h3>
                 <p>Catering licences are for catering businesses that provide a full range of food and beverage services
                   to their clients. Licensed caterers can sell liquor and maintain a liquor inventory. </p>
@@ -73,32 +69,29 @@
                   target="_blank">Learn
                   more about this licence</a>
               </td>
-              <td>
+              <td style='text-align: center;'>
                 <button *ngIf="liquorOne" class="btn btn-primary" (click)="startNewCateringApplication()"
                   id="startCatering">START
                   APPLICATION</button>
-                <span *ngIf="!liquorOne">COMING&nbsp;SOON</span>
+                  <button *ngIf="!liquorOne" class="btn btn-primary"
+                  id="startCatering" disabled>COMING SOON</button>  
+                
               </td>
             </tr>
             <tr>
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
                 <img class="icon" src="assets/Wine-store-icon-blue-40px.png" alt="">
               </td>
-              <td>
+              <td style="width:700px;">
                 <h3>Wine Retail Store Licence</h3>
-                <p>To sell wine and wine-related accessories.</p>
-                <p>
-                  <i>*A separate application must be submitted for each proposed store.</i>
-                </p>
-                <p>
-                  <i>*This application is currently unavailable online</i>
-                </p>
-                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/catering-liquor-licence"
+                <p>Wine Stores include stores associated with a particular winery or group of wineries, independent wine stores, Vintners Quality Alliance (VQA) wine stores and tourist wine stores. They operate as a separate retail store and are not located at a winery. </p>
+                
+                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/wine-store-liquor-licence"
                   target="_blank">Learn
                   more about this licence</a>
               </td>
-              <td>
-                <span>COMING&nbsp;SOON</span>
+              <td style="text-align: center;">
+                <i>New wine store applications <br>are closed at this time.</i>
               </td>
             </tr>
 
