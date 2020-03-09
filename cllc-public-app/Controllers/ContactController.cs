@@ -378,7 +378,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // set the type to Retail Worker.
             contact.Customertypecode = 845280000;
 
-            if (userSettings.NewWorker != null && !_env.IsDevelopment())
+            if (userSettings.NewWorker != null)
             {
                 // get additional information from the service card headers.
                 contact.CopyContactUserSettings(userSettings.NewContact);
