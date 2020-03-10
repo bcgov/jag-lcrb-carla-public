@@ -61,6 +61,18 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
 
             ngDriver.WaitForAngular();
+
+            NgWebElement uiCheckBox1 = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            uiCheckBox1.Click();
+
+            NgWebElement uiCheckBox2 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
+            uiCheckBox2.Click();
+
+            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[text()='Continue']"));
+            continueButton.Click();
+
+            NgWebElement yesButton = ngDriver.FindElement(By.XPath("//div/button"));
+            yesButton.Click();
         }
 
         public void MakeWorkerPayment()
