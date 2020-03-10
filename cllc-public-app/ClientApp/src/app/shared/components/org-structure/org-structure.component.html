@@ -34,7 +34,7 @@
     
     <h3 class="blue-header">Provide Corporate Documents</h3>
     <div class="content">
-    <h3 class="plain-header">Notice of Articles</h3>
+    <h4 class="plain-header">Notice of Articles</h4>
     <section class="padded-section">
       <p>Please upload the {{node?.businessNameNew}} Corporation Notice of Articles.</p>
       <section>
@@ -51,7 +51,7 @@
 
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation'" [formGroup]="form">
     <div class="content-bottom">
-    <h3 class="plain-header">Central Securities Register</h3>
+    <h4 class="plain-header">Central Securities Register</h4>
     <section class="padded-section">
       <p>Please upload the {{node?.businessNameNew}} Central Securities Register.</p>
       <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} SECREG"
@@ -62,7 +62,7 @@
       </app-file-uploader>
     </section>
 
-    <h3 class="plain-header">Special Rights and Restrictions</h3>
+    <h4 class="plain-header">Special Rights and Restrictions</h4>
     <section class="padded-section">
       <p>If the corporation has special rights and restrictions not described within the Notice of Article, please
         provide them here.
@@ -89,7 +89,7 @@
   <ng-container *ngIf="node?.businessType === 'Partnership'">
     <h3 class="blue-header">Provide Partnership Documents</h3>
     <div class="content-bottom">
-    <h3 class="plain-header">Partnership Agreement</h3>
+    <h4 class="plain-header">Partnership Agreement</h4>
     <section class="padded-section">
       <p>Partnership Agreement for {{node?.businessNameNew}}.</p>
       <app-file-uploader *ngIf="account?.id"
