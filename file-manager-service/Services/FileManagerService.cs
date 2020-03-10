@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             var result = new CreateFolderReply();
             string listTitle = GetDocumentListTitle(request.EntityName);
 
-            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
+            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration, _logger);
 
             CreateDocumentLibraryIfMissing(listTitle, GetDocumentTemplateUrlPart(request.EntityName));
 
