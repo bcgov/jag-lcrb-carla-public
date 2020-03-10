@@ -44,11 +44,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         private string Digest;
         private CookieContainer _CookieContainer;
         private HttpClientHandler _HttpClientHandler;
-        private ILogger _logger;
 
-        public SharePointFileManager(IConfiguration Configuration, ILogger Logger)
+        public SharePointFileManager(IConfiguration Configuration)
         {
-            _logger = Logger;
             // create the HttpClient that is used for our direct REST calls.
             _CookieContainer = new CookieContainer();
             _HttpClientHandler = new HttpClientHandler() { UseCookies = true, AllowAutoRedirect = false, CookieContainer = _CookieContainer };
@@ -709,7 +707,6 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public async Task<string> AddFile(String documentLibrary, String folderName, String fileName, Stream fileData, string contentType)
         {
-            _logger.LogError($"documentLibrary: {documentLibrary}, folderName: {folderName}, fileName: {fileName}");
             folderName = FixFoldername(folderName);
             bool folderExists = await this.FolderExists(documentLibrary, folderName);
             if (!folderExists)
