@@ -66,6 +66,34 @@ namespace bdd_tests
             ngDriver.WaitForAngular();
 
             /* 
+            Page Title: Cannabis Retail Store Licence Eligibility Disclosure
+            */
+
+            string electricSignature = "Automated Test";
+
+            // select No for Question 1
+            NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
+            noRadio1.Click();
+
+            // select No for Question 2
+            NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
+            noRadio2.Click();
+
+            // select the certification checkbox
+            NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
+            matCheckbox.Click();
+
+            // enter the electronic signature
+            NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
+            sigCheckbox.SendKeys(electricSignature);
+
+            // click on the Submit button
+            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
+            submit_button.Click();
+
+            ngDriver.WaitForAngular();
+
+            /* 
             Page Title: Please Review the Account Profile
             */
 
@@ -99,7 +127,7 @@ namespace bdd_tests
             uiCorpNumber.SendKeys(incorporationNumber);
 
             // enter the Date of Incorporation in B.C. 
-            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            /*NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             uiCalendar1.Click();
 
             NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span"));
@@ -112,7 +140,7 @@ namespace bdd_tests
             uiCalendar4.Click();
 
             NgWebElement uiCalendar5 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[4]/td[5]/div"));
-            uiCalendar5.Click();
+            uiCalendar5.Click();*/
 
             // enter the physical street address 1
             NgWebElement uiPhysStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
@@ -186,43 +214,103 @@ namespace bdd_tests
             NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
             federalProducerConnectionToCorp.Click();
 
-            // click on CONTINUE TO APPLICATION button
+            // click on CONTINUE TO ORGANIZATION REVIEW button
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
             continueApp_button.Click();
 
             ngDriver.WaitForAngular();
         }
 
-        [And(@"I click on the Continue to Application button")]
-        public void I_continue_to_application()
+        [And(@"I click on the Continue to Organization Review button")]
+        public void I_continue_to_organization_review()
         {
+            string keyPersonnelFirstName = "Jane";
+            string keyPersonnelLastName = "Bond";
+            string keyPersonnelTitle = "Adventurer";
+            string keyPersonnelEmail = "jane@bond.com";
+            string keyPersonnelDOB = "1998-01-01";
+
+            string shareholderFirstName = "Jacqui";
+            string shareholderLastName = "Chan";
+            string shareholderVotingShares = "500";
+            string shareholderEmail = "jacqui@chan.com";
+
             ngDriver.WaitForAngular();
 
-            /* 
-            Page Title: Cannabis Retail Store Licence Eligibility Disclosure
-            */
+            // find the upload test files in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
 
-            string electricSignature = "Automated Test";
+            // upload a notice of articles document
+            string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+            NgWebElement uploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
+            uploadSignage.SendKeys(noticeOfArticles);
 
-            // select No for Question 1
-            NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
-            noRadio1.Click();
+            // upload a central securities register document
+            string centralSecuritiesRegister = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+            NgWebElement uploadCentralSecReg = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
+            uploadCentralSecReg.SendKeys(centralSecuritiesRegister);
 
-            // select No for Question 2
-            NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
-            noRadio2.Click();
+            // upload a special rights and restrictions document
+            string specialRightsRestrictions = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+            NgWebElement uploadSpecialRightsRes = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
+            uploadSpecialRightsRes.SendKeys(specialRightsRestrictions);
 
-            // select the certification checkbox
-            NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
-            matCheckbox.Click();
+            // open key personnel form
+            NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/section[4]/app-associate-list/div/button"));
+            openKeyPersonnelForm.Click();
 
-            // enter the electronic signature
-            NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
-            sigCheckbox.SendKeys(electricSignature);
+            // enter key personnel first name
+            NgWebElement uiKeyPersonFirst = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+            uiKeyPersonFirst.SendKeys(keyPersonnelFirstName);
 
-            // click on the Submit button
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
-            submit_button.Click();
+            // enter key personnel last name
+            NgWebElement uiKeyPersonLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+            uiKeyPersonLast.SendKeys(keyPersonnelLastName);
+
+            // select key personnel role
+            NgWebElement uiKeyPersonRole = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            uiKeyPersonRole.Click();
+
+            // enter key personnel title
+            NgWebElement uiKeyPersonTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+            uiKeyPersonTitle.SendKeys(keyPersonnelTitle);
+
+            // enter key personnel email
+            NgWebElement uiKeyPersonEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+            uiKeyPersonEmail.SendKeys(keyPersonnelEmail);
+
+            // enter key personnel DOB
+            NgWebElement uiKeyPersonDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            uiKeyPersonDOB.SendKeys(keyPersonnelDOB);
+
+            // open shareholder form
+            NgWebElement openShareholderForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/section[5]/app-associate-list/div/button"));
+            openShareholderForm.Click();
+
+            // enter shareholder first name
+            NgWebElement uiShareFirst = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
+            uiShareFirst.SendKeys(shareholderFirstName);
+
+            // enter shareholder last name
+            NgWebElement uiShareLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
+            uiShareLast.SendKeys(shareholderLastName);
+
+            // enter number of voting shares
+            NgWebElement uiShareVotes = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
+            uiShareVotes.SendKeys(shareholderVotingShares);
+
+            // enter shareholder email
+            NgWebElement uiShareEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+            uiShareEmail.SendKeys(shareholderEmail);
+
+            // enter shareholder DOB
+            // todo
+
+            // click on Submit Organization Info button
+            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
+            submitOrgInfoButton.Click();
 
             ngDriver.WaitForAngular();
         }
