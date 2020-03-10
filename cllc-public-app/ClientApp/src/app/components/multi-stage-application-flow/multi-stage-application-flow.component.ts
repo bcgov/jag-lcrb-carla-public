@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class MultiStageApplicationFlowComponent implements OnInit {
   securityScreeningEnabled: boolean;
   useDynamicFormMode: boolean = false;
+  applicationId: string;
 
   constructor(public featureFlagService: FeatureFlagService, private route: ActivatedRoute, ) {
 
@@ -17,9 +18,10 @@ export class MultiStageApplicationFlowComponent implements OnInit {
       .subscribe(featureOn => this.securityScreeningEnabled = featureOn);
 
     this.route.paramMap.subscribe(params => {
-      
       this.useDynamicFormMode = params.get('useDynamicFormMode') === 'true';
+      this.applicationId = params.get('applicationId');
     });
+
    }
 
   ngOnInit() {
