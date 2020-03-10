@@ -108,15 +108,15 @@ namespace bdd_tests
         [And(@"I complete Step 2 of the application")]
         public void I_complete_step_2_of_the_application()
         {
-            string applicantName = "Automated Test";
+            //string applicantName = "Automated Test";
             
-            NgWebElement uiSelfDisclosure = ngDriver.FindElement(By.XPath("((//input[@name='selfDisclosure'])[2]"));
+            NgWebElement uiSelfDisclosure = ngDriver.FindElement(By.XPath("(//input[@name='selfDisclosure'])[2]"));
             uiSelfDisclosure.Click();
 
             NgWebElement uiNoWetSignature1 = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
             uiNoWetSignature1.Click();
 
-            NgWebElement uiNoWetSignature2 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
+            /*NgWebElement uiNoWetSignature2 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
             uiNoWetSignature2.Click();
 
             NgWebElement uiApplicantName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
@@ -128,7 +128,7 @@ namespace bdd_tests
 
             string signatureFormPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
             NgWebElement uploadSignatureForm = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
-            uploadSignatureForm.SendKeys(signatureFormPath);
+            uploadSignatureForm.SendKeys(signatureFormPath);*/
         }
 
         [And(@"I click on the Submit & Pay button")]
