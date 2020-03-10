@@ -12,7 +12,7 @@
                         <th style="width: 150px;">Date of Birth</th>
                         <!-- <th *ngIf="showPHSLevel1()">Level 1 Personal History Summary </th>
                                 <th *ngIf="false">Level 2 Personal History Summary </th> -->
-                        <th style="background-color: transparent; width: 50px;"></th>
+                        <th style="background-color: transparent; width: 50px;">Action</th>
                     </tr>
                 </thead>
                 <ng-container *ngFor="let associate of associates.controls; let i = index;">
@@ -49,7 +49,7 @@
                                     <ng-container *ngIf="associate.get('edit').value">
                                         <table style="border:0px;">
                                             <tr>
-                                                <td nowrap>
+                                                <td nowrap style="border:0px; text-align:left;">
                                                     <input type="checkbox" style="margin-right: 5px;"
                                                         formControlName="isDirectorNew"> <label
                                                         style="padding-right: 10px;" for=""
@@ -59,7 +59,7 @@
                                                         style="padding-right: 10px; font-size:10px;"
                                                         for="">Officer</label><br>
                                                 </td>
-                                                <td nowrap>
+                                                <td nowrap style="border:0px; text-align:left;">
                                                     <div *ngIf="rootNode?.businessType !== 'Society'"> <input
                                                             type="checkbox" style="margin-right: 5px;"
                                                             formControlName="isManagerNew"> <label
@@ -114,13 +114,13 @@
                                 Link</button>
                         </td>
                         <td *ngIf="false"></td> -->
-                            <td>
+                            <td style='text-align:left;'> 
                                 <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
                                     (click)="associate.get('edit').value = true;" class="fas fa-pencil-alt"
-                                    style="margin-right: 10px;"></i>
+                                    style="margin-right: 10px;"><span class="icon-label">Edit</span></i>
                                 <i class="fas fa-save save" *ngIf="associate.get('edit').value"
-                                    (click)="saveLog(associate.value, i)" style="margin-right: 10px;"></i>
-                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"></i>
+                                    (click)="saveLog(associate.value, i)" style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
+                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span class="icon-label">Delete</span></i>
                             </td>
                         </tr>
 
@@ -174,7 +174,7 @@
                         <th style="width: 150px;">Date of Birth</th>
                         <!-- <th *ngIf="false">Liquor Associate Status </th>
                                 <th *ngIf="false">Cannabis Associate Status </th> -->
-                        <th style="background-color: transparent; width: 50px;"></th>
+                        <th style="background-color: transparent; width: 50px;">Action</th>
                     </tr>
                 </thead>
                 <ng-container *ngFor="let associate of associates.controls; let i = index;">
@@ -261,13 +261,13 @@
                             </td>
                             <!-- <td *ngIf="false"></td>
                         <td *ngIf="false"></td> -->
-                            <td>
+                        <td style='text-align:left;'>
                                 <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
                                     (click)="associate.get('edit').value = true;" class="fas fa-pencil-alt"
-                                    style="margin-right: 10px;"></i>
+                                    style="margin-right: 10px;"><span class="icon-label">Edit</span></i>
                                 <i class="fas fa-save" *ngIf="associate.get('edit').value"
-                                    (click)="saveLog(associate.value, i)" style="margin-right: 10px;"></i>
-                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"></i>
+                                    (click)="saveLog(associate.value, i)" style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
+                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span class="icon-label">Delete</span></i>
                             </td>
                         </tr>
                     </ng-container>
@@ -290,7 +290,7 @@
                         <th style="width: 200px;">Email</th>
                         <!-- <th *ngIf="false">Liquor Associate Status </th>
                                 <th *ngIf="false">Cannabis Associate Status </th> -->
-                        <th style="background-color: transparent; width: 50px;"></th>
+                        <th style="background-color: transparent; width: 50px;">Action</th>
                     </tr>
                 </thead>
                 <ng-container *ngFor="let associate of associates.controls; let i = index;">
@@ -362,14 +362,14 @@
                             </td>
                             <!-- <td *ngIf="false"></td>
                         <td *ngIf="false"></td> -->
-                            <td>
+                        <td style='text-align:left;'>
                                 <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
                                     (click)="associate.get('edit').value = true; associate.get('collapse').value = true;"
-                                    class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
+                                    class="fas fa-pencil-alt" style="margin-right: 10px;"><span class="icon-label">Edit</span></i>
                                 <i class="fas fa-save" *ngIf="associate.get('edit').value"
                                     (click)="saveLog(associate.value, i); associate.get('collapse').value = false;"
-                                    style="margin-right: 10px;"></i>
-                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"></i>
+                                    style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
+                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span class="icon-label">Delete</span></i>
                             </td>
 
                         </tr>
@@ -400,7 +400,7 @@
 
 
     <br>
-    <button class="btn btn-secondary" (click)="addAssociate()">
+    <button class="btn btn-secondary" (click)="addAssociate()" style="text-transform: uppercase;">
         <i class="fas fa-plus"></i>
         {{addLabel}}</button>
 </div>
