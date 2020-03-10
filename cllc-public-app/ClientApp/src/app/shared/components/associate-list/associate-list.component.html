@@ -12,7 +12,7 @@
                         <th style="width: 150px;">Date of Birth</th>
                         <!-- <th *ngIf="showPHSLevel1()">Level 1 Personal History Summary </th>
                                 <th *ngIf="false">Level 2 Personal History Summary </th> -->
-                        <th style="background-color: transparent; width: 50px;"></th>
+                        <th style="background-color: transparent; width: 50px;">Action</th>
                     </tr>
                 </thead>
                 <ng-container *ngFor="let associate of associates.controls; let i = index;">
@@ -174,7 +174,7 @@
                         <th style="width: 150px;">Date of Birth</th>
                         <!-- <th *ngIf="false">Liquor Associate Status </th>
                                 <th *ngIf="false">Cannabis Associate Status </th> -->
-                        <th style="background-color: transparent; width: 50px;"></th>
+                        <th style="background-color: transparent; width: 50px;">Action</th>
                     </tr>
                 </thead>
                 <ng-container *ngFor="let associate of associates.controls; let i = index;">
@@ -290,7 +290,7 @@
                         <th style="width: 200px;">Email</th>
                         <!-- <th *ngIf="false">Liquor Associate Status </th>
                                 <th *ngIf="false">Cannabis Associate Status </th> -->
-                        <th style="background-color: transparent; width: 50px;"></th>
+                        <th style="background-color: transparent; width: 50px;">Action</th>
                     </tr>
                 </thead>
                 <ng-container *ngFor="let associate of associates.controls; let i = index;">
@@ -400,7 +400,7 @@
 
 
     <br>
-    <button class="btn btn-secondary" (click)="addAssociate()">
+    <button class="btn btn-secondary" (click)="addAssociate()" style="text-transform: uppercase;">
         <i class="fas fa-plus"></i>
         {{addLabel}}</button>
 </div>
