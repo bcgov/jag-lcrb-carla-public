@@ -101,10 +101,6 @@ namespace bdd_tests
             NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
             uiPostalCode.SendKeys(postalCode);
 
-            //todo: sort out label value
-            //NgWebElement uiCountry = ngDriver.FindElement(By.XPath("(//select"));
-            //uiCountry.Click();
-
             NgWebElement saveAndContinueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SAVE & CONTINUE TO STEP 2')]"));
             saveAndContinueButton.Click();
         }
