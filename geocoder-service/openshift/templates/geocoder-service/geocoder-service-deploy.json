@@ -194,7 +194,7 @@
                   "successThreshold": 1,
                   "failureThreshold": 3
                 },
-                "liveinessProbe": {
+                "livenessProbe": {
                   "httpGet": {
                     "path": "/hc/live",
                     "port": 8080,

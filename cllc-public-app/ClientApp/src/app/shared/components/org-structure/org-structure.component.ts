@@ -1,7 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
 import { LicenseeChangeLog } from '@models/licensee-change-log.model';
 import { Account } from '@models/account.model';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { AssociateListComponent } from '../associate-list/associate-list.component';
+import { forkJoin, of } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-org-structure',
@@ -13,6 +16,9 @@ export class OrgStructureComponent implements OnInit {
   @Input() account: Account;
   @Input() licencesOnFile: boolean;
   @Output() deletedChanges: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();
+
+  @ViewChildren('associateList') associateList: QueryList<AssociateListComponent>;
+
   Account = Account;
   form: FormGroup;
 
@@ -46,9 +52,9 @@ export class OrgStructureComponent implements OnInit {
   }
 
   asLicenseeChangeLog(val): LicenseeChangeLog { return val };
-  
-  updateNumberOfFiles(numberOfFiles: number, docType: string){
-      this.node.fileUploads[docType] =  numberOfFiles;
+
+  updateNumberOfFiles(numberOfFiles: number, docType: string) {
+    this.node.fileUploads[docType] = numberOfFiles;
   }
 
   updateChildred(children: LicenseeChangeLog[], changeType: string) {
@@ -69,6 +75,31 @@ export class OrgStructureComponent implements OnInit {
       ...this.node.individualShareholderChildren,
       ...this.node.keyPersonnelChildren
       ];
+    }
+  }
+
+
+    /**
+   * saves all open associate list items
+   * returns an Observable<boolean>. False means there is validation errors
+   */
+  saveAll() {
+    let saveResults = [];
+
+    //save all open associate list
+    this.associateList.forEach(org => {
+      saveResults.push(org.saveAll());
+    });
+
+    if (saveResults.length > 0) {
+      return forkJoin(...saveResults)
+        .pipe(mergeMap(results => {
+          return of(results.indexOf(false) === -1);
+        }));
+    }
+    else {
+      // return true if there is nothing to save
+      return of(true);
     }
   }
 }

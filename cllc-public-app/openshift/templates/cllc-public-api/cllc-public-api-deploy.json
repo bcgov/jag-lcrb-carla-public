@@ -406,7 +406,7 @@
                   "successThreshold": 1,
                   "failureThreshold": 3
                 },
-                "liveinessProbe": {
+                "livenessProbe": {
                   "httpGet": {
                     "path": "/hc/live",
                     "port": 8080,
@@ -653,7 +653,7 @@
       "displayName": "Secret resource name",
       "description": "Secret resource name",
       "required": true,
-      "value": "cllc-public-preprod"
+      "value": "cllc-public"
     },
     {
       "name": "SITEMINDER_LOGOUT_URL",
