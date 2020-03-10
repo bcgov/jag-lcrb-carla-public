@@ -98,8 +98,8 @@ namespace bdd_tests
             NgWebElement uiCorpNumber = ngDriver.FindElement(By.Id("bcIncorporationNumber"));
             uiCorpNumber.SendKeys(incorporationNumber);
 
-            // enter the Date of Incorporation in B.C. - in progress 
-            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-account-profile/div/div[2]/div[1]/div/div/div[1]/section[2]/div/input"));
+            // enter the Date of Incorporation in B.C. 
+            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             uiCalendar1.Click();
 
             NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span"));

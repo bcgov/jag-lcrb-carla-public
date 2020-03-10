@@ -71,7 +71,6 @@ namespace bdd_tests
 
             string bizNumber = "012345678";
             string incorporationNumber = "BC1234567";
-            //string incorporationDate = "1999-01-01";
 
             string physStreetAddress1 = "645 Tyee Road";
             string physStreetAddress2 = "West of Victoria";
@@ -99,9 +98,21 @@ namespace bdd_tests
             NgWebElement uiCorpNumber = ngDriver.FindElement(By.Id("bcIncorporationNumber"));
             uiCorpNumber.SendKeys(incorporationNumber);
 
-            // enter the date of incorporation in B.C. - todo
-            //NgWebElement uiCorpDate = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
-            //uiCorpDate.SendKeys(incorporationDate);
+            // enter the date of incorporation in B.C.
+            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            uiCalendar1.Click();
+
+            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span"));
+            uiCalendar2.Click();
+
+            NgWebElement uiCalendar3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr[3]/td/div"));
+            uiCalendar3.Click();
+
+            NgWebElement uiCalendar4 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-year-view/table/tbody/tr[3]/td[4]/div"));
+            uiCalendar4.Click();
+
+            NgWebElement uiCalendar5 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[4]/td[5]/div"));
+            uiCalendar5.Click();
 
             // enter the physical street address 1
             NgWebElement uiPhysStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
