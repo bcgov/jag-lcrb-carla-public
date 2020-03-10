@@ -155,7 +155,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     MiddleName = legalEntity.middlename,
                     LastName = legalEntity.lastname,
                     ScreeningLink = legalEntity.PhsLink,
-                    DateSubmitted = dateSubmitted
+                    DateSubmitted = dateSubmitted,
+                    ContactId = legalEntity.contactId
                 };
                 if (isComplete)
                 {
@@ -164,9 +165,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         securityScreeningCategorySummarycannabisSummary.CompletedItems = new List<SecurityScreeningStatusItem>();
                     }
-                    if (!addedContacts.Any(c => c == newItem.ScreeningLink))
+                    if (!addedContacts.Any(c => c == newItem.ContactId))
                     {
-                        addedContacts.Add(newItem.ScreeningLink);
+                        addedContacts.Add(newItem.ContactId);
                         securityScreeningCategorySummarycannabisSummary.CompletedItems.Add(newItem);
                     }
                 }
@@ -176,9 +177,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         securityScreeningCategorySummarycannabisSummary.OutstandingItems = new List<SecurityScreeningStatusItem>();
                     }
-                    if (!addedContacts.Any(c => c == newItem.ScreeningLink))
+                    if (!addedContacts.Any(c => c == newItem.ContactId))
                     {
-                        addedContacts.Add(newItem.ScreeningLink);
+                        addedContacts.Add(newItem.ContactId);
                         securityScreeningCategorySummarycannabisSummary.OutstandingItems.Add(newItem);
                     }
                 }
@@ -346,7 +347,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 foreach (var legalEntity in legalEntities)
                 {
                     var viewModel = legalEntity.ToViewModel();
-                    if (!String.IsNullOrEmpty(legalEntity.AdoxioLegalentityid) && !processedEntities.Contains(legalEntity.AdoxioLegalentityid))
+                   if (!String.IsNullOrEmpty(legalEntity.AdoxioLegalentityid) && !processedEntities.Contains(legalEntity.AdoxioLegalentityid))
                     {
                         processedEntities.Add(legalEntity.AdoxioLegalentityid);
                         viewModel.children = GetLegalEntityChildren(legalEntity.AdoxioLegalentityid, processedEntities);
