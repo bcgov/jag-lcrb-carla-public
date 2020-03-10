@@ -53,7 +53,7 @@ namespace bdd_tests
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
 
-        public void CarlaLogin()
+        public void CarlaLogin(string businessType)
         {
             // load the dashboard page
             string test_start = configuration["test_start"];
@@ -62,42 +62,81 @@ namespace bdd_tests
 
             ngDriver.WaitForAngular();
 
+            /* 
+            Page Title: Terms of Use
+            */
+
+            // select the acceptance checkbox
             NgWebElement termsOfUseCheckbox = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
             termsOfUseCheckbox.Click();
 
+            // click on the Continue button
             NgWebElement continueButton = ngDriver.FindElement(By.XPath("//section[3]/button"));
             continueButton.Click();
 
+            /* 
+            Page Title: Please confirm the business or organization name associated to the Business BCeID.
+            */
+
+            // click on the Yes button
             NgWebElement confirmationButton = ngDriver.FindElement(By.XPath("//button"));
             confirmationButton.Click();
 
-            // Private Corporation
-            NgWebElement privateCorporationRadio = ngDriver.FindElement(By.Name("InitialBusinessType"));
-            privateCorporationRadio.Click();
+            /* 
+            Page Title: Please confirm the organization type associated with the Business BCeID:
+            */
 
-            // Public Corporation
-            //NgWebElement publicCorporationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[2]"));
-            //publicCorporationRadio.Click();
+            // if this is a private corporation, click the radio button
+            if (businessType == "private corporation")
+            {
+                NgWebElement privateCorporationRadio = ngDriver.FindElement(By.Name("InitialBusinessType"));
+                privateCorporationRadio.Click();
+            }
 
-            // Sole Proprietorship - has different fields!
-            //NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[3]"));
-            //soleProprietorshipRadio.Click();
+            // if this is a public corporation, click the radio button
+            if (businessType == "public corporation")
+            {
+                NgWebElement publicCorporationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[2]"));
+                publicCorporationRadio.Click();
+            }
 
-            // Partnership
-            //NgWebElement partnershipRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[4]"));
-            //partnershipRadio.Click();
+            // if this is a sole proprietorship, click the radio button
+            if (businessType == "sole proprietorship")
+            {
+                NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[3]"));
+                soleProprietorshipRadio.Click();
+            }
 
-            // Society
-            //NgWebElement societyRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[5]"));
-            //societyRadio.Click();
+            // if this is a partnership, click the radio button
+            if (businessType == "partnership")
+            {
+                NgWebElement partnershipRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[4]"));
+                partnershipRadio.Click();
+            }
 
-            // Indigenous nation
-            //NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[6]"));
-            //indigenousNationRadio.Click();
+            // if this is a society, click the radio button
+            if (businessType == "society")
+            {
+                NgWebElement societyRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[5]"));
+                societyRadio.Click();
+            }
 
+            // if this is an indigenous nation, click the radio button
+            if (businessType == "indigenous nation")
+            {
+                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[6]"));
+                indigenousNationRadio.Click();
+            }
+
+            // click on the Next button
             NgWebElement nextButton = ngDriver.FindElement(By.XPath("//button[contains(.,'Next')]"));
             nextButton.Click();
 
+            /* 
+            Page Title: Please confirm the name associated with the Business BCeID login provided.
+            */
+
+            // click on the Yes button
             NgWebElement confirmNameButton = ngDriver.FindElement(By.XPath("//button"));
             confirmNameButton.Click();
         }
@@ -111,6 +150,10 @@ namespace bdd_tests
 
             //browser sync - don't wait for Angular
             ngDriver.IgnoreSynchronization = true;
+
+            /* 
+            Page Title: Internet Payments Program (Bambora)
+            */
 
             driver.FindElementByName("trnCardNumber").SendKeys(testCC);
 
