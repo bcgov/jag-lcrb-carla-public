@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplication
+Feature: CRSApplication_indigenousnation
     As a logged in business user
-    I want to submit a CRS Application
+    I want to submit a CRS Application for an indigenous nation
 
 Scenario: Start Application
-    Given I am logged in to the dashboard
+    Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button
     And I click on the Continue to Application button
     And I complete the application
@@ -31,16 +31,16 @@ Scenario: Start Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplication.feature")]
-    public sealed class CRSApplication : TestBaseCRS
+    [FeatureFile("./CRSApplication_indigenousnation.feature")]
+    public sealed class CRSApplicationIndigenousNation : TestBaseCRS
     {
 
         // Dashboard related common actions
 
-        [Given(@"I am logged in to the dashboard")]
-        public void I_view_the_dashboard()
+        [Given(@"I am logged in to the dashboard as an (.*)")]
+        public void I_view_the_dashboard(string businessType)
         {
-            CarlaLogin();
+            CarlaLogin(businessType);
         }
 
         [And(@"I am not a marketer")]
@@ -60,6 +60,8 @@ namespace bdd_tests
 
             ngDriver.WaitForAngular();
 
+            // Complete account profile page
+
             string bizNumber = "012345678";
             string streetAddress = "645 Tyee Road";
             string city = "Victoria";
@@ -68,39 +70,36 @@ namespace bdd_tests
             string bizEmail = "test@automation.com";
             string corpContactPhone = "7781811818";
             string corpContactEmail = "automated@test.com";
-
-            NgWebElement uiBizNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+            
+            NgWebElement uiBizNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
             uiBizNumber.SendKeys(bizNumber);
 
-            NgWebElement uiStreetAddress = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
+            NgWebElement uiStreetAddress = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
             uiStreetAddress.SendKeys(streetAddress);
 
-            NgWebElement uiCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
+            NgWebElement uiCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             uiCity.SendKeys(city);
 
-            NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
+            NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
             uiPostalCode.SendKeys(postalCode);
 
             NgWebElement uiSameAsMailingAddress = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
             uiSameAsMailingAddress.Click();
 
-            NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
+            NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
             uiBizPhoneNumber.SendKeys(bizPhoneNumber);
 
-            NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
+            NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[16]"));
             uiBizEmail.SendKeys(bizEmail);
 
-            NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[23]"));
+            NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
             uiCorpContactPhone.SendKeys(corpContactPhone);
 
-            NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[24]"));
+            NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
             uiCorpContactEmail.SendKeys(corpContactEmail);
 
             NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
             corpConnectionFederalProducer.Click();
-
-            NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
-            federalProducerConnectionToCorp.Click();
 
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
             continueApp_button.Click();
@@ -148,6 +147,10 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
+            string indigenousNation = "Ashcroft Indian Band";
+
+            NgWebElement uiSelectNation = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select"));
+            uiSelectNation.SendKeys(indigenousNation);
 
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
             estabName.SendKeys(estName);
