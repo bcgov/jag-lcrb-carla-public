@@ -31,7 +31,9 @@
 <ng-template #treeNode let-node="node" let-account="account">
 
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
+    
     <h3 class="blue-header">Provide Corporate Documents</h3>
+    <div class="content">
     <h3 class="plain-header">Notice of Articles</h3>
     <section class="padded-section">
       <p>Please upload the {{node?.businessNameNew}} Corporation Notice of Articles.</p>
@@ -44,9 +46,11 @@
         </app-file-uploader>
       </section>
     </section>
+  </div>
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation'" [formGroup]="form">
+    <div class="content-bottom">
     <h3 class="plain-header">Central Securities Register</h3>
     <section class="padded-section">
       <p>Please upload the {{node?.businessNameNew}} Central Securities Register.</p>
@@ -79,11 +83,12 @@
       <input type="number" formControlName="totalShares" class="form-control">
       </app-field>
     </section-->
-
+  </div>
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'Partnership'">
     <h3 class="blue-header">Provide Partnership Documents</h3>
+    <div class="content-bottom">
     <h3 class="plain-header">Partnership Agreement</h3>
     <section class="padded-section">
       <p>Partnership Agreement for {{node?.businessNameNew}}.</p>
@@ -95,12 +100,15 @@
         [entityId]="account?.id" [uploadHeader]="'TO UPLOAD SPECIAL PARTNERSHIP AGREEMENT, DRAG FILE HERE OR'">
       </app-file-uploader>
     </section>
+  </div>
   </ng-container>
 
   <ng-container [formGroup]="form" *ngIf="node?.businessType === 'Society'">
-    <section class="padded-section">
+
       <h3 class="blue-header">Provide Society Information</h3>
-      <app-field label="Annual Membership Fee" errorMessage="Please enter value"
+      <div class="content-bottom">
+      <section class="padded-section">
+        <app-field label="Annual Membership Fee" errorMessage="Please enter value"
         [valid]="!form.get('annualMembershipFee').touched || form.get('annualMembershipFee').touched">
         <input type="number" formControlName="annualMembershipFee" class="form-control">
       </app-field>
@@ -109,6 +117,7 @@
         <input type="number" formControlName="numberOfMembers" re class="form-control">
       </app-field>
     </section>
+  </div>
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'SoleProprietor'">
@@ -121,6 +130,7 @@
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
 
     <h3 class="blue-header">List Key Personnel</h3>
+    <div class="content-bottom">  
     <section class="padded-section">
       <p>
         Please add the complete list of directors, officers and senior managers for {{node?.businessNameNew}}, including
@@ -135,10 +145,12 @@
         [account]="account" (personalHistoryItemsChange)="updateChildred($event, 'Leadership')" [licencesOnFile]="licencesOnFile"
         changeTypeSuffix="Leadership" addLabel="Add Key Personnel"></app-associate-list>
     </section>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'Society'">
     <h3 class="blue-header">List Directors and Officers</h3>
+    <div class="content-bottom">  
     <section class="padded-section">
       <p>
         Please add the complete list of directors and officers for {{node?.businessNameNew}}, including their
@@ -150,10 +162,12 @@
         (personalHistoryItemsChange)="updateChildred($event, 'Leadership')" [rootNode]="node" [account]="account"
         changeTypeSuffix="Leadership" addLabel="Add Director or Officer"></app-associate-list>
     </section>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'Partnership'">
     <h3 class="blue-header">List Partners</h3>
+    <div class="content-bottom">
     <h4 class="plain-header">Individual Partners</h4>
     <section class="padded-section">
       <p>
@@ -181,6 +195,7 @@
         (personalHistoryItemsChange)="updateChildred($event, 'BusinessShareholder')"
         changeTypeSuffix="BusinessShareholder" addLabel="Add Business Partner"></app-associate-list>
     </section>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation'">
@@ -191,6 +206,7 @@
 
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation'">
     <h3 class="blue-header">Identify Shareholders</h3>
+    <div class="content-bottom">  
     <h4 class="plain-header">Individual Shareholders</h4>
     <section class="padded-section">
       <p>
@@ -215,6 +231,7 @@
         changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder"></app-associate-list>
         <p>&nbsp;</p>
     </section>
+    </div>
   </ng-container>
 </ng-template>
 
