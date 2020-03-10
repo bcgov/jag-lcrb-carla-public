@@ -99,20 +99,20 @@ namespace bdd_tests
             uiCorpNumber.SendKeys(incorporationNumber);
 
             // enter the Date of Incorporation in B.C. - in progress 
-            //NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("//body"));
-            //uiCalendar1.Click();
+            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-account-profile/div/div[2]/div[1]/div/div/div[1]/section[2]/div/input"));
+            uiCalendar1.Click();
 
-            //NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("(//button[@type='button'])[3]"));
-            //uiCalendar2.Click();
+            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span"));
+            uiCalendar2.Click();
 
-            //NgWebElement uiCalendar3 = ngDriver.FindElement(By.XPath("(//button[@type='button'])[3]"));
-            //uiCalendar3.Click();
+            NgWebElement uiCalendar3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr[3]/td/div"));
+            uiCalendar3.Click();
 
-            //NgWebElement uiCalendar4 = ngDriver.FindElement(By.XPath("(//button[@type='button'])[3]"));
-            //uiCalendar4.Click();
+            NgWebElement uiCalendar4 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-year-view/table/tbody/tr[3]/td[4]/div"));
+            uiCalendar4.Click();
 
-            //NgWebElement uiCalendar5 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[3]/div"));
-            //uiCalendar5.Click();
+            NgWebElement uiCalendar5 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[4]/td[5]/div"));
+            uiCalendar5.Click();
 
             // enter the physical street address 1
             NgWebElement uiPhysStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
