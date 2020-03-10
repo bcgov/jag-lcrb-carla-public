@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             var result = new CreateFolderReply();
             string listTitle = GetDocumentListTitle(request.EntityName);
 
-            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration, _logger);
+            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
 
             CreateDocumentLibraryIfMissing(listTitle, GetDocumentTemplateUrlPart(request.EntityName));
 
@@ -280,6 +280,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
             try
             {
+                _logger.LogError($"documentLibrary: {GetDocumentTemplateUrlPart(request.EntityName)}, folderName: {request.FolderName}, fileName: {request.FileName}");
                 string fileName = _sharePointFileManager.AddFile(GetDocumentTemplateUrlPart(request.EntityName), 
                     request.FolderName, 
                     request.FileName, 
