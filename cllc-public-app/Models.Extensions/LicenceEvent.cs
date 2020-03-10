@@ -11,6 +11,40 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class LicenceEventExtensions
     {
+        public static EventClass DetermineEventClass(this LicenceEvent item, bool alwaysAuthorization)
+        {
+            bool isHighRisk = false;
+
+            // Attendance > 500
+            int maxAttendance = item.MaxAttendance != null ? (int)item.MaxAttendance : 0;
+            int maxStaffAttendance = item.MaxStaffAttendance != null ? (int)item.MaxStaffAttendance : 0;
+            if (maxAttendance + maxStaffAttendance >= 500) {
+                isHighRisk = true;
+            }
+
+            // Location is outdoors
+            // int? location = item.SpecificLocation;
+            if (item.SpecificLocation == SpecificLocation.Outdoors || item.SpecificLocation == SpecificLocation.Both) {
+                isHighRisk = true;
+            }
+
+            // liquor service > 2 hours (but not community event)
+            if (item.EventType != EventType.Community) {
+                item.Schedules.ForEach((schedule) => {
+                    System.TimeSpan? timeSpan = schedule.ServiceEndDateTime - schedule.ServiceStartDateTime;
+                    if (timeSpan.HasValue && timeSpan.Value.Hours > 2)
+                    {
+                        isHighRisk = true;
+                    }
+                });
+            }
+
+            if (isHighRisk || alwaysAuthorization) {
+                return EventClass.Authorization;
+            }
+            return EventClass.Notice;
+        }
+
         // Converts a dynamics entity into a view model
         public static ViewModels.LicenceEvent ToViewModel(this MicrosoftDynamicsCRMadoxioEvent item, IDynamicsClient dynamicsClient)
         {
