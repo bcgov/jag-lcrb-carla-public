@@ -1,7 +1,7 @@
 <div class="form-wrapper row" style="position:relative;">
   <div [ngBusy]="[busy, busyPromise]"></div>
   <section class="col-md-8">
-    <app-org-structure *ngIf="applicationId" [node]="treeRoot" [account]="account" [licencesOnFile]="licencesOnFile"></app-org-structure>
+    <app-org-structure *ngIf="applicationId" [node]="treeRoot" [account]="account" [licencesOnFile]="licencesOnFile" #orgStructure></app-org-structure>
     
     <section class="d-flex" *ngIf="licencesOnFile && LicenseeChangeLog.HasChanges(this.treeRoot)">
       <p>&nbsp;</p>
