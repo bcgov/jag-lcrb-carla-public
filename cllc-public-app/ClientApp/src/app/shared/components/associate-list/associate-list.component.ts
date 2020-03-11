@@ -181,6 +181,10 @@ export class AssociateListComponent extends FormBase implements OnInit {
     const controls = this.associates.controls;
     for (let control in controls) {
       if (control) {
+        // sync refObject
+        let refObject = controls[control].value.refObject;
+        refObject = Object.assign(refObject, controls[control].value);
+        // add item to value
         value.push(controls[control].value.refObject);
       }
     }
@@ -208,9 +212,6 @@ export class AssociateListComponent extends FormBase implements OnInit {
         this.associates.at(index).get('isIndividual').setValue(false);
         this.associates.at(index).get('isShareholderNew').setValue(true);
       }
-      // update refObject
-      const refObject = this.associates.at(index).get('refObject');
-      refObject.setValue(Object.assign(refObject.value, item));
 
       this.emitValue();
       saved = true;
