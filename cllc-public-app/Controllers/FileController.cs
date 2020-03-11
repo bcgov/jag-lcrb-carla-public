@@ -334,7 +334,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         break;
                     case "event":
                         var eventEntity = _dynamicsClient.GetEventByIdWithChildren(entityId);
-                        var eventLocation = eventEntity.AdoxioEventSharePointDocumentLocations.FirstOrDefault();
+                        MicrosoftDynamicsCRMsharepointdocumentlocation? eventLocation = eventEntity.AdoxioEventSharePointDocumentLocations.FirstOrDefault();
                         if (eventLocation != null && !string.IsNullOrEmpty(eventLocation.Relativeurl))
                         {
                             result = eventLocation.Relativeurl;
