@@ -228,7 +228,6 @@ namespace bdd_tests
             string keyPersonnelLastName = "Bond";
             string keyPersonnelTitle = "Adventurer";
             string keyPersonnelEmail = "jane@bond.com";
-            string keyPersonnelDOB = "1998-01-01";
 
             string shareholderFirstName = "Jacqui";
             string shareholderLastName = "Chan";
@@ -281,9 +280,8 @@ namespace bdd_tests
             NgWebElement uiKeyPersonEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
             uiKeyPersonEmail.SendKeys(keyPersonnelEmail);
 
-            // enter key personnel DOB
-            NgWebElement uiKeyPersonDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
-            uiKeyPersonDOB.SendKeys(keyPersonnelDOB);
+            // enter key personnel DOB 
+            // to do
 
             // open shareholder form
             NgWebElement openShareholderForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/section[5]/app-associate-list/div/button"));
