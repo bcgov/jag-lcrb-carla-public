@@ -322,22 +322,32 @@ namespace bdd_tests
             NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             uiCalendarS1.Click();
 
-            //NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-5']/div/mat-month-view/table/tbody/tr[2]/td/div"));
-            //uiCalendarS2.Click();
-
-            /*NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("(//button[@type='button'])[2]"));
+            NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/mat-calendar-header/div/div/button/span"));
             uiCalendarS2.Click();
 
-            NgWebElement uiCalendarS3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-5']/div/mat-multi-year-view/table/tbody/tr[6]/td/div"));
+            NgWebElement uiCalendarS3 = ngDriver.FindElement(By.XPath("(//button[@type='button'])[3]"));
             uiCalendarS3.Click();
 
-            NgWebElement uiCalendarS4 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-5']/div/mat-year-view/table/tbody/tr[3]/td[4]/div"));
+            NgWebElement uiCalendarS4 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-multi-year-view/table/tbody/tr[6]/td[3]/div"));
             uiCalendarS4.Click();
 
-            NgWebElement uiCalendarS5 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-5']/div/mat-month-view/table/tbody/tr[4]/td[3]/div"));
-            uiCalendarS5.Click();*/
+            NgWebElement uiCalendarS5 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-year-view/table/tbody/tr[3]/td[3]/div"));
+            uiCalendarS5.Click();
 
+            NgWebElement uiCalendarS6 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[3]/td[6]/div"));
+            uiCalendarS6.Click();
 
+            NgWebElement uiCalendarS7 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/section[5]/app-associate-list/div/table/tr/td[6]/i"));
+            uiCalendarS7.Click();
+
+            // check that shareholder DOB is populating properly
+            string secondShareholderFirstName = "Emily";
+
+            NgWebElement uiOpenSecondRow = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/section[5]/app-associate-list/div/button"));
+            uiOpenSecondRow.Click();
+
+            NgWebElement uiSecondShareFirst = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+            uiSecondShareFirst.SendKeys(secondShareholderFirstName);
 
             // click on Submit Organization Info button
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
