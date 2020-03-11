@@ -247,18 +247,21 @@ namespace Gov.Lclb.Cllb.Public
 
             // add the file manager.
             string fileManagerURI = _configuration["FILE_MANAGER_URI"];
-
+            if (!_env.IsProduction()) // needed for macOS TLS being turned off
+            {
+                AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            }
             if (!string.IsNullOrEmpty (fileManagerURI))
             {
                 var httpClientHandler = new HttpClientHandler();
-                
+
                 if (!_env.IsProduction()) // Ignore certificate errors in non-production modes.  
                                          // This allows you to use OpenShift self-signed certificates for testing.
                 {
-                    // Return `true` to allow certificates that are untrusted/invalid
+                    // Return `true` to allow certificates that are untrusted/invalid                    
                     httpClientHandler.ServerCertificateCustomValidationCallback =
                     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-                }      
+                }
                 
                 var httpClient = new HttpClient(httpClientHandler);
                 // set default request version to HTTP 2.  Note that Dotnet Core does not currently respect this setting for all requests.

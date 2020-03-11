@@ -1,6 +1,6 @@
 <div class="form-wrapper" style="position: relative;">
   <div [ngBusy]="[busy]"></div>
-  <form [formGroup]="eventForm" (change)="handleFormChange()">
+  <form [formGroup]="eventForm">
     <div class="padded-section">
       <h1>Catered Event Authorization Request</h1>
     </div>
@@ -56,11 +56,11 @@
         <li>The event is outdoors</li>
         <li>The duration of liquor service exceeds 2 hours (exludes community events)</li>
       </ul>
-      <div class="row">
+      <!-- <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Class" [isFullWidth]="true">
           <input class="form-control" type="text" [value]="getEventClassLabel()" readonly>
         </app-field>
-      </div>
+      </div> -->
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Type" [required]="true"
           [valid]="eventForm.get('eventType').valid || !eventForm.get('eventType').touched"

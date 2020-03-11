@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SpecificLocation, EventClass, FoodService, Entertainment, EventType, LicenceEvent, EventStatus } from '../../models/licence-event.model';
+import { SpecificLocation, FoodService, Entertainment, EventType, LicenceEvent, EventStatus } from '../../models/licence-event.model';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { takeWhile, switchMap } from 'rxjs/operators';
 import { AppState } from '@app/app-state/models/app-state';
@@ -33,7 +33,6 @@ export class EventFormComponent extends FormBase implements OnInit {
   specificLocation = SpecificLocation;
   foodService = FoodService;
   entertainment = Entertainment;
-  eventClass = EventClass;
   eventType = EventType;
   eventStatus = EventStatus;
   startDateMinimum: Date;
@@ -48,7 +47,6 @@ export class EventFormComponent extends FormBase implements OnInit {
     name: ['', []],
     licenceId: ['', []],
     accountId: ['', []],
-    eventClass: ['', []],
     contactName: ['', [Validators.required]],
     contactPhone: ['', [Validators.required]],
     contactEmail: ['', [Validators.required]],
@@ -72,13 +70,7 @@ export class EventFormComponent extends FormBase implements OnInit {
     postalCode: ['', [Validators.required]],
     startDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]],
-    agreement: [false, [Validators.required]],
-    // unused
-    externalId: ['', []],
-    eventNumber: ['', []],
-    importSequenceNumber: ['', []],
-    communityApproval: ['', []],
-    notifyEventInspector: ['', []]
+    agreement: [false, [Validators.required]]
   });
 
   constructor(
@@ -100,9 +92,9 @@ export class EventFormComponent extends FormBase implements OnInit {
         }
       });
       this.startDateMinimum = new Date();
-      this.startDateMinimum.setDate(this.startDateMinimum.getDate() + 21);
+      this.startDateMinimum.setDate(this.startDateMinimum.getDate());
       this.endDateMinimum = new Date();
-      this.endDateMinimum.setDate(this.endDateMinimum.getDate() + 21);
+      this.endDateMinimum.setDate(this.endDateMinimum.getDate());
     }
 
   ngOnInit() {
@@ -122,10 +114,35 @@ export class EventFormComponent extends FormBase implements OnInit {
 
   setFormToLicenceEvent(licenceEvent: LicenceEvent) {
     const schedules = licenceEvent['schedules'];
-    delete licenceEvent['schedules'];
-    delete licenceEvent['modifiedOn'];
     this.eventForm.setValue({
-      ...licenceEvent,
+      status: licenceEvent.status,
+      id: licenceEvent.id,
+      name: licenceEvent.name,
+      licenceId: licenceEvent.licenceId,
+      accountId: licenceEvent.accountId,
+      contactName: licenceEvent.contactName,
+      contactPhone: licenceEvent.contactPhone,
+      contactEmail: licenceEvent.contactEmail,
+      eventType: licenceEvent.eventType,
+      eventTypeDescription: licenceEvent.eventTypeDescription,
+      clientHostname: licenceEvent.clientHostname,
+      maxAttendance: licenceEvent.maxAttendance,
+      maxStaffAttendance: licenceEvent.maxStaffAttendance,
+      minorsAttending: licenceEvent.minorsAttending,
+      foodService: licenceEvent.foodService,
+      foodServiceDescription: licenceEvent.foodServiceDescription,
+      entertainment: licenceEvent.entertainment,
+      entertainmentDescription: licenceEvent.entertainmentDescription,
+      venueDescription: licenceEvent.venueDescription,
+      specificLocation: licenceEvent.specificLocation,
+      additionalLocationInformation: licenceEvent.additionalLocationInformation,
+      street1: licenceEvent.street1,
+      street2: licenceEvent.street2,
+      city: licenceEvent.city,
+      province: licenceEvent.province,
+      postalCode: licenceEvent.postalCode,
+      startDate: new Date(licenceEvent.startDate),
+      endDate: new Date(licenceEvent.endDate),
       agreement: false
     });
 
@@ -159,11 +176,7 @@ export class EventFormComponent extends FormBase implements OnInit {
 
   save(submit = false) {
     if (submit) {
-      if (this.getOptionFromValue(this.eventClass, this.eventForm.controls['eventClass'].value).label === 'Notice') {
-        this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Approved').value);
-      } else {
-        this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'In Review').value);
-      }
+      this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'In Review').value);
     }
 
     const schedules = this.packageUpTimeForms();
@@ -331,8 +344,6 @@ export class EventFormComponent extends FormBase implements OnInit {
 
   updateEndDateMinimum() {
     if (this.eventForm.controls['startDate'].value === null || this.eventForm.controls['startDate'].value === '') {
-      this.endDateMinimum = new Date();
-      this.endDateMinimum.setDate(this.endDateMinimum.getDate() + 21);
       this.endDateMaximum = null;
     } else if (this.eventForm.controls['endDate'].value === null || this.eventForm.controls['endDate'].value === '') {
       this.endDateMinimum = this.eventForm.controls['startDate'].value;
@@ -360,52 +371,6 @@ export class EventFormComponent extends FormBase implements OnInit {
 
   isFormValid() {
     return this.eventForm.invalid || !this.eventForm.controls['agreement'].value;
-  }
-
-  handleFormChange() {
-    let isHighRisk = false;
-
-    // Attendance > 500
-    const maxAttendance = this.eventForm.controls['maxAttendance'].value === '' ? 0 : this.eventForm.controls['maxAttendance'].value;
-    const maxStaffAttendance = this.eventForm.controls['maxStaffAttendance'].value === '' ? 0 : this.eventForm.controls['maxStaffAttendance'].value;
-    if (maxAttendance + maxStaffAttendance >= 500) {
-      isHighRisk = true;
-    }
-
-    // Location is outdoors
-    const location = this.getOptionFromValue(this.specificLocation, this.eventForm.controls['specificLocation'].value);
-    if (location.label === 'Outdoors' || location.label === 'Both') {
-      isHighRisk = true;
-    }
-
-    // liquor service > 2 hours (but not community event)
-    if (this.getOptionFromValue(this.eventType, this.eventForm.controls['eventType'].value).label !== 'Community') {
-      this.timeForms.value.forEach((form) => {
-        const endDate = new Date();
-        endDate.setHours(form.liquorEndTime.hour);
-        endDate.setMinutes(form.liquorEndTime.minute);
-        const startDate = new Date();
-        startDate.setHours(form.liquorStartTime.hour);
-        startDate.setMinutes(form.liquorStartTime.minute);
-
-        const diff = (endDate.getTime() - startDate.getTime()) / 1000 / 60 / 60;
-        if ((diff < 0 && 24 - diff > 2) || (diff > 2)) {
-          isHighRisk = true;
-        }
-      });
-    }
-
-    if (isHighRisk) {
-      const authorizationVal = this.getOptionFromLabel(this.eventClass, 'Authorization').value;
-      this.eventForm.controls['eventClass'].setValue(authorizationVal);
-    } else {
-      const noticeVal = this.getOptionFromLabel(this.eventClass, 'Notice').value;
-      this.eventForm.controls['eventClass'].setValue(noticeVal);
-    }
-  }
-
-  getEventClassLabel() {
-    return this.getOptionFromValue(this.eventClass, this.eventForm.get('eventClass').value).label;
   }
 
   cancel() {

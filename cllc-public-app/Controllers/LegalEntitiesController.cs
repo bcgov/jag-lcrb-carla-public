@@ -127,8 +127,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(legalEntity);
         }
 
-        private void GetScreeningData(ref SecurityScreeningCategorySummary securityScreeningCategorySummarycannabisSummary, LegalEntity legalEntity, bool isLiquor)
+        private void GetScreeningData(ref SecurityScreeningCategorySummary securityScreeningCategorySummarycannabisSummary, LegalEntity legalEntity, bool isLiquor, List<string> addedContacts = null)
         {
+            if (addedContacts == null)
+            {
+                addedContacts = new List<string>();
+            }
             // if the current legal entity is an individual, add it.
 
             if (legalEntity.isindividual != null && true == legalEntity.isindividual)
@@ -136,10 +140,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 bool isComplete = false;
                 DateTimeOffset? dateSubmitted = null;
                 // determine if there is a completed change log for this item.
-                if (! string.IsNullOrEmpty (legalEntity.contactId))
+                if (!string.IsNullOrEmpty(legalEntity.contactId))
                 {
                     var contact = _dynamicsClient.GetContactById(legalEntity.contactId).GetAwaiter().GetResult();
-                    if (contact != null && contact.AdoxioPhscomplete != null && contact.AdoxioPhscomplete == 845280001)
+                    if (contact != null && contact.AdoxioPhscomplete != null && contact.AdoxioPhscomplete == (int)YesNoOptions.Yes)
                     {
                         isComplete = true;
                         dateSubmitted = contact.AdoxioPhsdatesubmitted;
@@ -151,15 +155,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     MiddleName = legalEntity.middlename,
                     LastName = legalEntity.lastname,
                     ScreeningLink = legalEntity.PhsLink,
-                    DateSubmitted = dateSubmitted
+                    DateSubmitted = dateSubmitted,
+                    ContactId = legalEntity.contactId
                 };
                 if (isComplete)
                 {
+
                     if (securityScreeningCategorySummarycannabisSummary.CompletedItems == null)
                     {
                         securityScreeningCategorySummarycannabisSummary.CompletedItems = new List<SecurityScreeningStatusItem>();
                     }
-                    securityScreeningCategorySummarycannabisSummary.CompletedItems.Add(newItem);
+                    if (!addedContacts.Any(c => c == newItem.ContactId))
+                    {
+                        addedContacts.Add(newItem.ContactId);
+                        securityScreeningCategorySummarycannabisSummary.CompletedItems.Add(newItem);
+                    }
                 }
                 else
                 {
@@ -167,17 +177,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         securityScreeningCategorySummarycannabisSummary.OutstandingItems = new List<SecurityScreeningStatusItem>();
                     }
-                    securityScreeningCategorySummarycannabisSummary.OutstandingItems.Add(newItem);
+                    if (!addedContacts.Any(c => c == newItem.ContactId))
+                    {
+                        addedContacts.Add(newItem.ContactId);
+                        securityScreeningCategorySummarycannabisSummary.OutstandingItems.Add(newItem);
+                    }
                 }
             }
-            if (legalEntity.children != null )
+            if (legalEntity.children != null)
             {
                 foreach (var item in legalEntity.children)
                 {
-                    GetScreeningData(ref securityScreeningCategorySummarycannabisSummary, item, isLiquor);
+                    GetScreeningData(ref securityScreeningCategorySummarycannabisSummary, item, isLiquor, addedContacts);
                 }
             }
-                
+
         }
 
 
@@ -223,9 +237,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 GetScreeningData(ref liquorSummary, legalEntity, false);
                 result.Liquor = liquorSummary;
             }
-     
-            return new JsonResult(result);
 
+            return new JsonResult(result);
         }
 
 
@@ -334,7 +347,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 foreach (var legalEntity in legalEntities)
                 {
                     var viewModel = legalEntity.ToViewModel();
-                    if (!String.IsNullOrEmpty(legalEntity.AdoxioLegalentityid) && !processedEntities.Contains(legalEntity.AdoxioLegalentityid))
+                   if (!String.IsNullOrEmpty(legalEntity.AdoxioLegalentityid) && !processedEntities.Contains(legalEntity.AdoxioLegalentityid))
                     {
                         processedEntities.Add(legalEntity.AdoxioLegalentityid);
                         viewModel.children = GetLegalEntityChildren(legalEntity.AdoxioLegalentityid, processedEntities);
