@@ -211,10 +211,9 @@ export class LicencesComponent extends FormBase implements OnInit {
       forkJoin([
         this.licenceEventsService.getLicenceEventsList(licence.licenseId, 10)
       ])
-        .subscribe(data => {
-          console.log(data[0]);
-          licence.events = data[0];
-        });
+      .subscribe(data => {
+        licence.events = data[0];
+      });
     }
 
     if (typeof this.licenceMappings[licence.licenceTypeName] === 'undefined') {
