@@ -12,6 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./security.component.scss'],
 })
 export class EventSecurityFormComponent extends FormBase implements OnInit {
+  isDebugMode = false;
   isEditMode = false;
   licenceEvent: LicenceEvent;
   busy: Subscription;
