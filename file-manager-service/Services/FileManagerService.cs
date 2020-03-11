@@ -280,7 +280,6 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
             try
             {
-                _logger.LogError($"documentLibrary: {GetDocumentTemplateUrlPart(request.EntityName)}, folderName: {request.FolderName}, fileName: {request.FileName}");
                 string fileName = _sharePointFileManager.AddFile(GetDocumentTemplateUrlPart(request.EntityName), 
                     request.FolderName, 
                     request.FileName, 
