@@ -237,9 +237,9 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
    * Sends data to dynamics
    */
   save() {
-    this.validationErrors = this.validateFormData();
     this.orgStructure.saveAll()
       .subscribe(result => {
+        this.validationErrors = this.validateFormData();
         if (!result) {
           this.validationErrors = ['There are incomplete fields on the page', ...this.validationErrors];
         }
