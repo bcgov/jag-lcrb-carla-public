@@ -1,6 +1,6 @@
 
 import { filter, takeWhile, catchError, mergeMap, delay } from 'rxjs/operators';
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
@@ -56,6 +56,8 @@ export class ApplicationHTMLContent {
 export class ApplicationComponent extends FormBase implements OnInit {
   establishmentWatchWords: KeyValue<string, boolean>[];
   application: Application;
+  @Input() skipPayment: boolean = false;
+  @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('mainForm', { static: false }) mainForm: FileUploaderComponent;
   @ViewChild('financialIntegrityDocuments', { static: false }) financialIntegrityDocuments: FileUploaderComponent;
   @ViewChild('supportingDocuments', { static: false }) supportingDocuments: FileUploaderComponent;
@@ -272,7 +274,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (!this.application.applicationType.showDescription1) {
       this.form.get('description1').disable();
     }
-    
+
     // 03/01/2020 - Disabled until connected grocery store feature is ready
     // if (this.application.applicationType.connectedGroceryStore !== FormControlState.Show) {
     //   this.form.get('connectedGrocery').clearValidators();
@@ -343,7 +345,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return show;
   }
 
-  showGroceryStore(){
+  showGroceryStore() {
     let show = (this.application && this.showFormControl(this.application.applicationType.connectedGroceryStore));
     show = show && this.form.get('connectedGrocery').value === 'Yes';
     return show;
@@ -405,11 +407,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.showValidationMessages = true;
     } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
       this.submitPayment();
+      this.saveComplete.emit(true);
     } else {
       this.busy = this.save(true)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
+            this.saveComplete.emit(true);
             this.submitPayment();
           }
         });
@@ -420,6 +424,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
+    if (this.skipPayment) {
+      return;
+    }
     this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(jsonUrl => {
