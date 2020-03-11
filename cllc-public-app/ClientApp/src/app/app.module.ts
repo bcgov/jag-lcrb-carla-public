@@ -183,6 +183,7 @@ import { AccountCompletenessComponent } from './components/account-completeness/
 import { PhsConfirmationComponent } from './components/phs-confirmation/phs-confirmation.component';
 import { MultiStageApplicationFlowComponent } from './components/multi-stage-application-flow/multi-stage-application-flow.component';
 import { EventFormComponent } from '@components/event-form/event-form.component';
+import { EventSecurityFormComponent } from '@components/event-form/security.component';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { SecurityScreeningRequirementsComponent } from './components/security-screening-requirements/security-screening-requirements.component';
 import { EligibilityFormComponent } from './components/eligibility-form/eligibility-form.component';
@@ -220,6 +221,7 @@ import { EligibilityFormDataService } from '@services/eligibility-data.service';
     KeyPersonnelComponent,
     LicenceFeePaymentConfirmationComponent,
     EventFormComponent,
+    EventSecurityFormComponent,
     NewsletterConfirmationComponent,
     NewsletterSignupComponent,
     NotFoundComponent,

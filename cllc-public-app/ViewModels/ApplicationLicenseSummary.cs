@@ -24,11 +24,19 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         No = 845280000
     }
 
+    public enum ApplicationTypeCategory{
+        Cannabis = 845280000,
+        Liquor = 845280001
+    }
+
     public class ApplicationLicenseSummary
     {
         public string LicenseId { get; set; }
         public string ApplicationId { get; set; }
         public string ApplicationTypeName { get; set; }
+        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ApplicationTypeCategory? ApplicationTypeCategory { get; set; }
         public string EstablishmentId {get; set; }
         public string EstablishmentName { get; set; }
         public string EstablishmentAddressStreet { get; set; }
