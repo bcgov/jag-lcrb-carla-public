@@ -127,7 +127,8 @@ namespace bdd_tests
             uiCorpNumber.SendKeys(incorporationNumber);
 
             // enter the Date of Incorporation in B.C. 
-            /*NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+
+            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             uiCalendar1.Click();
 
             NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span"));
@@ -140,7 +141,7 @@ namespace bdd_tests
             uiCalendar4.Click();
 
             NgWebElement uiCalendar5 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[4]/td[5]/div"));
-            uiCalendar5.Click();*/
+            uiCalendar5.Click();
 
             // enter the physical street address 1
             NgWebElement uiPhysStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
@@ -281,7 +282,20 @@ namespace bdd_tests
             uiKeyPersonEmail.SendKeys(keyPersonnelEmail);
 
             // enter key personnel DOB 
-            // to do
+            NgWebElement uiCalendarP1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            uiCalendarP1.Click();
+
+            NgWebElement uiCalendarP2 = ngDriver.FindElement(By.XPath("(//button[@type='button'])[2]"));
+            uiCalendarP2.Click();
+
+            NgWebElement uiCalendarP3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-multi-year-view/table/tbody/tr[6]/td/div"));
+            uiCalendarP3.Click();
+
+            NgWebElement uiCalendarP4 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-year-view/table/tbody/tr[3]/td[4]/div"));
+            uiCalendarP4.Click();
+
+            NgWebElement uiCalendarP5 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[4]/td[3]/div"));
+            uiCalendarP5.Click();
 
             // open shareholder form
             NgWebElement openShareholderForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/section[5]/app-associate-list/div/button"));
@@ -303,8 +317,27 @@ namespace bdd_tests
             NgWebElement uiShareEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
             uiShareEmail.SendKeys(shareholderEmail);
 
-            // enter shareholder DOB
-            // todo
+            // enter shareholder DOB - in progress
+
+            NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            uiCalendarS1.Click();
+
+            //NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-5']/div/mat-month-view/table/tbody/tr[2]/td/div"));
+            //uiCalendarS2.Click();
+
+            /*NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("(//button[@type='button'])[2]"));
+            uiCalendarS2.Click();
+
+            NgWebElement uiCalendarS3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-5']/div/mat-multi-year-view/table/tbody/tr[6]/td/div"));
+            uiCalendarS3.Click();
+
+            NgWebElement uiCalendarS4 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-5']/div/mat-year-view/table/tbody/tr[3]/td[4]/div"));
+            uiCalendarS4.Click();
+
+            NgWebElement uiCalendarS5 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-5']/div/mat-month-view/table/tbody/tr[4]/td[3]/div"));
+            uiCalendarS5.Click();*/
+
+
 
             // click on Submit Organization Info button
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
