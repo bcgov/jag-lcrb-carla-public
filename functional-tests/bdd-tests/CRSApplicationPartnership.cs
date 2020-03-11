@@ -54,11 +54,47 @@ namespace bdd_tests
             ngDriver.WaitForAngular();
 
             //System.Threading.Thread.Sleep(7000);
-            
+
+            /* 
+            Page Title: Welcome to Cannabis Licensing
+            */
+
             NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
             startApp_button.Click();
 
             ngDriver.WaitForAngular();
+
+            /* 
+            Page Title: Cannabis Retail Store Licence Eligibility Disclosure
+            */
+
+            string electricSignature = "Automated Test";
+
+            // select No for Question 1
+            NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
+            noRadio1.Click();
+
+            // select No for Question 2
+            NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
+            noRadio2.Click();
+
+            // select the certification checkbox
+            NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
+            matCheckbox.Click();
+
+            // enter the electronic signature
+            NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
+            sigCheckbox.SendKeys(electricSignature);
+
+            // click on the Submit button
+            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
+            submit_button.Click();
+
+            ngDriver.WaitForAngular();
+
+            /* 
+            Page Title: Please Review the Account Profile
+            */
 
             string bizNumber = "012345678";
             string streetAddress = "645 Tyee Road";
@@ -113,22 +149,14 @@ namespace bdd_tests
         {
             ngDriver.WaitForAngular();
 
-            string electricSignature = "Automated Test";
+            // upload partnership agreement - to do 
 
-            NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
-            noRadio1.Click();
+            // list individual partners - to do
 
-            NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
-            noRadio2.Click();
+            // list business partners - to do
 
-            NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
-            matCheckbox.Click();
-
-            NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
-            sigCheckbox.SendKeys(electricSignature);
-
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
-            submit_button.Click();
+            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION']"));
+            submitOrgInfoButton.Click();
 
             ngDriver.WaitForAngular();
         }
