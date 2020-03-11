@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
 using Newtonsoft.Json;
@@ -25,8 +26,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public const string ApplicationDocumentListTitle = "Application";
         public const string ApplicationDocumentUrlTitle = "adoxio_application";
         public const string ContactDocumentListTitle = "contact";
-        public const string WorkertDocumentListTitle = "Worker Qualification";
-        public const string WorkertDocumentUrlTitle = "adoxio_worker";
+        public const string WorkerDocumentListTitle = "Worker Qualification";
+        public const string WorkerDocumentUrlTitle = "adoxio_worker";
+        public const string EventDocumentListTitle = "adoxio_event"; // temporarily using the wrong folder while waiting for permissions
 
         private const int MaxUrlLength = 260; // default maximum URL length.
 

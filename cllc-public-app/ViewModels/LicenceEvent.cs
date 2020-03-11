@@ -129,5 +129,52 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? ModifiedOn { get; set; }
 
         public List<LicenceEventSchedule> Schedules { get; set; }
+
+        // Security plan
+        public bool? SecurityPlanRequested { get; set; }
+        // Event Description
+        public string EventLiquorLayout { get; set; }
+        public int? DailyEventAttendees { get; set; }
+        public int? DailyMinorAttendees { get; set; }
+        public int? OccupantLoad { get; set; }
+        public bool? OccupantLoadAvailable { get; set; }
+        public int? OccupantLoadServiceArea { get; set; }
+        public bool? OccupantLoadServiceAreaAvailable { get; set; }
+        public string ServiceAreaControlledDetails { get; set; }
+        public string StaffingManagers { get; set; }
+        public string StaffingBartenders { get; set; }
+        public string StaffingServers { get; set; }
+
+        // Event Security
+        public string SecurityPersonnel { get; set; }
+        public int? SecurityPersonnelThroughCompany { get; set; }
+        public string SecurityCompanyName { get; set; }
+        public string SecurityCompanyAddress { get; set; }
+        public string SecurityCompanyCity { get; set; }
+        public string SecurityCompanyPostalCode { get; set; }
+        public string SecurityCompanyContactPerson { get; set; }
+        public string SecurityCompanyPhoneNumber { get; set; }
+        public string SecurityCompanyEmail { get; set; }
+        public string SecurityPoliceOfficerSummary { get; set; }
+        
+        //Safe and Responsible service
+        public bool? SafeAndResponsibleMinorsNotAttending { get; set; }
+        public bool? SafeAndResponsibleLiquorAreaControlled { get; set; }
+        public string SafeAndResponsibleLiquorAreaControlledDescription { get; set; }
+        public bool? SafeAndResponsibleMandatoryID { get; set; }
+        public bool? SafeAndResponsibleSignsAdvisingMinors { get; set; }
+        public bool? SafeAndResponsibleMinorsOther { get; set; }
+        public string SafeAndResponsibleMinorsOtherDescription { get; set; }
+        public bool? SafeAndResponsibleSignsAdvisingRemoval { get; set; }
+        public bool? SafeAndResponsibleSignsAdvisingTwoDrink { get; set; }
+        public bool? SafeAndResponsibleOverConsumptionOther { get; set; }
+        public string SafeAndResponsibleOverConsumptionOtherDescription { get; set; }
+        public bool? SafeAndResponsibleReadAppendix2 { get; set; }
+        public bool? SafeAndResponsibleDisturbancesOther { get; set; }
+        public string SafeAndResponsibleDisturbancesOtherDescription { get; set; }
+        public string SafeAndResponsibleAdditionalSafetyMeasures { get; set; }
+
+        // security agreement
+        public bool? DeclarationIsAccurate { get; set; }
     }
 }

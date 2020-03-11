@@ -143,7 +143,10 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     listTitle = SharePointFileManager.ContactDocumentListTitle;
                     break;
                 case "worker":
-                    listTitle = SharePointFileManager.WorkertDocumentListTitle;
+                    listTitle = SharePointFileManager.WorkerDocumentListTitle;
+                    break;
+                case "event":
+                    listTitle = SharePointFileManager.EventDocumentListTitle;
                     break;
                 default:
                     listTitle = entityName;
@@ -168,6 +171,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     break;
                 case "worker":
                     listTitle = "adoxio_worker";
+                    break;
+                case "event":
+                    listTitle = SharePointFileManager.EventDocumentListTitle;
                     break;
                 default:
                     break;
