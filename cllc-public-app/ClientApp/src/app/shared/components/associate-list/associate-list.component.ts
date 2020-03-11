@@ -1,9 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { LicenseeChangeLog, LicenseeChangeType } from '@models/licensee-change-log.model';
+import { Component, OnInit, Input, Output, EventEmitter, QueryList, ViewChildren } from '@angular/core';
+import { LicenseeChangeLog } from '@models/licensee-change-log.model';
 import { FormBuilder, Validators, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
 import { MatSnackBar } from '@angular/material';
+import { of, Observable, forkJoin } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
+import { OrgStructureComponent } from '../org-structure/org-structure.component';
 
 @Component({
   selector: 'app-associate-list',
@@ -22,6 +25,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
     this.items = value || [];
   };
   @Output() personalHistoryItemsChange = new EventEmitter<LicenseeChangeLog[]>();
+  @ViewChildren('orgStructure') orgStructureList: QueryList<OrgStructureComponent>;
 
   LicenseeChangeLog = LicenseeChangeLog;
   busy: any;
@@ -177,15 +181,19 @@ export class AssociateListComponent extends FormBase implements OnInit {
     const controls = this.associates.controls;
     for (let control in controls) {
       if (control) {
-        let refValue = Object.assign(controls[control].value.refObject, controls[control].value);
+        // sync refObject
+        let refObject = controls[control].value.refObject;
+        refObject = Object.assign(refObject, controls[control].value);
+        // add item to value
         value.push(controls[control].value.refObject);
       }
     }
     this.personalHistoryItemsChange.emit(value);
   }
 
-  saveLog(item: LicenseeChangeLog, index: number) {
+  saveLog(item: LicenseeChangeLog, index: number): Observable<boolean> {
     const valid = this.associates.at(index).valid;
+    let saved = false;
     if (valid) {
       item = Object.assign(new LicenseeChangeLog(), item || {}) as LicenseeChangeLog;
       if (!item.isAddChangeType()) {
@@ -206,6 +214,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
       }
 
       this.emitValue();
+      saved = true;
     } else {
       // mark all contols as touched to show validation rules
       const controls = (<FormGroup>(this.associates.at(index))).controls;
@@ -214,6 +223,36 @@ export class AssociateListComponent extends FormBase implements OnInit {
           (controls[control] as FormControl).markAsTouched();
         }
       }
+    }
+    return of(saved);
+  }
+
+  /**
+   * saves all open list items
+   * returns an Observable<boolean>. False means there is validation errors
+   */
+  saveAll(): Observable<boolean> {
+    let saveResults = [];
+    this.associates.getRawValue().forEach((value, index) => {
+      if (this.associates.at(index).value.edit) {
+        saveResults.push(this.saveLog(value, index));
+      }
+    });
+
+    // save all org structure children
+    if (this.orgStructureList.length > 0) {
+      this.orgStructureList.forEach(org => {
+        saveResults.push(org.saveAll());
+      });
+    }
+    if (saveResults.length > 0) {
+      return forkJoin(...saveResults)
+        .pipe(mergeMap(results => {
+          return of(results.indexOf(false) === -1);
+        }));
+    }
+    else {
+      return of(true);
     }
   }
 

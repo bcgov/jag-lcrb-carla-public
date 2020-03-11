@@ -7,6 +7,7 @@ export class ApplicationType {
   actionText: string;
   name: string;
   licenseType: LicenseType;
+  category: string;
 
   title: string;
   // preamble: string;

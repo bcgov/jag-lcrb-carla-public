@@ -21,6 +21,7 @@ import { LicenseDataService } from '@services/license-data.service';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { PaymentDataService } from '@services/payment-data.service';
+import { OrgStructureComponent } from '@shared/components/org-structure/org-structure.component';
 
 @Component({
   selector: 'app-application-licensee-changes',
@@ -37,7 +38,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   application: Application;
   currentChangeLogs: LicenseeChangeLog[];
   currentLegalEntities: LegalEntity;
-  @ViewChild(LicenseeTreeComponent, { static: false }) tree: LicenseeTreeComponent;
+  @ViewChild('orgStructure', { static: false }) orgStructure: OrgStructureComponent;
   @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   editedTree: LicenseeChangeLog;
@@ -153,14 +154,14 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     let label = 'Continue to Application';
     //if (!this.securityScreeningEnabled) {
 
-      //if No Organizational Information on File  OR changes made
-      if (!this.thereIsExistingOrgStructure || (this.treeRoot && LicenseeChangeLog.HasChanges(this.treeRoot))) {
-        label = 'Submit Organization Information';
-      }
-      // if Organization Information on File  AND no changes
-      else if (this.thereIsExistingOrgStructure && this.treeRoot && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
-        label = 'Confirm Organization Information Is Complete';
-      }
+    //if No Organizational Information on File  OR changes made
+    if (!this.thereIsExistingOrgStructure || (this.treeRoot && LicenseeChangeLog.HasChanges(this.treeRoot))) {
+      label = 'Submit Organization Information';
+    }
+    // if Organization Information on File  AND no changes
+    else if (this.thereIsExistingOrgStructure && this.treeRoot && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
+      label = 'Confirm Organization Information Is Complete';
+    }
     //}
     return label.toUpperCase();
   }
@@ -236,32 +237,38 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
    * Sends data to dynamics
    */
   save() {
-    this.validationErrors = this.validateFormData();
-    if (this.validationErrors.length === 0) {
+    this.orgStructure.saveAll()
+      .subscribe(result => {
+        this.validationErrors = this.validateFormData();
+        if (!result) {
+          this.validationErrors = ['There are incomplete fields on the page', ...this.validationErrors];
+        }
+        if (this.validationErrors.length === 0) {
 
-      // set value to cause invoice generationP
-      this.busyPromise = this.prepareSaveRequest({ invoicetrigger: 1 })
-        .pipe(mergeMap(results => {
-          const app: Application = results[0];
-          // payment is required
-          if (app && app.adoxioInvoiceId) {
-            this.submitPayment();
-          }
-          // else go to the application page
-          else if (app) {
-            this.saveComplete.emit(true);
-          }
-          return of(app);
-        }))
-        .toPromise()
-        .then(() => {
-          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          // set value to cause invoice generationP
+          this.busyPromise = this.prepareSaveRequest({ invoicetrigger: 1 })
+            .pipe(mergeMap(results => {
+              const app: Application = results[0];
+              // payment is required
+              if (app && app.adoxioInvoiceId) {
+                this.submitPayment();
+              }
+              // else go to the application page
+              else if (app) {
+                this.saveComplete.emit(true);
+              }
+              return of(app);
+            }))
+            .toPromise()
+            .then(() => {
+              this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
 
-        })
-        .catch(() => {
-          this.snackBar.open('Error saving application', 'Error', { duration: 2500, panelClass: ['red-snackbar'] });
-        });
-    }
+            })
+            .catch(() => {
+              this.snackBar.open('Error saving application', 'Error', { duration: 2500, panelClass: ['red-snackbar'] });
+            });
+        }
+      });
   }
 
   /**
@@ -281,6 +288,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
   private prepareSaveRequest(saveOverrideValue: Partial<Application>) {
+    this.validationErrors = [];
+
     saveOverrideValue = saveOverrideValue || {};
     const data = this.cleanSaveData(this.treeRoot);
     return forkJoin(
@@ -291,11 +300,20 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
   saveForLater() {
-    this.busyPromise = this.prepareSaveRequest({})
-      .toPromise()
-      .then(() => {
-        this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-        this.router.navigateByUrl('/dashboard');
+    this.orgStructure.saveAll()
+      .subscribe(result => {
+        this.validationErrors = [];
+        if (!result) {
+          this.validationErrors = ['There are incomplete fields on the page'];
+        }
+        if (this.validationErrors.length === 0) {
+          this.busyPromise = this.prepareSaveRequest({})
+            .toPromise()
+            .then(() => {
+              this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+              this.router.navigateByUrl('/dashboard');
+            });
+        }
       });
   }
 

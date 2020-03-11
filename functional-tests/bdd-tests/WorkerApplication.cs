@@ -10,6 +10,7 @@ using System;
 using Xunit.Gherkin.Quick;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using System.IO;
+using Xunit;
 
 /*
 Feature: WorkerApplication
@@ -39,23 +40,10 @@ namespace bdd_tests
             CarlaLoginWorker();
         }
 
-        [And(@"I complete the Terms of Use")]
-        public void I_complete_the_terms_of_use()
-        {
-            NgWebElement uiCheckOne = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
-            uiCheckOne.Click();
-
-            NgWebElement uiCheckTwo = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'][2]"));
-            uiCheckTwo.Click();
-
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE')]"));
-            continueButton.Click();
-        }
-
         [And(@"I click on my name")]
         public void I_click_on_my_name()
         {
-            NgWebElement uiNameLink = ngDriver.FindElement(By.XPath("(/html/body/app-root/div/div/div/main/div/app-dashboard/div/div[2]/div[1]/div/section/div/section/div/a"));
+            NgWebElement uiNameLink = ngDriver.FindElement(By.XPath("//a[contains(text(),'Associate')]"));
             uiNameLink.Click();
         }
 
@@ -87,14 +75,20 @@ namespace bdd_tests
             NgWebElement uiEmail = ngDriver.FindElement(By.XPath("//input[@type='email']"));
             uiEmail.SendKeys(email);
 
-            NgWebElement uiCalendarYear = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span"));
-            uiCalendarYear.Click();
+            NgWebElement openCalendar = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
+            openCalendar.Click();
 
-            NgWebElement uiCalendarMonth = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr/td/div"));
-            uiCalendarMonth.Click();
+            NgWebElement nextCalendar = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span"));
+            nextCalendar.Click();
 
-            NgWebElement uiCalendarDay = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-year-view/table/tbody/tr[2]/td/div"));
-            uiCalendarDay.Click();
+            NgWebElement nextCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr[4]/td[2]/div"));
+            nextCalendar2.Click();
+
+            NgWebElement nextCalendar3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-year-view/table/tbody/tr[3]/td[4]/div"));
+            nextCalendar3.Click();
+
+            NgWebElement nextCalendar4 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[4]/td[4]/div"));
+            nextCalendar4.Click();
 
             NgWebElement uiMailingStreet = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
             uiMailingStreet.SendKeys(mailingStreet);
@@ -108,9 +102,8 @@ namespace bdd_tests
             NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
             uiPostalCode.SendKeys(postalCode);
 
-            //todo: sort out label value
-            NgWebElement uiCountry = ngDriver.FindElement(By.XPath("(//select"));
-            uiCountry.Click();
+            NgWebElement saveAndContinueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SAVE & CONTINUE TO STEP 2')]"));
+            saveAndContinueButton.Click();
         }
 
         [And(@"I complete Step 2 of the application")]
@@ -118,7 +111,7 @@ namespace bdd_tests
         {
             string applicantName = "Automated Test";
             
-            NgWebElement uiSelfDisclosure = ngDriver.FindElement(By.XPath("((//input[@name='selfDisclosure'])[2]"));
+            NgWebElement uiSelfDisclosure = ngDriver.FindElement(By.XPath("(//input[@name='selfDisclosure'])[2]"));
             uiSelfDisclosure.Click();
 
             NgWebElement uiNoWetSignature1 = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
@@ -166,7 +159,7 @@ namespace bdd_tests
         [Then(@"the dashboard has a new status")]
         public void dashboard_has_new_status()
         {
-             //to do 
+            Assert.True (ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-dashboard/div/div[2]/div[1]/div/section/div/h2[text()='Security Verification Status: Pending Review']")).Displayed);
         }
     }
 }
