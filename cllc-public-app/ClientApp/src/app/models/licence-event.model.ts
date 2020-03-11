@@ -7,7 +7,7 @@ export class LicenceEvent {
   startDate: Date;
   endDate: Date;
   venueDescription: string;
-  AdditionalLocationInformation: string;
+  additionalLocationInformation: string;
   foodServiceDescription: string;
   entertainmentDescription: string;
   clientHostname: string;
@@ -21,6 +21,7 @@ export class LicenceEvent {
   street1: string;
   street2: string;
   city: string;
+  province: string;
   postalCode: string;
   modifiedOn: Date;
   schedules: [];
@@ -32,6 +33,53 @@ export class LicenceEvent {
   entertainment: number;
   foodService: number;
   eventClass: number;
+
+  // security plan
+  securityPlanRequested: boolean;
+  // Event Description
+  eventLiquorLayout: string;
+  dailyEventAttendees: number;
+  dailyMinorAttendees: number;
+  occupantLoad: number;
+  occupantLoadAvailable: boolean;
+  occupantLoadServiceArea: number;
+  occupantLoadServiceAreaAvailable: boolean;
+  serviceAreaControlledDetails: string;
+  staffingManagers: string;
+  staffingBartenders: string;
+  staffingServers: string;
+
+  // Event Security
+  securityPersonnel: string;
+  securityPersonnelThroughCompany: number;
+  securityCompanyName: string;
+  securityCompanyAddress: string;
+  securityCompanyCity: string;
+  securityCompanyPostalCode: string;
+  securityCompanyContactPerson: string;
+  securityCompanyPhoneNumber: string;
+  securityCompanyEmail: string;
+  securityPoliceOfficerSummary: string;
+
+  // Safe and Responsible service
+  safeAndResponsibleMinorsNotAttending: boolean;
+  safeAndResponsibleLiquorAreaControlled: boolean;
+  safeAndResponsibleLiquorAreaControlledDescription: string;
+  safeAndResponsibleMandatoryID: boolean;
+  safeAndResponsibleSignsAdvisingMinors: boolean;
+  safeAndResponsibleMinorsOther: boolean;
+  safeAndResponsibleMinorsOtherDescription: string;
+  safeAndResponsibleSignsAdvisingRemoval: boolean;
+  safeAndResponsibleSignsAdvisingTwoDrink: boolean;
+  safeAndResponsibleOverConsumptionOther: boolean;
+  safeAndResponsibleOverConsumptionOtherDescription: string;
+  safeAndResponsibleReadAppendix2: boolean;
+  safeAndResponsibleDisturbancesOther: boolean;
+  safeAndResponsibleDisturbancesOtherDescription: string;
+  safeAndResponsibleAdditionalSafetyMeasures: string;
+
+  // security agreement
+  declarationIsAccurate: boolean;
 
   // unused
   eventNumber: string;
