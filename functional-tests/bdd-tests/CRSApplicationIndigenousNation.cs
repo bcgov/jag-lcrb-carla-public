@@ -242,15 +242,26 @@ namespace bdd_tests
             signatureAgree.Click();
         }
 
-        [And(@"I click on the Submit & Pay button")]
-        public void click_on_submit_and_pay()
+        [And(@"I click on the Submit button")]
+        public void click_on_submit_button()
         {
-            NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
+            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
             System.Threading.Thread.Sleep(7000);
 
-            submitpay_button.Click();
+            submit_button.Click();
             System.Threading.Thread.Sleep(7000);
         }
+
+        [And(@"I click on the Pay for Application button")]
+        public void click_on_pay_for_application()
+        {
+            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
+            System.Threading.Thread.Sleep(7000);
+
+            pay_button.Click();
+            System.Threading.Thread.Sleep(7000);
+        }
+
 
         [Then(@"I CLICK on 'SAVE FOR LATER'")]
         public void click_on_save_for_later()
