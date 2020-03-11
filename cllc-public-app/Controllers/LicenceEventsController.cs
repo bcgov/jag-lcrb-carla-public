@@ -43,6 +43,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> CreateLicenceEvent([FromBody] ViewModels.LicenceEvent item)
         {
             MicrosoftDynamicsCRMadoxioEvent dynamicsEvent = new MicrosoftDynamicsCRMadoxioEvent();
+            bool alwaysAuthorization;
+            try
+            {
+                var licence = _dynamicsClient.Licenceses.GetByKey(item.LicenceId);
+                alwaysAuthorization = licence.AdoxioRequestsafetysecurityplan == null ? false : (bool)licence.AdoxioRequestsafetysecurityplan;
+            }
+            catch (HttpOperationException ex)
+            {
+                _logger.LogError(ex, "Error creating event");
+                return BadRequest();
+            }
+            item.EventClass = item.DetermineEventClass(alwaysAuthorization);
+            if (item.EventClass != EventClass.Authorization)
+            {
+                item.Status = LicenceEventStatus.Approved;
+            }
             dynamicsEvent.CopyValues(item);
 
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -128,10 +144,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             MicrosoftDynamicsCRMadoxioEvent dynamicsEvent = _dynamicsClient.GetEventByIdWithChildren(id);
-
             if (dynamicsEvent == null || !CurrentUserHasAccessToEventOwnedBy(dynamicsEvent.AdoxioAccount.Accountid))
             {
                 return new NotFoundResult();
+            }
+
+            // determine event class
+            bool alwaysAuthorization;
+            try
+            {
+                var licence = _dynamicsClient.Licenceses.GetByKey(item.LicenceId);
+                alwaysAuthorization = licence.AdoxioRequestsafetysecurityplan == null ? false : (bool)licence.AdoxioRequestsafetysecurityplan;
+            }
+            catch (HttpOperationException ex)
+            {
+                _logger.LogError(ex, "Error updating event");
+                return BadRequest();
+            }
+            item.EventClass = item.DetermineEventClass(alwaysAuthorization);
+            if (item.EventClass != EventClass.Authorization)
+            {
+                item.Status = LicenceEventStatus.Approved;
             }
 
             MicrosoftDynamicsCRMadoxioEvent patchEvent = new MicrosoftDynamicsCRMadoxioEvent();
