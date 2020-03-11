@@ -459,6 +459,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public MicrosoftDynamicsCRMadoxioEvent GetEventById(Guid id)
+        {
+            return GetEventById(id.ToString());
+        }
+
         public MicrosoftDynamicsCRMadoxioEventscheduleCollection GetEventSchedulesByEventId(string id)
         {
             MicrosoftDynamicsCRMadoxioEventscheduleCollection results;
