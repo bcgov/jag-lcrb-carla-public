@@ -10,6 +10,7 @@ export class AssociateContentComponent implements OnInit {
   @Input() account: Account;
   @Input() isIndigenousNation: boolean;
   @Input() showBothContents = true;
+  @Input() hasLicence = false;
 
   constructor() { }
 
