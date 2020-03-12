@@ -17,6 +17,7 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
   licenceEvent: LicenceEvent;
   busy: Subscription;
   eventStatus = EventStatus;
+  uploadedSecurityDocuments: 0;
   securityForm = this.fb.group({
     id: ['', [Validators.required]],
     licenceId: ['', [Validators.required]],
