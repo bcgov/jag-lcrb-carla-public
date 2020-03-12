@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material';
 import { LicenseeChangeLog } from '@models/licensee-change-log.model';
 import { LegalEntity } from '@models/legal-entity.model';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';
+import { LicenseDataService } from '@services/license-data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,13 +24,19 @@ export class DashboardComponent extends FormBase implements OnInit {
   indigenousNationModeActive: boolean;
   currentLegalEntities: LegalEntity;
   tree: LicenseeChangeLog;
+  hasLicence: boolean;
 
   constructor(private store: Store<AppState>,
     private router: Router,
     private snackBar: MatSnackBar,
     private legalEntityDataService: LegalEntityDataService,
+    private licenseDataService: LicenseDataService,
     private applicationDataService: ApplicationDataService) {
     super();
+    this.licenseDataService.getAllCurrentLicenses()
+    .subscribe(licences => {
+      this.hasLicence = licences.length > 0;
+    });
   }
 
   ngOnInit(): void {
