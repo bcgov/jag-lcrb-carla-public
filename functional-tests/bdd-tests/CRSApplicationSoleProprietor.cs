@@ -147,10 +147,39 @@ namespace bdd_tests
         {
             ngDriver.WaitForAngular();
 
-            // enter a leader - to do
+            // open the leader row 
+                                                                         
+            NgWebElement openLeaderForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/app-associate-list/div/button"));
+            openLeaderForm.Click();
+
+            // enter the leader info
+
+            string firstName = "Jane";
+            string lastName = "Bond";
+            string title = "Adventurer";
+            string email = "jane@bond.com";
+
+            // enter the leader first name
+            NgWebElement uiFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+            uiFirstName.SendKeys(firstName);
+
+            // enter the leader last name
+            NgWebElement uiLastName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+            uiLastName.SendKeys(lastName);
+
+            // enter the leader email
+            NgWebElement uiEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+            uiEmail.SendKeys(email);
+
+            // select the leader DOB
+            NgWebElement openLeaderDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+            openLeaderDOB.Click();
+                                                        
+            NgWebElement openLeaderDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            openLeaderDOB1.Click();
 
             // click on the Submit Organization Information button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION']"));
+            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
             submitOrgInfoButton.Click();
 
             ngDriver.WaitForAngular();
@@ -239,13 +268,23 @@ namespace bdd_tests
             signatureAgree.Click();
         }
 
-        [And(@"I click on the Submit & Pay button")]
-        public void click_on_submit_and_pay()
+        [And(@"I click on the Submit button")]
+        public void click_on_submit()
         {
-            NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
+            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
             System.Threading.Thread.Sleep(7000);
 
-            submitpay_button.Click();
+            submit_button.Click();
+            System.Threading.Thread.Sleep(7000);
+        }
+
+        [And(@"I click on the Pay button")]
+        public void click_on_pay()
+        {
+            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay')]"));
+            System.Threading.Thread.Sleep(7000);
+
+            pay_button.Click();
             System.Threading.Thread.Sleep(7000);
         }
 
