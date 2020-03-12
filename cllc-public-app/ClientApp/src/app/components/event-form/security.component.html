@@ -34,7 +34,7 @@
             [enableFileDeletion]="true"
             [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
             entityName="event" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
-            (numberOfUploadedFiles)="uploadedSignageDocuments = $event" [entityId]="securityForm.get('id').value"
+            (numberOfUploadedFiles)="uploadedSecurityDocuments = $event" [entityId]="securityForm.get('id').value"
             [uploadHeader]="'TO UPLOAD DOCUMENTS OF THE EVENT, DRAG FILES HERE OR'">
           </app-file-uploader>
           <h1>File upload here</h1>
@@ -241,7 +241,7 @@
           CANCEL
         </span>
       </button>
-      <button class="btn btn-primary" (click)="save(true)" [disabled]="isFormInvalid()">SUBMIT</button>
+      <button class="btn btn-primary" (click)="save()" [disabled]="isFormInvalid()">SUBMIT</button>
     </div>
   </form>
   <pre *ngIf="isDebugMode">
