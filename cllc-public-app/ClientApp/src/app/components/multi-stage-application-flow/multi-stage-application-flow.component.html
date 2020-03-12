@@ -11,7 +11,7 @@
       </app-account-profile>
     </mat-step>
     <mat-step label="Review Organization Structure">
-      <app-application-licensee-changes *ngIf="stepper.selectedIndex === 1" class="w-100"
+      <app-application-licensee-changes [redirectToDashboardOnSave]="false" *ngIf="stepper.selectedIndex === 1" class="w-100"
         (saveComplete)="stepper.selectedIndex = 2"></app-application-licensee-changes>
     </mat-step>
     <mat-step *ngIf="!useDynamicFormMode" label="Complete Application">

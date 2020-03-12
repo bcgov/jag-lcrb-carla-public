@@ -54,7 +54,7 @@ const routes: Routes = [
   },
   {
     path: 'org-structure',
-    component: OrganizationStructureComponent,
+    component: ApplicationLicenseeChangesComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: 'LicenseeChanges' }
   },
