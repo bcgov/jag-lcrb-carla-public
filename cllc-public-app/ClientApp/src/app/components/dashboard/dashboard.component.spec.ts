@@ -13,6 +13,7 @@ import { ApplicationDataService } from '@services/application-data.service';
 import { of } from 'rxjs/internal/observable/of';
 import { AppState } from '@app/app-state/models/app-state';
 import { AssociateContentComponent } from './associate-content/associate-content.component';
+import { LicenseDataService } from '@services/license-data.service';
 
 
 @Component({ selector: 'app-applications-and-licences', template: '' })
@@ -45,6 +46,7 @@ describe('DashboardComponent', () => {
         provideMockStore({ initialState }),
         { provide: Router, useValue: {} },
         { provide: ApplicationDataService, useValue: {} },
+        { provide: LicenseDataService, useValue: { getAllCurrentLicenses: () => of([]) } },
         { provide: LegalEntityDataService, useValue: { getCurrentHierachy: () => of({}) } },
         { provide: MatSnackBar, useValue: {} }
       ]
