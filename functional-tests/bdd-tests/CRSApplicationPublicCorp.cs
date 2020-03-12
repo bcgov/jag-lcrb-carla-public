@@ -275,15 +275,6 @@ namespace bdd_tests
             NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
             openKeyPersonnelDOB1.Click();
 
-            //NgWebElement openKeyPersonnelDOB2 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[7]/i/span"));
-            //openKeyPersonnelDOB2.Click();
-
-            //NgWebElement openKeyPersonnelDOB3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[7]/i[1]"));
-            //openKeyPersonnelDOB3.Click();
-
-            //NgWebElement openKeyPersonnelDOB3 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/section/button[2]"));
-            //openKeyPersonnelDOB3.Click();
-
             // click on Submit Organization Info button
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
             submitOrgInfoButton.Click();

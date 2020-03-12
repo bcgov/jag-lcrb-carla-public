@@ -154,11 +154,47 @@ namespace bdd_tests
             // enter Number of Members
             NgWebElement uiMemberNumber = ngDriver.FindElement(By.XPath("(//input[@type='number'])[2]"));
             uiMemberNumber.SendKeys(membershipNumber);
-            
-            // enter a director or officer - todo
+
+            // open the director row 
+            NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[3]/section/app-associate-list/div/button"));
+            openKeyPersonnelForm.Click();
+
+            // enter the director info
+
+            string firstName = "Jane";
+            string lastName = "Bond";
+            string title = "Adventurer";
+            string email = "jane@bond.com";
+
+            // enter the director first name
+            NgWebElement uiFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+            uiFirstName.SendKeys(firstName);
+
+            // enter the director last name
+            NgWebElement uiLastName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+            uiLastName.SendKeys(lastName);
+
+            // select the director position
+            NgWebElement uiPosition = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            uiPosition.Click();
+
+            // enter the director title
+            NgWebElement uiTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+            uiTitle.SendKeys(title);
+
+            // enter the director email
+            NgWebElement uiEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+            uiEmail.SendKeys(email);
+
+            // select the director DOB
+            NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            openKeyPersonnelDOB.Click();
+
+            NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            openKeyPersonnelDOB1.Click();
 
             // click on the Submit Organization Information button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION']"));
+            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
             submitOrgInfoButton.Click();
 
             ngDriver.WaitForAngular();
@@ -247,13 +283,23 @@ namespace bdd_tests
             signatureAgree.Click();
         }
 
-        [And(@"I click on the Submit & Pay button")]
-        public void click_on_submit_and_pay()
+        [And(@"I click on the Submit button")]
+        public void click_on_submit()
         {
-            NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
+            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
             System.Threading.Thread.Sleep(7000);
 
-            submitpay_button.Click();
+            submit_button.Click();
+            System.Threading.Thread.Sleep(7000);
+        }
+
+        [And(@"I click on the Pay button")]
+        public void click_on_pay()
+        {
+            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay')]"));
+            System.Threading.Thread.Sleep(7000);
+
+            pay_button.Click();
             System.Threading.Thread.Sleep(7000);
         }
 
