@@ -40,6 +40,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   currentLegalEntities: LegalEntity;
   @ViewChild('orgStructure', { static: false }) orgStructure: OrgStructureComponent;
   @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() redirectToDashboardOnSave = true;
 
   editedTree: LicenseeChangeLog;
   LicenseeChangeLog = LicenseeChangeLog;
@@ -93,18 +94,19 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
 
-    this.busy = this.loadLicenseeApplication()
-      .pipe(filter(id => !!id))
-      .subscribe(id => {
-        this.applicationId = id;
-        this.loadData();
-      });
+
 
     this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(filter(account => !!account))
       .subscribe((account) => {
         this.account = account;
+        this.loadLicenseeApplication()
+          .pipe(filter(id => !!id))
+          .subscribe(id => {
+            this.applicationId = id;
+            this.loadData();
+          });
       });
   }
 
@@ -256,6 +258,9 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
               // else go to the application page
               else if (app) {
                 this.saveComplete.emit(true);
+                if(this.redirectToDashboardOnSave){
+                  this.router.navigateByUrl('/dashboard');
+                }
               }
               return of(app);
             }))
