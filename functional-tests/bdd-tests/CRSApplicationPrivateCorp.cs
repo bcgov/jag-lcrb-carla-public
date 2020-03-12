@@ -248,85 +248,63 @@ namespace bdd_tests
             uploadSpecialRightsRes.SendKeys(specialRightsRestrictions);
 
             // open key personnel form   
-                                                                               //div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[4]/section/app-associate-list/div/button
             NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[4]/section/app-associate-list/div/button"));
             openKeyPersonnelForm.Click();
 
             // enter key personnel first name
-                                                                           //input[@type='text']
             NgWebElement uiKeyPersonFirst = ngDriver.FindElement(By.XPath("//input[@type='text']"));
             uiKeyPersonFirst.SendKeys(keyPersonnelFirstName);
 
             // enter key personnel last name
-                                                                  //xpath=(//input[@type='text'])[2]
             NgWebElement uiKeyPersonLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
             uiKeyPersonLast.SendKeys(keyPersonnelLastName);
 
             // select key personnel role
-                                                                          //input[@type='checkbox']
             NgWebElement uiKeyPersonRole = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
             uiKeyPersonRole.Click();
 
             // enter key personnel title
-                                                                   //xpath=(//input[@type='text'])[3]
             NgWebElement uiKeyPersonTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
             uiKeyPersonTitle.SendKeys(keyPersonnelTitle);
 
             // enter key personnel email
-                                                                   //xpath=(//input[@type='text'])[4]
             NgWebElement uiKeyPersonEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
             uiKeyPersonEmail.SendKeys(keyPersonnelEmail);
 
             // enter key personnel DOB
+            NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            openKeyPersonnelDOB.Click();
 
-            NgWebElement uiCalendarOpen = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[4]/section/app-associate-list/div/button"));
-            uiCalendarOpen.Click();
+            NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            openKeyPersonnelDOB1.Click();
 
-            NgWebElement uiCalendarP1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
-            uiCalendarP1.Click();
-
-            //NgWebElement uiCalendarP2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-            //uiCalendarP2.Click();
-
-            //NgWebElement uiCalendarP3 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[7]/i/span"));
-            //uiCalendarP3.Click();
-
-            NgWebElement uiCalendarP4 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section/app-associate-list/div/button"));
-            uiCalendarP4.Click();
-
-            // open shareholder form                                                              
+            // open shareholder form    
             NgWebElement uiOpenShare = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section/app-associate-list/div/button"));
             uiOpenShare.Click();
 
             // enter shareholder first name
-            NgWebElement uiShareFirst = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+            NgWebElement uiShareFirst = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
             uiShareFirst.SendKeys(shareholderFirstName);
 
             // enter shareholder last name
-            NgWebElement uiShareLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+            NgWebElement uiShareLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
             uiShareLast.SendKeys(shareholderLastName);
 
             // enter number of voting shares
-            NgWebElement uiShareVotes = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+            NgWebElement uiShareVotes = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
             uiShareVotes.SendKeys(shareholderVotingShares);
 
             // enter shareholder email
-            NgWebElement uiShareEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+            NgWebElement uiShareEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
             uiShareEmail.SendKeys(shareholderEmail);
 
             // enter shareholder DOB
 
-            NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
             uiCalendarS1.Click();
 
             NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-4']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
             uiCalendarS2.Click();
-
-            NgWebElement uiCalendarS3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-4']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-            uiCalendarS3.Click();
-
-            NgWebElement uiCalendarS4 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/section/button[2]"));
-            uiCalendarS4.Click();
 
             // click on Submit Organization Info button
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
@@ -442,17 +420,23 @@ namespace bdd_tests
             signatureAgree.Click();
         }
 
-        [And(@"I click on the Submit & Pay button")]
-        public void click_on_submit_and_pay()
+        [And(@"I click on the Submit button")]
+        public void click_on_submit()
         {
-            /* 
-            Page Title: Submit the Cannabis Retail Store Application
-            */
-
-            NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
+            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
             System.Threading.Thread.Sleep(7000);
 
-            submitpay_button.Click();
+            submit_button.Click();
+            System.Threading.Thread.Sleep(7000);
+        }
+
+        [And(@"I click on the Pay button")]
+        public void click_on_pay()
+        {
+            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay')]"));
+            System.Threading.Thread.Sleep(7000);
+
+            pay_button.Click();
             System.Threading.Thread.Sleep(7000);
         }
 
