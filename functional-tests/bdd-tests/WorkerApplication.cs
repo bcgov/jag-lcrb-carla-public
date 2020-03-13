@@ -202,7 +202,7 @@ namespace bdd_tests
             returnDash.Click();
         }
 
-        [Then(@"the dashboard has a new status")]
+        [And(@"the dashboard has a new status")]
         public void dashboard_has_new_status()
         {
             /* 
@@ -211,6 +211,12 @@ namespace bdd_tests
 
             // confirm Security Verification Status: Pending Review status is displayed
             Assert.True (ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-dashboard/div/div[2]/div[1]/div/section/div/h2[text()='Security Verification Status: Pending Review']")).Displayed);
+        }
+
+        [Then(@"I sign out")]
+        public void sign_out()
+        {
+            CarlaDeleteCurrentAccount();
         }
     }
 }
