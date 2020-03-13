@@ -1,0 +1,10 @@
+<div class="page-load" *ngIf="loading && ! error">
+  <div class="loading-indicator"></div>
+</div>
+
+<div class="alert alert-danger" *ngIf="error">
+  {{error}}
+</div>
+
+<div class="static-content" *ngIf="! loading" [innerHTML]="content">
+</div>
