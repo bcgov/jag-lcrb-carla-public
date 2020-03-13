@@ -83563,12 +83563,20 @@
           "description": "Select the marital status of the contact for reference in follow-up phone calls and other communications.",
           "type": "integer"
         },
+        "adoxio_phsfinancialinterestdetails": {
+          "description": "The details of the financial interest",
+          "type": "string"
+        },
         "adoxio_bcidcardnumber": {
           "description": "",
           "type": "string"
         },
         "yomilastname": {
           "description": "Type the phonetic spelling of the contact's last name, if the name is specified in Japanese, to make sure the name is pronounced correctly in phone calls with the contact.",
+          "type": "string"
+        },
+        "adoxio_phsexclusivedetails": {
+          "description": "Capture the details of an exclusive agreement with a Manufacturer",
           "type": "string"
         },
         "adoxio_driverslicencenumber": {
@@ -83940,6 +83948,11 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_phsexclusivemfg": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "address3_line2": {
           "description": "the second line of the 3rd address.",
           "type": "string"
@@ -83995,6 +84008,11 @@
         "business2": {
           "description": "Type a second business phone number for this contact.",
           "type": "string"
+        },
+        "adoxio_phsfinancialint": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "adoxio_other2ndidnumber": {
           "description": "",
@@ -84093,6 +84111,11 @@
         "haschildrencode": {
           "format": "int32",
           "description": "Select whether the contact has any children for reference in follow-up phone calls and other communications.",
+          "type": "integer"
+        },
+        "adoxio_phsprofitagreement": {
+          "format": "int32",
+          "description": "",
           "type": "integer"
         },
         "preferredappointmentdaycode": {
@@ -84360,6 +84383,10 @@
           "format": "decimal",
           "description": "Shows the Aging 60 field converted to the system's default base currency. The calculations use the exchange rate specified in the Currencies area.",
           "type": "number"
+        },
+        "adoxio_phsprofitagreementdetails": {
+          "description": "The details of the profit agreement",
+          "type": "string"
         },
         "address1_addressid": {
           "description": "Unique identifier for address 1.",
