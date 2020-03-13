@@ -11,12 +11,15 @@
       <app-account-profile *ngIf="stepper.selectedIndex === 0" [useInStepperMode]="true" style="width: 100%" (saveComplete)="stepper.selectedIndex = 1">
       </app-account-profile>
     </mat-step>
-    <mat-step label="Review Organization Structure">
+    <mat-step *ngIf="licenseeChangesEnabled" label="Review Organization Structure">
       <app-application-licensee-changes *ngIf="stepper.selectedIndex === 1" class="w-100"
                                         (saveComplete)="stepper.selectedIndex = 2"></app-application-licensee-changes>
-    </mat-step>    
-    <mat-step label="Complete Application">
+    </mat-step>
+    <mat-step *ngIf="licenseeChangesEnabled" label="Complete Application">
       <app-application-renewal *ngIf="stepper.selectedIndex === 2" style="width: 100%"></app-application-renewal>
+    </mat-step>
+    <mat-step *ngIf="!licenseeChangesEnabled" label="Complete Application">
+      <app-application-renewal *ngIf="stepper.selectedIndex === 1" style="width: 100%"></app-application-renewal>
     </mat-step>
   </mat-horizontal-stepper>
 
