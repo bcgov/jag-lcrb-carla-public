@@ -17,12 +17,13 @@ Feature: CRSApplication_partnership
     As a logged in business user
     I want to submit a CRS Application for a partnership
 
-Scenario: Start Application
+SScenario: Start Application
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button
     And I click on the Continue to Application button
     And I complete the application
-    And I click on the Submit & Pay button
+    And I click on the Submit button
+    And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And I delete my account
@@ -34,35 +35,21 @@ namespace bdd_tests
     [FeatureFile("./CRSApplication_partnership.feature")]
     public sealed class CRSApplicationPartnership : TestBaseCRS
     {
-
-        // Dashboard related common actions
-
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
         }
 
-        [And(@"I am not a marketer")]
-        public void check_marketer()
-        {
-        }
-
         [And(@"I click on the Start Application button")]
         public void I_start_application()
         {
-            ngDriver.WaitForAngular();
-
-            //System.Threading.Thread.Sleep(7000);
-
             /* 
             Page Title: Welcome to Cannabis Licensing
             */
 
             NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
             startApp_button.Click();
-
-            ngDriver.WaitForAngular();
 
             /* 
             Page Title: Cannabis Retail Store Licence Eligibility Disclosure
@@ -89,8 +76,6 @@ namespace bdd_tests
             // click on the Submit button
             NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
             submit_button.Click();
-
-            ngDriver.WaitForAngular();
 
             /* 
             Page Title: Please Review the Account Profile
@@ -140,15 +125,11 @@ namespace bdd_tests
 
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
             continueApp_button.Click();
-
-            ngDriver.WaitForAngular();
         }
 
         [And(@"I click on the Continue to Application button")]
         public void I_continue_to_application()
         {
-            ngDriver.WaitForAngular();
-
             // upload partnership agreement
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
@@ -206,15 +187,6 @@ namespace bdd_tests
 
             NgWebElement uiCalendar6 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/section/button[2]"));
             uiCalendar6.Click();
-
-            // list business partners - to do
-   
-            //NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'ORGANIZATION')]"));
-            //submitOrgInfoButton.Click();
-
-            //System.Threading.Thread.Sleep(7000);
-
-            ngDriver.WaitForAngular();
         }
 
         [And(@"I complete the application")]
@@ -232,8 +204,6 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
-
-            //System.Threading.Thread.Sleep(7000);
 
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
             estabName.SendKeys(estName);
@@ -322,13 +292,6 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(7000);
         }
 
-        [Then(@"I CLICK on 'SAVE FOR LATER'")]
-        public void click_on_save_for_later()
-        {
-            NgWebElement saveforlater_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SAVE FOR LATER')]"));
-            saveforlater_button.Click();
-        }
-
         [And(@"I enter the payment information")]
         public void enter_payment_info()
         {
@@ -338,6 +301,13 @@ namespace bdd_tests
         [And(@"I return to the dashboard")]
         public void return_to_dashboard()
         {
+            /* 
+            Page Title: Payment Approved
+            */
+
+            // confirm that payment receipt is for $7,500.00
+            Assert.True (ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-payment-confirmation/mat-card/div/div[1]/div/div/table/tr[6]/td[2][text()='$7,500.00']")).Displayed);
+
             string retDash = "Return to Dashboard";
             NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
             returnDash.Click();
