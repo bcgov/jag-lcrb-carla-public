@@ -54,11 +54,47 @@ namespace bdd_tests
             ngDriver.WaitForAngular();
 
             //System.Threading.Thread.Sleep(7000);
-            
+
+            /* 
+            Page Title: Welcome to Cannabis Licensing
+            */
+
             NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
             startApp_button.Click();
 
             ngDriver.WaitForAngular();
+
+            /* 
+            Page Title: Cannabis Retail Store Licence Eligibility Disclosure
+            */
+
+            string electricSignature = "Automated Test";
+
+            // select No for Question 1
+            NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
+            noRadio1.Click();
+
+            // select No for Question 2
+            NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
+            noRadio2.Click();
+
+            // select the certification checkbox
+            NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
+            matCheckbox.Click();
+
+            // enter the electronic signature
+            NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
+            sigCheckbox.SendKeys(electricSignature);
+
+            // click on the Submit button
+            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
+            submit_button.Click();
+
+            ngDriver.WaitForAngular();
+
+            /* 
+            Page Title: Please Review the Account Profile
+            */
 
             string bizNumber = "012345678";
             string streetAddress = "645 Tyee Road";
@@ -113,22 +149,70 @@ namespace bdd_tests
         {
             ngDriver.WaitForAngular();
 
-            string electricSignature = "Automated Test";
+            // upload partnership agreement
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
 
-            NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
-            noRadio1.Click();
+            string partnershipPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
+            NgWebElement uploadPartnershipAgreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+            uploadPartnershipAgreement.SendKeys(partnershipPath);
 
-            NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
-            noRadio2.Click();
+            // enter individual partner info
 
-            NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
-            matCheckbox.Click();
+            string partnerFirstName = "Automated";
+            string partnerLastName = "Test";
+            string partnerPercentage = "50";
+            string partnerEmail = "automated@test.com";
 
-            NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
-            sigCheckbox.SendKeys(electricSignature);
+            // open partner row
+            NgWebElement uiPartnerRow = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[3]/section/app-associate-list/div/button"));
+            uiPartnerRow.Click();
 
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
-            submit_button.Click();
+            // enter partner first name
+            NgWebElement uiPartnerFirst = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+            uiPartnerFirst.SendKeys(partnerFirstName);
+
+            // enter partner last name
+            NgWebElement uiPartnerLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+            uiPartnerLast.SendKeys(partnerLastName);
+
+            // enter partner percentage
+            NgWebElement uiPartnerPercentage = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+            uiPartnerPercentage.SendKeys(partnerPercentage);
+
+            // enter partner email
+            NgWebElement uiPartnerEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+            uiPartnerEmail.SendKeys(partnerEmail);
+
+            // enter partner DOB
+            NgWebElement uiCalendar0 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            uiCalendar0.Click();
+
+            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/mat-calendar-header/div/div/button/span"));
+            uiCalendar1.Click();
+
+            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-multi-year-view/table/tbody/tr/td/div"));
+            uiCalendar2.Click();
+
+            NgWebElement uiCalendar3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-year-view/table/tbody/tr[3]/td[4]/div"));
+            uiCalendar3.Click();
+
+            NgWebElement uiCalendar4 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[4]/td[6]/div"));
+            uiCalendar4.Click();
+
+            NgWebElement uiCalendar5 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[6]/i/span"));
+            uiCalendar5.Click();
+
+            NgWebElement uiCalendar6 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/section/button[2]"));
+            uiCalendar6.Click();
+
+            // list business partners - to do
+   
+            //NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'ORGANIZATION')]"));
+            //submitOrgInfoButton.Click();
+
+            //System.Threading.Thread.Sleep(7000);
 
             ngDriver.WaitForAngular();
         }
@@ -148,6 +232,8 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
+
+            //System.Threading.Thread.Sleep(7000);
 
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
             estabName.SendKeys(estName);
@@ -216,13 +302,23 @@ namespace bdd_tests
             signatureAgree.Click();
         }
 
-        [And(@"I click on the Submit & Pay button")]
-        public void click_on_submit_and_pay()
+        [And(@"I click on the Submit button")]
+        public void click_on_submit()
         {
-            NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
+            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
             System.Threading.Thread.Sleep(7000);
 
-            submitpay_button.Click();
+            submit_button.Click();
+            System.Threading.Thread.Sleep(7000);
+        }
+
+        [And(@"I click on the Pay for Application button")]
+        public void click_on_pay()
+        {
+            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
+            System.Threading.Thread.Sleep(7000);
+
+            pay_button.Click();
             System.Threading.Thread.Sleep(7000);
         }
 
