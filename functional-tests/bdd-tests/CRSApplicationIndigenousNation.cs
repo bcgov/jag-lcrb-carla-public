@@ -54,11 +54,47 @@ namespace bdd_tests
             ngDriver.WaitForAngular();
 
             //System.Threading.Thread.Sleep(7000);
-            
+
+            /* 
+            Page Title: Welcome to Cannabis Licensing
+            */
+
             NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
             startApp_button.Click();
 
             ngDriver.WaitForAngular();
+
+            /* 
+            Page Title: Cannabis Retail Store Licence Eligibility Disclosure
+            */
+
+            string electricSignature = "Automated Test";
+
+            // select No for Question 1
+            NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
+            noRadio1.Click();
+
+            // select No for Question 2
+            NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
+            noRadio2.Click();
+
+            // select the certification checkbox
+            NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
+            matCheckbox.Click();
+
+            // enter the electronic signature
+            NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
+            sigCheckbox.SendKeys(electricSignature);
+
+            // click on the Submit button
+            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
+            submit_button.Click();
+
+            ngDriver.WaitForAngular();
+
+            /* 
+            Page Title: Please Review the Account Profile
+            */
 
             // Complete account profile page
 
@@ -107,27 +143,14 @@ namespace bdd_tests
             ngDriver.WaitForAngular();
         }
 
-        [And(@"I click on the Continue to Application button")]
-        public void I_continue_to_application()
+        [And(@"I click on the Continue to Organization Review button")]
+        public void I_continue_to_organization_review()
         {
             ngDriver.WaitForAngular();
 
-            string electricSignature = "Automated Test";
-
-            NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
-            noRadio1.Click();
-
-            NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
-            noRadio2.Click();
-
-            NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
-            matCheckbox.Click();
-
-            NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
-            sigCheckbox.SendKeys(electricSignature);
-
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
-            submit_button.Click();
+            // click on the Submit Org Info button
+            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION']"));
+            submitOrgInfoButton.Click();
 
             ngDriver.WaitForAngular();
         }
@@ -149,7 +172,7 @@ namespace bdd_tests
             string conEmail = "contact@email.com";
             string indigenousNation = "Ashcroft Indian Band";
 
-            NgWebElement uiSelectNation = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select"));
+            NgWebElement uiSelectNation = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[3]/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select"));
             uiSelectNation.SendKeys(indigenousNation);
 
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
@@ -219,15 +242,26 @@ namespace bdd_tests
             signatureAgree.Click();
         }
 
-        [And(@"I click on the Submit & Pay button")]
-        public void click_on_submit_and_pay()
+        [And(@"I click on the Submit button")]
+        public void click_on_submit_button()
         {
-            NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
+            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
             System.Threading.Thread.Sleep(7000);
 
-            submitpay_button.Click();
+            submit_button.Click();
             System.Threading.Thread.Sleep(7000);
         }
+
+        [And(@"I click on the Pay for Application button")]
+        public void click_on_pay_for_application()
+        {
+            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
+            System.Threading.Thread.Sleep(7000);
+
+            pay_button.Click();
+            System.Threading.Thread.Sleep(7000);
+        }
+
 
         [Then(@"I CLICK on 'SAVE FOR LATER'")]
         public void click_on_save_for_later()
