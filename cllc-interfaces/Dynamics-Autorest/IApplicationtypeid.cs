@@ -19,6 +19,36 @@ namespace Gov.Lclb.Cllb.Interfaces
     public partial interface IApplicationtypeid
     {
         /// <summary>
+        /// Get adoxio_ApplicationTypeId from
+        /// adoxio_applicationtypefeeschedules
+        /// </summary>
+        /// <param name='adoxioApplicationtypefeescheduleid'>
+        /// key: adoxio_applicationtypefeescheduleid of
+        /// adoxio_applicationtypefeeschedule
+        /// </param>
+        /// <param name='select'>
+        /// Select properties to be returned
+        /// </param>
+        /// <param name='expand'>
+        /// Expand related entities
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationtype>> GetWithHttpMessagesAsync(string adoxioApplicationtypefeescheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// Get adoxio_ApplicationTypeId from adoxio_formelementuploadfields
         /// </summary>
         /// <param name='adoxioFormelementuploadfieldid'>
@@ -46,6 +76,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationtype>> GetWithHttpMessagesAsync(string adoxioFormelementuploadfieldid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationtype>> Get1WithHttpMessagesAsync(string adoxioFormelementuploadfieldid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
