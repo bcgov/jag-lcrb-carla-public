@@ -626,6 +626,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         }
                         
                         _dynamicsClient.Workers.Update(savedWorker.AdoxioWorkerid, patchWorker);
+
+                        var updatedWorker = await _dynamicsClient.GetWorkerByIdWithChildren(savedWorker.AdoxioWorkerid);
+
+                        // ensure that the worker has a documents folder.                        
+                        await CreateWorkerDocumentLocation(_dynamicsClient, _fileManagerClient, updatedWorker);
                     }
                 }
 
@@ -645,41 +650,14 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
         }
 
-        private async Task CreateContactDocumentLocation(IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMcontact contact)
-        {
-            string folderName = "";
-            try
-            { 
-
-                folderName = contact.GetDocumentFolderName();
-
-                var createFolderRequest = new CreateFolderRequest()
-                {
-                    EntityName = "contact",
-                    FolderName = folderName
-                };
-
-                var createFolderResult = _fileManagerClient.CreateFolder(createFolderRequest);
-
-                if (createFolderResult.ResultStatus == ResultStatus.Fail)
-                {
-                    _logger.LogError($"Error creating folder for contact {folderName}. Error is {createFolderResult.ErrorDetail}");
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, $"Error creating folder for contact {folderName}");
-            }
-        }
-
         private async Task CreateAccountDocumentLocation(IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMaccount account)
         {
             string folderName = "";
             try
-            {                
+            {
 
                 folderName = account.GetDocumentFolderName();
-               
+
                 var createFolderRequest = new CreateFolderRequest()
                 {
                     EntityName = "account",
@@ -697,7 +675,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             {
                 _logger.LogError(e, $"Error creating folder for account {folderName}");
             }
-            
+
 
             /*
             // now create a document location to link them.
@@ -774,5 +752,61 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
             */
         }
+
+        private async Task CreateContactDocumentLocation(IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMcontact contact)
+        {
+            string folderName = "";
+            try
+            { 
+
+                folderName = contact.GetDocumentFolderName();
+
+                var createFolderRequest = new CreateFolderRequest()
+                {
+                    EntityName = "contact",
+                    FolderName = folderName
+                };
+
+                var createFolderResult = _fileManagerClient.CreateFolder(createFolderRequest);
+
+                if (createFolderResult.ResultStatus == ResultStatus.Fail)
+                {
+                    _logger.LogError($"Error creating folder for contact {folderName}. Error is {createFolderResult.ErrorDetail}");
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Error creating folder for contact {folderName}");
+            }
+        }
+
+        private async Task CreateWorkerDocumentLocation(IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMadoxioWorker worker)
+        {
+            string folderName = "";
+            try
+            {
+
+                folderName = worker.GetDocumentFolderName();
+
+                var createFolderRequest = new CreateFolderRequest()
+                {
+                    EntityName = "worker",
+                    FolderName = folderName
+                };
+
+                var createFolderResult = _fileManagerClient.CreateFolder(createFolderRequest);
+
+                if (createFolderResult.ResultStatus == ResultStatus.Fail)
+                {
+                    _logger.LogError($"Error creating folder for contact {folderName}. Error is {createFolderResult.ErrorDetail}");
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Error creating folder for contact {folderName}");
+            }
+        }
+
+
     }
 }
