@@ -100,6 +100,17 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       id: [''],
+
+      renewalCriminalOffenceCheck: ['', Validators.required],
+      renewalUnreportedSaleOfBusiness: ['', Validators.required],
+      renewalBusinessType: ['', Validators.required],
+      renewalTiedhouse: ['', Validators.required],
+      tiedhouseFederalInterest: ['', Validators.required],
+      renewalOrgLeadership: ['', Validators.required],
+      renewalkeypersonnel: ['', Validators.required],
+      renewalShareholders: ['', Validators.required],
+      renewalOutstandingFines: ['', Validators.required],
+
       establishmentName: ['', [
         Validators.required,
         this.establishmentWatchWordsService.forbiddenNameValidator()
