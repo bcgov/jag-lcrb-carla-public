@@ -10,4 +10,5 @@ Scenario: Worker Application
     And I click on the Submit & Pay button
     And I enter the payment information
     And I return to the dashboard
-    Then the dashboard has a new status
+    And the dashboard has a new status
+    Then I sign out
