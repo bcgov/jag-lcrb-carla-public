@@ -26,7 +26,7 @@ Scenario: Start Application
     And I click on the Pay button
     And I enter the payment information
     And I return to the dashboard
-    And I delete my account
+    And the account is deleted
     Then I see login
 */
 
@@ -288,7 +288,7 @@ namespace bdd_tests
             returnDash.Click();
         }
 
-        [And(@"I delete my account")]
+        [And(@"the account is deleted")]
         public void Delete_my_account()
         {
             this.CarlaDeleteCurrentAccount();
