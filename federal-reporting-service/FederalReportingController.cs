@@ -39,6 +39,17 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             _logger = loggerFactory.CreateLogger(typeof(FederalReportingController));
         }
 
+        public async Task ExportFederalReports(PerformContext hangfireContext)
+        {
+            // Get any new exports that have been created
+            // Gather submitted reports
+            // Get inventory reports for those submitted reports
+            // Attach monthly report to export record
+            // Create CSV file
+            // Export file to Sharepoint
+            // Update export record with results (monthly reports, export triggered date, export completed date, document link)
+        }
+
 
         /// <summary>
         /// Generate a csv with the federal tracking report for a given reporting period
