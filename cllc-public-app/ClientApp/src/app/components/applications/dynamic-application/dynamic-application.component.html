@@ -182,13 +182,15 @@
       </div>
 
       <section style="position: relative; margin-top: 20px;">
-        <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/catering-demo'])">
+        <button class="btn btn-primary" style="margin-right:10px;" (click)="saveForLater()">
           <span>
             <i class="fa fa-save" style="color: #fff;"></i>
             SAVE FOR LATER
           </span>
         </button>
-        <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
+        <button class="btn btn-primary" (click)="submit_application()">
+          SUBMIT<span *ngIf="!skipPayment"> &amp; PAY</span>
+        </button>        
         <span style="float: right; color: #1a5a96; padding-top: 10px;">
           <span (click)="cancelApplication()">
             <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
