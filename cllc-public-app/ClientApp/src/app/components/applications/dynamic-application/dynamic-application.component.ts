@@ -138,7 +138,7 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       contactPersonFirstName: ['', Validators.required],
       contactPersonLastName: ['', Validators.required],
       contactPersonRole: [''],
-      contactPersonEmail: ['', Validators.required],
+      //contactPersonEmail: ['', Validators.required],
       contactPersonPhone: ['', Validators.required],
       establishmentAddressStreet: ['', Validators.required],
       establishmentAddressCity: ['', Validators.required],
@@ -148,7 +148,7 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
       applyAsIndigenousNation: [false],
-      federalProducerNames: ['', Validators.required],
+      //federalProducerNames: ['', Validators.required],
       applicantType: ['']
            
     });

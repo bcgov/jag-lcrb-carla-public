@@ -1,0 +1,95 @@
+.eq-table {
+  border-spacing: 1px 3px;
+  border-collapse: separate;
+  min-width: 900px;
+  td,
+  th {
+    background-color: #f1f4fa;
+    color: #000;
+    padding: 10px;
+  }
+
+  th {
+    text-align: center;
+  }
+
+  .alt-row {
+    td {
+      background-color: #fff;
+    }
+  }
+}
+
+table.greyGridTable {
+  border: 1px solid #757575;
+  width: 100%;
+  
+  text-align: center;
+  border-collapse: collapse;
+}
+table.greyGridTable td, table.greyGridTable th {
+  border: 1px solid black;
+  padding: 3px 4px;
+}
+table.greyGridTable tbody td {
+  font-size: 13px;
+  font-weight: bold;
+}
+table.greyGridTable tr:nth-child(even) {
+  background: #eee;
+  height: 75px;
+}
+table.greyGridTable tr:nth-child(odd) {  
+  height: 75px;
+}
+table.greyGridTable thead {
+  background: #FFFFFF;
+  border-bottom: 1px solid #757575;
+}
+table.greyGridTable thead th {
+  font-size: 15px;
+  font-weight: 800;
+  color: #333333;
+  text-align: center;
+  border-left: 1px solid #757575;
+}
+table.greyGridTable thead th:first-child {
+  border-left: none;
+}
+
+table.greyGridTable tfoot td {
+  font-size: 14px;
+}
+
+.save {
+  color: #38598a;
+}
+
+
+.fa-trash-alt {
+  color: #1a5a96;
+}
+
+.icon-label {
+  font-family: MyriadWebPro, Calibri, Arial, "sans serif";
+  font-weight: normal;
+  margin-left:5px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.fa, .fas{
+  cursor: pointer;
+  text-align: left;
+}
+
+
+::ng-deep {
+  mat-expansion-panel-header.mat-expanded:hover,
+  mat-expansion-panel-header:hover,
+  mat-expansion-panel-header:active,
+  mat-expansion-panel-header{
+    background-color: #F1F4FA !important;
+    height: 30px !important;
+  }
+}
