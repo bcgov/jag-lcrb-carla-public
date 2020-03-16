@@ -1,6 +1,12 @@
 <div class="form-wrapper">
   <div [ngBusy]="busy"></div>
   <h1>Licences</h1>
+
+  <div *ngIf="this.getNumberOfLicences() === 0">
+    <h2>You do not have any licences on file.</h2>  
+    <p>If currently have a liquor licence and are not seeing it here, please contact <a href="mailto:liquor.licensing@gov.bc.ca">liquor.licensing@gov.bc.ca</a>.</p>
+  </div>
+  
   <section *ngFor="let mappingItem of licenceMappings | keyvalue">
     <h2>{{mappingItem.key}} Licences</h2>
     <form [formGroup]="mainForm">
