@@ -13,14 +13,15 @@
                         RCMP or police detachment.
                     </p>
 
-                    <h3>Outstanding Personal History Summary Forms</h3>
-                    <p>
-                        The following associates have not provided completed personal history summary forms. The forms
-                        can be completed using the provided link, which can be emailed or sent by SMS to associates as
-                        needed:
-                    </p>
+
                     <ng-container *ngIf="data?.liquor?.outstandingItems?.length">
-                        <table class="w-100">
+                            <h3>Outstanding Personal History Summary Forms</h3>
+                            <p>
+                                The following associates have not provided completed personal history summary forms. The forms
+                                can be completed using the provided link, which can be emailed or sent by SMS to associates as
+                                needed:
+                            </p>
+                        <table>
                             <tr>
                                 <th>First Name</th>
                                 <th>Last Name</th>
@@ -41,13 +42,17 @@
                         </table>
                     </ng-container>
 
+                    <ng-container *ngIf="data?.liquor?.completedItems?.length">
                     <h3>Completed Personal History Summary Forms</h3>
                     <p>
                         The following associates have completed their personal history summary forms. No further
                         information is required at this time.
                     </p>
+                        <p>
+                            Shareholders with less than 10% interest in corporations are not required to submit personal history summary forms.
+                        </p>
 
-                    <table *ngIf="data?.liquor?.completedItems?.length" class="w-100">
+                    <table>
                         <tr>
                             <th>First Name</th>
                             <th>Last Name</th>
@@ -60,6 +65,7 @@
                             <td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td>
                         </tr>
                     </table>
+                    </ng-container>
 
                 </div>
             </ng-container>
