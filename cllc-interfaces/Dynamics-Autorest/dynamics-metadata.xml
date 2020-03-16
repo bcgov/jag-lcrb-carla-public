@@ -24624,11 +24624,17 @@
         <Property Name="familystatuscode" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Select the marital status of the contact for reference in follow-up phone calls and other communications." />
         </Property>
+        <Property Name="adoxio_phsfinancialinterestdetails" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="The details of the financial interest" />
+        </Property>
         <Property Name="adoxio_bcidcardnumber" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="yomilastname" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="Type the phonetic spelling of the contact's last name, if the name is specified in Japanese, to make sure the name is pronounced correctly in phone calls with the contact." />
+        </Property>
+        <Property Name="adoxio_phsexclusivedetails" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Capture the details of an exclusive agreement with a Manufacturer" />
         </Property>
         <Property Name="adoxio_driverslicencenumber" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -24937,6 +24943,9 @@
         <Property Name="adoxio_selfdeclaredlicencecap" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_phsexclusivemfg" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="address3_line2" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="the second line of the 3rd address." />
         </Property>
@@ -24975,6 +24984,9 @@
         </Property>
         <Property Name="business2" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="Type a second business phone number for this contact." />
+        </Property>
+        <Property Name="adoxio_phsfinancialint" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_other2ndidnumber" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -25054,6 +25066,9 @@
         </Property>
         <Property Name="haschildrencode" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Select whether the contact has any children for reference in follow-up phone calls and other communications." />
+        </Property>
+        <Property Name="adoxio_phsprofitagreement" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="preferredappointmentdaycode" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Select the preferred day of the week for service appointments." />
@@ -25298,6 +25313,9 @@
           <Annotation Term="Org.OData.Core.V1.Permissions">
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
+        </Property>
+        <Property Name="adoxio_phsprofitagreementdetails" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="The details of the profit agreement" />
         </Property>
         <Property Name="address1_addressid" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for address 1." />
