@@ -93,7 +93,8 @@ namespace bdd_tests
 
             // create the business data
             string bizNumber = "012345678";
-            string streetAddress = "645 Tyee Road";
+            string streetAddress1 = "645 Tyee Road";
+            string streetAddress2 = "Point Ellis";
             string city = "Victoria";
             string postalCode = "V8V4Y3";
             string bizPhoneNumber = "2501811818";
@@ -101,13 +102,24 @@ namespace bdd_tests
             string corpContactPhone = "7781811818";
             string corpContactEmail = "automated@test.com";
 
+            string mailStreet1 = "P.O. Box 123";
+            string mailStreet2 = "303 Prideaux St.";
+            string mailCity = "Nanaimo";
+            string mailProvince = "B.C.";
+            string mailPostalCode = "V9R2N3";
+            string mailCountry = "Switzerland";
+
             // enter the business number
             NgWebElement uiBizNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
             uiBizNumber.SendKeys(bizNumber);
 
             // enter the business street address
-            NgWebElement uiStreetAddress = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
-            uiStreetAddress.SendKeys(streetAddress);
+            NgWebElement uiStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+            uiStreetAddress1.SendKeys(streetAddress1);
+
+            // enter the contact's physical street address 2
+            NgWebElement uiStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            uiStreetAddress2.SendKeys(streetAddress2);
 
             // enter the business city
             NgWebElement uiCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
@@ -117,9 +129,33 @@ namespace bdd_tests
             NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
             uiPostalCode.SendKeys(postalCode);
 
-            // click the same as mailing address checkbox - todo: switch off to include more fields
+            /* switching off use of checkbox "Same as physical address" in order to test mailing address fields
             NgWebElement uiSameAsMailingAddress = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
-            uiSameAsMailingAddress.Click();
+            uiSameAsMailingAddress.Click(); */
+
+            // enter the mailing street address 1
+            NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
+            uiMailingStreetAddress1.SendKeys(mailStreet1);
+
+            // enter the mailing street address 2
+            NgWebElement uiMailingStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[11]"));
+            uiMailingStreetAddress2.SendKeys(mailStreet2);
+
+            // enter the mailing city
+            NgWebElement uiMailingCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+            uiMailingCity.SendKeys(mailCity);
+
+            // enter the mailing province
+            NgWebElement uiMailingProvince = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
+            uiMailingProvince.SendKeys(mailProvince);
+
+            // enter the mailing postal code
+            NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[14]"));
+            uiMailingPostalCode.SendKeys(mailPostalCode);
+
+            // enter the mailing country
+            NgWebElement uiMailingCountry = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
+            uiMailingCountry.SendKeys(mailCountry);
 
             // enter the business phone number
             NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[16]"));
