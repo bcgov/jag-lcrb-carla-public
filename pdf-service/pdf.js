@@ -26,7 +26,7 @@ module.exports = function (callback, templateName, viewData, pdfOptions) {
 		else {
 			// render
 			var html = mustache.render(template, viewData)
-			
+
 			if (viewData.border){
 				pdfOptions.border = JSON.parse(viewData.border);
 			}
