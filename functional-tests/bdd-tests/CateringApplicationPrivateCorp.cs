@@ -186,11 +186,28 @@ namespace bdd_tests
             string keyPersonnelTitle = "Adventurer";
             string keyPersonnelEmail = "jane@bond.com";
 
-            // create the shareholder data
+            // create the individual shareholder data
             string shareholderFirstName = "Jacqui";
             string shareholderLastName = "Chan";
             string shareholderVotingShares = "500";
             string shareholderEmail = "jacqui@chan.com";
+
+            // create the business shareholder data
+            string businessName = "Bourne Enterprises";
+            string businessVotingShares = "50";
+            string businessEmail = "bourne@enterprises.com";
+
+            // create key personnel for business
+            string bizKeyPersonnelFirstName = "Jacin";
+            string bizKeyPersonnelLastName = "Bourne";
+            string bizKeyPersonnelTitle = "Forgetful Spy";
+            string bizKeyPersonnelEmail = "jacin@bourne.com";
+
+            // create shareholder for business
+            string bizShareholderFirstName = "Petra";
+            string bizShareholderLastName = "Parker";
+            string bizShareholderTitle = "Arachnologist";
+            string bizShareholderEmail = "petra@spidey.com";
 
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
@@ -198,19 +215,20 @@ namespace bdd_tests
             string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
 
             // upload a notice of articles document
-            string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+            string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
             NgWebElement uploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
             uploadSignage.SendKeys(noticeOfArticles);
 
             // upload a central securities register document
-            string centralSecuritiesRegister = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+            string centralSecuritiesRegister = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "central_securities_register.pdf");
             NgWebElement uploadCentralSecReg = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
             uploadCentralSecReg.SendKeys(centralSecuritiesRegister);
 
             // upload a special rights and restrictions document
-            string specialRightsRestrictions = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+            string specialRightsRestrictions = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "special_rights_restrictions.pdf");
             NgWebElement uploadSpecialRightsRes = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
             uploadSpecialRightsRes.SendKeys(specialRightsRestrictions);
+
 
             // open key personnel form   
             NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[4]/section/app-associate-list/div/button"));
@@ -243,32 +261,80 @@ namespace bdd_tests
             NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
             openKeyPersonnelDOB1.Click();
 
-            // open shareholder form    
+
+            // open individual shareholder form    
             NgWebElement uiOpenShare = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section/app-associate-list/div/button"));
             uiOpenShare.Click();
 
-            // enter shareholder first name
+            // enter individual shareholder first name
             NgWebElement uiShareFirst = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
             uiShareFirst.SendKeys(shareholderFirstName);
 
-            // enter shareholder last name
+            // enter individual shareholder last name
             NgWebElement uiShareLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
             uiShareLast.SendKeys(shareholderLastName);
 
-            // enter number of voting shares
+            // enter individual number of voting shares
             NgWebElement uiShareVotes = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
             uiShareVotes.SendKeys(shareholderVotingShares);
 
-            // enter shareholder email
+            // enter individual shareholder email
             NgWebElement uiShareEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
             uiShareEmail.SendKeys(shareholderEmail);
 
-            // enter shareholder DOB
+            // enter individual shareholder DOB
             NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
             uiCalendarS1.Click();
 
             NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
             uiCalendarS2.Click();
+
+
+            // open business shareholder form    
+            NgWebElement uiOpenShareBiz = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section[2]/app-associate-list/div/button"));
+            uiOpenShareBiz.Click();
+
+            // enter business name
+            NgWebElement uiShareFirstBiz = ngDriver.FindElement(By.XPath("(//input[@type='text'])[11]"));
+            uiShareFirstBiz.SendKeys(businessName);
+
+            // enter business voting shares
+            NgWebElement uiShareVotesBiz = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+            uiShareVotesBiz.SendKeys(businessVotingShares);
+
+            // select the business type - todo
+            NgWebElement uiShareBizType = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr/td[3]/app-field/section/div/section/select"));
+            uiShareBizType.Click();
+
+            // enter business shareholder email
+            NgWebElement uiShareEmailBiz = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
+            uiShareEmailBiz.SendKeys(shareholderEmail);
+
+            // upload the business NOA - todo
+
+            // upload the central securities register - todo
+
+            // upload the special rights restrictions - todo
+
+            // enter key personnel first name - todo
+
+            // enter key personnel last name - todo
+
+            // select key personnel position - todo
+
+            // enter key personnel title - todo
+
+            // enter key personnel email - todo
+
+            // select key personnel DOB - todo
+
+            // enter individual shareholder first name - todo
+
+            // enter individual shareholder last name - todo
+
+            // enter individual shareholder voting shares - todo
+
+            // enter individual shareholder DOB - todo
 
             // click on Submit Organization Info button
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
