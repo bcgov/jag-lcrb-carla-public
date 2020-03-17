@@ -369,10 +369,17 @@ namespace bdd_tests
             signatureAgree.Click();
         }
 
-        [And(@"I click on the Submit & Pay button")]
+        [And(@"I click on the Submit button")]
+        public void click_on_submit()
+        {
+            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
+            submit_button.Click();
+        }
+
+        [And(@"I click on the Pay for Application button")]
         public void click_on_pay()
         {
-            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
+            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
             pay_button.Click();
         }
 
