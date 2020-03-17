@@ -66,6 +66,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   savedFormData: any;
   applicationId: string;
   busy: Subscription;
+  busyPromise: Promise<any>;
   accountId: string;
   payMethod: string;
   validationMessages: any[];
@@ -379,6 +380,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
         }
         return of(true);
       }));
+  }
+
+
+  saveForLater() {
+    this.busyPromise = this.save(true)
+      .toPromise()
+      .then(() => {
+        this.router.navigateByUrl('/dashboard');
+      });
   }
 
   prepareTiedHouseSaveRequest(_tiedHouseData) {

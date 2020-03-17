@@ -13,6 +13,8 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.Rest;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Gov.Lclb.Cllb.Public.Extensions;
+using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -25,13 +27,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
+        private readonly PdfClient _pdfClient;
 
-        public LicenceEventsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public LicenceEventsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, PdfClient pdfClient)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(LicenceEventsController));
+            _pdfClient = pdfClient;
         }
 
 
@@ -306,6 +310,84 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // if current user doesn't have an account they are probably not logged in
             return false;
+        }
+
+        /// GET an authorization as PDF.
+        [HttpGet("{eventId}/authorization.pdf")]
+        public async Task<IActionResult> GetAuthorizationPdf(string eventId)
+        {
+            MicrosoftDynamicsCRMadoxioEvent licenceEvent;
+            LicenceEvent licenceEventVM;
+            MicrosoftDynamicsCRMadoxioLicences licence;
+            MicrosoftDynamicsCRMaccount account;
+            MicrosoftDynamicsCRMsystemuser inspector;
+
+            try
+            {
+                licenceEvent = _dynamicsClient.Events.GetByKey(eventId);
+                licenceEventVM = licenceEvent.ToViewModel(_dynamicsClient);
+                licence = _dynamicsClient.Licenceses.GetByKey(licenceEventVM.LicenceId);
+                account = _dynamicsClient.Accounts.GetByKey(licence._adoxioLicenceeValue);
+                // inspector = _dynamicsClient.Systemuseradoxioeventinspector.InspectorByKey(licenceEvent._adoxioInspectorValue);
+            }
+            catch (HttpOperationException)
+            {
+                return new NotFoundResult();
+            }
+
+            if (!CurrentUserHasAccessToEventOwnedBy(licence._adoxioLicenceeValue))
+            {
+                return new NotFoundResult();
+            }
+
+            string eventTimings = "";
+            foreach (var schedule in licenceEventVM.Schedules)
+            {
+                eventTimings += $@"<tr class='hide-border'>
+                        <td style='width: 50%; text-align: left;'>{schedule.EventStartDateTime?.ToString("MMMM dd, yyyy")} - Event Hours: {schedule.EventStartDateTime?.ToString("h:mm tt")} to {schedule.EventEndDateTime?.ToString("h:mm tt")}</td>
+                        <td style='width: 50%; text-align: left;'>Service Hours: {schedule.ServiceStartDateTime?.ToString("h:mm tt")} to {schedule.ServiceEndDateTime?.ToString("h:mm tt")}</td>
+                    </tr>";
+            }
+            Dictionary<string, string> parameters;
+            parameters = new Dictionary<string, string>
+            {
+                { "licensee", account.Name },
+                { "licenceNumber", licence.AdoxioLicencenumber },
+                { "licenceExpiryDate", licence.AdoxioExpirydate?.ToString("MMMM dd, yyyy") },
+                { "licenseePhone", account.Telephone1 },
+                { "licenseeEmail", account.Emailaddress1 },
+                { "contactName", licenceEventVM.ContactName },
+                { "contactPhone", licenceEventVM.ContactPhone },
+                { "hostname", licenceEventVM.ClientHostname },
+                { "startDate", licenceEventVM.StartDate?.ToString("MMMM dd, yyyy") },
+                { "endDate", licenceEventVM.EndDate?.ToString("MMMM dd, yyyy") },
+                { "eventTimings", eventTimings },
+                { "eventType", EnumExtensions.GetEnumMemberValue(licenceEventVM.EventType)},
+                { "eventDescription", licenceEventVM.EventTypeDescription },
+                { "foodService", EnumExtensions.GetEnumMemberValue(licenceEventVM.FoodService) },
+                { "entertainment", EnumExtensions.GetEnumMemberValue(licenceEventVM.Entertainment) },
+                { "attendance", licenceEventVM.MaxAttendance.ToString() },
+                { "minors", licenceEventVM.MinorsAttending ?? false ? "Yes" : "No" },
+                { "location", licenceEventVM.SpecificLocation.ToString() },
+                { "addressLine1", licenceEventVM.Street1 },
+                { "addressLine2", licenceEventVM.Street2 },
+                { "addressLine3", $"{licenceEventVM.City}, BC {licenceEventVM.PostalCode}" },
+                { "inspectorName", "__TODO__"},
+                { "inspectorPhone", "__TODO__" },
+                { "inspectorEmail", "__TODO__" },
+                { "date", DateTime.Now.ToString("MMMM dd, yyyy") }
+            };
+
+            byte[] data;
+            try
+            {
+                data = await _pdfClient.GetPdf(parameters, "event_authorization");
+                return File(data, "application/pdf", $"authorization.pdf");
+            }
+            catch (Exception)
+            {
+                return new NotFoundResult();
+            }
         }
     }
 }
