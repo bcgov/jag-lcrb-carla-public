@@ -43,6 +43,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     var contact = dynamicsClient.Contacts.Get(filter: "contactid eq " + id).Value[0];
                     if (contact.AdoxioConsentvalidated == null)
                     {
+                        logger.LogError($"Consent not validated for associate: {contact.Contactid}");
                         consentValidated = false;
                         continue;
                     }
