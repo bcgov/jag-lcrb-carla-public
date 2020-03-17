@@ -20,13 +20,16 @@ Feature: CRSApplication_privatecorp
 Scenario: Start Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button
-    And I click on the Continue to Application button
+    And I complete the eligibility disclosure
+    And I review the account profile
+    And I review the organization structure
     And I complete the application
-    And I click on the Submit & Pay button
+    And I review the security screening requirements
+    And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
-    And I delete my account
-    Then I see login
+    And the account is deleted
+    Then I see the login page
 */
 
 namespace bdd_tests
@@ -34,27 +37,15 @@ namespace bdd_tests
     [FeatureFile("./CRSApplication_privatecorp.feature")]
     public sealed class CRSApplicationPrivateCorp : TestBaseCRS
     {
-
-        // Dashboard related common actions
-
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
         }
 
-        [And(@"I am not a marketer")]
-        public void check_marketer()
-        {
-        }
-
         [And(@"I click on the Start Application button")]
         public void I_start_application()
         {
-            ngDriver.WaitForAngular();
-
-            //System.Threading.Thread.Sleep(7000);
-
             /* 
             Page Title: Welcome to Cannabis Licensing
             */
@@ -62,9 +53,11 @@ namespace bdd_tests
             // click on the Start Application button
             NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
             startApp_button.Click();
+        }
 
-            ngDriver.WaitForAngular();
-
+        [And(@"I complete the eligibility disclosure")]
+        public void complete_eligibility_disclosure()
+        {
             /* 
             Page Title: Cannabis Retail Store Licence Eligibility Disclosure
             */
@@ -90,9 +83,11 @@ namespace bdd_tests
             // click on the Submit button
             NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
             submit_button.Click();
+        }
 
-            ngDriver.WaitForAngular();
-
+        [And(@"I review the account profile")]
+        public void review_account_profile()
+        {
             /* 
             Page Title: Please Review the Account Profile
             */
@@ -205,27 +200,29 @@ namespace bdd_tests
             NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
             federalProducerConnectionToCorp.Click();
 
-            // click on CONTINUE TO ORGANIZATION REVIEW button
+            // click on Continue to Organization Review button
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
             continueApp_button.Click();
-
-            ngDriver.WaitForAngular();
         }
 
-        [And(@"I click on the Continue to Organization Review button")]
+        [And(@"I review the organization structure")]
         public void I_continue_to_organization_review()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+            
+            // create the key personnel data
             string keyPersonnelFirstName = "Jane";
             string keyPersonnelLastName = "Bond";
             string keyPersonnelTitle = "Adventurer";
             string keyPersonnelEmail = "jane@bond.com";
 
+            // create the shareholder data
             string shareholderFirstName = "Jacqui";
             string shareholderLastName = "Chan";
             string shareholderVotingShares = "500";
             string shareholderEmail = "jacqui@chan.com";
-
-            ngDriver.WaitForAngular();
 
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
@@ -299,7 +296,6 @@ namespace bdd_tests
             uiShareEmail.SendKeys(shareholderEmail);
 
             // enter shareholder DOB
-
             NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
             uiCalendarS1.Click();
 
@@ -309,13 +305,16 @@ namespace bdd_tests
             // click on Submit Organization Info button
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
             submitOrgInfoButton.Click();
-
-            ngDriver.WaitForAngular();
         }
 
         [And(@"I complete the application")]
         public void I_complete_the_application()
         {
+            /* 
+            Page Title: Submit the Cannabis Retail Store Application
+            */
+
+            // create application info
             string estName = "Point Ellis Greenhouse";
             string estAddress = "645 Tyee Rd";
             string estCity = "Victoria";
@@ -328,10 +327,6 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
-
-            /* 
-            Page Title: Submit the Cannabis Retail Store Application
-            */
 
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
@@ -418,33 +413,26 @@ namespace bdd_tests
             // click on the signature agreement checkbox
             NgWebElement signatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
             signatureAgree.Click();
-        }
 
-        [And(@"I click on the Submit button")]
-        public void click_on_submit()
-        {
+            // click on the Submit button
             NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
-            System.Threading.Thread.Sleep(7000);
-
             submit_button.Click();
-            System.Threading.Thread.Sleep(7000);
         }
 
-        [And(@"I click on the Pay button")]
+        [And(@"I review the security screening requirements")]
+        public void review_security_screening_reqs()
+        {
+            /* 
+            Page Title: Security Screening Requirements
+                      : placeholder for future testing
+            */
+        }
+
+        [And(@"I click on the Pay for Application button")]
         public void click_on_pay()
         {
-            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay')]"));
-            System.Threading.Thread.Sleep(7000);
-
+            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
             pay_button.Click();
-            System.Threading.Thread.Sleep(7000);
-        }
-
-        [Then(@"I CLICK on 'SAVE FOR LATER'")]
-        public void click_on_save_for_later()
-        {
-            NgWebElement saveforlater_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SAVE FOR LATER')]"));
-            saveforlater_button.Click();
         }
 
         [And(@"I enter the payment information")]
@@ -460,22 +448,29 @@ namespace bdd_tests
             Page Title: Payment Approved
             */
 
-            string retDash = "Return to Dashboard";
+            // confirm that payment receipt is for $7,500.00
+            Assert.True (ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-payment-confirmation/mat-card/div/div[1]/div/div/table/tr[6]/td[2][text()='$7,500.00']")).Displayed);
 
+            string retDash = "Return to Dashboard";
+            
             // click on the Return to Dashboard link
             NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
             returnDash.Click();
         }
 
-        [And(@"I delete my account")]
+        [And(@"the account is deleted")]
         public void Delete_my_account()
         {
             this.CarlaDeleteCurrentAccount();
         }
 
-        [Then(@"I see login")]
+        [Then(@"I see the login page")]
         public void I_see_login()
         {
+            /* 
+            Page Title: Apply for a cannabis licence
+            */
+
             Assert.True (ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
     }
