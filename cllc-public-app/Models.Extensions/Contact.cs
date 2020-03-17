@@ -66,6 +66,13 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.PhsCanadianDrugAlchoholDrivingOffence = (YesNoOptions?)contact.AdoxioPhscanadiandrugalchoholdrivingoffence;
                 result.PhsDateSubmitted = contact.AdoxioPhsdatesubmitted;
                 result.PhsForeignDrugAlchoholOffence = (YesNoOptions?)contact.AdoxioPhsforeigndrugalchoholoffence;
+
+                result.PhsExclusiveMFG = (YesNoOptions?)contact.AdoxioPhsexclusivemfg;
+                result.phsExclusiveDetails = contact.AdoxioPhsexclusivedetails;
+                result.phsFinancialInt = (YesNoOptions?)contact.AdoxioPhsfinancialint;
+                result.phsFinancialIntDetails = contact.AdoxioPhsfinancialinterestdetails;
+                result.phsProfitAgreement = (YesNoOptions?)contact.AdoxioPhsprofitagreement;
+                result.phsProfitAgreementDetails = contact.AdoxioPhsprofitagreementdetails;
             }
             return result;
         }
@@ -335,6 +342,13 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioPhscanadiandrugalchoholdrivingoffence = (int?)from.PhsCanadianDrugAlchoholDrivingOffence;
             to.AdoxioPhsdatesubmitted = from.PhsDateSubmitted;
             to.AdoxioPhsforeigndrugalchoholoffence = (int?)from.PhsForeignDrugAlchoholOffence;
+
+            to.AdoxioPhsexclusivemfg = (int?)from.PhsExclusiveMFG;
+            to.AdoxioPhsexclusivedetails = from.phsExclusiveDetails;
+            to.AdoxioPhsfinancialint = (int?)from.phsFinancialInt;
+            to.AdoxioPhsfinancialinterestdetails = from.phsFinancialIntDetails;
+            to.AdoxioPhsprofitagreement = (int?)from.phsProfitAgreement;
+            to.AdoxioPhsprofitagreementdetails = from.phsProfitAgreementDetails;
         }
 
         public static MicrosoftDynamicsCRMcontact ToModel(this ViewModels.Contact contact)
@@ -376,6 +390,13 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.AdoxioPhsdatesubmitted = contact.PhsDateSubmitted;
                 result.AdoxioPhsforeigndrugalchoholoffence = (int?)contact.PhsForeignDrugAlchoholOffence;
                 result.AdoxioPhsconnectionsdetails = contact.PhsConnectionsDetails;
+
+                result.AdoxioPhsexclusivemfg = (int?)contact.PhsExclusiveMFG;
+                result.AdoxioPhsexclusivedetails = contact.phsExclusiveDetails;
+                result.AdoxioPhsfinancialint = (int?)contact.phsFinancialInt;
+                result.AdoxioPhsfinancialinterestdetails = contact.phsFinancialIntDetails;
+                result.AdoxioPhsprofitagreement = (int?)contact.phsProfitAgreement;
+                result.AdoxioPhsprofitagreementdetails = contact.phsProfitAgreementDetails;
 
 
                 if (string.IsNullOrEmpty(result.Fullname) && (!string.IsNullOrEmpty(result.Firstname) || !string.IsNullOrEmpty(result.Lastname)))
