@@ -112,6 +112,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public YesNoOptions? PhsForeignDrugAlchoholOffence { get; set; }
 
         public List<ViewModels.Alias> Aliases { get; set; }
+
+
+        public YesNoOptions? PhsExclusiveMFG  { get; set; }
+        public string phsExclusiveDetails   { get; set; }
+        public YesNoOptions? phsFinancialInt   { get; set; }
+        public string phsFinancialIntDetails   { get; set; }
+        public YesNoOptions? phsProfitAgreement   { get; set; }
+        public string phsProfitAgreementDetails   { get; set; }
         
     }
 }
