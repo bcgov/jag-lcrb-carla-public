@@ -22,7 +22,6 @@ import { ApplicationDataService } from '@services/application-data.service';
 import { Application } from '@models/application.model';
 import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
 import { ModalComponent } from '@shared/components/modal/modal.component';
-import { EligibilityFormComponent } from '@components/eligibility-form/eligibility-form.component';
 import { UserDataService } from '@services/user-data.service';
 
 const Months = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -80,11 +79,7 @@ export class AppComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((event) => {
         if (event instanceof NavigationEnd) {
-          if (event.url.search('federal-reporting') >= 0) {
-            this.showMessageCenterContent = false;
-          } else if (event.url.search('application') >= 0) {
-            this.reloadUser();
-          }
+          
           const prevSlug = this.previousUrl;
           let nextSlug = event.url.slice(1);
           if (!nextSlug) { nextSlug = 'home'; }
@@ -100,7 +95,7 @@ export class AppComponent extends FormBase implements OnInit {
   }
 
   ngOnInit(): void {
-    this.reloadUser();
+    
     this.loadVersionInfo();
 
     this.store.select(state => state.legalEntitiesState)
@@ -131,52 +126,6 @@ export class AppComponent extends FormBase implements OnInit {
 
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(VersionInfoDialogComponent, dialogConfig);
-  }
-
-  openEligibilityModal() {
-    if (!this.isEligibilityDialogOpen) {
-      const dialogRef = this.dialog.open(EligibilityFormComponent, {
-        disableClose: true,
-        autoFocus: false,
-        maxHeight: '95vh'
-      });
-      this.isEligibilityDialogOpen = true;
-      dialogRef.afterClosed().subscribe(() => this.isEligibilityDialogOpen = false);
-    }
-  }
-
-
-  reloadUser() {
-    this.userDataService.loadUserToStore().then(() => {
-      this.store.select(state => state.currentUserState.currentUser)
-        .pipe(takeWhile(() => this.componentActive))
-        .subscribe((data: User) => {
-          this.currentUser = data;
-          this.isNewUser = this.currentUser && this.currentUser.isNewUser;
-          if (this.currentUser && this.currentUser.accountid && this.currentUser.accountid !== '00000000-0000-0000-0000-000000000000') {
-            this.accountDataService.loadCurrentAccountToStore(this.currentUser.accountid)
-              .subscribe(() => {
-                if (data.isEligibilityRequired) {
-                  this.openEligibilityModal();
-                }
-              });
-
-            // load federal reports after the user logs in
-            this.monthlyReportDataService.getAllCurrentMonthlyReports()
-              .subscribe(data => {
-                this.linkedFederalReports = data.filter(report => report.statusCode === monthlyReportStatus.Draft);
-              });
-          } else {
-            this.store.dispatch(new SetCurrentAccountAction(null));
-          }
-        });
-
-      this.store.select(state => state.currentAccountState.currentAccount)
-        .pipe(takeWhile(() => this.componentActive))
-        .subscribe(account => {
-          this.account = account;
-        });
-    });
   }
 
 
