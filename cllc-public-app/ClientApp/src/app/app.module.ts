@@ -188,6 +188,7 @@ import { LicenceEventsService } from '@services/licence-events.service';
 import { SecurityScreeningRequirementsComponent } from './components/security-screening-requirements/security-screening-requirements.component';
 import { EligibilityFormComponent } from './components/eligibility-form/eligibility-form.component';
 import { EligibilityFormDataService } from '@services/eligibility-data.service';
+import { LiquorRenewalComponent } from './components/applications/liquor-renewal/liquor-renewal.component';
 
 
 @NgModule({
@@ -290,7 +291,8 @@ import { EligibilityFormDataService } from '@services/eligibility-data.service';
     PhsConfirmationComponent,
     MultiStageApplicationFlowComponent,
     SecurityScreeningRequirementsComponent,
-    EligibilityFormComponent
+    EligibilityFormComponent,
+    LiquorRenewalComponent
   ],
   imports: [
     ChartsModule,
