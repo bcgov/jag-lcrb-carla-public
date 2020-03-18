@@ -220,7 +220,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         /// <param name="applicationRequest">Application request.</param>
         public bool SendApplicationScreeningRequest(Guid applicationId, IncompleteApplicationScreening applicationRequest)
         {
-            var consentValidated = Validation.ValidateAssociateConsent(_dynamicsClient, (List<LegalEntity>)applicationRequest.Associates);
+            var consentValidated = Validation.ValidateAssociateConsent(_dynamicsClient, (List<LegalEntity>)applicationRequest.Associates, _logger);
 
             if (consentValidated)
             {
