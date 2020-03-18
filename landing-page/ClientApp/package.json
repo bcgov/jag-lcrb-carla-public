@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve --source-map --host 0.0.0.0",
     "build": "ng build --base-href /LCRB/ --deploy-url /LCRB/",
-    "builduat": "ng build --base-href /uat/cannabislicensing/ --deploy-url /uat/cannabislicensing/",
+    "builduat": "ng build --base-href /uat/LCRB/ --deploy-url /uat/LCRB/",
     "buildprod": "ng build --base-href / --deploy-url /",
     "watch": "ng build --watch --base-href /LCRB/ --deploy-url /LCRB/",
     "build:ssr": "npm run build -- --app=ssr --output-hashing=media",

@@ -15,12 +15,28 @@ namespace landing_page
             Configuration = configuration;
         }
 
+        readonly string MyAllowSpecificOrigins = "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com";
+
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("https://localhost",                                        
+                                        "https://dev.justice.gov.bc.ca",
+                                        "https://test.justice.gov.bc.ca",
+                                        "https://justice.gov.bc.ca");
+                });
+            });
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -31,6 +47,8 @@ namespace landing_page
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UsePathBase("/LCRB");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -57,6 +75,8 @@ namespace landing_page
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseSpa(spa =>
             {
