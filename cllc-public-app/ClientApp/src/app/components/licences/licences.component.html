@@ -4,7 +4,7 @@
 
   <div *ngIf="this.getNumberOfLicences() === 0">
     <h2>You do not have any licences on file.</h2>  
-    <p>If currently have a liquor licence and are not seeing it here, please contact <a href="mailto:liquor.licensing@gov.bc.ca">liquor.licensing@gov.bc.ca</a>.</p>
+    <p>If currently have a liquor licence and are not seeing it here, please contact <a href="mailto:LCRBLiquor@gov.bc.ca">LCRBLiquor@gov.bc.ca</a>.</p>
   </div>
   
   <section *ngFor="let mappingItem of licenceMappings | keyvalue">
@@ -18,7 +18,7 @@
             <img *ngIf="mappingItem.key === 'Marketing'" class="icon" src="assets/Cannabis-marketing-icon-blue-40px.png"
               alt="">
             <img *ngIf="mappingItem.key === 'Catering'" class="icon" src="assets/Catering-icon-blue-40px.png" alt="">
-            <img *ngIf="mappingItem.key === 'Wine Store'" class="icon" src="assets/Wine-Store-icon-blue-40px.png" alt="">
+            <img *ngIf="mappingItem.key === 'Wine Store'" class="icon" src="assets/Wine-store-icon-blue-40px.png" alt="">
           </th>
           <th style="width:250px;">Licence Details</th>
           <th style="width:250px;">Location</th>
@@ -120,8 +120,7 @@
               <ng-container
                 *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested !== 'Yes' || !licenceTransferFeatureOn)">
                 <div *ngIf="item.status != PAYMENT_REQUIRED">
-                  <p
-                    *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore || item?.licenceTypeName === ApplicationTypeNames.Catering">
+                  <p>
                     <a *ngIf="licenceTransferFeatureOn" [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
                       <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Transfer Ownership</span>
                     </a>
