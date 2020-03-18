@@ -7,19 +7,30 @@
     <!-- <ng-template matStepperIcon="number">
   </ng-template> -->
 
+    <!-- step 1 -->
     <mat-step label="Review Account Profile">
-      <app-account-profile *ngIf="stepper.selectedIndex === 0" [useInStepperMode]="true" style="width: 100%" (saveComplete)="stepper.selectedIndex = 1">
+      <app-account-profile *ngIf="stepper.selectedIndex === 0" [useInStepperMode]="true" style="width: 100%"
+        (saveComplete)="stepper.selectedIndex = 1">
       </app-account-profile>
     </mat-step>
-    <mat-step *ngIf="licenseeChangesEnabled" label="Review Organization Structure">
-      <app-application-licensee-changes *ngIf="stepper.selectedIndex === 1" class="w-100"
-                                        (saveComplete)="stepper.selectedIndex = 2"></app-application-licensee-changes>
+
+    <!-- step 2 -->
+    <mat-step>
+      <ng-container *ngIf="licenseeChangesEnabled">
+        <ng-template matStepLabel>Review Organization Structure</ng-template>
+        
+        <app-application-licensee-changes *ngIf="stepper.selectedIndex === 1" class="w-100"
+          (saveComplete)="stepper.selectedIndex = 2"></app-application-licensee-changes>
+      </ng-container>
+      <ng-container *ngIf="!licenseeChangesEnabled">
+        <ng-template matStepLabel>Complete Application</ng-template>
+        <app-application-renewal *ngIf="stepper.selectedIndex === 1" style="width: 100%"></app-application-renewal>
+      </ng-container>
     </mat-step>
+
+    <!-- step 3 -->
     <mat-step *ngIf="licenseeChangesEnabled" label="Complete Application">
       <app-application-renewal *ngIf="stepper.selectedIndex === 2" style="width: 100%"></app-application-renewal>
-    </mat-step>
-    <mat-step *ngIf="!licenseeChangesEnabled" label="Complete Application">
-      <app-application-renewal *ngIf="stepper.selectedIndex === 1" style="width: 100%"></app-application-renewal>
     </mat-step>
   </mat-horizontal-stepper>
 
