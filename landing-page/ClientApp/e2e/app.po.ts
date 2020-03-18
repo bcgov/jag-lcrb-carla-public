@@ -68,7 +68,7 @@ var AppHomePage = function() {
     var hideVoteResultsButton = element(by.id("hideVoteResultsButton"));
 
     this.navigateTo = function() {
-      return browser.get('/cannabislicensing/');
+      return browser.get('/LCRB/');
     };
 
     this.getMainHeading = function() {
