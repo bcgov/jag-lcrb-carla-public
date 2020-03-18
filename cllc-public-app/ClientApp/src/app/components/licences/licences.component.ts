@@ -319,6 +319,10 @@ export class LicencesComponent extends FormBase implements OnInit {
     }
   }
 
+  getNumberOfLicences() {
+    return Object.keys(this.licenceMappings).length;
+  }
+
   getOptionFromValue(options: any, value: number) {
     const idx = options.findIndex(opt => opt.value === value);
     if (idx >= 0) {
