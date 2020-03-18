@@ -158,6 +158,48 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             return result;
         }
+        
+
+        /// <summary>
+        /// Get a Account by their Guid
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static MicrosoftDynamicsCRMaccount GetAccountByLegalName(this IDynamicsClient system, string legalName)
+        {
+            // ensure that the legal name is safe for a query.
+            legalName.Replace("'", "''");
+
+            MicrosoftDynamicsCRMaccount result = null;
+            try
+            {
+                var accountResponse = system.Accounts.Get(filter: $"name eq '{legalName}'");
+                if (accountResponse.Value != null && accountResponse.Value.Count == 1)
+                {
+                    var firstAccount = accountResponse.Value.FirstOrDefault();
+                    if (string.IsNullOrEmpty(firstAccount.AdoxioExternalid))
+                    {
+                        result = firstAccount;
+                    }
+                }                
+            }
+            catch (Exception)
+            {
+
+                result = null;
+            }
+
+            // get the primary contact.
+            if (result != null && result.Primarycontactid == null && result._primarycontactidValue != null)
+            {
+                result.Primarycontactid = system.GetContactById(Guid.Parse(result._primarycontactidValue)).GetAwaiter().GetResult();
+            }
+
+            return result;
+
+        }
+
 
         /// <summary>
         /// Get a Account by their Guid
@@ -443,6 +485,36 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="system"></param>
         /// <param name="siteminderId"></param>
         /// <returns></returns>
+        public static IList<MicrosoftDynamicsCRMcontact> GetContactsByDetails(this IDynamicsClient system, string firstname, string middlename, string lastname, string emailaddress1)
+        {
+            firstname.Replace("'", "''");
+            middlename.Replace("'", "''");
+            lastname.Replace("'", "''");
+            emailaddress1.Replace("'", "''");
+            IList<MicrosoftDynamicsCRMcontact> result = null;
+            try
+            {
+                var contactsResponse = system.Contacts.Get(filter: $"firstname eq '{firstname}' and lastname eq '{lastname}' and middlename eq '{middlename}' and emailaddress1 eq '{emailaddress1}'");
+                result = contactsResponse.Value;
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Get a contact by their Siteminder ID
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="siteminderId"></param>
+        /// <returns></returns>
         public static MicrosoftDynamicsCRMcontact GetContactByExternalId(this IDynamicsClient system, string siteminderId)
         {
             string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
@@ -450,7 +522,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             try
             {
                 var contactsResponse = system.Contacts.Get(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
-                result = contactsResponse.Value.FirstOrDefault();
+                
             }
             catch (HttpOperationException)
             {
@@ -542,10 +614,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Load User from database using their userId and guid
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="userId"></param>
+        /// <param name="smGuid"></param>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient, string userId, IHeaderDictionary Headers, ILogger _logger, string guid = null)
+        public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient, string smGuid, IHeaderDictionary Headers, ILogger _logger, string guid = null)
         {
             User user = null;
             MicrosoftDynamicsCRMcontact contact = null;
@@ -559,9 +631,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (user == null)
             {
                 _logger.LogDebug(">>>> LoadUser for BCEID.");
-                if (Guid.TryParse(userId, out userGuid))
+                if (Guid.TryParse(smGuid, out userGuid))
                 {
-                    user = _dynamicsClient.GetUserBySmUserId(userId);
+                    user = _dynamicsClient.GetUserBySmGuid(smGuid);
+                    if (user == null)
+                    {
+                        // try by other means.
+                        var contactVM = new Public.ViewModels.Contact();
+                        contactVM.CopyHeaderValues(Headers);
+                        user = _dynamicsClient.GetUserByContactVmBlankSmGuid(contactVM);
+                    }
                     if (user != null)
                     {
                         _logger.LogDebug(">>>> LoadUser for BCEID: user != null");
@@ -595,7 +674,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 { //BC service card login
 
                     _logger.LogDebug(">>>> LoadUser for BC Services Card.");
-                    string externalId = GetServiceCardID(userId);
+                    string externalId = GetServiceCardID(smGuid);
                     contact = _dynamicsClient.GetContactByExternalId(externalId);
 
                     if (contact != null)
@@ -696,7 +775,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="context"></param>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public static User GetUserBySmUserId(this IDynamicsClient _dynamicsClient, string guid)
+        public static User GetUserBySmGuid(this IDynamicsClient _dynamicsClient, string guid)
         {
             Guid id = new Guid(guid);
             User user = null;
@@ -708,6 +787,48 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             return user;
+        }
+
+        /// <summary>
+        /// Returns a User based on certain contact details
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public static User GetUserByContactVmBlankSmGuid(this IDynamicsClient _dynamicsClient, Public.ViewModels.Contact contact)
+        {
+            
+            User result = null;
+            var firstUser = _dynamicsClient.GetContactByContactVmBlankSmGuid(contact);
+            if (firstUser != null && string.IsNullOrEmpty (firstUser.AdoxioExternalid))
+            {
+                result = new User();
+                result.FromContact(firstUser);
+            }                    
+
+            return result;
+        }
+
+        /// <summary>
+        /// Returns a Contact based that has an exact match on certain details
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public static MicrosoftDynamicsCRMcontact GetContactByContactVmBlankSmGuid(this IDynamicsClient _dynamicsClient, Public.ViewModels.Contact contact)
+        {
+           
+            MicrosoftDynamicsCRMcontact result = null;
+            var users = _dynamicsClient.GetContactsByDetails(contact.firstname, contact.middlename, contact.lastname, contact.emailaddress1);
+            if (users != null)
+            {
+                if (users.Count == 1)
+                {
+                    result = users.FirstOrDefault();                    
+                }
+            }
+
+            return result;
         }
 
         /// <summary>
