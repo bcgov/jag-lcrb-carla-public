@@ -56,19 +56,13 @@ import { BreadcrumbComponent } from '@components/breadcrumb/breadcrumb.component
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { DynamicsFormDataService } from '@services/dynamics-form-data.service';
 import { FileDataService } from '@services/file-data.service';
-
-
-
-import { FormViewerComponent } from '@components/form-viewer/form-viewer.component';
 import { InsertComponent } from '@components/insert/insert.component';
 import { InsertService } from '@components/insert/insert.service';
 import { StaticComponent } from '@components/static/static.component';
 import { HomeComponent } from '@components/home/home.component';
-import { PolicyDocumentComponent } from '@components/policy-document/policy-document.component';
 import { PolicyDocumentDataService } from '@services/policy-document-data.service';
 import { StatusBadgeComponent } from '@components/status-badge/status-badge.component';
 import { SurveyDataService } from '@services/survey-data.service';
-import { ResultComponent } from '@components/result/result.component';
 import { VoteComponent } from '@components/vote/vote.component';
 import { VoteDataService } from '@services/vote-data.service';
 import { NewsletterDataService } from '@services/newsletter-data.service';
@@ -110,14 +104,10 @@ import {
 import { VersionInfoDataService } from '@services/version-info-data.service';
 import { VersionInfoDialogComponent } from '@components/version-info/version-info-dialog.component';
 import { ModalComponent } from '@shared/components/modal/modal.component';
-import { AssociateListComponent } from './shared/components/associate-list/associate-list.component';
-import { OrgStructureComponent } from './shared/components/org-structure/org-structure.component';
-import { EventFormComponent } from '@components/event-form/event-form.component';
-import { EventSecurityFormComponent } from '@components/event-form/security.component';
-import { LicenceEventsService } from '@services/licence-events.service';
-import { EligibilityFormComponent } from './components/eligibility-form/eligibility-form.component';
-import { EligibilityFormDataService } from '@services/eligibility-data.service';
 
+import { LicenceEventsService } from '@services/licence-events.service';
+import { EligibilityFormDataService } from '@services/eligibility-data.service';
+import { TermsOfUseComponent } from '@components/terms-of-use/terms-of-use.component';
 
 @NgModule({
   declarations: [
@@ -127,14 +117,9 @@ import { EligibilityFormDataService } from '@services/eligibility-data.service';
     BreadcrumbComponent,
     FieldComponent,
     FileUploaderComponent,
-    FormViewerComponent,
     HomeComponent,
     InsertComponent,
-    EventFormComponent,
-    EventSecurityFormComponent,
     NotFoundComponent,
-    PolicyDocumentComponent,
-    ResultComponent,
     StaticComponent,
     StatusBadgeComponent,
     VoteComponent,
@@ -146,9 +131,7 @@ import { EligibilityFormDataService } from '@services/eligibility-data.service';
     OrganizationLeadershipComponent,
     ShareholdersAndPartnersComponent,
     VersionInfoDialogComponent,
-    AssociateListComponent,
-    OrgStructureComponent,
-    EligibilityFormComponent
+    TermsOfUseComponent
   ],
   imports: [
     ChartsModule,
