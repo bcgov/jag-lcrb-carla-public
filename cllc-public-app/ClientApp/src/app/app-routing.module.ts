@@ -34,10 +34,6 @@ import { FederalReportingComponent } from '@components/federal-reporting/federal
 import { ApplicationLicenseeChangesComponent } from '@components/applications/application-licensee-changes/application-licensee-changes.component';
 import { LicencesComponent } from '@components/licences/licences.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
-import { CateringDemoComponent } from './components/catering-demo/catering-demo.component';
-import { DynamicApplicationComponent } from './components/applications/dynamic-application/dynamic-application.component';
-import { AssociateListComponent } from '@shared/components/associate-list/associate-list.component';
-import { OrganizationStructureComponent } from '@components/account-profile/tabs/organization-structure/organization-structure.component';
 import { PersonalHistorySummaryComponent } from '@components/personal-history-summary/personal-history-summary.component';
 import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confirmation.component';
 import { MultiStageApplicationFlowComponent } from '@components/multi-stage-application-flow/multi-stage-application-flow.component';
@@ -45,6 +41,7 @@ import { EventFormComponent } from '@components/event-form/event-form.component'
 import { EventSecurityFormComponent } from '@components/event-form/security.component';
 import { SecurityScreeningRequirementsComponent } from '@components/security-screening-requirements/security-screening-requirements.component';
 import { EligibilityFormComponent } from '@components/eligibility-form/eligibility-form.component';
+import { LiquorRenewalComponent } from '@components/applications/liquor-renewal/liquor-renewal.component';
 
 
 const routes: Routes = [
@@ -110,6 +107,11 @@ const routes: Routes = [
   },
   {
     path: 'renew-crs-licence/application/:applicationId',
+    component: LicenceRenewalStepsComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'renew-licence/:licenceType/:applicationId',
     component: LicenceRenewalStepsComponent,
     canActivate: [BCeidAuthGuard]
   },
