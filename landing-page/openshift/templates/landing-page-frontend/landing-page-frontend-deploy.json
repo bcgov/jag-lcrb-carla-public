@@ -6,7 +6,7 @@
       "description": "Deployment template for a angular on nginx",
       "tags": "angular,nginx"
     },
-    "name": "cllc-public-frontend"
+    "name": "landing-page-frontend"
   },
   "objects": [
     {
@@ -243,14 +243,14 @@
       "displayName": "Name",
       "name": "NAME",
       "required": true,
-      "value": "cllc-public-frontend"
+      "value": "landing-page-frontend"
     },
     {
       "name": "APP_NAME",
       "displayName": "App Name",
       "description": "App Name",
       "required": true,
-      "value": "cllc-public"
+      "value": "landing-page"
     },
     {
       "name": "ROLE",
@@ -278,7 +278,7 @@
       "displayName": "API URL",
       "name": "API_URL",
       "required": true,
-      "value": "http://cllc-public-api:8080/cannabislicensing/"
+      "value": "http://landing-page-api:8080/LCRB/"
     },
     {
       "description": "The name of the service endpoint for the API.  Used to wire up to an API endpoint within the same project; overriding the URL defined by API_URL.",
@@ -292,7 +292,7 @@
       "displayName": "API Path",
       "name": "API_PATH",
       "required": true,
-      "value": "/cannabislicensing/"
+      "value": "/LCRB/"
     },
     {
       "description": "Additional known and trusted reverse proxy ips conforming to nginx set_real_ip_from directive syntax. Multiple directives are allowed, separated by semicolon.",
@@ -309,7 +309,7 @@
       "description": "The endpoint used for SiteMinder routed access to the application.",
       "displayName": "SiteMinder Application Domain",
       "name": "SITEMINDER_APPLICATION_DOMAIN",
-      "value": "protection-order-dev.pathfinder.bcgov"
+      "value": "lcrb-landing-page-dev.pathfinder.bcgov"
     },
     {
       "name": "SITEMINDER_WHITE_LIST",
