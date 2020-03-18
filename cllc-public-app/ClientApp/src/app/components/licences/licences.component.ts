@@ -320,11 +320,7 @@ export class LicencesComponent extends FormBase implements OnInit {
   }
 
   getNumberOfLicences() {
-    let count = 0;
-    for(let l in this.licenceMappings){
-      count++;
-    }
-    return count;
+    return Object.keys(this.licenceMappings).length;
   }
 
   getOptionFromValue(options: any, value: number) {
