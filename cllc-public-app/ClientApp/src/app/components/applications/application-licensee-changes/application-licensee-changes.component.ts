@@ -81,7 +81,6 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
 
   ngOnInit() {
-
     this.form = this.fb.group({
       id: [''],
       contactPersonFirstName: ['', Validators.required],
@@ -93,7 +92,6 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
-
 
 
     this.store.select(state => state.currentAccountState.currentAccount)
