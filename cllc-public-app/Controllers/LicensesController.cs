@@ -222,7 +222,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(applicationTypeName);
+                // var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(applicationTypeName);
 
                 MicrosoftDynamicsCRMadoxioApplication application = new MicrosoftDynamicsCRMadoxioApplication()
                 {
