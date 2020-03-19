@@ -3,5 +3,6 @@ export class SecurityScreeningStatusItem {
     middleName: string;
     lastName: string;
     dateSubmitted: Date;
-    screeningLink: string;
+    phsLink: string;
+    casLink: string;
 }
