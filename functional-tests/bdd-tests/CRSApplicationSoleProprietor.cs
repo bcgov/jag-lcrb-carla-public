@@ -99,8 +99,9 @@ namespace bdd_tests
             string postalCode = "V8V4Y3";
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
-            string corpContactPhone = "7781811818";
-            string corpContactEmail = "automated@test.com";
+            string soleProprietorContactTitle = "Owner";
+            string soleProprietorContactPhone = "7781811818";
+            string soleProprietorContactEmail = "automated@test.com";
 
             string mailStreet1 = "P.O. Box 123";
             string mailStreet2 = "303 Prideaux St.";
@@ -165,19 +166,23 @@ namespace bdd_tests
             NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
             uiBizEmail.SendKeys(bizEmail);
 
-            // enter the corporation contact phone number
-            NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
-            uiCorpContactPhone.SendKeys(corpContactPhone);
+            // enter the sole proprietor contact title
+            NgWebElement uiSolePropContactTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
+            uiSolePropContactTitle.SendKeys(soleProprietorContactTitle);
 
-            // enter the corporation contact phone email
-            NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
-            uiCorpContactEmail.SendKeys(corpContactEmail);
+            // enter the sole proprietor contact phone number
+            NgWebElement uiSolePropContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
+            uiSolePropContactPhone.SendKeys(soleProprietorContactPhone);
 
-            // select 'No' for corporation's connection to a federal producer
+            // enter the sole proprietor contact phone email
+            NgWebElement uiSolePropContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
+            uiSolePropContactEmail.SendKeys(soleProprietorContactEmail);
+
+            // select 'No' for sole proprietor's connection to a federal producer
             NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
             corpConnectionFederalProducer.Click();
 
-            // select 'No' for federal producer's connection to corporation
+            // select 'No' for federal producer's connection to sole proprietor
             NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
             federalProducerConnectionToCorp.Click();
 
