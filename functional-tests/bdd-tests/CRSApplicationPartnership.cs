@@ -99,8 +99,9 @@ namespace bdd_tests
             string postalCode = "V8V4Y3";
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
-            string corpContactPhone = "7781811818";
-            string corpContactEmail = "automated@test.com";
+            string partnerContactPhone = "7781811818";
+            string partnerContactEmail = "automated@test.com";
+            string partnerContactTitle = "CEO";
 
             string mailStreet1 = "P.O. Box 123";
             string mailStreet2 = "303 Prideaux St.";
@@ -165,13 +166,17 @@ namespace bdd_tests
             NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
             uiBizEmail.SendKeys(bizEmail);
 
-            // enter the corporate contact phone number
-            NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
-            uiCorpContactPhone.SendKeys(corpContactPhone);
+            // enter the partner contact title
+            NgWebElement uiPartnerContactTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
+            uiPartnerContactTitle.SendKeys(partnerContactTitle);
 
-            // enter the corporate contact email
-            NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
-            uiCorpContactEmail.SendKeys(corpContactEmail);
+            // enter the partnership contact phone number
+            NgWebElement uiPartnerContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
+            uiPartnerContactPhone.SendKeys(partnerContactPhone);
+
+            // enter the partnership contact email
+            NgWebElement uiPartnerContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
+            uiPartnerContactEmail.SendKeys(partnerContactEmail);
 
             // select 'No' for connection to federal producer
             NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
