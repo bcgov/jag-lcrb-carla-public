@@ -35,6 +35,7 @@ export class LegalEntity {
   accountId: string;
   shareholderAccountId: string;
   phsLink: string;
+  casLink: string;
   // helper fields
   shareholderType: string;
   sendConsentRequest: boolean;
