@@ -328,7 +328,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 licenceEventVM = licenceEvent.ToViewModel(_dynamicsClient);
                 licence = _dynamicsClient.Licenceses.GetByKey(licenceEventVM.LicenceId);
                 account = _dynamicsClient.Accounts.GetByKey(licence._adoxioLicenceeValue);
-                // inspector = _dynamicsClient.Systemuseradoxioeventinspector.InspectorByKey(licenceEvent._adoxioInspectorValue);
+                inspector = _dynamicsClient.Inspector.Get(eventId);
             }
             catch (HttpOperationException)
             {
@@ -372,9 +372,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "addressLine1", licenceEventVM.Street1 },
                 { "addressLine2", licenceEventVM.Street2 },
                 { "addressLine3", $"{licenceEventVM.City}, BC {licenceEventVM.PostalCode}" },
-                { "inspectorName", "__TODO__"},
-                { "inspectorPhone", "__TODO__" },
-                { "inspectorEmail", "__TODO__" },
+                { "inspectorName", inspector?.Fullname},
+                { "inspectorPhone", inspector?.Address1Telephone1 },
+                { "inspectorEmail", inspector?.Internalemailaddress },
                 { "date", DateTime.Now.ToString("MMMM dd, yyyy") }
             };
 
