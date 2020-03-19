@@ -1,0 +1,15 @@
+
+::ng-deep {
+    .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+        line-height: 36px !important;
+    }
+
+    .mat-button-toggle-checked {
+        background-color: #38598a !important;
+        color: #fff !important;
+    }
+
+    .invalid {
+        border: 2px solid #d8292f !important;
+    }
+}

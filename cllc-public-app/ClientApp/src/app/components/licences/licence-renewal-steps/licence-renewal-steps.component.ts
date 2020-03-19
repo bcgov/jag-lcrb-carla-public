@@ -8,14 +8,14 @@ import { FeatureFlagService } from '@services/feature-flag.service';
   styleUrls: ['./licence-renewal-steps.component.scss']
 })
 export class LicenceRenewalStepsComponent implements OnInit {
-
+  busy: any;
   licenseeChangesEnabled: boolean;
-  
 
-  constructor(public featureFlagService: FeatureFlagService ) {
+
+  constructor(public featureFlagService: FeatureFlagService) {
 
     featureFlagService.featureOn('LicenseeChanges')
-      .subscribe(featureOn => this.licenseeChangesEnabled = featureOn);    
+      .subscribe(featureOn => this.licenseeChangesEnabled = featureOn);
 
   }
 
