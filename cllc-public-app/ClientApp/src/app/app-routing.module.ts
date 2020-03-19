@@ -34,6 +34,7 @@ import { FederalReportingComponent } from '@components/federal-reporting/federal
 import { ApplicationLicenseeChangesComponent } from '@components/applications/application-licensee-changes/application-licensee-changes.component';
 import { LicencesComponent } from '@components/licences/licences.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
+import { CannabisAssociateScreeningComponent } from '@components/cannabis-associate-screening/cannabis-associate-screening.component';
 import { PersonalHistorySummaryComponent } from '@components/personal-history-summary/personal-history-summary.component';
 import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confirmation.component';
 import { MultiStageApplicationFlowComponent } from '@components/multi-stage-application-flow/multi-stage-application-flow.component';
@@ -67,6 +68,13 @@ const routes: Routes = [
     canActivate: [FeatureGuard],
     data: { feature: 'LicenseeChanges' }
   },
+  {
+    path: 'cannabis-associate-screening/:token',
+    component: CannabisAssociateScreeningComponent,
+    canActivate: [FeatureGuard],
+    data: { feature: 'LicenseeChanges' }
+  },
+
   {
     path: 'licences',
     component: LicencesComponent,
