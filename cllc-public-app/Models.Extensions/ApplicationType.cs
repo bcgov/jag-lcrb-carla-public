@@ -46,6 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ShowHoursOfSale = applicationType.AdoxioIsshowhoursofsale,
                     ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments,
                     EstablishmetNameIsReadOnly = applicationType.AdoxioIslockestablishmentname,
+                    ProofofZoning = (FormControlState?)applicationType.AdoxioProofofzoning,
                                        
                 };
 
