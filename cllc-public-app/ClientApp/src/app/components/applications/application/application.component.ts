@@ -90,6 +90,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedSitePlanDocuments: 0;
   uploadedFloorPlanDocuments: 0;
   uploadedPhotosOrRenderingsDocuments: 0;
+  uploadedZoningDocuments: 0;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -157,7 +158,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       applicantType: ['', Validators.required],
       description1: ['', [Validators.required]],
       proposedChange: ['', [Validators.required]],
-      connectedGrocery: ['', []],
+      connectedGrocery: ['', []]
     });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: boolean) => {
@@ -283,6 +284,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     //   this.form.get('connectedGrocery').setValidators([Validators.required]);
     // }
 
+
   }
 
 
@@ -336,6 +338,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     return show;
+  }
+
+  showZoning(): boolean {
+    let show = this.application
+    && this.application.applicationType
+    && this.showFormControl(this.application.applicationType.proofofZoning);
+  return show;
+
   }
 
   showExteriorRenderings() {
@@ -512,6 +522,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
       valid = false;
       this.validationMessages.push('At least one floor plan document is required.');
     }
+
+    if (this.application.applicationType.proofofZoning === FormControlState.Show &&
+      ((this.uploadedZoningDocuments || 0) < 1)) {
+      valid = false;
+      this.validationMessages.push('At least one zoning document is required.');
+    }
+
+
 
     if (this.application.applicationType.showPropertyDetails && !this.form.get('establishmentName').value) {
       valid = false;
