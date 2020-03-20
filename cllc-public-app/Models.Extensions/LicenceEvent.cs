@@ -30,7 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             // liquor service > 2 hours (but not community event)
             if (item.EventType != EventType.Community) {
-                item.Schedules.ForEach((schedule) => {
+                item.Schedules?.ForEach((schedule) => {
                     System.TimeSpan? timeSpan = schedule.ServiceEndDateTime - schedule.ServiceStartDateTime;
                     if (timeSpan.HasValue && timeSpan.Value.Hours > 2)
                     {
@@ -130,6 +130,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.SafeAndResponsibleDisturbancesOtherDescription = item.AdoxioIsotherdisturbancedetails;
                 result.SafeAndResponsibleAdditionalSafetyMeasures = item.AdoxioAdditionalsafetydetails;
                 result.DeclarationIsAccurate = item.AdoxioIsdeclarationaccurate;
+                result.SecurityPlanSubmitted = item.AdoxioSafetysecurityplanchangessubmitted;
             }
 
             MicrosoftDynamicsCRMadoxioEventscheduleCollection eventSchedules = dynamicsClient.GetEventSchedulesByEventId(result.Id);
@@ -217,6 +218,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIsotherdisturbancedetails = from.SafeAndResponsibleDisturbancesOtherDescription;
             to.AdoxioAdditionalsafetydetails = from.SafeAndResponsibleAdditionalSafetyMeasures;
             to.AdoxioIsdeclarationaccurate = from.DeclarationIsAccurate;
+
+            to.AdoxioSafetysecurityplanchangessubmitted = from.SecurityPlanSubmitted;
         }
     }
 }
