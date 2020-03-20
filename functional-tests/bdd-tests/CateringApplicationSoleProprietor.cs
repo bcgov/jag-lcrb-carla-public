@@ -190,7 +190,7 @@ namespace bdd_tests
             NgWebElement openLeaderDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
             openLeaderDOB.Click();
 
-            NgWebElement openLeaderDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            NgWebElement openLeaderDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
             openLeaderDOB1.Click();
 
             // click on the Submit Organization Information button
