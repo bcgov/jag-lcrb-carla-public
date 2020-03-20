@@ -256,7 +256,7 @@
       </div>
       <div class="row">
         <app-field class="col-xs-12">
-          <mat-checkbox [checked]="scheduleIsInconsistent" (change)="toggleScheduleConsistency()" [disabled]="eventForm.controls['startDate'].invalid || eventForm.controls['endDate'].invalid ">The event and liquor service times are different on specific dates.</mat-checkbox>
+          <mat-checkbox [checked]="scheduleIsInconsistent" (change)="toggleScheduleConsistency()" [disabled]="eventForm.controls['startDate'].invalid || eventForm.controls['endDate'].invalid || isReadOnly">The event and liquor service times are different on specific dates.</mat-checkbox>
         </app-field>
       </div>
     </div>
@@ -281,7 +281,7 @@
     </div>
 
     <div class="p-4 button-row">
-      <button class="btn btn-primary" style="margin-right:10px;" (click)="save(false);">
+      <button class="btn btn-primary" style="margin-right:10px;" (click)="save(false);" *ngIf="!isReadOnly">
         <span>
           <i class="fa fa-save" style="color: #fff;"></i>
           SAVE FOR LATER
@@ -290,10 +290,10 @@
       <button class="btn btn-primary" style="margin-right:10px;" (click)="cancel();">
         <span>
           <i class="fa fa-trash" style="color: #fff;"></i>
-          CANCEL
+          CANCEL EVENT
         </span>
       </button>
-      <button class="btn btn-primary" (click)="save(true)" [disabled]="isFormValid()">SUBMIT</button>
+      <button class="btn btn-primary" (click)="save(true)" [disabled]="isFormValid()" *ngIf="!isReadOnly">SUBMIT</button>
     </div>
   </form>
 </div>
