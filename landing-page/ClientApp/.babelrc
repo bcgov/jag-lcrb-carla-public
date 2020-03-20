@@ -1,5 +1,5 @@
 {
-    "parserOpts": {
-      "plugins": ["proposal-numeric-separator"]
+    "parserOpts": {        
+            "plugins": ["@babel/plugin-proposal-numeric-separator"]          
     }
-  }
+}
