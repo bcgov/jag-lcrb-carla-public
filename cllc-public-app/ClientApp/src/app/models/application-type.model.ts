@@ -36,6 +36,7 @@ export class ApplicationType {
   connectedGroceryStore: FormControlState;
   publicCooler: FormControlState;
   showLiquorSitePlan: FormControlState;
+  proofofZoning: FormControlState;
   
 
 
