@@ -235,26 +235,15 @@ namespace bdd_tests
             uiPartnerEmail.SendKeys(partnerEmail);
 
             // enter partner DOB
-            NgWebElement uiCalendar0 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
-            uiCalendar0.Click();
+            NgWebElement openPartnerDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            openPartnerDOB.Click();
 
-            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/mat-calendar-header/div/div/button/span"));
-            uiCalendar1.Click();
+            NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            openKeyPartnerDOB1.Click();
 
-            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-multi-year-view/table/tbody/tr/td/div"));
-            uiCalendar2.Click();
-
-            NgWebElement uiCalendar3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-year-view/table/tbody/tr[3]/td[4]/div"));
-            uiCalendar3.Click();
-
-            NgWebElement uiCalendar4 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[4]/td[6]/div"));
-            uiCalendar4.Click();
-
-            NgWebElement uiCalendar5 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[6]/i/span"));
-            uiCalendar5.Click();
-
-            NgWebElement uiCalendar6 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/section/button[2]"));
-            uiCalendar6.Click();
+            // click on the Submit Organization Information button
+            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
+            submitOrgInfoButton.Click();
         }
 
         [And(@"I complete the application")]
