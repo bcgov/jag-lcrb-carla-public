@@ -356,6 +356,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return show;
   }
 
+  showGroceryQuestion() {
+    let show = this.application
+    && this.application.applicationType
+    && this.showFormControl(this.application.applicationType.connectedGroceryStore);
+    return show;
+  }
+
   showGroceryStore() {
     let show = (this.application && this.showFormControl(this.application.applicationType.connectedGroceryStore));
     show = show && this.form.get('connectedGrocery').value === 'Yes';
