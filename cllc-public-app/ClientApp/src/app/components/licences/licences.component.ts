@@ -160,16 +160,18 @@ export class LicencesComponent extends FormBase implements OnInit {
   }
 
   startRenewal(licence: ApplicationLicenseSummary) {
-    const renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === 'CRS Renewal' || app.applicationTypeName === 'Liquor Licence Renewal');
+    const renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CRSRenewal
+      || app.applicationTypeName === ApplicationTypeNames.LiquorRenewal);
+
     if (renewalApplication && !renewalApplication.isPaid) {
       this.router.navigateByUrl(`/renew-licence/${licence.applicationTypeCategory}/${renewalApplication.applicationId}`);
     } else if (renewalApplication && renewalApplication.isPaid) {
       this.snackBar.open('Renewal application already submitted', 'Fail',
         { duration: 3500, panelClass: ['red-snackbar'] });
     } else {
-      let actionName = 'CRS Renewal';
+      let actionName = ApplicationTypeNames.CRSRenewal;;
       if (licence.applicationTypeCategory === 'Liquor') {
-        actionName = 'Liquor Licence Renewal';
+        actionName = ApplicationTypeNames.LiquorRenewal;
       }
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
         .pipe(takeWhile(() => this.componentActive))
