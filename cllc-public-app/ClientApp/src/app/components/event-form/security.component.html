@@ -31,8 +31,8 @@
             <li>Other amenities, concession stands, bike storage, washroom facilities, first aid</li>
           </ol>
           <app-file-uploader documentType="SecurityPlan"
-            [enableFileDeletion]="true"
-            [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
+            [enableFileDeletion]="!isReadOnly"
+            [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="!isReadOnly"
             entityName="event" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
             (numberOfUploadedFiles)="uploadedSecurityDocuments = $event" [entityId]="securityForm.get('id').value"
             [uploadHeader]="'TO UPLOAD DOCUMENTS OF THE EVENT, DRAG FILES HERE OR'">
