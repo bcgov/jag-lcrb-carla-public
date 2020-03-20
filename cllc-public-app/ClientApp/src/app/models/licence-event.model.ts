@@ -77,6 +77,7 @@ export class LicenceEvent {
   safeAndResponsibleDisturbancesOther: boolean;
   safeAndResponsibleDisturbancesOtherDescription: string;
   safeAndResponsibleAdditionalSafetyMeasures: string;
+  securityPlanSubmitted: boolean;
 
   // security agreement
   declarationIsAccurate: boolean;

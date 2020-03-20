@@ -237,11 +237,11 @@
     <div class="p-4 button-row">
       <button class="btn btn-primary" style="margin-right:10px;" (click)="cancel();">
         <span>
-          <i class="fa fa-trash" style="color: #fff;"></i>
+          <i class="fa fa-trash" style="color: #fff;" *ngIf="!isReadOnly"></i>
           CANCEL
         </span>
       </button>
-      <button class="btn btn-primary" (click)="save()" [disabled]="isFormInvalid()">SUBMIT</button>
+      <button class="btn btn-primary" (click)="save()" [disabled]="isFormInvalid()" *ngIf="!isReadOnly">SUBMIT</button>
     </div>
   </form>
   <pre *ngIf="isDebugMode">
