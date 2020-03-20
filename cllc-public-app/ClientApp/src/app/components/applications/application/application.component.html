@@ -71,7 +71,7 @@
             </div>
             <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
                 <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
-                          label="Establishment"
+                          
                           [required]="true">
                   <input class="form-control" style="width: 500px;" type="text"
                           [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
@@ -83,7 +83,7 @@
           </div>
           <div formGroupName="assignedLicence"
                *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
-            <h3 class="blue-header" style="margin-left: -15px;">CURRENT ADDRESS</h3>
+            <h3 class="blue-header">CURRENT ADDRESS</h3>
             <address class="row">
               <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
                 <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet" id="establishmentAddressStreet">
@@ -223,6 +223,12 @@
 
       <div class="ngtest-photo-signage" *ngIf="showFormControl(application?.applicationType?.signage)">
         <hr>
+        
+        <!--div *ngIf="application?.applicationType?.name === 'Catering'">
+          AAAAAAAAAH
+          
+        </div>
+        <div *ngIf="application?.applicationType?.name !== 'Catering'"></div-->
         <label for="">Photos or renderings of the store's signage</label>
         <br>
         <section *ngIf="application?.applicationType?.signage === FormControlState.Show">
@@ -258,7 +264,8 @@
         </section>
       </div>
 
-      <mat-card *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSEstablishmentNameChange"
+      <mat-card *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSEstablishmentNameChange &&
+              application?.licenseType == 'Cannabis Retail Store'" 
                 class="mat-elevation-z0" style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
@@ -558,6 +565,32 @@
           
         </div>
 
+      </div>
+    
+      <div class="ngtest-zoning" *ngIf="showZoning()">
+        <hr>
+        <label for="">Proof of Zoning</label>
+        <br>
+        <section>
+          <p>Please provide proof from your local government that the proposed location has been:</p>
+              <ul>
+                <li>appropriately zoned to operate a {{application?.licenseType}} licence, or</li>
+                <li>is in the process of being appropriately zoned</li>
+              </ul>
+              <p>You are responsible for obtaining the appropriate zoning from your local 
+                government to operate a {{application?.licenseType}} licence at your proposed location. 
+                Prior to issuing a licence at the new location, LCRB will require confirmation 
+                from your local government that the location is zoned appropriately to operate 
+                a WS licence. </p>
+        </section>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Zoning" fileTypes="FILE MUST BE IN PDF FORMAT."
+                             [enableFileDeletion]="application?.applicationType?.proofofZoning === FormControlState.Show"
+                             [multipleFiles]="false" entityName="application" [useDocumentTypeForName]="true"
+                             (numberOfUploadedFiles)="uploadedZoningDocuments = $event" [entityId]="applicationId"
+                             [uploadHeader]="'TO UPLOAD ZONING DOCUMENTS, DRAG FILES HERE OR'">
+          </app-file-uploader>
+        </section>
       </div>
 
       <!-- Hours of Sale -->
