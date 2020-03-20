@@ -353,15 +353,21 @@ namespace bdd_tests
             uiKeyPersonEmailBiz.SendKeys(keyPersonnelEmailBiz);
 
             // enter business shareholder > key personnel DOB
+            //NgWebElement uiKeyPersonnelDOB1Biz1 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
+            //uiKeyPersonnelDOB1Biz1.Click();
 
-            // Attempting to use SendKeys() for the textbox vs selecting a date from the calendar
-            // Result: This pops open the calendar but then blows up
-            // Question: How to get rid of the calendar picker (equivalent of hitting escape key in UI)?
-            // Question: How to successfully select a date from the calendar?
-            // Error message: System.InvalidOperationException : element not interactable
-            string uiKeyPersonBizBD = "3/4/2001";
-            NgWebElement uiKeyPersonnelDOB1Biz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
-            uiKeyPersonnelDOB1Biz.SendKeys(uiKeyPersonBizBD);
+            //NgWebElement uiKeyPersonnelDOB1Biz1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[2]/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
+            //uiKeyPersonnelDOB1Biz1.Click();
+            
+            //NgWebElement uiKeyPersonnelDOB1Biz2 = ngDriver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/mat-datepicker-content/mat-calendar/div/mat-month-view/table/tbody/tr[4]/td[1]/div"));
+            //uiKeyPersonnelDOB1Biz2.Click();
+
+            /* enter key personnel DOB - working example
+            NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            openKeyPersonnelDOB.Click();
+
+            NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            openKeyPersonnelDOB1.Click();*/
 
 
             /********** Business Shareholder - Individual Shareholder **********
@@ -397,9 +403,8 @@ namespace bdd_tests
             //uiCalendarIndyS1Biz.Click();
 
             //NgWebElement uiCalendarIndyS2Biz = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-4']/div/mat-month-view/table/tbody/tr[4]/td[1]/div"));
-            //uiCalendarIndyS2Biz.Click();
-            */
-
+            //uiCalendarIndyS2Biz.Click(); */
+           
             // click on Submit Organization Info button
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
             submitOrgInfoButton.Click();
