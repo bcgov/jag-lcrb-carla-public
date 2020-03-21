@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
+    "preinstall": "npx npm-force-resolutions",
     "start": "ng serve --source-map --host 0.0.0.0",
     "build": "ng build --base-href /cannabislicensing/ --deploy-url /cannabislicensing/",
     "builduat": "ng build --base-href /uat/cannabislicensing/ --deploy-url /uat/cannabislicensing/",
@@ -70,6 +71,7 @@
     "@types/knockout": "^3.4.66",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.2.1",
+    "@babel/core": "^7.9.0",
     "jasmine-core": "~2.99.1",
     "jasmine-marbles": "^0.5.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -87,5 +89,10 @@
     "typescript": "~3.5.3",
     "webpack": "^4.41.5",
     "xmlhttprequest": "^1.8.0"
+  },
+  "resolutions": {
+    "@babel/preset-env": "^7.9.0",
+    "@babel/cli": "^7.9.0",
+    "@babel/core": "^7.9.0"
   }
 }
