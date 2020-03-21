@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top277 { get; set; }
+        public int? Top312 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip192 { get; set; }
+        public int? Skip224 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count277 { get; set; }
+        public bool? Count312 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter277 { get; set; }
+        public string Filter312 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search192 { get; set; }
+        public string Search224 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -74,6 +74,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAccountadoxioeventlicensee.
         /// </summary>
         public virtual IAccountadoxioeventlicensee Accountadoxioeventlicensee { get; private set; }
+
+        /// <summary>
+        /// Gets the IAccountadoxiolicencesproposedoperator.
+        /// </summary>
+        public virtual IAccountadoxiolicencesproposedoperator Accountadoxiolicencesproposedoperator { get; private set; }
 
         /// <summary>
         /// Gets the IThirdpartyoperatorlicences.
@@ -194,6 +199,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplications.
         /// </summary>
         public virtual IApplications Applications { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationadoxioendorsementapplication.
+        /// </summary>
+        public virtual IApplicationadoxioendorsementapplication Applicationadoxioendorsementapplication { get; private set; }
 
         /// <summary>
         /// Gets the IBpfadoxioapplicationadoxioapplicationlicenseechangesv10.
@@ -366,6 +376,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ICannabismonthlyreports Cannabismonthlyreports { get; private set; }
 
         /// <summary>
+        /// Gets the IFederalreportexportid.
+        /// </summary>
+        public virtual IFederalreportexportid Federalreportexportid { get; private set; }
+
+        /// <summary>
         /// Gets the ICannabisproductadmins.
         /// </summary>
         public virtual ICannabisproductadmins Cannabisproductadmins { get; private set; }
@@ -444,6 +459,101 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IDocuments.
         /// </summary>
         public virtual IDocuments Documents { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsements.
+        /// </summary>
+        public virtual IEndorsements Endorsements { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplication.
+        /// </summary>
+        public virtual IApplication Application { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementasyncoperations.
+        /// </summary>
+        public virtual IEndorsementasyncoperations Endorsementasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementbulkdeletefailures.
+        /// </summary>
+        public virtual IEndorsementbulkdeletefailures Endorsementbulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementduplicatebaserecord.
+        /// </summary>
+        public virtual IEndorsementduplicatebaserecord Endorsementduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementduplicatematchingrecord.
+        /// </summary>
+        public virtual IEndorsementduplicatematchingrecord Endorsementduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementsharepointdocumentlocations.
+        /// </summary>
+        public virtual IEndorsementsharepointdocumentlocations Endorsementsharepointdocumentlocations { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementsyncerrors.
+        /// </summary>
+        public virtual IEndorsementsyncerrors Endorsementsyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementtype.
+        /// </summary>
+        public virtual IEndorsementtype Endorsementtype { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicence.
+        /// </summary>
+        public virtual ILicence Licence { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypeadoxiolicencetypeset.
+        /// </summary>
+        public virtual IEndorsementtypeadoxiolicencetypeset Endorsementtypeadoxiolicencetypeset { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypes.
+        /// </summary>
+        public virtual IEndorsementtypes Endorsementtypes { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypeadoxioendorsementendorsementtype.
+        /// </summary>
+        public virtual IEndorsementtypeadoxioendorsementendorsementtype Endorsementtypeadoxioendorsementendorsementtype { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypeadoxiolicencetype.
+        /// </summary>
+        public virtual IEndorsementtypeadoxiolicencetype Endorsementtypeadoxiolicencetype { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypeasyncoperations.
+        /// </summary>
+        public virtual IEndorsementtypeasyncoperations Endorsementtypeasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypebulkdeletefailures.
+        /// </summary>
+        public virtual IEndorsementtypebulkdeletefailures Endorsementtypebulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypeduplicatebaserecord.
+        /// </summary>
+        public virtual IEndorsementtypeduplicatebaserecord Endorsementtypeduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypeduplicatematchingrecord.
+        /// </summary>
+        public virtual IEndorsementtypeduplicatematchingrecord Endorsementtypeduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypesyncerrors.
+        /// </summary>
+        public virtual IEndorsementtypesyncerrors Endorsementtypesyncerrors { get; private set; }
 
         /// <summary>
         /// Gets the IEstablishments.
@@ -576,11 +686,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInspector Inspector { get; private set; }
 
         /// <summary>
-        /// Gets the ILicence.
-        /// </summary>
-        public virtual ILicence Licence { get; private set; }
-
-        /// <summary>
         /// Gets the IRegionid.
         /// </summary>
         public virtual IRegionid Regionid { get; private set; }
@@ -654,6 +759,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IFederalreportexports.
         /// </summary>
         public virtual IFederalreportexports Federalreportexports { get; private set; }
+
+        /// <summary>
+        /// Gets the IFederalreportexportadoxiocannabismonthlyreportfederalreportexportid.
+        /// </summary>
+        public virtual IFederalreportexportadoxiocannabismonthlyreportfederalreportexportid Federalreportexportadoxiocannabismonthlyreportfederalreportexportid { get; private set; }
 
         /// <summary>
         /// Gets the IFederalreportexportasyncoperations.
@@ -851,6 +961,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicenceses Licenceses { get; private set; }
 
         /// <summary>
+        /// Gets the ILicencesadoxioendorsementlicence.
+        /// </summary>
+        public virtual ILicencesadoxioendorsementlicence Licencesadoxioendorsementlicence { get; private set; }
+
+        /// <summary>
         /// Gets the ILicencesadoxioeventlicence.
         /// </summary>
         public virtual ILicencesadoxioeventlicence Licencesadoxioeventlicence { get; private set; }
@@ -869,6 +984,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicencessharepointdocumentlocations.
         /// </summary>
         public virtual ILicencessharepointdocumentlocations Licencessharepointdocumentlocations { get; private set; }
+
+        /// <summary>
+        /// Gets the IProposedoperator.
+        /// </summary>
+        public virtual IProposedoperator Proposedoperator { get; private set; }
 
         /// <summary>
         /// Gets the IThirdpartyoperatorid.
@@ -1041,6 +1161,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRegardingobjectidadoxioapplicationtypefeeschedule Regardingobjectidadoxioapplicationtypefeeschedule { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioendorsement.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioendorsement Regardingobjectidadoxioendorsement { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioendorsementtype.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioendorsementtype Regardingobjectidadoxioendorsementtype { get; private set; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioeventschedule.
         /// </summary>
         public virtual IRegardingobjectidadoxioeventschedule Regardingobjectidadoxioeventschedule { get; private set; }
@@ -1074,6 +1204,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBusinessunitadoxioapplicationtypefeeschedule.
         /// </summary>
         public virtual IBusinessunitadoxioapplicationtypefeeschedule Businessunitadoxioapplicationtypefeeschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioendorsement.
+        /// </summary>
+        public virtual IBusinessunitadoxioendorsement Businessunitadoxioendorsement { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioendorsementtype.
+        /// </summary>
+        public virtual IBusinessunitadoxioendorsementtype Businessunitadoxioendorsementtype { get; private set; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxioevent.
@@ -1126,6 +1266,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IBaserecordidadoxioapplicationtypefeeschedule Baserecordidadoxioapplicationtypefeeschedule { get; private set; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxioendorsement.
+        /// </summary>
+        public virtual IBaserecordidadoxioendorsement Baserecordidadoxioendorsement { get; private set; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxioendorsementtype.
+        /// </summary>
+        public virtual IBaserecordidadoxioendorsementtype Baserecordidadoxioendorsementtype { get; private set; }
+
+        /// <summary>
         /// Gets the IBaserecordidadoxioevent.
         /// </summary>
         public virtual IBaserecordidadoxioevent Baserecordidadoxioevent { get; private set; }
@@ -1164,6 +1314,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IDuplicaterecordidadoxioapplicationtypefeeschedule.
         /// </summary>
         public virtual IDuplicaterecordidadoxioapplicationtypefeeschedule Duplicaterecordidadoxioapplicationtypefeeschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioendorsement.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxioendorsement Duplicaterecordidadoxioendorsement { get; private set; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioendorsementtype.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxioendorsementtype Duplicaterecordidadoxioendorsementtype { get; private set; }
 
         /// <summary>
         /// Gets the IDuplicaterecordidadoxioevent.
@@ -1471,6 +1631,46 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILkadoxioapplicationtypefeeschedulemodifiedonbehalfby Lkadoxioapplicationtypefeeschedulemodifiedonbehalfby { get; private set; }
 
         /// <summary>
+        /// Gets the ILkadoxioendorsementcreatedby.
+        /// </summary>
+        public virtual ILkadoxioendorsementcreatedby Lkadoxioendorsementcreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioendorsementcreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioendorsementcreatedonbehalfby Lkadoxioendorsementcreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioendorsementmodifiedby.
+        /// </summary>
+        public virtual ILkadoxioendorsementmodifiedby Lkadoxioendorsementmodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioendorsementmodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioendorsementmodifiedonbehalfby Lkadoxioendorsementmodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioendorsementtypecreatedby.
+        /// </summary>
+        public virtual ILkadoxioendorsementtypecreatedby Lkadoxioendorsementtypecreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioendorsementtypecreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioendorsementtypecreatedonbehalfby Lkadoxioendorsementtypecreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioendorsementtypemodifiedby.
+        /// </summary>
+        public virtual ILkadoxioendorsementtypemodifiedby Lkadoxioendorsementtypemodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioendorsementtypemodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioendorsementtypemodifiedonbehalfby Lkadoxioendorsementtypemodifiedonbehalfby { get; private set; }
+
+        /// <summary>
         /// Gets the ILkadoxioeventcreatedby.
         /// </summary>
         public virtual ILkadoxioeventcreatedby Lkadoxioeventcreatedby { get; private set; }
@@ -1616,6 +1816,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IUseradoxioapplicationtypefeeschedule Useradoxioapplicationtypefeeschedule { get; private set; }
 
         /// <summary>
+        /// Gets the IUseradoxioendorsement.
+        /// </summary>
+        public virtual IUseradoxioendorsement Useradoxioendorsement { get; private set; }
+
+        /// <summary>
+        /// Gets the IUseradoxioendorsementtype.
+        /// </summary>
+        public virtual IUseradoxioendorsementtype Useradoxioendorsementtype { get; private set; }
+
+        /// <summary>
         /// Gets the IUseradoxioevent.
         /// </summary>
         public virtual IUseradoxioevent Useradoxioevent { get; private set; }
@@ -1669,6 +1879,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITeamadoxioapplicationtypefeeschedule.
         /// </summary>
         public virtual ITeamadoxioapplicationtypefeeschedule Teamadoxioapplicationtypefeeschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioendorsement.
+        /// </summary>
+        public virtual ITeamadoxioendorsement Teamadoxioendorsement { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioendorsementtype.
+        /// </summary>
+        public virtual ITeamadoxioendorsementtype Teamadoxioendorsementtype { get; private set; }
 
         /// <summary>
         /// Gets the ITeamadoxioevent.
@@ -1998,6 +2218,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             Accounts = new Accounts(this);
             Accountadoxioeventlicensee = new Accountadoxioeventlicensee(this);
+            Accountadoxiolicencesproposedoperator = new Accountadoxiolicencesproposedoperator(this);
             Thirdpartyoperatorlicences = new Thirdpartyoperatorlicences(this);
             Partyidadoxioevent = new Partyidadoxioevent(this);
             Regardingobjectidadoxioevent = new Regardingobjectidadoxioevent(this);
@@ -2022,6 +2243,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationrelocationv1syncerrors = new Applicationrelocationv1syncerrors(this);
             Applicationrelocationv1workflowlogs = new Applicationrelocationv1workflowlogs(this);
             Applications = new Applications(this);
+            Applicationadoxioendorsementapplication = new Applicationadoxioendorsementapplication(this);
             Bpfadoxioapplicationadoxioapplicationlicenseechangesv10 = new Bpfadoxioapplicationadoxioapplicationlicenseechangesv10(this);
             Bpfadoxioapplicationadoxioapplicationliquorbpf = new Bpfadoxioapplicationadoxioapplicationliquorbpf(this);
             Bpfadoxioapplicationadoxioapplicationrelocationv1 = new Bpfadoxioapplicationadoxioapplicationrelocationv1(this);
@@ -2056,6 +2278,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Businessaccounts = new Businessaccounts(this);
             Cannabisinventoryreports = new Cannabisinventoryreports(this);
             Cannabismonthlyreports = new Cannabismonthlyreports(this);
+            Federalreportexportid = new Federalreportexportid(this);
             Cannabisproductadmins = new Cannabisproductadmins(this);
             Citydistricts = new Citydistricts(this);
             Complaints = new Complaints(this);
@@ -2072,6 +2295,25 @@ namespace Gov.Lclb.Cllb.Interfaces
             Customautonumberrequests = new Customautonumberrequests(this);
             Documentadmins = new Documentadmins(this);
             Documents = new Documents(this);
+            Endorsements = new Endorsements(this);
+            Application = new Application(this);
+            Endorsementasyncoperations = new Endorsementasyncoperations(this);
+            Endorsementbulkdeletefailures = new Endorsementbulkdeletefailures(this);
+            Endorsementduplicatebaserecord = new Endorsementduplicatebaserecord(this);
+            Endorsementduplicatematchingrecord = new Endorsementduplicatematchingrecord(this);
+            Endorsementsharepointdocumentlocations = new Endorsementsharepointdocumentlocations(this);
+            Endorsementsyncerrors = new Endorsementsyncerrors(this);
+            Endorsementtype = new Endorsementtype(this);
+            Licence = new Licence(this);
+            Endorsementtypeadoxiolicencetypeset = new Endorsementtypeadoxiolicencetypeset(this);
+            Endorsementtypes = new Endorsementtypes(this);
+            Endorsementtypeadoxioendorsementendorsementtype = new Endorsementtypeadoxioendorsementendorsementtype(this);
+            Endorsementtypeadoxiolicencetype = new Endorsementtypeadoxiolicencetype(this);
+            Endorsementtypeasyncoperations = new Endorsementtypeasyncoperations(this);
+            Endorsementtypebulkdeletefailures = new Endorsementtypebulkdeletefailures(this);
+            Endorsementtypeduplicatebaserecord = new Endorsementtypeduplicatebaserecord(this);
+            Endorsementtypeduplicatematchingrecord = new Endorsementtypeduplicatematchingrecord(this);
+            Endorsementtypesyncerrors = new Endorsementtypesyncerrors(this);
             Establishments = new Establishments(this);
             Establishmentwatchwords = new Establishmentwatchwords(this);
             Events = new Events(this);
@@ -2098,7 +2340,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Eventsyncerrors = new Eventsyncerrors(this);
             Eventtasks = new Eventtasks(this);
             Inspector = new Inspector(this);
-            Licence = new Licence(this);
             Regionid = new Regionid(this);
             Eventid = new Eventid(this);
             Eventscheduleasyncoperations = new Eventscheduleasyncoperations(this);
@@ -2114,6 +2355,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Exhibitsyncerrors = new Exhibitsyncerrors(this);
             Investigationid = new Investigationid(this);
             Federalreportexports = new Federalreportexports(this);
+            Federalreportexportadoxiocannabismonthlyreportfederalreportexportid = new Federalreportexportadoxiocannabismonthlyreportfederalreportexportid(this);
             Federalreportexportasyncoperations = new Federalreportexportasyncoperations(this);
             Federalreportexportbulkdeletefailures = new Federalreportexportbulkdeletefailures(this);
             Federalreportexportduplicatebaserecord = new Federalreportexportduplicatebaserecord(this);
@@ -2153,10 +2395,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             Licenceldbordertotalhistoryduplicatematchingrecord = new Licenceldbordertotalhistoryduplicatematchingrecord(this);
             Licenceldbordertotalhistorysyncerrors = new Licenceldbordertotalhistorysyncerrors(this);
             Licenceses = new Licenceses(this);
+            Licencesadoxioendorsementlicence = new Licencesadoxioendorsementlicence(this);
             Licencesadoxioeventlicence = new Licencesadoxioeventlicence(this);
             Licencesadoxioldborderlicenceid = new Licencesadoxioldborderlicenceid(this);
             Licencesadoxiolicenceldbordertotalhistorylicence = new Licencesadoxiolicenceldbordertotalhistorylicence(this);
             Licencessharepointdocumentlocations = new Licencessharepointdocumentlocations(this);
+            Proposedoperator = new Proposedoperator(this);
             Thirdpartyoperatorid = new Thirdpartyoperatorid(this);
             Licencetypes = new Licencetypes(this);
             Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
@@ -2191,6 +2435,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Regardingobjectidadoxioapplicationstructurechangev1 = new Regardingobjectidadoxioapplicationstructurechangev1(this);
             Regardingobjectidadoxioapplicationtransferownershipv1 = new Regardingobjectidadoxioapplicationtransferownershipv1(this);
             Regardingobjectidadoxioapplicationtypefeeschedule = new Regardingobjectidadoxioapplicationtypefeeschedule(this);
+            Regardingobjectidadoxioendorsement = new Regardingobjectidadoxioendorsement(this);
+            Regardingobjectidadoxioendorsementtype = new Regardingobjectidadoxioendorsementtype(this);
             Regardingobjectidadoxioeventschedule = new Regardingobjectidadoxioeventschedule(this);
             Regardingobjectidadoxioexhibit = new Regardingobjectidadoxioexhibit(this);
             Regardingobjectidadoxiofederalreportexport = new Regardingobjectidadoxiofederalreportexport(this);
@@ -2198,6 +2444,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Regardingobjectidadoxioldborder = new Regardingobjectidadoxioldborder(this);
             Regardingobjectidadoxiolicenceldbordertotalhistory = new Regardingobjectidadoxiolicenceldbordertotalhistory(this);
             Businessunitadoxioapplicationtypefeeschedule = new Businessunitadoxioapplicationtypefeeschedule(this);
+            Businessunitadoxioendorsement = new Businessunitadoxioendorsement(this);
+            Businessunitadoxioendorsementtype = new Businessunitadoxioendorsementtype(this);
             Businessunitadoxioevent = new Businessunitadoxioevent(this);
             Businessunitadoxioeventschedule = new Businessunitadoxioeventschedule(this);
             Businessunitadoxioexhibit = new Businessunitadoxioexhibit(this);
@@ -2208,6 +2456,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Contacts = new Contacts(this);
             Contacttaskcontact = new Contacttaskcontact(this);
             Baserecordidadoxioapplicationtypefeeschedule = new Baserecordidadoxioapplicationtypefeeschedule(this);
+            Baserecordidadoxioendorsement = new Baserecordidadoxioendorsement(this);
+            Baserecordidadoxioendorsementtype = new Baserecordidadoxioendorsementtype(this);
             Baserecordidadoxioevent = new Baserecordidadoxioevent(this);
             Baserecordidadoxioeventschedule = new Baserecordidadoxioeventschedule(this);
             Baserecordidadoxioexhibit = new Baserecordidadoxioexhibit(this);
@@ -2216,6 +2466,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Baserecordidadoxioldborder = new Baserecordidadoxioldborder(this);
             Baserecordidadoxiolicenceldbordertotalhistory = new Baserecordidadoxiolicenceldbordertotalhistory(this);
             Duplicaterecordidadoxioapplicationtypefeeschedule = new Duplicaterecordidadoxioapplicationtypefeeschedule(this);
+            Duplicaterecordidadoxioendorsement = new Duplicaterecordidadoxioendorsement(this);
+            Duplicaterecordidadoxioendorsementtype = new Duplicaterecordidadoxioendorsementtype(this);
             Duplicaterecordidadoxioevent = new Duplicaterecordidadoxioevent(this);
             Duplicaterecordidadoxioeventschedule = new Duplicaterecordidadoxioeventschedule(this);
             Duplicaterecordidadoxioexhibit = new Duplicaterecordidadoxioexhibit(this);
@@ -2277,6 +2529,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lkadoxioapplicationtypefeeschedulecreatedonbehalfby = new Lkadoxioapplicationtypefeeschedulecreatedonbehalfby(this);
             Lkadoxioapplicationtypefeeschedulemodifiedby = new Lkadoxioapplicationtypefeeschedulemodifiedby(this);
             Lkadoxioapplicationtypefeeschedulemodifiedonbehalfby = new Lkadoxioapplicationtypefeeschedulemodifiedonbehalfby(this);
+            Lkadoxioendorsementcreatedby = new Lkadoxioendorsementcreatedby(this);
+            Lkadoxioendorsementcreatedonbehalfby = new Lkadoxioendorsementcreatedonbehalfby(this);
+            Lkadoxioendorsementmodifiedby = new Lkadoxioendorsementmodifiedby(this);
+            Lkadoxioendorsementmodifiedonbehalfby = new Lkadoxioendorsementmodifiedonbehalfby(this);
+            Lkadoxioendorsementtypecreatedby = new Lkadoxioendorsementtypecreatedby(this);
+            Lkadoxioendorsementtypecreatedonbehalfby = new Lkadoxioendorsementtypecreatedonbehalfby(this);
+            Lkadoxioendorsementtypemodifiedby = new Lkadoxioendorsementtypemodifiedby(this);
+            Lkadoxioendorsementtypemodifiedonbehalfby = new Lkadoxioendorsementtypemodifiedonbehalfby(this);
             Lkadoxioeventcreatedby = new Lkadoxioeventcreatedby(this);
             Lkadoxioeventcreatedonbehalfby = new Lkadoxioeventcreatedonbehalfby(this);
             Lkadoxioeventmodifiedby = new Lkadoxioeventmodifiedby(this);
@@ -2306,6 +2566,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lkadoxiolicenceldbordertotalhistorymodifiedby = new Lkadoxiolicenceldbordertotalhistorymodifiedby(this);
             Lkadoxiolicenceldbordertotalhistorymodifiedonbehalfby = new Lkadoxiolicenceldbordertotalhistorymodifiedonbehalfby(this);
             Useradoxioapplicationtypefeeschedule = new Useradoxioapplicationtypefeeschedule(this);
+            Useradoxioendorsement = new Useradoxioendorsement(this);
+            Useradoxioendorsementtype = new Useradoxioendorsementtype(this);
             Useradoxioevent = new Useradoxioevent(this);
             Useradoxioeventschedule = new Useradoxioeventschedule(this);
             Useradoxioexhibit = new Useradoxioexhibit(this);
@@ -2317,6 +2579,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Legalentitytask = new Legalentitytask(this);
             Regardingobjectidadoxioeventtask = new Regardingobjectidadoxioeventtask(this);
             Teamadoxioapplicationtypefeeschedule = new Teamadoxioapplicationtypefeeschedule(this);
+            Teamadoxioendorsement = new Teamadoxioendorsement(this);
+            Teamadoxioendorsementtype = new Teamadoxioendorsementtype(this);
             Teamadoxioevent = new Teamadoxioevent(this);
             Teamadoxioeventschedule = new Teamadoxioeventschedule(this);
             Teamadoxioexhibit = new Teamadoxioexhibit(this);
