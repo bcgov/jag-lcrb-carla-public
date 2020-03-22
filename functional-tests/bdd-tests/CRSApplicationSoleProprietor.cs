@@ -201,7 +201,6 @@ namespace bdd_tests
             // create the leader info
             string firstName = "Jane";
             string lastName = "Bond";
-            //string title = "Adventurer";
             string email = "jane@bond.com";
 
             // enter the leader first name
