@@ -181,12 +181,6 @@ namespace bdd_tests
             Page Title: [client name] Detailed Organization Information
             */
 
-            // create the key personnel data
-            string keyPersonnelFirst = "Jane";
-            string keyPersonnelLast = "Bond";
-            string keyPersonnelTitle = "Adventurer";
-            string keyPersonnelEmail = "jane@bond.com";
-
             // find the upload test file in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
@@ -196,6 +190,14 @@ namespace bdd_tests
             string NOAPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
             NgWebElement uploadNOA = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
             uploadNOA.SendKeys(NOAPath);
+
+            /********** Key Personnel **********/
+
+            // create the key personnel data
+            string keyPersonnelFirst = "Jane";
+            string keyPersonnelLast = "Bond";
+            string keyPersonnelTitle = "Adventurer";
+            string keyPersonnelEmail = "jane@bond.com";
 
             // open key personnel form
             NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[3]/section/app-associate-list/div/button"));
