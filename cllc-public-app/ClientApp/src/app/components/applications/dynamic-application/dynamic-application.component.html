@@ -172,14 +172,23 @@
       </section>
 
       <div class="light-blue-bg">
-        <p>
-          The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised
-          that
-          once an application is submitted, you will be unable to upload additional documentation. For questions on
-          the
-          LCRB application process, please contact: <a href="javascript: void(0);">lcrbcannabis@gov.bc.ca</a>.
-        </p>
-      </div>
+          <p>
+              The ‘save for later’ feature allows applicants to re-access an application in progress. 
+              For questions on the LCRB application process, please contact:</p>
+              <div *ngIf="application?.licenseType === 'Cannabis Retail Store'">
+              <a href="javascript: void(0);">lcrbcannabis@gov.bc.ca</a>
+            </div>
+            <div *ngIf="application?.licenseType !== 'Cannabis Retail Store'">
+                <a href="javascript: void(0);">LCRBLiquor@gov.bc.ca</a>
+              </div>
+        </div>
+          <!-- Next Steps -->
+          <h3 *ngIf="htmlContent?.nextSteps" class="blue-header">
+              What happens next
+            </h3>
+            <section *ngIf="htmlContent?.nextSteps" class="padded-section">
+              <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.nextSteps"></div>
+            </section>
 
       <section style="position: relative; margin-top: 20px;">
         <button class="btn btn-primary" style="margin-right:10px;" (click)="saveForLater()">

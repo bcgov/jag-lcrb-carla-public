@@ -440,7 +440,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 //get establishment name and address
                 EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
                 LicenceId = dynamicsApplication._adoxioAssignedlicenceValue,
-                IsPaid = (dynamicsApplication.AdoxioPaymentrecieved == true)
+                IsPaid = (dynamicsApplication.AdoxioPaymentrecieved == true),
             };
 
             // id
@@ -458,6 +458,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 applicationSummary.ApplicationTypeName = dynamicsApplication.AdoxioApplicationTypeId.AdoxioName;
                 applicationSummary.Portallabel = dynamicsApplication.AdoxioApplicationTypeId.AdoxioPortallabel;
+                applicationSummary.ApplicationTypeCategory = (ApplicationTypeCategory?)dynamicsApplication.AdoxioApplicationTypeId.AdoxioCategory;
             }
 
             applicationSummary.IsIndigenousNation = (dynamicsApplication.AdoxioApplicanttype == (int)AdoxioApplicantTypeCodes.IndigenousNation);

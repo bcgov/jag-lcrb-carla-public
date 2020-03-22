@@ -14,6 +14,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class EventSecurityFormComponent extends FormBase implements OnInit {
   isDebugMode = false;
   isEditMode = false;
+  isReadOnly = false;
   licenceEvent: LicenceEvent;
   busy: Subscription;
   eventStatus = EventStatus;
@@ -80,6 +81,9 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
   retrieveSavedEvent(eventId: string) {
     this.busy = this.licenceEvents.getLicenceEvent(eventId)
     .subscribe((licenceEvent) => {
+      if (licenceEvent.securityPlanSubmitted) {
+        this.isReadOnly = true;
+      }
       this.setFormToLicenceEvent(licenceEvent);
     });
   }
@@ -126,6 +130,10 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
       safeAndResponsibleAdditionalSafetyMeasures: licenceEvent.safeAndResponsibleAdditionalSafetyMeasures,
       declarationIsAccurate: false
     });
+
+    if (this.isReadOnly) {
+      this.securityForm.disable();
+    }
   }
 
   save() {
@@ -144,7 +152,7 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
   }
 
   updateLicence() {
-    this.busy = this.licenceEvents.updateLicenceEvent(this.securityForm.get('id').value, {...this.securityForm.value})
+    this.busy = this.licenceEvents.updateLicenceEvent(this.securityForm.get('id').value, {...this.securityForm.value, securityPlanSubmitted: true})
     .subscribe((licenceEvent) => {
       this.router.navigate(['/licences']);
     });
@@ -183,7 +191,7 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
       label: ''
     };
   }
-  
+
   printValidity() {
     return Object.keys(this.securityForm.controls)
     .map( control => {
@@ -196,7 +204,7 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
   }
 
   cancel() {
-    if (this.isEditMode) {
+    if (this.isEditMode && !this.isReadOnly) {
       const id = this.securityForm.get('id').value;
       this.securityForm.reset();
       this.securityForm.controls['id'].setValue(id);

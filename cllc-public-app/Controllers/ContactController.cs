@@ -578,6 +578,29 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
+        [HttpGet("cas-link/{contactId}")]
+        public JsonResult GetCASLinkForContactGuid(string contactId)
+        {
+            string casLink = null;
+            try
+            {
+                casLink = GetCASLink(contactId, _configuration, _encryptionKey);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting cannabis associate screening link");
+                _logger.LogError("Details:");
+                _logger.LogError(ex.Message);
+            }
+            return new JsonResult(casLink);
+        }
+        public static string GetCASLink(string contactId, IConfiguration _configuration, string _encryptionKey)
+        {
+            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/cannabis-associate-screening/";
+            //var ba = Guid.Parse(contactId).ToByteArray();
+            result += HttpUtility.UrlEncode(EncryptionUtility.EncryptStringHex(contactId, _encryptionKey));
+            return result;
+        }
 
         [HttpGet("phs-link/{contactId}")]
         public JsonResult GetPhsLinkForContactGuid(string contactId)
@@ -646,4 +669,5 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         public bool isComplete { get; set; }
     }
+
 }
