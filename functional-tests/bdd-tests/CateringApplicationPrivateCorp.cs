@@ -274,7 +274,7 @@ namespace bdd_tests
             NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
             uiCalendarS2.Click();
 
-            /********** Business Shareholder **********
+            /********** Business Shareholder **********/
 
             // create the business shareholder data
             string businessName = "Bourne Enterprises";
@@ -320,7 +320,7 @@ namespace bdd_tests
             NgWebElement uploadSpecialRightsResBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[18]"));
             uploadSpecialRightsResBiz.SendKeys(specialRightsRestrictionsBiz);
 
-            /********** Business Shareholder - Key Personnel **********
+            /********** Business Shareholder - Key Personnel **********/
 
             // create business shareholder key personnel data
             string keyPersonnelFirstNameBiz = "Ethel";
@@ -353,24 +353,14 @@ namespace bdd_tests
             uiKeyPersonEmailBiz.SendKeys(keyPersonnelEmailBiz);
 
             // enter business shareholder > key personnel DOB
-            //NgWebElement uiKeyPersonnelDOB1Biz1 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
-            //uiKeyPersonnelDOB1Biz1.Click();
+            NgWebElement uiKeyPersonnelDOB1Biz1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[2]/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
+            uiKeyPersonnelDOB1Biz1.Click();
 
-            //NgWebElement uiKeyPersonnelDOB1Biz1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[2]/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
-            //uiKeyPersonnelDOB1Biz1.Click();
-            
-            //NgWebElement uiKeyPersonnelDOB1Biz2 = ngDriver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/mat-datepicker-content/mat-calendar/div/mat-month-view/table/tbody/tr[4]/td[1]/div"));
-            //uiKeyPersonnelDOB1Biz2.Click();
-
-            /* enter key personnel DOB - working example
-            NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
-            openKeyPersonnelDOB.Click();
-
-            NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-            openKeyPersonnelDOB1.Click();*/
+            NgWebElement uiKeyPersonnelDOB1Biz2 = ngDriver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/mat-datepicker-content/mat-calendar/div/mat-month-view/table/tbody/tr[4]/td[1]/div"));
+            uiKeyPersonnelDOB1Biz2.Click();
 
 
-            /********** Business Shareholder - Individual Shareholder **********
+            /********** Business Shareholder - Individual Shareholder **********/
 
             // create the business shareholder > individual shareholder data
             string shareholderFirstNameBiz = "Jacintha";
@@ -398,13 +388,13 @@ namespace bdd_tests
             NgWebElement uiIndyShareEmailBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
             uiIndyShareEmailBiz.SendKeys(shareholderEmailBiz);
 
-            // enter business shareholder > individual shareholder DOB - todo
-            //NgWebElement uiCalendarIndyS1Biz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
-            //uiCalendarIndyS1Biz.Click();
+            // enter business shareholder > individual shareholder DOB
+            NgWebElement uiCalendarIndyS1Biz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
+            uiCalendarIndyS1Biz.Click();
 
-            //NgWebElement uiCalendarIndyS2Biz = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-4']/div/mat-month-view/table/tbody/tr[4]/td[1]/div"));
-            //uiCalendarIndyS2Biz.Click(); */
-           
+            NgWebElement uiCalendarIndyS2Biz = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-4']/div/mat-month-view/table/tbody/tr[4]/td[1]/div"));
+            uiCalendarIndyS2Biz.Click();
+
             // click on Submit Organization Info button
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
             submitOrgInfoButton.Click();
