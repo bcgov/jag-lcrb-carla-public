@@ -154,7 +154,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     FirstName = legalEntity.firstname,
                     MiddleName = legalEntity.middlename,
                     LastName = legalEntity.lastname,
-                    ScreeningLink = legalEntity.PhsLink,
+                    phsLink = legalEntity.PhsLink,
+                    casLink = legalEntity.CasLink,
                     DateSubmitted = dateSubmitted,
                     ContactId = legalEntity.contactId
                 };
@@ -311,6 +312,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (!string.IsNullOrEmpty(result.contactId))
                     {
                         result.PhsLink = ContactController.GetPhsLink(result.contactId, _configuration, _encryptionKey);
+                        result.CasLink = ContactController.GetCASLink(result.contactId, _configuration, _encryptionKey);
                     }
                     result.children = this.GetLegalEntityChildren(result.id);
                 }
@@ -355,6 +357,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (!string.IsNullOrEmpty(viewModel.contactId))
                     {
                         viewModel.PhsLink = ContactController.GetPhsLink(viewModel.contactId, _configuration, _encryptionKey);
+                        viewModel.CasLink = ContactController.GetCASLink(viewModel.contactId, _configuration, _encryptionKey);
                     }
 
                     result.Add(viewModel);

@@ -12,6 +12,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
         public readonly string ORGBOOK_API_REGISTRATION_ENDPOINT = "/api/v2/topic/ident/registration/";
         public readonly string ORGBOOK_API_SCHEMA_ENDPOINT = "/api/v2/schema";
         public readonly string ORGBOOK_API_CREDENTIAL_ENDPOINT = "/api/v2/search/credential/topic";
+        public readonly string ORGBOOK_API_AUTOCOMPLETE_ENDPOINT = "/api/v2/search/autocomplete";
         
         public OrgBookClient(HttpClient client, string BASE_URL)
         {
@@ -62,6 +63,34 @@ namespace Gov.Lclb.Cllb.OrgbookService
                         if (attribute["type"].ToString() == "licence_number" && attribute["value"].ToString() == licenceNumber)
                         {
                             return int.Parse(result["id"].ToString());
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        public async Task<Name> SearchCompanyName(string query)
+        {
+            HttpResponseMessage resp = await Client.GetAsync(ORGBOOK_BASE_URL + ORGBOOK_API_AUTOCOMPLETE_ENDPOINT + $"?q={query}&latest=true&revoked=false&&inactive=false");
+            if (resp.IsSuccessStatusCode)
+            {
+                string _responseContent = await resp.Content.ReadAsStringAsync();
+                dynamic response = JObject.Parse(_responseContent);
+                foreach (JObject result in response.results)
+                {
+                    foreach (JObject name in result["names"])
+                    {
+                        if (name["text"].ToString() == query.ToUpper())
+                        {
+                            return new Name()
+                            {
+                                id = (int) name["id"],
+                                text = name["text"].ToString(),
+                                language = name["language"].ToString(),
+                                credential_id = (int) name["credential_id"],
+                                type = name["type"].ToString()
+                            };
                         }
                     }
                 }

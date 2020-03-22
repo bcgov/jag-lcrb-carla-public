@@ -6,6 +6,7 @@ export class ApplicationSummary {
   name: string;
   jobNumber: string;
   applicationTypeName: string;
+  applicationTypeCategory: string;
   isIndigenousNation: boolean;
   licenceId: string;
   isPaid: boolean;
