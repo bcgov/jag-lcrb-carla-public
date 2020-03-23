@@ -250,3 +250,5 @@ section.padded,
 ::ng-deep .multiline-tooltip {
   white-space: pre-line;
 }
+
+.row:before, .row:after {display: none !important;}
