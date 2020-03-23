@@ -27,6 +27,7 @@ const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 
 })
 export class EventFormComponent extends FormBase implements OnInit {
   isEditMode = false;
+  isReadOnly = false;
   licenceEvent: LicenceEvent;
 
   busy: Subscription;
@@ -113,6 +114,10 @@ export class EventFormComponent extends FormBase implements OnInit {
   }
 
   setFormToLicenceEvent(licenceEvent: LicenceEvent) {
+    if (licenceEvent.status === this.getOptionFromLabel(this.eventStatus, 'Approved').value) {
+      this.isReadOnly = true;
+    }
+
     const schedules = licenceEvent['schedules'];
     this.eventForm.setValue({
       status: licenceEvent.status,
@@ -145,6 +150,10 @@ export class EventFormComponent extends FormBase implements OnInit {
       endDate: new Date(licenceEvent.endDate),
       agreement: false
     });
+    
+    if (this.isReadOnly) {
+      this.eventForm.disable();
+    }
 
     if (schedules.length > 0) {
       this.setTimeFormsToLicenceEventSchedule(schedules);
@@ -162,15 +171,20 @@ export class EventFormComponent extends FormBase implements OnInit {
       if (!isDefault) {
         this.scheduleIsInconsistent = true;
       }
-
-      this.timeForms.push(this.fb.group({
+      const timeForm = this.fb.group({
         dateTitle: [isDefault ? null : DAYS[startDate.getDay()] + ', ' + startDate.toLocaleDateString('en-US'), []],
         date: [isDefault ? null : startDate, []],
         startTime: [{hour: startDate.getHours(), minute: startDate.getMinutes()}, [Validators.required]],
         endTime: [{hour: endDate.getHours(), minute: endDate.getMinutes()}, [Validators.required]],
         liquorStartTime: [{hour: liquorStart.getHours(), minute: liquorStart.getMinutes()}, [Validators.required]],
         liquorEndTime: [{hour: liquorEnd.getHours(), minute: liquorEnd.getMinutes()}, [Validators.required]]
-      }));
+      });
+
+      if (this.isReadOnly) {
+        timeForm.disable();
+      }
+
+      this.timeForms.push(timeForm);
     });
   }
 
@@ -376,10 +390,11 @@ export class EventFormComponent extends FormBase implements OnInit {
   cancel() {
     if (this.isEditMode) {
       const id = this.eventForm.get('id').value;
-      this.eventForm.reset();
-      this.eventForm.controls['id'].setValue(id);
-      this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Cancelled').value);
-      this.updateLicence([]);
+      const status = this.getOptionFromLabel(this.eventStatus, 'Cancelled').value;
+      this.busy = this.licenceEvents.updateLicenceEvent(id, {...this.eventForm.value, status: status, licenceId: this.eventForm.get('licenceId').value})
+      .subscribe((licenceEvent) => {
+        this.router.navigate(['/licences']);
+      });
     } else {
       this.router.navigate(['/licences']);
     }

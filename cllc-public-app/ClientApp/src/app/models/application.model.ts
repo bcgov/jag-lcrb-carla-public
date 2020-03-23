@@ -88,6 +88,9 @@ export class Application {
   renewalFloorPlan: string;
   renewalSiteMap: string;
 
+  renewalDUI: string;
+  renewalThirdParty: string;
+
   description1: string;
 
   isReadyValidInterest: boolean;

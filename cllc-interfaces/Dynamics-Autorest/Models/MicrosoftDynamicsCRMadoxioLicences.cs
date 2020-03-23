@@ -64,6 +64,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// use when the record was created.</param>
         /// <param name="_owningteamValue">Unique identifier for the team that
         /// owns the record.</param>
+        /// <param name="_adoxioThirdpartyoperatoridValue">Unique identifier
+        /// for Account associated with Licence.</param>
         /// <param name="_owneridValue">Owner Id</param>
         /// <param name="importsequencenumber">Sequence number of the import
         /// that created this record.</param>
@@ -76,13 +78,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="statecode">Status of the Licence</param>
         /// <param name="_adoxioAccountidValue">To be removed and replaced with
         /// a new relationship adoxio_proposedlicensee_licences</param>
-        public MicrosoftDynamicsCRMadoxioLicences(string adoxioBusinessprogramaccountreferencenumber = default(string), string adoxioEffectivemonthname = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioEffectivedayofmonth = default(int?), int? timezoneruleversionnumber = default(int?), string _modifiedonbehalfbyValue = default(string), string _adoxioPdjurisdictionValue = default(string), string _owninguserValue = default(string), string adoxioEstablishmentaddresspostalcode = default(string), string _adoxioInspectoridValue = default(string), string _adoxioAreaidValue = default(string), string adoxioExpiryyeartext = default(string), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), int? adoxioExpirydayofmonth = default(int?), string adoxioLicencesid = default(string), string versionnumber = default(string), string adoxioEffectiveyeartext = default(string), int? adoxioExpiryyear = default(int?), int? adoxioEffectiveyear = default(int?), string emailaddress = default(string), string adoxioEstablishmentnametemp = default(string), string adoxioExpirymonthname = default(string), System.DateTimeOffset? adoxioExpirydate = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), int? adoxioTransferrequested = default(int?), string adoxioLicenceprintname = default(string), string _adoxioProposedownerValue = default(string), int? adoxioOrgbookcredentialresult = default(int?), string adoxioName = default(string), string _adoxioLicencetypeValue = default(string), string _createdbyValue = default(string), string _adoxioRegionValue = default(string), int? utcconversiontimezonecode = default(int?), string _owningteamValue = default(string), string _adoxioEstablishmentValue = default(string), string adoxioEstablishmentphone = default(string), System.DateTimeOffset? adoxioEffectivedate = default(System.DateTimeOffset?), string _owneridValue = default(string), int? importsequencenumber = default(int?), string _adoxioLginValue = default(string), string adoxioEstablishmentaddresscity = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _adoxioTerritoryValue = default(string), string adoxioOrgbookcredentialid = default(string), string adoxioLicencenumber = default(string), string adoxioEstablishmentaddressstreet = default(string), string _adoxioLicenceeValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioOwnershiptransferinprogress = default(int?), string adoxioOrgbookcredentiallink = default(string), string _modifiedbyValue = default(string), int? statecode = default(int?), string _adoxioAccountidValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> adoxioLicencesActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> adoxioLicencesAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioLicencesEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioLicencesFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioLicencesLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioLicencesPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioLicencesServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> adoxioLicencesTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioLicencesRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioLicencesSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioLicencesAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsyncerror> adoxioLicencesSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencesDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencesDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMannotation> adoxioLicencesAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLicencesAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLicencesBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount adoxioAccountId = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount adoxioLicencee = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioAdoxioLicencesAdoxioApplicationAssignedLicence = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> adoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioAdoxioLicencesAdoxioInvestigationLicence = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioAdoxioLicencesAdoxioLegalentityRelatedLicence = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMcontact> adoxioAdoxioLicencesContactRelatedLicence = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMincident> adoxioAdoxioLicencesIncidentLicence = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceType = default(MicrosoftDynamicsCRMadoxioLicencetype), MicrosoftDynamicsCRMadoxioRegion adoxioRegion = default(MicrosoftDynamicsCRMadoxioRegion), MicrosoftDynamicsCRMadoxioTerritory adoxioTerritory = default(MicrosoftDynamicsCRMadoxioTerritory), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation adoxioLGIN = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), MicrosoftDynamicsCRMadoxioPolicejurisdiction adoxioPDJurisdiction = default(MicrosoftDynamicsCRMadoxioPolicejurisdiction), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioLicenceComplaints = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioLicencesContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> adoxioLicencesCompliancemeetings = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation> adoxioLicenceInvestigations = default(IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation>), MicrosoftDynamicsCRMaccount adoxioProposedOwner = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMactivityparty> adoxioLicencesActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMadoxioArea adoxioAreaId = default(MicrosoftDynamicsCRMadoxioArea), IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> adoxioLicenceCannabismonthlyreports = default(IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport>), IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> adoxioLicenceInventoryreports = default(IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport>), MicrosoftDynamicsCRMsystemuser adoxioInspectorId = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioEvent> adoxioLicencesAdoxioEventLicence = default(IList<MicrosoftDynamicsCRMadoxioEvent>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioLicencesSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>))
+        public MicrosoftDynamicsCRMadoxioLicences(string adoxioBusinessprogramaccountreferencenumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioEffectivedayofmonth = default(int?), int? timezoneruleversionnumber = default(int?), bool? adoxioIseventapprovalalwaysrequired = default(bool?), string _modifiedonbehalfbyValue = default(string), string _adoxioPdjurisdictionValue = default(string), string _owninguserValue = default(string), string adoxioEstablishmentaddresspostalcode = default(string), string _adoxioInspectoridValue = default(string), string _adoxioAreaidValue = default(string), string adoxioExpiryyeartext = default(string), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), int? adoxioExpirydayofmonth = default(int?), string _adoxioProposedownerValue = default(string), string adoxioLicencesid = default(string), string versionnumber = default(string), string adoxioEffectiveyeartext = default(string), int? adoxioExpiryyear = default(int?), int? adoxioTporequestinprogress = default(int?), int? adoxioEffectiveyear = default(int?), string emailaddress = default(string), string adoxioEstablishmentnametemp = default(string), string adoxioExpirymonthname = default(string), System.DateTimeOffset? adoxioExpirydate = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), int? adoxioTransferrequested = default(int?), decimal? adoxioLdbordertotals = default(decimal?), int? adoxioOrgbookcredentialresult = default(int?), string adoxioName = default(string), int? adoxioTporequested = default(int?), string _adoxioLicencetypeValue = default(string), string _createdbyValue = default(string), string _adoxioRegionValue = default(string), int? utcconversiontimezonecode = default(int?), string _owningteamValue = default(string), string _adoxioEstablishmentValue = default(string), string adoxioEstablishmentphone = default(string), System.DateTimeOffset? adoxioEffectivedate = default(System.DateTimeOffset?), int? adoxioLicencesubcategory = default(int?), string _adoxioThirdpartyoperatoridValue = default(string), string _owneridValue = default(string), int? importsequencenumber = default(int?), string _adoxioLginValue = default(string), string adoxioEstablishmentaddresscity = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _adoxioTerritoryValue = default(string), string adoxioOrgbookcredentialid = default(string), string _adoxioProposedoperatorValue = default(string), string adoxioLicencenumber = default(string), string _adoxioLicenceeValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioOwnershiptransferinprogress = default(int?), string adoxioOrgbookcredentiallink = default(string), string adoxioLicenceprintname = default(string), string adoxioEstablishmentaddressstreet = default(string), string _modifiedbyValue = default(string), string adoxioEffectivemonthname = default(string), int? statecode = default(int?), string _adoxioAccountidValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> adoxioLicencesActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> adoxioLicencesAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioLicencesEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioLicencesFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioLicencesLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioLicencesPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioLicencesServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> adoxioLicencesTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioLicencesRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioLicencesSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioLicencesAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsyncerror> adoxioLicencesSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencesDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencesDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMannotation> adoxioLicencesAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLicencesAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLicencesBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount adoxioAccountId = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount adoxioLicencee = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioAdoxioLicencesAdoxioApplicationAssignedLicence = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> adoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioAdoxioLicencesAdoxioInvestigationLicence = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioAdoxioLicencesAdoxioLegalentityRelatedLicence = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMcontact> adoxioAdoxioLicencesContactRelatedLicence = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMincident> adoxioAdoxioLicencesIncidentLicence = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceType = default(MicrosoftDynamicsCRMadoxioLicencetype), MicrosoftDynamicsCRMadoxioRegion adoxioRegion = default(MicrosoftDynamicsCRMadoxioRegion), MicrosoftDynamicsCRMadoxioTerritory adoxioTerritory = default(MicrosoftDynamicsCRMadoxioTerritory), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation adoxioLGIN = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), MicrosoftDynamicsCRMadoxioPolicejurisdiction adoxioPDJurisdiction = default(MicrosoftDynamicsCRMadoxioPolicejurisdiction), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioLicenceComplaints = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioLicencesContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> adoxioLicencesCompliancemeetings = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation> adoxioLicenceInvestigations = default(IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation>), MicrosoftDynamicsCRMaccount adoxioProposedOwner = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMactivityparty> adoxioLicencesActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMadoxioArea adoxioAreaId = default(MicrosoftDynamicsCRMadoxioArea), IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> adoxioLicenceCannabismonthlyreports = default(IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport>), IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> adoxioLicenceInventoryreports = default(IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport>), MicrosoftDynamicsCRMsystemuser adoxioInspectorId = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioEvent> adoxioLicencesAdoxioEventLicence = default(IList<MicrosoftDynamicsCRMadoxioEvent>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioLicencesSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMadoxioLdborder> adoxioLicencesAdoxioLdborderLicenceId = default(IList<MicrosoftDynamicsCRMadoxioLdborder>), MicrosoftDynamicsCRMaccount adoxioThirdPartyOperatorId = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMadoxioLicenceldbordertotalhistory> adoxioLicencesAdoxioLicenceldbordertotalhistoryLicence = default(IList<MicrosoftDynamicsCRMadoxioLicenceldbordertotalhistory>), MicrosoftDynamicsCRMaccount adoxioProposedOperator = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMadoxioEndorsement> adoxioLicencesAdoxioEndorsementLicence = default(IList<MicrosoftDynamicsCRMadoxioEndorsement>))
         {
             AdoxioBusinessprogramaccountreferencenumber = adoxioBusinessprogramaccountreferencenumber;
-            AdoxioEffectivemonthname = adoxioEffectivemonthname;
             Overriddencreatedon = overriddencreatedon;
             AdoxioEffectivedayofmonth = adoxioEffectivedayofmonth;
             Timezoneruleversionnumber = timezoneruleversionnumber;
+            AdoxioIseventapprovalalwaysrequired = adoxioIseventapprovalalwaysrequired;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._adoxioPdjurisdictionValue = _adoxioPdjurisdictionValue;
             this._owninguserValue = _owninguserValue;
@@ -93,10 +95,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Statuscode = statuscode;
             AdoxioExpirydayofmonth = adoxioExpirydayofmonth;
+            this._adoxioProposedownerValue = _adoxioProposedownerValue;
             AdoxioLicencesid = adoxioLicencesid;
             Versionnumber = versionnumber;
             AdoxioEffectiveyeartext = adoxioEffectiveyeartext;
             AdoxioExpiryyear = adoxioExpiryyear;
+            AdoxioTporequestinprogress = adoxioTporequestinprogress;
             AdoxioEffectiveyear = adoxioEffectiveyear;
             Emailaddress = emailaddress;
             AdoxioEstablishmentnametemp = adoxioEstablishmentnametemp;
@@ -104,10 +108,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioExpirydate = adoxioExpirydate;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             AdoxioTransferrequested = adoxioTransferrequested;
-            AdoxioLicenceprintname = adoxioLicenceprintname;
-            this._adoxioProposedownerValue = _adoxioProposedownerValue;
+            AdoxioLdbordertotals = adoxioLdbordertotals;
             AdoxioOrgbookcredentialresult = adoxioOrgbookcredentialresult;
             AdoxioName = adoxioName;
+            AdoxioTporequested = adoxioTporequested;
             this._adoxioLicencetypeValue = _adoxioLicencetypeValue;
             this._createdbyValue = _createdbyValue;
             this._adoxioRegionValue = _adoxioRegionValue;
@@ -116,6 +120,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._adoxioEstablishmentValue = _adoxioEstablishmentValue;
             AdoxioEstablishmentphone = adoxioEstablishmentphone;
             AdoxioEffectivedate = adoxioEffectivedate;
+            AdoxioLicencesubcategory = adoxioLicencesubcategory;
+            this._adoxioThirdpartyoperatoridValue = _adoxioThirdpartyoperatoridValue;
             this._owneridValue = _owneridValue;
             Importsequencenumber = importsequencenumber;
             this._adoxioLginValue = _adoxioLginValue;
@@ -123,13 +129,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Createdon = createdon;
             this._adoxioTerritoryValue = _adoxioTerritoryValue;
             AdoxioOrgbookcredentialid = adoxioOrgbookcredentialid;
+            this._adoxioProposedoperatorValue = _adoxioProposedoperatorValue;
             AdoxioLicencenumber = adoxioLicencenumber;
-            AdoxioEstablishmentaddressstreet = adoxioEstablishmentaddressstreet;
             this._adoxioLicenceeValue = _adoxioLicenceeValue;
             Modifiedon = modifiedon;
             AdoxioOwnershiptransferinprogress = adoxioOwnershiptransferinprogress;
             AdoxioOrgbookcredentiallink = adoxioOrgbookcredentiallink;
+            AdoxioLicenceprintname = adoxioLicenceprintname;
+            AdoxioEstablishmentaddressstreet = adoxioEstablishmentaddressstreet;
             this._modifiedbyValue = _modifiedbyValue;
+            AdoxioEffectivemonthname = adoxioEffectivemonthname;
             Statecode = statecode;
             this._adoxioAccountidValue = _adoxioAccountidValue;
             Createdbyname = createdbyname;
@@ -183,6 +192,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioInspectorId = adoxioInspectorId;
             AdoxioLicencesAdoxioEventLicence = adoxioLicencesAdoxioEventLicence;
             AdoxioLicencesSharePointDocumentLocations = adoxioLicencesSharePointDocumentLocations;
+            AdoxioLicencesAdoxioLdborderLicenceId = adoxioLicencesAdoxioLdborderLicenceId;
+            AdoxioThirdPartyOperatorId = adoxioThirdPartyOperatorId;
+            AdoxioLicencesAdoxioLicenceldbordertotalhistoryLicence = adoxioLicencesAdoxioLicenceldbordertotalhistoryLicence;
+            AdoxioProposedOperator = adoxioProposedOperator;
+            AdoxioLicencesAdoxioEndorsementLicence = adoxioLicencesAdoxioEndorsementLicence;
             CustomInit();
         }
 
@@ -196,11 +210,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_businessprogramaccountreferencenumber")]
         public string AdoxioBusinessprogramaccountreferencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_effectivemonthname")]
-        public string AdoxioEffectivemonthname { get; set; }
 
         /// <summary>
         /// Gets or sets date and time that the record was migrated.
@@ -218,6 +227,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_iseventapprovalalwaysrequired")]
+        public bool? AdoxioIseventapprovalalwaysrequired { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who modified
@@ -278,6 +292,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public int? AdoxioExpirydayofmonth { get; set; }
 
         /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_proposedowner_value")]
+        public string _adoxioProposedownerValue { get; set; }
+
+        /// <summary>
         /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_licencesid")]
@@ -298,6 +317,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_expiryyear")]
         public int? AdoxioExpiryyear { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_tporequestinprogress")]
+        public int? AdoxioTporequestinprogress { get; set; }
 
         /// <summary>
         /// </summary>
@@ -341,13 +365,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licenceprintname")]
-        public string AdoxioLicenceprintname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_proposedowner_value")]
-        public string _adoxioProposedownerValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_ldbordertotals")]
+        public decimal? AdoxioLdbordertotals { get; set; }
 
         /// <summary>
         /// </summary>
@@ -359,6 +378,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_name")]
         public string AdoxioName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_tporequested")]
+        public int? AdoxioTporequested { get; set; }
 
         /// <summary>
         /// </summary>
@@ -405,6 +429,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public System.DateTimeOffset? AdoxioEffectivedate { get; set; }
 
         /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licencesubcategory")]
+        public int? AdoxioLicencesubcategory { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier for Account associated with Licence.
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_thirdpartyoperatorid_value")]
+        public string _adoxioThirdpartyoperatoridValue { get; set; }
+
+        /// <summary>
         /// Gets or sets owner Id
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
@@ -445,13 +480,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licencenumber")]
-        public string AdoxioLicencenumber { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_proposedoperator_value")]
+        public string _adoxioProposedoperatorValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_establishmentaddressstreet")]
-        public string AdoxioEstablishmentaddressstreet { get; set; }
+        [JsonProperty(PropertyName = "adoxio_licencenumber")]
+        public string AdoxioLicencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -475,10 +510,25 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioOrgbookcredentiallink { get; set; }
 
         /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licenceprintname")]
+        public string AdoxioLicenceprintname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_establishmentaddressstreet")]
+        public string AdoxioEstablishmentaddressstreet { get; set; }
+
+        /// <summary>
         /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_effectivemonthname")]
+        public string AdoxioEffectivemonthname { get; set; }
 
         /// <summary>
         /// Gets or sets status of the Licence
@@ -747,6 +797,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_licences_SharePointDocumentLocations")]
         public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> AdoxioLicencesSharePointDocumentLocations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licences_adoxio_ldborder_LicenceId")]
+        public IList<MicrosoftDynamicsCRMadoxioLdborder> AdoxioLicencesAdoxioLdborderLicenceId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_ThirdPartyOperatorId")]
+        public MicrosoftDynamicsCRMaccount AdoxioThirdPartyOperatorId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licences_adoxio_licenceldbordertotalhistory_Licence")]
+        public IList<MicrosoftDynamicsCRMadoxioLicenceldbordertotalhistory> AdoxioLicencesAdoxioLicenceldbordertotalhistoryLicence { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_ProposedOperator")]
+        public MicrosoftDynamicsCRMaccount AdoxioProposedOperator { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licences_adoxio_endorsement_Licence")]
+        public IList<MicrosoftDynamicsCRMadoxioEndorsement> AdoxioLicencesAdoxioEndorsementLicence { get; set; }
 
     }
 }

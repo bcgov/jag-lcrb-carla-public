@@ -87,6 +87,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string accountId { get; set; } //_adoxio_account_value
         public string contactId { get; set; } //_adoxioContactValue 
         public GeneralYesNo? isContactComplete { get; set; } //_adoxioContactValue.AdoxioPhscomplete
+        public string CasLink{ get; set; }
         public string PhsLink { get; set; }
         public string shareholderAccountId { get; set; } //_adoxio_shareholderaccountid_value
 
