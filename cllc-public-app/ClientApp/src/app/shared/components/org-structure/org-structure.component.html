@@ -1,4 +1,4 @@
-<h1 *ngIf="node?.isRoot" class="plain-header">{{node?.businessNameNew}} Detailed Organization Information</h1>
+<h1 *ngIf="node?.isRoot">Detailed Organization Information</h1>
 <div *ngIf="node?.isRoot" class=row>
     <div class="col-md-12">
 
@@ -218,6 +218,7 @@
         [account]="account" changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Shareholder" #associateList>
       </app-associate-list>
     </section>
+    <p>&nbsp;</p>
     <h4 class="plain-header">Business Shareholders</h4>
     <section class="padded-section">
 

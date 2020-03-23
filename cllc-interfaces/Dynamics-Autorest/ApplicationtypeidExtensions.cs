@@ -19,6 +19,78 @@ namespace Gov.Lclb.Cllb.Interfaces
     public static partial class ApplicationtypeidExtensions
     {
             /// <summary>
+            /// Get adoxio_ApplicationTypeId from adoxio_applicationtypefeeschedules
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioApplicationtypefeescheduleid'>
+            /// key: adoxio_applicationtypefeescheduleid of
+            /// adoxio_applicationtypefeeschedule
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            public static MicrosoftDynamicsCRMadoxioApplicationtype Get(this IApplicationtypeid operations, string adoxioApplicationtypefeescheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            {
+                return operations.GetAsync(adoxioApplicationtypefeescheduleid, select, expand).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get adoxio_ApplicationTypeId from adoxio_applicationtypefeeschedules
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioApplicationtypefeescheduleid'>
+            /// key: adoxio_applicationtypefeescheduleid of
+            /// adoxio_applicationtypefeeschedule
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MicrosoftDynamicsCRMadoxioApplicationtype> GetAsync(this IApplicationtypeid operations, string adoxioApplicationtypefeescheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioApplicationtypefeescheduleid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get adoxio_ApplicationTypeId from adoxio_applicationtypefeeschedules
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioApplicationtypefeescheduleid'>
+            /// key: adoxio_applicationtypefeescheduleid of
+            /// adoxio_applicationtypefeeschedule
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='customHeaders'>
+            /// Headers that will be added to request.
+            /// </param>
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationtype> GetWithHttpMessages(this IApplicationtypeid operations, string adoxioApplicationtypefeescheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            {
+                return operations.GetWithHttpMessagesAsync(adoxioApplicationtypefeescheduleid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
             /// Get adoxio_ApplicationTypeId from adoxio_formelementuploadfields
             /// </summary>
             /// <param name='operations'>
@@ -33,9 +105,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioApplicationtype Get(this IApplicationtypeid operations, string adoxioFormelementuploadfieldid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioApplicationtype Get1(this IApplicationtypeid operations, string adoxioFormelementuploadfieldid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(adoxioFormelementuploadfieldid, select, expand).GetAwaiter().GetResult();
+                return operations.Get1Async(adoxioFormelementuploadfieldid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -56,9 +128,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioApplicationtype> GetAsync(this IApplicationtypeid operations, string adoxioFormelementuploadfieldid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioApplicationtype> Get1Async(this IApplicationtypeid operations, string adoxioFormelementuploadfieldid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioFormelementuploadfieldid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.Get1WithHttpMessagesAsync(adoxioFormelementuploadfieldid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -82,9 +154,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationtype> GetWithHttpMessages(this IApplicationtypeid operations, string adoxioFormelementuploadfieldid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationtype> Get1WithHttpMessages(this IApplicationtypeid operations, string adoxioFormelementuploadfieldid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(adoxioFormelementuploadfieldid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.Get1WithHttpMessagesAsync(adoxioFormelementuploadfieldid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

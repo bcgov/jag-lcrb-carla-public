@@ -160,18 +160,23 @@ export class LicencesComponent extends FormBase implements OnInit {
   }
 
   startRenewal(licence: ApplicationLicenseSummary) {
-    const renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === 'CRS Renewal');
+    const renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CRSRenewal
+      || app.applicationTypeName === ApplicationTypeNames.LiquorRenewal);
+
     if (renewalApplication && !renewalApplication.isPaid) {
-      this.router.navigateByUrl('/renew-crs-licence/application/' + renewalApplication.applicationId);
+      this.router.navigateByUrl(`/renew-licence/${licence.applicationTypeCategory}/${renewalApplication.applicationId}`);
     } else if (renewalApplication && renewalApplication.isPaid) {
       this.snackBar.open('Renewal application already submitted', 'Fail',
         { duration: 3500, panelClass: ['red-snackbar'] });
     } else {
-      const actionName = 'CRS Renewal';
+      let actionName = ApplicationTypeNames.CRSRenewal;;
+      if (licence.applicationTypeCategory === 'Liquor') {
+        actionName = ApplicationTypeNames.LiquorRenewal;
+      }
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {
-          this.router.navigateByUrl('/renew-crs-licence/application/' + data.id);
+          this.router.navigateByUrl(`/renew-licence/${licence.applicationTypeCategory}/${data.id}`);
         },
           () => {
             this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail',
@@ -211,9 +216,9 @@ export class LicencesComponent extends FormBase implements OnInit {
       forkJoin([
         this.licenceEventsService.getLicenceEventsList(licence.licenseId, 10)
       ])
-      .subscribe(data => {
-        licence.events = data[0];
-      });
+        .subscribe(data => {
+          licence.events = data[0];
+        });
     }
 
     if (typeof this.licenceMappings[licence.licenceTypeName] === 'undefined') {
@@ -317,6 +322,10 @@ export class LicencesComponent extends FormBase implements OnInit {
       default:
         return '404';
     }
+  }
+
+  getNumberOfLicences() {
+    return Object.keys(this.licenceMappings).length;
   }
 
   getOptionFromValue(options: any, value: number) {

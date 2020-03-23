@@ -42,7 +42,11 @@ namespace bdd_tests
                 Console.Out.WriteLine("Enabling Headless Mode");
                 options.AddArguments("headless", "no-sandbox", "disable-web-security",  "no-zygote", "disable-gpu");
             }
-            
+            else
+            {
+                options.AddArguments("--start-maximized");
+            }
+
             driver = new ChromeDriver(path, options);
             
             //driver = new FirefoxDriver(FirefoxDriverService);
@@ -62,6 +66,10 @@ namespace bdd_tests
 
             ngDriver.WaitForAngular();
 
+            /* 
+            Page Title: Terms of Use
+            */
+
             NgWebElement uiCheckBox1 = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
             uiCheckBox1.Click();
 
@@ -71,29 +79,38 @@ namespace bdd_tests
             NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[text()='Continue']"));
             continueButton.Click();
 
+            /* 
+            Page Title: Please confirm the name belonging to the BC Services card you provided
+            */
+
             NgWebElement yesButton = ngDriver.FindElement(By.XPath("//div/button"));
             yesButton.Click();
         }
 
         public void MakeWorkerPayment()
         {
+            /* 
+            Page Title: Internet Payments Program (Bambora)
+            */
+
             string testCC = configuration["test_cc"];
             string testCVD = configuration["test_ccv"];
 
             System.Threading.Thread.Sleep(10000);
 
-            //browser sync - don't wait for Angular
             ngDriver.IgnoreSynchronization = true;
 
+            // enter the test credit card number
             driver.FindElementByName("trnCardNumber").SendKeys(testCC);
 
+            // enter the test credit card CVD number
             driver.FindElementByName("trnCardCvd").SendKeys(testCVD);
 
+            // click on the Pay Now button
             driver.FindElementByName("submitButton").Click();
 
             System.Threading.Thread.Sleep(10000);
 
-            //turn back on when returning to Angular
             ngDriver.IgnoreSynchronization = false;
         }
 

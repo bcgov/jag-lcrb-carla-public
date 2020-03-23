@@ -1,0 +1,259 @@
+<div class="form-wrapper" [formGroup]="form">
+    <h1>Cannabis Associate Screening</h1>
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <section class="d-flex">
+                <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+                <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+                    <p>
+                        <label>BEFORE YOU APPLY</label>: &nbsp;
+                        TO DO
+                    </p>
+
+                    <p class="pl-3">
+                        <strong>Note</strong>:&nbsp;
+                        At any time, the LCRB may require you to consent to subsequent criminal record checks.
+                    </p>
+
+                    <div>
+                        <label>INSTRUCTIONS</label>:
+                        <ul>
+                            <li>You must complete all questions in order submit. Information will not be saved unless
+                                the form is complete.
+                            </li>
+                            <li>Attach all supporting documentation as directed.</li>
+                        </ul>
+                        <p class="pl-3">
+                            <strong>Note</strong>: &nbsp;
+                            Having a criminal record does not cause your LCRB application to automatically be denied.
+                            LCRB will carefully review the circumstances of the individual case; severity and date of
+                            the offence for example, and how the type of offence relates to the responsibility of
+                            holding a cannabis licence.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- {{form.value | json}} -->
+            <h3 class="blue-header">BASIC INFORMATION</h3>
+
+            <section class="padded-section border-around">
+                <div formGroupName="contact">
+                    <app-field label="Name">
+                        <input class="form-control" style="width: 400px;" type="text" formControlName="shortName"
+                            readonly disabled>
+                    </app-field>
+
+                    <app-field label="Date of Birth" errorMessage="Date of Birth is required"
+                        [valid]="!form.get('contact.birthDate').touched || form.get('contact.birthDate').valid">
+                        <input type="text" formControlName='birthDate' style="width: 200px; background-color: #fff;"
+                            placeholder="yyyy-mm-dd" readonly class="form-control" [matDatepicker]="picker"
+                            (focus)="picker.open()" (click)="picker.open()">
+                        <mat-datepicker #picker></mat-datepicker>
+                    </app-field>
+
+                    <app-field label="Gender" errorMessage="Please select gender"
+                        [valid]="!form.get('contact.gender').touched || form.get('contact.gender').valid">
+                        <mat-radio-group formControlName="gender">
+                            <mat-radio-button value="Male" style="margin-right: 10px;">Male </mat-radio-button>
+                            <mat-radio-button value="Female" style="margin-right: 10px;">Female </mat-radio-button>
+                            <mat-radio-button value="Other">Other </mat-radio-button>
+                        </mat-radio-group>
+                    </app-field>
+                </div>
+                <hr>
+                <app-field label="Name at Birth">
+                    <section class="padded">
+                        <mat-checkbox color="primary" formControlName="sameNameAtBirth">I had the same name at birth
+                        </mat-checkbox>
+
+                        <ng-container *ngIf="form.get('sameNameAtBirth').value === false">
+                            <app-field label="First Name at Birth" errorMessage="Please enter First Name at Birth"
+                                [valid]="!form.get('firstNameAtBirth').touched || form.get('firstNameAtBirth').valid">
+                                <input class="form-control" style="width: 300px;" type="text"
+                                    formControlName="firstNameAtBirth">
+                            </app-field>
+
+                            <app-field label="Last Name at Birth" errorMessage="Please enter Last Name at Birth"
+                                [valid]="!form.get('lastNameAtBirth').touched || form.get('lastNameAtBirth').valid">
+                                <input class="form-control" style="width: 300px;" type="text"
+                                    formControlName="lastNameAtBirth">
+                            </app-field>
+                        </ng-container>
+                    </section>
+                </app-field>
+                <hr>
+
+                <app-field label="Other Last Names Used">
+                    <div formGroupName="contact">
+                        <section formArrayName="aliases" class="padded-section">
+                            <div *ngFor="let alias of aliases.controls; let i = index">
+                                <div [formGroupName]="i">
+                                    <app-field label="Last Name {{ i + 1}}" style="width:80%"
+                                        errorMessage="Please enter last name" [showChevrons]="false"
+                                        [valid]="!aliases.at(i).get('lastname').touched || aliases.at(i).get('lastname').valid"
+                                        [isFullWidth]="true">
+                                        <input class="form-control" style="width: 300px;" type="text"
+                                            formControlName="lastname"> <i class="fas fa-trash-alt ml-3"
+                                            (click)="deleteAlias(i)"></i>
+                                    </app-field>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <button (click)="addAlias()" class="btn btn-secondary" style="padding-left:10px;">Add Last
+                        Name</button>
+                </app-field>
+            </section>
+
+
+            <h3 class="blue-header">CURRENT ADDRESS</h3>
+            <div formGroupName="contact" class="padded-section border-around">
+                <address class="row">
+                    <app-field class="col-md-12 col-xs-12" label="Address" [required]="true"
+                        errorMessage="Plaese enter Address"
+                        [valid]="!form.get('contact.address1_line1').touched || form.get('contact.address1_line1').valid"
+                        [isFullWidth]="true">
+                        <input class="form-control" type="text" formControlName="address1_line1">
+                    </app-field>
+                    <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true"
+                        errorMessage="Plaese enter City" [required]="true"
+                        [valid]="!form.get('contact.address1_city').touched || form.get('contact.address1_city').valid">
+                        <input class="form-control" type="text" formControlName="address1_city">
+                    </app-field>
+                    <section class="col-md-4 col-xs-12">
+                        <app-field label="Province/State" [isFullWidth]="true" errorMessage="Plaese enter Province"
+                            [required]="true"
+                            [valid]="!form.get('contact.address1_stateorprovince').touched || form.get('contact.address1_stateorprovince').valid">
+                            <input class="form-control" type="text" formControlName="address1_stateorprovince"
+                                value="British Columbia">
+                        </app-field>
+                    </section>
+                    <section class="col-md-4 col-xs-12">
+                        <app-field label="Postal Code" errorMessage="Plaese enter Postal Code" [required]="true"
+                            [valid]="!form.get('contact.address1_postalcode').touched || form.get('contact.address1_postalcode').valid">
+                            <input class="form-control" type="text" formControlName="address1_postalcode">
+                        </app-field>
+                    </section>
+                    <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true"
+                        errorMessage="Plaese enter Country" [required]="true"
+                        [valid]="!form.get('contact.address1_country').touched || form.get('contact.address1_country').valid">
+                        <input formControlName="address1_country" class="form-control" autocomplete="country-name"
+                            type="text" value="Canada">
+                    </app-field>
+                </address>
+                <section>
+                    <app-field label="Phone Number" [required]="true"
+                        [valid]="!form.get('contact.mobilePhone').touched || form.get('contact.mobilePhone').valid"
+                        errorMessage="Please enter a 10-digit phone number">
+                        <input formControlName="mobilePhone" class="form-control" style="width: 350px;" maxlength="10"
+                            autocomplete="tel" type="text">
+                    </app-field>
+
+                    <app-field label="Email" [required]="true" errorMessage="Please enter email address"
+                        [valid]="!form.get('contact.emailaddress1').touched || form.get('contact.emailaddress1').valid"
+                        afterLabelText="By submitting this email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your Personal History Summary."
+                        style="padding-left:20px;">
+                        <input formControlName="emailaddress1" class="form-control" style="width: 350px;" type="text"
+                            autocomplete="email">
+                    </app-field>
+                </section>
+            </div>
+        <h3 class="blue-header">REQUIRED DOCUMENTS</h3>
+        <section formGroupName="contact" class="padded-section border-around">
+
+    
+        <ng-container>
+                <section class="padded-section">
+                    <h4 class="plain-header">DOCUMENT REQUIRED: Associate Financial Integrity FOrm</h4>
+                    <p>
+                        Please complete and upload the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf" target="_blank">Associate Financial Interity</a> form.
+                    </p>
+                    <section>
+                        <app-file-uploader documentType="Associate_Fin" [useDocumentTypeForName]="true"
+                            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+                            entityName="contact" [extensions]="['pdf']"
+                            [entityId]="contactToken" (numberOfUploadedFiles)="updateUploadedFiles($event, 'Associate_Fin')"
+                            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY, DRAG FILE HERE OR'"
+                            [publicAccess]="true">
+                        </app-file-uploader>
+                    </section>
+                </section>
+                <hr>    
+        </ng-container>
+                    
+        <ng-container>
+                <h4 class="plain-header">DOCUMENT REQUIRED: Consent for Cannabis Security Screening</h4>
+                <p>
+                        Please complete and upload the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-can-security-consent.pdf" target="_blank">Consent for Cannabis Security Screening</a> form.
+                </p>
+                <section>
+                    <app-file-uploader documentType="Cannabis_Consent" [useDocumentTypeForName]="true"
+                        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+                        (numberOfUploadedFiles)="updateUploadedFiles($event, 'Consent')"
+                        entityName="contact" [extensions]="['pdf']" [entityId]="contactToken"
+                        [uploadHeader]="'TO UPLOAD CONSENT, DRAG FILE HERE OR'"
+                        [publicAccess]="true">
+                    </app-file-uploader>
+                </section>
+                <hr>
+            </ng-container>
+
+
+        <ng-container>
+                <h4 class="plain-header">DOCUMENT REQUIRED: Identify Verification Form</h4>
+                <p>
+                        Please complete, sign and date the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-identity.pdf" target="_blank">Identity Verification</a> form.
+                    </p>
+                <section>
+                    <app-file-uploader documentType="ID_FORM" [useDocumentTypeForName]="true"
+                        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+                        (numberOfUploadedFiles)="updateUploadedFiles($event, 'IDForm')"
+                        entityName="contact" [extensions]="['pdf']" [entityId]="contactToken"
+                        [uploadHeader]="'TO UPLOAD IDENTITY FORM, DRAG FILE HERE OR'"
+                        [publicAccess]="true">
+                    </app-file-uploader>
+                </section>
+                
+            </ng-container>
+
+            </section>
+
+
+            <section class="error mt-3" *ngIf="validationErrors?.length">
+                <p *ngFor="let message of validationErrors">
+                    <span class="app-cancel">
+                        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+                        {{message}}
+                    </span>
+                </p>
+            </section>
+
+            <div *ngIf="!form.valid && showErrors" class="error-summary mt-3">
+                <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
+                <span>Some required fields have not been completed</span>
+            </div>
+
+            <button class="btn btn-primary mt-3" (click)="save()">Save</button>
+        </div>
+        <div class="col-md-4">
+            <section class="submit-container p-3" style="background-color: #F2F2F2; color:#000; border: none;">
+                <h2 style="color: #000">Collection Notice:</h2>
+                <div class="submit-content p-3">
+                    <p>
+                        The information requested on this form is collected by the Liquor and Cannabis Regulation Branch
+                        under Sections 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act for
+                        the purpose of cannabis licensing, compliance and enforcement matters in accordance with the
+                        Cannabis Control and Licensing Act. Should you have any questions about the collection, use, or
+                        disclosure of personal information, please contact the Freedom of Information Officer at PO Box
+                        9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+</div>

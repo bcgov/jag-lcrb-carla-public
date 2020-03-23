@@ -222,7 +222,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(applicationTypeName);
+                // var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(applicationTypeName);
 
                 MicrosoftDynamicsCRMadoxioApplication application = new MicrosoftDynamicsCRMadoxioApplication()
                 {
@@ -842,7 +842,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationsForLicenceByApplicant(licence.AdoxioLicencee.Accountid);
             var applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
 
-            licence.AdoxioLicenceType = ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
+            licence.AdoxioLicenceType = Models.ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
             return new JsonResult(licence.ToLicenseSummaryViewModel(applications));
         }
 

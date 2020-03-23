@@ -20,7 +20,7 @@
       </app-application>
     </mat-step>
     <mat-step *ngIf="useDynamicFormMode" label="Complete Application">
-      <app-dynamic-application *ngIf="stepper.selectedIndex === 2" class="w-100"
+      <app-dynamic-application *ngIf="stepper.selectedIndex === 2" [skipPayment]="true" class="w-100"
         (saveComplete)="stepper.selectedIndex = 3"></app-dynamic-application>
     </mat-step>
     <mat-step *ngIf="securityScreeningEnabled" label="Security Screening Requirements">

@@ -36,6 +36,7 @@ export class ApplicationType {
   connectedGroceryStore: FormControlState;
   publicCooler: FormControlState;
   showLiquorSitePlan: FormControlState;
+  proofofZoning: FormControlState;
   
 
 
@@ -59,5 +60,6 @@ export enum ApplicationTypeNames {
   CannabisRetailStore = 'Cannabis Retail Store',
   LicenseeChanges = 'Licensee Changes',
   Marketer = 'Marketing',
-  LiquorRelocation = 'Liquor Licence Relocation'
+  LiquorRelocation = 'Liquor Licence Relocation',
+  LiquorRenewal = 'Liquor Licence Renewal'
 }

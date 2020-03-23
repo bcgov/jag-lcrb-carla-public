@@ -781,6 +781,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return authorized;
         }
 
+        [HttpDelete("{token}/public-attachments/{entityName}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> PublicDeleteFile([FromRoute] string token, [FromQuery] string serverRelativeUrl, [FromQuery] string documentType, [FromRoute] string entityName)
+        {
+            // decode the entityID
+            string entityId = EncryptionUtility.DecryptStringHex(token, _encryptionKey);
+
+            bool authorized = await IsPublicUserAuthorized(entityName, entityId).ConfigureAwait(true);
+
+            if (authorized)
+            {
+                return await DeleteFileInternal(serverRelativeUrl, documentType, entityId, entityName, false).ConfigureAwait(true);
+            }
+            else
+            {
+                return Unauthorized();
+            }
+        }
+
         /// <summary>
         /// Public version of the file download.
         /// </summary>

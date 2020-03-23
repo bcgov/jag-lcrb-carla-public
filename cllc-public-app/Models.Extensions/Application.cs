@@ -130,6 +130,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioOtherbusinesssamelocationdetails = from.OtherBusinessesDetails;
             to.AdoxioIsapplicationcomplete = (int?)from.IsApplicationComplete;
 
+            to.AdoxioRenewaldui = (int?)from.RenewalDUI;
+            to.AdoxioRenewalthirdparty = (int?)from.RenewalThirdParty;
+
             // comment out this next line as it is causing all application updates to fail (moved to controller)
             //to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
 
@@ -211,9 +214,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
         }
 
-        public async static Task<Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient)
+        public async static Task<ViewModels.Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient)
         {
-            Application applicationVM = new ViewModels.Application()
+            ViewModels.Application applicationVM = new ViewModels.Application()
             {
                 Name = dynamicsApplication.AdoxioName,
                 JobNumber = dynamicsApplication.AdoxioJobnumber,
@@ -262,6 +265,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 RenewalFloorPlan = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalfloorplan,
                 RenewalSiteMap = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalsitemap,
                 TiedhouseFederalInterest = (ValueNotChanged?)dynamicsApplication.AdoxioRenewaltiedhousefederalinterest,
+                RenewalDUI = (ValueNotChanged?)dynamicsApplication.AdoxioRenewaldui,
+                RenewalThirdParty = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalthirdparty,
 
                 AuthorizedToSubmit = dynamicsApplication.AdoxioAuthorizedtosubmit,
                 SignatureAgreement = dynamicsApplication.AdoxioSignatureagreement,
@@ -365,7 +370,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 var contact = await dynamicsClient.GetContactById(applyingPersonId);
                 applicationVM.ApplyingPerson = contact.Fullname;
             }
-            
+
             if (dynamicsApplication._adoxioApplicantValue != null)
             {
                 var applicant = await dynamicsClient.GetAccountByIdAsync(Guid.Parse(dynamicsApplication._adoxioApplicantValue));
@@ -435,7 +440,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 //get establishment name and address
                 EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
                 LicenceId = dynamicsApplication._adoxioAssignedlicenceValue,
-                IsPaid = (dynamicsApplication.AdoxioPaymentrecieved == true)
+                IsPaid = (dynamicsApplication.AdoxioPaymentrecieved == true),
             };
 
             // id
@@ -453,6 +458,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 applicationSummary.ApplicationTypeName = dynamicsApplication.AdoxioApplicationTypeId.AdoxioName;
                 applicationSummary.Portallabel = dynamicsApplication.AdoxioApplicationTypeId.AdoxioPortallabel;
+                applicationSummary.ApplicationTypeCategory = (ApplicationTypeCategory?)dynamicsApplication.AdoxioApplicationTypeId.AdoxioCategory;
             }
 
             applicationSummary.IsIndigenousNation = (dynamicsApplication.AdoxioApplicanttype == (int)AdoxioApplicantTypeCodes.IndigenousNation);
