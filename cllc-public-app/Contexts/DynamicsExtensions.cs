@@ -250,7 +250,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     })
                     .Select(licence =>
                     {
-                        licence.AdoxioLicenceType = ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
+                        licence.AdoxioLicenceType = Gov.Lclb.Cllb.Public.Models.ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
                         return licence;
                     });
             }

@@ -214,9 +214,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
         }
 
-        public async static Task<Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient)
+        public async static Task<ViewModels.Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient)
         {
-            Application applicationVM = new ViewModels.Application()
+            ViewModels.Application applicationVM = new ViewModels.Application()
             {
                 Name = dynamicsApplication.AdoxioName,
                 JobNumber = dynamicsApplication.AdoxioJobnumber,
