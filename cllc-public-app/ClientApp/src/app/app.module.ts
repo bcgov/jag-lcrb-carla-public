@@ -179,6 +179,7 @@ import { OrgStructureComponent } from './shared/components/org-structure/org-str
 import { DynamicApplicationComponent } from './components/applications/dynamic-application/dynamic-application.component';
 import { CateringDemoComponent } from './components/catering-demo/catering-demo.component';
 import { PersonalHistorySummaryComponent } from './components/personal-history-summary/personal-history-summary.component';
+import { CannabisAssociateScreeningComponent} from './components/cannabis-associate-screening/cannabis-associate-screening.component';
 import { AccountCompletenessComponent } from './components/account-completeness/account-completeness.component';
 import { PhsConfirmationComponent } from './components/phs-confirmation/phs-confirmation.component';
 import { MultiStageApplicationFlowComponent } from './components/multi-stage-application-flow/multi-stage-application-flow.component';
@@ -188,6 +189,7 @@ import { LicenceEventsService } from '@services/licence-events.service';
 import { SecurityScreeningRequirementsComponent } from './components/security-screening-requirements/security-screening-requirements.component';
 import { EligibilityFormComponent } from './components/eligibility-form/eligibility-form.component';
 import { EligibilityFormDataService } from '@services/eligibility-data.service';
+import { LiquorRenewalComponent } from './components/applications/liquor-renewal/liquor-renewal.component';
 
 
 @NgModule({
@@ -286,11 +288,13 @@ import { EligibilityFormDataService } from '@services/eligibility-data.service';
     DynamicApplicationComponent,
     CateringDemoComponent,
     PersonalHistorySummaryComponent,
+    CannabisAssociateScreeningComponent,
     AccountCompletenessComponent,
     PhsConfirmationComponent,
     MultiStageApplicationFlowComponent,
     SecurityScreeningRequirementsComponent,
-    EligibilityFormComponent
+    EligibilityFormComponent,
+    LiquorRenewalComponent
   ],
   imports: [
     ChartsModule,

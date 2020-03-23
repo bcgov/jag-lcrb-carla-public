@@ -167,6 +167,30 @@ describe('ApplicationComponent', () => {
     expect(component.htmlContent.beforeStarting).toBe('');
   });
 
+  it('should show next steps content if enabled', () => {
+    applicationService.getApplicationById = () => of(<Application>{
+      applicantType: 'PublicCorporation',
+      applicationType: <any>{
+        contentTypes: [
+          {
+            'id': '3',
+            'body': 'body3',
+            'category': 'NextSteps',
+            'businessTypes': ['PublicCorporation']
+          }
+        ]
+      }
+    });
+    fixture = TestBed.createComponent(ApplicationComponent);
+    component = fixture.debugElement.componentInstance;
+    fixture.detectChanges();
+    expect(component.htmlContent.nextSteps).toBe('body3');
+  });
+
+  it('should hide before starting content if disabled', () => {
+    expect(component.htmlContent.nextSteps).toBe('');
+  });
+
   it('should show declarations content if enabled', () => {
     applicationService.getApplicationById = () => of(<Application>{
       applicationType: <any>{

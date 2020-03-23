@@ -61,7 +61,14 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
         primaryIdentificationType: [''],
         phsConnectionsDetails: [''],
         phsLivesInCanada: ['', Validators.required],
+        phsHasFive: ['', Validators.required],
         phsHasLivedInCanada: ['', Validators.required],
+        phsExclusiveMFG:['', Validators.required],
+        phsExclusiveDetails: [''],
+        phsFinancialInt:['', Validators.required],
+        phsFinancialIntDetails: [''],
+        phsProfitAgreement:['', Validators.required],
+        phsProfitAgreementDetails: [''],
         // phsExpired: [''],
         // phsComplete: [''],
         phsConnectionsToOtherLicences: ['', Validators.required],
@@ -89,10 +96,15 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
         if (value === 'Yes') {
           this.form.get('contact.phsHasLivedInCanada').clearValidators();
           this.form.get('contact.phsHasLivedInCanada').reset();
+          this.form.get('contact.phsHasFive').setValidators([Validators.required]);
+          
         } else {
           this.form.get('contact.phsHasLivedInCanada').setValidators([Validators.required]);
+          this.form.get('contact.phsHasFive').clearValidators();
+          this.form.get('contact.phsHasFive').reset();
         }
       });
+
 
     this.form.get('contact.phsConnectionsToOtherLicences').valueChanges
       .subscribe(value => {
@@ -145,7 +157,8 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
 
   showStatutoryDeclaration(): boolean {
     let show = (
-      this.form.get('contact.phsLivesInCanada').value === 'No' ||
+      this.form.get('contact.phsHasFive').value === 'No' ||
+      this.form.get('contact.phsHasLivedInCanada').value === 'No' ||      
       this.form.get('contact.phsCanadianDrugAlchoholDrivingOffence').value === 'Yes' ||
       this.form.get('contact.phsForeignDrugAlchoholOffence').value === 'Yes'
     );
@@ -160,6 +173,14 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
     return show;
   }
 
+  showDriversAbstract(): boolean {
+    let show = (
+      this.form.get('contact.phsCanadianDrugAlchoholDrivingOffence').value === 'Yes'
+    );
+    return show;
+
+  }
+
   updateUploadedFiles(uploadedNumber: number, docType: string) {
     this.fileCount[docType] = uploadedNumber;
   }
@@ -171,6 +192,10 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
     }
     if (this.showStatutoryDeclaration() && !(this.fileCount['StatDeclaration'] > 0)) {
       this.validationErrors.push("Please Upload Your Statutory Declaration");
+    }
+
+    if (this.showDriversAbstract() && (this.fileCount['StatDeclaration'] > 0)) {
+      this.validationErrors.push("Please Upload Your Driver's Extract");
     }
     return this.validationErrors.length <= 0;
   }

@@ -71,7 +71,7 @@
             </div>
             <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
                 <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
-                          label="Establishment"
+                          
                           [required]="true">
                   <input class="form-control" style="width: 500px;" type="text"
                           [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
@@ -83,7 +83,7 @@
           </div>
           <div formGroupName="assignedLicence"
                *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
-            <h3 class="blue-header" style="margin-left: -15px;">CURRENT ADDRESS</h3>
+            <h3 class="blue-header">CURRENT ADDRESS</h3>
             <address class="row">
               <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
                 <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet" id="establishmentAddressStreet">
@@ -223,6 +223,12 @@
 
       <div class="ngtest-photo-signage" *ngIf="showFormControl(application?.applicationType?.signage)">
         <hr>
+        
+        <!--div *ngIf="application?.applicationType?.name === 'Catering'">
+          AAAAAAAAAH
+          
+        </div>
+        <div *ngIf="application?.applicationType?.name !== 'Catering'"></div-->
         <label for="">Photos or renderings of the store's signage</label>
         <br>
         <section *ngIf="application?.applicationType?.signage === FormControlState.Show">
@@ -258,7 +264,8 @@
         </section>
       </div>
 
-      <mat-card *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSEstablishmentNameChange"
+      <mat-card *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSEstablishmentNameChange &&
+              application?.licenseType == 'Cannabis Retail Store'" 
                 class="mat-elevation-z0" style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
@@ -537,12 +544,12 @@
         </section>
       </div>
 
-      <div class="ngtest-grocery-store" *ngIf="showFormControl(application?.applicationType?.connectedGroceryStore)">
+      <div class="ngtest-grocery-store" *ngIf="showGroceryQuestion()">
         <hr>
         <mat-card class="mat-elevation-z0" style="margin-bottom: 10px;">
           <section style="display: flex; justify-content: space-between; width: 100%;">
             <div class="question-label">
-              Will the proposed structural alteration involve removing a wall shared with an eligible grocery store?
+              Is the {{application?.licenseType}} store located in an eligible grocery store?
             </div>
 
             <div style="flex: 0 0 85px;">
@@ -555,9 +562,58 @@
           </section>
         </mat-card>
         <div *ngIf="showGroceryStore()">
+            <section>
+                <p>Please download and print the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb090_grocery_store_declaration.pdf">Grocery Store Declaration</a> and have it be completed by 
+                  the owner of an eligible grocery store.</p>
+                  <p>An eligible grocery store is defined as:</p> 
+                  <ul>
+                    <li>primarily engaged in retailing a general line of foods, including canned, dry and frozen food, fresh fruits and vegetables, fresh and prepared meats, fish and poultry, dairy products, baked products and snack foods, and non-liquor beverages, intended for human consumption, and</li>
+                    <li>having an area of at least 10,000 square feet, including storage.</li>
+                  </ul>
+                  <p>To maintain eligibility, the conditions above must continue to be met, and the sales revenue from food and non-liquor liquor beverages must: </p>
+                  <ul>
+                    <li>total at least 70% of the total sales revenue of non-liquor products, and </li>
+                    <li>total more than 50% of the total sales revenue of liquor and non-liquor products in the grocery store. </li>
+                  </ul>
+                  
+              </section>
+            <section>
+                <app-file-uploader *ngIf="applicationId" documentType="Grocery Declaration" fileTypes="FILE MUST BE IN PDF FORMAT."
+                                   [enableFileDeletion]="true"
+                                   [multipleFiles]="false" entityName="application" [useDocumentTypeForName]="true"
+                                   (numberOfUploadedFiles)="uploadedGroceryDocuments = $event" [entityId]="applicationId"
+                                   [uploadHeader]="'TO UPLOAD GROCERY DECLARATION, DRAG FILES HERE OR'">
+                </app-file-uploader>
+              </section>
           
         </div>
 
+      </div>
+    
+      <div class="ngtest-zoning" *ngIf="showZoning()">
+        <hr>
+        <label for="">Proof of Zoning</label>
+        <br>
+        <section>
+          <p>Please provide proof from your local government that the proposed location has been:</p>
+              <ul>
+                <li>appropriately zoned to operate a {{application?.licenseType}} licence, or</li>
+                <li>is in the process of being appropriately zoned</li>
+              </ul>
+              <p>You are responsible for obtaining the appropriate zoning from your local 
+                government to operate a {{application?.licenseType}} licence at your proposed location. 
+                Prior to issuing a licence at the new location, LCRB will require confirmation 
+                from your local government that the location is zoned appropriately to operate 
+                a WS licence. </p>
+        </section>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Zoning" fileTypes="FILE MUST BE IN PDF FORMAT."
+                             [enableFileDeletion]="application?.applicationType?.proofofZoning === FormControlState.Show"
+                             [multipleFiles]="false" entityName="application" [useDocumentTypeForName]="true"
+                             (numberOfUploadedFiles)="uploadedZoningDocuments = $event" [entityId]="applicationId"
+                             [uploadHeader]="'TO UPLOAD ZONING DOCUMENTS, DRAG FILES HERE OR'">
+          </app-file-uploader>
+        </section>
       </div>
 
       <!-- Hours of Sale -->
@@ -1065,12 +1121,27 @@
         <br>
         <p>
           The ‘save for later’ feature allows applicants to re-access an application in progress. 
-          For questions on the LCRB application process, please contact: <a href="javascript: void(0);">lcrbcannabis@gov.bc.ca</a>.
-        </p>
+          For questions on the LCRB application process, please contact:</p>
+          <div *ngIf="application?.licenseType === 'Cannabis Retail Store'">
+          <a href="javascript: void(0);">lcrbcannabis@gov.bc.ca</a>
+        </div>
+        <div *ngIf="application?.licenseType !== 'Cannabis Retail Store'">
+            <a href="javascript: void(0);">LCRBLiquor@gov.bc.ca</a>
+          </div>
+        
       </div>
 
+      <!-- Next Steps -->
+      <h3 *ngIf="htmlContent?.nextSteps" class="blue-header">
+          What happens next
+        </h3>
+        <section *ngIf="htmlContent?.nextSteps" class="padded-section">
+          <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.nextSteps"></div>
+        </section>
+
+
       <section style="position: relative; margin-top: 20px;">
-        <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
+        <button class="btn btn-primary" style="margin-right:10px;" (click)="saveForLater()">
           <span>
             <i class="fa fa-save" style="color: #fff;"></i>
             SAVE FOR LATER

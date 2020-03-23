@@ -1,6 +1,6 @@
 
 import { filter, takeWhile, catchError, mergeMap, delay } from 'rxjs/operators';
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
@@ -60,6 +60,8 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
 
   establishmentWatchWords: KeyValue<string, boolean>[];
   application: Application;
+  @Input() skipPayment: boolean = false;
+  @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('mainForm', { static: false }) mainForm: FileUploaderComponent;
   @ViewChild('financialIntegrityDocuments', { static: false }) financialIntegrityDocuments: FileUploaderComponent;
   @ViewChild('supportingDocuments', { static: false }) supportingDocuments: FileUploaderComponent;
@@ -69,6 +71,7 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
   savedFormData: any;
   applicationId: string;
   busy: Subscription;
+  busyPromise: Promise<any>;
   accountId: string;
   payMethod: string;
   validationMessages: any[];
@@ -138,7 +141,7 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       contactPersonFirstName: ['', Validators.required],
       contactPersonLastName: ['', Validators.required],
       contactPersonRole: [''],
-      contactPersonEmail: ['', Validators.required],
+      //contactPersonEmail: ['', Validators.required],
       contactPersonPhone: ['', Validators.required],
       establishmentAddressStreet: ['', Validators.required],
       establishmentAddressCity: ['', Validators.required],
@@ -148,7 +151,7 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
       applyAsIndigenousNation: [false],
-      federalProducerNames: ['', Validators.required],
+      //federalProducerNames: ['', Validators.required],
       applicantType: ['']
            
     });
@@ -253,7 +256,9 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
     }
 
     if (this.application.applicationType.name !== ApplicationTypeNames.Marketer) {
-      this.form.get('federalProducerNames').disable();
+      if (this.form.get('federalProducerNames')) {
+        this.form.get('federalProducerNames').disable();
+      }      
     }
     
   }
@@ -349,6 +354,14 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       }));
   }
 
+  saveForLater() {
+    this.busyPromise = this.save(true)
+            .toPromise()
+            .then(() => {
+              this.router.navigateByUrl('/dashboard');
+            });
+  }
+
   prepareTiedHouseSaveRequest(_tiedHouseData) {
     if (!this.application.tiedHouse) {
       return of(null);
@@ -373,13 +386,15 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
   submit_application() {
     if (!this.isValid()) {
       this.showValidationMessages = true;
-    } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
+    } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {      
       this.submitPayment();
+      this.saveComplete.emit(true);
     } else {
       this.busy = this.save(true)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
-          if (result) {
+          if (result) {            
+            this.saveComplete.emit(true);
             this.submitPayment();
           }
         });
@@ -390,10 +405,12 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
+    if (this.skipPayment) {
+      return;
+    }
     this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(res => {
-        const jsonUrl = res;
+      .subscribe(jsonUrl => {
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
       }, err => {

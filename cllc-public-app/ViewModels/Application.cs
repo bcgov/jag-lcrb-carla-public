@@ -472,6 +472,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string IndigenousNationId { get; set; }
         public string FederalProducerNames { get; set; }
         public string Description1 { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? RenewalDUI { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? RenewalThirdParty { get; set; }
 
 
         public System.DateTimeOffset? Establishmentopeningdate { get; set; }
