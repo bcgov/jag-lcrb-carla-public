@@ -1,9 +1,9 @@
-﻿Feature: CateringApplication_privatecorp
+﻿Feature: CateringApplication_indigenousnation
     As a logged in business user
-    I want to submit a Catering Application for a private corporation
+    I want to submit a Catering Application for an indigenous nation
 
 Scenario: Start Application
-    Given I am logged in to the dashboard as a private corporation
+    Given I am logged in to the dashboard as an indigenous nation
     And I click on the Catering Start Application button
     And I review the account profile
     And I review the organization structure
