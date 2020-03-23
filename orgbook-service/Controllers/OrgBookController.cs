@@ -248,5 +248,38 @@ namespace Gov.Lclb.Cllb.OrgbookService
                 Success = true
             };
         }
+
+        public override async Task<MessageResult> CompanyExistsInOrgbook(CompanyNameRequest request, ServerCallContext context)
+        {
+            var result = await _orgbookClient.SearchCompanyName(request.CompanyName);
+            return new MessageResult() {
+                Success = result != null
+            };
+        }
+
+        public override async Task<CompaniesNameResult> CompaniesExistInOrgbook(CompaniesNameRequest request, ServerCallContext context)
+        {
+            List<bool> results = new List<bool>();
+            foreach(string name in request.CompanyNames)
+            {
+                CompanyNameRequest req = new CompanyNameRequest()
+                {
+                    CompanyName = name
+                };
+                MessageResult exists = await this.CompanyExistsInOrgbook(req, context);
+                if (exists.Success)
+                {
+                    results.Add(true);
+                }
+                else
+                {
+                    results.Add(false);
+                }
+            }
+            CompaniesNameResult result = new CompaniesNameResult();
+            result.CompanyNames.AddRange(request.CompanyNames);
+            result.Results.AddRange(results);
+            return result;
+        }
     }
 }

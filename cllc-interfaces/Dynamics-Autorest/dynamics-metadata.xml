@@ -1245,6 +1245,7 @@
         <NavigationProperty Name="adoxio_licenseechangelog_ShareholderBusinessAccount" Type="Collection(mscrm.adoxio_licenseechangelog)" Partner="adoxio_ShareholderBusinessAccount" />
         <NavigationProperty Name="adoxio_account_adoxio_event_Licensee" Type="Collection(mscrm.adoxio_event)" Partner="adoxio_Account" />
         <NavigationProperty Name="adoxio_thirdpartyoperator_licences" Type="Collection(mscrm.adoxio_licences)" Partner="adoxio_ThirdPartyOperatorId" />
+        <NavigationProperty Name="adoxio_account_adoxio_licences_ProposedOperator" Type="Collection(mscrm.adoxio_licences)" Partner="adoxio_ProposedOperator" />
         <Annotation Term="Org.OData.Core.V1.Description" String="Business that represents a customer or potential customer. The company that is billed in business transactions." />
       </EntityType>
       <EntityType Name="actioncard" BaseType="mscrm.crmbaseentity">
@@ -3400,10 +3401,20 @@
         <Property Name="adoxio_previouslicenceapplicationdetails" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="_adoxio_casemanagersupervisor_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="adoxio_renewalvalidinterest" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_servicehourssaturdayopen" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_checklistyellowpinned" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_adoxio_inspector_value" Type="Edm.Guid">
@@ -3550,6 +3561,9 @@
         <Property Name="adoxio_addresscity" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_servicehoursthursdayopen" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_dateaipdecisionlettersent" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3562,9 +3576,6 @@
         <Property Name="adoxio_inspectionchecklistdate" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="Used to store the date that the Inspector conducted the checklist and the notes were added to the parent application. Applicable only for AIP inspections." />
         </Property>
-        <Property Name="adoxio_fitandpropercomplete" Type="Edm.Boolean">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
         <Property Name="adoxio_initialcapassessmentdate" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3574,7 +3585,7 @@
         <Property Name="adoxio_checklistfinancialcheckpassed" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_datelicenceapproved" Type="Edm.DateTimeOffset">
+        <Property Name="adoxio_checklistzoningassessed" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_paymentrecieved" Type="Edm.Boolean">
@@ -3605,7 +3616,10 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
-        <Property Name="adoxio_securityclearancegenerateddate" Type="Edm.DateTimeOffset">
+        <Property Name="adoxio_dateappealed" Type="Edm.Date">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_fitandpropercomplete" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_jobnumber" Type="Edm.String" Unicode="false">
@@ -3618,6 +3632,9 @@
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_establishmentotheroption2" Type="Edm.Boolean">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_zoningstatus" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_uploadeddriversabstract" Type="Edm.Int32">
@@ -3681,6 +3698,9 @@
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_separationissuesresult" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_checklistpsalettersent" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_checklistaipdecisionmade" Type="Edm.Int32">
@@ -3751,13 +3771,6 @@
         <Property Name="adoxio_isreadystorage" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="_adoxio_casemanagersupervisor_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
         <Property Name="adoxio_checklistkeypersonnelbuilt" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3815,9 +3828,6 @@
         <Property Name="adoxio_servicehourssundayclose" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_servicehoursthursdayopen" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
         <Property Name="adoxio_ruralagencystoreappointment" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3843,6 +3853,9 @@
           <Annotation Term="Org.OData.Core.V1.Permissions">
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
+        </Property>
+        <Property Name="adoxio_datelicenceapproved" Type="Edm.DateTimeOffset">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_licencefeeinvoicepaid" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -3948,6 +3961,9 @@
         <Property Name="adoxio_daterefused" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_checklistoldlocationconfirmedinactive" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_email" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3975,7 +3991,7 @@
         <Property Name="adoxio_checklistsitemapassess" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_establishmentaddresspostalcode" Type="Edm.String" Unicode="false">
+        <Property Name="adoxio_checklistmapupdated" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_sitemapresult" Type="Edm.Int32">
@@ -4086,9 +4102,6 @@
         <Property Name="adoxio_initialcapassessmenttrigger" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_dateappealed" Type="Edm.Date">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
         <Property Name="adoxio_checklistlicencefeepaid" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
         </Property>
@@ -4104,10 +4117,16 @@
         <Property Name="adoxio_renewalunreportedsaleofbusiness" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_securityclearancegenerateddate" Type="Edm.DateTimeOffset">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_checklistsecuritiesregister" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_investigationstatuscomment" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_checklistexecutedleasereceived" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_paymentmethod" Type="Edm.Int32">
@@ -4165,6 +4184,9 @@
         <Property Name="adoxio_checklistassociateslist" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_checklistotherapplicationschecked" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_isreadyworkers" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -4210,6 +4232,9 @@
         <Property Name="adoxio_checklistlgindefined" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_checklistzoninginprogress" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_hastiedhouseassociations" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -4241,6 +4266,9 @@
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_previouslicenceapplication" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_establishmentaddresspostalcode" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_owningteam_value" Type="Edm.Guid">
@@ -4387,6 +4415,7 @@
         <NavigationProperty Name="bpf_adoxio_application_adoxio_applicationstructurechangev1" Type="Collection(mscrm.adoxio_applicationstructurechangev1)" Partner="bpf_adoxio_applicationid" />
         <NavigationProperty Name="bpf_adoxio_application_adoxio_applicationtransferownershipv1" Type="Collection(mscrm.adoxio_applicationtransferownershipv1)" Partner="bpf_adoxio_applicationid" />
         <NavigationProperty Name="bpf_adoxio_application_adoxio_applicationliquorbpf" Type="Collection(mscrm.adoxio_applicationliquorbpf)" Partner="bpf_adoxio_applicationid" />
+        <NavigationProperty Name="adoxio_application_adoxio_endorsement_Application" Type="Collection(mscrm.adoxio_endorsement)" Partner="adoxio_Application" />
         <Annotation Term="Org.OData.Core.V1.Description" String="" />
       </EntityType>
       <EntityType Name="adoxio_applicationstructurechangev1" BaseType="mscrm.crmbaseentity">
@@ -6352,6 +6381,13 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
+        <Property Name="_adoxio_federalreportexportid_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="statuscode" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Reason for the status of the Cannabis Monthly Report" />
         </Property>
@@ -6452,6 +6488,9 @@
           <ReferentialConstraint Property="_adoxio_licenseeid_value" ReferencedProperty="accountid" />
         </NavigationProperty>
         <NavigationProperty Name="adoxio_cannabismonthlyreport_inventoryreports" Type="Collection(mscrm.adoxio_cannabisinventoryreport)" Partner="adoxio_MonthlyReportId" />
+        <NavigationProperty Name="adoxio_FederalReportExportId" Type="mscrm.adoxio_federalreportexport" Nullable="false" Partner="adoxio_federalreportexport_adoxio_cannabismonthlyreport_FederalReportExportId">
+          <ReferentialConstraint Property="_adoxio_federalreportexportid_value" ReferencedProperty="adoxio_federalreportexportid" />
+        </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="" />
       </EntityType>
       <EntityType Name="adoxio_cannabisproductadmin" BaseType="mscrm.crmbaseentity">
@@ -6792,9 +6831,6 @@
         <Property Name="adoxio_firstresponseduedate" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_checklistassignedtorm" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
         <Property Name="_adoxio_regionid_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for Region associated with Complaint." />
           <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
@@ -6820,17 +6856,16 @@
         <Property Name="adoxio_checklistallegedcontraventionsadded" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="_adoxio_storecityid_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for City / District associated with Complaint." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
+        <Property Name="adoxio_minorsreporting" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Used for the investigation report template." />
         </Property>
         <Property Name="adoxio_street2" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_email" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_complaintbasisaggregate" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="createdon" Type="Edm.DateTimeOffset">
@@ -6857,6 +6892,9 @@
         </Property>
         <Property Name="adoxio_tiedhouseinducements" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_complaintid" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for entity instances" />
         </Property>
         <Property Name="adoxio_jobnumber" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -6912,6 +6950,9 @@
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_complaintcategory" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_checklistassignedtorm" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_reasonfordismissal" Type="Edm.Int32">
@@ -6983,6 +7024,9 @@
         <Property Name="utcconversiontimezonecode" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Time zone code that was in use when the record was created." />
         </Property>
+        <Property Name="adoxio_weaponsreporting" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Used for the investigation report template." />
+        </Property>
         <Property Name="_adoxio_cityid_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for City / District associated with Complaint." />
           <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
@@ -7041,10 +7085,7 @@
         <Property Name="adoxio_delegategmcomments" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_complaintid" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for entity instances" />
-        </Property>
-        <Property Name="adoxio_iswaiversigned" Type="Edm.Int32">
+        <Property Name="adoxio_contraventionnumberaggregate" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_intoxicatedpatrons" Type="Edm.Boolean">
@@ -7093,6 +7134,13 @@
         <Property Name="importsequencenumber" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Sequence number of the import that created this record." />
         </Property>
+        <Property Name="_adoxio_storecityid_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for City / District associated with Complaint." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="_modifiedonbehalfby_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the delegate user who modified the record." />
           <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
@@ -7115,6 +7163,9 @@
         </Property>
         <Property Name="statecode" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Status of the Complaint" />
+        </Property>
+        <Property Name="adoxio_iswaiversigned" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_investigationstatus" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -9227,6 +9278,327 @@
         </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="" />
       </EntityType>
+      <EntityType Name="adoxio_endorsement" BaseType="mscrm.crmbaseentity">
+        <Key>
+          <PropertyRef Name="adoxio_endorsementid" />
+        </Key>
+        <Property Name="_owninguser_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the user that owns the record." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="importsequencenumber" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Sequence number of the import that created this record." />
+        </Property>
+        <Property Name="adoxio_name" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="The name of the custom entity." />
+        </Property>
+        <Property Name="_createdby_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who created the record." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="_owningbusinessunit_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the business unit that owns the record" />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="modifiedon" Type="Edm.DateTimeOffset">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time when the record was modified." />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="utcconversiontimezonecode" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Time zone code that was in use when the record was created." />
+        </Property>
+        <Property Name="statecode" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Status of the Endorsement" />
+        </Property>
+        <Property Name="_owningteam_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the team that owns the record." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="createdon" Type="Edm.DateTimeOffset">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time when the record was created." />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="_modifiedonbehalfby_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the delegate user who modified the record." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="statuscode" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Reason for the status of the Endorsement" />
+        </Property>
+        <Property Name="overriddencreatedon" Type="Edm.DateTimeOffset">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time that the record was migrated." />
+        </Property>
+        <Property Name="_adoxio_endorsementtype_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="_modifiedby_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who modified the record." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="adoxio_endorsementid" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for entity instances" />
+        </Property>
+        <Property Name="timezoneruleversionnumber" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="For internal use only." />
+        </Property>
+        <Property Name="_adoxio_licence_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="_createdonbehalfby_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the delegate user who created the record." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="_ownerid_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Owner Id" />
+        </Property>
+        <Property Name="versionnumber" Type="Edm.Int64" ConcurrencyMode="Fixed">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Version Number" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="_adoxio_application_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <NavigationProperty Name="createdbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_endorsement_createdby">
+          <ReferentialConstraint Property="_createdby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="createdonbehalfbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_endorsement_createdonbehalfby">
+          <ReferentialConstraint Property="_createdonbehalfby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="modifiedbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_endorsement_modifiedby">
+          <ReferentialConstraint Property="_modifiedby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="modifiedonbehalfbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_endorsement_modifiedonbehalfby">
+          <ReferentialConstraint Property="_modifiedonbehalfby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="owninguser" Type="mscrm.systemuser" Nullable="false" Partner="user_adoxio_endorsement">
+          <ReferentialConstraint Property="_owninguser_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="owningteam" Type="mscrm.team" Nullable="false" Partner="team_adoxio_endorsement">
+          <ReferentialConstraint Property="_owningteam_value" ReferencedProperty="teamid" />
+        </NavigationProperty>
+        <NavigationProperty Name="ownerid" Type="mscrm.principal" Nullable="false" Partner="owner_adoxio_endorsement">
+          <ReferentialConstraint Property="_ownerid_value" ReferencedProperty="ownerid" />
+        </NavigationProperty>
+        <NavigationProperty Name="owningbusinessunit" Type="mscrm.businessunit" Nullable="false" Partner="business_unit_adoxio_endorsement">
+          <ReferentialConstraint Property="_owningbusinessunit_value" ReferencedProperty="businessunitid" />
+        </NavigationProperty>
+        <NavigationProperty Name="adoxio_endorsement_SyncErrors" Type="Collection(mscrm.syncerror)" Partner="regardingobjectid_adoxio_endorsement" />
+        <NavigationProperty Name="adoxio_endorsement_DuplicateMatchingRecord" Type="Collection(mscrm.duplicaterecord)" Partner="duplicaterecordid_adoxio_endorsement" />
+        <NavigationProperty Name="adoxio_endorsement_DuplicateBaseRecord" Type="Collection(mscrm.duplicaterecord)" Partner="baserecordid_adoxio_endorsement" />
+        <NavigationProperty Name="adoxio_endorsement_SharePointDocumentLocations" Type="Collection(mscrm.sharepointdocumentlocation)" Partner="regardingobjectid_adoxio_endorsement" />
+        <NavigationProperty Name="adoxio_endorsement_AsyncOperations" Type="Collection(mscrm.asyncoperation)" Partner="regardingobjectid_adoxio_endorsement" />
+        <NavigationProperty Name="adoxio_endorsement_BulkDeleteFailures" Type="Collection(mscrm.bulkdeletefailure)" Partner="regardingobjectid_adoxio_endorsement" />
+        <NavigationProperty Name="adoxio_EndorsementType" Type="mscrm.adoxio_endorsementtype" Nullable="false" Partner="adoxio_endorsementtype_adoxio_endorsement_EndorsementType">
+          <ReferentialConstraint Property="_adoxio_endorsementtype_value" ReferencedProperty="adoxio_endorsementtypeid" />
+        </NavigationProperty>
+        <NavigationProperty Name="adoxio_Application" Type="mscrm.adoxio_application" Nullable="false" Partner="adoxio_application_adoxio_endorsement_Application">
+          <ReferentialConstraint Property="_adoxio_application_value" ReferencedProperty="adoxio_applicationid" />
+        </NavigationProperty>
+        <NavigationProperty Name="adoxio_Licence" Type="mscrm.adoxio_licences" Nullable="false" Partner="adoxio_licences_adoxio_endorsement_Licence">
+          <ReferentialConstraint Property="_adoxio_licence_value" ReferencedProperty="adoxio_licencesid" />
+        </NavigationProperty>
+        <Annotation Term="Org.OData.Core.V1.Description" String="" />
+      </EntityType>
+      <EntityType Name="adoxio_endorsementtype_adoxio_licencetype" BaseType="mscrm.crmbaseentity">
+        <Key>
+          <PropertyRef Name="adoxio_endorsementtype_adoxio_licencetypeid" />
+        </Key>
+        <Property Name="adoxio_endorsementtypeid" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="versionnumber" Type="Edm.Int64">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="adoxio_endorsementtype_adoxio_licencetypeid" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="adoxio_licencetypeid" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Annotation Term="Org.OData.Core.V1.Description" String="" />
+      </EntityType>
+      <EntityType Name="adoxio_endorsementtype" BaseType="mscrm.crmbaseentity">
+        <Key>
+          <PropertyRef Name="adoxio_endorsementtypeid" />
+        </Key>
+        <Property Name="timezoneruleversionnumber" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="For internal use only." />
+        </Property>
+        <Property Name="versionnumber" Type="Edm.Int64" ConcurrencyMode="Fixed">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Version Number" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="importsequencenumber" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Sequence number of the import that created this record." />
+        </Property>
+        <Property Name="adoxio_endorsementtypeid" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for entity instances" />
+        </Property>
+        <Property Name="_modifiedby_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who modified the record." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="_owninguser_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the user that owns the record." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="_modifiedonbehalfby_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the delegate user who modified the record." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="statecode" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Status of the Endorsement Type" />
+        </Property>
+        <Property Name="_owningteam_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the team that owns the record." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="adoxio_name" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="The name of the custom entity." />
+        </Property>
+        <Property Name="overriddencreatedon" Type="Edm.DateTimeOffset">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time that the record was migrated." />
+        </Property>
+        <Property Name="_ownerid_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Owner Id" />
+        </Property>
+        <Property Name="utcconversiontimezonecode" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Time zone code that was in use when the record was created." />
+        </Property>
+        <Property Name="modifiedon" Type="Edm.DateTimeOffset">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time when the record was modified." />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="_owningbusinessunit_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the business unit that owns the record" />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="_createdby_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who created the record." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="_createdonbehalfby_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the delegate user who created the record." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="statuscode" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Reason for the status of the Endorsement Type" />
+        </Property>
+        <Property Name="createdon" Type="Edm.DateTimeOffset">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time when the record was created." />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <NavigationProperty Name="createdbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_endorsementtype_createdby">
+          <ReferentialConstraint Property="_createdby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="createdonbehalfbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_endorsementtype_createdonbehalfby">
+          <ReferentialConstraint Property="_createdonbehalfby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="modifiedbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_endorsementtype_modifiedby">
+          <ReferentialConstraint Property="_modifiedby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="modifiedonbehalfbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_endorsementtype_modifiedonbehalfby">
+          <ReferentialConstraint Property="_modifiedonbehalfby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="owninguser" Type="mscrm.systemuser" Nullable="false" Partner="user_adoxio_endorsementtype">
+          <ReferentialConstraint Property="_owninguser_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="owningteam" Type="mscrm.team" Nullable="false" Partner="team_adoxio_endorsementtype">
+          <ReferentialConstraint Property="_owningteam_value" ReferencedProperty="teamid" />
+        </NavigationProperty>
+        <NavigationProperty Name="ownerid" Type="mscrm.principal" Nullable="false" Partner="owner_adoxio_endorsementtype">
+          <ReferentialConstraint Property="_ownerid_value" ReferencedProperty="ownerid" />
+        </NavigationProperty>
+        <NavigationProperty Name="owningbusinessunit" Type="mscrm.businessunit" Nullable="false" Partner="business_unit_adoxio_endorsementtype">
+          <ReferentialConstraint Property="_owningbusinessunit_value" ReferencedProperty="businessunitid" />
+        </NavigationProperty>
+        <NavigationProperty Name="adoxio_endorsementtype_SyncErrors" Type="Collection(mscrm.syncerror)" Partner="regardingobjectid_adoxio_endorsementtype" />
+        <NavigationProperty Name="adoxio_endorsementtype_DuplicateMatchingRecord" Type="Collection(mscrm.duplicaterecord)" Partner="duplicaterecordid_adoxio_endorsementtype" />
+        <NavigationProperty Name="adoxio_endorsementtype_DuplicateBaseRecord" Type="Collection(mscrm.duplicaterecord)" Partner="baserecordid_adoxio_endorsementtype" />
+        <NavigationProperty Name="adoxio_endorsementtype_AsyncOperations" Type="Collection(mscrm.asyncoperation)" Partner="regardingobjectid_adoxio_endorsementtype" />
+        <NavigationProperty Name="adoxio_endorsementtype_BulkDeleteFailures" Type="Collection(mscrm.bulkdeletefailure)" Partner="regardingobjectid_adoxio_endorsementtype" />
+        <NavigationProperty Name="adoxio_endorsementtype_adoxio_licencetype" Type="Collection(mscrm.adoxio_licencetype)" Partner="adoxio_endorsementtype_adoxio_licencetype" />
+        <NavigationProperty Name="adoxio_endorsementtype_adoxio_endorsement_EndorsementType" Type="Collection(mscrm.adoxio_endorsement)" Partner="adoxio_EndorsementType" />
+        <Annotation Term="Org.OData.Core.V1.Description" String="" />
+      </EntityType>
       <EntityType Name="adoxio_establishment" BaseType="mscrm.crmbaseentity">
         <Key>
           <PropertyRef Name="adoxio_establishmentid" />
@@ -10405,6 +10777,9 @@
         <Property Name="adoxio_exportcompleted" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_exporttriggered" Type="Edm.DateTimeOffset">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="createdon" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="Date and time when the record was created." />
           <Annotation Term="Org.OData.Core.V1.Permissions">
@@ -10532,6 +10907,7 @@
         <NavigationProperty Name="adoxio_federalreportexport_SharePointDocumentLocations" Type="Collection(mscrm.sharepointdocumentlocation)" Partner="regardingobjectid_adoxio_federalreportexport" />
         <NavigationProperty Name="adoxio_federalreportexport_AsyncOperations" Type="Collection(mscrm.asyncoperation)" Partner="regardingobjectid_adoxio_federalreportexport" />
         <NavigationProperty Name="adoxio_federalreportexport_BulkDeleteFailures" Type="Collection(mscrm.bulkdeletefailure)" Partner="regardingobjectid_adoxio_federalreportexport" />
+        <NavigationProperty Name="adoxio_federalreportexport_adoxio_cannabismonthlyreport_FederalReportExportId" Type="Collection(mscrm.adoxio_cannabismonthlyreport)" Partner="adoxio_FederalReportExportId" />
         <Annotation Term="Org.OData.Core.V1.Description" String="" />
       </EntityType>
       <EntityType Name="adoxio_fiainvestigationlog" BaseType="mscrm.crmbaseentity">
@@ -13070,6 +13446,9 @@
         <Property Name="adoxio_expiryyear" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_tporequestinprogress" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_effectiveyear" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -13103,6 +13482,9 @@
         </Property>
         <Property Name="adoxio_name" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="The name of the custom entity." />
+        </Property>
+        <Property Name="adoxio_tporequested" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_adoxio_licencetype_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -13190,10 +13572,14 @@
         <Property Name="adoxio_orgbookcredentialid" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_licencenumber" Type="Edm.String" Unicode="false">
+        <Property Name="_adoxio_proposedoperator_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
         </Property>
-        <Property Name="adoxio_establishmentaddressstreet" Type="Edm.String" Unicode="false">
+        <Property Name="adoxio_licencenumber" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_adoxio_licencee_value" Type="Edm.Guid">
@@ -13216,6 +13602,9 @@
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_licenceprintname" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_establishmentaddressstreet" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_modifiedby_value" Type="Edm.Guid">
@@ -13332,6 +13721,10 @@
           <ReferentialConstraint Property="_adoxio_thirdpartyoperatorid_value" ReferencedProperty="accountid" />
         </NavigationProperty>
         <NavigationProperty Name="adoxio_licences_adoxio_licenceldbordertotalhistory_Licence" Type="Collection(mscrm.adoxio_licenceldbordertotalhistory)" Partner="adoxio_Licence" />
+        <NavigationProperty Name="adoxio_ProposedOperator" Type="mscrm.account" Nullable="false" Partner="adoxio_account_adoxio_licences_ProposedOperator">
+          <ReferentialConstraint Property="_adoxio_proposedoperator_value" ReferencedProperty="accountid" />
+        </NavigationProperty>
+        <NavigationProperty Name="adoxio_licences_adoxio_endorsement_Licence" Type="Collection(mscrm.adoxio_endorsement)" Partner="adoxio_Licence" />
         <Annotation Term="Org.OData.Core.V1.Description" String="This entity is created for illustration purpose temporary.  Further schema will be created in future" />
       </EntityType>
       <EntityType Name="adoxio_licencetype" BaseType="mscrm.crmbaseentity">
@@ -13506,6 +13899,7 @@
         <NavigationProperty Name="adoxio_licencetype_adoxio_applicationtype_LicenceType" Type="Collection(mscrm.adoxio_applicationtype)" Partner="adoxio_LicenceType" />
         <NavigationProperty Name="adoxio_licencetype_adoxio_inspectorcommentsrollup_LicenceType" Type="Collection(mscrm.adoxio_inspectorcommentsrollup)" Partner="adoxio_LicenceType" />
         <NavigationProperty Name="adoxio_licencetype_inspections" Type="Collection(mscrm.incident)" Partner="adoxio_LicenceTypeId" />
+        <NavigationProperty Name="adoxio_endorsementtype_adoxio_licencetype" Type="Collection(mscrm.adoxio_endorsementtype)" Partner="adoxio_endorsementtype_adoxio_licencetype" />
         <Annotation Term="Org.OData.Core.V1.Description" String="" />
       </EntityType>
       <EntityType Name="adoxio_licencetypes_applicationtypes" BaseType="mscrm.crmbaseentity">
@@ -18921,6 +19315,12 @@
         <NavigationProperty Name="regardingobjectid_adoxio_licenceldbordertotalhistory" Type="mscrm.adoxio_licenceldbordertotalhistory" Nullable="false" Partner="adoxio_licenceldbordertotalhistory_AsyncOperations">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_licenceldbordertotalhistoryid" />
         </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_adoxio_endorsementtype" Type="mscrm.adoxio_endorsementtype" Nullable="false" Partner="adoxio_endorsementtype_AsyncOperations">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_endorsementtypeid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_adoxio_endorsement" Type="mscrm.adoxio_endorsement" Nullable="false" Partner="adoxio_endorsement_AsyncOperations">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_endorsementid" />
+        </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="Process whose execution can proceed independently or in the background." />
       </EntityType>
       <EntityType Name="attachment" BaseType="mscrm.crmbaseentity">
@@ -20951,6 +21351,12 @@
         <NavigationProperty Name="regardingobjectid_adoxio_licenceldbordertotalhistory" Type="mscrm.adoxio_licenceldbordertotalhistory" Nullable="false" Partner="adoxio_licenceldbordertotalhistory_BulkDeleteFailures">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_licenceldbordertotalhistoryid" />
         </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_adoxio_endorsementtype" Type="mscrm.adoxio_endorsementtype" Nullable="false" Partner="adoxio_endorsementtype_BulkDeleteFailures">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_endorsementtypeid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_adoxio_endorsement" Type="mscrm.adoxio_endorsement" Nullable="false" Partner="adoxio_endorsement_BulkDeleteFailures">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_endorsementid" />
+        </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="Record that was not deleted during a bulk deletion job." />
       </EntityType>
       <EntityType Name="bulkdeleteoperation" BaseType="mscrm.crmbaseentity">
@@ -21853,6 +22259,8 @@
         <NavigationProperty Name="business_unit_adoxio_federalreportexport" Type="Collection(mscrm.adoxio_federalreportexport)" Partner="owningbusinessunit" />
         <NavigationProperty Name="business_unit_adoxio_applicationtypefeeschedule" Type="Collection(mscrm.adoxio_applicationtypefeeschedule)" Partner="owningbusinessunit" />
         <NavigationProperty Name="business_unit_adoxio_licenceldbordertotalhistory" Type="Collection(mscrm.adoxio_licenceldbordertotalhistory)" Partner="owningbusinessunit" />
+        <NavigationProperty Name="business_unit_adoxio_endorsementtype" Type="Collection(mscrm.adoxio_endorsementtype)" Partner="owningbusinessunit" />
+        <NavigationProperty Name="business_unit_adoxio_endorsement" Type="Collection(mscrm.adoxio_endorsement)" Partner="owningbusinessunit" />
         <Annotation Term="Org.OData.Core.V1.Description" String="Business, division, or department in the Microsoft Dynamics 365 database." />
       </EntityType>
       <EntityType Name="calendarrule" BaseType="mscrm.crmbaseentity">
@@ -24778,6 +25186,9 @@
         <Property Name="yomifirstname" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="Type the phonetic spelling of the contact's first name, if the name is specified in Japanese, to make sure the name is pronounced correctly in phone calls with the contact." />
         </Property>
+        <Property Name="adoxio_cascomplete" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_lastsecurityupdate" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -25324,6 +25735,9 @@
           <Annotation Term="Org.OData.Core.V1.Description" String="Select the primary address type." />
         </Property>
         <Property Name="adoxio_otheridtype" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_casdatesubmitted" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_canattendeducationsessions" Type="Edm.Boolean">
@@ -28161,6 +28575,18 @@
         </NavigationProperty>
         <NavigationProperty Name="baserecordid_adoxio_licenceldbordertotalhistory" Type="mscrm.adoxio_licenceldbordertotalhistory" Nullable="false" Partner="adoxio_licenceldbordertotalhistory_DuplicateBaseRecord">
           <ReferentialConstraint Property="_baserecordid_value" ReferencedProperty="adoxio_licenceldbordertotalhistoryid" />
+        </NavigationProperty>
+        <NavigationProperty Name="duplicaterecordid_adoxio_endorsementtype" Type="mscrm.adoxio_endorsementtype" Nullable="false" Partner="adoxio_endorsementtype_DuplicateMatchingRecord">
+          <ReferentialConstraint Property="_duplicaterecordid_value" ReferencedProperty="adoxio_endorsementtypeid" />
+        </NavigationProperty>
+        <NavigationProperty Name="baserecordid_adoxio_endorsementtype" Type="mscrm.adoxio_endorsementtype" Nullable="false" Partner="adoxio_endorsementtype_DuplicateBaseRecord">
+          <ReferentialConstraint Property="_baserecordid_value" ReferencedProperty="adoxio_endorsementtypeid" />
+        </NavigationProperty>
+        <NavigationProperty Name="duplicaterecordid_adoxio_endorsement" Type="mscrm.adoxio_endorsement" Nullable="false" Partner="adoxio_endorsement_DuplicateMatchingRecord">
+          <ReferentialConstraint Property="_duplicaterecordid_value" ReferencedProperty="adoxio_endorsementid" />
+        </NavigationProperty>
+        <NavigationProperty Name="baserecordid_adoxio_endorsement" Type="mscrm.adoxio_endorsement" Nullable="false" Partner="adoxio_endorsement_DuplicateBaseRecord">
+          <ReferentialConstraint Property="_baserecordid_value" ReferencedProperty="adoxio_endorsementid" />
         </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="Potential duplicate record." />
       </EntityType>
@@ -42702,6 +43128,8 @@
         <NavigationProperty Name="owner_adoxio_federalreportexport" Type="Collection(mscrm.adoxio_federalreportexport)" Partner="ownerid" />
         <NavigationProperty Name="owner_adoxio_applicationtypefeeschedule" Type="Collection(mscrm.adoxio_applicationtypefeeschedule)" Partner="ownerid" />
         <NavigationProperty Name="owner_adoxio_licenceldbordertotalhistory" Type="Collection(mscrm.adoxio_licenceldbordertotalhistory)" Partner="ownerid" />
+        <NavigationProperty Name="owner_adoxio_endorsementtype" Type="Collection(mscrm.adoxio_endorsementtype)" Partner="ownerid" />
+        <NavigationProperty Name="owner_adoxio_endorsement" Type="Collection(mscrm.adoxio_endorsement)" Partner="ownerid" />
         <Annotation Term="Org.OData.Core.V1.Description" String="Group of undeleted system users and undeleted teams. Owners can be used to control access to specific objects." />
       </EntityType>
       <EntityType Name="personaldocumenttemplate" BaseType="mscrm.crmbaseentity">
@@ -51941,6 +52369,9 @@
         <NavigationProperty Name="regardingobjectid_adoxio_federalreportexport" Type="mscrm.adoxio_federalreportexport" Nullable="false" Partner="adoxio_federalreportexport_SharePointDocumentLocations">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_federalreportexportid" />
         </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_adoxio_endorsement" Type="mscrm.adoxio_endorsement" Nullable="false" Partner="adoxio_endorsement_SharePointDocumentLocations">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_endorsementid" />
+        </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="Document libraries or folders on a SharePoint server from where documents can be managed in Microsoft Dynamics 365." />
       </EntityType>
       <EntityType Name="sharepointsite" BaseType="mscrm.crmbaseentity">
@@ -54649,6 +55080,12 @@
         <NavigationProperty Name="regardingobjectid_adoxio_licenceldbordertotalhistory" Type="mscrm.adoxio_licenceldbordertotalhistory" Nullable="false" Partner="adoxio_licenceldbordertotalhistory_SyncErrors">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_licenceldbordertotalhistoryid" />
         </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_adoxio_endorsementtype" Type="mscrm.adoxio_endorsementtype" Nullable="false" Partner="adoxio_endorsementtype_SyncErrors">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_endorsementtypeid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_adoxio_endorsement" Type="mscrm.adoxio_endorsement" Nullable="false" Partner="adoxio_endorsement_SyncErrors">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_endorsementid" />
+        </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="Failure reason and other detailed information for a record that failed to sync." />
       </EntityType>
       <EntityType Name="systemform" BaseType="mscrm.crmbaseentity">
@@ -56607,6 +57044,16 @@
         <NavigationProperty Name="lk_adoxio_licenceldbordertotalhistory_modifiedby" Type="Collection(mscrm.adoxio_licenceldbordertotalhistory)" Partner="modifiedbyname" />
         <NavigationProperty Name="lk_adoxio_licenceldbordertotalhistory_modifiedonbehalfby" Type="Collection(mscrm.adoxio_licenceldbordertotalhistory)" Partner="modifiedonbehalfbyname" />
         <NavigationProperty Name="user_adoxio_licenceldbordertotalhistory" Type="Collection(mscrm.adoxio_licenceldbordertotalhistory)" Partner="owninguser" />
+        <NavigationProperty Name="lk_adoxio_endorsementtype_createdby" Type="Collection(mscrm.adoxio_endorsementtype)" Partner="createdbyname" />
+        <NavigationProperty Name="lk_adoxio_endorsementtype_createdonbehalfby" Type="Collection(mscrm.adoxio_endorsementtype)" Partner="createdonbehalfbyname" />
+        <NavigationProperty Name="lk_adoxio_endorsementtype_modifiedby" Type="Collection(mscrm.adoxio_endorsementtype)" Partner="modifiedbyname" />
+        <NavigationProperty Name="lk_adoxio_endorsementtype_modifiedonbehalfby" Type="Collection(mscrm.adoxio_endorsementtype)" Partner="modifiedonbehalfbyname" />
+        <NavigationProperty Name="user_adoxio_endorsementtype" Type="Collection(mscrm.adoxio_endorsementtype)" Partner="owninguser" />
+        <NavigationProperty Name="lk_adoxio_endorsement_createdby" Type="Collection(mscrm.adoxio_endorsement)" Partner="createdbyname" />
+        <NavigationProperty Name="lk_adoxio_endorsement_createdonbehalfby" Type="Collection(mscrm.adoxio_endorsement)" Partner="createdonbehalfbyname" />
+        <NavigationProperty Name="lk_adoxio_endorsement_modifiedby" Type="Collection(mscrm.adoxio_endorsement)" Partner="modifiedbyname" />
+        <NavigationProperty Name="lk_adoxio_endorsement_modifiedonbehalfby" Type="Collection(mscrm.adoxio_endorsement)" Partner="modifiedonbehalfbyname" />
+        <NavigationProperty Name="user_adoxio_endorsement" Type="Collection(mscrm.adoxio_endorsement)" Partner="owninguser" />
         <Annotation Term="Org.OData.Core.V1.Description" String="Person with access to the Microsoft CRM system and who owns objects in the Microsoft CRM database." />
       </EntityType>
       <EntityType Name="systemusersyncmappingprofiles" BaseType="mscrm.crmbaseentity">
@@ -57153,6 +57600,8 @@
         <NavigationProperty Name="team_adoxio_federalreportexport" Type="Collection(mscrm.adoxio_federalreportexport)" Partner="owningteam" />
         <NavigationProperty Name="team_adoxio_applicationtypefeeschedule" Type="Collection(mscrm.adoxio_applicationtypefeeschedule)" Partner="owningteam" />
         <NavigationProperty Name="team_adoxio_licenceldbordertotalhistory" Type="Collection(mscrm.adoxio_licenceldbordertotalhistory)" Partner="owningteam" />
+        <NavigationProperty Name="team_adoxio_endorsementtype" Type="Collection(mscrm.adoxio_endorsementtype)" Partner="owningteam" />
+        <NavigationProperty Name="team_adoxio_endorsement" Type="Collection(mscrm.adoxio_endorsement)" Partner="owningteam" />
         <Annotation Term="Org.OData.Core.V1.Description" String="Collection of system users that routinely collaborate. Teams can be used to simplify record sharing and provide team members with common access to organization data when team members belong to different Business Units." />
       </EntityType>
       <EntityType Name="teamsyncattributemappingprofiles" BaseType="mscrm.crmbaseentity">
@@ -64400,6 +64849,7 @@
           <NavigationPropertyBinding Path="adoxio_licenseechangelog_ShareholderBusinessAccount" Target="adoxio_licenseechangelogs" />
           <NavigationPropertyBinding Path="adoxio_account_adoxio_event_Licensee" Target="adoxio_events" />
           <NavigationPropertyBinding Path="adoxio_thirdpartyoperator_licences" Target="adoxio_licenceses" />
+          <NavigationPropertyBinding Path="adoxio_account_adoxio_licences_ProposedOperator" Target="adoxio_licenceses" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -65023,6 +65473,7 @@
           <NavigationPropertyBinding Path="bpf_adoxio_application_adoxio_applicationstructurechangev1" Target="adoxio_applicationstructurechangev1s" />
           <NavigationPropertyBinding Path="bpf_adoxio_application_adoxio_applicationtransferownershipv1" Target="adoxio_applicationtransferownershipv1s" />
           <NavigationPropertyBinding Path="bpf_adoxio_application_adoxio_applicationliquorbpf" Target="adoxio_applicationliquorbpfs" />
+          <NavigationPropertyBinding Path="adoxio_application_adoxio_endorsement_Application" Target="adoxio_endorsements" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -65491,6 +65942,7 @@
           <NavigationPropertyBinding Path="adoxio_EstablishmentId" Target="adoxio_establishments" />
           <NavigationPropertyBinding Path="adoxio_LicenseeId" Target="accounts" />
           <NavigationPropertyBinding Path="adoxio_cannabismonthlyreport_inventoryreports" Target="adoxio_cannabisinventoryreports" />
+          <NavigationPropertyBinding Path="adoxio_FederalReportExportId" Target="adoxio_federalreportexports" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -66109,6 +66561,116 @@
             </Record>
           </Annotation>
         </EntitySet>
+        <EntitySet Name="adoxio_endorsements" EntityType="Microsoft.Dynamics.CRM.adoxio_endorsement">
+          <NavigationPropertyBinding Path="createdbyname" Target="systemusers" />
+          <NavigationPropertyBinding Path="createdonbehalfbyname" Target="systemusers" />
+          <NavigationPropertyBinding Path="modifiedbyname" Target="systemusers" />
+          <NavigationPropertyBinding Path="modifiedonbehalfbyname" Target="systemusers" />
+          <NavigationPropertyBinding Path="owninguser" Target="systemusers" />
+          <NavigationPropertyBinding Path="owningteam" Target="teams" />
+          <NavigationPropertyBinding Path="ownerid" Target="owners" />
+          <NavigationPropertyBinding Path="owningbusinessunit" Target="businessunits" />
+          <NavigationPropertyBinding Path="adoxio_endorsement_SyncErrors" Target="syncerrors" />
+          <NavigationPropertyBinding Path="adoxio_endorsement_DuplicateMatchingRecord" Target="duplicaterecords" />
+          <NavigationPropertyBinding Path="adoxio_endorsement_DuplicateBaseRecord" Target="duplicaterecords" />
+          <NavigationPropertyBinding Path="adoxio_endorsement_SharePointDocumentLocations" Target="sharepointdocumentlocations" />
+          <NavigationPropertyBinding Path="adoxio_endorsement_AsyncOperations" Target="asyncoperations" />
+          <NavigationPropertyBinding Path="adoxio_endorsement_BulkDeleteFailures" Target="bulkdeletefailures" />
+          <NavigationPropertyBinding Path="adoxio_EndorsementType" Target="adoxio_endorsementtypes" />
+          <NavigationPropertyBinding Path="adoxio_Application" Target="adoxio_applications" />
+          <NavigationPropertyBinding Path="adoxio_Licence" Target="adoxio_licenceses" />
+          <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
+          <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
+          <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
+            <Record>
+              <PropertyValue Property="Searchable" Bool="false" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.CountRestrictions">
+            <Record>
+              <PropertyValue Property="Countable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.NavigationRestrictions">
+            <Record>
+              <PropertyValue Property="Navigability">
+                <EnumMember>Org.OData.Capabilities.V1.NavigationType/Single</EnumMember>
+              </PropertyValue>
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
+            <Record>
+              <PropertyValue Property="Supported" Bool="true" />
+            </Record>
+          </Annotation>
+        </EntitySet>
+        <EntitySet Name="adoxio_endorsementtype_adoxio_licencetypeset" EntityType="Microsoft.Dynamics.CRM.adoxio_endorsementtype_adoxio_licencetype">
+          <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
+          <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
+          <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
+            <Record>
+              <PropertyValue Property="Searchable" Bool="false" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.CountRestrictions">
+            <Record>
+              <PropertyValue Property="Countable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.NavigationRestrictions">
+            <Record>
+              <PropertyValue Property="Navigability">
+                <EnumMember>Org.OData.Capabilities.V1.NavigationType/Single</EnumMember>
+              </PropertyValue>
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
+            <Record>
+              <PropertyValue Property="Supported" Bool="false" />
+            </Record>
+          </Annotation>
+        </EntitySet>
+        <EntitySet Name="adoxio_endorsementtypes" EntityType="Microsoft.Dynamics.CRM.adoxio_endorsementtype">
+          <NavigationPropertyBinding Path="createdbyname" Target="systemusers" />
+          <NavigationPropertyBinding Path="createdonbehalfbyname" Target="systemusers" />
+          <NavigationPropertyBinding Path="modifiedbyname" Target="systemusers" />
+          <NavigationPropertyBinding Path="modifiedonbehalfbyname" Target="systemusers" />
+          <NavigationPropertyBinding Path="owninguser" Target="systemusers" />
+          <NavigationPropertyBinding Path="owningteam" Target="teams" />
+          <NavigationPropertyBinding Path="ownerid" Target="owners" />
+          <NavigationPropertyBinding Path="owningbusinessunit" Target="businessunits" />
+          <NavigationPropertyBinding Path="adoxio_endorsementtype_SyncErrors" Target="syncerrors" />
+          <NavigationPropertyBinding Path="adoxio_endorsementtype_DuplicateMatchingRecord" Target="duplicaterecords" />
+          <NavigationPropertyBinding Path="adoxio_endorsementtype_DuplicateBaseRecord" Target="duplicaterecords" />
+          <NavigationPropertyBinding Path="adoxio_endorsementtype_AsyncOperations" Target="asyncoperations" />
+          <NavigationPropertyBinding Path="adoxio_endorsementtype_BulkDeleteFailures" Target="bulkdeletefailures" />
+          <NavigationPropertyBinding Path="adoxio_endorsementtype_adoxio_licencetype" Target="adoxio_licencetypes" />
+          <NavigationPropertyBinding Path="adoxio_endorsementtype_adoxio_endorsement_EndorsementType" Target="adoxio_endorsements" />
+          <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
+          <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
+          <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
+            <Record>
+              <PropertyValue Property="Searchable" Bool="false" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.CountRestrictions">
+            <Record>
+              <PropertyValue Property="Countable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.NavigationRestrictions">
+            <Record>
+              <PropertyValue Property="Navigability">
+                <EnumMember>Org.OData.Capabilities.V1.NavigationType/Single</EnumMember>
+              </PropertyValue>
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
+            <Record>
+              <PropertyValue Property="Supported" Bool="true" />
+            </Record>
+          </Annotation>
+        </EntitySet>
         <EntitySet Name="adoxio_establishments" EntityType="Microsoft.Dynamics.CRM.adoxio_establishment">
           <NavigationPropertyBinding Path="createdbyname" Target="systemusers" />
           <NavigationPropertyBinding Path="createdonbehalfbyname" Target="systemusers" />
@@ -66358,6 +66920,7 @@
           <NavigationPropertyBinding Path="adoxio_federalreportexport_SharePointDocumentLocations" Target="sharepointdocumentlocations" />
           <NavigationPropertyBinding Path="adoxio_federalreportexport_AsyncOperations" Target="asyncoperations" />
           <NavigationPropertyBinding Path="adoxio_federalreportexport_BulkDeleteFailures" Target="bulkdeletefailures" />
+          <NavigationPropertyBinding Path="adoxio_federalreportexport_adoxio_cannabismonthlyreport_FederalReportExportId" Target="adoxio_cannabismonthlyreports" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -67018,6 +67581,8 @@
           <NavigationPropertyBinding Path="adoxio_licences_adoxio_ldborder_LicenceId" Target="adoxio_ldborders" />
           <NavigationPropertyBinding Path="adoxio_ThirdPartyOperatorId" Target="accounts" />
           <NavigationPropertyBinding Path="adoxio_licences_adoxio_licenceldbordertotalhistory_Licence" Target="adoxio_licenceldbordertotalhistories" />
+          <NavigationPropertyBinding Path="adoxio_ProposedOperator" Target="accounts" />
+          <NavigationPropertyBinding Path="adoxio_licences_adoxio_endorsement_Licence" Target="adoxio_endorsements" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -67072,6 +67637,7 @@
           <NavigationPropertyBinding Path="adoxio_licencetype_adoxio_applicationtype_LicenceType" Target="adoxio_applicationtypes" />
           <NavigationPropertyBinding Path="adoxio_licencetype_adoxio_inspectorcommentsrollup_LicenceType" Target="adoxio_inspectorcommentsrollups" />
           <NavigationPropertyBinding Path="adoxio_licencetype_inspections" Target="incidents" />
+          <NavigationPropertyBinding Path="adoxio_endorsementtype_adoxio_licencetype" Target="adoxio_endorsementtypes" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -68469,6 +69035,8 @@
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_federalreportexport" Target="adoxio_federalreportexports" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationtypefeeschedule" Target="adoxio_applicationtypefeeschedules" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_licenceldbordertotalhistory" Target="adoxio_licenceldbordertotalhistories" />
+          <NavigationPropertyBinding Path="regardingobjectid_adoxio_endorsementtype" Target="adoxio_endorsementtypes" />
+          <NavigationPropertyBinding Path="regardingobjectid_adoxio_endorsement" Target="adoxio_endorsements" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -69074,6 +69642,8 @@
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_federalreportexport" Target="adoxio_federalreportexports" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationtypefeeschedule" Target="adoxio_applicationtypefeeschedules" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_licenceldbordertotalhistory" Target="adoxio_licenceldbordertotalhistories" />
+          <NavigationPropertyBinding Path="regardingobjectid_adoxio_endorsementtype" Target="adoxio_endorsementtypes" />
+          <NavigationPropertyBinding Path="regardingobjectid_adoxio_endorsement" Target="adoxio_endorsements" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -69421,6 +69991,8 @@
           <NavigationPropertyBinding Path="business_unit_adoxio_federalreportexport" Target="adoxio_federalreportexports" />
           <NavigationPropertyBinding Path="business_unit_adoxio_applicationtypefeeschedule" Target="adoxio_applicationtypefeeschedules" />
           <NavigationPropertyBinding Path="business_unit_adoxio_licenceldbordertotalhistory" Target="adoxio_licenceldbordertotalhistories" />
+          <NavigationPropertyBinding Path="business_unit_adoxio_endorsementtype" Target="adoxio_endorsementtypes" />
+          <NavigationPropertyBinding Path="business_unit_adoxio_endorsement" Target="adoxio_endorsements" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -71121,6 +71693,10 @@
           <NavigationPropertyBinding Path="baserecordid_adoxio_applicationtypefeeschedule" Target="adoxio_applicationtypefeeschedules" />
           <NavigationPropertyBinding Path="duplicaterecordid_adoxio_licenceldbordertotalhistory" Target="adoxio_licenceldbordertotalhistories" />
           <NavigationPropertyBinding Path="baserecordid_adoxio_licenceldbordertotalhistory" Target="adoxio_licenceldbordertotalhistories" />
+          <NavigationPropertyBinding Path="duplicaterecordid_adoxio_endorsementtype" Target="adoxio_endorsementtypes" />
+          <NavigationPropertyBinding Path="baserecordid_adoxio_endorsementtype" Target="adoxio_endorsementtypes" />
+          <NavigationPropertyBinding Path="duplicaterecordid_adoxio_endorsement" Target="adoxio_endorsements" />
+          <NavigationPropertyBinding Path="baserecordid_adoxio_endorsement" Target="adoxio_endorsements" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -76820,6 +77396,7 @@
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_contravention" Target="adoxio_contraventions" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_ldborder" Target="adoxio_ldborders" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_federalreportexport" Target="adoxio_federalreportexports" />
+          <NavigationPropertyBinding Path="regardingobjectid_adoxio_endorsement" Target="adoxio_endorsements" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -77698,6 +78275,8 @@
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_federalreportexport" Target="adoxio_federalreportexports" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationtypefeeschedule" Target="adoxio_applicationtypefeeschedules" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_licenceldbordertotalhistory" Target="adoxio_licenceldbordertotalhistories" />
+          <NavigationPropertyBinding Path="regardingobjectid_adoxio_endorsementtype" Target="adoxio_endorsementtypes" />
+          <NavigationPropertyBinding Path="regardingobjectid_adoxio_endorsement" Target="adoxio_endorsements" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -79065,6 +79644,16 @@
           <NavigationPropertyBinding Path="lk_adoxio_licenceldbordertotalhistory_modifiedby" Target="adoxio_licenceldbordertotalhistories" />
           <NavigationPropertyBinding Path="lk_adoxio_licenceldbordertotalhistory_modifiedonbehalfby" Target="adoxio_licenceldbordertotalhistories" />
           <NavigationPropertyBinding Path="user_adoxio_licenceldbordertotalhistory" Target="adoxio_licenceldbordertotalhistories" />
+          <NavigationPropertyBinding Path="lk_adoxio_endorsementtype_createdby" Target="adoxio_endorsementtypes" />
+          <NavigationPropertyBinding Path="lk_adoxio_endorsementtype_createdonbehalfby" Target="adoxio_endorsementtypes" />
+          <NavigationPropertyBinding Path="lk_adoxio_endorsementtype_modifiedby" Target="adoxio_endorsementtypes" />
+          <NavigationPropertyBinding Path="lk_adoxio_endorsementtype_modifiedonbehalfby" Target="adoxio_endorsementtypes" />
+          <NavigationPropertyBinding Path="user_adoxio_endorsementtype" Target="adoxio_endorsementtypes" />
+          <NavigationPropertyBinding Path="lk_adoxio_endorsement_createdby" Target="adoxio_endorsements" />
+          <NavigationPropertyBinding Path="lk_adoxio_endorsement_createdonbehalfby" Target="adoxio_endorsements" />
+          <NavigationPropertyBinding Path="lk_adoxio_endorsement_modifiedby" Target="adoxio_endorsements" />
+          <NavigationPropertyBinding Path="lk_adoxio_endorsement_modifiedonbehalfby" Target="adoxio_endorsements" />
+          <NavigationPropertyBinding Path="user_adoxio_endorsement" Target="adoxio_endorsements" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -79434,6 +80023,8 @@
           <NavigationPropertyBinding Path="team_adoxio_federalreportexport" Target="adoxio_federalreportexports" />
           <NavigationPropertyBinding Path="team_adoxio_applicationtypefeeschedule" Target="adoxio_applicationtypefeeschedules" />
           <NavigationPropertyBinding Path="team_adoxio_licenceldbordertotalhistory" Target="adoxio_licenceldbordertotalhistories" />
+          <NavigationPropertyBinding Path="team_adoxio_endorsementtype" Target="adoxio_endorsementtypes" />
+          <NavigationPropertyBinding Path="team_adoxio_endorsement" Target="adoxio_endorsements" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">

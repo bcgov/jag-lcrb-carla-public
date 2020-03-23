@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top277 { get; set; }
+        int? Top312 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip192 { get; set; }
+        int? Skip224 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count277 { get; set; }
+        bool? Count312 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter277 { get; set; }
+        string Filter312 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search192 { get; set; }
+        string Search224 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -71,6 +71,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAccountadoxioeventlicensee.
         /// </summary>
         IAccountadoxioeventlicensee Accountadoxioeventlicensee { get; }
+
+        /// <summary>
+        /// Gets the IAccountadoxiolicencesproposedoperator.
+        /// </summary>
+        IAccountadoxiolicencesproposedoperator Accountadoxiolicencesproposedoperator { get; }
 
         /// <summary>
         /// Gets the IThirdpartyoperatorlicences.
@@ -191,6 +196,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplications.
         /// </summary>
         IApplications Applications { get; }
+
+        /// <summary>
+        /// Gets the IApplicationadoxioendorsementapplication.
+        /// </summary>
+        IApplicationadoxioendorsementapplication Applicationadoxioendorsementapplication { get; }
 
         /// <summary>
         /// Gets the IBpfadoxioapplicationadoxioapplicationlicenseechangesv10.
@@ -363,6 +373,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ICannabismonthlyreports Cannabismonthlyreports { get; }
 
         /// <summary>
+        /// Gets the IFederalreportexportid.
+        /// </summary>
+        IFederalreportexportid Federalreportexportid { get; }
+
+        /// <summary>
         /// Gets the ICannabisproductadmins.
         /// </summary>
         ICannabisproductadmins Cannabisproductadmins { get; }
@@ -441,6 +456,101 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IDocuments.
         /// </summary>
         IDocuments Documents { get; }
+
+        /// <summary>
+        /// Gets the IEndorsements.
+        /// </summary>
+        IEndorsements Endorsements { get; }
+
+        /// <summary>
+        /// Gets the IApplication.
+        /// </summary>
+        IApplication Application { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementasyncoperations.
+        /// </summary>
+        IEndorsementasyncoperations Endorsementasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementbulkdeletefailures.
+        /// </summary>
+        IEndorsementbulkdeletefailures Endorsementbulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementduplicatebaserecord.
+        /// </summary>
+        IEndorsementduplicatebaserecord Endorsementduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementduplicatematchingrecord.
+        /// </summary>
+        IEndorsementduplicatematchingrecord Endorsementduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementsharepointdocumentlocations.
+        /// </summary>
+        IEndorsementsharepointdocumentlocations Endorsementsharepointdocumentlocations { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementsyncerrors.
+        /// </summary>
+        IEndorsementsyncerrors Endorsementsyncerrors { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementtype.
+        /// </summary>
+        IEndorsementtype Endorsementtype { get; }
+
+        /// <summary>
+        /// Gets the ILicence.
+        /// </summary>
+        ILicence Licence { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypeadoxiolicencetypeset.
+        /// </summary>
+        IEndorsementtypeadoxiolicencetypeset Endorsementtypeadoxiolicencetypeset { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypes.
+        /// </summary>
+        IEndorsementtypes Endorsementtypes { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypeadoxioendorsementendorsementtype.
+        /// </summary>
+        IEndorsementtypeadoxioendorsementendorsementtype Endorsementtypeadoxioendorsementendorsementtype { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypeadoxiolicencetype.
+        /// </summary>
+        IEndorsementtypeadoxiolicencetype Endorsementtypeadoxiolicencetype { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypeasyncoperations.
+        /// </summary>
+        IEndorsementtypeasyncoperations Endorsementtypeasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypebulkdeletefailures.
+        /// </summary>
+        IEndorsementtypebulkdeletefailures Endorsementtypebulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypeduplicatebaserecord.
+        /// </summary>
+        IEndorsementtypeduplicatebaserecord Endorsementtypeduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypeduplicatematchingrecord.
+        /// </summary>
+        IEndorsementtypeduplicatematchingrecord Endorsementtypeduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypesyncerrors.
+        /// </summary>
+        IEndorsementtypesyncerrors Endorsementtypesyncerrors { get; }
 
         /// <summary>
         /// Gets the IEstablishments.
@@ -573,11 +683,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         IInspector Inspector { get; }
 
         /// <summary>
-        /// Gets the ILicence.
-        /// </summary>
-        ILicence Licence { get; }
-
-        /// <summary>
         /// Gets the IRegionid.
         /// </summary>
         IRegionid Regionid { get; }
@@ -651,6 +756,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IFederalreportexports.
         /// </summary>
         IFederalreportexports Federalreportexports { get; }
+
+        /// <summary>
+        /// Gets the IFederalreportexportadoxiocannabismonthlyreportfederalreportexportid.
+        /// </summary>
+        IFederalreportexportadoxiocannabismonthlyreportfederalreportexportid Federalreportexportadoxiocannabismonthlyreportfederalreportexportid { get; }
 
         /// <summary>
         /// Gets the IFederalreportexportasyncoperations.
@@ -848,6 +958,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicenceses Licenceses { get; }
 
         /// <summary>
+        /// Gets the ILicencesadoxioendorsementlicence.
+        /// </summary>
+        ILicencesadoxioendorsementlicence Licencesadoxioendorsementlicence { get; }
+
+        /// <summary>
         /// Gets the ILicencesadoxioeventlicence.
         /// </summary>
         ILicencesadoxioeventlicence Licencesadoxioeventlicence { get; }
@@ -866,6 +981,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicencessharepointdocumentlocations.
         /// </summary>
         ILicencessharepointdocumentlocations Licencessharepointdocumentlocations { get; }
+
+        /// <summary>
+        /// Gets the IProposedoperator.
+        /// </summary>
+        IProposedoperator Proposedoperator { get; }
 
         /// <summary>
         /// Gets the IThirdpartyoperatorid.
@@ -1038,6 +1158,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegardingobjectidadoxioapplicationtypefeeschedule Regardingobjectidadoxioapplicationtypefeeschedule { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioendorsement.
+        /// </summary>
+        IRegardingobjectidadoxioendorsement Regardingobjectidadoxioendorsement { get; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioendorsementtype.
+        /// </summary>
+        IRegardingobjectidadoxioendorsementtype Regardingobjectidadoxioendorsementtype { get; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioeventschedule.
         /// </summary>
         IRegardingobjectidadoxioeventschedule Regardingobjectidadoxioeventschedule { get; }
@@ -1071,6 +1201,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBusinessunitadoxioapplicationtypefeeschedule.
         /// </summary>
         IBusinessunitadoxioapplicationtypefeeschedule Businessunitadoxioapplicationtypefeeschedule { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioendorsement.
+        /// </summary>
+        IBusinessunitadoxioendorsement Businessunitadoxioendorsement { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioendorsementtype.
+        /// </summary>
+        IBusinessunitadoxioendorsementtype Businessunitadoxioendorsementtype { get; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxioevent.
@@ -1123,6 +1263,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IBaserecordidadoxioapplicationtypefeeschedule Baserecordidadoxioapplicationtypefeeschedule { get; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxioendorsement.
+        /// </summary>
+        IBaserecordidadoxioendorsement Baserecordidadoxioendorsement { get; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxioendorsementtype.
+        /// </summary>
+        IBaserecordidadoxioendorsementtype Baserecordidadoxioendorsementtype { get; }
+
+        /// <summary>
         /// Gets the IBaserecordidadoxioevent.
         /// </summary>
         IBaserecordidadoxioevent Baserecordidadoxioevent { get; }
@@ -1161,6 +1311,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IDuplicaterecordidadoxioapplicationtypefeeschedule.
         /// </summary>
         IDuplicaterecordidadoxioapplicationtypefeeschedule Duplicaterecordidadoxioapplicationtypefeeschedule { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioendorsement.
+        /// </summary>
+        IDuplicaterecordidadoxioendorsement Duplicaterecordidadoxioendorsement { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioendorsementtype.
+        /// </summary>
+        IDuplicaterecordidadoxioendorsementtype Duplicaterecordidadoxioendorsementtype { get; }
 
         /// <summary>
         /// Gets the IDuplicaterecordidadoxioevent.
@@ -1468,6 +1628,46 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILkadoxioapplicationtypefeeschedulemodifiedonbehalfby Lkadoxioapplicationtypefeeschedulemodifiedonbehalfby { get; }
 
         /// <summary>
+        /// Gets the ILkadoxioendorsementcreatedby.
+        /// </summary>
+        ILkadoxioendorsementcreatedby Lkadoxioendorsementcreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioendorsementcreatedonbehalfby.
+        /// </summary>
+        ILkadoxioendorsementcreatedonbehalfby Lkadoxioendorsementcreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioendorsementmodifiedby.
+        /// </summary>
+        ILkadoxioendorsementmodifiedby Lkadoxioendorsementmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioendorsementmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioendorsementmodifiedonbehalfby Lkadoxioendorsementmodifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioendorsementtypecreatedby.
+        /// </summary>
+        ILkadoxioendorsementtypecreatedby Lkadoxioendorsementtypecreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioendorsementtypecreatedonbehalfby.
+        /// </summary>
+        ILkadoxioendorsementtypecreatedonbehalfby Lkadoxioendorsementtypecreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioendorsementtypemodifiedby.
+        /// </summary>
+        ILkadoxioendorsementtypemodifiedby Lkadoxioendorsementtypemodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioendorsementtypemodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioendorsementtypemodifiedonbehalfby Lkadoxioendorsementtypemodifiedonbehalfby { get; }
+
+        /// <summary>
         /// Gets the ILkadoxioeventcreatedby.
         /// </summary>
         ILkadoxioeventcreatedby Lkadoxioeventcreatedby { get; }
@@ -1613,6 +1813,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IUseradoxioapplicationtypefeeschedule Useradoxioapplicationtypefeeschedule { get; }
 
         /// <summary>
+        /// Gets the IUseradoxioendorsement.
+        /// </summary>
+        IUseradoxioendorsement Useradoxioendorsement { get; }
+
+        /// <summary>
+        /// Gets the IUseradoxioendorsementtype.
+        /// </summary>
+        IUseradoxioendorsementtype Useradoxioendorsementtype { get; }
+
+        /// <summary>
         /// Gets the IUseradoxioevent.
         /// </summary>
         IUseradoxioevent Useradoxioevent { get; }
@@ -1666,6 +1876,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITeamadoxioapplicationtypefeeschedule.
         /// </summary>
         ITeamadoxioapplicationtypefeeschedule Teamadoxioapplicationtypefeeschedule { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioendorsement.
+        /// </summary>
+        ITeamadoxioendorsement Teamadoxioendorsement { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioendorsementtype.
+        /// </summary>
+        ITeamadoxioendorsementtype Teamadoxioendorsementtype { get; }
 
         /// <summary>
         /// Gets the ITeamadoxioevent.

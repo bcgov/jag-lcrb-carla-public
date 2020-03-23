@@ -1,4 +1,7 @@
-﻿namespace Gov.Lclb.Cllb.Public.ViewModels
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace Gov.Lclb.Cllb.Public.ViewModels
 {
 
     public class ApplicationSummary
@@ -9,6 +12,9 @@
         public string Name { get; set; } //adoxio_name
         public string JobNumber { get; set; } //adoxio_jobnumber
         public string ApplicationTypeName { get; set; }
+        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ApplicationTypeCategory? ApplicationTypeCategory { get; set; }
         public bool IsIndigenousNation { get; set; }
         public bool IsPaid { get; set; }
         public string LicenceId { get; set; }
