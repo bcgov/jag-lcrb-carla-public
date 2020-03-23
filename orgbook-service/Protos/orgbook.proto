@@ -9,6 +9,8 @@ service Orgbook {
     rpc SyncLicencesToOrgbook (GenericRequest) returns (MessageResult);
     rpc SyncOrgbookToLicences (GenericRequest) returns (MessageResult);
     rpc IssueLicenceCredential (IssueLicenceCredentialMessage) returns (MessageResult);
+    rpc CompanyExistsInOrgbook (CompanyNameRequest) returns (MessageResult);
+    rpc CompaniesExistInOrgbook (CompaniesNameRequest) returns (CompaniesNameResult);
 }
 
 message GenericRequest {
@@ -23,4 +25,19 @@ message IssueLicenceCredentialMessage {
 
 message MessageResult {
     bool success = 1;
+}
+
+message CompanyNameRequest {
+    string id = 1;
+    string companyName = 2;
+}
+
+message CompaniesNameRequest {
+    string id = 1;
+    repeated string companyNames = 2;
+}
+
+message CompaniesNameResult {
+    repeated string companyNames = 1;
+    repeated bool results = 2;
 }
