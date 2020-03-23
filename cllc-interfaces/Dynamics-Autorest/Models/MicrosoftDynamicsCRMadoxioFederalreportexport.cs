@@ -63,11 +63,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="_owneridValue">Owner Id</param>
         /// <param name="statuscode">Reason for the status of the Federal
         /// Report Export</param>
-        public MicrosoftDynamicsCRMadoxioFederalreportexport(int? statecode = default(int?), string adoxioDocumentlink = default(string), System.DateTimeOffset? adoxioExportcompleted = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), string _owningbusinessunitValue = default(string), string _createdonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string adoxioFederalreportexportid = default(string), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string adoxioName = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string _owninguserValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioExporttirggered = default(System.DateTimeOffset?), string _owningteamValue = default(string), int? adoxioExportnumber = default(int?), string _owneridValue = default(string), int? statuscode = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioFederalreportexportSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFederalreportexportDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFederalreportexportDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioFederalreportexportSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioFederalreportexportAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioFederalreportexportBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
+        public MicrosoftDynamicsCRMadoxioFederalreportexport(int? statecode = default(int?), string adoxioDocumentlink = default(string), System.DateTimeOffset? adoxioExportcompleted = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioExporttriggered = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), string _owningbusinessunitValue = default(string), string _createdonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string adoxioFederalreportexportid = default(string), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string adoxioName = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string _owninguserValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioExporttirggered = default(System.DateTimeOffset?), string _owningteamValue = default(string), int? adoxioExportnumber = default(int?), string _owneridValue = default(string), int? statuscode = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioFederalreportexportSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFederalreportexportDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFederalreportexportDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioFederalreportexportSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioFederalreportexportAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioFederalreportexportBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> adoxioFederalreportexportAdoxioCannabismonthlyreportFederalReportExportId = default(IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport>))
         {
             Statecode = statecode;
             AdoxioDocumentlink = adoxioDocumentlink;
             AdoxioExportcompleted = adoxioExportcompleted;
+            AdoxioExporttriggered = adoxioExporttriggered;
             Createdon = createdon;
             Versionnumber = versionnumber;
             this._owningbusinessunitValue = _owningbusinessunitValue;
@@ -102,6 +103,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioFederalreportexportSharePointDocumentLocations = adoxioFederalreportexportSharePointDocumentLocations;
             AdoxioFederalreportexportAsyncOperations = adoxioFederalreportexportAsyncOperations;
             AdoxioFederalreportexportBulkDeleteFailures = adoxioFederalreportexportBulkDeleteFailures;
+            AdoxioFederalreportexportAdoxioCannabismonthlyreportFederalReportExportId = adoxioFederalreportexportAdoxioCannabismonthlyreportFederalReportExportId;
             CustomInit();
         }
 
@@ -125,6 +127,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_exportcompleted")]
         public System.DateTimeOffset? AdoxioExportcompleted { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_exporttriggered")]
+        public System.DateTimeOffset? AdoxioExporttriggered { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the record was created.
@@ -318,6 +325,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_federalreportexport_BulkDeleteFailures")]
         public IList<MicrosoftDynamicsCRMbulkdeletefailure> AdoxioFederalreportexportBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_federalreportexport_adoxio_cannabismonthlyreport_FederalReportExportId")]
+        public IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> AdoxioFederalreportexportAdoxioCannabismonthlyreportFederalReportExportId { get; set; }
 
     }
 }
