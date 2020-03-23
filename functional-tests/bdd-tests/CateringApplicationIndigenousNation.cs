@@ -13,18 +13,17 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplication_indigenousnation
+Feature: CateringApplication_indigenousnation
     As a logged in business user
-    I want to submit a CRS Application for an indigenous nation
+    I want to submit a Catering Application for an indigenous nation
 
 Scenario: Start Application
     Given I am logged in to the dashboard as an indigenous nation
-    And I click on the Start Application button
-    And I complete the eligibility disclosure
+    And I click on the Catering Start Application button
     And I review the account profile
     And I review the organization structure
     And I complete the application
-    And I review the security screening requirements
+    And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
@@ -34,8 +33,8 @@ Scenario: Start Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplication_indigenousnation.feature")]
-    public sealed class CRSApplicationIndigenousNation : TestBaseCRS
+    [FeatureFile("./CateringApplication_indigenousnation.feature")]
+    public sealed class CateringApplicationIndigenousNation : TestBaseCatering
     {
         [Given(@"I am logged in to the dashboard as an (.*)")]
         public void I_view_the_dashboard(string businessType)
@@ -43,45 +42,16 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
-        [And(@"I click on the Start Application button")]
-        public void start_application()
+        [And(@"I click on the Catering Start Application button")]
+        public void I_start_application()
         {
             /* 
-            Page Title: Welcome to Cannabis Licensing
+            Page Title: 
             */
 
-            NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
+            // click on the Catering Start Application button
+            NgWebElement startApp_button = ngDriver.FindElement(By.Id("startCatering"));
             startApp_button.Click();
-        }
-
-        [And(@"I complete the eligibility disclosure")]
-        public void complete_eligibility_disclosure()
-        {
-            /* 
-            Page Title: Cannabis Retail Store Licence Eligibility Disclosure
-            */
-
-            string electricSignature = "Automated Test";
-
-            // select No for Question 1
-            NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
-            noRadio1.Click();
-
-            // select No for Question 2
-            NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
-            noRadio2.Click();
-
-            // select the certification checkbox
-            NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
-            matCheckbox.Click();
-
-            // enter the electronic signature
-            NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
-            sigCheckbox.SendKeys(electricSignature);
-
-            // click on the Submit button
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
-            submit_button.Click();
         }
 
         [And(@"I review the account profile")]
@@ -203,7 +173,7 @@ namespace bdd_tests
         public void I_complete_the_application()
         {
             /* 
-            Page Title: Submit the Cannabis Retail Store Application
+            Page Title: [none]
             */
 
             // create application info
@@ -212,24 +182,29 @@ namespace bdd_tests
             string estCity = "Victoria";
             string estPostal = "V9A6X5";
             string estPID = "012345678";
-            string estEmail = "test@test.com";
             string estPhone = "2505555555";
             string conGiven = "Given";
             string conSurname = "Surname";
             string conRole = "CEO";
             string conPhone = "2508888888";
-            string conEmail = "contact@email.com";
-            string indigenousNation = "Ashcroft Indian Band";
 
-            // enter the IN into the dropdown
-            NgWebElement uiSelectNation = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[3]/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select"));
-            uiSelectNation.SendKeys(indigenousNation);
+            // select 'No' for previous liquor licence
+            NgWebElement previousLicence = ngDriver.FindElement(By.Id("mat-button-toggle-2-button"));
+            previousLicence.Click();
+
+            // select 'No' for Rural Agency Store Appointment
+            NgWebElement ruralStore = ngDriver.FindElement(By.Id("mat-button-toggle-5-button"));
+            ruralStore.Click();
+
+            // select 'No' for distillery, brewery or winery connections
+            NgWebElement liquorProduction = ngDriver.FindElement(By.Id("mat-button-toggle-8-button"));
+            liquorProduction.Click();
 
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
             estabName.SendKeys(estName);
 
-            // enter the establishment street address
+            // enter the establishment address
             NgWebElement estabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
             estabAddress.SendKeys(estAddress);
 
@@ -241,97 +216,62 @@ namespace bdd_tests
             NgWebElement estabPostal = ngDriver.FindElement(By.Id("establishmentAddressPostalCode"));
             estabPostal.SendKeys(estPostal);
 
-            // enter the establishment's PID
+            // enter the PID
             NgWebElement estabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             estabPID.SendKeys(estPID);
 
-            // enter the establishment email
-            NgWebElement estabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
-            estabEmail.SendKeys(estEmail);
-
-            // enter the establishment phone number
+            // enter the store phone number
             NgWebElement estabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             estabPhone.SendKeys(estPhone);
 
-            // find the upload_files folder in the repo
+            // select 'No' for other business on premises
+            NgWebElement otherBusiness = ngDriver.FindElement(By.Id("mat-button-toggle-11-button"));
+            otherBusiness.Click();
+
+            // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
             string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
 
-            // upload the signage pdf
+            // upload a store signage document
             string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
             NgWebElement uploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
             uploadSignage.SendKeys(signagePath);
 
-            // upload the valid interest pdf
-            string validInterestPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "valid_interest.pdf");
-            NgWebElement uploadValidInterest = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
-            uploadValidInterest.SendKeys(validInterestPath);
-
-            // upload the floor plan pdf
-            string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
-            NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
-            uploadFloorplan.SendKeys(floorplanPath);
-
-            // upload the site plan pdf
-            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
-            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[11]"));
-            uploadSitePlan.SendKeys(sitePlanPath);
-
-            // upload the financial integrity pdf
-            string finIntegrityPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "fin_integrity.pdf");
-            NgWebElement uploadFinIntegrity = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
-            uploadFinIntegrity.SendKeys(finIntegrityPath);
-
-            // enter the contact's first name
+            // enter the first name of the application contact
             NgWebElement contactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
             contactGiven.SendKeys(conGiven);
 
-            // enter the contact's last name
+            // enter the last name of the application contact
             NgWebElement contactSurname = ngDriver.FindElement(By.Id("contactPersonLastName"));
             contactSurname.SendKeys(conSurname);
 
-            // enter the contact's title
-            NgWebElement contactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
+            // enter the role of the application contact
+            NgWebElement contactRole = ngDriver.FindElement(By.Id("contactPersonRole"));
             contactRole.SendKeys(conRole);
 
-            // enter the contact's phone number
-            NgWebElement contactPhone = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonPhone]"));
+            // enter the phone number of the application contact
+            NgWebElement contactPhone = ngDriver.FindElement(By.Id("contactPersonPhone"));
             contactPhone.SendKeys(conPhone);
 
-            // enter the contact's email address
-            NgWebElement contactEmail = ngDriver.FindElement(By.Id("contactPersonEmail"));
-            contactEmail.SendKeys(conEmail);
-
-            // select the authorized to submit checkbox
+            // click on the authorized to submit checkbox
             NgWebElement authorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
             authorizedSubmit.Click();
 
-            // select the signature checkbox
+            // click on the signature agreement checkbox
             NgWebElement signatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
             signatureAgree.Click();
-
-            // click on the Submit button
+        }
+        [And(@"I click on the Submit button")]
+        public void click_on_submit()
+        {
             NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
             submit_button.Click();
         }
 
-        [And(@"I review the security screening requirements")]
-        public void review_security_screening_reqs()
-        {
-            /* 
-            Page Title: Security Screening Requirements
-                      : placeholder for future testing
-            */
-        }
-
         [And(@"I click on the Pay for Application button")]
-        public void click_on_pay_for_application()
+        public void click_on_pay()
         {
-            /* 
-            Page Title: Security Screening Requirements
-            */
-
             NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
             pay_button.Click();
         }
@@ -339,7 +279,7 @@ namespace bdd_tests
         [And(@"I enter the payment information")]
         public void enter_payment_info()
         {
-            MakeCRSPayment();
+            MakeCateringPayment();
         }
 
         [And(@"I return to the dashboard")]
@@ -349,11 +289,12 @@ namespace bdd_tests
             Page Title: Payment Approved
             */
 
-            // confirm that payment receipt is for $7,500.00
-            Assert.True (ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-payment-confirmation/mat-card/div/div[1]/div/div/table/tr[6]/td[2][text()='$7,500.00']")).Displayed);
+            // confirm that payment receipt is for $475.00
+            Assert.True(ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-payment-confirmation/mat-card/div/div[1]/div/div/table/tr[6]/td[2][text()='$475.00']")).Displayed);
 
-            // click on Return to Dashboard link
             string retDash = "Return to Dashboard";
+
+            // click on the Return to Dashboard link
             NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
             returnDash.Click();
         }
@@ -368,10 +309,10 @@ namespace bdd_tests
         public void I_see_login()
         {
             /* 
-            Page Title: Apply for a cannabis licence
+            Page Title: 
             */
 
-            Assert.True (ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
     }
 }
