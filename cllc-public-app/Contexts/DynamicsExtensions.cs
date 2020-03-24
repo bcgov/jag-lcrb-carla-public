@@ -487,10 +487,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public static IList<MicrosoftDynamicsCRMcontact> GetContactsByDetails(this IDynamicsClient system, string firstname, string middlename, string lastname, string emailaddress1)
         {
-            firstname.Replace("'", "''");
-            middlename.Replace("'", "''");
-            lastname.Replace("'", "''");
-            emailaddress1.Replace("'", "''");
+            if (!string.IsNullOrEmpty(firstname)) {
+                firstname.Replace("'", "''");
+            }
+            if (!string.IsNullOrEmpty(middlename))
+            {
+                middlename.Replace("'", "''");
+            }
+            if (!string.IsNullOrEmpty(lastname))
+            {
+                lastname.Replace("'", "''");
+            }
+            if (!string.IsNullOrEmpty(emailaddress1))
+            {
+                emailaddress1.Replace("'", "''");
+            }
             IList<MicrosoftDynamicsCRMcontact> result = null;
             try
             {
