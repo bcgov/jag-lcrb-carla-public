@@ -93,6 +93,7 @@ namespace bdd_tests
 
             // create the account data
             string bizNumber = "012345678";
+            string societyIncorpNum = "BC1234567";
             string streetAddress1 = "645 Tyee Road";
             string streetAddress2 = "Point Ellis";
 
@@ -100,8 +101,9 @@ namespace bdd_tests
             string postalCode = "V8V4Y3";
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
-            string corpContactPhone = "7781811818";
-            string corpContactEmail = "automated@test.com";
+            string societyContactTitle = "Director";
+            string societyContactPhone = "7781811818";
+            string societyContactEmail = "automated@test.com";
 
             string mailStreet1 = "P.O. Box 123";
             string mailStreet2 = "303 Prideaux St.";
@@ -113,6 +115,17 @@ namespace bdd_tests
             // enter the business number
             NgWebElement uiBizNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
             uiBizNumber.SendKeys(bizNumber);
+
+            // enter the BC society incorporation number
+            NgWebElement uiSocietyIncNumber = ngDriver.FindElement(By.Id("bcIncorporationNumber"));
+            uiSocietyIncNumber.SendKeys(societyIncorpNum);
+
+            // enter the Date of Incorporation in B.C. 
+            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            uiCalendar1.Click();
+
+            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            uiCalendar2.Click();
 
             // enter the physical street address 1
             NgWebElement uiStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
@@ -166,15 +179,19 @@ namespace bdd_tests
             NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
             uiBizEmail.SendKeys(bizEmail);
 
-            // enter the corporation contact phone number
-            NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[23]"));
-            uiCorpContactPhone.SendKeys(corpContactPhone);
+            // enter the society contact title
+            NgWebElement uiSocietyContactTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
+            uiSocietyContactTitle.SendKeys(societyContactTitle);
 
-            // enter the corporation contact phone email
-            NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[24]"));
-            uiCorpContactEmail.SendKeys(corpContactEmail);
+            // enter the society contact phone number
+            NgWebElement uiSocietyContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[23]"));
+            uiSocietyContactPhone.SendKeys(societyContactPhone);
 
-            // select 'No' for corporation's connection to a federal producer
+            // enter the society contact phone email
+            NgWebElement uiSocietyContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[24]"));
+            uiSocietyContactEmail.SendKeys(societyContactEmail);
+
+            // select 'No' for society's connection to a federal producer
             NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
             corpConnectionFederalProducer.Click();
 
