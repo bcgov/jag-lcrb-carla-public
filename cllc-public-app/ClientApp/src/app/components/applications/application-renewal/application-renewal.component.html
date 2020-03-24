@@ -14,7 +14,7 @@
         <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
       </section>
 
-
+      <h3 class="blue-header">Questionnaire</h3>
       <mat-card class="mat-elevation-z1">
         <app-field errorMessage="Please select a value" [showChevrons]="false" [required]="true" [valid]="true">
 
@@ -41,7 +41,7 @@
       </mat-card>
       <p></p>
 
-      <mat-card class="mat-elevation-z8">
+      <mat-card class="mat-elevation-z1">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             2. Has there been an unreported sale of the business associated with the licence within the past 12 months?
@@ -65,7 +65,7 @@
       </mat-card>
       <p></p>
 
-      <mat-card class="mat-elevation-z8">
+      <mat-card class="mat-elevation-z1">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             3. Our records show that this establishment is licensed as a {{account?.getBusinessTypeName()}}. Has this
@@ -90,7 +90,7 @@
       </mat-card>
       <p></p>
 
-      <mat-card class="mat-elevation-z8">
+      <mat-card class="mat-elevation-z1">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             4. Have you, any partner, shareholder, director, officer, or an immediate family member of any of the
@@ -118,7 +118,7 @@
       </mat-card>
       <p></p>
 
-      <mat-card class="mat-elevation-z8">
+      <mat-card class="mat-elevation-z1">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             5. Has a federal produce of cannabis acquired a new interest or expanded an existing interest - financial or
@@ -146,7 +146,7 @@
       <p></p>
 
 
-      <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             6. Have you made any unreported changes to your organizational leadership within the past 12 months?
@@ -169,7 +169,7 @@
       </mat-card>
       <p></p>
 
-      <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             7. Have you made any unreported changes to your key personnel within the past 12 months?
@@ -191,7 +191,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;"
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;"
                 *ngIf="account?.isPrivateCorporation() || account?.isPublicCorporation() || account?.isPartnership()">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
@@ -214,7 +214,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             9. Do you have an outstanding payable fine under the Offence Act or outstanding payable monetary penalty under
@@ -239,7 +239,7 @@
 
 
 
-      <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;"
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;"
                 *ngIf="application?.applicationType?.showPropertyDetails">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
@@ -271,7 +271,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;"
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;"
                 *ngIf="application?.applicationType?.showPropertyDetails">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
@@ -294,7 +294,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;"
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;"
                 *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
@@ -371,7 +371,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;"
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;"
                 *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
@@ -416,7 +416,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             14. Are you aware of any local government or Indigenous nation zoning changes with respect to your
@@ -438,7 +438,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;"
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;"
                 *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
@@ -462,7 +462,7 @@
         </section>
       </mat-card>
 
-      <!-- <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;"
+      <!-- <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;"
     *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
     <section style="display: flex; justify-content: space-between; width: 100%;">
       <div class="question-label">
