@@ -487,25 +487,43 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public static IList<MicrosoftDynamicsCRMcontact> GetContactsByDetails(this IDynamicsClient system, string firstname, string middlename, string lastname, string emailaddress1)
         {
+            string filter = "";
             if (!string.IsNullOrEmpty(firstname)) {
                 firstname.Replace("'", "''");
+                filter += $"firstname eq '{firstname}'";
             }
             if (!string.IsNullOrEmpty(middlename))
             {
+                if (!string.IsNullOrEmpty (filter))
+                {
+                    filter += " and ";
+                }
                 middlename.Replace("'", "''");
+                filter += $"middlename eq '{middlename}'";
             }
             if (!string.IsNullOrEmpty(lastname))
             {
+                if (!string.IsNullOrEmpty(filter))
+                {
+                    filter = filter + " and ";
+                }
                 lastname.Replace("'", "''");
+                filter += $"lastname eq '{lastname}'";
+
             }
             if (!string.IsNullOrEmpty(emailaddress1))
             {
+                if (!string.IsNullOrEmpty(filter))
+                {
+                    filter += " and ";
+                }
                 emailaddress1.Replace("'", "''");
+                filter += $"emailaddress1 eq '{emailaddress1}'";
             }
             IList<MicrosoftDynamicsCRMcontact> result = null;
             try
             {
-                var contactsResponse = system.Contacts.Get(filter: $"firstname eq '{firstname}' and lastname eq '{lastname}' and middlename eq '{middlename}' and emailaddress1 eq '{emailaddress1}'");
+                var contactsResponse = system.Contacts.Get(filter: filter );
                 result = contactsResponse.Value;
             }
             catch (HttpOperationException)
@@ -830,14 +848,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
            
             MicrosoftDynamicsCRMcontact result = null;
-            var users = _dynamicsClient.GetContactsByDetails(contact.firstname, contact.middlename, contact.lastname, contact.emailaddress1);
-            if (users != null)
+            if (contact != null)
             {
-                if (users.Count == 1)
+                var users = _dynamicsClient.GetContactsByDetails(contact.firstname, contact.middlename, contact.lastname, contact.emailaddress1);
+                if (users != null && users.Count == 1)
                 {
-                    result = users.FirstOrDefault();                    
+                    result = users.FirstOrDefault();
                 }
-            }
+            }            
 
             return result;
         }
