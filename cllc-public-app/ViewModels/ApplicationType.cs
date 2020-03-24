@@ -62,6 +62,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public FormControlState? PublicCooler { get; set; }
 
+        public bool? ShowLiquorDeclarations { get; set; }
+        
         public bool? ShowDescription1 { get; set; }
 
         public LicenseType LicenseType { get; set; }
