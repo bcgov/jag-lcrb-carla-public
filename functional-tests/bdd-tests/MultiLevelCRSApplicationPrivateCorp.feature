@@ -1,7 +1,7 @@
 ﻿Feature: MultiLevelCRSApplicationPrivateCorp
     As a logged in business user
     I want to submit a CRS Application for a private corporation
-    With multiple business shareholders
+    With multiple nested business shareholders
 
 Scenario: Start Application
     Given I am logged in to the dashboard as a private corporation
