@@ -58,12 +58,12 @@
         </app-field>
       </div>
       <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="The occupant load of the event:" [required]="true"
+        <!-- <app-field class="col-md-5 col-xs-10" label="The occupant load of the event:" [required]="true"
           [valid]="securityForm.get('occupantLoad').valid || !securityForm.get('occupantLoad').touched"
           errorMessage="Please enter the occupant load of the event">
           <input type="text" class="form-control" formControlName="occupantLoad"/>
           <mat-checkbox formControlName="occupantLoadAvailable">Occupant load not available</mat-checkbox>
-        </app-field>
+        </app-field> -->
         
       </div>
       <div class="row">
@@ -193,30 +193,19 @@
     <div class="padded-section clearfix">
       <div class="row mb-5">
         <section class="col-md-5 col-xs-10">
-          <label>What will you do to prevent minors from being serverd or consuming liquor?</label>
+          <label>What will you do to prevent minors from being served or consuming liquor?</label>
           <mat-checkbox class="d-block" formControlName="safeAndResponsibleMinorsNotAttending">Not applicable - no minors are attending the event</mat-checkbox>
-          <mat-checkbox class="d-block" formControlName="safeAndResponsibleLiquorAreaControlled">Access to the liquor service area is well controlled - describe:</mat-checkbox>
-          <input type="text" class="form-control" formControlName="safeAndResponsibleLiquorAreaControlledDescription"/>
-          <mat-checkbox class="d-block" formControlName="safeAndResponsibleMandatoryID">Mandatory requirement of 2 pieces of ID</mat-checkbox>
-          <mat-checkbox class="d-block" formControlName="safeAndResponsibleSignsAdvisingMinors">Signs advising that minors cannot enter the liquor service area and 2 pieces of ID required</mat-checkbox>
-          <mat-checkbox class="d-block" formControlName="safeAndResponsibleMinorsOther">Other - describe:</mat-checkbox>
-          <input type="text" class="form-control" formControlName="safeAndResponsibleMinorsOtherDescription"/>
         </section>
       </div>
-      <div class="row mb-5">
+      <!-- <div class="row mb-5">
         <section class="col-md-5 col-xs-10">
           <label>What will you do to prevent over-consumption and intoxication?</label>
-          <mat-checkbox class="d-block" formControlName="safeAndResponsibleSignsAdvisingRemoval">Signs advising that intoxicated persons will be removed</mat-checkbox>
-          <mat-checkbox class="d-block" formControlName="safeAndResponsibleSignsAdvisingTwoDrink">Signs advising two-drink maximum in effect</mat-checkbox>
-          <mat-checkbox class="d-block" formControlName="safeAndResponsibleOverConsumptionOther">Other - describe:</mat-checkbox>
           <input type="text" class="form-control" formControlName="safeAndResponsibleOverConsumptionOtherDescription"/>
         </section>
-      </div>
+      </div> -->
       <div class="row mb-5">
         <section class="col-md-5 col-xs-10">
           <label>What will you do to prevent unreasonable disturbances to neighbours?</label>
-          <mat-checkbox class="d-block" formControlName="safeAndResponsibleReadAppendix2">I have read Appendix 2: Taking Reasonable Measures to Prevent Disturbances in the terms and conditions guide</mat-checkbox>
-          <mat-checkbox class="d-block" formControlName="safeAndResponsibleDisturbancesOther">Other - describe:</mat-checkbox>
           <input type="text" class="form-control" formControlName="safeAndResponsibleDisturbancesOtherDescription"/>
         </section>
       </div>
