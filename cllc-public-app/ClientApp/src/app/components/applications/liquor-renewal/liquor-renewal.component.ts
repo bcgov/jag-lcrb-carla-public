@@ -73,8 +73,6 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       id: [''],
-      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
-      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
 
       renewalBusinessType: ['', Validators.required],
       renewalCriminalOffenceCheck: ['', Validators.required],
@@ -85,7 +83,16 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       renewalThirdParty: ['', Validators.required],
       renewalTiedhouse: ['', Validators.required],
       renewalUnreportedSaleOfBusiness: ['', Validators.required],
-      renewalValidInterest: ['', Validators.required],
+      renewalValidInterest: ['', Validators.required], 
+      
+      contactPersonFirstName: ['', Validators.required],
+      contactPersonLastName: ['', Validators.required],
+      contactPersonRole: [''],
+      contactPersonEmail: ['', Validators.required],
+      contactPersonPhone: ['', Validators.required],
+
+      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
+      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
     });
 
     this.applicationDataService.getSubmittedApplicationCount()
