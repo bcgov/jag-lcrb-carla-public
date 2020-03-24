@@ -429,6 +429,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // so we just do a Dynamics lookup on the siteMinderGuid.
 
                 _logger.LogDebug("Loading user external id = " + siteMinderGuid);
+                // 3/18/2020 - Note that LoadUser will now work if there is a match on the guid, as well as a match on name in a case where there is no guid.
                 userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(siteMinderGuid, context.Request.Headers, _logger);
                 _logger.LogDebug("After getting authenticated user = " + userSettings.GetJson());
 
@@ -489,6 +490,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     if (siteMinderBusinessGuid != null) // BCeID user
                     {
                         var contact = _dynamicsClient.GetContactByExternalId(userSettings.ContactId);
+                        if (contact == null)
+                        {
+                            // try by other means.
+                            var contactVM = new Public.ViewModels.Contact();
+                            contactVM.CopyHeaderValues(context.Request.Headers);
+                            contact = _dynamicsClient.GetContactByContactVmBlankSmGuid(contactVM);
+                        }
                         if (contact != null && contact.Contactid != null)
                         {
                             await CreateContactDocumentLocation(_dynamicsClient, _fileManagerClient, contact);
@@ -496,6 +504,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
 
                         var account = await _dynamicsClient.GetAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
+                        if (account == null)
+                        {
+                            // try by other means.
+                            account = _dynamicsClient.GetAccountByLegalName(userSettings.BusinessLegalName);
+                        }
                         if (account != null && account.Accountid != null)
                         {
                             userSettings.AccountId = account.Accountid;
