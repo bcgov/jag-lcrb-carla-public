@@ -276,7 +276,7 @@ namespace bdd_tests
             string shareholderVotingShares = "500";
             string shareholderEmail = "jacqui@chan.com";
 
-            // open shareholder form    
+            // open shareholder form 
             NgWebElement uiOpenShare = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section/app-associate-list/div/button"));
             uiOpenShare.Click();
 
@@ -429,10 +429,10 @@ namespace bdd_tests
         {
             // add in an additional five nested business shareholders
             business_shareholder_2();
-            business_shareholder_3();
-            business_shareholder_4();
-            business_shareholder_5();
-            business_shareholder_6();
+            //business_shareholder_3();
+            //business_shareholder_4();
+            //business_shareholder_5();
+            //business_shareholder_6();
         }
 
         [And(@"I submit the organization information")]
@@ -463,31 +463,30 @@ namespace bdd_tests
             string businessVotingShares2 = "100";
             string businessEmail2 = "garda@world.com";
 
-            // open business shareholder form    
-            NgWebElement uiOpenShareBiz2 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section[2]/app-associate-list/div/button"));
+            // open business shareholder form 
+            NgWebElement uiOpenShareBiz2 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/button"));
             uiOpenShareBiz2.Click();
 
             // enter business name
-            NgWebElement uiShareFirstBiz2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[11]"));
+            NgWebElement uiShareFirstBiz2 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[1]/app-field/section/div[1]/section/input"));
             uiShareFirstBiz2.SendKeys(businessName2);
 
             // enter business voting shares
-            NgWebElement uiShareVotesBiz2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+            NgWebElement uiShareVotesBiz2 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[2]/app-field/section/div/section/input"));
             uiShareVotesBiz2.SendKeys(businessVotingShares2);
 
             // select the business type
-            NgWebElement uiShareBizType2 = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/select/option[2]"));
+            NgWebElement uiShareBizType2 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[3]/app-field/section/div/section/select/option[2]"));
             uiShareBizType2.Click();
 
             // enter business shareholder email
-            NgWebElement uiShareEmailBiz2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
+            NgWebElement uiShareEmailBiz2 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0'/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
             uiShareEmailBiz2.SendKeys(businessEmail2);
 
             // select the business shareholder confirm button
-            NgWebElement uiShareBizConfirmButton2 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr/td[5]/i/span"));
+            NgWebElement uiShareBizConfirmButton2 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr[2]/td[5]/i/span"));
             uiShareBizConfirmButton2.Click();
-
-            // todo: find the upload folder
+            /*
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
@@ -508,7 +507,7 @@ namespace bdd_tests
             NgWebElement uploadSpecialRightsResBiz2 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[18]"));
             uploadSpecialRightsResBiz2.SendKeys(specialRightsRestrictionsBiz2);
 
-            /********** Business Shareholder #2 - Key Personnel **********/
+            /********** Business Shareholder #2 - Key Personnel **********
 
             // create business shareholder key personnel data
             string keyPersonnelFirstNameBiz2 = "GardaWorld";
@@ -547,7 +546,7 @@ namespace bdd_tests
             NgWebElement uiKeyPersonnelDOB1Biz22 = ngDriver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/mat-datepicker-content/mat-calendar/div/mat-month-view/table/tbody/tr[4]/td[1]/div"));
             uiKeyPersonnelDOB1Biz22.Click();
 
-            /********** Business Shareholder #2 - Individual Shareholder **********/
+            /********** Business Shareholder #2 - Individual Shareholder **********
 
             // create the business shareholder > individual shareholder data
             string shareholderFirstNameBiz2 = "GardaWorld";
@@ -580,7 +579,7 @@ namespace bdd_tests
             uiCalendarIndyS1Biz2.Click();
 
             NgWebElement uiCalendarIndyS2Biz2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-6']/div/mat-month-view/table/tbody/tr[4]/td[1]/div"));
-            uiCalendarIndyS2Biz2.Click();
+            uiCalendarIndyS2Biz2.Click();*/
         }
 
         public void business_shareholder_3()
