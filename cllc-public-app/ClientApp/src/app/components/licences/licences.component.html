@@ -117,14 +117,17 @@
             </td>
 
             <td style="background-color: #E1E8F2; padding: 10px;">
-              <ng-container
-                *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested !== 'Yes' || !licenceTransferFeatureOn)">
+              <ng-container *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested !== 'Yes' && licenceTransferFeatureOn)">
                 <div *ngIf="item.status != PAYMENT_REQUIRED">
                   <p>
                     <a *ngIf="licenceTransferFeatureOn" [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
                       <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Transfer Ownership</span>
                     </a>
                   </p>
+                </div>
+              </ng-container>              
+              <ng-container *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested !== 'Yes' || !licenceTransferFeatureOn || (item?.licenceTypeName !== ApplicationTypeNames.CannabisRetailStore && item?.licenceTypeName !== ApplicationTypeNames.Marketer))">
+                <div *ngIf="item.status != PAYMENT_REQUIRED">
                   <p *ngFor="let action of item.allowedActions">
                     <a href="javascript:void(0);" (click)="doAction(item,action.name)">
                       <span><i class="fas fa-bolt" style="margin-right: 10px;"></i>{{action?.actionText}}</span>
@@ -138,9 +141,8 @@
                 Expired<br>Please Renew.
               </section>
 
-              <section
-                *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested === 'Yes' && licenceTransferFeatureOn)"
-                class="licence-expired">
+              <section *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested === 'Yes' && licenceTransferFeatureOn)"
+                       class="licence-expired">
                 TRANSFER INITIATED <br />
                 <a [routerLink]="[ '/ownership-cancel-transfer/' + item.licenseId]">
                   <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Cancel Transfer</span>
