@@ -42,7 +42,11 @@ namespace bdd_tests
                 Console.Out.WriteLine("Enabling Headless Mode");
                 options.AddArguments("headless", "no-sandbox", "disable-web-security",  "no-zygote", "disable-gpu");
             }
-            
+            else
+            {
+                options.AddArguments("--start-maximized");
+            }
+
             driver = new ChromeDriver(path, options);
             
             //driver = new FirefoxDriver(FirefoxDriverService);
