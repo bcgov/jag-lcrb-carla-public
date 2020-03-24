@@ -252,3 +252,19 @@ section.padded,
 }
 
 .row:before, .row:after {display: none !important;}
+
+.mat-expansion-panel {
+ background-color:#E1E8F2;
+ 
+}
+
+.mat-expansion-panel-header-title {
+    color: black;
+    font-weight:600;
+}
+.mat-expansion-panel-header-description {
+    color: black;
+    font-weight:600;
+    border: 1px sold black;
+    border-radius:5px;
+}
