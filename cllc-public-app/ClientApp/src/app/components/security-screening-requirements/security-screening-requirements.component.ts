@@ -22,6 +22,7 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
   cannabisLicenceExist: boolean;
   isLiquorApplication: boolean;
   isCannabisApplication: boolean;
+  errorMessages: string[] = [];
 
   constructor(private snackBar: MatSnackBar,
     private route: ActivatedRoute,
@@ -75,19 +76,46 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
     this.snackBar.open('The link is copied to the clipboard', '', { duration: 2500, panelClass: ['green-snackbar'] });
   }
 
+  showLiquorContent(): boolean {
+    let show = false;
+    if ((!this.applicationId && this.liquorLicenceExist) || this.isLiquorApplication) {
+      show = true;
+    }
+    return show;
+  }
+
+  showCannabisContent(): boolean {
+    let show = false;
+    if ((!this.applicationId && this.cannabisLicenceExist) || this.isCannabisApplication) {
+      show = true;
+    }
+    return show;
+  }
+
+  isValid(): boolean {
+    this.errorMessages = [];
+    let valid = true;
+    if (this.showLiquorContent() && this.applicationId && this.data.liquor.outstandingItems.length > 0) {
+      this.errorMessages.push('Please complete all outstanding items');
+    }
+    return valid;
+  }
+
   /**
  * Redirect to payment processing page (Express Pay / Bambora service)
  * */
   private submitApplicationPayment() {
-    this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
-      .subscribe(jsonUrl => {
-        window.location.href = jsonUrl['url'];
-        return jsonUrl['url'];
-      }, err => {
-        if (err._body === 'Payment already made') {
-          this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        }
-      });
+    if (this.isValid()) {
+      this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
+        .subscribe(jsonUrl => {
+          window.location.href = jsonUrl['url'];
+          return jsonUrl['url'];
+        }, err => {
+          if (err._body === 'Payment already made') {
+            this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          }
+        });
+    }
   }
 
 }
