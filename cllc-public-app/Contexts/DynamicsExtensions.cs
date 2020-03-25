@@ -551,7 +551,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             try
             {
                 var contactsResponse = system.Contacts.Get(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
-                
+                result = contactsResponse.Value.FirstOrDefault();                
             }
             catch (HttpOperationException)
             {
@@ -646,16 +646,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="smGuid"></param>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient, string smGuid, IHeaderDictionary Headers, ILogger _logger, string guid = null)
+        public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient, string smGuid, IHeaderDictionary Headers, ILogger _logger)
         {
             User user = null;
             MicrosoftDynamicsCRMcontact contact = null;
             Guid userGuid;
-
-            if (!string.IsNullOrEmpty(guid))
-            {
-                user = await _dynamicsClient.GetUserByGuid(guid);
-            }
 
             if (user == null)
             {
@@ -759,21 +754,9 @@ namespace Gov.Lclb.Cllb.Interfaces
                     }
                 }
             }
-
-            if (user == null)
-                return null;
-
-            if (guid == null)
-                return user;
-
-
-            if (!user.ContactId.ToString().Equals(guid, StringComparison.OrdinalIgnoreCase))
-            {
-                // invalid account - guid doesn't match user credential
-                return null;
-            }
-
+            
             return user;
+
         }
 
         /// <summary>
