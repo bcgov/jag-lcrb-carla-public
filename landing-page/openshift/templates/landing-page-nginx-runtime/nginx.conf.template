@@ -82,6 +82,8 @@ http {
 
         # Remove path prefix when handling files
         rewrite ^\/lcrb\/(.*) /$1 last;
+		
+		rewrite ^\/LCRB\/(.*) /$1 last;
     
         # serve our angular app here
         location / {
