@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -72,7 +73,8 @@ namespace Gov.Lclb.Cllb.OrgbookService
 
         public async Task<Name> SearchCompanyName(string query)
         {
-            HttpResponseMessage resp = await Client.GetAsync(ORGBOOK_BASE_URL + ORGBOOK_API_AUTOCOMPLETE_ENDPOINT + $"?q={query}&latest=true&revoked=false&&inactive=false");
+            string url = ORGBOOK_BASE_URL + ORGBOOK_API_AUTOCOMPLETE_ENDPOINT + $"?q={Uri.EscapeDataString(query)}&latest=true&revoked=false&inactive=false";
+            HttpResponseMessage resp = await Client.GetAsync(url);
             if (resp.IsSuccessStatusCode)
             {
                 string _responseContent = await resp.Content.ReadAsStringAsync();

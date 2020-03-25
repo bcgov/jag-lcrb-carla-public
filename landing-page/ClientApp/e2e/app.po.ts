@@ -68,7 +68,7 @@ var AppHomePage = function() {
     var hideVoteResultsButton = element(by.id("hideVoteResultsButton"));
 
     this.navigateTo = function() {
-      return browser.get('/LCRB/');
+      return browser.get('/lcrb/');
     };
 
     this.getMainHeading = function() {

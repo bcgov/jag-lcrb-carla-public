@@ -1,57 +1,56 @@
 <div class="form-wrapper" style="position: relative">
     <div [ngBusy]="busy"></div>
-        <div>
-            <h1 class="ngtest-page-title">{{ htmlContent?.title }}</h1>
-        </div>
-        <div [formGroup]="form" class="application-wrapper">
-            <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>
-            <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">BEFORE STARTING
-                THE APPLICATION</h3>
-            <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
-                <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
+    <div>
+        <h1 class="ngtest-page-title">{{ htmlContent?.title }}</h1>
+    </div>
+    <div [formGroup]="form" class="application-wrapper">
+        <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>
+        <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">BEFORE STARTING
+            THE APPLICATION</h3>
+        <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
+            <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
+        </section>
+        <h3 class="blue-header">Questionnaire</h3>
+        <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+            <section class="d-flex justify-content-between w-100">
+                <div class="question-label align-self-center">
+                    1. Have you or any partner, shareholder, director, or officer of this licensee been arrested
+                    for, charged with, or convicted of a criminal offence within the past 12 months that you have
+                    not reported to the LCRB?
+                </div>
+                <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalCriminalOffenceCheck')}"
+                        formControlName="renewalCriminalOffenceCheck" aria-label="Font Style">
+                        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                        <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
             </section>
-            <h3 class="blue-header">Questionnaire</h3>
-            <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
-                <section class="d-flex justify-content-between w-100">
-                    <div class="question-label align-self-center">
-                        1. Have you or any partner, shareholder, director, or officer of this licensee been arrested
-                        for, charged with, or convicted of a criminal offence within the past 12 months that you have
-                        not reported to the LCRB?
-                    </div>
-                    <div style="flex: 0 0 85px;">
-                        <mat-button-toggle-group
-                            [ngClass]="{'invalid': isTouchedAndInvalid('renewalCriminalOffenceCheck')}"
-                            formControlName="renewalCriminalOffenceCheck" aria-label="Font Style">
-                            <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                            <mat-button-toggle value="No">No</mat-button-toggle>
-                        </mat-button-toggle-group>
-                    </div>
-                </section>
-                <section style="padding-right: 95px;">
-                    <div *ngIf="form.get('renewalCriminalOffenceCheck').value === 'Yes'" class="field-changed">
-                    </div>
-                </section>
-            </mat-card>
+            <section style="padding-right: 95px;">
+                <div *ngIf="form.get('renewalCriminalOffenceCheck').value === 'Yes'" class="field-changed">
+                </div>
+            </section>
+        </mat-card>
 
-            <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
-                <section class="d-flex justify-content-between w-100">
-                    <div class="question-label align-self-center">
-                        2. Have you or any of your partners, shareholders or directors of this establishment received
-                        any alcohol related driving infractions in the past 12 months?
-                    </div>
-                    <div style="flex: 0 0 85px;">
-                        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalDUI')}"
-                            formControlName="renewalDUI" aria-label="Font Style">
-                            <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                            <mat-button-toggle value="No">No</mat-button-toggle>
-                        </mat-button-toggle-group>
-                    </div>
-                </section>
-                <section style="padding-right: 95px;">
-                    <div *ngIf="form.get('renewalDUI').value === 'Yes'" class="field-changed">
-                    </div>
-                </section>
-            </mat-card>
+        <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+            <section class="d-flex justify-content-between w-100">
+                <div class="question-label align-self-center">
+                    2. Have you or any of your partners, shareholders or directors of this establishment received
+                    any alcohol related driving infractions in the past 12 months?
+                </div>
+                <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalDUI')}"
+                        formControlName="renewalDUI" aria-label="Font Style">
+                        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                        <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </section>
+            <section style="padding-right: 95px;">
+                <div *ngIf="form.get('renewalDUI').value === 'Yes'" class="field-changed">
+                </div>
+            </section>
+        </mat-card>
 
             <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
                 <section class="d-flex justify-content-between w-100">
@@ -74,302 +73,303 @@
                 </section>
             </mat-card>
 
-            <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
-                <section class="d-flex justify-content-between w-100">
-                    <div class="question-label align-self-center">
-                        4. Have you redistributed any shares within the past 12 months?
-                    </div>
-                    <div style="flex: 0 0 85px;">
-                        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalShareholders')}"
-                            formControlName="renewalShareholders" aria-label="Font Style">
-                            <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                            <mat-button-toggle value="No">No</mat-button-toggle>
-                        </mat-button-toggle-group>
-                    </div>
-                </section>
-                <section style="padding-right: 95px;">
-                    <div *ngIf="form.get('renewalShareholders').value === 'Yes'" class="field-changed">
-                    </div>
-                </section>
-            </mat-card>
+        <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+            <section class="d-flex justify-content-between w-100">
+                <div class="question-label align-self-center">
+                    4. Have you redistributed any shares within the past 12 months?
+                </div>
+                <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalShareholders')}"
+                        formControlName="renewalShareholders" aria-label="Font Style">
+                        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                        <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </section>
+            <section style="padding-right: 95px;">
+                <div *ngIf="form.get('renewalShareholders').value === 'Yes'" class="field-changed">
+                </div>
+            </section>
+        </mat-card>
 
-            <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
-                <section class="d-flex justify-content-between w-100">
-                    <div class="question-label align-self-center">
-                        5. Have you entered into an agreement allowing another person or business to use your liquor
-                        licence within the past 12 months?
-                    </div>
-                    <div style="flex: 0 0 85px;">
-                        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalThirdParty')}"
-                            formControlName="renewalThirdParty" aria-label="Font Style">
-                            <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                            <mat-button-toggle value="No">No</mat-button-toggle>
-                        </mat-button-toggle-group>
-                    </div>
-                </section>
-                <section style="padding-right: 95px;">
-                    <div *ngIf="form.get('renewalThirdParty').value === 'Yes'" class="field-changed">
-                    </div>
-                </section>
-            </mat-card>
+        <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+            <section class="d-flex justify-content-between w-100">
+                <div class="question-label align-self-center">
+                    5. Have you entered into an agreement allowing another person or business to use your liquor
+                    licence within the past 12 months?
+                </div>
+                <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalThirdParty')}"
+                        formControlName="renewalThirdParty" aria-label="Font Style">
+                        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                        <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </section>
+            <section style="padding-right: 95px;">
+                <div *ngIf="form.get('renewalThirdParty').value === 'Yes'" class="field-changed">
+                </div>
+            </section>
+        </mat-card>
 
-            <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
-                <section class="d-flex justify-content-between w-100">
-                    <div class="question-label align-self-center">
-                        6. Have you made any structural changes to your establishment within the past 12 months?
-                    </div>
-                    <div style="flex: 0 0 85px;">
-                        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalFloorPlan')}"
-                            formControlName="renewalFloorPlan" aria-label="Font Style">
-                            <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                            <mat-button-toggle value="No">No</mat-button-toggle>
-                        </mat-button-toggle-group>
-                    </div>
-                </section>
-                <section style="padding-right: 95px;">
-                    <div *ngIf="form.get('renewalFloorPlan').value === 'Yes'" class="field-changed">
-                    </div>
-                </section>
-            </mat-card>
+        <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+            <section class="d-flex justify-content-between w-100">
+                <div class="question-label align-self-center">
+                    6. Have you made any structural changes to your establishment within the past 12 months?
+                </div>
+                <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalFloorPlan')}"
+                        formControlName="renewalFloorPlan" aria-label="Font Style">
+                        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                        <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </section>
+            <section style="padding-right: 95px;">
+                <div *ngIf="form.get('renewalFloorPlan').value === 'Yes'" class="field-changed">
+                </div>
+            </section>
+        </mat-card>
 
-            <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
-                <section class="d-flex justify-content-between w-100">
-                    <div class="question-label align-self-center">
-                        7. Have you acquired a new interest or expanded an existing interest financial or otherwise
-                        in a winery, brewery, distillery, liquor agent and/or a UBrew/UVin within the past 12 months?
-                    </div>
-                    <div style="flex: 0 0 85px;">
-                        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalTiedhouse')}"
-                            formControlName="renewalTiedhouse" aria-label="Font Style">
-                            <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                            <mat-button-toggle value="No">No</mat-button-toggle>
-                        </mat-button-toggle-group>
-                    </div>
-                </section>
-                <section style="padding-right: 95px;">
-                    <div *ngIf="form.get('renewalTiedhouse').value === 'Yes'" class="field-changed">
-                    </div>
-                </section>
-            </mat-card>
-            <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
-                <section class="d-flex justify-content-between w-100">
-                    <div class="question-label align-self-center">
-                        8. Have you sold the business associated with this liquor licence within the last 12 months?
-                    </div>
-                    <div style="flex: 0 0 85px;">
-                        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalUnreportedSaleOfBusiness')}"
-                            formControlName="renewalUnreportedSaleOfBusiness" aria-label="Font Style">
-                            <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                            <mat-button-toggle value="No">No</mat-button-toggle>
-                        </mat-button-toggle-group>
-                    </div>
-                </section>
-                <section style="padding-right: 95px;">
-                    <div *ngIf="form.get('renewalUnreportedSaleOfBusiness').value === 'Yes'" class="field-changed">
-                    </div>
-                </section>
-            </mat-card>
-            <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
-                <section class="d-flex justify-content-between w-100">
-                    <div class="question-label align-self-center">
-                        9.Have you sold the property or transferred the lease associated with this liquor licence within
-                        the last 12 months?
-                    </div>
-                    <div style="flex: 0 0 85px;">
-                        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalValidInterest')}"
-                            formControlName="renewalValidInterest" aria-label="Font Style">
-                            <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                            <mat-button-toggle value="No">No</mat-button-toggle>
-                        </mat-button-toggle-group>
-                    </div>
-                </section>
-                <section style="padding-right: 95px;">
-                    <div *ngIf="form.get('renewalValidInterest').value === 'Yes'" class="field-changed">
-                    </div>
-                </section>
-            </mat-card>
-            <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
-                <section class="d-flex justify-content-between w-100">
-                    <div class="question-label align-self-center">
-                        10. Have you added, changed or removed a licensee representative within the past 12 months?
-                    </div>
-                    <div style="flex: 0 0 85px;">
-                        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalkeypersonnel')}"
-                            formControlName="renewalkeypersonnel" aria-label="Font Style">
-                            <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                            <mat-button-toggle value="No">No</mat-button-toggle>
-                        </mat-button-toggle-group>
-                    </div>
-                </section>
-                <section style="padding-right: 95px;">
-                    <div *ngIf="form.get('renewalkeypersonnel').value === 'Yes'" class="field-changed">
-                    </div>
-                </section>
-            </mat-card>
+        <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+            <section class="d-flex justify-content-between w-100">
+                <div class="question-label align-self-center">
+                    7. Have you acquired a new interest or expanded an existing interest financial or otherwise
+                    in a winery, brewery, distillery, liquor agent and/or a UBrew/UVin within the past 12 months?
+                </div>
+                <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalTiedhouse')}"
+                        formControlName="renewalTiedhouse" aria-label="Font Style">
+                        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                        <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </section>
+            <section style="padding-right: 95px;">
+                <div *ngIf="form.get('renewalTiedhouse').value === 'Yes'" class="field-changed">
+                </div>
+            </section>
+        </mat-card>
+        <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+            <section class="d-flex justify-content-between w-100">
+                <div class="question-label align-self-center">
+                    8. Have you sold the business associated with this liquor licence within the last 12 months?
+                </div>
+                <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group
+                        [ngClass]="{'invalid': isTouchedAndInvalid('renewalUnreportedSaleOfBusiness')}"
+                        formControlName="renewalUnreportedSaleOfBusiness" aria-label="Font Style">
+                        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                        <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </section>
+            <section style="padding-right: 95px;">
+                <div *ngIf="form.get('renewalUnreportedSaleOfBusiness').value === 'Yes'" class="field-changed">
+                </div>
+            </section>
+        </mat-card>
+        <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+            <section class="d-flex justify-content-between w-100">
+                <div class="question-label align-self-center">
+                    9.Have you sold the property or transferred the lease associated with this liquor licence within
+                    the last 12 months?
+                </div>
+                <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalValidInterest')}"
+                        formControlName="renewalValidInterest" aria-label="Font Style">
+                        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                        <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </section>
+            <section style="padding-right: 95px;">
+                <div *ngIf="form.get('renewalValidInterest').value === 'Yes'" class="field-changed">
+                </div>
+            </section>
+        </mat-card>
+        <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+            <section class="d-flex justify-content-between w-100">
+                <div class="question-label align-self-center">
+                    10. Have you added, changed or removed a licensee representative within the past 12 months?
+                </div>
+                <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalkeypersonnel')}"
+                        formControlName="renewalkeypersonnel" aria-label="Font Style">
+                        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                        <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </section>
+            <section style="padding-right: 95px;">
+                <div *ngIf="form.get('renewalkeypersonnel').value === 'Yes'" class="field-changed">
+                </div>
+            </section>
+        </mat-card>
 
-            <!--h3 class="blue-header">RENEWAL CONTACT DETAILS</h3>
-            <i *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
-              The contact LCRB should communicate with regarding the application. The contact must be authorized to
-              represent
-              the applicant and have the authority to bind the applicant.
-            </i>
-            <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-              <i *ngIf="account?.businessType === 'SoleProprietor'">
+        <h3 class="blue-header">RENEWAL CONTACT DETAILS</h3>
+        <i *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+            The contact LCRB should communicate with regarding the application. The contact must be authorized to
+            represent
+            the applicant and have the authority to bind the applicant.
+        </i>
+        <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+            <i *ngIf="account?.businessType === 'SoleProprietor'">
                 The contact LCRB should communicate with regarding the application
-              </i>
-              <i *ngIf="account?.businessType === 'Society'">
+            </i>
+            <i *ngIf="account?.businessType === 'Society'">
                 The contact LCRB should communicate with regarding the application. The contact must be authorized to
                 represent the applicant and have the authority to bind the applicant.
-              </i>
-              <i *ngIf="businessTypeIsPartnership()">
+            </i>
+            <i *ngIf="businessTypeIsPartnership()">
                 The contact LCRB should communicate with regarding the application. The contact must be authorized to
                 represent the applicant and have the authority to bind the applicant.
-              </i>
-              <i *ngIf="account?.businessType !== 'PublicCorporation'">
+            </i>
+            <i *ngIf="account?.businessType !== 'PublicCorporation'">
                 The contact must be authorized to represent the applicant and have the authority to bind the applicant.
-              </i>
-              <i *ngIf="businessTypeIsPrivateCorporation()">
+            </i>
+            <i *ngIf="businessTypeIsPrivateCorporation()">
                 The contact LCRB should communicate with regarding the application. The contact must be authorized to
                 represent the applicant and have the authority to bind the applicant.
-              </i>
-            </div>
-            <address class="padded-section">
-      
-              <app-field label="First Name" [required]="true"
-                         [valid]="form.get('contactPersonFirstName').valid || !form.get('contactPersonFirstName').touched"
-                         errorMessage="Please enter the business contact's first name">
-                <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
-                       formControlName="contactPersonFirstName">
-              </app-field>
-      
-              <app-field label="Last Name" [required]="true"
-                         [valid]="form.get('contactPersonLastName').valid || !form.get('contactPersonLastName').touched"
-                         errorMessage="Please enter the business contact's last name">
-                <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
-                       formControlName="contactPersonLastName">
-              </app-field>
-      
-              <app-field label="Title/ Position" [required]="false" [valid]="true">
-                <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
-              </app-field>
-      
-              <app-field label="Phone Number (main)" [required]="true"
-                         [valid]="form.get('contactPersonPhone').valid || !form.get('contactPersonPhone').touched"
-                         errorMessage="Please enter the business contact's 10-digit phone number">
-                <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
-                       (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
-              </app-field>
-      
-              <app-field label="Email" [required]="true"
-                         [valid]="form.get('contactPersonEmail').valid || !form.get('contactPersonEmail').touched"
-                         errorMessage="Please enter the business contact's email address">
-                <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
-                       formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
-              </app-field>
-            </address-->
-
-
-            <h3 class="blue-header ngtest-declarations">
-                DECLARATIONS
-            </h3>
-            <div class="padded-section">
-                <p>
-                    This application should be submitted by an individual with the authority to bind the applicant. The
-                    branch
-                    relies on the applicant to ensure that the individual who submits this application is authorized to
-                    do so.
-                    Typically, an appropriate individual in a corporation will be a duly authorized signatory who will
-                    usually
-                    be an officer or, in some cases, a director.
-                </p>
-                <p>
-                    Note: An agent, lawyer, licensee representative or third party operator may NOT submit this
-                    application on
-                    behalf of the applicant.
-                </p>
-                <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
-                    errorMessage="Please affirm that you are authorized to submit the application."
-                    [showChevrons]="false">
-                    <section style="display: flex">
-                        <input type="checkbox" formControlName="authorizedToSubmit">
-                        <span class="error-states">*</span>
-                        <div style="padding-left: 10px;"> I understand and affirm that I am authorized to submit the
-                            application
-                        </div>
-                    </section>
-                </app-field>
-                <p>
-                    Section 20(1) of the Liquor Control and Licensing Act states: “The general manager may refuse to issue, renew, transfer or amend a licence if the applicant fails to disclose a material fact required by the application or makes a false or misleading statement in the application.”
-                </p>
-                <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
-                    errorMessage="Please affirm that all of the information provided for this application is true and complete."
-                    [showChevrons]="false">
-                    <section style="display: flex">
-                        <input type="checkbox" formControlName="signatureAgreement">
-                        <span class="error-states">*</span>
-                        <div style="padding-left: 10px;"> I understand and affirm that all of the information provided
-                            for this
-                            application is true and complete
-                        </div>
-                    </section>
-                </app-field>
-            </div>
-
-            <section class="error" *ngIf="showValidationMessages">
-                <p *ngFor="let message of validationMessages">
-                    <span class="app-cancel">
-                        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-                        {{message}}
-                    </span>
-                </p>
-            </section>
-
-            <div class="light-blue-bg">
-                <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
-                    The Province does not know how many application for a cannabis retail store licence will be
-                    received.
-                    Therefore, it is difficult to predict how long applications will take to process. To minimize delays
-                    in
-                    processing, applicants must make sure the application is complete before submitting it.
-                </p>
-                <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-                    The Province does not know how many applications for a cannabis marketing licence will be received.
-                    Therefore,
-                    it is difficult to predict how long applications will take to process. To minimize delays in
-                    processing,
-                    applicants must make sure the application is complete before submitting it.
-                </p>
-                <br>
-                <p>
-                    The ‘save for later’ feature allows applicants to re-access an application in progress. Please be
-                    advised
-                    that
-                    once an application is submitted, you will be unable to upload additional documentation. For
-                    questions on
-                    the
-                    LCRB application process, please contact: <a href="javascript: void(0);">lcrbcannabis@gov.bc.ca</a>.
-                </p>
-            </div>
-
-            <section style="position: relative; margin-top: 20px;">
-                <button class="btn btn-primary" style="margin-right:10px;" (click)="saveForLater()">
-                    <span>
-                        <i class="fa fa-save" style="color: #fff;"></i>
-                        SAVE FOR LATER
-                    </span>
-                </button>
-                <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
-                <span style="float: right; color: #1a5a96; padding-top: 10px;">
-                    <span (click)="cancelApplication()">
-                        <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
-                        <a href="javascript: void(0)">
-                            Cancel Application
-                        </a>
-                    </span>
-                </span>
-
-                <div [ngBusy]="busy"></div>
-            </section>
+            </i>
         </div>
-    
+        <address class="padded-section">
+
+            <app-field label="First Name" [required]="true"
+                [valid]="form.get('contactPersonFirstName').valid || !form.get('contactPersonFirstName').touched"
+                errorMessage="Please enter the business contact's first name">
+                <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
+                    formControlName="contactPersonFirstName">
+            </app-field>
+
+            <app-field label="Last Name" [required]="true"
+                [valid]="form.get('contactPersonLastName').valid || !form.get('contactPersonLastName').touched"
+                errorMessage="Please enter the business contact's last name">
+                <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
+                    formControlName="contactPersonLastName">
+            </app-field>
+
+            <app-field label="Title/ Position" [required]="false" [valid]="true">
+                <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
+            </app-field>
+
+            <app-field label="Phone Number (main)" [required]="true"
+                [valid]="form.get('contactPersonPhone').valid || !form.get('contactPersonPhone').touched"
+                errorMessage="Please enter the business contact's 10-digit phone number">
+                <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
+                    (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
+            </app-field>
+
+            <app-field label="Email" [required]="true"
+                [valid]="form.get('contactPersonEmail').valid || !form.get('contactPersonEmail').touched"
+                errorMessage="Please enter the business contact's email address">
+                <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
+                    formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
+            </app-field>
+        </address>
+
+
+        <h3 class="blue-header ngtest-declarations">
+            DECLARATIONS
+        </h3>
+        <div class="padded-section">
+            <p>
+                <strong>
+                    The application must only be submitted by an individual with the authority to bind the applicant.
+                    The branch relies on the applicant to ensure that the individual who submits this application is
+                    authorized to do so. Typically, an appropriate individual in a corporation will be a duly authorized
+                    signatory who will usually be an officer or, in some cases, a director. Note: A lawyer or
+                    consultant, may NOT submit this application on behalf of the applicant.
+                </strong>
+            </p>
+            <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
+                errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
+                <section style="display: flex">
+                    <input type="checkbox" formControlName="authorizedToSubmit">
+                    <span class="error-states">*</span>
+                    <div style="padding-left: 10px;"> I understand and affirm that I am authorized to submit the
+                        application
+                    </div>
+                </section>
+            </app-field>
+            <p>
+                <strong>
+                    Section 20(1) of the Liquor Control and Licensing Act states: “The general manager may refuse to
+                    issue,
+                    renew, transfer or amend a licence if the applicant fails to disclose a material fact required by
+                    the
+                    application or makes a false or misleading statement in the application.”
+                </strong>
+            </p>
+            <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+                errorMessage="Please affirm that all of the information provided for this application is true and complete."
+                [showChevrons]="false">
+                <section style="display: flex">
+                    <input type="checkbox" formControlName="signatureAgreement">
+                    <span class="error-states">*</span>
+                    <div style="padding-left: 10px;"> I understand and affirm that all of the information provided
+                        for this
+                        application is true and complete
+                    </div>
+                </section>
+            </app-field>
+        </div>
+
+        <section class="error" *ngIf="showValidationMessages">
+            <p *ngFor="let message of validationMessages">
+                <span class="app-cancel">
+                    <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+                    {{message}}
+                </span>
+            </p>
+        </section>
+
+        <div class="light-blue-bg">
+            <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+                The Province does not know how many application for a cannabis retail store licence will be
+                received.
+                Therefore, it is difficult to predict how long applications will take to process. To minimize delays
+                in
+                processing, applicants must make sure the application is complete before submitting it.
+            </p>
+            <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+                The Province does not know how many applications for a cannabis marketing licence will be received.
+                Therefore,
+                it is difficult to predict how long applications will take to process. To minimize delays in
+                processing,
+                applicants must make sure the application is complete before submitting it.
+            </p>
+            <br>
+            <p>
+                The ‘save for later’ feature allows applicants to re-access an application in progress. Please be
+                advised
+                that
+                once an application is submitted, you will be unable to upload additional documentation. For
+                questions on
+                the
+                LCRB application process, please contact: <a href="javascript: void(0);">lcrbcannabis@gov.bc.ca</a>.
+            </p>
+        </div>
+
+        <section style="position: relative; margin-top: 20px;">
+            <button class="btn btn-primary" style="margin-right:10px;" (click)="saveForLater()">
+                <span>
+                    <i class="fa fa-save" style="color: #fff;"></i>
+                    SAVE FOR LATER
+                </span>
+            </button>
+            <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
+            <span style="float: right; color: #1a5a96; padding-top: 10px;">
+                <span (click)="cancelApplication()">
+                    <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+                    <a href="javascript: void(0)">
+                        Cancel Application
+                    </a>
+                </span>
+            </span>
+
+            <div [ngBusy]="busy"></div>
+        </section>
+    </div>
+
 </div>
