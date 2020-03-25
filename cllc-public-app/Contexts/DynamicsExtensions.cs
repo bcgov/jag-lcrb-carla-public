@@ -487,14 +487,43 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public static IList<MicrosoftDynamicsCRMcontact> GetContactsByDetails(this IDynamicsClient system, string firstname, string middlename, string lastname, string emailaddress1)
         {
-            firstname.Replace("'", "''");
-            middlename.Replace("'", "''");
-            lastname.Replace("'", "''");
-            emailaddress1.Replace("'", "''");
+            string filter = "";
+            if (!string.IsNullOrEmpty(firstname)) {
+                firstname.Replace("'", "''");
+                filter += $"firstname eq '{firstname}'";
+            }
+            if (!string.IsNullOrEmpty(middlename))
+            {
+                if (!string.IsNullOrEmpty (filter))
+                {
+                    filter += " and ";
+                }
+                middlename.Replace("'", "''");
+                filter += $"middlename eq '{middlename}'";
+            }
+            if (!string.IsNullOrEmpty(lastname))
+            {
+                if (!string.IsNullOrEmpty(filter))
+                {
+                    filter = filter + " and ";
+                }
+                lastname.Replace("'", "''");
+                filter += $"lastname eq '{lastname}'";
+
+            }
+            if (!string.IsNullOrEmpty(emailaddress1))
+            {
+                if (!string.IsNullOrEmpty(filter))
+                {
+                    filter += " and ";
+                }
+                emailaddress1.Replace("'", "''");
+                filter += $"emailaddress1 eq '{emailaddress1}'";
+            }
             IList<MicrosoftDynamicsCRMcontact> result = null;
             try
             {
-                var contactsResponse = system.Contacts.Get(filter: $"firstname eq '{firstname}' and lastname eq '{lastname}' and middlename eq '{middlename}' and emailaddress1 eq '{emailaddress1}'");
+                var contactsResponse = system.Contacts.Get(filter: filter );
                 result = contactsResponse.Value;
             }
             catch (HttpOperationException)
@@ -522,7 +551,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             try
             {
                 var contactsResponse = system.Contacts.Get(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
-                
+                result = contactsResponse.Value.FirstOrDefault();                
             }
             catch (HttpOperationException)
             {
@@ -617,16 +646,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="smGuid"></param>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient, string smGuid, IHeaderDictionary Headers, ILogger _logger, string guid = null)
+        public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient, string smGuid, IHeaderDictionary Headers, ILogger _logger)
         {
             User user = null;
             MicrosoftDynamicsCRMcontact contact = null;
             Guid userGuid;
-
-            if (!string.IsNullOrEmpty(guid))
-            {
-                user = await _dynamicsClient.GetUserByGuid(guid);
-            }
 
             if (user == null)
             {
@@ -730,21 +754,9 @@ namespace Gov.Lclb.Cllb.Interfaces
                     }
                 }
             }
-
-            if (user == null)
-                return null;
-
-            if (guid == null)
-                return user;
-
-
-            if (!user.ContactId.ToString().Equals(guid, StringComparison.OrdinalIgnoreCase))
-            {
-                // invalid account - guid doesn't match user credential
-                return null;
-            }
-
+            
             return user;
+
         }
 
         /// <summary>
@@ -819,14 +831,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
            
             MicrosoftDynamicsCRMcontact result = null;
-            var users = _dynamicsClient.GetContactsByDetails(contact.firstname, contact.middlename, contact.lastname, contact.emailaddress1);
-            if (users != null)
+            if (contact != null)
             {
-                if (users.Count == 1)
+                var users = _dynamicsClient.GetContactsByDetails(contact.firstname, contact.middlename, contact.lastname, contact.emailaddress1);
+                if (users != null && users.Count == 1)
                 {
-                    result = users.FirstOrDefault();                    
+                    result = users.FirstOrDefault();
                 }
-            }
+            }            
 
             return result;
         }
