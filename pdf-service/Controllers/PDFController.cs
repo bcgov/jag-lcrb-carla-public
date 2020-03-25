@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.NodeServices;
 using Microsoft.AspNetCore.Hosting;
-using Newtonsoft.Json;
 
 namespace PDF.Controllers
 {
@@ -36,11 +35,10 @@ namespace PDF.Controllers
         public async Task<IActionResult> GetPDF([FromServices] INodeServices nodeServices, [FromBody]  object rawdata, string template )
         {
             JSONResponse result;
-            var options = new { format="Letter", orientation= "portrait" };            
-            Dictionary<string, string> dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(rawdata.ToString());
+            var options = new { format="Letter", orientation= "portrait" };
 
             // execute the Node.js component
-            result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", template, dict, options); 
+            result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", template, rawdata, options); 
                         
             return new FileContentResult(result.data, "application/pdf");
         }        
