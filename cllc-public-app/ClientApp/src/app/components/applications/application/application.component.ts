@@ -150,8 +150,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
       serviceHoursThursdayClose: ['', Validators.required],
       serviceHoursFridayClose: ['', Validators.required],
       serviceHoursSaturdayClose: ['', Validators.required],
-      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
-      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
+      authorizedToSubmit: [''],
+      signatureAgreement: [''],
+      liquorDeclarationCheck: [''],
       applyAsIndigenousNation: [false],
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
       federalProducerNames: ['', Validators.required],
@@ -275,6 +276,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     if (!this.application.applicationType.showDescription1) {
       this.form.get('description1').disable();
+    }
+
+    if (this.application.applicationType.showLiquorDeclarations) {
+      this.form.get('authorizedToSubmit').setValidators([this.customRequiredCheckboxValidator()]);
+    } else {
+      this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
+      this.form.get('liquorDeclarationCheck').setValidators([this.customRequiredCheckboxValidator()]);
     }
 
     // 03/01/2020 - Disabled until connected grocery store feature is ready

@@ -47,6 +47,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments,
                     EstablishmetNameIsReadOnly = applicationType.AdoxioIslockestablishmentname,
                     ProofofZoning = (FormControlState?)applicationType.AdoxioProofofzoning,
+                    ShowLiquorDeclarations = applicationType.AdoxioIsshowliquordeclarations
                                        
                 };
 
