@@ -487,6 +487,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public static IList<MicrosoftDynamicsCRMcontact> GetContactsByDetails(this IDynamicsClient system, string firstname, string middlename, string lastname, string emailaddress1)
         {
+            IList<MicrosoftDynamicsCRMcontact> result = null;
             string filter = "";
             if (!string.IsNullOrEmpty(firstname)) {
                 firstname.Replace("'", "''");
@@ -520,21 +521,25 @@ namespace Gov.Lclb.Cllb.Interfaces
                 emailaddress1.Replace("'", "''");
                 filter += $"emailaddress1 eq '{emailaddress1}'";
             }
-            IList<MicrosoftDynamicsCRMcontact> result = null;
-            try
+
+            if (!string.IsNullOrEmpty (filter))
             {
-                var contactsResponse = system.Contacts.Get(filter: filter );
-                result = contactsResponse.Value;
-            }
-            catch (HttpOperationException)
-            {
-                result = null;
-            }
-            catch (Exception)
-            {
-                result = null;
+                try
+                {
+                    var contactsResponse = system.Contacts.Get(filter: filter);
+                    result = contactsResponse.Value;
+                }
+                catch (HttpOperationException)
+                {
+                    result = null;
+                }
+                catch (Exception)
+                {
+                    result = null;
+                }
             }
 
+            
             return result;
         }
 
