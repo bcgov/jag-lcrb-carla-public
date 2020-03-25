@@ -74,14 +74,16 @@ http {
         add_header X-Frame-Options DENY;
 
         # Forward URL if not using path prefix
-        #if ($request_uri !~ "^/LCRB") {
+        #if ($request_uri !~ "^/lcrb") {
         #    return 301 $real_scheme://$http_host/LCRB$request_uri;
         #}
 
 		%API_CONFIG_SECTION%
 
         # Remove path prefix when handling files
-        rewrite ^\/LCRB\/(.*) /$1 last;
+        rewrite ^\/lcrb\/(.*) /$1 last;
+		
+		rewrite ^\/LCRB\/(.*) /$1 last;
     
         # serve our angular app here
         location / {
