@@ -429,7 +429,7 @@ namespace bdd_tests
         {
             // add in an additional five nested business shareholders
             business_shareholder_2();
-            //business_shareholder_3();
+            business_shareholder_3();
             //business_shareholder_4();
             //business_shareholder_5();
             //business_shareholder_6();
@@ -463,7 +463,7 @@ namespace bdd_tests
             string businessVotingShares2 = "100";
             string businessEmail2 = "garda@world.com";
 
-            // open business shareholder form 
+            // open business shareholder form - GardaWorld
             NgWebElement uiOpenShareBiz2 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/button"));
             uiOpenShareBiz2.Click();
 
@@ -591,28 +591,33 @@ namespace bdd_tests
             string businessVotingShares3 = "3";
             string businessEmail3 = "Häagen-Dazs@Icecream.Com";
 
-            // open business shareholder form    
-            NgWebElement uiOpenShareBiz3 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section[2]/app-associate-list/div/button"));
+            // open business shareholder form - GardaWorld
+            //NgWebElement uiOpenShareBiz2 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/button"));
+            //uiOpenShareBiz2.Click();
+
+            // open business shareholder form
+                                                                        //div[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[5]/i
+            NgWebElement uiOpenShareBiz3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/button"));
             uiOpenShareBiz3.Click();
 
             // enter business name
-            NgWebElement uiShareFirstBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[11]"));
+            NgWebElement uiShareFirstBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[31]"));
             uiShareFirstBiz3.SendKeys(businessName3);
 
             // enter business voting shares
-            NgWebElement uiShareVotesBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+            NgWebElement uiShareVotesBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[32]"));
             uiShareVotesBiz3.SendKeys(businessVotingShares3);
 
             // select the business type
-            NgWebElement uiShareBizType3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/select/option[2]"));
+            NgWebElement uiShareBizType3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[3]/app-field/section/div/section/select/option[2]"));
             uiShareBizType3.Click();
 
             // enter business shareholder email
-            NgWebElement uiShareEmailBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
+            NgWebElement uiShareEmailBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[33]"));
             uiShareEmailBiz3.SendKeys(businessEmail3);
 
-            // select the business shareholder confirm button
-            NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr/td[5]/i/span"));
+            // select the business shareholder confirm button            
+            NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[5]/i[1]/span"));
             uiShareBizConfirmButton3.Click();
 
             // find the upload test files in the bdd-tests\upload_files folder
@@ -622,17 +627,17 @@ namespace bdd_tests
 
             // upload a notice of articles document for business shareholder
             string noticeOfArticlesBiz3 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-            NgWebElement uploadNoticeofArticlesBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
+            NgWebElement uploadNoticeofArticlesBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[30]"));
             uploadNoticeofArticlesBiz3.SendKeys(noticeOfArticlesBiz3);
 
             // upload a central securities register document for business shareholder
             string centralSecuritiesRegisterBiz3 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "central_securities_register.pdf");
-            NgWebElement uploadCentralSecRegBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
+            NgWebElement uploadCentralSecRegBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[33]"));
             uploadCentralSecRegBiz3.SendKeys(centralSecuritiesRegisterBiz3);
 
             // upload a special rights and restrictions document for business shareholder
             string specialRightsRestrictionsBiz3 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "special_rights_restrictions.pdf");
-            NgWebElement uploadSpecialRightsResBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[18]"));
+            NgWebElement uploadSpecialRightsResBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[36]"));
             uploadSpecialRightsResBiz3.SendKeys(specialRightsRestrictionsBiz3);
 
             /********** Business Shareholder #3 - Key Personnel **********/
