@@ -9,6 +9,7 @@ import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
 import { ApplicationDataService } from '@services/application-data.service';
 import { LicenseDataService } from '@services/license-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('SecurityScreeningRequirementsComponent', () => {
   let component: SecurityScreeningRequirementsComponent;
@@ -17,6 +18,7 @@ describe('SecurityScreeningRequirementsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SecurityScreeningRequirementsComponent],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: MatSnackBar, useValue: {} },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
