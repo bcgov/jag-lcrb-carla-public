@@ -141,7 +141,7 @@
 
     <div class="row">
            <section class="col-md-8 mt-3">
-            <section class="error">
+            <section class="error" *ngIf="errorMessages?.length">
                 <p *ngFor="let message of errorMessages">
                   <span class="app-cancel">
                     <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
