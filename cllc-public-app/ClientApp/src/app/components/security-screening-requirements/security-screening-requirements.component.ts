@@ -95,7 +95,7 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
   isValid(): boolean {
     this.errorMessages = [];
     let valid = true;
-    if (this.showLiquorContent() && this.applicationId && this.data.liquor.outstandingItems.length > 0) {
+    if (this.showLiquorContent() && this.applicationId && this.data.liquor?.outstandingItems?.length && this.data.liquor?.outstandingItems?.length > 0) {
       this.errorMessages.push('Please complete all outstanding items');
     }
     return valid;
