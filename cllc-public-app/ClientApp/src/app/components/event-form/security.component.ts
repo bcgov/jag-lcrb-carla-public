@@ -25,7 +25,7 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
     eventLiquorLayout: ['', [Validators.required, Validators.maxLength(5000)]],
     dailyEventAttendees: ['', [Validators.required, Validators.max(999999), Validators.pattern('^[0-9]+$')]],
     dailyMinorAttendees: ['', [Validators.required, Validators.max(999999), Validators.pattern('^[0-9]+$')]],
-    occupantLoad: ['', [Validators.required, Validators.max(999999), Validators.pattern('^[0-9]+$')]],
+    occupantLoad: ['', [Validators.max(999999), Validators.pattern('^[0-9]+$')]],
     occupantLoadAvailable: ['', []],
     occupantLoadServiceArea: ['', [Validators.required, Validators.max(99999), Validators.pattern('^[0-9]+$')]],
     occupantLoadServiceAreaAvailable: ['', []],
@@ -58,6 +58,7 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
     safeAndResponsibleDisturbancesOther: ['', []],
     safeAndResponsibleDisturbancesOtherDescription: ['', [Validators.maxLength(2000)]],
     safeAndResponsibleAdditionalSafetyMeasures: ['', [Validators.maxLength(2000)]],
+    safeAndResponsibleServiceAreaSupervision: ['', [Validators.maxLength(2000)]],
     declarationIsAccurate: [false, [Validators.required]]
   });
 
@@ -128,6 +129,7 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
       safeAndResponsibleDisturbancesOther: licenceEvent.safeAndResponsibleDisturbancesOther,
       safeAndResponsibleDisturbancesOtherDescription: licenceEvent.safeAndResponsibleDisturbancesOtherDescription,
       safeAndResponsibleAdditionalSafetyMeasures: licenceEvent.safeAndResponsibleAdditionalSafetyMeasures,
+      safeAndResponsibleServiceAreaSupervision: licenceEvent.safeAndResponsibleServiceAreaSupervision,
       declarationIsAccurate: false
     });
 
