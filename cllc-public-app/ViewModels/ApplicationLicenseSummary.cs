@@ -17,6 +17,19 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Attempted = 845280006,
     }
 
+    public enum LicenseSubCategory
+    {
+        GroceryStore = 845280000,
+        IndependentWineStore = 845280001,
+        OffSiteWineStore = 845280002,
+        OnSiteWineStore = 845280003,
+        SacramentalWineStore = 845280004,
+        SpecialtyWineStore = 845280005,
+        TouristWineStore = 845280006,
+        WineOnShelf = 845280007
+
+    }
+
 
     public enum TransferRequested
     {
@@ -44,6 +57,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string EstablishmentAddressPostalCode { get; set; }
 
         public string EstablishmentPhoneNumber { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public LicenseSubCategory? LicenseSubCategory { get; set; }
 
         public string EstablishmentEmail { get; set; }
         public bool? EstablishmentIsOpen { get; set; }

@@ -320,7 +320,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             LicenceEvent licenceEventVM;
             MicrosoftDynamicsCRMadoxioLicences licence;
             MicrosoftDynamicsCRMaccount account;
-            MicrosoftDynamicsCRMsystemuser inspector;
+            string inspectorName;
+            string inspectorEmail;
+            string inspectorPhone;
 
             try
             {
@@ -328,11 +330,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 licenceEventVM = licenceEvent.ToViewModel(_dynamicsClient);
                 licence = _dynamicsClient.Licenceses.GetByKey(licenceEventVM.LicenceId);
                 account = _dynamicsClient.Accounts.GetByKey(licence._adoxioLicenceeValue);
-                inspector = _dynamicsClient.Inspector.Get(eventId);
             }
             catch (HttpOperationException)
             {
                 return new NotFoundResult();
+            }
+
+            try
+            {
+                MicrosoftDynamicsCRMsystemuser inspector = _dynamicsClient.Inspector.Get(eventId);
+                inspectorName = inspector.Fullname;
+                inspectorPhone = inspector.Address1Telephone1;
+                inspectorEmail = inspector.Internalemailaddress;
+            }
+            catch (HttpOperationException)
+            {
+                inspectorName = "";
+                inspectorPhone = "";
+                inspectorEmail = "";
             }
 
             if (!CurrentUserHasAccessToEventOwnedBy(licence._adoxioLicenceeValue))
@@ -372,9 +387,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "addressLine1", licenceEventVM.Street1 },
                 { "addressLine2", licenceEventVM.Street2 },
                 { "addressLine3", $"{licenceEventVM.City}, BC {licenceEventVM.PostalCode}" },
-                { "inspectorName", inspector?.Fullname},
-                { "inspectorPhone", inspector?.Address1Telephone1 },
-                { "inspectorEmail", inspector?.Internalemailaddress },
+                { "inspectorName", inspectorName },
+                { "inspectorPhone", inspectorPhone },
+                { "inspectorEmail", inspectorEmail },
                 { "date", DateTime.Now.ToString("MMMM dd, yyyy") }
             };
 
