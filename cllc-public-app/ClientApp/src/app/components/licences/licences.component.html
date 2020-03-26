@@ -5,12 +5,12 @@
   <div *ngIf="getNumberOfLicences() === 0">
     <h2>You do not have any licences on file</h2>  
     <p>If you currently have a liquor licence and are not seeing it here, please contact <a href="mailto:LCRBLiquor@gov.bc.ca">LCRBLiquor@gov.bc.ca</a>.</p>
-  </div>
-  
+  </div>  
   <section *ngFor="let mappingItem of licenceMappings | keyvalue">
+    <div *ngIf="LicenceTypeSupported(mappingItem.key)">
     <h2>{{mappingItem.key}} Licences</h2>
     <form [formGroup]="mainForm">
-      <table class="eq-table">
+      <table class="eq-table" >
         <tr>
           <th class="p-0">
             <img *ngIf="mappingItem.key === 'Cannabis Retail Store'" class="icon"
@@ -35,10 +35,12 @@
               <div>
                 <strong *ngIf="item?.licenceTypeName !== 'Marketing'" style="color: #1a5a96;">
                   {{item.establishmentName}}</strong>
+                  <div *ngIf="item?.licenceTypeName === 'Wine Store'"><p>{{getSubCategory(item.licenseSubCategory)}}</p></div>
               </div>
               <strong *ngIf="item?.licenceTypeName === 'Marketing'" style="color: #1a5a96;">
                 Marketing Licence</strong>
               <span *ngIf="item?.licenceTypeName !== 'Marketing'">Licence Number:  <i>{{item.licenseNumber}}</i></span>
+              
               <br>
               <span>Expiry / Renewal Date: {{item.expiryDate | date: 'MM/dd/yyyy'}}</span> <br>
               <div *ngIf="item.status !== PAYMENT_REQUIRED && !isAboutToExpire(item.expiryDate) "
@@ -185,10 +187,24 @@
           </tr>
         </ng-container>
       </table>
+    
     </form>
     <p style="text-align: center; font-style: italic;">All {{mappingItem.key}} licence holders must follow the terms and
       conditions of their licence as set out in the <a href="{{getHandbookLink(mappingItem.key)}}"
         target="_blank">{{mappingItem.key}} Terms and Conditions Handbook</a></p>
     <p>&nbsp;</p>
+    </div>
+  </section>
+
+  <section *ngFor="let mappingItem of licenceMappings | keyvalue">
+    <div *ngIf="!LicenceTypeSupported(mappingItem.key)">
+        <h3>{{mappingItem.key}} Licences - <i>Coming Soon</i></h3>
+        <ul>
+          <ng-container *ngFor="let item of licenceMappings[mappingItem.key]; let i = index;">
+            <li style="font-size: 16px;">{{item.licenseNumber}} - {{item.establishmentName}}</li>
+          </ng-container>
+
+        </ul>
+    </div>
   </section>
 </div>
