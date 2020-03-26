@@ -588,7 +588,7 @@ namespace bdd_tests
             // create the business shareholder data
             string businessName3 = "Häagen-Dazs";
             string businessVotingShares3 = "3";
-            string businessEmail3 = "Häagen-Dazs@Icecream.Com";
+            string businessEmail3 = "hd@icecream.com";
 
             // open business shareholder form
             NgWebElement uiOpenShareBiz3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/button"));
@@ -610,25 +610,11 @@ namespace bdd_tests
             NgWebElement uiShareEmailBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[33]"));
             uiShareEmailBiz3.SendKeys(businessEmail3);
 
-            // select the business shareholder confirm button - to do
-            // Option 1:
-            //NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.XPath("//div[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/button"));
-            //uiShareBizConfirmButton3.Click();
-            // Option 2:
-            //NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[5]/i[1]"));
-            //uiShareBizConfirmButton3.Click();
-            // Option 3:
-            //NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[5]/i[1]/span"));
-            //uiShareBizConfirmButton3.Click();
-            // Option 4:
-            NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.XPath("//div[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[5]/i"));
+            // select the business shareholder confirm button
+            NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.XPath("//div[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[5]/i/span"));
             uiShareBizConfirmButton3.Click();
 
-            // click on Submit Organization Info button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
-            submitOrgInfoButton.Click();
-
-            /*// find the upload test files in the bdd-tests\upload_files folder
+            // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
             string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
@@ -648,13 +634,13 @@ namespace bdd_tests
             NgWebElement uploadSpecialRightsResBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[36]"));
             uploadSpecialRightsResBiz3.SendKeys(specialRightsRestrictionsBiz3);
 
-            /********** Business Shareholder #3 - Key Personnel **********
+            /********** Business Shareholder #3 - Key Personnel **********/
 
             // create business shareholder key personnel data
             string keyPersonnelFirstNameBiz3 = "Häagen-Dazs";
             string keyPersonnelLastNameBiz3 = "KeyPersonnel";
             string keyPersonnelTitleBiz3 = "Frozen Goods";
-            string keyPersonnelEmailBiz3 = "Häagen-Dazs@keypersonnel.com";
+            string keyPersonnelEmailBiz3 = "hd@keypersonnel.com";
 
             // open business shareholder > key personnel form
             NgWebElement openKeyPersonnelFormBiz3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section/app-associate-list/div/button"));
