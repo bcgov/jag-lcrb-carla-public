@@ -129,8 +129,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.SafeAndResponsibleDisturbancesOther = item.AdoxioIsotherdisturbance;
                 result.SafeAndResponsibleDisturbancesOtherDescription = item.AdoxioIsotherdisturbancedetails;
                 result.SafeAndResponsibleAdditionalSafetyMeasures = item.AdoxioAdditionalsafetydetails;
+                result.SafeAndResponsibleServiceAreaSupervision = item.AdoxioServiceareaentrancesupervisiondetails;
                 result.DeclarationIsAccurate = item.AdoxioIsdeclarationaccurate;
                 result.SecurityPlanSubmitted = item.AdoxioSafetysecurityplanchangessubmitted;
+                
             }
 
             MicrosoftDynamicsCRMadoxioEventscheduleCollection eventSchedules = dynamicsClient.GetEventSchedulesByEventId(result.Id);
@@ -217,6 +219,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIsotherdisturbance = from.SafeAndResponsibleDisturbancesOther;
             to.AdoxioIsotherdisturbancedetails = from.SafeAndResponsibleDisturbancesOtherDescription;
             to.AdoxioAdditionalsafetydetails = from.SafeAndResponsibleAdditionalSafetyMeasures;
+            to.AdoxioServiceareaentrancesupervisiondetails = from.SafeAndResponsibleServiceAreaSupervision;
             to.AdoxioIsdeclarationaccurate = from.DeclarationIsAccurate;
 
             to.AdoxioSafetysecurityplanchangessubmitted = from.SecurityPlanSubmitted;
