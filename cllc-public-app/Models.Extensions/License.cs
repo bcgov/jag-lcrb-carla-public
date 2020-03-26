@@ -81,6 +81,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 LicenseId = licence.AdoxioLicencesid,
                 LicenseNumber = licence.AdoxioLicencenumber,
+                LicenseSubCategory = (LicenseSubCategory?)licence.AdoxioLicencesubcategory, // TG added for wine stores
                 EstablishmentAddressStreet = licence.AdoxioEstablishmentaddressstreet,
                 EstablishmentAddressCity = licence.AdoxioEstablishmentaddresscity,
                 EstablishmentAddressPostalCode = licence.AdoxioEstablishmentaddresspostalcode,
