@@ -53,19 +53,19 @@
                             history summary forms.
                         </p>
 
-                        <table>
-                            <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Date Submitted</th>
-                            </tr>
-                            <tr [ngClass]="{'alt-row': i%2 === 0}"
-                                *ngFor="let item of data?.liquor?.completedItems; let i=index;">
-                                <td>{{item.firstName}}</td>
-                                <td>{{item.lastName}} </td>
-                                <td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td>
-                            </tr>
-                        </table>
+                    <table>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Date Submitted</th>
+                        </tr>
+                        <tr [ngClass]="{'alt-row': i%2 === 0}"
+                            *ngFor="let item of data?.liquor?.completedItems; let i=index;">
+                            <td>{{item.firstName}} </td>
+                            <td>{{item.lastName}} </td>
+                            <td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td>
+                        </tr>
+                    </table>
                     </ng-container>
 
                 </div>
@@ -77,37 +77,44 @@
                     <p>
                         Each cannabis associate must provide a completed Cannabis Associate Security Screening form
                         along with required documents.
+                        See the <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms" target="_blank">Forms for Sole Proprietors and Associates of Cannabis Licence Applicants</a> for 
+                        the complete details.
                     </p>
 
-                    <h3>Outstanding Cannabis Associate Security Screening forms</h3>
+                    <!--h3>Outstanding Cannabis Associate Security Screening forms</h3>
                     <p>
                         The following associates have not provided completed cannabis associate security screening
                         forms. The forms can be completed using the provided link, which can be emailed or sent by SMS
                         to associates as needed:
-                    </p>
+                    </p-->
                     <ng-container *ngIf="data?.cannabis?.outstandingItems?.length">
-                        <table class="w-100">
+                        <table>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>Associates Requiring Security Screening:</th>
+                                <!--th>Last Name</th-->
+                                <!--th>Status</th>
+                                <th>Action</th-->
                             </tr>
                             <tr [ngClass]="{'alt-row': i%2 === 0}"
                                 *ngFor="let item of data?.cannabis?.outstandingItems; let i=index">
-                                <td>{{item.firstName}}</td>
-                                <td>{{item.lastName}} </td>
-                                <td style="text-align: center;">Not Submitted</td>
+                                <td>{{item.firstName}} {{item.lastName}}</td>
+                                <!--td>{{item.lastName}} </td-->
+                                <!--td style="text-align: center;">Not Submitted</td>
                                 <td style="text-align: center;">
                                     <a href="javascript: void(0)" (click)="copyMessage(item.casLink)">
                                         <i class="fas fa-copy"></i>
                                         Copy Link</a>
-                                </td>
+                                </td-->
+                            <tr [ngClass]="{'alt-row': i%2 === 0}"
+                            *ngFor="let item of data?.cannabis?.completedItems; let i=index;">
+                            <td>{{item.firstName}} {{item.lastName}}</td>
+                            <!--td>{{item.lastName}} </td-->
+                            <!--td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td-->                                    
                             </tr>
                         </table>
                     </ng-container>
 
-                    <h3>Completed Cannabis Associate Security Screening Forms</h3>
+                    <!--h3>Completed Cannabis Associate Security Screening Forms</h3>
                     <p>
                         The following associates have completed their cannabis associate security screening forms. No
                         further information is required at this time.
@@ -125,7 +132,7 @@
                             <td>{{item.lastName}} </td>
                             <td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td>
                         </tr>
-                    </table>
+                    </table-->
 
                 </div>
             </ng-container>
