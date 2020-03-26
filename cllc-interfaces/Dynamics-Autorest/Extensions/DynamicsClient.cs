@@ -240,13 +240,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             MicrosoftDynamicsCRMaccount result;
             try
-            {
+            {                
                 string[] expand = { "primarycontactid", 
                     "Account_SharepointDocumentLocation", 
                     "adoxio_account_adoxio_legalentity_Account", 
                     "adoxio_account_adoxio_establishment_Licencee",
                     "adoxio_account_adoxio_application_Applicant",
-                    "adoxio_licenseechangelog_BusinessAccount"};
+                    "adoxio_licenseechangelog_BusinessAccount",
+                    "adoxio_account_adoxio_licences_Licencee",
+                    "contact_customer_accounts"
+                };
                 // fetch from Dynamics.
                 result = Accounts.GetByKey(accountid: id, expand: expand);
             }
