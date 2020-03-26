@@ -192,27 +192,50 @@
     <h3 class="blue-header">SAFE AND RESPONSIBLE SERVICE</h3>
     <div class="padded-section clearfix">
       <div class="row mb-5">
-        <section class="col-md-5 col-xs-10">
-          <label>What will you do to prevent minors from being served or consuming liquor?</label>
+        <app-field class="col-md-5 col-xs-10" label="Minors - Describe what measures will be put in place to prevent minors from consuming alcohol"
+            [valid]="securityForm.get('safeAndResponsibleMinorsOtherDescription').valid || !securityForm.get('safeAndResponsibleMinorsOtherDescription').touched"
+            errorMessage="Please enter details" [isFullWidth]="true">
+          <textarea class="form-control" formControlName="safeAndResponsibleMinorsOtherDescription"></textarea>
           <mat-checkbox class="d-block" formControlName="safeAndResponsibleMinorsNotAttending">Not applicable - no minors are attending the event</mat-checkbox>
-        </section>
+        </app-field>
       </div>
-      <!-- <div class="row mb-5">
-        <section class="col-md-5 col-xs-10">
-          <label>What will you do to prevent over-consumption and intoxication?</label>
-          <input type="text" class="form-control" formControlName="safeAndResponsibleOverConsumptionOtherDescription"/>
-        </section>
-      </div> -->
+
       <div class="row mb-5">
-        <section class="col-md-5 col-xs-10">
-          <label>What will you do to prevent unreasonable disturbances to neighbours?</label>
-          <input type="text" class="form-control" formControlName="safeAndResponsibleDisturbancesOtherDescription"/>
-        </section>
+        <app-field class="col-md-5 col-xs-10" label="Removal of intoxicated patrons - You must not permit intoxicated patrons to remain in the service area. What arrangements will you make to ensure that intoxicated patrons are removed from the event and get to a safe location?"
+            [valid]="securityForm.get('safeAndResponsibleOverConsumptionOtherDescription').valid || !securityForm.get('safeAndResponsibleOverConsumptionOtherDescription').touched"
+            errorMessage="Please enter details" [isFullWidth]="true">
+          <textarea class="form-control" formControlName="safeAndResponsibleOverConsumptionOtherDescription"></textarea>
+        </app-field>
       </div>
+
+      <div class="row mb-5">
+        <app-field class="col-md-5 col-xs-10" label="Respect for neighbors - What actions will you take to ensure participants do not unduly disturb the neighborhood when the event ends?"
+            [valid]="securityForm.get('safeAndResponsibleDisturbancesOtherDescription').valid || !securityForm.get('safeAndResponsibleDisturbancesOtherDescription').touched"
+            errorMessage="Please enter details" [isFullWidth]="true">
+          <textarea class="form-control" formControlName="safeAndResponsibleDisturbancesOtherDescription"></textarea>
+        </app-field>
+      </div>
+
+      <div class="row mb-5">
+        <app-field class="col-md-5 col-xs-10" label="Describe the physical barriers (i.e., fencing, barricading, rooms, etc.) which will be in place to control and limit access to and from areas where alcohol is being sold or served?"
+            [valid]="securityForm.get('safeAndResponsibleLiquorAreaControlledDescription').valid || !securityForm.get('safeAndResponsibleLiquorAreaControlledDescription').touched"
+            errorMessage="Please enter details" [isFullWidth]="true">
+          <textarea class="form-control" formControlName="safeAndResponsibleLiquorAreaControlledDescription"></textarea>
+        </app-field>
+      </div>
+
+      <div class="row mb-5">
+        <app-field class="col-md-5 col-xs-10" label="How will the entrances to the liquor service area be supervised?"
+            [valid]="securityForm.get('safeAndResponsibleServiceAreaSupervision').valid || !securityForm.get('safeAndResponsibleServiceAreaSupervision').touched"
+            errorMessage="Please enter details" [isFullWidth]="true">
+          <textarea class="form-control" formControlName="safeAndResponsibleServiceAreaSupervision"></textarea>
+        </app-field>
+      </div>
+      
       <div class="row mb-5">
         <app-field class="col-md-5 col-xs-10" label="Please describe any additional safety and security measures"
             [valid]="securityForm.get('safeAndResponsibleAdditionalSafetyMeasures').valid || !securityForm.get('safeAndResponsibleAdditionalSafetyMeasures').touched"
-            errorMessage="Please enter additional safety and security measures" [isFullWidth]="true">
+            errorMessage="Please enter details" [isFullWidth]="true">
           <textarea class="form-control" formControlName="safeAndResponsibleAdditionalSafetyMeasures"></textarea>
         </app-field>
       </div>
