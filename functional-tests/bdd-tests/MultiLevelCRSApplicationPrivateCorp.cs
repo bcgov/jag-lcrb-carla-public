@@ -581,7 +581,6 @@ namespace bdd_tests
             NgWebElement uiCalendarIndyS2Biz2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-8']/div/mat-month-view/table/tbody/tr[4]/td[1]/div"));
             uiCalendarIndyS2Biz2.Click();
         }
-
         public void business_shareholder_3()
         {
             /********** Business Shareholder #3 **********/
@@ -593,7 +592,6 @@ namespace bdd_tests
 
             // open business shareholder form
             NgWebElement uiOpenShareBiz3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/button"));
-            //NgWebElement uiOpenShareBiz3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section/app-associate-list/div/button"));
             uiOpenShareBiz3.Click();
 
             // enter business name
@@ -612,11 +610,25 @@ namespace bdd_tests
             NgWebElement uiShareEmailBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[33]"));
             uiShareEmailBiz3.SendKeys(businessEmail3);
 
-            // select the business shareholder confirm button - to do                                                                        
-            /*NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[5]/i[1]/span"));
+            // select the business shareholder confirm button - to do
+            // Option 1:
+            //NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.XPath("//div[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/button"));
+            //uiShareBizConfirmButton3.Click();
+            // Option 2:
+            //NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[5]/i[1]"));
+            //uiShareBizConfirmButton3.Click();
+            // Option 3:
+            //NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[5]/i[1]/span"));
+            //uiShareBizConfirmButton3.Click();
+            // Option 4:
+            NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.XPath("//div[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[5]/i"));
             uiShareBizConfirmButton3.Click();
 
-            // find the upload test files in the bdd-tests\upload_files folder
+            // click on Submit Organization Info button
+            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
+            submitOrgInfoButton.Click();
+
+            /*// find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
             string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
