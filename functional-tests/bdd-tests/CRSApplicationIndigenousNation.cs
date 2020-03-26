@@ -219,11 +219,10 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
-            string indigenousNation = "Ashcroft Indian Band";
 
-            // enter the IN into the dropdown
-            NgWebElement uiSelectNation = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[3]/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select"));
-            uiSelectNation.SendKeys(indigenousNation);
+            // select the IN from the dropdown
+            NgWebElement uiSelectNation = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-2']/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select/option[2]"));
+            uiSelectNation.Click();
 
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
