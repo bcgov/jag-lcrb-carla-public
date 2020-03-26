@@ -4,7 +4,7 @@
     <div class="row">
         <section class="col-md-8">
 
-            <ng-container *ngIf="liquorLicenceExist || isLiquorApplication">
+            <ng-container *ngIf="showLiquorContent()">
                 <h3 class="blue-header">LIQUOR</h3>
                 <div class="content">
                     <p>
@@ -13,14 +13,14 @@
                         RCMP or police detachment.
                     </p>
 
-
                     <ng-container *ngIf="data?.liquor?.outstandingItems?.length">
-                            <h3>Outstanding Personal History Summary Forms</h3>
-                            <p>
-                                The following associates have not provided completed personal history summary forms. The forms
-                                can be completed using the provided link, which can be emailed or sent by SMS to associates as
-                                needed:
-                            </p>
+                        <h3>Outstanding Personal History Summary Forms</h3>
+                        <p>
+                            The following associates have not provided completed personal history summary forms. The
+                            forms can be completed using the provided link, which can be emailed or sent by SMS to
+                            associates
+                            as needed:
+                        </p>
                         <table>
                             <tr>
                                 <th>First Name</th>
@@ -43,13 +43,14 @@
                     </ng-container>
 
                     <ng-container *ngIf="data?.liquor?.completedItems?.length">
-                    <h3>Completed Personal History Summary Forms</h3>
-                    <p>
-                        The following associates have completed their personal history summary forms. No further
-                        information is required at this time.
-                    </p>
+                        <h3>Completed Personal History Summary Forms</h3>
                         <p>
-                            Shareholders with less than 10% interest in corporations are not required to submit personal history summary forms.
+                            The following associates have completed their personal history summary forms. No further
+                            information is required at this time.
+                        </p>
+                        <p>
+                            Shareholders with less than 10% interest in corporations are not required to submit personal
+                            history summary forms.
                         </p>
 
                     <table>
@@ -70,7 +71,7 @@
                 </div>
             </ng-container>
 
-            <ng-container *ngIf="cannabisLicenceExist || isCannabisApplication">
+            <ng-container *ngIf="showCannabisContent()">
                 <h3 class="blue-header">CANNABIS</h3>
                 <div class="content">
                     <p>
@@ -143,13 +144,22 @@
         </section>
 
         <section class="col-md-4"></section>
+    </div>
 
-        <section class="col-md-8 mt-3">
+    <div class="row">
+           <section class="col-md-8 mt-3">
+            <section class="error">
+                <p *ngFor="let message of errorMessages">
+                  <span class="app-cancel">
+                    <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+                    {{message}}
+                  </span>
+                </p>
+              </section>
             <section *ngIf="applicationId" class="d-flex justify-content-between">
                 <button class="btn btn-primary">Back to Org Structure</button>
                 <button class="btn btn-primary" (click)="submitApplicationPayment()">Pay for Application</button>
             </section>
         </section>
-
     </div>
 </div>
