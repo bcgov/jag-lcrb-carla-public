@@ -796,107 +796,143 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
             
-
-              
-            foreach (var le in account.AdoxioAccountAdoxioLegalentityAccount)
+            if (account.AdoxioAccountAdoxioLegalentityAccount != null)
             {
-                try
+                foreach (var le in account.AdoxioAccountAdoxioLegalentityAccount)
                 {
-                    _dynamicsClient.Legalentities.Delete(le.AdoxioLegalentityid);
-                    _logger.LogDebug(LoggingEvents.HttpDelete, "Legal Entity deleted: " + le.AdoxioLegalentityid);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException, "Error deleting the Legal Entity: ");
-                    throw new Exception("Error deleting the Legal Entity");
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError(e, "Error deleting the Legal Entity");
-                    throw new Exception("Error deleting the Legal Entity");
+                    try
+                    {
+                        _dynamicsClient.Legalentities.Delete(le.AdoxioLegalentityid);
+                        _logger.LogDebug(LoggingEvents.HttpDelete, "Legal Entity deleted: " + le.AdoxioLegalentityid);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error deleting the Legal Entity: ");
+                        throw new Exception("Error deleting the Legal Entity");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error deleting the Legal Entity");
+                        throw new Exception("Error deleting the Legal Entity");
+                    }
                 }
             }
-
-            // adoxio_account_adoxio_establishment_Licencee
-            foreach (var establishment in account.AdoxioAccountAdoxioEstablishmentLicencee)
+            
+            if (account.AdoxioAccountAdoxioEstablishmentLicencee != null)
             {
-                try
+                // adoxio_account_adoxio_establishment_Licencee
+                foreach (var establishment in account.AdoxioAccountAdoxioEstablishmentLicencee)
                 {
-                    _dynamicsClient.Establishments.Delete(establishment.AdoxioEstablishmentid);
-                    _logger.LogDebug(LoggingEvents.HttpDelete, "Establishment deleted: " + establishment.AdoxioEstablishmentid);
+                    try
+                    {
+                        _dynamicsClient.Establishments.Delete(establishment.AdoxioEstablishmentid);
+                        _logger.LogDebug(LoggingEvents.HttpDelete, "Establishment deleted: " + establishment.AdoxioEstablishmentid);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error deleting the Establishment: ");
+                        throw new Exception("Error deleting the Establishment");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error deleting the Establishment");
+                        throw new Exception("Error deleting the Establishment");
+                    }
                 }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException, "Error deleting the Establishment: ");
-                    throw new Exception("Error deleting the Establishment");
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError(e, "Error deleting the Establishment");
-                    throw new Exception("Error deleting the Establishment");
-                }
+
             }
 
-            // adoxio_account_adoxio_establishment_Licencee
-            foreach (var application in account.AdoxioAccountAdoxioApplicationApplicant)
+            if (account.AdoxioAccountAdoxioApplicationApplicant != null)
             {
-                try
+                // adoxio_account_adoxio_establishment_Licencee
+                foreach (var application in account.AdoxioAccountAdoxioApplicationApplicant)
                 {
-                    _dynamicsClient.Applications.Delete(application.AdoxioApplicationid);
-                    _logger.LogDebug(LoggingEvents.HttpDelete, "Application deleted: " + application.AdoxioApplicationid);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException, "Error deleting the Application: ");
-                    throw new Exception("Error deleting the Application");
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError(e, "Error deleting the Application");
-                    throw new Exception("Error deleting the Application");
+                    try
+                    {
+                        _dynamicsClient.Applications.Delete(application.AdoxioApplicationid);
+                        _logger.LogDebug(LoggingEvents.HttpDelete, "Application deleted: " + application.AdoxioApplicationid);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error deleting the Application: ");
+                        throw new Exception("Error deleting the Application");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error deleting the Application");
+                        throw new Exception("Error deleting the Application");
+                    }
                 }
             }
-
-            // change logs
-            foreach (var changelog in account.AdoxioLicenseechangelogBusinessAccount)
+            
+            if (account.AdoxioLicenseechangelogBusinessAccount != null)
             {
-                try
+                // change logs
+                foreach (var changelog in account.AdoxioLicenseechangelogBusinessAccount)
                 {
-                    _dynamicsClient.Licenseechangelogs.Delete(changelog.AdoxioLicenseechangelogid);
-                    _logger.LogDebug(LoggingEvents.HttpDelete, "Application deleted: " + changelog.AdoxioLicenseechangelogid);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException, "Error deleting the Application: ");
-                    throw new Exception("Error deleting the Application");
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError(e, "Error deleting the Application");
-                    throw new Exception("Error deleting the Application");
+                    try
+                    {
+                        _dynamicsClient.Licenseechangelogs.Delete(changelog.AdoxioLicenseechangelogid);
+                        _logger.LogDebug(LoggingEvents.HttpDelete, "Application deleted: " + changelog.AdoxioLicenseechangelogid);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error deleting the Application: ");
+                        throw new Exception("Error deleting the Application");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error deleting the Application");
+                        throw new Exception("Error deleting the Application");
+                    }
                 }
             }
+            
 
-
-            // delete related licences
-            foreach (var license in account.AdoxioAccountAdoxioLicencesLicencee)
+            if (account.AdoxioAccountAdoxioLicencesLicencee != null)
             {
-                try
+                // delete related licences
+                foreach (var license in account.AdoxioAccountAdoxioLicencesLicencee)
                 {
-                    _dynamicsClient.Licenseechangelogs.Delete(license.AdoxioLicencesid);
-                    _logger.LogDebug(LoggingEvents.HttpDelete, "License deleted: " + license.AdoxioLicencesid);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException, "Error deleting the License: ");
-                    throw new Exception("Error deleting the License");
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError(e, "Error deleting the License");
-                    throw new Exception("Error deleting the License");
+                    try
+                    {
+                        _dynamicsClient.Licenseechangelogs.Delete(license.AdoxioLicencesid);
+                        _logger.LogDebug(LoggingEvents.HttpDelete, "License deleted: " + license.AdoxioLicencesid);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error deleting the License: ");
+                        throw new Exception("Error deleting the License");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error deleting the License");
+                        throw new Exception("Error deleting the License");
+                    }
                 }
             }
+            
+            if (account.ContactCustomerAccounts != null)
+            {
+                foreach (var contact in account.ContactCustomerAccounts)
+                {
+                    try
+                    {
+                        _dynamicsClient.Contacts.Delete(contact.Contactid);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error deleting the Contact: ");
+                        throw new Exception("Error deleting the Contact");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error deleting the Contact");
+                        throw new Exception("Error deleting the Contact");
+                    }
+                }
+            }
+            
 
             // delete the account
             try
