@@ -173,6 +173,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? SafeAndResponsibleDisturbancesOther { get; set; }
         public string SafeAndResponsibleDisturbancesOtherDescription { get; set; }
         public string SafeAndResponsibleAdditionalSafetyMeasures { get; set; }
+        public string SafeAndResponsibleServiceAreaSupervision { get; set; }
         public bool? SecurityPlanSubmitted { get; set; }
 
         // security agreement
