@@ -31,6 +31,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string licenseStatus { get; set; }
         public string licenseType { get; set; }
         public string licenseNumber { get; set; }
+        public string licenseSubCategory {get; set;}
         public DateTimeOffset? expiryDate { get; set; }
     }
 }
