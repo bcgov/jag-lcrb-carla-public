@@ -20,6 +20,9 @@ export class ApplicationLicenseSummary {
   applicationTypeName: string;
   applicationTypeCategory: string;
   licenseNumber: string;
+  // subcategory is generally blank, except for wine stores
+  // using the same mispelled naming convention for consistency
+  licenseSubCategory: string;
   name: string;
   jobNumber: string;
   isPaid: boolean;

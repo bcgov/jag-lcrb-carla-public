@@ -279,10 +279,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (this.application.applicationType.showLiquorDeclarations) {
-      this.form.get('authorizedToSubmit').setValidators([this.customRequiredCheckboxValidator()]);
-    } else {
-      this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
       this.form.get('liquorDeclarationCheck').setValidators([this.customRequiredCheckboxValidator()]);
+    }
+
+    if (this.application.applicationType.showDeclarations) {
+      this.form.get('authorizedToSubmit').setValidators([this.customRequiredCheckboxValidator()]);
+      this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
     }
 
     // 03/01/2020 - Disabled until connected grocery store feature is ready
@@ -350,9 +352,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   showZoning(): boolean {
     let show = this.application
-    && this.application.applicationType
-    && this.showFormControl(this.application.applicationType.proofofZoning);
-  return show;
+      && this.application.applicationType
+      && this.showFormControl(this.application.applicationType.proofofZoning);
+    return show;
 
   }
 
@@ -366,8 +368,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   showGroceryQuestion() {
     let show = this.application
-    && this.application.applicationType
-    && this.showFormControl(this.application.applicationType.connectedGroceryStore);
+      && this.application.applicationType
+      && this.showFormControl(this.application.applicationType.connectedGroceryStore);
     return show;
   }
 
