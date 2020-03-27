@@ -18,7 +18,9 @@ Feature: CateringApplication_soleproprietor
     I want to submit a Catering Application for a sole proprietor
 
 Scenario: Start Application
-    Given I am logged in to the dashboard as a sole proprietor
+    Given I am logged in to the dashboard as a sole proprietorship
+    And the account is deleted
+    And I am logged in to the dashboard as a sole proprietorship
     And I click on the Catering Start Application button
     And I review the account profile
     And I review the organization structure
@@ -38,6 +40,12 @@ namespace bdd_tests
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
+        {
+            CarlaLoginNoCheck(businessType);
+        }
+
+        [And(@"I am logged in to the dashboard as a (.*)")]
+        public void And_I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
         }
