@@ -256,6 +256,10 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
 
+            // enter the establishment name
+            NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
+            estabName.SendKeys(estName);
+
             // select 'No' for previous liquor licence
             NgWebElement previousLicence = ngDriver.FindElement(By.Id("mat-button-toggle-2-button"));
             previousLicence.Click();
@@ -267,10 +271,6 @@ namespace bdd_tests
             // select 'No' for distillery, brewery or winery connections
             NgWebElement liquorProduction = ngDriver.FindElement(By.Id("mat-button-toggle-8-button"));
             liquorProduction.Click();
-
-            // enter the establishment name
-            NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
-            estabName.SendKeys(estName);
 
             // enter the establishment address
             NgWebElement estabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));

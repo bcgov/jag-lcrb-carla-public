@@ -245,6 +245,14 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
 
+            // enter the phone number of the application contact
+            NgWebElement contactPhone = ngDriver.FindElement(By.Id("contactPersonPhone"));
+            contactPhone.SendKeys(conPhone);
+
+            // enter the establishment name
+            NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
+            estabName.SendKeys(estName);
+
             // select 'No' for previous liquor licence
             NgWebElement previousLicence = ngDriver.FindElement(By.Id("mat-button-toggle-2-button"));
             previousLicence.Click();
@@ -256,10 +264,6 @@ namespace bdd_tests
             // select 'No' for distillery, brewery or winery connections
             NgWebElement liquorProduction = ngDriver.FindElement(By.Id("mat-button-toggle-8-button"));
             liquorProduction.Click();
-
-            // enter the establishment name
-            NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
-            estabName.SendKeys(estName);
 
             // enter the establishment address
             NgWebElement estabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
@@ -306,10 +310,6 @@ namespace bdd_tests
             // enter the role of the application contact
             NgWebElement contactRole = ngDriver.FindElement(By.Id("contactPersonRole"));
             contactRole.SendKeys(conRole);
-
-            // enter the phone number of the application contact
-            NgWebElement contactPhone = ngDriver.FindElement(By.Id("contactPersonPhone"));
-            contactPhone.SendKeys(conPhone);
 
             // click on the authorized to submit checkbox
             NgWebElement authorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
