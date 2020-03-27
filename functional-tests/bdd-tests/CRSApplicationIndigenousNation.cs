@@ -63,11 +63,11 @@ namespace bdd_tests
 
             string electricSignature = "Automated Test";
 
-            // select No for Question 1
+            // select No for Question 1 using radio button
             NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
             noRadio1.Click();
 
-            // select No for Question 2
+            // select No for Question 2 using radio button
             NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
             noRadio2.Click();
 
@@ -99,9 +99,11 @@ namespace bdd_tests
             string postalCode = "V8V4Y3";
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
-            string title = "CEO";
-            string corpContactPhone = "7781811818";
-            string corpContactEmail = "automated@test.com";
+            string authGiven = "AuthGiven";
+            string authSurname = "AuthSurname";
+            string authTitle = "CEO";
+            string authContactPhone = "7781811818";
+            string authContactEmail = "automated@test.com";
 
             string mailStreet1 = "P.O. Box 123";
             string mailStreet2 = "303 Prideaux St.";
@@ -166,23 +168,31 @@ namespace bdd_tests
             NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[16]"));
             uiBizEmail.SendKeys(bizEmail);
 
+            // (re)enter the first name of authorized contact
+            NgWebElement uiAuthGiven = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
+            uiAuthGiven.SendKeys(authGiven);
+
+            // (re)enter the last name of authorized contact
+            NgWebElement uiAuthSurname = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
+            uiAuthSurname.SendKeys(authSurname);
+
             // enter the authorized person's title
-            NgWebElement uiBizTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
-            uiBizTitle.SendKeys(title);
+            NgWebElement uiAuthTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
+            uiAuthTitle.SendKeys(authTitle);
 
             // enter the authorized person's phone number
-            NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
-            uiCorpContactPhone.SendKeys(corpContactPhone);
+            NgWebElement uiAuthContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
+            uiAuthContactPhone.SendKeys(authContactPhone);
 
             // enter the authorized person's email
-            NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
-            uiCorpContactEmail.SendKeys(corpContactEmail);
+            NgWebElement uiAuthContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
+            uiAuthContactEmail.SendKeys(authContactEmail);
 
-            // select 'No' re connections to federal producers of cannabis
+            // select 'No' re connections to federal producers of cannabis using radio button
             NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
             corpConnectionFederalProducer.Click();
 
-            // click on Continue to Organization Review button
+            // click on Continue to Organization Review button using radio button
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
             continueApp_button.Click();
         }
@@ -219,10 +229,16 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
+            string nation = "Colwood";
 
-            // select the IN from the dropdown
-            NgWebElement uiSelectNation = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-2']/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select/option[2]"));
-            uiSelectNation.Click();
+            // select the nation using dropdown
+            //Relative XPath for Ashcroft Indian Nation from Chrome DevTools: *[@id="cdk-step-content-0-2"]/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select/option[2]
+            //XPath from Katalon:                                         //div[@id='cdk-step-content-0-2']/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div/section/select
+            //Full XPath for Ashcroft Indian Nation from Chrome DevTools: /html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[3]/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select/option[2]
+            //Working example:               ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[3]/app-field/section/div/section/select/option[2]"));
+            //Colwood nation from Chrome DevTools:                          //*[@id="cdk-step-content-0-2"]/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select/option[4]
+            NgWebElement uiSelectNation1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[3]/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select"));
+            //uiSelectNation1.SendKeys(nation);
 
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));

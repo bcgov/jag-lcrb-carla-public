@@ -34,7 +34,7 @@ Scenario: Start Application
 namespace bdd_tests
 {
     [FeatureFile("./CateringApplication_society.feature")]
-    public sealed class CateringApplicationSociety : TestBaseCatering
+    public sealed class CateringApplicationSociety : TestBaseCRS
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
@@ -71,6 +71,8 @@ namespace bdd_tests
             string postalCode = "V8V4Y3";
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
+            string societyContactGiven = "CateringSocietyGiven";
+            string societyContactSurname = "CateringSocietySurname";
             string societyContactTitle = "Director";
             string societyContactPhone = "7781811818";
             string societyContactEmail = "automated@test.com";
@@ -148,6 +150,14 @@ namespace bdd_tests
             // enter the business email
             NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
             uiBizEmail.SendKeys(bizEmail);
+
+            // (re)enter the society contact first name
+            NgWebElement uiSocietyContactGiven = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
+            uiSocietyContactGiven.SendKeys(societyContactGiven);
+
+            // (re)enter the society contact surname
+            NgWebElement uiSocietyContactSurname = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
+            uiSocietyContactSurname.SendKeys(societyContactSurname);
 
             // enter the society contact title
             NgWebElement uiSocietyContactTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
@@ -338,7 +348,7 @@ namespace bdd_tests
         [And(@"I enter the payment information")]
         public void enter_payment_info()
         {
-            MakeCateringPayment();
+            MakeCRSPayment();
         }
 
         [And(@"I return to the dashboard")]

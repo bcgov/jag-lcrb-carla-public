@@ -34,7 +34,7 @@ Scenario: Start Application
 namespace bdd_tests
 {
     [FeatureFile("./CateringApplication_soleproprietor.feature")]
-    public sealed class CateringApplicationSoleProprietor : TestBaseCatering
+    public sealed class CateringApplicationSoleProprietor : TestBaseCRS
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
@@ -69,6 +69,8 @@ namespace bdd_tests
             string postalCode = "V8V4Y3";
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
+            string solepropContactGiven = "CateringSolePropGiven";
+            string solepropContactSurname = "CateringSolePropSurname";
             string soleProprietorContactTitle = "Owner";
             string soleProprietorContactPhone = "7781811818";
             string soleProprietorContactEmail = "automated@test.com";
@@ -135,6 +137,14 @@ namespace bdd_tests
             // enter the business email
             NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
             uiBizEmail.SendKeys(bizEmail);
+
+            // (re)enter the sole proprietor contact first name
+            NgWebElement uiSolePropContactGiven = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
+            uiSolePropContactGiven.SendKeys(solepropContactGiven);
+
+            // (re)enter the sole proprietor contact surname
+            NgWebElement uiSolePropContactSurname = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
+            uiSolePropContactSurname.SendKeys(solepropContactSurname);
 
             // enter the sole proprietor contact title
             NgWebElement uiSolePropContactTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
@@ -309,7 +319,7 @@ namespace bdd_tests
         [And(@"I enter the payment information")]
         public void enter_payment_info()
         {
-            MakeCateringPayment();
+            MakeCRSPayment();
         }
 
         [And(@"I return to the dashboard")]
