@@ -42,97 +42,86 @@ namespace Gov.Lclb.Cllb.FederalReportingService
         public async Task ExportFederalReports(PerformContext hangfireContext)
         {
             // Get any new exports that have been created
-            // Gather submitted reports
-            // Get inventory reports for those submitted reports
-            // Attach monthly report to export record
-            // Create CSV file
-            // Export file to Sharepoint
-            // Update export record with results (monthly reports, export triggered date, export completed date, document link)
-        }
-
-
-        /// <summary>
-        /// Generate a csv with the federal tracking report for a given reporting period
-        /// </summary>
-        /// <returns></returns>
-        public async Task GenerateFederalTrackingReport(PerformContext hangfireContext)
-        {
-            try
+            string filter = "adoxio_exportcompleted eq null";
+            MicrosoftDynamicsCRMadoxioFederalreportexportCollection exports = _dynamicsClient.Federalreportexports.Get(filter: filter);
+            if (exports.Value.Count > 0)
             {
-                MicrosoftDynamicsCRMadoxioCannabismonthlyreport previousReport = _dynamicsClient.Cannabismonthlyreports.Get(top: 1, orderby: new List<string> {"adoxio_csvexportid desc"}).Value.FirstOrDefault();
-                int currentExportId = (previousReport != null && previousReport.AdoxioCsvexportid != null) ? (int)previousReport.AdoxioCsvexportid + 1 : 1;
-
-                // Submitted reports
-                string filter = $"statuscode eq {(int)MonthlyReportStatus.Submitted}";
-                var dynamicsMonthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
-                List<FederalReportingMonthlyExport> monthlyReports = new List<FederalReportingMonthlyExport>();
-                foreach (MicrosoftDynamicsCRMadoxioCannabismonthlyreport report in dynamicsMonthlyReports.Value)
+                string exportId = exports.Value.FirstOrDefault().AdoxioFederalreportexportid;
+                MicrosoftDynamicsCRMadoxioFederalreportexport export = new MicrosoftDynamicsCRMadoxioFederalreportexport();
+                export.AdoxioExporttriggered = DateTime.UtcNow;
+                _dynamicsClient.Federalreportexports.Update(exportId, export);
+                try
                 {
-                    FederalReportingMonthlyExport export = new FederalReportingMonthlyExport()
+                    // Gather submitted reports
+                    filter = $"statuscode eq {(int)MonthlyReportStatus.Submitted}";
+                    var dynamicsMonthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
+                    List<FederalReportingMonthlyExport> monthlyReports = new List<FederalReportingMonthlyExport>();
+                    foreach (MicrosoftDynamicsCRMadoxioCannabismonthlyreport report in dynamicsMonthlyReports.Value)
                     {
-                        ReportingPeriodMonth = report.AdoxioReportingperiodmonth,
-                        ReportingPeriodYear = report.AdoxioReportingperiodyear,
-                        RetailerDistributor = report.AdoxioRetailerdistributor?.ToString() ?? "1",
-                        CompanyName = report.AdoxioEstablishmentnametext,
-                        SiteID = report.AdoxioSiteidnumber,
-                        City = report.AdoxioCity,
-                        PostalCode = report.AdoxioPostalcode,
-                        ManagementEmployees = report.AdoxioEmployeesmanagement ?? 0,
-                        AdministrativeEmployees = report.AdoxioEmployeesadministrative ?? 0,
-                        SalesEmployees = report.AdoxioEmployeessales ?? 0,
-                        ProductionEmployees = report.AdoxioEmployeesproduction ?? 0,
-                        OtherEmployees = report.AdoxioEmployeesother ?? 0
-                    };
+                        FederalReportingMonthlyExport exportVM = new FederalReportingMonthlyExport()
+                        {
+                            ReportingPeriodMonth = report.AdoxioReportingperiodmonth,
+                            ReportingPeriodYear = report.AdoxioReportingperiodyear,
+                            RetailerDistributor = report.AdoxioRetailerdistributor?.ToString() ?? "1",
+                            CompanyName = report.AdoxioEstablishmentnametext,
+                            SiteID = report.AdoxioSiteidnumber,
+                            City = report.AdoxioCity,
+                            PostalCode = report.AdoxioPostalcode,
+                            ManagementEmployees = report.AdoxioEmployeesmanagement ?? 0,
+                            AdministrativeEmployees = report.AdoxioEmployeesadministrative ?? 0,
+                            SalesEmployees = report.AdoxioEmployeessales ?? 0,
+                            ProductionEmployees = report.AdoxioEmployeesproduction ?? 0,
+                            OtherEmployees = report.AdoxioEmployeesother ?? 0
+                        };
 
-                    filter = $"_adoxio_monthlyreportid_value eq {report.AdoxioCannabismonthlyreportid}";
-                    var invResp = _dynamicsClient.Cannabisinventoryreports.Get(filter: filter);
-                    foreach (MicrosoftDynamicsCRMadoxioCannabisinventoryreport inventoryReport in invResp.Value)
-                    {
-                        MicrosoftDynamicsCRMadoxioCannabisproductadmin product = _dynamicsClient.Cannabisproductadmins.GetByKey(inventoryReport._adoxioProductidValue);
-                        export.PopulateProduct(inventoryReport, product);
+                        // Get inventory reports for those submitted reports
+                        filter = $"_adoxio_monthlyreportid_value eq {report.AdoxioCannabismonthlyreportid}";
+                        var invResp = _dynamicsClient.Cannabisinventoryreports.Get(filter: filter);
+                        foreach (MicrosoftDynamicsCRMadoxioCannabisinventoryreport inventoryReport in invResp.Value)
+                        {
+                            MicrosoftDynamicsCRMadoxioCannabisproductadmin product = _dynamicsClient.Cannabisproductadmins.GetByKey(inventoryReport._adoxioProductidValue);
+                            exportVM.PopulateProduct(inventoryReport, product);
+                        }
+                        monthlyReports.Add(exportVM);
+
+                        MicrosoftDynamicsCRMadoxioCannabismonthlyreport patchRecord = new MicrosoftDynamicsCRMadoxioCannabismonthlyreport()
+                        {
+                            // AdoxioCsvexportdate = DateTime.UtcNow,
+                            // AdoxioCsvexportid = currentExportId,
+                            Statuscode = (int)MonthlyReportStatus.Closed
+                        };
+                        _dynamicsClient.Cannabismonthlyreports.Update(report.AdoxioCannabismonthlyreportid, patchRecord);
+
+                        hangfireContext.WriteLine($"Found {monthlyReports.Count} monthly reports to export.");
+                        _logger.LogInformation($"Found {monthlyReports.Count} monthly reports to export.");
+                        if (monthlyReports.Count > 0)
+                        {
+                            string filePath = "";
+                            using (var mem = new MemoryStream())
+                            using (var writer = new StreamWriter(mem))
+                            using (var csv = new CsvWriter(writer))
+                            {
+                                csv.Configuration.RegisterClassMap<FederalReportingMonthlyExportMap>();
+                                csv.WriteRecords(monthlyReports);
+
+                                writer.Flush();
+                                mem.Position = 0;
+                                string filename = $"{export.AdoxioExportnumber}_{DateTime.Now.ToString("yyy-MM-dd")}-CannabisTrackingReport.csv";
+                                string sharepointFilename = await _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv");
+                                string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
+                            }
+                            hangfireContext.WriteLine($"Successfully exported Federal Reporting CSV {export.AdoxioExportnumber}.");
+                            _logger.LogInformation($"Successfully exported Federal Reporting CSV {export.AdoxioExportnumber}.");
+                        }
                     }
-                    monthlyReports.Add(export);
-
-                    MicrosoftDynamicsCRMadoxioCannabismonthlyreport patchRecord = new MicrosoftDynamicsCRMadoxioCannabismonthlyreport()
-                    {
-                        AdoxioCsvexportdate = DateTime.UtcNow,
-                        AdoxioCsvexportid = currentExportId,
-                        Statuscode = (int)MonthlyReportStatus.Closed
-                    };
-                    _dynamicsClient.Cannabismonthlyreports.Update(report.AdoxioCannabismonthlyreportid, patchRecord);
-                    
+                    export.AdoxioExportcompleted = DateTime.UtcNow;
+                    _dynamicsClient.Federalreportexports.Update(exportId, export);
                 }
-                hangfireContext.WriteLine($"Found {monthlyReports.Count} monthly reports to export.");
-                _logger.LogInformation($"Found {monthlyReports.Count} monthly reports to export.");
-                if (monthlyReports.Count > 0)
+                catch (HttpOperationException httpOperationException)
                 {
-                    string filePath = "";
-                    using (var mem = new MemoryStream())
-                    using (var writer = new StreamWriter(mem))
-                    using (var csv = new CsvWriter(writer))
-                    {
-                        csv.Configuration.RegisterClassMap<FederalReportingMonthlyExportMap>();
-                        csv.WriteRecords(monthlyReports);
-
-                        writer.Flush();
-                        mem.Position = 0;
-                        string filename = $"{currentExportId.ToString("0000")}_{DateTime.Now.ToString("yyy-MM-dd")}-CannabisTrackingReport.csv";
-                        string sharepointFilename = await _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv");
-                        string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
-                    }
-                    hangfireContext.WriteLine($"Successfully exported Federal Reporting CSV {currentExportId}.");
-                    _logger.LogInformation($"Successfully exported Federal Reporting CSV {currentExportId}.");
+                    hangfireContext.WriteLine("Error creating federal tracking CSV");
+                    _logger.LogError(httpOperationException, "Error creating federal tracking CSV");
                 }
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                hangfireContext.WriteLine("Error creating federal tracking CSV");
-                _logger.LogError(httpOperationException, "Error creating federal tracking CSV");
-            }
-            catch (SharePointRestException e)
-            {
-                hangfireContext.WriteLine("Error saving csv to sharepoint");
-                _logger.LogError(e, "Error saving csv to sharepoint");
             }
         }
     }

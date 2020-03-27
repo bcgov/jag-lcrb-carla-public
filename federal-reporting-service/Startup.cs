@@ -154,8 +154,8 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                 {
                     log.LogInformation($"Creating Hangfire jobs for {typeof(Startup)} ...");
 
-                    // Run 1 minute past midnight on the 15th of every month
-                    RecurringJob.AddOrUpdate(() => new FederalReportingController(Configuration, loggerFactory).GenerateFederalTrackingReport(null), "1 8 15 * *");
+                    // Run every 10 minutes
+                    RecurringJob.AddOrUpdate(() => new FederalReportingController(Configuration, loggerFactory).ExportFederalReports(null), "*/10 * * * *");
 
                     log.LogInformation("Hangfire jobs setup.");
                 }
