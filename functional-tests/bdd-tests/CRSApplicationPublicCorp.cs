@@ -110,6 +110,8 @@ namespace bdd_tests
 
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
+            string corpGiven = "CorpGiven";
+            string corpSurname = "CorpSurname";
             string corpTitle = "CEO";
             string corpContactPhone = "7781811818";
             string corpContactEmail = "automated@test.com";
@@ -180,6 +182,14 @@ namespace bdd_tests
             // enter the business email
             NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
             uiBizEmail.SendKeys(bizEmail);
+
+            // (re)enter the first name of corporation contact
+            NgWebElement uiCorpGiven = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
+            uiCorpGiven.SendKeys(corpGiven);
+
+            // (re)enter the last name of corporation contact
+            NgWebElement uiCorpSurname = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
+            uiCorpSurname.SendKeys(corpSurname);
 
             // enter the corporation contact title
             NgWebElement uiCorpTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
