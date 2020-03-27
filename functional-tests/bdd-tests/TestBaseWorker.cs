@@ -57,6 +57,17 @@ namespace bdd_tests
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
 
+        public void CarlaLoginWorkerNoTerms()
+        {
+            // load the dashboard page
+            string test_start = configuration["test_start_worker"];
+
+            ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
+
+            ngDriver.WaitForAngular();
+            
+        }
+
         public void CarlaLoginWorker()
         {
             // load the dashboard page
