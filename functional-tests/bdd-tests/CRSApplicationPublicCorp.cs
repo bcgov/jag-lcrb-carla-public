@@ -13,12 +13,14 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplication_publiccorp
+Feature: CRSApplication_pubcorp
     As a logged in business user
     I want to submit a CRS Application for a public corporation
 
 Scenario: Start Application
     Given I am logged in to the dashboard as a public corporation
+    And the account is deleted
+    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button
     And I complete the eligibility disclosure
     And I review the account profile
@@ -39,6 +41,12 @@ namespace bdd_tests
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
+        {
+            CarlaLoginNoCheck(businessType);
+        }
+
+        [And(@"I am logged in to the dashboard as a (.*)")]
+        public void And_I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
         }
