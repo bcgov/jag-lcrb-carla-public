@@ -11,6 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.26.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.25.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="CsvHelper" Version="12.2.1" />
     <PackageReference Include="Hangfire" Version="1.7.7" />
     <PackageReference Include="Hangfire.Console" Version="1.4.2" />
@@ -22,6 +27,16 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.Splunk" Version="3.3.0" />
     <PackageReference Include="Serilog.Exceptions" Version="5.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\file-manager-service\Protos\fileManager.proto" GrpcServices="Client">
+      <Link>gRPC Prototypes\fileManager.proto</Link>
+    </Protobuf>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\file-manager-service\file-manager-service.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
