@@ -1,6 +1,7 @@
 using CsvHelper;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
+// using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +12,8 @@ using System.IO;
 using System;
 using System.Threading.Tasks;
 using Hangfire;
+using Google.Protobuf;
+using Gov.Lclb.Cllb.Services.FileManager;
 using Hangfire.Console;
 using Hangfire.Server;
 using System.Linq;
@@ -22,20 +25,19 @@ namespace Gov.Lclb.Cllb.FederalReportingService
         private readonly string DOCUMENT_LIBRARY = "Federal Reporting";
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IConfiguration _configuration;
-        private readonly SharePointFileManager _sharepoint;
-        private readonly ILogger _logger;
+        private readonly FileManagerClient _fileManagerClient;
 
-        public FederalReportingController(IConfiguration configuration, ILoggerFactory loggerFactory)
+        private readonly ILogger _logger;
+        
+
+        public FederalReportingController(IConfiguration configuration, ILoggerFactory loggerFactory, FileManagerClient fileClient)
         {
             _configuration = configuration;
             if (_configuration["DYNAMICS_ODATA_URI"] != null)
             {
                 _dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
             }
-            if (_configuration["SHAREPOINT_ODATA_URI"] != null)
-            {
-                _sharepoint = new SharePointFileManager(_configuration);
-            }
+            _fileManagerClient = fileClient;
             _logger = loggerFactory.CreateLogger(typeof(FederalReportingController));
         }
 
@@ -46,7 +48,8 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             MicrosoftDynamicsCRMadoxioFederalreportexportCollection exports = _dynamicsClient.Federalreportexports.Get(filter: filter);
             if (exports.Value.Count > 0)
             {
-                string exportId = exports.Value.FirstOrDefault().AdoxioFederalreportexportid;
+                MicrosoftDynamicsCRMadoxioFederalreportexport export = exports.Value.FirstOrDefault();
+                string exportId = export.AdoxioFederalreportexportid;
                 MicrosoftDynamicsCRMadoxioFederalreportexport export = new MicrosoftDynamicsCRMadoxioFederalreportexport();
                 export.AdoxioExporttriggered = DateTime.UtcNow;
                 _dynamicsClient.Federalreportexports.Update(exportId, export);
@@ -86,8 +89,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
 
                         MicrosoftDynamicsCRMadoxioCannabismonthlyreport patchRecord = new MicrosoftDynamicsCRMadoxioCannabismonthlyreport()
                         {
-                            // AdoxioCsvexportdate = DateTime.UtcNow,
-                            // AdoxioCsvexportid = currentExportId,
+                            AdoxioFederalReportExportIdODateBind = _dynamicsClient.GetEntityURI("adoxio_federalreportexports", exportId),
                             Statuscode = (int)MonthlyReportStatus.Closed
                         };
                         _dynamicsClient.Cannabismonthlyreports.Update(report.AdoxioCannabismonthlyreportid, patchRecord);
@@ -107,8 +109,37 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                                 writer.Flush();
                                 mem.Position = 0;
                                 string filename = $"{export.AdoxioExportnumber}_{DateTime.Now.ToString("yyy-MM-dd")}-CannabisTrackingReport.csv";
-                                string sharepointFilename = await _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv");
-                                string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
+                                // Sanitize file name
+                                Regex illegalInFileName = new Regex(@"[#%*<>?{}~¿""]");
+                                filename = illegalInFileName.Replace(filename, "");
+                                illegalInFileName = new Regex(@"[&:/\\|]");
+                                filename = illegalInFileName.Replace(filename, "-");
+
+                                filename = FileSystemItemExtensions.CombineNameDocumentType(filename, documentType);
+                                string folderName = null;
+
+                                MicrosoftDynamicsCRMsharepointdocumentlocation? documentLocation = export.AdoxioEventSharePointDocumentLocations.FirstOrDefault();
+
+                                if (folderName == null)
+                                {
+                                    folderName = await GetFolderName(entityName, entityId, _dynamicsClient).ConfigureAwait(true);
+
+                                    await CreateEntitySharePointDocumentLocation(entityName, entityId, folderName, folderName);
+                                }
+                                // string sharepointFilename = await _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv");
+                                // string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
+                                byte[] data = mem.ToArray();
+                                // call the web service
+                                var uploadRequest = new UploadFileRequest()
+                                {
+                                    ContentType = file.ContentType,
+                                    Data = ByteString.CopyFrom(data),
+                                    EntityName = "federal_report",
+                                    FileName = filename,
+                                    FolderName = DOCUMENT_LIBRARY
+                                };
+
+                                var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
                             }
                             hangfireContext.WriteLine($"Successfully exported Federal Reporting CSV {export.AdoxioExportnumber}.");
                             _logger.LogInformation($"Successfully exported Federal Reporting CSV {export.AdoxioExportnumber}.");
@@ -123,6 +154,105 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                     _logger.LogError(httpOperationException, "Error creating federal tracking CSV");
                 }
             }
+        }
+
+        private async Task CreateFederalReportDocumentLocation(MicrosoftDynamicsCRMadoxioFederalreportexport federalReport, string folderName, string name)
+        {
+
+            // now create a document location to link them.
+
+            // Create the SharePointDocumentLocation entity
+            MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+            {
+                Relativeurl = folderName,
+                Description = "Federal Report Files",
+                Name = name
+            };
+
+
+            try
+            {
+                mdcsdl = _dynamicsClient.Sharepointdocumentlocations.Create(mdcsdl);
+            }
+            catch (HttpOperationException odee)
+            {
+                _logger.LogError(odee, "Error creating SharepointDocumentLocation");
+                mdcsdl = null;
+            }
+            if (mdcsdl != null)
+            {
+
+                // set the parent document library.
+                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL("adoxio_federalreportexports");
+
+                string accountUri = _dynamicsClient.GetEntityURI("adoxio_federalreportexports", federalReport.AdoxioFederalreportexportid);
+                // add a regardingobjectid.
+                var patchSharePointDocumentLocationIncident = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+                {
+                    RegardingobjectIdAccountODataBind = accountUri,
+                    ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference),
+                    Relativeurl = folderName,
+                    Description = "Federal Report Files",
+                };
+
+                try
+                {
+                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocationIncident);
+                }
+                catch (HttpOperationException odee)
+                {
+                    _logger.LogError(odee, "Error adding reference SharepointDocumentLocation to federal report");
+                }
+
+                string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
+
+                Odataid oDataId = new Odataid()
+                {
+                    OdataidProperty = sharePointLocationData
+                };
+                try
+                {
+                    _dynamicsClient.Federalreportexports.AddReference(federalReport.AdoxioFederalreportexportid, "adoxio_federalreportexports_SharePointDocumentLocations", oDataId);
+                }
+                catch (HttpOperationException odee)
+                {
+                    _logger.LogError(odee, "Error adding reference to SharepointDocumentLocation");
+                }
+            }
+        }
+
+        private string GetDocumentLocationReferenceByRelativeURL(string relativeUrl)
+        {
+            string result = null;
+            string sanitized = relativeUrl.Replace("'", "''");
+            // first see if one exists.
+            var locations = _dynamicsClient.Sharepointdocumentlocations.Get(filter: "relativeurl eq '" + sanitized + "'");
+
+            var location = locations.Value.FirstOrDefault();
+
+            if (location == null)
+            {
+                MicrosoftDynamicsCRMsharepointdocumentlocation newRecord = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+                {
+                    Relativeurl = relativeUrl
+                };
+                // create a new document location.
+                try
+                {
+                    location = _dynamicsClient.Sharepointdocumentlocations.Create(newRecord);
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    _logger.LogError(httpOperationException, "Error creating document location");
+                }
+            }
+
+            if (location != null)
+            {
+                result = location.Sharepointdocumentlocationid;
+            }
+
+            return result;
         }
     }
 }
