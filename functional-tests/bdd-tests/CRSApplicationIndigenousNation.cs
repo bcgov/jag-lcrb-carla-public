@@ -222,6 +222,7 @@ namespace bdd_tests
             string estCity = "Victoria";
             string estPostal = "V9A6X5";
             string estPID = "012345678";
+            string indigenousNation = "Ashcroft Indian Band";
             string estEmail = "test@test.com";
             string estPhone = "2505555555";
             string conGiven = "Given";
@@ -229,16 +230,6 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
-            string nation = "Colwood";
-
-            // select the nation using dropdown
-            //Relative XPath for Ashcroft Indian Nation from Chrome DevTools: *[@id="cdk-step-content-0-2"]/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select/option[2]
-            //XPath from Katalon:                                         //div[@id='cdk-step-content-0-2']/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div/section/select
-            //Full XPath for Ashcroft Indian Nation from Chrome DevTools: /html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[3]/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select/option[2]
-            //Working example:               ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[3]/app-field/section/div/section/select/option[2]"));
-            //Colwood nation from Chrome DevTools:                          //*[@id="cdk-step-content-0-2"]/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select/option[4]
-            NgWebElement uiSelectNation1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[3]/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select"));
-            //uiSelectNation1.SendKeys(nation);
 
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
@@ -259,6 +250,10 @@ namespace bdd_tests
             // enter the establishment's PID
             NgWebElement estabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             estabPID.SendKeys(estPID);
+
+            // enter the IN into the dropdown
+            NgWebElement uiSelectNation = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[3]/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select"));
+            uiSelectNation.SendKeys(indigenousNation);
 
             // enter the establishment email
             NgWebElement estabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
