@@ -2,10 +2,10 @@
     <h1>Security Screening Requirements</h1>
 
     <div class="row">
-        <section class="col-md-8">
+        <section>
 
             <ng-container *ngIf="showLiquorContent()">
-                <h3 class="blue-header">LIQUOR</h3>
+                <h3 class="blue-header">LIQUOR REQUIREMENTS</h3>
                 <div class="content">
                     <p>
                         Each liquor licence associate must provide a completed Personal History Summary form along with
@@ -14,25 +14,27 @@
                     </p>
 
                     <ng-container *ngIf="data?.liquor?.outstandingItems?.length">
-                        <h3>Outstanding Personal History Summary Forms</h3>
+                        <h4 class="plain-header">OUTSTANDING PERSONAL HISTORY FORMS</h4>
                         <p>
                             The following associates have not provided completed personal history summary forms. The
                             forms can be completed using the provided link, which can be emailed or sent by SMS to
                             associates
                             as needed:
                         </p>
-                        <table>
+                        <table class="greyGridTable" style="width:700px;">
+                            <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th style="width:200px;">First Name</th>
+                                <th style="width:200px;">Last Name</th>
+                                <th style="width:200px;">Status</th>
+                                <th style="width:100px;">Action</th>
                             </tr>
+                            </thead>
                             <tr [ngClass]="{'alt-row': i%2 === 0}"
                                 *ngFor="let item of data?.liquor?.outstandingItems; let i=index;">
                                 <td>{{item.firstName}}</td>
                                 <td>{{item.lastName}} </td>
-                                <td style="text-align: center;">Not Submitted</td>
+                                <td style="text-align: center;"><p class="missing">Not Submitted</p></td>
                                 <td style="text-align: center;"><a href="javascript: void(0)"
                                         (click)="copyMessage(item.phsLink)">
                                         <i class="fas fa-copy"></i>
@@ -41,9 +43,10 @@
                             </tr>
                         </table>
                     </ng-container>
+                    <hr>
 
                     <ng-container *ngIf="data?.liquor?.completedItems?.length">
-                        <h3>Completed Personal History Summary Forms</h3>
+                        <h4 class="plain-header">COMPLETED PERSONAL HISTORY FORMS</h4>
                         <p>
                             The following associates have completed their personal history summary forms. No further
                             information is required at this time.
@@ -53,12 +56,14 @@
                             history summary forms.
                         </p>
 
-                    <table>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Date Submitted</th>
-                        </tr>
+                        <table class="greyGridTable" style="width:700px;">
+                            <thead>
+                            <tr>
+                                <th style="width:200px;">First Name</th>
+                                <th style="width:200px;">Last Name</th>
+                                <th style="width:300px;">Date Submitted</th>
+                            </tr>
+                            </thead>
                         <tr [ngClass]="{'alt-row': i%2 === 0}"
                             *ngFor="let item of data?.liquor?.completedItems; let i=index;">
                             <td>{{item.firstName}} </td>
@@ -88,13 +93,15 @@
                         to associates as needed:
                     </p-->
                     <ng-container *ngIf="data?.cannabis?.outstandingItems?.length">
-                        <table>
+                        <table class="greyGridTable" style="width: 400px;">
+                            <thead>
                             <tr>
-                                <th>Associates Requiring Security Screening:</th>
+                                <th style="width:400px;">Associates Requiring Security Screening:</th>
                                 <!--th>Last Name</th-->
                                 <!--th>Status</th>
                                 <th>Action</th-->
                             </tr>
+                            </thead>
                             <tr [ngClass]="{'alt-row': i%2 === 0}"
                                 *ngFor="let item of data?.cannabis?.outstandingItems; let i=index">
                                 <td>{{item.firstName}} {{item.lastName}}</td>
@@ -137,10 +144,10 @@
                 </div>
             </ng-container>
 
-            <p class="mt-2">
+            <!--p class="mt-2">
                 All associates must submit the above required security screening forms prior to completing their
                 application.
-            </p>
+            </p-->
         </section>
 
         <section class="col-md-4"></section>

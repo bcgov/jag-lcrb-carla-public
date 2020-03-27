@@ -16,12 +16,14 @@ $custom-typography: mat-typography-config(
 
 @include angular-material-typography($custom-typography);
 body {
-    color: #494949;
+    
     background: #f2f2f2;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #494949;
+    text-rendering: optimizeLegibility;
+    
     font-style: MyriadWebPro, Calibri, Arial, "sans serif";
+    font-feature-settings: "kern" 1;
 }
 
 .btn.btn-primary {
@@ -89,7 +91,8 @@ body {
 
 p {
     font-weight: Regular;
-    font-size: 14px #494949
+    font-size: 14px;
+    font-feature-settings: "kern" 1;
 }
 
 h1 {
@@ -167,13 +170,17 @@ select.form-control:not([size]):not([multiple]) {
 .plain-header {
     
     color: #000000;
-    font-weight: 900;    
+    font-weight: 600;   
+    font-style: normal;
+    line-height: 16px;
+    font-feature-settings: "kern" 1; 
     
 }
 
 h4.plain-header {
     
     text-transform: uppercase;
+    
 }
 
 .blue-header {
@@ -183,6 +190,7 @@ h4.plain-header {
     font-size: 16px;
     font-weight: semi-bold;
     text-transform: uppercase;
+    font-feature-settings: "kern" 1;
 }
 
 .grey-header {
@@ -268,3 +276,45 @@ section.padded,
     border: 1px sold black;
     border-radius:5px;
 }
+
+table.greyGridTable {
+    border: 1px solid #757575;
+    width: 100%;
+    border-spacing: 0px;
+    
+    text-align: center;
+    border-collapse: collapse;
+  }
+  table.greyGridTable td, table.greyGridTable th {
+    border: 1px solid black;
+    padding: 3px 4px;
+  }
+  table.greyGridTable tbody td {
+    font-size: 13px;
+    font-weight: bold;
+  }
+  table.greyGridTable tr:nth-child(even) {
+    background: #eee;
+    height: 75px;
+  }
+  table.greyGridTable tr:nth-child(odd) {  
+    height: 75px;
+  }
+  table.greyGridTable thead {
+    background: #FFFFFF;
+    border-bottom: 1px solid #757575;
+  }
+  table.greyGridTable thead th {
+    font-size: 15px;
+    font-weight: 800;
+    color: #333333;
+    text-align: center;
+    border-left: 1px solid #757575;
+  }
+  table.greyGridTable thead th:first-child {
+    border-left: none;
+  }
+  
+  table.greyGridTable tfoot td {
+    font-size: 14px;
+  }
