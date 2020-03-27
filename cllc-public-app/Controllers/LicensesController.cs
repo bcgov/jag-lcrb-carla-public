@@ -770,6 +770,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "establishmentCity", adoxioLicense.AdoxioLicencee.Address1City + ", B.C." },
                         { "establishmentPostalCode", adoxioLicense.AdoxioLicencee.Address1Postalcode },
                         { "licencee", adoxioLicense.AdoxioLicencee.Name },
+                        { "licenceType", adoxioLicense.AdoxioLicenceType.AdoxioName },
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
                         { "restrictionsText", termsAndConditions },
