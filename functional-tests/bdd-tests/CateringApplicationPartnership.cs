@@ -34,7 +34,7 @@ Scenario: Start Application
 namespace bdd_tests
 {
     [FeatureFile("./CateringApplication_partnership.feature")]
-    public sealed class CateringApplicationPartnership : TestBaseCatering
+    public sealed class CateringApplicationPartnership : TestBaseCRS
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
@@ -72,6 +72,8 @@ namespace bdd_tests
             string partnerContactPhone = "7781811818";
             string partnerContactEmail = "automated@test.com";
             string partnerContactTitle = "CEO";
+            string bizGiven = "CateringPartnerGiven";
+            string bizSurname = "CateringPartnerSurname";
 
             string mailStreet1 = "P.O. Box 123";
             string mailStreet2 = "303 Prideaux St.";
@@ -135,6 +137,14 @@ namespace bdd_tests
             // enter the business email
             NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
             uiBizEmail.SendKeys(bizEmail);
+
+            // (re)enter the first name of business contact
+            NgWebElement uiBizGiven = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
+            uiBizGiven.SendKeys(bizGiven);
+
+            // (re)enter the last name of business contact
+            NgWebElement uiBizSurname = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
+            uiBizSurname.SendKeys(bizSurname);
 
             // enter the partner contact title
             NgWebElement uiPartnerContactTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
@@ -235,6 +245,14 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
 
+            // enter the phone number of the application contact
+            NgWebElement contactPhone = ngDriver.FindElement(By.Id("contactPersonPhone"));
+            contactPhone.SendKeys(conPhone);
+
+            // enter the establishment name
+            NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
+            estabName.SendKeys(estName);
+
             // select 'No' for previous liquor licence
             NgWebElement previousLicence = ngDriver.FindElement(By.Id("mat-button-toggle-2-button"));
             previousLicence.Click();
@@ -246,10 +264,6 @@ namespace bdd_tests
             // select 'No' for distillery, brewery or winery connections
             NgWebElement liquorProduction = ngDriver.FindElement(By.Id("mat-button-toggle-8-button"));
             liquorProduction.Click();
-
-            // enter the establishment name
-            NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
-            estabName.SendKeys(estName);
 
             // enter the establishment address
             NgWebElement estabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
@@ -297,10 +311,6 @@ namespace bdd_tests
             NgWebElement contactRole = ngDriver.FindElement(By.Id("contactPersonRole"));
             contactRole.SendKeys(conRole);
 
-            // enter the phone number of the application contact
-            NgWebElement contactPhone = ngDriver.FindElement(By.Id("contactPersonPhone"));
-            contactPhone.SendKeys(conPhone);
-
             // click on the authorized to submit checkbox
             NgWebElement authorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
             authorizedSubmit.Click();
@@ -327,7 +337,7 @@ namespace bdd_tests
         [And(@"I enter the payment information")]
         public void enter_payment_info()
         {
-            MakeCateringPayment();
+            MakeCRSPayment();
         }
 
         [And(@"I return to the dashboard")]

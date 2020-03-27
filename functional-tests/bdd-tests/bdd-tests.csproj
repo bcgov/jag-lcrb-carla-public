@@ -89,5 +89,8 @@
     <None Update="CateringApplication_validation.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="MultiLevelCRSApplicationPrivateCorp.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
