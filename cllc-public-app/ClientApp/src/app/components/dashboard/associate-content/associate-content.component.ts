@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Account } from '@models/account.model';
+import { FeatureFlagService } from '@services/feature-flag.service';
 
 @Component({
   selector: 'app-associate-content',
@@ -11,8 +12,12 @@ export class AssociateContentComponent implements OnInit {
   @Input() isIndigenousNation: boolean;
   @Input() showBothContents = true;
   @Input() hasLicence = false;
+  licenseeChangeFeatureOn: boolean = false;
 
-  constructor() { }
+  constructor(private featureFlagService: FeatureFlagService) { 
+    featureFlagService.featureOn('LicenseeChanges')
+      .subscribe(x => this.licenseeChangeFeatureOn = x);
+  }
 
   ngOnInit() {
   }
