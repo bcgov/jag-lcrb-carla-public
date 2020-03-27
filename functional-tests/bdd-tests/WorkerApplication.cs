@@ -34,8 +34,20 @@ namespace bdd_tests
     public sealed class WorkerApplication : TestBaseWorker
     {
 
+        [Given(@"I login with no terms")]
+        public void I_login_no_terms()
+        {
+            CarlaLoginWorkerNoTerms();
+        }
+
         [Given(@"I am logged in to the dashboard")]
         public void I_view_the_dashboard()
+        {
+            CarlaLoginWorker();
+        }
+
+        [And(@"I am logged in to the dashboard")]
+        public void And_I_view_the_dashboard()
         {
             CarlaLoginWorker();
         }
@@ -213,10 +225,26 @@ namespace bdd_tests
             Assert.True (ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-dashboard/div/div[2]/div[1]/div/section/div/h2[text()='Security Verification Status: Pending Review']")).Displayed);
         }
 
+        [And(@"the account is deleted")]
+        public void Delete_my_account()
+        {
+            this.CarlaDeleteCurrentAccount();
+        }
+
         [Then(@"I sign out")]
         public void sign_out()
         {
             CarlaDeleteCurrentAccount();
+        }
+
+        [Then(@"I see the login page")]
+        public void I_see_login()
+        {
+            /* 
+            Page Title: Apply for a cannabis licence
+            */
+
+            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
     }
 }
