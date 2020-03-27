@@ -349,16 +349,6 @@ namespace bdd_tests
             submit_button.Click();
         }
 
-        /*[And(@"I click on the Submit button")]
-        public void click_on_submit()
-        {
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
-            System.Threading.Thread.Sleep(7000);
-
-            submit_button.Click();
-            System.Threading.Thread.Sleep(7000);
-        }*/
-
         [And(@"I review the security screening requirements")]
         public void review_security_screening_reqs()
         {
