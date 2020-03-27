@@ -34,7 +34,7 @@ Scenario: Start Application
 namespace bdd_tests
 {
     [FeatureFile("./CateringApplication_soleproprietor.feature")]
-    public sealed class CateringApplicationSoleProprietor : TestBaseCRS
+    public sealed class CateringApplicationSoleProprietor : TestBase
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
@@ -227,6 +227,8 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
 
+            System.Threading.Thread.Sleep(7000);
+
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
             estabName.SendKeys(estName);
@@ -319,7 +321,7 @@ namespace bdd_tests
         [And(@"I enter the payment information")]
         public void enter_payment_info()
         {
-            MakeCRSPayment();
+            MakePayment();
         }
 
         [And(@"I return to the dashboard")]
