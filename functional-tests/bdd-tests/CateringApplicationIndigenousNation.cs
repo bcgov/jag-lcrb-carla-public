@@ -34,7 +34,7 @@ Scenario: Start Application
 namespace bdd_tests
 {
     [FeatureFile("./CateringApplication_indigenousnation.feature")]
-    public sealed class CateringApplicationIndigenousNation : TestBaseCRS
+    public sealed class CateringApplicationIndigenousNation : TestBase
     {
         [Given(@"I am logged in to the dashboard as an (.*)")]
         public void I_view_the_dashboard(string businessType)
@@ -289,7 +289,7 @@ namespace bdd_tests
         [And(@"I enter the payment information")]
         public void enter_payment_info()
         {
-            MakeCRSPayment();
+            MakePayment();
         }
 
         [And(@"I return to the dashboard")]
