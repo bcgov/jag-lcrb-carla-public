@@ -759,6 +759,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "storeHours", storeHours }
                     };
                 }
+                else // handle other types such as catering
+                {
+                    parameters = new Dictionary<string, string>
+                    {
+                        { "title", "Liquor_License" },
+                        { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
+                        { "establishmentName", adoxioLicense.AdoxioLicencee.Name  },
+                        { "establishmentStreet", adoxioLicense.AdoxioLicencee.Address1Line1 },
+                        { "establishmentCity", adoxioLicense.AdoxioLicencee.Address1City + ", B.C." },
+                        { "establishmentPostalCode", adoxioLicense.AdoxioLicencee.Address1Postalcode },
+                        { "licencee", adoxioLicense.AdoxioLicencee.Name },
+                        { "licenceType", adoxioLicense.AdoxioLicenceType },
+                        { "effectiveDate", effectiveDateParam },
+                        { "expiryDate", expiraryDateParam },
+                        { "restrictionsText", termsAndConditions },
+                        { "storeHours", storeHours }
+                    };
+                }
                 try
                 {
                     var templateName = "cannabis_licence";
