@@ -12,6 +12,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.HealthChecks" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="3.1.2" />
+    <PackageReference Include="Stubble.Compilation" Version="1.7.2" />
+    <PackageReference Include="Stubble.Core" Version="1.7.2" />
+    <PackageReference Include="Stubble.Extensions.JsonNet" Version="1.2.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.0.0" />
@@ -49,7 +52,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Templates\catering_licence.mustache">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\event_authorization.mustache">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Templates\wine_store_licence copy.mustache">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

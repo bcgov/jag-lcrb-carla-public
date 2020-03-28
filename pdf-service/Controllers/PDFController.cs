@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.NodeServices;
 using Microsoft.AspNetCore.Hosting;
+using Stubble.Core.Builders;
+using System.IO;
 
 namespace PDF.Controllers
 {
@@ -16,14 +18,12 @@ namespace PDF.Controllers
     [Route("api/[controller]")]
     public class PDFController : Controller
     {
-        private readonly IConfiguration Configuration;
-        private readonly IHostingEnvironment _env;
+        private readonly IConfiguration Configuration;        
         protected ILogger _logger;
 
-        public PDFController(IConfiguration configuration, ILoggerFactory loggerFactory, IHostingEnvironment env)
+        public PDFController(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
-            Configuration = configuration;
-            _env = env;
+            Configuration = configuration;            
             _logger = loggerFactory.CreateLogger(typeof(PDFController));
         }
 
@@ -32,41 +32,32 @@ namespace PDF.Controllers
         [Produces("application/pdf")]
         [ProducesResponseType(200, Type = typeof(FileContentResult))]
 
-        public async Task<IActionResult> GetPDF([FromServices] INodeServices nodeServices, [FromBody]  object rawdata, string template )
+        public async Task<IActionResult> GetPDF([FromServices] INodeServices nodeServices, [FromBody] Dictionary<string, object> rawdata, string template )
         {
-            JSONResponse result;
-            var options = new { format="Letter", orientation= "portrait" };
+            // first do a mustache merge.
+            var stubble = new StubbleBuilder().Build();
+            string filename = $"Templates/{template}.mustache";
 
-            // execute the Node.js component
-            result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", template, rawdata, options); 
-                        
-            return new FileContentResult(result.data, "application/pdf");
+            if (System.IO.File.Exists(filename))
+            {
+                string format = System.IO.File.ReadAllText(filename);
+                var templateData = stubble.Render(format, rawdata);
+                
+
+                JSONResponse result;
+                var options = new { format = "Letter", orientation = "portrait" };
+
+                // execute the Node.js component
+                result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", templateData, rawdata, options);
+
+                return new FileContentResult(result.data, "application/pdf");
+            }
+            else
+            {
+                return new NotFoundResult();
+            }
+
         }        
        
-        [HttpGet]
-        [Route("GetTestPDF")]
-
-        public async Task<IActionResult> GetTestPDF([FromServices] INodeServices nodeServices)
-        {
-            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
-
-            JSONResponse result = null;
-            var options = new { };            
-
-            var testObject = new Dictionary <string, string>();
-            testObject.Add("title", "test title");
-            testObject.Add("licenceNumber", "123456");
-            testObject.Add("businessName", "test biz name");
-            testObject.Add("addressLine1", "address 1");
-            testObject.Add("addressLine2", "address 2");
-            testObject.Add("companyName", "Test Inc.");
-            // testObject.Add("permitIssueDate", "date 123");
-            // testObject.Add("restrictionsText", "restrictions");
-
-            // execute the Node.js component
-            result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", "cannabis_licence", testObject, options); 
-                        
-            return new FileContentResult(result.data, "application/pdf");
-        }
     }
 }
