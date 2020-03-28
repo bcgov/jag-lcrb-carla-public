@@ -16,7 +16,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     {
 
         /// <summary>
-        /// Add reference to adoxio_events
+        /// Add reference to adoxio_federalreportexport
         /// </summary>
         /// <param name='federalReportExportId'>
         /// key: adoxio_federalreportexportid
@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_events({adoxio_federalreportexportid})/{fieldname}/$ref").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_federalreportexports({adoxio_federalreportexportid})/{fieldname}/$ref").ToString();
             _url = _url.Replace("{adoxio_federalreportexportid}", System.Uri.EscapeDataString(federalReportExportId));
             _url = _url.Replace("{fieldname}", System.Uri.EscapeDataString(fieldname));
             // Create HTTP transport objects
@@ -169,9 +169,9 @@ namespace Gov.Lclb.Cllb.Interfaces
     public partial interface IFederalreportexports
     {
         /// <summary>
-        /// Add reference to adoxio_events
+        /// Add reference to adoxio_federalreportexport
         /// </summary>
-        /// <param name='federalReportId'>
+        /// <param name='federalReportExportId'>
         /// key: adoxio_federalreportexportid
         /// </param>
         /// <param name='fieldname'>
@@ -192,22 +192,22 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string federalReportId, string fieldname, Odataid odataid = default(Odataid), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string federalReportExportId, string fieldname, Odataid odataid = default(Odataid), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 
 
     /// <summary>
-    /// Extension methods for Events.
+    /// Extension methods for FederalReportExport.
     /// </summary>
-    public static partial class EventsExtensions
+    public static partial class FederalReportExportExtension
     {
         /// <summary>
-        /// Add reference to adoxio_events
+        /// Add reference to adoxio_federalreportexport
         /// </summary>
         /// <param name='operations'>
         /// The operations group for this extension method.
         /// </param>
-        /// <param name='federalReportId'>
+        /// <param name='federalReportExportId'>
         /// key: adoxio_federalreportexportid
         /// </param>
         /// <param name='fieldname'>
@@ -222,13 +222,13 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Add reference to adoxio_events
+        /// Add reference to adoxio_federalreportexport
         /// </summary>
         /// <param name='operations'>
         /// The operations group for this extension method.
         /// </param>
-        /// <param name='eventId'>
-        /// key: adoxio_eventid
+        /// <param name='federalReportExportId'>
+        /// key: adoxio_federalreportid
         /// </param>
         /// <param name='fieldname'>
         /// key: fieldname

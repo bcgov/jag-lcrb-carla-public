@@ -31,10 +31,11 @@ namespace Gov.Lclb.Cllb.FederalReportingService
         private readonly ILoggerFactory _loggerFactory;
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment _env { get; set; }
-        public _fileManagerClient FileManagerClient { get; set; }
+        public FileManagerClient _fileManagerClient { get; set; }
 
         public Startup(IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            _env = env;
             _loggerFactory = loggerFactory;
 
             var builder = new ConfigurationBuilder()
