@@ -19,6 +19,10 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Exceptions;
 using System.Net.Http;
+using System.Net;
+using Grpc.Net.Client;
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+using Gov.Lclb.Cllb.Services.FileManager;
 
 namespace Gov.Lclb.Cllb.FederalReportingService
 {
@@ -26,9 +30,12 @@ namespace Gov.Lclb.Cllb.FederalReportingService
     {
         private readonly ILoggerFactory _loggerFactory;
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment _env { get; set; }
+        public FileManagerClient _fileManagerClient { get; set; }
 
         public Startup(IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            _env = env;
             _loggerFactory = loggerFactory;
 
             var builder = new ConfigurationBuilder()
@@ -62,6 +69,52 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             // health checks. 
             services.AddHealthChecks()
                 .AddCheck("Federal Reporting Service", () => HealthCheckResult.Healthy());
+
+                // add the file manager.
+            string fileManagerURI = Configuration["FILE_MANAGER_URI"];
+            if (!_env.IsProduction()) // needed for macOS TLS being turned off
+            {
+                AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            }
+            if (!string.IsNullOrEmpty (fileManagerURI))
+            {
+                var httpClientHandler = new HttpClientHandler();
+
+                if (!_env.IsProduction()) // Ignore certificate errors in non-production modes.  
+                                         // This allows you to use OpenShift self-signed certificates for testing.
+                {
+                    // Return `true` to allow certificates that are untrusted/invalid                    
+                    httpClientHandler.ServerCertificateCustomValidationCallback =
+                    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+                }
+                
+                var httpClient = new HttpClient(httpClientHandler);
+                // set default request version to HTTP 2.  Note that Dotnet Core does not currently respect this setting for all requests.
+                httpClient.DefaultRequestVersion = HttpVersion.Version20;
+              
+                var initialChannel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions { HttpClient = httpClient });
+                
+                var initialClient = new FileManagerClient(initialChannel);
+                // call the token service to get a token.
+                var tokenRequest = new TokenRequest()
+                {
+                    Secret = Configuration["FILE_MANAGER_SECRET"]
+                };
+
+                var tokenReply = initialClient.GetToken(tokenRequest);
+
+                if (tokenReply != null && tokenReply.ResultStatus == ResultStatus.Success)
+                {
+                    // Add the bearer token to the client.
+                    
+                    httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokenReply.Token}");
+
+                    var channel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions() { HttpClient = httpClient });                   
+                    _fileManagerClient = new FileManagerClient(channel);
+                    services.AddTransient<FileManagerClient>(_ => _fileManagerClient);
+
+                }
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -154,8 +207,8 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                 {
                     log.LogInformation($"Creating Hangfire jobs for {typeof(Startup)} ...");
 
-                    // Run 1 minute past midnight on the 15th of every month
-                    RecurringJob.AddOrUpdate(() => new FederalReportingController(Configuration, loggerFactory).GenerateFederalTrackingReport(null), "1 8 15 * *");
+                    // Run every 10 minutes
+                    RecurringJob.AddOrUpdate(() => new FederalReportingController(Configuration, loggerFactory, _fileManagerClient).ExportFederalReports(null), "*/10 * * * *");
 
                     log.LogInformation("Hangfire jobs setup.");
                 }
