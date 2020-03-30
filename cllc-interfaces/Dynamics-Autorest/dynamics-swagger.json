@@ -66085,13 +66085,14 @@
           "description": "",
           "type": "boolean"
         },
-        "adoxio_isshowpropertydetails": {
-          "description": "",
-          "type": "boolean"
-        },
         "adoxio_name": {
           "description": "The name of the custom entity.",
           "type": "string"
+        },
+        "adoxio_isfree": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "adoxio_siteplan": {
           "format": "int32",
@@ -66137,10 +66138,6 @@
           "description": "Unique identifier of the user who modified the record.",
           "type": "string"
         },
-        "adoxio_defaultbpmid": {
-          "description": "",
-          "type": "string"
-        },
         "statecode": {
           "format": "int32",
           "description": "Status of the Application Type",
@@ -66149,6 +66146,11 @@
         "adoxio_currentestablishmentaddress": {
           "format": "int32",
           "description": "",
+          "type": "integer"
+        },
+        "statuscode": {
+          "format": "int32",
+          "description": "Reason for the status of the Application Type",
           "type": "integer"
         },
         "adoxio_establishmentname": {
@@ -66221,7 +66223,11 @@
           "description": "",
           "type": "boolean"
         },
-        "adoxio_showdescription2": {
+        "adoxio_isendorsement": {
+          "description": "",
+          "type": "boolean"
+        },
+        "adoxio_isshowpropertydetails": {
           "description": "",
           "type": "boolean"
         },
@@ -66229,6 +66235,10 @@
           "format": "int32",
           "description": "",
           "type": "integer"
+        },
+        "adoxio_showdescription2": {
+          "description": "",
+          "type": "boolean"
         },
         "timezoneruleversionnumber": {
           "format": "int32",
@@ -66240,10 +66250,9 @@
           "description": "Version Number",
           "type": "string"
         },
-        "statuscode": {
-          "format": "int32",
-          "description": "Reason for the status of the Application Type",
-          "type": "integer"
+        "adoxio_defaultbpmid": {
+          "description": "",
+          "type": "string"
         },
         "adoxio_proofofzoning": {
           "format": "int32",
@@ -72176,6 +72185,10 @@
           "type": "string"
         },
         "adoxio_isotherconsumptionsafetydetails": {
+          "description": "",
+          "type": "string"
+        },
+        "adoxio_serviceareaentrancesupervisiondetails": {
           "description": "",
           "type": "string"
         },
