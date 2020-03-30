@@ -142,10 +142,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var filter = $"_adoxio_licencee_value eq {licenceeId}";
                 filter += $" and statuscode eq { (int)LicenceStatusCodes.Active}";
+                var expand = new List<string>{"adoxio_LicenceType"};
                 try
                 {
-                    result = _dynamicsClient.Licenceses.Get(filter: filter).Value.Count;
-
+                    result = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand).Value
+                    .Count(licence => licence.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store");
                 }
                 catch (HttpOperationException)
                 {
@@ -382,7 +383,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             int count = GetSubmittedCountByApplicant(userSettings.AccountId);
             count += GetApprovedLicenceCountByApplicant(userSettings.AccountId);
 
-            if (count >= 8)
+            if (count >= 8 && item.ApplicationType.Name == "Cannabis Retail Store")
             {
                 return BadRequest("8 applications have already been submitted. Can not create more");
             }
