@@ -32,7 +32,7 @@ Scenario: Start Application
 namespace bdd_tests
 {
     [FeatureFile("./MultiLevelCRSApplicationPrivateCorp.feature")]
-    public sealed class MultiLevelCRSApplicationPrivateCorp : TestBaseCRS
+    public sealed class MultiLevelCRSApplicationPrivateCorp : TestBase
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
