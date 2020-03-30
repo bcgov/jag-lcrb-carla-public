@@ -19,11 +19,13 @@ Feature: CateringApplication_validation
 
 Scenario: Start Application
     Given I am logged in to the dashboard as a private corporation
+    And the account is deleted
+    And I am logged in to the dashboard as a private corporation
     And I click on the Catering Start Application button
     And I review the account profile
     And I review the organization structure
     And I do not complete the catering application correctly
-    Then the expected error messages are displayed  
+    Then the expected error messages are displayed
 */
 
 namespace bdd_tests
@@ -41,6 +43,12 @@ namespace bdd_tests
         public void And_I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
+        }
+
+        [And(@"the account is deleted")]
+        public void Delete_my_account()
+        {
+            this.CarlaDeleteCurrentAccount();
         }
 
         [And(@"I click on the Catering Start Application button")]
