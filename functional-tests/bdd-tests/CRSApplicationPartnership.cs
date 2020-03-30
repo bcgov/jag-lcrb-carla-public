@@ -20,7 +20,7 @@ Feature: CRSApplication_partnership
 Scenario: Start Application
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
-    And I am logged in to the dashboard as a private corporation
+    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button
     And I complete the eligibility disclosure
     And I review the account profile
@@ -285,6 +285,8 @@ namespace bdd_tests
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
 
+            ngDriver.WaitForAngular();
+
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
             estabName.SendKeys(estName);
@@ -305,13 +307,13 @@ namespace bdd_tests
             NgWebElement estabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             estabPID.SendKeys(estPID);
 
-            // enter the establishment email
-            NgWebElement estabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
-            estabEmail.SendKeys(estEmail);
-
             // enter the establishment phone number
             NgWebElement estabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             estabPhone.SendKeys(estPhone);
+
+            // enter the establishment email
+            NgWebElement estabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
+            estabEmail.SendKeys(estEmail);
 
             // find the upload_files folder in the repo
             var environment = Environment.CurrentDirectory;
