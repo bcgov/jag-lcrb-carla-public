@@ -700,7 +700,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     <td>11:00 pm</td>
                     <td>11:00 pm</td>
                 </tr>";
-                if (application.AdoxioServicehoursstandardhours != true && adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
+                if (application?.AdoxioServicehoursstandardhours != true && adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
                 {
                     storeHours = $@"
                 <tr>
@@ -735,6 +735,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "establishmentStreet", adoxioLicense.AdoxioEstablishment.AdoxioAddressstreet },
                         { "establishmentCity", adoxioLicense.AdoxioEstablishment.AdoxioAddresscity + ", B.C." },
                         { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment.AdoxioAddresspostalcode },
+                        { "licenceType", adoxioLicense.AdoxioLicenceType.AdoxioName },
                         { "licencee", adoxioLicense.AdoxioLicencee.Name },
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
@@ -753,6 +754,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "establishmentCity", adoxioLicense.AdoxioLicencee.Address1City + ", B.C." },
                         { "establishmentPostalCode", adoxioLicense.AdoxioLicencee.Address1Postalcode },
                         { "licencee", adoxioLicense.AdoxioLicencee.Name },
+                        { "licenceType", adoxioLicense.AdoxioLicenceType.AdoxioName },
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
                         { "restrictionsText", termsAndConditions },
@@ -770,7 +772,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "establishmentCity", adoxioLicense.AdoxioLicencee.Address1City + ", B.C." },
                         { "establishmentPostalCode", adoxioLicense.AdoxioLicencee.Address1Postalcode },
                         { "licencee", adoxioLicense.AdoxioLicencee.Name },
-                        { "licenceType", adoxioLicense.AdoxioLicenceType },
+                        { "licenceType", adoxioLicense.AdoxioLicenceType.AdoxioName },
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
                         { "restrictionsText", termsAndConditions },
