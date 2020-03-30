@@ -148,6 +148,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 case "event":
                     listTitle = SharePointFileManager.EventDocumentListTitle;
                     break;
+                case "federal_report":
+                    listTitle = SharePointFileManager.FederalReportListTitle;
+                    break;
                 default:
                     listTitle = entityName;
                     break;
@@ -174,6 +177,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     break;
                 case "event":
                     listTitle = SharePointFileManager.EventDocumentListTitle;
+                    break;
+                case "federal_report":
+                    listTitle = SharePointFileManager.FederalReportListTitle;
                     break;
                 default:
                     break;
