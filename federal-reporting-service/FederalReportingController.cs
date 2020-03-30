@@ -23,7 +23,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
 {
     public class FederalReportingController
     {
-        private readonly string DOCUMENT_LIBRARY = "Federal Reporting";
+        private readonly string DOCUMENT_LIBRARY = "adoxio_federalreportexport";
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IConfiguration _configuration;
         private readonly FileManagerClient _fileManagerClient;
@@ -128,7 +128,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                                 {
                                     folderName = export.GetDocumentFolderName();
 
-                                    CreateFederalReportDocumentLocation(export, folderName, filename);
+                                    CreateFederalReportDocumentLocation(export, DOCUMENT_LIBRARY, folderName);
                                 }
                                 // string sharepointFilename = await _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv");
                                 // string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
@@ -140,7 +140,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                                     Data = ByteString.CopyFrom(data),
                                     EntityName = "federal_report",
                                     FileName = filename,
-                                    FolderName = DOCUMENT_LIBRARY
+                                    FolderName = folderName
                                 };
 
                                 var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
@@ -187,7 +187,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             {
 
                 // set the parent document library.
-                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL("Federal Reporting", name);
+                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL("adoxio_federalreportexport", name);
 
                 string exportUri = _dynamicsClient.GetEntityURI("adoxio_federalreportexports", federalReport.AdoxioFederalreportexportid);
                 // add a regardingobjectid.
@@ -195,7 +195,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                 {
                     RegardingobjectIdFederalReportExportODataBind = exportUri,
                     ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference),
-                    Relativeurl = folderName,
+                    Relativeurl = name,
                     Description = "Federal Report Files",
                 };
 
@@ -217,7 +217,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
 
                 try
                 {
-                    _dynamicsClient.Federalreportexports.AddReference(federalReport.AdoxioFederalreportexportid, "adoxio_documentlink", oDataId);
+                    _dynamicsClient.Federalreportexports.AddReference(federalReport.AdoxioFederalreportexportid, "adoxio_federalreportexport_SharePointDocumentLocations", oDataId);
                 }
                 catch (HttpOperationException odee)
                 {
