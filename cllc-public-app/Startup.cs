@@ -289,9 +289,7 @@ namespace Gov.Lclb.Cllb.Public
                     services.AddTransient<FileManagerClient>(_ => new FileManagerClient(channel));
 
                 }
-
-
-            }            
+            }
 
         }
 
