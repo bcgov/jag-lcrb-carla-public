@@ -700,7 +700,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     <td>11:00 pm</td>
                     <td>11:00 pm</td>
                 </tr>";
-                if (application.AdoxioServicehoursstandardhours != true && adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
+                if (application?.AdoxioServicehoursstandardhours != true && adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
                 {
                     storeHours = $@"
                 <tr>
