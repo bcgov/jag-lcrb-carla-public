@@ -130,6 +130,7 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
       safeAndResponsibleDisturbancesOtherDescription: licenceEvent.safeAndResponsibleDisturbancesOtherDescription,
       safeAndResponsibleAdditionalSafetyMeasures: licenceEvent.safeAndResponsibleAdditionalSafetyMeasures,
       safeAndResponsibleServiceAreaSupervision: licenceEvent.safeAndResponsibleServiceAreaSupervision,
+      securityPlanSubmitted: false,
       declarationIsAccurate: false
     });
 
@@ -139,7 +140,7 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
   }
 
   save() {
-    this.updateLicence();
+    this.updateLicenceEvent();
   }
 
   clearRelatedFormFieldIfNotOther(options: any, fieldName: string, relatedField: string) {
@@ -153,16 +154,9 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
     this.securityForm.controls[relatedField].updateValueAndValidity();
   }
 
-  updateLicence() {
-    this.busy = this.licenceEvents.updateLicenceEvent(this.securityForm.get('id').value, {...this.securityForm.value, securityPlanSubmitted: true})
-    .subscribe((licenceEvent) => {
-      this.router.navigate(['/licences']);
-    });
-  }
-
-  createLicence() {
-    this.securityForm.removeControl('id');
-    this.busy = this.licenceEvents.createLicenceEvent({...this.securityForm.value})
+  updateLicenceEvent() {
+    this.securityForm.controls['securityPlanSubmitted'].setValue(true);
+    this.busy = this.licenceEvents.updateLicenceEvent(this.securityForm.get('id').value, {...this.securityForm.value})
     .subscribe((licenceEvent) => {
       this.router.navigate(['/licences']);
     });
