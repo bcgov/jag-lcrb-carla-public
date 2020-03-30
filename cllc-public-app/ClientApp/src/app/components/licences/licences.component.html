@@ -50,7 +50,7 @@
                 </a>
               </div>
               <a href="javascript: void(0);" (click)="startRenewal(item)" appRemoveIfFeatureOff="CRS-Renewal"
-                *ngIf="isAboutToExpire(item.expiryDate)"><i class="fas fa-exclamation-triangle"
+                *ngIf="isAboutToExpire(item.expiryDate)" class="missing"><i class="fas fa-exclamation-triangle"
                   style="margin-right: 10px;"></i>Renew Licence</a>
             </td>
 
@@ -137,10 +137,15 @@
                   </p>
                 </div>
               </ng-container>
-              <section *ngIf="licenceHasExpired(item?.expiryDate)" class="licence-expired">
+              <section *ngIf="licenceHasExpired(item?.expiryDate)" class="licence-expired" style="text-align: center;">
 
-                Attention: This Licence has
-                Expired<br>Please Renew.
+                  <a href="javascript: void(0);" (click)="startRenewal(item)" appRemoveIfFeatureOff="CRS-Renewal"
+                  *ngIf="isAboutToExpire(item.expiryDate)" class="missing">
+                    <strong>Attention</strong>: This Licence has
+                    Expired<br>Please Renew.
+                  </a>
+
+
               </section>
 
               <section *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested === 'Yes' && licenceTransferFeatureOn)"
