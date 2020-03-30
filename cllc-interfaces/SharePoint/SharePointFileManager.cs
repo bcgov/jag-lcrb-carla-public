@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public const string WorkerDocumentListTitle = "Worker Qualification";
         public const string WorkerDocumentUrlTitle = "adoxio_worker";
         public const string EventDocumentListTitle = "adoxio_event";
-        public const string FederalReportListTitle = "Federal Reporting";
+        public const string FederalReportListTitle = "adoxio_federalreportexport";
 
         private const int MaxUrlLength = 260; // default maximum URL length.
 
