@@ -219,7 +219,10 @@ namespace bdd_tests
             NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
             federalProducerConnectionToCorp.Click();
 
-            // add family member check back in - TODO
+            /* switched off
+            // select 'No' for immediate family members
+            NgWebElement immediateFamilyMembers = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[6]"));
+            immediateFamilyMembers.Click(); */
 
             // click on Continue to Organization Review button
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
