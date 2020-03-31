@@ -162,11 +162,11 @@ export class LicencesComponent extends FormBase implements OnInit {
 
   startRenewal(licence: ApplicationLicenseSummary) {
     const liquorLicenceTypes = ['Liquor Primary', 'Catering', 'Wine Store'];
-    let renewalType = ApplicationTypeNames.CRSRenewal;
+    let renewalType = 'CRS-Renewal';
     let renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CRSRenewal);
 
     if (liquorLicenceTypes.indexOf(licence.licenceTypeName) !== -1) {
-      renewalType = ApplicationTypeNames.LiquorRenewal;
+      renewalType = 'Liquor-Licence-Renewal';
       renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.LiquorRenewal);
     }
 

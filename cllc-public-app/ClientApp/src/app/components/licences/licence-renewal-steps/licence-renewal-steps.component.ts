@@ -21,7 +21,6 @@ export class LicenceRenewalStepsComponent implements OnInit {
       .subscribe(featureOn => this.licenseeChangesEnabled = featureOn);
 
       this.route.paramMap.subscribe(pmap => this.licenceType = pmap.get('licenceType'));
-
   }
 
   ngOnInit() {
