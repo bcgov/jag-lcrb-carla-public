@@ -36,6 +36,8 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   applicationId: string;
   busy: Subscription;
   accountId: string;
+  // need access to the licence to handle subcategory cases
+  licenseSubCategory: string;
   payMethod: string;
   validationMessages: any[];
   showValidationMessages: boolean;
@@ -116,6 +118,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
         }
 
         this.application = data;
+        this.licenseSubCategory = this.application.assignedLicence.licenseSubCategory;
 
         this.addDynamicContent();
 
@@ -144,6 +147,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   }
 
   doAction(licenseId: string, actionName: string) {
+  
     this.busy = this.licenceDataService.createApplicationForActionType(licenseId, actionName)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(data => {
@@ -198,7 +202,6 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
         return of(true);
       }));
   }
-
 
   updateApplicationInStore() {
     this.applicationDataService.getApplicationById(this.applicationId)
