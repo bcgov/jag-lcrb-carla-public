@@ -434,23 +434,14 @@ namespace bdd_tests
             business_shareholder_5();
         }
 
-        [And(@"I submit the organization information")]
+        [Then(@"I submit the organization information")]
         public void submit_org_info()
         {
             // click on Submit Organization Info button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
+            System.Threading.Thread.Sleep(7000);
+            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
+            System.Threading.Thread.Sleep(7000);
             submitOrgInfoButton.Click();
-        }
-
-        [Then(@"I see the application page")]
-        public void see_application_page()
-        {
-            /* 
-            Page Title: Submit the Cannabis Retail Store Application
-            */
-
-            // change to application page - todo
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'')]")).Displayed);
         }
 
         public void business_shareholder_2()
