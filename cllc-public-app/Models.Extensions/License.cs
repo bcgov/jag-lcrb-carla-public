@@ -5,6 +5,7 @@ using Gov.Lclb.Cllb.Public.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Gov.Lclb.Cllb.Public.Extensions;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -18,7 +19,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             License adoxioLicenseVM = new License();
 
             adoxioLicenseVM.id = dynamicsLicense.AdoxioLicencesid;
-
+            adoxioLicenseVM.licenseSubCategory = EnumExtensions.GetEnumMemberValue((LicenseSubCategory?)dynamicsLicense.AdoxioLicencesubcategory);
             // fetch the establishment and get name and address
             Guid? adoxioEstablishmentId = null;
             if (!string.IsNullOrEmpty(dynamicsLicense._adoxioEstablishmentValue))
