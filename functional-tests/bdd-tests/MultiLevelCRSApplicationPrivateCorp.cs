@@ -432,7 +432,7 @@ namespace bdd_tests
             business_shareholder_3();
             business_shareholder_4();
             business_shareholder_5();
-            //business_shareholder_6();
+            business_shareholder_6();
         }
 
         [And(@"I submit the organization information")]
@@ -923,7 +923,6 @@ namespace bdd_tests
             uiKeyPersonEmailBiz5.SendKeys(keyPersonnelEmailBiz5);
 
             // enter business shareholder > key personnel DOB
-            //html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[2]/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input
             NgWebElement uiKeyPersonnelDOB1Biz15 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
             uiKeyPersonnelDOB1Biz15.Click();
 
@@ -981,24 +980,26 @@ namespace bdd_tests
             uiOpenShareBiz6.Click();
 
             // enter business name
-            NgWebElement uiShareFirstBiz6 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[56]"));
+            NgWebElement uiShareFirstBiz6 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[1]/app-field/section/div[1]/section/input"));
             uiShareFirstBiz6.SendKeys(businessName6);
 
             // enter business voting shares
-            NgWebElement uiShareVotesBiz6 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[57]"));
+            NgWebElement uiShareVotesBiz6 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[2]/app-field/section/div[1]/section/input"));
             uiShareVotesBiz6.SendKeys(businessVotingShares6);
 
             // select the business type using dropdown
-            //NgWebElement uiShareBizType6 = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/select/option[2]"));
-            //uiShareBizType6.Click();
+            NgWebElement uiShareBizType6 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/select/option[2]"));
+            uiShareBizType6.Click();
 
             // enter business shareholder email
-            NgWebElement uiShareEmailBiz6 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[58]"));
+            NgWebElement uiShareEmailBiz6 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
             uiShareEmailBiz6.SendKeys(businessEmail6);
 
             // select the business shareholder confirm button
-            //NgWebElement uiShareBizConfirmButton6 = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr/td[5]/i/span"));
-            //uiShareBizConfirmButton6.Click();
+            System.Threading.Thread.Sleep(7000);
+            NgWebElement uiShareBizConfirmButton6 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[2]/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/table/tr/td[5]/i[1]/span"));
+            System.Threading.Thread.Sleep(7000);
+            uiShareBizConfirmButton6.Click();
 
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
