@@ -17,12 +17,6 @@ module.exports = function (callback, html, viewData, pdfOptions) {
 		type: "pdf"             // allowed file types: png, jpeg, pdf
 	};
 
-	
-
-	if (viewData.border){
-		pdfOptions.border = JSON.parse(viewData.border);
-	}
-
 	// PDF options
 	var options = Object.assign({}, DEFAULT_PDF_OPTIONS, pdfOptions);
 			
