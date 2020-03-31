@@ -22,12 +22,12 @@
           (saveComplete)="stepper.selectedIndex = 2"></app-application-licensee-changes>
       </ng-container>
 
-      <ng-container *ngIf="!licenseeChangesEnabled && applicationTypeCategory === 'Cannabis'">
+      <ng-container *ngIf="!licenseeChangesEnabled && licenceType === 'CRS Renewal'">
         <ng-template matStepLabel>Complete Application</ng-template>
         <app-application-renewal *ngIf="stepper.selectedIndex === 1" style="width: 100%"></app-application-renewal>
       </ng-container>
 
-      <ng-container *ngIf="!licenseeChangesEnabled && applicationTypeCategory === 'Liquor'">
+      <ng-container *ngIf="!licenseeChangesEnabled && licenceType === 'Liquor Licence Renewal'">
         <ng-template matStepLabel>Complete Application</ng-template>
         <app-liquor-renewal *ngIf="stepper.selectedIndex === 1" style="width: 100%"></app-liquor-renewal>
       </ng-container>
@@ -35,9 +35,9 @@
 
     <!-- step 3 -->
     <mat-step *ngIf="licenseeChangesEnabled" label="Complete Application">
-      <app-application-renewal *ngIf="stepper.selectedIndex === 2 && applicationTypeCategory === 'Cannabis'"
+      <app-application-renewal *ngIf="stepper.selectedIndex === 2 && licenceType === 'CRS Renewal'"
         style="width: 100%"></app-application-renewal>
-      <app-liquor-renewal *ngIf="stepper.selectedIndex === 2 && applicationTypeCategory === 'Liquor'"
+      <app-liquor-renewal *ngIf="stepper.selectedIndex === 2 && licenceType === 'Liquor Licence Renewal'"
         style="width: 100%"></app-liquor-renewal>
     </mat-step>
   </mat-horizontal-stepper>
