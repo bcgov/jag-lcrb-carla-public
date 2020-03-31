@@ -119,7 +119,7 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
-    path: 'renew-licence/:applicationTypeCategory/:applicationId',
+    path: 'renew-licence/:licenceType/:applicationId',
     component: LicenceRenewalStepsComponent,
     canActivate: [BCeidAuthGuard]
   },
