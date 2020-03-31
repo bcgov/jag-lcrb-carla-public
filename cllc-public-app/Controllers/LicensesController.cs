@@ -789,10 +789,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             break;
                         case "Catering":
                             templateName = "catering_licence";
-                            break;
-                        case "Wine Store Licence":
-                            templateName ="wine_store_licence";
-                            break;
+                            break;                        
                     }
                     
                     byte[] data = await _pdfClient.GetPdf(parameters, templateName);
