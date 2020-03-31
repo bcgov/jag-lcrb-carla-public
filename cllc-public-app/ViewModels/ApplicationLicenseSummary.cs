@@ -24,9 +24,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         OffSiteWineStore = 845280002,
         OnSiteWineStore = 845280003,
         SacramentalWineStore = 845280004,
-        SpecialtyWineStore = 845280005,
+        SpecialWineStore = 845280005,
         TouristWineStore = 845280006,
-        WineOnShelf = 845280007
+        WineOnShelf = 845280007,
+        BCVQA = 845280008,
 
     }
 

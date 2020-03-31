@@ -364,8 +364,8 @@ export class LicencesComponent extends FormBase implements OnInit {
       case "SacramentalWineStore":
         label = "Sacramental Wine Store";
         break;
-      case "SpecialtyWineStore":
-        label = "Specialty Wine Store";
+      case "SpecialWineStore":
+        label = "Special Wine Store";
         break;
       case "TouristWineStore":
         label = "Tourist Wine Store";
@@ -373,8 +373,12 @@ export class LicencesComponent extends FormBase implements OnInit {
       case "WineOnShelf":
         label = "Wine on Shelf";
         break;
+      case "BCVQA":
+        label = "BC VQA Store";
+        break;
+
       default:
-        label = "";
+        label = subcategory;
     }
     return label;
   }
