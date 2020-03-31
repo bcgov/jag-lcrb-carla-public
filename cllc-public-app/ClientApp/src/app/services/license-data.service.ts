@@ -48,4 +48,7 @@ export class LicenseDataService extends DataService {
     return this.http.put<ApplicationLicenseSummary>(this.apiPath + licenceId + '/establishment', licence, { headers: this.headers });
   }
 
+  updateLicenceLDBOrders(licenceId: string, total: number) {
+    return this.http.put<License>(this.apiPath + licenceId + '/ldbordertotals', total, { headers: this.headers });
+  }
 }
