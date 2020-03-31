@@ -809,6 +809,43 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
+        [HttpPut("{licenceId}/ldbordertotals")]
+        public async Task<IActionResult> UpdateLicenceLDBOrderTotals([FromBody] int total, string licenceId)
+        {
+            if (total == null || string.IsNullOrEmpty(licenceId))
+            {
+                return BadRequest();
+            }
+
+            MicrosoftDynamicsCRMadoxioLicences licence = _dynamicsClient.GetLicenceByIdWithChildren(licenceId);
+            if (licence == null)
+            {
+                return NotFound();
+            }
+
+            if (!CurrentUserHasAccessToLicenseOwnedBy(licence.AdoxioLicencee.Accountid))
+            {
+                return Forbid();
+            }
+
+            MicrosoftDynamicsCRMadoxioLicences patchObject = new MicrosoftDynamicsCRMadoxioLicences()
+            {
+                AdoxioLdbordertotals = total
+            };
+
+            try
+            {
+                await _dynamicsClient.Licenceses.UpdateAsync(licenceId, patchObject);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error updating licence ldb order totals");
+                throw new Exception("Unable to update licence ldb order totals");
+            }
+
+            return Ok();
+        }
+
         [HttpPut("{licenceId}/establishment")]
         public async Task<IActionResult> UpdateLicenceEstablishment([FromBody] ViewModels.ApplicationLicenseSummary item, string licenceId)
         {
