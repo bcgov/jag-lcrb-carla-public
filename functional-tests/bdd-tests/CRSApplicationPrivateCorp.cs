@@ -470,7 +470,9 @@ namespace bdd_tests
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
 
-            ngDriver.WaitForAngular();
+            // enter the store phone number
+            NgWebElement estabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
+            estabPhone.SendKeys(estPhone);
 
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
@@ -495,10 +497,6 @@ namespace bdd_tests
             // enter the store email
             NgWebElement estabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
             estabEmail.SendKeys(estEmail);
-
-            // enter the store phone number
-            NgWebElement estabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
-            estabPhone.SendKeys(estPhone);
 
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
