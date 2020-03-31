@@ -7302,11 +7302,17 @@
         <Property Name="utcconversiontimezonecode" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Time zone code that was in use when the record was created." />
         </Property>
+        <Property Name="adoxio_investigationdescription" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="versionnumber" Type="Edm.Int64" ConcurrencyMode="Fixed">
           <Annotation Term="Org.OData.Core.V1.Description" String="Version Number" />
           <Annotation Term="Org.OData.Core.V1.Permissions">
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
+        </Property>
+        <Property Name="adoxio_investigationbackground" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_complianceinvestigationid" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for entity instances" />
@@ -7324,15 +7330,12 @@
         <Property Name="adoxio_jobnumber" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="_adoxio_licenseeid_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for Account associated with Investigation (Enforcement)." />
+        <Property Name="_adoxio_establishmentid_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for Establishment associated with Investigation (Enforcement)." />
           <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
           <Annotation Term="Org.OData.Core.V1.Permissions">
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
-        </Property>
-        <Property Name="adoxio_investigationbackground" Type="Edm.String" Unicode="false">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_modifiedby_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who modified the record." />
@@ -7429,6 +7432,13 @@
         <Property Name="adoxio_recommendedaction" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="_adoxio_licenseeid_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for Account associated with Investigation (Enforcement)." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="adoxio_investigationoffences" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -7447,15 +7457,11 @@
         <Property Name="adoxio_investigationwitnessstatements" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_investigationdescription" Type="Edm.String" Unicode="false">
+        <Property Name="adoxio_investigationenforcementaction" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="_adoxio_establishmentid_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for Establishment associated with Investigation (Enforcement)." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
+        <Property Name="adoxio_isnotifyrm" Type="Edm.Boolean">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_owninguser_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the user that owns the record." />
@@ -7475,9 +7481,6 @@
           </Annotation>
         </Property>
         <Property Name="adoxio_reactivationdate" Type="Edm.DateTimeOffset">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
-        <Property Name="adoxio_investigationenforcementaction" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_adoxio_complaintid_value" Type="Edm.Guid">
@@ -12865,9 +12868,6 @@
         <Property Name="adoxio_commonvotingshares" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_legalentityid" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for entity instances" />
-        </Property>
         <Property Name="adoxio_interestpercentage" Type="Edm.Decimal" Scale="Variable">
           <Annotation Term="Org.OData.Core.V1.Description" String="Must fill if interest is more than 10%" />
         </Property>
@@ -12980,6 +12980,13 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
+        <Property Name="_adoxio_relatedlicence_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="adoxio_position" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -12989,12 +12996,8 @@
         <Property Name="adoxio_phonenumber" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="_adoxio_relatedlicence_value" Type="Edm.Guid">
+        <Property Name="adoxio_numberofmembers" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
         </Property>
         <Property Name="_owningbusinessunit_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the business unit that owns the record" />
@@ -13075,6 +13078,9 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
+        <Property Name="adoxio_totalcompanyshares" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_driverslicencenumber" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -13094,6 +13100,9 @@
           <Annotation Term="Org.OData.Core.V1.Permissions">
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
+        </Property>
+        <Property Name="adoxio_annualmembershipfee" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_ownerid_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Owner Id" />
@@ -13134,8 +13143,8 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
-        <Property Name="adoxio_totalcompanyshares" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        <Property Name="adoxio_legalentityid" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for entity instances" />
         </Property>
         <Property Name="_adoxio_profilename_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -13945,6 +13954,13 @@
         <Key>
           <PropertyRef Name="adoxio_licenseechangelogid" />
         </Key>
+        <Property Name="_adoxio_shareholderbusinessaccount_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="adoxio_name" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="The name of the custom entity." />
         </Property>
@@ -13960,6 +13976,9 @@
           <Annotation Term="Org.OData.Core.V1.Permissions">
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
+        </Property>
+        <Property Name="adoxio_numberofmembersnew" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_adoxio_parentlinceseechangelogid_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for Licensee Change Log associated with Licensee Change Log." />
@@ -14024,6 +14043,9 @@
         <Property Name="adoxio_totalsharesold" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_numberofmembersold" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_isdirectorold" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -14063,12 +14085,11 @@
         <Property Name="adoxio_iskeypersonnelold" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="_adoxio_shareholderbusinessaccount_value" Type="Edm.Guid">
+        <Property Name="adoxio_annualmembershipfeeold" Type="Edm.Decimal" Scale="Variable">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
+        </Property>
+        <Property Name="adoxio_annualmembershipfeenew" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_iskeypersonnelnew" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
