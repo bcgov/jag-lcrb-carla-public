@@ -295,8 +295,10 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
     saveOverrideValue = saveOverrideValue || {};
     const data = this.cleanSaveData(this.treeRoot);
+
     return forkJoin(
       this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue }),
+      this.legalEntityDataService.updateLegalEntity({...this.currentLegalEntities, numberOfMembers: this.treeRoot.numberOfMembers, annualMembershipFee: this.treeRoot.annualMembershipFee }, this.currentLegalEntities.id),
       this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId) // ,
       // this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges)
     );
@@ -319,7 +321,6 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         }
       });
   }
-
 
   addCancelledChange(change: LicenseeChangeLog) {
     this.cancelledLicenseeChanges.push(change);
