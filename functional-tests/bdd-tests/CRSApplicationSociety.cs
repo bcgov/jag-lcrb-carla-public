@@ -296,6 +296,8 @@ namespace bdd_tests
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
 
+            System.Threading.Thread.Sleep(7000);
+
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
             estabName.SendKeys(estName);

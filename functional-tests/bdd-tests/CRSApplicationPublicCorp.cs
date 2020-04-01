@@ -136,7 +136,7 @@ namespace bdd_tests
             NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             uiCalendar1.Click();
 
-            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[1]/td[2]/div"));
             uiCalendar2.Click();
 
             // enter the physical street address 1
@@ -290,7 +290,7 @@ namespace bdd_tests
             NgWebElement openPartnerDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             openPartnerDOB.Click();
 
-            NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
             openKeyPartnerDOB1.Click();
 
             // click on Submit Organization Info button
@@ -318,6 +318,8 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
+
+            System.Threading.Thread.Sleep(7000);
 
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
