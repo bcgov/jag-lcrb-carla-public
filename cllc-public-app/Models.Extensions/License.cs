@@ -19,7 +19,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             License adoxioLicenseVM = new License();
 
             adoxioLicenseVM.id = dynamicsLicense.AdoxioLicencesid;
-            adoxioLicenseVM.licenseSubCategory = EnumExtensions.GetEnumMemberValue((LicenseSubCategory?)dynamicsLicense.AdoxioLicencesubcategory);
+            if (dynamicsLicense.AdoxioLicencesubcategory != null)
+            {
+                adoxioLicenseVM.licenseSubCategory = EnumExtensions.GetEnumMemberValue((LicenseSubCategory?)dynamicsLicense.AdoxioLicencesubcategory);
+            }            
             // fetch the establishment and get name and address
             Guid? adoxioEstablishmentId = null;
             if (!string.IsNullOrEmpty(dynamicsLicense._adoxioEstablishmentValue))
