@@ -205,7 +205,7 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
       this.securityForm.reset();
       this.securityForm.controls['id'].setValue(id);
       this.securityForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Cancelled').value);
-      this.updateLicence();
+      this.updateLicenceEvent();
     } else {
       this.router.navigate(['/licences']);
     }
