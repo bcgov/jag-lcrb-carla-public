@@ -864,7 +864,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
             }
-            
+
+            if (account.AdoxioLicenseechangelogParentBusinessAccount != null)
+            {
+                // change logs
+                foreach (var changelog in account.AdoxioLicenseechangelogParentBusinessAccount)
+                {
+                    try
+                    {
+                        _dynamicsClient.Licenseechangelogs.Delete(changelog.AdoxioLicenseechangelogid);
+                        _logger.LogDebug(LoggingEvents.HttpDelete, "Application deleted: " + changelog.AdoxioLicenseechangelogid);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error deleting the Changelog: ");
+                        throw new Exception("Error deleting the Changelog");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error deleting the Changelog");
+                        throw new Exception("Error deleting the Changelog");
+                    }
+                }
+            }
+
             if (account.AdoxioLicenseechangelogBusinessAccount != null)
             {
                 // change logs
@@ -878,16 +901,39 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     catch (HttpOperationException httpOperationException)
                     {
                         _logger.LogError(httpOperationException, "Error deleting the Application: ");
+                        throw new Exception("Error deleting the Changelog");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error deleting the Changelog");
+                        throw new Exception("Error deleting the Changelog");
+                    }
+                }
+            }
+
+            if (account.AdoxioLicenseechangelogShareholderBusinessAccount != null)
+            {
+                // change logs
+                foreach (var changelog in account.AdoxioLicenseechangelogShareholderBusinessAccount)
+                {
+                    try
+                    {
+                        _dynamicsClient.Licenseechangelogs.Delete(changelog.AdoxioLicenseechangelogid);
+                        _logger.LogDebug(LoggingEvents.HttpDelete, "Application deleted: " + changelog.AdoxioLicenseechangelogid);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error deleting the Application: ");
                         throw new Exception("Error deleting the Application");
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, "Error deleting the Application");
-                        throw new Exception("Error deleting the Application");
+                        _logger.LogError(e, "Error deleting the Changelog");
+                        throw new Exception("Error deleting the Changelog");
                     }
                 }
             }
-            
+
 
             if (account.AdoxioAccountAdoxioLicencesLicencee != null)
             {
@@ -932,7 +978,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
             }
-            
+
+            if (account.AdoxioAccountTiedhouseconnections != null)
+            {
+                foreach (var tiedHouseConnection in account.AdoxioAccountTiedhouseconnections)
+                {
+                    try
+                    {
+                        _dynamicsClient.Tiedhouseconnections.Delete(tiedHouseConnection.AdoxioTiedhouseconnectionid);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error deleting the Tied house connection");
+                        throw new Exception("Error deleting the Tied house connection");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error deleting the Tied house connection");
+                        throw new Exception("Error deleting the Tied house connection");
+                    }
+                }
+            }
+
 
             // delete the account
             try
