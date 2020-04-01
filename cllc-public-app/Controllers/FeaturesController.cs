@@ -30,6 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (!string.IsNullOrEmpty(_configuration["FEATURE_CRS_RENEWAL"]))
             {
                 features.Add("CRS-Renewal");
+                features.Add("Liquor-Licence-Renewal");
             }
 
             if (!string.IsNullOrEmpty(_configuration["FEATURE_INDIGENOUS_NATION"]))

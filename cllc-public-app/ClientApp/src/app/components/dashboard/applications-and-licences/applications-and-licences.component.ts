@@ -17,6 +17,7 @@ import { AppState } from '@app/app-state/models/app-state';
 import { SetIndigenousNationModeAction } from '@app/app-state/actions/app-state.action';
 import * as moment from 'moment';
 import { PaymentDataService } from '@services/payment-data.service';
+import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQUOR_RENEWAL_LICENCE_TYPE_NAME } from '@components/licences/licences.component';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -77,10 +78,10 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       this.licenceAbsentLabel = '';
     }
     featureFlagService.featureOn('LicenceTransfer')
-    .pipe(takeWhile(() => this.componentActive))
-    .subscribe((featureOn: boolean) => {
-      this.licenceTransferFeatureOn = featureOn;
-    });
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((featureOn: boolean) => {
+        this.licenceTransferFeatureOn = featureOn;
+      });
     featureFlagService.featureOn('LicenseeChanges')
       .subscribe(x => this.licenseeChangeFeatureOn = x);
     featureFlagService.featureOn('LiquorOne')
@@ -187,7 +188,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     const actionApplication = licence.actionApplications.find(app => app.applicationTypeName === actionName && app.applicationStatus !== 'Active');
     if (actionApplication && !actionApplication.isPaid) {
       this.router.navigateByUrl('/account-profile/' + actionApplication.applicationId);
-    } else if (actionApplication && actionApplication.isPaid ) {
+    } else if (actionApplication && actionApplication.isPaid) {
       this.snackBar.open('Application already submitted', 'Fail',
         { duration: 3500, panelClass: ['red-snackbar'] });
     } else {
@@ -218,18 +219,18 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   payLicenceFee(licence: ApplicationLicenseSummary) {
     const crsApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore);
     if (crsApplication) {
-    this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(crsApplication.applicationId)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(res => {
-        const data = <any>res;
-        window.location.href = data.url;
-      }, err => {
-        if (err._body === 'Payment already made') {
-          this.snackBar.open('Licence Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        }
-      });
+      this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(crsApplication.applicationId)
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe(res => {
+          const data = <any>res;
+          window.location.href = data.url;
+        }, err => {
+          if (err._body === 'Payment already made') {
+            this.snackBar.open('Licence Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          }
+        });
     }
-    }
+  }
 
   startNewLicenceApplication() {
     const newLicenceApplicationData: Application = <Application>{
@@ -256,8 +257,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
-        if( this.licenseeChangeFeatureOn){
-        this.router.navigateByUrl(`/multi-step-application/${data.id}`);
+        if (this.licenseeChangeFeatureOn) {
+          this.router.navigateByUrl(`/multi-step-application/${data.id}`);
         } else {
           this.router.navigateByUrl(`/account-profile/${data.id}`);
         }
@@ -299,10 +300,10 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         const route: any[] = [`/multi-step-application/${data.id}`];
- 
+
         route.push({ useDynamicFormMode: true });
-        
-        this.router.navigate(route);        
+
+        this.router.navigate(route);
       },
       () => {
         this.snackBar.open('Error starting a Catering Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
@@ -347,6 +348,15 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     return expiry < now;
   }
 
+  getRenewalType(applicationType: string): string {
+    let licenceType = '';
+    if (applicationType === ApplicationTypeNames.CRSRenewal) {
+      licenceType = CRS_RENEWAL_LICENCE_TYPE_NAME;
+    } else if (applicationType === ApplicationTypeNames.LiquorRenewal){
+      licenceType = LIQUOR_RENEWAL_LICENCE_TYPE_NAME;
+    }
+    return licenceType;
+  }
 }
 
 @Component({

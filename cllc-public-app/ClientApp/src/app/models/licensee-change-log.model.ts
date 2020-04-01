@@ -246,6 +246,8 @@ export class LicenseeChangeLog {
       this.titleNew = legalEntity.jobTitle;
       this.titleOld = legalEntity.jobTitle;
       this.phsLink = legalEntity.phsLink;
+      this.numberOfMembers = legalEntity.numberOfMembers;
+      this.annualMembershipFee = legalEntity.annualMembershipFee;
     }
   }
 

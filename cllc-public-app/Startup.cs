@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -171,6 +172,21 @@ namespace Gov.Lclb.Cllb.Public
 
             services.AddSession(x => x.IdleTimeout = TimeSpan.FromHours(4.0));
 
+            // session will automatically use redis or another distribued cache if it is available.
+            if (!string.IsNullOrEmpty(_configuration["REDIS_SERVER"]))
+            {
+                services.AddDistributedRedisCache(o =>
+                {
+                    string config = _configuration["REDIS_SERVER"];
+                    if (! string.IsNullOrEmpty(_configuration["REDIS_PASSWORD"]))
+                    {
+                        string redisPassword = _configuration["REDIS_PASSWORD"];
+                        config += $",password={redisPassword}";
+                    }
+                    o.Configuration = config;                    
+                });
+            }
+
         }
 
         private void SetupServices(IServiceCollection services)
@@ -289,9 +305,7 @@ namespace Gov.Lclb.Cllb.Public
                     services.AddTransient<FileManagerClient>(_ => new FileManagerClient(channel));
 
                 }
-
-
-            }            
+            }
 
         }
 

@@ -3,7 +3,7 @@
   <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;">APPLICATIONS</h3>
   <section style="border: 1px solid #ccc; padding: 10px;  border-bottom: 4px solid #FFCC00;">
     <section>
-      <div *ngIf="submittedApplications < 8  && !marketerExists">
+      <div *ngIf="submittedApplications < 300  && !marketerExists">
         <p>
           Use the list below to find the application type you are looking for:
         </p>
@@ -19,7 +19,7 @@
               <th colspan=2>LICENCE</th>
               <th></th>
             </tr> -->
-            <tr *ngIf="!(submittedApplications >= 8 || marketerExists)">
+            <tr *ngIf="!(marketerExists)">
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
                 <img class="icon" src="assets/Cannabis-store-icon-blue-40px.png" alt="">
               </td>
@@ -190,7 +190,7 @@
                     <span>Complete Application</span>
                   </a>
                   <a *ngIf="item.applicationTypeName === ApplicationTypeNames.CRSRenewal || item.applicationTypeName === ApplicationTypeNames.LiquorRenewal"
-                     routerLink="/renew-licence/{{item.applicationTypeCategory}}/{{item.id}}">
+                     routerLink="/renew-licence/{{getRenewalType(item.applicationTypeName)}}/{{item.id}}">
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Complete Renewal</span>
                   </a>
