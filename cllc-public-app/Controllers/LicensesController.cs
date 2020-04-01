@@ -677,8 +677,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
                 }
-
-                var application = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.FirstOrDefault();
+                
                 var storeHours = $@"
                 <tr>
                     <td>Open</td>
@@ -700,28 +699,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     <td>11:00 pm</td>
                     <td>11:00 pm</td>
                 </tr>";
-                if (application?.AdoxioServicehoursstandardhours != true && adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
+                if (adoxioLicense.AdoxioEstablishment?.AdoxioStandardhours != true && adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
                 {
                     storeHours = $@"
                 <tr>
                     <td>Open</td>
-                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehoursmondayopen)}</td>
-                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourstuesdayopen)}</td>
-                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourswednesdayopen)}</td>
-                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehoursthursdayopen)}</td>
-                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehoursfridayopen)}</td>
-                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourssaturdayopen)}</td>
-                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourssundayopen)}</td>
+                    <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioMondayopen)}</td>
+                    <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioTuesdayopen)}</td>
+                    <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioWednesdayopen)}</td>
+                    <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioThursdayopen)}</td>
+                    <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioFridayopen)}</td>
+                    <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioSaturdayopen)}</td>
+                    <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioSundayopen)}</td>
                 </tr>                
                 <tr>
                     <td>Close</td>
-                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehoursmondayclose)}</td>
-                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourstuesdayclose)}</td>
-                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourswednesdayclose)}</td>
-                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehoursthursdayclose)}</td>
-                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehoursfridayclose)}</td>
-                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourssaturdayclose)}</td>
-                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourssundayclose)}</td>
+                    <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioMondayclose)}</td>
+                    <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioTuesdayclose)}</td>
+                    <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioWednesdayclose)}</td>
+                    <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioThursdayclose)}</td>
+                    <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioFridayclose)}</td>
+                    <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioSaturdayclose)}</td>
+                    <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioSundayclose)}</td>
                 </tr>";
                 }
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
@@ -731,12 +730,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         { "title", "Canabis_License" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
-                        { "establishmentName", adoxioLicense.AdoxioEstablishment.AdoxioName },
-                        { "establishmentStreet", adoxioLicense.AdoxioEstablishment.AdoxioAddressstreet },
-                        { "establishmentCity", adoxioLicense.AdoxioEstablishment.AdoxioAddresscity + ", B.C." },
-                        { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment.AdoxioAddresspostalcode },
-                        { "licenceType", adoxioLicense.AdoxioLicenceType.AdoxioName },
-                        { "licencee", adoxioLicense.AdoxioLicencee.Name },
+                        { "establishmentName", adoxioLicense.AdoxioEstablishment?.AdoxioName },
+                        { "establishmentStreet", adoxioLicense.AdoxioEstablishment?.AdoxioAddressstreet },
+                        { "establishmentCity", adoxioLicense.AdoxioEstablishment?.AdoxioAddresscity + ", B.C." },
+                        { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment?.AdoxioAddresspostalcode },
+                        { "licenceType", adoxioLicense.AdoxioLicenceType?.AdoxioName },
+                        { "licencee", adoxioLicense.AdoxioLicencee?.Name },
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
                         { "restrictionsText", termsAndConditions },
@@ -749,12 +748,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         { "title", "Canabis_License" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
-                        { "establishmentName", adoxioLicense.AdoxioLicencee.Name  },
-                        { "establishmentStreet", adoxioLicense.AdoxioLicencee.Address1Line1 },
-                        { "establishmentCity", adoxioLicense.AdoxioLicencee.Address1City + ", B.C." },
-                        { "establishmentPostalCode", adoxioLicense.AdoxioLicencee.Address1Postalcode },
-                        { "licencee", adoxioLicense.AdoxioLicencee.Name },
-                        { "licenceType", adoxioLicense.AdoxioLicenceType.AdoxioName },
+                        { "establishmentName", adoxioLicense.AdoxioLicencee?.Name  },
+                        { "establishmentStreet", adoxioLicense.AdoxioLicencee?.Address1Line1 },
+                        { "establishmentCity", adoxioLicense.AdoxioLicencee?.Address1City + ", B.C." },
+                        { "establishmentPostalCode", adoxioLicense.AdoxioLicencee?.Address1Postalcode },
+                        { "licencee", adoxioLicense.AdoxioLicencee?.Name },
+                        { "licenceType", adoxioLicense.AdoxioLicenceType?.AdoxioName },
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
                         { "restrictionsText", termsAndConditions },
@@ -767,12 +766,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         { "title", "Liquor_License" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
-                        { "establishmentName", adoxioLicense.AdoxioLicencee.Name  },
-                        { "establishmentStreet", adoxioLicense.AdoxioEstablishment.AdoxioAddressstreet },
-                        { "establishmentCity", adoxioLicense.AdoxioEstablishment.AdoxioAddresscity + ", B.C." },
-                        { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment.AdoxioAddresspostalcode },
-                        { "licencee", adoxioLicense.AdoxioLicencee.Name },
-                        { "licenceType", adoxioLicense.AdoxioLicenceType.AdoxioName },
+                        { "establishmentName", adoxioLicense.AdoxioLicencee?.Name  },
+                        { "establishmentStreet", adoxioLicense.AdoxioEstablishment?.AdoxioAddressstreet },
+                        { "establishmentCity", adoxioLicense.AdoxioEstablishment?.AdoxioAddresscity + ", B.C." },
+                        { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment?.AdoxioAddresspostalcode },
+                        { "licencee", adoxioLicense.AdoxioLicencee?.Name },
+                        { "licenceType", adoxioLicense.AdoxioLicenceType?.AdoxioName },
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
                         { "restrictionsText", termsAndConditions },
@@ -797,8 +796,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError("Error returning PDF response");
-                    _logger.LogError(e.Message);
+                    _logger.LogError(e, "Error returning PDF response");                    
 
                     return new NotFoundResult();
                 }
