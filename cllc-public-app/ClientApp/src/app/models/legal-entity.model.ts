@@ -43,4 +43,6 @@ export class LegalEntity {
   position: string;
   jobTitle: string;
   percentageVotingShares: number;
+  numberOfMembers: number;
+  annualMembershipFee: number;
 }

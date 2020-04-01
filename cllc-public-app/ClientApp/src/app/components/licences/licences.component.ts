@@ -24,6 +24,8 @@ import { EventStatus } from '@models/licence-event.model';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
+export const CRS_RENEWAL_LICENCE_TYPE_NAME = 'crs';
+export const LIQUOR_RENEWAL_LICENCE_TYPE_NAME = 'liquor';
 
 
 const ACTIVE = 'Active';
@@ -161,26 +163,32 @@ export class LicencesComponent extends FormBase implements OnInit {
   }
 
   startRenewal(licence: ApplicationLicenseSummary) {
-    const renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CRSRenewal
-      || app.applicationTypeName === ApplicationTypeNames.LiquorRenewal);
+    const liquorLicenceTypes = ['Liquor Primary', 'Catering', 'Wine Store'];
+    let renewalType = CRS_RENEWAL_LICENCE_TYPE_NAME;
+    let renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CRSRenewal);
+
+    if (liquorLicenceTypes.indexOf(licence.licenceTypeName) !== -1) {
+      renewalType = LIQUOR_RENEWAL_LICENCE_TYPE_NAME;
+      renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.LiquorRenewal);
+    }
 
     if (renewalApplication && !renewalApplication.isPaid) {
-      this.router.navigateByUrl(`/renew-licence/${licence.applicationTypeCategory}/${renewalApplication.applicationId}`);
+      this.router.navigateByUrl(`/renew-licence/${renewalType}/${renewalApplication.applicationId}`);
     } else if (renewalApplication && renewalApplication.isPaid) {
       this.snackBar.open('Renewal application already submitted', 'Fail',
         { duration: 3500, panelClass: ['red-snackbar'] });
     } else {
-      let actionName = ApplicationTypeNames.CRSRenewal;;
-      if (licence.applicationTypeCategory === 'Liquor') {
-        actionName = ApplicationTypeNames.LiquorRenewal;
+      let renewalApplicationTypeName = ApplicationTypeNames.CRSRenewal;
+      if(renewalType === LIQUOR_RENEWAL_LICENCE_TYPE_NAME){
+        renewalApplicationTypeName = ApplicationTypeNames.LiquorRenewal;
       }
-      this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
+      this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, renewalApplicationTypeName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {
-          this.router.navigateByUrl(`/renew-licence/${licence.applicationTypeCategory}/${data.id}`);
+          this.router.navigateByUrl(`/renew-licence/${renewalType}/${data.id}`);
         },
           () => {
-            this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail',
+            this.snackBar.open(`Error running licence action for ${renewalType}`, 'Fail',
               { duration: 3500, panelClass: ['red-snackbar'] });
             console.log('Error starting a Change Licence Location Application');
           }
@@ -345,15 +353,15 @@ export class LicencesComponent extends FormBase implements OnInit {
     };
   }
 
-  getSubCategory(subcategory: string){
+  getSubCategory(subcategory: string) {
     let label = "";
 
-    switch(subcategory) {
+    switch (subcategory) {
       case "GroceryStore":
         label = "Grocery Store";
         break;
       case "IndependentWineStore":
-        label = "Independent Wine Store"; 
+        label = "Independent Wine Store";
         break;
       case "OffSiteWineStore":
         label = "Off-Site Wine Store";
@@ -364,8 +372,8 @@ export class LicencesComponent extends FormBase implements OnInit {
       case "SacramentalWineStore":
         label = "Sacramental Wine Store";
         break;
-      case "SpecialtyWineStore":
-        label = "Specialty Wine Store";
+      case "SpecialWineStore":
+        label = "Special Wine Store";
         break;
       case "TouristWineStore":
         label = "Tourist Wine Store";
@@ -373,8 +381,12 @@ export class LicencesComponent extends FormBase implements OnInit {
       case "WineOnShelf":
         label = "Wine on Shelf";
         break;
+      case "BCVQA":
+        label = "BC VQA Store";
+        break;
+
       default:
-        label = "";
+        label = subcategory;
     }
     return label;
   }

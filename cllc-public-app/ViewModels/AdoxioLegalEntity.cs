@@ -132,6 +132,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? dateIssued { get; set; }
         public DateTimeOffset? securityAssessmentEmailSentOn { get; set; } //adoxio_dateemailsent (date time)
 
+        public Decimal? AnnualMembershipFee { get; set; }
+        public int? NumberOfMembers { get; set; }
+        public int? TotalShares { get; set; }
+
         //adoxio_contact (lookup contact)
         //adoxio_correspondingpersonalhistorysummary (lookup personal history summary)
         //adoxio_dateofsharesissued (date time)

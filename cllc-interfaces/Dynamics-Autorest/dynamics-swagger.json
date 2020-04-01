@@ -66085,13 +66085,14 @@
           "description": "",
           "type": "boolean"
         },
-        "adoxio_isshowpropertydetails": {
-          "description": "",
-          "type": "boolean"
-        },
         "adoxio_name": {
           "description": "The name of the custom entity.",
           "type": "string"
+        },
+        "adoxio_isfree": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "adoxio_siteplan": {
           "format": "int32",
@@ -66137,10 +66138,6 @@
           "description": "Unique identifier of the user who modified the record.",
           "type": "string"
         },
-        "adoxio_defaultbpmid": {
-          "description": "",
-          "type": "string"
-        },
         "statecode": {
           "format": "int32",
           "description": "Status of the Application Type",
@@ -66149,6 +66146,11 @@
         "adoxio_currentestablishmentaddress": {
           "format": "int32",
           "description": "",
+          "type": "integer"
+        },
+        "statuscode": {
+          "format": "int32",
+          "description": "Reason for the status of the Application Type",
           "type": "integer"
         },
         "adoxio_establishmentname": {
@@ -66221,7 +66223,11 @@
           "description": "",
           "type": "boolean"
         },
-        "adoxio_showdescription2": {
+        "adoxio_isendorsement": {
+          "description": "",
+          "type": "boolean"
+        },
+        "adoxio_isshowpropertydetails": {
           "description": "",
           "type": "boolean"
         },
@@ -66229,6 +66235,10 @@
           "format": "int32",
           "description": "",
           "type": "integer"
+        },
+        "adoxio_showdescription2": {
+          "description": "",
+          "type": "boolean"
         },
         "timezoneruleversionnumber": {
           "format": "int32",
@@ -66240,10 +66250,9 @@
           "description": "Version Number",
           "type": "string"
         },
-        "statuscode": {
-          "format": "int32",
-          "description": "Reason for the status of the Application Type",
-          "type": "integer"
+        "adoxio_defaultbpmid": {
+          "description": "",
+          "type": "string"
         },
         "adoxio_proofofzoning": {
           "format": "int32",
@@ -68597,9 +68606,17 @@
           "description": "Time zone code that was in use when the record was created.",
           "type": "integer"
         },
+        "adoxio_investigationdescription": {
+          "description": "",
+          "type": "string"
+        },
         "versionnumber": {
           "format": "int64",
           "description": "Version Number",
+          "type": "string"
+        },
+        "adoxio_investigationbackground": {
+          "description": "",
           "type": "string"
         },
         "adoxio_complianceinvestigationid": {
@@ -68619,12 +68636,8 @@
           "description": "",
           "type": "string"
         },
-        "_adoxio_licenseeid_value": {
-          "description": "Unique identifier for Account associated with Investigation (Enforcement).",
-          "type": "string"
-        },
-        "adoxio_investigationbackground": {
-          "description": "",
+        "_adoxio_establishmentid_value": {
+          "description": "Unique identifier for Establishment associated with Investigation (Enforcement).",
           "type": "string"
         },
         "_modifiedby_value": {
@@ -68718,6 +68731,10 @@
           "description": "",
           "type": "integer"
         },
+        "_adoxio_licenseeid_value": {
+          "description": "Unique identifier for Account associated with Investigation (Enforcement).",
+          "type": "string"
+        },
         "adoxio_investigationoffences": {
           "description": "",
           "type": "string"
@@ -68741,13 +68758,13 @@
           "description": "",
           "type": "string"
         },
-        "adoxio_investigationdescription": {
+        "adoxio_investigationenforcementaction": {
           "description": "",
           "type": "string"
         },
-        "_adoxio_establishmentid_value": {
-          "description": "Unique identifier for Establishment associated with Investigation (Enforcement).",
-          "type": "string"
+        "adoxio_isnotifyrm": {
+          "description": "",
+          "type": "boolean"
         },
         "_owninguser_value": {
           "description": "Unique identifier for the user that owns the record.",
@@ -68764,10 +68781,6 @@
         },
         "adoxio_reactivationdate": {
           "format": "date-time",
-          "description": "",
-          "type": "string"
-        },
-        "adoxio_investigationenforcementaction": {
           "description": "",
           "type": "string"
         },
@@ -72179,6 +72192,10 @@
           "description": "",
           "type": "string"
         },
+        "adoxio_serviceareaentrancesupervisiondetails": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_isotherdisturbance": {
           "description": "",
           "type": "boolean"
@@ -75145,10 +75162,6 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_legalentityid": {
-          "description": "Unique identifier for entity instances",
-          "type": "string"
-        },
         "adoxio_interestpercentage": {
           "format": "decimal",
           "description": "Must fill if interest is more than 10%",
@@ -75283,6 +75296,10 @@
           "description": "Version Number",
           "type": "string"
         },
+        "_adoxio_relatedlicence_value": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_position": {
           "format": "int32",
           "description": "",
@@ -75296,9 +75313,10 @@
           "description": "",
           "type": "string"
         },
-        "_adoxio_relatedlicence_value": {
+        "adoxio_numberofmembers": {
+          "format": "int32",
           "description": "",
-          "type": "string"
+          "type": "integer"
         },
         "_owningbusinessunit_value": {
           "description": "Unique identifier for the business unit that owns the record",
@@ -75393,6 +75411,11 @@
           "description": "Unique identifier for the team that owns the record.",
           "type": "string"
         },
+        "adoxio_totalcompanyshares": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "adoxio_driverslicencenumber": {
           "description": "",
           "type": "string"
@@ -75410,6 +75433,11 @@
           "format": "int32",
           "description": "sum of no. of voting shares and no. of non-voting shares",
           "type": "integer"
+        },
+        "adoxio_annualmembershipfee": {
+          "format": "decimal",
+          "description": "",
+          "type": "number"
         },
         "_ownerid_value": {
           "description": "Owner Id",
@@ -75450,10 +75478,9 @@
           "description": "Unique identifier of the user who created the record.",
           "type": "string"
         },
-        "adoxio_totalcompanyshares": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
+        "adoxio_legalentityid": {
+          "description": "Unique identifier for entity instances",
+          "type": "string"
         },
         "_adoxio_profilename_value": {
           "description": "",
@@ -76594,6 +76621,10 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_licenseechangelog",
       "type": "object",
       "properties": {
+        "_adoxio_shareholderbusinessaccount_value": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_name": {
           "description": "The name of the custom entity.",
           "type": "string"
@@ -76610,6 +76641,11 @@
         "_createdonbehalfby_value": {
           "description": "Unique identifier of the delegate user who created the record.",
           "type": "string"
+        },
+        "adoxio_numberofmembersnew": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "_adoxio_parentlinceseechangelogid_value": {
           "description": "Unique identifier for Licensee Change Log associated with Licensee Change Log.",
@@ -76684,6 +76720,11 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_numberofmembersold": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "adoxio_isdirectorold": {
           "description": "",
           "type": "boolean"
@@ -76722,9 +76763,15 @@
           "description": "",
           "type": "boolean"
         },
-        "_adoxio_shareholderbusinessaccount_value": {
+        "adoxio_annualmembershipfeeold": {
+          "format": "decimal",
           "description": "",
-          "type": "string"
+          "type": "number"
+        },
+        "adoxio_annualmembershipfeenew": {
+          "format": "decimal",
+          "description": "",
+          "type": "number"
         },
         "adoxio_iskeypersonnelnew": {
           "description": "",

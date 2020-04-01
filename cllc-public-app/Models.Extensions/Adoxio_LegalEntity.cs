@@ -50,6 +50,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioDateofappointment = from.dateofappointment;
             to.AdoxioDateofsharesissued = from.dateIssued;
             to.AdoxioJobtitle = from.jobTitle;
+            to.AdoxioNumberofmembers = from.NumberOfMembers;
+            to.AdoxioAnnualmembershipfee = from.AnnualMembershipFee;
+            to.AdoxioTotalshares = from.TotalShares;
             // Assigning the account this way throws exception:
             // System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
             //if (from.account.id != null)
@@ -137,6 +140,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.dateIssued = adoxio_legalentity.AdoxioDateofsharesissued;
                 result.securityAssessmentEmailSentOn = adoxio_legalentity.AdoxioDateemailsent;
                 result.jobTitle = adoxio_legalentity.AdoxioJobtitle;
+
+                result.AnnualMembershipFee = adoxio_legalentity.AdoxioAnnualmembershipfee;
+                result.NumberOfMembers  = adoxio_legalentity.AdoxioNumberofmembers;
+                result.TotalShares = adoxio_legalentity.AdoxioTotalshares;
 
                 // populate the account.
                 if (adoxio_legalentity.AdoxioAccount != null)

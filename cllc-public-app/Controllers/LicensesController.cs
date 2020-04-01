@@ -768,9 +768,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "title", "Liquor_License" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
                         { "establishmentName", adoxioLicense.AdoxioLicencee.Name  },
-                        { "establishmentStreet", adoxioLicense.AdoxioLicencee.Address1Line1 },
-                        { "establishmentCity", adoxioLicense.AdoxioLicencee.Address1City + ", B.C." },
-                        { "establishmentPostalCode", adoxioLicense.AdoxioLicencee.Address1Postalcode },
+                        { "establishmentStreet", adoxioLicense.AdoxioEstablishment.AdoxioAddressstreet },
+                        { "establishmentCity", adoxioLicense.AdoxioEstablishment.AdoxioAddresscity + ", B.C." },
+                        { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment.AdoxioAddresspostalcode },
                         { "licencee", adoxioLicense.AdoxioLicencee.Name },
                         { "licenceType", adoxioLicense.AdoxioLicenceType.AdoxioName },
                         { "effectiveDate", effectiveDateParam },
@@ -789,10 +789,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             break;
                         case "Catering":
                             templateName = "catering_licence";
-                            break;
-                        case "Wine Store Licence":
-                            templateName ="wine_store_licence";
-                            break;
+                            break;                        
                     }
                     
                     byte[] data = await _pdfClient.GetPdf(parameters, templateName);
@@ -810,6 +807,43 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
+        }
+
+        [HttpPut("{licenceId}/ldbordertotals")]
+        public async Task<IActionResult> UpdateLicenceLDBOrderTotals([FromBody] int total, string licenceId)
+        {
+            if (total == null || string.IsNullOrEmpty(licenceId))
+            {
+                return BadRequest();
+            }
+
+            MicrosoftDynamicsCRMadoxioLicences licence = _dynamicsClient.GetLicenceByIdWithChildren(licenceId);
+            if (licence == null)
+            {
+                return NotFound();
+            }
+
+            if (!CurrentUserHasAccessToLicenseOwnedBy(licence.AdoxioLicencee.Accountid))
+            {
+                return Forbid();
+            }
+
+            MicrosoftDynamicsCRMadoxioLicences patchObject = new MicrosoftDynamicsCRMadoxioLicences()
+            {
+                AdoxioLdbordertotals = total
+            };
+
+            try
+            {
+                await _dynamicsClient.Licenceses.UpdateAsync(licenceId, patchObject);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error updating licence ldb order totals");
+                throw new Exception("Unable to update licence ldb order totals");
+            }
+
+            return Ok();
         }
 
         [HttpPut("{licenceId}/establishment")]
