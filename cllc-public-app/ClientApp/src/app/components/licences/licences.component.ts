@@ -25,7 +25,7 @@ import { EventStatus } from '@models/licence-event.model';
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
 export const CRS_RENEWAL_LICENCE_TYPE_NAME = 'crs';
-export const LIQOR_RENEWAL_LICENCE_TYPE_NAME = 'liqor';
+export const LIQUOR_RENEWAL_LICENCE_TYPE_NAME = 'liquor';
 
 
 const ACTIVE = 'Active';
@@ -168,7 +168,7 @@ export class LicencesComponent extends FormBase implements OnInit {
     let renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CRSRenewal);
 
     if (liquorLicenceTypes.indexOf(licence.licenceTypeName) !== -1) {
-      renewalType = LIQOR_RENEWAL_LICENCE_TYPE_NAME;
+      renewalType = LIQUOR_RENEWAL_LICENCE_TYPE_NAME;
       renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.LiquorRenewal);
     }
 
@@ -179,7 +179,7 @@ export class LicencesComponent extends FormBase implements OnInit {
         { duration: 3500, panelClass: ['red-snackbar'] });
     } else {
       let renewalApplicationTypeName = ApplicationTypeNames.CRSRenewal;
-      if(renewalType === LIQOR_RENEWAL_LICENCE_TYPE_NAME){
+      if(renewalType === LIQUOR_RENEWAL_LICENCE_TYPE_NAME){
         renewalApplicationTypeName = ApplicationTypeNames.LiquorRenewal;
       }
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, renewalApplicationTypeName)
