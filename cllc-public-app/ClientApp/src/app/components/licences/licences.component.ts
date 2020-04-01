@@ -24,6 +24,8 @@ import { EventStatus } from '@models/licence-event.model';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
+export const CRS_RENEWAL_LICENCE_TYPE_NAME = 'crs';
+export const LIQOR_RENEWAL_LICENCE_TYPE_NAME = 'liqor';
 
 
 const ACTIVE = 'Active';
@@ -162,11 +164,11 @@ export class LicencesComponent extends FormBase implements OnInit {
 
   startRenewal(licence: ApplicationLicenseSummary) {
     const liquorLicenceTypes = ['Liquor Primary', 'Catering', 'Wine Store'];
-    let renewalType = 'CRS-Renewal';
+    let renewalType = CRS_RENEWAL_LICENCE_TYPE_NAME;
     let renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CRSRenewal);
 
     if (liquorLicenceTypes.indexOf(licence.licenceTypeName) !== -1) {
-      renewalType = 'Liquor-Licence-Renewal';
+      renewalType = LIQOR_RENEWAL_LICENCE_TYPE_NAME;
       renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.LiquorRenewal);
     }
 
@@ -176,7 +178,11 @@ export class LicencesComponent extends FormBase implements OnInit {
       this.snackBar.open('Renewal application already submitted', 'Fail',
         { duration: 3500, panelClass: ['red-snackbar'] });
     } else {
-      this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, renewalType)
+      let renewalApplicationTypeName = ApplicationTypeNames.CRSRenewal;
+      if(renewalType === LIQOR_RENEWAL_LICENCE_TYPE_NAME){
+        renewalApplicationTypeName = ApplicationTypeNames.LiquorRenewal;
+      }
+      this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, renewalApplicationTypeName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {
           this.router.navigateByUrl(`/renew-licence/${renewalType}/${data.id}`);
