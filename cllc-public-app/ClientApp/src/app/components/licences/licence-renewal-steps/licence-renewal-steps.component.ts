@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { ActivatedRoute } from '@angular/router';
+import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQUOR_RENEWAL_LICENCE_TYPE_NAME } from '../licences.component';
 
 @Component({
   selector: 'app-licence-renewal-steps',
@@ -12,6 +13,8 @@ export class LicenceRenewalStepsComponent implements OnInit {
   busy: any;
   licenseeChangesEnabled: boolean;
   licenceType: string;
+  CRS_RENEWAL_LICENCE_TYPE_NAME = CRS_RENEWAL_LICENCE_TYPE_NAME;
+  LIQUOR_RENEWAL_LICENCE_TYPE_NAME = LIQUOR_RENEWAL_LICENCE_TYPE_NAME;
 
 
   constructor(public featureFlagService: FeatureFlagService,
