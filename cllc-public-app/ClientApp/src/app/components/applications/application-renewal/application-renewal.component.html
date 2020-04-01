@@ -32,12 +32,6 @@
             </mat-button-toggle-group>
           </div>
         </section>
-        <!-- <section style="padding-right: 95px;">
-      <div *ngIf="form.get('renewalCriminalOffenceCheck').value === 'Yes'" class="field-changed">
-        <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
-        contact you as part of this renewal process
-      </div>
-    </section> -->
       </mat-card>
       <p></p>
 
@@ -239,8 +233,7 @@
 
 
 
-      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;"
-                *ngIf="application?.applicationType?.showPropertyDetails">
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             10. Have you made an unreported change to your store’s name in the past 12 months?
@@ -254,14 +247,6 @@
           </div>
         </section>
         <section style="padding-right: 95px;">
-          <app-field [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) === -1 ? 'Establishment Name' : 'Name of the Proposed Establishment'"
-                     [required]="true" [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
-                     errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
-            <input class="form-control" style="width: 500px;" type="text"
-                   [readonly]="application?.applicationType?.establishmetNameIsReadOnly"
-                   (change)="checkPossibleProblematicWords()" formControlName="establishmentName">
-          </app-field>
-
           <div *ngIf="form.get('renewalBranding').value === 'Yes'" class="field-changed">
 
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i> You can still renew your licence.
@@ -271,8 +256,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;"
-                *ngIf="application?.applicationType?.showPropertyDetails">
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             11. Have you updated the store’s signage or branding in the past 12 months?
@@ -294,8 +278,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;"
-                *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             12. Have you made an unreported change of location of your establishment within the past 12 months? (This
@@ -311,58 +294,6 @@
           </div>
         </section>
         <section style="padding-right: 95px;">
-          <address formGroupName="assignedLicence" class="row">
-            <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
-              <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet">
-            </app-field>
-            <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true">
-              <input class="form-control" type="text" readonly formControlName="establishmentAddressCity">
-            </app-field>
-            <section class="col-md-4 col-xs-12">
-              <app-field label="Province" [isFullWidth]="true">
-                <input class="form-control" readonly type="text" value="British Columbia">
-              </app-field>
-            </section>
-            <section class="col-md-4 col-xs-12">
-              <app-field label="Postal Code">
-                <input class="form-control" type="text" readonly formControlName="establishmentAddressPostalCode">
-              </app-field>
-            </section>
-            <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
-              <input class="form-control" autocomplete="country-name" readonly type="text" value="Canada">
-            </app-field>
-          </address>
-          <div formGroupName="assignedLicence" class="light-blue-bg" style="display: flex;">
-            <div style="flex: 0 0 210px;">
-              <app-field label="Parcel Identifier (PID)" [valid]="true"
-                         errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
-                <input type="text" class="form-control" style="width: 200px;" readonly
-                       (keydown)="rejectIfNotDigitOrBackSpace($event)" formControlName="establishmentParcelId">
-              </app-field>
-            </div>
-            <div style="flex: 1; font-size: 11px;">
-              <span>
-
-                <span>
-                  <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>The property’s PID may be
-                  found
-                  on
-                </span> <br>
-                <ul style="display: inline-block">
-                  <li>The title to the property</li>
-                  <li>Through the B.C. Land Title and Survey Authority</li>
-                  <li>The tax assessment notice from BC Assessment</li>
-                </ul>
-              </span>
-
-              <ul style="display: inline-block">
-                <li>BC Assessment’s e-valueBC website </li>
-                <li>The municipal tax notice</li>
-                <li>The property lease</li>
-              </ul>
-            </div>
-          </div>
-
           <div *ngIf="form.get('renewalEstablishmentAddress').value === 'Yes'" style=" margin-top: 10px;"
                class="field-changed">
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>You can still renew your licence.
@@ -371,8 +302,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;"
-                *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             13. Have you sold the property or transferred the lease associated with this cannabis retail store licence
@@ -387,28 +317,6 @@
           </div>
         </section>
         <section style="padding-right: 95px;">
-          <!-- Store Contact Info -->
-          <section *ngIf="showFormControl(application?.applicationType?.storeContactInfo)">
-            <div style="flex: 0 0 210px;">
-              <app-field label="Store Email" [required]="true"
-                         [valid]="!form.get('establishmentEmail').touched || form.get('establishmentEmail').valid"
-                         errorMessage="Please enter an email address">
-                <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
-                       [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
-                       formControlName="establishmentEmail">
-              </app-field>
-            </div>
-            <div style="flex: 0 0 210px;">
-              <app-field label="Store Phone" [required]="true"
-                         [valid]="!form.get('establishmentPhone').touched || form.get('establishmentPhone').valid"
-                         errorMessage="Please enter a phone number ">
-                <input type="text" class="form-control" style="width: 200px;" maxlength="10" autocomplete="tel"
-                       [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
-                       (keydown)="rejectIfNotDigitOrBackSpace($event)" formControlName="establishmentPhone">
-              </app-field>
-            </div>
-          </section>
-
           <div *ngIf="form.get('renewalValidInterest').value === 'Yes'" class="field-changed">
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
             contact you as part of this renewal process
@@ -438,8 +346,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;"
-                *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
            15. Have you made any unreported changes to the store’s floor plan within the past 12 months?
@@ -462,26 +369,6 @@
         </section>
       </mat-card>
 
-      <!-- <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;"
-    *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
-    <section style="display: flex; justify-content: space-between; width: 100%;">
-      <div class="question-label">
-        7. Have you made any unreported changes to the site map within the past 12 months?
-      </div>
-      <div style="flex: 0 0 85px;">
-        <mat-button-toggle-group  [ngClass]="{'invalid': isTouchedAndInvalid('renewalShareholders')}" formControlName="renewalSiteMap" aria-label="Font Style">
-          <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-          <mat-button-toggle value="No">No</mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
-    </section>
-    <section style="padding-right: 95px;">
-      <div *ngIf="form.get('renewalSiteMap').value === 'Yes'" class="field-changed">
-        <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
-        contact you as part of this renewal process
-      </div>
-    </section>
-  </mat-card> -->
       <!-- Contact Details -->
       <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
       <i *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
@@ -544,10 +431,10 @@
         </app-field>
       </address>
 
-      <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType?.showDeclarations">
+      <h3 class="blue-header ngtest-declarations">
         DECLARATIONS
       </h3>
-      <div class="padded-section" *ngIf="application?.applicationType?.showDeclarations">
+      <div class="padded-section">
         <p>
           This application should be submitted by an individual with the authority to bind the applicant. The branch
           relies on the applicant to ensure that the individual who submits this application is authorized to do so.
