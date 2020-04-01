@@ -456,6 +456,7 @@ namespace bdd_tests
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
             System.Threading.Thread.Sleep(7000);
             submitOrgInfoButton.Click();
+            System.Threading.Thread.Sleep(7000);
         }
 
         [And(@"I complete the application")]
@@ -1136,6 +1137,9 @@ namespace bdd_tests
 
             NgWebElement uiCalendarIndyS2Biz5 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-14']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
             uiCalendarIndyS2Biz5.Click();
+
+            // click on the Confirm button
+
         }
     }
 }
