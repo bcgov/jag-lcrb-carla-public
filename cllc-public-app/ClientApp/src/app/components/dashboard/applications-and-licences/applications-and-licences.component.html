@@ -190,7 +190,7 @@
                     <span>Complete Application</span>
                   </a>
                   <a *ngIf="item.applicationTypeName === ApplicationTypeNames.CRSRenewal || item.applicationTypeName === ApplicationTypeNames.LiquorRenewal"
-                     routerLink="/renew-licence/{{item.applicationTypeName}}/{{item.id}}">
+                     routerLink="/renew-licence/{{getRenewalType(item.applicationTypeName)}}/{{item.id}}">
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Complete Renewal</span>
                   </a>
