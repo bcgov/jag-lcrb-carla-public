@@ -68,10 +68,11 @@ namespace Gov.Lclb.Cllb.Public.Utility
                         using (var swEncrypt = new StreamWriter(csEncrypt))
                         {
                             swEncrypt.Write(text);
+                            csEncrypt.FlushFinalBlock(); // resolve issues with padding
                         }
 
                         var iv = aes.IV;
-
+                        
                         var decryptedContent = msEncrypt.ToArray();
 
                         byte[] byteResult = new byte[iv.Length + decryptedContent.Length];
@@ -139,6 +140,7 @@ namespace Gov.Lclb.Cllb.Public.Utility
 
         public static string DecryptStringHex(string cipherText, string keyString)
         {
+            
             string result = null;
             try
             {
