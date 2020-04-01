@@ -226,7 +226,7 @@ namespace bdd_tests
             NgWebElement openPartnerDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             openPartnerDOB.Click();
 
-            NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
             openKeyPartnerDOB1.Click();
 
             // click on the Submit Organization Information button
@@ -252,6 +252,8 @@ namespace bdd_tests
             string conSurname = "Surname";
             string conRole = "CEO";
             string conPhone = "2508888888";
+
+            System.Threading.Thread.Sleep(7000);
 
             // enter the phone number of the application contact
             NgWebElement contactPhone = ngDriver.FindElement(By.Id("contactPersonPhone"));
