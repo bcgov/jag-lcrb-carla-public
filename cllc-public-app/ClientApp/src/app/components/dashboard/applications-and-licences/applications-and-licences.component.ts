@@ -17,7 +17,7 @@ import { AppState } from '@app/app-state/models/app-state';
 import { SetIndigenousNationModeAction } from '@app/app-state/actions/app-state.action';
 import * as moment from 'moment';
 import { PaymentDataService } from '@services/payment-data.service';
-import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQOR_RENEWAL_LICENCE_TYPE_NAME } from '@components/licences/licences.component';
+import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQUOR_RENEWAL_LICENCE_TYPE_NAME } from '@components/licences/licences.component';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -353,7 +353,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     if (applicationType === ApplicationTypeNames.CRSRenewal) {
       licenceType = CRS_RENEWAL_LICENCE_TYPE_NAME;
     } else if (applicationType === ApplicationTypeNames.LiquorRenewal){
-      licenceType = LIQOR_RENEWAL_LICENCE_TYPE_NAME;
+      licenceType = LIQUOR_RENEWAL_LICENCE_TYPE_NAME;
     }
     return licenceType;
   }
