@@ -101,21 +101,37 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     this.form = this.fb.group({
       id: [''],
 
+      // #1
       renewalCriminalOffenceCheck: ['', Validators.required],
+      // #2
       renewalUnreportedSaleOfBusiness: ['', Validators.required],
+      // #3
       renewalBusinessType: ['', Validators.required],
+      // #4
       renewalTiedhouse: ['', Validators.required],
+      // #5
       tiedhouseFederalInterest: ['', Validators.required],
+      // #6
       renewalOrgLeadership: ['', Validators.required],
+      // #7
       renewalkeypersonnel: ['', Validators.required],
+      // #8
       renewalShareholders: ['', Validators.required],
+      // #9
       renewalOutstandingFines: ['', Validators.required],
-
-      establishmentName: ['', [
-        Validators.required,
-        this.establishmentWatchWordsService.forbiddenNameValidator()
-      ]],
-      establishmentParcelId: [''],
+      // # 10
+      renewalBranding: ['', Validators.required],
+      // #11
+      renewalSignage: ['', Validators.required],
+      // #12 
+      renewalEstablishmentAddress: ['', Validators.required],
+      // #13
+      renewalValidInterest: ['', Validators.required],
+      // #14
+      renewalZoning: ['', Validators.required],
+      // #15
+      renewalFloorPlan: ['', Validators.required],
+      
       contactPersonFirstName: ['', Validators.required],
       contactPersonLastName: ['', Validators.required],
       contactPersonRole: [''],
@@ -125,13 +141,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
 
-      renewalBranding: ['', Validators.required],
-      renewalSignage: ['', Validators.required],
-      renewalEstablishmentAddress: ['', Validators.required],
-      renewalValidInterest: ['', Validators.required],
-      renewalZoning: ['', Validators.required],
-      renewalFloorPlan: ['', Validators.required],
-      renewalSiteMap: [''],
       assignedLicence: this.fb.group({
         id: [''],
         establishmentAddressStreet: [''],
