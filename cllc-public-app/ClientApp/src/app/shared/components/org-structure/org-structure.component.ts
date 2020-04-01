@@ -12,7 +12,18 @@ import { mergeMap } from 'rxjs/operators';
   styleUrls: ['./org-structure.component.scss']
 })
 export class OrgStructureComponent implements OnInit {
-  @Input() node: LicenseeChangeLog;
+  private _node: LicenseeChangeLog;
+  @Input() set node(value) {
+    this._node = value;
+    if(this.form){
+      this.form.patchValue(value);
+    }
+  };
+
+  get node(): LicenseeChangeLog {
+    return this._node;
+  }
+
   @Input() account: Account;
   @Input() licencesOnFile: boolean;
   @Output() deletedChanges: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();

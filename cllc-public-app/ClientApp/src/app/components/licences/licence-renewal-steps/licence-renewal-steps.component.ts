@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class LicenceRenewalStepsComponent implements OnInit {
   busy: any;
   licenseeChangesEnabled: boolean;
-  applicationTypeCategory: string;
+  licenceType: string;
 
 
   constructor(public featureFlagService: FeatureFlagService,
@@ -20,8 +20,7 @@ export class LicenceRenewalStepsComponent implements OnInit {
     featureFlagService.featureOn('LicenseeChanges')
       .subscribe(featureOn => this.licenseeChangesEnabled = featureOn);
 
-      this.route.paramMap.subscribe(pmap => this.applicationTypeCategory = pmap.get('applicationTypeCategory'));
-
+      this.route.paramMap.subscribe(pmap => this.licenceType = pmap.get('licenceType'));
   }
 
   ngOnInit() {

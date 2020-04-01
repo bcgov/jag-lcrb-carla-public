@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
@@ -19,18 +20,26 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
     public enum LicenseSubCategory
     {
+        [EnumMember(Value = "Grocery Store")]
         GroceryStore = 845280000,
+        [EnumMember(Value = "Independent Wine Store")]
         IndependentWineStore = 845280001,
+        [EnumMember(Value = "Off Site Wine Store")]
         OffSiteWineStore = 845280002,
+        [EnumMember(Value = "On Site Wine Store")]
         OnSiteWineStore = 845280003,
+        [EnumMember(Value = "Sacramental Wine Store")]
         SacramentalWineStore = 845280004,
+        [EnumMember(Value = "Special Wine Store")]
         SpecialWineStore = 845280005,
+        [EnumMember(Value = "Tourist Wine Store")]
         TouristWineStore = 845280006,
+        [EnumMember(Value = "Wine On Shelf")]
         WineOnShelf = 845280007,
-        BCVQA = 845280008,
+        [EnumMember(Value = "BC VQA Store")]
+        BCVQAStore = 845280008
 
     }
-
 
     public enum TransferRequested
     {
