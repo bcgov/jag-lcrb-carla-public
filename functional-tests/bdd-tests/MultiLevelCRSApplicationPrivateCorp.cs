@@ -74,26 +74,62 @@ namespace bdd_tests
             */
 
             string electricSignature = "Automated Test";
+            try
+            {
+                // select No for Question 1 using radio button
+                NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
+                noRadio1.Click();
+            }
+            catch (NoSuchElementException)
+            {
 
-            // select No for Question 1 using radio button
-            NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
-            noRadio1.Click();
+            }
 
-            // select No for Question 2 using radio button
-            NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
-            noRadio2.Click();
 
-            // select the certification checkbox
-            NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
-            matCheckbox.Click();
+            try
+            {
+                // select No for Question 2 using radio button
+                NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
+                noRadio2.Click();
+            }
+            catch (NoSuchElementException)
+            {
 
-            // enter the electronic signature
-            NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
-            sigCheckbox.SendKeys(electricSignature);
+            }
 
-            // click on the Submit button
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
-            submit_button.Click();
+            try
+            {
+                // select the certification checkbox
+                NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
+                matCheckbox.Click();
+            }
+            catch (NoSuchElementException)
+            {
+
+            }
+
+            try
+            {
+                // enter the electronic signature
+                NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
+                sigCheckbox.SendKeys(electricSignature);
+            }
+            catch (NoSuchElementException)
+            {
+
+            }
+
+            try
+            {
+                // click on the Submit button
+                NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
+                submit_button.Click();
+            }
+            catch (NoSuchElementException)
+            {
+
+            }
+            
         }
 
         [And(@"I review the account profile")]
@@ -135,8 +171,8 @@ namespace bdd_tests
             // enter the Date of Incorporation in B.C. 
             NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             uiCalendar1.Click();
-
-            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[1]/td[2]/div"));
+            
+            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/mat-datepicker-content/mat-calendar/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
             uiCalendar2.Click();
 
             // enter the physical street address 1
