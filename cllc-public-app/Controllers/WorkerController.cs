@@ -263,61 +263,65 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioWorker adoxioWorker = _dynamicsClient.Workers.GetByKey(workerId, expand: expand);
             if (adoxioWorker == null)
             {
+                _logger.LogError($"Unable to send Worker Qualification Letter for worker {workerId} - unable to get worker record");
                 throw new Exception("Error getting worker.");
             }
 
             if (!CurrentUserHasAccessToContactWorkerApplicationOwnedBy(adoxioWorker?.AdoxioContactId?.Contactid))
             {
+                _logger.LogError($"Unable to send Worker Qualification Letter for worker {workerId} - current user does not have access to worker");
                 return NotFound("No access to worker");
-            }
-
-            var dateOfBirthParam = "";
-            if (adoxioWorker.AdoxioDateofbirth.HasValue)
-            {
-                DateTime dateOfBirth = adoxioWorker.AdoxioDateofbirth.Value.DateTime;
-                dateOfBirthParam = dateOfBirth.ToString("dd/MM/yyyy");
-            }
-
-            var effectiveDateParam = "";
-            if (adoxioWorker.AdoxioSecuritycompletedon != null)
-            {
-                DateTime effectiveDate = adoxioWorker.AdoxioSecuritycompletedon.Value.DateTime;
-                effectiveDateParam = effectiveDate.ToString("dd/MM/yyyy");
-            }
-
-            var expiryDateParam = "";
-            if (adoxioWorker.AdoxioExpirydate != null)
-            {
-                DateTime expiryDate = adoxioWorker.AdoxioExpirydate.Value.DateTime;
-                expiryDateParam = expiryDate.ToString("dd/MM/yyyy");
-            }
-
-            var parameters = new Dictionary<string, string>
-            {
-                { "title", "Worker_Qualification" },
-                { "currentDate", DateTime.Now.ToLongDateString() },
-                { "firstName", adoxioWorker.AdoxioFirstname },
-                { "middleName", adoxioWorker.AdoxioMiddlename },
-                { "lastName", adoxioWorker.AdoxioLastname },
-                { "dateOfBirth", dateOfBirthParam },
-                { "address", adoxioWorker.AdoxioContactId.Address1Line1 },
-                { "city", adoxioWorker.AdoxioContactId.Address1City },
-                { "province", adoxioWorker.AdoxioContactId.Address1Stateorprovince},
-                { "postalCode", adoxioWorker.AdoxioContactId.Address1Postalcode},
-                { "effectiveDate", effectiveDateParam },
-                { "expiryDate", expiryDateParam },
-                { "border", "{ \"top\": \"40px\", \"right\": \"40px\", \"bottom\": \"0px\", \"left\": \"40px\" }" }
-            };
+            }            
 
             try
             {
+                var dateOfBirthParam = "";
+                if (adoxioWorker.AdoxioDateofbirth.HasValue)
+                {
+                    DateTime dateOfBirth = adoxioWorker.AdoxioDateofbirth.Value.DateTime;
+                    dateOfBirthParam = dateOfBirth.ToString("dd/MM/yyyy");
+                }
+
+                var effectiveDateParam = "";
+                if (adoxioWorker.AdoxioSecuritycompletedon != null)
+                {
+                    DateTime effectiveDate = adoxioWorker.AdoxioSecuritycompletedon.Value.DateTime;
+                    effectiveDateParam = effectiveDate.ToString("dd/MM/yyyy");
+                }
+
+                var expiryDateParam = "";
+                if (adoxioWorker.AdoxioExpirydate != null)
+                {
+                    DateTime expiryDate = adoxioWorker.AdoxioExpirydate.Value.DateTime;
+                    expiryDateParam = expiryDate.ToString("dd/MM/yyyy");
+                }
+
+                var parameters = new Dictionary<string, string>
+                {
+                    { "title", "Worker_Qualification" },
+                    { "currentDate", DateTime.Now.ToLongDateString() },
+                    { "firstName", adoxioWorker.AdoxioFirstname },
+                    { "middleName", adoxioWorker.AdoxioMiddlename },
+                    { "lastName", adoxioWorker.AdoxioLastname },
+                    { "dateOfBirth", dateOfBirthParam },
+                    { "address", adoxioWorker.AdoxioContactId.Address1Line1 },
+                    { "city", adoxioWorker.AdoxioContactId.Address1City },
+                    { "province", adoxioWorker.AdoxioContactId.Address1Stateorprovince},
+                    { "postalCode", adoxioWorker.AdoxioContactId.Address1Postalcode},
+                    { "effectiveDate", effectiveDateParam },
+                    { "expiryDate", expiryDateParam },
+                    { "border", "{ \"top\": \"40px\", \"right\": \"40px\", \"bottom\": \"0px\", \"left\": \"40px\" }" }
+                };
+
                 byte[] data = await _pdfClient.GetPdf(parameters, "worker_qualification_letter");
-                return File(data, "application/pdf");
+                _logger.LogInformation($"Sending Worker Qualification Letter for worker {workerId}");
+                return File(data, "application/pdf","WorkerQualificationLetter.pdf");
             }
-            catch
+            catch (Exception e)
             {
                 string basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "" : _configuration["BASE_PATH"];
                 basePath += "/worker-qualification/dashboard";
+                _logger.LogError(e, $"Unable to send Worker Qualification Letter for worker {workerId}");
                 return Redirect(basePath);
             }
         }
