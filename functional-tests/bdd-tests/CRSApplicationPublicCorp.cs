@@ -13,12 +13,14 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplication_publiccorp
+Feature: CRSApplication_pubcorp
     As a logged in business user
     I want to submit a CRS Application for a public corporation
 
 Scenario: Start Application
     Given I am logged in to the dashboard as a public corporation
+    And the account is deleted
+    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button
     And I complete the eligibility disclosure
     And I review the account profile
@@ -35,10 +37,16 @@ Scenario: Start Application
 namespace bdd_tests
 {
     [FeatureFile("./CRSApplication_pubcorp.feature")]
-    public sealed class CRSApplicationPublicCorp : TestBaseCRS
+    public sealed class CRSApplicationPublicCorp : TestBase
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
+        {
+            CarlaLoginNoCheck(businessType);
+        }
+
+        [And(@"I am logged in to the dashboard as a (.*)")]
+        public void And_I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
         }
@@ -211,9 +219,10 @@ namespace bdd_tests
             NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
             federalProducerConnectionToCorp.Click();
 
+            /* switched off
             // select 'No' for immediate family members
             NgWebElement immediateFamilyMembers = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[6]"));
-            immediateFamilyMembers.Click();
+            immediateFamilyMembers.Click(); */
 
             // click on Continue to Organization Review button
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
@@ -242,6 +251,16 @@ namespace bdd_tests
             string NOAPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
             NgWebElement uploadNOA = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
             uploadNOA.SendKeys(NOAPath);
+
+            /*// upload a central securities register document
+            string centralSecuritiesRegister = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+            NgWebElement uploadCentralSecReg = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
+            uploadCentralSecReg.SendKeys(centralSecuritiesRegister);
+
+            // upload a special rights and restrictions document
+            string specialRightsRestrictions = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+            NgWebElement uploadSpecialRightsRes = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
+            uploadSpecialRightsRes.SendKeys(specialRightsRestrictions);*/
 
             // open key personnel form
             NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[3]/section/app-associate-list/div/button"));
@@ -410,7 +429,7 @@ namespace bdd_tests
         [And(@"I enter the payment information")]
         public void enter_payment_info()
         {
-            MakeCRSPayment();
+            MakePayment();
         }
 
         [And(@"I return to the dashboard")]

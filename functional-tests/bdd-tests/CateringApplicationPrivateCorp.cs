@@ -19,11 +19,14 @@ Feature: CateringApplication_privatecorp
 
 Scenario: Start Application
     Given I am logged in to the dashboard as a private corporation
+    And the account is deleted
+    And I am logged in to the dashboard as a private corporation
     And I click on the Catering Start Application button
     And I review the account profile
     And I review the organization structure
     And I complete the application
-    And I click on the Submit & Pay button
+    And I click on the Submit button
+    And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the account is deleted
@@ -33,10 +36,16 @@ Scenario: Start Application
 namespace bdd_tests
 {
     [FeatureFile("./CateringApplication_privatecorp.feature")]
-    public sealed class CateringApplicationPrivateCorp : TestBaseCRS
+    public sealed class CateringApplicationPrivateCorp : TestBase
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
+        {
+            CarlaLoginNoCheck(businessType);
+        }
+
+        [And(@"I am logged in to the dashboard as a (.*)")]
+        public void And_I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
         }
@@ -429,6 +438,8 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
 
+            ngDriver.WaitForAngular();
+
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
             estabName.SendKeys(estName);
@@ -521,7 +532,7 @@ namespace bdd_tests
         [And(@"I enter the payment information")]
         public void enter_payment_info()
         {
-            MakeCRSPayment();
+            MakePayment();
         }
 
         [And(@"I return to the dashboard")]

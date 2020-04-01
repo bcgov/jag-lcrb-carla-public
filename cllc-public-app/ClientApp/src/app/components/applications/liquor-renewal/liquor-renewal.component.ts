@@ -21,6 +21,7 @@ import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
+import { License } from '@models/license.model';
 
 @Component({
   selector: 'app-liquor-renewal',
@@ -36,6 +37,8 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   applicationId: string;
   busy: Subscription;
   accountId: string;
+  // need access to the licence to handle subcategory cases
+  licenseSubCategory: string;
   payMethod: string;
   validationMessages: any[];
   showValidationMessages: boolean;
@@ -111,11 +114,23 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     this.busy = this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: Application) => {
+        this.busy = this.licenceDataService.getLicenceById(data.assignedLicence.id)
+          .pipe(takeWhile(() => this.componentActive))
+          .subscribe((data: License) => {
+            if (data.licenseSubCategory !== null &&
+              data.licenseSubCategory !== 'Independent Wine Store' &&
+              data.licenseSubCategory !== 'Tourist Wine Store' &&
+              data.licenseSubCategory !== 'Special Wine Store') {
+                this.form.addControl('ldbOrderTotals', this.fb.control('', [Validators.required, Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]));
+                this.form.addControl('ldbOrderTotalsConfirm', this.fb.control('', [Validators.required]));
+            }
+          });
         if (data.establishmentParcelId) {
           data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
         }
 
         this.application = data;
+        this.licenseSubCategory = this.application.assignedLicence.licenseSubCategory;
 
         this.addDynamicContent();
 
@@ -144,6 +159,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   }
 
   doAction(licenseId: string, actionName: string) {
+  
     this.busy = this.licenceDataService.createApplicationForActionType(licenseId, actionName)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(data => {
@@ -183,6 +199,12 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
 
+    if (this.form.get('ldbOrderTotals')) {
+      this.licenceDataService.updateLicenceLDBOrders(this.application.assignedLicence.id, this.form.get('ldbOrderTotals').value)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(() => {});
+    }
+
     return this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
@@ -198,7 +220,6 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
         return of(true);
       }));
   }
-
 
   updateApplicationInStore() {
     this.applicationDataService.getApplicationById(this.applicationId)
@@ -246,6 +267,11 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   }
 
   isValid(): boolean {
+    this.validationMessages = [];
+
+    if (this.form.get('ldbOrderTotals') && this.form.get('ldbOrderTotals').value !== this.form.get('ldbOrderTotalsConfirm').value) {
+      this.validationMessages.push('LDB Order Totals are required');
+    }
     // mark controls as touched
     for (const c in this.form.controls) {
       if (typeof (this.form.get(c).markAsTouched) === 'function') {
@@ -253,12 +279,11 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       }
     }
     this.showValidationMessages = false;
-    this.validationMessages = [];
 
     if (!this.form.valid) {
       this.validationMessages.push('Some required fields have not been completed');
     }
-    return this.form.valid;
+    return this.validationMessages.length === 0;
   }
 
   /**

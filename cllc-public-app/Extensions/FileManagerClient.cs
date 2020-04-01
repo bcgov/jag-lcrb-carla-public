@@ -9,7 +9,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager {
   /// <summary>
   /// The files service definition.
   /// </summary>
-  public static partial class FileManager{
+  public static partial class FileManager {
         public const string DefaultDocumentListTitle = "Account";
         public const string AccountDocumentUrlTitle = "account";
         public const string ApplicationDocumentListTitle = "Application";

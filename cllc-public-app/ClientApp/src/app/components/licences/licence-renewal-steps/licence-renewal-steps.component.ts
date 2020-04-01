@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { ActivatedRoute } from '@angular/router';
+import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQUOR_RENEWAL_LICENCE_TYPE_NAME } from '../licences.component';
 
 @Component({
   selector: 'app-licence-renewal-steps',
@@ -11,7 +12,9 @@ import { ActivatedRoute } from '@angular/router';
 export class LicenceRenewalStepsComponent implements OnInit {
   busy: any;
   licenseeChangesEnabled: boolean;
-  applicationTypeCategory: string;
+  licenceType: string;
+  CRS_RENEWAL_LICENCE_TYPE_NAME = CRS_RENEWAL_LICENCE_TYPE_NAME;
+  LIQUOR_RENEWAL_LICENCE_TYPE_NAME = LIQUOR_RENEWAL_LICENCE_TYPE_NAME;
 
 
   constructor(public featureFlagService: FeatureFlagService,
@@ -20,8 +23,7 @@ export class LicenceRenewalStepsComponent implements OnInit {
     featureFlagService.featureOn('LicenseeChanges')
       .subscribe(featureOn => this.licenseeChangesEnabled = featureOn);
 
-      this.route.paramMap.subscribe(pmap => this.applicationTypeCategory = pmap.get('applicationTypeCategory'));
-
+      this.route.paramMap.subscribe(pmap => this.licenceType = pmap.get('licenceType'));
   }
 
   ngOnInit() {
