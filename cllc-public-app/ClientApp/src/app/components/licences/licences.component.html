@@ -73,11 +73,10 @@
             </td>
 
             <td>
-              <div *ngIf="item?.licenceTypeName === ApplicationTypeNames.Catering">
+              <div *ngIf="item?.licenceTypeName === ApplicationTypeNames.Catering && item?.status !== PAYMENT_REQUIRED">
                 <a [routerLink]="[ '/licence/' + item.licenseId + '/event']">
                   <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Event Authorization
                 </a>
-
               </div>
               <div *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore">
                 <mat-checkbox [checked]="item?.establishmentIsOpen"
