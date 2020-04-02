@@ -162,7 +162,7 @@ export class AppComponent extends FormBase implements OnInit {
               });
 
             // load federal reports after the user logs in
-            this.monthlyReportDataService.getAllCurrentMonthlyReports()
+            this.monthlyReportDataService.getAllCurrentMonthlyReports(false)
               .subscribe(data => {
                 this.linkedFederalReports = data.filter(report => report.statusCode === monthlyReportStatus.Draft);
               });
