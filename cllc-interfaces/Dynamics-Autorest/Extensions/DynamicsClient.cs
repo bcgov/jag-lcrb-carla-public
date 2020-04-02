@@ -246,9 +246,12 @@ namespace Gov.Lclb.Cllb.Interfaces
                     "adoxio_account_adoxio_legalentity_Account", 
                     "adoxio_account_adoxio_establishment_Licencee",
                     "adoxio_account_adoxio_application_Applicant",
+                    "adoxio_licenseechangelog_ParentBusinessAccount",
                     "adoxio_licenseechangelog_BusinessAccount",
+                    "adoxio_licenseechangelog_ShareholderBusinessAccount",
                     "adoxio_account_adoxio_licences_Licencee",
-                    "contact_customer_accounts"
+                    "contact_customer_accounts",
+                    "adoxio_account_tiedhouseconnections"
                 };
                 // fetch from Dynamics.
                 result = Accounts.GetByKey(accountid: id, expand: expand);
