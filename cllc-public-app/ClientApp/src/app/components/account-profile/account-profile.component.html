@@ -30,7 +30,7 @@
           <h3 *ngIf="getBusinessTypeName() === 'Indigenous Nation'" class="blue-header">INDIGENOUS NATION DETAILS</h3>
           <h3 *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" class="blue-header"> CORPORATION DETAILS
           </h3>
-          <div formGroupName="businessProfile" class="padded-section">
+          <div formGroupName="businessProfile" class="padded-section content-bottom">
             <app-field [label]="legalNameLabel()">
               <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text" disabled
                 [value]="account?.name || ''">
@@ -109,7 +109,7 @@
 
           <h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">{{getBusinessTypeName().toLocaleUpperCase()}} ADDRESSES</h3>
           <h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation'">CONTACT ADDRESSES</h3>
-          <div formGroupName="businessProfile" class="padded-section">
+          <div formGroupName="businessProfile" class="padded-section content-bottom">
             <p></p>
             <h3>Physical Address</h3>
             <div class="row">
@@ -210,7 +210,7 @@
 
           <h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">{{getBusinessTypeName().toLocaleUpperCase()}} CONTACT</h3>
           <h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation'">AUTHORIZED PERSON</h3>
-          <div formGroupName="primarycontact" class="padded-section">
+          <div formGroupName="primarycontact" class="padded-section content-bottom">
             <i>The name and contact information of the person LCRB should contact for ongoing communication. The contact
               must be authorized to represent the applicant and have the authority to bind the applicant. </i><br>
 
@@ -253,7 +253,7 @@
 
           <h3 class="blue-header">CONNECTIONS
             TO FEDERAL PRODUCERS OF CANNABIS</h3>
-          <div class="padded-section" *ngIf="saveFormData?.businessProfile?.id">
+          <div class="padded-section content-bottom" *ngIf="saveFormData?.businessProfile?.id">
             <app-connection-to-producers *ngIf="account?.tiedHouse" [tiedHouse]="account?.tiedHouse"
               [businessType]="account?.businessType" (value)="tiedHouseFormData = $event"></app-connection-to-producers>
           </div>
@@ -268,6 +268,7 @@
             <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
             <span>Some required fields have not been completed</span>
           </div>
+          <br><br>
           <section style="position: relative;">
             <div [ngBusy]="[busy3]"></div>
             <a routerLink="/dashboard">
