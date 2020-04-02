@@ -1,8 +1,6 @@
 using CsvHelper;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
@@ -12,7 +10,6 @@ using System;
 using System.Threading.Tasks;
 using Hangfire;
 using Google.Protobuf;
-using Gov.Lclb.Cllb.Services.FileManager;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Hangfire.Console;
 using Hangfire.Server;
@@ -134,7 +131,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                                 // string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
                                 byte[] data = mem.ToArray();
                                 // call the web service
-                                var uploadRequest = new UploadFileRequest()
+                                var uploadRequest = new Services.FileManager.UploadFileRequest()
                                 {
                                     ContentType = "text/csv",
                                     Data = ByteString.CopyFrom(data),
