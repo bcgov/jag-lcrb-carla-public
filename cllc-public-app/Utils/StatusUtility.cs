@@ -26,10 +26,6 @@ namespace Gov.Lclb.Cllb.Public.Utils
                 {
                     shownStatus = STATUS_PAYMENT_REQUIRED;
                 }
-                if (DateTimeOffset.Now > application.AdoxioAssignedLicence.AdoxioExpirydate)
-                {
-                    shownStatus = STATUS_RENEWAL_DUE;
-                }
             }
             else
             {
