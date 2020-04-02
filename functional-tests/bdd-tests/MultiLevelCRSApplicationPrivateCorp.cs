@@ -488,9 +488,15 @@ namespace bdd_tests
         public void submit_org_info()
         {
             // click on Submit Organization Info button
+            //System.Threading.Thread.Sleep(7000);
+            //NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
+            NgWebElement saveForLaterButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SAVE FOR LATER ')]"));
+            //System.Threading.Thread.Sleep(7000);
+            saveForLaterButton.Click();
+            
             System.Threading.Thread.Sleep(7000);
+
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
-            System.Threading.Thread.Sleep(7000);
             submitOrgInfoButton.Click();
             System.Threading.Thread.Sleep(7000);
         }
@@ -1163,10 +1169,6 @@ namespace bdd_tests
             NgWebElement uiIndyShareVotesBiz5 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/div/input"));
             uiIndyShareVotesBiz5.SendKeys(shareholderVotingSharesBiz5);
 
-            // enter business shareholder > individual shareholder email
-            NgWebElement uiIndyShareEmailBiz5 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
-            uiIndyShareEmailBiz5.SendKeys(shareholderEmailBiz5);
-
             // enter business shareholder > individual shareholder DOB
             NgWebElement uiCalendarIndyS1Biz5 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
             uiCalendarIndyS1Biz5.Click();
@@ -1174,8 +1176,13 @@ namespace bdd_tests
             NgWebElement uiCalendarIndyS2Biz5 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-14']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
             uiCalendarIndyS2Biz5.Click();
 
-            // click on the Confirm button
+            // enter business shareholder > individual shareholder email
+            NgWebElement uiIndyShareEmailBiz5 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
+            uiIndyShareEmailBiz5.SendKeys(shareholderEmailBiz5);
 
+            // click on the Confirm button
+            //NgWebElement uiClickConfirmButton = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/table/tr/td[6]/i[1]/span"));
+            //uiClickConfirmButton.Click();
         }
     }
 }
