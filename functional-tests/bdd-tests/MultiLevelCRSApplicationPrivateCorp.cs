@@ -488,17 +488,8 @@ namespace bdd_tests
         public void submit_org_info()
         {
             // click on Submit Organization Info button
-            //System.Threading.Thread.Sleep(7000);
-            //NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
-            NgWebElement saveForLaterButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SAVE FOR LATER ')]"));
-            //System.Threading.Thread.Sleep(7000);
-            saveForLaterButton.Click();
-            
-            System.Threading.Thread.Sleep(7000);
-
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
             submitOrgInfoButton.Click();
-            System.Threading.Thread.Sleep(7000);
         }
 
         [And(@"I complete the application")]
@@ -767,7 +758,7 @@ namespace bdd_tests
             // create the business shareholder > individual shareholder data
             string shareholderFirstNameBiz2 = "GardaWorld";
             string shareholderLastNameBiz2 = "IndividualShareholder";
-            string shareholderVotingSharesBiz2 = "Security Expert";
+            string shareholderVotingSharesBiz2 = "1800";
             string shareholderEmailBiz2 = "gardaworld@individualshareholder.com";
 
             // open business shareholder > individual shareholder form
