@@ -963,31 +963,9 @@
 
       <!-- Contact Details -->
       <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
-      <i *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
-        The contact LCRB should communicate with regarding the application. The contact must be authorized to
-        represent
-        the applicant and have the authority to bind the applicant.
-      </i>
-      <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-        <i *ngIf="account?.businessType === 'SoleProprietor'">
-          The contact LCRB should communicate with regarding the application
-        </i>
-        <i *ngIf="account?.businessType === 'Society'">
-          The contact LCRB should communicate with regarding the application. The contact must be authorized to
-          represent the applicant and have the authority to bind the applicant.
-        </i>
-        <i *ngIf="businessTypeIsPartnership()">
-          The contact LCRB should communicate with regarding the application. The contact must be authorized to
-          represent the applicant and have the authority to bind the applicant.
-        </i>
-        <i *ngIf="account?.businessType !== 'PublicCorporation'">
-          The contact must be authorized to represent the applicant and have the authority to bind the applicant.
-        </i>
-        <i *ngIf="businessTypeIsPrivateCorporation()">
-          The contact LCRB should communicate with regarding the application. The contact must be authorized to
-          represent the applicant and have the authority to bind the applicant.
-        </i>
-      </div>
+      <p><i>
+        Please provide contact information for the contact that the LCRB should communicate with regarding the application. This contact must be authorized to represent the applicant and have the authority to bind the applicant. 
+      </i></p>
       <address class="padded-section">
 
         <app-field label="First Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonFirstName')"
