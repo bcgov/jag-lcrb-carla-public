@@ -41,7 +41,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger = loggerFactory.CreateLogger(typeof(MonthlyReportsController));
         }
 
-        private List<MonthlyReport> GetMonthlyReportsByUser(string licenceeId)
+        private List<MonthlyReport> GetMonthlyReportsByUser(string licenceeId, bool expandInventoryReports)
         {
             List<MonthlyReport> monthlyReportsList = new List<MonthlyReport>();
             IEnumerable<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> monthlyReports;
@@ -66,7 +66,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 foreach (var monthlyReport in monthlyReports)
                 {
-                    monthlyReportsList.Add(monthlyReport.ToViewModel(_dynamicsClient));
+                    monthlyReportsList.Add(monthlyReport.ToViewModel(_dynamicsClient, expandInventoryReports));
                 }
             }
 
@@ -123,7 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 foreach (var monthlyReport in monthlyReports)
                 {
-                    monthlyReportsList.Add(monthlyReport.ToViewModel(_dynamicsClient));
+                    monthlyReportsList.Add(monthlyReport.ToViewModel(_dynamicsClient, true));
                 }
             }
 
@@ -133,7 +133,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET all monthly reports in Dynamics by Licencee using the account Id assigned to the user logged in
         [HttpGet("current")]
-        public IActionResult GetCurrentUserMonthlyReports()
+        public IActionResult GetCurrentUserMonthlyReports([FromQuery] bool expandInventoryReports)
         {
             if (_configuration["FEATURE_FEDERAL_REPORTING"] == null)
             {
@@ -147,7 +147,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new BadRequestResult();
             }
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
-            List<MonthlyReport> monthlyReports = GetMonthlyReportsByUser(userSettings.AccountId);
+            List<MonthlyReport> monthlyReports = GetMonthlyReportsByUser(userSettings.AccountId, expandInventoryReports);
 
             return new JsonResult(monthlyReports);
         }
@@ -166,7 +166,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 MicrosoftDynamicsCRMadoxioCannabismonthlyreport monthlyReport = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter).Value.FirstOrDefault();
                 if (monthlyReport != null && CurrentUserHasAccessToMonthlyReportOwnedBy(monthlyReport._adoxioLicenseeidValue))
                 {
-                    return new JsonResult(monthlyReport.ToViewModel(_dynamicsClient));
+                    return new JsonResult(monthlyReport.ToViewModel(_dynamicsClient, true));
                 }
             }
             catch (HttpOperationException ex)
