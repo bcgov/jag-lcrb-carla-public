@@ -7,9 +7,13 @@ using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Support.UI;
 using Protractor;
 using System;
+using Xunit;
+using Xunit.Abstractions;
 using Xunit.Gherkin.Quick;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using System.IO;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace bdd_tests
 {
@@ -160,7 +164,7 @@ namespace bdd_tests
             string testCC = configuration["test_cc"];
             string testCVD = configuration["test_ccv"];
 
-            System.Threading.Thread.Sleep(10000);
+            System.Threading.Thread.Sleep(3000);
 
             //browser sync - don't wait for Angular
             ngDriver.IgnoreSynchronization = true;
@@ -175,20 +179,24 @@ namespace bdd_tests
 
             driver.FindElementByName("submitButton").Click();
 
-            System.Threading.Thread.Sleep(10000);
+            System.Threading.Thread.Sleep(3000);
 
             //turn back on when returning to Angular
             ngDriver.IgnoreSynchronization = false;
         }
         public void CarlaDeleteCurrentAccount()
         {
+            
             string deleteAccountURL = $"{baseUri}api/accounts/delete/current";
-            string script = $"fetch(\"{deleteAccountURL}\", {{method: \"POST\", body: {{}}}})";
+            string script = $"return fetch(\"{deleteAccountURL}\", {{method: \"POST\", body: {{}}}})";
 
-            ngDriver.ExecuteScript(script);
+            var  deleteResult = ngDriver.ExecuteScript(script);
+            var obj = JsonConvert.SerializeObject(deleteResult);
+            var json = JsonConvert.DeserializeObject<Dictionary<string,object>>(obj);
+            bool success = (Int64)json["status"] == 404 || (Newtonsoft.Json.Linq.JObject)json["text"] == new Newtonsoft.Json.Linq.JObject("OK");
+            Assert.True(success);
 
-            // note that the above call to delete the account will take a period of time to execute.
-
+            // note that the above call to delete the account will take a period of time to execute.            
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
     }
