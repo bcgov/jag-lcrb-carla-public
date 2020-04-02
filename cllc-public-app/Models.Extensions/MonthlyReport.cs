@@ -19,7 +19,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class MonthlyReportExtension
     {
-        public static MonthlyReport ToViewModel(this MicrosoftDynamicsCRMadoxioCannabismonthlyreport dynamicsMonthlyReport, IDynamicsClient dynamicsClient)
+        public static MonthlyReport ToViewModel(this MicrosoftDynamicsCRMadoxioCannabismonthlyreport dynamicsMonthlyReport, IDynamicsClient dynamicsClient, bool expandInventoryReports)
         {
             if (dynamicsMonthlyReport == null)
             {
@@ -56,43 +56,45 @@ namespace Gov.Lclb.Cllb.Public.Models
                 monthlyReportVM.establishmentAddressCity = establishment.AdoxioAddresscity;
                 monthlyReportVM.establishmentAddressPostalCode = establishment.AdoxioAddresspostalcode;
             }
-
-            IEnumerable<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> inventoryReports = dynamicsClient.GetInventoryReportsForMonthlyReport(dynamicsMonthlyReport.AdoxioCannabismonthlyreportid);
-            foreach (var inventoryReport in inventoryReports)
+            if (expandInventoryReports)
             {
-                MicrosoftDynamicsCRMadoxioCannabisproductadmin product = dynamicsClient.Cannabisproductadmins.GetByKey(inventoryReport._adoxioProductidValue);
-                InventorySalesReport inv = new InventorySalesReport()
+                IEnumerable<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> inventoryReports = dynamicsClient.GetInventoryReportsForMonthlyReport(dynamicsMonthlyReport.AdoxioCannabismonthlyreportid);
+                foreach (var inventoryReport in inventoryReports)
                 {
-                    product = product.AdoxioName,
-                    ProductDescription = product.AdoxioDescription,
-                    ProductDisplayOrder = product.AdoxioDisplayorder,
-                    inventoryReportId = inventoryReport.AdoxioCannabisinventoryreportid,
-                    openingInventory = inventoryReport.AdoxioOpeninginventory,
-                    domesticAdditions = inventoryReport.AdoxioQtyreceiveddomestic,
-                    returnsAdditions = inventoryReport.AdoxioQtyreceivedreturns,
-                    otherAdditions = inventoryReport.AdoxioQtyreceivedother,
-                    domesticReductions = inventoryReport.AdoxioQtyshippeddomestic,
-                    returnsReductions = inventoryReport.AdoxioQtyshippedreturned,
-                    destroyedReductions = inventoryReport.AdoxioQtydestroyed,
-                    lostReductions = inventoryReport.AdoxioQtyloststolen,
-                    otherReductions = inventoryReport.AdoxioOtherreductions,
-                    closingNumber = inventoryReport.AdoxioClosinginventory,
-                    closingValue = (inventoryReport.AdoxioValueofclosinginventory != null) ? inventoryReport.AdoxioValueofclosinginventory.Value : 0,
-                    totalSalesToConsumerQty = Convert.ToInt32(inventoryReport.AdoxioPackagedunitsnumber),
-                    totalSalesToConsumerValue = (inventoryReport.AdoxioTotalvalue != null) ? inventoryReport.AdoxioTotalvalue.Value : 0,
-                    totalSalesToRetailerQty = Convert.ToInt32(inventoryReport.AdoxioPackagedunitsnumberretailer),
-                    totalSalesToRetailerValue = (inventoryReport.AdoxioTotalvalueretailer != null) ? inventoryReport.AdoxioTotalvalueretailer.Value : 0,
-                    otherDescription = inventoryReport.AdoxioOtherdescription
-                };
-                if (product.AdoxioName != "Seeds" && product.AdoxioName != "Vegetative Cannabis")
-                {
-                    inv.closingWeight = (inventoryReport.AdoxioWeightofclosinginventory != null) ? inventoryReport.AdoxioWeightofclosinginventory.Value : 0;
+                    MicrosoftDynamicsCRMadoxioCannabisproductadmin product = dynamicsClient.Cannabisproductadmins.GetByKey(inventoryReport._adoxioProductidValue);
+                    InventorySalesReport inv = new InventorySalesReport()
+                    {
+                        product = product.AdoxioName,
+                        ProductDescription = product.AdoxioDescription,
+                        ProductDisplayOrder = product.AdoxioDisplayorder,
+                        inventoryReportId = inventoryReport.AdoxioCannabisinventoryreportid,
+                        openingInventory = inventoryReport.AdoxioOpeninginventory,
+                        domesticAdditions = inventoryReport.AdoxioQtyreceiveddomestic,
+                        returnsAdditions = inventoryReport.AdoxioQtyreceivedreturns,
+                        otherAdditions = inventoryReport.AdoxioQtyreceivedother,
+                        domesticReductions = inventoryReport.AdoxioQtyshippeddomestic,
+                        returnsReductions = inventoryReport.AdoxioQtyshippedreturned,
+                        destroyedReductions = inventoryReport.AdoxioQtydestroyed,
+                        lostReductions = inventoryReport.AdoxioQtyloststolen,
+                        otherReductions = inventoryReport.AdoxioOtherreductions,
+                        closingNumber = inventoryReport.AdoxioClosinginventory,
+                        closingValue = (inventoryReport.AdoxioValueofclosinginventory != null) ? inventoryReport.AdoxioValueofclosinginventory.Value : 0,
+                        totalSalesToConsumerQty = Convert.ToInt32(inventoryReport.AdoxioPackagedunitsnumber),
+                        totalSalesToConsumerValue = (inventoryReport.AdoxioTotalvalue != null) ? inventoryReport.AdoxioTotalvalue.Value : 0,
+                        totalSalesToRetailerQty = Convert.ToInt32(inventoryReport.AdoxioPackagedunitsnumberretailer),
+                        totalSalesToRetailerValue = (inventoryReport.AdoxioTotalvalueretailer != null) ? inventoryReport.AdoxioTotalvalueretailer.Value : 0,
+                        otherDescription = inventoryReport.AdoxioOtherdescription
+                    };
+                    if (product.AdoxioName != "Seeds" && product.AdoxioName != "Vegetative Cannabis")
+                    {
+                        inv.closingWeight = (inventoryReport.AdoxioWeightofclosinginventory != null) ? inventoryReport.AdoxioWeightofclosinginventory.Value : 0;
+                    }
+                    if (product.AdoxioName == "Seeds")
+                    {
+                        inv.totalSeeds = inventoryReport.AdoxioTotalnumberseeds;
+                    }
+                    monthlyReportVM.inventorySalesReports.Add(inv);
                 }
-                if (product.AdoxioName == "Seeds")
-                {
-                    inv.totalSeeds = inventoryReport.AdoxioTotalnumberseeds;
-                }
-                monthlyReportVM.inventorySalesReports.Add(inv);
             }
 
             return monthlyReportVM;
