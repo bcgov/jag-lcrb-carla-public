@@ -24,6 +24,7 @@ namespace Gov.Lclb.Cllb.Public.Utility
 
             using (Aes aes = Aes.Create())
             {
+                aes.Padding = PaddingMode.PKCS7;
                 byte[] key = Encoding.UTF8.GetBytes(keyString.Substring(0, aes.Key.Length));
 
                 using (var encryptor = aes.CreateEncryptor(key, aes.IV))
@@ -58,6 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Utility
 
             using (Aes aes = Aes.Create())
             {
+                aes.Padding = PaddingMode.PKCS7;
                 byte[] key = Encoding.UTF8.GetBytes(keyString.Substring(0, aes.Key.Length));
 
                 using (var encryptor = aes.CreateEncryptor(key, aes.IV))
