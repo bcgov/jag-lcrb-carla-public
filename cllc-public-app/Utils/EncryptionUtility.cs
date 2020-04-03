@@ -65,20 +65,22 @@ namespace Gov.Lclb.Cllb.Public.Utility
                     using (var msEncrypt = new MemoryStream())
                     {
                         using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
-                        using (var swEncrypt = new StreamWriter(csEncrypt))
                         {
-                            swEncrypt.Write(text);
-                            csEncrypt.FlushFinalBlock(); // resolve issues with padding
+                            using (var swEncrypt = new StreamWriter(csEncrypt))
+                            {
+                                swEncrypt.Write(text);                                
+                            }                            
                         }
+                        
 
                         var iv = aes.IV;
-                        
-                        var decryptedContent = msEncrypt.ToArray();
 
-                        byte[] byteResult = new byte[iv.Length + decryptedContent.Length];
+                        byte[] data = msEncrypt.ToArray();
+
+                        byte[] byteResult = new byte[iv.Length + data.Length];
 
                         Buffer.BlockCopy(iv, 0, byteResult, 0, iv.Length);
-                        Buffer.BlockCopy(decryptedContent, 0, byteResult, iv.Length, decryptedContent.Length);
+                        Buffer.BlockCopy(data, 0, byteResult, iv.Length, data.Length);
 
                         result = BitConverter.ToString(byteResult).Replace("-", ""); 
                     }
@@ -104,6 +106,7 @@ namespace Gov.Lclb.Cllb.Public.Utility
 
                 using (var aesAlg = Aes.Create())
                 {
+                    aesAlg.Padding = PaddingMode.PKCS7;
                     var key = Encoding.UTF8.GetBytes(keyString.Substring(0, aesAlg.Key.Length));
                     using (var decryptor = aesAlg.CreateDecryptor(key, iv))
                     {
@@ -144,9 +147,12 @@ namespace Gov.Lclb.Cllb.Public.Utility
             string result = null;
             try
             {
-                cipherText = HttpUtility.UrlDecode(cipherText);                
-                var fullCipher = StringToByteArray(cipherText);
-
+                cipherText = HttpUtility.UrlDecode(cipherText);
+                int NumberChars = cipherText.Length;
+                byte[] fullCipher = new byte[NumberChars / 2];
+                for (int i = 0; i < NumberChars; i += 2)
+                    fullCipher[i / 2] = Convert.ToByte(cipherText.Substring(i, 2), 16);
+                
                 var iv = new byte[16];
                 var cipher = new byte[fullCipher.Length - iv.Length];
 
@@ -155,6 +161,7 @@ namespace Gov.Lclb.Cllb.Public.Utility
 
                 using (var aesAlg = Aes.Create())
                 {
+                    aesAlg.Padding = PaddingMode.PKCS7;
                     var key = Encoding.UTF8.GetBytes(keyString.Substring(0, aesAlg.Key.Length));
                     using (var decryptor = aesAlg.CreateDecryptor(key, iv))
                     {
