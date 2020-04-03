@@ -155,21 +155,21 @@ namespace bdd_tests
             uiNoWetSignature1.Click();
 
             // select signature checkbox
-            NgWebElement uiNoWetSignature2 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
-            uiNoWetSignature2.Click();
+            //NgWebElement uiNoWetSignature2 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
+            //uiNoWetSignature2.Click();
 
             // enter applicant name
-            NgWebElement uiApplicantName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
-            uiApplicantName.SendKeys(applicantName);
+            //NgWebElement uiApplicantName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+            //uiApplicantName.SendKeys(applicantName);
 
             // upload the signature form
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+            //var environment = Environment.CurrentDirectory;
+            //string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            //string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
 
-            string signatureFormPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signature.pdf");
-            NgWebElement uploadSignatureForm = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
-            uploadSignatureForm.SendKeys(signatureFormPath);
+            //string signatureFormPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signature.pdf");
+            //NgWebElement uploadSignatureForm = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
+            //uploadSignatureForm.SendKeys(signatureFormPath);
         }
 
         [And(@"I click on the Submit & Pay button")]
