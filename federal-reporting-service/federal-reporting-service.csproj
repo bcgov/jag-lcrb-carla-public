@@ -35,10 +35,6 @@
     </Protobuf>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\file-manager-service\file-manager-service.csproj" />
-  </ItemGroup>
-
   <PropertyGroup>
     <DefaultItemExcludes>../cllc-public-app/**;$(DefaultItemExcludes)</DefaultItemExcludes>
   </PropertyGroup>

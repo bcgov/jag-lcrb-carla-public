@@ -239,13 +239,27 @@ namespace bdd_tests
             NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[24]"));
             uiCorpContactEmail.SendKeys(corpContactEmail);
 
-            // select 'No' for corporation's connection to a federal producer using radio button
-            NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
-            corpConnectionFederalProducer.Click();
+            try
+            {
+                // select 'No' for corporation's connection to a federal producer using radio button
+                NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
+                corpConnectionFederalProducer.Click();
+            }
+            catch (NoSuchElementException)
+            {
 
-            // select 'No' for federal producer's connection to corporation using radio button
-            NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
-            federalProducerConnectionToCorp.Click();
+            }
+            
+            try
+            {
+                // select 'No' for federal producer's connection to corporation using radio button
+                NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
+                federalProducerConnectionToCorp.Click();
+            }
+            catch (NoSuchElementException)
+            {
+
+            }
 
             // click on Continue to Organization Review button
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));

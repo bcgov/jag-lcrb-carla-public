@@ -370,31 +370,10 @@
 
       <!-- Contact Details -->
       <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
-      <i *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
-        The contact LCRB should communicate with regarding the application. The contact must be authorized to
-        represent
-        the applicant and have the authority to bind the applicant.
-      </i>
-      <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-        <i *ngIf="account?.businessType === 'SoleProprietor'">
-          The contact LCRB should communicate with regarding the application
+      <p><i>
+          Please provide contact information for the contact that the LCRB should communicate with regarding the application. This contact must be authorized to represent the applicant and have the authority to bind the applicant. 
         </i>
-        <i *ngIf="account?.businessType === 'Society'">
-          The contact LCRB should communicate with regarding the application. The contact must be authorized to
-          represent the applicant and have the authority to bind the applicant.
-        </i>
-        <i *ngIf="businessTypeIsPartnership()">
-          The contact LCRB should communicate with regarding the application. The contact must be authorized to
-          represent the applicant and have the authority to bind the applicant.
-        </i>
-        <i *ngIf="account?.businessType !== 'PublicCorporation'">
-          The contact must be authorized to represent the applicant and have the authority to bind the applicant.
-        </i>
-        <i *ngIf="businessTypeIsPrivateCorporation()">
-          The contact LCRB should communicate with regarding the application. The contact must be authorized to
-          represent the applicant and have the authority to bind the applicant.
-        </i>
-      </div>
+      </p>
       <address class="padded-section">
 
         <app-field label="First Name" [required]="true"
@@ -433,9 +412,9 @@
       <h3 class="blue-header ngtest-declarations">
         DECLARATIONS
       </h3>
-      <div class="padded-section">
+      <div class="padded-section content">
         <p>
-          This application should be submitted by an individual with the authority to bind the applicant. The branch
+          This application should only be submitted by an individual with the authority to bind the applicant. The branch
           relies on the applicant to ensure that the individual who submits this application is authorized to do so.
           Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually
           be an officer or, in some cases, a director.
