@@ -221,7 +221,6 @@ export class LicencesComponent extends FormBase implements OnInit {
         applicationStatus: app.applicationStatus,
         isPaid: app.isPaid
       };
-      debugger;
       licence.actionApplications.push(action);
     });
     if (licence.licenceTypeName === 'Catering') {
