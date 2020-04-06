@@ -32,6 +32,11 @@ export class LicenseDataService extends DataService {
     return this.http.post<Application>(url, {licenceId, accountId}, { headers: this.headers });
   }
 
+  setThirdPartyOperator(licenceId: string, accountId: string) {
+    const url = `${this.apiPath}set-third-party-operator`;
+    return this.http.post<Application>(url, {licenceId, accountId}, { headers: this.headers });
+  }
+
   getAllCurrentLicenses(): Observable<ApplicationLicenseSummary[]> {
     return this.http.get<ApplicationLicenseSummary[]>(this.apiPath + 'current', {
       headers: this.headers

@@ -127,6 +127,15 @@
                   </p>
                 </div>
               </ng-container>              
+              <ng-container *ngIf="!licenceHasExpired(item.expiryDate)">
+                <div *ngIf="item.status != PAYMENT_REQUIRED">
+                  <p>
+                    <a *ngIf="licenceTransferFeatureOn" [routerLink]="[ '/third-party-operator/' + item.licenseId]">
+                      <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Assign Third Party Operator</span>
+                    </a>
+                  </p>
+                </div>
+              </ng-container>              
               <ng-container *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested !== 'Yes' || !licenceTransferFeatureOn || (item?.licenceTypeName !== ApplicationTypeNames.CannabisRetailStore && item?.licenceTypeName !== ApplicationTypeNames.Marketer))">
                 <div *ngIf="item.status != PAYMENT_REQUIRED">
                   <p *ngFor="let action of item.allowedActions">

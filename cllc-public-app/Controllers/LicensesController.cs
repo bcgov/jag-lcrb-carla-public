@@ -199,6 +199,47 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
+        [HttpPost("set-third-party-operator")]
+        public ActionResult SetThirdPartyOperator(LicenceTransfer item)
+        {
+             if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            // check access to licence
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.GetLicenceByIdWithChildren(item.LicenceId);
+            if (adoxioLicense == null)
+            {
+                return NotFound();
+            }
+
+            if (!CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid))
+            {
+                return Forbid();
+            }
+
+            try
+            {
+                var yes = 845280001;
+                var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
+                {
+                     = _dynamicsClient.GetEntityURI("accounts", item.AccountId),
+                    AdoxioTransferrequesteProposedOwnerODataBindd = yes
+                };
+
+                // create application
+                _dynamicsClient.Licenceses.Update(item.LicenceId, patchLicence);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error initiating licence transfer");
+                // fail if we can't create.
+                throw (httpOperationException);
+            } 
+            return Ok();
+        }
+
         /// Create a change of location application
         [HttpPost("{licenceId}/create-action-application/{applicationTypeName}")]
         public async Task<JsonResult> CreateApplicationForAction(string licenceId, string applicationTypeName)
