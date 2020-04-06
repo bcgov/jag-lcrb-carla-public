@@ -217,14 +217,6 @@
       </div>
 
       <div class="row mb-5">
-        <app-field class="col-md-5 col-xs-10" label="Describe the physical barriers (i.e., fencing, barricading, rooms, etc.) which will be in place to control and limit access to and from areas where alcohol is being sold or served?"
-            [valid]="securityForm.get('safeAndResponsibleLiquorAreaControlledDescription').valid || !securityForm.get('safeAndResponsibleLiquorAreaControlledDescription').touched"
-            errorMessage="Please enter details" [isFullWidth]="true">
-          <textarea class="form-control" formControlName="safeAndResponsibleLiquorAreaControlledDescription"></textarea>
-        </app-field>
-      </div>
-
-      <div class="row mb-5">
         <app-field class="col-md-5 col-xs-10" label="How will the entrances to the liquor service area be supervised?"
             [valid]="securityForm.get('safeAndResponsibleServiceAreaSupervision').valid || !securityForm.get('safeAndResponsibleServiceAreaSupervision').touched"
             errorMessage="Please enter details" [isFullWidth]="true">

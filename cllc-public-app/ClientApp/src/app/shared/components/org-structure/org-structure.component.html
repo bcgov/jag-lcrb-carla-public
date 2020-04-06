@@ -110,7 +110,7 @@
       <section class="padded-section">
         <app-field label="Annual Membership Fee" errorMessage="Please enter value"
         [valid]="!form.get('annualMembershipFee').touched || form.get('annualMembershipFee').touched">
-        <input type="number" formControlName="annualMembershipFee" class="form-control">
+        <input type="number" formControlName="annualMembershipFee" class="form-control" prefix="$" thousandSeparator="," mask="separator">
       </app-field>
       <app-field label="Number of Members" errorMessage="Please enter value"
         [valid]="!form.get('numberOfMembers').touched || form.get('numberOfMembers').touched">

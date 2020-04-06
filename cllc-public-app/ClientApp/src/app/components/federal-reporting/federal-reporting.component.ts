@@ -84,7 +84,7 @@ export class FederalReportingComponent implements OnInit {
   ngOnInit() {
     this.busy = forkJoin([
       this.licenceDataService.getAllCurrentLicenses(),
-      this.monthlyReportDataService.getAllCurrentMonthlyReports()
+      this.monthlyReportDataService.getAllCurrentMonthlyReports(true)
     ])
     .subscribe(results => {
       this.licenses = results[0].filter(l => l.licenceTypeName === 'Cannabis Retail Store');
