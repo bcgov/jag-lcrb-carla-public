@@ -9,7 +9,7 @@ Scenario: Request CRS Store Name or Branding Change
     And the licence fee has been paid
     And I click on the Request Store Name or Branding Change link
     And I review the account profile
-    And I submit a name or branding change application
+    And I submit a valid name or branding change application
     And I complete the payment
-    And I click on the Licences tab
-    Then **outcome to be confirmed**
+    And I return to the dashboard
+    Then a name or branding change application under review is displayed

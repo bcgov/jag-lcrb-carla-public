@@ -11,5 +11,5 @@ Scenario: Request CRS Structural Change
     And I review the account profile
     And I submit a CRS structural change application
     And I complete the payment
-    And I click on the Licences tab
-    Then **outcome to be confirmed**
+    And I return to the dashboard
+    Then a structural change application under review is displayed

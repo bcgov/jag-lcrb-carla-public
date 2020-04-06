@@ -8,7 +8,7 @@ Scenario: Plan CRS Opening
     And I click on the Licences tab
     And the licence fee has been paid
     And I click on the Plan Store Opening link
-    And I get ready for my inspection
+    And I complete the planning details
     And I click on the Save button
     And I click on the Licences tab
     And I click on the Plan Store Opening link

@@ -11,5 +11,5 @@ Scenario: Request CRS Relocation
     And I review the account profile
     And I submit a licence relocation application
     And I complete the payment
-    And I click on the Licences tab
-    Then **outcome to be confirmed**
+    And I return to the dashboard
+    Then a relocation request under review is displayed

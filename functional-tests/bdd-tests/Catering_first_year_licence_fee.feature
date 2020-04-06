@@ -9,4 +9,4 @@ Scenario: Pay First Year Catering Licence
     And I click on the Pay First Year Licensing Fee link
     And I complete the payment
     And I click on the Licences tab
-    Then the Licences tab has been updated
+    Then the Licences tab has been updated with expiry date, download link, and change jobs
