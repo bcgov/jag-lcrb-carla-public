@@ -72,7 +72,7 @@
                     "name": "DYNAMICS_NATIVE_ODATA_URI",
                     "valueFrom": {
                       "secretKeyRef": {
-                        "key": "dynamics-native-odata-uri",
+                        "key": "DYNAMICS_NATIVE_ODATA_URI",
                         "name": "${SECRET_RESOURCE_NAME}"
                       }
                     }
@@ -81,7 +81,7 @@
                     "name": "DYNAMICS_ODATA_URI",
                     "valueFrom": {
                       "secretKeyRef": {
-                        "key": "dynamics-odata-uri",
+                        "key": "DYNAMICS_ODATA_URI",
                         "name": "${SECRET_RESOURCE_NAME}"
                       }
                     }
@@ -90,7 +90,7 @@
                     "name": "DYNAMICS_PASSWORD",
                     "valueFrom": {
                       "secretKeyRef": {
-                        "key": "dynamics-password",
+                        "key": "DYNAMICS_PASSWORD",
                         "name": "${SECRET_RESOURCE_NAME}"
                       }
                     }
@@ -99,55 +99,28 @@
                     "name": "DYNAMICS_USERNAME",
                     "valueFrom": {
                       "secretKeyRef": {
-                        "key": "dynamics-user",
+                        "key": "DYNAMICS_USERNAME",
                         "name": "${SECRET_RESOURCE_NAME}"
                       }
                     }
                   },
                   {
-                    "name": "SHAREPOINT_NATIVE_BASE_URI",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "sharepoint-native-base-uri",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
+                    "name": "FILE_MANAGER_URI"
                   },                  
                   {
-                    "name": "SHAREPOINT_ODATA_URI",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "sharepoint-odata-uri",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
+                    "name": "FILE_MANAGER_SECRET"
                   },
                   {
-                    "name": "SHAREPOINT_PASSWORD",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "sharepoint-password",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
+                    "name": "DOTNET_SSL_DIRS",
+                    "value": "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
                   },
                   {
                     "name": "SSG_USERNAME",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "ssg-username",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
+                    "value": ""
                   },
                   {
                     "name": "SSG_PASSWORD",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "ssg-password",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
+                    "value": ""
                   }
                 ],
                 "resources": {
