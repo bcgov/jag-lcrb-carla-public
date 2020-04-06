@@ -54,6 +54,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   licenses: ApplicationLicenseSummary[];
   licencesOnFile: boolean;
   securityScreeningEnabled: boolean;
+  licenseeApplicationLoaded: boolean;
 
   constructor(public dialog: MatDialog,
     public snackBar: MatSnackBar,
@@ -99,12 +100,15 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       .pipe(filter(account => !!account))
       .subscribe((account) => {
         this.account = account;
-        this.loadLicenseeApplication()
-          .pipe(filter(id => !!id))
-          .subscribe(id => {
-            this.applicationId = id;
-            this.loadData();
-          });
+        if (!this.licenseeApplicationLoaded) {
+          this.loadLicenseeApplication()
+            .pipe(filter(id => !!id))
+            .subscribe(id => {
+              this.applicationId = id;
+              this.loadData();
+            });
+        }
+        this.licenseeApplicationLoaded = true;
       });
   }
 
@@ -256,7 +260,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
               // else go to the application page
               else if (app) {
                 this.saveComplete.emit(true);
-                if(this.redirectToDashboardOnSave){
+                if (this.redirectToDashboardOnSave) {
                   this.router.navigateByUrl('/dashboard');
                 }
               }
@@ -298,9 +302,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
     return forkJoin(
       this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue }),
-      this.legalEntityDataService.updateLegalEntity({...this.currentLegalEntities, numberOfMembers: this.treeRoot.numberOfMembers, annualMembershipFee: this.treeRoot.annualMembershipFee }, this.currentLegalEntities.id),
-      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId) // ,
-      // this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges)
+      this.legalEntityDataService.updateLegalEntity({ ...this.currentLegalEntities, numberOfMembers: this.treeRoot.numberOfMembers, annualMembershipFee: this.treeRoot.annualMembershipFee }, this.currentLegalEntities.id),
+      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId)
     );
   }
 
