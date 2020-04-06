@@ -355,7 +355,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 foreach (var establishment in account.AdoxioAccountAdoxioEstablishmentLicencee)
                 {
-                    if (establishment.Statuscode != null && establishment.Statuscode.Value == 845280000) // Licensed
+                    if (establishment.Statuscode != null && establishment.Statuscode.Value == 845280000 && establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null) // Licensed
                     {
                         EstablishmentMapData data = new EstablishmentMapData()
                         {
