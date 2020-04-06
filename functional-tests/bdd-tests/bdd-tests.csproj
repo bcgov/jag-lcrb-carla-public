@@ -92,5 +92,8 @@
     <None Update="MultiLevelCRSApplicationPrivateCorp.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="CRS_pay_licence_fee.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

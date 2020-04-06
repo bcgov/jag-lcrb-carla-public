@@ -11,5 +11,5 @@ Scenario: Request Catering Third Party Operator
     And I review the account profile
     And I submit the third-party operator application
     And I complete the payment
-    And I click on the Licences tab
-    Then **outcome to be confirmed**
+    And I return to the dashboard
+    Then a third party operation application under review is displayed
