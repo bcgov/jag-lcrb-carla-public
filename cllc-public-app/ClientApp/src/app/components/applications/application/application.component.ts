@@ -13,7 +13,7 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { Application } from '@models/application.model';
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
 import { DynamicsDataService } from '@services/dynamics-data.service';
-import { Account } from '@models/account.model';
+import { Account, TransferAccount } from '@models/account.model';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
@@ -120,6 +120,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
         establishmentAddressCity: [''],
         establishmentAddressPostalCode: [''],
         establishmentParcelId: ['']
+      }),
+      proposedTPO: this.fb.group({
+        accountId: ['', [Validators.required]],
+        accountName: [{value: '', disabled: true}],
+        contactName: [{value: '', disabled: true}],
+        businessType: [{value: '', disabled: true}],
       }),
       establishmentName: ['', [
         Validators.required,
@@ -378,6 +384,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
     show = show && this.form.get('connectedGrocery').value === 'Yes';
     return show;
   }
+  
+  onAccountSelect(proposedAccount: TransferAccount) {
+    this.form.get('proposedTPO').patchValue(proposedAccount);
+  }
+
+
 
   /**
    * Save form data
