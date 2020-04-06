@@ -10,4 +10,5 @@ Scenario: Transfer Catering Ownership
     And I identify the proposed licensee
     And I complete the consent and declarations
     And I submit the transfer
-    Then **outcome to be confirmed**
+    And I click on the Licences tab
+    Then the transfer application is displayed

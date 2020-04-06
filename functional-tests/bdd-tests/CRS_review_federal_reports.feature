@@ -8,4 +8,4 @@ Scenario: Review CRS Federal Reports
     And I click on the Licences tab
     And the licence fee has been paid
     And I click on the Review Federal Reports link
-    Then the monthly reports will be available
+    Then the monthly reports page is displayed

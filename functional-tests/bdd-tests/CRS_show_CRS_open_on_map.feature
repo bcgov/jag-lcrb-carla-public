@@ -8,4 +8,6 @@ Scenario: Show CRS as Open on Map
     And I click on the Licences tab
     And I select the Show Store as Open on Map checkbox
     And I click on the Show Store as Open on Map link
-    Then **outcome to be confirmed**
+    And I click on the maps page
+    And I search for my store
+    Then my store is shown as open
