@@ -979,6 +979,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
+            // applications
+            if (account.AdoxioAccountAdoxioApplicationApplicant != null)
+            {
+                foreach (var application in account.AdoxioAccountAdoxioApplicationApplicant)
+                {
+                    try
+                    {
+                        MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await _dynamicsClient.GetApplicationByIdWithChildren(application.AdoxioApplicationid);
+
+                        if (adoxioApplication.AdoxioInvoice != null)
+                        {
+                            _dynamicsClient.Invoices.Delete(adoxioApplication.AdoxioInvoice.Invoiceid);
+                        }
+
+                        // TODO - add any other entities that might block a delete.
+
+                        _dynamicsClient.Applications.Delete(application.AdoxioApplicationid);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error deleting the application");
+                        throw new Exception("Error deleting the application");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error deleting the application");
+                        throw new Exception("Error deleting the application");
+                    }
+                }
+            }
+
+
             if (account.AdoxioAccountTiedhouseconnections != null)
             {
                 foreach (var tiedHouseConnection in account.AdoxioAccountTiedhouseconnections)
@@ -1001,6 +1033,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
 
+            // delete SharePoint document locations
+
+            if (account.AccountSharepointDocumentLocation != null)
+            {
+                foreach (var sharePointDocumentLocations in account.AccountSharepointDocumentLocation)
+                {
+                    try
+                    {
+                        _dynamicsClient.Sharepointdocumentlocations.Delete(sharePointDocumentLocations.Sharepointdocumentlocationid);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error deleting the SharePoint Document Locations");
+                        throw new Exception("Error deleting the SharePoint Document Locations");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error deleting the SharePoint Document Locations");
+                        throw new Exception("Error deleting the SharePoint Document Locations");
+                    }
+                }
+            }
+
+
             // delete the account
             try
             {
@@ -1018,8 +1074,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Error deleting the account");
             }
 
-            _logger.LogDebug(LoggingEvents.HttpDelete, "No content returned.");
-            return NoContent(); // 204 
+            return Ok("OK"); // OK 
         }
 
 
