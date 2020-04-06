@@ -165,11 +165,13 @@ export class LicencesComponent extends FormBase implements OnInit {
   startRenewal(licence: ApplicationLicenseSummary) {
     const liquorLicenceTypes = ['Liquor Primary', 'Catering', 'Wine Store'];
     let renewalType = CRS_RENEWAL_LICENCE_TYPE_NAME;
-    let renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CRSRenewal);
+    let renewalApplication = licence.actionApplications.find(app =>
+      app.applicationTypeName === ApplicationTypeNames.CRSRenewal && app.applicationStatus !== 'Active');
 
     if (liquorLicenceTypes.indexOf(licence.licenceTypeName) !== -1) {
       renewalType = LIQUOR_RENEWAL_LICENCE_TYPE_NAME;
-      renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.LiquorRenewal);
+      renewalApplication = licence.actionApplications.find(app =>
+        app.applicationTypeName === ApplicationTypeNames.LiquorRenewal && app.applicationStatus !== 'Active');
     }
 
     if (renewalApplication && !renewalApplication.isPaid) {
@@ -179,7 +181,7 @@ export class LicencesComponent extends FormBase implements OnInit {
         { duration: 3500, panelClass: ['red-snackbar'] });
     } else {
       let renewalApplicationTypeName = ApplicationTypeNames.CRSRenewal;
-      if(renewalType === LIQUOR_RENEWAL_LICENCE_TYPE_NAME){
+      if (renewalType === LIQUOR_RENEWAL_LICENCE_TYPE_NAME) {
         renewalApplicationTypeName = ApplicationTypeNames.LiquorRenewal;
       }
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, renewalApplicationTypeName)
@@ -219,6 +221,7 @@ export class LicencesComponent extends FormBase implements OnInit {
         applicationStatus: app.applicationStatus,
         isPaid: app.isPaid
       };
+      debugger;
       licence.actionApplications.push(action);
     });
     if (licence.licenceTypeName === 'Catering') {
