@@ -138,7 +138,7 @@ namespace Gov.Lclb.Cllb.Public
                                   policy.RequireClaim(User.UserTypeClaim, "Business"));
             });
             services.RegisterPermissionHandler();
-            if (string.IsNullOrEmpty (_configuration["KEY_RING_DIRECTORY"]))
+            if (!string.IsNullOrEmpty (_configuration["KEY_RING_DIRECTORY"]))
             {
                 // setup key ring to persist in storage.
                 services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(_configuration["KEY_RING_DIRECTORY"]));
