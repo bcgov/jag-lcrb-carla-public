@@ -34,17 +34,16 @@ namespace bdd_tests
     [FeatureFile("./CRS_pay_licence_fee.feature")]
     public sealed class CRSPayLicenceFee : TestBase
     {
-        [Given(@"the CRS application has been approved")]
+        /*[Given(@"the CRS application has been approved")]
         public void CRS_application_is_approved()
         {
+        }*/
 
-        }
-
-        //[Given(@"I am logged in to the dashboard as a (.*)")]
-        [And(@"I am logged in to the dashboard as a (.*)")]
+        [Given(@"I am logged in to the dashboard as a (.*)")]
+        //[And(@"I am logged in to the dashboard as a (.*)")]
         public void And_I_view_the_dashboard(string businessType)
         {
-            CarlaLogin(businessType);
+            CarlaLoginNoCheck(businessType);
         }
 
         [And(@"I click on the Licences tab")]
@@ -86,10 +85,10 @@ namespace bdd_tests
             string reasonDay = "The store will be opened on this day for many reasons.";
 
             // enter the estimated opening date
-            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-and-licence-fee/div/div[2]/div[2]/section[2]/div/app-field[1]/section/div/section/input"));
+            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-and-licence-fee/div/div[2]/div[2]/section[2]/div/app-field[1]/section/div[1]/section/input"));
             uiCalendar1.Click();
 
-            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[3]/div"));
             uiCalendar2.Click();
 
             // enter the reason for the opening date
@@ -106,6 +105,8 @@ namespace bdd_tests
 
             NgWebElement paymentButton = ngDriver.FindElement(By.XPath("//button[contains(.,' PAY LICENCE FEE AND RECEIVE LICENCE')]"));
             paymentButton.Click();
+
+            System.Threading.Thread.Sleep(3000);
         }
 
         [And(@"I complete the payment")]
