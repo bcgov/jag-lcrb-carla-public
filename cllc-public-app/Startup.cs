@@ -138,7 +138,7 @@ namespace Gov.Lclb.Cllb.Public
                                   policy.RequireClaim(User.UserTypeClaim, "Business"));
             });
             services.RegisterPermissionHandler();
-            if (string.IsNullOrEmpty (_configuration["KEY_RING_DIRECTORY"]))
+            if (!string.IsNullOrEmpty (_configuration["KEY_RING_DIRECTORY"]))
             {
                 // setup key ring to persist in storage.
                 services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(_configuration["KEY_RING_DIRECTORY"]));
@@ -170,9 +170,9 @@ namespace Gov.Lclb.Cllb.Public
                 .AddCheck<DynamicsHealthCheck>("Dynamics")
                 .AddCheck<GeocoderHealthCheck>("Geocoder");
 
-            services.AddSession(x => x.IdleTimeout = TimeSpan.FromHours(4.0));
+            
 
-            // session will automatically use redis or another distribued cache if it is available.
+            
             if (!string.IsNullOrEmpty(_configuration["REDIS_SERVER"]))
             {
                 services.AddDistributedRedisCache(o =>
@@ -186,6 +186,12 @@ namespace Gov.Lclb.Cllb.Public
                     o.Configuration = config;                    
                 });
             }
+
+            // session will automatically use redis or another distributed cache if it is available.
+            services.AddSession(x => {
+                x.IdleTimeout = TimeSpan.FromHours(4.0);
+                x.Cookie.IsEssential = true;
+            });
 
         }
 
@@ -449,6 +455,7 @@ namespace Gov.Lclb.Cllb.Public
             };
 
             app.UseStaticFiles(staticFileOptions);
+
             app.UseSpaStaticFiles(staticFileOptions);
             app.UseXXssProtection(options => options.EnabledWithBlockMode());
             app.UseNoCacheHttpHeaders();
