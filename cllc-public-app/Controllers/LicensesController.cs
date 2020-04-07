@@ -300,7 +300,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 foreach (var licence in licences)
                 {
                     var applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
-                    licenseSummaryList.Add(licence.ToLicenseSummaryViewModel(applications));
+                    licenseSummaryList.Add(licence.ToLicenseSummaryViewModel(applications, _dynamicsClient));
                 }
             }
 
@@ -898,7 +898,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
 
             licence.AdoxioLicenceType = Models.ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
-            return new JsonResult(licence.ToLicenseSummaryViewModel(applications));
+            return new JsonResult(licence.ToLicenseSummaryViewModel(applications, _dynamicsClient));
         }
 
         /// <summary>
