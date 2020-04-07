@@ -190,6 +190,7 @@ import { SecurityScreeningRequirementsComponent } from './components/security-sc
 import { EligibilityFormComponent } from './components/eligibility-form/eligibility-form.component';
 import { EligibilityFormDataService } from '@services/eligibility-data.service';
 import { LiquorRenewalComponent } from './components/applications/liquor-renewal/liquor-renewal.component';
+import { TemporaryOffsiteComponent } from '@components/temporary-offsite/temporary-offsite.component';
 
 
 @NgModule({
@@ -224,6 +225,7 @@ import { LiquorRenewalComponent } from './components/applications/liquor-renewal
     LicenceFeePaymentConfirmationComponent,
     EventFormComponent,
     EventSecurityFormComponent,
+    TemporaryOffsiteComponent,
     NewsletterConfirmationComponent,
     NewsletterSignupComponent,
     NotFoundComponent,
