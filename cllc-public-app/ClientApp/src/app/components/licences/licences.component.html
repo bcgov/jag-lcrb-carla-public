@@ -73,7 +73,7 @@
             </td>
 
             <td>
-              <div *ngIf="item?.licenceTypeName === ApplicationTypeNames.WineStore">
+              <div *ngIf="hasEndorsement('Temporary Off-Site Endorsement', item)">
                 <a [routerLink]="[ '/licence/' + item.licenseId + '/temporary-offsite']">
                   <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Temporary Off-Site Sale Authorization
                 </a>
