@@ -196,11 +196,11 @@ namespace bdd_tests
             string membershipNumber = "200";
 
             // enter Annual Membership Fee
-            NgWebElement uiMemberFee = ngDriver.FindElement(By.XPath("//input[@type='number']"));
+            NgWebElement uiMemberFee = ngDriver.FindElement(By.XPath("//input[@type='text']"));
             uiMemberFee.SendKeys(membershipFee);
 
             // enter Number of Members
-            NgWebElement uiMemberNumber = ngDriver.FindElement(By.XPath("(//input[@type='number'])[2]"));
+            NgWebElement uiMemberNumber = ngDriver.FindElement(By.XPath("(//input[@type='number'])"));
             uiMemberNumber.SendKeys(membershipNumber);
 
             // open the director row 
@@ -214,11 +214,11 @@ namespace bdd_tests
             string email = "jane@bond.com";
 
             // enter the director first name
-            NgWebElement uiFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+            NgWebElement uiFirstName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
             uiFirstName.SendKeys(firstName);
 
             // enter the director last name
-            NgWebElement uiLastName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+            NgWebElement uiLastName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
             uiLastName.SendKeys(lastName);
 
             // select the director position
@@ -226,15 +226,15 @@ namespace bdd_tests
             uiPosition.Click();
 
             // enter the director title
-            NgWebElement uiTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+            NgWebElement uiTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
             uiTitle.SendKeys(title);
 
             // enter the director email
-            NgWebElement uiEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+            NgWebElement uiEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             uiEmail.SendKeys(email);
 
             // select the director DOB
-            NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
             openKeyPersonnelDOB.Click();
 
             NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
