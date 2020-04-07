@@ -144,7 +144,7 @@ namespace bdd_tests
             Page Title: Consent for Cannabis Security Screening - Step 2
             */
 
-            string applicantName = "Automated Test";
+            //string applicantName = "Automated Test";
             
             // select 'No' for background screen (self disclosure) radio button
             NgWebElement uiSelfDisclosure = ngDriver.FindElement(By.XPath("(//input[@name='selfDisclosure'])[2]"));
