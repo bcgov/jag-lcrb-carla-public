@@ -35,16 +35,16 @@ namespace bdd_tests
     [FeatureFile("./CRS_plan_store_opening.feature")]
     public sealed class CRSPlanStoreOpening : TestBase
     {
-        [Given(@"the CRS application has been approved")]
+        /*[Given(@"the CRS application has been approved")]
         public void CRS_application_is_approved()
         {
-        }
+        }*/
 
-        //[Given(@"I am logged in to the dashboard as a (.*)")]
-        [And(@"I am logged in to the dashboard as a (.*)")]
+        [Given(@"I am logged in to the dashboard as a (.*)")]
+        //[And(@"I am logged in to the dashboard as a (.*)")]
         public void And_I_view_the_dashboard(string businessType)
         {
-            CarlaLogin(businessType);
+            CarlaLoginNoCheck(businessType);
         }
 
         [And(@"I click on the Licences tab")]
@@ -76,6 +76,11 @@ namespace bdd_tests
             Page Title: Licences
             Subtitle:   Cannabis Retail Store Licences
             */
+            string planOpeningLink = "Plan Store Opening";
+
+            // click on the Licences link
+            NgWebElement uiOpeningLink = ngDriver.FindElement(By.LinkText(planOpeningLink));
+            uiOpeningLink.Click();
         }
 
         [And(@"I complete the planning details")]
