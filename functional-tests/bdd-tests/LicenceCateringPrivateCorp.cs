@@ -13,24 +13,15 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: Catering_licence_download
+Feature: LicenceCateringPrivateCorp
     As a logged in business user
-    I would like to download a catering licence
-
-Scenario: Download Catering Licence
-    Given the Catering application has been approved
-    And I am logged in to the dashboard as a private corporation
-    And I click on the Licences tab
-    And the licence fee has been paid
-    And I click on the Download Licence link
-    And the licence is downloaded
-    Then the correct information is displayed
+    I want to pay the first year catering licence fees
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./Catering_licence_download.feature")]
-    public sealed class CateringLicenceDownload : TestBase
+    [FeatureFile("./LicenceCateringPrivateCorp.feature")]
+    public sealed class LicenceCateringPrivateCorp : TestBase
     {
         [Given(@"the Catering application has been approved")]
         public void catering_application_approved()
@@ -57,37 +48,31 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
-        [And(@"the licence fee has been paid")]
-        public void licence_fee_paid()
+        [And(@"I click on the Pay First Year Licensing Fee link")]
+        public void click_pay_first_year_licensing_fee()
         {
             /* 
-            Page Title: 
+            Page Title: Licences
+            Subtitle:   Cannabis Retail Store Licences
             */
         }
 
-        [And(@"I click on the Download Licence link")]
-        public void click_download_licence_link()
+        [And(@"I complete the payment")]
+        public void complete_the_payment()
         {
-            /* 
-            Page Title: 
-            */
+            MakePayment();
         }
 
-        [And(@"the licence is downloaded")]
-        public void licence_is_downloaded()
+        [Then(@"the Licences tab has been updated with expiry date, download link, and change jobs")]
+        public void licences_tab_updated()
         {
             /* 
-            Page Title: 
+            Page Title: Licences
+            Subtitle:   Cannabis Retail Store Licences
             */
+
+            //Assert.True (ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
 
-        [Then(@"the correct information is displayed")]
-        public void correct_info_displayed()
-        {
-            /* 
-            Page Title: 
-            Subtitle:   
-            */
-        }
     }
 }
