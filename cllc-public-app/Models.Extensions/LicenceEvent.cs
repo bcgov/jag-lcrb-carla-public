@@ -132,6 +132,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.SafeAndResponsibleServiceAreaSupervision = item.AdoxioServiceareaentrancesupervisiondetails;
                 result.DeclarationIsAccurate = item.AdoxioIsdeclarationaccurate;
                 result.SecurityPlanSubmitted = item.AdoxioSafetysecurityplanchangessubmitted;
+                result.SEPLicensee = item.AdoxioSeplicensee;
+                result.SEPLicenceNumber = item.AdoxioSeplicencenumber;
+                result.SEPContactName = item.AdoxioSepcontactname;
+                result.SEPContactPhoneNumber = item.AdoxioSepcontactphonenumber;
                 
             }
 
@@ -221,6 +225,11 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioAdditionalsafetydetails = from.SafeAndResponsibleAdditionalSafetyMeasures;
             to.AdoxioServiceareaentrancesupervisiondetails = from.SafeAndResponsibleServiceAreaSupervision;
             to.AdoxioIsdeclarationaccurate = from.DeclarationIsAccurate;
+
+            to.AdoxioSepcontactphonenumber = from.SEPContactPhoneNumber;
+            to.AdoxioSepcontactname = from.SEPContactName;
+            to.AdoxioSeplicencenumber = from.SEPLicenceNumber;
+            to.AdoxioSeplicensee = from.SEPLicensee;
 
             to.AdoxioSafetysecurityplanchangessubmitted = from.SecurityPlanSubmitted;
         }

@@ -75,6 +75,17 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 adoxioLicenseVM.establishmentParcelId = dynamicsLicense.AdoxioEstablishment.AdoxioParcelid;
             }
+            
+            // TODO
+            // string filter = $"_adoxio_licence_value eq {adoxioLicenseVM.id}";
+            // MicrosoftDynamicsCRMadoxioEndorsementCollection endorsements = dynamicsClient.Endorsements.Get(filter: filter);
+            // if (endorsements.Value.Count > 0)
+            // {
+            //     foreach (var item in endorsements.Value)
+            //     {
+                    
+            //     }
+            // }
 
             return adoxioLicenseVM;
         }

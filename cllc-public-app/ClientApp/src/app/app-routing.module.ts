@@ -43,6 +43,7 @@ import { EventSecurityFormComponent } from '@components/event-form/security.comp
 import { SecurityScreeningRequirementsComponent } from '@components/security-screening-requirements/security-screening-requirements.component';
 import { EligibilityFormComponent } from '@components/eligibility-form/eligibility-form.component';
 import { LiquorRenewalComponent } from '@components/applications/liquor-renewal/liquor-renewal.component';
+import { TemporaryOffsiteComponent } from '@components/temporary-offsite/temporary-offsite.component';
 
 
 const routes: Routes = [
@@ -94,6 +95,16 @@ const routes: Routes = [
   {
     path: 'licence/:licenceId/event/:eventId',
     component: EventFormComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'licence/:licenceId/temporary-offsite',
+    component: TemporaryOffsiteComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'licence/:licenceId/temporary-offsite/:eventId',
+    component: TemporaryOffsiteComponent,
     canActivate: [BCeidAuthGuard]
   },
   {
