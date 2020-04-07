@@ -18,9 +18,8 @@ Feature: CRS_pay_licence_fee
     I want to pay the Cannabis Retail Store Licence Fee
 
 Scenario: Pay CRS Licence Fee
-    #Given the CRS application has been approved
-    #And I am logged in to the dashboard as a private corporation
-    Given I am logged in to the dashboard as a private corporation
+    Given the CRS application has been approved
+    And I am logged in to the dashboard as a private corporation
     And I click on the Licences tab
     And I click on the Pay Licence Fee and Plan Store Opening link
     And I enter the estimated opening date and the opening date reason
@@ -32,11 +31,17 @@ Scenario: Pay CRS Licence Fee
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRS_pay_licence_fee")]
-    public sealed class CRS_pay_licence_fee : TestBase
+    [FeatureFile("./CRS_pay_licence_fee.feature")]
+    public sealed class CRSPayLicenceFee : TestBase
     {
+        [Given(@"the CRS application has been approved")]
+        public void CRS_application_is_approved()
+        {
 
-        [Given(@"I am logged in to the dashboard as a (.*)")]
+        }
+
+        //[Given(@"I am logged in to the dashboard as a (.*)")]
+        [And(@"I am logged in to the dashboard as a (.*)")]
         public void And_I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
