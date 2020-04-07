@@ -223,7 +223,7 @@ export class LicencesComponent extends FormBase implements OnInit {
       };
       licence.actionApplications.push(action);
     });
-    if (licence.licenceTypeName === 'Catering') {
+    if (licence.licenceTypeName === 'Catering' || licence.licenceTypeName === 'Wine Store') {
       forkJoin([
         this.licenceEventsService.getLicenceEventsList(licence.licenseId, 10)
       ])
