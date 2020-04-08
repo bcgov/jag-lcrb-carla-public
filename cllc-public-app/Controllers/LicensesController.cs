@@ -386,7 +386,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var account = await _dynamicsClient.Accounts.GetByKeyAsync(accountid: thirdPartyOperatorId, expand: expand);
                 result = account.AdoxioThirdpartyoperatorLicences
                 .Select(licence =>  _dynamicsClient.GetLicenceByIdWithChildren(licence.AdoxioLicencesid))
-                .Select(licence => licence.ToLicenseSummaryViewModel(new List<MicrosoftDynamicsCRMadoxioApplication>()))
+                .Select(licence => licence.ToLicenseSummaryViewModel(new List<MicrosoftDynamicsCRMadoxioApplication>(), _dynamicsClient))
                 .ToList();
             }
             catch (HttpOperationException)
