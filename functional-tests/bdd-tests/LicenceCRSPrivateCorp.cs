@@ -377,7 +377,7 @@ namespace bdd_tests
             // next steps?
         }
 
-        [And(@"I assign a third party operator")]
+        [And(@"I request a third party operator")]
         public void transfer_store_ownership()
         {
             /* 
