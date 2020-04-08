@@ -62,7 +62,6 @@ export class ApplicationThirdPartyOperatorComponent extends FormBase implements 
         contactName: [{value: '', disabled: true}],
         businessType: [{value: '', disabled: true}],
       }),
-      transferConsent: ['', [this.customRequiredCheckboxValidator()]],
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });

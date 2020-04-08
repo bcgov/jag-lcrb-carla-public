@@ -55,7 +55,10 @@ export class LicencesComponent extends FormBase implements OnInit {
   ApplicationTypeNames = ApplicationTypeNames;
   licenceTransferFeatureOn = false;
   licenceMappings = {};
-  supportedLicenceTypes = ["Catering", "Wine Store", "Cannabis Retail Store", "Marketing"];
+  supportedLicenceTypes = [
+    "Catering", "Wine Store", "Cannabis Retail Store", "Marketing",
+    "Opertated - Wine Store"
+  ];
 
   constructor(
     private applicationDataService: ApplicationDataService,
@@ -98,11 +101,18 @@ export class LicencesComponent extends FormBase implements OnInit {
    * */
   private displayApplications() {
     this.busy =
-      forkJoin(this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()
+      forkJoin(this.applicationDataService.getAllCurrentApplications(),
+        this.licenceDataService.getAllCurrentLicenses(),
+        this.licenceDataService.getAllOperatedLicenses()
       ).pipe(takeWhile(() => this.componentActive))
-        .subscribe(([applications, licenses]) => {
+        .subscribe(([applications, licenses, operatedLicences]) => {
           this.applications = applications;
-          licenses.forEach((licence: ApplicationLicenseSummary) => {
+          operatedLicences.forEach(licence => {
+            licence.isOperated = true;
+            licence.licenceTypeName = 'Opertated - ' + licence.licenceTypeName 
+          });
+          let combinedLicences = [...licenses, ...operatedLicences];
+          combinedLicences.forEach((licence: ApplicationLicenseSummary) => {
             this.addOrUpdateLicence(licence);
           });
         });
