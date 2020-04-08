@@ -62,5 +62,6 @@ export enum ApplicationTypeNames {
   LicenseeChanges = 'Licensee Changes',
   Marketer = 'Marketing',
   LiquorRelocation = 'Liquor Licence Relocation',
-  LiquorRenewal = 'Liquor Licence Renewal'
+  LiquorRenewal = 'Liquor Licence Renewal',
+  WineStore = 'Wine Store'
 }
