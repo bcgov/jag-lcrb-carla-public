@@ -58,7 +58,7 @@ export class LicencesComponent extends FormBase implements OnInit {
   licenceMappings = {};
   supportedLicenceTypes = [
     "Catering", "Wine Store", "Cannabis Retail Store", "Marketing",
-    "Opertated - Wine Store"
+    "Operated - Wine Store"
   ];
 
   constructor(
@@ -110,7 +110,7 @@ export class LicencesComponent extends FormBase implements OnInit {
           this.applications = applications;
           operatedLicences.forEach(licence => {
             licence.isOperated = true;
-            licence.licenceTypeName = 'Opertated - ' + licence.licenceTypeName 
+            licence.licenceTypeName = 'Operated - ' + licence.licenceTypeName 
           });
           let combinedLicences = [...licenses, ...operatedLicences];
           combinedLicences.forEach((licence: ApplicationLicenseSummary) => {
