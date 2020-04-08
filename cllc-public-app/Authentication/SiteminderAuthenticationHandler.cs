@@ -642,8 +642,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                         var updatedWorker = await _dynamicsClient.GetWorkerByIdWithChildren(savedWorker.AdoxioWorkerid);
 
-                        // ensure that the worker has a documents folder.                        
-                        await CreateWorkerDocumentLocation(_dynamicsClient, _fileManagerClient, updatedWorker);
+                        // only create the worker document location if the FEATURE_NO_WET_SIGNATURE setting is blank
+                        if (string.IsNullOrEmpty(_configuration["FEATURE_NO_WET_SIGNATURE"]))
+                        {
+                            // ensure that the worker has a documents folder.                        
+                            await CreateWorkerDocumentLocation(_dynamicsClient, _fileManagerClient, updatedWorker);
+                        }
+                            
                     }
                 }
 
