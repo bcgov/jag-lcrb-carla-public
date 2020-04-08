@@ -670,7 +670,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
         private async Task CreateAccountDocumentLocation(IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMaccount account)
         {
-            string folderName = "";
+            string folderName;
             string logFolderName = ""; 
             try
             {
