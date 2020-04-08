@@ -97,15 +97,20 @@ namespace bdd_tests
        
             NgWebElement paymentButton = ngDriver.FindElement(By.XPath("//button[contains(.,' PAY LICENCE FEE AND RECEIVE LICENCE')]"));
             paymentButton.Click();
-  
+            
+            // pay the licence fee
             MakePayment();
+
+            // return to the Licences tab
+            uiLicenceFee.Click();
         }
 
         [And(@"I plan the store opening")]
         public void plan_store_opening()
         {
             /* 
-            Page Title: Plan Your Store Opening
+            Page Title: Licences
+            Subtitle:   Cannabis Retail Store Licences
             */
 
             string storePlanningLink = "Plan Store Opening";
@@ -113,6 +118,10 @@ namespace bdd_tests
             // click on the store planning link
             NgWebElement uiStorePlanning = ngDriver.FindElement(By.LinkText(storePlanningLink));
             uiStorePlanning.Click();
+
+            /* 
+            Page Title: Plan Your Store Opening
+            */
 
             // select checkboxes to confirm store opening details
             NgWebElement check1 = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
@@ -160,6 +169,8 @@ namespace bdd_tests
             //click on the Save button
             NgWebElement saveButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SAVE')]"));
             saveButton.Click();
+
+            //todo: confirm next page after save
         }
 
         [And(@"I request a store relocation")]
@@ -232,7 +243,6 @@ namespace bdd_tests
             // return to the Licences tab
             string licencesLink = "Licences";
 
-            // click on the Licences link
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
         }

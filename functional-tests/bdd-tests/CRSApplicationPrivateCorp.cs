@@ -384,7 +384,6 @@ namespace bdd_tests
             uiKeyPersonnelDOB1Biz1.Click();
 
             NgWebElement uiKeyPersonnelDOB1Biz2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-5']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
-            //NgWebElement uiKeyPersonnelDOB1Biz2 = ngDriver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/mat-datepicker-content/mat-calendar/div/mat-month-view/table/tbody/tr[4]/td[1]/div"));
             uiKeyPersonnelDOB1Biz2.Click();
 
             /********** Business Shareholder - Individual Shareholder **********/
