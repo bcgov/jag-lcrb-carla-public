@@ -341,6 +341,10 @@ export class LicencesComponent extends FormBase implements OnInit {
         return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/catering-handbook.pdf';
       case 'Wine Store':
         return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/winestore-handbook.pdf';
+      // added handling for operated wine stores
+      // TODO: refactor Operated approach so that we don't have to add a case for each operator style
+      case 'Operated - Wine Store':
+          return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/winestore-handbook.pdf';
       default:
         return '404';
     }
