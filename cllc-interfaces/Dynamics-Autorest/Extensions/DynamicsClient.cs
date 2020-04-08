@@ -191,7 +191,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 string[] expand = { "primarycontactid" };
                 // fetch from Dynamics.
-                result = await Accounts.GetByKeyAsync(accountid: id.ToString(),expand:expand);
+                result = await Accounts.GetByKeyAsync(accountid: id.ToString(), expand: expand);
             }
             catch (HttpOperationException)
             {
@@ -240,10 +240,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             MicrosoftDynamicsCRMaccount result;
             try
-            {                
-                string[] expand = { "primarycontactid", 
-                    "Account_SharepointDocumentLocation", 
-                    "adoxio_account_adoxio_legalentity_Account", 
+            {
+                string[] expand = { "primarycontactid",
+                    "Account_SharepointDocumentLocation",
+                    "adoxio_account_adoxio_legalentity_Account",
                     "adoxio_account_adoxio_establishment_Licencee",
                     "adoxio_account_adoxio_application_Applicant",
                     "adoxio_licenseechangelog_ParentBusinessAccount",
@@ -334,7 +334,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             string[] expand = { "adoxio_Licencee" };
             try
             {
-                result = Establishments.GetByKey(adoxioEstablishmentid:id, expand:expand );
+                result = Establishments.GetByKey(adoxioEstablishmentid: id, expand: expand);
             }
             catch (HttpOperationException)
             {
@@ -411,7 +411,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 // adoxio_Licencee,adoxio_establishment
                 // Note that adoxio_Licencee is the Account linked to the licence
-                var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment", "adoxio_LicenceType", "adoxio_adoxio_licences_adoxio_application_AssignedLicence" };
+                var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment", "adoxio_LicenceType",
+                    "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_ProposedOperator" 
+                };
                 result = this.Licenceses.GetByKey(adoxioLicencesid: id, expand: expand);
             }
             catch (HttpOperationException)
@@ -446,7 +448,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 result = null;
             }
-            
+
             return result;
         }
 
@@ -461,7 +463,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 result = null;
             }
-            
+
             return result;
         }
 
@@ -481,7 +483,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 results = null;
             }
-            
+
             return results;
         }
     }
