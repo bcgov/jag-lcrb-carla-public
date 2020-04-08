@@ -31,6 +31,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager
         public override Task<CreateFolderReply> CreateFolder(CreateFolderRequest request, ServerCallContext context)
         {
             var result = new CreateFolderReply();
+
+            string logFolder = WordSanitizer.Sanitize(request.FolderName);
+
             string listTitle = GetDocumentListTitle(request.EntityName);
 
             SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
@@ -69,14 +72,14 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 catch (SharePointRestException ex)
                 {
                     result.ResultStatus = ResultStatus.Fail;
-                    result.ErrorDetail = $"ERROR in creating folder {request.FolderName}";
+                    result.ErrorDetail = $"ERROR in creating folder {logFolder}";
                     _logger.LogError(ex, result.ErrorDetail);
 
                 }
                 catch (Exception e)
                 {
                     result.ResultStatus = ResultStatus.Fail;
-                    result.ErrorDetail = $"ERROR in creating folder {request.FolderName}";
+                    result.ErrorDetail = $"ERROR in creating folder {logFolder}";
                     _logger.LogError(e, result.ErrorDetail);
                 }
 
@@ -201,6 +204,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager
         {
             var result = new DeleteFileReply();
 
+            string logUrl = WordSanitizer.Sanitize(request.ServerRelativeUrl);
+
             SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
 
             try
@@ -221,14 +226,14 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             catch (SharePointRestException ex)
             {
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = $"ERROR in deleting file {request.ServerRelativeUrl}";
+                result.ErrorDetail = $"ERROR in deleting file {logUrl}";
                 _logger.LogError(ex, result.ErrorDetail);
 
             }
             catch (Exception e)
             {
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = $"ERROR in deleting file {request.ServerRelativeUrl}";
+                result.ErrorDetail = $"ERROR in deleting file {logUrl}";
                 _logger.LogError(e, result.ErrorDetail);
             }
 
@@ -238,7 +243,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
         public override Task<DownloadFileReply> DownloadFile(DownloadFileRequest request, ServerCallContext context)
         {
             var result = new DownloadFileReply();
-
+            string logUrl = WordSanitizer.Sanitize(request.ServerRelativeUrl);
             SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
 
             try
@@ -260,14 +265,14 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             catch (SharePointRestException ex)
             {
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = $"ERROR in downloading file {request.ServerRelativeUrl}";
+                result.ErrorDetail = $"ERROR in downloading file {logUrl}";
                 _logger.LogError(ex, result.ErrorDetail);
 
             }
             catch (Exception e)
             {
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = $"ERROR in downloading file {request.ServerRelativeUrl}";
+                result.ErrorDetail = $"ERROR in downloading file {logUrl}";
                 _logger.LogError(e, result.ErrorDetail);
             }
 
@@ -278,7 +283,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager
         public override Task<UploadFileReply> UploadFile(UploadFileRequest request, ServerCallContext context)
         {
             var result = new UploadFileReply();
-            
+            string logFileName = WordSanitizer.Sanitize(request.FileName);
+            string logFolderName = WordSanitizer.Sanitize(request.FolderName);
 
             SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
 
@@ -297,14 +303,14 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             catch (SharePointRestException ex)
             {
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = $"ERROR in uploading file {request.FileName} to folder {request.FolderName}";
+                result.ErrorDetail = $"ERROR in uploading file {logFileName} to folder {logFolderName}";
                 _logger.LogError(ex, result.ErrorDetail);
                 
             }
             catch (Exception e)
             {
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = $"ERROR in uploading file {request.FileName} to folder {request.FolderName}";
+                result.ErrorDetail = $"ERROR in uploading file {logFileName} to folder {logFolderName}";
                 _logger.LogError(e, result.ErrorDetail);
             }
 
