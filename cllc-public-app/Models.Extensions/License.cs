@@ -14,6 +14,25 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class LicenseExtensions
     {
+        public static List<string> GetEndorsements(string licenceId, IDynamicsClient dynamicsClient)
+        {
+            List<string> endorsementsList = new List<string>();
+            string filter = $"_adoxio_licence_value eq {licenceId}";
+            string[] expand = { "adoxio_ApplicationType" };
+            MicrosoftDynamicsCRMadoxioEndorsementCollection endorsementsCollection = dynamicsClient.Endorsements.Get(filter: filter, expand: expand);
+            if (endorsementsCollection.Value.Count > 0)
+            {
+                foreach (var item in endorsementsCollection.Value)
+                {
+                    if (item.AdoxioApplicationType != null) {
+                        endorsementsList.Add(item.AdoxioApplicationType.AdoxioName);
+                    }
+                }
+            }
+
+            return endorsementsList;
+        }
+
         public static License ToViewModel(this MicrosoftDynamicsCRMadoxioLicences dynamicsLicense, IDynamicsClient dynamicsClient)
         {
             License adoxioLicenseVM = new License();
@@ -75,11 +94,15 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 adoxioLicenseVM.establishmentParcelId = dynamicsLicense.AdoxioEstablishment.AdoxioParcelid;
             }
+            
+            
+            adoxioLicenseVM.endorsements = GetEndorsements(adoxioLicenseVM.id, dynamicsClient);
+            
 
             return adoxioLicenseVM;
         }
 
-        public static ApplicationLicenseSummary ToLicenseSummaryViewModel(this MicrosoftDynamicsCRMadoxioLicences licence, IList<MicrosoftDynamicsCRMadoxioApplication> applications)
+        public static ApplicationLicenseSummary ToLicenseSummaryViewModel(this MicrosoftDynamicsCRMadoxioLicences licence, IList<MicrosoftDynamicsCRMadoxioApplication> applications, IDynamicsClient dynamicsClient)
         {
             ApplicationLicenseSummary licenseSummary = new ViewModels.ApplicationLicenseSummary()
             {
@@ -143,6 +166,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
 
             }
+
+            licenseSummary.Endorsements = GetEndorsements(licenseSummary.LicenseId, dynamicsClient);
+            
 
             return licenseSummary;
         }
