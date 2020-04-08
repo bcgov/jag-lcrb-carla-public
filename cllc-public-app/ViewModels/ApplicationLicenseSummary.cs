@@ -86,5 +86,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public TransferRequested? TransferRequested { get; set; }
 
         public string ThirdPartyOperatorAccountName { get; set; }
+        public List<string> Endorsements { get; set; }
     }
 }

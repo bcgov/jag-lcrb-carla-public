@@ -21,6 +21,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Establishment } from '@models/establishment.model';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { EventStatus } from '@models/licence-event.model';
+import { License } from '@models/license.model';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -233,7 +234,7 @@ export class LicencesComponent extends FormBase implements OnInit {
       };
       licence.actionApplications.push(action);
     });
-    if (licence.licenceTypeName === 'Catering') {
+    if (licence.licenceTypeName === 'Catering' || licence.licenceTypeName === 'Wine Store') {
       forkJoin([
         this.licenceEventsService.getLicenceEventsList(licence.licenseId, 10)
       ])
@@ -401,5 +402,9 @@ export class LicencesComponent extends FormBase implements OnInit {
         label = subcategory;
     }
     return label;
+  }
+
+  hasEndorsement(endorsement: string, licence: License) {
+    return licence.endorsements.indexOf(endorsement) >= 0;
   }
 }
