@@ -40,6 +40,7 @@ export class ApplicationLicenseSummary {
   events: LicenceEvent[];
   transferRequested: string;
 
+  thirdPartyOperatorAccountName: string;
   isOperated: boolean; // only used on the client side
 }
 
