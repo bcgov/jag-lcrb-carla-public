@@ -27,5 +27,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_Account@odata.bind")]
         public string AccountODataBind { get; set; }
         
+        // not in client yet
+        [JsonProperty(PropertyName = "adoxio_seplicensee")]
+        public string AdoxioSeplicensee { get; set; }
+        [JsonProperty(PropertyName = "adoxio_seplicencenumber")]
+        public string AdoxioSeplicencenumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sepcontactphonenumber")]
+        public string AdoxioSepcontactphonenumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sepcontactname")]
+        public string AdoxioSepcontactname { get; set; }
     }
 }

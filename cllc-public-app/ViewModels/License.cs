@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
@@ -33,5 +34,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string licenseNumber { get; set; }
         public string licenseSubCategory {get; set;}
         public DateTimeOffset? expiryDate { get; set; }
+
+        public List<string> endorsements { get; set; }
     }
 }
