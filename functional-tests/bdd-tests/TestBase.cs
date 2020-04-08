@@ -259,5 +259,37 @@ namespace bdd_tests
             {
             }
         }
+
+        public void CRSReturnToDashboard()
+        {
+            /* 
+            Page Title: Payment Approved
+            */
+
+            // confirm that payment receipt is for $7,500.00
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$7,500.00')]")).Displayed);
+
+            // click on Return to Dashboard link
+            string retDash = "Return to Dashboard";
+            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
+            returnDash.Click();
+        }
+
+        public void CateringReturnToDashboard()
+        {
+            /* 
+            Page Title: Payment Approved
+            */
+
+            // confirm that payment receipt is for $475.00
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$475.00')]")).Displayed);
+
+            string retDash = "Return to Dashboard";
+
+            // click on the Return to Dashboard link
+            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
+            returnDash.Click();
+        }
+
     }
 }
