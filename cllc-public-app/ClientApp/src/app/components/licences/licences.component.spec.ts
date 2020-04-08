@@ -20,7 +20,7 @@ const applicationDataServiceStub: Partial<ApplicationDataService> = {
   getAllCurrentApplications: () => of([]),
   getSubmittedApplicationCount: () => of(0)
 };
-const licenceDataServiceStub: Partial<LicenseDataService> = { getAllCurrentLicenses: () => of([]) };
+const licenceDataServiceStub: Partial<LicenseDataService> = {getAllOperatedLicenses: () => of([]), getAllCurrentLicenses: () => of([]) };
 const routerStub: Partial<Router> = {};
 const paymentServiceStub: Partial<PaymentDataService> = {};
 const snackBarStub: Partial<MatSnackBar> = {};

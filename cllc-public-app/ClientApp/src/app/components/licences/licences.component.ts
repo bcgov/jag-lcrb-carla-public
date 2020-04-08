@@ -21,6 +21,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Establishment } from '@models/establishment.model';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { EventStatus } from '@models/licence-event.model';
+import { License } from '@models/license.model';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -55,7 +56,10 @@ export class LicencesComponent extends FormBase implements OnInit {
   ApplicationTypeNames = ApplicationTypeNames;
   licenceTransferFeatureOn = false;
   licenceMappings = {};
-  supportedLicenceTypes = ["Catering", "Wine Store", "Cannabis Retail Store", "Marketing"];
+  supportedLicenceTypes = [
+    "Catering", "Wine Store", "Cannabis Retail Store", "Marketing",
+    "Opertated - Wine Store"
+  ];
 
   constructor(
     private applicationDataService: ApplicationDataService,
@@ -98,11 +102,18 @@ export class LicencesComponent extends FormBase implements OnInit {
    * */
   private displayApplications() {
     this.busy =
-      forkJoin(this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()
+      forkJoin(this.applicationDataService.getAllCurrentApplications(),
+        this.licenceDataService.getAllCurrentLicenses(),
+        this.licenceDataService.getAllOperatedLicenses()
       ).pipe(takeWhile(() => this.componentActive))
-        .subscribe(([applications, licenses]) => {
+        .subscribe(([applications, licenses, operatedLicences]) => {
           this.applications = applications;
-          licenses.forEach((licence: ApplicationLicenseSummary) => {
+          operatedLicences.forEach(licence => {
+            licence.isOperated = true;
+            licence.licenceTypeName = 'Opertated - ' + licence.licenceTypeName 
+          });
+          let combinedLicences = [...licenses, ...operatedLicences];
+          combinedLicences.forEach((licence: ApplicationLicenseSummary) => {
             this.addOrUpdateLicence(licence);
           });
         });
@@ -223,7 +234,7 @@ export class LicencesComponent extends FormBase implements OnInit {
       };
       licence.actionApplications.push(action);
     });
-    if (licence.licenceTypeName === 'Catering') {
+    if (licence.licenceTypeName === 'Catering' || licence.licenceTypeName === 'Wine Store') {
       forkJoin([
         this.licenceEventsService.getLicenceEventsList(licence.licenseId, 10)
       ])
@@ -391,5 +402,9 @@ export class LicencesComponent extends FormBase implements OnInit {
         label = subcategory;
     }
     return label;
+  }
+
+  hasEndorsement(endorsement: string, licence: License) {
+    return licence.endorsements.indexOf(endorsement) >= 0;
   }
 }
