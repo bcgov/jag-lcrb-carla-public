@@ -17,6 +17,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_ProposedOwner@odata.bind")]
         public string ProposedOwnerODataBind { get; set; }
 
+        [JsonProperty(PropertyName = "adoxio_ProposedOperator@odata.bind")]
+        public string adoxio_ThirdPartyOperatorIdODataBind { get; set; }
+
         [JsonProperty(PropertyName = "adoxio_establishment@odata.bind")]
         public string AdoxioEstablishmentODataBind { get; set; }
 

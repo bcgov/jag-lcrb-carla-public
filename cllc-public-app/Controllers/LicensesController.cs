@@ -224,8 +224,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var yes = 845280001;
                 var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
                 {
-                     = _dynamicsClient.GetEntityURI("accounts", item.AccountId),
-                    AdoxioTransferrequesteProposedOwnerODataBindd = yes
+                    adoxio_ThirdPartyOperatorIdODataBind = _dynamicsClient.GetEntityURI("accounts", item.AccountId),
+                    AdoxioTporequested = yes
                 };
 
                 // create application
@@ -385,7 +385,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // fetch from Dynamics.
                 var account = await _dynamicsClient.Accounts.GetByKeyAsync(accountid: thirdPartyOperatorId, expand: expand);
                 result = account.AdoxioThirdpartyoperatorLicences
-                .Select(licence => licence.ToLicenseSummaryViewModel(null))
+                .Select(licence =>  _dynamicsClient.GetLicenceByIdWithChildren(licence.AdoxioLicencesid))
+                .Select(licence => licence.ToLicenseSummaryViewModel(new List<MicrosoftDynamicsCRMadoxioApplication>()))
                 .ToList();
             }
             catch (HttpOperationException)
