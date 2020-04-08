@@ -274,7 +274,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public static IEnumerable<MicrosoftDynamicsCRMadoxioLicences> GetLicensesByLicencee(this IDynamicsClient _dynamicsClient, IMemoryCache _cache, string licenceeId)
         {
-            var expand = new List<string> { "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_LicenceType", "adoxio_establishment" };
+            var expand = new List<string> { "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_LicenceType", "adoxio_establishment", "adoxio_ThirdPartyOperatorId" };
 
             IEnumerable<MicrosoftDynamicsCRMadoxioLicences> licences = null;
 
