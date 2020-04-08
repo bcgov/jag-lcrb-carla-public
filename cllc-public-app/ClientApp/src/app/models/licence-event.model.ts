@@ -83,6 +83,12 @@ export class LicenceEvent {
   // security agreement
   declarationIsAccurate: boolean;
 
+  // temp offsite auth
+  sepLicensee: string;
+  sepLicenceNumber: string;
+  sepContactName: string;
+  sepContactPhoneNumber: string;
+
   // unused
   eventNumber: string;
   externalId: string;
@@ -114,6 +120,10 @@ export const EventStatus = [
   {
     label: 'Cancelled',
     value: 845280003
+  },
+  {
+    label: 'Submitted',
+    value: 845280005
   }
 ];
 
