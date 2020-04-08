@@ -13,6 +13,7 @@ export class License {
   establishmentAddressCity: string;
   establishmentAddressPostalCode: string;
   establishmentParcelId: string;
+  endorsements: string[];
 
   expiryDate: Date;
 }

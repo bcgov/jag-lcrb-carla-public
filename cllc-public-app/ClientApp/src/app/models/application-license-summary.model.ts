@@ -39,6 +39,9 @@ export class ApplicationLicenseSummary {
   actionApplications: LicenceActionApplication[];
   events: LicenceEvent[];
   transferRequested: string;
+
+  thirdPartyOperatorAccountName: string;
+  isOperated: boolean; // only used on the client side
 }
 
 export interface LicenceActionApplication {
