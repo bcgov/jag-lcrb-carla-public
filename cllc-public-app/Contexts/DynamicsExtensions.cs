@@ -158,7 +158,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             return result;
         }
-        
+
 
         /// <summary>
         /// Get a Account by their Guid
@@ -182,7 +182,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     {
                         result = firstAccount;
                     }
-                }                
+                }
             }
             catch (Exception)
             {
@@ -478,6 +478,39 @@ namespace Gov.Lclb.Cllb.Interfaces
             return dynamicsApplicationList;
         }
 
+        /// <summary>
+        /// Gets all third party operator licences for the given applicantId
+        /// </summary>
+        /// <param name="_dynamicsClient"></param>
+        /// <param name="applicantId"></param>
+        /// <returns></returns>
+        public static IEnumerable<MicrosoftDynamicsCRMadoxioApplication> GetThirdPartyOperaotsLicences(this IDynamicsClient _dynamicsClient, string applicantId)
+        {
+            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType", "adoxio_ApplicationTypeId" };
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
+            if (string.IsNullOrEmpty(applicantId))
+            {
+                throw new Exception("ERROR getting ApplicationsForLicenceByApplicant - Applicant cannot be null");
+            }
+            else
+            {
+                var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated}";
+                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Denied}";
+                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
+                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+
+                try
+                {
+                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
+                }
+                catch (HttpOperationException)
+                {
+                    dynamicsApplicationList = null;
+                }
+            }
+            return dynamicsApplicationList;
+        }
+
 
         /// <summary>
         /// Get a contact by their Siteminder ID
@@ -489,13 +522,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             IList<MicrosoftDynamicsCRMcontact> result = null;
             string filter = "";
-            if (!string.IsNullOrEmpty(firstname)) {
+            if (!string.IsNullOrEmpty(firstname))
+            {
                 firstname.Replace("'", "''");
                 filter += $"firstname eq '{firstname}'";
             }
             if (!string.IsNullOrEmpty(middlename))
             {
-                if (!string.IsNullOrEmpty (filter))
+                if (!string.IsNullOrEmpty(filter))
                 {
                     filter += " and ";
                 }
@@ -522,7 +556,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 filter += $"emailaddress1 eq '{emailaddress1}'";
             }
 
-            if (!string.IsNullOrEmpty (filter))
+            if (!string.IsNullOrEmpty(filter))
             {
                 try
                 {
@@ -539,7 +573,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
             }
 
-            
+
             return result;
         }
 
@@ -556,7 +590,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             try
             {
                 var contactsResponse = system.Contacts.Get(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
-                result = contactsResponse.Value.FirstOrDefault();                
+                result = contactsResponse.Value.FirstOrDefault();
             }
             catch (HttpOperationException)
             {
@@ -759,7 +793,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     }
                 }
             }
-            
+
             return user;
 
         }
@@ -814,14 +848,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public static User GetUserByContactVmBlankSmGuid(this IDynamicsClient _dynamicsClient, Public.ViewModels.Contact contact)
         {
-            
+
             User result = null;
             var firstUser = _dynamicsClient.GetContactByContactVmBlankSmGuid(contact);
-            if (firstUser != null && string.IsNullOrEmpty (firstUser.AdoxioExternalid))
+            if (firstUser != null && string.IsNullOrEmpty(firstUser.AdoxioExternalid))
             {
                 result = new User();
                 result.FromContact(firstUser);
-            }                    
+            }
 
             return result;
         }
@@ -834,7 +868,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public static MicrosoftDynamicsCRMcontact GetContactByContactVmBlankSmGuid(this IDynamicsClient _dynamicsClient, Public.ViewModels.Contact contact)
         {
-           
+
             MicrosoftDynamicsCRMcontact result = null;
             if (contact != null)
             {
@@ -843,7 +877,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     result = users.FirstOrDefault();
                 }
-            }            
+            }
 
             return result;
         }
