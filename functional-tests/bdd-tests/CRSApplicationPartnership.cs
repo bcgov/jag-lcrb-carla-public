@@ -440,16 +440,7 @@ namespace bdd_tests
         [And(@"I return to the dashboard")]
         public void return_to_dashboard()
         {
-            /* 
-            Page Title: Payment Approved
-            */
-
-            // confirm that payment receipt is for $7,500.00
-            Assert.True (ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-payment-confirmation/mat-card/div/div[1]/div/div/table/tr[6]/td[2][text()='$7,500.00']")).Displayed);
-
-            string retDash = "Return to Dashboard";
-            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
-            returnDash.Click();
+            CRSReturnToDashboard();
         }
 
         [And(@"the account is deleted")]
