@@ -149,8 +149,8 @@
 
               <section *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested === 'Yes' && licenceTransferFeatureOn)"
                        class="licence-expired">
-                TRANSFER INITIATED <br />
-                <a [routerLink]="[ '/ownership-cancel-transfer/' + item.licenseId]">
+                <strong>TRANSFER INITIATED</strong> <br />
+                <a [routerLink]="[ '/ownership-cancel-transfer/' + item.licenseId]" class="missing">
                   <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Cancel Transfer</span>
                 </a>
               </section>
