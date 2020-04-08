@@ -98,6 +98,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 TransferRequested = (TransferRequested?)licence.AdoxioTransferrequested
             };
 
+            if(licence.AdoxioThirdPartyOperatorId != null){
+                licenseSummary.ThirdPartyOperatorAccountName = licence.AdoxioThirdPartyOperatorId.Name;
+            }
 
             if (licence.AdoxioEstablishment != null)
             {

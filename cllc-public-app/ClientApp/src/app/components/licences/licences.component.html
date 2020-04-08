@@ -78,6 +78,11 @@
               </td>
 
               <td>
+                <ng-container *ngIf="!item.isOperated && item.thirdPartyOperatorAccountName">
+                    <span>Operated By:</span>
+                    <strong style="color: #1a5a96;">
+                      {{item.thirdPartyOperatorAccountName}}</strong>
+                </ng-container>
                 <div
                   *ngIf="item?.licenceTypeName === ApplicationTypeNames.Catering && item?.status !== PAYMENT_REQUIRED">
                   <a [routerLink]="[ '/licence/' + item.licenseId + '/event']">
