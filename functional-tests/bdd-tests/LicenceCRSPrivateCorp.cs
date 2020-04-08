@@ -79,16 +79,16 @@ namespace bdd_tests
             uiLicenceFee.Click();
 
             /* 
-            Page Title:
+            Page Title: Plan Your Store Opening
             */
 
             string reasonDay = "Automated test: Reason for opening date.";
 
-            // enter the estimated opening date
-            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-and-licence-fee/div/div[2]/div[2]/section[2]/div/app-field[1]/section/div[1]/section/input"));
+            // select the opening date
+            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
             uiCalendar1.Click();
 
-            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[3]/div"));
+            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[5]/td[5]/div"));
             uiCalendar2.Click();
 
             // enter the reason for the opening date
@@ -97,8 +97,6 @@ namespace bdd_tests
        
             NgWebElement paymentButton = ngDriver.FindElement(By.XPath("//button[contains(.,' PAY LICENCE FEE AND RECEIVE LICENCE')]"));
             paymentButton.Click();
-
-            System.Threading.Thread.Sleep(3000);
   
             MakePayment();
         }
@@ -194,6 +192,18 @@ namespace bdd_tests
             string proposedCity = "Automated City";
             string proposedPostalCode = "A1A 1A1";
 
+            System.Threading.Thread.Sleep(7000);
+
+            // find the upload test file in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload a supporting document
+            string supportingDocument = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "checklist.pdf");
+            NgWebElement uploadSupportingDoc = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+            uploadSupportingDoc.SendKeys(supportingDocument);
+
             // enter the proposed street address
             NgWebElement uiProposedAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
             uiProposedAddress.SendKeys(proposedAddress);
@@ -205,16 +215,6 @@ namespace bdd_tests
             // enter the postal code
             NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.Id("establishmentAddressPostalCode"));
             uiProposedPostalCode.SendKeys(proposedPostalCode);
-
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload a supporting document
-            string supportingDocument = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "checklist.pdf");
-            NgWebElement uploadSupportingDoc = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uploadSupportingDoc.SendKeys(supportingDocument);
 
             // select the authorized to submit checkbox
             NgWebElement uiAuthToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
