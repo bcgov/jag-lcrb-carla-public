@@ -671,10 +671,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         private async Task CreateAccountDocumentLocation(IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMaccount account)
         {
             string folderName = "";
+            string logFolderName = ""; 
             try
             {
 
                 folderName = account.GetDocumentFolderName();
+                logFolderName = WordSanitizer.Sanitize(folderName);
 
                 var createFolderRequest = new CreateFolderRequest()
                 {
@@ -686,98 +688,25 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 if (createFolderResult.ResultStatus == ResultStatus.Fail)
                 {
-                    _logger.LogError($"Error creating folder for account {folderName}. Error is {createFolderResult.ErrorDetail}");
+                    _logger.LogError($"Error creating folder for account {logFolderName}. Error is {createFolderResult.ErrorDetail}");
                 }
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Error creating folder for account {folderName}");
+                _logger.LogError(e, $"Error creating folder for account {logFolderName}");
             }
-
-
-            /*
-            // now create a document location to link them.
-
-            // Create the SharePointDocumentLocation entity
-            MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
-            {
-                Relativeurl = folderName,
-                Description = "Account Files",
-                Name = name
-            };
-
-
-            try
-            {
-                mdcsdl = _dynamicsClient.Sharepointdocumentlocations.Create(mdcsdl);
-            }
-            catch (OdataerrorException odee)
-            {
-                _logger.LogError("Error creating SharepointDocumentLocation");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-                mdcsdl = null;
-            }
-            if (mdcsdl != null)
-            {
-
-                // set the parent document library.
-                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL("account");
-
-                string accountUri = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
-                // add a regardingobjectid.
-                var patchSharePointDocumentLocationIncident = new MicrosoftDynamicsCRMsharepointdocumentlocation()
-                {
-                    RegardingobjectIdAccountODataBind = accountUri,
-                    ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference),
-                    Relativeurl = folderName,
-                    Description = "Account Files",
-                };
-
-                try
-                {
-                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocationIncident);
-                }
-                catch (OdataerrorException odee)
-                {
-                    _logger.LogError("Error adding reference SharepointDocumentLocation to account");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
-                }
-
-                string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
-
-                OdataId oDataId = new OdataId()
-                {
-                    OdataIdProperty = sharePointLocationData
-                };
-                try
-                {
-                    _dynamicsClient.Accounts.AddReference(account.Accountid, "Account_SharepointDocumentLocation", oDataId);
-                }
-                catch (OdataerrorException odee)
-                {
-                    _logger.LogError("Error adding reference to SharepointDocumentLocation");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
-                }
-            }
-            */
+        
         }
 
         private async Task CreateContactDocumentLocation(IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMcontact contact)
         {
-            string folderName = "";
+            string folderName;
+            string logFolderName = "";
             try
             { 
 
                 folderName = contact.GetDocumentFolderName();
+                logFolderName = WordSanitizer.Sanitize(folderName);
 
                 var createFolderRequest = new CreateFolderRequest()
                 {
@@ -789,22 +718,24 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 if (createFolderResult.ResultStatus == ResultStatus.Fail)
                 {
-                    _logger.LogError($"Error creating folder for contact {folderName}. Error is {createFolderResult.ErrorDetail}");
+                    _logger.LogError($"Error creating folder for contact {logFolderName}. Error is {createFolderResult.ErrorDetail}");
                 }
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Error creating folder for contact {folderName}");
+                _logger.LogError(e, $"Error creating folder for contact {logFolderName}");
             }
         }
 
         private async Task CreateWorkerDocumentLocation(IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMadoxioWorker worker)
         {
             string folderName = "";
+            string logFolderName = "";
             try
             {
 
                 folderName = worker.GetDocumentFolderName();
+                logFolderName = WordSanitizer.Sanitize(folderName);
 
                 var createFolderRequest = new CreateFolderRequest()
                 {
@@ -816,12 +747,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 if (createFolderResult.ResultStatus == ResultStatus.Fail)
                 {
-                    _logger.LogError($"Error creating folder for contact {folderName}. Error is {createFolderResult.ErrorDetail}");
+                    _logger.LogError($"Error creating folder for contact {logFolderName}. Error is {createFolderResult.ErrorDetail}");
                 }
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Error creating folder for contact {folderName}");
+                _logger.LogError(e, $"Error creating folder for contact {logFolderName}");
             }
         }
 
