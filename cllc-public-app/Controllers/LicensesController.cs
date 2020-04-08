@@ -100,8 +100,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var no = 845280000;
                 var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
-                {                    
-                    AdoxioTransferrequested = no 
+                {
+                    AdoxioTransferrequested = no
                 };
 
                 // create application
@@ -125,15 +125,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _logger.LogError(httpOperationException, "Error deleting proposed owner");
                     throw;
-                }                
-            }            
+                }
+            }
 
             // find the related application and delete it.
             foreach (var application in adoxioLicense.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence)
             {
                 // get the full application type.]
                 var applicationType = _dynamicsClient.GetApplicationTypeById(application._adoxioApplicationtypeidValue).GetAwaiter().GetResult();
-                if (applicationType.AdoxioName.Contains( "CRS Transfer of Ownership"))
+                if (applicationType.AdoxioName.Contains("CRS Transfer of Ownership"))
                 {
                     var patchApplication = new MicrosoftDynamicsCRMadoxioApplication()
                     {
@@ -161,7 +161,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("initiate-transfer")]
         public ActionResult InitiateTransfer(LicenceTransfer item)
         {
-             if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
@@ -195,7 +195,48 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(httpOperationException, "Error initiating licence transfer");
                 // fail if we can't create.
                 throw (httpOperationException);
-            } 
+            }
+            return Ok();
+        }
+
+        [HttpPost("set-third-party-operator")]
+        public ActionResult SetThirdPartyOperator(LicenceTransfer item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            // check access to licence
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.GetLicenceByIdWithChildren(item.LicenceId);
+            if (adoxioLicense == null)
+            {
+                return NotFound();
+            }
+
+            if (!CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid))
+            {
+                return Forbid();
+            }
+
+            try
+            {
+                var yes = 845280001;
+                var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
+                {
+                    adoxio_ThirdPartyOperatorIdODataBind = _dynamicsClient.GetEntityURI("accounts", item.AccountId),
+                    AdoxioTporequested = yes
+                };
+
+                // create application
+                _dynamicsClient.Licenceses.Update(item.LicenceId, patchLicence);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error initiating licence transfer");
+                // fail if we can't create.
+                throw (httpOperationException);
+            }
             return Ok();
         }
 
@@ -307,8 +348,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return licenseSummaryList;
         }
 
-
-
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
         [HttpGet("current")]
         public JsonResult GetCurrentUserLicences()
@@ -323,7 +362,40 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(adoxioLicenses);
         }
 
+        /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
+        [HttpGet("third-party-operator")]
+        public async Task<JsonResult> GetThirdPartyOperatedLicencesAsync()
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
+            // get all third party operator licenses
+            List<ApplicationLicenseSummary> adoxioLicenses = await GetThirdPartyOperatedLicencesForAccountAsync(userSettings.AccountId.ToString());
+
+            return new JsonResult(adoxioLicenses);
+        }
+
+        private async Task<List<ApplicationLicenseSummary>> GetThirdPartyOperatedLicencesForAccountAsync(string thirdPartyOperatorId)
+        {
+            List<ApplicationLicenseSummary> result;
+            try
+            {
+                string[] expand = { "adoxio_thirdpartyoperator_licences" };
+                // fetch from Dynamics.
+                var account = await _dynamicsClient.Accounts.GetByKeyAsync(accountid: thirdPartyOperatorId, expand: expand);
+                result = account.AdoxioThirdpartyoperatorLicences
+                .Select(licence =>  _dynamicsClient.GetLicenceByIdWithChildren(licence.AdoxioLicencesid))
+                .Select(licence => licence.ToLicenseSummaryViewModel(new List<MicrosoftDynamicsCRMadoxioApplication>()))
+                .ToList();
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+
+            return result;
+        }
 
         /// GET all licenses in Dynamics filtered by the GUID of the licencee
         [HttpGet("licencee/{licenceeId}")]
@@ -677,7 +749,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
                 }
-                
+
                 var storeHours = $@"
                 <tr>
                     <td>Open</td>
@@ -782,24 +854,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var templateName = "cannabis_licence";
 
-                    switch(adoxioLicense.AdoxioLicenceType.AdoxioName) {
+                    switch (adoxioLicense.AdoxioLicenceType.AdoxioName)
+                    {
                         case "Marketing":
                             templateName = "cannabis_marketer_licence";
                             break;
                         case "Catering":
                             templateName = "catering_licence";
                             break;
-                       case "Wine Store":
+                        case "Wine Store":
                             templateName = "wine_store";
-                            break;                   
+                            break;
                     }
-                    
+
                     byte[] data = await _pdfClient.GetPdf(parameters, templateName);
                     return File(data, "application/pdf", $"{adoxioLicense.AdoxioLicencenumber}.pdf");
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError(e, "Error returning PDF response");                    
+                    _logger.LogError(e, "Error returning PDF response");
 
                     return new NotFoundResult();
                 }
