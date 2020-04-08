@@ -44,6 +44,7 @@ import { SecurityScreeningRequirementsComponent } from '@components/security-scr
 import { EligibilityFormComponent } from '@components/eligibility-form/eligibility-form.component';
 import { LiquorRenewalComponent } from '@components/applications/liquor-renewal/liquor-renewal.component';
 import { TemporaryOffsiteComponent } from '@components/temporary-offsite/temporary-offsite.component';
+import { ApplicationThirdPartyOperatorComponent } from '@components/applications/application-third-party-operator/application-third-party-operator.component';
 
 
 const routes: Routes = [
@@ -180,6 +181,11 @@ const routes: Routes = [
   {
     path: 'ownership-transfer/:licenceId',
     component: ApplicationOwnershipTransferComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'third-party-operator/:licenceId',
+    component: ApplicationThirdPartyOperatorComponent,
     canActivate: [BCeidAuthGuard]
   },
   {
