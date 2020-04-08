@@ -279,8 +279,6 @@ namespace bdd_tests
             uiBizPartnerEmail.SendKeys(bizPartnerEmail);
 
             // click on the business shareholder confirm button
-            //NgWebElement uiShareBizConfirmButton = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr/td[5]/i/span"));
-            //uiShareBizConfirmButton.Click();
             NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[3]/section[2]/app-associate-list/div/table/tr/td[5]/i[1]"));
             uiConfirmButton.Click();
 
