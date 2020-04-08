@@ -200,5 +200,64 @@ namespace bdd_tests
             // note that the above call to delete the account will take a period of time to execute.            
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
+
+        public void CRSEligibilityDisclosure()
+        {
+            /* 
+            Page Title: Cannabis Retail Store Licence Eligibility Disclosure
+            */
+
+            string electricSignature = "Automated Test";
+
+            try
+            {
+                // select No for Question 1 using radio button
+                NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
+                noRadio1.Click();
+            }
+            catch (NoSuchElementException)
+            {
+            }
+
+            try
+            {
+                // select No for Question 2 using radio button
+                NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
+                noRadio2.Click();
+            }
+            catch (NoSuchElementException)
+            {
+            }
+
+            try
+            {
+                // select the certification checkbox
+                NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
+                matCheckbox.Click();
+            }
+            catch (NoSuchElementException)
+            {
+            }
+
+            try
+            {
+                // enter the electronic signature
+                NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
+                sigCheckbox.SendKeys(electricSignature);
+            }
+            catch (NoSuchElementException)
+            {
+            }
+
+            try
+            {
+                // click on the Submit button
+                NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
+                submit_button.Click();
+            }
+            catch (NoSuchElementException)
+            {
+            }
+        }
     }
 }
