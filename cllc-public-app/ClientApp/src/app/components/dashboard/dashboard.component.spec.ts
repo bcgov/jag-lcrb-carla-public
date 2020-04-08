@@ -14,7 +14,10 @@ import { of } from 'rxjs/internal/observable/of';
 import { AppState } from '@app/app-state/models/app-state';
 import { AssociateContentComponent } from './associate-content/associate-content.component';
 import { LicenseDataService } from '@services/license-data.service';
+import { HttpClient } from '@angular/common/http';
+import { FeatureFlagDataService } from '@services/feature-flag-data.service';
 
+const httpClientSpy: { get: jasmine.Spy } = jasmine.createSpyObj('HttpClient', ['get']);
 
 @Component({ selector: 'app-applications-and-licences', template: '' })
 class ApplicationsAndLicencesComponent {
@@ -45,6 +48,7 @@ describe('DashboardComponent', () => {
       providers: [
         provideMockStore({ initialState }),
         { provide: Router, useValue: {} },
+        { provide: FeatureFlagDataService, useValue: { getFeatureFlags: () => of([]) } },
         { provide: ApplicationDataService, useValue: {} },
         { provide: LicenseDataService, useValue: { getAllCurrentLicenses: () => of([]) } },
         { provide: LegalEntityDataService, useValue: { getCurrentHierachy: () => of({}) } },
