@@ -15,7 +15,21 @@ using Xunit;
 /*
 Feature: LicenceCateringPrivateCorp
     As a logged in business user
-    I want to pay the first year catering licence fees
+    I want to pay the first year catering licence fee
+    And complete the available application types
+
+Scenario: Pay First Year Catering Licence and Complete Applications
+    #Given the Catering application has been approved
+    #And I am logged in to the dashboard as a private corporation
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Licences tab
+    And I pay the licensing fee
+    And I request an event authorization
+    And I request a valid store name or branding change
+    And I request a store relocation
+    And I request a third party operator
+    And I request a transfer of ownership
+    Then the requested applications are visible on the dashboard
 */
 
 namespace bdd_tests
@@ -28,10 +42,11 @@ namespace bdd_tests
         {
         }
 
-        [And(@"I am logged in to the dashboard as a (.*)")]
+        [Given(@"I am logged in to the dashboard as a (.*)")]
+        //[And(@"I am logged in to the dashboard as a (.*)")]
         public void And_I_view_the_dashboard(string businessType)
         {
-            CarlaLogin(businessType);
+            CarlaLoginNoCheck(businessType);
         }
 
         [And(@"I click on the Licences tab")]
@@ -48,22 +63,46 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
-        [And(@"I click on the Pay First Year Licensing Fee link")]
+        [And(@"I pay the licensing fee")]
         public void click_pay_first_year_licensing_fee()
         {
             /* 
             Page Title: Licences
             Subtitle:   Cannabis Retail Store Licences
             */
-        }
-
-        [And(@"I complete the payment")]
-        public void complete_the_payment()
-        {
+            
             MakePayment();
+
         }
 
-        [Then(@"the Licences tab has been updated with expiry date, download link, and change jobs")]
+        [And(@"I request an event authorization")]
+        public void request_event_authorization()
+        {          
+        }
+
+        [And(@"I request a valid store name or branding change")]
+        public void name_branding_change()
+        {
+        }
+
+        [And(@"I request a store relocation")]
+        public void request_store_relocation()
+        {
+        }
+   
+        [And(@"I request a third party operator")]
+        public void request_third_party_operator()
+        {
+        }
+
+
+        [And(@"I request a transfer of ownership")]
+        public void request_transfer_of_ownership()
+        {
+        }
+ 
+
+        [Then(@"the requested applications are visible on the dashboard")]
         public void licences_tab_updated()
         {
             /* 
