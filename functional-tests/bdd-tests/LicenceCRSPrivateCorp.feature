@@ -11,8 +11,8 @@ Scenario: Pay CRS Licence Fee and Complete Applications
     #And I pay the licensing fee
     #And I plan the store opening
     And I request a store relocation
-    And I request a valid store name or branding change
-    And I review the federal reports
-    And I request a transfer of ownership
-    And I show the store as open on the map
+    #And I request a valid store name or branding change
+    #And I review the federal reports
+    #And I request a transfer of ownership
+    #And I show the store as open on the map
     Then the requested applications are visible on the dashboard
