@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             // liquor service ends after 2am (but not community event)
             if (item.EventType != EventType.Community) {
                 item.Schedules?.ForEach((schedule) => {
-                    if (schedule.ServiceEndDateTime.Value.Hour > 2)
+                    if (schedule.ServiceEndDateTime.Value.Hour > 2 && schedule.ServiceEndDateTime.Value.Hour < 9)
                     {
                         isHighRisk = true;
                     }
