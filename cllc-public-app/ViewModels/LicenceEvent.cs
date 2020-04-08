@@ -175,6 +175,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string SafeAndResponsibleAdditionalSafetyMeasures { get; set; }
         public string SafeAndResponsibleServiceAreaSupervision { get; set; }
         public bool? SecurityPlanSubmitted { get; set; }
+        public string SEPLicensee { get; set; }
+        public string SEPLicenceNumber { get; set; }
+        public string SEPContactPhoneNumber { get; set; }
+        public string SEPContactName { get; set; }
 
         // security agreement
         public bool? DeclarationIsAccurate { get; set; }
