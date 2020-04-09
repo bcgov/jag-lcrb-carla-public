@@ -948,7 +948,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             templateName = "catering_licence";
                             break;
                         case "Wine Store":
-                            templateName = "wine_store";
+                            templateName = "wine_store_licence";
                             break;
                     }
 
