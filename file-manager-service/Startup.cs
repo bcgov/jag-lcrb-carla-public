@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
-using System.Text;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using System.Net.Mime;
+using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Serilog;
 using Serilog.Exceptions;
+using System.Linq;
+using System.Net.Mime;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.Services.FileManager
 {
@@ -87,29 +84,11 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             app.UseAuthentication();
             app.UseAuthorization();
 
-
-
-            var healthCheckOptions = new HealthCheckOptions
+            app.UseHealthChecks("/hc/ready", new HealthCheckOptions
             {
-                ResponseWriter = async (c, r) =>
-                {
-                    c.Response.ContentType = MediaTypeNames.Application.Json;
-                    var result = JsonConvert.SerializeObject(
-                       new
-                       {
-                           checks = r.Entries.Select(e =>
-                      new {
-                          description = e.Key,
-                          status = e.Value.Status.ToString(),
-                          responseTime = e.Value.Duration.TotalMilliseconds
-                      }),
-                           totalResponseTime = r.TotalDuration.TotalMilliseconds
-                       });
-                    await c.Response.WriteAsync(result);
-                }
-            };
-
-            app.UseHealthChecks("/hc/ready", healthCheckOptions);
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
 
             app.UseHealthChecks("/hc/live", new HealthCheckOptions
             {
@@ -117,7 +96,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 Predicate = (_) => false
             });
 
-  
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<FileManagerService>();
