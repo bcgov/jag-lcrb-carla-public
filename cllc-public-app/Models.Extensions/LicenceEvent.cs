@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             // liquor service ends after 2am (but not community event)
             if (item.EventType != EventType.Community) {
                 item.Schedules?.ForEach((schedule) => {
-                    if (schedule.ServiceEndDateTime.Value.Hour > 2)
+                    if (schedule.ServiceEndDateTime.Value.LocalDateTime.Hour > 2 && schedule.ServiceEndDateTime.Value.LocalDateTime.Hour < 9)
                     {
                         isHighRisk = true;
                     }
@@ -57,8 +57,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
                 result.Status = (LicenceEventStatus?)item.Statuscode;
                 result.Name = item.AdoxioName;
-                result.StartDate = item.AdoxioStartdate;
-                result.EndDate = item.AdoxioEnddate;
+                result.StartDate = item.AdoxioStartdate?.Date;
+                result.EndDate = item.AdoxioEnddate?.Date;
                 result.VenueDescription = item.AdoxioVenuenamedescription;
                 result.AdditionalLocationInformation = item.AdoxioAdditionallocationinfo;
                 result.FoodService = (FoodService?)item.AdoxioFoodservice;

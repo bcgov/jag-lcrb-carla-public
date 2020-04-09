@@ -114,11 +114,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError("Error updating contact");
-                _logger.LogError("Request:");
-                _logger.LogError(httpOperationException.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(httpOperationException.Response.Content);
+                _logger.LogError(httpOperationException,"Error updating contact");
             }
 
             contact = await _dynamicsClient.GetContactById(contactId);
@@ -158,11 +154,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError("Error updating contact");
-                _logger.LogError("Request:");
-                _logger.LogError(httpOperationException.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(httpOperationException.Response.Content);
+                _logger.LogError(httpOperationException,"Error updating contact");
             }
 
             foreach (var alias in item.Aliases)
@@ -254,11 +246,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(LoggingEvents.Error, "Error getting contact by Siteminder Guid.");
-                _logger.LogError("Request:");
-                _logger.LogError(httpOperationException.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(httpOperationException.Response.Content);
+                _logger.LogError(httpOperationException, "Error getting contact by Siteminder Guid.");
                 throw new HttpOperationException("Error getting contact by Siteminder Guid");
             }
 
@@ -355,11 +343,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(LoggingEvents.Error, "Error getting contact by Siteminder Guid.");
-                _logger.LogError("Request:");
-                _logger.LogError(httpOperationException.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(httpOperationException.Response.Content);
+                _logger.LogError(httpOperationException, "Error getting contact by Siteminder Guid.");                
                 throw new HttpOperationException("Error getting contact by Siteminder Guid");
             }
 
@@ -408,10 +392,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError("Error updating contact");
-                _logger.LogError("Request:");
-                _logger.LogError(httpOperationException.Request.Content);
-                _logger.LogError("Response:");
+                _logger.LogError(httpOperationException,"Error updating contact");
                 _logger.LogError(httpOperationException.Response.Content);
 
                 //fail
@@ -477,11 +458,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError("Error creating SharepointDocumentLocation");
-                _logger.LogError("Request:");
-                _logger.LogError(httpOperationException.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(httpOperationException.Response.Content);
+                _logger.LogError(httpOperationException,"Error creating SharepointDocumentLocation");
                 mdcsdl = null;
             }
             if (mdcsdl != null)
@@ -500,11 +477,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError("Error adding reference SharepointDocumentLocation to application");
-                    _logger.LogError("Request:");
-                    _logger.LogError(httpOperationException.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(httpOperationException.Response.Content);
+                    _logger.LogError(httpOperationException,"Error adding reference SharepointDocumentLocation to application");
                     throw httpOperationException;
                 }
 
@@ -520,11 +493,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError("Error adding reference to SharepointDocumentLocation");
-                    _logger.LogError("Request:");
-                    _logger.LogError(httpOperationException.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(httpOperationException.Response.Content);
+                    _logger.LogError(httpOperationException,"Error adding reference to SharepointDocumentLocation");
                     throw httpOperationException;
                 }
             }
@@ -562,11 +531,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError("Error creating document location");
-                    _logger.LogError("Request:");
-                    _logger.LogError(httpOperationException.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(httpOperationException.Response.Content);
+                    _logger.LogError(httpOperationException,"Error creating document location");
                 }
             }
 
@@ -612,9 +577,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError("Error getting personal history link");
-                _logger.LogError("Details:");
-                _logger.LogError(ex.Message);
+                _logger.LogError(ex, "Error getting personal history link");
             }
             return new JsonResult(phsLink);
         }
