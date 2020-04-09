@@ -240,6 +240,91 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
+        // handle cancel-operator-application
+        // to: validate working
+        [HttpPost("cancel-operator-application")]
+        public ActionResult CancelTPO(LicenceTransfer item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            // check access to licence
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.GetLicenceByIdWithChildren(item.LicenceId);
+            if (adoxioLicense == null)
+            {
+                return NotFound();
+            }
+
+            if (!CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid))
+            {
+                return Forbid();
+            }
+
+            try
+            {
+                var no = 845280000;
+                var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
+                {
+                    AdoxioTporequested = no
+                };
+
+                // create application
+                _dynamicsClient.Licenceses.Update(item.LicenceId, patchLicence);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error cancelling Third Party Application");
+                // fail if we can't create.
+                throw;
+            }
+
+            // Delete the Proposed Owner (ProposedOwnerODataBind)
+            try
+            {
+                _dynamicsClient.Licenceses.DeleteReferenceWithHttpMessagesAsync(item.LicenceId, "adoxio_proposedoperator").GetAwaiter().GetResult();
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                if (httpOperationException.Response.StatusCode != System.Net.HttpStatusCode.NotFound)
+                {
+                    _logger.LogError(httpOperationException, "Error deleting proposed operator");
+                    throw;
+                }
+            }
+
+            // find the related application and delete it.
+            foreach (var application in adoxioLicense.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence)
+            {
+                // get the full application type.]
+                var applicationType = _dynamicsClient.GetApplicationTypeById(application._adoxioApplicationtypeidValue).GetAwaiter().GetResult();
+                if (applicationType.AdoxioName.Contains("Third Party Operator"))
+                {
+                    var patchApplication = new MicrosoftDynamicsCRMadoxioApplication()
+                    {
+                        //Statecode = (int?)AdoxioApplicationStatusCodes.Cancelled,
+                        Statuscode = (int?)AdoxioApplicationStatusCodes.Terminated
+                    };
+                    try
+                    {
+                        _dynamicsClient.Applications.Update(application.AdoxioApplicationid, patchApplication);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error cancelling related application");
+                        // fail if we can't create.
+                        throw;
+                    }
+
+                }
+            }
+
+
+            return Ok();
+        }
+
+
         /// Create a change of location application
         [HttpPost("{licenceId}/create-action-application/{applicationTypeName}")]
         public async Task<JsonResult> CreateApplicationForAction(string licenceId, string applicationTypeName)
