@@ -104,6 +104,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         private async Task<bool> CanAccessEntityFile(string entityName, string entityId, string documentType, string serverRelativeUrl)
         {
+            string logUrl = WordSanitizer.Sanitize(serverRelativeUrl);
+
             var result = await CanAccessEntity(entityName, entityId).ConfigureAwait(true);
             //get list of files for entity
             bool hasFile = false;
@@ -126,7 +128,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                _logger.LogError($"Unexpected error - Unable to validate file - {serverRelativeUrl}");
+                _logger.LogError($"Unexpected error - Unable to validate file - {logUrl}");
             }
 
             return result && hasFile;
@@ -220,6 +222,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
 
+            string logUrl = WordSanitizer.Sanitize(serverRelativeUrl);
+
             // call the web service
             var downloadRequest = new DownloadFileRequest()
             {
@@ -232,7 +236,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // Update modifiedon to current time
                 UpdateEntityModifiedOnDate(entityName, entityId, true);
-                _logger.LogInformation($"SUCCESS in getting file {serverRelativeUrl}");
+                _logger.LogInformation($"SUCCESS in getting file {logUrl}");
                 byte[] fileContents = downloadResult.Data.ToByteArray();
                 return new FileContentResult(fileContents, "application/octet-stream")
                 {
@@ -240,8 +244,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                _logger.LogError($"ERROR in getting file {serverRelativeUrl} - {downloadResult.ErrorDetail}");
-                throw new Exception($"ERROR in getting file {serverRelativeUrl} - {downloadResult.ErrorDetail}");
+                _logger.LogError($"ERROR in getting file {logUrl} - {downloadResult.ErrorDetail}");
+                throw new Exception($"ERROR in getting file {logUrl} - {downloadResult.ErrorDetail}");
             }
 
         }
@@ -1135,8 +1139,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            // Update modifiedon to current time
-            UpdateEntityModifiedOnDate(entityName, entityId);
+            string logUrl = WordSanitizer.Sanitize(serverRelativeUrl);
 
             // call the web service
             var deleteRequest = new DeleteFileRequest()
@@ -1155,8 +1158,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                _logger.LogError($"ERROR in deleting file {serverRelativeUrl} - {deleteResult.ErrorDetail}");
-                throw new Exception($"ERROR in deleting file {serverRelativeUrl} - {deleteResult.ErrorDetail}");
+                _logger.LogError($"ERROR in deleting file {logUrl} - {deleteResult.ErrorDetail}");
+                throw new Exception($"ERROR in deleting file {logUrl} - {deleteResult.ErrorDetail}");
             }
 
         }
@@ -1247,16 +1250,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
 
+            string logFolderName = WordSanitizer.Sanitize(folderName);
+            string logFileName = WordSanitizer.Sanitize(fileName);
+
             if (uploadResult.ResultStatus == ResultStatus.Success)
             {
                 // Update modifiedon to current time
                 UpdateEntityModifiedOnDate(entityName, entityId, true);
-                _logger.LogInformation($"SUCCESS in uploading file {fileName} to folder {folderName}");
+                _logger.LogInformation($"SUCCESS in uploading file {logFileName} to folder {logFolderName}");
             }
             else
             {
-                _logger.LogError($"ERROR in uploading file {fileName} to folder {folderName}");
-                throw new Exception($"ERROR in uploading file {fileName} to folder {folderName}");
+                _logger.LogError($"ERROR in uploading file {logFileName} to folder {logFolderName}");
+                throw new Exception($"ERROR in uploading file {logFileName} to folder {logFolderName}");
             }
 
             return new JsonResult(result);
