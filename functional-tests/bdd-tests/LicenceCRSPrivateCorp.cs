@@ -19,17 +19,16 @@ Feature: LicenceCRSPrivateCorp.feature
     And complete the available application types
 
 Scenario: Pay CRS Licence Fee and Complete Applications
-    #Given the CRS application has been approved
-    #And I am logged in to the dashboard as a private corporation
-    Given I am logged in to the dashboard as a private corporation
+    Given the CRS application has been approved
+    And I am logged in to the dashboard as a private corporation
     And I click on the Licences tab
     And I pay the licensing fee
     And I plan the store opening
     And I request a store relocation
     And I request a valid store name or branding change
+    And I request a structural change
     And I review the federal reports
     And I request a transfer of ownership
-    And I request a third party operator
     And I show the store as open on the map
     Then the requested applications are visible on the dashboard
 */
@@ -180,6 +179,8 @@ namespace bdd_tests
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
 
+            System.Threading.Thread.Sleep(7000);
+
             string licencesLink = "Licences";
 
             // click on the Licences link
@@ -254,6 +255,8 @@ namespace bdd_tests
             // pay for the relocation application
             MakePayment();
 
+            System.Threading.Thread.Sleep(7000);
+
             // return to the Licences tab
             string licencesLink = "Licences";
 
@@ -315,6 +318,80 @@ namespace bdd_tests
 
             // pay for the relocation application
             MakePayment();
+            
+            System.Threading.Thread.Sleep(7000);
+
+            // return to the Licences tab
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+        }
+
+        [And(@"I request a structural change")]
+        public void request_structural_change()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Cannabis Retail Store Licences
+            */
+
+            string structuralChange = "Request a Structural Change";
+
+            // click on the request structural change link
+            NgWebElement uiStructuralChange = ngDriver.FindElement(By.LinkText(structuralChange));
+            uiStructuralChange.Click();
+
+            /* 
+            Page Title: Please Review the Account Profile
+            */
+
+            // click on continue to application button
+            NgWebElement continueToApplicationButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
+            continueToApplicationButton.Click();
+
+            /* 
+            Page Title: Submit the Cannabis Retail Store Structural Change Application
+            */
+
+            // create test data
+            string description = "Test automation outline of the proposed change.";
+
+            // enter the description of the change
+            NgWebElement descriptionOfChange = ngDriver.FindElement(By.Id("description1"));
+            descriptionOfChange.SendKeys(description);
+
+            // find the upload test file in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload a floor plan document
+            string floorPlan = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
+            NgWebElement uiFloorPlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+            uiFloorPlan.SendKeys(floorPlan);
+
+            // select 'no' for changes to entries
+            NgWebElement changeToEntries = ngDriver.FindElement(By.Id("mat-button-toggle-2-button"));
+            changeToEntries.Click();
+
+            // select authorizedToSubmit checkbox
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            uiAuthorizedToSubmit.Click();
+
+            // select signatureAgreement checkbox
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
+            uiSignatureAgreement.Click();
+
+            // click on the Submit & Pay button
+            NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
+            submitpayButton.Click();
+
+            // pay for the relocation application
+            MakePayment();
+
+            System.Threading.Thread.Sleep(7000);
 
             // return to the Licences tab
             string licencesLink = "Licences";
@@ -325,8 +402,8 @@ namespace bdd_tests
         }
 
         [And(@"I review the federal reports")]
-        public void review_federal_reports()
-        {
+            public void review_federal_reports()
+            {
             /* 
             Page Title: Licences
             Subtitle:   Cannabis Retail Store Licences
@@ -391,39 +468,6 @@ namespace bdd_tests
             // TODO: determine next steps
         }
 
-        [And(@"I request a third party operator")]
-        public void third_party_operator()
-        {
-            /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            */
-
-            string assignThirdParty = "Assign Third Party Operator";
-
-            // click on the Assign Third Party Operator Link
-            NgWebElement uiAssignThirdPartyOp = ngDriver.FindElement(By.LinkText(assignThirdParty));
-            uiAssignThirdPartyOp.Click();
-
-            /* 
-            Page Title: Assigning Third Party Operator for Cannabis Retail Store Licence
-            */
-
-            // TODO: select the business name of third party operator
-
-            // click on authorized to submit checkbox
-            NgWebElement authorizedToSubmit = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
-            authorizedToSubmit.Click();
-
-            // click on signature agreement checkbox
-            NgWebElement signatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
-            signatureAgreement.Click();
-
-            // click on submit button
-            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
-            submitButton.Click();
-        }
-
         [And(@"I show the store as open on the map")]
         public void show_store_open_on_map()
         {
@@ -460,6 +504,14 @@ namespace bdd_tests
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
 
+            System.Threading.Thread.Sleep(7000);
+
+            string dashboard = "Dashboard";
+
+            // click on the Dashboard link
+            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
+            uiDashboard.Click();
+
             // confirm that relocation request is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Relocation Request')]")).Displayed);
 
@@ -469,8 +521,8 @@ namespace bdd_tests
             // TODO: confirm that a transfer of ownership request is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' ')]")).Displayed);
 
-            // TODO: confirm that a third party operator request is displayed
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' ')]")).Displayed);
+            // confirm that a structural change request is displayed
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Structural Change')]")).Displayed);
         }
     }
 }
