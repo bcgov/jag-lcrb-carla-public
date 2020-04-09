@@ -40,3 +40,4 @@ node_modules/
 /watchdog/Watchdog/bin/Debug/netcoreapp3.1
 /watchdog/Watchdog/obj
 /watchdog/healthchecksdb
+/orgbook-service/.vs/orgbook-service

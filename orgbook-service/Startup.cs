@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using System.Net.Mime;
 using Newtonsoft.Json;
 using System.Linq;
+using HealthChecks.UI.Client;
 
 namespace Gov.Lclb.Cllb.OrgbookService
 {
@@ -121,7 +122,11 @@ namespace Gov.Lclb.Cllb.OrgbookService
                 }
             };
 
-            app.UseHealthChecks("/hc/ready", healthCheckOptions);
+            app.UseHealthChecks("/hc/ready", new HealthCheckOptions
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
 
             app.UseHealthChecks("/hc/live", new HealthCheckOptions
             {
