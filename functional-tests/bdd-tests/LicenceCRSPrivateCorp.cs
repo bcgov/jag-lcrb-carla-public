@@ -94,7 +94,6 @@ namespace bdd_tests
 
             // enter the reason for the opening date
             NgWebElement uiReasonDate = ngDriver.FindElement(By.XPath("//textarea"));
-            //NgWebElement uiReasonDate = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-and-licence-fee/div/div[2]/div[2]/section[2]/div/app-field[2]/section/div/section/textarea"));
             uiReasonDate.SendKeys(reasonDay);
        
             NgWebElement paymentButton = ngDriver.FindElement(By.XPath("//button[contains(.,' PAY LICENCE FEE AND RECEIVE LICENCE')]"));
