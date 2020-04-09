@@ -36,6 +36,7 @@ export class ApplicationLicenseSummary {
   actionApplications: LicenceActionApplication[];
   events: LicenceEvent[];
   transferRequested: string;
+  tpoRequested: string; // indicate whether a third-party operator application is in progress
 }
 
 export interface LicenceActionApplication {
