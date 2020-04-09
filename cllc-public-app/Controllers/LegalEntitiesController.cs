@@ -258,11 +258,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error reading LegalEntityChangeLog: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+                _logger.LogError(httpOperationException, $"Error reading LegalEntityChangelog");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unexpected Exception while reading LegalEntityChangeLogy");
+                _logger.LogError(e, $"Unexpected Exception while reading LegalEntityChangelog");
             }
             return new JsonResult(result);
         }
@@ -282,11 +282,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error reading LegalEntityChangeLog: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+                _logger.LogError(httpOperationException, $"Error reading LegalEntityChangelog");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unexpected Exception while reading LegalEntityChangeLogy");
+                _logger.LogError(e, $"Unexpected Exception while reading LegalEntityChangelog");
             }
             return new JsonResult(result);
         }
@@ -335,7 +335,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error while patching legal entity: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+                _logger.LogError(httpOperationException, $"Error while patching legal entity");
             }
             catch (Exception e)
             {

@@ -719,11 +719,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                         }
                         catch (HttpOperationException httpOperationException)
                         {
-                            _logger.LogError("Error updating Contact");
-                            _logger.LogError("Request:");
-                            _logger.LogError(httpOperationException.Request.Content);
-                            _logger.LogError("Response:");
-                            _logger.LogError(httpOperationException.Response.Content);
+                            _logger.LogError(httpOperationException, "Error updating Contact");
                             // fail if we can't create.
                             throw (httpOperationException);
                         }
@@ -760,11 +756,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                         }
                         catch (HttpOperationException httpOperationException)
                         {
-                            _logger.LogError("Error updating Contact");
-                            _logger.LogError("Request:");
-                            _logger.LogError(httpOperationException.Request.Content);
-                            _logger.LogError("Response:");
-                            _logger.LogError(httpOperationException.Response.Content);
+                            _logger.LogError(httpOperationException, "Error updating Contact");
                             // fail if we can't update.
                             throw (httpOperationException);
                         }
@@ -783,11 +775,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                         }
                         catch (HttpOperationException httpOperationException)
                         {
-                            _logger.LogError("Error updating Worker");
-                            _logger.LogError("Request:");
-                            _logger.LogError(httpOperationException.Request.Content);
-                            _logger.LogError("Response:");
-                            _logger.LogError(httpOperationException.Response.Content);
+                            _logger.LogError(httpOperationException, "Error updating Worker");
                         }
 
                     }
