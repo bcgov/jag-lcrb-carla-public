@@ -4,30 +4,46 @@
   <div *ngIf="account?.businessType">
     <div [formGroup]="form" style="padding-left: 45px; position: relative">
       <!-- Title -->
-      <h1 class="ngtest-page-title">Assing Third Party Operator for {{licence.licenseType}} Licence</h1>
+      <h1 class="ngtest-page-title">Add or Change a Third Party Operator</h1>
     </div>
 
     <div [formGroup]="form" class="application-wrapper">
       <!-- Preamble -->
       <section class="ngtest-preamble-content">
         <p>
-          Disclaimer content here
+            This application must be completed when a licensee wishes to engage a third party to manage the operation 
+            of the licensee's establishment.  The third party operator participates in a contractual agreement with 
+            the licensee and benefits financially from the arrangement. The third party operator agreement must be in 
+            place when a licensee wishes to engage a third party--either a proprietorship, corporate entity or partnership 
+            to manage the operation of the licensee's establishment. A third party operator:
         </p>
+        <ul>
+          <li>is not an employee of the licensee </li>
+          <li>must be approved by the Liquor and Cannabis Regulation Branch</li>
+          <li>does not assume accountability for the overall operation of the establishment on behalf of the licensee as the licensee remains responsible for all activities within the licensed establishment </li>
+          <li>must not enter into an agreement or allow another person to use the licence </li>
+          <li>must be 19 years of age or over </li>
+          <li>is subject to the same suitability assessment as the licensee</li>
+          <li>is not permitted to make application for a change to the licence or sign applications on behalf of the licensee.</li>
+        </ul>
       </section>
 
 
       <!-- Before Starting -->
       <h3 class="blue-header">BEFORE STARTING THE APPLICATION</h3>
-      <section class="padded-section">
+      <section class="padded-section content-bottom">
         <div class="ngtest-before-starting-content">
           <p>
-            Before you start content here
+            Before starting, please ensure that the third party operator you wish to has logged into this website and specified
+            their basic account information. <br>
+            <strong>Important: If they do not first log into this site, you will not be able to proceed with this application</strong>.
+
           </p>
         </div>
       </section>
 
       <h3 class="blue-header">LICENCE TO BE ASSIGNED AS THIRD PARTY OPERATOR</h3>
-      <section class="padded-section">
+      <section class="padded-section content-bottom">
         <app-field label="Licence" [required]="false">
           <input class="form-control" style="width: 500px;" type="text" [readonly]="true"
             formControlName="licenseNumber">
@@ -73,7 +89,7 @@
       </section>
 
       <h3 class="blue-header">IDENTIFY THE THIRD PARTY OPERATOR</h3>
-      <section class="padded-section">
+      <section class="padded-section content-bottom">
         <app-field label="Search for the business name to be a third party operator of  your licence:"
           errorMessage="Please select a value" [required]="true" [valid]="isValidOrNotTouched('proposedTPO.accountId')">
           <app-account-picker (valueSelected)="onAccountSelect($event)"></app-account-picker>
@@ -88,7 +104,7 @@
       <h3 class="blue-header ngtest-declarations">
         DECLARATIONS
       </h3>
-      <div class="padded-section">
+      <div class="padded-section content-bottom">
         <section>
           <div>
             The application must only be submitted by an individual with the authority to bind the applicant. The

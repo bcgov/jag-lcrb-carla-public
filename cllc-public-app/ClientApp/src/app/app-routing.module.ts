@@ -183,6 +183,12 @@ const routes: Routes = [
     component: ApplicationOwnershipTransferComponent,
     canActivate: [BCeidAuthGuard]
   },
+  /* TO DO
+  {
+    path: 'cancel-third-party-operator/:licenceId',
+    component: ApplicationCancelThirdPartyOperatorComponent,
+    canActivate: [BCeidAuthGuard]
+  },*/
   {
     path: 'third-party-operator/:licenceId',
     component: ApplicationThirdPartyOperatorComponent,
