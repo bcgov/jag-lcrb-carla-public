@@ -3,12 +3,15 @@ import { Subscription } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SpecificLocation, FoodService, Entertainment, EventType, LicenceEvent, EventStatus } from '../../models/licence-event.model';
 import { LicenceEventsService } from '@services/licence-events.service';
-import { takeWhile, switchMap } from 'rxjs/operators';
+import { takeWhile } from 'rxjs/operators';
 import { AppState } from '@app/app-state/models/app-state';
 import { Store } from '@ngrx/store';
 import { User } from '@models/user.model';
 import { FormBase } from '@shared/form-base';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import * as _moment from 'moment';
 
 const DEFAULT_START_TIME = {
   hour: 9,
@@ -19,11 +22,31 @@ const DEFAULT_END_TIME = {
   minute: 0
 };
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL'
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'YYYY-MM-DD',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-event-form',
   templateUrl: './event-form.component.html',
   styleUrls: ['./event-form.component.scss'],
+  providers: [
+    // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
+    // application's root module. We provide it at the component level here, due to limitations of
+    // our example generation script.
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }  ],
 })
 export class EventFormComponent extends FormBase implements OnInit {
   isEditMode = false;
@@ -146,11 +169,11 @@ export class EventFormComponent extends FormBase implements OnInit {
       city: licenceEvent.city,
       province: licenceEvent.province,
       postalCode: licenceEvent.postalCode,
-      startDate: new Date(licenceEvent.startDate),
-      endDate: new Date(licenceEvent.endDate),
+      startDate: _moment.utc(licenceEvent.startDate),
+      endDate: _moment.utc(licenceEvent.endDate),
       agreement: false
     });
-    
+
     if (this.isReadOnly) {
       this.eventForm.disable();
     }
@@ -362,15 +385,15 @@ export class EventFormComponent extends FormBase implements OnInit {
     } else if (this.eventForm.controls['endDate'].value === null || this.eventForm.controls['endDate'].value === '') {
       this.endDateMinimum = this.eventForm.controls['startDate'].value;
       this.endDateMaximum = new Date(this.eventForm.controls['startDate'].value);
-      this.endDateMaximum.setDate(this.eventForm.controls['startDate'].value.getDate() + 30);
+      this.endDateMaximum.setDate(this.eventForm.controls['startDate'].value.date() + 30);
     } else {
       // start and end date
-      if (this.eventForm.controls['endDate'].value.getTime() < this.eventForm.controls['startDate'].value.getTime()) {
+      if (this.eventForm.controls['endDate'].value < this.eventForm.controls['startDate'].value) {
         this.eventForm.controls['endDate'].setValue(null);
       }
       this.endDateMinimum = this.eventForm.controls['startDate'].value;
       this.endDateMaximum = new Date(this.eventForm.controls['startDate'].value);
-      this.endDateMaximum.setDate(this.eventForm.controls['startDate'].value.getDate() + 30);
+      this.endDateMaximum.setDate(this.eventForm.controls['startDate'].value.date() + 30);
     }
   }
 
