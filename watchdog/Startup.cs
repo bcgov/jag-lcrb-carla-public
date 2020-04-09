@@ -8,6 +8,15 @@ using Microsoft.Extensions.Hosting;
 
 namespace Watchdog
 {
+    public static class HCUIextensions {
+        public static void AddHealthCheckEndpointIfExists(this HealthChecks.UI.Configuration.Settings setup, string name, string uri)
+    {
+        if (!string.IsNullOrEmpty(uri))
+        {
+            setup.AddHealthCheckEndpoint(name, uri);
+        }
+    }
+}
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -16,6 +25,8 @@ namespace Watchdog
         }
 
         public IConfiguration Configuration { get; }
+
+        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -28,18 +39,15 @@ namespace Watchdog
             {
                 //setup.SetHealthCheckDatabaseConnectionString("Data Source=./healthchecksdb");
                 setup.AddHealthCheckEndpoint("Watchdog", "/healthcheck");
-
-                string portalHealthCheck = Configuration["PORTAL_HEALTH_URI"];
-                //setup.AddHealthCheckEndpoint("Portal", portalHealthCheck);
                 
-                setup.AddHealthCheckEndpoint("PDF", Configuration["PDF_HEALTH_URI"]);
-                /*
-                //setup.AddHealthCheckEndpoint("File Manager", Configuration["FILE_MANAGER_HEALTH_URI"]);
-                setup.AddHealthCheckEndpoint("Federal Reporting", Configuration["FEDERAL_REPORTING_HEALTH_URI"]);
-                setup.AddHealthCheckEndpoint("Geocoder", Configuration["GEOCODER_HEALTH_URI"]);
-                setup.AddHealthCheckEndpoint("One Stop", Configuration["ONE_STOP_HEALTH_URI"]);
-                setup.AddHealthCheckEndpoint("Redis", Configuration["REDIS_HEALTH_URI"]);
-                */
+                setup.AddHealthCheckEndpointIfExists("Portal API", Configuration["PORTAL_HEALTH_URI"]);
+                setup.AddHealthCheckEndpointIfExists("PDF", Configuration["PDF_HEALTH_URI"]);                
+                setup.AddHealthCheckEndpointIfExists("File Manager", Configuration["FILE_MANAGER_HEALTH_URI"]);
+                setup.AddHealthCheckEndpointIfExists("Federal Reporting", Configuration["FEDERAL_REPORTING_HEALTH_URI"]);
+                setup.AddHealthCheckEndpointIfExists("Geocoder", Configuration["GEOCODER_HEALTH_URI"]);
+                setup.AddHealthCheckEndpointIfExists("One Stop", Configuration["ONE_STOP_HEALTH_URI"]);
+                setup.AddHealthCheckEndpoint("Org Book", Configuration["ORG_BOOK_URI"]);
+                
                 //setup.AddWebhookNotification("webhook1", uri: "http://httpbin.org/status/200?code=ax3rt56s", payload: "{...}");
             });
             
