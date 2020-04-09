@@ -23,6 +23,8 @@ using System.Net;
 using Grpc.Net.Client;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Gov.Lclb.Cllb.Services.FileManager;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Client;
 
 namespace Gov.Lclb.Cllb.FederalReportingService
 {
@@ -119,8 +121,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
-        {
-            app.UseHealthChecks("/hc");
+        {            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -156,6 +157,12 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             {
                 SetupHangfireJobs(app, loggerFactory);
             }
+
+            app.UseHealthChecks("/hc", new HealthCheckOptions
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
 
             if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]) &&
                 !string.IsNullOrEmpty(Configuration["SPLUNK_TOKEN"])
