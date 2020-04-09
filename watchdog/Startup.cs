@@ -38,7 +38,7 @@ namespace Watchdog
             services.AddHealthChecksUI(setupSettings: setup =>
             {
                 //setup.SetHealthCheckDatabaseConnectionString("Data Source=./healthchecksdb");
-                setup.AddHealthCheckEndpoint("Watchdog", "/healthcheck");
+                setup.AddHealthCheckEndpoint("Watchdog", "/hc/ready");
                 
                 setup.AddHealthCheckEndpointIfExists("Portal API", Configuration["PORTAL_HEALTH_URI"]);
                 setup.AddHealthCheckEndpointIfExists("PDF", Configuration["PDF_HEALTH_URI"]);                
@@ -63,10 +63,16 @@ namespace Watchdog
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHealthChecks("/healthcheck", new HealthCheckOptions
+            app.UseHealthChecks("/hc/ready", new HealthCheckOptions
             {
                 Predicate = _ => true,
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
+
+            app.UseHealthChecks("/hc/live", new HealthCheckOptions
+            {
+                // Exclude all checks and return a 200-Ok.
+                Predicate = (_) => false
             });
 
             app.UseRouting()
