@@ -135,31 +135,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return File(new System.Text.UTF8Encoding().GetBytes(jsonData), "application/json", "BC-Retail-Cannabis-Stores.json");
         }
         private List<EstablishmentMapData> GetMapData(string search)
-        {
-            /*
-            string communicationRegionsCacheKey = "LGIN_REGIONS";
-            Dictionary<int, string> communicationRegions;
-            if (!_cache.TryGetValue(communicationRegionsCacheKey, out communicationRegions))
-            {
-                // populate the communicationRegions.
-                try
-                {
-                    var regions = _dynamicsClient.Globaloptionsetdefinitions.GetByKey("46b91aec-49a5-4859-bd5b-e9edba00bb9d");
-                    foreach (var region in regions.Options)
-                    {
-
-                    }
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError(e, "Error getting communication regions.");
-                }
-                
-            }
-
-            */
-
-
+        {            
             string cacheKey;
             if (string.IsNullOrEmpty(search))
             {
@@ -190,12 +166,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError("Error getting applications" + httpOperationException.Request.Content + "\n" + httpOperationException.Response.Content);
+                        _logger.LogError(httpOperationException, "Error getting applications");
                         throw new Exception("Unable to get applications");
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError($"Unexpected error getting applications {e.Message}");
+                        _logger.LogError(e, "Unexpected error getting applications");
                     }
 
                     // get licenses

@@ -82,7 +82,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 MicrosoftDynamicsCRMaccount adoxioAccount = await _dynamicsClient.GetAccountByIdAsync(accountId);
                 if (adoxioAccount == null)
                 {
-                    _logger.LogError("Account NOT found.");
+                    _logger.LogError($"Account {accountId} NOT found.");
                     return new NotFoundResult();
                 }
                 adoxioAccount = new MicrosoftDynamicsCRMaccount();

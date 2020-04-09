@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Gov.Lclb.Cllb.Public.Utils;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager {
 
         public static void CreateFolderIfNotExist (this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string folderName)
         {
+            string logFolderName = WordSanitizer.Sanitize(folderName);
             try
             {
                 
@@ -33,12 +35,12 @@ namespace Gov.Lclb.Cllb.Services.FileManager {
 
                 if (createFolderResult.ResultStatus == ResultStatus.Fail)
                 {
-                    _logger.LogError($"Error creating folder for entity {entityName} and folder {folderName}. Error is {createFolderResult.ErrorDetail}");
+                    _logger.LogError($"Error creating folder for entity {entityName} and folder {logFolderName}. Error is {createFolderResult.ErrorDetail}");
                 }
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Error creating folder for account {entityName} and folder {folderName}");
+                _logger.LogError(e, $"Error creating folder for account {entityName} and folder {logFolderName}");
             }
         }
 
