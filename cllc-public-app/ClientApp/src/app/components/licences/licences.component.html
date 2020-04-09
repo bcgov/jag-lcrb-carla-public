@@ -132,7 +132,15 @@
                     </a>
                   </p>
                 </div>
+                <div *ngIf="!licenceHasExpired(item.expiryDate) && item.tpoRequested === 'Yes'" class="licence-expired">
+                  <strong>Third Party Operator Application Initiated</strong> <br />
+                  <!-- TO DO: Finish Cancellation logic-->
+                    <!--a [routerLink]="[ '/cancel-third-party-operator/' + item.licenseId]" class="missing">
+                    <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Cancel Application</span>
+                  </a-->
+                </div>
               </td>
+
 
               <td style="background-color: #E1E8F2; padding: 10px;">
                 <!-- 3rd Party Operators cannot submit  changes -->
@@ -147,7 +155,8 @@
                     </p>
                   </div>
                 </ng-container>
-                <ng-container *ngIf="!licenceHasExpired(item.expiryDate)">
+                <!-- if there is a third party application in progress, we don't show the ability to submit a new application-->
+                <ng-container *ngIf="!licenceHasExpired(item.expiryDate) && item.tpoRequested == 'No' && item?.licenceTypeName !== ApplicationTypeNames.CannabisRetailStore">
                   <div *ngIf="item.status != PAYMENT_REQUIRED">
                     <p>
                       <a *ngIf="licenceTransferFeatureOn" [routerLink]="[ '/third-party-operator/' + item.licenseId]">
@@ -179,6 +188,7 @@
 
                 </section>
 
+
               <section *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested === 'Yes' && licenceTransferFeatureOn)"
                        class="licence-expired">
                 <strong>TRANSFER INITIATED</strong> <br />
@@ -186,6 +196,7 @@
                   <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Cancel Transfer</span>
                 </a>
               </section>
+
               </div>
               <section *ngIf="item.isOperated"><i>3rd-Party Operators cannot request changes to the licence. All change requests
                 for the licence must be requested by the Licensee.</i>
