@@ -392,7 +392,7 @@ namespace bdd_tests
         }
 
         [And(@"I request a third party operator")]
-        public void transfer_store_ownership()
+        public void third_party_operator()
         {
             /* 
             Page Title: Licences

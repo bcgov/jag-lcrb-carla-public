@@ -68,7 +68,7 @@ namespace bdd_tests
         {
             /* 
             Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
+            Subtitle:   Catering Licences
             */
 
             string firstYearLicenceFee = "Pay First Year Licensing Fee";
@@ -94,7 +94,7 @@ namespace bdd_tests
         {
             /* 
             Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
+            Subtitle:   Catering Licences
             */
 
             string requestEventAuthorization = "Request Event Authorization";
@@ -102,6 +102,10 @@ namespace bdd_tests
             // click on the request event authorization link
             NgWebElement uiRequestEventAuthorization = ngDriver.FindElement(By.LinkText(requestEventAuthorization));
             uiRequestEventAuthorization.Click();
+
+            /* 
+            Page Title: Catered Event Authorization Request
+            */
 
             // create event authorization data
             string eventContactName = "AutoTestEventContactName";
@@ -217,34 +221,226 @@ namespace bdd_tests
         [And(@"I request a valid store name or branding change")]
         public void name_branding_change()
         {
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
+
+            string nameBrandingLink = "Request Store Name or Branding Change";
+
+            // click on the Request Store Name or Branding Change link
+            NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLink));
+            uiRequestChange.Click();
+
+            /* 
+            Page Title: Please Review the Account Profile
+            */
+
+            // click on the Continue to Application button
+            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
+            continueButton.Click();
+
+            /*
+            Page Title: Submit a Name or Branding Change Application
+            */
+
+            // find the upload test file in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload a supporting document
+            string supportingDocument = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+            NgWebElement uploadSupportingDoc = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+            uploadSupportingDoc.SendKeys(supportingDocument);
+
+            // click on the authorized to submit checkbox
+            NgWebElement uiAuthSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            uiAuthSubmit.Click();
+
+            // click on the signature agreement checkbox
+            NgWebElement uiSigAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
+            uiSigAgreement.Click();
+
+            // click on the Submit & Pay button
+            NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
+            submitpayButton.Click();
+
+            // pay for the relocation application
+            MakePayment();
+
+            // return to the Licences tab
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
         }
 
         [And(@"I request a store relocation")]
         public void request_store_relocation()
         {
+            /* 
+            Page Title: Licences
+            Subtitle: Catering Licences
+            */
+
+            string requestRelocationLink = "Request Relocation";
+
+            // click on the request location link
+            NgWebElement uiRequestRelocation = ngDriver.FindElement(By.LinkText(requestRelocationLink));
+            uiRequestRelocation.Click();
+
+            /* 
+            Page Title: Please Review the Account Profile
+            */
+
+            // click on the Continue to Application button
+            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
+            continueButton.Click();
+
+            /* 
+            Page Title: Submit a Licence Relocation Application
+            */
+
+            //string proposedAddress = "Automated Test Street";
+            //string proposedCity = "Automated City";
+            //string proposedPostalCode = "A1A 1A1";
+
+            // enter the proposed street address
+            //NgWebElement uiProposedAddress = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div/div[1]/div[2]/section[2]/section/div[3]/address/app-field[1]/section/div[1]/section/input"));
+            //uiProposedAddress.SendKeys(proposedAddress);
+
+            // enter the proposed city
+            //NgWebElement uiProposedCity = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div/div[1]/div[2]/section[2]/section/div[3]/address/app-field[2]/section/div[1]/section/input"));
+            //uiProposedCity.SendKeys(proposedCity);
+
+            // enter the postal code
+            //NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div/div[1]/div[2]/section[2]/section/div[3]/address/section[2]/app-field/section/div[1]/section/input"));
+            //uiProposedPostalCode.SendKeys(proposedPostalCode);
+
+            // find the upload test file in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload a supporting document
+            string supportingDocument = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "checklist.pdf");
+            NgWebElement uploadSupportingDoc = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+            uploadSupportingDoc.SendKeys(supportingDocument);
+
+            // select the authorized to submit checkbox
+            NgWebElement uiAuthToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            uiAuthToSubmit.Click();
+
+            // select the signature agreement checkbox
+            NgWebElement uiSigAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
+            uiSigAgreement.Click();
+
+            // click on the Submit & Pay button
+            NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
+            submitpayButton.Click();
+
+            // pay for the relocation application
+            MakePayment();
+
+            // return to the Licences tab
+            string licencesLink = "Licences";
+
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
         }
    
         [And(@"I request a third party operator")]
         public void request_third_party_operator()
         {
-        }
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
 
+            string assignThirdParty = "Assign Third Party Operator";
+
+            // click on the Assign Third Party Operator Link
+            NgWebElement uiAssignThirdPartyOp = ngDriver.FindElement(By.LinkText(assignThirdParty));
+            uiAssignThirdPartyOp.Click();
+
+            /* 
+            Page Title: Assigning Third Party Operator for Catering Licence
+            */
+
+            // TODO: select the business name of third party operator
+
+            // click on authorized to submit checkbox
+            NgWebElement authorizedToSubmit = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            authorizedToSubmit.Click();
+
+            // click on signature agreement checkbox
+            NgWebElement signatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
+            signatureAgreement.Click();
+
+            // click on submit button
+            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
+            submitButton.Click();
+        }
 
         [And(@"I request a transfer of ownership")]
         public void request_transfer_of_ownership()
         {
-        }
- 
-
-        [Then(@"the requested applications are visible on the dashboard")]
-        public void licences_tab_updated()
-        {
             /* 
             Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
+            Subtitle:   Catering Licences
             */
 
-            //Assert.True (ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
+            string transferOwnership = "Transfer Ownership";
+
+            // click on the Transfer Ownership link
+            NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
+            uiTransferOwnership.Click();
+
+            /* 
+            Page Title: Transfer Your Catering Licence
+            */
+
+            // TODO: search for the proposed licensee
+
+            // click on consent to licence transfer checkbox
+            NgWebElement consentToTransfer = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-ownership-transfer/div/div[2]/div[2]/section[5]/app-field/section/div/section/section/input"));
+            consentToTransfer.Click();
+
+            // click on authorize signature checkbox
+            NgWebElement authorizeSignature = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-ownership-transfer/div/div[2]/div[2]/div/app-field[1]/section/div/section/section/input"));
+            authorizeSignature.Click();
+
+            // click on signature agreement checkbox
+            NgWebElement signatureAgreement = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-ownership-transfer/div/div[2]/div[2]/div/app-field[2]/section/div/section/section/input"));
+            signatureAgreement.Click();
+
+            // click on submit transfer button
+            NgWebElement submitTransferButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT TRANSFER')]"));
+            submitTransferButton.Click();
+
+            // TODO: determine next steps
+        }
+
+        [Then(@"the requested applications are visible on the dashboard")]
+        public void applications_visible_on_dashboard()
+        {
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
+
+            // confirm that relocation request is displayed
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Relocation Request')]")).Displayed);
+
+            // confirm that a name or branding change request is displayed
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Name or Branding Change')]")).Displayed);
+
+            // TODO: confirm that a transfer of ownership request is displayed
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' ')]")).Displayed);
+
+            // TODO: confirm that a third party operator request is displayed
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' ')]")).Displayed);
         }
 
     }
