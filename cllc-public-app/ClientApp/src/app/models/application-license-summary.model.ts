@@ -39,6 +39,7 @@ export class ApplicationLicenseSummary {
   actionApplications: LicenceActionApplication[];
   events: LicenceEvent[];
   transferRequested: string;
+  tpoRequested: string; // indicates a Third Party Application in Progress
 
   thirdPartyOperatorAccountName: string;
   isOperated: boolean; // only used on the client side
