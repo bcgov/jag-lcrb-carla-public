@@ -73,12 +73,14 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
-    this.snackBar.open('The link is copied to the clipboard', '', { duration: 2500, panelClass: ['green-snackbar'] });
+    this.snackBar.open('The link is copied to the clipboard and can be shared', '', { duration: 2500, panelClass: ['green-snackbar'] });
   }
 
   showLiquorContent(): boolean {
     let show = false;
-    if ((!this.applicationId && this.liquorLicenceExist) || this.isLiquorApplication) {
+    // always show the liquor content if accessing from the dashboard 
+    // or if it is for a liquor application
+    if ((!this.applicationId) || this.isLiquorApplication) {
       show = true;
     }
     return show;
@@ -86,7 +88,9 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
 
   showCannabisContent(): boolean {
     let show = false;
-    if ((!this.applicationId && this.cannabisLicenceExist) || this.isCannabisApplication) {
+    // always show the Cannabis content if accessing from the dashboard 
+    // or if it is for a cannabis application
+    if ((!this.applicationId) || this.isCannabisApplication) {
       show = true;
     }
     return show;
