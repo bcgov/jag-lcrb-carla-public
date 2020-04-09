@@ -118,7 +118,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 ExpiryDate = licence.AdoxioExpirydate,
                 Status = StatusUtility.GetLicenceStatus(licence, applications),
                 AllowedActions = new List<ApplicationType>(),
-                TransferRequested = (TransferRequested?)licence.AdoxioTransferrequested
+                TransferRequested = (TransferRequested?)licence.AdoxioTransferrequested,
+                TPORequested = (TPORequested?)licence.AdoxioTporequested // indicate whether a third party operator app has been requested
             };
 
             if(licence.AdoxioThirdPartyOperatorId != null){
