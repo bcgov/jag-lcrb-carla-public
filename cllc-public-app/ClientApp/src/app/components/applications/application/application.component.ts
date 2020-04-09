@@ -121,12 +121,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
         establishmentAddressPostalCode: [''],
         establishmentParcelId: ['']
       }),
-      proposedTPO: this.fb.group({
-        accountId: ['', [Validators.required]],
-        accountName: [{value: '', disabled: true}],
-        contactName: [{value: '', disabled: true}],
-        businessType: [{value: '', disabled: true}],
-      }),
       establishmentName: ['', [
         Validators.required,
         this.establishmentWatchWordsService.forbiddenNameValidator()
@@ -571,6 +565,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (!this.isHoursOfSaleValid()) {
       this.validationMessages.push('Hours of sale are required');
     }
+
     if (!this.form.valid) {
       this.validationMessages.push('Some required fields have not been completed');
     }
