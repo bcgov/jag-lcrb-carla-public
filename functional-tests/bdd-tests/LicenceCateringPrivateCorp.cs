@@ -303,22 +303,6 @@ namespace bdd_tests
             Page Title: Submit a Licence Relocation Application
             */
 
-            //string proposedAddress = "Automated Test Street";
-            //string proposedCity = "Automated City";
-            //string proposedPostalCode = "A1A 1A1";
-
-            // enter the proposed street address
-            //NgWebElement uiProposedAddress = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div/div[1]/div[2]/section[2]/section/div[3]/address/app-field[1]/section/div[1]/section/input"));
-            //uiProposedAddress.SendKeys(proposedAddress);
-
-            // enter the proposed city
-            //NgWebElement uiProposedCity = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div/div[1]/div[2]/section[2]/section/div[3]/address/app-field[2]/section/div[1]/section/input"));
-            //uiProposedCity.SendKeys(proposedCity);
-
-            // enter the postal code
-            //NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div/div[1]/div[2]/section[2]/section/div[3]/address/section[2]/app-field/section/div[1]/section/input"));
-            //uiProposedPostalCode.SendKeys(proposedPostalCode);
-
             // find the upload test file in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
@@ -344,6 +328,8 @@ namespace bdd_tests
             // pay for the relocation application
             MakePayment();
 
+            System.Threading.Thread.Sleep(7000);
+
             // return to the Licences tab
             string licencesLink = "Licences";
 
@@ -359,14 +345,14 @@ namespace bdd_tests
             Subtitle:   Catering Licences
             */
 
-            string assignThirdParty = "Assign Third Party Operator";
+            string addOrChangeThirdParty = "Add or Change a Third Party Operator";
 
-            // click on the Assign Third Party Operator Link
-            NgWebElement uiAssignThirdPartyOp = ngDriver.FindElement(By.LinkText(assignThirdParty));
-            uiAssignThirdPartyOp.Click();
+            // click on the Add or Change a Third Party Operator Link
+            NgWebElement uiAddOrChangeThirdPartyOp = ngDriver.FindElement(By.LinkText(addOrChangeThirdParty));
+            uiAddOrChangeThirdPartyOp.Click();
 
             /* 
-            Page Title: Assigning Third Party Operator for Catering Licence
+            Page Title: Add or Change a Third Party Operator
             */
 
             // TODO: select the business name of third party operator
