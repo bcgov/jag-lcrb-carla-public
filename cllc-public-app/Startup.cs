@@ -153,31 +153,47 @@ namespace Gov.Lclb.Cllb.Public
             orgBook.ReadResponseAsString = true;
             services.AddTransient<IOrgBookClient>(_ => (IOrgBookClient)orgBook);
 
-            // health checks
-            services.AddHealthChecks()
-                .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
-                // No longer checking SQL Server in health checks as the SQL components are no longer active.
-#if (USE_MSSQL)
-                .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
-#endif
-                .AddCheck<DynamicsHealthCheck>("Dynamics")
-                .AddCheck<GeocoderHealthCheck>("Geocoder");
+            
 
             
 
             
             if (!string.IsNullOrEmpty(_configuration["REDIS_SERVER"]))
             {
-                services.AddDistributedRedisCache(o =>
+                string config = _configuration["REDIS_SERVER"];
+                if (!string.IsNullOrEmpty(_configuration["REDIS_PASSWORD"]))
                 {
-                    string config = _configuration["REDIS_SERVER"];
-                    if (! string.IsNullOrEmpty(_configuration["REDIS_PASSWORD"]))
-                    {
-                        string redisPassword = _configuration["REDIS_PASSWORD"];
-                        config += $",password={redisPassword}";
-                    }
+                    string redisPassword = _configuration["REDIS_PASSWORD"];
+                    config += $",password={redisPassword}";
+                }
+                services.AddDistributedRedisCache(o =>
+                {                    
                     o.Configuration = config;                    
                 });
+
+                // health checks
+                services.AddHealthChecks()
+                    .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
+                // No longer checking SQL Server in health checks as the SQL components are no longer active.
+#if (USE_MSSQL)
+                .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
+#endif
+               .AddRedis(config, name: "Redis")
+               .AddCheck<DynamicsHealthCheck>("Dynamics")
+               .AddCheck<GeocoderHealthCheck>("Geocoder");
+
+            }
+            else // checks with no redis.
+            {
+                // health checks
+                services.AddHealthChecks()
+                    .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
+                // No longer checking SQL Server in health checks as the SQL components are no longer active.
+#if (USE_MSSQL)
+                .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
+#endif
+                .AddCheck<DynamicsHealthCheck>("Dynamics")
+                    .AddCheck<GeocoderHealthCheck>("Geocoder");
             }
 
             // session will automatically use redis or another distributed cache if it is available.
