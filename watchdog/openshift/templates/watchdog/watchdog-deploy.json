@@ -95,7 +95,7 @@
 				  {
                     "name": "ORG_BOOK_URI",
                     "value": ""
-                  },
+                  }
 				  
                   
                 ],
@@ -175,21 +175,14 @@
       "displayName": "Name",
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
-      "value": "geocoder-service"
-    },
-	{
-      "name": "SECRET_RESOURCE_NAME",
-      "displayName": "Secret resource name",
-      "description": "Secret resource name.",
-      "required": true,
-      "value": "cllc-public"
-    },
+      "value": "watchdog"
+    },	
     {
       "name": "SOURCE_IMAGE_NAME",
       "displayName": "Source Image Name",
       "description": "The name of the image to use for this resource.",
       "required": true,
-      "value": "geocoder-service"
+      "value": "watchdog"
     },
     {
       "name": "IMAGE_NAMESPACE",
@@ -235,42 +228,6 @@
       "displayName": "Memory Request",
       "description": "Starting amount of memory the container can use.",
       "value": "512Mi"
-    },  
-    {
-		"description": "String used to identify the issuer.  Usually a URL to a website.",
-		"displayName": "JWT VALID ISSUER",
-        "name": "JWT_VALID_ISSUER",
-		"required": true,
-        "value": "http://localhost"
-    },
-    {
-		"description": "String used to identify the audience.",
-		"displayName": "JWT VALID AUDIENCE",
-        "name": "JWT_VALID_AUDIENCE",
-		"required": true,
-        "value": "http://localhost"
-    },
-    {
-		"description": "Secret/Key used to generate tokens.  Can be any text string, including the text form of a GUID.",
-		"displayName": "JWT Token Key",
-		"name": "JWT_TOKEN_KEY",
-		"required": true,
-		"value": "CHANGEME"
-    },
-    {
-      "description": "URI to the DataBC Geocoder",
-      "displayName": "Geocoder API URI",
-      "name": "GEOCODER_API_URI",
-      "required": true,
-      "value": "CHANGEME"
-    },
-    {
-      "description": "Secret/Key used to authenticate with the DataBC Geocoder",
-      "displayName": "Geocoder Key",
-      "name": "GEOCODER_API_KEY",
-      "required": true,
-      "value": "CHANGEME"
     }
-
   ]
 }

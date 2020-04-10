@@ -37,8 +37,13 @@ namespace Watchdog
             // Registers required services for health checks
             services.AddHealthChecksUI(setupSettings: setup =>
             {
-                //setup.SetHealthCheckDatabaseConnectionString("Data Source=./healthchecksdb");
-                setup.AddHealthCheckEndpoint("Watchdog", "/hc/ready");
+                string datasource = Configuration["DATASOURCE"];
+                if (! string.IsNullOrEmpty (datasource))
+                {
+                    setup.SetHealthCheckDatabaseConnectionString($"Data Source={datasource}");
+                }
+                //
+                setup.AddHealthCheckEndpointIfExists("Watchdog", Configuration["WATCHDOG_HEALTH_URI"]);
                 
                 setup.AddHealthCheckEndpointIfExists("Portal API", Configuration["PORTAL_HEALTH_URI"]);
                 setup.AddHealthCheckEndpointIfExists("PDF", Configuration["PDF_HEALTH_URI"]);                
