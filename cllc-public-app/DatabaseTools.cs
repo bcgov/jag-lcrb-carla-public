@@ -66,6 +66,8 @@ namespace Gov.Lclb.Cllb.Public
         /// </summary>
         public static void CreateDatabaseIfNotExists(IConfiguration Configuration)
         {
+
+#if (USE_MSSQL)
             // only do this if a sa password was supplied.
             if (!string.IsNullOrEmpty(Configuration["DB_ADMIN_PASSWORD"]))
             {
@@ -115,6 +117,7 @@ namespace Gov.Lclb.Cllb.Public
                     }
                 }
             }
+#endif
         }
 
         /// <summary>
