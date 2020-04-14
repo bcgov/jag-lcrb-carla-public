@@ -51,7 +51,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 var licence = _dynamicsClient.Licenceses.GetByKey(item.LicenceId);
-                alwaysAuthorization = licence.AdoxioRequestsafetysecurityplan == null ? false : (bool)licence.AdoxioRequestsafetysecurityplan;
+                alwaysAuthorization = licence.AdoxioIseventapprovalalwaysrequired == null ? false : (bool)licence.AdoxioIseventapprovalalwaysrequired;
             }
             catch (HttpOperationException ex)
             {
@@ -158,7 +158,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 var licence = _dynamicsClient.Licenceses.GetByKey(item.LicenceId);
-                alwaysAuthorization = licence.AdoxioRequestsafetysecurityplan == null ? false : (bool)licence.AdoxioRequestsafetysecurityplan;
+                alwaysAuthorization = licence.AdoxioIseventapprovalalwaysrequired == null ? false : (bool)licence.AdoxioIseventapprovalalwaysrequired;
             }
             catch (HttpOperationException ex)
             {
