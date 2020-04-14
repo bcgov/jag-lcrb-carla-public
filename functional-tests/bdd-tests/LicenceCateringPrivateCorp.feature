@@ -8,10 +8,10 @@ Scenario: Pay First Year Catering Licence and Complete Applications
     #And I am logged in to the dashboard as a private corporation
     Given I am logged in to the dashboard as a private corporation
     And I click on the Licences tab
-    #And I pay the licensing fee
-    #And I request an event authorization
-    And I request a valid store name or branding change
+    And I pay the licensing fee
+    And I request an event authorization
+    #And I request a valid store name or branding change
     And I request a store relocation
-    And I request a third party operator
+    #And I request a third party operator
     And I request a transfer of ownership
-    Then the requested applications are visible on the dashboard
+    #Then the applications are visible on the dashboard
