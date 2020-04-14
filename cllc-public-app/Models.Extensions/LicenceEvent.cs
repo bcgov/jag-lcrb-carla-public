@@ -3,6 +3,7 @@ using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Gov.Lclb.Cllb.Public.Utils;
 using System.Collections.Generic;
+using System;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -31,9 +32,13 @@ namespace Gov.Lclb.Cllb.Public.Models
             // liquor service ends after 2am (but not community event)
             if (item.EventType != EventType.Community) {
                 item.Schedules?.ForEach((schedule) => {
-                    if (schedule.ServiceEndDateTime.Value.LocalDateTime.Hour > 2 && schedule.ServiceEndDateTime.Value.LocalDateTime.Hour < 9)
-                    {
-                        isHighRisk = true;
+                    if (schedule.ServiceEndDateTime.HasValue) {
+                        TimeZoneInfo hwZone = TimeZoneInfo.FindSystemTimeZoneById("America/Vancouver");
+                        DateTimeOffset endTime = TimeZoneInfo.ConvertTimeFromUtc(schedule.ServiceEndDateTime.HasValue ? schedule.ServiceEndDateTime.Value.DateTime : DateTime.MaxValue, hwZone);
+                        if (endTime.Hour > 2 && endTime.Hour < 9)
+                        {
+                            isHighRisk = true;
+                        }
                     }
                 });
             }
