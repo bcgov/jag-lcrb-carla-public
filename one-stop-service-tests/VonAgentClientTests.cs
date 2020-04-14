@@ -12,6 +12,7 @@ namespace one_stop_service_tests
 {
     public class VonAgentClientTests
     {
+        /*
         [Fact]
         public async Task TestCreateLicenceCredential()
         {
@@ -43,5 +44,6 @@ namespace one_stop_service_tests
 
             Assert.Equal(1, mockHttp.GetMatchCount(request));
         }
+        */
     }
 }

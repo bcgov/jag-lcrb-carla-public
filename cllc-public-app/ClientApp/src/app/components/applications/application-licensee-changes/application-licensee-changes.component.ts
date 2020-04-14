@@ -248,11 +248,10 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
           this.validationErrors = ['There are incomplete fields on the page', ...this.validationErrors];
         }
         if (this.validationErrors.length === 0) {
-
           // set value to cause invoice generationP
           this.busyPromise = this.prepareSaveRequest({ invoicetrigger: 1 })
             .pipe(mergeMap(results => {
-              const app: Application = results[0];
+              const app: Application = results[2];
               // payment is required
               if (app && app.adoxioInvoiceId) {
                 this.submitPayment();
@@ -301,9 +300,10 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     const data = this.cleanSaveData(this.treeRoot);
 
     return forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue }),
+      // 4-14-2020 - GW - Changed behavior to save the org structure change logs first before updating the application (to generate the invoice)
       this.legalEntityDataService.updateLegalEntity({ ...this.currentLegalEntities, numberOfMembers: this.treeRoot.numberOfMembers, annualMembershipFee: this.treeRoot.annualMembershipFee }, this.currentLegalEntities.id),
-      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId)
+      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId),
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue })
     );
   }
 
