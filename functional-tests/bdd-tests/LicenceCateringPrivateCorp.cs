@@ -210,7 +210,6 @@ namespace bdd_tests
             uiEventLiquorServiceTimesDifferent.Click();
 
             // select terms and conditions checkbox
-            //NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.Id("mat-checkbox-2-input"));
             NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-event-form/div/form/div[9]/div/mat-checkbox"));
             uiTermsAndConditions.Click();
 
