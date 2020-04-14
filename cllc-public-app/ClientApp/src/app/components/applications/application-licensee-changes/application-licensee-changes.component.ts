@@ -251,7 +251,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
           // set value to cause invoice generationP
           this.busyPromise = this.prepareSaveRequest({ invoicetrigger: 1 })
             .pipe(mergeMap(results => {
-              const app: Application = results[0];
+              const app: Application = results[2];
               // payment is required
               if (app && app.adoxioInvoiceId) {
                 this.submitPayment();
