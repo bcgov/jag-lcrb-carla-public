@@ -207,13 +207,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (string.IsNullOrEmpty(serverRelativeUrl) || string.IsNullOrEmpty(documentType) || string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName))
             {
                 return BadRequest();
-            }
-
-            ValidateSession();
+            }        
 
             bool hasAccess = true;
             if (checkUser)
             {
+                ValidateSession();
                 hasAccess = await CanAccessEntityFile(entityName, entityId, documentType, serverRelativeUrl).ConfigureAwait(true);
             }
 
@@ -909,6 +908,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             bool hasAccess = true;
+
             if (checkUser)
             {
                 ValidateSession();
@@ -1039,8 +1039,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             List<ViewModels.FileSystemItem> fileSystemItemVMList = new List<ViewModels.FileSystemItem>();
 
-            ValidateSession();
-
+            // 4-9-2020 - GW removed session check to resolve issue with PHS links not working.  Session checks occur further up the call stack.
 
             if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(documentType))
             {
@@ -1195,19 +1194,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task<IActionResult> UploadAttachmentInternal(string entityId, string entityName,
             IFormFile file, string documentType, bool checkUser)
         {
-            ViewModels.FileSystemItem result = null;
-            if (checkUser)
-            {
-                ValidateSession();
-            }
+            ViewModels.FileSystemItem result = null;            
 
             if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(documentType))
             {
                 return BadRequest();
             }
+
             bool hasAccess = true;
             if (checkUser)
             {
+                ValidateSession();
                 hasAccess = await CanAccessEntity(entityName, entityId).ConfigureAwait(true);
             }
 

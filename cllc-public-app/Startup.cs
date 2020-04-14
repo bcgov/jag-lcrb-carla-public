@@ -6,6 +6,9 @@ using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Authorization;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Services.FileManager;
+using Grpc.Net.Client;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
@@ -17,11 +20,10 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Microsoft.EntityFrameworkCore;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Net.Http.Headers;
@@ -33,24 +35,15 @@ using Serilog.Exceptions;
 using System;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Mime;
-using System.Text;
-using Microsoft.Extensions.Hosting;
-using System.Collections.Generic;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
-using Grpc.Net.Client;
-using Gov.Lclb.Cllb.Services.FileManager;
-using System.Net;
 
 namespace Gov.Lclb.Cllb.Public
 {
     public class Startup
-    {
-
-        
+    { 
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
@@ -160,31 +153,47 @@ namespace Gov.Lclb.Cllb.Public
             orgBook.ReadResponseAsString = true;
             services.AddTransient<IOrgBookClient>(_ => (IOrgBookClient)orgBook);
 
-            // health checks
-            services.AddHealthChecks()
-                .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
-                // No longer checking SQL Server in health checks as the SQL components are no longer active.
-#if (USE_MSSQL)
-                .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
-#endif
-                .AddCheck<DynamicsHealthCheck>("Dynamics")
-                .AddCheck<GeocoderHealthCheck>("Geocoder");
+            
 
             
 
             
             if (!string.IsNullOrEmpty(_configuration["REDIS_SERVER"]))
             {
-                services.AddDistributedRedisCache(o =>
+                string config = _configuration["REDIS_SERVER"];
+                if (!string.IsNullOrEmpty(_configuration["REDIS_PASSWORD"]))
                 {
-                    string config = _configuration["REDIS_SERVER"];
-                    if (! string.IsNullOrEmpty(_configuration["REDIS_PASSWORD"]))
-                    {
-                        string redisPassword = _configuration["REDIS_PASSWORD"];
-                        config += $",password={redisPassword}";
-                    }
+                    string redisPassword = _configuration["REDIS_PASSWORD"];
+                    config += $",password={redisPassword}";
+                }
+                services.AddDistributedRedisCache(o =>
+                {                    
                     o.Configuration = config;                    
                 });
+
+                // health checks
+                services.AddHealthChecks()
+                    .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
+                // No longer checking SQL Server in health checks as the SQL components are no longer active.
+#if (USE_MSSQL)
+                .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
+#endif
+               .AddRedis(config, name: "Redis")
+               .AddCheck<DynamicsHealthCheck>("Dynamics")
+               .AddCheck<GeocoderHealthCheck>("Geocoder");
+
+            }
+            else // checks with no redis.
+            {
+                // health checks
+                services.AddHealthChecks()
+                    .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
+                // No longer checking SQL Server in health checks as the SQL components are no longer active.
+#if (USE_MSSQL)
+                .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
+#endif
+                .AddCheck<DynamicsHealthCheck>("Dynamics")
+                    .AddCheck<GeocoderHealthCheck>("Geocoder");
             }
 
             // session will automatically use redis or another distributed cache if it is available.
@@ -432,7 +441,11 @@ namespace Gov.Lclb.Cllb.Public
                     await c.Response.WriteAsync(result);
                 }
             };
-            app.UseHealthChecks("/hc/ready", healthCheckOptions);
+            app.UseHealthChecks("/hc/ready", new HealthCheckOptions
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
 
             app.UseHealthChecks("/hc/live", new HealthCheckOptions
             {

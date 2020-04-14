@@ -1,4 +1,5 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
+using HealthChecks.UI.Client;
 using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
@@ -8,25 +9,22 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.HealthChecks;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Exceptions;
 using SoapCore;
-using Swashbuckle.AspNetCore.Swagger;
 using System;
-using System.Linq;
 using System.Reflection;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
-using Serilog;
-using Serilog.Exceptions;
-using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
@@ -123,11 +121,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             });
 
             // health checks. 
-            services.AddHealthChecks(checks =>
-            {
-                checks.AddValueTaskCheck("HTTP Endpoint", () => new
-                    ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
-            });
+            services.AddHealthChecks();
 
             
         }
@@ -202,6 +196,12 @@ namespace Gov.Lclb.Cllb.OneStopService
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB One Stop Service");
+            });
+
+            app.UseHealthChecks("/hc", new HealthCheckOptions
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
 
             // enable Splunk logger using Serilog

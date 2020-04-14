@@ -105,7 +105,7 @@ export class ApplicationThirdPartyOperatorComponent extends FormBase implements 
       }))
       .pipe(mergeMap(() => {
         if (showProgress === true) {
-          this.snackBar.open('Transfer has been initiated', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.snackBar.open('Third Party Operator Application has been initiated', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
         }
         return of(true);
       }));

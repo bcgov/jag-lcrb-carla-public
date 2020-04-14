@@ -1,6 +1,7 @@
 ﻿using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -165,9 +166,13 @@ namespace Gov.Lclb.Cllb.Geocoder
                        });
                     await c.Response.WriteAsync(result);
                 }
-            };
+            };            
 
-            app.UseHealthChecks("/hc/ready", healthCheckOptions);
+            app.UseHealthChecks("/hc/ready", new HealthCheckOptions
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
 
             app.UseHealthChecks("/hc/live", new HealthCheckOptions
             {

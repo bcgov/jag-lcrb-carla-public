@@ -24,6 +24,8 @@ using Serilog.Exceptions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Net.Http;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Client;
 
 [assembly: ApiController]
 namespace Gov.Lclb.Cllb.CarlaSpiceSync
@@ -177,7 +179,11 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 SetupHangfireJobs(app, loggerFactory);
             }
 
-            app.UseHealthChecks("/hc");
+            app.UseHealthChecks("/hc", new HealthCheckOptions
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
 
             app.UseAuthentication();
             app.UseMvc();
