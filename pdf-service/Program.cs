@@ -13,7 +13,6 @@ namespace Pdf
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseHealthChecks("/hc");
+                .UseStartup<Startup>();
     }
 }
