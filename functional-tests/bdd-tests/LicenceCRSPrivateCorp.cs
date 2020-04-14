@@ -388,6 +388,8 @@ namespace bdd_tests
             NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
             submitpayButton.Click();
 
+            System.Threading.Thread.Sleep(3000);
+
             // pay for the relocation application
             MakePayment();
 
