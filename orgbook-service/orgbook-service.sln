@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "orgbook-service", "orgbook-service.csproj", "{D8997DA0-0598-42A8-8F12-6C66D2C01803}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicsAutorest", "..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj", "{F08E1B16-C244-4380-ACA0-C1DAB7E3F18A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D8997DA0-0598-42A8-8F12-6C66D2C01803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8997DA0-0598-42A8-8F12-6C66D2C01803}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8997DA0-0598-42A8-8F12-6C66D2C01803}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8997DA0-0598-42A8-8F12-6C66D2C01803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F08E1B16-C244-4380-ACA0-C1DAB7E3F18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F08E1B16-C244-4380-ACA0-C1DAB7E3F18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F08E1B16-C244-4380-ACA0-C1DAB7E3F18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F08E1B16-C244-4380-ACA0-C1DAB7E3F18A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A270F86D-B9F6-466B-9840-81E49CF1E353}
+	EndGlobalSection
+EndGlobal

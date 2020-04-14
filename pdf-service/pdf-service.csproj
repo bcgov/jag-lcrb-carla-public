@@ -9,8 +9,9 @@
 
   <ItemGroup>
 
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="3.0.2" />
+
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.HealthChecks" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="3.1.2" />
     <PackageReference Include="Stubble.Compilation" Version="1.7.2" />
     <PackageReference Include="Stubble.Core" Version="1.7.2" />
@@ -46,10 +47,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Templates\cannabis_marketer_licence.mustache">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Templates\cannabis_licence.mustache">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Templates\catering_licence.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -58,10 +59,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Templates\wine_store_licence.mustache">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Templates\worker_qualification_letter.mustache">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

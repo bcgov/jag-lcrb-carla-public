@@ -7,8 +7,10 @@ using RichardSzalay.MockHttp;
 
 namespace one_stop_service_tests
 {
+    
     public class OrgBookClientTests
     {
+        /*
         [Fact]
         public async Task TestGetTopicIdSuccess()
         {
@@ -104,5 +106,6 @@ namespace one_stop_service_tests
 
             Assert.Null(licenceCredentialId);
         }
+        */
     }
 }
