@@ -251,19 +251,26 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
           // set value to cause invoice generationP
           this.busyPromise = this.prepareSaveRequest({ invoicetrigger: 1 })
             .pipe(mergeMap(results => {
-              const app: Application = results[2];
-              // payment is required
-              if (app && app.adoxioInvoiceId) {
-                this.submitPayment();
-              }
-              // else go to the application page
-              else if (app) {
-                this.saveComplete.emit(true);
-                if (this.redirectToDashboardOnSave) {
-                  this.router.navigateByUrl('/dashboard');
-                }
-              }
-              return of(app);
+              console.log(results);
+              const saveOverrideValue = { invoicetrigger: 1 };
+              return this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue })
+                .pipe(takeWhile(() => this.componentActive))
+                .toPromise()
+                .then(result => {
+                  const app: Application = result;
+                  // payment is required
+                  if (app && app.adoxioInvoiceId) {
+                    this.submitPayment();
+                  }
+                  // else go to the application page
+                  else if (app) {
+                    this.saveComplete.emit(true);
+                    if (this.redirectToDashboardOnSave) {
+                      this.router.navigateByUrl('/dashboard');
+                    }
+                  }
+                  return of(app);
+                });
             }))
             .toPromise()
             .then(() => {
@@ -298,13 +305,11 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
     saveOverrideValue = saveOverrideValue || {};
     const data = this.cleanSaveData(this.treeRoot);
+    //this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue })
+    
 
-    return forkJoin(
-      // 4-14-2020 - GW - Changed behavior to save the org structure change logs first before updating the application (to generate the invoice)
-      this.legalEntityDataService.updateLegalEntity({ ...this.currentLegalEntities, numberOfMembers: this.treeRoot.numberOfMembers, annualMembershipFee: this.treeRoot.annualMembershipFee }, this.currentLegalEntities.id),
-      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId),
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue })
-    );
+    return forkJoin(this.legalEntityDataService.updateLegalEntity({ ...this.currentLegalEntities, numberOfMembers: this.treeRoot.numberOfMembers, annualMembershipFee: this.treeRoot.annualMembershipFee }, this.currentLegalEntities.id),
+      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId) );
   }
 
   saveForLater() {
