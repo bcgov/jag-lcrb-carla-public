@@ -61,7 +61,7 @@ namespace bdd_tests
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
 
-        public void CarlaLoginNoCheck()
+        public void CarlaLoginNoCheck(string businessType)
         {
             // load the dashboard page
             string test_start = configuration["test_start"];
