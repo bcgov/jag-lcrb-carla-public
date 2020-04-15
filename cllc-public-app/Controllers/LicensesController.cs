@@ -221,11 +221,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                var yes = 845280001;
                 var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
                 {
                     adoxio_ThirdPartyOperatorIdODataBind = _dynamicsClient.GetEntityURI("accounts", item.AccountId),
-                    AdoxioTporequested = yes
+                    AdoxioTporequested = (int)TPORequested.Yes
                 };
 
                 // create application
@@ -264,10 +263,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                var no = 845280000;
                 var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
                 {
-                    AdoxioTporequested = no
+                    AdoxioTporequested = (int)TPORequested.No
                 };
 
                 // create application
