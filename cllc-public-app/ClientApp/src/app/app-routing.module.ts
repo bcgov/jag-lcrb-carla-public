@@ -45,6 +45,7 @@ import { EligibilityFormComponent } from '@components/eligibility-form/eligibili
 import { LiquorRenewalComponent } from '@components/applications/liquor-renewal/liquor-renewal.component';
 import { TemporaryOffsiteComponent } from '@components/temporary-offsite/temporary-offsite.component';
 import { ApplicationThirdPartyOperatorComponent } from '@components/applications/application-third-party-operator/application-third-party-operator.component';
+import { CancelThirdPartyOperatorComponent } from '@components/applications/cancel-third-party-operator/cancel-third-party-operator.component';
 
 
 const routes: Routes = [
@@ -179,16 +180,15 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
+    path: 'cancel-third-party-operator/:licenceId',
+    component: CancelThirdPartyOperatorComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
     path: 'ownership-transfer/:licenceId',
     component: ApplicationOwnershipTransferComponent,
     canActivate: [BCeidAuthGuard]
   },
-  /* TO DO
-  {
-    path: 'cancel-third-party-operator/:licenceId',
-    component: ApplicationCancelThirdPartyOperatorComponent,
-    canActivate: [BCeidAuthGuard]
-  },*/
   {
     path: 'third-party-operator/:licenceId',
     component: ApplicationThirdPartyOperatorComponent,
