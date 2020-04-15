@@ -69,67 +69,7 @@ namespace bdd_tests
         [And(@"I complete the eligibility disclosure")]
         public void complete_eligibility_disclosure()
         {
-            /* 
-            Page Title: Cannabis Retail Store Licence Eligibility Disclosure
-            */
-
-            string electricSignature = "Automated Test";
-            try
-            {
-                // select No for Question 1 using radio button
-                NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
-                noRadio1.Click();
-            }
-            catch (NoSuchElementException)
-            {
-
-            }
-
-
-            try
-            {
-                // select No for Question 2 using radio button
-                NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
-                noRadio2.Click();
-            }
-            catch (NoSuchElementException)
-            {
-
-            }
-
-            try
-            {
-                // select the certification checkbox
-                NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
-                matCheckbox.Click();
-            }
-            catch (NoSuchElementException)
-            {
-
-            }
-
-            try
-            {
-                // enter the electronic signature
-                NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
-                sigCheckbox.SendKeys(electricSignature);
-            }
-            catch (NoSuchElementException)
-            {
-
-            }
-
-            try
-            {
-                // click on the Submit button
-                NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
-                submit_button.Click();
-            }
-            catch (NoSuchElementException)
-            {
-
-            }
-            
+            CRSEligibilityDisclosure();
         }
 
         [And(@"I review the account profile")]
@@ -172,7 +112,7 @@ namespace bdd_tests
             NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             uiCalendar1.Click();
             
-            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/mat-datepicker-content/mat-calendar/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[1]/td[2]/div"));
             uiCalendar2.Click();
 
             // enter the physical street address 1
@@ -502,11 +442,8 @@ namespace bdd_tests
         public void submit_org_info()
         {
             // click on Submit Organization Info button
-            System.Threading.Thread.Sleep(7000);
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
-            System.Threading.Thread.Sleep(7000);
             submitOrgInfoButton.Click();
-            System.Threading.Thread.Sleep(7000);
         }
 
         [And(@"I complete the application")]
@@ -775,7 +712,7 @@ namespace bdd_tests
             // create the business shareholder > individual shareholder data
             string shareholderFirstNameBiz2 = "GardaWorld";
             string shareholderLastNameBiz2 = "IndividualShareholder";
-            string shareholderVotingSharesBiz2 = "Security Expert";
+            string shareholderVotingSharesBiz2 = "1800";
             string shareholderEmailBiz2 = "gardaworld@individualshareholder.com";
 
             // open business shareholder > individual shareholder form
@@ -1177,10 +1114,6 @@ namespace bdd_tests
             NgWebElement uiIndyShareVotesBiz5 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/div/input"));
             uiIndyShareVotesBiz5.SendKeys(shareholderVotingSharesBiz5);
 
-            // enter business shareholder > individual shareholder email
-            NgWebElement uiIndyShareEmailBiz5 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
-            uiIndyShareEmailBiz5.SendKeys(shareholderEmailBiz5);
-
             // enter business shareholder > individual shareholder DOB
             NgWebElement uiCalendarIndyS1Biz5 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
             uiCalendarIndyS1Biz5.Click();
@@ -1188,8 +1121,13 @@ namespace bdd_tests
             NgWebElement uiCalendarIndyS2Biz5 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-14']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
             uiCalendarIndyS2Biz5.Click();
 
-            // click on the Confirm button
+            // enter business shareholder > individual shareholder email
+            NgWebElement uiIndyShareEmailBiz5 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
+            uiIndyShareEmailBiz5.SendKeys(shareholderEmailBiz5);
 
+            // click on the Confirm button
+            //NgWebElement uiClickConfirmButton = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/table/tr/td[6]/i[1]/span"));
+            //uiClickConfirmButton.Click();
         }
     }
 }

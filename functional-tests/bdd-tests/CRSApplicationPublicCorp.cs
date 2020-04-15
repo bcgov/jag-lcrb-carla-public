@@ -66,31 +66,7 @@ namespace bdd_tests
         [And(@"I complete the eligibility disclosure")]
         public void complete_eligibility_disclosure()
         {
-            /* 
-            Page Title: Cannabis Retail Store Licence Eligibility Disclosure
-            */
-
-            string electricSignature = "Automated Test";
-
-            // select No for Question 1
-            NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
-            noRadio1.Click();
-
-            // select No for Question 2
-            NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
-            noRadio2.Click();
-
-            // select the certification checkbox
-            NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
-            matCheckbox.Click();
-
-            // enter the electronic signature
-            NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
-            sigCheckbox.SendKeys(electricSignature);
-
-            // click on the Submit button
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
-            submit_button.Click();
+            CRSEligibilityDisclosure();
         }
 
         [And(@"I review the account profile")]
@@ -136,7 +112,7 @@ namespace bdd_tests
             NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             uiCalendar1.Click();
 
-            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[1]/td[2]/div"));
             uiCalendar2.Click();
 
             // enter the physical street address 1
@@ -290,7 +266,7 @@ namespace bdd_tests
             NgWebElement openPartnerDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             openPartnerDOB.Click();
 
-            NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
             openKeyPartnerDOB1.Click();
 
             // click on Submit Organization Info button
@@ -318,6 +294,8 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
+
+            System.Threading.Thread.Sleep(7000);
 
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
@@ -435,16 +413,7 @@ namespace bdd_tests
         [And(@"I return to the dashboard")]
         public void return_to_dashboard()
         {
-            /* 
-            Page Title: Payment Approved
-            */
-
-            // confirm that payment receipt is for $7,500.00
-            Assert.True (ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-payment-confirmation/mat-card/div/div[1]/div/div/table/tr[6]/td[2][text()='$7,500.00']")).Displayed);
-
-            string retDash = "Return to Dashboard";
-            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
-            returnDash.Click();
+            CRSReturnToDashboard();
         }
 
         [And(@"the account is deleted")]
