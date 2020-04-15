@@ -68,6 +68,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public LicenseType LicenseType { get; set; }
 
-        public List<ApplicationTypeContent> contentTypes { get; set; }
+        public List<ApplicationTypeContent> ContentTypes { get; set; }
+
+        public int? IsFree { get; set; }
     }
 }
