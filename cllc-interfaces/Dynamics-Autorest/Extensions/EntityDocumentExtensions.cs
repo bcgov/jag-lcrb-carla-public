@@ -60,7 +60,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static string GetDocumentFolderName(this MicrosoftDynamicsCRMadoxioFederalreportexport exportEntity)
         {
             string entityIdCleaned = CleanGuidForSharePoint(exportEntity.AdoxioFederalreportexportid);
-            string folderName = $"federalreportexport_{entityIdCleaned}";
+            string folderName = $"{exportEntity.AdoxioName}_{entityIdCleaned}";
             return folderName;
         }
 
