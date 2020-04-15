@@ -216,6 +216,18 @@ namespace bdd_tests
             // click on the submit button
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
             submitOrgInfoButton.Click();
+
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
+
+            // click on the Event History bar - TODO
+            // NgWebElement expandEventHistory = ngDriver.FindElement(By.Id("mat-expansion-panel-header-1"));
+            // expandEventHistory.Click();
+            
+            // confirm that the Event Status = In Review and the Client or Host Name is present - TODO
+            // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
         }
 
         [And(@"I request a valid store name or branding change")]
@@ -357,7 +369,11 @@ namespace bdd_tests
             Page Title: Add or Change a Third Party Operator
             */
 
-            // TODO: select the business name of third party operator
+            string thirdparty = "GunderCorp TestBusiness";
+
+            // search for the proposed licensee
+            NgWebElement thirdPartyOperator = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+            thirdPartyOperator.SendKeys(thirdparty);
 
             // click on authorized to submit checkbox
             NgWebElement authorizedToSubmit = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
@@ -390,30 +406,46 @@ namespace bdd_tests
             Page Title: Transfer Your Catering Licence
             */
 
-            // TODO: search for the proposed licensee
+            string licensee = "GunderCorp TestBusiness";
+
+            // search for the proposed licensee
+            NgWebElement proposedLicensee = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+            proposedLicensee.SendKeys(licensee);
 
             // click on consent to licence transfer checkbox
-            NgWebElement consentToTransfer = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-ownership-transfer/div/div[2]/div[2]/section[5]/app-field/section/div/section/section/input"));
+            NgWebElement consentToTransfer = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
             consentToTransfer.Click();
 
             // click on authorize signature checkbox
-            NgWebElement authorizeSignature = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-ownership-transfer/div/div[2]/div[2]/div/app-field[1]/section/div/section/section/input"));
+            NgWebElement authorizeSignature = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
             authorizeSignature.Click();
 
             // click on signature agreement checkbox
-            NgWebElement signatureAgreement = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-ownership-transfer/div/div[2]/div[2]/div/app-field[2]/section/div/section/section/input"));
+            NgWebElement signatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[3]"));
             signatureAgreement.Click();
 
             // click on submit transfer button
             NgWebElement submitTransferButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT TRANSFER')]"));
             submitTransferButton.Click();
 
-            // TODO: determine next steps
+            // check for transfer initiated status 
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TRANSFER INITIATED')]")).Displayed);
         }
 
         [Then(@"the requested applications are visible on the dashboard")]
         public void applications_visible_on_dashboard()
         {
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
+
+            string dashboard = "Dashboard";
+
+            // click on the Dashboard link
+            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
+            uiDashboard.Click();
+
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
@@ -421,14 +453,14 @@ namespace bdd_tests
             // confirm that relocation request is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Relocation Request')]")).Displayed);
 
-            // confirm that a name or branding change request is displayed
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Name or Branding Change')]")).Displayed);
+            // confirm that a name or branding change request is displayed - TODO
+            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Name or Branding Change')]")).Displayed);
 
-            // TODO: confirm that a transfer of ownership request is displayed
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' ')]")).Displayed);
+            // TODO: confirm that a transfer of ownership request is displayed - TODO
+            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' ')]")).Displayed);
 
-            // TODO: confirm that a third party operator request is displayed
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' ')]")).Displayed);
+            // TODO: confirm that a third party operator request is displayed - TODO
+            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' ')]")).Displayed);
         }
 
     }
