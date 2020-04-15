@@ -134,10 +134,13 @@
                 </div>
                 <div *ngIf="!licenceHasExpired(item.expiryDate) && item.tpoRequested === 'Yes'" class="licence-expired">
                   <strong>Third Party Operator Application Initiated</strong> <br />
-                  <!-- TO DO: Finish Cancellation logic-->
-                    <!--a [routerLink]="[ '/cancel-third-party-operator/' + item.licenseId]" class="missing">
-                    <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Cancel Application</span>
-                  </a-->
+                  <section
+                    *ngIf="!licenceHasExpired(item.expiryDate) && (item.tpoRequested === 'Yes' && licenceTransferFeatureOn)"
+                    class="licence-expired">
+                    <a [routerLink]="[ '/cancel-third-party-operator/' + item.licenseId]" class="missing">
+                      <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Cancel Application</span>
+                    </a>
+                  </section>
                 </div>
               </td>
 
@@ -145,63 +148,67 @@
               <td style="background-color: #E1E8F2; padding: 10px;">
                 <!-- 3rd Party Operators cannot submit  changes -->
                 <div *ngIf="!item.isOperated">
-                <ng-container
-                  *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested !== 'Yes' && licenceTransferFeatureOn)">
-                  <div *ngIf="item.status != PAYMENT_REQUIRED">
-                    <p>
-                      <a *ngIf="licenceTransferFeatureOn" [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
-                        <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Transfer Ownership</span>
-                      </a>
-                    </p>
-                  </div>
-                </ng-container>
-                <!-- if there is a third party application in progress, we don't show the ability to submit a new application-->
-                <ng-container *ngIf="!licenceHasExpired(item.expiryDate) && item.tpoRequested == 'No' && item?.licenceTypeName !== ApplicationTypeNames.CannabisRetailStore">
-                  <div *ngIf="item.status != PAYMENT_REQUIRED">
-                    <p>
-                      <a *ngIf="licenceTransferFeatureOn" [routerLink]="[ '/third-party-operator/' + item.licenseId]">
-                        <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Add or Change a Third Party
-                          Operator</span>
-                      </a>
-                    </p>
-                  </div>
-                </ng-container>
-                <ng-container
-                  *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested !== 'Yes' || !licenceTransferFeatureOn || (item?.licenceTypeName !== ApplicationTypeNames.CannabisRetailStore && item?.licenceTypeName !== ApplicationTypeNames.Marketer))">
-                  <div *ngIf="item.status != PAYMENT_REQUIRED">
-                    <p *ngFor="let action of item.allowedActions">
-                      <a href="javascript:void(0);" (click)="doAction(item,action.name)">
-                        <span><i class="fas fa-bolt" style="margin-right: 10px;"></i>{{action?.actionText}}</span>
-                      </a>
-                    </p>
-                  </div>
-                </ng-container>
-                <section *ngIf="licenceHasExpired(item?.expiryDate)" class="licence-expired"
-                  style="text-align: center;">
+                  <ng-container
+                    *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested !== 'Yes' && licenceTransferFeatureOn)">
+                    <div *ngIf="item.status != PAYMENT_REQUIRED">
+                      <p>
+                        <a *ngIf="licenceTransferFeatureOn" [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
+                          <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Transfer Ownership</span>
+                        </a>
+                      </p>
+                    </div>
+                  </ng-container>
+                  <!-- if there is a third party application in progress, we don't show the ability to submit a new application-->
+                  <ng-container
+                    *ngIf="!licenceHasExpired(item.expiryDate) && item.tpoRequested == 'No' && item?.licenceTypeName !== ApplicationTypeNames.CannabisRetailStore">
+                    <div *ngIf="item.status != PAYMENT_REQUIRED">
+                      <p>
+                        <a *ngIf="licenceTransferFeatureOn" [routerLink]="[ '/third-party-operator/' + item.licenseId]">
+                          <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Add or Change a Third
+                            Party
+                            Operator</span>
+                        </a>
+                      </p>
+                    </div>
+                  </ng-container>
+                  <ng-container
+                    *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested !== 'Yes' || !licenceTransferFeatureOn || (item?.licenceTypeName !== ApplicationTypeNames.CannabisRetailStore && item?.licenceTypeName !== ApplicationTypeNames.Marketer))">
+                    <div *ngIf="item.status != PAYMENT_REQUIRED">
+                      <p *ngFor="let action of item.allowedActions">
+                        <a href="javascript:void(0);" (click)="doAction(item,action.name)">
+                          <span><i class="fas fa-bolt" style="margin-right: 10px;"></i>{{action?.actionText}}</span>
+                        </a>
+                      </p>
+                    </div>
+                  </ng-container>
+                  <section *ngIf="licenceHasExpired(item?.expiryDate)" class="licence-expired"
+                    style="text-align: center;">
 
-                  <a href="javascript: void(0);" (click)="startRenewal(item)" appRemoveIfFeatureOff="CRS-Renewal"
-                    *ngIf="isAboutToExpire(item.expiryDate)" class="missing">
-                    <strong>Attention</strong>: This Licence has
-                    Expired<br>Please Renew.
-                  </a>
+                    <a href="javascript: void(0);" (click)="startRenewal(item)" appRemoveIfFeatureOff="CRS-Renewal"
+                      *ngIf="isAboutToExpire(item.expiryDate)" class="missing">
+                      <strong>Attention</strong>: This Licence has
+                      Expired<br>Please Renew.
+                    </a>
 
 
+                  </section>
+
+                  <section
+                    *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested === 'Yes' && licenceTransferFeatureOn)"
+                    class="licence-expired">
+                    <strong>TRANSFER INITIATED</strong> <br />
+                    <a [routerLink]="[ '/ownership-cancel-transfer/' + item.licenseId]" class="missing">
+                      <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Cancel Transfer</span>
+                    </a>
+                  </section>
+
+
+
+                </div>
+                <section *ngIf="item.isOperated"><i>3rd-Party Operators cannot request changes to the licence. All
+                    change requests
+                    for the licence must be requested by the Licensee.</i>
                 </section>
-
-
-              <section *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested === 'Yes' && licenceTransferFeatureOn)"
-                       class="licence-expired">
-                <strong>TRANSFER INITIATED</strong> <br />
-                <a [routerLink]="[ '/ownership-cancel-transfer/' + item.licenseId]" class="missing">
-                  <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Cancel Transfer</span>
-                </a>
-              </section>
-
-              </div>
-              <section *ngIf="item.isOperated"><i>3rd-Party Operators cannot request changes to the licence. All change requests
-                for the licence must be requested by the Licensee.</i>
-
-              </section>
 
               </td>
             </tr>
@@ -286,15 +293,17 @@
         </table>
 
       </form>
-      <p *ngIf="!mappingItem.key.includes('Operated')" style="text-align: center; font-style: italic;">All {{mappingItem.key}} licence holders must follow the terms
+      <p *ngIf="!mappingItem.key.includes('Operated')" style="text-align: center; font-style: italic;">All
+        {{mappingItem.key}} licence holders must follow the terms
         and
         conditions of their licence as set out in the <a href="{{getHandbookLink(mappingItem.key)}}"
           target="_blank">{{mappingItem.key}} Terms and Conditions Handbook</a></p>
-      <p *ngIf="mappingItem.key.includes('Operated')" style="text-align: center; font-style: italic;">All Third Party Operators must follow the terms
-              and
-              conditions as set out in the <a href="{{getHandbookLink(mappingItem.key)}}"
-                target="_blank">Terms and Conditions Handbook</a></p>
-      <p>&nbsp;</p>          
+      <p *ngIf="mappingItem.key.includes('Operated')" style="text-align: center; font-style: italic;">All Third Party
+        Operators must follow the terms
+        and
+        conditions as set out in the <a href="{{getHandbookLink(mappingItem.key)}}" target="_blank">Terms and Conditions
+          Handbook</a></p>
+      <p>&nbsp;</p>
     </div>
   </section>
 

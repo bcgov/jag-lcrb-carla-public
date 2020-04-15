@@ -66,31 +66,7 @@ namespace bdd_tests
         [And(@"I complete the eligibility disclosure")]
         public void complete_eligibility_disclosure()
         {
-            /* 
-            Page Title: Cannabis Retail Store Licence Eligibility Disclosure
-            */
-
-            string electricSignature = "Automated Test";
-
-            // select No for Question 1
-            NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
-            noRadio1.Click();
-
-            // select No for Question 2
-            NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
-            noRadio2.Click();
-
-            // select the certification checkbox
-            NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
-            matCheckbox.Click();
-
-            // enter the electronic signature
-            NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
-            sigCheckbox.SendKeys(electricSignature);
-
-            // click on the Submit button
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
-            submit_button.Click();
+            CRSEligibilityDisclosure();
         }
 
         [And(@"I review the account profile")]
@@ -408,7 +384,6 @@ namespace bdd_tests
             uiKeyPersonnelDOB1Biz1.Click();
 
             NgWebElement uiKeyPersonnelDOB1Biz2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-5']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
-            //NgWebElement uiKeyPersonnelDOB1Biz2 = ngDriver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/mat-datepicker-content/mat-calendar/div/mat-month-view/table/tbody/tr[4]/td[1]/div"));
             uiKeyPersonnelDOB1Biz2.Click();
 
             /********** Business Shareholder - Individual Shareholder **********/
@@ -590,18 +565,7 @@ namespace bdd_tests
         [And(@"I return to the dashboard")]
         public void return_to_dashboard()
         {
-            /* 
-            Page Title: Payment Approved
-            */
-
-            // confirm that payment receipt is for $7,500.00
-            Assert.True (ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-payment-confirmation/mat-card/div/div[1]/div/div/table/tr[6]/td[2][text()='$7,500.00']")).Displayed);
-
-            string retDash = "Return to Dashboard";
-            
-            // click on the Return to Dashboard link
-            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
-            returnDash.Click();
+            CRSReturnToDashboard();
         }
 
         [And(@"the account is deleted")]
