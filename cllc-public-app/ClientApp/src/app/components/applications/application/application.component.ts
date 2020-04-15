@@ -378,7 +378,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     show = show && this.form.get('connectedGrocery').value === 'Yes';
     return show;
   }
-  
+
   onAccountSelect(proposedAccount: TransferAccount) {
     this.form.get('proposedTPO').patchValue(proposedAccount);
   }
@@ -446,20 +446,29 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * Submit the application for payment
    * */
   submit_application() {
-    if (!this.isValid()) {
-      this.showValidationMessages = true;
-    } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
-      this.submitPayment();
-      this.saveComplete.emit(true);
-    } else {
-      this.busy = this.save(true)
+    const formChanged: boolean = (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)); // has the data been updated?
+    const save: Observable<boolean> = formChanged ? this.save(!this.application.applicationType.isFree) : of(true); // bypass save if form value not updated
+
+    // Only save if the data is valid
+    if (this.isValid()) {
+      this.busy = save
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
             this.saveComplete.emit(true);
-            this.submitPayment();
+            // redirect to dashboard if the applicationType is FREE
+            if (this.application.applicationType.isFree) {
+              this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+              this.router.navigateByUrl('/dashboard');
+            } else {
+              this.submitPayment();
+            }
+          } else if (this.application.applicationType.isFree) { // show error message the save failed and the application is free
+            this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
           }
         });
+    } else {
+      this.showValidationMessages = true;
     }
   }
 
@@ -470,6 +479,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.skipPayment) {
       return;
     }
+
     this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(jsonUrl => {

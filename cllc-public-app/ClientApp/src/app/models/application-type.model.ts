@@ -38,9 +38,7 @@ export class ApplicationType {
   publicCooler: FormControlState;
   showLiquorSitePlan: FormControlState;
   proofofZoning: FormControlState;
-  
-
-
+  isFree: boolean;
 }
 
 export enum FormControlState {

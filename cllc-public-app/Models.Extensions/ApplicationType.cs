@@ -47,16 +47,17 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments,
                     EstablishmetNameIsReadOnly = applicationType.AdoxioIslockestablishmentname,
                     ProofofZoning = (FormControlState?)applicationType.AdoxioProofofzoning,
-                    ShowLiquorDeclarations = applicationType.AdoxioIsshowliquordeclarations
+                    ShowLiquorDeclarations = applicationType.AdoxioIsshowliquordeclarations,
+                    IsFree = applicationType.AdoxioIsfree
                                        
                 };
 
                 if (applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)
                 {
-                    result.contentTypes = new List<ApplicationTypeContent>();
+                    result.ContentTypes = new List<ApplicationTypeContent>();
                     foreach (var content in applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType)
                     {
-                        result.contentTypes.Add(content.ToViewModel());
+                        result.ContentTypes.Add(content.ToViewModel());
                     }
                 }
                 /*

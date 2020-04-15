@@ -98,7 +98,7 @@
                                 <app-field [showChevrons]="false"
                                     *ngIf="associate.get('edit').value && !associate.get('id').value"
                                     [valid]="!associate.get('dateofBirthNew').touched || associate.get('dateofBirthNew').valid"
-                                    errorMessage="Please enter Bith Date">
+                                    errorMessage="Please enter Birth Date">
                                     <input type="text" formControlName="dateofBirthNew"
                                         style="width: 120px; background-color: #fff;" autocomplete="false"
                                         placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker2"

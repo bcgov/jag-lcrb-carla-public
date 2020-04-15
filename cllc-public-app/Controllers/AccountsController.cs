@@ -988,7 +988,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await _dynamicsClient.GetApplicationByIdWithChildren(application.AdoxioApplicationid);
 
-                        if (adoxioApplication.AdoxioInvoice != null)
+                        if (adoxioApplication?.AdoxioInvoice != null)
                         {
                             _dynamicsClient.Invoices.Delete(adoxioApplication.AdoxioInvoice.Invoiceid);
                         }

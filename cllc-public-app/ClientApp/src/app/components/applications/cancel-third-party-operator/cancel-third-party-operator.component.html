@@ -4,19 +4,18 @@
   <div *ngIf="account?.businessType">
     <div [formGroup]="form" style="padding-left: 45px; position: relative">
       <!-- Title -->
-      <h1 class="ngtest-page-title">Cancel Licence Transfer</h1>
+      <h1 class="ngtest-page-title">Cancel Third Party Operator</h1>
     </div>
 
     <div [formGroup]="form" class="application-wrapper">
       <!-- Preamble -->
-      
+
 
       <h3 class="blue-header">LICENCE DETAILS</h3>
       <section class="padded-section">
-        <app-field label="Establishment Name" [required]="false" [valid]="isValidOrNotTouched('establishmentName')"
-          errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
+        <app-field label="Establishment Name" [required]="false" [valid]="true">
           <input class="form-control" style="width: 500px;" type="text" [readonly]="true"
-            (change)="checkPossibleProblematicWords()" formControlName="establishmentName">
+            formControlName="establishmentName">
         </app-field>
 
         <div>
@@ -53,14 +52,14 @@
       </section>
 
 
-      <h3 class="blue-header">CONFIRM CANCELLATION OF TRANSFER</h3>
+      <h3 class="blue-header">CONFIRM CANCELLATION OF THIRD PARTH OPERATOR</h3>
       <section class="padded-section">
         <app-field [required]="true" [valid]="isValidOrNotTouched('transferConsent')"
           errorMessage="Please consent to the transfer" [showChevrons]="false">
           <section style="display: flex">
             <input type="checkbox" formControlName="transferConsent">
             <!-- <span class="error-states">*</span> -->
-            <div style="padding-left: 10px;"> I agree to cancel the transfer of my {{licence.licenseType}} licence.
+            <div style="padding-left: 10px;"> I agree to cancel the third parth operator for my {{licence.licenseType}}} licence.
             </div>
           </section>
         </app-field>
@@ -78,13 +77,13 @@
       </section>
 
       <section style="position: relative; margin-top: 20px;">
-        <button class="btn btn-primary" (click)="cancelTransfer()">
+        <button class="btn btn-primary" (click)="cancelThirdPartyOperator()">
           <i class="fa fa-save" style="color: #fff;"></i>
-          CANCEL TRANSFER</button>
+          CANCEL THIRD PARTY OPERATOR</button>
         <span style="float: right; color: #1a5a96; padding-top: 10px;">
-          <a routerLink="/dashboard">
+          <a routerLink="/licences">
             <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
-            Return to Dashboard
+            Return to Licences Page
           </a>
         </span>
         <div [ngBusy]="busy"></div>
