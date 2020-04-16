@@ -92,21 +92,21 @@
             "displayName": "App Group",
             "description": "The name assigned to all of the deployments in this project.",
             "required": true,
-            "value": "indy-catalyst"
+            "value": "OrgbookIssuerAgent"
         },
         {
             "name": "GIT_REPO_URL",
             "displayName": "Git Repo URL",
             "description": "The URL to your GIT repo.",
             "required": true,
-            "value": "https://github.com/bcgov/jag-lcrb-carla-public.git"
+            "value": "https://github.com/brianorwhatever/jag-lcrb-carla-public.git"
         },
         {
             "name": "GIT_REF",
             "displayName": "Git Reference",
             "description": "The git reference or branch.",
             "required": true,
-            "value": "master"
+            "value": "indy-catalyst-orgbook"
         },
         {
             "name": "SOURCE_CONTEXT_DIR",
