@@ -11,10 +11,12 @@ using System.Threading.Tasks;
 using Hangfire;
 using Google.Protobuf;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+using Gov.Lclb.Cllb.Services.FileManager;
 using Hangfire.Console;
 using Hangfire.Server;
 using System.Linq;
 using System.Text.RegularExpressions;
+using grpc = global::Grpc.Core;
 
 namespace Gov.Lclb.Cllb.FederalReportingService
 {
@@ -140,8 +142,16 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                                 FileName = filename,
                                 FolderName = folderName
                             };
-
-                            var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
+                            bool folderResult = CreateFolder(folderName);
+                            if (folderResult)
+                            {
+                                var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
+                            }
+                            else
+                            {
+                                hangfireContext.WriteLine($"Failed to create sharepoint folder for federal report.");
+                                _logger.LogInformation($"Failed to create sharepoint folder for federal report.");
+                            }
                         }
                         hangfireContext.WriteLine($"Successfully exported Federal Reporting CSV {export.AdoxioExportnumber}.");
                         _logger.LogInformation($"Successfully exported Federal Reporting CSV {export.AdoxioExportnumber}.");
@@ -256,6 +266,32 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             }
 
             return result;
+        }
+
+        private bool CreateFolder(string folderName)
+        {
+            try
+            {
+                
+                var createFolderRequest = new CreateFolderRequest()
+                {
+                    EntityName = "federal_report",
+                    FolderName = folderName
+                };
+
+                var createFolderResult = _fileManagerClient.CreateFolder(createFolderRequest);
+
+                if (createFolderResult.ResultStatus == ResultStatus.Fail)
+                {
+                    _logger.LogError($"Error creating folder for federal report. Error is {createFolderResult.ErrorDetail}");
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Error creating folder for federal report. Error is {e.Message}");
+            }
+            return false;
         }
     }
 }
