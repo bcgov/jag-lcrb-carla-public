@@ -391,9 +391,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             var response = await _Client.SendAsync(endpointRequest);
             HttpStatusCode _statusCode = response.StatusCode;
 
-            if (_statusCode != HttpStatusCode.OK || _statusCode != HttpStatusCode.Created)
+            // check to see if the folder creation worked.
+            if ( ! (_statusCode == HttpStatusCode.OK || _statusCode == HttpStatusCode.Created))
             {
-                string _responseContent = null;
+                string _responseContent;
                 var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
