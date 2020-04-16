@@ -278,7 +278,7 @@ namespace bdd_tests
             NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
             submitpayButton.Click();
 
-            // pay for the relocation application
+            // pay for the branding change application
             MakePayment();
 
             System.Threading.Thread.Sleep(7000);
@@ -317,6 +317,23 @@ namespace bdd_tests
             Page Title: Submit a Licence Relocation Application
             */
 
+            // create test data
+            string streetAddress = "303 Prideaux St";
+            string city = "Nanaimo";
+            string postal = "V9R2N3";
+
+            // enter the proposed street address
+            NgWebElement uiStreetAddress = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressStreet'])[2]"));
+            uiStreetAddress.SendKeys(streetAddress);
+
+            // enter the proposed street city
+            NgWebElement uiCity = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressCity'])[2]"));
+            uiCity.SendKeys(city);
+
+            // enter the proposed postal code
+            NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressPostalCode'])[3]"));
+            uiPostalCode.SendKeys(postal);
+
             // find the upload test file in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
@@ -343,17 +360,17 @@ namespace bdd_tests
             MakePayment();
 
             System.Threading.Thread.Sleep(7000);
-
-            // return to the Licences tab
-            string licencesLink = "Licences";
-
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
         }
    
         [And(@"I request a third party operator")]
         public void request_third_party_operator()
         {
+            // return to the Licences tab
+            string licencesLink = "Licences";
+
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+
             /* 
             Page Title: Licences
             Subtitle:   Catering Licences
@@ -375,6 +392,9 @@ namespace bdd_tests
             NgWebElement thirdPartyOperator = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
             thirdPartyOperator.SendKeys(thirdparty);
 
+            NgWebElement thirdPartyOperatorOption = ngDriver.FindElement(By.XPath("//mat-option[@id='mat-option-0']/span"));
+            thirdPartyOperatorOption.Click();
+
             // click on authorized to submit checkbox
             NgWebElement authorizedToSubmit = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
             authorizedToSubmit.Click();
@@ -391,6 +411,12 @@ namespace bdd_tests
         [And(@"I request a transfer of ownership")]
         public void request_transfer_of_ownership()
         {
+            // return to the Licences tab
+            string licencesLink = "Licences";
+
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+
             /* 
             Page Title: Licences
             Subtitle:   Catering Licences
@@ -412,6 +438,9 @@ namespace bdd_tests
             NgWebElement proposedLicensee = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
             proposedLicensee.SendKeys(licensee);
 
+            NgWebElement thirdPartyOperatorOption = ngDriver.FindElement(By.XPath("//mat-option[@id='mat-option-0']/span"));
+            thirdPartyOperatorOption.Click();
+
             // click on consent to licence transfer checkbox
             NgWebElement consentToTransfer = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
             consentToTransfer.Click();
@@ -427,6 +456,9 @@ namespace bdd_tests
             // click on submit transfer button
             NgWebElement submitTransferButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT TRANSFER')]"));
             submitTransferButton.Click();
+
+            // return to the Licences tab
+            uiLicences.Click();
 
             // check for transfer initiated status 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TRANSFER INITIATED')]")).Displayed);
