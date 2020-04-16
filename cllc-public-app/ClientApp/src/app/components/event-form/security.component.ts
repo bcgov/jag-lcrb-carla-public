@@ -130,7 +130,6 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
       safeAndResponsibleDisturbancesOtherDescription: licenceEvent.safeAndResponsibleDisturbancesOtherDescription,
       safeAndResponsibleAdditionalSafetyMeasures: licenceEvent.safeAndResponsibleAdditionalSafetyMeasures,
       safeAndResponsibleServiceAreaSupervision: licenceEvent.safeAndResponsibleServiceAreaSupervision,
-      securityPlanSubmitted: false,
       declarationIsAccurate: false
     });
 
@@ -155,8 +154,7 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
   }
 
   updateLicenceEvent() {
-    this.securityForm.controls['securityPlanSubmitted'].setValue(true);
-    this.busy = this.licenceEvents.updateLicenceEvent(this.securityForm.get('id').value, {...this.securityForm.value})
+    this.busy = this.licenceEvents.updateLicenceEvent(this.securityForm.get('id').value, {securityPlanSubmitted: true, ...this.securityForm.value})
     .subscribe((licenceEvent) => {
       this.router.navigate(['/licences']);
     });
