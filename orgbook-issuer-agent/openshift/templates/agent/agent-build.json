@@ -102,21 +102,21 @@
         "displayName": "Git Repo URL",
         "description": "The URL to your GIT repo.",
         "required": true,
-        "value": "https://github.com/brianorwhatever/jag-lcrb-carla-public.git"
+        "value": "https://github.com/bcgov/indy-catalyst.git"
       },
       {
         "name": "GIT_REF",
         "displayName": "Git Reference",
         "description": "The git reference or branch.",
         "required": true,
-        "value": "indy-cat-orgbook"
+        "value": "master"
       },
       {
         "name": "SOURCE_CONTEXT_DIR",
         "displayName": "Source Context Directory",
         "description": "The source context directory.",
         "required": false,
-        "value": "orgbook-issuer-agent/docker/vcr-agent"
+        "value": "docker/vcr-agent"
       },
       {
         "name": "OUTPUT_IMAGE_TAG",
