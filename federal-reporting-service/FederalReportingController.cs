@@ -26,6 +26,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IConfiguration _configuration;
         private readonly FileManagerClient _fileManagerClient;
+        private readonly string _exportPath;
 
         private readonly ILogger _logger;
         
@@ -36,6 +37,14 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             if (_configuration["DYNAMICS_ODATA_URI"] != null)
             {
                 _dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
+            }
+            if (_configuration["EXPORT_PATH"] != null)
+            {
+                _exportPath = _configuration["EXPORT_PATH"];
+            }
+            else
+            {
+                _exportPath = "./";
             }
             _fileManagerClient = fileClient;
             _logger = loggerFactory.CreateLogger(typeof(FederalReportingController));
@@ -105,7 +114,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                         illegalInFileName = new Regex(@"[&:/\\|]");
                         filename = illegalInFileName.Replace(filename, "-");
                         // using (var mem = new MemoryStream())
-                        using (var writer = new StreamWriter(filename))
+                        using (var writer = new StreamWriter(_exportPath + filename))
                         using (var csv = new CsvWriter(writer))
                         {
                             csv.Configuration.RegisterClassMap<FederalReportingMonthlyExportMap>();
