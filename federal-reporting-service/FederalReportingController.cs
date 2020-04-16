@@ -283,13 +283,13 @@ namespace Gov.Lclb.Cllb.FederalReportingService
 
                 if (createFolderResult.ResultStatus == ResultStatus.Fail)
                 {
-                    _logger.LogError($"Error creating folder for entity federal_report and folder {folderName}. Error is {createFolderResult.ErrorDetail}");
+                    _logger.LogError($"Error creating folder for federal report. Error is {createFolderResult.ErrorDetail}");
                 }
                 return true;
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Error creating folder for account federal_report and folder {folderName}");
+                _logger.LogError(e, $"Error creating folder for federal report. Error is {e.Message}");
             }
             return false;
         }
