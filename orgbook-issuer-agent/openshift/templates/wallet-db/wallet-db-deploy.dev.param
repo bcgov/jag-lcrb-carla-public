@@ -1,0 +1,23 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: .
+# Template File: ../openshift/templates/wallet/wallet-deploy.json
+#=========================================================
+# NAME=wallet
+# SUFFIX=-indy-cat
+# APP_NAME=BcRegistriesAgent
+# APP_GROUP=indy-catalyst
+# IMAGE_NAMESPACE=devex-von-bc-registries-agent-tools
+# SOURCE_IMAGE_NAME=db
+TAG_NAME=dev
+# POSTGRESQL_DATABASE_NAME=default_wallet
+# POSTGRESQL_USER=[a-zA-Z_][a-zA-Z0-9_]{10}
+# POSTGRESQL_PASSWORD=[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}
+# POSTGRESQL_ADMIN_PASSWORD=[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}
+# MOUNT_PATH=/var/lib/pgsql/data
+# PERSISTENT_VOLUME_SIZE=60Gi
+# PERSISTENT_VOLUME_CLASS=gluster-file-db
+# CPU_REQUEST=10m
+# CPU_LIMIT=1000m
+# MEMORY_REQUEST=10Mi
+# MEMORY_LIMIT=2000Mi
