@@ -28,8 +28,8 @@ Scenario: Pay CRS Licence Fee and Complete Applications
     And I request a valid store name or branding change
     And I request a structural change
     And I review the federal reports
-    And I request a transfer of ownership
     And I show the store as open on the map
+    And I request a transfer of ownership
     Then the requested applications are visible on the dashboard
 */
 
@@ -217,6 +217,7 @@ namespace bdd_tests
             string proposedAddress = "Automated Test Street";
             string proposedCity = "Automated City";
             string proposedPostalCode = "A1A 1A1";
+            string pid = "012345678";
 
             // enter the proposed street address
             NgWebElement uiProposedAddress = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div/div[1]/div[2]/section[2]/section/div[3]/address/app-field[1]/section/div[1]/section/input"));
@@ -229,6 +230,10 @@ namespace bdd_tests
             // enter the postal code
             NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div/div[1]/div[2]/section[2]/section/div[3]/address/section[2]/app-field/section/div[1]/section/input"));
             uiProposedPostalCode.SendKeys(proposedPostalCode);
+
+            // enter the PID
+            NgWebElement uiProposedPID = ngDriver.FindElement(By.XPath("//*[@id='establishmentParcelId']"));
+            uiProposedPID.SendKeys(pid);
 
             // find the upload test file in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
@@ -434,6 +439,12 @@ namespace bdd_tests
         [And(@"I request a transfer of ownership")]
         public void request_ownership_transfer()
         {
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+
             /* 
             Page Title: Licences
             Subtitle:   Cannabis Retail Store Licences
@@ -449,7 +460,14 @@ namespace bdd_tests
             Page Title: Transfer Your Cannabis Retail Store Licence
             */
 
-            // TODO: search for the proposed licensee
+            string thirdparty = "GunderCorp TestBusiness";
+
+            // search for the proposed licensee
+            NgWebElement thirdPartyOperator = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+            thirdPartyOperator.SendKeys(thirdparty);
+
+            NgWebElement thirdPartyOperatorOption = ngDriver.FindElement(By.XPath("//mat-option[@id='mat-option-0']/span"));
+            thirdPartyOperatorOption.Click();
 
             // click on consent to licence transfer checkbox
             NgWebElement consentToTransfer = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-ownership-transfer/div/div[2]/div[2]/section[5]/app-field/section/div/section/section/input"));
@@ -467,7 +485,7 @@ namespace bdd_tests
             NgWebElement submitTransferButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT TRANSFER')]"));
             submitTransferButton.Click();
 
-            // TODO: determine next steps
+            // TODO: Confirm status change on Licences tab
         }
 
         [And(@"I show the store as open on the map")]
@@ -519,9 +537,6 @@ namespace bdd_tests
 
             // confirm that a name or branding change request is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Name or Branding Change')]")).Displayed);
-
-            // TODO: confirm that a transfer of ownership request is displayed
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' ')]")).Displayed);
 
             // confirm that a structural change request is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Structural Change')]")).Displayed);
