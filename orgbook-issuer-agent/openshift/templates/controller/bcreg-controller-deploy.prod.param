@@ -1,0 +1,27 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: .
+# Template File: ../openshift/templates/bcreg-controller/bcreg-controller-deploy.json
+#=========================================================
+# NAME=bcreg-controller
+# SUFFIX=-indy-cat
+# APP_NAME=BcRegistriesAgent
+# APP_GROUP=indy-catalyst
+# IMAGE_NAMESPACE=devex-von-bc-registries-agent-tools
+TAG_NAME=prod
+# CONFIG_ROOT=../config
+# HOST_PORT=8080
+# ENVIRONMENT=default
+# AGENT_SERVICE_NAME=agent
+# AGENT_ADMIN_PORT=8024
+# CR_AGENT_ADMIN_URL=
+# CR_ADMIN_API_KEY=
+# WEB_CONCURRENCY=1
+# WORKER_THREADS=160
+# MAX_CRED_RESPONSE_TIMEOUT=90
+# MIN_REPLICAS=1
+# MAX_REPLICAS=1
+# CPU_REQUEST=10m
+# CPU_LIMIT=1000m
+# MEMORY_REQUEST=10Mi
+# MEMORY_LIMIT=1000Mi
