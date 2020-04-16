@@ -1,0 +1,367 @@
+# Documentation: https://github.com/bcgov/von-agent-template/tree/master/von-x-agent/config
+
+issuers:
+  lcrb:
+    name: Liquor and Cannabis Regulation Branch
+    abbreviation: LCRB
+    url: https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing
+    email: lclb.lclb@gov.bc.ca
+    logo_path: ../assets/img/surrey-logo.png
+    endpoint: $ENDPOINT_URL
+
+    connection:
+      type: TheOrgBook
+      api_url: $TOB_API_URL
+      sign_target: false
+
+    credential_types:
+    - schema: registration.registries.ca
+      issuer_url: $APPLICATION_URL/registration
+      description: TODO
+      details:
+        label_en: Registration
+        url_en: $APPLICATION_URL/registration
+      credential:
+        effective_date:
+          input: effective_date
+          from: claim
+        inactive:
+          input: entity_status
+          from: claim
+          processor:
+            - bcgov.entity_status.is_historical
+        revoked_date:
+          input: expiry_date
+          from: claim
+      topic:
+        label_en: Registration
+        source_id:
+          input: registration_id
+          from: claim
+        type:
+          input: registration.registries.ca
+          from: value
+      mapping:
+        - model: name
+          fields:
+            type:
+              input: entity_name
+              from: value
+            text:
+              input: entity_name
+              from: claim
+        - model: name
+          fields:
+            type:
+              input: entity_name_assumed
+              from: value
+            text:
+              input: entity_name_assumed
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: registration_date
+              from: value
+            format:
+              input: datetime
+              from: value
+            value:
+              input: registration_date
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: entity_name_effective
+              from: value
+            format:
+              input: datetime
+              from: value
+            value:
+              input: entity_name_effective
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: entity_name_assumed_effective
+              from: value
+            format:
+              input: datetime
+              from: value
+            value:
+              input: entity_name_assumed_effective
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: entity_status
+              from: value
+            format:
+              input: category
+              from: value
+            value:
+              input: entity_status
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: entity_status_effective
+              from: value
+            format:
+              input: datetime
+              from: value
+            value:
+              input: entity_status_effective
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: entity_type
+              from: value
+            format:
+              input: category
+              from: value
+            value:
+              input: entity_type
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: registered_jurisdiction
+              from: value
+            format:
+              input: jurisdiction
+              from: value
+            value:
+              input: registered_jurisdiction
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: home_jurisdiction
+              from: value
+            format:
+              input: jurisdiction
+              from: value
+            value:
+              input: home_jurisdiction
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: reason_description
+              from: value
+            format:
+              input: category
+              from: value
+            value:
+              input: reason_description
+              from: claim
+    - schema: address.registries.ca
+      issuer_url: $APPLICATION_URL/address
+      description: TODO
+      details:
+        label_en: Corporate Address
+        url_en: $APPLICATION_URL/address
+      credential:
+        effective_date:
+          input: effective_date
+          from: claim
+        revoked_date:
+          input: expiry_date
+          from: claim
+      topic:
+        source_id:
+          input: registration_id
+          from: claim
+        type:
+          input: registration.registries.ca
+          from: value
+      cardinality_fields:
+        - address_type
+      mapping:
+        - model: address
+          fields:
+            addressee:
+              input: addressee
+              from: claim
+            civic_address:
+              input: civic_address
+              from: claim
+            city:
+              input: municipality
+              from: claim
+            province:
+              input: province
+              from: claim
+            postal_code:
+              input: postal_code
+              from: claim
+            country:
+              input: country
+              from: claim
+            type:
+              input: address_type
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: reason_description
+              from: value
+            format:
+              input: category
+              from: value
+            value:
+              input: reason_description
+              from: claim
+    - schema: cannabis-retail-store-licence.lcrb
+      label_en: Cannabis Retail Store Licence
+      issuer_url: $APPLICATION_URL/cannabis-retail-store-licence
+      depends_on:
+        - registration.registries.ca
+      credential:
+        effective_date:
+          input: effective_date
+          from: claim
+
+      # topic identifies the id of the subject of the credential from the foundational credential
+      # in BC Gov deployment type is always "registration" as it is from BC Registries
+      topic:
+        label_en: Registration
+        source_id:
+          input: registration_id
+          from: claim
+        type:
+          input: registration
+          from: value
+      cardinality_fields:
+        - licence_number
+      mapping:
+        - model: attribute
+          fields:
+            type:
+              input: issue_date
+              from: value
+            format:
+              input: datetime
+              from: value
+            value:
+              input: issue_date
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: licence_number
+              from: value
+            value:
+              input: licence_number
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: expiry_date
+              from: value
+            format:
+              input: datetime
+              from: value
+            value:
+              input: expiry_date
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: establishment_name
+              from: value
+            value:
+              input: establishment_name
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: effective_date
+              from: value
+            format:
+              input: datetime
+              from: value
+            value:
+              input: effective_date
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: civic_address
+              from: value
+            format:
+              input: text
+              from: value
+            value:
+              input: civic_address
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: city
+              from: value
+            format:
+              input: text
+              from: value
+            value:
+              input: city
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: province
+              from: value
+            format:
+              input: text
+              from: value
+            value:
+              input: province
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: postal_code
+              from: value
+            format:
+              input: text
+              from: value
+            value:
+              input: postal_code
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: country
+              from: value
+            format:
+              input: text
+              from: value
+            value:
+              input: country
+              from: claim
+
+verifiers:
+  bctob:
+    name: BC OrgBook
+    alias: vcr-agent
+    connection:
+      type: TheOrgBook
+      api_url: $TOB_API_URL
+      agent_admin_url: $TOB_AGENT_ADMIN_URL
+
+proof_requests:
+  greenlight_registration:
+    version: '1.0.0'
+    schemas:
+      - key:
+          did: 6qnvgJtqwK44D8LFYnV5Yf
+          name: Registered Corporation
+          version: '1.0.3'
+        attributes:
+          - corp_num
+          - legal_name
+
+
+### eof ###
