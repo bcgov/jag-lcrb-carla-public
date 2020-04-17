@@ -52,13 +52,6 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             catch (SharePointRestException ex)
             {
                 _logger.LogError($"SharePointRestException creating sharepoint folder (status code: {ex.Response.StatusCode})");
-                foreach (var header in ex.Response.Headers)
-                {
-                    foreach (var val in header.Value)
-                    {
-                        _logger.LogError($"Header: {header.Key}:{val}");
-                    }
-                }
                 folderExists = false;
             }
             catch (Exception)
