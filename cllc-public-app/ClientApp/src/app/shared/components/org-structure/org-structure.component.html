@@ -127,6 +127,13 @@
     </app-associate-list>
   </ng-container>
 
+  <ng-container *ngIf="node?.businessType === 'Trust'">
+    <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
+      [account]="account" (personalHistoryItemsChange)="updateChildred($event, 'Leadership')"
+      changeTypeSuffix="Leadership" addLabel="Add Trustee" #associateList>
+    </app-associate-list>
+  </ng-container>
+
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
 
     <h3 class="blue-header">List Key Personnel</h3>
