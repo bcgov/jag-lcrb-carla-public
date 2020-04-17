@@ -138,14 +138,13 @@
                                             </mat-panel-description>
                                         </mat-expansion-panel-header>
                                         <section style="text-align: left; padding-top: 15px;">
-                                            <p>Please provide name change documents for the people identified in
-                                                this list: </p>
+                                            <p>Please provide a certificate of name change, marriage certificate, etc.: </p>
                                             <app-file-uploader *ngIf="account" documentType="Name Change Documents"
                                                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
                                                 entityName="account"
                                                 (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Name Change Documents', associate?.value?.refObject)"
                                                 [entityId]="account.id"
-                                                [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
+                                                [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENT, DRAG FILE HERE OR'"
                                                 #financialIntegrityDocuments>
                                             </app-file-uploader>
                                         </section>
@@ -347,6 +346,7 @@
                                         <option value="Partnership">Partnership</option>
                                         <option value="SoleProprietor">Sole Proprietor</option>
                                         <option value="Society">Society</option>
+                                        <option value="Trust">Trust</option>
                                     </select>
                                 </app-field>
 

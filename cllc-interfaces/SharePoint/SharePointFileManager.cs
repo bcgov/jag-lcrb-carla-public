@@ -391,9 +391,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             var response = await _Client.SendAsync(endpointRequest);
             HttpStatusCode _statusCode = response.StatusCode;
 
-            if (_statusCode != HttpStatusCode.OK && _statusCode != HttpStatusCode.Created)
+            // check to see if the folder creation worked.
+            if ( ! (_statusCode == HttpStatusCode.OK || _statusCode == HttpStatusCode.Created))
             {
-                string _responseContent = null;
+                string _responseContent;
                 var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
@@ -868,17 +869,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<byte[]> DownloadFile(string url)
         {
             byte[] result = null;
-            var webRequest = System.Net.WebRequest.Create(ApiEndpoint + "web/GetFileByServerRelativeUrl('" + EscapeApostrophe(url) + "')/$value");
-            HttpWebRequest request = (HttpWebRequest)webRequest;
-            request.PreAuthenticate = true;
-            request.Headers.Add("Authorization", Authorization);
-            request.Accept = "*";
 
-            // we need to add authentication to a HTTP Client to fetch the file.
+            HttpRequestMessage endpointRequest = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(ApiEndpoint + "web/GetFileByServerRelativeUrl('" + EscapeApostrophe(url) + "')/$value"),                
+            };
+
+            // make the request.
+            var response = await _Client.SendAsync(endpointRequest);
+
+
             using (
                 MemoryStream ms = new MemoryStream())
             {
-                await request.GetResponse().GetResponseStream().CopyToAsync(ms);
+                await response.Content.CopyToAsync(ms);
                 result = ms.ToArray();
             }
 

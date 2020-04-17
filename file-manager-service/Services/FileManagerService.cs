@@ -49,8 +49,14 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     folderExists = true;
                 }
             }
+            catch (SharePointRestException ex)
+            {
+                _logger.LogError($"SharePointRestException creating sharepoint folder (status code: {ex.Response.StatusCode})");
+                folderExists = false;
+            }
             catch (Exception)
             {
+                _logger.LogError($"Generic Exception creating sharepoint folder");
                 folderExists = false;
             }
 
