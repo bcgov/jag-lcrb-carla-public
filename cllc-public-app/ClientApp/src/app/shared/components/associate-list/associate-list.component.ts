@@ -118,7 +118,13 @@ export class AssociateListComponent extends FormBase implements OnInit {
       group.get('isDirectorNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
       group.get('isOfficerNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
       group.get('isManagerNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
-      group.get('isTrusteeNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
+    }
+
+    if (this.changeTypeSuffix === 'Trust') {
+      group.get('firstNameNew').setValidators([Validators.required]);
+      group.get('lastNameNew').setValidators([Validators.required]);
+      group.get('emailNew').setValidators([Validators.required, Validators.email]);
+      group.get('dateofBirthNew').setValidators([Validators.required]);
     }
 
     if (this.changeTypeSuffix === 'IndividualShareholder') {
@@ -212,6 +218,9 @@ export class AssociateListComponent extends FormBase implements OnInit {
       } else if (this.changeTypeSuffix === 'BusinessShareholder') {
         this.associates.at(index).get('isIndividual').setValue(false);
         this.associates.at(index).get('isShareholderNew').setValue(true);
+      } else if (this.changeTypeSuffix === 'Trust') {
+        this.associates.at(index).get('isIndividual').setValue(true);
+        this.associates.at(index).get('isTrusteeNew').setValue(true);
       }
 
       this.emitValue();
@@ -276,7 +285,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
     if (!node.id && !node.legalEntityId) { // added but never saved to dynamics. Just delete from client side
       this.associates.removeAt(index);
     } else if (!node.isRoot && (node.id || node.legalEntityId)) { // already saved to dynamics. Update changeType. This should be deleted by the API if there is no legalEntityId
-      if (this.changeTypeSuffix === 'Leadership') {
+      if (this.changeTypeSuffix === 'Leadership' || this.changeTypeSuffix === 'Trustee') {
         node.changeType = 'removeLeadership';
       } else if (this.changeTypeSuffix === 'IndividualShareholder') {
         node.changeType = 'removeIndividualShareholder';
