@@ -11,10 +11,12 @@ using System.Threading.Tasks;
 using Hangfire;
 using Google.Protobuf;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+using Gov.Lclb.Cllb.Services.FileManager;
 using Hangfire.Console;
 using Hangfire.Server;
 using System.Linq;
 using System.Text.RegularExpressions;
+using grpc = global::Grpc.Core;
 
 namespace Gov.Lclb.Cllb.FederalReportingService
 {
@@ -24,6 +26,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IConfiguration _configuration;
         private readonly FileManagerClient _fileManagerClient;
+        private readonly string _exportPath;
 
         private readonly ILogger _logger;
         
@@ -34,6 +37,14 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             if (_configuration["DYNAMICS_ODATA_URI"] != null)
             {
                 _dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
+            }
+            if (_configuration["EXPORT_PATH"] != null)
+            {
+                _exportPath = _configuration["EXPORT_PATH"];
+            }
+            else
+            {
+                _exportPath = "./";
             }
             _fileManagerClient = fileClient;
             _logger = loggerFactory.CreateLogger(typeof(FederalReportingController));
@@ -97,51 +108,59 @@ namespace Gov.Lclb.Cllb.FederalReportingService
 
                     if (monthlyReports.Count > 0)
                     {
-                        string filePath = "";
-                        using (var mem = new MemoryStream())
-                        using (var writer = new StreamWriter(mem))
+                        string filename = $"{export.AdoxioExportnumber}_{DateTime.Now.ToString("yyy-MM-dd")}-CannabisTrackingReport.csv";
+                        Regex illegalInFileName = new Regex(@"[#%*<>?{}~¿""]");
+                        filename = illegalInFileName.Replace(filename, "");
+                        illegalInFileName = new Regex(@"[&:/\\|]");
+                        filename = illegalInFileName.Replace(filename, "-");
+                        // using (var mem = new MemoryStream())
+                        using (var writer = new StreamWriter(_exportPath + filename))
                         using (var csv = new CsvWriter(writer))
                         {
                             csv.Configuration.RegisterClassMap<FederalReportingMonthlyExportMap>();
                             csv.WriteRecords(monthlyReports);
 
                             writer.Flush();
-                            mem.Position = 0;
-                            string filename = $"{export.AdoxioExportnumber}_{DateTime.Now.ToString("yyy-MM-dd")}-CannabisTrackingReport.csv";
-                            // Sanitize file name
-                            Regex illegalInFileName = new Regex(@"[#%*<>?{}~¿""]");
-                            filename = illegalInFileName.Replace(filename, "");
-                            illegalInFileName = new Regex(@"[&:/\\|]");
-                            filename = illegalInFileName.Replace(filename, "-");
+                            // mem.Position = 0;
 
-                            string folderName = null;
-                            MicrosoftDynamicsCRMsharepointdocumentlocation? documentLocation = null;
-                            if (export.AdoxioFederalreportexportSharePointDocumentLocations != null)
-                            {
-                                documentLocation = export.AdoxioFederalreportexportSharePointDocumentLocations.FirstOrDefault();
-                                folderName = documentLocation.Relativeurl;
-                            }
 
-                            if (folderName == null)
-                            {
-                                folderName = export.GetDocumentFolderName();
 
-                                await CreateFederalReportDocumentLocation(export, DOCUMENT_LIBRARY, folderName);
-                            }
+                            // string folderName = null;
+                            // MicrosoftDynamicsCRMsharepointdocumentlocation? documentLocation = null;
+                            // if (export.AdoxioFederalreportexportSharePointDocumentLocations != null)
+                            // {
+                            //     documentLocation = export.AdoxioFederalreportexportSharePointDocumentLocations.FirstOrDefault();
+                            //     folderName = documentLocation.Relativeurl;
+                            // }
+
+                            // if (folderName == null)
+                            // {
+                            //     folderName = export.GetDocumentFolderName();
+
+                            //     await CreateFederalReportDocumentLocation(export, DOCUMENT_LIBRARY, folderName);
+                            // }
                             // string sharepointFilename = await _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv");
                             // string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
-                            byte[] data = mem.ToArray();
+                            // byte[] data = mem.ToArray();
                             // call the web service
-                            var uploadRequest = new Services.FileManager.UploadFileRequest()
-                            {
-                                ContentType = "text/csv",
-                                Data = ByteString.CopyFrom(data),
-                                EntityName = "federal_report",
-                                FileName = filename,
-                                FolderName = folderName
-                            };
-
-                            var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
+                            // var uploadRequest = new Services.FileManager.UploadFileRequest()
+                            // {
+                            //     ContentType = "text/csv",
+                            //     Data = ByteString.CopyFrom(data),
+                            //     EntityName = "federal_report",
+                            //     FileName = filename,
+                            //     FolderName = folderName
+                            // };
+                            // bool folderResult = CreateFolder(folderName);
+                            // if (folderResult)
+                            // {
+                            //     var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
+                            // }
+                            // else
+                            // {
+                            //     hangfireContext.WriteLine($"Failed to create sharepoint folder for federal report.");
+                            //     _logger.LogInformation($"Failed to create sharepoint folder for federal report.");
+                            // }
                         }
                         hangfireContext.WriteLine($"Successfully exported Federal Reporting CSV {export.AdoxioExportnumber}.");
                         _logger.LogInformation($"Successfully exported Federal Reporting CSV {export.AdoxioExportnumber}.");
@@ -256,6 +275,32 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             }
 
             return result;
+        }
+
+        private bool CreateFolder(string folderName)
+        {
+            try
+            {
+                
+                var createFolderRequest = new CreateFolderRequest()
+                {
+                    EntityName = "federal_report",
+                    FolderName = folderName
+                };
+
+                var createFolderResult = _fileManagerClient.CreateFolder(createFolderRequest);
+
+                if (createFolderResult.ResultStatus == ResultStatus.Fail)
+                {
+                    _logger.LogError($"Error creating folder for federal report. Error is {createFolderResult.ErrorDetail}");
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Error creating folder for federal report. Error is {e.Message}");
+            }
+            return false;
         }
     }
 }
