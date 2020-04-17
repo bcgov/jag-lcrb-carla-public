@@ -869,17 +869,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<byte[]> DownloadFile(string url)
         {
             byte[] result = null;
-            var webRequest = System.Net.WebRequest.Create(ApiEndpoint + "web/GetFileByServerRelativeUrl('" + EscapeApostrophe(url) + "')/$value");
-            HttpWebRequest request = (HttpWebRequest)webRequest;
-            request.PreAuthenticate = true;
-            request.Headers.Add("Authorization", Authorization);
-            request.Accept = "*";
 
-            // we need to add authentication to a HTTP Client to fetch the file.
+            HttpRequestMessage endpointRequest = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(ApiEndpoint + "web/GetFileByServerRelativeUrl('" + EscapeApostrophe(url) + "')/$value"),                
+            };
+
+            // make the request.
+            var response = await _Client.SendAsync(endpointRequest);
+
+
             using (
                 MemoryStream ms = new MemoryStream())
             {
-                await request.GetResponse().GetResponseStream().CopyToAsync(ms);
+                await response.Content.CopyToAsync(ms);
                 result = ms.ToArray();
             }
 
