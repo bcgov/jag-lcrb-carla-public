@@ -5,8 +5,27 @@
     <div class="row">
         <section class="col-md-8">
             <mat-tab-group>
-                <mat-tab label="LIQUOR REQUIREMENTS">
-                    <div class="content w-100">
+                <mat-tab label="LIQUOR REQUIREMENTS" *ngIf="showLiquorContent()">
+                    <div class="content">
+                        <section *ngIf="!data?.liquor?.outstandingItems?.length && !data?.liquor?.completedItems?.length">
+                            
+                            
+                            <div class=" p-3" style="padding: 20px;">
+                              <h3>Organization Details Incomplete</h3>
+                                <p>
+                                    You have not completed your <strong>Organization Details</strong>, which identifies which associates must complete
+                                    a security screening. You must complete provide this information prior to completing your security screening requirements.
+                                </p>
+                               
+                              <div>
+                                <button routerLink="/org-structure" class="btn btn-primary">COMPLETE ORGANIZATION INFORMATION</button>
+                              </div>
+                              <p>&nbsp;</p>
+                              
+                            </div>
+                        
+                            </section>
+
                         <p>
                             Each liquor licence associate must provide a completed Personal History Summary form along
                             with
@@ -78,8 +97,27 @@
 
                     </div>
                 </mat-tab>
-                <mat-tab label="CANNABIS REQUIREMENTS">
+                <mat-tab label="CANNABIS REQUIREMENTS" *ngIf="showCannabisContent()">
                     <div class="content w-100">
+                        <section *ngIf="!data?.cannabis?.outstandingItems?.length && !data?.cannabis?.completedItems?.length">
+                            
+                            
+                            <div class=" p-3" style="padding: 20px;">
+                              <h3>Organization Details Incomplete</h3>
+                                <p>
+                                    You have not completed your <strong>Organization Details</strong>, which identifies which associates must complete
+                                    a security screening. You must complete provide this information prior to completing your security screening requirements.
+                                </p>
+                               
+                              <div>
+                                <button routerLink="/org-structure" class="btn btn-primary">COMPLETE ORGANIZATION INFORMATION</button>
+                              </div>
+                              <p>&nbsp;</p>
+                              
+                            </div>
+                        
+                            </section>
+
                         <p>Sole proprietors and associates of applicants for a non-medical cannabis licence are required
                             to
                             submit
