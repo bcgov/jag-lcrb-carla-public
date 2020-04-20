@@ -411,17 +411,17 @@ namespace bdd_tests
             MakePayment();
 
             System.Threading.Thread.Sleep(7000);
+
+            // return to the Licences tab
+            string licencesLink2 = "Licences";
+
+            NgWebElement uiLicences2 = ngDriver.FindElement(By.LinkText(licencesLink2));
+            uiLicences2.Click();
         }
 
         [And(@"I request a third party operator")]
         public void request_third_party_operator()
         {
-            // return to the Licences tab
-            string licencesLink = "Licences";
-
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
-
             /* 
             Page Title: Licences
             Subtitle:   Catering Licences
@@ -457,17 +457,20 @@ namespace bdd_tests
             // click on submit button
             NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
             submitButton.Click();
-        }
 
-        [And(@"I request a transfer of ownership")]
-        public void request_transfer_of_ownership()
-        {
             // return to the Licences tab
             string licencesLink = "Licences";
 
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
 
+            // confirm that the application has been initiated
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third Party Operator Application Initiated')]")).Displayed);
+        }
+
+        [And(@"I request a transfer of ownership")]
+        public void request_transfer_of_ownership()
+        {
             /* 
             Page Title: Licences
             Subtitle:   Catering Licences
@@ -508,7 +511,10 @@ namespace bdd_tests
             NgWebElement submitTransferButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT TRANSFER')]"));
             submitTransferButton.Click();
 
-            // return to the Licences tab
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
 
             // check for transfer initiated status 
@@ -539,12 +545,8 @@ namespace bdd_tests
             // confirm that a name or branding change request is displayed - TODO
             //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Name or Branding Change')]")).Displayed);
 
-            // TODO: confirm that a transfer of ownership request is displayed - TODO
-            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' ')]")).Displayed);
-
-            // TODO: confirm that a third party operator request is displayed - TODO
-            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' ')]")).Displayed);
+            // confirm that a third party operator request is displayed
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third-Party Operator')]")).Displayed);
         }
-
     }
 }

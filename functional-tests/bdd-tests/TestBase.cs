@@ -312,7 +312,7 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
 
-            System.Threading.Thread.Sleep(7000);
+            System.Threading.Thread.Sleep(9000);
 
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
