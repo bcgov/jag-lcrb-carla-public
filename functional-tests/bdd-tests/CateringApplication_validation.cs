@@ -296,7 +296,7 @@ namespace bdd_tests
             Page Title: Catering Licence Application
             */
 
-            System.Threading.Thread.Sleep(7000);
+            System.Threading.Thread.Sleep(9000);
 
             // select 'Yes' for previous liquor licence
             NgWebElement previousLicence = ngDriver.FindElement(By.Id("mat-button-toggle-1-button"));
