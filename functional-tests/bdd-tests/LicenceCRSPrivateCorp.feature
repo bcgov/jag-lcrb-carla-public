@@ -8,7 +8,7 @@ Scenario: Pay CRS Licence Fee and Complete Applications
     # And I am logged in to the dashboard as a private corporation
     Given I am logged in to the dashboard as a private corporation
     And I click on the Licences tab
-    #And I pay the licensing fee
+    And I pay the licensing fee
     And I click on the licence download link
     And I plan the store opening
     And I request a store relocation
