@@ -8,28 +8,7 @@
     },
     "name": "cllc-public-frontend"
   },
-  "objects": [
-    {
-      "kind": "NetworkSecurityPolicy",
-      "apiVersion": "secops.pathfinder.gov.bc.ca/v1alpha1",
-      "metadata": {
-        "name": "${NAME}",
-        "labels": {
-          "name": "${NAME}",
-          "app": "${APP_NAME}",
-          "env": "${TAG_NAME}"
-        }
-      },
-      "spec": {
-        "description": "Allow the frontend (web) to talk to the api pod.\n",
-        "source": [
-          "- role=${ROLE}\n- app=${APP_NAME}\n- env=${TAG_NAME}"
-        ],
-        "destination": [
-          "- role=api\n- app=${APP_NAME}\n- env=${TAG_NAME}"
-        ]
-      }
-    },
+  "objects": [    
     {
       "kind": "DeploymentConfig",
       "apiVersion": "v1",
@@ -221,11 +200,12 @@
           "env": "${TAG_NAME}"
         },
         "annotations": {
-          "haproxy.router.openshift.io/ip_whitelist": "${SITEMINDER_WHITE_LIST}"
+          "haproxy.router.openshift.io/ip_whitelist": "${SITEMINDER_WHITE_LIST}",
+		  "haproxy.router.openshift.io/timeout": "5m"
         }
       },
       "spec": {
-        "host": "${SITEMINDER_APPLICATION_DOMAIN}",
+        "host": "${SITEMINDER_APPLICATION_DOMAIN}${TAG_NAME}.pathfinder.bcgov",
         "port": {
           "targetPort": "8080-tcp"
         },
@@ -309,7 +289,7 @@
       "description": "The endpoint used for SiteMinder routed access to the application.",
       "displayName": "SiteMinder Application Domain",
       "name": "SITEMINDER_APPLICATION_DOMAIN",
-      "value": "protection-order-dev.pathfinder.bcgov"
+      "value": "cannabis-licensing-"
     },
     {
       "name": "SITEMINDER_WHITE_LIST",
