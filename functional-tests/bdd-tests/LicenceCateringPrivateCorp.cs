@@ -24,6 +24,7 @@ Scenario: Pay First Year Catering Licence and Complete Applications
     Given I am logged in to the dashboard as a private corporation
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the licence download link
     And I request an event authorization
     #And I request a valid store name or branding change
     And I request a store relocation
@@ -88,6 +89,16 @@ namespace bdd_tests
             // click on the Licences link
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
+        }
+
+        [And(@"I click on the licence download link")]
+        public void click_licence_download_link()
+        {
+            string downloadLink = "Download Licence";
+
+            // click on the Licences link
+            NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
+            uiDownloadLicence.Click();
         }
 
         [And(@"I request an event authorization")]
