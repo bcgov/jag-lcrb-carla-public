@@ -23,6 +23,7 @@ Scenario: Pay CRS Licence Fee and Complete Applications
     And I am logged in to the dashboard as a private corporation
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the licence download link
     And I plan the store opening
     And I request a store relocation
     And I request a valid store name or branding change
@@ -108,6 +109,16 @@ namespace bdd_tests
             // click on the Licences link
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
+        }
+
+        [And(@"I click on the licence download link")]
+        public void click_licence_download_link()
+        {
+            string downloadLink = "Download Licence";
+
+            // click on the Licences link
+            NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
+            uiDownloadLicence.Click();
         }
 
         [And(@"I plan the store opening")]
