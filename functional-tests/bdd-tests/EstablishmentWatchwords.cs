@@ -26,8 +26,8 @@ Scenario Outline: Confirm establishment watch words
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I enter a "<watch_word>" on the application page
-    Then the message "The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed." is displayed
+    And I enter a "<watch_word>"
+    Then the correct error message is displayed  
    
     Examples:
     | watch_word    |
@@ -77,6 +77,12 @@ namespace bdd_tests
         public void And_I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
+        }
+
+        [And(@"the account is deleted")]
+        public void Delete_my_account()
+        {
+            this.CarlaDeleteCurrentAccount();
         }
 
         [And(@"I click on the Start Application button")]
@@ -453,8 +459,8 @@ namespace bdd_tests
             submitOrgInfoButton.Click();
         }
 
-        [And(@"I enter a watchword on the application page")]
-        public void enter_a_watchword()
+        [When(@"I enter a (.*)")]
+        public void enter_a_watchword(string watchword)
         {
             /* 
             Page Title: Submit the Cannabis Retail Store Application
@@ -463,18 +469,22 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(7000);
 
             // enter the establishment name
-            //NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
-            //estabName.SendKeys(estName);
+            NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
+            estabName.SendKeys(watchword);
+
+            // click on the establishment address to trigger the warning
+            NgWebElement estabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
+            estabAddress.Click();
         }
 
-        [Then(@"the message 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' is displayed")]
+        [Then(@"the correct error message is displayed")]
         public void watch_warning_displayed()
         {
             /* 
             Page Title: Submit the Cannabis Retail Store Application
             */
 
-            Assert.True(ngDriver.FindElement(By.XPath("//a[text()=' ']")).Displayed);
+        Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'at least one word that doesn’t comply']")).Displayed);
         }
     }
 }
