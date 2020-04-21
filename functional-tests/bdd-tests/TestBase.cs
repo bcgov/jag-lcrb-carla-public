@@ -61,7 +61,7 @@ namespace bdd_tests
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
 
-        public void CarlaLoginNoCheck(string businessType)
+        public void CarlaLoginNoCheck()
         {
             // load the dashboard page
             string test_start = configuration["test_start"];
@@ -164,7 +164,7 @@ namespace bdd_tests
             string testCC = configuration["test_cc"];
             string testCVD = configuration["test_ccv"];
 
-            System.Threading.Thread.Sleep(7000);
+            System.Threading.Thread.Sleep(9000);
 
             //browser sync - don't wait for Angular
             ngDriver.IgnoreSynchronization = true;
