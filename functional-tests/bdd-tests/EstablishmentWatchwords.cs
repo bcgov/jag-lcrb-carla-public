@@ -484,7 +484,7 @@ namespace bdd_tests
             Page Title: Submit the Cannabis Retail Store Application
             */
 
-        Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'at least one word that doesn’t comply']")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'at least one word that doesn’t comply']")).Displayed);
         }
     }
 }
