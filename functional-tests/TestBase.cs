@@ -30,9 +30,15 @@ namespace FunctionalTest
             }
             */
 
+            /*
             configuration = new ConfigurationBuilder()
                 .AddEnvironmentVariables()
                 .AddUserSecrets("dc6f3b78-5234-4b46-96e3-75849fde4479")
+                .Build();*/
+
+            configuration = new ConfigurationBuilder()
+                .AddEnvironmentVariables()
+                .AddUserSecrets("a004e634-29c7-48b6-becc-87fe16be7538")
                 .Build();
 
             string xrmUriStr = configuration["D365_URL"] ?? "http://acme.crm.dynamics.com";
