@@ -20,6 +20,7 @@ namespace bdd_tests
     public abstract class TestBase : Feature
     {
         protected RemoteWebDriver driver;
+
         // Protractor driver
         protected NgWebDriver ngDriver;
 
@@ -61,8 +62,22 @@ namespace bdd_tests
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
 
+        public void CheckFeatureFlags()
+        {
+            string feature_flags = configuration["featureFlags"];
+
+            // navigate to the feature flags page
+            driver.Navigate().GoToUrl($"{baseUri}{feature_flags}");
+
+            // confirm that the LiquorOne flag is enabled during this test
+            //Assert.True(driver.FindElement(By.XPath("//body[contains(.,'LiquorOne')]")).Displayed);
+        }
+
         public void CarlaLoginNoCheck()
         {
+            // confirm which feature flags are enabled
+            CheckFeatureFlags();
+
             // load the dashboard page
             string test_start = configuration["test_start"];
 
@@ -73,6 +88,9 @@ namespace bdd_tests
 
         public void CarlaLogin(string businessType)
         {
+            // confirm which feature flags are enabled
+            CheckFeatureFlags();
+
             // load the dashboard page
             string test_start = configuration["test_start"];
 
