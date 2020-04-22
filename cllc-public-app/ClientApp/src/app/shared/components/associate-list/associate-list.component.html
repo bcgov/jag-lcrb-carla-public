@@ -228,7 +228,8 @@
                                         [valid]="!associate.get('numberofSharesNew').touched || associate.get('numberofSharesNew').valid"
                                         errorMessage="Please enter Shares">
                                         <div class="d-flex">
-                                            <input class="form-control" type="text" formControlName="numberofSharesNew">
+                                            <input class="form-control" type="text" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                                             formControlName="numberofSharesNew">
                                         </div>
                                     </app-field>
                                 </ng-container>
@@ -327,7 +328,8 @@
                                         [isFullWidth]="true"
                                         [valid]="!associate.get('numberofSharesNew').touched || associate.get('numberofSharesNew').valid"
                                         errorMessage="Please enter Shares">
-                                        <input class="form-control" type="text" formControlName="numberofSharesNew">
+                                        <input class="form-control" type="text" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                                        formControlName="numberofSharesNew">
                                     </app-field>
                                 </ng-container>
                             </td>
