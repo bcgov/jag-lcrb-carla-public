@@ -9,10 +9,10 @@
             "apiVersion": "v1",
             "kind": "ImageStream",
             "metadata": {
-                "name": "${NAME}",
+                "name": "${NAME}${SUFFIX}",
                 "labels": {
-                    "name": "${NAME}",
-                    "app": "${APP_NAME}${SUFFIX}",
+                    "name": "${NAME}${SUFFIX}",
+                    "app": "${APP_NAME}",
                     "app-group": "${APP_GROUP}"
                 }
             }
@@ -21,10 +21,10 @@
             "kind": "BuildConfig",
             "apiVersion": "v1",
             "metadata": {
-                "name": "${NAME}",
+                "name": "${NAME}${SUFFIX}",
                 "labels": {
-                    "name": "${NAME}",
-                    "app": "${APP_NAME}${SUFFIX}",
+                    "name": "${NAME}${SUFFIX}",
+                    "app": "${APP_NAME}",
                     "app-group": "${APP_GROUP}"
                 }
             },
@@ -59,7 +59,7 @@
                 "output": {
                     "to": {
                         "kind": "ImageStreamTag",
-                        "name": "${NAME}:${OUTPUT_IMAGE_TAG}"
+                        "name": "${NAME}${SUFFIX}:${OUTPUT_IMAGE_TAG}"
                     }
                 }
             }
@@ -71,14 +71,14 @@
             "displayName": "Name",
             "description": "The name assigned to all of the resources defined in this template.",
             "required": true,
-            "value": "db"
+            "value": "wallet-db"
         },
         {
             "name": "SUFFIX",
             "displayName": "Suffix",
             "description": "A name suffix used for all objects",
             "required": false,
-            "value": "-indy-cat"
+            "value": "-orgbook-issuer"
         },
         {
             "name": "APP_NAME",
@@ -113,7 +113,7 @@
             "displayName": "Source Context Directory",
             "description": "The source context directory.",
             "required": false,
-            "value": "openshift/templates/wallet-db/config"
+            "value": "orgbook-issuer-agent/openshift/templates/wallet-db/config"
         },
         {
             "name": "SOURCE_IMAGE_KIND",

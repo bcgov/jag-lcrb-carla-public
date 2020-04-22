@@ -9,10 +9,10 @@
         "kind": "ImageStream",
         "apiVersion": "v1",
         "metadata": {
-          "name": "${NAME}",
+          "name": "${NAME}${SUFFIX}",
           "labels": {
-            "name": "${NAME}",
-            "app": "${APP_NAME}${SUFFIX}",
+            "name": "${NAME}${SUFFIX}",
+            "app": "${APP_NAME}",
             "app-group": "${APP_GROUP}"
           }
         }
@@ -21,10 +21,10 @@
         "kind": "BuildConfig",
         "apiVersion": "v1",
         "metadata": {
-          "name": "${NAME}",
+          "name": "${NAME}${SUFFIX}",
           "labels": {
-            "name": "${NAME}",
-            "app": "${APP_NAME}${SUFFIX}",
+            "name": "${NAME}${SUFFIX}",
+            "app": "${APP_NAME}",
             "app-group": "${APP_GROUP}"
           }
         },
@@ -47,7 +47,7 @@
           "output": {
             "to": {
               "kind": "ImageStreamTag",
-              "name": "${NAME}:${OUTPUT_IMAGE_TAG}"
+              "name": "${NAME}${SUFFIX}:${OUTPUT_IMAGE_TAG}"
             }
           },
           "resources": {

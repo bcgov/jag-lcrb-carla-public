@@ -15,7 +15,7 @@
         "name": "${NAME}${SUFFIX}",
         "labels": {
           "name": "${NAME}${SUFFIX}",
-          "app": "${APP_NAME}${SUFFIX}",
+          "app": "${APP_NAME}",
           "app-group": "${APP_GROUP}"
         }
       },
@@ -32,7 +32,7 @@
         "name": "${NAME}${SUFFIX}",
         "labels": {
           "name": "${NAME}${SUFFIX}",
-          "app": "${APP_NAME}${SUFFIX}",
+          "app": "${APP_NAME}",
           "app-group": "${APP_GROUP}"
         }
       },
@@ -57,7 +57,7 @@
         "name": "${NAME}${SUFFIX}",
         "labels": {
           "name": "${NAME}${SUFFIX}",
-          "app": "${APP_NAME}${SUFFIX}",
+          "app": "${APP_NAME}",
           "app-group": "${APP_GROUP}"
         },
         "annotations": {
@@ -89,7 +89,7 @@
               "from": {
                 "kind": "ImageStreamTag",
                 "namespace": "${IMAGE_NAMESPACE}",
-                "name": "${NAME}:${TAG_NAME}"
+                "name": "${NAME}${SUFFIX}:${TAG_NAME}"
               }
             }
           }
@@ -133,13 +133,13 @@
                   },
                   {
                     "name": "AGENT_ADMIN_URL",
-                    "value": "http://${AGENT_SERVICE_NAME}${SUFFIX}:${AGENT_ADMIN_PORT}"
+                    "value": "http://${AGENT_SERVICE_NAME}:${AGENT_ADMIN_PORT}"
                   },
                   {
                     "name": "AGENT_ADMIN_API_KEY",
                     "valueFrom": {
                       "secretKeyRef": {
-                        "name": "${AGENT_SERVICE_NAME}${SUFFIX}",
+                        "name": "${AGENT_SERVICE_NAME}",
                         "key": "admin-api-key"
                       }
                     }
@@ -310,14 +310,14 @@
       "name": "CR_AGENT_ADMIN_URL",
       "displayName": "Credential Registry Admin API Url",
       "description": "Credential registry admin api url",
-      "required": true,
+      "required": false,
       "value": ""
     },
     {
       "name": "CR_ADMIN_API_KEY",
       "displayName": "Credential Registry Admin API Key",
       "description": "Credential registry admin api key",
-      "required": true,
+      "required": false,
       "value": ""
     },
     {

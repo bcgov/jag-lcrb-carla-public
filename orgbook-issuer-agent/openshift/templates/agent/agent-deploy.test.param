@@ -13,7 +13,7 @@ APPLICATION_DOMAIN=lcrb-orgbook-issuer-agent-test.pathfinder.gov.bc.ca
 TAG_NAME=test
 # AGENT_LABEL_NAME=bcreg-agent
 AGENT_BASE_URL=https://lcrb-orgbook-issuer-agent-test.pathfinder.gov.bc.ca
-# WEBHOOK_URL=http://bcreg-controller-indy-cat:8080/api/agentcb
+# WEBHOOK_URL=http://controller-orgbook-issuer:8080/api/agentcb
 # AGENT_ADMIN_PORT=8024
 # ADMIN_API_KEY=[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}
 # AGENT_HTTP_PORT=8021

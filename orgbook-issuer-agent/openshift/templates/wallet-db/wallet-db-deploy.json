@@ -17,7 +17,7 @@
           "generation": 1,
           "labels": {
             "name": "${NAME}${SUFFIX}",
-            "app": "${APP_NAME}${SUFFIX}",
+            "app": "${APP_NAME}",
             "app-group": "${APP_GROUP}",
             "template": "${NAME}${SUFFIX}-persistent-template"
           }
@@ -42,7 +42,7 @@
                 "from": {
                   "kind": "ImageStreamTag",
                   "namespace": "${IMAGE_NAMESPACE}",
-                  "name": "${SOURCE_IMAGE_NAME}:${TAG_NAME}"
+                  "name": "${NAME}${SUFFIX}:${TAG_NAME}"
                 }
               }
             },
@@ -59,7 +59,7 @@
             "metadata": {
               "labels": {
                 "name": "${NAME}${SUFFIX}",
-                "app": "${APP_NAME}${SUFFIX}",
+                "app": "${APP_NAME}",
                 "app-group": "${APP_GROUP}"
               }
             },
@@ -68,7 +68,7 @@
                 {
                   "name": "${NAME}${SUFFIX}-data",
                   "persistentVolumeClaim": {
-                    "claimName": "${NAME}${SUFFIX}"
+                    "claimName": "${NAME}${SUFFIX}-data"
                   }
                 }
               ],
@@ -178,10 +178,10 @@
         "kind": "PersistentVolumeClaim",
         "apiVersion": "v1",
         "metadata": {
-          "name": "${NAME}${SUFFIX}",
+          "name": "${NAME}${SUFFIX}-data",
           "labels": {
-            "name": "${NAME}${SUFFIX}",
-            "app": "${APP_NAME}${SUFFIX}",
+            "name": "${NAME}${SUFFIX}-data",
+            "app": "${APP_NAME}",
             "app-group": "${APP_GROUP}",
             "template": "${NAME}${SUFFIX}-persistent-template"
           }
@@ -205,7 +205,7 @@
           "name": "${NAME}${SUFFIX}",
           "labels": {
             "name": "${NAME}${SUFFIX}",
-            "app": "${APP_NAME}${SUFFIX}",
+            "app": "${APP_NAME}",
             "app-group": "${APP_GROUP}"
           }
         },
@@ -223,7 +223,7 @@
           "name": "${NAME}${SUFFIX}",
           "labels": {
             "name": "${NAME}${SUFFIX}",
-            "app": "${APP_NAME}${SUFFIX}",
+            "app": "${APP_NAME}",
             "app-group": "${APP_GROUP}",
             "template": "${NAME}${SUFFIX}-persistent-template"
           },
@@ -254,7 +254,7 @@
         "displayName": "Name",
         "description": "The name assigned to all of the OpenShift resources associated to the server instance.",
         "required": true,
-        "value": "wallet"
+        "value": "wallet-db"
       },
       {
         "name": "SUFFIX",
@@ -283,13 +283,6 @@
         "required": true,
         "description": "The namespace of the OpenShift project containing the imagestream for the application.",
         "value": "yuumcs-tools"
-      },
-      {
-        "name": "SOURCE_IMAGE_NAME",
-        "displayName": "Source Image Name",
-        "description": "The name of the image to use for this resource.",
-        "required": true,
-        "value": "db"
       },
       {
         "name": "TAG_NAME",
