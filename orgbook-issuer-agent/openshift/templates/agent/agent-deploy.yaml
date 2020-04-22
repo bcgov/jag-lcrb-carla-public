@@ -11,7 +11,7 @@ objects:
     name: ${NAME}${SUFFIX}
     labels:
       name: ${NAME}${SUFFIX}
-      app: ${APP_NAME}${SUFFIX}
+      app: ${APP_NAME}
       app-group: ${APP_GROUP}
   spec:
     ports:
@@ -36,7 +36,7 @@ objects:
     name: ${NAME}${SUFFIX}
     labels:
       name: ${NAME}${SUFFIX}
-      app: ${APP_NAME}${SUFFIX}
+      app: ${APP_NAME}
       app-group: ${APP_GROUP}
     annotations:
         haproxy.router.openshift.io/timeout: ${ROUTE_TIMEOUT}
@@ -58,7 +58,7 @@ objects:
     name: ${WALLET_CREDENTIAL_STORE_NAME}${SUFFIX}
     labels:
       name: ${NAME}${SUFFIX}
-      app: ${APP_NAME}${SUFFIX}
+      app: ${APP_NAME}
       app-group: ${APP_GROUP}
   stringData:
     key: ${WALLET_KEY}
@@ -69,10 +69,10 @@ objects:
 - kind: Secret
   apiVersion: v1
   metadata:
-    name: ${NAME}${SUFFIX}
+    name: ${AGENT_LABEL_NAME}
     labels:
-      name: ${NAME}${SUFFIX}
-      app: ${APP_NAME}${SUFFIX}
+      name: ${AGENT_LABEL_NAME}
+      app: ${APP_NAME}
       app-group: ${APP_GROUP}
   stringData:
     admin-api-key: ${ADMIN_API_KEY}
@@ -84,7 +84,7 @@ objects:
     name: ${NAME}${SUFFIX}
     labels:
       name: ${NAME}${SUFFIX}
-      app: ${APP_NAME}${SUFFIX}
+      app: ${APP_NAME}
       app-group: ${APP_GROUP}
   spec:
     replicas: 1
@@ -97,7 +97,7 @@ objects:
         name: ${NAME}${SUFFIX}
         labels:
           name: ${NAME}${SUFFIX}
-          app: ${APP_NAME}${SUFFIX}
+          app: ${APP_NAME}
           app-group: ${APP_GROUP}
       spec:
         containers:
@@ -245,7 +245,7 @@ objects:
         - ${NAME}${SUFFIX}
         from:
           kind: ImageStreamTag
-          name: ${NAME}:${TAG_NAME}
+          name: ${NAME}${SUFFIX}:${TAG_NAME}
           namespace: ${IMAGE_NAMESPACE}
 
 - kind: HorizontalPodAutoscaler
@@ -254,7 +254,7 @@ objects:
     name: ${NAME}${SUFFIX}
     labels:
       name: ${NAME}${SUFFIX}
-      app: ${APP_NAME}${SUFFIX}
+      app: ${APP_NAME}
       app-group: ${APP_GROUP}
   spec:
     scaleTargetRef:
@@ -268,27 +268,27 @@ parameters:
   displayName: Name
   description: The name assigned to all the objects defined in this template.
   required: true
-  value: agent
+  value: ${NAME}
 - name: SUFFIX
   displayName: Suffix
   description: A name suffix used for all objects.
   required: false
-  value: -orgbook-issuer
+  value: ${SUFFIX}
 - name: APP_NAME
   displayName: App Name
   description: Used to group components together in the OpenShift console.
   required: true
-  value: OrgbookIssuerAgent
+  value: ${APP_NAME}
 - name: APP_GROUP
   displayName: App Group
   description: Used to group components together.
   required: true
-  value: OrgbookIssuerAgent
+  value: ${APP_GROUP}
 - name: APPLICATION_DOMAIN
   displayName: Application Hostname
   description: The exposed hostname that will route to the service, if left blank a value will be defaulted.
   required: false
-  value: lcrb-orgbook-issuer-agent-dev.pathfinder.gov.bc.ca
+  value: ${APPLICATION_DOMAIN}
 - name: ROUTE_TIMEOUT
   displayName: Route Timeout
   description: The timeout for the application route.  When this timeout is exceeded the application's route will respond with a 504 Gateway Timeout error.
@@ -297,32 +297,32 @@ parameters:
 - name: IMAGE_NAMESPACE
   displayName: Namespace containing application images.
   required: true
-  value: yuumcs-tools
+  value: ${IMAGE_NAMESPACE}
 - name: TAG_NAME
   displayName: Environment TAG name
   description: The TAG name for this environment, e.g., dev, test, prod.
   required: true
-  value: dev
+  value: ${TAG_NAME}
 - name: AGENT_LABEL_NAME
   displayName: Agent Label/Name
   description: The label/name of the agent
   required: true
-  value: bcreg-agent
+  value: ${AGENT_LABEL_NAME}
 - name: AGENT_BASE_URL
   displayName: Agent endpoint
   description: The endpoint of the agent
   required: true
-  value: https://lcrb-orgbook-issuer-agent-dev.pathfinder.gov.bc.ca
+  value: ${AGENT_BASE_URL}
 - name: WEBHOOK_URL
   displayName: Webhook URL
   description: The webhook endpoint
   required: true
-  value: http://bcreg-controller-indy-cat:8080/api/agentcb
+  value: ${WEBHOOK_URL}
 - name: AGENT_ADMIN_PORT
   displayName: Agent Admin Port
   description: The admin port on which the service will listen.
   required: true
-  value: "8024"
+  value: "${AGENT_ADMIN_PORT}"
 - name: ADMIN_API_KEY
   displayName: Agent Admin API Key
   description: The key used to authenticate client requests to the admin api.
@@ -333,22 +333,22 @@ parameters:
   displayName: Agent Http Port
   description: The http port on which the service will listen.
   required: true
-  value: "8021"
+  value: "${AGENT_HTTP_PORT"
 - name: AGENT_WS_PORT
   displayName: Agent WS Port
   description: The WS port on which the service will listen.
   required: true
-  value: "8023"
+  value: "${AGENT_WS_PORT}"
 - name: GENESIS_FILE_URL
   displayName: Genesis File URL
   description: The URL from which the genesis file can be downloaded.
   required: true
-  value: http://dev.bcovrin.vonx.io/genesis
+  value: ${GENESIS_FILE_URL}
 - name: LOG_LEVEL
   displayName: Log Level
   description: The logging level for the agent, one of 'debug', 'info', 'warning', 'error', 'critical'
   required: true
-  value: WARNING
+  value: ${LOG_LEVEL}
 - name: AGENT_TIMING
   displayName: Collect agent timing information.
   description: Enable/Disable collection of agent timing information.  Controls the inclusion/exclusion of the agent '--timing' startup parameter.  Defaults to disabled.
@@ -393,7 +393,7 @@ parameters:
   description: The name of the wallet credential store (aka The name of the secret
     that contains the wallet credentials).
   required: true
-  value: agent-wallet-credentials
+  value: ${WALLET_CREDENTIAL_STORE_NAME}
 - name: WALLET_KEY
   displayName: Wallet Encryption Key
   description: The encryption key to be used for the wallets.  Needs to be basee64 encoded.

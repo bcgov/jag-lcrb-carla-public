@@ -8,11 +8,11 @@
 # APP_NAME=BcRegistriesAgent
 # APP_GROUP=indy-catalyst
 # IMAGE_NAMESPACE=devex-von-bc-registries-agent-tools
-TAG_NAME=dev
+TAG_NAME=latest
 # CONFIG_ROOT=../config
 # HOST_PORT=8080
 # ENVIRONMENT=default
-# AGENT_SERVICE_NAME=agent
+AGENT_SERVICE_NAME=agent-orgbook-issuer
 # AGENT_ADMIN_PORT=8024
 # CR_AGENT_ADMIN_URL=
 # CR_ADMIN_API_KEY=

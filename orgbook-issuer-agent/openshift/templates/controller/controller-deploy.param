@@ -3,16 +3,16 @@
 # Component: .
 # Template File: ../openshift/templates/bcreg-controller/bcreg-controller-deploy.json
 #=========================================================
-NAME=orgbook-issuer-controller
+NAME=controller
 SUFFIX=-orgbook-issuer
 APP_NAME=OrgbookIssuerAgent
 APP_GROUP=OrgbookIssuerAgent
 IMAGE_NAMESPACE=yuumcs-tools
-TAG_NAME=dev
+TAG_NAME=latest
 CONFIG_ROOT=../config
 HOST_PORT=8080
 ENVIRONMENT=default
-AGENT_SERVICE_NAME=agent
+AGENT_SERVICE_NAME=agent-orgbook-issuer
 AGENT_ADMIN_PORT=8024
 CR_AGENT_ADMIN_URL=
 CR_ADMIN_API_KEY=
