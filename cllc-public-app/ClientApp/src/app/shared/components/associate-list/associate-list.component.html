@@ -100,7 +100,7 @@
                                     [valid]="!associate.get('dateofBirthNew').touched || associate.get('dateofBirthNew').valid"
                                     errorMessage="Please enter Birth Date">
                                     <input type="text" formControlName="dateofBirthNew"
-                                        style="width: 120px; background-color: #fff;" autocomplete="false"
+                                        style="width: 120px; background-color: #fff;" autocomplete="false" readonly
                                         placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker2"
                                         [max]="YearsAgo19" (focus)="picker2.open()" (click)="picker2.open()">
                                     <mat-datepicker #picker2></mat-datepicker>
@@ -253,7 +253,7 @@
                                     errorMessage="Please enter Birth Date">
                                     <input type="text" formControlName="dateofBirthNew"
                                         style="width: 120px; background-color: #fff;" autocomplete="false"
-                                        [max]="YearsAgo19" placeholder="yyyy-mm-dd" class="form-control"
+                                        [max]="YearsAgo19" placeholder="yyyy-mm-dd" class="form-control" readonly
                                         [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
                                     <mat-datepicker #picker></mat-datepicker>
                                 </app-field>
