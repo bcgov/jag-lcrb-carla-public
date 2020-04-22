@@ -142,11 +142,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // determine if there is a completed change log for this item.
                 if (!string.IsNullOrEmpty(legalEntity.contactId))
                 {
+                    // liquor
                     var contact = _dynamicsClient.GetContactById(legalEntity.contactId).GetAwaiter().GetResult();
-                    if (contact != null && contact.AdoxioPhscomplete != null && contact.AdoxioPhscomplete == (int)YesNoOptions.Yes)
+                    if (isLiquor && contact != null && contact.AdoxioPhscomplete != null && contact.AdoxioPhscomplete == (int)YesNoOptions.Yes)
                     {
                         isComplete = true;
                         dateSubmitted = contact.AdoxioPhsdatesubmitted;
+                    }
+
+                    // cannabis
+                    if (!isLiquor && contact != null && contact.AdoxioCascomplete != null && contact.AdoxioCascomplete == (int)YesNoOptions.Yes)
+                    {
+                        isComplete = true;
+                        dateSubmitted = contact.AdoxioCasdatesubmitted;
                     }
                 }
                 var newItem = new SecurityScreeningStatusItem()
@@ -235,7 +243,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (liquorLicenceCount > 0 || liquorApplicationCount > 0)
             {
                 SecurityScreeningCategorySummary liquorSummary = new SecurityScreeningCategorySummary();
-                GetScreeningData(ref liquorSummary, legalEntity, false);
+                GetScreeningData(ref liquorSummary, legalEntity, true);
                 result.Liquor = liquorSummary;
             }
 
@@ -349,7 +357,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 foreach (var legalEntity in legalEntities)
                 {
                     var viewModel = legalEntity.ToViewModel();
-                   if (!String.IsNullOrEmpty(legalEntity.AdoxioLegalentityid) && !processedEntities.Contains(legalEntity.AdoxioLegalentityid))
+                    if (!String.IsNullOrEmpty(legalEntity.AdoxioLegalentityid) && !processedEntities.Contains(legalEntity.AdoxioLegalentityid))
                     {
                         processedEntities.Add(legalEntity.AdoxioLegalentityid);
                         viewModel.children = GetLegalEntityChildren(legalEntity.AdoxioLegalentityid, processedEntities);

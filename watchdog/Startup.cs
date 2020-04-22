@@ -52,7 +52,8 @@ namespace Watchdog
                 setup.AddHealthCheckEndpointIfExists("Geocoder", Configuration["GEOCODER_HEALTH_URI"]);
                 setup.AddHealthCheckEndpointIfExists("One Stop", Configuration["ONE_STOP_HEALTH_URI"]);
                 setup.AddHealthCheckEndpoint("Org Book", Configuration["ORG_BOOK_URI"]);
-                
+                setup.AddHealthCheckEndpoint("SPICE/CARLA Sync", Configuration["SPICE_SYNC_URI"]);
+
                 //setup.AddWebhookNotification("webhook1", uri: "http://httpbin.org/status/200?code=ax3rt56s", payload: "{...}");
             });
             

@@ -73,6 +73,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.phsFinancialIntDetails = contact.AdoxioPhsfinancialinterestdetails;
                 result.phsProfitAgreement = (YesNoOptions?)contact.AdoxioPhsprofitagreement;
                 result.phsProfitAgreementDetails = contact.AdoxioPhsprofitagreementdetails;
+                result.CasComplete = (YesNoOptions?)contact.AdoxioCascomplete;
             }
             return result;
         }
