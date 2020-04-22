@@ -107,7 +107,7 @@ namespace bdd_tests
             NgWebElement nextCalendar = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span"));
             nextCalendar.Click();
 
-            NgWebElement nextCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr[4]/td[2]/div"));
+            NgWebElement nextCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr[4]/td[3]/div"));
             nextCalendar2.Click();
 
             NgWebElement nextCalendar3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-year-view/table/tbody/tr[3]/td[4]/div"));
