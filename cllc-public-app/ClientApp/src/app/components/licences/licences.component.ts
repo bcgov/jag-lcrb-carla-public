@@ -128,7 +128,7 @@ export class LicencesComponent extends FormBase implements OnInit {
     if (actionApplication && !actionApplication.isPaid) {
       this.router.navigateByUrl('/account-profile/' + actionApplication.applicationId);
     } else if (actionApplication && actionApplication.isPaid) {
-      this.snackBar.open('Application  in progress', 'Fail',
+      this.snackBar.open(`${actionName} has already been submitted and is under review`, 'Warning',
         { duration: 3500, panelClass: ['red-snackbar'] });
     } else {
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
