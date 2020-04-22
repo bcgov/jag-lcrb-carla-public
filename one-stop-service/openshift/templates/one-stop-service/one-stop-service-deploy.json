@@ -316,12 +316,7 @@
       "displayName": "Memory Request",
       "description": "Starting amount of memory the container can use.",
       "value": "512Mi"
-    },   
-    {
-      "description": "Field for a test email.",
-      "displayName": "Test Email",
-      "name": "TEST_EMAIL"
-    },
+    },       
     {
       "description": "URL for SMTP Host, e.g., apps.smtp.gov.bc.ca, if left blank a value will be defaulted.",
       "displayName": "SMTP Host",
@@ -335,21 +330,29 @@
 		"displayName": "JWT VALID ISSUER",
         "name": "JWT_VALID_ISSUER",
 		"required": true,
-        "value": "CHANGEME"
+        "value": "http://localhost:8080/"
     },
     {
 		"description": "String used to identify the audience.",
 		"displayName": "JWT VALID AUDIENCE",
         "name": "JWT_VALID_AUDIENCE",
 		"required": true,
-        "value": "CHANGEME"
-    },
+        "value": "http://localhost:8080/"
+    },	
     {
 		"description": "Secret/Key used to generate tokens.  Can be any text string, including the text form of a GUID.",
 		"displayName": "JWT Token Key",
 		"name": "JWT_TOKEN_KEY",
 		"required": true,
 		"value": "CHANGEME"
-    }
+    },
+	{
+		"description": "Secret",
+		"displayName": "Secret Name",
+		"name": "SECRET_RESOURCE_NAME",
+		"required": true,
+		"value": "cllc-public"
+    }	
+	
   ]
 }
