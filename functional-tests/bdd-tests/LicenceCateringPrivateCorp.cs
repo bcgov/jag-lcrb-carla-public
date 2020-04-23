@@ -329,7 +329,7 @@ namespace bdd_tests
             Page Title: Submit a Licence Relocation Application
             */
 
-            // create test data
+            /*// create test data
             string streetAddress = "303 Prideaux St";
             string city = "Nanaimo";
             string postal = "V9R2N3";
@@ -345,6 +345,7 @@ namespace bdd_tests
             // enter the proposed postal code
             NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressPostalCode'])[3]"));
             uiPostalCode.SendKeys(postal);
+            */
 
             // find the upload test file in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
@@ -557,7 +558,7 @@ namespace bdd_tests
             //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Name or Branding Change')]")).Displayed);
 
             // confirm that a third party operator request is displayed
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third-Party Operator')]")).Displayed);
+            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third-Party Operator')]")).Displayed);
         }
     }
 }
