@@ -7,6 +7,8 @@
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
     using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -27,67 +29,35 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMentitlementtemplatechannel class.
         /// </summary>
-        /// <param name="_entitlementtemplateidValue">Unique identifier for
-        /// Entitlement Template associated with Entitlement Template
-        /// Channel.</param>
-        /// <param name="entitlementtemplatechannelid">Unique identifier for
-        /// entity instances</param>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// modified the record.</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="_transactioncurrencyidValue">Unique identifier of the
-        /// currency associated with the incident.</param>
-        /// <param name="versionnumber">Version number of the entitlement
-        /// template channel item.</param>
-        /// <param name="exchangerate">Exchange rate for the currency
-        /// associated with the incident with respect to the base
-        /// currency.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="name">The name of the custom entity.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who modified the record.</param>
-        /// <param name="totalterms">Type the total number of entitlement
-        /// terms.</param>
-        /// <param name="modifiedon">Date and time when the record was
-        /// modified.</param>
-        /// <param name="channel">Select a channel for which you are defining
-        /// the entitlement terms.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the record.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the record.</param>
-        /// <param name="createdon">Date and time when the entitlement was
-        /// created.</param>
-        /// <param name="_organizationidValue">Unique identifier of the
-        /// organization with which the entitlement template channel is
-        /// associated.</param>
-        public MicrosoftDynamicsCRMentitlementtemplatechannel(string _entitlementtemplateidValue = default(string), string entitlementtemplatechannelid = default(string), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _transactioncurrencyidValue = default(string), string versionnumber = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string name = default(string), string _modifiedonbehalfbyValue = default(string), decimal? totalterms = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? channel = default(int?), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _organizationidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMentitlementtemplate entitlementtemplateid = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMentitlementtemplatechannel(string _modifiedonbehalfbyValue = default(string), string name = default(string), string _organizationidValue = default(string), int? importsequencenumber = default(int?), string entitlementtemplatechannelid = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), decimal? exchangerate = default(decimal?), int? channel = default(int?), string _entitlementtemplateidValue = default(string), string _transactioncurrencyidValue = default(string), string _createdbyValue = default(string), decimal? totalterms = default(decimal?), int? utcconversiontimezonecode = default(int?), IList<MicrosoftDynamicsCRMsyncerror> entitlementtemplatechannelSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMteam> entitlementtemplatechannelTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> entitlementtemplatechannelAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> entitlementtemplatechannelMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> entitlementtemplatechannelBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> entitlementtemplatechannelPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMconnection> entitlementtemplatechannelConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> entitlementtemplatechannelConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMentitlementtemplate entitlementtemplateid = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            this._entitlementtemplateidValue = _entitlementtemplateidValue;
-            Entitlementtemplatechannelid = entitlementtemplatechannelid;
-            Importsequencenumber = importsequencenumber;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            this._modifiedbyValue = _modifiedbyValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Versionnumber = versionnumber;
-            Exchangerate = exchangerate;
-            Overriddencreatedon = overriddencreatedon;
-            Name = name;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Totalterms = totalterms;
-            Modifiedon = modifiedon;
-            Channel = channel;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._createdbyValue = _createdbyValue;
-            Createdon = createdon;
+            Name = name;
             this._organizationidValue = _organizationidValue;
+            Importsequencenumber = importsequencenumber;
+            Entitlementtemplatechannelid = entitlementtemplatechannelid;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Createdon = createdon;
+            Modifiedon = modifiedon;
+            Overriddencreatedon = overriddencreatedon;
+            Versionnumber = versionnumber;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._modifiedbyValue = _modifiedbyValue;
+            Exchangerate = exchangerate;
+            Channel = channel;
+            this._entitlementtemplateidValue = _entitlementtemplateidValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            this._createdbyValue = _createdbyValue;
+            Totalterms = totalterms;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            EntitlementtemplatechannelSyncErrors = entitlementtemplatechannelSyncErrors;
+            EntitlementtemplatechannelTeams = entitlementtemplatechannelTeams;
+            EntitlementtemplatechannelAsyncOperations = entitlementtemplatechannelAsyncOperations;
+            EntitlementtemplatechannelMailboxTrackingFolders = entitlementtemplatechannelMailboxTrackingFolders;
+            EntitlementtemplatechannelBulkDeleteFailures = entitlementtemplatechannelBulkDeleteFailures;
+            EntitlementtemplatechannelPrincipalObjectAttributeAccesses = entitlementtemplatechannelPrincipalObjectAttributeAccesses;
+            EntitlementtemplatechannelConnections1 = entitlementtemplatechannelConnections1;
+            EntitlementtemplatechannelConnections2 = entitlementtemplatechannelConnections2;
             Createdby = createdby;
             Modifiedby = modifiedby;
             Organizationid = organizationid;
@@ -104,128 +74,139 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets unique identifier for Entitlement Template associated
-        /// with Entitlement Template Channel.
-        /// </summary>
-        [JsonProperty(PropertyName = "_entitlementtemplateid_value")]
-        public string _entitlementtemplateidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for entity instances
-        /// </summary>
-        [JsonProperty(PropertyName = "entitlementtemplatechannelid")]
-        public string Entitlementtemplatechannelid { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who modified the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the currency associated with the
-        /// incident.
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets version number of the entitlement template channel
-        /// item.
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets exchange rate for the currency associated with the
-        /// incident with respect to the base currency.
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the custom entity.
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who modified
-        /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets type the total number of entitlement terms.
         /// </summary>
-        [JsonProperty(PropertyName = "totalterms")]
-        public decimal? Totalterms { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the record was modified.
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets select a channel for which you are defining the
-        /// entitlement terms.
         /// </summary>
-        [JsonProperty(PropertyName = "channel")]
-        public int? Channel { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// record.
+        /// </summary>
+        [JsonProperty(PropertyName = "entitlementtemplatechannelid")]
+        public string Entitlementtemplatechannelid { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who created the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the entitlement was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the organization with which the
-        /// entitlement template channel is associated.
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "channel")]
+        public int? Channel { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_entitlementtemplateid_value")]
+        public string _entitlementtemplateidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "totalterms")]
+        public decimal? Totalterms { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entitlementtemplatechannel_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> EntitlementtemplatechannelSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entitlementtemplatechannel_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> EntitlementtemplatechannelTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entitlementtemplatechannel_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> EntitlementtemplatechannelAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entitlementtemplatechannel_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> EntitlementtemplatechannelMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entitlementtemplatechannel_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> EntitlementtemplatechannelBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entitlementtemplatechannel_PrincipalObjectAttributeAccesses")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> EntitlementtemplatechannelPrincipalObjectAttributeAccesses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entitlementtemplatechannel_connections1")]
+        public IList<MicrosoftDynamicsCRMconnection> EntitlementtemplatechannelConnections1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entitlementtemplatechannel_connections2")]
+        public IList<MicrosoftDynamicsCRMconnection> EntitlementtemplatechannelConnections2 { get; set; }
 
         /// <summary>
         /// </summary>

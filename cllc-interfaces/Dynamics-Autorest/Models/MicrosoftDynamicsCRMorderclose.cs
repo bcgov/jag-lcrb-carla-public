@@ -29,27 +29,39 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMorderclose
         /// class.
         /// </summary>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="revision">Order revision number.</param>
-        /// <param name="category">Category of the order close
-        /// activity.</param>
-        /// <param name="_salesorderidValue">Unique identifier of the order
-        /// with which the order close activity is associated.</param>
-        /// <param name="subcategory">Subcategory of the order close
-        /// activity.</param>
-        /// <param name="ordernumber">Order number.</param>
-        public MicrosoftDynamicsCRMorderclose(int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? revision = default(int?), string category = default(string), string _salesorderidValue = default(string), string subcategory = default(string), string ordernumber = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunitOrderclose = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> orderCloseSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> orderCloseBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMservice serviceidOrderclose = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMannotation> orderCloseAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMactivityparty> ordercloseActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsystemuser owninguserOrderclose = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> orderCloseAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsalesorder salesorderid = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMteam owningteamOrderclose = default(MicrosoftDynamicsCRMteam))
+        public MicrosoftDynamicsCRMorderclose(int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string category = default(string), string ordernumber = default(string), string subcategory = default(string), string _salesorderidValue = default(string), int? revision = default(int?), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemailOrderclose = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementOrderclose = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateOrderclose = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingOrderclose = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderOrderclose = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordOrderclose = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMsite regardingobjectidSiteOrderclose = default(MicrosoftDynamicsCRMsite), MicrosoftDynamicsCRMaccount regardingobjectidAccountOrderclose = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMmailbox sendermailboxidOrderclose = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidOrderclose = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprincipal owneridOrderclose = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityOrderclose = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsla slaActivitypointerSlaOrderclose = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleOrderclose = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMlead regardingobjectidLeadOrderclose = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationOrderclose = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMincident regardingobjectidIncidentOrderclose = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignOrderclose = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityOrderclose = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSlaOrderclose = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMcampaignresponse> campaignResponseOrderCloses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMteam> ordercloseTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ordercloseMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> orderclosePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunitOrderclose = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> orderCloseSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> orderCloseBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMservice serviceidOrderclose = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMannotation> orderCloseAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMactivityparty> ordercloseActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsystemuser owninguserOrderclose = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> orderCloseAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsalesorder salesorderid = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMteam owningteamOrderclose = default(MicrosoftDynamicsCRMteam))
         {
             Importsequencenumber = importsequencenumber;
             Overriddencreatedon = overriddencreatedon;
-            Revision = revision;
             Category = category;
-            this._salesorderidValue = _salesorderidValue;
-            Subcategory = subcategory;
             Ordernumber = ordernumber;
+            Subcategory = subcategory;
+            this._salesorderidValue = _salesorderidValue;
+            Revision = revision;
+            RegardingobjectidNewInteractionforemailOrderclose = regardingobjectidNewInteractionforemailOrderclose;
+            RegardingobjectidEntitlementOrderclose = regardingobjectidEntitlementOrderclose;
+            RegardingobjectidEntitlementtemplateOrderclose = regardingobjectidEntitlementtemplateOrderclose;
+            RegardingobjectidBookableresourcebookingOrderclose = regardingobjectidBookableresourcebookingOrderclose;
+            RegardingobjectidBookableresourcebookingheaderOrderclose = regardingobjectidBookableresourcebookingheaderOrderclose;
+            RegardingobjectidKnowledgebaserecordOrderclose = regardingobjectidKnowledgebaserecordOrderclose;
+            RegardingobjectidSiteOrderclose = regardingobjectidSiteOrderclose;
+            RegardingobjectidAccountOrderclose = regardingobjectidAccountOrderclose;
+            SendermailboxidOrderclose = sendermailboxidOrderclose;
+            TransactioncurrencyidOrderclose = transactioncurrencyidOrderclose;
+            OwneridOrderclose = owneridOrderclose;
+            RegardingobjectidOpportunityOrderclose = regardingobjectidOpportunityOrderclose;
+            SlaActivitypointerSlaOrderclose = slaActivitypointerSlaOrderclose;
+            RegardingobjectidKnowledgearticleOrderclose = regardingobjectidKnowledgearticleOrderclose;
+            RegardingobjectidLeadOrderclose = regardingobjectidLeadOrderclose;
+            RegardingobjectidBulkoperationOrderclose = regardingobjectidBulkoperationOrderclose;
+            RegardingobjectidIncidentOrderclose = regardingobjectidIncidentOrderclose;
+            RegardingobjectidCampaignOrderclose = regardingobjectidCampaignOrderclose;
+            RegardingobjectidCampaignactivityOrderclose = regardingobjectidCampaignactivityOrderclose;
+            SlainvokedidActivitypointerSlaOrderclose = slainvokedidActivitypointerSlaOrderclose;
+            CampaignResponseOrderCloses = campaignResponseOrderCloses;
+            OrdercloseTeams = ordercloseTeams;
+            OrdercloseMailboxTrackingFolders = ordercloseMailboxTrackingFolders;
+            OrderclosePrincipalObjectAttributeAccesses = orderclosePrincipalObjectAttributeAccesses;
             CreatedonbehalfbyOrderclose = createdonbehalfbyOrderclose;
             OwningbusinessunitOrderclose = owningbusinessunitOrderclose;
             OrderCloseSyncErrors = orderCloseSyncErrors;
@@ -74,48 +86,159 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
-        /// Gets or sets order revision number.
-        /// </summary>
-        [JsonProperty(PropertyName = "revision")]
-        public int? Revision { get; set; }
-
-        /// <summary>
-        /// Gets or sets category of the order close activity.
         /// </summary>
         [JsonProperty(PropertyName = "category")]
         public string Category { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the order with which the order
-        /// close activity is associated.
         /// </summary>
-        [JsonProperty(PropertyName = "_salesorderid_value")]
-        public string _salesorderidValue { get; set; }
+        [JsonProperty(PropertyName = "ordernumber")]
+        public string Ordernumber { get; set; }
 
         /// <summary>
-        /// Gets or sets subcategory of the order close activity.
         /// </summary>
         [JsonProperty(PropertyName = "subcategory")]
         public string Subcategory { get; set; }
 
         /// <summary>
-        /// Gets or sets order number.
         /// </summary>
-        [JsonProperty(PropertyName = "ordernumber")]
-        public string Ordernumber { get; set; }
+        [JsonProperty(PropertyName = "_salesorderid_value")]
+        public string _salesorderidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "revision")]
+        public int? Revision { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_new_interactionforemail_orderclose")]
+        public MicrosoftDynamicsCRMinteractionforemail RegardingobjectidNewInteractionforemailOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_entitlement_orderclose")]
+        public MicrosoftDynamicsCRMentitlement RegardingobjectidEntitlementOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_entitlementtemplate_orderclose")]
+        public MicrosoftDynamicsCRMentitlementtemplate RegardingobjectidEntitlementtemplateOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebooking_orderclose")]
+        public MicrosoftDynamicsCRMbookableresourcebooking RegardingobjectidBookableresourcebookingOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebookingheader_orderclose")]
+        public MicrosoftDynamicsCRMbookableresourcebookingheader RegardingobjectidBookableresourcebookingheaderOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_knowledgebaserecord_orderclose")]
+        public MicrosoftDynamicsCRMknowledgebaserecord RegardingobjectidKnowledgebaserecordOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_site_orderclose")]
+        public MicrosoftDynamicsCRMsite RegardingobjectidSiteOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_account_orderclose")]
+        public MicrosoftDynamicsCRMaccount RegardingobjectidAccountOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sendermailboxid_orderclose")]
+        public MicrosoftDynamicsCRMmailbox SendermailboxidOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "transactioncurrencyid_orderclose")]
+        public MicrosoftDynamicsCRMtransactioncurrency TransactioncurrencyidOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ownerid_orderclose")]
+        public MicrosoftDynamicsCRMprincipal OwneridOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_opportunity_orderclose")]
+        public MicrosoftDynamicsCRMopportunity RegardingobjectidOpportunityOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sla_activitypointer_sla_orderclose")]
+        public MicrosoftDynamicsCRMsla SlaActivitypointerSlaOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_knowledgearticle_orderclose")]
+        public MicrosoftDynamicsCRMknowledgearticle RegardingobjectidKnowledgearticleOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_lead_orderclose")]
+        public MicrosoftDynamicsCRMlead RegardingobjectidLeadOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bulkoperation_orderclose")]
+        public MicrosoftDynamicsCRMbulkoperation RegardingobjectidBulkoperationOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_incident_orderclose")]
+        public MicrosoftDynamicsCRMincident RegardingobjectidIncidentOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_campaign_orderclose")]
+        public MicrosoftDynamicsCRMcampaign RegardingobjectidCampaignOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_campaignactivity_orderclose")]
+        public MicrosoftDynamicsCRMcampaignactivity RegardingobjectidCampaignactivityOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "slainvokedid_activitypointer_sla_orderclose")]
+        public MicrosoftDynamicsCRMsla SlainvokedidActivitypointerSlaOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "CampaignResponse_OrderCloses")]
+        public IList<MicrosoftDynamicsCRMcampaignresponse> CampaignResponseOrderCloses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "orderclose_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> OrdercloseTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "orderclose_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> OrdercloseMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "orderclose_PrincipalObjectAttributeAccesses")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> OrderclosePrincipalObjectAttributeAccesses { get; set; }
 
         /// <summary>
         /// </summary>
