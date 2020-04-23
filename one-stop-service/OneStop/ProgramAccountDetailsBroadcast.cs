@@ -142,9 +142,19 @@ namespace WebApplicationSoap.OneStop
 
             // Set the SBNProgramTypeCode to the value specified in the licence -> licenceType record.
 
-            //if (licence?.AdoxioLicenceType.onAdoxioLicenceType?)
-
-            programAccountDetailsBroadcastBody.SBNProgramTypeCode = OneStopUtils.PROGRAM_TYPE_CODE_CANNABIS_RETAIL_STORE;
+            if (licence?.AdoxioLicenceType?.AdoxioOnestopprogramaccounttype != null )
+            {
+                programAccountDetailsBroadcastBody.SBNProgramTypeCode = licence?.AdoxioLicenceType?.AdoxioOnestopprogramaccounttype.ToString();
+            }
+            else
+            {
+                if ("Cannabis Retail Store" == licence?.AdoxioLicenceType?.AdoxioName  )
+                {
+                    programAccountDetailsBroadcastBody.SBNProgramTypeCode = OneStopUtils.PROGRAM_TYPE_CODE_CANNABIS_RETAIL_STORE;
+                }
+                
+            }
+            
 
             programAccountDetailsBroadcastBody.businessCore = GetBusinessCore(licence);
 
