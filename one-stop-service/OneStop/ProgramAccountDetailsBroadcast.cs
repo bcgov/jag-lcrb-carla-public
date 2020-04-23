@@ -139,8 +139,11 @@ namespace WebApplicationSoap.OneStop
             
             // reference number received on SBNCreateProgramAccountResponseBody.businessProgramAccountReferenceNumber
             programAccountDetailsBroadcastBody.businessProgramAccountReferenceNumber = licence.AdoxioBusinessprogramaccountreferencenumber;
-            
-            // this identifies the licence type. Fixed number assigned by the OneStopHub
+
+            // Set the SBNProgramTypeCode to the value specified in the licence -> licenceType record.
+
+            //if (licence?.AdoxioLicenceType.onAdoxioLicenceType?)
+
             programAccountDetailsBroadcastBody.SBNProgramTypeCode = OneStopUtils.PROGRAM_TYPE_CODE_CANNABIS_RETAIL_STORE;
 
             programAccountDetailsBroadcastBody.businessCore = GetBusinessCore(licence);
