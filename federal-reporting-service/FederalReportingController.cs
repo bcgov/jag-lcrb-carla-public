@@ -128,8 +128,8 @@ namespace Gov.Lclb.Cllb.FederalReportingService
 
                                 await CreateFederalReportDocumentLocation(export, DOCUMENT_LIBRARY, folderName);
                             }
-                            string sharepointFilename = await _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv");
-                            string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
+                            // string sharepointFilename = await _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv");
+                            // string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
                             byte[] data = mem.ToArray();
                             // call the web service
                             var uploadRequest = new Services.FileManager.UploadFileRequest()
