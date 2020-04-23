@@ -29,74 +29,34 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMkbarticletemplate class.
         /// </summary>
-        /// <param name="componentstate">For internal use only.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the kbarticletemplate.</param>
-        /// <param name="iscustomizable">Information that specifies whether
-        /// this component can be customized.</param>
-        /// <param name="description">Description of the knowledge base article
-        /// template.</param>
-        /// <param name="introducedversion">Version in which the form is
-        /// introduced.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// last modified the knowledge base article template.</param>
-        /// <param name="modifiedon">Date and time when the knowledge base
-        /// article template was last modified.</param>
-        /// <param name="overwritetime">For internal use only.</param>
-        /// <param name="solutionid">Unique identifier of the associated
-        /// solution.</param>
-        /// <param name="structurexml">XML structure of the knowledge base
-        /// article.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who last modified the kbarticletemplate.</param>
-        /// <param name="title">Title of the knowledge base article
-        /// template.</param>
-        /// <param name="createdon">Date and time when the knowledge base
-        /// article template was created.</param>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="kbarticletemplateidunique">For internal use
-        /// only.</param>
-        /// <param name="languagecode">Language of the Article Template</param>
-        /// <param name="kbarticletemplateid">Unique identifier of the
-        /// knowledge base article template.</param>
-        /// <param name="isactive">Information about whether the knowledge base
-        /// article is active.</param>
-        /// <param name="formatxml">XML format of the knowledge base article
-        /// template.</param>
-        /// <param name="_organizationidValue">Unique identifier of the
-        /// organization associated with the template.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the knowledge base article template.</param>
-        public MicrosoftDynamicsCRMkbarticletemplate(int? componentstate = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string iscustomizable = default(string), string description = default(string), string introducedversion = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), string structurexml = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string title = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string kbarticletemplateidunique = default(string), int? languagecode = default(int?), string kbarticletemplateid = default(string), bool? isactive = default(bool?), string formatxml = default(string), bool? ismanaged = default(bool?), string _organizationidValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> kbArticleTemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMkbarticle> kbArticleTemplateKbArticles = default(IList<MicrosoftDynamicsCRMkbarticle>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> kbArticleTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMbulkdeletefailure> kbArticleTemplateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMkbarticletemplate(string kbarticletemplateid = default(string), string iscustomizable = default(string), int? importsequencenumber = default(int?), string kbarticletemplateidunique = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string description = default(string), int? languagecode = default(int?), string _createdonbehalfbyValue = default(string), string formatxml = default(string), string solutionid = default(string), int? componentstate = default(int?), string structurexml = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), bool? isactive = default(bool?), bool? ismanaged = default(bool?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string title = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string introducedversion = default(string), string _organizationidValue = default(string), string _createdbyValue = default(string), string _modifiedbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprocesssession> kbArticleTemplateProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMasyncoperation> kbArticleTemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMkbarticle> kbArticleTemplateKbArticles = default(IList<MicrosoftDynamicsCRMkbarticle>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> kbArticleTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMbulkdeletefailure> kbArticleTemplateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            Componentstate = componentstate;
-            Overriddencreatedon = overriddencreatedon;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Kbarticletemplateid = kbarticletemplateid;
             Iscustomizable = iscustomizable;
+            Importsequencenumber = importsequencenumber;
+            Kbarticletemplateidunique = kbarticletemplateidunique;
+            Overriddencreatedon = overriddencreatedon;
             Description = description;
-            Introducedversion = introducedversion;
-            this._modifiedbyValue = _modifiedbyValue;
-            Modifiedon = modifiedon;
-            Overwritetime = overwritetime;
+            Languagecode = languagecode;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Formatxml = formatxml;
             Solutionid = solutionid;
+            Componentstate = componentstate;
             Structurexml = structurexml;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Versionnumber = versionnumber;
-            Title = title;
-            Createdon = createdon;
-            Importsequencenumber = importsequencenumber;
-            Kbarticletemplateidunique = kbarticletemplateidunique;
-            Languagecode = languagecode;
-            Kbarticletemplateid = kbarticletemplateid;
             Isactive = isactive;
-            Formatxml = formatxml;
             Ismanaged = ismanaged;
+            Overwritetime = overwritetime;
+            Title = title;
+            Modifiedon = modifiedon;
+            Createdon = createdon;
+            Introducedversion = introducedversion;
             this._organizationidValue = _organizationidValue;
             this._createdbyValue = _createdbyValue;
+            this._modifiedbyValue = _modifiedbyValue;
             Createdby = createdby;
+            KbArticleTemplateProcessSessions = kbArticleTemplateProcessSessions;
             KbArticleTemplateAsyncOperations = kbArticleTemplateAsyncOperations;
             KbArticleTemplateKbArticles = kbArticleTemplateKbArticles;
             Createdonbehalfby = createdonbehalfby;
@@ -114,78 +74,66 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets for internal use only.
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
+        [JsonProperty(PropertyName = "kbarticletemplateid")]
+        public string Kbarticletemplateid { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// kbarticletemplate.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets information that specifies whether this component can
-        /// be customized.
         /// </summary>
         [JsonProperty(PropertyName = "iscustomizable")]
         public string Iscustomizable { get; set; }
 
         /// <summary>
-        /// Gets or sets description of the knowledge base article template.
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "kbarticletemplateidunique")]
+        public string Kbarticletemplateidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets version in which the form is introduced.
         /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
+        [JsonProperty(PropertyName = "languagecode")]
+        public int? Languagecode { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who last modified the
-        /// knowledge base article template.
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the knowledge base article template
-        /// was last modified.
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "formatxml")]
+        public string Formatxml { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
         public string Solutionid { get; set; }
 
         /// <summary>
-        /// Gets or sets XML structure of the knowledge base article.
+        /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "structurexml")]
         public string Structurexml { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the delegate user who last
-        /// modified the kbarticletemplate.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
@@ -196,56 +144,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string Versionnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets title of the knowledge base article template.
-        /// </summary>
-        [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the knowledge base article template
-        /// was created.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "kbarticletemplateidunique")]
-        public string Kbarticletemplateidunique { get; set; }
-
-        /// <summary>
-        /// Gets or sets language of the Article Template
-        /// </summary>
-        [JsonProperty(PropertyName = "languagecode")]
-        public int? Languagecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the knowledge base article
-        /// template.
-        /// </summary>
-        [JsonProperty(PropertyName = "kbarticletemplateid")]
-        public string Kbarticletemplateid { get; set; }
-
-        /// <summary>
-        /// Gets or sets information about whether the knowledge base article
-        /// is active.
         /// </summary>
         [JsonProperty(PropertyName = "isactive")]
         public bool? Isactive { get; set; }
-
-        /// <summary>
-        /// Gets or sets XML format of the knowledge base article template.
-        /// </summary>
-        [JsonProperty(PropertyName = "formatxml")]
-        public string Formatxml { get; set; }
 
         /// <summary>
         /// </summary>
@@ -253,23 +154,54 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public bool? Ismanaged { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the organization associated with
-        /// the template.
+        /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who created the
-        /// knowledge base article template.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdby")]
         public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "KbArticleTemplate_ProcessSessions")]
+        public IList<MicrosoftDynamicsCRMprocesssession> KbArticleTemplateProcessSessions { get; set; }
 
         /// <summary>
         /// </summary>
