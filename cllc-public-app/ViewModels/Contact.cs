@@ -111,6 +111,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNoOptions? PhsForeignDrugAlchoholOffence { get; set; }
 
+                
+        [JsonConverter(typeof(StringEnumConverter))]
+        public YesNoOptions? CasComplete { get; set; }
+
         public List<ViewModels.Alias> Aliases { get; set; }
 
 
