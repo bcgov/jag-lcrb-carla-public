@@ -217,6 +217,8 @@ issuers:
     - schema: cannabis-retail-store-licence.lcrb
       description: Cannabis Retail Store Licence
       label_en: Cannabis Retail Store Licence
+      details:
+        label_en: Cannabis Retail Store Licence
       issuer_url: $APPLICATION_URL/cannabis-retail-store-licence
       depends_on:
         - registration.registries.ca
@@ -346,6 +348,8 @@ issuers:
       description: Cannabis Marketing Licence
       label_en: Cannabis Marketing Licence
       issuer_url: $APPLICATION_URL/cannabis-marketing-licence
+      details:
+        label_en: Cannabis Marketing Licence
       depends_on:
         - registration.registries.ca
       credential:
