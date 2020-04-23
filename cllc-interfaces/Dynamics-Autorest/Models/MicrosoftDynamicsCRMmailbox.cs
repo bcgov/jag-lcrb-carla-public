@@ -31,256 +31,101 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMmailbox
         /// class.
         /// </summary>
-        /// <param name="testemailconfigurationretrycount">Shows the number of
-        /// times an email configuration test has been performed.</param>
-        /// <param name="isactsyncorgflagset">Set the current organization as
-        /// the synchronization organization.</param>
-        /// <param name="lastmailboxforcedunlockoccurredon">For internal use
-        /// only.</param>
-        /// <param name="isforwardmailbox">Select whether the mailbox is a
-        /// forward mailbox.</param>
-        /// <param name="_emailserverprofileValue">Select the email server
-        /// profile of the mailbox.</param>
-        /// <param name="isemailaddressapprovedbyo365admin">Shows the status of
-        /// approval of the email address by O365 Admin.</param>
-        /// <param name="orgmarkedasprimaryforexchangesync">Indicates if the
-        /// crm org is to be marked as primary syncing org for the mailbox
-        /// record.</param>
-        /// <param name="actdeliverymethod">Choose the delivery method for the
-        /// mailbox for appointments, contacts, and tasks.</param>
-        /// <param name="mailboxprocessingcontext">For internal use
-        /// only.</param>
-        /// <param name="outgoingemaildeliverymethod">Select how outgoing email
-        /// will be sent from the mailbox.</param>
-        /// <param name="entityimageid">For internal use only.</param>
-        /// <param name="incomingemaildeliverymethod">Select how incoming email
-        /// will be delivered to the mailbox.</param>
-        /// <param name="lastsyncerror">For internal use only.</param>
-        /// <param name="noactcount">For internal use only.</param>
-        /// <param name="mailboxid">Unique identifier of the mailbox.</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="forcedunlockcount">For internal use only</param>
-        /// <param name="lastsuccessfulsynccompletedon">Last Successful Sync
-        /// Time</param>
-        /// <param name="lastautodiscoveredon">Shows the date and time when the
-        /// Exchange web services URL was last discovered using the
-        /// AutoDiscover service.</param>
-        /// <param name="_owninguserValue">Unique identifier for the user that
-        /// owns the record.</param>
-        /// <param name="enabledforoutgoingemail">Choose whether the mailbox is
-        /// enabled for sending email.</param>
-        /// <param name="_modifiedbyValue">Shows who last updated the
-        /// record.</param>
-        /// <param name="entityimage">The default image for the entity.</param>
-        /// <param name="createdon">Shows the date and time when the record was
-        /// created. The date and time are displayed in the time zone selected
-        /// in Microsoft Dynamics 365 options.</param>
-        /// <param name="versionnumber">Version number of the mailbox.</param>
-        /// <param name="_organizationidValue">Unique identifier of the
-        /// organization associated with the record.</param>
-        /// <param name="lastduration">Last Duration for the mailbox</param>
-        /// <param name="testemailconfigurationscheduled">Indicates if the
-        /// email configuration test has been scheduled for a mailbox
-        /// record.</param>
-        /// <param name="itemsfailedforlastsync">For internal use only.</param>
-        /// <param name="officeappsdeploymenterror">The Office Apps deployment
-        /// error.</param>
-        /// <param name="enabledforact">Indicates whether the mailbox is
-        /// enabled for Appointments, Contacts, and Tasks.</param>
-        /// <param name="outgoingemailstatus">Select the status of outgoing
-        /// email messages.</param>
-        /// <param name="lastsyncerrorcount">For internal use only</param>
-        /// <param name="emailaddress">Type the email address of the
-        /// mailbox.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="lastsyncerroroccurredon">For internal use
-        /// only.</param>
-        /// <param name="processanddeleteemails">Select whether to delete
-        /// emails from the mailbox after processing.</param>
-        /// <param name="itemsprocessedforlastsync">For internal use
-        /// only.</param>
-        /// <param name="folderhierarchy">Holds the hierarchy of folders under
-        /// inbox in XML format.</param>
-        /// <param name="officeappsdeploymentcompleteon">Date and time when the
-        /// last office apps deployment was completed for a mailbox
-        /// record.</param>
-        /// <param name="processinglastattemptedon">Date and time when the
-        /// processing of the mailbox was last attempted.</param>
-        /// <param name="username">Type a user name used for mailbox
-        /// authentication.</param>
-        /// <param name="officeappsdeploymentscheduled">Indicates if the office
-        /// apps deployment has been scheduled for a mailbox record.</param>
-        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
-        /// record on behalf of another user.</param>
-        /// <param name="officeappsdeploymentstatus">Indicates the office apps
-        /// deployment type for a mailbox record.</param>
-        /// <param name="postponesendinguntil">Shows the date and time when the
-        /// mailbox can start sending emails.</param>
-        /// <param name="postponetestemailconfigurationuntil">Shows the date
-        /// and time when the next email configuration test will be run for a
-        /// mailbox record.</param>
-        /// <param name="actstatus">Status of the Appointments, Contacts, and
-        /// Tasks.</param>
-        /// <param name="statuscode">Select the mailbox's status.</param>
-        /// <param name="lastsyncstartedon">Last Sync Start Time</param>
-        /// <param name="processedtimes">The number of times mailbox has
-        /// processed</param>
-        /// <param name="lastsyncerrorcode">For internal use only.</param>
-        /// <param name="_createdbyValue">Shows who created the record.</param>
-        /// <param name="_owningteamValue">Unique identifier for the team that
-        /// owns the record.</param>
-        /// <param name="_owneridValue">Enter the user or team who is assigned
-        /// to manage the record. This field is updated every time the record
-        /// is assigned to a different user.</param>
-        /// <param name="lastsyncerrormachinename">For internal use
-        /// only.</param>
-        /// <param name="ewsurl">Exchange web services endpoint URL for the
-        /// mailbox.</param>
-        /// <param name="modifiedon">Shows the date and time when the record
-        /// was last updated. The date and time are displayed in the time zone
-        /// selected in Microsoft Dynamics 365 options.</param>
-        /// <param name="_createdonbehalfbyValue">Shows who created the record
-        /// on behalf of another user.</param>
-        /// <param name="postponeofficeappsdeploymentuntil">Shows the date and
-        /// time when the next outlook mail app install will be run for a
-        /// mailbox record.</param>
-        /// <param name="postponemailboxprocessinguntil">Shows the date and
-        /// time when processing will begin on this mailbox.</param>
-        /// <param name="processemailreceivedafter">Shows the date and time to
-        /// start processing email received by the mailbox.</param>
-        /// <param name="receivingpostponeduntil">For internal use
-        /// only.</param>
-        /// <param name="emailrouteraccessapproval">Shows the status of the
-        /// email address.</param>
-        /// <param name="mailboxstatus">Last Sync Status for Outgoing, Incoming
-        /// and ACT as a whole.</param>
-        /// <param name="noemailcount">For internal use only.</param>
-        /// <param name="incomingemailstatus">Select the status that will be
-        /// assigned to incoming email messages.</param>
-        /// <param name="processingstatecode">Information that indicates
-        /// whether email will be processed for this mailbox</param>
-        /// <param name="password">Type the password for the mailbox.</param>
-        /// <param name="enabledforincomingemail">Choose whether the mailbox is
-        /// enabled for receiving email.</param>
-        /// <param name="name">Type the name of the mailbox.</param>
-        /// <param name="_owningbusinessunitValue">Select the business unit
-        /// that owns the record.</param>
-        /// <param name="isserviceaccount">Select whether the mailbox
-        /// corresponds to one for the service account.</param>
-        /// <param name="statecode">Shows whether the mailbox is active or
-        /// inactive.</param>
-        /// <param name="testmailboxaccesscompletedon">Date and time when the
-        /// last email configuration test was completed for a mailbox
-        /// record.</param>
-        /// <param name="exchangesyncstatexml">Contains the exchange
-        /// synchronization state in XML format.</param>
-        /// <param name="_regardingobjectidValue">Choose the user associated to
-        /// the mailbox.</param>
-        /// <param name="undeliverablefolder">Shows the ID of the Undeliverable
-        /// folder in the mailbox managed by Microsoft Exchange.</param>
-        /// <param name="allowemailconnectortousecredentials">Choose whether to
-        /// allow the email connector to use credentials.</param>
-        /// <param name="averagetotalduration">Mailbox Total Duration in
-        /// Average</param>
-        /// <param name="verboseloggingenabled">Indicates if verbose tracing
-        /// needs to be enabled for this mailbox.</param>
-        /// <param name="receivingpostponeduntilforact">For internal use
-        /// only.</param>
-        /// <param name="hostid">Unique identifier of the async host that is
-        /// processing this mailbox.</param>
-        /// <param name="transientfailurecount">Concatenation of transient
-        /// failure counts of all mailbox operations.</param>
-        public MicrosoftDynamicsCRMmailbox(int? testemailconfigurationretrycount = default(int?), bool? isactsyncorgflagset = default(bool?), System.DateTimeOffset? lastmailboxforcedunlockoccurredon = default(System.DateTimeOffset?), bool? isforwardmailbox = default(bool?), string _emailserverprofileValue = default(string), bool? isemailaddressapprovedbyo365admin = default(bool?), bool? orgmarkedasprimaryforexchangesync = default(bool?), int? actdeliverymethod = default(int?), int? mailboxprocessingcontext = default(int?), int? outgoingemaildeliverymethod = default(int?), string entityimageid = default(string), int? incomingemaildeliverymethod = default(int?), string lastsyncerror = default(string), int? noactcount = default(int?), string mailboxid = default(string), int? timezoneruleversionnumber = default(int?), int? forcedunlockcount = default(int?), System.DateTimeOffset? lastsuccessfulsynccompletedon = default(System.DateTimeOffset?), System.DateTimeOffset? lastautodiscoveredon = default(System.DateTimeOffset?), string _owninguserValue = default(string), bool? enabledforoutgoingemail = default(bool?), string _modifiedbyValue = default(string), byte[] entityimage = default(byte[]), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), string _organizationidValue = default(string), int? lastduration = default(int?), bool? testemailconfigurationscheduled = default(bool?), int? itemsfailedforlastsync = default(int?), string officeappsdeploymenterror = default(string), bool? enabledforact = default(bool?), int? outgoingemailstatus = default(int?), int? lastsyncerrorcount = default(int?), string emailaddress = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? lastsyncerroroccurredon = default(System.DateTimeOffset?), bool? processanddeleteemails = default(bool?), int? itemsprocessedforlastsync = default(int?), long? entityimageTimestamp = default(long?), string folderhierarchy = default(string), System.DateTimeOffset? officeappsdeploymentcompleteon = default(System.DateTimeOffset?), System.DateTimeOffset? processinglastattemptedon = default(System.DateTimeOffset?), string username = default(string), bool? officeappsdeploymentscheduled = default(bool?), string _modifiedonbehalfbyValue = default(string), int? officeappsdeploymentstatus = default(int?), System.DateTimeOffset? postponesendinguntil = default(System.DateTimeOffset?), System.DateTimeOffset? postponetestemailconfigurationuntil = default(System.DateTimeOffset?), int? actstatus = default(int?), int? statuscode = default(int?), System.DateTimeOffset? lastsyncstartedon = default(System.DateTimeOffset?), int? processedtimes = default(int?), int? lastsyncerrorcode = default(int?), bool? ispasswordset = default(bool?), string _createdbyValue = default(string), string _owningteamValue = default(string), string _owneridValue = default(string), string lastsyncerrormachinename = default(string), string ewsurl = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? postponeofficeappsdeploymentuntil = default(System.DateTimeOffset?), System.DateTimeOffset? postponemailboxprocessinguntil = default(System.DateTimeOffset?), System.DateTimeOffset? processemailreceivedafter = default(System.DateTimeOffset?), System.DateTimeOffset? receivingpostponeduntil = default(System.DateTimeOffset?), int? emailrouteraccessapproval = default(int?), int? mailboxstatus = default(int?), int? noemailcount = default(int?), int? incomingemailstatus = default(int?), int? processingstatecode = default(int?), string password = default(string), bool? enabledforincomingemail = default(bool?), string name = default(string), string _owningbusinessunitValue = default(string), bool? isserviceaccount = default(bool?), int? statecode = default(int?), System.DateTimeOffset? testmailboxaccesscompletedon = default(System.DateTimeOffset?), string exchangesyncstatexml = default(string), string entityimageUrl = default(string), string _regardingobjectidValue = default(string), string undeliverablefolder = default(string), bool? allowemailconnectortousecredentials = default(bool?), int? averagetotalduration = default(int?), int? verboseloggingenabled = default(int?), System.DateTimeOffset? receivingpostponeduntilforact = default(System.DateTimeOffset?), string hostid = default(string), int? transientfailurecount = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser regardingobjectid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMemailserverprofile emailserverprofile = default(MicrosoftDynamicsCRMemailserverprofile), IList<MicrosoftDynamicsCRMsystemuser> systemuserDefaultmailboxMailbox = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMqueue> queueDefaultmailboxMailbox = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMtracelog> tracelogMailbox = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMactivitypointer> activitypointerSendermailboxidMailbox = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMasyncoperation> mailboxAsyncoperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMqueue regardingobjectidQueue = default(MicrosoftDynamicsCRMqueue), IList<MicrosoftDynamicsCRMemail> emailSendermailboxidMailbox = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMsyncerror> mailboxSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMannotation> mailboxAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>))
+        public MicrosoftDynamicsCRMmailbox(int? testemailconfigurationretrycount = default(int?), int? noactcount = default(int?), System.DateTimeOffset? processemailreceivedafter = default(System.DateTimeOffset?), string exchangesyncstatexml = default(string), bool? isforwardmailbox = default(bool?), string _emailserverprofileValue = default(string), bool? isemailaddressapprovedbyo365admin = default(bool?), string credentialinfo = default(string), int? actdeliverymethod = default(int?), int? mailboxprocessingcontext = default(int?), string dataencryptionkey = default(string), string folderhierarchy = default(string), string mailboxid = default(string), int? outgoingemaildeliverymethod = default(int?), int? exchangecontactsimportstatus = default(int?), System.DateTimeOffset? exchangecontactsimportcompletedon = default(System.DateTimeOffset?), bool? officeappsdeploymentscheduled = default(bool?), string entityimageid = default(string), int? timezoneruleversionnumber = default(int?), int? incomingemaildeliverymethod = default(int?), string _owneridValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? lastsuccessfulsynccompletedon = default(System.DateTimeOffset?), int? averagetotalduration = default(int?), string _owninguserValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string lastsyncerror = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? isdataencryptionkeyset = default(bool?), string versionnumber = default(string), bool? isserviceaccount = default(bool?), int? lastduration = default(int?), bool? testemailconfigurationscheduled = default(bool?), bool? processanddeleteemails = default(bool?), System.DateTimeOffset? receivingpostponeduntil = default(System.DateTimeOffset?), int? itemsfailedforlastsync = default(int?), string officeappsdeploymenterror = default(string), bool? enabledforact = default(bool?), int? outgoingemailstatus = default(int?), System.DateTimeOffset? postponemailboxprocessinguntil = default(System.DateTimeOffset?), int? lastsyncerrorcount = default(int?), string emailaddress = default(string), System.DateTimeOffset? lastsyncstartedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? lastsyncerroroccurredon = default(System.DateTimeOffset?), System.DateTimeOffset? postponeofficeappsdeploymentuntil = default(System.DateTimeOffset?), byte[] entityimage = default(byte[]), bool? allowemailconnectortousecredentials = default(bool?), int? itemsprocessedforlastsync = default(int?), long? entityimageTimestamp = default(long?), System.DateTimeOffset? officeappsdeploymentcompleteon = default(System.DateTimeOffset?), System.DateTimeOffset? processinglastattemptedon = default(System.DateTimeOffset?), string username = default(string), string _modifiedonbehalfbyValue = default(string), int? officeappsdeploymentstatus = default(int?), System.DateTimeOffset? postponesendinguntil = default(System.DateTimeOffset?), System.DateTimeOffset? postponetestemailconfigurationuntil = default(System.DateTimeOffset?), int? actstatus = default(int?), int? statuscode = default(int?), int? forcedunlockcount = default(int?), System.DateTimeOffset? receivingpostponeduntilforact = default(System.DateTimeOffset?), int? processedtimes = default(int?), bool? ispasswordset = default(bool?), string _createdbyValue = default(string), string _owningteamValue = default(string), bool? orgmarkedasprimaryforexchangesync = default(bool?), string lastsyncerrormachinename = default(string), string ewsurl = default(string), int? processingstatecode = default(int?), int? lastsyncerrorcode = default(int?), string _organizationidValue = default(string), string _createdonbehalfbyValue = default(string), int? emailrouteraccessapproval = default(int?), int? mailboxstatus = default(int?), int? noemailcount = default(int?), int? incomingemailstatus = default(int?), bool? enabledforoutgoingemail = default(bool?), string password = default(string), bool? enabledforincomingemail = default(bool?), bool? isexchangecontactsimportscheduled = default(bool?), int? transientfailurecount = default(int?), string _owningbusinessunitValue = default(string), string name = default(string), System.DateTimeOffset? lastautodiscoveredon = default(System.DateTimeOffset?), System.DateTimeOffset? testmailboxaccesscompletedon = default(System.DateTimeOffset?), string entityimageUrl = default(string), string _regardingobjectidValue = default(string), string undeliverablefolder = default(string), System.DateTimeOffset? lastmailboxforcedunlockoccurredon = default(System.DateTimeOffset?), bool? isactsyncorgflagset = default(bool?), int? verboseloggingenabled = default(int?), int? statecode = default(int?), string hostid = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser regardingobjectid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMemailserverprofile emailserverprofile = default(MicrosoftDynamicsCRMemailserverprofile), IList<MicrosoftDynamicsCRMsystemuser> systemuserDefaultmailboxMailbox = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMqueue> queueDefaultmailboxMailbox = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMbulkoperation> bulkoperationMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcampaignactivity> campaignactivityMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMcampaignresponse> campaignresponseMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMincidentresolution> incidentresolutionMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMserviceappointment> serviceappointmentMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMopportunityclose> opportunitycloseMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> ordercloseMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> quotecloseMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMtracelog> tracelogMailbox = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMactivitypointer> activitypointerSendermailboxidMailbox = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMasyncoperation> mailboxAsyncoperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMqueue regardingobjectidQueue = default(MicrosoftDynamicsCRMqueue), IList<MicrosoftDynamicsCRMemail> emailSendermailboxidMailbox = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMsyncerror> mailboxSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMannotation> mailboxAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> mailboxMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMprocesssession> mailboxProcesssessions = default(IList<MicrosoftDynamicsCRMprocesssession>))
         {
             Testemailconfigurationretrycount = testemailconfigurationretrycount;
-            Isactsyncorgflagset = isactsyncorgflagset;
-            Lastmailboxforcedunlockoccurredon = lastmailboxforcedunlockoccurredon;
+            Noactcount = noactcount;
+            Processemailreceivedafter = processemailreceivedafter;
+            Exchangesyncstatexml = exchangesyncstatexml;
             Isforwardmailbox = isforwardmailbox;
             this._emailserverprofileValue = _emailserverprofileValue;
             Isemailaddressapprovedbyo365admin = isemailaddressapprovedbyo365admin;
-            Orgmarkedasprimaryforexchangesync = orgmarkedasprimaryforexchangesync;
+            Credentialinfo = credentialinfo;
             Actdeliverymethod = actdeliverymethod;
             Mailboxprocessingcontext = mailboxprocessingcontext;
-            Outgoingemaildeliverymethod = outgoingemaildeliverymethod;
-            Entityimageid = entityimageid;
-            Incomingemaildeliverymethod = incomingemaildeliverymethod;
-            Lastsyncerror = lastsyncerror;
-            Noactcount = noactcount;
+            Dataencryptionkey = dataencryptionkey;
+            Folderhierarchy = folderhierarchy;
             Mailboxid = mailboxid;
+            Outgoingemaildeliverymethod = outgoingemaildeliverymethod;
+            Exchangecontactsimportstatus = exchangecontactsimportstatus;
+            Exchangecontactsimportcompletedon = exchangecontactsimportcompletedon;
+            Officeappsdeploymentscheduled = officeappsdeploymentscheduled;
+            Entityimageid = entityimageid;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            Forcedunlockcount = forcedunlockcount;
-            Lastsuccessfulsynccompletedon = lastsuccessfulsynccompletedon;
-            Lastautodiscoveredon = lastautodiscoveredon;
-            this._owninguserValue = _owninguserValue;
-            Enabledforoutgoingemail = enabledforoutgoingemail;
+            Incomingemaildeliverymethod = incomingemaildeliverymethod;
+            this._owneridValue = _owneridValue;
             this._modifiedbyValue = _modifiedbyValue;
-            Entityimage = entityimage;
+            Lastsuccessfulsynccompletedon = lastsuccessfulsynccompletedon;
+            Averagetotalduration = averagetotalduration;
+            this._owninguserValue = _owninguserValue;
+            Modifiedon = modifiedon;
+            Lastsyncerror = lastsyncerror;
             Createdon = createdon;
+            Isdataencryptionkeyset = isdataencryptionkeyset;
             Versionnumber = versionnumber;
-            this._organizationidValue = _organizationidValue;
+            Isserviceaccount = isserviceaccount;
             Lastduration = lastduration;
             Testemailconfigurationscheduled = testemailconfigurationscheduled;
+            Processanddeleteemails = processanddeleteemails;
+            Receivingpostponeduntil = receivingpostponeduntil;
             Itemsfailedforlastsync = itemsfailedforlastsync;
             Officeappsdeploymenterror = officeappsdeploymenterror;
             Enabledforact = enabledforact;
             Outgoingemailstatus = outgoingemailstatus;
+            Postponemailboxprocessinguntil = postponemailboxprocessinguntil;
             Lastsyncerrorcount = lastsyncerrorcount;
             Emailaddress = emailaddress;
+            Lastsyncstartedon = lastsyncstartedon;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Lastsyncerroroccurredon = lastsyncerroroccurredon;
-            Processanddeleteemails = processanddeleteemails;
+            Postponeofficeappsdeploymentuntil = postponeofficeappsdeploymentuntil;
+            Entityimage = entityimage;
+            Allowemailconnectortousecredentials = allowemailconnectortousecredentials;
             Itemsprocessedforlastsync = itemsprocessedforlastsync;
             EntityimageTimestamp = entityimageTimestamp;
-            Folderhierarchy = folderhierarchy;
             Officeappsdeploymentcompleteon = officeappsdeploymentcompleteon;
             Processinglastattemptedon = processinglastattemptedon;
             Username = username;
-            Officeappsdeploymentscheduled = officeappsdeploymentscheduled;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Officeappsdeploymentstatus = officeappsdeploymentstatus;
             Postponesendinguntil = postponesendinguntil;
             Postponetestemailconfigurationuntil = postponetestemailconfigurationuntil;
             Actstatus = actstatus;
             Statuscode = statuscode;
-            Lastsyncstartedon = lastsyncstartedon;
+            Forcedunlockcount = forcedunlockcount;
+            Receivingpostponeduntilforact = receivingpostponeduntilforact;
             Processedtimes = processedtimes;
-            Lastsyncerrorcode = lastsyncerrorcode;
             Ispasswordset = ispasswordset;
             this._createdbyValue = _createdbyValue;
             this._owningteamValue = _owningteamValue;
-            this._owneridValue = _owneridValue;
+            Orgmarkedasprimaryforexchangesync = orgmarkedasprimaryforexchangesync;
             Lastsyncerrormachinename = lastsyncerrormachinename;
             Ewsurl = ewsurl;
-            Modifiedon = modifiedon;
+            Processingstatecode = processingstatecode;
+            Lastsyncerrorcode = lastsyncerrorcode;
+            this._organizationidValue = _organizationidValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Postponeofficeappsdeploymentuntil = postponeofficeappsdeploymentuntil;
-            Postponemailboxprocessinguntil = postponemailboxprocessinguntil;
-            Processemailreceivedafter = processemailreceivedafter;
-            Receivingpostponeduntil = receivingpostponeduntil;
             Emailrouteraccessapproval = emailrouteraccessapproval;
             Mailboxstatus = mailboxstatus;
             Noemailcount = noemailcount;
             Incomingemailstatus = incomingemailstatus;
-            Processingstatecode = processingstatecode;
+            Enabledforoutgoingemail = enabledforoutgoingemail;
             Password = password;
             Enabledforincomingemail = enabledforincomingemail;
-            Name = name;
+            Isexchangecontactsimportscheduled = isexchangecontactsimportscheduled;
+            Transientfailurecount = transientfailurecount;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            Isserviceaccount = isserviceaccount;
-            Statecode = statecode;
+            Name = name;
+            Lastautodiscoveredon = lastautodiscoveredon;
             Testmailboxaccesscompletedon = testmailboxaccesscompletedon;
-            Exchangesyncstatexml = exchangesyncstatexml;
             EntityimageUrl = entityimageUrl;
             this._regardingobjectidValue = _regardingobjectidValue;
             Undeliverablefolder = undeliverablefolder;
-            Allowemailconnectortousecredentials = allowemailconnectortousecredentials;
-            Averagetotalduration = averagetotalduration;
+            Lastmailboxforcedunlockoccurredon = lastmailboxforcedunlockoccurredon;
+            Isactsyncorgflagset = isactsyncorgflagset;
             Verboseloggingenabled = verboseloggingenabled;
-            Receivingpostponeduntilforact = receivingpostponeduntilforact;
+            Statecode = statecode;
             Hostid = hostid;
-            Transientfailurecount = transientfailurecount;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -293,6 +138,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Emailserverprofile = emailserverprofile;
             SystemuserDefaultmailboxMailbox = systemuserDefaultmailboxMailbox;
             QueueDefaultmailboxMailbox = queueDefaultmailboxMailbox;
+            AbsScheduledprocessexecutionMailboxSendermailboxid = absScheduledprocessexecutionMailboxSendermailboxid;
+            BulkoperationMailboxSendermailboxid = bulkoperationMailboxSendermailboxid;
+            CampaignactivityMailboxSendermailboxid = campaignactivityMailboxSendermailboxid;
+            CampaignresponseMailboxSendermailboxid = campaignresponseMailboxSendermailboxid;
+            IncidentresolutionMailboxSendermailboxid = incidentresolutionMailboxSendermailboxid;
+            ServiceappointmentMailboxSendermailboxid = serviceappointmentMailboxSendermailboxid;
+            OpportunitycloseMailboxSendermailboxid = opportunitycloseMailboxSendermailboxid;
+            OrdercloseMailboxSendermailboxid = ordercloseMailboxSendermailboxid;
+            QuotecloseMailboxSendermailboxid = quotecloseMailboxSendermailboxid;
             TracelogMailbox = tracelogMailbox;
             ActivitypointerSendermailboxidMailbox = activitypointerSendermailboxidMailbox;
             MailboxAsyncoperations = mailboxAsyncoperations;
@@ -300,8 +154,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             EmailSendermailboxidMailbox = emailSendermailboxidMailbox;
             MailboxSyncErrors = mailboxSyncErrors;
             MailboxAnnotation = mailboxAnnotation;
+            MailboxMailboxTrackingFolder = mailboxMailboxTrackingFolder;
             Organizationid = organizationid;
-            AbsScheduledprocessexecutionMailboxSendermailboxid = absScheduledprocessexecutionMailboxSendermailboxid;
+            MailboxProcesssessions = mailboxProcesssessions;
             CustomInit();
         }
 
@@ -311,246 +166,247 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets shows the number of times an email configuration test
-        /// has been performed.
         /// </summary>
         [JsonProperty(PropertyName = "testemailconfigurationretrycount")]
         public int? Testemailconfigurationretrycount { get; set; }
 
         /// <summary>
-        /// Gets or sets set the current organization as the synchronization
-        /// organization.
-        /// </summary>
-        [JsonProperty(PropertyName = "isactsyncorgflagset")]
-        public bool? Isactsyncorgflagset { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "lastmailboxforcedunlockoccurredon")]
-        public System.DateTimeOffset? Lastmailboxforcedunlockoccurredon { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the mailbox is a forward mailbox.
-        /// </summary>
-        [JsonProperty(PropertyName = "isforwardmailbox")]
-        public bool? Isforwardmailbox { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the email server profile of the mailbox.
-        /// </summary>
-        [JsonProperty(PropertyName = "_emailserverprofile_value")]
-        public string _emailserverprofileValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the status of approval of the email address by
-        /// O365 Admin.
-        /// </summary>
-        [JsonProperty(PropertyName = "isemailaddressapprovedbyo365admin")]
-        public bool? Isemailaddressapprovedbyo365admin { get; set; }
-
-        /// <summary>
-        /// Gets or sets indicates if the crm org is to be marked as primary
-        /// syncing org for the mailbox record.
-        /// </summary>
-        [JsonProperty(PropertyName = "orgmarkedasprimaryforexchangesync")]
-        public bool? Orgmarkedasprimaryforexchangesync { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose the delivery method for the mailbox for
-        /// appointments, contacts, and tasks.
-        /// </summary>
-        [JsonProperty(PropertyName = "actdeliverymethod")]
-        public int? Actdeliverymethod { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "mailboxprocessingcontext")]
-        public int? Mailboxprocessingcontext { get; set; }
-
-        /// <summary>
-        /// Gets or sets select how outgoing email will be sent from the
-        /// mailbox.
-        /// </summary>
-        [JsonProperty(PropertyName = "outgoingemaildeliverymethod")]
-        public int? Outgoingemaildeliverymethod { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimageid")]
-        public string Entityimageid { get; set; }
-
-        /// <summary>
-        /// Gets or sets select how incoming email will be delivered to the
-        /// mailbox.
-        /// </summary>
-        [JsonProperty(PropertyName = "incomingemaildeliverymethod")]
-        public int? Incomingemaildeliverymethod { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "lastsyncerror")]
-        public string Lastsyncerror { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "noactcount")]
         public int? Noactcount { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the mailbox.
+        /// </summary>
+        [JsonProperty(PropertyName = "processemailreceivedafter")]
+        public System.DateTimeOffset? Processemailreceivedafter { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangesyncstatexml")]
+        public string Exchangesyncstatexml { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isforwardmailbox")]
+        public bool? Isforwardmailbox { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_emailserverprofile_value")]
+        public string _emailserverprofileValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isemailaddressapprovedbyo365admin")]
+        public bool? Isemailaddressapprovedbyo365admin { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "credentialinfo")]
+        public string Credentialinfo { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "actdeliverymethod")]
+        public int? Actdeliverymethod { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "mailboxprocessingcontext")]
+        public int? Mailboxprocessingcontext { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "dataencryptionkey")]
+        public string Dataencryptionkey { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "folderhierarchy")]
+        public string Folderhierarchy { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "mailboxid")]
         public string Mailboxid { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
+        /// </summary>
+        [JsonProperty(PropertyName = "outgoingemaildeliverymethod")]
+        public int? Outgoingemaildeliverymethod { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangecontactsimportstatus")]
+        public int? Exchangecontactsimportstatus { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangecontactsimportcompletedon")]
+        public System.DateTimeOffset? Exchangecontactsimportcompletedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "officeappsdeploymentscheduled")]
+        public bool? Officeappsdeploymentscheduled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimageid")]
+        public string Entityimageid { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only
         /// </summary>
-        [JsonProperty(PropertyName = "forcedunlockcount")]
-        public int? Forcedunlockcount { get; set; }
+        [JsonProperty(PropertyName = "incomingemaildeliverymethod")]
+        public int? Incomingemaildeliverymethod { get; set; }
 
         /// <summary>
-        /// Gets or sets last Successful Sync Time
         /// </summary>
-        [JsonProperty(PropertyName = "lastsuccessfulsynccompletedon")]
-        public System.DateTimeOffset? Lastsuccessfulsynccompletedon { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the date and time when the Exchange web services
-        /// URL was last discovered using the AutoDiscover service.
-        /// </summary>
-        [JsonProperty(PropertyName = "lastautodiscoveredon")]
-        public System.DateTimeOffset? Lastautodiscoveredon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the user that owns the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose whether the mailbox is enabled for sending
-        /// email.
-        /// </summary>
-        [JsonProperty(PropertyName = "enabledforoutgoingemail")]
-        public bool? Enabledforoutgoingemail { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets the default image for the entity.
+        /// </summary>
+        [JsonProperty(PropertyName = "lastsuccessfulsynccompletedon")]
+        public System.DateTimeOffset? Lastsuccessfulsynccompletedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "averagetotalduration")]
+        public int? Averagetotalduration { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastsyncerror")]
+        public string Lastsyncerror { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isdataencryptionkeyset")]
+        public bool? Isdataencryptionkeyset { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isserviceaccount")]
+        public bool? Isserviceaccount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastduration")]
+        public int? Lastduration { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "testemailconfigurationscheduled")]
+        public bool? Testemailconfigurationscheduled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processanddeleteemails")]
+        public bool? Processanddeleteemails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "receivingpostponeduntil")]
+        public System.DateTimeOffset? Receivingpostponeduntil { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "itemsfailedforlastsync")]
+        public int? Itemsfailedforlastsync { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "officeappsdeploymenterror")]
+        public string Officeappsdeploymenterror { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "enabledforact")]
+        public bool? Enabledforact { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "outgoingemailstatus")]
+        public int? Outgoingemailstatus { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "postponemailboxprocessinguntil")]
+        public System.DateTimeOffset? Postponemailboxprocessinguntil { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastsyncerrorcount")]
+        public int? Lastsyncerrorcount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "emailaddress")]
+        public string Emailaddress { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastsyncstartedon")]
+        public System.DateTimeOffset? Lastsyncstartedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastsyncerroroccurredon")]
+        public System.DateTimeOffset? Lastsyncerroroccurredon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "postponeofficeappsdeploymentuntil")]
+        public System.DateTimeOffset? Postponeofficeappsdeploymentuntil { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonConverter(typeof(Base64UrlJsonConverter))]
         [JsonProperty(PropertyName = "entityimage")]
         public byte[] Entityimage { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the date and time when the record was created.
-        /// The date and time are displayed in the time zone selected in
-        /// Microsoft Dynamics 365 options.
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "allowemailconnectortousecredentials")]
+        public bool? Allowemailconnectortousecredentials { get; set; }
 
         /// <summary>
-        /// Gets or sets version number of the mailbox.
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the organization associated with
-        /// the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets last Duration for the mailbox
-        /// </summary>
-        [JsonProperty(PropertyName = "lastduration")]
-        public int? Lastduration { get; set; }
-
-        /// <summary>
-        /// Gets or sets indicates if the email configuration test has been
-        /// scheduled for a mailbox record.
-        /// </summary>
-        [JsonProperty(PropertyName = "testemailconfigurationscheduled")]
-        public bool? Testemailconfigurationscheduled { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "itemsfailedforlastsync")]
-        public int? Itemsfailedforlastsync { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Office Apps deployment error.
-        /// </summary>
-        [JsonProperty(PropertyName = "officeappsdeploymenterror")]
-        public string Officeappsdeploymenterror { get; set; }
-
-        /// <summary>
-        /// Gets or sets indicates whether the mailbox is enabled for
-        /// Appointments, Contacts, and Tasks.
-        /// </summary>
-        [JsonProperty(PropertyName = "enabledforact")]
-        public bool? Enabledforact { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the status of outgoing email messages.
-        /// </summary>
-        [JsonProperty(PropertyName = "outgoingemailstatus")]
-        public int? Outgoingemailstatus { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only
-        /// </summary>
-        [JsonProperty(PropertyName = "lastsyncerrorcount")]
-        public int? Lastsyncerrorcount { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the email address of the mailbox.
-        /// </summary>
-        [JsonProperty(PropertyName = "emailaddress")]
-        public string Emailaddress { get; set; }
-
-        /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "lastsyncerroroccurredon")]
-        public System.DateTimeOffset? Lastsyncerroroccurredon { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether to delete emails from the mailbox after
-        /// processing.
-        /// </summary>
-        [JsonProperty(PropertyName = "processanddeleteemails")]
-        public bool? Processanddeleteemails { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "itemsprocessedforlastsync")]
         public int? Itemsprocessedforlastsync { get; set; }
@@ -561,96 +417,64 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public long? EntityimageTimestamp { get; set; }
 
         /// <summary>
-        /// Gets or sets holds the hierarchy of folders under inbox in XML
-        /// format.
-        /// </summary>
-        [JsonProperty(PropertyName = "folderhierarchy")]
-        public string Folderhierarchy { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the last office apps deployment was
-        /// completed for a mailbox record.
         /// </summary>
         [JsonProperty(PropertyName = "officeappsdeploymentcompleteon")]
         public System.DateTimeOffset? Officeappsdeploymentcompleteon { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the processing of the mailbox was
-        /// last attempted.
         /// </summary>
         [JsonProperty(PropertyName = "processinglastattemptedon")]
         public System.DateTimeOffset? Processinglastattemptedon { get; set; }
 
         /// <summary>
-        /// Gets or sets type a user name used for mailbox authentication.
         /// </summary>
         [JsonProperty(PropertyName = "username")]
         public string Username { get; set; }
 
         /// <summary>
-        /// Gets or sets indicates if the office apps deployment has been
-        /// scheduled for a mailbox record.
-        /// </summary>
-        [JsonProperty(PropertyName = "officeappsdeploymentscheduled")]
-        public bool? Officeappsdeploymentscheduled { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who last updated the record on behalf of another
-        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets indicates the office apps deployment type for a
-        /// mailbox record.
         /// </summary>
         [JsonProperty(PropertyName = "officeappsdeploymentstatus")]
         public int? Officeappsdeploymentstatus { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the date and time when the mailbox can start
-        /// sending emails.
         /// </summary>
         [JsonProperty(PropertyName = "postponesendinguntil")]
         public System.DateTimeOffset? Postponesendinguntil { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the date and time when the next email
-        /// configuration test will be run for a mailbox record.
         /// </summary>
         [JsonProperty(PropertyName = "postponetestemailconfigurationuntil")]
         public System.DateTimeOffset? Postponetestemailconfigurationuntil { get; set; }
 
         /// <summary>
-        /// Gets or sets status of the Appointments, Contacts, and Tasks.
         /// </summary>
         [JsonProperty(PropertyName = "actstatus")]
         public int? Actstatus { get; set; }
 
         /// <summary>
-        /// Gets or sets select the mailbox's status.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
-        /// Gets or sets last Sync Start Time
         /// </summary>
-        [JsonProperty(PropertyName = "lastsyncstartedon")]
-        public System.DateTimeOffset? Lastsyncstartedon { get; set; }
+        [JsonProperty(PropertyName = "forcedunlockcount")]
+        public int? Forcedunlockcount { get; set; }
 
         /// <summary>
-        /// Gets or sets the number of times mailbox has processed
+        /// </summary>
+        [JsonProperty(PropertyName = "receivingpostponeduntilforact")]
+        public System.DateTimeOffset? Receivingpostponeduntilforact { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "processedtimes")]
         public int? Processedtimes { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "lastsyncerrorcode")]
-        public int? Lastsyncerrorcode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -658,163 +482,114 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public bool? Ispasswordset { get; set; }
 
         /// <summary>
-        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier for the team that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
-        /// Gets or sets enter the user or team who is assigned to manage the
-        /// record. This field is updated every time the record is assigned to
-        /// a different user.
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "orgmarkedasprimaryforexchangesync")]
+        public bool? Orgmarkedasprimaryforexchangesync { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "lastsyncerrormachinename")]
         public string Lastsyncerrormachinename { get; set; }
 
         /// <summary>
-        /// Gets or sets exchange web services endpoint URL for the mailbox.
         /// </summary>
         [JsonProperty(PropertyName = "ewsurl")]
         public string Ewsurl { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the date and time when the record was last
-        /// updated. The date and time are displayed in the time zone selected
-        /// in Microsoft Dynamics 365 options.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who created the record on behalf of another
-        /// user.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time when the next outlook mail app
-        /// install will be run for a mailbox record.
-        /// </summary>
-        [JsonProperty(PropertyName = "postponeofficeappsdeploymentuntil")]
-        public System.DateTimeOffset? Postponeofficeappsdeploymentuntil { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time when processing will begin on
-        /// this mailbox.
-        /// </summary>
-        [JsonProperty(PropertyName = "postponemailboxprocessinguntil")]
-        public System.DateTimeOffset? Postponemailboxprocessinguntil { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time to start processing email
-        /// received by the mailbox.
-        /// </summary>
-        [JsonProperty(PropertyName = "processemailreceivedafter")]
-        public System.DateTimeOffset? Processemailreceivedafter { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "receivingpostponeduntil")]
-        public System.DateTimeOffset? Receivingpostponeduntil { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the status of the email address.
-        /// </summary>
-        [JsonProperty(PropertyName = "emailrouteraccessapproval")]
-        public int? Emailrouteraccessapproval { get; set; }
-
-        /// <summary>
-        /// Gets or sets last Sync Status for Outgoing, Incoming and ACT as a
-        /// whole.
-        /// </summary>
-        [JsonProperty(PropertyName = "mailboxstatus")]
-        public int? Mailboxstatus { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "noemailcount")]
-        public int? Noemailcount { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the status that will be assigned to incoming
-        /// email messages.
-        /// </summary>
-        [JsonProperty(PropertyName = "incomingemailstatus")]
-        public int? Incomingemailstatus { get; set; }
-
-        /// <summary>
-        /// Gets or sets information that indicates whether email will be
-        /// processed for this mailbox
         /// </summary>
         [JsonProperty(PropertyName = "processingstatecode")]
         public int? Processingstatecode { get; set; }
 
         /// <summary>
-        /// Gets or sets type the password for the mailbox.
+        /// </summary>
+        [JsonProperty(PropertyName = "lastsyncerrorcode")]
+        public int? Lastsyncerrorcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "emailrouteraccessapproval")]
+        public int? Emailrouteraccessapproval { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "mailboxstatus")]
+        public int? Mailboxstatus { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "noemailcount")]
+        public int? Noemailcount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "incomingemailstatus")]
+        public int? Incomingemailstatus { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "enabledforoutgoingemail")]
+        public bool? Enabledforoutgoingemail { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "password")]
         public string Password { get; set; }
 
         /// <summary>
-        /// Gets or sets choose whether the mailbox is enabled for receiving
-        /// email.
         /// </summary>
         [JsonProperty(PropertyName = "enabledforincomingemail")]
         public bool? Enabledforincomingemail { get; set; }
 
         /// <summary>
-        /// Gets or sets type the name of the mailbox.
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "isexchangecontactsimportscheduled")]
+        public bool? Isexchangecontactsimportscheduled { get; set; }
 
         /// <summary>
-        /// Gets or sets select the business unit that owns the record.
+        /// </summary>
+        [JsonProperty(PropertyName = "transientfailurecount")]
+        public int? Transientfailurecount { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
-        /// Gets or sets select whether the mailbox corresponds to one for the
-        /// service account.
         /// </summary>
-        [JsonProperty(PropertyName = "isserviceaccount")]
-        public bool? Isserviceaccount { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets shows whether the mailbox is active or inactive.
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "lastautodiscoveredon")]
+        public System.DateTimeOffset? Lastautodiscoveredon { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the last email configuration test
-        /// was completed for a mailbox record.
         /// </summary>
         [JsonProperty(PropertyName = "testmailboxaccesscompletedon")]
         public System.DateTimeOffset? Testmailboxaccesscompletedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets contains the exchange synchronization state in XML
-        /// format.
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangesyncstatexml")]
-        public string Exchangesyncstatexml { get; set; }
 
         /// <summary>
         /// </summary>
@@ -822,57 +597,39 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string EntityimageUrl { get; set; }
 
         /// <summary>
-        /// Gets or sets choose the user associated to the mailbox.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
         public string _regardingobjectidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the ID of the Undeliverable folder in the
-        /// mailbox managed by Microsoft Exchange.
         /// </summary>
         [JsonProperty(PropertyName = "undeliverablefolder")]
         public string Undeliverablefolder { get; set; }
 
         /// <summary>
-        /// Gets or sets choose whether to allow the email connector to use
-        /// credentials.
         /// </summary>
-        [JsonProperty(PropertyName = "allowemailconnectortousecredentials")]
-        public bool? Allowemailconnectortousecredentials { get; set; }
+        [JsonProperty(PropertyName = "lastmailboxforcedunlockoccurredon")]
+        public System.DateTimeOffset? Lastmailboxforcedunlockoccurredon { get; set; }
 
         /// <summary>
-        /// Gets or sets mailbox Total Duration in Average
         /// </summary>
-        [JsonProperty(PropertyName = "averagetotalduration")]
-        public int? Averagetotalduration { get; set; }
+        [JsonProperty(PropertyName = "isactsyncorgflagset")]
+        public bool? Isactsyncorgflagset { get; set; }
 
         /// <summary>
-        /// Gets or sets indicates if verbose tracing needs to be enabled for
-        /// this mailbox.
         /// </summary>
         [JsonProperty(PropertyName = "verboseloggingenabled")]
         public int? Verboseloggingenabled { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
         /// </summary>
-        [JsonProperty(PropertyName = "receivingpostponeduntilforact")]
-        public System.DateTimeOffset? Receivingpostponeduntilforact { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the async host that is processing
-        /// this mailbox.
         /// </summary>
         [JsonProperty(PropertyName = "hostid")]
         public string Hostid { get; set; }
-
-        /// <summary>
-        /// Gets or sets concatenation of transient failure counts of all
-        /// mailbox operations.
-        /// </summary>
-        [JsonProperty(PropertyName = "transientfailurecount")]
-        public int? Transientfailurecount { get; set; }
 
         /// <summary>
         /// </summary>
@@ -936,6 +693,51 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_mailbox_sendermailboxid")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AbsScheduledprocessexecutionMailboxSendermailboxid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bulkoperation_mailbox_sendermailboxid")]
+        public IList<MicrosoftDynamicsCRMbulkoperation> BulkoperationMailboxSendermailboxid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignactivity_mailbox_sendermailboxid")]
+        public IList<MicrosoftDynamicsCRMcampaignactivity> CampaignactivityMailboxSendermailboxid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignresponse_mailbox_sendermailboxid")]
+        public IList<MicrosoftDynamicsCRMcampaignresponse> CampaignresponseMailboxSendermailboxid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "incidentresolution_mailbox_sendermailboxid")]
+        public IList<MicrosoftDynamicsCRMincidentresolution> IncidentresolutionMailboxSendermailboxid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "serviceappointment_mailbox_sendermailboxid")]
+        public IList<MicrosoftDynamicsCRMserviceappointment> ServiceappointmentMailboxSendermailboxid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "opportunityclose_mailbox_sendermailboxid")]
+        public IList<MicrosoftDynamicsCRMopportunityclose> OpportunitycloseMailboxSendermailboxid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "orderclose_mailbox_sendermailboxid")]
+        public IList<MicrosoftDynamicsCRMorderclose> OrdercloseMailboxSendermailboxid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "quoteclose_mailbox_sendermailboxid")]
+        public IList<MicrosoftDynamicsCRMquoteclose> QuotecloseMailboxSendermailboxid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "tracelog_Mailbox")]
         public IList<MicrosoftDynamicsCRMtracelog> TracelogMailbox { get; set; }
 
@@ -971,13 +773,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "Mailbox_MailboxTrackingFolder")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> MailboxMailboxTrackingFolder { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "organizationid")]
         public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_mailbox_sendermailboxid")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AbsScheduledprocessexecutionMailboxSendermailboxid { get; set; }
+        [JsonProperty(PropertyName = "mailbox_processsessions")]
+        public IList<MicrosoftDynamicsCRMprocesssession> MailboxProcesssessions { get; set; }
 
     }
 }

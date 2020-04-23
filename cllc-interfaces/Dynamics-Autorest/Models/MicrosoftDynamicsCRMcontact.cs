@@ -31,739 +31,304 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcontact
         /// class.
         /// </summary>
-        /// <param name="address3City">Type the city for the 3rd
-        /// address.</param>
-        /// <param name="firstname">Type the contact's first name to make sure
-        /// the contact is addressed correctly in sales calls, email, and
-        /// marketing campaigns.</param>
-        /// <param name="address2Line2">Type the second line of the secondary
-        /// address.</param>
-        /// <param name="assistantphone">Type the phone number for the
-        /// contact's assistant.</param>
-        /// <param name="lastname">Type the contact's last name to make sure
-        /// the contact is addressed correctly in sales calls, email, and
-        /// marketing campaigns.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="_modifiedbyValue">Shows who last updated the
-        /// record.</param>
-        /// <param name="address1County">Type the county for the primary
-        /// address.</param>
-        /// <param name="address3Line3">the third line of the 3rd
-        /// address.</param>
-        /// <param name="yomimiddlename">Type the phonetic spelling of the
-        /// contact's middle name, if the name is specified in Japanese, to
-        /// make sure the name is pronounced correctly in phone calls with the
-        /// contact.</param>
-        /// <param name="ftpsiteurl">Type the URL for the contact's FTP site to
-        /// enable users to access data and share documents.</param>
-        /// <param name="address1Longitude">Type the longitude value for the
-        /// primary address for use in mapping and other applications.</param>
-        /// <param name="accountrolecode">Select the contact's role within the
-        /// company or sales process, such as decision maker, employee, or
-        /// influencer.</param>
-        /// <param name="address1Postalcode">Type the ZIP Code or postal code
-        /// for the primary address.</param>
-        /// <param name="adoxioStateprovince">Uses the Global Option set
-        /// StateProvince.</param>
-        /// <param name="marketingonly">Whether is only for marketing</param>
-        /// <param name="address1Telephone3">Type a third phone number
-        /// associated with the primary address.</param>
-        /// <param name="pager">Type the pager number for the contact.</param>
-        /// <param name="address3Postalcode">the ZIP Code or postal code for
-        /// the 3rd address.</param>
-        /// <param name="_createdbyexternalpartyValue">Shows the external party
-        /// who created the record.</param>
-        /// <param name="address1Composite">Shows the complete primary
-        /// address.</param>
-        /// <param name="assistantname">Type the name of the contact's
-        /// assistant.</param>
-        /// <param name="anniversary">Enter the date of the contact's wedding
-        /// or service anniversary for use in customer gift programs or other
-        /// communications.</param>
-        /// <param name="versionnumber">Version number of the contact.</param>
-        /// <param name="governmentid">Type the passport number or other
-        /// government ID for the contact for use in documents or
-        /// reports.</param>
-        /// <param name="leadsourcecode">Select the primary marketing source
-        /// that directed the contact to your organization.</param>
-        /// <param name="address2Telephone1">Type the main phone number
-        /// associated with the secondary address.</param>
-        /// <param name="address1Upszone">Type the UPS zone of the primary
-        /// address to make sure shipping charges are calculated correctly and
-        /// deliveries are made promptly, if shipped by UPS.</param>
-        /// <param name="address3Utcoffset">Select the time zone, or UTC
-        /// offset, for this address so that other people can reference it when
-        /// they contact someone at this address.</param>
-        /// <param name="address2Stateorprovince">Type the state or province of
-        /// the secondary address.</param>
-        /// <param name="yomifullname">Shows the combined Yomi first and last
-        /// names of the contact so that the full phonetic name can be
-        /// displayed in views and reports.</param>
-        /// <param name="createdon">Shows the date and time when the record was
-        /// created. The date and time are displayed in the time zone selected
-        /// in Microsoft Dynamics 365 options.</param>
-        /// <param name="_defaultpricelevelidValue">Choose the default price
-        /// list associated with the contact to make sure the correct product
-        /// prices for this customer are applied in sales opportunities,
-        /// quotes, and orders.</param>
-        /// <param name="address3Telephone3">Type a third phone number
-        /// associated with the primary address.</param>
-        /// <param name="salutation">Type the salutation of the contact to make
-        /// sure the contact is addressed correctly in sales calls, email
-        /// messages, and marketing campaigns.</param>
-        /// <param name="donotbulkpostalmail">Select whether the contact
-        /// accepts bulk postal mail sent through marketing campaigns or quick
-        /// campaigns. If Do Not Allow is selected, the contact can be added to
-        /// marketing lists, but will be excluded from the letters.</param>
-        /// <param name="birthdate">Enter the contact's birthday for use in
-        /// customer gift programs or other communications.</param>
-        /// <param name="familystatuscode">Select the marital status of the
-        /// contact for reference in follow-up phone calls and other
-        /// communications.</param>
-        /// <param name="adoxioPhsfinancialinterestdetails">The details of the
-        /// financial interest</param>
-        /// <param name="yomilastname">Type the phonetic spelling of the
-        /// contact's last name, if the name is specified in Japanese, to make
-        /// sure the name is pronounced correctly in phone calls with the
-        /// contact.</param>
-        /// <param name="adoxioPhsexclusivedetails">Capture the details of an
-        /// exclusive agreement with a Manufacturer</param>
-        /// <param name="lastusedincampaign">Shows the date when the contact
-        /// was last included in a marketing campaign or quick
-        /// campaign.</param>
-        /// <param name="_parentcustomeridValue">Select the parent account or
-        /// parent contact for the contact to provide a quick link to
-        /// additional details, such as financial information, activities, and
-        /// opportunities.</param>
-        /// <param name="address2Country">Type the country or region for the
-        /// secondary address.</param>
-        /// <param name="aging60">For system use only.</param>
-        /// <param name="address1Telephone2">Type a second phone number
-        /// associated with the primary address.</param>
-        /// <param name="address2Longitude">Type the longitude value for the
-        /// secondary address for use in mapping and other
-        /// applications.</param>
-        /// <param name="modifiedon">Shows the date and time when the record
-        /// was last updated. The date and time are displayed in the time zone
-        /// selected in Microsoft Dynamics 365 options.</param>
-        /// <param name="_owningteamValue">Unique identifier of the team who
-        /// owns the contact.</param>
-        /// <param name="nickname">Type the contact's nickname.</param>
-        /// <param name="address1Country">Type the country or region for the
-        /// primary address.</param>
-        /// <param name="_owninguserValue">Unique identifier of the user who
-        /// owns the contact.</param>
-        /// <param name="paymenttermscode">Select the payment terms to indicate
-        /// when the customer needs to pay the total amount.</param>
-        /// <param name="address1Telephone1">Type the main phone number
-        /// associated with the primary address.</param>
-        /// <param name="_accountidValue">Unique identifier of the account with
-        /// which the contact is associated.</param>
-        /// <param name="_parentcontactidValue">Unique identifier of the parent
-        /// contact.</param>
-        /// <param name="address3Longitude">Type the longitude value for the
-        /// third address for use in mapping and other applications.</param>
-        /// <param name="mobilephone">Type the mobile phone number for the
-        /// contact.</param>
-        /// <param name="address3Stateorprovince">the state or province of the
-        /// third address.</param>
-        /// <param name="merged">Shows whether the account has been merged with
-        /// a master contact.</param>
-        /// <param name="shippingmethodcode">Select a shipping method for
-        /// deliveries sent to this address.</param>
-        /// <param name="address2City">Type the city for the secondary
-        /// address.</param>
-        /// <param name="donotpostalmail">Select whether the contact allows
-        /// direct mail. If Do Not Allow is selected, the contact will be
-        /// excluded from letter activities distributed in marketing
-        /// campaigns.</param>
-        /// <param name="address1Freighttermscode">Select the freight terms for
-        /// the primary address to make sure shipping orders are processed
-        /// correctly.</param>
-        /// <param name="externaluseridentifier">Identifier for an external
-        /// user.</param>
-        /// <param name="address3Name">Type a descriptive name for the third
-        /// address, such as Corporate Headquarters.</param>
-        /// <param name="entityimage">Shows the default image for the
-        /// record.</param>
-        /// <param name="_owneridValue">Enter the user or team who is assigned
-        /// to manage the record. This field is updated every time the record
-        /// is assigned to a different user.</param>
-        /// <param name="donotfax">Select whether the contact allows faxes. If
-        /// Do Not Allow is selected, the contact will be excluded from any fax
-        /// activities distributed in marketing campaigns.</param>
-        /// <param name="subscriptionid">For internal use only.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="yomifirstname">Type the phonetic spelling of the
-        /// contact's first name, if the name is specified in Japanese, to make
-        /// sure the name is pronounced correctly in phone calls with the
-        /// contact.</param>
-        /// <param name="address1Primarycontactname">Type the name of the main
-        /// contact at the account's primary address.</param>
-        /// <param name="processid">Shows the ID of the process.</param>
-        /// <param name="_masteridValue">Unique identifier of the master
-        /// contact for merge.</param>
-        /// <param name="managerphone">Type the phone number for the contact's
-        /// manager.</param>
-        /// <param name="address1Utcoffset">Select the time zone, or UTC
-        /// offset, for this address so that other people can reference it when
-        /// they contact someone at this address.</param>
-        /// <param name="address2Latitude">Type the latitude value for the
-        /// secondary address for use in mapping and other
-        /// applications.</param>
-        /// <param name="creditlimitBase">Shows the Credit Limit field
-        /// converted to the system's default base currency for reporting
-        /// purposes. The calculations use the exchange rate specified in the
-        /// Currencies area.</param>
-        /// <param name="address1City">Type the city for the primary
-        /// address.</param>
-        /// <param name="address3Latitude">Type the latitude value for the
-        /// third address for use in mapping and other applications.</param>
-        /// <param name="callback">Type a callback phone number for this
-        /// contact.</param>
-        /// <param name="middlename">Type the contact's middle name or initial
-        /// to make sure the contact is addressed correctly.</param>
-        /// <param name="address3Addressid">Unique identifier for address
-        /// 3.</param>
-        /// <param name="aging30">For system use only.</param>
-        /// <param name="contactid">Unique identifier of the contact.</param>
-        /// <param name="company">Type the company phone of the
-        /// contact.</param>
-        /// <param name="address2Shippingmethodcode">Select a shipping method
-        /// for deliveries sent to this address.</param>
-        /// <param name="address2Utcoffset">Select the time zone, or UTC
-        /// offset, for this address so that other people can reference it when
-        /// they contact someone at this address.</param>
-        /// <param name="creditonhold">Select whether the contact is on a
-        /// credit hold, for reference when addressing invoice and accounting
-        /// issues.</param>
-        /// <param name="numberofchildren">Type the number of children the
-        /// contact has for reference in follow-up phone calls and other
-        /// communications.</param>
-        /// <param name="gendercode">Select the contact's gender to make sure
-        /// the contact is addressed correctly in sales calls, email, and
-        /// marketing campaigns.</param>
-        /// <param name="_modifiedbyexternalpartyValue">Shows the external
-        /// party who modified the record.</param>
-        /// <param name="address2Line3">Type the third line of the secondary
-        /// address.</param>
-        /// <param name="telephone2">Type a second phone number for this
-        /// contact.</param>
-        /// <param name="followemail">Information about whether to allow
-        /// following email activity like opens, attachment views and link
-        /// clicks for emails sent to the contact.</param>
-        /// <param name="address3Upszone">Type the UPS zone of the third
-        /// address to make sure shipping charges are calculated correctly and
-        /// deliveries are made promptly, if shipped by UPS.</param>
-        /// <param name="address3Line1">the first line of the 3rd
-        /// address.</param>
-        /// <param name="emailaddress1">Type the primary email address for the
-        /// contact.</param>
-        /// <param name="address1Stateorprovince">Type the state or province of
-        /// the primary address.</param>
-        /// <param name="lastonholdtime">Contains the date and time stamp of
-        /// the last on hold time.</param>
-        /// <param name="_originatingleadidValue">Shows the lead that the
-        /// contact was created if the contact was created by converting a lead
-        /// in Microsoft Dynamics 365. This is used to relate the contact to
-        /// the data on the originating lead for use in reporting and
-        /// analytics.</param>
-        /// <param name="aging30Base">Shows the Aging 30 field converted to the
-        /// system's default base currency. The calculations use the exchange
-        /// rate specified in the Currencies area.</param>
-        /// <param name="annualincomeBase">Shows the Annual Income field
-        /// converted to the system's default base currency. The calculations
-        /// use the exchange rate specified in the Currencies area.</param>
-        /// <param name="statecode">Shows whether the contact is active or
-        /// inactive. Inactive contacts are read-only and can't be edited
-        /// unless they are reactivated.</param>
-        /// <param name="preferredcontactmethodcode">Select the preferred
-        /// method of contact.</param>
-        /// <param name="childrensnames">Type the names of the contact's
-        /// children for reference in communications and client
-        /// programs.</param>
-        /// <param name="donotbulkemail">Select whether the contact accepts
-        /// bulk email sent through marketing campaigns or quick campaigns. If
-        /// Do Not Allow is selected, the contact can be added to marketing
-        /// lists, but will be excluded from the email.</param>
-        /// <param name="address3Line2">the second line of the 3rd
-        /// address.</param>
-        /// <param name="preferredappointmenttimecode">Select the preferred
-        /// time of day for service appointments.</param>
-        /// <param name="address1Name">Type a descriptive name for the primary
-        /// address, such as Corporate Headquarters.</param>
-        /// <param name="department">Type the department or business unit where
-        /// the contact works in the parent company or business.</param>
-        /// <param name="educationcode">Select the contact's highest level of
-        /// education for use in segmentation and analysis.</param>
-        /// <param name="address2Telephone3">Type a third phone number
-        /// associated with the secondary address.</param>
-        /// <param name="business2">Type a second business phone number for
-        /// this contact.</param>
-        /// <param name="entityimageid">For internal use only.</param>
-        /// <param name="address2Addresstypecode">Select the secondary address
-        /// type.</param>
-        /// <param name="address1Latitude">Type the latitude value for the
-        /// primary address for use in mapping and other applications.</param>
-        /// <param name="statuscode">Select the contact's status.</param>
-        /// <param name="address1Postofficebox">Type the post office box number
-        /// of the primary address.</param>
-        /// <param name="spousesname">Type the name of the contact's spouse or
-        /// partner for reference during calls, events, or other communications
-        /// with the contact.</param>
-        /// <param name="home2">Type a second home phone number for this
-        /// contact.</param>
-        /// <param name="address2County">Type the county for the secondary
-        /// address.</param>
-        /// <param name="traversedpath">For internal use only.</param>
-        /// <param name="_transactioncurrencyidValue">Choose the local currency
-        /// for the record to make sure budgets are reported in the correct
-        /// currency.</param>
-        /// <param name="address2Fax">Type the fax number associated with the
-        /// secondary address.</param>
-        /// <param name="address2Composite">Shows the complete secondary
-        /// address.</param>
-        /// <param name="customersizecode">Select the size of the contact's
-        /// company for segmentation and reporting purposes.</param>
-        /// <param name="exchangerate">Shows the conversion rate of the
-        /// record's currency. The exchange rate is used to convert all money
-        /// fields in the record from the local currency to the system's
-        /// default currency.</param>
-        /// <param name="creditlimit">Type the credit limit of the contact for
-        /// reference when you address invoice and accounting issues with the
-        /// customer.</param>
-        /// <param name="haschildrencode">Select whether the contact has any
-        /// children for reference in follow-up phone calls and other
-        /// communications.</param>
-        /// <param name="preferredappointmentdaycode">Select the preferred day
-        /// of the week for service appointments.</param>
-        /// <param name="_preferredsystemuseridValue">Choose the regular or
-        /// preferred customer service representative for reference when
-        /// scheduling service activities for the contact.</param>
-        /// <param name="address1Line2">Type the second line of the primary
-        /// address.</param>
-        /// <param name="jobtitle">Type the job title of the contact to make
-        /// sure the contact is addressed correctly in sales calls, email, and
-        /// marketing campaigns.</param>
-        /// <param name="_preferredserviceidValue">Choose the contact's
-        /// preferred service to make sure services are scheduled correctly for
-        /// the customer.</param>
-        /// <param name="address2Line1">Type the first line of the secondary
-        /// address.</param>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="address3Telephone1">Type the main phone number
-        /// associated with the third address.</param>
-        /// <param name="address2Telephone2">Type a second phone number
-        /// associated with the secondary address.</param>
-        /// <param name="timespentbymeonemailandmeetings">Total time spent for
-        /// emails (read and write) and meetings by me in relation to the
-        /// contact record.</param>
-        /// <param name="telephone1">Type the main phone number for this
-        /// contact.</param>
-        /// <param name="address1Line3">Type the third line of the primary
-        /// address.</param>
-        /// <param name="description">Type additional information to describe
-        /// the contact, such as an excerpt from the company's website.</param>
-        /// <param name="_adoxioApplicationidValue">Unique identifier for
-        /// Application associated with Contact.</param>
-        /// <param name="_slaidValue">Choose the service level agreement (SLA)
-        /// that you want to apply to the Contact record.</param>
-        /// <param name="isbackofficecustomer">Select whether the contact
-        /// exists in a separate accounting or other system, such as Microsoft
-        /// Dynamics GP or another ERP database, for use in integration
-        /// processes.</param>
-        /// <param name="address3Primarycontactname">Type the name of the main
-        /// contact at the account's third address.</param>
-        /// <param name="donotphone">Select whether the contact accepts phone
-        /// calls. If Do Not Allow is selected, the contact will be excluded
-        /// from any phone call activities distributed in marketing
-        /// campaigns.</param>
-        /// <param name="address2Upszone">Type the UPS zone of the secondary
-        /// address to make sure shipping charges are calculated correctly and
-        /// deliveries are made promptly, if shipped by UPS.</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="address3Country">the country or region for the 3rd
-        /// address.</param>
-        /// <param name="_preferredequipmentidValue">Choose the contact's
-        /// preferred service facility or equipment to make sure services are
-        /// scheduled correctly for the customer.</param>
-        /// <param name="address2Postofficebox">Type the post office box number
-        /// of the secondary address.</param>
-        /// <param name="telephone3">Type a third phone number for this
-        /// contact.</param>
-        /// <param name="websiteurl">Type the contact's professional or
-        /// personal website or blog URL.</param>
-        /// <param name="address2Postalcode">Type the ZIP Code or postal code
-        /// for the secondary address.</param>
-        /// <param name="annualincome">Type the contact's annual income for use
-        /// in profiling and financial analysis.</param>
-        /// <param name="aging90">For system use only.</param>
-        /// <param name="fax">Type the fax number for the contact.</param>
-        /// <param name="address1Shippingmethodcode">Select a shipping method
-        /// for deliveries sent to this address.</param>
-        /// <param name="_owningbusinessunitValue">Unique identifier of the
-        /// business unit that owns the contact.</param>
-        /// <param name="_createdbyValue">Shows who created the record.</param>
-        /// <param name="emailaddress3">Type an alternate email address for the
-        /// contact.</param>
-        /// <param name="customertypecode">Select the category that best
-        /// describes the relationship between the contact and your
-        /// organization.</param>
-        /// <param name="address3Addresstypecode">Select the third address
-        /// type.</param>
-        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
-        /// record on behalf of another user.</param>
-        /// <param name="address1Line1">Type the first line of the primary
-        /// address.</param>
-        /// <param name="address3Postofficebox">the post office box number of
-        /// the 3rd address.</param>
-        /// <param name="address3Composite">Shows the complete third
-        /// address.</param>
-        /// <param name="address2Name">Type a descriptive name for the
-        /// secondary address, such as Corporate Headquarters.</param>
-        /// <param name="suffix">Type the suffix used in the contact's name,
-        /// such as Jr. or Sr. to make sure the contact is addressed correctly
-        /// in sales calls, email, and marketing campaigns.</param>
-        /// <param name="fullname">Combines and shows the contact's first and
-        /// last names so that the full name can be displayed in views and
-        /// reports.</param>
-        /// <param name="address3Freighttermscode">Select the freight terms for
-        /// the third address to make sure shipping orders are processed
-        /// correctly.</param>
-        /// <param name="address3Shippingmethodcode">Select a shipping method
-        /// for deliveries sent to this address.</param>
-        /// <param name="employeeid">Type the employee ID or number for the
-        /// contact for reference in orders, service cases, or other
-        /// communications with the contact's organization.</param>
-        /// <param name="managername">Type the name of the contact's manager
-        /// for use in escalating issues or other follow-up communications with
-        /// the contact.</param>
-        /// <param name="address2Primarycontactname">Type the name of the main
-        /// contact at the account's secondary address.</param>
-        /// <param name="stageid">Shows the ID of the stage.</param>
-        /// <param name="address2Freighttermscode">Select the freight terms for
-        /// the secondary address to make sure shipping orders are processed
-        /// correctly.</param>
-        /// <param name="aging60Base">Shows the Aging 60 field converted to the
-        /// system's default base currency. The calculations use the exchange
-        /// rate specified in the Currencies area.</param>
-        /// <param name="adoxioPhsprofitagreementdetails">The details of the
-        /// profit agreement</param>
-        /// <param name="address1Addressid">Unique identifier for address
-        /// 1.</param>
-        /// <param name="address1Addresstypecode">Select the primary address
-        /// type.</param>
-        /// <param name="donotemail">Select whether the contact allows direct
-        /// email sent from Microsoft Dynamics 365. If Do Not Allow is
-        /// selected, Microsoft Dynamics 365 will not send the email.</param>
-        /// <param name="adoxioRole">Text field to capture the role entered in
-        /// the front end by the contact person.</param>
-        /// <param name="address3County">Type the county for the third
-        /// address.</param>
-        /// <param name="_createdonbehalfbyValue">Shows who created the record
-        /// on behalf of another user.</param>
-        /// <param name="territorycode">Select a region or territory for the
-        /// contact for use in segmentation and analysis.</param>
-        /// <param name="address3Telephone2">Type a second phone number
-        /// associated with the third address.</param>
-        /// <param name="address1Fax">Type the fax number associated with the
-        /// primary address.</param>
-        /// <param name="address2Addressid">Unique identifier for address
-        /// 2.</param>
-        /// <param name="emailaddress2">Type the secondary email address for
-        /// the contact.</param>
-        /// <param name="aging90Base">Shows the Aging 90 field converted to the
-        /// system's default base currency. The calculations use the exchange
-        /// rate specified in the Currencies area.</param>
-        /// <param name="onholdtime">Shows how long, in minutes, that the
-        /// record was on hold.</param>
-        /// <param name="address3Fax">Type the fax number associated with the
-        /// third address.</param>
-        /// <param name="participatesinworkflow">Shows whether the contact
-        /// participates in workflow rules.</param>
-        /// <param name="_slainvokedidValue">Last SLA that was applied to this
-        /// case. This field is for internal use only.</param>
-        /// <param name="donotsendmm">Select whether the contact accepts
-        /// marketing materials, such as brochures or catalogs. Contacts that
-        /// opt out can be excluded from marketing initiatives.</param>
-        public MicrosoftDynamicsCRMcontact(string address3City = default(string), int? adoxioSpdjobid = default(int?), bool? adoxioIsassociate = default(bool?), bool? adoxioCansignpermanentchangeapplications = default(bool?), System.DateTimeOffset? adoxioConsentvalidatedexpirydate = default(System.DateTimeOffset?), string firstname = default(string), string address2Line2 = default(string), string assistantphone = default(string), string lastname = default(string), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), string address1County = default(string), string address3Line3 = default(string), string yomimiddlename = default(string), string ftpsiteurl = default(string), string adoxioUnstructuredaddress = default(string), decimal? address1Longitude = default(decimal?), int? accountrolecode = default(int?), string address1Postalcode = default(string), int? adoxioStateprovince = default(int?), bool? marketingonly = default(bool?), string address1Telephone3 = default(string), string pager = default(string), string address3Postalcode = default(string), string _createdbyexternalpartyValue = default(string), bool? adoxioCansigntemporarychangeapplications = default(bool?), string address1Composite = default(string), string assistantname = default(string), System.DateTimeOffset? anniversary = default(System.DateTimeOffset?), string versionnumber = default(string), string governmentid = default(string), int? leadsourcecode = default(int?), string address2Telephone1 = default(string), bool? adoxioInvited = default(bool?), string address1Upszone = default(string), int? address3Utcoffset = default(int?), string address2Stateorprovince = default(string), string yomifullname = default(string), string adoxioPhsconnectionsdetails = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _defaultpricelevelidValue = default(string), string address3Telephone3 = default(string), string salutation = default(string), bool? donotbulkpostalmail = default(bool?), int? adoxioPhslivesincanada = default(int?), System.DateTimeOffset? birthdate = default(System.DateTimeOffset?), int? familystatuscode = default(int?), string adoxioPhsfinancialinterestdetails = default(string), string adoxioBcidcardnumber = default(string), string yomilastname = default(string), string adoxioPhsexclusivedetails = default(string), string adoxioDriverslicencenumber = default(string), System.DateTimeOffset? lastusedincampaign = default(System.DateTimeOffset?), string _parentcustomeridValue = default(string), string address2Country = default(string), decimal? aging60 = default(decimal?), string address1Telephone2 = default(string), decimal? address2Longitude = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string nickname = default(string), string address1Country = default(string), string _owninguserValue = default(string), int? paymenttermscode = default(int?), string address1Telephone1 = default(string), string _accountidValue = default(string), string _parentcontactidValue = default(string), string entityimageUrl = default(string), decimal? address3Longitude = default(decimal?), int? adoxioPhshaslivedincanada = default(int?), string mobilephone = default(string), string address3Stateorprovince = default(string), bool? merged = default(bool?), int? shippingmethodcode = default(int?), int? adoxioPhsexpired = default(int?), bool? adoxioIsauthorizedrepresentative = default(bool?), string address2City = default(string), bool? donotpostalmail = default(bool?), int? address1Freighttermscode = default(int?), string adoxioOtheridnumber = default(string), string externaluseridentifier = default(string), string address3Name = default(string), byte[] entityimage = default(byte[]), string _owneridValue = default(string), bool? donotfax = default(bool?), string subscriptionid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string yomifirstname = default(string), int? adoxioCascomplete = default(int?), System.DateTimeOffset? adoxioLastsecurityupdate = default(System.DateTimeOffset?), string address1Primarycontactname = default(string), string processid = default(string), string adoxioScopeofthelicenseeinstructions = default(string), string _masteridValue = default(string), string managerphone = default(string), bool? adoxioIsworker = default(bool?), int? address1Utcoffset = default(int?), decimal? address2Latitude = default(decimal?), int? adoxioGendercode = default(int?), decimal? creditlimitBase = default(decimal?), string address1City = default(string), decimal? address3Latitude = default(decimal?), string callback = default(string), int? adoxioIdentificationtype = default(int?), string middlename = default(string), string address3Addressid = default(string), decimal? aging30 = default(decimal?), string contactid = default(string), string company = default(string), int? address2Shippingmethodcode = default(int?), int? address2Utcoffset = default(int?), bool? creditonhold = default(bool?), string adoxioExternalid = default(string), int? numberofchildren = default(int?), int? adoxioConsentvalidated = default(int?), int? adoxioPhscomplete = default(int?), int? gendercode = default(int?), string _modifiedbyexternalpartyValue = default(string), string address2Line3 = default(string), string telephone2 = default(string), bool? followemail = default(bool?), string address3Upszone = default(string), string address3Line1 = default(string), string emailaddress1 = default(string), string address1Stateorprovince = default(string), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string _originatingleadidValue = default(string), string adoxioBirthplace = default(string), decimal? aging30Base = default(decimal?), System.DateTimeOffset? adoxioEmploymentstartdate = default(System.DateTimeOffset?), decimal? annualincomeBase = default(decimal?), int? statecode = default(int?), int? preferredcontactmethodcode = default(int?), string childrensnames = default(string), bool? donotbulkemail = default(bool?), int? adoxioSelfdeclaredlicencecap = default(int?), int? adoxioPhsexclusivemfg = default(int?), string address3Line2 = default(string), bool? adoxioIsstaffadmin = default(bool?), string adoxioOther2ndidtype = default(string), int? preferredappointmenttimecode = default(int?), string address1Name = default(string), string adoxioContactportalurl = default(string), string department = default(string), int? educationcode = default(int?), int? adoxioPhsconnectionstootherlicences = default(int?), string address2Telephone3 = default(string), bool? adoxioIsmarketer = default(bool?), int? adoxioSelfdeclaredtiedhouse = default(int?), string business2 = default(string), int? adoxioPhsfinancialint = default(int?), string adoxioOther2ndidnumber = default(string), string entityimageid = default(string), int? address2Addresstypecode = default(int?), int? adoxioSecondaryidentificationtype = default(int?), decimal? address1Latitude = default(decimal?), int? statuscode = default(int?), string address1Postofficebox = default(string), string spousesname = default(string), System.DateTimeOffset? adoxioSecurityexpirydate = default(System.DateTimeOffset?), string home2 = default(string), System.DateTimeOffset? adoxioSelfdeclaredtiedhousedate = default(System.DateTimeOffset?), bool? adoxioCanobtainlicenceinfofrombranch = default(bool?), string address2County = default(string), string traversedpath = default(string), string _transactioncurrencyidValue = default(string), string address2Fax = default(string), string address2Composite = default(string), int? customersizecode = default(int?), decimal? exchangerate = default(decimal?), decimal? creditlimit = default(decimal?), int? adoxioIdentificationjurisdiction = default(int?), int? haschildrencode = default(int?), int? adoxioPhsprofitagreement = default(int?), int? preferredappointmentdaycode = default(int?), string _preferredsystemuseridValue = default(string), string address1Line2 = default(string), string jobtitle = default(string), string _preferredserviceidValue = default(string), string address2Line1 = default(string), int? importsequencenumber = default(int?), string address3Telephone1 = default(string), string address2Telephone2 = default(string), string timespentbymeonemailandmeetings = default(string), string telephone1 = default(string), string _adoxioRelatedlicenceValue = default(string), string address1Line3 = default(string), string description = default(string), string _adoxioApplicationidValue = default(string), string _adoxioEstablishmentValue = default(string), string _slaidValue = default(string), bool? isbackofficecustomer = default(bool?), long? entityimageTimestamp = default(long?), string address3Primarycontactname = default(string), int? adoxioSelfdisclosure = default(int?), bool? donotphone = default(bool?), string address2Upszone = default(string), int? timezoneruleversionnumber = default(int?), string address3Country = default(string), int? adoxioPhscanadiandrugalchoholdrivingoffence = default(int?), string _preferredequipmentidValue = default(string), string address2Postofficebox = default(string), string telephone3 = default(string), string websiteurl = default(string), string address2Postalcode = default(string), decimal? annualincome = default(decimal?), decimal? aging90 = default(decimal?), string fax = default(string), int? address1Shippingmethodcode = default(int?), string _owningbusinessunitValue = default(string), bool? adoxioCanattendcompliancemeetings = default(bool?), string adoxioDateofbirthshortdatestring = default(string), string _createdbyValue = default(string), string emailaddress3 = default(string), int? customertypecode = default(int?), int? address3Addresstypecode = default(int?), string _modifiedonbehalfbyValue = default(string), string address1Line1 = default(string), string address3Postofficebox = default(string), string adoxioSecondaryidnumber = default(string), string address3Composite = default(string), string address2Name = default(string), string suffix = default(string), string adoxioPreferredname = default(string), string fullname = default(string), int? address3Freighttermscode = default(int?), int? address3Shippingmethodcode = default(int?), string employeeid = default(string), string managername = default(string), string address2Primarycontactname = default(string), string stageid = default(string), int? adoxioSecuritycheckstatus = default(int?), System.DateTimeOffset? adoxioPhsdatesubmitted = default(System.DateTimeOffset?), int? address2Freighttermscode = default(int?), int? adoxioPhsforeigndrugalchoholoffence = default(int?), decimal? aging60Base = default(decimal?), string adoxioPhsprofitagreementdetails = default(string), string address1Addressid = default(string), int? address1Addresstypecode = default(int?), string adoxioOtheridtype = default(string), System.DateTimeOffset? adoxioCasdatesubmitted = default(System.DateTimeOffset?), bool? adoxioCanattendeducationsessions = default(bool?), bool? donotemail = default(bool?), string adoxioRole = default(string), string address3County = default(string), string _createdonbehalfbyValue = default(string), int? territorycode = default(int?), string address3Telephone2 = default(string), string address1Fax = default(string), string address2Addressid = default(string), bool? adoxioCanrepresentlicenseeathearings = default(bool?), string emailaddress2 = default(string), decimal? aging90Base = default(decimal?), int? onholdtime = default(int?), string address3Fax = default(string), bool? adoxioCansigngrocerystoreproofofsalesrevenue = default(bool?), string adoxioPrimaryidnumber = default(string), System.DateTimeOffset? adoxioSelfdeclaredlicencecapdate = default(System.DateTimeOffset?), bool? participatesinworkflow = default(bool?), string _slainvokedidValue = default(string), bool? donotsendmm = default(bool?), IList<MicrosoftDynamicsCRMquote> contactquotesAssociation = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMlist> listcontactAssociation = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMinvoice> contactinvoicesAssociation = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMsalesorder> contactordersAssociation = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMcontract> servicecontractcontactsAssociation = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMlead> contactleadsAssociation = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMentitlement> contactEntitlementContactId = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMbookableresource> contactBookableresourceContactId = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMconnection> contactConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMopportunity> opportunityParentContact = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMfeedback> contactFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMactivitypointer> contactActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMsocialactivity> contactSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMfeedback> lkContactFeedbackCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMpostfollow> contactPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostregarding> contactPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMsocialactivity> socialactivityPostauthorContacts = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMinvoice> invoiceCustomerContacts = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMquote> quoteCustomerContacts = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMbulkoperationlog> createdContactBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), IList<MicrosoftDynamicsCRMphonecall> contactPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> contactTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMsyncerror> contactSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMentitlement> entitlementcontactsAssociation = default(IList<MicrosoftDynamicsCRMentitlement>), MicrosoftDynamicsCRMsla slainvokedidContactSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsla slaContactSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMlead> leadCustomerContacts = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMannotation> contactAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMcontact masterid = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMcontact> contactMasterContact = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMlead originatingleadid = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMserviceappointment> contactServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> contactEmailEmailSender = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMaccount> accountPrimaryContact = default(IList<MicrosoftDynamicsCRMaccount>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontract> contractCustomerContacts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMactioncard> contactActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMcontract> contractBillingcustomerContacts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMentitlement> contactEntitlementCustomer = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMsocialactivity> socialactivityPostauthoraccountContacts = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMsocialprofile> socialprofileCustomerContacts = default(IList<MicrosoftDynamicsCRMsocialprofile>), IList<MicrosoftDynamicsCRMcustomeraddress> contactCustomerAddress = default(IList<MicrosoftDynamicsCRMcustomeraddress>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMincident> incidentCustomerContacts = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMaccount parentcustomeridAccount = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMduplicaterecord> contactDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMfeedback> lkContactFeedbackCreatedby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceContact = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMsalesorder> orderCustomerContacts = default(IList<MicrosoftDynamicsCRMsalesorder>), MicrosoftDynamicsCRMsystemuser preferredsystemuserid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMfax> contactFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMincident> contactAsPrimaryContact = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMservice preferredserviceid = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMincident> contactAsResponsibleContact = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMappointment> contactAppointments = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMlead> leadParentContact = default(IList<MicrosoftDynamicsCRMlead>), MicrosoftDynamicsCRMequipment preferredequipmentid = default(MicrosoftDynamicsCRMequipment), IList<MicrosoftDynamicsCRMasyncoperation> contactAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMbulkoperationlog> sourceContactBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> contactRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMbulkdeletefailure> contactBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMcontact parentcustomeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMcontact> contactCustomerContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMconnection> contactConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMduplicaterecord> contactDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMcontractdetail> contractlineitemCustomerContacts = default(IList<MicrosoftDynamicsCRMcontractdetail>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> contactEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMopportunity> opportunityCustomerContacts = default(IList<MicrosoftDynamicsCRMopportunity>), MicrosoftDynamicsCRMpricelevel defaultpricelevelid = default(MicrosoftDynamicsCRMpricelevel), IList<MicrosoftDynamicsCRMactivityparty> contactActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMletter> contactLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> contactAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMadoxioApplication adoxioApplicationId = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioLicences adoxioRelatedLicence = default(MicrosoftDynamicsCRMadoxioLicences), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioContactAdoxioApplicationApplyingPerson = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioContactAdoxioComplaintComplainant = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioContactAdoxioLegalentityContact = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioContactAdoxioLegalentityProfileName = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> adoxioContactAdoxioPreviousaddressContactId = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioAlias> adoxioContactAliases = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> adoxioContactCorporateroles = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioContactInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> adoxioContactPersonalhistorysummary = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> adoxioContactTiedhouseconnections = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioWorker> adoxioContactWorkerregistration = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioDocument> adoxioIndividualDocuments = default(IList<MicrosoftDynamicsCRMadoxioDocument>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> contactSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMadoxioLicenseechangelog> adoxioLicenseechangelogContact = default(IList<MicrosoftDynamicsCRMadoxioLicenseechangelog>), IList<MicrosoftDynamicsCRMtask> adoxioContactTaskContact = default(IList<MicrosoftDynamicsCRMtask>))
+        public MicrosoftDynamicsCRMcontact(decimal? aging90Base = default(decimal?), string fax = default(string), string address2Name = default(string), string adoxioExternalid = default(string), bool? donotfax = default(bool?), string address1County = default(string), string address1Upszone = default(string), string _preferredequipmentidValue = default(string), bool? donotbulkemail = default(bool?), int? adoxioPhsconnectionstootherlicences = default(int?), string _transactioncurrencyidValue = default(string), string stageid = default(string), int? haschildrencode = default(int?), decimal? exchangerate = default(decimal?), int? adoxioSecondaryidentificationtype = default(int?), System.DateTimeOffset? anniversary = default(System.DateTimeOffset?), string adoxioScopeofthelicenseeinstructions = default(string), string address3Postalcode = default(string), int? adoxioPhsprofitagreement = default(int?), bool? adoxioCanobtainlicenceinfofrombranch = default(bool?), string telephone1 = default(string), int? adoxioSelfdeclaredlicencecap = default(int?), bool? creditonhold = default(bool?), int? adoxioCascomplete = default(int?), decimal? address3Longitude = default(decimal?), string _owninguserValue = default(string), int? adoxioPhsexclusivemfg = default(int?), int? accountrolecode = default(int?), string yomimiddlename = default(string), int? utcconversiontimezonecode = default(int?), int? preferredappointmenttimecode = default(int?), int? timezoneruleversionnumber = default(int?), string versionnumber = default(string), string subscriptionid = default(string), string address3Line2 = default(string), string adoxioSecondaryidnumber = default(string), bool? adoxioIsassociate = default(bool?), int? adoxioGendercode = default(int?), string address2Telephone2 = default(string), bool? donotbulkpostalmail = default(bool?), string _modifiedonbehalfbyValue = default(string), string adoxioPhsfinancialinterestdetails = default(string), string adoxioDriverslicencenumber = default(string), string _createdbyValue = default(string), System.DateTimeOffset? adoxioConsentvalidatedexpirydate = default(System.DateTimeOffset?), byte[] entityimage = default(byte[]), bool? msdynGdproptout = default(bool?), bool? isbackofficecustomer = default(bool?), int? address1Addresstypecode = default(int?), string lastname = default(string), string adoxioPhsconnectionsdetails = default(string), bool? adoxioIsstaffadmin = default(bool?), string adoxioContactportalurl = default(string), int? address2Addresstypecode = default(int?), int? paymenttermscode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string mobilephone = default(string), System.DateTimeOffset? adoxioPhsdatesubmitted = default(System.DateTimeOffset?), string address3Telephone3 = default(string), string traversedpath = default(string), decimal? aging60 = default(decimal?), string address1Stateorprovince = default(string), string _adoxioEstablishmentValue = default(string), int? address3Shippingmethodcode = default(int?), int? adoxioPhscomplete = default(int?), string address1Postalcode = default(string), string address1Line1 = default(string), string address3Telephone2 = default(string), string address3Postofficebox = default(string), string address1Telephone2 = default(string), string employeeid = default(string), decimal? aging30Base = default(decimal?), string firstname = default(string), string address2County = default(string), bool? adoxioIsworker = default(bool?), string address2Postalcode = default(string), System.DateTimeOffset? adoxioLastsecurityupdate = default(System.DateTimeOffset?), bool? merged = default(bool?), string spousesname = default(string), int? adoxioPhshaslivedincanada = default(int?), int? familystatuscode = default(int?), int? customersizecode = default(int?), string address1City = default(string), bool? followemail = default(bool?), string address2Postofficebox = default(string), string ftpsiteurl = default(string), string salutation = default(string), decimal? aging30 = default(decimal?), string address1Addressid = default(string), bool? adoxioCanrepresentlicenseeathearings = default(bool?), decimal? address1Latitude = default(decimal?), int? address3Freighttermscode = default(int?), int? address1Utcoffset = default(int?), int? adoxioConsentvalidated = default(int?), string suffix = default(string), string description = default(string), decimal? address2Longitude = default(decimal?), string department = default(string), int? numberofchildren = default(int?), decimal? aging90 = default(decimal?), System.DateTimeOffset? adoxioEmploymentstartdate = default(System.DateTimeOffset?), string _parentcustomeridValue = default(string), string emailaddress1 = default(string), string address3County = default(string), string jobtitle = default(string), string nickname = default(string), string websiteurl = default(string), string address3City = default(string), string assistantphone = default(string), long? entityimageTimestamp = default(long?), int? adoxioSelfdisclosure = default(int?), int? adoxioSpdjobid = default(int?), int? gendercode = default(int?), bool? donotemail = default(bool?), string _owningteamValue = default(string), int? adoxioSelfdeclaredtiedhouse = default(int?), int? territorycode = default(int?), string address3Primarycontactname = default(string), string company = default(string), int? leadsourcecode = default(int?), string address3Line1 = default(string), string address1Name = default(string), System.DateTimeOffset? adoxioSecurityexpirydate = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? adoxioPhsfinancialint = default(int?), int? preferredappointmentdaycode = default(int?), string _defaultpricelevelidValue = default(string), string address1Composite = default(string), int? adoxioPhscanadiandrugalchoholdrivingoffence = default(int?), string address3Addressid = default(string), string address2City = default(string), string address2Telephone3 = default(string), bool? participatesinworkflow = default(bool?), string address2Primarycontactname = default(string), string fullname = default(string), string _preferredsystemuseridValue = default(string), int? statecode = default(int?), string adoxioOtheridnumber = default(string), string adoxioPhsexclusivedetails = default(string), int? adoxioPhslivesincanada = default(int?), string address1Telephone3 = default(string), string adoxioOther2ndidnumber = default(string), string telephone3 = default(string), string _slaidValue = default(string), string address2Telephone1 = default(string), decimal? annualincomeBase = default(decimal?), string adoxioPreferredname = default(string), string address2Line2 = default(string), decimal? annualincome = default(decimal?), string adoxioBcidcardnumber = default(string), System.DateTimeOffset? adoxioSelfdeclaredlicencecapdate = default(System.DateTimeOffset?), System.DateTimeOffset? lastusedincampaign = default(System.DateTimeOffset?), string address3Name = default(string), string _modifiedbyexternalpartyValue = default(string), string managername = default(string), bool? marketingonly = default(bool?), string adoxioPhsprofitagreementdetails = default(string), int? shippingmethodcode = default(int?), string address2Line3 = default(string), int? address3Utcoffset = default(int?), string contactid = default(string), string governmentid = default(string), decimal? address2Latitude = default(decimal?), string address3Upszone = default(string), string adoxioRole = default(string), int? address2Freighttermscode = default(int?), string managerphone = default(string), bool? adoxioCanattendeducationsessions = default(bool?), string _masteridValue = default(string), int? adoxioPhsforeigndrugalchoholoffence = default(int?), decimal? address1Longitude = default(decimal?), string adoxioUnstructuredaddress = default(string), string address2Stateorprovince = default(string), int? statuscode = default(int?), string address1Line3 = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string address1Line2 = default(string), string address1Country = default(string), string address3Composite = default(string), decimal? creditlimitBase = default(decimal?), string adoxioOtheridtype = default(string), string processid = default(string), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string yomifirstname = default(string), string _adoxioApplicationidValue = default(string), string home2 = default(string), int? onholdtime = default(int?), string externaluseridentifier = default(string), int? adoxioStateprovince = default(int?), string address1Fax = default(string), string address1Postofficebox = default(string), string address1Telephone1 = default(string), bool? adoxioIsauthorizedrepresentative = default(bool?), int? address1Shippingmethodcode = default(int?), decimal? address3Latitude = default(decimal?), string adoxioDateofbirthshortdatestring = default(string), bool? donotsendmm = default(bool?), System.DateTimeOffset? adoxioSelfdeclaredtiedhousedate = default(System.DateTimeOffset?), string address3Fax = default(string), string yomifullname = default(string), string telephone2 = default(string), string address2Country = default(string), string pager = default(string), string entityimageUrl = default(string), System.DateTimeOffset? birthdate = default(System.DateTimeOffset?), int? adoxioIdentificationtype = default(int?), int? address3Addresstypecode = default(int?), int? address2Utcoffset = default(int?), int? educationcode = default(int?), string assistantname = default(string), string _originatingleadidValue = default(string), string _slainvokedidValue = default(string), string adoxioOther2ndidtype = default(string), string yomilastname = default(string), string adoxioBirthplace = default(string), string emailaddress3 = default(string), bool? adoxioInvited = default(bool?), string address3Line3 = default(string), int? importsequencenumber = default(int?), string address2Line1 = default(string), string address3Stateorprovince = default(string), int? customertypecode = default(int?), string middlename = default(string), string address3Telephone1 = default(string), int? address1Freighttermscode = default(int?), string _createdbyexternalpartyValue = default(string), string emailaddress2 = default(string), int? address2Shippingmethodcode = default(int?), bool? donotphone = default(bool?), string entityimageid = default(string), bool? donotpostalmail = default(bool?), int? adoxioPhsexpired = default(int?), string _preferredserviceidValue = default(string), bool? adoxioCanattendcompliancemeetings = default(bool?), string callback = default(string), bool? adoxioCansigntemporarychangeapplications = default(bool?), string address2Addressid = default(string), decimal? aging60Base = default(decimal?), int? adoxioIdentificationjurisdiction = default(int?), string _owneridValue = default(string), int? preferredcontactmethodcode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string address2Fax = default(string), string address3Country = default(string), string _adoxioRelatedlicenceValue = default(string), string _owningbusinessunitValue = default(string), string childrensnames = default(string), bool? adoxioCansigngrocerystoreproofofsalesrevenue = default(bool?), string _accountidValue = default(string), string address2Upszone = default(string), string _modifiedbyValue = default(string), string timespentbymeonemailandmeetings = default(string), string business2 = default(string), int? adoxioSecuritycheckstatus = default(int?), string address1Primarycontactname = default(string), bool? adoxioIsmarketer = default(bool?), System.DateTimeOffset? adoxioCasdatesubmitted = default(System.DateTimeOffset?), bool? adoxioCansignpermanentchangeapplications = default(bool?), string address2Composite = default(string), string _parentcontactidValue = default(string), decimal? creditlimit = default(decimal?), string adoxioPrimaryidnumber = default(string), IList<MicrosoftDynamicsCRMquote> contactquotesAssociation = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMlist> listcontactAssociation = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMinvoice> contactinvoicesAssociation = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMsalesorder> contactordersAssociation = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMcontract> servicecontractcontactsAssociation = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMlead> contactleadsAssociation = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> contactPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMentitlement> contactEntitlementContactId = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMbookableresource> contactBookableresourceContactId = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> contactAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMadoxioApplication adoxioApplicationId = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioLicences adoxioRelatedLicence = default(MicrosoftDynamicsCRMadoxioLicences), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioContactAdoxioApplicationApplyingPerson = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioContactAdoxioComplaintComplainant = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioContactAdoxioLegalentityContact = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioContactAdoxioLegalentityProfileName = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> adoxioContactAdoxioPreviousaddressContactId = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioAlias> adoxioContactAliases = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> adoxioContactCorporateroles = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioContactInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> adoxioContactPersonalhistorysummary = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> adoxioContactTiedhouseconnections = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioWorker> adoxioContactWorkerregistration = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioDocument> adoxioIndividualDocuments = default(IList<MicrosoftDynamicsCRMadoxioDocument>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> contactSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMadoxioLicenseechangelog> adoxioLicenseechangelogContact = default(IList<MicrosoftDynamicsCRMadoxioLicenseechangelog>), IList<MicrosoftDynamicsCRMtask> adoxioContactTaskContact = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMbulkoperation> contactBulkOperations = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcampaignresponse> contactCampaignResponses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMconnection> contactConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMopportunity> opportunityParentContact = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMfeedback> contactFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMprocesssession> contactProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMactivitypointer> contactActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMsocialactivity> contactSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMfeedback> lkContactFeedbackCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMpostfollow> contactPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostregarding> contactPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMsocialactivity> socialactivityPostauthorContacts = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMinvoice> invoiceCustomerContacts = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMquote> quoteCustomerContacts = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMbulkoperationlog> createdContactBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), IList<MicrosoftDynamicsCRMphonecall> contactPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> contactTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMsyncerror> contactSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMentitlement> entitlementcontactsAssociation = default(IList<MicrosoftDynamicsCRMentitlement>), MicrosoftDynamicsCRMsla slainvokedidContactSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsla slaContactSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMlead> leadCustomerContacts = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMannotation> contactAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMcontact masterid = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMcontact> contactMasterContact = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMlead originatingleadid = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMserviceappointment> contactServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> contactEmailEmailSender = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMaccount> accountPrimaryContact = default(IList<MicrosoftDynamicsCRMaccount>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontract> contractCustomerContacts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMactioncard> contactActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMcontract> contractBillingcustomerContacts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMentitlement> contactEntitlementCustomer = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMsocialactivity> socialactivityPostauthoraccountContacts = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMsocialprofile> socialprofileCustomerContacts = default(IList<MicrosoftDynamicsCRMsocialprofile>), IList<MicrosoftDynamicsCRMcustomeraddress> contactCustomerAddress = default(IList<MicrosoftDynamicsCRMcustomeraddress>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMincident> incidentCustomerContacts = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMaccount parentcustomeridAccount = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMduplicaterecord> contactDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMfeedback> lkContactFeedbackCreatedby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceContact = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMsalesorder> orderCustomerContacts = default(IList<MicrosoftDynamicsCRMsalesorder>), MicrosoftDynamicsCRMsystemuser preferredsystemuserid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMfax> contactFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMincident> contactAsPrimaryContact = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMservice preferredserviceid = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> contactMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMincident> contactAsResponsibleContact = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMappointment> contactAppointments = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMlead> leadParentContact = default(IList<MicrosoftDynamicsCRMlead>), MicrosoftDynamicsCRMequipment preferredequipmentid = default(MicrosoftDynamicsCRMequipment), IList<MicrosoftDynamicsCRMasyncoperation> contactAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMbulkoperationlog> sourceContactBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> contactRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMbulkdeletefailure> contactBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMcontact parentcustomeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMcontact> contactCustomerContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMconnection> contactConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMduplicaterecord> contactDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMcontractdetail> contractlineitemCustomerContacts = default(IList<MicrosoftDynamicsCRMcontractdetail>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> contactEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMopportunity> opportunityCustomerContacts = default(IList<MicrosoftDynamicsCRMopportunity>), MicrosoftDynamicsCRMpricelevel defaultpricelevelid = default(MicrosoftDynamicsCRMpricelevel), IList<MicrosoftDynamicsCRMactivityparty> contactActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMletter> contactLetters = default(IList<MicrosoftDynamicsCRMletter>))
         {
-            Address3City = address3City;
-            AdoxioSpdjobid = adoxioSpdjobid;
-            AdoxioIsassociate = adoxioIsassociate;
-            AdoxioCansignpermanentchangeapplications = adoxioCansignpermanentchangeapplications;
-            AdoxioConsentvalidatedexpirydate = adoxioConsentvalidatedexpirydate;
-            Firstname = firstname;
-            Address2Line2 = address2Line2;
-            Assistantphone = assistantphone;
-            Lastname = lastname;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            this._modifiedbyValue = _modifiedbyValue;
-            Address1County = address1County;
-            Address3Line3 = address3Line3;
-            Yomimiddlename = yomimiddlename;
-            Ftpsiteurl = ftpsiteurl;
-            AdoxioUnstructuredaddress = adoxioUnstructuredaddress;
-            Address1Longitude = address1Longitude;
-            Accountrolecode = accountrolecode;
-            Address1Postalcode = address1Postalcode;
-            AdoxioStateprovince = adoxioStateprovince;
-            Marketingonly = marketingonly;
-            Address1Telephone3 = address1Telephone3;
-            Pager = pager;
-            Address3Postalcode = address3Postalcode;
-            this._createdbyexternalpartyValue = _createdbyexternalpartyValue;
-            AdoxioCansigntemporarychangeapplications = adoxioCansigntemporarychangeapplications;
-            Address1Composite = address1Composite;
-            Assistantname = assistantname;
-            Anniversary = anniversary;
-            Versionnumber = versionnumber;
-            Governmentid = governmentid;
-            Leadsourcecode = leadsourcecode;
-            Address2Telephone1 = address2Telephone1;
-            AdoxioInvited = adoxioInvited;
-            Address1Upszone = address1Upszone;
-            Address3Utcoffset = address3Utcoffset;
-            Address2Stateorprovince = address2Stateorprovince;
-            Yomifullname = yomifullname;
-            AdoxioPhsconnectionsdetails = adoxioPhsconnectionsdetails;
-            Createdon = createdon;
-            this._defaultpricelevelidValue = _defaultpricelevelidValue;
-            Address3Telephone3 = address3Telephone3;
-            Salutation = salutation;
-            Donotbulkpostalmail = donotbulkpostalmail;
-            AdoxioPhslivesincanada = adoxioPhslivesincanada;
-            Birthdate = birthdate;
-            Familystatuscode = familystatuscode;
-            AdoxioPhsfinancialinterestdetails = adoxioPhsfinancialinterestdetails;
-            AdoxioBcidcardnumber = adoxioBcidcardnumber;
-            Yomilastname = yomilastname;
-            AdoxioPhsexclusivedetails = adoxioPhsexclusivedetails;
-            AdoxioDriverslicencenumber = adoxioDriverslicencenumber;
-            Lastusedincampaign = lastusedincampaign;
-            this._parentcustomeridValue = _parentcustomeridValue;
-            Address2Country = address2Country;
-            Aging60 = aging60;
-            Address1Telephone2 = address1Telephone2;
-            Address2Longitude = address2Longitude;
-            Modifiedon = modifiedon;
-            this._owningteamValue = _owningteamValue;
-            Nickname = nickname;
-            Address1Country = address1Country;
-            this._owninguserValue = _owninguserValue;
-            Paymenttermscode = paymenttermscode;
-            Address1Telephone1 = address1Telephone1;
-            this._accountidValue = _accountidValue;
-            this._parentcontactidValue = _parentcontactidValue;
-            EntityimageUrl = entityimageUrl;
-            Address3Longitude = address3Longitude;
-            AdoxioPhshaslivedincanada = adoxioPhshaslivedincanada;
-            Mobilephone = mobilephone;
-            Address3Stateorprovince = address3Stateorprovince;
-            Merged = merged;
-            Shippingmethodcode = shippingmethodcode;
-            AdoxioPhsexpired = adoxioPhsexpired;
-            AdoxioIsauthorizedrepresentative = adoxioIsauthorizedrepresentative;
-            Address2City = address2City;
-            Donotpostalmail = donotpostalmail;
-            Address1Freighttermscode = address1Freighttermscode;
-            AdoxioOtheridnumber = adoxioOtheridnumber;
-            Externaluseridentifier = externaluseridentifier;
-            Address3Name = address3Name;
-            Entityimage = entityimage;
-            this._owneridValue = _owneridValue;
-            Donotfax = donotfax;
-            Subscriptionid = subscriptionid;
-            Overriddencreatedon = overriddencreatedon;
-            Yomifirstname = yomifirstname;
-            AdoxioCascomplete = adoxioCascomplete;
-            AdoxioLastsecurityupdate = adoxioLastsecurityupdate;
-            Address1Primarycontactname = address1Primarycontactname;
-            Processid = processid;
-            AdoxioScopeofthelicenseeinstructions = adoxioScopeofthelicenseeinstructions;
-            this._masteridValue = _masteridValue;
-            Managerphone = managerphone;
-            AdoxioIsworker = adoxioIsworker;
-            Address1Utcoffset = address1Utcoffset;
-            Address2Latitude = address2Latitude;
-            AdoxioGendercode = adoxioGendercode;
-            CreditlimitBase = creditlimitBase;
-            Address1City = address1City;
-            Address3Latitude = address3Latitude;
-            Callback = callback;
-            AdoxioIdentificationtype = adoxioIdentificationtype;
-            Middlename = middlename;
-            Address3Addressid = address3Addressid;
-            Aging30 = aging30;
-            Contactid = contactid;
-            Company = company;
-            Address2Shippingmethodcode = address2Shippingmethodcode;
-            Address2Utcoffset = address2Utcoffset;
-            Creditonhold = creditonhold;
-            AdoxioExternalid = adoxioExternalid;
-            Numberofchildren = numberofchildren;
-            AdoxioConsentvalidated = adoxioConsentvalidated;
-            AdoxioPhscomplete = adoxioPhscomplete;
-            Gendercode = gendercode;
-            this._modifiedbyexternalpartyValue = _modifiedbyexternalpartyValue;
-            Address2Line3 = address2Line3;
-            Telephone2 = telephone2;
-            Followemail = followemail;
-            Address3Upszone = address3Upszone;
-            Address3Line1 = address3Line1;
-            Emailaddress1 = emailaddress1;
-            Address1Stateorprovince = address1Stateorprovince;
-            Lastonholdtime = lastonholdtime;
-            this._originatingleadidValue = _originatingleadidValue;
-            AdoxioBirthplace = adoxioBirthplace;
-            Aging30Base = aging30Base;
-            AdoxioEmploymentstartdate = adoxioEmploymentstartdate;
-            AnnualincomeBase = annualincomeBase;
-            Statecode = statecode;
-            Preferredcontactmethodcode = preferredcontactmethodcode;
-            Childrensnames = childrensnames;
-            Donotbulkemail = donotbulkemail;
-            AdoxioSelfdeclaredlicencecap = adoxioSelfdeclaredlicencecap;
-            AdoxioPhsexclusivemfg = adoxioPhsexclusivemfg;
-            Address3Line2 = address3Line2;
-            AdoxioIsstaffadmin = adoxioIsstaffadmin;
-            AdoxioOther2ndidtype = adoxioOther2ndidtype;
-            Preferredappointmenttimecode = preferredappointmenttimecode;
-            Address1Name = address1Name;
-            AdoxioContactportalurl = adoxioContactportalurl;
-            Department = department;
-            Educationcode = educationcode;
-            AdoxioPhsconnectionstootherlicences = adoxioPhsconnectionstootherlicences;
-            Address2Telephone3 = address2Telephone3;
-            AdoxioIsmarketer = adoxioIsmarketer;
-            AdoxioSelfdeclaredtiedhouse = adoxioSelfdeclaredtiedhouse;
-            Business2 = business2;
-            AdoxioPhsfinancialint = adoxioPhsfinancialint;
-            AdoxioOther2ndidnumber = adoxioOther2ndidnumber;
-            Entityimageid = entityimageid;
-            Address2Addresstypecode = address2Addresstypecode;
-            AdoxioSecondaryidentificationtype = adoxioSecondaryidentificationtype;
-            Address1Latitude = address1Latitude;
-            Statuscode = statuscode;
-            Address1Postofficebox = address1Postofficebox;
-            Spousesname = spousesname;
-            AdoxioSecurityexpirydate = adoxioSecurityexpirydate;
-            Home2 = home2;
-            AdoxioSelfdeclaredtiedhousedate = adoxioSelfdeclaredtiedhousedate;
-            AdoxioCanobtainlicenceinfofrombranch = adoxioCanobtainlicenceinfofrombranch;
-            Address2County = address2County;
-            Traversedpath = traversedpath;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Address2Fax = address2Fax;
-            Address2Composite = address2Composite;
-            Customersizecode = customersizecode;
-            Exchangerate = exchangerate;
-            Creditlimit = creditlimit;
-            AdoxioIdentificationjurisdiction = adoxioIdentificationjurisdiction;
-            Haschildrencode = haschildrencode;
-            AdoxioPhsprofitagreement = adoxioPhsprofitagreement;
-            Preferredappointmentdaycode = preferredappointmentdaycode;
-            this._preferredsystemuseridValue = _preferredsystemuseridValue;
-            Address1Line2 = address1Line2;
-            Jobtitle = jobtitle;
-            this._preferredserviceidValue = _preferredserviceidValue;
-            Address2Line1 = address2Line1;
-            Importsequencenumber = importsequencenumber;
-            Address3Telephone1 = address3Telephone1;
-            Address2Telephone2 = address2Telephone2;
-            Timespentbymeonemailandmeetings = timespentbymeonemailandmeetings;
-            Telephone1 = telephone1;
-            this._adoxioRelatedlicenceValue = _adoxioRelatedlicenceValue;
-            Address1Line3 = address1Line3;
-            Description = description;
-            this._adoxioApplicationidValue = _adoxioApplicationidValue;
-            this._adoxioEstablishmentValue = _adoxioEstablishmentValue;
-            this._slaidValue = _slaidValue;
-            Isbackofficecustomer = isbackofficecustomer;
-            EntityimageTimestamp = entityimageTimestamp;
-            Address3Primarycontactname = address3Primarycontactname;
-            AdoxioSelfdisclosure = adoxioSelfdisclosure;
-            Donotphone = donotphone;
-            Address2Upszone = address2Upszone;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Address3Country = address3Country;
-            AdoxioPhscanadiandrugalchoholdrivingoffence = adoxioPhscanadiandrugalchoholdrivingoffence;
-            this._preferredequipmentidValue = _preferredequipmentidValue;
-            Address2Postofficebox = address2Postofficebox;
-            Telephone3 = telephone3;
-            Websiteurl = websiteurl;
-            Address2Postalcode = address2Postalcode;
-            Annualincome = annualincome;
-            Aging90 = aging90;
-            Fax = fax;
-            Address1Shippingmethodcode = address1Shippingmethodcode;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            AdoxioCanattendcompliancemeetings = adoxioCanattendcompliancemeetings;
-            AdoxioDateofbirthshortdatestring = adoxioDateofbirthshortdatestring;
-            this._createdbyValue = _createdbyValue;
-            Emailaddress3 = emailaddress3;
-            Customertypecode = customertypecode;
-            Address3Addresstypecode = address3Addresstypecode;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Address1Line1 = address1Line1;
-            Address3Postofficebox = address3Postofficebox;
-            AdoxioSecondaryidnumber = adoxioSecondaryidnumber;
-            Address3Composite = address3Composite;
-            Address2Name = address2Name;
-            Suffix = suffix;
-            AdoxioPreferredname = adoxioPreferredname;
-            Fullname = fullname;
-            Address3Freighttermscode = address3Freighttermscode;
-            Address3Shippingmethodcode = address3Shippingmethodcode;
-            Employeeid = employeeid;
-            Managername = managername;
-            Address2Primarycontactname = address2Primarycontactname;
-            Stageid = stageid;
-            AdoxioSecuritycheckstatus = adoxioSecuritycheckstatus;
-            AdoxioPhsdatesubmitted = adoxioPhsdatesubmitted;
-            Address2Freighttermscode = address2Freighttermscode;
-            AdoxioPhsforeigndrugalchoholoffence = adoxioPhsforeigndrugalchoholoffence;
-            Aging60Base = aging60Base;
-            AdoxioPhsprofitagreementdetails = adoxioPhsprofitagreementdetails;
-            Address1Addressid = address1Addressid;
-            Address1Addresstypecode = address1Addresstypecode;
-            AdoxioOtheridtype = adoxioOtheridtype;
-            AdoxioCasdatesubmitted = adoxioCasdatesubmitted;
-            AdoxioCanattendeducationsessions = adoxioCanattendeducationsessions;
-            Donotemail = donotemail;
-            AdoxioRole = adoxioRole;
-            Address3County = address3County;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Territorycode = territorycode;
-            Address3Telephone2 = address3Telephone2;
-            Address1Fax = address1Fax;
-            Address2Addressid = address2Addressid;
-            AdoxioCanrepresentlicenseeathearings = adoxioCanrepresentlicenseeathearings;
-            Emailaddress2 = emailaddress2;
             Aging90Base = aging90Base;
-            Onholdtime = onholdtime;
-            Address3Fax = address3Fax;
-            AdoxioCansigngrocerystoreproofofsalesrevenue = adoxioCansigngrocerystoreproofofsalesrevenue;
-            AdoxioPrimaryidnumber = adoxioPrimaryidnumber;
-            AdoxioSelfdeclaredlicencecapdate = adoxioSelfdeclaredlicencecapdate;
+            Fax = fax;
+            Address2Name = address2Name;
+            AdoxioExternalid = adoxioExternalid;
+            Donotfax = donotfax;
+            Address1County = address1County;
+            Address1Upszone = address1Upszone;
+            this._preferredequipmentidValue = _preferredequipmentidValue;
+            Donotbulkemail = donotbulkemail;
+            AdoxioPhsconnectionstootherlicences = adoxioPhsconnectionstootherlicences;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            Stageid = stageid;
+            Haschildrencode = haschildrencode;
+            Exchangerate = exchangerate;
+            AdoxioSecondaryidentificationtype = adoxioSecondaryidentificationtype;
+            Anniversary = anniversary;
+            AdoxioScopeofthelicenseeinstructions = adoxioScopeofthelicenseeinstructions;
+            Address3Postalcode = address3Postalcode;
+            AdoxioPhsprofitagreement = adoxioPhsprofitagreement;
+            AdoxioCanobtainlicenceinfofrombranch = adoxioCanobtainlicenceinfofrombranch;
+            Telephone1 = telephone1;
+            AdoxioSelfdeclaredlicencecap = adoxioSelfdeclaredlicencecap;
+            Creditonhold = creditonhold;
+            AdoxioCascomplete = adoxioCascomplete;
+            Address3Longitude = address3Longitude;
+            this._owninguserValue = _owninguserValue;
+            AdoxioPhsexclusivemfg = adoxioPhsexclusivemfg;
+            Accountrolecode = accountrolecode;
+            Yomimiddlename = yomimiddlename;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Preferredappointmenttimecode = preferredappointmenttimecode;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Versionnumber = versionnumber;
+            Subscriptionid = subscriptionid;
+            Address3Line2 = address3Line2;
+            AdoxioSecondaryidnumber = adoxioSecondaryidnumber;
+            AdoxioIsassociate = adoxioIsassociate;
+            AdoxioGendercode = adoxioGendercode;
+            Address2Telephone2 = address2Telephone2;
+            Donotbulkpostalmail = donotbulkpostalmail;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            AdoxioPhsfinancialinterestdetails = adoxioPhsfinancialinterestdetails;
+            AdoxioDriverslicencenumber = adoxioDriverslicencenumber;
+            this._createdbyValue = _createdbyValue;
+            AdoxioConsentvalidatedexpirydate = adoxioConsentvalidatedexpirydate;
+            Entityimage = entityimage;
+            MsdynGdproptout = msdynGdproptout;
+            Isbackofficecustomer = isbackofficecustomer;
+            Address1Addresstypecode = address1Addresstypecode;
+            Lastname = lastname;
+            AdoxioPhsconnectionsdetails = adoxioPhsconnectionsdetails;
+            AdoxioIsstaffadmin = adoxioIsstaffadmin;
+            AdoxioContactportalurl = adoxioContactportalurl;
+            Address2Addresstypecode = address2Addresstypecode;
+            Paymenttermscode = paymenttermscode;
+            Modifiedon = modifiedon;
+            Mobilephone = mobilephone;
+            AdoxioPhsdatesubmitted = adoxioPhsdatesubmitted;
+            Address3Telephone3 = address3Telephone3;
+            Traversedpath = traversedpath;
+            Aging60 = aging60;
+            Address1Stateorprovince = address1Stateorprovince;
+            this._adoxioEstablishmentValue = _adoxioEstablishmentValue;
+            Address3Shippingmethodcode = address3Shippingmethodcode;
+            AdoxioPhscomplete = adoxioPhscomplete;
+            Address1Postalcode = address1Postalcode;
+            Address1Line1 = address1Line1;
+            Address3Telephone2 = address3Telephone2;
+            Address3Postofficebox = address3Postofficebox;
+            Address1Telephone2 = address1Telephone2;
+            Employeeid = employeeid;
+            Aging30Base = aging30Base;
+            Firstname = firstname;
+            Address2County = address2County;
+            AdoxioIsworker = adoxioIsworker;
+            Address2Postalcode = address2Postalcode;
+            AdoxioLastsecurityupdate = adoxioLastsecurityupdate;
+            Merged = merged;
+            Spousesname = spousesname;
+            AdoxioPhshaslivedincanada = adoxioPhshaslivedincanada;
+            Familystatuscode = familystatuscode;
+            Customersizecode = customersizecode;
+            Address1City = address1City;
+            Followemail = followemail;
+            Address2Postofficebox = address2Postofficebox;
+            Ftpsiteurl = ftpsiteurl;
+            Salutation = salutation;
+            Aging30 = aging30;
+            Address1Addressid = address1Addressid;
+            AdoxioCanrepresentlicenseeathearings = adoxioCanrepresentlicenseeathearings;
+            Address1Latitude = address1Latitude;
+            Address3Freighttermscode = address3Freighttermscode;
+            Address1Utcoffset = address1Utcoffset;
+            AdoxioConsentvalidated = adoxioConsentvalidated;
+            Suffix = suffix;
+            Description = description;
+            Address2Longitude = address2Longitude;
+            Department = department;
+            Numberofchildren = numberofchildren;
+            Aging90 = aging90;
+            AdoxioEmploymentstartdate = adoxioEmploymentstartdate;
+            this._parentcustomeridValue = _parentcustomeridValue;
+            Emailaddress1 = emailaddress1;
+            Address3County = address3County;
+            Jobtitle = jobtitle;
+            Nickname = nickname;
+            Websiteurl = websiteurl;
+            Address3City = address3City;
+            Assistantphone = assistantphone;
+            EntityimageTimestamp = entityimageTimestamp;
+            AdoxioSelfdisclosure = adoxioSelfdisclosure;
+            AdoxioSpdjobid = adoxioSpdjobid;
+            Gendercode = gendercode;
+            Donotemail = donotemail;
+            this._owningteamValue = _owningteamValue;
+            AdoxioSelfdeclaredtiedhouse = adoxioSelfdeclaredtiedhouse;
+            Territorycode = territorycode;
+            Address3Primarycontactname = address3Primarycontactname;
+            Company = company;
+            Leadsourcecode = leadsourcecode;
+            Address3Line1 = address3Line1;
+            Address1Name = address1Name;
+            AdoxioSecurityexpirydate = adoxioSecurityexpirydate;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            AdoxioPhsfinancialint = adoxioPhsfinancialint;
+            Preferredappointmentdaycode = preferredappointmentdaycode;
+            this._defaultpricelevelidValue = _defaultpricelevelidValue;
+            Address1Composite = address1Composite;
+            AdoxioPhscanadiandrugalchoholdrivingoffence = adoxioPhscanadiandrugalchoholdrivingoffence;
+            Address3Addressid = address3Addressid;
+            Address2City = address2City;
+            Address2Telephone3 = address2Telephone3;
             Participatesinworkflow = participatesinworkflow;
-            this._slainvokedidValue = _slainvokedidValue;
+            Address2Primarycontactname = address2Primarycontactname;
+            Fullname = fullname;
+            this._preferredsystemuseridValue = _preferredsystemuseridValue;
+            Statecode = statecode;
+            AdoxioOtheridnumber = adoxioOtheridnumber;
+            AdoxioPhsexclusivedetails = adoxioPhsexclusivedetails;
+            AdoxioPhslivesincanada = adoxioPhslivesincanada;
+            Address1Telephone3 = address1Telephone3;
+            AdoxioOther2ndidnumber = adoxioOther2ndidnumber;
+            Telephone3 = telephone3;
+            this._slaidValue = _slaidValue;
+            Address2Telephone1 = address2Telephone1;
+            AnnualincomeBase = annualincomeBase;
+            AdoxioPreferredname = adoxioPreferredname;
+            Address2Line2 = address2Line2;
+            Annualincome = annualincome;
+            AdoxioBcidcardnumber = adoxioBcidcardnumber;
+            AdoxioSelfdeclaredlicencecapdate = adoxioSelfdeclaredlicencecapdate;
+            Lastusedincampaign = lastusedincampaign;
+            Address3Name = address3Name;
+            this._modifiedbyexternalpartyValue = _modifiedbyexternalpartyValue;
+            Managername = managername;
+            Marketingonly = marketingonly;
+            AdoxioPhsprofitagreementdetails = adoxioPhsprofitagreementdetails;
+            Shippingmethodcode = shippingmethodcode;
+            Address2Line3 = address2Line3;
+            Address3Utcoffset = address3Utcoffset;
+            Contactid = contactid;
+            Governmentid = governmentid;
+            Address2Latitude = address2Latitude;
+            Address3Upszone = address3Upszone;
+            AdoxioRole = adoxioRole;
+            Address2Freighttermscode = address2Freighttermscode;
+            Managerphone = managerphone;
+            AdoxioCanattendeducationsessions = adoxioCanattendeducationsessions;
+            this._masteridValue = _masteridValue;
+            AdoxioPhsforeigndrugalchoholoffence = adoxioPhsforeigndrugalchoholoffence;
+            Address1Longitude = address1Longitude;
+            AdoxioUnstructuredaddress = adoxioUnstructuredaddress;
+            Address2Stateorprovince = address2Stateorprovince;
+            Statuscode = statuscode;
+            Address1Line3 = address1Line3;
+            Createdon = createdon;
+            Address1Line2 = address1Line2;
+            Address1Country = address1Country;
+            Address3Composite = address3Composite;
+            CreditlimitBase = creditlimitBase;
+            AdoxioOtheridtype = adoxioOtheridtype;
+            Processid = processid;
+            Lastonholdtime = lastonholdtime;
+            Yomifirstname = yomifirstname;
+            this._adoxioApplicationidValue = _adoxioApplicationidValue;
+            Home2 = home2;
+            Onholdtime = onholdtime;
+            Externaluseridentifier = externaluseridentifier;
+            AdoxioStateprovince = adoxioStateprovince;
+            Address1Fax = address1Fax;
+            Address1Postofficebox = address1Postofficebox;
+            Address1Telephone1 = address1Telephone1;
+            AdoxioIsauthorizedrepresentative = adoxioIsauthorizedrepresentative;
+            Address1Shippingmethodcode = address1Shippingmethodcode;
+            Address3Latitude = address3Latitude;
+            AdoxioDateofbirthshortdatestring = adoxioDateofbirthshortdatestring;
             Donotsendmm = donotsendmm;
+            AdoxioSelfdeclaredtiedhousedate = adoxioSelfdeclaredtiedhousedate;
+            Address3Fax = address3Fax;
+            Yomifullname = yomifullname;
+            Telephone2 = telephone2;
+            Address2Country = address2Country;
+            Pager = pager;
+            EntityimageUrl = entityimageUrl;
+            Birthdate = birthdate;
+            AdoxioIdentificationtype = adoxioIdentificationtype;
+            Address3Addresstypecode = address3Addresstypecode;
+            Address2Utcoffset = address2Utcoffset;
+            Educationcode = educationcode;
+            Assistantname = assistantname;
+            this._originatingleadidValue = _originatingleadidValue;
+            this._slainvokedidValue = _slainvokedidValue;
+            AdoxioOther2ndidtype = adoxioOther2ndidtype;
+            Yomilastname = yomilastname;
+            AdoxioBirthplace = adoxioBirthplace;
+            Emailaddress3 = emailaddress3;
+            AdoxioInvited = adoxioInvited;
+            Address3Line3 = address3Line3;
+            Importsequencenumber = importsequencenumber;
+            Address2Line1 = address2Line1;
+            Address3Stateorprovince = address3Stateorprovince;
+            Customertypecode = customertypecode;
+            Middlename = middlename;
+            Address3Telephone1 = address3Telephone1;
+            Address1Freighttermscode = address1Freighttermscode;
+            this._createdbyexternalpartyValue = _createdbyexternalpartyValue;
+            Emailaddress2 = emailaddress2;
+            Address2Shippingmethodcode = address2Shippingmethodcode;
+            Donotphone = donotphone;
+            Entityimageid = entityimageid;
+            Donotpostalmail = donotpostalmail;
+            AdoxioPhsexpired = adoxioPhsexpired;
+            this._preferredserviceidValue = _preferredserviceidValue;
+            AdoxioCanattendcompliancemeetings = adoxioCanattendcompliancemeetings;
+            Callback = callback;
+            AdoxioCansigntemporarychangeapplications = adoxioCansigntemporarychangeapplications;
+            Address2Addressid = address2Addressid;
+            Aging60Base = aging60Base;
+            AdoxioIdentificationjurisdiction = adoxioIdentificationjurisdiction;
+            this._owneridValue = _owneridValue;
+            Preferredcontactmethodcode = preferredcontactmethodcode;
+            Overriddencreatedon = overriddencreatedon;
+            Address2Fax = address2Fax;
+            Address3Country = address3Country;
+            this._adoxioRelatedlicenceValue = _adoxioRelatedlicenceValue;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Childrensnames = childrensnames;
+            AdoxioCansigngrocerystoreproofofsalesrevenue = adoxioCansigngrocerystoreproofofsalesrevenue;
+            this._accountidValue = _accountidValue;
+            Address2Upszone = address2Upszone;
+            this._modifiedbyValue = _modifiedbyValue;
+            Timespentbymeonemailandmeetings = timespentbymeonemailandmeetings;
+            Business2 = business2;
+            AdoxioSecuritycheckstatus = adoxioSecuritycheckstatus;
+            Address1Primarycontactname = address1Primarycontactname;
+            AdoxioIsmarketer = adoxioIsmarketer;
+            AdoxioCasdatesubmitted = adoxioCasdatesubmitted;
+            AdoxioCansignpermanentchangeapplications = adoxioCansignpermanentchangeapplications;
+            Address2Composite = address2Composite;
+            this._parentcontactidValue = _parentcontactidValue;
+            Creditlimit = creditlimit;
+            AdoxioPrimaryidnumber = adoxioPrimaryidnumber;
             ContactquotesAssociation = contactquotesAssociation;
             ListcontactAssociation = listcontactAssociation;
             ContactinvoicesAssociation = contactinvoicesAssociation;
             ContactordersAssociation = contactordersAssociation;
             ServicecontractcontactsAssociation = servicecontractcontactsAssociation;
             ContactleadsAssociation = contactleadsAssociation;
+            ContactPrincipalobjectattributeaccess = contactPrincipalobjectattributeaccess;
             ContactEntitlementContactId = contactEntitlementContactId;
             ContactBookableresourceContactId = contactBookableresourceContactId;
+            ContactAbsScheduledprocessexecutions = contactAbsScheduledprocessexecutions;
+            AdoxioApplicationId = adoxioApplicationId;
+            AdoxioEstablishment = adoxioEstablishment;
+            AdoxioRelatedLicence = adoxioRelatedLicence;
+            AdoxioContactAdoxioApplicationApplyingPerson = adoxioContactAdoxioApplicationApplyingPerson;
+            AdoxioContactAdoxioComplaintComplainant = adoxioContactAdoxioComplaintComplainant;
+            AdoxioContactAdoxioLegalentityContact = adoxioContactAdoxioLegalentityContact;
+            AdoxioContactAdoxioLegalentityProfileName = adoxioContactAdoxioLegalentityProfileName;
+            AdoxioContactAdoxioPreviousaddressContactId = adoxioContactAdoxioPreviousaddressContactId;
+            AdoxioContactAliases = adoxioContactAliases;
+            AdoxioContactCorporateroles = adoxioContactCorporateroles;
+            AdoxioContactInvestigation = adoxioContactInvestigation;
+            AdoxioContactPersonalhistorysummary = adoxioContactPersonalhistorysummary;
+            AdoxioContactTiedhouseconnections = adoxioContactTiedhouseconnections;
+            AdoxioContactWorkerregistration = adoxioContactWorkerregistration;
+            AdoxioIndividualDocuments = adoxioIndividualDocuments;
+            ContactSharePointDocumentLocations = contactSharePointDocumentLocations;
+            AdoxioLicenseechangelogContact = adoxioLicenseechangelogContact;
+            AdoxioContactTaskContact = adoxioContactTaskContact;
+            ContactBulkOperations = contactBulkOperations;
+            ContactCampaignResponses = contactCampaignResponses;
             ContactConnections1 = contactConnections1;
             OpportunityParentContact = opportunityParentContact;
             ContactFeedback = contactFeedback;
+            ContactProcessSessions = contactProcessSessions;
             StageidProcessstage = stageidProcessstage;
             ContactActivityPointers = contactActivityPointers;
             ContactSocialActivities = contactSocialActivities;
@@ -810,6 +375,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             ContactFaxes = contactFaxes;
             ContactAsPrimaryContact = contactAsPrimaryContact;
             Preferredserviceid = preferredserviceid;
+            ContactMailboxTrackingFolder = contactMailboxTrackingFolder;
             ContactAsResponsibleContact = contactAsResponsibleContact;
             ContactAppointments = contactAppointments;
             Owninguser = owninguser;
@@ -832,25 +398,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Defaultpricelevelid = defaultpricelevelid;
             ContactActivityParties = contactActivityParties;
             ContactLetters = contactLetters;
-            ContactAbsScheduledprocessexecutions = contactAbsScheduledprocessexecutions;
-            AdoxioApplicationId = adoxioApplicationId;
-            AdoxioEstablishment = adoxioEstablishment;
-            AdoxioRelatedLicence = adoxioRelatedLicence;
-            AdoxioContactAdoxioApplicationApplyingPerson = adoxioContactAdoxioApplicationApplyingPerson;
-            AdoxioContactAdoxioComplaintComplainant = adoxioContactAdoxioComplaintComplainant;
-            AdoxioContactAdoxioLegalentityContact = adoxioContactAdoxioLegalentityContact;
-            AdoxioContactAdoxioLegalentityProfileName = adoxioContactAdoxioLegalentityProfileName;
-            AdoxioContactAdoxioPreviousaddressContactId = adoxioContactAdoxioPreviousaddressContactId;
-            AdoxioContactAliases = adoxioContactAliases;
-            AdoxioContactCorporateroles = adoxioContactCorporateroles;
-            AdoxioContactInvestigation = adoxioContactInvestigation;
-            AdoxioContactPersonalhistorysummary = adoxioContactPersonalhistorysummary;
-            AdoxioContactTiedhouseconnections = adoxioContactTiedhouseconnections;
-            AdoxioContactWorkerregistration = adoxioContactWorkerregistration;
-            AdoxioIndividualDocuments = adoxioIndividualDocuments;
-            ContactSharePointDocumentLocations = contactSharePointDocumentLocations;
-            AdoxioLicenseechangelogContact = adoxioLicenseechangelogContact;
-            AdoxioContactTaskContact = adoxioContactTaskContact;
             CustomInit();
         }
 
@@ -860,728 +407,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets type the city for the 3rd address.
         /// </summary>
-        [JsonProperty(PropertyName = "address3_city")]
-        public string Address3City { get; set; }
+        [JsonProperty(PropertyName = "aging90_base")]
+        public decimal? Aging90Base { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_spdjobid")]
-        public int? AdoxioSpdjobid { get; set; }
+        [JsonProperty(PropertyName = "fax")]
+        public string Fax { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isassociate")]
-        public bool? AdoxioIsassociate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_cansignpermanentchangeapplications")]
-        public bool? AdoxioCansignpermanentchangeapplications { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_consentvalidatedexpirydate")]
-        public System.DateTimeOffset? AdoxioConsentvalidatedexpirydate { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the contact's first name to make sure the contact
-        /// is addressed correctly in sales calls, email, and marketing
-        /// campaigns.
-        /// </summary>
-        [JsonProperty(PropertyName = "firstname")]
-        public string Firstname { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the second line of the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_line2")]
-        public string Address2Line2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the phone number for the contact's assistant.
-        /// </summary>
-        [JsonProperty(PropertyName = "assistantphone")]
-        public string Assistantphone { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the contact's last name to make sure the contact
-        /// is addressed correctly in sales calls, email, and marketing
-        /// campaigns.
-        /// </summary>
-        [JsonProperty(PropertyName = "lastname")]
-        public string Lastname { get; set; }
-
-        /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who last updated the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the county for the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_county")]
-        public string Address1County { get; set; }
-
-        /// <summary>
-        /// Gets or sets the third line of the 3rd address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_line3")]
-        public string Address3Line3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the phonetic spelling of the contact's middle
-        /// name, if the name is specified in Japanese, to make sure the name
-        /// is pronounced correctly in phone calls with the contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "yomimiddlename")]
-        public string Yomimiddlename { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the URL for the contact's FTP site to enable
-        /// users to access data and share documents.
-        /// </summary>
-        [JsonProperty(PropertyName = "ftpsiteurl")]
-        public string Ftpsiteurl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_unstructuredaddress")]
-        public string AdoxioUnstructuredaddress { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the longitude value for the primary address for
-        /// use in mapping and other applications.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_longitude")]
-        public decimal? Address1Longitude { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the contact's role within the company or sales
-        /// process, such as decision maker, employee, or influencer.
-        /// </summary>
-        [JsonProperty(PropertyName = "accountrolecode")]
-        public int? Accountrolecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the ZIP Code or postal code for the primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_postalcode")]
-        public string Address1Postalcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets uses the Global Option set StateProvince.
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_stateprovince")]
-        public int? AdoxioStateprovince { get; set; }
-
-        /// <summary>
-        /// Gets or sets whether is only for marketing
-        /// </summary>
-        [JsonProperty(PropertyName = "marketingonly")]
-        public bool? Marketingonly { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a third phone number associated with the primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_telephone3")]
-        public string Address1Telephone3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the pager number for the contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "pager")]
-        public string Pager { get; set; }
-
-        /// <summary>
-        /// Gets or sets the ZIP Code or postal code for the 3rd address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_postalcode")]
-        public string Address3Postalcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the external party who created the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdbyexternalparty_value")]
-        public string _createdbyexternalpartyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_cansigntemporarychangeapplications")]
-        public bool? AdoxioCansigntemporarychangeapplications { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the complete primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_composite")]
-        public string Address1Composite { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the name of the contact's assistant.
-        /// </summary>
-        [JsonProperty(PropertyName = "assistantname")]
-        public string Assistantname { get; set; }
-
-        /// <summary>
-        /// Gets or sets enter the date of the contact's wedding or service
-        /// anniversary for use in customer gift programs or other
-        /// communications.
-        /// </summary>
-        [JsonProperty(PropertyName = "anniversary")]
-        public System.DateTimeOffset? Anniversary { get; set; }
-
-        /// <summary>
-        /// Gets or sets version number of the contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the passport number or other government ID for
-        /// the contact for use in documents or reports.
-        /// </summary>
-        [JsonProperty(PropertyName = "governmentid")]
-        public string Governmentid { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the primary marketing source that directed the
-        /// contact to your organization.
-        /// </summary>
-        [JsonProperty(PropertyName = "leadsourcecode")]
-        public int? Leadsourcecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the main phone number associated with the
-        /// secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_telephone1")]
-        public string Address2Telephone1 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_invited")]
-        public bool? AdoxioInvited { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the UPS zone of the primary address to make sure
-        /// shipping charges are calculated correctly and deliveries are made
-        /// promptly, if shipped by UPS.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_upszone")]
-        public string Address1Upszone { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the time zone, or UTC offset, for this address
-        /// so that other people can reference it when they contact someone at
-        /// this address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_utcoffset")]
-        public int? Address3Utcoffset { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the state or province of the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_stateorprovince")]
-        public string Address2Stateorprovince { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the combined Yomi first and last names of the
-        /// contact so that the full phonetic name can be displayed in views
-        /// and reports.
-        /// </summary>
-        [JsonProperty(PropertyName = "yomifullname")]
-        public string Yomifullname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phsconnectionsdetails")]
-        public string AdoxioPhsconnectionsdetails { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time when the record was created.
-        /// The date and time are displayed in the time zone selected in
-        /// Microsoft Dynamics 365 options.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose the default price list associated with the
-        /// contact to make sure the correct product prices for this customer
-        /// are applied in sales opportunities, quotes, and orders.
-        /// </summary>
-        [JsonProperty(PropertyName = "_defaultpricelevelid_value")]
-        public string _defaultpricelevelidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a third phone number associated with the primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_telephone3")]
-        public string Address3Telephone3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the salutation of the contact to make sure the
-        /// contact is addressed correctly in sales calls, email messages, and
-        /// marketing campaigns.
-        /// </summary>
-        [JsonProperty(PropertyName = "salutation")]
-        public string Salutation { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the contact accepts bulk postal mail
-        /// sent through marketing campaigns or quick campaigns. If Do Not
-        /// Allow is selected, the contact can be added to marketing lists, but
-        /// will be excluded from the letters.
-        /// </summary>
-        [JsonProperty(PropertyName = "donotbulkpostalmail")]
-        public bool? Donotbulkpostalmail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phslivesincanada")]
-        public int? AdoxioPhslivesincanada { get; set; }
-
-        /// <summary>
-        /// Gets or sets enter the contact's birthday for use in customer gift
-        /// programs or other communications.
-        /// </summary>
-        [JsonProperty(PropertyName = "birthdate")]
-        public System.DateTimeOffset? Birthdate { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the marital status of the contact for reference
-        /// in follow-up phone calls and other communications.
-        /// </summary>
-        [JsonProperty(PropertyName = "familystatuscode")]
-        public int? Familystatuscode { get; set; }
-
-        /// <summary>
-        /// Gets or sets the details of the financial interest
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phsfinancialinterestdetails")]
-        public string AdoxioPhsfinancialinterestdetails { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_bcidcardnumber")]
-        public string AdoxioBcidcardnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the phonetic spelling of the contact's last name,
-        /// if the name is specified in Japanese, to make sure the name is
-        /// pronounced correctly in phone calls with the contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "yomilastname")]
-        public string Yomilastname { get; set; }
-
-        /// <summary>
-        /// Gets or sets capture the details of an exclusive agreement with a
-        /// Manufacturer
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phsexclusivedetails")]
-        public string AdoxioPhsexclusivedetails { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_driverslicencenumber")]
-        public string AdoxioDriverslicencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date when the contact was last included in a
-        /// marketing campaign or quick campaign.
-        /// </summary>
-        [JsonProperty(PropertyName = "lastusedincampaign")]
-        public System.DateTimeOffset? Lastusedincampaign { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the parent account or parent contact for the
-        /// contact to provide a quick link to additional details, such as
-        /// financial information, activities, and opportunities.
-        /// </summary>
-        [JsonProperty(PropertyName = "_parentcustomerid_value")]
-        public string _parentcustomeridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the country or region for the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_country")]
-        public string Address2Country { get; set; }
-
-        /// <summary>
-        /// Gets or sets for system use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "aging60")]
-        public decimal? Aging60 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a second phone number associated with the primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_telephone2")]
-        public string Address1Telephone2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the longitude value for the secondary address for
-        /// use in mapping and other applications.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_longitude")]
-        public decimal? Address2Longitude { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time when the record was last
-        /// updated. The date and time are displayed in the time zone selected
-        /// in Microsoft Dynamics 365 options.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the team who owns the contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the contact's nickname.
-        /// </summary>
-        [JsonProperty(PropertyName = "nickname")]
-        public string Nickname { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the country or region for the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_country")]
-        public string Address1Country { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who owns the contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the payment terms to indicate when the customer
-        /// needs to pay the total amount.
-        /// </summary>
-        [JsonProperty(PropertyName = "paymenttermscode")]
-        public int? Paymenttermscode { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the main phone number associated with the primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_telephone1")]
-        public string Address1Telephone1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the account with which the
-        /// contact is associated.
-        /// </summary>
-        [JsonProperty(PropertyName = "_accountid_value")]
-        public string _accountidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the parent contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "_parentcontactid_value")]
-        public string _parentcontactidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimage_url")]
-        public string EntityimageUrl { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the longitude value for the third address for use
-        /// in mapping and other applications.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_longitude")]
-        public decimal? Address3Longitude { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phshaslivedincanada")]
-        public int? AdoxioPhshaslivedincanada { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the mobile phone number for the contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "mobilephone")]
-        public string Mobilephone { get; set; }
-
-        /// <summary>
-        /// Gets or sets the state or province of the third address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_stateorprovince")]
-        public string Address3Stateorprovince { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows whether the account has been merged with a
-        /// master contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "merged")]
-        public bool? Merged { get; set; }
-
-        /// <summary>
-        /// Gets or sets select a shipping method for deliveries sent to this
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "shippingmethodcode")]
-        public int? Shippingmethodcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phsexpired")]
-        public int? AdoxioPhsexpired { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isauthorizedrepresentative")]
-        public bool? AdoxioIsauthorizedrepresentative { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the city for the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_city")]
-        public string Address2City { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the contact allows direct mail. If Do
-        /// Not Allow is selected, the contact will be excluded from letter
-        /// activities distributed in marketing campaigns.
-        /// </summary>
-        [JsonProperty(PropertyName = "donotpostalmail")]
-        public bool? Donotpostalmail { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the freight terms for the primary address to
-        /// make sure shipping orders are processed correctly.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_freighttermscode")]
-        public int? Address1Freighttermscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_otheridnumber")]
-        public string AdoxioOtheridnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets identifier for an external user.
-        /// </summary>
-        [JsonProperty(PropertyName = "externaluseridentifier")]
-        public string Externaluseridentifier { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a descriptive name for the third address, such as
-        /// Corporate Headquarters.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_name")]
-        public string Address3Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the default image for the record.
-        /// </summary>
-        [JsonConverter(typeof(Base64UrlJsonConverter))]
-        [JsonProperty(PropertyName = "entityimage")]
-        public byte[] Entityimage { get; set; }
-
-        /// <summary>
-        /// Gets or sets enter the user or team who is assigned to manage the
-        /// record. This field is updated every time the record is assigned to
-        /// a different user.
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the contact allows faxes. If Do Not
-        /// Allow is selected, the contact will be excluded from any fax
-        /// activities distributed in marketing campaigns.
-        /// </summary>
-        [JsonProperty(PropertyName = "donotfax")]
-        public bool? Donotfax { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "subscriptionid")]
-        public string Subscriptionid { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the phonetic spelling of the contact's first
-        /// name, if the name is specified in Japanese, to make sure the name
-        /// is pronounced correctly in phone calls with the contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "yomifirstname")]
-        public string Yomifirstname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_cascomplete")]
-        public int? AdoxioCascomplete { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_lastsecurityupdate")]
-        public System.DateTimeOffset? AdoxioLastsecurityupdate { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the name of the main contact at the account's
-        /// primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_primarycontactname")]
-        public string Address1Primarycontactname { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the ID of the process.
-        /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_scopeofthelicenseeinstructions")]
-        public string AdoxioScopeofthelicenseeinstructions { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the master contact for merge.
-        /// </summary>
-        [JsonProperty(PropertyName = "_masterid_value")]
-        public string _masteridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the phone number for the contact's manager.
-        /// </summary>
-        [JsonProperty(PropertyName = "managerphone")]
-        public string Managerphone { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isworker")]
-        public bool? AdoxioIsworker { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the time zone, or UTC offset, for this address
-        /// so that other people can reference it when they contact someone at
-        /// this address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_utcoffset")]
-        public int? Address1Utcoffset { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the latitude value for the secondary address for
-        /// use in mapping and other applications.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_latitude")]
-        public decimal? Address2Latitude { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_gendercode")]
-        public int? AdoxioGendercode { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the Credit Limit field converted to the system's
-        /// default base currency for reporting purposes. The calculations use
-        /// the exchange rate specified in the Currencies area.
-        /// </summary>
-        [JsonProperty(PropertyName = "creditlimit_base")]
-        public decimal? CreditlimitBase { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the city for the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_city")]
-        public string Address1City { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the latitude value for the third address for use
-        /// in mapping and other applications.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_latitude")]
-        public decimal? Address3Latitude { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a callback phone number for this contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "callback")]
-        public string Callback { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_identificationtype")]
-        public int? AdoxioIdentificationtype { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the contact's middle name or initial to make sure
-        /// the contact is addressed correctly.
-        /// </summary>
-        [JsonProperty(PropertyName = "middlename")]
-        public string Middlename { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for address 3.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_addressid")]
-        public string Address3Addressid { get; set; }
-
-        /// <summary>
-        /// Gets or sets for system use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "aging30")]
-        public decimal? Aging30 { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "contactid")]
-        public string Contactid { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the company phone of the contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "company")]
-        public string Company { get; set; }
-
-        /// <summary>
-        /// Gets or sets select a shipping method for deliveries sent to this
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_shippingmethodcode")]
-        public int? Address2Shippingmethodcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the time zone, or UTC offset, for this address
-        /// so that other people can reference it when they contact someone at
-        /// this address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_utcoffset")]
-        public int? Address2Utcoffset { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the contact is on a credit hold, for
-        /// reference when addressing invoice and accounting issues.
-        /// </summary>
-        [JsonProperty(PropertyName = "creditonhold")]
-        public bool? Creditonhold { get; set; }
+        [JsonProperty(PropertyName = "address2_name")]
+        public string Address2Name { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1589,153 +427,89 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioExternalid { get; set; }
 
         /// <summary>
-        /// Gets or sets type the number of children the contact has for
-        /// reference in follow-up phone calls and other communications.
         /// </summary>
-        [JsonProperty(PropertyName = "numberofchildren")]
-        public int? Numberofchildren { get; set; }
+        [JsonProperty(PropertyName = "donotfax")]
+        public bool? Donotfax { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_consentvalidated")]
-        public int? AdoxioConsentvalidated { get; set; }
+        [JsonProperty(PropertyName = "address1_county")]
+        public string Address1County { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phscomplete")]
-        public int? AdoxioPhscomplete { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the contact's gender to make sure the contact
-        /// is addressed correctly in sales calls, email, and marketing
-        /// campaigns.
-        /// </summary>
-        [JsonProperty(PropertyName = "gendercode")]
-        public int? Gendercode { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the external party who modified the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedbyexternalparty_value")]
-        public string _modifiedbyexternalpartyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the third line of the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_line3")]
-        public string Address2Line3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a second phone number for this contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "telephone2")]
-        public string Telephone2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets information about whether to allow following email
-        /// activity like opens, attachment views and link clicks for emails
-        /// sent to the contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "followemail")]
-        public bool? Followemail { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the UPS zone of the third address to make sure
-        /// shipping charges are calculated correctly and deliveries are made
-        /// promptly, if shipped by UPS.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_upszone")]
-        public string Address3Upszone { get; set; }
-
-        /// <summary>
-        /// Gets or sets the first line of the 3rd address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_line1")]
-        public string Address3Line1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the primary email address for the contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "emailaddress1")]
-        public string Emailaddress1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the state or province of the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_stateorprovince")]
-        public string Address1Stateorprovince { get; set; }
-
-        /// <summary>
-        /// Gets or sets contains the date and time stamp of the last on hold
-        /// time.
-        /// </summary>
-        [JsonProperty(PropertyName = "lastonholdtime")]
-        public System.DateTimeOffset? Lastonholdtime { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the lead that the contact was created if the
-        /// contact was created by converting a lead in Microsoft Dynamics 365.
-        /// This is used to relate the contact to the data on the originating
-        /// lead for use in reporting and analytics.
-        /// </summary>
-        [JsonProperty(PropertyName = "_originatingleadid_value")]
-        public string _originatingleadidValue { get; set; }
+        [JsonProperty(PropertyName = "address1_upszone")]
+        public string Address1Upszone { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_birthplace")]
-        public string AdoxioBirthplace { get; set; }
+        [JsonProperty(PropertyName = "_preferredequipmentid_value")]
+        public string _preferredequipmentidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the Aging 30 field converted to the system's
-        /// default base currency. The calculations use the exchange rate
-        /// specified in the Currencies area.
-        /// </summary>
-        [JsonProperty(PropertyName = "aging30_base")]
-        public decimal? Aging30Base { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_employmentstartdate")]
-        public System.DateTimeOffset? AdoxioEmploymentstartdate { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the Annual Income field converted to the
-        /// system's default base currency. The calculations use the exchange
-        /// rate specified in the Currencies area.
-        /// </summary>
-        [JsonProperty(PropertyName = "annualincome_base")]
-        public decimal? AnnualincomeBase { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows whether the contact is active or inactive.
-        /// Inactive contacts are read-only and can't be edited unless they are
-        /// reactivated.
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the preferred method of contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "preferredcontactmethodcode")]
-        public int? Preferredcontactmethodcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the names of the contact's children for reference
-        /// in communications and client programs.
-        /// </summary>
-        [JsonProperty(PropertyName = "childrensnames")]
-        public string Childrensnames { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the contact accepts bulk email sent
-        /// through marketing campaigns or quick campaigns. If Do Not Allow is
-        /// selected, the contact can be added to marketing lists, but will be
-        /// excluded from the email.
         /// </summary>
         [JsonProperty(PropertyName = "donotbulkemail")]
         public bool? Donotbulkemail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phsconnectionstootherlicences")]
+        public int? AdoxioPhsconnectionstootherlicences { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "stageid")]
+        public string Stageid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "haschildrencode")]
+        public int? Haschildrencode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_secondaryidentificationtype")]
+        public int? AdoxioSecondaryidentificationtype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "anniversary")]
+        public System.DateTimeOffset? Anniversary { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_scopeofthelicenseeinstructions")]
+        public string AdoxioScopeofthelicenseeinstructions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_postalcode")]
+        public string Address3Postalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phsprofitagreement")]
+        public int? AdoxioPhsprofitagreement { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_canobtainlicenceinfofrombranch")]
+        public bool? AdoxioCanobtainlicenceinfofrombranch { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "telephone1")]
+        public string Telephone1 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1744,14 +518,149 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "creditonhold")]
+        public bool? Creditonhold { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_cascomplete")]
+        public int? AdoxioCascomplete { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_longitude")]
+        public decimal? Address3Longitude { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_phsexclusivemfg")]
         public int? AdoxioPhsexclusivemfg { get; set; }
 
         /// <summary>
-        /// Gets or sets the second line of the 3rd address.
+        /// </summary>
+        [JsonProperty(PropertyName = "accountrolecode")]
+        public int? Accountrolecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "yomimiddlename")]
+        public string Yomimiddlename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "preferredappointmenttimecode")]
+        public int? Preferredappointmenttimecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "subscriptionid")]
+        public string Subscriptionid { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "address3_line2")]
         public string Address3Line2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_secondaryidnumber")]
+        public string AdoxioSecondaryidnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isassociate")]
+        public bool? AdoxioIsassociate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_gendercode")]
+        public int? AdoxioGendercode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_telephone2")]
+        public string Address2Telephone2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "donotbulkpostalmail")]
+        public bool? Donotbulkpostalmail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phsfinancialinterestdetails")]
+        public string AdoxioPhsfinancialinterestdetails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_driverslicencenumber")]
+        public string AdoxioDriverslicencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_consentvalidatedexpirydate")]
+        public System.DateTimeOffset? AdoxioConsentvalidatedexpirydate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
+        [JsonProperty(PropertyName = "entityimage")]
+        public byte[] Entityimage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_gdproptout")]
+        public bool? MsdynGdproptout { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isbackofficecustomer")]
+        public bool? Isbackofficecustomer { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_addresstypecode")]
+        public int? Address1Addresstypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastname")]
+        public string Lastname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phsconnectionsdetails")]
+        public string AdoxioPhsconnectionsdetails { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1760,58 +669,318 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_other2ndidtype")]
-        public string AdoxioOther2ndidtype { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the preferred time of day for service
-        /// appointments.
-        /// </summary>
-        [JsonProperty(PropertyName = "preferredappointmenttimecode")]
-        public int? Preferredappointmenttimecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a descriptive name for the primary address, such
-        /// as Corporate Headquarters.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_name")]
-        public string Address1Name { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_contactportalurl")]
         public string AdoxioContactportalurl { get; set; }
 
         /// <summary>
-        /// Gets or sets type the department or business unit where the contact
-        /// works in the parent company or business.
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_addresstypecode")]
+        public int? Address2Addresstypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "paymenttermscode")]
+        public int? Paymenttermscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "mobilephone")]
+        public string Mobilephone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phsdatesubmitted")]
+        public System.DateTimeOffset? AdoxioPhsdatesubmitted { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_telephone3")]
+        public string Address3Telephone3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "traversedpath")]
+        public string Traversedpath { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "aging60")]
+        public decimal? Aging60 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_stateorprovince")]
+        public string Address1Stateorprovince { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_establishment_value")]
+        public string _adoxioEstablishmentValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_shippingmethodcode")]
+        public int? Address3Shippingmethodcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phscomplete")]
+        public int? AdoxioPhscomplete { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_postalcode")]
+        public string Address1Postalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_line1")]
+        public string Address1Line1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_telephone2")]
+        public string Address3Telephone2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_postofficebox")]
+        public string Address3Postofficebox { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_telephone2")]
+        public string Address1Telephone2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "employeeid")]
+        public string Employeeid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "aging30_base")]
+        public decimal? Aging30Base { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "firstname")]
+        public string Firstname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_county")]
+        public string Address2County { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isworker")]
+        public bool? AdoxioIsworker { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_postalcode")]
+        public string Address2Postalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_lastsecurityupdate")]
+        public System.DateTimeOffset? AdoxioLastsecurityupdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "merged")]
+        public bool? Merged { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "spousesname")]
+        public string Spousesname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phshaslivedincanada")]
+        public int? AdoxioPhshaslivedincanada { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "familystatuscode")]
+        public int? Familystatuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "customersizecode")]
+        public int? Customersizecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_city")]
+        public string Address1City { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "followemail")]
+        public bool? Followemail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_postofficebox")]
+        public string Address2Postofficebox { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ftpsiteurl")]
+        public string Ftpsiteurl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "salutation")]
+        public string Salutation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "aging30")]
+        public decimal? Aging30 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_addressid")]
+        public string Address1Addressid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_canrepresentlicenseeathearings")]
+        public bool? AdoxioCanrepresentlicenseeathearings { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_latitude")]
+        public decimal? Address1Latitude { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_freighttermscode")]
+        public int? Address3Freighttermscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_utcoffset")]
+        public int? Address1Utcoffset { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_consentvalidated")]
+        public int? AdoxioConsentvalidated { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "suffix")]
+        public string Suffix { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_longitude")]
+        public decimal? Address2Longitude { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "department")]
         public string Department { get; set; }
 
         /// <summary>
-        /// Gets or sets select the contact's highest level of education for
-        /// use in segmentation and analysis.
         /// </summary>
-        [JsonProperty(PropertyName = "educationcode")]
-        public int? Educationcode { get; set; }
+        [JsonProperty(PropertyName = "numberofchildren")]
+        public int? Numberofchildren { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phsconnectionstootherlicences")]
-        public int? AdoxioPhsconnectionstootherlicences { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a third phone number associated with the
-        /// secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_telephone3")]
-        public string Address2Telephone3 { get; set; }
+        [JsonProperty(PropertyName = "aging90")]
+        public decimal? Aging90 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ismarketer")]
-        public bool? AdoxioIsmarketer { get; set; }
+        [JsonProperty(PropertyName = "adoxio_employmentstartdate")]
+        public System.DateTimeOffset? AdoxioEmploymentstartdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_parentcustomerid_value")]
+        public string _parentcustomeridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "emailaddress1")]
+        public string Emailaddress1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_county")]
+        public string Address3County { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "jobtitle")]
+        public string Jobtitle { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "nickname")]
+        public string Nickname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "websiteurl")]
+        public string Websiteurl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_city")]
+        public string Address3City { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "assistantphone")]
+        public string Assistantphone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimage_timestamp")]
+        public long? EntityimageTimestamp { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_selfdisclosure")]
+        public int? AdoxioSelfdisclosure { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_spdjobid")]
+        public int? AdoxioSpdjobid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "gendercode")]
+        public int? Gendercode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "donotemail")]
+        public bool? Donotemail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1819,10 +988,44 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public int? AdoxioSelfdeclaredtiedhouse { get; set; }
 
         /// <summary>
-        /// Gets or sets type a second business phone number for this contact.
         /// </summary>
-        [JsonProperty(PropertyName = "business2")]
-        public string Business2 { get; set; }
+        [JsonProperty(PropertyName = "territorycode")]
+        public int? Territorycode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_primarycontactname")]
+        public string Address3Primarycontactname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "company")]
+        public string Company { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "leadsourcecode")]
+        public int? Leadsourcecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_line1")]
+        public string Address3Line1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_name")]
+        public string Address1Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_securityexpirydate")]
+        public System.DateTimeOffset? AdoxioSecurityexpirydate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1831,311 +1034,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_other2ndidnumber")]
-        public string AdoxioOther2ndidnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimageid")]
-        public string Entityimageid { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the secondary address type.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_addresstypecode")]
-        public int? Address2Addresstypecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_secondaryidentificationtype")]
-        public int? AdoxioSecondaryidentificationtype { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the latitude value for the primary address for
-        /// use in mapping and other applications.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_latitude")]
-        public decimal? Address1Latitude { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the contact's status.
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the post office box number of the primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_postofficebox")]
-        public string Address1Postofficebox { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the name of the contact's spouse or partner for
-        /// reference during calls, events, or other communications with the
-        /// contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "spousesname")]
-        public string Spousesname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_securityexpirydate")]
-        public System.DateTimeOffset? AdoxioSecurityexpirydate { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a second home phone number for this contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "home2")]
-        public string Home2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_selfdeclaredtiedhousedate")]
-        public System.DateTimeOffset? AdoxioSelfdeclaredtiedhousedate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_canobtainlicenceinfofrombranch")]
-        public bool? AdoxioCanobtainlicenceinfofrombranch { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the county for the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_county")]
-        public string Address2County { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "traversedpath")]
-        public string Traversedpath { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose the local currency for the record to make sure
-        /// budgets are reported in the correct currency.
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the fax number associated with the secondary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_fax")]
-        public string Address2Fax { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the complete secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_composite")]
-        public string Address2Composite { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the size of the contact's company for
-        /// segmentation and reporting purposes.
-        /// </summary>
-        [JsonProperty(PropertyName = "customersizecode")]
-        public int? Customersizecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the conversion rate of the record's currency.
-        /// The exchange rate is used to convert all money fields in the record
-        /// from the local currency to the system's default currency.
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the credit limit of the contact for reference
-        /// when you address invoice and accounting issues with the customer.
-        /// </summary>
-        [JsonProperty(PropertyName = "creditlimit")]
-        public decimal? Creditlimit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_identificationjurisdiction")]
-        public int? AdoxioIdentificationjurisdiction { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the contact has any children for
-        /// reference in follow-up phone calls and other communications.
-        /// </summary>
-        [JsonProperty(PropertyName = "haschildrencode")]
-        public int? Haschildrencode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phsprofitagreement")]
-        public int? AdoxioPhsprofitagreement { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the preferred day of the week for service
-        /// appointments.
-        /// </summary>
         [JsonProperty(PropertyName = "preferredappointmentdaycode")]
         public int? Preferredappointmentdaycode { get; set; }
 
         /// <summary>
-        /// Gets or sets choose the regular or preferred customer service
-        /// representative for reference when scheduling service activities for
-        /// the contact.
         /// </summary>
-        [JsonProperty(PropertyName = "_preferredsystemuserid_value")]
-        public string _preferredsystemuseridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the second line of the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_line2")]
-        public string Address1Line2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the job title of the contact to make sure the
-        /// contact is addressed correctly in sales calls, email, and marketing
-        /// campaigns.
-        /// </summary>
-        [JsonProperty(PropertyName = "jobtitle")]
-        public string Jobtitle { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose the contact's preferred service to make sure
-        /// services are scheduled correctly for the customer.
-        /// </summary>
-        [JsonProperty(PropertyName = "_preferredserviceid_value")]
-        public string _preferredserviceidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the first line of the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_line1")]
-        public string Address2Line1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the main phone number associated with the third
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_telephone1")]
-        public string Address3Telephone1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a second phone number associated with the
-        /// secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_telephone2")]
-        public string Address2Telephone2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets total time spent for emails (read and write) and
-        /// meetings by me in relation to the contact record.
-        /// </summary>
-        [JsonProperty(PropertyName = "timespentbymeonemailandmeetings")]
-        public string Timespentbymeonemailandmeetings { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the main phone number for this contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "telephone1")]
-        public string Telephone1 { get; set; }
+        [JsonProperty(PropertyName = "_defaultpricelevelid_value")]
+        public string _defaultpricelevelidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_relatedlicence_value")]
-        public string _adoxioRelatedlicenceValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the third line of the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_line3")]
-        public string Address1Line3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type additional information to describe the contact,
-        /// such as an excerpt from the company's website.
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for Application associated with
-        /// Contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_applicationid_value")]
-        public string _adoxioApplicationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_establishment_value")]
-        public string _adoxioEstablishmentValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose the service level agreement (SLA) that you want
-        /// to apply to the Contact record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_slaid_value")]
-        public string _slaidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the contact exists in a separate
-        /// accounting or other system, such as Microsoft Dynamics GP or
-        /// another ERP database, for use in integration processes.
-        /// </summary>
-        [JsonProperty(PropertyName = "isbackofficecustomer")]
-        public bool? Isbackofficecustomer { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimage_timestamp")]
-        public long? EntityimageTimestamp { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the name of the main contact at the account's
-        /// third address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_primarycontactname")]
-        public string Address3Primarycontactname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_selfdisclosure")]
-        public int? AdoxioSelfdisclosure { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the contact accepts phone calls. If Do
-        /// Not Allow is selected, the contact will be excluded from any phone
-        /// call activities distributed in marketing campaigns.
-        /// </summary>
-        [JsonProperty(PropertyName = "donotphone")]
-        public bool? Donotphone { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the UPS zone of the secondary address to make
-        /// sure shipping charges are calculated correctly and deliveries are
-        /// made promptly, if shipped by UPS.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_upszone")]
-        public string Address2Upszone { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets the country or region for the 3rd address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_country")]
-        public string Address3Country { get; set; }
+        [JsonProperty(PropertyName = "address1_composite")]
+        public string Address1Composite { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2143,152 +1053,89 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public int? AdoxioPhscanadiandrugalchoholdrivingoffence { get; set; }
 
         /// <summary>
-        /// Gets or sets choose the contact's preferred service facility or
-        /// equipment to make sure services are scheduled correctly for the
-        /// customer.
         /// </summary>
-        [JsonProperty(PropertyName = "_preferredequipmentid_value")]
-        public string _preferredequipmentidValue { get; set; }
+        [JsonProperty(PropertyName = "address3_addressid")]
+        public string Address3Addressid { get; set; }
 
         /// <summary>
-        /// Gets or sets type the post office box number of the secondary
-        /// address.
         /// </summary>
-        [JsonProperty(PropertyName = "address2_postofficebox")]
-        public string Address2Postofficebox { get; set; }
+        [JsonProperty(PropertyName = "address2_city")]
+        public string Address2City { get; set; }
 
         /// <summary>
-        /// Gets or sets type a third phone number for this contact.
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_telephone3")]
+        public string Address2Telephone3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "participatesinworkflow")]
+        public bool? Participatesinworkflow { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_primarycontactname")]
+        public string Address2Primarycontactname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "fullname")]
+        public string Fullname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_preferredsystemuserid_value")]
+        public string _preferredsystemuseridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_otheridnumber")]
+        public string AdoxioOtheridnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phsexclusivedetails")]
+        public string AdoxioPhsexclusivedetails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phslivesincanada")]
+        public int? AdoxioPhslivesincanada { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_telephone3")]
+        public string Address1Telephone3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_other2ndidnumber")]
+        public string AdoxioOther2ndidnumber { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "telephone3")]
         public string Telephone3 { get; set; }
 
         /// <summary>
-        /// Gets or sets type the contact's professional or personal website or
-        /// blog URL.
         /// </summary>
-        [JsonProperty(PropertyName = "websiteurl")]
-        public string Websiteurl { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the ZIP Code or postal code for the secondary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_postalcode")]
-        public string Address2Postalcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the contact's annual income for use in profiling
-        /// and financial analysis.
-        /// </summary>
-        [JsonProperty(PropertyName = "annualincome")]
-        public decimal? Annualincome { get; set; }
-
-        /// <summary>
-        /// Gets or sets for system use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "aging90")]
-        public decimal? Aging90 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the fax number for the contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "fax")]
-        public string Fax { get; set; }
-
-        /// <summary>
-        /// Gets or sets select a shipping method for deliveries sent to this
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_shippingmethodcode")]
-        public int? Address1Shippingmethodcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the business unit that owns the
-        /// contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "_slaid_value")]
+        public string _slaidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_canattendcompliancemeetings")]
-        public bool? AdoxioCanattendcompliancemeetings { get; set; }
+        [JsonProperty(PropertyName = "address2_telephone1")]
+        public string Address2Telephone1 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dateofbirthshortdatestring")]
-        public string AdoxioDateofbirthshortdatestring { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who created the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type an alternate email address for the contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "emailaddress3")]
-        public string Emailaddress3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the category that best describes the
-        /// relationship between the contact and your organization.
-        /// </summary>
-        [JsonProperty(PropertyName = "customertypecode")]
-        public int? Customertypecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the third address type.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_addresstypecode")]
-        public int? Address3Addresstypecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who last updated the record on behalf of another
-        /// user.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the first line of the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_line1")]
-        public string Address1Line1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets the post office box number of the 3rd address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_postofficebox")]
-        public string Address3Postofficebox { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_secondaryidnumber")]
-        public string AdoxioSecondaryidnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the complete third address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address3_composite")]
-        public string Address3Composite { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a descriptive name for the secondary address,
-        /// such as Corporate Headquarters.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_name")]
-        public string Address2Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the suffix used in the contact's name, such as
-        /// Jr. or Sr. to make sure the contact is addressed correctly in sales
-        /// calls, email, and marketing campaigns.
-        /// </summary>
-        [JsonProperty(PropertyName = "suffix")]
-        public string Suffix { get; set; }
+        [JsonProperty(PropertyName = "annualincome_base")]
+        public decimal? AnnualincomeBase { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2296,71 +1143,114 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioPreferredname { get; set; }
 
         /// <summary>
-        /// Gets or sets combines and shows the contact's first and last names
-        /// so that the full name can be displayed in views and reports.
         /// </summary>
-        [JsonProperty(PropertyName = "fullname")]
-        public string Fullname { get; set; }
+        [JsonProperty(PropertyName = "address2_line2")]
+        public string Address2Line2 { get; set; }
 
         /// <summary>
-        /// Gets or sets select the freight terms for the third address to make
-        /// sure shipping orders are processed correctly.
         /// </summary>
-        [JsonProperty(PropertyName = "address3_freighttermscode")]
-        public int? Address3Freighttermscode { get; set; }
+        [JsonProperty(PropertyName = "annualincome")]
+        public decimal? Annualincome { get; set; }
 
         /// <summary>
-        /// Gets or sets select a shipping method for deliveries sent to this
-        /// address.
         /// </summary>
-        [JsonProperty(PropertyName = "address3_shippingmethodcode")]
-        public int? Address3Shippingmethodcode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_bcidcardnumber")]
+        public string AdoxioBcidcardnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets type the employee ID or number for the contact for
-        /// reference in orders, service cases, or other communications with
-        /// the contact's organization.
         /// </summary>
-        [JsonProperty(PropertyName = "employeeid")]
-        public string Employeeid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_selfdeclaredlicencecapdate")]
+        public System.DateTimeOffset? AdoxioSelfdeclaredlicencecapdate { get; set; }
 
         /// <summary>
-        /// Gets or sets type the name of the contact's manager for use in
-        /// escalating issues or other follow-up communications with the
-        /// contact.
+        /// </summary>
+        [JsonProperty(PropertyName = "lastusedincampaign")]
+        public System.DateTimeOffset? Lastusedincampaign { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_name")]
+        public string Address3Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedbyexternalparty_value")]
+        public string _modifiedbyexternalpartyValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "managername")]
         public string Managername { get; set; }
 
         /// <summary>
-        /// Gets or sets type the name of the main contact at the account's
-        /// secondary address.
         /// </summary>
-        [JsonProperty(PropertyName = "address2_primarycontactname")]
-        public string Address2Primarycontactname { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the ID of the stage.
-        /// </summary>
-        [JsonProperty(PropertyName = "stageid")]
-        public string Stageid { get; set; }
+        [JsonProperty(PropertyName = "marketingonly")]
+        public bool? Marketingonly { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_securitycheckstatus")]
-        public int? AdoxioSecuritycheckstatus { get; set; }
+        [JsonProperty(PropertyName = "adoxio_phsprofitagreementdetails")]
+        public string AdoxioPhsprofitagreementdetails { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phsdatesubmitted")]
-        public System.DateTimeOffset? AdoxioPhsdatesubmitted { get; set; }
+        [JsonProperty(PropertyName = "shippingmethodcode")]
+        public int? Shippingmethodcode { get; set; }
 
         /// <summary>
-        /// Gets or sets select the freight terms for the secondary address to
-        /// make sure shipping orders are processed correctly.
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_line3")]
+        public string Address2Line3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_utcoffset")]
+        public int? Address3Utcoffset { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contactid")]
+        public string Contactid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "governmentid")]
+        public string Governmentid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_latitude")]
+        public decimal? Address2Latitude { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_upszone")]
+        public string Address3Upszone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_role")]
+        public string AdoxioRole { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "address2_freighttermscode")]
         public int? Address2Freighttermscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "managerphone")]
+        public string Managerphone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_canattendeducationsessions")]
+        public bool? AdoxioCanattendeducationsessions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_masterid_value")]
+        public string _masteridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2368,30 +1258,54 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public int? AdoxioPhsforeigndrugalchoholoffence { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the Aging 60 field converted to the system's
-        /// default base currency. The calculations use the exchange rate
-        /// specified in the Currencies area.
         /// </summary>
-        [JsonProperty(PropertyName = "aging60_base")]
-        public decimal? Aging60Base { get; set; }
+        [JsonProperty(PropertyName = "address1_longitude")]
+        public decimal? Address1Longitude { get; set; }
 
         /// <summary>
-        /// Gets or sets the details of the profit agreement
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phsprofitagreementdetails")]
-        public string AdoxioPhsprofitagreementdetails { get; set; }
+        [JsonProperty(PropertyName = "adoxio_unstructuredaddress")]
+        public string AdoxioUnstructuredaddress { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier for address 1.
         /// </summary>
-        [JsonProperty(PropertyName = "address1_addressid")]
-        public string Address1Addressid { get; set; }
+        [JsonProperty(PropertyName = "address2_stateorprovince")]
+        public string Address2Stateorprovince { get; set; }
 
         /// <summary>
-        /// Gets or sets select the primary address type.
         /// </summary>
-        [JsonProperty(PropertyName = "address1_addresstypecode")]
-        public int? Address1Addresstypecode { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_line3")]
+        public string Address1Line3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_line2")]
+        public string Address1Line2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_country")]
+        public string Address1Country { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_composite")]
+        public string Address3Composite { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "creditlimit_base")]
+        public decimal? CreditlimitBase { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2400,100 +1314,333 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_casdatesubmitted")]
-        public System.DateTimeOffset? AdoxioCasdatesubmitted { get; set; }
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_canattendeducationsessions")]
-        public bool? AdoxioCanattendeducationsessions { get; set; }
+        [JsonProperty(PropertyName = "lastonholdtime")]
+        public System.DateTimeOffset? Lastonholdtime { get; set; }
 
         /// <summary>
-        /// Gets or sets select whether the contact allows direct email sent
-        /// from Microsoft Dynamics 365. If Do Not Allow is selected, Microsoft
-        /// Dynamics 365 will not send the email.
         /// </summary>
-        [JsonProperty(PropertyName = "donotemail")]
-        public bool? Donotemail { get; set; }
+        [JsonProperty(PropertyName = "yomifirstname")]
+        public string Yomifirstname { get; set; }
 
         /// <summary>
-        /// Gets or sets text field to capture the role entered in the front
-        /// end by the contact person.
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_role")]
-        public string AdoxioRole { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_applicationid_value")]
+        public string _adoxioApplicationidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets type the county for the third address.
         /// </summary>
-        [JsonProperty(PropertyName = "address3_county")]
-        public string Address3County { get; set; }
+        [JsonProperty(PropertyName = "home2")]
+        public string Home2 { get; set; }
 
         /// <summary>
-        /// Gets or sets shows who created the record on behalf of another
-        /// user.
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "onholdtime")]
+        public int? Onholdtime { get; set; }
 
         /// <summary>
-        /// Gets or sets select a region or territory for the contact for use
-        /// in segmentation and analysis.
         /// </summary>
-        [JsonProperty(PropertyName = "territorycode")]
-        public int? Territorycode { get; set; }
+        [JsonProperty(PropertyName = "externaluseridentifier")]
+        public string Externaluseridentifier { get; set; }
 
         /// <summary>
-        /// Gets or sets type a second phone number associated with the third
-        /// address.
         /// </summary>
-        [JsonProperty(PropertyName = "address3_telephone2")]
-        public string Address3Telephone2 { get; set; }
+        [JsonProperty(PropertyName = "adoxio_stateprovince")]
+        public int? AdoxioStateprovince { get; set; }
 
         /// <summary>
-        /// Gets or sets type the fax number associated with the primary
-        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "address1_fax")]
         public string Address1Fax { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier for address 2.
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_postofficebox")]
+        public string Address1Postofficebox { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_telephone1")]
+        public string Address1Telephone1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isauthorizedrepresentative")]
+        public bool? AdoxioIsauthorizedrepresentative { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_shippingmethodcode")]
+        public int? Address1Shippingmethodcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_latitude")]
+        public decimal? Address3Latitude { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_dateofbirthshortdatestring")]
+        public string AdoxioDateofbirthshortdatestring { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "donotsendmm")]
+        public bool? Donotsendmm { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_selfdeclaredtiedhousedate")]
+        public System.DateTimeOffset? AdoxioSelfdeclaredtiedhousedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_fax")]
+        public string Address3Fax { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "yomifullname")]
+        public string Yomifullname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "telephone2")]
+        public string Telephone2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_country")]
+        public string Address2Country { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "pager")]
+        public string Pager { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimage_url")]
+        public string EntityimageUrl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "birthdate")]
+        public System.DateTimeOffset? Birthdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_identificationtype")]
+        public int? AdoxioIdentificationtype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_addresstypecode")]
+        public int? Address3Addresstypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_utcoffset")]
+        public int? Address2Utcoffset { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "educationcode")]
+        public int? Educationcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "assistantname")]
+        public string Assistantname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_originatingleadid_value")]
+        public string _originatingleadidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_slainvokedid_value")]
+        public string _slainvokedidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_other2ndidtype")]
+        public string AdoxioOther2ndidtype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "yomilastname")]
+        public string Yomilastname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_birthplace")]
+        public string AdoxioBirthplace { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "emailaddress3")]
+        public string Emailaddress3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_invited")]
+        public bool? AdoxioInvited { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_line3")]
+        public string Address3Line3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_line1")]
+        public string Address2Line1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_stateorprovince")]
+        public string Address3Stateorprovince { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "customertypecode")]
+        public int? Customertypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "middlename")]
+        public string Middlename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_telephone1")]
+        public string Address3Telephone1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_freighttermscode")]
+        public int? Address1Freighttermscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdbyexternalparty_value")]
+        public string _createdbyexternalpartyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "emailaddress2")]
+        public string Emailaddress2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_shippingmethodcode")]
+        public int? Address2Shippingmethodcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "donotphone")]
+        public bool? Donotphone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimageid")]
+        public string Entityimageid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "donotpostalmail")]
+        public bool? Donotpostalmail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phsexpired")]
+        public int? AdoxioPhsexpired { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_preferredserviceid_value")]
+        public string _preferredserviceidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_canattendcompliancemeetings")]
+        public bool? AdoxioCanattendcompliancemeetings { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "callback")]
+        public string Callback { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_cansigntemporarychangeapplications")]
+        public bool? AdoxioCansigntemporarychangeapplications { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "address2_addressid")]
         public string Address2Addressid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_canrepresentlicenseeathearings")]
-        public bool? AdoxioCanrepresentlicenseeathearings { get; set; }
+        [JsonProperty(PropertyName = "aging60_base")]
+        public decimal? Aging60Base { get; set; }
 
         /// <summary>
-        /// Gets or sets type the secondary email address for the contact.
         /// </summary>
-        [JsonProperty(PropertyName = "emailaddress2")]
-        public string Emailaddress2 { get; set; }
+        [JsonProperty(PropertyName = "adoxio_identificationjurisdiction")]
+        public int? AdoxioIdentificationjurisdiction { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the Aging 90 field converted to the system's
-        /// default base currency. The calculations use the exchange rate
-        /// specified in the Currencies area.
         /// </summary>
-        [JsonProperty(PropertyName = "aging90_base")]
-        public decimal? Aging90Base { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
-        /// Gets or sets shows how long, in minutes, that the record was on
-        /// hold.
         /// </summary>
-        [JsonProperty(PropertyName = "onholdtime")]
-        public int? Onholdtime { get; set; }
+        [JsonProperty(PropertyName = "preferredcontactmethodcode")]
+        public int? Preferredcontactmethodcode { get; set; }
 
         /// <summary>
-        /// Gets or sets type the fax number associated with the third address.
         /// </summary>
-        [JsonProperty(PropertyName = "address3_fax")]
-        public string Address3Fax { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_fax")]
+        public string Address2Fax { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address3_country")]
+        public string Address3Country { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_relatedlicence_value")]
+        public string _adoxioRelatedlicenceValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "childrensnames")]
+        public string Childrensnames { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2502,35 +1649,73 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_accountid_value")]
+        public string _accountidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_upszone")]
+        public string Address2Upszone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timespentbymeonemailandmeetings")]
+        public string Timespentbymeonemailandmeetings { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business2")]
+        public string Business2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_securitycheckstatus")]
+        public int? AdoxioSecuritycheckstatus { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_primarycontactname")]
+        public string Address1Primarycontactname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_ismarketer")]
+        public bool? AdoxioIsmarketer { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_casdatesubmitted")]
+        public System.DateTimeOffset? AdoxioCasdatesubmitted { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_cansignpermanentchangeapplications")]
+        public bool? AdoxioCansignpermanentchangeapplications { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_composite")]
+        public string Address2Composite { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_parentcontactid_value")]
+        public string _parentcontactidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "creditlimit")]
+        public decimal? Creditlimit { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_primaryidnumber")]
         public string AdoxioPrimaryidnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_selfdeclaredlicencecapdate")]
-        public System.DateTimeOffset? AdoxioSelfdeclaredlicencecapdate { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows whether the contact participates in workflow
-        /// rules.
-        /// </summary>
-        [JsonProperty(PropertyName = "participatesinworkflow")]
-        public bool? Participatesinworkflow { get; set; }
-
-        /// <summary>
-        /// Gets or sets last SLA that was applied to this case. This field is
-        /// for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "_slainvokedid_value")]
-        public string _slainvokedidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the contact accepts marketing
-        /// materials, such as brochures or catalogs. Contacts that opt out can
-        /// be excluded from marketing initiatives.
-        /// </summary>
-        [JsonProperty(PropertyName = "donotsendmm")]
-        public bool? Donotsendmm { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2564,6 +1749,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "contact_principalobjectattributeaccess")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ContactPrincipalobjectattributeaccess { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "contact_entitlement_ContactId")]
         public IList<MicrosoftDynamicsCRMentitlement> ContactEntitlementContactId { get; set; }
 
@@ -2571,6 +1761,111 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "contact_bookableresource_ContactId")]
         public IList<MicrosoftDynamicsCRMbookableresource> ContactBookableresourceContactId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contact_abs_scheduledprocessexecutions")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> ContactAbsScheduledprocessexecutions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_ApplicationId")]
+        public MicrosoftDynamicsCRMadoxioApplication AdoxioApplicationId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_Establishment")]
+        public MicrosoftDynamicsCRMadoxioEstablishment AdoxioEstablishment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_RelatedLicence")]
+        public MicrosoftDynamicsCRMadoxioLicences AdoxioRelatedLicence { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_adoxio_application_ApplyingPerson")]
+        public IList<MicrosoftDynamicsCRMadoxioApplication> AdoxioContactAdoxioApplicationApplyingPerson { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_adoxio_complaint_Complainant")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaint> AdoxioContactAdoxioComplaintComplainant { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_adoxio_legalentity_Contact")]
+        public IList<MicrosoftDynamicsCRMadoxioLegalentity> AdoxioContactAdoxioLegalentityContact { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_adoxio_legalentity_ProfileName")]
+        public IList<MicrosoftDynamicsCRMadoxioLegalentity> AdoxioContactAdoxioLegalentityProfileName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_adoxio_previousaddress_ContactId")]
+        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> AdoxioContactAdoxioPreviousaddressContactId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_aliases")]
+        public IList<MicrosoftDynamicsCRMadoxioAlias> AdoxioContactAliases { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_corporateroles")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> AdoxioContactCorporateroles { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_investigation")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioContactInvestigation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_personalhistorysummary")]
+        public IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> AdoxioContactPersonalhistorysummary { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_tiedhouseconnections")]
+        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> AdoxioContactTiedhouseconnections { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_workerregistration")]
+        public IList<MicrosoftDynamicsCRMadoxioWorker> AdoxioContactWorkerregistration { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_individual_documents")]
+        public IList<MicrosoftDynamicsCRMadoxioDocument> AdoxioIndividualDocuments { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contact_SharePointDocumentLocations")]
+        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> ContactSharePointDocumentLocations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licenseechangelog_Contact")]
+        public IList<MicrosoftDynamicsCRMadoxioLicenseechangelog> AdoxioLicenseechangelogContact { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_task_Contact")]
+        public IList<MicrosoftDynamicsCRMtask> AdoxioContactTaskContact { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contact_BulkOperations")]
+        public IList<MicrosoftDynamicsCRMbulkoperation> ContactBulkOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contact_CampaignResponses")]
+        public IList<MicrosoftDynamicsCRMcampaignresponse> ContactCampaignResponses { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2586,6 +1881,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "Contact_Feedback")]
         public IList<MicrosoftDynamicsCRMfeedback> ContactFeedback { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Contact_ProcessSessions")]
+        public IList<MicrosoftDynamicsCRMprocesssession> ContactProcessSessions { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2819,6 +2119,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "Contact_MailboxTrackingFolder")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ContactMailboxTrackingFolder { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "contact_as_responsible_contact")]
         public IList<MicrosoftDynamicsCRMincident> ContactAsResponsibleContact { get; set; }
 
@@ -2926,101 +2231,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "Contact_Letters")]
         public IList<MicrosoftDynamicsCRMletter> ContactLetters { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "contact_abs_scheduledprocessexecutions")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> ContactAbsScheduledprocessexecutions { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ApplicationId")]
-        public MicrosoftDynamicsCRMadoxioApplication AdoxioApplicationId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Establishment")]
-        public MicrosoftDynamicsCRMadoxioEstablishment AdoxioEstablishment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_RelatedLicence")]
-        public MicrosoftDynamicsCRMadoxioLicences AdoxioRelatedLicence { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_adoxio_application_ApplyingPerson")]
-        public IList<MicrosoftDynamicsCRMadoxioApplication> AdoxioContactAdoxioApplicationApplyingPerson { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_adoxio_complaint_Complainant")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaint> AdoxioContactAdoxioComplaintComplainant { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_adoxio_legalentity_Contact")]
-        public IList<MicrosoftDynamicsCRMadoxioLegalentity> AdoxioContactAdoxioLegalentityContact { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_adoxio_legalentity_ProfileName")]
-        public IList<MicrosoftDynamicsCRMadoxioLegalentity> AdoxioContactAdoxioLegalentityProfileName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_adoxio_previousaddress_ContactId")]
-        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> AdoxioContactAdoxioPreviousaddressContactId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_aliases")]
-        public IList<MicrosoftDynamicsCRMadoxioAlias> AdoxioContactAliases { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_corporateroles")]
-        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> AdoxioContactCorporateroles { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_investigation")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioContactInvestigation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_personalhistorysummary")]
-        public IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> AdoxioContactPersonalhistorysummary { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_tiedhouseconnections")]
-        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> AdoxioContactTiedhouseconnections { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_workerregistration")]
-        public IList<MicrosoftDynamicsCRMadoxioWorker> AdoxioContactWorkerregistration { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_individual_documents")]
-        public IList<MicrosoftDynamicsCRMadoxioDocument> AdoxioIndividualDocuments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "contact_SharePointDocumentLocations")]
-        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> ContactSharePointDocumentLocations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licenseechangelog_Contact")]
-        public IList<MicrosoftDynamicsCRMadoxioLicenseechangelog> AdoxioLicenseechangelogContact { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_task_Contact")]
-        public IList<MicrosoftDynamicsCRMtask> AdoxioContactTaskContact { get; set; }
 
     }
 }

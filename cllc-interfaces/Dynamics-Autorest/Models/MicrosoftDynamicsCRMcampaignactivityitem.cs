@@ -7,6 +7,8 @@
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
     using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -27,29 +29,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcampaignactivityitem class.
         /// </summary>
-        /// <param name="owningbusinessunit">Unique identifier of the business
-        /// unit that owns the campaign activity item.</param>
-        /// <param name="_owneridValue">Unique identifier of the user or team
-        /// who owns the campaign activity item.</param>
-        /// <param name="itemid">Unique identifier of the item.</param>
-        /// <param name="owninguser">Unique identifier of the user that owns
-        /// the campaign activity item.</param>
-        /// <param name="_campaignactivityidValue">Unique identifier of the
-        /// campaign activity for the item.</param>
-        /// <param name="itemobjecttypecode">Identification of the type of the
-        /// campaign activity item.</param>
-        /// <param name="campaignactivityitemid">Unique identifier of the
-        /// campaign activity item.</param>
-        public MicrosoftDynamicsCRMcampaignactivityitem(string owningbusinessunit = default(string), string _owneridValue = default(string), string itemid = default(string), string versionnumber = default(string), string owninguser = default(string), string _campaignactivityidValue = default(string), string itemobjecttypecode = default(string), string campaignactivityitemid = default(string), MicrosoftDynamicsCRMactivitypointer campaignactivityid = default(MicrosoftDynamicsCRMactivitypointer))
+        public MicrosoftDynamicsCRMcampaignactivityitem(int? utcconversiontimezonecode = default(int?), string itemid = default(string), string _campaignactivityidValue = default(string), int? importsequencenumber = default(int?), string owninguser = default(string), string itemobjecttypecode = default(string), string name = default(string), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), string campaignactivityitemid = default(string), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string owningbusinessunit = default(string), IList<MicrosoftDynamicsCRMteam> campaignactivityitemTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> campaignactivityitemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> campaignactivityitemMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> campaignactivityitemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> campaignactivityitemPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMactivitypointer campaignactivityid = default(MicrosoftDynamicsCRMactivitypointer))
         {
-            Owningbusinessunit = owningbusinessunit;
-            this._owneridValue = _owneridValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Itemid = itemid;
-            Versionnumber = versionnumber;
-            Owninguser = owninguser;
             this._campaignactivityidValue = _campaignactivityidValue;
+            Importsequencenumber = importsequencenumber;
+            Owninguser = owninguser;
             Itemobjecttypecode = itemobjecttypecode;
+            Name = name;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._owneridValue = _owneridValue;
             Campaignactivityitemid = campaignactivityitemid;
+            Versionnumber = versionnumber;
+            Overriddencreatedon = overriddencreatedon;
+            Owningbusinessunit = owningbusinessunit;
+            CampaignactivityitemTeams = campaignactivityitemTeams;
+            CampaignactivityitemAsyncOperations = campaignactivityitemAsyncOperations;
+            CampaignactivityitemMailboxTrackingFolders = campaignactivityitemMailboxTrackingFolders;
+            CampaignactivityitemBulkDeleteFailures = campaignactivityitemBulkDeleteFailures;
+            CampaignactivityitemPrincipalObjectAttributeAccesses = campaignactivityitemPrincipalObjectAttributeAccesses;
             Campaignactivityid = campaignactivityid;
             CustomInit();
         }
@@ -60,24 +59,54 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets unique identifier of the business unit that owns the
-        /// campaign activity item.
         /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public string Owningbusinessunit { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user or team who owns the
-        /// campaign activity item.
+        /// </summary>
+        [JsonProperty(PropertyName = "itemid")]
+        public string Itemid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_campaignactivityid_value")]
+        public string _campaignactivityidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public string Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "itemobjecttypecode")]
+        public string Itemobjecttypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the item.
         /// </summary>
-        [JsonProperty(PropertyName = "itemid")]
-        public string Itemid { get; set; }
+        [JsonProperty(PropertyName = "campaignactivityitemid")]
+        public string Campaignactivityitemid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -85,31 +114,39 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string Versionnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user that owns the campaign
-        /// activity item.
         /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public string Owninguser { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the campaign activity for the
-        /// item.
         /// </summary>
-        [JsonProperty(PropertyName = "_campaignactivityid_value")]
-        public string _campaignactivityidValue { get; set; }
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public string Owningbusinessunit { get; set; }
 
         /// <summary>
-        /// Gets or sets identification of the type of the campaign activity
-        /// item.
         /// </summary>
-        [JsonProperty(PropertyName = "itemobjecttypecode")]
-        public string Itemobjecttypecode { get; set; }
+        [JsonProperty(PropertyName = "campaignactivityitem_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> CampaignactivityitemTeams { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the campaign activity item.
         /// </summary>
-        [JsonProperty(PropertyName = "campaignactivityitemid")]
-        public string Campaignactivityitemid { get; set; }
+        [JsonProperty(PropertyName = "campaignactivityitem_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> CampaignactivityitemAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignactivityitem_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> CampaignactivityitemMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignactivityitem_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> CampaignactivityitemBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignactivityitem_PrincipalObjectAttributeAccesses")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> CampaignactivityitemPrincipalObjectAttributeAccesses { get; set; }
 
         /// <summary>
         /// </summary>
