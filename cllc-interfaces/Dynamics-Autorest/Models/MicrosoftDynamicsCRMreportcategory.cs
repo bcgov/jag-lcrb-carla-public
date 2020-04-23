@@ -29,78 +29,34 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMreportcategory class.
         /// </summary>
-        /// <param name="componentstate">For internal use only.</param>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the report category.</param>
-        /// <param name="iscustomizable">Information that specifies whether
-        /// this component can be customized.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the report category.</param>
-        /// <param name="versionnumber">Version number of the report
-        /// category.</param>
-        /// <param name="overwritetime">For internal use only.</param>
-        /// <param name="reportcategoryidunique">For internal use only.</param>
-        /// <param name="createdon">Date and time when the report category
-        /// record was created.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who last modified the report category.</param>
-        /// <param name="exchangerate">Exchange rate for the currency
-        /// associated with the report category with respect to the base
-        /// currency.</param>
-        /// <param name="reportcategoryid">Unique identifier of the report
-        /// category.</param>
-        /// <param name="modifiedon">Date and time when the report category was
-        /// last modified.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// last modified the report category.</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="owningbusinessunit">Unique identifier of the business
-        /// unit that owns the report category.</param>
-        /// <param name="ismanaged">Indicates whether the solution component is
-        /// part of a managed solution.</param>
-        /// <param name="_transactioncurrencyidValue">Unique identifier of the
-        /// currency associated with the Report category.</param>
-        /// <param name="_owneridValue">Unique identifier of the user or team
-        /// who owns the report category.</param>
-        /// <param name="solutionid">Unique identifier of the associated
-        /// solution.</param>
-        /// <param name="categorycode">Category of the report.</param>
-        /// <param name="_reportidValue">Unique identifier of the
-        /// report.</param>
-        /// <param name="owninguser">Unique identifier of the user who owns the
-        /// report category.</param>
-        public MicrosoftDynamicsCRMreportcategory(int? componentstate = default(int?), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string _createdbyValue = default(string), string iscustomizable = default(string), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string reportcategoryidunique = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), decimal? exchangerate = default(decimal?), string reportcategoryid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string owningbusinessunit = default(string), bool? ismanaged = default(bool?), string _transactioncurrencyidValue = default(string), string _owneridValue = default(string), string solutionid = default(string), int? categorycode = default(int?), string _reportidValue = default(string), string owninguser = default(string), MicrosoftDynamicsCRMreport reportid = default(MicrosoftDynamicsCRMreport), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> reportCategorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMreportcategory(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), string iscustomizable = default(string), bool? ismanaged = default(bool?), string reportcategoryid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string reportcategoryidunique = default(string), int? importsequencenumber = default(int?), string _owneridValue = default(string), decimal? exchangerate = default(decimal?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _reportidValue = default(string), int? componentstate = default(int?), string _transactioncurrencyidValue = default(string), int? timezoneruleversionnumber = default(int?), string owningbusinessunit = default(string), string solutionid = default(string), string owninguser = default(string), int? categorycode = default(int?), MicrosoftDynamicsCRMreport reportid = default(MicrosoftDynamicsCRMreport), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> reportcategoryPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> reportCategorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
-            Componentstate = componentstate;
-            Importsequencenumber = importsequencenumber;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            this._createdbyValue = _createdbyValue;
-            Iscustomizable = iscustomizable;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Versionnumber = versionnumber;
-            Overwritetime = overwritetime;
-            Reportcategoryidunique = reportcategoryidunique;
-            Createdon = createdon;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Exchangerate = exchangerate;
-            Reportcategoryid = reportcategoryid;
             Modifiedon = modifiedon;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Versionnumber = versionnumber;
+            Iscustomizable = iscustomizable;
+            Ismanaged = ismanaged;
+            Reportcategoryid = reportcategoryid;
+            Overwritetime = overwritetime;
             this._modifiedbyValue = _modifiedbyValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Reportcategoryidunique = reportcategoryidunique;
+            Importsequencenumber = importsequencenumber;
+            this._owneridValue = _owneridValue;
+            Exchangerate = exchangerate;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Createdon = createdon;
+            this._createdbyValue = _createdbyValue;
+            this._reportidValue = _reportidValue;
+            Componentstate = componentstate;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Owningbusinessunit = owningbusinessunit;
-            Ismanaged = ismanaged;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            this._owneridValue = _owneridValue;
             Solutionid = solutionid;
-            Categorycode = categorycode;
-            this._reportidValue = _reportidValue;
             Owninguser = owninguser;
+            Categorycode = categorycode;
             Reportid = reportid;
+            ReportcategoryPrincipalobjectattributeaccess = reportcategoryPrincipalobjectattributeaccess;
             Modifiedonbehalfby = modifiedonbehalfby;
             Createdby = createdby;
             ReportCategorySyncErrors = reportCategorySyncErrors;
@@ -116,168 +72,134 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the report
-        /// category.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets information that specifies whether this component can
-        /// be customized.
-        /// </summary>
-        [JsonProperty(PropertyName = "iscustomizable")]
-        public string Iscustomizable { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// report category.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets version number of the report category.
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "reportcategoryidunique")]
-        public string Reportcategoryidunique { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the report category record was
-        /// created.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who last
-        /// modified the report category.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets exchange rate for the currency associated with the
-        /// report category with respect to the base currency.
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the report category.
-        /// </summary>
-        [JsonProperty(PropertyName = "reportcategoryid")]
-        public string Reportcategoryid { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the report category was last
-        /// modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who last modified the
-        /// report category.
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the business unit that owns the
-        /// report category.
         /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public string Owningbusinessunit { get; set; }
+        [JsonProperty(PropertyName = "iscustomizable")]
+        public string Iscustomizable { get; set; }
 
         /// <summary>
-        /// Gets or sets indicates whether the solution component is part of a
-        /// managed solution.
         /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the currency associated with the
-        /// Report category.
         /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        [JsonProperty(PropertyName = "reportcategoryid")]
+        public string Reportcategoryid { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user or team who owns the
-        /// report category.
+        /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "reportcategoryidunique")]
+        public string Reportcategoryidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the associated solution.
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
-        /// Gets or sets category of the report.
         /// </summary>
-        [JsonProperty(PropertyName = "categorycode")]
-        public int? Categorycode { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the report.
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_reportid_value")]
         public string _reportidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who owns the report
-        /// category.
+        /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public string Owningbusinessunit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
         public string Owninguser { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "categorycode")]
+        public int? Categorycode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "reportid")]
         public MicrosoftDynamicsCRMreport Reportid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "reportcategory_principalobjectattributeaccess")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ReportcategoryPrincipalobjectattributeaccess { get; set; }
 
         /// <summary>
         /// </summary>

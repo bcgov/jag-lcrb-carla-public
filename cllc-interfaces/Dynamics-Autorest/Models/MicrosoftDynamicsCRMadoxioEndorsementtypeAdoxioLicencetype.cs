@@ -27,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioEndorsementtypeAdoxioLicencetype class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioEndorsementtypeAdoxioLicencetype(string adoxioEndorsementtypeid = default(string), string versionnumber = default(string), string adoxioEndorsementtypeAdoxioLicencetypeid = default(string), string adoxioLicencetypeid = default(string))
+        public MicrosoftDynamicsCRMadoxioEndorsementtypeAdoxioLicencetype(string adoxioEndorsementtypeAdoxioLicencetypeid = default(string), string versionnumber = default(string), string adoxioLicencetypeid = default(string), string adoxioEndorsementtypeid = default(string))
         {
-            AdoxioEndorsementtypeid = adoxioEndorsementtypeid;
-            Versionnumber = versionnumber;
             AdoxioEndorsementtypeAdoxioLicencetypeid = adoxioEndorsementtypeAdoxioLicencetypeid;
+            Versionnumber = versionnumber;
             AdoxioLicencetypeid = adoxioLicencetypeid;
+            AdoxioEndorsementtypeid = adoxioEndorsementtypeid;
             CustomInit();
         }
 
@@ -43,8 +43,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_endorsementtypeid")]
-        public string AdoxioEndorsementtypeid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_endorsementtype_adoxio_licencetypeid")]
+        public string AdoxioEndorsementtypeAdoxioLicencetypeid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -53,13 +53,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_endorsementtype_adoxio_licencetypeid")]
-        public string AdoxioEndorsementtypeAdoxioLicencetypeid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
+        public string AdoxioLicencetypeid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
-        public string AdoxioLicencetypeid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_endorsementtypeid")]
+        public string AdoxioEndorsementtypeid { get; set; }
 
     }
 }

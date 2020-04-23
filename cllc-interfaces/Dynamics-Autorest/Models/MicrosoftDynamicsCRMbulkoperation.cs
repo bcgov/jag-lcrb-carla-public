@@ -29,38 +29,41 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMbulkoperation
         /// class.
         /// </summary>
-        /// <param name="successcount">Number of records which succeeded in the
-        /// bulk operation.</param>
-        /// <param name="targetedrecordtypecode">Select the type of records
-        /// targeted in the quick campaign to identify the target
-        /// audience.</param>
-        /// <param name="bulkoperationnumber">Shows the number for the quick
-        /// campaign record, used to identify the quick campaign.</param>
-        /// <param name="errornumber">Shows the error code that is used to
-        /// troubleshoot issues in the quick campaign.</param>
-        /// <param name="parameters">XML string that contains the parameters to
-        /// the bulk operation.</param>
-        /// <param name="failurecount">Number of records which failed in the
-        /// bulk operation.</param>
-        /// <param name="createdrecordtypecode">Choose the activity to create
-        /// that determines how target prospects or customers in this quick
-        /// campaign are contacted.</param>
-        /// <param name="operationtypecode">Select the type of bulk operation
-        /// process, such as quick campaign or campaign activity
-        /// distribution.</param>
-        /// <param name="targetmemberscount">Number of members to
-        /// target.</param>
-        public MicrosoftDynamicsCRMbulkoperation(int? successcount = default(int?), int? targetedrecordtypecode = default(int?), string bulkoperationnumber = default(string), int? errornumber = default(int?), string parameters = default(string), int? failurecount = default(int?), int? createdrecordtypecode = default(int?), int? operationtypecode = default(int?), int? targetmemberscount = default(int?), IList<MicrosoftDynamicsCRMemail> bulkOperationEmail = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMsystemuser createdbyBulkoperation = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsocialactivity> bulkOperationSocialActivity = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMbulkdeletefailure> bulkOperationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMphonecall> bulkOperationPhonecall = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMbulkoperationlog> bulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMlist regardingobjectidList = default(MicrosoftDynamicsCRMlist), IList<MicrosoftDynamicsCRMcampaignresponse> bulkOperationCampaignResponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), MicrosoftDynamicsCRMsystemuser owninguserBulkoperation = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityBulkoperation = default(MicrosoftDynamicsCRMcampaignactivity), IList<MicrosoftDynamicsCRMactivityparty> bulkoperationActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitBulkoperation = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> bulkOperationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivitypointer> bulkOperationActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMfax> bulkOperationFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> bulkOperationLetter = default(IList<MicrosoftDynamicsCRMletter>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyBulkoperation = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyBulkoperation = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteamBulkoperation = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMappointment> bulkOperationAppointment = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMasyncoperation> bulkOperationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> bulkOperationRecurringAppointmentMaster = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyBulkoperation = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMqueueitem> bulkOperationQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> bulkoperationAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>))
+        public MicrosoftDynamicsCRMbulkoperation(string bulkoperationnumber = default(string), string parameters = default(string), int? targetedrecordtypecode = default(int?), int? operationtypecode = default(int?), int? failurecount = default(int?), string workflowinfo = default(string), int? targetmemberscount = default(int?), int? errornumber = default(int?), int? successcount = default(int?), int? createdrecordtypecode = default(int?), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> bulkoperationAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemailBulkoperation = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingBulkoperation = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderBulkoperation = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordBulkoperation = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMaccount regardingobjectidAccountBulkoperation = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact regardingobjectidContactBulkoperation = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMmailbox sendermailboxidBulkoperation = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidBulkoperation = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprincipal owneridBulkoperation = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsla slaActivitypointerSlaBulkoperation = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleBulkoperation = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMlead regardingobjectidLeadBulkoperation = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSlaBulkoperation = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMcampaignresponse> campaignResponseBulkOperations = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMteam> bulkoperationTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> bulkoperationPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> bulkoperationAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMincidentresolution> bulkoperationIncidentResolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMserviceappointment> bulkoperationServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMopportunityclose> bulkoperationOpportunityCloses = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> bulkoperationOrderCloses = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> bulkoperationQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMemail> bulkOperationEmail = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMsystemuser createdbyBulkoperation = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsocialactivity> bulkOperationSocialActivity = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMbulkdeletefailure> bulkOperationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMphonecall> bulkOperationPhonecall = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMbulkoperationlog> bulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMlist regardingobjectidList = default(MicrosoftDynamicsCRMlist), IList<MicrosoftDynamicsCRMcampaignresponse> bulkOperationCampaignResponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> bulkOperationMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMsystemuser owninguserBulkoperation = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityBulkoperation = default(MicrosoftDynamicsCRMcampaignactivity), IList<MicrosoftDynamicsCRMactivityparty> bulkoperationActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitBulkoperation = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> bulkOperationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivitypointer> bulkOperationActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMfax> bulkOperationFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> bulkOperationLetter = default(IList<MicrosoftDynamicsCRMletter>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyBulkoperation = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyBulkoperation = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteamBulkoperation = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMappointment> bulkOperationAppointment = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMasyncoperation> bulkOperationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> bulkOperationRecurringAppointmentMaster = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyBulkoperation = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMqueueitem> bulkOperationQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>))
         {
-            Successcount = successcount;
-            Targetedrecordtypecode = targetedrecordtypecode;
             Bulkoperationnumber = bulkoperationnumber;
-            Errornumber = errornumber;
             Parameters = parameters;
-            Failurecount = failurecount;
-            Createdrecordtypecode = createdrecordtypecode;
+            Targetedrecordtypecode = targetedrecordtypecode;
             Operationtypecode = operationtypecode;
+            Failurecount = failurecount;
+            Workflowinfo = workflowinfo;
             Targetmemberscount = targetmemberscount;
+            Errornumber = errornumber;
+            Successcount = successcount;
+            Createdrecordtypecode = createdrecordtypecode;
+            BulkoperationAbsScheduledprocessexecutions = bulkoperationAbsScheduledprocessexecutions;
+            RegardingobjectidNewInteractionforemailBulkoperation = regardingobjectidNewInteractionforemailBulkoperation;
+            RegardingobjectidBookableresourcebookingBulkoperation = regardingobjectidBookableresourcebookingBulkoperation;
+            RegardingobjectidBookableresourcebookingheaderBulkoperation = regardingobjectidBookableresourcebookingheaderBulkoperation;
+            RegardingobjectidKnowledgebaserecordBulkoperation = regardingobjectidKnowledgebaserecordBulkoperation;
+            RegardingobjectidAccountBulkoperation = regardingobjectidAccountBulkoperation;
+            RegardingobjectidContactBulkoperation = regardingobjectidContactBulkoperation;
+            SendermailboxidBulkoperation = sendermailboxidBulkoperation;
+            TransactioncurrencyidBulkoperation = transactioncurrencyidBulkoperation;
+            OwneridBulkoperation = owneridBulkoperation;
+            SlaActivitypointerSlaBulkoperation = slaActivitypointerSlaBulkoperation;
+            RegardingobjectidKnowledgearticleBulkoperation = regardingobjectidKnowledgearticleBulkoperation;
+            RegardingobjectidLeadBulkoperation = regardingobjectidLeadBulkoperation;
+            SlainvokedidActivitypointerSlaBulkoperation = slainvokedidActivitypointerSlaBulkoperation;
+            CampaignResponseBulkOperations = campaignResponseBulkOperations;
+            BulkoperationTeams = bulkoperationTeams;
+            BulkoperationPrincipalObjectAttributeAccesses = bulkoperationPrincipalObjectAttributeAccesses;
+            BulkoperationAnnotations = bulkoperationAnnotations;
+            BulkoperationIncidentResolutions = bulkoperationIncidentResolutions;
+            BulkoperationServiceAppointments = bulkoperationServiceAppointments;
+            BulkoperationOpportunityCloses = bulkoperationOpportunityCloses;
+            BulkoperationOrderCloses = bulkoperationOrderCloses;
+            BulkoperationQuoteCloses = bulkoperationQuoteCloses;
             BulkOperationEmail = bulkOperationEmail;
             CreatedbyBulkoperation = createdbyBulkoperation;
             BulkOperationSocialActivity = bulkOperationSocialActivity;
@@ -70,6 +73,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             ActivityidActivitypointer = activityidActivitypointer;
             RegardingobjectidList = regardingobjectidList;
             BulkOperationCampaignResponse = bulkOperationCampaignResponse;
+            BulkOperationMailboxTrackingFolder = bulkOperationMailboxTrackingFolder;
             OwninguserBulkoperation = owninguserBulkoperation;
             RegardingobjectidCampaignactivityBulkoperation = regardingobjectidCampaignactivityBulkoperation;
             BulkoperationActivityParties = bulkoperationActivityParties;
@@ -86,7 +90,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             BulkOperationRecurringAppointmentMaster = bulkOperationRecurringAppointmentMaster;
             ModifiedonbehalfbyBulkoperation = modifiedonbehalfbyBulkoperation;
             BulkOperationQueueItem = bulkOperationQueueItem;
-            BulkoperationAbsScheduledprocessexecutions = bulkoperationAbsScheduledprocessexecutions;
             CustomInit();
         }
 
@@ -96,65 +99,169 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets number of records which succeeded in the bulk
-        /// operation.
-        /// </summary>
-        [JsonProperty(PropertyName = "successcount")]
-        public int? Successcount { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the type of records targeted in the quick
-        /// campaign to identify the target audience.
-        /// </summary>
-        [JsonProperty(PropertyName = "targetedrecordtypecode")]
-        public int? Targetedrecordtypecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the number for the quick campaign record, used
-        /// to identify the quick campaign.
         /// </summary>
         [JsonProperty(PropertyName = "bulkoperationnumber")]
         public string Bulkoperationnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the error code that is used to troubleshoot
-        /// issues in the quick campaign.
-        /// </summary>
-        [JsonProperty(PropertyName = "errornumber")]
-        public int? Errornumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets XML string that contains the parameters to the bulk
-        /// operation.
         /// </summary>
         [JsonProperty(PropertyName = "parameters")]
         public string Parameters { get; set; }
 
         /// <summary>
-        /// Gets or sets number of records which failed in the bulk operation.
         /// </summary>
-        [JsonProperty(PropertyName = "failurecount")]
-        public int? Failurecount { get; set; }
+        [JsonProperty(PropertyName = "targetedrecordtypecode")]
+        public int? Targetedrecordtypecode { get; set; }
 
         /// <summary>
-        /// Gets or sets choose the activity to create that determines how
-        /// target prospects or customers in this quick campaign are contacted.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdrecordtypecode")]
-        public int? Createdrecordtypecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the type of bulk operation process, such as
-        /// quick campaign or campaign activity distribution.
         /// </summary>
         [JsonProperty(PropertyName = "operationtypecode")]
         public int? Operationtypecode { get; set; }
 
         /// <summary>
-        /// Gets or sets number of members to target.
+        /// </summary>
+        [JsonProperty(PropertyName = "failurecount")]
+        public int? Failurecount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "workflowinfo")]
+        public string Workflowinfo { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "targetmemberscount")]
         public int? Targetmemberscount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "errornumber")]
+        public int? Errornumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "successcount")]
+        public int? Successcount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdrecordtypecode")]
+        public int? Createdrecordtypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bulkoperation_abs_scheduledprocessexecutions")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> BulkoperationAbsScheduledprocessexecutions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_new_interactionforemail_bulkoperation")]
+        public MicrosoftDynamicsCRMinteractionforemail RegardingobjectidNewInteractionforemailBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebooking_bulkoperation")]
+        public MicrosoftDynamicsCRMbookableresourcebooking RegardingobjectidBookableresourcebookingBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebookingheader_bulkoperation")]
+        public MicrosoftDynamicsCRMbookableresourcebookingheader RegardingobjectidBookableresourcebookingheaderBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_knowledgebaserecord_bulkoperation")]
+        public MicrosoftDynamicsCRMknowledgebaserecord RegardingobjectidKnowledgebaserecordBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_account_bulkoperation")]
+        public MicrosoftDynamicsCRMaccount RegardingobjectidAccountBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_contact_bulkoperation")]
+        public MicrosoftDynamicsCRMcontact RegardingobjectidContactBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sendermailboxid_bulkoperation")]
+        public MicrosoftDynamicsCRMmailbox SendermailboxidBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "transactioncurrencyid_bulkoperation")]
+        public MicrosoftDynamicsCRMtransactioncurrency TransactioncurrencyidBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ownerid_bulkoperation")]
+        public MicrosoftDynamicsCRMprincipal OwneridBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sla_activitypointer_sla_bulkoperation")]
+        public MicrosoftDynamicsCRMsla SlaActivitypointerSlaBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_knowledgearticle_bulkoperation")]
+        public MicrosoftDynamicsCRMknowledgearticle RegardingobjectidKnowledgearticleBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_lead_bulkoperation")]
+        public MicrosoftDynamicsCRMlead RegardingobjectidLeadBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "slainvokedid_activitypointer_sla_bulkoperation")]
+        public MicrosoftDynamicsCRMsla SlainvokedidActivitypointerSlaBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "CampaignResponse_BulkOperations")]
+        public IList<MicrosoftDynamicsCRMcampaignresponse> CampaignResponseBulkOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bulkoperation_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> BulkoperationTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bulkoperation_PrincipalObjectAttributeAccesses")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> BulkoperationPrincipalObjectAttributeAccesses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bulkoperation_Annotations")]
+        public IList<MicrosoftDynamicsCRMannotation> BulkoperationAnnotations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bulkoperation_IncidentResolutions")]
+        public IList<MicrosoftDynamicsCRMincidentresolution> BulkoperationIncidentResolutions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bulkoperation_ServiceAppointments")]
+        public IList<MicrosoftDynamicsCRMserviceappointment> BulkoperationServiceAppointments { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bulkoperation_OpportunityCloses")]
+        public IList<MicrosoftDynamicsCRMopportunityclose> BulkoperationOpportunityCloses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bulkoperation_OrderCloses")]
+        public IList<MicrosoftDynamicsCRMorderclose> BulkoperationOrderCloses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bulkoperation_QuoteCloses")]
+        public IList<MicrosoftDynamicsCRMquoteclose> BulkoperationQuoteCloses { get; set; }
 
         /// <summary>
         /// </summary>
@@ -200,6 +307,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "BulkOperation_CampaignResponse")]
         public IList<MicrosoftDynamicsCRMcampaignresponse> BulkOperationCampaignResponse { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "BulkOperation_MailboxTrackingFolder")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> BulkOperationMailboxTrackingFolder { get; set; }
 
         /// <summary>
         /// </summary>
@@ -280,11 +392,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "BulkOperation_QueueItem")]
         public IList<MicrosoftDynamicsCRMqueueitem> BulkOperationQueueItem { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "bulkoperation_abs_scheduledprocessexecutions")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> BulkoperationAbsScheduledprocessexecutions { get; set; }
 
     }
 }
