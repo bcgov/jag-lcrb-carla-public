@@ -13,30 +13,59 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CateringApplication_privatecorp
+Feature: Establishment_watchwords
     As a logged in business user
-    I want to submit a Catering Application for a private corporation
+    I want to submit an establishment name
+    And confirm that watch words are not used
 
-Scenario: Start Application
+Scenario Outline: Confirm establishment watch words
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     And I am logged in to the dashboard as a private corporation
-    And I click on the Catering Start Application button
+    And I click on the Start Application button
+    And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I complete the application
-    And I click on the Submit button
-    And I click on the Pay for Application button
-    And I enter the payment information
-    And I return to the dashboard
-    And the account is deleted
-    Then I see the login page
+    And I enter a "<watch_word>"
+    Then the correct error message is displayed  
+   
+    Examples:
+    | watch_word    |
+    | Antidote      |
+    | Apothecary    |
+    | Compassion    |
+    | Cure          |
+    | Dispensary    |
+    | Doctor        |
+    | Dr.           |
+    | Elixir        |
+    | Heal          |
+    | Healing       |
+    | Health        |
+    | Herbal        |
+    | Hospital      |
+    | Med           |
+    | Medi          |
+    | Medical       |
+    | Medicinal     |
+    | Medicine      |
+    | Pharmacy      |
+    | Potion        |
+    | Prescription  |
+    | Relief        |
+    | Remedy        |
+    | Restore       |
+    | Solution      |
+    | Therapeutics  |
+    | Therapy       |
+    | Tonics        |
+    | Treatment     |
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./CateringApplication_privatecorp.feature")]
-    public sealed class CateringApplicationPrivateCorp : TestBase
+    [FeatureFile("./Establishment_watchwords.feature")]
+    public sealed class EstablishmentWatchwords : TestBase
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
@@ -50,16 +79,28 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
-        [And(@"I click on the Catering Start Application button")]
+        [And(@"the account is deleted")]
+        public void Delete_my_account()
+        {
+            this.CarlaDeleteCurrentAccount();
+        }
+
+        [And(@"I click on the Start Application button")]
         public void I_start_application()
         {
             /* 
-            Page Title: 
+            Page Title: Welcome to Cannabis Licensing
             */
 
-            // click on the Catering Start Application button
-            NgWebElement startApp_button = ngDriver.FindElement(By.Id("startCatering"));
+            // click on the Start Application button
+            NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
             startApp_button.Click();
+        }
+
+        [And(@"I complete the eligibility disclosure")]
+        public void complete_eligibility_disclosure()
+        {
+            CRSEligibilityDisclosure();
         }
 
         [And(@"I review the account profile")]
@@ -86,8 +127,8 @@ namespace bdd_tests
 
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
-            string corpGiven = "CateringPrivateCorpGiven";
-            string corpSurname = "CateringPrivateCorpSurname";
+            string corpGiven = "CorpGiven";
+            string corpSurname = "CorpSurname";
             string corpTitle = "CEO";
             string corpContactPhone = "7781811818";
             string corpContactEmail = "automated@test.com";
@@ -104,7 +145,7 @@ namespace bdd_tests
             NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             uiCalendar1.Click();
 
-            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[1]/td[2]/div"));
+            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[1]/td[2]/div"));
             uiCalendar2.Click();
 
             // enter the physical street address 1
@@ -205,17 +246,17 @@ namespace bdd_tests
             string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
 
             // upload a notice of articles document
-            string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
+            string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
             NgWebElement uploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
             uploadSignage.SendKeys(noticeOfArticles);
 
             // upload a central securities register document
-            string centralSecuritiesRegister = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "central_securities_register.pdf");
+            string centralSecuritiesRegister = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
             NgWebElement uploadCentralSecReg = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
             uploadCentralSecReg.SendKeys(centralSecuritiesRegister);
 
             // upload a special rights and restrictions document
-            string specialRightsRestrictions = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "special_rights_restrictions.pdf");
+            string specialRightsRestrictions = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
             NgWebElement uploadSpecialRightsRes = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
             uploadSpecialRightsRes.SendKeys(specialRightsRestrictions);
 
@@ -240,9 +281,9 @@ namespace bdd_tests
             uiKeyPersonLast.SendKeys(keyPersonnelLastName);
 
             // select key personnel role
-            NgWebElement uiKeyPersonRole = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[3]"));
+            NgWebElement uiKeyPersonRole = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
             uiKeyPersonRole.Click();
-            
+
             // enter key personnel title
             NgWebElement uiKeyPersonTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
             uiKeyPersonTitle.SendKeys(keyPersonnelTitle);
@@ -255,42 +296,42 @@ namespace bdd_tests
             NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             openKeyPersonnelDOB.Click();
 
-            NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+            NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
             openKeyPersonnelDOB1.Click();
 
             /********** Individual Shareholder **********/
 
-            // create the individual shareholder data
+            // create the shareholder data
             string shareholderFirstName = "Jacqui";
             string shareholderLastName = "Chan";
             string shareholderVotingShares = "500";
             string shareholderEmail = "jacqui@chan.com";
 
-            // open individual shareholder form    
+            // open shareholder form    
             NgWebElement uiOpenShare = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section/app-associate-list/div/button"));
             uiOpenShare.Click();
 
-            // enter individual shareholder first name
+            // enter shareholder first name
             NgWebElement uiShareFirst = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
             uiShareFirst.SendKeys(shareholderFirstName);
 
-            // enter individual shareholder last name
+            // enter shareholder last name
             NgWebElement uiShareLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
             uiShareLast.SendKeys(shareholderLastName);
 
-            // enter individual number of voting shares
+            // enter number of voting shares
             NgWebElement uiShareVotes = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
             uiShareVotes.SendKeys(shareholderVotingShares);
 
-            // enter individual shareholder email
+            // enter shareholder email
             NgWebElement uiShareEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
             uiShareEmail.SendKeys(shareholderEmail);
 
-            // enter individual shareholder DOB
+            // enter shareholder DOB
             NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
             uiCalendarS1.Click();
 
-            NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+            NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-4']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
             uiCalendarS2.Click();
 
             /********** Business Shareholder **********/
@@ -375,9 +416,8 @@ namespace bdd_tests
             NgWebElement uiKeyPersonnelDOB1Biz1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[2]/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
             uiKeyPersonnelDOB1Biz1.Click();
 
-            NgWebElement uiKeyPersonnelDOB1Biz2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+            NgWebElement uiKeyPersonnelDOB1Biz2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-5']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
             uiKeyPersonnelDOB1Biz2.Click();
-
 
             /********** Business Shareholder - Individual Shareholder **********/
 
@@ -411,7 +451,7 @@ namespace bdd_tests
             NgWebElement uiCalendarIndyS1Biz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
             uiCalendarIndyS1Biz.Click();
 
-            NgWebElement uiCalendarIndyS2Biz = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-4']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+            NgWebElement uiCalendarIndyS2Biz = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-6']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
             uiCalendarIndyS2Biz.Click();
 
             // click on Submit Organization Info button
@@ -419,52 +459,32 @@ namespace bdd_tests
             submitOrgInfoButton.Click();
         }
 
-        [And(@"I complete the application")]
-        public void I_complete_the_application()
-        {
-            CateringApplication();
-        }
-
-        [And(@"I click on the Submit button")]
-        public void click_on_submit()
-        {
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
-            submit_button.Click();
-        }
-
-        [And(@"I click on the Pay for Application button")]
-        public void click_on_pay()
-        {
-            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
-            pay_button.Click();
-        }
-
-        [And(@"I enter the payment information")]
-        public void enter_payment_info()
-        {
-            MakePayment();
-        }
-
-        [And(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            CateringReturnToDashboard();
-        }
-
-        [And(@"the account is deleted")]
-        public void Delete_my_account()
-        {
-            this.CarlaDeleteCurrentAccount();
-        }
-
-        [Then(@"I see the login page")]
-        public void I_see_login()
+        [When(@"I enter a (.*)")]
+        public void enter_a_watchword(string watchword)
         {
             /* 
-            Page Title: 
+            Page Title: Submit the Cannabis Retail Store Application
             */
 
-            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
+            System.Threading.Thread.Sleep(7000);
+
+            // enter the establishment name
+            NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
+            estabName.SendKeys(watchword);
+
+            // click on the establishment address to trigger the warning
+            NgWebElement estabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
+            estabAddress.Click();
+        }
+
+        [Then(@"the correct error message is displayed")]
+        public void watch_warning_displayed()
+        {
+            /* 
+            Page Title: Submit the Cannabis Retail Store Application
+            */
+
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'at least one word that doesn’t comply']")).Displayed);
         }
     }
 }
