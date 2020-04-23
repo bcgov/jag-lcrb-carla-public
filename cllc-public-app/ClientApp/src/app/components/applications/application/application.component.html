@@ -212,15 +212,9 @@
         </section>
       </section>
       <section *ngIf="application?.applicationType?.formReference && dynamicsForm?.tabs">
-
-
-        <!--<section *ngIf="dynamicsForm?.tabs">-->
         <h3 class="blue-header">Application Details</h3>
-        <h1>{{application?.applicationType?.formReference}}</h1>
-
-
         <div *ngFor="let formTab of dynamicsForm.tabs">
-          <h3 class="blue-header">{{formTab.name}}</h3>
+          <!-- <h3 class="blue-header">{{formTab.name}}</h3>-->
           <div *ngFor="let formSection of formTab.sections; let i = index;">
             <div *ngIf="formSection.visible">
               <section class="padded-section">
@@ -266,10 +260,10 @@
                     </app-field>
                     <div class="padded-section" *ngIf="formField.controltype == 'TextAreaControl'">
                       <!-- <app-field [label]="formField.name" [required]="formField.required" [isFullWidth]="true" [valid]="isValidOrNotTouched(formField.datafieldname)"
-                           [showChevrons]="false">
-                  <textarea rows="8" style="width: 100%;" maxlength="5000"
-                            [formControlName]="formField.datafieldname" [id]="formField.datafieldname"></textarea>
-                </app-field>-->
+                         [showChevrons]="false">
+                <textarea rows="8" style="width: 100%;" maxlength="5000"
+                          [formControlName]="formField.datafieldname" [id]="formField.datafieldname"></textarea>
+              </app-field>-->
                     </div>
 
                     <app-field *ngIf="formField.controltype == 'DateTimeControl'" [label]="formField.name" [required]="formField.required">
