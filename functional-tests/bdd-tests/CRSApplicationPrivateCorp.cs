@@ -42,7 +42,7 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            CarlaLoginNoCheck(businessType);
+            CarlaLoginNoCheck();
         }
 
         [And(@"I am logged in to the dashboard as a (.*)")]
@@ -262,7 +262,6 @@ namespace bdd_tests
             NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             openKeyPersonnelDOB.Click();
 
-            //NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
             NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
             openKeyPersonnelDOB1.Click();
 
@@ -447,7 +446,7 @@ namespace bdd_tests
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
 
-            System.Threading.Thread.Sleep(7000);
+            System.Threading.Thread.Sleep(9000);
 
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));

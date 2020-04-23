@@ -159,8 +159,9 @@
                     </div>
                   </ng-container>
                   <!-- if there is a third party application in progress, we don't show the ability to submit a new application-->
+                  <!-- sometimes imported licences are imported with a blank TPO Requested field, so we need to check for blank -->
                   <ng-container
-                    *ngIf="!licenceHasExpired(item.expiryDate) && item.tpoRequested == 'No' && item?.licenceTypeName !== ApplicationTypeNames.CannabisRetailStore">
+                    *ngIf="!licenceHasExpired(item.expiryDate) && (item.tpoRequested == 'No' || !item.tpoRequested) && item?.licenceTypeName !== ApplicationTypeNames.CannabisRetailStore">
                     <div *ngIf="item.status != PAYMENT_REQUIRED">
                       <p>
                         <a *ngIf="licenceTransferFeatureOn" [routerLink]="[ '/third-party-operator/' + item.licenseId]">
