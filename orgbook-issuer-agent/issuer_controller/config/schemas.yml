@@ -135,7 +135,7 @@
 #       required: false
 
 - name: cannabis-retail-store-licence.lcrb
-  version: '1.0.47'
+  version: '1.1.0'
   description: Cannabis Retail Store Licence Issued by Liquor and Cannabis Regulation Branch
   path: /cannabis-retail-store-licence
   cardinality:
@@ -196,7 +196,7 @@
       data_type: text
       required: false
 - name: cannabis-marketing-licence.lcrb
-  version: '1.0.47'
+  version: '1.1.0'
   description: Cannabis Marketing Licence Issued by Liquor and Cannabis Regulation Branch
   path: /cannabis-marketing-licence
   cardinality:
