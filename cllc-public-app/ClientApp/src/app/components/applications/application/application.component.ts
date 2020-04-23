@@ -26,6 +26,8 @@ import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AccountDataService } from '@services/account-data.service';
 import { User } from '@models/user.model';
+import { DynamicsForm } from '../../../models/dynamics-form.model';
+import { DynamicsFormDataService } from '../../../services/dynamics-form-data.service';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -90,7 +92,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedSitePlanDocuments: 0;
   uploadedFloorPlanDocuments: 0;
   uploadedPhotosOrRenderingsDocuments: 0;
-  uploadedZoningDocuments: 0;
+  uploadedZoningDocuments: 0; 
+  dynamicsForm: DynamicsForm;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -104,7 +107,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     private tiedHouseService: TiedHouseConnectionsDataService,
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService,
-    private accountDataService: AccountDataService
+    private accountDataService: AccountDataService,
+    private dynamicsFormDataService: DynamicsFormDataService
   ) {
     super();
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
@@ -112,6 +116,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
+
+
     this.form = this.fb.group({
       id: [''],
       assignedLicence: this.fb.group({
@@ -220,7 +226,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
         () => {
           console.log('Error occured');
         }
-      );
+    );
+
+
+    // get the application form 
+    this.dynamicsFormDataService.getDynamicsForm('df0e3410-b8d4-46f8-bcef-1b20a01a66d7') // catering form for demo
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(value => this.dynamicsForm = value);
   }
 
   private hideFormControlByType() {

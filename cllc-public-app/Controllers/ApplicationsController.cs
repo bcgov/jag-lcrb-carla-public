@@ -282,7 +282,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id">GUID of the Application to get</param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDynamicsApplication(string id)
+        public async Task<IActionResult> GetApplication(string id)
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
