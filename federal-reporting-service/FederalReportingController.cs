@@ -26,7 +26,6 @@ namespace Gov.Lclb.Cllb.FederalReportingService
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IConfiguration _configuration;
         private readonly FileManagerClient _fileManagerClient;
-        private readonly string _exportPath;
 
         private readonly ILogger _logger;
         
@@ -37,14 +36,6 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             if (_configuration["DYNAMICS_ODATA_URI"] != null)
             {
                 _dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
-            }
-            if (_configuration["EXPORT_PATH"] != null)
-            {
-                _exportPath = _configuration["EXPORT_PATH"];
-            }
-            else
-            {
-                _exportPath = "./";
             }
             _fileManagerClient = fileClient;
             _logger = loggerFactory.CreateLogger(typeof(FederalReportingController));
@@ -113,54 +104,52 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                         filename = illegalInFileName.Replace(filename, "");
                         illegalInFileName = new Regex(@"[&:/\\|]");
                         filename = illegalInFileName.Replace(filename, "-");
-                        // using (var mem = new MemoryStream())
-                        using (var writer = new StreamWriter(_exportPath + filename))
+                        using (var mem = new MemoryStream())
+                        using (var writer = new StreamWriter(mem))
                         using (var csv = new CsvWriter(writer))
                         {
                             csv.Configuration.RegisterClassMap<FederalReportingMonthlyExportMap>();
                             csv.WriteRecords(monthlyReports);
 
                             writer.Flush();
-                            // mem.Position = 0;
+                            mem.Position = 0;
 
+                            string folderName = null;
+                            MicrosoftDynamicsCRMsharepointdocumentlocation? documentLocation = null;
+                            if (export.AdoxioFederalreportexportSharePointDocumentLocations != null)
+                            {
+                                documentLocation = export.AdoxioFederalreportexportSharePointDocumentLocations.FirstOrDefault();
+                                folderName = documentLocation.Relativeurl;
+                            }
 
+                            if (folderName == null)
+                            {
+                                folderName = export.GetDocumentFolderName();
 
-                            // string folderName = null;
-                            // MicrosoftDynamicsCRMsharepointdocumentlocation? documentLocation = null;
-                            // if (export.AdoxioFederalreportexportSharePointDocumentLocations != null)
-                            // {
-                            //     documentLocation = export.AdoxioFederalreportexportSharePointDocumentLocations.FirstOrDefault();
-                            //     folderName = documentLocation.Relativeurl;
-                            // }
-
-                            // if (folderName == null)
-                            // {
-                            //     folderName = export.GetDocumentFolderName();
-
-                            //     await CreateFederalReportDocumentLocation(export, DOCUMENT_LIBRARY, folderName);
-                            // }
-                            // string sharepointFilename = await _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv");
-                            // string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
-                            // byte[] data = mem.ToArray();
-                            // call the web service
-                            // var uploadRequest = new Services.FileManager.UploadFileRequest()
-                            // {
-                            //     ContentType = "text/csv",
-                            //     Data = ByteString.CopyFrom(data),
-                            //     EntityName = "federal_report",
-                            //     FileName = filename,
-                            //     FolderName = folderName
-                            // };
-                            // bool folderResult = CreateFolder(folderName);
-                            // if (folderResult)
-                            // {
-                            //     var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
-                            // }
-                            // else
-                            // {
-                            //     hangfireContext.WriteLine($"Failed to create sharepoint folder for federal report.");
-                            //     _logger.LogInformation($"Failed to create sharepoint folder for federal report.");
-                            // }
+                                await CreateFederalReportDocumentLocation(export, DOCUMENT_LIBRARY, folderName);
+                            }
+                            string sharepointFilename = await _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv");
+                            string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
+                            byte[] data = mem.ToArray();
+                            call the web service
+                            var uploadRequest = new Services.FileManager.UploadFileRequest()
+                            {
+                                ContentType = "text/csv",
+                                Data = ByteString.CopyFrom(data),
+                                EntityName = "federal_report",
+                                FileName = filename,
+                                FolderName = folderName
+                            };
+                            bool folderResult = CreateFolder(folderName);
+                            if (folderResult)
+                            {
+                                var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
+                            }
+                            else
+                            {
+                                hangfireContext.WriteLine($"Failed to create sharepoint folder for federal report.");
+                                _logger.LogInformation($"Failed to create sharepoint folder for federal report.");
+                            }
                         }
                         hangfireContext.WriteLine($"Successfully exported Federal Reporting CSV {export.AdoxioExportnumber}.");
                         _logger.LogInformation($"Successfully exported Federal Reporting CSV {export.AdoxioExportnumber}.");
