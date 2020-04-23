@@ -263,7 +263,7 @@ def assemble_issuer_spec(config: dict) -> dict:
     return spec
 
 
-def assemble_credential_type_spec(config: dict) -> dict:
+def assemble_credential_type_spec(config: dict, schema_attrs: dict) -> dict:
     """
     Create the issuer JSON definition which will be submitted to the OrgBook
     """
@@ -284,14 +284,20 @@ def assemble_credential_type_spec(config: dict) -> dict:
     deflang = "en"
 
     if not config.get("topic"):
-        raise RuntimeError("Missing 'topic' for credential type")
+        raise RuntimeError("Missing 'topic' for credential type " + config.get("schema_name"))
 
     if not config.get("issuer_url"):
-        raise RuntimeError("Missing 'issuer_url' for credential type")
+        raise RuntimeError("Missing 'issuer_url' for credential type " + config.get("schema_name"))
 
     labels = extract_translated(config, "label", config.get("schema_name"), deflang)
     urls = extract_translated(config, "url", config.get("issuer_url"), deflang)
     logo_b64 = encode_logo_image(config, config_root)
+
+    claim_labels = {}
+    claim_descriptions = {}
+    for k, v in schema_attrs.items():
+        claim_labels[k] = extract_translated(v, "label", k, deflang)
+        claim_descriptions[k] = extract_translated(v, "description", k, deflang)
 
     ctype = {
         "schema": config.get("schema_name"),
@@ -309,5 +315,7 @@ def assemble_credential_type_spec(config: dict) -> dict:
     for k in CRED_TYPE_PARAMETERS:
         if k != "details" and k in config and k not in ctype:
             ctype[k] = config[k]
-
+    ctype["claim_labels"] = claim_labels
+    ctype["claim_descriptions"] = claim_descriptions
+    
     return ctype

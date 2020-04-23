@@ -58,7 +58,7 @@ def agent_schemas_cred_defs(agent_admin_url):
             agent_admin_url + "/schemas/" + schema_id, headers=ADMIN_REQUEST_HEADERS
         )
         response.raise_for_status()
-        schema = response.json()["schema_json"]
+        schema = response.json()["schema"]
         schema_key = schema["name"] + "::" + schema["version"]
         ret_schemas[schema_key] = {"schema": schema, "schema_id": str(schema["seqNo"])}
 
@@ -253,8 +253,9 @@ class StartupProcessingThread(threading.Thread):
                         "CRED_DEF_" + schema_name + "_" + schema_info["version"]
                     ],
                 }
+                credential_type['attributes'] = schema_info["attributes"]
                 ctype_config.update(credential_type)
-                ctype = config.assemble_credential_type_spec(ctype_config)
+                ctype = config.assemble_credential_type_spec(ctype_config, schema_info.get("attributes"))
                 if ctype is not None:
                     credential_types.append(ctype)
 
