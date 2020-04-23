@@ -17,39 +17,36 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 result = new ApplicationType()
                 {
-                    Id = applicationType.AdoxioApplicationtypeid,
-
                     ActionText = applicationType.AdoxioActiontext,
-
-                    Name = applicationType.AdoxioName,
-                    Title = applicationType.AdoxioTitletext,
                     Category = (ApplicationTypeCategory?)applicationType.AdoxioCategory,
-
-                    ShowPropertyDetails = applicationType.AdoxioIsshowpropertydetails,
-                    EstablishmentName = (FormControlState?)applicationType.AdoxioEstablishmentname,
-                    CurrentEstablishmentAddress = (FormControlState?)applicationType.AdoxioCurrentestablishmentaddress,                    
-                    ShowCurrentProperty = applicationType.AdoxioIsshowcurrentproperty,                    
-                    newEstablishmentAddress = (FormControlState?)applicationType.AdoxioNewestablishmentaddress,
-                    StoreContactInfo = (FormControlState?)applicationType.AdoxioStorecontactinfo,
-                    ShowDescription1 = applicationType.AdoxioShowdescription1,
-                    Signage = (FormControlState?)applicationType.AdoxioSignage,
-                    ValidInterest = (FormControlState?)applicationType.AdoxioValidinterest,
-                    FloorPlan = (FormControlState?)applicationType.AdoxioFloorplan,
-                    SitePlan = (FormControlState?)applicationType.AdoxioSiteplan,             
-                    ShowLiquorSitePlan = (FormControlState?)applicationType.AdoxioLiquorsiteplan,       
-                    SitePhotos = (FormControlState?)applicationType.AdoxioSitephotographs,
-                    PublicCooler = (FormControlState?)applicationType.AdoxioPubliccoolerspace,
                     ConnectedGroceryStore = (FormControlState?)applicationType.AdoxioConnectedgrocerystore,
+                    CurrentEstablishmentAddress = (FormControlState?)applicationType.AdoxioCurrentestablishmentaddress,
+                    EstablishmentName = (FormControlState?)applicationType.AdoxioEstablishmentname,
+                    EstablishmetNameIsReadOnly = applicationType.AdoxioIslockestablishmentname,
+                    FloorPlan = (FormControlState?)applicationType.AdoxioFloorplan,
+                    FormReference = applicationType.AdoxioFormreference,
+                    Id = applicationType.AdoxioApplicationtypeid,
+                    IsFree = applicationType.AdoxioIsfree,
+                    Name = applicationType.AdoxioName,
+                    NewEstablishmentAddress = (FormControlState?)applicationType.AdoxioNewestablishmentaddress,
+                    ProofofZoning = (FormControlState?)applicationType.AdoxioProofofzoning,
+                    PublicCooler = (FormControlState?)applicationType.AdoxioPubliccoolerspace,
                     ShowAssociatesFormUpload = applicationType.AdoxioIsshowassociatesformupload,
+                    ShowCurrentProperty = applicationType.AdoxioIsshowcurrentproperty,
                     ShowDeclarations = applicationType.AdoxioIsshowdeclarations,
+                    ShowDescription1 = applicationType.AdoxioShowdescription1,
                     ShowFinancialIntegrityFormUpload = applicationType.AdoxioIsshowfinancialintegrityformupload,
                     ShowHoursOfSale = applicationType.AdoxioIsshowhoursofsale,
-                    ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments,
-                    EstablishmetNameIsReadOnly = applicationType.AdoxioIslockestablishmentname,
-                    ProofofZoning = (FormControlState?)applicationType.AdoxioProofofzoning,
                     ShowLiquorDeclarations = applicationType.AdoxioIsshowliquordeclarations,
-                    IsFree = applicationType.AdoxioIsfree
-                                       
+                    ShowLiquorSitePlan = (FormControlState?)applicationType.AdoxioLiquorsiteplan,
+                    ShowPropertyDetails = applicationType.AdoxioIsshowpropertydetails,
+                    ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments,
+                    Signage = (FormControlState?)applicationType.AdoxioSignage,
+                    SitePhotos = (FormControlState?)applicationType.AdoxioSitephotographs,
+                    SitePlan = (FormControlState?)applicationType.AdoxioSiteplan,
+                    StoreContactInfo = (FormControlState?)applicationType.AdoxioStorecontactinfo,
+                    Title = applicationType.AdoxioTitletext,
+                    ValidInterest = (FormControlState?)applicationType.AdoxioValidinterest                    
                 };
 
                 if (applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)
