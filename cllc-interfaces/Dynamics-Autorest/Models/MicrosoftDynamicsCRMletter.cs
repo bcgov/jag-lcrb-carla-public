@@ -27,37 +27,34 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMletter class.
         /// </summary>
-        /// <param name="category">Type a category to identify the letter type,
-        /// such as sales offer or past due notice, to tie the letter to a
-        /// business group or function.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="address">Type the complete recipient address for the
-        /// letter to ensure timely delivery.</param>
-        /// <param name="directioncode">Select the direction of the letter as
-        /// incoming or outbound.</param>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="subcategory">Type a subcategory to identify the letter
-        /// type and relate the activity to a specific product, sales region,
-        /// business group, or other function.</param>
-        /// <param name="subscriptionid">For internal use only.</param>
-        public MicrosoftDynamicsCRMletter(string category = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string address = default(string), bool? directioncode = default(bool?), int? importsequencenumber = default(int?), string subcategory = default(string), string subscriptionid = default(string), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementLetter = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateLetter = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingLetter = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderLetter = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordLetter = default(MicrosoftDynamicsCRMknowledgebaserecord), IList<MicrosoftDynamicsCRMactioncard> letterActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceLetter = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMcampaignresponse> letterCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignLetter = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyLetter = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyLetter = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> letterConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMbulkdeletefailure> letterBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMquote regardingobjectidQuoteLetter = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleLetter = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMsyncerror> letterSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitLetter = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMannotation> letterAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceLetter = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMsla slainvokedidLetterSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderLetter = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMteam owningteamLetter = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityLetter = default(MicrosoftDynamicsCRMcampaignactivity), IList<MicrosoftDynamicsCRMactivityparty> letterActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMservice serviceidLetter = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMasyncoperation> letterAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMcontract regardingobjectidContractLetter = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidLetter = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationLetter = default(MicrosoftDynamicsCRMbulkoperation), IList<MicrosoftDynamicsCRMconnection> letterConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser owninguserLetter = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> letterDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityLetter = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMqueueitem> letterQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMincident regardingobjectidIncidentLetter = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMsystemuser modifiedbyLetter = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMlead regardingobjectidLeadLetter = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMsla slaLetterSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsystemuser createdbyLetter = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> letterDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount regardingobjectidAccountLetter = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact regardingobjectidContactLetter = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessLetter = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationLetter = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintLetter = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationLetter = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesLetter = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerLetter = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationLetter = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), MicrosoftDynamicsCRMadoxioEvent regardingobjectidAdoxioEventLetter = default(MicrosoftDynamicsCRMadoxioEvent))
+        public MicrosoftDynamicsCRMletter(string category = default(string), string subcategory = default(string), bool? directioncode = default(bool?), string subscriptionid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string address = default(string), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementLetter = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateLetter = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingLetter = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderLetter = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordLetter = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMmsdynPostalbum regardingobjectidMsdynPostalbumLetter = default(MicrosoftDynamicsCRMmsdynPostalbum), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessLetter = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationLetter = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintLetter = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationLetter = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesLetter = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerLetter = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationLetter = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), MicrosoftDynamicsCRMsite regardingobjectidSiteLetter = default(MicrosoftDynamicsCRMsite), MicrosoftDynamicsCRMadoxioEvent regardingobjectidAdoxioEventLetter = default(MicrosoftDynamicsCRMadoxioEvent), IList<MicrosoftDynamicsCRMactioncard> letterActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> letterPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceLetter = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMprocesssession> letterProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMcampaignresponse> letterCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignLetter = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyLetter = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyLetter = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> letterConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMbulkdeletefailure> letterBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMquote regardingobjectidQuoteLetter = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleLetter = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMsyncerror> letterSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitLetter = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMannotation> letterAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceLetter = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMsla slainvokedidLetterSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderLetter = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMteam owningteamLetter = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityLetter = default(MicrosoftDynamicsCRMcampaignactivity), IList<MicrosoftDynamicsCRMactivityparty> letterActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMservice serviceidLetter = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMasyncoperation> letterAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMcontract regardingobjectidContractLetter = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidLetter = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationLetter = default(MicrosoftDynamicsCRMbulkoperation), IList<MicrosoftDynamicsCRMconnection> letterConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser owninguserLetter = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> letterDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityLetter = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMqueueitem> letterQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMincident regardingobjectidIncidentLetter = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMsystemuser modifiedbyLetter = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMlead regardingobjectidLeadLetter = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMsla slaLetterSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsystemuser createdbyLetter = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> letterDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount regardingobjectidAccountLetter = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact regardingobjectidContactLetter = default(MicrosoftDynamicsCRMcontact))
         {
             Category = category;
+            Subcategory = subcategory;
+            Directioncode = directioncode;
+            Subscriptionid = subscriptionid;
             Overriddencreatedon = overriddencreatedon;
             Address = address;
-            Directioncode = directioncode;
             Importsequencenumber = importsequencenumber;
-            Subcategory = subcategory;
-            Subscriptionid = subscriptionid;
             RegardingobjectidEntitlementLetter = regardingobjectidEntitlementLetter;
             RegardingobjectidEntitlementtemplateLetter = regardingobjectidEntitlementtemplateLetter;
             RegardingobjectidBookableresourcebookingLetter = regardingobjectidBookableresourcebookingLetter;
             RegardingobjectidBookableresourcebookingheaderLetter = regardingobjectidBookableresourcebookingheaderLetter;
             RegardingobjectidKnowledgebaserecordLetter = regardingobjectidKnowledgebaserecordLetter;
+            RegardingobjectidMsdynPostalbumLetter = regardingobjectidMsdynPostalbumLetter;
+            RegardingobjectidAbsScheduledprocessLetter = regardingobjectidAbsScheduledprocessLetter;
+            RegardingobjectidAdoxioApplicationLetter = regardingobjectidAdoxioApplicationLetter;
+            RegardingobjectidAdoxioComplaintLetter = regardingobjectidAdoxioComplaintLetter;
+            RegardingobjectidAdoxioInvestigationLetter = regardingobjectidAdoxioInvestigationLetter;
+            RegardingobjectidAdoxioLicencesLetter = regardingobjectidAdoxioLicencesLetter;
+            RegardingobjectidAdoxioWorkerLetter = regardingobjectidAdoxioWorkerLetter;
+            RegardingobjectidAdoxioComplianceinvestigationLetter = regardingobjectidAdoxioComplianceinvestigationLetter;
+            RegardingobjectidSiteLetter = regardingobjectidSiteLetter;
+            RegardingobjectidAdoxioEventLetter = regardingobjectidAdoxioEventLetter;
             LetterActioncard = letterActioncard;
+            LetterPrincipalobjectattributeaccess = letterPrincipalobjectattributeaccess;
             SlakpiinstanceLetter = slakpiinstanceLetter;
+            LetterProcessSessions = letterProcessSessions;
             LetterCampaignresponse = letterCampaignresponse;
             RegardingobjectidCampaignLetter = regardingobjectidCampaignLetter;
             StageidProcessstage = stageidProcessstage;
@@ -95,14 +92,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             LetterDuplicateMatchingRecord = letterDuplicateMatchingRecord;
             RegardingobjectidAccountLetter = regardingobjectidAccountLetter;
             RegardingobjectidContactLetter = regardingobjectidContactLetter;
-            RegardingobjectidAbsScheduledprocessLetter = regardingobjectidAbsScheduledprocessLetter;
-            RegardingobjectidAdoxioApplicationLetter = regardingobjectidAdoxioApplicationLetter;
-            RegardingobjectidAdoxioComplaintLetter = regardingobjectidAdoxioComplaintLetter;
-            RegardingobjectidAdoxioInvestigationLetter = regardingobjectidAdoxioInvestigationLetter;
-            RegardingobjectidAdoxioLicencesLetter = regardingobjectidAdoxioLicencesLetter;
-            RegardingobjectidAdoxioWorkerLetter = regardingobjectidAdoxioWorkerLetter;
-            RegardingobjectidAdoxioComplianceinvestigationLetter = regardingobjectidAdoxioComplianceinvestigationLetter;
-            RegardingobjectidAdoxioEventLetter = regardingobjectidAdoxioEventLetter;
             CustomInit();
         }
 
@@ -112,53 +101,39 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets type a category to identify the letter type, such as
-        /// sales offer or past due notice, to tie the letter to a business
-        /// group or function.
         /// </summary>
         [JsonProperty(PropertyName = "category")]
         public string Category { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the complete recipient address for the letter to
-        /// ensure timely delivery.
-        /// </summary>
-        [JsonProperty(PropertyName = "address")]
-        public string Address { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the direction of the letter as incoming or
-        /// outbound.
-        /// </summary>
-        [JsonProperty(PropertyName = "directioncode")]
-        public bool? Directioncode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a subcategory to identify the letter type and
-        /// relate the activity to a specific product, sales region, business
-        /// group, or other function.
         /// </summary>
         [JsonProperty(PropertyName = "subcategory")]
         public string Subcategory { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
+        /// </summary>
+        [JsonProperty(PropertyName = "directioncode")]
+        public bool? Directioncode { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "subscriptionid")]
         public string Subscriptionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address")]
+        public string Address { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -187,13 +162,73 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_msdyn_postalbum_letter")]
+        public MicrosoftDynamicsCRMmsdynPostalbum RegardingobjectidMsdynPostalbumLetter { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_abs_scheduledprocess_letter")]
+        public MicrosoftDynamicsCRMabsScheduledprocess RegardingobjectidAbsScheduledprocessLetter { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_application_letter")]
+        public MicrosoftDynamicsCRMadoxioApplication RegardingobjectidAdoxioApplicationLetter { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_complaint_letter")]
+        public MicrosoftDynamicsCRMadoxioComplaint RegardingobjectidAdoxioComplaintLetter { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_investigation_letter")]
+        public MicrosoftDynamicsCRMadoxioInvestigation RegardingobjectidAdoxioInvestigationLetter { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_licences_letter")]
+        public MicrosoftDynamicsCRMadoxioLicences RegardingobjectidAdoxioLicencesLetter { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_worker_letter")]
+        public MicrosoftDynamicsCRMadoxioWorker RegardingobjectidAdoxioWorkerLetter { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_complianceinvestigation_letter")]
+        public MicrosoftDynamicsCRMadoxioComplianceinvestigation RegardingobjectidAdoxioComplianceinvestigationLetter { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_site_letter")]
+        public MicrosoftDynamicsCRMsite RegardingobjectidSiteLetter { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_event_letter")]
+        public MicrosoftDynamicsCRMadoxioEvent RegardingobjectidAdoxioEventLetter { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "letter_actioncard")]
         public IList<MicrosoftDynamicsCRMactioncard> LetterActioncard { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "letter_principalobjectattributeaccess")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> LetterPrincipalobjectattributeaccess { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "slakpiinstance_letter")]
         public IList<MicrosoftDynamicsCRMslakpiinstance> SlakpiinstanceLetter { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Letter_ProcessSessions")]
+        public IList<MicrosoftDynamicsCRMprocesssession> LetterProcessSessions { get; set; }
 
         /// <summary>
         /// </summary>
@@ -379,46 +414,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_contact_letter")]
         public MicrosoftDynamicsCRMcontact RegardingobjectidContactLetter { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_abs_scheduledprocess_letter")]
-        public MicrosoftDynamicsCRMabsScheduledprocess RegardingobjectidAbsScheduledprocessLetter { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_application_letter")]
-        public MicrosoftDynamicsCRMadoxioApplication RegardingobjectidAdoxioApplicationLetter { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_complaint_letter")]
-        public MicrosoftDynamicsCRMadoxioComplaint RegardingobjectidAdoxioComplaintLetter { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_investigation_letter")]
-        public MicrosoftDynamicsCRMadoxioInvestigation RegardingobjectidAdoxioInvestigationLetter { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_licences_letter")]
-        public MicrosoftDynamicsCRMadoxioLicences RegardingobjectidAdoxioLicencesLetter { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_worker_letter")]
-        public MicrosoftDynamicsCRMadoxioWorker RegardingobjectidAdoxioWorkerLetter { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_complianceinvestigation_letter")]
-        public MicrosoftDynamicsCRMadoxioComplianceinvestigation RegardingobjectidAdoxioComplianceinvestigationLetter { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_event_letter")]
-        public MicrosoftDynamicsCRMadoxioEvent RegardingobjectidAdoxioEventLetter { get; set; }
 
     }
 }

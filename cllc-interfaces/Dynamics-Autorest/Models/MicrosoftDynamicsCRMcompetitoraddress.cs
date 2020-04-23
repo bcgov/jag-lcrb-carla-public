@@ -29,97 +29,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcompetitoraddress class.
         /// </summary>
-        /// <param name="stateorprovince">State or province in the competitor
-        /// address.</param>
-        /// <param name="utcoffset">UTC offset for address 1. This is the
-        /// difference between local time and standard Coordinated Universal
-        /// Time.</param>
-        /// <param name="composite">Shows the complete address.</param>
-        /// <param name="upszone">United Parcel Service (UPS) zone for the
-        /// address of the competitor.</param>
-        /// <param name="addresstypecode">Type of address for the competitor,
-        /// such as primary address.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who last modified the competitor address.</param>
-        /// <param name="modifiedon">Date and time when the competitor address
-        /// was last modified.</param>
-        /// <param name="postalcode">ZIP Code or postal code in the competitor
-        /// address.</param>
-        /// <param name="latitude">Latitude for the competitor address.</param>
-        /// <param name="versionnumber">Version number of the competitor
-        /// address.</param>
-        /// <param name="telephone1">First telephone number for the competitor
-        /// address.</param>
-        /// <param name="name">Name used to identify the competitor
-        /// address.</param>
-        /// <param name="telephone2">Second telephone number for the competitor
-        /// address.</param>
-        /// <param name="county">County name in the competitor address.</param>
-        /// <param name="addressnumber">Information about which competitor
-        /// address is applicable.</param>
-        /// <param name="city">City name in the competitor address.</param>
-        /// <param name="longitude">Longitude for the address for the
-        /// competitor.</param>
-        /// <param name="telephone3">Third telephone number for the competitor
-        /// address.</param>
-        /// <param name="country">Country/region name in the competitor
-        /// address.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the competitor address.</param>
-        /// <param name="createdon">Date and time when the competitor address
-        /// was created.</param>
-        /// <param name="fax">Fax number for the competitor address.</param>
-        /// <param name="_parentidValue">Unique identifier of the parent object
-        /// with which the competitor address is associated.</param>
-        /// <param name="line1">First line for entering address
-        /// information.</param>
-        /// <param name="line3">Third line for entering address
-        /// information.</param>
-        /// <param name="line2">Second line for entering address
-        /// information.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the competitor address.</param>
-        /// <param name="competitoraddressid">Unique identifier of the
-        /// competitor address.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// last modified the competitor address.</param>
-        /// <param name="shippingmethodcode">Method of shipment for the
-        /// competitor.</param>
-        /// <param name="postofficebox">Post office box number in the
-        /// competitor address.</param>
-        public MicrosoftDynamicsCRMcompetitoraddress(string stateorprovince = default(string), int? utcoffset = default(int?), string composite = default(string), string upszone = default(string), int? addresstypecode = default(int?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string postalcode = default(string), decimal? latitude = default(decimal?), string versionnumber = default(string), string telephone1 = default(string), string name = default(string), string telephone2 = default(string), string county = default(string), int? addressnumber = default(int?), string city = default(string), decimal? longitude = default(decimal?), string telephone3 = default(string), string country = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string fax = default(string), string _parentidValue = default(string), string line1 = default(string), string line3 = default(string), string line2 = default(string), string _createdonbehalfbyValue = default(string), string competitoraddressid = default(string), string _modifiedbyValue = default(string), int? shippingmethodcode = default(int?), string postofficebox = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> competitorAddressSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcompetitor parentid = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMcompetitoraddress(string stateorprovince = default(string), string telephone2 = default(string), int? utcoffset = default(int?), string composite = default(string), string upszone = default(string), int? addresstypecode = default(int?), string _modifiedonbehalfbyValue = default(string), string line1 = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string postalcode = default(string), decimal? latitude = default(decimal?), string versionnumber = default(string), string telephone1 = default(string), string name = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string county = default(string), int? addressnumber = default(int?), string city = default(string), string telephone3 = default(string), int? importsequencenumber = default(int?), decimal? longitude = default(decimal?), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), string fax = default(string), string _parentidValue = default(string), string line3 = default(string), string line2 = default(string), string _createdonbehalfbyValue = default(string), string country = default(string), string competitoraddressid = default(string), string _modifiedbyValue = default(string), int? shippingmethodcode = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string postofficebox = default(string), IList<MicrosoftDynamicsCRMteam> competitoraddressTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> competitoraddressAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> competitoraddressMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> competitoraddressBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> competitoraddressPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> competitorAddressSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcompetitor parentid = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Stateorprovince = stateorprovince;
+            Telephone2 = telephone2;
             Utcoffset = utcoffset;
             Composite = composite;
             Upszone = upszone;
             Addresstypecode = addresstypecode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Line1 = line1;
             Modifiedon = modifiedon;
             Postalcode = postalcode;
             Latitude = latitude;
             Versionnumber = versionnumber;
             Telephone1 = telephone1;
             Name = name;
-            Telephone2 = telephone2;
+            Createdon = createdon;
             County = county;
             Addressnumber = addressnumber;
             City = city;
-            Longitude = longitude;
             Telephone3 = telephone3;
-            Country = country;
+            Importsequencenumber = importsequencenumber;
+            Longitude = longitude;
             this._createdbyValue = _createdbyValue;
-            Createdon = createdon;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Fax = fax;
             this._parentidValue = _parentidValue;
-            Line1 = line1;
             Line3 = line3;
             Line2 = line2;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Country = country;
             Competitoraddressid = competitoraddressid;
             this._modifiedbyValue = _modifiedbyValue;
             Shippingmethodcode = shippingmethodcode;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Overriddencreatedon = overriddencreatedon;
             Postofficebox = postofficebox;
+            CompetitoraddressTeams = competitoraddressTeams;
+            CompetitoraddressAsyncOperations = competitoraddressAsyncOperations;
+            CompetitoraddressMailboxTrackingFolders = competitoraddressMailboxTrackingFolders;
+            CompetitoraddressBulkDeleteFailures = competitoraddressBulkDeleteFailures;
+            CompetitoraddressPrincipalObjectAttributeAccesses = competitoraddressPrincipalObjectAttributeAccesses;
             Createdby = createdby;
             Modifiedby = modifiedby;
             CompetitorAddressSyncErrors = competitorAddressSyncErrors;
@@ -135,200 +86,204 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets state or province in the competitor address.
         /// </summary>
         [JsonProperty(PropertyName = "stateorprovince")]
         public string Stateorprovince { get; set; }
 
         /// <summary>
-        /// Gets or sets UTC offset for address 1. This is the difference
-        /// between local time and standard Coordinated Universal Time.
-        /// </summary>
-        [JsonProperty(PropertyName = "utcoffset")]
-        public int? Utcoffset { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the complete address.
-        /// </summary>
-        [JsonProperty(PropertyName = "composite")]
-        public string Composite { get; set; }
-
-        /// <summary>
-        /// Gets or sets united Parcel Service (UPS) zone for the address of
-        /// the competitor.
-        /// </summary>
-        [JsonProperty(PropertyName = "upszone")]
-        public string Upszone { get; set; }
-
-        /// <summary>
-        /// Gets or sets type of address for the competitor, such as primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "addresstypecode")]
-        public int? Addresstypecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who last
-        /// modified the competitor address.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the competitor address was last
-        /// modified.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets ZIP Code or postal code in the competitor address.
-        /// </summary>
-        [JsonProperty(PropertyName = "postalcode")]
-        public string Postalcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets latitude for the competitor address.
-        /// </summary>
-        [JsonProperty(PropertyName = "latitude")]
-        public decimal? Latitude { get; set; }
-
-        /// <summary>
-        /// Gets or sets version number of the competitor address.
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets first telephone number for the competitor address.
-        /// </summary>
-        [JsonProperty(PropertyName = "telephone1")]
-        public string Telephone1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets name used to identify the competitor address.
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets second telephone number for the competitor address.
         /// </summary>
         [JsonProperty(PropertyName = "telephone2")]
         public string Telephone2 { get; set; }
 
         /// <summary>
-        /// Gets or sets county name in the competitor address.
         /// </summary>
-        [JsonProperty(PropertyName = "county")]
-        public string County { get; set; }
+        [JsonProperty(PropertyName = "utcoffset")]
+        public int? Utcoffset { get; set; }
 
         /// <summary>
-        /// Gets or sets information about which competitor address is
-        /// applicable.
         /// </summary>
-        [JsonProperty(PropertyName = "addressnumber")]
-        public int? Addressnumber { get; set; }
+        [JsonProperty(PropertyName = "composite")]
+        public string Composite { get; set; }
 
         /// <summary>
-        /// Gets or sets city name in the competitor address.
         /// </summary>
-        [JsonProperty(PropertyName = "city")]
-        public string City { get; set; }
+        [JsonProperty(PropertyName = "upszone")]
+        public string Upszone { get; set; }
 
         /// <summary>
-        /// Gets or sets longitude for the address for the competitor.
         /// </summary>
-        [JsonProperty(PropertyName = "longitude")]
-        public decimal? Longitude { get; set; }
+        [JsonProperty(PropertyName = "addresstypecode")]
+        public int? Addresstypecode { get; set; }
 
         /// <summary>
-        /// Gets or sets third telephone number for the competitor address.
         /// </summary>
-        [JsonProperty(PropertyName = "telephone3")]
-        public string Telephone3 { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets country/region name in the competitor address.
-        /// </summary>
-        [JsonProperty(PropertyName = "country")]
-        public string Country { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the
-        /// competitor address.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the competitor address was created.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// Gets or sets fax number for the competitor address.
-        /// </summary>
-        [JsonProperty(PropertyName = "fax")]
-        public string Fax { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the parent object with which the
-        /// competitor address is associated.
-        /// </summary>
-        [JsonProperty(PropertyName = "_parentid_value")]
-        public string _parentidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets first line for entering address information.
         /// </summary>
         [JsonProperty(PropertyName = "line1")]
         public string Line1 { get; set; }
 
         /// <summary>
-        /// Gets or sets third line for entering address information.
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "postalcode")]
+        public string Postalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "latitude")]
+        public decimal? Latitude { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "telephone1")]
+        public string Telephone1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "county")]
+        public string County { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "addressnumber")]
+        public int? Addressnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "city")]
+        public string City { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "telephone3")]
+        public string Telephone3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "longitude")]
+        public decimal? Longitude { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "fax")]
+        public string Fax { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_parentid_value")]
+        public string _parentidValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "line3")]
         public string Line3 { get; set; }
 
         /// <summary>
-        /// Gets or sets second line for entering address information.
         /// </summary>
         [JsonProperty(PropertyName = "line2")]
         public string Line2 { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// competitor address.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the competitor address.
+        /// </summary>
+        [JsonProperty(PropertyName = "country")]
+        public string Country { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "competitoraddressid")]
         public string Competitoraddressid { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who last modified the
-        /// competitor address.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets method of shipment for the competitor.
         /// </summary>
         [JsonProperty(PropertyName = "shippingmethodcode")]
         public int? Shippingmethodcode { get; set; }
 
         /// <summary>
-        /// Gets or sets post office box number in the competitor address.
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "postofficebox")]
         public string Postofficebox { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "competitoraddress_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> CompetitoraddressTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "competitoraddress_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> CompetitoraddressAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "competitoraddress_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> CompetitoraddressMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "competitoraddress_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> CompetitoraddressBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "competitoraddress_PrincipalObjectAttributeAccesses")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> CompetitoraddressPrincipalObjectAttributeAccesses { get; set; }
 
         /// <summary>
         /// </summary>
