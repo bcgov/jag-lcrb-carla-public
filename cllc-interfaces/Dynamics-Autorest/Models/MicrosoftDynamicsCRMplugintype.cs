@@ -29,88 +29,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMplugintype
         /// class.
         /// </summary>
-        /// <param name="name">Name of the plug-in type.</param>
-        /// <param name="assemblyname">Full path name of the plug-in
-        /// assembly.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the plug-in type.</param>
-        /// <param name="friendlyname">User friendly name for the
-        /// plug-in.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// last modified the plug-in type.</param>
-        /// <param name="publickeytoken">Public key token of the assembly for
-        /// the plug-in type.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the plugintype.</param>
-        /// <param name="version">Version number of the assembly for the
-        /// plug-in type.</param>
-        /// <param name="_pluginassemblyidValue">Unique identifier of the
-        /// plug-in assembly that contains this plug-in type.</param>
-        /// <param name="culture">Culture code for the plug-in
-        /// assembly.</param>
-        /// <param name="plugintypeid">Unique identifier of the plug-in
-        /// type.</param>
-        /// <param name="customworkflowactivityinfo">Serialized Custom Activity
-        /// Type information, including required arguments. For more
-        /// information, see SandboxCustomActivityInfo.</param>
-        /// <param name="createdon">Date and time when the plug-in type was
-        /// created.</param>
-        /// <param name="major">Major of the version number of the assembly for
-        /// the plug-in type.</param>
-        /// <param name="workflowactivitygroupname">Group name of workflow
-        /// custom activity.</param>
-        /// <param name="componentstate">For internal use only.</param>
-        /// <param name="typename">Fully qualified type name of the plug-in
-        /// type.</param>
-        /// <param name="minor">Minor of the version number of the assembly for
-        /// the plug-in type.</param>
-        /// <param name="plugintypeidunique">Unique identifier of the plug-in
-        /// type.</param>
-        /// <param name="modifiedon">Date and time when the plug-in type was
-        /// last modified.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who last modified the plugintype.</param>
-        /// <param name="customizationlevel">Customization level of the plug-in
-        /// type.</param>
-        /// <param name="description">Description of the plug-in type.</param>
-        /// <param name="overwritetime">For internal use only.</param>
-        /// <param name="_organizationidValue">Unique identifier of the
-        /// organization with which the plug-in type is associated.</param>
-        /// <param name="isworkflowactivity">Indicates if the plug-in is a
-        /// custom activity for workflows.</param>
-        /// <param name="solutionid">Unique identifier of the associated
-        /// solution.</param>
-        public MicrosoftDynamicsCRMplugintype(string name = default(string), string assemblyname = default(string), string _createdbyValue = default(string), string friendlyname = default(string), string _modifiedbyValue = default(string), string publickeytoken = default(string), string _createdonbehalfbyValue = default(string), string version = default(string), string _pluginassemblyidValue = default(string), string culture = default(string), string plugintypeid = default(string), string versionnumber = default(string), string customworkflowactivityinfo = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? major = default(int?), string workflowactivitygroupname = default(string), int? componentstate = default(int?), string typename = default(string), int? minor = default(int?), string plugintypeidunique = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? customizationlevel = default(int?), string description = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), string _organizationidValue = default(string), bool? isworkflowactivity = default(bool?), string solutionid = default(string), IList<MicrosoftDynamicsCRMservice> pluginTypeService = default(IList<MicrosoftDynamicsCRMservice>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpluginassembly pluginassemblyid = default(MicrosoftDynamicsCRMpluginassembly), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> plugintypeidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> plugintypeSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMplugintype(string versionnumber = default(string), string plugintypeid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? isworkflowactivity = default(bool?), string _createdonbehalfbyValue = default(string), string workflowactivitygroupname = default(string), string _organizationidValue = default(string), int? minor = default(int?), string _createdbyValue = default(string), string culture = default(string), string version = default(string), bool? ismanaged = default(bool?), string description = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string friendlyname = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? customizationlevel = default(int?), string solutionid = default(string), string plugintypeidunique = default(string), string name = default(string), string publickeytoken = default(string), int? componentstate = default(int?), string assemblyname = default(string), string customworkflowactivityinfo = default(string), string _pluginassemblyidValue = default(string), string typename = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? major = default(int?), IList<MicrosoftDynamicsCRMservice> pluginTypeService = default(IList<MicrosoftDynamicsCRMservice>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpluginassembly pluginassemblyid = default(MicrosoftDynamicsCRMpluginassembly), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> plugintypeidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> plugintypeSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMplugintypestatistic> plugintypePlugintypestatistic = default(IList<MicrosoftDynamicsCRMplugintypestatistic>))
         {
-            Name = name;
-            Assemblyname = assemblyname;
-            this._createdbyValue = _createdbyValue;
-            Friendlyname = friendlyname;
-            this._modifiedbyValue = _modifiedbyValue;
-            Publickeytoken = publickeytoken;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Version = version;
-            this._pluginassemblyidValue = _pluginassemblyidValue;
-            Culture = culture;
-            Plugintypeid = plugintypeid;
             Versionnumber = versionnumber;
-            Customworkflowactivityinfo = customworkflowactivityinfo;
-            Createdon = createdon;
-            Major = major;
-            Workflowactivitygroupname = workflowactivitygroupname;
-            Componentstate = componentstate;
-            Typename = typename;
-            Minor = minor;
-            Plugintypeidunique = plugintypeidunique;
-            Modifiedon = modifiedon;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Customizationlevel = customizationlevel;
-            Description = description;
+            Plugintypeid = plugintypeid;
             Overwritetime = overwritetime;
-            Ismanaged = ismanaged;
-            this._organizationidValue = _organizationidValue;
             Isworkflowactivity = isworkflowactivity;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Workflowactivitygroupname = workflowactivitygroupname;
+            this._organizationidValue = _organizationidValue;
+            Minor = minor;
+            this._createdbyValue = _createdbyValue;
+            Culture = culture;
+            Version = version;
+            Ismanaged = ismanaged;
+            Description = description;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Friendlyname = friendlyname;
+            Createdon = createdon;
+            Customizationlevel = customizationlevel;
             Solutionid = solutionid;
+            Plugintypeidunique = plugintypeidunique;
+            Name = name;
+            Publickeytoken = publickeytoken;
+            Componentstate = componentstate;
+            Assemblyname = assemblyname;
+            Customworkflowactivityinfo = customworkflowactivityinfo;
+            this._pluginassemblyidValue = _pluginassemblyidValue;
+            Typename = typename;
+            Modifiedon = modifiedon;
+            Major = major;
             PluginTypeService = pluginTypeService;
             Modifiedby = modifiedby;
             Pluginassemblyid = pluginassemblyid;
@@ -120,6 +69,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Createdby = createdby;
             PlugintypeSdkmessageprocessingstep = plugintypeSdkmessageprocessingstep;
             Modifiedonbehalfby = modifiedonbehalfby;
+            PlugintypePlugintypestatistic = plugintypePlugintypestatistic;
             CustomInit();
         }
 
@@ -129,162 +79,59 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets name of the plug-in type.
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets full path name of the plug-in assembly.
-        /// </summary>
-        [JsonProperty(PropertyName = "assemblyname")]
-        public string Assemblyname { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the plug-in
-        /// type.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets user friendly name for the plug-in.
-        /// </summary>
-        [JsonProperty(PropertyName = "friendlyname")]
-        public string Friendlyname { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who last modified the
-        /// plug-in type.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets public key token of the assembly for the plug-in type.
-        /// </summary>
-        [JsonProperty(PropertyName = "publickeytoken")]
-        public string Publickeytoken { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// plugintype.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets version number of the assembly for the plug-in type.
-        /// </summary>
-        [JsonProperty(PropertyName = "version")]
-        public string Version { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the plug-in assembly that
-        /// contains this plug-in type.
-        /// </summary>
-        [JsonProperty(PropertyName = "_pluginassemblyid_value")]
-        public string _pluginassemblyidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets culture code for the plug-in assembly.
-        /// </summary>
-        [JsonProperty(PropertyName = "culture")]
-        public string Culture { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the plug-in type.
         /// </summary>
         [JsonProperty(PropertyName = "plugintypeid")]
         public string Plugintypeid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
-        /// Gets or sets serialized Custom Activity Type information, including
-        /// required arguments. For more information, see
-        /// SandboxCustomActivityInfo.
         /// </summary>
-        [JsonProperty(PropertyName = "customworkflowactivityinfo")]
-        public string Customworkflowactivityinfo { get; set; }
+        [JsonProperty(PropertyName = "isworkflowactivity")]
+        public bool? Isworkflowactivity { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the plug-in type was created.
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets major of the version number of the assembly for the
-        /// plug-in type.
-        /// </summary>
-        [JsonProperty(PropertyName = "major")]
-        public int? Major { get; set; }
-
-        /// <summary>
-        /// Gets or sets group name of workflow custom activity.
         /// </summary>
         [JsonProperty(PropertyName = "workflowactivitygroupname")]
         public string Workflowactivitygroupname { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets fully qualified type name of the plug-in type.
-        /// </summary>
-        [JsonProperty(PropertyName = "typename")]
-        public string Typename { get; set; }
-
-        /// <summary>
-        /// Gets or sets minor of the version number of the assembly for the
-        /// plug-in type.
         /// </summary>
         [JsonProperty(PropertyName = "minor")]
         public int? Minor { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the plug-in type.
         /// </summary>
-        [JsonProperty(PropertyName = "plugintypeidunique")]
-        public string Plugintypeidunique { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the plug-in type was last modified.
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "culture")]
+        public string Culture { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the delegate user who last
-        /// modified the plugintype.
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets customization level of the plug-in type.
-        /// </summary>
-        [JsonProperty(PropertyName = "customizationlevel")]
-        public int? Customizationlevel { get; set; }
-
-        /// <summary>
-        /// Gets or sets description of the plug-in type.
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
+        [JsonProperty(PropertyName = "version")]
+        public string Version { get; set; }
 
         /// <summary>
         /// </summary>
@@ -292,24 +139,89 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public bool? Ismanaged { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the organization with which the
-        /// plug-in type is associated.
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets indicates if the plug-in is a custom activity for
-        /// workflows.
         /// </summary>
-        [JsonProperty(PropertyName = "isworkflowactivity")]
-        public bool? Isworkflowactivity { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the associated solution.
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "friendlyname")]
+        public string Friendlyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "customizationlevel")]
+        public int? Customizationlevel { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
         public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "plugintypeidunique")]
+        public string Plugintypeidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "publickeytoken")]
+        public string Publickeytoken { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "assemblyname")]
+        public string Assemblyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "customworkflowactivityinfo")]
+        public string Customworkflowactivityinfo { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_pluginassemblyid_value")]
+        public string _pluginassemblyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "typename")]
+        public string Typename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "major")]
+        public int? Major { get; set; }
 
         /// <summary>
         /// </summary>
@@ -355,6 +267,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "modifiedonbehalfby")]
         public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "plugintype_plugintypestatistic")]
+        public IList<MicrosoftDynamicsCRMplugintypestatistic> PlugintypePlugintypestatistic { get; set; }
 
     }
 }

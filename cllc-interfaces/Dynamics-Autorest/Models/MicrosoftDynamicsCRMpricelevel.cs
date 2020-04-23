@@ -29,79 +29,34 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMpricelevel
         /// class.
         /// </summary>
-        /// <param name="_transactioncurrencyidValue">Unique identifier of the
-        /// currency associated with the price level.</param>
-        /// <param name="paymentmethodcode">Payment terms to use with the price
-        /// list.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the pricelevel.</param>
-        /// <param name="freighttermscode">Freight terms for the price
-        /// list.</param>
-        /// <param name="versionnumber">Version number of the price
-        /// level.</param>
-        /// <param name="description">Description of the price list.</param>
-        /// <param name="exchangerate">Shows the conversion rate of the
-        /// record's currency. The exchange rate is used to convert all money
-        /// fields in the record from the local currency to the system's
-        /// default currency.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// last modified the price list.</param>
-        /// <param name="statecode">Status of the price list.</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="createdon">Date and time when the price list was
-        /// created.</param>
-        /// <param name="_organizationidValue">Unique identifier of the
-        /// organization associated with the price list.</param>
-        /// <param name="name">Name of the price list.</param>
-        /// <param name="begindate">Date on which the price list becomes
-        /// effective.</param>
-        /// <param name="enddate">Date that is the last day the price list is
-        /// valid.</param>
-        /// <param name="statuscode">Reason for the status of the price
-        /// list.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who last modified the pricelevel.</param>
-        /// <param name="pricelevelid">Unique identifier of the price
-        /// list.</param>
-        /// <param name="shippingmethodcode">Method of shipment for products in
-        /// the price list.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="modifiedon">Date and time when the price list was last
-        /// modified.</param>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the price list.</param>
-        public MicrosoftDynamicsCRMpricelevel(string _transactioncurrencyidValue = default(string), int? paymentmethodcode = default(int?), string _createdonbehalfbyValue = default(string), int? freighttermscode = default(int?), string versionnumber = default(string), string description = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? statecode = default(int?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _organizationidValue = default(string), string name = default(string), System.DateTimeOffset? begindate = default(System.DateTimeOffset?), System.DateTimeOffset? enddate = default(System.DateTimeOffset?), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string pricelevelid = default(string), int? shippingmethodcode = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> pricelevelConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMproduct> priceLevelProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMquote> priceLevelQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMproductpricelevel> priceLevelProductPriceLevels = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMsalesorder> priceLevelOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> priceLevelSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMopportunity> priceLevelOpportunties = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMinvoice> priceLevelInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMbulkdeletefailure> priceLevelBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMaccount> priceLevelAccounts = default(IList<MicrosoftDynamicsCRMaccount>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMcampaign> priceListCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMcontact> priceLevelContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMasyncoperation> priceLevelAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMconnection> pricelevelConnections1 = default(IList<MicrosoftDynamicsCRMconnection>))
+        public MicrosoftDynamicsCRMpricelevel(int? shippingmethodcode = default(int?), decimal? exchangerate = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? begindate = default(System.DateTimeOffset?), int? statecode = default(int?), int? importsequencenumber = default(int?), string _organizationidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? enddate = default(System.DateTimeOffset?), string _createdbyValue = default(string), int? paymentmethodcode = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string versionnumber = default(string), int? freighttermscode = default(int?), string name = default(string), int? statuscode = default(int?), string description = default(string), string _modifiedonbehalfbyValue = default(string), string pricelevelid = default(string), IList<MicrosoftDynamicsCRMteam> pricelevelTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> pricelevelMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> pricelevelConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMproduct> priceLevelProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMquote> priceLevelQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMproductpricelevel> priceLevelProductPriceLevels = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMsalesorder> priceLevelOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> priceLevelSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> pricelevelPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMopportunity> priceLevelOpportunties = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMinvoice> priceLevelInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMbulkdeletefailure> priceLevelBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMaccount> priceLevelAccounts = default(IList<MicrosoftDynamicsCRMaccount>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMcampaign> priceListCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMcontact> priceLevelContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMprocesssession> priceLevelProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMasyncoperation> priceLevelAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMconnection> pricelevelConnections1 = default(IList<MicrosoftDynamicsCRMconnection>))
         {
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Paymentmethodcode = paymentmethodcode;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Freighttermscode = freighttermscode;
-            Versionnumber = versionnumber;
-            Description = description;
+            Shippingmethodcode = shippingmethodcode;
             Exchangerate = exchangerate;
-            Overriddencreatedon = overriddencreatedon;
-            this._modifiedbyValue = _modifiedbyValue;
-            Statecode = statecode;
+            Modifiedon = modifiedon;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            Createdon = createdon;
-            this._organizationidValue = _organizationidValue;
-            Name = name;
             Begindate = begindate;
+            Statecode = statecode;
+            Importsequencenumber = importsequencenumber;
+            this._organizationidValue = _organizationidValue;
+            Overriddencreatedon = overriddencreatedon;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Enddate = enddate;
+            this._createdbyValue = _createdbyValue;
+            Paymentmethodcode = paymentmethodcode;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Createdon = createdon;
+            this._modifiedbyValue = _modifiedbyValue;
+            Versionnumber = versionnumber;
+            Freighttermscode = freighttermscode;
+            Name = name;
             Statuscode = statuscode;
+            Description = description;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Pricelevelid = pricelevelid;
-            Shippingmethodcode = shippingmethodcode;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Modifiedon = modifiedon;
-            Importsequencenumber = importsequencenumber;
-            this._createdbyValue = _createdbyValue;
+            PricelevelTeams = pricelevelTeams;
+            PricelevelMailboxTrackingFolders = pricelevelMailboxTrackingFolders;
             Modifiedonbehalfby = modifiedonbehalfby;
             Createdonbehalfby = createdonbehalfby;
             PricelevelConnections2 = pricelevelConnections2;
@@ -113,6 +68,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Modifiedby = modifiedby;
             Transactioncurrencyid = transactioncurrencyid;
             PriceLevelSyncErrors = priceLevelSyncErrors;
+            PricelevelPrincipalobjectattributeaccess = pricelevelPrincipalobjectattributeaccess;
             PriceLevelOpportunties = priceLevelOpportunties;
             PriceLevelInvoices = priceLevelInvoices;
             PriceLevelBulkDeleteFailures = priceLevelBulkDeleteFailures;
@@ -120,6 +76,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Organizationid = organizationid;
             PriceListCampaigns = priceListCampaigns;
             PriceLevelContacts = priceLevelContacts;
+            PriceLevelProcessSessions = priceLevelProcessSessions;
             PriceLevelAsyncOperations = priceLevelAsyncOperations;
             PricelevelConnections1 = pricelevelConnections1;
             CustomInit();
@@ -131,158 +88,134 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets unique identifier of the currency associated with the
-        /// price level.
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets payment terms to use with the price list.
-        /// </summary>
-        [JsonProperty(PropertyName = "paymentmethodcode")]
-        public int? Paymentmethodcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// pricelevel.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets freight terms for the price list.
-        /// </summary>
-        [JsonProperty(PropertyName = "freighttermscode")]
-        public int? Freighttermscode { get; set; }
-
-        /// <summary>
-        /// Gets or sets version number of the price level.
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets description of the price list.
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the conversion rate of the record's currency.
-        /// The exchange rate is used to convert all money fields in the record
-        /// from the local currency to the system's default currency.
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who last modified the
-        /// price list.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets status of the price list.
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the price list was created.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the organization associated with
-        /// the price list.
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets name of the price list.
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets date on which the price list becomes effective.
-        /// </summary>
-        [JsonProperty(PropertyName = "begindate")]
-        public System.DateTimeOffset? Begindate { get; set; }
-
-        /// <summary>
-        /// Gets or sets date that is the last day the price list is valid.
-        /// </summary>
-        [JsonProperty(PropertyName = "enddate")]
-        public System.DateTimeOffset? Enddate { get; set; }
-
-        /// <summary>
-        /// Gets or sets reason for the status of the price list.
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who last
-        /// modified the pricelevel.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the price list.
-        /// </summary>
-        [JsonProperty(PropertyName = "pricelevelid")]
-        public string Pricelevelid { get; set; }
-
-        /// <summary>
-        /// Gets or sets method of shipment for products in the price list.
         /// </summary>
         [JsonProperty(PropertyName = "shippingmethodcode")]
         public int? Shippingmethodcode { get; set; }
 
         /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the price list was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "begindate")]
+        public System.DateTimeOffset? Begindate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who created the price
-        /// list.
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "enddate")]
+        public System.DateTimeOffset? Enddate { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "paymentmethodcode")]
+        public int? Paymentmethodcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "freighttermscode")]
+        public int? Freighttermscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "pricelevelid")]
+        public string Pricelevelid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "pricelevel_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> PricelevelTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "pricelevel_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> PricelevelMailboxTrackingFolders { get; set; }
 
         /// <summary>
         /// </summary>
@@ -341,6 +274,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "pricelevel_principalobjectattributeaccess")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> PricelevelPrincipalobjectattributeaccess { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "price_level_opportunties")]
         public IList<MicrosoftDynamicsCRMopportunity> PriceLevelOpportunties { get; set; }
 
@@ -373,6 +311,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "price_level_contacts")]
         public IList<MicrosoftDynamicsCRMcontact> PriceLevelContacts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "PriceLevel_ProcessSessions")]
+        public IList<MicrosoftDynamicsCRMprocesssession> PriceLevelProcessSessions { get; set; }
 
         /// <summary>
         /// </summary>

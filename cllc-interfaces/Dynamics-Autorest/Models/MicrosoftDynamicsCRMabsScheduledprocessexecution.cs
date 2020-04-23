@@ -29,16 +29,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMabsScheduledprocessexecution class.
         /// </summary>
-        /// <param name="absRecordsprocessed">Tracks the number of records
-        /// processed as part of the execution.</param>
-        /// <param name="importsequencenumber">Sequence number of the import
-        /// that created this record.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        public MicrosoftDynamicsCRMabsScheduledprocessexecution(int? absRecordsprocessed = default(int?), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemailAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMaccount regardingobjectidAccountAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontract regardingobjectidContractAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMsystemuser createdbyAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact regardingobjectidContactAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMmailbox sendermailboxidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMprincipal owneridAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsystemuser owninguserAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsla slaActivitypointerSlaAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMbusinessunit owningbusinessunitAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMquote regardingobjectidQuoteAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMlead regardingobjectidLeadAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMservice serviceidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMincident regardingobjectidIncidentAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMteam owningteamAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSlaAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMactivitypointer activityidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMactivityparty> absScheduledprocessexecutionActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMcampaignresponse> campaignResponseAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMactioncard> absScheduledprocessexecutionActionCards = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMsyncerror> absScheduledprocessexecutionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMconnection> absScheduledprocessexecutionConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> absScheduledprocessexecutionConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMqueueitem> absScheduledprocessexecutionQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> absScheduledprocessexecutionAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMfeedback> absScheduledprocessexecutionFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMasyncoperation> absScheduledprocessexecutionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> absScheduledprocessexecutionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), MicrosoftDynamicsCRMadoxioEvent regardingobjectidAdoxioEventAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMadoxioEvent))
+        public MicrosoftDynamicsCRMabsScheduledprocessexecution(int? importsequencenumber = default(int?), int? absRecordsprocessed = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemailAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMmsdynPostalbum regardingobjectidMsdynPostalbumAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMmsdynPostalbum), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMaccount regardingobjectidAccountAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontract regardingobjectidContractAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMsystemuser createdbyAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact regardingobjectidContactAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMmailbox sendermailboxidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMprincipal owneridAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsystemuser owninguserAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsla slaActivitypointerSlaAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMbusinessunit owningbusinessunitAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMquote regardingobjectidQuoteAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMlead regardingobjectidLeadAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMservice serviceidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMincident regardingobjectidIncidentAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMteam owningteamAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSlaAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMactivitypointer activityidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMactivityparty> absScheduledprocessexecutionActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMcampaignresponse> campaignResponseAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMactioncard> absScheduledprocessexecutionActionCards = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMsyncerror> absScheduledprocessexecutionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMconnection> absScheduledprocessexecutionConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> absScheduledprocessexecutionConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMqueueitem> absScheduledprocessexecutionQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> absScheduledprocessexecutionAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMfeedback> absScheduledprocessexecutionFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMasyncoperation> absScheduledprocessexecutionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> absScheduledprocessexecutionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> absScheduledprocessexecutionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> absScheduledprocessexecutionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> absScheduledprocessexecutionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), MicrosoftDynamicsCRMsite regardingobjectidSiteAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMsite), MicrosoftDynamicsCRMadoxioEvent regardingobjectidAdoxioEventAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMadoxioEvent))
         {
-            AbsRecordsprocessed = absRecordsprocessed;
             Importsequencenumber = importsequencenumber;
+            AbsRecordsprocessed = absRecordsprocessed;
             Overriddencreatedon = overriddencreatedon;
             RegardingobjectidNewInteractionforemailAbsScheduledprocessexecution = regardingobjectidNewInteractionforemailAbsScheduledprocessexecution;
             RegardingobjectidEntitlementAbsScheduledprocessexecution = regardingobjectidEntitlementAbsScheduledprocessexecution;
@@ -46,6 +40,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             RegardingobjectidBookableresourcebookingAbsScheduledprocessexecution = regardingobjectidBookableresourcebookingAbsScheduledprocessexecution;
             RegardingobjectidBookableresourcebookingheaderAbsScheduledprocessexecution = regardingobjectidBookableresourcebookingheaderAbsScheduledprocessexecution;
             RegardingobjectidKnowledgebaserecordAbsScheduledprocessexecution = regardingobjectidKnowledgebaserecordAbsScheduledprocessexecution;
+            RegardingobjectidMsdynPostalbumAbsScheduledprocessexecution = regardingobjectidMsdynPostalbumAbsScheduledprocessexecution;
             RegardingobjectidAbsScheduledprocessAbsScheduledprocessexecution = regardingobjectidAbsScheduledprocessAbsScheduledprocessexecution;
             RegardingobjectidAccountAbsScheduledprocessexecution = regardingobjectidAccountAbsScheduledprocessexecution;
             RegardingobjectidContractAbsScheduledprocessexecution = regardingobjectidContractAbsScheduledprocessexecution;
@@ -84,13 +79,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AbsScheduledprocessexecutionAnnotations = absScheduledprocessexecutionAnnotations;
             AbsScheduledprocessexecutionFeedback = absScheduledprocessexecutionFeedback;
             AbsScheduledprocessexecutionAsyncOperations = absScheduledprocessexecutionAsyncOperations;
+            AbsScheduledprocessexecutionMailboxTrackingFolders = absScheduledprocessexecutionMailboxTrackingFolders;
+            AbsScheduledprocessexecutionProcessSession = absScheduledprocessexecutionProcessSession;
             AbsScheduledprocessexecutionBulkDeleteFailures = absScheduledprocessexecutionBulkDeleteFailures;
+            AbsScheduledprocessexecutionPrincipalObjectAttributeAccesses = absScheduledprocessexecutionPrincipalObjectAttributeAccesses;
             RegardingobjectidAdoxioApplicationAbsScheduledprocessexecution = regardingobjectidAdoxioApplicationAbsScheduledprocessexecution;
             RegardingobjectidAdoxioComplaintAbsScheduledprocessexecution = regardingobjectidAdoxioComplaintAbsScheduledprocessexecution;
             RegardingobjectidAdoxioInvestigationAbsScheduledprocessexecution = regardingobjectidAdoxioInvestigationAbsScheduledprocessexecution;
             RegardingobjectidAdoxioLicencesAbsScheduledprocessexecution = regardingobjectidAdoxioLicencesAbsScheduledprocessexecution;
             RegardingobjectidAdoxioWorkerAbsScheduledprocessexecution = regardingobjectidAdoxioWorkerAbsScheduledprocessexecution;
             RegardingobjectidAdoxioComplianceinvestigationAbsScheduledprocessexecution = regardingobjectidAdoxioComplianceinvestigationAbsScheduledprocessexecution;
+            RegardingobjectidSiteAbsScheduledprocessexecution = regardingobjectidSiteAbsScheduledprocessexecution;
             RegardingobjectidAdoxioEventAbsScheduledprocessexecution = regardingobjectidAdoxioEventAbsScheduledprocessexecution;
             CustomInit();
         }
@@ -101,21 +100,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets tracks the number of records processed as part of the
-        /// execution.
-        /// </summary>
-        [JsonProperty(PropertyName = "abs_recordsprocessed")]
-        public int? AbsRecordsprocessed { get; set; }
-
-        /// <summary>
-        /// Gets or sets sequence number of the import that created this
-        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time that the record was migrated.
+        /// </summary>
+        [JsonProperty(PropertyName = "abs_recordsprocessed")]
+        public int? AbsRecordsprocessed { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
@@ -149,6 +143,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_knowledgebaserecord_abs_scheduledprocessexecution")]
         public MicrosoftDynamicsCRMknowledgebaserecord RegardingobjectidKnowledgebaserecordAbsScheduledprocessexecution { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_msdyn_postalbum_abs_scheduledprocessexecution")]
+        public MicrosoftDynamicsCRMmsdynPostalbum RegardingobjectidMsdynPostalbumAbsScheduledprocessexecution { get; set; }
 
         /// <summary>
         /// </summary>
@@ -342,8 +341,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> AbsScheduledprocessexecutionMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_ProcessSession")]
+        public IList<MicrosoftDynamicsCRMprocesssession> AbsScheduledprocessexecutionProcessSession { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "abs_scheduledprocessexecution_BulkDeleteFailures")]
         public IList<MicrosoftDynamicsCRMbulkdeletefailure> AbsScheduledprocessexecutionBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_PrincipalObjectAttributeAccesses")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> AbsScheduledprocessexecutionPrincipalObjectAttributeAccesses { get; set; }
 
         /// <summary>
         /// </summary>
@@ -374,6 +388,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_adoxio_complianceinvestigation_abs_scheduledprocessexecution")]
         public MicrosoftDynamicsCRMadoxioComplianceinvestigation RegardingobjectidAdoxioComplianceinvestigationAbsScheduledprocessexecution { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_site_abs_scheduledprocessexecution")]
+        public MicrosoftDynamicsCRMsite RegardingobjectidSiteAbsScheduledprocessexecution { get; set; }
 
         /// <summary>
         /// </summary>
