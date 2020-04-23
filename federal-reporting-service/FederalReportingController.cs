@@ -210,6 +210,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                 }
                 catch (HttpOperationException odee)
                 {
+                    _logger.LogError(odee.Response.Content);
                     _logger.LogError(odee, "Error adding reference SharepointDocumentLocation to federal report");
                 }
 
