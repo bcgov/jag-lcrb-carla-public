@@ -29,94 +29,36 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsocialprofile
         /// class.
         /// </summary>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="uniqueprofileid">Unique ID of the Profile ID</param>
-        /// <param name="modifiedon">Date and time when the record was
-        /// modified.</param>
-        /// <param name="influencescore">Shows the score that determines the
-        /// online social influence of the social profile.</param>
-        /// <param name="statecode">Status of the Social Profile</param>
-        /// <param name="exchangerate">Shows the conversion rate of the
-        /// record's currency. The exchange rate is used to convert all money
-        /// fields in the record from the local currency to the system's
-        /// default currency.</param>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="blocked">Identifies if the social profile has been
-        /// blocked.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// modified the record.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the record.</param>
-        /// <param name="statuscode">Reason for the status of the Social
-        /// Profile</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who modified the record.</param>
-        /// <param name="_owninguserValue">Unique identifier of the user who
-        /// owns the contact.</param>
-        /// <param name="_transactioncurrencyidValue">Choose the local currency
-        /// for the record to make sure budgets are reported in the correct
-        /// currency.</param>
-        /// <param name="_owneridValue">Shows the user or team that is assigned
-        /// to manage the record. This field is updated every time the record
-        /// is assigned to a different user.</param>
-        /// <param name="profilefullname">Shows the display name of the
-        /// customer on this social profile.</param>
-        /// <param name="profilename">Shows the name of the social profile on
-        /// the corresponding social channel.</param>
-        /// <param name="socialprofileid">Unique Identifier of the social
-        /// profile name.</param>
-        /// <param name="_owningbusinessunitValue">Unique identifier for the
-        /// business unit that owns the record</param>
-        /// <param name="community">Identifies where the social profile
-        /// originated from, such as Twitter, or Facebook.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the record.</param>
-        /// <param name="profilelink">Shows the customer that this social
-        /// profile belongs to.</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="_owningteamValue">Unique identifier of the team who
-        /// owns the contact.</param>
-        /// <param name="createdon">Date and time when the record was
-        /// created.</param>
-        /// <param name="_customeridValue">Shows the customer that this social
-        /// profile belongs to.</param>
-        /// <param name="versionnumber">Version number of the social
-        /// profile.</param>
-        public MicrosoftDynamicsCRMsocialprofile(int? utcconversiontimezonecode = default(int?), string uniqueprofileid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? influencescore = default(decimal?), int? statecode = default(int?), decimal? exchangerate = default(decimal?), int? importsequencenumber = default(int?), bool? blocked = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), string _transactioncurrencyidValue = default(string), string _owneridValue = default(string), string profilefullname = default(string), string profilename = default(string), string socialprofileid = default(string), string _owningbusinessunitValue = default(string), int? community = default(int?), string _createdbyValue = default(string), string profilelink = default(string), int? timezoneruleversionnumber = default(int?), string _owningteamValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _customeridValue = default(string), string versionnumber = default(string), IList<MicrosoftDynamicsCRMduplicaterecord> socialProfileDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> socialProfileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMconnection> socialprofileConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> socialprofileConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMsyncerror> socialProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMsocialactivity> socialprofileSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMincident> socialprofileCases = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMduplicaterecord> socialProfileDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMsocialprofile(string _modifiedbyValue = default(string), decimal? exchangerate = default(decimal?), string _modifiedonbehalfbyValue = default(string), decimal? influencescore = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string profilelink = default(string), string _createdonbehalfbyValue = default(string), int? community = default(int?), string _transactioncurrencyidValue = default(string), string _createdbyValue = default(string), int? statecode = default(int?), bool? blocked = default(bool?), int? utcconversiontimezonecode = default(int?), string socialprofileid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string profilefullname = default(string), string uniqueprofileid = default(string), int? timezoneruleversionnumber = default(int?), int? statuscode = default(int?), string _owninguserValue = default(string), string _owneridValue = default(string), string profilename = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string _owningbusinessunitValue = default(string), string versionnumber = default(string), string _customeridValue = default(string), IList<MicrosoftDynamicsCRMduplicaterecord> socialProfileDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> socialProfileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMconnection> socialprofileConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> socialprofileConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMsyncerror> socialProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> socialprofilePrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMsocialactivity> socialprofileSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMincident> socialprofileCases = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMprocesssession> socialProfileProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMduplicaterecord> socialProfileDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Uniqueprofileid = uniqueprofileid;
-            Modifiedon = modifiedon;
-            Influencescore = influencescore;
-            Statecode = statecode;
-            Exchangerate = exchangerate;
-            Importsequencenumber = importsequencenumber;
-            Blocked = blocked;
-            Overriddencreatedon = overriddencreatedon;
             this._modifiedbyValue = _modifiedbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Statuscode = statuscode;
+            Exchangerate = exchangerate;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._owninguserValue = _owninguserValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            this._owneridValue = _owneridValue;
-            Profilefullname = profilefullname;
-            Profilename = profilename;
-            Socialprofileid = socialprofileid;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            Community = community;
-            this._createdbyValue = _createdbyValue;
-            Profilelink = profilelink;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._owningteamValue = _owningteamValue;
+            Influencescore = influencescore;
             Createdon = createdon;
-            this._customeridValue = _customeridValue;
+            Profilelink = profilelink;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Community = community;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            this._createdbyValue = _createdbyValue;
+            Statecode = statecode;
+            Blocked = blocked;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Socialprofileid = socialprofileid;
+            Modifiedon = modifiedon;
+            Profilefullname = profilefullname;
+            Uniqueprofileid = uniqueprofileid;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Statuscode = statuscode;
+            this._owninguserValue = _owninguserValue;
+            this._owneridValue = _owneridValue;
+            Profilename = profilename;
+            Importsequencenumber = importsequencenumber;
+            Overriddencreatedon = overriddencreatedon;
+            this._owningteamValue = _owningteamValue;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             Versionnumber = versionnumber;
+            this._customeridValue = _customeridValue;
             SocialProfileDuplicateBaseRecord = socialProfileDuplicateBaseRecord;
             SocialProfileAsyncOperations = socialProfileAsyncOperations;
             Modifiedonbehalfby = modifiedonbehalfby;
@@ -126,10 +68,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Owninguser = owninguser;
             CustomeridContact = customeridContact;
             SocialProfileSyncErrors = socialProfileSyncErrors;
+            SocialprofilePrincipalobjectattributeaccess = socialprofilePrincipalobjectattributeaccess;
             SocialprofileSocialActivities = socialprofileSocialActivities;
             Ownerid = ownerid;
             SocialprofileCases = socialprofileCases;
             Transactioncurrencyid = transactioncurrencyid;
+            SocialProfileProcessSessions = socialProfileProcessSessions;
             SocialProfileDuplicateMatchingRecord = socialProfileDuplicateMatchingRecord;
             CustomeridAccount = customeridAccount;
             Createdonbehalfby = createdonbehalfby;
@@ -142,188 +86,144 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique ID of the Profile ID
-        /// </summary>
-        [JsonProperty(PropertyName = "uniqueprofileid")]
-        public string Uniqueprofileid { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the record was modified.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the score that determines the online social
-        /// influence of the social profile.
-        /// </summary>
-        [JsonProperty(PropertyName = "influencescore")]
-        public decimal? Influencescore { get; set; }
-
-        /// <summary>
-        /// Gets or sets status of the Social Profile
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the conversion rate of the record's currency.
-        /// The exchange rate is used to convert all money fields in the record
-        /// from the local currency to the system's default currency.
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets identifies if the social profile has been blocked.
-        /// </summary>
-        [JsonProperty(PropertyName = "blocked")]
-        public bool? Blocked { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// record.
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
-        /// Gets or sets reason for the status of the Social Profile
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who modified
-        /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who owns the contact.
         /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        [JsonProperty(PropertyName = "influencescore")]
+        public decimal? Influencescore { get; set; }
 
         /// <summary>
-        /// Gets or sets choose the local currency for the record to make sure
-        /// budgets are reported in the correct currency.
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the user or team that is assigned to manage the
-        /// record. This field is updated every time the record is assigned to
-        /// a different user.
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the display name of the customer on this social
-        /// profile.
-        /// </summary>
-        [JsonProperty(PropertyName = "profilefullname")]
-        public string Profilefullname { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the name of the social profile on the
-        /// corresponding social channel.
-        /// </summary>
-        [JsonProperty(PropertyName = "profilename")]
-        public string Profilename { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique Identifier of the social profile name.
-        /// </summary>
-        [JsonProperty(PropertyName = "socialprofileid")]
-        public string Socialprofileid { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the business unit that owns the
-        /// record
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets identifies where the social profile originated from,
-        /// such as Twitter, or Facebook.
-        /// </summary>
-        [JsonProperty(PropertyName = "community")]
-        public int? Community { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the customer that this social profile belongs
-        /// to.
-        /// </summary>
-        [JsonProperty(PropertyName = "profilelink")]
-        public string Profilelink { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the team who owns the contact.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the record was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the customer that this social profile belongs
-        /// to.
         /// </summary>
-        [JsonProperty(PropertyName = "_customerid_value")]
-        public string _customeridValue { get; set; }
+        [JsonProperty(PropertyName = "profilelink")]
+        public string Profilelink { get; set; }
 
         /// <summary>
-        /// Gets or sets version number of the social profile.
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "community")]
+        public int? Community { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "blocked")]
+        public bool? Blocked { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "socialprofileid")]
+        public string Socialprofileid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "profilefullname")]
+        public string Profilefullname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "uniqueprofileid")]
+        public string Uniqueprofileid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "profilename")]
+        public string Profilename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_customerid_value")]
+        public string _customeridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -372,6 +272,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "socialprofile_principalobjectattributeaccess")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> SocialprofilePrincipalobjectattributeaccess { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "Socialprofile_SocialActivities")]
         public IList<MicrosoftDynamicsCRMsocialactivity> SocialprofileSocialActivities { get; set; }
 
@@ -389,6 +294,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "transactioncurrencyid")]
         public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "SocialProfile_ProcessSessions")]
+        public IList<MicrosoftDynamicsCRMprocesssession> SocialProfileProcessSessions { get; set; }
 
         /// <summary>
         /// </summary>

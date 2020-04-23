@@ -29,9 +29,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMLookupAttributeMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMLookupAttributeMetadata(IList<string> targets = default(IList<string>))
+        public MicrosoftDynamicsCRMLookupAttributeMetadata(IList<string> targets = default(IList<string>), string format = default(string))
         {
             Targets = targets;
+            Format = format;
             CustomInit();
         }
 
@@ -44,6 +45,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "Targets")]
         public IList<string> Targets { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Format")]
+        public string Format { get; set; }
 
     }
 }

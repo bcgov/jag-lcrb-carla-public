@@ -29,87 +29,39 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcontracttemplate class.
         /// </summary>
-        /// <param name="createdon">Date and time when the contract template
-        /// was created.</param>
-        /// <param name="contractservicelevelcode">Unique identifier of the
-        /// level of service specified in contracts that are based on the
-        /// template.</param>
-        /// <param name="componentstate">For internal use only.</param>
-        /// <param name="introducedversion">Version in which the form is
-        /// introduced.</param>
-        /// <param name="iscustomizable">Information that specifies whether
-        /// this component can be customized.</param>
-        /// <param name="billingfrequencycode">How often the customer or
-        /// account is to be billed in contracts that are based on the
-        /// template.</param>
-        /// <param name="solutionid">Unique identifier of the associated
-        /// solution.</param>
-        /// <param name="versionnumber">Version number of the contract
-        /// template.</param>
-        /// <param name="modifiedon">Date and time when the contract template
-        /// was last modified.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who last modified the contracttemplate.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the contract template.</param>
-        /// <param name="contracttemplateid">Unique identifier of the contract
-        /// template.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// last modified the contract template.</param>
-        /// <param name="ismanaged">Indicates whether the solution component is
-        /// part of a managed solution.</param>
-        /// <param name="abbreviation">Abbreviation of the contract template
-        /// name.</param>
-        /// <param name="description">Description of the contract
-        /// template.</param>
-        /// <param name="overwritetime">For internal use only.</param>
-        /// <param name="_organizationidValue">Unique identifier of the
-        /// organization associated with the contract template.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="usediscountaspercentage">Specifies whether the
-        /// discount is a percentage or a monetary amount in contracts based on
-        /// the template.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the contracttemplate.</param>
-        /// <param name="effectivitycalendar">Days of the week and times for
-        /// which contracts based on the template are effective.</param>
-        /// <param name="contracttemplateidunique">For internal use
-        /// only.</param>
-        /// <param name="name">Name of the contract template.</param>
-        /// <param name="allotmenttypecode">Criteria for the contracts based on
-        /// the template, such as number of cases, time, or coverage
-        /// dates.</param>
-        public MicrosoftDynamicsCRMcontracttemplate(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? contractservicelevelcode = default(int?), int? componentstate = default(int?), string introducedversion = default(string), string iscustomizable = default(string), int? billingfrequencycode = default(int?), string solutionid = default(string), string versionnumber = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string contracttemplateid = default(string), string _modifiedbyValue = default(string), bool? ismanaged = default(bool?), string abbreviation = default(string), string description = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _organizationidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), bool? usediscountaspercentage = default(bool?), string _createdonbehalfbyValue = default(string), string effectivitycalendar = default(string), string contracttemplateidunique = default(string), string name = default(string), int? allotmenttypecode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> contractTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> contractTemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> contractTemplateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontract> contractTemplateContracts = default(IList<MicrosoftDynamicsCRMcontract>))
+        public MicrosoftDynamicsCRMcontracttemplate(int? importsequencenumber = default(int?), string effectivitycalendar = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string contracttemplateidunique = default(string), string name = default(string), int? billingfrequencycode = default(int?), string introducedversion = default(string), int? timezoneruleversionnumber = default(int?), string iscustomizable = default(string), int? utcconversiontimezonecode = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), int? contractservicelevelcode = default(int?), string contracttemplateid = default(string), string _modifiedonbehalfbyValue = default(string), int? componentstate = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string solutionid = default(string), bool? usediscountaspercentage = default(bool?), string abbreviation = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _organizationidValue = default(string), string description = default(string), bool? ismanaged = default(bool?), int? allotmenttypecode = default(int?), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), IList<MicrosoftDynamicsCRMteam> contracttemplateTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> contracttemplateMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> contracttemplatePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> contractTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> contractTemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> contractTemplateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprocesssession> contractTemplateProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMcontract> contractTemplateContracts = default(IList<MicrosoftDynamicsCRMcontract>))
         {
-            Createdon = createdon;
-            Contractservicelevelcode = contractservicelevelcode;
-            Componentstate = componentstate;
-            Introducedversion = introducedversion;
-            Iscustomizable = iscustomizable;
-            Billingfrequencycode = billingfrequencycode;
-            Solutionid = solutionid;
-            Versionnumber = versionnumber;
-            Modifiedon = modifiedon;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._createdbyValue = _createdbyValue;
-            Contracttemplateid = contracttemplateid;
-            this._modifiedbyValue = _modifiedbyValue;
-            Ismanaged = ismanaged;
-            Abbreviation = abbreviation;
-            Description = description;
-            Overwritetime = overwritetime;
-            this._organizationidValue = _organizationidValue;
-            Overriddencreatedon = overriddencreatedon;
             Importsequencenumber = importsequencenumber;
-            Usediscountaspercentage = usediscountaspercentage;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Effectivitycalendar = effectivitycalendar;
+            Overwritetime = overwritetime;
             Contracttemplateidunique = contracttemplateidunique;
             Name = name;
+            Billingfrequencycode = billingfrequencycode;
+            Introducedversion = introducedversion;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Iscustomizable = iscustomizable;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._modifiedbyValue = _modifiedbyValue;
+            Contractservicelevelcode = contractservicelevelcode;
+            Contracttemplateid = contracttemplateid;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Componentstate = componentstate;
+            Modifiedon = modifiedon;
+            Solutionid = solutionid;
+            Usediscountaspercentage = usediscountaspercentage;
+            Abbreviation = abbreviation;
+            Overriddencreatedon = overriddencreatedon;
+            this._createdbyValue = _createdbyValue;
+            this._organizationidValue = _organizationidValue;
+            Description = description;
+            Ismanaged = ismanaged;
             Allotmenttypecode = allotmenttypecode;
+            Versionnumber = versionnumber;
+            Createdon = createdon;
+            ContracttemplateTeams = contracttemplateTeams;
+            ContracttemplateMailboxTrackingFolders = contracttemplateMailboxTrackingFolders;
+            ContracttemplatePrincipalObjectAttributeAccesses = contracttemplatePrincipalObjectAttributeAccesses;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Organizationid = organizationid;
@@ -118,6 +70,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             ContractTemplateAsyncOperations = contractTemplateAsyncOperations;
             ContractTemplateBulkDeleteFailures = contractTemplateBulkDeleteFailures;
             Modifiedby = modifiedby;
+            ContractTemplateProcessSessions = contractTemplateProcessSessions;
             ContractTemplateContracts = contractTemplateContracts;
             CustomInit();
         }
@@ -128,174 +81,159 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets date and time when the contract template was created.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the level of service specified in
-        /// contracts that are based on the template.
-        /// </summary>
-        [JsonProperty(PropertyName = "contractservicelevelcode")]
-        public int? Contractservicelevelcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// Gets or sets version in which the form is introduced.
-        /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
-
-        /// <summary>
-        /// Gets or sets information that specifies whether this component can
-        /// be customized.
-        /// </summary>
-        [JsonProperty(PropertyName = "iscustomizable")]
-        public string Iscustomizable { get; set; }
-
-        /// <summary>
-        /// Gets or sets how often the customer or account is to be billed in
-        /// contracts that are based on the template.
-        /// </summary>
-        [JsonProperty(PropertyName = "billingfrequencycode")]
-        public int? Billingfrequencycode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the associated solution.
-        /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
-
-        /// <summary>
-        /// Gets or sets version number of the contract template.
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the contract template was last
-        /// modified.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who last
-        /// modified the contracttemplate.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the contract
-        /// template.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the contract template.
-        /// </summary>
-        [JsonProperty(PropertyName = "contracttemplateid")]
-        public string Contracttemplateid { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who last modified the
-        /// contract template.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets indicates whether the solution component is part of a
-        /// managed solution.
-        /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
-
-        /// <summary>
-        /// Gets or sets abbreviation of the contract template name.
-        /// </summary>
-        [JsonProperty(PropertyName = "abbreviation")]
-        public string Abbreviation { get; set; }
-
-        /// <summary>
-        /// Gets or sets description of the contract template.
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the organization associated with
-        /// the contract template.
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
-        /// Gets or sets specifies whether the discount is a percentage or a
-        /// monetary amount in contracts based on the template.
-        /// </summary>
-        [JsonProperty(PropertyName = "usediscountaspercentage")]
-        public bool? Usediscountaspercentage { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// contracttemplate.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets days of the week and times for which contracts based
-        /// on the template are effective.
         /// </summary>
         [JsonProperty(PropertyName = "effectivitycalendar")]
         public string Effectivitycalendar { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
+        /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "contracttemplateidunique")]
         public string Contracttemplateidunique { get; set; }
 
         /// <summary>
-        /// Gets or sets name of the contract template.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets criteria for the contracts based on the template, such
-        /// as number of cases, time, or coverage dates.
+        /// </summary>
+        [JsonProperty(PropertyName = "billingfrequencycode")]
+        public int? Billingfrequencycode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "iscustomizable")]
+        public string Iscustomizable { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contractservicelevelcode")]
+        public int? Contractservicelevelcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contracttemplateid")]
+        public string Contracttemplateid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "usediscountaspercentage")]
+        public bool? Usediscountaspercentage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "abbreviation")]
+        public string Abbreviation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "allotmenttypecode")]
         public int? Allotmenttypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contracttemplate_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> ContracttemplateTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contracttemplate_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ContracttemplateMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contracttemplate_PrincipalObjectAttributeAccesses")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ContracttemplatePrincipalObjectAttributeAccesses { get; set; }
 
         /// <summary>
         /// </summary>
@@ -336,6 +274,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "modifiedby")]
         public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ContractTemplate_ProcessSessions")]
+        public IList<MicrosoftDynamicsCRMprocesssession> ContractTemplateProcessSessions { get; set; }
 
         /// <summary>
         /// </summary>

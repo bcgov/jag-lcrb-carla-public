@@ -29,129 +29,81 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioLicenseechangelog class.
         /// </summary>
-        /// <param name="adoxioName">The name of the custom entity.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the record.</param>
-        /// <param name="_adoxioParentlinceseechangelogidValue">Unique
-        /// identifier for Licensee Change Log associated with Licensee Change
-        /// Log.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="_owningbusinessunitValue">Unique identifier for the
-        /// business unit that owns the record</param>
-        /// <param name="statecode">Status of the Licensee Change Log</param>
-        /// <param name="createdon">Date and time when the record was
-        /// created.</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who modified the record.</param>
-        /// <param name="_transactioncurrencyidValue">Unique identifier of the
-        /// currency associated with the entity.</param>
-        /// <param name="_adoxioParentlegalentityidValue">Unique identifier for
-        /// Legal Entity associated with Licensee Change Log.</param>
-        /// <param name="_owneridValue">Owner Id</param>
-        /// <param name="_owningteamValue">Unique identifier for the team that
-        /// owns the record.</param>
-        /// <param name="adoxioLicenseechangelogid">Unique identifier for
-        /// entity instances</param>
-        /// <param name="importsequencenumber">Sequence number of the import
-        /// that created this record.</param>
-        /// <param name="modifiedon">Date and time when the record was
-        /// modified.</param>
-        /// <param name="_adoxioLegalentityidValue">Unique identifier for Legal
-        /// Entity associated with Licensee Change Log.</param>
-        /// <param name="exchangerate">Exchange rate for the currency
-        /// associated with the entity with respect to the base
-        /// currency.</param>
-        /// <param name="versionnumber">Version Number</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="statuscode">Reason for the status of the Licensee
-        /// Change Log</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// modified the record.</param>
-        /// <param name="adoxioAnnualmembershipfeeBase">Value of the Annual
-        /// Membership Fee in base currency.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the record.</param>
-        /// <param name="_owninguserValue">Unique identifier for the user that
-        /// owns the record.</param>
-        public MicrosoftDynamicsCRMadoxioLicenseechangelog(string _adoxioShareholderbusinessaccountValue = default(string), string adoxioName = default(string), System.DateTimeOffset? adoxioDateofbirthnew = default(System.DateTimeOffset?), string adoxioFirstnameold = default(string), string _createdonbehalfbyValue = default(string), int? adoxioNumberofmembersnew = default(int?), string _adoxioParentlinceseechangelogidValue = default(string), bool? adoxioIsmanagernew = default(bool?), int? utcconversiontimezonecode = default(int?), int? adoxioTotalsharesnew = default(int?), string _owningbusinessunitValue = default(string), int? statecode = default(int?), string adoxioEmailold = default(string), int? adoxioNumberofsharesnew = default(int?), decimal? adoxioInterestpercentageold = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _adoxioApplicationtypeValue = default(string), bool? adoxioIsmanagerold = default(bool?), int? adoxioNumberofmembers = default(int?), int? adoxioBusinessaccounttype = default(int?), string adoxioTitlenew = default(string), int? adoxioTotalsharesold = default(int?), int? adoxioNumberofmembersold = default(int?), bool? adoxioIsdirectorold = default(bool?), bool? adoxioIspartnernew = default(bool?), string _adoxioParentbusinessaccountValue = default(string), int? adoxioNumberofsharesold = default(int?), string adoxioTitleold = default(string), string _adoxioApplicationValue = default(string), string _adoxioBusinessaccountValue = default(string), int? adoxioChangetype = default(int?), bool? adoxioIskeypersonnelold = default(bool?), decimal? adoxioAnnualmembershipfeeold = default(decimal?), decimal? adoxioAnnualmembershipfeenew = default(decimal?), bool? adoxioIskeypersonnelnew = default(bool?), int? timezoneruleversionnumber = default(int?), string _modifiedonbehalfbyValue = default(string), string _adoxioContactValue = default(string), bool? adoxioIspartnerold = default(bool?), string _transactioncurrencyidValue = default(string), string _adoxioParentlegalentityidValue = default(string), decimal? adoxioAnnualmembershipfee = default(decimal?), bool? adoxioIsshareholdernew = default(bool?), string adoxioBusinessnamenew = default(string), bool? adoxioIsshareholderold = default(bool?), decimal? adoxioInterestpercentagenew = default(decimal?), string adoxioBusinesnameold = default(string), string _owneridValue = default(string), string _owningteamValue = default(string), string adoxioLicenseechangelogid = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? adoxioIstrusteenew = default(bool?), string adoxioEmailnew = default(string), string _adoxioLegalentityidValue = default(string), decimal? exchangerate = default(decimal?), bool? adoxioIstrusteeold = default(bool?), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statuscode = default(int?), bool? adoxioIsofficerold = default(bool?), string _modifiedbyValue = default(string), System.DateTimeOffset? adoxioDateofbirthold = default(System.DateTimeOffset?), string adoxioFirstnamenew = default(string), string adoxioLastnameold = default(string), decimal? adoxioAnnualmembershipfeeBase = default(decimal?), string _createdbyValue = default(string), string adoxioJobnumber = default(string), string _owninguserValue = default(string), bool? adoxioIsdirectornew = default(bool?), int? adoxioBusinesstype = default(int?), bool? adoxioIsofficernew = default(bool?), string adoxioLastnamenew = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioLicenseechangelogSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLicenseechangelogAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLicenseechangelogBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationType = default(MicrosoftDynamicsCRMadoxioApplicationtype), MicrosoftDynamicsCRMaccount adoxioParentBusinessAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount adoxioBusinessAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact adoxioContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioLicenseechangelog adoxioParentLinceseeChangeLogId = default(MicrosoftDynamicsCRMadoxioLicenseechangelog), IList<MicrosoftDynamicsCRMadoxioLicenseechangelog> adoxioLicenseechangelogLicenseechangelogs = default(IList<MicrosoftDynamicsCRMadoxioLicenseechangelog>), MicrosoftDynamicsCRMaccount adoxioShareholderBusinessAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioLegalentity adoxioParentLegalEntityId = default(MicrosoftDynamicsCRMadoxioLegalentity), MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntityId = default(MicrosoftDynamicsCRMadoxioLegalentity), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMadoxioLicenseechangelog(decimal? adoxioInterestpercentagenew = default(decimal?), string _adoxioParentlegalentityidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? adoxioNumberofmembers = default(int?), System.DateTimeOffset? adoxioDateofbirthnew = default(System.DateTimeOffset?), bool? adoxioIspartnerold = default(bool?), int? importsequencenumber = default(int?), string _createdbyValue = default(string), int? statecode = default(int?), string _adoxioShareholderbusinessaccountValue = default(string), decimal? adoxioAnnualmembershipfeeBase = default(decimal?), string adoxioEmailnew = default(string), int? utcconversiontimezonecode = default(int?), string _owningbusinessunitValue = default(string), int? adoxioTotalsharesnew = default(int?), string adoxioName = default(string), string adoxioLicenseechangelogid = default(string), decimal? adoxioAnnualmembershipfeeold = default(decimal?), int? adoxioNumberofmembersold = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? adoxioIsmanagernew = default(bool?), string _adoxioApplicationtypeValue = default(string), string versionnumber = default(string), string adoxioEmailold = default(string), bool? adoxioIsofficernew = default(bool?), bool? adoxioIsofficerold = default(bool?), string adoxioLastnamenew = default(string), int? adoxioBusinessaccounttype = default(int?), string adoxioBusinesnameold = default(string), bool? adoxioIsshareholdernew = default(bool?), string _createdonbehalfbyValue = default(string), bool? adoxioIstrusteenew = default(bool?), int? adoxioBusinesstype = default(int?), string adoxioFirstnamenew = default(string), string _adoxioApplicationValue = default(string), string _adoxioBusinessaccountValue = default(string), string adoxioTitleold = default(string), string _owninguserValue = default(string), string adoxioBusinessnamenew = default(string), string adoxioLastnameold = default(string), int? statuscode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioTotalsharesold = default(int?), string adoxioFirstnameold = default(string), string _modifiedbyValue = default(string), bool? adoxioIstrusteeold = default(bool?), string _owningteamValue = default(string), decimal? adoxioInterestpercentageold = default(decimal?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? adoxioDateofbirthold = default(System.DateTimeOffset?), bool? adoxioIskeypersonnelold = default(bool?), string adoxioTitlenew = default(string), decimal? adoxioAnnualmembershipfee = default(decimal?), int? adoxioNumberofsharesnew = default(int?), string _modifiedonbehalfbyValue = default(string), bool? adoxioIsdirectorold = default(bool?), decimal? exchangerate = default(decimal?), string _adoxioContactValue = default(string), int? adoxioNumberofsharesold = default(int?), string _transactioncurrencyidValue = default(string), bool? adoxioIspartnernew = default(bool?), decimal? adoxioAnnualmembershipfeenew = default(decimal?), int? adoxioNumberofmembersnew = default(int?), int? adoxioChangetype = default(int?), bool? adoxioIsshareholderold = default(bool?), string adoxioJobnumber = default(string), string _adoxioLegalentityidValue = default(string), bool? adoxioIsdirectornew = default(bool?), bool? adoxioIskeypersonnelnew = default(bool?), bool? adoxioIsmanagerold = default(bool?), string _adoxioParentbusinessaccountValue = default(string), string _owneridValue = default(string), string _adoxioParentlinceseechangelogidValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioLicenseechangelogSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLicenseechangelogAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioLicenseechangelogMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioLicenseechangelogProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLicenseechangelogBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioLicenseechangelogPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationType = default(MicrosoftDynamicsCRMadoxioApplicationtype), MicrosoftDynamicsCRMaccount adoxioParentBusinessAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount adoxioBusinessAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact adoxioContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioLicenseechangelog adoxioParentLinceseeChangeLogId = default(MicrosoftDynamicsCRMadoxioLicenseechangelog), IList<MicrosoftDynamicsCRMadoxioLicenseechangelog> adoxioLicenseechangelogLicenseechangelogs = default(IList<MicrosoftDynamicsCRMadoxioLicenseechangelog>), MicrosoftDynamicsCRMaccount adoxioShareholderBusinessAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioLegalentity adoxioParentLegalEntityId = default(MicrosoftDynamicsCRMadoxioLegalentity), MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntityId = default(MicrosoftDynamicsCRMadoxioLegalentity), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
-            this._adoxioShareholderbusinessaccountValue = _adoxioShareholderbusinessaccountValue;
-            AdoxioName = adoxioName;
-            AdoxioDateofbirthnew = adoxioDateofbirthnew;
-            AdoxioFirstnameold = adoxioFirstnameold;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            AdoxioNumberofmembersnew = adoxioNumberofmembersnew;
-            this._adoxioParentlinceseechangelogidValue = _adoxioParentlinceseechangelogidValue;
-            AdoxioIsmanagernew = adoxioIsmanagernew;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            AdoxioTotalsharesnew = adoxioTotalsharesnew;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            Statecode = statecode;
-            AdoxioEmailold = adoxioEmailold;
-            AdoxioNumberofsharesnew = adoxioNumberofsharesnew;
-            AdoxioInterestpercentageold = adoxioInterestpercentageold;
+            AdoxioInterestpercentagenew = adoxioInterestpercentagenew;
+            this._adoxioParentlegalentityidValue = _adoxioParentlegalentityidValue;
             Createdon = createdon;
-            this._adoxioApplicationtypeValue = _adoxioApplicationtypeValue;
-            AdoxioIsmanagerold = adoxioIsmanagerold;
             AdoxioNumberofmembers = adoxioNumberofmembers;
-            AdoxioBusinessaccounttype = adoxioBusinessaccounttype;
-            AdoxioTitlenew = adoxioTitlenew;
-            AdoxioTotalsharesold = adoxioTotalsharesold;
+            AdoxioDateofbirthnew = adoxioDateofbirthnew;
+            AdoxioIspartnerold = adoxioIspartnerold;
+            Importsequencenumber = importsequencenumber;
+            this._createdbyValue = _createdbyValue;
+            Statecode = statecode;
+            this._adoxioShareholderbusinessaccountValue = _adoxioShareholderbusinessaccountValue;
+            AdoxioAnnualmembershipfeeBase = adoxioAnnualmembershipfeeBase;
+            AdoxioEmailnew = adoxioEmailnew;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            AdoxioTotalsharesnew = adoxioTotalsharesnew;
+            AdoxioName = adoxioName;
+            AdoxioLicenseechangelogid = adoxioLicenseechangelogid;
+            AdoxioAnnualmembershipfeeold = adoxioAnnualmembershipfeeold;
             AdoxioNumberofmembersold = adoxioNumberofmembersold;
-            AdoxioIsdirectorold = adoxioIsdirectorold;
-            AdoxioIspartnernew = adoxioIspartnernew;
-            this._adoxioParentbusinessaccountValue = _adoxioParentbusinessaccountValue;
-            AdoxioNumberofsharesold = adoxioNumberofsharesold;
-            AdoxioTitleold = adoxioTitleold;
+            Overriddencreatedon = overriddencreatedon;
+            AdoxioIsmanagernew = adoxioIsmanagernew;
+            this._adoxioApplicationtypeValue = _adoxioApplicationtypeValue;
+            Versionnumber = versionnumber;
+            AdoxioEmailold = adoxioEmailold;
+            AdoxioIsofficernew = adoxioIsofficernew;
+            AdoxioIsofficerold = adoxioIsofficerold;
+            AdoxioLastnamenew = adoxioLastnamenew;
+            AdoxioBusinessaccounttype = adoxioBusinessaccounttype;
+            AdoxioBusinesnameold = adoxioBusinesnameold;
+            AdoxioIsshareholdernew = adoxioIsshareholdernew;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            AdoxioIstrusteenew = adoxioIstrusteenew;
+            AdoxioBusinesstype = adoxioBusinesstype;
+            AdoxioFirstnamenew = adoxioFirstnamenew;
             this._adoxioApplicationValue = _adoxioApplicationValue;
             this._adoxioBusinessaccountValue = _adoxioBusinessaccountValue;
-            AdoxioChangetype = adoxioChangetype;
-            AdoxioIskeypersonnelold = adoxioIskeypersonnelold;
-            AdoxioAnnualmembershipfeeold = adoxioAnnualmembershipfeeold;
-            AdoxioAnnualmembershipfeenew = adoxioAnnualmembershipfeenew;
-            AdoxioIskeypersonnelnew = adoxioIskeypersonnelnew;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._adoxioContactValue = _adoxioContactValue;
-            AdoxioIspartnerold = adoxioIspartnerold;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            this._adoxioParentlegalentityidValue = _adoxioParentlegalentityidValue;
-            AdoxioAnnualmembershipfee = adoxioAnnualmembershipfee;
-            AdoxioIsshareholdernew = adoxioIsshareholdernew;
-            AdoxioBusinessnamenew = adoxioBusinessnamenew;
-            AdoxioIsshareholderold = adoxioIsshareholderold;
-            AdoxioInterestpercentagenew = adoxioInterestpercentagenew;
-            AdoxioBusinesnameold = adoxioBusinesnameold;
-            this._owneridValue = _owneridValue;
-            this._owningteamValue = _owningteamValue;
-            AdoxioLicenseechangelogid = adoxioLicenseechangelogid;
-            Importsequencenumber = importsequencenumber;
-            Modifiedon = modifiedon;
-            AdoxioIstrusteenew = adoxioIstrusteenew;
-            AdoxioEmailnew = adoxioEmailnew;
-            this._adoxioLegalentityidValue = _adoxioLegalentityidValue;
-            Exchangerate = exchangerate;
-            AdoxioIstrusteeold = adoxioIstrusteeold;
-            Versionnumber = versionnumber;
-            Overriddencreatedon = overriddencreatedon;
-            Statuscode = statuscode;
-            AdoxioIsofficerold = adoxioIsofficerold;
-            this._modifiedbyValue = _modifiedbyValue;
-            AdoxioDateofbirthold = adoxioDateofbirthold;
-            AdoxioFirstnamenew = adoxioFirstnamenew;
-            AdoxioLastnameold = adoxioLastnameold;
-            AdoxioAnnualmembershipfeeBase = adoxioAnnualmembershipfeeBase;
-            this._createdbyValue = _createdbyValue;
-            AdoxioJobnumber = adoxioJobnumber;
+            AdoxioTitleold = adoxioTitleold;
             this._owninguserValue = _owninguserValue;
+            AdoxioBusinessnamenew = adoxioBusinessnamenew;
+            AdoxioLastnameold = adoxioLastnameold;
+            Statuscode = statuscode;
+            Modifiedon = modifiedon;
+            AdoxioTotalsharesold = adoxioTotalsharesold;
+            AdoxioFirstnameold = adoxioFirstnameold;
+            this._modifiedbyValue = _modifiedbyValue;
+            AdoxioIstrusteeold = adoxioIstrusteeold;
+            this._owningteamValue = _owningteamValue;
+            AdoxioInterestpercentageold = adoxioInterestpercentageold;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            AdoxioDateofbirthold = adoxioDateofbirthold;
+            AdoxioIskeypersonnelold = adoxioIskeypersonnelold;
+            AdoxioTitlenew = adoxioTitlenew;
+            AdoxioAnnualmembershipfee = adoxioAnnualmembershipfee;
+            AdoxioNumberofsharesnew = adoxioNumberofsharesnew;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            AdoxioIsdirectorold = adoxioIsdirectorold;
+            Exchangerate = exchangerate;
+            this._adoxioContactValue = _adoxioContactValue;
+            AdoxioNumberofsharesold = adoxioNumberofsharesold;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            AdoxioIspartnernew = adoxioIspartnernew;
+            AdoxioAnnualmembershipfeenew = adoxioAnnualmembershipfeenew;
+            AdoxioNumberofmembersnew = adoxioNumberofmembersnew;
+            AdoxioChangetype = adoxioChangetype;
+            AdoxioIsshareholderold = adoxioIsshareholderold;
+            AdoxioJobnumber = adoxioJobnumber;
+            this._adoxioLegalentityidValue = _adoxioLegalentityidValue;
             AdoxioIsdirectornew = adoxioIsdirectornew;
-            AdoxioBusinesstype = adoxioBusinesstype;
-            AdoxioIsofficernew = adoxioIsofficernew;
-            AdoxioLastnamenew = adoxioLastnamenew;
+            AdoxioIskeypersonnelnew = adoxioIskeypersonnelnew;
+            AdoxioIsmanagerold = adoxioIsmanagerold;
+            this._adoxioParentbusinessaccountValue = _adoxioParentbusinessaccountValue;
+            this._owneridValue = _owneridValue;
+            this._adoxioParentlinceseechangelogidValue = _adoxioParentlinceseechangelogidValue;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -162,7 +114,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Owningbusinessunit = owningbusinessunit;
             AdoxioLicenseechangelogSyncErrors = adoxioLicenseechangelogSyncErrors;
             AdoxioLicenseechangelogAsyncOperations = adoxioLicenseechangelogAsyncOperations;
+            AdoxioLicenseechangelogMailboxTrackingFolders = adoxioLicenseechangelogMailboxTrackingFolders;
+            AdoxioLicenseechangelogProcessSession = adoxioLicenseechangelogProcessSession;
             AdoxioLicenseechangelogBulkDeleteFailures = adoxioLicenseechangelogBulkDeleteFailures;
+            AdoxioLicenseechangelogPrincipalObjectAttributeAccesses = adoxioLicenseechangelogPrincipalObjectAttributeAccesses;
             AdoxioApplicationType = adoxioApplicationType;
             AdoxioParentBusinessAccount = adoxioParentBusinessAccount;
             AdoxioBusinessAccount = adoxioBusinessAccount;
@@ -184,104 +139,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_shareholderbusinessaccount_value")]
-        public string _adoxioShareholderbusinessaccountValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the custom entity.
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
+        [JsonProperty(PropertyName = "adoxio_interestpercentagenew")]
+        public decimal? AdoxioInterestpercentagenew { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dateofbirthnew")]
-        public System.DateTimeOffset? AdoxioDateofbirthnew { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_parentlegalentityid_value")]
+        public string _adoxioParentlegalentityidValue { get; set; }
 
         /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_firstnameold")]
-        public string AdoxioFirstnameold { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_numberofmembersnew")]
-        public int? AdoxioNumberofmembersnew { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for Licensee Change Log associated
-        /// with Licensee Change Log.
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_parentlinceseechangelogid_value")]
-        public string _adoxioParentlinceseechangelogidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ismanagernew")]
-        public bool? AdoxioIsmanagernew { get; set; }
-
-        /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_totalsharesnew")]
-        public int? AdoxioTotalsharesnew { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the business unit that owns the
-        /// record
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets status of the Licensee Change Log
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_emailold")]
-        public string AdoxioEmailold { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_numberofsharesnew")]
-        public int? AdoxioNumberofsharesnew { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_interestpercentageold")]
-        public decimal? AdoxioInterestpercentageold { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the record was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_applicationtype_value")]
-        public string _adoxioApplicationtypeValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ismanagerold")]
-        public bool? AdoxioIsmanagerold { get; set; }
 
         /// <summary>
         /// </summary>
@@ -290,18 +159,73 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_businessaccounttype")]
-        public int? AdoxioBusinessaccounttype { get; set; }
+        [JsonProperty(PropertyName = "adoxio_dateofbirthnew")]
+        public System.DateTimeOffset? AdoxioDateofbirthnew { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_titlenew")]
-        public string AdoxioTitlenew { get; set; }
+        [JsonProperty(PropertyName = "adoxio_ispartnerold")]
+        public bool? AdoxioIspartnerold { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_totalsharesold")]
-        public int? AdoxioTotalsharesold { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_shareholderbusinessaccount_value")]
+        public string _adoxioShareholderbusinessaccountValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_annualmembershipfee_base")]
+        public decimal? AdoxioAnnualmembershipfeeBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_emailnew")]
+        public string AdoxioEmailnew { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_totalsharesnew")]
+        public int? AdoxioTotalsharesnew { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licenseechangelogid")]
+        public string AdoxioLicenseechangelogid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_annualmembershipfeeold")]
+        public decimal? AdoxioAnnualmembershipfeeold { get; set; }
 
         /// <summary>
         /// </summary>
@@ -310,28 +234,78 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isdirectorold")]
-        public bool? AdoxioIsdirectorold { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ispartnernew")]
-        public bool? AdoxioIspartnernew { get; set; }
+        [JsonProperty(PropertyName = "adoxio_ismanagernew")]
+        public bool? AdoxioIsmanagernew { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_parentbusinessaccount_value")]
-        public string _adoxioParentbusinessaccountValue { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_applicationtype_value")]
+        public string _adoxioApplicationtypeValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_numberofsharesold")]
-        public int? AdoxioNumberofsharesold { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_titleold")]
-        public string AdoxioTitleold { get; set; }
+        [JsonProperty(PropertyName = "adoxio_emailold")]
+        public string AdoxioEmailold { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isofficernew")]
+        public bool? AdoxioIsofficernew { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isofficerold")]
+        public bool? AdoxioIsofficerold { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_lastnamenew")]
+        public string AdoxioLastnamenew { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_businessaccounttype")]
+        public int? AdoxioBusinessaccounttype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_businesnameold")]
+        public string AdoxioBusinesnameold { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isshareholdernew")]
+        public bool? AdoxioIsshareholdernew { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_istrusteenew")]
+        public bool? AdoxioIstrusteenew { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_businesstype")]
+        public int? AdoxioBusinesstype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_firstnamenew")]
+        public string AdoxioFirstnamenew { get; set; }
 
         /// <summary>
         /// </summary>
@@ -345,75 +319,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_changetype")]
-        public int? AdoxioChangetype { get; set; }
+        [JsonProperty(PropertyName = "adoxio_titleold")]
+        public string AdoxioTitleold { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_iskeypersonnelold")]
-        public bool? AdoxioIskeypersonnelold { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_annualmembershipfeeold")]
-        public decimal? AdoxioAnnualmembershipfeeold { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_annualmembershipfeenew")]
-        public decimal? AdoxioAnnualmembershipfeenew { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_iskeypersonnelnew")]
-        public bool? AdoxioIskeypersonnelnew { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who modified
-        /// the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_contact_value")]
-        public string _adoxioContactValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ispartnerold")]
-        public bool? AdoxioIspartnerold { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the currency associated with the
-        /// entity.
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for Legal Entity associated with
-        /// Licensee Change Log.
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_parentlegalentityid_value")]
-        public string _adoxioParentlegalentityidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_annualmembershipfee")]
-        public decimal? AdoxioAnnualmembershipfee { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isshareholdernew")]
-        public bool? AdoxioIsshareholdernew { get; set; }
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -422,73 +334,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isshareholderold")]
-        public bool? AdoxioIsshareholderold { get; set; }
+        [JsonProperty(PropertyName = "adoxio_lastnameold")]
+        public string AdoxioLastnameold { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_interestpercentagenew")]
-        public decimal? AdoxioInterestpercentagenew { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_businesnameold")]
-        public string AdoxioBusinesnameold { get; set; }
-
-        /// <summary>
-        /// Gets or sets owner Id
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the team that owns the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for entity instances
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licenseechangelogid")]
-        public string AdoxioLicenseechangelogid { get; set; }
-
-        /// <summary>
-        /// Gets or sets sequence number of the import that created this
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the record was modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_istrusteenew")]
-        public bool? AdoxioIstrusteenew { get; set; }
+        [JsonProperty(PropertyName = "adoxio_totalsharesold")]
+        public int? AdoxioTotalsharesold { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_emailnew")]
-        public string AdoxioEmailnew { get; set; }
+        [JsonProperty(PropertyName = "adoxio_firstnameold")]
+        public string AdoxioFirstnameold { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier for Legal Entity associated with
-        /// Licensee Change Log.
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_legalentityid_value")]
-        public string _adoxioLegalentityidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets exchange rate for the currency associated with the
-        /// entity with respect to the base currency.
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -496,33 +368,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public bool? AdoxioIstrusteeold { get; set; }
 
         /// <summary>
-        /// Gets or sets version Number
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets reason for the status of the Licensee Change Log
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isofficerold")]
-        public bool? AdoxioIsofficerold { get; set; }
+        [JsonProperty(PropertyName = "adoxio_interestpercentageold")]
+        public decimal? AdoxioInterestpercentageold { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -531,25 +389,78 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_firstnamenew")]
-        public string AdoxioFirstnamenew { get; set; }
+        [JsonProperty(PropertyName = "adoxio_iskeypersonnelold")]
+        public bool? AdoxioIskeypersonnelold { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_lastnameold")]
-        public string AdoxioLastnameold { get; set; }
+        [JsonProperty(PropertyName = "adoxio_titlenew")]
+        public string AdoxioTitlenew { get; set; }
 
         /// <summary>
-        /// Gets or sets value of the Annual Membership Fee in base currency.
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_annualmembershipfee_base")]
-        public decimal? AdoxioAnnualmembershipfeeBase { get; set; }
+        [JsonProperty(PropertyName = "adoxio_annualmembershipfee")]
+        public decimal? AdoxioAnnualmembershipfee { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_numberofsharesnew")]
+        public int? AdoxioNumberofsharesnew { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isdirectorold")]
+        public bool? AdoxioIsdirectorold { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_contact_value")]
+        public string _adoxioContactValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_numberofsharesold")]
+        public int? AdoxioNumberofsharesold { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_ispartnernew")]
+        public bool? AdoxioIspartnernew { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_annualmembershipfeenew")]
+        public decimal? AdoxioAnnualmembershipfeenew { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_numberofmembersnew")]
+        public int? AdoxioNumberofmembersnew { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_changetype")]
+        public int? AdoxioChangetype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isshareholderold")]
+        public bool? AdoxioIsshareholderold { get; set; }
 
         /// <summary>
         /// </summary>
@@ -557,10 +468,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioJobnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier for the user that owns the record.
         /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_legalentityid_value")]
+        public string _adoxioLegalentityidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -569,18 +479,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_businesstype")]
-        public int? AdoxioBusinesstype { get; set; }
+        [JsonProperty(PropertyName = "adoxio_iskeypersonnelnew")]
+        public bool? AdoxioIskeypersonnelnew { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isofficernew")]
-        public bool? AdoxioIsofficernew { get; set; }
+        [JsonProperty(PropertyName = "adoxio_ismanagerold")]
+        public bool? AdoxioIsmanagerold { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_lastnamenew")]
-        public string AdoxioLastnamenew { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_parentbusinessaccount_value")]
+        public string _adoxioParentbusinessaccountValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_parentlinceseechangelogid_value")]
+        public string _adoxioParentlinceseechangelogidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -634,8 +554,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licenseechangelog_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> AdoxioLicenseechangelogMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licenseechangelog_ProcessSession")]
+        public IList<MicrosoftDynamicsCRMprocesssession> AdoxioLicenseechangelogProcessSession { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_licenseechangelog_BulkDeleteFailures")]
         public IList<MicrosoftDynamicsCRMbulkdeletefailure> AdoxioLicenseechangelogBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licenseechangelog_PrincipalObjectAttributeAccesses")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> AdoxioLicenseechangelogPrincipalObjectAttributeAccesses { get; set; }
 
         /// <summary>
         /// </summary>

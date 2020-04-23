@@ -27,98 +27,41 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcalendarrule
         /// class.
         /// </summary>
-        /// <param name="effectiveintervalend">Effective interval end of the
-        /// calendar rule.</param>
-        /// <param name="ismodified">For internal use only.</param>
-        /// <param name="offset">Start offset for leaf nonrecurring
-        /// rules.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the calendarrule.</param>
-        /// <param name="_serviceidValue">Unique identifier of the service with
-        /// which the calendar rule is associated.</param>
-        /// <param name="createdon">Date and time when the calendar rule was
-        /// created.</param>
-        /// <param name="name">Name of the calendar rule.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the calendar rule.</param>
-        /// <param name="groupdesignator">Unique identifier of the
-        /// group.</param>
-        /// <param name="duration">Duration of the calendar rule in
-        /// minutes.</param>
-        /// <param name="extentcode">Extent of the calendar rule.</param>
-        /// <param name="description">Defines free/busy times for a service and
-        /// for resources or resource groups, such as working, non-working,
-        /// vacation, and blocked.</param>
-        /// <param name="effort">Effort available for a resource during the
-        /// time described by the calendar rule.</param>
-        /// <param name="starttime">Start time for the rule.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who last modified the calendarrule.</param>
-        /// <param name="timecode">Type of calendar rule such as working hours,
-        /// break, holiday, or time off.</param>
-        /// <param name="modifiedon">Date and time when the calendar rule was
-        /// last modified.</param>
-        /// <param name="_calendaridValue">Unique identifier of the calendar
-        /// with which the calendar rule is associated.</param>
-        /// <param name="endtime">For internal use only.</param>
-        /// <param name="isvaried">Flag used in leaf nonrecurring
-        /// rules.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// last modified the calendar rule.</param>
-        /// <param name="calendarruleid">Unique identifier of the calendar
-        /// rule.</param>
-        /// <param name="timezonecode">Local time zone for the calendar
-        /// rule.</param>
-        /// <param name="subcode">Sub-type of calendar rule.</param>
-        /// <param name="pattern">Pattern of the rule recurrence.</param>
-        /// <param name="businessunitid">Unique identifier of the business unit
-        /// with which the calendar rule is associated.</param>
-        /// <param name="_innercalendaridValue">Unique identifier of the inner
-        /// calendar for non-leaf calendar rules.</param>
-        /// <param name="issimple">Flag used in vary-by-day calendar
-        /// rules.</param>
-        /// <param name="effectiveintervalstart">Effective interval start of
-        /// the calendar rule.</param>
-        /// <param name="rank">Rank of the calendar rule.</param>
-        /// <param name="isselected">Flag used in vary-by-day calendar
-        /// rules.</param>
-        /// <param name="organizationid">Unique identifier of the organization
-        /// with which the calendar rule is associated.</param>
-        public MicrosoftDynamicsCRMcalendarrule(System.DateTimeOffset? effectiveintervalend = default(System.DateTimeOffset?), bool? ismodified = default(bool?), int? offset = default(int?), string _createdonbehalfbyValue = default(string), string _serviceidValue = default(string), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), string _createdbyValue = default(string), string groupdesignator = default(string), int? duration = default(int?), int? extentcode = default(int?), string description = default(string), decimal? effort = default(decimal?), System.DateTimeOffset? starttime = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? timecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _calendaridValue = default(string), System.DateTimeOffset? endtime = default(System.DateTimeOffset?), bool? isvaried = default(bool?), string _modifiedbyValue = default(string), string calendarruleid = default(string), int? timezonecode = default(int?), int? subcode = default(int?), string pattern = default(string), string businessunitid = default(string), string _innercalendaridValue = default(string), bool? issimple = default(bool?), System.DateTimeOffset? effectiveintervalstart = default(System.DateTimeOffset?), int? rank = default(int?), bool? isselected = default(bool?), string organizationid = default(string), MicrosoftDynamicsCRMcalendar calendarid = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcalendar innercalendarid = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMservice serviceid = default(MicrosoftDynamicsCRMservice))
+        public MicrosoftDynamicsCRMcalendarrule(string groupdesignator = default(string), int? rank = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? starttime = default(System.DateTimeOffset?), string _serviceidValue = default(string), string organizationid = default(string), bool? isselected = default(bool?), int? duration = default(int?), int? offset = default(int?), int? timecode = default(int?), string _innercalendaridValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? extentcode = default(int?), int? subcode = default(int?), bool? isvaried = default(bool?), System.DateTimeOffset? effectiveintervalstart = default(System.DateTimeOffset?), string name = default(string), System.DateTimeOffset? endtime = default(System.DateTimeOffset?), string _createdbyValue = default(string), bool? issimple = default(bool?), string calendarruleid = default(string), int? timezonecode = default(int?), string pattern = default(string), decimal? effort = default(decimal?), string description = default(string), bool? ismodified = default(bool?), string _modifiedbyValue = default(string), string _calendaridValue = default(string), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), System.DateTimeOffset? effectiveintervalend = default(System.DateTimeOffset?), string businessunitid = default(string), MicrosoftDynamicsCRMcalendar calendarid = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcalendar innercalendarid = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMservice serviceid = default(MicrosoftDynamicsCRMservice))
         {
-            Effectiveintervalend = effectiveintervalend;
-            Ismodified = ismodified;
-            Offset = offset;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._serviceidValue = _serviceidValue;
-            Versionnumber = versionnumber;
-            Createdon = createdon;
-            Name = name;
-            this._createdbyValue = _createdbyValue;
             Groupdesignator = groupdesignator;
-            Duration = duration;
-            Extentcode = extentcode;
-            Description = description;
-            Effort = effort;
+            Rank = rank;
+            Createdon = createdon;
             Starttime = starttime;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._serviceidValue = _serviceidValue;
+            Organizationid = organizationid;
+            Isselected = isselected;
+            Duration = duration;
+            Offset = offset;
             Timecode = timecode;
+            this._innercalendaridValue = _innercalendaridValue;
             Modifiedon = modifiedon;
-            this._calendaridValue = _calendaridValue;
-            Endtime = endtime;
+            Extentcode = extentcode;
+            Subcode = subcode;
             Isvaried = isvaried;
-            this._modifiedbyValue = _modifiedbyValue;
+            Effectiveintervalstart = effectiveintervalstart;
+            Name = name;
+            Endtime = endtime;
+            this._createdbyValue = _createdbyValue;
+            Issimple = issimple;
             Calendarruleid = calendarruleid;
             Timezonecode = timezonecode;
-            Subcode = subcode;
             Pattern = pattern;
+            Effort = effort;
+            Description = description;
+            Ismodified = ismodified;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._calendaridValue = _calendaridValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Versionnumber = versionnumber;
+            Effectiveintervalend = effectiveintervalend;
             Businessunitid = businessunitid;
-            this._innercalendaridValue = _innercalendaridValue;
-            Issimple = issimple;
-            Effectiveintervalstart = effectiveintervalstart;
-            Rank = rank;
-            Isselected = isselected;
-            Organizationid = organizationid;
             Calendarid = calendarid;
             Modifiedby = modifiedby;
             Modifiedonbehalfby = modifiedonbehalfby;
@@ -135,36 +78,154 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets effective interval end of the calendar rule.
         /// </summary>
-        [JsonProperty(PropertyName = "effectiveintervalend")]
-        public System.DateTimeOffset? Effectiveintervalend { get; set; }
+        [JsonProperty(PropertyName = "groupdesignator")]
+        public string Groupdesignator { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
         /// </summary>
-        [JsonProperty(PropertyName = "ismodified")]
-        public bool? Ismodified { get; set; }
+        [JsonProperty(PropertyName = "rank")]
+        public int? Rank { get; set; }
 
         /// <summary>
-        /// Gets or sets start offset for leaf nonrecurring rules.
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "starttime")]
+        public System.DateTimeOffset? Starttime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_serviceid_value")]
+        public string _serviceidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public string Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isselected")]
+        public bool? Isselected { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "duration")]
+        public int? Duration { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "offset")]
         public int? Offset { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// calendarrule.
+        /// </summary>
+        [JsonProperty(PropertyName = "timecode")]
+        public int? Timecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_innercalendarid_value")]
+        public string _innercalendaridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "extentcode")]
+        public int? Extentcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "subcode")]
+        public int? Subcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isvaried")]
+        public bool? Isvaried { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "effectiveintervalstart")]
+        public System.DateTimeOffset? Effectiveintervalstart { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "endtime")]
+        public System.DateTimeOffset? Endtime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "issimple")]
+        public bool? Issimple { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "calendarruleid")]
+        public string Calendarruleid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezonecode")]
+        public int? Timezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "pattern")]
+        public string Pattern { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "effort")]
+        public decimal? Effort { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ismodified")]
+        public bool? Ismodified { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_calendarid_value")]
+        public string _calendaridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the service with which the
-        /// calendar rule is associated.
-        /// </summary>
-        [JsonProperty(PropertyName = "_serviceid_value")]
-        public string _serviceidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -172,178 +233,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string Versionnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the calendar rule was created.
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "effectiveintervalend")]
+        public System.DateTimeOffset? Effectiveintervalend { get; set; }
 
         /// <summary>
-        /// Gets or sets name of the calendar rule.
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the calendar
-        /// rule.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the group.
-        /// </summary>
-        [JsonProperty(PropertyName = "groupdesignator")]
-        public string Groupdesignator { get; set; }
-
-        /// <summary>
-        /// Gets or sets duration of the calendar rule in minutes.
-        /// </summary>
-        [JsonProperty(PropertyName = "duration")]
-        public int? Duration { get; set; }
-
-        /// <summary>
-        /// Gets or sets extent of the calendar rule.
-        /// </summary>
-        [JsonProperty(PropertyName = "extentcode")]
-        public int? Extentcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets defines free/busy times for a service and for
-        /// resources or resource groups, such as working, non-working,
-        /// vacation, and blocked.
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// Gets or sets effort available for a resource during the time
-        /// described by the calendar rule.
-        /// </summary>
-        [JsonProperty(PropertyName = "effort")]
-        public decimal? Effort { get; set; }
-
-        /// <summary>
-        /// Gets or sets start time for the rule.
-        /// </summary>
-        [JsonProperty(PropertyName = "starttime")]
-        public System.DateTimeOffset? Starttime { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who last
-        /// modified the calendarrule.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type of calendar rule such as working hours, break,
-        /// holiday, or time off.
-        /// </summary>
-        [JsonProperty(PropertyName = "timecode")]
-        public int? Timecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the calendar rule was last
-        /// modified.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the calendar with which the
-        /// calendar rule is associated.
-        /// </summary>
-        [JsonProperty(PropertyName = "_calendarid_value")]
-        public string _calendaridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "endtime")]
-        public System.DateTimeOffset? Endtime { get; set; }
-
-        /// <summary>
-        /// Gets or sets flag used in leaf nonrecurring rules.
-        /// </summary>
-        [JsonProperty(PropertyName = "isvaried")]
-        public bool? Isvaried { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who last modified the
-        /// calendar rule.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the calendar rule.
-        /// </summary>
-        [JsonProperty(PropertyName = "calendarruleid")]
-        public string Calendarruleid { get; set; }
-
-        /// <summary>
-        /// Gets or sets local time zone for the calendar rule.
-        /// </summary>
-        [JsonProperty(PropertyName = "timezonecode")]
-        public int? Timezonecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets sub-type of calendar rule.
-        /// </summary>
-        [JsonProperty(PropertyName = "subcode")]
-        public int? Subcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets pattern of the rule recurrence.
-        /// </summary>
-        [JsonProperty(PropertyName = "pattern")]
-        public string Pattern { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the business unit with which the
-        /// calendar rule is associated.
         /// </summary>
         [JsonProperty(PropertyName = "businessunitid")]
         public string Businessunitid { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the inner calendar for non-leaf
-        /// calendar rules.
-        /// </summary>
-        [JsonProperty(PropertyName = "_innercalendarid_value")]
-        public string _innercalendaridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets flag used in vary-by-day calendar rules.
-        /// </summary>
-        [JsonProperty(PropertyName = "issimple")]
-        public bool? Issimple { get; set; }
-
-        /// <summary>
-        /// Gets or sets effective interval start of the calendar rule.
-        /// </summary>
-        [JsonProperty(PropertyName = "effectiveintervalstart")]
-        public System.DateTimeOffset? Effectiveintervalstart { get; set; }
-
-        /// <summary>
-        /// Gets or sets rank of the calendar rule.
-        /// </summary>
-        [JsonProperty(PropertyName = "rank")]
-        public int? Rank { get; set; }
-
-        /// <summary>
-        /// Gets or sets flag used in vary-by-day calendar rules.
-        /// </summary>
-        [JsonProperty(PropertyName = "isselected")]
-        public bool? Isselected { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the organization with which the
-        /// calendar rule is associated.
-        /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public string Organizationid { get; set; }
 
         /// <summary>
         /// </summary>

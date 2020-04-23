@@ -29,39 +29,24 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMprivilege
         /// class.
         /// </summary>
-        /// <param name="accessright">Rights a user has to an instance of an
-        /// entity.</param>
-        /// <param name="canbebasic">Information that specifies whether the
-        /// privilege applies to the user, the user's team, or objects shared
-        /// by the user.</param>
-        /// <param name="name">Name of the privilege.</param>
-        /// <param name="privilegeid">Unique identifier of the
-        /// privilege.</param>
-        /// <param name="canbeentityreference">Information that specifies
-        /// whether the privilege applies to the local reference of an external
-        /// party.</param>
-        /// <param name="canbeglobal">Information that specifies whether the
-        /// privilege applies to the entire organization.</param>
-        /// <param name="canbeparententityreference">Information that specifies
-        /// whether the privilege applies to parent reference of the external
-        /// party.</param>
-        /// <param name="canbelocal">Information that specifies whether the
-        /// privilege applies to the user's business unit.</param>
-        /// <param name="canbedeep">Information that specifies whether the
-        /// privilege applies to child business units of the business unit
-        /// associated with the user.</param>
-        public MicrosoftDynamicsCRMprivilege(int? accessright = default(int?), bool? canbebasic = default(bool?), string versionnumber = default(string), string name = default(string), string privilegeid = default(string), bool? canbeentityreference = default(bool?), bool? canbeglobal = default(bool?), bool? canbeparententityreference = default(bool?), bool? canbelocal = default(bool?), bool? canbedeep = default(bool?), IList<MicrosoftDynamicsCRMroletemplate> roletemplateprivilegesAssociation = default(IList<MicrosoftDynamicsCRMroletemplate>), IList<MicrosoftDynamicsCRMrole> roleprivilegesAssociation = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMasyncoperation> privilegeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> privilegeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
+        public MicrosoftDynamicsCRMprivilege(string privilegerowid = default(string), int? accessright = default(int?), bool? canbebasic = default(bool?), string versionnumber = default(string), int? componentstate = default(int?), string privilegeid = default(string), bool? canbeentityreference = default(bool?), bool? canbeglobal = default(bool?), bool? canbedeep = default(bool?), string name = default(string), bool? canbeparententityreference = default(bool?), bool? ismanaged = default(bool?), string solutionid = default(string), string introducedversion = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? canbelocal = default(bool?), IList<MicrosoftDynamicsCRMroletemplate> roletemplateprivilegesAssociation = default(IList<MicrosoftDynamicsCRMroletemplate>), IList<MicrosoftDynamicsCRMrole> roleprivilegesAssociation = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMasyncoperation> privilegeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> privilegeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
         {
+            Privilegerowid = privilegerowid;
             Accessright = accessright;
             Canbebasic = canbebasic;
             Versionnumber = versionnumber;
-            Name = name;
+            Componentstate = componentstate;
             Privilegeid = privilegeid;
             Canbeentityreference = canbeentityreference;
             Canbeglobal = canbeglobal;
-            Canbeparententityreference = canbeparententityreference;
-            Canbelocal = canbelocal;
             Canbedeep = canbedeep;
+            Name = name;
+            Canbeparententityreference = canbeparententityreference;
+            Ismanaged = ismanaged;
+            Solutionid = solutionid;
+            Introducedversion = introducedversion;
+            Overwritetime = overwritetime;
+            Canbelocal = canbelocal;
             RoletemplateprivilegesAssociation = roletemplateprivilegesAssociation;
             RoleprivilegesAssociation = roleprivilegesAssociation;
             PrivilegeAsyncOperations = privilegeAsyncOperations;
@@ -75,15 +60,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets rights a user has to an instance of an entity.
+        /// </summary>
+        [JsonProperty(PropertyName = "privilegerowid")]
+        public string Privilegerowid { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "accessright")]
         public int? Accessright { get; set; }
 
         /// <summary>
-        /// Gets or sets information that specifies whether the privilege
-        /// applies to the user, the user's team, or objects shared by the
-        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "canbebasic")]
         public bool? Canbebasic { get; set; }
@@ -94,52 +80,64 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string Versionnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets name of the privilege.
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the privilege.
         /// </summary>
         [JsonProperty(PropertyName = "privilegeid")]
         public string Privilegeid { get; set; }
 
         /// <summary>
-        /// Gets or sets information that specifies whether the privilege
-        /// applies to the local reference of an external party.
         /// </summary>
         [JsonProperty(PropertyName = "canbeentityreference")]
         public bool? Canbeentityreference { get; set; }
 
         /// <summary>
-        /// Gets or sets information that specifies whether the privilege
-        /// applies to the entire organization.
         /// </summary>
         [JsonProperty(PropertyName = "canbeglobal")]
         public bool? Canbeglobal { get; set; }
 
         /// <summary>
-        /// Gets or sets information that specifies whether the privilege
-        /// applies to parent reference of the external party.
+        /// </summary>
+        [JsonProperty(PropertyName = "canbedeep")]
+        public bool? Canbedeep { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "canbeparententityreference")]
         public bool? Canbeparententityreference { get; set; }
 
         /// <summary>
-        /// Gets or sets information that specifies whether the privilege
-        /// applies to the user's business unit.
+        /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "canbelocal")]
         public bool? Canbelocal { get; set; }
-
-        /// <summary>
-        /// Gets or sets information that specifies whether the privilege
-        /// applies to child business units of the business unit associated
-        /// with the user.
-        /// </summary>
-        [JsonProperty(PropertyName = "canbedeep")]
-        public bool? Canbedeep { get; set; }
 
         /// <summary>
         /// </summary>
