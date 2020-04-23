@@ -38,9 +38,22 @@ namespace bdd_tests
     [FeatureFile("./CateringApplication_soleproprietor.feature")]
     public sealed class CateringApplicationSoleProprietor : TestBase
     {
+        public void CheckFeatureFlagsLiquor()
+        {
+            string feature_flags = configuration["featureFlags"];
+
+            // navigate to the feature flags page
+            driver.Navigate().GoToUrl($"{baseUri}{feature_flags}");
+
+            // confirm that the LiquorOne flag is enabled during this test
+            Assert.True(driver.FindElement(By.XPath("//body[contains(.,'LiquorOne')]")).Displayed);
+        }
+
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
+            CheckFeatureFlagsLiquor();
+
             CarlaLoginNoCheck();
         }
 
