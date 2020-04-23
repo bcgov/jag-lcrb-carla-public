@@ -7,6 +7,8 @@
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
     using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -27,30 +29,32 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMlistmember
         /// class.
         /// </summary>
-        /// <param name="modifiedon">Date and time when the list member was
-        /// last modified.</param>
-        /// <param name="_owneridValue">Unique identifier of the user or team
-        /// who owns the list member.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who last modified the listmember.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// last modified the list member.</param>
-        public MicrosoftDynamicsCRMlistmember(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _listidValue = default(string), string owningbusinessunit = default(string), string owninguser = default(string), string _createdbyValue = default(string), string entitytype = default(string), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), string listmemberid = default(string), string _entityidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owneridValue = default(string), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMlistmember(string _owneridValue = default(string), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string entitytype = default(string), string name = default(string), string _createdbyValue = default(string), string _listidValue = default(string), string owninguser = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string owningbusinessunit = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), string _entityidValue = default(string), string _modifiedbyValue = default(string), string listmemberid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), IList<MicrosoftDynamicsCRMteam> listmemberTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> listmemberAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> listmemberMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> listmemberBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> listmemberPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            Createdon = createdon;
-            this._listidValue = _listidValue;
-            Owningbusinessunit = owningbusinessunit;
-            Owninguser = owninguser;
-            this._createdbyValue = _createdbyValue;
-            Entitytype = entitytype;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Versionnumber = versionnumber;
-            Listmemberid = listmemberid;
-            this._entityidValue = _entityidValue;
-            Modifiedon = modifiedon;
             this._owneridValue = _owneridValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Entitytype = entitytype;
+            Name = name;
+            this._createdbyValue = _createdbyValue;
+            this._listidValue = _listidValue;
+            Owninguser = owninguser;
+            Importsequencenumber = importsequencenumber;
+            Modifiedon = modifiedon;
+            Owningbusinessunit = owningbusinessunit;
+            Overriddencreatedon = overriddencreatedon;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Versionnumber = versionnumber;
+            this._entityidValue = _entityidValue;
             this._modifiedbyValue = _modifiedbyValue;
+            Listmemberid = listmemberid;
+            Createdon = createdon;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            ListmemberTeams = listmemberTeams;
+            ListmemberAsyncOperations = listmemberAsyncOperations;
+            ListmemberMailboxTrackingFolders = listmemberMailboxTrackingFolders;
+            ListmemberBulkDeleteFailures = listmemberBulkDeleteFailures;
+            ListmemberPrincipalObjectAttributeAccesses = listmemberPrincipalObjectAttributeAccesses;
             Createdonbehalfby = createdonbehalfby;
             Modifiedonbehalfby = modifiedonbehalfby;
             Modifiedby = modifiedby;
@@ -65,28 +69,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_listid_value")]
-        public string _listidValue { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public string Owningbusinessunit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public string Owninguser { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -95,8 +89,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_listid_value")]
+        public string _listidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public string Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public string Owningbusinessunit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -105,40 +139,53 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_entityid_value")]
+        public string _entityidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "listmemberid")]
         public string Listmemberid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_entityid_value")]
-        public string _entityidValue { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the list member was last modified.
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user or team who owns the
-        /// list member.
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "listmember_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> ListmemberTeams { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the delegate user who last
-        /// modified the listmember.
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "listmember_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> ListmemberAsyncOperations { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who last modified the
-        /// list member.
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "listmember_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ListmemberMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "listmember_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> ListmemberBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "listmember_PrincipalObjectAttributeAccesses")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ListmemberPrincipalObjectAttributeAccesses { get; set; }
 
         /// <summary>
         /// </summary>

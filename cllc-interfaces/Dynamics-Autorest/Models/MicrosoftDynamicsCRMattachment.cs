@@ -31,26 +31,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMattachment
         /// class.
         /// </summary>
-        /// <param name="mimetype">MIME type of the attachment.</param>
-        /// <param name="filename">File name of the attachment.</param>
-        /// <param name="attachmentid">Unique identifier of the
-        /// attachment.</param>
-        /// <param name="body">Contents of the attachment.</param>
-        /// <param name="bodyBinary">Contents of the attachment.</param>
-        /// <param name="filesize">File size of the attachment.</param>
-        /// <param name="subject">Subject associated with the
-        /// attachment.</param>
-        /// <param name="versionnumber">Version number of the
-        /// attachment.</param>
-        public MicrosoftDynamicsCRMattachment(string mimetype = default(string), string filename = default(string), string attachmentid = default(string), string body = default(string), byte[] bodyBinary = default(byte[]), int? filesize = default(int?), string subject = default(string), string versionnumber = default(string), IList<MicrosoftDynamicsCRMsyncerror> attachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivitymimeattachment> attachmentActivityMimeAttachments = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>))
+        public MicrosoftDynamicsCRMattachment(string attachmentid = default(string), string mimetype = default(string), string body = default(string), byte[] bodyBinary = default(byte[]), string subject = default(string), string filename = default(string), int? filesize = default(int?), string versionnumber = default(string), IList<MicrosoftDynamicsCRMsyncerror> attachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivitymimeattachment> attachmentActivityMimeAttachments = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>))
         {
-            Mimetype = mimetype;
-            Filename = filename;
             Attachmentid = attachmentid;
+            Mimetype = mimetype;
             Body = body;
             BodyBinary = bodyBinary;
-            Filesize = filesize;
             Subject = subject;
+            Filename = filename;
+            Filesize = filesize;
             Versionnumber = versionnumber;
             AttachmentSyncErrors = attachmentSyncErrors;
             AttachmentActivityMimeAttachments = attachmentActivityMimeAttachments;
@@ -63,50 +52,42 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets MIME type of the attachment.
-        /// </summary>
-        [JsonProperty(PropertyName = "mimetype")]
-        public string Mimetype { get; set; }
-
-        /// <summary>
-        /// Gets or sets file name of the attachment.
-        /// </summary>
-        [JsonProperty(PropertyName = "filename")]
-        public string Filename { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "attachmentid")]
         public string Attachmentid { get; set; }
 
         /// <summary>
-        /// Gets or sets contents of the attachment.
+        /// </summary>
+        [JsonProperty(PropertyName = "mimetype")]
+        public string Mimetype { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "body")]
         public string Body { get; set; }
 
         /// <summary>
-        /// Gets or sets contents of the attachment.
         /// </summary>
         [JsonConverter(typeof(Base64UrlJsonConverter))]
         [JsonProperty(PropertyName = "body_binary")]
         public byte[] BodyBinary { get; set; }
 
         /// <summary>
-        /// Gets or sets file size of the attachment.
-        /// </summary>
-        [JsonProperty(PropertyName = "filesize")]
-        public int? Filesize { get; set; }
-
-        /// <summary>
-        /// Gets or sets subject associated with the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "subject")]
         public string Subject { get; set; }
 
         /// <summary>
-        /// Gets or sets version number of the attachment.
+        /// </summary>
+        [JsonProperty(PropertyName = "filename")]
+        public string Filename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "filesize")]
+        public int? Filesize { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }

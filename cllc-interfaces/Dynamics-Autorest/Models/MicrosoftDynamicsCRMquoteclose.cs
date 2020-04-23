@@ -29,28 +29,41 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMquoteclose
         /// class.
         /// </summary>
-        /// <param name="quotenumber">Quote number.</param>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="category">Category of the quote close
-        /// activity.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="subcategory">Subcategory of the quote close
-        /// activity.</param>
-        /// <param name="revision">Quote revision number.</param>
-        /// <param name="_quoteidValue">Unique identifier of the quote with
-        /// which the quote close activity is associated.</param>
-        public MicrosoftDynamicsCRMquoteclose(string quotenumber = default(string), int? importsequencenumber = default(int?), string category = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string subcategory = default(string), int? revision = default(int?), string _quoteidValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyQuoteclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMservice serviceidQuoteclose = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMquote quoteid = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMsystemuser createdonbehalfbyQuoteclose = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> quoteCloseSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> quoteCloseAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMannotation> quoteCloseAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMactivityparty> quotecloseActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMbulkdeletefailure> quoteCloseBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitQuoteclose = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser owninguserQuoteclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteamQuoteclose = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser createdbyQuoteclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyQuoteclose = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMquoteclose(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string subcategory = default(string), string category = default(string), int? importsequencenumber = default(int?), int? revision = default(int?), string quotenumber = default(string), string _quoteidValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyQuoteclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemailQuoteclose = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementQuoteclose = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateQuoteclose = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingQuoteclose = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderQuoteclose = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordQuoteclose = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMsite regardingobjectidSiteQuoteclose = default(MicrosoftDynamicsCRMsite), MicrosoftDynamicsCRMaccount regardingobjectidAccountQuoteclose = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMmailbox sendermailboxidQuoteclose = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidQuoteclose = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprincipal owneridQuoteclose = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityQuoteclose = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsla slaActivitypointerSlaQuoteclose = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleQuoteclose = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMquote regardingobjectidQuoteQuoteclose = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMlead regardingobjectidLeadQuoteclose = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationQuoteclose = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMincident regardingobjectidIncidentQuoteclose = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignQuoteclose = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityQuoteclose = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSlaQuoteclose = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMcampaignresponse> campaignResponseQuoteCloses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMteam> quotecloseTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> quotecloseMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> quoteclosePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMservice serviceidQuoteclose = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMquote quoteid = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMsystemuser createdonbehalfbyQuoteclose = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> quoteCloseSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> quoteCloseAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMannotation> quoteCloseAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMactivityparty> quotecloseActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMbulkdeletefailure> quoteCloseBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitQuoteclose = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser owninguserQuoteclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteamQuoteclose = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser createdbyQuoteclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyQuoteclose = default(MicrosoftDynamicsCRMsystemuser))
         {
-            Quotenumber = quotenumber;
-            Importsequencenumber = importsequencenumber;
-            Category = category;
             Overriddencreatedon = overriddencreatedon;
             Subcategory = subcategory;
+            Category = category;
+            Importsequencenumber = importsequencenumber;
             Revision = revision;
+            Quotenumber = quotenumber;
             this._quoteidValue = _quoteidValue;
             ModifiedonbehalfbyQuoteclose = modifiedonbehalfbyQuoteclose;
+            RegardingobjectidNewInteractionforemailQuoteclose = regardingobjectidNewInteractionforemailQuoteclose;
+            RegardingobjectidEntitlementQuoteclose = regardingobjectidEntitlementQuoteclose;
+            RegardingobjectidEntitlementtemplateQuoteclose = regardingobjectidEntitlementtemplateQuoteclose;
+            RegardingobjectidBookableresourcebookingQuoteclose = regardingobjectidBookableresourcebookingQuoteclose;
+            RegardingobjectidBookableresourcebookingheaderQuoteclose = regardingobjectidBookableresourcebookingheaderQuoteclose;
+            RegardingobjectidKnowledgebaserecordQuoteclose = regardingobjectidKnowledgebaserecordQuoteclose;
+            RegardingobjectidSiteQuoteclose = regardingobjectidSiteQuoteclose;
+            RegardingobjectidAccountQuoteclose = regardingobjectidAccountQuoteclose;
+            SendermailboxidQuoteclose = sendermailboxidQuoteclose;
+            TransactioncurrencyidQuoteclose = transactioncurrencyidQuoteclose;
+            OwneridQuoteclose = owneridQuoteclose;
+            RegardingobjectidOpportunityQuoteclose = regardingobjectidOpportunityQuoteclose;
+            SlaActivitypointerSlaQuoteclose = slaActivitypointerSlaQuoteclose;
+            RegardingobjectidKnowledgearticleQuoteclose = regardingobjectidKnowledgearticleQuoteclose;
+            RegardingobjectidQuoteQuoteclose = regardingobjectidQuoteQuoteclose;
+            RegardingobjectidLeadQuoteclose = regardingobjectidLeadQuoteclose;
+            RegardingobjectidBulkoperationQuoteclose = regardingobjectidBulkoperationQuoteclose;
+            RegardingobjectidIncidentQuoteclose = regardingobjectidIncidentQuoteclose;
+            RegardingobjectidCampaignQuoteclose = regardingobjectidCampaignQuoteclose;
+            RegardingobjectidCampaignactivityQuoteclose = regardingobjectidCampaignactivityQuoteclose;
+            SlainvokedidActivitypointerSlaQuoteclose = slainvokedidActivitypointerSlaQuoteclose;
+            CampaignResponseQuoteCloses = campaignResponseQuoteCloses;
+            QuotecloseTeams = quotecloseTeams;
+            QuotecloseMailboxTrackingFolders = quotecloseMailboxTrackingFolders;
+            QuoteclosePrincipalObjectAttributeAccesses = quoteclosePrincipalObjectAttributeAccesses;
             ServiceidQuoteclose = serviceidQuoteclose;
             Quoteid = quoteid;
             ActivityidActivitypointer = activityidActivitypointer;
@@ -74,45 +87,36 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets quote number.
-        /// </summary>
-        [JsonProperty(PropertyName = "quotenumber")]
-        public string Quotenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets category of the quote close activity.
-        /// </summary>
-        [JsonProperty(PropertyName = "category")]
-        public string Category { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
-        /// Gets or sets subcategory of the quote close activity.
         /// </summary>
         [JsonProperty(PropertyName = "subcategory")]
         public string Subcategory { get; set; }
 
         /// <summary>
-        /// Gets or sets quote revision number.
+        /// </summary>
+        [JsonProperty(PropertyName = "category")]
+        public string Category { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "revision")]
         public int? Revision { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the quote with which the quote
-        /// close activity is associated.
+        /// </summary>
+        [JsonProperty(PropertyName = "quotenumber")]
+        public string Quotenumber { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_quoteid_value")]
         public string _quoteidValue { get; set; }
@@ -121,6 +125,131 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "modifiedonbehalfby_quoteclose")]
         public MicrosoftDynamicsCRMsystemuser ModifiedonbehalfbyQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_new_interactionforemail_quoteclose")]
+        public MicrosoftDynamicsCRMinteractionforemail RegardingobjectidNewInteractionforemailQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_entitlement_quoteclose")]
+        public MicrosoftDynamicsCRMentitlement RegardingobjectidEntitlementQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_entitlementtemplate_quoteclose")]
+        public MicrosoftDynamicsCRMentitlementtemplate RegardingobjectidEntitlementtemplateQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebooking_quoteclose")]
+        public MicrosoftDynamicsCRMbookableresourcebooking RegardingobjectidBookableresourcebookingQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebookingheader_quoteclose")]
+        public MicrosoftDynamicsCRMbookableresourcebookingheader RegardingobjectidBookableresourcebookingheaderQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_knowledgebaserecord_quoteclose")]
+        public MicrosoftDynamicsCRMknowledgebaserecord RegardingobjectidKnowledgebaserecordQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_site_quoteclose")]
+        public MicrosoftDynamicsCRMsite RegardingobjectidSiteQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_account_quoteclose")]
+        public MicrosoftDynamicsCRMaccount RegardingobjectidAccountQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sendermailboxid_quoteclose")]
+        public MicrosoftDynamicsCRMmailbox SendermailboxidQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "transactioncurrencyid_quoteclose")]
+        public MicrosoftDynamicsCRMtransactioncurrency TransactioncurrencyidQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ownerid_quoteclose")]
+        public MicrosoftDynamicsCRMprincipal OwneridQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_opportunity_quoteclose")]
+        public MicrosoftDynamicsCRMopportunity RegardingobjectidOpportunityQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sla_activitypointer_sla_quoteclose")]
+        public MicrosoftDynamicsCRMsla SlaActivitypointerSlaQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_knowledgearticle_quoteclose")]
+        public MicrosoftDynamicsCRMknowledgearticle RegardingobjectidKnowledgearticleQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_quote_quoteclose")]
+        public MicrosoftDynamicsCRMquote RegardingobjectidQuoteQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_lead_quoteclose")]
+        public MicrosoftDynamicsCRMlead RegardingobjectidLeadQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bulkoperation_quoteclose")]
+        public MicrosoftDynamicsCRMbulkoperation RegardingobjectidBulkoperationQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_incident_quoteclose")]
+        public MicrosoftDynamicsCRMincident RegardingobjectidIncidentQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_campaign_quoteclose")]
+        public MicrosoftDynamicsCRMcampaign RegardingobjectidCampaignQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_campaignactivity_quoteclose")]
+        public MicrosoftDynamicsCRMcampaignactivity RegardingobjectidCampaignactivityQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "slainvokedid_activitypointer_sla_quoteclose")]
+        public MicrosoftDynamicsCRMsla SlainvokedidActivitypointerSlaQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "CampaignResponse_QuoteCloses")]
+        public IList<MicrosoftDynamicsCRMcampaignresponse> CampaignResponseQuoteCloses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "quoteclose_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> QuotecloseTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "quoteclose_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> QuotecloseMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "quoteclose_PrincipalObjectAttributeAccesses")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> QuoteclosePrincipalObjectAttributeAccesses { get; set; }
 
         /// <summary>
         /// </summary>

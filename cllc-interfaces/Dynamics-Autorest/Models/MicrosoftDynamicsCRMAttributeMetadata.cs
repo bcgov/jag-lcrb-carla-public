@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMAttributeMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMAttributeMetadata(string attributeOf = default(string), string attributeType = default(string), string attributeTypeName = default(string), int? columnNumber = default(int?), string description = default(string), string displayName = default(string), string deprecatedVersion = default(string), string introducedVersion = default(string), string entityLogicalName = default(string), string isAuditEnabled = default(string), bool? isCustomAttribute = default(bool?), bool? isPrimaryId = default(bool?), bool? isPrimaryName = default(bool?), bool? isValidForCreate = default(bool?), bool? isValidForRead = default(bool?), bool? isValidForUpdate = default(bool?), bool? canBeSecuredForRead = default(bool?), bool? canBeSecuredForCreate = default(bool?), bool? canBeSecuredForUpdate = default(bool?), bool? isSecured = default(bool?), bool? isRetrievable = default(bool?), bool? isFilterable = default(bool?), bool? isSearchable = default(bool?), bool? isManaged = default(bool?), string isGlobalFilterEnabled = default(string), string isSortableEnabled = default(string), string linkedAttributeId = default(string), string logicalName = default(string), string isCustomizable = default(string), string isRenameable = default(string), string isValidForAdvancedFind = default(string), string requiredLevel = default(string), string canModifyAdditionalSettings = default(string), string schemaName = default(string), bool? isLogical = default(bool?), string inheritsFrom = default(string), int? sourceType = default(int?))
+        public MicrosoftDynamicsCRMAttributeMetadata(string attributeOf = default(string), string attributeType = default(string), string attributeTypeName = default(string), int? columnNumber = default(int?), string description = default(string), string displayName = default(string), string deprecatedVersion = default(string), string introducedVersion = default(string), string entityLogicalName = default(string), string isAuditEnabled = default(string), bool? isCustomAttribute = default(bool?), bool? isPrimaryId = default(bool?), bool? isPrimaryName = default(bool?), bool? isValidForCreate = default(bool?), bool? isValidForRead = default(bool?), bool? isValidForUpdate = default(bool?), bool? canBeSecuredForRead = default(bool?), bool? canBeSecuredForCreate = default(bool?), bool? canBeSecuredForUpdate = default(bool?), bool? isSecured = default(bool?), bool? isRetrievable = default(bool?), bool? isFilterable = default(bool?), bool? isSearchable = default(bool?), bool? isManaged = default(bool?), string isGlobalFilterEnabled = default(string), string isSortableEnabled = default(string), string linkedAttributeId = default(string), string logicalName = default(string), string isCustomizable = default(string), string isRenameable = default(string), string isValidForAdvancedFind = default(string), bool? isValidForForm = default(bool?), bool? isRequiredForForm = default(bool?), bool? isValidForGrid = default(bool?), string requiredLevel = default(string), string canModifyAdditionalSettings = default(string), string schemaName = default(string), string externalName = default(string), bool? isLogical = default(bool?), bool? isDataSourceSecret = default(bool?), string inheritsFrom = default(string), int? sourceType = default(int?), string autoNumberFormat = default(string))
         {
             AttributeOf = attributeOf;
             AttributeType = attributeType;
@@ -60,12 +60,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             IsCustomizable = isCustomizable;
             IsRenameable = isRenameable;
             IsValidForAdvancedFind = isValidForAdvancedFind;
+            IsValidForForm = isValidForForm;
+            IsRequiredForForm = isRequiredForForm;
+            IsValidForGrid = isValidForGrid;
             RequiredLevel = requiredLevel;
             CanModifyAdditionalSettings = canModifyAdditionalSettings;
             SchemaName = schemaName;
+            ExternalName = externalName;
             IsLogical = isLogical;
+            IsDataSourceSecret = isDataSourceSecret;
             InheritsFrom = inheritsFrom;
             SourceType = sourceType;
+            AutoNumberFormat = autoNumberFormat;
             CustomInit();
         }
 
@@ -231,6 +237,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "IsValidForForm")]
+        public bool? IsValidForForm { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IsRequiredForForm")]
+        public bool? IsRequiredForForm { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IsValidForGrid")]
+        public bool? IsValidForGrid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "RequiredLevel")]
         public string RequiredLevel { get; set; }
 
@@ -246,8 +267,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "ExternalName")]
+        public string ExternalName { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "IsLogical")]
         public bool? IsLogical { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IsDataSourceSecret")]
+        public bool? IsDataSourceSecret { get; set; }
 
         /// <summary>
         /// </summary>
@@ -258,6 +289,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "SourceType")]
         public int? SourceType { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "AutoNumberFormat")]
+        public string AutoNumberFormat { get; set; }
 
     }
 }
