@@ -1,7 +1,7 @@
 
 import { filter, takeWhile, catchError, mergeMap, delay } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { Subscription, Subject, Observable, forkJoin, of } from 'rxjs';
@@ -222,6 +222,30 @@ export class ApplicationComponent extends FormBase implements OnInit {
           this.form.disable();
         }
         this.savedFormData = this.form.value;
+
+        if (this.application.applicationType.formReference) {
+          // get the application form 
+          this.dynamicsFormDataService.getDynamicsForm(this.application.applicationType.formReference) 
+            .pipe(takeWhile(() => this.componentActive))
+            .subscribe(value => {
+              this.dynamicsForm = value;
+              this.dynamicsForm.tabs.forEach(function (tab) {
+                tab.sections.forEach(function (section) {
+                  section.fields.forEach(function (field) {
+                    // add the field to the form.
+                    if (field.required) {
+                      this.form.addControl(field.name, new FormControl('', Validators.required));
+                    }
+                    else {
+                      this.form.addControl(field.name, new FormControl('')); 
+                    }
+                    
+                  });
+                });
+              });
+            });
+        }
+        
       },
         () => {
           console.log('Error occured');
@@ -229,10 +253,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     );
 
 
-    // get the application form 
-    this.dynamicsFormDataService.getDynamicsForm('df0e3410-b8d4-46f8-bcef-1b20a01a66d7') // catering form for demo
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(value => this.dynamicsForm = value);
+    
   }
 
   private hideFormControlByType() {
