@@ -49,7 +49,7 @@ namespace bdd_tests
             // navigate to the feature flags page
             driver.Navigate().GoToUrl($"{baseUri}{feature_flags}");
 
-            // confirm that the LiquorOne flag is enabled during this test
+            // confirm that the CRS-Renewal flag is enabled during this test
             Assert.True(driver.FindElement(By.XPath("//body[contains(.,'CRS-Renewal')]")).Displayed);
         }
 
