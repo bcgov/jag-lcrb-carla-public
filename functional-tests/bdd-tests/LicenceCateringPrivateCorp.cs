@@ -84,6 +84,9 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(7000);
 
+            // confirm correct payment amount
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$450.00')]")).Displayed);
+
             string licencesLink = "Licences";
 
             // click on the Licences link
@@ -373,6 +376,9 @@ namespace bdd_tests
             MakePayment();
 
             System.Threading.Thread.Sleep(7000);
+
+            // confirm correct payment amount
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
         }
 
         [And(@"I submit a third party application")]
@@ -434,6 +440,12 @@ namespace bdd_tests
         [And(@"I request a third party operator")]
         public void request_third_party_operator()
         {
+            // return to the Licences tab
+            string licencesLink2 = "Licences";
+
+            NgWebElement uiLicences2 = ngDriver.FindElement(By.LinkText(licencesLink2));
+            uiLicences2.Click();
+
             /* 
             Page Title: Licences
             Subtitle:   Catering Licences
