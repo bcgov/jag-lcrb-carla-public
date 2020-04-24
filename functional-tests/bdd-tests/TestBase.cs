@@ -208,41 +208,119 @@ namespace bdd_tests
             Page Title: Cannabis Retail Store Licence Eligibility Disclosure
             */
 
-            string electricSignature = "Automated Test";
-
+            // select response:
+            // On or after March 1, 2020, did you or any of your associates own, operate, provide financial support to, or receive income from an unlicensed cannabis retail store or retailer?
             try
             {
-                // select No for Question 1 using radio button
-                NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
-                noRadio1.Click();
+                // select No using radio button
+                //NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
+                //noRadio1.Click();
+
+                // select Yes radio button 
+                NgWebElement yesRadio1 = ngDriver.FindElement(By.Id("mat-radio-2"));
+                yesRadio1.Click();
             }
             catch (NoSuchElementException)
             {
             }
 
+            // complete field:
+            // Please indicate the name and location of the retailer or store
             try
             {
-                // select No for Question 2 using radio button
-                NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
+                string nameAndLocation = "Automated test name and location of retailer";
+                
+                NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[49]"));
+                uiNameAndLocation.SendKeys(nameAndLocation);
+            }
+            catch (NoSuchElementException)
+            {
+            }
+
+            // select response:
+            // Does the retailer or store continue to operate?
+            try
+            {
+                // select Yes for Question 2 using radio button
+                NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-5"));
                 noRadio2.Click();
             }
             catch (NoSuchElementException)
             {
             }
 
+            // select response:
+            // On or after March 1, 2020, were you or any of your associates involved with the distribution or supply of cannabis to a licensed or unlicensed cannabis retail store or retailer?
             try
             {
-                // select the certification checkbox
-                NgWebElement matCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
-                matCheckbox.Click();
+                // select No using radio button
+                //NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
+                //noRadio2.Click();
+
+                // select Yes using radio button
+                NgWebElement yesRadio2 = ngDriver.FindElement(By.Id("mat-radio-8"));
+                yesRadio2.Click();
             }
             catch (NoSuchElementException)
             {
             }
 
+            // complete field:
+            // Please indicate the details of your involvement
+
             try
             {
-                // enter the electronic signature
+                string involvementDetails = "Automated test - details of the involvement";
+                
+                NgWebElement matCheckbox = ngDriver.FindElement(By.XPath("//mat-dialog-container[@id='mat-dialog-0']/app-eligibility-form/div/form/div[4]/div/app-field/section/div/section/textarea"));
+                matCheckbox.SendKeys(involvementDetails);
+            }
+            catch (NoSuchElementException)
+            {
+            }
+
+            // complete field: 
+            // Please indicate the name and location of the retailer or store
+
+            try
+            {
+                string nameAndLocation2 = "Automated test name and location of retailer (2)";
+
+                NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[51]"));
+                uiNameAndLocation2.SendKeys(nameAndLocation2);
+            }
+            catch (NoSuchElementException)
+            {
+            }
+
+            // select response:
+            // Do you continue to be involved?
+
+            try
+            {
+                // select Yes for Question 2 using radio button
+                NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-11"));
+                noRadio2.Click();
+            }
+            catch (NoSuchElementException)
+            {
+            }
+
+            // select certification checkbox
+            try
+            {
+                NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-checkbox-1"));
+                noRadio2.Click();
+            }
+            catch (NoSuchElementException)
+            {
+            }
+
+            // enter the electronic signature
+            try
+            {
+                string electricSignature = "Automated Test";
+
                 NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
                 sigCheckbox.SendKeys(electricSignature);
             }
@@ -250,9 +328,9 @@ namespace bdd_tests
             {
             }
 
+            // click on the Submit button
             try
             {
-                // click on the Submit button
                 NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
                 submit_button.Click();
             }
