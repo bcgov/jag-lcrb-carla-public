@@ -30,6 +30,8 @@ namespace bdd_tests
 
         protected string baseUri;
 
+        protected string businessTypeShared;
+
         protected TestBase()
         {
             string path = Directory.GetCurrentDirectory();
@@ -74,6 +76,8 @@ namespace bdd_tests
 
         public void CarlaLogin(string businessType)
         {
+            businessTypeShared = businessType;
+            
             // load the dashboard page
             string test_start = configuration["test_start"];
 
@@ -229,9 +233,22 @@ namespace bdd_tests
             try
             {
                 string nameAndLocation = "Automated test name and location of retailer";
-                
-                NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[49]"));
-                uiNameAndLocation.SendKeys(nameAndLocation);
+
+                if (businessTypeShared == "indigenous nation")
+                {
+                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[46]"));
+                    uiNameAndLocation.SendKeys(nameAndLocation);
+                }
+                else if (businessTypeShared == "sole proprietorship")
+                {
+                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[47]"));
+                    uiNameAndLocation.SendKeys(nameAndLocation);
+                }
+                else
+                {
+                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[49]"));
+                    uiNameAndLocation.SendKeys(nameAndLocation);
+                }       
             }
             catch (NoSuchElementException)
             {
@@ -286,8 +303,16 @@ namespace bdd_tests
             {
                 string nameAndLocation2 = "Automated test name and location of retailer (2)";
 
-                NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[51]"));
-                uiNameAndLocation2.SendKeys(nameAndLocation2);
+                if (businessTypeShared == "sole proprietorship")
+                {
+                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[49]"));
+                    uiNameAndLocation2.SendKeys(nameAndLocation2);
+                }
+                else
+                {
+                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[51]"));
+                    uiNameAndLocation2.SendKeys(nameAndLocation2);
+                }
             }
             catch (NoSuchElementException)
             {
