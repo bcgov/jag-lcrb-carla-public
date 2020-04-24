@@ -18,7 +18,7 @@ Feature: Establishment_watchwords
     I want to submit an establishment name
     And confirm that watch words are not used
 
-Scenario Outline: Confirm establishment watch words
+Scenario:
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     And I am logged in to the dashboard as a private corporation
@@ -26,40 +26,38 @@ Scenario Outline: Confirm establishment watch words
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I enter a "<watch_word>"
-    Then the correct error message is displayed  
+    Then I confirm the correct watchword error messages are displayed 
    
-    Examples:
-    | watch_word    |
-    | Antidote      |
-    | Apothecary    |
-    | Compassion    |
-    | Cure          |
-    | Dispensary    |
-    | Doctor        |
-    | Dr.           |
-    | Elixir        |
-    | Heal          |
-    | Healing       |
-    | Health        |
-    | Herbal        |
-    | Hospital      |
-    | Med           |
-    | Medi          |
-    | Medical       |
-    | Medicinal     |
-    | Medicine      |
-    | Pharmacy      |
-    | Potion        |
-    | Prescription  |
-    | Relief        |
-    | Remedy        |
-    | Restore       |
-    | Solution      |
-    | Therapeutics  |
-    | Therapy       |
-    | Tonics        |
-    | Treatment     |
+    List of watchwords:
+    - Antidote      
+    - Apothecary    
+    - Compassion    
+    - Cure          
+    - Dispensary    
+    - Doctor        
+    - Dr.           
+    - Elixir        
+    - Heal          
+    - Healing       
+    - Health        
+    - Herbal        
+    - Hospital      
+    - Med           
+    - Medi          
+    - Medical       
+    - Medicinal     
+    - Medicine      
+    - Pharmacy      
+    - Potion        
+    - Prescription  
+    - Relief        
+    - Remedy        
+    - Restore       
+    - Solution      
+    - Therapeutics  
+    - Therapy       
+    - Tonics        
+    - Treatment     
 */
 
 namespace bdd_tests
@@ -459,14 +457,46 @@ namespace bdd_tests
             submitOrgInfoButton.Click();
         }
 
-        [When(@"I enter a (.*)")]
-        public void enter_a_watchword(string watchword)
+        [Then(@"I confirm the correct watchword error messages are displayed")]
+        public void watch_warning_displayed()
         {
             /* 
             Page Title: Submit the Cannabis Retail Store Application
             */
-
+            
             System.Threading.Thread.Sleep(7000);
+
+            string watchword = "Antidote";
+
+            /*Antidote
+              Apothecary
+              Compassion
+              Cure
+              Dispensary
+              Doctor
+              Dr.
+              Elixir
+              Heal
+              Healing
+              Health
+              Herbal
+              Hospital
+              Med
+              Medi
+              Medical
+              Medicinal
+              Medicine
+              Pharmacy
+              Potion
+              Prescription
+              Relief
+              Remedy
+              Restore
+              Solution
+              Therapeutics
+              Therapy
+              Tonics
+              Treatment*/
 
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
@@ -475,14 +505,6 @@ namespace bdd_tests
             // click on the establishment address to trigger the warning
             NgWebElement estabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
             estabAddress.Click();
-        }
-
-        [Then(@"the correct error message is displayed")]
-        public void watch_warning_displayed()
-        {
-            /* 
-            Page Title: Submit the Cannabis Retail Store Application
-            */
 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'at least one word that doesn’t comply']")).Displayed);
         }
