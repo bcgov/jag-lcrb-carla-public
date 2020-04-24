@@ -24,6 +24,7 @@ export class ApplicationType {
   showDeclarations: boolean;
   showLiquorDeclarations: boolean;
   establishmetNameIsReadOnly: boolean;
+  formReference: string;
   showDescription1: boolean;
 
   storeContactInfo: FormControlState;
