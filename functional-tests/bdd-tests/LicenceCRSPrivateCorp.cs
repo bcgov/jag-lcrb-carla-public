@@ -104,6 +104,9 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(7000);
 
+            // confirm correct payment amount
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
+
             string licencesLink = "Licences";
 
             // click on the Licences link
@@ -273,6 +276,9 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(7000);
 
+            // confirm correct payment amount
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
+
             // return to the Licences tab
             string licencesLink = "Licences";
 
@@ -336,6 +342,9 @@ namespace bdd_tests
             MakePayment();
             
             System.Threading.Thread.Sleep(7000);
+
+            // confirm correct payment amount
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
 
             // return to the Licences tab
             string licencesLink = "Licences";
@@ -410,6 +419,9 @@ namespace bdd_tests
             MakePayment();
 
             System.Threading.Thread.Sleep(7000);
+
+            // confirm correct payment amount
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$440.00')]")).Displayed);
 
             // return to the Licences tab
             string licencesLink = "Licences";
