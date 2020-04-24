@@ -13,7 +13,6 @@ Scenario: Pay First Year Catering Licence and Complete Applications
     And I request an event authorization
     # And I request a valid store name or branding change
     And I request a store relocation
-    # And I submit a third party application
     And I request a third party operator
     And I request a transfer of ownership
     Then the requested applications are visible on the dashboard
