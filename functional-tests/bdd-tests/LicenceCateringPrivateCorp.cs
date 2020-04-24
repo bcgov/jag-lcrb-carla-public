@@ -381,62 +381,6 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
         }
 
-        [And(@"I submit a third party application")]
-        public void third_party_operator_application()
-        {
-            // return to the Licences tab
-            string licencesLink = "Licences";
-
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
-
-            /* 
-            Page Title: Licences
-            Subtitle:   Catering Licences
-            */
-
-            string thirdpartyapp = "Third-Party Operator Application";
-
-            // click on the Third-Party Operator link
-            NgWebElement uiThirdPartyOp = ngDriver.FindElement(By.LinkText(thirdpartyapp));
-            uiThirdPartyOp.Click();
-
-            /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
-            continueButton.Click();
-
-            /* 
-            Page Title: Third-Party Operator Application
-            */
-
-            // click on the authorized to submit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
-            uiAuthorizedToSubmit.Click();
-
-            // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
-            uiSignatureAgreement.Click();
-
-            // click on submit and pay button
-            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
-            submitButton.Click();
-
-            // pay for the application
-            MakePayment();
-
-            System.Threading.Thread.Sleep(7000);
-
-            // return to the Licences tab
-            string licencesLink2 = "Licences";
-
-            NgWebElement uiLicences2 = ngDriver.FindElement(By.LinkText(licencesLink2));
-            uiLicences2.Click();
-        }
-
         [And(@"I request a third party operator")]
         public void request_third_party_operator()
         {
