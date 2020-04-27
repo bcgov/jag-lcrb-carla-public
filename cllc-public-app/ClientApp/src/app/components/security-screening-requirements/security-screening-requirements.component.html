@@ -1,5 +1,6 @@
 <div class="form-wrapper">
     <h1>Security Screening Requirements</h1>
+    <div [ngBusy]="busy"></div>
 
 
     <div class="row">
@@ -99,9 +100,7 @@
                             <div *ngIf="!data?.liquor?.outstandingItems?.length">
                                 <h3 class="plain-header"><i class="fas fa-check"></i>All Personal History Summary forms have been submitted.</h3>
                             </div>
-                            <div *ngIf="!data?.liquor?.outstandingItems?.length > 0">
-                                <h3 class="plain-header"><i class="fas fa-exclamation"></i>Not all Personal History Summary forms have been submitted.</h3>
-                            </div>
+                            
                         </ng-container>
                         
 
@@ -127,6 +126,11 @@
                             </div>
                         
                             </section>
+
+                        <p>Each Cannabis licence associate must proviode a completed Cannabis Associate Security Screening form along with required documents.                            
+                        </p>
+
+                        <section *ngIf="data?.cannabis?.outstandingItems?.length">
 
                         <p>Sole proprietors and associates of applicants for a non-medical cannabis licence are required
                             to
@@ -155,6 +159,7 @@
                             for
                             the complete details.
                         </p>
+                        </section>
 
                         <!--h3>Outstanding Cannabis Associate Security Screening forms</h3>
                     <p>
@@ -184,34 +189,44 @@
                                         <i class="fas fa-copy"></i>
                                         Copy Link</a>
                                 </td-->
+                            </tr>
                                 <tr [ngClass]="{'alt-row': i%2 === 0}"
                                     *ngFor="let item of data?.cannabis?.completedItems; let i=index;">
-                                    <td>{{item.firstName}} {{item.lastName}}</td>
+                                    <td><i class="fas fa-check"></i>{{item.firstName}} {{item.lastName}}</td>
                                     <!--td>{{item.lastName}} </td-->
                                     <!--td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td-->
                                 </tr>
                             </table>
+
                         </ng-container>
 
-                        <!--h3>Completed Cannabis Associate Security Screening Forms</h3>
+
+
+
+                    <h4 class="plain-header">Completed Cannabis Associate Security Screening Forms</h4>
                     <p>
                         The following associates have completed their cannabis associate security screening forms. No
                         further information is required at this time.
                     </p>
 
-                    <table *ngIf="data?.cannabis?.completedItems?.length" class="w-100">
+                    <table *ngIf="data?.cannabis?.completedItems?.length" class="greyGridTable">
+                        <thead>
                         <tr>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Date Submitted</th>
-                        </tr>
+                        </tr></thead>
                         <tr [ngClass]="{'alt-row': i%2 === 0}"
                             *ngFor="let item of data?.cannabis?.completedItems; let i=index;">
                             <td>{{item.firstName}}</td>
                             <td>{{item.lastName}} </td>
                             <td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td>
                         </tr>
-                    </table-->
+                    </table>
+
+                    <div *ngIf="!data?.cannabis?.outstandingItems?.length">
+                        <h3 class="plain-header"><i class="fas fa-check"></i>All Associate Security Screenings have been submitted.</h3>
+                    </div>
 
                     </div>
                 </mat-tab>
