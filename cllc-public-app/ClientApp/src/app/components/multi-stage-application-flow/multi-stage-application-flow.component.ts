@@ -1,6 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { ActivatedRoute } from '@angular/router';
+import { of, Observable } from 'rxjs';
+import { AccountProfileComponent } from '@components/account-profile/account-profile.component';
+import { ApplicationLicenseeChangesComponent } from '@components/applications/application-licensee-changes/application-licensee-changes.component';
+import { ApplicationComponent } from '@components/applications/application/application.component';
+import { DynamicApplicationComponent } from '@components/applications/dynamic-application/dynamic-application.component';
 
 @Component({
   selector: 'app-multi-stage-application-flow',
@@ -12,6 +17,12 @@ export class MultiStageApplicationFlowComponent implements OnInit {
   useDynamicFormMode: boolean = false;
   applicationId: string;
 
+  @ViewChild('accountProfile', { static: false }) accountProfileComponent: AccountProfileComponent;
+  @ViewChild('orgStructure', { static: false }) licenseeChangesComponent: ApplicationLicenseeChangesComponent;
+  @ViewChild('mainApplication', { static: false }) applicationComponent: ApplicationComponent;
+  @ViewChild('dynamicApplication', { static: false }) dynamicApplicationComponent: DynamicApplicationComponent;
+
+
   constructor(public featureFlagService: FeatureFlagService, private route: ActivatedRoute, ) {
 
     featureFlagService.featureOn('SecurityScreening')
@@ -22,12 +33,30 @@ export class MultiStageApplicationFlowComponent implements OnInit {
       this.applicationId = params.get('applicationId');
     });
 
-   }
+  }
 
   ngOnInit() {
   }
 
+  canDeactivate(): Observable<boolean> {
+    let result: Observable<boolean> = of(true);
+    if (this.accountProfileComponent) {
+      result = this.accountProfileComponent.canDeactivate();
+    }
+    if (this.licenseeChangesComponent) {
+      result = this.licenseeChangesComponent.canDeactivate();
+    }
+    if (this.applicationComponent) {
+      result = this.applicationComponent.canDeactivate();
+    }
+    if (this.dynamicApplicationComponent) {
+      result = this.dynamicApplicationComponent.canDeactivate();
+    }
+    return result;
+  }
+
   selectionChange(event) {
+
   }
 
 }
