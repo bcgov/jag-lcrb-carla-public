@@ -78,16 +78,7 @@
               </td>
 
               <td>
-                <ng-container *ngIf="!item.isOperated && item.thirdPartyOperatorAccountName">
-                  <span>Operated By:</span>
-                  <strong style="color: #1a5a96;">
-                    {{item.thirdPartyOperatorAccountName}}</strong>
-                  <br>
-                  <a [routerLink]="[ '/cancel-third-party-operator/' + item.licenseId]" class="missing">
-                    <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>
-                      Terminate Third Party Operator Relationship</span>
-                  </a>
-                </ng-container>
+
                 <div *ngIf="showPlanStoreOpening(item)" style="min-width: 10px; margin-bottom: 10px;">
                   <a href="javascript:void(0);" (click)="planStoreOpening(item)" class="missing">
                     <span *ngIf="item.status == PAYMENT_REQUIRED">
@@ -140,6 +131,8 @@
                     </a>
                   </div>
                 </div>
+                <!-- Third Party Operator Actions-->
+                <!-- Indicate application has been initiated-->
                 <div *ngIf="!licenceHasExpired(item.expiryDate) && item.tpoRequested === 'Yes'" class="licence-expired">
                   <br>
                   <strong>Third Party Operator Application Initiated</strong> <br />
@@ -151,6 +144,16 @@
                     </a>
                   </section>
                 </div>
+                <!-- Indicate third party operator relationship established-->
+                <ng-container *ngIf="!item.isOperated && item.thirdPartyOperatorAccountName">
+                  <br><span>Operated By:</span>
+                  <strong style="color: #1a5a96;">
+                    {{item.thirdPartyOperatorAccountName}}</strong>
+                  <br>
+                  <a [routerLink]="[ '/cancel-third-party-operator/' + item.licenseId]" class="missing">
+                    <span><i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Terminate Third Party Operator Relationship</span>
+                  </a>
+                </ng-container>
               </td>
 
 
