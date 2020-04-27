@@ -78,118 +78,7 @@ namespace bdd_tests
         [And(@"I review the account profile")]
         public void review_account_profile()
         {
-            /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            // create the account data
-            string bizNumber = "012345678";
-            string streetAddress1 = "645 Tyee Road";
-            string streetAddress2 = "Point Ellis";
-            string city = "Victoria";
-            string postalCode = "V8V4Y3";
-            string bizPhoneNumber = "2501811818";
-            string bizEmail = "test@automation.com";
-            string solepropContactGiven = "CateringSolePropGiven";
-            string solepropContactSurname = "CateringSolePropSurname";
-            string soleProprietorContactTitle = "Owner";
-            string soleProprietorContactPhone = "7781811818";
-            string soleProprietorContactEmail = "automated@test.com";
-
-            string mailStreet1 = "P.O. Box 123";
-            string mailStreet2 = "303 Prideaux St.";
-            string mailCity = "Nanaimo";
-            string mailProvince = "B.C.";
-            string mailPostalCode = "V9R2N3";
-            string mailCountry = "Switzerland";
-
-            // enter the business number
-            NgWebElement uiBizNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
-            uiBizNumber.SendKeys(bizNumber);
-
-            // enter the physical street address 1
-            NgWebElement uiStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
-            uiStreetAddress1.SendKeys(streetAddress1);
-
-            // enter the physical street address 2
-            NgWebElement uiStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
-            uiStreetAddress2.SendKeys(streetAddress2);
-
-            // enter the physical city
-            NgWebElement uiCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
-            uiCity.SendKeys(city);
-
-            // enter the physical postal code
-            NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
-            uiPostalCode.SendKeys(postalCode);
-
-            /* switching off use of checkbox "Same as physical address" in order to test mailing address fields
-            NgWebElement uiSameAsMailingAddress = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
-            uiSameAsMailingAddress.Click(); */
-
-            // enter the mailing street address 1
-            NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
-            uiMailingStreetAddress1.SendKeys(mailStreet1);
-
-            // enter the mailing street address 2
-            NgWebElement uiMailingStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[11]"));
-            uiMailingStreetAddress2.SendKeys(mailStreet2);
-
-            // enter the mailing city
-            NgWebElement uiMailingCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
-            uiMailingCity.SendKeys(mailCity);
-
-            // enter the mailing province
-            NgWebElement uiMailingProvince = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
-            uiMailingProvince.SendKeys(mailProvince);
-
-            // enter the mailing postal code
-            NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[14]"));
-            uiMailingPostalCode.SendKeys(mailPostalCode);
-
-            // enter the mailing country
-            NgWebElement uiMailingCountry = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
-            uiMailingCountry.SendKeys(mailCountry);
-
-            // enter the business phone number
-            NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[16]"));
-            uiBizPhoneNumber.SendKeys(bizPhoneNumber);
-
-            // enter the business email
-            NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
-            uiBizEmail.SendKeys(bizEmail);
-
-            // (re)enter the sole proprietor contact first name
-            NgWebElement uiSolePropContactGiven = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
-            uiSolePropContactGiven.SendKeys(solepropContactGiven);
-
-            // (re)enter the sole proprietor contact surname
-            NgWebElement uiSolePropContactSurname = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
-            uiSolePropContactSurname.SendKeys(solepropContactSurname);
-
-            // enter the sole proprietor contact title
-            NgWebElement uiSolePropContactTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
-            uiSolePropContactTitle.SendKeys(soleProprietorContactTitle);
-
-            // enter the sole proprietor contact phone number
-            NgWebElement uiSolePropContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
-            uiSolePropContactPhone.SendKeys(soleProprietorContactPhone);
-
-            // enter the sole proprietor contact phone email
-            NgWebElement uiSolePropContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
-            uiSolePropContactEmail.SendKeys(soleProprietorContactEmail);
-
-            // select 'No' for sole proprietor's connection to a federal producer
-            NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
-            corpConnectionFederalProducer.Click();
-
-            // select 'No' for federal producer's connection to sole proprietor
-            NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
-            federalProducerConnectionToCorp.Click();
-
-            // click on Continue to Organization Review button
-            NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
-            continueApp_button.Click();
+            ReviewAccountProfile();
         }
 
         [And(@"I review the organization structure")]
@@ -202,7 +91,6 @@ namespace bdd_tests
             // create the leader info
             string firstName = "Jane";
             string lastName = "Bond";
-            //string title = "Adventurer";
             string email = "jane@bond.com";
 
             // enter the leader first name
