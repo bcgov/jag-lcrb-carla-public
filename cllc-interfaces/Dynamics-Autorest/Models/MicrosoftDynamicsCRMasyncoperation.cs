@@ -29,133 +29,55 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMasyncoperation class.
         /// </summary>
-        /// <param name="createdon">Date and time when the system job was
-        /// created.</param>
-        /// <param name="statecode">Status of the system job.</param>
-        /// <param name="_owningextensionidValue">Unique identifier of the
-        /// owning extension with which the system job is associated.</param>
-        /// <param name="operationtype">Type of the system job.</param>
-        /// <param name="subtype">The Subtype of the Async Job</param>
-        /// <param name="message">Message related to the system job.</param>
-        /// <param name="dependencytoken">Execution of all operations with the
-        /// same dependency token is serialized.</param>
-        /// <param name="correlationupdatedtime">Last time the correlation
-        /// depth was updated.</param>
-        /// <param name="depth">Number of SDK calls made since the first
-        /// call.</param>
-        /// <param name="name">Name of the system job.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the asyncoperation.</param>
-        /// <param name="executiontimespan">Time that the system job has taken
-        /// to execute.</param>
-        /// <param name="modifiedon">Date and time when the system job was last
-        /// modified.</param>
-        /// <param name="_workflowactivationidValue">Unique identifier of the
-        /// workflow activation related to the system job.</param>
-        /// <param name="_owneridValue">Unique identifier of the user or team
-        /// who owns the system job.</param>
-        /// <param name="postponeuntil">Indicates whether the system job should
-        /// run only after the specified date and time.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// last modified the system job.</param>
-        /// <param name="_owningteamValue">Unique identifier of the team who
-        /// owns the record.</param>
-        /// <param name="completedon">Date and time when the system job was
-        /// completed.</param>
-        /// <param name="primaryentitytype">Type of entity with which the
-        /// system job is primarily associated.</param>
-        /// <param name="_regardingobjectidValue">Unique identifier of the
-        /// object with which the system job is associated.</param>
-        /// <param name="data">Unstructured data associated with the system
-        /// job.</param>
-        /// <param name="recurrencepattern">Pattern of the system job's
-        /// recurrence.</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="sequence">Order in which operations were
-        /// submitted.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the system job.</param>
-        /// <param name="correlationid">Unique identifier used to correlate
-        /// between multiple SDK requests and system jobs.</param>
-        /// <param name="_owninguserValue">Unique identifier of the user who
-        /// owns the record.</param>
-        /// <param name="workflowstagename">Name of a workflow stage.</param>
-        /// <param name="_owningbusinessunitValue">Unique identifier of the
-        /// business unit that owns the system job.</param>
-        /// <param name="recurrencestarttime">Starting time in UTC for the
-        /// recurrence pattern.</param>
-        /// <param name="errorcode">Error code returned from a canceled system
-        /// job.</param>
-        /// <param name="hostid">Unique identifier of the host that owns this
-        /// system job.</param>
-        /// <param name="messagename">Name of the message that started this
-        /// system job.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who last modified the asyncoperation.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="statuscode">Reason for the status of the system
-        /// job.</param>
-        /// <param name="requestid">Unique identifier of the request that
-        /// generated the system job.</param>
-        /// <param name="friendlymessage">Message provided by the system
-        /// job.</param>
-        /// <param name="iswaitingforevent">Indicates that the system job is
-        /// waiting for an event.</param>
-        /// <param name="retrycount">Number of times to retry the system
-        /// job.</param>
-        /// <param name="startedon">Date and time when the system job was
-        /// started.</param>
-        /// <param name="asyncoperationid">Unique identifier of the system
-        /// job.</param>
-        public MicrosoftDynamicsCRMasyncoperation(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statecode = default(int?), string _owningextensionidValue = default(string), int? operationtype = default(int?), int? subtype = default(int?), string message = default(string), string dependencytoken = default(string), System.DateTimeOffset? correlationupdatedtime = default(System.DateTimeOffset?), int? depth = default(int?), string name = default(string), string _createdonbehalfbyValue = default(string), decimal? executiontimespan = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _workflowactivationidValue = default(string), string _owneridValue = default(string), System.DateTimeOffset? postponeuntil = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _owningteamValue = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string primaryentitytype = default(string), string _regardingobjectidValue = default(string), string data = default(string), string recurrencepattern = default(string), int? timezoneruleversionnumber = default(int?), long? sequence = default(long?), string _createdbyValue = default(string), string correlationid = default(string), string _owninguserValue = default(string), string workflowstagename = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? recurrencestarttime = default(System.DateTimeOffset?), int? errorcode = default(int?), string hostid = default(string), string messagename = default(string), string parentpluginexecutionid = default(string), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), string requestid = default(string), string friendlymessage = default(string), bool? iswaitingforevent = default(bool?), int? retrycount = default(int?), System.DateTimeOffset? startedon = default(System.DateTimeOffset?), string asyncoperationid = default(string), MicrosoftDynamicsCRMtheme regardingobjectidTheme = default(MicrosoftDynamicsCRMtheme), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemail = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMproductsubstitute regardingobjectidProductsubstitute = default(MicrosoftDynamicsCRMproductsubstitute), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementchannel regardingobjectidEntitlementchannel = default(MicrosoftDynamicsCRMentitlementchannel), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplate = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMpost regardingobjectidPost = default(MicrosoftDynamicsCRMpost), MicrosoftDynamicsCRMposition regardingobjectidPosition = default(MicrosoftDynamicsCRMposition), MicrosoftDynamicsCRMbookableresource regardingobjectidBookableresource = default(MicrosoftDynamicsCRMbookableresource), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebooking = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheader = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMbookableresourcecategory regardingobjectidBookableresourcecategory = default(MicrosoftDynamicsCRMbookableresourcecategory), MicrosoftDynamicsCRMbookableresourcecategoryassn regardingobjectidBookableresourcecategoryassn = default(MicrosoftDynamicsCRMbookableresourcecategoryassn), MicrosoftDynamicsCRMbookableresourcecharacteristic regardingobjectidBookableresourcecharacteristic = default(MicrosoftDynamicsCRMbookableresourcecharacteristic), MicrosoftDynamicsCRMbookableresourcegroup regardingobjectidBookableresourcegroup = default(MicrosoftDynamicsCRMbookableresourcegroup), MicrosoftDynamicsCRMbookingstatus regardingobjectidBookingstatus = default(MicrosoftDynamicsCRMbookingstatus), MicrosoftDynamicsCRMcharacteristic regardingobjectidCharacteristic = default(MicrosoftDynamicsCRMcharacteristic), MicrosoftDynamicsCRMratingmodel regardingobjectidRatingmodel = default(MicrosoftDynamicsCRMratingmodel), MicrosoftDynamicsCRMratingvalue regardingobjectidRatingvalue = default(MicrosoftDynamicsCRMratingvalue), MicrosoftDynamicsCRMsimilarityrule regardingobjectidSimilarityrule = default(MicrosoftDynamicsCRMsimilarityrule), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMproductpricelevel regardingobjectidProductpricelevel = default(MicrosoftDynamicsCRMproductpricelevel), MicrosoftDynamicsCRMreport regardingobjectidReport = default(MicrosoftDynamicsCRMreport), IList<MicrosoftDynamicsCRMemail> asyncOperationEmails = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMrecurringappointmentmaster regardingobjectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMincidentresolution regardingobjectidIncidentresolution = default(MicrosoftDynamicsCRMincidentresolution), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMprivilege regardingobjectidPrivilege = default(MicrosoftDynamicsCRMprivilege), IList<MicrosoftDynamicsCRMbulkdeleteoperation> asyncOperationBulkDeleteOperation = default(IList<MicrosoftDynamicsCRMbulkdeleteoperation>), MicrosoftDynamicsCRMgoalrollupquery regardingobjectidGoalrollupquery = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMdiscounttype regardingobjectidDiscounttype = default(MicrosoftDynamicsCRMdiscounttype), IList<MicrosoftDynamicsCRMsocialactivity> asyncOperationSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMpostfollow regardingobjectidPostfollow = default(MicrosoftDynamicsCRMpostfollow), MicrosoftDynamicsCRMbusinessunit regardingobjectidBusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMannualfiscalcalendar regardingobjectidAnnualfiscalcalendar = default(MicrosoftDynamicsCRMannualfiscalcalendar), MicrosoftDynamicsCRMequipment regardingobjectidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMdiscount regardingobjectidDiscount = default(MicrosoftDynamicsCRMdiscount), MicrosoftDynamicsCRMworkflow workflowactivationid = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMmonthlyfiscalcalendar regardingobjectidMonthlyfiscalcalendar = default(MicrosoftDynamicsCRMmonthlyfiscalcalendar), MicrosoftDynamicsCRMmailbox regardingobjectidMailbox = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMimportfile regardingobjectidImportfile = default(MicrosoftDynamicsCRMimportfile), IList<MicrosoftDynamicsCRMworkflowlog> lkWorkflowlogAsyncoperationChildworkflow = default(IList<MicrosoftDynamicsCRMworkflowlog>), MicrosoftDynamicsCRMimportdata regardingobjectidImportdata = default(MicrosoftDynamicsCRMimportdata), MicrosoftDynamicsCRMemail regardingobjectidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMteam regardingobjectidTeam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMduplicaterecord> asyncOperationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMopportunityclose regardingobjectidOpportunityclose = default(MicrosoftDynamicsCRMopportunityclose), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMkbarticletemplate regardingobjectidKbarticletemplate = default(MicrosoftDynamicsCRMkbarticletemplate), MicrosoftDynamicsCRMemailserverprofile regardingobjectidEmailserverprofile = default(MicrosoftDynamicsCRMemailserverprofile), MicrosoftDynamicsCRMuserform regardingobjectidUserform = default(MicrosoftDynamicsCRMuserform), MicrosoftDynamicsCRMtransactioncurrency regardingobjectidTransactioncurrency = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsocialprofile regardingobjectidSocialprofile = default(MicrosoftDynamicsCRMsocialprofile), MicrosoftDynamicsCRMopportunityproduct regardingobjectidOpportunityproduct = default(MicrosoftDynamicsCRMopportunityproduct), MicrosoftDynamicsCRMimportmap regardingobjectidImportmap = default(MicrosoftDynamicsCRMimportmap), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMphonecall regardingobjectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMsocialactivity regardingobjectidSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMcontract regardingobjectidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMqueueitem regardingobjectidQueueitem = default(MicrosoftDynamicsCRMqueueitem), MicrosoftDynamicsCRMquarterlyfiscalcalendar regardingobjectidQuarterlyfiscalcalendar = default(MicrosoftDynamicsCRMquarterlyfiscalcalendar), MicrosoftDynamicsCRMqueue regardingobjectidQueue = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMtemplate regardingobjectidTemplate = default(MicrosoftDynamicsCRMtemplate), MicrosoftDynamicsCRMserviceappointment regardingobjectidServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMkbarticle regardingobjectidKbarticle = default(MicrosoftDynamicsCRMkbarticle), MicrosoftDynamicsCRMsystemform regardingobjectidSystemform = default(MicrosoftDynamicsCRMsystemform), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMorganization regardingobjectidOrganization = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMconnectionrole regardingobjectidConnectionrole = default(MicrosoftDynamicsCRMconnectionrole), MicrosoftDynamicsCRMsite regardingobjectidSite = default(MicrosoftDynamicsCRMsite), MicrosoftDynamicsCRMkbarticlecomment regardingobjectidKbarticlecomment = default(MicrosoftDynamicsCRMkbarticlecomment), MicrosoftDynamicsCRMappointment regardingobjectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMsystemuser regardingobjectidSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMmailmergetemplate regardingobjectidMailmergetemplate = default(MicrosoftDynamicsCRMmailmergetemplate), MicrosoftDynamicsCRMcampaign regardingobjectidCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMquoteclose regardingobjectidQuoteclose = default(MicrosoftDynamicsCRMquoteclose), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMcalendar regardingobjectidCalendar = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMproductassociation regardingobjectidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMcontracttemplate regardingobjectidContracttemplate = default(MicrosoftDynamicsCRMcontracttemplate), MicrosoftDynamicsCRMconnection regardingobjectidConnection = default(MicrosoftDynamicsCRMconnection), MicrosoftDynamicsCRMmetric regardingobjectidMetric = default(MicrosoftDynamicsCRMmetric), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMrole regardingobjectidRole = default(MicrosoftDynamicsCRMrole), MicrosoftDynamicsCRMresource regardingobjectidResource = default(MicrosoftDynamicsCRMresource), MicrosoftDynamicsCRMsalesorderdetail regardingobjectidSalesorderdetail = default(MicrosoftDynamicsCRMsalesorderdetail), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsubject regardingobjectidSubject = default(MicrosoftDynamicsCRMsubject), MicrosoftDynamicsCRMuomschedule regardingobjectidUomschedule = default(MicrosoftDynamicsCRMuomschedule), MicrosoftDynamicsCRMsavedquery regardingobjectidSavedquery = default(MicrosoftDynamicsCRMsavedquery), MicrosoftDynamicsCRMsla regardingobjectidSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMactivitymimeattachment regardingobjectidActivitymimeattachment = default(MicrosoftDynamicsCRMactivitymimeattachment), MicrosoftDynamicsCRMletter regardingobjectidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMproduct regardingobjectidProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMinvoicedetail regardingobjectidInvoicedetail = default(MicrosoftDynamicsCRMinvoicedetail), MicrosoftDynamicsCRMlist regardingobjectidList = default(MicrosoftDynamicsCRMlist), MicrosoftDynamicsCRMcompetitor regardingobjectidCompetitor = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMorderclose regardingobjectidOrderclose = default(MicrosoftDynamicsCRMorderclose), MicrosoftDynamicsCRMquotedetail regardingobjectidQuotedetail = default(MicrosoftDynamicsCRMquotedetail), MicrosoftDynamicsCRMannotation regardingobjectidAnnotation = default(MicrosoftDynamicsCRMannotation), MicrosoftDynamicsCRMuserquery regardingobjectidUserquery = default(MicrosoftDynamicsCRMuserquery), IList<MicrosoftDynamicsCRMworkflowlog> lkWorkflowlogAsyncoperations = default(IList<MicrosoftDynamicsCRMworkflowlog>), MicrosoftDynamicsCRMtask regardingobjectidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMcontractdetail regardingobjectidContractdetail = default(MicrosoftDynamicsCRMcontractdetail), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMquote regardingobjectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMsharepointsite regardingobjectidSharepointsite = default(MicrosoftDynamicsCRMsharepointsite), MicrosoftDynamicsCRMsalesliterature regardingobjectidSalesliterature = default(MicrosoftDynamicsCRMsalesliterature), MicrosoftDynamicsCRMsdkmessageprocessingstep owningextensionid = default(MicrosoftDynamicsCRMsdkmessageprocessingstep), MicrosoftDynamicsCRMbusinessunitnewsarticle regardingobjectidBusinessunitnewsarticle = default(MicrosoftDynamicsCRMbusinessunitnewsarticle), MicrosoftDynamicsCRMcampaignresponse regardingobjectidCampaignresponse = default(MicrosoftDynamicsCRMcampaignresponse), MicrosoftDynamicsCRMgoal regardingobjectidGoal = default(MicrosoftDynamicsCRMgoal), MicrosoftDynamicsCRMimportlog regardingobjectidImportlog = default(MicrosoftDynamicsCRMimportlog), MicrosoftDynamicsCRMsemiannualfiscalcalendar regardingobjectidSemiannualfiscalcalendar = default(MicrosoftDynamicsCRMsemiannualfiscalcalendar), MicrosoftDynamicsCRMterritory regardingobjectidTerritory = default(MicrosoftDynamicsCRMterritory), MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar regardingobjectidFixedmonthlyfiscalcalendar = default(MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcustomeraddress regardingobjectidCustomeraddress = default(MicrosoftDynamicsCRMcustomeraddress), MicrosoftDynamicsCRMservice regardingobjectidService = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMinvoice regardingobjectidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMuom regardingobjectidUom = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMfax regardingobjectidFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMbulkoperationlog regardingobjectidBulkoperationlog = default(MicrosoftDynamicsCRMbulkoperationlog), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMresourcespec regardingobjectidResourcespec = default(MicrosoftDynamicsCRMresourcespec), MicrosoftDynamicsCRMsalesliteratureitem regardingobjectidSalesliteratureitem = default(MicrosoftDynamicsCRMsalesliteratureitem), MicrosoftDynamicsCRMsharepointdocumentlocation regardingobjectidSharepointdocumentlocation = default(MicrosoftDynamicsCRMsharepointdocumentlocation), MicrosoftDynamicsCRMactivitypointer regardingobjectidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMpricelevel regardingobjectidPricelevel = default(MicrosoftDynamicsCRMpricelevel), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMconstraintbasedgroup regardingobjectidConstraintbasedgroup = default(MicrosoftDynamicsCRMconstraintbasedgroup), MicrosoftDynamicsCRMimport regardingobjectidImport = default(MicrosoftDynamicsCRMimport), MicrosoftDynamicsCRMresourcegroup regardingobjectidResourcegroup = default(MicrosoftDynamicsCRMresourcegroup), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocess = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMabsScheduledprocessexecution regardingobjectidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMadoxioAlias regardingobjectidAdoxioAlias = default(MicrosoftDynamicsCRMadoxioAlias), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioApplicationinvoicehistory regardingobjectidAdoxioApplicationinvoicehistory = default(MicrosoftDynamicsCRMadoxioApplicationinvoicehistory), MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation regardingobjectidAdoxioApplicationtermsconditionslimitation = default(MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation), MicrosoftDynamicsCRMadoxioArea regardingobjectidAdoxioArea = default(MicrosoftDynamicsCRMadoxioArea), MicrosoftDynamicsCRMadoxioBusinessaccount regardingobjectidAdoxioBusinessaccount = default(MicrosoftDynamicsCRMadoxioBusinessaccount), MicrosoftDynamicsCRMadoxioCitydistrict regardingobjectidAdoxioCitydistrict = default(MicrosoftDynamicsCRMadoxioCitydistrict), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioContravention regardingobjectidAdoxioContravention = default(MicrosoftDynamicsCRMadoxioContravention), MicrosoftDynamicsCRMadoxioCorporatehistorysummary regardingobjectidAdoxioCorporatehistorysummary = default(MicrosoftDynamicsCRMadoxioCorporatehistorysummary), MicrosoftDynamicsCRMadoxioCorporaterole regardingobjectidAdoxioCorporaterole = default(MicrosoftDynamicsCRMadoxioCorporaterole), MicrosoftDynamicsCRMadoxioCustomautonumberdefinition regardingobjectidAdoxioCustomautonumberdefinition = default(MicrosoftDynamicsCRMadoxioCustomautonumberdefinition), MicrosoftDynamicsCRMadoxioCustomautonumberrequest regardingobjectidAdoxioCustomautonumberrequest = default(MicrosoftDynamicsCRMadoxioCustomautonumberrequest), MicrosoftDynamicsCRMadoxioEstablishment regardingobjectidAdoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioFundingsource regardingobjectidAdoxioFundingsource = default(MicrosoftDynamicsCRMadoxioFundingsource), MicrosoftDynamicsCRMadoxioInterest regardingobjectidAdoxioInterest = default(MicrosoftDynamicsCRMadoxioInterest), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLegalentity regardingobjectidAdoxioLegalentity = default(MicrosoftDynamicsCRMadoxioLegalentity), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicences = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioLicencetype regardingobjectidAdoxioLicencetype = default(MicrosoftDynamicsCRMadoxioLicencetype), MicrosoftDynamicsCRMadoxioLoan regardingobjectidAdoxioLoan = default(MicrosoftDynamicsCRMadoxioLoan), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation regardingobjectidAdoxioLocalgovindigenousnation = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), MicrosoftDynamicsCRMadoxioPersonalhistorysummary regardingobjectidAdoxioPersonalhistorysummary = default(MicrosoftDynamicsCRMadoxioPersonalhistorysummary), MicrosoftDynamicsCRMadoxioPolicejurisdiction regardingobjectidAdoxioPolicejurisdiction = default(MicrosoftDynamicsCRMadoxioPolicejurisdiction), MicrosoftDynamicsCRMadoxioPolicydocument regardingobjectidAdoxioPolicydocument = default(MicrosoftDynamicsCRMadoxioPolicydocument), MicrosoftDynamicsCRMadoxioPostalcode regardingobjectidAdoxioPostalcode = default(MicrosoftDynamicsCRMadoxioPostalcode), MicrosoftDynamicsCRMadoxioPreviousaddress regardingobjectidAdoxioPreviousaddress = default(MicrosoftDynamicsCRMadoxioPreviousaddress), MicrosoftDynamicsCRMadoxioRegion regardingobjectidAdoxioRegion = default(MicrosoftDynamicsCRMadoxioRegion), MicrosoftDynamicsCRMadoxioSetting regardingobjectidAdoxioSetting = default(MicrosoftDynamicsCRMadoxioSetting), MicrosoftDynamicsCRMadoxioSpddatarow regardingobjectidAdoxioSpddatarow = default(MicrosoftDynamicsCRMadoxioSpddatarow), MicrosoftDynamicsCRMadoxioSpdexports regardingobjectidAdoxioSpdexports = default(MicrosoftDynamicsCRMadoxioSpdexports), MicrosoftDynamicsCRMadoxioTaxandaccounting regardingobjectidAdoxioTaxandaccounting = default(MicrosoftDynamicsCRMadoxioTaxandaccounting), MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset regardingobjectidAdoxioTermsconditionslimitationspreset = default(MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset), MicrosoftDynamicsCRMadoxioTerritory regardingobjectidAdoxioTerritory = default(MicrosoftDynamicsCRMadoxioTerritory), MicrosoftDynamicsCRMadoxioTiedhouseassociation regardingobjectidAdoxioTiedhouseassociation = default(MicrosoftDynamicsCRMadoxioTiedhouseassociation), MicrosoftDynamicsCRMadoxioTiedhouseconnection regardingobjectidAdoxioTiedhouseconnection = default(MicrosoftDynamicsCRMadoxioTiedhouseconnection), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioWorkerinvoicehistory regardingobjectidAdoxioWorkerinvoicehistory = default(MicrosoftDynamicsCRMadoxioWorkerinvoicehistory), MicrosoftDynamicsCRMadoxioDocument regardingobjectidAdoxioDocument = default(MicrosoftDynamicsCRMadoxioDocument), MicrosoftDynamicsCRMadoxioDocumentadmin regardingobjectidAdoxioDocumentadmin = default(MicrosoftDynamicsCRMadoxioDocumentadmin), MicrosoftDynamicsCRMadoxioContraventionadmin regardingobjectidAdoxioContraventionadmin = default(MicrosoftDynamicsCRMadoxioContraventionadmin), MicrosoftDynamicsCRMadoxioCompliancemeeting regardingobjectidAdoxioCompliancemeeting = default(MicrosoftDynamicsCRMadoxioCompliancemeeting), MicrosoftDynamicsCRMadoxioInvestigationactivity regardingobjectidAdoxioInvestigationactivity = default(MicrosoftDynamicsCRMadoxioInvestigationactivity), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigation = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), MicrosoftDynamicsCRMadoxioFiainvestigationlog regardingobjectidAdoxioFiainvestigationlog = default(MicrosoftDynamicsCRMadoxioFiainvestigationlog), MicrosoftDynamicsCRMadoxioApplicationtype regardingobjectidAdoxioApplicationtype = default(MicrosoftDynamicsCRMadoxioApplicationtype), MicrosoftDynamicsCRMadoxioApplicationtypecontent regardingobjectidAdoxioApplicationtypecontent = default(MicrosoftDynamicsCRMadoxioApplicationtypecontent), MicrosoftDynamicsCRMadoxioInspectionreactivationhistory regardingobjectidAdoxioInspectionreactivationhistory = default(MicrosoftDynamicsCRMadoxioInspectionreactivationhistory), MicrosoftDynamicsCRMadoxioEstablishmentwatchword regardingobjectidAdoxioEstablishmentwatchword = default(MicrosoftDynamicsCRMadoxioEstablishmentwatchword), MicrosoftDynamicsCRMadoxioRelatedparty regardingobjectidAdoxioRelatedparty = default(MicrosoftDynamicsCRMadoxioRelatedparty), MicrosoftDynamicsCRMadoxioWitness regardingobjectidAdoxioWitness = default(MicrosoftDynamicsCRMadoxioWitness), MicrosoftDynamicsCRMadoxioApplicationbpfv3 regardingobjectidAdoxioApplicationbpfv3 = default(MicrosoftDynamicsCRMadoxioApplicationbpfv3), MicrosoftDynamicsCRMadoxioInspectorcommentsrollup regardingobjectidAdoxioInspectorcommentsrollup = default(MicrosoftDynamicsCRMadoxioInspectorcommentsrollup), MicrosoftDynamicsCRMadoxioCannabismonthlyreport regardingobjectidAdoxioCannabismonthlyreport = default(MicrosoftDynamicsCRMadoxioCannabismonthlyreport), MicrosoftDynamicsCRMadoxioCannabisproductadmin regardingobjectidAdoxioCannabisproductadmin = default(MicrosoftDynamicsCRMadoxioCannabisproductadmin), MicrosoftDynamicsCRMadoxioCannabisinventoryreport regardingobjectidAdoxioCannabisinventoryreport = default(MicrosoftDynamicsCRMadoxioCannabisinventoryreport), MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory regardingobjectidAdoxioInvestigationreactivationhistory = default(MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory), MicrosoftDynamicsCRMadoxioLicenseechangelog regardingobjectidAdoxioLicenseechangelog = default(MicrosoftDynamicsCRMadoxioLicenseechangelog), MicrosoftDynamicsCRMadoxioAuditlogrequest regardingobjectidAdoxioAuditlogrequest = default(MicrosoftDynamicsCRMadoxioAuditlogrequest), MicrosoftDynamicsCRMadoxioExhibit regardingobjectidAdoxioExhibit = default(MicrosoftDynamicsCRMadoxioExhibit), MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10 regardingobjectidAdoxioApplicationlicenseechangesv10 = default(MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10), MicrosoftDynamicsCRMadoxioApplicationrelocationv1 regardingobjectidAdoxioApplicationrelocationv1 = default(MicrosoftDynamicsCRMadoxioApplicationrelocationv1), MicrosoftDynamicsCRMadoxioApplicationstructurechangev1 regardingobjectidAdoxioApplicationstructurechangev1 = default(MicrosoftDynamicsCRMadoxioApplicationstructurechangev1), MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1 regardingobjectidAdoxioApplicationtransferownershipv1 = default(MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1), MicrosoftDynamicsCRMadoxioFormelementuploadfield regardingobjectidAdoxioFormelementuploadfield = default(MicrosoftDynamicsCRMadoxioFormelementuploadfield), MicrosoftDynamicsCRMadoxioApplicationliquorbpf regardingobjectidAdoxioApplicationliquorbpf = default(MicrosoftDynamicsCRMadoxioApplicationliquorbpf), MicrosoftDynamicsCRMadoxioEvent regardingobjectidAdoxioEvent = default(MicrosoftDynamicsCRMadoxioEvent), MicrosoftDynamicsCRMadoxioEventschedule regardingobjectidAdoxioEventschedule = default(MicrosoftDynamicsCRMadoxioEventschedule), MicrosoftDynamicsCRMadoxioLdborder regardingobjectidAdoxioLdborder = default(MicrosoftDynamicsCRMadoxioLdborder), MicrosoftDynamicsCRMadoxioFederalreportexport regardingobjectidAdoxioFederalreportexport = default(MicrosoftDynamicsCRMadoxioFederalreportexport), MicrosoftDynamicsCRMadoxioApplicationtypefeeschedule regardingobjectidAdoxioApplicationtypefeeschedule = default(MicrosoftDynamicsCRMadoxioApplicationtypefeeschedule), MicrosoftDynamicsCRMadoxioLicenceldbordertotalhistory regardingobjectidAdoxioLicenceldbordertotalhistory = default(MicrosoftDynamicsCRMadoxioLicenceldbordertotalhistory), MicrosoftDynamicsCRMadoxioEndorsementtype regardingobjectidAdoxioEndorsementtype = default(MicrosoftDynamicsCRMadoxioEndorsementtype), MicrosoftDynamicsCRMadoxioEndorsement regardingobjectidAdoxioEndorsement = default(MicrosoftDynamicsCRMadoxioEndorsement))
+        public MicrosoftDynamicsCRMasyncoperation(int? retrycount = default(int?), System.DateTimeOffset? correlationupdatedtime = default(System.DateTimeOffset?), int? depth = default(int?), string rootexecutioncontext = default(string), int? subtype = default(int?), string _createdonbehalfbyValue = default(string), string friendlymessage = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string hostid = default(string), string _owningextensionidValue = default(string), long? sequence = default(long?), string workflowstagename = default(string), int? utcconversiontimezonecode = default(int?), string _owningteamValue = default(string), string _owneridValue = default(string), int? statuscode = default(int?), string requestid = default(string), string _owninguserValue = default(string), string dependencytoken = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string data = default(string), string messagename = default(string), string _owningbusinessunitValue = default(string), string recurrencepattern = default(string), int? operationtype = default(int?), string _modifiedbyValue = default(string), string asyncoperationid = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? recurrencestarttime = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? postponeuntil = default(System.DateTimeOffset?), decimal? executiontimespan = default(decimal?), string _workflowactivationidValue = default(string), string message = default(string), string parentpluginexecutionid = default(string), string primaryentitytype = default(string), string _regardingobjectidValue = default(string), int? statecode = default(int?), System.DateTimeOffset? startedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), int? errorcode = default(int?), bool? iswaitingforevent = default(bool?), string name = default(string), string correlationid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMtheme regardingobjectidTheme = default(MicrosoftDynamicsCRMtheme), MicrosoftDynamicsCRMusermapping regardingobjectidUsermapping = default(MicrosoftDynamicsCRMusermapping), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemail = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMproductsubstitute regardingobjectidProductsubstitute = default(MicrosoftDynamicsCRMproductsubstitute), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementchannel regardingobjectidEntitlementchannel = default(MicrosoftDynamicsCRMentitlementchannel), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplate = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMpost regardingobjectidPost = default(MicrosoftDynamicsCRMpost), MicrosoftDynamicsCRMposition regardingobjectidPosition = default(MicrosoftDynamicsCRMposition), MicrosoftDynamicsCRMbookableresource regardingobjectidBookableresource = default(MicrosoftDynamicsCRMbookableresource), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebooking = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheader = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMbookableresourcecategory regardingobjectidBookableresourcecategory = default(MicrosoftDynamicsCRMbookableresourcecategory), MicrosoftDynamicsCRMbookableresourcecategoryassn regardingobjectidBookableresourcecategoryassn = default(MicrosoftDynamicsCRMbookableresourcecategoryassn), MicrosoftDynamicsCRMbookableresourcecharacteristic regardingobjectidBookableresourcecharacteristic = default(MicrosoftDynamicsCRMbookableresourcecharacteristic), MicrosoftDynamicsCRMbookableresourcegroup regardingobjectidBookableresourcegroup = default(MicrosoftDynamicsCRMbookableresourcegroup), MicrosoftDynamicsCRMbookingstatus regardingobjectidBookingstatus = default(MicrosoftDynamicsCRMbookingstatus), MicrosoftDynamicsCRMcharacteristic regardingobjectidCharacteristic = default(MicrosoftDynamicsCRMcharacteristic), MicrosoftDynamicsCRMratingmodel regardingobjectidRatingmodel = default(MicrosoftDynamicsCRMratingmodel), MicrosoftDynamicsCRMratingvalue regardingobjectidRatingvalue = default(MicrosoftDynamicsCRMratingvalue), MicrosoftDynamicsCRMsimilarityrule regardingobjectidSimilarityrule = default(MicrosoftDynamicsCRMsimilarityrule), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMmsdynPostalbum regardingobjectidMsdynPostalbum = default(MicrosoftDynamicsCRMmsdynPostalbum), MicrosoftDynamicsCRMmsdynPostconfig regardingobjectidMsdynPostconfig = default(MicrosoftDynamicsCRMmsdynPostconfig), MicrosoftDynamicsCRMmsdynPostruleconfig regardingobjectidMsdynPostruleconfig = default(MicrosoftDynamicsCRMmsdynPostruleconfig), MicrosoftDynamicsCRMmsdynWallsavedquery regardingobjectidMsdynWallsavedquery = default(MicrosoftDynamicsCRMmsdynWallsavedquery), MicrosoftDynamicsCRMmsdynWallsavedqueryusersettings regardingobjectidMsdynWallsavedqueryusersettings = default(MicrosoftDynamicsCRMmsdynWallsavedqueryusersettings), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocess = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMabsScheduledprocessexecution regardingobjectidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMadoxioAlias regardingobjectidAdoxioAlias = default(MicrosoftDynamicsCRMadoxioAlias), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioApplicationinvoicehistory regardingobjectidAdoxioApplicationinvoicehistory = default(MicrosoftDynamicsCRMadoxioApplicationinvoicehistory), MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation regardingobjectidAdoxioApplicationtermsconditionslimitation = default(MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation), MicrosoftDynamicsCRMadoxioArea regardingobjectidAdoxioArea = default(MicrosoftDynamicsCRMadoxioArea), MicrosoftDynamicsCRMadoxioBusinessaccount regardingobjectidAdoxioBusinessaccount = default(MicrosoftDynamicsCRMadoxioBusinessaccount), MicrosoftDynamicsCRMadoxioCitydistrict regardingobjectidAdoxioCitydistrict = default(MicrosoftDynamicsCRMadoxioCitydistrict), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioContravention regardingobjectidAdoxioContravention = default(MicrosoftDynamicsCRMadoxioContravention), MicrosoftDynamicsCRMadoxioCorporatehistorysummary regardingobjectidAdoxioCorporatehistorysummary = default(MicrosoftDynamicsCRMadoxioCorporatehistorysummary), MicrosoftDynamicsCRMadoxioCorporaterole regardingobjectidAdoxioCorporaterole = default(MicrosoftDynamicsCRMadoxioCorporaterole), MicrosoftDynamicsCRMadoxioCustomautonumberdefinition regardingobjectidAdoxioCustomautonumberdefinition = default(MicrosoftDynamicsCRMadoxioCustomautonumberdefinition), MicrosoftDynamicsCRMadoxioCustomautonumberrequest regardingobjectidAdoxioCustomautonumberrequest = default(MicrosoftDynamicsCRMadoxioCustomautonumberrequest), MicrosoftDynamicsCRMadoxioEstablishment regardingobjectidAdoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioFundingsource regardingobjectidAdoxioFundingsource = default(MicrosoftDynamicsCRMadoxioFundingsource), MicrosoftDynamicsCRMadoxioInterest regardingobjectidAdoxioInterest = default(MicrosoftDynamicsCRMadoxioInterest), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLegalentity regardingobjectidAdoxioLegalentity = default(MicrosoftDynamicsCRMadoxioLegalentity), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicences = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioLicencetype regardingobjectidAdoxioLicencetype = default(MicrosoftDynamicsCRMadoxioLicencetype), MicrosoftDynamicsCRMadoxioLoan regardingobjectidAdoxioLoan = default(MicrosoftDynamicsCRMadoxioLoan), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation regardingobjectidAdoxioLocalgovindigenousnation = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), MicrosoftDynamicsCRMadoxioPersonalhistorysummary regardingobjectidAdoxioPersonalhistorysummary = default(MicrosoftDynamicsCRMadoxioPersonalhistorysummary), MicrosoftDynamicsCRMadoxioPolicejurisdiction regardingobjectidAdoxioPolicejurisdiction = default(MicrosoftDynamicsCRMadoxioPolicejurisdiction), MicrosoftDynamicsCRMadoxioPolicydocument regardingobjectidAdoxioPolicydocument = default(MicrosoftDynamicsCRMadoxioPolicydocument), MicrosoftDynamicsCRMadoxioPostalcode regardingobjectidAdoxioPostalcode = default(MicrosoftDynamicsCRMadoxioPostalcode), MicrosoftDynamicsCRMadoxioPreviousaddress regardingobjectidAdoxioPreviousaddress = default(MicrosoftDynamicsCRMadoxioPreviousaddress), MicrosoftDynamicsCRMadoxioRegion regardingobjectidAdoxioRegion = default(MicrosoftDynamicsCRMadoxioRegion), MicrosoftDynamicsCRMadoxioSetting regardingobjectidAdoxioSetting = default(MicrosoftDynamicsCRMadoxioSetting), MicrosoftDynamicsCRMadoxioSpddatarow regardingobjectidAdoxioSpddatarow = default(MicrosoftDynamicsCRMadoxioSpddatarow), MicrosoftDynamicsCRMadoxioSpdexports regardingobjectidAdoxioSpdexports = default(MicrosoftDynamicsCRMadoxioSpdexports), MicrosoftDynamicsCRMadoxioTaxandaccounting regardingobjectidAdoxioTaxandaccounting = default(MicrosoftDynamicsCRMadoxioTaxandaccounting), MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset regardingobjectidAdoxioTermsconditionslimitationspreset = default(MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset), MicrosoftDynamicsCRMadoxioTerritory regardingobjectidAdoxioTerritory = default(MicrosoftDynamicsCRMadoxioTerritory), MicrosoftDynamicsCRMadoxioTiedhouseassociation regardingobjectidAdoxioTiedhouseassociation = default(MicrosoftDynamicsCRMadoxioTiedhouseassociation), MicrosoftDynamicsCRMadoxioTiedhouseconnection regardingobjectidAdoxioTiedhouseconnection = default(MicrosoftDynamicsCRMadoxioTiedhouseconnection), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioWorkerinvoicehistory regardingobjectidAdoxioWorkerinvoicehistory = default(MicrosoftDynamicsCRMadoxioWorkerinvoicehistory), MicrosoftDynamicsCRMadoxioDocument regardingobjectidAdoxioDocument = default(MicrosoftDynamicsCRMadoxioDocument), MicrosoftDynamicsCRMadoxioDocumentadmin regardingobjectidAdoxioDocumentadmin = default(MicrosoftDynamicsCRMadoxioDocumentadmin), MicrosoftDynamicsCRMadoxioContraventionadmin regardingobjectidAdoxioContraventionadmin = default(MicrosoftDynamicsCRMadoxioContraventionadmin), MicrosoftDynamicsCRMadoxioCompliancemeeting regardingobjectidAdoxioCompliancemeeting = default(MicrosoftDynamicsCRMadoxioCompliancemeeting), MicrosoftDynamicsCRMadoxioInvestigationactivity regardingobjectidAdoxioInvestigationactivity = default(MicrosoftDynamicsCRMadoxioInvestigationactivity), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigation = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), MicrosoftDynamicsCRMadoxioFiainvestigationlog regardingobjectidAdoxioFiainvestigationlog = default(MicrosoftDynamicsCRMadoxioFiainvestigationlog), MicrosoftDynamicsCRMadoxioApplicationtype regardingobjectidAdoxioApplicationtype = default(MicrosoftDynamicsCRMadoxioApplicationtype), MicrosoftDynamicsCRMadoxioApplicationtypecontent regardingobjectidAdoxioApplicationtypecontent = default(MicrosoftDynamicsCRMadoxioApplicationtypecontent), MicrosoftDynamicsCRMadoxioInspectionreactivationhistory regardingobjectidAdoxioInspectionreactivationhistory = default(MicrosoftDynamicsCRMadoxioInspectionreactivationhistory), MicrosoftDynamicsCRMadoxioEstablishmentwatchword regardingobjectidAdoxioEstablishmentwatchword = default(MicrosoftDynamicsCRMadoxioEstablishmentwatchword), MicrosoftDynamicsCRMadoxioRelatedparty regardingobjectidAdoxioRelatedparty = default(MicrosoftDynamicsCRMadoxioRelatedparty), MicrosoftDynamicsCRMadoxioWitness regardingobjectidAdoxioWitness = default(MicrosoftDynamicsCRMadoxioWitness), MicrosoftDynamicsCRMadoxioApplicationbpfv3 regardingobjectidAdoxioApplicationbpfv3 = default(MicrosoftDynamicsCRMadoxioApplicationbpfv3), MicrosoftDynamicsCRMadoxioInspectorcommentsrollup regardingobjectidAdoxioInspectorcommentsrollup = default(MicrosoftDynamicsCRMadoxioInspectorcommentsrollup), MicrosoftDynamicsCRMadoxioCannabismonthlyreport regardingobjectidAdoxioCannabismonthlyreport = default(MicrosoftDynamicsCRMadoxioCannabismonthlyreport), MicrosoftDynamicsCRMadoxioCannabisproductadmin regardingobjectidAdoxioCannabisproductadmin = default(MicrosoftDynamicsCRMadoxioCannabisproductadmin), MicrosoftDynamicsCRMadoxioCannabisinventoryreport regardingobjectidAdoxioCannabisinventoryreport = default(MicrosoftDynamicsCRMadoxioCannabisinventoryreport), MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory regardingobjectidAdoxioInvestigationreactivationhistory = default(MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory), MicrosoftDynamicsCRMadoxioLicenseechangelog regardingobjectidAdoxioLicenseechangelog = default(MicrosoftDynamicsCRMadoxioLicenseechangelog), MicrosoftDynamicsCRMadoxioAuditlogrequest regardingobjectidAdoxioAuditlogrequest = default(MicrosoftDynamicsCRMadoxioAuditlogrequest), MicrosoftDynamicsCRMadoxioExhibit regardingobjectidAdoxioExhibit = default(MicrosoftDynamicsCRMadoxioExhibit), MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10 regardingobjectidAdoxioApplicationlicenseechangesv10 = default(MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10), MicrosoftDynamicsCRMadoxioApplicationrelocationv1 regardingobjectidAdoxioApplicationrelocationv1 = default(MicrosoftDynamicsCRMadoxioApplicationrelocationv1), MicrosoftDynamicsCRMadoxioApplicationstructurechangev1 regardingobjectidAdoxioApplicationstructurechangev1 = default(MicrosoftDynamicsCRMadoxioApplicationstructurechangev1), MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1 regardingobjectidAdoxioApplicationtransferownershipv1 = default(MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1), MicrosoftDynamicsCRMadoxioFormelementuploadfield regardingobjectidAdoxioFormelementuploadfield = default(MicrosoftDynamicsCRMadoxioFormelementuploadfield), MicrosoftDynamicsCRMaccountleads regardingobjectidAccountleads = default(MicrosoftDynamicsCRMaccountleads), MicrosoftDynamicsCRMcontactleads regardingobjectidContactleads = default(MicrosoftDynamicsCRMcontactleads), MicrosoftDynamicsCRMleadaddress regardingobjectidLeadaddress = default(MicrosoftDynamicsCRMleadaddress), MicrosoftDynamicsCRMdynamicproperty regardingobjectidDynamicproperty = default(MicrosoftDynamicsCRMdynamicproperty), MicrosoftDynamicsCRMdynamicpropertyassociation regardingobjectidDynamicpropertyassociation = default(MicrosoftDynamicsCRMdynamicpropertyassociation), MicrosoftDynamicsCRMdynamicpropertyinstance regardingobjectidDynamicpropertyinstance = default(MicrosoftDynamicsCRMdynamicpropertyinstance), MicrosoftDynamicsCRMdynamicpropertyoptionsetitem regardingobjectidDynamicpropertyoptionsetitem = default(MicrosoftDynamicsCRMdynamicpropertyoptionsetitem), MicrosoftDynamicsCRMcampaignactivityitem regardingobjectidCampaignactivityitem = default(MicrosoftDynamicsCRMcampaignactivityitem), MicrosoftDynamicsCRMcampaignitem regardingobjectidCampaignitem = default(MicrosoftDynamicsCRMcampaignitem), MicrosoftDynamicsCRMlistmember regardingobjectidListmember = default(MicrosoftDynamicsCRMlistmember), MicrosoftDynamicsCRMentitlementcontacts regardingobjectidEntitlementcontacts = default(MicrosoftDynamicsCRMentitlementcontacts), MicrosoftDynamicsCRMentitlementproducts regardingobjectidEntitlementproducts = default(MicrosoftDynamicsCRMentitlementproducts), MicrosoftDynamicsCRMentitlementtemplatechannel regardingobjectidEntitlementtemplatechannel = default(MicrosoftDynamicsCRMentitlementtemplatechannel), MicrosoftDynamicsCRMentitlementtemplateproducts regardingobjectidEntitlementtemplateproducts = default(MicrosoftDynamicsCRMentitlementtemplateproducts), MicrosoftDynamicsCRMincidentknowledgebaserecord regardingobjectidIncidentknowledgebaserecord = default(MicrosoftDynamicsCRMincidentknowledgebaserecord), MicrosoftDynamicsCRMknowledgearticleincident regardingobjectidKnowledgearticleincident = default(MicrosoftDynamicsCRMknowledgearticleincident), MicrosoftDynamicsCRMphonetocaseprocess regardingobjectidPhonetocaseprocess = default(MicrosoftDynamicsCRMphonetocaseprocess), MicrosoftDynamicsCRMservicecontractcontacts regardingobjectidServicecontractcontacts = default(MicrosoftDynamicsCRMservicecontractcontacts), MicrosoftDynamicsCRMcompetitoraddress regardingobjectidCompetitoraddress = default(MicrosoftDynamicsCRMcompetitoraddress), MicrosoftDynamicsCRMcompetitorproduct regardingobjectidCompetitorproduct = default(MicrosoftDynamicsCRMcompetitorproduct), MicrosoftDynamicsCRMcompetitorsalesliterature regardingobjectidCompetitorsalesliterature = default(MicrosoftDynamicsCRMcompetitorsalesliterature), MicrosoftDynamicsCRMcontactinvoices regardingobjectidContactinvoices = default(MicrosoftDynamicsCRMcontactinvoices), MicrosoftDynamicsCRMcontactorders regardingobjectidContactorders = default(MicrosoftDynamicsCRMcontactorders), MicrosoftDynamicsCRMcontactquotes regardingobjectidContactquotes = default(MicrosoftDynamicsCRMcontactquotes), MicrosoftDynamicsCRMleadcompetitors regardingobjectidLeadcompetitors = default(MicrosoftDynamicsCRMleadcompetitors), MicrosoftDynamicsCRMleadproduct regardingobjectidLeadproduct = default(MicrosoftDynamicsCRMleadproduct), MicrosoftDynamicsCRMleadtoopportunitysalesprocess regardingobjectidLeadtoopportunitysalesprocess = default(MicrosoftDynamicsCRMleadtoopportunitysalesprocess), MicrosoftDynamicsCRMopportunitycompetitors regardingobjectidOpportunitycompetitors = default(MicrosoftDynamicsCRMopportunitycompetitors), MicrosoftDynamicsCRMopportunitysalesprocess regardingobjectidOpportunitysalesprocess = default(MicrosoftDynamicsCRMopportunitysalesprocess), MicrosoftDynamicsCRMproductsalesliterature regardingobjectidProductsalesliterature = default(MicrosoftDynamicsCRMproductsalesliterature), MicrosoftDynamicsCRMmsdynRelationshipinsightsunifiedconfig regardingobjectidMsdynRelationshipinsightsunifiedconfig = default(MicrosoftDynamicsCRMmsdynRelationshipinsightsunifiedconfig), MicrosoftDynamicsCRMmsdynSiconfig regardingobjectidMsdynSiconfig = default(MicrosoftDynamicsCRMmsdynSiconfig), MicrosoftDynamicsCRMadminsettingsentity regardingobjectidAdminsettingsentity = default(MicrosoftDynamicsCRMadminsettingsentity), MicrosoftDynamicsCRMadoxioApplicationliquorbpf regardingobjectidAdoxioApplicationliquorbpf = default(MicrosoftDynamicsCRMadoxioApplicationliquorbpf), MicrosoftDynamicsCRMadoxioEvent regardingobjectidAdoxioEvent = default(MicrosoftDynamicsCRMadoxioEvent), MicrosoftDynamicsCRMadoxioEventschedule regardingobjectidAdoxioEventschedule = default(MicrosoftDynamicsCRMadoxioEventschedule), MicrosoftDynamicsCRMadoxioFederalreportexport regardingobjectidAdoxioFederalreportexport = default(MicrosoftDynamicsCRMadoxioFederalreportexport), MicrosoftDynamicsCRMadoxioLdborder regardingobjectidAdoxioLdborder = default(MicrosoftDynamicsCRMadoxioLdborder), MicrosoftDynamicsCRMadoxioApplicationtypefeeschedule regardingobjectidAdoxioApplicationtypefeeschedule = default(MicrosoftDynamicsCRMadoxioApplicationtypefeeschedule), MicrosoftDynamicsCRMadoxioEndorsement regardingobjectidAdoxioEndorsement = default(MicrosoftDynamicsCRMadoxioEndorsement), MicrosoftDynamicsCRMadoxioEndorsementtype regardingobjectidAdoxioEndorsementtype = default(MicrosoftDynamicsCRMadoxioEndorsementtype), MicrosoftDynamicsCRMadoxioLicenceldbordertotalhistory regardingobjectidAdoxioLicenceldbordertotalhistory = default(MicrosoftDynamicsCRMadoxioLicenceldbordertotalhistory), MicrosoftDynamicsCRMproductpricelevel regardingobjectidProductpricelevel = default(MicrosoftDynamicsCRMproductpricelevel), MicrosoftDynamicsCRMreport regardingobjectidReport = default(MicrosoftDynamicsCRMreport), IList<MicrosoftDynamicsCRMemail> asyncOperationEmails = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMrecurringappointmentmaster regardingobjectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMincidentresolution regardingobjectidIncidentresolution = default(MicrosoftDynamicsCRMincidentresolution), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMprivilege regardingobjectidPrivilege = default(MicrosoftDynamicsCRMprivilege), IList<MicrosoftDynamicsCRMbulkdeleteoperation> asyncOperationBulkDeleteOperation = default(IList<MicrosoftDynamicsCRMbulkdeleteoperation>), MicrosoftDynamicsCRMgoalrollupquery regardingobjectidGoalrollupquery = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMdiscounttype regardingobjectidDiscounttype = default(MicrosoftDynamicsCRMdiscounttype), IList<MicrosoftDynamicsCRMsocialactivity> asyncOperationSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMpostfollow regardingobjectidPostfollow = default(MicrosoftDynamicsCRMpostfollow), MicrosoftDynamicsCRMbusinessunit regardingobjectidBusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMannualfiscalcalendar regardingobjectidAnnualfiscalcalendar = default(MicrosoftDynamicsCRMannualfiscalcalendar), MicrosoftDynamicsCRMequipment regardingobjectidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMdiscount regardingobjectidDiscount = default(MicrosoftDynamicsCRMdiscount), MicrosoftDynamicsCRMworkflow workflowactivationid = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMmonthlyfiscalcalendar regardingobjectidMonthlyfiscalcalendar = default(MicrosoftDynamicsCRMmonthlyfiscalcalendar), MicrosoftDynamicsCRMmailbox regardingobjectidMailbox = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMimportfile regardingobjectidImportfile = default(MicrosoftDynamicsCRMimportfile), IList<MicrosoftDynamicsCRMworkflowlog> lkWorkflowlogAsyncoperationChildworkflow = default(IList<MicrosoftDynamicsCRMworkflowlog>), MicrosoftDynamicsCRMimportdata regardingobjectidImportdata = default(MicrosoftDynamicsCRMimportdata), MicrosoftDynamicsCRMemail regardingobjectidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMteam regardingobjectidTeam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMduplicaterecord> asyncOperationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMopportunityclose regardingobjectidOpportunityclose = default(MicrosoftDynamicsCRMopportunityclose), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMkbarticletemplate regardingobjectidKbarticletemplate = default(MicrosoftDynamicsCRMkbarticletemplate), MicrosoftDynamicsCRMemailserverprofile regardingobjectidEmailserverprofile = default(MicrosoftDynamicsCRMemailserverprofile), MicrosoftDynamicsCRMuserform regardingobjectidUserform = default(MicrosoftDynamicsCRMuserform), MicrosoftDynamicsCRMtransactioncurrency regardingobjectidTransactioncurrency = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsocialprofile regardingobjectidSocialprofile = default(MicrosoftDynamicsCRMsocialprofile), MicrosoftDynamicsCRMopportunityproduct regardingobjectidOpportunityproduct = default(MicrosoftDynamicsCRMopportunityproduct), MicrosoftDynamicsCRMimportmap regardingobjectidImportmap = default(MicrosoftDynamicsCRMimportmap), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMphonecall regardingobjectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMsocialactivity regardingobjectidSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMcontract regardingobjectidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMqueueitem regardingobjectidQueueitem = default(MicrosoftDynamicsCRMqueueitem), MicrosoftDynamicsCRMquarterlyfiscalcalendar regardingobjectidQuarterlyfiscalcalendar = default(MicrosoftDynamicsCRMquarterlyfiscalcalendar), MicrosoftDynamicsCRMqueue regardingobjectidQueue = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMtemplate regardingobjectidTemplate = default(MicrosoftDynamicsCRMtemplate), MicrosoftDynamicsCRMserviceappointment regardingobjectidServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMkbarticle regardingobjectidKbarticle = default(MicrosoftDynamicsCRMkbarticle), MicrosoftDynamicsCRMsystemform regardingobjectidSystemform = default(MicrosoftDynamicsCRMsystemform), MicrosoftDynamicsCRMdisplaystring regardingobjectidDisplaystring = default(MicrosoftDynamicsCRMdisplaystring), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMorganization regardingobjectidOrganization = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMconnectionrole regardingobjectidConnectionrole = default(MicrosoftDynamicsCRMconnectionrole), MicrosoftDynamicsCRMsite regardingobjectidSite = default(MicrosoftDynamicsCRMsite), MicrosoftDynamicsCRMkbarticlecomment regardingobjectidKbarticlecomment = default(MicrosoftDynamicsCRMkbarticlecomment), MicrosoftDynamicsCRMappointment regardingobjectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMsystemuser regardingobjectidSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMmailmergetemplate regardingobjectidMailmergetemplate = default(MicrosoftDynamicsCRMmailmergetemplate), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> asyncOperationMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMcampaign regardingobjectidCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMquoteclose regardingobjectidQuoteclose = default(MicrosoftDynamicsCRMquoteclose), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMcalendar regardingobjectidCalendar = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMrollupfield regardingobjectidRollupfield = default(MicrosoftDynamicsCRMrollupfield), MicrosoftDynamicsCRMproductassociation regardingobjectidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMcontracttemplate regardingobjectidContracttemplate = default(MicrosoftDynamicsCRMcontracttemplate), MicrosoftDynamicsCRMconnection regardingobjectidConnection = default(MicrosoftDynamicsCRMconnection), MicrosoftDynamicsCRMmetric regardingobjectidMetric = default(MicrosoftDynamicsCRMmetric), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMrole regardingobjectidRole = default(MicrosoftDynamicsCRMrole), MicrosoftDynamicsCRMresource regardingobjectidResource = default(MicrosoftDynamicsCRMresource), MicrosoftDynamicsCRMsalesorderdetail regardingobjectidSalesorderdetail = default(MicrosoftDynamicsCRMsalesorderdetail), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsubject regardingobjectidSubject = default(MicrosoftDynamicsCRMsubject), MicrosoftDynamicsCRMuomschedule regardingobjectidUomschedule = default(MicrosoftDynamicsCRMuomschedule), MicrosoftDynamicsCRMsavedquery regardingobjectidSavedquery = default(MicrosoftDynamicsCRMsavedquery), MicrosoftDynamicsCRMsla regardingobjectidSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMactivitymimeattachment regardingobjectidActivitymimeattachment = default(MicrosoftDynamicsCRMactivitymimeattachment), MicrosoftDynamicsCRMletter regardingobjectidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMproduct regardingobjectidProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMinvoicedetail regardingobjectidInvoicedetail = default(MicrosoftDynamicsCRMinvoicedetail), MicrosoftDynamicsCRMlist regardingobjectidList = default(MicrosoftDynamicsCRMlist), MicrosoftDynamicsCRMcompetitor regardingobjectidCompetitor = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMorderclose regardingobjectidOrderclose = default(MicrosoftDynamicsCRMorderclose), MicrosoftDynamicsCRMquotedetail regardingobjectidQuotedetail = default(MicrosoftDynamicsCRMquotedetail), MicrosoftDynamicsCRMannotation regardingobjectidAnnotation = default(MicrosoftDynamicsCRMannotation), MicrosoftDynamicsCRMuserquery regardingobjectidUserquery = default(MicrosoftDynamicsCRMuserquery), IList<MicrosoftDynamicsCRMworkflowlog> lkWorkflowlogAsyncoperations = default(IList<MicrosoftDynamicsCRMworkflowlog>), MicrosoftDynamicsCRMtask regardingobjectidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMcontractdetail regardingobjectidContractdetail = default(MicrosoftDynamicsCRMcontractdetail), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMquote regardingobjectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMsharepointsite regardingobjectidSharepointsite = default(MicrosoftDynamicsCRMsharepointsite), MicrosoftDynamicsCRMsalesliterature regardingobjectidSalesliterature = default(MicrosoftDynamicsCRMsalesliterature), MicrosoftDynamicsCRMsdkmessageprocessingstep owningextensionid = default(MicrosoftDynamicsCRMsdkmessageprocessingstep), MicrosoftDynamicsCRMbusinessunitnewsarticle regardingobjectidBusinessunitnewsarticle = default(MicrosoftDynamicsCRMbusinessunitnewsarticle), MicrosoftDynamicsCRMcampaignresponse regardingobjectidCampaignresponse = default(MicrosoftDynamicsCRMcampaignresponse), MicrosoftDynamicsCRMgoal regardingobjectidGoal = default(MicrosoftDynamicsCRMgoal), MicrosoftDynamicsCRMimportlog regardingobjectidImportlog = default(MicrosoftDynamicsCRMimportlog), MicrosoftDynamicsCRMsemiannualfiscalcalendar regardingobjectidSemiannualfiscalcalendar = default(MicrosoftDynamicsCRMsemiannualfiscalcalendar), MicrosoftDynamicsCRMterritory regardingobjectidTerritory = default(MicrosoftDynamicsCRMterritory), MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar regardingobjectidFixedmonthlyfiscalcalendar = default(MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcustomeraddress regardingobjectidCustomeraddress = default(MicrosoftDynamicsCRMcustomeraddress), MicrosoftDynamicsCRMservice regardingobjectidService = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMinvoice regardingobjectidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMuom regardingobjectidUom = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMfax regardingobjectidFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMbulkoperationlog regardingobjectidBulkoperationlog = default(MicrosoftDynamicsCRMbulkoperationlog), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMresourcespec regardingobjectidResourcespec = default(MicrosoftDynamicsCRMresourcespec), MicrosoftDynamicsCRMsalesliteratureitem regardingobjectidSalesliteratureitem = default(MicrosoftDynamicsCRMsalesliteratureitem), MicrosoftDynamicsCRMsharepointdocumentlocation regardingobjectidSharepointdocumentlocation = default(MicrosoftDynamicsCRMsharepointdocumentlocation), MicrosoftDynamicsCRMactivitypointer regardingobjectidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMpricelevel regardingobjectidPricelevel = default(MicrosoftDynamicsCRMpricelevel), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMconstraintbasedgroup regardingobjectidConstraintbasedgroup = default(MicrosoftDynamicsCRMconstraintbasedgroup), MicrosoftDynamicsCRMimport regardingobjectidImport = default(MicrosoftDynamicsCRMimport), MicrosoftDynamicsCRMresourcegroup regardingobjectidResourcegroup = default(MicrosoftDynamicsCRMresourcegroup))
         {
-            Createdon = createdon;
-            Statecode = statecode;
-            this._owningextensionidValue = _owningextensionidValue;
-            Operationtype = operationtype;
-            Subtype = subtype;
-            Message = message;
-            Dependencytoken = dependencytoken;
+            Retrycount = retrycount;
             Correlationupdatedtime = correlationupdatedtime;
             Depth = depth;
-            Name = name;
+            Rootexecutioncontext = rootexecutioncontext;
+            Subtype = subtype;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Executiontimespan = executiontimespan;
-            Modifiedon = modifiedon;
-            this._workflowactivationidValue = _workflowactivationidValue;
-            this._owneridValue = _owneridValue;
-            Postponeuntil = postponeuntil;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._owningteamValue = _owningteamValue;
-            Completedon = completedon;
-            Primaryentitytype = primaryentitytype;
-            this._regardingobjectidValue = _regardingobjectidValue;
-            Data = data;
-            Recurrencepattern = recurrencepattern;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Sequence = sequence;
-            this._createdbyValue = _createdbyValue;
-            Correlationid = correlationid;
-            this._owninguserValue = _owninguserValue;
-            Workflowstagename = workflowstagename;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            Recurrencestarttime = recurrencestarttime;
-            Errorcode = errorcode;
+            Friendlymessage = friendlymessage;
+            Createdon = createdon;
             Hostid = hostid;
-            Messagename = messagename;
-            Parentpluginexecutionid = parentpluginexecutionid;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._owningextensionidValue = _owningextensionidValue;
+            Sequence = sequence;
+            Workflowstagename = workflowstagename;
             Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._owningteamValue = _owningteamValue;
+            this._owneridValue = _owneridValue;
             Statuscode = statuscode;
             Requestid = requestid;
-            Friendlymessage = friendlymessage;
-            Iswaitingforevent = iswaitingforevent;
-            Retrycount = retrycount;
-            Startedon = startedon;
+            this._owninguserValue = _owninguserValue;
+            Dependencytoken = dependencytoken;
+            Completedon = completedon;
+            Data = data;
+            Messagename = messagename;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Recurrencepattern = recurrencepattern;
+            Operationtype = operationtype;
+            this._modifiedbyValue = _modifiedbyValue;
             Asyncoperationid = asyncoperationid;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Recurrencestarttime = recurrencestarttime;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Postponeuntil = postponeuntil;
+            Executiontimespan = executiontimespan;
+            this._workflowactivationidValue = _workflowactivationidValue;
+            Message = message;
+            Parentpluginexecutionid = parentpluginexecutionid;
+            Primaryentitytype = primaryentitytype;
+            this._regardingobjectidValue = _regardingobjectidValue;
+            Statecode = statecode;
+            Startedon = startedon;
+            this._createdbyValue = _createdbyValue;
+            Errorcode = errorcode;
+            Iswaitingforevent = iswaitingforevent;
+            Name = name;
+            Correlationid = correlationid;
+            Modifiedon = modifiedon;
             RegardingobjectidTheme = regardingobjectidTheme;
+            RegardingobjectidUsermapping = regardingobjectidUsermapping;
             RegardingobjectidNewInteractionforemail = regardingobjectidNewInteractionforemail;
             RegardingobjectidProductsubstitute = regardingobjectidProductsubstitute;
             RegardingobjectidKnowledgearticle = regardingobjectidKnowledgearticle;
@@ -177,123 +99,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             RegardingobjectidRatingvalue = regardingobjectidRatingvalue;
             RegardingobjectidSimilarityrule = regardingobjectidSimilarityrule;
             RegardingobjectidKnowledgebaserecord = regardingobjectidKnowledgebaserecord;
-            RegardingobjectidProductpricelevel = regardingobjectidProductpricelevel;
-            RegardingobjectidReport = regardingobjectidReport;
-            AsyncOperationEmails = asyncOperationEmails;
-            RegardingobjectidRecurringappointmentmaster = regardingobjectidRecurringappointmentmaster;
-            RegardingobjectidIncidentresolution = regardingobjectidIncidentresolution;
-            RegardingobjectidOpportunity = regardingobjectidOpportunity;
-            RegardingobjectidPrivilege = regardingobjectidPrivilege;
-            AsyncOperationBulkDeleteOperation = asyncOperationBulkDeleteOperation;
-            RegardingobjectidGoalrollupquery = regardingobjectidGoalrollupquery;
-            RegardingobjectidDiscounttype = regardingobjectidDiscounttype;
-            AsyncOperationSocialActivities = asyncOperationSocialActivities;
-            RegardingobjectidPostfollow = regardingobjectidPostfollow;
-            RegardingobjectidBusinessunit = regardingobjectidBusinessunit;
-            RegardingobjectidAnnualfiscalcalendar = regardingobjectidAnnualfiscalcalendar;
-            RegardingobjectidEquipment = regardingobjectidEquipment;
-            RegardingobjectidDiscount = regardingobjectidDiscount;
-            Workflowactivationid = workflowactivationid;
-            RegardingobjectidMonthlyfiscalcalendar = regardingobjectidMonthlyfiscalcalendar;
-            RegardingobjectidMailbox = regardingobjectidMailbox;
-            RegardingobjectidImportfile = regardingobjectidImportfile;
-            LkWorkflowlogAsyncoperationChildworkflow = lkWorkflowlogAsyncoperationChildworkflow;
-            RegardingobjectidImportdata = regardingobjectidImportdata;
-            RegardingobjectidEmail = regardingobjectidEmail;
-            RegardingobjectidTeam = regardingobjectidTeam;
-            AsyncOperationDuplicateBaseRecord = asyncOperationDuplicateBaseRecord;
-            RegardingobjectidOpportunityclose = regardingobjectidOpportunityclose;
-            RegardingobjectidLead = regardingobjectidLead;
-            RegardingobjectidKbarticletemplate = regardingobjectidKbarticletemplate;
-            RegardingobjectidEmailserverprofile = regardingobjectidEmailserverprofile;
-            RegardingobjectidUserform = regardingobjectidUserform;
-            RegardingobjectidTransactioncurrency = regardingobjectidTransactioncurrency;
-            RegardingobjectidSocialprofile = regardingobjectidSocialprofile;
-            RegardingobjectidOpportunityproduct = regardingobjectidOpportunityproduct;
-            RegardingobjectidImportmap = regardingobjectidImportmap;
-            RegardingobjectidAccount = regardingobjectidAccount;
-            RegardingobjectidPhonecall = regardingobjectidPhonecall;
-            RegardingobjectidSocialactivity = regardingobjectidSocialactivity;
-            RegardingobjectidSalesorder = regardingobjectidSalesorder;
-            RegardingobjectidContract = regardingobjectidContract;
-            RegardingobjectidQueueitem = regardingobjectidQueueitem;
-            RegardingobjectidQuarterlyfiscalcalendar = regardingobjectidQuarterlyfiscalcalendar;
-            RegardingobjectidQueue = regardingobjectidQueue;
-            RegardingobjectidTemplate = regardingobjectidTemplate;
-            RegardingobjectidServiceappointment = regardingobjectidServiceappointment;
-            Createdby = createdby;
-            RegardingobjectidKbarticle = regardingobjectidKbarticle;
-            RegardingobjectidSystemform = regardingobjectidSystemform;
-            Owningbusinessunit = owningbusinessunit;
-            RegardingobjectidOrganization = regardingobjectidOrganization;
-            RegardingobjectidConnectionrole = regardingobjectidConnectionrole;
-            RegardingobjectidSite = regardingobjectidSite;
-            RegardingobjectidKbarticlecomment = regardingobjectidKbarticlecomment;
-            RegardingobjectidAppointment = regardingobjectidAppointment;
-            RegardingobjectidSystemuser = regardingobjectidSystemuser;
-            RegardingobjectidMailmergetemplate = regardingobjectidMailmergetemplate;
-            RegardingobjectidCampaign = regardingobjectidCampaign;
-            RegardingobjectidQuoteclose = regardingobjectidQuoteclose;
-            RegardingobjectidIncident = regardingobjectidIncident;
-            RegardingobjectidCalendar = regardingobjectidCalendar;
-            RegardingobjectidProductassociation = regardingobjectidProductassociation;
-            RegardingobjectidContracttemplate = regardingobjectidContracttemplate;
-            RegardingobjectidConnection = regardingobjectidConnection;
-            RegardingobjectidMetric = regardingobjectidMetric;
-            Modifiedby = modifiedby;
-            RegardingobjectidRole = regardingobjectidRole;
-            RegardingobjectidResource = regardingobjectidResource;
-            RegardingobjectidSalesorderdetail = regardingobjectidSalesorderdetail;
-            Createdonbehalfby = createdonbehalfby;
-            Ownerid = ownerid;
-            RegardingobjectidSubject = regardingobjectidSubject;
-            RegardingobjectidUomschedule = regardingobjectidUomschedule;
-            RegardingobjectidSavedquery = regardingobjectidSavedquery;
-            RegardingobjectidSla = regardingobjectidSla;
-            RegardingobjectidActivitymimeattachment = regardingobjectidActivitymimeattachment;
-            RegardingobjectidLetter = regardingobjectidLetter;
-            Owningteam = owningteam;
-            RegardingobjectidProduct = regardingobjectidProduct;
-            RegardingobjectidInvoicedetail = regardingobjectidInvoicedetail;
-            RegardingobjectidList = regardingobjectidList;
-            RegardingobjectidCompetitor = regardingobjectidCompetitor;
-            RegardingobjectidOrderclose = regardingobjectidOrderclose;
-            RegardingobjectidQuotedetail = regardingobjectidQuotedetail;
-            RegardingobjectidAnnotation = regardingobjectidAnnotation;
-            RegardingobjectidUserquery = regardingobjectidUserquery;
-            LkWorkflowlogAsyncoperations = lkWorkflowlogAsyncoperations;
-            RegardingobjectidTask = regardingobjectidTask;
-            RegardingobjectidContractdetail = regardingobjectidContractdetail;
-            RegardingobjectidContact = regardingobjectidContact;
-            RegardingobjectidQuote = regardingobjectidQuote;
-            RegardingobjectidSharepointsite = regardingobjectidSharepointsite;
-            RegardingobjectidSalesliterature = regardingobjectidSalesliterature;
-            Owningextensionid = owningextensionid;
-            RegardingobjectidBusinessunitnewsarticle = regardingobjectidBusinessunitnewsarticle;
-            RegardingobjectidCampaignresponse = regardingobjectidCampaignresponse;
-            RegardingobjectidGoal = regardingobjectidGoal;
-            RegardingobjectidImportlog = regardingobjectidImportlog;
-            RegardingobjectidSemiannualfiscalcalendar = regardingobjectidSemiannualfiscalcalendar;
-            RegardingobjectidTerritory = regardingobjectidTerritory;
-            RegardingobjectidFixedmonthlyfiscalcalendar = regardingobjectidFixedmonthlyfiscalcalendar;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            RegardingobjectidBulkoperation = regardingobjectidBulkoperation;
-            RegardingobjectidCustomeraddress = regardingobjectidCustomeraddress;
-            RegardingobjectidService = regardingobjectidService;
-            RegardingobjectidInvoice = regardingobjectidInvoice;
-            RegardingobjectidUom = regardingobjectidUom;
-            RegardingobjectidFax = regardingobjectidFax;
-            RegardingobjectidBulkoperationlog = regardingobjectidBulkoperationlog;
-            RegardingobjectidCampaignactivity = regardingobjectidCampaignactivity;
-            RegardingobjectidResourcespec = regardingobjectidResourcespec;
-            RegardingobjectidSalesliteratureitem = regardingobjectidSalesliteratureitem;
-            RegardingobjectidSharepointdocumentlocation = regardingobjectidSharepointdocumentlocation;
-            RegardingobjectidActivitypointer = regardingobjectidActivitypointer;
-            RegardingobjectidPricelevel = regardingobjectidPricelevel;
-            Owninguser = owninguser;
-            RegardingobjectidConstraintbasedgroup = regardingobjectidConstraintbasedgroup;
-            RegardingobjectidImport = regardingobjectidImport;
-            RegardingobjectidResourcegroup = regardingobjectidResourcegroup;
+            RegardingobjectidMsdynPostalbum = regardingobjectidMsdynPostalbum;
+            RegardingobjectidMsdynPostconfig = regardingobjectidMsdynPostconfig;
+            RegardingobjectidMsdynPostruleconfig = regardingobjectidMsdynPostruleconfig;
+            RegardingobjectidMsdynWallsavedquery = regardingobjectidMsdynWallsavedquery;
+            RegardingobjectidMsdynWallsavedqueryusersettings = regardingobjectidMsdynWallsavedqueryusersettings;
             RegardingobjectidAbsScheduledprocess = regardingobjectidAbsScheduledprocess;
             RegardingobjectidAbsScheduledprocessexecution = regardingobjectidAbsScheduledprocessexecution;
             RegardingobjectidAdoxioAlias = regardingobjectidAdoxioAlias;
@@ -361,15 +171,168 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             RegardingobjectidAdoxioApplicationstructurechangev1 = regardingobjectidAdoxioApplicationstructurechangev1;
             RegardingobjectidAdoxioApplicationtransferownershipv1 = regardingobjectidAdoxioApplicationtransferownershipv1;
             RegardingobjectidAdoxioFormelementuploadfield = regardingobjectidAdoxioFormelementuploadfield;
+            RegardingobjectidAccountleads = regardingobjectidAccountleads;
+            RegardingobjectidContactleads = regardingobjectidContactleads;
+            RegardingobjectidLeadaddress = regardingobjectidLeadaddress;
+            RegardingobjectidDynamicproperty = regardingobjectidDynamicproperty;
+            RegardingobjectidDynamicpropertyassociation = regardingobjectidDynamicpropertyassociation;
+            RegardingobjectidDynamicpropertyinstance = regardingobjectidDynamicpropertyinstance;
+            RegardingobjectidDynamicpropertyoptionsetitem = regardingobjectidDynamicpropertyoptionsetitem;
+            RegardingobjectidCampaignactivityitem = regardingobjectidCampaignactivityitem;
+            RegardingobjectidCampaignitem = regardingobjectidCampaignitem;
+            RegardingobjectidListmember = regardingobjectidListmember;
+            RegardingobjectidEntitlementcontacts = regardingobjectidEntitlementcontacts;
+            RegardingobjectidEntitlementproducts = regardingobjectidEntitlementproducts;
+            RegardingobjectidEntitlementtemplatechannel = regardingobjectidEntitlementtemplatechannel;
+            RegardingobjectidEntitlementtemplateproducts = regardingobjectidEntitlementtemplateproducts;
+            RegardingobjectidIncidentknowledgebaserecord = regardingobjectidIncidentknowledgebaserecord;
+            RegardingobjectidKnowledgearticleincident = regardingobjectidKnowledgearticleincident;
+            RegardingobjectidPhonetocaseprocess = regardingobjectidPhonetocaseprocess;
+            RegardingobjectidServicecontractcontacts = regardingobjectidServicecontractcontacts;
+            RegardingobjectidCompetitoraddress = regardingobjectidCompetitoraddress;
+            RegardingobjectidCompetitorproduct = regardingobjectidCompetitorproduct;
+            RegardingobjectidCompetitorsalesliterature = regardingobjectidCompetitorsalesliterature;
+            RegardingobjectidContactinvoices = regardingobjectidContactinvoices;
+            RegardingobjectidContactorders = regardingobjectidContactorders;
+            RegardingobjectidContactquotes = regardingobjectidContactquotes;
+            RegardingobjectidLeadcompetitors = regardingobjectidLeadcompetitors;
+            RegardingobjectidLeadproduct = regardingobjectidLeadproduct;
+            RegardingobjectidLeadtoopportunitysalesprocess = regardingobjectidLeadtoopportunitysalesprocess;
+            RegardingobjectidOpportunitycompetitors = regardingobjectidOpportunitycompetitors;
+            RegardingobjectidOpportunitysalesprocess = regardingobjectidOpportunitysalesprocess;
+            RegardingobjectidProductsalesliterature = regardingobjectidProductsalesliterature;
+            RegardingobjectidMsdynRelationshipinsightsunifiedconfig = regardingobjectidMsdynRelationshipinsightsunifiedconfig;
+            RegardingobjectidMsdynSiconfig = regardingobjectidMsdynSiconfig;
+            RegardingobjectidAdminsettingsentity = regardingobjectidAdminsettingsentity;
             RegardingobjectidAdoxioApplicationliquorbpf = regardingobjectidAdoxioApplicationliquorbpf;
             RegardingobjectidAdoxioEvent = regardingobjectidAdoxioEvent;
             RegardingobjectidAdoxioEventschedule = regardingobjectidAdoxioEventschedule;
-            RegardingobjectidAdoxioLdborder = regardingobjectidAdoxioLdborder;
             RegardingobjectidAdoxioFederalreportexport = regardingobjectidAdoxioFederalreportexport;
+            RegardingobjectidAdoxioLdborder = regardingobjectidAdoxioLdborder;
             RegardingobjectidAdoxioApplicationtypefeeschedule = regardingobjectidAdoxioApplicationtypefeeschedule;
-            RegardingobjectidAdoxioLicenceldbordertotalhistory = regardingobjectidAdoxioLicenceldbordertotalhistory;
-            RegardingobjectidAdoxioEndorsementtype = regardingobjectidAdoxioEndorsementtype;
             RegardingobjectidAdoxioEndorsement = regardingobjectidAdoxioEndorsement;
+            RegardingobjectidAdoxioEndorsementtype = regardingobjectidAdoxioEndorsementtype;
+            RegardingobjectidAdoxioLicenceldbordertotalhistory = regardingobjectidAdoxioLicenceldbordertotalhistory;
+            RegardingobjectidProductpricelevel = regardingobjectidProductpricelevel;
+            RegardingobjectidReport = regardingobjectidReport;
+            AsyncOperationEmails = asyncOperationEmails;
+            RegardingobjectidRecurringappointmentmaster = regardingobjectidRecurringappointmentmaster;
+            RegardingobjectidIncidentresolution = regardingobjectidIncidentresolution;
+            RegardingobjectidOpportunity = regardingobjectidOpportunity;
+            RegardingobjectidPrivilege = regardingobjectidPrivilege;
+            AsyncOperationBulkDeleteOperation = asyncOperationBulkDeleteOperation;
+            RegardingobjectidGoalrollupquery = regardingobjectidGoalrollupquery;
+            RegardingobjectidDiscounttype = regardingobjectidDiscounttype;
+            AsyncOperationSocialActivities = asyncOperationSocialActivities;
+            RegardingobjectidPostfollow = regardingobjectidPostfollow;
+            RegardingobjectidBusinessunit = regardingobjectidBusinessunit;
+            RegardingobjectidAnnualfiscalcalendar = regardingobjectidAnnualfiscalcalendar;
+            RegardingobjectidEquipment = regardingobjectidEquipment;
+            RegardingobjectidDiscount = regardingobjectidDiscount;
+            Workflowactivationid = workflowactivationid;
+            RegardingobjectidMonthlyfiscalcalendar = regardingobjectidMonthlyfiscalcalendar;
+            RegardingobjectidMailbox = regardingobjectidMailbox;
+            RegardingobjectidImportfile = regardingobjectidImportfile;
+            LkWorkflowlogAsyncoperationChildworkflow = lkWorkflowlogAsyncoperationChildworkflow;
+            RegardingobjectidImportdata = regardingobjectidImportdata;
+            RegardingobjectidEmail = regardingobjectidEmail;
+            RegardingobjectidTeam = regardingobjectidTeam;
+            AsyncOperationDuplicateBaseRecord = asyncOperationDuplicateBaseRecord;
+            RegardingobjectidOpportunityclose = regardingobjectidOpportunityclose;
+            RegardingobjectidLead = regardingobjectidLead;
+            RegardingobjectidKbarticletemplate = regardingobjectidKbarticletemplate;
+            RegardingobjectidEmailserverprofile = regardingobjectidEmailserverprofile;
+            RegardingobjectidUserform = regardingobjectidUserform;
+            RegardingobjectidTransactioncurrency = regardingobjectidTransactioncurrency;
+            RegardingobjectidSocialprofile = regardingobjectidSocialprofile;
+            RegardingobjectidOpportunityproduct = regardingobjectidOpportunityproduct;
+            RegardingobjectidImportmap = regardingobjectidImportmap;
+            RegardingobjectidAccount = regardingobjectidAccount;
+            RegardingobjectidPhonecall = regardingobjectidPhonecall;
+            RegardingobjectidSocialactivity = regardingobjectidSocialactivity;
+            RegardingobjectidSalesorder = regardingobjectidSalesorder;
+            RegardingobjectidContract = regardingobjectidContract;
+            RegardingobjectidQueueitem = regardingobjectidQueueitem;
+            RegardingobjectidQuarterlyfiscalcalendar = regardingobjectidQuarterlyfiscalcalendar;
+            RegardingobjectidQueue = regardingobjectidQueue;
+            RegardingobjectidTemplate = regardingobjectidTemplate;
+            RegardingobjectidServiceappointment = regardingobjectidServiceappointment;
+            Createdby = createdby;
+            RegardingobjectidKbarticle = regardingobjectidKbarticle;
+            RegardingobjectidSystemform = regardingobjectidSystemform;
+            RegardingobjectidDisplaystring = regardingobjectidDisplaystring;
+            Owningbusinessunit = owningbusinessunit;
+            RegardingobjectidOrganization = regardingobjectidOrganization;
+            RegardingobjectidConnectionrole = regardingobjectidConnectionrole;
+            RegardingobjectidSite = regardingobjectidSite;
+            RegardingobjectidKbarticlecomment = regardingobjectidKbarticlecomment;
+            RegardingobjectidAppointment = regardingobjectidAppointment;
+            RegardingobjectidSystemuser = regardingobjectidSystemuser;
+            RegardingobjectidMailmergetemplate = regardingobjectidMailmergetemplate;
+            AsyncOperationMailboxTrackingFolder = asyncOperationMailboxTrackingFolder;
+            RegardingobjectidCampaign = regardingobjectidCampaign;
+            RegardingobjectidQuoteclose = regardingobjectidQuoteclose;
+            RegardingobjectidIncident = regardingobjectidIncident;
+            RegardingobjectidCalendar = regardingobjectidCalendar;
+            RegardingobjectidRollupfield = regardingobjectidRollupfield;
+            RegardingobjectidProductassociation = regardingobjectidProductassociation;
+            RegardingobjectidContracttemplate = regardingobjectidContracttemplate;
+            RegardingobjectidConnection = regardingobjectidConnection;
+            RegardingobjectidMetric = regardingobjectidMetric;
+            Modifiedby = modifiedby;
+            RegardingobjectidRole = regardingobjectidRole;
+            RegardingobjectidResource = regardingobjectidResource;
+            RegardingobjectidSalesorderdetail = regardingobjectidSalesorderdetail;
+            Createdonbehalfby = createdonbehalfby;
+            Ownerid = ownerid;
+            RegardingobjectidSubject = regardingobjectidSubject;
+            RegardingobjectidUomschedule = regardingobjectidUomschedule;
+            RegardingobjectidSavedquery = regardingobjectidSavedquery;
+            RegardingobjectidSla = regardingobjectidSla;
+            RegardingobjectidActivitymimeattachment = regardingobjectidActivitymimeattachment;
+            RegardingobjectidLetter = regardingobjectidLetter;
+            Owningteam = owningteam;
+            RegardingobjectidProduct = regardingobjectidProduct;
+            RegardingobjectidInvoicedetail = regardingobjectidInvoicedetail;
+            RegardingobjectidList = regardingobjectidList;
+            RegardingobjectidCompetitor = regardingobjectidCompetitor;
+            RegardingobjectidOrderclose = regardingobjectidOrderclose;
+            RegardingobjectidQuotedetail = regardingobjectidQuotedetail;
+            RegardingobjectidAnnotation = regardingobjectidAnnotation;
+            RegardingobjectidUserquery = regardingobjectidUserquery;
+            LkWorkflowlogAsyncoperations = lkWorkflowlogAsyncoperations;
+            RegardingobjectidTask = regardingobjectidTask;
+            RegardingobjectidContractdetail = regardingobjectidContractdetail;
+            RegardingobjectidContact = regardingobjectidContact;
+            RegardingobjectidQuote = regardingobjectidQuote;
+            RegardingobjectidSharepointsite = regardingobjectidSharepointsite;
+            RegardingobjectidSalesliterature = regardingobjectidSalesliterature;
+            Owningextensionid = owningextensionid;
+            RegardingobjectidBusinessunitnewsarticle = regardingobjectidBusinessunitnewsarticle;
+            RegardingobjectidCampaignresponse = regardingobjectidCampaignresponse;
+            RegardingobjectidGoal = regardingobjectidGoal;
+            RegardingobjectidImportlog = regardingobjectidImportlog;
+            RegardingobjectidSemiannualfiscalcalendar = regardingobjectidSemiannualfiscalcalendar;
+            RegardingobjectidTerritory = regardingobjectidTerritory;
+            RegardingobjectidFixedmonthlyfiscalcalendar = regardingobjectidFixedmonthlyfiscalcalendar;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            RegardingobjectidBulkoperation = regardingobjectidBulkoperation;
+            RegardingobjectidCustomeraddress = regardingobjectidCustomeraddress;
+            RegardingobjectidService = regardingobjectidService;
+            RegardingobjectidInvoice = regardingobjectidInvoice;
+            RegardingobjectidUom = regardingobjectidUom;
+            RegardingobjectidFax = regardingobjectidFax;
+            RegardingobjectidBulkoperationlog = regardingobjectidBulkoperationlog;
+            RegardingobjectidCampaignactivity = regardingobjectidCampaignactivity;
+            RegardingobjectidResourcespec = regardingobjectidResourcespec;
+            RegardingobjectidSalesliteratureitem = regardingobjectidSalesliteratureitem;
+            RegardingobjectidSharepointdocumentlocation = regardingobjectidSharepointdocumentlocation;
+            RegardingobjectidActivitypointer = regardingobjectidActivitypointer;
+            RegardingobjectidPricelevel = regardingobjectidPricelevel;
+            Owninguser = owninguser;
+            RegardingobjectidConstraintbasedgroup = regardingobjectidConstraintbasedgroup;
+            RegardingobjectidImport = regardingobjectidImport;
+            RegardingobjectidResourcegroup = regardingobjectidResourcegroup;
             CustomInit();
         }
 
@@ -379,221 +342,174 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets date and time when the system job was created.
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "retrycount")]
+        public int? Retrycount { get; set; }
 
         /// <summary>
-        /// Gets or sets status of the system job.
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the owning extension with which
-        /// the system job is associated.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningextensionid_value")]
-        public string _owningextensionidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type of the system job.
-        /// </summary>
-        [JsonProperty(PropertyName = "operationtype")]
-        public int? Operationtype { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Subtype of the Async Job
-        /// </summary>
-        [JsonProperty(PropertyName = "subtype")]
-        public int? Subtype { get; set; }
-
-        /// <summary>
-        /// Gets or sets message related to the system job.
-        /// </summary>
-        [JsonProperty(PropertyName = "message")]
-        public string Message { get; set; }
-
-        /// <summary>
-        /// Gets or sets execution of all operations with the same dependency
-        /// token is serialized.
-        /// </summary>
-        [JsonProperty(PropertyName = "dependencytoken")]
-        public string Dependencytoken { get; set; }
-
-        /// <summary>
-        /// Gets or sets last time the correlation depth was updated.
         /// </summary>
         [JsonProperty(PropertyName = "correlationupdatedtime")]
         public System.DateTimeOffset? Correlationupdatedtime { get; set; }
 
         /// <summary>
-        /// Gets or sets number of SDK calls made since the first call.
         /// </summary>
         [JsonProperty(PropertyName = "depth")]
         public int? Depth { get; set; }
 
         /// <summary>
-        /// Gets or sets name of the system job.
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "rootexecutioncontext")]
+        public string Rootexecutioncontext { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// asyncoperation.
+        /// </summary>
+        [JsonProperty(PropertyName = "subtype")]
+        public int? Subtype { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets time that the system job has taken to execute.
         /// </summary>
-        [JsonProperty(PropertyName = "executiontimespan")]
-        public decimal? Executiontimespan { get; set; }
+        [JsonProperty(PropertyName = "friendlymessage")]
+        public string Friendlymessage { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the system job was last modified.
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the workflow activation related
-        /// to the system job.
-        /// </summary>
-        [JsonProperty(PropertyName = "_workflowactivationid_value")]
-        public string _workflowactivationidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user or team who owns the
-        /// system job.
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets indicates whether the system job should run only after
-        /// the specified date and time.
-        /// </summary>
-        [JsonProperty(PropertyName = "postponeuntil")]
-        public System.DateTimeOffset? Postponeuntil { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who last modified the
-        /// system job.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the team who owns the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the system job was completed.
-        /// </summary>
-        [JsonProperty(PropertyName = "completedon")]
-        public System.DateTimeOffset? Completedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets type of entity with which the system job is primarily
-        /// associated.
-        /// </summary>
-        [JsonProperty(PropertyName = "primaryentitytype")]
-        public string Primaryentitytype { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the object with which the system
-        /// job is associated.
-        /// </summary>
-        [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public string _regardingobjectidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unstructured data associated with the system job.
-        /// </summary>
-        [JsonProperty(PropertyName = "data")]
-        public string Data { get; set; }
-
-        /// <summary>
-        /// Gets or sets pattern of the system job's recurrence.
-        /// </summary>
-        [JsonProperty(PropertyName = "recurrencepattern")]
-        public string Recurrencepattern { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets order in which operations were submitted.
-        /// </summary>
-        [JsonProperty(PropertyName = "sequence")]
-        public long? Sequence { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the system
-        /// job.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier used to correlate between multiple
-        /// SDK requests and system jobs.
-        /// </summary>
-        [JsonProperty(PropertyName = "correlationid")]
-        public string Correlationid { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who owns the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets name of a workflow stage.
-        /// </summary>
-        [JsonProperty(PropertyName = "workflowstagename")]
-        public string Workflowstagename { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the business unit that owns the
-        /// system job.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets starting time in UTC for the recurrence pattern.
-        /// </summary>
-        [JsonProperty(PropertyName = "recurrencestarttime")]
-        public System.DateTimeOffset? Recurrencestarttime { get; set; }
-
-        /// <summary>
-        /// Gets or sets error code returned from a canceled system job.
-        /// </summary>
-        [JsonProperty(PropertyName = "errorcode")]
-        public int? Errorcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the host that owns this system
-        /// job.
         /// </summary>
         [JsonProperty(PropertyName = "hostid")]
         public string Hostid { get; set; }
 
         /// <summary>
-        /// Gets or sets name of the message that started this system job.
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningextensionid_value")]
+        public string _owningextensionidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sequence")]
+        public long? Sequence { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "workflowstagename")]
+        public string Workflowstagename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "requestid")]
+        public string Requestid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "dependencytoken")]
+        public string Dependencytoken { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "completedon")]
+        public System.DateTimeOffset? Completedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "data")]
+        public string Data { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "messagename")]
         public string Messagename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "recurrencepattern")]
+        public string Recurrencepattern { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "operationtype")]
+        public int? Operationtype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "asyncoperationid")]
+        public string Asyncoperationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "recurrencestarttime")]
+        public System.DateTimeOffset? Recurrencestarttime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "postponeuntil")]
+        public System.DateTimeOffset? Postponeuntil { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "executiontimespan")]
+        public decimal? Executiontimespan { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_workflowactivationid_value")]
+        public string _workflowactivationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "message")]
+        public string Message { get; set; }
 
         /// <summary>
         /// </summary>
@@ -601,66 +517,64 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string Parentpluginexecutionid { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the delegate user who last
-        /// modified the asyncoperation.
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "primaryentitytype")]
+        public string Primaryentitytype { get; set; }
 
         /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "_regardingobjectid_value")]
+        public string _regardingobjectidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets reason for the status of the system job.
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the request that generated the
-        /// system job.
-        /// </summary>
-        [JsonProperty(PropertyName = "requestid")]
-        public string Requestid { get; set; }
-
-        /// <summary>
-        /// Gets or sets message provided by the system job.
-        /// </summary>
-        [JsonProperty(PropertyName = "friendlymessage")]
-        public string Friendlymessage { get; set; }
-
-        /// <summary>
-        /// Gets or sets indicates that the system job is waiting for an event.
-        /// </summary>
-        [JsonProperty(PropertyName = "iswaitingforevent")]
-        public bool? Iswaitingforevent { get; set; }
-
-        /// <summary>
-        /// Gets or sets number of times to retry the system job.
-        /// </summary>
-        [JsonProperty(PropertyName = "retrycount")]
-        public int? Retrycount { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the system job was started.
         /// </summary>
         [JsonProperty(PropertyName = "startedon")]
         public System.DateTimeOffset? Startedon { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the system job.
         /// </summary>
-        [JsonProperty(PropertyName = "asyncoperationid")]
-        public string Asyncoperationid { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "errorcode")]
+        public int? Errorcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "iswaitingforevent")]
+        public bool? Iswaitingforevent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "correlationid")]
+        public string Correlationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_theme")]
         public MicrosoftDynamicsCRMtheme RegardingobjectidTheme { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_usermapping")]
+        public MicrosoftDynamicsCRMusermapping RegardingobjectidUsermapping { get; set; }
 
         /// <summary>
         /// </summary>
@@ -769,588 +683,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_productpricelevel")]
-        public MicrosoftDynamicsCRMproductpricelevel RegardingobjectidProductpricelevel { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_msdyn_postalbum")]
+        public MicrosoftDynamicsCRMmsdynPostalbum RegardingobjectidMsdynPostalbum { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_report")]
-        public MicrosoftDynamicsCRMreport RegardingobjectidReport { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_msdyn_postconfig")]
+        public MicrosoftDynamicsCRMmsdynPostconfig RegardingobjectidMsdynPostconfig { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "AsyncOperation_Emails")]
-        public IList<MicrosoftDynamicsCRMemail> AsyncOperationEmails { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_msdyn_postruleconfig")]
+        public MicrosoftDynamicsCRMmsdynPostruleconfig RegardingobjectidMsdynPostruleconfig { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMrecurringappointmentmaster RegardingobjectidRecurringappointmentmaster { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_msdyn_wallsavedquery")]
+        public MicrosoftDynamicsCRMmsdynWallsavedquery RegardingobjectidMsdynWallsavedquery { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_incidentresolution")]
-        public MicrosoftDynamicsCRMincidentresolution RegardingobjectidIncidentresolution { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_opportunity")]
-        public MicrosoftDynamicsCRMopportunity RegardingobjectidOpportunity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_privilege")]
-        public MicrosoftDynamicsCRMprivilege RegardingobjectidPrivilege { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "AsyncOperation_BulkDeleteOperation")]
-        public IList<MicrosoftDynamicsCRMbulkdeleteoperation> AsyncOperationBulkDeleteOperation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_goalrollupquery")]
-        public MicrosoftDynamicsCRMgoalrollupquery RegardingobjectidGoalrollupquery { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_discounttype")]
-        public MicrosoftDynamicsCRMdiscounttype RegardingobjectidDiscounttype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "AsyncOperation_SocialActivities")]
-        public IList<MicrosoftDynamicsCRMsocialactivity> AsyncOperationSocialActivities { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_postfollow")]
-        public MicrosoftDynamicsCRMpostfollow RegardingobjectidPostfollow { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_businessunit")]
-        public MicrosoftDynamicsCRMbusinessunit RegardingobjectidBusinessunit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_annualfiscalcalendar")]
-        public MicrosoftDynamicsCRMannualfiscalcalendar RegardingobjectidAnnualfiscalcalendar { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_equipment")]
-        public MicrosoftDynamicsCRMequipment RegardingobjectidEquipment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_discount")]
-        public MicrosoftDynamicsCRMdiscount RegardingobjectidDiscount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "workflowactivationid")]
-        public MicrosoftDynamicsCRMworkflow Workflowactivationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_monthlyfiscalcalendar")]
-        public MicrosoftDynamicsCRMmonthlyfiscalcalendar RegardingobjectidMonthlyfiscalcalendar { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_mailbox")]
-        public MicrosoftDynamicsCRMmailbox RegardingobjectidMailbox { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_importfile")]
-        public MicrosoftDynamicsCRMimportfile RegardingobjectidImportfile { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_workflowlog_asyncoperation_childworkflow")]
-        public IList<MicrosoftDynamicsCRMworkflowlog> LkWorkflowlogAsyncoperationChildworkflow { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_importdata")]
-        public MicrosoftDynamicsCRMimportdata RegardingobjectidImportdata { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_email")]
-        public MicrosoftDynamicsCRMemail RegardingobjectidEmail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_team")]
-        public MicrosoftDynamicsCRMteam RegardingobjectidTeam { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "AsyncOperation_DuplicateBaseRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> AsyncOperationDuplicateBaseRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_opportunityclose")]
-        public MicrosoftDynamicsCRMopportunityclose RegardingobjectidOpportunityclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_lead")]
-        public MicrosoftDynamicsCRMlead RegardingobjectidLead { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_kbarticletemplate")]
-        public MicrosoftDynamicsCRMkbarticletemplate RegardingobjectidKbarticletemplate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_emailserverprofile")]
-        public MicrosoftDynamicsCRMemailserverprofile RegardingobjectidEmailserverprofile { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_userform")]
-        public MicrosoftDynamicsCRMuserform RegardingobjectidUserform { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_transactioncurrency")]
-        public MicrosoftDynamicsCRMtransactioncurrency RegardingobjectidTransactioncurrency { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_socialprofile")]
-        public MicrosoftDynamicsCRMsocialprofile RegardingobjectidSocialprofile { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_opportunityproduct")]
-        public MicrosoftDynamicsCRMopportunityproduct RegardingobjectidOpportunityproduct { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_importmap")]
-        public MicrosoftDynamicsCRMimportmap RegardingobjectidImportmap { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_account")]
-        public MicrosoftDynamicsCRMaccount RegardingobjectidAccount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_phonecall")]
-        public MicrosoftDynamicsCRMphonecall RegardingobjectidPhonecall { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_socialactivity")]
-        public MicrosoftDynamicsCRMsocialactivity RegardingobjectidSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_salesorder")]
-        public MicrosoftDynamicsCRMsalesorder RegardingobjectidSalesorder { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_contract")]
-        public MicrosoftDynamicsCRMcontract RegardingobjectidContract { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_queueitem")]
-        public MicrosoftDynamicsCRMqueueitem RegardingobjectidQueueitem { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_quarterlyfiscalcalendar")]
-        public MicrosoftDynamicsCRMquarterlyfiscalcalendar RegardingobjectidQuarterlyfiscalcalendar { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_queue")]
-        public MicrosoftDynamicsCRMqueue RegardingobjectidQueue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_template")]
-        public MicrosoftDynamicsCRMtemplate RegardingobjectidTemplate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_serviceappointment")]
-        public MicrosoftDynamicsCRMserviceappointment RegardingobjectidServiceappointment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_kbarticle")]
-        public MicrosoftDynamicsCRMkbarticle RegardingobjectidKbarticle { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_systemform")]
-        public MicrosoftDynamicsCRMsystemform RegardingobjectidSystemform { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_organization")]
-        public MicrosoftDynamicsCRMorganization RegardingobjectidOrganization { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_connectionrole")]
-        public MicrosoftDynamicsCRMconnectionrole RegardingobjectidConnectionrole { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_site")]
-        public MicrosoftDynamicsCRMsite RegardingobjectidSite { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_kbarticlecomment")]
-        public MicrosoftDynamicsCRMkbarticlecomment RegardingobjectidKbarticlecomment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_appointment")]
-        public MicrosoftDynamicsCRMappointment RegardingobjectidAppointment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_systemuser")]
-        public MicrosoftDynamicsCRMsystemuser RegardingobjectidSystemuser { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_mailmergetemplate")]
-        public MicrosoftDynamicsCRMmailmergetemplate RegardingobjectidMailmergetemplate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_campaign")]
-        public MicrosoftDynamicsCRMcampaign RegardingobjectidCampaign { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_quoteclose")]
-        public MicrosoftDynamicsCRMquoteclose RegardingobjectidQuoteclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_incident")]
-        public MicrosoftDynamicsCRMincident RegardingobjectidIncident { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_calendar")]
-        public MicrosoftDynamicsCRMcalendar RegardingobjectidCalendar { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_productassociation")]
-        public MicrosoftDynamicsCRMproductassociation RegardingobjectidProductassociation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_contracttemplate")]
-        public MicrosoftDynamicsCRMcontracttemplate RegardingobjectidContracttemplate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_connection")]
-        public MicrosoftDynamicsCRMconnection RegardingobjectidConnection { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_metric")]
-        public MicrosoftDynamicsCRMmetric RegardingobjectidMetric { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_role")]
-        public MicrosoftDynamicsCRMrole RegardingobjectidRole { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_resource")]
-        public MicrosoftDynamicsCRMresource RegardingobjectidResource { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_salesorderdetail")]
-        public MicrosoftDynamicsCRMsalesorderdetail RegardingobjectidSalesorderdetail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ownerid")]
-        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_subject")]
-        public MicrosoftDynamicsCRMsubject RegardingobjectidSubject { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_uomschedule")]
-        public MicrosoftDynamicsCRMuomschedule RegardingobjectidUomschedule { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_savedquery")]
-        public MicrosoftDynamicsCRMsavedquery RegardingobjectidSavedquery { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_sla")]
-        public MicrosoftDynamicsCRMsla RegardingobjectidSla { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_activitymimeattachment")]
-        public MicrosoftDynamicsCRMactivitymimeattachment RegardingobjectidActivitymimeattachment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_letter")]
-        public MicrosoftDynamicsCRMletter RegardingobjectidLetter { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningteam")]
-        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_product")]
-        public MicrosoftDynamicsCRMproduct RegardingobjectidProduct { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_invoicedetail")]
-        public MicrosoftDynamicsCRMinvoicedetail RegardingobjectidInvoicedetail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_list")]
-        public MicrosoftDynamicsCRMlist RegardingobjectidList { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_competitor")]
-        public MicrosoftDynamicsCRMcompetitor RegardingobjectidCompetitor { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_orderclose")]
-        public MicrosoftDynamicsCRMorderclose RegardingobjectidOrderclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_quotedetail")]
-        public MicrosoftDynamicsCRMquotedetail RegardingobjectidQuotedetail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_annotation")]
-        public MicrosoftDynamicsCRMannotation RegardingobjectidAnnotation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_userquery")]
-        public MicrosoftDynamicsCRMuserquery RegardingobjectidUserquery { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_workflowlog_asyncoperations")]
-        public IList<MicrosoftDynamicsCRMworkflowlog> LkWorkflowlogAsyncoperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_task")]
-        public MicrosoftDynamicsCRMtask RegardingobjectidTask { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_contractdetail")]
-        public MicrosoftDynamicsCRMcontractdetail RegardingobjectidContractdetail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_contact")]
-        public MicrosoftDynamicsCRMcontact RegardingobjectidContact { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_quote")]
-        public MicrosoftDynamicsCRMquote RegardingobjectidQuote { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_sharepointsite")]
-        public MicrosoftDynamicsCRMsharepointsite RegardingobjectidSharepointsite { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_salesliterature")]
-        public MicrosoftDynamicsCRMsalesliterature RegardingobjectidSalesliterature { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningextensionid")]
-        public MicrosoftDynamicsCRMsdkmessageprocessingstep Owningextensionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_businessunitnewsarticle")]
-        public MicrosoftDynamicsCRMbusinessunitnewsarticle RegardingobjectidBusinessunitnewsarticle { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_campaignresponse")]
-        public MicrosoftDynamicsCRMcampaignresponse RegardingobjectidCampaignresponse { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_goal")]
-        public MicrosoftDynamicsCRMgoal RegardingobjectidGoal { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_importlog")]
-        public MicrosoftDynamicsCRMimportlog RegardingobjectidImportlog { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_semiannualfiscalcalendar")]
-        public MicrosoftDynamicsCRMsemiannualfiscalcalendar RegardingobjectidSemiannualfiscalcalendar { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_territory")]
-        public MicrosoftDynamicsCRMterritory RegardingobjectidTerritory { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_fixedmonthlyfiscalcalendar")]
-        public MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar RegardingobjectidFixedmonthlyfiscalcalendar { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_bulkoperation")]
-        public MicrosoftDynamicsCRMbulkoperation RegardingobjectidBulkoperation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_customeraddress")]
-        public MicrosoftDynamicsCRMcustomeraddress RegardingobjectidCustomeraddress { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_service")]
-        public MicrosoftDynamicsCRMservice RegardingobjectidService { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_invoice")]
-        public MicrosoftDynamicsCRMinvoice RegardingobjectidInvoice { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_uom")]
-        public MicrosoftDynamicsCRMuom RegardingobjectidUom { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_fax")]
-        public MicrosoftDynamicsCRMfax RegardingobjectidFax { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_bulkoperationlog")]
-        public MicrosoftDynamicsCRMbulkoperationlog RegardingobjectidBulkoperationlog { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_campaignactivity")]
-        public MicrosoftDynamicsCRMcampaignactivity RegardingobjectidCampaignactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_resourcespec")]
-        public MicrosoftDynamicsCRMresourcespec RegardingobjectidResourcespec { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_salesliteratureitem")]
-        public MicrosoftDynamicsCRMsalesliteratureitem RegardingobjectidSalesliteratureitem { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_sharepointdocumentlocation")]
-        public MicrosoftDynamicsCRMsharepointdocumentlocation RegardingobjectidSharepointdocumentlocation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_activitypointer")]
-        public MicrosoftDynamicsCRMactivitypointer RegardingobjectidActivitypointer { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_pricelevel")]
-        public MicrosoftDynamicsCRMpricelevel RegardingobjectidPricelevel { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_constraintbasedgroup")]
-        public MicrosoftDynamicsCRMconstraintbasedgroup RegardingobjectidConstraintbasedgroup { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_import")]
-        public MicrosoftDynamicsCRMimport RegardingobjectidImport { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_resourcegroup")]
-        public MicrosoftDynamicsCRMresourcegroup RegardingobjectidResourcegroup { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_msdyn_wallsavedqueryusersettings")]
+        public MicrosoftDynamicsCRMmsdynWallsavedqueryusersettings RegardingobjectidMsdynWallsavedqueryusersettings { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1689,6 +1043,171 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_accountleads")]
+        public MicrosoftDynamicsCRMaccountleads RegardingobjectidAccountleads { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_contactleads")]
+        public MicrosoftDynamicsCRMcontactleads RegardingobjectidContactleads { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_leadaddress")]
+        public MicrosoftDynamicsCRMleadaddress RegardingobjectidLeadaddress { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_dynamicproperty")]
+        public MicrosoftDynamicsCRMdynamicproperty RegardingobjectidDynamicproperty { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_dynamicpropertyassociation")]
+        public MicrosoftDynamicsCRMdynamicpropertyassociation RegardingobjectidDynamicpropertyassociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_dynamicpropertyinstance")]
+        public MicrosoftDynamicsCRMdynamicpropertyinstance RegardingobjectidDynamicpropertyinstance { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_dynamicpropertyoptionsetitem")]
+        public MicrosoftDynamicsCRMdynamicpropertyoptionsetitem RegardingobjectidDynamicpropertyoptionsetitem { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_campaignactivityitem")]
+        public MicrosoftDynamicsCRMcampaignactivityitem RegardingobjectidCampaignactivityitem { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_campaignitem")]
+        public MicrosoftDynamicsCRMcampaignitem RegardingobjectidCampaignitem { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_listmember")]
+        public MicrosoftDynamicsCRMlistmember RegardingobjectidListmember { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_entitlementcontacts")]
+        public MicrosoftDynamicsCRMentitlementcontacts RegardingobjectidEntitlementcontacts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_entitlementproducts")]
+        public MicrosoftDynamicsCRMentitlementproducts RegardingobjectidEntitlementproducts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_entitlementtemplatechannel")]
+        public MicrosoftDynamicsCRMentitlementtemplatechannel RegardingobjectidEntitlementtemplatechannel { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_entitlementtemplateproducts")]
+        public MicrosoftDynamicsCRMentitlementtemplateproducts RegardingobjectidEntitlementtemplateproducts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_incidentknowledgebaserecord")]
+        public MicrosoftDynamicsCRMincidentknowledgebaserecord RegardingobjectidIncidentknowledgebaserecord { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_knowledgearticleincident")]
+        public MicrosoftDynamicsCRMknowledgearticleincident RegardingobjectidKnowledgearticleincident { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_phonetocaseprocess")]
+        public MicrosoftDynamicsCRMphonetocaseprocess RegardingobjectidPhonetocaseprocess { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_servicecontractcontacts")]
+        public MicrosoftDynamicsCRMservicecontractcontacts RegardingobjectidServicecontractcontacts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_competitoraddress")]
+        public MicrosoftDynamicsCRMcompetitoraddress RegardingobjectidCompetitoraddress { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_competitorproduct")]
+        public MicrosoftDynamicsCRMcompetitorproduct RegardingobjectidCompetitorproduct { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_competitorsalesliterature")]
+        public MicrosoftDynamicsCRMcompetitorsalesliterature RegardingobjectidCompetitorsalesliterature { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_contactinvoices")]
+        public MicrosoftDynamicsCRMcontactinvoices RegardingobjectidContactinvoices { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_contactorders")]
+        public MicrosoftDynamicsCRMcontactorders RegardingobjectidContactorders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_contactquotes")]
+        public MicrosoftDynamicsCRMcontactquotes RegardingobjectidContactquotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_leadcompetitors")]
+        public MicrosoftDynamicsCRMleadcompetitors RegardingobjectidLeadcompetitors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_leadproduct")]
+        public MicrosoftDynamicsCRMleadproduct RegardingobjectidLeadproduct { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_leadtoopportunitysalesprocess")]
+        public MicrosoftDynamicsCRMleadtoopportunitysalesprocess RegardingobjectidLeadtoopportunitysalesprocess { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_opportunitycompetitors")]
+        public MicrosoftDynamicsCRMopportunitycompetitors RegardingobjectidOpportunitycompetitors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_opportunitysalesprocess")]
+        public MicrosoftDynamicsCRMopportunitysalesprocess RegardingobjectidOpportunitysalesprocess { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_productsalesliterature")]
+        public MicrosoftDynamicsCRMproductsalesliterature RegardingobjectidProductsalesliterature { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_msdyn_relationshipinsightsunifiedconfig")]
+        public MicrosoftDynamicsCRMmsdynRelationshipinsightsunifiedconfig RegardingobjectidMsdynRelationshipinsightsunifiedconfig { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_msdyn_siconfig")]
+        public MicrosoftDynamicsCRMmsdynSiconfig RegardingobjectidMsdynSiconfig { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adminsettingsentity")]
+        public MicrosoftDynamicsCRMadminsettingsentity RegardingobjectidAdminsettingsentity { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_adoxio_applicationliquorbpf")]
         public MicrosoftDynamicsCRMadoxioApplicationliquorbpf RegardingobjectidAdoxioApplicationliquorbpf { get; set; }
 
@@ -1704,13 +1223,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_ldborder")]
-        public MicrosoftDynamicsCRMadoxioLdborder RegardingobjectidAdoxioLdborder { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_federalreportexport")]
+        public MicrosoftDynamicsCRMadoxioFederalreportexport RegardingobjectidAdoxioFederalreportexport { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_federalreportexport")]
-        public MicrosoftDynamicsCRMadoxioFederalreportexport RegardingobjectidAdoxioFederalreportexport { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_ldborder")]
+        public MicrosoftDynamicsCRMadoxioLdborder RegardingobjectidAdoxioLdborder { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1719,8 +1238,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_licenceldbordertotalhistory")]
-        public MicrosoftDynamicsCRMadoxioLicenceldbordertotalhistory RegardingobjectidAdoxioLicenceldbordertotalhistory { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_endorsement")]
+        public MicrosoftDynamicsCRMadoxioEndorsement RegardingobjectidAdoxioEndorsement { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1729,8 +1248,608 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_endorsement")]
-        public MicrosoftDynamicsCRMadoxioEndorsement RegardingobjectidAdoxioEndorsement { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_licenceldbordertotalhistory")]
+        public MicrosoftDynamicsCRMadoxioLicenceldbordertotalhistory RegardingobjectidAdoxioLicenceldbordertotalhistory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_productpricelevel")]
+        public MicrosoftDynamicsCRMproductpricelevel RegardingobjectidProductpricelevel { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_report")]
+        public MicrosoftDynamicsCRMreport RegardingobjectidReport { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "AsyncOperation_Emails")]
+        public IList<MicrosoftDynamicsCRMemail> AsyncOperationEmails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMrecurringappointmentmaster RegardingobjectidRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_incidentresolution")]
+        public MicrosoftDynamicsCRMincidentresolution RegardingobjectidIncidentresolution { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_opportunity")]
+        public MicrosoftDynamicsCRMopportunity RegardingobjectidOpportunity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_privilege")]
+        public MicrosoftDynamicsCRMprivilege RegardingobjectidPrivilege { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "AsyncOperation_BulkDeleteOperation")]
+        public IList<MicrosoftDynamicsCRMbulkdeleteoperation> AsyncOperationBulkDeleteOperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_goalrollupquery")]
+        public MicrosoftDynamicsCRMgoalrollupquery RegardingobjectidGoalrollupquery { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_discounttype")]
+        public MicrosoftDynamicsCRMdiscounttype RegardingobjectidDiscounttype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "AsyncOperation_SocialActivities")]
+        public IList<MicrosoftDynamicsCRMsocialactivity> AsyncOperationSocialActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_postfollow")]
+        public MicrosoftDynamicsCRMpostfollow RegardingobjectidPostfollow { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_businessunit")]
+        public MicrosoftDynamicsCRMbusinessunit RegardingobjectidBusinessunit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_annualfiscalcalendar")]
+        public MicrosoftDynamicsCRMannualfiscalcalendar RegardingobjectidAnnualfiscalcalendar { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_equipment")]
+        public MicrosoftDynamicsCRMequipment RegardingobjectidEquipment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_discount")]
+        public MicrosoftDynamicsCRMdiscount RegardingobjectidDiscount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "workflowactivationid")]
+        public MicrosoftDynamicsCRMworkflow Workflowactivationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_monthlyfiscalcalendar")]
+        public MicrosoftDynamicsCRMmonthlyfiscalcalendar RegardingobjectidMonthlyfiscalcalendar { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_mailbox")]
+        public MicrosoftDynamicsCRMmailbox RegardingobjectidMailbox { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_importfile")]
+        public MicrosoftDynamicsCRMimportfile RegardingobjectidImportfile { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_workflowlog_asyncoperation_childworkflow")]
+        public IList<MicrosoftDynamicsCRMworkflowlog> LkWorkflowlogAsyncoperationChildworkflow { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_importdata")]
+        public MicrosoftDynamicsCRMimportdata RegardingobjectidImportdata { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_email")]
+        public MicrosoftDynamicsCRMemail RegardingobjectidEmail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_team")]
+        public MicrosoftDynamicsCRMteam RegardingobjectidTeam { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "AsyncOperation_DuplicateBaseRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> AsyncOperationDuplicateBaseRecord { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_opportunityclose")]
+        public MicrosoftDynamicsCRMopportunityclose RegardingobjectidOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_lead")]
+        public MicrosoftDynamicsCRMlead RegardingobjectidLead { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_kbarticletemplate")]
+        public MicrosoftDynamicsCRMkbarticletemplate RegardingobjectidKbarticletemplate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_emailserverprofile")]
+        public MicrosoftDynamicsCRMemailserverprofile RegardingobjectidEmailserverprofile { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_userform")]
+        public MicrosoftDynamicsCRMuserform RegardingobjectidUserform { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_transactioncurrency")]
+        public MicrosoftDynamicsCRMtransactioncurrency RegardingobjectidTransactioncurrency { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_socialprofile")]
+        public MicrosoftDynamicsCRMsocialprofile RegardingobjectidSocialprofile { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_opportunityproduct")]
+        public MicrosoftDynamicsCRMopportunityproduct RegardingobjectidOpportunityproduct { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_importmap")]
+        public MicrosoftDynamicsCRMimportmap RegardingobjectidImportmap { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_account")]
+        public MicrosoftDynamicsCRMaccount RegardingobjectidAccount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_phonecall")]
+        public MicrosoftDynamicsCRMphonecall RegardingobjectidPhonecall { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_socialactivity")]
+        public MicrosoftDynamicsCRMsocialactivity RegardingobjectidSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_salesorder")]
+        public MicrosoftDynamicsCRMsalesorder RegardingobjectidSalesorder { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_contract")]
+        public MicrosoftDynamicsCRMcontract RegardingobjectidContract { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_queueitem")]
+        public MicrosoftDynamicsCRMqueueitem RegardingobjectidQueueitem { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_quarterlyfiscalcalendar")]
+        public MicrosoftDynamicsCRMquarterlyfiscalcalendar RegardingobjectidQuarterlyfiscalcalendar { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_queue")]
+        public MicrosoftDynamicsCRMqueue RegardingobjectidQueue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_template")]
+        public MicrosoftDynamicsCRMtemplate RegardingobjectidTemplate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_serviceappointment")]
+        public MicrosoftDynamicsCRMserviceappointment RegardingobjectidServiceappointment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_kbarticle")]
+        public MicrosoftDynamicsCRMkbarticle RegardingobjectidKbarticle { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_systemform")]
+        public MicrosoftDynamicsCRMsystemform RegardingobjectidSystemform { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_displaystring")]
+        public MicrosoftDynamicsCRMdisplaystring RegardingobjectidDisplaystring { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_organization")]
+        public MicrosoftDynamicsCRMorganization RegardingobjectidOrganization { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_connectionrole")]
+        public MicrosoftDynamicsCRMconnectionrole RegardingobjectidConnectionrole { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_site")]
+        public MicrosoftDynamicsCRMsite RegardingobjectidSite { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_kbarticlecomment")]
+        public MicrosoftDynamicsCRMkbarticlecomment RegardingobjectidKbarticlecomment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_appointment")]
+        public MicrosoftDynamicsCRMappointment RegardingobjectidAppointment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_systemuser")]
+        public MicrosoftDynamicsCRMsystemuser RegardingobjectidSystemuser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_mailmergetemplate")]
+        public MicrosoftDynamicsCRMmailmergetemplate RegardingobjectidMailmergetemplate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "AsyncOperation_MailboxTrackingFolder")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> AsyncOperationMailboxTrackingFolder { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_campaign")]
+        public MicrosoftDynamicsCRMcampaign RegardingobjectidCampaign { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_quoteclose")]
+        public MicrosoftDynamicsCRMquoteclose RegardingobjectidQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_incident")]
+        public MicrosoftDynamicsCRMincident RegardingobjectidIncident { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_calendar")]
+        public MicrosoftDynamicsCRMcalendar RegardingobjectidCalendar { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_rollupfield")]
+        public MicrosoftDynamicsCRMrollupfield RegardingobjectidRollupfield { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_productassociation")]
+        public MicrosoftDynamicsCRMproductassociation RegardingobjectidProductassociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_contracttemplate")]
+        public MicrosoftDynamicsCRMcontracttemplate RegardingobjectidContracttemplate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_connection")]
+        public MicrosoftDynamicsCRMconnection RegardingobjectidConnection { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_metric")]
+        public MicrosoftDynamicsCRMmetric RegardingobjectidMetric { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_role")]
+        public MicrosoftDynamicsCRMrole RegardingobjectidRole { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_resource")]
+        public MicrosoftDynamicsCRMresource RegardingobjectidResource { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_salesorderdetail")]
+        public MicrosoftDynamicsCRMsalesorderdetail RegardingobjectidSalesorderdetail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ownerid")]
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_subject")]
+        public MicrosoftDynamicsCRMsubject RegardingobjectidSubject { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_uomschedule")]
+        public MicrosoftDynamicsCRMuomschedule RegardingobjectidUomschedule { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_savedquery")]
+        public MicrosoftDynamicsCRMsavedquery RegardingobjectidSavedquery { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_sla")]
+        public MicrosoftDynamicsCRMsla RegardingobjectidSla { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_activitymimeattachment")]
+        public MicrosoftDynamicsCRMactivitymimeattachment RegardingobjectidActivitymimeattachment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_letter")]
+        public MicrosoftDynamicsCRMletter RegardingobjectidLetter { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningteam")]
+        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_product")]
+        public MicrosoftDynamicsCRMproduct RegardingobjectidProduct { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_invoicedetail")]
+        public MicrosoftDynamicsCRMinvoicedetail RegardingobjectidInvoicedetail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_list")]
+        public MicrosoftDynamicsCRMlist RegardingobjectidList { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_competitor")]
+        public MicrosoftDynamicsCRMcompetitor RegardingobjectidCompetitor { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_orderclose")]
+        public MicrosoftDynamicsCRMorderclose RegardingobjectidOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_quotedetail")]
+        public MicrosoftDynamicsCRMquotedetail RegardingobjectidQuotedetail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_annotation")]
+        public MicrosoftDynamicsCRMannotation RegardingobjectidAnnotation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_userquery")]
+        public MicrosoftDynamicsCRMuserquery RegardingobjectidUserquery { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_workflowlog_asyncoperations")]
+        public IList<MicrosoftDynamicsCRMworkflowlog> LkWorkflowlogAsyncoperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_task")]
+        public MicrosoftDynamicsCRMtask RegardingobjectidTask { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_contractdetail")]
+        public MicrosoftDynamicsCRMcontractdetail RegardingobjectidContractdetail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_contact")]
+        public MicrosoftDynamicsCRMcontact RegardingobjectidContact { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_quote")]
+        public MicrosoftDynamicsCRMquote RegardingobjectidQuote { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_sharepointsite")]
+        public MicrosoftDynamicsCRMsharepointsite RegardingobjectidSharepointsite { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_salesliterature")]
+        public MicrosoftDynamicsCRMsalesliterature RegardingobjectidSalesliterature { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningextensionid")]
+        public MicrosoftDynamicsCRMsdkmessageprocessingstep Owningextensionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_businessunitnewsarticle")]
+        public MicrosoftDynamicsCRMbusinessunitnewsarticle RegardingobjectidBusinessunitnewsarticle { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_campaignresponse")]
+        public MicrosoftDynamicsCRMcampaignresponse RegardingobjectidCampaignresponse { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_goal")]
+        public MicrosoftDynamicsCRMgoal RegardingobjectidGoal { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_importlog")]
+        public MicrosoftDynamicsCRMimportlog RegardingobjectidImportlog { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_semiannualfiscalcalendar")]
+        public MicrosoftDynamicsCRMsemiannualfiscalcalendar RegardingobjectidSemiannualfiscalcalendar { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_territory")]
+        public MicrosoftDynamicsCRMterritory RegardingobjectidTerritory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_fixedmonthlyfiscalcalendar")]
+        public MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar RegardingobjectidFixedmonthlyfiscalcalendar { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bulkoperation")]
+        public MicrosoftDynamicsCRMbulkoperation RegardingobjectidBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_customeraddress")]
+        public MicrosoftDynamicsCRMcustomeraddress RegardingobjectidCustomeraddress { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_service")]
+        public MicrosoftDynamicsCRMservice RegardingobjectidService { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_invoice")]
+        public MicrosoftDynamicsCRMinvoice RegardingobjectidInvoice { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_uom")]
+        public MicrosoftDynamicsCRMuom RegardingobjectidUom { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_fax")]
+        public MicrosoftDynamicsCRMfax RegardingobjectidFax { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bulkoperationlog")]
+        public MicrosoftDynamicsCRMbulkoperationlog RegardingobjectidBulkoperationlog { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_campaignactivity")]
+        public MicrosoftDynamicsCRMcampaignactivity RegardingobjectidCampaignactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_resourcespec")]
+        public MicrosoftDynamicsCRMresourcespec RegardingobjectidResourcespec { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_salesliteratureitem")]
+        public MicrosoftDynamicsCRMsalesliteratureitem RegardingobjectidSalesliteratureitem { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_sharepointdocumentlocation")]
+        public MicrosoftDynamicsCRMsharepointdocumentlocation RegardingobjectidSharepointdocumentlocation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_activitypointer")]
+        public MicrosoftDynamicsCRMactivitypointer RegardingobjectidActivitypointer { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_pricelevel")]
+        public MicrosoftDynamicsCRMpricelevel RegardingobjectidPricelevel { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_constraintbasedgroup")]
+        public MicrosoftDynamicsCRMconstraintbasedgroup RegardingobjectidConstraintbasedgroup { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_import")]
+        public MicrosoftDynamicsCRMimport RegardingobjectidImport { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_resourcegroup")]
+        public MicrosoftDynamicsCRMresourcegroup RegardingobjectidResourcegroup { get; set; }
 
     }
 }

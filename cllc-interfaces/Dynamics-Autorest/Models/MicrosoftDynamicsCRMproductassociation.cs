@@ -29,75 +29,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMproductassociation class.
         /// </summary>
-        /// <param name="_uomidValue">Shows the unit of the product
-        /// association.</param>
-        /// <param name="modifiedon">Shows the date and time when the record
-        /// was last updated.</param>
-        /// <param name="productisrequired">Select whether the associated
-        /// product is required or optional.</param>
-        /// <param name="productassociationid">Shows the unique identifier of
-        /// the product association.</param>
-        /// <param name="overriddencreatedon">Shows the date and time that the
-        /// record was migrated.</param>
-        /// <param name="dmtimportstate">Internal Use Only</param>
-        /// <param name="statuscode">Select the associated product's
-        /// status.</param>
-        /// <param name="exchangerate">Shows the conversion rate of the
-        /// record's currency. The exchange rate is used to convert all money
-        /// fields in the record from the local currency to the system's
-        /// default currency.</param>
-        /// <param name="_associatedproductValue">Select a product to add to
-        /// the bundle or kit.</param>
-        /// <param name="statecode">Shows whether the associated product is
-        /// active or inactive.</param>
-        /// <param name="versionnumber">Shows the version number of the product
-        /// association.</param>
-        /// <param name="createdon">Shows the date and time when the record was
-        /// created.</param>
-        /// <param name="_createdonbehalfbyValue">Shows who created the record
-        /// on behalf of another user.</param>
-        /// <param name="_createdbyValue">Shows who created the record.</param>
-        /// <param name="quantity">Type the quantity of the products added to
-        /// the bundle or kit.</param>
-        /// <param name="_organizationidValue">Shows the organization
-        /// associated with the record.</param>
-        /// <param name="_transactioncurrencyidValue">Shows the currency
-        /// associated with the record.</param>
-        /// <param name="propertycustomizationstatus">Shows whether the item
-        /// has properties that can be customized.</param>
-        /// <param name="_modifiedonbehalfbyValue">Shows who created the record
-        /// on behalf of another user.</param>
-        /// <param name="_modifiedbyValue">Shows who last updated the
-        /// record.</param>
-        /// <param name="_productidValue">Select a bundle or a kit.</param>
-        /// <param name="importsequencenumber">Shows the data import or data
-        /// migration that created this record.</param>
-        public MicrosoftDynamicsCRMproductassociation(string _uomidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? productisrequired = default(int?), string productassociationid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? dmtimportstate = default(int?), int? statuscode = default(int?), decimal? exchangerate = default(decimal?), string _associatedproductValue = default(string), int? statecode = default(int?), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), decimal? quantity = default(decimal?), string _organizationidValue = default(string), string _transactioncurrencyidValue = default(string), int? propertycustomizationstatus = default(int?), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _productidValue = default(string), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMproduct associatedproduct = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMinvoicedetail> productAssociationInvoiceDetails = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMsyncerror> productAssociationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> productAssociationDynamicPropertyAssociation = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMdynamicproperty> productAssociationDynamicProperty = default(IList<MicrosoftDynamicsCRMdynamicproperty>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsalesorderdetail> productAssociationSalesorderDetails = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMasyncoperation> productAssociationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), IList<MicrosoftDynamicsCRMquotedetail> productAssociationQuoteDetails = default(IList<MicrosoftDynamicsCRMquotedetail>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMopportunityproduct> productAssociationOpportunityProduct = default(IList<MicrosoftDynamicsCRMopportunityproduct>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMproductassociation(int? statecode = default(int?), string productassociationid = default(string), string _modifiedonbehalfbyValue = default(string), decimal? exchangerate = default(decimal?), string versionnumber = default(string), int? importsequencenumber = default(int?), decimal? quantity = default(decimal?), int? dmtimportstate = default(int?), string _associatedproductValue = default(string), int? productisrequired = default(int?), string _transactioncurrencyidValue = default(string), string _productidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _uomidValue = default(string), int? propertycustomizationstatus = default(int?), string _modifiedbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _organizationidValue = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMproduct associatedproduct = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMteam> productassociationTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> productassociationMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> productassociationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMinvoicedetail> productAssociationInvoiceDetails = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMsyncerror> productAssociationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> productAssociationDynamicPropertyAssociation = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMdynamicproperty> productAssociationDynamicProperty = default(IList<MicrosoftDynamicsCRMdynamicproperty>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsalesorderdetail> productAssociationSalesorderDetails = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMasyncoperation> productAssociationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), IList<MicrosoftDynamicsCRMquotedetail> productAssociationQuoteDetails = default(IList<MicrosoftDynamicsCRMquotedetail>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMopportunityproduct> productAssociationOpportunityProduct = default(IList<MicrosoftDynamicsCRMopportunityproduct>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> productAssociationPrincipalObjectAttributeAccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprocesssession> productAssociationProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>))
         {
-            this._uomidValue = _uomidValue;
-            Modifiedon = modifiedon;
-            Productisrequired = productisrequired;
-            Productassociationid = productassociationid;
-            Overriddencreatedon = overriddencreatedon;
-            Dmtimportstate = dmtimportstate;
-            Statuscode = statuscode;
-            Exchangerate = exchangerate;
-            this._associatedproductValue = _associatedproductValue;
             Statecode = statecode;
-            Versionnumber = versionnumber;
-            Createdon = createdon;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._createdbyValue = _createdbyValue;
-            Quantity = quantity;
-            this._organizationidValue = _organizationidValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Propertycustomizationstatus = propertycustomizationstatus;
+            Productassociationid = productassociationid;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._productidValue = _productidValue;
+            Exchangerate = exchangerate;
+            Versionnumber = versionnumber;
             Importsequencenumber = importsequencenumber;
+            Quantity = quantity;
+            Dmtimportstate = dmtimportstate;
+            this._associatedproductValue = _associatedproductValue;
+            Productisrequired = productisrequired;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            this._productidValue = _productidValue;
+            Createdon = createdon;
+            this._uomidValue = _uomidValue;
+            Propertycustomizationstatus = propertycustomizationstatus;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._createdbyValue = _createdbyValue;
+            Overriddencreatedon = overriddencreatedon;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Modifiedon = modifiedon;
+            Statuscode = statuscode;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._organizationidValue = _organizationidValue;
             Organizationid = organizationid;
             Associatedproduct = associatedproduct;
+            ProductassociationTeams = productassociationTeams;
+            ProductassociationMailboxTrackingFolders = productassociationMailboxTrackingFolders;
+            ProductassociationBulkDeleteFailures = productassociationBulkDeleteFailures;
             ProductAssociationInvoiceDetails = productAssociationInvoiceDetails;
             ProductAssociationSyncErrors = productAssociationSyncErrors;
             ProductAssociationDynamicPropertyAssociation = productAssociationDynamicPropertyAssociation;
@@ -111,8 +73,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             ProductAssociationQuoteDetails = productAssociationQuoteDetails;
             Createdby = createdby;
             ProductAssociationOpportunityProduct = productAssociationOpportunityProduct;
+            ProductAssociationPrincipalObjectAttributeAccess = productAssociationPrincipalObjectAttributeAccess;
             Modifiedby = modifiedby;
             Createdonbehalfby = createdonbehalfby;
+            ProductAssociationProcessSessions = productAssociationProcessSessions;
             CustomInit();
         }
 
@@ -122,147 +86,124 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets shows the unit of the product association.
-        /// </summary>
-        [JsonProperty(PropertyName = "_uomid_value")]
-        public string _uomidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time when the record was last
-        /// updated.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the associated product is required or
-        /// optional.
-        /// </summary>
-        [JsonProperty(PropertyName = "productisrequired")]
-        public int? Productisrequired { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the unique identifier of the product
-        /// association.
-        /// </summary>
-        [JsonProperty(PropertyName = "productassociationid")]
-        public string Productassociationid { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets internal Use Only
-        /// </summary>
-        [JsonProperty(PropertyName = "dmtimportstate")]
-        public int? Dmtimportstate { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the associated product's status.
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the conversion rate of the record's currency.
-        /// The exchange rate is used to convert all money fields in the record
-        /// from the local currency to the system's default currency.
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
-
-        /// <summary>
-        /// Gets or sets select a product to add to the bundle or kit.
-        /// </summary>
-        [JsonProperty(PropertyName = "_associatedproduct_value")]
-        public string _associatedproductValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows whether the associated product is active or
-        /// inactive.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the version number of the product association.
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "productassociationid")]
+        public string Productassociationid { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the date and time when the record was created.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who created the record on behalf of another
-        /// user.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who created the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the quantity of the products added to the bundle
-        /// or kit.
-        /// </summary>
-        [JsonProperty(PropertyName = "quantity")]
-        public decimal? Quantity { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the organization associated with the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the currency associated with the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows whether the item has properties that can be
-        /// customized.
-        /// </summary>
-        [JsonProperty(PropertyName = "propertycustomizationstatus")]
-        public int? Propertycustomizationstatus { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who created the record on behalf of another
-        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets shows who last updated the record.
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
-        /// Gets or sets select a bundle or a kit.
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "quantity")]
+        public decimal? Quantity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "dmtimportstate")]
+        public int? Dmtimportstate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_associatedproduct_value")]
+        public string _associatedproductValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "productisrequired")]
+        public int? Productisrequired { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_productid_value")]
         public string _productidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the data import or data migration that created
-        /// this record.
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_uomid_value")]
+        public string _uomidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "propertycustomizationstatus")]
+        public int? Propertycustomizationstatus { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -273,6 +214,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "associatedproduct")]
         public MicrosoftDynamicsCRMproduct Associatedproduct { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "productassociation_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> ProductassociationTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "productassociation_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ProductassociationMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "productassociation_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> ProductassociationBulkDeleteFailures { get; set; }
 
         /// <summary>
         /// </summary>
@@ -341,6 +297,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "ProductAssociation_PrincipalObjectAttributeAccess")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ProductAssociationPrincipalObjectAttributeAccess { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "modifiedby")]
         public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
 
@@ -348,6 +309,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "createdonbehalfby")]
         public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ProductAssociation_ProcessSessions")]
+        public IList<MicrosoftDynamicsCRMprocesssession> ProductAssociationProcessSessions { get; set; }
 
     }
 }

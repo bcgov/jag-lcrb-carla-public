@@ -29,35 +29,39 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMopportunityclose class.
         /// </summary>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="_opportunityidValue">Unique identifier of the
-        /// opportunity closed.</param>
-        /// <param name="subcategory">Subcategory of the opportunity close
-        /// activity.</param>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="category">Category of the opportunity close
-        /// activity.</param>
-        /// <param name="actualrevenueBase">Shows the Actual Revenue field
-        /// converted to the system's default base currency for reporting
-        /// purposes. The calculation uses the exchange rate specified in the
-        /// Currencies area.</param>
-        /// <param name="_competitoridValue">Unique identifier of the
-        /// competitor with which the opportunity close activity is
-        /// associated.</param>
-        /// <param name="actualrevenue">Actual revenue generated for the
-        /// opportunity.</param>
-        public MicrosoftDynamicsCRMopportunityclose(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _opportunityidValue = default(string), string subcategory = default(string), int? importsequencenumber = default(int?), string category = default(string), decimal? actualrevenueBase = default(decimal?), string _competitoridValue = default(string), decimal? actualrevenue = default(decimal?), MicrosoftDynamicsCRMservice serviceidOpportunityclose = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMasyncoperation> opportunityCloseAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsyncerror> opportunityCloseSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser owninguserOpportunityclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidOpportunityclose = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyOpportunityclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMbulkdeletefailure> opportunityCloseBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdbyOpportunityclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcompetitor competitorid = default(MicrosoftDynamicsCRMcompetitor), IList<MicrosoftDynamicsCRMactivityparty> opportunitycloseActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsystemuser modifiedbyOpportunityclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyOpportunityclose = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMannotation> opportunityCloseAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMteam owningteamOpportunityclose = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMbusinessunit owningbusinessunitOpportunityclose = default(MicrosoftDynamicsCRMbusinessunit))
+        public MicrosoftDynamicsCRMopportunityclose(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string subcategory = default(string), string _competitoridValue = default(string), int? importsequencenumber = default(int?), string category = default(string), decimal? actualrevenueBase = default(decimal?), decimal? actualrevenue = default(decimal?), string _opportunityidValue = default(string), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemailOpportunityclose = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementOpportunityclose = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateOpportunityclose = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingOpportunityclose = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderOpportunityclose = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordOpportunityclose = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMsite regardingobjectidSiteOpportunityclose = default(MicrosoftDynamicsCRMsite), MicrosoftDynamicsCRMaccount regardingobjectidAccountOpportunityclose = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMmailbox sendermailboxidOpportunityclose = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMprincipal owneridOpportunityclose = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityOpportunityclose = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsla slaActivitypointerSlaOpportunityclose = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleOpportunityclose = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMlead regardingobjectidLeadOpportunityclose = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationOpportunityclose = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMincident regardingobjectidIncidentOpportunityclose = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignOpportunityclose = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityOpportunityclose = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSlaOpportunityclose = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMcampaignresponse> campaignResponseOpportunityCloses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMteam> opportunitycloseTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> opportunitycloseMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> opportunityclosePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMservice serviceidOpportunityclose = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMasyncoperation> opportunityCloseAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsyncerror> opportunityCloseSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser owninguserOpportunityclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidOpportunityclose = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyOpportunityclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMbulkdeletefailure> opportunityCloseBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdbyOpportunityclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcompetitor competitorid = default(MicrosoftDynamicsCRMcompetitor), IList<MicrosoftDynamicsCRMactivityparty> opportunitycloseActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsystemuser modifiedbyOpportunityclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyOpportunityclose = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMannotation> opportunityCloseAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMteam owningteamOpportunityclose = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMbusinessunit owningbusinessunitOpportunityclose = default(MicrosoftDynamicsCRMbusinessunit))
         {
             Overriddencreatedon = overriddencreatedon;
-            this._opportunityidValue = _opportunityidValue;
             Subcategory = subcategory;
+            this._competitoridValue = _competitoridValue;
             Importsequencenumber = importsequencenumber;
             Category = category;
             ActualrevenueBase = actualrevenueBase;
-            this._competitoridValue = _competitoridValue;
             Actualrevenue = actualrevenue;
+            this._opportunityidValue = _opportunityidValue;
+            RegardingobjectidNewInteractionforemailOpportunityclose = regardingobjectidNewInteractionforemailOpportunityclose;
+            RegardingobjectidEntitlementOpportunityclose = regardingobjectidEntitlementOpportunityclose;
+            RegardingobjectidEntitlementtemplateOpportunityclose = regardingobjectidEntitlementtemplateOpportunityclose;
+            RegardingobjectidBookableresourcebookingOpportunityclose = regardingobjectidBookableresourcebookingOpportunityclose;
+            RegardingobjectidBookableresourcebookingheaderOpportunityclose = regardingobjectidBookableresourcebookingheaderOpportunityclose;
+            RegardingobjectidKnowledgebaserecordOpportunityclose = regardingobjectidKnowledgebaserecordOpportunityclose;
+            RegardingobjectidSiteOpportunityclose = regardingobjectidSiteOpportunityclose;
+            RegardingobjectidAccountOpportunityclose = regardingobjectidAccountOpportunityclose;
+            SendermailboxidOpportunityclose = sendermailboxidOpportunityclose;
+            OwneridOpportunityclose = owneridOpportunityclose;
+            RegardingobjectidOpportunityOpportunityclose = regardingobjectidOpportunityOpportunityclose;
+            SlaActivitypointerSlaOpportunityclose = slaActivitypointerSlaOpportunityclose;
+            RegardingobjectidKnowledgearticleOpportunityclose = regardingobjectidKnowledgearticleOpportunityclose;
+            RegardingobjectidLeadOpportunityclose = regardingobjectidLeadOpportunityclose;
+            RegardingobjectidBulkoperationOpportunityclose = regardingobjectidBulkoperationOpportunityclose;
+            RegardingobjectidIncidentOpportunityclose = regardingobjectidIncidentOpportunityclose;
+            RegardingobjectidCampaignOpportunityclose = regardingobjectidCampaignOpportunityclose;
+            RegardingobjectidCampaignactivityOpportunityclose = regardingobjectidCampaignactivityOpportunityclose;
+            SlainvokedidActivitypointerSlaOpportunityclose = slainvokedidActivitypointerSlaOpportunityclose;
+            CampaignResponseOpportunityCloses = campaignResponseOpportunityCloses;
+            OpportunitycloseTeams = opportunitycloseTeams;
+            OpportunitycloseMailboxTrackingFolders = opportunitycloseMailboxTrackingFolders;
+            OpportunityclosePrincipalObjectAttributeAccesses = opportunityclosePrincipalObjectAttributeAccesses;
             ServiceidOpportunityclose = serviceidOpportunityclose;
             OpportunityCloseAsyncOperations = opportunityCloseAsyncOperations;
             OpportunityCloseSyncErrors = opportunityCloseSyncErrors;
@@ -84,57 +88,159 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the opportunity closed.
-        /// </summary>
-        [JsonProperty(PropertyName = "_opportunityid_value")]
-        public string _opportunityidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets subcategory of the opportunity close activity.
         /// </summary>
         [JsonProperty(PropertyName = "subcategory")]
         public string Subcategory { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets category of the opportunity close activity.
-        /// </summary>
-        [JsonProperty(PropertyName = "category")]
-        public string Category { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the Actual Revenue field converted to the
-        /// system's default base currency for reporting purposes. The
-        /// calculation uses the exchange rate specified in the Currencies
-        /// area.
-        /// </summary>
-        [JsonProperty(PropertyName = "actualrevenue_base")]
-        public decimal? ActualrevenueBase { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the competitor with which the
-        /// opportunity close activity is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_competitorid_value")]
         public string _competitoridValue { get; set; }
 
         /// <summary>
-        /// Gets or sets actual revenue generated for the opportunity.
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "category")]
+        public string Category { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "actualrevenue_base")]
+        public decimal? ActualrevenueBase { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "actualrevenue")]
         public decimal? Actualrevenue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_opportunityid_value")]
+        public string _opportunityidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_new_interactionforemail_opportunityclose")]
+        public MicrosoftDynamicsCRMinteractionforemail RegardingobjectidNewInteractionforemailOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_entitlement_opportunityclose")]
+        public MicrosoftDynamicsCRMentitlement RegardingobjectidEntitlementOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_entitlementtemplate_opportunityclose")]
+        public MicrosoftDynamicsCRMentitlementtemplate RegardingobjectidEntitlementtemplateOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebooking_opportunityclose")]
+        public MicrosoftDynamicsCRMbookableresourcebooking RegardingobjectidBookableresourcebookingOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebookingheader_opportunityclose")]
+        public MicrosoftDynamicsCRMbookableresourcebookingheader RegardingobjectidBookableresourcebookingheaderOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_knowledgebaserecord_opportunityclose")]
+        public MicrosoftDynamicsCRMknowledgebaserecord RegardingobjectidKnowledgebaserecordOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_site_opportunityclose")]
+        public MicrosoftDynamicsCRMsite RegardingobjectidSiteOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_account_opportunityclose")]
+        public MicrosoftDynamicsCRMaccount RegardingobjectidAccountOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sendermailboxid_opportunityclose")]
+        public MicrosoftDynamicsCRMmailbox SendermailboxidOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ownerid_opportunityclose")]
+        public MicrosoftDynamicsCRMprincipal OwneridOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_opportunity_opportunityclose")]
+        public MicrosoftDynamicsCRMopportunity RegardingobjectidOpportunityOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sla_activitypointer_sla_opportunityclose")]
+        public MicrosoftDynamicsCRMsla SlaActivitypointerSlaOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_knowledgearticle_opportunityclose")]
+        public MicrosoftDynamicsCRMknowledgearticle RegardingobjectidKnowledgearticleOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_lead_opportunityclose")]
+        public MicrosoftDynamicsCRMlead RegardingobjectidLeadOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bulkoperation_opportunityclose")]
+        public MicrosoftDynamicsCRMbulkoperation RegardingobjectidBulkoperationOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_incident_opportunityclose")]
+        public MicrosoftDynamicsCRMincident RegardingobjectidIncidentOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_campaign_opportunityclose")]
+        public MicrosoftDynamicsCRMcampaign RegardingobjectidCampaignOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_campaignactivity_opportunityclose")]
+        public MicrosoftDynamicsCRMcampaignactivity RegardingobjectidCampaignactivityOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "slainvokedid_activitypointer_sla_opportunityclose")]
+        public MicrosoftDynamicsCRMsla SlainvokedidActivitypointerSlaOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "CampaignResponse_OpportunityCloses")]
+        public IList<MicrosoftDynamicsCRMcampaignresponse> CampaignResponseOpportunityCloses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "opportunityclose_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> OpportunitycloseTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "opportunityclose_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> OpportunitycloseMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "opportunityclose_PrincipalObjectAttributeAccesses")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> OpportunityclosePrincipalObjectAttributeAccesses { get; set; }
 
         /// <summary>
         /// </summary>

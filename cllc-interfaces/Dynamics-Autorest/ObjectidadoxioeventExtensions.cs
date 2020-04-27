@@ -87,5 +87,74 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return operations.GetWithHttpMessagesAsync(annotationid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Get objectid_adoxio_event from principalobjectattributeaccessset
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='principalobjectattributeaccessid'>
+            /// key: principalobjectattributeaccessid of principalobjectattributeaccess
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            public static MicrosoftDynamicsCRMadoxioEvent Get1(this IObjectidadoxioevent operations, string principalobjectattributeaccessid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            {
+                return operations.Get1Async(principalobjectattributeaccessid, select, expand).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get objectid_adoxio_event from principalobjectattributeaccessset
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='principalobjectattributeaccessid'>
+            /// key: principalobjectattributeaccessid of principalobjectattributeaccess
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MicrosoftDynamicsCRMadoxioEvent> Get1Async(this IObjectidadoxioevent operations, string principalobjectattributeaccessid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.Get1WithHttpMessagesAsync(principalobjectattributeaccessid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get objectid_adoxio_event from principalobjectattributeaccessset
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='principalobjectattributeaccessid'>
+            /// key: principalobjectattributeaccessid of principalobjectattributeaccess
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='customHeaders'>
+            /// Headers that will be added to request.
+            /// </param>
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioEvent> Get1WithHttpMessages(this IObjectidadoxioevent operations, string principalobjectattributeaccessid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            {
+                return operations.Get1WithHttpMessagesAsync(principalobjectattributeaccessid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+
     }
 }

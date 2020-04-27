@@ -31,179 +31,75 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMopportunityproduct class.
         /// </summary>
-        /// <param name="_modifiedbyValue">Shows who last updated the
-        /// record.</param>
-        /// <param name="isproductoverridden">For system use only.</param>
-        /// <param name="priceperunit">Shows the price per unit of the
-        /// opportunity product, based on the price list specified on the
-        /// parent opportunity.</param>
-        /// <param name="_createdonbehalfbyValue">Shows who created the record
-        /// on behalf of another user.</param>
-        /// <param name="taxBase">Shows the Tax field converted to the system's
-        /// default base currency for reporting purposes. The calculation uses
-        /// the exchange rate specified in the Currencies area.</param>
-        /// <param name="quantity">Type the amount or quantity of the product
-        /// the customer would like to purchase.</param>
-        /// <param name="productdescription">Type a detailed product
-        /// description or additional notes about the opportunity product, such
-        /// as talking points or product updates, that will assist the sales
-        /// team when they discuss the product with the customer.</param>
-        /// <param name="ispriceoverridden">Select whether the pricing on the
-        /// opportunity product reflects an override of the product catalog
-        /// pricing.</param>
-        /// <param name="description">Type additional information to describe
-        /// the opportunity product, such as manufacturing details.</param>
-        /// <param name="_transactioncurrencyidValue">Choose the local currency
-        /// for the record to make sure budgets are reported in the correct
-        /// currency.</param>
-        /// <param name="baseamountBase">Shows the Amount field converted to
-        /// the system's default base currency. The calculation uses the
-        /// exchange rate specified in the Currencies area.</param>
-        /// <param name="lineitemnumber">Type the line item number for the
-        /// opportunity product to easily identify the product in the
-        /// opportunity documents and make sure it's listed in the correct
-        /// order.</param>
-        /// <param name="manualdiscountamount">Type the manual discount amount
-        /// for the opportunity product to deduct any negotiated or other
-        /// savings from the product total.</param>
-        /// <param name="extendedamount">Shows the total amount due for the
-        /// opportunity product, calculated on the Amount value minus the
-        /// Manual Discount amount.</param>
-        /// <param name="priceperunitBase">Shows the Price Per Unit field
-        /// converted to the system's default base currency for reporting
-        /// purposes. The calculation uses the exchange rate specified in the
-        /// Currencies area.</param>
-        /// <param name="producttypecode">Product Type</param>
-        /// <param name="opportunitystatecode">Select the status of the
-        /// opportunity product.</param>
-        /// <param name="createdon">Shows the date and time when the record was
-        /// created. The date and time are displayed in the time zone selected
-        /// in Microsoft Dynamics 365 options.</param>
-        /// <param name="parentbundleid">Choose the parent bundle associated
-        /// with this product</param>
-        /// <param name="pricingerrorcode">Select the pricing error for the
-        /// opportunity product.</param>
-        /// <param name="volumediscountamount">Shows the discount amount per
-        /// unit if a specified volume is purchased. Configure volume discounts
-        /// in the Product Catalog in the Settings area.</param>
-        /// <param name="baseamount">Shows the total price of the opportunity
-        /// product, based on the price per unit, volume discount, and
-        /// quantity.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="opportunityproductid">Unique identifier of the
-        /// opportunity product.</param>
-        /// <param name="_uomidValue">Choose the unit of measurement for the
-        /// base unit quantity for this purchase, such as each or
-        /// dozen.</param>
-        /// <param name="entityimage">The default image for the entity.</param>
-        /// <param name="owninguser">Unique identifier of the user who owns the
-        /// opportunity product.</param>
-        /// <param name="_opportunityidValue">Unique identifier of the
-        /// opportunity with which the opportunity product is
-        /// associated.</param>
-        /// <param name="manualdiscountamountBase">Shows the Manual Discount
-        /// field converted to the system's default base currency for reporting
-        /// purposes. The calculation uses the exchange rate specified in the
-        /// Currencies area.</param>
-        /// <param name="modifiedon">Shows the date and time when the record
-        /// was last updated. The date and time are displayed in the time zone
-        /// selected in Microsoft Dynamics 365 options.</param>
-        /// <param name="versionnumber">Version number of the opportunity
-        /// product.</param>
-        /// <param name="entityimageid">For internal use only.</param>
-        /// <param name="_productidValue">Choose the product to include on the
-        /// opportunity to link the product's pricing and other information to
-        /// the opportunity.</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="productassociationid">Unique identifier of the product
-        /// line item association with bundle in the opportunity</param>
-        /// <param name="owningbusinessunit">Unique identifier of the business
-        /// unit that owns the opportunity product.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who last modified the opportunityproduct.</param>
-        /// <param name="propertyconfigurationstatus">Status of the property
-        /// configuration.</param>
-        /// <param name="tax">Type the tax amount to be applied on the
-        /// opportunity product.</param>
-        /// <param name="volumediscountamountBase">Shows the Volume Discount
-        /// field converted to the system's default base currency for reporting
-        /// purposes. The calculation uses the exchange rate specified in the
-        /// Currencies area.</param>
-        /// <param name="extendedamountBase">Shows the Extended Amount field
-        /// converted to the system's default base currency. The calculation
-        /// uses the exchange rate specified in the Currencies area.</param>
-        /// <param name="exchangerate">Shows the conversion rate of the
-        /// record's currency. The exchange rate is used to convert all money
-        /// fields in the record from the local currency to the system's
-        /// default currency.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="_owneridValue">Unique identifier of the user or team
-        /// who owns the opportunity product.</param>
-        /// <param name="sequencenumber">Shows the ID of the data that
-        /// maintains the sequence.</param>
-        /// <param name="_createdbyValue">Shows who created the record.</param>
-        public MicrosoftDynamicsCRMopportunityproduct(string _modifiedbyValue = default(string), bool? isproductoverridden = default(bool?), decimal? priceperunit = default(decimal?), string _createdonbehalfbyValue = default(string), decimal? taxBase = default(decimal?), decimal? quantity = default(decimal?), string productdescription = default(string), bool? ispriceoverridden = default(bool?), string description = default(string), string _transactioncurrencyidValue = default(string), decimal? baseamountBase = default(decimal?), int? lineitemnumber = default(int?), decimal? manualdiscountamount = default(decimal?), decimal? extendedamount = default(decimal?), decimal? priceperunitBase = default(decimal?), int? producttypecode = default(int?), int? opportunitystatecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string parentbundleid = default(string), int? pricingerrorcode = default(int?), decimal? volumediscountamount = default(decimal?), decimal? baseamount = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string opportunityproductid = default(string), string _uomidValue = default(string), string entityimageUrl = default(string), byte[] entityimage = default(byte[]), string owninguser = default(string), string _opportunityidValue = default(string), decimal? manualdiscountamountBase = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), string entityimageid = default(string), string _productidValue = default(string), int? timezoneruleversionnumber = default(int?), int? importsequencenumber = default(int?), string productassociationid = default(string), string owningbusinessunit = default(string), long? entityimageTimestamp = default(long?), string _modifiedonbehalfbyValue = default(string), int? propertyconfigurationstatus = default(int?), decimal? tax = default(decimal?), decimal? volumediscountamountBase = default(decimal?), decimal? extendedamountBase = default(decimal?), decimal? exchangerate = default(decimal?), int? utcconversiontimezonecode = default(int?), string _owneridValue = default(string), int? sequencenumber = default(int?), string _createdbyValue = default(string), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMasyncoperation> opportunityProductAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> opportunityProductDynamicpropertyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMsyncerror> opportunityProductSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMproductassociation productassociationidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> opportunityProductBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMopportunityproduct parentbundleidOpportunityproduct = default(MicrosoftDynamicsCRMopportunityproduct), IList<MicrosoftDynamicsCRMopportunityproduct> opportunityproductParentOpportunityproduct = default(IList<MicrosoftDynamicsCRMopportunityproduct>))
+        public MicrosoftDynamicsCRMopportunityproduct(string description = default(string), string _opportunityidValue = default(string), string _productidValue = default(string), int? lineitemnumber = default(int?), decimal? priceperunit = default(decimal?), string _modifiedonbehalfbyValue = default(string), string productassociationid = default(string), decimal? extendedamount = default(decimal?), string _createdbyValue = default(string), string _owningteamValue = default(string), decimal? volumediscountamount = default(decimal?), decimal? exchangerate = default(decimal?), bool? isproductoverridden = default(bool?), decimal? tax = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? pricingerrorcode = default(int?), int? sequencenumber = default(int?), string entityimageid = default(string), int? producttypecode = default(int?), string _parentbundleidrefValue = default(string), int? utcconversiontimezonecode = default(int?), decimal? baseamountBase = default(decimal?), decimal? manualdiscountamount = default(decimal?), string owninguser = default(string), string productname = default(string), string _owneridValue = default(string), string parentbundleid = default(string), string _createdonbehalfbyValue = default(string), decimal? taxBase = default(decimal?), string productdescription = default(string), int? timezoneruleversionnumber = default(int?), string _transactioncurrencyidValue = default(string), byte[] entityimage = default(byte[]), string opportunityproductname = default(string), decimal? manualdiscountamountBase = default(decimal?), string entityimageUrl = default(string), int? skippricecalculation = default(int?), bool? ispriceoverridden = default(bool?), string opportunityproductid = default(string), string versionnumber = default(string), string _modifiedbyValue = default(string), long? entityimageTimestamp = default(long?), decimal? quantity = default(decimal?), int? importsequencenumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? volumediscountamountBase = default(decimal?), decimal? baseamount = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), decimal? extendedamountBase = default(decimal?), int? propertyconfigurationstatus = default(int?), int? opportunitystatecode = default(int?), string _uomidValue = default(string), decimal? priceperunitBase = default(decimal?), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMteam> opportunityproductTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> opportunityproductMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMopportunityproduct parentbundleidrefOpportunityproduct = default(MicrosoftDynamicsCRMopportunityproduct), IList<MicrosoftDynamicsCRMopportunityproduct> opportunityproductParentrefOpportunityproduct = default(IList<MicrosoftDynamicsCRMopportunityproduct>), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMprocesssession> opportunityProductProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMasyncoperation> opportunityProductAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> opportunityproductPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> opportunityProductDynamicpropertyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMsyncerror> opportunityProductSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMproductassociation productassociationidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> opportunityProductBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMopportunityproduct parentbundleidOpportunityproduct = default(MicrosoftDynamicsCRMopportunityproduct), IList<MicrosoftDynamicsCRMopportunityproduct> opportunityproductParentOpportunityproduct = default(IList<MicrosoftDynamicsCRMopportunityproduct>))
         {
-            this._modifiedbyValue = _modifiedbyValue;
-            Isproductoverridden = isproductoverridden;
+            Description = description;
+            this._opportunityidValue = _opportunityidValue;
+            this._productidValue = _productidValue;
+            Lineitemnumber = lineitemnumber;
             Priceperunit = priceperunit;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Productassociationid = productassociationid;
+            Extendedamount = extendedamount;
+            this._createdbyValue = _createdbyValue;
+            this._owningteamValue = _owningteamValue;
+            Volumediscountamount = volumediscountamount;
+            Exchangerate = exchangerate;
+            Isproductoverridden = isproductoverridden;
+            Tax = tax;
+            Modifiedon = modifiedon;
+            Pricingerrorcode = pricingerrorcode;
+            Sequencenumber = sequencenumber;
+            Entityimageid = entityimageid;
+            Producttypecode = producttypecode;
+            this._parentbundleidrefValue = _parentbundleidrefValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            BaseamountBase = baseamountBase;
+            Manualdiscountamount = manualdiscountamount;
+            Owninguser = owninguser;
+            Productname = productname;
+            this._owneridValue = _owneridValue;
+            Parentbundleid = parentbundleid;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             TaxBase = taxBase;
-            Quantity = quantity;
             Productdescription = productdescription;
-            Ispriceoverridden = ispriceoverridden;
-            Description = description;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            BaseamountBase = baseamountBase;
-            Lineitemnumber = lineitemnumber;
-            Manualdiscountamount = manualdiscountamount;
-            Extendedamount = extendedamount;
-            PriceperunitBase = priceperunitBase;
-            Producttypecode = producttypecode;
-            Opportunitystatecode = opportunitystatecode;
+            Entityimage = entityimage;
+            Opportunityproductname = opportunityproductname;
+            ManualdiscountamountBase = manualdiscountamountBase;
+            EntityimageUrl = entityimageUrl;
+            Skippricecalculation = skippricecalculation;
+            Ispriceoverridden = ispriceoverridden;
+            Opportunityproductid = opportunityproductid;
+            Versionnumber = versionnumber;
+            this._modifiedbyValue = _modifiedbyValue;
+            EntityimageTimestamp = entityimageTimestamp;
+            Quantity = quantity;
+            Importsequencenumber = importsequencenumber;
             Createdon = createdon;
-            Parentbundleid = parentbundleid;
-            Pricingerrorcode = pricingerrorcode;
-            Volumediscountamount = volumediscountamount;
+            VolumediscountamountBase = volumediscountamountBase;
             Baseamount = baseamount;
             Overriddencreatedon = overriddencreatedon;
-            Opportunityproductid = opportunityproductid;
-            this._uomidValue = _uomidValue;
-            EntityimageUrl = entityimageUrl;
-            Entityimage = entityimage;
-            Owninguser = owninguser;
-            this._opportunityidValue = _opportunityidValue;
-            ManualdiscountamountBase = manualdiscountamountBase;
-            Modifiedon = modifiedon;
-            Versionnumber = versionnumber;
-            Entityimageid = entityimageid;
-            this._productidValue = _productidValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Importsequencenumber = importsequencenumber;
-            Productassociationid = productassociationid;
-            Owningbusinessunit = owningbusinessunit;
-            EntityimageTimestamp = entityimageTimestamp;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Propertyconfigurationstatus = propertyconfigurationstatus;
-            Tax = tax;
-            VolumediscountamountBase = volumediscountamountBase;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             ExtendedamountBase = extendedamountBase;
-            Exchangerate = exchangerate;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            this._owneridValue = _owneridValue;
-            Sequencenumber = sequencenumber;
-            this._createdbyValue = _createdbyValue;
+            Propertyconfigurationstatus = propertyconfigurationstatus;
+            Opportunitystatecode = opportunitystatecode;
+            this._uomidValue = _uomidValue;
+            PriceperunitBase = priceperunitBase;
+            Owningteam = owningteam;
+            OpportunityproductTeams = opportunityproductTeams;
+            OpportunityproductMailboxTrackingFolders = opportunityproductMailboxTrackingFolders;
+            ParentbundleidrefOpportunityproduct = parentbundleidrefOpportunityproduct;
+            OpportunityproductParentrefOpportunityproduct = opportunityproductParentrefOpportunityproduct;
             Productid = productid;
             Transactioncurrencyid = transactioncurrencyid;
             Createdby = createdby;
             Opportunityid = opportunityid;
+            OpportunityProductProcessSessions = opportunityProductProcessSessions;
             OpportunityProductAsyncOperations = opportunityProductAsyncOperations;
             Modifiedby = modifiedby;
+            OpportunityproductPrincipalobjectattributeaccess = opportunityproductPrincipalobjectattributeaccess;
             OpportunityProductDynamicpropertyinstance = opportunityProductDynamicpropertyinstance;
             OpportunityProductSyncErrors = opportunityProductSyncErrors;
             ProductassociationidProductassociation = productassociationidProductassociation;
@@ -222,182 +118,180 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets shows who last updated the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets for system use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "isproductoverridden")]
-        public bool? Isproductoverridden { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the price per unit of the opportunity product,
-        /// based on the price list specified on the parent opportunity.
-        /// </summary>
-        [JsonProperty(PropertyName = "priceperunit")]
-        public decimal? Priceperunit { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who created the record on behalf of another
-        /// user.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the Tax field converted to the system's default
-        /// base currency for reporting purposes. The calculation uses the
-        /// exchange rate specified in the Currencies area.
-        /// </summary>
-        [JsonProperty(PropertyName = "tax_base")]
-        public decimal? TaxBase { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the amount or quantity of the product the
-        /// customer would like to purchase.
-        /// </summary>
-        [JsonProperty(PropertyName = "quantity")]
-        public decimal? Quantity { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a detailed product description or additional
-        /// notes about the opportunity product, such as talking points or
-        /// product updates, that will assist the sales team when they discuss
-        /// the product with the customer.
-        /// </summary>
-        [JsonProperty(PropertyName = "productdescription")]
-        public string Productdescription { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the pricing on the opportunity product
-        /// reflects an override of the product catalog pricing.
-        /// </summary>
-        [JsonProperty(PropertyName = "ispriceoverridden")]
-        public bool? Ispriceoverridden { get; set; }
-
-        /// <summary>
-        /// Gets or sets type additional information to describe the
-        /// opportunity product, such as manufacturing details.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets choose the local currency for the record to make sure
-        /// budgets are reported in the correct currency.
         /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        [JsonProperty(PropertyName = "_opportunityid_value")]
+        public string _opportunityidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the Amount field converted to the system's
-        /// default base currency. The calculation uses the exchange rate
-        /// specified in the Currencies area.
         /// </summary>
-        [JsonProperty(PropertyName = "baseamount_base")]
-        public decimal? BaseamountBase { get; set; }
+        [JsonProperty(PropertyName = "_productid_value")]
+        public string _productidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets type the line item number for the opportunity product
-        /// to easily identify the product in the opportunity documents and
-        /// make sure it's listed in the correct order.
         /// </summary>
         [JsonProperty(PropertyName = "lineitemnumber")]
         public int? Lineitemnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets type the manual discount amount for the opportunity
-        /// product to deduct any negotiated or other savings from the product
-        /// total.
         /// </summary>
-        [JsonProperty(PropertyName = "manualdiscountamount")]
-        public decimal? Manualdiscountamount { get; set; }
+        [JsonProperty(PropertyName = "priceperunit")]
+        public decimal? Priceperunit { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the total amount due for the opportunity
-        /// product, calculated on the Amount value minus the Manual Discount
-        /// amount.
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "productassociationid")]
+        public string Productassociationid { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "extendedamount")]
         public decimal? Extendedamount { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the Price Per Unit field converted to the
-        /// system's default base currency for reporting purposes. The
-        /// calculation uses the exchange rate specified in the Currencies
-        /// area.
         /// </summary>
-        [JsonProperty(PropertyName = "priceperunit_base")]
-        public decimal? PriceperunitBase { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets product Type
         /// </summary>
-        [JsonProperty(PropertyName = "producttypecode")]
-        public int? Producttypecode { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
-        /// Gets or sets select the status of the opportunity product.
-        /// </summary>
-        [JsonProperty(PropertyName = "opportunitystatecode")]
-        public int? Opportunitystatecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time when the record was created.
-        /// The date and time are displayed in the time zone selected in
-        /// Microsoft Dynamics 365 options.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose the parent bundle associated with this product
-        /// </summary>
-        [JsonProperty(PropertyName = "parentbundleid")]
-        public string Parentbundleid { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the pricing error for the opportunity product.
-        /// </summary>
-        [JsonProperty(PropertyName = "pricingerrorcode")]
-        public int? Pricingerrorcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the discount amount per unit if a specified
-        /// volume is purchased. Configure volume discounts in the Product
-        /// Catalog in the Settings area.
         /// </summary>
         [JsonProperty(PropertyName = "volumediscountamount")]
         public decimal? Volumediscountamount { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the total price of the opportunity product,
-        /// based on the price per unit, volume discount, and quantity.
         /// </summary>
-        [JsonProperty(PropertyName = "baseamount")]
-        public decimal? Baseamount { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time that the record was migrated.
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "isproductoverridden")]
+        public bool? Isproductoverridden { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the opportunity product.
         /// </summary>
-        [JsonProperty(PropertyName = "opportunityproductid")]
-        public string Opportunityproductid { get; set; }
+        [JsonProperty(PropertyName = "tax")]
+        public decimal? Tax { get; set; }
 
         /// <summary>
-        /// Gets or sets choose the unit of measurement for the base unit
-        /// quantity for this purchase, such as each or dozen.
         /// </summary>
-        [JsonProperty(PropertyName = "_uomid_value")]
-        public string _uomidValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "pricingerrorcode")]
+        public int? Pricingerrorcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sequencenumber")]
+        public int? Sequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimageid")]
+        public string Entityimageid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "producttypecode")]
+        public int? Producttypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_parentbundleidref_value")]
+        public string _parentbundleidrefValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "baseamount_base")]
+        public decimal? BaseamountBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "manualdiscountamount")]
+        public decimal? Manualdiscountamount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public string Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "productname")]
+        public string Productname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "parentbundleid")]
+        public string Parentbundleid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "tax_base")]
+        public decimal? TaxBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "productdescription")]
+        public string Productdescription { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
+        [JsonProperty(PropertyName = "entityimage")]
+        public byte[] Entityimage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "opportunityproductname")]
+        public string Opportunityproductname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "manualdiscountamount_base")]
+        public decimal? ManualdiscountamountBase { get; set; }
 
         /// <summary>
         /// </summary>
@@ -405,89 +299,29 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string EntityimageUrl { get; set; }
 
         /// <summary>
-        /// Gets or sets the default image for the entity.
         /// </summary>
-        [JsonConverter(typeof(Base64UrlJsonConverter))]
-        [JsonProperty(PropertyName = "entityimage")]
-        public byte[] Entityimage { get; set; }
+        [JsonProperty(PropertyName = "skippricecalculation")]
+        public int? Skippricecalculation { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who owns the opportunity
-        /// product.
         /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public string Owninguser { get; set; }
+        [JsonProperty(PropertyName = "ispriceoverridden")]
+        public bool? Ispriceoverridden { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the opportunity with which the
-        /// opportunity product is associated.
         /// </summary>
-        [JsonProperty(PropertyName = "_opportunityid_value")]
-        public string _opportunityidValue { get; set; }
+        [JsonProperty(PropertyName = "opportunityproductid")]
+        public string Opportunityproductid { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the Manual Discount field converted to the
-        /// system's default base currency for reporting purposes. The
-        /// calculation uses the exchange rate specified in the Currencies
-        /// area.
-        /// </summary>
-        [JsonProperty(PropertyName = "manualdiscountamount_base")]
-        public decimal? ManualdiscountamountBase { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time when the record was last
-        /// updated. The date and time are displayed in the time zone selected
-        /// in Microsoft Dynamics 365 options.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets version number of the opportunity product.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
         /// </summary>
-        [JsonProperty(PropertyName = "entityimageid")]
-        public string Entityimageid { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose the product to include on the opportunity to
-        /// link the product's pricing and other information to the
-        /// opportunity.
-        /// </summary>
-        [JsonProperty(PropertyName = "_productid_value")]
-        public string _productidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the product line item association
-        /// with bundle in the opportunity
-        /// </summary>
-        [JsonProperty(PropertyName = "productassociationid")]
-        public string Productassociationid { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the business unit that owns the
-        /// opportunity product.
-        /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public string Owningbusinessunit { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -495,75 +329,89 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public long? EntityimageTimestamp { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the delegate user who last
-        /// modified the opportunityproduct.
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "quantity")]
+        public decimal? Quantity { get; set; }
 
         /// <summary>
-        /// Gets or sets status of the property configuration.
         /// </summary>
-        [JsonProperty(PropertyName = "propertyconfigurationstatus")]
-        public int? Propertyconfigurationstatus { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
-        /// Gets or sets type the tax amount to be applied on the opportunity
-        /// product.
         /// </summary>
-        [JsonProperty(PropertyName = "tax")]
-        public decimal? Tax { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the Volume Discount field converted to the
-        /// system's default base currency for reporting purposes. The
-        /// calculation uses the exchange rate specified in the Currencies
-        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "volumediscountamount_base")]
         public decimal? VolumediscountamountBase { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the Extended Amount field converted to the
-        /// system's default base currency. The calculation uses the exchange
-        /// rate specified in the Currencies area.
+        /// </summary>
+        [JsonProperty(PropertyName = "baseamount")]
+        public decimal? Baseamount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "extendedamount_base")]
         public decimal? ExtendedamountBase { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the conversion rate of the record's currency.
-        /// The exchange rate is used to convert all money fields in the record
-        /// from the local currency to the system's default currency.
         /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
+        [JsonProperty(PropertyName = "propertyconfigurationstatus")]
+        public int? Propertyconfigurationstatus { get; set; }
 
         /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "opportunitystatecode")]
+        public int? Opportunitystatecode { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user or team who owns the
-        /// opportunity product.
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "_uomid_value")]
+        public string _uomidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the ID of the data that maintains the sequence.
         /// </summary>
-        [JsonProperty(PropertyName = "sequencenumber")]
-        public int? Sequencenumber { get; set; }
+        [JsonProperty(PropertyName = "priceperunit_base")]
+        public decimal? PriceperunitBase { get; set; }
 
         /// <summary>
-        /// Gets or sets shows who created the record.
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "owningteam")]
+        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "opportunityproduct_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> OpportunityproductTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "opportunityproduct_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> OpportunityproductMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "parentbundleidref_opportunityproduct")]
+        public MicrosoftDynamicsCRMopportunityproduct ParentbundleidrefOpportunityproduct { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "opportunityproduct_parentref_opportunityproduct")]
+        public IList<MicrosoftDynamicsCRMopportunityproduct> OpportunityproductParentrefOpportunityproduct { get; set; }
 
         /// <summary>
         /// </summary>
@@ -587,6 +435,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "OpportunityProduct_ProcessSessions")]
+        public IList<MicrosoftDynamicsCRMprocesssession> OpportunityProductProcessSessions { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "OpportunityProduct_AsyncOperations")]
         public IList<MicrosoftDynamicsCRMasyncoperation> OpportunityProductAsyncOperations { get; set; }
 
@@ -594,6 +447,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "modifiedby")]
         public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "opportunityproduct_principalobjectattributeaccess")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> OpportunityproductPrincipalobjectattributeaccess { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,46 +29,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig class.
         /// </summary>
-        /// <param name="customizationlevel">Customization level of the SDK
-        /// message processing step secure configuration.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the
-        /// sdkmessageprocessingstepsecureconfig.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who last modified the
-        /// sdkmessageprocessingstepsecureconfig.</param>
-        /// <param name="sdkmessageprocessingstepsecureconfigidunique">Unique
-        /// identifier of the SDK message processing step.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// last modified the SDK message processing step.</param>
-        /// <param name="secureconfig">Secure step-specific configuration for
-        /// the plug-in type that is passed to the plug-in's constructor at run
-        /// time.</param>
-        /// <param name="_organizationidValue">Unique identifier of the
-        /// organization with which the SDK message processing step is
-        /// associated.</param>
-        /// <param name="sdkmessageprocessingstepsecureconfigid">Unique
-        /// identifier of the SDK message processing step secure
-        /// configuration.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the SDK message processing step.</param>
-        /// <param name="modifiedon">Date and time when the SDK message
-        /// processing step was last modified.</param>
-        /// <param name="createdon">Date and time when the SDK message
-        /// processing step was created.</param>
-        public MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig(int? customizationlevel = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string sdkmessageprocessingstepsecureconfigidunique = default(string), string _modifiedbyValue = default(string), string secureconfig = default(string), string _organizationidValue = default(string), string sdkmessageprocessingstepsecureconfigid = default(string), string _createdbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessageprocessingstepsecureconfigidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig(string secureconfig = default(string), string _createdbyValue = default(string), int? customizationlevel = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string sdkmessageprocessingstepsecureconfigidunique = default(string), string _organizationidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string sdkmessageprocessingstepsecureconfigid = default(string), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessageprocessingstepsecureconfigidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
+            Secureconfig = secureconfig;
+            this._createdbyValue = _createdbyValue;
             Customizationlevel = customizationlevel;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Sdkmessageprocessingstepsecureconfigidunique = sdkmessageprocessingstepsecureconfigidunique;
             this._modifiedbyValue = _modifiedbyValue;
-            Secureconfig = secureconfig;
-            this._organizationidValue = _organizationidValue;
-            Sdkmessageprocessingstepsecureconfigid = sdkmessageprocessingstepsecureconfigid;
-            this._createdbyValue = _createdbyValue;
-            Modifiedon = modifiedon;
             Createdon = createdon;
+            Sdkmessageprocessingstepsecureconfigidunique = sdkmessageprocessingstepsecureconfigidunique;
+            this._organizationidValue = _organizationidValue;
+            Modifiedon = modifiedon;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Sdkmessageprocessingstepsecureconfigid = sdkmessageprocessingstepsecureconfigid;
             SdkmessageprocessingstepsecureconfigidSdkmessageprocessingstep = sdkmessageprocessingstepsecureconfigidSdkmessageprocessingstep;
             Organizationid = organizationid;
             Createdby = createdby;
@@ -84,80 +57,59 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets customization level of the SDK message processing step
-        /// secure configuration.
-        /// </summary>
-        [JsonProperty(PropertyName = "customizationlevel")]
-        public int? Customizationlevel { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// sdkmessageprocessingstepsecureconfig.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who last
-        /// modified the sdkmessageprocessingstepsecureconfig.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the SDK message processing step.
-        /// </summary>
-        [JsonProperty(PropertyName = "sdkmessageprocessingstepsecureconfigidunique")]
-        public string Sdkmessageprocessingstepsecureconfigidunique { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who last modified the
-        /// SDK message processing step.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets secure step-specific configuration for the plug-in
-        /// type that is passed to the plug-in's constructor at run time.
         /// </summary>
         [JsonProperty(PropertyName = "secureconfig")]
         public string Secureconfig { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the organization with which the
-        /// SDK message processing step is associated.
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the SDK message processing step
-        /// secure configuration.
-        /// </summary>
-        [JsonProperty(PropertyName = "sdkmessageprocessingstepsecureconfigid")]
-        public string Sdkmessageprocessingstepsecureconfigid { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the SDK
-        /// message processing step.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the SDK message processing step was
-        /// last modified.
+        /// </summary>
+        [JsonProperty(PropertyName = "customizationlevel")]
+        public int? Customizationlevel { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sdkmessageprocessingstepsecureconfigidunique")]
+        public string Sdkmessageprocessingstepsecureconfigidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the SDK message processing step was
-        /// created.
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sdkmessageprocessingstepsecureconfigid")]
+        public string Sdkmessageprocessingstepsecureconfigid { get; set; }
 
         /// <summary>
         /// </summary>
