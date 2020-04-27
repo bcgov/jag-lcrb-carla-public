@@ -64,6 +64,9 @@
                                     </td>
                                 </tr>
                             </table>
+                            <div *ngIf="!data?.liquor?.completedItems?.length > 0">
+                                <h3 class="plain-header"><i class="fas fa-exclamation"></i>The above Personal History Summary forms have yet to be completed.</h3>
+                            </div>
                         </ng-container>
                         <hr>
 
@@ -93,7 +96,14 @@
                                     <td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td>
                                 </tr>
                             </table>
+                            <div *ngIf="!data?.liquor?.outstandingItems?.length">
+                                <h3 class="plain-header"><i class="fas fa-check"></i>All Personal History Summary forms have been submitted.</h3>
+                            </div>
+                            <div *ngIf="!data?.liquor?.outstandingItems?.length > 0">
+                                <h3 class="plain-header"><i class="fas fa-exclamation"></i>Not all Personal History Summary forms have been submitted.</h3>
+                            </div>
                         </ng-container>
+                        
 
                     </div>
                 </mat-tab>
