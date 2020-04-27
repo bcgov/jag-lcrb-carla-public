@@ -83,6 +83,32 @@
                   <strong style="color: #1a5a96;">
                     {{item.thirdPartyOperatorAccountName}}</strong>
                 </ng-container>
+                <div *ngIf="showPlanStoreOpening(item)" style="min-width: 10px; margin-bottom: 10px;">
+                  <a href="javascript:void(0);" (click)="planStoreOpening(item)" class="missing">
+                    <span *ngIf="item.status == PAYMENT_REQUIRED">
+                      <i class="fas fa-shopping-cart" style="margin-right: 10px;">
+                      </i>Pay Licence Fee and Plan Store Opening</span>
+                    <span *ngIf="item.status != PAYMENT_REQUIRED">
+                      <i class="fas fa-pencil-alt" style="margin-right: 10px;">
+                      </i>Plan Store Opening</span>
+                  </a>
+                </div>
+                <div
+                *ngIf="item.storeInspected && item.status == PAYMENT_REQUIRED  && item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore"
+                style="min-width: 10px; margin-bottom: 10px;">
+                <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
+                  <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay Licence Fee</span>
+                </a>
+              </div>
+              <div *ngIf="item.status == PAYMENT_REQUIRED  && item?.licenceTypeName === ApplicationTypeNames.Catering"
+                style="min-width: 10px; margin-bottom: 10px;">
+                <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
+                  <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay First Year Licensing
+                    Fee</span>
+                </a>
+              </div>
+              <div>
+
                 <div *ngIf="hasEndorsement('Temporary Off-Site Endorsement', item)">
                   <a [routerLink]="[ '/licence/' + item.licenseId + '/temporary-offsite']">
                     <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Temporary Off-Site Sale
@@ -100,32 +126,9 @@
                     (click)="toggleStoreOpen(item?.licenceTypeName, i, item?.establishmentId, !item.establishmentIsOpen);">
                     <a href="#">Show Store as Open on Map</a></mat-checkbox>
                 </div>
-                <div *ngIf="showPlanStoreOpening(item)" style="min-width: 10px; margin-bottom: 10px;">
-                  <a href="javascript:void(0);" (click)="planStoreOpening(item)">
-                    <span *ngIf="item.status == PAYMENT_REQUIRED">
-                      <i class="fas fa-shopping-cart" style="margin-right: 10px;">
-                      </i>Pay Licence Fee and Plan Store Opening</span>
-                    <span *ngIf="item.status != PAYMENT_REQUIRED">
-                      <i class="fas fa-pencil-alt" style="margin-right: 10px;">
-                      </i>Plan Store Opening</span>
-                  </a>
-                </div>
-                <div
-                  *ngIf="item.storeInspected && item.status == PAYMENT_REQUIRED  && item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore"
-                  style="min-width: 10px; margin-bottom: 10px;">
-                  <a href="javascript:void(0);" (click)="payLicenceFee(item)">
-                    <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay Licence Fee</span>
-                  </a>
-                </div>
-                <div *ngIf="item.status == PAYMENT_REQUIRED  && item?.licenceTypeName === ApplicationTypeNames.Catering"
-                  style="min-width: 10px; margin-bottom: 10px;">
-                  <a href="javascript:void(0);" (click)="payLicenceFee(item)">
-                    <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay First Year Licensing
-                      Fee</span>
-                  </a>
-                </div>
-                <div>
-                  <p *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore">
+
+ 
+                  <p *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore &&  item.status != PAYMENT_REQUIRED">
                     <a [routerLink]="[ '/federal-reporting/' + item.licenseId + '/default']">
                       <span><i class="fas fa-business-time" style="margin-right: 10px;"></i>Review Federal
                         Reports</span>
