@@ -140,6 +140,7 @@ const routes: Routes = [
     path: 'multi-step-application/:applicationId',
     component: MultiStageApplicationFlowComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
+    canDeactivate: [CanDeactivateGuard],
     data: { feature: 'LicenseeChanges' }
   },
   {
