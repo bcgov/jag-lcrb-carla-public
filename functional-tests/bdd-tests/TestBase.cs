@@ -17,7 +17,7 @@ using Newtonsoft.Json;
 
 namespace bdd_tests
 {
-    public abstract class TestBase : Feature
+    public abstract class TestBase : Feature, IDisposable
     {
         protected RemoteWebDriver driver;
 
@@ -434,5 +434,13 @@ namespace bdd_tests
             NgWebElement uiSignatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSignatureAgree.Click();
         }
+        public void Dispose()
+        {
+            ngDriver.Quit();
+
+            // Suppress finalization.
+            GC.SuppressFinalize(this);
+        }
+        
     }
 }
