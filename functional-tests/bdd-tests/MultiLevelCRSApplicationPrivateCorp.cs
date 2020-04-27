@@ -45,7 +45,7 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            CarlaLoginNoCheck(businessType);
+            CarlaLoginNoCheck();
         }
 
         [And(@"I am logged in to the dashboard as a (.*)")]
@@ -236,10 +236,10 @@ namespace bdd_tests
             /********** Key Personnel **********/
 
             // create the key personnel data
-            string keyPersonnelFirstName = "Jane";
-            string keyPersonnelLastName = "Bond";
-            string keyPersonnelTitle = "Adventurer";
-            string keyPersonnelEmail = "jane@bond.com";
+            string keyPersonnelFirstName = "KeyPersonnelFirst";
+            string keyPersonnelLastName = "KeyPersonnelLast";
+            string keyPersonnelTitle = "KeyPersonnelTitle";
+            string keyPersonnelEmail = "key.personnel@email.com";
 
             // open key personnel form   
             NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[4]/section/app-associate-list/div/button"));
@@ -275,10 +275,10 @@ namespace bdd_tests
             /********** Individual Shareholder **********/
 
             // create the shareholder data
-            string shareholderFirstName = "Jacqui";
-            string shareholderLastName = "Chan";
+            string shareholderFirstName = "IndividualShareholderFirst";
+            string shareholderLastName = "IndividualShareholderLast";
             string shareholderVotingShares = "500";
-            string shareholderEmail = "jacqui@chan.com";
+            string shareholderEmail = "individual.shareholder@email.com";
 
             // open shareholder form 
             NgWebElement uiOpenShare = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section/app-associate-list/div/button"));
@@ -310,9 +310,9 @@ namespace bdd_tests
             /********** Business Shareholder #1 **********/
 
             // create the business shareholder data
-            string businessName = "Bourne Enterprises";
+            string businessName = "Business Shareholder 1";
             string businessVotingShares = "50";
-            string businessEmail = "bourne@enterprises.com";
+            string businessEmail = "businessshareholder1@enterprises.com";
 
             // open business shareholder form    
             NgWebElement uiOpenShareBiz = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section[2]/app-associate-list/div/button"));
@@ -356,10 +356,10 @@ namespace bdd_tests
             /********** Business Shareholder #1 - Key Personnel **********/
 
             // create business shareholder key personnel data
-            string keyPersonnelFirstNameBiz = "Ethel";
-            string keyPersonnelLastNameBiz = "Hunt";
-            string keyPersonnelTitleBiz = "Climbing Enthusiast";
-            string keyPersonnelEmailBiz = "ethel@hunt.com";
+            string keyPersonnelFirstNameBiz1 = "KeyPersonnelBiz1First";
+            string keyPersonnelLastNameBiz1 = "KeyPersonnelBiz1Last";
+            string keyPersonnelTitleBiz1 = "KeyPersonnelBiz1Title";
+            string keyPersonnelEmailBiz1 = "keypersonnel@biz1.com";
 
             // open business shareholder > key personnel form
             NgWebElement openKeyPersonnelFormBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section/app-associate-list/div/button"));
@@ -367,11 +367,11 @@ namespace bdd_tests
 
             // enter business shareholder > key personnel first name
             NgWebElement uiKeyPersonFirstBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[1]/app-field/section/div[1]/section/input"));
-            uiKeyPersonFirstBiz.SendKeys(keyPersonnelFirstNameBiz);
+            uiKeyPersonFirstBiz.SendKeys(keyPersonnelFirstNameBiz1);
 
             // enter business shareholder > key personnel last name
             NgWebElement uiKeyPersonLastBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[2]/app-field/section/div[1]/section/input"));
-            uiKeyPersonLastBiz.SendKeys(keyPersonnelLastNameBiz);
+            uiKeyPersonLastBiz.SendKeys(keyPersonnelLastNameBiz1);
 
             // select business shareholder > key personnel role using checkbox
             NgWebElement uiKeyPersonRoleBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[3]/app-field/section/div/section/table/tr/td[1]/input[1]"));
@@ -379,11 +379,11 @@ namespace bdd_tests
 
             // enter business shareholder > key personnel title
             NgWebElement uiKeyPersonTitleBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[4]/app-field/section/div/section/input"));
-            uiKeyPersonTitleBiz.SendKeys(keyPersonnelTitleBiz);
+            uiKeyPersonTitleBiz.SendKeys(keyPersonnelTitleBiz1);
 
             // enter business shareholder > key personnel email
             NgWebElement uiKeyPersonEmailBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
-            uiKeyPersonEmailBiz.SendKeys(keyPersonnelEmailBiz);
+            uiKeyPersonEmailBiz.SendKeys(keyPersonnelEmailBiz1);
 
             // enter business shareholder > key personnel DOB
             NgWebElement uiKeyPersonnelDOB1Biz1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[2]/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[3]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
@@ -395,10 +395,10 @@ namespace bdd_tests
             /********** Business Shareholder #1 - Individual Shareholder **********/
 
             // create the business shareholder > individual shareholder data
-            string shareholderFirstNameBiz = "Jacintha";
-            string shareholderLastNameBiz = "Ryan";
+            string shareholderFirstNameBiz = "IndividualShareholderBiz1First";
+            string shareholderLastNameBiz = "IndividualShareholderBiz1Last";
             string shareholderVotingSharesBiz = "500";
-            string shareholderEmailBiz = "jacintha@cia.com";
+            string shareholderEmailBiz = "individualshareholder@biz1.com";
 
             // open business shareholder > individual shareholder form
             NgWebElement uiOpenIndyShareBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/button"));
@@ -431,7 +431,7 @@ namespace bdd_tests
         [And(@"I add in multiple nested business shareholders")]
         public void add_multiple_business_shareholders()
         {
-            // add in an additional five nested business shareholders
+            // add in an additional four nested business shareholders
             business_shareholder_2();
             business_shareholder_3();
             business_shareholder_4();
@@ -467,7 +467,7 @@ namespace bdd_tests
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
 
-            System.Threading.Thread.Sleep(7000);
+            System.Threading.Thread.Sleep(9000);
 
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
@@ -589,14 +589,7 @@ namespace bdd_tests
             Page Title: Payment Approved
             */
 
-            // confirm that payment receipt is for $7,500.00
-            Assert.True(ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-payment-confirmation/mat-card/div/div[1]/div/div/table/tr[6]/td[2][text()='$7,500.00']")).Displayed);
-
-            string retDash = "Return to Dashboard";
-
-            // click on the Return to Dashboard link
-            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
-            returnDash.Click();
+            CRSReturnToDashboard();
         }
 
         [And(@"the account is deleted")]
@@ -620,9 +613,9 @@ namespace bdd_tests
             /********** Business Shareholder #2 **********/
 
             // create the business shareholder data
-            string businessName2 = "GardaWorld International Protective Services";
+            string businessName2 = "Business Shareholder 2";
             string businessVotingShares2 = "100";
-            string businessEmail2 = "garda@world.com";
+            string businessEmail2 = "businessshareholder2@email.com";
 
             // open business shareholder form - GardaWorld
             NgWebElement uiOpenShareBiz2 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/button"));
@@ -671,10 +664,10 @@ namespace bdd_tests
             /********** Business Shareholder #2 - Key Personnel **********/
 
             // create business shareholder key personnel data
-            string keyPersonnelFirstNameBiz2 = "GardaWorld";
-            string keyPersonnelLastNameBiz2 = "KeyPersonnel";
-            string keyPersonnelTitleBiz2 = "Security Expert";
-            string keyPersonnelEmailBiz2 = "gardaworld@keypersonnel.com";
+            string keyPersonnelFirstNameBiz2 = "KeyPersonnelBiz2First";
+            string keyPersonnelLastNameBiz2 = "KeyPersonnelBiz2Last";
+            string keyPersonnelTitleBiz2 = "KeyPersonnelBiz2Title";
+            string keyPersonnelEmailBiz2 = "keypersonnel@biz2.com";
 
             // open business shareholder > key personnel form                                   
             NgWebElement openKeyPersonnelFormBiz2 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[3]/section/app-associate-list/div/button"));
@@ -710,10 +703,10 @@ namespace bdd_tests
             /********** Business Shareholder #2 - Individual Shareholder **********/
 
             // create the business shareholder > individual shareholder data
-            string shareholderFirstNameBiz2 = "GardaWorld";
-            string shareholderLastNameBiz2 = "IndividualShareholder";
+            string shareholderFirstNameBiz2 = "IndividualShareholderBiz2First";
+            string shareholderLastNameBiz2 = "IndividualShareholderBiz2Last";
             string shareholderVotingSharesBiz2 = "1800";
-            string shareholderEmailBiz2 = "gardaworld@individualshareholder.com";
+            string shareholderEmailBiz2 = "individualshareholder@biz2.com";
 
             // open business shareholder > individual shareholder form
             NgWebElement uiOpenIndyShareBiz2 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/button"));
@@ -747,9 +740,9 @@ namespace bdd_tests
             /********** Business Shareholder #3 **********/
 
             // create the business shareholder data
-            string businessName3 = "Häagen-Dazs";
+            string businessName3 = "Business Shareholder 3";
             string businessVotingShares3 = "3";
-            string businessEmail3 = "hd@icecream.com";
+            string businessEmail3 = "businessshareholder3@email.com";
 
             // open business shareholder form
             NgWebElement uiOpenShareBiz3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/button"));
@@ -798,10 +791,10 @@ namespace bdd_tests
             /********** Business Shareholder #3 - Key Personnel **********/
 
             // create business shareholder key personnel data
-            string keyPersonnelFirstNameBiz3 = "Häagen-Dazs";
-            string keyPersonnelLastNameBiz3 = "KeyPersonnel";
-            string keyPersonnelTitleBiz3 = "Frozen Goods";
-            string keyPersonnelEmailBiz3 = "hd@keypersonnel.com";
+            string keyPersonnelFirstNameBiz3 = "KeyPersonnelBiz3First";
+            string keyPersonnelLastNameBiz3 = "KeyPersonnelBiz3Last";
+            string keyPersonnelTitleBiz3 = "KeyPersonnelBiz3Title";
+            string keyPersonnelEmailBiz3 = "keypersonnel@biz3.com";
 
             // open business shareholder > key personnel form
             NgWebElement openKeyPersonnelFormBiz3 = ngDriver.FindElement(By.XPath("//div[@id='cdk-accordion-child-2']/div/section/app-org-structure/div[3]/section/app-associate-list/div/button"));
@@ -837,10 +830,10 @@ namespace bdd_tests
             /********** Business Shareholder #3 - Individual Shareholder **********/
 
             // create the business shareholder > individual shareholder data
-            string shareholderFirstNameBiz3 = "Häagen-Dazs";
-            string shareholderLastNameBiz3 = "IndividualShareholder";
+            string shareholderFirstNameBiz3 = "IndividualShareholderBiz3First";
+            string shareholderLastNameBiz3 = "IndividualShareholderBiz3Last";
             string shareholderVotingSharesBiz3 = "1000";
-            string shareholderEmailBiz3 = "hd@individualshareholder.com";
+            string shareholderEmailBiz3 = "individualshareholder@biz3.com";
 
             // open business shareholder > individual shareholder form
             NgWebElement uiOpenIndyShareBiz3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/button"));
@@ -875,9 +868,9 @@ namespace bdd_tests
             /********** Business Shareholder #4 **********/
 
             // create the business shareholder data
-            string businessName4 = "General Mills, Inc.";
+            string businessName4 = "Business Shareholder 4";
             string businessVotingShares4 = "2";
-            string businessEmail4 = "generalmills@hotmail.com";
+            string businessEmail4 = "businessshareholder4@email.com";
 
             // open business shareholder form
             NgWebElement uiOpenShareBiz4 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/button"));
@@ -926,10 +919,10 @@ namespace bdd_tests
             /********** Business Shareholder #4 - Key Personnel **********/
 
             // create business shareholder key personnel data
-            string keyPersonnelFirstNameBiz4 = "General Mills, Inc.";
-            string keyPersonnelLastNameBiz4 = "KeyPersonnel";
-            string keyPersonnelTitleBiz4 = "Manager";
-            string keyPersonnelEmailBiz4 = "GeneralMills@keypersonnel.com";
+            string keyPersonnelFirstNameBiz4 = "KeyPersonnelBiz4First";
+            string keyPersonnelLastNameBiz4 = "KeyPersonnelBiz4Last";
+            string keyPersonnelTitleBiz4 = "KeyPersonnelBiz4Title";
+            string keyPersonnelEmailBiz4 = "keypersonnel@biz4.com";
 
             // open business shareholder > key personnel form
             NgWebElement openKeyPersonnelFormBiz4 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-3']/div/section/app-org-structure/div[3]/section/app-associate-list/div/button"));
@@ -965,10 +958,10 @@ namespace bdd_tests
             /********** Business Shareholder #4 - Individual Shareholder **********/
 
             // create the business shareholder > individual shareholder data
-            string shareholderFirstNameBiz4 = "General Mills, Inc.";
-            string shareholderLastNameBiz4 = "IndividualShareholder";
+            string shareholderFirstNameBiz4 = "IndividualShareholderBiz4First";
+            string shareholderLastNameBiz4 = "IndividualShareholderBiz4Last";
             string shareholderVotingSharesBiz4 = "1";
-            string shareholderEmailBiz4 = "GeneralMills@individualshareholder.com";
+            string shareholderEmailBiz4 = "individualshareholder@biz4.com";
 
             // open business shareholder > individual shareholder form
             NgWebElement uiOpenIndyShareBiz4 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-3']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/button"));
@@ -1003,9 +996,9 @@ namespace bdd_tests
             /********** Business Shareholder #5 **********/
 
             // create the business shareholder data
-            string businessName5 = "Emirates Telecommunication Group Company PJSC";
+            string businessName5 = "Business Shareholder 5";
             string businessVotingShares5 = "1";
-            string businessEmail5 = "dubai@tele.com";
+            string businessEmail5 = "businessshareholder5@email.com";
 
             // open business shareholder form
             NgWebElement uiOpenShareBiz5 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-3']/div/section/app-org-structure/div[4]/section[2]/app-associate-list/div/button"));
@@ -1054,10 +1047,10 @@ namespace bdd_tests
             /********** Business Shareholder #5 - Key Personnel **********/
 
             // create business shareholder key personnel data
-            string keyPersonnelFirstNameBiz5 = "Emirates Telecommunication Group Company PJSC";
-            string keyPersonnelLastNameBiz5 = "KeyPersonnel";
-            string keyPersonnelTitleBiz5 = "Engineer";
-            string keyPersonnelEmailBiz5 = "emirates@keypersonnel.com";
+            string keyPersonnelFirstNameBiz5 = "KeyPersonnelBiz5First";
+            string keyPersonnelLastNameBiz5 = "KeyPersonnelBiz5Last";
+            string keyPersonnelTitleBiz5 = "KeyPersonnelBiz5Title";
+            string keyPersonnelEmailBiz5 = "keypersonnel@biz5.com";
 
             // open business shareholder > key personnel form
             NgWebElement openKeyPersonnelFormBiz5 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[3]/section/app-associate-list/div/button"));
@@ -1093,10 +1086,10 @@ namespace bdd_tests
             /********** Business Shareholder #5 - Individual Shareholder **********/
 
             // create the business shareholder > individual shareholder data
-            string shareholderFirstNameBiz5 = "Emirates Telecommunication Group Company PJSC";
-            string shareholderLastNameBiz5 = "IndividualShareholder";
+            string shareholderFirstNameBiz5 = "IndividualShareholderBiz5First";
+            string shareholderLastNameBiz5 = "IndividualShareholderBiz5Last";
             string shareholderVotingSharesBiz5 = "1";
-            string shareholderEmailBiz5 = "emirates@individualshareholder.com";
+            string shareholderEmailBiz5 = "individualshareholder@biz5.com";
 
             // open business shareholder > individual shareholder form
             NgWebElement uiOpenIndyShareBiz5 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section[1]/app-associate-list/div/button"));

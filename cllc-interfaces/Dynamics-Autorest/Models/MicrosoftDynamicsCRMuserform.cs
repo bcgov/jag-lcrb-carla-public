@@ -29,62 +29,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMuserform
         /// class.
         /// </summary>
-        /// <param name="userformid">Unique identifier of the user
-        /// dashboard.</param>
-        /// <param name="formxml">Shows the XML representation of the layout of
-        /// the form or dashboard.</param>
-        /// <param name="_owneridValue">Enter the user or team who is assigned
-        /// to manage the record. This field is updated every time the record
-        /// is assigned to a different user.</param>
-        /// <param name="objecttypecode">Shows the record type (entity) code
-        /// that the form applies to.</param>
-        /// <param name="_createdonbehalfbyValue">Shows who created the record
-        /// on behalf of another user.</param>
-        /// <param name="_owningteamValue">Unique identifier of the team who
-        /// owns the dashboard.</param>
-        /// <param name="_modifiedonbehalfbyValue">Shows who created the record
-        /// on behalf of another user.</param>
-        /// <param name="type">Select the form type.</param>
-        /// <param name="_createdbyValue">Shows who created the record.</param>
-        /// <param name="_modifiedbyValue">Shows who last updated the
-        /// record.</param>
-        /// <param name="modifiedon">Shows the date and time when the record
-        /// was last updated. The date and time are displayed in the time zone
-        /// selected in Microsoft Dynamics 365 options.</param>
-        /// <param name="istabletenabled">Information that specifies whether
-        /// the dashboard is enabled for tablet.</param>
-        /// <param name="description">Type additional information to describe
-        /// the form or dashboard, such as the filter criteria or intended
-        /// audience.</param>
-        /// <param name="name">Type a descriptive name for the form or
-        /// dashboard.</param>
-        /// <param name="createdon">Shows the date and time when the record was
-        /// created. The date and time are displayed in the time zone selected
-        /// in Microsoft Dynamics 365 options.</param>
-        /// <param name="_owninguserValue">Unique identifier of the user who
-        /// owns the dashboard.</param>
-        /// <param name="_owningbusinessunitValue">Shows the business unit that
-        /// the record owner belongs to.</param>
-        public MicrosoftDynamicsCRMuserform(string userformid = default(string), string formxml = default(string), string _owneridValue = default(string), string objecttypecode = default(string), string _createdonbehalfbyValue = default(string), string _owningteamValue = default(string), string _modifiedonbehalfbyValue = default(string), int? type = default(int?), string _createdbyValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? istabletenabled = default(bool?), string description = default(string), string name = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), string _owninguserValue = default(string), string _owningbusinessunitValue = default(string), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMasyncoperation> userFormAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMbulkdeletefailure> userFormBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
+        public MicrosoftDynamicsCRMuserform(string _owneridValue = default(string), string description = default(string), string userformid = default(string), string name = default(string), string formjson = default(string), string _owningbusinessunitValue = default(string), string _createdbyValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string formxml = default(string), string objecttypecode = default(string), string _modifiedonbehalfbyValue = default(string), int? type = default(int?), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), bool? istabletenabled = default(bool?), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMasyncoperation> userFormAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMbulkdeletefailure> userFormBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
         {
-            Userformid = userformid;
-            Formxml = formxml;
             this._owneridValue = _owneridValue;
-            Objecttypecode = objecttypecode;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._owningteamValue = _owningteamValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Type = type;
+            Description = description;
+            Userformid = userformid;
+            Name = name;
+            Formjson = formjson;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             this._createdbyValue = _createdbyValue;
             this._modifiedbyValue = _modifiedbyValue;
             Modifiedon = modifiedon;
-            Istabletenabled = istabletenabled;
-            Description = description;
-            Name = name;
-            Createdon = createdon;
+            Formxml = formxml;
+            Objecttypecode = objecttypecode;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Type = type;
             Versionnumber = versionnumber;
+            Createdon = createdon;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._owningteamValue = _owningteamValue;
             this._owninguserValue = _owninguserValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Istabletenabled = istabletenabled;
             Owninguser = owninguser;
             Owningteam = owningteam;
             UserFormAsyncOperations = userFormAsyncOperations;
@@ -104,106 +69,69 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets unique identifier of the user dashboard.
-        /// </summary>
-        [JsonProperty(PropertyName = "userformid")]
-        public string Userformid { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the XML representation of the layout of the form
-        /// or dashboard.
-        /// </summary>
-        [JsonProperty(PropertyName = "formxml")]
-        public string Formxml { get; set; }
-
-        /// <summary>
-        /// Gets or sets enter the user or team who is assigned to manage the
-        /// record. This field is updated every time the record is assigned to
-        /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the record type (entity) code that the form
-        /// applies to.
-        /// </summary>
-        [JsonProperty(PropertyName = "objecttypecode")]
-        public string Objecttypecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who created the record on behalf of another
-        /// user.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the team who owns the dashboard.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who created the record on behalf of another
-        /// user.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the form type.
-        /// </summary>
-        [JsonProperty(PropertyName = "type")]
-        public int? Type { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who created the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who last updated the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time when the record was last
-        /// updated. The date and time are displayed in the time zone selected
-        /// in Microsoft Dynamics 365 options.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets information that specifies whether the dashboard is
-        /// enabled for tablet.
-        /// </summary>
-        [JsonProperty(PropertyName = "istabletenabled")]
-        public bool? Istabletenabled { get; set; }
-
-        /// <summary>
-        /// Gets or sets type additional information to describe the form or
-        /// dashboard, such as the filter criteria or intended audience.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets type a descriptive name for the form or dashboard.
+        /// </summary>
+        [JsonProperty(PropertyName = "userformid")]
+        public string Userformid { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the date and time when the record was created.
-        /// The date and time are displayed in the time zone selected in
-        /// Microsoft Dynamics 365 options.
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "formjson")]
+        public string Formjson { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "formxml")]
+        public string Formxml { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objecttypecode")]
+        public string Objecttypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "type")]
+        public int? Type { get; set; }
 
         /// <summary>
         /// </summary>
@@ -211,17 +139,29 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string Versionnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who owns the dashboard.
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the business unit that the record owner belongs
-        /// to.
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "istabletenabled")]
+        public bool? Istabletenabled { get; set; }
 
         /// <summary>
         /// </summary>

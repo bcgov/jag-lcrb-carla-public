@@ -29,75 +29,32 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioFundingsource class.
         /// </summary>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// modified the record.</param>
-        /// <param name="adoxioName">The name of the custom entity.</param>
-        /// <param name="_adoxioAccountidValue">Unique identifier for Account
-        /// associated with Funding Source.</param>
-        /// <param name="statecode">Status of the Funding Source</param>
-        /// <param name="_owninguserValue">Unique identifier for the user that
-        /// owns the record.</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="_owningteamValue">Unique identifier for the team that
-        /// owns the record.</param>
-        /// <param name="importsequencenumber">Sequence number of the import
-        /// that created this record.</param>
-        /// <param name="_owneridValue">Owner Id</param>
-        /// <param name="versionnumber">Version Number</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="statuscode">Reason for the status of the Funding
-        /// Source</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who modified the record.</param>
-        /// <param name="adoxioFundingsourceid">Unique identifier for entity
-        /// instances</param>
-        /// <param name="createdon">Date and time when the record was
-        /// created.</param>
-        /// <param name="modifiedon">Date and time when the record was
-        /// modified.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the record.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the record.</param>
-        /// <param name="_transactioncurrencyidValue">Unique identifier of the
-        /// currency associated with the entity.</param>
-        /// <param name="adoxioAmountoffundingBase">Value of the Amount of
-        /// Funding (CAN$) in base currency.</param>
-        /// <param name="exchangerate">Exchange rate for the currency
-        /// associated with the entity with respect to the base
-        /// currency.</param>
-        /// <param name="_owningbusinessunitValue">Unique identifier for the
-        /// business unit that owns the record</param>
-        public MicrosoftDynamicsCRMadoxioFundingsource(string _modifiedbyValue = default(string), string adoxioName = default(string), string _adoxioAccountidValue = default(string), int? statecode = default(int?), string _owninguserValue = default(string), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), string _owningteamValue = default(string), int? importsequencenumber = default(int?), string _owneridValue = default(string), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), decimal? adoxioAmountoffunding = default(decimal?), string adoxioFundingsourceid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), string _transactioncurrencyidValue = default(string), decimal? adoxioAmountoffundingBase = default(decimal?), decimal? exchangerate = default(decimal?), string _owningbusinessunitValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioFundingsourceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFundingsourceDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFundingsourceDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioFundingsourceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioFundingsourceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMaccount adoxioAccountId = default(MicrosoftDynamicsCRMaccount))
+        public MicrosoftDynamicsCRMadoxioFundingsource(int? utcconversiontimezonecode = default(int?), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _modifiedbyValue = default(string), string adoxioFundingsourceid = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? adoxioAmountoffunding = default(decimal?), string versionnumber = default(string), int? statecode = default(int?), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _adoxioAccountidValue = default(string), string _owningteamValue = default(string), decimal? adoxioAmountoffundingBase = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), decimal? exchangerate = default(decimal?), string adoxioName = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioFundingsourceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFundingsourceDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFundingsourceDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioFundingsourceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioFundingsourceMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioFundingsourceProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioFundingsourceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioFundingsourcePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMaccount adoxioAccountId = default(MicrosoftDynamicsCRMaccount))
         {
-            this._modifiedbyValue = _modifiedbyValue;
-            AdoxioName = adoxioName;
-            this._adoxioAccountidValue = _adoxioAccountidValue;
-            Statecode = statecode;
-            this._owninguserValue = _owninguserValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            this._owningteamValue = _owningteamValue;
-            Importsequencenumber = importsequencenumber;
             this._owneridValue = _owneridValue;
-            Versionnumber = versionnumber;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            this._modifiedbyValue = _modifiedbyValue;
+            AdoxioFundingsourceid = adoxioFundingsourceid;
+            Importsequencenumber = importsequencenumber;
             Overriddencreatedon = overriddencreatedon;
+            AdoxioAmountoffunding = adoxioAmountoffunding;
+            Versionnumber = versionnumber;
+            Statecode = statecode;
+            this._createdbyValue = _createdbyValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._adoxioAccountidValue = _adoxioAccountidValue;
+            this._owningteamValue = _owningteamValue;
+            AdoxioAmountoffundingBase = adoxioAmountoffundingBase;
+            Createdon = createdon;
             Statuscode = statuscode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            AdoxioAmountoffunding = adoxioAmountoffunding;
-            AdoxioFundingsourceid = adoxioFundingsourceid;
-            Createdon = createdon;
+            this._owninguserValue = _owninguserValue;
             Modifiedon = modifiedon;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._createdbyValue = _createdbyValue;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            AdoxioAmountoffundingBase = adoxioAmountoffundingBase;
             Exchangerate = exchangerate;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
+            AdoxioName = adoxioName;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -110,7 +67,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioFundingsourceDuplicateMatchingRecord = adoxioFundingsourceDuplicateMatchingRecord;
             AdoxioFundingsourceDuplicateBaseRecord = adoxioFundingsourceDuplicateBaseRecord;
             AdoxioFundingsourceAsyncOperations = adoxioFundingsourceAsyncOperations;
+            AdoxioFundingsourceMailboxTrackingFolders = adoxioFundingsourceMailboxTrackingFolders;
+            AdoxioFundingsourceProcessSession = adoxioFundingsourceProcessSession;
             AdoxioFundingsourceBulkDeleteFailures = adoxioFundingsourceBulkDeleteFailures;
+            AdoxioFundingsourcePrincipalObjectAttributeAccesses = adoxioFundingsourcePrincipalObjectAttributeAccesses;
             Transactioncurrencyid = transactioncurrencyid;
             AdoxioAccountId = adoxioAccountId;
             CustomInit();
@@ -122,92 +82,39 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who modified the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the custom entity.
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for Account associated with Funding
-        /// Source.
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_accountid_value")]
-        public string _adoxioAccountidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets status of the Funding Source
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the user that owns the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier for the team that owns the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets sequence number of the import that created this
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets owner Id
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
-        /// Gets or sets version Number
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time that the record was migrated.
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_fundingsourceid")]
+        public string AdoxioFundingsourceid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets reason for the status of the Funding Source
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who modified
-        /// the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -215,63 +122,84 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public decimal? AdoxioAmountoffunding { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier for entity instances
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_fundingsourceid")]
-        public string AdoxioFundingsourceid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the record was created.
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the record was modified.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the currency associated with the
-        /// entity.
         /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets value of the Amount of Funding (CAN$) in base
-        /// currency.
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_accountid_value")]
+        public string _adoxioAccountidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_amountoffunding_base")]
         public decimal? AdoxioAmountoffundingBase { get; set; }
 
         /// <summary>
-        /// Gets or sets exchange rate for the currency associated with the
-        /// entity with respect to the base currency.
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
         public decimal? Exchangerate { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier for the business unit that owns the
-        /// record
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -335,8 +263,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_fundingsource_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> AdoxioFundingsourceMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_fundingsource_ProcessSession")]
+        public IList<MicrosoftDynamicsCRMprocesssession> AdoxioFundingsourceProcessSession { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_fundingsource_BulkDeleteFailures")]
         public IList<MicrosoftDynamicsCRMbulkdeletefailure> AdoxioFundingsourceBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_fundingsource_PrincipalObjectAttributeAccesses")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> AdoxioFundingsourcePrincipalObjectAttributeAccesses { get; set; }
 
         /// <summary>
         /// </summary>

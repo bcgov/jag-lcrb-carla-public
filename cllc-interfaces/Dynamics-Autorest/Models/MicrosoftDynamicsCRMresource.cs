@@ -31,41 +31,29 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMresource
         /// class.
         /// </summary>
-        /// <param name="isdisabled">Information about whether the resource is
-        /// enabled.</param>
-        /// <param name="entityimageid">For internal use only.</param>
-        /// <param name="versionnumber">Version number of the resource.</param>
-        /// <param name="objecttypecode">Type of entity with which the resource
-        /// is associated.</param>
-        /// <param name="_organizationidValue">Unique identifier of the
-        /// organization with which the resource is associated.</param>
-        /// <param name="_businessunitidValue">Unique identifier of the
-        /// business unit with which the resource is associated.</param>
-        /// <param name="entityimage">Shows the default image for the
-        /// record.</param>
-        /// <param name="_siteidValue">Unique identifier of the site at which
-        /// the resource is located.</param>
-        /// <param name="name">Name of the resource.</param>
-        /// <param name="calendarid">Unique identifier of the calendar for the
-        /// resource.</param>
-        /// <param name="resourceid">Unique identifier of the resource.</param>
-        /// <param name="displayinserviceviews">For internal use only.</param>
-        public MicrosoftDynamicsCRMresource(bool? isdisabled = default(bool?), string entityimageid = default(string), long? entityimageTimestamp = default(long?), string versionnumber = default(string), string objecttypecode = default(string), string _organizationidValue = default(string), string _businessunitidValue = default(string), byte[] entityimage = default(byte[]), string _siteidValue = default(string), string name = default(string), string calendarid = default(string), string entityimageUrl = default(string), string resourceid = default(string), bool? displayinserviceviews = default(bool?), MicrosoftDynamicsCRMsystemuser resourceidSystemuser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> resourceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> resourceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> resourceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMequipment resourceidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMresourcespec resourceidResourcespec = default(MicrosoftDynamicsCRMresourcespec), MicrosoftDynamicsCRMsite siteid = default(MicrosoftDynamicsCRMsite))
+        public MicrosoftDynamicsCRMresource(string _organizationidValue = default(string), int? importsequencenumber = default(int?), byte[] entityimage = default(byte[]), string calendarid = default(string), string resourceid = default(string), string entityimageUrl = default(string), string name = default(string), int? timezoneruleversionnumber = default(int?), long? entityimageTimestamp = default(long?), string versionnumber = default(string), string _businessunitidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _siteidValue = default(string), bool? displayinserviceviews = default(bool?), string objecttypecode = default(string), bool? isdisabled = default(bool?), string entityimageid = default(string), int? utcconversiontimezonecode = default(int?), IList<MicrosoftDynamicsCRMteam> resourceTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> resourceMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> resourcePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser resourceidSystemuser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> resourceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> resourceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> resourceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMequipment resourceidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMresourcespec resourceidResourcespec = default(MicrosoftDynamicsCRMresourcespec), MicrosoftDynamicsCRMsite siteid = default(MicrosoftDynamicsCRMsite))
         {
-            Isdisabled = isdisabled;
-            Entityimageid = entityimageid;
+            this._organizationidValue = _organizationidValue;
+            Importsequencenumber = importsequencenumber;
+            Entityimage = entityimage;
+            Calendarid = calendarid;
+            Resourceid = resourceid;
+            EntityimageUrl = entityimageUrl;
+            Name = name;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             EntityimageTimestamp = entityimageTimestamp;
             Versionnumber = versionnumber;
-            Objecttypecode = objecttypecode;
-            this._organizationidValue = _organizationidValue;
             this._businessunitidValue = _businessunitidValue;
-            Entityimage = entityimage;
+            Overriddencreatedon = overriddencreatedon;
             this._siteidValue = _siteidValue;
-            Name = name;
-            Calendarid = calendarid;
-            EntityimageUrl = entityimageUrl;
-            Resourceid = resourceid;
             Displayinserviceviews = displayinserviceviews;
+            Objecttypecode = objecttypecode;
+            Isdisabled = isdisabled;
+            Entityimageid = entityimageid;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            ResourceTeams = resourceTeams;
+            ResourceMailboxTrackingFolders = resourceMailboxTrackingFolders;
+            ResourcePrincipalObjectAttributeAccesses = resourcePrincipalObjectAttributeAccesses;
             ResourceidSystemuser = resourceidSystemuser;
             ResourceBulkDeleteFailures = resourceBulkDeleteFailures;
             ResourceSyncErrors = resourceSyncErrors;
@@ -84,73 +72,30 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets information about whether the resource is enabled.
-        /// </summary>
-        [JsonProperty(PropertyName = "isdisabled")]
-        public bool? Isdisabled { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimageid")]
-        public string Entityimageid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimage_timestamp")]
-        public long? EntityimageTimestamp { get; set; }
-
-        /// <summary>
-        /// Gets or sets version number of the resource.
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets type of entity with which the resource is associated.
-        /// </summary>
-        [JsonProperty(PropertyName = "objecttypecode")]
-        public string Objecttypecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the organization with which the
-        /// resource is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the business unit with which the
-        /// resource is associated.
         /// </summary>
-        [JsonProperty(PropertyName = "_businessunitid_value")]
-        public string _businessunitidValue { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the default image for the record.
         /// </summary>
         [JsonConverter(typeof(Base64UrlJsonConverter))]
         [JsonProperty(PropertyName = "entityimage")]
         public byte[] Entityimage { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the site at which the resource is
-        /// located.
-        /// </summary>
-        [JsonProperty(PropertyName = "_siteid_value")]
-        public string _siteidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets name of the resource.
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the calendar for the resource.
         /// </summary>
         [JsonProperty(PropertyName = "calendarid")]
         public string Calendarid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "resourceid")]
+        public string Resourceid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -158,16 +103,79 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string EntityimageUrl { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the resource.
         /// </summary>
-        [JsonProperty(PropertyName = "resourceid")]
-        public string Resourceid { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimage_timestamp")]
+        public long? EntityimageTimestamp { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_businessunitid_value")]
+        public string _businessunitidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_siteid_value")]
+        public string _siteidValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "displayinserviceviews")]
         public bool? Displayinserviceviews { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objecttypecode")]
+        public string Objecttypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isdisabled")]
+        public bool? Isdisabled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimageid")]
+        public string Entityimageid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "resource_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> ResourceTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "resource_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ResourceMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "resource_PrincipalObjectAttributeAccesses")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ResourcePrincipalObjectAttributeAccesses { get; set; }
 
         /// <summary>
         /// </summary>

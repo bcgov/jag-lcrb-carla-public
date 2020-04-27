@@ -27,7 +27,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMprincipalentitymap class.
         /// </summary>
-        /// <param name="principalentitymapid">For internal use only.</param>
         public MicrosoftDynamicsCRMprincipalentitymap(string objecttypecode = default(string), string principalid = default(string), string principalentitymapid = default(string), string versionnumber = default(string), MicrosoftDynamicsCRMprincipal principalidOwner = default(MicrosoftDynamicsCRMprincipal))
         {
             Objecttypecode = objecttypecode;
@@ -54,7 +53,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string Principalid { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "principalentitymapid")]
         public string Principalentitymapid { get; set; }

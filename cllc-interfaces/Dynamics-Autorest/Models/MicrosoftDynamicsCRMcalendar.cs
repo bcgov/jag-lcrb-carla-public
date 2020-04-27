@@ -29,52 +29,24 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcalendar
         /// class.
         /// </summary>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// last modified the calendar.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who last modified the calendar.</param>
-        /// <param name="_businessunitidValue">Unique identifier of the
-        /// business unit with which the calendar is associated.</param>
-        /// <param name="isshared">Calendar is shared by other calendars, such
-        /// as the organization calendar.</param>
-        /// <param name="primaryuserid">Unique identifier of the primary user
-        /// of this calendar.</param>
-        /// <param name="description">Calendar used by the scheduling system to
-        /// define when an appointment or activity is to occur.</param>
-        /// <param name="createdon">Date and time when the calendar was
-        /// created.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the calendar.</param>
-        /// <param name="modifiedon">Date and time when the calendar was last
-        /// modified.</param>
-        /// <param name="_holidayschedulecalendaridValue">Holiday Schedule
-        /// CalendarId</param>
-        /// <param name="type">Calendar type, such as User work hour calendar,
-        /// or Customer service hour calendar.</param>
-        /// <param name="name">Name of the calendar.</param>
-        /// <param name="calendarid">Unique identifier of the calendar.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the calendar.</param>
-        /// <param name="_organizationidValue">Unique identifier of the
-        /// organization with which the calendar is associated.</param>
-        public MicrosoftDynamicsCRMcalendar(string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _businessunitidValue = default(string), bool? isshared = default(bool?), string primaryuserid = default(string), string description = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _holidayschedulecalendaridValue = default(string), int? type = default(int?), string versionnumber = default(string), string name = default(string), string calendarid = default(string), string _createdbyValue = default(string), string _organizationidValue = default(string), IList<MicrosoftDynamicsCRMcalendarrule> calendarCalendarRules = default(IList<MicrosoftDynamicsCRMcalendarrule>), IList<MicrosoftDynamicsCRMequipment> calendarEquipment = default(IList<MicrosoftDynamicsCRMequipment>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> calendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsla> slabaseBusinesshoursid = default(IList<MicrosoftDynamicsCRMsla>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMorganization> calendarOrganization = default(IList<MicrosoftDynamicsCRMorganization>), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMbusinessunit> businessUnitCalendar = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMannotation> calendarAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMcalendar holidayschedulecalendarid = default(MicrosoftDynamicsCRMcalendar), IList<MicrosoftDynamicsCRMcalendar> calendarCustomercalendarHolidaycalendar = default(IList<MicrosoftDynamicsCRMcalendar>), IList<MicrosoftDynamicsCRMbookableresource> calendarBookableresources = default(IList<MicrosoftDynamicsCRMbookableresource>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> calendarSystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMservice> calendarServices = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMasyncoperation> calendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcalendarrule> innerCalendarCalendarRules = default(IList<MicrosoftDynamicsCRMcalendarrule>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMcalendar(string name = default(string), string _modifiedonbehalfbyValue = default(string), int? type = default(int?), string primaryuserid = default(string), string _createdonbehalfbyValue = default(string), string _businessunitidValue = default(string), string description = default(string), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _holidayschedulecalendaridValue = default(string), string calendarid = default(string), string _createdbyValue = default(string), bool? isshared = default(bool?), string _organizationidValue = default(string), string _modifiedbyValue = default(string), IList<MicrosoftDynamicsCRMcalendarrule> calendarCalendarRules = default(IList<MicrosoftDynamicsCRMcalendarrule>), IList<MicrosoftDynamicsCRMequipment> calendarEquipment = default(IList<MicrosoftDynamicsCRMequipment>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> calendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsla> slabaseBusinesshoursid = default(IList<MicrosoftDynamicsCRMsla>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMorganization> calendarOrganization = default(IList<MicrosoftDynamicsCRMorganization>), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMbusinessunit> businessUnitCalendar = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMannotation> calendarAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMcalendar holidayschedulecalendarid = default(MicrosoftDynamicsCRMcalendar), IList<MicrosoftDynamicsCRMcalendar> calendarCustomercalendarHolidaycalendar = default(IList<MicrosoftDynamicsCRMcalendar>), IList<MicrosoftDynamicsCRMbookableresource> calendarBookableresources = default(IList<MicrosoftDynamicsCRMbookableresource>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> calendarSystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMservice> calendarServices = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMasyncoperation> calendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcalendarrule> innerCalendarCalendarRules = default(IList<MicrosoftDynamicsCRMcalendarrule>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
-            this._modifiedbyValue = _modifiedbyValue;
+            Name = name;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._businessunitidValue = _businessunitidValue;
-            Isshared = isshared;
+            Type = type;
             Primaryuserid = primaryuserid;
-            Description = description;
-            Createdon = createdon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._businessunitidValue = _businessunitidValue;
+            Description = description;
+            Versionnumber = versionnumber;
+            Createdon = createdon;
             Modifiedon = modifiedon;
             this._holidayschedulecalendaridValue = _holidayschedulecalendaridValue;
-            Type = type;
-            Versionnumber = versionnumber;
-            Name = name;
             Calendarid = calendarid;
             this._createdbyValue = _createdbyValue;
+            Isshared = isshared;
             this._organizationidValue = _organizationidValue;
+            this._modifiedbyValue = _modifiedbyValue;
             CalendarCalendarRules = calendarCalendarRules;
             CalendarEquipment = calendarEquipment;
             Createdonbehalfby = createdonbehalfby;
@@ -104,78 +76,39 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who last modified the
-        /// calendar.
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the delegate user who last
-        /// modified the calendar.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the business unit with which the
-        /// calendar is associated.
         /// </summary>
-        [JsonProperty(PropertyName = "_businessunitid_value")]
-        public string _businessunitidValue { get; set; }
+        [JsonProperty(PropertyName = "type")]
+        public int? Type { get; set; }
 
         /// <summary>
-        /// Gets or sets calendar is shared by other calendars, such as the
-        /// organization calendar.
-        /// </summary>
-        [JsonProperty(PropertyName = "isshared")]
-        public bool? Isshared { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the primary user of this
-        /// calendar.
         /// </summary>
         [JsonProperty(PropertyName = "primaryuserid")]
         public string Primaryuserid { get; set; }
 
         /// <summary>
-        /// Gets or sets calendar used by the scheduling system to define when
-        /// an appointment or activity is to occur.
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the calendar was created.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// calendar.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the calendar was last modified.
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "_businessunitid_value")]
+        public string _businessunitidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets holiday Schedule CalendarId
         /// </summary>
-        [JsonProperty(PropertyName = "_holidayschedulecalendarid_value")]
-        public string _holidayschedulecalendaridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets calendar type, such as User work hour calendar, or
-        /// Customer service hour calendar.
-        /// </summary>
-        [JsonProperty(PropertyName = "type")]
-        public int? Type { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
 
         /// <summary>
         /// </summary>
@@ -183,30 +116,44 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string Versionnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets name of the calendar.
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the calendar.
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_holidayschedulecalendarid_value")]
+        public string _holidayschedulecalendaridValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "calendarid")]
         public string Calendarid { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who created the
-        /// calendar.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the organization with which the
-        /// calendar is associated.
+        /// </summary>
+        [JsonProperty(PropertyName = "isshared")]
+        public bool? Isshared { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>

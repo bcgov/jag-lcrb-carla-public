@@ -30,13 +30,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMOptionMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMOptionMetadata(int? value = default(int?), string label = default(string), string description = default(string), string color = default(string), bool? isManaged = default(bool?), string metadataId = default(string), bool? hasChanged = default(bool?))
+        public MicrosoftDynamicsCRMOptionMetadata(int? value = default(int?), string label = default(string), string description = default(string), string color = default(string), bool? isManaged = default(bool?), string externalValue = default(string), string metadataId = default(string), bool? hasChanged = default(bool?))
         {
             Value = value;
             Label = label;
             Description = description;
             Color = color;
             IsManaged = isManaged;
+            ExternalValue = externalValue;
             MetadataId = metadataId;
             HasChanged = hasChanged;
             CustomInit();
@@ -71,6 +72,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "IsManaged")]
         public bool? IsManaged { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ExternalValue")]
+        public string ExternalValue { get; set; }
 
         /// <summary>
         /// </summary>

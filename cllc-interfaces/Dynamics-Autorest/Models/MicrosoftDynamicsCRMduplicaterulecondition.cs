@@ -29,57 +29,24 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMduplicaterulecondition class.
         /// </summary>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the condition.</param>
-        /// <param name="_owneridValue">Unique identifier of the user or team
-        /// who owns the duplicate rule condition.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// last modified the condition.</param>
-        /// <param name="baseattributename">Field that is being
-        /// compared.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who last modified the duplicate rule
-        /// condition.</param>
-        /// <param name="matchingattributename">Field that is being compared
-        /// with the base field.</param>
-        /// <param name="_regardingobjectidValue">Unique identifier of the
-        /// object with which the condition is associated.</param>
-        /// <param name="owninguser">Unique identifier of the user who owns the
-        /// condition.</param>
-        /// <param name="modifiedon">Date and time when the condition was last
-        /// modified.</param>
-        /// <param name="createdon">Date and time when the condition was
-        /// created.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the duplicate rule condition.</param>
-        /// <param name="ignoreblankvalues">Determines whether to consider
-        /// blank values as non-duplicate values</param>
-        /// <param name="operatorparam">Parameter value of N if the operator is
-        /// Same First Characters or Same Last Characters.</param>
-        /// <param name="owningbusinessunit">Unique identifier of the business
-        /// unit that owns the condition.</param>
-        /// <param name="duplicateruleconditionid">Unique identifier of the
-        /// condition.</param>
-        /// <param name="operatorcode">Operator for this rule
-        /// condition.</param>
-        public MicrosoftDynamicsCRMduplicaterulecondition(string _createdbyValue = default(string), string _owneridValue = default(string), string _modifiedbyValue = default(string), string baseattributename = default(string), string _modifiedonbehalfbyValue = default(string), string matchingattributename = default(string), string _regardingobjectidValue = default(string), string owninguser = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), bool? ignoreblankvalues = default(bool?), int? operatorparam = default(int?), string owningbusinessunit = default(string), string duplicateruleconditionid = default(string), int? operatorcode = default(int?), IList<MicrosoftDynamicsCRMsyncerror> duplicateRuleConditionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMduplicaterule regardingobjectid = default(MicrosoftDynamicsCRMduplicaterule), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMduplicaterulecondition(string _modifiedbyValue = default(string), string duplicateruleconditionid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string owningbusinessunit = default(string), string _createdonbehalfbyValue = default(string), string owninguser = default(string), bool? ignoreblankvalues = default(bool?), string baseattributename = default(string), string _owneridValue = default(string), int? operatorcode = default(int?), int? operatorparam = default(int?), string _createdbyValue = default(string), string _regardingobjectidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string matchingattributename = default(string), IList<MicrosoftDynamicsCRMsyncerror> duplicateRuleConditionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMduplicaterule regardingobjectid = default(MicrosoftDynamicsCRMduplicaterule), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            this._createdbyValue = _createdbyValue;
-            this._owneridValue = _owneridValue;
             this._modifiedbyValue = _modifiedbyValue;
-            Baseattributename = baseattributename;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Matchingattributename = matchingattributename;
-            this._regardingobjectidValue = _regardingobjectidValue;
-            Owninguser = owninguser;
-            Modifiedon = modifiedon;
-            Createdon = createdon;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Ignoreblankvalues = ignoreblankvalues;
-            Operatorparam = operatorparam;
-            Owningbusinessunit = owningbusinessunit;
             Duplicateruleconditionid = duplicateruleconditionid;
+            Createdon = createdon;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Owningbusinessunit = owningbusinessunit;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Owninguser = owninguser;
+            Ignoreblankvalues = ignoreblankvalues;
+            Baseattributename = baseattributename;
+            this._owneridValue = _owneridValue;
             Operatorcode = operatorcode;
+            Operatorparam = operatorparam;
+            this._createdbyValue = _createdbyValue;
+            this._regardingobjectidValue = _regardingobjectidValue;
+            Modifiedon = modifiedon;
+            Matchingattributename = matchingattributename;
             DuplicateRuleConditionSyncErrors = duplicateRuleConditionSyncErrors;
             Regardingobjectid = regardingobjectid;
             Createdonbehalfby = createdonbehalfby;
@@ -95,109 +62,84 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who created the
-        /// condition.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user or team who owns the
-        /// duplicate rule condition.
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who last modified the
-        /// condition.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets field that is being compared.
-        /// </summary>
-        [JsonProperty(PropertyName = "baseattributename")]
-        public string Baseattributename { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who last
-        /// modified the duplicate rule condition.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets field that is being compared with the base field.
-        /// </summary>
-        [JsonProperty(PropertyName = "matchingattributename")]
-        public string Matchingattributename { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the object with which the
-        /// condition is associated.
-        /// </summary>
-        [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public string _regardingobjectidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who owns the condition.
-        /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public string Owninguser { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the condition was last modified.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the condition was created.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// duplicate rule condition.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets determines whether to consider blank values as
-        /// non-duplicate values
-        /// </summary>
-        [JsonProperty(PropertyName = "ignoreblankvalues")]
-        public bool? Ignoreblankvalues { get; set; }
-
-        /// <summary>
-        /// Gets or sets parameter value of N if the operator is Same First
-        /// Characters or Same Last Characters.
-        /// </summary>
-        [JsonProperty(PropertyName = "operatorparam")]
-        public int? Operatorparam { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the business unit that owns the
-        /// condition.
-        /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public string Owningbusinessunit { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the condition.
         /// </summary>
         [JsonProperty(PropertyName = "duplicateruleconditionid")]
         public string Duplicateruleconditionid { get; set; }
 
         /// <summary>
-        /// Gets or sets operator for this rule condition.
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public string Owningbusinessunit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public string Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ignoreblankvalues")]
+        public bool? Ignoreblankvalues { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "baseattributename")]
+        public string Baseattributename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "operatorcode")]
         public int? Operatorcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "operatorparam")]
+        public int? Operatorparam { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_regardingobjectid_value")]
+        public string _regardingobjectidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "matchingattributename")]
+        public string Matchingattributename { get; set; }
 
         /// <summary>
         /// </summary>

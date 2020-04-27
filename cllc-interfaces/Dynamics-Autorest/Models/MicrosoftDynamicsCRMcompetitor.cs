@@ -31,278 +31,99 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcompetitor
         /// class.
         /// </summary>
-        /// <param name="tickersymbol">Type the stock exchange symbol for the
-        /// competitor to track financial performance of the company. You can
-        /// click the code entered in this field to access the latest trading
-        /// information from MSN Money.</param>
-        /// <param name="address2Addresstypecode">Select the secondary address
-        /// type.</param>
-        /// <param name="address2Addressid">Unique identifier for address
-        /// 2.</param>
-        /// <param name="address2Shippingmethodcode">Select a shipping method
-        /// for deliveries sent to this address.</param>
-        /// <param name="address1Postalcode">Type the ZIP Code or postal code
-        /// for the primary address.</param>
-        /// <param name="address2Latitude">Type the latitude value for the
-        /// secondary address for use in mapping and other
-        /// applications.</param>
-        /// <param name="address2Upszone">Type the UPS zone of the secondary
-        /// address to make sure shipping charges are calculated correctly and
-        /// deliveries are made promptly , if shipped by UPS.</param>
-        /// <param name="address1Fax">Type the fax number associated with the
-        /// primary address.</param>
-        /// <param name="opportunities">Type notes or other information about
-        /// the competitive opportunities or selling points you can
-        /// make.</param>
-        /// <param name="reportedrevenue">Type the amount of revenue reported
-        /// in the competitor's annual report or other source.</param>
-        /// <param name="address1Telephone1">Type the main phone number
-        /// associated with the primary address.</param>
-        /// <param name="address1Stateorprovince">Type the state or province of
-        /// the primary address.</param>
-        /// <param name="competitorid">Unique identifier of the
-        /// competitor.</param>
-        /// <param name="address1Name">Type a descriptive name for the primary
-        /// address, such as Corporate Headquarters.</param>
-        /// <param name="_createdbyValue">Shows who created the record.</param>
-        /// <param name="address1Country">Type the country or region for the
-        /// primary address.</param>
-        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
-        /// record on behalf of another user.</param>
-        /// <param name="address2Postalcode">Type the ZIP Code or postal code
-        /// for the secondary address.</param>
-        /// <param name="stageid">Shows the ID of the stage.</param>
-        /// <param name="address2Name">Type a descriptive name for the
-        /// secondary address, such as Corporate Headquarters.</param>
-        /// <param name="weaknesses">Type notes or other information about the
-        /// competitor's weaknesses or areas in which your organization
-        /// outperforms the competitor.</param>
-        /// <param name="strengths">Type notes or other information about the
-        /// competitor's strengths, such as top-selling products and targeted
-        /// industries or markets.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="address1Telephone3">Type a third phone number
-        /// associated with the primary address.</param>
-        /// <param name="address2Country">Type the country or region for the
-        /// secondary address.</param>
-        /// <param name="entityimage">Shows the default image for the
-        /// record.</param>
-        /// <param name="address1Line1">Type the first line of the primary
-        /// address.</param>
-        /// <param name="name">Type the company or business name used to
-        /// identify the competitor in data views and related records.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="winpercentage">Type the percentage of your
-        /// organization's lost opportunities that are won by the competitor to
-        /// identify your strongest competitors.</param>
-        /// <param name="address2County">Type the county for the secondary
-        /// address.</param>
-        /// <param name="reportingyear">Type the fiscal year during which the
-        /// competitor's reported revenue was announced for use in reporting
-        /// and analysis.</param>
-        /// <param name="address1City">Type the city for the primary
-        /// address.</param>
-        /// <param name="entityimageid">For internal use only.</param>
-        /// <param name="address1Upszone">Type the UPS zone of the primary
-        /// address to make sure shipping charges are calculated correctly and
-        /// deliveries are made promptly, if shipped by UPS.</param>
-        /// <param name="address1Shippingmethodcode">Select a shipping method
-        /// for deliveries sent to this address.</param>
-        /// <param name="address1Line3">Type the third line of the primary
-        /// address.</param>
-        /// <param name="reportingquarter">Type the quarter number during which
-        /// the competitor's reported revenue was recorded or announced for use
-        /// in reporting and analysis.</param>
-        /// <param name="address2Telephone1">Type the main phone number
-        /// associated with the secondary address.</param>
-        /// <param name="address2City">Type the city for the secondary
-        /// address.</param>
-        /// <param name="address2Line2">Type the second line of the secondary
-        /// address.</param>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="address1Addresstypecode">Select the primary address
-        /// type.</param>
-        /// <param name="createdon">Shows the date and time when the record was
-        /// created. The date and time are displayed in the time zone selected
-        /// in Microsoft Dynamics 365 options.</param>
-        /// <param name="address2Utcoffset">Select the time zone, or UTC
-        /// offset, for this address so that other people can reference it when
-        /// they contact someone at this address.</param>
-        /// <param name="processid">Shows the ID of the process.</param>
-        /// <param name="websiteurl">Type the website URL for the
-        /// competitor.</param>
-        /// <param name="modifiedon">Shows the date and time when the record
-        /// was last updated. The date and time are displayed in the time zone
-        /// selected in Microsoft Dynamics 365 options.</param>
-        /// <param name="exchangerate">Shows the conversion rate of the
-        /// record's currency. The exchange rate is used to convert all money
-        /// fields in the record from the local currency to the system's
-        /// default currency.</param>
-        /// <param name="_transactioncurrencyidValue">Choose the local currency
-        /// for the record to make sure budgets are reported in the correct
-        /// currency.</param>
-        /// <param name="traversedpath">For internal use only.</param>
-        /// <param name="referenceinfourl">Type the URL for the website used to
-        /// obtain reference information about the competitor.</param>
-        /// <param name="address1Postofficebox">Type the post office box number
-        /// of the primary address.</param>
-        /// <param name="address2Line3">Type the third line of the secondary
-        /// address.</param>
-        /// <param name="address1Latitude">Type the latitude value for the
-        /// primary address for use in mapping and other applications.</param>
-        /// <param name="address1Telephone2">Type a second phone number
-        /// associated with the primary address.</param>
-        /// <param name="threats">Type notes or other information about the
-        /// competitor's threats to your organization when you sell to the same
-        /// prospect or customer.</param>
-        /// <param name="reportedrevenueBase">Shows the Reported Revenue field
-        /// converted to the system's default base currency for reporting
-        /// purposes. The calculations use the exchange rate specified in the
-        /// Currencies area.</param>
-        /// <param name="address2Telephone2">Type a second phone number
-        /// associated with the secondary address.</param>
-        /// <param name="address2Telephone3">Type a third phone number
-        /// associated with the secondary address.</param>
-        /// <param name="address1Addressid">Unique identifier for address
-        /// 1.</param>
-        /// <param name="stockexchange">Type the stock exchange at which the
-        /// competitor is listed to track their stock and financial performance
-        /// of the company.</param>
-        /// <param name="address1Composite">Shows the complete primary
-        /// address.</param>
-        /// <param name="address1County">Type the county for the primary
-        /// address.</param>
-        /// <param name="keyproduct">Type the competitor's primary product,
-        /// service, or specialty.</param>
-        /// <param name="address2Longitude">Type the longitude value for the
-        /// secondary address for use in mapping and other
-        /// applications.</param>
-        /// <param name="address2Fax">Type the fax number associated with the
-        /// secondary address.</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="address1Line2">Type the second line of the primary
-        /// address.</param>
-        /// <param name="address1Utcoffset">Select the time zone, or UTC
-        /// offset, for this address so that other people can reference it when
-        /// they contact someone at this address.</param>
-        /// <param name="address2Stateorprovince">Type the state or province of
-        /// the secondary address.</param>
-        /// <param name="_organizationidValue">Unique identifier of the
-        /// associated organization.</param>
-        /// <param name="_createdonbehalfbyValue">Shows who created the record
-        /// on behalf of another user.</param>
-        /// <param name="address2Line1">Type the first line of the secondary
-        /// address.</param>
-        /// <param name="address2Postofficebox">Type the post office box number
-        /// of the secondary address.</param>
-        /// <param name="versionnumber">Version number of the
-        /// competitor.</param>
-        /// <param name="overview">Type notes or other information about the
-        /// competitor's business, such as location, revenue, or distribution
-        /// channel.</param>
-        /// <param name="address2Composite">Shows the complete secondary
-        /// address.</param>
-        /// <param name="yominame">Type the phonetic spelling of the
-        /// competitor's name, if specified in Japanese, to make sure the name
-        /// is pronounced correctly in phone calls and other
-        /// communications.</param>
-        /// <param name="_modifiedbyValue">Shows who last updated the
-        /// record.</param>
-        /// <param name="address1Longitude">Type the longitude value for the
-        /// primary address for use in mapping and other applications.</param>
-        public MicrosoftDynamicsCRMcompetitor(string tickersymbol = default(string), int? address2Addresstypecode = default(int?), string address2Addressid = default(string), int? address2Shippingmethodcode = default(int?), string address1Postalcode = default(string), decimal? address2Latitude = default(decimal?), string address2Upszone = default(string), string address1Fax = default(string), string opportunities = default(string), decimal? reportedrevenue = default(decimal?), string address1Telephone1 = default(string), string address1Stateorprovince = default(string), string competitorid = default(string), string address1Name = default(string), string _createdbyValue = default(string), string address1Country = default(string), string _modifiedonbehalfbyValue = default(string), string address2Postalcode = default(string), string stageid = default(string), string address2Name = default(string), string weaknesses = default(string), string strengths = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string address1Telephone3 = default(string), string address2Country = default(string), byte[] entityimage = default(byte[]), string address1Line1 = default(string), string name = default(string), int? utcconversiontimezonecode = default(int?), decimal? winpercentage = default(decimal?), string address2County = default(string), int? reportingyear = default(int?), string address1City = default(string), string entityimageid = default(string), string address1Upszone = default(string), int? address1Shippingmethodcode = default(int?), string address1Line3 = default(string), int? reportingquarter = default(int?), string address2Telephone1 = default(string), long? entityimageTimestamp = default(long?), string address2City = default(string), string address2Line2 = default(string), int? importsequencenumber = default(int?), int? address1Addresstypecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? address2Utcoffset = default(int?), string processid = default(string), string websiteurl = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? exchangerate = default(decimal?), string _transactioncurrencyidValue = default(string), string traversedpath = default(string), string referenceinfourl = default(string), string address1Postofficebox = default(string), string address2Line3 = default(string), decimal? address1Latitude = default(decimal?), string address1Telephone2 = default(string), string threats = default(string), decimal? reportedrevenueBase = default(decimal?), string address2Telephone2 = default(string), string address2Telephone3 = default(string), string address1Addressid = default(string), string stockexchange = default(string), string address1Composite = default(string), string address1County = default(string), string keyproduct = default(string), decimal? address2Longitude = default(decimal?), string address2Fax = default(string), int? timezoneruleversionnumber = default(int?), string address1Line2 = default(string), int? address1Utcoffset = default(int?), string address2Stateorprovince = default(string), string entityimageUrl = default(string), string _organizationidValue = default(string), string _createdonbehalfbyValue = default(string), string address2Line1 = default(string), string address2Postofficebox = default(string), string versionnumber = default(string), string overview = default(string), string address2Composite = default(string), string yominame = default(string), string _modifiedbyValue = default(string), decimal? address1Longitude = default(decimal?), IList<MicrosoftDynamicsCRMlead> leadcompetitorsAssociation = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMsalesliterature> competitorsalesliteratureAssociation = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMproduct> competitorproductAssociation = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMopportunity> opportunitycompetitorsAssociation = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMsyncerror> competitorSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> competitorDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMconnection> competitorConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMannotation> competitorAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMconnection> competitorConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMcompetitoraddress> competitorAddresses = default(IList<MicrosoftDynamicsCRMcompetitoraddress>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> competitorAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMopportunityclose> competitorOpportunityActivities = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMduplicaterecord> competitorDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMbulkdeletefailure> competitorBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMpostregarding> competitorPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMpostfollow> competitorPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>))
+        public MicrosoftDynamicsCRMcompetitor(string address2City = default(string), string _transactioncurrencyidValue = default(string), int? address2Shippingmethodcode = default(int?), int? reportingyear = default(int?), string address1Telephone2 = default(string), string weaknesses = default(string), string yominame = default(string), string _modifiedbyValue = default(string), string entityimageUrl = default(string), string name = default(string), string address1Postalcode = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string address1Postofficebox = default(string), int? address2Utcoffset = default(int?), int? reportingquarter = default(int?), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), string address1Composite = default(string), string address2Upszone = default(string), decimal? exchangerate = default(decimal?), string _modifiedonbehalfbyValue = default(string), long? entityimageTimestamp = default(long?), string address2Line3 = default(string), string threats = default(string), string address1Telephone3 = default(string), string address2Postalcode = default(string), string keyproduct = default(string), string competitorid = default(string), string address2Name = default(string), decimal? address2Latitude = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? address2Longitude = default(decimal?), int? address1Utcoffset = default(int?), string address1City = default(string), string _organizationidValue = default(string), string address2Addressid = default(string), decimal? reportedrevenueBase = default(decimal?), string address1Stateorprovince = default(string), string stockexchange = default(string), int? address1Addresstypecode = default(int?), string address1Upszone = default(string), decimal? winpercentage = default(decimal?), string address2Stateorprovince = default(string), string versionnumber = default(string), string address2Postofficebox = default(string), string opportunities = default(string), byte[] entityimage = default(byte[]), string address1Telephone1 = default(string), string address1County = default(string), string tickersymbol = default(string), string address1Line2 = default(string), string address2Telephone1 = default(string), string address2Composite = default(string), string address1Name = default(string), string address2Telephone3 = default(string), string entityimageid = default(string), string strengths = default(string), string address1Line3 = default(string), string address2Fax = default(string), decimal? reportedrevenue = default(decimal?), int? utcconversiontimezonecode = default(int?), string stageid = default(string), string websiteurl = default(string), string address1Fax = default(string), string overview = default(string), int? importsequencenumber = default(int?), string address1Country = default(string), decimal? address1Latitude = default(decimal?), string address1Addressid = default(string), int? address2Addresstypecode = default(int?), decimal? address1Longitude = default(decimal?), int? timezoneruleversionnumber = default(int?), string traversedpath = default(string), string address2Telephone2 = default(string), string address2County = default(string), string address2Country = default(string), string address2Line1 = default(string), string referenceinfourl = default(string), string address2Line2 = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? address1Shippingmethodcode = default(int?), string address1Line1 = default(string), string processid = default(string), IList<MicrosoftDynamicsCRMlead> leadcompetitorsAssociation = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMsalesliterature> competitorsalesliteratureAssociation = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMproduct> competitorproductAssociation = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMopportunity> opportunitycompetitorsAssociation = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMpostregarding> competitorPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMpostfollow> competitorPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMteam> competitorTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> competitorMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMsyncerror> competitorSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> competitorDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMconnection> competitorConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> competitorPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> competitorAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMconnection> competitorConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMcompetitoraddress> competitorAddresses = default(IList<MicrosoftDynamicsCRMcompetitoraddress>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> competitorAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMopportunityclose> competitorOpportunityActivities = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMduplicaterecord> competitorDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMbulkdeletefailure> competitorBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprocesssession> competitorProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            Tickersymbol = tickersymbol;
-            Address2Addresstypecode = address2Addresstypecode;
-            Address2Addressid = address2Addressid;
-            Address2Shippingmethodcode = address2Shippingmethodcode;
-            Address1Postalcode = address1Postalcode;
-            Address2Latitude = address2Latitude;
-            Address2Upszone = address2Upszone;
-            Address1Fax = address1Fax;
-            Opportunities = opportunities;
-            Reportedrevenue = reportedrevenue;
-            Address1Telephone1 = address1Telephone1;
-            Address1Stateorprovince = address1Stateorprovince;
-            Competitorid = competitorid;
-            Address1Name = address1Name;
-            this._createdbyValue = _createdbyValue;
-            Address1Country = address1Country;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Address2Postalcode = address2Postalcode;
-            Stageid = stageid;
-            Address2Name = address2Name;
-            Weaknesses = weaknesses;
-            Strengths = strengths;
-            Overriddencreatedon = overriddencreatedon;
-            Address1Telephone3 = address1Telephone3;
-            Address2Country = address2Country;
-            Entityimage = entityimage;
-            Address1Line1 = address1Line1;
-            Name = name;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Winpercentage = winpercentage;
-            Address2County = address2County;
-            Reportingyear = reportingyear;
-            Address1City = address1City;
-            Entityimageid = entityimageid;
-            Address1Upszone = address1Upszone;
-            Address1Shippingmethodcode = address1Shippingmethodcode;
-            Address1Line3 = address1Line3;
-            Reportingquarter = reportingquarter;
-            Address2Telephone1 = address2Telephone1;
-            EntityimageTimestamp = entityimageTimestamp;
             Address2City = address2City;
-            Address2Line2 = address2Line2;
-            Importsequencenumber = importsequencenumber;
-            Address1Addresstypecode = address1Addresstypecode;
-            Createdon = createdon;
-            Address2Utcoffset = address2Utcoffset;
-            Processid = processid;
-            Websiteurl = websiteurl;
-            Modifiedon = modifiedon;
-            Exchangerate = exchangerate;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Traversedpath = traversedpath;
-            Referenceinfourl = referenceinfourl;
-            Address1Postofficebox = address1Postofficebox;
-            Address2Line3 = address2Line3;
-            Address1Latitude = address1Latitude;
+            Address2Shippingmethodcode = address2Shippingmethodcode;
+            Reportingyear = reportingyear;
             Address1Telephone2 = address1Telephone2;
-            Threats = threats;
-            ReportedrevenueBase = reportedrevenueBase;
-            Address2Telephone2 = address2Telephone2;
-            Address2Telephone3 = address2Telephone3;
-            Address1Addressid = address1Addressid;
-            Stockexchange = stockexchange;
-            Address1Composite = address1Composite;
-            Address1County = address1County;
-            Keyproduct = keyproduct;
-            Address2Longitude = address2Longitude;
-            Address2Fax = address2Fax;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Address1Line2 = address1Line2;
-            Address1Utcoffset = address1Utcoffset;
-            Address2Stateorprovince = address2Stateorprovince;
-            EntityimageUrl = entityimageUrl;
-            this._organizationidValue = _organizationidValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Address2Line1 = address2Line1;
-            Address2Postofficebox = address2Postofficebox;
-            Versionnumber = versionnumber;
-            Overview = overview;
-            Address2Composite = address2Composite;
+            Weaknesses = weaknesses;
             Yominame = yominame;
             this._modifiedbyValue = _modifiedbyValue;
+            EntityimageUrl = entityimageUrl;
+            Name = name;
+            Address1Postalcode = address1Postalcode;
+            Overriddencreatedon = overriddencreatedon;
+            Address1Postofficebox = address1Postofficebox;
+            Address2Utcoffset = address2Utcoffset;
+            Reportingquarter = reportingquarter;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._createdbyValue = _createdbyValue;
+            Address1Composite = address1Composite;
+            Address2Upszone = address2Upszone;
+            Exchangerate = exchangerate;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            EntityimageTimestamp = entityimageTimestamp;
+            Address2Line3 = address2Line3;
+            Threats = threats;
+            Address1Telephone3 = address1Telephone3;
+            Address2Postalcode = address2Postalcode;
+            Keyproduct = keyproduct;
+            Competitorid = competitorid;
+            Address2Name = address2Name;
+            Address2Latitude = address2Latitude;
+            Modifiedon = modifiedon;
+            Address2Longitude = address2Longitude;
+            Address1Utcoffset = address1Utcoffset;
+            Address1City = address1City;
+            this._organizationidValue = _organizationidValue;
+            Address2Addressid = address2Addressid;
+            ReportedrevenueBase = reportedrevenueBase;
+            Address1Stateorprovince = address1Stateorprovince;
+            Stockexchange = stockexchange;
+            Address1Addresstypecode = address1Addresstypecode;
+            Address1Upszone = address1Upszone;
+            Winpercentage = winpercentage;
+            Address2Stateorprovince = address2Stateorprovince;
+            Versionnumber = versionnumber;
+            Address2Postofficebox = address2Postofficebox;
+            Opportunities = opportunities;
+            Entityimage = entityimage;
+            Address1Telephone1 = address1Telephone1;
+            Address1County = address1County;
+            Tickersymbol = tickersymbol;
+            Address1Line2 = address1Line2;
+            Address2Telephone1 = address2Telephone1;
+            Address2Composite = address2Composite;
+            Address1Name = address1Name;
+            Address2Telephone3 = address2Telephone3;
+            Entityimageid = entityimageid;
+            Strengths = strengths;
+            Address1Line3 = address1Line3;
+            Address2Fax = address2Fax;
+            Reportedrevenue = reportedrevenue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Stageid = stageid;
+            Websiteurl = websiteurl;
+            Address1Fax = address1Fax;
+            Overview = overview;
+            Importsequencenumber = importsequencenumber;
+            Address1Country = address1Country;
+            Address1Latitude = address1Latitude;
+            Address1Addressid = address1Addressid;
+            Address2Addresstypecode = address2Addresstypecode;
             Address1Longitude = address1Longitude;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Traversedpath = traversedpath;
+            Address2Telephone2 = address2Telephone2;
+            Address2County = address2County;
+            Address2Country = address2Country;
+            Address2Line1 = address2Line1;
+            Referenceinfourl = referenceinfourl;
+            Address2Line2 = address2Line2;
+            Createdon = createdon;
+            Address1Shippingmethodcode = address1Shippingmethodcode;
+            Address1Line1 = address1Line1;
+            Processid = processid;
             LeadcompetitorsAssociation = leadcompetitorsAssociation;
             CompetitorsalesliteratureAssociation = competitorsalesliteratureAssociation;
             CompetitorproductAssociation = competitorproductAssociation;
             OpportunitycompetitorsAssociation = opportunitycompetitorsAssociation;
+            CompetitorPostRegardings = competitorPostRegardings;
+            CompetitorPostFollows = competitorPostFollows;
+            CompetitorTeams = competitorTeams;
+            CompetitorMailboxTrackingFolders = competitorMailboxTrackingFolders;
             CompetitorSyncErrors = competitorSyncErrors;
             Modifiedby = modifiedby;
             Createdby = createdby;
@@ -310,6 +131,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             StageidProcessstage = stageidProcessstage;
             CompetitorConnections2 = competitorConnections2;
             Transactioncurrencyid = transactioncurrencyid;
+            CompetitorPrincipalobjectattributeaccess = competitorPrincipalobjectattributeaccess;
             CompetitorAnnotation = competitorAnnotation;
             CompetitorConnections1 = competitorConnections1;
             CompetitorAddresses = competitorAddresses;
@@ -319,9 +141,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             CompetitorOpportunityActivities = competitorOpportunityActivities;
             CompetitorDuplicateMatchingRecord = competitorDuplicateMatchingRecord;
             CompetitorBulkDeleteFailures = competitorBulkDeleteFailures;
+            CompetitorProcessSessions = competitorProcessSessions;
             Createdonbehalfby = createdonbehalfby;
-            CompetitorPostRegardings = competitorPostRegardings;
-            CompetitorPostFollows = competitorPostFollows;
             CustomInit();
         }
 
@@ -331,496 +152,44 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets type the stock exchange symbol for the competitor to
-        /// track financial performance of the company. You can click the code
-        /// entered in this field to access the latest trading information from
-        /// MSN Money.
-        /// </summary>
-        [JsonProperty(PropertyName = "tickersymbol")]
-        public string Tickersymbol { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the secondary address type.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_addresstypecode")]
-        public int? Address2Addresstypecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for address 2.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_addressid")]
-        public string Address2Addressid { get; set; }
-
-        /// <summary>
-        /// Gets or sets select a shipping method for deliveries sent to this
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_shippingmethodcode")]
-        public int? Address2Shippingmethodcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the ZIP Code or postal code for the primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_postalcode")]
-        public string Address1Postalcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the latitude value for the secondary address for
-        /// use in mapping and other applications.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_latitude")]
-        public decimal? Address2Latitude { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the UPS zone of the secondary address to make
-        /// sure shipping charges are calculated correctly and deliveries are
-        /// made promptly , if shipped by UPS.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_upszone")]
-        public string Address2Upszone { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the fax number associated with the primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_fax")]
-        public string Address1Fax { get; set; }
-
-        /// <summary>
-        /// Gets or sets type notes or other information about the competitive
-        /// opportunities or selling points you can make.
-        /// </summary>
-        [JsonProperty(PropertyName = "opportunities")]
-        public string Opportunities { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the amount of revenue reported in the
-        /// competitor's annual report or other source.
-        /// </summary>
-        [JsonProperty(PropertyName = "reportedrevenue")]
-        public decimal? Reportedrevenue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the main phone number associated with the primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_telephone1")]
-        public string Address1Telephone1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the state or province of the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_stateorprovince")]
-        public string Address1Stateorprovince { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the competitor.
-        /// </summary>
-        [JsonProperty(PropertyName = "competitorid")]
-        public string Competitorid { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a descriptive name for the primary address, such
-        /// as Corporate Headquarters.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_name")]
-        public string Address1Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who created the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the country or region for the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_country")]
-        public string Address1Country { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who last updated the record on behalf of another
-        /// user.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the ZIP Code or postal code for the secondary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_postalcode")]
-        public string Address2Postalcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the ID of the stage.
-        /// </summary>
-        [JsonProperty(PropertyName = "stageid")]
-        public string Stageid { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a descriptive name for the secondary address,
-        /// such as Corporate Headquarters.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_name")]
-        public string Address2Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets type notes or other information about the competitor's
-        /// weaknesses or areas in which your organization outperforms the
-        /// competitor.
-        /// </summary>
-        [JsonProperty(PropertyName = "weaknesses")]
-        public string Weaknesses { get; set; }
-
-        /// <summary>
-        /// Gets or sets type notes or other information about the competitor's
-        /// strengths, such as top-selling products and targeted industries or
-        /// markets.
-        /// </summary>
-        [JsonProperty(PropertyName = "strengths")]
-        public string Strengths { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a third phone number associated with the primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_telephone3")]
-        public string Address1Telephone3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the country or region for the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_country")]
-        public string Address2Country { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the default image for the record.
-        /// </summary>
-        [JsonConverter(typeof(Base64UrlJsonConverter))]
-        [JsonProperty(PropertyName = "entityimage")]
-        public byte[] Entityimage { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the first line of the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_line1")]
-        public string Address1Line1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the company or business name used to identify the
-        /// competitor in data views and related records.
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the percentage of your organization's lost
-        /// opportunities that are won by the competitor to identify your
-        /// strongest competitors.
-        /// </summary>
-        [JsonProperty(PropertyName = "winpercentage")]
-        public decimal? Winpercentage { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the county for the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_county")]
-        public string Address2County { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the fiscal year during which the competitor's
-        /// reported revenue was announced for use in reporting and analysis.
-        /// </summary>
-        [JsonProperty(PropertyName = "reportingyear")]
-        public int? Reportingyear { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the city for the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_city")]
-        public string Address1City { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimageid")]
-        public string Entityimageid { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the UPS zone of the primary address to make sure
-        /// shipping charges are calculated correctly and deliveries are made
-        /// promptly, if shipped by UPS.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_upszone")]
-        public string Address1Upszone { get; set; }
-
-        /// <summary>
-        /// Gets or sets select a shipping method for deliveries sent to this
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_shippingmethodcode")]
-        public int? Address1Shippingmethodcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the third line of the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_line3")]
-        public string Address1Line3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the quarter number during which the competitor's
-        /// reported revenue was recorded or announced for use in reporting and
-        /// analysis.
-        /// </summary>
-        [JsonProperty(PropertyName = "reportingquarter")]
-        public int? Reportingquarter { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the main phone number associated with the
-        /// secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_telephone1")]
-        public string Address2Telephone1 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimage_timestamp")]
-        public long? EntityimageTimestamp { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the city for the secondary address.
         /// </summary>
         [JsonProperty(PropertyName = "address2_city")]
         public string Address2City { get; set; }
 
         /// <summary>
-        /// Gets or sets type the second line of the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_line2")]
-        public string Address2Line2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the primary address type.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_addresstypecode")]
-        public int? Address1Addresstypecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time when the record was created.
-        /// The date and time are displayed in the time zone selected in
-        /// Microsoft Dynamics 365 options.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the time zone, or UTC offset, for this address
-        /// so that other people can reference it when they contact someone at
-        /// this address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_utcoffset")]
-        public int? Address2Utcoffset { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the ID of the process.
-        /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the website URL for the competitor.
-        /// </summary>
-        [JsonProperty(PropertyName = "websiteurl")]
-        public string Websiteurl { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time when the record was last
-        /// updated. The date and time are displayed in the time zone selected
-        /// in Microsoft Dynamics 365 options.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the conversion rate of the record's currency.
-        /// The exchange rate is used to convert all money fields in the record
-        /// from the local currency to the system's default currency.
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose the local currency for the record to make sure
-        /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
         public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
         /// </summary>
-        [JsonProperty(PropertyName = "traversedpath")]
-        public string Traversedpath { get; set; }
+        [JsonProperty(PropertyName = "address2_shippingmethodcode")]
+        public int? Address2Shippingmethodcode { get; set; }
 
         /// <summary>
-        /// Gets or sets type the URL for the website used to obtain reference
-        /// information about the competitor.
         /// </summary>
-        [JsonProperty(PropertyName = "referenceinfourl")]
-        public string Referenceinfourl { get; set; }
+        [JsonProperty(PropertyName = "reportingyear")]
+        public int? Reportingyear { get; set; }
 
         /// <summary>
-        /// Gets or sets type the post office box number of the primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_postofficebox")]
-        public string Address1Postofficebox { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the third line of the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_line3")]
-        public string Address2Line3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the latitude value for the primary address for
-        /// use in mapping and other applications.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_latitude")]
-        public decimal? Address1Latitude { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a second phone number associated with the primary
-        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "address1_telephone2")]
         public string Address1Telephone2 { get; set; }
 
         /// <summary>
-        /// Gets or sets type notes or other information about the competitor's
-        /// threats to your organization when you sell to the same prospect or
-        /// customer.
         /// </summary>
-        [JsonProperty(PropertyName = "threats")]
-        public string Threats { get; set; }
+        [JsonProperty(PropertyName = "weaknesses")]
+        public string Weaknesses { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the Reported Revenue field converted to the
-        /// system's default base currency for reporting purposes. The
-        /// calculations use the exchange rate specified in the Currencies
-        /// area.
         /// </summary>
-        [JsonProperty(PropertyName = "reportedrevenue_base")]
-        public decimal? ReportedrevenueBase { get; set; }
+        [JsonProperty(PropertyName = "yominame")]
+        public string Yominame { get; set; }
 
         /// <summary>
-        /// Gets or sets type a second phone number associated with the
-        /// secondary address.
         /// </summary>
-        [JsonProperty(PropertyName = "address2_telephone2")]
-        public string Address2Telephone2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a third phone number associated with the
-        /// secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_telephone3")]
-        public string Address2Telephone3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for address 1.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_addressid")]
-        public string Address1Addressid { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the stock exchange at which the competitor is
-        /// listed to track their stock and financial performance of the
-        /// company.
-        /// </summary>
-        [JsonProperty(PropertyName = "stockexchange")]
-        public string Stockexchange { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the complete primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_composite")]
-        public string Address1Composite { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the county for the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_county")]
-        public string Address1County { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the competitor's primary product, service, or
-        /// specialty.
-        /// </summary>
-        [JsonProperty(PropertyName = "keyproduct")]
-        public string Keyproduct { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the longitude value for the secondary address for
-        /// use in mapping and other applications.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_longitude")]
-        public decimal? Address2Longitude { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the fax number associated with the secondary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_fax")]
-        public string Address2Fax { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the second line of the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_line2")]
-        public string Address1Line2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the time zone, or UTC offset, for this address
-        /// so that other people can reference it when they contact someone at
-        /// this address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_utcoffset")]
-        public int? Address1Utcoffset { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the state or province of the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_stateorprovince")]
-        public string Address2Stateorprovince { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -828,70 +197,375 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string EntityimageUrl { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the associated organization.
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets shows who created the record on behalf of another
-        /// user.
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_postalcode")]
+        public string Address1Postalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_postofficebox")]
+        public string Address1Postofficebox { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_utcoffset")]
+        public int? Address2Utcoffset { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "reportingquarter")]
+        public int? Reportingquarter { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets type the first line of the secondary address.
         /// </summary>
-        [JsonProperty(PropertyName = "address2_line1")]
-        public string Address2Line1 { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets type the post office box number of the secondary
-        /// address.
         /// </summary>
-        [JsonProperty(PropertyName = "address2_postofficebox")]
-        public string Address2Postofficebox { get; set; }
+        [JsonProperty(PropertyName = "address1_composite")]
+        public string Address1Composite { get; set; }
 
         /// <summary>
-        /// Gets or sets version number of the competitor.
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_upszone")]
+        public string Address2Upszone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimage_timestamp")]
+        public long? EntityimageTimestamp { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_line3")]
+        public string Address2Line3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "threats")]
+        public string Threats { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_telephone3")]
+        public string Address1Telephone3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_postalcode")]
+        public string Address2Postalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "keyproduct")]
+        public string Keyproduct { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "competitorid")]
+        public string Competitorid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_name")]
+        public string Address2Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_latitude")]
+        public decimal? Address2Latitude { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_longitude")]
+        public decimal? Address2Longitude { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_utcoffset")]
+        public int? Address1Utcoffset { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_city")]
+        public string Address1City { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_addressid")]
+        public string Address2Addressid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "reportedrevenue_base")]
+        public decimal? ReportedrevenueBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_stateorprovince")]
+        public string Address1Stateorprovince { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "stockexchange")]
+        public string Stockexchange { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_addresstypecode")]
+        public int? Address1Addresstypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_upszone")]
+        public string Address1Upszone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "winpercentage")]
+        public decimal? Winpercentage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_stateorprovince")]
+        public string Address2Stateorprovince { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets type notes or other information about the competitor's
-        /// business, such as location, revenue, or distribution channel.
         /// </summary>
-        [JsonProperty(PropertyName = "overview")]
-        public string Overview { get; set; }
+        [JsonProperty(PropertyName = "address2_postofficebox")]
+        public string Address2Postofficebox { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the complete secondary address.
+        /// </summary>
+        [JsonProperty(PropertyName = "opportunities")]
+        public string Opportunities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
+        [JsonProperty(PropertyName = "entityimage")]
+        public byte[] Entityimage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_telephone1")]
+        public string Address1Telephone1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_county")]
+        public string Address1County { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "tickersymbol")]
+        public string Tickersymbol { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_line2")]
+        public string Address1Line2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_telephone1")]
+        public string Address2Telephone1 { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "address2_composite")]
         public string Address2Composite { get; set; }
 
         /// <summary>
-        /// Gets or sets type the phonetic spelling of the competitor's name,
-        /// if specified in Japanese, to make sure the name is pronounced
-        /// correctly in phone calls and other communications.
         /// </summary>
-        [JsonProperty(PropertyName = "yominame")]
-        public string Yominame { get; set; }
+        [JsonProperty(PropertyName = "address1_name")]
+        public string Address1Name { get; set; }
 
         /// <summary>
-        /// Gets or sets shows who last updated the record.
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "address2_telephone3")]
+        public string Address2Telephone3 { get; set; }
 
         /// <summary>
-        /// Gets or sets type the longitude value for the primary address for
-        /// use in mapping and other applications.
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimageid")]
+        public string Entityimageid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "strengths")]
+        public string Strengths { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_line3")]
+        public string Address1Line3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_fax")]
+        public string Address2Fax { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "reportedrevenue")]
+        public decimal? Reportedrevenue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "stageid")]
+        public string Stageid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "websiteurl")]
+        public string Websiteurl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_fax")]
+        public string Address1Fax { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overview")]
+        public string Overview { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_country")]
+        public string Address1Country { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_latitude")]
+        public decimal? Address1Latitude { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_addressid")]
+        public string Address1Addressid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_addresstypecode")]
+        public int? Address2Addresstypecode { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "address1_longitude")]
         public decimal? Address1Longitude { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "traversedpath")]
+        public string Traversedpath { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_telephone2")]
+        public string Address2Telephone2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_county")]
+        public string Address2County { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_country")]
+        public string Address2Country { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_line1")]
+        public string Address2Line1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "referenceinfourl")]
+        public string Referenceinfourl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_line2")]
+        public string Address2Line2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_shippingmethodcode")]
+        public int? Address1Shippingmethodcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_line1")]
+        public string Address1Line1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -912,6 +586,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "opportunitycompetitors_association")]
         public IList<MicrosoftDynamicsCRMopportunity> OpportunitycompetitorsAssociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "competitor_PostRegardings")]
+        public IList<MicrosoftDynamicsCRMpostregarding> CompetitorPostRegardings { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "competitor_PostFollows")]
+        public IList<MicrosoftDynamicsCRMpostfollow> CompetitorPostFollows { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "competitor_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> CompetitorTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "competitor_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> CompetitorMailboxTrackingFolders { get; set; }
 
         /// <summary>
         /// </summary>
@@ -947,6 +641,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "transactioncurrencyid")]
         public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "competitor_principalobjectattributeaccess")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> CompetitorPrincipalobjectattributeaccess { get; set; }
 
         /// <summary>
         /// </summary>
@@ -995,18 +694,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "Competitor_ProcessSessions")]
+        public IList<MicrosoftDynamicsCRMprocesssession> CompetitorProcessSessions { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdonbehalfby")]
         public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "competitor_PostRegardings")]
-        public IList<MicrosoftDynamicsCRMpostregarding> CompetitorPostRegardings { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "competitor_PostFollows")]
-        public IList<MicrosoftDynamicsCRMpostfollow> CompetitorPostFollows { get; set; }
 
     }
 }

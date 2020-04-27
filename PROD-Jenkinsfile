@@ -1,5 +1,5 @@
-APP_NAME = "cllc-public-prod"
-PROJECT_NAMESPACE = "lclb-cllc"
+APP_NAME = "cllc-public"
+PROJECT_NAMESPACE = "yuumcs"
 
 class AppEnvironment {
   String name
@@ -18,7 +18,9 @@ environments = [
 ARTIFACT_BUILD = APP_NAME
 RUNTIME_CHAINED_BUILD = "${APP_NAME}"
 
-IMAGESTREAM_NAME = "${APP_NAME}"
+IMAGESTREAM_NAME_API = "${APP_NAME}-api"
+IMAGESTREAM_NAME_FRONTEND = "${APP_NAME}-frontend"
+
 
 PATHFINDER_URL = "pathfinder.bcgov"
 
@@ -131,16 +133,8 @@ def notifyError(title, description) {
 }
 
 node('master') {
-	stage('Build') {        
-		echo "Building Application image..."
-		buildAndVerify(ARTIFACT_BUILD)
-		
-		IMAGE_HASH = getLatestHash(IMAGESTREAM_NAME)
-		echo ">> IMAGE_HASH: ${IMAGE_HASH}"
-	  	  
-    }
 	stage('Confirm') {
-		input ("Confirm PROD release")
+		input ("Confirm promote TEST to PROD for release")
 	}
 	/* Deploying to PROD
 		- backing up latest stable deployment
@@ -149,13 +143,16 @@ node('master') {
 	*/
 	stage("Deploy to ${environments.prod.name}") {            
 	  def environment = environments.prod.tag
-	  def stableTag = environments.prod.previousTag
-	  node {
+    def sourceTag = environments.test.tag
+	  def stableTag = environments.prod.previousTag	  
 		try {
 		  // hold on to a copy of the last stable DEV environment (in case the upcoming deployment fails...)
-		  IMAGE_HASH = getLatestHash(IMAGESTREAM_NAME)
-		  tagLatestStable(environment, stableTag, IMAGESTREAM_NAME)		  
-		  deployAndVerify(IMAGE_HASH, environment, IMAGESTREAM_NAME)
+		  
+		  tagLatestStable(environment, stableTag, IMAGESTREAM_NAME_API)		  
+		  deployAndVerify(sourceTag, environment, IMAGESTREAM_NAME_API)
+
+      tagLatestStable(environment, stableTag, IMAGESTREAM_NAME_FRONTEND)		  
+		  deployAndVerify(sourceTag, environment, IMAGESTREAM_NAME_FRONTEND)
 		  // all is good!
 		  notifyGood(
 			"New ${APP_NAME} in ${environment} :)",
@@ -167,8 +164,7 @@ node('master') {
 			"Error: '${error.message}'"
 		  )
 		  throw error
-		}
-	  }
+		}	  
    }	
 }
 
