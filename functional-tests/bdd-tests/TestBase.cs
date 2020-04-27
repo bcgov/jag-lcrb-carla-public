@@ -246,7 +246,8 @@ namespace bdd_tests
                 }
                 else
                 {
-                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[25]"));
+                    //NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[25]"));
+                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[39]"));
                     uiNameAndLocation.SendKeys(nameAndLocation);
                 }       
             }
@@ -314,7 +315,8 @@ namespace bdd_tests
                 }
                 else
                 {
-                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[27]"));
+                    //NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[27]"));
+                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[41]"));
                     uiNameAndLocation2.SendKeys(nameAndLocation2);
                 }
             }
@@ -725,15 +727,38 @@ namespace bdd_tests
                 uiCorpContactEmail.SendKeys(corpContactEmail);
             }
 
-            // select 'No' for connection to a federal producer
+            /*// select 'No' for connection to a federal producer - switched off to test text areas
             NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
+            corpConnectionFederalProducer.Click();*/
+
+            // select 'Yes' for connection to a federal producer
+            NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[1]"));
             corpConnectionFederalProducer.Click();
 
-            // select 'No' for federal producer's connection to business
+            // enter the name of the federal producer and details of the connection 
+            string nameAndDetails = "Name and details of federal producer (automated test).";
+
+            NgWebElement uiDetailsFederalProducer = ngDriver.FindElement(By.XPath("//textarea"));
+            uiDetailsFederalProducer.SendKeys(nameAndDetails);
+
+            /*// select 'No' for federal producer's connection to business - switched off to test text areas
             if ((businessTypeShared != "indigenous nation") && (businessTypeShared != "society"))
             {
                 NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
                 federalProducerConnectionToCorp.Click();
+            }*/
+
+            // select 'Yes' for federal producer's connection to business
+            if ((businessTypeShared != "indigenous nation") && (businessTypeShared != "society"))
+            {
+            NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[3]"));
+            federalProducerConnectionToCorp.Click();
+                
+            // enter the name of the federal producer and details of the connection 
+            string nameAndDetails2 = "Name and details of federal producer (automated test) (2).";
+
+            NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.XPath("(//textarea[@id=''])[2]"));
+            uiDetailsFederalProducer2.SendKeys(nameAndDetails2);
             }
 
             // click on Continue to Organization Review button
