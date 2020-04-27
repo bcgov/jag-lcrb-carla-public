@@ -303,6 +303,37 @@ namespace Gov.Lclb.Cllb.Interfaces
             return licences;
         }
 
+        public static IEnumerable<MicrosoftDynamicsCRMadoxioLicences> GetTransferLicensesByLicencee(this IDynamicsClient _dynamicsClient, IMemoryCache _cache, string licenceeId)
+        {
+            var expand = new List<string> { "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_LicenceType", "adoxio_establishment", "adoxio_ThirdPartyOperatorId" };
+
+            IEnumerable<MicrosoftDynamicsCRMadoxioLicences> licences = null;
+
+            var filter = $"_adoxio_proposedowner_value eq {licenceeId} and adoxio_ownershiptransferinprogress eq 845280001";
+
+            try
+            {
+                licences = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
+                licences = licences
+                    .Where(licence =>
+                    {
+                        return licence.Statuscode != (int)Public.ViewModels.LicenceStatusCodes.Cancelled
+                            && licence.Statuscode != (int)Public.ViewModels.LicenceStatusCodes.Inactive;
+
+                    })
+                    .Select(licence =>
+                    {
+                        licence.AdoxioLicenceType = Gov.Lclb.Cllb.Public.Models.ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
+                        return licence;
+                    });
+            }
+            catch (HttpOperationException)
+            {
+                licences = null;
+            }
+            return licences;
+        }
+
         public static async Task<MicrosoftDynamicsCRMadoxioTiedhouseconnection> GetTiedHouseConnectionById(this IDynamicsClient system, Guid id)
         {
             MicrosoftDynamicsCRMadoxioTiedhouseconnection result;

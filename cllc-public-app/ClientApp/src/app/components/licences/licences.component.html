@@ -82,6 +82,11 @@
                   <span>Operated By:</span>
                   <strong style="color: #1a5a96;">
                     {{item.thirdPartyOperatorAccountName}}</strong>
+                  <br>
+                  <a [routerLink]="[ '/cancel-third-party-operator/' + item.licenseId]" class="missing">
+                    <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>
+                      Terminate Third Party Operator Relationship</span>
+                  </a>
                 </ng-container>
                 <div *ngIf="hasEndorsement('Temporary Off-Site Endorsement', item)">
                   <a [routerLink]="[ '/licence/' + item.licenseId + '/temporary-offsite']">
