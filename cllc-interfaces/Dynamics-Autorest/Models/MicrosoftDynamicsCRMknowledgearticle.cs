@@ -29,187 +29,68 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMknowledgearticle class.
         /// </summary>
-        /// <param name="_owningbusinessunitValue">Unique identifier for the
-        /// business unit that owns the record</param>
-        /// <param name="exchangerate">Exchange rate for the currency
-        /// associated with the KnowledgeArticle with respect to the base
-        /// currency.</param>
-        /// <param name="isinternal">Shows whether this article is only visible
-        /// internally.</param>
-        /// <param name="publishon">Date and time when the record was
-        /// published.</param>
-        /// <param name="setcategoryassociations">Shows whether category
-        /// associations have been set</param>
-        /// <param name="expirationstateid">Contains the id of the expiration
-        /// state of the entity.</param>
-        /// <param name="description">A short overview of the article,
-        /// primarily used in search results and for search engine
-        /// optimization.</param>
-        /// <param name="importsequencenumber">Sequence number of the import
-        /// that created this record.</param>
-        /// <param name="ratingState">State of Rating</param>
-        /// <param name="expiredreviewoptions">Expired Review Options</param>
-        /// <param name="isprimary">Select whether the article is the primary
-        /// article.</param>
-        /// <param name="publishstatusid">Publish Status of the
-        /// Article.</param>
-        /// <param name="setproductassociations">Set Product
-        /// Associations</param>
-        /// <param name="isrootarticle">Select whether the article is the root
-        /// article.</param>
-        /// <param name="ratingCount">Rating Count</param>
-        /// <param name="traversedpath">A comma separated list of string values
-        /// representing the unique identifiers of stages in a Business Process
-        /// Flow Instance in the order that they occur.</param>
-        /// <param name="expirationdate">Enter an expiration date for the
-        /// article. Leave this field blank for no expiration date.</param>
-        /// <param name="_languagelocaleidValue">Select the language that the
-        /// article's content is in.</param>
-        /// <param name="ratingSum">Total sum of Rating</param>
-        /// <param name="_previousarticlecontentidValue">Shows the version that
-        /// the current article was restored from.</param>
-        /// <param name="processid">Contains the id of the process associated
-        /// with the entity.</param>
-        /// <param name="_rootarticleidValue">Contains the id of the root
-        /// article.</param>
-        /// <param name="scheduledstatusid">Contains the id of the scheduled
-        /// status of the entity.</param>
-        /// <param name="islatestversion">Shows which version of the knowledge
-        /// article is the latest version.</param>
-        /// <param name="title">Type a title for the article.</param>
-        /// <param name="_owneridValue">Unique identifier of the user or team
-        /// who owns the record.</param>
-        /// <param name="knowledgearticleviews">Shows the total number of
-        /// article views.</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="statecode">Shows whether the article is a draft or is
-        /// published, archived, or discarded. Draft articles aren't available
-        /// externally and can be edited. Published articles are available
-        /// externally, based on applicable permissions, but can't be edited.
-        /// All metadata changes are reflected in the published version.
-        /// Archived and discarded articles aren't available externally and
-        /// can't be edited.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// modified the record.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="_owninguserValue">Unique identifier for the user that
-        /// owns the record.</param>
-        /// <param name="_owningteamValue">Unique identifier for the team that
-        /// owns the record.</param>
-        /// <param name="articlepublicnumber">Shows the automatically generated
-        /// ID exposed to customers, partners, and other external users to
-        /// reference and look up articles.</param>
-        /// <param name="rating">Information which specifies how helpful the
-        /// related record was.</param>
-        /// <param name="keywords">Type keywords to be used for searches in
-        /// knowledge base articles. Separate keywords by using commas.</param>
-        /// <param name="knowledgearticleviewsState">State of Knowledge Article
-        /// View.</param>
-        /// <param name="modifiedon">Date and time when the record was
-        /// modified.</param>
-        /// <param name="knowledgearticleid">Unique identifier for entity
-        /// instances</param>
-        /// <param name="_primaryauthoridValue">Contains the id of the primary
-        /// author associated with the article.</param>
-        /// <param name="_parentarticlecontentidValue">Contains the id of the
-        /// parent article content associated with the entity.</param>
-        /// <param name="_subjectidValue">Choose the subject of the article to
-        /// assist with article searches. You can configure subjects under
-        /// Business Management in the Settings area.</param>
-        /// <param name="ratingDate">The date time for Rating.</param>
-        /// <param name="knowledgearticleviewsDate">The date time for Knowledge
-        /// Article View.</param>
-        /// <param name="_transactioncurrencyidValue">Exchange rate for the
-        /// currency associated with the KnowledgeArticle with respect to the
-        /// base currency.</param>
-        /// <param name="statuscode">Select the article's status.</param>
-        /// <param name="minorversionnumber">Shows the minor version number of
-        /// this article's content.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the record.</param>
-        /// <param name="majorversionnumber">Shows the major version number of
-        /// this article's content.</param>
-        /// <param name="content">Shows the body of the article stored in HTML
-        /// format.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who modified the record.</param>
-        /// <param name="review">Review</param>
-        /// <param name="updatecontent">Update Content</param>
-        /// <param name="expirationstatusid">Contains the id of the expiration
-        /// status of the entity.</param>
-        /// <param name="createdon">Date and time when the record was
-        /// created.</param>
-        /// <param name="readyforreview">Ready For Review</param>
-        /// <param name="stageid">Contains the id of the stage where the entity
-        /// is located.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the record.</param>
-        public MicrosoftDynamicsCRMknowledgearticle(string _owningbusinessunitValue = default(string), decimal? exchangerate = default(decimal?), bool? isinternal = default(bool?), System.DateTimeOffset? publishon = default(System.DateTimeOffset?), bool? setcategoryassociations = default(bool?), int? expirationstateid = default(int?), string description = default(string), int? importsequencenumber = default(int?), int? ratingState = default(int?), int? expiredreviewoptions = default(int?), bool? isprimary = default(bool?), int? publishstatusid = default(int?), bool? setproductassociations = default(bool?), bool? isrootarticle = default(bool?), int? ratingCount = default(int?), string traversedpath = default(string), System.DateTimeOffset? expirationdate = default(System.DateTimeOffset?), string _languagelocaleidValue = default(string), string versionnumber = default(string), decimal? ratingSum = default(decimal?), string _previousarticlecontentidValue = default(string), string processid = default(string), string _rootarticleidValue = default(string), int? scheduledstatusid = default(int?), bool? islatestversion = default(bool?), string title = default(string), string _owneridValue = default(string), int? knowledgearticleviews = default(int?), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owninguserValue = default(string), string _owningteamValue = default(string), string articlepublicnumber = default(string), decimal? rating = default(decimal?), string keywords = default(string), int? knowledgearticleviewsState = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string knowledgearticleid = default(string), string _primaryauthoridValue = default(string), string _parentarticlecontentidValue = default(string), string _subjectidValue = default(string), System.DateTimeOffset? ratingDate = default(System.DateTimeOffset?), System.DateTimeOffset? knowledgearticleviewsDate = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), int? statuscode = default(int?), int? minorversionnumber = default(int?), string _createdbyValue = default(string), int? majorversionnumber = default(int?), string content = default(string), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), int? review = default(int?), bool? updatecontent = default(bool?), int? expirationstatusid = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? readyforreview = default(bool?), string stageid = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMconnection> knowledgearticleConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> knowledgearticleConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMduplicaterecord> knowledgearticleDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> knowledgearticleDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> knowledgearticleSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMqueueitem> knowledgearticleQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> knowledgearticleAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMteam> knowledgearticleTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> knowledgearticleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> knowledgearticleBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMexpiredprocess> knowledgearticleExpiredprocess = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMtranslationprocess> knowledgearticleTranslationprocess = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMsyncerror> knowledgeArticleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMlanguagelocale languagelocaleid = default(MicrosoftDynamicsCRMlanguagelocale), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> knowledgeArticleRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMletter> knowledgeArticleLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMsocialactivity> knowledgeArticleSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMactivitypointer> knowledgeArticleActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMnewprocess> knowledgearticleNewprocess = default(IList<MicrosoftDynamicsCRMnewprocess>), IList<MicrosoftDynamicsCRMfax> knowledgeArticleFaxes = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMknowledgearticle previousArticleContentId = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticlePreviousarticleContentid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMknowledgearticle rootArticleId = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleRootarticleId = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMknowledgearticleviews> knowledgearticleViews = default(IList<MicrosoftDynamicsCRMknowledgearticleviews>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMphonecall> knowledgeArticlePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMknowledgearticleincident> incidentKnowledgearticles = default(IList<MicrosoftDynamicsCRMknowledgearticleincident>), MicrosoftDynamicsCRMknowledgearticle parentArticleContentId = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleParentarticleContentid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMcategory> knowledgearticleCategory = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMactivityparty> knowledgearticleActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMemail> knowledgeArticleEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMtask> knowledgeArticleTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMsystemuser primaryauthorid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMappointment> knowledgeArticleAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMserviceappointment> knowledgeArticleServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMpostregarding> knowledgearticlePostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMpostfollow> knowledgearticlePostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMfeedback> knowledgeArticleFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), MicrosoftDynamicsCRMsubject subjectid = default(MicrosoftDynamicsCRMsubject), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> knowledgearticleAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMadoxioApplication> msdynAdoxioApplicationKnowledgearticle = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioLicencetype> msdynAdoxioLicencetypeKnowledgearticle = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>))
+        public MicrosoftDynamicsCRMknowledgearticle(int? review = default(int?), string _languagelocaleidValue = default(string), int? publishstatusid = default(int?), int? expiredreviewoptions = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? knowledgearticleviewsDate = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string stageid = default(string), string description = default(string), string versionnumber = default(string), string content = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? ratingDate = default(System.DateTimeOffset?), int? ratingState = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _parentarticlecontentidValue = default(string), int? knowledgearticleviews = default(int?), string _owningbusinessunitValue = default(string), int? timezoneruleversionnumber = default(int?), string keywords = default(string), bool? isprimary = default(bool?), string _primaryauthoridValue = default(string), string _owneridValue = default(string), string _owningteamValue = default(string), decimal? exchangerate = default(decimal?), bool? updatecontent = default(bool?), int? expirationstateid = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? knowledgearticleviewsState = default(int?), int? minorversionnumber = default(int?), string knowledgearticleid = default(string), decimal? ratingSum = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? expirationstatusid = default(int?), int? statecode = default(int?), bool? isrootarticle = default(bool?), string _subjectidValue = default(string), int? utcconversiontimezonecode = default(int?), int? ratingCount = default(int?), bool? setproductassociations = default(bool?), bool? islatestversion = default(bool?), System.DateTimeOffset? publishon = default(System.DateTimeOffset?), string processid = default(string), string _createdbyValue = default(string), int? scheduledstatusid = default(int?), string _previousarticlecontentidValue = default(string), string _transactioncurrencyidValue = default(string), string _createdonbehalfbyValue = default(string), int? majorversionnumber = default(int?), string articlepublicnumber = default(string), string traversedpath = default(string), int? statuscode = default(int?), System.DateTimeOffset? expirationdate = default(System.DateTimeOffset?), string _rootarticleidValue = default(string), string _owninguserValue = default(string), decimal? rating = default(decimal?), string title = default(string), bool? readyforreview = default(bool?), bool? isinternal = default(bool?), bool? setcategoryassociations = default(bool?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMconnection> knowledgearticleConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> knowledgearticleConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMduplicaterecord> knowledgearticleDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> knowledgearticleDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> knowledgearticleSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMqueueitem> knowledgearticleQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> knowledgearticleAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMteam> knowledgearticleTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> knowledgearticleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> knowledgearticleProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> knowledgearticleBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> knowledgearticlePrincipalObjectAttributeAccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> knowledgearticleAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMadoxioApplication> msdynAdoxioApplicationKnowledgearticle = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioLicencetype> msdynAdoxioLicencetypeKnowledgearticle = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMbulkoperation> knowledgearticleBulkOperations = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcampaignresponse> knowledgearticleCampaignResponses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMincidentresolution> knowledgearticleIncidentResolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMopportunityclose> knowledgearticleOpportunityCloses = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> knowledgearticleOrderCloses = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> knowledgearticleQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMexpiredprocess> knowledgearticleExpiredprocess = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMtranslationprocess> knowledgearticleTranslationprocess = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMsyncerror> knowledgeArticleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMlanguagelocale languagelocaleid = default(MicrosoftDynamicsCRMlanguagelocale), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> knowledgeArticleRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMletter> knowledgeArticleLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMsocialactivity> knowledgeArticleSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMactivitypointer> knowledgeArticleActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMnewprocess> knowledgearticleNewprocess = default(IList<MicrosoftDynamicsCRMnewprocess>), IList<MicrosoftDynamicsCRMfax> knowledgeArticleFaxes = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMknowledgearticle previousArticleContentId = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticlePreviousarticleContentid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMknowledgearticle rootArticleId = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleRootarticleId = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMknowledgearticleviews> knowledgearticleViews = default(IList<MicrosoftDynamicsCRMknowledgearticleviews>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMphonecall> knowledgeArticlePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMknowledgearticleincident> incidentKnowledgearticles = default(IList<MicrosoftDynamicsCRMknowledgearticleincident>), MicrosoftDynamicsCRMknowledgearticle parentArticleContentId = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleParentarticleContentid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMcategory> knowledgearticleCategory = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMactivityparty> knowledgearticleActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMemail> knowledgeArticleEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMtask> knowledgeArticleTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMsystemuser primaryauthorid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMappointment> knowledgeArticleAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMserviceappointment> knowledgeArticleServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMpostregarding> knowledgearticlePostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMpostfollow> knowledgearticlePostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMfeedback> knowledgeArticleFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), MicrosoftDynamicsCRMsubject subjectid = default(MicrosoftDynamicsCRMsubject))
         {
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            Exchangerate = exchangerate;
-            Isinternal = isinternal;
-            Publishon = publishon;
-            Setcategoryassociations = setcategoryassociations;
-            Expirationstateid = expirationstateid;
-            Description = description;
-            Importsequencenumber = importsequencenumber;
-            RatingState = ratingState;
-            Expiredreviewoptions = expiredreviewoptions;
-            Isprimary = isprimary;
-            Publishstatusid = publishstatusid;
-            Setproductassociations = setproductassociations;
-            Isrootarticle = isrootarticle;
-            RatingCount = ratingCount;
-            Traversedpath = traversedpath;
-            Expirationdate = expirationdate;
-            this._languagelocaleidValue = _languagelocaleidValue;
-            Versionnumber = versionnumber;
-            RatingSum = ratingSum;
-            this._previousarticlecontentidValue = _previousarticlecontentidValue;
-            Processid = processid;
-            this._rootarticleidValue = _rootarticleidValue;
-            Scheduledstatusid = scheduledstatusid;
-            Islatestversion = islatestversion;
-            Title = title;
-            this._owneridValue = _owneridValue;
-            Knowledgearticleviews = knowledgearticleviews;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Statecode = statecode;
-            this._modifiedbyValue = _modifiedbyValue;
-            Overriddencreatedon = overriddencreatedon;
-            this._owninguserValue = _owninguserValue;
-            this._owningteamValue = _owningteamValue;
-            Articlepublicnumber = articlepublicnumber;
-            Rating = rating;
-            Keywords = keywords;
-            KnowledgearticleviewsState = knowledgearticleviewsState;
-            Modifiedon = modifiedon;
-            Knowledgearticleid = knowledgearticleid;
-            this._primaryauthoridValue = _primaryauthoridValue;
-            this._parentarticlecontentidValue = _parentarticlecontentidValue;
-            this._subjectidValue = _subjectidValue;
-            RatingDate = ratingDate;
-            KnowledgearticleviewsDate = knowledgearticleviewsDate;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Statuscode = statuscode;
-            Minorversionnumber = minorversionnumber;
-            this._createdbyValue = _createdbyValue;
-            Majorversionnumber = majorversionnumber;
-            Content = content;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Review = review;
-            Updatecontent = updatecontent;
-            Expirationstatusid = expirationstatusid;
-            Createdon = createdon;
-            Readyforreview = readyforreview;
+            this._languagelocaleidValue = _languagelocaleidValue;
+            Publishstatusid = publishstatusid;
+            Expiredreviewoptions = expiredreviewoptions;
+            this._modifiedbyValue = _modifiedbyValue;
+            KnowledgearticleviewsDate = knowledgearticleviewsDate;
+            Importsequencenumber = importsequencenumber;
             Stageid = stageid;
+            Description = description;
+            Versionnumber = versionnumber;
+            Content = content;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            RatingDate = ratingDate;
+            RatingState = ratingState;
+            Overriddencreatedon = overriddencreatedon;
+            this._parentarticlecontentidValue = _parentarticlecontentidValue;
+            Knowledgearticleviews = knowledgearticleviews;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Keywords = keywords;
+            Isprimary = isprimary;
+            this._primaryauthoridValue = _primaryauthoridValue;
+            this._owneridValue = _owneridValue;
+            this._owningteamValue = _owningteamValue;
+            Exchangerate = exchangerate;
+            Updatecontent = updatecontent;
+            Expirationstateid = expirationstateid;
+            Modifiedon = modifiedon;
+            KnowledgearticleviewsState = knowledgearticleviewsState;
+            Minorversionnumber = minorversionnumber;
+            Knowledgearticleid = knowledgearticleid;
+            RatingSum = ratingSum;
+            Createdon = createdon;
+            Expirationstatusid = expirationstatusid;
+            Statecode = statecode;
+            Isrootarticle = isrootarticle;
+            this._subjectidValue = _subjectidValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            RatingCount = ratingCount;
+            Setproductassociations = setproductassociations;
+            Islatestversion = islatestversion;
+            Publishon = publishon;
+            Processid = processid;
+            this._createdbyValue = _createdbyValue;
+            Scheduledstatusid = scheduledstatusid;
+            this._previousarticlecontentidValue = _previousarticlecontentidValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Majorversionnumber = majorversionnumber;
+            Articlepublicnumber = articlepublicnumber;
+            Traversedpath = traversedpath;
+            Statuscode = statuscode;
+            Expirationdate = expirationdate;
+            this._rootarticleidValue = _rootarticleidValue;
+            this._owninguserValue = _owninguserValue;
+            Rating = rating;
+            Title = title;
+            Readyforreview = readyforreview;
+            Isinternal = isinternal;
+            Setcategoryassociations = setcategoryassociations;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -227,8 +108,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             KnowledgearticleAnnotations = knowledgearticleAnnotations;
             KnowledgearticleTeams = knowledgearticleTeams;
             KnowledgearticleAsyncOperations = knowledgearticleAsyncOperations;
+            KnowledgearticleProcessSession = knowledgearticleProcessSession;
             KnowledgearticleBulkDeleteFailures = knowledgearticleBulkDeleteFailures;
+            KnowledgearticlePrincipalObjectAttributeAccess = knowledgearticlePrincipalObjectAttributeAccess;
             StageidProcessstage = stageidProcessstage;
+            KnowledgearticleAbsScheduledprocessexecutions = knowledgearticleAbsScheduledprocessexecutions;
+            MsdynAdoxioApplicationKnowledgearticle = msdynAdoxioApplicationKnowledgearticle;
+            MsdynAdoxioLicencetypeKnowledgearticle = msdynAdoxioLicencetypeKnowledgearticle;
+            KnowledgearticleBulkOperations = knowledgearticleBulkOperations;
+            KnowledgearticleCampaignResponses = knowledgearticleCampaignResponses;
+            KnowledgearticleIncidentResolutions = knowledgearticleIncidentResolutions;
+            KnowledgearticleOpportunityCloses = knowledgearticleOpportunityCloses;
+            KnowledgearticleOrderCloses = knowledgearticleOrderCloses;
+            KnowledgearticleQuoteCloses = knowledgearticleQuoteCloses;
             KnowledgearticleExpiredprocess = knowledgearticleExpiredprocess;
             KnowledgearticleTranslationprocess = knowledgearticleTranslationprocess;
             KnowledgeArticleSyncErrors = knowledgeArticleSyncErrors;
@@ -260,9 +152,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             KnowledgearticlePostFollows = knowledgearticlePostFollows;
             KnowledgeArticleFeedback = knowledgeArticleFeedback;
             Subjectid = subjectid;
-            KnowledgearticleAbsScheduledprocessexecutions = knowledgearticleAbsScheduledprocessexecutions;
-            MsdynAdoxioApplicationKnowledgearticle = msdynAdoxioApplicationKnowledgearticle;
-            MsdynAdoxioLicencetypeKnowledgearticle = msdynAdoxioLicencetypeKnowledgearticle;
             CustomInit();
         }
 
@@ -272,119 +161,49 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets unique identifier for the business unit that owns the
-        /// record
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "review")]
+        public int? Review { get; set; }
 
         /// <summary>
-        /// Gets or sets exchange rate for the currency associated with the
-        /// KnowledgeArticle with respect to the base currency.
         /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
+        [JsonProperty(PropertyName = "_languagelocaleid_value")]
+        public string _languagelocaleidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets shows whether this article is only visible internally.
-        /// </summary>
-        [JsonProperty(PropertyName = "isinternal")]
-        public bool? Isinternal { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the record was published.
-        /// </summary>
-        [JsonProperty(PropertyName = "publishon")]
-        public System.DateTimeOffset? Publishon { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows whether category associations have been set
-        /// </summary>
-        [JsonProperty(PropertyName = "setcategoryassociations")]
-        public bool? Setcategoryassociations { get; set; }
-
-        /// <summary>
-        /// Gets or sets contains the id of the expiration state of the entity.
-        /// </summary>
-        [JsonProperty(PropertyName = "expirationstateid")]
-        public int? Expirationstateid { get; set; }
-
-        /// <summary>
-        /// Gets or sets a short overview of the article, primarily used in
-        /// search results and for search engine optimization.
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// Gets or sets sequence number of the import that created this
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets state of Rating
-        /// </summary>
-        [JsonProperty(PropertyName = "rating_state")]
-        public int? RatingState { get; set; }
-
-        /// <summary>
-        /// Gets or sets expired Review Options
-        /// </summary>
-        [JsonProperty(PropertyName = "expiredreviewoptions")]
-        public int? Expiredreviewoptions { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the article is the primary article.
-        /// </summary>
-        [JsonProperty(PropertyName = "isprimary")]
-        public bool? Isprimary { get; set; }
-
-        /// <summary>
-        /// Gets or sets publish Status of the Article.
         /// </summary>
         [JsonProperty(PropertyName = "publishstatusid")]
         public int? Publishstatusid { get; set; }
 
         /// <summary>
-        /// Gets or sets set Product Associations
         /// </summary>
-        [JsonProperty(PropertyName = "setproductassociations")]
-        public bool? Setproductassociations { get; set; }
+        [JsonProperty(PropertyName = "expiredreviewoptions")]
+        public int? Expiredreviewoptions { get; set; }
 
         /// <summary>
-        /// Gets or sets select whether the article is the root article.
         /// </summary>
-        [JsonProperty(PropertyName = "isrootarticle")]
-        public bool? Isrootarticle { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets rating Count
         /// </summary>
-        [JsonProperty(PropertyName = "rating_count")]
-        public int? RatingCount { get; set; }
+        [JsonProperty(PropertyName = "knowledgearticleviews_date")]
+        public System.DateTimeOffset? KnowledgearticleviewsDate { get; set; }
 
         /// <summary>
-        /// Gets or sets a comma separated list of string values representing
-        /// the unique identifiers of stages in a Business Process Flow
-        /// Instance in the order that they occur.
         /// </summary>
-        [JsonProperty(PropertyName = "traversedpath")]
-        public string Traversedpath { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
-        /// Gets or sets enter an expiration date for the article. Leave this
-        /// field blank for no expiration date.
         /// </summary>
-        [JsonProperty(PropertyName = "expirationdate")]
-        public System.DateTimeOffset? Expirationdate { get; set; }
+        [JsonProperty(PropertyName = "stageid")]
+        public string Stageid { get; set; }
 
         /// <summary>
-        /// Gets or sets select the language that the article's content is in.
         /// </summary>
-        [JsonProperty(PropertyName = "_languagelocaleid_value")]
-        public string _languagelocaleidValue { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
 
         /// <summary>
         /// </summary>
@@ -392,275 +211,254 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string Versionnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets total sum of Rating
-        /// </summary>
-        [JsonProperty(PropertyName = "rating_sum")]
-        public decimal? RatingSum { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the version that the current article was
-        /// restored from.
-        /// </summary>
-        [JsonProperty(PropertyName = "_previousarticlecontentid_value")]
-        public string _previousarticlecontentidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets contains the id of the process associated with the
-        /// entity.
-        /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
-
-        /// <summary>
-        /// Gets or sets contains the id of the root article.
-        /// </summary>
-        [JsonProperty(PropertyName = "_rootarticleid_value")]
-        public string _rootarticleidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets contains the id of the scheduled status of the entity.
-        /// </summary>
-        [JsonProperty(PropertyName = "scheduledstatusid")]
-        public int? Scheduledstatusid { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows which version of the knowledge article is the
-        /// latest version.
-        /// </summary>
-        [JsonProperty(PropertyName = "islatestversion")]
-        public bool? Islatestversion { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a title for the article.
-        /// </summary>
-        [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user or team who owns the
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the total number of article views.
-        /// </summary>
-        [JsonProperty(PropertyName = "knowledgearticleviews")]
-        public int? Knowledgearticleviews { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows whether the article is a draft or is published,
-        /// archived, or discarded. Draft articles aren't available externally
-        /// and can be edited. Published articles are available externally,
-        /// based on applicable permissions, but can't be edited. All metadata
-        /// changes are reflected in the published version. Archived and
-        /// discarded articles aren't available externally and can't be edited.
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who modified the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the user that owns the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the team that owns the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the automatically generated ID exposed to
-        /// customers, partners, and other external users to reference and look
-        /// up articles.
-        /// </summary>
-        [JsonProperty(PropertyName = "articlepublicnumber")]
-        public string Articlepublicnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets information which specifies how helpful the related
-        /// record was.
-        /// </summary>
-        [JsonProperty(PropertyName = "rating")]
-        public decimal? Rating { get; set; }
-
-        /// <summary>
-        /// Gets or sets type keywords to be used for searches in knowledge
-        /// base articles. Separate keywords by using commas.
-        /// </summary>
-        [JsonProperty(PropertyName = "keywords")]
-        public string Keywords { get; set; }
-
-        /// <summary>
-        /// Gets or sets state of Knowledge Article View.
-        /// </summary>
-        [JsonProperty(PropertyName = "knowledgearticleviews_state")]
-        public int? KnowledgearticleviewsState { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the record was modified.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for entity instances
-        /// </summary>
-        [JsonProperty(PropertyName = "knowledgearticleid")]
-        public string Knowledgearticleid { get; set; }
-
-        /// <summary>
-        /// Gets or sets contains the id of the primary author associated with
-        /// the article.
-        /// </summary>
-        [JsonProperty(PropertyName = "_primaryauthorid_value")]
-        public string _primaryauthoridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets contains the id of the parent article content
-        /// associated with the entity.
-        /// </summary>
-        [JsonProperty(PropertyName = "_parentarticlecontentid_value")]
-        public string _parentarticlecontentidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose the subject of the article to assist with
-        /// article searches. You can configure subjects under Business
-        /// Management in the Settings area.
-        /// </summary>
-        [JsonProperty(PropertyName = "_subjectid_value")]
-        public string _subjectidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets the date time for Rating.
-        /// </summary>
-        [JsonProperty(PropertyName = "rating_date")]
-        public System.DateTimeOffset? RatingDate { get; set; }
-
-        /// <summary>
-        /// Gets or sets the date time for Knowledge Article View.
-        /// </summary>
-        [JsonProperty(PropertyName = "knowledgearticleviews_date")]
-        public System.DateTimeOffset? KnowledgearticleviewsDate { get; set; }
-
-        /// <summary>
-        /// Gets or sets exchange rate for the currency associated with the
-        /// KnowledgeArticle with respect to the base currency.
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the article's status.
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the minor version number of this article's
-        /// content.
-        /// </summary>
-        [JsonProperty(PropertyName = "minorversionnumber")]
-        public int? Minorversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the major version number of this article's
-        /// content.
-        /// </summary>
-        [JsonProperty(PropertyName = "majorversionnumber")]
-        public int? Majorversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the body of the article stored in HTML format.
         /// </summary>
         [JsonProperty(PropertyName = "content")]
         public string Content { get; set; }
 
         /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who modified
-        /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets review
         /// </summary>
-        [JsonProperty(PropertyName = "review")]
-        public int? Review { get; set; }
+        [JsonProperty(PropertyName = "rating_date")]
+        public System.DateTimeOffset? RatingDate { get; set; }
 
         /// <summary>
-        /// Gets or sets update Content
+        /// </summary>
+        [JsonProperty(PropertyName = "rating_state")]
+        public int? RatingState { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_parentarticlecontentid_value")]
+        public string _parentarticlecontentidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "knowledgearticleviews")]
+        public int? Knowledgearticleviews { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "keywords")]
+        public string Keywords { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isprimary")]
+        public bool? Isprimary { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_primaryauthorid_value")]
+        public string _primaryauthoridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "updatecontent")]
         public bool? Updatecontent { get; set; }
 
         /// <summary>
-        /// Gets or sets contains the id of the expiration status of the
-        /// entity.
         /// </summary>
-        [JsonProperty(PropertyName = "expirationstatusid")]
-        public int? Expirationstatusid { get; set; }
+        [JsonProperty(PropertyName = "expirationstateid")]
+        public int? Expirationstateid { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the record was created.
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "knowledgearticleviews_state")]
+        public int? KnowledgearticleviewsState { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "minorversionnumber")]
+        public int? Minorversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "knowledgearticleid")]
+        public string Knowledgearticleid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "rating_sum")]
+        public decimal? RatingSum { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
-        /// Gets or sets ready For Review
+        /// </summary>
+        [JsonProperty(PropertyName = "expirationstatusid")]
+        public int? Expirationstatusid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isrootarticle")]
+        public bool? Isrootarticle { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_subjectid_value")]
+        public string _subjectidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "rating_count")]
+        public int? RatingCount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "setproductassociations")]
+        public bool? Setproductassociations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "islatestversion")]
+        public bool? Islatestversion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "publishon")]
+        public System.DateTimeOffset? Publishon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "scheduledstatusid")]
+        public int? Scheduledstatusid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_previousarticlecontentid_value")]
+        public string _previousarticlecontentidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "majorversionnumber")]
+        public int? Majorversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "articlepublicnumber")]
+        public string Articlepublicnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "traversedpath")]
+        public string Traversedpath { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "expirationdate")]
+        public System.DateTimeOffset? Expirationdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_rootarticleid_value")]
+        public string _rootarticleidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "rating")]
+        public decimal? Rating { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "readyforreview")]
         public bool? Readyforreview { get; set; }
 
         /// <summary>
-        /// Gets or sets contains the id of the stage where the entity is
-        /// located.
         /// </summary>
-        [JsonProperty(PropertyName = "stageid")]
-        public string Stageid { get; set; }
+        [JsonProperty(PropertyName = "isinternal")]
+        public bool? Isinternal { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// record.
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "setcategoryassociations")]
+        public bool? Setcategoryassociations { get; set; }
 
         /// <summary>
         /// </summary>
@@ -749,13 +547,68 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "knowledgearticle_ProcessSession")]
+        public IList<MicrosoftDynamicsCRMprocesssession> KnowledgearticleProcessSession { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "knowledgearticle_BulkDeleteFailures")]
         public IList<MicrosoftDynamicsCRMbulkdeletefailure> KnowledgearticleBulkDeleteFailures { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "knowledgearticle_PrincipalObjectAttributeAccess")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> KnowledgearticlePrincipalObjectAttributeAccess { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "stageid_processstage")]
         public MicrosoftDynamicsCRMprocessstage StageidProcessstage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "knowledgearticle_abs_scheduledprocessexecutions")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> KnowledgearticleAbsScheduledprocessexecutions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_adoxio_application_knowledgearticle")]
+        public IList<MicrosoftDynamicsCRMadoxioApplication> MsdynAdoxioApplicationKnowledgearticle { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_adoxio_licencetype_knowledgearticle")]
+        public IList<MicrosoftDynamicsCRMadoxioLicencetype> MsdynAdoxioLicencetypeKnowledgearticle { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "knowledgearticle_BulkOperations")]
+        public IList<MicrosoftDynamicsCRMbulkoperation> KnowledgearticleBulkOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "knowledgearticle_CampaignResponses")]
+        public IList<MicrosoftDynamicsCRMcampaignresponse> KnowledgearticleCampaignResponses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "knowledgearticle_IncidentResolutions")]
+        public IList<MicrosoftDynamicsCRMincidentresolution> KnowledgearticleIncidentResolutions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "knowledgearticle_OpportunityCloses")]
+        public IList<MicrosoftDynamicsCRMopportunityclose> KnowledgearticleOpportunityCloses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "knowledgearticle_OrderCloses")]
+        public IList<MicrosoftDynamicsCRMorderclose> KnowledgearticleOrderCloses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "knowledgearticle_QuoteCloses")]
+        public IList<MicrosoftDynamicsCRMquoteclose> KnowledgearticleQuoteCloses { get; set; }
 
         /// <summary>
         /// </summary>
@@ -911,21 +764,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "subjectid")]
         public MicrosoftDynamicsCRMsubject Subjectid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "knowledgearticle_abs_scheduledprocessexecutions")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> KnowledgearticleAbsScheduledprocessexecutions { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_adoxio_application_knowledgearticle")]
-        public IList<MicrosoftDynamicsCRMadoxioApplication> MsdynAdoxioApplicationKnowledgearticle { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_adoxio_licencetype_knowledgearticle")]
-        public IList<MicrosoftDynamicsCRMadoxioLicencetype> MsdynAdoxioLicencetypeKnowledgearticle { get; set; }
 
     }
 }

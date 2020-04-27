@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top312 { get; set; }
+        public int? Top536 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip224 { get; set; }
+        public int? Skip536 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count312 { get; set; }
+        public bool? Count536 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter312 { get; set; }
+        public string Filter536 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search224 { get; set; }
+        public string Search536 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -106,14 +106,59 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAliases Aliases { get; private set; }
 
         /// <summary>
+        /// Gets the IAliasmailboxtrackingfolders.
+        /// </summary>
+        public virtual IAliasmailboxtrackingfolders Aliasmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IAliasprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IAliasprincipalobjectattributeaccesses Aliasprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IAliasprocesssession.
+        /// </summary>
+        public virtual IAliasprocesssession Aliasprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationbpfv3s.
         /// </summary>
         public virtual IApplicationbpfv3s Applicationbpfv3s { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationbpfv3mailboxtrackingfolders.
+        /// </summary>
+        public virtual IApplicationbpfv3mailboxtrackingfolders Applicationbpfv3mailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationbpfv3principalobjectattributeaccesses.
+        /// </summary>
+        public virtual IApplicationbpfv3principalobjectattributeaccesses Applicationbpfv3principalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationbpfv3processsession.
+        /// </summary>
+        public virtual IApplicationbpfv3processsession Applicationbpfv3processsession { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationinvoicehistories.
         /// </summary>
         public virtual IApplicationinvoicehistories Applicationinvoicehistories { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationinvoicehistorymailboxtrackingfolders.
+        /// </summary>
+        public virtual IApplicationinvoicehistorymailboxtrackingfolders Applicationinvoicehistorymailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationinvoicehistoryprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IApplicationinvoicehistoryprincipalobjectattributeaccesses Applicationinvoicehistoryprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationinvoicehistoryprocesssession.
+        /// </summary>
+        public virtual IApplicationinvoicehistoryprocesssession Applicationinvoicehistoryprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IApplicationlicenseechangesv10s.
@@ -129,6 +174,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationlicenseechangesv10bulkdeletefailures.
         /// </summary>
         public virtual IApplicationlicenseechangesv10bulkdeletefailures Applicationlicenseechangesv10bulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationlicenseechangesv10mailboxtrackingfolders.
+        /// </summary>
+        public virtual IApplicationlicenseechangesv10mailboxtrackingfolders Applicationlicenseechangesv10mailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationlicenseechangesv10principalobjectattributeaccesses.
+        /// </summary>
+        public virtual IApplicationlicenseechangesv10principalobjectattributeaccesses Applicationlicenseechangesv10principalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationlicenseechangesv10processsession.
+        /// </summary>
+        public virtual IApplicationlicenseechangesv10processsession Applicationlicenseechangesv10processsession { get; private set; }
 
         /// <summary>
         /// Gets the IApplicationlicenseechangesv10syncerrors.
@@ -161,6 +221,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationliquorbpfbulkdeletefailures Applicationliquorbpfbulkdeletefailures { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationliquorbpfmailboxtrackingfolders.
+        /// </summary>
+        public virtual IApplicationliquorbpfmailboxtrackingfolders Applicationliquorbpfmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationliquorbpfprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IApplicationliquorbpfprincipalobjectattributeaccesses Applicationliquorbpfprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationliquorbpfprocesssession.
+        /// </summary>
+        public virtual IApplicationliquorbpfprocesssession Applicationliquorbpfprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationliquorbpfsyncerrors.
         /// </summary>
         public virtual IApplicationliquorbpfsyncerrors Applicationliquorbpfsyncerrors { get; private set; }
@@ -186,6 +261,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationrelocationv1bulkdeletefailures Applicationrelocationv1bulkdeletefailures { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationrelocationv1mailboxtrackingfolders.
+        /// </summary>
+        public virtual IApplicationrelocationv1mailboxtrackingfolders Applicationrelocationv1mailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationrelocationv1principalobjectattributeaccesses.
+        /// </summary>
+        public virtual IApplicationrelocationv1principalobjectattributeaccesses Applicationrelocationv1principalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationrelocationv1processsession.
+        /// </summary>
+        public virtual IApplicationrelocationv1processsession Applicationrelocationv1processsession { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationrelocationv1syncerrors.
         /// </summary>
         public virtual IApplicationrelocationv1syncerrors Applicationrelocationv1syncerrors { get; private set; }
@@ -204,6 +294,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationadoxioendorsementapplication.
         /// </summary>
         public virtual IApplicationadoxioendorsementapplication Applicationadoxioendorsementapplication { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationmailboxtrackingfolders.
+        /// </summary>
+        public virtual IApplicationmailboxtrackingfolders Applicationmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IApplicationprincipalobjectattributeaccesses Applicationprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationprocesssession.
+        /// </summary>
+        public virtual IApplicationprocesssession Applicationprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IBpfadoxioapplicationadoxioapplicationlicenseechangesv10.
@@ -246,6 +351,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationstructurechangev1bulkdeletefailures Applicationstructurechangev1bulkdeletefailures { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationstructurechangev1mailboxtrackingfolders.
+        /// </summary>
+        public virtual IApplicationstructurechangev1mailboxtrackingfolders Applicationstructurechangev1mailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationstructurechangev1principalobjectattributeaccesses.
+        /// </summary>
+        public virtual IApplicationstructurechangev1principalobjectattributeaccesses Applicationstructurechangev1principalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationstructurechangev1processsession.
+        /// </summary>
+        public virtual IApplicationstructurechangev1processsession Applicationstructurechangev1processsession { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationstructurechangev1syncerrors.
         /// </summary>
         public virtual IApplicationstructurechangev1syncerrors Applicationstructurechangev1syncerrors { get; private set; }
@@ -259,6 +379,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtermsconditionslimitations.
         /// </summary>
         public virtual IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtermsconditionslimitationmailboxtrackingfolders.
+        /// </summary>
+        public virtual IApplicationtermsconditionslimitationmailboxtrackingfolders Applicationtermsconditionslimitationmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtermsconditionslimitationprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IApplicationtermsconditionslimitationprincipalobjectattributeaccesses Applicationtermsconditionslimitationprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtermsconditionslimitationprocesssession.
+        /// </summary>
+        public virtual IApplicationtermsconditionslimitationprocesssession Applicationtermsconditionslimitationprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IApplicationtransferownershipv1s.
@@ -276,6 +411,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationtransferownershipv1bulkdeletefailures Applicationtransferownershipv1bulkdeletefailures { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationtransferownershipv1mailboxtrackingfolders.
+        /// </summary>
+        public virtual IApplicationtransferownershipv1mailboxtrackingfolders Applicationtransferownershipv1mailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtransferownershipv1principalobjectattributeaccesses.
+        /// </summary>
+        public virtual IApplicationtransferownershipv1principalobjectattributeaccesses Applicationtransferownershipv1principalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtransferownershipv1processsession.
+        /// </summary>
+        public virtual IApplicationtransferownershipv1processsession Applicationtransferownershipv1processsession { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationtransferownershipv1syncerrors.
         /// </summary>
         public virtual IApplicationtransferownershipv1syncerrors Applicationtransferownershipv1syncerrors { get; private set; }
@@ -289,6 +439,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtypecontents.
         /// </summary>
         public virtual IApplicationtypecontents Applicationtypecontents { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtypecontentmailboxtrackingfolders.
+        /// </summary>
+        public virtual IApplicationtypecontentmailboxtrackingfolders Applicationtypecontentmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtypecontentprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IApplicationtypecontentprincipalobjectattributeaccesses Applicationtypecontentprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtypecontentprocesssession.
+        /// </summary>
+        public virtual IApplicationtypecontentprocesssession Applicationtypecontentprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IApplicationtypefeeschedules.
@@ -316,6 +481,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationtypefeescheduleduplicatematchingrecord Applicationtypefeescheduleduplicatematchingrecord { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationtypefeeschedulemailboxtrackingfolders.
+        /// </summary>
+        public virtual IApplicationtypefeeschedulemailboxtrackingfolders Applicationtypefeeschedulemailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtypefeescheduleprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IApplicationtypefeescheduleprincipalobjectattributeaccesses Applicationtypefeescheduleprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtypefeescheduleprocesssession.
+        /// </summary>
+        public virtual IApplicationtypefeescheduleprocesssession Applicationtypefeescheduleprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationtypefeeschedulesyncerrors.
         /// </summary>
         public virtual IApplicationtypefeeschedulesyncerrors Applicationtypefeeschedulesyncerrors { get; private set; }
@@ -341,9 +521,29 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationtypeadoxioapplicationtypefeescheduleapplicationtypeid Applicationtypeadoxioapplicationtypefeescheduleapplicationtypeid { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationtypeadoxioendorsementapplicationtype.
+        /// </summary>
+        public virtual IApplicationtypeadoxioendorsementapplicationtype Applicationtypeadoxioendorsementapplicationtype { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationtypeformelementuploadfields.
         /// </summary>
         public virtual IApplicationtypeformelementuploadfields Applicationtypeformelementuploadfields { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtypemailboxtrackingfolders.
+        /// </summary>
+        public virtual IApplicationtypemailboxtrackingfolders Applicationtypemailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtypeprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IApplicationtypeprincipalobjectattributeaccesses Applicationtypeprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtypeprocesssession.
+        /// </summary>
+        public virtual IApplicationtypeprocesssession Applicationtypeprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IAreas.
@@ -356,9 +556,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAreaevents Areaevents { get; private set; }
 
         /// <summary>
+        /// Gets the IAreamailboxtrackingfolders.
+        /// </summary>
+        public virtual IAreamailboxtrackingfolders Areamailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IAreaprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IAreaprincipalobjectattributeaccesses Areaprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IAreaprocesssession.
+        /// </summary>
+        public virtual IAreaprocesssession Areaprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IAuditlogrequests.
         /// </summary>
         public virtual IAuditlogrequests Auditlogrequests { get; private set; }
+
+        /// <summary>
+        /// Gets the IAuditlogrequestmailboxtrackingfolders.
+        /// </summary>
+        public virtual IAuditlogrequestmailboxtrackingfolders Auditlogrequestmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IAuditlogrequestprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IAuditlogrequestprincipalobjectattributeaccesses Auditlogrequestprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IAuditlogrequestprocesssession.
+        /// </summary>
+        public virtual IAuditlogrequestprocesssession Auditlogrequestprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IBusinessaccounts.
@@ -366,14 +596,59 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IBusinessaccounts Businessaccounts { get; private set; }
 
         /// <summary>
+        /// Gets the IBusinessaccountmailboxtrackingfolders.
+        /// </summary>
+        public virtual IBusinessaccountmailboxtrackingfolders Businessaccountmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessaccountprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IBusinessaccountprincipalobjectattributeaccesses Businessaccountprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessaccountprocesssession.
+        /// </summary>
+        public virtual IBusinessaccountprocesssession Businessaccountprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the ICannabisinventoryreports.
         /// </summary>
         public virtual ICannabisinventoryreports Cannabisinventoryreports { get; private set; }
 
         /// <summary>
+        /// Gets the ICannabisinventoryreportmailboxtrackingfolders.
+        /// </summary>
+        public virtual ICannabisinventoryreportmailboxtrackingfolders Cannabisinventoryreportmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ICannabisinventoryreportprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ICannabisinventoryreportprincipalobjectattributeaccesses Cannabisinventoryreportprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ICannabisinventoryreportprocesssession.
+        /// </summary>
+        public virtual ICannabisinventoryreportprocesssession Cannabisinventoryreportprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the ICannabismonthlyreports.
         /// </summary>
         public virtual ICannabismonthlyreports Cannabismonthlyreports { get; private set; }
+
+        /// <summary>
+        /// Gets the ICannabismonthlyreportmailboxtrackingfolders.
+        /// </summary>
+        public virtual ICannabismonthlyreportmailboxtrackingfolders Cannabismonthlyreportmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ICannabismonthlyreportprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ICannabismonthlyreportprincipalobjectattributeaccesses Cannabismonthlyreportprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ICannabismonthlyreportprocesssession.
+        /// </summary>
+        public virtual ICannabismonthlyreportprocesssession Cannabismonthlyreportprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IFederalreportexportid.
@@ -386,9 +661,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ICannabisproductadmins Cannabisproductadmins { get; private set; }
 
         /// <summary>
+        /// Gets the ICannabisproductadminmailboxtrackingfolders.
+        /// </summary>
+        public virtual ICannabisproductadminmailboxtrackingfolders Cannabisproductadminmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ICannabisproductadminprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ICannabisproductadminprincipalobjectattributeaccesses Cannabisproductadminprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ICannabisproductadminprocesssession.
+        /// </summary>
+        public virtual ICannabisproductadminprocesssession Cannabisproductadminprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the ICitydistricts.
         /// </summary>
         public virtual ICitydistricts Citydistricts { get; private set; }
+
+        /// <summary>
+        /// Gets the ICitydistrictmailboxtrackingfolders.
+        /// </summary>
+        public virtual ICitydistrictmailboxtrackingfolders Citydistrictmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ICitydistrictprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ICitydistrictprincipalobjectattributeaccesses Citydistrictprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ICitydistrictprocesssession.
+        /// </summary>
+        public virtual ICitydistrictprocesssession Citydistrictprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IComplaints.
@@ -396,9 +701,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IComplaints Complaints { get; private set; }
 
         /// <summary>
+        /// Gets the IComplaintmailboxtrackingfolders.
+        /// </summary>
+        public virtual IComplaintmailboxtrackingfolders Complaintmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IComplaintprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IComplaintprincipalobjectattributeaccesses Complaintprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IComplaintprocesssession.
+        /// </summary>
+        public virtual IComplaintprocesssession Complaintprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IComplianceinvestigations.
         /// </summary>
         public virtual IComplianceinvestigations Complianceinvestigations { get; private set; }
+
+        /// <summary>
+        /// Gets the IComplianceinvestigationmailboxtrackingfolders.
+        /// </summary>
+        public virtual IComplianceinvestigationmailboxtrackingfolders Complianceinvestigationmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IComplianceinvestigationprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IComplianceinvestigationprincipalobjectattributeaccesses Complianceinvestigationprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IComplianceinvestigationprocesssession.
+        /// </summary>
+        public virtual IComplianceinvestigationprocesssession Complianceinvestigationprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IInvestigationexhibits.
@@ -411,9 +746,29 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ICompliancemeetings Compliancemeetings { get; private set; }
 
         /// <summary>
+        /// Gets the ICompliancemeetingmailboxtrackingfolders.
+        /// </summary>
+        public virtual ICompliancemeetingmailboxtrackingfolders Compliancemeetingmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ICompliancemeetingprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ICompliancemeetingprincipalobjectattributeaccesses Compliancemeetingprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ICompliancemeetingprocesssession.
+        /// </summary>
+        public virtual ICompliancemeetingprocesssession Compliancemeetingprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the ICompliancemeetingrelatedparties.
         /// </summary>
         public virtual ICompliancemeetingrelatedparties Compliancemeetingrelatedparties { get; private set; }
+
+        /// <summary>
+        /// Gets the IContraventionid.
+        /// </summary>
+        public virtual IContraventionid Contraventionid { get; private set; }
 
         /// <summary>
         /// Gets the IContraventionadmins.
@@ -421,9 +776,44 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IContraventionadmins Contraventionadmins { get; private set; }
 
         /// <summary>
+        /// Gets the IContraventionadminmailboxtrackingfolders.
+        /// </summary>
+        public virtual IContraventionadminmailboxtrackingfolders Contraventionadminmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IContraventionadminprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IContraventionadminprincipalobjectattributeaccesses Contraventionadminprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IContraventionadminprocesssession.
+        /// </summary>
+        public virtual IContraventionadminprocesssession Contraventionadminprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IContraventions.
         /// </summary>
         public virtual IContraventions Contraventions { get; private set; }
+
+        /// <summary>
+        /// Gets the IContraventioncompliancemeetings.
+        /// </summary>
+        public virtual IContraventioncompliancemeetings Contraventioncompliancemeetings { get; private set; }
+
+        /// <summary>
+        /// Gets the IContraventionmailboxtrackingfolders.
+        /// </summary>
+        public virtual IContraventionmailboxtrackingfolders Contraventionmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IContraventionprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IContraventionprincipalobjectattributeaccesses Contraventionprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IContraventionprocesssession.
+        /// </summary>
+        public virtual IContraventionprocesssession Contraventionprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IContraventionsharepointdocumentlocations.
@@ -436,9 +826,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ICorporatehistorysummaries Corporatehistorysummaries { get; private set; }
 
         /// <summary>
+        /// Gets the ICorporatehistorysummarymailboxtrackingfolders.
+        /// </summary>
+        public virtual ICorporatehistorysummarymailboxtrackingfolders Corporatehistorysummarymailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ICorporatehistorysummaryprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ICorporatehistorysummaryprincipalobjectattributeaccesses Corporatehistorysummaryprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ICorporatehistorysummaryprocesssession.
+        /// </summary>
+        public virtual ICorporatehistorysummaryprocesssession Corporatehistorysummaryprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the ICorporateroles.
         /// </summary>
         public virtual ICorporateroles Corporateroles { get; private set; }
+
+        /// <summary>
+        /// Gets the ICorporaterolemailboxtrackingfolders.
+        /// </summary>
+        public virtual ICorporaterolemailboxtrackingfolders Corporaterolemailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ICorporateroleprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ICorporateroleprincipalobjectattributeaccesses Corporateroleprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ICorporateroleprocesssession.
+        /// </summary>
+        public virtual ICorporateroleprocesssession Corporateroleprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the ICustomautonumberdefinitions.
@@ -446,9 +866,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ICustomautonumberdefinitions Customautonumberdefinitions { get; private set; }
 
         /// <summary>
+        /// Gets the ICustomautonumberdefinitionmailboxtrackingfolders.
+        /// </summary>
+        public virtual ICustomautonumberdefinitionmailboxtrackingfolders Customautonumberdefinitionmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ICustomautonumberdefinitionprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ICustomautonumberdefinitionprincipalobjectattributeaccesses Customautonumberdefinitionprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ICustomautonumberdefinitionprocesssession.
+        /// </summary>
+        public virtual ICustomautonumberdefinitionprocesssession Customautonumberdefinitionprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the ICustomautonumberrequests.
         /// </summary>
         public virtual ICustomautonumberrequests Customautonumberrequests { get; private set; }
+
+        /// <summary>
+        /// Gets the ICustomautonumberrequestmailboxtrackingfolders.
+        /// </summary>
+        public virtual ICustomautonumberrequestmailboxtrackingfolders Customautonumberrequestmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ICustomautonumberrequestprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ICustomautonumberrequestprincipalobjectattributeaccesses Customautonumberrequestprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ICustomautonumberrequestprocesssession.
+        /// </summary>
+        public virtual ICustomautonumberrequestprocesssession Customautonumberrequestprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IDocumentadmins.
@@ -456,9 +906,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IDocumentadmins Documentadmins { get; private set; }
 
         /// <summary>
+        /// Gets the IDocumentadminmailboxtrackingfolders.
+        /// </summary>
+        public virtual IDocumentadminmailboxtrackingfolders Documentadminmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IDocumentadminprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IDocumentadminprincipalobjectattributeaccesses Documentadminprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IDocumentadminprocesssession.
+        /// </summary>
+        public virtual IDocumentadminprocesssession Documentadminprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IDocuments.
         /// </summary>
         public virtual IDocuments Documents { get; private set; }
+
+        /// <summary>
+        /// Gets the IDocumentmailboxtrackingfolders.
+        /// </summary>
+        public virtual IDocumentmailboxtrackingfolders Documentmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IDocumentprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IDocumentprincipalobjectattributeaccesses Documentprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IDocumentprocesssession.
+        /// </summary>
+        public virtual IDocumentprocesssession Documentprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IEndorsements.
@@ -469,6 +949,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplication.
         /// </summary>
         public virtual IApplication Application { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtype.
+        /// </summary>
+        public virtual IApplicationtype Applicationtype { get; private set; }
 
         /// <summary>
         /// Gets the IEndorsementasyncoperations.
@@ -489,6 +974,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEndorsementduplicatematchingrecord.
         /// </summary>
         public virtual IEndorsementduplicatematchingrecord Endorsementduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementmailboxtrackingfolders.
+        /// </summary>
+        public virtual IEndorsementmailboxtrackingfolders Endorsementmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IEndorsementprincipalobjectattributeaccesses Endorsementprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementprocesssession.
+        /// </summary>
+        public virtual IEndorsementprocesssession Endorsementprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IEndorsementsharepointdocumentlocations.
@@ -551,6 +1051,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEndorsementtypeduplicatematchingrecord Endorsementtypeduplicatematchingrecord { get; private set; }
 
         /// <summary>
+        /// Gets the IEndorsementtypemailboxtrackingfolders.
+        /// </summary>
+        public virtual IEndorsementtypemailboxtrackingfolders Endorsementtypemailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypeprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IEndorsementtypeprincipalobjectattributeaccesses Endorsementtypeprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IEndorsementtypeprocesssession.
+        /// </summary>
+        public virtual IEndorsementtypeprocesssession Endorsementtypeprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IEndorsementtypesyncerrors.
         /// </summary>
         public virtual IEndorsementtypesyncerrors Endorsementtypesyncerrors { get; private set; }
@@ -561,9 +1076,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEstablishments Establishments { get; private set; }
 
         /// <summary>
+        /// Gets the IEstablishmentmailboxtrackingfolders.
+        /// </summary>
+        public virtual IEstablishmentmailboxtrackingfolders Establishmentmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IEstablishmentprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IEstablishmentprincipalobjectattributeaccesses Establishmentprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IEstablishmentprocesssession.
+        /// </summary>
+        public virtual IEstablishmentprocesssession Establishmentprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IEstablishmentwatchwords.
         /// </summary>
         public virtual IEstablishmentwatchwords Establishmentwatchwords { get; private set; }
+
+        /// <summary>
+        /// Gets the IEstablishmentwatchwordmailboxtrackingfolders.
+        /// </summary>
+        public virtual IEstablishmentwatchwordmailboxtrackingfolders Establishmentwatchwordmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IEstablishmentwatchwordprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IEstablishmentwatchwordprincipalobjectattributeaccesses Establishmentwatchwordprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IEstablishmentwatchwordprocesssession.
+        /// </summary>
+        public virtual IEstablishmentwatchwordprocesssession Establishmentwatchwordprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IEvents.
@@ -641,9 +1186,24 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEventletters Eventletters { get; private set; }
 
         /// <summary>
+        /// Gets the IEventmailboxtrackingfolders.
+        /// </summary>
+        public virtual IEventmailboxtrackingfolders Eventmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
         /// Gets the IEventphonecalls.
         /// </summary>
         public virtual IEventphonecalls Eventphonecalls { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IEventprincipalobjectattributeaccesses Eventprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventprocesssession.
+        /// </summary>
+        public virtual IEventprocesssession Eventprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IEventrecurringappointmentmasters.
@@ -716,6 +1276,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEventscheduleduplicatematchingrecord Eventscheduleduplicatematchingrecord { get; private set; }
 
         /// <summary>
+        /// Gets the IEventschedulemailboxtrackingfolders.
+        /// </summary>
+        public virtual IEventschedulemailboxtrackingfolders Eventschedulemailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventscheduleprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IEventscheduleprincipalobjectattributeaccesses Eventscheduleprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventscheduleprocesssession.
+        /// </summary>
+        public virtual IEventscheduleprocesssession Eventscheduleprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IEventschedulesyncerrors.
         /// </summary>
         public virtual IEventschedulesyncerrors Eventschedulesyncerrors { get; private set; }
@@ -744,6 +1319,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IExhibitduplicatematchingrecord.
         /// </summary>
         public virtual IExhibitduplicatematchingrecord Exhibitduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IExhibitmailboxtrackingfolders.
+        /// </summary>
+        public virtual IExhibitmailboxtrackingfolders Exhibitmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IExhibitprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IExhibitprincipalobjectattributeaccesses Exhibitprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IExhibitprocesssession.
+        /// </summary>
+        public virtual IExhibitprocesssession Exhibitprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IExhibitsyncerrors.
@@ -786,6 +1376,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IFederalreportexportduplicatematchingrecord Federalreportexportduplicatematchingrecord { get; private set; }
 
         /// <summary>
+        /// Gets the IFederalreportexportmailboxtrackingfolders.
+        /// </summary>
+        public virtual IFederalreportexportmailboxtrackingfolders Federalreportexportmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IFederalreportexportprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IFederalreportexportprincipalobjectattributeaccesses Federalreportexportprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IFederalreportexportprocesssession.
+        /// </summary>
+        public virtual IFederalreportexportprocesssession Federalreportexportprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IFederalreportexportsharepointdocumentlocations.
         /// </summary>
         public virtual IFederalreportexportsharepointdocumentlocations Federalreportexportsharepointdocumentlocations { get; private set; }
@@ -799,6 +1404,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IFiainvestigationlogs.
         /// </summary>
         public virtual IFiainvestigationlogs Fiainvestigationlogs { get; private set; }
+
+        /// <summary>
+        /// Gets the IFiainvestigationlogmailboxtrackingfolders.
+        /// </summary>
+        public virtual IFiainvestigationlogmailboxtrackingfolders Fiainvestigationlogmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IFiainvestigationlogprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IFiainvestigationlogprincipalobjectattributeaccesses Fiainvestigationlogprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IFiainvestigationlogprocesssession.
+        /// </summary>
+        public virtual IFiainvestigationlogprocesssession Fiainvestigationlogprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IFormelementuploadfields.
@@ -826,6 +1446,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IFormelementuploadfieldduplicatematchingrecord Formelementuploadfieldduplicatematchingrecord { get; private set; }
 
         /// <summary>
+        /// Gets the IFormelementuploadfieldmailboxtrackingfolders.
+        /// </summary>
+        public virtual IFormelementuploadfieldmailboxtrackingfolders Formelementuploadfieldmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfieldprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IFormelementuploadfieldprincipalobjectattributeaccesses Formelementuploadfieldprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfieldprocesssession.
+        /// </summary>
+        public virtual IFormelementuploadfieldprocesssession Formelementuploadfieldprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IFormelementuploadfieldsyncerrors.
         /// </summary>
         public virtual IFormelementuploadfieldsyncerrors Formelementuploadfieldsyncerrors { get; private set; }
@@ -834,6 +1469,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IFundingsources.
         /// </summary>
         public virtual IFundingsources Fundingsources { get; private set; }
+
+        /// <summary>
+        /// Gets the IFundingsourcemailboxtrackingfolders.
+        /// </summary>
+        public virtual IFundingsourcemailboxtrackingfolders Fundingsourcemailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IFundingsourceprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IFundingsourceprincipalobjectattributeaccesses Fundingsourceprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IFundingsourceprocesssession.
+        /// </summary>
+        public virtual IFundingsourceprocesssession Fundingsourceprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IIncidentadoxiolicencetypeset.
@@ -851,9 +1501,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInspectionreactivationhistories Inspectionreactivationhistories { get; private set; }
 
         /// <summary>
+        /// Gets the IInspectionreactivationhistorymailboxtrackingfolders.
+        /// </summary>
+        public virtual IInspectionreactivationhistorymailboxtrackingfolders Inspectionreactivationhistorymailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IInspectionreactivationhistoryprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IInspectionreactivationhistoryprincipalobjectattributeaccesses Inspectionreactivationhistoryprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IInspectionreactivationhistoryprocesssession.
+        /// </summary>
+        public virtual IInspectionreactivationhistoryprocesssession Inspectionreactivationhistoryprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IInspectorcommentsrollups.
         /// </summary>
         public virtual IInspectorcommentsrollups Inspectorcommentsrollups { get; private set; }
+
+        /// <summary>
+        /// Gets the IInspectorcommentsrollupmailboxtrackingfolders.
+        /// </summary>
+        public virtual IInspectorcommentsrollupmailboxtrackingfolders Inspectorcommentsrollupmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IInspectorcommentsrollupprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IInspectorcommentsrollupprincipalobjectattributeaccesses Inspectorcommentsrollupprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IInspectorcommentsrollupprocesssession.
+        /// </summary>
+        public virtual IInspectorcommentsrollupprocesssession Inspectorcommentsrollupprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IInterests.
@@ -861,9 +1541,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInterests Interests { get; private set; }
 
         /// <summary>
+        /// Gets the IInterestmailboxtrackingfolders.
+        /// </summary>
+        public virtual IInterestmailboxtrackingfolders Interestmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IInterestprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IInterestprincipalobjectattributeaccesses Interestprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IInterestprocesssession.
+        /// </summary>
+        public virtual IInterestprocesssession Interestprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IInvestigationactivities.
         /// </summary>
         public virtual IInvestigationactivities Investigationactivities { get; private set; }
+
+        /// <summary>
+        /// Gets the IInvestigationactivitymailboxtrackingfolders.
+        /// </summary>
+        public virtual IInvestigationactivitymailboxtrackingfolders Investigationactivitymailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IInvestigationactivityprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IInvestigationactivityprincipalobjectattributeaccesses Investigationactivityprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IInvestigationactivityprocesssession.
+        /// </summary>
+        public virtual IInvestigationactivityprocesssession Investigationactivityprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IInvestigationreactivationhistories.
@@ -871,9 +1581,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInvestigationreactivationhistories Investigationreactivationhistories { get; private set; }
 
         /// <summary>
+        /// Gets the IInvestigationreactivationhistorymailboxtrackingfolders.
+        /// </summary>
+        public virtual IInvestigationreactivationhistorymailboxtrackingfolders Investigationreactivationhistorymailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IInvestigationreactivationhistoryprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IInvestigationreactivationhistoryprincipalobjectattributeaccesses Investigationreactivationhistoryprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IInvestigationreactivationhistoryprocesssession.
+        /// </summary>
+        public virtual IInvestigationreactivationhistoryprocesssession Investigationreactivationhistoryprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IInvestigations.
         /// </summary>
         public virtual IInvestigations Investigations { get; private set; }
+
+        /// <summary>
+        /// Gets the IInvestigationmailboxtrackingfolders.
+        /// </summary>
+        public virtual IInvestigationmailboxtrackingfolders Investigationmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IInvestigationprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IInvestigationprincipalobjectattributeaccesses Investigationprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IInvestigationprocesssession.
+        /// </summary>
+        public virtual IInvestigationprocesssession Investigationprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the ILdborders.
@@ -901,6 +1641,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILdborderduplicatematchingrecord Ldborderduplicatematchingrecord { get; private set; }
 
         /// <summary>
+        /// Gets the ILdbordermailboxtrackingfolders.
+        /// </summary>
+        public virtual ILdbordermailboxtrackingfolders Ldbordermailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ILdborderprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ILdborderprincipalobjectattributeaccesses Ldborderprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ILdborderprocesssession.
+        /// </summary>
+        public virtual ILdborderprocesssession Ldborderprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the ILdbordersharepointdocumentlocations.
         /// </summary>
         public virtual ILdbordersharepointdocumentlocations Ldbordersharepointdocumentlocations { get; private set; }
@@ -919,6 +1674,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILegalentities.
         /// </summary>
         public virtual ILegalentities Legalentities { get; private set; }
+
+        /// <summary>
+        /// Gets the ILegalentitymailboxtrackingfolders.
+        /// </summary>
+        public virtual ILegalentitymailboxtrackingfolders Legalentitymailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ILegalentityprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ILegalentityprincipalobjectattributeaccesses Legalentityprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ILegalentityprocesssession.
+        /// </summary>
+        public virtual ILegalentityprocesssession Legalentityprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the ILegalentitytasklegalentity.
@@ -951,6 +1721,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicenceldbordertotalhistoryduplicatematchingrecord Licenceldbordertotalhistoryduplicatematchingrecord { get; private set; }
 
         /// <summary>
+        /// Gets the ILicenceldbordertotalhistorymailboxtrackingfolders.
+        /// </summary>
+        public virtual ILicenceldbordertotalhistorymailboxtrackingfolders Licenceldbordertotalhistorymailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicenceldbordertotalhistoryprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ILicenceldbordertotalhistoryprincipalobjectattributeaccesses Licenceldbordertotalhistoryprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicenceldbordertotalhistoryprocesssession.
+        /// </summary>
+        public virtual ILicenceldbordertotalhistoryprocesssession Licenceldbordertotalhistoryprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the ILicenceldbordertotalhistorysyncerrors.
         /// </summary>
         public virtual ILicenceldbordertotalhistorysyncerrors Licenceldbordertotalhistorysyncerrors { get; private set; }
@@ -981,6 +1766,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicencesadoxiolicenceldbordertotalhistorylicence Licencesadoxiolicenceldbordertotalhistorylicence { get; private set; }
 
         /// <summary>
+        /// Gets the ILicencesmailboxtrackingfolders.
+        /// </summary>
+        public virtual ILicencesmailboxtrackingfolders Licencesmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencesprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ILicencesprincipalobjectattributeaccesses Licencesprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencesprocesssession.
+        /// </summary>
+        public virtual ILicencesprocesssession Licencesprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the ILicencessharepointdocumentlocations.
         /// </summary>
         public virtual ILicencessharepointdocumentlocations Licencessharepointdocumentlocations { get; private set; }
@@ -1001,6 +1801,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicencetypes Licencetypes { get; private set; }
 
         /// <summary>
+        /// Gets the ILicencetypemailboxtrackingfolders.
+        /// </summary>
+        public virtual ILicencetypemailboxtrackingfolders Licencetypemailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencetypeprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ILicencetypeprincipalobjectattributeaccesses Licencetypeprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencetypeprocesssession.
+        /// </summary>
+        public virtual ILicencetypeprocesssession Licencetypeprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the ILicencetypesapplicationtypesset.
         /// </summary>
         public virtual ILicencetypesapplicationtypesset Licencetypesapplicationtypesset { get; private set; }
@@ -1011,9 +1826,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicenseechangelogs Licenseechangelogs { get; private set; }
 
         /// <summary>
+        /// Gets the ILicenseechangelogmailboxtrackingfolders.
+        /// </summary>
+        public virtual ILicenseechangelogmailboxtrackingfolders Licenseechangelogmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicenseechangelogprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ILicenseechangelogprincipalobjectattributeaccesses Licenseechangelogprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicenseechangelogprocesssession.
+        /// </summary>
+        public virtual ILicenseechangelogprocesssession Licenseechangelogprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the ILoans.
         /// </summary>
         public virtual ILoans Loans { get; private set; }
+
+        /// <summary>
+        /// Gets the ILoanmailboxtrackingfolders.
+        /// </summary>
+        public virtual ILoanmailboxtrackingfolders Loanmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ILoanprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ILoanprincipalobjectattributeaccesses Loanprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ILoanprocesssession.
+        /// </summary>
+        public virtual ILoanprocesssession Loanprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the ILocalgovindigenousnations.
@@ -1021,9 +1866,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILocalgovindigenousnations Localgovindigenousnations { get; private set; }
 
         /// <summary>
+        /// Gets the ILocalgovindigenousnationmailboxtrackingfolders.
+        /// </summary>
+        public virtual ILocalgovindigenousnationmailboxtrackingfolders Localgovindigenousnationmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ILocalgovindigenousnationprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ILocalgovindigenousnationprincipalobjectattributeaccesses Localgovindigenousnationprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ILocalgovindigenousnationprocesssession.
+        /// </summary>
+        public virtual ILocalgovindigenousnationprocesssession Localgovindigenousnationprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IPersonalhistorysummaries.
         /// </summary>
         public virtual IPersonalhistorysummaries Personalhistorysummaries { get; private set; }
+
+        /// <summary>
+        /// Gets the IPersonalhistorysummarymailboxtrackingfolders.
+        /// </summary>
+        public virtual IPersonalhistorysummarymailboxtrackingfolders Personalhistorysummarymailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IPersonalhistorysummaryprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IPersonalhistorysummaryprincipalobjectattributeaccesses Personalhistorysummaryprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IPersonalhistorysummaryprocesssession.
+        /// </summary>
+        public virtual IPersonalhistorysummaryprocesssession Personalhistorysummaryprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IPolicejurisdictions.
@@ -1031,9 +1906,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IPolicejurisdictions Policejurisdictions { get; private set; }
 
         /// <summary>
+        /// Gets the IPolicejurisdictionmailboxtrackingfolders.
+        /// </summary>
+        public virtual IPolicejurisdictionmailboxtrackingfolders Policejurisdictionmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IPolicejurisdictionprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IPolicejurisdictionprincipalobjectattributeaccesses Policejurisdictionprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IPolicejurisdictionprocesssession.
+        /// </summary>
+        public virtual IPolicejurisdictionprocesssession Policejurisdictionprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IPolicydocuments.
         /// </summary>
         public virtual IPolicydocuments Policydocuments { get; private set; }
+
+        /// <summary>
+        /// Gets the IPolicydocumentmailboxtrackingfolders.
+        /// </summary>
+        public virtual IPolicydocumentmailboxtrackingfolders Policydocumentmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IPolicydocumentprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IPolicydocumentprincipalobjectattributeaccesses Policydocumentprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IPolicydocumentprocesssession.
+        /// </summary>
+        public virtual IPolicydocumentprocesssession Policydocumentprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IPostalcodes.
@@ -1041,9 +1946,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IPostalcodes Postalcodes { get; private set; }
 
         /// <summary>
+        /// Gets the IPostalcodemailboxtrackingfolders.
+        /// </summary>
+        public virtual IPostalcodemailboxtrackingfolders Postalcodemailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IPostalcodeprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IPostalcodeprincipalobjectattributeaccesses Postalcodeprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IPostalcodeprocesssession.
+        /// </summary>
+        public virtual IPostalcodeprocesssession Postalcodeprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IPreviousaddresses.
         /// </summary>
         public virtual IPreviousaddresses Previousaddresses { get; private set; }
+
+        /// <summary>
+        /// Gets the IPreviousaddressmailboxtrackingfolders.
+        /// </summary>
+        public virtual IPreviousaddressmailboxtrackingfolders Previousaddressmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IPreviousaddressprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IPreviousaddressprincipalobjectattributeaccesses Previousaddressprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IPreviousaddressprocesssession.
+        /// </summary>
+        public virtual IPreviousaddressprocesssession Previousaddressprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IRegions.
@@ -1056,6 +1991,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRegionevents Regionevents { get; private set; }
 
         /// <summary>
+        /// Gets the IRegionmailboxtrackingfolders.
+        /// </summary>
+        public virtual IRegionmailboxtrackingfolders Regionmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegionprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IRegionprincipalobjectattributeaccesses Regionprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegionprocesssession.
+        /// </summary>
+        public virtual IRegionprocesssession Regionprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IRelatedparties.
         /// </summary>
         public virtual IRelatedparties Relatedparties { get; private set; }
@@ -1066,9 +2016,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ICompliancemeetingid Compliancemeetingid { get; private set; }
 
         /// <summary>
+        /// Gets the IRelatedpartymailboxtrackingfolders.
+        /// </summary>
+        public virtual IRelatedpartymailboxtrackingfolders Relatedpartymailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IRelatedpartyprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IRelatedpartyprincipalobjectattributeaccesses Relatedpartyprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IRelatedpartyprocesssession.
+        /// </summary>
+        public virtual IRelatedpartyprocesssession Relatedpartyprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the ISettings.
         /// </summary>
         public virtual ISettings Settings { get; private set; }
+
+        /// <summary>
+        /// Gets the ISettingmailboxtrackingfolders.
+        /// </summary>
+        public virtual ISettingmailboxtrackingfolders Settingmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ISettingprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ISettingprincipalobjectattributeaccesses Settingprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ISettingprocesssession.
+        /// </summary>
+        public virtual ISettingprocesssession Settingprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the ISpddatarows.
@@ -1076,9 +2056,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISpddatarows Spddatarows { get; private set; }
 
         /// <summary>
+        /// Gets the ISpddatarowmailboxtrackingfolders.
+        /// </summary>
+        public virtual ISpddatarowmailboxtrackingfolders Spddatarowmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpddatarowprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ISpddatarowprincipalobjectattributeaccesses Spddatarowprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpddatarowprocesssession.
+        /// </summary>
+        public virtual ISpddatarowprocesssession Spddatarowprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the ISpdexportses.
         /// </summary>
         public virtual ISpdexportses Spdexportses { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpdexportsmailboxtrackingfolders.
+        /// </summary>
+        public virtual ISpdexportsmailboxtrackingfolders Spdexportsmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpdexportsprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ISpdexportsprincipalobjectattributeaccesses Spdexportsprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpdexportsprocesssession.
+        /// </summary>
+        public virtual ISpdexportsprocesssession Spdexportsprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the ITaxandaccountings.
@@ -1086,9 +2096,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ITaxandaccountings Taxandaccountings { get; private set; }
 
         /// <summary>
+        /// Gets the ITaxandaccountingmailboxtrackingfolders.
+        /// </summary>
+        public virtual ITaxandaccountingmailboxtrackingfolders Taxandaccountingmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ITaxandaccountingprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ITaxandaccountingprincipalobjectattributeaccesses Taxandaccountingprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ITaxandaccountingprocesssession.
+        /// </summary>
+        public virtual ITaxandaccountingprocesssession Taxandaccountingprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the ITermsconditionslimitationspresets.
         /// </summary>
         public virtual ITermsconditionslimitationspresets Termsconditionslimitationspresets { get; private set; }
+
+        /// <summary>
+        /// Gets the ITermsconditionslimitationspresetmailboxtrackingfolders.
+        /// </summary>
+        public virtual ITermsconditionslimitationspresetmailboxtrackingfolders Termsconditionslimitationspresetmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ITermsconditionslimitationspresetprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ITermsconditionslimitationspresetprincipalobjectattributeaccesses Termsconditionslimitationspresetprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ITermsconditionslimitationspresetprocesssession.
+        /// </summary>
+        public virtual ITermsconditionslimitationspresetprocesssession Termsconditionslimitationspresetprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the ITerritories.
@@ -1096,9 +2136,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ITerritories Territories { get; private set; }
 
         /// <summary>
+        /// Gets the ITerritorymailboxtrackingfolders.
+        /// </summary>
+        public virtual ITerritorymailboxtrackingfolders Territorymailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ITerritoryprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ITerritoryprincipalobjectattributeaccesses Territoryprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ITerritoryprocesssession.
+        /// </summary>
+        public virtual ITerritoryprocesssession Territoryprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the ITiedhouseassociations.
         /// </summary>
         public virtual ITiedhouseassociations Tiedhouseassociations { get; private set; }
+
+        /// <summary>
+        /// Gets the ITiedhouseassociationmailboxtrackingfolders.
+        /// </summary>
+        public virtual ITiedhouseassociationmailboxtrackingfolders Tiedhouseassociationmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ITiedhouseassociationprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ITiedhouseassociationprincipalobjectattributeaccesses Tiedhouseassociationprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ITiedhouseassociationprocesssession.
+        /// </summary>
+        public virtual ITiedhouseassociationprocesssession Tiedhouseassociationprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the ITiedhouseconnections.
@@ -1106,9 +2176,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ITiedhouseconnections Tiedhouseconnections { get; private set; }
 
         /// <summary>
+        /// Gets the ITiedhouseconnectionmailboxtrackingfolders.
+        /// </summary>
+        public virtual ITiedhouseconnectionmailboxtrackingfolders Tiedhouseconnectionmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ITiedhouseconnectionprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ITiedhouseconnectionprincipalobjectattributeaccesses Tiedhouseconnectionprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ITiedhouseconnectionprocesssession.
+        /// </summary>
+        public virtual ITiedhouseconnectionprocesssession Tiedhouseconnectionprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IWitnesses.
         /// </summary>
         public virtual IWitnesses Witnesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IWitnessmailboxtrackingfolders.
+        /// </summary>
+        public virtual IWitnessmailboxtrackingfolders Witnessmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IWitnessprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IWitnessprincipalobjectattributeaccesses Witnessprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IWitnessprocesssession.
+        /// </summary>
+        public virtual IWitnessprocesssession Witnessprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IWorkerinvoicehistories.
@@ -1116,9 +2216,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IWorkerinvoicehistories Workerinvoicehistories { get; private set; }
 
         /// <summary>
+        /// Gets the IWorkerinvoicehistorymailboxtrackingfolders.
+        /// </summary>
+        public virtual IWorkerinvoicehistorymailboxtrackingfolders Workerinvoicehistorymailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IWorkerinvoicehistoryprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IWorkerinvoicehistoryprincipalobjectattributeaccesses Workerinvoicehistoryprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IWorkerinvoicehistoryprocesssession.
+        /// </summary>
+        public virtual IWorkerinvoicehistoryprocesssession Workerinvoicehistoryprocesssession { get; private set; }
+
+        /// <summary>
         /// Gets the IWorkers.
         /// </summary>
         public virtual IWorkers Workers { get; private set; }
+
+        /// <summary>
+        /// Gets the IWorkermailboxtrackingfolders.
+        /// </summary>
+        public virtual IWorkermailboxtrackingfolders Workermailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IWorkerprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IWorkerprincipalobjectattributeaccesses Workerprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IWorkerprocesssession.
+        /// </summary>
+        public virtual IWorkerprocesssession Workerprocesssession { get; private set; }
 
         /// <summary>
         /// Gets the IObjectidadoxioevent.
@@ -1401,6 +2531,301 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILists Lists { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioalias.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioalias Regardingobjectidadoxioalias { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplication.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioapplication Regardingobjectidadoxioapplication { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationbpfv3.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioapplicationbpfv3 Regardingobjectidadoxioapplicationbpfv3 { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationinvoicehistory.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioapplicationinvoicehistory Regardingobjectidadoxioapplicationinvoicehistory { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationtermsconditionslimitation.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioapplicationtermsconditionslimitation Regardingobjectidadoxioapplicationtermsconditionslimitation { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationtype.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioapplicationtype Regardingobjectidadoxioapplicationtype { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationtypecontent.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioapplicationtypecontent Regardingobjectidadoxioapplicationtypecontent { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioarea.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioarea Regardingobjectidadoxioarea { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioauditlogrequest.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioauditlogrequest Regardingobjectidadoxioauditlogrequest { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiobusinessaccount.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiobusinessaccount Regardingobjectidadoxiobusinessaccount { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiocannabisinventoryreport.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiocannabisinventoryreport Regardingobjectidadoxiocannabisinventoryreport { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiocannabismonthlyreport.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiocannabismonthlyreport Regardingobjectidadoxiocannabismonthlyreport { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiocannabisproductadmin.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiocannabisproductadmin Regardingobjectidadoxiocannabisproductadmin { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiocitydistrict.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiocitydistrict Regardingobjectidadoxiocitydistrict { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiocomplaint.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiocomplaint Regardingobjectidadoxiocomplaint { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiocomplianceinvestigation.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiocomplianceinvestigation Regardingobjectidadoxiocomplianceinvestigation { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiocompliancemeeting.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiocompliancemeeting Regardingobjectidadoxiocompliancemeeting { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiocontravention.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiocontravention Regardingobjectidadoxiocontravention { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiocontraventionadmin.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiocontraventionadmin Regardingobjectidadoxiocontraventionadmin { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiocorporatehistorysummary.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiocorporatehistorysummary Regardingobjectidadoxiocorporatehistorysummary { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiocorporaterole.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiocorporaterole Regardingobjectidadoxiocorporaterole { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiocustomautonumberdefinition.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiocustomautonumberdefinition Regardingobjectidadoxiocustomautonumberdefinition { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiocustomautonumberrequest.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiocustomautonumberrequest Regardingobjectidadoxiocustomautonumberrequest { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiodocument.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiodocument Regardingobjectidadoxiodocument { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiodocumentadmin.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiodocumentadmin Regardingobjectidadoxiodocumentadmin { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioestablishment.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioestablishment Regardingobjectidadoxioestablishment { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioestablishmentwatchword.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioestablishmentwatchword Regardingobjectidadoxioestablishmentwatchword { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiofiainvestigationlog.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiofiainvestigationlog Regardingobjectidadoxiofiainvestigationlog { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiofundingsource.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiofundingsource Regardingobjectidadoxiofundingsource { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioinspectionreactivationhistory.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioinspectionreactivationhistory Regardingobjectidadoxioinspectionreactivationhistory { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioinspectorcommentsrollup.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioinspectorcommentsrollup Regardingobjectidadoxioinspectorcommentsrollup { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiointerest.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiointerest Regardingobjectidadoxiointerest { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioinvestigation.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioinvestigation Regardingobjectidadoxioinvestigation { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioinvestigationactivity.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioinvestigationactivity Regardingobjectidadoxioinvestigationactivity { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioinvestigationreactivationhistory.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioinvestigationreactivationhistory Regardingobjectidadoxioinvestigationreactivationhistory { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiolegalentity.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiolegalentity Regardingobjectidadoxiolegalentity { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiolicences.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiolicences Regardingobjectidadoxiolicences { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiolicencetype.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiolicencetype Regardingobjectidadoxiolicencetype { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiolicenseechangelog.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiolicenseechangelog Regardingobjectidadoxiolicenseechangelog { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioloan.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioloan Regardingobjectidadoxioloan { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiolocalgovindigenousnation.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiolocalgovindigenousnation Regardingobjectidadoxiolocalgovindigenousnation { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiopersonalhistorysummary.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiopersonalhistorysummary Regardingobjectidadoxiopersonalhistorysummary { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiopolicejurisdiction.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiopolicejurisdiction Regardingobjectidadoxiopolicejurisdiction { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiopolicydocument.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiopolicydocument Regardingobjectidadoxiopolicydocument { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiopostalcode.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiopostalcode Regardingobjectidadoxiopostalcode { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiopreviousaddress.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiopreviousaddress Regardingobjectidadoxiopreviousaddress { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioregion.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioregion Regardingobjectidadoxioregion { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiorelatedparty.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiorelatedparty Regardingobjectidadoxiorelatedparty { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiosetting.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiosetting Regardingobjectidadoxiosetting { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiospddatarow.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiospddatarow Regardingobjectidadoxiospddatarow { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiospdexports.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiospdexports Regardingobjectidadoxiospdexports { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiotaxandaccounting.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiotaxandaccounting Regardingobjectidadoxiotaxandaccounting { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiotermsconditionslimitationspreset.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiotermsconditionslimitationspreset Regardingobjectidadoxiotermsconditionslimitationspreset { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioterritory.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioterritory Regardingobjectidadoxioterritory { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiotiedhouseassociation.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiotiedhouseassociation Regardingobjectidadoxiotiedhouseassociation { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiotiedhouseconnection.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiotiedhouseconnection Regardingobjectidadoxiotiedhouseconnection { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiowitness.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiowitness Regardingobjectidadoxiowitness { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioworker.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioworker Regardingobjectidadoxioworker { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioworkerinvoicehistory.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioworkerinvoicehistory Regardingobjectidadoxioworkerinvoicehistory { get; private set; }
+
+        /// <summary>
         /// Gets the IOrganizationadoxioapplicationlicenseechangesv10.
         /// </summary>
         public virtual IOrganizationadoxioapplicationlicenseechangesv10 Organizationadoxioapplicationlicenseechangesv10 { get; private set; }
@@ -1429,6 +2854,371 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IRegardingobjectidadoxioeventphonecall.
         /// </summary>
         public virtual IRegardingobjectidadoxioeventphonecall Regardingobjectidadoxioeventphonecall { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioalias.
+        /// </summary>
+        public virtual IObjectidadoxioalias Objectidadoxioalias { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioapplication.
+        /// </summary>
+        public virtual IObjectidadoxioapplication Objectidadoxioapplication { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioapplicationbpfv3.
+        /// </summary>
+        public virtual IObjectidadoxioapplicationbpfv3 Objectidadoxioapplicationbpfv3 { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioapplicationinvoicehistory.
+        /// </summary>
+        public virtual IObjectidadoxioapplicationinvoicehistory Objectidadoxioapplicationinvoicehistory { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioapplicationlicenseechangesv10.
+        /// </summary>
+        public virtual IObjectidadoxioapplicationlicenseechangesv10 Objectidadoxioapplicationlicenseechangesv10 { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioapplicationliquorbpf.
+        /// </summary>
+        public virtual IObjectidadoxioapplicationliquorbpf Objectidadoxioapplicationliquorbpf { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioapplicationrelocationv1.
+        /// </summary>
+        public virtual IObjectidadoxioapplicationrelocationv1 Objectidadoxioapplicationrelocationv1 { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioapplicationstructurechangev1.
+        /// </summary>
+        public virtual IObjectidadoxioapplicationstructurechangev1 Objectidadoxioapplicationstructurechangev1 { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioapplicationtermsconditionslimitation.
+        /// </summary>
+        public virtual IObjectidadoxioapplicationtermsconditionslimitation Objectidadoxioapplicationtermsconditionslimitation { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioapplicationtransferownershipv1.
+        /// </summary>
+        public virtual IObjectidadoxioapplicationtransferownershipv1 Objectidadoxioapplicationtransferownershipv1 { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioapplicationtype.
+        /// </summary>
+        public virtual IObjectidadoxioapplicationtype Objectidadoxioapplicationtype { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioapplicationtypecontent.
+        /// </summary>
+        public virtual IObjectidadoxioapplicationtypecontent Objectidadoxioapplicationtypecontent { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioapplicationtypefeeschedule.
+        /// </summary>
+        public virtual IObjectidadoxioapplicationtypefeeschedule Objectidadoxioapplicationtypefeeschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioarea.
+        /// </summary>
+        public virtual IObjectidadoxioarea Objectidadoxioarea { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioauditlogrequest.
+        /// </summary>
+        public virtual IObjectidadoxioauditlogrequest Objectidadoxioauditlogrequest { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiobusinessaccount.
+        /// </summary>
+        public virtual IObjectidadoxiobusinessaccount Objectidadoxiobusinessaccount { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiocannabisinventoryreport.
+        /// </summary>
+        public virtual IObjectidadoxiocannabisinventoryreport Objectidadoxiocannabisinventoryreport { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiocannabismonthlyreport.
+        /// </summary>
+        public virtual IObjectidadoxiocannabismonthlyreport Objectidadoxiocannabismonthlyreport { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiocannabisproductadmin.
+        /// </summary>
+        public virtual IObjectidadoxiocannabisproductadmin Objectidadoxiocannabisproductadmin { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiocitydistrict.
+        /// </summary>
+        public virtual IObjectidadoxiocitydistrict Objectidadoxiocitydistrict { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiocomplaint.
+        /// </summary>
+        public virtual IObjectidadoxiocomplaint Objectidadoxiocomplaint { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiocomplianceinvestigation.
+        /// </summary>
+        public virtual IObjectidadoxiocomplianceinvestigation Objectidadoxiocomplianceinvestigation { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiocompliancemeeting.
+        /// </summary>
+        public virtual IObjectidadoxiocompliancemeeting Objectidadoxiocompliancemeeting { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiocontravention.
+        /// </summary>
+        public virtual IObjectidadoxiocontravention Objectidadoxiocontravention { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiocontraventionadmin.
+        /// </summary>
+        public virtual IObjectidadoxiocontraventionadmin Objectidadoxiocontraventionadmin { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiocorporatehistorysummary.
+        /// </summary>
+        public virtual IObjectidadoxiocorporatehistorysummary Objectidadoxiocorporatehistorysummary { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiocorporaterole.
+        /// </summary>
+        public virtual IObjectidadoxiocorporaterole Objectidadoxiocorporaterole { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiocustomautonumberdefinition.
+        /// </summary>
+        public virtual IObjectidadoxiocustomautonumberdefinition Objectidadoxiocustomautonumberdefinition { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiocustomautonumberrequest.
+        /// </summary>
+        public virtual IObjectidadoxiocustomautonumberrequest Objectidadoxiocustomautonumberrequest { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiodocument.
+        /// </summary>
+        public virtual IObjectidadoxiodocument Objectidadoxiodocument { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiodocumentadmin.
+        /// </summary>
+        public virtual IObjectidadoxiodocumentadmin Objectidadoxiodocumentadmin { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioendorsement.
+        /// </summary>
+        public virtual IObjectidadoxioendorsement Objectidadoxioendorsement { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioendorsementtype.
+        /// </summary>
+        public virtual IObjectidadoxioendorsementtype Objectidadoxioendorsementtype { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioestablishment.
+        /// </summary>
+        public virtual IObjectidadoxioestablishment Objectidadoxioestablishment { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioestablishmentwatchword.
+        /// </summary>
+        public virtual IObjectidadoxioestablishmentwatchword Objectidadoxioestablishmentwatchword { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioeventschedule.
+        /// </summary>
+        public virtual IObjectidadoxioeventschedule Objectidadoxioeventschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioexhibit.
+        /// </summary>
+        public virtual IObjectidadoxioexhibit Objectidadoxioexhibit { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiofederalreportexport.
+        /// </summary>
+        public virtual IObjectidadoxiofederalreportexport Objectidadoxiofederalreportexport { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiofiainvestigationlog.
+        /// </summary>
+        public virtual IObjectidadoxiofiainvestigationlog Objectidadoxiofiainvestigationlog { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioformelementuploadfield.
+        /// </summary>
+        public virtual IObjectidadoxioformelementuploadfield Objectidadoxioformelementuploadfield { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiofundingsource.
+        /// </summary>
+        public virtual IObjectidadoxiofundingsource Objectidadoxiofundingsource { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioinspectionreactivationhistory.
+        /// </summary>
+        public virtual IObjectidadoxioinspectionreactivationhistory Objectidadoxioinspectionreactivationhistory { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioinspectorcommentsrollup.
+        /// </summary>
+        public virtual IObjectidadoxioinspectorcommentsrollup Objectidadoxioinspectorcommentsrollup { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiointerest.
+        /// </summary>
+        public virtual IObjectidadoxiointerest Objectidadoxiointerest { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioinvestigation.
+        /// </summary>
+        public virtual IObjectidadoxioinvestigation Objectidadoxioinvestigation { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioinvestigationactivity.
+        /// </summary>
+        public virtual IObjectidadoxioinvestigationactivity Objectidadoxioinvestigationactivity { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioinvestigationreactivationhistory.
+        /// </summary>
+        public virtual IObjectidadoxioinvestigationreactivationhistory Objectidadoxioinvestigationreactivationhistory { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioldborder.
+        /// </summary>
+        public virtual IObjectidadoxioldborder Objectidadoxioldborder { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiolegalentity.
+        /// </summary>
+        public virtual IObjectidadoxiolegalentity Objectidadoxiolegalentity { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiolicenceldbordertotalhistory.
+        /// </summary>
+        public virtual IObjectidadoxiolicenceldbordertotalhistory Objectidadoxiolicenceldbordertotalhistory { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiolicences.
+        /// </summary>
+        public virtual IObjectidadoxiolicences Objectidadoxiolicences { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiolicencetype.
+        /// </summary>
+        public virtual IObjectidadoxiolicencetype Objectidadoxiolicencetype { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiolicenseechangelog.
+        /// </summary>
+        public virtual IObjectidadoxiolicenseechangelog Objectidadoxiolicenseechangelog { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioloan.
+        /// </summary>
+        public virtual IObjectidadoxioloan Objectidadoxioloan { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiolocalgovindigenousnation.
+        /// </summary>
+        public virtual IObjectidadoxiolocalgovindigenousnation Objectidadoxiolocalgovindigenousnation { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiopersonalhistorysummary.
+        /// </summary>
+        public virtual IObjectidadoxiopersonalhistorysummary Objectidadoxiopersonalhistorysummary { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiopolicejurisdiction.
+        /// </summary>
+        public virtual IObjectidadoxiopolicejurisdiction Objectidadoxiopolicejurisdiction { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiopolicydocument.
+        /// </summary>
+        public virtual IObjectidadoxiopolicydocument Objectidadoxiopolicydocument { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiopostalcode.
+        /// </summary>
+        public virtual IObjectidadoxiopostalcode Objectidadoxiopostalcode { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiopreviousaddress.
+        /// </summary>
+        public virtual IObjectidadoxiopreviousaddress Objectidadoxiopreviousaddress { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioregion.
+        /// </summary>
+        public virtual IObjectidadoxioregion Objectidadoxioregion { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiorelatedparty.
+        /// </summary>
+        public virtual IObjectidadoxiorelatedparty Objectidadoxiorelatedparty { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiosetting.
+        /// </summary>
+        public virtual IObjectidadoxiosetting Objectidadoxiosetting { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiospddatarow.
+        /// </summary>
+        public virtual IObjectidadoxiospddatarow Objectidadoxiospddatarow { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiospdexports.
+        /// </summary>
+        public virtual IObjectidadoxiospdexports Objectidadoxiospdexports { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiotaxandaccounting.
+        /// </summary>
+        public virtual IObjectidadoxiotaxandaccounting Objectidadoxiotaxandaccounting { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiotermsconditionslimitationspreset.
+        /// </summary>
+        public virtual IObjectidadoxiotermsconditionslimitationspreset Objectidadoxiotermsconditionslimitationspreset { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioterritory.
+        /// </summary>
+        public virtual IObjectidadoxioterritory Objectidadoxioterritory { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiotiedhouseassociation.
+        /// </summary>
+        public virtual IObjectidadoxiotiedhouseassociation Objectidadoxiotiedhouseassociation { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiotiedhouseconnection.
+        /// </summary>
+        public virtual IObjectidadoxiotiedhouseconnection Objectidadoxiotiedhouseconnection { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiowitness.
+        /// </summary>
+        public virtual IObjectidadoxiowitness Objectidadoxiowitness { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioworker.
+        /// </summary>
+        public virtual IObjectidadoxioworker Objectidadoxioworker { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioworkerinvoicehistory.
+        /// </summary>
+        public virtual IObjectidadoxioworkerinvoicehistory Objectidadoxioworkerinvoicehistory { get; private set; }
 
         /// <summary>
         /// Gets the ILkadoxioapplicationlicenseechangesv10activestageid.
@@ -1479,16 +3269,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISharepointdocumentlocations.
         /// </summary>
         public virtual ISharepointdocumentlocations Sharepointdocumentlocations { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiocontravention.
-        /// </summary>
-        public virtual IRegardingobjectidadoxiocontravention Regardingobjectidadoxiocontravention { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiolicences.
-        /// </summary>
-        public virtual IRegardingobjectidadoxiolicences Regardingobjectidadoxiolicences { get; private set; }
 
         /// <summary>
         /// Gets the ISharepointsites.
@@ -2224,26 +4004,47 @@ namespace Gov.Lclb.Cllb.Interfaces
             Regardingobjectidadoxioevent = new Regardingobjectidadoxioevent(this);
             Adoxiolicencetypeadoxioinvestigationset = new Adoxiolicencetypeadoxioinvestigationset(this);
             Aliases = new Aliases(this);
+            Aliasmailboxtrackingfolders = new Aliasmailboxtrackingfolders(this);
+            Aliasprincipalobjectattributeaccesses = new Aliasprincipalobjectattributeaccesses(this);
+            Aliasprocesssession = new Aliasprocesssession(this);
             Applicationbpfv3s = new Applicationbpfv3s(this);
+            Applicationbpfv3mailboxtrackingfolders = new Applicationbpfv3mailboxtrackingfolders(this);
+            Applicationbpfv3principalobjectattributeaccesses = new Applicationbpfv3principalobjectattributeaccesses(this);
+            Applicationbpfv3processsession = new Applicationbpfv3processsession(this);
             Applicationinvoicehistories = new Applicationinvoicehistories(this);
+            Applicationinvoicehistorymailboxtrackingfolders = new Applicationinvoicehistorymailboxtrackingfolders(this);
+            Applicationinvoicehistoryprincipalobjectattributeaccesses = new Applicationinvoicehistoryprincipalobjectattributeaccesses(this);
+            Applicationinvoicehistoryprocesssession = new Applicationinvoicehistoryprocesssession(this);
             Applicationlicenseechangesv10s = new Applicationlicenseechangesv10s(this);
             Applicationlicenseechangesv10asyncoperations = new Applicationlicenseechangesv10asyncoperations(this);
             Applicationlicenseechangesv10bulkdeletefailures = new Applicationlicenseechangesv10bulkdeletefailures(this);
+            Applicationlicenseechangesv10mailboxtrackingfolders = new Applicationlicenseechangesv10mailboxtrackingfolders(this);
+            Applicationlicenseechangesv10principalobjectattributeaccesses = new Applicationlicenseechangesv10principalobjectattributeaccesses(this);
+            Applicationlicenseechangesv10processsession = new Applicationlicenseechangesv10processsession(this);
             Applicationlicenseechangesv10syncerrors = new Applicationlicenseechangesv10syncerrors(this);
             Applicationlicenseechangesv10workflowlogs = new Applicationlicenseechangesv10workflowlogs(this);
             Bpfadoxioapplicationid = new Bpfadoxioapplicationid(this);
             Applicationliquorbpfs = new Applicationliquorbpfs(this);
             Applicationliquorbpfasyncoperations = new Applicationliquorbpfasyncoperations(this);
             Applicationliquorbpfbulkdeletefailures = new Applicationliquorbpfbulkdeletefailures(this);
+            Applicationliquorbpfmailboxtrackingfolders = new Applicationliquorbpfmailboxtrackingfolders(this);
+            Applicationliquorbpfprincipalobjectattributeaccesses = new Applicationliquorbpfprincipalobjectattributeaccesses(this);
+            Applicationliquorbpfprocesssession = new Applicationliquorbpfprocesssession(this);
             Applicationliquorbpfsyncerrors = new Applicationliquorbpfsyncerrors(this);
             Applicationliquorbpfworkflowlogs = new Applicationliquorbpfworkflowlogs(this);
             Applicationrelocationv1s = new Applicationrelocationv1s(this);
             Applicationrelocationv1asyncoperations = new Applicationrelocationv1asyncoperations(this);
             Applicationrelocationv1bulkdeletefailures = new Applicationrelocationv1bulkdeletefailures(this);
+            Applicationrelocationv1mailboxtrackingfolders = new Applicationrelocationv1mailboxtrackingfolders(this);
+            Applicationrelocationv1principalobjectattributeaccesses = new Applicationrelocationv1principalobjectattributeaccesses(this);
+            Applicationrelocationv1processsession = new Applicationrelocationv1processsession(this);
             Applicationrelocationv1syncerrors = new Applicationrelocationv1syncerrors(this);
             Applicationrelocationv1workflowlogs = new Applicationrelocationv1workflowlogs(this);
             Applications = new Applications(this);
             Applicationadoxioendorsementapplication = new Applicationadoxioendorsementapplication(this);
+            Applicationmailboxtrackingfolders = new Applicationmailboxtrackingfolders(this);
+            Applicationprincipalobjectattributeaccesses = new Applicationprincipalobjectattributeaccesses(this);
+            Applicationprocesssession = new Applicationprocesssession(this);
             Bpfadoxioapplicationadoxioapplicationlicenseechangesv10 = new Bpfadoxioapplicationadoxioapplicationlicenseechangesv10(this);
             Bpfadoxioapplicationadoxioapplicationliquorbpf = new Bpfadoxioapplicationadoxioapplicationliquorbpf(this);
             Bpfadoxioapplicationadoxioapplicationrelocationv1 = new Bpfadoxioapplicationadoxioapplicationrelocationv1(this);
@@ -2252,55 +4053,134 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationstructurechangev1s = new Applicationstructurechangev1s(this);
             Applicationstructurechangev1asyncoperations = new Applicationstructurechangev1asyncoperations(this);
             Applicationstructurechangev1bulkdeletefailures = new Applicationstructurechangev1bulkdeletefailures(this);
+            Applicationstructurechangev1mailboxtrackingfolders = new Applicationstructurechangev1mailboxtrackingfolders(this);
+            Applicationstructurechangev1principalobjectattributeaccesses = new Applicationstructurechangev1principalobjectattributeaccesses(this);
+            Applicationstructurechangev1processsession = new Applicationstructurechangev1processsession(this);
             Applicationstructurechangev1syncerrors = new Applicationstructurechangev1syncerrors(this);
             Applicationstructurechangev1workflowlogs = new Applicationstructurechangev1workflowlogs(this);
             Applicationtermsconditionslimitations = new Applicationtermsconditionslimitations(this);
+            Applicationtermsconditionslimitationmailboxtrackingfolders = new Applicationtermsconditionslimitationmailboxtrackingfolders(this);
+            Applicationtermsconditionslimitationprincipalobjectattributeaccesses = new Applicationtermsconditionslimitationprincipalobjectattributeaccesses(this);
+            Applicationtermsconditionslimitationprocesssession = new Applicationtermsconditionslimitationprocesssession(this);
             Applicationtransferownershipv1s = new Applicationtransferownershipv1s(this);
             Applicationtransferownershipv1asyncoperations = new Applicationtransferownershipv1asyncoperations(this);
             Applicationtransferownershipv1bulkdeletefailures = new Applicationtransferownershipv1bulkdeletefailures(this);
+            Applicationtransferownershipv1mailboxtrackingfolders = new Applicationtransferownershipv1mailboxtrackingfolders(this);
+            Applicationtransferownershipv1principalobjectattributeaccesses = new Applicationtransferownershipv1principalobjectattributeaccesses(this);
+            Applicationtransferownershipv1processsession = new Applicationtransferownershipv1processsession(this);
             Applicationtransferownershipv1syncerrors = new Applicationtransferownershipv1syncerrors(this);
             Applicationtransferownershipv1workflowlogs = new Applicationtransferownershipv1workflowlogs(this);
             Applicationtypecontents = new Applicationtypecontents(this);
+            Applicationtypecontentmailboxtrackingfolders = new Applicationtypecontentmailboxtrackingfolders(this);
+            Applicationtypecontentprincipalobjectattributeaccesses = new Applicationtypecontentprincipalobjectattributeaccesses(this);
+            Applicationtypecontentprocesssession = new Applicationtypecontentprocesssession(this);
             Applicationtypefeeschedules = new Applicationtypefeeschedules(this);
             Applicationtypefeescheduleasyncoperations = new Applicationtypefeescheduleasyncoperations(this);
             Applicationtypefeeschedulebulkdeletefailures = new Applicationtypefeeschedulebulkdeletefailures(this);
             Applicationtypefeescheduleduplicatebaserecord = new Applicationtypefeescheduleduplicatebaserecord(this);
             Applicationtypefeescheduleduplicatematchingrecord = new Applicationtypefeescheduleduplicatematchingrecord(this);
+            Applicationtypefeeschedulemailboxtrackingfolders = new Applicationtypefeeschedulemailboxtrackingfolders(this);
+            Applicationtypefeescheduleprincipalobjectattributeaccesses = new Applicationtypefeescheduleprincipalobjectattributeaccesses(this);
+            Applicationtypefeescheduleprocesssession = new Applicationtypefeescheduleprocesssession(this);
             Applicationtypefeeschedulesyncerrors = new Applicationtypefeeschedulesyncerrors(this);
             Applicationtypeid = new Applicationtypeid(this);
             Feeproduct = new Feeproduct(this);
             Applicationtypes = new Applicationtypes(this);
             Applicationtypeadoxioapplicationtypefeescheduleapplicationtypeid = new Applicationtypeadoxioapplicationtypefeescheduleapplicationtypeid(this);
+            Applicationtypeadoxioendorsementapplicationtype = new Applicationtypeadoxioendorsementapplicationtype(this);
             Applicationtypeformelementuploadfields = new Applicationtypeformelementuploadfields(this);
+            Applicationtypemailboxtrackingfolders = new Applicationtypemailboxtrackingfolders(this);
+            Applicationtypeprincipalobjectattributeaccesses = new Applicationtypeprincipalobjectattributeaccesses(this);
+            Applicationtypeprocesssession = new Applicationtypeprocesssession(this);
             Areas = new Areas(this);
             Areaevents = new Areaevents(this);
+            Areamailboxtrackingfolders = new Areamailboxtrackingfolders(this);
+            Areaprincipalobjectattributeaccesses = new Areaprincipalobjectattributeaccesses(this);
+            Areaprocesssession = new Areaprocesssession(this);
             Auditlogrequests = new Auditlogrequests(this);
+            Auditlogrequestmailboxtrackingfolders = new Auditlogrequestmailboxtrackingfolders(this);
+            Auditlogrequestprincipalobjectattributeaccesses = new Auditlogrequestprincipalobjectattributeaccesses(this);
+            Auditlogrequestprocesssession = new Auditlogrequestprocesssession(this);
             Businessaccounts = new Businessaccounts(this);
+            Businessaccountmailboxtrackingfolders = new Businessaccountmailboxtrackingfolders(this);
+            Businessaccountprincipalobjectattributeaccesses = new Businessaccountprincipalobjectattributeaccesses(this);
+            Businessaccountprocesssession = new Businessaccountprocesssession(this);
             Cannabisinventoryreports = new Cannabisinventoryreports(this);
+            Cannabisinventoryreportmailboxtrackingfolders = new Cannabisinventoryreportmailboxtrackingfolders(this);
+            Cannabisinventoryreportprincipalobjectattributeaccesses = new Cannabisinventoryreportprincipalobjectattributeaccesses(this);
+            Cannabisinventoryreportprocesssession = new Cannabisinventoryreportprocesssession(this);
             Cannabismonthlyreports = new Cannabismonthlyreports(this);
+            Cannabismonthlyreportmailboxtrackingfolders = new Cannabismonthlyreportmailboxtrackingfolders(this);
+            Cannabismonthlyreportprincipalobjectattributeaccesses = new Cannabismonthlyreportprincipalobjectattributeaccesses(this);
+            Cannabismonthlyreportprocesssession = new Cannabismonthlyreportprocesssession(this);
             Federalreportexportid = new Federalreportexportid(this);
             Cannabisproductadmins = new Cannabisproductadmins(this);
+            Cannabisproductadminmailboxtrackingfolders = new Cannabisproductadminmailboxtrackingfolders(this);
+            Cannabisproductadminprincipalobjectattributeaccesses = new Cannabisproductadminprincipalobjectattributeaccesses(this);
+            Cannabisproductadminprocesssession = new Cannabisproductadminprocesssession(this);
             Citydistricts = new Citydistricts(this);
+            Citydistrictmailboxtrackingfolders = new Citydistrictmailboxtrackingfolders(this);
+            Citydistrictprincipalobjectattributeaccesses = new Citydistrictprincipalobjectattributeaccesses(this);
+            Citydistrictprocesssession = new Citydistrictprocesssession(this);
             Complaints = new Complaints(this);
+            Complaintmailboxtrackingfolders = new Complaintmailboxtrackingfolders(this);
+            Complaintprincipalobjectattributeaccesses = new Complaintprincipalobjectattributeaccesses(this);
+            Complaintprocesssession = new Complaintprocesssession(this);
             Complianceinvestigations = new Complianceinvestigations(this);
+            Complianceinvestigationmailboxtrackingfolders = new Complianceinvestigationmailboxtrackingfolders(this);
+            Complianceinvestigationprincipalobjectattributeaccesses = new Complianceinvestigationprincipalobjectattributeaccesses(this);
+            Complianceinvestigationprocesssession = new Complianceinvestigationprocesssession(this);
             Investigationexhibits = new Investigationexhibits(this);
             Compliancemeetings = new Compliancemeetings(this);
+            Compliancemeetingmailboxtrackingfolders = new Compliancemeetingmailboxtrackingfolders(this);
+            Compliancemeetingprincipalobjectattributeaccesses = new Compliancemeetingprincipalobjectattributeaccesses(this);
+            Compliancemeetingprocesssession = new Compliancemeetingprocesssession(this);
             Compliancemeetingrelatedparties = new Compliancemeetingrelatedparties(this);
+            Contraventionid = new Contraventionid(this);
             Contraventionadmins = new Contraventionadmins(this);
+            Contraventionadminmailboxtrackingfolders = new Contraventionadminmailboxtrackingfolders(this);
+            Contraventionadminprincipalobjectattributeaccesses = new Contraventionadminprincipalobjectattributeaccesses(this);
+            Contraventionadminprocesssession = new Contraventionadminprocesssession(this);
             Contraventions = new Contraventions(this);
+            Contraventioncompliancemeetings = new Contraventioncompliancemeetings(this);
+            Contraventionmailboxtrackingfolders = new Contraventionmailboxtrackingfolders(this);
+            Contraventionprincipalobjectattributeaccesses = new Contraventionprincipalobjectattributeaccesses(this);
+            Contraventionprocesssession = new Contraventionprocesssession(this);
             Contraventionsharepointdocumentlocations = new Contraventionsharepointdocumentlocations(this);
             Corporatehistorysummaries = new Corporatehistorysummaries(this);
+            Corporatehistorysummarymailboxtrackingfolders = new Corporatehistorysummarymailboxtrackingfolders(this);
+            Corporatehistorysummaryprincipalobjectattributeaccesses = new Corporatehistorysummaryprincipalobjectattributeaccesses(this);
+            Corporatehistorysummaryprocesssession = new Corporatehistorysummaryprocesssession(this);
             Corporateroles = new Corporateroles(this);
+            Corporaterolemailboxtrackingfolders = new Corporaterolemailboxtrackingfolders(this);
+            Corporateroleprincipalobjectattributeaccesses = new Corporateroleprincipalobjectattributeaccesses(this);
+            Corporateroleprocesssession = new Corporateroleprocesssession(this);
             Customautonumberdefinitions = new Customautonumberdefinitions(this);
+            Customautonumberdefinitionmailboxtrackingfolders = new Customautonumberdefinitionmailboxtrackingfolders(this);
+            Customautonumberdefinitionprincipalobjectattributeaccesses = new Customautonumberdefinitionprincipalobjectattributeaccesses(this);
+            Customautonumberdefinitionprocesssession = new Customautonumberdefinitionprocesssession(this);
             Customautonumberrequests = new Customautonumberrequests(this);
+            Customautonumberrequestmailboxtrackingfolders = new Customautonumberrequestmailboxtrackingfolders(this);
+            Customautonumberrequestprincipalobjectattributeaccesses = new Customautonumberrequestprincipalobjectattributeaccesses(this);
+            Customautonumberrequestprocesssession = new Customautonumberrequestprocesssession(this);
             Documentadmins = new Documentadmins(this);
+            Documentadminmailboxtrackingfolders = new Documentadminmailboxtrackingfolders(this);
+            Documentadminprincipalobjectattributeaccesses = new Documentadminprincipalobjectattributeaccesses(this);
+            Documentadminprocesssession = new Documentadminprocesssession(this);
             Documents = new Documents(this);
+            Documentmailboxtrackingfolders = new Documentmailboxtrackingfolders(this);
+            Documentprincipalobjectattributeaccesses = new Documentprincipalobjectattributeaccesses(this);
+            Documentprocesssession = new Documentprocesssession(this);
             Endorsements = new Endorsements(this);
             Application = new Application(this);
+            Applicationtype = new Applicationtype(this);
             Endorsementasyncoperations = new Endorsementasyncoperations(this);
             Endorsementbulkdeletefailures = new Endorsementbulkdeletefailures(this);
             Endorsementduplicatebaserecord = new Endorsementduplicatebaserecord(this);
             Endorsementduplicatematchingrecord = new Endorsementduplicatematchingrecord(this);
+            Endorsementmailboxtrackingfolders = new Endorsementmailboxtrackingfolders(this);
+            Endorsementprincipalobjectattributeaccesses = new Endorsementprincipalobjectattributeaccesses(this);
+            Endorsementprocesssession = new Endorsementprocesssession(this);
             Endorsementsharepointdocumentlocations = new Endorsementsharepointdocumentlocations(this);
             Endorsementsyncerrors = new Endorsementsyncerrors(this);
             Endorsementtype = new Endorsementtype(this);
@@ -2313,9 +4193,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             Endorsementtypebulkdeletefailures = new Endorsementtypebulkdeletefailures(this);
             Endorsementtypeduplicatebaserecord = new Endorsementtypeduplicatebaserecord(this);
             Endorsementtypeduplicatematchingrecord = new Endorsementtypeduplicatematchingrecord(this);
+            Endorsementtypemailboxtrackingfolders = new Endorsementtypemailboxtrackingfolders(this);
+            Endorsementtypeprincipalobjectattributeaccesses = new Endorsementtypeprincipalobjectattributeaccesses(this);
+            Endorsementtypeprocesssession = new Endorsementtypeprocesssession(this);
             Endorsementtypesyncerrors = new Endorsementtypesyncerrors(this);
             Establishments = new Establishments(this);
+            Establishmentmailboxtrackingfolders = new Establishmentmailboxtrackingfolders(this);
+            Establishmentprincipalobjectattributeaccesses = new Establishmentprincipalobjectattributeaccesses(this);
+            Establishmentprocesssession = new Establishmentprocesssession(this);
             Establishmentwatchwords = new Establishmentwatchwords(this);
+            Establishmentwatchwordmailboxtrackingfolders = new Establishmentwatchwordmailboxtrackingfolders(this);
+            Establishmentwatchwordprincipalobjectattributeaccesses = new Establishmentwatchwordprincipalobjectattributeaccesses(this);
+            Establishmentwatchwordprocesssession = new Establishmentwatchwordprocesssession(this);
             Events = new Events(this);
             Account = new Account(this);
             Areaid = new Areaid(this);
@@ -2331,7 +4220,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             Eventfaxes = new Eventfaxes(this);
             Eventinspections = new Eventinspections(this);
             Eventletters = new Eventletters(this);
+            Eventmailboxtrackingfolders = new Eventmailboxtrackingfolders(this);
             Eventphonecalls = new Eventphonecalls(this);
+            Eventprincipalobjectattributeaccesses = new Eventprincipalobjectattributeaccesses(this);
+            Eventprocesssession = new Eventprocesssession(this);
             Eventrecurringappointmentmasters = new Eventrecurringappointmentmasters(this);
             Eventschedules = new Eventschedules(this);
             Eventserviceappointments = new Eventserviceappointments(this);
@@ -2346,12 +4238,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             Eventschedulebulkdeletefailures = new Eventschedulebulkdeletefailures(this);
             Eventscheduleduplicatebaserecord = new Eventscheduleduplicatebaserecord(this);
             Eventscheduleduplicatematchingrecord = new Eventscheduleduplicatematchingrecord(this);
+            Eventschedulemailboxtrackingfolders = new Eventschedulemailboxtrackingfolders(this);
+            Eventscheduleprincipalobjectattributeaccesses = new Eventscheduleprincipalobjectattributeaccesses(this);
+            Eventscheduleprocesssession = new Eventscheduleprocesssession(this);
             Eventschedulesyncerrors = new Eventschedulesyncerrors(this);
             Exhibits = new Exhibits(this);
             Exhibitasyncoperations = new Exhibitasyncoperations(this);
             Exhibitbulkdeletefailures = new Exhibitbulkdeletefailures(this);
             Exhibitduplicatebaserecord = new Exhibitduplicatebaserecord(this);
             Exhibitduplicatematchingrecord = new Exhibitduplicatematchingrecord(this);
+            Exhibitmailboxtrackingfolders = new Exhibitmailboxtrackingfolders(this);
+            Exhibitprincipalobjectattributeaccesses = new Exhibitprincipalobjectattributeaccesses(this);
+            Exhibitprocesssession = new Exhibitprocesssession(this);
             Exhibitsyncerrors = new Exhibitsyncerrors(this);
             Investigationid = new Investigationid(this);
             Federalreportexports = new Federalreportexports(this);
@@ -2360,73 +4258,181 @@ namespace Gov.Lclb.Cllb.Interfaces
             Federalreportexportbulkdeletefailures = new Federalreportexportbulkdeletefailures(this);
             Federalreportexportduplicatebaserecord = new Federalreportexportduplicatebaserecord(this);
             Federalreportexportduplicatematchingrecord = new Federalreportexportduplicatematchingrecord(this);
+            Federalreportexportmailboxtrackingfolders = new Federalreportexportmailboxtrackingfolders(this);
+            Federalreportexportprincipalobjectattributeaccesses = new Federalreportexportprincipalobjectattributeaccesses(this);
+            Federalreportexportprocesssession = new Federalreportexportprocesssession(this);
             Federalreportexportsharepointdocumentlocations = new Federalreportexportsharepointdocumentlocations(this);
             Federalreportexportsyncerrors = new Federalreportexportsyncerrors(this);
             Fiainvestigationlogs = new Fiainvestigationlogs(this);
+            Fiainvestigationlogmailboxtrackingfolders = new Fiainvestigationlogmailboxtrackingfolders(this);
+            Fiainvestigationlogprincipalobjectattributeaccesses = new Fiainvestigationlogprincipalobjectattributeaccesses(this);
+            Fiainvestigationlogprocesssession = new Fiainvestigationlogprocesssession(this);
             Formelementuploadfields = new Formelementuploadfields(this);
             Formelementuploadfieldasyncoperations = new Formelementuploadfieldasyncoperations(this);
             Formelementuploadfieldbulkdeletefailures = new Formelementuploadfieldbulkdeletefailures(this);
             Formelementuploadfieldduplicatebaserecord = new Formelementuploadfieldduplicatebaserecord(this);
             Formelementuploadfieldduplicatematchingrecord = new Formelementuploadfieldduplicatematchingrecord(this);
+            Formelementuploadfieldmailboxtrackingfolders = new Formelementuploadfieldmailboxtrackingfolders(this);
+            Formelementuploadfieldprincipalobjectattributeaccesses = new Formelementuploadfieldprincipalobjectattributeaccesses(this);
+            Formelementuploadfieldprocesssession = new Formelementuploadfieldprocesssession(this);
             Formelementuploadfieldsyncerrors = new Formelementuploadfieldsyncerrors(this);
             Fundingsources = new Fundingsources(this);
+            Fundingsourcemailboxtrackingfolders = new Fundingsourcemailboxtrackingfolders(this);
+            Fundingsourceprincipalobjectattributeaccesses = new Fundingsourceprincipalobjectattributeaccesses(this);
+            Fundingsourceprocesssession = new Fundingsourceprocesssession(this);
             Incidentadoxiolicencetypeset = new Incidentadoxiolicencetypeset(this);
             Inspectioninspectorsset = new Inspectioninspectorsset(this);
             Inspectionreactivationhistories = new Inspectionreactivationhistories(this);
+            Inspectionreactivationhistorymailboxtrackingfolders = new Inspectionreactivationhistorymailboxtrackingfolders(this);
+            Inspectionreactivationhistoryprincipalobjectattributeaccesses = new Inspectionreactivationhistoryprincipalobjectattributeaccesses(this);
+            Inspectionreactivationhistoryprocesssession = new Inspectionreactivationhistoryprocesssession(this);
             Inspectorcommentsrollups = new Inspectorcommentsrollups(this);
+            Inspectorcommentsrollupmailboxtrackingfolders = new Inspectorcommentsrollupmailboxtrackingfolders(this);
+            Inspectorcommentsrollupprincipalobjectattributeaccesses = new Inspectorcommentsrollupprincipalobjectattributeaccesses(this);
+            Inspectorcommentsrollupprocesssession = new Inspectorcommentsrollupprocesssession(this);
             Interests = new Interests(this);
+            Interestmailboxtrackingfolders = new Interestmailboxtrackingfolders(this);
+            Interestprincipalobjectattributeaccesses = new Interestprincipalobjectattributeaccesses(this);
+            Interestprocesssession = new Interestprocesssession(this);
             Investigationactivities = new Investigationactivities(this);
+            Investigationactivitymailboxtrackingfolders = new Investigationactivitymailboxtrackingfolders(this);
+            Investigationactivityprincipalobjectattributeaccesses = new Investigationactivityprincipalobjectattributeaccesses(this);
+            Investigationactivityprocesssession = new Investigationactivityprocesssession(this);
             Investigationreactivationhistories = new Investigationreactivationhistories(this);
+            Investigationreactivationhistorymailboxtrackingfolders = new Investigationreactivationhistorymailboxtrackingfolders(this);
+            Investigationreactivationhistoryprincipalobjectattributeaccesses = new Investigationreactivationhistoryprincipalobjectattributeaccesses(this);
+            Investigationreactivationhistoryprocesssession = new Investigationreactivationhistoryprocesssession(this);
             Investigations = new Investigations(this);
+            Investigationmailboxtrackingfolders = new Investigationmailboxtrackingfolders(this);
+            Investigationprincipalobjectattributeaccesses = new Investigationprincipalobjectattributeaccesses(this);
+            Investigationprocesssession = new Investigationprocesssession(this);
             Ldborders = new Ldborders(this);
             Ldborderasyncoperations = new Ldborderasyncoperations(this);
             Ldborderbulkdeletefailures = new Ldborderbulkdeletefailures(this);
             Ldborderduplicatebaserecord = new Ldborderduplicatebaserecord(this);
             Ldborderduplicatematchingrecord = new Ldborderduplicatematchingrecord(this);
+            Ldbordermailboxtrackingfolders = new Ldbordermailboxtrackingfolders(this);
+            Ldborderprincipalobjectattributeaccesses = new Ldborderprincipalobjectattributeaccesses(this);
+            Ldborderprocesssession = new Ldborderprocesssession(this);
             Ldbordersharepointdocumentlocations = new Ldbordersharepointdocumentlocations(this);
             Ldbordersyncerrors = new Ldbordersyncerrors(this);
             Licenceid = new Licenceid(this);
             Legalentities = new Legalentities(this);
+            Legalentitymailboxtrackingfolders = new Legalentitymailboxtrackingfolders(this);
+            Legalentityprincipalobjectattributeaccesses = new Legalentityprincipalobjectattributeaccesses(this);
+            Legalentityprocesssession = new Legalentityprocesssession(this);
             Legalentitytasklegalentity = new Legalentitytasklegalentity(this);
             Licenceldbordertotalhistories = new Licenceldbordertotalhistories(this);
             Licenceldbordertotalhistoryasyncoperations = new Licenceldbordertotalhistoryasyncoperations(this);
             Licenceldbordertotalhistorybulkdeletefailures = new Licenceldbordertotalhistorybulkdeletefailures(this);
             Licenceldbordertotalhistoryduplicatebaserecord = new Licenceldbordertotalhistoryduplicatebaserecord(this);
             Licenceldbordertotalhistoryduplicatematchingrecord = new Licenceldbordertotalhistoryduplicatematchingrecord(this);
+            Licenceldbordertotalhistorymailboxtrackingfolders = new Licenceldbordertotalhistorymailboxtrackingfolders(this);
+            Licenceldbordertotalhistoryprincipalobjectattributeaccesses = new Licenceldbordertotalhistoryprincipalobjectattributeaccesses(this);
+            Licenceldbordertotalhistoryprocesssession = new Licenceldbordertotalhistoryprocesssession(this);
             Licenceldbordertotalhistorysyncerrors = new Licenceldbordertotalhistorysyncerrors(this);
             Licenceses = new Licenceses(this);
             Licencesadoxioendorsementlicence = new Licencesadoxioendorsementlicence(this);
             Licencesadoxioeventlicence = new Licencesadoxioeventlicence(this);
             Licencesadoxioldborderlicenceid = new Licencesadoxioldborderlicenceid(this);
             Licencesadoxiolicenceldbordertotalhistorylicence = new Licencesadoxiolicenceldbordertotalhistorylicence(this);
+            Licencesmailboxtrackingfolders = new Licencesmailboxtrackingfolders(this);
+            Licencesprincipalobjectattributeaccesses = new Licencesprincipalobjectattributeaccesses(this);
+            Licencesprocesssession = new Licencesprocesssession(this);
             Licencessharepointdocumentlocations = new Licencessharepointdocumentlocations(this);
             Proposedoperator = new Proposedoperator(this);
             Thirdpartyoperatorid = new Thirdpartyoperatorid(this);
             Licencetypes = new Licencetypes(this);
+            Licencetypemailboxtrackingfolders = new Licencetypemailboxtrackingfolders(this);
+            Licencetypeprincipalobjectattributeaccesses = new Licencetypeprincipalobjectattributeaccesses(this);
+            Licencetypeprocesssession = new Licencetypeprocesssession(this);
             Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
             Licenseechangelogs = new Licenseechangelogs(this);
+            Licenseechangelogmailboxtrackingfolders = new Licenseechangelogmailboxtrackingfolders(this);
+            Licenseechangelogprincipalobjectattributeaccesses = new Licenseechangelogprincipalobjectattributeaccesses(this);
+            Licenseechangelogprocesssession = new Licenseechangelogprocesssession(this);
             Loans = new Loans(this);
+            Loanmailboxtrackingfolders = new Loanmailboxtrackingfolders(this);
+            Loanprincipalobjectattributeaccesses = new Loanprincipalobjectattributeaccesses(this);
+            Loanprocesssession = new Loanprocesssession(this);
             Localgovindigenousnations = new Localgovindigenousnations(this);
+            Localgovindigenousnationmailboxtrackingfolders = new Localgovindigenousnationmailboxtrackingfolders(this);
+            Localgovindigenousnationprincipalobjectattributeaccesses = new Localgovindigenousnationprincipalobjectattributeaccesses(this);
+            Localgovindigenousnationprocesssession = new Localgovindigenousnationprocesssession(this);
             Personalhistorysummaries = new Personalhistorysummaries(this);
+            Personalhistorysummarymailboxtrackingfolders = new Personalhistorysummarymailboxtrackingfolders(this);
+            Personalhistorysummaryprincipalobjectattributeaccesses = new Personalhistorysummaryprincipalobjectattributeaccesses(this);
+            Personalhistorysummaryprocesssession = new Personalhistorysummaryprocesssession(this);
             Policejurisdictions = new Policejurisdictions(this);
+            Policejurisdictionmailboxtrackingfolders = new Policejurisdictionmailboxtrackingfolders(this);
+            Policejurisdictionprincipalobjectattributeaccesses = new Policejurisdictionprincipalobjectattributeaccesses(this);
+            Policejurisdictionprocesssession = new Policejurisdictionprocesssession(this);
             Policydocuments = new Policydocuments(this);
+            Policydocumentmailboxtrackingfolders = new Policydocumentmailboxtrackingfolders(this);
+            Policydocumentprincipalobjectattributeaccesses = new Policydocumentprincipalobjectattributeaccesses(this);
+            Policydocumentprocesssession = new Policydocumentprocesssession(this);
             Postalcodes = new Postalcodes(this);
+            Postalcodemailboxtrackingfolders = new Postalcodemailboxtrackingfolders(this);
+            Postalcodeprincipalobjectattributeaccesses = new Postalcodeprincipalobjectattributeaccesses(this);
+            Postalcodeprocesssession = new Postalcodeprocesssession(this);
             Previousaddresses = new Previousaddresses(this);
+            Previousaddressmailboxtrackingfolders = new Previousaddressmailboxtrackingfolders(this);
+            Previousaddressprincipalobjectattributeaccesses = new Previousaddressprincipalobjectattributeaccesses(this);
+            Previousaddressprocesssession = new Previousaddressprocesssession(this);
             Regions = new Regions(this);
             Regionevents = new Regionevents(this);
+            Regionmailboxtrackingfolders = new Regionmailboxtrackingfolders(this);
+            Regionprincipalobjectattributeaccesses = new Regionprincipalobjectattributeaccesses(this);
+            Regionprocesssession = new Regionprocesssession(this);
             Relatedparties = new Relatedparties(this);
             Compliancemeetingid = new Compliancemeetingid(this);
+            Relatedpartymailboxtrackingfolders = new Relatedpartymailboxtrackingfolders(this);
+            Relatedpartyprincipalobjectattributeaccesses = new Relatedpartyprincipalobjectattributeaccesses(this);
+            Relatedpartyprocesssession = new Relatedpartyprocesssession(this);
             Settings = new Settings(this);
+            Settingmailboxtrackingfolders = new Settingmailboxtrackingfolders(this);
+            Settingprincipalobjectattributeaccesses = new Settingprincipalobjectattributeaccesses(this);
+            Settingprocesssession = new Settingprocesssession(this);
             Spddatarows = new Spddatarows(this);
+            Spddatarowmailboxtrackingfolders = new Spddatarowmailboxtrackingfolders(this);
+            Spddatarowprincipalobjectattributeaccesses = new Spddatarowprincipalobjectattributeaccesses(this);
+            Spddatarowprocesssession = new Spddatarowprocesssession(this);
             Spdexportses = new Spdexportses(this);
+            Spdexportsmailboxtrackingfolders = new Spdexportsmailboxtrackingfolders(this);
+            Spdexportsprincipalobjectattributeaccesses = new Spdexportsprincipalobjectattributeaccesses(this);
+            Spdexportsprocesssession = new Spdexportsprocesssession(this);
             Taxandaccountings = new Taxandaccountings(this);
+            Taxandaccountingmailboxtrackingfolders = new Taxandaccountingmailboxtrackingfolders(this);
+            Taxandaccountingprincipalobjectattributeaccesses = new Taxandaccountingprincipalobjectattributeaccesses(this);
+            Taxandaccountingprocesssession = new Taxandaccountingprocesssession(this);
             Termsconditionslimitationspresets = new Termsconditionslimitationspresets(this);
+            Termsconditionslimitationspresetmailboxtrackingfolders = new Termsconditionslimitationspresetmailboxtrackingfolders(this);
+            Termsconditionslimitationspresetprincipalobjectattributeaccesses = new Termsconditionslimitationspresetprincipalobjectattributeaccesses(this);
+            Termsconditionslimitationspresetprocesssession = new Termsconditionslimitationspresetprocesssession(this);
             Territories = new Territories(this);
+            Territorymailboxtrackingfolders = new Territorymailboxtrackingfolders(this);
+            Territoryprincipalobjectattributeaccesses = new Territoryprincipalobjectattributeaccesses(this);
+            Territoryprocesssession = new Territoryprocesssession(this);
             Tiedhouseassociations = new Tiedhouseassociations(this);
+            Tiedhouseassociationmailboxtrackingfolders = new Tiedhouseassociationmailboxtrackingfolders(this);
+            Tiedhouseassociationprincipalobjectattributeaccesses = new Tiedhouseassociationprincipalobjectattributeaccesses(this);
+            Tiedhouseassociationprocesssession = new Tiedhouseassociationprocesssession(this);
             Tiedhouseconnections = new Tiedhouseconnections(this);
+            Tiedhouseconnectionmailboxtrackingfolders = new Tiedhouseconnectionmailboxtrackingfolders(this);
+            Tiedhouseconnectionprincipalobjectattributeaccesses = new Tiedhouseconnectionprincipalobjectattributeaccesses(this);
+            Tiedhouseconnectionprocesssession = new Tiedhouseconnectionprocesssession(this);
             Witnesses = new Witnesses(this);
+            Witnessmailboxtrackingfolders = new Witnessmailboxtrackingfolders(this);
+            Witnessprincipalobjectattributeaccesses = new Witnessprincipalobjectattributeaccesses(this);
+            Witnessprocesssession = new Witnessprocesssession(this);
             Workerinvoicehistories = new Workerinvoicehistories(this);
+            Workerinvoicehistorymailboxtrackingfolders = new Workerinvoicehistorymailboxtrackingfolders(this);
+            Workerinvoicehistoryprincipalobjectattributeaccesses = new Workerinvoicehistoryprincipalobjectattributeaccesses(this);
+            Workerinvoicehistoryprocesssession = new Workerinvoicehistoryprocesssession(this);
             Workers = new Workers(this);
+            Workermailboxtrackingfolders = new Workermailboxtrackingfolders(this);
+            Workerprincipalobjectattributeaccesses = new Workerprincipalobjectattributeaccesses(this);
+            Workerprocesssession = new Workerprocesssession(this);
             Objectidadoxioevent = new Objectidadoxioevent(this);
             Regardingobjectidadoxioeventappointment = new Regardingobjectidadoxioeventappointment(this);
             Regardingobjectidadoxioapplicationlicenseechangesv10 = new Regardingobjectidadoxioapplicationlicenseechangesv10(this);
@@ -2483,12 +4489,144 @@ namespace Gov.Lclb.Cllb.Interfaces
             Leads = new Leads(this);
             Regardingobjectidadoxioeventletter = new Regardingobjectidadoxioeventletter(this);
             Lists = new Lists(this);
+            Regardingobjectidadoxioalias = new Regardingobjectidadoxioalias(this);
+            Regardingobjectidadoxioapplication = new Regardingobjectidadoxioapplication(this);
+            Regardingobjectidadoxioapplicationbpfv3 = new Regardingobjectidadoxioapplicationbpfv3(this);
+            Regardingobjectidadoxioapplicationinvoicehistory = new Regardingobjectidadoxioapplicationinvoicehistory(this);
+            Regardingobjectidadoxioapplicationtermsconditionslimitation = new Regardingobjectidadoxioapplicationtermsconditionslimitation(this);
+            Regardingobjectidadoxioapplicationtype = new Regardingobjectidadoxioapplicationtype(this);
+            Regardingobjectidadoxioapplicationtypecontent = new Regardingobjectidadoxioapplicationtypecontent(this);
+            Regardingobjectidadoxioarea = new Regardingobjectidadoxioarea(this);
+            Regardingobjectidadoxioauditlogrequest = new Regardingobjectidadoxioauditlogrequest(this);
+            Regardingobjectidadoxiobusinessaccount = new Regardingobjectidadoxiobusinessaccount(this);
+            Regardingobjectidadoxiocannabisinventoryreport = new Regardingobjectidadoxiocannabisinventoryreport(this);
+            Regardingobjectidadoxiocannabismonthlyreport = new Regardingobjectidadoxiocannabismonthlyreport(this);
+            Regardingobjectidadoxiocannabisproductadmin = new Regardingobjectidadoxiocannabisproductadmin(this);
+            Regardingobjectidadoxiocitydistrict = new Regardingobjectidadoxiocitydistrict(this);
+            Regardingobjectidadoxiocomplaint = new Regardingobjectidadoxiocomplaint(this);
+            Regardingobjectidadoxiocomplianceinvestigation = new Regardingobjectidadoxiocomplianceinvestigation(this);
+            Regardingobjectidadoxiocompliancemeeting = new Regardingobjectidadoxiocompliancemeeting(this);
+            Regardingobjectidadoxiocontravention = new Regardingobjectidadoxiocontravention(this);
+            Regardingobjectidadoxiocontraventionadmin = new Regardingobjectidadoxiocontraventionadmin(this);
+            Regardingobjectidadoxiocorporatehistorysummary = new Regardingobjectidadoxiocorporatehistorysummary(this);
+            Regardingobjectidadoxiocorporaterole = new Regardingobjectidadoxiocorporaterole(this);
+            Regardingobjectidadoxiocustomautonumberdefinition = new Regardingobjectidadoxiocustomautonumberdefinition(this);
+            Regardingobjectidadoxiocustomautonumberrequest = new Regardingobjectidadoxiocustomautonumberrequest(this);
+            Regardingobjectidadoxiodocument = new Regardingobjectidadoxiodocument(this);
+            Regardingobjectidadoxiodocumentadmin = new Regardingobjectidadoxiodocumentadmin(this);
+            Regardingobjectidadoxioestablishment = new Regardingobjectidadoxioestablishment(this);
+            Regardingobjectidadoxioestablishmentwatchword = new Regardingobjectidadoxioestablishmentwatchword(this);
+            Regardingobjectidadoxiofiainvestigationlog = new Regardingobjectidadoxiofiainvestigationlog(this);
+            Regardingobjectidadoxiofundingsource = new Regardingobjectidadoxiofundingsource(this);
+            Regardingobjectidadoxioinspectionreactivationhistory = new Regardingobjectidadoxioinspectionreactivationhistory(this);
+            Regardingobjectidadoxioinspectorcommentsrollup = new Regardingobjectidadoxioinspectorcommentsrollup(this);
+            Regardingobjectidadoxiointerest = new Regardingobjectidadoxiointerest(this);
+            Regardingobjectidadoxioinvestigation = new Regardingobjectidadoxioinvestigation(this);
+            Regardingobjectidadoxioinvestigationactivity = new Regardingobjectidadoxioinvestigationactivity(this);
+            Regardingobjectidadoxioinvestigationreactivationhistory = new Regardingobjectidadoxioinvestigationreactivationhistory(this);
+            Regardingobjectidadoxiolegalentity = new Regardingobjectidadoxiolegalentity(this);
+            Regardingobjectidadoxiolicences = new Regardingobjectidadoxiolicences(this);
+            Regardingobjectidadoxiolicencetype = new Regardingobjectidadoxiolicencetype(this);
+            Regardingobjectidadoxiolicenseechangelog = new Regardingobjectidadoxiolicenseechangelog(this);
+            Regardingobjectidadoxioloan = new Regardingobjectidadoxioloan(this);
+            Regardingobjectidadoxiolocalgovindigenousnation = new Regardingobjectidadoxiolocalgovindigenousnation(this);
+            Regardingobjectidadoxiopersonalhistorysummary = new Regardingobjectidadoxiopersonalhistorysummary(this);
+            Regardingobjectidadoxiopolicejurisdiction = new Regardingobjectidadoxiopolicejurisdiction(this);
+            Regardingobjectidadoxiopolicydocument = new Regardingobjectidadoxiopolicydocument(this);
+            Regardingobjectidadoxiopostalcode = new Regardingobjectidadoxiopostalcode(this);
+            Regardingobjectidadoxiopreviousaddress = new Regardingobjectidadoxiopreviousaddress(this);
+            Regardingobjectidadoxioregion = new Regardingobjectidadoxioregion(this);
+            Regardingobjectidadoxiorelatedparty = new Regardingobjectidadoxiorelatedparty(this);
+            Regardingobjectidadoxiosetting = new Regardingobjectidadoxiosetting(this);
+            Regardingobjectidadoxiospddatarow = new Regardingobjectidadoxiospddatarow(this);
+            Regardingobjectidadoxiospdexports = new Regardingobjectidadoxiospdexports(this);
+            Regardingobjectidadoxiotaxandaccounting = new Regardingobjectidadoxiotaxandaccounting(this);
+            Regardingobjectidadoxiotermsconditionslimitationspreset = new Regardingobjectidadoxiotermsconditionslimitationspreset(this);
+            Regardingobjectidadoxioterritory = new Regardingobjectidadoxioterritory(this);
+            Regardingobjectidadoxiotiedhouseassociation = new Regardingobjectidadoxiotiedhouseassociation(this);
+            Regardingobjectidadoxiotiedhouseconnection = new Regardingobjectidadoxiotiedhouseconnection(this);
+            Regardingobjectidadoxiowitness = new Regardingobjectidadoxiowitness(this);
+            Regardingobjectidadoxioworker = new Regardingobjectidadoxioworker(this);
+            Regardingobjectidadoxioworkerinvoicehistory = new Regardingobjectidadoxioworkerinvoicehistory(this);
             Organizationadoxioapplicationlicenseechangesv10 = new Organizationadoxioapplicationlicenseechangesv10(this);
             Organizationadoxioapplicationliquorbpf = new Organizationadoxioapplicationliquorbpf(this);
             Organizationadoxioapplicationrelocationv1 = new Organizationadoxioapplicationrelocationv1(this);
             Organizationadoxioapplicationstructurechangev1 = new Organizationadoxioapplicationstructurechangev1(this);
             Organizationadoxioapplicationtransferownershipv1 = new Organizationadoxioapplicationtransferownershipv1(this);
             Regardingobjectidadoxioeventphonecall = new Regardingobjectidadoxioeventphonecall(this);
+            Objectidadoxioalias = new Objectidadoxioalias(this);
+            Objectidadoxioapplication = new Objectidadoxioapplication(this);
+            Objectidadoxioapplicationbpfv3 = new Objectidadoxioapplicationbpfv3(this);
+            Objectidadoxioapplicationinvoicehistory = new Objectidadoxioapplicationinvoicehistory(this);
+            Objectidadoxioapplicationlicenseechangesv10 = new Objectidadoxioapplicationlicenseechangesv10(this);
+            Objectidadoxioapplicationliquorbpf = new Objectidadoxioapplicationliquorbpf(this);
+            Objectidadoxioapplicationrelocationv1 = new Objectidadoxioapplicationrelocationv1(this);
+            Objectidadoxioapplicationstructurechangev1 = new Objectidadoxioapplicationstructurechangev1(this);
+            Objectidadoxioapplicationtermsconditionslimitation = new Objectidadoxioapplicationtermsconditionslimitation(this);
+            Objectidadoxioapplicationtransferownershipv1 = new Objectidadoxioapplicationtransferownershipv1(this);
+            Objectidadoxioapplicationtype = new Objectidadoxioapplicationtype(this);
+            Objectidadoxioapplicationtypecontent = new Objectidadoxioapplicationtypecontent(this);
+            Objectidadoxioapplicationtypefeeschedule = new Objectidadoxioapplicationtypefeeschedule(this);
+            Objectidadoxioarea = new Objectidadoxioarea(this);
+            Objectidadoxioauditlogrequest = new Objectidadoxioauditlogrequest(this);
+            Objectidadoxiobusinessaccount = new Objectidadoxiobusinessaccount(this);
+            Objectidadoxiocannabisinventoryreport = new Objectidadoxiocannabisinventoryreport(this);
+            Objectidadoxiocannabismonthlyreport = new Objectidadoxiocannabismonthlyreport(this);
+            Objectidadoxiocannabisproductadmin = new Objectidadoxiocannabisproductadmin(this);
+            Objectidadoxiocitydistrict = new Objectidadoxiocitydistrict(this);
+            Objectidadoxiocomplaint = new Objectidadoxiocomplaint(this);
+            Objectidadoxiocomplianceinvestigation = new Objectidadoxiocomplianceinvestigation(this);
+            Objectidadoxiocompliancemeeting = new Objectidadoxiocompliancemeeting(this);
+            Objectidadoxiocontravention = new Objectidadoxiocontravention(this);
+            Objectidadoxiocontraventionadmin = new Objectidadoxiocontraventionadmin(this);
+            Objectidadoxiocorporatehistorysummary = new Objectidadoxiocorporatehistorysummary(this);
+            Objectidadoxiocorporaterole = new Objectidadoxiocorporaterole(this);
+            Objectidadoxiocustomautonumberdefinition = new Objectidadoxiocustomautonumberdefinition(this);
+            Objectidadoxiocustomautonumberrequest = new Objectidadoxiocustomautonumberrequest(this);
+            Objectidadoxiodocument = new Objectidadoxiodocument(this);
+            Objectidadoxiodocumentadmin = new Objectidadoxiodocumentadmin(this);
+            Objectidadoxioendorsement = new Objectidadoxioendorsement(this);
+            Objectidadoxioendorsementtype = new Objectidadoxioendorsementtype(this);
+            Objectidadoxioestablishment = new Objectidadoxioestablishment(this);
+            Objectidadoxioestablishmentwatchword = new Objectidadoxioestablishmentwatchword(this);
+            Objectidadoxioeventschedule = new Objectidadoxioeventschedule(this);
+            Objectidadoxioexhibit = new Objectidadoxioexhibit(this);
+            Objectidadoxiofederalreportexport = new Objectidadoxiofederalreportexport(this);
+            Objectidadoxiofiainvestigationlog = new Objectidadoxiofiainvestigationlog(this);
+            Objectidadoxioformelementuploadfield = new Objectidadoxioformelementuploadfield(this);
+            Objectidadoxiofundingsource = new Objectidadoxiofundingsource(this);
+            Objectidadoxioinspectionreactivationhistory = new Objectidadoxioinspectionreactivationhistory(this);
+            Objectidadoxioinspectorcommentsrollup = new Objectidadoxioinspectorcommentsrollup(this);
+            Objectidadoxiointerest = new Objectidadoxiointerest(this);
+            Objectidadoxioinvestigation = new Objectidadoxioinvestigation(this);
+            Objectidadoxioinvestigationactivity = new Objectidadoxioinvestigationactivity(this);
+            Objectidadoxioinvestigationreactivationhistory = new Objectidadoxioinvestigationreactivationhistory(this);
+            Objectidadoxioldborder = new Objectidadoxioldborder(this);
+            Objectidadoxiolegalentity = new Objectidadoxiolegalentity(this);
+            Objectidadoxiolicenceldbordertotalhistory = new Objectidadoxiolicenceldbordertotalhistory(this);
+            Objectidadoxiolicences = new Objectidadoxiolicences(this);
+            Objectidadoxiolicencetype = new Objectidadoxiolicencetype(this);
+            Objectidadoxiolicenseechangelog = new Objectidadoxiolicenseechangelog(this);
+            Objectidadoxioloan = new Objectidadoxioloan(this);
+            Objectidadoxiolocalgovindigenousnation = new Objectidadoxiolocalgovindigenousnation(this);
+            Objectidadoxiopersonalhistorysummary = new Objectidadoxiopersonalhistorysummary(this);
+            Objectidadoxiopolicejurisdiction = new Objectidadoxiopolicejurisdiction(this);
+            Objectidadoxiopolicydocument = new Objectidadoxiopolicydocument(this);
+            Objectidadoxiopostalcode = new Objectidadoxiopostalcode(this);
+            Objectidadoxiopreviousaddress = new Objectidadoxiopreviousaddress(this);
+            Objectidadoxioregion = new Objectidadoxioregion(this);
+            Objectidadoxiorelatedparty = new Objectidadoxiorelatedparty(this);
+            Objectidadoxiosetting = new Objectidadoxiosetting(this);
+            Objectidadoxiospddatarow = new Objectidadoxiospddatarow(this);
+            Objectidadoxiospdexports = new Objectidadoxiospdexports(this);
+            Objectidadoxiotaxandaccounting = new Objectidadoxiotaxandaccounting(this);
+            Objectidadoxiotermsconditionslimitationspreset = new Objectidadoxiotermsconditionslimitationspreset(this);
+            Objectidadoxioterritory = new Objectidadoxioterritory(this);
+            Objectidadoxiotiedhouseassociation = new Objectidadoxiotiedhouseassociation(this);
+            Objectidadoxiotiedhouseconnection = new Objectidadoxiotiedhouseconnection(this);
+            Objectidadoxiowitness = new Objectidadoxiowitness(this);
+            Objectidadoxioworker = new Objectidadoxioworker(this);
+            Objectidadoxioworkerinvoicehistory = new Objectidadoxioworkerinvoicehistory(this);
             Lkadoxioapplicationlicenseechangesv10activestageid = new Lkadoxioapplicationlicenseechangesv10activestageid(this);
             Lkadoxioapplicationliquorbpfactivestageid = new Lkadoxioapplicationliquorbpfactivestageid(this);
             Lkadoxioapplicationrelocationv1activestageid = new Lkadoxioapplicationrelocationv1activestageid(this);
@@ -2499,8 +4637,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Savedqueries = new Savedqueries(this);
             Regardingobjectidadoxioeventserviceappointment = new Regardingobjectidadoxioeventserviceappointment(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
-            Regardingobjectidadoxiocontravention = new Regardingobjectidadoxiocontravention(this);
-            Regardingobjectidadoxiolicences = new Regardingobjectidadoxiolicences(this);
             Sharepointsites = new Sharepointsites(this);
             Regardingobjectidadoxioeventsocialactivity = new Regardingobjectidadoxioeventsocialactivity(this);
             Systemforms = new Systemforms(this);
