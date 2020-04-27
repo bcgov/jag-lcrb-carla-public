@@ -207,7 +207,7 @@ namespace bdd_tests
             string retDash = "Return to Dashboard";
 
             // confirm that payment receipt is for $100.00
-            Assert.True (ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-worker-payment-confirmation/mat-card/div/div[1]/div/div/table/tr[5]/td[2][text()='$100.00']")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$100.00')]")).Displayed);
 
             // click on the Return to Dashboard link
             NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
