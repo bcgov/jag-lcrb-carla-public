@@ -401,7 +401,7 @@ namespace bdd_tests
             string corpContactPhone = "7781811818";
             string corpContactEmail = "automated@test.com";
 
-            // enter the Business Number
+            // enter the business number
             if (businessTypeShared == "indigenous nation")
             {
                 NgWebElement uiBizNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
@@ -418,8 +418,6 @@ namespace bdd_tests
             {
                 NgWebElement uiCorpNumber = ngDriver.FindElement(By.Id("bcIncorporationNumber"));
                 uiCorpNumber.SendKeys(incorporationNumber);
-
-
             }
 
             // enter the society incorporation number
@@ -647,7 +645,7 @@ namespace bdd_tests
                 uiBizEmail.SendKeys(bizEmail);
             }
 
-            // (re)enter the first name of corporation contact
+            // (re)enter the first name of contact
             if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
             {
                 NgWebElement uiCorpGiven = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
@@ -664,7 +662,7 @@ namespace bdd_tests
                 uiCorpGiven.SendKeys(corpGiven);
             }
 
-            // (re)enter the last name of corporation contact
+            // (re)enter the last name of contact
             if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
             {
                 NgWebElement uiCorpSurname = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
@@ -681,7 +679,7 @@ namespace bdd_tests
                 uiCorpSurname.SendKeys(corpSurname);
             }
 
-            // enter the corporation contact title
+            // enter the contact title
             if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
             {
                 NgWebElement uiCorpTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
@@ -698,7 +696,7 @@ namespace bdd_tests
                 uiCorpTitle.SendKeys(corpTitle);
             }
 
-            // enter the corporation contact phone number
+            // enter the contact phone number
             if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
             {
                 NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
@@ -715,7 +713,7 @@ namespace bdd_tests
                 uiCorpContactPhone.SendKeys(corpContactPhone);
             }
 
-            // enter the corporation contact phone email
+            // enter the contact email
             if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
             {
                 NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
@@ -732,11 +730,11 @@ namespace bdd_tests
                 uiCorpContactEmail.SendKeys(corpContactEmail);
             }
 
-            // select 'No' for corporation's connection to a federal producer
+            // select 'No' for connection to a federal producer
             NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
             corpConnectionFederalProducer.Click();
 
-            // select 'No' for federal producer's connection to corporation
+            // select 'No' for federal producer's connection to business
             if ((businessTypeShared != "indigenous nation") && (businessTypeShared != "society"))
             {
                 NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
