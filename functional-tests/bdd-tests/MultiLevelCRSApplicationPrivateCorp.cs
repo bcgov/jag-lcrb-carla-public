@@ -92,6 +92,9 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
+            ReviewAccountProfile();
+/*
+
             string bizNumber = "012345678";
             string incorporationNumber = "BC1234567";
             
@@ -146,7 +149,7 @@ namespace bdd_tests
 
             /* switching off use of checkbox "Same as physical address" in order to test mailing address fields
             NgWebElement uiSameAsMailingAddress = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
-            uiSameAsMailingAddress.Click(); */
+            uiSameAsMailingAddress.Click(); 
 
             // enter the mailing street address 1
             NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
@@ -216,7 +219,7 @@ namespace bdd_tests
 
             // click on Continue to Organization Review button
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
-            continueApp_button.Click();
+            continueApp_button.Click();*/
         }
 
         [And(@"I review the organization structure")]

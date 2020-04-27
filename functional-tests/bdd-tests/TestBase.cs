@@ -234,7 +234,12 @@ namespace bdd_tests
             {
                 string nameAndLocation = "Automated test name and location of retailer";
 
-                if (businessTypeShared == "indigenous nation")
+                if (businessTypeShared == "partnership")
+                {
+                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[37]"));
+                    uiNameAndLocation.SendKeys(nameAndLocation);
+                }
+                else if (businessTypeShared == "indigenous nation")
                 {
                     NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[46]"));
                     uiNameAndLocation.SendKeys(nameAndLocation);
@@ -298,12 +303,16 @@ namespace bdd_tests
 
             // complete field: 
             // Please indicate the name and location of the retailer or store
-
             try
             {
                 string nameAndLocation2 = "Automated test name and location of retailer (2)";
 
-                if (businessTypeShared == "sole proprietorship")
+                if (businessTypeShared == "partnership")
+                {
+                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[39]"));
+                    uiNameAndLocation2.SendKeys(nameAndLocation2);
+                }
+                else if (businessTypeShared == "sole proprietorship")
                 {
                     NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[49]"));
                     uiNameAndLocation2.SendKeys(nameAndLocation2);
@@ -320,7 +329,6 @@ namespace bdd_tests
 
             // select response:
             // Do you continue to be involved?
-
             try
             {
                 // select Yes for Question 2 using radio button
@@ -362,6 +370,382 @@ namespace bdd_tests
             catch (NoSuchElementException)
             {
             }
+        }
+
+        public void ReviewAccountProfile()
+        {
+            /* 
+            Page Title: Please Review the Account Profile
+            */
+
+            string bizNumber = "012345678";
+            string incorporationNumber = "BC1234567";
+
+            string physStreetAddress1 = "645 Tyee Road";
+            string physStreetAddress2 = "West of Victoria";
+            string physCity = "Victoria";
+            string physPostalCode = "V8V4Y3";
+
+            string mailStreet1 = "P.O. Box 123";
+            string mailStreet2 = "303 Prideaux St.";
+            string mailCity = "Nanaimo";
+            string mailProvince = "B.C.";
+            string mailPostalCode = "V9R2N3";
+            string mailCountry = "Switzerland";
+
+            string bizPhoneNumber = "2501811818";
+            string bizEmail = "test@automation.com";
+            string corpGiven = "CorpGiven";
+            string corpSurname = "CorpSurname";
+            string corpTitle = "CEO";
+            string corpContactPhone = "7781811818";
+            string corpContactEmail = "automated@test.com";
+
+            // enter the Business Number
+            if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiBizNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+                uiBizNumber.SendKeys(bizNumber);
+            }
+            else
+            {
+                NgWebElement uiBizNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+                uiBizNumber.SendKeys(bizNumber);
+            }
+
+            // enter the private corporation incorporation number
+            if (businessTypeShared == "private corporation")
+            {
+                NgWebElement uiCorpNumber = ngDriver.FindElement(By.Id("bcIncorporationNumber"));
+                uiCorpNumber.SendKeys(incorporationNumber);
+
+
+            }
+
+            // enter the society incorporation number
+            if (businessTypeShared == "society")
+            {
+                NgWebElement uiSocietyIncNumber = ngDriver.FindElement(By.Id("bcIncorporationNumber"));
+                uiSocietyIncNumber.SendKeys(incorporationNumber);
+            }
+
+            // enter the date of incorporation in B.C. 
+            if ((businessTypeShared == "private corporation") || (businessTypeShared == "society"))
+            {
+                NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+                uiCalendar1.Click();
+
+                NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[1]/td[2]/div"));
+                uiCalendar2.Click();
+            }
+
+            // enter the physical street address 1
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiPhysStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+                uiPhysStreetAddress1.SendKeys(physStreetAddress1);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiPhysStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+                uiPhysStreetAddress1.SendKeys(physStreetAddress1);
+            }
+            else
+            {
+                NgWebElement uiPhysStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
+                uiPhysStreetAddress1.SendKeys(physStreetAddress1);
+            }
+
+            // enter the physical street address 2
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiPhysStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+                uiPhysStreetAddress2.SendKeys(physStreetAddress2);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiPhysStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+                uiPhysStreetAddress2.SendKeys(physStreetAddress2);
+            }
+            else
+            {
+                NgWebElement uiPhysStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
+                uiPhysStreetAddress2.SendKeys(physStreetAddress2);
+            }
+
+            // enter the physical city
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiPhysCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
+                uiPhysCity.SendKeys(physCity);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiPhysCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+                uiPhysCity.SendKeys(physCity);
+            }
+            else
+            {
+                NgWebElement uiPhysCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
+                uiPhysCity.SendKeys(physCity);
+            }
+
+            // enter the physical postal code
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiPhysPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
+                uiPhysPostalCode.SendKeys(physPostalCode);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiPhysPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
+                uiPhysPostalCode.SendKeys(physPostalCode);
+            }
+            else
+            {
+                NgWebElement uiPhysPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
+                uiPhysPostalCode.SendKeys(physPostalCode);
+            }
+
+            /* switching off use of checkbox "Same as physical address" in order to test mailing address fields
+            NgWebElement uiSameAsMailingAddress = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            uiSameAsMailingAddress.Click(); */
+
+            // enter the mailing street address 1
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
+                uiMailingStreetAddress1.SendKeys(mailStreet1);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+                uiMailingStreetAddress1.SendKeys(mailStreet1);
+            }
+            else
+            {
+                NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+                uiMailingStreetAddress1.SendKeys(mailStreet1);
+            }
+
+            // enter the mailing street address 2
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiMailingStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[11]"));
+                uiMailingStreetAddress2.SendKeys(mailStreet2);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiMailingStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
+                uiMailingStreetAddress2.SendKeys(mailStreet2);
+            }
+            else
+            {
+                NgWebElement uiMailingStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
+                uiMailingStreetAddress2.SendKeys(mailStreet2);
+            }
+
+            // enter the mailing city
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiMailingCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+                uiMailingCity.SendKeys(mailCity);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiMailingCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[11]"));
+                uiMailingCity.SendKeys(mailCity);
+            }
+            else
+            {
+                NgWebElement uiMailingCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[14]"));
+                uiMailingCity.SendKeys(mailCity);
+            }
+
+            // enter the mailing province
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiMailingProvince = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
+                uiMailingProvince.SendKeys(mailProvince);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiMailingProvince = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+                uiMailingProvince.SendKeys(mailProvince);
+            }
+            else
+            {
+                NgWebElement uiMailingProvince = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
+                uiMailingProvince.SendKeys(mailProvince);
+            }
+
+            // enter the mailing postal code
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[14]"));
+                uiMailingPostalCode.SendKeys(mailPostalCode);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
+                uiMailingPostalCode.SendKeys(mailPostalCode);
+            }
+            else
+            {
+                NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[16]"));
+                uiMailingPostalCode.SendKeys(mailPostalCode);
+            }
+
+            // enter the mailing country
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiMailingCountry = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
+                uiMailingCountry.SendKeys(mailCountry);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiMailingCountry = ngDriver.FindElement(By.XPath("(//input[@type='text'])[14]"));
+                uiMailingCountry.SendKeys(mailCountry);
+            }
+            else
+            {
+                NgWebElement uiMailingCountry = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
+                uiMailingCountry.SendKeys(mailCountry);
+            }
+
+            // enter the business phone number
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[16]"));
+                uiBizPhoneNumber.SendKeys(bizPhoneNumber);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
+                uiBizPhoneNumber.SendKeys(bizPhoneNumber);
+            }
+            else
+            {
+                NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
+                uiBizPhoneNumber.SendKeys(bizPhoneNumber);
+            }
+
+            // enter the business email
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
+                uiBizEmail.SendKeys(bizEmail);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[16]"));
+                uiBizEmail.SendKeys(bizEmail);
+            }
+            else
+            {
+                NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
+                uiBizEmail.SendKeys(bizEmail);
+            }
+
+            // (re)enter the first name of corporation contact
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiCorpGiven = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
+                uiCorpGiven.SendKeys(corpGiven);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiCorpGiven = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
+                uiCorpGiven.SendKeys(corpGiven);
+            }
+            else
+            {
+                NgWebElement uiCorpGiven = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
+                uiCorpGiven.SendKeys(corpGiven);
+            }
+
+            // (re)enter the last name of corporation contact
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiCorpSurname = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
+                uiCorpSurname.SendKeys(corpSurname);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiCorpSurname = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
+                uiCorpSurname.SendKeys(corpSurname);
+            }
+            else
+            {
+                NgWebElement uiCorpSurname = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
+                uiCorpSurname.SendKeys(corpSurname);
+            }
+
+            // enter the corporation contact title
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiCorpTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
+                uiCorpTitle.SendKeys(corpTitle);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiCorpTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
+                uiCorpTitle.SendKeys(corpTitle);
+            }
+            else
+            {
+                NgWebElement uiCorpTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
+                uiCorpTitle.SendKeys(corpTitle);
+            }
+
+            // enter the corporation contact phone number
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
+                uiCorpContactPhone.SendKeys(corpContactPhone);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
+                uiCorpContactPhone.SendKeys(corpContactPhone);
+            }
+            else
+            {
+                NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[23]"));
+                uiCorpContactPhone.SendKeys(corpContactPhone);
+            }
+
+            // enter the corporation contact phone email
+            if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
+            {
+                NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
+                uiCorpContactEmail.SendKeys(corpContactEmail);
+            }
+            else if (businessTypeShared == "indigenous nation")
+            {
+                NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
+                uiCorpContactEmail.SendKeys(corpContactEmail);
+            }
+            else
+            {
+                NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[24]"));
+                uiCorpContactEmail.SendKeys(corpContactEmail);
+            }
+
+            // select 'No' for corporation's connection to a federal producer
+            NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
+            corpConnectionFederalProducer.Click();
+
+            // select 'No' for federal producer's connection to corporation
+            if ((businessTypeShared != "indigenous nation") && (businessTypeShared != "society"))
+            {
+                NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
+                federalProducerConnectionToCorp.Click();
+            }
+
+            // click on Continue to Organization Review button
+            NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
+            continueApp_button.Click();
         }
 
         public void CRSReturnToDashboard()
