@@ -414,7 +414,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private List<ApplicationLicenseSummary> GetLicensesByLicencee(string licenceeId)
         {
 
-            var licences = _dynamicsClient.GetLicensesByLicencee(_cache, licenceeId);
+            var licences = _dynamicsClient.GetLicensesByLicencee(_cache, licenceeId).ToList();
+            var transferLicences = _dynamicsClient.GetTransferLicensesByLicencee(_cache, licenceeId).ToList();
+            if (transferLicences != null)
+            {
+                if (licences == null)
+                {
+                    licences = transferLicences;
+                }
+                else
+                {
+                    licences.AddRange(transferLicences);
+                }
+            }
 
             List<ApplicationLicenseSummary> licenseSummaryList = new List<ApplicationLicenseSummary>();
 
@@ -468,7 +480,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // fetch from Dynamics.
                 var account = await _dynamicsClient.Accounts.GetByKeyAsync(accountid: thirdPartyOperatorId, expand: expand);
                 result = account.AdoxioThirdpartyoperatorLicences
-                .Select(licence =>  _dynamicsClient.GetLicenceByIdWithChildren(licence.AdoxioLicencesid))
+                .Select(licence => _dynamicsClient.GetLicenceByIdWithChildren(licence.AdoxioLicencesid))
                 .Select(licence => licence.ToLicenseSummaryViewModel(new List<MicrosoftDynamicsCRMadoxioApplication>(), _dynamicsClient))
                 .ToList();
             }
