@@ -7,7 +7,7 @@ import { Application } from '@models/application.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';
-import { forkJoin, of } from 'rxjs';
+import { forkJoin, of, Observable, Subject } from 'rxjs';
 import { takeWhile, filter, mergeMap, switchMap } from 'rxjs/operators';
 import { LegalEntity } from '@models/legal-entity.model';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -311,22 +311,28 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId) );
   }
 
-  saveForLater() {
+  saveForLater(navigateAfterSaving: boolean = true): Observable<boolean> {
+    let subject  = new Subject<boolean>();
     this.orgStructure.saveAll()
       .subscribe(result => {
         this.validationErrors = [];
         if (!result) {
           this.validationErrors = ['There are incomplete fields on the page'];
+          subject.next(false);
         }
         if (this.validationErrors.length === 0) {
           this.busyPromise = this.prepareSaveRequest({})
             .toPromise()
             .then(() => {
               this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-              this.router.navigateByUrl('/dashboard');
+              if(navigateAfterSaving){
+                this.router.navigateByUrl('/dashboard');
+              }
+              subject.next(true);
             });
         }
       });
+      return subject;
   }
 
   addCancelledChange(change: LicenseeChangeLog) {
@@ -334,6 +340,10 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
   cancelApplication() {
+  }
+
+  canDeactivate(): Observable<boolean> {
+    return this.saveForLater(false);
   }
 
   /**
