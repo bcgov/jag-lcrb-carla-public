@@ -246,12 +246,12 @@ namespace bdd_tests
                 }
                 else if (businessTypeShared == "sole proprietorship")
                 {
-                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[47]"));
+                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[23]"));
                     uiNameAndLocation.SendKeys(nameAndLocation);
                 }
                 else
                 {
-                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[49]"));
+                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[25]"));
                     uiNameAndLocation.SendKeys(nameAndLocation);
                 }       
             }
@@ -294,7 +294,7 @@ namespace bdd_tests
             {
                 string involvementDetails = "Automated test - details of the involvement";
                 
-                NgWebElement matCheckbox = ngDriver.FindElement(By.XPath("//mat-dialog-container[@id='mat-dialog-0']/app-eligibility-form/div/form/div[4]/div/app-field/section/div/section/textarea"));
+                NgWebElement matCheckbox = ngDriver.FindElement(By.XPath("//textarea"));
                 matCheckbox.SendKeys(involvementDetails);
             }
             catch (NoSuchElementException)
@@ -314,12 +314,12 @@ namespace bdd_tests
                 }
                 else if (businessTypeShared == "sole proprietorship")
                 {
-                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[49]"));
+                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[25]"));
                     uiNameAndLocation2.SendKeys(nameAndLocation2);
                 }
                 else
                 {
-                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[51]"));
+                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[27]"));
                     uiNameAndLocation2.SendKeys(nameAndLocation2);
                 }
             }
