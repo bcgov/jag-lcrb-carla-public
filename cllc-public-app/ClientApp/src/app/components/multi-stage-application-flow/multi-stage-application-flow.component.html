@@ -7,13 +7,13 @@
 
     <mat-step label="Review Account Profile">
       <app-account-profile *ngIf="stepper.selectedIndex === 0" [useInStepperMode]="true" class="w-100"
-        (saveComplete)="stepper.selectedIndex = 1">
+        (saveComplete)="stepper.selectedIndex = 1" #accountProfile>
       </app-account-profile>
     </mat-step>
 
     <mat-step label="Review Organization Structure">
       <app-application-licensee-changes [redirectToDashboardOnSave]="false" *ngIf="stepper.selectedIndex === 1"
-        class="w-100" (saveComplete)="stepper.selectedIndex = 2"></app-application-licensee-changes>
+        class="w-100" (saveComplete)="stepper.selectedIndex = 2" #orgStructure></app-application-licensee-changes>
     </mat-step>
 
     <mat-step label="Complete Application">
@@ -27,7 +27,7 @@
       <app-security-screening-requirements *ngIf="stepper.selectedIndex === 3" class="w-100">
       </app-security-screening-requirements>
     </mat-step>
-    
+
     <mat-step *ngIf="applicationId" label="Application Payment">
     </mat-step>
 

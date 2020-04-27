@@ -283,11 +283,11 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       );
   }
 
-  canDeactivate(): Observable<boolean> | boolean {
+  canDeactivate(): Observable<boolean> {
     const connectionsDidntChang = !(this.connectionsToProducers && this.connectionsToProducers.formHasChanged());
     const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
     if (connectionsDidntChang && formDidntChange) {
-      return true;
+      return of(true);
     } else {
       const subj = new Subject<boolean>();
       this.busy = this.save(true).subscribe(res => {

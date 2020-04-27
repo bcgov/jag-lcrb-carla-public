@@ -261,10 +261,10 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     }
   }
 
-  canDeactivate(): Observable<boolean> | boolean {
+  canDeactivate(): Observable<boolean> {
     if (!this.connectionsToProducers.formHasChanged() &&
       JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
-      return true;
+      return of(true);
     } else {
       return this.save();
     }
