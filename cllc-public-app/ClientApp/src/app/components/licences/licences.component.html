@@ -82,6 +82,11 @@
                   <span>Operated By:</span>
                   <strong style="color: #1a5a96;">
                     {{item.thirdPartyOperatorAccountName}}</strong>
+                  <br>
+                  <a [routerLink]="[ '/cancel-third-party-operator/' + item.licenseId]" class="missing">
+                    <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>
+                      Terminate Third Party Operator Relationship</span>
+                  </a>
                 </ng-container>
                 <div *ngIf="showPlanStoreOpening(item)" style="min-width: 10px; margin-bottom: 10px;">
                   <a href="javascript:void(0);" (click)="planStoreOpening(item)" class="missing">
