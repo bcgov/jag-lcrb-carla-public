@@ -234,17 +234,12 @@ namespace bdd_tests
             {
                 string nameAndLocation = "Automated test name and location of retailer";
 
-                if (businessTypeShared == "partnership")
+                if (businessTypeShared == "indigenous nation")
                 {
-                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[37]"));
+                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
                     uiNameAndLocation.SendKeys(nameAndLocation);
                 }
-                else if (businessTypeShared == "indigenous nation")
-                {
-                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[46]"));
-                    uiNameAndLocation.SendKeys(nameAndLocation);
-                }
-                else if (businessTypeShared == "sole proprietorship")
+                else if ((businessTypeShared == "sole proprietorship") || (businessTypeShared == "partnership"))
                 {
                     NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[23]"));
                     uiNameAndLocation.SendKeys(nameAndLocation);
@@ -307,14 +302,14 @@ namespace bdd_tests
             {
                 string nameAndLocation2 = "Automated test name and location of retailer (2)";
 
-                if (businessTypeShared == "partnership")
-                {
-                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[39]"));
-                    uiNameAndLocation2.SendKeys(nameAndLocation2);
-                }
-                else if (businessTypeShared == "sole proprietorship")
+                if ((businessTypeShared == "sole proprietorship") || (businessTypeShared == "partnership"))
                 {
                     NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[25]"));
+                    uiNameAndLocation2.SendKeys(nameAndLocation2);
+                }
+                else if (businessTypeShared == "indigenous nation")
+                {
+                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[24]"));
                     uiNameAndLocation2.SendKeys(nameAndLocation2);
                 }
                 else
