@@ -753,14 +753,27 @@ namespace bdd_tests
             // select 'Yes' for federal producer's connection to business
             if ((businessTypeShared != "indigenous nation") && (businessTypeShared != "society"))
             {
-            NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[3]"));
-            federalProducerConnectionToCorp.Click();
+                NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[3]"));
+                federalProducerConnectionToCorp.Click();
                 
-            // enter the name of the federal producer and details of the connection 
-            string nameAndDetails2 = "Name and details of federal producer (automated test) (2).";
+                // enter the name of the federal producer and details of the connection 
+                string nameAndDetails2 = "Name and details of federal producer (automated test) (2).";
 
-            NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.XPath("(//textarea[@id=''])[2]"));
-            uiDetailsFederalProducer2.SendKeys(nameAndDetails2);
+                NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.XPath("(//textarea[@id=''])[2]"));
+                uiDetailsFederalProducer2.SendKeys(nameAndDetails2);
+            }
+
+            if (businessTypeShared == "public corporation")
+            {
+                string familyRelationship = "Details of family relationship (automated test).";
+
+                // select 'Yes' for family connection
+                NgWebElement familyConnectionConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[5]"));
+                familyConnectionConnectionToCorp.Click();
+
+                // enter details of family connection
+                NgWebElement familyConnectionDetails = ngDriver.FindElement(By.XPath("(//textarea[@id=''])[3]"));
+                familyConnectionDetails.SendKeys(familyRelationship);
             }
 
             // click on Continue to Organization Review button
