@@ -228,6 +228,7 @@ namespace bdd_tests
             {
             }
 
+            /*
             // complete field:
             // Please indicate the name and location of the retailer or store
             try
@@ -253,7 +254,7 @@ namespace bdd_tests
             }
             catch (NoSuchElementException)
             {
-            }
+            }*/
 
             // select response:
             // Does the retailer or store continue to operate?
@@ -283,6 +284,7 @@ namespace bdd_tests
             {
             }
 
+            /*
             // complete field:
             // Please indicate the details of your involvement
 
@@ -322,7 +324,7 @@ namespace bdd_tests
             }
             catch (NoSuchElementException)
             {
-            }
+            }*/
 
             // select response:
             // Do you continue to be involved?
