@@ -60,15 +60,14 @@ export class SpdConsentComponent implements OnInit {
         id: [],
         selfDisclosure: [''],
       }),
-      consentToSecurityScreening: [],
-      certifyInformationIsCorrect: [],
-      electronicSignature: [],
+      //consentToSecurityScreening: [],
+      //certifyInformationIsCorrect: [],
+      //electronicSignature: [],
       consentToCollection: [false],
     });
     this.reloadUser();
 
   }
-
 
   reloadUser() {
     this.busy = this.userDataService.getCurrentUser()
@@ -86,35 +85,26 @@ export class SpdConsentComponent implements OnInit {
 
   isValid(): boolean {
     this.showValidationMessages = false;
-    let valid = true;
-    if (!this.noWetSignature && !this.isFileUploadValid()) {
-      valid = false;
-    }
-    if (!this.isDeclarationValid()) {
-      valid = false;
-    }
-    if (!this.isCriminalBackgroundValid()) {
-      valid = false;
-    }
-
-    return valid;
+    return this.form.value.consentToCollection;
   }
 
+  // TO DO: Remove
   isCriminalBackgroundValid(): boolean {
     const valid = (this.form.value.contact.selfDisclosure === 1 || this.form.value.contact.selfDisclosure === 0);
     return valid;
   }
 
+  // TO DO: Remove
   isDeclarationValid(): boolean {
     const valid = !!(this.signName && this.consentToCollection && this.infoAccurate);
     return valid;
   }
-
+// TO DO: Remove
   isFileUploadValid(): boolean {
     return (this.uploadedDocuments === 1);
   }
 
-
+// TO DO: Remove
   formValid() {
     return this.infoAccurate
       && (this.uploadedDocuments === 1)

@@ -9,21 +9,28 @@
 
     <div [formGroup]="form" class="application-wrapper">
       <!-- Preamble -->
-      <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>
+      <section class="d-flex">
+      
+        <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+        <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+          <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>
+          <p><i class="fa fa-save" style="margin-right: 10px;"></i>If you leave this page, the information you input will be saved. You can continue later from the dashboard.</p>
+        </div>
+      </section>
 
       <!-- Before Starting -->
       <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">
         BEFORE STARTING
         THE APPLICATION
       </h3>
-      <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
+      <section *ngIf="htmlContent?.beforeStarting" class="padded-section content-bottom">
         <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
       </section>
 
-      <!-- Property Details -->
+      <!-- Establishment Name -->
       <section class="ngtest-property-details" *ngIf="application?.applicationType?.showPropertyDetails">
-        <h3 class="blue-header">PROPERTY DETAILS</h3>
-        <section class="padded-section">
+        <h3 class="blue-header">ESTABLISHMENT DETAILS</h3>
+        <section class="padded-section content-bottom">
           <div style="position: relative">
             <div [ngBusy]="busy"></div>
             <section *ngIf="application?.applicationType?.establishmentName === FormControlState.Show">
@@ -69,8 +76,11 @@
                 Double check the store name before submitting the application.
               </div>
             </div>
+            <!-- Non Cannabis Establishment Name input-->
             <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
-              <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)" [required]="true">
+              <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)" 
+                [required]="application?.applicationType?.establishmentName !== FormControlState.Reaonly"
+                [label]="getEstablishmentLabel(application?.applicationType)">
                 <input class="form-control" style="width: 500px;" type="text"
                        [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
                        formControlName="establishmentName" id="establishmentName">
@@ -82,6 +92,8 @@
           <div formGroupName="assignedLicence"
                *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
             <h3 class="blue-header">CURRENT ADDRESS</h3>
+            <div class="content-bottom">
+            <p>The licenced establishment is currently located at the following address:</p>
             <address class="row">
               <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
                 <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet"
@@ -114,13 +126,16 @@
                 </app-field>
               </div>
             </div>
+            </div>
           </div>
-          <div class="ngtest-new-address"
+
+          <h3 class="blue-header" *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
+            PROPOSED ADDRESS
+          </h3>
+          
+          <div class="ngtest-new-address content-bottom"
             *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
-            <h3 class="blue-header">
-              PROPOSED ADDRESS
-            </h3>
-            &nbsp;
+            <p>The proposed location of the licenced establishment:</p> 
             <address class="row">
               <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
                          [valid]="isValidOrNotTouched('establishmentAddressStreet')"
@@ -188,7 +203,9 @@
 
           <!-- Store Contact Info -->
           <section *ngIf="showFormControl(application?.applicationType?.storeContactInfo)">
-            <div style="flex: 0 0 210px;">
+            <h3 class="blue-header">Establishment Contact Details</h3>
+            <div style="flex: 0 0 210px;" class="content">
+              <p>The phone and email address used to contact your licenced establishment:</p>
               <app-field label="Store Email" [required]="false" [valid]="isValidOrNotTouched('establishmentEmail')"
                          errorMessage="Please enter an email address">
                 <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
@@ -196,7 +213,7 @@
                        formControlName="establishmentEmail" id="establishmentEmail">
               </app-field>
             </div>
-            <div style="flex: 0 0 210px;">
+            <div style="flex: 0 0 210px;" class="content-bottom">
               <app-field label="Store Phone" [required]="false" [valid]="isValidOrNotTouched('establishmentPhone')"
                          errorMessage="Please enter a phone number ">
                 <input type="text" class="form-control" style="width: 200px;" maxlength="10" autocomplete="tel"
@@ -210,6 +227,8 @@
 
         </section>
       </section>
+
+      <!-- Dynamic form details-->
       <section *ngIf="application?.applicationType?.formReference && dynamicsForm?.tabs">
         <h3 class="blue-header">Application Details</h3>
         <div *ngFor="let formTab of dynamicsForm.tabs">
@@ -314,6 +333,7 @@
         </div>
 
       </section>
+
       <section *ngIf="application?.applicationType?.showDescription1">
         <h3 class="blue-header">DESCRIPTION OF CHANGE</h3>
         <div class="padded-section">
@@ -326,14 +346,9 @@
         </div>
       </section>
 
+      <!-- Photos or Renderings of Signage-->
       <div class="ngtest-photo-signage" *ngIf="showFormControl(application?.applicationType?.signage)">
         <hr>
-
-        <!--div *ngIf="application?.applicationType?.name === 'Catering'">
-
-
-    </div>
-    <div *ngIf="application?.applicationType?.name !== 'Catering'"></div-->
         <label for="">Photos or renderings of the store's signage</label>
         <br>
         <section *ngIf="application?.applicationType?.signage === FormControlState.Show">
@@ -781,7 +796,7 @@
       <!-- Hours of Sale -->
       <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
         <h3 class="blue-header">HOURS OF SALE</h3>
-        <div class="padded-section">
+        <div class="padded-section content-bottom">
           <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">
             Indicate the
             store's proposed hours for cannabis sales below. Proposed
@@ -1095,6 +1110,7 @@
 
       <!-- Contact Details -->
       <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
+      <div class=content-bottom>
       <p>
         <i>
           Please provide contact information for the contact that the LCRB should communicate with regarding the application. This contact must be authorized to represent the applicant and have the authority to bind the applicant.
@@ -1132,11 +1148,13 @@
                  (blur)="trimValue(form.get('contactPersonEmail'))">
         </app-field>
       </address>
+    </div>
 
+    <!-- Declarations section -->
       <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType?.showDeclarations">
         DECLARATIONS
       </h3>
-      <div class="padded-section" *ngIf="application?.applicationType?.showDeclarations">
+      <div class="padded-section content-bottom" *ngIf="application?.applicationType?.showDeclarations">
         <ng-container *ngIf="!application?.applicationType?.showLiquorDeclarations">
           <section>
             <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
@@ -1293,16 +1311,6 @@
         </ng-container>
       </div>
 
-      <p>Proceed to pay online using a credit card through the secure web portal.</p>
-
-      <p>
-        <i>
-          <b>Please note:</b> Applications which are submitted without all required information or documents will
-          not be
-          processed. Applicants will be contacted and provided the opportunity to submit missing information. Once
-          applicants provide all required documents to the LCRB, the application will be processed.
-        </i>
-      </p>
 
       <section class="error" *ngIf="showValidationMessages">
         <p *ngFor="let message of validationMessages">
@@ -1313,41 +1321,61 @@
         </p>
       </section>
 
-      <div class="light-blue-bg">
-        <p *ngIf="application?.licenseType === 'Cannabis Retail Store'">
-          The Province does not know how many application for a cannabis retail store licence will be received.
-          Therefore, it is difficult to predict how long applications will take to process. To minimize delays in
-          processing, applicants must make sure the application is complete before submitting it.
-        </p>
-        <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-          The Province does not know how many applications for a cannabis marketing licence will be received.
-          Therefore,
-          it is difficult to predict how long applications will take to process. To minimize delays in processing,
-          applicants must make sure the application is complete before submitting it.
-        </p>
 
-        <br>
-        <p>
-          The ‘save for later’ feature allows applicants to re-access an application in progress.
-          For questions on the LCRB application process, please contact:
-        </p>
-        <div *ngIf="application?.licenseType === 'Cannabis Retail Store'">
-          <a href="javascript: void(0);">lcrbcannabis@gov.bc.ca</a>
-        </div>
-        <div *ngIf="application?.licenseType !== 'Cannabis Retail Store'">
-          <a href="javascript: void(0);">LCRBLiquor@gov.bc.ca</a>
-        </div>
-
-      </div>
 
       <!-- Next Steps -->
       <h3 *ngIf="htmlContent?.nextSteps" class="blue-header">
-        What happens next
+        What happens next?
       </h3>
-      <section *ngIf="htmlContent?.nextSteps" class="padded-section">
+      <section *ngIf="htmlContent?.nextSteps" class="padded-section content-bottom">
         <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.nextSteps"></div>
       </section>
 
+      <!-- Proceed to Pay-->
+
+      <section class="d-flex" style="margin-top:15px;">
+      
+        <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+        <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+
+          <p>Proceed to pay online using a credit card through the secure web portal.</p>
+
+          <p>
+            <i>
+              <b>Please note:</b> Applications which are submitted without all required information or documents will
+              not be
+              processed. Applicants will be contacted and provided the opportunity to submit missing information. Once
+              applicants provide all required documents to the LCRB, the application will be processed.
+            </i>
+          </p>
+
+          <div>
+            <p *ngIf="application?.licenseType === 'Cannabis Retail Store'">
+              The Province does not know how many application for a cannabis retail store licence will be received.
+              Therefore, it is difficult to predict how long applications will take to process. To minimize delays in
+              processing, applicants must make sure the application is complete before submitting it.
+            </p>
+            <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+              The Province does not know how many applications for a cannabis marketing licence will be received.
+              Therefore,
+              it is difficult to predict how long applications will take to process. To minimize delays in processing,
+              applicants must make sure the application is complete before submitting it.
+            </p>
+    
+            <br>
+          
+            <div *ngIf="application?.licenseType === 'Cannabis Retail Store'">
+              For questions on the LCRB application process, please contact: <a href="javascript: void(0);">lcrbcannabis@gov.bc.ca</a>
+            </div>
+            <div *ngIf="application?.licenseType !== 'Cannabis Retail Store'">
+              For questions on the LCRB application process, please contact: <a href="javascript: void(0);">LCRBLiquor@gov.bc.ca</a>
+            </div>
+    
+          </div>
+        </div>
+      </section>
+
+      <!-- button section -->
 
       <section style="position: relative; margin-top: 20px;">
         <button class="btn btn-primary" style="margin-right:10px;" (click)="saveForLater()">
