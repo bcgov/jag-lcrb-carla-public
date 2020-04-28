@@ -90,13 +90,7 @@ namespace bdd_tests
         [And(@"I review the organization structure")]
         public void review_org_structure()
         {
-            /* 
-            Page Title: [client name] Detailed Organization Information
-            */
-
-            // click on the Submit Org Info button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION']"));
-            submitOrgInfoButton.Click();
+            ReviewOrgStructure();
         }
 
         [And(@"I complete the application")]
