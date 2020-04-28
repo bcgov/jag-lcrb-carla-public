@@ -228,7 +228,6 @@ namespace bdd_tests
             {
             }
 
-            /*
             // complete field:
             // Please indicate the name and location of the retailer or store
             try
@@ -237,12 +236,12 @@ namespace bdd_tests
 
                 if (businessTypeShared == "indigenous nation")
                 {
-                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
+                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[36]"));
                     uiNameAndLocation.SendKeys(nameAndLocation);
                 }
                 else if ((businessTypeShared == "sole proprietorship") || (businessTypeShared == "partnership"))
                 {
-                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[23]"));
+                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[37]"));
                     uiNameAndLocation.SendKeys(nameAndLocation);
                 }
                 else
@@ -254,7 +253,7 @@ namespace bdd_tests
             }
             catch (NoSuchElementException)
             {
-            }*/
+            }
 
             // select response:
             // Does the retailer or store continue to operate?
@@ -284,10 +283,8 @@ namespace bdd_tests
             {
             }
 
-            /*
             // complete field:
             // Please indicate the details of your involvement
-
             try
             {
                 string involvementDetails = "Automated test - details of the involvement";
@@ -307,12 +304,12 @@ namespace bdd_tests
 
                 if ((businessTypeShared == "sole proprietorship") || (businessTypeShared == "partnership"))
                 {
-                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[25]"));
+                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[39]"));
                     uiNameAndLocation2.SendKeys(nameAndLocation2);
                 }
                 else if (businessTypeShared == "indigenous nation")
                 {
-                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[24]"));
+                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[38]"));
                     uiNameAndLocation2.SendKeys(nameAndLocation2);
                 }
                 else
@@ -324,7 +321,7 @@ namespace bdd_tests
             }
             catch (NoSuchElementException)
             {
-            }*/
+            }
 
             // select response:
             // Do you continue to be involved?
