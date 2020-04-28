@@ -1413,18 +1413,20 @@ namespace bdd_tests
 
             // create application info
             string prevAppDetails = "Here are the previous application details (test).";
-            string liqConnectionDetails = "Here are the liquor industry connection details (test).";
+            //string liqConnectionDetails = "Here are the liquor industry connection details (test).";
             string estName = "Point Ellis Greenhouse";
             string estAddress = "645 Tyee Rd";
             string estCity = "Victoria";
             string estPostal = "V9A6X5";
             string estPID = "012345678";
             string estPhone = "2505555555";
-            string otherBizDetails = "Here are the other business details (test).";
+            string estEmail = "test@automation.com";
+            //string otherBizDetails = "Here are the other business details (test).";
             string conGiven = "Given";
             string conSurname = "Surname";
             string conRole = "CEO";
             string conPhone = "2508888888";
+            string conEmail = "test2@automation.com";
 
             System.Threading.Thread.Sleep(9000);
 
@@ -1436,33 +1438,25 @@ namespace bdd_tests
             //NgWebElement uiPreviousLicenceNo = ngDriver.FindElement(By.Id("mat-button-toggle-2-button"));
             //uiPreviousLicenceNo.Click();
 
-            // select 'Yes' for previous liquor licence
-            NgWebElement uiPreviousLicenceYes = ngDriver.FindElement(By.Id("mat-button-toggle-1-button"));
-            uiPreviousLicenceYes.Click();
-
-            // enter the previous application details
-            NgWebElement uiPreviousApplicationDetails = ngDriver.FindElement(By.Id("previousApplicationDetails"));
-            uiPreviousApplicationDetails.SendKeys(prevAppDetails);
-
             // select 'No' for Rural Agency Store Appointment
             //NgWebElement uiRuralStoreNo = ngDriver.FindElement(By.Id("mat-button-toggle-5-button"));
             //uiRuralStoreNo.Click();
 
             // select 'Yes' for Rural Agency Store Appointment
-            NgWebElement uiRuralStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-4-button"));
-            uiRuralStoreYes.Click();
+            //NgWebElement uiRuralStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-4-button"));
+            //uiRuralStoreYes.Click();
 
             // select 'No' for distillery, brewery or winery connections
             //NgWebElement uiLiquorProductionNo = ngDriver.FindElement(By.Id("mat-button-toggle-8-button"));
             //uiLiquorProductionNo.Click();
 
             // select 'Yes' for distillery, brewery or winery connections
-            NgWebElement uiLiquorProductionYes = ngDriver.FindElement(By.Id("mat-button-toggle-7-button"));
-            uiLiquorProductionYes.Click();
+            //NgWebElement uiLiquorProductionYes = ngDriver.FindElement(By.Id("mat-button-toggle-7-button"));
+            //uiLiquorProductionYes.Click();
 
             // enter the liquor industry connections details
-            NgWebElement uiLiquorConnectionDetails = ngDriver.FindElement(By.Id("liquorIndustryConnectionsDetails"));
-            uiLiquorConnectionDetails.SendKeys(liqConnectionDetails);
+            //NgWebElement uiLiquorConnectionDetails = ngDriver.FindElement(By.Id("liquorIndustryConnectionsDetails"));
+            //uiLiquorConnectionDetails.SendKeys(liqConnectionDetails);
 
             // enter the establishment address
             NgWebElement uiEstabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
@@ -1480,21 +1474,33 @@ namespace bdd_tests
             NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
+            // enter the store email
+            NgWebElement uiEstabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
+            uiEstabEmail.SendKeys(estEmail);
+
             // enter the store phone number
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
+
+            // select 'Yes' for previous liquor licence
+            NgWebElement uiPreviousLicenceYes = ngDriver.FindElement(By.Id("mat-button-toggle-1-button"));
+            uiPreviousLicenceYes.Click();
+
+            // enter the previous application details
+            NgWebElement uiPreviousApplicationDetails = ngDriver.FindElement(By.Id("//textarea"));
+            uiPreviousApplicationDetails.SendKeys(prevAppDetails);
 
             // select 'No' for other business on premises
             //NgWebElement uiOtherBusinessNo = ngDriver.FindElement(By.Id("mat-button-toggle-11-button"));
             //uiOtherBusinessNo.Click();
 
             // select 'Yes' for other business on premises
-            NgWebElement uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-10-button"));
-            uiOtherBusinessYes.Click();
+            //NgWebElement uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-10-button"));
+            //uiOtherBusinessYes.Click();
 
             // enter the other business details
-            NgWebElement uiOtherBusinessDetails = ngDriver.FindElement(By.Id("otherBusinessesDetails"));
-            uiOtherBusinessDetails.SendKeys(otherBizDetails);
+            //NgWebElement uiOtherBusinessDetails = ngDriver.FindElement(By.Id("otherBusinessesDetails"));
+            //uiOtherBusinessDetails.SendKeys(otherBizDetails);
 
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
@@ -1522,13 +1528,17 @@ namespace bdd_tests
             NgWebElement uiContactPhone = ngDriver.FindElement(By.Id("contactPersonPhone"));
             uiContactPhone.SendKeys(conPhone);
 
+            // enter the email of the application contact
+            NgWebElement uiContactEmail = ngDriver.FindElement(By.Id("contactPersonEmail"));
+            uiContactEmail.SendKeys(conEmail);
+
             // click on the authorized to submit checkbox
-            NgWebElement uiAuthorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
-            uiAuthorizedSubmit.Click();
+            //NgWebElement uiAuthorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            //uiAuthorizedSubmit.Click();
 
             // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
-            uiSignatureAgree.Click();
+            //NgWebElement uiSignatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
+            //uiSignatureAgree.Click();
         }
         public void Dispose()
         {
