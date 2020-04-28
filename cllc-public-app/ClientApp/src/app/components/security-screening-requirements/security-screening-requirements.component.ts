@@ -8,6 +8,7 @@ import { ApplicationDataService } from '@services/application-data.service';
 import { LicenseDataService } from '@services/license-data.service';
 import { ApplicationType } from '@models/application-type.model';
 import { PaymentDataService } from '@services/payment-data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-security-screening-requirements',
@@ -16,6 +17,7 @@ import { PaymentDataService } from '@services/payment-data.service';
 })
 export class SecurityScreeningRequirementsComponent implements OnInit {
   data: SecurityScreeningSummary;
+  busy: Subscription;
   applicationId: string;
   applicationType: ApplicationType;
   liquorLicenceExist: boolean;
@@ -30,7 +32,7 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
     private licenseDataService: LicenseDataService,
     private paymentDataService: PaymentDataService,
     private legalEntityDataService: LegalEntityDataService) {
-    this.legalEntityDataService.getCurrentSecurityScreeningItems()
+    this.busy = this.legalEntityDataService.getCurrentSecurityScreeningItems()
       .subscribe(summary => {
         this.data = summary;
       });
@@ -53,7 +55,7 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
         });
     }
 
-    this.licenseDataService.getAllCurrentLicenses()
+    this.busy = this.licenseDataService.getAllCurrentLicenses()
       .subscribe(licences => {
         this.liquorLicenceExist = licences.filter(lc => lc.applicationTypeCategory === 'Liquor').length > 0;
         this.cannabisLicenceExist = licences.filter(lc => lc.applicationTypeCategory === 'Cannabis').length > 0;
