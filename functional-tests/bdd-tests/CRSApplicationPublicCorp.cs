@@ -91,70 +91,7 @@ namespace bdd_tests
         [And(@"I review the organization structure")]
         public void I_continue_to_organization_review()
         {
-            /* 
-            Page Title: [client name] Detailed Organization Information
-            */
-            
-            // create the key personnel data
-            string keyPersonnelFirst = "Jane";
-            string keyPersonnelLast = "Bond";
-            string keyPersonnelTitle = "Adventurer";
-            string keyPersonnelEmail = "jane@bond.com";
-
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload NOA form
-            string NOAPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-            NgWebElement uploadNOA = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uploadNOA.SendKeys(NOAPath);
-
-            /*// upload a central securities register document
-            string centralSecuritiesRegister = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-            NgWebElement uploadCentralSecReg = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
-            uploadCentralSecReg.SendKeys(centralSecuritiesRegister);
-
-            // upload a special rights and restrictions document
-            string specialRightsRestrictions = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-            NgWebElement uploadSpecialRightsRes = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
-            uploadSpecialRightsRes.SendKeys(specialRightsRestrictions);*/
-
-            // open key personnel form
-            NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[3]/section/app-associate-list/div/button"));
-            openKeyPersonnelForm.Click();
-
-            // enter key personnel first name
-            NgWebElement openKeyPersonnelFirst = ngDriver.FindElement(By.XPath("//input[@type='text']"));
-            openKeyPersonnelFirst.SendKeys(keyPersonnelFirst);
-
-            // enter key personnel last name
-            NgWebElement openKeyPersonnelLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
-            openKeyPersonnelLast.SendKeys(keyPersonnelLast);
-            
-            // select key personnel role
-            NgWebElement openKeyPersonnelRole = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
-            openKeyPersonnelRole.Click();
-
-            // enter key personnel title
-            NgWebElement openKeyPersonnelTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
-            openKeyPersonnelTitle.SendKeys(keyPersonnelTitle);
-            
-            // enter key personnel email
-            NgWebElement openKeyPersonnelEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
-            openKeyPersonnelEmail.SendKeys(keyPersonnelEmail);
-
-            // select key person DOB
-            NgWebElement openPartnerDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
-            openPartnerDOB.Click();
-
-            NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
-            openKeyPartnerDOB1.Click();
-
-            // click on Submit Organization Info button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
-            submitOrgInfoButton.Click();
+            ReviewOrgStructure();
         }
 
         [And(@"I complete the application")]
