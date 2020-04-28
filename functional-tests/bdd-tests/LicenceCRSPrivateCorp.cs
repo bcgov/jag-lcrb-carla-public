@@ -132,7 +132,7 @@ namespace bdd_tests
             Subtitle:   Cannabis Retail Store Licences
             */
 
-            string storePlanningLink = "Plan Store Opening";
+            string storePlanningLink = "Store Opening Inspection Checklist";
 
             // click on the store planning link
             NgWebElement uiStorePlanning = ngDriver.FindElement(By.LinkText(storePlanningLink));
