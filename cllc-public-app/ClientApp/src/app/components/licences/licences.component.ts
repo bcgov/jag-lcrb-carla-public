@@ -58,7 +58,7 @@ export class LicencesComponent extends FormBase implements OnInit {
   licenceMappings = {};
   supportedLicenceTypes = [
     "Catering", "Wine Store", "Cannabis Retail Store", "Marketing",
-    "Operated - Wine Store"
+    "Operated - Wine Store", "Operated - Catering"
   ];
 
   constructor(
