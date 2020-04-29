@@ -359,6 +359,8 @@ export class LicenseeChangeLog {
       node.children.forEach(child => {
         const childNode = this.processLegalEntityTree(child);
         childNode.parentLinceseeChangeLog = newNode;
+
+        //split the change log if it is both a shareholder and key-personnel
         if (childNode.isIndividual && (childNode.isDirectorNew || childNode.isManagerNew || childNode.isOfficerNew || childNode.isTrusteeNew)) {
           const newIndividualNode = <LicenseeChangeLog>{ ...childNode, isShareholderNew: false, isShareholderOld: false };
           newNode.children.push(newIndividualNode);
@@ -372,6 +374,7 @@ export class LicenseeChangeLog {
           childNode.isDirectorOld = false;
           childNode.isTrusteeOld = false;
         }
+        
         newNode.children.push(childNode);
       });
 
