@@ -27,9 +27,8 @@
       </p>
     </section>
 
-    <section class="mt-5" style="position: relative;">
-      <div [ngBusy]="[busyPromise]"></div>
-      <button class="btn btn-secondary" style="margin-right:10px;" (click)="saveForLater()">
+    <section class="mt-5" style="position: relative;">      
+      <button *ngIf="treeRoot" class="btn btn-secondary" style="margin-right:10px;" (click)="saveForLater()">
         <span>
           <i class="fa fa-save"></i>
           SAVE FOR LATER
@@ -37,7 +36,7 @@
       </button>
 
       
-      <button *ngIf="true || LicenseeChangeLog.HasChanges(treeRoot)" class="btn btn-primary" style="float: right;"
+      <button *ngIf="treeRoot" class="btn btn-primary" style="float: right;"
          (click)="save()">
         <i class="fa fa-save" style="color: #fff;"></i>
         {{getSaveLabel()}}</button>
