@@ -13,14 +13,15 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: LicenceCRS_privatecorp.feature
+Feature: LicenceCRS_soleproprietor.feature
     As a logged in business user
     I want to pay the Cannabis Retail Store Licence Fee
     And complete the available application types
 
 Scenario: Pay CRS Licence Fee and Complete Applications
-    Given the CRS application has been approved
-    And I am logged in to the dashboard as a private corporation
+    # Given the CRS application has been approved
+    # And I am logged in to the dashboard as a sole proprietorship
+    Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the licence download link
@@ -36,8 +37,8 @@ Scenario: Pay CRS Licence Fee and Complete Applications
 
 namespace bdd_tests
 {
-    [FeatureFile("./LicenceCRS_privatecorp.feature")]
-    public sealed class LicenceCRSPrivateCorp : TestBase
+    [FeatureFile("./LicenceCRS_soleproprietor.feature")]
+    public sealed class LicenceCRSSoleProprietor : TestBase
     {
         /*[Given(@"the CRS application has been approved")]
         public void CRS_application_is_approved()
