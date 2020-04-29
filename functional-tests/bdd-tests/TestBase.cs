@@ -1205,7 +1205,6 @@ namespace bdd_tests
                 uploadPartnership2Agreement.SendKeys(partnershipPath2);
 
                 // open individual partner 2 row
-                                                                              //*[@id="cdk-accordion-child-0"]/div/section/app-org-structure/div[3]/section[1]/app-associate-list/div/button
                 NgWebElement openPartner2Row = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section[1]/app-associate-list/div/button"));
                 openPartner2Row.Click();
 
