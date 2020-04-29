@@ -92,7 +92,7 @@
     <None Update="MultiLevelCRSApplicationPrivateCorp.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LicenceCRSPrivateCorp.feature">
+    <None Update="LicenceCRS_privatecorp.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LicenceCateringPrivateCorp.feature">
