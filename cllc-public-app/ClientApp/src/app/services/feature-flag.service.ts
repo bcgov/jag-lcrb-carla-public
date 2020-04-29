@@ -8,21 +8,50 @@ import { of, Observable } from 'rxjs';
 })
 export class FeatureFlagService {
 
-  private _featureFlags: Observable<string[]> = of([]); // A list of all features turned ON
+  private _featureFlags: Array<string> = [] // A list of all features turned ON
+  private initialized = false;
 
   constructor(private featureFlagDataService: FeatureFlagDataService) {
-    this._featureFlags = this.featureFlagDataService.getFeatureFlags();
-   }
+
+    
+  }
+
+  public init() {
+    if (!this.initialized) {
+      console.log("GETTING FLAGS");
+
+      this.featureFlagDataService.getFeatureFlags()
+        .toPromise()
+        .then(featureFlags => {
+          console.log("GOT FLAGS");
+          console.log(featureFlags);
+          this._featureFlags = featureFlags;
+          this.initialized = true;
+        });
+    }
+  }
 
   featureOn(featureName: string): Observable<boolean> {
     if (!featureName) {
+      return of(false);
+    }
+
+    console.log("Looking for feature " + featureName);
+    console.log("FEATURE FLAGS");
+    console.log(this._featureFlags);
+
+    // Find the feature flag that is turned on
+    if (this._featureFlags && !!this._featureFlags.find(feature => {
+      return feature === featureName;
+    })) {
+      console.log("Found feature " + featureName)
       return of(true);
     }
-    // Find the feature flag that is turned on
-    // if feature not found, default to turned off
-    return this._featureFlags
-      .pipe(map(features => {
-        return !!features.find(feature => feature === featureName);
-      }));
-  }
+    else {
+      console.log("Did not find feature " + featureName);
+      return of(false);
+    }
+    
+    }
+    
 }

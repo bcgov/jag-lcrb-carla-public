@@ -414,19 +414,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private List<ApplicationLicenseSummary> GetLicensesByLicencee(string licenceeId)
         {
 
-            var licences = _dynamicsClient.GetLicensesByLicencee(_cache, licenceeId).ToList();
-            var transferLicences = _dynamicsClient.GetTransferLicensesByLicencee(_cache, licenceeId).ToList();
-            if (transferLicences != null)
-            {
-                if (licences == null)
-                {
-                    licences = transferLicences;
-                }
-                else
-                {
-                    licences.AddRange(transferLicences);
-                }
-            }
+            var licences = _dynamicsClient.GetAllLicensesByLicencee(_cache, licenceeId).ToList();            
 
             List<ApplicationLicenseSummary> licenseSummaryList = new List<ApplicationLicenseSummary>();
 
@@ -445,7 +433,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
         [HttpGet("current")]
-        public JsonResult GetCurrentUserLicences()
+        public List<ApplicationLicenseSummary> GetCurrentUserLicences()
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -454,7 +442,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
             List<ApplicationLicenseSummary> adoxioLicenses = GetLicensesByLicencee(userSettings.AccountId);
 
-            return new JsonResult(adoxioLicenses);
+            return adoxioLicenses;
         }
 
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in

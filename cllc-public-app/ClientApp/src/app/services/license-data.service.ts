@@ -6,9 +6,10 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { DataService } from './data.service';
 import { License } from '@models/license.model';
-import { Establishment } from '@models/establishment.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LicenseDataService extends DataService {
 
   apiPath = 'api/licenses/';
