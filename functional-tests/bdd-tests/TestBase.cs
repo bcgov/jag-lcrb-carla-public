@@ -212,8 +212,7 @@ namespace bdd_tests
             Page Title: Cannabis Retail Store Licence Eligibility Disclosure
             */
 
-            // select response:
-            // On or after March 1, 2020, did you or any of your associates own, operate, provide financial support to, or receive income from an unlicensed cannabis retail store or retailer?
+            // select response: On or after March 1, 2020, did you or any of your associates own, operate, provide financial support to, or receive income from an unlicensed cannabis retail store or retailer?
             try
             {
                 // select No using radio button
@@ -228,8 +227,7 @@ namespace bdd_tests
             {
             }
 
-            // complete field:
-            // Please indicate the name and location of the retailer or store
+            // complete field: Please indicate the name and location of the retailer or store
             try
             {
                 string nameAndLocation = "Automated test name and location of retailer";
@@ -246,7 +244,6 @@ namespace bdd_tests
                 }
                 else
                 {
-                    //NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[25]"));
                     NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[39]"));
                     uiNameAndLocation.SendKeys(nameAndLocation);
                 }       
@@ -255,8 +252,7 @@ namespace bdd_tests
             {
             }
 
-            // select response:
-            // Does the retailer or store continue to operate?
+            // select response: Does the retailer or store continue to operate?
             try
             {
                 // select Yes for Question 2 using radio button
@@ -267,8 +263,7 @@ namespace bdd_tests
             {
             }
 
-            // select response:
-            // On or after March 1, 2020, were you or any of your associates involved with the distribution or supply of cannabis to a licensed or unlicensed cannabis retail store or retailer?
+            // select response: On or after March 1, 2020, were you or any of your associates involved with the distribution or supply of cannabis to a licensed or unlicensed cannabis retail store or retailer?
             try
             {
                 // select No using radio button
@@ -283,8 +278,7 @@ namespace bdd_tests
             {
             }
 
-            // complete field:
-            // Please indicate the details of your involvement
+            // complete field: Please indicate the details of your involvement
             try
             {
                 string involvementDetails = "Automated test - details of the involvement";
@@ -296,8 +290,7 @@ namespace bdd_tests
             {
             }
 
-            // complete field: 
-            // Please indicate the name and location of the retailer or store
+            // complete field: Please indicate the name and location of the retailer or store
             try
             {
                 string nameAndLocation2 = "Automated test name and location of retailer (2)";
@@ -314,7 +307,6 @@ namespace bdd_tests
                 }
                 else
                 {
-                    //NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[27]"));
                     NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[41]"));
                     uiNameAndLocation2.SendKeys(nameAndLocation2);
                 }
@@ -323,8 +315,7 @@ namespace bdd_tests
             {
             }
 
-            // select response:
-            // Do you continue to be involved?
+            // select response: Do you continue to be involved?
             try
             {
                 // select Yes for Question 2 using radio button
