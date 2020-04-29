@@ -15,5 +15,5 @@ Scenario: Start Application
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
-    And the account is deleted
+    # And the account is deleted
     Then I see the login page
