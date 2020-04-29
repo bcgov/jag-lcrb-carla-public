@@ -81,7 +81,8 @@ export class LicenseeChangeLog {
   // }
 
   public get keyPersonnelChildren(): LicenseeChangeLog[] {
-    const leaders = (this.children || []).filter(item => item.isIndividual && !item.isShareholderNew);
+    const leaders = (this.children || []).filter(item => item.isIndividual &&
+      (item.isDirectorNew || item.isManagerNew || item.isOfficerNew || item.isTrusteeNew));
     return leaders;
   }
 
@@ -98,7 +99,9 @@ export class LicenseeChangeLog {
   public get keyPersonnelChildrenNoRemoves(): LicenseeChangeLog[] {
     const leaders = (this.children || []).filter(item => {
       item = Object.assign(new LicenseeChangeLog, item);
-      return item.isIndividual && !item.isShareholderNew && !item.isRemoveChangeType();
+      return item.isIndividual &&
+        (item.isDirectorNew || item.isManagerNew || item.isOfficerNew || item.isTrusteeNew)
+        && !item.isRemoveChangeType();
     });
     return leaders;
   }
@@ -121,7 +124,7 @@ export class LicenseeChangeLog {
 
   public static GetKeyPersonnelDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
     let children = changeLog.children || [];
-    let leaders = children.filter(item => item.isIndividual && !item.isShareholderNew && item.changeType !== 'unchanged');
+    let leaders = children.filter(item => item.isIndividual && item.changeType !== 'unchanged');
     children.forEach(child => {
       leaders = leaders.concat(LicenseeChangeLog.GetKeyPersonnelDecendents(child));
     });
@@ -248,6 +251,8 @@ export class LicenseeChangeLog {
       this.phsLink = legalEntity.phsLink;
       this.numberOfMembers = legalEntity.numberOfMembers;
       this.annualMembershipFee = legalEntity.annualMembershipFee;
+      this.totalSharesOld = legalEntity.totalShares;
+      this.totalSharesNew = legalEntity.totalShares;
     }
   }
 
@@ -284,11 +289,11 @@ export class LicenseeChangeLog {
 
   private privateCorpFileErrors(): string[] {
     let errors = [];
-    if(this.businessType === 'PrivateCorporation'){
-      if(this.fileUploads['NOA'] <= 0){
+    if (this.businessType === 'PrivateCorporation') {
+      if (this.fileUploads['NOA'] <= 0) {
         errors.push(`${this.businessNameNew}: Please upload the Corporation Notice of Articles`);
       }
-      if(this.fileUploads['SECREG'] <= 0){
+      if (this.fileUploads['SECREG'] <= 0) {
         errors.push(`${this.businessNameNew}: Please upload the Central Securities Register`);
       }
     }
@@ -297,18 +302,18 @@ export class LicenseeChangeLog {
 
   private publicCorpFileErrors(): string[] {
     let errors = [];
-    if(this.businessType === 'PublicCorporation'){
-      if(this.fileUploads['NOA'] <= 0){
+    if (this.businessType === 'PublicCorporation') {
+      if (this.fileUploads['NOA'] <= 0) {
         errors.push(`${this.businessNameNew}: Please upload the Corporation Notice of Articles`);
       }
     }
     return errors;
   }
-  
+
   private partnershipFileErrors(): string[] {
     let errors = [];
-    if(this.businessType === 'Partnership'){
-      if(this.fileUploads['NOA'] <= 0){
+    if (this.businessType === 'Partnership') {
+      if (this.fileUploads['NOA'] <= 0) {
         errors.push(`${this.businessNameNew}: Please upload the Partnership Agreement`);
       }
     }
@@ -318,8 +323,8 @@ export class LicenseeChangeLog {
   private nameChangeFileErrors(): string[] {
     let errors = [];
 
-    if(this.isNameChangePerformed()){
-      if(this.fileUploads['Name Change Documents'] <= 0){
+    if (this.isNameChangePerformed()) {
+      if (this.fileUploads['Name Change Documents'] <= 0) {
         errors.push(`${this.firstNameNew} ${this.lastNameNew}: Please upload the Name Change Documents`);
       }
     }
@@ -348,17 +353,33 @@ export class LicenseeChangeLog {
   */
   public static processLegalEntityTree(node: LegalEntity): LicenseeChangeLog {
     const newNode = new LicenseeChangeLog(node);
+
     if (node.children && node.children.length) {
       newNode.children = [];
       node.children.forEach(child => {
         const childNode = this.processLegalEntityTree(child);
         childNode.parentLinceseeChangeLog = newNode;
+        if (childNode.isIndividual && (childNode.isDirectorNew || childNode.isManagerNew || childNode.isOfficerNew || childNode.isTrusteeNew)) {
+          const newIndividualNode = <LicenseeChangeLog>{ ...childNode, isShareholderNew: false, isShareholderOld: false };
+          newNode.children.push(newIndividualNode);
+
+          childNode.isManagerNew = false;
+          childNode.isOfficerNew = false;
+          childNode.isDirectorNew = false;
+          childNode.isTrusteeNew = false;
+          childNode.isManagerOld = false;
+          childNode.isOfficerOld = false;
+          childNode.isDirectorOld = false;
+          childNode.isTrusteeOld = false;
+        }
         newNode.children.push(childNode);
       });
+
       newNode.children.sort((a, b) => {
         return a.totalSharesNew - b.totalSharesNew;
       });
     }
+
     return newNode;
   }
 
