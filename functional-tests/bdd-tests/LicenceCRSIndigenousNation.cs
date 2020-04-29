@@ -45,8 +45,8 @@ namespace bdd_tests
         {
         }*/
 
-        [Given(@"I am logged in to the dashboard as a (.*)")]
-        //[And(@"I am logged in to the dashboard as a (.*)")]
+        [Given(@"I am logged in to the dashboard as an (.*)")]
+        //[And(@"I am logged in to the dashboard as an (.*)")]
         public void And_I_view_the_dashboard(string businessType)
         {
             CarlaLoginNoCheck();
