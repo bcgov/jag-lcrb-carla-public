@@ -132,7 +132,10 @@ export class LicenseeChangeLog {
   }
 
   public static HasChanges(changeLog: LicenseeChangeLog): Boolean {
-    return this.GetKeyPersonnelDecendents(changeLog).length > 0 || this.GetBusinessShareholderDecendents(changeLog).length > 0 || this.GetIndividualShareholderDecendents(changeLog).length > 0;
+    const keyPersonnnelChanged = this.GetKeyPersonnelDecendents(changeLog).length > 0;
+    const individualShareholderChanged = this.GetIndividualShareholderDecendents(changeLog).length > 0;
+    const businessShareholderChanged = this.GetBusinessShareholderDecendents(changeLog).length > 0;
+    return keyPersonnnelChanged || individualShareholderChanged || businessShareholderChanged;
   }
 
   public static GetIndividualShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
@@ -268,8 +271,7 @@ export class LicenseeChangeLog {
       changeLog.firstNameNew === changeLog.firstNameOld &&
       changeLog.lastNameNew === changeLog.lastNameOld &&
       changeLog.dateofBirthNew === changeLog.dateofBirthOld &&
-      changeLog.titleNew === changeLog.titleOld &&
-      changeLog.totalSharesOld === changeLog.totalSharesNew) {
+      changeLog.titleNew === changeLog.titleOld ) {
       result = true
     }
     return result;
