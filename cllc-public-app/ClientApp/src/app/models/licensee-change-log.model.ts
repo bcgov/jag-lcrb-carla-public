@@ -124,7 +124,7 @@ export class LicenseeChangeLog {
 
   public static GetKeyPersonnelDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
     let children = changeLog.children || [];
-    let leaders = children.filter(item => item.isIndividual && item.changeType !== 'unchanged');
+    let leaders = children.filter(item => item.isIndividual && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
       leaders = leaders.concat(LicenseeChangeLog.GetKeyPersonnelDecendents(child));
     });
@@ -137,7 +137,7 @@ export class LicenseeChangeLog {
 
   public static GetIndividualShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
     let children = changeLog.children || [];
-    let shareholders = children.filter(item => item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged');
+    let shareholders = children.filter(item => item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
       shareholders = shareholders.concat(LicenseeChangeLog.GetIndividualShareholderDecendents(child));
     });
@@ -146,7 +146,7 @@ export class LicenseeChangeLog {
 
   public static GetBusinessShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
     let children = changeLog.children || [];
-    let shareholders = children.filter(item => !item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged');
+    let shareholders = children.filter(item => !item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
       shareholders = shareholders.concat(LicenseeChangeLog.GetBusinessShareholderDecendents(child));
     });
@@ -254,6 +254,25 @@ export class LicenseeChangeLog {
       this.totalSharesOld = legalEntity.totalShares;
       this.totalSharesNew = legalEntity.totalShares;
     }
+  }
+
+  public static onlyEmailHasChanged(changeLog: LicenseeChangeLog): boolean {
+    let result = false;
+    if (changeLog.emailNew !== changeLog.emailOld &&
+      changeLog.isDirectorNew === changeLog.isDirectorOld &&
+      changeLog.isManagerNew === changeLog.isManagerOld &&
+      changeLog.isOfficerNew === changeLog.isOfficerOld &&
+      changeLog.isShareholderNew === changeLog.isShareholderOld &&
+      changeLog.isTrusteeNew === changeLog.isTrusteeOld &&
+      changeLog.numberofSharesNew === changeLog.numberofSharesOld &&
+      changeLog.firstNameNew === changeLog.firstNameOld &&
+      changeLog.lastNameNew === changeLog.lastNameOld &&
+      changeLog.dateofBirthNew === changeLog.dateofBirthOld &&
+      changeLog.titleNew === changeLog.titleOld &&
+      changeLog.totalSharesOld === changeLog.totalSharesNew) {
+      result = true
+    }
+    return result;
   }
 
   getNewLeadershipPosition(): string {
@@ -374,7 +393,7 @@ export class LicenseeChangeLog {
           childNode.isDirectorOld = false;
           childNode.isTrusteeOld = false;
         }
-        
+
         newNode.children.push(childNode);
       });
 
