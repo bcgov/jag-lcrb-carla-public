@@ -1,6 +1,7 @@
 
 import { LicenseType } from './license-type.model';
 import { ApplicationContentType } from './application-content-type.model';
+import { DynamicsForm } from './dynamics-form.model';
 
 export class ApplicationType {
   id: string;
@@ -40,6 +41,8 @@ export class ApplicationType {
   showLiquorSitePlan: FormControlState;
   proofofZoning: FormControlState;
   isFree: boolean;
+
+  dynamicsForm: DynamicsForm;
 }
 
 export enum FormControlState {

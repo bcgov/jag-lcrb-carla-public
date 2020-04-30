@@ -196,9 +196,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
       .subscribe(data => this.indigenousNations = data);
 
 
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId)
+    this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: Application) => {
+      .subscribe(data => {
         if (data.establishmentParcelId) {
           data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
         }
@@ -206,6 +206,29 @@ export class ApplicationComponent extends FormBase implements OnInit {
           (<any>data).applyAsIndigenousNation = true;
         }
         this.application = data;
+
+        if (data.applicationType.formReference) {
+          // get the application form        
+              this.dynamicsForm = data.applicationType.dynamicsForm;
+              this.dynamicsForm.tabs.forEach(function (tab) {
+                tab.sections.forEach(function (section) {
+                  if (section.fields) {
+                    section.fields.forEach(function (field) {
+                      // add the field to the form.
+                      if (field.required) {
+                        this.form.addControl(field.name, new FormControl('', Validators.required));
+                      }
+                      else {
+                        this.form.addControl(field.name, new FormControl(''));
+                      }
+                    }, this);
+                  }
+                  
+                }, this);
+              }, this);
+        }
+
+
         this.hideFormControlByType();
 
         this.addDynamicContent();
@@ -223,29 +246,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
         }
         this.savedFormData = this.form.value;
 
-        if (this.application.applicationType.formReference) {
-          // get the application form 
-          this.dynamicsFormDataService.getDynamicsForm(this.application.applicationType.formReference) 
-            .pipe(takeWhile(() => this.componentActive))
-            .subscribe(value => {
-              this.dynamicsForm = value;
-              this.dynamicsForm.tabs.forEach(function (tab) {
-                tab.sections.forEach(function (section) {
-                  section.fields.forEach(function (field) {
-                    // add the field to the form.
-                    if (field.required) {
-                      this.form.addControl(field.name, new FormControl('', Validators.required));
-                    }
-                    else {
-                      this.form.addControl(field.name, new FormControl('')); 
-                    }
-                    
-                  });
-                });
-              });
-            });
-        }
-        
       },
         () => {
           console.log('Error occured');

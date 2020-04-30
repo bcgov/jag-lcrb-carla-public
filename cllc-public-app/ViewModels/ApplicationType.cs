@@ -75,5 +75,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public List<ApplicationTypeContent> ContentTypes { get; set; }
 
         public int? IsFree { get; set; }
+
+        public Form DynamicsForm { get; set; }
     }
 }
