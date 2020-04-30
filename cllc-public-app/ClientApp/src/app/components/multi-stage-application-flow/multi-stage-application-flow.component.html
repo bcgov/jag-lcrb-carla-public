@@ -16,9 +16,8 @@
         class="w-100" (saveComplete)="stepper.selectedIndex = 2" #orgStructure></app-application-licensee-changes>
     </mat-step>
 
-    <mat-step label="Complete Application">
-      <ng-container *ngIf="stepper.selectedIndex === 2"></ng-container>
-      <app-application class="w-100" [skipPayment]="true"
+    <mat-step label="Complete Application">      
+      <app-application *ngIf="stepper.selectedIndex === 2" class="w-100" [skipPayment]="true"
         (saveComplete)="stepper.selectedIndex = 3">
       </app-application>      
     </mat-step>
