@@ -24,6 +24,7 @@ Scenario: Start Application
     And I click on the Catering Start Application button
     And I review the account profile
     And I review the organization structure
+    And I submit the organization structure
     And I complete the application
     And I click on the Submit button
     And I click on the Pay for Application button
@@ -130,10 +131,12 @@ namespace bdd_tests
 
             NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
             openKeyPartnerDOB1.Click();
+        }
 
-            // click on the Submit Organization Information button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
-            submitOrgInfoButton.Click();
+        [And(@"I submit the organization structure")]
+        public void submit_org_structure()
+        {
+            SubmitOrgInfoButton();
         }
 
         [And(@"I complete the application")]
