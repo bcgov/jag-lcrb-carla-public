@@ -1,0 +1,68 @@
+﻿@page
+@model Watchdog.Pages.ApplicationTypesCheckModel
+@{
+    ViewData["Title"] = "Application Types Check";
+}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Application Type</th>
+                <th>Field</th>
+                <th>DEV</th>
+                <th>TEST</th>
+                <th>PROD</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var key in Model.allKeys)
+            {
+                <tr>
+                    <td rowspan="@Model.allRowSizes[key]"> @key  </td>
+                    <th>Is Default</th>
+                    <td> @Model.devAppTypes[@key].AdoxioIsdefault.ToString() </td>
+                    <td> @Model.tstAppTypes[@key].AdoxioIsdefault.ToString() </td>
+                    <td> @Model.prdAppTypes[@key].AdoxioIsdefault.ToString() </td>
+                </tr>
+                <tr>
+                    <th>Code</th>
+                    <td> @Model.devAppTypes[@key]?.AdoxioCode </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioCode </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioCode </td>
+                </tr>
+                <tr>
+                    <th>Requires Security Screening</th>
+                    <td> @Model.devAppTypes[@key]?.AdoxioRequiressecurityscreening.ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioRequiressecurityscreening.ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioRequiressecurityscreening.ToString() </td>
+                </tr>
+                <tr>
+                    <th>Form Reference</th>
+                    <td> @Model.devAppTypes[@key]?.AdoxioFormreference </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioFormreference </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioFormreference </td>
+                </tr>
+                @if (@Model.allFieldNames.ContainsKey(@key))
+                {
+                <tr>
+                    <th>Form Fields</th>
+                    <td colspan="3"> &nbsp; </td>
+                </tr>
+                @foreach (var fieldname in Model.allFieldNames[@key])
+                {
+        <tr>
+            <td>@fieldname</td>
+            <td>@if (@Model.devFieldNames.ContainsKey(@key)) { @Model.devFieldNames[@key].Contains(fieldname).ToString() } </td>
+            <td>@if (@Model.tstFieldNames.ContainsKey(@key)) { @Model.tstFieldNames[@key].Contains(fieldname).ToString() } </td>
+            <td>@if (@Model.prdFieldNames.ContainsKey(@key)) { @Model.prdFieldNames[@key].Contains(fieldname).ToString() }</td>            
+        </tr>
+
+                }
+                    
+                }
+
+
+
+            }
+        </tbody>
+    </table>
+
