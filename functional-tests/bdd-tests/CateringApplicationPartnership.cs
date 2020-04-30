@@ -85,52 +85,7 @@ namespace bdd_tests
         [And(@"I review the organization structure")]
         public void review_org_structure()
         {
-            /* 
-            Page Title: [client name] Detailed Organization Information
-            */
-
-            // create individual partner info
-            string partnerFirstName = "Automated";
-            string partnerLastName = "Test";
-            string partnerPercentage = "50";
-            string partnerEmail = "automated@test.com";
-
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload the partnership agreement
-            string partnershipPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-            NgWebElement uploadPartnershipAgreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uploadPartnershipAgreement.SendKeys(partnershipPath);
-
-            // open partner row
-            NgWebElement uiPartnerRow = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[3]/section/app-associate-list/div/button"));
-            uiPartnerRow.Click();
-
-            // enter partner first name
-            NgWebElement uiPartnerFirst = ngDriver.FindElement(By.XPath("//input[@type='text']"));
-            uiPartnerFirst.SendKeys(partnerFirstName);
-
-            // enter partner last name
-            NgWebElement uiPartnerLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
-            uiPartnerLast.SendKeys(partnerLastName);
-
-            // enter partner percentage
-            NgWebElement uiPartnerPercentage = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
-            uiPartnerPercentage.SendKeys(partnerPercentage);
-
-            // enter partner email
-            NgWebElement uiPartnerEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
-            uiPartnerEmail.SendKeys(partnerEmail);
-
-            // enter partner DOB
-            NgWebElement openPartnerDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
-            openPartnerDOB.Click();
-
-            NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
-            openKeyPartnerDOB1.Click();
+            CateringOrgStructure();            
         }
 
         [And(@"I submit the organization structure")]

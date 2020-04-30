@@ -85,54 +85,7 @@ namespace bdd_tests
         [And(@"I review the organization structure")]
         public void I_continue_to_organization_review()
         {
-            // create society data
-            string membershipFee = "2500";
-            string membershipNumber = "200";
-
-            // enter Annual Membership Fee
-            NgWebElement uiMemberFee = ngDriver.FindElement(By.XPath("//input[@type='text']"));
-            uiMemberFee.SendKeys(membershipFee);
-
-            // enter Number of Members
-            NgWebElement uiMemberNumber = ngDriver.FindElement(By.XPath("(//input[@type='number'])"));
-            uiMemberNumber.SendKeys(membershipNumber);
-
-            // open the director row 
-            NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[3]/section/app-associate-list/div/button"));
-            openKeyPersonnelForm.Click();
-
-            // create the director info
-            string firstName = "Jane";
-            string lastName = "Bond";
-            string title = "Adventurer";
-            string email = "jane@bond.com";
-
-            // enter the director first name
-            NgWebElement uiFirstName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
-            uiFirstName.SendKeys(firstName);
-
-            // enter the director last name
-            NgWebElement uiLastName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
-            uiLastName.SendKeys(lastName);
-
-            // select the director position
-            NgWebElement uiPosition = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
-            uiPosition.Click();
-
-            // enter the director title
-            NgWebElement uiTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
-            uiTitle.SendKeys(title);
-
-            // enter the director email
-            NgWebElement uiEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
-            uiEmail.SendKeys(email);
-
-            // select the director DOB
-            NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
-            openKeyPersonnelDOB.Click();
-
-            NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
-            openKeyPersonnelDOB1.Click();
+            CateringOrgStructure();
         }
 
         [And(@"I submit the organization structure")]
