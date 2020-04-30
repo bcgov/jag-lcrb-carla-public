@@ -222,10 +222,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
                 section.fields.forEach(function (field) {
                   // add the field to the form.
                   if (field.required) {
-                    this.form.addControl(field.name, new FormControl('', Validators.required));
+                    this.form.addControl(field.datafieldname, new FormControl('', Validators.required));
                   }
                   else {
-                    this.form.addControl(field.name, new FormControl(''));
+                    this.form.addControl(field.datafieldname, new FormControl(''));
                   }
                 }, this);
               }
