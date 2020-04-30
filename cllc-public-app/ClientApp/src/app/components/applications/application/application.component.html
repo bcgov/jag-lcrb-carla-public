@@ -1,3 +1,4 @@
+<div [ngBusy]="busy"></div>
 <div *ngIf="application">  
   <ng-template #applicationContent>
     <div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
@@ -32,7 +33,7 @@
           <h3 class="blue-header">ESTABLISHMENT DETAILS</h3>
           <section class="padded-section content-bottom">
             <div style="position: relative">
-              <div [ngBusy]="busy"></div>
+              
               <section *ngIf="application?.applicationType?.establishmentName === FormControlState.Show">
                 <label for="">Establishment Name</label>
                 <br>
