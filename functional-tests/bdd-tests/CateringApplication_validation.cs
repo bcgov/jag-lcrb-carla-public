@@ -24,6 +24,7 @@ Scenario: Start Application
     And I click on the Catering Start Application button
     And I review the account profile
     And I review the organization structure
+    And I submit the organization structure
     And I do not complete the catering application correctly
     Then the expected error messages are displayed
 */
@@ -85,107 +86,13 @@ namespace bdd_tests
         [And(@"I review the organization structure")]
         public void I_continue_to_organization_review()
         {
-            /*
-            Page Title: [client name] Detailed Organization Information
-            */
-            
-            // find the upload test files in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+            ReviewOrgStructure();            
+        }
 
-            // upload a notice of articles document
-            string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-            NgWebElement uploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
-            uploadSignage.SendKeys(noticeOfArticles);
-
-            // upload a central securities register document
-            string centralSecuritiesRegister = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "central_securities_register.pdf");
-            NgWebElement uploadCentralSecReg = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
-            uploadCentralSecReg.SendKeys(centralSecuritiesRegister);
-
-            // upload a special rights and restrictions document
-            string specialRightsRestrictions = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "special_rights_restrictions.pdf");
-            NgWebElement uploadSpecialRightsRes = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
-            uploadSpecialRightsRes.SendKeys(specialRightsRestrictions);
-
-            /********** Key Personnel *********/
-
-            // create the key personnel data
-            string keyPersonnelFirstName = "Jane";
-            string keyPersonnelLastName = "Bond";
-            string keyPersonnelTitle = "Adventurer";
-            string keyPersonnelEmail = "jane@bond.com";
-
-            // open key personnel form   
-            NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[4]/section/app-associate-list/div/button"));
-            openKeyPersonnelForm.Click();
-
-            // enter key personnel first name
-            NgWebElement uiKeyPersonFirst = ngDriver.FindElement(By.XPath("//input[@type='text']"));
-            uiKeyPersonFirst.SendKeys(keyPersonnelFirstName);
-
-            // enter key personnel last name
-            NgWebElement uiKeyPersonLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
-            uiKeyPersonLast.SendKeys(keyPersonnelLastName);
-
-            // select key personnel role
-            NgWebElement uiKeyPersonRole = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[3]"));
-            uiKeyPersonRole.Click();
-            
-            // enter key personnel title
-            NgWebElement uiKeyPersonTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
-            uiKeyPersonTitle.SendKeys(keyPersonnelTitle);
-
-            // enter key personnel email
-            NgWebElement uiKeyPersonEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
-            uiKeyPersonEmail.SendKeys(keyPersonnelEmail);
-
-            // enter key personnel DOB
-            NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
-            openKeyPersonnelDOB.Click();
-
-            NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
-            openKeyPersonnelDOB1.Click();
-
-            /********** Individual Shareholder *********/
-
-            // create the individual shareholder data
-            string shareholderFirstName = "Jacqui";
-            string shareholderLastName = "Chan";
-            string shareholderVotingShares = "500";
-            string shareholderEmail = "jacqui@chan.com";
-
-            // open individual shareholder form    
-            NgWebElement uiOpenShare = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section/app-associate-list/div/button"));
-            uiOpenShare.Click();
-
-            // enter individual shareholder first name
-            NgWebElement uiShareFirst = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
-            uiShareFirst.SendKeys(shareholderFirstName);
-
-            // enter individual shareholder last name
-            NgWebElement uiShareLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
-            uiShareLast.SendKeys(shareholderLastName);
-
-            // enter individual number of voting shares
-            NgWebElement uiShareVotes = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
-            uiShareVotes.SendKeys(shareholderVotingShares);
-
-            // enter individual shareholder email
-            NgWebElement uiShareEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
-            uiShareEmail.SendKeys(shareholderEmail);
-
-            // enter individual shareholder DOB
-            NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
-            uiCalendarS1.Click();
-
-            NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
-            uiCalendarS2.Click();
-                      
-            // click on Submit Organization Info button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
-            submitOrgInfoButton.Click();
+        [And(@"I submit the organization structure")]
+        public void submit_org_structure()
+        {
+            SubmitOrgInfoButton();
         }
 
         [And(@"I do not complete the catering application correctly")]
