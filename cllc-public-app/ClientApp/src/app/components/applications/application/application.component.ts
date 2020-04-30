@@ -196,42 +196,43 @@ export class ApplicationComponent extends FormBase implements OnInit {
       .subscribe(data => this.indigenousNations = data);
 
 
-    this.applicationDataService.getApplicationById(this.applicationId)
+    this.busy = this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(data => {
+      .subscribe((data: Application) => {
         if (data.establishmentParcelId) {
           data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
         }
         if (data.applicantType === 'IndigenousNation') {
           (<any>data).applyAsIndigenousNation = true;
         }
+
         this.application = data;
-
-        if (data.applicationType.formReference) {
-          // get the application form        
-              this.dynamicsForm = data.applicationType.dynamicsForm;
-              this.dynamicsForm.tabs.forEach(function (tab) {
-                tab.sections.forEach(function (section) {
-                  if (section.fields) {
-                    section.fields.forEach(function (field) {
-                      // add the field to the form.
-                      if (field.required) {
-                        this.form.addControl(field.name, new FormControl('', Validators.required));
-                      }
-                      else {
-                        this.form.addControl(field.name, new FormControl(''));
-                      }
-                    }, this);
-                  }
-                  
-                }, this);
-              }, this);
-        }
-
 
         this.hideFormControlByType();
 
-        this.addDynamicContent();
+        this.addDynamicContent();        
+
+        if (data.applicationType.formReference) {
+          console.log("Getting form layout");
+          // get the application form        
+          this.dynamicsForm = data.applicationType.dynamicsForm;
+          this.dynamicsForm.tabs.forEach(function (tab) {
+            tab.sections.forEach(function (section) {
+              if (section.fields) {
+                section.fields.forEach(function (field) {
+                  // add the field to the form.
+                  if (field.required) {
+                    this.form.addControl(field.name, new FormControl('', Validators.required));
+                  }
+                  else {
+                    this.form.addControl(field.name, new FormControl(''));
+                  }
+                }, this);
+              }
+
+            }, this);
+          }, this);
+        }
 
         const noNulls = Object.keys(data)
           .filter(e => data[e] !== null)
@@ -241,11 +242,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
           }, {});
 
         this.form.patchValue(noNulls);
+
         if (data.isPaid) {
           this.form.disable();
         }
         this.savedFormData = this.form.value;
 
+        
       },
         () => {
           console.log('Error occured');
