@@ -776,7 +776,7 @@ namespace bdd_tests
             */
 
             if (businessTypeShared == "private corporation")
-            { 
+            {
                 // find the upload test files in the bdd-tests\upload_files folder
                 var environment = Environment.CurrentDirectory;
                 string projectDirectory = Directory.GetParent(environment).Parent.FullName;
@@ -952,7 +952,7 @@ namespace bdd_tests
                 // enter business shareholder > key personnel DOB
                 NgWebElement uiKeyPersonnelDOB1Biz1 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
                 uiKeyPersonnelDOB1Biz1.Click();
-                
+
                 NgWebElement uiKeyPersonnelDOB1Biz2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-5']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
                 uiKeyPersonnelDOB1Biz2.Click();
 
@@ -989,11 +989,11 @@ namespace bdd_tests
                 uiCalendarIndyS1Biz.Click();
 
                 NgWebElement uiCalendarIndyS2Biz = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-6']/div/mat-month-view/table/tbody/tr[4]/td[4]/div"));
-                uiCalendarIndyS2Biz.Click(); 
+                uiCalendarIndyS2Biz.Click();
             }
 
             if (businessTypeShared == "sole proprietorship")
-            { 
+            {
                 // open the leader row                                                           
                 NgWebElement openLeaderForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/app-associate-list/div/button"));
                 openLeaderForm.Click();
@@ -1126,7 +1126,7 @@ namespace bdd_tests
             }
 
             if (businessTypeShared == "partnership")
-            { 
+            {
                 // create individual partner info
                 string partnerFirstName = "Automated";
                 string partnerLastName = "Test";
@@ -1237,7 +1237,10 @@ namespace bdd_tests
                 NgWebElement openKeyPartner2DOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
                 openKeyPartner2DOB1.Click();
             }
+        }
 
+        public void SubmitOrgInfoButton()
+        {
             // click on the Submit Org Info button
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION']"));
             submitOrgInfoButton.Click();

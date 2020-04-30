@@ -11,4 +11,5 @@ Scenario:
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
+    And I submit the organization structure
     Then I confirm the correct watchword error messages are displayed 
