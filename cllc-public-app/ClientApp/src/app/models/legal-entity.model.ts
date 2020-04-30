@@ -45,4 +45,5 @@ export class LegalEntity {
   percentageVotingShares: number;
   numberOfMembers: number;
   annualMembershipFee: number;
+  totalShares: number;
 }

@@ -1,32 +1,38 @@
-<h1 *ngIf="node?.isRoot">Detailed Organization Information</h1>
-<div *ngIf="node?.isRoot" class=row>
+<div *ngIf="node?.isRoot">
+  <h1>Detailed Organization Information</h1>
+  <div class=row>
     <div class="col-md-12">
 
-        <section class="d-flex">
-            <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
-            <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+      <section class="d-flex">
+        <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+        <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
 
-              <p>All licensees and applicants must maintain a complete and current list of key personnel and businesses associated with their organization.</p> 
-              <p>You are required to notify the LCRB of any changes to your organization’s structure within ten business days of the change being made. These changes include:</p>
-                  <ul><li>Change of directors, officers, or senior managers</li>
-                  <li>Name changes</li>
-                  <li>Internal transfer of shares</li>
-                  <li>External transfer of shares</li>
-                  </ul>
-              <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences dashboard.</p>
-                  
-              <p>Fees are calculated based on the type of change reported and the number of licences impacted. If no changes are made, or no licences are held, you will not be charged a fee for submitting this information.</p>
-              <ul>
-                <li>Applicable fees for cannabis licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1" target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.</li>
-                <li>Applicable fees for liquor licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1" target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
-              </ul>
-            </div>
-          </section>
-      </div>
+          <p>All licensees and applicants must maintain a complete and current list of key personnel and businesses associated with their organization.</p>
+          <p>You are required to notify the LCRB of any changes to your organization’s structure within ten business days of the change being made. These changes include:</p>
+          <ul>
+            <li>Change of directors, officers, or senior managers</li>
+            <li>Name changes</li>
+            <li>Internal transfer of shares</li>
+            <li>External transfer of shares</li>
+          </ul>
+          <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences dashboard.</p>
+
+          <p>Fees are calculated based on the type of change reported and the number of licences impacted. If no changes are made, or no licences are held, you will not be charged a fee for submitting this information.</p>
+          <ul>
+            <li>Applicable fees for cannabis licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1" target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.</li>
+            <li>Applicable fees for liquor licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1" target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>  
 </div>
-<h2 *ngIf="!node?.isRoot && node?.businessType" class="plain-header">
-  {{node?.businessNameNew}} Shareholder Business Information </h2>
-<p *ngIf="!node?.isRoot && !node?.businessType">Please select a shareholder <strong>Business Type</strong> above.</p>
+<div *ngIf="!node?.isRoot">
+  <h2 *ngIf="node?.businessType" class="plain-header">
+    {{node?.businessNameNew}} Shareholder Business Information
+  </h2>
+  <p *ngIf="node && !node.businessType">Please select a shareholder <strong>Business Type</strong> above.</p>
+</div>
 
 <ng-template #treeNode let-node="node" let-account="account">
 
