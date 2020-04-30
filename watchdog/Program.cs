@@ -12,6 +12,7 @@ namespace Watchdog
             CreateHostBuilder(args).Build().Run();
         }
 
+      
         public static IWebHostBuilder CreateHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)                
                 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -28,4 +29,14 @@ namespace Watchdog
                 .UseStartup<Startup>();
                 
     }
-}
+    /*
+        
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+        }
+        */
+    }
