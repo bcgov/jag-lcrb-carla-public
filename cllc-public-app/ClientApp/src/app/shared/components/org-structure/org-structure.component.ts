@@ -9,16 +9,16 @@ import { mergeMap } from 'rxjs/operators';
 @Component({
   selector: 'app-org-structure',
   templateUrl: './org-structure.component.html',
-  styleUrls: ['./org-structure.component.scss']
+  styleUrls: [ './org-structure.component.scss' ]
 })
 export class OrgStructureComponent implements OnInit {
   private _node: LicenseeChangeLog;
   @Input() set node(value) {
     this._node = value;
-    if(this.form){
+    if (this.form) {
       this.form.patchValue(value);
     }
-  };
+  }
 
   get node(): LicenseeChangeLog {
     return this._node;
@@ -49,7 +49,7 @@ export class OrgStructureComponent implements OnInit {
       numberOfMembers: [numberOfMembers, [Validators.required]],
       annualMembershipFee: [annualMembershipFee, [Validators.required]],
       totalShares: [totalShares, [Validators.required]]
-    })
+    });
 
     this.form.valueChanges
       .subscribe(value => {
@@ -62,7 +62,7 @@ export class OrgStructureComponent implements OnInit {
 
   }
 
-  asLicenseeChangeLog(val): LicenseeChangeLog { return val };
+  asLicenseeChangeLog(val): LicenseeChangeLog { return val; }
 
   updateNumberOfFiles(numberOfFiles: number, docType: string) {
     this.node.fileUploads[docType] = numberOfFiles;
@@ -95,9 +95,9 @@ export class OrgStructureComponent implements OnInit {
    * returns an Observable<boolean>. False means there is validation errors
    */
   saveAll() {
-    let saveResults = [];
+    const saveResults = [];
 
-    //save all open associate list
+    // save all open associate list
     this.associateList.forEach(org => {
       saveResults.push(org.saveAll());
     });
@@ -107,8 +107,7 @@ export class OrgStructureComponent implements OnInit {
         .pipe(mergeMap(results => {
           return of(results.indexOf(false) === -1);
         }));
-    }
-    else {
+    } else {
       // return true if there is nothing to save
       return of(true);
     }

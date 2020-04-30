@@ -24,7 +24,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet()]
-        public IActionResult GetFeatureList()
+        public List<string> GetFeatureList()
         {
             var features = new List<string>();
             if (!string.IsNullOrEmpty(_configuration["FEATURE_CRS_RENEWAL"]))
@@ -77,7 +77,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("LiquorOne");
             }
 
-            return new JsonResult(features);
+            return features;
         }
 
     }
