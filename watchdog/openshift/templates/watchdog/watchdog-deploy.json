@@ -112,6 +112,10 @@
                   {
                     "containerPort": 8080,
                     "protocol": "TCP"
+                  },
+                  {
+                    "containerPort": 8088,
+                    "protocol": "TCP"
                   }
                 ],
                 "env": [
@@ -164,10 +168,15 @@
                     "memory": "${MEMORY_REQUEST}"
                   }
                 },
+                "volumeMounts":[
+                {
+                  "mountPath": "/var/run/secrets/service-cert",
+                  "name": "service-cert"
+              }],
                 "readinessProbe": {
                   "httpGet": {
                     "path": "/hc/ready",
-                    "port": 8080,
+                    "port": 8088,
                     "scheme": "HTTP"
                   },
                   "initialDelaySeconds": 10,
@@ -179,7 +188,7 @@
                 "livenessProbe": {
                   "httpGet": {
                     "path": "/hc/live",
-                    "port": 8080,
+                    "port": 8088,
                     "scheme": "HTTP"
                   },
                   "initialDelaySeconds": 10,
@@ -214,6 +223,12 @@
             "protocol": "TCP",
             "port": 8080,
             "targetPort": 8080
+          },
+          {
+            "name": "8088-tcp",
+            "protocol": "TCP",
+            "port": 8088,
+            "targetPort": 8088
           },
           {
             "name": "8443-tcp",
