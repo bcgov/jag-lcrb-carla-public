@@ -17,8 +17,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? lostReductions { get; set; }
         public int? otherReductions { get; set; }
         public int? closingNumber { get; set; }
-        public decimal closingValue { get; set; }
-        public decimal closingWeight { get; set; }
+        public decimal? closingValue { get; set; }
+        public decimal? closingWeight { get; set; }
         // only used for seeds
         public int? totalSeeds { get; set; }
 
@@ -27,9 +27,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         // Sales
         public int? totalSalesToConsumerQty { get; set; }
-        public decimal totalSalesToConsumerValue { get; set; }
+        public decimal? totalSalesToConsumerValue { get; set; }
         public int? totalSalesToRetailerQty { get; set; }
-        public decimal totalSalesToRetailerValue { get; set; }
+        public decimal? totalSalesToRetailerValue { get; set; }
 
         public int? ProductDisplayOrder { get; set; }
         public string ProductDescription { get; set; }
