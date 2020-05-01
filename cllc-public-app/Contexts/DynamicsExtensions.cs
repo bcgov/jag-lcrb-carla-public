@@ -1,5 +1,6 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
+using Gov.Lclb.Cllb.Public.Mapping;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -712,6 +714,201 @@ namespace Gov.Lclb.Cllb.Interfaces
                 result = null;
             }
             return result;
+        }
+
+        public static Public.ViewModels.Form GetSystemformViewModel(this IDynamicsClient _dynamicsClient,  ILogger _logger, string formid)
+        {
+
+            // get the picklists.
+
+            List<MicrosoftDynamicsCRMpicklistAttributeMetadata> picklistMetadata = null;
+
+            try
+            {
+                picklistMetadata = _dynamicsClient.Entitydefinitions.GetEntityPicklists("adoxio_application").Value;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "ERROR getting accounts picklist metadata");
+            }
+
+            // get the application mapping.
+
+            ApplicationMapping applicationMapping = new ApplicationMapping();
+            var systemForm = _dynamicsClient.Systemforms.GetByKey(formid);
+
+            /*
+            string entityKey = "SystemForm_" + id + "_Entity";
+            string nameKey = "SystemForm_" + id + "_Name";
+            string xmlKey = "SystemForm_" + id + "_FormXML";
+            string formXml = await _distributedCache.GetStringAsync(xmlKey);
+            */
+
+            string formXml = systemForm.Formxml;
+
+            Public.ViewModels.Form form = new Public.ViewModels.Form();
+            form.id = formid;
+            form.tabs = new List<Public.ViewModels.FormTab>();
+            form.sections = new List<Public.ViewModels.FormSection>();
+
+            var tabs = XDocument.Parse(formXml).XPathSelectElements("form/tabs/tab");
+            if (tabs != null)
+            {
+                foreach (var tab in tabs)
+                {
+                    var tabLabel = tab.XPathSelectElement("labels/label");
+                    string description = tabLabel.Attribute("description").Value;
+                    string tabId = tabLabel.Attribute("id") == null ? "" : tabLabel.Attribute("id").Value;
+                    Boolean tabShowLabel = tab.Attribute("showlabel").DynamicsAttributeToBoolean();
+                    Boolean tabVisible = tab.Attribute("visible").DynamicsAttributeToBoolean();
+
+                    Public.ViewModels.FormTab formTab = new Public.ViewModels.FormTab();
+                    formTab.id = tabId;
+                    formTab.name = description;
+                    formTab.sections = new List<Public.ViewModels.FormSection>();
+                    formTab.showlabel = tabShowLabel;
+                    formTab.visible = tabVisible;
+
+                    // get the sections
+                    var sections = tab.XPathSelectElements("columns/column/sections/section");
+                    foreach (var section in sections)
+                    {
+                        Boolean sectionShowLabel = section.Attribute("showlabel").DynamicsAttributeToBoolean();
+                        Boolean sectionVisible = section.Attribute("visible").DynamicsAttributeToBoolean();
+                        if (section.Attribute("visible") == null)
+                        {
+                            sectionVisible = true; // default visibility to true if it is not specified.
+                        }
+
+
+                        Public.ViewModels.FormSection formSection = new Public.ViewModels.FormSection();
+                        formSection.fields = new List<Public.ViewModels.FormField>();
+                        formSection.id = section.Attribute("id").Value;
+                        formSection.showlabel = sectionShowLabel;
+                        formSection.visible = sectionVisible;
+
+                        // get the fields.
+                        var sectionLabels = section.XPathSelectElements("labels/label");
+
+                        // the section label is the section name.
+                        foreach (var sectionLabel in sectionLabels)
+                        {
+                            formSection.name = sectionLabel.Attribute("description").Value;
+                        }
+                        // get the cells.
+                        var cells = section.XPathSelectElements("rows/row/cell");
+
+                        foreach (var cell in cells)
+                        {
+                            Public.ViewModels.FormField formField = new Public.ViewModels.FormField();
+                            // get cell visibility and showlabel
+                            bool cellShowLabel = cell.Attribute("showlabel").DynamicsAttributeToBoolean();
+                            bool cellVisible = cell.Attribute("visible").DynamicsAttributeToBoolean();
+
+                            // set the cell to visible if it is not hidden.
+                            if (cell.Attribute("visible") == null)
+                            {
+                                cellVisible = true;
+                            }
+
+                            formField.showlabel = cellShowLabel;
+                            formField.visible = cellVisible;
+
+                            // get the cell label. 
+
+                            if (formField.showlabel)
+                            {
+                                var cellLabels = cell.XPathSelectElements("labels/label");
+                                foreach (var cellLabel in cellLabels)
+                                {
+                                    formField.name = cellLabel.Attribute("description").Value;
+                                }
+                            }
+                            else
+                            {
+                                // use the section name.
+                                formField.name = formSection.name;
+                                formSection.name = "";
+                            }
+
+
+                            // get the form field name.
+                            var control = cell.XPathSelectElement("control");
+                            if (!string.IsNullOrEmpty(formField.name) && control != null && control.Attribute("datafieldname") != null)
+                            {
+                                formField.classid = control.Attribute("classid").Value;
+                                formField.controltype = formField.classid.DynamicsControlClassidToName();
+                                string datafieldname = control.Attribute("datafieldname").Value;
+                                // translate the data field name
+                                formField.datafieldname = applicationMapping.GetViewModelKey(datafieldname);
+
+                                formField.required = control.Attribute("isrequired").DynamicsAttributeToBoolean();
+
+                                if (formField.controltype.Equals("PicklistControl"))
+                                {
+                                    // get the options.
+                                    var metadata = picklistMetadata.FirstOrDefault(x => x.LogicalName == datafieldname);
+
+                                    formField.options = new List<Public.ViewModels.OptionMetadata>();
+
+                                    if (metadata == null)
+                                    {
+                                        formField.options.Add(new Public.ViewModels.OptionMetadata() { label = "INVALID PICKLIST", value = 0 });
+                                    }
+                                    else
+                                    {
+                                        MicrosoftDynamicsCRMoptionSet optionSet = null;
+                                        // could be an OptionSet or a globalOptionSet.
+                                        if (metadata.OptionSet != null)
+                                        {
+                                            optionSet = metadata.OptionSet;
+                                        }
+                                        else
+                                        {
+                                            optionSet = metadata.GlobalOptionSet;
+                                        }
+                                        if (optionSet != null)
+                                        {
+                                            foreach (var option in optionSet.Options)
+                                            {
+                                                int? value = option.Value;
+                                                string label = option.Label?.UserLocalizedLabel?.Label;
+                                                if (value == null || label == null)
+                                                {
+                                                    formField.options.Add(new Public.ViewModels.OptionMetadata() { label = "INVALID PICKLIST", value = 0 });
+                                                }
+                                                else
+                                                {
+                                                    formField.options.Add(new Public.ViewModels.OptionMetadata() { label = label, value = value.Value });
+                                                }
+
+                                            }
+                                        }
+
+                                    }
+                                }
+                                if (formField.datafieldname != null)
+                                {
+                                    formSection.fields.Add(formField);
+                                }
+                            }
+
+                        }
+
+                        formTab.sections.Add(formSection);
+                        form.sections.Add(formSection);
+                    }
+
+                    form.tabs.Add(formTab);
+                }
+            }
+            else // single tab form.
+            {
+                Public.ViewModels.FormTab formTab = new Public.ViewModels.FormTab();
+                formTab.name = "";
+                form.tabs.Add(formTab);
+            }
+            return form;
         }
 
         /// <summary>
