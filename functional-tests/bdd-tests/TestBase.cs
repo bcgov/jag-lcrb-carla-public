@@ -1434,7 +1434,7 @@ namespace bdd_tests
                 NgWebElement openLeaderDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
                 openLeaderDOB.Click();
 
-                NgWebElement openLeaderDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+                NgWebElement openLeaderDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
                 openLeaderDOB1.Click();
             }
 
@@ -1486,7 +1486,7 @@ namespace bdd_tests
                 NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
                 openKeyPersonnelDOB.Click();
 
-                NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+                NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
                 openKeyPersonnelDOB1.Click();
             }
 
@@ -1538,7 +1538,7 @@ namespace bdd_tests
                 NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
                 openKeyPersonnelDOB.Click();
 
-                NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+                NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
                 openKeyPersonnelDOB1.Click();
             }
 
@@ -1584,7 +1584,7 @@ namespace bdd_tests
                 NgWebElement openPartnerDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
                 openPartnerDOB.Click();
 
-                NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+                NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
                 openKeyPartnerDOB1.Click(); 
             }
 
@@ -1646,7 +1646,7 @@ namespace bdd_tests
                 NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
                 openKeyPersonnelDOB.Click();
 
-                NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+                NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
                 openKeyPersonnelDOB1.Click();
 
                 /********** Individual Shareholder *********/
@@ -1681,7 +1681,7 @@ namespace bdd_tests
                 NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
                 uiCalendarS1.Click();
 
-                NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+                NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
                 uiCalendarS2.Click();
 
                 /********** Business Shareholder *********/
@@ -1766,7 +1766,7 @@ namespace bdd_tests
                 NgWebElement uiKeyPersonnelDOB1Biz1 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
                 uiKeyPersonnelDOB1Biz1.Click();
 
-                NgWebElement uiKeyPersonnelDOB1Biz2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+                NgWebElement uiKeyPersonnelDOB1Biz2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
                 uiKeyPersonnelDOB1Biz2.Click();
 
                 /********** Business Shareholder - Individual Shareholder *********/
@@ -1801,7 +1801,7 @@ namespace bdd_tests
                 NgWebElement uiCalendarIndyS1Biz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
                 uiCalendarIndyS1Biz.Click();
 
-                NgWebElement uiCalendarIndyS2Biz = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-4']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+                NgWebElement uiCalendarIndyS2Biz = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-4']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
                 uiCalendarIndyS2Biz.Click();
             }
         }
