@@ -25,7 +25,7 @@ namespace Watchdog
                     config.AddEnvironmentVariables();
                    
                 })
-                
+                .UseOpenShiftIntegration(_ => _.CertificateMountPoint = "/var/run/secrets/service-cert")
                 .UseStartup<Startup>();
                 
     }
