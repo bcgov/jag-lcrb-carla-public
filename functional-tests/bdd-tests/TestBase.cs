@@ -1019,7 +1019,7 @@ namespace bdd_tests
                 NgWebElement openLeaderDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
                 openLeaderDOB.Click();
 
-                NgWebElement openLeaderDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+                NgWebElement openLeaderDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
                 openLeaderDOB1.Click();
             }
 
@@ -1121,7 +1121,7 @@ namespace bdd_tests
                 NgWebElement openPartnerDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
                 openPartnerDOB.Click();
 
-                NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+                NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
                 openKeyPartnerDOB1.Click();
             }
 
@@ -1167,7 +1167,7 @@ namespace bdd_tests
                 NgWebElement openPartnerDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
                 openPartnerDOB.Click();
 
-                NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+                NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
                 openKeyPartnerDOB1.Click();
 
                 // open business partner row
@@ -1234,7 +1234,7 @@ namespace bdd_tests
                 NgWebElement openPartner2DOB = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
                 openPartner2DOB.Click();
 
-                NgWebElement openKeyPartner2DOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
+                NgWebElement openKeyPartner2DOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
                 openKeyPartner2DOB1.Click();
             }
         }
@@ -1293,7 +1293,9 @@ namespace bdd_tests
                 string indigenousNation = "Ashcroft Indian Band";
 
                 // enter the IN into the dropdown
-                NgWebElement uiSelectNation = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[3]/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select"));
+                NgWebElement uiSelectNation = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-2']/app-application/div[2]/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select"));
+                                                                              //html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[3]/app-application/div[2]/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select
+                //NgWebElement uiSelectNation = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[3]/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select"));
                 uiSelectNation.SendKeys(indigenousNation);
             }
 
