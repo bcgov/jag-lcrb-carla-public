@@ -205,10 +205,34 @@ export class ApplicationComponent extends FormBase implements OnInit {
         if (data.applicantType === 'IndigenousNation') {
           (<any>data).applyAsIndigenousNation = true;
         }
+
         this.application = data;
+
         this.hideFormControlByType();
 
-        this.addDynamicContent();
+        this.addDynamicContent();        
+
+        if (data.applicationType.formReference) {
+          console.log("Getting form layout");
+          // get the application form        
+          this.dynamicsForm = data.applicationType.dynamicsForm;
+          this.dynamicsForm.tabs.forEach(function (tab) {
+            tab.sections.forEach(function (section) {
+              if (section.fields) {
+                section.fields.forEach(function (field) {
+                  // add the field to the form.
+                  if (field.required) {
+                    this.form.addControl(field.datafieldname, new FormControl('', Validators.required));
+                  }
+                  else {
+                    this.form.addControl(field.datafieldname, new FormControl(''));
+                  }
+                }, this);
+              }
+
+            }, this);
+          }, this);
+        }
 
         const noNulls = Object.keys(data)
           .filter(e => data[e] !== null)
@@ -218,33 +242,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
           }, {});
 
         this.form.patchValue(noNulls);
+
         if (data.isPaid) {
           this.form.disable();
         }
         this.savedFormData = this.form.value;
 
-        if (this.application.applicationType.formReference) {
-          // get the application form 
-          this.dynamicsFormDataService.getDynamicsForm(this.application.applicationType.formReference) 
-            .pipe(takeWhile(() => this.componentActive))
-            .subscribe(value => {
-              this.dynamicsForm = value;
-              this.dynamicsForm.tabs.forEach(function (tab) {
-                tab.sections.forEach(function (section) {
-                  section.fields.forEach(function (field) {
-                    // add the field to the form.
-                    if (field.required) {
-                      this.form.addControl(field.name, new FormControl('', Validators.required));
-                    }
-                    else {
-                      this.form.addControl(field.name, new FormControl('')); 
-                    }
-                    
-                  });
-                });
-              });
-            });
-        }
         
       },
         () => {

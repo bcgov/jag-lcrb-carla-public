@@ -18,13 +18,10 @@ export class FeatureFlagService {
 
   public init() {
     if (!this.initialized) {
-      console.log("GETTING FLAGS");
 
       this.featureFlagDataService.getFeatureFlags()
         .toPromise()
         .then(featureFlags => {
-          console.log("GOT FLAGS");
-          console.log(featureFlags);
           this._featureFlags = featureFlags;
           this.initialized = true;
         });
@@ -35,20 +32,13 @@ export class FeatureFlagService {
     if (!featureName) {
       return of(false);
     }
-
-    console.log("Looking for feature " + featureName);
-    console.log("FEATURE FLAGS");
-    console.log(this._featureFlags);
-
     // Find the feature flag that is turned on
     if (this._featureFlags && !!this._featureFlags.find(feature => {
       return feature === featureName;
     })) {
-      console.log("Found feature " + featureName)
       return of(true);
     }
     else {
-      console.log("Did not find feature " + featureName);
       return of(false);
     }
     
