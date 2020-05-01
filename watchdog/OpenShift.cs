@@ -69,17 +69,13 @@ namespace Watchdog
                 if (_options.Value.UseHttps)
                 {
                     options.ListenAnyIP(8080, configureListen => {
-                        configureListen.UseHttps(_certificateLoader.ServiceCertificate);
-                        // enable Http2, for gRPC
-                        configureListen.Protocols = HttpProtocols.Http2;
+                        configureListen.UseHttps(_certificateLoader.ServiceCertificate);                        
                         configureListen.UseConnectionLogging();
                     });
                 }
                 else
                 {
                     options.ListenAnyIP(8080, configureListen => {
-                        // enable Http2, for gRPC
-                        configureListen.Protocols = HttpProtocols.Http2;
                         configureListen.UseConnectionLogging();
                     });
                 }
