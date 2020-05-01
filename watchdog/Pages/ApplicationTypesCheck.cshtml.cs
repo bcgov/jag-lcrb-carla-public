@@ -193,7 +193,7 @@ namespace Watchdog.Pages
 
                 // now calculate the row height.
 
-                int rowSize = 4;
+                int rowSize = 31;
                 if (allFieldNames.ContainsKey(item.AdoxioName))
                 {
                     rowSize += allFieldNames[item.AdoxioName].Count + 1;
