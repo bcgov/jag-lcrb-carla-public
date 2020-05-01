@@ -24,6 +24,7 @@ Scenario: Start Application
     And I click on the Catering Start Application button
     And I review the account profile
     And I review the organization structure
+    And I submit the organization structure
     And I complete the application
     And I click on the Submit button
     And I click on the Pay for Application button
@@ -38,9 +39,22 @@ namespace bdd_tests
     [FeatureFile("./CateringApplication_society.feature")]
     public sealed class CateringApplicationSociety : TestBase
     {
+        public void CheckFeatureFlagsLiquor()
+        {
+            string feature_flags = configuration["featureFlags"];
+
+            // navigate to the feature flags page
+            driver.Navigate().GoToUrl($"{baseUri}{feature_flags}");
+
+            // confirm that the LiquorOne flag is enabled during this test
+            Assert.True(driver.FindElement(By.XPath("//body[contains(.,'LiquorOne')]")).Displayed);
+        }
+
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
+            CheckFeatureFlagsLiquor();
+            
             CarlaLoginNoCheck();
         }
 
@@ -65,184 +79,19 @@ namespace bdd_tests
         [And(@"I review the account profile")]
         public void review_account_profile()
         {
-            /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            // create the account data
-            string bizNumber = "012345678";
-            string societyIncorpNum = "BC1234567";
-            string streetAddress1 = "645 Tyee Road";
-            string streetAddress2 = "Point Ellis";
-
-            string city = "Victoria";
-            string postalCode = "V8V4Y3";
-            string bizPhoneNumber = "2501811818";
-            string bizEmail = "test@automation.com";
-            string societyContactGiven = "CateringSocietyGiven";
-            string societyContactSurname = "CateringSocietySurname";
-            string societyContactTitle = "Director";
-            string societyContactPhone = "7781811818";
-            string societyContactEmail = "automated@test.com";
-
-            string mailStreet1 = "P.O. Box 123";
-            string mailStreet2 = "303 Prideaux St.";
-            string mailCity = "Nanaimo";
-            string mailProvince = "B.C.";
-            string mailPostalCode = "V9R2N3";
-            string mailCountry = "Switzerland";
-
-            // enter the business number
-            NgWebElement uiBizNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
-            uiBizNumber.SendKeys(bizNumber);
-
-            // enter the BC society incorporation number
-            NgWebElement uiSocietyIncNumber = ngDriver.FindElement(By.Id("bcIncorporationNumber"));
-            uiSocietyIncNumber.SendKeys(societyIncorpNum);
-
-            // enter the Date of Incorporation in B.C. 
-            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
-            uiCalendar1.Click();
-
-            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[1]/td[2]/div"));
-            uiCalendar2.Click();
-
-            // enter the physical street address 1
-            NgWebElement uiStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
-            uiStreetAddress1.SendKeys(streetAddress1);
-
-            // enter the physical street address 2
-            NgWebElement uiStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
-            uiStreetAddress2.SendKeys(streetAddress2);
-
-            // enter the physical city
-            NgWebElement uiCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
-            uiCity.SendKeys(city);
-
-            // enter the physical postal code
-            NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
-            uiPostalCode.SendKeys(postalCode);
-
-            /* switching off use of checkbox "Same as physical address" in order to test mailing address fields
-            NgWebElement uiSameAsMailingAddress = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
-            uiSameAsMailingAddress.Click(); */
-
-            // enter the mailing street address 1
-            NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
-            uiMailingStreetAddress1.SendKeys(mailStreet1);
-
-            // enter the mailing street address 2
-            NgWebElement uiMailingStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
-            uiMailingStreetAddress2.SendKeys(mailStreet2);
-
-            // enter the mailing city
-            NgWebElement uiMailingCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[14]"));
-            uiMailingCity.SendKeys(mailCity);
-
-            // enter the mailing province
-            NgWebElement uiMailingProvince = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
-            uiMailingProvince.SendKeys(mailProvince);
-
-            // enter the mailing postal code
-            NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[16]"));
-            uiMailingPostalCode.SendKeys(mailPostalCode);
-
-            // enter the mailing country
-            NgWebElement uiMailingCountry = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
-            uiMailingCountry.SendKeys(mailCountry);
-
-            // enter the business phone number
-            NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
-            uiBizPhoneNumber.SendKeys(bizPhoneNumber);
-
-            // enter the business email
-            NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
-            uiBizEmail.SendKeys(bizEmail);
-
-            // (re)enter the society contact first name
-            NgWebElement uiSocietyContactGiven = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
-            uiSocietyContactGiven.SendKeys(societyContactGiven);
-
-            // (re)enter the society contact surname
-            NgWebElement uiSocietyContactSurname = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
-            uiSocietyContactSurname.SendKeys(societyContactSurname);
-
-            // enter the society contact title
-            NgWebElement uiSocietyContactTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
-            uiSocietyContactTitle.SendKeys(societyContactTitle);
-
-            // enter the society contact phone number
-            NgWebElement uiSocietyContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[23]"));
-            uiSocietyContactPhone.SendKeys(societyContactPhone);
-
-            // enter the society contact phone email
-            NgWebElement uiSocietyContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[24]"));
-            uiSocietyContactEmail.SendKeys(societyContactEmail);
-
-            // select 'No' for society's connection to a federal producer
-            NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
-            corpConnectionFederalProducer.Click();
-
-            // click on Continue to Organization Review button
-            NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
-            continueApp_button.Click();
+            ReviewAccountProfile();
         }
 
         [And(@"I review the organization structure")]
         public void I_continue_to_organization_review()
         {
-            // create society data
-            string membershipFee = "2500";
-            string membershipNumber = "200";
+            CateringOrgStructure();
+        }
 
-            // enter Annual Membership Fee
-            NgWebElement uiMemberFee = ngDriver.FindElement(By.XPath("//input[@type='text']"));
-            uiMemberFee.SendKeys(membershipFee);
-
-            // enter Number of Members
-            NgWebElement uiMemberNumber = ngDriver.FindElement(By.XPath("(//input[@type='number'])"));
-            uiMemberNumber.SendKeys(membershipNumber);
-
-            // open the director row 
-            NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[3]/section/app-associate-list/div/button"));
-            openKeyPersonnelForm.Click();
-
-            // create the director info
-            string firstName = "Jane";
-            string lastName = "Bond";
-            string title = "Adventurer";
-            string email = "jane@bond.com";
-
-            // enter the director first name
-            NgWebElement uiFirstName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
-            uiFirstName.SendKeys(firstName);
-
-            // enter the director last name
-            NgWebElement uiLastName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
-            uiLastName.SendKeys(lastName);
-
-            // select the director position
-            NgWebElement uiPosition = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
-            uiPosition.Click();
-
-            // enter the director title
-            NgWebElement uiTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
-            uiTitle.SendKeys(title);
-
-            // enter the director email
-            NgWebElement uiEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
-            uiEmail.SendKeys(email);
-
-            // select the director DOB
-            NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
-            openKeyPersonnelDOB.Click();
-
-            NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
-            openKeyPersonnelDOB1.Click();
-
-            // click on the Submit Organization Information button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
-            submitOrgInfoButton.Click();
+        [And(@"I submit the organization structure")]
+        public void submit_org_structure()
+        {
+            SubmitOrgInfoButton();
         }
 
         [And(@"I complete the application")]

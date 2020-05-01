@@ -35,7 +35,6 @@ namespace FunctionalTest
             XrmTestBrowser.Entity.SetValue("mobilephone", "555-555-5555");
             XrmTestBrowser.Entity.SetValue("birthdate", DateTime.Parse("11/1/1980"));
 
-
             //7. Save the new record
             XrmTestBrowser.CommandBar.ClickCommand("Save");            
         }
