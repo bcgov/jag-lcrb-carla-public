@@ -52,11 +52,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("LicenseeChanges");
             }
 
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_FEDERAL_REPORTING"]))
-            {
-                features.Add("FederalReporting");
-            }
-
             if (!string.IsNullOrEmpty(_configuration["FEATURE_NO_WET_SIGNATURE"]))
             {
                 features.Add("NoWetSignature");
