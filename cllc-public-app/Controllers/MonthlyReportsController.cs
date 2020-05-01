@@ -98,10 +98,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("licence/{licenceId}")]
         public IActionResult GetMonthlyReportsByLicence(string licenceId)
         {
-            if (_configuration["FEATURE_FEDERAL_REPORTING"] == null)
-            {
-                return new NotFoundResult();
-            }
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
@@ -135,10 +131,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("current")]
         public IActionResult GetCurrentUserMonthlyReports([FromQuery] bool expandInventoryReports)
         {
-            if (_configuration["FEATURE_FEDERAL_REPORTING"] == null)
-            {
-                return new NotFoundResult();
-            }
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
@@ -156,10 +148,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{reportId}")]
         public IActionResult GetMonthlyReport(string reportId)
         {
-            if (_configuration["FEATURE_FEDERAL_REPORTING"] == null)
-            {
-                return new NotFoundResult();
-            }
             try
             {
                 var filter = $"adoxio_cannabismonthlyreportid eq {reportId}";
@@ -217,25 +205,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         MicrosoftDynamicsCRMadoxioCannabisinventoryreport updateReport = new MicrosoftDynamicsCRMadoxioCannabisinventoryreport()
                         {
-                            AdoxioOpeninginventory = invReport.openingInventory,
-                            AdoxioQtyreceiveddomestic = invReport.domesticAdditions,
-                            AdoxioQtyreceivedreturns = invReport.returnsAdditions,
-                            AdoxioQtyreceivedother = invReport.otherAdditions,
-                            AdoxioQtyshippeddomestic = invReport.domesticReductions,
-                            AdoxioQtyshippedreturned = invReport.returnsReductions,
-                            AdoxioQtydestroyed = invReport.destroyedReductions,
-                            AdoxioQtyloststolen = invReport.lostReductions,
-                            AdoxioOtherreductions = invReport.otherReductions,
-                            AdoxioClosinginventory = invReport.closingNumber,
-                            AdoxioValueofclosinginventory = invReport.closingValue,
-                            AdoxioPackagedunitsnumber = invReport.totalSalesToConsumerQty,
-                            AdoxioTotalvalue = invReport.totalSalesToConsumerValue,
-                            AdoxioPackagedunitsnumberretailer = invReport.totalSalesToRetailerQty,
-                            AdoxioTotalvalueretailer = invReport.totalSalesToRetailerValue
+                            AdoxioOpeninginventory = invReport.openingInventory == null ? 0 : invReport.openingInventory,
+                            AdoxioQtyreceiveddomestic = invReport.domesticAdditions == null ? 0 : invReport.domesticAdditions,
+                            AdoxioQtyreceivedreturns = invReport.returnsAdditions == null ? 0 : invReport.returnsAdditions,
+                            AdoxioQtyreceivedother = invReport.otherAdditions == null ? 0 : invReport.otherAdditions,
+                            AdoxioQtyshippeddomestic = invReport.domesticReductions == null ? 0 : invReport.domesticReductions,
+                            AdoxioQtyshippedreturned = invReport.returnsReductions == null ? 0 : invReport.returnsReductions,
+                            AdoxioQtydestroyed = invReport.destroyedReductions == null ? 0 : invReport.destroyedReductions,
+                            AdoxioQtyloststolen = invReport.lostReductions == null ? 0 : invReport.lostReductions,
+                            AdoxioOtherreductions = invReport.otherReductions == null ? 0 : invReport.otherReductions,
+                            AdoxioClosinginventory = invReport.closingNumber == null ? 0 : invReport.closingNumber,
+                            AdoxioValueofclosinginventory = invReport.closingValue == null ? 0 : invReport.closingValue,
+                            AdoxioPackagedunitsnumber = invReport.totalSalesToConsumerQty == null ? 0 : invReport.totalSalesToConsumerQty,
+                            AdoxioTotalvalue = invReport.totalSalesToConsumerValue == null ? 0 : invReport.totalSalesToConsumerValue,
+                            AdoxioPackagedunitsnumberretailer = invReport.totalSalesToRetailerQty == null ? 0 : invReport.totalSalesToRetailerQty,
+                            AdoxioTotalvalueretailer = invReport.totalSalesToRetailerValue == null ? 0 : invReport.totalSalesToRetailerValue
                         };
                         if (invReport.product == "Seeds")
                         {
-                            updateReport.AdoxioTotalnumberseeds = invReport.totalSeeds;
+                            updateReport.AdoxioTotalnumberseeds = invReport.totalSeeds == null ? 0 : invReport.totalSeeds;
                         }
                         else if (invReport.product == "Extracts - Other" || invReport.product == "Other")
                         {
@@ -244,7 +232,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                         if (invReport.product != "Vegetative Cannabis")
                         {
-                            updateReport.AdoxioWeightofclosinginventory = invReport.closingWeight;
+                            updateReport.AdoxioWeightofclosinginventory = invReport.closingWeight == null ? 0 : invReport.closingWeight;
                         }
 
                         _dynamicsClient.Cannabisinventoryreports.Update(invReport.inventoryReportId, updateReport);
