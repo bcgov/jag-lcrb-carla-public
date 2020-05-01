@@ -244,7 +244,7 @@ namespace bdd_tests
                 }
                 else
                 {
-                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[39]"));
+                    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.XPath("(//input[@type='text'])[25]"));
                     uiNameAndLocation.SendKeys(nameAndLocation);
                 }       
             }
@@ -307,7 +307,7 @@ namespace bdd_tests
                 }
                 else
                 {
-                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[41]"));
+                    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[27]"));
                     uiNameAndLocation2.SendKeys(nameAndLocation2);
                 }
             }
