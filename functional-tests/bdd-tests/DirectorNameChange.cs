@@ -103,12 +103,6 @@ namespace bdd_tests
 
             // confirm correct payment amount
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
-
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
         }
 
         [And(@"I return to the dashboard")]
@@ -132,17 +126,18 @@ namespace bdd_tests
         public void modify_director_name()
         {
             // click on the Edit button for Key Personnel
-            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[4]/section/app-associate-list/div/table/tr[1]/td[7]/i[1]/span"));
+            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
             uiEditInfoButton.Click();
 
             // enter a new name for the director
             string newDirectorFirstName = "Updated Director";
 
-            NgWebElement uiNewDirectorFirstName = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[1]/app-field/section/div[1]/section/input"));
+            NgWebElement uiNewDirectorFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+            uiNewDirectorFirstName.Clear();
             uiNewDirectorFirstName.SendKeys(newDirectorFirstName);
 
             // click on the Confirm button
-            NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[7]/i[1]/span"));
+            NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
             uiConfirmButton.Click();
 
             // find the upload test file in the bdd-tests\upload_files folder
@@ -152,7 +147,7 @@ namespace bdd_tests
 
             // upload a notice of articles document
             string marriageCertificate = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "marriage_certificate.pdf");
-            NgWebElement uploadMarriageCert = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
+            NgWebElement uploadMarriageCert = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
             uploadMarriageCert.SendKeys(marriageCertificate);
         }
 
@@ -176,6 +171,14 @@ namespace bdd_tests
         [Then(@"the director name is now updated")]
         public void director_name_updated()
         {
+            System.Threading.Thread.Sleep(7000);
+
+            this.return_to_dashboard();
+
+            this.review_org_structure();
+
+            System.Threading.Thread.Sleep(7000);
+
             // check that the director name has been updated
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Updated Director')]")).Displayed);
         }
