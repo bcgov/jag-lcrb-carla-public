@@ -76,7 +76,7 @@
           "namespace": "${PROJECT_PREFIX}-tools"    
         },
         "spec": {
-          "description": "allow ${PROJECT_PREFIX}-tools pods to talk to the k8s api\n",
+          "description": "allow ${PROJECT_PREFIX}-tools pods to talk to the same namespace\n",
           "destination": [ ["- $namespace=${PROJECT_PREFIX}-tools" ] ],
           "source": [ [ "- $namespace=${PROJECT_PREFIX}-tools" ] ]   
         }
