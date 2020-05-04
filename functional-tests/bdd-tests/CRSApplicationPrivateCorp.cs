@@ -26,7 +26,7 @@ Scenario: Start Application
     And I review the account profile
     And I review the organization structure
     And I submit the organization structure
-    And I complete the application
+    And I complete the Cannabis Retail Store application
     And I review the security screening requirements
     And I click on the Pay for Application button
     And I enter the payment information
@@ -101,7 +101,7 @@ namespace bdd_tests
             SubmitOrgInfoButton();
         }
 
-        [And(@"I complete the application")]
+        [And(@"I complete the Cannabis Retail Store application")]
         public void I_complete_the_application()
         {
             CRSApplication();
