@@ -234,19 +234,19 @@ namespace bdd_tests
             string pid = "012345678";
 
             // enter the proposed street address
-            NgWebElement uiProposedAddress = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div/div[1]/div[2]/section[2]/section/div[3]/address/app-field[1]/section/div[1]/section/input"));
+            NgWebElement uiProposedAddress = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressStreet'])[2]"));
             uiProposedAddress.SendKeys(proposedAddress);
 
             // enter the proposed city
-            NgWebElement uiProposedCity = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div/div[1]/div[2]/section[2]/section/div[3]/address/app-field[2]/section/div[1]/section/input"));
+            NgWebElement uiProposedCity = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressCity'])[2]"));
             uiProposedCity.SendKeys(proposedCity);
 
             // enter the postal code
-            NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div/div[2]/div/div[1]/div[2]/section[2]/section/div[3]/address/section[2]/app-field/section/div[1]/section/input"));
+            NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressPostalCode'])[3]"));
             uiProposedPostalCode.SendKeys(proposedPostalCode);
 
             // enter the PID
-            NgWebElement uiProposedPID = ngDriver.FindElement(By.XPath("//*[@id='establishmentParcelId']"));
+            NgWebElement uiProposedPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiProposedPID.SendKeys(pid);
 
             // find the upload test file in the bdd-tests\upload_files folder
