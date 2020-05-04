@@ -1813,16 +1813,15 @@ namespace bdd_tests
             */
 
             // create application info
-            string prevAppDetails = "Here are the previous application details (test).";
-            //string liqConnectionDetails = "Here are the liquor industry connection details (test).";
-            string estName = "Point Ellis Greenhouse";
+            string prevAppDetails = "Here are the previous application details (automated test).";
+            string liqConnectionDetails = "Here are the liquor industry connection details (automated test).";
+            //string estName = "Point Ellis Greenhouse";
             string estAddress = "645 Tyee Rd";
             string estCity = "Victoria";
             string estPostal = "V9A6X5";
             string estPID = "012345678";
             string estPhone = "2505555555";
             string estEmail = "test@automation.com";
-            //string otherBizDetails = "Here are the other business details (test).";
             string conGiven = "Given";
             string conSurname = "Surname";
             string conRole = "CEO";
@@ -1832,32 +1831,8 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(9000);
 
             // enter the establishment name
-            NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
-            uiEstabName.SendKeys(estName);
-
-            // select 'No' for previous liquor licence
-            //NgWebElement uiPreviousLicenceNo = ngDriver.FindElement(By.Id("mat-button-toggle-2-button"));
-            //uiPreviousLicenceNo.Click();
-
-            // select 'No' for Rural Agency Store Appointment
-            //NgWebElement uiRuralStoreNo = ngDriver.FindElement(By.Id("mat-button-toggle-5-button"));
-            //uiRuralStoreNo.Click();
-
-            // select 'Yes' for Rural Agency Store Appointment
-            //NgWebElement uiRuralStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-4-button"));
-            //uiRuralStoreYes.Click();
-
-            // select 'No' for distillery, brewery or winery connections
-            //NgWebElement uiLiquorProductionNo = ngDriver.FindElement(By.Id("mat-button-toggle-8-button"));
-            //uiLiquorProductionNo.Click();
-
-            // select 'Yes' for distillery, brewery or winery connections
-            //NgWebElement uiLiquorProductionYes = ngDriver.FindElement(By.Id("mat-button-toggle-7-button"));
-            //uiLiquorProductionYes.Click();
-
-            // enter the liquor industry connections details
-            //NgWebElement uiLiquorConnectionDetails = ngDriver.FindElement(By.Id("liquorIndustryConnectionsDetails"));
-            //uiLiquorConnectionDetails.SendKeys(liqConnectionDetails);
+            //NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
+            //uiEstabName.SendKeys(estName);
 
             // enter the establishment address
             NgWebElement uiEstabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
@@ -1883,25 +1858,28 @@ namespace bdd_tests
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
-            // select 'Yes' for previous liquor licence
+            // select 'Yes'
+            // Do you or any of your shareholders currently hold, have held, or have previously applied for a British Columbia liquor licence ?
             NgWebElement uiPreviousLicenceYes = ngDriver.FindElement(By.Id("mat-button-toggle-1-button"));
             uiPreviousLicenceYes.Click();
 
             // enter the previous application details
-            NgWebElement uiPreviousApplicationDetails = ngDriver.FindElement(By.Id("//textarea"));
+            NgWebElement uiPreviousApplicationDetails = ngDriver.FindElement(By.Id("previousApplicationDetails"));
             uiPreviousApplicationDetails.SendKeys(prevAppDetails);
 
-            // select 'No' for other business on premises
-            //NgWebElement uiOtherBusinessNo = ngDriver.FindElement(By.Id("mat-button-toggle-11-button"));
-            //uiOtherBusinessNo.Click();
+            // select 'Yes'
+            // Do you hold a Rural Agency Store Appointment?
+            NgWebElement uiRuralAgencyStore = ngDriver.FindElement(By.Id("mat-button-toggle-4-button"));
+            uiRuralAgencyStore.Click();
 
-            // select 'Yes' for other business on premises
-            //NgWebElement uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-10-button"));
-            //uiOtherBusinessYes.Click();
+            // select 'Yes'
+            // Do you, or any of your shareholders, have any connection, financial or otherwise, direct or indirect, with a distillery, brewery or winery?
+            NgWebElement uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-7-button"));
+            uiOtherBusinessYes.Click();
 
-            // enter the other business details
-            //NgWebElement uiOtherBusinessDetails = ngDriver.FindElement(By.Id("otherBusinessesDetails"));
-            //uiOtherBusinessDetails.SendKeys(otherBizDetails);
+            // enter the connection details
+            NgWebElement uiLiqIndConnection = ngDriver.FindElement(By.Id("liquorIndustryConnectionsDetails"));
+            uiLiqIndConnection.SendKeys(liqConnectionDetails);
 
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
@@ -1932,15 +1910,8 @@ namespace bdd_tests
             // enter the email of the application contact
             NgWebElement uiContactEmail = ngDriver.FindElement(By.Id("contactPersonEmail"));
             uiContactEmail.SendKeys(conEmail);
-
-            // click on the authorized to submit checkbox
-            //NgWebElement uiAuthorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
-            //uiAuthorizedSubmit.Click();
-
-            // click on the signature agreement checkbox
-            //NgWebElement uiSignatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
-            //uiSignatureAgree.Click();
         }
+
         public void Dispose()
         {
             ngDriver.Quit();
