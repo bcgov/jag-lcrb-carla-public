@@ -13,7 +13,7 @@ Scenario: Start Application
     And I review the organization structure
     And I add in multiple nested business shareholders
     And I submit the organization structure
-    And I complete the application
+    And I complete the Cannabis Retail Store application
     And I review the security screening requirements
     And I click on the Pay for Application button
     And I enter the payment information
