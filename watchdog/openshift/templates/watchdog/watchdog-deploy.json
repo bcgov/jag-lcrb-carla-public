@@ -7,6 +7,16 @@
   },
   "objects": [
     {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "metadata": {
+        "name": "${NAME}",
+        "annotations": {
+          "serviceaccounts.openshift.io/oauth-redirectreference.primary": "{\"kind\":\"OAuthRedirectReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"Route\",\"name\":\"${NAME}\"}}"
+        }
+      }
+    },
+    {
       "kind": "DeploymentConfig",
       "apiVersion": "v1",
       "metadata": {
@@ -53,7 +63,48 @@
             }
           },
           "spec": {
+            "volumes": [
+              {
+                "name": "proxy-tls",
+                "secret": {
+                  "defaultMode": 420,
+                  "secretName": "${NAME}-proxy-tls"
+                }
+              }
+            ],
             "containers": [
+              {
+                "args": [
+                  "--https-address=:8443",
+                  "--provider=openshift",
+                  "--openshift-service-account=${NAME}",
+                  "--upstream=http://localhost:8080",
+                  "--tls-cert=/etc/tls/private/tls.crt",
+                  "--tls-key=/etc/tls/private/tls.key",
+                  "--cookie-secure=false",
+                  "--cookie-secret=SECRET",
+                  "--openshift-sar={\"namespace\":\"${NAMESPACE}\",\"resource\":\"services\",\"name\":\"${NAME}\",\"verb\":\"get\"}"
+                ],
+                "image": "openshift/oauth-proxy:latest",
+                "imagePullPolicy": "IfNotPresent",
+                "name": "oauth-proxy",
+                "ports": [
+                  {
+                    "containerPort": 8443,
+                    "name": "public",
+                    "protocol": "TCP"
+                  }
+                ],
+                "resources": {},
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/etc/tls/private",
+                    "name": "proxy-tls"
+                  }
+                ]
+              },
               {
                 "name": "${NAME}",
                 "image": "",
@@ -61,13 +112,21 @@
                   {
                     "containerPort": 8080,
                     "protocol": "TCP"
+                  },
+                  {
+                    "containerPort": 8088,
+                    "protocol": "TCP"
                   }
                 ],
                 "env": [
                   {
                     "name": "ASPNETCORE_ENVIRONMENT",
                     "value": "${ASPNETCORE_ENVIRONMENT}"
-                  },                                    
+                  },
+                  {
+                    "name": "DOTNET_SSL_DIRS",
+                    "value": "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
+                    },                                    
 				  {
                     "name": "PORTAL_HEALTH_URI",
                     "value": "http://cllc-public-api:8080/hc/ready"
@@ -109,10 +168,15 @@
                     "memory": "${MEMORY_REQUEST}"
                   }
                 },
+                "volumeMounts":[
+                {
+                  "mountPath": "/var/run/secrets/service-cert",
+                  "name": "service-cert"
+              }],
                 "readinessProbe": {
                   "httpGet": {
                     "path": "/hc/ready",
-                    "port": 8080,
+                    "port": 8088,
                     "scheme": "HTTP"
                   },
                   "initialDelaySeconds": 10,
@@ -124,7 +188,7 @@
                 "livenessProbe": {
                   "httpGet": {
                     "path": "/hc/live",
-                    "port": 8080,
+                    "port": 8088,
                     "scheme": "HTTP"
                   },
                   "initialDelaySeconds": 10,
@@ -148,8 +212,9 @@
           "template": "${NAME}-deployment"
         },
         "annotations": {
-          "description": "Exposes and load balances the application pods."
-        }
+          "description": "Exposes and load balances the application pods.",          
+          "service.alpha.openshift.io/serving-cert-secret-name": "${NAME}-proxy-tls"
+        }      
       },
       "spec": {
         "ports": [
@@ -158,6 +223,18 @@
             "protocol": "TCP",
             "port": 8080,
             "targetPort": 8080
+          },
+          {
+            "name": "8088-tcp",
+            "protocol": "TCP",
+            "port": 8088,
+            "targetPort": 8088
+          },
+          {
+            "name": "8443-tcp",
+            "protocol": "TCP",
+            "port": 8443,
+            "targetPort": 8443
           }
         ],
         "selector": {
@@ -189,7 +266,7 @@
       "displayName": "Image Namespace",
       "description": "The namespace of the OpenShift project containing the imagestream for the application.",
       "required": true,
-      "value": "yummcs-tools"
+      "value": "yuumcs-tools"
     },
     {
       "name": "TAG_NAME",
