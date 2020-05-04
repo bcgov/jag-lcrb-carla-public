@@ -338,6 +338,10 @@
                     }
                   },
                   {
+                    "name": "DOTNET_SSL_DIRS",
+                    "value": "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
+                    },
+                  {
                     "name": "SHAREPOINT_ODATA_URI",
                     "valueFrom": {
                       "secretKeyRef": {
