@@ -10,4 +10,4 @@ Scenario: Change director and shareholder same name
     And I review the organization structure
     And I modify only the director record
     And I review the organization structure
-    Then the director and shareholder name are identical 
+    Then the director and shareholder name are identical

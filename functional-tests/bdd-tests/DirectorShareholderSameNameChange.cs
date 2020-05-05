@@ -36,7 +36,7 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void And_I_view_the_dashboard(string businessType)
         {
-            CarlaLoginNoCheck();
+            CarlaLogin(businessType);
         }
 
         [And(@"I click on the Complete Organization Information button")]
@@ -50,6 +50,26 @@ namespace bdd_tests
         [And(@"I enter the same individual as a director and a shareholder")]
         public void same_director_shareholder()
         {
+            // find the upload test files in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload a notice of articles document
+            string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+            NgWebElement uploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
+            uploadSignage.SendKeys(noticeOfArticles);
+
+            // upload a central securities register document
+            string centralSecuritiesRegister = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+            NgWebElement uploadCentralSecReg = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
+            uploadCentralSecReg.SendKeys(centralSecuritiesRegister);
+
+            // upload a special rights and restrictions document
+            string specialRightsRestrictions = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+            NgWebElement uploadSpecialRightsRes = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
+            uploadSpecialRightsRes.SendKeys(specialRightsRestrictions);
+
             // click on the Add Key Personnel button
             NgWebElement uiAddKeyPersonnel = ngDriver.FindElement(By.XPath("//div/button"));
             uiAddKeyPersonnel.Click();
@@ -85,7 +105,7 @@ namespace bdd_tests
             NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             openKeyPersonnelDOB.Click();
 
-            NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
             openKeyPersonnelDOB1.Click();
 
             // click on the Confirm button
@@ -97,26 +117,26 @@ namespace bdd_tests
             uiAddIndividualShareholder.Click();
 
             // enter the first name
-            NgWebElement uiSameIndividualFirstName2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
+            NgWebElement uiSameIndividualFirstName2 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/app-field/section/div[1]/section/input"));
             uiSameIndividualFirstName2.SendKeys(sameIndividualFirstName);
 
             // enter the last name
-            NgWebElement uiSameIndividualLastName2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
+            NgWebElement uiSameIndividualLastName2 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/app-field/section/div[1]/section/input"));
             uiSameIndividualLastName2.SendKeys(sameIndividualLastName);
 
             // enter the number of voting shares
-            NgWebElement uiSameIndividualVotingShare = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
+            NgWebElement uiSameIndividualVotingShare = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/div/input"));
             uiSameIndividualVotingShare.SendKeys(votingShares);
 
             // enter the email
-            NgWebElement uiSameIndividualEmail2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+            NgWebElement uiSameIndividualEmail2 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
             uiSameIndividualEmail2.SendKeys(sameIndividualEmail);
 
             // enter the DOB
-            NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
+            NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
             uiCalendarS1.Click();
 
-            NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-4']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
             uiCalendarS2.Click();
 
             // click on the Confirm button
@@ -131,9 +151,8 @@ namespace bdd_tests
         [And(@"I review the organization structure")]
         public void review_org_structure2()
         {
-            // click on review org info button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
-            orgInfoButton.Click();
+            // click on complete org info button
+            complete_org_info();
         }
          
         [And(@"I modify only the director record")]
@@ -157,26 +176,29 @@ namespace bdd_tests
             uiNewLastName.Clear();
             uiNewLastName.SendKeys(newLastName);
 
-            // find the marriage certificate file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload a marriage certificate document
-            string marriageCertificate = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "marriage_certificate.pdf");
-            NgWebElement uploadMarriageCert = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
-            uploadMarriageCert.SendKeys(marriageCertificate);
+            // click on the Confirm button
+            NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
+            uiConfirmButton.Click();
 
             // click on submit org info button
             NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
             orgInfoButton.Click();
         }
 
-        [Then(@"the new director and shareholder name are identical")]
+        [Then(@"the director and shareholder name are identical")]
         public void director_name_updated()
         {
-            // check that the director name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'NewFirstNamae')]")).Displayed);
+            // check that the director first name has been updated
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
+
+            // check that the director last name has been updated
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
+
+            // check that the shareholder first name has been updated
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
+
+            // check that the shareholder last name has been updated
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
         }
     }
 }
