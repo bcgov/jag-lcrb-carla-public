@@ -1180,11 +1180,11 @@ namespace bdd_tests
                 string bizPartnerEmail = "automated@test.com";
 
                 // enter the business partner name
-                NgWebElement uiBizPartnerName = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[3]/section[2]/app-associate-list/div/table/tr/td[1]/app-field/section/div[1]/section/input"));
+                NgWebElement uiBizPartnerName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
                 uiBizPartnerName.SendKeys(bizPartnerName);
 
                 // enter the business partner percentage
-                NgWebElement uiBizPartnerPercentage = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[3]/section[2]/app-associate-list/div/table/tr/td[2]/app-field/section/div[1]/section/input"));
+                NgWebElement uiBizPartnerPercentage = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
                 uiBizPartnerPercentage.SendKeys(bizPartnerPercentage);
 
                 // select the business type using dropdown
@@ -1192,7 +1192,7 @@ namespace bdd_tests
                 uiShareBizType.Click();
 
                 // enter the business partner email
-                NgWebElement uiBizPartnerEmail = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[3]/section[2]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
+                NgWebElement uiBizPartnerEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
                 uiBizPartnerEmail.SendKeys(bizPartnerEmail);
 
                 // click on the business shareholder confirm button
@@ -1943,7 +1943,7 @@ namespace bdd_tests
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
             string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
 
-            // upload a notice of articles document
+            // upload a marriage certificate document
             string marriageCertificate = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "marriage_certificate.pdf");
             NgWebElement uploadMarriageCert = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
             uploadMarriageCert.SendKeys(marriageCertificate);
