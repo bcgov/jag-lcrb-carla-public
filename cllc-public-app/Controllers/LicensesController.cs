@@ -406,7 +406,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError(httpOperationException, "Error updating application");
                 }
 
-                return new JsonResult(await application.ToViewModel(_dynamicsClient));
+                return new JsonResult(await application.ToViewModel(_dynamicsClient, _logger));
 
             }
         }
@@ -414,7 +414,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private List<ApplicationLicenseSummary> GetLicensesByLicencee(string licenceeId)
         {
 
-            var licences = _dynamicsClient.GetLicensesByLicencee(_cache, licenceeId);
+            var licences = _dynamicsClient.GetAllLicensesByLicencee(_cache, licenceeId).ToList();            
 
             List<ApplicationLicenseSummary> licenseSummaryList = new List<ApplicationLicenseSummary>();
 
@@ -433,7 +433,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
         [HttpGet("current")]
-        public JsonResult GetCurrentUserLicences()
+        public List<ApplicationLicenseSummary> GetCurrentUserLicences()
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -442,7 +442,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
             List<ApplicationLicenseSummary> adoxioLicenses = GetLicensesByLicencee(userSettings.AccountId);
 
-            return new JsonResult(adoxioLicenses);
+            return adoxioLicenses;
         }
 
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
@@ -468,7 +468,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // fetch from Dynamics.
                 var account = await _dynamicsClient.Accounts.GetByKeyAsync(accountid: thirdPartyOperatorId, expand: expand);
                 result = account.AdoxioThirdpartyoperatorLicences
-                .Select(licence =>  _dynamicsClient.GetLicenceByIdWithChildren(licence.AdoxioLicencesid))
+                .Select(licence => _dynamicsClient.GetLicenceByIdWithChildren(licence.AdoxioLicencesid))
                 .Select(licence => licence.ToLicenseSummaryViewModel(new List<MicrosoftDynamicsCRMadoxioApplication>(), _dynamicsClient))
                 .ToList();
             }

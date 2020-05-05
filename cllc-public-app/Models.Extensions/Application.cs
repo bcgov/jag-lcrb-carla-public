@@ -3,6 +3,7 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -214,7 +215,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
         }
 
-        public async static Task<ViewModels.Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient)
+        public async static Task<ViewModels.Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, ILogger logger)
         {
             ViewModels.Application applicationVM = new ViewModels.Application()
             {
@@ -415,6 +416,11 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (dynamicsApplication.AdoxioApplicationTypeId != null)
             {
                 applicationVM.ApplicationType = dynamicsApplication.AdoxioApplicationTypeId.ToViewModel();
+
+                if (! string.IsNullOrEmpty(applicationVM.ApplicationType.FormReference))
+                {
+                    applicationVM.ApplicationType.DynamicsForm = dynamicsClient.GetSystemformViewModel(logger, applicationVM.ApplicationType.FormReference);
+                }
             }
             if (dynamicsApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication != null)
             {

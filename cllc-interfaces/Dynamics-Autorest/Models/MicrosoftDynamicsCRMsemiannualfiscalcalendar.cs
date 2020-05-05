@@ -29,70 +29,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsemiannualfiscalcalendar class.
         /// </summary>
-        /// <param name="fiscalperiodtype">Type of fiscal period used in the
-        /// sales quota.</param>
-        /// <param name="_businessunitidValue">Unique identifier of the
-        /// business unit with which the calendar is associated.</param>
-        /// <param name="firsthalf">Sales quota for the first half of the
-        /// fiscal year.</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="secondhalf">Sales quota for the second half of the
-        /// fiscal year.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// last modified the semiannual fiscal calendar.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who last modified the
-        /// semiannualfiscalcalendar.</param>
-        /// <param name="firsthalfBase">Base currency equivalent for the sales
-        /// quota for the first half of the fiscal year.</param>
-        /// <param name="_transactioncurrencyidValue">Unique identifier of the
-        /// currency associated with the semiannual fiscal calendar.</param>
-        /// <param name="secondhalfBase">Base currency equivalent of the sales
-        /// quota for the second half of the fiscal year.</param>
-        /// <param name="userfiscalcalendarid">Unique identifier for the user
-        /// who created the semiannual fiscal calendar.</param>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="exchangerate">Exchange rate for the currency
-        /// associated with the semiannual fiscal calendar with respect to the
-        /// base currency.</param>
-        /// <param name="modifiedon">Date and time when the semiannual fiscal
-        /// calendar was last modified.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the semiannualfiscalcalendar.</param>
-        /// <param name="effectiveon">Date and time when the semiannual fiscal
-        /// calendar sales quota takes effect.</param>
-        /// <param name="_salespersonidValue">Unique identifier of the
-        /// associated salesperson.</param>
-        /// <param name="createdon">Date and time when the quota for the
-        /// semiannual fiscal calendar was created.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the semiannual fiscal calendar.</param>
-        public MicrosoftDynamicsCRMsemiannualfiscalcalendar(int? fiscalperiodtype = default(int?), string _businessunitidValue = default(string), decimal? firsthalf = default(decimal?), int? timezoneruleversionnumber = default(int?), decimal? secondhalf = default(decimal?), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), decimal? firsthalfBase = default(decimal?), string _transactioncurrencyidValue = default(string), decimal? secondhalfBase = default(decimal?), string userfiscalcalendarid = default(string), int? importsequencenumber = default(int?), decimal? exchangerate = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), string _salespersonidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> semiAnnualFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> semiAnnualFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMsemiannualfiscalcalendar(string _createdbyValue = default(string), decimal? exchangerate = default(decimal?), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), decimal? secondhalfBase = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), decimal? secondhalf = default(decimal?), int? importsequencenumber = default(int?), int? timezoneruleversionnumber = default(int?), string _businessunitidValue = default(string), string userfiscalcalendarid = default(string), decimal? firsthalfBase = default(decimal?), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), int? fiscalperiodtype = default(int?), string _salespersonidValue = default(string), decimal? firsthalf = default(decimal?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> semiAnnualFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> semiAnnualFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            Fiscalperiodtype = fiscalperiodtype;
-            this._businessunitidValue = _businessunitidValue;
-            Firsthalf = firsthalf;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Secondhalf = secondhalf;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            FirsthalfBase = firsthalfBase;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            SecondhalfBase = secondhalfBase;
-            Userfiscalcalendarid = userfiscalcalendarid;
-            Importsequencenumber = importsequencenumber;
+            this._createdbyValue = _createdbyValue;
             Exchangerate = exchangerate;
-            Modifiedon = modifiedon;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Effectiveon = effectiveon;
-            this._salespersonidValue = _salespersonidValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Createdon = createdon;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            this._createdbyValue = _createdbyValue;
+            SecondhalfBase = secondhalfBase;
+            Modifiedon = modifiedon;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Secondhalf = secondhalf;
+            Importsequencenumber = importsequencenumber;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._businessunitidValue = _businessunitidValue;
+            Userfiscalcalendarid = userfiscalcalendarid;
+            FirsthalfBase = firsthalfBase;
+            Effectiveon = effectiveon;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Fiscalperiodtype = fiscalperiodtype;
+            this._salespersonidValue = _salespersonidValue;
+            Firsthalf = firsthalf;
             Modifiedonbehalfby = modifiedonbehalfby;
             Createdonbehalfby = createdonbehalfby;
             Createdby = createdby;
@@ -110,139 +68,104 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets type of fiscal period used in the sales quota.
         /// </summary>
-        [JsonProperty(PropertyName = "fiscalperiodtype")]
-        public int? Fiscalperiodtype { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the business unit with which the
-        /// calendar is associated.
-        /// </summary>
-        [JsonProperty(PropertyName = "_businessunitid_value")]
-        public string _businessunitidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets sales quota for the first half of the fiscal year.
-        /// </summary>
-        [JsonProperty(PropertyName = "firsthalf")]
-        public decimal? Firsthalf { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets sales quota for the second half of the fiscal year.
-        /// </summary>
-        [JsonProperty(PropertyName = "secondhalf")]
-        public decimal? Secondhalf { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who last modified the
-        /// semiannual fiscal calendar.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who last
-        /// modified the semiannualfiscalcalendar.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets base currency equivalent for the sales quota for the
-        /// first half of the fiscal year.
-        /// </summary>
-        [JsonProperty(PropertyName = "firsthalf_base")]
-        public decimal? FirsthalfBase { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the currency associated with the
-        /// semiannual fiscal calendar.
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets base currency equivalent of the sales quota for the
-        /// second half of the fiscal year.
-        /// </summary>
-        [JsonProperty(PropertyName = "secondhalf_base")]
-        public decimal? SecondhalfBase { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the user who created the
-        /// semiannual fiscal calendar.
-        /// </summary>
-        [JsonProperty(PropertyName = "userfiscalcalendarid")]
-        public string Userfiscalcalendarid { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets exchange rate for the currency associated with the
-        /// semiannual fiscal calendar with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
         public decimal? Exchangerate { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the semiannual fiscal calendar was
-        /// last modified.
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// semiannualfiscalcalendar.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the semiannual fiscal calendar
-        /// sales quota takes effect.
-        /// </summary>
-        [JsonProperty(PropertyName = "effectiveon")]
-        public System.DateTimeOffset? Effectiveon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the associated salesperson.
-        /// </summary>
-        [JsonProperty(PropertyName = "_salespersonid_value")]
-        public string _salespersonidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the quota for the semiannual fiscal
-        /// calendar was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who created the
-        /// semiannual fiscal calendar.
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "secondhalf_base")]
+        public decimal? SecondhalfBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "secondhalf")]
+        public decimal? Secondhalf { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_businessunitid_value")]
+        public string _businessunitidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "userfiscalcalendarid")]
+        public string Userfiscalcalendarid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "firsthalf_base")]
+        public decimal? FirsthalfBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "effectiveon")]
+        public System.DateTimeOffset? Effectiveon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "fiscalperiodtype")]
+        public int? Fiscalperiodtype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_salespersonid_value")]
+        public string _salespersonidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "firsthalf")]
+        public decimal? Firsthalf { get; set; }
 
         /// <summary>
         /// </summary>

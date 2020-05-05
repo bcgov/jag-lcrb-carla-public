@@ -19,6 +19,7 @@ Scenario: Start Application
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
+    And I submit the organization structure
     And I complete the application
     And I review the security screening requirements
     And I click on the Pay for Application button
@@ -33,10 +34,23 @@ namespace bdd_tests
     [FeatureFile("./CRSApplication_partnership.feature")]
     public sealed class CRSApplicationPartnership : TestBase
     {
+        public void CheckFeatureFlagsCannabis()
+        {
+            string feature_flags = configuration["featureFlags"];
+
+            // navigate to the feature flags page
+            driver.Navigate().GoToUrl($"{baseUri}{feature_flags}");
+
+            // confirm that the CRS-Renewal flag is enabled during this test
+            Assert.True(driver.FindElement(By.XPath("//body[contains(.,'CRS-Renewal')]")).Displayed);
+        }
+
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            CarlaLoginNoCheck(businessType);
+            CheckFeatureFlagsCannabis();
+            
+            CarlaLoginNoCheck();
         }
 
         [And(@"I am logged in to the dashboard as a (.*)")]
@@ -65,354 +79,25 @@ namespace bdd_tests
         [And(@"I review the account profile")]
         public void review_account_profile()
         {
-            /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            // create the business data
-            string bizNumber = "012345678";
-            string streetAddress1 = "645 Tyee Road";
-            string streetAddress2 = "Point Ellis";
-            string city = "Victoria";
-            string postalCode = "V8V4Y3";
-            string bizPhoneNumber = "2501811818";
-            string bizEmail = "test@automation.com";
-            string partnerContactPhone = "7781811818";
-            string partnerContactEmail = "automated@test.com";
-            string partnerContactTitle = "CEO";
-            string bizGiven = "BizGiven";
-            string bizSurname = "BizSurname";
-
-            string mailStreet1 = "P.O. Box 123";
-            string mailStreet2 = "303 Prideaux St.";
-            string mailCity = "Nanaimo";
-            string mailProvince = "B.C.";
-            string mailPostalCode = "V9R2N3";
-            string mailCountry = "Switzerland";
-
-            // enter the business number
-            NgWebElement uiBizNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
-            uiBizNumber.SendKeys(bizNumber);
-
-            // enter the business street address
-            NgWebElement uiStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
-            uiStreetAddress1.SendKeys(streetAddress1);
-
-            // enter the contact's physical street address 2
-            NgWebElement uiStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
-            uiStreetAddress2.SendKeys(streetAddress2);
-
-            // enter the business city
-            NgWebElement uiCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
-            uiCity.SendKeys(city);
-
-            // enter the business postal code
-            NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
-            uiPostalCode.SendKeys(postalCode);
-
-            /* switching off use of checkbox "Same as physical address" in order to test mailing address fields
-            NgWebElement uiSameAsMailingAddress = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
-            uiSameAsMailingAddress.Click(); */
-
-            // enter the mailing street address 1
-            NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
-            uiMailingStreetAddress1.SendKeys(mailStreet1);
-
-            // enter the mailing street address 2
-            NgWebElement uiMailingStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[11]"));
-            uiMailingStreetAddress2.SendKeys(mailStreet2);
-
-            // enter the mailing city
-            NgWebElement uiMailingCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
-            uiMailingCity.SendKeys(mailCity);
-
-            // enter the mailing province
-            NgWebElement uiMailingProvince = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
-            uiMailingProvince.SendKeys(mailProvince);
-
-            // enter the mailing postal code
-            NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[14]"));
-            uiMailingPostalCode.SendKeys(mailPostalCode);
-
-            // enter the mailing country
-            NgWebElement uiMailingCountry = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
-            uiMailingCountry.SendKeys(mailCountry);
-
-            // enter the business phone number
-            NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.XPath("(//input[@type='text'])[16]"));
-            uiBizPhoneNumber.SendKeys(bizPhoneNumber);
-
-            // enter the business email
-            NgWebElement uiBizEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
-            uiBizEmail.SendKeys(bizEmail);
-
-            // (re)enter the first name of business contact
-            NgWebElement uiBizGiven = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
-            uiBizGiven.SendKeys(bizGiven);
-
-            // (re)enter the last name of business contact
-            NgWebElement uiBizSurname = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
-            uiBizSurname.SendKeys(bizSurname);
-
-            // enter the partner contact title
-            NgWebElement uiPartnerContactTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
-            uiPartnerContactTitle.SendKeys(partnerContactTitle);
-
-            // enter the partnership contact phone number
-            NgWebElement uiPartnerContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[21]"));
-            uiPartnerContactPhone.SendKeys(partnerContactPhone);
-
-            // enter the partnership contact email
-            NgWebElement uiPartnerContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[22]"));
-            uiPartnerContactEmail.SendKeys(partnerContactEmail);
-
-            // select 'No' for connection to federal producer
-            NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
-            corpConnectionFederalProducer.Click();
-
-            // select 'No' for connection from federal producer
-            NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
-            federalProducerConnectionToCorp.Click();
-
-            // click on Continue to Organization Review button
-            NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
-            continueApp_button.Click();
+            ReviewAccountProfile();
         }
 
         [And(@"I review the organization structure")]
         public void review_org_structure()
         {
-            /* 
-            Page Title: [client name] Detailed Organization Information
-            */
+            ReviewOrgStructure();
+        }
 
-            // create individual partner info
-            string partnerFirstName = "Automated";
-            string partnerLastName = "Test";
-            string partnerPercentage = "50";
-            string partnerEmail = "automated@test.com";
-
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload the partnership agreement
-            string partnershipPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-            NgWebElement uploadPartnershipAgreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uploadPartnershipAgreement.SendKeys(partnershipPath);
-
-            // open partner row
-            NgWebElement uiPartnerRow = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[3]/section/app-associate-list/div/button"));
-            uiPartnerRow.Click();
-
-            // enter partner first name
-            NgWebElement uiPartnerFirst = ngDriver.FindElement(By.XPath("//input[@type='text']"));
-            uiPartnerFirst.SendKeys(partnerFirstName);
-
-            // enter partner last name
-            NgWebElement uiPartnerLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
-            uiPartnerLast.SendKeys(partnerLastName);
-
-            // enter partner percentage
-            NgWebElement uiPartnerPercentage = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
-            uiPartnerPercentage.SendKeys(partnerPercentage);
-
-            // enter partner email
-            NgWebElement uiPartnerEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
-            uiPartnerEmail.SendKeys(partnerEmail);
-
-            // enter partner DOB
-            NgWebElement openPartnerDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
-            openPartnerDOB.Click();
-
-            NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
-            openKeyPartnerDOB1.Click();
-
-            // open business partner row
-            NgWebElement openPartnerRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[3]/section[2]/app-associate-list/div/button"));
-            openPartnerRow.Click();
-
-            // create business partner info
-            string bizPartnerName = "Automated Test";
-            string bizPartnerPercentage = "50";
-            string bizPartnerEmail = "automated@test.com";
-
-            // enter the business partner name
-            NgWebElement uiBizPartnerName = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[3]/section[2]/app-associate-list/div/table/tr/td[1]/app-field/section/div[1]/section/input"));
-            uiBizPartnerName.SendKeys(bizPartnerName);
-
-            // enter the business partner percentage
-            NgWebElement uiBizPartnerPercentage = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[3]/section[2]/app-associate-list/div/table/tr/td[2]/app-field/section/div[1]/section/input"));
-            uiBizPartnerPercentage.SendKeys(bizPartnerPercentage);
-
-            // select the business type using dropdown
-            NgWebElement uiShareBizType = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[3]/section[2]/app-associate-list/div/table/tr/td[3]/app-field/section/div/section/select/option[4]"));
-            uiShareBizType.Click();
-
-            // enter the business partner email
-            NgWebElement uiBizPartnerEmail = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[3]/section[2]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
-            uiBizPartnerEmail.SendKeys(bizPartnerEmail);
-
-            // click on the business shareholder confirm button
-            NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[3]/section[2]/app-associate-list/div/table/tr/td[5]/i[1]"));
-            uiConfirmButton.Click();
-
-            // upload a second partnership agreement
-            string partnershipPath2 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-            NgWebElement uploadPartnership2Agreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
-            uploadPartnership2Agreement.SendKeys(partnershipPath2);
-
-            // open individual partner 2 row
-            NgWebElement openPartner2Row = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[2]/section[1]/app-associate-list/div/button"));
-            openPartner2Row.Click();
-
-            // create individual partner 2 info
-            string partner2FirstName = "Automated2";
-            string partner2LastName = "Test2";
-            string partner2Percentage = "502";
-            string partner2Email = "automated2@test.com";
-
-            // enter individual partner2 first name
-            NgWebElement uiPartner2First = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[2]/section[1]/app-associate-list/div/table/tr/td[1]/app-field/section/div[1]/section/input"));
-            uiPartner2First.SendKeys(partner2FirstName);
-
-            // enter individual partner2 last name
-            NgWebElement uiPartner2Last = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[2]/section[1]/app-associate-list/div/table/tr/td[2]/app-field/section/div[1]/section/input"));
-            uiPartner2Last.SendKeys(partner2LastName);
-
-            // enter individual partner2 percentage
-            NgWebElement uiPartner2Percentage = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[2]/section[1]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/div/input"));
-            uiPartner2Percentage.SendKeys(partner2Percentage);
-
-            // enter individual partner2 email
-            NgWebElement uiPartner2Email = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[2]/section[1]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
-            uiPartner2Email.SendKeys(partner2Email);
-
-            // enter individual partner2 DOB
-            NgWebElement openPartner2DOB = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[2]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
-            openPartner2DOB.Click();
-
-            NgWebElement openKeyPartner2DOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[1]/div"));
-            openKeyPartner2DOB1.Click();
-
-            // click on the Submit Organization Information button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT ORGANIZATION INFORMATION')]"));
-            submitOrgInfoButton.Click();
+        [And(@"I submit the organization structure")]
+        public void submit_org_structure()
+        {
+            SubmitOrgInfoButton();
         }
 
         [And(@"I complete the application")]
         public void I_complete_the_application()
         {
-            /* 
-            Page Title: Submit the Cannabis Retail Store Application
-            */
-
-            // create application info
-            string estName = "Point Ellis Greenhouse";
-            string estAddress = "645 Tyee Rd";
-            string estCity = "Victoria";
-            string estPostal = "V9A6X5";
-            string estPID = "012345678";
-            string estEmail = "test@test.com";
-            string estPhone = "2505555555";
-            string conGiven = "Given";
-            string conSurname = "Surname";
-            string conRole = "CEO";
-            string conPhone = "2508888888";
-            string conEmail = "contact@email.com";
-
-            System.Threading.Thread.Sleep(7000);
-
-            // enter the establishment name
-            NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
-            estabName.SendKeys(estName);
-
-            // enter the establishment street address
-            NgWebElement estabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
-            estabAddress.SendKeys(estAddress);
-
-            // enter the establishment city
-            NgWebElement estabCity = ngDriver.FindElement(By.Id("establishmentAddressCity"));
-            estabCity.SendKeys(estCity);
-
-            // enter the establishment postal code
-            NgWebElement estabPostal = ngDriver.FindElement(By.Id("establishmentAddressPostalCode"));
-            estabPostal.SendKeys(estPostal);
-
-            // enter the establishment's PID
-            NgWebElement estabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
-            estabPID.SendKeys(estPID);
-
-            // enter the establishment phone number
-            NgWebElement estabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
-            estabPhone.SendKeys(estPhone);
-
-            // enter the establishment email
-            NgWebElement estabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
-            estabEmail.SendKeys(estEmail);
-
-            // find the upload_files folder in the repo
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload the signage pdf
-            string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-            NgWebElement uploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uploadSignage.SendKeys(signagePath);
-
-            // upload the valid interest pdf
-            string validInterestPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "valid_interest.pdf");
-            NgWebElement uploadValidInterest = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
-            uploadValidInterest.SendKeys(validInterestPath);
-
-            // upload the floor plan pdf
-            string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
-            NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
-            uploadFloorplan.SendKeys(floorplanPath);
-
-            // upload the site plan pdf
-            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
-            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[11]"));
-            uploadSitePlan.SendKeys(sitePlanPath);
-
-            // upload the financial integrity pdf
-            string finIntegrityPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "fin_integrity.pdf");
-            NgWebElement uploadFinIntegrity = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
-            uploadFinIntegrity.SendKeys(finIntegrityPath);
-
-            // enter the contact's first name
-            NgWebElement contactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
-            contactGiven.SendKeys(conGiven);
-
-            // enter the contact's last name
-            NgWebElement contactSurname = ngDriver.FindElement(By.Id("contactPersonLastName"));
-            contactSurname.SendKeys(conSurname);
-
-            // enter the contact's title
-            NgWebElement contactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
-            contactRole.SendKeys(conRole);
-
-            // enter the contact's phone number
-            NgWebElement contactPhone = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonPhone]"));
-            contactPhone.SendKeys(conPhone);
-
-            // enter the contact's email address
-            NgWebElement contactEmail = ngDriver.FindElement(By.Id("contactPersonEmail"));
-            contactEmail.SendKeys(conEmail);
-
-            // select the authorized to submit checkbox
-            NgWebElement authorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
-            authorizedSubmit.Click();
-
-            // select the signature checkbox
-            NgWebElement signatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
-            signatureAgree.Click();
-
-            // click on the Submit button
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
-            submit_button.Click();
+            CRSApplication();
         }
 
         [And(@"I review the security screening requirements")]

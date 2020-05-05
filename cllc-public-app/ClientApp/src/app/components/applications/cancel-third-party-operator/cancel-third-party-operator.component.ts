@@ -88,12 +88,12 @@ export class CancelThirdPartyOperatorComponent extends FormBase implements OnIni
         return this.licenseDataService.cancelThirdPartyOperator(this.licence.id, this.account.id)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
-        this.snackBar.open('Error submitting cancel transfer', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open('Error submitting cancel for Third Party Operator Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         return of(false);
       }))
       .pipe(mergeMap(() => {
         if (showProgress === true) {
-          this.snackBar.open('Transfer has been cancelled', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.snackBar.open('Third Party Operator Application has been cancelled', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
         }
         return of(true);
       }));

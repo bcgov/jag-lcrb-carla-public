@@ -14,17 +14,17 @@ node('master') {
         parallel('Angular': {
 
             if (changeset("cllc-public-app/ClientApp/*")) {
-                openshiftBuild bldCfg: 'cllc-public-angular', showBuildLogs: 'true'
+                openshiftBuild bldCfg: 'cllc-public-angular', showBuildLogs: 'true', waitTime: 1800000
             }
         }, 'C# API': {
             if (changeset("cllc-public-app/*")) {
-                openshiftBuild bldCfg: 'cllc-public-api', showBuildLogs: 'true'
+                openshiftBuild bldCfg: 'cllc-public-api', showBuildLogs: 'true', waitTime: 1800000
                 openshiftTag destStream: 'cllc-public-api', verbose: 'true', destTag: 'dev', srcStream: 'cllc-public-api', srcTag: 'latest'
             }
         })
 
         echo "Building Application image..."
-        openshiftBuild bldCfg: 'cllc-public-frontend', showBuildLogs: 'true'
+        openshiftBuild bldCfg: 'cllc-public-frontend', showBuildLogs: 'true', waitTime: 1800000
         openshiftTag destStream: 'cllc-public-frontend', verbose: 'true', destTag: 'dev', srcStream: 'cllc-public-frontend', srcTag: 'latest'
     }
 }
@@ -70,9 +70,12 @@ parallel('SonarQube Scan': {
             openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
         }
     }, 'Angular': {
+        echo "Node Tests disabled"
+        /*
         node('nodejs') 
             {
                 
+                /*
                 //the checkout is mandatory, otherwise the functional test would fail
                 echo "checking out source"
                 echo "Build: ${BUILD_ID}"
@@ -101,5 +104,6 @@ parallel('SonarQube Scan': {
                 }                    
             }
         }
+        */
     })
 }

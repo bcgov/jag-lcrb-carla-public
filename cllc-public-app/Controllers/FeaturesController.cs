@@ -24,7 +24,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet()]
-        public IActionResult GetFeatureList()
+        public List<string> GetFeatureList()
         {
             var features = new List<string>();
             if (!string.IsNullOrEmpty(_configuration["FEATURE_CRS_RENEWAL"]))
@@ -52,11 +52,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("LicenseeChanges");
             }
 
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_FEDERAL_REPORTING"]))
-            {
-                features.Add("FederalReporting");
-            }
-
             if (!string.IsNullOrEmpty(_configuration["FEATURE_NO_WET_SIGNATURE"]))
             {
                 features.Add("NoWetSignature");
@@ -77,7 +72,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("LiquorOne");
             }
 
-            return new JsonResult(features);
+            return features;
         }
 
     }

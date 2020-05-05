@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMEntityMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMEntityMetadata(int? activityTypeMask = default(int?), bool? autoRouteToOwnerQueue = default(bool?), bool? canTriggerWorkflow = default(bool?), string description = default(string), string displayCollectionName = default(string), string displayName = default(string), bool? entityHelpUrlEnabled = default(bool?), string entityHelpUrl = default(string), bool? isDocumentManagementEnabled = default(bool?), bool? isOneNoteIntegrationEnabled = default(bool?), bool? isInteractionCentricEnabled = default(bool?), bool? isKnowledgeManagementEnabled = default(bool?), bool? isSLAEnabled = default(bool?), bool? isBPFEntity = default(bool?), bool? isDocumentRecommendationsEnabled = default(bool?), bool? autoCreateAccessTeams = default(bool?), bool? isActivity = default(bool?), bool? isActivityParty = default(bool?), string isAuditEnabled = default(string), bool? isAvailableOffline = default(bool?), bool? isChildEntity = default(bool?), bool? isAIRUpdated = default(bool?), string isValidForQueue = default(string), string isConnectionsEnabled = default(string), string iconLargeName = default(string), string iconMediumName = default(string), string iconSmallName = default(string), bool? isCustomEntity = default(bool?), bool? isBusinessProcessEnabled = default(bool?), string isCustomizable = default(string), string isRenameable = default(string), string isMappable = default(string), string isDuplicateDetectionEnabled = default(string), string canCreateAttributes = default(string), string canCreateForms = default(string), string canCreateViews = default(string), string canCreateCharts = default(string), string canBeRelatedEntityInRelationship = default(string), string canBePrimaryEntityInRelationship = default(string), string canBeInManyToMany = default(string), string canEnableSyncToExternalSearchIndex = default(string), bool? syncToExternalSearchIndex = default(bool?), string canModifyAdditionalSettings = default(string), string canChangeHierarchicalRelationship = default(string), bool? isOptimisticConcurrencyEnabled = default(bool?), bool? changeTrackingEnabled = default(bool?), string canChangeTrackingBeEnabled = default(string), bool? isImportable = default(bool?), bool? isIntersect = default(bool?), string isMailMergeEnabled = default(string), bool? isManaged = default(bool?), bool? isEnabledForCharts = default(bool?), bool? isEnabledForTrace = default(bool?), bool? isValidForAdvancedFind = default(bool?), string isVisibleInMobile = default(string), string isVisibleInMobileClient = default(string), string isReadOnlyInMobileClient = default(string), string isOfflineInMobileClient = default(string), int? daysSinceRecordLastModified = default(int?), string mobileOfflineFilters = default(string), bool? isReadingPaneEnabled = default(bool?), bool? isQuickCreateEnabled = default(bool?), string logicalName = default(string), int? objectTypeCode = default(int?), string ownershipType = default(string), string primaryNameAttribute = default(string), string primaryImageAttribute = default(string), string primaryIdAttribute = default(string), IList<object> privileges = default(IList<object>), string recurrenceBaseEntityLogicalName = default(string), string reportViewName = default(string), string schemaName = default(string), string introducedVersion = default(string), bool? isStateModelAware = default(bool?), bool? enforceStateTransitions = default(bool?), string entityColor = default(string), string logicalCollectionName = default(string), string collectionSchemaName = default(string), string entitySetName = default(string), bool? isEnabledForExternalChannels = default(bool?), bool? isPrivate = default(bool?), bool? usesBusinessDataLabelTable = default(bool?), bool? isLogicalEntity = default(bool?), bool? hasActivities = default(bool?), bool? hasNotes = default(bool?), bool? hasFeedback = default(bool?), IList<MicrosoftDynamicsCRMAttributeMetadata> attributes = default(IList<MicrosoftDynamicsCRMAttributeMetadata>), IList<MicrosoftDynamicsCRMManyToManyRelationshipMetadata> manyToManyRelationships = default(IList<MicrosoftDynamicsCRMManyToManyRelationshipMetadata>), IList<MicrosoftDynamicsCRMOneToManyRelationshipMetadata> manyToOneRelationships = default(IList<MicrosoftDynamicsCRMOneToManyRelationshipMetadata>), IList<MicrosoftDynamicsCRMOneToManyRelationshipMetadata> oneToManyRelationships = default(IList<MicrosoftDynamicsCRMOneToManyRelationshipMetadata>), IList<MicrosoftDynamicsCRMEntityKeyMetadata> keys = default(IList<MicrosoftDynamicsCRMEntityKeyMetadata>))
+        public MicrosoftDynamicsCRMEntityMetadata(int? activityTypeMask = default(int?), bool? autoRouteToOwnerQueue = default(bool?), bool? canTriggerWorkflow = default(bool?), string description = default(string), string displayCollectionName = default(string), string displayName = default(string), bool? entityHelpUrlEnabled = default(bool?), string entityHelpUrl = default(string), bool? isDocumentManagementEnabled = default(bool?), bool? isOneNoteIntegrationEnabled = default(bool?), bool? isInteractionCentricEnabled = default(bool?), bool? isKnowledgeManagementEnabled = default(bool?), bool? isSLAEnabled = default(bool?), bool? isBPFEntity = default(bool?), bool? isDocumentRecommendationsEnabled = default(bool?), string dataProviderId = default(string), string dataSourceId = default(string), bool? autoCreateAccessTeams = default(bool?), bool? isActivity = default(bool?), bool? isActivityParty = default(bool?), string isAuditEnabled = default(string), bool? isAvailableOffline = default(bool?), bool? isChildEntity = default(bool?), bool? isAIRUpdated = default(bool?), string isValidForQueue = default(string), string isConnectionsEnabled = default(string), string iconLargeName = default(string), string iconMediumName = default(string), string iconSmallName = default(string), string iconVectorName = default(string), bool? isCustomEntity = default(bool?), bool? isBusinessProcessEnabled = default(bool?), string isCustomizable = default(string), string isRenameable = default(string), string isMappable = default(string), string isDuplicateDetectionEnabled = default(string), string canCreateAttributes = default(string), string canCreateForms = default(string), string canCreateViews = default(string), string canCreateCharts = default(string), string canBeRelatedEntityInRelationship = default(string), string canBePrimaryEntityInRelationship = default(string), string canBeInManyToMany = default(string), string canBeInCustomEntityAssociation = default(string), string canEnableSyncToExternalSearchIndex = default(string), bool? syncToExternalSearchIndex = default(bool?), string canModifyAdditionalSettings = default(string), string canChangeHierarchicalRelationship = default(string), bool? isOptimisticConcurrencyEnabled = default(bool?), bool? changeTrackingEnabled = default(bool?), string canChangeTrackingBeEnabled = default(string), bool? isImportable = default(bool?), bool? isIntersect = default(bool?), string isMailMergeEnabled = default(string), bool? isManaged = default(bool?), bool? isEnabledForCharts = default(bool?), bool? isEnabledForTrace = default(bool?), bool? isValidForAdvancedFind = default(bool?), string isVisibleInMobile = default(string), string isVisibleInMobileClient = default(string), string isReadOnlyInMobileClient = default(string), string isOfflineInMobileClient = default(string), int? daysSinceRecordLastModified = default(int?), string mobileOfflineFilters = default(string), bool? isReadingPaneEnabled = default(bool?), bool? isQuickCreateEnabled = default(bool?), string logicalName = default(string), int? objectTypeCode = default(int?), string ownershipType = default(string), string primaryNameAttribute = default(string), string primaryImageAttribute = default(string), string primaryIdAttribute = default(string), IList<object> privileges = default(IList<object>), string recurrenceBaseEntityLogicalName = default(string), string reportViewName = default(string), string schemaName = default(string), string introducedVersion = default(string), bool? isStateModelAware = default(bool?), bool? enforceStateTransitions = default(bool?), string externalName = default(string), string entityColor = default(string), string logicalCollectionName = default(string), string externalCollectionName = default(string), string collectionSchemaName = default(string), string entitySetName = default(string), bool? isEnabledForExternalChannels = default(bool?), bool? isPrivate = default(bool?), bool? usesBusinessDataLabelTable = default(bool?), bool? isLogicalEntity = default(bool?), bool? hasNotes = default(bool?), bool? hasActivities = default(bool?), bool? hasFeedback = default(bool?), IList<MicrosoftDynamicsCRMAttributeMetadata> attributes = default(IList<MicrosoftDynamicsCRMAttributeMetadata>), IList<MicrosoftDynamicsCRMManyToManyRelationshipMetadata> manyToManyRelationships = default(IList<MicrosoftDynamicsCRMManyToManyRelationshipMetadata>), IList<MicrosoftDynamicsCRMOneToManyRelationshipMetadata> manyToOneRelationships = default(IList<MicrosoftDynamicsCRMOneToManyRelationshipMetadata>), IList<MicrosoftDynamicsCRMOneToManyRelationshipMetadata> oneToManyRelationships = default(IList<MicrosoftDynamicsCRMOneToManyRelationshipMetadata>), IList<MicrosoftDynamicsCRMEntityKeyMetadata> keys = default(IList<MicrosoftDynamicsCRMEntityKeyMetadata>))
         {
             ActivityTypeMask = activityTypeMask;
             AutoRouteToOwnerQueue = autoRouteToOwnerQueue;
@@ -46,6 +46,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             IsSLAEnabled = isSLAEnabled;
             IsBPFEntity = isBPFEntity;
             IsDocumentRecommendationsEnabled = isDocumentRecommendationsEnabled;
+            DataProviderId = dataProviderId;
+            DataSourceId = dataSourceId;
             AutoCreateAccessTeams = autoCreateAccessTeams;
             IsActivity = isActivity;
             IsActivityParty = isActivityParty;
@@ -58,6 +60,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             IconLargeName = iconLargeName;
             IconMediumName = iconMediumName;
             IconSmallName = iconSmallName;
+            IconVectorName = iconVectorName;
             IsCustomEntity = isCustomEntity;
             IsBusinessProcessEnabled = isBusinessProcessEnabled;
             IsCustomizable = isCustomizable;
@@ -71,6 +74,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             CanBeRelatedEntityInRelationship = canBeRelatedEntityInRelationship;
             CanBePrimaryEntityInRelationship = canBePrimaryEntityInRelationship;
             CanBeInManyToMany = canBeInManyToMany;
+            CanBeInCustomEntityAssociation = canBeInCustomEntityAssociation;
             CanEnableSyncToExternalSearchIndex = canEnableSyncToExternalSearchIndex;
             SyncToExternalSearchIndex = syncToExternalSearchIndex;
             CanModifyAdditionalSettings = canModifyAdditionalSettings;
@@ -106,16 +110,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             IntroducedVersion = introducedVersion;
             IsStateModelAware = isStateModelAware;
             EnforceStateTransitions = enforceStateTransitions;
+            ExternalName = externalName;
             EntityColor = entityColor;
             LogicalCollectionName = logicalCollectionName;
+            ExternalCollectionName = externalCollectionName;
             CollectionSchemaName = collectionSchemaName;
             EntitySetName = entitySetName;
             IsEnabledForExternalChannels = isEnabledForExternalChannels;
             IsPrivate = isPrivate;
             UsesBusinessDataLabelTable = usesBusinessDataLabelTable;
             IsLogicalEntity = isLogicalEntity;
-            HasActivities = hasActivities;
             HasNotes = hasNotes;
+            HasActivities = hasActivities;
             HasFeedback = hasFeedback;
             Attributes = attributes;
             ManyToManyRelationships = manyToManyRelationships;
@@ -207,6 +213,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "DataProviderId")]
+        public string DataProviderId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "DataSourceId")]
+        public string DataSourceId { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "AutoCreateAccessTeams")]
         public bool? AutoCreateAccessTeams { get; set; }
 
@@ -264,6 +280,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "IconSmallName")]
         public string IconSmallName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IconVectorName")]
+        public string IconVectorName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -329,6 +350,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "CanBeInManyToMany")]
         public string CanBeInManyToMany { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "CanBeInCustomEntityAssociation")]
+        public string CanBeInCustomEntityAssociation { get; set; }
 
         /// <summary>
         /// </summary>
@@ -507,6 +533,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "ExternalName")]
+        public string ExternalName { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "EntityColor")]
         public string EntityColor { get; set; }
 
@@ -514,6 +545,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "LogicalCollectionName")]
         public string LogicalCollectionName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ExternalCollectionName")]
+        public string ExternalCollectionName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -547,13 +583,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "HasActivities")]
-        public bool? HasActivities { get; set; }
+        [JsonProperty(PropertyName = "HasNotes")]
+        public bool? HasNotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "HasNotes")]
-        public bool? HasNotes { get; set; }
+        [JsonProperty(PropertyName = "HasActivities")]
+        public bool? HasActivities { get; set; }
 
         /// <summary>
         /// </summary>

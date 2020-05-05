@@ -29,84 +29,40 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMleadtoopportunitysalesprocess class.
         /// </summary>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="_organizationidValue">Unique identifier of the
-        /// organization with which the SDK message request is
-        /// associated.</param>
-        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
-        /// record on behalf of another user.</param>
-        /// <param name="_createdbyValue">Shows who created the record.</param>
-        /// <param name="_processidValue">Unique identifier of the
-        /// LeadToOpportunitySalesProcess associated to the Business Process
-        /// Flow instance.</param>
-        /// <param name="_modifiedbyValue">Shows who last updated the
-        /// record.</param>
-        /// <param name="activestagestartedon">Date and time when current
-        /// active stage is started.</param>
-        /// <param name="versionnumber">Version number of the business process
-        /// instance.</param>
-        /// <param name="exchangerate">Shows the conversion rate of the
-        /// record's currency. The exchange rate is used to convert all money
-        /// fields in the record from the local currency to the system's
-        /// default currency.</param>
-        /// <param name="_opportunityidValue">Unique identifier of the workflow
-        /// associated to the Business Process Flow instance.</param>
-        /// <param name="duration">Duration between completed on and started
-        /// on, used by business process flow.</param>
-        /// <param name="completedon">Date and time when Business Process Flow
-        /// instance is completed</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="businessprocessflowinstanceid">Unique identifier for
-        /// Lead To Opportunity Sales Process bpf entity instances</param>
-        /// <param name="createdon">Shows the date and time when the record was
-        /// created. The date and time are displayed in the time zone selected
-        /// in Microsoft Dynamics CRM options.</param>
-        /// <param name="_createdonbehalfbyValue">Shows who created the record
-        /// on behalf of another user.</param>
-        /// <param name="modifiedon">Shows the date and time when the record
-        /// was last updated. The date and time are displayed in the time zone
-        /// selected in Microsoft Dynamics CRM options.</param>
-        /// <param name="_transactioncurrencyidValue">Choose the local currency
-        /// for the record to make sure budgets are reported in the correct
-        /// currency.</param>
-        /// <param name="_leadidValue">Unique identifier of the workflow
-        /// associated to the Business Process Flow instance.</param>
-        /// <param name="_activestageidValue">Unique identifier of the active
-        /// stage for the Business Process Flow instance.</param>
-        /// <param name="statuscode">Select the delve action record
-        /// status.</param>
-        /// <param name="traversedpath">Traversed Path</param>
-        /// <param name="name">Process Name.</param>
-        /// <param name="statecode">Shows whether the Delve action record is
-        /// pending, completed, or tracking.</param>
-        public MicrosoftDynamicsCRMleadtoopportunitysalesprocess(int? importsequencenumber = default(int?), string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string _processidValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? activestagestartedon = default(System.DateTimeOffset?), string versionnumber = default(string), decimal? exchangerate = default(decimal?), string _opportunityidValue = default(string), int? duration = default(int?), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string businessprocessflowinstanceid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), string _leadidValue = default(string), string _activestageidValue = default(string), int? statuscode = default(int?), string traversedpath = default(string), string name = default(string), int? statecode = default(int?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMlead leadId = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMworkflowlog> workflowlogsLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMworkflowlog>), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMsyncerror> leadToOpportunitySalesProcessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprocessstage activestageid = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMopportunity opportunityId = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMleadtoopportunitysalesprocess(string traversedpath = default(string), string businessprocessflowinstanceid = default(string), string _opportunityidValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), int? duration = default(int?), string _modifiedonbehalfbyValue = default(string), string name = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _activestageidValue = default(string), int? importsequencenumber = default(int?), string _leadidValue = default(string), int? statecode = default(int?), string _createdbyValue = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string _processidValue = default(string), string _transactioncurrencyidValue = default(string), string _organizationidValue = default(string), int? timezoneruleversionnumber = default(int?), string versionnumber = default(string), decimal? exchangerate = default(decimal?), int? statuscode = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? activestagestartedon = default(System.DateTimeOffset?), IList<MicrosoftDynamicsCRMteam> leadtoopportunitysalesprocessTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> leadtoopportunitysalesprocessAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> leadtoopportunitysalesprocessMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> leadtoopportunitysalesprocessProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> leadtoopportunitysalesprocessBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> leadtoopportunitysalesprocessPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMlead leadId = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMworkflowlog> workflowlogsLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMworkflowlog>), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMsyncerror> leadToOpportunitySalesProcessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprocessstage activestageid = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMopportunity opportunityId = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser))
         {
-            Importsequencenumber = importsequencenumber;
-            this._organizationidValue = _organizationidValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._createdbyValue = _createdbyValue;
-            this._processidValue = _processidValue;
+            Traversedpath = traversedpath;
+            Businessprocessflowinstanceid = businessprocessflowinstanceid;
+            this._opportunityidValue = _opportunityidValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedbyValue = _modifiedbyValue;
-            Activestagestartedon = activestagestartedon;
+            Duration = duration;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Name = name;
+            Overriddencreatedon = overriddencreatedon;
+            Modifiedon = modifiedon;
+            Createdon = createdon;
+            this._activestageidValue = _activestageidValue;
+            Importsequencenumber = importsequencenumber;
+            this._leadidValue = _leadidValue;
+            Statecode = statecode;
+            this._createdbyValue = _createdbyValue;
+            Completedon = completedon;
+            this._processidValue = _processidValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            this._organizationidValue = _organizationidValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Versionnumber = versionnumber;
             Exchangerate = exchangerate;
-            this._opportunityidValue = _opportunityidValue;
-            Duration = duration;
-            Completedon = completedon;
-            Overriddencreatedon = overriddencreatedon;
-            Businessprocessflowinstanceid = businessprocessflowinstanceid;
-            Createdon = createdon;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Modifiedon = modifiedon;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            this._leadidValue = _leadidValue;
-            this._activestageidValue = _activestageidValue;
             Statuscode = statuscode;
-            Traversedpath = traversedpath;
-            Name = name;
-            Statecode = statecode;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Activestagestartedon = activestagestartedon;
+            LeadtoopportunitysalesprocessTeams = leadtoopportunitysalesprocessTeams;
+            LeadtoopportunitysalesprocessAsyncOperations = leadtoopportunitysalesprocessAsyncOperations;
+            LeadtoopportunitysalesprocessMailboxTrackingFolders = leadtoopportunitysalesprocessMailboxTrackingFolders;
+            LeadtoopportunitysalesprocessProcessSession = leadtoopportunitysalesprocessProcessSession;
+            LeadtoopportunitysalesprocessBulkDeleteFailures = leadtoopportunitysalesprocessBulkDeleteFailures;
+            LeadtoopportunitysalesprocessPrincipalObjectAttributeAccesses = leadtoopportunitysalesprocessPrincipalObjectAttributeAccesses;
             Transactioncurrencyid = transactioncurrencyid;
             LeadId = leadId;
             WorkflowlogsLeadtoopportunitysalesprocess = workflowlogsLeadtoopportunitysalesprocess;
@@ -128,167 +84,164 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the organization with which the
-        /// SDK message request is associated.
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who last updated the record on behalf of another
-        /// user.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who created the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the LeadToOpportunitySalesProcess
-        /// associated to the Business Process Flow instance.
-        /// </summary>
-        [JsonProperty(PropertyName = "_processid_value")]
-        public string _processidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who last updated the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when current active stage is started.
-        /// </summary>
-        [JsonProperty(PropertyName = "activestagestartedon")]
-        public System.DateTimeOffset? Activestagestartedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets version number of the business process instance.
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the conversion rate of the record's currency.
-        /// The exchange rate is used to convert all money fields in the record
-        /// from the local currency to the system's default currency.
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the workflow associated to the
-        /// Business Process Flow instance.
-        /// </summary>
-        [JsonProperty(PropertyName = "_opportunityid_value")]
-        public string _opportunityidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets duration between completed on and started on, used by
-        /// business process flow.
-        /// </summary>
-        [JsonProperty(PropertyName = "duration")]
-        public int? Duration { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when Business Process Flow instance is
-        /// completed
-        /// </summary>
-        [JsonProperty(PropertyName = "completedon")]
-        public System.DateTimeOffset? Completedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for Lead To Opportunity Sales
-        /// Process bpf entity instances
-        /// </summary>
-        [JsonProperty(PropertyName = "businessprocessflowinstanceid")]
-        public string Businessprocessflowinstanceid { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time when the record was created.
-        /// The date and time are displayed in the time zone selected in
-        /// Microsoft Dynamics CRM options.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who created the record on behalf of another
-        /// user.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time when the record was last
-        /// updated. The date and time are displayed in the time zone selected
-        /// in Microsoft Dynamics CRM options.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose the local currency for the record to make sure
-        /// budgets are reported in the correct currency.
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the workflow associated to the
-        /// Business Process Flow instance.
-        /// </summary>
-        [JsonProperty(PropertyName = "_leadid_value")]
-        public string _leadidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the active stage for the Business
-        /// Process Flow instance.
-        /// </summary>
-        [JsonProperty(PropertyName = "_activestageid_value")]
-        public string _activestageidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the delve action record status.
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// Gets or sets traversed Path
         /// </summary>
         [JsonProperty(PropertyName = "traversedpath")]
         public string Traversedpath { get; set; }
 
         /// <summary>
-        /// Gets or sets process Name.
+        /// </summary>
+        [JsonProperty(PropertyName = "businessprocessflowinstanceid")]
+        public string Businessprocessflowinstanceid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_opportunityid_value")]
+        public string _opportunityidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "duration")]
+        public int? Duration { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets shows whether the Delve action record is pending,
-        /// completed, or tracking.
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_activestageid_value")]
+        public string _activestageidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_leadid_value")]
+        public string _leadidValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "completedon")]
+        public System.DateTimeOffset? Completedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_processid_value")]
+        public string _processidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activestagestartedon")]
+        public System.DateTimeOffset? Activestagestartedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "leadtoopportunitysalesprocess_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> LeadtoopportunitysalesprocessTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "leadtoopportunitysalesprocess_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> LeadtoopportunitysalesprocessAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "leadtoopportunitysalesprocess_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> LeadtoopportunitysalesprocessMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "leadtoopportunitysalesprocess_ProcessSession")]
+        public IList<MicrosoftDynamicsCRMprocesssession> LeadtoopportunitysalesprocessProcessSession { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "leadtoopportunitysalesprocess_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> LeadtoopportunitysalesprocessBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "leadtoopportunitysalesprocess_PrincipalObjectAttributeAccesses")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> LeadtoopportunitysalesprocessPrincipalObjectAttributeAccesses { get; set; }
 
         /// <summary>
         /// </summary>

@@ -17,6 +17,10 @@ using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Extensions;
 using Microsoft.OpenApi;
 using Newtonsoft.Json;
+using Microsoft.Rest;
+using System.Net.Http;
+using System.Threading;
+using Gov.Lclb.Cllb.Interfaces;
 
 // online validator that seems to work - https://apitools.dev/swagger-parser/online/
 
@@ -26,60 +30,37 @@ namespace odata2openapi
     {
         static string solutionPrefix;
 
-        static string GetDynamicsMetadata (IConfiguration Configuration )
+        static string GetDynamicsMetadata(IConfiguration Configuration)
         {
             string dynamicsOdataUri = Configuration["DYNAMICS_ODATA_URI"];
-            string aadTenantId = Configuration["DYNAMICS_AAD_TENANT_ID"];
-            string serverAppIdUri = Configuration["DYNAMICS_SERVER_APP_ID_URI"];
-            string clientKey = Configuration["DYNAMICS_CLIENT_KEY"];
-            string clientId = Configuration["DYNAMICS_CLIENT_ID"];
-            string ssgUsername = Configuration["SSG_USERNAME"];
-            string ssgPassword = Configuration["SSG_PASSWORD"];
 
-            // ensure the last character of the uri is a slash.
-            if (dynamicsOdataUri[dynamicsOdataUri.Length - 1] != '/')
-            {
-                dynamicsOdataUri += "/";
-            }
+            ServiceClientCredentials serviceClientCredentials = DynamicsSetupUtil.GetServiceClientCredentials(Configuration);
 
-            var webRequest = WebRequest.Create(dynamicsOdataUri + "$metadata");
-            HttpWebRequest request = (HttpWebRequest)webRequest;
-
-            if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
-            {
-                var authenticationContext = new AuthenticationContext(
-                "https://login.windows.net/" + aadTenantId);
-                ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
-                var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientCredential);
-                task.Wait();
-                AuthenticationResult authenticationResult = task.Result;
-                request.Headers.Add("Authorization", authenticationResult.CreateAuthorizationHeader());
-            }
-            else
-            {
-                String encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(ssgUsername + ":" + ssgPassword));
-                request.Headers.Add("Authorization", "Basic " + encoded);
-            }
+            // Create HTTP transport objects
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new System.Uri(dynamicsOdataUri + "$metadata");
 
             string result = null;
 
-            request.Method = "GET";
-            request.PreAuthenticate = true;
+
             //request.Accept = "application/json;odata=verbose";
             //request.ContentType =  "application/json";
+            CancellationToken cancellationToken = default(CancellationToken);
 
-            // we need to add authentication to a HTTP Client to fetch the file.
-            using (
-                MemoryStream ms = new MemoryStream())
-            {
-                request.GetResponse().GetResponseStream().CopyTo(ms);
-                var buffer = ms.ToArray();
-                result = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
-            }
+            serviceClientCredentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).GetAwaiter().GetResult();
+
+            HttpClient httpClient = new HttpClient();
+
+            _httpResponse = httpClient.SendAsync(_httpRequest, cancellationToken).GetAwaiter().GetResult();
+
+            result = _httpResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             return result;
 
         }
+
         /*
         static void FixProperty (JsonSchema4 item , string name)
         {

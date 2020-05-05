@@ -27,61 +27,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcustomcontrolresource class.
         /// </summary>
-        /// <param name="_organizationidValue">Unique identifier of the
-        /// organization associated with the web resource.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// modified the record.</param>
-        /// <param name="customcontrolresourceidunique">For internal use
-        /// only.</param>
-        /// <param name="modifiedon">Date and time when the record was
-        /// modified.</param>
-        /// <param name="versionrequirement">For internal use only.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the record.</param>
-        /// <param name="customcontrolresourceid">Unique identifier of the
-        /// Custom Control Resource.</param>
-        /// <param name="webresourceid">Unique identifier of the web
-        /// resource.</param>
-        /// <param name="name">Name of the custom control resource.</param>
-        /// <param name="overwritetime">For internal use only.</param>
-        /// <param name="solutionid">Unique identifier of the associated
-        /// solution.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who modified the record.</param>
-        /// <param name="customcontrolid">Unique identifier of the custom
-        /// control.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the record.</param>
-        /// <param name="introducedversion">Version in which the form is
-        /// introduced.</param>
-        /// <param name="componentstate">For internal use only.</param>
-        /// <param name="versionnumber">Version number of the Custom Control
-        /// Resource.</param>
-        /// <param name="version">For internal use only.</param>
-        /// <param name="createdon">Date and time when the record was
-        /// created.</param>
-        public MicrosoftDynamicsCRMcustomcontrolresource(string _organizationidValue = default(string), string _modifiedbyValue = default(string), bool? ismanaged = default(bool?), string customcontrolresourceidunique = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionrequirement = default(string), string _createdonbehalfbyValue = default(string), string customcontrolresourceid = default(string), string webresourceid = default(string), string name = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), string _modifiedonbehalfbyValue = default(string), string customcontrolid = default(string), string _createdbyValue = default(string), string introducedversion = default(string), int? componentstate = default(int?), string versionnumber = default(string), string version = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMcustomcontrol customcontrolidCustomcontrol = default(MicrosoftDynamicsCRMcustomcontrol), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMcustomcontrolresource(string _organizationidValue = default(string), string version = default(string), string webresourceid = default(string), int? componentstate = default(int?), string versionnumber = default(string), string customcontrolresourceid = default(string), string versionrequirement = default(string), string _modifiedonbehalfbyValue = default(string), string solutionid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string introducedversion = default(string), string customcontrolresourceidunique = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), bool? ismanaged = default(bool?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string customcontrolid = default(string), MicrosoftDynamicsCRMcustomcontrol customcontrolidCustomcontrol = default(MicrosoftDynamicsCRMcustomcontrol), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             this._organizationidValue = _organizationidValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            Ismanaged = ismanaged;
-            Customcontrolresourceidunique = customcontrolresourceidunique;
-            Modifiedon = modifiedon;
-            Versionrequirement = versionrequirement;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Customcontrolresourceid = customcontrolresourceid;
+            Version = version;
             Webresourceid = webresourceid;
-            Name = name;
-            Overwritetime = overwritetime;
-            Solutionid = solutionid;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Customcontrolid = customcontrolid;
-            this._createdbyValue = _createdbyValue;
-            Introducedversion = introducedversion;
             Componentstate = componentstate;
             Versionnumber = versionnumber;
-            Version = version;
+            Customcontrolresourceid = customcontrolresourceid;
+            Versionrequirement = versionrequirement;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Solutionid = solutionid;
+            Overwritetime = overwritetime;
+            Modifiedon = modifiedon;
+            this._createdbyValue = _createdbyValue;
+            Introducedversion = introducedversion;
+            Customcontrolresourceidunique = customcontrolresourceidunique;
             Createdon = createdon;
+            Name = name;
+            Ismanaged = ismanaged;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._modifiedbyValue = _modifiedbyValue;
+            Customcontrolid = customcontrolid;
             CustomcontrolidCustomcontrol = customcontrolidCustomcontrol;
             Createdby = createdby;
             Modifiedby = modifiedby;
@@ -97,17 +64,84 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets unique identifier of the organization associated with
-        /// the web resource.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "version")]
+        public string Version { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "webresourceid")]
+        public string Webresourceid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "customcontrolresourceid")]
+        public string Customcontrolresourceid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionrequirement")]
+        public string Versionrequirement { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "customcontrolresourceidunique")]
+        public string Customcontrolresourceidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
@@ -115,108 +149,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public bool? Ismanaged { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "customcontrolresourceidunique")]
-        public string Customcontrolresourceidunique { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the record was modified.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "versionrequirement")]
-        public string Versionrequirement { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the Custom Control Resource.
         /// </summary>
-        [JsonProperty(PropertyName = "customcontrolresourceid")]
-        public string Customcontrolresourceid { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the web resource.
-        /// </summary>
-        [JsonProperty(PropertyName = "webresourceid")]
-        public string Webresourceid { get; set; }
-
-        /// <summary>
-        /// Gets or sets name of the custom control resource.
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the associated solution.
-        /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who modified
-        /// the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the custom control.
         /// </summary>
         [JsonProperty(PropertyName = "customcontrolid")]
         public string Customcontrolid { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets version in which the form is introduced.
-        /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// Gets or sets version number of the Custom Control Resource.
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "version")]
-        public string Version { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the record was created.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>

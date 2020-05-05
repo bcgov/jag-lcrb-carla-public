@@ -1,0 +1,238 @@
+﻿@page
+@model Watchdog.Pages.ApplicationTypesCheckModel
+@{
+    ViewData["Title"] = "Application Types Check";
+}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Application Type</th>
+                <th>Field</th>
+                <th>DEV</th>
+                <th>TEST</th>
+                <th>PROD</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var key in Model.allKeys)
+            {
+                <tr>
+                    <td rowspan="@Model.allRowSizes[key]"> @key  </td>
+                    <th>Is Default</th>
+                    <td> @Model.devAppTypes[@key].AdoxioIsdefault.ToString() </td>
+                    <td> @Model.tstAppTypes[@key].AdoxioIsdefault.ToString() </td>
+                    <td> @Model.prdAppTypes[@key].AdoxioIsdefault.ToString() </td>
+                </tr>
+                <tr>
+                    <th>Code</th>
+                    <td> @Model.devAppTypes[@key]?.AdoxioCode </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioCode </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioCode </td>
+                </tr>
+                <tr>
+                    <th>Requires Security Screening</th>
+                    <td> @Model.devAppTypes[@key]?.AdoxioRequiressecurityscreening.ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioRequiressecurityscreening.ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioRequiressecurityscreening.ToString() </td>
+                </tr>
+                <tr>
+                    <th>Form Reference</th>
+                    <td> @Model.devAppTypes[@key]?.AdoxioFormreference </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioFormreference </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioFormreference </td>
+                </tr>
+                <tr>
+                    <th>Online Display Controls</th>
+                    <td colspan="3"> &nbsp; </td>
+                </tr>
+                <tr>
+                    <td>Show Property Details</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowpropertydetails.ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowpropertydetails.ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowpropertydetails.ToString() </td>
+                </tr>
+                <tr>
+                    <td>Establishment Name</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioEstablishmentname.Equals(1).ToString()  </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioEstablishmentname.Equals(1).ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioEstablishmentname.Equals(1).ToString() </td>
+                </tr>
+                <tr>
+                    <td>Current Establishment Address</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioCurrentestablishmentaddress.Equals(1).ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioCurrentestablishmentaddress.Equals(1).ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioCurrentestablishmentaddress.Equals(1).ToString() </td>
+                </tr>
+                <tr>
+                    <td>Show Current Property</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowcurrentproperty.ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowcurrentproperty.ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowcurrentproperty.ToString() </td>
+                </tr>
+                <tr>
+                    <td>New Establishment Address</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioNewestablishmentaddress.Equals(1).ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioNewestablishmentaddress.Equals(1).ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioNewestablishmentaddress.Equals(1).ToString() </td>
+                </tr>
+                <tr>
+                    <td>Store Contact Info</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioStorecontactinfo.Equals(1).ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioStorecontactinfo.Equals(1).ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioStorecontactinfo.Equals(1).ToString() </td>
+                </tr>
+                <tr>
+                    <td>Show Description 1</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioShowdescription1.ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioShowdescription1.ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioShowdescription1.ToString() </td>
+                </tr>
+                <tr>
+                    <td>Signage</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioSignage.Equals(1).ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioSignage.Equals(1).ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioSignage.Equals(1).ToString() </td>
+                </tr>
+                <tr>
+                    <td>Valid Interest</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioValidinterest.Equals(1).ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioValidinterest.Equals(1).ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioValidinterest.Equals(1).ToString() </td>
+                </tr>
+                <tr>
+                    <td>Floor Plan</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioFloorplan.Equals(1).ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioFloorplan.Equals(1).ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioFloorplan.Equals(1).ToString() </td>
+                </tr>
+                <tr>
+                    <td>Site Plan</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioSiteplan.Equals(1).ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioSiteplan.Equals(1).ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioSiteplan.Equals(1).ToString() </td>
+                </tr>
+                <tr>
+                    <td>Liquor Site Plan</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioLiquorsiteplan.Equals(1).ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioLiquorsiteplan.Equals(1).ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioLiquorsiteplan.Equals(1).ToString() </td>
+                </tr>
+                <tr>
+                    <td>Site Photographs</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioSitephotographs.Equals(1).ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioSitephotographs.Equals(1).ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioSitephotographs.Equals(1).ToString() </td>
+                </tr>
+                <tr>
+                    <td>Public Cooler Space</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioPubliccoolerspace.Equals(1).ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioPubliccoolerspace.Equals(1).ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioPubliccoolerspace.Equals(1).ToString() </td>
+                </tr>
+                <tr>
+                    <td>Connected Grocery Store</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioConnectedgrocerystore.Equals(1).ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioConnectedgrocerystore.Equals(1).ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioConnectedgrocerystore.Equals(1).ToString() </td>
+                </tr>
+                <tr>
+                    <td>Proof of Zoning</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioProofofzoning.Equals(1).ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioProofofzoning.Equals(1).ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioProofofzoning.Equals(1).ToString() </td>
+                </tr>
+                <tr>
+                    <td>Show Hours of Sale</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowhoursofsale.ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowhoursofsale.ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowhoursofsale.ToString() </td>
+                </tr>
+                <tr>
+                    <td>Show Associates Form Upload</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowassociatesformupload.ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowassociatesformupload.ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowassociatesformupload.ToString() </td>
+                </tr>
+                <tr>
+                    <td>Show Financial Integrity Form Upload</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowfinancialintegrityformupload.ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowfinancialintegrityformupload.ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowfinancialintegrityformupload.ToString() </td>
+                </tr>
+                <tr>
+                    <td>Show Supporting Documents</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowsupportingdocuments.ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowsupportingdocuments.ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowsupportingdocuments.ToString() </td>
+                </tr>
+                <tr>
+                    <td>Show Declarations</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowdeclarations.ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowdeclarations.ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowdeclarations.ToString() </td>
+                </tr>
+                <tr>
+                    <td>Show Liquor Declarations</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowliquordeclarations.ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowliquordeclarations.ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowliquordeclarations.ToString() </td>
+                </tr>
+                <tr>
+                    <td>Show LG/IN Approval</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowlginapproval.ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowlginapproval.ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowlginapproval.ToString() </td>
+                </tr>
+                <tr>
+                    <td>Lock Establishment Name</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioIslockestablishmentname.ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioIslockestablishmentname.ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioIslockestablishmentname.ToString() </td>
+                </tr>
+                <tr>
+                    <td>Show Description 2</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioShowdescription2.ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioShowdescription2.ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioShowdescription2.ToString() </td>
+                </tr>
+                <tr>
+                    <td>Show Description 3</td>
+                    <td> @Model.devAppTypes[@key]?.AdoxioShowdescription3.ToString() </td>
+                    <td> @Model.tstAppTypes[@key]?.AdoxioShowdescription3.ToString() </td>
+                    <td> @Model.prdAppTypes[@key]?.AdoxioShowdescription3.ToString() </td>
+                </tr>                
+                @if (@Model.allFieldNames.ContainsKey(@key))
+
+                {
+                    <tr>
+                        <th>Form Fields</th>
+                        <td colspan="3"> &nbsp; </td>
+                    </tr>
+                    @foreach (var fieldname in Model.allFieldNames[@key])
+                    {
+                        <tr>
+                            <td>@fieldname</td>
+                            <td>
+                                @if (@Model.devFieldNames.ContainsKey(@key))
+                                {@Model.devFieldNames[@key].Contains(fieldname).ToString()}
+                            </td>
+                            <td>
+                                @if (@Model.tstFieldNames.ContainsKey(@key))
+                                {@Model.tstFieldNames[@key].Contains(fieldname).ToString()}
+                            </td>
+                            <td>
+                                @if (@Model.prdFieldNames.ContainsKey(@key))
+                                {@Model.prdFieldNames[@key].Contains(fieldname).ToString()}
+                            </td>
+                        </tr>
+
+                    }
+
+                }
+
+
+
+            }
+        </tbody>
+    </table>
+

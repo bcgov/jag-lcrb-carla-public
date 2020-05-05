@@ -29,115 +29,70 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioApplicationtype class.
         /// </summary>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="adoxioSitephotographs">Add site photographs of the
-        /// site to the application page</param>
-        /// <param name="adoxioConnectedgrocerystore">Show whether this
-        /// application type can be connected to a Grocery Store or not</param>
-        /// <param name="adoxioName">The name of the custom entity.</param>
-        /// <param name="_owningbusinessunitValue">Unique identifier for the
-        /// business unit that owns the record</param>
-        /// <param name="importsequencenumber">Sequence number of the import
-        /// that created this record.</param>
-        /// <param name="_owneridValue">Owner Id</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the record.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// modified the record.</param>
-        /// <param name="statecode">Status of the Application Type</param>
-        /// <param name="statuscode">Reason for the status of the Application
-        /// Type</param>
-        /// <param name="_owningteamValue">Unique identifier for the team that
-        /// owns the record.</param>
-        /// <param name="createdon">Date and time when the record was
-        /// created.</param>
-        /// <param name="adoxioIsshowliquordeclarations">Enable Liquor
-        /// Declarations on the application page</param>
-        /// <param name="modifiedon">Date and time when the record was
-        /// modified.</param>
-        /// <param name="adoxioPortallabel">The application name that is
-        /// displayed to the applicant/licensee online.</param>
-        /// <param name="adoxioPubliccoolerspace">Is the public permitted to
-        /// walk into the cooler space?</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="versionnumber">Version Number</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who modified the record.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the record.</param>
-        /// <param name="adoxioLiquorsiteplan">Basic site plan description for
-        /// liquor.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="adoxioApplicationtypeid">Unique identifier for entity
-        /// instances</param>
-        /// <param name="_owninguserValue">Unique identifier for the user that
-        /// owns the record.</param>
-        public MicrosoftDynamicsCRMadoxioApplicationtype(bool? adoxioRequiressecurityscreening = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? adoxioIsshowassociatesformupload = default(bool?), int? adoxioSitephotographs = default(int?), bool? adoxioIsdefault = default(bool?), bool? adoxioIsshowcurrentproperty = default(bool?), int? adoxioConnectedgrocerystore = default(int?), bool? adoxioIsshowhoursofsale = default(bool?), string adoxioTitletext = default(string), bool? adoxioShowdescription3 = default(bool?), string adoxioName = default(string), int? adoxioIsfree = default(int?), int? adoxioSiteplan = default(int?), string _adoxioRenewalapplicationtypeValue = default(string), int? adoxioNewestablishmentaddress = default(int?), string _owningbusinessunitValue = default(string), int? adoxioSignage = default(int?), int? importsequencenumber = default(int?), string _adoxioApplicationfeeproductValue = default(string), string _owneridValue = default(string), string _createdbyValue = default(string), string _modifiedbyValue = default(string), int? statecode = default(int?), int? adoxioCurrentestablishmentaddress = default(int?), int? statuscode = default(int?), int? adoxioEstablishmentname = default(int?), string _owningteamValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? adoxioIsshowliquordeclarations = default(bool?), int? adoxioValidinterest = default(int?), bool? adoxioIsshowlginapproval = default(bool?), bool? adoxioIsshowfinancialintegrityformupload = default(bool?), int? adoxioFloorplan = default(int?), string adoxioDefaultbpfid = default(string), string adoxioCode = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioFormreference = default(string), string adoxioPortallabel = default(string), string adoxioActiontext = default(string), int? adoxioPubliccoolerspace = default(int?), bool? adoxioIsshowsupportingdocuments = default(bool?), bool? adoxioIsendorsement = default(bool?), bool? adoxioIsshowpropertydetails = default(bool?), int? adoxioCategory = default(int?), bool? adoxioShowdescription2 = default(bool?), int? timezoneruleversionnumber = default(int?), string versionnumber = default(string), string adoxioDefaultbpmid = default(string), int? adoxioProofofzoning = default(int?), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), bool? adoxioIslockestablishmentname = default(bool?), bool? adoxioIsshowdeclarations = default(bool?), int? adoxioLiquorsiteplan = default(int?), int? utcconversiontimezonecode = default(int?), string adoxioApplicationtypeid = default(string), string _owninguserValue = default(string), string adoxioDefaultqueuename = default(string), bool? adoxioShowdescription1 = default(bool?), string _adoxioLicencetypeValue = default(string), int? adoxioStorecontactinfo = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioApplicationtypeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationtypeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationtypeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioApplicationtypeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioApplicationtypeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioApplicationtypeApplications = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioLicencetype> adoxioLicencetypesApplicationtypes = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioApplicationtypecontent> adoxioApplicationtypeAdoxioApplicationtypecontentApplicationType = default(IList<MicrosoftDynamicsCRMadoxioApplicationtypecontent>), MicrosoftDynamicsCRMproduct adoxioApplicationFeeProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceType = default(MicrosoftDynamicsCRMadoxioLicencetype), IList<MicrosoftDynamicsCRMincident> adoxioApplicationtypeInspections = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioRenewalApplicationType = default(MicrosoftDynamicsCRMadoxioApplicationtype), IList<MicrosoftDynamicsCRMadoxioApplicationtype> adoxioApplicationtypeRenewalType = default(IList<MicrosoftDynamicsCRMadoxioApplicationtype>), IList<MicrosoftDynamicsCRMadoxioLicenseechangelog> adoxioApplicationtypeAdoxioLicenseechangelogApplicationType = default(IList<MicrosoftDynamicsCRMadoxioLicenseechangelog>), IList<MicrosoftDynamicsCRMadoxioFormelementuploadfield> adoxioApplicationtypeFormelementuploadfields = default(IList<MicrosoftDynamicsCRMadoxioFormelementuploadfield>), IList<MicrosoftDynamicsCRMadoxioApplicationtypefeeschedule> adoxioApplicationtypeAdoxioApplicationtypefeescheduleApplicationTypeId = default(IList<MicrosoftDynamicsCRMadoxioApplicationtypefeeschedule>))
+        public MicrosoftDynamicsCRMadoxioApplicationtype(int? adoxioEstablishmentname = default(int?), string adoxioName = default(string), int? adoxioSiteplan = default(int?), string adoxioDynamicapplicationform = default(string), int? importsequencenumber = default(int?), bool? adoxioIslockestablishmentname = default(bool?), string adoxioActiontext = default(string), int? adoxioIsfree = default(int?), bool? adoxioIsshowpropertydetails = default(bool?), string adoxioDefaultbpmid = default(string), int? adoxioPubliccoolerspace = default(int?), int? adoxioLiquorsiteplan = default(int?), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), int? adoxioProofofzoning = default(int?), int? adoxioStorecontactinfo = default(int?), int? adoxioSignage = default(int?), string adoxioDefaultqueuename = default(string), bool? adoxioIsdefault = default(bool?), string adoxioDefaultbpfid = default(string), bool? adoxioIsshowfinancialintegrityformupload = default(bool?), bool? adoxioIsshowlginapproval = default(bool?), bool? adoxioIsshowliquordeclarations = default(bool?), int? adoxioNewestablishmentaddress = default(int?), string _owningteamValue = default(string), string _owningbusinessunitValue = default(string), bool? adoxioIsshowcurrentproperty = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? statecode = default(int?), string adoxioPortallabel = default(string), bool? adoxioIsshowdeclarations = default(bool?), int? adoxioFloorplan = default(int?), int? utcconversiontimezonecode = default(int?), string _owninguserValue = default(string), string _createdonbehalfbyValue = default(string), bool? adoxioShowdescription1 = default(bool?), string _owneridValue = default(string), int? adoxioConnectedgrocerystore = default(int?), bool? adoxioShowdescription2 = default(bool?), bool? adoxioRequiressecurityscreening = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioApplicationtypeid = default(string), int? adoxioCategory = default(int?), bool? adoxioShowdescription3 = default(bool?), bool? adoxioIsshowhoursofsale = default(bool?), string adoxioTitletext = default(string), string _adoxioRenewalapplicationtypeValue = default(string), string _createdbyValue = default(string), int? adoxioValidinterest = default(int?), string adoxioFormreference = default(string), string adoxioCode = default(string), int? adoxioSitephotographs = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? adoxioCurrentestablishmentaddress = default(int?), string _adoxioLicencetypeValue = default(string), int? statuscode = default(int?), bool? adoxioIsendorsement = default(bool?), bool? adoxioIsshowassociatesformupload = default(bool?), string _adoxioApplicationfeeproductValue = default(string), bool? adoxioIsshowsupportingdocuments = default(bool?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioApplicationtypeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationtypeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationtypeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioApplicationtypeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioApplicationtypeMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioApplicationtypeProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioApplicationtypeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioApplicationtypePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioApplicationtypeApplications = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioLicencetype> adoxioLicencetypesApplicationtypes = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioApplicationtypecontent> adoxioApplicationtypeAdoxioApplicationtypecontentApplicationType = default(IList<MicrosoftDynamicsCRMadoxioApplicationtypecontent>), MicrosoftDynamicsCRMproduct adoxioApplicationFeeProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceType = default(MicrosoftDynamicsCRMadoxioLicencetype), IList<MicrosoftDynamicsCRMincident> adoxioApplicationtypeInspections = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioRenewalApplicationType = default(MicrosoftDynamicsCRMadoxioApplicationtype), IList<MicrosoftDynamicsCRMadoxioApplicationtype> adoxioApplicationtypeRenewalType = default(IList<MicrosoftDynamicsCRMadoxioApplicationtype>), IList<MicrosoftDynamicsCRMadoxioLicenseechangelog> adoxioApplicationtypeAdoxioLicenseechangelogApplicationType = default(IList<MicrosoftDynamicsCRMadoxioLicenseechangelog>), IList<MicrosoftDynamicsCRMadoxioFormelementuploadfield> adoxioApplicationtypeFormelementuploadfields = default(IList<MicrosoftDynamicsCRMadoxioFormelementuploadfield>), IList<MicrosoftDynamicsCRMadoxioApplicationtypefeeschedule> adoxioApplicationtypeAdoxioApplicationtypefeescheduleApplicationTypeId = default(IList<MicrosoftDynamicsCRMadoxioApplicationtypefeeschedule>), IList<MicrosoftDynamicsCRMadoxioEndorsement> adoxioApplicationtypeAdoxioEndorsementApplicationType = default(IList<MicrosoftDynamicsCRMadoxioEndorsement>))
         {
+            AdoxioEstablishmentname = adoxioEstablishmentname;
+            AdoxioName = adoxioName;
+            AdoxioSiteplan = adoxioSiteplan;
+            AdoxioDynamicapplicationform = adoxioDynamicapplicationform;
+            Importsequencenumber = importsequencenumber;
+            AdoxioIslockestablishmentname = adoxioIslockestablishmentname;
+            AdoxioActiontext = adoxioActiontext;
+            AdoxioIsfree = adoxioIsfree;
+            AdoxioIsshowpropertydetails = adoxioIsshowpropertydetails;
+            AdoxioDefaultbpmid = adoxioDefaultbpmid;
+            AdoxioPubliccoolerspace = adoxioPubliccoolerspace;
+            AdoxioLiquorsiteplan = adoxioLiquorsiteplan;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Versionnumber = versionnumber;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            AdoxioProofofzoning = adoxioProofofzoning;
+            AdoxioStorecontactinfo = adoxioStorecontactinfo;
+            AdoxioSignage = adoxioSignage;
+            AdoxioDefaultqueuename = adoxioDefaultqueuename;
+            AdoxioIsdefault = adoxioIsdefault;
+            AdoxioDefaultbpfid = adoxioDefaultbpfid;
+            AdoxioIsshowfinancialintegrityformupload = adoxioIsshowfinancialintegrityformupload;
+            AdoxioIsshowlginapproval = adoxioIsshowlginapproval;
+            AdoxioIsshowliquordeclarations = adoxioIsshowliquordeclarations;
+            AdoxioNewestablishmentaddress = adoxioNewestablishmentaddress;
+            this._owningteamValue = _owningteamValue;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            AdoxioIsshowcurrentproperty = adoxioIsshowcurrentproperty;
+            Modifiedon = modifiedon;
+            Statecode = statecode;
+            AdoxioPortallabel = adoxioPortallabel;
+            AdoxioIsshowdeclarations = adoxioIsshowdeclarations;
+            AdoxioFloorplan = adoxioFloorplan;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._owninguserValue = _owninguserValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            AdoxioShowdescription1 = adoxioShowdescription1;
+            this._owneridValue = _owneridValue;
+            AdoxioConnectedgrocerystore = adoxioConnectedgrocerystore;
+            AdoxioShowdescription2 = adoxioShowdescription2;
             AdoxioRequiressecurityscreening = adoxioRequiressecurityscreening;
             Overriddencreatedon = overriddencreatedon;
-            AdoxioIsshowassociatesformupload = adoxioIsshowassociatesformupload;
-            AdoxioSitephotographs = adoxioSitephotographs;
-            AdoxioIsdefault = adoxioIsdefault;
-            AdoxioIsshowcurrentproperty = adoxioIsshowcurrentproperty;
-            AdoxioConnectedgrocerystore = adoxioConnectedgrocerystore;
+            AdoxioApplicationtypeid = adoxioApplicationtypeid;
+            AdoxioCategory = adoxioCategory;
+            AdoxioShowdescription3 = adoxioShowdescription3;
             AdoxioIsshowhoursofsale = adoxioIsshowhoursofsale;
             AdoxioTitletext = adoxioTitletext;
-            AdoxioShowdescription3 = adoxioShowdescription3;
-            AdoxioName = adoxioName;
-            AdoxioIsfree = adoxioIsfree;
-            AdoxioSiteplan = adoxioSiteplan;
             this._adoxioRenewalapplicationtypeValue = _adoxioRenewalapplicationtypeValue;
-            AdoxioNewestablishmentaddress = adoxioNewestablishmentaddress;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            AdoxioSignage = adoxioSignage;
-            Importsequencenumber = importsequencenumber;
-            this._adoxioApplicationfeeproductValue = _adoxioApplicationfeeproductValue;
-            this._owneridValue = _owneridValue;
             this._createdbyValue = _createdbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            Statecode = statecode;
-            AdoxioCurrentestablishmentaddress = adoxioCurrentestablishmentaddress;
-            Statuscode = statuscode;
-            AdoxioEstablishmentname = adoxioEstablishmentname;
-            this._owningteamValue = _owningteamValue;
-            Createdon = createdon;
-            AdoxioIsshowliquordeclarations = adoxioIsshowliquordeclarations;
             AdoxioValidinterest = adoxioValidinterest;
-            AdoxioIsshowlginapproval = adoxioIsshowlginapproval;
-            AdoxioIsshowfinancialintegrityformupload = adoxioIsshowfinancialintegrityformupload;
-            AdoxioFloorplan = adoxioFloorplan;
-            AdoxioDefaultbpfid = adoxioDefaultbpfid;
-            AdoxioCode = adoxioCode;
-            Modifiedon = modifiedon;
             AdoxioFormreference = adoxioFormreference;
-            AdoxioPortallabel = adoxioPortallabel;
-            AdoxioActiontext = adoxioActiontext;
-            AdoxioPubliccoolerspace = adoxioPubliccoolerspace;
-            AdoxioIsshowsupportingdocuments = adoxioIsshowsupportingdocuments;
-            AdoxioIsendorsement = adoxioIsendorsement;
-            AdoxioIsshowpropertydetails = adoxioIsshowpropertydetails;
-            AdoxioCategory = adoxioCategory;
-            AdoxioShowdescription2 = adoxioShowdescription2;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Versionnumber = versionnumber;
-            AdoxioDefaultbpmid = adoxioDefaultbpmid;
-            AdoxioProofofzoning = adoxioProofofzoning;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            AdoxioIslockestablishmentname = adoxioIslockestablishmentname;
-            AdoxioIsshowdeclarations = adoxioIsshowdeclarations;
-            AdoxioLiquorsiteplan = adoxioLiquorsiteplan;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            AdoxioApplicationtypeid = adoxioApplicationtypeid;
-            this._owninguserValue = _owninguserValue;
-            AdoxioDefaultqueuename = adoxioDefaultqueuename;
-            AdoxioShowdescription1 = adoxioShowdescription1;
+            AdoxioCode = adoxioCode;
+            AdoxioSitephotographs = adoxioSitephotographs;
+            Createdon = createdon;
+            AdoxioCurrentestablishmentaddress = adoxioCurrentestablishmentaddress;
             this._adoxioLicencetypeValue = _adoxioLicencetypeValue;
-            AdoxioStorecontactinfo = adoxioStorecontactinfo;
+            Statuscode = statuscode;
+            AdoxioIsendorsement = adoxioIsendorsement;
+            AdoxioIsshowassociatesformupload = adoxioIsshowassociatesformupload;
+            this._adoxioApplicationfeeproductValue = _adoxioApplicationfeeproductValue;
+            AdoxioIsshowsupportingdocuments = adoxioIsshowsupportingdocuments;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -150,7 +105,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioApplicationtypeDuplicateMatchingRecord = adoxioApplicationtypeDuplicateMatchingRecord;
             AdoxioApplicationtypeDuplicateBaseRecord = adoxioApplicationtypeDuplicateBaseRecord;
             AdoxioApplicationtypeAsyncOperations = adoxioApplicationtypeAsyncOperations;
+            AdoxioApplicationtypeMailboxTrackingFolders = adoxioApplicationtypeMailboxTrackingFolders;
+            AdoxioApplicationtypeProcessSession = adoxioApplicationtypeProcessSession;
             AdoxioApplicationtypeBulkDeleteFailures = adoxioApplicationtypeBulkDeleteFailures;
+            AdoxioApplicationtypePrincipalObjectAttributeAccesses = adoxioApplicationtypePrincipalObjectAttributeAccesses;
             AdoxioApplicationtypeApplications = adoxioApplicationtypeApplications;
             AdoxioLicencetypesApplicationtypes = adoxioLicencetypesApplicationtypes;
             AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType = adoxioApplicationtypeAdoxioApplicationtypecontentApplicationType;
@@ -162,6 +120,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioApplicationtypeAdoxioLicenseechangelogApplicationType = adoxioApplicationtypeAdoxioLicenseechangelogApplicationType;
             AdoxioApplicationtypeFormelementuploadfields = adoxioApplicationtypeFormelementuploadfields;
             AdoxioApplicationtypeAdoxioApplicationtypefeescheduleApplicationTypeId = adoxioApplicationtypeAdoxioApplicationtypefeescheduleApplicationTypeId;
+            AdoxioApplicationtypeAdoxioEndorsementApplicationType = adoxioApplicationtypeAdoxioEndorsementApplicationType;
             CustomInit();
         }
 
@@ -172,26 +131,103 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_requiressecurityscreening")]
-        public bool? AdoxioRequiressecurityscreening { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "adoxio_establishmentname")]
+        public int? AdoxioEstablishmentname { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isshowassociatesformupload")]
-        public bool? AdoxioIsshowassociatesformupload { get; set; }
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
 
         /// <summary>
-        /// Gets or sets add site photographs of the site to the application
-        /// page
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sitephotographs")]
-        public int? AdoxioSitephotographs { get; set; }
+        [JsonProperty(PropertyName = "adoxio_siteplan")]
+        public int? AdoxioSiteplan { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_dynamicapplicationform")]
+        public string AdoxioDynamicapplicationform { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_islockestablishmentname")]
+        public bool? AdoxioIslockestablishmentname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_actiontext")]
+        public string AdoxioActiontext { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isfree")]
+        public int? AdoxioIsfree { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isshowpropertydetails")]
+        public bool? AdoxioIsshowpropertydetails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_defaultbpmid")]
+        public string AdoxioDefaultbpmid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_publiccoolerspace")]
+        public int? AdoxioPubliccoolerspace { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_liquorsiteplan")]
+        public int? AdoxioLiquorsiteplan { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_proofofzoning")]
+        public int? AdoxioProofofzoning { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_storecontactinfo")]
+        public int? AdoxioStorecontactinfo { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_signage")]
+        public int? AdoxioSignage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_defaultqueuename")]
+        public string AdoxioDefaultqueuename { get; set; }
 
         /// <summary>
         /// </summary>
@@ -200,15 +236,128 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_defaultbpfid")]
+        public string AdoxioDefaultbpfid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isshowfinancialintegrityformupload")]
+        public bool? AdoxioIsshowfinancialintegrityformupload { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isshowlginapproval")]
+        public bool? AdoxioIsshowlginapproval { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isshowliquordeclarations")]
+        public bool? AdoxioIsshowliquordeclarations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_newestablishmentaddress")]
+        public int? AdoxioNewestablishmentaddress { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_isshowcurrentproperty")]
         public bool? AdoxioIsshowcurrentproperty { get; set; }
 
         /// <summary>
-        /// Gets or sets show whether this application type can be connected to
-        /// a Grocery Store or not
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_portallabel")]
+        public string AdoxioPortallabel { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isshowdeclarations")]
+        public bool? AdoxioIsshowdeclarations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_floorplan")]
+        public int? AdoxioFloorplan { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_showdescription1")]
+        public bool? AdoxioShowdescription1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_connectedgrocerystore")]
         public int? AdoxioConnectedgrocerystore { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_showdescription2")]
+        public bool? AdoxioShowdescription2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_requiressecurityscreening")]
+        public bool? AdoxioRequiressecurityscreening { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_applicationtypeid")]
+        public string AdoxioApplicationtypeid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_category")]
+        public int? AdoxioCategory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_showdescription3")]
+        public bool? AdoxioShowdescription3 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -222,116 +371,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_showdescription3")]
-        public bool? AdoxioShowdescription3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the custom entity.
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isfree")]
-        public int? AdoxioIsfree { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_siteplan")]
-        public int? AdoxioSiteplan { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_adoxio_renewalapplicationtype_value")]
         public string _adoxioRenewalapplicationtypeValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_newestablishmentaddress")]
-        public int? AdoxioNewestablishmentaddress { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the business unit that owns the
-        /// record
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_signage")]
-        public int? AdoxioSignage { get; set; }
-
-        /// <summary>
-        /// Gets or sets sequence number of the import that created this
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_applicationfeeproduct_value")]
-        public string _adoxioApplicationfeeproductValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets owner Id
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the record.
-        /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who modified the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets status of the Application Type
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_currentestablishmentaddress")]
-        public int? AdoxioCurrentestablishmentaddress { get; set; }
-
-        /// <summary>
-        /// Gets or sets reason for the status of the Application Type
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_establishmentname")]
-        public int? AdoxioEstablishmentname { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the team that owns the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the record was created.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// Gets or sets enable Liquor Declarations on the application page
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isshowliquordeclarations")]
-        public bool? AdoxioIsshowliquordeclarations { get; set; }
 
         /// <summary>
         /// </summary>
@@ -340,23 +386,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isshowlginapproval")]
-        public bool? AdoxioIsshowlginapproval { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isshowfinancialintegrityformupload")]
-        public bool? AdoxioIsshowfinancialintegrityformupload { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_floorplan")]
-        public int? AdoxioFloorplan { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_defaultbpfid")]
-        public string AdoxioDefaultbpfid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_formreference")]
+        public string AdoxioFormreference { get; set; }
 
         /// <summary>
         /// </summary>
@@ -364,139 +395,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioCode { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the record was modified.
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sitephotographs")]
+        public int? AdoxioSitephotographs { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_formreference")]
-        public string AdoxioFormreference { get; set; }
-
-        /// <summary>
-        /// Gets or sets the application name that is displayed to the
-        /// applicant/licensee online.
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_portallabel")]
-        public string AdoxioPortallabel { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_actiontext")]
-        public string AdoxioActiontext { get; set; }
-
-        /// <summary>
-        /// Gets or sets is the public permitted to walk into the cooler space?
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_publiccoolerspace")]
-        public int? AdoxioPubliccoolerspace { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isshowsupportingdocuments")]
-        public bool? AdoxioIsshowsupportingdocuments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isendorsement")]
-        public bool? AdoxioIsendorsement { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isshowpropertydetails")]
-        public bool? AdoxioIsshowpropertydetails { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_category")]
-        public int? AdoxioCategory { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_showdescription2")]
-        public bool? AdoxioShowdescription2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets version Number
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_defaultbpmid")]
-        public string AdoxioDefaultbpmid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_proofofzoning")]
-        public int? AdoxioProofofzoning { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who modified
-        /// the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_islockestablishmentname")]
-        public bool? AdoxioIslockestablishmentname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isshowdeclarations")]
-        public bool? AdoxioIsshowdeclarations { get; set; }
-
-        /// <summary>
-        /// Gets or sets basic site plan description for liquor.
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_liquorsiteplan")]
-        public int? AdoxioLiquorsiteplan { get; set; }
-
-        /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for entity instances
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_applicationtypeid")]
-        public string AdoxioApplicationtypeid { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the user that owns the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_defaultqueuename")]
-        public string AdoxioDefaultqueuename { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_showdescription1")]
-        public bool? AdoxioShowdescription1 { get; set; }
+        [JsonProperty(PropertyName = "adoxio_currentestablishmentaddress")]
+        public int? AdoxioCurrentestablishmentaddress { get; set; }
 
         /// <summary>
         /// </summary>
@@ -505,8 +416,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_storecontactinfo")]
-        public int? AdoxioStorecontactinfo { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isendorsement")]
+        public bool? AdoxioIsendorsement { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isshowassociatesformupload")]
+        public bool? AdoxioIsshowassociatesformupload { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_applicationfeeproduct_value")]
+        public string _adoxioApplicationfeeproductValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isshowsupportingdocuments")]
+        public bool? AdoxioIsshowsupportingdocuments { get; set; }
 
         /// <summary>
         /// </summary>
@@ -570,8 +501,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_applicationtype_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> AdoxioApplicationtypeMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_applicationtype_ProcessSession")]
+        public IList<MicrosoftDynamicsCRMprocesssession> AdoxioApplicationtypeProcessSession { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_applicationtype_BulkDeleteFailures")]
         public IList<MicrosoftDynamicsCRMbulkdeletefailure> AdoxioApplicationtypeBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_applicationtype_PrincipalObjectAttributeAccesses")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> AdoxioApplicationtypePrincipalObjectAttributeAccesses { get; set; }
 
         /// <summary>
         /// </summary>
@@ -627,6 +573,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_applicationtype_adoxio_applicationtypefeeschedule_ApplicationTypeId")]
         public IList<MicrosoftDynamicsCRMadoxioApplicationtypefeeschedule> AdoxioApplicationtypeAdoxioApplicationtypefeescheduleApplicationTypeId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_applicationtype_adoxio_endorsement_ApplicationType")]
+        public IList<MicrosoftDynamicsCRMadoxioEndorsement> AdoxioApplicationtypeAdoxioEndorsementApplicationType { get; set; }
 
     }
 }

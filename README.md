@@ -6,12 +6,12 @@ Technology Stack
 
 | Layer   | Technology | 
 | ------- | ------------ |
-| Presentation | Angular 7 |
-| Business Logic | C Sharp - Dotnet Core 2.1 |
-| Web Server | Kestrel |
-| Data    | SQL Server 2017 |
-| Data    | MS Dynamics |
-| Document Management    | MS SharePoint |   
+| Presentation | Angular 8 |
+| Business Logic | C Sharp - Dotnet Core 3.1 |
+| Web Server | Nginx |
+| Application Server | Kestrel |
+| Data    | MS Dynamics On Premise V9, ADFS |
+| Document Management    | MS SharePoint 2016, ADFS |   
 
 Repository Map
 --------------
@@ -26,10 +26,12 @@ Repository Map
 - **cllc-interfaces-test**: Automated tests for the above interface libraries
 - **cllc-public-app**: Source code for the public facing application
 - **cllc-public-app-test**: Automated tests for the public application
-- **dotnet-sonar**: Source for a helper image that runs a sonar scan
+- **federal-reporting**: Image source for a service used to handle monthly reports to the federal government
+- **file-manager**: Image source for a file manager used to handle communications with SharePoint
 - **functional-tests**: Source for BDD tests
 - **openshift**: Various OpenShift related material, including instructions for setup and templates.
 - **sql-server**: Image source for a sql server instance. 
+- **watchdog**: Image source for a watchdog that can monitor the dependency tree of the application
 
 Installation
 ------------
@@ -39,8 +41,8 @@ Developer Prerequisites
 -----------------------
 
 **Public Application**
-- .Net Core SDK (Dotnet Core 2 is used for all components)
-- Node.js version 8 LTS
+- .Net Core SDK (Dotnet Core 3.1 is used for all components)
+- Node.js version 10.19 
 - .NET Core IDE such as Visual Studio or VS Code
 - Local instance of SQL Server
 

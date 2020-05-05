@@ -193,6 +193,7 @@ import { LiquorRenewalComponent } from './components/applications/liquor-renewal
 import { TemporaryOffsiteComponent } from '@components/temporary-offsite/temporary-offsite.component';
 import { ApplicationThirdPartyOperatorComponent } from '@components/applications/application-third-party-operator/application-third-party-operator.component';
 import { CancelThirdPartyOperatorComponent } from '@components/applications/cancel-third-party-operator/cancel-third-party-operator.component';
+import { FeatureFlagService } from './services/feature-flag.service';
 
 
 @NgModule({
@@ -432,6 +433,15 @@ import { CancelThirdPartyOperatorComponent } from '@components/applications/canc
     VoteDataService,
     VersionInfoDataService,
     WorkerDataService,
+    FeatureFlagService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (featureFlagService: FeatureFlagService) => function () {
+        return featureFlagService.init();
+      },
+      deps: [FeatureFlagService],
+      multi: true
+    },
     {
       provide: APP_INITIALIZER,
       useFactory: (us: UserDataService) => function () {

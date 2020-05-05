@@ -107,7 +107,7 @@ namespace bdd_tests
             NgWebElement nextCalendar = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span"));
             nextCalendar.Click();
 
-            NgWebElement nextCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr[4]/td[2]/div"));
+            NgWebElement nextCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr[4]/td[3]/div"));
             nextCalendar2.Click();
 
             NgWebElement nextCalendar3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-year-view/table/tbody/tr[3]/td[4]/div"));
@@ -144,32 +144,9 @@ namespace bdd_tests
             Page Title: Consent for Cannabis Security Screening - Step 2
             */
 
-            string applicantName = "Automated Test";
-            
-            // select 'No' for background screen (self disclosure) radio button
-            NgWebElement uiSelfDisclosure = ngDriver.FindElement(By.XPath("(//input[@name='selfDisclosure'])[2]"));
-            uiSelfDisclosure.Click();
-
             // select consent and disclosure checkbox
             NgWebElement uiNoWetSignature1 = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
             uiNoWetSignature1.Click();
-
-            // select signature checkbox
-            NgWebElement uiNoWetSignature2 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
-            uiNoWetSignature2.Click();
-
-            // enter applicant name
-            NgWebElement uiApplicantName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
-            uiApplicantName.SendKeys(applicantName);
-
-            // upload the signature form
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            string signatureFormPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signature.pdf");
-            NgWebElement uploadSignatureForm = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
-            uploadSignatureForm.SendKeys(signatureFormPath);
         }
 
         [And(@"I click on the Submit & Pay button")]
@@ -207,7 +184,7 @@ namespace bdd_tests
             string retDash = "Return to Dashboard";
 
             // confirm that payment receipt is for $100.00
-            Assert.True (ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-worker-payment-confirmation/mat-card/div/div[1]/div/div/table/tr[5]/td[2][text()='$100.00']")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$100.00')]")).Displayed);
 
             // click on the Return to Dashboard link
             NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));

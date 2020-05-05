@@ -194,7 +194,7 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
       this.validationErrors.push("Please Upload Your Statutory Declaration");
     }
 
-    if (this.showDriversAbstract() && (this.fileCount['StatDeclaration'] > 0)) {
+    if (this.showDriversAbstract() && (this.fileCount['DriverExtract'] > 0)) {
       this.validationErrors.push("Please Upload Your Driver's Extract");
     }
     return this.validationErrors.length <= 0;

@@ -100,7 +100,7 @@
                                     [valid]="!associate.get('dateofBirthNew').touched || associate.get('dateofBirthNew').valid"
                                     errorMessage="Please enter Birth Date">
                                     <input type="text" formControlName="dateofBirthNew"
-                                        style="width: 120px; background-color: #fff;" autocomplete="false"
+                                        style="width: 120px; background-color: #fff;" autocomplete="false" readonly
                                         placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker2"
                                         [max]="YearsAgo19" (focus)="picker2.open()" (click)="picker2.open()">
                                     <mat-datepicker #picker2></mat-datepicker>
@@ -228,7 +228,8 @@
                                         [valid]="!associate.get('numberofSharesNew').touched || associate.get('numberofSharesNew').valid"
                                         errorMessage="Please enter Shares">
                                         <div class="d-flex">
-                                            <input class="form-control" type="text" formControlName="numberofSharesNew">
+                                            <input class="form-control" type="text" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                                             formControlName="numberofSharesNew">
                                         </div>
                                     </app-field>
                                 </ng-container>
@@ -253,7 +254,7 @@
                                     errorMessage="Please enter Birth Date">
                                     <input type="text" formControlName="dateofBirthNew"
                                         style="width: 120px; background-color: #fff;" autocomplete="false"
-                                        [max]="YearsAgo19" placeholder="yyyy-mm-dd" class="form-control"
+                                        [max]="YearsAgo19" placeholder="yyyy-mm-dd" class="form-control" readonly
                                         [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
                                     <mat-datepicker #picker></mat-datepicker>
                                 </app-field>
@@ -327,7 +328,8 @@
                                         [isFullWidth]="true"
                                         [valid]="!associate.get('numberofSharesNew').touched || associate.get('numberofSharesNew').valid"
                                         errorMessage="Please enter Shares">
-                                        <input class="form-control" type="text" formControlName="numberofSharesNew">
+                                        <input class="form-control" type="text" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                                        formControlName="numberofSharesNew">
                                     </app-field>
                                 </ng-container>
                             </td>

@@ -29,500 +29,170 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMlead class.
         /// </summary>
-        /// <param name="address1Name">Type a descriptive name for the primary
-        /// address, such as Corporate Headquarters.</param>
-        /// <param name="subject">Type a subject or descriptive name, such as
-        /// the expected order, company name, or marketing source list, to
-        /// identify the lead.</param>
-        /// <param name="address1County">Type the county for the primary
-        /// address.</param>
-        /// <param name="address1Telephone2">Type a second phone number
-        /// associated with the primary address.</param>
-        /// <param name="lastname">Type the last name of the primary contact
-        /// for the lead to make sure the prospect is addressed correctly in
-        /// sales calls, email, and marketing campaigns.</param>
-        /// <param name="description">Type additional information to describe
-        /// the lead, such as an excerpt from the company's website.</param>
-        /// <param name="address1City">Type the city for the primary
-        /// address.</param>
-        /// <param name="address1Telephone1">Type the main phone number
-        /// associated with the primary address.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="address2Country">Type the country or region for the
-        /// secondary address.</param>
-        /// <param name="processid">Shows the ID of the process.</param>
-        /// <param name="address2Postofficebox">Type the post office box number
-        /// of the secondary address.</param>
-        /// <param name="modifiedon">Shows the date and time when the record
-        /// was last updated. The date and time are displayed in the time zone
-        /// selected in Microsoft Dynamics 365 options.</param>
-        /// <param name="address2City">Type the city for the secondary
-        /// address.</param>
-        /// <param name="budgetamountBase">Base currency equivalent of the
-        /// estimated budget of the lead.</param>
-        /// <param name="estimatedvalue">Type a numeric value of the lead's
-        /// estimated value, such as a product quantity, if no revenue amount
-        /// can be specified in the Est. Value field. This can be used for
-        /// sales forecasting and planning.</param>
-        /// <param name="lastusedincampaign">Shows the date when the lead was
-        /// last included in a marketing campaign or quick campaign.</param>
-        /// <param name="budgetstatus">Information about the budget status of
-        /// the lead's company or organization.</param>
-        /// <param name="_modifiedbyValue">Shows who last updated the
-        /// record.</param>
-        /// <param name="address1Line3">Type the third line of the primary
-        /// address.</param>
-        /// <param name="address1Addresstypecode">Select the primary address
-        /// type.</param>
-        /// <param name="donotbulkemail">Select whether the lead accepts bulk
-        /// email sent through marketing campaigns or quick campaigns. If Do
-        /// Not Allow is selected, the lead can be added to marketing lists,
-        /// but will be excluded from the email.</param>
-        /// <param name="statecode">Shows whether the lead is open, qualified,
-        /// or disqualified. Qualified and disqualified leads are read-only and
-        /// can't be edited unless they are reactivated.</param>
-        /// <param name="estimatedclosedate">Enter the expected close date for
-        /// the lead, so that the sales team can schedule timely follow-up
-        /// meetings to move the prospect to the next sales stage.</param>
-        /// <param name="address2Addresstypecode">Select the secondary address
-        /// type.</param>
-        /// <param name="leadsourcecode">Select the primary marketing source
-        /// that prompted the lead to contact you.</param>
-        /// <param name="salesstage">Select the sales stage of this lead to aid
-        /// the sales team in their efforts to convert this lead to an
-        /// opportunity.</param>
-        /// <param name="initialcommunication">Choose whether someone from the
-        /// sales team contacted this lead earlier.</param>
-        /// <param name="followemail">Information about whether to allow
-        /// following email activity like opens, attachment views and link
-        /// clicks for emails sent to the lead.</param>
-        /// <param name="estimatedamountBase">Shows the Est. Value field
-        /// converted to the system's default base currency. The calculation
-        /// uses the exchange rate specified in the Currencies area.</param>
-        /// <param name="budgetamount">Information about the budget amount of
-        /// the lead's company or organization.</param>
-        /// <param name="industrycode">Select the primary industry in which the
-        /// lead's business is focused, for use in marketing segmentation and
-        /// demographic analysis.</param>
-        /// <param name="telephone3">Type an alternate phone number for the
-        /// primary contact for the lead.</param>
-        /// <param name="address1Country">Type the country or region for the
-        /// primary address.</param>
-        /// <param name="middlename">Type the middle name or initial of the
-        /// primary contact for the lead to make sure the prospect is addressed
-        /// correctly.</param>
-        /// <param name="exchangerate">Shows the conversion rate of the
-        /// record's currency. The exchange rate is used to convert all money
-        /// fields in the record from the local currency to the system's
-        /// default currency.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="mobilephone">Type the mobile phone number for the
-        /// primary contact for the lead.</param>
-        /// <param name="fax">Type the fax number for the primary contact for
-        /// the lead.</param>
-        /// <param name="participatesinworkflow">Shows whether the lead
-        /// participates in workflow rules.</param>
-        /// <param name="createdon">Shows the date and time when the record was
-        /// created. The date and time are displayed in the time zone selected
-        /// in Microsoft Dynamics 365 options.</param>
-        /// <param name="yomilastname">Type the phonetic spelling of the lead's
-        /// last name, if the name is specified in Japanese, to make sure the
-        /// name is pronounced correctly in phone calls with the
-        /// prospect.</param>
-        /// <param name="_accountidValue">Unique identifier of the account with
-        /// which the lead is associated.</param>
-        /// <param name="sic">Type the Standard Industrial Classification (SIC)
-        /// code that indicates the lead's primary industry of business for use
-        /// in marketing segmentation and demographic analysis.</param>
-        /// <param name="entityimageid">For internal use only.</param>
-        /// <param name="address1Composite">Shows the complete primary
-        /// address.</param>
-        /// <param name="need">Choose how high the level of need is for the
-        /// lead's company.</param>
-        /// <param name="_owninguserValue">Unique identifier of the user who
-        /// owns the lead.</param>
-        /// <param name="address1Upszone">Type the UPS zone of the primary
-        /// address to make sure shipping charges are calculated correctly and
-        /// deliveries are made promptly, if shipped by UPS.</param>
-        /// <param name="purchaseprocess">Choose whether an individual or a
-        /// committee will be involved in the purchase process for the
-        /// lead.</param>
-        /// <param name="_createdonbehalfbyValue">Shows who created the record
-        /// on behalf of another user.</param>
-        /// <param name="address1Postalcode">Type the ZIP Code or postal code
-        /// for the primary address.</param>
-        /// <param name="_parentcontactidValue">Choose a contact to connect
-        /// this lead to, so that the relationship is visible in reports and
-        /// analytics.</param>
-        /// <param name="entityimage">Shows the default image for the
-        /// record.</param>
-        /// <param name="yomifirstname">Type the phonetic spelling of the
-        /// lead's first name, if the name is specified in Japanese, to make
-        /// sure the name is pronounced correctly in phone calls with the
-        /// prospect.</param>
-        /// <param name="address1Stateorprovince">Type the state or province of
-        /// the primary address.</param>
-        /// <param name="_owningteamValue">Unique identifier of the team who
-        /// owns the lead.</param>
-        /// <param name="timespentbymeonemailandmeetings">Total time spent for
-        /// emails (read and write) and meetings by me in relation to the lead
-        /// record.</param>
-        /// <param name="_customeridValue">Select the customer account or
-        /// contact to provide a quick link to additional customer details,
-        /// such as account information, activities, and opportunities.</param>
-        /// <param name="address1Postofficebox">Type the post office box number
-        /// of the primary address.</param>
-        /// <param name="donotfax">Select whether the lead allows
-        /// faxes.</param>
-        /// <param name="versionnumber">Version number of the lead.</param>
-        /// <param name="address2County">Type the county for the secondary
-        /// address.</param>
-        /// <param name="_owneridValue">Enter the user or team who is assigned
-        /// to manage the record. This field is updated every time the record
-        /// is assigned to a different user.</param>
-        /// <param name="_originatingcaseidValue">This attribute is used for
-        /// Sample Service Business Processes.</param>
-        /// <param name="_contactidValue">Unique identifier of the contact with
-        /// which the lead is associated.</param>
-        /// <param name="telephone2">Type the home phone number for the primary
-        /// contact for the lead.</param>
-        /// <param name="address2Line3">Type the third line of the secondary
-        /// address.</param>
-        /// <param name="address2Line1">Type the first line of the secondary
-        /// address.</param>
-        /// <param name="salutation">Type the salutation of the primary contact
-        /// for this lead to make sure the prospect is addressed correctly in
-        /// sales calls, email messages, and marketing campaigns.</param>
-        /// <param name="numberofemployees">Type the number of employees that
-        /// work at the company associated with the lead, for use in marketing
-        /// segmentation and demographic analysis.</param>
-        /// <param name="companyname">Type the name of the company associated
-        /// with the lead. This becomes the account name when the lead is
-        /// qualified and converted to a customer account.</param>
-        /// <param name="fullname">Combines and shows the lead's first and last
-        /// names so the full name can be displayed in views and
-        /// reports.</param>
-        /// <param name="_qualifyingopportunityidValue">Choose the opportunity
-        /// that the lead was qualified on and then converted to.</param>
-        /// <param name="_slaidValue">Choose the service level agreement (SLA)
-        /// that you want to apply to the Lead record.</param>
-        /// <param name="firstname">Type the first name of the primary contact
-        /// for the lead to make sure the prospect is addressed correctly in
-        /// sales calls, email, and marketing campaigns.</param>
-        /// <param name="address1Latitude">Type the latitude value for the
-        /// primary address for use in mapping and other applications.</param>
-        /// <param name="schedulefollowupQualify">Enter the date and time of
-        /// the qualifying follow-up meeting with the lead.</param>
-        /// <param name="address2Latitude">Type the latitude value for the
-        /// secondary address for use in mapping and other
-        /// applications.</param>
-        /// <param name="address1Line2">Type the second line of the primary
-        /// address.</param>
-        /// <param name="decisionmaker">Select whether your notes include
-        /// information about who makes the purchase decisions at the lead's
-        /// company.</param>
-        /// <param name="_masteridValue">Unique identifier of the master lead
-        /// for merge.</param>
-        /// <param name="address2Fax">Type the fax number associated with the
-        /// secondary address.</param>
-        /// <param name="address2Telephone1">Type the main phone number
-        /// associated with the secondary address.</param>
-        /// <param name="address2Shippingmethodcode">Select a shipping method
-        /// for deliveries sent to this address.</param>
-        /// <param name="address1Telephone3">Type a third phone number
-        /// associated with the primary address.</param>
-        /// <param name="purchasetimeframe">Choose how long the lead will
-        /// likely take to make the purchase, so the sales team will be
-        /// aware.</param>
-        /// <param name="preferredcontactmethodcode">Select the preferred
-        /// method of contact.</param>
-        /// <param name="address2Line2">Type the second line of the secondary
-        /// address.</param>
-        /// <param name="address2Upszone">Type the UPS zone of the secondary
-        /// address to make sure shipping charges are calculated correctly and
-        /// deliveries are made promptly, if shipped by UPS.</param>
-        /// <param name="websiteurl">Type the website URL for the company
-        /// associated with this lead.</param>
-        /// <param name="address2Postalcode">Type the ZIP Code or postal code
-        /// for the secondary address.</param>
-        /// <param name="address1Shippingmethodcode">Select a shipping method
-        /// for deliveries sent to this address.</param>
-        /// <param name="address2Name">Type a descriptive name for the
-        /// secondary address, such as Corporate Headquarters.</param>
-        /// <param name="leadqualitycode">Select a rating value to indicate the
-        /// lead's potential to become a customer.</param>
-        /// <param name="address2Addressid">Unique identifier for address
-        /// 2.</param>
-        /// <param name="pager">Type the pager number for the primary contact
-        /// for the lead.</param>
-        /// <param name="donotsendmm">Select whether the lead accepts marketing
-        /// materials, such as brochures or catalogs. Leads that opt out can be
-        /// excluded from marketing initiatives.</param>
-        /// <param name="emailaddress1">Type the primary email address for the
-        /// lead.</param>
-        /// <param name="stageid">Shows the ID of the stage.</param>
-        /// <param name="prioritycode">Select the priority so that preferred
-        /// customers or critical issues are handled quickly.</param>
-        /// <param name="_createdbyValue">Shows who created the record.</param>
-        /// <param name="address1Addressid">Unique identifier for address
-        /// 1.</param>
-        /// <param name="address2Telephone2">Type a second phone number
-        /// associated with the secondary address.</param>
-        /// <param name="traversedpath">For internal use only.</param>
-        /// <param name="_campaignidValue">Choose the campaign that the lead
-        /// was generated from to track the effectiveness of marketing
-        /// campaigns and identify communications received by the lead.</param>
-        /// <param name="address1Fax">Type the fax number associated with the
-        /// primary address.</param>
-        /// <param name="donotemail">Select whether the lead allows direct
-        /// email sent from Microsoft Dynamics 365.</param>
-        /// <param name="yomimiddlename">Type the phonetic spelling of the
-        /// lead's middle name, if the name is specified in Japanese, to make
-        /// sure the name is pronounced correctly in phone calls with the
-        /// prospect.</param>
-        /// <param name="jobtitle">Type the job title of the primary contact
-        /// for this lead to make sure the prospect is addressed correctly in
-        /// sales calls, email, and marketing campaigns.</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="salesstagecode">Select the sales process stage for the
-        /// lead to help determine the probability of the lead converting to an
-        /// opportunity.</param>
-        /// <param name="emailaddress2">Type the secondary email address for
-        /// the lead.</param>
-        /// <param name="emailaddress3">Type a third email address for the
-        /// lead.</param>
-        /// <param name="leadid">Unique identifier of the lead.</param>
-        /// <param name="lastonholdtime">Contains the date and time stamp of
-        /// the last on hold time.</param>
-        /// <param name="statuscode">Select the lead's status.</param>
-        /// <param name="_relatedobjectidValue">Related Campaign
-        /// Response.</param>
-        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
-        /// record on behalf of another user.</param>
-        /// <param name="address1Utcoffset">Select the time zone, or UTC
-        /// offset, for this address so that other people can reference it when
-        /// they contact someone at this address.</param>
-        /// <param name="_transactioncurrencyidValue">Choose the local currency
-        /// for the record to make sure budgets are reported in the correct
-        /// currency.</param>
-        /// <param name="qualificationcomments">Type comments about the
-        /// qualification or scoring of the lead.</param>
-        /// <param name="onholdtime">Shows how long, in minutes, that the
-        /// record was on hold.</param>
-        /// <param name="revenue">Type the annual revenue of the company
-        /// associated with the lead to provide an understanding of the
-        /// prospect's business.</param>
-        /// <param name="merged">Tells whether the lead has been merged with
-        /// another lead.</param>
-        /// <param name="donotphone">Select whether the lead allows phone
-        /// calls.</param>
-        /// <param name="address2Stateorprovince">Type the state or province of
-        /// the secondary address.</param>
-        /// <param name="evaluatefit">Select whether the fit between the lead's
-        /// requirements and your offerings was evaluated.</param>
-        /// <param name="estimatedamount">Type the estimated revenue value that
-        /// this lead will generate to assist in sales forecasting and
-        /// planning.</param>
-        /// <param name="_slainvokedidValue">Last SLA that was applied to this
-        /// case. This field is for internal use only.</param>
-        /// <param name="address1Longitude">Type the longitude value for the
-        /// primary address for use in mapping and other applications.</param>
-        /// <param name="yomifullname">Combines and shows the lead's Yomi first
-        /// and last names so the full phonetic name can be displayed in views
-        /// and reports.</param>
-        /// <param name="donotpostalmail">Select whether the lead allows direct
-        /// mail.</param>
-        /// <param name="address2Utcoffset">Select the time zone, or UTC
-        /// offset, for this address so that other people can reference it when
-        /// they contact someone at this address.</param>
-        /// <param name="address2Composite">Shows the complete secondary
-        /// address.</param>
-        /// <param name="schedulefollowupProspect">Enter the date and time of
-        /// the prospecting follow-up meeting with the lead.</param>
-        /// <param name="yomicompanyname">Type the phonetic spelling of the
-        /// lead's company name, if the name is specified in Japanese, to make
-        /// sure the name is pronounced correctly in phone calls with the
-        /// prospect.</param>
-        /// <param name="telephone1">Type the work phone number for the primary
-        /// contact for the lead.</param>
-        /// <param name="address2Telephone3">Type a third phone number
-        /// associated with the secondary address.</param>
-        /// <param name="_parentaccountidValue">Choose an account to connect
-        /// this lead to, so that the relationship is visible in reports and
-        /// analytics.</param>
-        /// <param name="address2Longitude">Type the longitude value for the
-        /// secondary address for use in mapping and other
-        /// applications.</param>
-        /// <param name="_owningbusinessunitValue">Unique identifier of the
-        /// business unit that owns the lead.</param>
-        /// <param name="address1Line1">Type the first line of the primary
-        /// address.</param>
-        /// <param name="confirminterest">Select whether the lead confirmed
-        /// interest in your offerings. This helps in determining the lead
-        /// quality.</param>
-        /// <param name="importsequencenumber">Unique identifier of the data
-        /// import or data migration that created this record.</param>
-        /// <param name="revenueBase">Shows the Annual Revenue field converted
-        /// to the system's default base currency. The calculation uses the
-        /// exchange rate specified in the Currencies area.</param>
-        public MicrosoftDynamicsCRMlead(string address1Name = default(string), string subject = default(string), string address1County = default(string), string address1Telephone2 = default(string), string lastname = default(string), string description = default(string), string address1City = default(string), string address1Telephone1 = default(string), int? utcconversiontimezonecode = default(int?), string address2Country = default(string), string processid = default(string), string address2Postofficebox = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string address2City = default(string), decimal? budgetamountBase = default(decimal?), decimal? estimatedvalue = default(decimal?), System.DateTimeOffset? lastusedincampaign = default(System.DateTimeOffset?), int? budgetstatus = default(int?), string _modifiedbyValue = default(string), string address1Line3 = default(string), int? address1Addresstypecode = default(int?), bool? donotbulkemail = default(bool?), int? statecode = default(int?), System.DateTimeOffset? estimatedclosedate = default(System.DateTimeOffset?), int? address2Addresstypecode = default(int?), int? leadsourcecode = default(int?), int? salesstage = default(int?), int? initialcommunication = default(int?), bool? followemail = default(bool?), decimal? estimatedamountBase = default(decimal?), decimal? budgetamount = default(decimal?), int? industrycode = default(int?), string telephone3 = default(string), string address1Country = default(string), string middlename = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string mobilephone = default(string), string fax = default(string), bool? participatesinworkflow = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string yomilastname = default(string), string _accountidValue = default(string), string sic = default(string), string entityimageid = default(string), string address1Composite = default(string), int? need = default(int?), string _owninguserValue = default(string), string address1Upszone = default(string), int? purchaseprocess = default(int?), string _createdonbehalfbyValue = default(string), string address1Postalcode = default(string), string _parentcontactidValue = default(string), byte[] entityimage = default(byte[]), string yomifirstname = default(string), string address1Stateorprovince = default(string), string _owningteamValue = default(string), string timespentbymeonemailandmeetings = default(string), string _customeridValue = default(string), string address1Postofficebox = default(string), string entityimageUrl = default(string), bool? donotfax = default(bool?), string versionnumber = default(string), string address2County = default(string), string _owneridValue = default(string), string _originatingcaseidValue = default(string), string _contactidValue = default(string), string telephone2 = default(string), string address2Line3 = default(string), string address2Line1 = default(string), string salutation = default(string), int? numberofemployees = default(int?), string companyname = default(string), string fullname = default(string), string _qualifyingopportunityidValue = default(string), string _slaidValue = default(string), string firstname = default(string), decimal? address1Latitude = default(decimal?), System.DateTimeOffset? schedulefollowupQualify = default(System.DateTimeOffset?), decimal? address2Latitude = default(decimal?), string address1Line2 = default(string), bool? decisionmaker = default(bool?), string _masteridValue = default(string), string address2Fax = default(string), string address2Telephone1 = default(string), int? address2Shippingmethodcode = default(int?), string address1Telephone3 = default(string), int? purchasetimeframe = default(int?), int? preferredcontactmethodcode = default(int?), string address2Line2 = default(string), string address2Upszone = default(string), string websiteurl = default(string), string address2Postalcode = default(string), int? address1Shippingmethodcode = default(int?), string address2Name = default(string), int? leadqualitycode = default(int?), string address2Addressid = default(string), string pager = default(string), bool? donotsendmm = default(bool?), string emailaddress1 = default(string), string stageid = default(string), int? prioritycode = default(int?), string _createdbyValue = default(string), string address1Addressid = default(string), string address2Telephone2 = default(string), long? entityimageTimestamp = default(long?), string traversedpath = default(string), string _campaignidValue = default(string), string address1Fax = default(string), bool? donotemail = default(bool?), string yomimiddlename = default(string), string jobtitle = default(string), int? timezoneruleversionnumber = default(int?), int? salesstagecode = default(int?), string emailaddress2 = default(string), string emailaddress3 = default(string), string leadid = default(string), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), int? statuscode = default(int?), string _relatedobjectidValue = default(string), string _modifiedonbehalfbyValue = default(string), int? address1Utcoffset = default(int?), string _transactioncurrencyidValue = default(string), string qualificationcomments = default(string), int? onholdtime = default(int?), decimal? revenue = default(decimal?), bool? merged = default(bool?), bool? donotphone = default(bool?), string address2Stateorprovince = default(string), bool? evaluatefit = default(bool?), decimal? estimatedamount = default(decimal?), string _slainvokedidValue = default(string), decimal? address1Longitude = default(decimal?), string yomifullname = default(string), bool? donotpostalmail = default(bool?), int? address2Utcoffset = default(int?), string address2Composite = default(string), System.DateTimeOffset? schedulefollowupProspect = default(System.DateTimeOffset?), string yomicompanyname = default(string), string telephone1 = default(string), string address2Telephone3 = default(string), string _parentaccountidValue = default(string), decimal? address2Longitude = default(decimal?), string _owningbusinessunitValue = default(string), string address1Line1 = default(string), bool? confirminterest = default(bool?), int? importsequencenumber = default(int?), decimal? revenueBase = default(decimal?), IList<MicrosoftDynamicsCRMcompetitor> leadcompetitorsAssociation = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMaccount> accountleadsAssociation = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMlist> listleadAssociation = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMproduct> leadproductAssociation = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMcontact> contactleadsAssociation = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMconnection> leadConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMincident originatingcaseid = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMphonecall> leadPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMduplicaterecord> leadDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMopportunity> opportunityOriginatingLead = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMpostfollow> leadPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostregarding> leadPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMemail> leadEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> leadLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMemail> leadEmailEmailSender = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMtask> leadTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMactioncard> leadActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMlead masterid = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMlead> leadMasterLead = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMasyncoperation> leadAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> leadSharepointDocumentLocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> leadBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMfax> leadFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMcontact> contactOriginatingLead = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivitypointer> leadActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMleadaddress> leadAddresses = default(IList<MicrosoftDynamicsCRMleadaddress>), IList<MicrosoftDynamicsCRMaccount> accountOriginatingLead = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> leadRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), MicrosoftDynamicsCRMsla slaLeadSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMsyncerror> leadSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMbulkoperationlog> createdLeadBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), IList<MicrosoftDynamicsCRMsocialactivity> leadSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMappointment> leadAppointments = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMcampaignresponse relatedobjectid = default(MicrosoftDynamicsCRMcampaignresponse), IList<MicrosoftDynamicsCRMactivityparty> leadActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMannotation> leadAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMcontact parentcontactid = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMopportunity qualifyingopportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMduplicaterecord> leadDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceLead = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMconnection> leadConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMcampaign campaignid = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMaccount parentaccountid = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsla slainvokedidLeadSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMletter> leadLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMserviceappointment> leadServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMbulkoperationlog> sourceLeadBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> leadAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>))
+        public MicrosoftDynamicsCRMlead(decimal? address1Latitude = default(decimal?), System.DateTimeOffset? lastusedincampaign = default(System.DateTimeOffset?), string description = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string address1Fax = default(string), string sic = default(string), int? salesstage = default(int?), int? address1Shippingmethodcode = default(int?), decimal? address2Latitude = default(decimal?), bool? merged = default(bool?), string firstname = default(string), string _createdonbehalfbyValue = default(string), string timespentbymeonemailandmeetings = default(string), decimal? revenue = default(decimal?), int? salesstagecode = default(int?), System.DateTimeOffset? schedulefollowupQualify = default(System.DateTimeOffset?), string address1Upszone = default(string), string address2Addressid = default(string), string _slainvokedidValue = default(string), string address1Telephone2 = default(string), bool? evaluatefit = default(bool?), string address2Country = default(string), string address1Telephone1 = default(string), int? budgetstatus = default(int?), string address2Name = default(string), string _accountidValue = default(string), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string address2Telephone1 = default(string), int? address2Utcoffset = default(int?), int? address1Utcoffset = default(int?), int? onholdtime = default(int?), string _owneridValue = default(string), string address2City = default(string), string _owningbusinessunitValue = default(string), string _slaidValue = default(string), string jobtitle = default(string), string emailaddress2 = default(string), string _masteridValue = default(string), int? prioritycode = default(int?), string _parentcontactidValue = default(string), bool? participatesinworkflow = default(bool?), decimal? estimatedamount = default(decimal?), string address1Stateorprovince = default(string), string address2Upszone = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? schedulefollowupProspect = default(System.DateTimeOffset?), string address2County = default(string), string address2Stateorprovince = default(string), int? address2Addresstypecode = default(int?), string lastname = default(string), string address1County = default(string), string _parentaccountidValue = default(string), string _transactioncurrencyidValue = default(string), int? utcconversiontimezonecode = default(int?), bool? donotemail = default(bool?), string telephone3 = default(string), string address1City = default(string), bool? followemail = default(bool?), decimal? budgetamountBase = default(decimal?), int? numberofemployees = default(int?), bool? donotfax = default(bool?), int? statecode = default(int?), string _originatingcaseidValue = default(string), string address1Addressid = default(string), bool? donotphone = default(bool?), int? purchaseprocess = default(int?), string _createdbyValue = default(string), string _owningteamValue = default(string), string address2Line3 = default(string), string emailaddress3 = default(string), string companyname = default(string), int? address1Addresstypecode = default(int?), string _relatedobjectidValue = default(string), bool? decisionmaker = default(bool?), string pager = default(string), string entityimageUrl = default(string), string address1Line2 = default(string), string yomifullname = default(string), string address2Composite = default(string), string mobilephone = default(string), string address1Postofficebox = default(string), string address1Line1 = default(string), int? initialcommunication = default(int?), string processid = default(string), string address1Postalcode = default(string), string qualificationcomments = default(string), string _campaignidValue = default(string), string address1Name = default(string), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? confirminterest = default(bool?), decimal? revenueBase = default(decimal?), string middlename = default(string), int? leadsourcecode = default(int?), string address2Telephone3 = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), byte[] entityimage = default(byte[]), bool? donotbulkemail = default(bool?), string address1Line3 = default(string), string yomicompanyname = default(string), decimal? exchangerate = default(decimal?), string address1Country = default(string), string _owninguserValue = default(string), int? leadqualitycode = default(int?), int? importsequencenumber = default(int?), bool? donotsendmm = default(bool?), decimal? address1Longitude = default(decimal?), string entityimageid = default(string), string websiteurl = default(string), string leadid = default(string), int? industrycode = default(int?), string address2Postofficebox = default(string), int? address2Shippingmethodcode = default(int?), string address2Line1 = default(string), string traversedpath = default(string), string _qualifyingopportunityidValue = default(string), decimal? address2Longitude = default(decimal?), int? purchasetimeframe = default(int?), string _modifiedonbehalfbyValue = default(string), string address2Telephone2 = default(string), string fax = default(string), string yomimiddlename = default(string), bool? msdynGdproptout = default(bool?), int? timezoneruleversionnumber = default(int?), string address2Fax = default(string), System.DateTimeOffset? estimatedclosedate = default(System.DateTimeOffset?), string address2Line2 = default(string), string salutation = default(string), string versionnumber = default(string), string fullname = default(string), string subject = default(string), string _customeridValue = default(string), string yomilastname = default(string), string yomifirstname = default(string), int? preferredcontactmethodcode = default(int?), decimal? estimatedamountBase = default(decimal?), string _contactidValue = default(string), string address1Composite = default(string), string address1Telephone3 = default(string), decimal? estimatedvalue = default(decimal?), string stageid = default(string), decimal? budgetamount = default(decimal?), bool? donotpostalmail = default(bool?), string emailaddress1 = default(string), string address2Postalcode = default(string), string telephone1 = default(string), long? entityimageTimestamp = default(long?), string telephone2 = default(string), int? need = default(int?), IList<MicrosoftDynamicsCRMcompetitor> leadcompetitorsAssociation = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMaccount> accountleadsAssociation = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMlist> listleadAssociation = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMproduct> leadproductAssociation = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMcontact> contactleadsAssociation = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> leadAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMteam> leadTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMbulkoperation> leadBulkOperations = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcampaignresponse> leadCampaignResponses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMincidentresolution> leadIncidentResolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMopportunityclose> leadOpportunityCloses = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> leadOrderCloses = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> leadQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMconnection> leadConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMincident originatingcaseid = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMphonecall> leadPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMduplicaterecord> leadDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMopportunity> opportunityOriginatingLead = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMprocesssession> leadProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMpostfollow> leadPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostregarding> leadPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMemail> leadEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> leadLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMemail> leadEmailEmailSender = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMtask> leadTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMactioncard> leadActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMlead masterid = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMlead> leadMasterLead = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMasyncoperation> leadAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> leadSharepointDocumentLocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> leadBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMfax> leadFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMcontact> contactOriginatingLead = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> leadMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMactivitypointer> leadActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMleadaddress> leadAddresses = default(IList<MicrosoftDynamicsCRMleadaddress>), IList<MicrosoftDynamicsCRMaccount> accountOriginatingLead = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> leadRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), MicrosoftDynamicsCRMsla slaLeadSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMsyncerror> leadSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMbulkoperationlog> createdLeadBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), IList<MicrosoftDynamicsCRMsocialactivity> leadSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMappointment> leadAppointments = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMcampaignresponse relatedobjectid = default(MicrosoftDynamicsCRMcampaignresponse), IList<MicrosoftDynamicsCRMactivityparty> leadActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> leadPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> leadAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMcontact parentcontactid = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMopportunity qualifyingopportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMduplicaterecord> leadDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceLead = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMconnection> leadConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMcampaign campaignid = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMaccount parentaccountid = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsla slainvokedidLeadSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMletter> leadLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMserviceappointment> leadServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMbulkoperationlog> sourceLeadBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>))
         {
-            Address1Name = address1Name;
-            Subject = subject;
-            Address1County = address1County;
-            Address1Telephone2 = address1Telephone2;
-            Lastname = lastname;
-            Description = description;
-            Address1City = address1City;
-            Address1Telephone1 = address1Telephone1;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Address2Country = address2Country;
-            Processid = processid;
-            Address2Postofficebox = address2Postofficebox;
-            Modifiedon = modifiedon;
-            Address2City = address2City;
-            BudgetamountBase = budgetamountBase;
-            Estimatedvalue = estimatedvalue;
-            Lastusedincampaign = lastusedincampaign;
-            Budgetstatus = budgetstatus;
-            this._modifiedbyValue = _modifiedbyValue;
-            Address1Line3 = address1Line3;
-            Address1Addresstypecode = address1Addresstypecode;
-            Donotbulkemail = donotbulkemail;
-            Statecode = statecode;
-            Estimatedclosedate = estimatedclosedate;
-            Address2Addresstypecode = address2Addresstypecode;
-            Leadsourcecode = leadsourcecode;
-            Salesstage = salesstage;
-            Initialcommunication = initialcommunication;
-            Followemail = followemail;
-            EstimatedamountBase = estimatedamountBase;
-            Budgetamount = budgetamount;
-            Industrycode = industrycode;
-            Telephone3 = telephone3;
-            Address1Country = address1Country;
-            Middlename = middlename;
-            Exchangerate = exchangerate;
-            Overriddencreatedon = overriddencreatedon;
-            Mobilephone = mobilephone;
-            Fax = fax;
-            Participatesinworkflow = participatesinworkflow;
-            Createdon = createdon;
-            Yomilastname = yomilastname;
-            this._accountidValue = _accountidValue;
-            Sic = sic;
-            Entityimageid = entityimageid;
-            Address1Composite = address1Composite;
-            Need = need;
-            this._owninguserValue = _owninguserValue;
-            Address1Upszone = address1Upszone;
-            Purchaseprocess = purchaseprocess;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Address1Postalcode = address1Postalcode;
-            this._parentcontactidValue = _parentcontactidValue;
-            Entityimage = entityimage;
-            Yomifirstname = yomifirstname;
-            Address1Stateorprovince = address1Stateorprovince;
-            this._owningteamValue = _owningteamValue;
-            Timespentbymeonemailandmeetings = timespentbymeonemailandmeetings;
-            this._customeridValue = _customeridValue;
-            Address1Postofficebox = address1Postofficebox;
-            EntityimageUrl = entityimageUrl;
-            Donotfax = donotfax;
-            Versionnumber = versionnumber;
-            Address2County = address2County;
-            this._owneridValue = _owneridValue;
-            this._originatingcaseidValue = _originatingcaseidValue;
-            this._contactidValue = _contactidValue;
-            Telephone2 = telephone2;
-            Address2Line3 = address2Line3;
-            Address2Line1 = address2Line1;
-            Salutation = salutation;
-            Numberofemployees = numberofemployees;
-            Companyname = companyname;
-            Fullname = fullname;
-            this._qualifyingopportunityidValue = _qualifyingopportunityidValue;
-            this._slaidValue = _slaidValue;
-            Firstname = firstname;
             Address1Latitude = address1Latitude;
-            SchedulefollowupQualify = schedulefollowupQualify;
-            Address2Latitude = address2Latitude;
-            Address1Line2 = address1Line2;
-            Decisionmaker = decisionmaker;
-            this._masteridValue = _masteridValue;
-            Address2Fax = address2Fax;
-            Address2Telephone1 = address2Telephone1;
-            Address2Shippingmethodcode = address2Shippingmethodcode;
-            Address1Telephone3 = address1Telephone3;
-            Purchasetimeframe = purchasetimeframe;
-            Preferredcontactmethodcode = preferredcontactmethodcode;
-            Address2Line2 = address2Line2;
-            Address2Upszone = address2Upszone;
-            Websiteurl = websiteurl;
-            Address2Postalcode = address2Postalcode;
-            Address1Shippingmethodcode = address1Shippingmethodcode;
-            Address2Name = address2Name;
-            Leadqualitycode = leadqualitycode;
-            Address2Addressid = address2Addressid;
-            Pager = pager;
-            Donotsendmm = donotsendmm;
-            Emailaddress1 = emailaddress1;
-            Stageid = stageid;
-            Prioritycode = prioritycode;
-            this._createdbyValue = _createdbyValue;
-            Address1Addressid = address1Addressid;
-            Address2Telephone2 = address2Telephone2;
-            EntityimageTimestamp = entityimageTimestamp;
-            Traversedpath = traversedpath;
-            this._campaignidValue = _campaignidValue;
+            Lastusedincampaign = lastusedincampaign;
+            Description = description;
+            Createdon = createdon;
             Address1Fax = address1Fax;
-            Donotemail = donotemail;
-            Yomimiddlename = yomimiddlename;
-            Jobtitle = jobtitle;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Salesstagecode = salesstagecode;
-            Emailaddress2 = emailaddress2;
-            Emailaddress3 = emailaddress3;
-            Leadid = leadid;
-            Lastonholdtime = lastonholdtime;
-            Statuscode = statuscode;
-            this._relatedobjectidValue = _relatedobjectidValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Address1Utcoffset = address1Utcoffset;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Qualificationcomments = qualificationcomments;
-            Onholdtime = onholdtime;
-            Revenue = revenue;
+            Sic = sic;
+            Salesstage = salesstage;
+            Address1Shippingmethodcode = address1Shippingmethodcode;
+            Address2Latitude = address2Latitude;
             Merged = merged;
-            Donotphone = donotphone;
-            Address2Stateorprovince = address2Stateorprovince;
-            Evaluatefit = evaluatefit;
-            Estimatedamount = estimatedamount;
+            Firstname = firstname;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Timespentbymeonemailandmeetings = timespentbymeonemailandmeetings;
+            Revenue = revenue;
+            Salesstagecode = salesstagecode;
+            SchedulefollowupQualify = schedulefollowupQualify;
+            Address1Upszone = address1Upszone;
+            Address2Addressid = address2Addressid;
             this._slainvokedidValue = _slainvokedidValue;
-            Address1Longitude = address1Longitude;
-            Yomifullname = yomifullname;
-            Donotpostalmail = donotpostalmail;
+            Address1Telephone2 = address1Telephone2;
+            Evaluatefit = evaluatefit;
+            Address2Country = address2Country;
+            Address1Telephone1 = address1Telephone1;
+            Budgetstatus = budgetstatus;
+            Address2Name = address2Name;
+            this._accountidValue = _accountidValue;
+            Lastonholdtime = lastonholdtime;
+            Address2Telephone1 = address2Telephone1;
             Address2Utcoffset = address2Utcoffset;
-            Address2Composite = address2Composite;
-            SchedulefollowupProspect = schedulefollowupProspect;
-            Yomicompanyname = yomicompanyname;
-            Telephone1 = telephone1;
-            Address2Telephone3 = address2Telephone3;
-            this._parentaccountidValue = _parentaccountidValue;
-            Address2Longitude = address2Longitude;
+            Address1Utcoffset = address1Utcoffset;
+            Onholdtime = onholdtime;
+            this._owneridValue = _owneridValue;
+            Address2City = address2City;
             this._owningbusinessunitValue = _owningbusinessunitValue;
+            this._slaidValue = _slaidValue;
+            Jobtitle = jobtitle;
+            Emailaddress2 = emailaddress2;
+            this._masteridValue = _masteridValue;
+            Prioritycode = prioritycode;
+            this._parentcontactidValue = _parentcontactidValue;
+            Participatesinworkflow = participatesinworkflow;
+            Estimatedamount = estimatedamount;
+            Address1Stateorprovince = address1Stateorprovince;
+            Address2Upszone = address2Upszone;
+            this._modifiedbyValue = _modifiedbyValue;
+            SchedulefollowupProspect = schedulefollowupProspect;
+            Address2County = address2County;
+            Address2Stateorprovince = address2Stateorprovince;
+            Address2Addresstypecode = address2Addresstypecode;
+            Lastname = lastname;
+            Address1County = address1County;
+            this._parentaccountidValue = _parentaccountidValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Donotemail = donotemail;
+            Telephone3 = telephone3;
+            Address1City = address1City;
+            Followemail = followemail;
+            BudgetamountBase = budgetamountBase;
+            Numberofemployees = numberofemployees;
+            Donotfax = donotfax;
+            Statecode = statecode;
+            this._originatingcaseidValue = _originatingcaseidValue;
+            Address1Addressid = address1Addressid;
+            Donotphone = donotphone;
+            Purchaseprocess = purchaseprocess;
+            this._createdbyValue = _createdbyValue;
+            this._owningteamValue = _owningteamValue;
+            Address2Line3 = address2Line3;
+            Emailaddress3 = emailaddress3;
+            Companyname = companyname;
+            Address1Addresstypecode = address1Addresstypecode;
+            this._relatedobjectidValue = _relatedobjectidValue;
+            Decisionmaker = decisionmaker;
+            Pager = pager;
+            EntityimageUrl = entityimageUrl;
+            Address1Line2 = address1Line2;
+            Yomifullname = yomifullname;
+            Address2Composite = address2Composite;
+            Mobilephone = mobilephone;
+            Address1Postofficebox = address1Postofficebox;
             Address1Line1 = address1Line1;
+            Initialcommunication = initialcommunication;
+            Processid = processid;
+            Address1Postalcode = address1Postalcode;
+            Qualificationcomments = qualificationcomments;
+            this._campaignidValue = _campaignidValue;
+            Address1Name = address1Name;
+            Statuscode = statuscode;
+            Overriddencreatedon = overriddencreatedon;
             Confirminterest = confirminterest;
-            Importsequencenumber = importsequencenumber;
             RevenueBase = revenueBase;
+            Middlename = middlename;
+            Leadsourcecode = leadsourcecode;
+            Address2Telephone3 = address2Telephone3;
+            Modifiedon = modifiedon;
+            Entityimage = entityimage;
+            Donotbulkemail = donotbulkemail;
+            Address1Line3 = address1Line3;
+            Yomicompanyname = yomicompanyname;
+            Exchangerate = exchangerate;
+            Address1Country = address1Country;
+            this._owninguserValue = _owninguserValue;
+            Leadqualitycode = leadqualitycode;
+            Importsequencenumber = importsequencenumber;
+            Donotsendmm = donotsendmm;
+            Address1Longitude = address1Longitude;
+            Entityimageid = entityimageid;
+            Websiteurl = websiteurl;
+            Leadid = leadid;
+            Industrycode = industrycode;
+            Address2Postofficebox = address2Postofficebox;
+            Address2Shippingmethodcode = address2Shippingmethodcode;
+            Address2Line1 = address2Line1;
+            Traversedpath = traversedpath;
+            this._qualifyingopportunityidValue = _qualifyingopportunityidValue;
+            Address2Longitude = address2Longitude;
+            Purchasetimeframe = purchasetimeframe;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Address2Telephone2 = address2Telephone2;
+            Fax = fax;
+            Yomimiddlename = yomimiddlename;
+            MsdynGdproptout = msdynGdproptout;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Address2Fax = address2Fax;
+            Estimatedclosedate = estimatedclosedate;
+            Address2Line2 = address2Line2;
+            Salutation = salutation;
+            Versionnumber = versionnumber;
+            Fullname = fullname;
+            Subject = subject;
+            this._customeridValue = _customeridValue;
+            Yomilastname = yomilastname;
+            Yomifirstname = yomifirstname;
+            Preferredcontactmethodcode = preferredcontactmethodcode;
+            EstimatedamountBase = estimatedamountBase;
+            this._contactidValue = _contactidValue;
+            Address1Composite = address1Composite;
+            Address1Telephone3 = address1Telephone3;
+            Estimatedvalue = estimatedvalue;
+            Stageid = stageid;
+            Budgetamount = budgetamount;
+            Donotpostalmail = donotpostalmail;
+            Emailaddress1 = emailaddress1;
+            Address2Postalcode = address2Postalcode;
+            Telephone1 = telephone1;
+            EntityimageTimestamp = entityimageTimestamp;
+            Telephone2 = telephone2;
+            Need = need;
             LeadcompetitorsAssociation = leadcompetitorsAssociation;
             AccountleadsAssociation = accountleadsAssociation;
             ListleadAssociation = listleadAssociation;
             LeadproductAssociation = leadproductAssociation;
             ContactleadsAssociation = contactleadsAssociation;
+            LeadAbsScheduledprocessexecutions = leadAbsScheduledprocessexecutions;
+            LeadTeams = leadTeams;
+            LeadBulkOperations = leadBulkOperations;
+            LeadCampaignResponses = leadCampaignResponses;
+            LeadIncidentResolutions = leadIncidentResolutions;
+            LeadOpportunityCloses = leadOpportunityCloses;
+            LeadOrderCloses = leadOrderCloses;
+            LeadQuoteCloses = leadQuoteCloses;
             LeadConnections2 = leadConnections2;
             Originatingcaseid = originatingcaseid;
             LeadPhonecalls = leadPhonecalls;
@@ -531,6 +201,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             CustomeridAccount = customeridAccount;
             Modifiedonbehalfby = modifiedonbehalfby;
             OpportunityOriginatingLead = opportunityOriginatingLead;
+            LeadProcessSessions = leadProcessSessions;
             LeadPostFollows = leadPostFollows;
             LeadPostRegardings = leadPostRegardings;
             LeadEmails = leadEmails;
@@ -550,6 +221,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             ContactOriginatingLead = contactOriginatingLead;
             Owninguser = owninguser;
             Modifiedby = modifiedby;
+            LeadMailboxTrackingFolder = leadMailboxTrackingFolder;
             LeadActivityPointers = leadActivityPointers;
             LeadAddresses = leadAddresses;
             AccountOriginatingLead = accountOriginatingLead;
@@ -562,6 +234,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             LeadAppointments = leadAppointments;
             Relatedobjectid = relatedobjectid;
             LeadActivityParties = leadActivityParties;
+            LeadPrincipalobjectattributeaccess = leadPrincipalobjectattributeaccess;
             LeadAnnotation = leadAnnotation;
             Parentcontactid = parentcontactid;
             Transactioncurrencyid = transactioncurrencyid;
@@ -577,7 +250,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             LeadLetters = leadLetters;
             LeadServiceAppointments = leadServiceAppointments;
             SourceLeadBulkOperationLogs = sourceLeadBulkOperationLogs;
-            LeadAbsScheduledprocessexecutions = leadAbsScheduledprocessexecutions;
             CustomInit();
         }
 
@@ -587,426 +259,379 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets type a descriptive name for the primary address, such
-        /// as Corporate Headquarters.
         /// </summary>
-        [JsonProperty(PropertyName = "address1_name")]
-        public string Address1Name { get; set; }
+        [JsonProperty(PropertyName = "address1_latitude")]
+        public decimal? Address1Latitude { get; set; }
 
         /// <summary>
-        /// Gets or sets type a subject or descriptive name, such as the
-        /// expected order, company name, or marketing source list, to identify
-        /// the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "subject")]
-        public string Subject { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the county for the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_county")]
-        public string Address1County { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a second phone number associated with the primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_telephone2")]
-        public string Address1Telephone2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the last name of the primary contact for the lead
-        /// to make sure the prospect is addressed correctly in sales calls,
-        /// email, and marketing campaigns.
-        /// </summary>
-        [JsonProperty(PropertyName = "lastname")]
-        public string Lastname { get; set; }
-
-        /// <summary>
-        /// Gets or sets type additional information to describe the lead, such
-        /// as an excerpt from the company's website.
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the city for the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_city")]
-        public string Address1City { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the main phone number associated with the primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_telephone1")]
-        public string Address1Telephone1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the country or region for the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_country")]
-        public string Address2Country { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the ID of the process.
-        /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the post office box number of the secondary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_postofficebox")]
-        public string Address2Postofficebox { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time when the record was last
-        /// updated. The date and time are displayed in the time zone selected
-        /// in Microsoft Dynamics 365 options.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the city for the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_city")]
-        public string Address2City { get; set; }
-
-        /// <summary>
-        /// Gets or sets base currency equivalent of the estimated budget of
-        /// the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "budgetamount_base")]
-        public decimal? BudgetamountBase { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a numeric value of the lead's estimated value,
-        /// such as a product quantity, if no revenue amount can be specified
-        /// in the Est. Value field. This can be used for sales forecasting and
-        /// planning.
-        /// </summary>
-        [JsonProperty(PropertyName = "estimatedvalue")]
-        public decimal? Estimatedvalue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date when the lead was last included in a
-        /// marketing campaign or quick campaign.
         /// </summary>
         [JsonProperty(PropertyName = "lastusedincampaign")]
         public System.DateTimeOffset? Lastusedincampaign { get; set; }
 
         /// <summary>
-        /// Gets or sets information about the budget status of the lead's
-        /// company or organization.
         /// </summary>
-        [JsonProperty(PropertyName = "budgetstatus")]
-        public int? Budgetstatus { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets shows who last updated the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the third line of the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_line3")]
-        public string Address1Line3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the primary address type.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_addresstypecode")]
-        public int? Address1Addresstypecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the lead accepts bulk email sent
-        /// through marketing campaigns or quick campaigns. If Do Not Allow is
-        /// selected, the lead can be added to marketing lists, but will be
-        /// excluded from the email.
-        /// </summary>
-        [JsonProperty(PropertyName = "donotbulkemail")]
-        public bool? Donotbulkemail { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows whether the lead is open, qualified, or
-        /// disqualified. Qualified and disqualified leads are read-only and
-        /// can't be edited unless they are reactivated.
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets enter the expected close date for the lead, so that
-        /// the sales team can schedule timely follow-up meetings to move the
-        /// prospect to the next sales stage.
-        /// </summary>
-        [JsonProperty(PropertyName = "estimatedclosedate")]
-        public System.DateTimeOffset? Estimatedclosedate { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the secondary address type.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_addresstypecode")]
-        public int? Address2Addresstypecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the primary marketing source that prompted the
-        /// lead to contact you.
-        /// </summary>
-        [JsonProperty(PropertyName = "leadsourcecode")]
-        public int? Leadsourcecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the sales stage of this lead to aid the sales
-        /// team in their efforts to convert this lead to an opportunity.
-        /// </summary>
-        [JsonProperty(PropertyName = "salesstage")]
-        public int? Salesstage { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose whether someone from the sales team contacted
-        /// this lead earlier.
-        /// </summary>
-        [JsonProperty(PropertyName = "initialcommunication")]
-        public int? Initialcommunication { get; set; }
-
-        /// <summary>
-        /// Gets or sets information about whether to allow following email
-        /// activity like opens, attachment views and link clicks for emails
-        /// sent to the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "followemail")]
-        public bool? Followemail { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the Est. Value field converted to the system's
-        /// default base currency. The calculation uses the exchange rate
-        /// specified in the Currencies area.
-        /// </summary>
-        [JsonProperty(PropertyName = "estimatedamount_base")]
-        public decimal? EstimatedamountBase { get; set; }
-
-        /// <summary>
-        /// Gets or sets information about the budget amount of the lead's
-        /// company or organization.
-        /// </summary>
-        [JsonProperty(PropertyName = "budgetamount")]
-        public decimal? Budgetamount { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the primary industry in which the lead's
-        /// business is focused, for use in marketing segmentation and
-        /// demographic analysis.
-        /// </summary>
-        [JsonProperty(PropertyName = "industrycode")]
-        public int? Industrycode { get; set; }
-
-        /// <summary>
-        /// Gets or sets type an alternate phone number for the primary contact
-        /// for the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "telephone3")]
-        public string Telephone3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the country or region for the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_country")]
-        public string Address1Country { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the middle name or initial of the primary contact
-        /// for the lead to make sure the prospect is addressed correctly.
-        /// </summary>
-        [JsonProperty(PropertyName = "middlename")]
-        public string Middlename { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the conversion rate of the record's currency.
-        /// The exchange rate is used to convert all money fields in the record
-        /// from the local currency to the system's default currency.
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the mobile phone number for the primary contact
-        /// for the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "mobilephone")]
-        public string Mobilephone { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the fax number for the primary contact for the
-        /// lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "fax")]
-        public string Fax { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows whether the lead participates in workflow rules.
-        /// </summary>
-        [JsonProperty(PropertyName = "participatesinworkflow")]
-        public bool? Participatesinworkflow { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the date and time when the record was created.
-        /// The date and time are displayed in the time zone selected in
-        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
-        /// Gets or sets type the phonetic spelling of the lead's last name, if
-        /// the name is specified in Japanese, to make sure the name is
-        /// pronounced correctly in phone calls with the prospect.
         /// </summary>
-        [JsonProperty(PropertyName = "yomilastname")]
-        public string Yomilastname { get; set; }
+        [JsonProperty(PropertyName = "address1_fax")]
+        public string Address1Fax { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the account with which the lead
-        /// is associated.
-        /// </summary>
-        [JsonProperty(PropertyName = "_accountid_value")]
-        public string _accountidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the Standard Industrial Classification (SIC) code
-        /// that indicates the lead's primary industry of business for use in
-        /// marketing segmentation and demographic analysis.
         /// </summary>
         [JsonProperty(PropertyName = "sic")]
         public string Sic { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
         /// </summary>
-        [JsonProperty(PropertyName = "entityimageid")]
-        public string Entityimageid { get; set; }
+        [JsonProperty(PropertyName = "salesstage")]
+        public int? Salesstage { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the complete primary address.
         /// </summary>
-        [JsonProperty(PropertyName = "address1_composite")]
-        public string Address1Composite { get; set; }
+        [JsonProperty(PropertyName = "address1_shippingmethodcode")]
+        public int? Address1Shippingmethodcode { get; set; }
 
         /// <summary>
-        /// Gets or sets choose how high the level of need is for the lead's
-        /// company.
         /// </summary>
-        [JsonProperty(PropertyName = "need")]
-        public int? Need { get; set; }
+        [JsonProperty(PropertyName = "address2_latitude")]
+        public decimal? Address2Latitude { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who owns the lead.
         /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        [JsonProperty(PropertyName = "merged")]
+        public bool? Merged { get; set; }
 
         /// <summary>
-        /// Gets or sets type the UPS zone of the primary address to make sure
-        /// shipping charges are calculated correctly and deliveries are made
-        /// promptly, if shipped by UPS.
         /// </summary>
-        [JsonProperty(PropertyName = "address1_upszone")]
-        public string Address1Upszone { get; set; }
+        [JsonProperty(PropertyName = "firstname")]
+        public string Firstname { get; set; }
 
         /// <summary>
-        /// Gets or sets choose whether an individual or a committee will be
-        /// involved in the purchase process for the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "purchaseprocess")]
-        public int? Purchaseprocess { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who created the record on behalf of another
-        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets type the ZIP Code or postal code for the primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_postalcode")]
-        public string Address1Postalcode { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose a contact to connect this lead to, so that the
-        /// relationship is visible in reports and analytics.
-        /// </summary>
-        [JsonProperty(PropertyName = "_parentcontactid_value")]
-        public string _parentcontactidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the default image for the record.
-        /// </summary>
-        [JsonConverter(typeof(Base64UrlJsonConverter))]
-        [JsonProperty(PropertyName = "entityimage")]
-        public byte[] Entityimage { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the phonetic spelling of the lead's first name,
-        /// if the name is specified in Japanese, to make sure the name is
-        /// pronounced correctly in phone calls with the prospect.
-        /// </summary>
-        [JsonProperty(PropertyName = "yomifirstname")]
-        public string Yomifirstname { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the state or province of the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_stateorprovince")]
-        public string Address1Stateorprovince { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the team who owns the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets total time spent for emails (read and write) and
-        /// meetings by me in relation to the lead record.
         /// </summary>
         [JsonProperty(PropertyName = "timespentbymeonemailandmeetings")]
         public string Timespentbymeonemailandmeetings { get; set; }
 
         /// <summary>
-        /// Gets or sets select the customer account or contact to provide a
-        /// quick link to additional customer details, such as account
-        /// information, activities, and opportunities.
         /// </summary>
-        [JsonProperty(PropertyName = "_customerid_value")]
-        public string _customeridValue { get; set; }
+        [JsonProperty(PropertyName = "revenue")]
+        public decimal? Revenue { get; set; }
 
         /// <summary>
-        /// Gets or sets type the post office box number of the primary
-        /// address.
         /// </summary>
-        [JsonProperty(PropertyName = "address1_postofficebox")]
-        public string Address1Postofficebox { get; set; }
+        [JsonProperty(PropertyName = "salesstagecode")]
+        public int? Salesstagecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "schedulefollowup_qualify")]
+        public System.DateTimeOffset? SchedulefollowupQualify { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_upszone")]
+        public string Address1Upszone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_addressid")]
+        public string Address2Addressid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_slainvokedid_value")]
+        public string _slainvokedidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_telephone2")]
+        public string Address1Telephone2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "evaluatefit")]
+        public bool? Evaluatefit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_country")]
+        public string Address2Country { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_telephone1")]
+        public string Address1Telephone1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "budgetstatus")]
+        public int? Budgetstatus { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_name")]
+        public string Address2Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_accountid_value")]
+        public string _accountidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastonholdtime")]
+        public System.DateTimeOffset? Lastonholdtime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_telephone1")]
+        public string Address2Telephone1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_utcoffset")]
+        public int? Address2Utcoffset { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_utcoffset")]
+        public int? Address1Utcoffset { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "onholdtime")]
+        public int? Onholdtime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_city")]
+        public string Address2City { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_slaid_value")]
+        public string _slaidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "jobtitle")]
+        public string Jobtitle { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "emailaddress2")]
+        public string Emailaddress2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_masterid_value")]
+        public string _masteridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "prioritycode")]
+        public int? Prioritycode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_parentcontactid_value")]
+        public string _parentcontactidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "participatesinworkflow")]
+        public bool? Participatesinworkflow { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "estimatedamount")]
+        public decimal? Estimatedamount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_stateorprovince")]
+        public string Address1Stateorprovince { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_upszone")]
+        public string Address2Upszone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "schedulefollowup_prospect")]
+        public System.DateTimeOffset? SchedulefollowupProspect { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_county")]
+        public string Address2County { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_stateorprovince")]
+        public string Address2Stateorprovince { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_addresstypecode")]
+        public int? Address2Addresstypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastname")]
+        public string Lastname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_county")]
+        public string Address1County { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_parentaccountid_value")]
+        public string _parentaccountidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "donotemail")]
+        public bool? Donotemail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "telephone3")]
+        public string Telephone3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_city")]
+        public string Address1City { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "followemail")]
+        public bool? Followemail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "budgetamount_base")]
+        public decimal? BudgetamountBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "numberofemployees")]
+        public int? Numberofemployees { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "donotfax")]
+        public bool? Donotfax { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_originatingcaseid_value")]
+        public string _originatingcaseidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_addressid")]
+        public string Address1Addressid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "donotphone")]
+        public bool? Donotphone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "purchaseprocess")]
+        public int? Purchaseprocess { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_line3")]
+        public string Address2Line3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "emailaddress3")]
+        public string Emailaddress3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "companyname")]
+        public string Companyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_addresstypecode")]
+        public int? Address1Addresstypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_relatedobjectid_value")]
+        public string _relatedobjectidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "decisionmaker")]
+        public bool? Decisionmaker { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "pager")]
+        public string Pager { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1014,305 +639,355 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string EntityimageUrl { get; set; }
 
         /// <summary>
-        /// Gets or sets select whether the lead allows faxes.
-        /// </summary>
-        [JsonProperty(PropertyName = "donotfax")]
-        public bool? Donotfax { get; set; }
-
-        /// <summary>
-        /// Gets or sets version number of the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the county for the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_county")]
-        public string Address2County { get; set; }
-
-        /// <summary>
-        /// Gets or sets enter the user or team who is assigned to manage the
-        /// record. This field is updated every time the record is assigned to
-        /// a different user.
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets this attribute is used for Sample Service Business
-        /// Processes.
-        /// </summary>
-        [JsonProperty(PropertyName = "_originatingcaseid_value")]
-        public string _originatingcaseidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the contact with which the lead
-        /// is associated.
-        /// </summary>
-        [JsonProperty(PropertyName = "_contactid_value")]
-        public string _contactidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the home phone number for the primary contact for
-        /// the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "telephone2")]
-        public string Telephone2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the third line of the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_line3")]
-        public string Address2Line3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the first line of the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_line1")]
-        public string Address2Line1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the salutation of the primary contact for this
-        /// lead to make sure the prospect is addressed correctly in sales
-        /// calls, email messages, and marketing campaigns.
-        /// </summary>
-        [JsonProperty(PropertyName = "salutation")]
-        public string Salutation { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the number of employees that work at the company
-        /// associated with the lead, for use in marketing segmentation and
-        /// demographic analysis.
-        /// </summary>
-        [JsonProperty(PropertyName = "numberofemployees")]
-        public int? Numberofemployees { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the name of the company associated with the lead.
-        /// This becomes the account name when the lead is qualified and
-        /// converted to a customer account.
-        /// </summary>
-        [JsonProperty(PropertyName = "companyname")]
-        public string Companyname { get; set; }
-
-        /// <summary>
-        /// Gets or sets combines and shows the lead's first and last names so
-        /// the full name can be displayed in views and reports.
-        /// </summary>
-        [JsonProperty(PropertyName = "fullname")]
-        public string Fullname { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose the opportunity that the lead was qualified on
-        /// and then converted to.
-        /// </summary>
-        [JsonProperty(PropertyName = "_qualifyingopportunityid_value")]
-        public string _qualifyingopportunityidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose the service level agreement (SLA) that you want
-        /// to apply to the Lead record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_slaid_value")]
-        public string _slaidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the first name of the primary contact for the
-        /// lead to make sure the prospect is addressed correctly in sales
-        /// calls, email, and marketing campaigns.
-        /// </summary>
-        [JsonProperty(PropertyName = "firstname")]
-        public string Firstname { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the latitude value for the primary address for
-        /// use in mapping and other applications.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_latitude")]
-        public decimal? Address1Latitude { get; set; }
-
-        /// <summary>
-        /// Gets or sets enter the date and time of the qualifying follow-up
-        /// meeting with the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "schedulefollowup_qualify")]
-        public System.DateTimeOffset? SchedulefollowupQualify { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the latitude value for the secondary address for
-        /// use in mapping and other applications.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_latitude")]
-        public decimal? Address2Latitude { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the second line of the primary address.
         /// </summary>
         [JsonProperty(PropertyName = "address1_line2")]
         public string Address1Line2 { get; set; }
 
         /// <summary>
-        /// Gets or sets select whether your notes include information about
-        /// who makes the purchase decisions at the lead's company.
         /// </summary>
-        [JsonProperty(PropertyName = "decisionmaker")]
-        public bool? Decisionmaker { get; set; }
+        [JsonProperty(PropertyName = "yomifullname")]
+        public string Yomifullname { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the master lead for merge.
         /// </summary>
-        [JsonProperty(PropertyName = "_masterid_value")]
-        public string _masteridValue { get; set; }
+        [JsonProperty(PropertyName = "address2_composite")]
+        public string Address2Composite { get; set; }
 
         /// <summary>
-        /// Gets or sets type the fax number associated with the secondary
-        /// address.
         /// </summary>
-        [JsonProperty(PropertyName = "address2_fax")]
-        public string Address2Fax { get; set; }
+        [JsonProperty(PropertyName = "mobilephone")]
+        public string Mobilephone { get; set; }
 
         /// <summary>
-        /// Gets or sets type the main phone number associated with the
-        /// secondary address.
         /// </summary>
-        [JsonProperty(PropertyName = "address2_telephone1")]
-        public string Address2Telephone1 { get; set; }
+        [JsonProperty(PropertyName = "address1_postofficebox")]
+        public string Address1Postofficebox { get; set; }
 
         /// <summary>
-        /// Gets or sets select a shipping method for deliveries sent to this
-        /// address.
         /// </summary>
-        [JsonProperty(PropertyName = "address2_shippingmethodcode")]
-        public int? Address2Shippingmethodcode { get; set; }
+        [JsonProperty(PropertyName = "address1_line1")]
+        public string Address1Line1 { get; set; }
 
         /// <summary>
-        /// Gets or sets type a third phone number associated with the primary
-        /// address.
         /// </summary>
-        [JsonProperty(PropertyName = "address1_telephone3")]
-        public string Address1Telephone3 { get; set; }
+        [JsonProperty(PropertyName = "initialcommunication")]
+        public int? Initialcommunication { get; set; }
 
         /// <summary>
-        /// Gets or sets choose how long the lead will likely take to make the
-        /// purchase, so the sales team will be aware.
         /// </summary>
-        [JsonProperty(PropertyName = "purchasetimeframe")]
-        public int? Purchasetimeframe { get; set; }
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
 
         /// <summary>
-        /// Gets or sets select the preferred method of contact.
         /// </summary>
-        [JsonProperty(PropertyName = "preferredcontactmethodcode")]
-        public int? Preferredcontactmethodcode { get; set; }
+        [JsonProperty(PropertyName = "address1_postalcode")]
+        public string Address1Postalcode { get; set; }
 
         /// <summary>
-        /// Gets or sets type the second line of the secondary address.
         /// </summary>
-        [JsonProperty(PropertyName = "address2_line2")]
-        public string Address2Line2 { get; set; }
+        [JsonProperty(PropertyName = "qualificationcomments")]
+        public string Qualificationcomments { get; set; }
 
         /// <summary>
-        /// Gets or sets type the UPS zone of the secondary address to make
-        /// sure shipping charges are calculated correctly and deliveries are
-        /// made promptly, if shipped by UPS.
         /// </summary>
-        [JsonProperty(PropertyName = "address2_upszone")]
-        public string Address2Upszone { get; set; }
+        [JsonProperty(PropertyName = "_campaignid_value")]
+        public string _campaignidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets type the website URL for the company associated with
-        /// this lead.
         /// </summary>
-        [JsonProperty(PropertyName = "websiteurl")]
-        public string Websiteurl { get; set; }
+        [JsonProperty(PropertyName = "address1_name")]
+        public string Address1Name { get; set; }
 
         /// <summary>
-        /// Gets or sets type the ZIP Code or postal code for the secondary
-        /// address.
         /// </summary>
-        [JsonProperty(PropertyName = "address2_postalcode")]
-        public string Address2Postalcode { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
-        /// Gets or sets select a shipping method for deliveries sent to this
-        /// address.
         /// </summary>
-        [JsonProperty(PropertyName = "address1_shippingmethodcode")]
-        public int? Address1Shippingmethodcode { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
-        /// Gets or sets type a descriptive name for the secondary address,
-        /// such as Corporate Headquarters.
         /// </summary>
-        [JsonProperty(PropertyName = "address2_name")]
-        public string Address2Name { get; set; }
+        [JsonProperty(PropertyName = "confirminterest")]
+        public bool? Confirminterest { get; set; }
 
         /// <summary>
-        /// Gets or sets select a rating value to indicate the lead's potential
-        /// to become a customer.
+        /// </summary>
+        [JsonProperty(PropertyName = "revenue_base")]
+        public decimal? RevenueBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "middlename")]
+        public string Middlename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "leadsourcecode")]
+        public int? Leadsourcecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_telephone3")]
+        public string Address2Telephone3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
+        [JsonProperty(PropertyName = "entityimage")]
+        public byte[] Entityimage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "donotbulkemail")]
+        public bool? Donotbulkemail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_line3")]
+        public string Address1Line3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "yomicompanyname")]
+        public string Yomicompanyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_country")]
+        public string Address1Country { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "leadqualitycode")]
         public int? Leadqualitycode { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier for address 2.
         /// </summary>
-        [JsonProperty(PropertyName = "address2_addressid")]
-        public string Address2Addressid { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
-        /// Gets or sets type the pager number for the primary contact for the
-        /// lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "pager")]
-        public string Pager { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the lead accepts marketing materials,
-        /// such as brochures or catalogs. Leads that opt out can be excluded
-        /// from marketing initiatives.
         /// </summary>
         [JsonProperty(PropertyName = "donotsendmm")]
         public bool? Donotsendmm { get; set; }
 
         /// <summary>
-        /// Gets or sets type the primary email address for the lead.
         /// </summary>
-        [JsonProperty(PropertyName = "emailaddress1")]
-        public string Emailaddress1 { get; set; }
+        [JsonProperty(PropertyName = "address1_longitude")]
+        public decimal? Address1Longitude { get; set; }
 
         /// <summary>
-        /// Gets or sets shows the ID of the stage.
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimageid")]
+        public string Entityimageid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "websiteurl")]
+        public string Websiteurl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "leadid")]
+        public string Leadid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "industrycode")]
+        public int? Industrycode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_postofficebox")]
+        public string Address2Postofficebox { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_shippingmethodcode")]
+        public int? Address2Shippingmethodcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_line1")]
+        public string Address2Line1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "traversedpath")]
+        public string Traversedpath { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_qualifyingopportunityid_value")]
+        public string _qualifyingopportunityidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_longitude")]
+        public decimal? Address2Longitude { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "purchasetimeframe")]
+        public int? Purchasetimeframe { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_telephone2")]
+        public string Address2Telephone2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "fax")]
+        public string Fax { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "yomimiddlename")]
+        public string Yomimiddlename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_gdproptout")]
+        public bool? MsdynGdproptout { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_fax")]
+        public string Address2Fax { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "estimatedclosedate")]
+        public System.DateTimeOffset? Estimatedclosedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_line2")]
+        public string Address2Line2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "salutation")]
+        public string Salutation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "fullname")]
+        public string Fullname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "subject")]
+        public string Subject { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_customerid_value")]
+        public string _customeridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "yomilastname")]
+        public string Yomilastname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "yomifirstname")]
+        public string Yomifirstname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "preferredcontactmethodcode")]
+        public int? Preferredcontactmethodcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "estimatedamount_base")]
+        public decimal? EstimatedamountBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_contactid_value")]
+        public string _contactidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_composite")]
+        public string Address1Composite { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_telephone3")]
+        public string Address1Telephone3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "estimatedvalue")]
+        public decimal? Estimatedvalue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "stageid")]
         public string Stageid { get; set; }
 
         /// <summary>
-        /// Gets or sets select the priority so that preferred customers or
-        /// critical issues are handled quickly.
         /// </summary>
-        [JsonProperty(PropertyName = "prioritycode")]
-        public int? Prioritycode { get; set; }
+        [JsonProperty(PropertyName = "budgetamount")]
+        public decimal? Budgetamount { get; set; }
 
         /// <summary>
-        /// Gets or sets shows who created the record.
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "donotpostalmail")]
+        public bool? Donotpostalmail { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier for address 1.
         /// </summary>
-        [JsonProperty(PropertyName = "address1_addressid")]
-        public string Address1Addressid { get; set; }
+        [JsonProperty(PropertyName = "emailaddress1")]
+        public string Emailaddress1 { get; set; }
 
         /// <summary>
-        /// Gets or sets type a second phone number associated with the
-        /// secondary address.
         /// </summary>
-        [JsonProperty(PropertyName = "address2_telephone2")]
-        public string Address2Telephone2 { get; set; }
+        [JsonProperty(PropertyName = "address2_postalcode")]
+        public string Address2Postalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "telephone1")]
+        public string Telephone1 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1320,294 +995,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public long? EntityimageTimestamp { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
         /// </summary>
-        [JsonProperty(PropertyName = "traversedpath")]
-        public string Traversedpath { get; set; }
+        [JsonProperty(PropertyName = "telephone2")]
+        public string Telephone2 { get; set; }
 
         /// <summary>
-        /// Gets or sets choose the campaign that the lead was generated from
-        /// to track the effectiveness of marketing campaigns and identify
-        /// communications received by the lead.
         /// </summary>
-        [JsonProperty(PropertyName = "_campaignid_value")]
-        public string _campaignidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the fax number associated with the primary
-        /// address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_fax")]
-        public string Address1Fax { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the lead allows direct email sent from
-        /// Microsoft Dynamics 365.
-        /// </summary>
-        [JsonProperty(PropertyName = "donotemail")]
-        public bool? Donotemail { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the phonetic spelling of the lead's middle name,
-        /// if the name is specified in Japanese, to make sure the name is
-        /// pronounced correctly in phone calls with the prospect.
-        /// </summary>
-        [JsonProperty(PropertyName = "yomimiddlename")]
-        public string Yomimiddlename { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the job title of the primary contact for this
-        /// lead to make sure the prospect is addressed correctly in sales
-        /// calls, email, and marketing campaigns.
-        /// </summary>
-        [JsonProperty(PropertyName = "jobtitle")]
-        public string Jobtitle { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the sales process stage for the lead to help
-        /// determine the probability of the lead converting to an opportunity.
-        /// </summary>
-        [JsonProperty(PropertyName = "salesstagecode")]
-        public int? Salesstagecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the secondary email address for the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "emailaddress2")]
-        public string Emailaddress2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a third email address for the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "emailaddress3")]
-        public string Emailaddress3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "leadid")]
-        public string Leadid { get; set; }
-
-        /// <summary>
-        /// Gets or sets contains the date and time stamp of the last on hold
-        /// time.
-        /// </summary>
-        [JsonProperty(PropertyName = "lastonholdtime")]
-        public System.DateTimeOffset? Lastonholdtime { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the lead's status.
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// Gets or sets related Campaign Response.
-        /// </summary>
-        [JsonProperty(PropertyName = "_relatedobjectid_value")]
-        public string _relatedobjectidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows who last updated the record on behalf of another
-        /// user.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the time zone, or UTC offset, for this address
-        /// so that other people can reference it when they contact someone at
-        /// this address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_utcoffset")]
-        public int? Address1Utcoffset { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose the local currency for the record to make sure
-        /// budgets are reported in the correct currency.
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type comments about the qualification or scoring of
-        /// the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "qualificationcomments")]
-        public string Qualificationcomments { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows how long, in minutes, that the record was on
-        /// hold.
-        /// </summary>
-        [JsonProperty(PropertyName = "onholdtime")]
-        public int? Onholdtime { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the annual revenue of the company associated with
-        /// the lead to provide an understanding of the prospect's business.
-        /// </summary>
-        [JsonProperty(PropertyName = "revenue")]
-        public decimal? Revenue { get; set; }
-
-        /// <summary>
-        /// Gets or sets tells whether the lead has been merged with another
-        /// lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "merged")]
-        public bool? Merged { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the lead allows phone calls.
-        /// </summary>
-        [JsonProperty(PropertyName = "donotphone")]
-        public bool? Donotphone { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the state or province of the secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_stateorprovince")]
-        public string Address2Stateorprovince { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the fit between the lead's requirements
-        /// and your offerings was evaluated.
-        /// </summary>
-        [JsonProperty(PropertyName = "evaluatefit")]
-        public bool? Evaluatefit { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the estimated revenue value that this lead will
-        /// generate to assist in sales forecasting and planning.
-        /// </summary>
-        [JsonProperty(PropertyName = "estimatedamount")]
-        public decimal? Estimatedamount { get; set; }
-
-        /// <summary>
-        /// Gets or sets last SLA that was applied to this case. This field is
-        /// for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "_slainvokedid_value")]
-        public string _slainvokedidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the longitude value for the primary address for
-        /// use in mapping and other applications.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_longitude")]
-        public decimal? Address1Longitude { get; set; }
-
-        /// <summary>
-        /// Gets or sets combines and shows the lead's Yomi first and last
-        /// names so the full phonetic name can be displayed in views and
-        /// reports.
-        /// </summary>
-        [JsonProperty(PropertyName = "yomifullname")]
-        public string Yomifullname { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the lead allows direct mail.
-        /// </summary>
-        [JsonProperty(PropertyName = "donotpostalmail")]
-        public bool? Donotpostalmail { get; set; }
-
-        /// <summary>
-        /// Gets or sets select the time zone, or UTC offset, for this address
-        /// so that other people can reference it when they contact someone at
-        /// this address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_utcoffset")]
-        public int? Address2Utcoffset { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the complete secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_composite")]
-        public string Address2Composite { get; set; }
-
-        /// <summary>
-        /// Gets or sets enter the date and time of the prospecting follow-up
-        /// meeting with the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "schedulefollowup_prospect")]
-        public System.DateTimeOffset? SchedulefollowupProspect { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the phonetic spelling of the lead's company name,
-        /// if the name is specified in Japanese, to make sure the name is
-        /// pronounced correctly in phone calls with the prospect.
-        /// </summary>
-        [JsonProperty(PropertyName = "yomicompanyname")]
-        public string Yomicompanyname { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the work phone number for the primary contact for
-        /// the lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "telephone1")]
-        public string Telephone1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets type a third phone number associated with the
-        /// secondary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_telephone3")]
-        public string Address2Telephone3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets choose an account to connect this lead to, so that the
-        /// relationship is visible in reports and analytics.
-        /// </summary>
-        [JsonProperty(PropertyName = "_parentaccountid_value")]
-        public string _parentaccountidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the longitude value for the secondary address for
-        /// use in mapping and other applications.
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_longitude")]
-        public decimal? Address2Longitude { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the business unit that owns the
-        /// lead.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets type the first line of the primary address.
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_line1")]
-        public string Address1Line1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets select whether the lead confirmed interest in your
-        /// offerings. This helps in determining the lead quality.
-        /// </summary>
-        [JsonProperty(PropertyName = "confirminterest")]
-        public bool? Confirminterest { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the data import or data migration
-        /// that created this record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets shows the Annual Revenue field converted to the
-        /// system's default base currency. The calculation uses the exchange
-        /// rate specified in the Currencies area.
-        /// </summary>
-        [JsonProperty(PropertyName = "revenue_base")]
-        public decimal? RevenueBase { get; set; }
+        [JsonProperty(PropertyName = "need")]
+        public int? Need { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1633,6 +1028,46 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "contactleads_association")]
         public IList<MicrosoftDynamicsCRMcontact> ContactleadsAssociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lead_abs_scheduledprocessexecutions")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> LeadAbsScheduledprocessexecutions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lead_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> LeadTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lead_BulkOperations")]
+        public IList<MicrosoftDynamicsCRMbulkoperation> LeadBulkOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lead_CampaignResponses")]
+        public IList<MicrosoftDynamicsCRMcampaignresponse> LeadCampaignResponses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lead_IncidentResolutions")]
+        public IList<MicrosoftDynamicsCRMincidentresolution> LeadIncidentResolutions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lead_OpportunityCloses")]
+        public IList<MicrosoftDynamicsCRMopportunityclose> LeadOpportunityCloses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lead_OrderCloses")]
+        public IList<MicrosoftDynamicsCRMorderclose> LeadOrderCloses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lead_QuoteCloses")]
+        public IList<MicrosoftDynamicsCRMquoteclose> LeadQuoteCloses { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1673,6 +1108,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "opportunity_originating_lead")]
         public IList<MicrosoftDynamicsCRMopportunity> OpportunityOriginatingLead { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Lead_ProcessSessions")]
+        public IList<MicrosoftDynamicsCRMprocesssession> LeadProcessSessions { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1771,6 +1211,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "Lead_MailboxTrackingFolder")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> LeadMailboxTrackingFolder { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "Lead_ActivityPointers")]
         public IList<MicrosoftDynamicsCRMactivitypointer> LeadActivityPointers { get; set; }
 
@@ -1828,6 +1273,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "lead_activity_parties")]
         public IList<MicrosoftDynamicsCRMactivityparty> LeadActivityParties { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lead_principalobjectattributeaccess")]
+        public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> LeadPrincipalobjectattributeaccess { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1903,11 +1353,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "SourceLead_BulkOperationLogs")]
         public IList<MicrosoftDynamicsCRMbulkoperationlog> SourceLeadBulkOperationLogs { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lead_abs_scheduledprocessexecutions")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> LeadAbsScheduledprocessexecutions { get; set; }
 
     }
 }

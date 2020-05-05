@@ -1,27 +1,26 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
-import { FormBase, CanadaPostalRegex } from '@shared/form-base';
-import { NestedTreeControl } from '@angular/cdk/tree';
-import { LicenseeChangeLog, LicenseeChangeType } from '@models/licensee-change-log.model';
-import { MatTreeNestedDataSource, MatTree, MatDialog, MatSnackBar, ErrorStateMatcher } from '@angular/material';
-import { Application } from '@models/application.model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ApplicationDataService } from '@services/application-data.service';
-import { LegalEntityDataService } from '@services/legal-entity-data.service';
-import { forkJoin, of } from 'rxjs';
-import { takeWhile, filter, mergeMap, switchMap } from 'rxjs/operators';
-import { LegalEntity } from '@models/legal-entity.model';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild, ModuleWithProviders } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
 import { Account } from '@models/account.model';
-import { LicenseeTreeComponent } from '@shared/components/licensee-tree/licensee-tree.component';
-import { ApplicationSummary } from '@models/application-summary.model';
-import { ApplicationTypeNames, ApplicationType } from '@models/application-type.model';
-import { LicenseDataService } from '@services/license-data.service';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
+import { ApplicationSummary } from '@models/application-summary.model';
+import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
+import { Application } from '@models/application.model';
+import { LegalEntity } from '@models/legal-entity.model';
+import { LicenseeChangeLog } from '@models/licensee-change-log.model';
+import { Store } from '@ngrx/store';
+import { ApplicationDataService } from '@services/application-data.service';
 import { FeatureFlagService } from '@services/feature-flag.service';
+import { LegalEntityDataService } from '@services/legal-entity-data.service';
+import { LicenseDataService } from '@services/license-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { OrgStructureComponent } from '@shared/components/org-structure/org-structure.component';
+import { FormBase } from '@shared/form-base';
+import { forkJoin, Observable, of, Subject } from 'rxjs';
+import { filter, mergeMap, switchMap, takeWhile } from 'rxjs/operators';
+import { AppRemoveIfFeatureOnDirective } from '../../../directives/remove-if-feature-on.directive';
 
 @Component({
   selector: 'app-application-licensee-changes',
@@ -67,13 +66,13 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     private paymentDataService: PaymentDataService,
     private applicationDataService: ApplicationDataService,
     private legalEntityDataService: LegalEntityDataService,
-    public featureFlagService: FeatureFlagService) {
+    private featureFlagService: FeatureFlagService) {
     super();
 
     featureFlagService.featureOn('SecurityScreening')
       .subscribe(featureOn => this.securityScreeningEnabled = featureOn);
 
-    this.licenseService.getAllCurrentLicenses()
+    this.busy = this.licenseService.getAllCurrentLicenses()
       .subscribe(data => {
         this.licenses = data;
         this.licencesOnFile = (this.licenses && this.licenses.length > 0);
@@ -135,7 +134,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
   /**
-   * Gets licensee application id. Create the applicaiton and return id if it does not exist
+   * Gets licensee application id. Create the application and return id if it does not exist
    */
   loadLicenseeApplication() {
     return this.applicationDataService.getOngoingLicenseeChangeApplicationId()
@@ -156,17 +155,15 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
   getSaveLabel(): string {
     let label = 'Continue to Application';
-    //if (!this.securityScreeningEnabled) {
 
-    //if No Organizational Information on File  OR changes made
+    // if No Organizational Information on File  OR changes made
     if (!this.thereIsExistingOrgStructure || (this.treeRoot && LicenseeChangeLog.HasChanges(this.treeRoot))) {
       label = 'Submit Organization Information';
     }
     // if Organization Information on File  AND no changes
     else if (this.thereIsExistingOrgStructure && this.treeRoot && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
       label = 'Confirm Organization Information Is Complete';
-    }
-    //}
+    }    
     return label.toUpperCase();
   }
 
@@ -190,7 +187,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
           // filter out approved applications
           const notTerminatedApplications =
             applications.filter(app => {
-              let noneTerminatedCRSApplications: boolean = ['Terminated and refunded'].indexOf(app.applicationStatus) === -1
+              const noneTerminatedCRSApplications: boolean = ['Terminated and refunded'].indexOf(app.applicationStatus) === -1
                 && app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore;
               return noneTerminatedCRSApplications;
             });
@@ -256,14 +253,12 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
               return this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue })
                 .pipe(takeWhile(() => this.componentActive))
                 .toPromise()
-                .then(result => {
-                  const app: Application = result;
+                .then(app => {
                   // payment is required
                   if (app && app.adoxioInvoiceId) {
                     this.submitPayment();
-                  }
-                  // else go to the application page
-                  else if (app) {
+                  } else if (app) { // go to the application page
+                    
                     this.saveComplete.emit(true);
                     if (this.redirectToDashboardOnSave) {
                       this.router.navigateByUrl('/dashboard');
@@ -306,27 +301,32 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     saveOverrideValue = saveOverrideValue || {};
     const data = this.cleanSaveData(this.treeRoot);
     
-
     return forkJoin(this.legalEntityDataService.updateLegalEntity({ ...this.currentLegalEntities, numberOfMembers: this.treeRoot.numberOfMembers, annualMembershipFee: this.treeRoot.annualMembershipFee }, this.currentLegalEntities.id),
-      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId) );
+      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId));
   }
 
-  saveForLater() {
+  saveForLater(navigateAfterSaving: boolean = true): Observable<boolean> {
+    let subject  = new Subject<boolean>();
     this.orgStructure.saveAll()
       .subscribe(result => {
         this.validationErrors = [];
         if (!result) {
           this.validationErrors = ['There are incomplete fields on the page'];
+          subject.next(false);
         }
         if (this.validationErrors.length === 0) {
           this.busyPromise = this.prepareSaveRequest({})
             .toPromise()
             .then(() => {
               this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-              this.router.navigateByUrl('/dashboard');
+              if(navigateAfterSaving){
+                this.router.navigateByUrl('/dashboard');
+              }
+              subject.next(true);
             });
         }
       });
+      return subject;
   }
 
   addCancelledChange(change: LicenseeChangeLog) {
@@ -334,6 +334,10 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
   cancelApplication() {
+  }
+
+  canDeactivate(): Observable<boolean> {
+    return this.saveForLater(false);
   }
 
   /**
@@ -359,12 +363,10 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     node.parentLinceseeChangeLog = undefined;
     node.refObject = undefined;
 
-
     if (node.children && node.children.length) {
       node.children.forEach(child => {
         this.removeParentReferences(child)
-      })
+      });
     }
   }
 }
-
