@@ -34,8 +34,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public FormControlState? StoreContactInfo { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public FormControlState? EstablishmentName { get; set; }
+        /// <summary>
+        /// Reference to the Systemform entity in Dynamics that holds the meta data for the form.
+        /// </summary>
+        public string FormReference { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public FormControlState? newEstablishmentAddress { get; set; }
+        public FormControlState? NewEstablishmentAddress { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public FormControlState? CurrentEstablishmentAddress { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
@@ -71,5 +75,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public List<ApplicationTypeContent> ContentTypes { get; set; }
 
         public int? IsFree { get; set; }
+
+        public Form DynamicsForm { get; set; }
     }
 }

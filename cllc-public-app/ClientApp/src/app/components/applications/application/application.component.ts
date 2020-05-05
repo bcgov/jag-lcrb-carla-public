@@ -1,7 +1,7 @@
 
 import { filter, takeWhile, catchError, mergeMap, delay } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { Subscription, Subject, Observable, forkJoin, of } from 'rxjs';
@@ -26,6 +26,8 @@ import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AccountDataService } from '@services/account-data.service';
 import { User } from '@models/user.model';
+import { DynamicsForm } from '../../../models/dynamics-form.model';
+import { DynamicsFormDataService } from '../../../services/dynamics-form-data.service';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -90,7 +92,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedSitePlanDocuments: 0;
   uploadedFloorPlanDocuments: 0;
   uploadedPhotosOrRenderingsDocuments: 0;
-  uploadedZoningDocuments: 0;
+  uploadedZoningDocuments: 0; 
+  dynamicsForm: DynamicsForm;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -104,7 +107,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     private tiedHouseService: TiedHouseConnectionsDataService,
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService,
-    private accountDataService: AccountDataService
+    private accountDataService: AccountDataService,
+    private dynamicsFormDataService: DynamicsFormDataService
   ) {
     super();
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
@@ -112,6 +116,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
+
+
     this.form = this.fb.group({
       id: [''],
       assignedLicence: this.fb.group({
@@ -199,10 +205,34 @@ export class ApplicationComponent extends FormBase implements OnInit {
         if (data.applicantType === 'IndigenousNation') {
           (<any>data).applyAsIndigenousNation = true;
         }
+
         this.application = data;
+
         this.hideFormControlByType();
 
-        this.addDynamicContent();
+        this.addDynamicContent();        
+
+        if (data.applicationType.formReference) {
+          console.log("Getting form layout");
+          // get the application form        
+          this.dynamicsForm = data.applicationType.dynamicsForm;
+          this.dynamicsForm.tabs.forEach(function (tab) {
+            tab.sections.forEach(function (section) {
+              if (section.fields) {
+                section.fields.forEach(function (field) {
+                  // add the field to the form.
+                  if (field.required) {
+                    this.form.addControl(field.datafieldname, new FormControl('', Validators.required));
+                  }
+                  else {
+                    this.form.addControl(field.datafieldname, new FormControl(''));
+                  }
+                }, this);
+              }
+
+            }, this);
+          }, this);
+        }
 
         const noNulls = Object.keys(data)
           .filter(e => data[e] !== null)
@@ -212,15 +242,21 @@ export class ApplicationComponent extends FormBase implements OnInit {
           }, {});
 
         this.form.patchValue(noNulls);
+
         if (data.isPaid) {
           this.form.disable();
         }
         this.savedFormData = this.form.value;
+
+        
       },
         () => {
           console.log('Error occured');
         }
-      );
+    );
+
+
+    
   }
 
   private hideFormControlByType() {
@@ -317,11 +353,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       );
   }
 
-  canDeactivate(): Observable<boolean> | boolean {
+  canDeactivate(): Observable<boolean> {
     const connectionsDidntChang = !(this.connectionsToProducers && this.connectionsToProducers.formHasChanged());
     const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
     if (connectionsDidntChang && formDidntChange) {
-      return true;
+      return of(true);
     } else {
       const subj = new Subject<boolean>();
       this.busy = this.save(true).subscribe(res => {
