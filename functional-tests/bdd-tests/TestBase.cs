@@ -1912,6 +1912,150 @@ namespace bdd_tests
             uiContactEmail.SendKeys(conEmail);
         }
 
+        public void RequestPersonnelNameChange()
+        {
+            // click on Dashboard link
+            string dash = "Dashboard";
+            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(dash));
+            returnDash.Click();
+
+            // click on the review organzation information button
+            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
+            orgInfoButton.Click();
+
+            // click on the Edit button for Key Personnel
+            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
+            uiEditInfoButton.Click();
+
+            // enter a new name for the director
+            string newDirectorFirstName = "Updated Director";
+
+            NgWebElement uiNewDirectorFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+            uiNewDirectorFirstName.Clear();
+            uiNewDirectorFirstName.SendKeys(newDirectorFirstName);
+
+            // click on the Confirm button
+            NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
+            uiConfirmButton.Click();
+
+            // find the upload test file in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload a notice of articles document
+            string marriageCertificate = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "marriage_certificate.pdf");
+            NgWebElement uploadMarriageCert = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
+            uploadMarriageCert.SendKeys(marriageCertificate);
+
+            // click on submit org info button
+            NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
+            orgInfoButton2.Click();
+  
+            MakePayment();
+
+            // check payment fee
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
+
+            System.Threading.Thread.Sleep(7000);
+
+            // click on Dashboard link
+            NgWebElement returnDash2 = ngDriver.FindElement(By.LinkText(dash));
+            returnDash2.Click();
+
+            // click on the review organzation information button
+            NgWebElement orgInfoButton3 = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
+            orgInfoButton3.Click();
+
+            System.Threading.Thread.Sleep(7000);
+
+            // check that the director name has been updated
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Updated Director')]")).Displayed);
+        }
+
+        public void RequestRelocation()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle: Cannabis Retail Store Licences
+            */
+
+            string requestRelocationLink = "Request Relocation";
+
+            // click on the request location link
+            NgWebElement uiRequestRelocation = ngDriver.FindElement(By.LinkText(requestRelocationLink));
+            uiRequestRelocation.Click();
+
+            /* 
+            Page Title: Please Review the Account Profile
+            */
+
+            // click on the Continue to Application button
+            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
+            continueButton.Click();
+
+            /* 
+            Page Title: Submit a Licence Relocation Application
+            */
+
+            string proposedAddress = "Automated Test Street";
+            string proposedCity = "Automated City";
+            string proposedPostalCode = "A1A 1A1";
+            string pid = "012345678";
+
+            // enter the proposed street address
+            NgWebElement uiProposedAddress = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressStreet'])[2]"));
+            uiProposedAddress.SendKeys(proposedAddress);
+
+            // enter the proposed city
+            NgWebElement uiProposedCity = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressCity'])[2]"));
+            uiProposedCity.SendKeys(proposedCity);
+
+            // enter the postal code
+            NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressPostalCode'])[3]"));
+            uiProposedPostalCode.SendKeys(proposedPostalCode);
+
+            // enter the PID
+            NgWebElement uiProposedPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
+            uiProposedPID.SendKeys(pid);
+
+            // find the upload test file in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload a supporting document
+            string supportingDocument = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "checklist.pdf");
+            NgWebElement uploadSupportingDoc = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+            uploadSupportingDoc.SendKeys(supportingDocument);
+
+            // select the authorized to submit checkbox
+            NgWebElement uiAuthToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            uiAuthToSubmit.Click();
+
+            // select the signature agreement checkbox
+            NgWebElement uiSigAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
+            uiSigAgreement.Click();
+
+            // click on the Submit & Pay button
+            NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
+            submitpayButton.Click();
+
+            // pay for the relocation application
+            MakePayment();
+
+            System.Threading.Thread.Sleep(7000);
+
+            // confirm correct payment amount
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
+
+            // return to the Licences tab
+            string licencesLink = "Licences";
+
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+        }
+
         public void Dispose()
         {
             ngDriver.Quit();
