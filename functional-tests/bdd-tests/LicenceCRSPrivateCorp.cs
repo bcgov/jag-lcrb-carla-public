@@ -31,6 +31,7 @@ Scenario: Pay CRS Licence Fee and Complete Applications
     And I review the federal reports
     And I show the store as open on the map
     And I request a transfer of ownership
+    And I request a personnel name change
     Then the requested applications are visible on the dashboard
 */
 
@@ -205,85 +206,7 @@ namespace bdd_tests
         [And(@"I request a store relocation")]
         public void request_store_relocation()
         {
-            /* 
-            Page Title: Licences
-            Subtitle: Cannabis Retail Store Licences
-            */
-
-            string requestRelocationLink = "Request Relocation";
-
-            // click on the request location link
-            NgWebElement uiRequestRelocation = ngDriver.FindElement(By.LinkText(requestRelocationLink));
-            uiRequestRelocation.Click();
-
-            /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
-            continueButton.Click();
-
-            /* 
-            Page Title: Submit a Licence Relocation Application
-            */
-
-            string proposedAddress = "Automated Test Street";
-            string proposedCity = "Automated City";
-            string proposedPostalCode = "A1A 1A1";
-            string pid = "012345678";
-
-            // enter the proposed street address
-            NgWebElement uiProposedAddress = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressStreet'])[2]"));
-            uiProposedAddress.SendKeys(proposedAddress);
-
-            // enter the proposed city
-            NgWebElement uiProposedCity = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressCity'])[2]"));
-            uiProposedCity.SendKeys(proposedCity);
-
-            // enter the postal code
-            NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressPostalCode'])[3]"));
-            uiProposedPostalCode.SendKeys(proposedPostalCode);
-
-            // enter the PID
-            NgWebElement uiProposedPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
-            uiProposedPID.SendKeys(pid);
-
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload a supporting document
-            string supportingDocument = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "checklist.pdf");
-            NgWebElement uploadSupportingDoc = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uploadSupportingDoc.SendKeys(supportingDocument);
-
-            // select the authorized to submit checkbox
-            NgWebElement uiAuthToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
-            uiAuthToSubmit.Click();
-
-            // select the signature agreement checkbox
-            NgWebElement uiSigAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
-            uiSigAgreement.Click();
-
-            // click on the Submit & Pay button
-            NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
-            submitpayButton.Click();
-
-            // pay for the relocation application
-            MakePayment();
-
-            System.Threading.Thread.Sleep(7000);
-
-            // confirm correct payment amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
-
-            // return to the Licences tab
-            string licencesLink = "Licences";
-
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
+            RequestRelocation(); 
         }
 
         [And(@"I request a valid store name or branding change")]
@@ -538,6 +461,12 @@ namespace bdd_tests
             // click on the Dashboard link
             NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
             uiDashboard.Click();
+        }
+
+        [And(@"I request a personnel name change")]
+        public void request_personnel_name_change()
+        {
+            RequestPersonnelNameChange();
         }
 
         [Then(@"the requested applications are visible on the dashboard")]
