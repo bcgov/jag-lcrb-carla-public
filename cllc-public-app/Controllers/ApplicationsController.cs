@@ -90,7 +90,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Cancelled
                         && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.TerminatedAndRefunded))
                     {
-                        result.Add(await dynamicsApplication.ToViewModel(_dynamicsClient));
+                        result.Add(await dynamicsApplication.ToViewModel(_dynamicsClient, _logger));
                     }
                 }
 
@@ -282,7 +282,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id">GUID of the Application to get</param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDynamicsApplication(string id)
+        public async Task<IActionResult> GetApplication(string id)
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -303,7 +303,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     return new NotFoundResult();
                 }
-                result = await dynamicsApplication.ToViewModel(_dynamicsClient);
+                result = await dynamicsApplication.ToViewModel(_dynamicsClient, _logger);
             }
 
 
@@ -454,7 +454,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             await initializeSharepoint(adoxioApplication);
 
-            return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient));
+            return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient, _logger));
 
         }
 
@@ -585,7 +585,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationId);
 
-            return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient));
+            return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient, _logger));
         }
 
         /// <summary>
