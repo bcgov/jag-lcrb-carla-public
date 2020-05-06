@@ -271,7 +271,7 @@ export class LicenseeChangeLog {
       changeLog.firstNameNew === changeLog.firstNameOld &&
       changeLog.lastNameNew === changeLog.lastNameOld &&
       changeLog.dateofBirthNew === changeLog.dateofBirthOld &&
-      changeLog.titleNew === changeLog.titleOld ) {
+      changeLog.titleNew === changeLog.titleOld) {
       result = true
     }
     return result;
@@ -299,12 +299,18 @@ export class LicenseeChangeLog {
   }
 
   getFileUploadValidationErrors(): string[] {
-    let errors = [
-      ...this.privateCorpFileErrors(),
-      ...this.publicCorpFileErrors(),
-      ...this.partnershipFileErrors(),
-      ...this.nameChangeFileErrors()
-    ];
+    let errors = [];
+
+    //no errors for items being removed
+    if (!this.isRemoveChangeType()) {
+      let errors = [
+        ...this.privateCorpFileErrors(),
+        ...this.publicCorpFileErrors(),
+        ...this.partnershipFileErrors(),
+        ...this.nameChangeFileErrors()
+      ];
+    }
+
     return errors;
   }
 
