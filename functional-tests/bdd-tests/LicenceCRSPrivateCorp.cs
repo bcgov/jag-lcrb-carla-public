@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: LicenceCRSPrivateCorp.feature
+Feature: LicenceCRS_privatecorp.feature
     As a logged in business user
     I want to pay the Cannabis Retail Store Licence Fee
     And complete the available application types
@@ -36,7 +36,7 @@ Scenario: Pay CRS Licence Fee and Complete Applications
 
 namespace bdd_tests
 {
-    [FeatureFile("./LicenceCRSPrivateCorp.feature")]
+    [FeatureFile("./LicenceCRS_privatecorp.feature")]
     public sealed class LicenceCRSPrivateCorp : TestBase
     {
         /*[Given(@"the CRS application has been approved")]
@@ -104,6 +104,9 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(7000);
 
+            // confirm correct payment amount
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
+
             string licencesLink = "Licences";
 
             // click on the Licences link
@@ -129,7 +132,7 @@ namespace bdd_tests
             Subtitle:   Cannabis Retail Store Licences
             */
 
-            string storePlanningLink = "Plan Store Opening";
+            string storePlanningLink = "Store Opening Inspection Checklist";
 
             // click on the store planning link
             NgWebElement uiStorePlanning = ngDriver.FindElement(By.LinkText(storePlanningLink));
@@ -273,6 +276,9 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(7000);
 
+            // confirm correct payment amount
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
+
             // return to the Licences tab
             string licencesLink = "Licences";
 
@@ -336,6 +342,9 @@ namespace bdd_tests
             MakePayment();
             
             System.Threading.Thread.Sleep(7000);
+
+            // confirm correct payment amount
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
 
             // return to the Licences tab
             string licencesLink = "Licences";
@@ -410,6 +419,9 @@ namespace bdd_tests
             MakePayment();
 
             System.Threading.Thread.Sleep(7000);
+
+            // confirm correct payment amount
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$440.00')]")).Displayed);
 
             // return to the Licences tab
             string licencesLink = "Licences";
