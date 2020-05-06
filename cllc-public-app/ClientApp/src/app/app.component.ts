@@ -185,13 +185,13 @@ export class AppComponent extends FormBase implements OnInit {
     return result;
   }
 
-  isIE10orLower() {
+  isIE() {
     let result, jscriptVersion;
     result = false;
 
     jscriptVersion = new Function('/*@cc_on return @_jscript_version; @*/')();
 
-    if (jscriptVersion !== undefined) {
+    if (jscriptVersion !== undefined || !Array.prototype.includes) {
       result = true;
     }
     return result;
