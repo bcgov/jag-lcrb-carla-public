@@ -1569,8 +1569,8 @@ namespace bdd_tests
             uiContactSurname.SendKeys(conSurname);
 
             // enter the role of the application contact
-            NgWebElement uiContactRole = ngDriver.FindElement(By.Id("contactPersonRole"));
-            uiContactRole.SendKeys(conRole);
+            //NgWebElement uiContactRole = ngDriver.FindElement(By.Id("contactPersonRole"));
+            //uiContactRole.SendKeys(conRole);
 
             // enter the phone number of the application contact
             NgWebElement uiContactPhone = ngDriver.FindElement(By.Id("contactPersonPhone"));
