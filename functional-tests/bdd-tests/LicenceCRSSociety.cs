@@ -105,32 +105,10 @@ namespace bdd_tests
         }
 
         [And(@"I review the federal reports")]
-            public void review_federal_reports()
-            {
-            /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            */
-
-            string reviewReports = "Review Federal Reports";
-
-            // click on the Review Federal Reports link
-            NgWebElement uiReviewFedReports = ngDriver.FindElement(By.LinkText(reviewReports));
-            uiReviewFedReports.Click();
-
-            /* 
-            Page Title: Federal Reporting
-            */
-
-            Assert.True (ngDriver.FindElement(By.XPath("//body[contains(.,'Federal Reporting')]")).Displayed);
-            
-            // return to the Licences tab
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
-        }
+        public void review_federal_reports()
+        {
+            ReviewFederalReports();
+        }   
 
         [And(@"I request a transfer of ownership")]
         public void request_ownership_transfer()

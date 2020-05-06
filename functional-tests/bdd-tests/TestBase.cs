@@ -2036,6 +2036,33 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
+        public void ReviewFederalReports()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Cannabis Retail Store Licences
+            */
+
+            string reviewReports = "Review Federal Reports";
+
+            // click on the Review Federal Reports link
+            NgWebElement uiReviewFedReports = ngDriver.FindElement(By.LinkText(reviewReports));
+            uiReviewFedReports.Click();
+
+            /* 
+            Page Title: Federal Reporting
+            */
+
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Federal Reporting')]")).Displayed);
+
+            // return to the Licences tab
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+            }
+
         public void Dispose()
         {
             ngDriver.Quit();
