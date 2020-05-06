@@ -298,7 +298,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_Licence")]
         public MicrosoftDynamicsCRMadoxioLicences AdoxioLicence { get; set; }
 
-
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_ApplicationType")]
+        public MicrosoftDynamicsCRMadoxioApplicationtype AdoxioApplicationType { get; set; }
 
     }
 }

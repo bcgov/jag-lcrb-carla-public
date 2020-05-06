@@ -59,6 +59,7 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
     safeAndResponsibleDisturbancesOtherDescription: ['', [Validators.maxLength(2000)]],
     safeAndResponsibleAdditionalSafetyMeasures: ['', [Validators.maxLength(2000)]],
     safeAndResponsibleServiceAreaSupervision: ['', [Validators.maxLength(2000)]],
+    status: ['', [Validators.required]],
     declarationIsAccurate: [false, [Validators.required]]
   });
 
@@ -85,6 +86,7 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
       if (licenceEvent.securityPlanSubmitted) {
         this.isReadOnly = true;
       }
+      console.log('just retrieved', licenceEvent);
       this.setFormToLicenceEvent(licenceEvent);
     });
   }
@@ -130,6 +132,7 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
       safeAndResponsibleDisturbancesOtherDescription: licenceEvent.safeAndResponsibleDisturbancesOtherDescription,
       safeAndResponsibleAdditionalSafetyMeasures: licenceEvent.safeAndResponsibleAdditionalSafetyMeasures,
       safeAndResponsibleServiceAreaSupervision: licenceEvent.safeAndResponsibleServiceAreaSupervision,
+      status: licenceEvent.status,
       declarationIsAccurate: false
     });
 
@@ -154,6 +157,7 @@ export class EventSecurityFormComponent extends FormBase implements OnInit {
   }
 
   updateLicenceEvent() {
+    console.log('submitting', this.securityForm.value);
     this.busy = this.licenceEvents.updateLicenceEvent(this.securityForm.get('id').value, {securityPlanSubmitted: true, ...this.securityForm.value})
     .subscribe((licenceEvent) => {
       this.router.navigate(['/licences']);

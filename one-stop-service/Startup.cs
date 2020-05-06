@@ -1,17 +1,19 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
-using HealthChecks.UI.Client;
 using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -23,8 +25,6 @@ using System;
 using System.Reflection;
 using System.ServiceModel;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
@@ -121,9 +121,9 @@ namespace Gov.Lclb.Cllb.OneStopService
             });
 
             // health checks. 
-            services.AddHealthChecks();
+            services.AddHealthChecks()
+                .AddCheck("one-stop-service", () => HealthCheckResult.Healthy("OK"));
 
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

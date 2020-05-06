@@ -1,0 +1,108 @@
+{
+    "kind": "Template",
+    "apiVersion": "v1",
+    "metadata":
+    {
+      "name": "${NAME}",
+      "creationTimestamp": null
+    },
+    "objects": [
+	{
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}"
+      }
+    },
+        {
+            "apiVersion": "secops.pathfinder.gov.bc.ca/v1alpha1",
+            "kind": "NetworkSecurityPolicy",
+            "metadata": {
+              "annotations": {
+                "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"secops.pathfinder.gov.bc.ca/v1alpha1\",\"kind\":\"NetworkSecurityPolicy\",\"metadata\":{\"annotations\":{},\"name\":\"egress-internet-sxluez-${ENVIRONMENT}\",\"namespace\":\"${PROJECT_PREFIX}-${ENVIRONMENT}\"},\"spec\":{\"description\":\"allow ${PROJECT_PREFIX}-${ENVIRONMENT} to talk to the internet\\n\",\"destination\":[[\"ext:network=any\"]],\"source\":[[\"$namespace=${PROJECT_PREFIX}-${ENVIRONMENT}\"]]}}\n"
+              },
+              "creationTimestamp": "2019-11-19T19:38:36Z",
+              "finalizers": [
+                "finalizer.secops.pathfinder.gov.bc.ca"
+              ],
+              "generation": 1,
+              "name": "egress-internet-${PROJECT_PREFIX}-${ENVIRONMENT}",
+              "namespace": "${PROJECT_PREFIX}-${ENVIRONMENT}"
+            },
+            "spec": {
+              "description": "${PROJECT_PREFIX}-${ENVIRONMENT} to talk to the internet\n",
+              "destination": [
+                [ "ext:network=any" ]
+              ],
+              "source": [
+                [ "$namespace=${PROJECT_PREFIX}-${ENVIRONMENT}" ]
+              ]
+            }
+          },
+          {
+        "apiVersion": "secops.pathfinder.gov.bc.ca/v1alpha1",
+        "kind": "NetworkSecurityPolicy",
+        "metadata": {
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"secops.pathfinder.gov.bc.ca/v1alpha1\",\"kind\":\"NetworkSecurityPolicy\",\"metadata\":{\"annotations\":{},\"name\":\"int-cluster-k8s-api-permit-${PROJECT_PREFIX}-${ENVIRONMENT}\",\"namespace\":\"${PROJECT_PREFIX}-${ENVIRONMENT}\"},\"spec\":{\"description\":\"allow ${PROJECT_PREFIX}-${ENVIRONMENT} pods to talk to the k8s api\\n\",\"destination\":[[\"int:network=internal-cluster-api-endpoint\"]],\"source\":[[\"$namespace=${PROJECT_PREFIX}-${ENVIRONMENT}\"]]}}\n"
+          },
+          "creationTimestamp": "2019-10-09T16:36:59Z",
+          "finalizers": [
+            "finalizer.secops.pathfinder.gov.bc.ca"
+          ],
+          "generation": 1,
+          "name": "int-cluster-k8s-api-permit-${PROJECT_PREFIX}-${ENVIRONMENT}",
+          "namespace": "${PROJECT_PREFIX}-${ENVIRONMENT}"    
+        },
+        "spec": {
+          "description": "allow ${PROJECT_PREFIX}-${ENVIRONMENT} pods to talk to the k8s api\n",
+          "destination": [ ["int:network=internal-cluster-api-endpoint" ] ],
+          "source": [ [ "- $namespace=${PROJECT_PREFIX}-${ENVIRONMENT}" ] ]   
+        }
+    },
+    {
+        "apiVersion": "secops.pathfinder.gov.bc.ca/v1alpha1",
+        "kind": "NetworkSecurityPolicy",
+        "metadata": {
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"secops.pathfinder.gov.bc.ca/v1alpha1\",\"kind\":\"NetworkSecurityPolicy\",\"metadata\":{\"annotations\":{},\"name\":\"intra-namespace-comms-${PROJECT_PREFIX}-${ENVIRONMENT}\",\"namespace\":\"${PROJECT_PREFIX}-${ENVIRONMENT}\"},\"spec\":{\"description\":\"allow ${PROJECT_PREFIX}-${ENVIRONMENT} pods to talk to the k8s api\\n\",\"destination\":[[\"$namespace=${PROJECT_PREFIX}-${ENVIRONMENT}\"]],\"source\":[[\"$namespace=${PROJECT_PREFIX}-${ENVIRONMENT}\"]]}}\n"
+          },
+          "creationTimestamp": "2019-10-09T16:36:59Z",
+          "finalizers": [
+            "finalizer.secops.pathfinder.gov.bc.ca"
+          ],
+          "generation": 1,
+          "name": "intra-namespace-comms-${PROJECT_PREFIX}-${ENVIRONMENT}",
+          "namespace": "${PROJECT_PREFIX}-${ENVIRONMENT}"    
+        },
+        "spec": {
+          "description": "allow ${PROJECT_PREFIX}-${ENVIRONMENT} pods to talk to other pods in the same namespace\n",
+          "destination": [ ["- $namespace=${PROJECT_PREFIX}-${ENVIRONMENT}" ] ],
+          "source": [ [ "- $namespace=${PROJECT_PREFIX}-${ENVIRONMENT}" ] ]   
+        }
+    }
+    ],
+    "parameters": [
+      {
+        "name": "NAME",
+        "displayName": "Name",
+        "description": "The name assigned to all of the resources defined in this template.",
+        "required": true,
+        "value": "network-security-policies"
+      },
+      {
+        "name": "PROJECT_PREFIX",
+        "displayName": "PROJECT_PREFIX",
+        "description": "The PROJECT_PREFIX assigned to all of the resources defined in this template.",
+        "required": true,
+        "value": "yuumcs"
+      },
+      {
+        "name": "ENVIRONMENT",
+        "displayName": "Environment",
+        "description": "The environment assigned to all of the resources defined in this template.",
+        "required": true,
+        "value": "dev"
+      }
+    ]
+  }

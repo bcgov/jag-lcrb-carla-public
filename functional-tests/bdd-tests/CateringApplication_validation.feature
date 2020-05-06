@@ -9,5 +9,6 @@ Scenario: Start Application
     And I click on the Catering Start Application button
     And I review the account profile
     And I review the organization structure
+    And I submit the organization structure
     And I do not complete the catering application correctly
     Then the expected error messages are displayed

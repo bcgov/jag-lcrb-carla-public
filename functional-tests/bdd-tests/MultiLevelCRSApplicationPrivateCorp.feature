@@ -12,7 +12,7 @@ Scenario: Start Application
     And I review the account profile
     And I review the organization structure
     And I add in multiple nested business shareholders
-    And I submit the organization information
+    And I submit the organization structure
     And I complete the application
     And I review the security screening requirements
     And I click on the Pay for Application button

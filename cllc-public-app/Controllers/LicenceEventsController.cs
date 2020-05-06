@@ -153,22 +153,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            // determine event class
-            bool alwaysAuthorization;
-            try
+            // not updating security plan
+            if (item.SecurityPlanSubmitted == null)
             {
-                var licence = _dynamicsClient.Licenceses.GetByKey(item.LicenceId);
-                alwaysAuthorization = licence.AdoxioIseventapprovalalwaysrequired == null ? false : (bool)licence.AdoxioIseventapprovalalwaysrequired;
-            }
-            catch (HttpOperationException ex)
-            {
-                _logger.LogError(ex, "Error updating event");
-                return BadRequest();
-            }
-            item.EventClass = item.DetermineEventClass(alwaysAuthorization);
-            if (item.EventClass != EventClass.Authorization)
-            {
-                item.Status = LicenceEventStatus.Approved;
+                // determine event class
+                bool alwaysAuthorization;
+                try
+                {
+                    var licence = _dynamicsClient.Licenceses.GetByKey(item.LicenceId);
+                    alwaysAuthorization = licence.AdoxioIseventapprovalalwaysrequired == null ? false : (bool)licence.AdoxioIseventapprovalalwaysrequired;
+                }
+                catch (HttpOperationException ex)
+                {
+                    _logger.LogError(ex, "Error updating event");
+                    return BadRequest();
+                }
+                item.EventClass = item.DetermineEventClass(alwaysAuthorization);
+                if (item.EventClass != EventClass.Authorization)
+                {
+                    item.Status = LicenceEventStatus.Approved;
+                }
             }
 
             MicrosoftDynamicsCRMadoxioEvent patchEvent = new MicrosoftDynamicsCRMadoxioEvent();

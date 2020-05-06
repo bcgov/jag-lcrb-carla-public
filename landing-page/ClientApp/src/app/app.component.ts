@@ -40,7 +40,6 @@ export class AppComponent extends FormBase implements OnInit {
   public isNewUser: boolean;
   public isDevMode: boolean;
   public showMap: boolean;
-  public showFederalReporting: boolean;
   public versionInfo: VersionInfo;
   isAssociate = false;
   account: Account;
@@ -70,9 +69,6 @@ export class AppComponent extends FormBase implements OnInit {
 
     featureFlagService.featureOn('LicenseeChanges')
       .subscribe(x => this.licenseeChangeFeatureOn = x);
-
-    featureFlagService.featureOn('FederalReporting')
-      .subscribe(x => this.showFederalReporting = x);
 
     this.isDevMode = isDevMode();
     this.router.events
