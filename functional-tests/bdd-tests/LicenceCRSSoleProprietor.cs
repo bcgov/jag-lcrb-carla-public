@@ -71,50 +71,7 @@ namespace bdd_tests
         [And(@"I pay the licensing fee")]
         public void pay_licence_fee()
         {
-            /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            */
-
-            string licenceFee = "Pay Licence Fee and Plan Store Opening";
-
-            // click on the pay licence fee link
-            NgWebElement uiLicenceFee = ngDriver.FindElement(By.LinkText(licenceFee));
-            uiLicenceFee.Click();
-
-            /* 
-            Page Title: Plan Your Store Opening
-            */
-
-            string reasonDay = "Automated test: Reason for opening date.";
-
-            // select the opening date
-            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
-            uiCalendar1.Click();
-
-            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[5]/td[5]/div"));
-            uiCalendar2.Click();
-
-            // enter the reason for the opening date
-            NgWebElement uiReasonDate = ngDriver.FindElement(By.XPath("//textarea"));
-            uiReasonDate.SendKeys(reasonDay);
-       
-            NgWebElement paymentButton = ngDriver.FindElement(By.XPath("//button[contains(.,' PAY LICENCE FEE AND RECEIVE LICENCE')]"));
-            paymentButton.Click();
-            
-            // pay the licence fee
-            MakePayment();
-
-            System.Threading.Thread.Sleep(7000);
-
-            // confirm correct payment amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
-
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
+            PayLicenceFee();
         }
 
         [And(@"I click on the licence download link")]
