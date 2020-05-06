@@ -41,3 +41,4 @@ node_modules/
 /watchdog/Watchdog/obj
 /watchdog/healthchecksdb
 /orgbook-service/.vs/orgbook-service
+/cllc-interfaces/Dynamics-Autorest/code-model-v1
