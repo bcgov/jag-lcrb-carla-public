@@ -120,12 +120,14 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 errorNotification = (SBNErrorNotification1)serializer.Deserialize(reader);                
             }
-            _logger.LogError("Received error notification");
-            _logger.LogError(inputXML);
+            
 
             // check to see if it is simply a problem with an old account number.
             if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11845")) // Transaction not allowed - Duplicate Client event exists )
             {
+                _logger.LogError("Received error notification");
+                _logger.LogError(inputXML);
+
                 _logger.LogError("****************************************************");
                 _logger.LogError("CRA has rejected the message due to an incorrect business number.  The business in question may have had multiple business numbers in the past and the number in the record is no longer valid.  Please correct the business number.");
                 _logger.LogError("****************************************************");                
@@ -140,7 +142,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 int currentSuffix = OneStopUtils.GetSuffixFromPartnerNote(errorNotification.header.partnerNote, _logger);
 
                 // sanity check
-                if (currentSuffix < 10)
+                if (currentSuffix < 100)
                 {
                     currentSuffix++;
                     _logger.LogInformation($"Starting resend of licence creation message, with new value of {currentSuffix}");
@@ -150,7 +152,14 @@ namespace Gov.Lclb.Cllb.OneStopService
                 else
                 {
                     _logger.LogInformation($"Skipping resend of licence creation message as there have been too many tries({currentSuffix})");
+                    _logger.LogError("Received error notification");
+                    _logger.LogError(inputXML);
                 }
+            }
+            else
+            {
+                _logger.LogError("Received error notification");
+                _logger.LogError(inputXML);
             }
 
             return result;
