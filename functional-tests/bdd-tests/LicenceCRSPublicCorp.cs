@@ -101,78 +101,7 @@ namespace bdd_tests
         [And(@"I request a structural change")]
         public void request_structural_change()
         {
-            /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            */
-
-            string structuralChange = "Request a Structural Change";
-
-            // click on the request structural change link
-            NgWebElement uiStructuralChange = ngDriver.FindElement(By.LinkText(structuralChange));
-            uiStructuralChange.Click();
-
-            /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            // click on continue to application button
-            NgWebElement continueToApplicationButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
-            continueToApplicationButton.Click();
-
-            /* 
-            Page Title: Submit the Cannabis Retail Store Structural Change Application
-            */
-
-            // create test data
-            string description = "Test automation outline of the proposed change.";
-
-            // enter the description of the change
-            NgWebElement descriptionOfChange = ngDriver.FindElement(By.Id("description1"));
-            descriptionOfChange.SendKeys(description);
-
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload a floor plan document
-            string floorPlan = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
-            NgWebElement uiFloorPlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uiFloorPlan.SendKeys(floorPlan);
-
-            // select 'no' for changes to entries
-            NgWebElement changeToEntries = ngDriver.FindElement(By.Id("mat-button-toggle-2-button"));
-            changeToEntries.Click();
-
-            // select authorizedToSubmit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
-            uiAuthorizedToSubmit.Click();
-
-            // select signatureAgreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
-            uiSignatureAgreement.Click();
-
-            // click on the Submit & Pay button
-            NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
-            submitpayButton.Click();
-
-            System.Threading.Thread.Sleep(3000);
-
-            // pay for the relocation application
-            MakePayment();
-
-            System.Threading.Thread.Sleep(7000);
-
-            // confirm correct payment amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$440.00')]")).Displayed);
-
-            // return to the Licences tab
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
+            RequestStructuralChange();
         }
 
         [And(@"I review the federal reports")]
