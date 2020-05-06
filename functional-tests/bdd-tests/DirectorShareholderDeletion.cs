@@ -159,7 +159,7 @@ namespace bdd_tests
         public void delete_director_record()
         {
             // click on the delete button for key personnel 
-            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[7]/i[2]/span"));
             uiEditInfoButton.Click();
 
             // click on submit org info button
