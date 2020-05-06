@@ -25,6 +25,7 @@ using Serilog.Events;
 using Serilog.Exceptions;
 using SoapCore;
 using System;
+using System.Net.Http;
 using System.Reflection;
 using System.ServiceModel;
 using System.Text;
@@ -88,7 +89,7 @@ namespace Gov.Lclb.Cllb.OneStopService
     public class Startup
     {
         private readonly ILoggerFactory _loggerFactory;
-        public IConfiguration Configuration { get; }
+        public IConfiguration _configuration { get; }
 
         public Startup(IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
@@ -105,7 +106,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 builder.AddUserSecrets<Startup>();
             }
 
-            Configuration = builder.Build();
+            _configuration = builder.Build();
 
         }
 
@@ -120,15 +121,15 @@ namespace Gov.Lclb.Cllb.OneStopService
             });
 
 
-            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(Configuration);
-            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _loggerFactory.CreateLogger("IReceiveFromHubService"), Configuration));
+            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
+            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _loggerFactory.CreateLogger("IReceiveFromHubService"), _configuration));
 
             services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("OneStopController"));
 
             services.AddMvc(config =>
             {
                 config.EnableEndpointRouting = false;
-                if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
+                if (!string.IsNullOrEmpty(_configuration["JWT_TOKEN_KEY"]))
                 {
                     var policy = new AuthorizationPolicyBuilder()
                                  .RequireAuthenticatedUser()
@@ -148,7 +149,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders();
 
-            if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
+            if (!string.IsNullOrEmpty(_configuration["JWT_TOKEN_KEY"]))
             {
                 // Configure JWT authentication
                 services.AddAuthentication(o =>
@@ -162,9 +163,9 @@ namespace Gov.Lclb.Cllb.OneStopService
                     o.TokenValidationParameters = new TokenValidationParameters()
                     {
                         RequireExpirationTime = false,
-                        ValidIssuer = Configuration["JWT_VALID_ISSUER"],
-                        ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
+                        ValidIssuer = _configuration["JWT_VALID_ISSUER"],
+                        ValidAudience = _configuration["JWT_VALID_AUDIENCE"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT_TOKEN_KEY"]))
                     };
                 });
             }
@@ -186,16 +187,16 @@ namespace Gov.Lclb.Cllb.OneStopService
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            
-            
+
+
 
             // OneStop does not seem to set the SoapAction properly
 
             app.Use(async (context, next) =>
             {
-                
+
                 if (context.Request.Path.Value.Equals("/receiveFromHub"))
-                {                    
+                {
                     string soapAction = context.Request.Headers["SOAPAction"];
                     if (string.IsNullOrEmpty(soapAction) || soapAction.Equals("\"\""))
                     {
@@ -242,13 +243,15 @@ namespace Gov.Lclb.Cllb.OneStopService
                 app.UseHangfireDashboard("/hangfire", dashboardOptions);
             }
 
-            if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_JOBS"]))
+            if (!string.IsNullOrEmpty(_configuration["ENABLE_HANGFIRE_JOBS"]))
             {
                 SetupHangfireJobs(app, loggerFactory);
             }
 
             app.UseAuthentication();
-            app.UseMvc();
+
+            
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -261,34 +264,66 @@ namespace Gov.Lclb.Cllb.OneStopService
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
 
-        app.UseSerilogRequestLogging(opts => {
-            opts.EnrichDiagnosticContext = LogHelper.EnrichFromRequest;
-            opts.GetLevel = LogHelper.ExcludeHealthChecks; // Use the custom level
-        });
+            // by positioning this after the health check, no need to filter out health checks from request logging.
+            app.UseSerilogRequestLogging();
 
-        // enable Splunk logger using Serilog
-        if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]) &&
-                !string.IsNullOrEmpty(Configuration["SPLUNK_TOKEN"])
+            app.UseMvc();
+
+            // enable Splunk logger using Serilog
+            // enable Splunk logger using Serilog
+            if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]) &&
+                !string.IsNullOrEmpty(_configuration["SPLUNK_TOKEN"])
                 )
+            {
+
+                Serilog.Sinks.Splunk.CustomFields fields = new Serilog.Sinks.Splunk.CustomFields();
+                if (!string.IsNullOrEmpty(_configuration["SPLUNK_CHANNEL"]))
+                {
+                    fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", _configuration["SPLUNK_CHANNEL"]));
+                }
+                var splunkUri = new Uri(_configuration["SPLUNK_COLLECTOR_URL"]);
+                var upperSplunkHost = splunkUri.Host?.ToUpperInvariant() ?? string.Empty;
+
+                // Fix for bad SSL issues 
+
+
+                Log.Logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .Enrich.WithExceptionDetails()
+                    .WriteTo.Console()
+                    .WriteTo.EventCollector(splunkHost: _configuration["SPLUNK_COLLECTOR_URL"],
+                       sourceType: "manual", eventCollectorToken: _configuration["SPLUNK_TOKEN"],
+                       restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
+#pragma warning disable CA2000 // Dispose objects before losing scope
+                       messageHandler: new HttpClientHandler()
+                       {
+                           ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
+                       }
+#pragma warning restore CA2000 // Dispose objects before losing scope
+                     )
+                    .CreateLogger();
+
+                Serilog.Debugging.SelfLog.Enable(Console.Error);
+
+                Log.Logger.Information("CARLA Portal Container Started");
+
+            }
+            else
             {
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
-                    .WriteTo.EventCollector(Configuration["SPLUNK_COLLECTOR_URL"],
-                        Configuration["SPLUNK_TOKEN"], restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error)
+                    .WriteTo.Console()
                     .CreateLogger();
             }
-
         }
 
-    
-
-        /// <summary>
-        /// Setup the Hangfire jobs.
-        /// </summary>
-        /// <param name="app"></param>
-        /// <param name="loggerFactory"></param>
-        private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFactory)
+            /// <summary>
+            /// Setup the Hangfire jobs.
+            /// </summary>
+            /// <param name="app"></param>
+            /// <param name="loggerFactory"></param>
+            private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             Microsoft.Extensions.Logging.ILogger log = loggerFactory.CreateLogger(typeof(Startup));
             log.LogInformation("Starting setup of Hangfire job ...");
@@ -300,7 +335,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                     log.LogInformation("Creating Hangfire jobs for License issuance check ...");
 
                     Microsoft.Extensions.Logging.ILogger oneStopLog = loggerFactory.CreateLogger(typeof(OneStopUtils));
-                    RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, oneStopLog).CheckForNewLicences(null), Cron.Hourly());
+                    RecurringJob.AddOrUpdate(() => new OneStopUtils(_configuration, oneStopLog).CheckForNewLicences(null), Cron.Hourly());
 
                     log.LogInformation("Hangfire License issuance check jobs setup.");
                 }
