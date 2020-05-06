@@ -123,7 +123,7 @@ export class LicenseeChangeLog {
   }
 
   public static GetKeyPersonnelDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
-    let children = changeLog.children || [];
+    let children = (changeLog && changeLog.children) || [];
     let leaders = children.filter(item => item.isIndividual && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
       leaders = leaders.concat(LicenseeChangeLog.GetKeyPersonnelDecendents(child));
@@ -139,7 +139,7 @@ export class LicenseeChangeLog {
   }
 
   public static GetIndividualShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
-    let children = changeLog.children || [];
+    let children = (changeLog && changeLog.children) || [];
     let shareholders = children.filter(item => item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
       shareholders = shareholders.concat(LicenseeChangeLog.GetIndividualShareholderDecendents(child));
@@ -148,7 +148,7 @@ export class LicenseeChangeLog {
   }
 
   public static GetBusinessShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
-    let children = changeLog.children || [];
+    let children = (changeLog && changeLog.children) || [];
     let shareholders = children.filter(item => !item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
       shareholders = shareholders.concat(LicenseeChangeLog.GetBusinessShareholderDecendents(child));
