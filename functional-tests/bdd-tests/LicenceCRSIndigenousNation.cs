@@ -125,30 +125,7 @@ namespace bdd_tests
         [And(@"I show the store as open on the map")]
         public void show_store_open_on_map()
         {
-            /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            */
-
-            string showOpenOnMap = "Show Store as Open on Map";
-
-            // click on the Transfer Ownership link
-            NgWebElement uiShowOpenOnMap = ngDriver.FindElement(By.LinkText(showOpenOnMap));
-            uiShowOpenOnMap.Click();
-
-            // TODO: next steps?
-
-            /* 
-            Page Title: Apply for a cannabis licence
-            */
-
-            System.Threading.Thread.Sleep(7000);
-
-            string dashboard = "Dashboard";
-
-            // click on the Dashboard link
-            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
-            uiDashboard.Click();
+            ShowStoreOpen();
         }
 
         [And(@"I change a personnel email address")]
