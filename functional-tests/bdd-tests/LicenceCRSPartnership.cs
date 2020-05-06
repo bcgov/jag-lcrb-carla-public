@@ -77,11 +77,7 @@ namespace bdd_tests
         [And(@"I click on the licence download link")]
         public void click_licence_download_link()
         {
-            string downloadLink = "Download Licence";
-
-            // click on the Licences link
-            NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
-            uiDownloadLicence.Click();
+            DownloadLicence();
         }
 
         [And(@"I plan the store opening")]

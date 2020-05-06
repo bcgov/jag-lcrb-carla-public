@@ -1807,6 +1807,15 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
+        public void DownloadLicence()
+        {
+            string downloadLink = "Download Licence";
+
+            // click on the Licences link
+            NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
+            uiDownloadLicence.Click();
+        }
+
         public void Dispose()
         {
             ngDriver.Quit();
