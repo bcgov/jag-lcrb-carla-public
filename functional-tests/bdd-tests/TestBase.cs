@@ -56,10 +56,10 @@ namespace bdd_tests
 
             driver = new ChromeDriver(path, options);
 
-            //driver = new FirefoxDriver(FirefoxDriverService);
-            driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(60);
-
             ngDriver = new NgWebDriver(driver);
+          
+            ngDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(300);
+            ngDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(300);
 
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
@@ -190,20 +190,11 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = false;
         }
         public void CarlaDeleteCurrentAccount()
-        {
-            
-            string deleteAccountURL = $"{baseUri}api/accounts/delete/current";
-            string script = $"return fetch(\"{deleteAccountURL}\", {{method: \"POST\", body: {{}}}})";
-
-            var  deleteResult = ngDriver.ExecuteScript(script);
-            var obj = JsonConvert.SerializeObject(deleteResult);
-            var json = JsonConvert.DeserializeObject<Dictionary<string,object>>(obj);
-            //bool success = (Int64)json["status"] == 404 || (Newtonsoft.Json.Linq.JObject)json["text"] == new Newtonsoft.Json.Linq.JObject("OK");
-            //bool success = (Int64)json["status"] != 500;
-            //Assert.True(success);
-
-            // note that the above call to delete the account will take a period of time to execute.            
-            ngDriver.Navigate().GoToUrl($"{baseUri}logout");
+        {                       
+            // using wrapped driver as both of these calls are not angular
+            ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/accounts/delete/current");
+                       
+            ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
 
         public void CRSEligibilityDisclosure()
