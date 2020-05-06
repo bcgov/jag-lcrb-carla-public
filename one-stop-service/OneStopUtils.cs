@@ -23,7 +23,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// <summary>
         /// Maximum number of new licenses that will be sent per interval.
         /// </summary>
-        private const int MAX_LICENCES_PER_INTERVAL = 2;
+        private const int MAX_LICENCES_PER_INTERVAL = 10;
 
         private static readonly HttpClient Client = new HttpClient();
 
