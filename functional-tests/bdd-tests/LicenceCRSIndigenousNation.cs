@@ -113,53 +113,7 @@ namespace bdd_tests
         [And(@"I request a transfer of ownership")]
         public void request_ownership_transfer()
         {
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
-
-            /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            */
-
-            string transferOwnership = "Transfer Ownership";
-
-            // click on the Transfer Ownership link
-            NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
-            uiTransferOwnership.Click();
-
-            /* 
-            Page Title: Transfer Your Cannabis Retail Store Licence
-            */
-
-            string thirdparty = "GunderCorp TestBusiness";
-
-            // search for the proposed licensee
-            NgWebElement thirdPartyOperator = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
-            thirdPartyOperator.SendKeys(thirdparty);
-
-            NgWebElement thirdPartyOperatorOption = ngDriver.FindElement(By.XPath("//mat-option[@id='mat-option-0']/span"));
-            thirdPartyOperatorOption.Click();
-
-            // click on consent to licence transfer checkbox
-            NgWebElement consentToTransfer = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-ownership-transfer/div/div[2]/div[2]/section[5]/app-field/section/div/section/section/input"));
-            consentToTransfer.Click();
-
-            // click on authorize signature checkbox
-            NgWebElement authorizeSignature = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-ownership-transfer/div/div[2]/div[2]/div/app-field[1]/section/div/section/section/input"));
-            authorizeSignature.Click();
-
-            // click on signature agreement checkbox
-            NgWebElement signatureAgreement = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-ownership-transfer/div/div[2]/div[2]/div/app-field[2]/section/div/section/section/input"));
-            signatureAgreement.Click();
-
-            // click on submit transfer button
-            NgWebElement submitTransferButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT TRANSFER')]"));
-            submitTransferButton.Click();
-
-            // TODO: Confirm status change on Licences tab
+            RequestTransferOwnership();
         }
 
         [And(@"I request a personnel name change")]
