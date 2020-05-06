@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top536 { get; set; }
+        public int? Top538 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip536 { get; set; }
+        public int? Skip538 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count536 { get; set; }
+        public bool? Count538 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter536 { get; set; }
+        public string Filter538 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search536 { get; set; }
+        public string Search538 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -79,6 +79,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAccountadoxiolicencesproposedoperator.
         /// </summary>
         public virtual IAccountadoxiolicencesproposedoperator Accountadoxiolicencesproposedoperator { get; private set; }
+
+        /// <summary>
+        /// Gets the ILginlinkid.
+        /// </summary>
+        public virtual ILginlinkid Lginlinkid { get; private set; }
 
         /// <summary>
         /// Gets the IThirdpartyoperatorlicences.
@@ -1864,6 +1869,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILocalgovindigenousnations.
         /// </summary>
         public virtual ILocalgovindigenousnations Localgovindigenousnations { get; private set; }
+
+        /// <summary>
+        /// Gets the ILginaccounts.
+        /// </summary>
+        public virtual ILginaccounts Lginaccounts { get; private set; }
 
         /// <summary>
         /// Gets the ILocalgovindigenousnationmailboxtrackingfolders.
@@ -3731,6 +3741,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAsyncoperationidadoxioapplicationtransferownershipv1 Asyncoperationidadoxioapplicationtransferownershipv1 { get; private set; }
 
         /// <summary>
+        /// Gets the IWorkflows.
+        /// </summary>
+        public virtual IWorkflows Workflows { get; private set; }
+
+        /// <summary>
         /// Gets the ILkadoxioapplicationlicenseechangesv10processid.
         /// </summary>
         public virtual ILkadoxioapplicationlicenseechangesv10processid Lkadoxioapplicationlicenseechangesv10processid { get; private set; }
@@ -3999,6 +4014,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Accounts = new Accounts(this);
             Accountadoxioeventlicensee = new Accountadoxioeventlicensee(this);
             Accountadoxiolicencesproposedoperator = new Accountadoxiolicencesproposedoperator(this);
+            Lginlinkid = new Lginlinkid(this);
             Thirdpartyoperatorlicences = new Thirdpartyoperatorlicences(this);
             Partyidadoxioevent = new Partyidadoxioevent(this);
             Regardingobjectidadoxioevent = new Regardingobjectidadoxioevent(this);
@@ -4356,6 +4372,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Loanprincipalobjectattributeaccesses = new Loanprincipalobjectattributeaccesses(this);
             Loanprocesssession = new Loanprocesssession(this);
             Localgovindigenousnations = new Localgovindigenousnations(this);
+            Lginaccounts = new Lginaccounts(this);
             Localgovindigenousnationmailboxtrackingfolders = new Localgovindigenousnationmailboxtrackingfolders(this);
             Localgovindigenousnationprincipalobjectattributeaccesses = new Localgovindigenousnationprincipalobjectattributeaccesses(this);
             Localgovindigenousnationprocesssession = new Localgovindigenousnationprocesssession(this);
@@ -4729,6 +4746,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Asyncoperationidadoxioapplicationrelocationv1 = new Asyncoperationidadoxioapplicationrelocationv1(this);
             Asyncoperationidadoxioapplicationstructurechangev1 = new Asyncoperationidadoxioapplicationstructurechangev1(this);
             Asyncoperationidadoxioapplicationtransferownershipv1 = new Asyncoperationidadoxioapplicationtransferownershipv1(this);
+            Workflows = new Workflows(this);
             Lkadoxioapplicationlicenseechangesv10processid = new Lkadoxioapplicationlicenseechangesv10processid(this);
             Lkadoxioapplicationliquorbpfprocessid = new Lkadoxioapplicationliquorbpfprocessid(this);
             Lkadoxioapplicationrelocationv1processid = new Lkadoxioapplicationrelocationv1processid(this);
