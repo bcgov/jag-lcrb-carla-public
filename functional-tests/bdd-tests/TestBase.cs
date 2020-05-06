@@ -1725,6 +1725,40 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
+        public void RequestPersonnelEmailChange()
+        {
+            // click on Dashboard link
+            string dash = "Dashboard";
+            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(dash));
+            returnDash.Click();
+
+            // click on the review organzation information button
+            NgWebElement orgInfoButton3 = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
+            orgInfoButton3.Click();
+
+            // click on the Edit button for Key Personnel
+            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
+            uiEditInfoButton.Click();
+
+            // enter a new email for the director
+            string newDirectorEmail = "newemail@test.com";
+
+            NgWebElement uiNewDirectorEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+            uiNewDirectorEmail.Clear();
+            uiNewDirectorEmail.SendKeys(newDirectorEmail);
+
+            // click on the Confirm button
+            NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
+            uiConfirmButton.Click();
+
+            // click on confirm org info button
+            NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' CONFIRM ORGANIZATION INFORMATION IS COMPLETE')]"));
+            orgInfoButton2.Click();
+
+            // check that dashboard is displayed (i.e. no payment has been required)
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Welcome to Liquor and Cannabis Licensing')]")).Displayed);
+        }
+
         public void Dispose()
         {
             ngDriver.Quit();
