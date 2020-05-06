@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top536 { get; set; }
+        int? Top538 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip536 { get; set; }
+        int? Skip538 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count536 { get; set; }
+        bool? Count538 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter536 { get; set; }
+        string Filter538 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search536 { get; set; }
+        string Search538 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -76,6 +76,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAccountadoxiolicencesproposedoperator.
         /// </summary>
         IAccountadoxiolicencesproposedoperator Accountadoxiolicencesproposedoperator { get; }
+
+        /// <summary>
+        /// Gets the ILginlinkid.
+        /// </summary>
+        ILginlinkid Lginlinkid { get; }
 
         /// <summary>
         /// Gets the IThirdpartyoperatorlicences.
@@ -1861,6 +1866,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILocalgovindigenousnations.
         /// </summary>
         ILocalgovindigenousnations Localgovindigenousnations { get; }
+
+        /// <summary>
+        /// Gets the ILginaccounts.
+        /// </summary>
+        ILginaccounts Lginaccounts { get; }
 
         /// <summary>
         /// Gets the ILocalgovindigenousnationmailboxtrackingfolders.
@@ -3726,6 +3736,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAsyncoperationidadoxioapplicationtransferownershipv1.
         /// </summary>
         IAsyncoperationidadoxioapplicationtransferownershipv1 Asyncoperationidadoxioapplicationtransferownershipv1 { get; }
+
+        /// <summary>
+        /// Gets the IWorkflows.
+        /// </summary>
+        IWorkflows Workflows { get; }
 
         /// <summary>
         /// Gets the ILkadoxioapplicationlicenseechangesv10processid.

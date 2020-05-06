@@ -1078,7 +1078,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
-        [HttpPost("delete/current")]
+        [HttpGet("delete/current")]
         public async Task<IActionResult> DeleteCurrentAccount()
         {
             if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
@@ -1091,13 +1091,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogDebug(LoggingEvents.HttpGet, "UserSettings: " + JsonConvert.SerializeObject(userSettings));
 
             // query the Dynamics system to get the account record.
-            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+            if (userSettings.AccountId != null && !userSettings.IsNewUserRegistration && userSettings.AccountId.Length > 0)
             {
-                return await DeleteDynamicsAccount(userSettings.AccountId);
+
+                // call the bpf.
+                try
+                {
+                    // this needs to be the guid for the published workflow.
+                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync("df4e4623-a2f5-4e9f-a305-d8a578d1c49f", userSettings.AccountId);
+                    return Ok("OK");
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                
             }
             else
             {
-                return NotFound();
+                return Ok("OK");
             }
         }
 
