@@ -137,26 +137,7 @@ namespace bdd_tests
         [Then(@"the requested applications are visible on the dashboard")]
         public void licences_tab_updated()
         {
-            /* 
-            Page Title: Welcome to Liquor and Cannabis Licensing
-            */
-
-            System.Threading.Thread.Sleep(7000);
-
-            string dashboard = "Dashboard";
-
-            // click on the Dashboard link
-            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
-            uiDashboard.Click();
-
-            // confirm that relocation request is displayed
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Relocation Request')]")).Displayed);
-
-            // confirm that a name or branding change request is displayed
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Name or Branding Change')]")).Displayed);
-
-            // confirm that a structural change request is displayed
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Structural Change')]")).Displayed);
+            RequestedApplicationsOnDashboard();        
         }
     }
 }
