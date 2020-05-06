@@ -2114,6 +2114,34 @@ namespace bdd_tests
             // TODO: Confirm status change on Licences tab
         }
 
+        public void ShowStoreOpen()
+        {
+            /* 
+                Page Title: Licences
+                Subtitle:   Cannabis Retail Store Licences
+                */
+
+            string showOpenOnMap = "Show Store as Open on Map";
+
+            // click on the Transfer Ownership link
+            NgWebElement uiShowOpenOnMap = ngDriver.FindElement(By.LinkText(showOpenOnMap));
+            uiShowOpenOnMap.Click();
+
+            // TODO: next steps?
+
+            /* 
+            Page Title: Apply for a cannabis licence
+            */
+
+            System.Threading.Thread.Sleep(7000);
+
+            string dashboard = "Dashboard";
+
+            // click on the Dashboard link
+            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
+            uiDashboard.Click();
+        }
+
         public void Dispose()
         {
             ngDriver.Quit();
