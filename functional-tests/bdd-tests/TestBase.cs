@@ -1597,11 +1597,17 @@ namespace bdd_tests
             uiEditInfoButton.Click();
 
             // enter a new name for the director
-            string newDirectorFirstName = "Updated Director";
+            string newDirectorFirstName = "UpdatedFirstName";
+            string newDirectorLastName = "UpdatedLastName";
+
 
             NgWebElement uiNewDirectorFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
             uiNewDirectorFirstName.Clear();
             uiNewDirectorFirstName.SendKeys(newDirectorFirstName);
+
+            NgWebElement uiNewDirectorLasttName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+            uiNewDirectorLasttName.Clear();
+            uiNewDirectorLasttName.SendKeys(newDirectorLastName);
 
             // click on the Confirm button
             NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
@@ -1639,7 +1645,8 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(7000);
 
             // check that the director name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Updated Director')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedFirstName')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedLastName')]")).Displayed);
         }
 
         public void RequestRelocation()
