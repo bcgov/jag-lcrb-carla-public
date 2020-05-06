@@ -542,6 +542,58 @@
         }
       }
     },
+    "/accounts({accountid})/adoxio_LGINLinkId": {
+      "get": {
+        "tags": [
+          "lginlinkid"
+        ],
+        "summary": "Get adoxio_LGINLinkId from accounts",
+        "operationId": "lginlinkid_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountid",
+            "description": "key: accountid of account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_localgovindigenousnation"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/accounts({accountid})/adoxio_thirdpartyoperator_licences": {
       "get": {
         "tags": [
@@ -57174,6 +57226,152 @@
         }
       }
     },
+    "/adoxio_localgovindigenousnations({adoxio_localgovindigenousnationid})/adoxio_LGIN_Accounts": {
+      "get": {
+        "tags": [
+          "lgin_accounts"
+        ],
+        "summary": "Get adoxio_LGIN_Accounts from adoxio_localgovindigenousnations",
+        "operationId": "lginaccounts_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_localgovindigenousnationid",
+            "description": "key: adoxio_localgovindigenousnationid of adoxio_localgovindigenousnation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.accountCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_localgovindigenousnations({adoxio_localgovindigenousnationid})/adoxio_LGIN_Accounts({accountid})": {
+      "get": {
+        "tags": [
+          "lgin_accounts"
+        ],
+        "summary": "Get adoxio_LGIN_Accounts from adoxio_localgovindigenousnations",
+        "operationId": "lginaccounts_Getadoxio_LGIN_AccountsByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_localgovindigenousnationid",
+            "description": "key: adoxio_localgovindigenousnationid of adoxio_localgovindigenousnation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "accountid",
+            "description": "key: accountid of account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_localgovindigenousnations({adoxio_localgovindigenousnationid})/adoxio_localgovindigenousnation_MailboxTrackingFolders": {
       "get": {
         "tags": [
@@ -103624,6 +103822,246 @@
         }
       }
     },
+    "/workflows": {
+      "get": {
+        "tags": [
+          "workflows.workflow"
+        ],
+        "summary": "Get entities from workflows",
+        "operationId": "Workflows_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.workflowCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "workflows.workflow"
+        ],
+        "summary": "Add new entity to workflows",
+        "operationId": "Workflows_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Prefer",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New entity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.workflow"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.workflow"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/workflows({workflowid})": {
+      "get": {
+        "tags": [
+          "workflows.workflow"
+        ],
+        "summary": "Get entity from workflows by key",
+        "operationId": "Workflows_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workflowid",
+            "description": "key: workflowid of workflow",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.workflow"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "workflows.workflow"
+        ],
+        "summary": "Update entity in workflows",
+        "operationId": "Workflows_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workflowid",
+            "description": "key: workflowid of workflow",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New property values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.workflow"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "workflows.workflow"
+        ],
+        "summary": "Delete entity from workflows",
+        "operationId": "Workflows_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workflowid",
+            "description": "key: workflowid of workflow",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/workflows({workflowid})/lk_adoxio_applicationlicenseechangesv10_processid": {
       "get": {
         "tags": [
@@ -105386,12 +105824,19 @@
           "format": "date-time",
           "type": "string"
         },
+        "adoxio_ownvotingsharesinproducer": {
+          "format": "int32",
+          "type": "integer"
+        },
         "_owningteam_value": {
           "type": "string"
         },
         "exchangerate": {
           "format": "decimal",
           "type": "number"
+        },
+        "_adoxio_lginlinkid_value": {
+          "type": "string"
         },
         "adoxio_termsofuseaccepteddate": {
           "format": "date-time",
@@ -105576,10 +106021,6 @@
           "type": "string"
         },
         "address2_utcoffset": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_ownvotingsharesinproducer": {
           "format": "int32",
           "type": "integer"
         },
@@ -105907,6 +106348,9 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
           }
+        },
+        "adoxio_LGINLinkId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_localgovindigenousnation"
         },
         "ownerid": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
@@ -121351,6 +121795,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
+          }
+        },
+        "adoxio_LGIN_Accounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
           }
         }
       }
@@ -189970,6 +190420,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemform"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.workflowCollection": {
+      "title": "Collection of workflow",
+      "description": "Microsoft.Dynamics.CRM.workflowCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.workflow"
           }
         }
       }
