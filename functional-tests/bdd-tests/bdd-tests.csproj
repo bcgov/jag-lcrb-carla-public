@@ -122,5 +122,8 @@
     <None Update="Director_shareholder_samenamechange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Director_shareholder_deletion.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
