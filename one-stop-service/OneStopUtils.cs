@@ -82,8 +82,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
                     if (_logger != null)
                     {
-                        _logger.LogError(ex.Message);
-                        _logger.LogError(ex.StackTrace);
+                        _logger.LogError(ex, $"Exception occured. {ex.Message}");
                     }
 
                     throw;
