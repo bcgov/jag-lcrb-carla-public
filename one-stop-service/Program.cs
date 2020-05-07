@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
+using Serilog;
 using System;
 
 namespace Gov.Lclb.Cllb.OneStopService
@@ -22,7 +23,8 @@ namespace Gov.Lclb.Cllb.OneStopService
                 logging.AddConsole(x => x.TimestampFormat = "yyyy-MM-dd HH:mm:ss ");
                 logging.AddDebug();
                 logging.AddEventSourceLogger();
-            })                   
+            })
+            .UseSerilog()
             .ConfigureAppConfiguration((hostingContext, config) =>
                     {
                 config.AddEnvironmentVariables();
