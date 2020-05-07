@@ -1620,8 +1620,17 @@ namespace bdd_tests
 
             // upload a marriage certificate document
             string marriageCertificate = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "marriage_certificate.pdf");
-            NgWebElement uploadMarriageCert = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
-            uploadMarriageCert.SendKeys(marriageCertificate);
+
+            if (businessTypeShared == "public corporation")
+            {
+                NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
+                uploadMarriageCert1.SendKeys(marriageCertificate);
+            }
+            else
+            {
+                NgWebElement uploadMarriageCert2 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
+                uploadMarriageCert2.SendKeys(marriageCertificate);
+            }
 
             // click on submit org info button
             NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
