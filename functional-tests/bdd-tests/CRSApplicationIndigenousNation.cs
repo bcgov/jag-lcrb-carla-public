@@ -141,7 +141,7 @@ namespace bdd_tests
         [And(@"the account is deleted")]
         public void Delete_my_account()
         {
-            this.CarlaDeleteCurrentAccount();
+            CarlaDeleteCurrentAccount();
         }
 
         [Then(@"I see the login page")]
@@ -150,6 +150,7 @@ namespace bdd_tests
             /* 
             Page Title: Apply for a cannabis licence
             */
+            CarlaHome();
 
             Assert.True (ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
