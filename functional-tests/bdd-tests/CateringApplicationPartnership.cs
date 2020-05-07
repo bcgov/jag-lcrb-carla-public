@@ -21,11 +21,11 @@ Scenario: Start Application
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
     And I am logged in to the dashboard as a partnership
-    And I click on the Catering Start Application button
+    And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
     And I submit the organization structure
-    And I complete the application
+    And I complete the Catering application
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
@@ -64,16 +64,15 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
-        [And(@"I click on the Catering Start Application button")]
-        public void I_start_application()
+        [And(@"I click on the Start Application button for (.*)")]
+        public void I_start_application(string application_type)
         {
-            /* 
-            Page Title: 
-            */
 
             // click on the Catering Start Application button
             NgWebElement startApp_button = ngDriver.FindElement(By.Id("startCatering"));
             startApp_button.Click();
+
+            applicationTypeShared = application_type;
         }
 
         [And(@"I review the account profile")]
@@ -85,7 +84,7 @@ namespace bdd_tests
         [And(@"I review the organization structure")]
         public void review_org_structure()
         {
-            CateringOrgStructure();            
+            ReviewOrgStructure();
         }
 
         [And(@"I submit the organization structure")]
@@ -94,7 +93,7 @@ namespace bdd_tests
             SubmitOrgInfoButton();
         }
 
-        [And(@"I complete the application")]
+        [And(@"I complete the Catering application")]
         public void I_complete_the_application()
         {
             CateringApplication();
