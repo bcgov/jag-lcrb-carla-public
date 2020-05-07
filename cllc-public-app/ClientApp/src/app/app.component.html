@@ -1,10 +1,10 @@
 <div>
-  <section class="container not-supported-browser" *ngIf="isIE10orLower()">
-    <p>Internet Explorer versions 10 and lower are not supported</p>
-    <p>Please use Google Chrome, Firefox, Edge or IE 11</p>
+  <section class="container not-supported-browser" *ngIf="isIE()">
+    <p>Internet Explorer is not supported</p>
+    <p>Please use Google Chrome, Firefox or Microsoft Edge</p>
   </section>
 
-  <div class="app-outer" *ngIf="!isIE10orLower()">
+  <div class="app-outer" *ngIf="!isIE()">
     <header class="app-header">
       <div class="top-menu row" style="padding-left: 30px; padding-right: 30px; margin:0;">
         <section class="col-md-8 col-xs-12">
