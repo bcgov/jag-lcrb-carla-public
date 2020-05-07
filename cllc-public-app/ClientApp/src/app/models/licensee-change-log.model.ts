@@ -123,7 +123,7 @@ export class LicenseeChangeLog {
   }
 
   public static GetKeyPersonnelDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
-    let children = changeLog.children || [];
+    let children = (changeLog && changeLog.children) || [];
     let leaders = children.filter(item => item.isIndividual && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
       leaders = leaders.concat(LicenseeChangeLog.GetKeyPersonnelDecendents(child));
@@ -139,7 +139,7 @@ export class LicenseeChangeLog {
   }
 
   public static GetIndividualShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
-    let children = changeLog.children || [];
+    let children = (changeLog && changeLog.children) || [];
     let shareholders = children.filter(item => item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
       shareholders = shareholders.concat(LicenseeChangeLog.GetIndividualShareholderDecendents(child));
@@ -148,7 +148,7 @@ export class LicenseeChangeLog {
   }
 
   public static GetBusinessShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
-    let children = changeLog.children || [];
+    let children = (changeLog && changeLog.children) || [];
     let shareholders = children.filter(item => !item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
       shareholders = shareholders.concat(LicenseeChangeLog.GetBusinessShareholderDecendents(child));
@@ -271,7 +271,7 @@ export class LicenseeChangeLog {
       changeLog.firstNameNew === changeLog.firstNameOld &&
       changeLog.lastNameNew === changeLog.lastNameOld &&
       changeLog.dateofBirthNew === changeLog.dateofBirthOld &&
-      changeLog.titleNew === changeLog.titleOld ) {
+      changeLog.titleNew === changeLog.titleOld) {
       result = true
     }
     return result;
@@ -299,12 +299,18 @@ export class LicenseeChangeLog {
   }
 
   getFileUploadValidationErrors(): string[] {
-    let errors = [
-      ...this.privateCorpFileErrors(),
-      ...this.publicCorpFileErrors(),
-      ...this.partnershipFileErrors(),
-      ...this.nameChangeFileErrors()
-    ];
+    let errors = [];
+
+    //no errors for items being removed
+    if (!this.isRemoveChangeType()) {
+      let errors = [
+        ...this.privateCorpFileErrors(),
+        ...this.publicCorpFileErrors(),
+        ...this.partnershipFileErrors(),
+        ...this.nameChangeFileErrors()
+      ];
+    }
+
     return errors;
   }
 

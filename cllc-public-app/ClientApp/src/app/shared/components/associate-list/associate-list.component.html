@@ -139,7 +139,7 @@
                                         </mat-expansion-panel-header>
                                         <section style="text-align: left; padding-top: 15px;">
                                             <p>Please provide a certificate of name change, marriage certificate, etc.: </p>
-                                            <app-file-uploader *ngIf="account" documentType="Name Change Documents"
+                                            <app-file-uploader *ngIf="account" documentType="{{asLicenseeChangeLog(associate?.value).fileUploadPrefix}} Name Change Documents"
                                                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
                                                 entityName="account"
                                                 (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Name Change Documents', associate?.value?.refObject)"

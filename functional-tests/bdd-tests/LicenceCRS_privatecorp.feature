@@ -17,4 +17,6 @@ Scenario: Pay CRS Licence Fee and Complete Applications
     And I review the federal reports
     And I show the store as open on the map
     And I request a transfer of ownership
+    And I request a personnel name change
+    And I change a personnel email address
     Then the requested applications are visible on the dashboard
