@@ -74,34 +74,41 @@ namespace bdd_tests
             NgWebElement uiAddKeyPersonnel = ngDriver.FindElement(By.XPath("//div/button"));
             uiAddKeyPersonnel.Click();
 
-            // create same individual data
+            // create data
             string sameIndividualFirstName = "Same";
             string sameIndividualLastName = "Individual";
             string sameIndividualEmail = "same@individual.com";
             string sameTitle = "CEO";
             string votingShares = "100";
 
-            // enter the first name 
+            string sameIndividualEmail2 = "same@individual2.com";
+
+            string sparePersonnelFirstName = "Spare";
+            string sparePersonnelLastName = "KeyPersonnel";
+            string sparePersonnelTitle = "CFO";
+            string sparePersonnelEmail = "cfo@test.com";
+
+            // enter the key personnel first name 
             NgWebElement uiSameIndividualFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
             uiSameIndividualFirstName.SendKeys(sameIndividualFirstName);
 
-            // enter the last name 
+            // enter the key personnel last name 
             NgWebElement uiSameIndividualLastName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
             uiSameIndividualLastName.SendKeys(sameIndividualLastName);
 
-            // click the Director checkbox
+            // click the key personnel checkbox
             NgWebElement uiSameRole = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
             uiSameRole.Click();
 
-            // enter the title
+            // enter the key personnel title
             NgWebElement uiSameTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
             uiSameTitle.SendKeys(sameTitle);
 
-            // enter the email 
+            // enter the key personnel email 
             NgWebElement uiSameIndividualEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
             uiSameIndividualEmail.SendKeys(sameIndividualEmail);
 
-            // select the DOB
+            // select the key personnel DOB
             NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             openKeyPersonnelDOB.Click();
 
@@ -112,31 +119,62 @@ namespace bdd_tests
             NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
             uiConfirmButton.Click();
 
+            // click on the add key personnel button for spare
+            NgWebElement uiAddKeyPersonnel2 = ngDriver.FindElement(By.XPath("//div/button"));
+            uiAddKeyPersonnel2.Click();
+
+            // enter the spare key personnel first name
+            NgWebElement uiSpareFirstName = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr[2]/td[1]/app-field/section/div[1]/section/input"));
+            uiSpareFirstName.SendKeys(sparePersonnelFirstName);
+
+            // enter the key personnel last name 
+            NgWebElement uiSpareLastName = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr[2]/td[2]/app-field/section/div[1]/section/input"));
+            uiSpareLastName.SendKeys(sparePersonnelLastName);
+
+            // click the key personnel checkbox            
+            NgWebElement uiSpareRole = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr[2]/td[3]/app-field/section/div[1]/section/table/tr/td[2]/div/input"));
+            uiSpareRole.Click();
+
+            // enter the key personnel title
+            NgWebElement uiSpareTitle = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr[2]/td[4]/app-field/section/div/section/input"));
+            uiSpareTitle.SendKeys(sparePersonnelTitle);
+
+            // enter the key personnel email 
+            NgWebElement uiSpareEmail = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr[2]/td[5]/app-field/section/div[1]/section/input"));
+            uiSpareEmail.SendKeys(sparePersonnelEmail);
+
+            // select the key personnel DOB
+            NgWebElement openSpareDOB = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr[2]/td[6]/app-field/section/div[1]/section/input"));
+            openSpareDOB.Click();
+
+            NgWebElement openSpareDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[5]/div"));
+            openSpareDOB1.Click();
+
             // click on Add Individual Shareholder
             NgWebElement uiAddIndividualShareholder = ngDriver.FindElement(By.XPath("//div[5]/section/app-associate-list/div/button"));
             uiAddIndividualShareholder.Click();
 
-            // enter the first name
-            NgWebElement uiSameIndividualFirstName2 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/app-field/section/div[1]/section/input"));
+            // enter the shareholder first name
+            NgWebElement uiSameIndividualFirstName2 = ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/app-field/section/div[1]/section/input"));
             uiSameIndividualFirstName2.SendKeys(sameIndividualFirstName);
 
             // enter the last name
-            NgWebElement uiSameIndividualLastName2 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/app-field/section/div[1]/section/input"));
+            NgWebElement uiSameIndividualLastName2 = ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/app-field/section/div[1]/section/input"));
             uiSameIndividualLastName2.SendKeys(sameIndividualLastName);
 
             // enter the number of voting shares
-            NgWebElement uiSameIndividualVotingShare = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/div/input"));
+            NgWebElement uiSameIndividualVotingShare = ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/div/input"));
             uiSameIndividualVotingShare.SendKeys(votingShares);
 
             // enter the email
-            NgWebElement uiSameIndividualEmail2 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
-            uiSameIndividualEmail2.SendKeys(sameIndividualEmail);
+            NgWebElement uiSameIndividualEmail2 = ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
+            uiSameIndividualEmail2.SendKeys(sameIndividualEmail2);
 
             // enter the DOB
-            NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
+            NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
             uiCalendarS1.Click();
 
-            NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+            NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
             uiCalendarS2.Click();
 
             // click on the Confirm button
@@ -159,7 +197,7 @@ namespace bdd_tests
         public void delete_director_record()
         {
             // click on the delete button for key personnel 
-            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[7]/i[2]/span"));
+            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[7]/i[2]/span"));
             uiEditInfoButton.Click();
 
             // click on submit org info button
@@ -167,20 +205,11 @@ namespace bdd_tests
             orgInfoButton.Click();
         }
 
-        [Then(@"the director and shareholder are not displayed")]
+        [Then(@"only the shareholder record is displayed")]
         public void director_name_updated()
         {
-            // check that the director first name is not displayed
-            Assert.False(ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
-
-            // check that the director last name is not displayed
-            Assert.False(ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
-
-            // check that the shareholder first name is not displayed
-            Assert.False(ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
-
-            // check that the shareholder last name is not displayed
-            Assert.False(ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
+            // check that the director email is not displayed
+            Assert.False(ngDriver.FindElement(By.XPath("//body[contains(.,'same@individual.com')]")).Displayed);
         }
     }
 }
