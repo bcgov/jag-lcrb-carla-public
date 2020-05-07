@@ -127,23 +127,23 @@ namespace bdd_tests
             NgWebElement uiSpareFirstName = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr[2]/td[1]/app-field/section/div[1]/section/input"));
             uiSpareFirstName.SendKeys(sparePersonnelFirstName);
 
-            // enter the key personnel last name 
+            // enter the spare key personnel last name 
             NgWebElement uiSpareLastName = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr[2]/td[2]/app-field/section/div[1]/section/input"));
             uiSpareLastName.SendKeys(sparePersonnelLastName);
 
-            // click the key personnel checkbox            
+            // click the spare key personnel checkbox            
             NgWebElement uiSpareRole = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr[2]/td[3]/app-field/section/div[1]/section/table/tr/td[2]/div/input"));
             uiSpareRole.Click();
 
-            // enter the key personnel title
+            // enter the spare key personnel title
             NgWebElement uiSpareTitle = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr[2]/td[4]/app-field/section/div/section/input"));
             uiSpareTitle.SendKeys(sparePersonnelTitle);
 
-            // enter the key personnel email 
+            // enter the spare key personnel email 
             NgWebElement uiSpareEmail = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr[2]/td[5]/app-field/section/div[1]/section/input"));
             uiSpareEmail.SendKeys(sparePersonnelEmail);
 
-            // select the key personnel DOB
+            // select the spare key personnel DOB
             NgWebElement openSpareDOB = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr[2]/td[6]/app-field/section/div[1]/section/input"));
             openSpareDOB.Click();
 
@@ -158,19 +158,19 @@ namespace bdd_tests
             NgWebElement uiSameIndividualFirstName2 = ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/app-field/section/div[1]/section/input"));
             uiSameIndividualFirstName2.SendKeys(sameIndividualFirstName);
 
-            // enter the last name
+            // enter the shareholder last name
             NgWebElement uiSameIndividualLastName2 = ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/app-field/section/div[1]/section/input"));
             uiSameIndividualLastName2.SendKeys(sameIndividualLastName);
 
-            // enter the number of voting shares
+            // enter the shareholder number of voting shares
             NgWebElement uiSameIndividualVotingShare = ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/div/input"));
             uiSameIndividualVotingShare.SendKeys(votingShares);
 
-            // enter the email
+            // enter the shareholder email
             NgWebElement uiSameIndividualEmail2 = ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
             uiSameIndividualEmail2.SendKeys(sameIndividualEmail2);
 
-            // enter the DOB
+            // enter the shareholder DOB
             NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
             uiCalendarS1.Click();
 
@@ -208,8 +208,12 @@ namespace bdd_tests
         [Then(@"only the shareholder record is displayed")]
         public void director_name_updated()
         {
-            // check that the director email is not displayed
-            Assert.False(ngDriver.FindElement(By.XPath("//body[contains(.,'same@individual.com')]")).Displayed);
+            // check that the director email is not displayed to confirm deletion
+            Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'same@individual.com'))]")).Displayed);
+
+            // check that the shareholder email is displayed to confirm remains
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'same@individual2.com')]")).Displayed);
+
         }
     }
 }
