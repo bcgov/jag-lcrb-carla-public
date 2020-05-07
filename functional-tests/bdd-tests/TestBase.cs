@@ -74,6 +74,14 @@ namespace bdd_tests
             ngDriver.WaitForAngular();
         }
 
+        public void CarlaHome()
+        {
+            
+            ngDriver.Navigate().GoToUrl($"{baseUri}");
+
+            ngDriver.WaitForAngular();
+        }
+
         public void CarlaLogin(string businessType)
         {
             businessTypeShared = businessType;
