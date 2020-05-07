@@ -191,10 +191,10 @@ namespace bdd_tests
         }
         public void CarlaDeleteCurrentAccount()
         {                       
-            // using wrapped driver as both of these calls are not angular
+            // using wrapped driver as this call is not angular
             ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/accounts/delete/current");
                        
-            ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}logout");
+            ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
 
         public void CRSEligibilityDisclosure()
