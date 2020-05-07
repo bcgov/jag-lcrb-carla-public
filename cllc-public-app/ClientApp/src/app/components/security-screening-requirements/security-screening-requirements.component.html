@@ -202,7 +202,7 @@
 
 
 
-
+                    <div *ngIf="!(!data?.cannabis?.outstandingItems?.length && !data?.cannabis?.completedItems?.length)">
                     <h4 class="plain-header">Completed Cannabis Associate Security Screening Forms</h4>
                     <p>
                         The following associates have completed their cannabis associate security screening forms. No
@@ -226,6 +226,7 @@
 
                     <div *ngIf="!data?.cannabis?.outstandingItems?.length">
                         <h3 class="plain-header"><i class="fas fa-check"></i>All Associate Security Screenings have been submitted.</h3>
+                    </div>
                     </div>
 
                     </div>
