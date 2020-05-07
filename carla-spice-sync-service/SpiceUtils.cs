@@ -390,7 +390,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 var screeningRequest = new IncompleteApplicationScreening()
                 {
                     Name = application.AdoxioName,
-                    ApplicationType = licenceType.AdoxioName,
+                    ApplicationType = licenceType.AdoxioName == null ? "Cannabis Retail Store" : licenceType.AdoxioName,
                     RecordIdentifier = application.AdoxioJobnumber,
                     UrgentPriority = false,
                     Associates = new List<LegalEntity>(),
