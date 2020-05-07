@@ -47,8 +47,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         private string HandleSBNCreateProgramAccountResponse(string inputXML)
         {
-            _logger.LogInformation("Reached HandleSBNCreateProgramAccountResponse");
-            _logger.LogInformation($"inputXML is: {inputXML}");
+            _logger.LogDebug($"Reached HandleSBNCreateProgramAccountResponse inputXML is: {inputXML}");
 
             string httpStatusCode = "200";
 
@@ -58,7 +57,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             using (TextReader reader = new StringReader(inputXML))
             {
                 licenseData = (SBNCreateProgramAccountResponse1)serializer.Deserialize(reader);
-                _logger.LogInformation(inputXML);
+                _logger.LogDebug(inputXML);
             }
 
 
@@ -90,11 +89,8 @@ namespace Gov.Lclb.Cllb.OneStopService
                 }
                 catch (HttpOperationException odee)
                 {
-                    _logger.LogError("Error updating Licence");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError("Error updating Licence {licence.AdoxioLicencesid}");
+                    _logger.LogDebug(odee, "Error updating Licence {licence.AdoxioLicencesid}");
                     // fail if we can't get results.
                     throw (odee);
                 }
@@ -125,8 +121,8 @@ namespace Gov.Lclb.Cllb.OneStopService
             // check to see if it is simply a problem with an old account number.
             if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11845")) // Transaction not allowed - Duplicate Client event exists )
             {
-                _logger.LogError("Received error notification");
-                _logger.LogError(inputXML);
+                _logger.LogError($"Received error notification for record with partner note {errorNotification.header.partnerNote}");
+                _logger.LogDebug(inputXML);
 
                 _logger.LogError("****************************************************");
                 _logger.LogError("CRA has rejected the message due to an incorrect business number.  The business in question may have had multiple business numbers in the past and the number in the record is no longer valid.  Please correct the business number.");
@@ -142,24 +138,24 @@ namespace Gov.Lclb.Cllb.OneStopService
                 int currentSuffix = OneStopUtils.GetSuffixFromPartnerNote(errorNotification.header.partnerNote, _logger);
 
                 // sanity check
-                if (currentSuffix < 100)
+                if (currentSuffix < 50)
                 {
                     currentSuffix++;
                     _logger.LogInformation($"Starting resend of licence creation message, with new value of {currentSuffix}");
                     BackgroundJob.Schedule(() => new OneStopUtils(Configuration, _logger).SendLicenceCreationMessageREST(null, licenceGuid, currentSuffix.ToString("D3"))// zero pad 3 digit.
-                    , TimeSpan.FromMinutes(1)); // Try again after 1 minutes.
+                    , TimeSpan.FromSeconds(30)); // Try again after 30 seconds
                 }                
                 else
                 {
                     _logger.LogInformation($"Skipping resend of licence creation message as there have been too many tries({currentSuffix})");
-                    _logger.LogError("Received error notification");
-                    _logger.LogError(inputXML);
+                    _logger.LogError($"Received error notification for record with partner note {errorNotification.header.partnerNote}");
+                    _logger.LogDebug(inputXML);
                 }
             }
             else
             {
-                _logger.LogError("Received error notification");
-                _logger.LogError(inputXML);
+                _logger.LogError($"Received error notification for record with partner note {errorNotification.header.partnerNote}");
+                _logger.LogDebug(inputXML);
             }
 
             return result;
