@@ -21,7 +21,7 @@ Scenario: Start Application
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     And I am logged in to the dashboard as a private corporation
-    And I click on the Catering Start Application button
+    And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
     And I submit the organization structure
@@ -65,7 +65,7 @@ namespace bdd_tests
             this.CarlaDeleteCurrentAccount();
         }
 
-        [And(@"I click on the Catering Start Application button")]
+        [And(@"I click on the Start Application button for Catering")]
         public void I_start_application()
         {
             /* 
