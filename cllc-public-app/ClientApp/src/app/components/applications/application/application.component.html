@@ -80,8 +80,8 @@
               <!-- Non Cannabis Establishment Name input-->
               <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
                 <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
-                           [required]="application?.applicationType?.establishmentName !== FormControlState.Reaonly"
-                           [label]="getEstablishmentLabel(application?.applicationType)">
+                           [required]="true"
+                           >
                   <input class="form-control" style="width: 500px;" type="text"
                          [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
                          formControlName="establishmentName" id="establishmentName">
