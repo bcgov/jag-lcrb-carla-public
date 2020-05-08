@@ -1,6 +1,7 @@
 .env
 .DS_Store
 
+
 /cllc-interfaces-test/SharePoint/Properties/launchSettings.json
 cllc-public-app/ClientApp/e2e-reports
 /functional-tests/bin
