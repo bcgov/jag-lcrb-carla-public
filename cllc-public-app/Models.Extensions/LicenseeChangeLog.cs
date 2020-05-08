@@ -19,6 +19,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             toDynamics.AdoxioIsmanagerold = fromVM.IsManagerOld;
             toDynamics.AdoxioIsofficernew = fromVM.IsOfficerNew;
             toDynamics.AdoxioIsofficerold = fromVM.IsOfficerOld;
+            toDynamics.AdoxioIsownernew = fromVM.IsOwnerNew;
+            toDynamics.AdoxioIsownerold = fromVM.IsOwnerOld;
             toDynamics.AdoxioIsshareholdernew = fromVM.IsShareholderNew;
             toDynamics.AdoxioIsshareholderold = fromVM.IsShareholderOld;
             toDynamics.AdoxioIstrusteenew = fromVM.IsTrusteeNew;
@@ -58,6 +60,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IsManagerOld = changeLog.AdoxioIsmanagerold,
                 IsOfficerNew = changeLog.AdoxioIsofficernew,
                 IsOfficerOld = changeLog.AdoxioIsofficerold,
+                IsOwnerNew = changeLog.AdoxioIsownernew,
+                IsOwnerOld = changeLog.AdoxioIsownerold,
                 IsShareholderNew = changeLog.AdoxioIsshareholdernew,
                 IsShareholderOld = changeLog.AdoxioIsshareholderold,
                 IsTrusteeNew = changeLog.AdoxioIstrusteenew,
