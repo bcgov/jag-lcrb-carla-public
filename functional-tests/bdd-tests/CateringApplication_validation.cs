@@ -36,10 +36,8 @@ namespace bdd_tests
     {
         public void CheckFeatureFlagsLiquor()
         {
-            string feature_flags = configuration["featureFlags"];
-
             // navigate to the feature flags page
-            driver.Navigate().GoToUrl($"{baseUri}{feature_flags}");
+            driver.Navigate().GoToUrl($"{baseUri}api/features");
 
             // confirm that the LiquorOne flag is enabled during this test
             Assert.True(driver.FindElement(By.XPath("//body[contains(.,'LiquorOne')]")).Displayed);
