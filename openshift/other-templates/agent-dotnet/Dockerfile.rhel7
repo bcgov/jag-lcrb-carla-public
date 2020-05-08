@@ -37,12 +37,11 @@ RUN scl enable rh-dotnet31 'dotnet help'
 RUN chown -R 1001:0 $HOME && \
     chmod -R g+rw $HOME
 
-RUN yum -y install wget nano Xvfb  xorg-x11-xauth java-1.8.0-openjdk git && \
-    subscription-manager repos --enable rhel-7-server-optional-rpms && \
+RUN yum -y install wget nano Xvfb  xorg-x11-xauth java-1.8.0-openjdk git && \   
 	wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm && \
 	yum -y localinstall epel-release-latest-7.noarch.rpm && \
-	yum -y localinstall google-chrome-stable_current_x86_64.rpm && \
+	yum --enablerepo=rhel-7-server-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-dotnet-rpms,rhel-7-server-optional-rpms -y localinstall google-chrome-stable_current_x86_64.rpm && \
 	rm google-chrome-stable_current_x86_64.rpm && \
 	yum -y install firefox; yum clean all
 
