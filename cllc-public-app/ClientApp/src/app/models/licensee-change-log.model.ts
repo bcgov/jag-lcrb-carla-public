@@ -17,6 +17,8 @@ export class LicenseeChangeLog {
   isShareholderOld: boolean;
   isTrusteeNew: boolean;
   isTrusteeOld: boolean;
+  isOwnerNew: boolean;
+  isOwnerOld: boolean;
   businessType: string;
   numberofSharesNew: number;
   numberofSharesOld: number;
@@ -82,7 +84,7 @@ export class LicenseeChangeLog {
 
   public get keyPersonnelChildren(): LicenseeChangeLog[] {
     const leaders = (this.children || []).filter(item => item.isIndividual &&
-      (item.isDirectorNew || item.isManagerNew || item.isOfficerNew || item.isTrusteeNew));
+      (item.isDirectorNew || item.isManagerNew || item.isOfficerNew || item.isTrusteeNew || item.isOwnerNew));
     return leaders;
   }
 
@@ -100,7 +102,7 @@ export class LicenseeChangeLog {
     const leaders = (this.children || []).filter(item => {
       item = Object.assign(new LicenseeChangeLog, item);
       return item.isIndividual &&
-        (item.isDirectorNew || item.isManagerNew || item.isOfficerNew || item.isTrusteeNew)
+        (item.isDirectorNew || item.isManagerNew || item.isOfficerNew || item.isTrusteeNew || item.isOwnerNew)
         && !item.isRemoveChangeType();
     });
     return leaders;
@@ -179,6 +181,7 @@ export class LicenseeChangeLog {
         && node.individualShareholderChildrenNoRemoves.length === 0) {
         validationResult.push(`${node.businessNameNew} needs to have one or more shareholders`);
       }
+
       if (node.businessType === 'SoleProprietor' && node.keyPersonnelChildrenNoRemoves.length === 0) {
         validationResult.push(`${node.businessNameNew} needs to have a leader`);
       }
@@ -227,6 +230,8 @@ export class LicenseeChangeLog {
       this.isManagerOld = legalEntity.isSeniorManagement;
       this.isOfficerNew = legalEntity.isOfficer;
       this.isOfficerOld = legalEntity.isOfficer;
+      this.isOwnerNew = legalEntity.isOwner;
+      this.isOwnerOld = legalEntity.isOwner;
       this.isShareholderNew = legalEntity.isShareholder;
       this.isShareholderOld = legalEntity.isShareholder;
       this.isTrusteeNew = legalEntity.isTrustee;
@@ -265,6 +270,7 @@ export class LicenseeChangeLog {
       changeLog.isDirectorNew === changeLog.isDirectorOld &&
       changeLog.isManagerNew === changeLog.isManagerOld &&
       changeLog.isOfficerNew === changeLog.isOfficerOld &&
+      changeLog.isOwnerNew === changeLog.isOwnerOld &&
       changeLog.isShareholderNew === changeLog.isShareholderOld &&
       changeLog.isTrusteeNew === changeLog.isTrusteeOld &&
       changeLog.numberofSharesNew === changeLog.numberofSharesOld &&
@@ -288,6 +294,11 @@ export class LicenseeChangeLog {
     if (this.isOfficerNew) {
       position += 'Officer, ';
     }
+
+    if (this.isOwnerNew) {
+      position += 'Owner, ';
+    }
+
     if (this.isTrusteeNew) {
       position += 'Trustee, ';
     }
@@ -394,10 +405,12 @@ export class LicenseeChangeLog {
 
           childNode.isManagerNew = false;
           childNode.isOfficerNew = false;
+          childNode.isOwnerNew = false;
           childNode.isDirectorNew = false;
           childNode.isTrusteeNew = false;
           childNode.isManagerOld = false;
           childNode.isOfficerOld = false;
+          childNode.isOwnerOld = false;
           childNode.isDirectorOld = false;
           childNode.isTrusteeOld = false;
         }
