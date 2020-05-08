@@ -1044,8 +1044,8 @@ namespace bdd_tests
 
             if (businessTypeShared == "sole proprietorship")
             {
-                // open the leader row                                                           
-                NgWebElement openLeaderForm = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/app-associate-list/div/button"));
+                // open the leader row   
+                NgWebElement openLeaderForm = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[2]/app-associate-list/div/button"));
                 openLeaderForm.Click();
 
                 // create the leader info
