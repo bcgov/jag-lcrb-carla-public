@@ -2310,6 +2310,7 @@ namespace bdd_tests
             submitTransferButton.Click();
 
             // TODO: Confirm status change on Licences tab
+
         }
 
         public void ShowStoreOpen()
