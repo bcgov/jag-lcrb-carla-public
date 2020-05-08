@@ -61,6 +61,8 @@ export class AssociateListComponent extends FormBase implements OnInit {
       id: [''],
       changeType: [''],
       isDirectorNew: [''],
+      isOwnerNew: [''],
+      isOwnerOld: [''],
       isDirectorOld: [''],
       isManagerNew: [''],
       isManagerOld: [''],
@@ -212,6 +214,11 @@ export class AssociateListComponent extends FormBase implements OnInit {
 
       if (this.changeTypeSuffix === 'Leadership') {
         this.associates.at(index).get('isIndividual').setValue(true);
+        // check to see if this is a sole prop.
+        if (this.account.businessType === 'SoleProprietor') {
+          this.associates.at(index).get('isOwnerNew').setValue(true);
+        }
+        
       } else if (this.changeTypeSuffix === 'IndividualShareholder') {
         this.associates.at(index).get('isIndividual').setValue(true);
         this.associates.at(index).get('isShareholderNew').setValue(true);
@@ -271,6 +278,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
     node.isDirectorNew = node.isDirectorOld;
     node.isManagerNew = node.isManagerOld;
     node.isOfficerNew = node.isOfficerOld;
+    node.isOwnerNew = node.isOwnerOld;
     node.isShareholderNew = node.isShareholderOld;
     node.isTrusteeNew = node.isTrusteeOld;
     node.numberofSharesNew = node.numberofSharesOld;
