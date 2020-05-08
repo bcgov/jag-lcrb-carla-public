@@ -33,6 +33,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsManagerOld { get; set; }
         public bool? IsOfficerNew { get; set; }
         public bool? IsOfficerOld { get; set; }
+        public bool? IsOwnerNew { get; set; }
+        public bool? IsOwnerOld { get; set; }
         public bool? IsShareholderNew { get; set; }
         public bool? IsShareholderOld { get; set; }
         public bool? IsTrusteeNew { get; set; }
