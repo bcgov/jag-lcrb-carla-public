@@ -379,7 +379,7 @@ namespace bdd_tests
             string mailCity = "Nanaimo";
             string mailProvince = "B.C.";
             string mailPostalCode = "V9R2N3";
-            string mailCountry = "Switzerland";
+            string mailCountry = "Canada";
 
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
@@ -801,10 +801,10 @@ namespace bdd_tests
                 /********** Key Personnel **********/
 
                 // create the key personnel data
-                string keyPersonnelFirstName = "Jane";
-                string keyPersonnelLastName = "Bond";
-                string keyPersonnelTitle = "Adventurer";
-                string keyPersonnelEmail = "jane@bond.com";
+                string keyPersonnelFirstName = "KeyPersonnel1";
+                string keyPersonnelLastName = "PrivateCorp";
+                string keyPersonnelTitle = "CTO";
+                string keyPersonnelEmail = "keypersonnel1@privatecorp.com";
 
                 // open key personnel form  
                 if (applicationTypeShared == "Catering")
@@ -865,10 +865,10 @@ namespace bdd_tests
                 /********** Individual Shareholder **********/
 
                 // create the shareholder data
-                string shareholderFirstName = "Jacqui";
-                string shareholderLastName = "Chan";
+                string shareholderFirstName = "IndividualShareholder1";
+                string shareholderLastName = "PrivateCorp";
                 string shareholderVotingShares = "500";
-                string shareholderEmail = "jacqui@chan.com";
+                string shareholderEmail = "individualshareholder1@privatecorp.com";
 
                 // open shareholder form    
                 NgWebElement uiOpenShare = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section/app-associate-list/div/button"));
@@ -910,7 +910,7 @@ namespace bdd_tests
                 // create the business shareholder data
                 string businessName = "Business Shareholder 1";
                 string businessVotingShares = "50";
-                string businessEmail = "bourne@enterprises.com";
+                string businessEmail = "business@shareholder1.com";
 
                 // open business shareholder form    
                 NgWebElement uiOpenShareBiz = ngDriver.FindElement(By.XPath("//div[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section/app-org-structure/div[5]/section[2]/app-associate-list/div/button"));
@@ -954,10 +954,10 @@ namespace bdd_tests
                 /********** Business Shareholder - Key Personnel **********/
 
                 // create business shareholder key personnel data
-                string keyPersonnelFirstNameBiz = "Ethel";
-                string keyPersonnelLastNameBiz = "Hunt";
-                string keyPersonnelTitleBiz = "Climbing Enthusiast";
-                string keyPersonnelEmailBiz = "ethel@hunt.com";
+                string keyPersonnelFirstNameBiz = "KeyPersonnel2";
+                string keyPersonnelLastNameBiz = "BizShareholderPrivateCorp";
+                string keyPersonnelTitleBiz = "Event Planner";
+                string keyPersonnelEmailBiz = "keypersonnel2bizshareholder@privatecorp.com";
 
                 // open business shareholder > key personnel form
                 NgWebElement openKeyPersonnelFormBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section/app-associate-list/div/button"));
@@ -1001,10 +1001,10 @@ namespace bdd_tests
                 /********** Business Shareholder - Individual Shareholder **********/
 
                 // create the business shareholder > individual shareholder data
-                string shareholderFirstNameBiz = "Jacintha";
-                string shareholderLastNameBiz = "Ryan";
+                string shareholderFirstNameBiz = "IndividualShareholder2";
+                string shareholderLastNameBiz = "BizShareholderPrivateCorp";
                 string shareholderVotingSharesBiz = "500";
-                string shareholderEmailBiz = "jacintha@cia.com";
+                string shareholderEmailBiz = "individualshareholder2bizshareholder@privatecorp.com";
 
                 // open business shareholder > individual shareholder form
                 NgWebElement uiOpenIndyShareBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[5]/section[1]/app-associate-list/div/button"));
@@ -1049,9 +1049,9 @@ namespace bdd_tests
                 openLeaderForm.Click();
 
                 // create the leader info
-                string firstName = "Jane";
-                string lastName = "Bond";
-                string email = "jane@bond.com";
+                string firstName = "Leader";
+                string lastName = "SoleProprietor";
+                string email = "leader@soleproprietor.com";
 
                 // enter the leader first name
                 NgWebElement uiFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
@@ -1100,10 +1100,10 @@ namespace bdd_tests
                 openKeyPersonnelForm.Click();
 
                 // create the director info
-                string firstName = "Jane";
-                string lastName = "Bond";
-                string title = "Adventurer";
-                string email = "jane@bond.com";
+                string firstName = "Director";
+                string lastName = "Society";
+                string title = "Chair";
+                string email = "director@society.com";
 
                 // enter the director first name
                 NgWebElement uiFirstName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
@@ -1144,10 +1144,10 @@ namespace bdd_tests
             if (businessTypeShared == "public corporation")
             {
                 // create the key personnel data
-                string keyPersonnelFirst = "Jane";
-                string keyPersonnelLast = "Bond";
-                string keyPersonnelTitle = "Adventurer";
-                string keyPersonnelEmail = "jane@bond.com";
+                string keyPersonnelFirst = "KeyPersonnel1";
+                string keyPersonnelLast = "Public Corp";
+                string keyPersonnelTitle = "CEO";
+                string keyPersonnelEmail = "keypersonnel1@publiccorp.com";
 
                 // find the upload test file in the bdd-tests\upload_files folder
                 var environment = Environment.CurrentDirectory;
@@ -1202,10 +1202,10 @@ namespace bdd_tests
             if (businessTypeShared == "partnership")
             {
                 // create individual partner info
-                string partnerFirstName = "Automated";
-                string partnerLastName = "Test";
+                string partnerFirstName = "Individual";
+                string partnerLastName = "Partner";
                 string partnerPercentage = "50";
-                string partnerEmail = "automated@test.com";
+                string partnerEmail = "individual@partner.com";
 
                 // find the upload test file in the bdd-tests\upload_files folder
                 var environment = Environment.CurrentDirectory;
@@ -1251,15 +1251,15 @@ namespace bdd_tests
                     NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
                     openKeyPartnerDOB1.Click();
                 }
-                /*
+
                 // open business partner row
                 NgWebElement openPartnerRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[3]/section[2]/app-associate-list/div/button"));
                 openPartnerRow.Click();
 
                 // create business partner info
-                string bizPartnerName = "Automated Test";
+                string bizPartnerName = "Business Partner";
                 string bizPartnerPercentage = "50";
-                string bizPartnerEmail = "automated@test.com";
+                string bizPartnerEmail = "business@partner.com";
 
                 // enter the business partner name
                 NgWebElement uiBizPartnerName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
@@ -1291,10 +1291,10 @@ namespace bdd_tests
                 openPartner2Row.Click();
 
                 // create individual partner 2 info
-                string partner2FirstName = "Automated2";
-                string partner2LastName = "Test2";
+                string partner2FirstName = "Individual";
+                string partner2LastName = "Partner2";
                 string partner2Percentage = "502";
-                string partner2Email = "automated2@test.com";
+                string partner2Email = "individual@partner2.com";
 
                 // enter individual partner2 first name
                 NgWebElement uiPartner2First = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section[1]/app-associate-list/div/table/tr/td[1]/app-field/section/div[1]/section/input"));
@@ -1317,7 +1317,7 @@ namespace bdd_tests
                 openPartner2DOB.Click();
 
                 NgWebElement openKeyPartner2DOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                openKeyPartner2DOB1.Click();*/
+                openKeyPartner2DOB1.Click();
             }
         }
 
@@ -1376,8 +1376,6 @@ namespace bdd_tests
 
                 // enter the IN into the dropdown
                 NgWebElement uiSelectNation = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-2']/app-application/div[2]/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select"));
-                                                                              //html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[3]/app-application/div[2]/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select
-                //NgWebElement uiSelectNation = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[3]/app-application/div/div[2]/div[2]/section/div/app-field[2]/section/div[1]/section/select"));
                 uiSelectNation.SendKeys(indigenousNation);
             }
 
@@ -1501,7 +1499,7 @@ namespace bdd_tests
             string estEmail = "test@automation.com";
             string conGiven = "Given";
             string conSurname = "Surname";
-            string conRole = "CEO";
+            //string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "test2@automation.com";
 
@@ -1596,7 +1594,7 @@ namespace bdd_tests
             NgWebElement returnDash = ngDriver.FindElement(By.LinkText(dash));
             returnDash.Click();
 
-            // click on the review organzation information button
+            // click on the review organization information button
             NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
             orgInfoButton.Click();
 
@@ -1607,7 +1605,6 @@ namespace bdd_tests
             // enter a new name for the director
             string newDirectorFirstName = "UpdatedFirstName";
             string newDirectorLastName = "UpdatedLastName";
-
 
             NgWebElement uiNewDirectorFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
             uiNewDirectorFirstName.Clear();
@@ -1977,7 +1974,7 @@ namespace bdd_tests
             NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
             submitpayButton.Click();
 
-            // pay for the relocation application
+            // pay for the branding change application
             MakePayment();
 
             System.Threading.Thread.Sleep(7000);
@@ -2053,7 +2050,7 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(3000);
 
-            // pay for the relocation application
+            // pay for the structural change application
             MakePayment();
 
             System.Threading.Thread.Sleep(7000);
@@ -2156,11 +2153,9 @@ namespace bdd_tests
 
             string showOpenOnMap = "Show Store as Open on Map";
 
-            // click on the Transfer Ownership link
+            // click on the Show Store as Open on Map link
             NgWebElement uiShowOpenOnMap = ngDriver.FindElement(By.LinkText(showOpenOnMap));
             uiShowOpenOnMap.Click();
-
-            // TODO: next steps?
 
             /* 
             Page Title: Apply for a cannabis licence
@@ -2197,6 +2192,53 @@ namespace bdd_tests
 
             // confirm that a structural change request is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Structural Change')]")).Displayed);
+        }
+
+        public void ReviewSecurityScreening()
+        {
+            /* 
+            Page Title: Security Screening Requirements
+            */
+
+            // confirm that private corporation personnel are present
+            if (businessTypeShared == "private corporation")
+            {
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel1 PrivateCorp')]")).Displayed);
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1 PrivateCorp')]")).Displayed);
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel2 BizShareholderPrivateCorp')]")).Displayed);
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder2 BizShareholderPrivateCorp')]")).Displayed);
+            }
+
+            // confirm that sole proprietor personnel are present
+            if (businessTypeShared == "sole proprietorship")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader SoleProprietor')]")).Displayed);
+            }
+
+            // confirm that society personnel are present
+            if (businessTypeShared == "society")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director Society')]")).Displayed);
+            }
+
+            // confirm that public corporation personnel are present
+            if (businessTypeShared == "public corporation")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel1 Public Corp')]")).Displayed);
+            }
+
+            // confirm that partnership personnel are present
+            if (businessTypeShared == "partnership")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Individual Partner')]")).Displayed);
+
+                // switched off - pending LCSD-3126
+                //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Individual Partner2')]")).Displayed);
+            }
         }
 
         public void Dispose()

@@ -105,8 +105,9 @@ namespace bdd_tests
         {
             /* 
             Page Title: Security Screening Requirements
-                      : placeholder for future testing
             */
+
+            ReviewSecurityScreening();
         }
 
         [And(@"I click on the Pay for Application button")]
