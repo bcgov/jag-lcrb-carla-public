@@ -68,7 +68,8 @@ export class OrgStructureComponent implements OnInit {
     this.node.fileUploads[docType] = numberOfFiles;
   }
 
-  updateChildred(children: LicenseeChangeLog[], changeType: string) {
+  updateChildren(children: LicenseeChangeLog[], changeType: string) {
+  
     children = children || [];
     this.node.children = this.node.children || [];
     if (changeType === 'Leadership') {

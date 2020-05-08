@@ -26,6 +26,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_ParentLegalEntityId@odata.bind")]
         public string ParentLegalEntityOdataBind { get; set; }
 
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isownerold")]
+        public bool? AdoxioIsownerold { get; set; }
 
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isownernew")]
+        public bool? AdoxioIsownernew { get; set; }
     }
 }
