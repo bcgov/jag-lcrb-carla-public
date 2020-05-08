@@ -54,6 +54,11 @@ namespace bdd_tests
             else
             {
                 options.AddArguments("--start-maximized");
+                if (!string.IsNullOrEmpty(configuration["CHROME_BINARY_LOCATION"]))
+                {
+                    options.BinaryLocation = configuration["CHROME_BINARY_LOCATION"];
+                }
+                
             }
 
             driver = new ChromeDriver(path, options);
