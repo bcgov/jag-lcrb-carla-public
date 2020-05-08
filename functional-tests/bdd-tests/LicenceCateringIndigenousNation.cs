@@ -22,7 +22,7 @@ Scenario: Pay First Year Catering Licence and Complete Applications
     # Given the Catering application has been approved
     # And I am logged in to the dashboard as an indigenous nation
     Given I am logged in to the dashboard as an indigenous nation
-    And I click on the Licences tab
+    And I click on the Licences tab for Catering
     And I pay the licensing fee
     And I click on the licence download link
     And I request an event authorization
@@ -50,12 +50,14 @@ namespace bdd_tests
             CarlaLoginNoCheck();
         }
 
-        [And(@"I click on the Licences tab")]
-        public void click_on_licences_tab()
+        [And(@"I click on the Licences tab for (.*)")]
+        public void click_on_licences_tab(string applicationType)
         {
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
+
+            applicationTypeShared = applicationType;
 
             string licencesLink = "Licences";
 
