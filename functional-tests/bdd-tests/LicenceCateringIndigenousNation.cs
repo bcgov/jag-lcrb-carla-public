@@ -13,15 +13,15 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: LicenceCatering_private_corp
+Feature: LicenceCatering_indigenous_nation
     As a logged in business user
-    I want to pay the first year catering licence fee
-    And complete the available application types for a private corporation
+    I want to pay the first year catering licence fee 
+    And complete the available application types for an indigenous nation
 
 Scenario: Pay First Year Catering Licence and Complete Applications
     # Given the Catering application has been approved
-    # And I am logged in to the dashboard as a private corporation
-    Given I am logged in to the dashboard as a private corporation
+    # And I am logged in to the dashboard as an indigenous nation
+    Given I am logged in to the dashboard as an indigenous nation
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the licence download link
@@ -35,8 +35,8 @@ Scenario: Pay First Year Catering Licence and Complete Applications
 
 namespace bdd_tests
 {
-    [FeatureFile("./LicenceCatering_private_corp.feature")]
-    public sealed class LicenceCateringPrivateCorp : TestBase
+    [FeatureFile("./LicenceCatering_indigenous_nation.feature")]
+    public sealed class LicenceCateringIndigenousNation : TestBase
     {
         [Given(@"the Catering application has been approved")]
         public void catering_application_approved()
