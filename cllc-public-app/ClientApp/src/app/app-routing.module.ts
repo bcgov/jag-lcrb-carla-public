@@ -57,7 +57,8 @@ const routes: Routes = [
     path: 'org-structure',
     component: ApplicationLicenseeChangesComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-    canDeactivate: [CanDeactivateGuard],
+// Disabled to fix problem with duplicate save
+//    canDeactivate: [CanDeactivateGuard],
     data: { feature: 'LicenseeChanges' }
   },
   {
