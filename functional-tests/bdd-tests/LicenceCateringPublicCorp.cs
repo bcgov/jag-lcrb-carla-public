@@ -50,12 +50,14 @@ namespace bdd_tests
             CarlaLoginNoCheck();
         }
 
-        [And(@"I click on the Licences tab")]
-        public void click_on_licences_tab()
+        [And(@"I click on the Licences tab for (.*)")]
+        public void click_on_licences_tab(string applicationType)
         {
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
+
+            applicationTypeShared = applicationType;
 
             string licencesLink = "Licences";
 
