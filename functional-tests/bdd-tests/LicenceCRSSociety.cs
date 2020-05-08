@@ -71,7 +71,7 @@ namespace bdd_tests
         [And(@"I pay the licensing fee")]
         public void pay_licence_fee()
         {
-            PayLicenceFee();
+            PayCRSLicenceFee();
         }
 
         [And(@"I click on the licence download link")]
