@@ -107,6 +107,8 @@ namespace bdd_tests
         [And(@"I click on the Pay for Application button")]
         public void click_on_pay()
         {
+            ReviewSecurityScreening();
+
             NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
             pay_button.Click();
         }
