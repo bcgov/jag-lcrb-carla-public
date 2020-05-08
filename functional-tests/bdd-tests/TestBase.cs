@@ -50,15 +50,14 @@ namespace bdd_tests
             {
                 Console.Out.WriteLine("Enabling Headless Mode");
                 options.AddArguments("headless", "no-sandbox", "disable-web-security", "no-zygote", "disable-gpu");
-            }
-            else
-            {
-                options.AddArguments("--start-maximized");
                 if (!string.IsNullOrEmpty(configuration["CHROME_BINARY_LOCATION"]))
                 {
                     options.BinaryLocation = configuration["CHROME_BINARY_LOCATION"];
                 }
-                
+            }
+            else
+            {
+                options.AddArguments("--start-maximized");                                
             }
 
             driver = new ChromeDriver(path, options);
