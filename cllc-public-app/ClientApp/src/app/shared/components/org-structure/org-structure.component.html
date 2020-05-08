@@ -226,7 +226,7 @@
     <h3 class="blue-header">Provide Ownership Information</h3>
     <div class="content-bottom">
     <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
-      [account]="account" (personalHistoryItemsChange)="updateChildred($event, 'Leadership')"
+      [account]="account" (personalHistoryItemsChange)="updateChildren($event, 'Leadership')"
       changeTypeSuffix="Leadership" addLabel="Add Leader" #associateList>
     </app-associate-list>
     </div>
@@ -234,7 +234,7 @@
 
   <ng-container *ngIf="node?.businessType === 'Trust'">
     <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
-      [account]="account" (personalHistoryItemsChange)="updateChildred($event, 'Leadership')"
+      [account]="account" (personalHistoryItemsChange)="updateChildren($event, 'Leadership')"
       changeTypeSuffix="Leadership" addLabel="Add Trustee" #associateList>
     </app-associate-list>
   </ng-container>
@@ -254,7 +254,7 @@
         related information.
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node" 
-        [account]="account" (personalHistoryItemsChange)="updateChildred($event, 'Leadership')" [licencesOnFile]="licencesOnFile"
+        [account]="account" (personalHistoryItemsChange)="updateChildren($event, 'Leadership')" [licencesOnFile]="licencesOnFile"
         changeTypeSuffix="Leadership" addLabel="Add Key Personnel" #associateList></app-associate-list>
     </section>
     </div>
@@ -271,7 +271,7 @@
         required to provide security screening related information.
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [licencesOnFile]="licencesOnFile"
-        (personalHistoryItemsChange)="updateChildred($event, 'Leadership')" [rootNode]="node" [account]="account"
+        (personalHistoryItemsChange)="updateChildren($event, 'Leadership')" [rootNode]="node" [account]="account"
         changeTypeSuffix="Leadership" addLabel="Add Director or Officer" #associateList></app-associate-list>
     </section>
     </div>
@@ -291,7 +291,7 @@
         related information.
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"  [licencesOnFile]="licencesOnFile"
-        (personalHistoryItemsChange)="updateChildred( $event, 'IndividualShareholder')" [rootNode]="node" [account]="account"
+        (personalHistoryItemsChange)="updateChildren( $event, 'IndividualShareholder')" [rootNode]="node" [account]="account"
         changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Partner" #associateList></app-associate-list>
     </section>
 
@@ -304,7 +304,7 @@
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"
         [rootNode]="node" [account]="account"  [licencesOnFile]="licencesOnFile"
-        (personalHistoryItemsChange)="updateChildred($event, 'BusinessShareholder')"
+        (personalHistoryItemsChange)="updateChildren($event, 'BusinessShareholder')"
         changeTypeSuffix="BusinessShareholder" addLabel="Add Business Partner" #associateList></app-associate-list>
     </section>
     </div>
@@ -326,7 +326,7 @@
         owned, and email address.
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"
-        (personalHistoryItemsChange)="updateChildred($event, 'IndividualShareholder')" [rootNode]="node"  [licencesOnFile]="licencesOnFile"
+        (personalHistoryItemsChange)="updateChildren($event, 'IndividualShareholder')" [rootNode]="node"  [licencesOnFile]="licencesOnFile"
         [account]="account" changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Shareholder" #associateList>
       </app-associate-list>
     </section>
@@ -340,7 +340,7 @@
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"
         [rootNode]="node" [account]="account"  [licencesOnFile]="licencesOnFile"
-        (personalHistoryItemsChange)="updateChildred($event, 'BusinessShareholder')"
+        (personalHistoryItemsChange)="updateChildren($event, 'BusinessShareholder')"
         changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder" #associateList></app-associate-list>
         <p>&nbsp;</p>
     </section>
