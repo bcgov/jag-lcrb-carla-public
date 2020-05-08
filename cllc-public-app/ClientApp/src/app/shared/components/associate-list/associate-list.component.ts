@@ -117,10 +117,14 @@ export class AssociateListComponent extends FormBase implements OnInit {
       group.get('lastNameNew').setValidators([Validators.required]);
       group.get('emailNew').setValidators([Validators.required, Validators.email]);
       group.get('dateofBirthNew').setValidators([Validators.required]);
-      group.get('isDirectorNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
-      group.get('isOfficerNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
-      group.get('isManagerNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
-    }
+      // these validators are not required for SoleProps because they're always owners
+      if(this.rootNode.businessType !== 'SoleProprietor') {
+        group.get('isDirectorNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
+        group.get('isOfficerNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
+        group.get('isManagerNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
+       }
+      }
+    
 
     if (this.changeTypeSuffix === 'Trust') {
       group.get('firstNameNew').setValidators([Validators.required]);
