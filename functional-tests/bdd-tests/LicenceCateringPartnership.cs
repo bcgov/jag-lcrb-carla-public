@@ -91,137 +91,13 @@ namespace bdd_tests
         [And(@"I request a valid store name or branding change")]
         public void name_branding_change()
         {
-            /* 
-            Page Title: Licences
-            Subtitle:   Catering Licences
-            */
-
-            string nameBrandingLink = "Request Store Name or Branding Change";
-
-            // click on the Request Store Name or Branding Change link
-            NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLink));
-            uiRequestChange.Click();
-
-            /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
-            continueButton.Click();
-
-            /*
-            Page Title: Submit a Name or Branding Change Application
-            */
-
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload a supporting document
-            string supportingDocument = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-            NgWebElement uploadSupportingDoc = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uploadSupportingDoc.SendKeys(supportingDocument);
-
-            // click on the authorized to submit checkbox
-            NgWebElement uiAuthSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
-            uiAuthSubmit.Click();
-
-            // click on the signature agreement checkbox
-            NgWebElement uiSigAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
-            uiSigAgreement.Click();
-
-            // click on the Submit & Pay button
-            NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
-            submitpayButton.Click();
-
-            // pay for the branding change application
-            MakePayment();
-
-            System.Threading.Thread.Sleep(7000);
-
-            // return to the Licences tab
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
+            CateringNameBrandingChange();
         }
 
         [And(@"I request a store relocation")]
         public void request_store_relocation()
         {
-            /* 
-            Page Title: Licences
-            Subtitle: Catering Licences
-            */
-
-            string requestRelocationLink = "Request Relocation";
-
-            // click on the request location link
-            NgWebElement uiRequestRelocation = ngDriver.FindElement(By.LinkText(requestRelocationLink));
-            uiRequestRelocation.Click();
-
-            /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
-            continueButton.Click();
-
-            /* 
-            Page Title: Submit a Licence Relocation Application
-            */
-
-            /*// create test data
-            string streetAddress = "303 Prideaux St";
-            string city = "Nanaimo";
-            string postal = "V9R2N3";
-
-            // enter the proposed street address
-            NgWebElement uiStreetAddress = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressStreet'])[2]"));
-            uiStreetAddress.SendKeys(streetAddress);
-
-            // enter the proposed street city
-            NgWebElement uiCity = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressCity'])[2]"));
-            uiCity.SendKeys(city);
-
-            // enter the proposed postal code
-            NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressPostalCode'])[3]"));
-            uiPostalCode.SendKeys(postal);
-            */
-
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload a supporting document
-            string supportingDocument = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "checklist.pdf");
-            NgWebElement uploadSupportingDoc = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uploadSupportingDoc.SendKeys(supportingDocument);
-
-            // select the authorized to submit checkbox
-            NgWebElement uiAuthToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
-            uiAuthToSubmit.Click();
-
-            // select the signature agreement checkbox
-            NgWebElement uiSigAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
-            uiSigAgreement.Click();
-
-            // click on the Submit & Pay button
-            NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
-            submitpayButton.Click();
-
-            // pay for the relocation application
-            MakePayment();
-
-            System.Threading.Thread.Sleep(7000);
-
-            // confirm correct payment amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
+            CateringRelocationRequest();
         }
 
         [And(@"I request a third party operator")]
