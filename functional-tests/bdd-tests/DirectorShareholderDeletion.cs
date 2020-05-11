@@ -37,10 +37,10 @@ namespace bdd_tests
         public void And_I_view_the_dashboard(string businessType)
         {
             // to be used with fresh test ID
-            //CarlaLogin(businessType);
+            CarlaLogin(businessType);
 
             // to be used in pipeline
-            CarlaLoginNoCheck();
+            //CarlaLoginNoCheck();
         }
 
         [And(@"I click on the Complete Organization Information button")]
