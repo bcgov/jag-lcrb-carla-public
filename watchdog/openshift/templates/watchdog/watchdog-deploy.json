@@ -65,7 +65,7 @@
           "spec": {
             "volumes": [
               {
-                "name": "proxy-tls",
+                "name": "${NAME}-proxy-tls",
                 "secret": {
                   "defaultMode": 420,
                   "secretName": "${NAME}-proxy-tls"
@@ -101,7 +101,7 @@
                 "volumeMounts": [
                   {
                     "mountPath": "/etc/tls/private",
-                    "name": "proxy-tls"
+                    "name": "${NAME}-proxy-tls"
                   }
                 ]
               },
@@ -171,7 +171,7 @@
                 "volumeMounts":[
                 {
                   "mountPath": "/var/run/secrets/service-cert",
-                  "name": "service-cert"
+                  "name": "${NAME}-proxy-tls"
               }],
                 "readinessProbe": {
                   "httpGet": {
