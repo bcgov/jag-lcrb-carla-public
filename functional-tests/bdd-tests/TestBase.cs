@@ -1597,6 +1597,14 @@ namespace bdd_tests
             // enter the email of the application contact
             NgWebElement uiContactEmail = ngDriver.FindElement(By.Id("contactPersonEmail"));
             uiContactEmail.SendKeys(conEmail);
+
+            // click on the authorized to submit checkbox
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            uiAuthorizedToSubmit.Click();
+
+            // click on the signature agreement checkbox
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
+            uiSignatureAgreement.Click();
         }
 
         public void RequestPersonnelNameChange()
@@ -2384,38 +2392,40 @@ namespace bdd_tests
             // confirm that private corporation personnel are present
             if (businessTypeShared == "private corporation")
             {
-
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel1 PrivateCorp')]")).Displayed);
-
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1 PrivateCorp')]")).Displayed);
-
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel1')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'PrivateCorp')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel2 BizShareholderPrivateCorp')]")).Displayed);
-
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder2 BizShareholderPrivateCorp')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'BizShareholderPrivateCorp')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder2')]")).Displayed);
             }
 
             // confirm that sole proprietor personnel are present
             if (businessTypeShared == "sole proprietorship")
             {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader SoleProprietor')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'SoleProprietor')]")).Displayed);
             }
 
             // confirm that society personnel are present
             if (businessTypeShared == "society")
             {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director Society')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Society')]")).Displayed);
             }
 
             // confirm that public corporation personnel are present
             if (businessTypeShared == "public corporation")
             {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel1 Public Corp')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel1')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Public Corp')]")).Displayed);
             }
 
             // confirm that partnership personnel are present
             if (businessTypeShared == "partnership")
             {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Individual Partner')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Individual')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Partner')]")).Displayed);
 
                 // switched off - pending LCSD-3126
                 //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Individual Partner2')]")).Displayed);
@@ -2485,9 +2495,9 @@ namespace bdd_tests
         public void CateringRelocationRequest()
         {
             /* 
-Page Title: Licences
-Subtitle: Catering Licences
-*/
+            Page Title: Licences
+            Subtitle: Catering Licences
+            */
 
             string requestRelocationLink = "Request Relocation";
 
