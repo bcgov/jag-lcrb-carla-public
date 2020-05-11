@@ -88,7 +88,7 @@ def tagLatestStable(environment, backupTag, imageStream) {
 
 def deployAndVerify(srcHash, environment, imageStream) {
   echo "Deploying ${APP_NAME} to ${environment}"
-  tagImage(srcHash, environment, "cllc-public-prod")
+  tagImage(srcHash, environment, imageStream)
   // verify deployment to an environment; e.g. [your-project-name]-dev
   openshiftVerifyDeployment(
     deploymentConfig: "cllc-public",
