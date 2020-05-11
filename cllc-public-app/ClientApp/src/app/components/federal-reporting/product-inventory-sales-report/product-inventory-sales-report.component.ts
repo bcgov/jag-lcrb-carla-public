@@ -24,7 +24,7 @@ export class ProductInventorySalesReportComponent implements OnInit {
       if (controlErrors != null) {
         Object.keys(controlErrors).forEach(keyError => {
           const error = fieldValidationErrors[key].find(e => e.type === keyError);
-          if (errorStrings.findIndex(e => e === error.message) === -1) {
+          if (error && errorStrings.findIndex(e => e === error.message) === -1) {
             errorStrings.push(error.message);
           }
         });
