@@ -7,7 +7,7 @@ Scenario: Pay CRS Licence Fee and Complete Applications
     # Given the CRS application has been approved
     # And I am logged in to the dashboard as a society
     Given I am logged in to the dashboard as a society
-    And I click on the Licences tab
+    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee
     And I click on the licence download link
     And I plan the store opening
