@@ -1320,8 +1320,16 @@ namespace bdd_tests
                 NgWebElement openPartner2DOB = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
                 openPartner2DOB.Click();
 
-                NgWebElement openKeyPartner2DOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                openKeyPartner2DOB1.Click();
+                if (applicationTypeShared == "Catering")
+                {
+                    NgWebElement openKeyPartner2DOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+                    openKeyPartner2DOB1.Click();
+                }
+                else
+                {
+                    NgWebElement openKeyPartner2DOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
+                    openKeyPartner2DOB1.Click();
+                }
             }
         }
 
@@ -1494,7 +1502,7 @@ namespace bdd_tests
             // create application info
             string prevAppDetails = "Here are the previous application details (automated test).";
             string liqConnectionDetails = "Here are the liquor industry connection details (automated test).";
-            //string estName = "Point Ellis Greenhouse";
+            string estName = "Point Ellis Greenhouse";
             string estAddress = "645 Tyee Rd";
             string estCity = "Victoria";
             string estPostal = "V9A6X5";
@@ -1503,15 +1511,15 @@ namespace bdd_tests
             string estEmail = "test@automation.com";
             string conGiven = "Given";
             string conSurname = "Surname";
-            //string conRole = "CEO";
+            string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "test2@automation.com";
 
             System.Threading.Thread.Sleep(9000);
 
             // enter the establishment name
-            //NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
-            //uiEstabName.SendKeys(estName);
+            NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
+            uiEstabName.SendKeys(estName);
 
             // enter the establishment address
             NgWebElement uiEstabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
@@ -1579,11 +1587,11 @@ namespace bdd_tests
             uiContactSurname.SendKeys(conSurname);
 
             // enter the role of the application contact
-            //NgWebElement uiContactRole = ngDriver.FindElement(By.Id("contactPersonRole"));
-            //uiContactRole.SendKeys(conRole);
+            NgWebElement uiContactRole = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+            uiContactRole.SendKeys(conRole);
 
             // enter the phone number of the application contact
-            NgWebElement uiContactPhone = ngDriver.FindElement(By.Id("contactPersonPhone"));
+            NgWebElement uiContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
             uiContactPhone.SendKeys(conPhone);
 
             // enter the email of the application contact
