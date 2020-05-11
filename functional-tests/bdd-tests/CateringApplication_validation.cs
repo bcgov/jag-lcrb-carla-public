@@ -63,8 +63,8 @@ namespace bdd_tests
             this.CarlaDeleteCurrentAccount();
         }
 
-        [And(@"I click on the Start Application button for Catering")]
-        public void I_start_application()
+        [And(@"I click on the Start Application button for (.*)")]
+        public void I_start_application(string application_type)
         {
             /* 
             Page Title: 
@@ -73,6 +73,8 @@ namespace bdd_tests
             // click on the Catering Start Application button
             NgWebElement startApp_button = ngDriver.FindElement(By.Id("startCatering"));
             startApp_button.Click();
+
+            applicationTypeShared = application_type;
         }
 
         [And(@"I review the account profile")]
@@ -125,8 +127,8 @@ namespace bdd_tests
             */
 
             // select 'Yes' for other business on premises
-            NgWebElement otherBusiness = ngDriver.FindElement(By.Id("mat-button-toggle-10-button"));
-            otherBusiness.Click();
+            //NgWebElement otherBusiness = ngDriver.FindElement(By.Id("mat-button-toggle-10-button"));
+            //otherBusiness.Click();
 
             /*
             The following actions are intentionally left incomplete:
