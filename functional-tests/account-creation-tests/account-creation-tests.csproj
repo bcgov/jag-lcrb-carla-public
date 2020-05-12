@@ -37,11 +37,51 @@
   <ItemGroup>
     <None Remove="map-search.feature" />          
   </ItemGroup>
+
   <ItemGroup>
-    <Content Include="map-search.feature">
+    <ProjectReference Include="..\bdd-tests\bdd-tests.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Create_CateringApplication_indigenousnation.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-    </Content>
+    </None>
+    <None Update="Create_CateringApplication_partnership.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Create_CateringApplication_privatecorp.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Create_CateringApplication_pubcorp.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Create_CateringApplication_society.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Create_CateringApplication_soleproprietor.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Create_CRSApplication_indigenousnation.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Create_CRSApplication_partnership.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Create_CRSApplication_privatecorp.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Create_CRSApplication_pubcorp.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Create_CRSApplication_society.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Create_CRSApplication_soleproprietor.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Create_MultiLevel_CRSApplication_PrivateCorp.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
