@@ -222,6 +222,10 @@ export class AssociateListComponent extends FormBase implements OnInit {
         if (this.account.businessType === 'SoleProprietor') {
           this.associates.at(index).get('isOwnerNew').setValue(true);
         }
+        // check to see if this is a trust.
+        if (this.rootNode.businessType === 'Trust') {
+          this.associates.at(index).get('isTrusteeNew').setValue(true);
+        }
         
       } else if (this.changeTypeSuffix === 'IndividualShareholder') {
         this.associates.at(index).get('isIndividual').setValue(true);
@@ -229,9 +233,6 @@ export class AssociateListComponent extends FormBase implements OnInit {
       } else if (this.changeTypeSuffix === 'BusinessShareholder') {
         this.associates.at(index).get('isIndividual').setValue(false);
         this.associates.at(index).get('isShareholderNew').setValue(true);
-      } else if (this.changeTypeSuffix === 'Trust') {
-        this.associates.at(index).get('isIndividual').setValue(true);
-        this.associates.at(index).get('isTrusteeNew').setValue(true);
       }
 
       this.emitValue();
