@@ -54,6 +54,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   licencesOnFile: boolean;
   securityScreeningEnabled: boolean;
   licenseeApplicationLoaded: boolean;
+  loadedValue: LicenseeChangeLog;
 
   constructor(public dialog: MatDialog,
     public snackBar: MatSnackBar,
@@ -127,6 +128,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.treeRoot = LicenseeChangeLog.processLegalEntityTree(this.currentLegalEntities);
         this.treeRoot.isRoot = true;
         this.treeRoot.applySavedChangeLogs(currentChangeLogs);
+
+        this.loadedValue = this.cleanSaveData(this.treeRoot);
 
         this.addDynamicContent();
         this.form.patchValue(this.application);
@@ -258,7 +261,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
                   if (app && app.adoxioInvoiceId) {
                     this.submitPayment();
                   } else if (app) { // go to the application page
-                    
+                    this.loadedValue = this.cleanSaveData(this.treeRoot); // update the loaded value after a succesfull save
                     this.saveComplete.emit(true);
                     if (this.redirectToDashboardOnSave) {
                       this.router.navigateByUrl('/dashboard');
@@ -337,6 +340,10 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
   canDeactivate(): Observable<boolean> {
+    const data = this.cleanSaveData(this.treeRoot);
+    if(JSON.stringify(data) === JSON.stringify(this.loadedValue)){ //no change made. Skip save
+      return of(true);
+    }
     return this.saveForLater(false);
   }
 
