@@ -13,8 +13,6 @@ Scenario: Start Application
     And I review the organization structure
     And I submit the organization structure
     And I complete the Cannabis Retail Store application
-    And I review the security screening requirements
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
-    Then I see the login page
+    Then I return to the dashboard   

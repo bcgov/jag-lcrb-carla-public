@@ -15,5 +15,4 @@ Scenario: Start Application
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
-    Then I see the login page
+    Then I return to the dashboard      
