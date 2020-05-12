@@ -31,8 +31,7 @@ Scenario: Start Application
     And I review the security screening requirements
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
-    Then I see the login page
+    Then I return to the dashboard
 */
 
 namespace bdd_tests
@@ -66,10 +65,6 @@ namespace bdd_tests
         [And(@"I click on the Start Application button for a Cannabis Retail Store")]
         public void I_start_application()
         {
-            /* 
-            Page Title: Welcome to Cannabis Licensing
-            */
-
             NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
             startApp_button.Click();
         }
@@ -107,10 +102,6 @@ namespace bdd_tests
         [And(@"I review the security screening requirements")]
         public void review_security_screening_reqs()
         {
-            /* 
-            Page Title: Security Screening Requirements
-            */
-
             ReviewSecurityScreening();
         }
 
@@ -127,7 +118,7 @@ namespace bdd_tests
             MakePayment();
         }
 
-        [And(@"I return to the dashboard")]
+        [Then(@"I return to the dashboard")]
         public void return_to_dashboard()
         {
             CRSReturnToDashboard();
@@ -137,16 +128,6 @@ namespace bdd_tests
         public void Delete_my_account()
         {
             this.CarlaDeleteCurrentAccount();
-        }
-
-        [Then(@"I see the login page")]
-        public void I_see_login()
-        {
-            /* 
-            Page Title: Apply for a cannabis licence
-            */
-
-            Assert.True (ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
     }
 }
