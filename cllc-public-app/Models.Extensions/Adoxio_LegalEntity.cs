@@ -25,6 +25,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioInterestpercentage = from.interestpercentage;
             to.AdoxioIsindividual = (from.isindividual != null && (bool)from.isindividual) ? 1 : 0;
             to.AdoxioLastname = from.lastname;
+            to.AdoxioIstrustee = from.IsTrustee;
             if (from.legalentitytype != null)
             {
                 to.AdoxioLegalentitytype = (int?)from.legalentitytype;
@@ -125,7 +126,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.isPartner = (adoxio_legalentity.AdoxioIspartner == true);
                 result.isApplicant = (adoxio_legalentity.AdoxioIsapplicant == true);
                 result.isShareholder = (adoxio_legalentity.AdoxioIsshareholder == true);
-                // result.isTrustee =  adoxio_legalentity.AdoxioIstrustee;
+                result.IsTrustee =  (adoxio_legalentity.AdoxioIstrustee == true);
                 result.isDirector = (adoxio_legalentity.AdoxioIsdirector == true);
                 result.isOfficer = (adoxio_legalentity.AdoxioIsofficer == true);
                 result.isSeniorManagement = (adoxio_legalentity.AdoxioIsseniormanagement == true);
