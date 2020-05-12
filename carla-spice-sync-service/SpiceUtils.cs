@@ -386,7 +386,17 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         {
             try
             {
-                MicrosoftDynamicsCRMadoxioLicencetype licenceType = _dynamicsClient.Licencetypes.Get(filter: $"adoxio_licencetypeid eq {application._adoxioLicencetypeValue}").Value[0];
+                MicrosoftDynamicsCRMadoxioLicencetype licenceType;
+                if (application._adoxioLicencetypeValue != null)
+                {
+                    licenceType = _dynamicsClient.Licencetypes.Get(filter: $"adoxio_licencetypeid eq {application._adoxioLicencetypeValue}").Value[0];
+                }
+                else
+                {
+                    // LCSD-3203 default to CRS if no licence type
+                    licenceType = _dynamicsClient.Licencetypes.Get(filter: $"adoxio_name eq 'Cannabis Retail Store'").Value[0];
+                }
+                
                 var screeningRequest = new IncompleteApplicationScreening()
                 {
                     Name = application.AdoxioName,
@@ -560,7 +570,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                             }
                             else
                             {
-                                var accountAssociates = CreateAssociatesForAccount(entity.Account.AccountId);
+                                var accountAssociates = CreateAssociatesForAccount(entity.Account.AccountId, screeningRequest.Associates.Select(s => s.Account.AccountId).ToList());
                                 screeningRequest.Associates = screeningRequest.Associates.Concat(accountAssociates).ToList();
                             }
                         }
@@ -572,7 +582,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 }
 
                 /* Add associates from account */
-                var moreAssociates = CreateAssociatesForAccount(application._adoxioApplicantValue);
+                var moreAssociates = CreateAssociatesForAccount(application._adoxioApplicantValue, screeningRequest.Associates.Select(s => s.Account.AccountId).ToList());
                 screeningRequest.Associates = screeningRequest.Associates.Concat(moreAssociates).ToList();
                 /* remove duplicate associates */
                 List<string> contactIds = new List<string>{};
@@ -601,9 +611,18 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
         }
 
-        private List<LegalEntity> CreateAssociatesForAccount(string accountId)
+        private List<LegalEntity> CreateAssociatesForAccount(string accountId, List<string> accounts)
         {
             List<LegalEntity> newAssociates = new List<LegalEntity>();
+            if (accounts.Contains(accountId))
+            {
+                return newAssociates;
+            }
+            else
+            {
+                accounts.Add(accountId);
+            }
+            
             if (string.IsNullOrEmpty(accountId))
             {
                 _logger.LogError("CreateAssociatesForAccount received a null accountId");
@@ -627,7 +646,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         }
                         else
                         {
-                            var moreAssociates = CreateAssociatesForAccount(associate.Account.AccountId);
+                            var moreAssociates = CreateAssociatesForAccount(associate.Account.AccountId, accounts);
                             newAssociates.AddRange(moreAssociates);
                         }
                     }
