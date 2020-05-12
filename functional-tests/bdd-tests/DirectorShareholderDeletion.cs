@@ -37,10 +37,10 @@ namespace bdd_tests
         public void And_I_view_the_dashboard(string businessType)
         {
             // to be used with fresh test ID
-            //CarlaLogin(businessType);
+            CarlaLogin(businessType);
 
             // to be used in pipeline
-            CarlaLoginNoCheck();
+            //CarlaLoginNoCheck();
         }
 
         [And(@"I click on the Complete Organization Information button")]
@@ -151,7 +151,7 @@ namespace bdd_tests
             NgWebElement openSpareDOB = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr[2]/td[6]/app-field/section/div[1]/section/input"));
             openSpareDOB.Click();
 
-            NgWebElement openSpareDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[5]/div"));
+            NgWebElement openSpareDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[5]/div"));
             openSpareDOB1.Click();
 
             // click on Add Individual Shareholder
