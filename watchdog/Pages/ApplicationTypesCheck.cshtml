@@ -2,6 +2,7 @@
 @model Watchdog.Pages.ApplicationTypesCheckModel
 @{
     ViewData["Title"] = "Application Types Check";
+    string rowClass = "";
 }
     <table class="table">
         <thead>
@@ -16,190 +17,222 @@
         <tbody>
             @foreach (var key in Model.allKeys)
             {
+            <tr>
+                <td rowspan="@Model.allRowSizes[key]"> @key  </td>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioIsdefault.ToString(), @Model.tstAppTypes[@key]?.AdoxioIsdefault.ToString(), @Model.prdAppTypes[@key]?.AdoxioIsdefault.ToString()); }
+
+                <th>Is Default</th>
+                <td class="@rowClass"> @Model.devAppTypes[@key].AdoxioIsdefault.ToString() </td>
+                <td class="@rowClass"> @Model.tstAppTypes[@key].AdoxioIsdefault.ToString() </td>
+                <td class="@rowClass"> @Model.prdAppTypes[@key].AdoxioIsdefault.ToString() </td>
+            </tr>
                 <tr>
-                    <td rowspan="@Model.allRowSizes[key]"> @key  </td>
-                    <th>Is Default</th>
-                    <td> @Model.devAppTypes[@key].AdoxioIsdefault.ToString() </td>
-                    <td> @Model.tstAppTypes[@key].AdoxioIsdefault.ToString() </td>
-                    <td> @Model.prdAppTypes[@key].AdoxioIsdefault.ToString() </td>
-                </tr>
-                <tr>
+                    @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioCode, @Model.tstAppTypes[@key]?.AdoxioCode, @Model.prdAppTypes[@key]?.AdoxioCode); }
                     <th>Code</th>
-                    <td> @Model.devAppTypes[@key]?.AdoxioCode </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioCode </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioCode </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioCode </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioCode </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioCode </td>
                 </tr>
                 <tr>
                     <th>Requires Security Screening</th>
-                    <td> @Model.devAppTypes[@key]?.AdoxioRequiressecurityscreening.ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioRequiressecurityscreening.ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioRequiressecurityscreening.ToString() </td>
+                    @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioRequiressecurityscreening.ToString(), @Model.tstAppTypes[@key]?.AdoxioRequiressecurityscreening.ToString(), @Model.prdAppTypes[@key]?.AdoxioRequiressecurityscreening.ToString()); }
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioRequiressecurityscreening.ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioRequiressecurityscreening.ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioRequiressecurityscreening.ToString() </td>
                 </tr>
                 <tr>
+                    @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioFormreference, @Model.tstAppTypes[@key]?.AdoxioFormreference, @Model.prdAppTypes[@key]?.AdoxioFormreference); }
                     <th>Form Reference</th>
-                    <td> @Model.devAppTypes[@key]?.AdoxioFormreference </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioFormreference </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioFormreference </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioFormreference </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioFormreference </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioFormreference </td>
                 </tr>
                 <tr>
                     <th>Online Display Controls</th>
                     <td colspan="3"> &nbsp; </td>
                 </tr>
                 <tr>
+                    @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioIsshowpropertydetails.ToString(), @Model.tstAppTypes[@key]?.AdoxioIsshowpropertydetails.ToString(), @Model.prdAppTypes[@key]?.AdoxioIsshowpropertydetails.ToString()); }
                     <td>Show Property Details</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowpropertydetails.ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowpropertydetails.ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowpropertydetails.ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioIsshowpropertydetails.ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioIsshowpropertydetails.ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioIsshowpropertydetails.ToString() </td>
                 </tr>
                 <tr>
+                    @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioEstablishmentname.Equals(1).ToString(), @Model.tstAppTypes[@key]?.AdoxioEstablishmentname.Equals(1).ToString(), @Model.prdAppTypes[@key]?.AdoxioEstablishmentname.Equals(1).ToString()); }
                     <td>Establishment Name</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioEstablishmentname.Equals(1).ToString()  </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioEstablishmentname.Equals(1).ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioEstablishmentname.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioEstablishmentname.Equals(1).ToString()  </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioEstablishmentname.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioEstablishmentname.Equals(1).ToString() </td>
                 </tr>
                 <tr>
+                    @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioCurrentestablishmentaddress.Equals(1).ToString(), @Model.tstAppTypes[@key]?.AdoxioCurrentestablishmentaddress.Equals(1).ToString(), @Model.prdAppTypes[@key]?.AdoxioCurrentestablishmentaddress.Equals(1).ToString()); }
                     <td>Current Establishment Address</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioCurrentestablishmentaddress.Equals(1).ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioCurrentestablishmentaddress.Equals(1).ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioCurrentestablishmentaddress.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioCurrentestablishmentaddress.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioCurrentestablishmentaddress.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioCurrentestablishmentaddress.Equals(1).ToString() </td>
                 </tr>
                 <tr>
+                    @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioIsshowcurrentproperty.ToString(), @Model.tstAppTypes[@key]?.AdoxioIsshowcurrentproperty.ToString(), @Model.prdAppTypes[@key]?.AdoxioIsshowcurrentproperty.ToString()); }
                     <td>Show Current Property</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowcurrentproperty.ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowcurrentproperty.ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowcurrentproperty.ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioIsshowcurrentproperty.ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioIsshowcurrentproperty.ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioIsshowcurrentproperty.ToString() </td>
                 </tr>
                 <tr>
+                    @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioNewestablishmentaddress.Equals(1).ToString(), @Model.tstAppTypes[@key]?.AdoxioNewestablishmentaddress.Equals(1).ToString(), @Model.prdAppTypes[@key]?.AdoxioNewestablishmentaddress.Equals(1).ToString()); }
                     <td>New Establishment Address</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioNewestablishmentaddress.Equals(1).ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioNewestablishmentaddress.Equals(1).ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioNewestablishmentaddress.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioNewestablishmentaddress.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioNewestablishmentaddress.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioNewestablishmentaddress.Equals(1).ToString() </td>
                 </tr>
                 <tr>
+                    @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioStorecontactinfo.Equals(1).ToString(), @Model.tstAppTypes[@key]?.AdoxioStorecontactinfo.Equals(1).ToString(), @Model.prdAppTypes[@key]?.AdoxioStorecontactinfo.Equals(1).ToString()); }
                     <td>Store Contact Info</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioStorecontactinfo.Equals(1).ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioStorecontactinfo.Equals(1).ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioStorecontactinfo.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioStorecontactinfo.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioStorecontactinfo.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioStorecontactinfo.Equals(1).ToString() </td>
                 </tr>
                 <tr>
+                    @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioShowdescription1.ToString(), @Model.tstAppTypes[@key]?.AdoxioShowdescription1.ToString(), @Model.prdAppTypes[@key]?.AdoxioShowdescription1.ToString()); }
                     <td>Show Description 1</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioShowdescription1.ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioShowdescription1.ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioShowdescription1.ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioShowdescription1.ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioShowdescription1.ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioShowdescription1.ToString() </td>
                 </tr>
                 <tr>
+                    @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioSignage.Equals(1).ToString(), @Model.tstAppTypes[@key]?.AdoxioSignage.Equals(1).ToString(), @Model.prdAppTypes[@key]?.AdoxioSignage.Equals(1).ToString()); }
                     <td>Signage</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioSignage.Equals(1).ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioSignage.Equals(1).ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioSignage.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioSignage.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioSignage.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioSignage.Equals(1).ToString() </td>
                 </tr>
                 <tr>
+                    @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioValidinterest.Equals(1).ToString(), @Model.tstAppTypes[@key]?.AdoxioValidinterest.Equals(1).ToString(), @Model.prdAppTypes[@key]?.AdoxioValidinterest.Equals(1).ToString()); }
                     <td>Valid Interest</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioValidinterest.Equals(1).ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioValidinterest.Equals(1).ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioValidinterest.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioValidinterest.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioValidinterest.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioValidinterest.Equals(1).ToString() </td>
                 </tr>
                 <tr>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioFloorplan.Equals(1).ToString(), @Model.tstAppTypes[@key]?.AdoxioFloorplan.Equals(1).ToString(), @Model.prdAppTypes[@key]?.AdoxioFloorplan.Equals(1).ToString()); }
                     <td>Floor Plan</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioFloorplan.Equals(1).ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioFloorplan.Equals(1).ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioFloorplan.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioFloorplan.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioFloorplan.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioFloorplan.Equals(1).ToString() </td>
                 </tr>
                 <tr>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioSiteplan.Equals(1).ToString(), @Model.tstAppTypes[@key]?.AdoxioSiteplan.Equals(1).ToString(), @Model.prdAppTypes[@key]?.AdoxioSiteplan.Equals(1).ToString()); }
                     <td>Site Plan</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioSiteplan.Equals(1).ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioSiteplan.Equals(1).ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioSiteplan.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioSiteplan.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioSiteplan.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioSiteplan.Equals(1).ToString() </td>
                 </tr>
                 <tr>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioLiquorsiteplan.Equals(1).ToString(), @Model.tstAppTypes[@key]?.AdoxioLiquorsiteplan.Equals(1).ToString(), @Model.prdAppTypes[@key]?.AdoxioLiquorsiteplan.Equals(1).ToString()); }
                     <td>Liquor Site Plan</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioLiquorsiteplan.Equals(1).ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioLiquorsiteplan.Equals(1).ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioLiquorsiteplan.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioLiquorsiteplan.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioLiquorsiteplan.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioLiquorsiteplan.Equals(1).ToString() </td>
                 </tr>
                 <tr>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioSitephotographs.Equals(1).ToString(), @Model.tstAppTypes[@key]?.AdoxioSitephotographs.Equals(1).ToString(), @Model.prdAppTypes[@key]?.AdoxioSitephotographs.Equals(1).ToString()); }
                     <td>Site Photographs</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioSitephotographs.Equals(1).ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioSitephotographs.Equals(1).ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioSitephotographs.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioSitephotographs.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioSitephotographs.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioSitephotographs.Equals(1).ToString() </td>
                 </tr>
                 <tr>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioPubliccoolerspace.Equals(1).ToString(), @Model.tstAppTypes[@key]?.AdoxioPubliccoolerspace.Equals(1).ToString(), @Model.prdAppTypes[@key]?.AdoxioPubliccoolerspace.Equals(1).ToString()); }
                     <td>Public Cooler Space</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioPubliccoolerspace.Equals(1).ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioPubliccoolerspace.Equals(1).ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioPubliccoolerspace.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioPubliccoolerspace.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioPubliccoolerspace.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioPubliccoolerspace.Equals(1).ToString() </td>
                 </tr>
                 <tr>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioConnectedgrocerystore.Equals(1).ToString(), @Model.tstAppTypes[@key]?.AdoxioConnectedgrocerystore.Equals(1).ToString(), @Model.prdAppTypes[@key]?.AdoxioConnectedgrocerystore.Equals(1).ToString()); }
                     <td>Connected Grocery Store</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioConnectedgrocerystore.Equals(1).ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioConnectedgrocerystore.Equals(1).ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioConnectedgrocerystore.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioConnectedgrocerystore.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioConnectedgrocerystore.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioConnectedgrocerystore.Equals(1).ToString() </td>
                 </tr>
                 <tr>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioProofofzoning.Equals(1).ToString(), @Model.tstAppTypes[@key]?.AdoxioProofofzoning.Equals(1).ToString(), @Model.prdAppTypes[@key]?.AdoxioProofofzoning.Equals(1).ToString()); }
                     <td>Proof of Zoning</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioProofofzoning.Equals(1).ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioProofofzoning.Equals(1).ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioProofofzoning.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioProofofzoning.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioProofofzoning.Equals(1).ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioProofofzoning.Equals(1).ToString() </td>
                 </tr>
                 <tr>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioIsshowhoursofsale.ToString(), @Model.tstAppTypes[@key]?.AdoxioIsshowhoursofsale.ToString(), @Model.prdAppTypes[@key]?.AdoxioIsshowhoursofsale.ToString()); }
                     <td>Show Hours of Sale</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowhoursofsale.ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowhoursofsale.ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowhoursofsale.ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioIsshowhoursofsale.ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioIsshowhoursofsale.ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioIsshowhoursofsale.ToString() </td>
                 </tr>
                 <tr>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioIsshowassociatesformupload.ToString(), @Model.tstAppTypes[@key]?.AdoxioIsshowassociatesformupload.ToString(), @Model.prdAppTypes[@key]?.AdoxioIsshowassociatesformupload.ToString()); }
                     <td>Show Associates Form Upload</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowassociatesformupload.ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowassociatesformupload.ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowassociatesformupload.ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioIsshowassociatesformupload.ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioIsshowassociatesformupload.ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioIsshowassociatesformupload.ToString() </td>
                 </tr>
                 <tr>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioIsshowfinancialintegrityformupload.ToString(), @Model.tstAppTypes[@key]?.AdoxioIsshowfinancialintegrityformupload.ToString(), @Model.prdAppTypes[@key]?.AdoxioIsshowfinancialintegrityformupload.ToString()); }
                     <td>Show Financial Integrity Form Upload</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowfinancialintegrityformupload.ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowfinancialintegrityformupload.ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowfinancialintegrityformupload.ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioIsshowfinancialintegrityformupload.ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioIsshowfinancialintegrityformupload.ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioIsshowfinancialintegrityformupload.ToString() </td>
                 </tr>
                 <tr>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioIsshowsupportingdocuments.ToString(), @Model.tstAppTypes[@key]?.AdoxioIsshowsupportingdocuments.ToString(), @Model.prdAppTypes[@key]?.AdoxioIsshowsupportingdocuments.ToString()); }
                     <td>Show Supporting Documents</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowsupportingdocuments.ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowsupportingdocuments.ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowsupportingdocuments.ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioIsshowsupportingdocuments.ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioIsshowsupportingdocuments.ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioIsshowsupportingdocuments.ToString() </td>
                 </tr>
                 <tr>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioIsshowdeclarations.ToString(), @Model.tstAppTypes[@key]?.AdoxioIsshowdeclarations.ToString(), @Model.prdAppTypes[@key]?.AdoxioIsshowdeclarations.ToString()); }
                     <td>Show Declarations</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowdeclarations.ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowdeclarations.ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowdeclarations.ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioIsshowdeclarations.ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioIsshowdeclarations.ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioIsshowdeclarations.ToString() </td>
                 </tr>
                 <tr>
-                    <td>Show Liquor Declarations</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowliquordeclarations.ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowliquordeclarations.ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowliquordeclarations.ToString() </td>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioIsshowliquordeclarations.ToString(), @Model.tstAppTypes[@key]?.AdoxioIsshowliquordeclarations.ToString(), @Model.prdAppTypes[@key]?.AdoxioIsshowliquordeclarations.ToString()); }
+                    <td class="@rowClass">Show Liquor Declarations</td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioIsshowliquordeclarations.ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioIsshowliquordeclarations.ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioIsshowliquordeclarations.ToString() </td>
                 </tr>
                 <tr>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioIsshowlginapproval.ToString(), @Model.tstAppTypes[@key]?.AdoxioIsshowlginapproval.ToString(), @Model.prdAppTypes[@key]?.AdoxioIsshowlginapproval.ToString()); }
                     <td>Show LG/IN Approval</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioIsshowlginapproval.ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioIsshowlginapproval.ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioIsshowlginapproval.ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioIsshowlginapproval.ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioIsshowlginapproval.ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioIsshowlginapproval.ToString() </td>
                 </tr>
                 <tr>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioIslockestablishmentname.ToString(), @Model.tstAppTypes[@key]?.AdoxioIslockestablishmentname.ToString(), @Model.prdAppTypes[@key]?.AdoxioIslockestablishmentname.ToString()); }
+
                     <td>Lock Establishment Name</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioIslockestablishmentname.ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioIslockestablishmentname.ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioIslockestablishmentname.ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioIslockestablishmentname.ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioIslockestablishmentname.ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioIslockestablishmentname.ToString() </td>
                 </tr>
                 <tr>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioShowdescription2.ToString(), @Model.tstAppTypes[@key]?.AdoxioShowdescription2.ToString(), @Model.prdAppTypes[@key]?.AdoxioShowdescription2.ToString()); }
                     <td>Show Description 2</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioShowdescription2.ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioShowdescription2.ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioShowdescription2.ToString() </td>
+                    <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioShowdescription2.ToString() </td>
+                    <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioShowdescription2.ToString() </td>
+                    <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioShowdescription2.ToString() </td>
                 </tr>
                 <tr>
-                    <td>Show Description 3</td>
-                    <td> @Model.devAppTypes[@key]?.AdoxioShowdescription3.ToString() </td>
-                    <td> @Model.tstAppTypes[@key]?.AdoxioShowdescription3.ToString() </td>
-                    <td> @Model.prdAppTypes[@key]?.AdoxioShowdescription3.ToString() </td>
+                @{ rowClass = @Model.GetRowClass(@Model.devAppTypes[@key]?.AdoxioShowdescription3.ToString(), @Model.tstAppTypes[@key]?.AdoxioShowdescription3.ToString(), @Model.prdAppTypes[@key]?.AdoxioShowdescription3.ToString()); }
+                <td>Show Description 3</td>
+                <td class="@rowClass"> @Model.devAppTypes[@key]?.AdoxioShowdescription3.ToString() </td>
+                <td class="@rowClass"> @Model.tstAppTypes[@key]?.AdoxioShowdescription3.ToString() </td>
+                <td class="@rowClass"> @Model.prdAppTypes[@key]?.AdoxioShowdescription3.ToString() </td>
                 </tr>                
                 @if (@Model.allFieldNames.ContainsKey(@key))
 
@@ -210,19 +243,22 @@
                     </tr>
                     @foreach (var fieldname in Model.allFieldNames[@key])
                     {
+                        
+                        rowClass = @Model.GetRowClass(@Model.devFieldNames[@key].Contains(fieldname).ToString(), @Model.tstFieldNames[@key].Contains(fieldname).ToString(), @Model.prdFieldNames[@key].Contains(fieldname).ToString());
+                        
                         <tr>
                             <td>@fieldname</td>
-                            <td>
+                            <td class="@rowClass">
                                 @if (@Model.devFieldNames.ContainsKey(@key))
-                                {@Model.devFieldNames[@key].Contains(fieldname).ToString()}
+                                    {@Model.devFieldNames[@key].Contains(fieldname).ToString()}
                             </td>
-                            <td>
+                            <td class="@rowClass">
                                 @if (@Model.tstFieldNames.ContainsKey(@key))
-                                {@Model.tstFieldNames[@key].Contains(fieldname).ToString()}
+                                    {@Model.tstFieldNames[@key].Contains(fieldname).ToString()}
                             </td>
-                            <td>
+                            <td class="@rowClass">
                                 @if (@Model.prdFieldNames.ContainsKey(@key))
-                                {@Model.prdFieldNames[@key].Contains(fieldname).ToString()}
+                                    {@Model.prdFieldNames[@key].Contains(fieldname).ToString()}
                             </td>
                         </tr>
 
