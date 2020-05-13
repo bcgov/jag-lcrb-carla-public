@@ -105,8 +105,7 @@ namespace bdd_tests
             NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             openKeyPersonnelDOB.Click();
 
-            NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-            openKeyPersonnelDOB1.Click();
+            SharedCalendarDate();
 
             // click on the Confirm button
             NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
@@ -136,8 +135,7 @@ namespace bdd_tests
             NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
             uiCalendarS1.Click();
 
-            NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-            uiCalendarS2.Click();
+            SharedCalendarDate();
 
             // click on the Confirm button
             NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.XPath("//td[6]/i/span"));

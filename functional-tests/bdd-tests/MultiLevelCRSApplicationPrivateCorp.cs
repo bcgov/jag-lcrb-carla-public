@@ -265,8 +265,7 @@ namespace bdd_tests
             NgWebElement uiKeyPersonnelDOB1Biz12 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
             uiKeyPersonnelDOB1Biz12.Click();
 
-            NgWebElement uiKeyPersonnelDOB1Biz22 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-7']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-            uiKeyPersonnelDOB1Biz22.Click();
+            SharedCalendarDate();
 
             /********** Business Shareholder #2 - Individual Shareholder **********/
 
@@ -300,8 +299,7 @@ namespace bdd_tests
             NgWebElement uiCalendarIndyS1Biz2 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-1']/div/section/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
             uiCalendarIndyS1Biz2.Click();
 
-            NgWebElement uiCalendarIndyS2Biz2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-8']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-            uiCalendarIndyS2Biz2.Click();
+            SharedCalendarDate();
         }
         public void business_shareholder_3()
         {
@@ -392,8 +390,7 @@ namespace bdd_tests
             NgWebElement uiKeyPersonnelDOB1Biz13 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-multi-stage-application-flow/div/mat-horizontal-stepper/div[2]/div[2]/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr[2]/td/mat-expansion-panel/div/div/section/app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
             uiKeyPersonnelDOB1Biz13.Click();
 
-            NgWebElement uiKeyPersonnelDOB1Biz23 = ngDriver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/mat-datepicker-content/mat-calendar/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-            uiKeyPersonnelDOB1Biz23.Click();
+            SharedCalendarDate();
 
             /********** Business Shareholder #3 - Individual Shareholder **********/
 
@@ -427,8 +424,7 @@ namespace bdd_tests
             NgWebElement uiCalendarIndyS1Biz3 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
             uiCalendarIndyS1Biz3.Click();
 
-            NgWebElement uiCalendarIndyS2Biz3 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-10']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-            uiCalendarIndyS2Biz3.Click();
+            SharedCalendarDate();
         }
 
         public void business_shareholder_4()
@@ -520,8 +516,7 @@ namespace bdd_tests
             NgWebElement uiKeyPersonnelDOB1Biz14 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-3']/div/section/app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
             uiKeyPersonnelDOB1Biz14.Click();
 
-            NgWebElement uiKeyPersonnelDOB1Biz24 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-11']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-            uiKeyPersonnelDOB1Biz24.Click();
+            SharedCalendarDate();
 
             /********** Business Shareholder #4 - Individual Shareholder **********/
 
@@ -555,8 +550,7 @@ namespace bdd_tests
             NgWebElement uiCalendarIndyS1Biz4 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-3']/div/section/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
             uiCalendarIndyS1Biz4.Click();
 
-            NgWebElement uiCalendarIndyS2Biz4 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-12']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-            uiCalendarIndyS2Biz4.Click();
+            SharedCalendarDate();
         }
 
         public void business_shareholder_5()
@@ -648,8 +642,7 @@ namespace bdd_tests
             NgWebElement uiKeyPersonnelDOB1Biz15 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
             uiKeyPersonnelDOB1Biz15.Click();
 
-            NgWebElement uiKeyPersonnelDOB1Biz25 = ngDriver.FindElement(By.XPath("//html/body/div[2]/div[2]/div/mat-datepicker-content/mat-calendar/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-            uiKeyPersonnelDOB1Biz25.Click();
+            SharedCalendarDate();
 
             /********** Business Shareholder #5 - Individual Shareholder **********/
 
@@ -679,8 +672,7 @@ namespace bdd_tests
             NgWebElement uiCalendarIndyS1Biz5 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
             uiCalendarIndyS1Biz5.Click();
 
-            NgWebElement uiCalendarIndyS2Biz5 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-14']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-            uiCalendarIndyS2Biz5.Click();
+            SharedCalendarDate();
 
             // enter business shareholder > individual shareholder email
             NgWebElement uiIndyShareEmailBiz5 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-4']/div/section/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
