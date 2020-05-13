@@ -16,7 +16,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
-
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -30,14 +31,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly FileManagerClient _fileManagerClient;
+        private readonly IWebHostEnvironment _env;
 
-        public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient)
-        {
+        public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IWebHostEnvironment env)
+        {         
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(ApplicationsController));
             _fileManagerClient = fileClient;
+            _env = env;
         }
 
 
@@ -589,7 +592,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Delete an Application.  Using a HTTP Post to avoid Siteminder issues with DELETE
+        /// Cancel an Application.  Using a HTTP Post to avoid Siteminder issues with DELETE
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -630,6 +633,50 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
             return NoContent(); // 204
+        }
+
+        /// <summary>
+        /// Process an application.  Only useful for automated testing.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}/process")]
+        public async Task<IActionResult> ProcessApplication(string id)
+        {
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
+
+
+            // get the current user.
+            string sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
+
+
+            // query the Dynamics system to get the account record.
+            if (userSettings.AccountId != null && !userSettings.IsNewUserRegistration && userSettings.AccountId.Length > 0)
+            {
+
+                // call the bpf to process the application.
+                try
+                {
+                    // this needs to be the guid for the published workflow.
+                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync("0a78e6dc-8d62-480f-909f-c104051cf467", id);
+                    return Ok("OK");
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    string error = httpOperationException.Response.Content;
+                    return BadRequest(error);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
+            }
+            else
+            {
+                return BadRequest("This API is not available to an unregistered user.");
+            }
         }
 
         /// <summary>
