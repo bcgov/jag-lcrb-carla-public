@@ -80,6 +80,30 @@ namespace Watchdog.Pages
         public Dictionary<string, List<string>> tstFieldNames;
         public Dictionary<string, List<string>> prdFieldNames;
 
+        // true if there is a difference
+        public bool IsDifferent (string dev, string test, string prod)
+        {
+            bool result = true;
+            if (dev == test && test == prod)
+            {
+                result = false;
+            }
+            return result;
+        }
+
+        public string GetRowClass (string dev, string test, string prod)
+        {            
+            string result;
+            if (IsDifferent(dev, test, prod))
+            {
+                result = "different";
+            }
+            else
+            {
+                result = "same";
+            }
+            return result;
+        }
 
         private void GetAppTypes (string prefix, IConfigurationRoot configuration, Dictionary<string, MicrosoftDynamicsCRMadoxioApplicationtype> appTypesDict, Dictionary<string, List<string>> envFields, List<string> allKeys)
         {
