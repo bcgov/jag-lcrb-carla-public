@@ -137,4 +137,25 @@ export class FormBase implements OnDestroy {
     ngOnDestroy(): void {
         this.componentActive = false;
     }
+
+    public listControlsWithErrors(form: FormGroup, ValidationFieldNameMap: any, parentName: string = ''): string[] {
+        let list = [];
+        for (const c in form.controls) {
+            let control = form.get(c);
+            if (!control.valid) {
+                let possibleForm = <any>control;
+                if (possibleForm.controls) {
+                    let name = parentName + c + '.';
+                    list = [...list, ...this.listControlsWithErrors(<FormGroup>possibleForm, ValidationFieldNameMap, name)];
+                } else {
+                    let message = parentName + c + ' is not valid';
+                    if(ValidationFieldNameMap[parentName + c]){
+                        message = ValidationFieldNameMap[parentName + c] + ' is not valid';
+                    }
+                    list.push(message);
+                }
+            }
+        }
+        return list;
+    }
 }
