@@ -35,7 +35,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ,
                 ApplicationType = await GetDefaultCannabisApplicationType(),
 
-               
+
                 EstablishmentName = "Not a Dispensary"
                 ,
                 EstablishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1"
@@ -45,7 +45,17 @@ namespace Gov.Lclb.Cllb.Public.Test
                 EstablishmentAddressCity = "Victoria, BC"
                 ,
                 EstablishmentAddressPostalCode = "V1X 1X1"
-                //,applicationStatus = "0"
+
+                ,
+                ContactPersonEmail = "test@test.com",
+                ContactPersonFirstName = "Firstname",
+                ContactPersonLastName = "Lastname",
+                ContactPersonPhone = "1231231234",
+                ContactPersonRole = "Owner",
+
+
+
+                IsApplicationComplete = GeneralYesNo.Yes
             };
 
             var jsonString = JsonConvert.SerializeObject(viewmodel_application);
@@ -63,6 +73,15 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
             Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
             Assert.Equal("V1X1X1", responseViewModel.EstablishmentAddressPostalCode); // postal code now has spaces removed by system
+
+            Assert.Equal("test@test.com", responseViewModel.ContactPersonEmail);
+            Assert.Equal("Firstname", responseViewModel.ContactPersonFirstName);
+            Assert.Equal("Lastname", responseViewModel.ContactPersonLastName);
+            Assert.Equal("1231231234", responseViewModel.ContactPersonPhone);
+            Assert.Equal("Owner", responseViewModel.ContactPersonRole);
+
+
+            Assert.Equal(GeneralYesNo.Yes, responseViewModel.IsApplicationComplete);
 
             Guid id = new Guid(responseViewModel.Id);
             //return;
