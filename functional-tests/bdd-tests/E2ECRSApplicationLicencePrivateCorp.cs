@@ -143,7 +143,9 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{application_ID}/process");
 
             // wait for the autoamted approval process to run
-            System.Threading.Thread.Sleep(9000);
+            System.Threading.Thread.Sleep(20000);
+
+            // navigate back to dashboard or licences tabs - TODO
         }
 
         [And(@"the account is deleted")]
