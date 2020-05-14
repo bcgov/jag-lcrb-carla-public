@@ -44,7 +44,7 @@ namespace Watchdog.Pages
     public class ApplicationTypesCheckModel : PageModel
     {
         private readonly IConfigurationRoot Configuration;
-        
+
 
         public ApplicationTypesCheckModel(IConfiguration configuration)
         {
@@ -59,11 +59,13 @@ namespace Watchdog.Pages
 
             devAppTypes = new Dictionary<string, MicrosoftDynamicsCRMadoxioApplicationtype>();
             tstAppTypes = new Dictionary<string, MicrosoftDynamicsCRMadoxioApplicationtype>();
-            prdAppTypes = new Dictionary<string, MicrosoftDynamicsCRMadoxioApplicationtype>();
+            prdAppTypes = new Dictionary<string, MicrosoftDynamicsCRMadoxioApplicationtype>();           
 
-            GetAppTypes ("DEV", Configuration, devAppTypes, devFieldNames, allKeys);
-            GetAppTypes ("TST", Configuration, tstAppTypes, tstFieldNames, allKeys);
-            GetAppTypes ("PRD", Configuration, prdAppTypes, prdFieldNames, allKeys);
+            Parallel.Invoke(
+                delegate() { GetAppTypes("DEV", Configuration, devAppTypes, devFieldNames, allKeys); },
+                delegate() { GetAppTypes("TST", Configuration, tstAppTypes, tstFieldNames, allKeys); },
+                delegate() { GetAppTypes("PRD", Configuration, prdAppTypes, prdFieldNames, allKeys); }
+            );
             
         }
 
