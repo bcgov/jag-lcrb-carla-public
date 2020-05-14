@@ -243,9 +243,11 @@
                     </tr>
                     @foreach (var fieldname in Model.allFieldNames[@key])
                     {
-                        
-                        rowClass = @Model.GetRowClass(@Model.devFieldNames[@key].Contains(fieldname).ToString(), @Model.tstFieldNames[@key].Contains(fieldname).ToString(), @Model.prdFieldNames[@key].Contains(fieldname).ToString());
-                        
+
+                        //rowClass = @Model.GetRowClass(@Model.devFieldNames[@key].Contains(fieldname).ToString(), @Model.tstFieldNames[@key].Contains(fieldname).ToString(), @Model.prdFieldNames[@key].Contains(fieldname).ToString());
+
+                        rowClass = @Model.allFieldClasses[@key][fieldname];
+
                         <tr>
                             <td>@fieldname</td>
                             <td class="@rowClass">
