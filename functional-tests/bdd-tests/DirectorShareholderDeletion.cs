@@ -20,6 +20,8 @@ Feature: Director_shareholder_deletion.feature
 
 Scenario: Delete an individual who is both a director and shareholder
     Given I am logged in to the dashboard as a private corporation
+    And the account is deleted
+    And I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
     And I review the organization structure
@@ -34,13 +36,21 @@ namespace bdd_tests
     public sealed class DirectorShareholderDeletion : TestBase
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
+        public void Given_I_view_the_dashboard(string businessType)
+        {
+            CarlaLoginNoCheck();
+        }
+
+        [And(@"the account is deleted")]
+        public void Delete_my_account()
+        {
+            this.CarlaDeleteCurrentAccount();
+        }
+
+        [And(@"I am logged in to the dashboard as a (.*)")]
         public void And_I_view_the_dashboard(string businessType)
         {
-            // to be used with fresh test ID
             CarlaLogin(businessType);
-
-            // to be used in pipeline
-            //CarlaLoginNoCheck();
         }
 
         [And(@"I click on the Complete Organization Information button")]
