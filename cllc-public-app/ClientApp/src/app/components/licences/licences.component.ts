@@ -60,6 +60,7 @@ export class LicencesComponent extends FormBase implements OnInit {
     "Catering", "Wine Store", "Cannabis Retail Store", "Marketing",
     "Operated - Wine Store", "Operated - Catering",
     "Transfer in Progress - Wine Store", "Transfer in Progress - Catering",
+    "Deemed - Wine Store", "Deemed - Catering"
   ];
 
   constructor(
@@ -105,15 +106,20 @@ export class LicencesComponent extends FormBase implements OnInit {
     this.busy =
       forkJoin(this.applicationDataService.getAllCurrentApplications(),
         this.licenceDataService.getAllCurrentLicenses(),
-        this.licenceDataService.getAllOperatedLicenses()
+        this.licenceDataService.getAllOperatedLicenses(),
+        this.licenceDataService.getAllProposedLicenses()
       ).pipe(takeWhile(() => this.componentActive))
-        .subscribe(([applications, licenses, operatedLicences]) => {
+        .subscribe(([applications, licenses, operatedLicences, proposedLicences]) => {
           this.applications = applications;
           operatedLicences.forEach(licence => {
             licence.isOperated = true;
-            licence.licenceTypeName = 'Operated - ' + licence.licenceTypeName 
+            licence.licenceTypeName = 'Operated - ' + licence.licenceTypeName;
           });
-          let combinedLicences = [...licenses, ...operatedLicences];
+          proposedLicences.forEach(licence => {
+            licence.isDeemed = true;
+            licence.licenceTypeName = 'Deemed - ' + licence.licenceTypeName;
+          })
+          let combinedLicences = [...licenses, ...operatedLicences, ...proposedLicences];
           combinedLicences.forEach((licence: ApplicationLicenseSummary) => {
             this.addOrUpdateLicence(licence);
           });

@@ -505,6 +505,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(adoxioLicenses);
         }
 
+        /// GET all proposed licenses in Dynamics by Licencee using the account Id assigned to the user logged in
+        [HttpGet("proposed-owner")]
+        public async Task<JsonResult> GetProposedLicenseeLicences()
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // get all proposed operator licenses
+            List<ApplicationLicenseSummary> adoxioLicenses = await GetProposedOwnerLicencesForAccountAsync(userSettings.AccountId.ToString());
+
+            return new JsonResult(adoxioLicenses);
+        }
+
         private async Task<List<ApplicationLicenseSummary>> GetThirdPartyOperatedLicencesForAccountAsync(string thirdPartyOperatorId)
         {
             List<ApplicationLicenseSummary> result;
@@ -514,6 +528,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // fetch from Dynamics.
                 var account = await _dynamicsClient.Accounts.GetByKeyAsync(accountid: thirdPartyOperatorId, expand: expand);
                 result = account.AdoxioThirdpartyoperatorLicences
+                .Select(licence => _dynamicsClient.GetLicenceByIdWithChildren(licence.AdoxioLicencesid))
+                .Select(licence => licence.ToLicenseSummaryViewModel(new List<MicrosoftDynamicsCRMadoxioApplication>(), _dynamicsClient))
+                .ToList();
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
+        private async Task<List<ApplicationLicenseSummary>> GetProposedOwnerLicencesForAccountAsync(string accountId)
+        {
+            List<ApplicationLicenseSummary> result;
+            try
+            {
+                string[] expand = { "adoxio_account_adoxio_licences_ProposedOwner" };
+                // fetch from Dynamics.
+                var account = await _dynamicsClient.Accounts.GetByKeyAsync(accountid: accountId, expand: expand);
+                result = account.AdoxioAccountAdoxioLicencesProposedOwner
                 .Select(licence => _dynamicsClient.GetLicenceByIdWithChildren(licence.AdoxioLicencesid))
                 .Select(licence => licence.ToLicenseSummaryViewModel(new List<MicrosoftDynamicsCRMadoxioApplication>(), _dynamicsClient))
                 .ToList();
