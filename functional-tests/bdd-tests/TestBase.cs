@@ -34,6 +34,8 @@ namespace bdd_tests
 
         protected string applicationTypeShared;
 
+        protected string application_ID;
+
         protected TestBase()
         {
             string path = Directory.GetCurrentDirectory();
@@ -1456,6 +1458,14 @@ namespace bdd_tests
             // click on the signature agreement checkbox
             NgWebElement signatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
             signatureAgree.Click();
+
+            // retrieve the current URL to get the application ID (needed downstream)
+            string URL = ngDriver.Url;
+
+            // retrieve the application ID
+            string[] parsedURL = URL.Split('/');
+
+            application_ID = parsedURL[5];
 
             // click on the Submit button
             NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
