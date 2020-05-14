@@ -19,7 +19,7 @@
               <img *ngIf="mappingItem.key === 'Marketing'" class="icon"
                 src="assets/Cannabis-marketing-icon-blue-40px.png" alt="">
               <img *ngIf="mappingItem.key === 'Catering'" class="icon" src="assets/Catering-icon-blue-40px.png" alt="">
-              <img *ngIf="mappingItem.key === 'Wine Store'" class="icon" src="assets/Wine-store-icon-blue-40px.png"
+              <img *ngIf="mappingItem.key === 'Wine Store'" class="icon" src="assets/Wine-store-icon-blue-40px.png"f
                 alt="">
             </th>
             <th style="width:250px;">Licence Details</th>
@@ -47,14 +47,14 @@
 
                 <br>
                 <span>Expiry / Renewal Date: {{item.expiryDate | date: 'MM/dd/yyyy'}}</span> <br>
-                <div *ngIf="!item.isOperated && item.status !== PAYMENT_REQUIRED && !isAboutToExpire(item.expiryDate) "
+                <div *ngIf="!item.isOperated && !item.isDeemed && item.status !== PAYMENT_REQUIRED && !isAboutToExpire(item.expiryDate) "
                   style="min-width: 10px; margin-bottom: 10px;">
                   <a [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'" download>
                     <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
                   </a>
                 </div>
                 <a href="javascript: void(0);" (click)="startRenewal(item)" appRemoveIfFeatureOff="CRS-Renewal"
-                  *ngIf="!item.isOperated && isAboutToExpire(item.expiryDate)" class="missing"><i
+                  *ngIf="!item.isOperated && !item.isDeemed && isAboutToExpire(item.expiryDate)" class="missing"><i
                     class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>Renew Licence</a>
               </td>
 
@@ -63,11 +63,11 @@
                   {{item?.establishmentAddressStreet}} <br>
                   {{item?.establishmentAddressCity}} BC {{item?.establishmentAddressPostalCode}}<br>
                   <input class="form-control" type="text" formControlName="phone" mask="(000) 000-0000"
-                    placeholder="Store Phone Number" [readonly]="item.isOperated"
-                    (focusout)="!item.isOperated && updatePhone(item?.licenseId, item?.establishmentId, $event)"> <br>
+                    placeholder="Store Phone Number" [readonly]="item.isOperated || item?.isDeemed"
+                    (focusout)="!item.isOperated && !item.isDeemed && updatePhone(item?.licenseId, item?.establishmentId, $event)"> <br>
                   <input class="form-control" type="text" formControlName="email" placeholder="Store Email Address"
-                    [readonly]="item.isOperated"
-                    (focusout)="!item.isOperated && updateEmail(item?.licenseId, item?.establishmentId, $event)"> <br>
+                    [readonly]="item.isOperated || item?.isDeemed"
+                    (focusout)="!item.isOperated && !item.isDeemed  && updateEmail(item?.licenseId, item?.establishmentId, $event)"> <br>
                 </div>
                 <div *ngIf="item?.licenceTypeName === 'Marketing'">
                   {{account?.physicalAddressStreet}} <br>
@@ -112,7 +112,7 @@
                   </a>
                 </div>
                 <div
-                  *ngIf="item?.licenceTypeName === ApplicationTypeNames.Catering && item?.status !== PAYMENT_REQUIRED">
+                  *ngIf="(item?.licenceTypeName === ApplicationTypeNames.Catering || item?.licenceTypeName === 'Deemed - Catering') && item?.status !== PAYMENT_REQUIRED">
                   <a [routerLink]="[ '/licence/' + item.licenseId + '/event']">
                     <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Event Authorization
                   </a>
@@ -133,7 +133,7 @@
                 </div>
                 <!-- Third Party Operator Actions-->
                 <!-- Indicate application has been initiated-->
-                <div *ngIf="!licenceHasExpired(item.expiryDate) && item.tpoRequested === 'Yes'" class="licence-expired">
+                <div *ngIf="!licenceHasExpired(item.expiryDate) && !item.isDeemed && item.tpoRequested === 'Yes'" class="licence-expired">
                   <br>
                   <strong>Third Party Operator Application Initiated</strong> <br />
                   <section
