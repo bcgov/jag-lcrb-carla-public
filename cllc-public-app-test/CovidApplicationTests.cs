@@ -95,7 +95,6 @@ namespace Gov.Lclb.Cllb.Public.Test
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/covidDelete");
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-
          
         }
 
