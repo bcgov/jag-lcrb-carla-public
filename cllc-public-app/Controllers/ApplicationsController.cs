@@ -16,7 +16,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
-
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -29,15 +30,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
+        private readonly IWebHostEnvironment _env;
         private readonly FileManagerClient _fileManagerClient;
 
-        public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient)
+        public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IWebHostEnvironment env)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(ApplicationsController));
             _fileManagerClient = fileClient;
+            _env = env;
         }
 
 
@@ -688,6 +691,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue))
+            {
+                return new NotFoundResult();
+            }
+
+
+            await _dynamicsClient.Applications.DeleteAsync(adoxio_applicationid.ToString());
+
+            return NoContent(); // 204
+        }
+
+        [HttpPost("{id}/covidDelete")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DeleteCovidApplication(string id)
+        {
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
+
+            // get the application.
+            Guid adoxio_applicationid = new Guid(id);
+
+            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationid);
+            if (adoxioApplication == null)
             {
                 return new NotFoundResult();
             }
