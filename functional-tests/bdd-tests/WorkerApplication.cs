@@ -110,14 +110,20 @@ namespace bdd_tests
             NgWebElement openCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-previous-button"));
             openCalendar2.Click();
 
-            NgWebElement openCalendar3 = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
-            openCalendar3.Click();
+            var openCalendar3 = ngDriver.FindElements(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content")).GetEnumerator();
+            openCalendar3.MoveNext();
+            openCalendar3.Current.Click();
 
-            NgWebElement openCalendar4 = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
-            openCalendar4.Click();
-
-            NgWebElement openCalendar5 = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
-            openCalendar5.Click();
+            var openCalendar4 = ngDriver.FindElements(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content")).GetEnumerator();
+            openCalendar4.MoveNext();
+            openCalendar4.MoveNext();
+            openCalendar4.MoveNext();
+            openCalendar4.Current.Click();
+           
+            var openCalendar5 = ngDriver.FindElements(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content")).GetEnumerator();
+            openCalendar5.MoveNext();
+            openCalendar5.MoveNext();
+            openCalendar5.Current.Click();
 
             // enter the street of the mailing address
             NgWebElement uiMailingStreet = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
