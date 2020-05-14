@@ -403,7 +403,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // set account relationship
                 adoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
 
-                // set applicaiton type relationship 
+                // set application type relationship 
                 var applicationType = _dynamicsClient.GetApplicationTypeByName(item.ApplicationType.Name);
                 adoxioApplication.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
 
@@ -458,6 +458,44 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         }
 
+        
+        [HttpPost("covid")]
+        [AllowAnonymous]
+        public async Task<IActionResult> CreateCovidApplication ([FromBody] ViewModels.CovidApplication item)
+        {
+            // check to see if the feature is on.
+            if (string.IsNullOrEmpty(_configuration["FEATURE_COVID_APPLICATION"]))
+            {
+                return BadRequest();
+            }
+
+            var adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
+            adoxioApplication.CopyValues(item);
+
+            try
+            {
+                // create application
+                adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                string applicationId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
+                if (!string.IsNullOrEmpty(applicationId) && Guid.TryParse(applicationId, out Guid applicationGuid))
+                {
+                    adoxioApplication = await _dynamicsClient.GetApplicationById(applicationGuid);
+                }
+                else
+                {
+
+                    _logger.LogError(httpOperationException, "Error creating application");
+                    // fail if we can't create.
+                    throw (httpOperationException);
+                }
+
+            }
+
+            return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient, _logger));
+        }
         private async Task initializeSharepoint(MicrosoftDynamicsCRMadoxioApplication adoxioApplication)
         {
             // create a SharePointDocumentLocation link
