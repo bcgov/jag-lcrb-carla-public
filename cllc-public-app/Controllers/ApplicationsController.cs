@@ -479,6 +479,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // create application
                 adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
+                _logger.LogInformation($"CREATED COVID APPLICATION {adoxioApplication.AdoxioApplicationid}");
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -490,7 +491,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else
                 {
 
-                    _logger.LogError(httpOperationException, "Error creating application");
+                    _logger.LogError(httpOperationException, "Error creating COVID application");
                     // fail if we can't create.
                     throw (httpOperationException);
                 }
