@@ -37,6 +37,37 @@ export const MY_FORMATS = {
   },
 };
 
+const ValidationFieldNameMap = {
+  'businessProfile.id': 'Account ID',
+  'businessProfile._mailingSameAsPhysicalAddress': 'Mailing Address Same as Physical Address',
+  'businessProfile.bcIncorporationNumber': 'B.C. Incorporation Number',
+  'businessProfile.dateOfIncorporationInBC': 'Date of Incorporation In B.C.',
+  'businessProfile.businessNumber': 'Business Number',
+  'businessProfile.businessType': 'Business Type',
+  'businessProfile.contactPhone': 'Corporation Address Business Phone',
+  // 'businessProfile.contactEmail': 'Corporation Address Business Email',
+
+  'businessProfile.physicalAddressStreet': 'Physical Address Street',
+  'businessProfile.physicalAddressStreet2': 'Physical Address Street2',
+  'businessProfile.physicalAddressCity': 'Physical Address City',
+  'businessProfile.physicalAddressPostalCode': 'Physical Address Postal Code',
+  'businessProfile.physicalAddressProvince': 'Physical Address Province',
+  'businessProfile.physicalAddressCountry': 'Physical Address Country',
+  'businessProfile.mailingAddressStreet': 'Mailing Address Street',
+  'businessProfile.mailingAddressStreet2': 'Mailing Address Street2',
+  'businessProfile.mailingAddressCity': 'Mailing Address City',
+  'businessProfile.mailingAddressPostalCode': 'Mailing Address Postal Code',
+  'businessProfile.mailingAddressProvince': 'Mailing Address Province',
+  'businessProfile.mailingAddressCountry': 'Mailing Address Country',
+
+  'primarycontact.id': 'Corporation Contact ID',
+  'primarycontact.firstname': 'Corporation Contact Fist Name',
+  'primarycontact.lastname': 'Corporation Contact LastName',
+  'primarycontact.jobTitle': 'Corporation Contact Job Title',
+  'primarycontact.telephone1': 'Corporation Contact Telephone',
+  'primarycontact.emailaddress1': 'Corporation Contact Email',
+};
+
 
 @Component({
   selector: 'app-account-profile',
@@ -65,6 +96,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   applicationMode: string;
   account: Account;
   tiedHouseFormData: Observable<TiedHouseConnection>;
+  validationMessages: string[];
 
   public get contacts(): FormArray {
     return this.form.get('otherContacts') as FormArray;
@@ -235,10 +267,10 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
         if (this.account.isPrivateCorporation()) {
           this.form.get('businessProfile.bcIncorporationNumber')
-          .setValidators([Validators.pattern('^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$')]);
+            .setValidators([Validators.pattern('^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$')]);
         } else if (this.account.businessType === 'Society') {
           this.form.get('businessProfile.bcIncorporationNumber')
-          .setValidators([Validators.pattern('^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$')]);
+            .setValidators([Validators.pattern('^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$')]);
         } else {
           this.form.get('businessProfile.bcIncorporationNumber').clearValidators();
         }
@@ -296,6 +328,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   }
 
   gotoReview() {
+    this.validationMessages = [];
     if (this.form.valid && (!this.connectionsToProducers || this.connectionsToProducers.form.valid)) {
       this.busy = this.save().subscribe(() => {
         if (this.useInStepperMode) {
@@ -322,8 +355,11 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       });
     } else {
       this.markAsTouched();
+      this.listControlsWithErrors(this.form, ValidationFieldNameMap).forEach(m => this.validationMessages.push(m));
     }
   }
+
+
 
   prepareTiedHouseSaveRequest(_tiedHouseData) {
     const data = { ...this.account.tiedHouse, ..._tiedHouseData };
