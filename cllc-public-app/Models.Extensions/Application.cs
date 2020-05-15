@@ -178,14 +178,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioContactpersonphone = from.ContactPersonPhone;
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
             to.AdoxioAdditionalpropertyinformation = from.AdditionalPropertyInformation;
-            
+
             to.AdoxioDescription1 = from.Description1;
 
             //store opening
-            
+
 
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
-            
+
             to.AdoxioApplicanttype = (int?)from.ApplicantType;
 
             // catering fields
@@ -193,7 +193,17 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         }
 
+        public static void CopyValuesForCovidApplication(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.CovidApplication from)
+        {
+            to.CopyValues(from);
 
+            /* 2020/5/15 - Copy values has a comment that says to not copy this fields because of a dynamics workflow
+            * Including this fields for the covid application as the workflow should not be relevant ?
+            */
+            to.AdoxioAddressstreet = from.AddressStreet;
+            to.AdoxioAddresscity = from.AddressCity;
+            to.AdoxioAddresspostalcode = from.AddressPostalCode;
+        }
         public static void CopyValuesForChangeOfLocation(this MicrosoftDynamicsCRMadoxioApplication to, MicrosoftDynamicsCRMadoxioLicences from, bool copyAddress)
         {
             // copy establishment information
@@ -455,7 +465,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 applicationVM.ApplicationType = dynamicsApplication.AdoxioApplicationTypeId.ToViewModel();
 
-                if (! string.IsNullOrEmpty(applicationVM.ApplicationType.FormReference))
+                if (!string.IsNullOrEmpty(applicationVM.ApplicationType.FormReference))
                 {
                     applicationVM.ApplicationType.DynamicsForm = dynamicsClient.GetSystemformViewModel(logger, applicationVM.ApplicationType.FormReference);
                 }
@@ -492,6 +502,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EstablishmentPhone = dynamicsApplication.AdoxioEstablishmentphone,
                 EstablishmentEmail = dynamicsApplication.AdoxioEstablishmentemail,
                 IsApplicationComplete = (GeneralYesNo?)dynamicsApplication.AdoxioIsapplicationcomplete,
+
+                AddressStreet = dynamicsApplication.AdoxioAddressstreet,
+                AddressCity = dynamicsApplication.AdoxioAddresscity,
+                AddressPostalCode = dynamicsApplication.AdoxioAddresspostalcode,
+
+                NameOfApplicant = dynamicsApplication.AdoxioNameofapplicant,
 
 
 
@@ -551,7 +567,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
                 var adoxio_licencetype = dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
-                applicationVM.LicenseType = adoxio_licencetype.AdoxioName;
+                applicationVM.LicenceType = adoxio_licencetype.AdoxioName;
             }
 
 

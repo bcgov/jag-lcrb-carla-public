@@ -14,6 +14,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public AdoxioApplicantTypeCodes ApplicantType { get; set; } //adoxio_applicanttype
 
         public string JobNumber { get; set; } //adoxio_jobnumber
+        public string NameOfApplicant { get; set; } 
 
         public string AdditionalPropertyInformation { get; set; } //adoxio_additionalpropertyinformation
         public string AdoxioInvoiceId  { get; set; }
@@ -27,6 +28,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string ContactPersonPhone { get; set; } //adoxio_contactpersonphone
         public string ContactPersonRole { get; set; } //adoxio_role
 
+        public string AddressCity { get; set; } //adoxio_addresscity
+        public string AddressPostalCode { get; set; } //adoxio_addresspostalcode
+        public string AddressStreet { get; set; } //adoxio_addressstreet
+
         public string EstablishmentAddress { get; set; } //adoxio_establishmentaddress
         public string EstablishmentName { get; set; } //adoxio_establishmentpropsedname
         public string EstablishmentAddressCity { get; set; } //adoxio_establishmentaddresscity
@@ -37,7 +42,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string EstablishmentPhone { get; set; }
 
         
-        public string LicenseType { get; set; } //_adoxio_licencetype_value		
+        public string LicenceType { get; set; } //_adoxio_licencetype_value		
         
         public DateTimeOffset? ModifiedOn { get; set; }
 
