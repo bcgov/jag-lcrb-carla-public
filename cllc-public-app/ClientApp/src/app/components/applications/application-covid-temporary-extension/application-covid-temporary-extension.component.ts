@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
 import { filter } from 'rxjs/operators';
+import { DelayedFileUploaderComponent } from '@shared/components/delayed-file-uploader/delayed-file-uploader.component';
 
 const FormValidationErrorMap = {
   licenceNumber: 'Licence Number',
@@ -39,6 +40,10 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
   busy: any;
   showValidationMessages: boolean;
   validationMessages: string[] = [];
+
+
+  @ViewChild('uploadedFloorplanDocuments', { static: false }) uploadedFloorplanDocuments: DelayedFileUploaderComponent;
+  @ViewChild('uploadedLicenseeRepresentativeNotficationFormDocuments', { static: false }) uploadedLicenseeRepresentativeNotficationFormDocuments: DelayedFileUploaderComponent;
 
   constructor(private fb: FormBuilder) {
     super();
