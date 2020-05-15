@@ -31,7 +31,7 @@ export class CovidApplication {
   addressPostalCode: string;
   addressStreet: string;
 
-  licenseType: string;
+  licenceType: string;
   modifiedOn: Date;
   name: string;
   applicationType: ApplicationType;
