@@ -46,12 +46,17 @@ import { LiquorRenewalComponent } from '@components/applications/liquor-renewal/
 import { TemporaryOffsiteComponent } from '@components/temporary-offsite/temporary-offsite.component';
 import { ApplicationThirdPartyOperatorComponent } from '@components/applications/application-third-party-operator/application-third-party-operator.component';
 import { CancelThirdPartyOperatorComponent } from '@components/applications/cancel-third-party-operator/cancel-third-party-operator.component';
+import { ApplicationCovidTemporaryExtensionComponent } from '@components/applications/application-covid-temporary-extension/application-covid-temporary-extension.component';
 
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'covid-temporary-extension',
+    component: ApplicationCovidTemporaryExtensionComponent
   },
   {
     path: 'org-structure',

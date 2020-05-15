@@ -37,8 +37,6 @@ export class FormBase implements OnDestroy {
         return body;
     }
 
-
-
     isValidOrNotTouched(field: string) {
         return this.form.get(field).disabled
             || this.form.get(field).valid
@@ -138,24 +136,67 @@ export class FormBase implements OnDestroy {
         this.componentActive = false;
     }
 
-    public listControlsWithErrors(form: FormGroup, ValidationFieldNameMap: any, parentName: string = ''): string[] {
+    public listControlsWithErrors(form: FormGroup | FormArray, ValidationFieldNameMap: any = {}, parentName: string = ''): string[] {
         let list = [];
-        for (const c in form.controls) {
-            let control = form.get(c);
-            if (!control.valid) {
-                let possibleForm = <any>control;
-                if (possibleForm.controls) {
-                    let name = parentName + c + '.';
-                    list = [...list, ...this.listControlsWithErrors(<FormGroup>possibleForm, ValidationFieldNameMap, name)];
-                } else {
-                    let message = parentName + c + ' is not valid';
-                    if(ValidationFieldNameMap[parentName + c]){
-                        message = ValidationFieldNameMap[parentName + c] + ' is not valid';
+        if (form instanceof FormGroup) {
+            for (const c in form.controls) {
+                let control = form.get(c);
+                if (!control.valid) {
+                    if (control instanceof FormGroup || control instanceof FormArray) {
+                        let name = parentName + c + '.';
+                        list = [...list, ...this.listControlsWithErrors(control, ValidationFieldNameMap, name)];
+                    } else {
+                        let message = parentName + c;
+                        if (ValidationFieldNameMap[parentName + c]) {
+                            message = ValidationFieldNameMap[parentName + c];
+                        }
+                        list.push(message);
                     }
-                    list.push(message);
                 }
             }
+        } else if (form instanceof FormArray) {
+            form.controls.forEach((control, index) => {
+                if (!control.valid) {
+                    if (control instanceof FormGroup || control instanceof FormArray) {
+                        let name = parentName;
+                        list = [...list, ...this.listControlsWithErrors(control, ValidationFieldNameMap, name)];
+                    } else {
+                        let message = parentName + ' at index ' + index;
+                        if (ValidationFieldNameMap[parentName]) {
+                            message = ValidationFieldNameMap[parentName] + ' at index ' + index;
+                        }
+                        list.push(message);
+                    }
+                }
+            });
         }
         return list;
+    }
+
+
+    public markConstrolsAsTouched(form: FormGroup | FormArray) {
+
+        if (form instanceof FormGroup) {
+            for (const c in form.controls) {
+                let control = form.get(c);
+                if (!control.valid) {
+                    if (control instanceof FormGroup || control instanceof FormArray) {
+                        this.markConstrolsAsTouched(control);
+                    } else {
+                        control.markAsTouched();
+                    }
+                }
+            }
+        } else if (form instanceof FormArray) {
+            form.controls.forEach((control, index) => {
+                if (!control.valid) {
+                    if (control instanceof FormGroup || control instanceof FormArray) {
+                        this.markConstrolsAsTouched(control);
+                    } else {
+                        control.markAsTouched();
+                    }
+                }
+            });
+        }
     }
 }

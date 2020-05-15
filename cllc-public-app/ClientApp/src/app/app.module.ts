@@ -194,6 +194,7 @@ import { TemporaryOffsiteComponent } from '@components/temporary-offsite/tempora
 import { ApplicationThirdPartyOperatorComponent } from '@components/applications/application-third-party-operator/application-third-party-operator.component';
 import { CancelThirdPartyOperatorComponent } from '@components/applications/cancel-third-party-operator/cancel-third-party-operator.component';
 import { FeatureFlagService } from './services/feature-flag.service';
+import { ApplicationCovidTemporaryExtensionComponent } from './components/applications/application-covid-temporary-extension/application-covid-temporary-extension.component';
 
 
 @NgModule({
@@ -301,7 +302,8 @@ import { FeatureFlagService } from './services/feature-flag.service';
     MultiStageApplicationFlowComponent,
     SecurityScreeningRequirementsComponent,
     EligibilityFormComponent,
-    LiquorRenewalComponent
+    LiquorRenewalComponent,
+    ApplicationCovidTemporaryExtensionComponent
   ],
   imports: [
     ChartsModule,
