@@ -542,16 +542,29 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private async Task<List<ApplicationLicenseSummary>> GetProposedOwnerLicencesForAccountAsync(string accountId)
         {
-            List<ApplicationLicenseSummary> result;
+            List<ApplicationLicenseSummary> result = new List<ApplicationLicenseSummary>();
             try
             {
                 string[] expand = { "adoxio_account_adoxio_licences_ProposedOwner" };
                 // fetch from Dynamics.
                 var account = await _dynamicsClient.Accounts.GetByKeyAsync(accountid: accountId, expand: expand);
-                result = account.AdoxioAccountAdoxioLicencesProposedOwner
+                var licences = account.AdoxioAccountAdoxioLicencesProposedOwner
                 .Select(licence => _dynamicsClient.GetLicenceByIdWithChildren(licence.AdoxioLicencesid))
-                .Select(licence => licence.ToLicenseSummaryViewModel(new List<MicrosoftDynamicsCRMadoxioApplication>(), _dynamicsClient))
+                .Select(licence =>
+                {
+                    licence.AdoxioLicenceType = Gov.Lclb.Cllb.Public.Models.ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
+                    return licence;
+                })
                 .ToList();
+                if (licences != null)
+                {
+                    foreach (var licence in licences)
+                    {
+                        IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationsForLicenceByApplicant(licence.AdoxioLicencee.Accountid);
+                        var applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
+                        result.Add(licence.ToLicenseSummaryViewModel(applications, _dynamicsClient));
+                    }
+                }
             }
             catch (HttpOperationException)
             {
