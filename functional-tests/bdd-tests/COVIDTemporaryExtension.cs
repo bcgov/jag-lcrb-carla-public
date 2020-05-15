@@ -61,7 +61,6 @@ namespace bdd_tests
             // create test data
 
             string licencenumber = "1234";
-            string licencetype = "Cannabis Retail Store";
             string licencename = "Point Ellis Operations";
             string estname = "Point Ellis Greenhouse";
             string eststreet = "645 Tyee Road";
@@ -80,48 +79,54 @@ namespace bdd_tests
 
             NgWebElement uiLicenceNumber = ngDriver.FindElement(By.XPath("//input[@type='text']"));
             uiLicenceNumber.SendKeys(licencenumber);
+            
+            NgWebElement uiLicenceType = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-2']"));
+            uiLicenceType.Click();
 
-            NgWebElement uiLicenceType = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
-            uiLicenceType.SendKeys(licencetype);
-
-            NgWebElement uiLicenceName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+            NgWebElement uiLicenceName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
             uiLicenceName.SendKeys(licencename);
 
-            NgWebElement uiEstName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+            NgWebElement uiEstName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
             uiEstName.SendKeys(estname);
 
-            NgWebElement uiEstStreet = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            NgWebElement uiEstStreet = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
             uiEstStreet.SendKeys(eststreet);
 
-            NgWebElement uiEstCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
+            NgWebElement uiEstCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             uiEstCity.SendKeys(estcity);
 
-            NgWebElement uiEstPostal = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
+            NgWebElement uiEstPostal = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
             uiEstPostal.SendKeys(estpostal);
 
-            NgWebElement uiContactFirst = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
+            NgWebElement uiContactFirst = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
             uiContactFirst.SendKeys(contactfirst);
 
-            NgWebElement uiContactLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+            NgWebElement uiContactLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
             uiContactLast.SendKeys(contactlast);
 
-            NgWebElement uiContactTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
+            NgWebElement uiContactTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
             uiContactTitle.SendKeys(contacttitle);
 
-            NgWebElement uiContactTel = ngDriver.FindElement(By.XPath("(//input[@type='text'])[11]"));
+            NgWebElement uiContactTel = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
             uiContactTel.SendKeys(contacttel);
 
-            NgWebElement uiContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+            NgWebElement uiContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[11]"));
             uiContactEmail.SendKeys(contactemail);
 
-            NgWebElement uiMailingStreet = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
+            NgWebElement uiMailingStreet = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
             uiMailingStreet.SendKeys(mailingstreet);
 
-            NgWebElement uiMailingCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[14]"));
+            NgWebElement uiMailingCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
             uiMailingCity.SendKeys(mailingcity);
 
-            NgWebElement uiMailingPostal = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
+            NgWebElement uiMailingPostal = ngDriver.FindElement(By.XPath("(//input[@type='text'])[14]"));
             uiMailingPostal.SendKeys(mailingpostal);
+
+            NgWebElement uiLocalGovPerm = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[6]"));
+            uiLocalGovPerm.Click();
+
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[7]"));
+            uiSignatureAgreement.Click();
         }
 
         [And(@"I click on the Submit button")]
