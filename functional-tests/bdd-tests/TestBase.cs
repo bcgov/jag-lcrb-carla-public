@@ -425,7 +425,7 @@ namespace bdd_tests
                 NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
                 uiCalendar1.Click();
 
-                NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[1]/td[2]/div"));
+                NgWebElement uiCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
                 uiCalendar2.Click();
             }
 
@@ -855,16 +855,8 @@ namespace bdd_tests
                 NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
                 openKeyPersonnelDOB.Click();
 
-                if (applicationTypeShared == "Catering")
-                {
-                    NgWebElement openKeyPersonnelDOB1Cat = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    openKeyPersonnelDOB1Cat.Click();
-                }
-                else
-                {
-                    NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    openKeyPersonnelDOB1.Click();
-                }
+                // select the date
+                SharedCalendarDate();
 
                 /********** Individual Shareholder **********/
 
@@ -898,16 +890,8 @@ namespace bdd_tests
                 NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
                 uiCalendarS1.Click();
 
-                if (applicationTypeShared == "Catering")
-                {
-                    NgWebElement uiCalendarS2Cat = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    uiCalendarS2Cat.Click();
-                }
-                else
-                {
-                    NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-4']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    uiCalendarS2.Click();
-                }
+                // select the date
+                SharedCalendarDate();
 
                 /********** Business Shareholder **********/
 
@@ -991,16 +975,8 @@ namespace bdd_tests
                 NgWebElement uiKeyPersonnelDOB1Biz1 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
                 uiKeyPersonnelDOB1Biz1.Click();
 
-                if (applicationTypeShared == "Catering")
-                {
-                    NgWebElement uiKeyPersonnelDOB1Biz2Cat = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    uiKeyPersonnelDOB1Biz2Cat.Click();
-                }
-                else
-                {
-                    NgWebElement uiKeyPersonnelDOB1Biz2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-5']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    uiKeyPersonnelDOB1Biz2.Click();
-                }
+                // select the date
+                SharedCalendarDate();
 
                 /********** Business Shareholder - Individual Shareholder **********/
 
@@ -1034,16 +1010,8 @@ namespace bdd_tests
                 NgWebElement uiCalendarIndyS1Biz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
                 uiCalendarIndyS1Biz.Click();
 
-                if (applicationTypeShared == "Catering")
-                {
-                    NgWebElement uiCalendarIndyS2BizCat = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-4']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    uiCalendarIndyS2BizCat.Click();
-                }
-                else
-                {
-                    NgWebElement uiCalendarIndyS2Biz = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-6']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    uiCalendarIndyS2Biz.Click();
-                }
+                // select the date
+                SharedCalendarDate();
             }
 
             if (businessTypeShared == "sole proprietorship")
@@ -1073,16 +1041,8 @@ namespace bdd_tests
                 NgWebElement openLeaderDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
                 openLeaderDOB.Click();
 
-                if (applicationTypeShared == "Catering")
-                {
-                    NgWebElement openLeaderDOB1Cat = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    openLeaderDOB1Cat.Click();
-                }
-                else
-                {
-                    NgWebElement openLeaderDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    openLeaderDOB1.Click();
-                }
+                // select the date
+                SharedCalendarDate();
             }
 
             if (businessTypeShared == "society")
@@ -1133,16 +1093,8 @@ namespace bdd_tests
                 NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
                 openKeyPersonnelDOB.Click();
 
-                if (applicationTypeShared == "Catering")
-                {
-                    NgWebElement openKeyPersonnelDOB1Cat = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    openKeyPersonnelDOB1Cat.Click();
-                }
-                else
-                {
-                    NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    openKeyPersonnelDOB1.Click();
-                }
+                // select the date
+                SharedCalendarDate();
             }
 
             if (businessTypeShared == "public corporation")
@@ -1188,19 +1140,11 @@ namespace bdd_tests
                 openKeyPersonnelEmail.SendKeys(keyPersonnelEmail);
 
                 // select key person DOB
-                NgWebElement openPartnerDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
-                openPartnerDOB.Click();
+                NgWebElement openKeyPersonDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+                openKeyPersonDOB.Click();
 
-                if (applicationTypeShared == "Catering")
-                {
-                    NgWebElement openKeyPersonnelDOB1Cat = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    openKeyPersonnelDOB1Cat.Click();
-                }
-                else
-                {
-                    NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    openKeyPartnerDOB1.Click();
-                }
+                // select the date
+                SharedCalendarDate();
             }
 
             if (businessTypeShared == "partnership")
@@ -1245,16 +1189,8 @@ namespace bdd_tests
                 NgWebElement openPartnerDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
                 openPartnerDOB.Click();
 
-                if (applicationTypeShared == "Catering")
-                {
-                    NgWebElement openKeyPartnerDOB1Cat = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    openKeyPartnerDOB1Cat.Click();
-                }
-                else
-                {
-                    NgWebElement openKeyPartnerDOB1 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-2']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    openKeyPartnerDOB1.Click();
-                }
+                // select the date
+                SharedCalendarDate();
 
                 // open business partner row
                 NgWebElement openPartnerRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/section[1]/app-org-structure/div[3]/section[2]/app-associate-list/div/button"));
@@ -1320,16 +1256,8 @@ namespace bdd_tests
                 NgWebElement openPartner2DOB = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
                 openPartner2DOB.Click();
 
-                if (applicationTypeShared == "Catering")
-                {
-                    NgWebElement openKeyPartner2DOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    openKeyPartner2DOB1.Click();
-                }
-                else
-                {
-                    NgWebElement openKeyPartner2DOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-3']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-                    openKeyPartner2DOB1.Click();
-                }
+                // select the date
+                SharedCalendarDate();
             }
         }
 
@@ -1832,7 +1760,7 @@ namespace bdd_tests
             NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
             uiCalendar1.Click();
 
-            NgWebElement uiCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[5]/td[5]/div"));
+            NgWebElement uiCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
             uiCalendar2.Click();
 
             // enter the reason for the opening date
@@ -1990,14 +1918,14 @@ namespace bdd_tests
             NgWebElement uiVenueStartDate1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
             uiVenueStartDate1.Click();
 
-            NgWebElement uiVenueStartDate2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[5]/td[5]/div"));
+            NgWebElement uiVenueStartDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
             uiVenueStartDate2.Click();
 
             // select end date
             NgWebElement uiVenueEndDate1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
             uiVenueEndDate1.Click();
 
-            NgWebElement uiVenueEndDate2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[5]/td[5]/div"));
+            NgWebElement uiVenueEndDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
             uiVenueEndDate2.Click();
 
             // select event and liquor service times are different on specific dates checkbox
@@ -2573,6 +2501,16 @@ namespace bdd_tests
             // Suppress finalization.
             GC.SuppressFinalize(this);
         }
-        
+
+        public void SharedCalendarDate()
+        {
+            // click on the previous button
+            NgWebElement openCalendarPrevious = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-previous-button"));
+            openCalendarPrevious.Click();
+
+            // click on the first day
+            NgWebElement openCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
+            openCalendarYear.Click();
+        }
     }
 }
