@@ -185,7 +185,13 @@
 
 
                 <section style="text-align: center; color: lightblue">
-                    File Upload here
+                  <app-delayed-file-uploader documentType="Floorplan"
+                                     [enableFileDeletion]="true"
+                                     [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
+                                     entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+                                     (numberOfUploadedFiles)="uploadedFloorplanDocuments = $event" 
+                                     [uploadHeader]="'TO UPLOAD FLOOR PLAN, DRAG FILES HERE OR'">
+                  </app-delayed-file-uploader>
                 </section>
             </div>
 
@@ -220,7 +226,13 @@
                 </p>
 
                 <section style="text-align: center; color: lightblue">
-                    File Upload here
+                  <app-delayed-file-uploader documentType="LicenseeRepresentativeNotficationForm"
+                                             [enableFileDeletion]="true"
+                                             [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
+                                             entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+                                             (numberOfUploadedFiles)="uploadedLicenseeRepresentativeNotficationFormDocuments = $event" 
+                                             [uploadHeader]="'TO UPLOAD LICENSEE REPRESENTATIVE NOTIFICATION FORM, DRAG FILES HERE OR'">
+                  </app-delayed-file-uploader>
                 </section>
             </div>
 
