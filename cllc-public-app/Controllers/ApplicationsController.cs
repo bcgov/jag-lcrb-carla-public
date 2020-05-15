@@ -32,8 +32,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IWebHostEnvironment _env;
         private readonly FileManagerClient _fileManagerClient;
-        private readonly IWebHostEnvironment _env;
-
+     
         public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IWebHostEnvironment env)
         {
             _configuration = configuration;
