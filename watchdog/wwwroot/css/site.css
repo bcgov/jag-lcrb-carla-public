@@ -51,11 +51,23 @@ button.accept-policy {
   line-height: inherit;
 }
 
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
   position: relative;
   min-height: 100%;
+}
+
+td {
+
+}
+.different {
+    background-color: #ff0000;
+    color: white;
+}
+.same {
+
 }
 
 body {
