@@ -2,10 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
 import { filter } from 'rxjs/operators';
+import { ApplicationDataService } from '@services/application-data.service';
+import { MatSnackBar } from '@angular/material';
 import { DelayedFileUploaderComponent } from '@shared/components/delayed-file-uploader/delayed-file-uploader.component';
 
 const FormValidationErrorMap = {
-  licenceNumber: 'Licence Number',
+  description1: 'Licence Number',
   licenceType: 'Licence Type',
   nameOfApplicant: 'Licensee name',
   establishmentName: 'Establishment name',
@@ -14,12 +16,12 @@ const FormValidationErrorMap = {
   establishmentAddressPostalCode: 'Establishment Address city',
   businessTelephone: 'Business Telephone',
   businessEmail: 'Business Email',
-  contactFirstName: 'Contact First Name',
-  contactLastName: 'Contact Last Name',
-  contactRole: 'Contact Title/Position',
-  establishmentMailingAddressStreet: 'Mailing Address Street',
-  establishmentMailingAddressCity: 'Mailing Address City',
-  establishmentMailingAddressPostalCode: 'Mailing Address Postal Code',
+  contactPersonFirstName: 'Contact First Name',
+  contactPersonLastName: 'Contact Last Name',
+  contactPersonRole: 'Contact Title/Position',
+  addressStreet: 'Mailing Address Street',
+  addressCity: 'Mailing Address City',
+  addressPostalCode: 'Mailing Address Postal Code',
 
   receivedLGPermission: 'Local Government Permission Receipt checkbox',
   signatureAgreement: 'Declaration checkbox',
@@ -41,17 +43,20 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
   showValidationMessages: boolean;
   validationMessages: string[] = [];
 
+  
 
   @ViewChild('uploadedFloorplanDocuments', { static: false }) uploadedFloorplanDocuments: DelayedFileUploaderComponent;
   @ViewChild('uploadedLicenseeRepresentativeNotficationFormDocuments', { static: false }) uploadedLicenseeRepresentativeNotficationFormDocuments: DelayedFileUploaderComponent;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+        private applicationDataService: ApplicationDataService,
+        private snackBar: MatSnackBar) {
     super();
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      licenceNumber: ['', [Validators.required]],
+      description1: ['', [Validators.required, Validators.maxLength(7)]], //this holds the licenceNumber
       licenceType: ['', [Validators.required]],
       nameOfApplicant: ['', [Validators.required]],
       establishmentName: ['', [Validators.required]],
@@ -60,13 +65,13 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
       establishmentAddressPostalCode: ['', [Validators.required, this.customZipCodeValidator('addressCountry')]],
       businessTelephone: ['', [Validators.required]],
       businessEmail: ['', [Validators.required, Validators.email]],
-      contactFirstName: ['', [Validators.required]],
-      contactLastName: ['', [Validators.required]],
-      contactRole: ['', [Validators.required]],
+      contactPersonFirstName: ['', [Validators.required]],
+      contactPersonLastName: ['', [Validators.required]],
+      contactPersonRole: ['', [Validators.required]],
       sameAddresses: [''],
-      establishmentMailingAddressStreet: ['', [Validators.required]],
-      establishmentMailingAddressCity: ['', [Validators.required]],
-      establishmentMailingAddressPostalCode: ['', [Validators.required, this.customZipCodeValidator('addressCountry')]],
+      addressStreet: ['', [Validators.required]],
+      addressCity: ['', [Validators.required]],
+      addressPostalCode: ['', [Validators.required, this.customZipCodeValidator('addressCountry')]],
       addressCountry: ['Canada'], // only used client side for validation
 
       receivedLGPermission: ['', [this.customRequiredCheckboxValidator()]],
@@ -82,9 +87,9 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
       .pipe(filter(value => !!value)) // only when the box is checked
       .subscribe(() => {
         // copy the address values over
-        this.form.get('establishmentMailingAddressStreet').setValue(this.form.get('establishmentAddressStreet').value);
-        this.form.get('establishmentMailingAddressCity').setValue(this.form.get('establishmentAddressCity').value);
-        this.form.get('establishmentMailingAddressPostalCode').setValue(this.form.get('establishmentAddressPostalCode').value);
+        this.form.get('addressStreet').setValue(this.form.get('establishmentAddressStreet').value);
+        this.form.get('addressCity').setValue(this.form.get('establishmentAddressCity').value);
+        this.form.get('addressPostalCode').setValue(this.form.get('establishmentAddressPostalCode').value);
       });
 
   }
@@ -97,7 +102,14 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
     }
     else {
       this.validationMessages = [];
-      alert('Save to be called');
+      this.busy = this.applicationDataService.createCovidApplication(this.form.value)
+        .subscribe(res => {
+          this.snackBar.open('Application Submitted', 'Success',
+            { duration: 2500, panelClass: ['green-snackbar'] });
+        },
+        err => {
+          this.snackBar.open('Failed to submit application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        });
     }
   }
 
