@@ -35,7 +35,7 @@ namespace bdd_tests
             // navigate to the feature flags page
             driver.Navigate().GoToUrl($"{baseUri}api/features");
 
-            // confirm that the COVID Temporary Extenstion feature flag is enabled during this test - TODO
+            // confirm that the COVID Temporary Extension feature flag is enabled during this test - TODO
             //Assert.True(driver.FindElement(By.XPath("//body[contains(.,'FEATURE_COVID_APPLICATION')]")).Displayed);
         }
 
@@ -52,13 +52,14 @@ namespace bdd_tests
         }
 
         [And(@"I complete the temporary extension application")]
-        public void start_application()
+        public void complete_application()
         {
             /* 
             Page Title: Covid Temporary Extension Application
             */
 
             // create test data
+
             string licencenumber = "1234";
             string licencetype = "Cannabis Retail Store";
             string licencename = "Point Ellis Operations";
@@ -74,6 +75,8 @@ namespace bdd_tests
             string mailingstreet = "MailingStreet";
             string mailingcity = "MailingCity";
             string mailingpostal = "V8V4Y3";
+
+            // complete text inputs
 
             NgWebElement uiLicenceNumber = ngDriver.FindElement(By.XPath("//input[@type='text']"));
             uiLicenceNumber.SendKeys(licencenumber);
