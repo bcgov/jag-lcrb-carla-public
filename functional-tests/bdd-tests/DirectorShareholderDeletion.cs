@@ -27,7 +27,8 @@ Scenario: Delete an individual who is both a director and shareholder
     And I review the organization structure
     And I delete only the director record
     And I review the organization structure
-    Then the director and shareholder are not displayed
+    And only the shareholder record is displayed
+    Then the account is deleted
 */
 
 namespace bdd_tests
@@ -216,7 +217,7 @@ namespace bdd_tests
             orgInfoButton.Click();
         }
 
-        [Then(@"only the shareholder record is displayed")]
+        [And(@"only the shareholder record is displayed")]
         public void director_name_updated()
         {
             // check that the director email is not displayed to confirm deletion
@@ -225,6 +226,12 @@ namespace bdd_tests
             // check that the shareholder email is displayed to confirm remains
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'same@individual2.com')]")).Displayed);
 
+        }
+
+        [Then(@"the account is deleted")]
+        public void Delete_my_account2()
+        {
+            this.CarlaDeleteCurrentAccount();
         }
     }
 }
