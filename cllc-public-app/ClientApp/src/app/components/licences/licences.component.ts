@@ -59,8 +59,7 @@ export class LicencesComponent extends FormBase implements OnInit {
   supportedLicenceTypes = [
     "Catering", "Wine Store", "Cannabis Retail Store", "Marketing",
     "Operated - Wine Store", "Operated - Catering",
-    "Transfer in Progress - Wine Store", "Transfer in Progress - Catering",
-    "Deemed - Wine Store", "Deemed - Catering"
+    "Transfer in Progress - Wine Store", "Transfer in Progress - Catering"
   ];
 
   constructor(
@@ -117,7 +116,6 @@ export class LicencesComponent extends FormBase implements OnInit {
           });
           proposedLicences.forEach(licence => {
             licence.isDeemed = true;
-            licence.licenceTypeName = 'Deemed - ' + licence.licenceTypeName;
           })
           let combinedLicences = [...licenses, ...operatedLicences, ...proposedLicences];
           combinedLicences.forEach((licence: ApplicationLicenseSummary) => {

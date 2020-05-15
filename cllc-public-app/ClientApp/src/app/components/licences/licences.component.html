@@ -35,6 +35,9 @@
 
               <td style="padding: 10px;">
                 <div>
+                  <div *ngIf="item?.isDeemed">
+                    <strong>DEEMED</strong>
+                  </div>
                   <strong *ngIf="item?.licenceTypeName !== 'Marketing'" style="color: #1a5a96;">
                     {{item.establishmentName}}</strong>
                   <div *ngIf="item?.licenceTypeName.includes('Wine Store')">
@@ -112,7 +115,7 @@
                   </a>
                 </div>
                 <div
-                  *ngIf="(item?.licenceTypeName === ApplicationTypeNames.Catering || item?.licenceTypeName === 'Deemed - Catering') && item?.status !== PAYMENT_REQUIRED">
+                  *ngIf="item?.licenceTypeName === ApplicationTypeNames.Catering && item?.status !== PAYMENT_REQUIRED">
                   <a [routerLink]="[ '/licence/' + item.licenseId + '/event']">
                     <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Event Authorization
                   </a>
