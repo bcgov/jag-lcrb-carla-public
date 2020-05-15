@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             CovidApplication viewmodel_application = new CovidApplication()
             {
-                LicenseType = "Cannabis Retail Store" //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
+                LicenceType = "Cannabis Retail Store" //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
                 ,
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
                 ,
