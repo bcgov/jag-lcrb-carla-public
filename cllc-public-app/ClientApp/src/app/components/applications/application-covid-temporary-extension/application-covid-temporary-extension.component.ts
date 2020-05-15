@@ -75,12 +75,7 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
       addressCountry: ['Canada'], // only used client side for validation
 
       receivedLGPermission: ['', [this.customRequiredCheckboxValidator()]],
-      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
-
-      currentTotalCapicityIncluded: ['', [this.customRequiredCheckboxValidator()]],
-      areasToBeExtendedIncluded: ['', [this.customRequiredCheckboxValidator()]],
-      floorPlanIncluded: ['', [this.customRequiredCheckboxValidator()]],
-      writtenApprovalIncluded: ['', [this.customRequiredCheckboxValidator()]],
+      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
     });
 
     this.form.get('sameAddresses').valueChanges
