@@ -473,7 +473,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             var adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
-            adoxioApplication.CopyValues(item);
+            adoxioApplication.CopyValuesForCovidApplication(item);
 
             try
             {
@@ -498,7 +498,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             }
 
-            return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient, _logger));
+            return new JsonResult(await adoxioApplication.ToCovidViewModel(_dynamicsClient, _logger));
         }
         private async Task initializeSharepoint(MicrosoftDynamicsCRMadoxioApplication adoxioApplication)
         {
