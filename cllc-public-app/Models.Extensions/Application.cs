@@ -191,6 +191,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             // catering fields
             to.AdoxioIsapplicationcomplete = (int?)from.IsApplicationComplete;
 
+
         }
 
         public static void CopyValuesForCovidApplication(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.CovidApplication from)
