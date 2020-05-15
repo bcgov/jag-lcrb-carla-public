@@ -13,10 +13,11 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: MultiLevelCRSApplicationPrivateCorp
+Feature: Create_MultiLevel_CRSApplication_PrivateCorp
     As a logged in business user
     I want to submit a CRS Application for a private corporation
     With multiple nested business shareholders
+    To be used as test data
 
 Scenario: Start Application
     Given I am logged in to the dashboard as a private corporation
@@ -29,18 +30,15 @@ Scenario: Start Application
     And I add in multiple nested business shareholders
     And I submit the organization structure
     And I complete the Cannabis Retail Store application
-    And I review the security screening requirements
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
-    And the account is deleted
-    Then I see the login page
+    Then I return to the dashboard
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./MultiLevelCRSApplicationPrivateCorp.feature")]
-    public sealed class MultiLevelCRSApplicationPrivateCorp : TestBase
+    [FeatureFile("./Create_MultiLevel_CRSApplication_PrivateCorp.feature")]
+    public sealed class CreateMultiLevelCRSApplicationPrivateCorp : TestBase
     {
         public void CheckFeatureFlagsCannabis()
         {
@@ -117,26 +115,6 @@ namespace bdd_tests
             CRSApplication();    
         }
 
-        [And(@"I review the security screening requirements")]
-        public void review_security_screening_reqs()
-        {
-            /* 
-            Page Title: Security Screening Requirements
-            */
-
-            ReviewSecurityScreening();
-
-            /*// check for nested personnel - pending LCSD-3126
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz2First KeyPersonnelBiz2Last')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz2First IndividualShareholderBiz2Last')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz3First KeyPersonnelBiz3Last')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz3First IndividualShareholderBiz3Last')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz4First KeyPersonnelBiz4Last')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz4First IndividualShareholderBiz4Last')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz5First KeyPersonnelBiz5Last')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz5First IndividualShareholderBiz5Last')]")).Displayed);*/
-        }
-
         [And(@"I click on the Pay for Application button")]
         public void click_on_pay()
         {
@@ -150,7 +128,7 @@ namespace bdd_tests
             MakePayment();
         }
 
-        [And(@"I return to the dashboard")]
+        [Then(@"I return to the dashboard")]
         public void return_to_dashboard()
         {
             /* 
@@ -164,16 +142,6 @@ namespace bdd_tests
         public void Delete_my_account()
         {
             this.CarlaDeleteCurrentAccount();
-        }
-
-        [Then(@"I see the login page")]
-        public void I_see_login()
-        {
-            /* 
-            Page Title: Apply for a cannabis licence
-            */
-
-            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
 
         public void business_shareholder_2()
