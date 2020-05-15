@@ -472,8 +472,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
 
+
+
             var adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
             adoxioApplication.CopyValuesForCovidApplication(item);
+
+            adoxioApplication.AdoxioApplicanttype = (int?)845280000;  // private corp - change to public user.
+
+            // set license type relationship 
+            if (!string.IsNullOrEmpty(item.LicenceType))
+            {
+                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.LicenceType);
+                adoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
+            }
+
+            // set application type relationship 
+            var applicationType = _dynamicsClient.GetApplicationTypeByName("Temporary Extension of Licensed Area");
+            adoxioApplication.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
 
             try
             {

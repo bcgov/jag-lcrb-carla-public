@@ -32,11 +32,10 @@
                 <app-field label="Type" [valid]="isValidOrNotTouched('licenceType')" [showChevrons]="false"
                     errorMessage="Licence Type is a required field" [isFullWidth]="true">
                     <mat-radio-group formControlName="licenceType">
-                        <mat-radio-button class="mr-5" value="FoodPrimary">Food Primary</mat-radio-button>
-                        <mat-radio-button class="mr-5" value="LiquorPrimary">Liquor Primary</mat-radio-button>
-                        <mat-radio-button class="mr-5" value="LiquorPrimaryClub">Liquor Primary Club</mat-radio-button>
-                        <mat-radio-button class="mr-5" value="Female">Female</mat-radio-button>
-                        <mat-radio-button value="Winery">Winery </mat-radio-button>
+                        <mat-radio-button class="mr-5" value="Food Primary">Food Primary</mat-radio-button>
+                        <mat-radio-button class="mr-5" value="Liquor Primary">Liquor Primary</mat-radio-button>
+                        <mat-radio-button class="mr-5" value="Liquor Primary Club">Liquor Primary Club</mat-radio-button>
+                        <mat-radio-button value="Winery">Winery</mat-radio-button>
                     </mat-radio-group>
                 </app-field>
 
@@ -93,14 +92,14 @@
                     <input class="form-control" style="width: 500px;" type="text" formControlName="contactPersonRole">
                 </app-field>
 
-                <app-field label="Business Tel" [valid]="isValidOrNotTouched('businessTelephone')"
+                <app-field label="Business Tel" [valid]="isValidOrNotTouched('contactPersonPhone')"
                     errorMessage="Business Tel is a required field">
-                    <input class="form-control" style="width: 500px;" type="text" formControlName="businessTelephone">
+                    <input class="form-control" style="width: 500px;" type="text" formControlName="contactPersonPhone">
                 </app-field>
 
-                <app-field label="Business Email" [valid]="isValidOrNotTouched('businessEmail')"
+                <app-field label="Business Email" [valid]="isValidOrNotTouched('contactPersonEmail')"
                     errorMessage="Business Email is a required field">
-                    <input class="form-control" style="width: 500px;" type="text" formControlName="businessEmail">
+                    <input class="form-control" style="width: 500px;" type="text" formControlName="contactPersonEmail">
                 </app-field>
 
                 <app-field [valid]="true">
@@ -141,59 +140,43 @@
                     Please provide the following information and documents:
                 </p>
 
-                <app-field [valid]="!showValidationMessages || form.get('currentTotalCapicityIncluded').valid"
-                    errorMessage="This check is required" [showChevrons]="false">
-                    <section style="display: flex">
-                        <input type="checkbox" formControlName="currentTotalCapicityIncluded">
-                        <div style="padding-left: 10px;">
-                            Current total capacity, including patios (as shown on licence);
-                        </div>
-                    </section>
-                </app-field>
+                
 
-                <app-field [valid]="!showValidationMessages || form.get('areasToBeExtendedIncluded').valid"
-                    errorMessage="This check is required" [showChevrons]="false">
-                    <section style="display: flex">
-                        <input type="checkbox" formControlName="areasToBeExtendedIncluded">
-                        <div style="padding-left: 10px;">
-                            Identify the area(s) to be extended;
-                        </div>
-                    </section>
-                </app-field>
+                <ul>
+                  <li>Current total capacity, including patios (as shown on licence);</li>
+                  <li>Identify the area(s) to be extended;</li>
+                  <li>
+                    Floor plan of the extended area(s) showing how perimeter is defined, dimensions and its
+                    physical relationship to existing licensed areas:
+                  </li>
+                  <li>
+                    <ul>
+                      <li>
+                        Floor plan must have occupant load of the extended area marked/stamped on the plans
+                        by provincial fire or building authority (or designate)
+                        where the extension is indoors or within a permanent structure.
+                      </li>
+                      <li>
+                        Provide proposed person capacity of extended area(s) if extension is outside; and
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    Where the proposed area is not on property owned or controlled by the licensee, provide
+                    written approval for such use from the property owner.
+                  </li>
 
-                <app-field [valid]="!showValidationMessages || form.get('floorPlanIncluded').valid"
-                    errorMessage="This check is required" [showChevrons]="false">
-                    <section style="display: flex">
-                        <input type="checkbox" formControlName="floorPlanIncluded">
-                        <div style="padding-left: 10px;">
-                            <div>Floor plan of the extended area(s) showing how perimeter is defined, dimensions and its
-                                physical relationship to existing licensed areas:</div>
-
-                            <ul>
-                                <li>Floor plan must have occupant load of the extended area marked/stamped on the plans
-                                    by provincial fire or building authority (or designate)
-                                    where the extension is indoors or within a permanent structure.</li>
-                                <li>Provide proposed person capacity of extended area(s) if extension is outside; and
-                                </li>
-                            </ul>
-                        </div>
-                    </section>
-                </app-field>
-
-                <app-field [valid]="!showValidationMessages || form.get('writtenApprovalIncluded').valid"
-                    errorMessage="This check is required" [showChevrons]="false">
-                    <section style="display: flex">
-                        <input type="checkbox" formControlName="writtenApprovalIncluded">
-                        <div style="padding-left: 10px;">
-                            Where the proposed area is not on property owned or controlled by the licensee, provide
-                            written approval for such use from the property owner.
-                        </div>
-                    </section>
-                </app-field>
+                </ul>               
 
 
                 <section style="text-align: center; color: lightblue">
-                    File Upload here
+                  <app-delayed-file-uploader documentType="Floorplan"
+                                     [enableFileDeletion]="true"
+                                     [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
+                                     entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+                                     (numberOfUploadedFiles)="uploadedFloorplanDocuments = $event" 
+                                     [uploadHeader]="'TO UPLOAD FLOOR PLAN, DRAG FILES HERE OR'">
+                  </app-delayed-file-uploader>
                 </section>
             </div>
 
@@ -228,7 +211,13 @@
                 </p>
 
                 <section style="text-align: center; color: lightblue">
-                    File Upload here
+                  <app-delayed-file-uploader documentType="LicenseeRepresentativeNotficationForm"
+                                             [enableFileDeletion]="true"
+                                             [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
+                                             entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+                                             (numberOfUploadedFiles)="uploadedLicenseeRepresentativeNotficationFormDocuments = $event" 
+                                             [uploadHeader]="'TO UPLOAD LICENSEE REPRESENTATIVE NOTIFICATION FORM, DRAG FILES HERE OR'">
+                  </app-delayed-file-uploader>
                 </section>
             </div>
 
