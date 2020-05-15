@@ -92,14 +92,14 @@
                     <input class="form-control" style="width: 500px;" type="text" formControlName="contactPersonRole">
                 </app-field>
 
-                <app-field label="Business Tel" [valid]="isValidOrNotTouched('businessTelephone')"
+                <app-field label="Business Tel" [valid]="isValidOrNotTouched('contactPersonPhone')"
                     errorMessage="Business Tel is a required field">
-                    <input class="form-control" style="width: 500px;" type="text" formControlName="businessTelephone">
+                    <input class="form-control" style="width: 500px;" type="text" formControlName="contactPersonPhone">
                 </app-field>
 
-                <app-field label="Business Email" [valid]="isValidOrNotTouched('businessEmail')"
+                <app-field label="Business Email" [valid]="isValidOrNotTouched('contactPersonEmail')"
                     errorMessage="Business Email is a required field">
-                    <input class="form-control" style="width: 500px;" type="text" formControlName="businessEmail">
+                    <input class="form-control" style="width: 500px;" type="text" formControlName="contactPersonEmail">
                 </app-field>
 
                 <app-field [valid]="true">
