@@ -30,11 +30,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
+        private readonly IWebHostEnvironment _env;
         private readonly FileManagerClient _fileManagerClient;
         private readonly IWebHostEnvironment _env;
 
         public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IWebHostEnvironment env)
-        {         
+        {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _dynamicsClient = dynamicsClient;
@@ -406,7 +407,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // set account relationship
                 adoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
 
-                // set applicaiton type relationship 
+                // set application type relationship 
                 var applicationType = _dynamicsClient.GetApplicationTypeByName(item.ApplicationType.Name);
                 adoxioApplication.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
 
@@ -461,6 +462,45 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         }
 
+        
+        [HttpPost("covid")]
+        [AllowAnonymous]
+        public async Task<IActionResult> CreateCovidApplication ([FromBody] ViewModels.CovidApplication item)
+        {
+            // check to see if the feature is on.
+            if (string.IsNullOrEmpty(_configuration["FEATURE_COVID_APPLICATION"]))
+            {
+                return BadRequest();
+            }
+
+            var adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
+            adoxioApplication.CopyValues(item);
+
+            try
+            {
+                // create application
+                adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
+                _logger.LogInformation($"CREATED COVID APPLICATION {adoxioApplication.AdoxioApplicationid}");
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                string applicationId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
+                if (!string.IsNullOrEmpty(applicationId) && Guid.TryParse(applicationId, out Guid applicationGuid))
+                {
+                    adoxioApplication = await _dynamicsClient.GetApplicationById(applicationGuid);
+                }
+                else
+                {
+
+                    _logger.LogError(httpOperationException, "Error creating COVID application");
+                    // fail if we can't create.
+                    throw (httpOperationException);
+                }
+
+            }
+
+            return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient, _logger));
+        }
         private async Task initializeSharepoint(MicrosoftDynamicsCRMadoxioApplication adoxioApplication)
         {
             // create a SharePointDocumentLocation link
@@ -697,6 +737,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue))
+            {
+                return new NotFoundResult();
+            }
+
+
+            await _dynamicsClient.Applications.DeleteAsync(adoxio_applicationid.ToString());
+
+            return NoContent(); // 204
+        }
+
+        [HttpPost("{id}/covidDelete")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DeleteCovidApplication(string id)
+        {
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
+
+            // get the application.
+            Guid adoxio_applicationid = new Guid(id);
+
+            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationid);
+            if (adoxioApplication == null)
             {
                 return new NotFoundResult();
             }
