@@ -86,6 +86,8 @@ import { NewsletterDataService } from '@services/newsletter-data.service';
 import { UserDataService } from '@services/user-data.service';
 import { NotFoundComponent } from '@components/not-found/not-found.component';
 import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
+import { DelayedFileUploaderComponent } from '@shared/components/delayed-file-uploader/delayed-file-uploader.component';
+
 import { CorporateDetailsComponent } from '@components/account-profile/tabs/corporate-details/corporate-details.component';
 import {
   DirectorsAndOfficersComponent,
@@ -214,6 +216,7 @@ import { ApplicationCovidTemporaryExtensionComponent } from './components/applic
     ConnectionToProducersComponent,
     CorporateDetailsComponent,
     DashboardComponent,
+    DelayedFileUploaderComponent,
     DirectorAndOfficerPersonDialogComponent,
     DirectorsAndOfficersComponent,
     DynamicsFormComponent,
