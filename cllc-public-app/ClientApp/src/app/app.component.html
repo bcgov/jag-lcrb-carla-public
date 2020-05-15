@@ -94,6 +94,10 @@
                     <a (click)="toggleButton.click()" tabindex="2" routerLink="/map">Map of Cannabis Stores
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a (click)="toggleButton.click()" tabindex="2" routerLink="/covid-temporary-extension">Covid Temporary Extension
+                    </a>
+                  </li>
                 </ul>
               </div>
             </nav>
@@ -124,6 +128,9 @@
                       Screening</a>
                     <a *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()"
                       class="nav-link" routerLink="/worker-qualification/dashboard">Dashboard</a>
+                    <a (click)="toggleButtonLoggedIn.click()"
+                      class="nav-link" routerLink="/covid-temporary-extension">Covid Temporary Extension</a>
+                      
                   </li>
                 </ul>
               </div>

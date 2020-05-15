@@ -18,7 +18,8 @@
               Please Review Your Account Profile
             </h1>
             <p>
-              Please review the account profile below. If any information has changed, you can update it before starting the application. 
+              Please review the account profile below. If any information has changed, you can update it before starting
+              the application.
             </p>
           </section>
 
@@ -67,7 +68,8 @@
               </select>
             </app-field>
 
-            <section *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1 && getBusinessTypeName() !== 'Indigenous Nation'">
+            <section
+              *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1 && getBusinessTypeName() !== 'Indigenous Nation'">
               <div [ngClass]="{'has-error': false}">
                 <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" for="">Incorporation
                   Number</label>
@@ -76,16 +78,19 @@
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" id="bcIncorporationNumber"
                   formControlName="bcIncorporationNumber">
-                <div *ngIf="!form.get('businessProfile.bcIncorporationNumber').valid && form.get('businessProfile.bcIncorporationNumber').touched" class="alert alert-danger" style="width: 250px;">
-                    <span *ngIf="account?.isPrivateCorporation()">Please use this format: 'BC1234567'</span>
-                    <span *ngIf="account?.businessType === 'Society'">Please use this format: 'S1234567'</span>
+                <div
+                  *ngIf="!form.get('businessProfile.bcIncorporationNumber').valid && form.get('businessProfile.bcIncorporationNumber').touched"
+                  class="alert alert-danger" style="width: 250px;">
+                  <span *ngIf="account?.isPrivateCorporation()">Please use this format: 'BC1234567'</span>
+                  <span *ngIf="account?.businessType === 'Society'">Please use this format: 'S1234567'</span>
                 </div>
               </div>
             </section>
 
             <p></p>
 
-            <section *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1 && getBusinessTypeName() !== 'Indigenous Nation'">
+            <section
+              *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1 && getBusinessTypeName() !== 'Indigenous Nation'">
               <div [ngClass]="{'has-error': false}">
                 <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1">Date
                   of Incorporation in B.C.</label>
@@ -93,8 +98,8 @@
                   B.C.</label>
                 <br>
                 <input type="text" formControlName='dateOfIncorporationInBC'
-                style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" class="form-control"
-                [max]="maxDate" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
+                  style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" class="form-control"
+                  [max]="maxDate" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
                 <mat-datepicker #picker></mat-datepicker>
                 <!-- <div *ngIf="this.isFieldError('businessProfile.dateOfIncorporationInBC')" class="alert alert-danger" style="width: 250px;">
                   <div *ngIf="form.controls['businessProfile.dateOfIncorporationInBC'].hasError('required') ">
@@ -107,7 +112,8 @@
 
 
 
-          <h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">{{getBusinessTypeName().toLocaleUpperCase()}} ADDRESSES</h3>
+          <h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">
+            {{getBusinessTypeName().toLocaleUpperCase()}} ADDRESSES</h3>
           <h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation'">CONTACT ADDRESSES</h3>
           <div formGroupName="businessProfile" class="padded-section content-bottom">
             <p></p>
@@ -135,7 +141,8 @@
                 <app-field label="Postal Code" [required]="true"
                   (blur)="trimValue(form.get('businessProfile.physicalAddressPostalCode'))"
                   [valid]="form.get('businessProfile.physicalAddressPostalCode').valid || !form.get('businessProfile.physicalAddressPostalCode').touched"
-                  errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)" [isFullWidth]="true">
+                  errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)"
+                  [isFullWidth]="true">
                   <input class="form-control" type="text" formControlName="physicalAddressPostalCode">
                 </app-field>
               </section>
@@ -176,8 +183,7 @@
                 </section>
                 <section class="col-md-3 col-xs-12">
                   <app-field label="Postal /Zip Code" errorMessage="This is required. The postal / zip code should be in one of the following formats: X1X1X1,
-                    12345, 12345-1234"
-                    (blur)="trimValue(form.get('businessProfile.mailingAddressPostalCode'))"
+                    12345, 12345-1234" (blur)="trimValue(form.get('businessProfile.mailingAddressPostalCode'))"
                     [valid]="form.get('businessProfile.mailingAddressPostalCode').valid || !form.get('businessProfile.mailingAddressPostalCode').touched"
                     [required]="true" [isFullWidth]="true">
                     <input type="text" formControlName="mailingAddressPostalCode" class="form-control">
@@ -208,7 +214,8 @@
             </app-field>
           </div>
 
-          <h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">{{getBusinessTypeName().toLocaleUpperCase()}} CONTACT</h3>
+          <h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">
+            {{getBusinessTypeName().toLocaleUpperCase()}} CONTACT</h3>
           <h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation'">AUTHORIZED PERSON</h3>
           <div formGroupName="primarycontact" class="padded-section content-bottom">
             <i>The name and contact information of the person LCRB should contact for ongoing communication. The contact
@@ -264,9 +271,15 @@
           </div> -->
 
 
-          <div *ngIf="!form.valid && form.touched" class="error-summary">
-            <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
-            <span>Some required fields have not been completed</span>
+          <div *ngIf="!form.valid && form.touched" class="error-summary mt-3">
+            <div *ngIf="!validationMessages?.length">
+              <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
+              <span>Some required fields have not been completed</span>
+            </div>
+            <div *ngFor="let message of validationMessages">
+              <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
+              <span>{{message}}</span>
+            </div>
           </div>
           <br><br>
           <section style="position: relative;">
@@ -274,7 +287,8 @@
             <a routerLink="/dashboard">
               <i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Cancel & Close</a>
             <span style="float: right;">
-              <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary save-cont" id="continueToApp">
+              <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary save-cont"
+                id="continueToApp">
                 <span *ngIf="!applicationId && !useInStepperMode">SAVE & CONTINUE</span>
                 <span *ngIf="applicationId && !useInStepperMode">CONTINUE TO APPLICATION</span>
                 <span *ngIf="useInStepperMode">CONTINUE TO ORGANIZATION REVIEW</span>&nbsp;
