@@ -362,6 +362,14 @@ export class FederalReportingComponent implements OnInit {
   }
 
   createProductForm(report) {
+    const closingWeightValidators = [Validators.min(0), Validators.max(1000), Validators.pattern('^[0-9]+(\.[0-9]{1,3})?$')];
+    if (report.product !== 'Seeds') {
+      closingWeightValidators.push(Validators.required);
+    }
+    const totalSeedsValidators = [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')];
+    if (report.product === 'Seeds') {
+      totalSeedsValidators.push(Validators.required);
+    }
     return this.fb.group({
       inventoryReportId: [report.inventoryReportId, []],
       product: [report.product, []],
@@ -377,8 +385,8 @@ export class FederalReportingComponent implements OnInit {
       otherReductions: [report.otherReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
       closingNumber: [report.closingNumber, [Validators.required, Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
       closingValue: [report.closingValue, [Validators.required, Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
-      closingWeight: [report.closingWeight, [Validators.required, Validators.min(0), Validators.max(1000), Validators.pattern('^[0-9]+(\.[0-9]{1,3})?$')]],
-      totalSeeds: [report.totalSeeds, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      closingWeight: [report.closingWeight, closingWeightValidators],
+      totalSeeds: [report.totalSeeds, totalSeedsValidators],
       totalSalesToConsumerQty: [report.totalSalesToConsumerQty, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
       totalSalesToConsumerValue: [report.totalSalesToConsumerValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
       otherDescription: ['Extracts - Other', 'Other'].indexOf(report.product) >= 0 ? [report.otherDescription, [Validators.required]] : null
