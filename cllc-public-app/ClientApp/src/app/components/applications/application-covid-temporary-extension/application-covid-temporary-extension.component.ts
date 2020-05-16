@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
 import { filter } from 'rxjs/operators';
 import { ApplicationDataService } from '@services/application-data.service';
 import { MatSnackBar } from '@angular/material';
+import { DelayedFileUploaderComponent } from '@shared/components/delayed-file-uploader/delayed-file-uploader.component';
 
 const FormValidationErrorMap = {
   description1: 'Licence Number',
@@ -13,8 +14,8 @@ const FormValidationErrorMap = {
   establishmentAddressStreet: 'Establishmen Address Street',
   establishmentAddressCity: 'Establishment Address City',
   establishmentAddressPostalCode: 'Establishment Address city',
-  businessTelephone: 'Business Telephone',
-  businessEmail: 'Business Email',
+  contactPersonPhone: 'Business Telephone',
+  contactPersonEmail: 'Business Email',
   contactPersonFirstName: 'Contact First Name',
   contactPersonLastName: 'Contact Last Name',
   contactPersonRole: 'Contact Title/Position',
@@ -42,9 +43,14 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
   showValidationMessages: boolean;
   validationMessages: string[] = [];
 
+  
+
+  @ViewChild('uploadedFloorplanDocuments', { static: false }) uploadedFloorplanDocuments: DelayedFileUploaderComponent;
+  @ViewChild('uploadedLicenseeRepresentativeNotficationFormDocuments', { static: false }) uploadedLicenseeRepresentativeNotficationFormDocuments: DelayedFileUploaderComponent;
+
   constructor(private fb: FormBuilder,
-    private applicationDataService: ApplicationDataService,
-    private snackBar: MatSnackBar) {
+        private applicationDataService: ApplicationDataService,
+        private snackBar: MatSnackBar) {
     super();
   }
 
@@ -57,8 +63,8 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
       establishmentAddressStreet: ['', [Validators.required]],
       establishmentAddressCity: ['', [Validators.required]],
       establishmentAddressPostalCode: ['', [Validators.required, this.customZipCodeValidator('addressCountry')]],
-      businessTelephone: ['', [Validators.required]],
-      businessEmail: ['', [Validators.required, Validators.email]],
+      contactPersonPhone: ['', [Validators.required]],
+      contactPersonEmail: ['', [Validators.required, Validators.email]],
       contactPersonFirstName: ['', [Validators.required]],
       contactPersonLastName: ['', [Validators.required]],
       contactPersonRole: ['', [Validators.required]],
@@ -69,12 +75,7 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
       addressCountry: ['Canada'], // only used client side for validation
 
       receivedLGPermission: ['', [this.customRequiredCheckboxValidator()]],
-      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
-
-      currentTotalCapicityIncluded: ['', [this.customRequiredCheckboxValidator()]],
-      areasToBeExtendedIncluded: ['', [this.customRequiredCheckboxValidator()]],
-      floorPlanIncluded: ['', [this.customRequiredCheckboxValidator()]],
-      writtenApprovalIncluded: ['', [this.customRequiredCheckboxValidator()]],
+      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
     });
 
     this.form.get('sameAddresses').valueChanges
