@@ -9,14 +9,37 @@
 
         <div [formGroup]="form">
             <!-- Preamble -->
+            <section class="d-flex">
+            <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+            <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px; font-size:larger;">
             <section class="ngtest-preamble-content">
-                <p>
-                    Licensees may apply for a temporary extension of their licensed areas for a limited period, subject
-                    to any restrictions within the Liquor Control and Licensing Act, Regulations, branch policies and
-                    /or original terms and conditions of licensing. Approval of this temporary change request permits
-                    the licensee to operate at the capacity on the face of their current licence plus the capacity of
-                    the extension area. If in doubt, consult with licensing staff at LCRB
-                </p>
+                <p>To support B.C.’s licensed establishments in safely reopening for business while respecting the physical distancing 
+                    guidelines outlined by the Provincial Health Officer (PHO) orders, this new authorization permits food primary, 
+                    liquor primary and manufacturer licensees (i.e., wineries, breweries, distilleries) to temporarily expand their 
+                    service areas until <strong>October 31, 2020</strong>.</p>
+ 
+                <p>This authorization is subject to any restrictions within the Liquor Control and Licensing Act, Regulations, branch 
+                    policies and/or original terms and conditions of licensing. It is important to note that this authorization will 
+                    permit expanded service areas only and will not expand overall occupancy.</p>
+ 
+                <p>To prevent further financial strain for those licensees most impacted by the pandemic, there will be no fees associated 
+                    with the temporary extension application.</p>
+ 
+                <p>Local governments will have two options for approval of temporary expansion authorizations for liquor primary and 
+                    manufacturer licences:</p>
+                    <ul>
+                        <li>pre-approval to cover all establishments within their jurisdiction who may apply for an expanded liquor service area; or</li>
+                        <li>review of all individual requests prior to licensees submitting their applications to LCRB.</li>
+                    </ul>
+
+                <p>If a local government chooses to review all individual requests, the LCRB will require liquor primary and manufacturer licensees to provide written approval from their local government with their application.</p>
+ 
+                <p>Please get in touch with your local government to determine their approach prior to submitting your application.</p>
+ 
+                <p>To submit an application, please fill out the information in the form below.</p>
+                
+            </section>
+            </div>
             </section>
 
 
@@ -25,11 +48,11 @@
 
                 <app-field label="Licence Number" [valid]="isValidOrNotTouched('description1')"
                     errorMessage="Licence Number is a required field">
-                    <input class="form-control" style="width: 500px;" type="text" maxlength="7"
-                        formControlName="description1">
+                    <input class="form-control" type="text" maxlength="7"
+                        formControlName="description1" mask="000000">
                 </app-field>
 
-                <app-field label="Type" [valid]="isValidOrNotTouched('licenceType')" [showChevrons]="false"
+                <app-field label="Licence Type" [valid]="isValidOrNotTouched('licenceType')" [showChevrons]="false"
                     errorMessage="Licence Type is a required field" [isFullWidth]="true">
                     <mat-radio-group formControlName="licenceType">
                         <mat-radio-button class="mr-5" value="Food Primary">Food Primary</mat-radio-button>
@@ -38,11 +61,7 @@
                         <mat-radio-button value="Winery">Winery</mat-radio-button>
                     </mat-radio-group>
                 </app-field>
-
-                <app-field label="Licensee Name (as shown on licence)" [valid]="isValidOrNotTouched('nameOfApplicant')"
-                    errorMessage="Licensee Name is a required field">
-                    <input class="form-control" style="width: 500px;" type="text" formControlName="nameOfApplicant">
-                </app-field>
+                <hr>
 
                 <app-field label="Establishment Name (as shown on licence)"
                     [valid]="isValidOrNotTouched('establishmentName')"
@@ -69,10 +88,17 @@
 
                         <app-field class="col-md-4" [valid]="isValidOrNotTouched('establishmentAddressPostalCode')"
                             errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)">
-                            <input class="form-control" style="width: 500px;" type="text" placeholder="Postal Code"
+                            <input class="form-control" type="text" mask="A0A0A0" placeholder="Postal Code"
                                 formControlName="establishmentAddressPostalCode">
                         </app-field>
                     </div>
+                </app-field>
+
+                <hr>
+
+                <app-field label="Licensee Name (as shown on licence)" [valid]="isValidOrNotTouched('nameOfApplicant')"
+                errorMessage="Licensee Name is a required field">
+                <input class="form-control" style="width: 500px;" type="text" formControlName="nameOfApplicant">
                 </app-field>
 
                 <app-field label="Contact First Name" [valid]="isValidOrNotTouched('contactPersonFirstName')"
@@ -94,7 +120,7 @@
 
                 <app-field label="Business Tel" [valid]="isValidOrNotTouched('contactPersonPhone')"
                     errorMessage="Business Tel is a required field">
-                    <input class="form-control" style="width: 500px;" type="text" formControlName="contactPersonPhone">
+                    <input class="form-control" mask="(000) 000-0000" type="text" formControlName="contactPersonPhone">
                 </app-field>
 
                 <app-field label="Business Email" [valid]="isValidOrNotTouched('contactPersonEmail')"
@@ -125,7 +151,7 @@
 
                         <app-field class="col-md-4" [valid]="isValidOrNotTouched('addressPostalCode')"
                             errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)">
-                            <input class="form-control" style="width: 500px;" type="text" placeholder="Postal Code"
+                            <input class="form-control" type="text" placeholder="Postal Code"
                                 formControlName="addressPostalCode">
                         </app-field>
                     </div>
