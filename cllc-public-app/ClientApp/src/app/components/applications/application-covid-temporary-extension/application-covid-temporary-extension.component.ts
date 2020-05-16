@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
-import { filter } from 'rxjs/operators';
+import { filter, flatMap } from 'rxjs/operators';
 import { ApplicationDataService } from '@services/application-data.service';
 import { MatSnackBar } from '@angular/material';
 import { DelayedFileUploaderComponent } from '@shared/components/delayed-file-uploader/delayed-file-uploader.component';
+import { throwError, Observable, forkJoin } from 'rxjs';
+import { FileItem } from '../../../models/file-item.model';
+import { FileDataService } from '../../../services/file-data.service';
 
 const FormValidationErrorMap = {
   description1: 'Licence Number',
@@ -42,14 +45,15 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
   busy: any;
   showValidationMessages: boolean;
   validationMessages: string[] = [];
-
+  files: FileItem[] = [];
   
 
-  @ViewChild('uploadedFloorplanDocuments', { static: false }) uploadedFloorplanDocuments: DelayedFileUploaderComponent;
-  @ViewChild('uploadedLicenseeRepresentativeNotficationFormDocuments', { static: false }) uploadedLicenseeRepresentativeNotficationFormDocuments: DelayedFileUploaderComponent;
+  @ViewChild('floorplanDocuments', { static: false }) floorplanDocuments: DelayedFileUploaderComponent;
+  @ViewChild('licenseeRepresentativeNotficationFormDocuments', { static: false }) licenseeRepresentativeNotficationFormDocuments: DelayedFileUploaderComponent;
 
   constructor(private fb: FormBuilder,
-        private applicationDataService: ApplicationDataService,
+    private applicationDataService: ApplicationDataService,
+        private fileDataService: FileDataService,
         private snackBar: MatSnackBar) {
     super();
   }
@@ -89,7 +93,16 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
 
   }
 
+
+
+  uploadDocuments(id: string, fileUploader: DelayedFileUploaderComponent): Observable<any> {
+    return forkJoin(
+      fileUploader.files.map(f => this.fileDataService.uploadPublicCovidDocument(id, fileUploader.documentType, f.file))
+    );
+  }
+
   submitApplication() {
+    
     if (!this.form.valid) {
       this.showValidationMessages = true;
       this.markConstrolsAsTouched(this.form);
@@ -97,15 +110,26 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
     }
     else {
       this.validationMessages = [];
-      this.busy = this.applicationDataService.createCovidApplication(this.form.value)
-        .subscribe(res => {
-          this.snackBar.open('Application Submitted', 'Success',
-            { duration: 2500, panelClass: ['green-snackbar'] });
-        },
-        err => {
-          this.snackBar.open('Failed to submit application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+      this.busy = this.applicationDataService.createCovidApplication(this.form.value).pipe()
+        .subscribe(result => {
+          if (result.id) {
+            // now upload the documents.
+            forkJoin(this.uploadDocuments(result.id, this.floorplanDocuments),
+              this.uploadDocuments(result.id, this.licenseeRepresentativeNotficationFormDocuments)
+            ).pipe()
+              .subscribe(() => {
+                this.snackBar.open('Application Submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+              },
+                err => {
+                  this.snackBar.open('Failed to submit application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+                });
+          } else {
+            return throwError('Server Error - no ID was returned');
+          }
         });
+ 
     }
+
   }
 
 }

@@ -21,7 +21,7 @@ export interface DropdownOption {
 })
 export class DelayedFileUploaderComponent implements OnInit, OnDestroy {
   unsubscribe: Subject<void> = new Subject();
-  public files: FileItem[] = [];
+  
 
   @Input() id: string;
   @Input() uploadUrl: string;
@@ -44,9 +44,14 @@ export class DelayedFileUploaderComponent implements OnInit, OnDestroy {
 
   validationErrors: string[] = [];
 
+  public files: FileItem[] = [];
+
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
+
+    
+
     // subscribe to files from store
     this.store.select(state => state.fileUploadsState.fileUploads)
       .pipe(
@@ -90,48 +95,6 @@ export class DelayedFileUploaderComponent implements OnInit, OnDestroy {
     }
 
 
-    this.validationErrors = [];
-
-    const files = event;
-    let newFileCount = 0;
-    for (const droppedFile of files) {
-      newFileCount += 1;
-    }
-    let count = this.getCurrentLastFileCounter() + 1;
-    if (files.length > 1 && !this.multipleFiles) {
-      alert('Only one file can be uploaded here');
-      return;
-    }
-    if (this.maxNumberOfFiles < (this.files.length + newFileCount)) {
-      alert(`Only ${this.maxNumberOfFiles} files can be uploaded here`);
-      return;
-    }
-    for (const droppedFile of files) {
-      if (droppedFile.fileEntry.isFile) {
-        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-        fileEntry.file((file: File) => {
-          this.addFile(file);
-          count += 1;
-        });
-      } else {
-        // It was a directory (empty directories are added, otherwise only files)
-        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        // console.log(droppedFile.relativePath, fileEntry);
-      }
-    }
-
-
-    
-    for (const droppedFile of files) {
-      if (droppedFile.fileEntry.isFile) {
-        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-        fileEntry.file((file: File) => {
-          if (this.validateFile(file)) {
-            this.addFile(file);
-          }
-        });
-      }
-    }
   }
 
   getCurrentLastFileCounter(): number {
