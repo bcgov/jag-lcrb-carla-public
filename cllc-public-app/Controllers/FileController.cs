@@ -888,6 +888,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
+        [HttpPost("{id}/public-covid-application")]
+        [DisableRequestSizeLimit]
+        [AllowAnonymous]
+        public async Task<IActionResult> PublicCovidApplication([FromRoute] string id,
+          [FromForm]IFormFile file, [FromForm] string documentType)
+        {
+            string entityName = "application";
+            // decode the entityID
+            var application = _dynamicsClient.GetApplicationById(id);
+            if (application == null) 
+            { 
+                return BadRequest();  
+            }
+            else
+            {
+                return await UploadAttachmentInternal(id, entityName, file, documentType, false).ConfigureAwait(true);
+            }
+        }
+
+
         /// <summary>
         /// Get the file details list in folder associated to the application folder and document type
         /// </summary>

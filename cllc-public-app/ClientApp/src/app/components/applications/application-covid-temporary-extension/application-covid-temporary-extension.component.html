@@ -196,7 +196,7 @@
 
 
                 <section style="text-align: center; color: lightblue">
-                  <app-delayed-file-uploader documentType="Floorplan"
+                  <app-delayed-file-uploader documentType="Floorplan" #floorplanDocuments id="floorplanDocuments"
                                      [enableFileDeletion]="true"
                                      [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
                                      entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
@@ -237,7 +237,7 @@
                 </p>
 
                 <section style="text-align: center; color: lightblue">
-                  <app-delayed-file-uploader documentType="LicenseeRepresentativeNotficationForm"
+                  <app-delayed-file-uploader documentType="LicenseeRepresentativeNotficationForm" #licenseeRepresentativeNotficationFormDocuments id="licenseeRepresentativeNotficationFormDocuments"
                                              [enableFileDeletion]="true"
                                              [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
                                              entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
