@@ -13,9 +13,10 @@ export class SetFileUploadsAction implements Action {
 export class ClearFileUploadsAction implements Action {
   readonly type = CLEAR_FILE_UPLOADS;
 
-  constructor(public payload: string) { }
+  constructor(public payload: {id: string, documentType: string}) { }
 }
 
 export type Actions =
 SetFileUploadsAction
 | ClearFileUploadsAction;
+

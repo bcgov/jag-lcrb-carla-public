@@ -513,6 +513,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             }
 
+            await initializeSharepoint(adoxioApplication);
+
             return new JsonResult(await adoxioApplication.ToCovidViewModel(_dynamicsClient, _logger));
         }
         private async Task initializeSharepoint(MicrosoftDynamicsCRMadoxioApplication adoxioApplication)
