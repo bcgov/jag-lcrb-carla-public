@@ -25,5 +25,18 @@ export class FileDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  uploadPublicCovidDocument(applicationId: any, documentType: string, file: File) {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+
+    formData.append('documentType', documentType);
+
+    const headers: HttpHeaders = new HttpHeaders();
+
+    const path = `${this.apiPath}${applicationId}/public-covid-application`;
+    return this.http.post<any>(path, formData, { headers: headers })
+      .pipe(catchError(this.handleError));
+  }
+
 
 }
