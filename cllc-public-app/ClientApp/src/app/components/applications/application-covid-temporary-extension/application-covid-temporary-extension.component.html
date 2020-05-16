@@ -22,22 +22,22 @@
                     policies and/or original terms and conditions of licensing. It is important to note that this authorization will 
                     permit expanded service areas only and will not expand overall occupancy.</p>
  
-                <p>To prevent further financial strain for those licensees most impacted by the pandemic, there will be no fees associated 
+                <p>To prevent further financial strain for those licensees most impacted by the pandemic, there will be <strong>no fees</strong> associated 
                     with the temporary extension application.</p>
  
                 <p>Local governments will have two options for approval of temporary expansion authorizations for liquor primary and 
                     manufacturer licences:</p>
-                    <ul>
+                    <ul style="font-size: larger;">
                         <li>pre-approval to cover all establishments within their jurisdiction who may apply for an expanded liquor service area; or</li>
                         <li>review of all individual requests prior to licensees submitting their applications to LCRB.</li>
                     </ul>
 
-                <p>If a local government chooses to review all individual requests, the LCRB will require liquor primary and manufacturer licensees to provide written approval from their local government with their application.</p>
- 
-                <p>Please get in touch with your local government to determine their approach prior to submitting your application.</p>
- 
-                <p>To submit an application, please fill out the information in the form below.</p>
-                
+                    <p>If a local government chooses to review all individual requests for liquor primary and manufacturer applications, the LCRB will require those licensees to provide written approval from their local government with their application. Please get in touch with your local government to determine their approach prior to submitting your application.
+                    Local government approval is not required for food primary licensees.</p>
+                     
+                    <p>If you currently have a complex permanent structural change application under review by the LCRB, you can submit a new application for a temporary expansion authorization to allow for the adherence of social distancing requirements within your current occupancy limits.</p>
+                     
+                    <p>To submit an application, please fill out the information in the form below.</p>
             </section>
             </div>
             </section>
@@ -175,8 +175,7 @@
                     Floor plan of the extended area(s) showing how perimeter is defined, dimensions and its
                     physical relationship to existing licensed areas:
                   </li>
-                  <li>
-                    <ul>
+                  <li><ul>
                       <li>
                         Floor plan must have occupant load of the extended area marked/stamped on the plans
                         by provincial fire or building authority (or designate)
@@ -184,8 +183,7 @@
                       </li>
                       <li>
                         Provide proposed person capacity of extended area(s) if extension is outside; and
-                      </li>
-                    </ul>
+                      </li></ul>
                   </li>
                   <li>
                     Where the proposed area is not on property owned or controlled by the licensee, provide
@@ -272,20 +270,31 @@
             <h3 class="blue-header ngtest-declarations">
                 DECLARATIONS
             </h3>
-            <div class="padded-section content-bottom">
-                <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
-                    errorMessage="Please affirm that all of the information provided for this application is true and complete."
-                    [showChevrons]="false">
-                    <section style="display: flex">
-                        <input type="checkbox" formControlName="signatureAgreement">
-                        <span class="error-states">*</span>
-                        <div style="padding-left: 10px;">
-                            As the licensee or authorized signatory of the licensee, I understand and affirm that all of
-                            the information provided is true and complete.
-                        </div>
+
+                <section class="d-flex" style="margin-top: 0px;">
+                    <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+                    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+                    <section class="ngtest-preamble-content">
+                            <p><strong>Section 57(1)(c)</strong> of the <strong>Liquor Control and Licensing Act</strong> states: “A person commits an offence if the person (c) 
+                                provides false or misleading information in the following circumstances: (i) when making an application referred to in section 12; (ii) when 
+                                making a report or when required and as specified by the general manager under section 59.
+                            </p>
+                        <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+                            errorMessage="Please affirm that all of the information provided for this application is true and complete."
+                            [showChevrons]="false">
+                            <section style="display: flex">
+                                <input type="checkbox" formControlName="signatureAgreement">
+                                <span class="error-states">*</span>
+                                <div style="padding-left: 10px; font-size: larger;">
+                                    As the licensee or authorized signatory of the licensee, I understand and affirm that all of
+                                    the information provided is true and complete.
+                                </div>
+                            </section>
+                        </app-field>
                     </section>
-                </app-field>
-            </div>
+                    </div>
+                </section>
+            
 
             <section class="error mt-3 p-3" *ngIf="!form.valid && form.touched">
                 <div *ngIf="!validationMessages?.length">
