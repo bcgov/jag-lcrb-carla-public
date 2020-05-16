@@ -52,7 +52,7 @@ export class DelayedFileUploaderComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.unsubscribe),
       ).subscribe(fileUploads => {
-        const fileUploadSet = fileUploads.find(f => f.id === this.id);
+        const fileUploadSet = fileUploads.find(f => f.id === this.id && f.documentType === this.documentType);
         this.files = fileUploadSet ? fileUploadSet.files : [];
       });
   }
@@ -199,11 +199,20 @@ export class DelayedFileUploaderComponent implements OnInit, OnDestroy {
 
   addFile(file: File) {
     const fileSystemEntry = { id: this.files.length, name: file.name, size: Math.trunc(file.size / 1024), file: file };
-    this.store.dispatch(new FileUploadsActions.SetFileUploadsAction({ id: this.id, files: [...this.files, fileSystemEntry ] }));
+    const fileSet = { 
+      id: this.id, 
+      documentType: this.documentType,
+      files: [...this.files, fileSystemEntry ] 
+    };
+    this.store.dispatch(new FileUploadsActions.SetFileUploadsAction(fileSet));
   }
 
   removeFile(file: FileItem) {
-    this.store.dispatch(new FileUploadsActions.SetFileUploadsAction({ id: this.id, files: this.files.filter(f => f.id !== file.id) }));
+    this.store.dispatch(new FileUploadsActions.SetFileUploadsAction({ 
+      id: this.id, 
+      documentType: this.documentType,
+      files: this.files.filter(f => f.id !== file.id) 
+    }));
   }
 
   browseFiles(browserMultiple: HTMLInputElement) {
