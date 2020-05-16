@@ -83,6 +83,18 @@ namespace bdd_tests
             NgWebElement uiLicenceType = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-2']"));
             uiLicenceType.Click();
 
+            NgWebElement uiLicenceType1 = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-3']"));
+            uiLicenceType1.Click();
+
+            NgWebElement uiLicenceType2 = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-4']"));
+            uiLicenceType2.Click();
+
+            NgWebElement uiLicenceType3 = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-5']"));
+            uiLicenceType3.Click();
+
+            NgWebElement uiLicenceType4 = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-6']"));
+            uiLicenceType4.Click();
+
             NgWebElement uiLicenceName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
             uiLicenceName.SendKeys(licencename);
 
