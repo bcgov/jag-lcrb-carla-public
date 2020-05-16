@@ -10,9 +10,9 @@ export function reducer(state: FileUploadsState = initialState, action: FileUplo
     // Section 3
     switch (action.type) {
         case FileUploadsActions.CLEAR_FILE_UPLOADS:
-            return { ...state, fileUploads: state.fileUploads.filter(f => f.id !== action.payload) };
+            return { ...state, fileUploads: state.fileUploads.filter(f => f.id !== action.payload.id || f.documentType !== action.payload.documentType) };
         case FileUploadsActions.SET_FILE_UPLOADS:
-            return { ...state, fileUploads: [ ...state.fileUploads.filter(f => f.id !== action.payload.id), action.payload ] };
+            return { ...state, fileUploads: [ ...state.fileUploads.filter(f => f.id !== action.payload.id || f.documentType !== action.payload.documentType), action.payload ] };
         default:
             return state;
     }
