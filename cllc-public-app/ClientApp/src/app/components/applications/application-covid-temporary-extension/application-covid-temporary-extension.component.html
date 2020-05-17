@@ -245,16 +245,13 @@
                 </section>
             </div>
 
+            <div *ngIf="lgInputRequired()">
             <h3 class="blue-header ngtest-declarations">
                 LOCAL GOVERNMENT/FIRST NATION COMMENTS
             </h3>
             <div class="padded-section content-bottom">
-                <p>
-                    This application process requires comment from your local government/First Nation. Please download
-                    and take the completed application form and all required documents to their local government/First
-                    Nation and request that the local government/First Nation complete.
-                </p>
-                <app-field [valid]="!showValidationMessages || form.get('receivedLGPermission').valid"
+ 
+                <!--app-field [valid]="!showValidationMessages || form.get('receivedLGPermission').valid"
                     errorMessage="Please affirm that all of the information provided for this application is true and complete."
                     [showChevrons]="false">
                     <section style="display: flex">
@@ -264,7 +261,17 @@
                             I have received permission from my Local Government.
                         </div>
                     </section>
+                </app-field-->
+
+                <app-field [valid]="isValidOrNotTouched('lgType')" [showChevrons]="false"
+                    errorMessage="Please identify your Local Goverment status" [isFullWidth]="true">
+                    <mat-radio-group formControlName="lgStatus">
+                        <mat-radio-button class="mr-5" value="option1">My Local Government or Indigenous Nation has given blanket permission/approval for all temporary extensions applications in their jurisdiction related to COVID-19.</mat-radio-button><br>
+                        <mat-radio-button class="mr-5" value="option2">My Local Government or Indigenous Nation wishes to review and approve each application individually.</mat-radio-button>
+                    </mat-radio-group>
                 </app-field>
+
+            </div>
             </div>
 
             <h3 class="blue-header ngtest-declarations" style="margin-bottom: 0px;">
