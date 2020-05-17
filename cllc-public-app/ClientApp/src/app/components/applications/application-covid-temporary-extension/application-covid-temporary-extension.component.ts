@@ -46,6 +46,8 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
   showValidationMessages: boolean;
   validationMessages: string[] = [];
   files: FileItem[] = [];
+  uploadedFloorplanDocuments: any;
+  uploadedLicenseeRepresentativeNotficationFormDocuments: any;
   
 
   @ViewChild('floorplanDocuments', { static: false }) floorplanDocuments: DelayedFileUploaderComponent;
