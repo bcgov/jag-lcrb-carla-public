@@ -82,7 +82,7 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
       addressCountry: ['Canada'], // only used client side for validation
 
       //receivedLGPermission: ['', [this.customRequiredCheckboxValidator()]],
-      lgStatus: ['', [Validators.required]],
+      lgStatus: ['', []],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
     });
 
@@ -110,7 +110,7 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
     
     // if the chose food primary, they don't even see the LG option and it's not required
     if(this.form.get("licenceType").value && this.form.get("licenceType").value == "Food Primary") {
-      this.form.get('lgStatus').setValidators([]);
+      this.form.get('lgStatus').clearValidators();
       return false;
     }
 
