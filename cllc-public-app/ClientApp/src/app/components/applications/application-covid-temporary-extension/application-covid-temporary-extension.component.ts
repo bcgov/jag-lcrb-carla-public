@@ -101,6 +101,11 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
     );
   }
 
+  
+  lgInputRequired(): boolean {
+    return this.form.get("licenceType").value != "Food Primary";
+  }
+
   submitApplication() {
     
     if (!this.form.valid) {
@@ -133,3 +138,4 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
   }
 
 }
+
