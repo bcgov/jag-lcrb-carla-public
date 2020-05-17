@@ -13,31 +13,22 @@
             <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
             <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
             <section class="ngtest-preamble-content">
-                <p>To support B.C.’s licensed establishments in safely reopening for business while respecting the physical distancing 
-                    guidelines outlined by the Provincial Health Officer (PHO) orders, this new authorization permits food primary, 
-                    liquor primary and manufacturer licensees (i.e., wineries, breweries, distilleries) to temporarily expand their 
-                    service areas until <strong>October 31, 2020</strong>.</p>
- 
-                <p>This authorization is subject to any restrictions within the Liquor Control and Licensing Act, Regulations, branch 
-                    policies and/or original terms and conditions of licensing. It is important to note that this authorization will 
-                    permit expanded service areas only and will not expand overall occupancy.</p>
- 
-                <p>To prevent further financial strain for those licensees most impacted by the pandemic, there will be <strong>no fees</strong> associated 
-                    with the temporary extension application.</p>
- 
-                <p>Local governments will have two options for approval of temporary expansion authorizations for liquor primary and 
-                    manufacturer licences:</p>
-                    <ul style="font-size: larger;">
+                <p>To support B.C.’s licensed establishments in safely reopening for business while respecting the physical distancing guidelines outlined by the Provincial Health Officer (PHO) orders, this new authorization permits food primary, liquor primary and manufacturer licensees (i.e., wineries, breweries, distilleries) to temporarily expand their service areas until <strong>October 31, 2020</strong>.</p>
+
+                <p>This authorization is subject to any restrictions within the Liquor Control and Licensing Act, Regulations, branch policies and/or original terms and conditions of licensing. It is important to note that this authorization will permit expanded service areas only and will not expand overall occupancy.</p>
+                
+                <p>To prevent further financial strain for those licensees most impacted by the pandemic, there will be no fees associated with the temporary extension application.</p>
+                
+                <p>Local governments will have two options for approval of temporary expansion authorizations for liquor primary and manufacturer licences:</p>
+                    <ul style="font-size:larger">
                         <li>pre-approval to cover all establishments within their jurisdiction who may apply for an expanded liquor service area; or</li>
                         <li>review of all individual requests prior to licensees submitting their applications to LCRB.</li>
                     </ul>
-
-                    <p>If a local government chooses to review all individual requests for liquor primary and manufacturer applications, the LCRB will require those licensees to provide written approval from their local government with their application. Please get in touch with your local government to determine their approach prior to submitting your application.
-                    Local government approval is not required for food primary licensees.</p>
-                     
-                    <p>If you currently have a complex permanent structural change application under review by the LCRB, you can submit a new application for a temporary expansion authorization to allow for the adherence of social distancing requirements within your current occupancy limits.</p>
-                     
-                    <p>To submit an application, please fill out the information in the form below.</p>
+                
+                <p>If a local government chooses to review all individual requests for liquor primary and manufacturer applications, the LCRB will require those licensees to provide written approval from their local government with their application.</p>
+                
+                <p><strong>Please get in touch with your local government to determine their approach prior to submitting your application.</strong></p>    
+                
             </section>
             </div>
             </section>
@@ -123,10 +114,12 @@
                     <input class="form-control" mask="(000) 000-0000" type="text" formControlName="contactPersonPhone">
                 </app-field>
 
-                <app-field label="Business Email" [valid]="isValidOrNotTouched('contactPersonEmail')"
+                <app-field label="Contact Email (authorizations will be sent to this address)" [valid]="isValidOrNotTouched('contactPersonEmail')"
                     errorMessage="Business Email is a required field">
                     <input class="form-control" style="width: 500px;" type="text" formControlName="contactPersonEmail">
                 </app-field>
+
+       
 
                 <app-field [valid]="true">
                     <section style="display: flex; align-items: center;">
@@ -162,37 +155,12 @@
                 TEMPORARY EXTENSION OF LICENSED AREA
             </h3>
             <div class="padded-section content-bottom">
-                <p>
-                    Please provide the following information and documents:
-                </p>
-
-                
-
-                <ul>
-                  <li>Current total capacity, including patios (as shown on licence);</li>
-                  <li>Identify the area(s) to be extended;</li>
-                  <li>
-                    Floor plan of the extended area(s) showing how perimeter is defined, dimensions and its
-                    physical relationship to existing licensed areas:
-                  </li>
-                  <li><ul>
-                      <li>
-                        Floor plan must have occupant load of the extended area marked/stamped on the plans
-                        by provincial fire or building authority (or designate)
-                        where the extension is indoors or within a permanent structure.
-                      </li>
-                      <li>
-                        Provide proposed person capacity of extended area(s) if extension is outside; and
-                      </li></ul>
-                  </li>
-                  <li>
-                    Where the proposed area is not on property owned or controlled by the licensee, provide
-                    written approval for such use from the property owner.
-                  </li>
-
-                </ul>               
-
-
+                <p>Please upload documents that provide the following information:</p>
+                <ul style="font-size:larger;"><li>Provide a floor plan showing the proposed expanded service area. The floor plan may be hand drawn but must be legible and must clearly 
+                    identify the following details: how the perimeter is defined, dimensions, and its physical relationship to existing licensed areas.</li>
+                    <li>Identify the existing service area to be expanded (e.g. Person01, Lounge, Patio2, etc. as shown on your licence)</li>
+                </ul>
+           
                 <section style="text-align: center; color: lightblue">
                   <app-delayed-file-uploader documentType="Floorplan" #floorplanDocuments id="floorplanDocuments"
                                      [enableFileDeletion]="true"
@@ -263,13 +231,25 @@
                     </section>
                 </app-field-->
 
-                <app-field [valid]="isValidOrNotTouched('lgType')" [showChevrons]="false"
+                <app-field [valid]="isValidOrNotTouched('lgStatus')" [showChevrons]="false"
                     errorMessage="Please identify your Local Goverment status" [isFullWidth]="true">
                     <mat-radio-group formControlName="lgStatus">
                         <mat-radio-button class="mr-5" value="option1">My Local Government or Indigenous Nation has given blanket permission/approval for all temporary extensions applications in their jurisdiction related to COVID-19.</mat-radio-button><br>
                         <mat-radio-button class="mr-5" value="option2">My Local Government or Indigenous Nation wishes to review and approve each application individually.</mat-radio-button>
                     </mat-radio-group>
                 </app-field>
+
+                <div *ngIf="lgConfirmationRequired()">
+                <section style="text-align: center; color: lightblue">
+                    <app-delayed-file-uploader documentType="LGConfirmation" #lGConfirmation id="LGConfirmation"
+                                               [enableFileDeletion]="true"
+                                               [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="false"
+                                               entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+                                               (numberOfUploadedFiles)="uploadedLGConfirmation = $event" 
+                                               [uploadHeader]="'TO UPLOAD LG/IN CONFIRMATION, DRAG FILE HERE OR'">
+                    </app-delayed-file-uploader>
+                  </section>
+                </div>
 
             </div>
             </div>
