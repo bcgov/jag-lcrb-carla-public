@@ -109,7 +109,7 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
   lgInputRequired(): boolean {
     
     // if the chose food primary, they don't even see the LG option and it's not required
-    if(this.form.get("licenceType").value && this.form.get("licenceType").value == "Food Primary") {
+    if(this.form.get("licenceType").value && this.form.get("licenceType").value === "Food Primary") {
       this.form.get('lgStatus').clearValidators();
       return false;
     }
