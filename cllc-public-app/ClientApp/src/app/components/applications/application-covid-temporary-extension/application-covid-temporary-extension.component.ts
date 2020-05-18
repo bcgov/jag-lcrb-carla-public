@@ -26,7 +26,8 @@ const FormValidationErrorMap = {
   addressCity: 'Mailing Address City',
   addressPostalCode: 'Mailing Address Postal Code',
 
-  receivedLGPermission: 'Local Government Permission Receipt checkbox',
+  //receivedLGPermission: 'Local Government Permission Receipt checkbox',
+  lgStatus: 'Selection of the LG Option',
   signatureAgreement: 'Declaration checkbox',
 
   currentTotalCapicityIncluded: 'Current Total Capacity checkbox',
@@ -80,7 +81,8 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
       addressPostalCode: ['', [Validators.required, this.customZipCodeValidator('addressCountry')]],
       addressCountry: ['Canada'], // only used client side for validation
 
-      receivedLGPermission: ['', [this.customRequiredCheckboxValidator()]],
+      //receivedLGPermission: ['', [this.customRequiredCheckboxValidator()]],
+      lgStatus: ['', []],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
     });
 
@@ -101,6 +103,27 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
     return forkJoin(
       fileUploader.files.map(f => this.fileDataService.uploadPublicCovidDocument(id, fileUploader.documentType, f.file))
     );
+  }
+
+  
+  lgInputRequired(): boolean {
+    
+    // if the chose food primary, they don't even see the LG option and it's not required
+    if(this.form.get("licenceType").value && this.form.get("licenceType").value === "Food Primary") {
+      this.form.get('lgStatus').clearValidators();
+      return false;
+    }
+
+    // otherwise lgStatus is required
+    this.form.get("lgStatus").setValidators([Validators.required]);
+    return true;
+
+  }
+
+  lgConfirmationRequired(): boolean {
+  
+    return this.form.get("lgStatus").value && this.form.get("lgStatus").value == "option2" && this.lgInputRequired();
+    
   }
 
   submitApplication() {
@@ -135,3 +158,4 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
   }
 
 }
+
