@@ -49,10 +49,11 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
   files: FileItem[] = [];
   uploadedFloorplanDocuments: any;
   uploadedLicenseeRepresentativeNotficationFormDocuments: any;
-  
+  uploadDocumentJobs: any[] = [];
 
   @ViewChild('floorplanDocuments', { static: false }) floorplanDocuments: DelayedFileUploaderComponent;
   @ViewChild('licenseeRepresentativeNotficationFormDocuments', { static: false }) licenseeRepresentativeNotficationFormDocuments: DelayedFileUploaderComponent;
+  @ViewChild('lGConfirmation', { static: false }) lGConfirmationDocuments: DelayedFileUploaderComponent;
 
   constructor(private fb: FormBuilder,
     private applicationDataService: ApplicationDataService,
@@ -138,14 +139,21 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
     }
     else {
       this.validationMessages = [];
-      this.snackBar.open('Attempting to Submit', 'Notification', { duration: 2500, panelClass: ['red-snackbar'] });
+      this.snackBar.open('Attempting to Submit', 'Notification', { duration: 2500, panelClass: ['green-snackbar'] });
       this.busy = this.applicationDataService.createCovidApplication(this.form.value).pipe()
         .subscribe(result => {
           if (result.id) {
             // now upload the documents.
-            forkJoin(this.uploadDocuments(result.id, this.floorplanDocuments),
-              this.uploadDocuments(result.id, this.licenseeRepresentativeNotficationFormDocuments)
-            ).pipe()
+
+            this.uploadDocumentJobs = [];
+            this.uploadDocumentJobs.push(this.uploadDocuments(result.id, this.floorplanDocuments));
+            this.uploadDocumentJobs.push(this.uploadDocuments(result.id, this.licenseeRepresentativeNotficationFormDocuments));
+            if (this.lGConfirmationDocuments && this.lGConfirmationDocuments.files) {
+              this.uploadDocumentJobs.push(this.uploadDocuments(result.id, this.lGConfirmationDocuments));
+            }
+
+
+            this.busy = forkJoin(this.uploadDocumentJobs).pipe()
               .subscribe(() => {
                 this.snackBar.open('Application Submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
                 //this.router.navigateByUrl('/dashboard');
