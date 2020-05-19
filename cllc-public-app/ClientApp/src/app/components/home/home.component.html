@@ -51,8 +51,55 @@
             </div>
           </div>
         </div>
-        <div style="padding-left: 0px;" class="col-md-4 col-sm-12">
+        <div appRemoveIfFeatureOff="CovidApplication" style="padding-left: 0px;" class="col-md-4 col-sm-12">
           <div class="side-box-wrapper">
+            <section class="side-box">
+              <section style="display: flex">
+                <table>
+                  <tr>
+                    <td>
+                      <button mat-fab class="fab-button mat-elevation-z0">
+                        <mat-icon class="icon" aria-label="Liquor Content">description</mat-icon>
+                      </button>
+                    </td>
+                    <td>
+                      <h2 style="margin: 0px;">Temporary Service Area Expansion Authorization</h2>
+                      <p style="font-size: small;">In response to the public health emergency related to COVID-19, and to help businesses safely reopen while respecting the Provincial Health 
+                        Officer’s order and physical distancing guidelines, the LCRB is accepting applications for food primary, liquor primary, and manufacturer 
+                        licensees to temporarily expand their service areas until October 31, 2020.
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </section>
+              <p style="padding-top: 30px;">
+                <span>
+                  
+                </span>
+              </p>
+              <div style="display: flex; justify-content: flex-end">
+                
+                  <button onclick="location.href='https://justice.gov.bc.ca/cannabislicensing/covid-temporary-extension';" type="button" class="btn btn-primary" tabindex="3" >Apply Here</button>
+                
+              </div>
+            </section>
+          </div>
+        </div>       
+      </div>
+    </div>
+  </div>
+  <div class="home-margins">
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <div class="home-body">
+          <app-accordion></app-accordion>
+        </div>
+      </div>
+      
+      <div style="padding-left:0px;" class="col-md-4 col-sm-12">
+        
+        <div class="side-box-wrapper">
+          
             <section class="side-box">
               <section style="display: flex">
                 <table>
@@ -80,21 +127,8 @@
                   <button onclick="location.href='https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing'" type="button" class="btn btn-primary" tabindex="3" >LCRB Content Portal</button>
                 
               </div>
-            </section>
-          </div>
-        </div>       
-      </div>
-    </div>
-  </div>
-  <div class="home-margins">
-    <div class="row">
-      <div class="col-md-8 col-sm-12">
-        <div class="home-body">
-          <app-accordion></app-accordion>
-        </div>
-      </div>
-      <div style="padding-left:0px;" class="col-md-4 col-sm-12">
-        <div class="side-box-wrapper">
+             </section>
+             
           <section class="side-box">
             <app-newsletter-signup slug="signupForUpdates"></app-newsletter-signup>
           </section>

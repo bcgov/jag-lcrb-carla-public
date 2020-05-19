@@ -36,10 +36,8 @@ namespace bdd_tests
     {
         public void CheckFeatureFlagsCannabis()
         {
-            string feature_flags = configuration["featureFlags"];
-
             // navigate to the feature flags page
-            driver.Navigate().GoToUrl($"{baseUri}{feature_flags}");
+            driver.Navigate().GoToUrl($"{baseUri}api/features");
 
             // confirm that the CRS-Renewal flag is enabled during this test
             Assert.True(driver.FindElement(By.XPath("//body[contains(.,'CRS-Renewal')]")).Displayed);
@@ -105,8 +103,9 @@ namespace bdd_tests
         {
             /* 
             Page Title: Security Screening Requirements
-                      : placeholder for future testing
             */
+
+            ReviewSecurityScreening();
         }
 
         [And(@"I click on the Pay for Application button")]

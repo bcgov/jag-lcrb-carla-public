@@ -41,10 +41,8 @@ namespace bdd_tests
     {
         public void CheckFeatureFlagsLiquor()
         {
-            string feature_flags = configuration["featureFlags"];
-
             // navigate to the feature flags page
-            driver.Navigate().GoToUrl($"{baseUri}{feature_flags}");
+            driver.Navigate().GoToUrl($"{baseUri}api/features");
 
             // confirm that the LiquorOne flag is enabled during this test
             Assert.True(driver.FindElement(By.XPath("//body[contains(.,'LiquorOne')]")).Displayed);
@@ -109,6 +107,8 @@ namespace bdd_tests
         [And(@"I click on the Pay for Application button")]
         public void click_on_pay()
         {
+            ReviewSecurityScreening();
+
             NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
             pay_button.Click();
         }
