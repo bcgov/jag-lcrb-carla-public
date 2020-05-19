@@ -57,6 +57,13 @@ export class LicenseDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getAllProposedLicenses(): Observable<ApplicationLicenseSummary[]> {
+    return this.http.get<ApplicationLicenseSummary[]>(this.apiPath + 'proposed-owner', {
+      headers: this.headers
+    })
+      .pipe(catchError(this.handleError));
+  }
+
   createApplicationForActionType(licenseId: string, applicationType: string): Observable<Application> {
     const url = `${this.apiPath}${licenseId}/create-action-application/${encodeURIComponent(applicationType)}`;
     return this.http.post<Application>(url, null, { headers: this.headers });
