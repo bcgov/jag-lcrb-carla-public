@@ -211,7 +211,7 @@ namespace bdd_tests
         [And(@"I click on the Submit button")]
         public void submit_button()
         {
-            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT APPLICATION')]"));
+            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT APPLICATION18')]"));
             submitButton.Click();
         }
 
