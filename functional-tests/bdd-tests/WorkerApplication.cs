@@ -116,8 +116,8 @@ namespace bdd_tests
 
             var openCalendar4 = ngDriver.FindElements(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content")).GetEnumerator();
             openCalendar4.MoveNext();
-            openCalendar4.MoveNext();
-            openCalendar4.MoveNext();
+            //var openCalendar4a = ngDriver.FindElements(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content")).GetEnumerator();
+            //openCalendar4a.MoveNext();
             openCalendar4.Current.Click();
            
             var openCalendar5 = ngDriver.FindElements(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content")).GetEnumerator();
