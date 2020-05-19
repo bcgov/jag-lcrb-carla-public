@@ -8,6 +8,8 @@ import { DelayedFileUploaderComponent } from '@shared/components/delayed-file-up
 import { throwError, Observable, forkJoin } from 'rxjs';
 import { FileItem } from '../../../models/file-item.model';
 import { FileDataService } from '../../../services/file-data.service';
+//import { Router } from '@angular/router';
+
 
 const FormValidationErrorMap = {
   description1: 'Licence Number',
@@ -58,6 +60,7 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
   constructor(private fb: FormBuilder,
     private applicationDataService: ApplicationDataService,
         private fileDataService: FileDataService,
+       // public router: Router,
         private snackBar: MatSnackBar) {
     super();
   }
@@ -98,8 +101,6 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
 
   }
 
-
-
   uploadDocuments(id: string, fileUploader: DelayedFileUploaderComponent): Observable<any> {
     return forkJoin(
       fileUploader.files.map(f => this.fileDataService.uploadPublicCovidDocument(id, fileUploader.documentType, f.file))
@@ -107,8 +108,8 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
   }
 
   
+  // LG input is required when the licence type is not a food primary
   lgInputRequired(): boolean {
-    
     // if they chose food primary, they don't even see the LG option and it's not required
     if(this.form.get("licenceType").value && this.form.get("licenceType").value === "Food Primary") {
       //alert(this.form.get('lgStatus').)
@@ -116,26 +117,35 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
       this.form.get('lgStatus').updateValueAndValidity();
       return false;
     }
-
     // otherwise lgStatus is required
     this.form.get("lgStatus").setValidators([Validators.required]);
     this.form.get('lgStatus').updateValueAndValidity();
     return true;
-
   }
 
+  // if the LG Confirmation Option is revealed and they have selected option two, then they must upload an approval file
   lgConfirmationRequired(): boolean {
-  
     return this.form.get("lgStatus").value && this.form.get("lgStatus").value == "option2" && this.lgInputRequired();
-    
   }
 
   submitApplication() {
-    
-    if (!this.form.valid) {
-      this.showValidationMessages = true;
-      this.markConstrolsAsTouched(this.form);
-      this.validationMessages = this.listControlsWithErrors(this.form, FormValidationErrorMap)
+    // check for valid form and file uploads
+    // licensee representative is optional
+    if (!this.form.valid ||
+      this.floorplanDocuments.files.length == 0 || 
+      (this.lgConfirmationRequired() && this.lGConfirmationDocuments.files.length == 0)) {
+
+        this.showValidationMessages = true;
+        this.markConstrolsAsTouched(this.form);
+        this.validationMessages = this.listControlsWithErrors(this.form, FormValidationErrorMap)
+
+        // validation messages for missing files
+        if(this.floorplanDocuments.files.length == 0) {
+          this.validationMessages.push("Missing Floor Plan Documents");
+        }
+        if(this.lgConfirmationRequired() && this.lGConfirmationDocuments.files.length == 0){
+          this.validationMessages.push("Missing Local Government or Indigenous Nation Approval")
+        }        
     }
     else {
       this.validationMessages = [];
@@ -152,15 +162,14 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
               this.uploadDocumentJobs.push(this.uploadDocuments(result.id, this.lGConfirmationDocuments));
             }
 
-
+            
             this.busy = forkJoin(this.uploadDocumentJobs).pipe()
               .subscribe(() => {
                 this.snackBar.open('Application Submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-                //this.router.navigateByUrl('/dashboard');
+               // this.router.navigateByUrl('/success');
               },
                 err => {
                   this.snackBar.open('Failed to submit application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-                  //this.router.navigateByUrl('/dashboard');
                 });
           } else {
             return throwError('Server Error - no ID was returned');

@@ -235,13 +235,14 @@
                     errorMessage="Please identify your Local Goverment status" [isFullWidth]="true">
                     <mat-radio-group formControlName="lgStatus">
                         <mat-radio-button class="mr-5" value="option1">My Local Government or Indigenous Nation has given blanket permission/approval for all temporary extensions applications in their jurisdiction related to COVID-19.</mat-radio-button><br>
-                        <mat-radio-button class="mr-5" value="option2">My Local Government or Indigenous Nation wishes to review and approve each application individually.</mat-radio-button>
+                        <mat-radio-button class="mr-5" value="option2">My Local Government or Indigenous Nation wishes to review and approve each application individually. I have attached their approval below:</mat-radio-button>
                     </mat-radio-group>
                 </app-field>
 
                 <div *ngIf="lgConfirmationRequired()">
                 <section style="text-align: center; color: lightblue">
-                    <app-delayed-file-uploader documentType="LGConfirmation" #lGConfirmation id="LGConfirmation"
+                    <h4 style="text-align: left; font-weight:900;">Local Government or Indigenous Nation Approval:</h4>
+                    <app-delayed-file-uploader documentType="LGConfirmation" #lGConfirmation id="lGConfirmation"
                                                [enableFileDeletion]="true"
                                                [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="false"
                                                entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
