@@ -27,7 +27,8 @@ Scenario: Change director and shareholder same name
     And I review the organization structure
     And I modify only the director record
     And I review the organization structure
-    Then the director and shareholder name are identical 
+    And the director and shareholder name are identical
+    Then the account is deleted
 */
 
 namespace bdd_tests
@@ -197,7 +198,7 @@ namespace bdd_tests
             orgInfoButton.Click();
         }
 
-        [Then(@"the director and shareholder name are identical")]
+        [And(@"the director and shareholder name are identical")]
         public void director_name_updated()
         {
             // check that the director first name has been updated
@@ -211,6 +212,12 @@ namespace bdd_tests
 
             // check that the shareholder last name has been updated
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
+        }
+
+        [Then(@"the account is deleted")]
+        public void Delete_my_account2()
+        {
+            this.CarlaDeleteCurrentAccount();
         }
     }
 }
