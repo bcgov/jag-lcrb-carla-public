@@ -67,6 +67,9 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
   }
 
   ngOnInit() {
+    
+    
+    
     this.form = this.fb.group({
       description1: ['', [Validators.required, Validators.maxLength(6)]], //this holds the licenceNumber
       licenceType: ['', [Validators.required]],
@@ -101,6 +104,15 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
       });
 
   }
+
+  ngAfterViewInit() {
+    // ensure the file drops are empty on a new form.
+    this.floorplanDocuments.files = [];
+    this.licenseeRepresentativeNotficationFormDocuments.files = [];
+    // note that we can't clear lGConfirmationDocuments at time of form load because the control is not created.
+
+  }
+
 
   uploadDocuments(id: string, fileUploader: DelayedFileUploaderComponent): Observable<any> {
     return forkJoin(
