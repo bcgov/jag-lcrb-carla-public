@@ -412,7 +412,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // adoxio_Licencee,adoxio_establishment
                 // Note that adoxio_Licencee is the Account linked to the licence
                 var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment", "adoxio_LicenceType",
-                    "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_ProposedOperator" 
+                    "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_ProposedOperator", "adoxio_ProposedOwner"
                 };
                 result = this.Licenceses.GetByKey(adoxioLicencesid: id, expand: expand);
             }
