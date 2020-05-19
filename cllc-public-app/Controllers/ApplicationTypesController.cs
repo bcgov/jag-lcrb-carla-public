@@ -56,6 +56,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET an application by name
         [HttpGet("GetByName/{name}")]
+        [AllowAnonymous]
         public ActionResult GetApplicationTypeByName([FromRoute] string name)
         {
             var applicationType = _dynamicsClient.GetApplicationTypeByName(name);

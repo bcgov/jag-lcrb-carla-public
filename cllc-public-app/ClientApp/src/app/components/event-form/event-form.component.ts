@@ -137,7 +137,11 @@ export class EventFormComponent extends FormBase implements OnInit {
   }
 
   setFormToLicenceEvent(licenceEvent: LicenceEvent) {
-    if (licenceEvent.status === this.getOptionFromLabel(this.eventStatus, 'Approved').value) {
+    if (
+      licenceEvent.status === this.getOptionFromLabel(this.eventStatus, 'Approved').value ||
+      licenceEvent.status === this.getOptionFromLabel(this.eventStatus, 'Cancelled').value ||
+      licenceEvent.status === this.getOptionFromLabel(this.eventStatus, 'Denied').value
+    ) {
       this.isReadOnly = true;
     }
 

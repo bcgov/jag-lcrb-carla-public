@@ -86,6 +86,8 @@ import { NewsletterDataService } from '@services/newsletter-data.service';
 import { UserDataService } from '@services/user-data.service';
 import { NotFoundComponent } from '@components/not-found/not-found.component';
 import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
+import { DelayedFileUploaderComponent } from '@shared/components/delayed-file-uploader/delayed-file-uploader.component';
+
 import { CorporateDetailsComponent } from '@components/account-profile/tabs/corporate-details/corporate-details.component';
 import {
   DirectorsAndOfficersComponent,
@@ -194,6 +196,8 @@ import { TemporaryOffsiteComponent } from '@components/temporary-offsite/tempora
 import { ApplicationThirdPartyOperatorComponent } from '@components/applications/application-third-party-operator/application-third-party-operator.component';
 import { CancelThirdPartyOperatorComponent } from '@components/applications/cancel-third-party-operator/cancel-third-party-operator.component';
 import { FeatureFlagService } from './services/feature-flag.service';
+import { ApplicationCovidTemporaryExtensionComponent } from './components/applications/application-covid-temporary-extension/application-covid-temporary-extension.component';
+import { CovidConfirmationComponent } from './components/applications/application-covid-temporary-extension/covid-confirmation/covid-confirmation.component';
 
 
 @NgModule({
@@ -213,6 +217,7 @@ import { FeatureFlagService } from './services/feature-flag.service';
     ConnectionToProducersComponent,
     CorporateDetailsComponent,
     DashboardComponent,
+    DelayedFileUploaderComponent,
     DirectorAndOfficerPersonDialogComponent,
     DirectorsAndOfficersComponent,
     DynamicsFormComponent,
@@ -301,7 +306,9 @@ import { FeatureFlagService } from './services/feature-flag.service';
     MultiStageApplicationFlowComponent,
     SecurityScreeningRequirementsComponent,
     EligibilityFormComponent,
-    LiquorRenewalComponent
+    LiquorRenewalComponent,
+    ApplicationCovidTemporaryExtensionComponent,
+    CovidConfirmationComponent
   ],
   imports: [
     ChartsModule,

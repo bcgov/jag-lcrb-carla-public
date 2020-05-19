@@ -104,17 +104,26 @@ namespace bdd_tests
             NgWebElement openCalendar = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
             openCalendar.Click();
 
-            NgWebElement nextCalendar = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span"));
-            nextCalendar.Click();
+            NgWebElement openCalendar1 = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-period-button"));
+            openCalendar1.Click();
 
-            NgWebElement nextCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr[4]/td[3]/div"));
-            nextCalendar2.Click();
+            NgWebElement openCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-previous-button"));
+            openCalendar2.Click();
 
-            NgWebElement nextCalendar3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-year-view/table/tbody/tr[3]/td[4]/div"));
-            nextCalendar3.Click();
+            var openCalendar3 = ngDriver.FindElements(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content")).GetEnumerator();
+            openCalendar3.MoveNext();
+            openCalendar3.Current.Click();
 
-            NgWebElement nextCalendar4 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[4]/td[4]/div"));
-            nextCalendar4.Click();
+            //NgWebElement openCalendar4 = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
+            //openCalendar4.Click();
+            //var openCalendar4a = ngDriver.FindElements(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content")).GetEnumerator();
+            //openCalendar4a.MoveNext();
+            //openCalendar4.Current.Click();
+           
+            //var openCalendar5 = ngDriver.FindElements(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content")).GetEnumerator();
+            //openCalendar5.MoveNext();
+            //openCalendar5.MoveNext();
+            //openCalendar5.Current.Click();
 
             // enter the street of the mailing address
             NgWebElement uiMailingStreet = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));

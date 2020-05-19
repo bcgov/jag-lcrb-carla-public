@@ -156,6 +156,55 @@ namespace Gov.Lclb.Cllb.Public.Models
             //}
         }
 
+
+        public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.CovidApplication from)
+        {
+            to.AdoxioName = from.Name;
+            //to.Adoxio_jobnumber = from.jobNumber;            
+            to.AdoxioEstablishmentpropsedname = from.EstablishmentName;
+            to.AdoxioEstablishmentaddressstreet = from.EstablishmentAddressStreet;
+            to.AdoxioEstablishmentaddresscity = from.EstablishmentAddressCity;
+            to.AdoxioEstablishmentaddresspostalcode = from.EstablishmentAddressPostalCode;
+            // 12-10-2019 - Removed the update to AdoxioAddressCity as the Dynamics workflow handles that.
+
+            to.AdoxioEstablishmentparcelid = from.EstablishmentParcelId;
+            to.AdoxioEstablishmentphone = from.EstablishmentPhone;
+            to.AdoxioEstablishmentemail = from.EstablishmentEmail;
+
+            to.AdoxioContactpersonfirstname = from.ContactPersonFirstName;
+            to.AdoxioContactpersonlastname = from.ContactPersonLastName;
+            to.AdoxioRole = from.ContactPersonRole;
+            to.AdoxioEmail = from.ContactPersonEmail;
+            to.AdoxioContactpersonphone = from.ContactPersonPhone;
+            to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
+            to.AdoxioAdditionalpropertyinformation = from.AdditionalPropertyInformation;
+
+            to.AdoxioDescription1 = from.Description1;
+
+            //store opening
+
+
+            to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
+
+            to.AdoxioApplicanttype = (int?)from.ApplicantType;
+
+            // catering fields
+            to.AdoxioIsapplicationcomplete = (int?)from.IsApplicationComplete;
+
+
+        }
+
+        public static void CopyValuesForCovidApplication(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.CovidApplication from)
+        {
+            to.CopyValues(from);
+
+            /* 2020/5/15 - Copy values has a comment that says to not copy this fields because of a dynamics workflow
+            * Including this fields for the covid application as the workflow should not be relevant ?
+            */
+            to.AdoxioAddressstreet = from.AddressStreet;
+            to.AdoxioAddresscity = from.AddressCity;
+            to.AdoxioAddresspostalcode = from.AddressPostalCode;
+        }
         public static void CopyValuesForChangeOfLocation(this MicrosoftDynamicsCRMadoxioApplication to, MicrosoftDynamicsCRMadoxioLicences from, bool copyAddress)
         {
             // copy establishment information
@@ -417,7 +466,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 applicationVM.ApplicationType = dynamicsApplication.AdoxioApplicationTypeId.ToViewModel();
 
-                if (! string.IsNullOrEmpty(applicationVM.ApplicationType.FormReference))
+                if (!string.IsNullOrEmpty(applicationVM.ApplicationType.FormReference))
                 {
                     applicationVM.ApplicationType.DynamicsForm = dynamicsClient.GetSystemformViewModel(logger, applicationVM.ApplicationType.FormReference);
                 }
@@ -432,6 +481,108 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
 
             applicationVM.PrevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!applicationVM.IsSubmitted);
+
+            return applicationVM;
+        }
+
+
+        public async static Task<ViewModels.CovidApplication> ToCovidViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, ILogger logger)
+        {
+            ViewModels.CovidApplication applicationVM = new ViewModels.CovidApplication()
+            {
+                Name = dynamicsApplication.AdoxioName,
+                JobNumber = dynamicsApplication.AdoxioJobnumber,
+                //get establishment name and address
+                EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
+                EstablishmentAddressStreet = dynamicsApplication.AdoxioEstablishmentaddressstreet,
+                EstablishmentAddressCity = dynamicsApplication.AdoxioEstablishmentaddresscity,
+                EstablishmentAddressPostalCode = dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
+                EstablishmentAddress = dynamicsApplication.AdoxioEstablishmentaddressstreet
+                                                    + ", " + dynamicsApplication.AdoxioEstablishmentaddresscity
+                                                    + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
+                EstablishmentPhone = dynamicsApplication.AdoxioEstablishmentphone,
+                EstablishmentEmail = dynamicsApplication.AdoxioEstablishmentemail,
+                IsApplicationComplete = (GeneralYesNo?)dynamicsApplication.AdoxioIsapplicationcomplete,
+
+                AddressStreet = dynamicsApplication.AdoxioAddressstreet,
+                AddressCity = dynamicsApplication.AdoxioAddresscity,
+                AddressPostalCode = dynamicsApplication.AdoxioAddresspostalcode,
+
+                NameOfApplicant = dynamicsApplication.AdoxioNameofapplicant,
+
+
+
+                AuthorizedToSubmit = dynamicsApplication.AdoxioAuthorizedtosubmit,
+
+                //get parcel id
+                EstablishmentParcelId = dynamicsApplication.AdoxioEstablishmentparcelid,
+
+                //get additional property info
+                AdditionalPropertyInformation = dynamicsApplication.AdoxioAdditionalpropertyinformation,
+                AdoxioInvoiceId = dynamicsApplication._adoxioInvoiceValue,
+
+                Description1 = dynamicsApplication.AdoxioDescription1,
+
+                //get contact details
+                ContactPersonFirstName = dynamicsApplication.AdoxioContactpersonfirstname,
+                ContactPersonLastName = dynamicsApplication.AdoxioContactpersonlastname,
+                ContactPersonRole = dynamicsApplication.AdoxioRole,
+                ContactPersonEmail = dynamicsApplication.AdoxioEmail,
+                ContactPersonPhone = dynamicsApplication.AdoxioContactpersonphone,
+
+                //get record audit info
+                CreatedOn = dynamicsApplication.Createdon,
+                ModifiedOn = dynamicsApplication.Modifiedon,
+
+                //store opening 
+
+                // Catering fields.
+
+            };
+
+
+
+            // id
+            if (dynamicsApplication.AdoxioApplicationid != null)
+            {
+                applicationVM.Id = dynamicsApplication.AdoxioApplicationid.ToString();
+            }
+
+
+            if (dynamicsApplication.AdoxioApplicanttype != null)
+            {
+                applicationVM.ApplicantType = (AdoxioApplicantTypeCodes)dynamicsApplication.AdoxioApplicanttype;
+            }
+
+            //get applying person from Contact entity
+            if (dynamicsApplication._adoxioApplyingpersonValue != null)
+            {
+                Guid applyingPersonId = Guid.Parse(dynamicsApplication._adoxioApplyingpersonValue);
+                var contact = await dynamicsClient.GetContactById(applyingPersonId);
+                applicationVM.ApplyingPerson = contact.Fullname;
+            }
+
+
+            //get license type from Adoxio_licencetype entity
+            if (dynamicsApplication._adoxioLicencetypeValue != null)
+            {
+                Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
+                var adoxio_licencetype = dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
+                applicationVM.LicenceType = adoxio_licencetype.AdoxioName;
+            }
+
+
+
+
+            if (dynamicsApplication.AdoxioApplicationTypeId != null)
+            {
+                applicationVM.ApplicationType = dynamicsApplication.AdoxioApplicationTypeId.ToViewModel();
+
+                if (!string.IsNullOrEmpty(applicationVM.ApplicationType.FormReference))
+                {
+                    applicationVM.ApplicationType.DynamicsForm = dynamicsClient.GetSystemformViewModel(logger, applicationVM.ApplicationType.FormReference);
+                }
+            }
 
             return applicationVM;
         }

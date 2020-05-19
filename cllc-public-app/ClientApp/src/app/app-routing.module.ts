@@ -46,6 +46,8 @@ import { LiquorRenewalComponent } from '@components/applications/liquor-renewal/
 import { TemporaryOffsiteComponent } from '@components/temporary-offsite/temporary-offsite.component';
 import { ApplicationThirdPartyOperatorComponent } from '@components/applications/application-third-party-operator/application-third-party-operator.component';
 import { CancelThirdPartyOperatorComponent } from '@components/applications/cancel-third-party-operator/cancel-third-party-operator.component';
+import { ApplicationCovidTemporaryExtensionComponent } from '@components/applications/application-covid-temporary-extension/application-covid-temporary-extension.component';
+import { CovidConfirmationComponent } from '@components/applications/application-covid-temporary-extension/covid-confirmation/covid-confirmation.component';
 
 
 const routes: Routes = [
@@ -54,11 +56,22 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'covid-temporary-extension',
+    component: ApplicationCovidTemporaryExtensionComponent,
+    canActivate: [FeatureGuard],
+    data: { feature: 'CovidApplication' }
+  },
+  {
+    path: 'covid-confirmation',
+    component: CovidConfirmationComponent,
+    canActivate: [FeatureGuard],
+    data: { feature: 'CovidApplication' }
+  },
+  {
     path: 'org-structure',
     component: ApplicationLicenseeChangesComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-// Disabled to fix problem with duplicate save
-//    canDeactivate: [CanDeactivateGuard],
+    canDeactivate: [CanDeactivateGuard], // Comment this out if there are problems with duplicate saves
     data: { feature: 'LicenseeChanges' }
   },
   {
@@ -286,7 +299,7 @@ const routes: Routes = [
   {
     path: 'result/:data',
     component: ResultComponent,
-    data: { }
+    data: {}
   },
   {
     path: 'survey-test',

@@ -20,12 +20,15 @@ Feature: Director_shareholder_samenamechange.feature
 
 Scenario: Change director and shareholder same name 
     Given I am logged in to the dashboard as a private corporation
+    And the account is deleted
+    And I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
     And I review the organization structure
     And I modify only the director record
     And I review the organization structure
-    Then the director and shareholder name are identical 
+    And the director and shareholder name are identical
+    Then the account is deleted
 */
 
 namespace bdd_tests
@@ -34,6 +37,18 @@ namespace bdd_tests
     public sealed class DirectorShareholderSameNameChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
+        public void Given_I_view_the_dashboard(string businessType)
+        {
+            CarlaLoginNoCheck();
+        }
+
+        [And(@"the account is deleted")]
+        public void Delete_my_account()
+        {
+            this.CarlaDeleteCurrentAccount();
+        }
+
+        [And(@"I am logged in to the dashboard as a (.*)")]
         public void And_I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
@@ -105,8 +120,7 @@ namespace bdd_tests
             NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             openKeyPersonnelDOB.Click();
 
-            NgWebElement openKeyPersonnelDOB1 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-            openKeyPersonnelDOB1.Click();
+            SharedCalendarDate();
 
             // click on the Confirm button
             NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
@@ -136,8 +150,7 @@ namespace bdd_tests
             NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
             uiCalendarS1.Click();
 
-            NgWebElement uiCalendarS2 = ngDriver.FindElement(By.XPath("//*[@id='mat-datepicker-1']/div/mat-month-view/table/tbody/tr[2]/td[2]/div"));
-            uiCalendarS2.Click();
+            SharedCalendarDate();
 
             // click on the Confirm button
             NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.XPath("//td[6]/i/span"));
@@ -185,7 +198,7 @@ namespace bdd_tests
             orgInfoButton.Click();
         }
 
-        [Then(@"the director and shareholder name are identical")]
+        [And(@"the director and shareholder name are identical")]
         public void director_name_updated()
         {
             // check that the director first name has been updated
@@ -199,6 +212,12 @@ namespace bdd_tests
 
             // check that the shareholder last name has been updated
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
+        }
+
+        [Then(@"the account is deleted")]
+        public void Delete_my_account2()
+        {
+            this.CarlaDeleteCurrentAccount();
         }
     }
 }
