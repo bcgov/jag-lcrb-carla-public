@@ -13,22 +13,23 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: COVID_temporary_extension.feature
+Feature: COVID_temporary_extension_winery.feature
     As a business user who is not logged in
     I want to submit a COVID temporary extension application
+    For a Winery licence
 
 Scenario: Complete COVID Temp Extension Application
     Given I am not logged in to the Liquor and Cannabis Portal
     And I click on the COVID Temporary Extension link
-    And I complete the temporary extension application
+    And I complete the temporary extension application for a Winery licence
     And I click on the Submit button
     Then the application is submitted
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./COVID_temporary_extension.feature")]
-    public sealed class COVIDTemporaryExtension : TestBase
+    [FeatureFile("./COVID_temporary_extension_winery.feature")]
+    public sealed class COVIDTemporaryExtensionWinery : TestBase
     {
         public void CheckFeatureFlagsCOVIDTempExtension()
         {
@@ -51,7 +52,7 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}covid-temporary-extension");
         }
 
-        [And(@"I complete the temporary extension application")]
+        [And(@"I complete the temporary extension application for a Winery licence")]
         public void complete_application()
         {
             /* 
@@ -211,14 +212,16 @@ namespace bdd_tests
         [And(@"I click on the Submit button")]
         public void submit_button()
         {
-            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT APPLICATION18')]"));
+            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT APPLICATION')]"));
             submitButton.Click();
         }
 
         [Then(@"the application is submitted")]
         public void application_submitted()
         {
-            //TODO
+            System.Threading.Thread.Sleep(11000);
+
+            Assert.True(driver.FindElement(By.XPath("//body[contains(.,'Thank you for your submission.')]")).Displayed);
         }
     }
 }
