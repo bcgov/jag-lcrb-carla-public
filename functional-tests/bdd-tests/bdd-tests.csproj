@@ -44,10 +44,19 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="COVID_temporary_extension_winery.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="COVID_temporary_extension_liquor_primary_club.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="COVID_temporary_extension_liquor_primary.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="COVID_temporary_extension_validation.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="COVID_temporary_extension.feature">
+    <None Update="COVID_temporary_extension_food_primary.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2E_CRSApplication_Licence_privatecorp.feature">
