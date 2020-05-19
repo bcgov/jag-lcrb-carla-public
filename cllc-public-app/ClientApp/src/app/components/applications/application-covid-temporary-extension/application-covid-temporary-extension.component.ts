@@ -141,10 +141,10 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
         this.validationMessages = this.listControlsWithErrors(this.form, FormValidationErrorMap)
 
         // validation messages for missing files
-        if(this.floorplanDocuments.files.length == 0) {
+        if(this.floorplanDocuments.files.length === 0) {
           this.validationMessages.push("Missing Floor Plan Documents");
         }
-        if(this.lgConfirmationRequired() && this.lGConfirmationDocuments.files.length == 0){
+        if(this.lgConfirmationRequired() && this.lGConfirmationDocuments.files.length === 0){
           this.validationMessages.push("Missing Local Government or Indigenous Nation Approval")
         }        
     }
@@ -157,17 +157,16 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
             // now upload the documents.
 
             this.uploadDocumentJobs = [];           
-            if (this.floorplanDocuments && this.floorplanDocuments.files) {
+            if (this.floorplanDocuments && this.floorplanDocuments.files.length > 0) {
               this.uploadDocumentJobs.push(this.uploadDocuments(result.id, this.floorplanDocuments));
             }
-            if (this.licenseeRepresentativeNotficationFormDocuments && this.licenseeRepresentativeNotficationFormDocuments.files) {
+            if (this.licenseeRepresentativeNotficationFormDocuments && this.licenseeRepresentativeNotficationFormDocuments.files.length > 0) {
               this.uploadDocumentJobs.push(this.uploadDocuments(result.id, this.licenseeRepresentativeNotficationFormDocuments));
             }
-            if (this.lGConfirmationDocuments && this.lGConfirmationDocuments.files) {
+            if (this.lGConfirmationDocuments && this.lGConfirmationDocuments.files.length > 0) {
               this.uploadDocumentJobs.push(this.uploadDocuments(result.id, this.lGConfirmationDocuments));
             }
 
-            
             this.busy = forkJoin(this.uploadDocumentJobs).pipe()
               .subscribe(() => {
                 this.snackBar.open('Application Submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
