@@ -9,16 +9,19 @@ import { of, Observable, Subject } from 'rxjs';
 export class FeatureFlagService {
 
   private _featureFlags: Array<string> = [] // A list of all features turned ON
-  private initialized = false;
-  //public featureOn: Subject<boolean> = new Subject<boolean>();
+  public initialized = false;
 
   constructor(private featureFlagDataService: FeatureFlagDataService) {
-
-    
   }
 
   public init() {
-    
+    // need to get features here to make sure initialized will be set to true at some point
+    this.featureFlagDataService.getFeatureFlags()
+      .subscribe(featureFlags => {
+        this._featureFlags = featureFlags;
+        this.initialized = true;
+        return featureFlags;
+      });
   }
 
   getFeature(featureName: string): Observable<boolean> {
@@ -48,8 +51,8 @@ export class FeatureFlagService {
           return this.getFeature(featureName);
         }));
     }
-    
-    
-    }
-    
+
+
+  }
+
 }
