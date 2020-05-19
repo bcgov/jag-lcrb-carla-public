@@ -36,7 +36,7 @@ namespace bdd_tests
             // navigate to the feature flags page
             driver.Navigate().GoToUrl($"{baseUri}api/features");
 
-            // confirm that the COVID Temporary Extension feature flag is enabled during this test - TODO
+            // confirm that the COVID Temporary Extension feature flag is enabled during this test 
             Assert.True(driver.FindElement(By.XPath("//body[contains(.,'CovidApplication')]")).Displayed);
         }
 
@@ -79,16 +79,7 @@ namespace bdd_tests
             NgWebElement uiLicenceNumber = ngDriver.FindElement(By.XPath("//input[@type='text']"));
             uiLicenceNumber.SendKeys(licencenumber);
             
-            // select the licence type - confirm all available radio buttons are clickable
-            NgWebElement uiLicenceType = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-2']"));
-            uiLicenceType.Click();
-
-            NgWebElement uiLicenceType1 = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-3']"));
-            uiLicenceType1.Click();
-
-            NgWebElement uiLicenceType2 = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-4']"));
-            uiLicenceType2.Click();
-
+            // select the licence type for Winery
             NgWebElement uiLicenceType3 = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-5']"));
             uiLicenceType3.Click();
 
@@ -187,7 +178,7 @@ namespace bdd_tests
             uploadRepNotify2.SendKeys(repNotifyPath2);
 
             // click on the local government / first nation comments checkbox
-            NgWebElement uiLGIN = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-11']"));
+            NgWebElement uiLGIN = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-8']"));
             uiLGIN.Click();
 
             // upload a LG/IN form 
