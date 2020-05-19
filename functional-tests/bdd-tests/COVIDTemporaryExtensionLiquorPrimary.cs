@@ -36,7 +36,7 @@ namespace bdd_tests
             // navigate to the feature flags page
             driver.Navigate().GoToUrl($"{baseUri}api/features");
 
-            // confirm that the COVID Temporary Extension feature flag is enabled during this test - TODO
+            // confirm that the COVID Temporary Extension feature flag is enabled during this test
             Assert.True(driver.FindElement(By.XPath("//body[contains(.,'CovidApplication')]")).Displayed);
         }
 

@@ -79,7 +79,7 @@ namespace bdd_tests
             NgWebElement uiLicenceNumber = ngDriver.FindElement(By.XPath("//input[@type='text']"));
             uiLicenceNumber.SendKeys(licencenumber);
             
-            // select the food primary licence type - confirm all available radio buttons are clickable
+            // select the food primary licence type
             NgWebElement uiLicenceType = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-2']"));
             uiLicenceType.Click();
 
