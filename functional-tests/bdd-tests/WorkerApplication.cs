@@ -114,16 +114,16 @@ namespace bdd_tests
             openCalendar3.MoveNext();
             openCalendar3.Current.Click();
 
-            var openCalendar4 = ngDriver.FindElements(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content")).GetEnumerator();
-            openCalendar4.MoveNext();
-            openCalendar4.MoveNext();
-            openCalendar4.MoveNext();
-            openCalendar4.Current.Click();
+            //NgWebElement openCalendar4 = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
+            //openCalendar4.Click();
+            //var openCalendar4a = ngDriver.FindElements(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content")).GetEnumerator();
+            //openCalendar4a.MoveNext();
+            //openCalendar4.Current.Click();
            
-            var openCalendar5 = ngDriver.FindElements(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content")).GetEnumerator();
-            openCalendar5.MoveNext();
-            openCalendar5.MoveNext();
-            openCalendar5.Current.Click();
+            //var openCalendar5 = ngDriver.FindElements(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content")).GetEnumerator();
+            //openCalendar5.MoveNext();
+            //openCalendar5.MoveNext();
+            //openCalendar5.Current.Click();
 
             // enter the street of the mailing address
             NgWebElement uiMailingStreet = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
