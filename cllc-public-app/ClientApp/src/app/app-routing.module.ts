@@ -47,6 +47,7 @@ import { TemporaryOffsiteComponent } from '@components/temporary-offsite/tempora
 import { ApplicationThirdPartyOperatorComponent } from '@components/applications/application-third-party-operator/application-third-party-operator.component';
 import { CancelThirdPartyOperatorComponent } from '@components/applications/cancel-third-party-operator/cancel-third-party-operator.component';
 import { ApplicationCovidTemporaryExtensionComponent } from '@components/applications/application-covid-temporary-extension/application-covid-temporary-extension.component';
+import { CovidConfirmationComponent } from '@components/applications/application-covid-temporary-extension/covid-confirmation/covid-confirmation.component';
 
 
 const routes: Routes = [
@@ -56,7 +57,15 @@ const routes: Routes = [
   },
   {
     path: 'covid-temporary-extension',
-    component: ApplicationCovidTemporaryExtensionComponent
+    component: ApplicationCovidTemporaryExtensionComponent,
+    canActivate: [FeatureGuard],
+    data: { feature: 'CovidApplication' }
+  },
+  {
+    path: 'covid-confirmation',
+    component: CovidConfirmationComponent,
+    canActivate: [FeatureGuard],
+    data: { feature: 'CovidApplication' }
   },
   {
     path: 'org-structure',
