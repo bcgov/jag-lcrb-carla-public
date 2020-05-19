@@ -12,4 +12,5 @@ Scenario: Delete an individual who is both a director and shareholder
     And I review the organization structure
     And I delete only the director record
     And I review the organization structure
-    Then only the shareholder record is displayed
+    And only the shareholder record is displayed
+    Then the account is deleted
