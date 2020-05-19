@@ -145,9 +145,13 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
           if (result.id) {
             // now upload the documents.
 
-            this.uploadDocumentJobs = [];
-            this.uploadDocumentJobs.push(this.uploadDocuments(result.id, this.floorplanDocuments));
-            this.uploadDocumentJobs.push(this.uploadDocuments(result.id, this.licenseeRepresentativeNotficationFormDocuments));
+            this.uploadDocumentJobs = [];           
+            if (this.floorplanDocuments && this.floorplanDocuments.files) {
+              this.uploadDocumentJobs.push(this.uploadDocuments(result.id, this.floorplanDocuments));
+            }
+            if (this.licenseeRepresentativeNotficationFormDocuments && this.licenseeRepresentativeNotficationFormDocuments.files) {
+              this.uploadDocumentJobs.push(this.uploadDocuments(result.id, this.licenseeRepresentativeNotficationFormDocuments));
+            }
             if (this.lGConfirmationDocuments && this.lGConfirmationDocuments.files) {
               this.uploadDocumentJobs.push(this.uploadDocuments(result.id, this.lGConfirmationDocuments));
             }
