@@ -197,6 +197,7 @@ import { ApplicationThirdPartyOperatorComponent } from '@components/applications
 import { CancelThirdPartyOperatorComponent } from '@components/applications/cancel-third-party-operator/cancel-third-party-operator.component';
 import { FeatureFlagService } from './services/feature-flag.service';
 import { ApplicationCovidTemporaryExtensionComponent } from './components/applications/application-covid-temporary-extension/application-covid-temporary-extension.component';
+import { CovidConfirmationComponent } from './components/applications/application-covid-temporary-extension/covid-confirmation/covid-confirmation.component';
 
 
 @NgModule({
@@ -306,7 +307,8 @@ import { ApplicationCovidTemporaryExtensionComponent } from './components/applic
     SecurityScreeningRequirementsComponent,
     EligibilityFormComponent,
     LiquorRenewalComponent,
-    ApplicationCovidTemporaryExtensionComponent
+    ApplicationCovidTemporaryExtensionComponent,
+    CovidConfirmationComponent
   ],
   imports: [
     ChartsModule,
