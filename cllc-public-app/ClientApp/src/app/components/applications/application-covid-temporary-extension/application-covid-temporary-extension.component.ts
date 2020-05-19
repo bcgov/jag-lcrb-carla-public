@@ -8,6 +8,7 @@ import { DelayedFileUploaderComponent } from '@shared/components/delayed-file-up
 import { throwError, Observable, forkJoin } from 'rxjs';
 import { FileItem } from '../../../models/file-item.model';
 import { FileDataService } from '../../../services/file-data.service';
+import { Router } from '@angular/router';
 //import { Router } from '@angular/router';
 
 
@@ -60,7 +61,7 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
   constructor(private fb: FormBuilder,
     private applicationDataService: ApplicationDataService,
         private fileDataService: FileDataService,
-       // public router: Router,
+       public router: Router,
         private snackBar: MatSnackBar) {
     super();
   }
@@ -170,7 +171,7 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
             this.busy = forkJoin(this.uploadDocumentJobs).pipe()
               .subscribe(() => {
                 this.snackBar.open('Application Submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-               // this.router.navigateByUrl('/success');
+               this.router.navigateByUrl('/covid-confirmation');
               },
                 err => {
                   this.snackBar.open('Failed to submit application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
