@@ -58,7 +58,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return NotFound();
                 }
 
-                if (!CurrentUserHasAccessToLicenseOwnedBy(licence.AdoxioLicencee.Accountid))
+                if (!CurrentUserHasAccessToLicenseOwnedBy(licence.AdoxioLicencee.Accountid) &&
+                    !CurrentUserHasAccessToLicenseTransferredTo(licence.AdoxioProposedOwner.Accountid))
                 {
                     return Forbid();
                 }
@@ -91,7 +92,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
 
-            if (!CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid))
+            if (!CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid) &&
+                !CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioProposedOwner.Accountid))
             {
                 return Forbid();
             }
@@ -214,7 +216,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
 
-            if (!CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid))
+            if (!CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid) &&
+                !CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioProposedOwner.Accountid))
             {
                 return Forbid();
             }
@@ -256,7 +259,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
 
-            if (!CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid))
+            if (!CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid) &&
+                !CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioProposedOwner.Accountid))
             {
                 return Forbid();
             }
@@ -896,7 +900,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence",
                 "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
                 "adoxio_LicenceType",
-                "adoxio_establishment"
+                "adoxio_establishment",
+                "adoxio_ProposedOwner"
             };
 
             MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenceses.GetByKey(licenceId, expand: expand);
@@ -905,7 +910,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Error getting license.");
             }
 
-            if (CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid))
+            if (CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid) &&
+                !CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioProposedOwner.Accountid))
             {
                 var effectiveDateParam = "";
                 if (adoxioLicense.AdoxioEffectivedate.HasValue)
@@ -1074,7 +1080,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
 
-            if (!CurrentUserHasAccessToLicenseOwnedBy(licence.AdoxioLicencee.Accountid))
+            if (!CurrentUserHasAccessToLicenseOwnedBy(licence.AdoxioLicencee.Accountid) &&
+                !CurrentUserHasAccessToLicenseTransferredTo(licence.AdoxioProposedOwner.Accountid))
             {
                 return Forbid();
             }
@@ -1163,6 +1170,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // For now, check if the account id matches the user's account.
             // TODO there may be some account relationships in the future
+            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+            {
+                return userSettings.AccountId == accountId;
+            }
+
+            // if current user doesn't have an account they are probably not logged in
+            return false;
+        }
+
+        /// <summary>
+        /// Verify whether currently logged in user has access to the account of a proposed owner of a licence
+        /// </summary>
+        /// <returns>boolean</returns>
+        private bool CurrentUserHasAccessToLicenseTransferredTo(string accountId)
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // For now, check if the account id matches the user's account.
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
                 return userSettings.AccountId == accountId;
