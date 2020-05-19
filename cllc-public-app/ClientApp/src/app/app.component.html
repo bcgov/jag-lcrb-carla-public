@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="featureFlagService.initialized">
   <section class="container not-supported-browser" *ngIf="isIE()">
     <p>Internet Explorer is not supported</p>
     <p>Please use Google Chrome, Firefox or Microsoft Edge</p>
