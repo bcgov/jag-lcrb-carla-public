@@ -68,7 +68,7 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
 
   ngOnInit() {
     this.form = this.fb.group({
-      description1: ['', [Validators.required, Validators.maxLength(7)]], //this holds the licenceNumber
+      description1: ['', [Validators.required, Validators.maxLength(6)]], //this holds the licenceNumber
       licenceType: ['', [Validators.required]],
       nameOfApplicant: ['', [Validators.required]],
       establishmentName: ['', [Validators.required]],
