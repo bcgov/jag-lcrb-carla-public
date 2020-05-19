@@ -36,7 +36,7 @@ namespace bdd_tests
             driver.Navigate().GoToUrl($"{baseUri}api/features");
 
             // confirm that the COVID Temporary Extension feature flag is enabled during this test - TODO
-            //Assert.True(driver.FindElement(By.XPath("//body[contains(.,'FEATURE_COVID_APPLICATION')]")).Displayed);
+            Assert.True(driver.FindElement(By.XPath("//body[contains(.,'CovidApplication')]")).Displayed);
         }
 
         [Given(@"I am not logged in to the Liquor and Cannabis Portal")]
@@ -59,7 +59,6 @@ namespace bdd_tests
             */
 
             // create test data
-
             string licencenumber = "123456";
             string licenceename = "Point Ellis Operations";
             string estname = "Point Ellis Greenhouse";
@@ -75,11 +74,11 @@ namespace bdd_tests
             string mailingcity = "MailingCity";
             string mailingpostal = "V8V4Y3";
 
-            // complete text inputs
-
+            // enter the licence number
             NgWebElement uiLicenceNumber = ngDriver.FindElement(By.XPath("//input[@type='text']"));
             uiLicenceNumber.SendKeys(licencenumber);
             
+            // select the licence type - confirm all available radio buttons are clickable
             NgWebElement uiLicenceType = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-2']"));
             uiLicenceType.Click();
 
@@ -92,43 +91,64 @@ namespace bdd_tests
             NgWebElement uiLicenceType3 = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-5']"));
             uiLicenceType3.Click();
 
+            // enter the establishment name
             NgWebElement uiEstName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
             uiEstName.SendKeys(estname);
 
+            // enter the establishment street
             NgWebElement uiEstStreet = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
             uiEstStreet.SendKeys(eststreet);
 
+            // enter the establishment city
             NgWebElement uiEstCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
             uiEstCity.SendKeys(estcity);
 
+            // enter the establishment postal code
             NgWebElement uiEstPostal = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
             uiEstPostal.SendKeys(estpostal);
 
+            // enter the licencee name
             NgWebElement uiLicenceeName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
             uiLicenceeName.SendKeys(licenceename);
 
+            // enter the contact first name
             NgWebElement uiContactFirst = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
             uiContactFirst.SendKeys(contactfirst);
 
+            // enter the contact last name
             NgWebElement uiContactLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
             uiContactLast.SendKeys(contactlast);
 
+            // enter the contact title
             NgWebElement uiContactTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
             uiContactTitle.SendKeys(contacttitle);
 
+            // enter the contact phone number
             NgWebElement uiContactTel = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
             uiContactTel.SendKeys(contacttel);
 
+            // enter the contact email
             NgWebElement uiContactEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[11]"));
             uiContactEmail.SendKeys(contactemail);
 
+            // select mailing address 'Same as above' checkbox (and then deselect) to confirm checkbox is visible and clickable
+            NgWebElement uiSameAsAbove = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            uiSameAsAbove.Click();
+            uiSameAsAbove.Click();
+
+            // enter the mailing street
             NgWebElement uiMailingStreet = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+            uiMailingStreet.Clear();
             uiMailingStreet.SendKeys(mailingstreet);
 
+            // enter the mailing city
             NgWebElement uiMailingCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
+            uiMailingCity.Clear();
             uiMailingCity.SendKeys(mailingcity);
 
+            // enter the mailing postal code
             NgWebElement uiMailingPostal = ngDriver.FindElement(By.XPath("(//input[@type='text'])[14]"));
+            uiMailingPostal.Clear();
             uiMailingPostal.SendKeys(mailingpostal);
 
             // find the upload test files in the bdd-tests\upload_files folder
@@ -141,19 +161,49 @@ namespace bdd_tests
             NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
             uploadFloorplan.SendKeys(floorplanPath);
 
+            // remove the floor plan 
+            string delete = "Delete";
+            NgWebElement uiDeleteLink = ngDriver.FindElement(By.LinkText(delete));
+            uiDeleteLink.Click();
+
+            // upload floor plan to confirm delete/reload functionality for same document
+            string floorplanPath2 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
+            NgWebElement uploadFloorplan2 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+            uploadFloorplan2.SendKeys(floorplanPath2);
+
             // upload a representative notification form 
-            string repNotifyPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
+            string repNotifyPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "licensee_rep_notification.pdf");
             NgWebElement uploadRepNotify = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
             uploadRepNotify.SendKeys(repNotifyPath);
 
+            // delete the representative notification form
+            NgWebElement uiDeleteLink2 = ngDriver.FindElement(By.XPath("//*[@id='licenseeRepresentativeNotficationFormDocuments']/div/div/section[1]/span[2]/a"));
+            uiDeleteLink2.Click();
+            
+            // upload a new version of the representative notification form
+            string repNotifyPath2 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "licensee_rep_notification_2.pdf");
+            NgWebElement uploadRepNotify2 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+            uploadRepNotify2.SendKeys(repNotifyPath2);
+
+            // click on the local government / first nation comments checkbox
             NgWebElement uiLGIN = ngDriver.FindElement(By.XPath("//mat-radio-button[@id='mat-radio-11']"));
             uiLGIN.Click();
 
             // upload a LG/IN form 
-            string LGINPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
+            string LGINPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "LG_IN_approval.pdf");
             NgWebElement uploadLGIN = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
             uploadLGIN.SendKeys(LGINPath);
 
+            // delete the LG/IN form 
+            NgWebElement uiDeleteLink3 = ngDriver.FindElement(By.XPath("//*[@id='lGConfirmation']/div/div/section[1]/span[2]/a"));
+            uiDeleteLink3.Click();
+
+            // upload a new version of the LG/IN form
+            string LGINPath2 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "LG_IN_approval_2.pdf");
+            NgWebElement uploadLGIN2 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
+            uploadLGIN2.SendKeys(LGINPath2);
+
+            // click on the signature agreement checkbox
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
             uiSignatureAgreement.Click();
         }
