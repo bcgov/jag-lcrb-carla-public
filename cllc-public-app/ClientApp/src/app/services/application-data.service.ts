@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { DataService } from './data.service';
+import { CovidApplication } from '@models/covid-application.model';
 
 @Injectable()
 export class ApplicationDataService extends DataService {
@@ -97,6 +98,15 @@ export class ApplicationDataService extends DataService {
     return this.http.post<Application>(this.apiPath, applicationData, { headers: this.headers });
   }
 
+  /**
+   * Create a Dynamics Application For Covid
+   * @param applicationData
+   */
+  createCovidApplication(applicationData: CovidApplication): Observable<CovidApplication> {
+    // call API
+    return this.http.post<CovidApplication>(this.apiPath + 'covid', applicationData, { headers: this.headers });
+  }
+
 
   /**
    * Get a file list of documents attached to the application by ID and document type
@@ -117,4 +127,6 @@ export class ApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
 
   }
+
+
 }

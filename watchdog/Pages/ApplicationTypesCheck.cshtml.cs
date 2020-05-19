@@ -44,7 +44,7 @@ namespace Watchdog.Pages
     public class ApplicationTypesCheckModel : PageModel
     {
         private readonly IConfigurationRoot Configuration;
-        
+
 
         public ApplicationTypesCheckModel(IConfiguration configuration)
         {
@@ -57,13 +57,29 @@ namespace Watchdog.Pages
             tstFieldNames = new Dictionary<string, List<string>>();
             prdFieldNames = new Dictionary<string, List<string>>();
 
+            allFieldClasses = new Dictionary<string, Dictionary<string, string>>();
+
             devAppTypes = new Dictionary<string, MicrosoftDynamicsCRMadoxioApplicationtype>();
             tstAppTypes = new Dictionary<string, MicrosoftDynamicsCRMadoxioApplicationtype>();
-            prdAppTypes = new Dictionary<string, MicrosoftDynamicsCRMadoxioApplicationtype>();
+            prdAppTypes = new Dictionary<string, MicrosoftDynamicsCRMadoxioApplicationtype>();           
 
-            GetAppTypes ("DEV", Configuration, devAppTypes, devFieldNames, allKeys);
-            GetAppTypes ("TST", Configuration, tstAppTypes, tstFieldNames, allKeys);
-            GetAppTypes ("PRD", Configuration, prdAppTypes, prdFieldNames, allKeys);
+            Parallel.Invoke(
+                delegate() { GetAppTypes("DEV", Configuration, devAppTypes, devFieldNames, allKeys); },
+                delegate() { GetAppTypes("TST", Configuration, tstAppTypes, tstFieldNames, allKeys); },
+                delegate() { GetAppTypes("PRD", Configuration, prdAppTypes, prdFieldNames, allKeys); }
+            );
+
+            foreach (var item in allFieldNames.Keys)
+            {
+                var d = new Dictionary<string, string>();
+
+                foreach (var field in allFieldNames[item])
+                {
+                    d.Add(field, GetRowClass(devFieldNames[item].Contains(field).ToString(), tstFieldNames[item].Contains(field).ToString(), prdFieldNames[item].Contains(field).ToString()));
+                }
+
+                allFieldClasses.Add(item, d);
+            }
             
         }
 
@@ -80,6 +96,32 @@ namespace Watchdog.Pages
         public Dictionary<string, List<string>> tstFieldNames;
         public Dictionary<string, List<string>> prdFieldNames;
 
+        public Dictionary<string, Dictionary<string, string>> allFieldClasses;
+
+        // true if there is a difference
+        public bool IsDifferent (string dev, string test, string prod)
+        {
+            bool result = true;
+            if (dev == test && test == prod)
+            {
+                result = false;
+            }
+            return result;
+        }
+
+        public string GetRowClass (string dev, string test, string prod)
+        {            
+            string result;
+            if (IsDifferent(dev, test, prod))
+            {
+                result = "different";
+            }
+            else
+            {
+                result = "same";
+            }
+            return result;
+        }
 
         private void GetAppTypes (string prefix, IConfigurationRoot configuration, Dictionary<string, MicrosoftDynamicsCRMadoxioApplicationtype> appTypesDict, Dictionary<string, List<string>> envFields, List<string> allKeys)
         {
