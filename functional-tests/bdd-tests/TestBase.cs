@@ -34,6 +34,8 @@ namespace bdd_tests
 
         protected string applicationTypeShared;
 
+        protected string application_ID;
+
         protected TestBase()
         {
             string path = Directory.GetCurrentDirectory();
@@ -221,8 +223,8 @@ namespace bdd_tests
             try
             {
                 // select No using radio button
-                //NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
-                //noRadio1.Click();
+                NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
+                noRadio1.Click();
 
                 // select Yes radio button 
                 NgWebElement yesRadio1 = ngDriver.FindElement(By.Id("mat-radio-2"));
@@ -272,8 +274,8 @@ namespace bdd_tests
             try
             {
                 // select No using radio button
-                //NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
-                //noRadio2.Click();
+                NgWebElement noRadio2 = ngDriver.FindElement(By.Id("mat-radio-9"));
+                noRadio2.Click();
 
                 // select Yes using radio button
                 NgWebElement yesRadio2 = ngDriver.FindElement(By.Id("mat-radio-8"));
@@ -722,13 +724,13 @@ namespace bdd_tests
                 uiCorpContactEmail.SendKeys(corpContactEmail);
             }
 
-            /*// select 'No' for connection to a federal producer - switched off to test text areas
+            // select 'No' for connection to a federal producer - switched off to test text areas
             NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
-            corpConnectionFederalProducer.Click();*/
+            corpConnectionFederalProducer.Click();
 
             // select 'Yes' for connection to a federal producer
-            NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[1]"));
-            corpConnectionFederalProducer.Click();
+            NgWebElement corpConnectionFederalProducer2 = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[1]"));
+            corpConnectionFederalProducer2.Click();
 
             // enter the name of the federal producer and details of the connection 
             string nameAndDetails = "Name and details of federal producer (automated test).";
@@ -736,12 +738,12 @@ namespace bdd_tests
             NgWebElement uiDetailsFederalProducer = ngDriver.FindElement(By.XPath("//textarea"));
             uiDetailsFederalProducer.SendKeys(nameAndDetails);
 
-            /*// select 'No' for federal producer's connection to business - switched off to test text areas
+            // select 'No' for federal producer's connection to business - switched off to test text areas
             if ((businessTypeShared != "indigenous nation") && (businessTypeShared != "society"))
             {
                 NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
                 federalProducerConnectionToCorp.Click();
-            }*/
+            }
 
             // select 'Yes' for federal producer's connection to business
             if ((businessTypeShared != "indigenous nation") && (businessTypeShared != "society"))
@@ -1384,6 +1386,14 @@ namespace bdd_tests
             // click on the signature agreement checkbox
             NgWebElement signatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
             signatureAgree.Click();
+
+            // retrieve the current URL to get the application ID (needed downstream)
+            string URL = ngDriver.Url;
+
+            // retrieve the application ID
+            string[] parsedURL = URL.Split('/');
+
+            application_ID = parsedURL[5];
 
             // click on the Submit button
             NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
