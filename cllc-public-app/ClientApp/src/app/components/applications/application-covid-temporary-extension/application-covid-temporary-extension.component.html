@@ -38,9 +38,8 @@
             <section class="padded-section content-bottom">
 
                 <app-field label="Licence Number" [valid]="isValidOrNotTouched('description1')"
-                    errorMessage="Licence Number is a required field">
-                    <input class="form-control" type="text" maxlength="7"
-                        formControlName="description1" mask="000000">
+                    errorMessage="Licence Number is a required field and must contain 6 digits">
+                    <input class="form-control" type="text" formControlName="description1" mask="000000">
                 </app-field>
 
                 <app-field label="Licence Type" [valid]="isValidOrNotTouched('licenceType')" [showChevrons]="false"
