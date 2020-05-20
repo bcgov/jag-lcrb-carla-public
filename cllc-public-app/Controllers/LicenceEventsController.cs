@@ -47,22 +47,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> CreateLicenceEvent([FromBody] ViewModels.LicenceEvent item)
         {
             MicrosoftDynamicsCRMadoxioEvent dynamicsEvent = new MicrosoftDynamicsCRMadoxioEvent();
-            bool alwaysAuthorization;
-            try
+            if (item?.Status == LicenceEventStatus.Submitted)
             {
-                var licence = _dynamicsClient.Licenceses.GetByKey(item.LicenceId);
-                alwaysAuthorization = licence.AdoxioIseventapprovalalwaysrequired == null ? false : (bool)licence.AdoxioIseventapprovalalwaysrequired;
+                bool alwaysAuthorization;
+                try
+                {
+                    var licence = _dynamicsClient.Licenceses.GetByKey(item.LicenceId);
+                    alwaysAuthorization = licence.AdoxioIseventapprovalalwaysrequired == null ? false : (bool)licence.AdoxioIseventapprovalalwaysrequired;
+                }
+                catch (HttpOperationException ex)
+                {
+                    _logger.LogError(ex, "Error creating event");
+                    return BadRequest();
+                }
+                item.EventClass = item.DetermineEventClass(alwaysAuthorization);
+                if (item.EventClass != EventClass.Authorization)
+                {
+                    item.Status = LicenceEventStatus.Approved;
+                }
+                else
+                {
+                    item.Status = LicenceEventStatus.InReview;
+                }
             }
-            catch (HttpOperationException ex)
-            {
-                _logger.LogError(ex, "Error creating event");
-                return BadRequest();
-            }
-            item.EventClass = item.DetermineEventClass(alwaysAuthorization);
-            if (item.EventClass != EventClass.Authorization)
-            {
-                item.Status = LicenceEventStatus.Approved;
-            }
+            
             dynamicsEvent.CopyValues(item);
 
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -154,7 +162,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // not updating security plan
-            if (item.SecurityPlanSubmitted == null)
+            if (item?.SecurityPlanSubmitted == null && item?.Status == LicenceEventStatus.Submitted)
             {
                 // determine event class
                 bool alwaysAuthorization;
@@ -172,6 +180,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (item.EventClass != EventClass.Authorization)
                 {
                     item.Status = LicenceEventStatus.Approved;
+                }
+                else
+                {
+                    item.Status = LicenceEventStatus.InReview;
                 }
             }
 
