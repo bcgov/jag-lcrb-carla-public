@@ -5,10 +5,10 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
     containerTemplate(
         name: 'jnlp',
         image: '172.50.0.2:5000/yuumcs-tools/agent-dotnet',
-        resourceRequestCpu: '500m',
-        resourceLimitCpu: '1000m',
-        resourceRequestMemory: '3Gi',
-        resourceLimitMemory: '4Gi',
+        resourceRequestCpu: '1000m',
+        resourceLimitCpu: '1500m',
+        resourceRequestMemory: '4Gi',
+        resourceLimitMemory: '6Gi',
         workingDir: '/home/jenkins',
         command: '',
         args: '${computer.jnlpmac} ${computer.name}'
