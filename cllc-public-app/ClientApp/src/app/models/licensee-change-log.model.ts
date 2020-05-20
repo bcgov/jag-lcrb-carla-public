@@ -314,7 +314,7 @@ export class LicenseeChangeLog {
 
     //no errors for items being removed
     if (!this.isRemoveChangeType()) {
-      let errors = [
+      errors = [
         ...this.privateCorpFileErrors(),
         ...this.publicCorpFileErrors(),
         ...this.partnershipFileErrors(),
