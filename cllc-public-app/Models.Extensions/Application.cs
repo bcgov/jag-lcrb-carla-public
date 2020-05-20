@@ -198,6 +198,8 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             to.CopyValues(from);
 
+            to.AdoxioNameofapplicant = from.NameOfApplicant;
+
             /* 2020/5/15 - Copy values has a comment that says to not copy this fields because of a dynamics workflow
             * Including this fields for the covid application as the workflow should not be relevant ?
             */
