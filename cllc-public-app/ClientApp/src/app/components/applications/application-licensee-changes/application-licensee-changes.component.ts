@@ -221,7 +221,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     node = Object.assign(new LicenseeChangeLog(), node);
 
     errors = errors.concat(node.getFileUploadValidationErrors());
-    debugger;
+    
     node.children = node.children || [];
     node.children.forEach(child => {
       errors = errors.concat(this.validateFileUploads(child));
