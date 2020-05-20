@@ -201,10 +201,16 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
   validateFormData() {
     let errors = [];
+    let fileErrors = [];
+
+    // Only check file validation errors if changes were made
+    if (!this.thereIsExistingOrgStructure || (this.treeRoot && LicenseeChangeLog.HasChanges(this.treeRoot))) {
+      fileErrors = this.validateFileUploads(this.treeRoot);
+    }
     if (this.treeRoot) {
       errors = [
         ...this.validateNonIndividauls(this.treeRoot),
-        ...this.validateFileUploads(this.treeRoot)
+        ...fileErrors
       ]
     }
     return errors;
@@ -215,6 +221,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     node = Object.assign(new LicenseeChangeLog(), node);
 
     errors = errors.concat(node.getFileUploadValidationErrors());
+    debugger;
     node.children = node.children || [];
     node.children.forEach(child => {
       errors = errors.concat(this.validateFileUploads(child));
