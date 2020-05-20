@@ -19,7 +19,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [EnumMember(Value = "Terminated")]
         Terminated = 845280002,
         [EnumMember(Value = "Cancelled")]
-        Cancelled = 845280003
+        Cancelled = 845280003,
+        [EnumMember(Value = "Submitted")]
+        Submitted = 845280005
     }
     public enum EventType
     {

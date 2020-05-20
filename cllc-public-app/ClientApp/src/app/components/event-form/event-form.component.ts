@@ -217,7 +217,7 @@ export class EventFormComponent extends FormBase implements OnInit {
 
   save(submit = false) {
     if (submit) {
-      this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'In Review').value);
+      this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Submitted').value);
     }
 
     const schedules = this.packageUpTimeForms();
