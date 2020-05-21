@@ -19,7 +19,6 @@ Scenario: Start Application
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee
-    And I click on the licence download link
     And I request a store relocation
     And the account is deleted
     Then I see the login page
