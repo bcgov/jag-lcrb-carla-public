@@ -42,6 +42,7 @@ const ServiceHours = [
   // , '23:15', '23:30', '23:45'
 ];
 
+
 export class ApplicationHTMLContent {
   title: string;
   preamble: string;
@@ -92,7 +93,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedSitePlanDocuments: 0;
   uploadedFloorPlanDocuments: 0;
   uploadedPhotosOrRenderingsDocuments: 0;
-  uploadedZoningDocuments: 0; 
+  uploadedZoningDocuments: 0;
   dynamicsForm: DynamicsForm;
 
   constructor(private store: Store<AppState>,
@@ -156,8 +157,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       serviceHoursThursdayClose: ['', Validators.required],
       serviceHoursFridayClose: ['', Validators.required],
       serviceHoursSaturdayClose: ['', Validators.required],
-      authorizedToSubmit: [''],
-      signatureAgreement: [''],
       liquorDeclarationCheck: [''],
       applyAsIndigenousNation: [false],
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
@@ -165,7 +164,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
       applicantType: ['', Validators.required],
       description1: ['', [Validators.required]],
       proposedChange: ['', [Validators.required]],
-      connectedGrocery: ['', []]
+      connectedGrocery: ['', []],
+      authorizedToSubmit: [''],
+      signatureAgreement: [''],
     });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((applyAsIN: boolean) => {
@@ -210,7 +211,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
         this.hideFormControlByType();
 
-        this.addDynamicContent();        
+        this.addDynamicContent();
 
         if (data.applicationType.formReference) {
           console.log("Getting form layout");
@@ -248,15 +249,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
         }
         this.savedFormData = this.form.value;
 
-        
+
       },
         () => {
           console.log('Error occured');
         }
-    );
+      );
 
 
-    
+
   }
 
   private hideFormControlByType() {
@@ -285,7 +286,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (!this.application.applicationType.showHoursOfSale) {
-      this.form.get('serviceHoursSundayOpen').disable();
       this.form.get('serviceHoursMondayOpen').disable();
       this.form.get('serviceHoursTuesdayOpen').disable();
       this.form.get('serviceHoursWednesdayOpen').disable();
@@ -529,15 +529,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   isValid(): boolean {
-    // mark controls as touched
-    for (const c in this.form.controls) {
-      if (typeof (this.form.get(c).markAsTouched) === 'function') {
-        this.form.get(c).markAsTouched();
-      }
-    }
+    this.markConstrolsAsTouched(this.form);
+
     this.showValidationMessages = false;
     let valid = true;
-    this.validationMessages = [];
+    this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
 
     // handle supporting documents for sole proprietor who submit marketing applications 
     let marketing_soleprop = this.application.applicationType.name === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietor";
@@ -616,6 +612,41 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Some required fields have not been completed');
     }
     return valid && this.form.valid;
+  }
+
+  getValidationErrorMap() {
+    let errorMap = {
+      establishmentName: (_ => {
+        let control = this.getEstablishmentLabel(<ApplicationTypeNames>(this.application.applicationType.name))
+        let message = '';
+        if (this.form && this.form.get('establishmentName')) {
+          let errors = this.form.get('establishmentName').errors;
+          if (errors && errors.required) {
+            message += `${control} is required`;
+          } else if (errors && errors.forbiddenName) {
+            message += `The store name contains at least one word that doesn’t comply with naming requirements.`;
+          }
+        }
+        return message;
+      })(),
+      establishmentParcelId: 'Please enter the Parcel Identifier (format: 9 digits)',
+      contactPersonFirstName: 'Please enter the business contact\'s first name',
+      contactPersonLastName: 'Please enter the business contact\'s last name',
+      contactPersonEmail: 'Please enter the business contact\'s email address',
+      contactPersonPhone: 'Please enter the business contact\'s 10-digit phone number',
+      establishmentAddressStreet: 'Please enter the street address',
+      establishmentAddressCity: 'Please enter the city',
+      establishmentAddressPostalCode: 'Please enter the postal code',
+      establishmentEmail: 'Please enter the email address for the store',
+      establishmentPhone: 'Please enter the store phone number',
+      authorizedToSubmit: 'Please affirm that you are authorized to submit the application.',
+      signatureAgreement: 'Please affirm that all of the information provided for this application is true and complete',
+      indigenousNationId: 'Please select the Indigenous nation',
+      federalProducerNames: 'Please enter the name of federal producer',
+      description1: 'Please enter a description',
+    };
+
+    return errorMap;
   }
 
 
