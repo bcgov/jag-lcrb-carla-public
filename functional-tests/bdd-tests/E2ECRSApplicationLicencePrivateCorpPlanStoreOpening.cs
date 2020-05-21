@@ -13,10 +13,10 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: E2E_CRSApplication_Licence_privatecorp
+Feature: E2E_CRSApplication_Licence_privatecorp_plan_store_opening
     As a logged in business user
     I want to submit a CRS Application for a private corporation
-    And submit licence changes for the approved application
+    And plan the store opening for the approved application
 
 Scenario: Start Application
     Given I am logged in to the dashboard as a private corporation
@@ -36,21 +36,14 @@ Scenario: Start Application
     And I pay the licensing fee
     And I click on the licence download link
     And I plan the store opening
-    And I request a store relocation
-    And I request a valid store name or branding change
-    And I request a structural change
-    And I review the federal reports
-    And I show the store as open on the map
-    And I request a transfer of ownership
-    And I request a personnel name change
-    And I change a personnel email address
-    Then the requested applications are visible on the dashboard
+    And the account is deleted
+    Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./E2E_CRSApplication_Licence_privatecorp.feature")]
-    public sealed class E2ECRSApplicationLicencePrivateCorp : TestBase
+    [FeatureFile("./E2E_CRSApplication_Licence_privatecorp_plan_store_opening.feature")]
+    public sealed class E2ECRSApplicationLicencePrivateCorpPlanStoreOpening : TestBase
     {
         public void CheckFeatureFlagsCannabis()
         {
@@ -189,58 +182,10 @@ namespace bdd_tests
             PlanStoreOpening();
         }
 
-        [And(@"I request a store relocation")]
-        public void request_store_relocation()
+        [Then(@"I see the login page")]
+        public void I_see_login()
         {
-            RequestRelocation();
-        }
-
-        [And(@"I request a valid store name or branding change")]
-        public void request_name_branding_change()
-        {
-            StoreNameBrandingChange();
-        }
-
-        [And(@"I request a structural change")]
-        public void request_structural_change()
-        {
-            RequestStructuralChange();
-        }
-
-        [And(@"I review the federal reports")]
-        public void review_federal_reports()
-        {
-            ReviewFederalReports();
-        }
-
-        [And(@"I request a transfer of ownership")]
-        public void request_ownership_transfer()
-        {
-            RequestTransferOwnership();
-        }
-
-        [And(@"I show the store as open on the map")]
-        public void show_store_open_on_map()
-        {
-            ShowStoreOpen();
-        }
-
-        [And(@"I request a personnel name change")]
-        public void request_personnel_name_change()
-        {
-            RequestPersonnelNameChange();
-        }
-
-        [And(@"I change a personnel email address")]
-        public void request_personnel_email_change()
-        {
-            RequestPersonnelEmailChange();
-        }
-
-        [Then(@"the requested applications are visible on the dashboard")]
-        public void licences_tab_updated()
-        {
-            RequestedApplicationsOnDashboard();
+            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
     }
 }
