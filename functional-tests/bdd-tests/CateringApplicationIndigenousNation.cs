@@ -82,9 +82,7 @@ namespace bdd_tests
         [And(@"I review the organization structure")]
         public void review_org_structure()
         {
-            /* 
-            placeholder for future testing
-            */
+            ReviewOrgStructure();
         }
 
         [And(@"I submit the organization structure")]
