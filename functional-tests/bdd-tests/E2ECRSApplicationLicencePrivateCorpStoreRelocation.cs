@@ -170,12 +170,6 @@ namespace bdd_tests
             PayCRSLicenceFee();
         }
 
-        [And(@"I click on the licence download link")]
-        public void click_licence_download_link()
-        {
-            DownloadLicence();
-        }
-
         [And(@"I request a store relocation")]
         public void request_store_relocation()
         {
