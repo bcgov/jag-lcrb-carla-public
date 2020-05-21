@@ -127,7 +127,7 @@ export class WorkerDashboardComponent extends FormBase implements OnInit {
       id: this.currentUser.contactid,
       emailaddress1: email,
     });
-    this.updateContact(contact);\
+    this.updateContact(contact);
   }
 
   // take the provided contact record and update it with the changes implemented
