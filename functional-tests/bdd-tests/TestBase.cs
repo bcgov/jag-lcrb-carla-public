@@ -1732,8 +1732,6 @@ namespace bdd_tests
             // pay for the relocation application
             MakePayment();
 
-            System.Threading.Thread.Sleep(10000);
-
             // confirm correct payment amount
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
 
@@ -2019,6 +2017,8 @@ namespace bdd_tests
             /* 
             Page Title: Plan Your Store Opening
             */
+
+            System.Threading.Thread.Sleep(7000);
 
             // select checkboxes to confirm store opening details
             NgWebElement check1 = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
