@@ -81,13 +81,12 @@ export class WorkerDashboardComponent extends FormBase implements OnInit {
           {key: 'Country', value: this.currentApplication.contact.address1_country},
         ];
 
-      //// set the values of the phone and email to what we have on file.
-      //this.currentApplication.contact.
-      this.mainForm.controls['phone'].setValue(this.currentApplication.contact.mobilePhone);
-      this.mainForm.controls['email'].setValue(this.currentApplication.contact.emailaddress1);
-        
-        this.setClientSideStatus(this.currentApplication);
+        // set the values of the phone and email to what we have on file.      
+        this.mainForm.controls['phone'].setValue(this.currentApplication.contact.mobilePhone);
+        this.mainForm.controls['email'].setValue(this.currentApplication.contact.emailaddress1);
 
+        // retrieve status of the most recent application
+        this.setClientSideStatus(this.currentApplication);
         this.applicationStatus = this.getStatus(res);
         const passedApplications = res.filter(i => (<any>i).status === 'Active');
 
@@ -100,13 +99,13 @@ export class WorkerDashboardComponent extends FormBase implements OnInit {
     }
   }
 
+  // when the phone field is updated, update the contact record
   updatePhone(event: any) {
     if (event.target.value === null) {
       return false;
     }
     
     const phone = this.mainForm.controls['phone'].value;
-
     const contact = Object.assign(new Contact(), {
       id: this.currentUser.contactid,
       mobilePhone: phone
@@ -116,17 +115,7 @@ export class WorkerDashboardComponent extends FormBase implements OnInit {
     
   }
 
-  updateContact(contact: Contact) {
-
-    this.busy = forkJoin([
-      this.contactDataService.updateContact(contact)
-     
-    ])
-      .subscribe(([resp]) => {
-        contact = resp;
-      });
-  }
-
+  // when the email field is updated, update the contact record
   updateEmail(event: any) {
     if (event.target.value === null) {
       return false;
@@ -138,11 +127,22 @@ export class WorkerDashboardComponent extends FormBase implements OnInit {
       id: this.currentUser.contactid,
       emailaddress1: email,
     });
-
-    this.updateContact(contact);
-    
-   
+    this.updateContact(contact);\
   }
+
+  // take the provided contact record and update it with the changes implemented
+  updateContact(contact: Contact) {
+
+    this.busy = forkJoin([
+      this.contactDataService.updateContact(contact)
+     
+    ])
+      .subscribe(([resp]) => {
+        contact = resp;
+      });
+  }
+
+
 
   setClientSideStatus(worker: Worker) {
     worker.clientSideStatus = worker.status;

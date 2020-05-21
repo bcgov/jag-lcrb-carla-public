@@ -134,10 +134,11 @@
               </mat-table>
             </section>
             <hr>
-
+            <!-- contact information-->
             <h3>Your Contact Information:</h3>
             <p>Stay up to date with communications from LCRB regarding your Cannabis Worker Security Verification, including renewal reminders.</p>
             <form [formGroup]="mainForm">
+              <!-- changing the values here automatically updates the contact record-->
               <input class="form-control" type="text" formControlName="phone" mask="(000) 000-0000"
               placeholder="Phone Number"
               (focusout)="updatePhone($event)" style="width:250px;"> <br>
