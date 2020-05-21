@@ -43,7 +43,9 @@ RUN yum -y install wget nano Xvfb  xorg-x11-xauth java-1.8.0-openjdk git && \
 	yum -y localinstall epel-release-latest-7.noarch.rpm && \
 	yum --enablerepo=rhel-7-server-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-dotnet-rpms,rhel-7-server-optional-rpms -y localinstall google-chrome-stable_current_x86_64.rpm && \
 	rm google-chrome-stable_current_x86_64.rpm && \
-	yum -y install firefox; yum clean all
+	yum clean all -y && \
+    rm -rf /var/cache/yum/*
+#	yum -y install firefox; yum clean all
 
 # Add Chrome as a user
 RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
