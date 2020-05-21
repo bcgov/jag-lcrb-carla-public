@@ -59,7 +59,7 @@
     <None Update="COVID_temporary_extension_food_primary.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_privatecorp.feature">
+    <None Update="E2E_CRSApplication_Licence_privatecorp_plan_store_opening.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="MapView.feature">
@@ -119,7 +119,7 @@
     <None Update="LicenceCRS_society.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LicenceCRS_indigenousnation.feature">
+    <None Update="E2E_LicenceCRS_indigenousnation.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LicenceCRS_soleproprietor.feature">

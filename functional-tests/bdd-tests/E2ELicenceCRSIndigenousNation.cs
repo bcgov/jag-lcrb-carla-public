@@ -13,15 +13,25 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: LicenceCRS_indigenousnation.feature
+Feature: E2E_LicenceCRS_indigenousnation.feature
     As a logged in business user
-    I want to pay the Cannabis Retail Store Licence Fee
-    And complete the available application types
+    I want to submit a CRS Application for a private corporation
+    And submit licence changes for the approved application
 
 Scenario: Pay CRS Licence Fee and Complete Applications
-    # Given the CRS application has been approved
-    # And I am logged in to the dashboard as an indigenous nation
     Given I am logged in to the dashboard as an indigenous nation
+    And the account is deleted
+    And I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
+    And I review the account profile
+    And I review the organization structure
+    And I submit the organization structure
+    And I complete the Cannabis Retail Store application
+    And I click on the Pay for Application button
+    And I enter the payment information
+    And I return to the dashboard
+    And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee
     And I click on the licence download link
@@ -39,19 +49,99 @@ Scenario: Pay CRS Licence Fee and Complete Applications
 
 namespace bdd_tests
 {
-    [FeatureFile("./LicenceCRS_indigenousnation.feature")]
-    public sealed class LicenceCRSIndigenousNation : TestBase
+    [FeatureFile("./E2E_LicenceCRS_indigenousnation.feature")]
+    public sealed class E2ELicenceCRSIndigenousNation : TestBase
     {
-        /*[Given(@"the CRS application has been approved")]
-        public void CRS_application_is_approved()
-        {
-        }*/
-
         [Given(@"I am logged in to the dashboard as an (.*)")]
-        //[And(@"I am logged in to the dashboard as an (.*)")]
-        public void And_I_view_the_dashboard(string businessType)
+        public void Given_I_view_the_dashboard()
         {
             CarlaLoginNoCheck();
+        }
+
+        [And(@"I am logged in to the dashboard as a (.*)")]
+        public void And_I_view_the_dashboard(string businessType)
+        {
+            CarlaLogin(businessType);
+        }
+
+        [And(@"I click on the Start Application button for a Cannabis Retail Store")]
+        public void I_start_application()
+        {
+            /* 
+            Page Title: Welcome to Cannabis Licensing
+            */
+
+            // click on the Start Application button
+            NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
+            startApp_button.Click();
+        }
+
+        [And(@"I complete the eligibility disclosure")]
+        public void complete_eligibility_disclosure()
+        {
+            CRSEligibilityDisclosure();
+        }
+
+        [And(@"I review the account profile")]
+        public void review_account_profile()
+        {
+            ReviewAccountProfile();
+        }
+
+        [And(@"I review the organization structure")]
+        public void I_continue_to_organization_review()
+        {
+            ReviewOrgStructure();
+        }
+
+        [And(@"I submit the organization structure")]
+        public void submit_org_structure()
+        {
+            SubmitOrgInfoButton();
+        }
+
+        [And(@"I complete the Cannabis Retail Store application")]
+        public void I_complete_the_application()
+        {
+            CRSApplication();
+        }
+
+        [And(@"I click on the Pay for Application button")]
+        public void click_on_pay()
+        {
+            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
+            pay_button.Click();
+        }
+
+        [And(@"I enter the payment information")]
+        public void enter_payment_info()
+        {
+            MakePayment();
+        }
+
+        [And(@"I return to the dashboard")]
+        public void return_to_dashboard()
+        {
+            CRSReturnToDashboard();
+        }
+
+        [And(@"the application is approved")]
+        public void application_is_approved()
+        {
+            // navigate to api/applications/<Application ID>/process
+            driver.Navigate().GoToUrl($"{baseUri}api/applications/{application_ID}/process");
+
+            // wait for the autoamted approval process to run
+            System.Threading.Thread.Sleep(20000);
+
+            // navigate back to dashboard
+            ngDriver.Navigate().GoToUrl($"{baseUri}/dashboard");
+        }
+
+        [And(@"the account is deleted")]
+        public void Delete_my_account()
+        {
+            this.CarlaDeleteCurrentAccount();
         }
 
         [And(@"I click on the Licences tab for a (.*)")]
