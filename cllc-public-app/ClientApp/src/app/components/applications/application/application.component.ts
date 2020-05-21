@@ -168,8 +168,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       connectedGrocery: ['', []]
     });
 
-    this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: boolean) => {
-      if (value === true) {
+    this.form.get('applyAsIndigenousNation').valueChanges.subscribe((applyAsIN: boolean) => {
+      if (applyAsIN && this.application.applicationType.name === this.ApplicationTypeNames.CannabisRetailStore) {
         this.form.get('applicantType').setValue('IndigenousNation');
         this.form.get('indigenousNationId').enable();
       } else {
