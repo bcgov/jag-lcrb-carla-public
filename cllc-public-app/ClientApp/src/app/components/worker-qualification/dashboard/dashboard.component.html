@@ -14,7 +14,7 @@
 
     <p>You’ll be informed of the results of your screening.</p>-->
 
-            <h2>Security Verification Status: {{currentApplication?.clientSideStatus}}</h2>
+            <h2>Security Verification Status: <strong>{{currentApplication?.clientSideStatus}}</strong></h2>
 
             <section>
               <div *ngIf="!currentApplication">
@@ -26,6 +26,7 @@
                 <p>
                   You can save the application and return later to complete and submit it with payment.
                 </p>
+
                 <a routerLink="/worker-qualification/application/{{currentApplication?.id}}">
                   {{currentApplication?.firstname}}
                   {{currentApplication?.middlename}}
@@ -84,8 +85,8 @@
                 <!-- Column -->
                 <ng-container matColumnDef="lastUpdated">
                   <mat-header-cell *matHeaderCellDef> LAST UPDATED </mat-header-cell>
-                  <mat-cell *matCellDef="let element">
-                    {{element?.modifiedOn | date:'mediumDate'}}
+                  <mat-cell *matCellDef="let element"><strong>
+                    {{element?.modifiedOn | date:'mediumDate'}}</strong>
                   </mat-cell>
                 </ng-container>
 
@@ -132,7 +133,19 @@
                   *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
               </mat-table>
             </section>
-
+            <hr>
+            <!-- contact information-->
+            <h3>Your Contact Information:</h3>
+            <p>Stay up to date with communications from LCRB regarding your Cannabis Worker Security Verification, including renewal reminders.</p>
+            <form [formGroup]="mainForm">
+              <!-- changing the values here automatically updates the contact record-->
+              <input class="form-control" type="text" formControlName="phone" mask="(000) 000-0000"
+              placeholder="Phone Number"
+              (focusout)="updatePhone($event)" style="width:250px;"> <br>
+              <input class="form-control" type="text" formControlName="email" placeholder="Email Address"
+              (focusout)="updateEmail($event)" style="width:250px;"> <br>
+            </form>
+          
           </div>
         </section>
       </div>
@@ -152,7 +165,7 @@
           </tr>
         </table>
         <div class="information">
-          <p>The following information has been provided from Service BC for use in your Worker Qualification.</p>
+          <p>The following information has been provided by Service BC for use in your Worker Qualification:</p>
           <table mat-table [dataSource]="dataTable" style="width: 100%;">
 
             <ng-container matColumnDef="key">
