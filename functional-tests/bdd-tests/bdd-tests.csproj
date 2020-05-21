@@ -59,6 +59,9 @@
     <None Update="COVID_temporary_extension_food_primary.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="E2E_CRSApplication_Licence_privatecorp_store_relocation.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="E2E_CRSApplication_Licence_privatecorp_plan_store_opening.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
