@@ -51,7 +51,7 @@ namespace bdd_tests
             if (!string.IsNullOrEmpty(configuration["OPENSHIFT_BUILD_COMMIT"]) || !string.IsNullOrEmpty(configuration["Build.BuildNumber"]))
             {
                 Console.Out.WriteLine("Enabling Headless Mode");
-                options.AddArguments("headless", "no-sandbox", "disable-web-security", "no-zygote", "disable-gpu");
+                options.AddArguments("headless", "no-sandbox", "disable-web-security", "no-zygote", "disable-gpu", "disable-dev-shm-usage", "disable-infobars", "start-maximized", "hide-scrollbars");
                 if (!string.IsNullOrEmpty(configuration["CHROME_BINARY_LOCATION"]))
                 {
                     options.BinaryLocation = configuration["CHROME_BINARY_LOCATION"];
@@ -59,7 +59,7 @@ namespace bdd_tests
             }
             else
             {
-                options.AddArguments("--start-maximized");                                
+                options.AddArguments("start-maximized");                                
             }
 
             driver = new ChromeDriver(path, options);
@@ -499,24 +499,27 @@ namespace bdd_tests
                 uiPhysPostalCode.SendKeys(physPostalCode);
             }
 
-            /* switching off use of checkbox "Same as physical address" in order to test mailing address fields
             NgWebElement uiSameAsMailingAddress = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
-            uiSameAsMailingAddress.Click(); */
+            uiSameAsMailingAddress.Click();
+            uiSameAsMailingAddress.Click();
 
             // enter the mailing street address 1
             if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
             {
                 NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
+                uiMailingStreetAddress1.Clear();
                 uiMailingStreetAddress1.SendKeys(mailStreet1);
             }
             else if (businessTypeShared == "indigenous nation")
             {
                 NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+                uiMailingStreetAddress1.Clear();
                 uiMailingStreetAddress1.SendKeys(mailStreet1);
             }
             else
             {
                 NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+                uiMailingStreetAddress1.Clear();
                 uiMailingStreetAddress1.SendKeys(mailStreet1);
             }
 
@@ -524,16 +527,19 @@ namespace bdd_tests
             if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
             {
                 NgWebElement uiMailingStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[11]"));
+                uiMailingStreetAddress2.Clear();
                 uiMailingStreetAddress2.SendKeys(mailStreet2);
             }
             else if (businessTypeShared == "indigenous nation")
             {
                 NgWebElement uiMailingStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
+                uiMailingStreetAddress2.Clear();
                 uiMailingStreetAddress2.SendKeys(mailStreet2);
             }
             else
             {
                 NgWebElement uiMailingStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
+                uiMailingStreetAddress2.Clear();
                 uiMailingStreetAddress2.SendKeys(mailStreet2);
             }
 
@@ -541,16 +547,19 @@ namespace bdd_tests
             if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
             {
                 NgWebElement uiMailingCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+                uiMailingCity.Clear();
                 uiMailingCity.SendKeys(mailCity);
             }
             else if (businessTypeShared == "indigenous nation")
             {
                 NgWebElement uiMailingCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[11]"));
+                uiMailingCity.Clear();
                 uiMailingCity.SendKeys(mailCity);
             }
             else
             {
                 NgWebElement uiMailingCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[14]"));
+                uiMailingCity.Clear();
                 uiMailingCity.SendKeys(mailCity);
             }
 
@@ -558,16 +567,19 @@ namespace bdd_tests
             if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
             {
                 NgWebElement uiMailingProvince = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
+                uiMailingProvince.Clear();
                 uiMailingProvince.SendKeys(mailProvince);
             }
             else if (businessTypeShared == "indigenous nation")
             {
                 NgWebElement uiMailingProvince = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+                uiMailingProvince.Clear();
                 uiMailingProvince.SendKeys(mailProvince);
             }
             else
             {
                 NgWebElement uiMailingProvince = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
+                uiMailingProvince.Clear();
                 uiMailingProvince.SendKeys(mailProvince);
             }
 
@@ -575,16 +587,19 @@ namespace bdd_tests
             if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
             {
                 NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[14]"));
+                uiMailingPostalCode.Clear();
                 uiMailingPostalCode.SendKeys(mailPostalCode);
             }
             else if (businessTypeShared == "indigenous nation")
             {
                 NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
+                uiMailingPostalCode.Clear();
                 uiMailingPostalCode.SendKeys(mailPostalCode);
             }
             else
             {
                 NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[16]"));
+                uiMailingPostalCode.Clear();
                 uiMailingPostalCode.SendKeys(mailPostalCode);
             }
 
@@ -592,16 +607,19 @@ namespace bdd_tests
             if ((businessTypeShared == "partnership") || (businessTypeShared == "sole proprietorship"))
             {
                 NgWebElement uiMailingCountry = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
+                uiMailingCountry.Clear();
                 uiMailingCountry.SendKeys(mailCountry);
             }
             else if (businessTypeShared == "indigenous nation")
             {
                 NgWebElement uiMailingCountry = ngDriver.FindElement(By.XPath("(//input[@type='text'])[14]"));
+                uiMailingCountry.Clear();
                 uiMailingCountry.SendKeys(mailCountry);
             }
             else
             {
                 NgWebElement uiMailingCountry = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
+                uiMailingCountry.Clear();
                 uiMailingCountry.SendKeys(mailCountry);
             }
 
@@ -1260,6 +1278,19 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
+            }
+
+            if (businessTypeShared == "indigenous nation")
+            {
+                // find the upload test file in the bdd-tests\upload_files folder
+                var environment = Environment.CurrentDirectory;
+                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+                // upload the associates document
+                string associatesPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
+                NgWebElement uploadAssociates = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+                uploadAssociates.SendKeys(associatesPath);
             }
         }
 
