@@ -13,10 +13,10 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: E2E_CRSApplication_Licence_privatecorp_structural_change
+Feature: E2E_CRSApplication_Licence_privatecorp_personnel_name_change
     As a logged in business user
     I want to submit a CRS Application for a private corporation
-    And request a structural change for the approved application
+    And request a personnel name change for the approved application
 
 Scenario: Start Application
     Given I am logged in to the dashboard as a private corporation
@@ -34,15 +34,15 @@ Scenario: Start Application
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee
-    And I request a structural change
+    And I request a personnel name change
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./E2E_CRSApplication_Licence_privatecorp_structural_change.feature")]
-    public sealed class E2ECRSApplicationLicencePrivateCorpStructuralChange : TestBase
+    [FeatureFile("./E2E_CRSApplication_Licence_privatecorp_personnel_name_change.feature")]
+    public sealed class E2ECRSApplicationLicencePrivateCorpPersonnelNameChange : TestBase
     {
         public void CheckFeatureFlagsCannabis()
         {
@@ -169,10 +169,10 @@ namespace bdd_tests
             PayCRSLicenceFee();
         }
 
-        [And(@"I request a structural change")]
-        public void request_structural_change()
+        [And(@"I request a personnel name change")]
+        public void request_personnel_name_change()
         {
-            RequestStructuralChange();
+            RequestPersonnelNameChange();
         }
 
         [Then(@"I see the login page")]
