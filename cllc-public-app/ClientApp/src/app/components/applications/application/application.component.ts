@@ -286,18 +286,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (!this.application.applicationType.showHoursOfSale) {
-      this.form.get('serviceHoursMondayOpen').disable() 
-      this.form.get('serviceHoursTuesdayOpen').disable() 
-      this.form.get('serviceHoursWednesdayOpen').disable() 
-      this.form.get('serviceHoursThursdayOpen').disable() 
-      this.form.get('serviceHoursFridayOpen').disable() 
-      this.form.get('serviceHoursSaturdayOpen').disable() 
-      this.form.get('serviceHoursSundayClose').disable() 
-      this.form.get('serviceHoursMondayClose').disable() 
-      this.form.get('serviceHoursTuesdayClose').disable() 
-      this.form.get('serviceHoursWednesdayClose').disable() 
-      this.form.get('serviceHoursThursdayClose').disable() 
-      this.form.get('serviceHoursFridayClose').disable() 
+      this.form.get('serviceHoursMondayOpen').disable();
+      this.form.get('serviceHoursTuesdayOpen').disable();
+      this.form.get('serviceHoursWednesdayOpen').disable();
+      this.form.get('serviceHoursThursdayOpen').disable();
+      this.form.get('serviceHoursFridayOpen').disable();
+      this.form.get('serviceHoursSaturdayOpen').disable();
+      this.form.get('serviceHoursSundayClose').disable();
+      this.form.get('serviceHoursMondayClose').disable();
+      this.form.get('serviceHoursTuesdayClose').disable();
+      this.form.get('serviceHoursWednesdayClose').disable();
+      this.form.get('serviceHoursThursdayClose').disable();
+      this.form.get('serviceHoursFridayClose').disable();
       this.form.get('serviceHoursSaturdayClose').disable();
     }
 
