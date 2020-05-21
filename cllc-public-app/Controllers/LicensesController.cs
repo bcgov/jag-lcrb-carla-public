@@ -910,8 +910,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Error getting license.");
             }
 
-            if (CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid) &&
-                !CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioProposedOwner.Accountid))
+            if (CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid) ||
+                (adoxioLicense.AdoxioProposedOwner != null && CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioProposedOwner.Accountid)))
             {
                 var effectiveDateParam = "";
                 if (adoxioLicense.AdoxioEffectivedate.HasValue)
@@ -1062,7 +1062,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                return new NotFoundResult();
+                return new UnauthorizedResult();
             }
         }
 
