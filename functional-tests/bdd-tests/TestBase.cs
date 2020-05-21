@@ -51,7 +51,7 @@ namespace bdd_tests
             if (!string.IsNullOrEmpty(configuration["OPENSHIFT_BUILD_COMMIT"]) || !string.IsNullOrEmpty(configuration["Build.BuildNumber"]))
             {
                 Console.Out.WriteLine("Enabling Headless Mode");
-                options.AddArguments("headless", "no-sandbox", "disable-web-security", "no-zygote", "disable-gpu");
+                options.AddArguments("headless", "no-sandbox", "disable-web-security", "no-zygote", "disable-gpu", "disable-dev-shm-usage", "disable-infobars", "start-maximized", "hide-scrollbars");
                 if (!string.IsNullOrEmpty(configuration["CHROME_BINARY_LOCATION"]))
                 {
                     options.BinaryLocation = configuration["CHROME_BINARY_LOCATION"];
@@ -59,7 +59,7 @@ namespace bdd_tests
             }
             else
             {
-                options.AddArguments("--start-maximized");                                
+                options.AddArguments("start-maximized");                                
             }
 
             driver = new ChromeDriver(path, options);
