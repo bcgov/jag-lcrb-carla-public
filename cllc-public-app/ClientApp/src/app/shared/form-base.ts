@@ -141,12 +141,12 @@ export class FormBase implements OnDestroy {
         if (form instanceof FormGroup) {
             for (const c in form.controls) {
                 let control = form.get(c);
-                if (!control.valid) {
+                if (!control.valid && control.status !== 'DISABLED') {
                     if (control instanceof FormGroup || control instanceof FormArray) {
                         let name = parentName + c + '.';
                         list = [...list, ...this.listControlsWithErrors(control, ValidationFieldNameMap, name)];
                     } else {
-                        let message = parentName + c;
+                        let message = parentName + c + ' is not valid';
                         if (ValidationFieldNameMap[parentName + c]) {
                             message = ValidationFieldNameMap[parentName + c];
                         }
@@ -156,12 +156,12 @@ export class FormBase implements OnDestroy {
             }
         } else if (form instanceof FormArray) {
             form.controls.forEach((control, index) => {
-                if (!control.valid) {
+                if (!control.valid && control.status !== 'DISABLED') {
                     if (control instanceof FormGroup || control instanceof FormArray) {
                         let name = parentName;
                         list = [...list, ...this.listControlsWithErrors(control, ValidationFieldNameMap, name)];
                     } else {
-                        let message = parentName + ' at index ' + index;
+                        let message = parentName + ' at index ' + index + 'is not valid';
                         if (ValidationFieldNameMap[parentName]) {
                             message = ValidationFieldNameMap[parentName] + ' at index ' + index;
                         }
@@ -175,7 +175,6 @@ export class FormBase implements OnDestroy {
 
 
     public markConstrolsAsTouched(form: FormGroup | FormArray) {
-
         if (form instanceof FormGroup) {
             for (const c in form.controls) {
                 let control = form.get(c);
