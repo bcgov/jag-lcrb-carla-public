@@ -911,7 +911,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             if (CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid) &&
-                !CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioProposedOwner.Accountid))
+                (adoxioLicense.AdoxioProposedOwner != null && !CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioProposedOwner.Accountid)))
             {
                 var effectiveDateParam = "";
                 if (adoxioLicense.AdoxioEffectivedate.HasValue)
