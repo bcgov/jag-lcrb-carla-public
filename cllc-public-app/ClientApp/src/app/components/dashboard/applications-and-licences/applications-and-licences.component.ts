@@ -130,7 +130,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
             .map(item => <any>item)
             .concat(licenses.filter(item => item.licenceTypeName === ApplicationTypeNames.Marketer)).length > 0;
 
-          this.nonMarketerExists = applications.filter(item => item.applicationTypeName !== ApplicationTypeNames.Marketer)
+          this.nonMarketerExists = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.CannabisRetailStore)
             .map(item => <any>item)
             .concat(licenses.filter(item => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
 
@@ -308,6 +308,29 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       () => {
         this.snackBar.open('Error starting a Catering Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         console.log('Error starting a Catering Application');
+      }
+    );
+  }
+
+  startNewRASApplication() {
+    const newLicenceApplicationData: Application = <Application>{
+      licenseType: 'Rural Agency',
+      applicantType: this.account.businessType,
+      applicationType: <ApplicationType>{ name: ApplicationTypeNames.RAS },
+      account: this.account,
+    };
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        const route: any[] = [`/multi-step-application/${data.id}`];
+
+        route.push({ useDynamicFormMode: true });
+
+        this.router.navigate(route);
+      },
+      () => {
+        this.snackBar.open('Error starting a Rural Agency Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a Rural Agency Application');
       }
     );
   }
