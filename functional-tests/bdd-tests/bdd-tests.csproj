@@ -59,10 +59,37 @@
     <None Update="COVID_temporary_extension_food_primary.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="E2E_CRSApplication_Licence_IN_federal_reports.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_IN_name_branding_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_IN_personnel_email_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="E2E_CRSApplication_Licence_privatecorp_personnel_email_change.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="E2E_CRSApplication_Licence_IN_personnel_name_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="E2E_CRSApplication_Licence_privatecorp_personnel_name_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_IN_plan_store_opening.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_IN_show_store_on_map.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_IN_store_relocation.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_IN_structural_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_IN_transfer_ownership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2E_CRSApplication_Licence_privatecorp_transfer_ownership.feature">
