@@ -23,6 +23,8 @@
             </p>
           </section>
 
+          <h3 class="blue-header">{{getBusinessTypeName().toLocaleUpperCase()}} DETAILS</h3>
+          <!--
           <h3 *ngIf="getBusinessTypeName() === 'Partnership'" class="blue-header">DETAILS OF THE
             PARTNERSHIP</h3>
           <h3 *ngIf="getBusinessTypeName() === 'Sole Proprietor'" class="blue-header">DETAILS OF
@@ -30,17 +32,20 @@
           <h3 *ngIf="saveFormData?.businessProfile?.businessType === 'Society'" class="blue-header">SOCIETY DETAILS</h3>
           <h3 *ngIf="getBusinessTypeName() === 'Indigenous Nation'" class="blue-header">INDIGENOUS NATION DETAILS</h3>
           <h3 *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" class="blue-header"> CORPORATION DETAILS
+          <h3 *ngIf="saveFormData?.businessProfile?.businessType === 'University'" class="blue-header">UNIVERSITY DETAILS</h3>
           </h3>
+          -->
           <div formGroupName="businessProfile" class="padded-section content-bottom">
             <app-field [label]="legalNameLabel()">
               <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text" disabled
                 [value]="account?.name || ''">
             </app-field>
 
-            <app-field label="Doing Business As (DBA) Name" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">
+            <!-- We don't currently receive the DBA, so hidden-->
+            <!-- Business As (DBA) Name" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">
               <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text" disabled
                 [value]="account?.businessDBAName || ''">
-            </app-field>
+            </app-field-->
 
             <app-field label="Business Number (9 digit number from the Canada Revenue Agency)" [required]="true"
               [valid]="form.get('businessProfile.businessNumber').valid || !form.get('businessProfile.businessNumber').touched"
@@ -64,17 +69,20 @@
                 <option value="LimitedLiabilityPartnership">Limited Liability Partnership</option>
                 <option value="SoleProprietor">Sole Proprietor</option>
                 <option value="Society">Society</option>
+                <option value="University">University</option>
+                <option value="Church">Church</option>
                 <option value="IndigenousNation">Indigenous Nation</option>
               </select>
             </app-field>
 
             <section
-              *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1 && getBusinessTypeName() !== 'Indigenous Nation'">
+              *ngIf="['Partnership', 'Sole Proprietor', 'University', 'Church'].indexOf(getBusinessTypeName()) == -1 && getBusinessTypeName() !== 'Indigenous Nation'">
               <div [ngClass]="{'has-error': false}">
                 <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" for="">Incorporation
                   Number</label>
                 <label *ngIf="getBusinessTypeName() == 'Society'" for="">B.C. Society
                   Incorporation Number</label>
+                
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" id="bcIncorporationNumber"
                   formControlName="bcIncorporationNumber">
@@ -90,7 +98,7 @@
             <p></p>
 
             <section
-              *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1 && getBusinessTypeName() !== 'Indigenous Nation'">
+              *ngIf="['Partnership', 'Sole Proprietor', 'University', 'Church'].indexOf(getBusinessTypeName()) == -1 && getBusinessTypeName() !== 'Indigenous Nation'">
               <div [ngClass]="{'has-error': false}">
                 <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1">Date
                   of Incorporation in B.C.</label>
@@ -202,8 +210,8 @@
             <app-field label="Business Phone Number" [required]="true"
               [valid]="form.get('businessProfile.contactPhone').valid || !form.get('businessProfile.contactPhone').touched"
               errorMessage="Please enter the 10-digit business phone number, without including any spaces">
-              <input class="form-control" style="width: 250px;" maxlength="10"
-                (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPhone">
+              <input class="form-control" style="width: 250px;" mask="(000) 000-0000"
+                type="text" formControlName="contactPhone">
             </app-field>
 
             <app-field label="Business Email" [required]="true"
@@ -240,8 +248,8 @@
             <app-field label="Phone Number" [required]="true"
               [valid]="form.get('primarycontact.telephone1').valid || !form.get('primarycontact.telephone1').touched"
               errorMessage="Please enter the business contact's 10-digit phone number">
-              <input class="form-control" style="width: 250px;" maxlength="10"
-                (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="telephone1">
+              <input class="form-control" style="width: 250px;" mask="(000) 000-0000"  
+                type="text" formControlName="telephone1">
             </app-field>
 
             <!-- <app-field label="Phone Number (alternate)" [required]="false">

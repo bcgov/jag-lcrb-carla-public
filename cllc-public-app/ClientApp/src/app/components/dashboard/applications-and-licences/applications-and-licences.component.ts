@@ -380,6 +380,16 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     }
     return licenceType;
   }
+  
+  CRSElligible(): boolean {
+    switch(this.account.businessType) {
+      case "University":
+      case "Church":
+        return false;
+      default:
+        return true;
+    }
+  }
 }
 
 @Component({
