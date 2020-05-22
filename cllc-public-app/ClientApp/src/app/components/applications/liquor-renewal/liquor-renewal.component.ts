@@ -23,6 +23,26 @@ import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
 import { License } from '@models/license.model';
 
+const ValidationErrorMap = {
+  renewalCriminalOffenceCheck: 'Please answer question 1',
+  renewalDUI: 'Please answer question 2',
+  renewalBusinessType: 'Please answer question 3',
+  renewalShareholders: 'Please answer question 4',
+  renewalThirdParty: 'Please answer question 5',
+  renewalFloorPlan: 'Please answer question 6',
+  renewalTiedhouse: 'Please answer question 7',
+  renewalUnreportedSaleOfBusiness: 'Please answer question 8',
+  renewalValidInterest: 'Please answer question 9',
+  renewalkeypersonnel: 'Please answer question 10',
+
+  contactPersonFirstName: 'Please enter the business contact\'s first name',
+  contactPersonLastName: 'Please enter the business contact\'s last name',
+  contactPersonEmail: 'Please enter the business contact\'s email address',
+  contactPersonPhone: 'Please enter the business contact\'s 10-digit phone number',
+  authorizedToSubmit: 'Please affirm that you are authorized to submit the application',
+  signatureAgreement: 'Please affirm that all of the information provided for this application is true and complete',
+}
+
 @Component({
   selector: 'app-liquor-renewal',
   templateUrl: './liquor-renewal.component.html',
@@ -86,8 +106,8 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       renewalThirdParty: ['', Validators.required],
       renewalTiedhouse: ['', Validators.required],
       renewalUnreportedSaleOfBusiness: ['', Validators.required],
-      renewalValidInterest: ['', Validators.required], 
-      
+      renewalValidInterest: ['', Validators.required],
+
       contactPersonFirstName: ['', Validators.required],
       contactPersonLastName: ['', Validators.required],
       contactPersonRole: [''],
@@ -121,8 +141,8 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
               data.licenseSubCategory !== 'Independent Wine Store' &&
               data.licenseSubCategory !== 'Tourist Wine Store' &&
               data.licenseSubCategory !== 'Special Wine Store') {
-                this.form.addControl('ldbOrderTotals', this.fb.control('', [Validators.required, Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]));
-                this.form.addControl('ldbOrderTotalsConfirm', this.fb.control('', [Validators.required]));
+              this.form.addControl('ldbOrderTotals', this.fb.control('', [Validators.required, Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]));
+              this.form.addControl('ldbOrderTotalsConfirm', this.fb.control('', [Validators.required]));
             }
           });
         if (data.establishmentParcelId) {
@@ -159,7 +179,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   }
 
   doAction(licenseId: string, actionName: string) {
-  
+
     this.busy = this.licenceDataService.createApplicationForActionType(licenseId, actionName)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(data => {
@@ -201,8 +221,8 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
 
     if (this.form.get('ldbOrderTotals')) {
       this.licenceDataService.updateLicenceLDBOrders(this.application.assignedLicence.id, this.form.get('ldbOrderTotals').value)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(() => {});
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe(() => { });
     }
 
     return this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })
@@ -267,22 +287,14 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   }
 
   isValid(): boolean {
-    this.validationMessages = [];
+    this.showValidationMessages = false;
+    this.markConstrolsAsTouched(this.form);
+    this.validationMessages = this.listControlsWithErrors(this.form, ValidationErrorMap);
 
     if (this.form.get('ldbOrderTotals') && this.form.get('ldbOrderTotals').value !== this.form.get('ldbOrderTotalsConfirm').value) {
       this.validationMessages.push('LDB Order Totals are required');
     }
-    // mark controls as touched
-    for (const c in this.form.controls) {
-      if (typeof (this.form.get(c).markAsTouched) === 'function') {
-        this.form.get(c).markAsTouched();
-      }
-    }
-    this.showValidationMessages = false;
 
-    if (!this.form.valid) {
-      this.validationMessages.push('Some required fields have not been completed');
-    }
     return this.validationMessages.length === 0;
   }
 
