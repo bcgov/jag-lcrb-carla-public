@@ -16,6 +16,10 @@ import { LicenseDataService } from '@services/license-data.service';
 import { License } from '@models/license.model';
 import { ApplicationHTMLContent } from '../application/application.component';
 
+const ValidationErrorMap = {
+  transferConsent: 'Please consent to the transfer'
+};
+
 @Component({
   selector: 'app-application-cancel-ownership-transfer',
   templateUrl: './application-cancel-ownership-transfer.component.html',
@@ -118,21 +122,12 @@ export class ApplicationCancelOwnershipTransferComponent extends FormBase implem
 
   isValid(): boolean {
     // mark controls as touched
-    for (const c in this.form.controls) {
-      if (typeof (this.form.get(c).markAsTouched) === 'function') {
-        this.form.get(c).markAsTouched();
-      }
-    }
+    this.markConstrolsAsTouched(this.form);
     this.showValidationMessages = false;
     let valid = true;
-    this.validationMessages = [];
+    this.validationMessages = this.listControlsWithErrors(this.form, ValidationErrorMap);
 
-
-    if (!this.form.valid) {
-      valid = false;
-      this.validationMessages.push('Some required fields have not been completed');
-    }
-    return valid;
+    return this.form.valid;
   }
 
   businessTypeIsPartnership(): boolean {
