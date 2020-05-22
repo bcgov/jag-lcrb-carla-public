@@ -121,7 +121,6 @@ export class ApplicationCancelOwnershipTransferComponent extends FormBase implem
   }
 
   isValid(): boolean {
-    // mark controls as touched
     this.markConstrolsAsTouched(this.form);
     this.showValidationMessages = false;
     let valid = true;

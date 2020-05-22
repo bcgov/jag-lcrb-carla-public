@@ -16,6 +16,13 @@ import { LicenseDataService } from '@services/license-data.service';
 import { License } from '@models/license.model';
 import { ApplicationHTMLContent } from '../application/application.component';
 
+const ValidationErrorMap = {
+  "proposedOwner.accountId": 'Please select the proposed transferee',
+  transferConsent: 'Please consent to the transfer',
+  authorizedToSubmit: 'Please affirm that you are authorized to submit the application.',
+  signatureAgreement: 'Please affirm that all of the information provided for this application is true and complete.',
+};
+
 @Component({
   selector: 'app-application-ownership-transfer',
   templateUrl: './application-ownership-transfer.component.html',
@@ -58,9 +65,9 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
       establishmentParcelId: [''],
       proposedOwner: this.fb.group({
         accountId: ['', [Validators.required]],
-        accountName: [{value: '', disabled: true}],
-        contactName: [{value: '', disabled: true}],
-        businessType: [{value: '', disabled: true}],
+        accountName: [{ value: '', disabled: true }],
+        contactName: [{ value: '', disabled: true }],
+        businessType: [{ value: '', disabled: true }],
       }),
       transferConsent: ['', [this.customRequiredCheckboxValidator()]],
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
@@ -130,27 +137,12 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
   }
 
   isValid(): boolean {
-    // mark controls as touched
-    for (const c in this.form.controls) {
-      if (typeof (this.form.get(c).markAsTouched) === 'function') {
-        this.form.get(c).markAsTouched();
-      }
-    }
-    for (const c in (<FormGroup>this.form.get('proposedOwner')).controls) {
-      if (typeof (this.form.get(`proposedOwner.${c}`).markAsTouched) === 'function') {
-        this.form.get(`proposedOwner.${c}`).markAsTouched();
-      }
-    }
+    this.markConstrolsAsTouched(this.form);
     this.showValidationMessages = false;
     let valid = true;
-    this.validationMessages = [];
+    this.validationMessages = this.listControlsWithErrors(this.form, ValidationErrorMap);
 
-
-    if (!this.form.valid) {
-      valid = false;
-      this.validationMessages.push('Some required fields have not been completed');
-    }
-    return valid;
+    return this.form.valid;
   }
 
   businessTypeIsPartnership(): boolean {
