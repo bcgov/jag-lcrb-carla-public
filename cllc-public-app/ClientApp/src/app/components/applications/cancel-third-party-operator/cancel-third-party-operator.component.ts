@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBase } from '@shared/form-base';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { PaymentDataService } from '@services/payment-data.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FeatureFlagService } from '@services/feature-flag.service';
@@ -15,6 +14,10 @@ import { Account, TransferAccount } from '@models/account.model';
 import { LicenseDataService } from '@services/license-data.service';
 import { License } from '@models/license.model';
 import { ApplicationHTMLContent } from '../application/application.component';
+
+const ValidationErrorMap = {
+  transferConsent: 'Please consent to the transfer'
+};
 
 @Component({
   selector: 'app-cancel-third-party-operator',
@@ -117,22 +120,11 @@ export class CancelThirdPartyOperatorComponent extends FormBase implements OnIni
   }
 
   isValid(): boolean {
-    // mark controls as touched
-    for (const c in this.form.controls) {
-      if (typeof (this.form.get(c).markAsTouched) === 'function') {
-        this.form.get(c).markAsTouched();
-      }
-    }
+    this.markConstrolsAsTouched(this.form);
     this.showValidationMessages = false;
-    let valid = true;
-    this.validationMessages = [];
+    this.validationMessages = this.listControlsWithErrors(this.form, ValidationErrorMap);
 
-
-    if (!this.form.valid) {
-      valid = false;
-      this.validationMessages.push('Some required fields have not been completed');
-    }
-    return valid;
+    return this.form.valid;
   }
 
   businessTypeIsPartnership(): boolean {
