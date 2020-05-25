@@ -48,7 +48,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
                     {
                         return property.GetType().GetProperty(secondToken).GetValue(property, null);
                     }
-
                 }
                 else
                 {

@@ -119,6 +119,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 Status = StatusUtility.GetLicenceStatus(licence, applications),
                 AllowedActions = new List<ApplicationType>(),
                 TransferRequested = (TransferRequested?)licence.AdoxioTransferrequested,
+                ThirdPartyOperatorAccountId = licence._adoxioThirdpartyoperatoridValue,
                 TPORequested = (TPORequested?)licence.AdoxioTporequested // indicate whether a third party operator app has been requested
             };
 

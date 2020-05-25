@@ -37,9 +37,16 @@ export class LicenseDataService extends DataService {
     const url = `${this.apiPath}set-third-party-operator`;
     return this.http.post<Application>(url, {licenceId, accountId}, { headers: this.headers });
   }
+
   // cancel Third Party Operator Application for given licence
   cancelThirdPartyOperator(licenceId: string, accountId: string) {
     const url = `${this.apiPath}cancel-operator-application`;
+    return this.http.post<Application>(url, { licenceId, accountId }, { headers: this.headers });
+  }
+
+  // terminate Third Party Operator relation for given licence (after approval)
+  terminateThirdPartyOperator(licenceId: string, accountId: string) {
+    const url = `${this.apiPath}terminate-operator-relationship`;
     return this.http.post<Application>(url, { licenceId, accountId }, { headers: this.headers });
   }
 
