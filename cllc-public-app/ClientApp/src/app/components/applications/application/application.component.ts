@@ -310,6 +310,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     if (this.application.applicationType.name !== ApplicationTypeNames.CRSStructuralChange
       && this.application.applicationType.name !== ApplicationTypeNames.CRSEstablishmentNameChange) {
+        debugger;
       this.form.get('proposedChange').disable();
     }
 
@@ -628,9 +629,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Hours of sale are required');
     }
 
-    if (!this.form.valid) {
-      this.validationMessages.push('Some required fields have not been completed');
-    }
     return valid && this.form.valid;
   }
 
