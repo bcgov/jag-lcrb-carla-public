@@ -387,8 +387,7 @@
           </section>
         </div>
 
-        <mat-card *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSEstablishmentNameChange &&
-              application?.licenseType == 'Cannabis Retail Store'" class="mat-elevation-z0"
+        <mat-card *ngIf="showExteriorChangeQuestion()" class="mat-elevation-z0"
                   style="margin-bottom: 10px;">
           <section style="display: flex; justify-content: space-between; width: 100%;">
             <div class="question-label">
