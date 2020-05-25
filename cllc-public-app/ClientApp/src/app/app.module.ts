@@ -198,6 +198,7 @@ import { CancelThirdPartyOperatorComponent } from '@components/applications/canc
 import { FeatureFlagService } from './services/feature-flag.service';
 import { ApplicationCovidTemporaryExtensionComponent } from './components/applications/application-covid-temporary-extension/application-covid-temporary-extension.component';
 import { CovidConfirmationComponent } from './components/applications/application-covid-temporary-extension/covid-confirmation/covid-confirmation.component';
+import { TerminateTOPRelationshipComponent } from '@components/applications/terminate-tpo-relationship/terminate-tpo-relationship.component';
 
 
 @NgModule({
@@ -284,6 +285,7 @@ import { CovidConfirmationComponent } from './components/applications/applicatio
     ApplicationAndLicenceFeeComponent,
     ApplicationCancelOwnershipTransferComponent,
     CancelThirdPartyOperatorComponent,
+    TerminateTOPRelationshipComponent,
     ApplicationOwnershipTransferComponent,
     ApplicationThirdPartyOperatorComponent,
     ProductInventorySalesReportComponent,
