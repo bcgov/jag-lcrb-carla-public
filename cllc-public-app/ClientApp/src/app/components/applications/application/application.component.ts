@@ -399,6 +399,21 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   }
 
+  showExteriorChangeQuestion():boolean {
+    let show = this.application &&
+                (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange 
+                && this.application.licenseType === 'Cannabis Retail Store');
+
+    if(show){
+      this.form.get('proposedChange').setValidators([Validators.required]);
+      this.form.updateValueAndValidity();
+    } else {
+      this.form.get('proposedChange').setValidators([]);
+      this.form.updateValueAndValidity();
+    }
+    return show;
+  }
+
   showExteriorRenderings() {
     let show = this.application &&
       (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
