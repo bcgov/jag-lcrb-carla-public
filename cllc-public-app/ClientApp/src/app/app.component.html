@@ -1,5 +1,5 @@
-<div *ngIf="featureFlagService.initialized" *ngIf="isIE()">
-  <section class="container not-supported-browser">
+<div *ngIf="featureFlagService.initialized">
+  <section class="container not-supported-browser" *ngIf="isIE()">
     <p><i class="fab fa-internet-explorer" style="margin-right:10px;"></i>Internet Explorer is no longer supported.</p>
     <p>Please use <a href="https://google.com/chrome" target="_blank" class="IE">Google Chrome</a>, 
       <a href="https://www.mozilla.org/en-CA/firefox/new/" target="_blank" class="IE">Firefox</a> or 
