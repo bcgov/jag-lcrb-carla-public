@@ -44,7 +44,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             if (licenceId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioLicencesid"); 
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxio_licencesid"); 
             }
             if (fieldname == null)
             {
@@ -57,15 +57,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioLicencesid", licenceId);
+                tracingParameters.Add("adoxio_licencesid", licenceId);
                 tracingParameters.Add("fieldname", fieldname);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "DeleteReference", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_licences({licenceId})/{fieldname}/$ref").ToString();
-            _url = _url.Replace("{adoxio_applicationid}", System.Uri.EscapeDataString(licenceId));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_licenceses({licenceId})/{fieldname}/$ref").ToString();
+            _url = _url.Replace("{licenceId}", System.Uri.EscapeDataString(licenceId));
             _url = _url.Replace("{fieldname}", System.Uri.EscapeDataString(fieldname));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();

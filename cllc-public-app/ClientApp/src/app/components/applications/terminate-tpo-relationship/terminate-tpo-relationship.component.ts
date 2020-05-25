@@ -16,7 +16,7 @@ import { License } from '@models/license.model';
 import { ApplicationHTMLContent } from '../application/application.component';
 
 const ValidationErrorMap = {
-  transferConsent: 'Please consent to the transfer'
+  transferConsent: 'Please consent to terminate the third party operator relationship'
 };
 
 @Component({
