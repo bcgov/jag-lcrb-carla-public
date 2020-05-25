@@ -1,4 +1,4 @@
-import { TerminateTOPRelationshipComponent } from './terminate-tpo-relationship.component';
+import { TerminateTPORelationshipComponent } from './terminate-tpo-relationship.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -29,8 +29,8 @@ let matSnackBarStub: Partial<MatSnackBar>;
 let activatedRouteStub: ActivatedRouteStub;
 
 describe('ApplicationCancelOwnershipTransferComponent', () => {
-  let component: TerminateTOPRelationshipComponent;
-  let fixture: ComponentFixture<TerminateTOPRelationshipComponent>;
+  let component: TerminateTPORelationshipComponent;
+  let fixture: ComponentFixture<TerminateTPORelationshipComponent>;
 
   const account = new Account();
   account.businessType = 'PublicCorporation';
@@ -53,7 +53,7 @@ describe('ApplicationCancelOwnershipTransferComponent', () => {
     matSnackBarStub = {};
     activatedRouteStub = new ActivatedRouteStub({ applicationId: 1 });
     TestBed.configureTestingModule({
-        declarations: [TerminateTOPRelationshipComponent, FieldComponent],
+        declarations: [TerminateTPORelationshipComponent, FieldComponent],
       imports: [
         RouterTestingModule,
         HttpClientTestingModule,
@@ -76,7 +76,7 @@ describe('ApplicationCancelOwnershipTransferComponent', () => {
   }));
 
   beforeEach(() => {
-      fixture = TestBed.createComponent(TerminateTOPRelationshipComponent);
+      fixture = TestBed.createComponent(TerminateTPORelationshipComponent);
     component = fixture.debugElement.componentInstance;
     fixture.detectChanges();
   });
