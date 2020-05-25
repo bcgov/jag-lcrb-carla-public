@@ -198,9 +198,9 @@
     </section>
     <p></p>
   </div>
-  <div *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">
+  <div *ngIf="['SoleProprietor', 'University', 'Church'].indexOf(businessType) !== -1">
     <section>
-      <label for="">Does the sole proprietor have any association, connection or financial interest in a
+      <label for="">Does the {{businessType}} have any association, connection or financial interest in a
         {{licensedProducerText}} of cannabis?</label>
       <br>
       <span>This includes, but is not limited to:</span>
@@ -230,7 +230,7 @@
     <p></p>
 
     <section>
-      <label for="">Does the sole proprietor have an immediate family member that has any interest in a {{federalProducerText}}?</label>
+      <label for="">Does the {{businessType}} have an immediate family member that has any interest in a {{federalProducerText}}?</label>
       <br>
       <span>This includes, but is not limited to:</span>
       <ul>
