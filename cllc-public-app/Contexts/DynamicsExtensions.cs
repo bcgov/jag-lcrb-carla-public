@@ -517,7 +517,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public static IEnumerable<MicrosoftDynamicsCRMadoxioApplication> GetApplicationsForLicenceByApplicant(this IDynamicsClient _dynamicsClient, string applicantId)
         {
-            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType", "adoxio_ApplicationTypeId" };
+            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType", "adoxio_ApplicationTypeId", "adoxio_ThirdPartyOperatorId" };
             IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
             if (string.IsNullOrEmpty(applicantId))
             {
