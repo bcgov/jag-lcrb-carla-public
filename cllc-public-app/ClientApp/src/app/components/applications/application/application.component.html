@@ -551,6 +551,7 @@
             </div>
           </section>
         </mat-card>
+        
 
         <div class="ngtest-site-plan" *ngIf="showSitePlan()">
           <hr><br>
@@ -634,18 +635,20 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="application?.licenseType != 'Cannnabis Retail Store'">
-              <p>A scaled site plan must show the following: </p>
-              <ul>
-                <li>location of the front entrance door of the proposed establishment</li>
-                <li>
-                  any other buildings/businesses around the proposed establishment and the entrances to those buildings
-                </li>
-                <li>any relevant street names</li>
-              </ul>
-            </div>
 
           </div>
+
+          <div *ngIf="application?.licenseType != 'Cannnabis Retail Store'">
+            <p>A scaled site plan must show the following: </p>
+            <ul>
+              <li>location of the front entrance door of the proposed establishment</li>
+              <li>
+                any other buildings/businesses around the proposed establishment and the entrances to those buildings
+              </li>
+              <li>any relevant street names</li>
+            </ul>
+          </div>
+
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Site Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
                                [enableFileDeletion]="application?.applicationType?.sitePlan === FormControlState.Show"
@@ -711,7 +714,7 @@
           <mat-card class="mat-elevation-z0" style="margin-bottom: 10px;">
             <section style="display: flex; justify-content: space-between; width: 100%;">
               <div class="question-label">
-                Is the {{application?.licenseType}} store located in an eligible grocery store?
+                Will the proposed structural alteration involve removing a wall between the {{application?.licenseType}} and an eligible grocery store?
               </div>
 
               <div style="flex: 0 0 85px;">
