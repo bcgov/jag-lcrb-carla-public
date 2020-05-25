@@ -52,14 +52,14 @@
       </section>
 
 
-      <h3 class="blue-header">CONFIRM CANCELLATION OF THIRD PARTY OPERATOR RELATIONSHIP</h3>
+      <h3 class="blue-header">CONFIRM TERMINATION OF THIRD PARTY OPERATOR RELATIONSHIP</h3>
       <section class="padded-section">
         <app-field [required]="true" [valid]="isValidOrNotTouched('transferConsent')"
-          errorMessage="Please consent to the transfer" [showChevrons]="false">
+          errorMessage="Please consent to terminate third party operator relationship" [showChevrons]="false">
           <section style="display: flex">
             <input type="checkbox" formControlName="transferConsent">
             <!-- <span class="error-states">*</span> -->
-            <div style="padding-left: 10px;"> I agree to cancel the third party operator relationship for my {{licence.licenseType}} licence.
+            <div style="padding-left: 10px;"> I agree to terminate the third party operator relationship for my {{licence.licenseType}} licence.
             </div>
           </section>
         </app-field>
