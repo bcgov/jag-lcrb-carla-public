@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top538 { get; set; }
+        int? Top573 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip538 { get; set; }
+        int? Skip573 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count538 { get; set; }
+        bool? Count573 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter538 { get; set; }
+        string Filter573 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search538 { get; set; }
+        string Search573 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -248,6 +248,46 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationliquorbpfworkflowlogs Applicationliquorbpfworkflowlogs { get; }
 
         /// <summary>
+        /// Gets the IApplicationliquorbpfv2s.
+        /// </summary>
+        IApplicationliquorbpfv2s Applicationliquorbpfv2s { get; }
+
+        /// <summary>
+        /// Gets the IApplicationliquorbpfv2asyncoperations.
+        /// </summary>
+        IApplicationliquorbpfv2asyncoperations Applicationliquorbpfv2asyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IApplicationliquorbpfv2bulkdeletefailures.
+        /// </summary>
+        IApplicationliquorbpfv2bulkdeletefailures Applicationliquorbpfv2bulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IApplicationliquorbpfv2mailboxtrackingfolders.
+        /// </summary>
+        IApplicationliquorbpfv2mailboxtrackingfolders Applicationliquorbpfv2mailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the IApplicationliquorbpfv2principalobjectattributeaccesses.
+        /// </summary>
+        IApplicationliquorbpfv2principalobjectattributeaccesses Applicationliquorbpfv2principalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the IApplicationliquorbpfv2processsession.
+        /// </summary>
+        IApplicationliquorbpfv2processsession Applicationliquorbpfv2processsession { get; }
+
+        /// <summary>
+        /// Gets the IApplicationliquorbpfv2syncerrors.
+        /// </summary>
+        IApplicationliquorbpfv2syncerrors Applicationliquorbpfv2syncerrors { get; }
+
+        /// <summary>
+        /// Gets the IApplicationliquorbpfv2workflowlogs.
+        /// </summary>
+        IApplicationliquorbpfv2workflowlogs Applicationliquorbpfv2workflowlogs { get; }
+
+        /// <summary>
         /// Gets the IApplicationrelocationv1s.
         /// </summary>
         IApplicationrelocationv1s Applicationrelocationv1s { get; }
@@ -321,6 +361,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBpfadoxioapplicationadoxioapplicationliquorbpf.
         /// </summary>
         IBpfadoxioapplicationadoxioapplicationliquorbpf Bpfadoxioapplicationadoxioapplicationliquorbpf { get; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioapplicationadoxioapplicationliquorbpfv2.
+        /// </summary>
+        IBpfadoxioapplicationadoxioapplicationliquorbpfv2 Bpfadoxioapplicationadoxioapplicationliquorbpfv2 { get; }
 
         /// <summary>
         /// Gets the IBpfadoxioapplicationadoxioapplicationrelocationv1.
@@ -1803,6 +1848,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicencetypes Licencetypes { get; }
 
         /// <summary>
+        /// Gets the ILicencetypeadoxiormreviewlicencetype.
+        /// </summary>
+        ILicencetypeadoxiormreviewlicencetype Licencetypeadoxiormreviewlicencetype { get; }
+
+        /// <summary>
         /// Gets the ILicencetypemailboxtrackingfolders.
         /// </summary>
         ILicencetypemailboxtrackingfolders Licencetypemailboxtrackingfolders { get; }
@@ -1993,6 +2043,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegions Regions { get; }
 
         /// <summary>
+        /// Gets the IRegionadoxiormreviewregion.
+        /// </summary>
+        IRegionadoxiormreviewregion Regionadoxiormreviewregion { get; }
+
+        /// <summary>
         /// Gets the IRegionevents.
         /// </summary>
         IRegionevents Regionevents { get; }
@@ -2036,6 +2091,66 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IRelatedpartyprocesssession.
         /// </summary>
         IRelatedpartyprocesssession Relatedpartyprocesssession { get; }
+
+        /// <summary>
+        /// Gets the IRmreviews.
+        /// </summary>
+        IRmreviews Rmreviews { get; }
+
+        /// <summary>
+        /// Gets the IInspection.
+        /// </summary>
+        IInspection Inspection { get; }
+
+        /// <summary>
+        /// Gets the ILicencetype.
+        /// </summary>
+        ILicencetype Licencetype { get; }
+
+        /// <summary>
+        /// Gets the IRegion.
+        /// </summary>
+        IRegion Region { get; }
+
+        /// <summary>
+        /// Gets the IRmreviewasyncoperations.
+        /// </summary>
+        IRmreviewasyncoperations Rmreviewasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IRmreviewbulkdeletefailures.
+        /// </summary>
+        IRmreviewbulkdeletefailures Rmreviewbulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IRmreviewduplicatebaserecord.
+        /// </summary>
+        IRmreviewduplicatebaserecord Rmreviewduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IRmreviewduplicatematchingrecord.
+        /// </summary>
+        IRmreviewduplicatematchingrecord Rmreviewduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IRmreviewmailboxtrackingfolders.
+        /// </summary>
+        IRmreviewmailboxtrackingfolders Rmreviewmailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the IRmreviewprincipalobjectattributeaccesses.
+        /// </summary>
+        IRmreviewprincipalobjectattributeaccesses Rmreviewprincipalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the IRmreviewprocesssession.
+        /// </summary>
+        IRmreviewprocesssession Rmreviewprocesssession { get; }
+
+        /// <summary>
+        /// Gets the IRmreviewsyncerrors.
+        /// </summary>
+        IRmreviewsyncerrors Rmreviewsyncerrors { get; }
 
         /// <summary>
         /// Gets the ISettings.
@@ -2278,6 +2393,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegardingobjectidadoxioapplicationliquorbpf Regardingobjectidadoxioapplicationliquorbpf { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationliquorbpfv2.
+        /// </summary>
+        IRegardingobjectidadoxioapplicationliquorbpfv2 Regardingobjectidadoxioapplicationliquorbpfv2 { get; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioapplicationrelocationv1.
         /// </summary>
         IRegardingobjectidadoxioapplicationrelocationv1 Regardingobjectidadoxioapplicationrelocationv1 { get; }
@@ -2338,6 +2458,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegardingobjectidadoxiolicenceldbordertotalhistory Regardingobjectidadoxiolicenceldbordertotalhistory { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxiormreview.
+        /// </summary>
+        IRegardingobjectidadoxiormreview Regardingobjectidadoxiormreview { get; }
+
+        /// <summary>
         /// Gets the IBusinessunitadoxioapplicationtypefeeschedule.
         /// </summary>
         IBusinessunitadoxioapplicationtypefeeschedule Businessunitadoxioapplicationtypefeeschedule { get; }
@@ -2386,6 +2511,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBusinessunitadoxiolicenceldbordertotalhistory.
         /// </summary>
         IBusinessunitadoxiolicenceldbordertotalhistory Businessunitadoxiolicenceldbordertotalhistory { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxiormreview.
+        /// </summary>
+        IBusinessunitadoxiormreview Businessunitadoxiormreview { get; }
 
         /// <summary>
         /// Gets the IContacts.
@@ -2448,6 +2578,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IBaserecordidadoxiolicenceldbordertotalhistory Baserecordidadoxiolicenceldbordertotalhistory { get; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxiormreview.
+        /// </summary>
+        IBaserecordidadoxiormreview Baserecordidadoxiormreview { get; }
+
+        /// <summary>
         /// Gets the IDuplicaterecordidadoxioapplicationtypefeeschedule.
         /// </summary>
         IDuplicaterecordidadoxioapplicationtypefeeschedule Duplicaterecordidadoxioapplicationtypefeeschedule { get; }
@@ -2498,6 +2633,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IDuplicaterecordidadoxiolicenceldbordertotalhistory Duplicaterecordidadoxiolicenceldbordertotalhistory { get; }
 
         /// <summary>
+        /// Gets the IDuplicaterecordidadoxiormreview.
+        /// </summary>
+        IDuplicaterecordidadoxiormreview Duplicaterecordidadoxiormreview { get; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioeventemail.
         /// </summary>
         IRegardingobjectidadoxioeventemail Regardingobjectidadoxioeventemail { get; }
@@ -2516,6 +2656,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IGlobaloptionsetdefinitions.
         /// </summary>
         IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; }
+
+        /// <summary>
+        /// Gets the IIncidentadoxiormreviewinspection.
+        /// </summary>
+        IIncidentadoxiormreviewinspection Incidentadoxiormreviewinspection { get; }
 
         /// <summary>
         /// Gets the IInvoices.
@@ -2843,6 +2988,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IOrganizationadoxioapplicationliquorbpf Organizationadoxioapplicationliquorbpf { get; }
 
         /// <summary>
+        /// Gets the IOrganizationadoxioapplicationliquorbpfv2.
+        /// </summary>
+        IOrganizationadoxioapplicationliquorbpfv2 Organizationadoxioapplicationliquorbpfv2 { get; }
+
+        /// <summary>
         /// Gets the IOrganizationadoxioapplicationrelocationv1.
         /// </summary>
         IOrganizationadoxioapplicationrelocationv1 Organizationadoxioapplicationrelocationv1 { get; }
@@ -2891,6 +3041,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IObjectidadoxioapplicationliquorbpf.
         /// </summary>
         IObjectidadoxioapplicationliquorbpf Objectidadoxioapplicationliquorbpf { get; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioapplicationliquorbpfv2.
+        /// </summary>
+        IObjectidadoxioapplicationliquorbpfv2 Objectidadoxioapplicationliquorbpfv2 { get; }
 
         /// <summary>
         /// Gets the IObjectidadoxioapplicationrelocationv1.
@@ -3173,6 +3328,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IObjectidadoxiorelatedparty Objectidadoxiorelatedparty { get; }
 
         /// <summary>
+        /// Gets the IObjectidadoxiormreview.
+        /// </summary>
+        IObjectidadoxiormreview Objectidadoxiormreview { get; }
+
+        /// <summary>
         /// Gets the IObjectidadoxiosetting.
         /// </summary>
         IObjectidadoxiosetting Objectidadoxiosetting { get; }
@@ -3236,6 +3396,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILkadoxioapplicationliquorbpfactivestageid.
         /// </summary>
         ILkadoxioapplicationliquorbpfactivestageid Lkadoxioapplicationliquorbpfactivestageid { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationliquorbpfv2activestageid.
+        /// </summary>
+        ILkadoxioapplicationliquorbpfv2activestageid Lkadoxioapplicationliquorbpfv2activestageid { get; }
 
         /// <summary>
         /// Gets the ILkadoxioapplicationrelocationv1activestageid.
@@ -3336,6 +3501,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILkadoxioapplicationliquorbpfmodifiedonbehalfby.
         /// </summary>
         ILkadoxioapplicationliquorbpfmodifiedonbehalfby Lkadoxioapplicationliquorbpfmodifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationliquorbpfv2createdby.
+        /// </summary>
+        ILkadoxioapplicationliquorbpfv2createdby Lkadoxioapplicationliquorbpfv2createdby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationliquorbpfv2createdonbehalfby.
+        /// </summary>
+        ILkadoxioapplicationliquorbpfv2createdonbehalfby Lkadoxioapplicationliquorbpfv2createdonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationliquorbpfv2modifiedby.
+        /// </summary>
+        ILkadoxioapplicationliquorbpfv2modifiedby Lkadoxioapplicationliquorbpfv2modifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationliquorbpfv2modifiedonbehalfby.
+        /// </summary>
+        ILkadoxioapplicationliquorbpfv2modifiedonbehalfby Lkadoxioapplicationliquorbpfv2modifiedonbehalfby { get; }
 
         /// <summary>
         /// Gets the ILkadoxioapplicationrelocationv1createdby.
@@ -3598,6 +3783,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILkadoxiolicenceldbordertotalhistorymodifiedonbehalfby Lkadoxiolicenceldbordertotalhistorymodifiedonbehalfby { get; }
 
         /// <summary>
+        /// Gets the ILkadoxiormreviewcreatedby.
+        /// </summary>
+        ILkadoxiormreviewcreatedby Lkadoxiormreviewcreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiormreviewcreatedonbehalfby.
+        /// </summary>
+        ILkadoxiormreviewcreatedonbehalfby Lkadoxiormreviewcreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiormreviewmodifiedby.
+        /// </summary>
+        ILkadoxiormreviewmodifiedby Lkadoxiormreviewmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiormreviewmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxiormreviewmodifiedonbehalfby Lkadoxiormreviewmodifiedonbehalfby { get; }
+
+        /// <summary>
         /// Gets the IUseradoxioapplicationtypefeeschedule.
         /// </summary>
         IUseradoxioapplicationtypefeeschedule Useradoxioapplicationtypefeeschedule { get; }
@@ -3646,6 +3851,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IUseradoxiolicenceldbordertotalhistory.
         /// </summary>
         IUseradoxiolicenceldbordertotalhistory Useradoxiolicenceldbordertotalhistory { get; }
+
+        /// <summary>
+        /// Gets the IUseradoxiormreview.
+        /// </summary>
+        IUseradoxiormreview Useradoxiormreview { get; }
 
         /// <summary>
         /// Gets the IContacttask.
@@ -3713,6 +3923,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ITeamadoxiolicenceldbordertotalhistory Teamadoxiolicenceldbordertotalhistory { get; }
 
         /// <summary>
+        /// Gets the ITeamadoxiormreview.
+        /// </summary>
+        ITeamadoxiormreview Teamadoxiormreview { get; }
+
+        /// <summary>
         /// Gets the IAsyncoperationidadoxioapplicationlicenseechangesv10.
         /// </summary>
         IAsyncoperationidadoxioapplicationlicenseechangesv10 Asyncoperationidadoxioapplicationlicenseechangesv10 { get; }
@@ -3721,6 +3936,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAsyncoperationidadoxioapplicationliquorbpf.
         /// </summary>
         IAsyncoperationidadoxioapplicationliquorbpf Asyncoperationidadoxioapplicationliquorbpf { get; }
+
+        /// <summary>
+        /// Gets the IAsyncoperationidadoxioapplicationliquorbpfv2.
+        /// </summary>
+        IAsyncoperationidadoxioapplicationliquorbpfv2 Asyncoperationidadoxioapplicationliquorbpfv2 { get; }
 
         /// <summary>
         /// Gets the IAsyncoperationidadoxioapplicationrelocationv1.
@@ -3751,6 +3971,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILkadoxioapplicationliquorbpfprocessid.
         /// </summary>
         ILkadoxioapplicationliquorbpfprocessid Lkadoxioapplicationliquorbpfprocessid { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationliquorbpfv2processid.
+        /// </summary>
+        ILkadoxioapplicationliquorbpfv2processid Lkadoxioapplicationliquorbpfv2processid { get; }
 
         /// <summary>
         /// Gets the ILkadoxioapplicationrelocationv1processid.
