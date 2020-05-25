@@ -24,7 +24,7 @@ const ValidationErrorMap = {
   templateUrl: './terminate-tpo-relationship.component.html',
   styleUrls: ['./terminate-tpo-relationship.component.scss']
 })
-export class TerminateTOPRelationshipComponent extends FormBase implements OnInit {
+export class TerminateTPORelationshipComponent extends FormBase implements OnInit {
   licence: License;
   form: FormGroup;
   licenceId: string;
