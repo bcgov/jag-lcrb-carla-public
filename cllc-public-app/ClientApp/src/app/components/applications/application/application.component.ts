@@ -379,7 +379,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showSitePlan(): boolean {
     let show = this.application
       && this.application.applicationType
-      && this.showFormControl(this.application.applicationType.sitePlan);
+      && (this.showFormControl(this.application.applicationType.sitePlan) 
+        || this.showFormControl(this.application.applicationType.showLiquorSitePlan));
 
     if (this.application && this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange) {
       show = this.showFormControl(this.application.applicationType.sitePlan)
@@ -388,6 +389,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     return show;
   }
+
 
   showZoning(): boolean {
     let show = this.application
