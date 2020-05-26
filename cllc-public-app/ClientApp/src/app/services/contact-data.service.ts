@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
-import { Contact, PHSContact } from '@models/contact.model';
+import { Contact, PHSContact, CASSContact } from '@models/contact.model';
 import { DataService } from './data.service';
 import { catchError } from 'rxjs/operators';
 
@@ -30,6 +30,11 @@ export class ContactDataService extends DataService {
     .pipe(catchError(this.handleError));
   }
 
+  public getContactByCassToken(token: string) {
+    return this.http.get<CASSContact>(`${this.apiPath}cass/${encodeURIComponent(token)}`, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   public createContact(contact: Contact) {
     return this.http.post<Contact>(this.apiPath, contact, { headers: this.headers })
     .pipe(catchError(this.handleError));
@@ -44,8 +49,8 @@ export class ContactDataService extends DataService {
     .pipe(catchError(this.handleError));
   }
 
-  public updatePHSContact(contact: Contact, token: string) {
-    return this.http.put<Contact>(this.apiPath + 'phs/' + encodeURIComponent(token), contact, { headers: this.headers })
+  public updateContactByToken(contact: Contact, token: string) {
+    return this.http.put<Contact>(this.apiPath + 'security-screening/' + encodeURIComponent(token), contact, { headers: this.headers })
     .pipe(catchError(this.handleError));
   }
 

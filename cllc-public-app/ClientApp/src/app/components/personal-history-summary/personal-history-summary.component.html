@@ -117,18 +117,18 @@
             <div formGroupName="contact" class="padded-section border-around">
                 <address class="row">
                     <app-field class="col-md-12 col-xs-12" label="Address" [required]="true"
-                        errorMessage="Plaese enter Address"
+                        errorMessage="Please enter Address"
                         [valid]="!form.get('contact.address1_line1').touched || form.get('contact.address1_line1').valid"
                         [isFullWidth]="true">
                         <input class="form-control" type="text" formControlName="address1_line1">
                     </app-field>
                     <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true"
-                        errorMessage="Plaese enter City" [required]="true"
+                        errorMessage="Please enter City" [required]="true"
                         [valid]="!form.get('contact.address1_city').touched || form.get('contact.address1_city').valid">
                         <input class="form-control" type="text" formControlName="address1_city">
                     </app-field>
                     <section class="col-md-4 col-xs-12">
-                        <app-field label="Province/State" [isFullWidth]="true" errorMessage="Plaese enter Province"
+                        <app-field label="Province/State" [isFullWidth]="true" errorMessage="Please enter Province"
                             [required]="true"
                             [valid]="!form.get('contact.address1_stateorprovince').touched || form.get('contact.address1_stateorprovince').valid">
                             <input class="form-control" type="text" formControlName="address1_stateorprovince"
@@ -136,13 +136,13 @@
                         </app-field>
                     </section>
                     <section class="col-md-4 col-xs-12">
-                        <app-field label="Postal Code" errorMessage="Plaese enter Postal Code" [required]="true"
+                        <app-field label="Postal Code" errorMessage="Please enter Postal Code" [required]="true"
                             [valid]="!form.get('contact.address1_postalcode').touched || form.get('contact.address1_postalcode').valid">
                             <input class="form-control" type="text" formControlName="address1_postalcode">
                         </app-field>
                     </section>
                     <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true"
-                        errorMessage="Plaese enter Country" [required]="true"
+                        errorMessage="Please enter Country" [required]="true"
                         [valid]="!form.get('contact.address1_country').touched || form.get('contact.address1_country').valid">
                         <input formControlName="address1_country" class="form-control" autocomplete="country-name"
                             type="text" value="Canada">

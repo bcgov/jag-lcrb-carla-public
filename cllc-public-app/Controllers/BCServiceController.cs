@@ -9,6 +9,14 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Net;
 using Microsoft.Extensions.Hosting;
+using Gov.Lclb.Cllb.Interfaces;
+using Microsoft.Rest;
+using Gov.Lclb.Cllb.Interfaces.Models;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using System.Globalization;
+using Gov.Lclb.Cllb.Public.ViewModels;
+using System.Web;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -20,17 +28,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IWebHostEnvironment _env;
         private readonly SiteMinderAuthOptions _options = new SiteMinderAuthOptions();
         private readonly string _encryptionKey;
+        private readonly IDynamicsClient _dynamicsClient;
+        private readonly ILogger _logger;
 
-        public BCServiceController(IConfiguration configuration, IWebHostEnvironment env)
+        public BCServiceController(IConfiguration configuration, IWebHostEnvironment env, IDynamicsClient dynamicsClient, ILoggerFactory loggerFactory)
         {
             _configuration = configuration;
             _env = env;
             _encryptionKey = _configuration["ENCRYPTION_KEY"];
+            _logger = loggerFactory.CreateLogger(typeof(ContactController));
+            _dynamicsClient = dynamicsClient;
         }
 
         [HttpGet]
         [Authorize]
-        public ActionResult BCServiceLogin(string path, string code)
+        public async Task<IActionResult> BCServiceLogin(string path, string code)
         {
             // check to see if we have a local path.  (do not allow a redirect to another website)
             if (!string.IsNullOrEmpty(path) && (Url.IsLocalUrl(path) || (!_env.IsProduction() && path.Equals("headers"))))
@@ -49,8 +61,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 if (string.IsNullOrEmpty(_configuration["ENABLE_SERVICECARD_TOKEN_TEST"]))
                 {
-                    string basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "" : _configuration["BASE_PATH"];
-                    basePath += "/worker-qualification/dashboard";
+                    string basePath = GetRedirectPath(_configuration, path, code);
                     return Redirect(basePath);
                 }
                 else
@@ -119,10 +130,40 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             );
 
-            string basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "" : _configuration["BASE_PATH"];
-            basePath += "/worker-qualification/dashboard";
+            string path = HttpUtility.ParseQueryString(Request.QueryString.ToString()).Get("path");
+            string code = HttpUtility.ParseQueryString(Request.QueryString.ToString()).Get("code");
+            string basePath = GetDevRedirectPath(_configuration, path, code);
             return Redirect(basePath);
         }
 
+        private string GetRedirectPath(IConfiguration configuration, string path, string code)
+        {
+            string basePath = string.IsNullOrEmpty(configuration["BASE_PATH"]) ? "" : configuration["BASE_PATH"];
+            if (path.Equals("cannabis-associate-screening"))
+            {
+                basePath += "/cannabis-associate-screening/" + code;
+            }
+            else
+            {
+                basePath += "/worker-qualification/dashboard";
+            }
+
+            return basePath;
+        }
+
+        private string GetDevRedirectPath(IConfiguration configuration, string path, string code)
+        {
+            string basePath = string.IsNullOrEmpty(configuration["BASE_PATH"]) ? "" : configuration["BASE_PATH"];
+            if (path.Equals("cannabis-associate-screening"))
+            {
+                basePath += $"/bcservice?path={path}&code={code}";
+            }
+            else
+            {
+                basePath += "/worker-qualification/dashboard";
+            }
+
+            return basePath;
+        }
     }
 }

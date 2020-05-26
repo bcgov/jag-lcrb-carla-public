@@ -18,6 +18,11 @@ using Gov.Lclb.Cllb.Services.FileManager;
 using System.Collections.Generic;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Extensions.Configuration;
+using Gov.Lclb.Cllb.Public.ViewModels;
+using System.Web;
+using Gov.Lclb.Cllb.Public.Utility;
+using Microsoft.Rest;
+using System.Collections.Specialized;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {
@@ -70,6 +75,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             SiteMinderUniversalIdKey = ConstSiteMinderUniversalIdKey;
             SiteMinderUserNameKey = ConstSiteMinderUserNameKey;
             SiteMinderUserDisplayNameKey = ConstSiteMinderUserDisplayNameKey;
+            SiteMinderBusinessLegalNameKey = ConstSiteMinderBusinessLegalNameKey;
             SiteMinderUserTypeKey = ConstSiteMinderUserType;
             SiteMinderBirthDate = ConstSiteMinderBirthDate;
             MissingSiteMinderUserIdError = ConstMissingSiteMinderUserIdError;
@@ -126,6 +132,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         ///User's Type (BCeID or BC services card)
         /// </summary>
         public string SiteMinderUserTypeKey { get; set; }
+
+        /// <summary>
+        /// Business Legal Name Key
+        /// </summary>
+        public string SiteMinderBusinessLegalNameKey { get; set; }
 
         /// <summary>
         /// BC Service Card - Birth Date field.
@@ -209,6 +220,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
     public class SiteminderAuthenticationHandler : AuthenticationHandler<SiteMinderAuthOptions>
     {
         private readonly ILogger _logger;
+        private readonly SiteMinderAuthOptions _options;
+        private IDynamicsClient _dynamicsClient;
 
         /// <summary>
         /// Siteminder Authentication Constructir
@@ -221,6 +234,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             : base(configureOptions, loggerFactory, encoder, clock)
         {
             _logger = loggerFactory.CreateLogger(typeof(SiteminderAuthenticationHandler));
+            _options = new SiteMinderAuthOptions();
         }
 
         /// <summary>
@@ -232,96 +246,34 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             // get siteminder headers
             _logger.LogDebug("Parsing the HTTP headers for SiteMinder authentication credential");
 
-            SiteMinderAuthOptions options = new SiteMinderAuthOptions();
-            bool isDeveloperLogin = false;
-            bool isBCSCDeveloperLogin = false;
+
+            string userId = null;
+            string devCompanyId = null;
+            string siteMinderGuid = "";
+            string siteMinderBusinessGuid = "";
+            string siteMinderUserType = "";
+
             try
             {
                 ClaimsPrincipal principal;
                 HttpContext context = Request.HttpContext;
-
-                IConfiguration _configuration = (IConfiguration)context.RequestServices.GetService(typeof(IConfiguration));
-
-                IDynamicsClient _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
-
-                FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));              
-
-                IWebHostEnvironment hostingEnv = (IWebHostEnvironment)context.RequestServices.GetService(typeof(IWebHostEnvironment));
-
                 UserSettings userSettings = new UserSettings();
 
+                IConfiguration _configuration = (IConfiguration)context.RequestServices.GetService(typeof(IConfiguration));
+                _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
+                FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
+                IWebHostEnvironment hostingEnv = (IWebHostEnvironment)context.RequestServices.GetService(typeof(IWebHostEnvironment));
+
+                // Fail if login disabled
                 if (!string.IsNullOrEmpty(_configuration["FEATURE_DISABLE_LOGIN"]))
                 {
-                    return AuthenticateResult.Fail(options.LoginDisabledError);
+                    return AuthenticateResult.Fail(_options.LoginDisabledError);
                 }
 
-                string userId = null;
-                string devCompanyId = null;
-                string siteMinderGuid = "";
-                string siteMinderBusinessGuid = "";
-                string siteMinderUserType = "";
-
-                // **************************************************
-                // If this is an Error or Authentiation API - Ignore
-                // **************************************************
-                string url = context.Request.GetDisplayUrl().ToLower();
-
-                if (url.Contains(".js"))
+                // Fail if coming from JS
+                if (context.Request.GetDisplayUrl().ToLower().Contains(".js"))
                 {
                     return AuthenticateResult.NoResult();
-                }
-
-                // **************************************************
-                // Check if we have a Dev Environment Cookie
-                // **************************************************
-                if (!hostingEnv.IsProduction())
-                {
-                    // check for a fake BCeID login in dev mode
-                    string temp = context.Request.Cookies[options.DevAuthenticationTokenKey];
-
-                    if (string.IsNullOrEmpty(temp)) // could be an automated test user.
-                    {
-                        temp = context.Request.Headers["DEV-USER"];
-                    }
-
-                    if (!string.IsNullOrEmpty(temp))
-                    {
-                        if (temp.Contains("::"))
-                        {
-                            var temp2 = temp.Split("::");
-                            userId = temp2[0];
-                            if (temp2.Length >= 2)
-                                devCompanyId = temp2[1];
-                            else
-                                devCompanyId = temp2[0];
-                        }
-                        else
-                        {
-                            userId = temp;
-                            devCompanyId = temp;
-                        }
-                        isDeveloperLogin = true;
-
-                        _logger.LogDebug("Got user from dev cookie = " + userId + ", company = " + devCompanyId);
-                    }
-                    else
-                    {
-                        // same set of tests for a BC Services Card dev login
-                        temp = context.Request.Cookies[options.DevBCSCAuthenticationTokenKey];
-
-                        if (string.IsNullOrEmpty(temp)) // could be an automated test user.
-                        {
-                            temp = context.Request.Headers["DEV-BCSC-USER"];
-                        }
-
-                        if (!string.IsNullOrEmpty(temp))
-                        {
-                            userId = temp;
-                            isBCSCDeveloperLogin = true;
-
-                            _logger.LogDebug("Got user from dev cookie = " + userId);
-                        }
-                    }
                 }
 
                 // **************************************************
@@ -345,126 +297,110 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                      !string.IsNullOrEmpty(userSettings.UserId) && userSettings.UserId == userId))
                 {
                     _logger.LogDebug("User already authenticated with active session: " + userSettings.UserId);
-                    principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme, userSettings.UserType);
+                    principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(_options.Scheme, userSettings.UserType);
                     return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
                 }
 
-                string smgov_userdisplayname = context.Request.Headers["smgov_userdisplayname"];
-                if (!string.IsNullOrEmpty(smgov_userdisplayname))
+                // **************************************************
+                // Check if we have a Dev Environment Cookie
+                // **************************************************
+                if (!hostingEnv.IsProduction() &&
+                    (!string.IsNullOrEmpty(context.Request.Cookies[_options.DevAuthenticationTokenKey]) ||
+                    !string.IsNullOrEmpty(context.Request.Cookies[_options.DevBCSCAuthenticationTokenKey]) ||
+                    !string.IsNullOrEmpty(context.Request.Headers[_options.DevAuthenticationTokenKey]) ||
+                    !string.IsNullOrEmpty(context.Request.Headers[_options.DevBCSCAuthenticationTokenKey]))
+                )
                 {
-                    userSettings.UserDisplayName = smgov_userdisplayname;
-                }
-
-                string smgov_businesslegalname = context.Request.Headers["smgov_businesslegalname"];
-                if (!string.IsNullOrEmpty(smgov_businesslegalname))
-                {
-                    userSettings.BusinessLegalName = smgov_businesslegalname;
+                    try
+                    {
+                        return await LoginDevUser(context, _dynamicsClient);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogInformation(ex.Message);
+                        _logger.LogInformation("Couldn't successfully login as dev user - continuing as regular user");
+                    }
                 }
 
                 // **************************************************
                 // Authenticate based on SiteMinder Headers
                 // **************************************************
                 _logger.LogDebug("Parsing the HTTP headers for SiteMinder authentication credential");
+                _logger.LogDebug("Getting user data from headers");
 
-                // At this point userID would only be set if we are logging in through as a DEV user
+                if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderUserIdentifierKey]))
+                {
+                    userSettings.UserDisplayName = context.Request.Headers[_options.SiteMinderUserIdentifierKey];
+                }
 
+                if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderBusinessLegalNameKey]))
+                {
+                    userSettings.BusinessLegalName = context.Request.Headers[_options.SiteMinderBusinessLegalNameKey];
+                }
+
+                userId = context.Request.Headers[_options.SiteMinderUserNameKey];
                 if (string.IsNullOrEmpty(userId))
                 {
-                    _logger.LogDebug("Getting user data from headers");
-
-                    userId = context.Request.Headers[options.SiteMinderUserNameKey];
-                    if (string.IsNullOrEmpty(userId))
-                    {
-                        userId = context.Request.Headers[options.SiteMinderUniversalIdKey];
-                    }
-
-                    siteMinderGuid = context.Request.Headers[options.SiteMinderUserGuidKey];
-                    siteMinderBusinessGuid = context.Request.Headers[options.SiteMinderBusinessGuidKey];
-                    siteMinderUserType = context.Request.Headers[options.SiteMinderUserTypeKey];
-
-
-                    // **************************************************
-                    // Validate credentials
-                    // **************************************************
-                    if (string.IsNullOrEmpty(userId))
-                    {
-                        _logger.LogDebug(options.MissingSiteMinderUserIdError);
-                        return AuthenticateResult.Fail(options.MissingSiteMinderGuidError);
-                    }
-
-                    if (string.IsNullOrEmpty(siteMinderGuid))
-                    {
-                        _logger.LogDebug(options.MissingSiteMinderGuidError);
-                        return AuthenticateResult.Fail(options.MissingSiteMinderGuidError);
-                    }
-                    if (string.IsNullOrEmpty(siteMinderUserType))
-                    {
-                        _logger.LogDebug(options.MissingSiteMinderUserTypeError);
-                        return AuthenticateResult.Fail(options.MissingSiteMinderUserTypeError);
-                    }
+                    userId = context.Request.Headers[_options.SiteMinderUniversalIdKey];
                 }
-                else // DEV user, setup a fake session and SiteMinder headers.
+
+                siteMinderGuid = context.Request.Headers[_options.SiteMinderUserGuidKey];
+                siteMinderBusinessGuid = context.Request.Headers[_options.SiteMinderBusinessGuidKey];
+                siteMinderUserType = context.Request.Headers[_options.SiteMinderUserTypeKey];
+
+
+                // **************************************************
+                // Validate credentials
+                // **************************************************
+                if (string.IsNullOrEmpty(userId))
                 {
-                    if (isDeveloperLogin)
-                    {
-                        _logger.LogDebug("Generating a Development user");
-                        userSettings.BusinessLegalName = devCompanyId + " TestBusiness";
-                        userSettings.UserDisplayName = userId + " TestUser";
-                        siteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
-                        siteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
-                        siteMinderUserType = "Business";
-                    }
-                    else if (isBCSCDeveloperLogin)
-                    {
-                        _logger.LogDebug("Generating a Development BC Services user");
-                        userSettings.BusinessLegalName = null;
-                        userSettings.UserDisplayName = userId + " Associate";
-                        siteMinderGuid = GuidUtility.CreateIdForDynamics("bcsc", userSettings.UserDisplayName).ToString();
-                        siteMinderBusinessGuid = null;
-                        siteMinderUserType = "VerifiedIndividual";
-                    }
+                    _logger.LogDebug(_options.MissingSiteMinderUserIdError);
+                    return AuthenticateResult.Fail(_options.MissingSiteMinderGuidError);
                 }
 
-                // Previously the code would do a database lookup here.  However there is no backing database for the users table now,
-                // so we just do a Dynamics lookup on the siteMinderGuid.
+                if (string.IsNullOrEmpty(siteMinderGuid))
+                {
+                    _logger.LogDebug(_options.MissingSiteMinderGuidError);
+                    return AuthenticateResult.Fail(_options.MissingSiteMinderGuidError);
+                }
+                if (string.IsNullOrEmpty(siteMinderUserType))
+                {
+                    _logger.LogDebug(_options.MissingSiteMinderUserTypeError);
+                    return AuthenticateResult.Fail(_options.MissingSiteMinderUserTypeError);
+                }
 
                 _logger.LogDebug("Loading user external id = " + siteMinderGuid);
                 // 3/18/2020 - Note that LoadUser will now work if there is a match on the guid, as well as a match on name in a case where there is no guid.
                 userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(siteMinderGuid, context.Request.Headers, _logger);
                 _logger.LogDebug("After getting authenticated user = " + userSettings.GetJson());
 
-
                 // check that the potential new user is 19.
-                if (userSettings.AuthenticatedUser != null && userSettings.AuthenticatedUser.ContactId == null)
+                if (userSettings.AuthenticatedUser != null
+                    && userSettings.AuthenticatedUser.ContactId == null
+                    && UserIsUnderage(context))
                 {
-                    string rawBirthDate = context.Request.Headers[options.SiteMinderBirthDate];
-                    // get the birthdate.
-                    if (DateTimeOffset.TryParse(rawBirthDate, out DateTimeOffset birthDate))
-                    {
-                        DateTimeOffset nineteenYears = DateTimeOffset.Now.AddYears(-19);
-                        if (birthDate > nineteenYears)
-                        {
-                            // younger than 19, cannot login.
-                            return AuthenticateResult.Fail(options.UnderageError);
-                        }
-                    }
+                    return AuthenticateResult.Fail(_options.UnderageError);
                 }
 
-                if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
+                // check that the user is active
+                if (userSettings.AuthenticatedUser != null
+                    && !userSettings.AuthenticatedUser.Active)
                 {
-
-                    _logger.LogDebug(options.InactivegDbUserIdError + " (" + userId + ")");
-                    return AuthenticateResult.Fail(options.InactivegDbUserIdError);
+                    _logger.LogDebug(_options.InactivegDbUserIdError + " (" + userId + ")");
+                    return AuthenticateResult.Fail(_options.InactivegDbUserIdError);
                 }
 
-                if (userSettings.AuthenticatedUser != null && !String.IsNullOrEmpty(siteMinderUserType))
+                // set the usertype to siteminder
+                if (userSettings.AuthenticatedUser != null
+                    && !string.IsNullOrEmpty(siteMinderUserType))
                 {
                     userSettings.AuthenticatedUser.UserType = siteMinderUserType;
                 }
+
                 userSettings.UserType = siteMinderUserType;
 
-                // This line gets the various claims for the current user.
-                ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme, userSettings.UserType);
+                // Get the various claims for the current user.
+                ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(_options.Scheme, userSettings.UserType);
 
                 // **************************************************
                 // Create authenticated user
@@ -520,136 +456,21 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     }
                 }
 
-                if (!hostingEnv.IsProduction() && (isDeveloperLogin || isBCSCDeveloperLogin))
-                {
-                    _logger.LogDebug("DEV MODE Setting identity and creating session for: " + userId);
-
-                    if (isDeveloperLogin)
-                    {
-                        userSettings.BusinessLegalName = devCompanyId + " TestBusiness";
-                        userSettings.UserDisplayName = userId + " TestUser";
-
-                        // add generated guids
-                        userSettings.SiteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
-                        userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
-                    }
-                    else if (isBCSCDeveloperLogin)
-                    {
-                        userSettings.BusinessLegalName = null;
-                        userSettings.UserDisplayName = userId + " Associate";
-
-                        // add generated guids
-                        userSettings.SiteMinderBusinessGuid = null;
-                        userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("bcsc", userSettings.UserDisplayName).ToString();
-                    }
-
-                    if (userSettings.IsNewUserRegistration)
-                    {
-                        if (isDeveloperLogin)
-                        {
-                            // add generated guids
-                            // set to null to indicate that the user is still registering the account
-                            userSettings.AccountId = null;
-                            userSettings.ContactId = null;
-                        }
-                        else if (isBCSCDeveloperLogin)
-                        {
-                            // set to null for now
-                            userSettings.AccountId = null;
-                            userSettings.ContactId = null;
-                        }
-
-                        _logger.LogDebug("New user registration:" + userSettings.UserDisplayName);
-                        _logger.LogDebug("userSettings.SiteMinderBusinessGuid:" + userSettings.SiteMinderBusinessGuid);
-                        _logger.LogDebug("userSettings.SiteMinderGuid:" + userSettings.SiteMinderGuid);
-                        _logger.LogDebug("userSettings.AccountId:" + userSettings.AccountId);
-                        _logger.LogDebug("userSettings.ContactId:" + userSettings.ContactId);
-                    }
-                    // Set account ID from authenticated user
-                    else if (userSettings.AuthenticatedUser != null)
-                    {
-                        // populate the business GUID.
-                        if (string.IsNullOrEmpty(userSettings.AccountId))
-                        {
-                            userSettings.AccountId = userSettings.AuthenticatedUser.AccountId.ToString();
-                        }
-                        if (string.IsNullOrEmpty(userSettings.ContactId))
-                        {
-                            userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
-                        }
-                        _logger.LogDebug("Returning user:" + userSettings.UserDisplayName);
-                        _logger.LogDebug("userSettings.AccountId:" + userSettings.AccountId);
-                        _logger.LogDebug("userSettings.ContactId:" + userSettings.ContactId);
-                    }
-                }
-
                 // add the worker settings if it is a new user.
                 if (userSettings.IsNewUserRegistration)
                 {
-                    userSettings.NewWorker = new ViewModels.Worker();
+                    userSettings.NewWorker = new Worker();
                     userSettings.NewWorker.CopyHeaderValues(context.Request.Headers);
 
-                    userSettings.NewContact = new ViewModels.Contact();
+                    userSettings.NewContact = new Contact();
                     userSettings.NewContact.CopyHeaderValues(context.Request.Headers);
-
-                    if (isBCSCDeveloperLogin)
-                    {
-                        userSettings.NewWorker.firstname = userId;
-                        userSettings.NewWorker.lastname = "Associate";
-                        userSettings.NewContact.firstname = userId;
-                        userSettings.NewContact.lastname = "Associate";                        
-                    }
                 }
                 else if (siteMinderUserType == "VerifiedIndividual")
                 {
-                    // Verified individual is from BC Service Card which means it's a worker
-                    // Update contact and worker with latest info from BC Service Card
-                    MicrosoftDynamicsCRMadoxioWorkerCollection workerCollection = _dynamicsClient.Workers.Get(filter: $"_adoxio_contactid_value eq {userSettings.ContactId}");
-                    if (workerCollection.Value.Count > 0) {
-                        MicrosoftDynamicsCRMadoxioWorker savedWorker = workerCollection.Value[0];
-                        ViewModels.Contact contact = new ViewModels.Contact();
-                        contact.CopyHeaderValues(context.Request.Headers);
-
-                        MicrosoftDynamicsCRMcontact savedContact = _dynamicsClient.Contacts.GetByKey(userSettings.ContactId);
-                        if (savedContact.Address1Line1 != null && savedContact.Address1Line1 != contact.address1_line1) {
-                            MicrosoftDynamicsCRMadoxioPreviousaddress prevAddress = new MicrosoftDynamicsCRMadoxioPreviousaddress() {
-                                AdoxioStreetaddress = savedContact.Address1Line1,
-                                AdoxioProvstate = savedContact.Address1Stateorprovince,
-                                AdoxioCity = savedContact.Address1City,
-                                AdoxioCountry = savedContact.Address1Country,
-                                AdoxioPostalcode = savedContact.Address1Postalcode,
-                                ContactIdODataBind = _dynamicsClient.GetEntityURI("contacts", savedContact.Contactid)
-                            };
-                            _dynamicsClient.Previousaddresses.Create(prevAddress);
-                        }
-
-                        
-                        _dynamicsClient.Contacts.Update(userSettings.ContactId, contact.ToModel());
-                        
-
-                        ViewModels.Worker worker = new ViewModels.Worker();
-                        worker.CopyHeaderValues(context.Request.Headers);
-                        
-                        MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker() {
-                            AdoxioFirstname = worker.firstname,
-                            AdoxioLastname = worker.lastname,
-                            AdoxioMiddlename = worker.middlename
-                        };
-                        if (worker.gender != 0) {
-                            patchWorker.AdoxioGendercode = (int)worker.gender;
-                        }
-                        
-                        _dynamicsClient.Workers.Update(savedWorker.AdoxioWorkerid, patchWorker);
-
-                        var updatedWorker = await _dynamicsClient.GetWorkerByIdWithChildren(savedWorker.AdoxioWorkerid);
-
-                        // only create the worker document location if the FEATURE_NO_WET_SIGNATURE setting is blank
-                        if (string.IsNullOrEmpty(_configuration["FEATURE_NO_WET_SIGNATURE"]))
-                        {
-                            // ensure that the worker has a documents folder.                        
-                            await CreateWorkerDocumentLocation(_dynamicsClient, _fileManagerClient, updatedWorker);
-                        }
-                            
+                    await HandleVerifiedIndividualLogin(userSettings, context);
+                    if (HttpUtility.ParseQueryString(context.Request.QueryString.ToString()).Get("path") != "cannabis-associate-screening")
+                    {
+                        await HandleWorkerLogin(userSettings, context);
                     }
                 }
 
@@ -658,9 +479,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************                
                 UserSettings.SaveUserSettings(userSettings, context);
 
-                // done!
-                principal = userPrincipal;
-                return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
+                return AuthenticateResult.Success(new AuthenticationTicket(userPrincipal, null, Options.Scheme));
             }
             catch (Exception exception)
             {
@@ -757,6 +576,237 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
         }
 
+        private async Task HandleVerifiedIndividualLogin(UserSettings userSettings, HttpContext context)
+        {
+            IConfiguration _configuration = (IConfiguration)context.RequestServices.GetService(typeof(IConfiguration));
+            IDynamicsClient _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
+            FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
 
+            ViewModels.Contact contact = new ViewModels.Contact();
+            contact.CopyHeaderValues(context.Request.Headers);
+
+            MicrosoftDynamicsCRMcontact savedContact = _dynamicsClient.Contacts.GetByKey(userSettings.ContactId);
+            if (savedContact.Address1Line1 != null && savedContact.Address1Line1 != contact.address1_line1)
+            {
+                MicrosoftDynamicsCRMadoxioPreviousaddress prevAddress = new MicrosoftDynamicsCRMadoxioPreviousaddress()
+                {
+                    AdoxioStreetaddress = savedContact.Address1Line1,
+                    AdoxioProvstate = savedContact.Address1Stateorprovince,
+                    AdoxioCity = savedContact.Address1City,
+                    AdoxioCountry = savedContact.Address1Country,
+                    AdoxioPostalcode = savedContact.Address1Postalcode,
+                    ContactIdODataBind = _dynamicsClient.GetEntityURI("contacts", savedContact.Contactid)
+                };
+                _dynamicsClient.Previousaddresses.Create(prevAddress);
+            }
+
+            _dynamicsClient.Contacts.Update(userSettings.ContactId, contact.ToModel());
+        }
+
+        private async Task HandleWorkerLogin(UserSettings userSettings, HttpContext context)
+        {
+            IConfiguration _configuration = (IConfiguration)context.RequestServices.GetService(typeof(IConfiguration));
+            IDynamicsClient _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
+            FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
+
+            // Update worker with latest info from BC Service Card
+            MicrosoftDynamicsCRMadoxioWorkerCollection workerCollection = _dynamicsClient.Workers.Get(filter: $"_adoxio_contactid_value eq {userSettings.ContactId}");
+            if (workerCollection.Value.Count > 0)
+            {
+                MicrosoftDynamicsCRMadoxioWorker savedWorker = workerCollection.Value[0];
+
+                ViewModels.Worker worker = new ViewModels.Worker();
+                worker.CopyHeaderValues(context.Request.Headers);
+
+                MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker()
+                {
+                    AdoxioFirstname = worker.firstname,
+                    AdoxioLastname = worker.lastname,
+                    AdoxioMiddlename = worker.middlename
+                };
+                if (worker.gender != 0)
+                {
+                    patchWorker.AdoxioGendercode = (int)worker.gender;
+                }
+
+                _dynamicsClient.Workers.Update(savedWorker.AdoxioWorkerid, patchWorker);
+
+                var updatedWorker = await _dynamicsClient.GetWorkerByIdWithChildren(savedWorker.AdoxioWorkerid);
+
+                // only create the worker document location if the FEATURE_NO_WET_SIGNATURE setting is blank
+                if (string.IsNullOrEmpty(_configuration["FEATURE_NO_WET_SIGNATURE"]))
+                {
+                    // ensure that the worker has a documents folder.                        
+                    await CreateWorkerDocumentLocation(_dynamicsClient, _fileManagerClient, updatedWorker);
+                }
+            }
+        }
+
+        private async Task<AuthenticateResult> LoginDevUser(HttpContext context, IDynamicsClient dynamicsClient)
+        {
+            string userId = null;
+            string devCompanyId = null;
+            bool isDeveloperLogin = false;
+            bool isBCSCDeveloperLogin = false;
+            UserSettings userSettings = new UserSettings();
+
+            // check for a fake BCeID login
+            
+            string temp = context.Request.Cookies[_options.DevAuthenticationTokenKey];
+
+            if (string.IsNullOrEmpty(temp)) // could be an automated test user.
+            {
+                temp = context.Request.Headers["DEV-USER"];
+            }
+
+            if (!string.IsNullOrEmpty(temp))
+            {
+                if (temp.Contains("::"))
+                {
+                    var temp2 = temp.Split("::");
+                    userId = temp2[0];
+                    if (temp2.Length >= 2)
+                        devCompanyId = temp2[1];
+                    else
+                        devCompanyId = temp2[0];
+                }
+                else
+                {
+                    userId = temp;
+                    devCompanyId = temp;
+                }
+                isDeveloperLogin = true;
+
+                _logger.LogDebug("Got user from dev cookie = " + userId + ", company = " + devCompanyId);
+            }
+            else
+            {
+                // same set of tests for a BC Services Card dev login
+                temp = context.Request.Cookies[_options.DevBCSCAuthenticationTokenKey];
+
+                if (string.IsNullOrEmpty(temp)) // could be an automated test user.
+                {
+                    temp = context.Request.Headers["DEV-BCSC-USER"];
+                }
+
+                if (!string.IsNullOrEmpty(temp))
+                {
+                    userId = temp;
+                    isBCSCDeveloperLogin = true;
+                    _logger.LogDebug("Got user from dev cookie = " + userId);
+                }
+            }
+
+            if (isDeveloperLogin)
+            {
+                _logger.LogDebug("Generating a Development user");
+                userSettings.BusinessLegalName = devCompanyId + " TestBusiness";
+                userSettings.UserDisplayName = userId + " TestUser";
+                userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
+                userSettings.SiteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
+                userSettings.UserType = "Business";
+            }
+            else if (isBCSCDeveloperLogin)
+            {
+                _logger.LogDebug("Generating a Development BC Services user");
+                userSettings.BusinessLegalName = null;
+                userSettings.UserDisplayName = userId + " Associate";
+                userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("bcsc", userSettings.UserDisplayName).ToString();
+                userSettings.SiteMinderBusinessGuid = null;
+                userSettings.UserType = "VerifiedIndividual";
+            }
+
+            NameValueCollection queryStringParams = HttpUtility.ParseQueryString(context.Request.QueryString.ToString());
+            if (queryStringParams.Get("path") == "cannabis-associate-screening" && queryStringParams.Get("success") == "false")
+            {
+                context.Request.Headers.Add("smgov_givenname", "NORMAN");
+                context.Request.Headers.Add("smgov_givennames", "Norman Percevel ");
+                context.Request.Headers.Add("smgov_useremail", "norman@rockwell.com");
+                context.Request.Headers.Add("smgov_birthdate", "1986-12-03");
+                context.Request.Headers.Add("smgov_sex", "Male");
+                context.Request.Headers.Add("smgov_streetaddress", "2000 STORMAN ROW");
+                context.Request.Headers.Add("smgov_city", "PENTICTON");
+                context.Request.Headers.Add("smgov_postalcode", "V8V8V8");
+                context.Request.Headers.Add("smgov_province", "BC");
+                context.Request.Headers.Add("smgov_country", "CA");
+                context.Request.Headers.Add("smgov_surname", "ROCKWELL");
+                userSettings.UserDisplayName = "NORMAN ROCKWELL";
+            }
+            else if (queryStringParams.Get("path") == "cannabis-associate-screening")
+            {
+                context.Request.Headers.Add("smgov_givenname", "JOE");
+                context.Request.Headers.Add("smgov_givennames", "Joe Shmoe ");
+                context.Request.Headers.Add("smgov_useremail", "joe@associate.com");
+                context.Request.Headers.Add("smgov_birthdate", "1986-12-03");
+                context.Request.Headers.Add("smgov_sex", "Male");
+                context.Request.Headers.Add("smgov_streetaddress", "2000 COLONIAL ROW");
+                context.Request.Headers.Add("smgov_city", "PENTICTON");
+                context.Request.Headers.Add("smgov_postalcode", "V2A7P4");
+                context.Request.Headers.Add("smgov_province", "BC");
+                context.Request.Headers.Add("smgov_country", "CA");
+                context.Request.Headers.Add("smgov_surname", "ONE");
+                userSettings.UserDisplayName = "JOE ONE";
+            }
+
+            _logger.LogDebug("DEV MODE Setting identity and creating session for: " + userId);
+
+            // create session info for the current user
+            userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(userSettings.SiteMinderGuid, context.Request.Headers, _logger);
+            if (userSettings.AuthenticatedUser == null)
+            {
+                if (Guid.TryParse(userSettings.SiteMinderGuid, out Guid contactId))
+                {
+                    MicrosoftDynamicsCRMcontact newContact;
+                    Contact contact = new Contact();
+                    contact.CopyHeaderValues(context.Request.Headers);
+                    newContact = contact.ToModel();
+                    newContact.AdoxioExternalid = userSettings.SiteMinderGuid;
+                    _dynamicsClient.Contacts.Create(newContact);
+                }
+
+                if (Guid.TryParse(userSettings.SiteMinderBusinessGuid, out Guid accountId))
+                {
+                    MicrosoftDynamicsCRMaccount newAccount = new MicrosoftDynamicsCRMaccount()
+                    {
+                        AdoxioExternalid = userSettings.SiteMinderBusinessGuid,
+                        Name = userSettings.BusinessLegalName
+                    };
+                    _dynamicsClient.Accounts.Create(newAccount);
+                }
+
+                userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(userSettings.SiteMinderGuid, context.Request.Headers, _logger);
+                userSettings.UserAuthenticated = true;
+                userSettings.IsNewUserRegistration = true;
+            }
+            else
+            {
+                userSettings.AuthenticatedUser.UserType = userSettings.UserType;
+                userSettings.AccountId = userSettings.AuthenticatedUser.AccountId.ToString();
+                userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
+                userSettings.UserAuthenticated = true;
+                userSettings.IsNewUserRegistration = false;
+            }
+            userSettings.UserId = userId;
+
+
+            ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(_options.Scheme, userSettings.UserType);
+            UserSettings.SaveUserSettings(userSettings, context);
+            return AuthenticateResult.Success(new AuthenticationTicket(userPrincipal, null, _options.Scheme));
+        }
+        private bool UserIsUnderage(HttpContext context)
+        {
+            string rawBirthDate = context.Request.Headers[_options.SiteMinderBirthDate];
+            // get the birthdate.
+            if (DateTimeOffset.TryParse(rawBirthDate, out DateTimeOffset birthDate))
+            {
+                DateTimeOffset nineteenYears = DateTimeOffset.Now.AddYears(-19);
+                if (birthDate > nineteenYears)
+                {
+                    // younger than 19, cannot login.
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
