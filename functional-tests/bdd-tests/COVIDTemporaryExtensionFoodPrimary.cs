@@ -31,15 +31,7 @@ namespace bdd_tests
     [FeatureFile("./COVID_temporary_extension_food_primary.feature")]
     public sealed class COVIDTemporaryExtensionFoodPrimary : TestBase
     {
-        public void CheckFeatureFlagsCOVIDTempExtension()
-        {
-            // navigate to the feature flags page
-            driver.Navigate().GoToUrl($"{baseUri}api/features");
-
-            // confirm that the COVID Temporary Extension feature flag is enabled during this test
-            Assert.True(driver.FindElement(By.XPath("//body[contains(.,'CovidApplication')]")).Displayed);
-        }
-
+       
         [Given(@"I am not logged in to the Liquor and Cannabis Portal")]
         public void not_logged_in()
         {
@@ -192,9 +184,9 @@ namespace bdd_tests
         [Then(@"the application is submitted")]
         public void application_submitted()
         {
-            System.Threading.Thread.Sleep(11000);
+            //System.Threading.Thread.Sleep(11000);
 
-            Assert.True(driver.FindElement(By.XPath("//body[contains(.,'Thank you for your submission.')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Thank you for your submission.')]")).Displayed);
         }
     }
 }
