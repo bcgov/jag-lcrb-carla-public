@@ -309,10 +309,6 @@ export class EventFormComponent extends FormBase implements OnInit {
     });
   }
 
-  compareFn(c1: any, c2: any): boolean {
-    return c1 && c2 ? c1.value === c2.value : c1 === c2;
-  }
-
   getOptionFromValue(options: any, value: number) {
     const idx = options.findIndex(opt => opt.value === value);
     if (idx >= 0) {

@@ -22,6 +22,8 @@ using Google.Protobuf;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using System.Web;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using CsvHelper.Configuration.Attributes;
+using System.Globalization;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -143,14 +145,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         /// <summary>
-        /// Update a contact using PHS token
+        /// Update a contact using PHS or CASS token
         /// </summary>
         /// <param name="item"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPut("phs/{token}")]
+        [HttpPut("security-screening/{token}")]
         [AllowAnonymous]
-        public async Task<IActionResult> UpdateContactByPHSToken([FromBody] ViewModels.Contact item, string token)
+        public async Task<IActionResult> UpdateContactByToken([FromBody] ViewModels.Contact item, string token)
         {
             if (token == null || item == null)
             {
@@ -563,13 +565,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        [HttpGet("cas-link/{contactId}")]
+        [HttpGet("cass-link/{contactId}")]
         public JsonResult GetCASLinkForContactGuid(string contactId)
         {
             string casLink = null;
             try
             {
-                casLink = DynamicsExtensions.GetCASLink(contactId, _configuration);
+                casLink = GetCASSLink(contactId, _configuration, _encryptionKey);
             }
             catch (Exception ex)
             {
@@ -579,7 +581,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             return new JsonResult(casLink);
         }
-       
+        
+        public static string GetCASSLink(string contactId, IConfiguration _configuration, string _encryptionKey)
+        {
+            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/cannabis-associate-screening/";
+            result += HttpUtility.UrlEncode(EncryptionUtility.EncryptStringHex(contactId, _encryptionKey));
+            return result;
+        }
 
         [HttpGet("phs-link/{contactId}")]
         public JsonResult GetPhsLinkForContactGuid(string contactId)
@@ -630,14 +638,105 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet("cass/{code}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetCASSContactByToken(string code)
+        {
+            string id = EncryptionUtility.DecryptStringHex(code, _encryptionKey);
+            if (!string.IsNullOrEmpty(id))
+            {
+                MicrosoftDynamicsCRMcontact userContact = null;
+                try
+                {
+                    string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                    UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+                    userContact = await _dynamicsClient.GetContactById(userSettings.ContactId);
+                }
+                catch (ArgumentNullException)
+                {
+                    // anonymous
+                }
+                
+                Guid contactId = Guid.Parse(id);
+                // query the Dynamics system to get the contact record.
+                var contact = await _dynamicsClient.GetContactById(contactId);
+
+                if (userContact == null) {
+                    return new JsonResult(new CASSPublicContact
+                    {
+                        Id = contact.Contactid,
+                        token = code,
+                        shortName = (contact.Firstname.First().ToString() + " " + contact.Lastname),
+                        IsWrongUser = false
+                    });
+                }
+
+                if (contact != null
+                    && contact.Firstname.StartsWith(userContact.Firstname.Substring(0, 1), true, CultureInfo.CurrentCulture)
+                    && userContact.Lastname == contact.Lastname
+                    && userContact.Birthdate.Value.Date.ToShortDateString() == contact.Birthdate.Value.Date.ToShortDateString()
+                )
+                {
+                    return new JsonResult(new CASSPrivateContact
+                    {
+                        Id = contact.Contactid,
+                        token = code,
+                        shortName = contact.Firstname + " " + contact.Lastname,
+                        dateOfBirth = contact.AdoxioDateofbirthshortdatestring,
+                        gender = ((Gender?)contact.AdoxioGendercode).ToString(),
+                        streetAddress = contact.Address1Line1,
+                        city = contact.Address1City,
+                        province = contact.Address1Stateorprovince,
+                        postalCode = contact.Address1Postalcode,
+                        country = contact.Address1Country
+                    });
+                }
+                else
+                {
+                    return new JsonResult(new CASSPublicContact
+                    {
+                        Id = contact.Contactid,
+                        token = code,
+                        shortName = (contact.Firstname.First().ToString() + " " + contact.Lastname),
+                        IsWrongUser = true
+                    });
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 
-    public class PHSContact
+    public class ScreeningContact
     {
         public string Id { get; set; }
         public string token { get; set; }
         public string shortName { get; set; }
+    }
+
+    public class PHSContact : ScreeningContact 
+    {
         public bool isComplete { get; set; }
+    }
+
+    public class CASSPublicContact : ScreeningContact
+    {
+        public bool IsWrongUser;
+    }
+
+    public class CASSPrivateContact : CASSPublicContact
+    {
+        public string dateOfBirth { get; set; }
+        public string gender { get; set; }
+        public string streetAddress { get; set; }
+        public string city { get; set; }
+        public string province { get; set; }
+        public string postalCode { get; set; }
+        public string country { get; set; }
+        public string email { get; set; }
     }
 
 }

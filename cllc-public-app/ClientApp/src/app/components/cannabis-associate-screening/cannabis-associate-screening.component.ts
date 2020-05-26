@@ -3,8 +3,13 @@ import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Alias } from '@models/alias.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContactDataService } from '@services/contact-data.service';
-import { PHSContact } from '@models/contact.model';
+import { CASSContact } from '@models/contact.model';
 import { FormBase } from '@shared/form-base';
+import { takeWhile } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../app-state/models/app-state';
+import { User } from '../../models/user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cannabis-associate-screening',
@@ -12,13 +17,15 @@ import { FormBase } from '@shared/form-base';
   styleUrls: ['./cannabis-associate-screening.component.scss']
 })
 export class CannabisAssociateScreeningComponent extends FormBase implements OnInit {
-
+  busy: Subscription;
+  user: User;
   aliasesToDelete: any;
   form: FormGroup;
   contactToken: string;
-  contact: PHSContact;
+  contact: CASSContact;
   showErrors: boolean;
   fileCount: any = {};
+  showForm = false;
   validationErrors: string[] = [];
 
   public get aliases(): FormArray {
@@ -27,10 +34,12 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
 
   constructor(private fb: FormBuilder,
     private contactDataService: ContactDataService,
+    private store: Store<AppState>,
     private router: Router,
     private route: ActivatedRoute) {
     super();
     this.route.paramMap.subscribe(pmap => this.contactToken = pmap.get('token'));
+
   }
 
   ngOnInit() {
@@ -44,39 +53,24 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
         shortName: [{ value: '', disabled: true }],
         emailaddress1: ['', [Validators.required, Validators.email]],
         telephone1: [''],
-        address1_line1: ['', [Validators.required, Validators.minLength(5)]],
-        address1_city: ['', Validators.required],
-        address1_stateorprovince: ['', [Validators.required]],
-        address1_country: ['', Validators.required],
-        address1_postalcode: ['', Validators.required],
-        jobTitle: [''],
-        birthDate: ['', Validators.required],
-        birthPlace: [''],
-        gender: ['', Validators.required],
+        address1_line1: [''],
+        address1_city: [''],
+        address1_stateorprovince: [''],
+        address1_country: [''],
+        address1_postalcode: [''],
+        birthDate: [''],
+        gender: [''],
         mobilePhone: ['', [Validators.required,]],
-        primaryIdNumber: [''],
-        secondaryIdNumber: [''],
-        selfDisclosure: [''],
-        secondaryIdentificationType: [''],
-        primaryIdentificationType: [''],
-        phsConnectionsDetails: [''],
-        phsLivesInCanada: ['', Validators.required],
-        phsHasFive: ['', Validators.required],
-        phsHasLivedInCanada: ['', Validators.required],
-        phsExclusiveMFG:['', Validators.required],
-        phsExclusiveDetails: [''],
-        phsFinancialInt:['', Validators.required],
-        phsFinancialIntDetails: [''],
-        phsProfitAgreement:['', Validators.required],
-        phsProfitAgreementDetails: [''],
-        // phsExpired: [''],
-        // phsComplete: [''],
-        phsConnectionsToOtherLicences: ['', Validators.required],
-        phsCanadianDrugAlchoholDrivingOffence: ['', Validators.required],
-        phsForeignDrugAlchoholOffence: ['', Validators.required],
         aliases: this.fb.array([])
-      })
+      }),
+      consentToCollection: ['', [Validators.required]],
+      privacyAgreement: ['', [Validators.required]]
     });
+    this.store.select((state) => state.currentUserState.currentUser)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((user) => {
+        this.user = user;
+      });
 
     this.form.get('sameNameAtBirth').valueChanges
       .subscribe(value => {
@@ -91,38 +85,26 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
         }
       });
 
-    this.form.get('contact.phsLivesInCanada').valueChanges
-      .subscribe(value => {
-        if (value === 'Yes') {
-          this.form.get('contact.phsHasLivedInCanada').clearValidators();
-          this.form.get('contact.phsHasLivedInCanada').reset();
-          this.form.get('contact.phsHasFive').setValidators([Validators.required]);
-          
-        } else {
-          this.form.get('contact.phsHasLivedInCanada').setValidators([Validators.required]);
-          this.form.get('contact.phsHasFive').clearValidators();
-          this.form.get('contact.phsHasFive').reset();
-        }
-      });
-
-
-    this.form.get('contact.phsConnectionsToOtherLicences').valueChanges
-      .subscribe(value => {
-        if (value === 'No') {
-          this.form.get('contact.phsConnectionsDetails').clearValidators();
-          this.form.get('contact.phsConnectionsDetails').reset();
-        } else {
-          this.form.get('contact.phsConnectionsDetails').setValidators([Validators.required]);
-        }
-      });
-
-    this.contactDataService.getContactByPhsToken(this.contactToken)
+    this.busy = this.contactDataService.getContactByCassToken(this.contactToken)
       .subscribe(contact => {
         this.contact = contact;
-        this.form.get('contact.shortName').setValue(contact.shortName);
-        if (this.contact.isComplete) {
-          this.router.navigateByUrl('/personal-history-summary/confirmation');
+        if (!contact.isWrongUser) {
+          this.showForm = true;
+          this.form.get('contact.shortName').setValue(contact.shortName);
+          this.form.get('contact.birthDate').setValue(contact.dateOfBirth);
+          this.form.get('contact.gender').setValue(contact.gender);
+          this.form.get('contact.address1_line1').setValue(contact.streetAddress);
+          this.form.get('contact.address1_city').setValue(contact.city);
+          this.form.get('contact.address1_stateorprovince').setValue(contact.province);
+          this.form.get('contact.address1_country').setValue(contact.country);
+          this.form.get('contact.address1_postalcode').setValue(contact.postalCode);
+        } else {
+          this.showForm = false;
         }
+        
+        //if (this.contact.isComplete) {
+        //  this.router.navigateByUrl('/security-screening/confirmation');
+        //}
       });
 
   }
@@ -155,31 +137,7 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
     });
   }
 
-  showStatutoryDeclaration(): boolean {
-    let show = (
-      this.form.get('contact.phsHasFive').value === 'No' ||
-      this.form.get('contact.phsHasLivedInCanada').value === 'No' ||      
-      this.form.get('contact.phsCanadianDrugAlchoholDrivingOffence').value === 'Yes' ||
-      this.form.get('contact.phsForeignDrugAlchoholOffence').value === 'Yes'
-    );
-    return show;
-  }
 
-  showCRCUpload(): boolean {
-    let show = (
-      this.form.get('contact.phsLivesInCanada').value === 'Yes' ||
-      this.form.get('contact.phsHasLivedInCanada').value === 'Yes'
-    );
-    return show;
-  }
-
-  showDriversAbstract(): boolean {
-    let show = (
-      this.form.get('contact.phsCanadianDrugAlchoholDrivingOffence').value === 'Yes'
-    );
-    return show;
-
-  }
 
   updateUploadedFiles(uploadedNumber: number, docType: string) {
     this.fileCount[docType] = uploadedNumber;
@@ -187,17 +145,15 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
 
   uploadsValid(): boolean {
     this.validationErrors = [];
-    if (this.showCRCUpload() && !(this.fileCount['CRC'] > 0)) {
-      this.validationErrors.push("Please Upload Your Completed Criminal Record Check ");
-    }
-    if (this.showStatutoryDeclaration() && !(this.fileCount['StatDeclaration'] > 0)) {
-      this.validationErrors.push("Please Upload Your Statutory Declaration");
+    if (this.showFinancialIntegrityForm() && !(this.fileCount['Associate_Fin'] > 0)) {
+      this.validationErrors.push("Please Upload Your Completed Financial Integrity Form");
     }
 
-    if (this.showDriversAbstract() && (this.fileCount['StatDeclaration'] > 0)) {
-      this.validationErrors.push("Please Upload Your Driver's Extract");
-    }
     return this.validationErrors.length <= 0;
+  }
+
+  showFinancialIntegrityForm(): boolean {
+    return true;
   }
 
   save() {
@@ -205,8 +161,11 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
 
     if (this.uploadsValid() && this.form.valid) {
       const contact = this.form.value.contact;
-      contact.phsDateSubmitted = new Date();
-      contact.phsComplete = 'Yes';
+      contact.casDateSubmitted = new Date();
+      contact.casComplete = 'Yes';
+      contact.casConsentValidated = 'Yes';
+      var today = new Date();
+      contact.casConsentValidatedExpiryDate = new Date(today.setMonth(today.getMonth() + 3));
 
       if (this.form.value.firstNameAtBirth && this.form.value.lastNameAtBirth) {
         contact.aliases.push({
@@ -215,9 +174,9 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
         });
       }
 
-      this.contactDataService.updatePHSContact(contact, this.contactToken)
+      this.contactDataService.updateContactByToken(contact, this.contactToken)
         .subscribe(res => {
-          this.router.navigateByUrl('/personal-history-summary/confirmation');
+          this.router.navigateByUrl('/security-screening/confirmation');
         });
     } else {
       // show error messages
