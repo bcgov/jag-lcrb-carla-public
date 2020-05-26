@@ -76,6 +76,13 @@ const routes: Routes = [
     data: { feature: 'LicenseeChanges' }
   },
   {
+    path: 'lg-approvals',
+    component: ApplicationLicenseeChangesComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    canDeactivate: [CanDeactivateGuard], 
+    data: { feature: 'LGApprovals' }
+  },
+  {
     path: 'personal-history-summary/confirmation',
     component: PhsConfirmationComponent,
     canActivate: [FeatureGuard],
