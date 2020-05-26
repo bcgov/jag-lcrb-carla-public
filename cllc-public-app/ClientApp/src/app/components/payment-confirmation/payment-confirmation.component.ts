@@ -50,6 +50,10 @@ export class PaymentConfirmationComponent implements OnInit {
     if (!this.applicationId) {
       this.applicationId = this.inputApplicationId;
     }
+    
+  }
+
+  ngAfterViewInit() {
     this.verify_payment();
   }
 

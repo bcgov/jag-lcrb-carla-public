@@ -41,6 +41,13 @@
             <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences dashboard.</p>
           </section>
 
+          <!-- For Societies, Universities and Churches-->
+          <section *ngIf="['Society', 'University', 'Church'].indexOf(node?.businessType) !== -1">
+            <p>{{node?.businessType}} applicants and licensees must provide their leadership information and keep it up to date.</p>
+            <p>You are required to notify the LCRB of name changes within ten business days of the change being made.</p>
+            <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences dashboard.</p>
+          </section>
+
           <!-- For Indigenous Nations -->
           <section *ngIf="node?.businessType === 'IndigenousNation'">
               <p>An applicant that is an <i>Indigenous Nation</i> may have associates that are required to consent to security
@@ -205,6 +212,24 @@
   </div>
   </ng-container>
 
+ <!-- University and Churches -->
+  <ng-container *ngIf="node?.businessType === 'University' || node?.businessType === 'Church'">
+    <h3 class="blue-header">Provide Official Documents</h3>
+    <div class="content-bottom">
+    <h4 class="plain-header">Official Documents</h4>
+    <section class="padded-section">
+      <p>Official operating documents for {{node?.businessNameNew}} that support your organization structure.</p>
+      <app-file-uploader *ngIf="account?.id"
+        documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} Official Documents"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+        (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Official Documents')"
+        [useDocumentTypeForName]="true" 
+        [entityId]="account?.id" [uploadHeader]="'TO UPLOAD OFFICIAL DOCUMENTS, DRAG FILE HERE OR'">
+      </app-file-uploader>
+    </section>
+  </div>
+  </ng-container>
+
   <ng-container [formGroup]="form" *ngIf="node?.businessType === 'Society'">
 
       <h3 class="blue-header">Provide Society Information</h3>
@@ -239,7 +264,10 @@
     </app-associate-list>
   </ng-container>
 
-  <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
+  <ng-container *ngIf="node?.businessType === 'PrivateCorporation' 
+                      || node?.businessType === 'PublicCorporation' 
+                      || node?.businessType === 'University'
+                      || node?.businessType === 'Church'">
 
     <h3 class="blue-header">List Key Personnel</h3>
     <div class="content-bottom">  

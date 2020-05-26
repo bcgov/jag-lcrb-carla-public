@@ -10,7 +10,7 @@
 
         <section>
           <h3>CANNABIS LICENCE APPLICATIONS</h3>
-          <div *ngIf="!(nonMarketerExists || marketerExists)"><p>
+          <div *ngIf="!(nonMarketerExists || marketerExists) && CRSElligible()"><p>
             <i>*You cannot apply for both cannabis licences, you can apply for one or other.</i>
           </p></div>
 
@@ -19,11 +19,12 @@
               <th colspan=2>LICENCE</th>
               <th></th>
             </tr> -->
-            <tr *ngIf="!(marketerExists)">
+            <tr *ngIf="!(marketerExists) && CRSElligible()">
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
                 <img class="icon" src="assets/Cannabis-store-icon-blue-40px.png" alt="">
               </td>
               <td style="width:700px;">
+
                 <h3>Cannabis Retail Store Licence</h3>
                 <p>The cannabis retail store licence allows licensees to sell non-medical cannabis and accessories.</p>
                 <P>(A separate application must be submitted for each proposed store)</P>
@@ -94,6 +95,26 @@
                 <i>New wine store applications <br>are closed at this time.</i>
               </td>
             </tr>
+
+            <!--tr>
+              <!-- Apply for a Rural Agency Store Licence >
+              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
+                <img class="icon" src="assets/Wine-store-icon-blue-40px.png" alt="">
+              </td>
+              <td style="width:700px;">
+                <h3>Rural Agency Store Licence</h3>
+                <p>Existing Rural Agency Stores may now apply for their official LCRB Liquor Licence. Note, you will need an existing Rural Agency Store registration number to complete the application. </p>
+                
+                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/wine-store-liquor-licence"
+                  target="_blank">Learn
+                  more about this licence</a>
+              </td>
+              <td style="text-align: center;">
+                <button *ngIf="liquorOne" class="btn btn-primary" (click)="startNewRASApplication()"
+                id="startCatering">START
+                APPLICATION</button>
+              </td>
+            </tr-->
 
           </table>
         </section>

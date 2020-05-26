@@ -4,11 +4,15 @@ import { UserDataService } from '@services/user-data.service';
 import { User } from '@models/user.model';
 import { Worker } from '@models/worker.model';
 import { WorkerDataService } from '@services/worker-data.service.';
-import { Subscription } from 'rxjs';
+import { ContactDataService } from '@services/contact-data.service';
+import { Contact } from '@models/contact.model';
+import { forkJoin, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { takeWhile } from 'rxjs/operators';
 import { FormBase } from '@shared/form-base';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+
 
 
 @Component({
@@ -27,6 +31,9 @@ export class WorkerDashboardComponent extends FormBase implements OnInit {
   id: string;
   firstName: string;
   lastName: string;
+  mainForm: FormGroup;
+  phone: string;
+  email: string;
   dataTable: any[];
 
   busy: Subscription;
@@ -35,15 +42,24 @@ export class WorkerDashboardComponent extends FormBase implements OnInit {
   constructor(
     private userDataService: UserDataService,
     private workerDataService: WorkerDataService,
+    private contactDataService: ContactDataService,
     private store: Store<AppState>
   ) {
     super();
+    this.mainForm = new FormGroup({});
+
   }
 
   ngOnInit() {
     this.store.select(state => state.currentUserState.currentUser)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(user => this.loadUser(user));
+
+      // add phone and email to the dashboard so the user can modify them
+      this.mainForm.addControl('phone', new FormControl(''));
+      this.mainForm.addControl('email', new FormControl(''));
+
+
   }
 
   loadUser(user: User) {
@@ -65,8 +81,12 @@ export class WorkerDashboardComponent extends FormBase implements OnInit {
           {key: 'Country', value: this.currentApplication.contact.address1_country},
         ];
 
-        this.setClientSideStatus(this.currentApplication);
+        // set the values of the phone and email to what we have on file.      
+        this.mainForm.controls['phone'].setValue(this.currentApplication.contact.mobilePhone);
+        this.mainForm.controls['email'].setValue(this.currentApplication.contact.emailaddress1);
 
+        // retrieve status of the most recent application
+        this.setClientSideStatus(this.currentApplication);
         this.applicationStatus = this.getStatus(res);
         const passedApplications = res.filter(i => (<any>i).status === 'Active');
 
@@ -74,8 +94,55 @@ export class WorkerDashboardComponent extends FormBase implements OnInit {
           this.displayedColumns.push('actions');
         }
       });
+
+
     }
   }
+
+  // when the phone field is updated, update the contact record
+  updatePhone(event: any) {
+    if (event.target.value === null) {
+      return false;
+    }
+    
+    const phone = this.mainForm.controls['phone'].value;
+    const contact = Object.assign(new Contact(), {
+      id: this.currentUser.contactid,
+      mobilePhone: phone
+    });
+
+    this.updateContact(contact);
+    
+  }
+
+  // when the email field is updated, update the contact record
+  updateEmail(event: any) {
+    if (event.target.value === null) {
+      return false;
+    }
+    
+    const email = this.mainForm.controls['email'].value;
+
+    const contact = Object.assign(new Contact(), {
+      id: this.currentUser.contactid,
+      emailaddress1: email,
+    });
+    this.updateContact(contact);
+  }
+
+  // take the provided contact record and update it with the changes implemented
+  updateContact(contact: Contact) {
+
+    this.busy = forkJoin([
+      this.contactDataService.updateContact(contact)
+     
+    ])
+      .subscribe(([resp]) => {
+        contact = resp;
+      });
+  }
+
+
 
   setClientSideStatus(worker: Worker) {
     worker.clientSideStatus = worker.status;

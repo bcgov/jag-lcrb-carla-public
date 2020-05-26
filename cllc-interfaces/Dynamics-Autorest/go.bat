@@ -6,4 +6,4 @@ dotnet run -p ..\OData.OpenAPI\odata2openapi\odata2openapi.csproj adoxio
 
 echo Updating client
 
-autorest --debug --verbose Readme.md
+autorest --v3 --debug --verbose Readme.md

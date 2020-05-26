@@ -59,7 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 if (!CurrentUserHasAccessToLicenseOwnedBy(licence.AdoxioLicencee.Accountid) &&
-                    !CurrentUserHasAccessToLicenseTransferredTo(licence.AdoxioProposedOwner.Accountid))
+                    (licence.AdoxioProposedOwner != null && !CurrentUserHasAccessToLicenseTransferredTo(licence.AdoxioProposedOwner.Accountid)))
                 {
                     return Forbid();
                 }
@@ -326,6 +326,44 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
+        // handle terminate-operator-application
+        [HttpPost("terminate-operator-relationship")]
+        public ActionResult TerminateTPORelationship(LicenceTransfer item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            // check access to licence
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.GetLicenceByIdWithChildren(item.LicenceId);
+            if (adoxioLicense == null)
+            {
+                return NotFound();
+            }
+            bool hasAccess = CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid);
+            hasAccess |= (adoxioLicense.AdoxioThirdPartyOperatorId  != null && CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioThirdPartyOperatorId .Accountid));
+            if (!hasAccess)
+            {
+                return Forbid();
+            }
+
+            // Delete the ThirdPartyOperator (ThirdPartyOperatorId)
+            try
+            {
+                _dynamicsClient.Licenceses.DeleteReferenceWithHttpMessagesAsync(item.LicenceId, "adoxio_ThirdPartyOperatorId").GetAwaiter().GetResult();
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                if (httpOperationException.Response.StatusCode != System.Net.HttpStatusCode.NotFound)
+                {
+                    _logger.LogError(httpOperationException, "Error deleting third party operator");
+                    throw;
+                }
+            }
+            return Ok();
+        }
+
 
         /// Create a change of location application
         [HttpPost("{licenceId}/create-action-application/{applicationTypeName}")]
@@ -464,14 +502,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             List<ApplicationLicenseSummary> licenseSummaryList = new List<ApplicationLicenseSummary>();
 
-            if (licences != null)
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationsForLicenceByApplicant(licenceeId);
+            if (licences != null && applicationsInProgress != null)
             {
-                IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationsForLicenceByApplicant(licenceeId);
                 foreach (var licence in licences)
                 {
                     var applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
                     var result = licence.ToLicenseSummaryViewModel(applications, _dynamicsClient);
-                    result.LicenceTypeName = "Transfer in Progress - "  + result.LicenceTypeName;
+                    result.LicenceTypeName = "Transfer in Progress - " + result.LicenceTypeName;
                     licenseSummaryList.Add(result);
                 }
             }
@@ -565,7 +603,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     foreach (var licence in licences)
                     {
                         IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationsForLicenceByApplicant(licence.AdoxioLicencee.Accountid);
-                        var applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
+                        var applications = new List<MicrosoftDynamicsCRMadoxioApplication>();
+                        if (applicationsInProgress != null)
+                        {
+                            applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
+                        }
                         result.Add(licence.ToLicenseSummaryViewModel(applications, _dynamicsClient));
                     }
                 }

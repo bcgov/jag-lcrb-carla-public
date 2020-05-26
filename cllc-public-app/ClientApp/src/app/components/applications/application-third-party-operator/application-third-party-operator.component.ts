@@ -5,7 +5,6 @@ import { Subscription, Observable, of } from 'rxjs';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { PaymentDataService } from '@services/payment-data.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FeatureFlagService } from '@services/feature-flag.service';
@@ -15,6 +14,12 @@ import { Account, TransferAccount } from '@models/account.model';
 import { LicenseDataService } from '@services/license-data.service';
 import { License } from '@models/license.model';
 import { ApplicationHTMLContent } from '../application/application.component';
+
+const ValidationErrorMap = {
+  "proposedTPO.accountId": 'Please select the business name to be a third party operator of  your licence',
+  authorizedToSubmit: 'Please affirm that you are authorized to submit the application.',
+  signatureAgreement: 'Please affirm that all of the information provided for this application is true and complete.',
+};
 
 @Component({
   selector: 'app-application-third-party-operator',
@@ -129,27 +134,11 @@ export class ApplicationThirdPartyOperatorComponent extends FormBase implements 
   }
 
   isValid(): boolean {
-    // mark controls as touched
-    for (const c in this.form.controls) {
-      if (typeof (this.form.get(c).markAsTouched) === 'function') {
-        this.form.get(c).markAsTouched();
-      }
-    }
-    for (const c in (<FormGroup>this.form.get('proposedTPO')).controls) {
-      if (typeof (this.form.get(`proposedTPO.${c}`).markAsTouched) === 'function') {
-        this.form.get(`proposedTPO.${c}`).markAsTouched();
-      }
-    }
+    this.markConstrolsAsTouched(this.form);
     this.showValidationMessages = false;
     let valid = true;
-    this.validationMessages = [];
-
-
-    if (!this.form.valid) {
-      valid = false;
-      this.validationMessages.push('Some required fields have not been completed');
-    }
-    return valid;
+    this.validationMessages = this.listControlsWithErrors(this.form, ValidationErrorMap);
+    return this.form.valid;
   }
 
   businessTypeIsPartnership(): boolean {
