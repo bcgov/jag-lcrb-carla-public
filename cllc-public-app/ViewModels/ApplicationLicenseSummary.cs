@@ -96,6 +96,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         
 
         public string ThirdPartyOperatorAccountName { get; set; }
+        public string ThirdPartyOperatorAccountId { get; set; }
         public List<string> Endorsements { get; set; }
     }
 }
