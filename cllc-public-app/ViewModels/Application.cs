@@ -20,8 +20,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         PendingForLGFNPFeedback = 845280006,
         Refused = 845280005,
         [EnumMember(Value = "Pending for Licence Fee")]
-        PendingForLicenceFee = 845280007,
-        Denied = 845280005,
+        PendingForLicenceFee = 845280007,        
         [EnumMember(Value = "Approved In Principle")]
         ApprovedInPrinciple = 845280008,
         Terminated = 845280009,
