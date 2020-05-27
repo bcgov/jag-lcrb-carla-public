@@ -169,9 +169,23 @@ namespace bdd_tests
             }
 
             // if this is an indigenous nation, click the radio button
-            if (businessType == "indigenous nation")
+            if (businessType == "university")
             {
                 NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[6]"));
+                indigenousNationRadio.Click();
+            }
+
+            // if this is an indigenous nation, click the radio button
+            if (businessType == "local government")
+            {
+                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[7]"));
+                indigenousNationRadio.Click();
+            }
+
+            // if this is an indigenous nation, click the radio button
+            if (businessType == "indigenous nation")
+            {
+                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[8]"));
                 indigenousNationRadio.Click();
             }
 
