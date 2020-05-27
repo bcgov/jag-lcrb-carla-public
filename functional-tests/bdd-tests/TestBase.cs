@@ -347,7 +347,8 @@ namespace bdd_tests
 
         public void ReviewAccountProfile()
         {
-            ngDriver.IgnoreSynchronization = false;
+            //ngDriver.IgnoreSynchronization = false;
+     
             /* 
             Page Title: Please Review the Account Profile
             */
@@ -375,8 +376,6 @@ namespace bdd_tests
             string corpContactPhone = "7781811818";
             string corpContactEmail = "automated@test.com";
 
-            
-
             // enter the business number
             NgWebElement uiBizNumber = ngDriver.FindElement(By.CssSelector("input[formControlName=\"businessNumber\"]"));
             uiBizNumber.SendKeys(bizNumber);
@@ -398,7 +397,6 @@ namespace bdd_tests
             NgWebElement uiPhysStreetAddress1 = ngDriver.FindElement(By.CssSelector("input[formControlName=\"physicalAddressStreet\"]"));
             uiPhysStreetAddress1.SendKeys(physStreetAddress1);
             
-
             // enter the physical street address 2
             NgWebElement uiPhysStreetAddress2 = ngDriver.FindElement(By.CssSelector("input[formControlName=\"physicalAddressStreet2\"]"));
             uiPhysStreetAddress2.SendKeys(physStreetAddress2);
@@ -411,13 +409,12 @@ namespace bdd_tests
             NgWebElement uiPhysPostalCode = ngDriver.FindElement(By.CssSelector("input[formControlName=\"physicalAddressPostalCode\"]"));
             uiPhysPostalCode.SendKeys(physPostalCode);
             
-
+            // select and deselect same mailing address to confirm checkbox is available
             NgWebElement uiSameAsMailingAddress = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
             uiSameAsMailingAddress.Click();
             uiSameAsMailingAddress.Click();
 
             // enter the mailing street address 1
-            
             NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressStreet\"]"));
             uiMailingStreetAddress1.Clear();
             uiMailingStreetAddress1.SendKeys(mailStreet1);
@@ -432,40 +429,34 @@ namespace bdd_tests
             uiMailingCity.Clear();
             uiMailingCity.SendKeys(mailCity);
             
-
             // enter the mailing province
             NgWebElement uiMailingProvince = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressProvince\"]"));
             uiMailingProvince.Clear();
             uiMailingProvince.SendKeys(mailProvince);
 
-            
             // enter the mailing postal code
             NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressPostalCode\"]"));
             uiMailingPostalCode.Clear();
             uiMailingPostalCode.SendKeys(mailPostalCode);
             
-
             // enter the mailing country
             NgWebElement uiMailingCountry = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressCountry\"]"));
             uiMailingCountry.Clear();
             uiMailingCountry.SendKeys(mailCountry);
             
-
             // enter the business phone number
             NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.CssSelector("input[formControlName=\"contactPhone\"]"));
             uiBizPhoneNumber.SendKeys(bizPhoneNumber);
-
-            
+           
             // enter the business email
             NgWebElement uiBizEmail = ngDriver.FindElement(By.CssSelector("input[formControlName=\"contactEmail\"]"));
             uiBizEmail.SendKeys(bizEmail);
 
-
-            // (re)enter the first name of contact
-            
+            // (re)enter the first name of contact           
             NgWebElement uiCorpGiven = ngDriver.FindElement(By.CssSelector("input[formControlName=\"firstname\"]"));
             uiCorpGiven.SendKeys(corpGiven);
-            
+
+            // (re)enter the last name of contact           
             NgWebElement uiCorpSurname = ngDriver.FindElement(By.CssSelector("input[formControlName=\"lastname\"]"));
             uiCorpSurname.SendKeys(corpSurname);
             
@@ -473,21 +464,16 @@ namespace bdd_tests
             NgWebElement uiCorpTitle = ngDriver.FindElement(By.CssSelector("input[formControlName=\"jobTitle\"]"));
             uiCorpTitle.SendKeys(corpTitle);
             
-
             // enter the contact phone number
-            
             NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.CssSelector("input[formControlName=\"telephone1\"]"));
             uiCorpContactPhone.SendKeys(corpContactPhone);
-
 
             ngDriver.WaitForAngular();
 
             // enter the contact email
-
             NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.CssSelector("div[formGroupName=\"primarycontact\"] input[formControlName=\"emailaddress1\"]"));
             uiCorpContactEmail.SendKeys(corpContactEmail);
             
-
             // select 'No' for connection to a federal producer - switched off to test text areas
             NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
             corpConnectionFederalProducer.Click();
