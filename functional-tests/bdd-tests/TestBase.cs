@@ -347,9 +347,10 @@ namespace bdd_tests
 
         public void ReviewAccountProfile()
         {
-            //ngDriver.IgnoreSynchronization = false;
-     
-            /* 
+        
+            ngDriver.IgnoreSynchronization = false;
+
+            /*
             Page Title: Please Review the Account Profile
             */
 
@@ -379,14 +380,14 @@ namespace bdd_tests
             // enter the business number
             NgWebElement uiBizNumber = ngDriver.FindElement(By.CssSelector("input[formControlName=\"businessNumber\"]"));
             uiBizNumber.SendKeys(bizNumber);
-            
-            // enter the private corporation incorporation number
+
+            // enter the private corporation or society incorporation number
             if (businessTypeShared == "private corporation" || businessTypeShared == "society")
             {
                 NgWebElement uiCorpNumber = ngDriver.FindElement(By.Id("bcIncorporationNumber"));
                 uiCorpNumber.SendKeys(incorporationNumber);
-            
-                NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+
+                NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
                 uiCalendar1.Click();
 
                 NgWebElement uiCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
@@ -396,11 +397,11 @@ namespace bdd_tests
             // enter the physical street address 1
             NgWebElement uiPhysStreetAddress1 = ngDriver.FindElement(By.CssSelector("input[formControlName=\"physicalAddressStreet\"]"));
             uiPhysStreetAddress1.SendKeys(physStreetAddress1);
-            
+
             // enter the physical street address 2
             NgWebElement uiPhysStreetAddress2 = ngDriver.FindElement(By.CssSelector("input[formControlName=\"physicalAddressStreet2\"]"));
             uiPhysStreetAddress2.SendKeys(physStreetAddress2);
-            
+
             // enter the physical city
             NgWebElement uiPhysCity = ngDriver.FindElement(By.CssSelector("input[formControlName=\"physicalAddressCity\"]"));
             uiPhysCity.SendKeys(physCity);           
@@ -408,7 +409,7 @@ namespace bdd_tests
             // enter the physical postal code
             NgWebElement uiPhysPostalCode = ngDriver.FindElement(By.CssSelector("input[formControlName=\"physicalAddressPostalCode\"]"));
             uiPhysPostalCode.SendKeys(physPostalCode);
-            
+
             // select and deselect same mailing address to confirm checkbox is available
             NgWebElement uiSameAsMailingAddress = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
             uiSameAsMailingAddress.Click();
@@ -418,17 +419,17 @@ namespace bdd_tests
             NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressStreet\"]"));
             uiMailingStreetAddress1.Clear();
             uiMailingStreetAddress1.SendKeys(mailStreet1);
-            
+
             // enter the mailing street address 2
             NgWebElement uiMailingStreetAddress2 = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressStreet2\"]"));
             uiMailingStreetAddress2.Clear();
             uiMailingStreetAddress2.SendKeys(mailStreet2);
-        
+
             // enter the mailing city
             NgWebElement uiMailingCity = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressCity\"]"));
             uiMailingCity.Clear();
             uiMailingCity.SendKeys(mailCity);
-            
+
             // enter the mailing province
             NgWebElement uiMailingProvince = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressProvince\"]"));
             uiMailingProvince.Clear();
@@ -438,16 +439,16 @@ namespace bdd_tests
             NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressPostalCode\"]"));
             uiMailingPostalCode.Clear();
             uiMailingPostalCode.SendKeys(mailPostalCode);
-            
+
             // enter the mailing country
             NgWebElement uiMailingCountry = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressCountry\"]"));
             uiMailingCountry.Clear();
             uiMailingCountry.SendKeys(mailCountry);
-            
+
             // enter the business phone number
             NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.CssSelector("input[formControlName=\"contactPhone\"]"));
             uiBizPhoneNumber.SendKeys(bizPhoneNumber);
-           
+
             // enter the business email
             NgWebElement uiBizEmail = ngDriver.FindElement(By.CssSelector("input[formControlName=\"contactEmail\"]"));
             uiBizEmail.SendKeys(bizEmail);
@@ -459,11 +460,11 @@ namespace bdd_tests
             // (re)enter the last name of contact           
             NgWebElement uiCorpSurname = ngDriver.FindElement(By.CssSelector("input[formControlName=\"lastname\"]"));
             uiCorpSurname.SendKeys(corpSurname);
-            
+
             // enter the contact title
             NgWebElement uiCorpTitle = ngDriver.FindElement(By.CssSelector("input[formControlName=\"jobTitle\"]"));
             uiCorpTitle.SendKeys(corpTitle);
-            
+
             // enter the contact phone number
             NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.CssSelector("input[formControlName=\"telephone1\"]"));
             uiCorpContactPhone.SendKeys(corpContactPhone);
@@ -473,7 +474,7 @@ namespace bdd_tests
             // enter the contact email
             NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.CssSelector("div[formGroupName=\"primarycontact\"] input[formControlName=\"emailaddress1\"]"));
             uiCorpContactEmail.SendKeys(corpContactEmail);
-            
+
             // select 'No' for connection to a federal producer - switched off to test text areas
             NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
             corpConnectionFederalProducer.Click();
@@ -481,7 +482,7 @@ namespace bdd_tests
             // select 'Yes' for connection to a federal producer
             NgWebElement corpConnectionFederalProducer2 = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[1]"));
             corpConnectionFederalProducer2.Click();
-            
+
             // enter the name of the federal producer and details of the connection 
             string nameAndDetails = "Name and details of federal producer (automated test).";
 
@@ -500,7 +501,7 @@ namespace bdd_tests
             {
                 NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[3]"));
                 federalProducerConnectionToCorp.Click();
-                
+
                 // enter the name of the federal producer and details of the connection 
                 string nameAndDetails2 = "Name and details of federal producer (automated test) (2).";
 
@@ -524,7 +525,7 @@ namespace bdd_tests
             // click on Continue to Organization Review button
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
             continueApp_button.Click();
-        }
+        }   
 
         public void ReviewOrgStructure()
         {
