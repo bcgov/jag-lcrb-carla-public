@@ -18,9 +18,7 @@ using Newtonsoft.Json;
 namespace bdd_tests
 {
     public abstract class TestBase : Feature, IDisposable
-    {
-        
-
+    {       
         // Protractor driver
         protected NgWebDriver ngDriver;
 
@@ -72,9 +70,9 @@ namespace bdd_tests
 
             ngDriver = new NgWebDriver(driver);
           
-           ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
-           ngDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(timeout);
-           ngDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(timeout);
+            ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
+            ngDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(timeout);
+            ngDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(timeout);
 
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
@@ -2345,6 +2343,18 @@ namespace bdd_tests
             // click on the first day
             NgWebElement openCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
             openCalendarYear.Click();
+        }
+
+        public void ApplicationIsApproved()
+        {
+            // navigate to api/applications/<Application ID>/process
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{application_ID}/process");
+
+            // wait for the autoamted approval process to run
+            System.Threading.Thread.Sleep(20000);
+
+            // navigate back to dashboard
+            ngDriver.Navigate().GoToUrl($"{baseUri}/dashboard");
         }
     }
 }
