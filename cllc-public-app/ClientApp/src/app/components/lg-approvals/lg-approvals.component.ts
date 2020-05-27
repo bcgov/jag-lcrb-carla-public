@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/app-state/models/app-state';
+import { Account } from '@models/account.model';
 
 @Component({
   selector: 'app-lg-approvals',
@@ -7,7 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LgApprovalsComponent implements OnInit {
 
-  constructor() { }
+  account: Account;
+
+  constructor(store: Store<AppState>) { 
+    store.select(state => state.currentAccountState.currentAccount)
+    .subscribe(account =>{
+      this.account = account;
+    });
+  }
 
   ngOnInit() {
   }

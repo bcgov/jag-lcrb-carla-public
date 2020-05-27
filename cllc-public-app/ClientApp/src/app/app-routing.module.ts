@@ -49,6 +49,7 @@ import { CancelThirdPartyOperatorComponent } from '@components/applications/canc
 import { ApplicationCovidTemporaryExtensionComponent } from '@components/applications/application-covid-temporary-extension/application-covid-temporary-extension.component';
 import { CovidConfirmationComponent } from '@components/applications/application-covid-temporary-extension/covid-confirmation/covid-confirmation.component';
 import { TerminateTPORelationshipComponent } from '@components/applications/terminate-tpo-relationship/terminate-tpo-relationship.component';
+import { LgApprovalsComponent } from '@components/lg-approvals/lg-approvals.component';
 
 
 const routes: Routes = [
@@ -77,7 +78,7 @@ const routes: Routes = [
   },
   {
     path: 'lg-approvals',
-    component: ApplicationLicenseeChangesComponent,
+    component: LgApprovalsComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     canDeactivate: [CanDeactivateGuard], 
     data: { feature: 'LGApprovals' }
