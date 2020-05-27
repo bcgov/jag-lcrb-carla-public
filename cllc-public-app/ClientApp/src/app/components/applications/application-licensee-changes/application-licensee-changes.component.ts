@@ -268,7 +268,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
                   if (app && app.adoxioInvoiceId) {
                     this.submitPayment();
                   } else if (app) { // go to the application page
-                    this.loadedValue = this.cleanSaveData(this.treeRoot); // update the loaded value after a succesfull save
+                    this.loadedValue = this.cleanSaveData(this.treeRoot);  // Update loadedValue to prevent double saving
                     this.saveComplete.emit(true);
                     if (this.redirectToDashboardOnSave) {
                       this.router.navigateByUrl('/dashboard');
@@ -329,6 +329,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
             .toPromise()
             .then(() => {
               this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+              this.loadedValue = this.cleanSaveData(this.treeRoot);  // Update loadedValue to prevent double saving
               if(navigateAfterSaving){
                 this.router.navigateByUrl('/dashboard');
               }
