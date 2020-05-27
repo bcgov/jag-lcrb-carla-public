@@ -77,6 +77,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("CovidApplication");
             }
 
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_LG_APPROVALS"]))
+            {
+                features.Add("LGApprovals");
+            }
+
             return features;
         }
 

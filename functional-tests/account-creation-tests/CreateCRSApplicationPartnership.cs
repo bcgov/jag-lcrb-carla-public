@@ -32,19 +32,11 @@ namespace bdd_tests
     [FeatureFile("./Create_CRSApplication_partnership.feature")]
     public sealed class CreateCRSApplicationPartnership : TestBase
     {
-        public void CheckFeatureFlagsCannabis()
-        {
-            // navigate to the feature flags page
-            driver.Navigate().GoToUrl($"{baseUri}api/features");
-
-            // confirm that the CRS-Renewal flag is enabled during this test
-            Assert.True(driver.FindElement(By.XPath("//body[contains(.,'CRS-Renewal')]")).Displayed);
-        }
 
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            CheckFeatureFlagsCannabis();
+            //CheckFeatureFlagsCannabis();
             
             CarlaLoginNoCheck();
         }
