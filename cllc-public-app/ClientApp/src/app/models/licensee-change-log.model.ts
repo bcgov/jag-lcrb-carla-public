@@ -261,6 +261,8 @@ export class LicenseeChangeLog {
       this.annualMembershipFee = legalEntity.annualMembershipFee;
       this.totalSharesOld = legalEntity.totalShares;
       this.totalSharesNew = legalEntity.totalShares;
+      this.interestPercentageOld = legalEntity.interestpercentage;
+      this.interestPercentageNew = legalEntity.interestpercentage;
     }
   }
 
