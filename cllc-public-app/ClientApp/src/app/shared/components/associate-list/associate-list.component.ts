@@ -354,7 +354,9 @@ export class AssociateListComponent extends FormBase implements OnInit {
     return this.rootNode && (
       this.rootNode.businessType === 'Society'
       || this.rootNode.businessType === 'PrivateCorporation'
-      || this.rootNode.businessType === 'PublicCorporation');
+      || this.rootNode.businessType === 'PublicCorporation'
+      || this.rootNode.businessType === 'Church'
+      || this.rootNode.businessType === 'University');
   }
 
   // check to see if there is a link in any child records; when set to true the Level 1 Personal History Summary column will show.

@@ -34,14 +34,7 @@ namespace bdd_tests
     [FeatureFile("./CRSApplication_partnership.feature")]
     public sealed class CRSApplicationPartnership : TestBase
     {
-        public void CheckFeatureFlagsCannabis()
-        {
-            // navigate to the feature flags page
-            driver.Navigate().GoToUrl($"{baseUri}api/features");
-
-            // confirm that the CRS-Renewal flag is enabled during this test
-            Assert.True(driver.FindElement(By.XPath("//body[contains(.,'CRS-Renewal')]")).Displayed);
-        }
+        
 
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
@@ -60,10 +53,14 @@ namespace bdd_tests
         [And(@"I click on the Start Application button for a Cannabis Retail Store")]
         public void I_start_application()
         {
+            ngDriver.IgnoreSynchronization = false;
+            ngDriver.Navigate().GoToUrl($"{baseUri}dashboard");
+
             /* 
             Page Title: Welcome to Cannabis Licensing
-            */
+            */           
 
+            
             NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
             startApp_button.Click();
         }
