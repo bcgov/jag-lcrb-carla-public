@@ -470,7 +470,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated}";
                 // Approved applications need to be passed to the client app
-                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Denied}";
+                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Refused}";
                 filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
                 filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
 
@@ -517,7 +517,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public static IEnumerable<MicrosoftDynamicsCRMadoxioApplication> GetApplicationsForLicenceByApplicant(this IDynamicsClient _dynamicsClient, string applicantId)
         {
-            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType", "adoxio_ApplicationTypeId", "adoxio_ThirdPartyOperatorId" };
+            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType", "adoxio_ApplicationTypeId" };
             IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
             if (string.IsNullOrEmpty(applicantId))
             {
@@ -526,7 +526,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             else
             {
                 var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated}";
-                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Denied}";
+                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Refused}";
                 filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
                 filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
 
@@ -534,7 +534,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
                 }
-                catch (HttpOperationException)
+                catch (HttpOperationException e)
                 {
                     dynamicsApplicationList = null;
                 }
@@ -559,7 +559,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             else
             {
                 var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated}";
-                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Denied}";
+                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Refused}";
                 filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
                 filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
 
