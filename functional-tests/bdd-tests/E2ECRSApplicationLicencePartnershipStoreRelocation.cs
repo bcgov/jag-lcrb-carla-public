@@ -44,15 +44,6 @@ namespace bdd_tests
     [FeatureFile("./E2E_CRSApplication_Licence_partnership_store_relocation.feature")]
     public sealed class E2ECRSApplicationLicencePartnershipStoreRelocation : TestBase
     {
-        public void CheckFeatureFlagsCannabis()
-        {
-            // navigate to the feature flags page
-            driver.Navigate().GoToUrl($"{baseUri}api/features");
-
-            // confirm that the CRS-Renewal flag is enabled during this test
-            Assert.True(driver.FindElement(By.XPath("//body[contains(.,'CRS-Renewal')]")).Displayed);
-        }
-
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
@@ -131,14 +122,7 @@ namespace bdd_tests
         [And(@"the application is approved")]
         public void application_is_approved()
         {
-            // navigate to api/applications/<Application ID>/process
-            driver.Navigate().GoToUrl($"{baseUri}api/applications/{application_ID}/process");
-
-            // wait for the autoamted approval process to run
-            System.Threading.Thread.Sleep(20000);
-
-            // navigate back to dashboard
-            ngDriver.Navigate().GoToUrl($"{baseUri}/dashboard");
+            ApplicationIsApproved();
         }
 
         [And(@"the account is deleted")]
