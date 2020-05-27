@@ -18,9 +18,7 @@ using Newtonsoft.Json;
 namespace bdd_tests
 {
     public abstract class TestBase : Feature, IDisposable
-    {
-        
-
+    {       
         // Protractor driver
         protected NgWebDriver ngDriver;
 
@@ -72,9 +70,9 @@ namespace bdd_tests
 
             ngDriver = new NgWebDriver(driver);
           
-           ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
-           ngDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(timeout);
-           ngDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(timeout);
+            ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
+            ngDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(timeout);
+            ngDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(timeout);
 
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
@@ -1358,87 +1356,90 @@ namespace bdd_tests
 
         public void RequestPersonnelNameChange()
         {
-            // click on Dashboard link
-            string dash = "Dashboard";
-            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(dash));
-            returnDash.Click();
-
-            // click on the review organization information button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
-            orgInfoButton.Click();
-
-            // click on the Edit button for Key Personnel
-            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
-            uiEditInfoButton.Click();
-
-            // enter a new name for the director
-            string newDirectorFirstName = "UpdatedFirstName";
-            string newDirectorLastName = "UpdatedLastName";
-
-            NgWebElement uiNewDirectorFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
-            uiNewDirectorFirstName.Clear();
-            uiNewDirectorFirstName.SendKeys(newDirectorFirstName);
-
-            NgWebElement uiNewDirectorLasttName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
-            uiNewDirectorLasttName.Clear();
-            uiNewDirectorLasttName.SendKeys(newDirectorLastName);
-
-            // click on the Confirm button
-            NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
-            uiConfirmButton.Click();
-
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload a marriage certificate document
-            string marriageCertificate = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "marriage_certificate.pdf");
-
-            if (businessTypeShared == "public corporation")
+            if (businessTypeShared != "indigenous nation")
             {
-                NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
-                uploadMarriageCert1.SendKeys(marriageCertificate);
+                // click on Dashboard link
+                string dash = "Dashboard";
+                NgWebElement returnDash = ngDriver.FindElement(By.LinkText(dash));
+                returnDash.Click();
+
+                // click on the review organization information button
+                NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
+                orgInfoButton.Click();
+
+                // click on the Edit button for Key Personnel
+                NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
+                uiEditInfoButton.Click();
+
+                // enter a new name for the director
+                string newDirectorFirstName = "UpdatedFirstName";
+                string newDirectorLastName = "UpdatedLastName";
+
+                NgWebElement uiNewDirectorFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+                uiNewDirectorFirstName.Clear();
+                uiNewDirectorFirstName.SendKeys(newDirectorFirstName);
+
+                NgWebElement uiNewDirectorLasttName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+                uiNewDirectorLasttName.Clear();
+                uiNewDirectorLasttName.SendKeys(newDirectorLastName);
+
+                // click on the Confirm button
+                NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
+                uiConfirmButton.Click();
+
+                // find the upload test file in the bdd-tests\upload_files folder
+                var environment = Environment.CurrentDirectory;
+                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+                // upload a marriage certificate document
+                string marriageCertificate = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "marriage_certificate.pdf");
+
+                if (businessTypeShared == "public corporation")
+                {
+                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
+                    uploadMarriageCert1.SendKeys(marriageCertificate);
+                }
+                else
+                {
+                    NgWebElement uploadMarriageCert2 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
+                    uploadMarriageCert2.SendKeys(marriageCertificate);
+                }
+
+                // workaround for current bug (LCSD-3214)
+                if (businessTypeShared == "partnership")
+                {
+                    string shares = "100";
+                    NgWebElement uiPartnerShares = ngDriver.FindElement(By.XPath("//app-org-structure/div[3]/section[1]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/div/input"));
+                    uiPartnerShares.Clear();
+                    uiPartnerShares.SendKeys(shares);
+                }
+
+                // click on submit org info button
+                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
+                orgInfoButton2.Click();
+
+                MakePayment();
+
+                // check payment fee
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
+
+                System.Threading.Thread.Sleep(7000);
+
+                // click on Dashboard link
+                NgWebElement returnDash2 = ngDriver.FindElement(By.LinkText(dash));
+                returnDash2.Click();
+
+                // click on the review organzation information button
+                NgWebElement orgInfoButton3 = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
+                orgInfoButton3.Click();
+
+                System.Threading.Thread.Sleep(7000);
+
+                // check that the director name has been updated
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedFirstName')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedLastName')]")).Displayed);
             }
-            else
-            {
-                NgWebElement uploadMarriageCert2 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
-                uploadMarriageCert2.SendKeys(marriageCertificate);
-            }
-
-            // workaround for current bug (LCSD-3214)
-            if (businessTypeShared == "partnership")
-            {
-                string shares = "100";
-                NgWebElement uiPartnerShares = ngDriver.FindElement(By.XPath("//app-org-structure/div[3]/section[1]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/div/input"));
-                uiPartnerShares.Clear();
-                uiPartnerShares.SendKeys(shares);
-            }
-
-            // click on submit org info button
-            NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
-            orgInfoButton2.Click();
-  
-            MakePayment();
-
-            // check payment fee
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
-
-            System.Threading.Thread.Sleep(7000);
-
-            // click on Dashboard link
-            NgWebElement returnDash2 = ngDriver.FindElement(By.LinkText(dash));
-            returnDash2.Click();
-
-            // click on the review organzation information button
-            NgWebElement orgInfoButton3 = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
-            orgInfoButton3.Click();
-
-            System.Threading.Thread.Sleep(7000);
-
-            // check that the director name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedFirstName')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedLastName')]")).Displayed);
         }
 
         public void RequestRelocation()
@@ -1512,8 +1513,6 @@ namespace bdd_tests
             // pay for the relocation application
             MakePayment();
 
-            System.Threading.Thread.Sleep(7000);
-
             // confirm correct payment amount
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
 
@@ -1526,36 +1525,39 @@ namespace bdd_tests
 
         public void RequestPersonnelEmailChange()
         {
-            // click on Dashboard link
-            string dash = "Dashboard";
-            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(dash));
-            returnDash.Click();
+            if (businessTypeShared != "indigenous nation")
+            {
+                // click on Dashboard link
+                string dash = "Dashboard";
+                NgWebElement returnDash = ngDriver.FindElement(By.LinkText(dash));
+                returnDash.Click();
 
-            // click on the review organization information button
-            NgWebElement orgInfoButton3 = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
-            orgInfoButton3.Click();
+                // click on the review organization information button
+                NgWebElement orgInfoButton3 = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
+                orgInfoButton3.Click();
 
-            // click on the Edit button for Key Personnel
-            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
-            uiEditInfoButton.Click();
+                // click on the Edit button for Key Personnel
+                NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
+                uiEditInfoButton.Click();
 
-            // enter a new email for the director
-            string newDirectorEmail = "newemail@test.com";
+                // enter a new email for the director
+                string newDirectorEmail = "newemail@test.com";
 
-            NgWebElement uiNewDirectorEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
-            uiNewDirectorEmail.Clear();
-            uiNewDirectorEmail.SendKeys(newDirectorEmail);
+                NgWebElement uiNewDirectorEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+                uiNewDirectorEmail.Clear();
+                uiNewDirectorEmail.SendKeys(newDirectorEmail);
 
-            // click on the Confirm button
-            NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
-            uiConfirmButton.Click();
+                // click on the Confirm button
+                NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
+                uiConfirmButton.Click();
 
-            // click on confirm org info button
-            NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' CONFIRM ORGANIZATION INFORMATION IS COMPLETE')]"));
-            orgInfoButton2.Click();
+                // click on confirm org info button
+                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' CONFIRM ORGANIZATION INFORMATION IS COMPLETE')]"));
+                orgInfoButton2.Click();
 
-            // check that dashboard is displayed (i.e. no payment has been required)
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Welcome to Liquor and Cannabis Licensing')]")).Displayed);
+                // check that dashboard is displayed (i.e. no payment has been required)
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Welcome to Liquor and Cannabis Licensing')]")).Displayed);
+            }
         }
 
         public void PayCRSLicenceFee()
@@ -1799,6 +1801,8 @@ namespace bdd_tests
             /* 
             Page Title: Plan Your Store Opening
             */
+
+            System.Threading.Thread.Sleep(7000);
 
             // select checkboxes to confirm store opening details
             NgWebElement check1 = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
@@ -2339,6 +2343,18 @@ namespace bdd_tests
             // click on the first day
             NgWebElement openCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
             openCalendarYear.Click();
+        }
+
+        public void ApplicationIsApproved()
+        {
+            // navigate to api/applications/<Application ID>/process
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{application_ID}/process");
+
+            // wait for the autoamted approval process to run
+            System.Threading.Thread.Sleep(20000);
+
+            // navigate back to dashboard
+            ngDriver.Navigate().GoToUrl($"{baseUri}/dashboard");
         }
     }
 }
