@@ -59,7 +59,139 @@
     <None Update="COVID_temporary_extension_food_primary.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_privatecorp.feature">
+    <None Update="E2E_CRSApplication_Licence_IN_federal_reports.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_IN_name_branding_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_IN_personnel_email_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_partnership_federal_reports.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_society_federal_reports.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_publiccorp_federal_reports.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_partnership_name_branding_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_society_name_branding_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_publiccorp_name_branding_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_partnership_personnel_email_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_society_personnel_email_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_publiccorp_personnel_email_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_privatecorp_personnel_email_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_IN_personnel_name_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_partnership_personnel_name_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_society_personnel_name_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_publiccorp_personnel_name_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_privatecorp_personnel_name_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_IN_plan_store_opening.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_IN_show_store_on_map.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_IN_store_relocation.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_IN_structural_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_IN_transfer_ownership.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_partnership_plan_store_opening.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_society_plan_store_opening.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_publiccorp_plan_store_opening.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_partnership_show_store_on_map.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_society_show_store_on_map.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_publiccorp_show_store_on_map.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_partnership_store_relocation.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_society_store_relocation.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_publiccorp_store_relocation.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_partnership_structural_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_society_structural_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_publiccorp_structural_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_partnership_transfer_ownership.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_society_transfer_ownership.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_publiccorp_transfer_ownership.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_privatecorp_transfer_ownership.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_privatecorp_show_store_on_map.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_privatecorp_federal_reports.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_privatecorp_structural_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_privatecorp_name_branding_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_privatecorp_store_relocation.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="E2E_CRSApplication_Licence_privatecorp_plan_store_opening.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="MapView.feature">
@@ -113,34 +245,13 @@
     <None Update="LicenceCRS_privatecorp.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LicenceCRS_publiccorp.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="LicenceCRS_society.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="LicenceCRS_indigenousnation.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="LicenceCRS_soleproprietor.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="LicenceCRS_partnership.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="LicenceCatering_private_corp.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="LicenceCatering_indigenous_nation.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LicenceCatering_partnership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LicenceCatering_public_corp.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="LicenceCatering_society.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LicenceCatering_sole_proprietor.feature">
