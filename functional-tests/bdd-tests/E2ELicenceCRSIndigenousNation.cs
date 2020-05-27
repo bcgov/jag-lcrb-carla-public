@@ -52,9 +52,12 @@ namespace bdd_tests
     [FeatureFile("./E2E_LicenceCRS_indigenousnation.feature")]
     public sealed class E2ELicenceCRSIndigenousNation : TestBase
     {
-        [Given(@"I am logged in to the dashboard as an (.*)")]
-        public void Given_I_view_the_dashboard()
+
+        [Given(@"I am logged in to the dashboard as a (.*)")]
+        public void I_view_the_dashboard(string businessType)
         {
+            CheckFeatureFlagsCannabis();
+
             CarlaLoginNoCheck();
         }
 
@@ -129,7 +132,7 @@ namespace bdd_tests
         public void application_is_approved()
         {
             // navigate to api/applications/<Application ID>/process
-            driver.Navigate().GoToUrl($"{baseUri}api/applications/{application_ID}/process");
+            ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/applications/{application_ID}/process");
 
             // wait for the autoamted approval process to run
             System.Threading.Thread.Sleep(20000);

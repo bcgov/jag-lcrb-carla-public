@@ -379,7 +379,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showSitePlan(): boolean {
     let show = this.application
       && this.application.applicationType
-      && this.showFormControl(this.application.applicationType.sitePlan);
+      && (this.showFormControl(this.application.applicationType.sitePlan) 
+        || this.showFormControl(this.application.applicationType.showLiquorSitePlan));
 
     if (this.application && this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange) {
       show = this.showFormControl(this.application.applicationType.sitePlan)
@@ -389,12 +390,28 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return show;
   }
 
+
   showZoning(): boolean {
     let show = this.application
       && this.application.applicationType
       && this.showFormControl(this.application.applicationType.proofofZoning);
     return show;
 
+  }
+
+  showExteriorChangeQuestion():boolean {
+    let show = this.application &&
+                (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange 
+                && this.application.licenseType === 'Cannabis Retail Store');
+
+    if(show){
+      this.form.get('proposedChange').setValidators([Validators.required]);
+      this.form.updateValueAndValidity();
+    } else {
+      this.form.get('proposedChange').setValidators([]);
+      this.form.updateValueAndValidity();
+    }
+    return show;
   }
 
   showExteriorRenderings() {
@@ -611,9 +628,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Hours of sale are required');
     }
 
-    if (!this.form.valid) {
-      this.validationMessages.push('Some required fields have not been completed');
-    }
     return valid && this.form.valid;
   }
 

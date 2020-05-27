@@ -48,6 +48,7 @@ import { ApplicationThirdPartyOperatorComponent } from '@components/applications
 import { CancelThirdPartyOperatorComponent } from '@components/applications/cancel-third-party-operator/cancel-third-party-operator.component';
 import { ApplicationCovidTemporaryExtensionComponent } from '@components/applications/application-covid-temporary-extension/application-covid-temporary-extension.component';
 import { CovidConfirmationComponent } from '@components/applications/application-covid-temporary-extension/covid-confirmation/covid-confirmation.component';
+import { TerminateTPORelationshipComponent } from '@components/applications/terminate-tpo-relationship/terminate-tpo-relationship.component';
 
 
 const routes: Routes = [
@@ -73,6 +74,13 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard, FeatureGuard],
     canDeactivate: [CanDeactivateGuard], // Comment this out if there are problems with duplicate saves
     data: { feature: 'LicenseeChanges' }
+  },
+  {
+    path: 'lg-approvals',
+    component: ApplicationLicenseeChangesComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    canDeactivate: [CanDeactivateGuard], 
+    data: { feature: 'LGApprovals' }
   },
   {
     path: 'personal-history-summary/confirmation',
@@ -196,6 +204,11 @@ const routes: Routes = [
   {
     path: 'cancel-third-party-operator/:licenceId',
     component: CancelThirdPartyOperatorComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'terminate-third-party-operator/:licenceId',
+    component: TerminateTPORelationshipComponent,
     canActivate: [BCeidAuthGuard]
   },
   {

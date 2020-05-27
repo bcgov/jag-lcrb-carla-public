@@ -30,15 +30,6 @@ namespace bdd_tests
     [FeatureFile("./COVID_temporary_extension_validation.feature")]
     public sealed class COVIDTemporaryExtensionValidation : TestBase
     {
-        public void CheckFeatureFlagsCOVIDTempExtension()
-        {
-            // navigate to the feature flags page
-            driver.Navigate().GoToUrl($"{baseUri}api/features");
-
-            // confirm that the COVID Temporary Extension feature flag is enabled during this test - TODO
-            Assert.True(driver.FindElement(By.XPath("//body[contains(.,'CovidApplication')]")).Displayed);
-        }
-
         [Given(@"I am not logged in to the Liquor and Cannabis Portal")]
         public void not_logged_in()
         {

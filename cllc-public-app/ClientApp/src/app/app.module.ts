@@ -198,6 +198,8 @@ import { CancelThirdPartyOperatorComponent } from '@components/applications/canc
 import { FeatureFlagService } from './services/feature-flag.service';
 import { ApplicationCovidTemporaryExtensionComponent } from './components/applications/application-covid-temporary-extension/application-covid-temporary-extension.component';
 import { CovidConfirmationComponent } from './components/applications/application-covid-temporary-extension/covid-confirmation/covid-confirmation.component';
+import { TerminateTPORelationshipComponent } from '@components/applications/terminate-tpo-relationship/terminate-tpo-relationship.component';
+import { LgApprovalsComponent } from './components/lg-approvals/lg-approvals.component';
 
 
 @NgModule({
@@ -284,6 +286,7 @@ import { CovidConfirmationComponent } from './components/applications/applicatio
     ApplicationAndLicenceFeeComponent,
     ApplicationCancelOwnershipTransferComponent,
     CancelThirdPartyOperatorComponent,
+    TerminateTPORelationshipComponent,
     ApplicationOwnershipTransferComponent,
     ApplicationThirdPartyOperatorComponent,
     ProductInventorySalesReportComponent,
@@ -308,7 +311,8 @@ import { CovidConfirmationComponent } from './components/applications/applicatio
     EligibilityFormComponent,
     LiquorRenewalComponent,
     ApplicationCovidTemporaryExtensionComponent,
-    CovidConfirmationComponent
+    CovidConfirmationComponent,
+    LgApprovalsComponent
   ],
   imports: [
     ChartsModule,

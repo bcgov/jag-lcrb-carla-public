@@ -21,6 +21,11 @@ import { Establishment } from '@models/establishment.model';
 import { ApplicationHTMLContent } from '../application/application.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 
+const ValidationErrorMap = {
+  establishmentopeningdate: 'Please enter the Estimated Opening Date',
+  description1: 'Please outline the reason for the opening date (at least 10 characters)',
+};
+
 @Component({
   selector: 'app-application-and-licence-fee',
   templateUrl: './application-and-licence-fee.component.html',
@@ -155,7 +160,7 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
    */
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
-    const establishment = <Establishment> {
+    const establishment = <Establishment>{
       id: saveData.assignedLicence.establishmentId,
       phone: saveData.assignedLicence.establishmentPhone,
       email: saveData.assignedLicence.establishmentEmail,
@@ -209,21 +214,12 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
 
   isValid(): boolean {
     // mark controls as touched
-    for (const c in this.form.controls) {
-      if (typeof (this.form.get(c).markAsTouched) === 'function') {
-        this.form.get(c).markAsTouched();
-      }
-    }
+    this.markConstrolsAsTouched(this.form);
     this.showValidationMessages = false;
     let valid = true;
-    this.validationMessages = [];
+    this.validationMessages = this.listControlsWithErrors(this.form, ValidationErrorMap);
 
-
-    if (!this.form.valid) {
-      valid = false;
-      this.validationMessages.push('Some required fields have not been completed');
-    }
-    return valid;
+    return this.form.valid;
   }
 
 
@@ -231,7 +227,6 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
    * Dialog to confirm the application cancellation (status changed to "Termindated")
    */
   cancelApplication() {
-
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
