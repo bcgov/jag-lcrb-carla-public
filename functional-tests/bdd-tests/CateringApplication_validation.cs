@@ -34,15 +34,6 @@ namespace bdd_tests
     [FeatureFile("./CateringApplication_validation.feature")]
     public sealed class CateringApplicationValidation : TestBase
     {
-        public void CheckFeatureFlagsLiquor()
-        {
-            // navigate to the feature flags page
-            driver.Navigate().GoToUrl($"{baseUri}api/features");
-
-            // confirm that the LiquorOne flag is enabled during this test
-            Assert.True(driver.FindElement(By.XPath("//body[contains(.,'LiquorOne')]")).Displayed);
-        }
-
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
