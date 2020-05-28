@@ -1865,6 +1865,13 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
+        public void StartCRSApplication()
+        {
+            // click on the Start Application button
+            NgWebElement startApp_button = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
+            startApp_button.Click();
+        }
+
         public void StoreNameBrandingChange()
         {
             /* 
@@ -2348,14 +2355,20 @@ namespace bdd_tests
 
         public void ApplicationIsApproved()
         {
+            ngDriver.IgnoreSynchronization = true;
+
             // navigate to api/applications/<Application ID>/process
             ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{application_ID}/process");
 
             // wait for the autoamted approval process to run
-            System.Threading.Thread.Sleep(20000);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+
+            ngDriver.IgnoreSynchronization = false;
 
             // navigate back to dashboard
             ngDriver.Navigate().GoToUrl($"{baseUri}/dashboard");
+
+
         }
     }
 }
