@@ -58,12 +58,7 @@ namespace bdd_tests
         [And(@"I click on the Start Application button for a Cannabis Retail Store")]
         public void start_application()
         {
-            /* 
-            Page Title: Welcome to Cannabis Licensing
-            */
-
-            NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
-            startApp_button.Click();
+            StartCRSApplication();
         }
 
         [And(@"I complete the eligibility disclosure")]
