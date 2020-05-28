@@ -39,6 +39,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     public class Account
     {
         public string id { get; set; }
+        public string LocalGovernmentId { get; set; }
         public string name { get; set; } //dynamics = name
         public string description { get; set; } //dynamics = description
         public string externalId { get; set; }

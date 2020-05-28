@@ -252,6 +252,8 @@ string accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", ""
                 accountVM.TermsOfUseAccepted = account.AdoxioTermsofuseaccepted;
                 accountVM.TermsOfUseAcceptedDate = account.AdoxioTermsofuseaccepteddate;
 
+                accountVM.LocalGovernmentId = account._adoxioLginlinkidValue;
+
                 if (account.Primarycontactid != null)
                 {
                     accountVM.primarycontact = account.Primarycontactid.ToViewModel();
