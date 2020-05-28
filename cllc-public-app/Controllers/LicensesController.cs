@@ -477,7 +477,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             var applicationFilter = $"_adoxio_applicant_value eq {licenceeId} and adoxio_paymentrecieved eq true ";
             applicationFilter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
-            applicationFilter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Denied}";
             applicationFilter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
             applicationFilter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
             applicationFilter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
