@@ -26,6 +26,13 @@ export class ApplicationDataService extends DataService {
     return this.http.get<Application[]>(this.apiPath + 'current', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
+  /**
+   * Get all  Applications for the current user for the given application type
+   * */
+  getApplicationsByType(applicationType: string): Observable<Application[]> {
+    return this.http.get<Application[]>(`${this.apiPath}current/by-type/${applicationType}`, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
 
   /**
    * Gets the number of submitted Applications for the current user
