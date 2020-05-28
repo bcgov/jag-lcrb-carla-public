@@ -103,25 +103,18 @@ namespace bdd_tests
             // select the start date (Date: From) for the current address
             NgWebElement openCalendar = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
             openCalendar.Click();
-            
-            NgWebElement openCalendar1 = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-period-button"));
-            openCalendar1.Click();
 
-            NgWebElement openCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-previous-button"));
-            openCalendar2.Click();
+            NgWebElement nextCalendar = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span"));
+            nextCalendar.Click();
 
-            NgWebElement openCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
-            openCalendarYear.Click();
-            System.Threading.Thread.Sleep(5000);
+            NgWebElement nextCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr[4]/td[2]/div"));
+            nextCalendar2.Click();
 
-            NgWebElement openCalendarMonth = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
-            openCalendarMonth.Click();
+            NgWebElement nextCalendar3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-year-view/table/tbody/tr[3]/td[4]/div"));
+            nextCalendar3.Click();
 
-            NgWebElement openCalendar3 = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-previous-button"));
-            openCalendar3.Click();
-
-            NgWebElement openCalendarDay = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:nth-child"));
-            openCalendarDay.Click();
+            NgWebElement nextCalendar4 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[4]/td[4]/div"));
+            nextCalendar4.Click();
 
             // enter the street of the mailing address
             NgWebElement uiMailingStreet = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
@@ -205,8 +198,8 @@ namespace bdd_tests
             Page Title: Worker Dashboard
             */
 
-            // confirm Security Verification Status: Pending Review status is displayed
-            Assert.True (ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-dashboard/div/div[2]/div[1]/div/section/div/h2[text()='Security Verification Status: Pending Review']")).Displayed);
+            // confirm Pending Review status is displayed
+            Assert.True (ngDriver.FindElement(By.XPath("//body[contains(.,'Pending Review')]")).Displayed);
         }
 
         [And(@"the account is deleted")]
