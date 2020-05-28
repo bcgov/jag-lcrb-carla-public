@@ -61,7 +61,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     // hide terminated applications from view.
                     if (dynamicsApplication.Statuscode == null || (dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Terminated
-                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Denied
+                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Refused
                         && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Cancelled
                         && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.TerminatedAndRefunded))
                     {
@@ -89,7 +89,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     // hide terminated applications from view.
                     if (dynamicsApplication.Statuscode == null || (dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Terminated
-                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Denied
+                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Refused
                         && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Cancelled
                         && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.TerminatedAndRefunded))
                     {
@@ -173,8 +173,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var result = 0;
             if (!string.IsNullOrEmpty(applicantId))
             {
-                var filter = $"_adoxio_applicant_value eq {applicantId} and adoxio_paymentrecieved eq true and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Denied}";
+                var filter = $"_adoxio_applicant_value eq {applicantId} and adoxio_paymentrecieved eq true and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";                
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
@@ -273,7 +272,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // GET all licensee change applications in Dynamics by applicant using the account Id assigned to the user logged in
             var filter = $"_adoxio_applicant_value eq {userSettings.AccountId} and adoxio_paymentrecieved ne true and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
             filter += $" and adoxio_isapplicationcomplete ne 1";
-            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Denied}";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
