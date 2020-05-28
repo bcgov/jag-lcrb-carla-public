@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IWebHostEnvironment _env;
         private readonly FileManagerClient _fileManagerClient;
-     
+
         public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IWebHostEnvironment env)
         {
             _configuration = configuration;
@@ -145,7 +145,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var filter = $"_adoxio_licencee_value eq {licenceeId}";
                 filter += $" and statuscode eq { (int)LicenceStatusCodes.Active}";
-                var expand = new List<string>{"adoxio_LicenceType"};
+                var expand = new List<string> { "adoxio_LicenceType" };
                 try
                 {
                     result = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand).Value
@@ -210,6 +210,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(adoxioApplications);
         }
 
+
         /// GET all applications in Dynamics for the current user
         [HttpGet("current")]
         public JsonResult GetCurrentUserApplications()
@@ -223,6 +224,43 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(adoxioApplications);
         }
 
+        /// GET all applications in Dynamics for the current user
+        [HttpGet("current/by-type/{applicationType}")]
+        public JsonResult GetCurrentUserApplicationsByType(string applicationType)
+        {
+            var results = new List<ApplicationSummary>();
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            var filter = $"_adoxio_applicant_value eq {userSettings.AccountId}";
+            var appType = _dynamicsClient.GetApplicationTypeByName("Licensee Changes");
+            if (appType != null)
+            {
+                filter += $" and _adoxio_applicationtypeid_value eq {appType.AdoxioApplicationtypeid} ";
+            }
+
+            try
+            {
+                var applications = _dynamicsClient.Applications.Get(filter: filter).Value.ToList();
+                if (applications != null)
+                {
+                    foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in applications)
+                    {
+                        results.Add(dynamicsApplication.ToSummaryViewModel());
+                    }
+                }
+
+            }
+            catch (HttpOperationException e)
+            {
+                _logger.LogError(e, "Error getting licensee application");
+                throw;
+            }
+            return new JsonResult(results);
+        }
+
+        
         /// GET all applications in Dynamics for the current user
         [HttpGet("ongoing-licensee-application-id")]
         public IActionResult GetOngoingLicenseeApplicationId()
@@ -251,10 +289,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var applications = _dynamicsClient.Applications.Get(filter: filter).Value.OrderBy(app => app.Createdon);
                 var application = applications.FirstOrDefault();
-                if(application != null){
+                if (application != null)
+                {
                     result = new JsonResult(application.AdoxioApplicationid);
-                }else{
-                    result =  new JsonResult(null);
+                }
+                else
+                {
+                    result = new JsonResult(null);
                 }
             }
             catch (HttpOperationException e)
@@ -461,10 +502,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         }
 
-        
+
         [HttpPost("covid")]
         [AllowAnonymous]
-        public async Task<IActionResult> CreateCovidApplication ([FromBody] ViewModels.CovidApplication item)
+        public async Task<IActionResult> CreateCovidApplication([FromBody] ViewModels.CovidApplication item)
         {
             // check to see if the feature is on.
             if (string.IsNullOrEmpty(_configuration["FEATURE_COVID_APPLICATION"]))
