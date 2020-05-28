@@ -4,6 +4,7 @@ import { LegalEntity } from '@models/legal-entity.model';
 
 export class Account {
   id: string;
+  localGovernmentId: string;
   name: string;
   description: string;
   bcIncorporationNumber: string;
