@@ -44,6 +44,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="CateringApplication_localgovernment.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="CateringApplication_university.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="COVID_temporary_extension_winery.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
