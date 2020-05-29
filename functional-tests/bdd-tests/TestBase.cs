@@ -591,11 +591,11 @@ namespace bdd_tests
                 }
 
                 // enter key personnel first name
-                NgWebElement uiKeyPersonFirst = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+                NgWebElement uiKeyPersonFirst = ngDriver.FindElement(By.CssSelector("input[formControlName=\"firstNameNew\"]")); 
                 uiKeyPersonFirst.SendKeys(keyPersonnelFirstName);
 
                 // enter key personnel last name
-                NgWebElement uiKeyPersonLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+                NgWebElement uiKeyPersonLast = ngDriver.FindElement(By.CssSelector("input[formControlName=\"lastNameNew\"]"));
                 uiKeyPersonLast.SendKeys(keyPersonnelLastName);
 
                 // select key personnel role
@@ -611,15 +611,15 @@ namespace bdd_tests
                 }
 
                 // enter key personnel title
-                NgWebElement uiKeyPersonTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+                NgWebElement uiKeyPersonTitle = ngDriver.FindElement(By.CssSelector("input[formControlName=\"titleNew\"]"));
                 uiKeyPersonTitle.SendKeys(keyPersonnelTitle);
 
                 // enter key personnel email
-                NgWebElement uiKeyPersonEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+                NgWebElement uiKeyPersonEmail = ngDriver.FindElement(By.CssSelector("input[formControlName=\"emailNew\"]"));
                 uiKeyPersonEmail.SendKeys(keyPersonnelEmail);
 
                 // enter key personnel DOB
-                NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+                NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.CssSelector("input[formControlName=\"dateofBirthNew\"]"));
                 openKeyPersonnelDOB.Click();
 
                 // select the date
