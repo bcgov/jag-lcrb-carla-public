@@ -26,7 +26,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     FloorPlan = (FormControlState?)applicationType.AdoxioFloorplan,
                     FormReference = applicationType.AdoxioFormreference,
                     Id = applicationType.AdoxioApplicationtypeid,
-                    IsFree = applicationType.AdoxioIsfree,
+                    
                     Name = applicationType.AdoxioName,
                     NewEstablishmentAddress = (FormControlState?)applicationType.AdoxioNewestablishmentaddress,
                     ProofofZoning = (FormControlState?)applicationType.AdoxioProofofzoning,
@@ -57,6 +57,20 @@ namespace Gov.Lclb.Cllb.Public.Models
                         result.ContentTypes.Add(content.ToViewModel());
                     }
                 }
+
+                // Normalize is free.
+                if (applicationType.AdoxioIsfree != null)
+                {
+                    if (applicationType.AdoxioIsfree == 845280000)
+                    {
+                        result.IsFree = true;
+                    }
+                    else
+                    {
+                        result.IsFree = false;
+                    }
+                }
+
                 /*
                 if (dynamicsApplicationType.AdoxioLicenceTypeId != null)
                 {

@@ -41,7 +41,7 @@ namespace bdd_tests
         {
             CheckFeatureFlagsCannabis();
             
-            CarlaLoginNoCheck();
+            CarlaLogin(businessType);
         }
 
         [And(@"I am logged in to the dashboard as a (.*)")]
@@ -53,16 +53,7 @@ namespace bdd_tests
         [And(@"I click on the Start Application button for a Cannabis Retail Store")]
         public void I_start_application()
         {
-            ngDriver.IgnoreSynchronization = false;
-            ngDriver.Navigate().GoToUrl($"{baseUri}dashboard");
-
-            /* 
-            Page Title: Welcome to Cannabis Licensing
-            */           
-
-            
-            NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
-            startApp_button.Click();
+            StartCRSApplication();
         }
 
         [And(@"I complete the eligibility disclosure")]
