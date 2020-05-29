@@ -13,39 +13,43 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CateringApplication_localgovernment
+Feature: E2E_CRSApplication_Licence_soleproprietor_personnel_name_change
     As a logged in business user
-    I want to submit a Catering Application for a local government
+    I want to submit a CRS Application for a sole proprietorship
+    And request a personnel name change for the approved application
 
 Scenario: Start Application
-    Given I am logged in to the dashboard as a local government
+    Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
-    And I am logged in to the dashboard as a local government
-    And I click on the Start Application button for Catering
+    And I am logged in to the dashboard as a sole proprietorship
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
     And I submit the organization structure
-    And I complete the Catering application
-    And I click on the Submit button
+    And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
+    And the application is approved
+    And I click on the Licences tab for a Cannabis Retail Store
+    And I pay the licensing fee
+    And I request a personnel name change
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./CateringApplication_localgovernment.feature")]
-    public sealed class CateringApplicationLocalGovernment : TestBase
-    {        
-
+    [FeatureFile("./E2E_CRSApplication_Licence_soleproprietor_personnel_name_change.feature")]
+    public sealed class E2ECRSApplicationLicenceSoleProprietorPersonnelNameChange : TestBase
+    {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            CheckFeatureFlagsLiquor();
-            
-            //CarlaLoginNoCheck();
+            CheckFeatureFlagsCannabis();
+
+            CarlaLogin(businessType);
         }
 
         [And(@"I am logged in to the dashboard as a (.*)")]
@@ -54,15 +58,16 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
-        [And(@"I click on the Start Application button for (.*)")]
-        public void I_start_application(string application_type)
+        [And(@"I click on the Start Application button for a Cannabis Retail Store")]
+        public void I_start_application()
         {
+            StartCRSApplication();
+        }
 
-            // click on the Catering Start Application button
-            NgWebElement startApp_button = ngDriver.FindElement(By.Id("startCatering"));
-            startApp_button.Click();
-
-            applicationTypeShared = application_type;
+        [And(@"I complete the eligibility disclosure")]
+        public void complete_eligibility_disclosure()
+        {
+            CRSEligibilityDisclosure();
         }
 
         [And(@"I review the account profile")]
@@ -83,24 +88,15 @@ namespace bdd_tests
             SubmitOrgInfoButton();
         }
 
-        [And(@"I complete the Catering application")]
+        [And(@"I complete the Cannabis Retail Store application")]
         public void I_complete_the_application()
         {
-            CateringApplication();
-        }
-
-        [And(@"I click on the Submit button")]
-        public void click_on_submit()
-        {
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
-            submit_button.Click();
+            CRSApplication();
         }
 
         [And(@"I click on the Pay for Application button")]
         public void click_on_pay()
         {
-            ReviewSecurityScreening();
-
             NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
             pay_button.Click();
         }
@@ -114,7 +110,13 @@ namespace bdd_tests
         [And(@"I return to the dashboard")]
         public void return_to_dashboard()
         {
-            CateringReturnToDashboard();
+            CRSReturnToDashboard();
+        }
+
+        [And(@"the application is approved")]
+        public void application_is_approved()
+        {
+            ApplicationIsApproved();
         }
 
         [And(@"the account is deleted")]
@@ -123,13 +125,37 @@ namespace bdd_tests
             this.CarlaDeleteCurrentAccount();
         }
 
+        [And(@"I click on the Licences tab for a (.*)")]
+        public void click_on_licences_tab(string applicationType)
+        {
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
+
+            applicationTypeShared = applicationType;
+
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+        }
+
+        [And(@"I pay the licensing fee")]
+        public void pay_licence_fee()
+        {
+            PayCRSLicenceFee();
+        }
+
+        [And(@"I request a personnel name change")]
+        public void request_personnel_name_change()
+        {
+            RequestPersonnelNameChange();
+        }
+
         [Then(@"I see the login page")]
         public void I_see_login()
         {
-            /* 
-            Page Title: 
-            */
-
             Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
     }
