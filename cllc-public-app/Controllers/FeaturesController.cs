@@ -82,6 +82,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("LGApprovals");
             }
 
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_LIQUOR_TWO"]))
+            {
+                features.Add("LiquorTwo");
+            }
+
             return features;
         }
 
