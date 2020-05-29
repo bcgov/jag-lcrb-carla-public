@@ -638,7 +638,8 @@ namespace bdd_tests
                 uiOpenShare.Click();
 
                 // enter shareholder first name
-                NgWebElement uiShareFirst = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
+                //NgWebElement uiShareFirst = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
+                NgWebElement uiShareFirst = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='IndividualShareholder'] input[formControlName='firstNameNew']"));
                 uiShareFirst.SendKeys(shareholderFirstName);
 
                 // enter shareholder last name
