@@ -11,7 +11,7 @@ namespace Gov.Lclb.Cllb.Public.Utility
     /// </summary>
     public static class EncryptionUtility
     {
-
+        const int AES_256_KEY_SIZE_BYTES = 32;
         /// <summary>
         /// Encrypt a string using AES
         /// </summary>
@@ -25,7 +25,10 @@ namespace Gov.Lclb.Cllb.Public.Utility
             using (Aes aes = Aes.Create())
             {
                 aes.Padding = PaddingMode.PKCS7;
-                byte[] key = Encoding.UTF8.GetBytes(keyString.Substring(0, aes.Key.Length));
+
+                // AES-256 uses the same block size as AES-128 (the default) however the key size is larger (32 bytes).
+
+                byte[] key = Encoding.UTF8.GetBytes(keyString.Substring(0, AES_256_KEY_SIZE_BYTES));
 
                 using (var encryptor = aes.CreateEncryptor(key, aes.IV))
                 {
@@ -60,7 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Utility
             using (Aes aes = Aes.Create())
             {
                 aes.Padding = PaddingMode.PKCS7;
-                byte[] key = Encoding.UTF8.GetBytes(keyString.Substring(0, aes.Key.Length));
+                byte[] key = Encoding.UTF8.GetBytes(keyString.Substring(0, AES_256_KEY_SIZE_BYTES));
 
                 using (var encryptor = aes.CreateEncryptor(key, aes.IV))
                 {
@@ -109,7 +112,7 @@ namespace Gov.Lclb.Cllb.Public.Utility
                 using (var aesAlg = Aes.Create())
                 {
                     aesAlg.Padding = PaddingMode.PKCS7;
-                    var key = Encoding.UTF8.GetBytes(keyString.Substring(0, aesAlg.Key.Length));
+                    var key = Encoding.UTF8.GetBytes(keyString.Substring(0, AES_256_KEY_SIZE_BYTES));
                     using (var decryptor = aesAlg.CreateDecryptor(key, iv))
                     {
                         using (var msDecrypt = new MemoryStream(cipher))
@@ -164,7 +167,7 @@ namespace Gov.Lclb.Cllb.Public.Utility
                 using (var aesAlg = Aes.Create())
                 {
                     aesAlg.Padding = PaddingMode.PKCS7;
-                    var key = Encoding.UTF8.GetBytes(keyString.Substring(0, aesAlg.Key.Length));
+                    var key = Encoding.UTF8.GetBytes(keyString.Substring(0, AES_256_KEY_SIZE_BYTES));
                     using (var decryptor = aesAlg.CreateDecryptor(key, iv))
                     {
                         using (var msDecrypt = new MemoryStream(cipher))
