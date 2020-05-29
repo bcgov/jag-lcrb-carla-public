@@ -167,6 +167,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       connectedGrocery: ['', []],
       authorizedToSubmit: [''],
       signatureAgreement: [''],
+      mfgType: ['', []],
+      brewPub: ['', []],
+      pipedIn: ['', []],
+      neutralGrain: ['', []],
     });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((applyAsIN: boolean) => {
@@ -438,6 +442,30 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   onAccountSelect(proposedAccount: TransferAccount) {
     this.form.get('proposedTPO').patchValue(proposedAccount);
+  }
+
+
+  /* Helper functions for the Manufactuer Licence Business Plan
+    There are a lot of conditional requirements depending on what is selected.
+    Most are self explanatory
+  */
+
+  hasType(): boolean {
+  return this.form.get('mfgType').value
+  }
+
+  isBrewery(): boolean {
+    return this.form.get('mfgType').value == "Brewery"
+  }
+  isWinery(): boolean {
+    return this.form.get('mfgType').value == "Winery"
+  }
+  isDistillery(): boolean {
+    return this.form.get('mfgType').value == "Distillery"
+  }
+  
+  isBrewPub(): boolean {
+    return this.form.get('mfgType').value == "Brewery" && this.form.get('brewPub').value == "Yes"
   }
 
 
