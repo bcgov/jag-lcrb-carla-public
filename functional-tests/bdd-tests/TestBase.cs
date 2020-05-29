@@ -77,15 +77,7 @@ namespace bdd_tests
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
 
-        public void CarlaLoginNoCheck()
-        {
-            // load the dashboard page
-            string test_start = configuration["test_start"];
-
-            ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
-
-            ngDriver.WaitForAngular();
-        }
+        
 
         public void CarlaHome()
         {
@@ -98,9 +90,11 @@ namespace bdd_tests
         public void CarlaLogin(string businessType)
         {
             businessTypeShared = businessType;
+
+            Random random = new Random();
             
             // load the dashboard page
-            string test_start = configuration["test_start"];
+            string test_start = "login/token/AT" + DateTime.Now.Ticks.ToString() + random.Next(0, 999).ToString();
             ngDriver.IgnoreSynchronization = true;
             ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
             ngDriver.IgnoreSynchronization = false;

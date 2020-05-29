@@ -50,7 +50,7 @@ namespace bdd_tests
         {
             CheckFeatureFlagsCannabis();
 
-            CarlaLoginNoCheck();
+            CarlaLogin(businessType);
         }
 
         [And(@"I am logged in to the dashboard as a (.*)")]
