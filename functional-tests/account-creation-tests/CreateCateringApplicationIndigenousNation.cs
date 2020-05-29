@@ -43,9 +43,9 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as an (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            //CheckFeatureFlagsLiquor();
+            CheckFeatureFlagsLiquor();
 
-            CarlaLoginNoCheck();
+            CarlaLogin(businessType);
         }
 
         [And(@"I am logged in to the dashboard as an (.*)")]
