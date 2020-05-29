@@ -151,8 +151,8 @@
                 <section>
                     <app-field label="Phone Number" [required]="true"
                         [valid]="!form.get('contact.mobilePhone').touched || form.get('contact.mobilePhone').valid"
-                        errorMessage="Please enter a 10-digit phone number">
-                        <input formControlName="mobilePhone" class="form-control" style="width: 350px;" maxlength="10"
+                        errorMessage="Please enter a 10-digit phone number" >
+                        <input formControlName="mobilePhone" class="form-control" mask="(000) 000-0000" style="width: 350px;"
                             autocomplete="tel" type="text">
                     </app-field>
 
