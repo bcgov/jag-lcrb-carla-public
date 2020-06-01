@@ -291,6 +291,9 @@ namespace Gov.Lclb.Cllb.OneStopService
 
 
                 Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                    .MinimumLevel.Override("System", LogEventLevel.Information)
+
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
@@ -314,6 +317,8 @@ namespace Gov.Lclb.Cllb.OneStopService
             else
             {
                 Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                    .MinimumLevel.Override("System", LogEventLevel.Information)
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
