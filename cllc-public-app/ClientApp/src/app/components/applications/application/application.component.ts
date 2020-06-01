@@ -532,7 +532,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * */
   submit_application() {
     const formChanged: boolean = (JSON.stringify(this.savedFormData) !== JSON.stringify(this.form.value)); // has the data been updated?
-    const save: Observable<boolean> = formChanged ? this.save(!this.application.applicationType.isFree) : of(true); // bypass save if form value not updated
+      const save: Observable<boolean> = formChanged ? this.save(!this.application.applicationType.isFree) : of(true); // bypass save if form value not updated
 
     // Only save if the data is valid
     if (this.isValid()) {
