@@ -7,7 +7,7 @@ using System.ServiceModel;
 using Microsoft.Extensions.Configuration;
 using Hangfire;
 using Gov.Lclb.Cllb.OneStopService;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace one_stop_service.Controllers
 {
@@ -17,10 +17,10 @@ namespace one_stop_service.Controllers
         IConfiguration Configuration;
         private readonly ILogger _logger;
 
-        public OneStopController(IConfiguration configuration, ILoggerFactory loggerFactory)
+        public OneStopController(IConfiguration configuration)
         {
             Configuration = configuration;
-            _logger = loggerFactory.CreateLogger(typeof(OneStopController)); 
+            _logger = Log.Logger;
             
             
         }
@@ -28,7 +28,7 @@ namespace one_stop_service.Controllers
         [HttpGet("SendLicenceCreationMessage/{licenceGuid}")]
         public async Task<IActionResult> SendLicenceCreationMessage(string licenceGuid)
         {
-            _logger.LogInformation($"Reached SendLicenceCreationMessage. licenceGuid: {licenceGuid}");
+            _logger.Information($"Reached SendLicenceCreationMessage. licenceGuid: {licenceGuid}");
             BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _logger).SendLicenceCreationMessageREST(null, licenceGuid, "001"));
             return Ok();
         }
@@ -36,7 +36,7 @@ namespace one_stop_service.Controllers
         [HttpGet("SendProgramAccountDetailsBroadcastMessage/{licenceGuid}")]
         public IActionResult SendProgramAccountDetailsBroadcastMessage(string licenceGuid)
         {
-            _logger.LogInformation("Reached SendProgramAccountDetailsBroadcastMessage");
+            _logger.Information("Reached SendProgramAccountDetailsBroadcastMessage");
             BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _logger).SendProgramAccountDetailsBroadcastMessageREST(null, licenceGuid));
             return Ok();
         }
@@ -44,7 +44,7 @@ namespace one_stop_service.Controllers
         [HttpGet("LdbExport")]
         public IActionResult LdbExport()
         {
-            _logger.LogInformation("Reached LdbExport");
+            _logger.Information("Reached LdbExport");
             BackgroundJob.Enqueue(() => new LdbExport(Configuration).SendLdbExport(null));
             return Ok();
         }

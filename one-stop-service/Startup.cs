@@ -125,7 +125,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
 
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
-            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _loggerFactory.CreateLogger(typeof (ReceiveFromHubService) ), _configuration));
+            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _configuration));
 
 
             services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("OneStopUtils"));
@@ -342,8 +342,8 @@ namespace Gov.Lclb.Cllb.OneStopService
                 {
                     log.LogInformation("Creating Hangfire jobs for License issuance check ...");
 
-                    Microsoft.Extensions.Logging.ILogger oneStopLog = loggerFactory.CreateLogger(typeof(OneStopUtils));
-                    RecurringJob.AddOrUpdate(() => new OneStopUtils(_configuration, oneStopLog).CheckForNewLicences(null), Cron.Hourly());
+                    
+                    RecurringJob.AddOrUpdate(() => new OneStopUtils(_configuration, Log.Logger).CheckForNewLicences(null), Cron.Hourly());
 
                     log.LogInformation("Hangfire License issuance check jobs setup.");
                 }

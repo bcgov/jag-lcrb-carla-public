@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Serilog;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -23,19 +23,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<string> receiveFromPartner(string inputXml)
         {
             var url = $"{BaseUri}?inputXML={Uri.EscapeDataString(inputXml)}";
-            logger.LogDebug($"InputXML to send = {inputXml}");
+            logger.Debug($"InputXML to send = {inputXml}");
             var response = await httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                logger.LogDebug("OneStop message sequence completed successfully ");
+                logger.Debug("OneStop message sequence completed successfully ");
                 return content;
             }
             else
             {
                 string content = await response.Content.ReadAsStringAsync();
                 string ex = response.ReasonPhrase + " \n >>>" + content;
-                logger.LogError($"Error received: {ex}");
+                logger.Error($"Error received: {ex}");
                 throw new Exception(ex);
             }
         }
