@@ -125,6 +125,8 @@ namespace Gov.Lclb.Cllb.OneStopService
             services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _loggerFactory.CreateLogger(typeof (ReceiveFromHubService) ), _configuration));
 
 
+            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("OneStopUtils"));
+
             services.AddMvc(config =>
             {
                 config.EnableEndpointRouting = false;
