@@ -13,15 +13,15 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: E2ECateringApplication_private_corp_name_branding_change
+Feature: E2ECateringApplication_partnership_store_relocation
     As a logged in business user
     I want to pay the first year catering licence fee
-    And submit a name branding change for a private corporation
+    And submit a store relocation request for a partnership
 
-Scenario: Pay First Year Catering Licence and Submit Name Branding Change
-    Given I am logged in to the dashboard as a private corporation
+Scenario: Pay First Year Catering Licence and Submit Store Relocation Request
+    Given I am logged in to the dashboard as a partnership
     And the account is deleted
-    And I am logged in to the dashboard as a private corporation
+    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -32,18 +32,17 @@ Scenario: Pay First Year Catering Licence and Submit Name Branding Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab
+    And I click on the Licences tab for Catering
     And I pay the licensing fee
-    And I click on the licence download link
-    And I request a valid store name or branding change
+    And I request a store relocation
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./E2ECateringApplication_private_corp_name_branding_change.feature")]
-    public sealed class E2ECateringApplicationLicencePrivateCorpNameBrandingChange : TestBase
+    [FeatureFile("./E2ECateringApplication_partnership_store_relocation.feature")]
+    public sealed class E2ECateringApplicationLicencePartnershipStoreRelocation : TestBase
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void Given_I_view_the_dashboard(string businessType)
@@ -156,20 +155,10 @@ namespace bdd_tests
             PayCateringLicenceFee();
         }
 
-        [And(@"I click on the licence download link")]
-        public void click_licence_download_link()
+        [And(@"I request a store relocation")]
+        public void request_store_relocation()
         {
-            string downloadLink = "Download Licence";
-
-            // click on the Licences link
-            NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
-            uiDownloadLicence.Click();
-        }
-
-        [And(@"I request a valid store name or branding change")]
-        public void name_branding_change()
-        {
-            CateringNameBrandingChange();
+            RequestRelocation();
         }
 
         [Then(@"I see the login page")]

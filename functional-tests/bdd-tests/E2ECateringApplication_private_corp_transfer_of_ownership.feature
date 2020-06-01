@@ -1,9 +1,9 @@
-﻿Feature: E2ECateringApplication_private_corp_name_branding_change
+﻿Feature: E2ECateringApplication_private_corp_transfer_of_ownership
     As a logged in business user
     I want to pay the first year catering licence fee
-    And submit a name branding change for a private corporation
+    And request a transfer of ownership for a private corporation
 
-Scenario: Pay First Year Catering Licence and Submit Name Branding Change
+Scenario: Pay First Year Catering Licence and Request a Transfer of Ownership
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     And I am logged in to the dashboard as a private corporation
@@ -19,7 +19,6 @@ Scenario: Pay First Year Catering Licence and Submit Name Branding Change
     And the application is approved
     And I click on the Licences tab for Catering
     And I pay the licensing fee
-    And I click on the licence download link
-    And I request a valid store name or branding change
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page

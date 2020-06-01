@@ -239,11 +239,9 @@ namespace bdd_tests
             Page Title: Cannabis Retail Store Licence Eligibility Disclosure
             */
 
-            // select response: On or after March 1, 2020, did you or any of your associates own, operate, provide financial support to, or receive income from an unlicensed cannabis retail store or retailer?
-
-            
+            // select response: On or after March 1, 2020, did you or any of your associates own, operate, provide financial support to, or receive income from an unlicensed cannabis retail store or retailer?          
+ 
             // select No using radio button
-
             NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
             noRadio1.Click();
 
@@ -252,8 +250,7 @@ namespace bdd_tests
             yesRadio1.Click();
             
 
-            // complete field: Please indicate the name and location of the retailer or store
-            
+            // complete field: Please indicate the name and location of the retailer or store 
             string nameAndLocation = "Automated test name and location of retailer";
 
             NgWebElement uiNameAndLocation = ngDriver.FindElement(By.CssSelector("input[formControlName=\"nameLocationUnlicencedRetailer\"]"));
@@ -298,14 +295,11 @@ namespace bdd_tests
             {
             }
 
-            // complete field: Please indicate the name and location of the retailer or store
-            
+            // complete field: Please indicate the name and location of the retailer or store           
             string nameAndLocation2 = "Automated test name and location of retailer (2)";
             NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.CssSelector("input[formControlName=\"nameLocationRetailer\"]"));
             
             uiNameAndLocation2.SendKeys(nameAndLocation2);
-
-            
 
             // select response: Do you continue to be involved?
             try
@@ -1316,6 +1310,14 @@ namespace bdd_tests
             // click on the signature agreement checkbox
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSignatureAgreement.Click();
+
+            // retrieve the current URL to get the application ID (needed downstream)
+            string URL = ngDriver.Url;
+
+            // retrieve the application ID
+            string[] parsedURL = URL.Split('/');
+
+            application_ID = parsedURL[5];
         }
 
 
@@ -2360,8 +2362,140 @@ namespace bdd_tests
 
             // navigate back to dashboard
             ngDriver.Navigate().GoToUrl($"{baseUri}/dashboard");
-
-
         }
+
+        public void RequestThirdPartyOperator()
+        {
+            // return to the Licences tab
+            string licencesLink2 = "Licences";
+
+            NgWebElement uiLicences2 = ngDriver.FindElement(By.LinkText(licencesLink2));
+            uiLicences2.Click();
+
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
+
+            string addOrChangeThirdParty = "Add or Change a Third Party Operator";
+
+            // click on the Add or Change a Third Party Operator Link
+            NgWebElement uiAddOrChangeThirdPartyOp = ngDriver.FindElement(By.LinkText(addOrChangeThirdParty));
+            uiAddOrChangeThirdPartyOp.Click();
+
+            /* 
+            Page Title: Add or Change a Third Party Operator
+            */
+
+            string thirdparty = "GunderCorp TestBusiness";
+
+            // search for the proposed licensee
+            NgWebElement thirdPartyOperator = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+            thirdPartyOperator.SendKeys(thirdparty);
+
+            NgWebElement thirdPartyOperatorOption = ngDriver.FindElement(By.XPath("//mat-option[@id='mat-option-0']/span"));
+            thirdPartyOperatorOption.Click();
+
+            // click on authorized to submit checkbox
+            NgWebElement authorizedToSubmit = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            authorizedToSubmit.Click();
+
+            // click on signature agreement checkbox
+            NgWebElement signatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
+            signatureAgreement.Click();
+
+            // click on submit button
+            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
+            submitButton.Click();
+
+            // return to the Licences tab
+            string licencesLink = "Licences";
+
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+
+            // confirm that the application has been initiated
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third Party Operator Application Initiated')]")).Displayed);
+        }
+
+        public void RequestTransferOfOwnership()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
+
+            string transferOwnership = "Transfer Ownership";
+
+            // click on the Transfer Ownership link
+            NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
+            uiTransferOwnership.Click();
+
+            /* 
+            Page Title: Transfer Your Catering Licence
+            */
+
+            string licensee = "GunderCorp TestBusiness";
+
+            // search for the proposed licensee
+            NgWebElement proposedLicensee = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+            proposedLicensee.SendKeys(licensee);
+
+            NgWebElement thirdPartyOperatorOption = ngDriver.FindElement(By.XPath("//*[@id='mat-option-1']/span"));
+            thirdPartyOperatorOption.Click();
+
+            // click on consent to licence transfer checkbox
+            NgWebElement consentToTransfer = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            consentToTransfer.Click();
+
+            // click on authorize signature checkbox
+            NgWebElement authorizeSignature = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
+            authorizeSignature.Click();
+
+            // click on signature agreement checkbox
+            NgWebElement signatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[3]"));
+            signatureAgreement.Click();
+
+            // click on submit transfer button
+            NgWebElement submitTransferButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT TRANSFER')]"));
+            submitTransferButton.Click();
+
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+
+            // check for transfer initiated status 
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TRANSFER INITIATED')]")).Displayed);
+        }
+
+        public void ApplicationsVisibleOnDashboard()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
+
+            string dashboard = "Dashboard";
+
+            // click on the Dashboard link
+            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
+            uiDashboard.Click();
+
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
+
+            // confirm that relocation request is displayed
+            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Relocation Request')]")).Displayed);
+
+            // confirm that a name or branding change request is displayed - TODO
+            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Name or Branding Change')]")).Displayed);
+
+            // confirm that a third party operator request is displayed
+            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third-Party Operator')]")).Displayed);
+        }
+
     }
 }
