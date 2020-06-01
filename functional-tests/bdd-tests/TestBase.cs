@@ -1201,7 +1201,7 @@ namespace bdd_tests
         public void CateringApplication()
         {
             /* 
-                Page Title: Catering Licence Application
+            Page Title: Catering Licence Application
             */
 
             // create application info
@@ -1317,7 +1317,11 @@ namespace bdd_tests
             // retrieve the application ID
             string[] parsedURL = URL.Split('/');
 
-            application_ID = parsedURL[5];
+            string[] tempFix = parsedURL[5].Split(';');
+
+            application_ID = tempFix[0];
+
+            //application_ID = parsedURL[5];
         }
 
 
@@ -2496,6 +2500,5 @@ namespace bdd_tests
             // confirm that a third party operator request is displayed
             //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third-Party Operator')]")).Displayed);
         }
-
     }
 }
