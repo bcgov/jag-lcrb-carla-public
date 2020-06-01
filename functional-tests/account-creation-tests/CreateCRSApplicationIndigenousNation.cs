@@ -44,13 +44,13 @@ namespace bdd_tests
         {
             //CheckFeatureFlagsCannabis();
 
-            CarlaLogin(businessType);
+            CarlaLoginNoCheck();
         }
 
         [And(@"I am logged in to the dashboard as an (.*)")]
         public void And_I_view_the_dashboard(string businessType)
         {
-            CarlaLogin(businessType);
+            CarlaLoginWithUser(businessType);
         }
 
         [And(@"I click on the Start Application button for a Cannabis Retail Store")]
