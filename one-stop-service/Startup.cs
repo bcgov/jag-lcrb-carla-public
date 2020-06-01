@@ -208,7 +208,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             });
 
-            app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
+            
 
             // , serializer: SoapSerializer.XmlSerializer, caseInsensitivePath: true
 
@@ -250,8 +250,6 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             app.UseAuthentication();
 
-            
-
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -266,6 +264,8 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             // by positioning this after the health check, no need to filter out health checks from request logging.
             app.UseSerilogRequestLogging();
+
+            app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
 
             app.UseMvc();
 
@@ -305,7 +305,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
                 Serilog.Debugging.SelfLog.Enable(Console.Error);
 
-                Log.Logger.Information("CARLA Portal Container Started");
+                Log.Logger.Information("Onestop-Service Container Started");
 
             }
             else

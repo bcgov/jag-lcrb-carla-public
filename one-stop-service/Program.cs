@@ -21,8 +21,6 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
                 logging.AddConsole(x => x.TimestampFormat = "yyyy-MM-dd HH:mm:ss ");
-                logging.AddDebug();
-                logging.AddEventSourceLogger();
             })
             .UseSerilog()
             .ConfigureAppConfiguration((hostingContext, config) =>
