@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Serilog;
+using Serilog.AspNetCore;
+using Serilog.Events;
 using System;
 
 namespace Gov.Lclb.Cllb.OneStopService
@@ -12,6 +14,14 @@ namespace Gov.Lclb.Cllb.OneStopService
     {
         public static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+            .Enrich.FromLogContext()
+            .WriteTo.Console()
+            .CreateLogger();
+
+
             CreateWebHostBuilder(args).Build().Run();
         }
 
@@ -19,7 +29,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             WebHost.CreateDefaultBuilder(args)
             .ConfigureLogging((hostingContext, logging) =>
             {
-                logging.ClearProviders();
+                //logging.ClearProviders();
                 logging.AddConsole(x =>
                 {
                     x.TimestampFormat = "yyyy-MM-dd HH:mm:ss ";
