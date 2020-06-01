@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: E2ECateringApplication_private_corp_name_branding_change
+Feature: E2ECateringApplication_private_corp_transfer_of_ownership
     As a logged in business user
     I want to pay the first year catering licence fee
-    And submit a name branding change for a private corporation
+    And request a transfer of ownership for a private corporation
 
-Scenario: Pay First Year Catering Licence and Submit Name Branding Change
+Scenario: Pay First Year Catering Licence and Request a Transfer of Ownership
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     And I am logged in to the dashboard as a private corporation
@@ -34,16 +34,15 @@ Scenario: Pay First Year Catering Licence and Submit Name Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
-    And I click on the licence download link
-    And I request a valid store name or branding change
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./E2ECateringApplication_private_corp_name_branding_change.feature")]
-    public sealed class E2ECateringApplicationLicencePrivateCorpNameBrandingChange : TestBase
+    [FeatureFile("./E2ECateringApplication_private_corp_transfer_of_ownership.feature")]
+    public sealed class E2ECateringApplicationLicencePrivateCorpTransferOfOwnership : TestBase
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void Given_I_view_the_dashboard(string businessType)
@@ -156,20 +155,10 @@ namespace bdd_tests
             PayCateringLicenceFee();
         }
 
-        [And(@"I click on the licence download link")]
-        public void click_licence_download_link()
-        {
-            string downloadLink = "Download Licence";
-
-            // click on the Licences link
-            NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
-            uiDownloadLicence.Click();
-        }
-
-        [And(@"I request a valid store name or branding change")]
+        [And(@"I request a transfer of ownership")]
         public void name_branding_change()
         {
-            CateringNameBrandingChange();
+            RequestTransferOfOwnership();
         }
 
         [Then(@"I see the login page")]
