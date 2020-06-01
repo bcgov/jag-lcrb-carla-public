@@ -122,9 +122,9 @@ namespace Gov.Lclb.Cllb.OneStopService
 
 
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
-            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _loggerFactory.CreateLogger("IReceiveFromHubService"), _configuration));
+            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _loggerFactory.CreateLogger(typeof (ReceiveFromHubService) ), _configuration));
 
-            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("OneStopController"));
+            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger(typeof()));
 
             services.AddMvc(config =>
             {
@@ -269,7 +269,6 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             app.UseMvc();
 
-            // enable Splunk logger using Serilog
             // enable Splunk logger using Serilog
             if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]) &&
                 !string.IsNullOrEmpty(_configuration["SPLUNK_TOKEN"])
