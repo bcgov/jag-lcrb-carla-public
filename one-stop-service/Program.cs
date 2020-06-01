@@ -18,19 +18,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-            .ConfigureLogging((hostingContext, logging) =>
-            {
-                //logging.ClearProviders();
-                logging.AddConsole(x =>
-                {
-                    x.TimestampFormat = "yyyy-MM-dd HH:mm:ss ";
-                    x.IncludeScopes = true;
-                });
-                logging.SetMinimumLevel(LogLevel.Debug);
-                logging.AddDebug();
-                logging.AddEventSourceLogger();
-            })
+            WebHost.CreateDefaultBuilder(args)            
             .UseSerilog()
             .ConfigureAppConfiguration((hostingContext, config) =>
                     {
