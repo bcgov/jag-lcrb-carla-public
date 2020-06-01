@@ -182,6 +182,8 @@ namespace Gov.Lclb.Cllb.OneStopService
                 // determine the type of XML.
                 string rootNodeName = GetRootNodeName(inputXML);
 
+                _logger.LogInformation("ONESTOP ReceiveFromHub Message {rootNodeName}");
+
                 switch (rootNodeName)
                 {
                     case "SBNCreateProgramAccountResponse":
