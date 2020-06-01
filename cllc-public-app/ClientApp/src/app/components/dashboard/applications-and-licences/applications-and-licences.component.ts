@@ -58,6 +58,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   licenceTransferFeatureOn = false;
   licenseeChangeFeatureOn: boolean;
   liquorOne: boolean;
+  liquorTwo: boolean;
 
 
   constructor(
@@ -86,6 +87,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       .subscribe(x => this.licenseeChangeFeatureOn = x);
     featureFlagService.featureOn('LiquorOne')
       .subscribe(x => this.liquorOne = x);
+    featureFlagService.featureOn('LiquorTwo')
+      .subscribe(x => this.liquorTwo = x);
   }
 
   ngOnInit() {
