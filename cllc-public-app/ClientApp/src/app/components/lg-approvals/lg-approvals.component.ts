@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { Account } from '@models/account.model';
+import { ApplicationDataService } from '@services/application-data.service';
+import { Application } from '@models/application.model';
 
 @Component({
   selector: 'app-lg-approvals',
@@ -11,8 +13,10 @@ import { Account } from '@models/account.model';
 export class LgApprovalsComponent implements OnInit {
 
   account: Account;
+  applications: Application[];
 
-  constructor(store: Store<AppState>) { 
+  constructor(private store: Store<AppState>,
+    private applicationDataService: ApplicationDataService) { 
     store.select(state => state.currentAccountState.currentAccount)
     .subscribe(account =>{
       this.account = account;
@@ -20,6 +24,10 @@ export class LgApprovalsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.applicationDataService.getLGApprovalApplications()
+    .subscribe(applications => this.applications = applications)
   }
+
+
 
 }

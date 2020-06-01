@@ -109,4 +109,6 @@ export class Application {
   isReadyProductNotVisibleOutside: boolean;
   establishmentopeningdate: Date;
   isApplicationComplete: string;
+
+  applicant: Account;
 }
