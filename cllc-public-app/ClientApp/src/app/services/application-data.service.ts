@@ -47,6 +47,11 @@ export class ApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getLGApprovalApplications(): Observable<Application[]> {
+    return this.http.get<Application[]>(this.apiPath + 'current/lg-approvals', { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   getOngoingLicenseeChangeApplicationId(): Observable<string> {
     return this.http.get<string>(this.apiPath + 'ongoing-licensee-application-id', { headers: this.headers })
       .pipe(catchError(this.handleError));
