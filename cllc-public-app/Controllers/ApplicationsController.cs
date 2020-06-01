@@ -274,8 +274,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var accountId = Utils.GuidUtility.SanitizeGuidString(userSettings.AccountId);
                 MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(new Guid(accountId));
 
-                var filter = $"_adoxio_applicant_value eq {userSettings.AccountId}";
-                filter += $" and _adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
+                var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
                 filter += $" and statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";
 
                 var expand = new List<string>{
