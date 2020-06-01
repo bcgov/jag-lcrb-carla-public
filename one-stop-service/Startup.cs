@@ -129,6 +129,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
 
             services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("OneStopUtils"));
+            services.AddSingleton<Serilog.ILogger>(Log.Logger);
 
             services.AddMvc(config =>
             {
