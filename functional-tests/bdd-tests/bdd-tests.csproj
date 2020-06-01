@@ -80,6 +80,9 @@
     <None Update="E2E_CRSApplication_Licence_partnership_federal_reports.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="E2ECateringApplication_private_corp_name_branding_change.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="E2E_CRSApplication_Licence_soleproprietor_federal_reports.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
