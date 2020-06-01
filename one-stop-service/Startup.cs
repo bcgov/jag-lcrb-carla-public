@@ -124,7 +124,6 @@ namespace Gov.Lclb.Cllb.OneStopService
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
             services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _loggerFactory.CreateLogger(typeof (ReceiveFromHubService) ), _configuration));
 
-            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger(typeof()));
 
             services.AddMvc(config =>
             {
