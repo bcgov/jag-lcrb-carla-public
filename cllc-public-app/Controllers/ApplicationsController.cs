@@ -390,7 +390,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                if (!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication._adoxioApplicantValue))
+                bool allowLGAccess = await CurrentUserIsLGForApplication(dynamicsApplication);
+                if (!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication._adoxioApplicantValue)
+                    && !allowLGAccess)
                 {
                     return new NotFoundResult();
                 }
@@ -406,6 +408,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             return new JsonResult(result);
+        }
+
+        private async Task<bool> CurrentUserIsLGForApplication(MicrosoftDynamicsCRMadoxioApplication application)
+        {
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // get user account
+            var accountId = Utils.GuidUtility.SanitizeGuidString(userSettings.AccountId);
+            MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(new Guid(accountId));
+
+            // make sure the application and account have matching local government values
+            bool isLGForApplication = (application != null && application._adoxioLocalgovindigenousnationidValue == account._adoxioLginlinkidValue);
+            return isLGForApplication;
         }
 
         private string GetApplicationFolderName(MicrosoftDynamicsCRMadoxioApplication application)
