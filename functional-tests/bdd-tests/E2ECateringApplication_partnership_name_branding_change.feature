@@ -1,12 +1,12 @@
-﻿Feature: E2ECateringApplication_private_corp_name_branding_change
+﻿Feature: E2ECateringApplication_partnership_name_branding_change
     As a logged in business user
     I want to pay the first year catering licence fee
-    And submit a name branding change for a private corporation
+    And submit a name branding change for a partnership
 
 Scenario: Pay First Year Catering Licence and Submit Name Branding Change
-    Given I am logged in to the dashboard as a private corporation
+    Given I am logged in to the dashboard as a partnership
     And the account is deleted
-    And I am logged in to the dashboard as a private corporation
+    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
