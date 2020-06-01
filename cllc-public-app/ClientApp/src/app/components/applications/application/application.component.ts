@@ -96,6 +96,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedZoningDocuments: 0;
   dynamicsForm: DynamicsForm;
 
+  get isOpenedByLG(): boolean {
+    let openedByLG = false;
+    if(this.account && this.application && 
+      this.account.localGovernmentId === this.application.indigenousNationId){
+      openedByLG = true;
+    }
+    return openedByLG;
+  }
+
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
