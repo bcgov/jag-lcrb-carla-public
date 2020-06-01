@@ -4,7 +4,7 @@ using Hangfire;
 using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
 using System;
@@ -82,7 +82,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
                     if (_logger != null)
                     {
-                        _logger.LogError(ex, $"Exception occured. {ex.Message}");
+                        _logger.Error(ex, $"Exception occured. {ex.Message}");
                     }
 
                     throw;
@@ -130,7 +130,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
                 if (_logger != null)
                 {
-                    _logger.LogError($"Unable to get licence {licenceGuid}.");
+                    _logger.Error($"Unable to get licence {licenceGuid}.");
                 }
             }
             else
@@ -201,8 +201,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 {
                     if (_logger != null)
                     {
-                        _logger.LogError(ex.Message);
-                        _logger.LogError(ex.StackTrace);
+                        _logger.Error(ex, "Error sending request.");
                     }
 
                     if (hangfireContext != null)
@@ -254,7 +253,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
                 if (_logger != null)
                 {
-                    _logger.LogError($"Unable to get licence {licenceGuid}.");
+                    _logger.Error($"Unable to get licence {licenceGuid}.");
                 }
             }
             else
@@ -377,7 +376,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 suffix = suffix.TrimStart('0');
                 if (!int.TryParse(suffix, out result))
                 {
-                    logger.LogError($"ERROR - unable to parse suffix of {suffix} in partner note {partnerNote}");
+                    logger.Error($"ERROR - unable to parse suffix of {suffix} in partner note {partnerNote}");
                 }
             }
             
