@@ -193,7 +193,57 @@ namespace Gov.Lclb.Cllb.OneStopService
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
 
+            // enable Splunk logger using Serilog
+            if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]) &&
+                !string.IsNullOrEmpty(_configuration["SPLUNK_TOKEN"])
+                )
+            {
 
+                Serilog.Sinks.Splunk.CustomFields fields = new Serilog.Sinks.Splunk.CustomFields();
+                if (!string.IsNullOrEmpty(_configuration["SPLUNK_CHANNEL"]))
+                {
+                    fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", _configuration["SPLUNK_CHANNEL"]));
+                }
+                var splunkUri = new Uri(_configuration["SPLUNK_COLLECTOR_URL"]);
+                var upperSplunkHost = splunkUri.Host?.ToUpperInvariant() ?? string.Empty;
+
+                // Fix for bad SSL issues 
+
+
+                Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                    .MinimumLevel.Override("System", LogEventLevel.Information)
+
+                    .Enrich.FromLogContext()
+                    .Enrich.WithExceptionDetails()
+                    .WriteTo.Console()
+                    .WriteTo.EventCollector(splunkHost: _configuration["SPLUNK_COLLECTOR_URL"],
+                       sourceType: "manual", eventCollectorToken: _configuration["SPLUNK_TOKEN"],
+                       restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
+#pragma warning disable CA2000 // Dispose objects before losing scope
+                       messageHandler: new HttpClientHandler()
+                       {
+                           ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
+                       }
+#pragma warning restore CA2000 // Dispose objects before losing scope
+                     )
+                    .CreateLogger();
+
+                Serilog.Debugging.SelfLog.Enable(Console.Error);
+
+                Log.Logger.Information("Onestop-Service Container Started");
+
+            }
+            else
+            {
+                Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                    .MinimumLevel.Override("System", LogEventLevel.Information)
+                    .Enrich.FromLogContext()
+                    .Enrich.WithExceptionDetails()
+                    .WriteTo.Console()
+                    .CreateLogger();
+            }
 
             // OneStop does not seem to set the SoapAction properly
 
@@ -270,61 +320,13 @@ namespace Gov.Lclb.Cllb.OneStopService
             // by positioning this after the health check, no need to filter out health checks from request logging.
             app.UseSerilogRequestLogging();
 
-            app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
+            
 
             app.UseMvc();
 
-            // enable Splunk logger using Serilog
-            if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]) &&
-                !string.IsNullOrEmpty(_configuration["SPLUNK_TOKEN"])
-                )
-            {
+            
 
-                Serilog.Sinks.Splunk.CustomFields fields = new Serilog.Sinks.Splunk.CustomFields();
-                if (!string.IsNullOrEmpty(_configuration["SPLUNK_CHANNEL"]))
-                {
-                    fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", _configuration["SPLUNK_CHANNEL"]));
-                }
-                var splunkUri = new Uri(_configuration["SPLUNK_COLLECTOR_URL"]);
-                var upperSplunkHost = splunkUri.Host?.ToUpperInvariant() ?? string.Empty;
-
-                // Fix for bad SSL issues 
-
-
-                Log.Logger = new LoggerConfiguration()
-                    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-                    .MinimumLevel.Override("System", LogEventLevel.Information)
-
-                    .Enrich.FromLogContext()
-                    .Enrich.WithExceptionDetails()
-                    .WriteTo.Console()
-                    .WriteTo.EventCollector(splunkHost: _configuration["SPLUNK_COLLECTOR_URL"],
-                       sourceType: "manual", eventCollectorToken: _configuration["SPLUNK_TOKEN"],
-                       restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
-#pragma warning disable CA2000 // Dispose objects before losing scope
-                       messageHandler: new HttpClientHandler()
-                       {
-                           ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
-                       }
-#pragma warning restore CA2000 // Dispose objects before losing scope
-                     )
-                    .CreateLogger();
-
-                Serilog.Debugging.SelfLog.Enable(Console.Error);
-
-                Log.Logger.Information("Onestop-Service Container Started");
-
-            }
-            else
-            {
-                Log.Logger = new LoggerConfiguration()
-                    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-                    .MinimumLevel.Override("System", LogEventLevel.Information)
-                    .Enrich.FromLogContext()
-                    .Enrich.WithExceptionDetails()
-                    .WriteTo.Console()
-                    .CreateLogger();
-            }
+            app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
         }
 
             /// <summary>
