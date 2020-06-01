@@ -87,18 +87,8 @@ namespace bdd_tests
             ngDriver.WaitForAngular();
         }
 
-        public void CarlaLogin(string businessType)
+        private void DoLogin(string businessType)
         {
-            businessTypeShared = businessType;
-
-            Random random = new Random();
-            
-            // load the dashboard page
-            string test_start = "login/token/AT" + DateTime.Now.Ticks.ToString() + random.Next(0, 999).ToString();
-            ngDriver.IgnoreSynchronization = true;
-            ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
-            ngDriver.IgnoreSynchronization = false;
-
             ngDriver.Navigate().GoToUrl($"{baseUri}dashboard");
 
 
@@ -196,6 +186,47 @@ namespace bdd_tests
             confirmNameButton.Click();
             ngDriver.WaitForAngular();
         }
+
+        public void CarlaLogin(string businessType)
+        {
+            businessTypeShared = businessType;
+
+            Random random = new Random();
+            
+            // load the dashboard page
+            string test_start = "login/token/AT" + DateTime.Now.Ticks.ToString() + random.Next(0, 999).ToString();
+            ngDriver.IgnoreSynchronization = true;
+            ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
+            ngDriver.IgnoreSynchronization = false;
+
+            DoLogin(businessType);
+        }
+
+        public void CarlaLoginNoCheck()
+        {
+            // load the dashboard page
+            string test_start = configuration["test_start"];
+
+            ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
+
+            ngDriver.WaitForAngular();
+        }
+
+        public void CarlaLoginWithUser(string businessType)
+        {
+            businessTypeShared = businessType;
+
+            // load the dashboard page
+            string test_start = configuration["test_start"];
+            ngDriver.IgnoreSynchronization = true;
+            ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
+            ngDriver.IgnoreSynchronization = false;
+
+            DoLogin(businessType);
+        }
+
+
+
 
         public void MakePayment()
         {
