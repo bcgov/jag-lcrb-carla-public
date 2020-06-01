@@ -101,8 +101,6 @@ namespace bdd_tests
 
             ngDriver.Navigate().GoToUrl($"{baseUri}dashboard");
 
-
-
             /* 
             Page Title: Terms of Use
             */
@@ -130,56 +128,56 @@ namespace bdd_tests
             // if this is a private corporation, click the radio button
             if (businessType == "private corporation")
             {
-                NgWebElement privateCorporationRadio = ngDriver.FindElement(By.Name("InitialBusinessType"));
+                NgWebElement privateCorporationRadio = ngDriver.FindElement(By.XPath("(//input[@value='PrivateCorporation'])"));
                 privateCorporationRadio.Click();
             }
 
             // if this is a public corporation, click the radio button
             if (businessType == "public corporation")
             {
-                NgWebElement publicCorporationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[2]"));
+                NgWebElement publicCorporationRadio = ngDriver.FindElement(By.XPath("(//input[@value='PublicCorporation'])"));
                 publicCorporationRadio.Click();
             }
 
             // if this is a sole proprietorship, click the radio button
             if (businessType == "sole proprietorship")
             {
-                NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[3]"));
+                NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.XPath("(//input[@value='SoleProprietor'])"));
                 soleProprietorshipRadio.Click();
             }
 
             // if this is a partnership, click the radio button
             if (businessType == "partnership")
             {
-                NgWebElement partnershipRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[4]"));
+                NgWebElement partnershipRadio = ngDriver.FindElement(By.XPath("(//input[@value='Partnership'])"));
                 partnershipRadio.Click();
             }
 
             // if this is a society, click the radio button
             if (businessType == "society")
             {
-                NgWebElement societyRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[5]"));
+                NgWebElement societyRadio = ngDriver.FindElement(By.XPath("(//input[@value='Society'])"));
                 societyRadio.Click();
             }
 
-            // if this is an indigenous nation, click the radio button
+            // if this is a university, click the radio button
             if (businessType == "university")
             {
-                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[6]"));
+                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@value='University'])"));
                 indigenousNationRadio.Click();
             }
 
-            // if this is an indigenous nation, click the radio button
-            if (businessType == "local government")
-            {
-                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[7]"));
-                indigenousNationRadio.Click();
-            }
+            // if this is a local government, click the radio button
+            //if (businessType == "local government")
+            //{
+            //    NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[7]"));
+            //    indigenousNationRadio.Click();
+            //}
 
             // if this is an indigenous nation, click the radio button
             if (businessType == "indigenous nation")
             {
-                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[8]"));
+                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@value='IndigenousNation'])"));
                 indigenousNationRadio.Click();
             }
 
