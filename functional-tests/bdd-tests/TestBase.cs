@@ -49,7 +49,7 @@ namespace bdd_tests
             if (!string.IsNullOrEmpty(configuration["OPENSHIFT_BUILD_COMMIT"]) || !string.IsNullOrEmpty(configuration["Build.BuildNumber"]))
             {
                 Console.Out.WriteLine("Enabling Headless Mode");
-                options.AddArguments("headless", "no-sandbox", "disable-web-security", "no-zygote", "disable-gpu", "disable-dev-shm-usage", "disable-infobars", "start-maximized", "hide-scrollbars");
+                options.AddArguments("headless", "no-sandbox", "disable-web-security", "no-zygote", "disable-gpu", "disable-dev-shm-usage", "disable-infobars", "start-maximized", "hide-scrollbars", "window-size=1920,1080");
                 if (!string.IsNullOrEmpty(configuration["CHROME_BINARY_LOCATION"]))
                 {
                     options.BinaryLocation = configuration["CHROME_BINARY_LOCATION"];
@@ -753,8 +753,6 @@ namespace bdd_tests
                 uiKeyPersonEmailBiz.SendKeys(keyPersonnelEmailBiz);
 
                 // enter business shareholder > key personnel DOB
-                // click interception error occurring here
-                //NgWebElement uiKeyPersonnelDOB1Biz1 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[6]/app-field/section/div[1]/section/input"));
                 NgWebElement uiKeyPersonnelDOB1Biz1 = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] app-associate-list[changetypesuffix='Leadership'] input[formControlName='dateofBirthNew']"));
                 uiKeyPersonnelDOB1Biz1.Click();
 
