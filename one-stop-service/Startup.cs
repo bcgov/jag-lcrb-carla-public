@@ -90,10 +90,11 @@ namespace Gov.Lclb.Cllb.OneStopService
     {
         private readonly ILoggerFactory _loggerFactory;
         public IConfiguration _configuration { get; }
+        public IWebHostEnvironment _env { get; }
 
         public Startup(IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            _loggerFactory = loggerFactory;
+            _loggerFactory = loggerFactory; 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
@@ -105,7 +106,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 builder.AddUserSecrets<Startup>();
             }
-
+            _env = env;
             _configuration = builder.Build();
 
         }
@@ -125,7 +126,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
 
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
-            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _configuration));
+            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _configuration, _env));
 
 
             services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("OneStopUtils"));
