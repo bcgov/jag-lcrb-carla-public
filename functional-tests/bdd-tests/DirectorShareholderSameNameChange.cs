@@ -97,11 +97,11 @@ namespace bdd_tests
             string votingShares = "100";
 
             // enter the first name 
-            NgWebElement uiSameIndividualFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+            NgWebElement uiSameIndividualFirstName = ngDriver.FindElement(By.CssSelector("input[formControlName=\"firstNameNew\"]"));
             uiSameIndividualFirstName.SendKeys(sameIndividualFirstName);
 
             // enter the last name 
-            NgWebElement uiSameIndividualLastName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+            NgWebElement uiSameIndividualLastName = ngDriver.FindElement(By.CssSelector("input[formControlName=\"lastNameNew\"]"));
             uiSameIndividualLastName.SendKeys(sameIndividualLastName);
 
             // click the Director checkbox
@@ -109,15 +109,15 @@ namespace bdd_tests
             uiSameRole.Click();
 
             // enter the title
-            NgWebElement uiSameTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+            NgWebElement uiSameTitle = ngDriver.FindElement(By.CssSelector("input[formControlName=\"titleNew\"]"));
             uiSameTitle.SendKeys(sameTitle);
 
             // enter the email 
-            NgWebElement uiSameIndividualEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+            NgWebElement uiSameIndividualEmail = ngDriver.FindElement(By.CssSelector("input[formControlName=\"emailNew\"]"));
             uiSameIndividualEmail.SendKeys(sameIndividualEmail);
 
             // select the DOB
-            NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.CssSelector("input[formControlName=\"dateofBirthNew\"]"));
             openKeyPersonnelDOB.Click();
 
             SharedCalendarDate();

@@ -87,21 +87,9 @@ namespace bdd_tests
             ngDriver.WaitForAngular();
         }
 
-        public void CarlaLogin(string businessType)
+        private void DoLogin(string businessType)
         {
-            businessTypeShared = businessType;
-
-            Random random = new Random();
-            
-            // load the dashboard page
-            string test_start = "login/token/AT" + DateTime.Now.Ticks.ToString() + random.Next(0, 999).ToString();
-            ngDriver.IgnoreSynchronization = true;
-            ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
-            ngDriver.IgnoreSynchronization = false;
-
             ngDriver.Navigate().GoToUrl($"{baseUri}dashboard");
-
-
 
             /* 
             Page Title: Terms of Use
@@ -130,56 +118,56 @@ namespace bdd_tests
             // if this is a private corporation, click the radio button
             if (businessType == "private corporation")
             {
-                NgWebElement privateCorporationRadio = ngDriver.FindElement(By.Name("InitialBusinessType"));
+                NgWebElement privateCorporationRadio = ngDriver.FindElement(By.XPath("(//input[@value='PrivateCorporation'])"));
                 privateCorporationRadio.Click();
             }
 
             // if this is a public corporation, click the radio button
             if (businessType == "public corporation")
             {
-                NgWebElement publicCorporationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[2]"));
+                NgWebElement publicCorporationRadio = ngDriver.FindElement(By.XPath("(//input[@value='PublicCorporation'])"));
                 publicCorporationRadio.Click();
             }
 
             // if this is a sole proprietorship, click the radio button
             if (businessType == "sole proprietorship")
             {
-                NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[3]"));
+                NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.XPath("(//input[@value='SoleProprietor'])"));
                 soleProprietorshipRadio.Click();
             }
 
             // if this is a partnership, click the radio button
             if (businessType == "partnership")
             {
-                NgWebElement partnershipRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[4]"));
+                NgWebElement partnershipRadio = ngDriver.FindElement(By.XPath("(//input[@value='Partnership'])"));
                 partnershipRadio.Click();
             }
 
             // if this is a society, click the radio button
             if (businessType == "society")
             {
-                NgWebElement societyRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[5]"));
+                NgWebElement societyRadio = ngDriver.FindElement(By.XPath("(//input[@value='Society'])"));
                 societyRadio.Click();
             }
 
-            // if this is an indigenous nation, click the radio button
+            // if this is a university, click the radio button
             if (businessType == "university")
             {
-                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[6]"));
+                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@value='University'])"));
                 indigenousNationRadio.Click();
             }
 
-            // if this is an indigenous nation, click the radio button
-            if (businessType == "local government")
-            {
-                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[7]"));
-                indigenousNationRadio.Click();
-            }
+            // if this is a local government, click the radio button
+            //if (businessType == "local government")
+            //{
+            //    NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[7]"));
+            //    indigenousNationRadio.Click();
+            //}
 
             // if this is an indigenous nation, click the radio button
             if (businessType == "indigenous nation")
             {
-                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@name='InitialBusinessType'])[8]"));
+                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@value='IndigenousNation'])"));
                 indigenousNationRadio.Click();
             }
 
@@ -196,6 +184,47 @@ namespace bdd_tests
             confirmNameButton.Click();
             ngDriver.WaitForAngular();
         }
+
+        public void CarlaLogin(string businessType)
+        {
+            businessTypeShared = businessType;
+
+            Random random = new Random();
+            
+            // load the dashboard page
+            string test_start = "login/token/AT" + DateTime.Now.Ticks.ToString() + random.Next(0, 999).ToString();
+            ngDriver.IgnoreSynchronization = true;
+            ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
+            ngDriver.IgnoreSynchronization = false;
+
+            DoLogin(businessType);
+        }
+
+        public void CarlaLoginNoCheck()
+        {
+            // load the dashboard page
+            string test_start = configuration["test_start"];
+
+            ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
+
+            ngDriver.WaitForAngular();
+        }
+
+        public void CarlaLoginWithUser(string businessType)
+        {
+            businessTypeShared = businessType;
+
+            // load the dashboard page
+            string test_start = configuration["test_start"];
+            ngDriver.IgnoreSynchronization = true;
+            ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
+            ngDriver.IgnoreSynchronization = false;
+
+            DoLogin(businessType);
+        }
+
+
+
 
         public void MakePayment()
         {
@@ -241,11 +270,9 @@ namespace bdd_tests
             Page Title: Cannabis Retail Store Licence Eligibility Disclosure
             */
 
-            // select response: On or after March 1, 2020, did you or any of your associates own, operate, provide financial support to, or receive income from an unlicensed cannabis retail store or retailer?
-
-            
+            // select response: On or after March 1, 2020, did you or any of your associates own, operate, provide financial support to, or receive income from an unlicensed cannabis retail store or retailer?          
+ 
             // select No using radio button
-
             NgWebElement noRadio1 = ngDriver.FindElement(By.Id("mat-radio-3"));
             noRadio1.Click();
 
@@ -254,8 +281,7 @@ namespace bdd_tests
             yesRadio1.Click();
             
 
-            // complete field: Please indicate the name and location of the retailer or store
-            
+            // complete field: Please indicate the name and location of the retailer or store 
             string nameAndLocation = "Automated test name and location of retailer";
 
             NgWebElement uiNameAndLocation = ngDriver.FindElement(By.CssSelector("input[formControlName=\"nameLocationUnlicencedRetailer\"]"));
@@ -300,14 +326,11 @@ namespace bdd_tests
             {
             }
 
-            // complete field: Please indicate the name and location of the retailer or store
-            
+            // complete field: Please indicate the name and location of the retailer or store           
             string nameAndLocation2 = "Automated test name and location of retailer (2)";
             NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.CssSelector("input[formControlName=\"nameLocationRetailer\"]"));
             
             uiNameAndLocation2.SendKeys(nameAndLocation2);
-
-            
 
             // select response: Do you continue to be involved?
             try
@@ -585,11 +608,11 @@ namespace bdd_tests
                 }
 
                 // enter key personnel first name
-                NgWebElement uiKeyPersonFirst = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+                NgWebElement uiKeyPersonFirst = ngDriver.FindElement(By.CssSelector("input[formControlName=\"firstNameNew\"]")); 
                 uiKeyPersonFirst.SendKeys(keyPersonnelFirstName);
 
                 // enter key personnel last name
-                NgWebElement uiKeyPersonLast = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+                NgWebElement uiKeyPersonLast = ngDriver.FindElement(By.CssSelector("input[formControlName=\"lastNameNew\"]"));
                 uiKeyPersonLast.SendKeys(keyPersonnelLastName);
 
                 // select key personnel role
@@ -605,15 +628,15 @@ namespace bdd_tests
                 }
 
                 // enter key personnel title
-                NgWebElement uiKeyPersonTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+                NgWebElement uiKeyPersonTitle = ngDriver.FindElement(By.CssSelector("input[formControlName=\"titleNew\"]"));
                 uiKeyPersonTitle.SendKeys(keyPersonnelTitle);
 
                 // enter key personnel email
-                NgWebElement uiKeyPersonEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+                NgWebElement uiKeyPersonEmail = ngDriver.FindElement(By.CssSelector("input[formControlName=\"emailNew\"]"));
                 uiKeyPersonEmail.SendKeys(keyPersonnelEmail);
 
                 // enter key personnel DOB
-                NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+                NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.CssSelector("input[formControlName=\"dateofBirthNew\"]"));
                 openKeyPersonnelDOB.Click();
 
                 // select the date
@@ -632,7 +655,8 @@ namespace bdd_tests
                 uiOpenShare.Click();
 
                 // enter shareholder first name
-                NgWebElement uiShareFirst = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
+                //NgWebElement uiShareFirst = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
+                NgWebElement uiShareFirst = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='IndividualShareholder'] input[formControlName='firstNameNew']"));
                 uiShareFirst.SendKeys(shareholderFirstName);
 
                 // enter shareholder last name
@@ -1208,7 +1232,7 @@ namespace bdd_tests
         public void CateringApplication()
         {
             /* 
-                Page Title: Catering Licence Application
+            Page Title: Catering Licence Application
             */
 
             // create application info
@@ -1317,6 +1341,18 @@ namespace bdd_tests
             // click on the signature agreement checkbox
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSignatureAgreement.Click();
+
+            // retrieve the current URL to get the application ID (needed downstream)
+            string URL = ngDriver.Url;
+
+            // retrieve the application ID
+            string[] parsedURL = URL.Split('/');
+
+            string[] tempFix = parsedURL[5].Split(';');
+
+            application_ID = tempFix[0];
+
+            //application_ID = parsedURL[5];
         }
 
 
@@ -2361,8 +2397,139 @@ namespace bdd_tests
 
             // navigate back to dashboard
             ngDriver.Navigate().GoToUrl($"{baseUri}/dashboard");
+        }
 
+        public void RequestThirdPartyOperator()
+        {
+            // return to the Licences tab
+            string licencesLink2 = "Licences";
 
+            NgWebElement uiLicences2 = ngDriver.FindElement(By.LinkText(licencesLink2));
+            uiLicences2.Click();
+
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
+
+            string addOrChangeThirdParty = "Add or Change a Third Party Operator";
+
+            // click on the Add or Change a Third Party Operator Link
+            NgWebElement uiAddOrChangeThirdPartyOp = ngDriver.FindElement(By.LinkText(addOrChangeThirdParty));
+            uiAddOrChangeThirdPartyOp.Click();
+
+            /* 
+            Page Title: Add or Change a Third Party Operator
+            */
+
+            string thirdparty = "GunderCorp TestBusiness";
+
+            // search for the proposed licensee
+            NgWebElement thirdPartyOperator = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+            thirdPartyOperator.SendKeys(thirdparty);
+
+            NgWebElement thirdPartyOperatorOption = ngDriver.FindElement(By.XPath("//mat-option[@id='mat-option-0']/span"));
+            thirdPartyOperatorOption.Click();
+
+            // click on authorized to submit checkbox
+            NgWebElement authorizedToSubmit = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            authorizedToSubmit.Click();
+
+            // click on signature agreement checkbox
+            NgWebElement signatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
+            signatureAgreement.Click();
+
+            // click on submit button
+            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
+            submitButton.Click();
+
+            // return to the Licences tab
+            string licencesLink = "Licences";
+
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+
+            // confirm that the application has been initiated
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third Party Operator Application Initiated')]")).Displayed);
+        }
+
+        public void RequestTransferOfOwnership()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
+
+            string transferOwnership = "Transfer Ownership";
+
+            // click on the Transfer Ownership link
+            NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
+            uiTransferOwnership.Click();
+
+            /* 
+            Page Title: Transfer Your Catering Licence
+            */
+
+            string licensee = "GunderCorp TestBusiness";
+
+            // search for the proposed licensee
+            NgWebElement proposedLicensee = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+            proposedLicensee.SendKeys(licensee);
+
+            NgWebElement thirdPartyOperatorOption = ngDriver.FindElement(By.XPath("//*[@id='mat-option-1']/span"));
+            thirdPartyOperatorOption.Click();
+
+            // click on consent to licence transfer checkbox
+            NgWebElement consentToTransfer = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            consentToTransfer.Click();
+
+            // click on authorize signature checkbox
+            NgWebElement authorizeSignature = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
+            authorizeSignature.Click();
+
+            // click on signature agreement checkbox
+            NgWebElement signatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[3]"));
+            signatureAgreement.Click();
+
+            // click on submit transfer button
+            NgWebElement submitTransferButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT TRANSFER')]"));
+            submitTransferButton.Click();
+
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+
+            // check for transfer initiated status 
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TRANSFER INITIATED')]")).Displayed);
+        }
+
+        public void ApplicationsVisibleOnDashboard()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
+
+            string dashboard = "Dashboard";
+
+            // click on the Dashboard link
+            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
+            uiDashboard.Click();
+
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
+
+            // confirm that relocation request is displayed
+            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Relocation Request')]")).Displayed);
+
+            // confirm that a name or branding change request is displayed - TODO
+            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Name or Branding Change')]")).Displayed);
+
+            // confirm that a third party operator request is displayed
+            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third-Party Operator')]")).Displayed);
         }
     }
 }

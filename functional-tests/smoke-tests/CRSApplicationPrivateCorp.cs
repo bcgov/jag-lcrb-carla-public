@@ -13,14 +13,14 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplication_localgovernment
+Feature: CRSApplication_privatecorp
     As a logged in business user
-    I want to submit a CRS Application for a local government
+    I want to submit a CRS Application for a private corporation
 
 Scenario: Start Application
-    Given I am logged in to the dashboard as a local government
+    Given I am logged in to the dashboard as a private corporation
     And the account is deleted
-    And I am logged in to the dashboard as a local government
+    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -37,15 +37,16 @@ Scenario: Start Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplication_localgovernment.feature")]
-    public sealed class CRSApplicationLocalGovernment : TestBase
+    [FeatureFile("./CRSApplication_privatecorp.feature")]
+    public sealed class CRSApplicationPrivateCorp : TestBase
     {
-        
+       
+
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
             CheckFeatureFlagsCannabis();
-            
+
             CarlaLogin(businessType);
         }
 
@@ -70,7 +71,7 @@ namespace bdd_tests
         [And(@"I review the account profile")]
         public void review_account_profile()
         {
-            ReviewAccountProfile(); 
+            ReviewAccountProfile();
         }
 
         [And(@"I review the organization structure")]
