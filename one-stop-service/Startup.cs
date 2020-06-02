@@ -226,9 +226,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                      )
                     .CreateLogger();
 
-                Serilog.Debugging.SelfLog.Enable(Console.Error);
-
-                Log.Logger.Information("Onestop-Service Container Started");
+                
 
             }
             else
@@ -239,6 +237,10 @@ namespace Gov.Lclb.Cllb.OneStopService
                     .WriteTo.Console()
                     .CreateLogger();
             }
+
+            Serilog.Debugging.SelfLog.Enable(Console.Error);
+
+            Log.Logger.Information("Onestop-Service Container Starting");
 
             // OneStop does not seem to set the SoapAction properly
 
@@ -341,7 +343,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                     Log.Logger.Information("Creating Hangfire jobs for License issuance check ...");
 
                     
-                    RecurringJob.AddOrUpdate(() => new OneStopUtils(_configuration, Log.Logger).CheckForNewLicences(null), Cron.Hourly());
+                    RecurringJob.AddOrUpdate(() => new OneStopUtils(_configuration).CheckForNewLicences(null), Cron.Hourly());
 
                     Log.Logger.Information("Hangfire License issuance check jobs setup.");
                 }
