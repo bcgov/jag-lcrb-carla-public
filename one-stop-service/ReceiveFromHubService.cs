@@ -125,12 +125,8 @@ namespace Gov.Lclb.Cllb.OneStopService
             // check to see if it is simply a problem with an old account number.
             if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11845")) // Transaction not allowed - Duplicate Client event exists )
             {
-                
-                Log.Logger.Debug(inputXML);
-
-  
+                  
                 Log.Logger.Error($"CRA has rejected the message due to an incorrect business number.  The business in question may have had multiple business numbers in the past and the number in the record is no longer valid.  Please correct the business number for record with partnernote of {errorNotification.header.partnerNote}");
-                
 
             }
             else if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11409")) // Old account number.               
