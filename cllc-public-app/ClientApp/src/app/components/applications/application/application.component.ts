@@ -96,6 +96,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedZoningDocuments: 0;
   dynamicsForm: DynamicsForm;
 
+  get isOpenedByLG(): boolean {
+    let openedByLG = false;
+    if(this.account && this.application && 
+      this.account.localGovernmentId === this.application.indigenousNationId){
+      openedByLG = true;
+    }
+    return openedByLG;
+  }
+
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
@@ -532,7 +541,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * */
   submit_application() {
     const formChanged: boolean = (JSON.stringify(this.savedFormData) !== JSON.stringify(this.form.value)); // has the data been updated?
-    const save: Observable<boolean> = formChanged ? this.save(!this.application.applicationType.isFree) : of(true); // bypass save if form value not updated
+      const save: Observable<boolean> = formChanged ? this.save(!this.application.applicationType.isFree) : of(true); // bypass save if form value not updated
 
     // Only save if the data is valid
     if (this.isValid()) {
