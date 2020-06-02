@@ -123,7 +123,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 Log.Logger.Debug(inputXML);
 
   
-                Log.Logger.Error("CRA has rejected the message due to an incorrect business number.  The business in question may have had multiple business numbers in the past and the number in the record is no longer valid.  Please correct the business number for record with partnernote of {errorNotification.header.partnerNote}");
+                Log.Logger.Error($"CRA has rejected the message due to an incorrect business number.  The business in question may have had multiple business numbers in the past and the number in the record is no longer valid.  Please correct the business number for record with partnernote of {errorNotification.header.partnerNote}");
                 
 
             }
@@ -136,7 +136,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 int currentSuffix = OneStopUtils.GetSuffixFromPartnerNote(errorNotification.header.partnerNote, Log.Logger);
 
                 // sanity check
-                if (currentSuffix < 50)
+                if (currentSuffix < 55)
                 {
                     currentSuffix++;
                     Log.Logger.Information($"Starting resend of licence creation message, with new value of {currentSuffix}");
@@ -145,15 +145,13 @@ namespace Gov.Lclb.Cllb.OneStopService
                 }                
                 else
                 {
-                    Log.Logger.Information($"Skipping resend of licence creation message as there have been too many tries({currentSuffix})");
-                    Log.Logger.Error($"Received error notification for record with partner note {errorNotification.header.partnerNote}");
-                    Log.Logger.Debug(inputXML);
+                    Log.Logger.Error($"Skipping resend of licence creation message as there have been too many tries({currentSuffix}) Partner Note is partner note {errorNotification.header.partnerNote}");         
                 }
             }
             else
             {
-                Log.Logger.Error($"Received error notification for record with partner note {errorNotification.header.partnerNote}");
-                Log.Logger.Debug(inputXML);
+                Log.Logger.Error($"Received error notification for record with partner note {errorNotification.header.partnerNote} Error Code is  {errorNotification.body.validationErrors[0].errorMessageNumber}. Error Text is {errorNotification.body.validationErrors[0].errorMessageText} {inputXML}");
+                
             }
 
             return result;
@@ -180,7 +178,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 // determine the type of XML.
                 string rootNodeName = GetRootNodeName(inputXML);
 
-                Log.Logger.Information("ONESTOP ReceiveFromHub Message {rootNodeName} {inputXML}");
+                Log.Logger.Information($"ONESTOP ReceiveFromHub Message {rootNodeName} {inputXML}");
 
                 switch (rootNodeName)
                 {
