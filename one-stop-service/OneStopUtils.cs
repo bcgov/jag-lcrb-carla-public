@@ -33,16 +33,12 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         private IOneStopRestClient _onestopRestClient;
 
-        private ILogger _logger;
-
-
         public OneStopUtils(IConfiguration Configuration)
         {
             this.Configuration = Configuration;
             _dynamics = DynamicsSetupUtil.SetupDynamics(Configuration);
-            
-            _logger = Log.Logger;
-            _onestopRestClient = OneStopUtils.SetupOneStopClient(Configuration, _logger);
+
+            _onestopRestClient = OneStopUtils.SetupOneStopClient(Configuration, Log.Logger);
         }
 
         /// <summary>
@@ -81,9 +77,9 @@ namespace Gov.Lclb.Cllb.OneStopService
                     hangfireContext.WriteLine($"Exception occured. {ex.Message}");
                     hangfireContext.WriteLine($"Cancelling");
 
-                    if (_logger != null)
+                    if (Log.Logger != null)
                     {
-                        _logger.Error(ex, $"Exception occured. {ex.Message}");
+                        Log.Logger.Error(ex, $"Exception occured. {ex.Message}");
                     }
 
                     throw;
@@ -129,9 +125,9 @@ namespace Gov.Lclb.Cllb.OneStopService
                     hangfireContext.WriteLine($"Unable to get licence {licenceGuid}.");
                 }
 
-                if (_logger != null)
+                if (Log.Logger != null)
                 {
-                    _logger.Error($"Unable to get licence {licenceGuid}.");
+                    Log.Logger.Error($"Unable to get licence {licenceGuid}.");
                 }
             }
             else
@@ -200,9 +196,9 @@ namespace Gov.Lclb.Cllb.OneStopService
                 }
                 catch (Exception ex)
                 {
-                    if (_logger != null)
+                    if (Log.Logger != null)
                     {
-                        _logger.Error(ex, "Error sending request.");
+                        Log.Logger.Error(ex, "Error sending request.");
                     }
 
                     if (hangfireContext != null)
@@ -252,9 +248,9 @@ namespace Gov.Lclb.Cllb.OneStopService
                     hangfireContext.WriteLine($"Unable to get licence {licenceGuid}.");
                 }
 
-                if (_logger != null)
+                if (Log.Logger != null)
                 {
-                    _logger.Error($"Unable to get licence {licenceGuid}.");
+                    Log.Logger.Error($"Unable to get licence {licenceGuid}.");
                 }
             }
             else
