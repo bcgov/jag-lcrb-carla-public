@@ -225,6 +225,19 @@
               </div>
               <p>&nbsp;</p>
             </section>
+            <!-- RAS Certificate Number -->
+            <!--section>
+              <h3 class="blue-header">Rural Agency Certificate Number</h3>
+              <div style="flex: 0 0 210px;" class="content-bottom">
+                <p>Please enter your Rural Agency Certificate Number here:</p>
+                <app-field label="Certificate Number:"
+                           errorMessage="Please enter a certificate number">
+                  <input type="text" class="form-control" style="width: 200px;" 
+                          id="certNumber">
+                </app-field>
+              </div>
+              <p>&nbsp;</p>
+            </section-->
 
           </section>
         </section>
@@ -1025,7 +1038,7 @@
         <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
           <h3 class="blue-header">HOURS OF SALE</h3>
           <div class="padded-section content-bottom">
-            <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">
+            <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
               Indicate the
               store's proposed hours for cannabis sales below. Proposed
               hours must fall between 9 a.m. and 11
@@ -1033,6 +1046,10 @@
               closed
               at
               times they are licensed to be open.
+            </p>
+            <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CannabisRetailStore">
+              Indicate the
+              store's proposed hours of sales below.
             </p>
             <table class="store-hours">
               <tr>
