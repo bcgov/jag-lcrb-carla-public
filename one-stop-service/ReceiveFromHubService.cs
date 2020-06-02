@@ -63,7 +63,6 @@ namespace Gov.Lclb.Cllb.OneStopService
             using (TextReader reader = new StringReader(inputXML))
             {
                 licenseData = (SBNCreateProgramAccountResponse1)serializer.Deserialize(reader);
-                Log.Logger.Information(inputXML);
             }
 
 
