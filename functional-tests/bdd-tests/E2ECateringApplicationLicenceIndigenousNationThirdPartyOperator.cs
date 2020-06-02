@@ -13,14 +13,15 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CateringApplication_privatecorp
+Feature: E2ECateringApplication_indigenous_nation_third_party_operator
     As a logged in business user
-    I want to submit a Catering Application for a private corporation
+    I want to pay the first year catering licence fee
+    And submit a third party operator application for an indigenous nation
 
-Scenario: Start Application
-    Given I am logged in to the dashboard as a private corporation
+Scenario: Pay First Year Catering Licence and Submit Third Party Operator Application
+    Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
-    And I am logged in to the dashboard as a private corporation
+    And I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -30,21 +31,31 @@ Scenario: Start Application
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
+    And the application is approved
+    And I click on the Licences tab for Catering
+    And I pay the licensing fee
+    And I request a third party operator
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./CateringApplication_privatecorp.feature")]
-    public sealed class CateringApplicationPrivateCorp : TestBase
+    [FeatureFile("./E2ECateringApplication_indigenous_nation_third_party_operator.feature")]
+    public sealed class E2ECateringApplicationLicenceIndigenousNationThirdPartyOperator : TestBase
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
-        public void I_view_the_dashboard(string businessType)
+        public void Given_I_view_the_dashboard(string businessType)
         {
             CheckFeatureFlagsLiquor();
-            
+
             CarlaLogin(businessType);
+        }
+
+        [And(@"the account is deleted")]
+        public void Delete_my_account()
+        {
+            this.CarlaDeleteCurrentAccount();
         }
 
         [And(@"I am logged in to the dashboard as a (.*)")]
@@ -116,19 +127,43 @@ namespace bdd_tests
             CateringReturnToDashboard();
         }
 
-        [And(@"the account is deleted")]
-        public void Delete_my_account()
+        [And(@"the application is approved")]
+        public void application_is_approved()
         {
-            this.CarlaDeleteCurrentAccount();
+            ApplicationIsApproved();
+        }
+
+        [And(@"I click on the Licences tab for (.*)")]
+        public void click_on_licences_tab(string applicationType)
+        {
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
+
+            applicationTypeShared = applicationType;
+
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+        }
+
+        [And(@"I pay the licensing fee")]
+        public void click_pay_first_year_licensing_fee()
+        {
+            PayCateringLicenceFee();
+        }
+
+        [And(@"I request a third party operator")]
+        public void third_party_operator()
+        {
+            RequestThirdPartyOperator();
         }
 
         [Then(@"I see the login page")]
         public void I_see_login()
         {
-            /* 
-            Page Title: 
-            */
-
             Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
     }
