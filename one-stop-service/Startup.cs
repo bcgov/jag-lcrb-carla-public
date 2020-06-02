@@ -295,7 +295,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             if (!string.IsNullOrEmpty(_configuration["ENABLE_HANGFIRE_JOBS"]))
             {
-                SetupHangfireJobs(app, loggerFactory);
+                SetupHangfireJobs(app);
             }
 
             app.UseAuthentication();
@@ -329,21 +329,21 @@ namespace Gov.Lclb.Cllb.OneStopService
             /// </summary>
             /// <param name="app"></param>
             /// <param name="loggerFactory"></param>
-            private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFactory)
+            private void SetupHangfireJobs(IApplicationBuilder app)
         {
-            Microsoft.Extensions.Logging.ILogger log = loggerFactory.CreateLogger(typeof(Startup));
-            log.LogInformation("Starting setup of Hangfire job ...");
+
+            Log.Logger.Information("Starting setup of Hangfire job ...");
 
             try
             {
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
-                    log.LogInformation("Creating Hangfire jobs for License issuance check ...");
+                    Log.Logger.Information("Creating Hangfire jobs for License issuance check ...");
 
                     
                     RecurringJob.AddOrUpdate(() => new OneStopUtils(_configuration, Log.Logger).CheckForNewLicences(null), Cron.Hourly());
 
-                    log.LogInformation("Hangfire License issuance check jobs setup.");
+                    Log.Logger.Information("Hangfire License issuance check jobs setup.");
                 }
             }
             catch (Exception e)
@@ -351,7 +351,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 StringBuilder msg = new StringBuilder();
                 msg.AppendLine("Failed to setup Hangfire job.");
 
-                log.LogCritical(new EventId(-1, "Hangfire job setup failed"), e, msg.ToString());
+                Log.Logger.Error(e, "Hangfire setup failed.");
             }
         }
 
