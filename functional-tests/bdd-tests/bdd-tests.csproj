@@ -44,12 +44,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Update="CateringApplication_localgovernment.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="CateringApplication_university.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="COVID_temporary_extension_winery.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -63,9 +57,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="COVID_temporary_extension_food_primary.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="CRSApplication_localgovernment.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2ECateringApplication_partnership_event_authorization.feature">
