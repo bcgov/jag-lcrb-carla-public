@@ -217,9 +217,9 @@
               <div style="flex: 0 0 210px;" class="content-bottom">
                 <app-field label="Store Phone" [required]="false" [valid]="isValidOrNotTouched('establishmentPhone')"
                            errorMessage="Please enter a phone number ">
-                  <input type="text" class="form-control" style="width: 200px;" maxlength="10" autocomplete="tel"
+                  <input type="text" class="form-control" style="width: 200px;" mask="(000) 000-0000" autocomplete="tel"
                          [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
-                         (keydown)="rejectIfNotDigitOrBackSpace($event)" formControlName="establishmentPhone"
+                         formControlName="establishmentPhone"
                          id="establishmentPhone">
                 </app-field>
               </div>
@@ -1819,7 +1819,7 @@
   </ng-template>
 
   <ng-template #indigenousContent>
-    <section class="large-screen-only">
+    <section class="large-screen-only" *ngIf="account?.businessType !== 'LocalGovernment'">
       <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">INDIGENOUS NATION</h3>
 
       <div [formGroup]="form" class="submitted-content"
