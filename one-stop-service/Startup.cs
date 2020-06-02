@@ -315,7 +315,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             });
 
             // by positioning this after the health check, no need to filter out health checks from request logging.
-            //app.UseSerilogRequestLogging();
+            app.UseSerilogRequestLogging();
 
             
 
