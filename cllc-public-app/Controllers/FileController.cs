@@ -61,8 +61,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="entityName"></param>
         /// <param name="entityId"></param>
+        /// <param name="isDelete">Some access rules are different for deletes</param>
         /// <returns></returns>
-        private async Task<bool> CanAccessEntity(string entityName, string entityId)
+        private async Task<bool> CanAccessEntity(string entityName, string entityId, bool isDelete = false)
         {
             var result = false;
             var id = Guid.Parse(entityId);
@@ -75,6 +76,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 case "application":
                     var application = await _dynamicsClient.GetApplicationById(id).ConfigureAwait(true);
                     result = application != null && CurrentUserHasAccessToAccount(application._adoxioApplicantValue);
+                    bool allowLGAccess = await CurrentUserIsLGForApplication(application);
+                    result = result || (allowLGAccess && !isDelete);
                     break;
                 case "contact":
                     var contact = await _dynamicsClient.GetContactById(id).ConfigureAwait(true);
@@ -102,11 +105,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="documentType"></param>
         /// <param name="serverRelativeUrl"></param>
         /// <returns></returns>
-        private async Task<bool> CanAccessEntityFile(string entityName, string entityId, string documentType, string serverRelativeUrl)
+        private async Task<bool> CanAccessEntityFile(string entityName, string entityId, string documentType, string serverRelativeUrl, bool isDelete = false)
         {
             string logUrl = WordSanitizer.Sanitize(serverRelativeUrl);
 
-            var result = await CanAccessEntity(entityName, entityId).ConfigureAwait(true);
+            var result = await CanAccessEntity(entityName, entityId, isDelete).ConfigureAwait(true);
             //get list of files for entity
             bool hasFile = false;
 
@@ -132,6 +135,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             return result && hasFile;
+        }
+
+
+        private async Task<bool> CurrentUserIsLGForApplication(MicrosoftDynamicsCRMadoxioApplication application)
+        {
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // get user account
+            var accountId = Utils.GuidUtility.SanitizeGuidString(userSettings.AccountId);
+            MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(new Guid(accountId));
+
+            // make sure the application and account have matching local government values
+            bool isLGForApplication = (application != null && application._adoxioLocalgovindigenousnationidValue == account._adoxioLginlinkidValue);
+            return isLGForApplication;
         }
 
 
@@ -1150,7 +1168,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (checkUser)
             {
                 ValidateSession();
-                hasAccess = await CanAccessEntityFile(entityName, entityId, documentType, serverRelativeUrl);
+                hasAccess = await CanAccessEntityFile(entityName, entityId, documentType, serverRelativeUrl, true);
             }
 
             if (!hasAccess)
