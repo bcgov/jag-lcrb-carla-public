@@ -1,8 +1,9 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Hangfire;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-
+using Microsoft.Extensions.Hosting;
 using Microsoft.Rest;
 using Serilog;
 using System;
@@ -19,11 +20,13 @@ namespace Gov.Lclb.Cllb.OneStopService
         IDynamicsClient _dynamicsClient;
 
         private readonly IConfiguration Configuration;
+        private readonly IWebHostEnvironment _env;
 
-        public ReceiveFromHubService(IDynamicsClient dynamicsClient, IConfiguration configuration)
+        public ReceiveFromHubService(IDynamicsClient dynamicsClient, IConfiguration configuration, IWebHostEnvironment env)
         {
             _dynamicsClient = dynamicsClient;
             Configuration = configuration;
+            _env = env;
         }
 
         /// <summary>
@@ -46,7 +49,11 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         private string HandleSBNCreateProgramAccountResponse(string inputXML)
         {
-            Log.Logger.Information($"Reached HandleSBNCreateProgramAccountResponse inputXML is: {inputXML}");
+            Log.Logger.Information($"Reached HandleSBNCreateProgramAccountResponse");
+            if (! _env.IsProduction())
+            {
+                Log.Logger.Information($"InputXML is: {inputXML}");
+            }
 
             string httpStatusCode = "200";
 
@@ -84,7 +91,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 try
                 {
                     _dynamicsClient.Licenceses.Update(licence.AdoxioLicencesid, pathLicence);
-                    Log.Logger.Information($"Updated Licence record {licence.AdoxioLicencesid} to {businessProgramAccountNumber}");
+                    Log.Logger.Information($"ONESTOP Updated Licence {licenceNumber} record {licence.AdoxioLicencesid} to {businessProgramAccountNumber}");
                 }
                 catch (HttpOperationException odee)
                 {
@@ -178,7 +185,11 @@ namespace Gov.Lclb.Cllb.OneStopService
                 // determine the type of XML.
                 string rootNodeName = GetRootNodeName(inputXML);
 
-                Log.Logger.Information($"ONESTOP ReceiveFromHub Message {rootNodeName} {inputXML}");
+                Log.Logger.Information($"ONESTOP ReceiveFromHub Message {rootNodeName}");
+                if (!_env.IsProduction())
+                {
+                    Log.Logger.Information($"ReceiveFromHub InputXML is: {inputXML}");
+                }
 
                 switch (rootNodeName)
                 {
@@ -194,13 +205,10 @@ namespace Gov.Lclb.Cllb.OneStopService
                 }
 
 
-                
-
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("Exception occured during processing of SOAP message");
-                Log.Logger.Error(ex.Message);
+                Log.Logger.Error(ex, "Exception occured during processing of SOAP message");
                 return "500";
             }
 
