@@ -91,11 +91,33 @@
                   more about this licence</a>
               </td>
               <td style='text-align: center;'>
-                <button *ngIf="liquorOne" class="btn btn-primary" (click)="startNewMfgApplication()"
-                  id="startCatering">START
+                <button class="btn btn-primary" (click)="startNewMfgApplication()"
+                  id="startMfg">START
                   APPLICATION</button>
               </td>
             </tr>
+
+            <tr *ngIf="liquorTwo">
+              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
+                <img class="icon" src="assets/U-Brew-icon-blue-40px.png" alt=""> 
+              </td>
+              <td style="width:700px;">
+                <h3>UBrew / UVin Licence</h3>
+                <p>Also known as Ferment-on-Premises, UBrews and UVins are businesses that provide their customers 
+                  with the ingredients, equipment and advice they need to make their own beer, wine, cider or coolers on-site. 
+                  Once it's made, UBrew and UVin customers must take their liquor away, for their own private consumption. 
+                  It cannot be sold to others.</p>                
+                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/ubrew-and-uvin-liquor-licence"
+                  target="_blank">Learn
+                  more about this licence</a>
+              </td>
+              <td style='text-align: center;'>
+                <button class="btn btn-primary" (click)="startNewUBVApplication()"
+                  id="startUBV">START
+                  APPLICATION</button>
+              </td>
+            </tr>
+            
 
 
             <tr>
@@ -128,9 +150,9 @@
                   more about this Expression of Interest</a>
               </td>
               <td style="text-align: center;">
-                <button *ngIf="liquorOne" class="btn btn-primary" (click)="startNewRASApplication()"
-                id="startCatering">START
-                APPLICATION</button>
+                <button class="btn btn-primary" (click)="startNewRASApplication()"
+                id="startRAS">EXPRESS INTEREST
+                </button>
               </td>
             </tr>
 
