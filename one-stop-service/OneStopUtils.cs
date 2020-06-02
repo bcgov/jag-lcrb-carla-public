@@ -36,12 +36,13 @@ namespace Gov.Lclb.Cllb.OneStopService
         private ILogger _logger;
 
 
-        public OneStopUtils(IConfiguration Configuration, ILogger logger)
+        public OneStopUtils(IConfiguration Configuration)
         {
             this.Configuration = Configuration;
             _dynamics = DynamicsSetupUtil.SetupDynamics(Configuration);
-            _onestopRestClient = OneStopUtils.SetupOneStopClient(Configuration, logger);
-            _logger = logger;
+            
+            _logger = Log.Logger;
+            _onestopRestClient = OneStopUtils.SetupOneStopClient(Configuration, _logger);
         }
 
         /// <summary>
