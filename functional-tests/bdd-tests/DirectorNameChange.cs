@@ -181,7 +181,7 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
         }
 
-        [And(@"I review the organization structure")]
+        [And(@"I review the organization structure again")]
         public void review_org_structure()
         {
             System.Threading.Thread.Sleep(5000);
@@ -240,13 +240,13 @@ namespace bdd_tests
         [And(@"the director name is now updated")]
         public void director_name_updated()
         {
-            System.Threading.Thread.Sleep(7000);
+            // click on Return to Dashboard link
+            string retDash = "Return to Dashboard";
+            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
+            returnDash.Click();
 
-            this.return_to_dashboard();
-
-            this.review_org_structure();
-
-            System.Threading.Thread.Sleep(7000);
+            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
+            orgInfoButton.Click();
 
             // check that the director name has been updated
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Updated Director')]")).Displayed);
