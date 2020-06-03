@@ -1351,7 +1351,6 @@ namespace bdd_tests
             //application_ID = parsedURL[5];
         }
 
-
         public void CheckFeatureFlag(string flag)
         {
             ngDriver.IgnoreSynchronization = true;
@@ -1364,7 +1363,6 @@ namespace bdd_tests
 
             ngDriver.IgnoreSynchronization = false;
         }
-
 
         public void CheckFeatureFlagsCannabis()
         {
@@ -2526,6 +2524,12 @@ namespace bdd_tests
 
             // confirm that a third party operator request is displayed
             //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third-Party Operator')]")).Displayed);
+        }
+
+        [And(@"the application is approved")]
+        public void application_is_approved()
+        {
+            ApplicationIsApproved();
         }
     }
 }
