@@ -21,7 +21,7 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
             echo "Build: ${BUILD_ID}"
             checkout scm
 
-            dir('functional-tests/bdd-tests') {               
+            dir('functional-tests/smoke-tests') {               
                 withEnv(["baseUri=${baseUri}","test_start=${test_start}","test_start_worker=${test_start_worker}","test_cc=${test_cc}","test_ccv=${test_ccv}","CHROME_BINARY_LOCATION=${CHROME_BINARY_LOCATION}"])
                 {
                     try {                        
