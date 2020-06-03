@@ -2561,5 +2561,11 @@ namespace bdd_tests
         {
             ReviewSecurityScreening();
         }
+
+        [And(@"I enter the payment information")]
+        public void enter_payment_info()
+        {
+            MakePayment();
+        }
     }
 }

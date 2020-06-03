@@ -89,12 +89,6 @@ namespace bdd_tests
             pay_button.Click();
         }
 
-        [And(@"I enter the payment information")]
-        public void enter_payment_info()
-        {
-            MakePayment();
-        }
-
         [Then(@"I return to the dashboard")]
         public void return_to_dashboard()
         {
