@@ -201,6 +201,7 @@ import { CovidConfirmationComponent } from './components/applications/applicatio
 import { TerminateTPORelationshipComponent } from '@components/applications/terminate-tpo-relationship/terminate-tpo-relationship.component';
 import { LgApprovalsComponent } from './components/lg-approvals/lg-approvals.component';
 import { LiquorApprovalsCalloutComponent } from './components/liquor-approvals-callout/liquor-approvals-callout.component';
+import { LgInConfirmationOfReceiptComponent } from './components/applications/application/tabs/lg-in-confirmation-of-receipt/lg-in-confirmation-of-receipt.component';
 
 
 @NgModule({
@@ -314,7 +315,8 @@ import { LiquorApprovalsCalloutComponent } from './components/liquor-approvals-c
     ApplicationCovidTemporaryExtensionComponent,
     CovidConfirmationComponent,
     LgApprovalsComponent,
-    LiquorApprovalsCalloutComponent
+    LiquorApprovalsCalloutComponent,
+    LgInConfirmationOfReceiptComponent
   ],
   imports: [
     ChartsModule,
