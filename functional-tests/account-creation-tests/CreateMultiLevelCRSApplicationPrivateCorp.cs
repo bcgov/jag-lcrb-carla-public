@@ -49,12 +49,6 @@ namespace bdd_tests
             CarlaLoginNoCheck();
         }
 
-        [And(@"I am logged in to the dashboard as a (.*)")]
-        public void And_I_view_the_dashboard(string businessType)
-        {
-            CarlaLoginWithUser(businessType);
-        }
-
         [And(@"I click on the Start Application button for a Cannabis Retail Store")]
         public void I_start_application()
         {
