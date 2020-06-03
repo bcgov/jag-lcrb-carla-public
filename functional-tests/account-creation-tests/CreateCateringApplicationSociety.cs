@@ -108,11 +108,5 @@ namespace bdd_tests
         {
             CateringReturnToDashboard();
         }
-
-        [And(@"the account is deleted")]
-        public void Delete_my_account()
-        {
-            this.CarlaDeleteCurrentAccount();
-        }
     }
 }
