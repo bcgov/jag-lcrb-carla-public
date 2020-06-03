@@ -79,15 +79,6 @@ namespace bdd_tests
             CRSApplication();
         }
 
-        [And(@"I review the security screening requirements")]
-        public void review_security_screening_reqs()
-        {
-            /* 
-            Page Title: Security Screening Requirements
-                      : placeholder for future testing
-            */
-        }
-
         [And(@"I click on the Pay for Application button")]
         public void click_on_pay_for_application()
         {
