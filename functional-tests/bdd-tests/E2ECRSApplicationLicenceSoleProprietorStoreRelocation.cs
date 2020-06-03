@@ -13,39 +13,42 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplication_university
+Feature: E2E_CRSApplication_Licence_soleproprietor_store_relocation
     As a logged in business user
-    I want to submit a CRS Application for a university
+    I want to submit a CRS Application for a sole proprietorship
+    And request a store relocation for the approved application
 
 Scenario: Start Application
-    Given I am logged in to the dashboard as a university
+    Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
-    And I am logged in to the dashboard as a university
+    And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
     And I submit the organization structure
     And I complete the Cannabis Retail Store application
-    And I review the security screening requirements
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
+    And the application is approved
+    And I click on the Licences tab for a Cannabis Retail Store
+    And I pay the licensing fee
+    And I request a store relocation
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplication_university.feature")]
-    public sealed class CRSApplicationUniversity : TestBase
+    [FeatureFile("./E2E_CRSApplication_Licence_soleproprietor_store_relocation.feature")]
+    public sealed class E2ECRSApplicationLicenceSoleProprietorStoreRelocation : TestBase
     {
-        
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
             CheckFeatureFlagsCannabis();
-            
+
             CarlaLogin(businessType);
         }
 
@@ -70,7 +73,7 @@ namespace bdd_tests
         [And(@"I review the account profile")]
         public void review_account_profile()
         {
-            ReviewAccountProfile(); 
+            ReviewAccountProfile();
         }
 
         [And(@"I review the organization structure")]
@@ -89,16 +92,6 @@ namespace bdd_tests
         public void I_complete_the_application()
         {
             CRSApplication();
-        }
-
-        [And(@"I review the security screening requirements")]
-        public void review_security_screening_reqs()
-        {
-            /* 
-            Page Title: Security Screening Requirements
-            */
-
-            ReviewSecurityScreening();
         }
 
         [And(@"I click on the Pay for Application button")]
@@ -120,20 +113,50 @@ namespace bdd_tests
             CRSReturnToDashboard();
         }
 
+        [And(@"the application is approved")]
+        public void application_is_approved()
+        {
+            ApplicationIsApproved();
+        }
+
         [And(@"the account is deleted")]
         public void Delete_my_account()
         {
             this.CarlaDeleteCurrentAccount();
         }
 
+        [And(@"I click on the Licences tab for a (.*)")]
+        public void click_on_licences_tab(string applicationType)
+        {
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
+
+            applicationTypeShared = applicationType;
+
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+        }
+
+        [And(@"I pay the licensing fee")]
+        public void pay_licence_fee()
+        {
+            PayCRSLicenceFee();
+        }
+
+        [And(@"I request a store relocation")]
+        public void request_store_relocation()
+        {
+            RequestRelocation();
+        }
+
         [Then(@"I see the login page")]
         public void I_see_login()
         {
-            /* 
-            Page Title: Apply for a cannabis licence
-            */
-
-            Assert.True (ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
     }
 }

@@ -96,6 +96,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedZoningDocuments: 0;
   dynamicsForm: DynamicsForm;
 
+  get isOpenedByLG(): boolean {
+    let openedByLG = false;
+    if(this.account && this.application && 
+      this.account.localGovernmentId && this.application.indigenousNationId &&
+      this.account.localGovernmentId === this.application.indigenousNationId){
+      openedByLG = true;
+    }
+    return openedByLG;
+  }
+
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
@@ -167,6 +177,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       connectedGrocery: ['', []],
       authorizedToSubmit: [''],
       signatureAgreement: [''],
+      mfgType: ['', []],
+      brewPub: ['', []],
+      pipedIn: ['', []],
+      neutralGrain: ['', []],
     });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((applyAsIN: boolean) => {
@@ -310,6 +324,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     if (this.application.applicationType.name !== ApplicationTypeNames.CRSStructuralChange
       && this.application.applicationType.name !== ApplicationTypeNames.CRSEstablishmentNameChange) {
+        debugger;
       this.form.get('proposedChange').disable();
     }
 
@@ -440,6 +455,30 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
 
+  /* Helper functions for the Manufactuer Licence Business Plan
+    There are a lot of conditional requirements depending on what is selected.
+    Most are self explanatory
+  */
+
+  hasType(): boolean {
+  return this.form.get('mfgType').value
+  }
+
+  isBrewery(): boolean {
+    return this.form.get('mfgType').value == "Brewery"
+  }
+  isWinery(): boolean {
+    return this.form.get('mfgType').value == "Winery"
+  }
+  isDistillery(): boolean {
+    return this.form.get('mfgType').value == "Distillery"
+  }
+  
+  isBrewPub(): boolean {
+    return this.form.get('mfgType').value == "Brewery" && this.form.get('brewPub').value == "Yes"
+  }
+
+
 
   /**
    * Save form data
@@ -503,7 +542,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * */
   submit_application() {
     const formChanged: boolean = (JSON.stringify(this.savedFormData) !== JSON.stringify(this.form.value)); // has the data been updated?
-    const save: Observable<boolean> = formChanged ? this.save(!this.application.applicationType.isFree) : of(true); // bypass save if form value not updated
+      const save: Observable<boolean> = formChanged ? this.save(!this.application.applicationType.isFree) : of(true); // bypass save if form value not updated
 
     // Only save if the data is valid
     if (this.isValid()) {
