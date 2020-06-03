@@ -80,16 +80,6 @@ namespace bdd_tests
             CRSApplication();
         }
 
-        [And(@"I review the security screening requirements")]
-        public void review_security_screening_reqs()
-        {
-            /* 
-            Page Title: Security Screening Requirements
-            */
-
-            ReviewSecurityScreening();
-        }
-
         [And(@"I click on the Pay for Application button")]
         public void click_on_pay()
         {
@@ -107,16 +97,6 @@ namespace bdd_tests
         public void return_to_dashboard()
         {
             CRSReturnToDashboard();
-        }
-
-        [Then(@"I see the login page")]
-        public void I_see_login()
-        {
-            /* 
-            Page Title: Apply for a cannabis licence
-            */
-
-            Assert.True (ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
     }
 }

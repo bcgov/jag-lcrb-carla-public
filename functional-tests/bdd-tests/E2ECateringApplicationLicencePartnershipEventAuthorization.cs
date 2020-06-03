@@ -142,11 +142,5 @@ namespace bdd_tests
         {
             RequestCateringEventAuthorization();
         }
-
-        [Then(@"I see the login page")]
-        public void I_see_login()
-        {
-            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
-        }
     }
 }
