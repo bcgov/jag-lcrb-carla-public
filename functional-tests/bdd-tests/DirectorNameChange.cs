@@ -124,19 +124,6 @@ namespace bdd_tests
             returnDash.Click();
         }
 
-        [And(@"the application is approved")]
-        public void application_is_approved()
-        {
-            // navigate to api/applications/<Application ID>/process
-            ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/applications/{application_ID}/process");
-
-            // wait for the autoamted approval process to run
-            System.Threading.Thread.Sleep(20000);
-
-            // navigate back to dashboard
-            ngDriver.Navigate().GoToUrl($"{baseUri}/dashboard");
-        }
-
         [And(@"I click on the Licences tab for a Cannabis Retail Store")]
         public void click_on_licences_tab()
         {
