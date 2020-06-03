@@ -128,12 +128,6 @@ namespace bdd_tests
             CateringReturnToDashboard();
         }
 
-        [And(@"the application is approved")]
-        public void application_is_approved()
-        {
-            ApplicationIsApproved();
-        }
-
         [And(@"I click on the Licences tab for (.*)")]
         public void click_on_licences_tab(string applicationType)
         {

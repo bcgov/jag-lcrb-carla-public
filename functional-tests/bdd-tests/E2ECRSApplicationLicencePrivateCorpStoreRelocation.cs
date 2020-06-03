@@ -113,12 +113,6 @@ namespace bdd_tests
         {
             CRSReturnToDashboard();
         }
- 
-        [And(@"the application is approved")]
-        public void application_is_approved()
-        {
-            ApplicationIsApproved();
-        }
 
         [And(@"the account is deleted")]
         public void Delete_my_account()
