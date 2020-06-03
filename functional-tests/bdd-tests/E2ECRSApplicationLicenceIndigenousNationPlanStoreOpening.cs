@@ -102,12 +102,6 @@ namespace bdd_tests
             CRSReturnToDashboard();
         }
 
-        [And(@"the account is deleted")]
-        public void Delete_my_account()
-        {
-            this.CarlaDeleteCurrentAccount();
-        }
-
         [And(@"I click on the Licences tab for a (.*)")]
         public void click_on_licences_tab(string applicationType)
         {

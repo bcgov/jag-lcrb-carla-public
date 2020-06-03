@@ -202,12 +202,6 @@ namespace bdd_tests
             Assert.True (ngDriver.FindElement(By.XPath("//body[contains(.,'Pending Review')]")).Displayed);
         }
 
-        [And(@"the account is deleted")]
-        public void Delete_my_account()
-        {
-            this.CarlaDeleteCurrentAccount();
-        }
-
         [Then(@"I sign out")]
         public void sign_out()
         {

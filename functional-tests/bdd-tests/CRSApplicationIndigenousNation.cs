@@ -111,12 +111,6 @@ namespace bdd_tests
             CRSReturnToDashboard();
         }
 
-        [And(@"the account is deleted")]
-        public void Delete_my_account()
-        {
-            CarlaDeleteCurrentAccount();
-        }
-
         [Then(@"I see the login page")]
         public void I_see_login()
         {

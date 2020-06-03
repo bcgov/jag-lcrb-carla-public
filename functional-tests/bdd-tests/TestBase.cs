@@ -2543,5 +2543,11 @@ namespace bdd_tests
         {
             ReviewAccountProfile();
         }
+
+        [And(@"the account is deleted")]
+        public void Delete_my_account()
+        {
+            this.CarlaDeleteCurrentAccount();
+        }
     }
 }

@@ -48,12 +48,6 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
-        [And(@"the account is deleted")]
-        public void Delete_my_account()
-        {
-            this.CarlaDeleteCurrentAccount();
-        }
-
         [And(@"I click on the Start Application button for (.*)")]
         public void I_start_application(string application_type)
         {

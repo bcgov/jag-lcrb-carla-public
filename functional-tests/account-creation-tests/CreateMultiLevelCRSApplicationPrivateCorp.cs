@@ -118,12 +118,6 @@ namespace bdd_tests
             CRSReturnToDashboard();
         }
 
-        [And(@"the account is deleted")]
-        public void Delete_my_account()
-        {
-            this.CarlaDeleteCurrentAccount();
-        }
-
         public void business_shareholder_2()
         {
             /********** Business Shareholder #2 **********/
