@@ -2537,5 +2537,11 @@ namespace bdd_tests
         {
             CRSEligibilityDisclosure();
         }
+
+        [And(@"I review the account profile")]
+        public void review_account_profile()
+        {
+            ReviewAccountProfile();
+        }
     }
 }
