@@ -2549,5 +2549,17 @@ namespace bdd_tests
         {
             this.CarlaDeleteCurrentAccount();
         }
+
+        [Then(@"I see the login page")]
+        public void I_see_login()
+        {
+            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
+        }
+
+        [And(@"I review the security screening requirements")]
+        public void review_security_screening_reqs()
+        {
+            ReviewSecurityScreening();
+        }
     }
 }
