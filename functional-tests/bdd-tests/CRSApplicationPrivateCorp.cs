@@ -40,8 +40,6 @@ namespace bdd_tests
     [FeatureFile("./CRSApplication_privatecorp.feature")]
     public sealed class CRSApplicationPrivateCorp : TestBase
     {
-       
-
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
@@ -85,12 +83,6 @@ namespace bdd_tests
         {
             NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
             pay_button.Click();
-        }
-
-        [And(@"I enter the payment information")]
-        public void enter_payment_info()
-        {
-            MakePayment();
         }
 
         [And(@"I return to the dashboard")]
