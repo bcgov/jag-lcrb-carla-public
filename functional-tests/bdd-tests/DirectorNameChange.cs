@@ -49,7 +49,7 @@ namespace bdd_tests
     public sealed class DirectorNameChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
-        public void And_I_view_the_dashboard(string businessType)
+        public void I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
         }
@@ -64,12 +64,6 @@ namespace bdd_tests
             // click on the Start Application button
             NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
             startApp_button.Click();
-        }
-
-        [And(@"I review the organization structure")]
-        public void I_continue_to_organization_review()
-        {
-            ReviewOrgStructure();
         }
 
         [And(@"I complete the Cannabis Retail Store application")]
