@@ -99,6 +99,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   get isOpenedByLG(): boolean {
     let openedByLG = false;
     if(this.account && this.application && 
+      this.account.localGovernmentId && this.application.indigenousNationId &&
       this.account.localGovernmentId === this.application.indigenousNationId){
       openedByLG = true;
     }
