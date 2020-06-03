@@ -78,12 +78,6 @@ namespace bdd_tests
             startApp_button.Click();
         }
 
-        [And(@"I complete the eligibility disclosure")]
-        public void complete_eligibility_disclosure()
-        {
-            CRSEligibilityDisclosure();
-        }
-
         [And(@"I review the account profile")]
         public void review_account_profile()
         {
