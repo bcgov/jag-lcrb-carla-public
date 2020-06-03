@@ -49,22 +49,10 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
-        [And(@"I am logged in to the dashboard as an (.*)")]
-        public void And_I_view_the_dashboard_IN(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-
         [And(@"I click on the Start Application button for a Cannabis Retail Store")]
         public void start_application()
         {
             StartCRSApplication();
-        }
-
-        [And(@"I review the organization structure")]
-        public void review_org_structure()
-        {
-            ReviewOrgStructure();
         }
 
         [And(@"I submit the organization structure")]

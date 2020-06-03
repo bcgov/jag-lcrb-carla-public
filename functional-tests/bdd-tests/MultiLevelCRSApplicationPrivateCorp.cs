@@ -64,12 +64,6 @@ namespace bdd_tests
             startApp_button.Click();
         }
 
-        [And(@"I review the organization structure")]
-        public void I_continue_to_organization_review()
-        {
-            ReviewOrgStructure();
-        }
-
         [And(@"I add in multiple nested business shareholders")]
         public void add_multiple_business_shareholders()
         {

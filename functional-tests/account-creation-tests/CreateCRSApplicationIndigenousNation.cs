@@ -64,12 +64,6 @@ namespace bdd_tests
             startApp_button.Click();
         }
 
-        [And(@"I review the organization structure")]
-        public void review_org_structure()
-        {
-            ReviewOrgStructure();
-        }
-
         [And(@"I submit the organization structure")]
         public void submit_org_structure()
         {

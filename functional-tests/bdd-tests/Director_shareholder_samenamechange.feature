@@ -11,6 +11,6 @@ Scenario: Change director and shareholder same name
     And I enter the same individual as a director and a shareholder
     And I review the organization structure
     And I modify only the director record
-    And I review the organization structure
+    And I click on the Complete Organization Information button
     And the director and shareholder name are identical
     Then the account is deleted
