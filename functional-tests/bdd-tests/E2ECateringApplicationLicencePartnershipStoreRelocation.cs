@@ -75,12 +75,6 @@ namespace bdd_tests
             applicationTypeShared = application_type;
         }
 
-        [And(@"I review the account profile")]
-        public void review_account_profile()
-        {
-            ReviewAccountProfile();
-        }
-
         [And(@"I review the organization structure")]
         public void I_continue_to_organization_review()
         {
