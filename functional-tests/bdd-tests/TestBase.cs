@@ -2531,5 +2531,11 @@ namespace bdd_tests
         {
             ApplicationIsApproved();
         }
+
+        [And(@"I complete the eligibility disclosure")]
+        public void complete_eligibility_disclosure()
+        {
+            CRSEligibilityDisclosure();
+        }
     }
 }
