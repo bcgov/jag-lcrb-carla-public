@@ -26,7 +26,7 @@ Scenario: Change director and shareholder same name
     And I enter the same individual as a director and a shareholder
     And I review the organization structure
     And I modify only the director record
-    And I review the organization structure
+    And I click on the Complete Organization Information button
     And the director and shareholder name are identical
     Then the account is deleted
 */
@@ -148,14 +148,7 @@ namespace bdd_tests
             NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
             orgInfoButton.Click();
         }
-
-        [And(@"I review the organization structure")]
-        public void review_org_structure2()
-        {
-            // click on complete org info button
-            complete_org_info();
-        }
-         
+        
         [And(@"I modify only the director record")]
         public void modify_director_record()
         {

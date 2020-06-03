@@ -70,12 +70,6 @@ namespace bdd_tests
             applicationTypeShared = application_type;
         }
 
-        [And(@"I review the organization structure")]
-        public void I_continue_to_organization_review()
-        {
-            ReviewOrgStructure();
-        }
-
         [And(@"I submit the organization structure")]
         public void submit_org_structure()
         {

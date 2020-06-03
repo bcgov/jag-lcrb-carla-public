@@ -11,6 +11,6 @@ Scenario: Delete an individual who is both a director and shareholder
     And I enter the same individual as a director and a shareholder
     And I review the organization structure
     And I delete only the director record
-    And I review the organization structure
+    And I click on the Complete Organization Information button
     And only the shareholder record is displayed
     Then the account is deleted

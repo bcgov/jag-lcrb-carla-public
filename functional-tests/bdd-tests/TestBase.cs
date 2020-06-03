@@ -2567,11 +2567,17 @@ namespace bdd_tests
         {
             MakePayment();
         }
-
+        
         [And(@"I am logged in to the dashboard as a (.*)")]
         public void And_I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
+        }
+
+        [And(@"I review the organization structure")]
+        public void I_continue_to_organization_review()
+        {
+            ReviewOrgStructure();
         }
     }
 }
