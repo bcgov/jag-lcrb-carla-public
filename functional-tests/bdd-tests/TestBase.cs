@@ -2474,5 +2474,11 @@ namespace bdd_tests
             NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'COMPLETE ORGANIZATION INFORMATION')]"));
             orgInfoButton.Click();
         }
+
+        [And(@"I complete the Cannabis Retail Store application")]
+        public void I_complete_the_Cannabis_application()
+        {
+            CRSApplication();
+        }
     }
 }

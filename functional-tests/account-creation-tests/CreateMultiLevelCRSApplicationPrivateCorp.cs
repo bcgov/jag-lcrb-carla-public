@@ -77,12 +77,6 @@ namespace bdd_tests
             SubmitOrgInfoButton();
         }
 
-        [And(@"I complete the Cannabis Retail Store application")]
-        public void I_complete_the_application()
-        {
-            CRSApplication();    
-        }
-
         [And(@"I click on the Pay for Application button")]
         public void click_on_pay()
         {

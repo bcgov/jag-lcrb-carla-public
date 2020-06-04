@@ -34,8 +34,6 @@ namespace bdd_tests
     [FeatureFile("./CRSApplication_partnership.feature")]
     public sealed class CRSApplicationPartnership : TestBase
     {
-        
-
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
@@ -54,12 +52,6 @@ namespace bdd_tests
         public void submit_org_structure()
         {
             SubmitOrgInfoButton();
-        }
-
-        [And(@"I complete the Cannabis Retail Store application")]
-        public void I_complete_the_application()
-        {
-            CRSApplication();
         }
 
         [And(@"I click on the Pay for Application button")]
