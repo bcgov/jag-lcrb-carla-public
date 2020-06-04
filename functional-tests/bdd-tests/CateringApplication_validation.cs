@@ -45,21 +45,11 @@ namespace bdd_tests
         [And(@"I click on the Start Application button for (.*)")]
         public void I_start_application(string application_type)
         {
-            /* 
-            Page Title: 
-            */
-
             // click on the Catering Start Application button
             NgWebElement startApp_button = ngDriver.FindElement(By.Id("startCatering"));
             startApp_button.Click();
 
             applicationTypeShared = application_type;
-        }
-
-        [And(@"I submit the organization structure")]
-        public void submit_org_structure()
-        {
-            SubmitOrgInfoButton();
         }
 
         [And(@"I do not complete the catering application correctly")]
