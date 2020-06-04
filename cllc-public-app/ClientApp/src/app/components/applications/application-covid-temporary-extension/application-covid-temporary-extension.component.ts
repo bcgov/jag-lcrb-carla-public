@@ -31,8 +31,8 @@ const FormValidationErrorMap = {
 
   //receivedLGPermission: 'Local Government Permission Receipt checkbox',
   lgStatus: 'Selection of the LG Option',
+  boundedStatus: 'Confirmation of perimiter bounding',
   signatureAgreement: 'Declaration checkbox',
-
   currentTotalCapicityIncluded: 'Current Total Capacity checkbox',
   areasToBeExtendedIncluded: 'Areas to be Extended checkbox',
   floorPlanIncluded: 'Floor Plan checkbox',
@@ -91,7 +91,9 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
 
       //receivedLGPermission: ['', [this.customRequiredCheckboxValidator()]],
       lgStatus: ['', []],
+      boundedStatus: ['',[Validators.required]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
+      // signatureAgreement: ['', [Validators.required]]
     });
 
     this.form.get('sameAddresses').valueChanges
