@@ -42,14 +42,6 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
-        [And(@"I click on the Complete Organization Information button")]
-        public void complete_org_info()
-        {
-            // click on the complete organzation information button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'COMPLETE ORGANIZATION INFORMATION')]"));
-            orgInfoButton.Click();
-        }
-
         [And(@"I enter the same individual as a director and a shareholder")]
         public void same_director_shareholder()
         {
