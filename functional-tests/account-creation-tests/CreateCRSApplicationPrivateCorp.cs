@@ -47,18 +47,6 @@ namespace bdd_tests
             CarlaLoginNoCheck();
         }
 
-        [And(@"I click on the Start Application button for a Cannabis Retail Store")]
-        public void I_start_application()
-        {
-            /* 
-            Page Title: Welcome to Cannabis Licensing
-            */
-
-            // click on the Start Application button
-            NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
-            startApp_button.Click();
-        }
-
         [And(@"I submit the organization structure")]
         public void submit_org_structure()
         {

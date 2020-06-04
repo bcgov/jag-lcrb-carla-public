@@ -2487,5 +2487,17 @@ namespace bdd_tests
             NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
             pay_button.Click();
         }
+
+        [And(@"I click on the Start Application button for a Cannabis Retail Store")]
+        public void start_application()
+        {
+            StartCRSApplication();
+        }
+
+        [And(@"I request a structural change")]
+        public void request_structural_change()
+        {
+            RequestStructuralChange();
+        }
     }
 }
