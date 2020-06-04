@@ -88,13 +88,6 @@ namespace bdd_tests
             submit_button.Click();
         }
 
-        [And(@"I click on the Pay for Application button")]
-        public void click_on_pay()
-        {
-            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
-            pay_button.Click();
-        }
-
         [And(@"I return to the dashboard")]
         public void return_to_dashboard()
         {

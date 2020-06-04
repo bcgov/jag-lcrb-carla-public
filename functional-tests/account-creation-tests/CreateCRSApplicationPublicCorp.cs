@@ -65,13 +65,6 @@ namespace bdd_tests
             SubmitOrgInfoButton();
         }
 
-        [And(@"I click on the Pay for Application button")]
-        public void click_on_pay()
-        {
-            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
-            pay_button.Click();
-        }
-
         [Then(@"I return to the dashboard")]
         public void return_to_dashboard()
         {
