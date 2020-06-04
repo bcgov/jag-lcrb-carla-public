@@ -2499,5 +2499,11 @@ namespace bdd_tests
         {
             RequestStructuralChange();
         }
+
+        [And(@"I submit the organization structure")]
+        public void submit_org_structure()
+        {
+            SubmitOrgInfoButton();
+        }
     }
 }

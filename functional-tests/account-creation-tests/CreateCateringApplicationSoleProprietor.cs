@@ -58,12 +58,6 @@ namespace bdd_tests
             applicationTypeShared = application_type;
         }
 
-        [And(@"I submit the organization structure")]
-        public void submit_org_structure()
-        {
-            SubmitOrgInfoButton();
-        }
-
         [And(@"I complete the Catering application")]
         public void I_complete_the_application()
         {

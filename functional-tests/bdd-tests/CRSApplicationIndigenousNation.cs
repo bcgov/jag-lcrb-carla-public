@@ -48,12 +48,6 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
-        [And(@"I submit the organization structure")]
-        public void submit_org_structure()
-        {
-            SubmitOrgInfoButton();
-        }
-
         [And(@"I return to the dashboard")]
         public void return_to_dashboard()
         {

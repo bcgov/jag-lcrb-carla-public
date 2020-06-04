@@ -159,14 +159,6 @@ namespace bdd_tests
             uploadMarriageCert.SendKeys(marriageCertificate);
         }
 
-        [And(@"I submit the organization structure")]
-        public void submit_org_structure()
-        {
-            // click on submit org info button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
-            orgInfoButton.Click();
-        }
-
         [And(@"I pay the name change fee")]
         public void name_change_fee()
         {
