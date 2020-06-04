@@ -9,8 +9,8 @@ Scenario: Change director and shareholder same name
     And I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
-    And I review the organization structure
+    And I click on the Complete Organization Information button
     And I modify only the director record
-    And I review the organization structure
+    And I click on the Complete Organization Information button
     And the director and shareholder name are identical
     Then the account is deleted

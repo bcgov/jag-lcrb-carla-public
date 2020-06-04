@@ -136,5 +136,11 @@ namespace bdd_tests
 
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
+
+        [And(@"the account is deleted")]
+        public void Delete_my_account()
+        {
+            this.CarlaDeleteCurrentAccount();
+        }
     }
 }
