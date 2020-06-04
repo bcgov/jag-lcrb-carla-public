@@ -58,12 +58,6 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
-        [And(@"I click on the Start Application button for a Cannabis Retail Store")]
-        public void I_start_application()
-        {
-            StartCRSApplication();
-        }
-
         [And(@"I submit the organization structure")]
         public void submit_org_structure()
         {
@@ -96,12 +90,6 @@ namespace bdd_tests
         public void pay_licence_fee()
         {
             PayCRSLicenceFee();
-        }
-
-        [And(@"I request a structural change")]
-        public void request_structural_change()
-        {
-            RequestStructuralChange();
         }
     }
 }
