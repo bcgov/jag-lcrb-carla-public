@@ -202,6 +202,16 @@ namespace bdd_tests
             Assert.True (ngDriver.FindElement(By.XPath("//body[contains(.,'Pending Review')]")).Displayed);
         }
 
+        [Then(@"I see the login page")]
+        public void I_see_login()
+        {
+            /* 
+            Page Title: Apply for a cannabis licence
+            */
+
+            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
+        }
+
         [Then(@"I sign out")]
         public void sign_out()
         {
