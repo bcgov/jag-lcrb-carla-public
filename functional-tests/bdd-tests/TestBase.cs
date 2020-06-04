@@ -2466,5 +2466,13 @@ namespace bdd_tests
                 uploadAssociates.SendKeys(associatesPath);
             }
         }
+
+        [And(@"I click on the Complete Organization Information button")]
+        public void complete_org_info()
+        {
+            // click on the complete organzation information button
+            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'COMPLETE ORGANIZATION INFORMATION')]"));
+            orgInfoButton.Click();
+        }
     }
 }
