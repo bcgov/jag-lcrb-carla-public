@@ -80,7 +80,6 @@
       </section>
       <p></p> -->
       <div *ngIf="account?.businessType !== 'LocalGovernment'">
-        <p>{{account?.businessType}}</p>
         <app-associate-content [hasLicence]="hasLicence" [account]="account" [isIndigenousNation]="indigenousNationModeActive">
         </app-associate-content>
       </div>

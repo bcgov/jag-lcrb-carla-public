@@ -323,7 +323,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     if (this.application.applicationType.name !== ApplicationTypeNames.CRSStructuralChange
       && this.application.applicationType.name !== ApplicationTypeNames.CRSEstablishmentNameChange) {
-        debugger;
+        //debugger;
       this.form.get('proposedChange').disable();
     }
 
