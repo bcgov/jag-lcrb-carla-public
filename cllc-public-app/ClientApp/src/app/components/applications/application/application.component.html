@@ -5,7 +5,8 @@
 
       <div [formGroup]="form" style="padding-left: 45px; position: relative">
         <!-- Title -->
-        <h1 class="ngtest-page-title">{{ htmlContent?.title }}</h1>
+        <h1 class="ngtest-page-title" *ngIf="!this.openedByLG">{{ htmlContent?.title }}</h1>
+        <h1 class="ngtest-page-title" *ngIf="this.openedByLG">Provide Comment on Application</h1>
       </div>
 
       <div [formGroup]="form" class="application-wrapper">
@@ -131,12 +132,13 @@
             </div>
 
             <h3 class="blue-header" *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
-              PROPOSED ADDRESS
+              ADDRESS
             </h3>
 
             <div class="ngtest-new-address content-bottom"
                  *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
-              <p>The proposed location of the licenced establishment:</p>
+              <p *ngIf="application?.licenseType !== 'RAS'">The proposed location of the licenced establishment:</p>
+              <p *ngIf="application?.licenseType === 'RAS'">Include any information necessary for finding the site (i.e. route number, mile marker, etc.).</p>
               <address class="row">
                 <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
                            [valid]="isValidOrNotTouched('establishmentAddressStreet')"
@@ -226,18 +228,18 @@
               <p>&nbsp;</p>
             </section>
             <!-- RAS Certificate Number -->
-            <!--section>
+            <section>
               <h3 class="blue-header">Rural Agency Certificate Number</h3>
               <div style="flex: 0 0 210px;" class="content-bottom">
                 <p>Please enter your Rural Agency Certificate Number here:</p>
-                <app-field label="Certificate Number:"
+                <app-field label="Rural Agency Certificate Number:"
                            errorMessage="Please enter a certificate number">
                   <input type="text" class="form-control" style="width: 200px;" 
                           id="certNumber">
                 </app-field>
               </div>
               <p>&nbsp;</p>
-            </section-->
+            </section>
 
           </section>
         </section>
@@ -299,8 +301,8 @@
               <p>Upload financial statements outlining production (in litres) and sales forecasts for a three year
                 period: </p>
               <section>
-                <app-file-uploader *ngIf="applicationId" documentType="Financial Statement"  [disableUploads]="isOpenedByLG"
-                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLG"
+                <app-file-uploader *ngIf="applicationId" documentType="Financial Statement"
+                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                   [useDocumentTypeForName]="true" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD FINANCIAL STATEMENTS, DRAG FILES HERE OR'">
                 </app-file-uploader>
@@ -312,8 +314,8 @@
                 manufacturing (you
                 manufacturing for others, and/or them manufacturing for you) and the manufacturer(s) involved:</p>
               <section>
-                <app-file-uploader *ngIf="applicationId" documentType="Proposed Products" [disableUploads]="isOpenedByLG"
-                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLG"
+                <app-file-uploader *ngIf="applicationId" documentType="Proposed Products"
+                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                   [useDocumentTypeForName]="true" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD PROPOSED PRODUCTS DESCRIPTION, DRAG FILES HERE OR'">
                 </app-file-uploader>
@@ -324,8 +326,8 @@
                 will
                 be from B.C.:</p>
               <section>
-                <app-file-uploader *ngIf="applicationId" documentType="Agricultural Sources"  [disableUploads]="isOpenedByLG"
-                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLG"
+                <app-file-uploader *ngIf="applicationId" documentType="Agricultural Sources"
+                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                   [useDocumentTypeForName]="true" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD AGRICULTURAL SOURCES DESCRIPTION, DRAG FILES HERE OR'">
                 </app-file-uploader>
@@ -340,8 +342,8 @@
                 steps: blending, crushing, filtering, aging for at least 3 months, secondary fermentation or carbonation, and
                 packaging.)</p>
               <section>
-                <app-file-uploader *ngIf="applicationId" documentType="Manufacturing Stages"  [disableUploads]="isOpenedByLG"
-                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLG"
+                <app-file-uploader *ngIf="applicationId" documentType="Manufacturing Stages"
+                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                   [useDocumentTypeForName]="true" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD MANUFACTURING STAGES DESCRIPTION, DRAG FILES HERE OR'">
                 </app-file-uploader>
@@ -373,8 +375,8 @@
                 you own or lease the equipment necessary to manufacture on-site, and you must continue to maintain that
                 equipment to renew your licence).:</p>
               <section>
-                <app-file-uploader *ngIf="applicationId" documentType="Manufacturer Equipment"  [disableUploads]="isOpenedByLG"
-                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLG"
+                <app-file-uploader *ngIf="applicationId" documentType="Manufacturer Equipment"
+                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                   [useDocumentTypeForName]="true" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD MANUFACTURING EQUIPMENT LIST, DRAG FILES HERE OR'">
                 </app-file-uploader>
@@ -384,8 +386,8 @@
               <h4>Packaged Product Storage</h4>
               <p>Upload a description of where you will store packaged products:</p>
               <section>
-                <app-file-uploader *ngIf="applicationId" documentType="Agricultural Sources"  [disableUploads]="isOpenedByLG"
-                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLG"
+                <app-file-uploader *ngIf="applicationId" documentType="Agricultural Sources"
+                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                   [useDocumentTypeForName]="true" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD AGRICULTURAL SOURCES DESCRIPTION, DRAG FILES HERE OR'">
                 </app-file-uploader>
@@ -426,7 +428,7 @@
                       <p>Upload a document that describes a sample of the brew sheets you intend to use in your
                         production:</p>
                       <section>
-                        <app-file-uploader *ngIf="applicationId" documentType="Sample Brew Sheet"  [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+                        <app-file-uploader *ngIf="applicationId" documentType="Sample Brew Sheet"
                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                           [useDocumentTypeForName]="true" [entityId]="applicationId"
                           [uploadHeader]="'TO UPLOAD SAMPLE BREW SHEET, DRAG FILES HERE OR'">
@@ -441,7 +443,7 @@
                 <h4>Business Insurance</h4>
                 <p>Upload your business insurance certificate:</p>
                 <section>
-                  <app-file-uploader *ngIf="applicationId" documentType="Business Insurance Certificate"  [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+                  <app-file-uploader *ngIf="applicationId" documentType="Business Insurance Certificate"
                     fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                     [useDocumentTypeForName]="true" [entityId]="applicationId"
                     [uploadHeader]="'TO UPLOAD BUSINESS INSURANCE CERTIFICATE, DRAG FILES HERE OR'">
@@ -453,7 +455,7 @@
                 <h4>Distribution Plan</h4>
                 <p>Upload a description of how you plan to distribute your packaged product:</p>
                 <section>
-                  <app-file-uploader *ngIf="applicationId" documentType="Distribution Plan"  [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+                  <app-file-uploader *ngIf="applicationId" documentType="Distribution Plan"
                     fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                     [useDocumentTypeForName]="true" [entityId]="applicationId"
                     [uploadHeader]="'TO UPLOAD DISTRIBUTION PLAN, DRAG FILES HERE OR'">
@@ -615,7 +617,7 @@
             the store's signage are on file.
           </p>
           <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Signage"  [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+            <app-file-uploader *ngIf="applicationId" documentType="Signage"
                                [enableFileDeletion]="application?.applicationType?.signage === FormControlState.Show"
                                [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
                                entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
@@ -701,8 +703,8 @@
             The below offer or proof of ownership, lease or sub-lease is on file.
           </p>
           <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Valid Interest" fileTypes="FILE MUST BE IN PDF FORMAT."  [disableUploads]="isOpenedByLG"
-                               [enableFileDeletion]="application?.applicationType?.validInterest === FormControlState.Show" [enableFileDeletion]="!isOpenedByLG"
+            <app-file-uploader *ngIf="applicationId" documentType="Valid Interest" fileTypes="FILE MUST BE IN PDF FORMAT."
+                               [enableFileDeletion]="application?.applicationType?.validInterest === FormControlState.Show"
                                [multipleFiles]="false" entityName="application" [useDocumentTypeForName]="true"
                                (numberOfUploadedFiles)="uploadedValidInterestDocuments = $event" [entityId]="applicationId"
                                [uploadHeader]="'TO UPLOAD OWNERSHIP OR LEASE DOCUMENTS, DRAG FILES HERE OR'">
@@ -763,8 +765,8 @@
             The below floor plan is on file.
           </p>
           <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Floor Plan" fileTypes="FILE MUST BE IN PDF FORMAT."  [disableUploads]="isOpenedByLG"
-                               [enableFileDeletion]="application?.applicationType?.floorPlan === FormControlState.Show" [enableFileDeletion]="!isOpenedByLG"
+            <app-file-uploader *ngIf="applicationId" documentType="Floor Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
+                               [enableFileDeletion]="application?.applicationType?.floorPlan === FormControlState.Show"
                                [multipleFiles]="true" entityName="application" [useDocumentTypeForName]="true"
                                (numberOfUploadedFiles)="uploadedFloorPlanDocuments = $event" [entityId]="applicationId"
                                [uploadHeader]="'TO UPLOAD FLOOR PLANS, DRAG FILES HERE OR'">
@@ -887,7 +889,7 @@
           </div>
 
           <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Site Plan" fileTypes="FILE MUST BE IN PDF FORMAT."  [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+            <app-file-uploader *ngIf="applicationId" documentType="Site Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
                                [enableFileDeletion]="application?.applicationType?.sitePlan === FormControlState.Show"
                                [multipleFiles]="true" entityName="application" [useDocumentTypeForName]="true"
                                (numberOfUploadedFiles)="uploadedSitePlanDocuments = $event" [entityId]="applicationId"
@@ -936,8 +938,8 @@
           </section>
 
           <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Exterior Photos or Renderings" [enableFileDeletion]="!isOpenedByLG"
-                               [enableFileDeletion]="true" [useDocumentTypeForName]="true"  [disableUploads]="isOpenedByLG"
+            <app-file-uploader *ngIf="applicationId" documentType="Exterior Photos or Renderings"
+                               [enableFileDeletion]="true" [useDocumentTypeForName]="true"
                                fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
                                [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
                                (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
@@ -994,7 +996,7 @@
 
             </section>
             <section>
-              <app-file-uploader *ngIf="applicationId" documentType="Grocery Declaration"  [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+              <app-file-uploader *ngIf="applicationId" documentType="Grocery Declaration"
                                  fileTypes="FILE MUST BE IN PDF FORMAT." [enableFileDeletion]="true" [multipleFiles]="false"
                                  entityName="application" [useDocumentTypeForName]="true"
                                  (numberOfUploadedFiles)="uploadedGroceryDocuments = $event" [entityId]="applicationId"
@@ -1024,8 +1026,8 @@
               a WS licence.
             </p>
           </section>
-          <section> 
-            <app-file-uploader *ngIf="applicationId" documentType="Zoning" fileTypes="FILE MUST BE IN PDF FORMAT."  [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+          <section>
+            <app-file-uploader *ngIf="applicationId" documentType="Zoning" fileTypes="FILE MUST BE IN PDF FORMAT."
                                [enableFileDeletion]="application?.applicationType?.proofofZoning === FormControlState.Show"
                                [multipleFiles]="false" entityName="application" [useDocumentTypeForName]="true"
                                (numberOfUploadedFiles)="uploadedZoningDocuments = $event" [entityId]="applicationId"
@@ -1221,7 +1223,7 @@
           </i>
           <p>Upload the completed form below.</p>
           <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"  [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+            <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"
                                fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                                (numberOfUploadedFiles)="uploadedAssociateDocuments = $event" [entityId]="applicationId"
                                [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
@@ -1241,7 +1243,7 @@
           </i>
           <p>Upload the completed form below.</p>
           <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity" [enableFileDeletion]="!isOpenedByLG"   [disableUploads]="isOpenedByLG"
+            <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
                                fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                                (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
                                [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
@@ -1344,7 +1346,7 @@
           </section>
 
           <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"  [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+            <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
                                (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [maxNumberOfFiles]="200"
                                fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
                                [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #supportingDocuments>
@@ -1688,7 +1690,7 @@
           </i>
           <p>Upload the completed form below.</p>
           <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"  [disableUploads]="isOpenedByLG"
+            <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"
                                fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                                (numberOfUploadedFiles)="uploadedAssociateDocuments = $event" [enableFileDeletion]="false"
                                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
@@ -1706,7 +1708,7 @@
           </i>
           <p>Upload the completed form below.</p>
           <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"  [disableUploads]="isOpenedByLG"
+            <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
                                fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                                (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [enableFileDeletion]="false"
                                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
@@ -1806,7 +1808,7 @@
 
         </section>
         <section>
-          <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"  [disableUploads]="isOpenedByLG"
+          <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
                              fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
                              [maxNumberOfFiles]="200" (numberOfUploadedFiles)="uploadedSupportingDocuments = $event"
                              [extensions]="['pdf', 'jpg', 'jpeg', 'png']" [enableFileDeletion]="false" #supportingDocuments>
