@@ -247,13 +247,6 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
 
-        public void SubmitOrgInfoButton()
-        {
-            // click on the Submit Org Info button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION']"));
-            submitOrgInfoButton.Click();
-        }
-
         public void CRSApplication()
         {
             /* 
@@ -2503,7 +2496,9 @@ namespace bdd_tests
         [And(@"I submit the organization structure")]
         public void submit_org_structure()
         {
-            SubmitOrgInfoButton();
+            // click on the Submit Org Info button
+            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION']"));
+            submitOrgInfoButton.Click();
         }
     }
 }

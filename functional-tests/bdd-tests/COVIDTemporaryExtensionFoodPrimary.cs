@@ -155,6 +155,10 @@ namespace bdd_tests
             NgWebElement uploadFloorplan2 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
             uploadFloorplan2.SendKeys(floorplanPath2);
 
+            // select the bounded status checkbox
+            NgWebElement boundedStatus = ngDriver.FindElement(By.Id("mat-checkbox-1"));
+            boundedStatus.Click();
+
             // upload a representative notification form 
             string repNotifyPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "licensee_rep_notification.pdf");
             NgWebElement uploadRepNotify = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
@@ -170,7 +174,7 @@ namespace bdd_tests
             uploadRepNotify2.SendKeys(repNotifyPath2);
 
             // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[3]"));
             uiSignatureAgreement.Click();
         }
 
