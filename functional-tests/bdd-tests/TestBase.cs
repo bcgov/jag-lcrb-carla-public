@@ -2508,5 +2508,11 @@ namespace bdd_tests
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION']"));
             submitOrgInfoButton.Click();
         }
+
+        [And(@"I complete the Catering application")]
+        public void I_complete_the_application()
+        {
+            CateringApplication();
+        }
     }
 }
