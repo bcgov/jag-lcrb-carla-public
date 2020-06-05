@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioContraventionadmin class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioContraventionadmin(decimal? adoxioSecondcontraventionminvalueBase = default(decimal?), int? adoxioItemnumber = default(int?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), string _transactioncurrencyidValue = default(string), int? adoxioCategory = default(int?), string adoxioElements = default(string), decimal? adoxioFirstcontraventionmaxvalueBase = default(decimal?), string adoxioInterpretation = default(string), int? adoxioFirstcontraventionminperiod = default(int?), bool? adoxioIsact = default(bool?), decimal? adoxioFirstcontraventionmaxvalue = default(decimal?), int? adoxioThirdcontraventionminperiod = default(int?), decimal? adoxioThirdcontraventionminvalue = default(decimal?), string _owneridValue = default(string), string adoxioContraventionadminid = default(string), string _owningteamValue = default(string), decimal? adoxioSecondcontraventionminvalue = default(decimal?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? exchangerate = default(decimal?), string adoxioName = default(string), string _owninguserValue = default(string), int? adoxioFirstcontraventionmaxperiod = default(int?), decimal? adoxioSecondcontraventionmaxvalue = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioSecondcontraventionmaxperiod = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? adoxioFirstcontraventionminvalueBase = default(decimal?), int? importsequencenumber = default(int?), bool? adoxioIsreg = default(bool?), int? adoxioSecondcontraventionminperiod = default(int?), string _createdbyValue = default(string), string adoxioReference = default(string), decimal? adoxioSecondcontraventionmaxvalueBase = default(decimal?), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string adoxioPolicynamereference = default(string), decimal? adoxioThirdcontraventionmaxvalueBase = default(decimal?), int? adoxioThirdcontraventionmaxperiod = default(int?), bool? adoxioIswqr = default(bool?), decimal? adoxioThirdcontraventionmaxvalue = default(decimal?), int? statuscode = default(int?), int? statecode = default(int?), decimal? adoxioThirdcontraventionminvalueBase = default(decimal?), int? adoxioLcrbtype = default(int?), string _modifiedbyValue = default(string), bool? adoxioIstandc = default(bool?), decimal? adoxioFirstcontraventionminvalue = default(decimal?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioContraventionadminSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionadminDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionadminDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioContraventionadminAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioContraventionadminMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioContraventionadminProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioContraventionadminBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioContraventionadminPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioContraventionadminContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMadoxioContraventionadmin(decimal? adoxioSecondcontraventionminvalueBase = default(decimal?), int? adoxioItemnumber = default(int?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), string _transactioncurrencyidValue = default(string), int? adoxioCategory = default(int?), string adoxioElements = default(string), decimal? adoxioFirstcontraventionmaxvalueBase = default(decimal?), int? adoxioClass = default(int?), string adoxioInterpretation = default(string), int? adoxioFirstcontraventionminperiod = default(int?), bool? adoxioIsact = default(bool?), decimal? adoxioFirstcontraventionmaxvalue = default(decimal?), int? adoxioThirdcontraventionminperiod = default(int?), decimal? adoxioThirdcontraventionminvalue = default(decimal?), string _owneridValue = default(string), string adoxioContraventionadminid = default(string), string _owningteamValue = default(string), decimal? adoxioSecondcontraventionminvalue = default(decimal?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? exchangerate = default(decimal?), string _adoxioLicencetypeidValue = default(string), string _owninguserValue = default(string), int? adoxioFirstcontraventionmaxperiod = default(int?), string _createdbyValue = default(string), decimal? adoxioSecondcontraventionmaxvalue = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioSecondcontraventionmaxperiod = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? adoxioFirstcontraventionminvalueBase = default(decimal?), int? importsequencenumber = default(int?), bool? adoxioIsreg = default(bool?), int? adoxioSecondcontraventionminperiod = default(int?), string adoxioName = default(string), string adoxioReference = default(string), decimal? adoxioSecondcontraventionmaxvalueBase = default(decimal?), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string adoxioPolicynamereference = default(string), decimal? adoxioThirdcontraventionmaxvalueBase = default(decimal?), int? adoxioThirdcontraventionmaxperiod = default(int?), bool? adoxioIswqr = default(bool?), decimal? adoxioThirdcontraventionmaxvalue = default(decimal?), int? statuscode = default(int?), int? statecode = default(int?), decimal? adoxioThirdcontraventionminvalueBase = default(decimal?), int? adoxioLcrbtype = default(int?), string _modifiedbyValue = default(string), bool? adoxioIstandc = default(bool?), decimal? adoxioFirstcontraventionminvalue = default(decimal?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioContraventionadminSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionadminDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionadminDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioContraventionadminAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioContraventionadminMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioContraventionadminProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioContraventionadminBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioContraventionadminPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioContraventionadminContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceTypeId = default(MicrosoftDynamicsCRMadoxioLicencetype))
         {
             AdoxioSecondcontraventionminvalueBase = adoxioSecondcontraventionminvalueBase;
             AdoxioItemnumber = adoxioItemnumber;
@@ -39,6 +39,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioCategory = adoxioCategory;
             AdoxioElements = adoxioElements;
             AdoxioFirstcontraventionmaxvalueBase = adoxioFirstcontraventionmaxvalueBase;
+            AdoxioClass = adoxioClass;
             AdoxioInterpretation = adoxioInterpretation;
             AdoxioFirstcontraventionminperiod = adoxioFirstcontraventionminperiod;
             AdoxioIsact = adoxioIsact;
@@ -52,9 +53,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Createdon = createdon;
             Exchangerate = exchangerate;
-            AdoxioName = adoxioName;
+            this._adoxioLicencetypeidValue = _adoxioLicencetypeidValue;
             this._owninguserValue = _owninguserValue;
             AdoxioFirstcontraventionmaxperiod = adoxioFirstcontraventionmaxperiod;
+            this._createdbyValue = _createdbyValue;
             AdoxioSecondcontraventionmaxvalue = adoxioSecondcontraventionmaxvalue;
             Modifiedon = modifiedon;
             AdoxioSecondcontraventionmaxperiod = adoxioSecondcontraventionmaxperiod;
@@ -63,7 +65,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Importsequencenumber = importsequencenumber;
             AdoxioIsreg = adoxioIsreg;
             AdoxioSecondcontraventionminperiod = adoxioSecondcontraventionminperiod;
-            this._createdbyValue = _createdbyValue;
+            AdoxioName = adoxioName;
             AdoxioReference = adoxioReference;
             AdoxioSecondcontraventionmaxvalueBase = adoxioSecondcontraventionmaxvalueBase;
             Utcconversiontimezonecode = utcconversiontimezonecode;
@@ -99,6 +101,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioContraventionadminPrincipalObjectAttributeAccesses = adoxioContraventionadminPrincipalObjectAttributeAccesses;
             AdoxioContraventionadminContraventions = adoxioContraventionadminContraventions;
             Transactioncurrencyid = transactioncurrencyid;
+            AdoxioLicenceTypeId = adoxioLicenceTypeId;
             CustomInit();
         }
 
@@ -146,6 +149,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_firstcontraventionmaxvalue_base")]
         public decimal? AdoxioFirstcontraventionmaxvalueBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_class")]
+        public int? AdoxioClass { get; set; }
 
         /// <summary>
         /// </summary>
@@ -214,8 +222,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_licencetypeid_value")]
+        public string _adoxioLicencetypeidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -226,6 +234,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_firstcontraventionmaxperiod")]
         public int? AdoxioFirstcontraventionmaxperiod { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -269,8 +282,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -446,6 +459,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "transactioncurrencyid")]
         public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_LicenceTypeId")]
+        public MicrosoftDynamicsCRMadoxioLicencetype AdoxioLicenceTypeId { get; set; }
 
     }
 }
