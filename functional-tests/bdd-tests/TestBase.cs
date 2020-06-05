@@ -75,11 +75,15 @@ namespace bdd_tests
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
         public void CarlaHome()
-        {
-            
+        { 
             ngDriver.Navigate().GoToUrl($"{baseUri}");
-
             ngDriver.WaitForAngular();
+        }
+
+        [And(@"I click on Home page")]
+        public void click_on_home_page()
+        {
+            CarlaHome();
         }
 
         private void DoLogin(string businessType)
@@ -553,6 +557,10 @@ namespace bdd_tests
         public void CheckFeatureFlagsLiquor()
         {
             CheckFeatureFlag("LiquorOne");        
+        }
+        public void CheckFeatureFlagsMaps()
+        {
+            CheckFeatureFlag("Maps");
         }
         public void RequestPersonnelNameChange()
         {
@@ -2499,6 +2507,19 @@ namespace bdd_tests
             // click on the Submit Org Info button
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION']"));
             submitOrgInfoButton.Click();
+        }
+
+        [And(@"I complete the Catering application")]
+        public void I_complete_the_application()
+        {
+            CateringApplication();
+        }
+
+        [And(@"I click on the Submit button")]
+        public void click_on_submit()
+        {
+            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
+            submit_button.Click();
         }
     }
 }
