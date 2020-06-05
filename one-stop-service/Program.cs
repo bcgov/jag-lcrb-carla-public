@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Serilog;
+using Serilog.AspNetCore;
+using Serilog.Events;
 using System;
 
 namespace Gov.Lclb.Cllb.OneStopService
@@ -16,14 +18,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-            .ConfigureLogging((hostingContext, logging) =>
-            {
-                logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-                logging.AddConsole(x => x.TimestampFormat = "yyyy-MM-dd HH:mm:ss ");
-                logging.AddDebug();
-                logging.AddEventSourceLogger();
-            })
+            WebHost.CreateDefaultBuilder(args)            
             .UseSerilog()
             .ConfigureAppConfiguration((hostingContext, config) =>
                     {
