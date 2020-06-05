@@ -48,6 +48,12 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
+        [And(@"I am logged in to the dashboard as an (.*)")]
+        public void And_I_view_the_dashboard_IN(string businessType)
+        {
+            CarlaLogin(businessType);
+        }
+
         [And(@"I return to the dashboard")]
         public void return_to_dashboard()
         {
