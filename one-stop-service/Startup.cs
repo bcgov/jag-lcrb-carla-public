@@ -90,10 +90,11 @@ namespace Gov.Lclb.Cllb.OneStopService
     {
         private readonly ILoggerFactory _loggerFactory;
         public IConfiguration _configuration { get; }
+        public IWebHostEnvironment _env { get; }
 
         public Startup(IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            _loggerFactory = loggerFactory;
+            _loggerFactory = loggerFactory; 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
@@ -105,7 +106,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 builder.AddUserSecrets<Startup>();
             }
-
+            _env = env;
             _configuration = builder.Build();
 
         }
@@ -114,6 +115,9 @@ namespace Gov.Lclb.Cllb.OneStopService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddLogging(configure => configure.AddSerilog(dispose: true));
+
             // Adjust Kestrel options to allow sync IO
             services.Configure<KestrelServerOptions>(options =>
             {
@@ -122,9 +126,11 @@ namespace Gov.Lclb.Cllb.OneStopService
 
 
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
-            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _loggerFactory.CreateLogger("IReceiveFromHubService"), _configuration));
+            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _configuration, _env));
 
-            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("OneStopController"));
+
+            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("OneStopUtils"));
+            services.AddSingleton<Serilog.ILogger>(Log.Logger);
 
             services.AddMvc(config =>
             {
@@ -188,7 +194,54 @@ namespace Gov.Lclb.Cllb.OneStopService
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
 
+            // enable Splunk logger using Serilog
+            if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]) &&
+                !string.IsNullOrEmpty(_configuration["SPLUNK_TOKEN"])
+                )
+            {
 
+                Serilog.Sinks.Splunk.CustomFields fields = new Serilog.Sinks.Splunk.CustomFields();
+                if (!string.IsNullOrEmpty(_configuration["SPLUNK_CHANNEL"]))
+                {
+                    fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", _configuration["SPLUNK_CHANNEL"]));
+                }
+                var splunkUri = new Uri(_configuration["SPLUNK_COLLECTOR_URL"]);
+                var upperSplunkHost = splunkUri.Host?.ToUpperInvariant() ?? string.Empty;
+
+                // Fix for bad SSL issues 
+
+
+                Log.Logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .Enrich.WithExceptionDetails()
+                    .WriteTo.Console()
+                    .WriteTo.EventCollector(splunkHost: _configuration["SPLUNK_COLLECTOR_URL"],
+                       sourceType: "manual", eventCollectorToken: _configuration["SPLUNK_TOKEN"],
+                       restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
+#pragma warning disable CA2000 // Dispose objects before losing scope
+                       messageHandler: new HttpClientHandler()
+                       {
+                           ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
+                       }
+#pragma warning restore CA2000 // Dispose objects before losing scope
+                     )
+                    .CreateLogger();
+
+                
+
+            }
+            else
+            {
+                Log.Logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .Enrich.WithExceptionDetails()
+                    .WriteTo.Console()
+                    .CreateLogger();
+            }
+
+            Serilog.Debugging.SelfLog.Enable(Console.Error);
+
+            Log.Logger.Information("Onestop-Service Container Starting");
 
             // OneStop does not seem to set the SoapAction properly
 
@@ -208,7 +261,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             });
 
-            app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
+            
 
             // , serializer: SoapSerializer.XmlSerializer, caseInsensitivePath: true
 
@@ -245,12 +298,10 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             if (!string.IsNullOrEmpty(_configuration["ENABLE_HANGFIRE_JOBS"]))
             {
-                SetupHangfireJobs(app, loggerFactory);
+                SetupHangfireJobs(app);
             }
 
             app.UseAuthentication();
-
-            
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -267,55 +318,13 @@ namespace Gov.Lclb.Cllb.OneStopService
             // by positioning this after the health check, no need to filter out health checks from request logging.
             app.UseSerilogRequestLogging();
 
+            
+
             app.UseMvc();
 
-            // enable Splunk logger using Serilog
-            // enable Splunk logger using Serilog
-            if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]) &&
-                !string.IsNullOrEmpty(_configuration["SPLUNK_TOKEN"])
-                )
-            {
+            
 
-                Serilog.Sinks.Splunk.CustomFields fields = new Serilog.Sinks.Splunk.CustomFields();
-                if (!string.IsNullOrEmpty(_configuration["SPLUNK_CHANNEL"]))
-                {
-                    fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", _configuration["SPLUNK_CHANNEL"]));
-                }
-                var splunkUri = new Uri(_configuration["SPLUNK_COLLECTOR_URL"]);
-                var upperSplunkHost = splunkUri.Host?.ToUpperInvariant() ?? string.Empty;
-
-                // Fix for bad SSL issues 
-
-
-                Log.Logger = new LoggerConfiguration()
-                    .Enrich.FromLogContext()
-                    .Enrich.WithExceptionDetails()
-                    .WriteTo.Console()
-                    .WriteTo.EventCollector(splunkHost: _configuration["SPLUNK_COLLECTOR_URL"],
-                       sourceType: "manual", eventCollectorToken: _configuration["SPLUNK_TOKEN"],
-                       restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
-#pragma warning disable CA2000 // Dispose objects before losing scope
-                       messageHandler: new HttpClientHandler()
-                       {
-                           ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
-                       }
-#pragma warning restore CA2000 // Dispose objects before losing scope
-                     )
-                    .CreateLogger();
-
-                Serilog.Debugging.SelfLog.Enable(Console.Error);
-
-                Log.Logger.Information("CARLA Portal Container Started");
-
-            }
-            else
-            {
-                Log.Logger = new LoggerConfiguration()
-                    .Enrich.FromLogContext()
-                    .Enrich.WithExceptionDetails()
-                    .WriteTo.Console()
-                    .CreateLogger();
-            }
+            app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
         }
 
             /// <summary>
@@ -323,21 +332,21 @@ namespace Gov.Lclb.Cllb.OneStopService
             /// </summary>
             /// <param name="app"></param>
             /// <param name="loggerFactory"></param>
-            private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFactory)
+            private void SetupHangfireJobs(IApplicationBuilder app)
         {
-            Microsoft.Extensions.Logging.ILogger log = loggerFactory.CreateLogger(typeof(Startup));
-            log.LogInformation("Starting setup of Hangfire job ...");
+
+            Log.Logger.Information("Starting setup of Hangfire job ...");
 
             try
             {
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
-                    log.LogInformation("Creating Hangfire jobs for License issuance check ...");
+                    Log.Logger.Information("Creating Hangfire jobs for License issuance check ...");
 
-                    Microsoft.Extensions.Logging.ILogger oneStopLog = loggerFactory.CreateLogger(typeof(OneStopUtils));
-                    RecurringJob.AddOrUpdate(() => new OneStopUtils(_configuration, oneStopLog).CheckForNewLicences(null), Cron.Hourly());
+                    
+                    RecurringJob.AddOrUpdate(() => new OneStopUtils(_configuration).CheckForNewLicences(null), Cron.Hourly());
 
-                    log.LogInformation("Hangfire License issuance check jobs setup.");
+                    Log.Logger.Information("Hangfire License issuance check jobs setup.");
                 }
             }
             catch (Exception e)
@@ -345,7 +354,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 StringBuilder msg = new StringBuilder();
                 msg.AppendLine("Failed to setup Hangfire job.");
 
-                log.LogCritical(new EventId(-1, "Hangfire job setup failed"), e, msg.ToString());
+                Log.Logger.Error(e, "Hangfire setup failed.");
             }
         }
 
