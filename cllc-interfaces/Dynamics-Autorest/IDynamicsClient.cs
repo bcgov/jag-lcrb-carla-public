@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top573 { get; set; }
+        int? Top592 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip573 { get; set; }
+        int? Skip592 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count573 { get; set; }
+        bool? Count592 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter573 { get; set; }
+        string Filter592 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search573 { get; set; }
+        string Search592 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -838,9 +838,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         IContraventionadminprocesssession Contraventionadminprocesssession { get; }
 
         /// <summary>
+        /// Gets the ILicencetypeid.
+        /// </summary>
+        ILicencetypeid Licencetypeid { get; }
+
+        /// <summary>
         /// Gets the IContraventions.
         /// </summary>
         IContraventions Contraventions { get; }
+
+        /// <summary>
+        /// Gets the IContraventionannotations.
+        /// </summary>
+        IContraventionannotations Contraventionannotations { get; }
 
         /// <summary>
         /// Gets the IContraventioncompliancemeetings.
@@ -1118,9 +1128,64 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEndorsementtypesyncerrors Endorsementtypesyncerrors { get; }
 
         /// <summary>
+        /// Gets the IEstablishmentincidents.
+        /// </summary>
+        IEstablishmentincidents Establishmentincidents { get; }
+
+        /// <summary>
+        /// Gets the IEstablishment.
+        /// </summary>
+        IEstablishment Establishment { get; }
+
+        /// <summary>
+        /// Gets the IEstablishmentincidentasyncoperations.
+        /// </summary>
+        IEstablishmentincidentasyncoperations Establishmentincidentasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IEstablishmentincidentbulkdeletefailures.
+        /// </summary>
+        IEstablishmentincidentbulkdeletefailures Establishmentincidentbulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IEstablishmentincidentmailboxtrackingfolders.
+        /// </summary>
+        IEstablishmentincidentmailboxtrackingfolders Establishmentincidentmailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the IEstablishmentincidentprincipalobjectattributeaccesses.
+        /// </summary>
+        IEstablishmentincidentprincipalobjectattributeaccesses Establishmentincidentprincipalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the IEstablishmentincidentprocesssession.
+        /// </summary>
+        IEstablishmentincidentprocesssession Establishmentincidentprocesssession { get; }
+
+        /// <summary>
+        /// Gets the IEstablishmentincidentsyncerrors.
+        /// </summary>
+        IEstablishmentincidentsyncerrors Establishmentincidentsyncerrors { get; }
+
+        /// <summary>
+        /// Gets the IInspector.
+        /// </summary>
+        IInspector Inspector { get; }
+
+        /// <summary>
         /// Gets the IEstablishments.
         /// </summary>
         IEstablishments Establishments { get; }
+
+        /// <summary>
+        /// Gets the IEstablishmentadoxioestablishmentincidentestablishment.
+        /// </summary>
+        IEstablishmentadoxioestablishmentincidentestablishment Establishmentadoxioestablishmentincidentestablishment { get; }
+
+        /// <summary>
+        /// Gets the IEstablishmentannotations.
+        /// </summary>
+        IEstablishmentannotations Establishmentannotations { get; }
 
         /// <summary>
         /// Gets the IEstablishmentmailboxtrackingfolders.
@@ -1286,11 +1351,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEventtasks.
         /// </summary>
         IEventtasks Eventtasks { get; }
-
-        /// <summary>
-        /// Gets the IInspector.
-        /// </summary>
-        IInspector Inspector { get; }
 
         /// <summary>
         /// Gets the IRegionid.
@@ -1853,6 +1913,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicencetypeadoxiormreviewlicencetype Licencetypeadoxiormreviewlicencetype { get; }
 
         /// <summary>
+        /// Gets the ILicencetypecontraventionadmin.
+        /// </summary>
+        ILicencetypecontraventionadmin Licencetypecontraventionadmin { get; }
+
+        /// <summary>
         /// Gets the ILicencetypemailboxtrackingfolders.
         /// </summary>
         ILicencetypemailboxtrackingfolders Licencetypemailboxtrackingfolders { get; }
@@ -2373,6 +2438,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IWorkerprocesssession Workerprocesssession { get; }
 
         /// <summary>
+        /// Gets the IObjectidadoxiocontravention.
+        /// </summary>
+        IObjectidadoxiocontravention Objectidadoxiocontravention { get; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioestablishment.
+        /// </summary>
+        IObjectidadoxioestablishment Objectidadoxioestablishment { get; }
+
+        /// <summary>
         /// Gets the IObjectidadoxioevent.
         /// </summary>
         IObjectidadoxioevent Objectidadoxioevent { get; }
@@ -2428,6 +2503,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegardingobjectidadoxioendorsementtype Regardingobjectidadoxioendorsementtype { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioestablishmentincident.
+        /// </summary>
+        IRegardingobjectidadoxioestablishmentincident Regardingobjectidadoxioestablishmentincident { get; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioeventschedule.
         /// </summary>
         IRegardingobjectidadoxioeventschedule Regardingobjectidadoxioeventschedule { get; }
@@ -2476,6 +2556,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBusinessunitadoxioendorsementtype.
         /// </summary>
         IBusinessunitadoxioendorsementtype Businessunitadoxioendorsementtype { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioestablishmentincident.
+        /// </summary>
+        IBusinessunitadoxioestablishmentincident Businessunitadoxioestablishmentincident { get; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxioevent.
@@ -3133,11 +3218,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         IObjectidadoxiocompliancemeeting Objectidadoxiocompliancemeeting { get; }
 
         /// <summary>
-        /// Gets the IObjectidadoxiocontravention.
-        /// </summary>
-        IObjectidadoxiocontravention Objectidadoxiocontravention { get; }
-
-        /// <summary>
         /// Gets the IObjectidadoxiocontraventionadmin.
         /// </summary>
         IObjectidadoxiocontraventionadmin Objectidadoxiocontraventionadmin { get; }
@@ -3183,9 +3263,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IObjectidadoxioendorsementtype Objectidadoxioendorsementtype { get; }
 
         /// <summary>
-        /// Gets the IObjectidadoxioestablishment.
+        /// Gets the IObjectidadoxioestablishmentincident.
         /// </summary>
-        IObjectidadoxioestablishment Objectidadoxioestablishment { get; }
+        IObjectidadoxioestablishmentincident Objectidadoxioestablishmentincident { get; }
 
         /// <summary>
         /// Gets the IObjectidadoxioestablishmentwatchword.
@@ -3458,6 +3538,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ISystemforms Systemforms { get; }
 
         /// <summary>
+        /// Gets the ISystemuseradoxioestablishmentincidentinspector.
+        /// </summary>
+        ISystemuseradoxioestablishmentincidentinspector Systemuseradoxioestablishmentincidentinspector { get; }
+
+        /// <summary>
         /// Gets the ISystemuseradoxioeventinspector.
         /// </summary>
         ISystemuseradoxioeventinspector Systemuseradoxioeventinspector { get; }
@@ -3643,6 +3728,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILkadoxioendorsementtypemodifiedonbehalfby Lkadoxioendorsementtypemodifiedonbehalfby { get; }
 
         /// <summary>
+        /// Gets the ILkadoxioestablishmentincidentcreatedby.
+        /// </summary>
+        ILkadoxioestablishmentincidentcreatedby Lkadoxioestablishmentincidentcreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioestablishmentincidentcreatedonbehalfby.
+        /// </summary>
+        ILkadoxioestablishmentincidentcreatedonbehalfby Lkadoxioestablishmentincidentcreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioestablishmentincidentmodifiedby.
+        /// </summary>
+        ILkadoxioestablishmentincidentmodifiedby Lkadoxioestablishmentincidentmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioestablishmentincidentmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioestablishmentincidentmodifiedonbehalfby Lkadoxioestablishmentincidentmodifiedonbehalfby { get; }
+
+        /// <summary>
         /// Gets the ILkadoxioeventcreatedby.
         /// </summary>
         ILkadoxioeventcreatedby Lkadoxioeventcreatedby { get; }
@@ -3818,6 +3923,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IUseradoxioendorsementtype Useradoxioendorsementtype { get; }
 
         /// <summary>
+        /// Gets the IUseradoxioestablishmentincident.
+        /// </summary>
+        IUseradoxioestablishmentincident Useradoxioestablishmentincident { get; }
+
+        /// <summary>
         /// Gets the IUseradoxioevent.
         /// </summary>
         IUseradoxioevent Useradoxioevent { get; }
@@ -3886,6 +3996,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITeamadoxioendorsementtype.
         /// </summary>
         ITeamadoxioendorsementtype Teamadoxioendorsementtype { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioestablishmentincident.
+        /// </summary>
+        ITeamadoxioestablishmentincident Teamadoxioestablishmentincident { get; }
 
         /// <summary>
         /// Gets the ITeamadoxioevent.
