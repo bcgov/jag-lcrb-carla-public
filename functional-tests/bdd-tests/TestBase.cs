@@ -2514,5 +2514,12 @@ namespace bdd_tests
         {
             CateringApplication();
         }
+
+        [And(@"I click on the Submit button")]
+        public void click_on_submit()
+        {
+            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
+            submit_button.Click();
+        }
     }
 }
