@@ -64,19 +64,6 @@ namespace bdd_tests
             applicationTypeShared = application_type;
         }
 
-        [And(@"I complete the Catering application")]
-        public void I_complete_the_application()
-        {
-            CateringApplication();
-        }
-
-        [And(@"I click on the Submit button")]
-        public void click_on_submit()
-        {
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
-            submit_button.Click();
-        }
-
         [And(@"I return to the dashboard")]
         public void return_to_dashboard()
         {
