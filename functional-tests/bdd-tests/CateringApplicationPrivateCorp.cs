@@ -58,12 +58,6 @@ namespace bdd_tests
             applicationTypeShared = application_type;
         }
 
-        [And(@"I complete the Catering application")]
-        public void I_complete_the_application()
-        {
-            CateringApplication();
-        }
-
         [And(@"I click on the Submit button")]
         public void click_on_submit()
         {
