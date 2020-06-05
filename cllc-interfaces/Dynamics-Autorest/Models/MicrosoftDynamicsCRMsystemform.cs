@@ -118,124 +118,100 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "formjson")]
-        public string Formjson { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "formactivationstate")]
-        public int? Formactivationstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "canbedeleted")]
-        public string Canbedeleted { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "type")]
-        public int? Type { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "version")]
-        public int? Version { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "istabletenabled")]
-        public bool? Istabletenabled { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isdefault")]
-        public bool? Isdefault { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "objecttypecode")]
-        public string Objecttypecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "formidunique")]
-        public string Formidunique { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "formpresentation")]
-        public int? Formpresentation { get; set; }
-
-        /// <summary>
+        /// Gets or sets unique identifier of the record type form.
         /// </summary>
         [JsonProperty(PropertyName = "formid")]
         public string Formid { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies whether the dashboard is
+        /// enabled for tablet.
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        [JsonProperty(PropertyName = "istabletenabled")]
+        public bool? Istabletenabled { get; set; }
 
         /// <summary>
+        /// Gets or sets type of the form, for example, Dashboard or Preview.
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "type")]
+        public int? Type { get; set; }
 
         /// <summary>
+        /// Gets or sets version in which the form is introduced.
         /// </summary>
-        [JsonProperty(PropertyName = "uniquename")]
-        public string Uniquename { get; set; }
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
 
         /// <summary>
+        /// Gets or sets code that represents the record type.
+        /// </summary>
+        [JsonProperty(PropertyName = "objecttypecode")]
+        public string Objecttypecode { get; set; }
+
+        /// <summary>
+        /// Gets or sets represents a version of customizations to be
+        /// synchronized with the Microsoft Dynamics 365 client for Outlook.
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets description of the form or dashboard.
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the form used when synchronizing
+        /// customizations for the Microsoft Dynamics 365 client for Outlook.
+        /// </summary>
+        [JsonProperty(PropertyName = "formidunique")]
+        public string Formidunique { get; set; }
+
+        /// <summary>
+        /// Gets or sets for internal use only.
+        /// </summary>
+        [JsonProperty(PropertyName = "version")]
+        public int? Version { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the parent form.
+        /// </summary>
+        [JsonProperty(PropertyName = "_ancestorformid_value")]
+        public string _ancestorformidValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets XML representation of the form layout.
         /// </summary>
         [JsonProperty(PropertyName = "formxml")]
         public string Formxml { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated solution.
+        /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// Gets or sets information that specifies whether the form or the
+        /// dashboard is the system default.
+        /// </summary>
+        [JsonProperty(PropertyName = "isdefault")]
+        public bool? Isdefault { get; set; }
+
+        /// <summary>
+        /// Gets or sets information that specifies whether the dashboard is
+        /// enabled for desktop.
         /// </summary>
         [JsonProperty(PropertyName = "isdesktopenabled")]
         public bool? Isdesktopenabled { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies whether this component can
+        /// be deleted.
         /// </summary>
-        [JsonProperty(PropertyName = "iscustomizable")]
-        public string Iscustomizable { get; set; }
+        [JsonProperty(PropertyName = "canbedeleted")]
+        public object Canbedeleted { get; set; }
 
         /// <summary>
         /// </summary>
@@ -243,24 +219,73 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public System.DateTimeOffset? Publishedon { get; set; }
 
         /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ancestorformid_value")]
-        public string _ancestorformidValue { get; set; }
-
-        /// <summary>
+        /// Gets or sets specifies whether this form is merged with the updated
+        /// UI layout in Microsoft Dynamics CRM 2015 or Microsoft Dynamics CRM
+        /// Online 2015 Update.
         /// </summary>
         [JsonProperty(PropertyName = "isairmerged")]
         public bool? Isairmerged { get; set; }
 
         /// <summary>
+        /// Gets or sets specifies the state of the form.
         /// </summary>
-        [JsonProperty(PropertyName = "SystemForm_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> SystemFormAsyncOperations { get; set; }
+        [JsonProperty(PropertyName = "formactivationstate")]
+        public int? Formactivationstate { get; set; }
+
+        /// <summary>
+        /// Gets or sets for internal use only.
+        /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// Gets or sets for internal use only.
+        /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processtrigger_systemform")]
-        public IList<MicrosoftDynamicsCRMprocesstrigger> ProcesstriggerSystemform { get; set; }
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// Gets or sets information that specifies whether this component can
+        /// be customized.
+        /// </summary>
+        //[JsonProperty(PropertyName = "iscustomizable")]
+        public object Iscustomizable { get; set; }
+
+        /// <summary>
+        /// Gets or sets name of the form.
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique Name
+        /// </summary>
+        [JsonProperty(PropertyName = "uniquename")]
+        public string Uniquename { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the organization.
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets specifies whether this form is in the updated UI
+        /// layout in Microsoft Dynamics CRM 2015 or Microsoft Dynamics CRM
+        /// Online 2015 Update.
+        /// </summary>
+        [JsonProperty(PropertyName = "formpresentation")]
+        public int? Formpresentation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "SystemForm_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> SystemFormAsyncOperations { get; set; }
 
         /// <summary>
         /// </summary>
