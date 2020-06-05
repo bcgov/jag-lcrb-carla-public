@@ -110,5 +110,12 @@ export class Application {
   establishmentopeningdate: Date;
   isApplicationComplete: string;
 
+  lGNameofOfficial: string;
+  lGTitlePosition: string;
+  lGContactPhone: string;
+  lGContactEmail: string;
+  lGApprovalDecision: string;
+  lGDecisionSubmissionDate: Date;
+
   applicant: Account;
 }

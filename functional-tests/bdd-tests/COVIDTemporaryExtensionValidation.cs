@@ -70,13 +70,30 @@ namespace bdd_tests
         [Then(@"the required field messages are displayed")]
         public void required_field_messages_displayed()
         {
-            // confirm that specific required field error messages are displayed
+            // confirm that error messages are displayed
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licence Number is a required field and must contain 6 digits')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licence Type is a required field')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is a required field')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please confirm that the attached floor plan shows how the expanded area will be bounded')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please identify your Local Goverment status')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that all of the information provided for this application is true and complete.')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'The following fields are not valid:')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licence Number')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licence Type')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licensee name')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment name')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishmen Address Street')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Address City')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Business Telephone')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Business Email')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Contact First Name')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Contact Last Name')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Contact Title/Position')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Mailing Address Street')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Mailing Address City')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Mailing Address Postal Code')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Selection of the LG Option')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Confirmation of perimeter bounding')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Declaration checkbox')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Missing Floor Plan Documents')]")).Displayed);
         }

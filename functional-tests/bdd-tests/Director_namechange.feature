@@ -20,7 +20,7 @@ Scenario: Change director name and pay fee
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee
     And I return to the dashboard
-    And I review the organization structure
+    And I review the organization structure again
     And I modify the director name
     And I submit the organization structure
     And I pay the name change fee

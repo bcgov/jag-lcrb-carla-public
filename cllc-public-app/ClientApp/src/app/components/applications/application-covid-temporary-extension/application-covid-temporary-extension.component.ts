@@ -31,7 +31,7 @@ const FormValidationErrorMap = {
 
   //receivedLGPermission: 'Local Government Permission Receipt checkbox',
   lgStatus: 'Selection of the LG Option',
-  boundedStatus: 'Confirmation of perimiter bounding',
+  boundedStatus: 'Confirmation of perimeter bounding',
   signatureAgreement: 'Declaration checkbox',
   currentTotalCapicityIncluded: 'Current Total Capacity checkbox',
   areasToBeExtendedIncluded: 'Areas to be Extended checkbox',
