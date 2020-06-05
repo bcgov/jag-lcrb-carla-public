@@ -137,8 +137,8 @@
 
             <div class="ngtest-new-address content-bottom"
                  *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
-              <p *ngIf="application?.licenseType !== 'RAS'">The proposed location of the licenced establishment:</p>
-              <p *ngIf="application?.licenseType === 'RAS'">Include any information necessary for finding the site (i.e. route number, mile marker, etc.).</p>
+              <p *ngIf="application?.licenseType !== 'Rural Agency'">The proposed location of the licenced establishment:</p>
+              <p *ngIf="application?.licenseType === 'Rural Agency'">Include any information necessary for finding the site (i.e. route number, mile marker, etc.).</p>
               <address class="row">
                 <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
                            [valid]="isValidOrNotTouched('establishmentAddressStreet')"
@@ -228,10 +228,9 @@
               <p>&nbsp;</p>
             </section>
             <!-- RAS Certificate Number -->
-            <section>
+            <section *ngIf="application?.licenseType === 'Rural Agency'">
               <h3 class="blue-header">Rural Agency Certificate Number</h3>
               <div style="flex: 0 0 210px;" class="content-bottom">
-                <p>Please enter your Rural Agency Certificate Number here:</p>
                 <app-field label="Rural Agency Certificate Number:"
                            errorMessage="Please enter a certificate number">
                   <input type="text" class="form-control" style="width: 200px;" 
@@ -245,7 +244,7 @@
         </section>
 
         <section *ngIf="application?.licenseType === 'Manufacturer'">
-        
+          <!-- Business Plan for Manufacturers-->
           <h3 class="blue-header">Manufacturer Business Plan</h3>
           <div class="content-bottom">
             <p>Please select the type of application you are submitting:</p>
@@ -295,6 +294,48 @@
                 construct and maintain their distillery in conformance with the BC Fire Code
                 requirements for fire prevention/protection. A copy of the Approval in Principal letter will be provided to OFC.
               </p>
+
+              <hr>
+              <app-field [valid]="isValidOrNotTouched('zoningPermitsMFG')" [showChevrons]="false"
+                errorMessage="Please confirm that the current zoning permits manufacturing on the manufacturing site"
+                [isFullWidth]="true" style="margin-left:10px;">
+                <mat-checkbox formControlName="zoningPermitsMFG">
+                  I confirm that current zoning permits manufacturing on the manufacturing site.</mat-checkbox>
+              </app-field>
+              <app-field [valid]="isValidOrNotTouched('zoningPermitsRetailSales')" [showChevrons]="false"
+                errorMessage="Please confirm that the current zoning permits retail sales on the manufacturing site"
+                [isFullWidth]="true" style="margin-left:10px;">
+                <mat-checkbox formControlName="zoningPermitsRetailSales">
+                  I confirm that current zoning permits retail sales on the manufacturing site.</mat-checkbox>
+              </app-field>
+              <div>
+              <table>
+                <tr>
+                  <td class="primary">
+                    <div class="question-label">
+                      Is this manufacturing site part of the Agricultural Land Reserve (ALR)?
+                    </div>
+                  </td>
+                  <td>
+                    <mat-button-toggle-group formControlName="isALR" aria-label="Font Style">
+                      <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                      <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+
+              <app-field [valid]="isValidOrNotTouched('meetsALRRequirements')" [showChevrons]="false"
+                errorMessage="Please confirm that the site meets ALR requriements"
+                [isFullWidth]="true" style="margin-left:10px;">
+                <mat-checkbox formControlName="meetsALRRequirements">
+                  I confirm that the manufacturing site meets ALR requirements.</mat-checkbox>
+              </app-field>
+              <section>
+
+              </section>
         
               <hr>
               <h4>Production and Sales Forecasts</h4>
@@ -307,7 +348,27 @@
                   [uploadHeader]="'TO UPLOAD FINANCIAL STATEMENTS, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
-        
+
+              <section class="content-bottom" style='border-top: solid #aaa 1px; margin-top:0px;'>
+                <p>Indicate the amount of grapes, fruit and honey that will be farmed at the winery site and used for the production
+                  of wine:
+                </p>
+                <div class="row">
+                  <app-field class="col-md-12 col-xs-12" label="Grapes: # of acres"
+                    errorMessage="Please enter the number of acress of production">
+                    <input type="text" class="form-control" style="width: 100px;">
+                  </app-field>
+                  <app-field class="col-md-12 col-xs-12" label="Fruit: # of acres"
+                    errorMessage="Please enter the number of acress of production">
+                    <input type="text" class="form-control" style="width: 100px;">
+                  </app-field>
+                  <app-field class="col-md-12 col-xs-12" label="Honey: # of beehives"
+                    errorMessage="Please enter the number of acress of production">
+                    <input type="text" class="form-control" style="width: 100px;">
+                  </app-field>
+                </div>
+              
+              </section>
               <hr>
               <h4>Proposed Products</h4>
               <p>Upload a document that describes your proposed product(s), and any plans regarding contract
