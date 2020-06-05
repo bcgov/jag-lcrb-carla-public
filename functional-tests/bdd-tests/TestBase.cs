@@ -75,11 +75,15 @@ namespace bdd_tests
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
         public void CarlaHome()
-        {
-            
+        { 
             ngDriver.Navigate().GoToUrl($"{baseUri}");
-
             ngDriver.WaitForAngular();
+        }
+
+        [And(@"I click on Home page")]
+        public void click_on_home_page()
+        {
+            CarlaHome();
         }
 
         private void DoLogin(string businessType)
@@ -553,6 +557,10 @@ namespace bdd_tests
         public void CheckFeatureFlagsLiquor()
         {
             CheckFeatureFlag("LiquorOne");        
+        }
+        public void CheckFeatureFlagsMaps()
+        {
+            CheckFeatureFlag("Maps");
         }
         public void RequestPersonnelNameChange()
         {
