@@ -29,37 +29,82 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsystemform
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsystemform(string formjson = default(string), int? formactivationstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string canbedeleted = default(string), int? type = default(int?), int? componentstate = default(int?), string _organizationidValue = default(string), int? version = default(int?), string description = default(string), bool? istabletenabled = default(bool?), bool? isdefault = default(bool?), string introducedversion = default(string), string objecttypecode = default(string), bool? ismanaged = default(bool?), string versionnumber = default(string), string formidunique = default(string), int? formpresentation = default(int?), string formid = default(string), string solutionid = default(string), string name = default(string), string uniquename = default(string), string formxml = default(string), bool? isdesktopenabled = default(bool?), string iscustomizable = default(string), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string _ancestorformidValue = default(string), bool? isairmerged = default(bool?), IList<MicrosoftDynamicsCRMasyncoperation> systemFormAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesstrigger> processtriggerSystemform = default(IList<MicrosoftDynamicsCRMprocesstrigger>), IList<MicrosoftDynamicsCRMbulkdeletefailure> systemFormBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemform ancestorformid = default(MicrosoftDynamicsCRMsystemform), IList<MicrosoftDynamicsCRMsystemform> formAncestorForm = default(IList<MicrosoftDynamicsCRMsystemform>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        /// <param name="formid">Unique identifier of the record type
+        /// form.</param>
+        /// <param name="istabletenabled">Information that specifies whether
+        /// the dashboard is enabled for tablet.</param>
+        /// <param name="type">Type of the form, for example, Dashboard or
+        /// Preview.</param>
+        /// <param name="introducedversion">Version in which the form is
+        /// introduced.</param>
+        /// <param name="objecttypecode">Code that represents the record
+        /// type.</param>
+        /// <param name="versionnumber">Represents a version of customizations
+        /// to be synchronized with the Microsoft Dynamics 365 client for
+        /// Outlook.</param>
+        /// <param name="description">Description of the form or
+        /// dashboard.</param>
+        /// <param name="formidunique">Unique identifier of the form used when
+        /// synchronizing customizations for the Microsoft Dynamics 365 client
+        /// for Outlook.</param>
+        /// <param name="version">For internal use only.</param>
+        /// <param name="_ancestorformidValue">Unique identifier of the parent
+        /// form.</param>
+        /// <param name="formxml">XML representation of the form
+        /// layout.</param>
+        /// <param name="solutionid">Unique identifier of the associated
+        /// solution.</param>
+        /// <param name="isdefault">Information that specifies whether the form
+        /// or the dashboard is the system default.</param>
+        /// <param name="isdesktopenabled">Information that specifies whether
+        /// the dashboard is enabled for desktop.</param>
+        /// <param name="canbedeleted">Information that specifies whether this
+        /// component can be deleted.</param>
+        /// <param name="isairmerged">Specifies whether this form is merged
+        /// with the updated UI layout in Microsoft Dynamics CRM 2015 or
+        /// Microsoft Dynamics CRM Online 2015 Update.</param>
+        /// <param name="formactivationstate">Specifies the state of the
+        /// form.</param>
+        /// <param name="overwritetime">For internal use only.</param>
+        /// <param name="componentstate">For internal use only.</param>
+        /// <param name="iscustomizable">Information that specifies whether
+        /// this component can be customized.</param>
+        /// <param name="name">Name of the form.</param>
+        /// <param name="uniquename">Unique Name</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization.</param>
+        /// <param name="formpresentation">Specifies whether this form is in
+        /// the updated UI layout in Microsoft Dynamics CRM 2015 or Microsoft
+        /// Dynamics CRM Online 2015 Update.</param>
+        public MicrosoftDynamicsCRMsystemform(string formid = default(string), bool? istabletenabled = default(bool?), int? type = default(int?), string introducedversion = default(string), string objecttypecode = default(string), string versionnumber = default(string), string description = default(string), string formidunique = default(string), int? version = default(int?), string _ancestorformidValue = default(string), string formxml = default(string), string solutionid = default(string), bool? isdefault = default(bool?), bool? isdesktopenabled = default(bool?), string canbedeleted = default(string), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), bool? isairmerged = default(bool?), int? formactivationstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? componentstate = default(int?), bool? ismanaged = default(bool?), string iscustomizable = default(string), string name = default(string), string uniquename = default(string), string _organizationidValue = default(string), int? formpresentation = default(int?), IList<MicrosoftDynamicsCRMasyncoperation> systemFormAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> systemFormBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemform ancestorformid = default(MicrosoftDynamicsCRMsystemform), IList<MicrosoftDynamicsCRMsystemform> formAncestorForm = default(IList<MicrosoftDynamicsCRMsystemform>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
-            Formjson = formjson;
-            Formactivationstate = formactivationstate;
-            Overwritetime = overwritetime;
-            Canbedeleted = canbedeleted;
-            Type = type;
-            Componentstate = componentstate;
-            this._organizationidValue = _organizationidValue;
-            Version = version;
-            Description = description;
+            Formid = formid;
             Istabletenabled = istabletenabled;
-            Isdefault = isdefault;
+            Type = type;
             Introducedversion = introducedversion;
             Objecttypecode = objecttypecode;
-            Ismanaged = ismanaged;
             Versionnumber = versionnumber;
+            Description = description;
             Formidunique = formidunique;
-            Formpresentation = formpresentation;
-            Formid = formid;
+            Version = version;
+            this._ancestorformidValue = _ancestorformidValue;
+            Formxml = formxml;
             Solutionid = solutionid;
+            Isdefault = isdefault;
+            Isdesktopenabled = isdesktopenabled;
+            Canbedeleted = canbedeleted;
+            Publishedon = publishedon;
+            Isairmerged = isairmerged;
+            Formactivationstate = formactivationstate;
+            Overwritetime = overwritetime;
+            Componentstate = componentstate;
+            Ismanaged = ismanaged;
+            Iscustomizable = iscustomizable;
             Name = name;
             Uniquename = uniquename;
-            Formxml = formxml;
-            Isdesktopenabled = isdesktopenabled;
-            Iscustomizable = iscustomizable;
-            Publishedon = publishedon;
-            this._ancestorformidValue = _ancestorformidValue;
-            Isairmerged = isairmerged;
+            this._organizationidValue = _organizationidValue;
+            Formpresentation = formpresentation;
             SystemFormAsyncOperations = systemFormAsyncOperations;
-            ProcesstriggerSystemform = processtriggerSystemform;
             SystemFormBulkDeleteFailures = systemFormBulkDeleteFailures;
             Ancestorformid = ancestorformid;
             FormAncestorForm = formAncestorForm;
