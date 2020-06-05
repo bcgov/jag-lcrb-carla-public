@@ -7,7 +7,7 @@ using System.ServiceModel;
 using Microsoft.Extensions.Configuration;
 using Hangfire;
 using Gov.Lclb.Cllb.OneStopService;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace one_stop_service.Controllers
 {
@@ -15,12 +15,12 @@ namespace one_stop_service.Controllers
     public class OneStopController : Controller
     {
         IConfiguration Configuration;
-        private readonly ILogger logger;
+        private readonly ILogger _logger;
 
-        public OneStopController(IConfiguration configuration, ILogger logger)
+        public OneStopController(IConfiguration configuration)
         {
             Configuration = configuration;
-            this.logger = logger;
+            _logger = Log.Logger;
             
             
         }
@@ -28,23 +28,23 @@ namespace one_stop_service.Controllers
         [HttpGet("SendLicenceCreationMessage/{licenceGuid}")]
         public async Task<IActionResult> SendLicenceCreationMessage(string licenceGuid)
         {
-            logger.LogInformation($"Reached SendLicenceCreationMessage. licenceGuid: {licenceGuid}");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, logger).SendLicenceCreationMessageREST(null, licenceGuid, "001"));
+            _logger.Information($"Reached SendLicenceCreationMessage. licenceGuid: {licenceGuid}");
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendLicenceCreationMessageREST(null, licenceGuid, "001"));
             return Ok();
         }
 
         [HttpGet("SendProgramAccountDetailsBroadcastMessage/{licenceGuid}")]
         public IActionResult SendProgramAccountDetailsBroadcastMessage(string licenceGuid)
         {
-            logger.LogInformation("Reached SendProgramAccountDetailsBroadcastMessage");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, logger).SendProgramAccountDetailsBroadcastMessageREST(null, licenceGuid));
+            _logger.Information("Reached SendProgramAccountDetailsBroadcastMessage");
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendProgramAccountDetailsBroadcastMessageREST(null, licenceGuid));
             return Ok();
         }
 
         [HttpGet("LdbExport")]
         public IActionResult LdbExport()
         {
-            logger.LogInformation("Reached LdbExport");
+            _logger.Information("Reached LdbExport");
             BackgroundJob.Enqueue(() => new LdbExport(Configuration).SendLdbExport(null));
             return Ok();
         }
