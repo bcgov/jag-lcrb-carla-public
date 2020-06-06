@@ -40,11 +40,10 @@ namespace bdd_tests
     [FeatureFile("./Create_MultiLevel_CRSApplication_PrivateCorp.feature")]
     public sealed class CreateMultiLevelCRSApplicationPrivateCorp : TestBase
     {
-
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            //CheckFeatureFlagsCannabis();
+            CheckFeatureFlagsCannabis();
 
             CarlaLoginNoCheck();
         }
@@ -62,10 +61,6 @@ namespace bdd_tests
         [Then(@"I return to the dashboard")]
         public void return_to_dashboard()
         {
-            /* 
-            Page Title: Payment Approved
-            */
-
             CRSReturnToDashboard();
         }
 
@@ -319,7 +314,6 @@ namespace bdd_tests
 
             SharedCalendarDate();
         }
-
         public void business_shareholder_4()
         {
             /********** Business Shareholder #4 **********/
@@ -445,7 +439,6 @@ namespace bdd_tests
 
             SharedCalendarDate();
         }
-
         public void business_shareholder_5()
         {
             /********** Business Shareholder #5 **********/
