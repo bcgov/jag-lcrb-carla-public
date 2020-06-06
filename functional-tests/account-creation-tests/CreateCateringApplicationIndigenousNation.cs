@@ -30,8 +30,8 @@ Scenario: Start Application
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
-    Then I see the login page
+    And I confirm the payment receipt for a Catering application
+    Then I return to the dashboard
 */
 
 namespace bdd_tests
@@ -61,12 +61,6 @@ namespace bdd_tests
             startApp_button.Click();
 
             applicationTypeShared = application_type;
-        }
-
-        [Then(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            CateringReturnToDashboard();
         }
     }
 }

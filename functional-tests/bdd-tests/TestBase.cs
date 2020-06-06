@@ -401,19 +401,22 @@ namespace bdd_tests
             }
         }
 
-        public void CRSReturnToDashboard()
+        [And(@"I return to the dashboard")]
+        public void and_I_return_to_dashboard()
+        {
+            ReturnToDashboard();
+        }
+
+        [Then(@"I return to the dashboard")]
+        public void then_I_return_to_dashboard()
+        {
+            ReturnToDashboard();
+        }
+
+        public void ReturnToDashboard()
         {
             // click on Return to Dashboard link
             string retDash = "Return to Dashboard";
-            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
-            returnDash.Click();
-        }
-
-        public void CateringReturnToDashboard()
-        {
-            string retDash = "Return to Dashboard";
-
-            // click on the Return to Dashboard link
             NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
             returnDash.Click();
         }
