@@ -6,6 +6,7 @@
 Scenario: Start Application
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
+    And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
