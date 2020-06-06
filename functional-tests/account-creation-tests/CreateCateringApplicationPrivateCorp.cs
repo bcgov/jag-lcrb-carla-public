@@ -38,11 +38,10 @@ namespace bdd_tests
     [FeatureFile("./Create_CateringApplication_privatecorp.feature")]
     public sealed class CreateCateringApplicationPrivateCorp : TestBase
     {
-
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            //CheckFeatureFlagsLiquor();
+            CheckFeatureFlagsLiquor();
 
             CarlaLoginNoCheck();
         }
