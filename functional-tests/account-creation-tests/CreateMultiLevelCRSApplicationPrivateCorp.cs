@@ -58,12 +58,6 @@ namespace bdd_tests
             business_shareholder_5();
         }
 
-        [Then(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            CRSReturnToDashboard();
-        }
-
         public void business_shareholder_2()
         {
             /********** Business Shareholder #2 **********/

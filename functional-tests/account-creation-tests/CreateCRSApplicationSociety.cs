@@ -45,11 +45,5 @@ namespace bdd_tests
 
             CarlaLoginNoCheck();
         }
-
-        [Then(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            CRSReturnToDashboard();
-        }
     }
 }
