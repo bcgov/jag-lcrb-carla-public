@@ -70,12 +70,6 @@ namespace bdd_tests
             applicationTypeShared = application_type;
         }
 
-        [And(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            CateringReturnToDashboard();
-        }
-
         [And(@"I click on the Licences tab for (.*)")]
         public void click_on_licences_tab(string applicationType)
         {
