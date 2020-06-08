@@ -959,7 +959,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                List<ViewModels.FileSystemItem> fileSystemItemVMList = await GetListFilesInFolder(entityId, entityName, documentType);
+                List<ViewModels.FileSystemItem> fileSystemItemVMList = await FileController.GetListFilesInFolder(entityId, entityName, documentType, _dynamicsClient, _fileManagerClient, _logger);
                 return new JsonResult(fileSystemItemVMList);
             }
         }
@@ -1073,7 +1073,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="entityName"></param>
         /// <param name="documentType"></param>
         /// <returns></returns>
-        private async Task<List<ViewModels.FileSystemItem>> GetListFilesInFolder(string entityId, string entityName, string documentType)
+        public static async Task<List<ViewModels.FileSystemItem>> GetListFilesInFolder(string entityId, string entityName, string documentType, IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, ILogger _logger)
         {
             List<ViewModels.FileSystemItem> fileSystemItemVMList = new List<ViewModels.FileSystemItem>();
 
