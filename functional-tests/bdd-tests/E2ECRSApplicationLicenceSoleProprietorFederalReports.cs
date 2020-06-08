@@ -57,11 +57,5 @@ namespace bdd_tests
         {
             PayCRSLicenceFee();
         }
-
-        [And(@"I review the federal reports")]
-        public void review_federal_reports()
-        {
-            ReviewFederalReports();
-        }
     }
 }
