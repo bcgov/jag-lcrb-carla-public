@@ -53,22 +53,13 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
+
         [And(@"I am logged in to the dashboard as an (.*)")]
         public void And_I_view_the_dashboard_IN(string businessType)
         {
             CarlaLogin(businessType);
         }
 
-        [And(@"I click on the Start Application button for (.*)")]
-        public void I_start_application(string application_type)
-        {
-
-            // click on the Catering Start Application button
-            NgWebElement startApp_button = ngDriver.FindElement(By.Id("startCatering"));
-            startApp_button.Click();
-
-            applicationTypeShared = application_type;
-        }
 
         [And(@"I pay the licensing fee")]
         public void click_pay_first_year_licensing_fee()
