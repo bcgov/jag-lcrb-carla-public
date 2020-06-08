@@ -1071,12 +1071,26 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
-        public void StartCRSApplication()
+
+        [And(@"I click on the Start Application button for (.*)")]
+        public void I_start_application(string application_type)
         {
-            // click on the Start Application button
-            NgWebElement startApp_button = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
-            startApp_button.Click();
+            if (application_type == "Catering")
+            {
+                // click on the Catering Start Application button
+                NgWebElement startApp_button = ngDriver.FindElement(By.Id("startCatering"));
+                startApp_button.Click();
+            }
+
+            if (application_type == "a Cannabis Retail Store")
+            {
+                NgWebElement startApp_button = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
+                startApp_button.Click();
+            }
+
+            applicationTypeShared = application_type;
         }
+
 
         [And(@"I request a valid store name or branding change")]
         public void request_name_branding_change()
@@ -2467,12 +2481,6 @@ namespace bdd_tests
             pay_button.Click();
         }
 
-        [And(@"I click on the Start Application button for a Cannabis Retail Store")]
-        public void start_application()
-        {
-            StartCRSApplication();
-        }
-
         [And(@"I submit the organization structure")]
         public void submit_org_structure()
         {
@@ -2593,6 +2601,12 @@ namespace bdd_tests
         public void plan_store_opening()
         {
             PlanStoreOpening();
+        }
+
+        [And(@"I review the federal reports")]
+        public void review_federal_reports()
+        {
+            ReviewFederalReports();
         }
     }
 }
