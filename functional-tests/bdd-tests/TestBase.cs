@@ -381,35 +381,46 @@ namespace bdd_tests
             submit_button.Click();
         }
 
-        public void CRSReturnToDashboard()
+        [And(@"I confirm the payment receipt for a (.*)")]
+        public void confirm_payment_receipt(string application_type)
         {
             /* 
             Page Title: Payment Approved
             */
 
-            // confirm that payment receipt is for $7,500.00
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$7,500.00')]")).Displayed);
+            if (application_type == "Cannabis Retail Store application")
+            {
+                // confirm that payment receipt is for $7,500.00
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$7,500.00')]")).Displayed);
+            }
 
+            if (application_type == "Catering application")
+            {
+                // confirm that payment receipt is for $7,500.00
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$475.00')]")).Displayed);
+            }
+        }
+
+        [And(@"I return to the dashboard")]
+        public void and_I_return_to_dashboard()
+        {
+            ReturnToDashboard();
+        }
+
+        [Then(@"I return to the dashboard")]
+        public void then_I_return_to_dashboard()
+        {
+            ReturnToDashboard();
+        }
+
+        public void ReturnToDashboard()
+        {
             // click on Return to Dashboard link
             string retDash = "Return to Dashboard";
             NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
             returnDash.Click();
         }
-        public void CateringReturnToDashboard()
-        {
-            /* 
-            Page Title: Payment Approved
-            */
 
-            // confirm that payment receipt is for $475.00
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$475.00')]")).Displayed);
-
-            string retDash = "Return to Dashboard";
-
-            // click on the Return to Dashboard link
-            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
-            returnDash.Click();
-        }
         public void CateringApplication()
         {
             /* 
