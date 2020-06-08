@@ -86,7 +86,7 @@ namespace bdd_tests
         }
 
         [And(@"I request a transfer of ownership")]
-        public void name_branding_change()
+        public void transfer_of_ownership()
         {
             RequestTransferOfOwnership();
         }
