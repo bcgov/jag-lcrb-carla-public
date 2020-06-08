@@ -74,11 +74,13 @@ namespace bdd_tests
 
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
+
         public void CarlaHome()
         { 
             ngDriver.Navigate().GoToUrl($"{baseUri}");
             ngDriver.WaitForAngular();
         }
+
 
         [And(@"I click on Home page")]
         public void click_on_home_page()
@@ -250,6 +252,7 @@ namespace bdd_tests
 
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
+
 
         [And(@"I complete the Cannabis Retail Store application")]
         public void I_complete_the_Cannabis_application()
@@ -992,8 +995,9 @@ namespace bdd_tests
             // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
         }
 
-        public void PlanStoreOpening()
-        {
+        [And(@"I plan the store opening")]
+        public void plan_store_opening()
+        { 
             /* 
             Page Title: Licences
             Subtitle:   Cannabis Retail Store Licences
@@ -1094,11 +1098,6 @@ namespace bdd_tests
 
         [And(@"I request a valid store name or branding change")]
         public void request_name_branding_change()
-        {
-            StoreNameBrandingChange();
-        }
-
-        public void StoreNameBrandingChange()
         {
             /* 
             Page Title: Licences
@@ -2597,11 +2596,6 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
-        [And(@"I plan the store opening")]
-        public void plan_store_opening()
-        {
-            PlanStoreOpening();
-        }
 
         [And(@"I review the federal reports")]
         public void review_federal_reports()
