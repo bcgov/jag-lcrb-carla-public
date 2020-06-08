@@ -63,11 +63,5 @@ namespace bdd_tests
         {
             PayCRSLicenceFee();
         }
-
-        [And(@"I request a valid store name or branding change")]
-        public void request_name_branding_change()
-        {
-            StoreNameBrandingChange();
-        }
     }
 }

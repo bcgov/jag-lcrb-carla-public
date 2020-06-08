@@ -251,7 +251,8 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
 
-        public void CRSApplication()
+        [And(@"I complete the Cannabis Retail Store application")]
+        public void I_complete_the_Cannabis_application()
         {
             /* 
             Page Title: Submit the Cannabis Retail Store Application
@@ -1077,6 +1078,12 @@ namespace bdd_tests
             startApp_button.Click();
         }
 
+        [And(@"I request a valid store name or branding change")]
+        public void request_name_branding_change()
+        {
+            StoreNameBrandingChange();
+        }
+
         public void StoreNameBrandingChange()
         {
             /* 
@@ -1144,7 +1151,8 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
-        public void RequestStructuralChange()
+        [And(@"I request a structural change")]
+        public void request_structural_change()
         {
             /* 
            Page Title: Licences
@@ -2452,12 +2460,6 @@ namespace bdd_tests
             orgInfoButton.Click();
         }
 
-        [And(@"I complete the Cannabis Retail Store application")]
-        public void I_complete_the_Cannabis_application()
-        {
-            CRSApplication();
-        }
-
         [And(@"I click on the Pay for Application button")]
         public void click_on_pay()
         {
@@ -2469,12 +2471,6 @@ namespace bdd_tests
         public void start_application()
         {
             StartCRSApplication();
-        }
-
-        [And(@"I request a structural change")]
-        public void request_structural_change()
-        {
-            RequestStructuralChange();
         }
 
         [And(@"I submit the organization structure")]
@@ -2591,6 +2587,12 @@ namespace bdd_tests
             // click on the Licences link
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
+        }
+
+        [And(@"I plan the store opening")]
+        public void plan_store_opening()
+        {
+            PlanStoreOpening();
         }
     }
 }

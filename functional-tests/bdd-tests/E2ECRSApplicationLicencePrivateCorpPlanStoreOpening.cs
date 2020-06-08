@@ -58,11 +58,5 @@ namespace bdd_tests
         {
             PayCRSLicenceFee();
         }
-
-        [And(@"I plan the store opening")]
-        public void plan_store_opening()
-        {
-            PlanStoreOpening();
-        }
     }
 }
