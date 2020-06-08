@@ -20,7 +20,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         PendingForLGFNPFeedback = 845280006,
         Refused = 845280005,
         [EnumMember(Value = "Pending for Licence Fee")]
-        PendingForLicenceFee = 845280007,        
+        PendingForLicenceFee = 845280007,
         [EnumMember(Value = "Approved In Principle")]
         ApprovedInPrinciple = 845280008,
         Terminated = 845280009,
@@ -495,5 +495,23 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         [JsonConverter(typeof(StringEnumConverter))]
         public GeneralYesNo? IsApplicationComplete { get; set; }
+
+        public string LgInName { get; set; }
+
+        [JsonProperty(PropertyName = "lGNameOfOfficial")]
+        public string LGNameOfOfficial { get; set; }
+
+        [JsonProperty(PropertyName = "lGTitlePosition")]
+        public string LGTitlePosition { get; set; }
+        
+        [JsonProperty(PropertyName = "lGContactPhone")]
+        public string LGContactPhone { get; set; }
+
+        [JsonProperty(PropertyName = "lGContactEmail")]
+        public string LGContactEmail { get; set; }
+
+        [JsonProperty(PropertyName = "lGDecisionSubmissionDate")]
+        public DateTimeOffset? LGDecisionSubmissionDate { get; set; }
+        public bool ResolutionDocsUploaded { get; set; }
     }
 }
