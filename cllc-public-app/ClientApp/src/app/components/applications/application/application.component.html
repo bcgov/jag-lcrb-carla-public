@@ -1754,7 +1754,7 @@
         </section>
 
         <section class="ngtest-opened-by-lg" *ngIf="isOpenedByLG">
-          <app-lg-in-confirmation-of-receipt [application]="application"></app-lg-in-confirmation-of-receipt>
+          <app-lg-in-confirmation-of-receipt *ngIf="application" [application]="application"></app-lg-in-confirmation-of-receipt>
         </section>
 
 

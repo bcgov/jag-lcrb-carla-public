@@ -1,24 +1,24 @@
 <h3 class="blue-header">
     LOCAL GOVERNMENT/INDIGENOUS NATION CONFIRMATIN OF RECEIPT OF APPLICATION
 </h3>
-<div class="padded-section">
+<div class="padded-section" [formGroup]="form">
     <app-field label="LG/IN">
-        <input type="text">
+        <input class="form-control" type="text">
     </app-field>
-    <app-field label="Name of Official" [valid]="this.isTouchedAndInvalid('lGNameofOfficial')"
+    <app-field label="Name of Official" [valid]="!isTouchedAndInvalid('lGNameOfOfficial')"
         errorMessage="Please enter the name of the official">
-        <input type="text" formControlName="lGNameofOfficial">
+        <input class="form-control" type="text" formControlName="lGNameOfOfficial">
     </app-field>
-    <app-field label="Title/Position" [valid]="this.isTouchedAndInvalid('lGTitlePosition')"
+    <app-field label="Title/Position" [valid]="!isTouchedAndInvalid('lGTitlePosition')"
         errorMessage="Please enter the Title/Position">
-        <input type="text" formControlName="lGTitlePosition">
+        <input class="form-control" type="text" formControlName="lGTitlePosition">
     </app-field>
-    <app-field label="Phone" [valid]="this.isTouchedAndInvalid('lGContactPhone')" mask="(000) 000-0000"
+    <app-field label="Phone" [valid]="!isTouchedAndInvalid('lGContactPhone')"
         errorMessage="Please enter the phone number">
-        <input type="text" formControlName="lGContactPhone">
+        <input class="form-control" type="text" formControlName="lGContactPhone" mask="(000) 000-0000" placeholder="(000) 000-0000">
     </app-field>
-    <app-field label="Email" [valid]="this.isTouchedAndInvalid('lGContactEmail')" errorMessage="Please enter the email">
-        <input type="text" formControlName="lGContactEmail">
+    <app-field label="Email" [valid]="!isTouchedAndInvalid('lGContactEmail')" errorMessage="Please enter the email">
+        <input class="form-control" type="text" formControlName="lGContactEmail">
     </app-field>
 
     <section>
@@ -57,7 +57,7 @@
     </button>
 
     <button class="btn btn-secondary" (click)="RejectApplication()">
-        <span>Approve</span>
+        <span>Reject</span>
     </button>
 
     <button class="btn btn-primary" (click)="ApproveApplication()">

@@ -15,6 +15,8 @@ export class LgApprovalsComponent implements OnInit {
 
   account: Account;
   applications: Application[];
+  applicationsDecisionNotMade: Application[];
+  applicationsDecisionMadeButNoDocs: Application[];
   busy: any;
   dataLoaded = false; // this is set to true when all page data is loaded
 
@@ -33,14 +35,16 @@ export class LgApprovalsComponent implements OnInit {
     // get approval applications
     this.busy = this.applicationDataService.getLGApprovalApplications()
       .subscribe(applications => {
-        this.applications = applications;
+        this.applications = applications || [];
+        this.applicationsDecisionNotMade = this.applications.filter(app => !app.lGDecisionSubmissionDate);
+        this.applicationsDecisionMadeButNoDocs = this.applications.filter(app => app.lGDecisionSubmissionDate && !app.resolutionDocsUploaded);
         this.dataLoaded = true;
       },
         error => {
           this.snackBar.open(`An error occured while getting approval applications`, 'Fail',
             { duration: 3500, panelClass: ['red-snackbar'] });
         });
-        
+
   }
 
 
