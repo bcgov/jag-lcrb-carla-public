@@ -54,15 +54,6 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
-        [And(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            // click on Return to Dashboard link
-            string retDash = "Return to Dashboard";
-            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
-            returnDash.Click();
-        }
-
         [And(@"I click on the Licences tab for a Cannabis Retail Store")]
         public void click_on_licences_tab()
         {

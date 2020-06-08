@@ -58,11 +58,5 @@ namespace bdd_tests
 
             applicationTypeShared = application_type;
         }
-
-        [And(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            CateringReturnToDashboard();
-        }
     }
 }
