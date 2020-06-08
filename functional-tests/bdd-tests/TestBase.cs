@@ -2532,5 +2532,11 @@ namespace bdd_tests
             NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
             submit_button.Click();
         }
+
+        [And(@"I request an event authorization")]
+        public void request_event_authorization()
+        {
+            RequestCateringEventAuthorization();
+        }
     }
 }
