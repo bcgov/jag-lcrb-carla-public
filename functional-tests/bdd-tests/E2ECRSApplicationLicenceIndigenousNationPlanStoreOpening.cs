@@ -59,12 +59,6 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
-        [And(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            CRSReturnToDashboard();
-        }
-
         [And(@"I click on the Licences tab for a (.*)")]
         public void click_on_licences_tab(string applicationType)
         {

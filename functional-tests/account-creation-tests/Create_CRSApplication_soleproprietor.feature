@@ -15,4 +15,5 @@ Scenario: Start Application
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
+    And I confirm the payment receipt for a Cannabis Retail Store application
     Then I return to the dashboard   

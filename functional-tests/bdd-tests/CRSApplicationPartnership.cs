@@ -41,11 +41,5 @@ namespace bdd_tests
             
             CarlaLogin(businessType);
         }
-
-        [And(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            CRSReturnToDashboard();
-        }
     }
 }

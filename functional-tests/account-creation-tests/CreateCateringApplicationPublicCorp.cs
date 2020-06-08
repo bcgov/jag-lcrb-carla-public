@@ -38,11 +38,10 @@ namespace bdd_tests
     [FeatureFile("./Create_CateringApplication_pubcorp.feature")]
     public sealed class CreateCateringApplicationPublicCorp : TestBase
     {
-
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            //CheckFeatureFlagsLiquor();
+            CheckFeatureFlagsLiquor();
 
             CarlaLoginNoCheck();
         }
@@ -55,12 +54,6 @@ namespace bdd_tests
             startApp_button.Click();
 
             applicationTypeShared = application_type;
-        }
-
-        [Then(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            CateringReturnToDashboard();
         }
     }
 }

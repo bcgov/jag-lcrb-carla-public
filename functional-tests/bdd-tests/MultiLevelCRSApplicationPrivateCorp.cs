@@ -62,16 +62,6 @@ namespace bdd_tests
             business_shareholder_5();
         }
 
-        [And(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            /* 
-            Page Title: Payment Approved
-            */
-
-            CRSReturnToDashboard();
-        }
-
         public void business_shareholder_2()
         {
             /********** Business Shareholder #2 **********/

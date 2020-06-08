@@ -38,11 +38,10 @@ namespace bdd_tests
     [FeatureFile("./Create_CateringApplication_soleproprietor.feature")]
     public sealed class CreateCateringApplicationSoleProprietor : TestBase
     {
-
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            //CheckFeatureFlagsLiquor();
+            CheckFeatureFlagsLiquor();
 
             CarlaLoginNoCheck();
         }
@@ -50,18 +49,11 @@ namespace bdd_tests
         [And(@"I click on the Start Application button for (.*)")]
         public void I_start_application(string application_type)
         {
-
             // click on the Catering Start Application button
             NgWebElement startApp_button = ngDriver.FindElement(By.Id("startCatering"));
             startApp_button.Click();
 
             applicationTypeShared = application_type;
-        }
-
-        [Then(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            CateringReturnToDashboard();
         }
     }
 }

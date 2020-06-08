@@ -38,19 +38,12 @@ namespace bdd_tests
     [FeatureFile("./Create_CRSApplication_soleproprietor.feature")]
     public sealed class CreateCRSApplicationSoleProprietor : TestBase
     {
-
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            //CheckFeatureFlagsCannabis();
+            CheckFeatureFlagsCannabis();
 
             CarlaLoginNoCheck();
-        }
-
-        [Then(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            CRSReturnToDashboard();
         }
     }
 }
