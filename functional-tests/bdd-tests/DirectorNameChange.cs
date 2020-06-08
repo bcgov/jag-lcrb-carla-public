@@ -40,7 +40,8 @@ Scenario: Change director name and pay fee
     And I submit the organization structure
     And I pay the name change fee
     And the director name is now updated
-    Then the account is deleted
+    And the account is deleted
+    Then I see the login page
 */
 
 namespace bdd_tests
@@ -172,12 +173,6 @@ namespace bdd_tests
 
             // check that the director name has been updated
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Updated Director')]")).Displayed);
-        }
-
-        [Then(@"the account is deleted")]
-        public void Delete_my_account2()
-        {
-            this.CarlaDeleteCurrentAccount();
         }
     }
 }
