@@ -209,7 +209,7 @@
             <section *ngIf="showFormControl(application?.applicationType?.storeContactInfo)">
               <h3 class="blue-header">Establishment Contact Details</h3>
               <div style="flex: 0 0 210px;" class="content">
-                <p>The phone and email address used to contact your licenced establishment:</p>
+                <p>The phone and email address used to contact your establishment:</p>
                 <app-field label="Store Email" [required]="false" [valid]="isValidOrNotTouched('establishmentEmail')"
                   errorMessage="Please enter an email address">
                   <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
@@ -852,16 +852,17 @@
             <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
               <p>The floor plans of the proposed establishment, which must meet the following requirements: </p>
               <ul>
-                <li>Must be clear, legible and of sufficient detail and size (8.5" x 11") </li>
-                <li>Provide room size dimensions </li>
-                <li>
+                <li>Must be scaled, clear, legible and include room size dimensions (8.5" x 11") </li>
+                <li *ngIf="isRAS()">detail the entire premises in which the business is located, including the area where liquor will be located, entrances, exits, washrooms, storage areas, cash register area, coolers, any adjoining doors and other fixtures</li>
+                <li *ngIf="isRAS()">clearly identify any adjoining areas</li>
+                <li *ngIf="!isRAS()">Provide room size dimensions </li>
+                <li *ngIf="!isRAS()">
                   Detail entrance, exit, washrooms, storage area, cash register area, coolers, any adjoining doors and
                   other fixtures
                 </li>
-                <li>Clearly identify the area proposed for licensing and any adjoining unlicensed areas</li>
+                <li *ngIf="!isRAS()">Clearly identify the area proposed for licensing and any adjoining unlicensed areas</li>
               </ul>
             </div>
-
           </section>
           <p *ngIf="application?.applicationType?.floorPlan === FormControlState.Reaonly">
             The below floor plan is on file.
@@ -1468,14 +1469,18 @@
 
 
         <!-- Contact Details -->
-        <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
+        <h3 class="blue-header" *ngIf="!isRAS()">APPLICATION CONTACT DETAILS</h3>
+        <h3 class="blue-header" *ngIf="isRAS()"> CONTACT DETAILS</h3>
         <div class=content-bottom>
-          <p>
+          <p *ngIf="!isRAS()">
             <i>
               Please provide contact information for the contact that the LCRB should communicate with regarding the
               application. This contact must be authorized to represent the applicant and have the authority to bind the
               applicant.
             </i>
+          </p>
+          <p *ngIf="isRAS()">
+            Please provide contact information for the contact that the LCRB should communicate with regarding the Expression of Interest.
           </p>
           <address class="padded-section">
 
@@ -1518,7 +1523,7 @@
         <div class="padded-section content-bottom" *ngIf="application?.applicationType?.showDeclarations">
           <ng-container *ngIf="!application?.applicationType?.showLiquorDeclarations">
             <section>
-              <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+              <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer && !isRAS()">
                 The application must only be submitted by an individual with the authority to bind the applicant. The
                 branch
                 relies on the applicant to ensure that the individual who submits this application is authorized to do
@@ -1527,6 +1532,9 @@
                 usually
                 be
                 an officer or, in some cases, a director
+              </div>
+              <div *ngIf="isRAS()">
+                <p>The Expression of Interest must only be submitted by an individual with the authority to bind the Rural Agency Store. The branch relies on the Rural Agency Store Owner to ensure that the individual who submits this Expression of Interest is authorized to do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually be an officer, or, in some cases, a director. Note: A lawyer or consultant may NOT submit this Expression of Interest on behalf of the Rural Agency Store.</p>
               </div>
               <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
                 <p *ngIf="account?.businessType === 'SoleProprietor'">
@@ -1572,7 +1580,7 @@
               </div>
 
             </section>
-            <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+            <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer && !isRAS()">
               Note: A lawyer or
               consultant,
               may NOT submit this application on behalf of
@@ -1594,8 +1602,11 @@
               <section style="display: flex">
                 <input type="checkbox" formControlName="authorizedToSubmit" id="authorizedToSubmit">
                 <span class="error-states">*</span>
-                <div style="padding-left: 10px;">
+                <div style="padding-left: 10px;" *ngIf="!isRAS()">
                   I understand and affirm that I am authorized to submit the application
+                </div>
+                <div style="padding-left: 10px;" *ngIf="isRAS()">
+                  I understand and affirm that I am authorized to submit the Expression of Interest
                 </div>
               </section>
             </app-field>
@@ -1619,9 +1630,13 @@
               <section style="display: flex">
                 <input type="checkbox" formControlName="signatureAgreement" id="signatureAgreement">
                 <span class="error-states">*</span>
-                <div style="padding-left: 10px;">
+                <div style="padding-left: 10px;" *ngIf="!isRAS()">
                   I understand and affirm that all of the information provided for this
                   application is true and complete
+                </div>
+                <div style="padding-left: 10px;" *ngIf="isRAS()">
+                  I understand and affirm that all of the information provided for this
+                  Expression of Interest is true and complete
                 </div>
               </section>
             </app-field>
@@ -1694,7 +1709,7 @@
 
         <!-- Proceed to Pay-->
 
-        <section class="d-flex" style="margin-top:15px;">
+        <section class="d-flex" style="margin-top:15px;" *ngIf="!isRAS()">
 
           <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
@@ -1745,21 +1760,21 @@
 
         <!-- button section -->
         <section *ngIf="!isOpenedByLG" style="position: relative; margin-top: 20px;">
-          <button class="btn btn-primary" style="margin-right:10px;" (click)="saveForLater()">
+          <button class="btn btn-secondary" style="margin-right:10px;" (click)="saveForLater()">
             <span>
-              <i class="fa fa-save" style="color: #fff;"></i>
+              <i class="fa fa-save"></i>
               SAVE FOR LATER
             </span>
           </button>
           <button class="btn btn-primary" (click)="submit_application()">
-            SUBMIT&nbsp;<span *ngIf="!skipPayment">&amp; PAY</span>
+            SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
           </button>
 
           <span style="float: right; color: #1a5a96; padding-top: 10px;">
             <span (click)="cancelApplication()">
               <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
               <a href="javascript: void(0)" id="cancelApp">
-                Cancel Application
+                Cancel <span *ngIf="!isRAS()">Application</span>
               </a>
             </span>
           </span>

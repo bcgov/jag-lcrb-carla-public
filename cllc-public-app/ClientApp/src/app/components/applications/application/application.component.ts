@@ -465,24 +465,28 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   hasType(): boolean {
     // to do, set validation requirements
-  return this.form.get('mfgType').value
+  return this.form.get('mfgType').value;
   }
 
   isBrewery(): boolean {
     // to do, set validation requirements
-    return this.form.get('mfgType').value == "Brewery"
+    return this.form.get('mfgType').value == "Brewery";
   }
   isWinery(): boolean {
     // to do, set validation requirements
-    return this.form.get('mfgType').value == "Winery"
+    return this.form.get('mfgType').value == "Winery";
   }
   isDistillery(): boolean {
-    return this.form.get('mfgType').value == "Distillery"
+    return this.form.get('mfgType').value == "Distillery";
   }
   
   isBrewPub(): boolean {
     // to do, set validation requirements
-    return this.form.get('mfgType').value == "Brewery" && this.form.get('brewPub').value == "Yes"
+    return this.form.get('mfgType').value == "Brewery" && this.form.get('brewPub').value == "Yes";
+  }
+
+  isRAS(): boolean {
+    return this.application.licenseType === 'Rural Agency';
   }
 
 
