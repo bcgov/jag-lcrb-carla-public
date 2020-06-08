@@ -431,7 +431,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
   
   CRSElligible(): boolean {
-    switch(this.account.businessType) {
+    switch(this.account && this.account.businessType) {
       case "University":
       case "Church":
         return false;
