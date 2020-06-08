@@ -90,11 +90,5 @@ namespace bdd_tests
         {
             PayCateringLicenceFee();
         }
-
-        [And(@"I request an event authorization")]
-        public void request_event_authorization()
-        {
-            RequestCateringEventAuthorization();
-        }
     }
 }
