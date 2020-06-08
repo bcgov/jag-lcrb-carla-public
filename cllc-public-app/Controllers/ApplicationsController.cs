@@ -225,7 +225,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET all applications of the given application type in Dynamics for the current user
         [HttpGet("current/by-type/{applicationType}")]
-        public JsonResult GetCurrentUserApplicationsByType(string applicationType)
+        public JsonResult GetCurrentUserLGApprovalApplications(string applicationType)
         {
             var results = new List<ApplicationSummary>();
             // get the current user.
@@ -295,6 +295,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in applications)
                     {
                         var viewModel = await dynamicsApplication.ToViewModel(_dynamicsClient, _logger);
+                        List<ViewModels.FileSystemItem> resolutionFiles = await FileController.GetListFilesInFolder(dynamicsApplication.AdoxioApplicationid, "application", "LGIN Resolution", _dynamicsClient, _fileManagerClient, _logger);
+                        if(resolutionFiles.Count > 0)
+                        {
+                            viewModel.ResolutionDocsUploaded = true;
+                        }
                         results.Add(viewModel);
                     }
                 }
@@ -715,7 +720,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Guid adoxio_applicationId = new Guid(id);
             MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationId);
 
-            if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue))
+            bool allowLGAccess = await CurrentUserIsLGForApplication(adoxioApplication);
+            if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue) && !allowLGAccess)
             {
                 return new NotFoundResult();
             }
