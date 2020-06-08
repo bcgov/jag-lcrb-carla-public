@@ -64,22 +64,6 @@ namespace bdd_tests
             applicationTypeShared = application_type;
         }
 
-        [And(@"I click on the Licences tab for (.*)")]
-        public void click_on_licences_tab(string applicationType)
-        {
-            /* 
-            Page Title: Welcome to Liquor and Cannabis Licensing
-            */
-
-            applicationTypeShared = applicationType;
-
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
-        }
-
         [And(@"I pay the licensing fee")]
         public void click_pay_first_year_licensing_fee()
         {

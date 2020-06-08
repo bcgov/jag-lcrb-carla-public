@@ -2576,5 +2576,21 @@ namespace bdd_tests
             NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
             uiDashboard.Click(); 
         }
+
+        [And(@"I click on the Licences tab for (.*)")]
+        public void click_on_licences_tab(string applicationType)
+        {
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
+
+            applicationTypeShared = applicationType;
+
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+        }
     }
 }
