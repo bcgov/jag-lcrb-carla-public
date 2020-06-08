@@ -73,11 +73,5 @@ namespace bdd_tests
         {
             PayCRSLicenceFee();
         }
-
-        [And(@"I request a personnel name change")]
-        public void request_personnel_name_change()
-        {
-            RequestPersonnelNameChange();
-        }
     }
 }

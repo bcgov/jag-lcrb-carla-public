@@ -2550,5 +2550,11 @@ namespace bdd_tests
         {
             RequestPersonnelEmailChange();
         }
+
+        [And(@"I request a personnel name change")]
+        public void request_personnel_name_change()
+        {
+            RequestPersonnelNameChange();
+        }
     }
 }

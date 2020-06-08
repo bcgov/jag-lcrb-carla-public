@@ -90,11 +90,5 @@ namespace bdd_tests
         {
             PayCateringLicenceFee();
         }
-
-        [And(@"I request a personnel name change")]
-        public void request_personnel_name_change()
-        {
-            RequestPersonnelNameChange();
-        }
     }
 }
