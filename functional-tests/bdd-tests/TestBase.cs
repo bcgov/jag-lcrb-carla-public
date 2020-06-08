@@ -2538,5 +2538,11 @@ namespace bdd_tests
         {
             RequestCateringEventAuthorization();
         }
+
+        [And(@"I request a valid store name or branding change")]
+        public void name_branding_change()
+        {
+            CateringNameBrandingChange();
+        }
     }
 }

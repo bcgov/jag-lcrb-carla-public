@@ -95,11 +95,5 @@ namespace bdd_tests
             NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
             uiDownloadLicence.Click();
         }
-
-        [And(@"I request a valid store name or branding change")]
-        public void name_branding_change()
-        {
-            CateringNameBrandingChange();
-        }
     }
 }
