@@ -1902,12 +1902,10 @@ namespace bdd_tests
         [And(@"I review the security screening requirements")]
         public void review_security_screening_reqs()
         {
-            // This needs to be rewritten as the flow has changed.  
-
             /* 
             Page Title: Security Screening Requirements
             */
-            /*
+            
             // confirm that private corporation personnel are present
             if (businessTypeShared == "private corporation")
             {
@@ -1947,9 +1945,8 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Partner')]")).Displayed);
 
                 // switched off - pending LCSD-3126
-                //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Individual Partner2')]")).Displayed);
+                //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Partner2')]")).Displayed);
             }
-            */
         }
 
         [And(@"I enter the payment information")]
