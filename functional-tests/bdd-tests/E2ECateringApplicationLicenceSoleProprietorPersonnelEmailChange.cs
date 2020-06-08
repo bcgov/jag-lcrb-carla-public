@@ -84,11 +84,5 @@ namespace bdd_tests
         {
             PayCateringLicenceFee();
         }
-
-        [And(@"I change a personnel email address")]
-        public void request_personnel_email_change()
-        {
-            RequestPersonnelEmailChange();
-        }
     }
 }
