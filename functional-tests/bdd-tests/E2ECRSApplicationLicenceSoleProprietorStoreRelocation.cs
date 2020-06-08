@@ -73,11 +73,5 @@ namespace bdd_tests
         {
             PayCRSLicenceFee();
         }
-
-        [And(@"I request a store relocation")]
-        public void request_store_relocation()
-        {
-            RequestRelocation();
-        }
     }
 }

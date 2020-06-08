@@ -84,11 +84,5 @@ namespace bdd_tests
         {
             PayCateringLicenceFee();
         }
-
-        [And(@"I request a transfer of ownership")]
-        public void transfer_of_ownership()
-        {
-            RequestTransferOfOwnership();
-        }
     }
 }

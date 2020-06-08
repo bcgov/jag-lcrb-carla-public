@@ -81,12 +81,6 @@ namespace bdd_tests
             PayCRSLicenceFee();
         }
 
-        [And(@"I click on the licence download link")]
-        public void click_licence_download_link()
-        {
-            DownloadLicence();
-        }
-
         [And(@"I plan the store opening")]
         public void plan_store_opening()
         {

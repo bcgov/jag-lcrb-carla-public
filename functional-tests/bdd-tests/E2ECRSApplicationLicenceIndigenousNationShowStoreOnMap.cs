@@ -79,11 +79,5 @@ namespace bdd_tests
         {
             PayCRSLicenceFee();
         }
-
-        [And(@"I show the store as open on the map")]
-        public void show_store_open_on_map()
-        {
-            ShowStoreOpen();
-        }
     }
 }

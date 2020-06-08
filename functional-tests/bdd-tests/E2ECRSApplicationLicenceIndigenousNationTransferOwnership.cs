@@ -79,11 +79,5 @@ namespace bdd_tests
         {
             PayCRSLicenceFee();
         }
-
-        [And(@"I request a transfer of ownership")]
-        public void request_ownership_transfer()
-        {
-            RequestTransferOwnership();
-        }
     }
 }

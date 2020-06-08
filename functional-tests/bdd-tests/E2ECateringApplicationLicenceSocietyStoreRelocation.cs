@@ -84,11 +84,5 @@ namespace bdd_tests
         {
             PayCateringLicenceFee();
         }
-
-        [And(@"I request a store relocation")]
-        public void request_store_relocation()
-        {
-            RequestRelocation();
-        }
     }
 }
