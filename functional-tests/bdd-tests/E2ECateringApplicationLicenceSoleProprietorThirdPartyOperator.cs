@@ -84,11 +84,5 @@ namespace bdd_tests
         {
             PayCateringLicenceFee();
         }
-
-        [And(@"I request a third party operator")]
-        public void third_party_operator()
-        {
-            RequestThirdPartyOperator();
-        }
     }
 }

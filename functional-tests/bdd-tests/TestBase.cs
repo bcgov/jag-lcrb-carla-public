@@ -991,15 +991,6 @@ namespace bdd_tests
             // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
         }
 
-        public void DownloadLicence()
-        {
-            string downloadLink = "Download Licence";
-
-            // click on the Licences link
-            NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
-            uiDownloadLicence.Click();
-        }
-
         public void PlanStoreOpening()
         {
             /* 
@@ -1256,7 +1247,7 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
-        public void RequestTransferOwnership()
+        /*public void RequestTransferOwnership()
         {
             string licencesLink = "Licences";
 
@@ -1267,7 +1258,7 @@ namespace bdd_tests
             /* 
             Page Title: Licences
             Subtitle:   Cannabis Retail Store Licences
-            */
+            
 
             string transferOwnership = "Transfer Ownership";
 
@@ -1277,7 +1268,7 @@ namespace bdd_tests
 
             /* 
             Page Title: Transfer Your Cannabis Retail Store Licence
-            */
+            
 
             string thirdparty = "GunderCorp TestBusiness";
 
@@ -1305,33 +1296,7 @@ namespace bdd_tests
             submitTransferButton.Click();
 
             // TODO: Confirm status change on Licences tab
-        }
-
-        public void ShowStoreOpen()
-        {
-            /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            */
-
-            string showOpenOnMap = "Show Store as Open on Map";
-
-            // click on the Show Store as Open on Map link
-            NgWebElement uiShowOpenOnMap = ngDriver.FindElement(By.LinkText(showOpenOnMap));
-            uiShowOpenOnMap.Click();
-
-            /* 
-            Page Title: Apply for a cannabis licence
-            */
-
-            System.Threading.Thread.Sleep(7000);
-
-            string dashboard = "Dashboard";
-
-            // click on the Dashboard link
-            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
-            uiDashboard.Click();
-        }
+        }*/
 
         public void RequestedApplicationsOnDashboard()
         {
@@ -2555,6 +2520,61 @@ namespace bdd_tests
         public void request_personnel_name_change()
         {
             RequestPersonnelNameChange();
+        }
+
+        [And(@"I request a store relocation")]
+        public void request_store_relocation()
+        {
+            RequestRelocation();
+        }
+
+        [And(@"I request a third party operator")]
+        public void third_party_operator()
+        {
+            RequestThirdPartyOperator();
+        }
+
+        [And(@"I request a transfer of ownership")]
+        public void request_ownership_transfer()
+        {
+            RequestTransferOfOwnership();
+        }
+
+        [And(@"I click on the licence download link")]
+        public void click_licence_download_link()
+        {
+            string downloadLink = "Download Licence";
+
+            // click on the Licences link
+            NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
+            uiDownloadLicence.Click();
+        }
+
+        [And(@"I show the store as open on the map")]
+        public void show_store_open_on_map()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Cannabis Retail Store Licences
+            */
+
+            string showOpenOnMap = "Show Store as Open on Map";
+
+            // click on the Show Store as Open on Map link
+            NgWebElement uiShowOpenOnMap = ngDriver.FindElement(By.LinkText(showOpenOnMap));
+            uiShowOpenOnMap.Click();
+
+            /* 
+            Page Title: Apply for a cannabis licence
+            */
+
+            System.Threading.Thread.Sleep(7000);
+
+            string dashboard = "Dashboard";
+
+            // click on the Dashboard link
+            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
+            uiDashboard.Click(); 
         }
     }
 }
