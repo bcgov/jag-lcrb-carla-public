@@ -28,7 +28,8 @@ Scenario: Delete an individual who is both a director and shareholder
     And I delete only the director record
     And I click on the Complete Organization Information button
     And only the shareholder record is displayed
-    Then the account is deleted
+    And the account is deleted
+    Then I see the login page
 */
 
 namespace bdd_tests
@@ -199,12 +200,6 @@ namespace bdd_tests
             // check that the shareholder email is displayed to confirm remains
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'same@individual2.com')]")).Displayed);
 
-        }
-
-        [Then(@"the account is deleted")]
-        public void Delete_my_account2()
-        {
-            this.CarlaDeleteCurrentAccount();
         }
     }
 }
