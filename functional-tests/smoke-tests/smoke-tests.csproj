@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="CateringApplication_privatecorp.feature">
+    <None Update="COVID_temporary_extension_food_primary.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Public_smoke_test.feature">
