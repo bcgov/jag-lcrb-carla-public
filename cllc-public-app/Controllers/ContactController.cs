@@ -31,11 +31,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class ContactController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly string _encryptionKey;
+
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IWebHostEnvironment _env;
+        private readonly string _encryptionKey;
         private readonly FileManagerClient _fileManagerClient;
 
         public ContactController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IWebHostEnvironment env, FileManagerClient fileManagerClient)
@@ -136,7 +137,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return BadRequest();
             }
-
+            
             // get the contact
             string contactId = EncryptionUtility.DecryptStringHex(token, _encryptionKey);
             Guid contactGuid = Guid.Parse(contactId);
@@ -549,7 +550,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string casLink = null;
             try
             {
-                casLink = GetCASLink(contactId, _configuration, _encryptionKey);
+                casLink = DynamicsExtensions.GetCASLink(contactId, _configuration);
             }
             catch (Exception ex)
             {
@@ -559,13 +560,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             return new JsonResult(casLink);
         }
-        public static string GetCASLink(string contactId, IConfiguration _configuration, string _encryptionKey)
-        {
-            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/cannabis-associate-screening/";
-            //var ba = Guid.Parse(contactId).ToByteArray();
-            result += HttpUtility.UrlEncode(EncryptionUtility.EncryptStringHex(contactId, _encryptionKey));
-            return result;
-        }
+       
 
         [HttpGet("phs-link/{contactId}")]
         public JsonResult GetPhsLinkForContactGuid(string contactId)
@@ -573,7 +568,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string phsLink = null;
             try
             {
-                phsLink = GetPhsLink(contactId, _configuration, _encryptionKey);
+                phsLink = DynamicsExtensions.GetPhsLink(contactId, _configuration);
             }
             catch (Exception ex)
             {
@@ -582,13 +577,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(phsLink);
         }
 
-        public static string GetPhsLink(string contactId, IConfiguration _configuration, string _encryptionKey)
-        {
-            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/personal-history-summary/";
-            //var ba = Guid.Parse(contactId).ToByteArray();
-            result += HttpUtility.UrlEncode(EncryptionUtility.EncryptStringHex(contactId, _encryptionKey));
-            return result;
-        }
+        
 
         [HttpGet("phs/{code}")]
         [AllowAnonymous]
@@ -629,7 +618,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public string Id { get; set; }
         public string token { get; set; }
         public string shortName { get; set; }
-
         public bool isComplete { get; set; }
     }
 
