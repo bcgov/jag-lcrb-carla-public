@@ -781,12 +781,85 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Welcome to Liquor and Cannabis Licensing')]")).Displayed);
             }
         }
-        public void PayCRSLicenceFee()
+
+        [And(@"I pay the licensing fee for (.*)")]
+        public void PayLicenceFee(string fee_type)
         {
             /* 
             Page Title: Licences
             Subtitle:   Cannabis Retail Store Licences
             */
+
+            if (fee_type == "Cannabis")
+            {
+                string licenceFee = "Pay Licence Fee and Plan Store Opening";
+
+                // click on the pay licence fee link
+                NgWebElement uiLicenceFee = ngDriver.FindElement(By.LinkText(licenceFee));
+                uiLicenceFee.Click();
+
+                /* 
+                Page Title: Plan Your Store Opening
+                */
+
+                string reasonDay = "Automated test: Reason for opening date.";
+
+                // select the opening date
+                NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+                uiCalendar1.Click();
+
+                NgWebElement uiCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
+                uiCalendar2.Click();
+
+                // enter the reason for the opening date
+                NgWebElement uiReasonDate = ngDriver.FindElement(By.XPath("//textarea"));
+                uiReasonDate.SendKeys(reasonDay);
+
+                NgWebElement paymentButton = ngDriver.FindElement(By.XPath("//button[contains(.,' PAY LICENCE FEE AND RECEIVE LICENCE')]"));
+                paymentButton.Click();
+            }
+
+            if (fee_type == "Catering")
+            {
+                string firstYearLicenceFee = "Pay First Year Licensing Fee";
+
+                // click on the pay first year licence fee link
+                NgWebElement uiFirstYearLicenceFee = ngDriver.FindElement(By.LinkText(firstYearLicenceFee));
+                uiFirstYearLicenceFee.Click();
+            }
+
+            // pay the licence fee
+            MakePayment();
+
+            System.Threading.Thread.Sleep(7000);
+
+            if (fee_type == "Cannabis")
+            {
+                // confirm correct payment amount for CRS
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
+            }
+
+            if (fee_type == "Catering")
+            {
+                // confirm correct payment amount for Catering
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$450.00')]")).Displayed);
+            }
+
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+        }
+
+        /*public void PayCRSLicenceFee()
+        {
+            
+            
+           /* 
+            Page Title: Licences
+            Subtitle:   Cannabis Retail Store Licences
+            
 
             string licenceFee = "Pay Licence Fee and Plan Store Opening";
 
@@ -796,7 +869,7 @@ namespace bdd_tests
 
             /* 
             Page Title: Plan Your Store Opening
-            */
+            
 
             string reasonDay = "Automated test: Reason for opening date.";
 
@@ -827,13 +900,14 @@ namespace bdd_tests
             // click on the Licences link
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
-        }
-        public void PayCateringLicenceFee()
+        }*/
+
+        /*public void PayCateringLicenceFee()
         {
             /* 
             Page Title: Licences
             Subtitle:   Catering Licences
-            */
+            *
 
             string firstYearLicenceFee = "Pay First Year Licensing Fee";
 
@@ -854,7 +928,8 @@ namespace bdd_tests
             // click on the Licences link
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
-        }
+        }*/
+
         public void RequestCateringEventAuthorization()
         {        
             /* 

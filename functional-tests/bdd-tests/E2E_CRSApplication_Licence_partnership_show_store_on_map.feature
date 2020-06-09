@@ -18,7 +18,7 @@ Scenario: Start Application
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    And I pay the licensing fee
+    And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And the account is deleted
     Then I see the login page

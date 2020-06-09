@@ -33,7 +33,7 @@ Scenario: Start Application
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    And I pay the licensing fee
+    And I pay the licensing fee for Cannabis
     And I request a store relocation
     And the account is deleted
     Then I see the login page
@@ -50,12 +50,6 @@ namespace bdd_tests
             CheckFeatureFlagsCannabis();
 
             CarlaLogin(businessType);
-        }
-
-        [And(@"I pay the licensing fee")]
-        public void pay_licence_fee()
-        {
-            PayCRSLicenceFee();
         }
     }
 }
