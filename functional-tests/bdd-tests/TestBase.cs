@@ -852,84 +852,6 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
-        /*public void PayCRSLicenceFee()
-        {
-            
-            
-           /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            
-
-            string licenceFee = "Pay Licence Fee and Plan Store Opening";
-
-            // click on the pay licence fee link
-            NgWebElement uiLicenceFee = ngDriver.FindElement(By.LinkText(licenceFee));
-            uiLicenceFee.Click();
-
-            /* 
-            Page Title: Plan Your Store Opening
-            
-
-            string reasonDay = "Automated test: Reason for opening date.";
-
-            // select the opening date
-            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
-            uiCalendar1.Click();
-
-            NgWebElement uiCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-            uiCalendar2.Click();
-
-            // enter the reason for the opening date
-            NgWebElement uiReasonDate = ngDriver.FindElement(By.XPath("//textarea"));
-            uiReasonDate.SendKeys(reasonDay);
-
-            NgWebElement paymentButton = ngDriver.FindElement(By.XPath("//button[contains(.,' PAY LICENCE FEE AND RECEIVE LICENCE')]"));
-            paymentButton.Click();
-
-            // pay the licence fee
-            MakePayment();
-
-            System.Threading.Thread.Sleep(7000);
-
-            // confirm correct payment amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
-
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
-        }*/
-
-        /*public void PayCateringLicenceFee()
-        {
-            /* 
-            Page Title: Licences
-            Subtitle:   Catering Licences
-            *
-
-            string firstYearLicenceFee = "Pay First Year Licensing Fee";
-
-            // click on the pay first year licence fee link
-            NgWebElement uiFirstYearLicenceFee = ngDriver.FindElement(By.LinkText(firstYearLicenceFee));
-            uiFirstYearLicenceFee.Click();
-
-            // pay the licencing fee
-            MakePayment();
-
-            System.Threading.Thread.Sleep(7000);
-
-            // confirm correct payment amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$450.00')]")).Displayed);
-
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
-        }*/
-
         public void RequestCateringEventAuthorization()
         {        
             /* 
@@ -2036,8 +1958,9 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
+
         [And(@"I review the organization structure")]
-        public void I_continue_to_organization_review()
+        public void review_organization_structure()
         {
             /* 
             Page Title: [client name] Detailed Organization Information
@@ -2521,6 +2444,10 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
+
+                // click on individual partner2 confirm button
+                NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section[1]/app-associate-list/div/table/tr/td[6]/i[1]"));
+                uiConfirmButton2.Click();
             }
 
             if (businessTypeShared == "indigenous nation")
