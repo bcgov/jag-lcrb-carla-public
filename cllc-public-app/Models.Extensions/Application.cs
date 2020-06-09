@@ -379,6 +379,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 LGContactPhone = dynamicsApplication.AdoxioLgcontactphone,
                 LGContactEmail = dynamicsApplication.AdoxioLgcontactemail,
                 LGDecisionSubmissionDate = dynamicsApplication.AdoxioLgdecisionsubmissiondate,
+                LgInName = dynamicsApplication?.AdoxioLocalgovindigenousnationid?.AdoxioName,
 
                 // Catering fields.
 
@@ -387,6 +388,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 LiquorIndustryConnectionsDetails = dynamicsApplication.AdoxioLiquorindustryconnectionsdetails,
 
                 OtherBusinessesDetails = dynamicsApplication.AdoxioOtherbusinesssamelocationdetails
+
             };
 
             // Catering yes / no fields
