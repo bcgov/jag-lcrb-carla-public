@@ -123,7 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // check that the session is setup correctly.
             userSettings.Validate();
 
-            LegalEntity legalEntity = GetLegalEntityTree(userSettings.AccountId);
+            LegalEntity legalEntity = _dynamicsClient.GetLegalEntityTree(userSettings.AccountId, _logger, _configuration);
             return new JsonResult(legalEntity);
         }
 
@@ -217,7 +217,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             string currentAccountId = userSettings.AccountId;
 
-            LegalEntity legalEntity = GetLegalEntityTree(userSettings.AccountId);
+            LegalEntity legalEntity = _dynamicsClient.GetLegalEntityTree(userSettings.AccountId, _logger, _configuration);
 
             // get the current user's applications and licences
             var licences = _dynamicsClient.GetLicensesByLicencee(_cache, currentAccountId);
@@ -252,27 +252,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         [HttpGet("legal-entity-change-logs/application/{applicationId}")]
-        public ActionResult GetChangeLogsForApplication(string applicationId)
+        public List<LicenseeChangeLog> GetChangeLogsForApplication(string applicationId)
         {
-            var result = new List<LicenseeChangeLog>();
-            var filter = "_adoxio_application_value eq " + applicationId;
-            try
-            {
-                var response = _dynamicsClient.Licenseechangelogs.Get(filter: filter).Value.ToList();
-                foreach (var item in response)
-                {
-                    result.Add(item.ToViewModel());
-                }
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, $"Error reading LegalEntityChangelog");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, $"Unexpected Exception while reading LegalEntityChangelog");
-            }
-            return new JsonResult(result);
+            return _dynamicsClient.GetApplicationChangeLogs(applicationId, _logger);
         }
 
         [HttpGet("legal-entity-change-logs/account/{accountId}")]
@@ -299,82 +281,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(result);
         }
 
-        private LegalEntity GetLegalEntityTree(string accountId)
-        {
-            LegalEntity result = null;
-            var filter = "_adoxio_account_value eq " + accountId;
-            filter += " and _adoxio_legalentityowned_value eq null";
-
-            var expand = new List<string>{
-                "adoxio_Contact"
-            };
-
-            var response = _dynamicsClient.Legalentities.Get(filter: filter, expand: expand);
-
-            if (response != null && response.Value != null)
-            {
-                var legalEntity = response.Value.FirstOrDefault();
-                if (legalEntity != null)
-                {
-                    result = legalEntity.ToViewModel();
-                    if (!string.IsNullOrEmpty(result.contactId))
-                    {
-                        result.PhsLink = ContactController.GetPhsLink(result.contactId, _configuration, _encryptionKey);
-                        result.CasLink = ContactController.GetCASLink(result.contactId, _configuration, _encryptionKey);
-                    }
-                    result.children = this.GetLegalEntityChildren(result.id);
-                }
-            }
-            return result;
-        }
-
-        private List<LegalEntity> GetLegalEntityChildren(string parentLegalEntityId, List<string> processedEntities = null)
-        {
-            List<LegalEntity> result = new List<LegalEntity>();
-            MicrosoftDynamicsCRMadoxioLegalentityCollection response = null;
-            var filter = "_adoxio_legalentityowned_value eq " + parentLegalEntityId;
-            if (processedEntities == null)
-            {
-                processedEntities = new List<string>();
-            }
-            try
-            {
-                response = _dynamicsClient.Legalentities.Get(filter: filter);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, $"Error while patching legal entity");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, $"Unexpected Exception while patching legal entity");
-            }
-
-            if (response != null && response.Value != null)
-            {
-                var legalEntities = response.Value.ToList();
-
-                foreach (var legalEntity in legalEntities)
-                {
-                    var viewModel = legalEntity.ToViewModel();
-                    if (!String.IsNullOrEmpty(legalEntity.AdoxioLegalentityid) && !processedEntities.Contains(legalEntity.AdoxioLegalentityid))
-                    {
-                        processedEntities.Add(legalEntity.AdoxioLegalentityid);
-                        viewModel.children = GetLegalEntityChildren(legalEntity.AdoxioLegalentityid, processedEntities);
-                    }
-                    if (!string.IsNullOrEmpty(viewModel.contactId))
-                    {
-                        viewModel.PhsLink = ContactController.GetPhsLink(viewModel.contactId, _configuration, _encryptionKey);
-                        viewModel.CasLink = ContactController.GetCASLink(viewModel.contactId, _configuration, _encryptionKey);
-                    }
-
-                    result.Add(viewModel);
-                }
-
-            }
-            return result;
-
-        }
+        
 
         private List<LegalEntity> GetAccountHierarchy(string accountId, List<string> shareHolders = null)
         {
