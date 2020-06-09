@@ -2548,7 +2548,7 @@ namespace bdd_tests
         [And(@"I click on the Pay for Application button")]
         public void click_on_pay()
         {
-            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
+            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application18')]"));
             pay_button.Click();
         }
 
