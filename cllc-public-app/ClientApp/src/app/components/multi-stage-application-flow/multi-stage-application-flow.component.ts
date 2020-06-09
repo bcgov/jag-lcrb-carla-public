@@ -6,6 +6,9 @@ import { AccountProfileComponent } from '@components/account-profile/account-pro
 import { ApplicationLicenseeChangesComponent } from '@components/applications/application-licensee-changes/application-licensee-changes.component';
 import { ApplicationComponent } from '@components/applications/application/application.component';
 import { DynamicApplicationComponent } from '@components/applications/dynamic-application/dynamic-application.component';
+import { ApplicationDataService } from '@services/application-data.service';
+import { Application } from '@models/application.model';
+
 
 @Component({
   selector: 'app-multi-stage-application-flow',
@@ -16,6 +19,9 @@ export class MultiStageApplicationFlowComponent implements OnInit {
   securityScreeningEnabled: boolean;
   useDynamicFormMode: boolean = false;
   applicationId: string;
+  isRAS: boolean = false;
+  isFree: boolean = false;
+  hasLGApproval: boolean = false;
 
   @ViewChild('accountProfile', { static: false }) accountProfileComponent: AccountProfileComponent;
   @ViewChild('orgStructure', { static: false }) licenseeChangesComponent: ApplicationLicenseeChangesComponent;
@@ -23,7 +29,10 @@ export class MultiStageApplicationFlowComponent implements OnInit {
   @ViewChild('dynamicApplication', { static: false }) dynamicApplicationComponent: DynamicApplicationComponent;
 
 
-  constructor(public featureFlagService: FeatureFlagService, private route: ActivatedRoute, ) {
+  constructor(public featureFlagService: FeatureFlagService, 
+              private route: ActivatedRoute, 
+              public applicationDataService: ApplicationDataService, 
+              ) {
 
     featureFlagService.featureOn('SecurityScreening')
       .subscribe(featureOn => this.securityScreeningEnabled = featureOn);
@@ -36,6 +45,26 @@ export class MultiStageApplicationFlowComponent implements OnInit {
   }
 
   ngOnInit() {
+    //this.isRAS = this.applicationComponent.isRAS();    
+    //this.applicationDataService.getApplicationById(this.applicationId).Subscribe( ... 
+
+    this.applicationDataService.getApplicationById(this.applicationId)
+      .subscribe((data: Application) => {
+        if (data.applicantType === 'IndigenousNation') {
+          (<any>data).applyAsIndigenousNation = true;
+        }
+
+        this.isFree = data.applicationType.isFree;
+        this.isRAS = data.licenseType == 'Rural Agency';
+        this.hasLGApproval = data.applicationType.show
+
+      },
+      () => {
+        console.log('Error occured');
+      }
+    );
+
+
   }
 
   canDeactivate(): Observable<boolean> {
@@ -54,6 +83,7 @@ export class MultiStageApplicationFlowComponent implements OnInit {
     }
     return result;
   }
+
 
   selectionChange(event) {
 
