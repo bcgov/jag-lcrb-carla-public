@@ -33,7 +33,7 @@ Scenario: Start Application
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    And I pay the licensing fee
+    And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And the account is deleted
     Then I see the login page
@@ -56,34 +56,6 @@ namespace bdd_tests
         public void And_I_view_the_dashboard_IN(string businessType)
         {
             CarlaLogin(businessType);
-        }
-
-        [And(@"I click on the Licences tab for a (.*)")]
-        public void click_on_licences_tab(string applicationType)
-        {
-            /* 
-            Page Title: Welcome to Liquor and Cannabis Licensing
-            */
-
-            applicationTypeShared = applicationType;
-
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
-        }
-
-        [And(@"I pay the licensing fee")]
-        public void pay_licence_fee()
-        {
-            PayCRSLicenceFee();
-        }
-
-        [And(@"I show the store as open on the map")]
-        public void show_store_open_on_map()
-        {
-            ShowStoreOpen();
         }
     }
 }

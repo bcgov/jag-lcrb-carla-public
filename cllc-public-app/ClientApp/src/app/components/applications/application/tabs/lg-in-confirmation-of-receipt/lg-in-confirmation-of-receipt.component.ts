@@ -21,7 +21,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
 
   ngOnInit() {
     this.form = this.fb.group({
-      LgIn: [{ value: '', disabled: true }],
+      lgInName: [{ value: '', disabled: true }],
       lGNameOfOfficial: ['', [Validators.required]],
       lGTitlePosition: ['', [Validators.required]],
       lGContactPhone: ['', [Validators.required]],

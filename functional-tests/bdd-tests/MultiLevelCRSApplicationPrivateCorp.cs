@@ -187,6 +187,7 @@ namespace bdd_tests
 
             SharedCalendarDate();
         }
+
         public void business_shareholder_3()
         {
             /********** Business Shareholder #3 **********/
