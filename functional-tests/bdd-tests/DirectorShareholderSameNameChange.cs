@@ -28,8 +28,9 @@ Scenario: Change director and shareholder same name
     And I modify only the director record
     And I click on the Complete Organization Information button
     And the director and shareholder name are identical
-    Then the account is deleted
-*/
+    And the account is deleted
+    Then I see the login page
+ */
 
 namespace bdd_tests
 {
@@ -185,12 +186,6 @@ namespace bdd_tests
 
             // check that the shareholder last name has been updated
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
-        }
-
-        [Then(@"the account is deleted")]
-        public void Delete_my_account2()
-        {
-            this.CarlaDeleteCurrentAccount();
         }
     }
 }

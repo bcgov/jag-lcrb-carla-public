@@ -262,12 +262,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
         this.form.patchValue(noNulls);
 
-        if (data.isPaid) {
+        // make fields readonly if payment was made or the LG is viewing the application
+        if (data.isPaid || this.isOpenedByLG) {
           this.form.disable();
         }
         this.savedFormData = this.form.value;
-
-
       },
         () => {
           console.log('Error occured');

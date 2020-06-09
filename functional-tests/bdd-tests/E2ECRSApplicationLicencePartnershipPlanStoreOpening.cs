@@ -33,7 +33,7 @@ Scenario: Start Application
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    And I pay the licensing fee
+    And I pay the licensing fee for Cannabis
     And I click on the licence download link
     And I plan the store opening
     And the account is deleted
@@ -51,40 +51,6 @@ namespace bdd_tests
             CheckFeatureFlagsCannabis();
 
             CarlaLogin(businessType);
-        }
-
-        [And(@"I click on the Licences tab for a (.*)")]
-        public void click_on_licences_tab(string applicationType)
-        {
-            /* 
-            Page Title: Welcome to Liquor and Cannabis Licensing
-            */
-
-            applicationTypeShared = applicationType;
-
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
-        }
-
-        [And(@"I pay the licensing fee")]
-        public void pay_licence_fee()
-        {
-            PayCRSLicenceFee();
-        }
-
-        [And(@"I click on the licence download link")]
-        public void click_licence_download_link()
-        {
-            DownloadLicence();
-        }
-
-        [And(@"I plan the store opening")]
-        public void plan_store_opening()
-        {
-            PlanStoreOpening();
         }
     }
 }

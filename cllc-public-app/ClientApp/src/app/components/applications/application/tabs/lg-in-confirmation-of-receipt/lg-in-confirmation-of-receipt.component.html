@@ -3,7 +3,7 @@
 </h3>
 <div class="padded-section" [formGroup]="form">
     <app-field label="LG/IN">
-        <input class="form-control" type="text">
+        <input class="form-control" formControlName="lgInName" readonly type="text">
     </app-field>
     <app-field label="Name of Official" [valid]="!isTouchedAndInvalid('lGNameOfOfficial')"
         errorMessage="Please enter the name of the official">

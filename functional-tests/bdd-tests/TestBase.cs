@@ -74,11 +74,13 @@ namespace bdd_tests
 
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
+
         public void CarlaHome()
         { 
             ngDriver.Navigate().GoToUrl($"{baseUri}");
             ngDriver.WaitForAngular();
         }
+
 
         [And(@"I click on Home page")]
         public void click_on_home_page()
@@ -251,7 +253,9 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
 
-        public void CRSApplication()
+
+        [And(@"I complete the Cannabis Retail Store application")]
+        public void I_complete_the_Cannabis_application()
         {
             /* 
             Page Title: Submit the Cannabis Retail Store Application
@@ -777,12 +781,85 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Welcome to Liquor and Cannabis Licensing')]")).Displayed);
             }
         }
-        public void PayCRSLicenceFee()
+
+        [And(@"I pay the licensing fee for (.*)")]
+        public void PayLicenceFee(string fee_type)
         {
             /* 
             Page Title: Licences
             Subtitle:   Cannabis Retail Store Licences
             */
+
+            if (fee_type == "Cannabis")
+            {
+                string licenceFee = "Pay Licence Fee and Plan Store Opening";
+
+                // click on the pay licence fee link
+                NgWebElement uiLicenceFee = ngDriver.FindElement(By.LinkText(licenceFee));
+                uiLicenceFee.Click();
+
+                /* 
+                Page Title: Plan Your Store Opening
+                */
+
+                string reasonDay = "Automated test: Reason for opening date.";
+
+                // select the opening date
+                NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+                uiCalendar1.Click();
+
+                NgWebElement uiCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
+                uiCalendar2.Click();
+
+                // enter the reason for the opening date
+                NgWebElement uiReasonDate = ngDriver.FindElement(By.XPath("//textarea"));
+                uiReasonDate.SendKeys(reasonDay);
+
+                NgWebElement paymentButton = ngDriver.FindElement(By.XPath("//button[contains(.,' PAY LICENCE FEE AND RECEIVE LICENCE')]"));
+                paymentButton.Click();
+            }
+
+            if (fee_type == "Catering")
+            {
+                string firstYearLicenceFee = "Pay First Year Licensing Fee";
+
+                // click on the pay first year licence fee link
+                NgWebElement uiFirstYearLicenceFee = ngDriver.FindElement(By.LinkText(firstYearLicenceFee));
+                uiFirstYearLicenceFee.Click();
+            }
+
+            // pay the licence fee
+            MakePayment();
+
+            System.Threading.Thread.Sleep(7000);
+
+            if (fee_type == "Cannabis")
+            {
+                // confirm correct payment amount for CRS
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
+            }
+
+            if (fee_type == "Catering")
+            {
+                // confirm correct payment amount for Catering
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$450.00')]")).Displayed);
+            }
+
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+        }
+
+        /*public void PayCRSLicenceFee()
+        {
+            
+            
+           /* 
+            Page Title: Licences
+            Subtitle:   Cannabis Retail Store Licences
+            
 
             string licenceFee = "Pay Licence Fee and Plan Store Opening";
 
@@ -792,7 +869,7 @@ namespace bdd_tests
 
             /* 
             Page Title: Plan Your Store Opening
-            */
+            
 
             string reasonDay = "Automated test: Reason for opening date.";
 
@@ -823,13 +900,14 @@ namespace bdd_tests
             // click on the Licences link
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
-        }
-        public void PayCateringLicenceFee()
+        }*/
+
+        /*public void PayCateringLicenceFee()
         {
             /* 
             Page Title: Licences
             Subtitle:   Catering Licences
-            */
+            *
 
             string firstYearLicenceFee = "Pay First Year Licensing Fee";
 
@@ -850,7 +928,8 @@ namespace bdd_tests
             // click on the Licences link
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
-        }
+        }*/
+
         public void RequestCateringEventAuthorization()
         {        
             /* 
@@ -991,17 +1070,9 @@ namespace bdd_tests
             // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
         }
 
-        public void DownloadLicence()
-        {
-            string downloadLink = "Download Licence";
-
-            // click on the Licences link
-            NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
-            uiDownloadLicence.Click();
-        }
-
-        public void PlanStoreOpening()
-        {
+        [And(@"I plan the store opening")]
+        public void plan_store_opening()
+        { 
             /* 
             Page Title: Licences
             Subtitle:   Cannabis Retail Store Licences
@@ -1079,14 +1150,29 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
-        public void StartCRSApplication()
+
+        [And(@"I click on the Start Application button for (.*)")]
+        public void I_start_application(string application_type)
         {
-            // click on the Start Application button
-            NgWebElement startApp_button = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
-            startApp_button.Click();
+            if (application_type == "Catering")
+            {
+                // click on the Catering Start Application button
+                NgWebElement startApp_button = ngDriver.FindElement(By.Id("startCatering"));
+                startApp_button.Click();
+            }
+
+            if (application_type == "a Cannabis Retail Store")
+            {
+                NgWebElement startApp_button = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
+                startApp_button.Click();
+            }
+
+            applicationTypeShared = application_type;
         }
 
-        public void StoreNameBrandingChange()
+
+        [And(@"I request a valid store name or branding change")]
+        public void request_name_branding_change()
         {
             /* 
             Page Title: Licences
@@ -1153,7 +1239,8 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
-        public void RequestStructuralChange()
+        [And(@"I request a structural change")]
+        public void request_structural_change()
         {
             /* 
            Page Title: Licences
@@ -1256,7 +1343,7 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
-        public void RequestTransferOwnership()
+        /*public void RequestTransferOwnership()
         {
             string licencesLink = "Licences";
 
@@ -1267,7 +1354,7 @@ namespace bdd_tests
             /* 
             Page Title: Licences
             Subtitle:   Cannabis Retail Store Licences
-            */
+            
 
             string transferOwnership = "Transfer Ownership";
 
@@ -1277,7 +1364,7 @@ namespace bdd_tests
 
             /* 
             Page Title: Transfer Your Cannabis Retail Store Licence
-            */
+            
 
             string thirdparty = "GunderCorp TestBusiness";
 
@@ -1305,33 +1392,7 @@ namespace bdd_tests
             submitTransferButton.Click();
 
             // TODO: Confirm status change on Licences tab
-        }
-
-        public void ShowStoreOpen()
-        {
-            /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            */
-
-            string showOpenOnMap = "Show Store as Open on Map";
-
-            // click on the Show Store as Open on Map link
-            NgWebElement uiShowOpenOnMap = ngDriver.FindElement(By.LinkText(showOpenOnMap));
-            uiShowOpenOnMap.Click();
-
-            /* 
-            Page Title: Apply for a cannabis licence
-            */
-
-            System.Threading.Thread.Sleep(7000);
-
-            string dashboard = "Dashboard";
-
-            // click on the Dashboard link
-            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
-            uiDashboard.Click();
-        }
+        }*/
 
         public void RequestedApplicationsOnDashboard()
         {
@@ -1916,12 +1977,10 @@ namespace bdd_tests
         [And(@"I review the security screening requirements")]
         public void review_security_screening_reqs()
         {
-            // This needs to be rewritten as the flow has changed.  
-
             /* 
             Page Title: Security Screening Requirements
             */
-            /*
+            
             // confirm that private corporation personnel are present
             if (businessTypeShared == "private corporation")
             {
@@ -1961,9 +2020,8 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Partner')]")).Displayed);
 
                 // switched off - pending LCSD-3126
-                //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Individual Partner2')]")).Displayed);
+                //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Partner2')]")).Displayed);
             }
-            */
         }
 
         [And(@"I enter the payment information")]
@@ -2487,29 +2545,11 @@ namespace bdd_tests
             orgInfoButton.Click();
         }
 
-        [And(@"I complete the Cannabis Retail Store application")]
-        public void I_complete_the_Cannabis_application()
-        {
-            CRSApplication();
-        }
-
         [And(@"I click on the Pay for Application button")]
         public void click_on_pay()
         {
             NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
             pay_button.Click();
-        }
-
-        [And(@"I click on the Start Application button for a Cannabis Retail Store")]
-        public void start_application()
-        {
-            StartCRSApplication();
-        }
-
-        [And(@"I request a structural change")]
-        public void request_structural_change()
-        {
-            RequestStructuralChange();
         }
 
         [And(@"I submit the organization structure")]
@@ -2531,6 +2571,108 @@ namespace bdd_tests
         {
             NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
             submit_button.Click();
+        }
+
+        [And(@"I request an event authorization")]
+        public void request_event_authorization()
+        {
+            RequestCateringEventAuthorization();
+        }
+
+        [And(@"I request a valid store name or branding change")]
+        public void name_branding_change()
+        {
+            CateringNameBrandingChange();
+        }
+
+        [And(@"I change a personnel email address")]
+        public void request_personnel_email_change()
+        {
+            RequestPersonnelEmailChange();
+        }
+
+        [And(@"I request a personnel name change")]
+        public void request_personnel_name_change()
+        {
+            RequestPersonnelNameChange();
+        }
+
+        [And(@"I request a store relocation")]
+        public void request_store_relocation()
+        {
+            RequestRelocation();
+        }
+
+        [And(@"I request a third party operator")]
+        public void third_party_operator()
+        {
+            RequestThirdPartyOperator();
+        }
+
+        [And(@"I request a transfer of ownership")]
+        public void request_ownership_transfer()
+        {
+            RequestTransferOfOwnership();
+        }
+
+        [And(@"I click on the licence download link")]
+        public void click_licence_download_link()
+        {
+            string downloadLink = "Download Licence";
+
+            // click on the Licences link
+            NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
+            uiDownloadLicence.Click();
+        }
+
+        [And(@"I show the store as open on the map")]
+        public void show_store_open_on_map()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Cannabis Retail Store Licences
+            */
+
+            string showOpenOnMap = "Show Store as Open on Map";
+
+            // click on the Show Store as Open on Map link
+            NgWebElement uiShowOpenOnMap = ngDriver.FindElement(By.LinkText(showOpenOnMap));
+            uiShowOpenOnMap.Click();
+
+            /* 
+            Page Title: Apply for a cannabis licence
+            */
+
+            System.Threading.Thread.Sleep(7000);
+
+            string dashboard = "Dashboard";
+
+            // click on the Dashboard link
+            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
+            uiDashboard.Click(); 
+        }
+
+        [And(@"I click on the Licences tab for (.*)")]
+        public void click_on_licences_tab(string applicationType)
+        {
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
+
+            applicationTypeShared = applicationType;
+
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+        }
+
+
+        [And(@"I review the federal reports")]
+        public void review_federal_reports()
+        {
+            ReviewFederalReports();
         }
     }
 }
