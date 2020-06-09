@@ -18,7 +18,7 @@ Scenario: Pay First Year Catering Licence and Submit Third Party Operator Applic
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for Catering
-    And I pay the licensing fee
+    And I pay the licensing fee for Catering
     And I request a third party operator
     And the account is deleted
     Then I see the login page
