@@ -1892,7 +1892,7 @@
         </app-field>
       </div>
     </section>
-    <app-associate-content [account]="account" [showBothContents]="false"
+    <app-associate-content *ngIf="account?.businessType !== 'LocalGovernment'" [account]="account" [showBothContents]="false"
       [isIndigenousNation]="form.get('applyAsIndigenousNation').value"></app-associate-content>
   </ng-template>
 

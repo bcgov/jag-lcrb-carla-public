@@ -77,7 +77,7 @@
         </div>
       </section>
       <p></p> -->
-      <app-associate-content [hasLicence]="hasLicence" [account]="account" [isIndigenousNation]="indigenousNationModeActive">
+      <app-associate-content *ngIf="account?.businessType !== 'LocalGovernment'" [hasLicence]="hasLicence" [account]="account" [isIndigenousNation]="indigenousNationModeActive">
       </app-associate-content>
       <p></p>
       <app-liquor-approvals-callout appRemoveIfFeatureOff="LGApprovals" [account]="account"></app-liquor-approvals-callout>
