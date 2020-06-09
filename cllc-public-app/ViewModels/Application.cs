@@ -496,6 +496,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public GeneralYesNo? IsApplicationComplete { get; set; }
 
+
         public string LgInName { get; set; }
 
         [JsonProperty(PropertyName = "lGNameOfOfficial")]
