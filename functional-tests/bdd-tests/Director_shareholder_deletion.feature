@@ -13,4 +13,5 @@ Scenario: Delete an individual who is both a director and shareholder
     And I delete only the director record
     And I click on the Complete Organization Information button
     And only the shareholder record is displayed
-    Then the account is deleted
+    And the account is deleted
+    Then I see the login page
