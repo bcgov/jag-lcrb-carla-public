@@ -51,11 +51,5 @@ namespace bdd_tests
 
             CarlaLogin(businessType);
         }
-
-        [And(@"I pay the licensing fee")]
-        public void pay_licence_fee()
-        {
-            PayCRSLicenceFee();
-        }
     }
 }

@@ -33,7 +33,7 @@ Scenario: Pay First Year Catering Licence and Submit Name Branding Change
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for Catering
-    And I pay the licensing fee
+    And I pay the licensing fee for Catering
     And I click on the licence download link
     And I request a valid store name or branding change
     And the account is deleted
@@ -58,13 +58,6 @@ namespace bdd_tests
         public void And_I_view_the_dashboard_IN(string businessType)
         {
             CarlaLogin(businessType);
-        }
-
-
-        [And(@"I pay the licensing fee")]
-        public void click_pay_first_year_licensing_fee()
-        {
-            PayCateringLicenceFee();
         }
     }
 }
