@@ -32,8 +32,8 @@ Scenario: Pay First Year Catering Licence and Submit Name Branding Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab
-    And I pay the licensing fee
+    And I click on the Licences tab for Catering
+    And I pay the licensing fee for Catering
     And I click on the licence download link
     And I request a valid store name or branding change
     And the account is deleted
@@ -51,55 +51,6 @@ namespace bdd_tests
             CheckFeatureFlagsLiquor();
 
             CarlaLogin(businessType);
-        }
-
-        [And(@"I click on the Start Application button for (.*)")]
-        public void I_start_application(string application_type)
-        {
-
-            // click on the Catering Start Application button
-            NgWebElement startApp_button = ngDriver.FindElement(By.Id("startCatering"));
-            startApp_button.Click();
-
-            applicationTypeShared = application_type;
-        }
-
-        [And(@"I click on the Licences tab for (.*)")]
-        public void click_on_licences_tab(string applicationType)
-        {
-            /* 
-            Page Title: Welcome to Liquor and Cannabis Licensing
-            */
-
-            applicationTypeShared = applicationType;
-
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
-        }
-
-        [And(@"I pay the licensing fee")]
-        public void click_pay_first_year_licensing_fee()
-        {
-            PayCateringLicenceFee();
-        }
-
-        [And(@"I click on the licence download link")]
-        public void click_licence_download_link()
-        {
-            string downloadLink = "Download Licence";
-
-            // click on the Licences link
-            NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
-            uiDownloadLicence.Click();
-        }
-
-        [And(@"I request a valid store name or branding change")]
-        public void name_branding_change()
-        {
-            CateringNameBrandingChange();
         }
     }
 }

@@ -42,16 +42,6 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
-        [And(@"I click on the Start Application button for (.*)")]
-        public void I_start_application(string application_type)
-        {
-            // click on the Catering Start Application button
-            NgWebElement startApp_button = ngDriver.FindElement(By.Id("startCatering"));
-            startApp_button.Click();
-
-            applicationTypeShared = application_type;
-        }
-
         [And(@"I do not complete the catering application correctly")]
         public void I_do_not_complete_the_application_correctly()
         {

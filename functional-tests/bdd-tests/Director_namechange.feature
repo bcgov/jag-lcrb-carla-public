@@ -25,4 +25,5 @@ Scenario: Change director name and pay fee
     And I submit the organization structure
     And I pay the name change fee
     And the director name is now updated
-    Then the account is deleted
+    And the account is deleted
+    Then I see the login page
