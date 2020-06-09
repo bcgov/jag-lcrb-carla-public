@@ -5,6 +5,7 @@ import { Account } from '@models/account.model';
 import { ApplicationDataService } from '@services/application-data.service';
 import { Application } from '@models/application.model';
 import { MatSnackBar } from '@angular/material';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-lg-approvals',
@@ -37,7 +38,7 @@ export class LgApprovalsComponent implements OnInit {
       .subscribe(applications => {
         this.applications = applications || [];
         this.applicationsDecisionNotMade = this.applications.filter(app => !app.lGDecisionSubmissionDate);
-        this.applicationsDecisionMadeButNoDocs = this.applications.filter(app => app.lGDecisionSubmissionDate && !app.resolutionDocsUploaded);
+        this.applicationsDecisionMadeButNoDocs = this.applications.filter(app => app.lGDecisionSubmissionDate && app.resolutionDocsUploaded);
         this.dataLoaded = true;
       },
         error => {
@@ -47,6 +48,12 @@ export class LgApprovalsComponent implements OnInit {
 
   }
 
-
-
+  get90dayCount(submissionDate: Date): number {
+    let submission = moment(submissionDate)
+      .startOf('day')
+      .add(90, 'day');
+    let current = moment().startOf('day');
+    let count = submission.diff(current, 'days');
+    return count;
+  }
 }
