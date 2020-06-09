@@ -394,7 +394,7 @@ export class LicenseeChangeLog {
   public static processLegalEntityTree(node: LegalEntity): LicenseeChangeLog {
     const newNode = new LicenseeChangeLog(node);
 
-    if (node.children && node.children.length) {
+    if (node && node.children && node.children.length) {
       newNode.children = [];
       node.children.forEach(child => {
         const childNode = this.processLegalEntityTree(child);
