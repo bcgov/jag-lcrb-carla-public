@@ -33,7 +33,6 @@ const FormValidationErrorMap = {
   lgStatus: 'Selection of the LG Option',
   boundedStatus: 'Confirmation of perimeter bounding',
   signatureAgreement: 'Declaration checkbox',
-
   currentTotalCapicityIncluded: 'Current Total Capacity checkbox',
   areasToBeExtendedIncluded: 'Areas to be Extended checkbox',
   floorPlanIncluded: 'Floor Plan checkbox',
@@ -94,6 +93,7 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
       lgStatus: ['', []],
       boundedStatus: ['',[Validators.required]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
+      // signatureAgreement: ['', [Validators.required]]
     });
 
     this.form.get('sameAddresses').valueChanges
