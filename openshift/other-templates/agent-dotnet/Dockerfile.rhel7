@@ -45,6 +45,7 @@ RUN yum -y install wget nano Xvfb  xorg-x11-xauth java-1.8.0-openjdk git && \
 	rm google-chrome-stable_current_x86_64.rpm && \
 	yum clean all -y && \
     rm -rf /var/cache/yum/* && \
+	dnf install npm && \
 	npm install -g @angular/cli && \
 	npm install -g typescript
 #	yum -y install firefox; yum clean all
