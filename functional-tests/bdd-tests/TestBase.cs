@@ -385,6 +385,7 @@ namespace bdd_tests
             submit_button.Click();
         }
 
+
         [And(@"I confirm the payment receipt for a (.*)")]
         public void confirm_payment_receipt(string application_type)
         {
@@ -411,6 +412,7 @@ namespace bdd_tests
             ReturnToDashboard();
         }
 
+
         [Then(@"I return to the dashboard")]
         public void then_I_return_to_dashboard()
         {
@@ -425,7 +427,9 @@ namespace bdd_tests
             returnDash.Click();
         }
 
-        public void CateringApplication()
+
+        [And(@"I complete the Catering application")]
+        public void I_complete_the_application()
         {
             /* 
             Page Title: Catering Licence Application
@@ -561,23 +565,30 @@ namespace bdd_tests
 
             ngDriver.IgnoreSynchronization = false;
         }
+
         public void CheckFeatureFlagsCannabis()
         {
             CheckFeatureFlag("CRS-Renewal");
         }
+
         public void CheckFeatureFlagsCOVIDTempExtension()
         {
             CheckFeatureFlag("CovidApplication");          
         }
+
         public void CheckFeatureFlagsLiquor()
         {
             CheckFeatureFlag("LiquorOne");        
         }
+
         public void CheckFeatureFlagsMaps()
         {
             CheckFeatureFlag("Maps");
         }
-        public void RequestPersonnelNameChange()
+
+
+        [And(@"I request a personnel name change")]
+        public void request_personnel_name_change()
         {
             if (businessTypeShared != "indigenous nation")
             {
@@ -665,7 +676,9 @@ namespace bdd_tests
             }
         }
 
-        public void RequestRelocation()
+
+        [And(@"I request a store relocation")]
+        public void request_store_relocation()
         {
             /* 
             Page Title: Licences
@@ -745,7 +758,10 @@ namespace bdd_tests
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
         }
-        public void RequestPersonnelEmailChange()
+
+
+        [And(@"I change a personnel email address")]
+        public void request_personnel_email_change()
         {
             if (businessTypeShared != "indigenous nation")
             {
@@ -781,6 +797,7 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Welcome to Liquor and Cannabis Licensing')]")).Displayed);
             }
         }
+
 
         [And(@"I pay the licensing fee for (.*)")]
         public void PayLicenceFee(string fee_type)
@@ -852,8 +869,10 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
-        public void RequestCateringEventAuthorization()
-        {        
+
+        [And(@"I request an event authorization")]
+        public void request_event_authorization()
+        {       
             /* 
             Page Title: Licences
             Subtitle:   Catering Licences
@@ -991,6 +1010,7 @@ namespace bdd_tests
             // confirm that the Event Status = In Review and the Client or Host Name is present - TODO
             // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
         }
+
 
         [And(@"I plan the store opening")]
         public void plan_store_opening()
@@ -1161,6 +1181,7 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
+
         [And(@"I request a structural change")]
         public void request_structural_change()
         {
@@ -1238,7 +1259,9 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
-        public void ReviewFederalReports()
+
+        [And(@"I review the federal reports")]
+        public void review_federal_reports()
         {
             /* 
             Page Title: Licences
@@ -1265,57 +1288,6 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
-        /*public void RequestTransferOwnership()
-        {
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
-
-            /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            
-
-            string transferOwnership = "Transfer Ownership";
-
-            // click on the Transfer Ownership link
-            NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
-            uiTransferOwnership.Click();
-
-            /* 
-            Page Title: Transfer Your Cannabis Retail Store Licence
-            
-
-            string thirdparty = "GunderCorp TestBusiness";
-
-            // search for the proposed licensee
-            NgWebElement thirdPartyOperator = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
-            thirdPartyOperator.SendKeys(thirdparty);
-
-            NgWebElement thirdPartyOperatorOption = ngDriver.FindElement(By.XPath("//mat-option[@id='mat-option-0']/span"));
-            thirdPartyOperatorOption.Click();
-
-            // click on consent to licence transfer checkbox
-            NgWebElement consentToTransfer = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-ownership-transfer/div/div[2]/div[2]/section[5]/app-field/section/div/section/section/input"));
-            consentToTransfer.Click();
-
-            // click on authorize signature checkbox
-            NgWebElement authorizeSignature = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-ownership-transfer/div/div[2]/div[2]/div/app-field[1]/section/div/section/section/input"));
-            authorizeSignature.Click();
-
-            // click on signature agreement checkbox
-            NgWebElement signatureAgreement = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-ownership-transfer/div/div[2]/div[2]/div/app-field[2]/section/div/section/section/input"));
-            signatureAgreement.Click();
-
-            // click on submit transfer button
-            NgWebElement submitTransferButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT TRANSFER')]"));
-            submitTransferButton.Click();
-
-            // TODO: Confirm status change on Licences tab
-        }*/
-
         public void RequestedApplicationsOnDashboard()
         {
             /* 
@@ -1339,7 +1311,10 @@ namespace bdd_tests
             // confirm that a structural change request is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Structural Change')]")).Displayed);
         }
-        public void CateringNameBrandingChange()
+
+
+        [And(@"I request a valid store name or branding change")]
+        public void name_branding_change()
         {
             /* 
             Page Title: Licences
@@ -1424,24 +1399,6 @@ namespace bdd_tests
             Page Title: Submit a Licence Relocation Application
             */
 
-            /*// create test data
-            string streetAddress = "303 Prideaux St";
-            string city = "Nanaimo";
-            string postal = "V9R2N3";
-
-            // enter the proposed street address
-            NgWebElement uiStreetAddress = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressStreet'])[2]"));
-            uiStreetAddress.SendKeys(streetAddress);
-
-            // enter the proposed street city
-            NgWebElement uiCity = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressCity'])[2]"));
-            uiCity.SendKeys(city);
-
-            // enter the proposed postal code
-            NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressPostalCode'])[3]"));
-            uiPostalCode.SendKeys(postal);
-            */
-
             // find the upload test file in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
@@ -1492,7 +1449,9 @@ namespace bdd_tests
             openCalendarYear.Click();
         }
 
-        public void RequestThirdPartyOperator()
+
+        [And(@"I request a third party operator")]
+        public void third_party_operator()
         {
             // return to the Licences tab
             string licencesLink2 = "Licences";
@@ -1546,7 +1505,9 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third Party Operator Application Initiated')]")).Displayed);
         }
 
-        public void RequestTransferOfOwnership()
+
+        [And(@"I request a transfer of ownership")]
+        public void request_ownership_transfer()
         {
             /* 
             Page Title: Licences
@@ -1625,6 +1586,7 @@ namespace bdd_tests
             //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third-Party Operator')]")).Displayed);
         }
 
+
         [And(@"the application is approved")]
         public void application_is_approved()
         {
@@ -1641,6 +1603,7 @@ namespace bdd_tests
             // navigate back to dashboard
             ngDriver.Navigate().GoToUrl($"{baseUri}/dashboard");
         }
+
 
         [And(@"I complete the eligibility disclosure")]
         public void complete_eligibility_disclosure()
@@ -1703,6 +1666,7 @@ namespace bdd_tests
             NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
             submit_button.Click();
         }
+
 
         [And(@"I review the account profile")]
         public void review_account_profile()
@@ -1884,17 +1848,20 @@ namespace bdd_tests
             continueApp_button.Click();
         }
 
+
         [And(@"the account is deleted")]
         public void Delete_my_account()
         {
             this.CarlaDeleteCurrentAccount();
         }
 
+
         [Then(@"I see the login page")]
         public void I_see_login()
         {
             Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
+
 
         [And(@"I review the security screening requirements")]
         public void review_security_screening_reqs()
@@ -1946,11 +1913,13 @@ namespace bdd_tests
             }
         }
 
+
         [And(@"I enter the payment information")]
         public void enter_payment_info()
         {
             MakePayment();
         }
+
         
         [And(@"I am logged in to the dashboard as a (.*)")]
         public void And_I_view_the_dashboard(string businessType)
@@ -2464,6 +2433,7 @@ namespace bdd_tests
             }
         }
 
+
         [And(@"I click on the Complete Organization Information button")]
         public void complete_org_info()
         {
@@ -2472,12 +2442,14 @@ namespace bdd_tests
             orgInfoButton.Click();
         }
 
+
         [And(@"I click on the Pay for Application button")]
         public void click_on_pay()
         {
             NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
             pay_button.Click();
         }
+
 
         [And(@"I submit the organization structure")]
         public void submit_org_structure()
@@ -2487,11 +2459,6 @@ namespace bdd_tests
             submitOrgInfoButton.Click();
         }
 
-        [And(@"I complete the Catering application")]
-        public void I_complete_the_application()
-        {
-            CateringApplication();
-        }
 
         [And(@"I click on the Submit button")]
         public void click_on_submit()
@@ -2500,47 +2467,6 @@ namespace bdd_tests
             submit_button.Click();
         }
 
-        [And(@"I request an event authorization")]
-        public void request_event_authorization()
-        {
-            RequestCateringEventAuthorization();
-        }
-
-        [And(@"I request a valid store name or branding change")]
-        public void name_branding_change()
-        {
-            CateringNameBrandingChange();
-        }
-
-        [And(@"I change a personnel email address")]
-        public void request_personnel_email_change()
-        {
-            RequestPersonnelEmailChange();
-        }
-
-        [And(@"I request a personnel name change")]
-        public void request_personnel_name_change()
-        {
-            RequestPersonnelNameChange();
-        }
-
-        [And(@"I request a store relocation")]
-        public void request_store_relocation()
-        {
-            RequestRelocation();
-        }
-
-        [And(@"I request a third party operator")]
-        public void third_party_operator()
-        {
-            RequestThirdPartyOperator();
-        }
-
-        [And(@"I request a transfer of ownership")]
-        public void request_ownership_transfer()
-        {
-            RequestTransferOfOwnership();
-        }
 
         [And(@"I click on the licence download link")]
         public void click_licence_download_link()
@@ -2551,6 +2477,7 @@ namespace bdd_tests
             NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
             uiDownloadLicence.Click();
         }
+
 
         [And(@"I show the store as open on the map")]
         public void show_store_open_on_map()
@@ -2579,6 +2506,7 @@ namespace bdd_tests
             uiDashboard.Click(); 
         }
 
+
         [And(@"I click on the Licences tab for (.*)")]
         public void click_on_licences_tab(string applicationType)
         {
@@ -2593,13 +2521,6 @@ namespace bdd_tests
             // click on the Licences link
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
-        }
-
-
-        [And(@"I review the federal reports")]
-        public void review_federal_reports()
-        {
-            ReviewFederalReports();
         }
     }
 }
