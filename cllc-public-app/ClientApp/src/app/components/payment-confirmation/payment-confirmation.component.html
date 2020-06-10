@@ -35,6 +35,10 @@
               <td>Amount</td>
               <td>{{trnAmount | currency}}</td>
             </tr>
+            <tr *ngIf="applicationType">
+              <td>Application Type</td>
+              <td>{{applicationType}}</td>
+            </tr>
           </table>
         </div>
       </div>
