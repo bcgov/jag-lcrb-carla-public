@@ -497,8 +497,8 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             try
             {
-                var data = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
-                licences = (List<MicrosoftDynamicsCRMadoxioLicences>)data
+                List<MicrosoftDynamicsCRMadoxioLicences> data = (List<MicrosoftDynamicsCRMadoxioLicences>)_dynamicsClient.Licenceses.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
+                licences = data
                     .Where(licence =>
                     {
                         return licence.Statuscode != (int)Public.ViewModels.LicenceStatusCodes.Cancelled
@@ -509,7 +509,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                     {
                         licence.AdoxioLicenceType = Gov.Lclb.Cllb.Public.Models.ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
                         return licence;
-                    });
+                    })
+                    .ToList();
             }
             catch (HttpOperationException)
             {
