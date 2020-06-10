@@ -380,9 +380,7 @@ namespace bdd_tests
 
             applicationID = parsedURL[5];
 
-            // click on the Submit button
-            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
-            submitButton.Click();
+            ClickOnSubmitButton();
         }
 
 
@@ -743,8 +741,7 @@ namespace bdd_tests
             uiSigAgreement.Click();
 
             // click on the Submit & Pay button
-            NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
-            submitpayButton.Click();
+            ClickOnSubmitButton();
 
             // pay for the relocation application
             MakePayment();
@@ -995,8 +992,7 @@ namespace bdd_tests
             uiTermsAndConditions.Click();
 
             // click on the submit button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
-            submitOrgInfoButton.Click();
+            ClickOnSubmitButton();
 
             /* 
             Page Title: Licences
@@ -1169,8 +1165,7 @@ namespace bdd_tests
             uiSignatureAgreement.Click();
 
             // click on the Submit & Pay button
-            NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
-            submitpayButton.Click();
+            ClickOnSubmitButton2();
 
             System.Threading.Thread.Sleep(3000);
 
@@ -1291,8 +1286,7 @@ namespace bdd_tests
             uiSigAgreement.Click();
 
             // click on the Submit & Pay button
-            NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
-            submitpayButton.Click();
+            ClickOnSubmitButton2();
 
             // pay for the branding change application
             MakePayment();
@@ -1354,8 +1348,7 @@ namespace bdd_tests
             uiSigAgreement.Click();
 
             // click on the Submit & Pay button
-            NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
-            submitpayButton.Click();
+            ClickOnSubmitButton2();
 
             // pay for the relocation application
             MakePayment();
@@ -1428,8 +1421,7 @@ namespace bdd_tests
             signatureAgreement.Click();
 
             // click on submit button
-            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
-            submitButton.Click();
+            ClickOnSubmitButton2();
 
             // return to the Licences tab
             string licencesLink = "Licences";
@@ -1599,8 +1591,7 @@ namespace bdd_tests
             sigCheckbox.SendKeys(electricSignature);
 
             // click on the Submit button
-            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
-            submitButton.Click();
+            ClickOnSubmitButton();
         }
 
 
@@ -2400,6 +2391,12 @@ namespace bdd_tests
         public void ClickOnSubmitButton()
         {
             NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
+            submitButton.Click();
+        }
+
+        public void ClickOnSubmitButton2()
+        {
+            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
             submitButton.Click();
         }
 
