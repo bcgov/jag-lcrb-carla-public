@@ -30,7 +30,7 @@ namespace bdd_tests
 
         protected string applicationTypeShared;
 
-        protected string application_ID;
+        protected string applicationID;
 
         protected TestBase()
         {
@@ -83,7 +83,7 @@ namespace bdd_tests
 
 
         [And(@"I click on Home page")]
-        public void click_on_home_page()
+        public void ClickOnHomePage()
         {
             CarlaHome();
         }
@@ -255,7 +255,7 @@ namespace bdd_tests
 
 
         [And(@"I complete the Cannabis Retail Store application")]
-        public void I_complete_the_Cannabis_application()
+        public void CompleteCannabisApplication()
         {
             /* 
             Page Title: Submit the Cannabis Retail Store Application
@@ -378,28 +378,28 @@ namespace bdd_tests
             // retrieve the application ID
             string[] parsedURL = URL.Split('/');
 
-            application_ID = parsedURL[5];
+            applicationID = parsedURL[5];
 
             // click on the Submit button
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
-            submit_button.Click();
+            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
+            submitButton.Click();
         }
 
 
         [And(@"I confirm the payment receipt for a (.*)")]
-        public void confirm_payment_receipt(string application_type)
+        public void ConfirmPaymentReceipt(string applicationType)
         {
             /* 
             Page Title: Payment Approved
             */
 
-            if (application_type == "Cannabis Retail Store application")
+            if (applicationType == "Cannabis Retail Store application")
             {
                 // confirm that payment receipt is for $7,500.00
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$7,500.00')]")).Displayed);
             }
 
-            if (application_type == "Catering application")
+            if (applicationType == "Catering application")
             {
                 // confirm that payment receipt is for $7,500.00
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$475.00')]")).Displayed);
@@ -407,14 +407,14 @@ namespace bdd_tests
         }
 
         [And(@"I return to the dashboard")]
-        public void and_I_return_to_dashboard()
+        public void AndReturnToDashboard()
         {
             ReturnToDashboard();
         }
 
 
         [Then(@"I return to the dashboard")]
-        public void then_I_return_to_dashboard()
+        public void ThenReturnToDashboard()
         {
             ReturnToDashboard();
         }
@@ -429,7 +429,7 @@ namespace bdd_tests
 
 
         [And(@"I complete the Catering application")]
-        public void I_complete_the_application()
+        public void CompleteCateringApplication()
         {
             /* 
             Page Title: Catering Licence Application
@@ -550,7 +550,7 @@ namespace bdd_tests
 
             string[] tempFix = parsedURL[5].Split(';');
 
-            application_ID = tempFix[0];
+            applicationID = tempFix[0];
         }
 
         public void CheckFeatureFlag(string flag)
@@ -588,7 +588,7 @@ namespace bdd_tests
 
 
         [And(@"I request a personnel name change")]
-        public void request_personnel_name_change()
+        public void RequestPersonnelNameChange()
         {
             if (businessTypeShared != "indigenous nation")
             {
@@ -678,7 +678,7 @@ namespace bdd_tests
 
 
         [And(@"I request a store relocation")]
-        public void request_store_relocation()
+        public void RequestStoreRelocation()
         {
             /* 
             Page Title: Licences
@@ -761,7 +761,7 @@ namespace bdd_tests
 
 
         [And(@"I change a personnel email address")]
-        public void request_personnel_email_change()
+        public void RequestPersonnelEmailChange()
         {
             if (businessTypeShared != "indigenous nation")
             {
@@ -800,14 +800,14 @@ namespace bdd_tests
 
 
         [And(@"I pay the licensing fee for (.*)")]
-        public void PayLicenceFee(string fee_type)
+        public void PayLicenceFee(string feeType)
         {
             /* 
             Page Title: Licences
             Subtitle:   Cannabis Retail Store Licences
             */
 
-            if (fee_type == "Cannabis")
+            if (feeType == "Cannabis")
             {
                 string licenceFee = "Pay Licence Fee and Plan Store Opening";
 
@@ -836,7 +836,7 @@ namespace bdd_tests
                 paymentButton.Click();
             }
 
-            if (fee_type == "Catering")
+            if (feeType == "Catering")
             {
                 string firstYearLicenceFee = "Pay First Year Licensing Fee";
 
@@ -850,13 +850,13 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(7000);
 
-            if (fee_type == "Cannabis")
+            if (feeType == "Cannabis")
             {
                 // confirm correct payment amount for CRS
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
             }
 
-            if (fee_type == "Catering")
+            if (feeType == "Catering")
             {
                 // confirm correct payment amount for Catering
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$450.00')]")).Displayed);
@@ -871,7 +871,7 @@ namespace bdd_tests
 
 
         [And(@"I request an event authorization")]
-        public void request_event_authorization()
+        public void RequestEventAuthorization()
         {       
             /* 
             Page Title: Licences
@@ -1013,7 +1013,7 @@ namespace bdd_tests
 
 
         [And(@"I plan the store opening")]
-        public void plan_store_opening()
+        public void PlanStoreOpening()
         { 
             /* 
             Page Title: Licences
@@ -1094,96 +1094,27 @@ namespace bdd_tests
 
 
         [And(@"I click on the Start Application button for (.*)")]
-        public void I_start_application(string application_type)
+        public void ClickStartApplication(string applicationType)
         {
-            if (application_type == "Catering")
+            if (applicationType == "Catering")
             {
                 // click on the Catering Start Application button
                 NgWebElement startApp_button = ngDriver.FindElement(By.Id("startCatering"));
                 startApp_button.Click();
             }
 
-            if (application_type == "a Cannabis Retail Store")
+            if (applicationType == "a Cannabis Retail Store")
             {
                 NgWebElement startApp_button = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
                 startApp_button.Click();
             }
 
-            applicationTypeShared = application_type;
-        }
-
-
-        [And(@"I request a valid store name or branding change")]
-        public void request_name_branding_change()
-        {
-            /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            */
-
-            string nameBrandingLink = "Request Store Name or Branding Change";
-
-            // click on the Request Store Name or Branding Change link
-            NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLink));
-            uiRequestChange.Click();
-
-            /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
-            continueButton.Click();
-
-            /*
-            Page Title: Submit a Name or Branding Change Application
-            */
-
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload a supporting document
-            string supportingDocument = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-            NgWebElement uploadSupportingDoc = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uploadSupportingDoc.SendKeys(supportingDocument);
-
-            // click on the store exterior change button
-            NgWebElement uiStoreExterior = ngDriver.FindElement(By.Id("mat-button-toggle-2-button"));
-            uiStoreExterior.Click();
-
-            // click on the authorized to submit checkbox
-            NgWebElement uiAuthSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
-            uiAuthSubmit.Click();
-
-            // click on the signature agreement checkbox
-            NgWebElement uiSigAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
-            uiSigAgreement.Click();
-
-            // click on the Submit & Pay button
-            NgWebElement submitpayButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
-            submitpayButton.Click();
-
-            // pay for the branding change application
-            MakePayment();
-
-            System.Threading.Thread.Sleep(7000);
-
-            // confirm correct payment amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
-
-            // return to the Licences tab
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
+            applicationTypeShared = applicationType;
         }
 
 
         [And(@"I request a structural change")]
-        public void request_structural_change()
+        public void RequestStructuralChange()
         {
             /* 
            Page Title: Licences
@@ -1261,7 +1192,7 @@ namespace bdd_tests
 
 
         [And(@"I review the federal reports")]
-        public void review_federal_reports()
+        public void ReviewFederalReports()
         {
             /* 
             Page Title: Licences
@@ -1313,14 +1244,9 @@ namespace bdd_tests
         }
 
 
-        [And(@"I request a valid store name or branding change")]
-        public void name_branding_change()
+        [And(@"I request a valid store name or branding change for (.*)")]
+        public void RequestNameBrandingChange(string changeType)
         {
-            /* 
-            Page Title: Licences
-            Subtitle:   Catering Licences
-            */
-
             string nameBrandingLink = "Request Store Name or Branding Change";
 
             // click on the Request Store Name or Branding Change link
@@ -1349,6 +1275,13 @@ namespace bdd_tests
             NgWebElement uploadSupportingDoc = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
             uploadSupportingDoc.SendKeys(supportingDocument);
 
+            if (changeType == "Cannabis")
+            {
+                // click on the store exterior change button	
+                NgWebElement uiStoreExterior = ngDriver.FindElement(By.Id("mat-button-toggle-2-button"));
+                uiStoreExterior.Click();
+            }
+
             // click on the authorized to submit checkbox
             NgWebElement uiAuthSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
             uiAuthSubmit.Click();
@@ -1365,6 +1298,9 @@ namespace bdd_tests
             MakePayment();
 
             System.Threading.Thread.Sleep(7000);
+
+            // confirm correct payment amount	
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
 
             // return to the Licences tab
             string licencesLink = "Licences";
@@ -1451,7 +1387,7 @@ namespace bdd_tests
 
 
         [And(@"I request a third party operator")]
-        public void third_party_operator()
+        public void RequestThirdPartyOperator()
         {
             // return to the Licences tab
             string licencesLink2 = "Licences";
@@ -1507,7 +1443,7 @@ namespace bdd_tests
 
 
         [And(@"I request a transfer of ownership")]
-        public void request_ownership_transfer()
+        public void RequestOwnershipTransfer()
         {
             /* 
             Page Title: Licences
@@ -1588,12 +1524,12 @@ namespace bdd_tests
 
 
         [And(@"the application is approved")]
-        public void application_is_approved()
+        public void ApplicationIsApproved()
         {
             ngDriver.IgnoreSynchronization = true;
 
             // navigate to api/applications/<Application ID>/process
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{application_ID}/process");
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{applicationID}/process");
 
             // wait for the autoamted approval process to run
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
@@ -1606,7 +1542,7 @@ namespace bdd_tests
 
 
         [And(@"I complete the eligibility disclosure")]
-        public void complete_eligibility_disclosure()
+        public void CompleteEligibilityDisclosure()
         {
             ngDriver.WaitForAngular();
 
@@ -1663,13 +1599,13 @@ namespace bdd_tests
             sigCheckbox.SendKeys(electricSignature);
 
             // click on the Submit button
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
-            submit_button.Click();
+            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT']"));
+            submitButton.Click();
         }
 
 
         [And(@"I review the account profile")]
-        public void review_account_profile()
+        public void ReviewAccountProfile()
         {
             /*
             Page Title: Please Review the Account Profile
@@ -1844,27 +1780,27 @@ namespace bdd_tests
             }
 
             // click on Continue to Organization Review button
-            NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
-            continueApp_button.Click();
+            NgWebElement continueAppButton = ngDriver.FindElement(By.Id("continueToApp"));
+            continueAppButton.Click();
         }
 
 
         [And(@"the account is deleted")]
-        public void Delete_my_account()
+        public void DeleteMyAccount()
         {
             this.CarlaDeleteCurrentAccount();
         }
 
 
         [Then(@"I see the login page")]
-        public void I_see_login()
+        public void SeeLogin()
         {
             Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
 
 
         [And(@"I review the security screening requirements")]
-        public void review_security_screening_reqs()
+        public void ReviewSecurityScreeningRequirements()
         {
             /* 
             Page Title: Security Screening Requirements
@@ -1915,21 +1851,21 @@ namespace bdd_tests
 
 
         [And(@"I enter the payment information")]
-        public void enter_payment_info()
+        public void EnterPaymentInfo()
         {
             MakePayment();
         }
 
         
         [And(@"I am logged in to the dashboard as a (.*)")]
-        public void And_I_view_the_dashboard(string businessType)
+        public void ViewDashboard(string businessType)
         {
             CarlaLogin(businessType);
         }
 
 
         [And(@"I review the organization structure")]
-        public void review_organization_structure()
+        public void ReviewOrganizationStructure()
         {
             /* 
             Page Title: [client name] Detailed Organization Information
@@ -2435,7 +2371,7 @@ namespace bdd_tests
 
 
         [And(@"I click on the Complete Organization Information button")]
-        public void complete_org_info()
+        public void CompleteOrgInfo()
         {
             // click on the complete organzation information button
             NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'COMPLETE ORGANIZATION INFORMATION')]"));
@@ -2444,15 +2380,15 @@ namespace bdd_tests
 
 
         [And(@"I click on the Pay for Application button")]
-        public void click_on_pay()
+        public void ClickOnPayButton()
         {
-            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
-            pay_button.Click();
+            NgWebElement payButton = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
+            payButton.Click();
         }
 
 
         [And(@"I submit the organization structure")]
-        public void submit_org_structure()
+        public void SubmitOrgStructure()
         {
             // click on the Submit Org Info button
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION']"));
@@ -2461,15 +2397,15 @@ namespace bdd_tests
 
 
         [And(@"I click on the Submit button")]
-        public void click_on_submit()
+        public void ClickOnSubmitButton()
         {
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
-            submit_button.Click();
+            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
+            submitButton.Click();
         }
 
 
         [And(@"I click on the licence download link")]
-        public void click_licence_download_link()
+        public void ClickLicenceDownloadLink()
         {
             string downloadLink = "Download Licence";
 
@@ -2480,7 +2416,7 @@ namespace bdd_tests
 
 
         [And(@"I show the store as open on the map")]
-        public void show_store_open_on_map()
+        public void ShowStoreOpenOnMap()
         {
             /* 
             Page Title: Licences
@@ -2508,7 +2444,7 @@ namespace bdd_tests
 
 
         [And(@"I click on the Licences tab for (.*)")]
-        public void click_on_licences_tab(string applicationType)
+        public void ClickOnLicencesTab(string applicationType)
         {
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
