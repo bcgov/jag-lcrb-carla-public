@@ -303,9 +303,20 @@
                                 provides false or misleading information in the following circumstances: (i) when making an application referred to in section 12; (ii) when 
                                 making a report or when required and as specified by the general manager under section 59.</i>
                             </p>
+
+                        <!--app-field [valid]="isValidOrNotTouched('signatureAgreemenmt')" [showChevrons]="false"
+                            errorMessage="Please affirm that all of the information provided for this application is true and complete."
+                            [isFullWidth]="true" style="margin-left:10px;">
+                            <mat-checkbox formControlName="signatureAgreement">
+                                <span class="error-states">*</span>
+                                I confirm that the attached floor plan shows how the perimeter of the expanded area will be bounded (e.g,
+                                fences, railings, ropes & stanchions, etc.).</mat-checkbox>
+                        </app-field-->
+
+
                         <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
                             errorMessage="Please affirm that all of the information provided for this application is true and complete."
-                            [showChevrons]="false">
+                            [showChevrons]="false">                            
                             <section style="display: flex">
                                 <input type="checkbox" formControlName="signatureAgreement">
                                 <span class="error-states">*</span>
