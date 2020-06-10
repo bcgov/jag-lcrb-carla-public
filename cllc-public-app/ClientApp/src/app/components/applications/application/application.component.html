@@ -5,7 +5,8 @@
 
       <div [formGroup]="form" style="padding-left: 45px; position: relative">
         <!-- Title -->
-        <h1 class="ngtest-page-title">{{ htmlContent?.title }}</h1>
+        <h1 class="ngtest-page-title" *ngIf="!this.openedByLG">{{ htmlContent?.title }}</h1>
+        <h1 class="ngtest-page-title" *ngIf="this.openedByLG">Provide Comment on Application</h1>
       </div>
 
       <div [formGroup]="form" class="application-wrapper">
@@ -132,12 +133,13 @@
             </div>
 
             <h3 class="blue-header" *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
-              PROPOSED ADDRESS
+              ADDRESS
             </h3>
 
             <div class="ngtest-new-address content-bottom"
-              *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
-              <p>The proposed location of the licenced establishment:</p>
+                 *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
+              <p *ngIf="application?.licenseType !== 'Rural Agency'">The proposed location of the licenced establishment:</p>
+              <p *ngIf="application?.licenseType === 'Rural Agency'">Include any information necessary for finding the site (i.e. route number, mile marker, etc.).</p>
               <address class="row">
                 <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
                   [valid]="isValidOrNotTouched('establishmentAddressStreet')"
@@ -207,7 +209,7 @@
             <section *ngIf="showFormControl(application?.applicationType?.storeContactInfo)">
               <h3 class="blue-header">Establishment Contact Details</h3>
               <div style="flex: 0 0 210px;" class="content">
-                <p>The phone and email address used to contact your licenced establishment:</p>
+                <p>The phone and email address used to contact your establishment:</p>
                 <app-field label="Store Email" [required]="false" [valid]="isValidOrNotTouched('establishmentEmail')"
                   errorMessage="Please enter an email address">
                   <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
@@ -217,11 +219,23 @@
               </div>
               <div style="flex: 0 0 210px;" class="content-bottom">
                 <app-field label="Store Phone" [required]="false" [valid]="isValidOrNotTouched('establishmentPhone')"
-                  errorMessage="Please enter a phone number ">
-                  <input type="text" class="form-control" style="width: 200px;" maxlength="10" autocomplete="tel"
-                    [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
-                    (keydown)="rejectIfNotDigitOrBackSpace($event)" formControlName="establishmentPhone"
-                    id="establishmentPhone">
+                           errorMessage="Please enter a phone number ">
+                  <input type="text" class="form-control" style="width: 200px;" mask="(000) 000-0000" autocomplete="tel"
+                         [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
+                         formControlName="establishmentPhone"
+                         id="establishmentPhone">
+                </app-field>
+              </div>
+              <p>&nbsp;</p>
+            </section>
+            <!-- RAS Certificate Number -->
+            <section *ngIf="application?.licenseType === 'Rural Agency'">
+              <h3 class="blue-header">Rural Agency Certificate Number</h3>
+              <div style="flex: 0 0 210px;" class="content-bottom">
+                <app-field label="Rural Agency Certificate Number:"
+                           errorMessage="Please enter a certificate number">
+                  <input type="text" class="form-control" style="width: 200px;" 
+                          id="certNumber">
                 </app-field>
               </div>
               <p>&nbsp;</p>
@@ -231,7 +245,7 @@
         </section>
 
         <section *ngIf="application?.licenseType === 'Manufacturer'">
-
+          <!-- Business Plan for Manufacturers-->
           <h3 class="blue-header">Manufacturer Business Plan</h3>
           <div class="content-bottom">
             <p>Please select the type of application you are submitting:</p>
@@ -296,17 +310,58 @@
               </p>
 
               <hr>
+              <app-field [valid]="isValidOrNotTouched('zoningPermitsMFG')" [showChevrons]="false"
+                errorMessage="Please confirm that the current zoning permits manufacturing on the manufacturing site"
+                [isFullWidth]="true" style="margin-left:10px;">
+                <mat-checkbox formControlName="zoningPermitsMFG">
+                  I confirm that current zoning permits manufacturing on the manufacturing site.</mat-checkbox>
+              </app-field>
+              <app-field [valid]="isValidOrNotTouched('zoningPermitsRetailSales')" [showChevrons]="false"
+                errorMessage="Please confirm that the current zoning permits retail sales on the manufacturing site"
+                [isFullWidth]="true" style="margin-left:10px;">
+                <mat-checkbox formControlName="zoningPermitsRetailSales">
+                  I confirm that current zoning permits retail sales on the manufacturing site.</mat-checkbox>
+              </app-field>
+              <div>
+              <table>
+                <tr>
+                  <td class="primary">
+                    <div class="question-label">
+                      Is this manufacturing site part of the Agricultural Land Reserve (ALR)?
+                    </div>
+                  </td>
+                  <td>
+                    <mat-button-toggle-group formControlName="isALR" aria-label="Font Style">
+                      <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                      <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+
+              <app-field [valid]="isValidOrNotTouched('meetsALRRequirements')" [showChevrons]="false"
+                errorMessage="Please confirm that the site meets ALR requriements"
+                [isFullWidth]="true" style="margin-left:10px;">
+                <mat-checkbox formControlName="meetsALRRequirements">
+                  I confirm that the manufacturing site meets ALR requirements.</mat-checkbox>
+              </app-field>
+              <section>
+
+              </section>
+        
+              <hr>
               <h4>Production and Sales Forecasts</h4>
               <p>Upload financial statements outlining production (in litres) and sales forecasts for a three year
                 period: </p>
               <section>
                 <app-file-uploader *ngIf="applicationId" documentType="Financial Statement"
-                  [disableUploads]="isOpenedByLG" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true"
-                  entityName="application" [enableFileDeletion]="!isOpenedByLG" [useDocumentTypeForName]="true"
-                  [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL STATEMENTS, DRAG FILES HERE OR'">
+                [disableUploads]="isOpenedByLG" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true"
+                entityName="application" [enableFileDeletion]="!isOpenedByLG" [useDocumentTypeForName]="true"
+                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL STATEMENTS, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
-
               <hr>
               <h4>Proposed Products</h4>
               <p>Upload a document that describes your proposed product(s), and any plans regarding contract
@@ -333,6 +388,26 @@
                   [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD AGRICULTURAL SOURCES DESCRIPTION, DRAG FILES HERE OR'">
                 </app-file-uploader>
+              </section>
+              <section class="content-bottom" style='border-top: solid #aaa 1px; margin-top:0px;'>
+                <p>Indicate the amount of grapes, fruit and honey that will be farmed at the winery site and used for the production
+                  of wine:
+                </p>
+                <div class="row">
+                  <app-field class="col-md-12 col-xs-12" label="Grapes: # of acres"
+                    errorMessage="Please enter the number of acress of production">
+                    <input type="text" class="form-control" style="width: 100px;">
+                  </app-field>
+                  <app-field class="col-md-12 col-xs-12" label="Fruit: # of acres"
+                    errorMessage="Please enter the number of acress of production">
+                    <input type="text" class="form-control" style="width: 100px;">
+                  </app-field>
+                  <app-field class="col-md-12 col-xs-12" label="Honey: # of beehives"
+                    errorMessage="Please enter the number of acress of production">
+                    <input type="text" class="form-control" style="width: 100px;">
+                  </app-field>
+                </div>
+              
               </section>
               <hr>
               <h4>Stages of Manufacturing Taking Place Onsite</h4>
@@ -709,14 +784,14 @@
                   licensee and the landlord or property owner.
                 </li>
                 <li>
-                  An offer or option to purchase the property and buildings in the licensee's name (as stated on the
-                  liquor licence). An offer or option must show price paid, have a term and expiry date and be signed by
-                  both the licensee and property owner. If a VQA store is relocating, the valid interest must be in the
+                  An offer or option to purchase the property and buildings in the licensee's name (as provided to LCRB
+                  ). An offer or option must show price paid, have a term and expiry date and be signed by
+                  both the licensee and property owner. If an operated store is relocating, the valid interest must be in the
                   name of the third party operator.
                 </li>
                 <p>&nbsp;</p>
               </ul>
-              <p>
+              <p *ngIf="!isRAS()">
                 <strong>Note:</strong> Valid interest must be maintained at the current and proposed site until the
                 relocation is finalized. LCRB may request a copy of valid interest at the current site during the
                 relocation application process.
@@ -777,16 +852,17 @@
             <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
               <p>The floor plans of the proposed establishment, which must meet the following requirements: </p>
               <ul>
-                <li>Must be clear, legible and of sufficient detail and size (8.5" x 11") </li>
-                <li>Provide room size dimensions </li>
-                <li>
+                <li>Must be scaled, clear, legible and include room size dimensions (8.5" x 11") </li>
+                <li *ngIf="isRAS()">detail the entire premises in which the business is located, including the area where liquor will be located, entrances, exits, washrooms, storage areas, cash register area, coolers, any adjoining doors and other fixtures</li>
+                <li *ngIf="isRAS()">clearly identify any adjoining areas</li>
+                <li *ngIf="!isRAS()">Provide room size dimensions </li>
+                <li *ngIf="!isRAS()">
                   Detail entrance, exit, washrooms, storage area, cash register area, coolers, any adjoining doors and
                   other fixtures
                 </li>
-                <li>Clearly identify the area proposed for licensing and any adjoining unlicensed areas</li>
+                <li *ngIf="!isRAS()">Clearly identify the area proposed for licensing and any adjoining unlicensed areas</li>
               </ul>
             </div>
-
           </section>
           <p *ngIf="application?.applicationType?.floorPlan === FormControlState.Reaonly">
             The below floor plan is on file.
@@ -1073,7 +1149,7 @@
         <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
           <h3 class="blue-header">HOURS OF SALE</h3>
           <div class="padded-section content-bottom">
-            <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">
+            <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
               Indicate the
               store's proposed hours for cannabis sales below. Proposed
               hours must fall between 9 a.m. and 11
@@ -1081,6 +1157,10 @@
               closed
               at
               times they are licensed to be open.
+            </p>
+            <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CannabisRetailStore">
+              Indicate the
+              store's proposed hours of sales below.
             </p>
             <table class="store-hours">
               <tr>
@@ -1389,14 +1469,18 @@
 
 
         <!-- Contact Details -->
-        <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
+        <h3 class="blue-header" *ngIf="!isRAS()">APPLICATION CONTACT DETAILS</h3>
+        <h3 class="blue-header" *ngIf="isRAS()"> CONTACT DETAILS</h3>
         <div class=content-bottom>
-          <p>
+          <p *ngIf="!isRAS()">
             <i>
               Please provide contact information for the contact that the LCRB should communicate with regarding the
               application. This contact must be authorized to represent the applicant and have the authority to bind the
               applicant.
             </i>
+          </p>
+          <p *ngIf="isRAS()">
+            Please provide contact information for the contact that the LCRB should communicate with regarding the information submission.
           </p>
           <address class="padded-section">
 
@@ -1439,7 +1523,7 @@
         <div class="padded-section content-bottom" *ngIf="application?.applicationType?.showDeclarations">
           <ng-container *ngIf="!application?.applicationType?.showLiquorDeclarations">
             <section>
-              <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+              <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer && !isRAS()">
                 The application must only be submitted by an individual with the authority to bind the applicant. The
                 branch
                 relies on the applicant to ensure that the individual who submits this application is authorized to do
@@ -1448,6 +1532,9 @@
                 usually
                 be
                 an officer or, in some cases, a director
+              </div>
+              <div *ngIf="isRAS()">
+                <p>The Rural Agency Store Information Submission must only be submitted by an individual with the authority to bind the Rural Agency Store. The branch relies on the Rural Agency Store Owner to ensure that the individual who submits this information is authorized to do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually be an officer, or, in some cases, a director. Note: A lawyer or consultant may NOT submit information on behalf of the Rural Agency Store.</p>
               </div>
               <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
                 <p *ngIf="account?.businessType === 'SoleProprietor'">
@@ -1493,7 +1580,7 @@
               </div>
 
             </section>
-            <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+            <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer && !isRAS()">
               Note: A lawyer or
               consultant,
               may NOT submit this application on behalf of
@@ -1515,8 +1602,11 @@
               <section style="display: flex">
                 <input type="checkbox" formControlName="authorizedToSubmit" id="authorizedToSubmit">
                 <span class="error-states">*</span>
-                <div style="padding-left: 10px;">
+                <div style="padding-left: 10px;" *ngIf="!isRAS()">
                   I understand and affirm that I am authorized to submit the application
+                </div>
+                <div style="padding-left: 10px;" *ngIf="isRAS()">
+                  I understand and affirm that I am authorized to submit this information.
                 </div>
               </section>
             </app-field>
@@ -1540,9 +1630,12 @@
               <section style="display: flex">
                 <input type="checkbox" formControlName="signatureAgreement" id="signatureAgreement">
                 <span class="error-states">*</span>
-                <div style="padding-left: 10px;">
+                <div style="padding-left: 10px;" *ngIf="!isRAS()">
                   I understand and affirm that all of the information provided for this
                   application is true and complete
+                </div>
+                <div style="padding-left: 10px;" *ngIf="isRAS()">
+                  I understand and affirm that all of the information provided is true and complete
                 </div>
               </section>
             </app-field>
@@ -1615,7 +1708,7 @@
 
         <!-- Proceed to Pay-->
 
-        <section class="d-flex" style="margin-top:15px;">
+        <section class="d-flex" style="margin-top:15px;" *ngIf="!isRAS()">
 
           <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
@@ -1666,21 +1759,21 @@
 
         <!-- button section -->
         <section *ngIf="!isOpenedByLG" style="position: relative; margin-top: 20px;">
-          <button class="btn btn-primary" style="margin-right:10px;" (click)="saveForLater()">
+          <button class="btn btn-secondary" style="margin-right:10px;" (click)="saveForLater()">
             <span>
-              <i class="fa fa-save" style="color: #fff;"></i>
+              <i class="fa fa-save"></i>
               SAVE FOR LATER
             </span>
           </button>
           <button class="btn btn-primary" (click)="submit_application()">
-            SUBMIT&nbsp;<span *ngIf="!skipPayment">&amp; PAY</span>
+            SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
           </button>
 
           <span style="float: right; color: #1a5a96; padding-top: 10px;">
             <span (click)="cancelApplication()">
               <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
               <a href="javascript: void(0)" id="cancelApp">
-                Cancel Application
+                Cancel <span *ngIf="!isRAS()">Application</span>
               </a>
             </span>
           </span>
@@ -1866,7 +1959,7 @@
   </ng-template>
 
   <ng-template #indigenousContent>
-    <section class="large-screen-only">
+    <section class="large-screen-only" *ngIf="account?.businessType !== 'LocalGovernment'">
       <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">INDIGENOUS NATION</h3>
 
       <div [formGroup]="form" class="submitted-content"

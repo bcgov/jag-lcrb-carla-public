@@ -25,7 +25,7 @@ import { ConnectionToNonMedicalStoresComponent } from '@components/account-profi
 import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AccountDataService } from '@services/account-data.service';
-import { User } from '@models/user.model';
+//import { User } from '@models/user.model';
 import { DynamicsForm } from '../../../models/dynamics-form.model';
 import { DynamicsFormDataService } from '../../../services/dynamics-form-data.service';
 
@@ -181,6 +181,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       brewPub: ['', []],
       pipedIn: ['', []],
       neutralGrain: ['', []],
+      zoningPermitsMFG: ['', []],
+      zoningPermitsRetailSales: ['', []],
+      isALR: ['', []],
+      meetsALRRequirements: ['', []],
     });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((applyAsIN: boolean) => {
@@ -459,21 +463,29 @@ export class ApplicationComponent extends FormBase implements OnInit {
   */
 
   hasType(): boolean {
-  return this.form.get('mfgType').value
+    // to do, set validation requirements
+  return this.form.get('mfgType').value;
   }
 
   isBrewery(): boolean {
-    return this.form.get('mfgType').value == "Brewery"
+    // to do, set validation requirements
+    return this.form.get('mfgType').value == "Brewery";
   }
   isWinery(): boolean {
-    return this.form.get('mfgType').value == "Winery"
+    // to do, set validation requirements
+    return this.form.get('mfgType').value == "Winery";
   }
   isDistillery(): boolean {
-    return this.form.get('mfgType').value == "Distillery"
+    return this.form.get('mfgType').value == "Distillery";
   }
   
   isBrewPub(): boolean {
-    return this.form.get('mfgType').value == "Brewery" && this.form.get('brewPub').value == "Yes"
+    // to do, set validation requirements
+    return this.form.get('mfgType').value == "Brewery" && this.form.get('brewPub').value == "Yes";
+  }
+
+  isRAS(): boolean {
+    return this.application.licenseType === 'Rural Agency';
   }
 
 
