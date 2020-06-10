@@ -741,7 +741,7 @@ namespace bdd_tests
             uiSigAgreement.Click();
 
             // click on the Submit & Pay button
-            ClickOnSubmitButton();
+            ClickOnSubmitButton2();
 
             // pay for the relocation application
             MakePayment();
