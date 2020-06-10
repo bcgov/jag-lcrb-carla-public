@@ -1,4 +1,4 @@
-<ng-container *ngIf="licenseeChangeFeatureOn"> 
+<ng-container *ngIf="licenseeChangeFeatureOn && account?.businessType != 'LocalGovernment'"> 
   <section class="large-screen-only" *ngIf="!hasLicence">
     <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ORGANIZATION STRUCTURE</h3>
     
