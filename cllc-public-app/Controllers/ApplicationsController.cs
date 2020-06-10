@@ -422,17 +422,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(e, "Error getting licensee application");
                 result = null;
             }
-            if (result == null)
+            if (result == null && applicationType != null)
             {
                 // create one.
                 var account = _dynamicsClient.GetAccountById(userSettings.AccountId);
-                var newApplicationType = _dynamicsClient.GetApplicationTypeByName("Licensee Changes");
-
                 result = new MicrosoftDynamicsCRMadoxioApplication()
                 {
-                    AdoxioApplicanttype = account.Businesstypecode,
-                    AdoxioApplicationTypeId = newApplicationType,
-                    AdoxioApplicant = account
+                    AdoxioApplicanttype = account.AdoxioBusinesstype,
+                    AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId),
+                    // set application type relationship 
+                    AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid)
                 };
 
                 try
