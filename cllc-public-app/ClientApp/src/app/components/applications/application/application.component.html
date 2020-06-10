@@ -791,7 +791,7 @@
                 </li>
                 <p>&nbsp;</p>
               </ul>
-              <p>
+              <p *ngIf="!isRAS()">
                 <strong>Note:</strong> Valid interest must be maintained at the current and proposed site until the
                 relocation is finalized. LCRB may request a copy of valid interest at the current site during the
                 relocation application process.
@@ -1480,7 +1480,7 @@
             </i>
           </p>
           <p *ngIf="isRAS()">
-            Please provide contact information for the contact that the LCRB should communicate with regarding the Expression of Interest.
+            Please provide contact information for the contact that the LCRB should communicate with regarding the information submission.
           </p>
           <address class="padded-section">
 
@@ -1534,7 +1534,7 @@
                 an officer or, in some cases, a director
               </div>
               <div *ngIf="isRAS()">
-                <p>The Expression of Interest must only be submitted by an individual with the authority to bind the Rural Agency Store. The branch relies on the Rural Agency Store Owner to ensure that the individual who submits this Expression of Interest is authorized to do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually be an officer, or, in some cases, a director. Note: A lawyer or consultant may NOT submit this Expression of Interest on behalf of the Rural Agency Store.</p>
+                <p>The Rural Agency Store Information Submission must only be submitted by an individual with the authority to bind the Rural Agency Store. The branch relies on the Rural Agency Store Owner to ensure that the individual who submits this information is authorized to do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually be an officer, or, in some cases, a director. Note: A lawyer or consultant may NOT submit information on behalf of the Rural Agency Store.</p>
               </div>
               <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
                 <p *ngIf="account?.businessType === 'SoleProprietor'">
@@ -1606,7 +1606,7 @@
                   I understand and affirm that I am authorized to submit the application
                 </div>
                 <div style="padding-left: 10px;" *ngIf="isRAS()">
-                  I understand and affirm that I am authorized to submit the Expression of Interest
+                  I understand and affirm that I am authorized to submit this information.
                 </div>
               </section>
             </app-field>
@@ -1635,8 +1635,7 @@
                   application is true and complete
                 </div>
                 <div style="padding-left: 10px;" *ngIf="isRAS()">
-                  I understand and affirm that all of the information provided for this
-                  Expression of Interest is true and complete
+                  I understand and affirm that all of the information provided is true and complete
                 </div>
               </section>
             </app-field>
