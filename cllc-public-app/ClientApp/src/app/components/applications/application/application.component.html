@@ -362,26 +362,6 @@
                 [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL STATEMENTS, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
-              <section class="content-bottom" style='border-top: solid #aaa 1px; margin-top:0px;'>
-                <p>Indicate the amount of grapes, fruit and honey that will be farmed at the winery site and used for the production
-                  of wine:
-                </p>
-                <div class="row">
-                  <app-field class="col-md-12 col-xs-12" label="Grapes: # of acres"
-                    errorMessage="Please enter the number of acress of production">
-                    <input type="text" class="form-control" style="width: 100px;">
-                  </app-field>
-                  <app-field class="col-md-12 col-xs-12" label="Fruit: # of acres"
-                    errorMessage="Please enter the number of acress of production">
-                    <input type="text" class="form-control" style="width: 100px;">
-                  </app-field>
-                  <app-field class="col-md-12 col-xs-12" label="Honey: # of beehives"
-                    errorMessage="Please enter the number of acress of production">
-                    <input type="text" class="form-control" style="width: 100px;">
-                  </app-field>
-                </div>
-              
-              </section>
               <hr>
               <h4>Proposed Products</h4>
               <p>Upload a document that describes your proposed product(s), and any plans regarding contract
@@ -408,6 +388,26 @@
                   [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD AGRICULTURAL SOURCES DESCRIPTION, DRAG FILES HERE OR'">
                 </app-file-uploader>
+              </section>
+              <section class="content-bottom" style='border-top: solid #aaa 1px; margin-top:0px;'>
+                <p>Indicate the amount of grapes, fruit and honey that will be farmed at the winery site and used for the production
+                  of wine:
+                </p>
+                <div class="row">
+                  <app-field class="col-md-12 col-xs-12" label="Grapes: # of acres"
+                    errorMessage="Please enter the number of acress of production">
+                    <input type="text" class="form-control" style="width: 100px;">
+                  </app-field>
+                  <app-field class="col-md-12 col-xs-12" label="Fruit: # of acres"
+                    errorMessage="Please enter the number of acress of production">
+                    <input type="text" class="form-control" style="width: 100px;">
+                  </app-field>
+                  <app-field class="col-md-12 col-xs-12" label="Honey: # of beehives"
+                    errorMessage="Please enter the number of acress of production">
+                    <input type="text" class="form-control" style="width: 100px;">
+                  </app-field>
+                </div>
+              
               </section>
               <hr>
               <h4>Stages of Manufacturing Taking Place Onsite</h4>
