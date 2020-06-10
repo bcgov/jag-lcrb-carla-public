@@ -22,7 +22,7 @@ ENV DOTNET_CORE_VERSION=3.1 \
 COPY contrib/bin/scl_enable /usr/local/bin/scl_enable
 
 # Install
-RUN INSTALL_PKGS="rh-dotnet31 rh-nodejs10-npm" && \
+RUN INSTALL_PKGS="rh-dotnet31 rh-nodejs10-npm rh-nodejs10-nodejs-nodemon rh-dotnet31-dotnet-sdk-3.1 " && \
     yum install -y --setopt=tsflags=nodocs --disablerepo=\* \
       --enablerepo=rhel-7-server-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-dotnet-rpms,rhel-7-server-optional-rpms \
       $INSTALL_PKGS && \
@@ -45,8 +45,8 @@ RUN yum -y install wget nano Xvfb  xorg-x11-xauth java-1.8.0-openjdk git rh-node
 	rm google-chrome-stable_current_x86_64.rpm && \
 	yum clean all -y && \
     rm -rf /var/cache/yum/* && \
-	npm install -g @angular/cli && \
-	npm install -g typescript
+	/opt/rh/rh-nodejs10/root/usr/lib/node_modules/npm/bin/npm install -g @angular/cli && \
+	/opt/rh/rh-nodejs10/root/usr/lib/node_modules/npm/bin/npm install -g typescript
 #	yum -y install firefox; yum clean all
 
 # Add Chrome as a user
