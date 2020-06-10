@@ -334,18 +334,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var application = GetCurrentLicenseeApplication(userSettings);
 
-                if (application.AdoxioApplicationTypeId != null)
+                if (! string.IsNullOrEmpty (application._adoxioApplicationtypeidValue))
                 {
-                    var filter = $"_adoxio_applicationtype_value eq { application.AdoxioApplicationTypeId.AdoxioApplicationtypeid}";
-                    try
+                    application.AdoxioApplicationTypeId = await _dynamicsClient.GetApplicationTypeById(application._adoxioApplicationtypeidValue).ConfigureAwait(true); ;
+                    if (application.AdoxioApplicationTypeId != null)
                     {
-                        var typeContents = _dynamicsClient.Applicationtypecontents.Get(filter: filter).Value;
-                        application.AdoxioApplicationTypeId.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType = typeContents;
-                    }
-                    catch (HttpOperationException e)
-                    {
-                        _logger.LogError(e, "Error getting type contents");                       
-                    }
+                        var filter = $"_adoxio_applicationtype_value eq { application._adoxioApplicationtypeidValue}";
+                        try
+                        {
+                            var typeContents = _dynamicsClient.Applicationtypecontents.Get(filter: filter).Value;
+                            application.AdoxioApplicationTypeId.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType = typeContents;
+                        }
+                        catch (HttpOperationException e)
+                        {
+                            _logger.LogError(e, "Error getting type contents");
+                        }
+                    }                    
                 }
 
                 result.Application = await application.ToViewModel(_dynamicsClient, _logger).ConfigureAwait(true);
