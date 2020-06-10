@@ -43,6 +43,8 @@
 
     </div>
     <div class="col-lg-4 col-sm-12" style="position: relative">
+      <app-liquor-approvals-callout appRemoveIfFeatureOff="LGApprovals" [account]="account"></app-liquor-approvals-callout>
+
       <section class="large-screen-only">
         <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ACCOUNT PROFILE</h3>
 
@@ -77,10 +79,12 @@
         </div>
       </section>
       <p></p> -->
-      <app-associate-content [hasLicence]="hasLicence" [account]="account" [isIndigenousNation]="indigenousNationModeActive">
-      </app-associate-content>
+      <div *ngIf="account?.businessType !== 'LocalGovernment'">
+        <app-associate-content [hasLicence]="hasLicence" [account]="account" [isIndigenousNation]="indigenousNationModeActive">
+        </app-associate-content>
+      </div>
       <p></p>
-      <app-liquor-approvals-callout appRemoveIfFeatureOff="LGApprovals" [account]="account"></app-liquor-approvals-callout>
+     
     </div>
   </div>
   <section style="margin-top: 20px;">
