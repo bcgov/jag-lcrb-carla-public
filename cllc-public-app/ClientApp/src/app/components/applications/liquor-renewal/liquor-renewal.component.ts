@@ -4,7 +4,6 @@ import { Application } from '@models/application.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription, Observable, Subject, forkJoin, of } from 'rxjs';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
-import { ApplicationHTMLContent } from '../application/application.component';
 import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { Store } from '@ngrx/store';
@@ -19,7 +18,7 @@ import { TiedHouseConnectionsDataService } from '@services/tied-house-connection
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
 import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
-import { FormBase } from '@shared/form-base';
+import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
 import { Account } from '@models/account.model';
 import { License } from '@models/license.model';
 

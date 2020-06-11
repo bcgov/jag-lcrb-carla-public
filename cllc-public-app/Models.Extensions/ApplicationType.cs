@@ -36,6 +36,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ShowCurrentProperty = applicationType.AdoxioIsshowcurrentproperty,
                     ShowDeclarations = applicationType.AdoxioIsshowdeclarations,
                     ShowDescription1 = applicationType.AdoxioShowdescription1,
+                    IsShowLGINApproval = applicationType.AdoxioIsshowlginapproval,
                     ShowFinancialIntegrityFormUpload = applicationType.AdoxioIsshowfinancialintegrityformupload,
                     ShowHoursOfSale = applicationType.AdoxioIsshowhoursofsale,
                     ShowLiquorDeclarations = applicationType.AdoxioIsshowliquordeclarations,

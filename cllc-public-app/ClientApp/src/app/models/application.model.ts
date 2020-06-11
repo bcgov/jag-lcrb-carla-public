@@ -68,6 +68,9 @@ export class Application {
   signatureAgreement: boolean;
   tiedHouse: TiedHouseConnection;
   indigenousNationId: string;
+  policeJurisdictionId: string;
+  indigenousNation: any;
+  policeJurisdiction: any;
   federalProducerNames: string;
 
   renewalCriminalOffenceCheck: string;
