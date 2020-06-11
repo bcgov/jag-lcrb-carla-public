@@ -109,9 +109,6 @@ namespace bdd_tests
 
             // check if establishment name has been provided
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment name is required.')]")).Displayed);
-
-            // check if empty required fields have been flagged
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Some required fields have not been completed')]")).Displayed);
         }
     }
 }
