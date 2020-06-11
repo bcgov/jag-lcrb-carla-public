@@ -15,7 +15,7 @@ export class FormBase implements OnDestroy {
     htmlContent: ApplicationHTMLContent;
     ApplicationTypeNames = ApplicationTypeNames;
 
-    public addDynamicContent() {
+  public addDynamicContent() { 
         if (this.application.applicationType) {
             this.htmlContent = {
                 title: this.application.applicationType.title,
@@ -27,14 +27,16 @@ export class FormBase implements OnDestroy {
     }
 
     public getApplicationContent(contentCartegory: string) {
-        let body = '';
+      let body = '';
+      if (this.application.applicationType.contentTypes) {
         const contents =
-            this.application.applicationType.contentTypes
-                .filter(t => t.category === contentCartegory && t.businessTypes.indexOf(this.application.applicantType) !== -1);
+          this.application.applicationType.contentTypes
+            .filter(t => t.category === contentCartegory && t.businessTypes.indexOf(this.application.applicantType) !== -1);
         if (contents.length > 0) {
-            body = contents[0].body;
+          body = contents[0].body;
         }
-        return body;
+      }        
+      return body;
     }
 
     isValidOrNotTouched(field: string) {

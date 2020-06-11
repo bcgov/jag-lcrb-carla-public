@@ -453,68 +453,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
-        private List<ApplicationLicenseSummary> GetLicensesByLicencee(string licenceeId)
-        {
+        
 
-            var licences = _dynamicsClient.GetAllLicensesByLicencee(_cache, licenceeId).ToList();
-
-            List<ApplicationLicenseSummary> licenseSummaryList = new List<ApplicationLicenseSummary>();
-
-            if (licences != null)
-            {
-                IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationsForLicenceByApplicant(licenceeId);
-                foreach (var licence in licences)
-                {
-                    var applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
-                    licenseSummaryList.Add(licence.ToLicenseSummaryViewModel(applications, _dynamicsClient));
-                }
-            }
-
-            return licenseSummaryList;
-        }
-
-        private List<ApplicationLicenseSummary> GetPaidLicensesOnTransfer(string licenceeId)
-        {
-            var applicationFilter = $"_adoxio_applicant_value eq {licenceeId} and adoxio_paymentrecieved eq true ";
-            applicationFilter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
-            applicationFilter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
-            applicationFilter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
-            applicationFilter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
-            applicationFilter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
-
-            var applicationType = _dynamicsClient.GetApplicationTypeByName("Liquor Licence Transfer");
-            if (applicationType != null)
-            {
-                applicationFilter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
-            }
-
-            var licenceExpand = new List<string> {
-                "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
-                "adoxio_LicenceType",
-                "adoxio_establishment",
-                "adoxio_ThirdPartyOperatorId"
-            };
-
-            List<MicrosoftDynamicsCRMadoxioLicences> licences = _dynamicsClient.Applications.Get(filter: applicationFilter).Value
-                .Select(app => _dynamicsClient.Licenceses.GetByKey(app._adoxioAssignedlicenceValue, expand: licenceExpand))
-                .ToList();
-
-            List<ApplicationLicenseSummary> licenseSummaryList = new List<ApplicationLicenseSummary>();
-
-            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationsForLicenceByApplicant(licenceeId);
-            if (licences != null && applicationsInProgress != null)
-            {
-                foreach (var licence in licences)
-                {
-                    var applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
-                    var result = licence.ToLicenseSummaryViewModel(applications, _dynamicsClient);
-                    result.LicenceTypeName = "Transfer in Progress - " + result.LicenceTypeName;
-                    licenseSummaryList.Add(result);
-                }
-            }
-
-            return licenseSummaryList;
-        }
 
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
         [HttpGet("current")]
@@ -525,8 +465,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
-            List<ApplicationLicenseSummary> adoxioLicenses = GetLicensesByLicencee(userSettings.AccountId);
-            List<ApplicationLicenseSummary> transterredLicenses = GetPaidLicensesOnTransfer(userSettings.AccountId);
+            List<ApplicationLicenseSummary> adoxioLicenses = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
+            List<ApplicationLicenseSummary> transterredLicenses = _dynamicsClient.GetPaidLicensesOnTransfer(userSettings.AccountId);
             adoxioLicenses.AddRange(transterredLicenses);
 
             return adoxioLicenses;
@@ -624,9 +564,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult GetDynamicsLicenses(string licenceeId)
         {
             // get all licenses in Dynamics by Licencee Id
-            List<ApplicationLicenseSummary> adoxioLicenses = GetLicensesByLicencee(licenceeId);
+            var result = _dynamicsClient.GetLicensesByLicencee(_cache, licenceeId);
+            
 
-            return new JsonResult(adoxioLicenses);
+
+            return new JsonResult(result);
         }
 
         /// <summary>
