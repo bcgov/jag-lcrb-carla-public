@@ -253,7 +253,7 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
 
-        [And(@"I complete the Rural Agency Store application")]
+        [Then(@"I complete the Rural Agency Store application")]
         public void CompleteRuralAgencyStoreApplication()
         {
             /* 
