@@ -111,24 +111,24 @@ namespace bdd_tests
             NgWebElement uiAddIndividualShareholder = ngDriver.FindElement(By.XPath("//div[5]/section/app-associate-list/div/button"));
             uiAddIndividualShareholder.Click();
 
-            // enter the first name
-            NgWebElement uiSameIndividualFirstName2 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/app-field/section/div[1]/section/input"));
-            uiSameIndividualFirstName2.SendKeys(sameIndividualFirstName);
+            // enter shareholder first name
+            NgWebElement uiShareFirst = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='IndividualShareholder'] input[formControlName=\"firstNameNew\"]"));
+            uiShareFirst.SendKeys(sameIndividualFirstName);
 
-            // enter the last name
-            NgWebElement uiSameIndividualLastName2 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/app-field/section/div[1]/section/input"));
-            uiSameIndividualLastName2.SendKeys(sameIndividualLastName);
+            // enter shareholder last name
+            NgWebElement uiShareLast = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='IndividualShareholder'] input[formControlName='lastNameNew']"));
+            uiShareLast.SendKeys(sameIndividualLastName);
 
-            // enter the number of voting shares
-            NgWebElement uiSameIndividualVotingShare = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/div/input"));
-            uiSameIndividualVotingShare.SendKeys(votingShares);
+            // enter number of voting shares
+            NgWebElement uiShareVotes = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='IndividualShareholder'] input[formControlName='numberofSharesNew']"));
+            uiShareVotes.SendKeys(votingShares);
 
-            // enter the email
-            NgWebElement uiSameIndividualEmail2 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
-            uiSameIndividualEmail2.SendKeys(sameIndividualEmail);
+            // enter shareholder email
+            NgWebElement uiShareEmail = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='IndividualShareholder'] input[formControlName='emailNew']"));
+            uiShareEmail.SendKeys(sameIndividualEmail);
 
-            // enter the DOB
-            NgWebElement uiCalendarS1 = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
+            // enter shareholder DOB
+            NgWebElement uiCalendarS1 = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='IndividualShareholder'] input[formControlName='dateofBirthNew']"));
             uiCalendarS1.Click();
 
             SharedCalendarDate();
