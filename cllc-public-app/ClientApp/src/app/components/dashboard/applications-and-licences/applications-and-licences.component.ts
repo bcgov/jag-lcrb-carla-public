@@ -58,6 +58,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   licenceTransferFeatureOn = false;
   licenseeChangeFeatureOn: boolean;
   liquorOne: boolean;
+  liquorTwo: boolean;
 
 
   constructor(
@@ -86,6 +87,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       .subscribe(x => this.licenseeChangeFeatureOn = x);
     featureFlagService.featureOn('LiquorOne')
       .subscribe(x => this.liquorOne = x);
+    featureFlagService.featureOn('LiquorTwo')
+      .subscribe(x => this.liquorTwo = x);
   }
 
   ngOnInit() {
@@ -346,6 +349,30 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         const route: any[] = [`/multi-step-application/${data.id}`];
+        //const route: any[] = [`/application/${data.id}`];
+
+        route.push({ useDynamicFormMode: true });
+
+        this.router.navigate(route);
+      },
+      () => {
+        this.snackBar.open('Error starting a Rural Agency Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a Rural Agency Application');
+      }
+    );
+  }
+
+  startNewUBVApplication() {
+    const newLicenceApplicationData: Application = <Application>{
+      licenseType: 'Rural Agency',
+      applicantType: this.account.businessType,
+      applicationType: <ApplicationType>{ name: ApplicationTypeNames.RAS },
+      account: this.account,
+    };
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        const route: any[] = [`/application/${data.id}`];
 
         route.push({ useDynamicFormMode: true });
 

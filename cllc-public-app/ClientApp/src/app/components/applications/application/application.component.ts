@@ -25,7 +25,7 @@ import { ConnectionToNonMedicalStoresComponent } from '@components/account-profi
 import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AccountDataService } from '@services/account-data.service';
-import { User } from '@models/user.model';
+//import { User } from '@models/user.model';
 import { DynamicsForm } from '../../../models/dynamics-form.model';
 import { DynamicsFormDataService } from '../../../services/dynamics-form-data.service';
 import { PoliceDurisdictionDataService } from '@services/police-jurisdiction-data.service';
@@ -190,6 +190,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
       neutralGrain: ['', []],
       lgAutoCompleteInput: ['', []],
       pdAutoCompleteInput: ['', []],
+      zoningPermitsMFG: ['', []],
+      zoningPermitsRetailSales: ['', []],
+      isALR: ['', []],
+      isOwner:['',[]],
+      hasValidInterest:['',[]],
+      willhaveValidInterest:['',[]],
+      meetsALRRequirements: ['', []],
     });
 
 
@@ -377,6 +384,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
     }
 
+    if (this.isRAS()) {
+
+      this.form.get('isOwner').setValidators([Validators.required]);
+      this.form.get('hasValidInterest').setValidators([Validators.required]);    
+      this.form.get('willhaveValidInterest').setValidators([Validators.required]);
+      // use description1 for the certificate number
+      this.form.get('description1').enable();
+      
+
+    }
+
     // 03/01/2020 - Disabled until connected grocery store feature is ready
     // if (this.application.applicationType.connectedGroceryStore !== FormControlState.Show) {
     //   this.form.get('connectedGrocery').clearValidators();
@@ -497,21 +515,29 @@ export class ApplicationComponent extends FormBase implements OnInit {
   */
 
   hasType(): boolean {
-    return this.form.get('mfgType').value
+    // to do, set validation requirements
+  return this.form.get('mfgType').value;
   }
 
   isBrewery(): boolean {
-    return this.form.get('mfgType').value == "Brewery"
+    // to do, set validation requirements
+    return this.form.get('mfgType').value == "Brewery";
   }
   isWinery(): boolean {
-    return this.form.get('mfgType').value == "Winery"
+    // to do, set validation requirements
+    return this.form.get('mfgType').value == "Winery";
   }
   isDistillery(): boolean {
-    return this.form.get('mfgType').value == "Distillery"
+    return this.form.get('mfgType').value == "Distillery";
   }
 
   isBrewPub(): boolean {
-    return this.form.get('mfgType').value == "Brewery" && this.form.get('brewPub').value == "Yes"
+    // to do, set validation requirements
+    return this.form.get('mfgType').value == "Brewery" && this.form.get('brewPub').value == "Yes";
+  }
+
+  isRAS(): boolean {
+    return this.application.licenseType === 'Rural Agency';
   }
 
 
@@ -586,14 +612,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
-            this.saveComplete.emit(true);
-            // redirect to dashboard if the applicationType is FREE
-            if (this.application.applicationType.isFree) {
-              this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-              this.router.navigateByUrl('/dashboard');
-            } else {
+            this.saveComplete.emit(true);                  
+              // Dynamics will determine whether payment is required or not.
+              // if the application is Free, it will not generate an invoice
               this.submitPayment();
-            }
+              // however we need to redirect if the application is Free
+              if (this.application.applicationType.isFree) {
+                this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+                this.router.navigateByUrl('/dashboard');
+              }
           } else if (this.application.applicationType.isFree) { // show error message the save failed and the application is free
             this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
           }
@@ -607,13 +634,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
+    
+    // skipPayment is set via the multi-step application
+    // if the application page is not the last step, we will often not want to collect payment
     if (this.skipPayment) {
       return;
     }
-
+    
     this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(jsonUrl => {
+        console.log("")
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
       }, err => {

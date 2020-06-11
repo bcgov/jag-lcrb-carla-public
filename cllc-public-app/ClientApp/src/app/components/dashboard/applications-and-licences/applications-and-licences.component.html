@@ -32,7 +32,7 @@
                   target="_blank" rel="noopener noreferrer">Learn more about this licence</a>
               </td>
               <td style="text-align: center;">
-                <button class="btn btn-primary" (click)="startNewLicenceApplication()" id="startCRS">START
+                <button class="btn btn-secondary" (click)="startNewLicenceApplication()" id="startCRS">START
                   APPLICATION</button>
               </td>
             </tr>
@@ -48,7 +48,7 @@
                   more about this licence</a>
               </td>
               <td style="text-align: center;">
-                <button class="btn btn-primary" (click)="startNewMarketerApplication()" id="startMarketing">START
+                <button class="btn btn-secondary" (click)="startNewMarketerApplication()" id="startMarketing">START
                   APPLICATION</button>
               </td>
             </tr>
@@ -71,15 +71,14 @@
                   more about this licence</a>
               </td>
               <td style='text-align: center;'>
-                <button *ngIf="liquorOne" class="btn btn-primary" (click)="startNewCateringApplication()"
+                <button *ngIf="liquorOne" class="btn btn-secondary" (click)="startNewCateringApplication()"
                   id="startCatering">START
                   APPLICATION</button>
-                  <button *ngIf="!liquorOne" class="btn btn-primary"
-                  id="startCatering" disabled>COMING SOON</button>  
-                
+                  <button *ngIf="!liquorOne" class="btn btn-secondary"
+                  id="startCatering" disabled>COMING SOON</button>               
               </td>
             </tr>
-            <!--tr>
+            <tr *ngIf="liquorTwo">
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
                 <img class="icon" src="assets/Manufacturer-icon-blue-40px.png" alt=""> 
               </td>
@@ -92,11 +91,33 @@
                   more about this licence</a>
               </td>
               <td style='text-align: center;'>
-                <button *ngIf="liquorOne" class="btn btn-primary" (click)="startNewMfgApplication()"
-                  id="startCatering">START
+                <button class="btn btn-secondary" (click)="startNewMfgApplication()"
+                  id="startMfg">START
                   APPLICATION</button>
               </td>
-            </tr-->
+            </tr>
+
+            <tr *ngIf="liquorTwo">
+              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
+                <img class="icon" src="assets/U-Brew-icon-blue-40px.png" alt=""> 
+              </td>
+              <td style="width:700px;">
+                <h3>UBrew / UVin Licence</h3>
+                <p>Also known as Ferment-on-Premises, UBrews and UVins are businesses that provide their customers 
+                  with the ingredients, equipment and advice they need to make their own beer, wine, cider or coolers on-site. 
+                  Once it's made, UBrew and UVin customers must take their liquor away, for their own private consumption. 
+                  It cannot be sold to others.</p>                
+                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/ubrew-and-uvin-liquor-licence"
+                  target="_blank">Learn
+                  more about this licence</a>
+              </td>
+              <td style='text-align: center;'>
+                <button class="btn btn-secondary" (click)="startNewUBVApplication()"
+                  id="startUBV">START
+                  APPLICATION</button>
+              </td>
+            </tr>
+            
 
 
             <tr>
@@ -116,25 +137,24 @@
               </td>
             </tr>
 
-            <!--tr>
-              <!-- Apply for a Rural Agency Store Licence >
+            <tr>
+              <!-- Apply for a Rural Agency Store Licence -->
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
                 <img class="icon" src="assets/Wine-store-icon-blue-40px.png" alt="">
               </td>
               <td style="width:700px;">
-                <h3>Rural Agency Store Licence</h3>
-                <p>Existing Rural Agency Stores may now apply for their official LCRB Liquor Licence. Note, you will need an existing Rural Agency Store registration number to complete the application. </p>
-                
-                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/wine-store-liquor-licence"
+                <h3>Rural Agency Store Information Submission</h3>
+                <p>Existing Rural Agency Stores must submit their store and business information to the LCRB in order to be issued a licence in the future. Note, you will need an existing Rural Agency Store Certificate number to complete the submission. </p>                
+                <!--a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/wine-store-liquor-licence"
                   target="_blank">Learn
-                  more about this licence</a>
+                  more about this Expression of Interest</a-->
               </td>
               <td style="text-align: center;">
-                <button *ngIf="liquorOne" class="btn btn-primary" (click)="startNewRASApplication()"
-                id="startCatering">START
-                APPLICATION</button>
+                <button class="btn btn-secondary" (click)="startNewRASApplication()"
+                id="startRAS">SUBMIT INFORMATION
+                </button>
               </td>
-            </tr-->
+            </tr>
 
           </table>
         </section>

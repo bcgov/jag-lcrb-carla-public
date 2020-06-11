@@ -2,9 +2,11 @@
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Mapping;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Utility;
 using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
 using Newtonsoft.Json;
@@ -12,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
@@ -20,9 +23,219 @@ namespace Gov.Lclb.Cllb.Interfaces
     public static class DynamicsExtensions
     {
 
+        public static List<Public.ViewModels.ApplicationLicenseSummary> GetLicensesByLicencee(this IDynamicsClient _dynamicsClient, string licenceeId, IMemoryCache _cache)
+        {
+
+            var licences = _dynamicsClient.GetAllLicensesByLicencee(_cache, licenceeId).ToList();
+
+            List<Public.ViewModels.ApplicationLicenseSummary> licenseSummaryList = new List<Public.ViewModels.ApplicationLicenseSummary>();
+
+            if (licences != null)
+            {
+                IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationsForLicenceByApplicant(licenceeId);
+                foreach (var licence in licences)
+                {
+                    var applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
+                    licenseSummaryList.Add(licence.ToLicenseSummaryViewModel(applications, _dynamicsClient));
+                }
+            }
+
+            return licenseSummaryList;
+        }
 
 
+        public static List<Public.ViewModels.ApplicationLicenseSummary> GetPaidLicensesOnTransfer(this IDynamicsClient _dynamicsClient, string licenceeId)
+        {
+            var applicationFilter = $"_adoxio_applicant_value eq {licenceeId} and adoxio_paymentrecieved eq true ";
+            applicationFilter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated}";
+            applicationFilter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
+            applicationFilter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved}";
+            applicationFilter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Refused}";
+            applicationFilter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
 
+            var applicationType = _dynamicsClient.GetApplicationTypeByName("Liquor Licence Transfer");
+            if (applicationType != null)
+            {
+                applicationFilter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
+            }
+
+            var licenceExpand = new List<string> {
+                "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
+                "adoxio_LicenceType",
+                "adoxio_establishment",
+                "adoxio_ThirdPartyOperatorId"
+            };
+
+            List<MicrosoftDynamicsCRMadoxioLicences> licences = _dynamicsClient.Applications.Get(filter: applicationFilter).Value
+                .Select(app => _dynamicsClient.Licenceses.GetByKey(app._adoxioAssignedlicenceValue, expand: licenceExpand))
+                .ToList();
+
+            List<Public.ViewModels.ApplicationLicenseSummary> licenseSummaryList = new List<Public.ViewModels.ApplicationLicenseSummary>();
+
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationsForLicenceByApplicant(licenceeId);
+            if (licences != null && applicationsInProgress != null)
+            {
+                foreach (var licence in licences)
+                {
+                    var applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
+                    var result = licence.ToLicenseSummaryViewModel(applications, _dynamicsClient);
+                    result.LicenceTypeName = "Transfer in Progress - " + result.LicenceTypeName;
+                    licenseSummaryList.Add(result);
+                }
+            }
+
+            return licenseSummaryList;
+        }
+
+        public static List<Public.ViewModels.LicenseeChangeLog> GetApplicationChangeLogs(this IDynamicsClient _dynamicsClient, string applicationId, ILogger _logger)
+        {
+            
+            var result = new List<Public.ViewModels.LicenseeChangeLog>();
+            var filter = "_adoxio_application_value eq " + applicationId;
+            try
+            {
+                var response = _dynamicsClient.Licenseechangelogs.Get(filter: filter).Value.ToList();
+                foreach (var item in response)
+                {
+                    result.Add(item.ToViewModel());
+                }
+}
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, $"Error reading LegalEntityChangelog");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Unexpected Exception while reading LegalEntityChangelog");
+            }
+            return result;
+        }
+
+        public static Public.ViewModels.LegalEntity GetLegalEntityTree(this IDynamicsClient _dynamicsClient, string accountId, ILogger _logger, IConfiguration _configuration)
+        {
+            Public.ViewModels.LegalEntity result = null;
+            var filter = "_adoxio_account_value eq " + accountId;
+            filter += " and _adoxio_legalentityowned_value eq null";
+
+            var expand = new List<string>{
+                "adoxio_Contact"
+            };
+
+            var response = _dynamicsClient.Legalentities.Get(filter: filter, expand: expand);
+
+            if (response != null && response.Value != null)
+            {
+                var legalEntity = response.Value.FirstOrDefault();
+                if (legalEntity != null)
+                {
+                    result = legalEntity.ToViewModel();
+                    if (!string.IsNullOrEmpty(result.contactId))
+                    {
+                        result.PhsLink = GetPhsLink(result.contactId, _configuration);
+                        result.CasLink = GetCASLink(result.contactId, _configuration);
+                    }
+                    result.children = _dynamicsClient.GetLegalEntityChildren(result.id, _logger, _configuration);
+                }
+            }
+            return result;
+        }
+
+        public static string GetPhsLink(string contactId, IConfiguration _configuration)
+        {
+            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/personal-history-summary/";
+            
+            string encryptionKey = _configuration["ENCRYPTION_KEY"];
+            result += HttpUtility.UrlEncode(EncryptionUtility.EncryptStringHex(contactId, encryptionKey));
+            return result;
+        }
+
+        public static string GetCASLink(string contactId, IConfiguration _configuration)
+        {
+            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/cannabis-associate-screening/";
+            //var ba = Guid.Parse(contactId).ToByteArray();
+            string encryptionKey = _configuration["ENCRYPTION_KEY"];
+            result += HttpUtility.UrlEncode(EncryptionUtility.EncryptStringHex(contactId, encryptionKey));
+            return result;
+        }
+
+
+        public static List<Public.ViewModels.LegalEntity> GetLegalEntityChildren(this IDynamicsClient _dynamicsClient, string parentLegalEntityId, ILogger _logger, IConfiguration _configuration, List<string> processedEntities = null)
+        {
+            List<Public.ViewModels.LegalEntity> result = new List<Public.ViewModels.LegalEntity>();
+            MicrosoftDynamicsCRMadoxioLegalentityCollection response = null;
+            var filter = "_adoxio_legalentityowned_value eq " + parentLegalEntityId;
+            if (processedEntities == null)
+            {
+                processedEntities = new List<string>();
+            }
+            try
+            {
+                response = _dynamicsClient.Legalentities.Get(filter: filter);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, $"Error while patching legal entity");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Unexpected Exception while patching legal entity");
+            }
+
+            if (response != null && response.Value != null)
+            {
+                var legalEntities = response.Value.ToList();
+
+                foreach (var legalEntity in legalEntities)
+                {
+                    var viewModel = legalEntity.ToViewModel();
+                    if (!String.IsNullOrEmpty(legalEntity.AdoxioLegalentityid) && !processedEntities.Contains(legalEntity.AdoxioLegalentityid))
+                    {
+                        processedEntities.Add(legalEntity.AdoxioLegalentityid);
+                        viewModel.children = _dynamicsClient.GetLegalEntityChildren(legalEntity.AdoxioLegalentityid, _logger, _configuration, processedEntities);
+                    }
+                    if (!string.IsNullOrEmpty(viewModel.contactId))
+                    {
+                        viewModel.PhsLink = GetPhsLink(viewModel.contactId, _configuration);
+                        viewModel.CasLink = GetCASLink(viewModel.contactId, _configuration);
+                    }
+
+                    result.Add(viewModel);
+                }
+
+            }
+            return result;
+
+        }
+
+        public static int GetNotTerminatedCRSApplicationCount(this IDynamicsClient _dynamicsClient, string accountId)
+        {
+            int result = 0;
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = _dynamicsClient.GetApplicationListByApplicant(accountId);
+            if (dynamicsApplicationList != null)
+            {
+                foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationList)
+                {
+                    Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
+                    var adoxio_licencetype = _dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
+                    string licenseType = adoxio_licencetype.AdoxioName;
+
+                    // hide terminated applications from view.
+                    if (dynamicsApplication.Statuscode == null || (dynamicsApplication.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated
+                        && dynamicsApplication.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.Refused
+                        && dynamicsApplication.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled
+                        && dynamicsApplication.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded)
+                        && licenseType == "Cannabis Retail Store"
+                        )
+                    {
+                        result++;
+                    }
+                }
+            
+            }
+            
+            return result;
+
+        }
 
         /// <summary>
         /// Convert a Dynamics attribute to boolean
@@ -274,18 +487,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-        public static IEnumerable<MicrosoftDynamicsCRMadoxioLicences> GetLicensesByLicencee(this IDynamicsClient _dynamicsClient, IMemoryCache _cache, string licenceeId)
+        public static List<MicrosoftDynamicsCRMadoxioLicences> GetLicensesByLicencee(this IDynamicsClient _dynamicsClient, IMemoryCache _cache, string licenceeId)
         {
             var expand = new List<string> { "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_LicenceType", "adoxio_establishment", "adoxio_ThirdPartyOperatorId" };
 
-            IEnumerable<MicrosoftDynamicsCRMadoxioLicences> licences = null;
+            List<MicrosoftDynamicsCRMadoxioLicences> licences = null;
 
             var filter = $"_adoxio_licencee_value eq {licenceeId}";
 
             try
             {
-                licences = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
-                licences = licences
+                List<MicrosoftDynamicsCRMadoxioLicences> data = (List<MicrosoftDynamicsCRMadoxioLicences>)_dynamicsClient.Licenceses.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
+                licences = data
                     .Where(licence =>
                     {
                         return licence.Statuscode != (int)Public.ViewModels.LicenceStatusCodes.Cancelled
@@ -296,7 +509,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                     {
                         licence.AdoxioLicenceType = Gov.Lclb.Cllb.Public.Models.ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
                         return licence;
-                    });
+                    })
+                    .ToList();
             }
             catch (HttpOperationException)
             {

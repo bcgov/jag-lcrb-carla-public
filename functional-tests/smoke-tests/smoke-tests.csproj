@@ -43,13 +43,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="COVID_temporary_extension_food_primary.feature">
+    <None Update="CRSApplication_privatecorp.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Public_smoke_test.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="CRSApplication_privatecorp.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
