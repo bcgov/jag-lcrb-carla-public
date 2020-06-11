@@ -1,11 +1,11 @@
 
-import { filter, takeWhile, catchError, mergeMap, delay } from 'rxjs/operators';
+import { filter, takeWhile, catchError, mergeMap, delay, tap, switchMap } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { Subscription, Subject, Observable, forkJoin, of } from 'rxjs';
-import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatSnackBar, MatDialog, MatAutocompleteTrigger } from '@angular/material';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
@@ -28,6 +28,8 @@ import { AccountDataService } from '@services/account-data.service';
 import { User } from '@models/user.model';
 import { DynamicsForm } from '../../../models/dynamics-form.model';
 import { DynamicsFormDataService } from '../../../services/dynamics-form-data.service';
+import { PoliceDurisdictionDataService } from '@services/police-jurisdiction-data.service';
+import { LocalGovernmentDataService } from '@services/local-government-data.service';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -65,6 +67,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   @ViewChild('financialIntegrityDocuments', { static: false }) financialIntegrityDocuments: FileUploaderComponent;
   @ViewChild('supportingDocuments', { static: false }) supportingDocuments: FileUploaderComponent;
   @ViewChild(ConnectionToNonMedicalStoresComponent, { static: false }) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
+  @ViewChild('lgAutoCompleteTrigger', { read: MatAutocompleteTrigger, static: false }) lgAutoComplete: MatAutocompleteTrigger;
+  @ViewChild(MatAutocompleteTrigger, { read: MatAutocompleteTrigger, static: false }) pdAutoComplete: MatAutocompleteTrigger;
   form: FormGroup;
   savedFormData: any;
   applicationId: string;
@@ -95,12 +99,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedPhotosOrRenderingsDocuments: 0;
   uploadedZoningDocuments: 0;
   dynamicsForm: DynamicsForm;
+  autocompleteLocalGovernmemts: any[];
+  autocompletePoliceDurisdictions: any[];
 
   get isOpenedByLG(): boolean {
     let openedByLG = false;
-    if(this.account && this.application && 
+    if (this.account && this.application &&
       this.account.localGovernmentId && this.application.indigenousNationId &&
-      this.account.localGovernmentId === this.application.indigenousNationId){
+      this.account.localGovernmentId === this.application.indigenousNationId) {
       openedByLG = true;
     }
     return openedByLG;
@@ -119,7 +125,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService,
     private accountDataService: AccountDataService,
-    private dynamicsFormDataService: DynamicsFormDataService
+    private policeJurisdictionDataService: PoliceDurisdictionDataService,
+    private localGovDataService: LocalGovernmentDataService
   ) {
     super();
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
@@ -181,7 +188,34 @@ export class ApplicationComponent extends FormBase implements OnInit {
       brewPub: ['', []],
       pipedIn: ['', []],
       neutralGrain: ['', []],
+      lgAutoCompleteInput: ['', []],
+      pdAutoCompleteInput: ['', []],
     });
+
+
+    this.form.get('lgAutoCompleteInput').valueChanges
+      .pipe(filter(value => value && value.length >= 3),
+        tap(_ => {
+          this.autocompleteLocalGovernmemts = [];
+        }),
+        switchMap(value => this.localGovDataService.getAutocomplete(value))
+      )
+      .subscribe(data => {
+        this.autocompleteLocalGovernmemts = data;
+        this.lgAutoComplete.openPanel();
+      });
+
+    this.form.get('pdAutoCompleteInput').valueChanges
+      .pipe(filter(value => value && value.length >= 3),
+        tap(_ => {
+          this.autocompleteLocalGovernmemts = [];
+        }),
+        switchMap(value => this.policeJurisdictionDataService.getAutocomplete(value))
+      )
+      .subscribe(data => {
+        this.autocompletePoliceDurisdictions = data;
+        this.pdAutoComplete.openPanel();
+      });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((applyAsIN: boolean) => {
       if (applyAsIN && this.application.applicationType.name === this.ApplicationTypeNames.CannabisRetailStore) {
@@ -271,6 +305,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
 
 
+  }
+
+  autocompleteDisplay(item: any) {
+    return item.name;
   }
 
   private hideFormControlByType() {
@@ -392,7 +430,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showSitePlan(): boolean {
     let show = this.application
       && this.application.applicationType
-      && (this.showFormControl(this.application.applicationType.sitePlan) 
+      && (this.showFormControl(this.application.applicationType.sitePlan)
         || this.showFormControl(this.application.applicationType.showLiquorSitePlan));
 
     if (this.application && this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange) {
@@ -412,12 +450,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   }
 
-  showExteriorChangeQuestion():boolean {
+  showExteriorChangeQuestion(): boolean {
     let show = this.application &&
-                (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange 
-                && this.application.licenseType === 'Cannabis Retail Store');
+      (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
+        && this.application.licenseType === 'Cannabis Retail Store');
 
-    if(show){
+    if (show) {
       this.form.get('proposedChange').setValidators([Validators.required]);
       this.form.updateValueAndValidity();
     } else {
@@ -459,7 +497,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   */
 
   hasType(): boolean {
-  return this.form.get('mfgType').value
+    return this.form.get('mfgType').value
   }
 
   isBrewery(): boolean {
@@ -471,7 +509,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   isDistillery(): boolean {
     return this.form.get('mfgType').value == "Distillery"
   }
-  
+
   isBrewPub(): boolean {
     return this.form.get('mfgType').value == "Brewery" && this.form.get('brewPub').value == "Yes"
   }
@@ -540,7 +578,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * */
   submit_application() {
     const formChanged: boolean = (JSON.stringify(this.savedFormData) !== JSON.stringify(this.form.value)); // has the data been updated?
-      const save: Observable<boolean> = formChanged ? this.save(!this.application.applicationType.isFree) : of(true); // bypass save if form value not updated
+    const save: Observable<boolean> = formChanged ? this.save(!this.application.applicationType.isFree) : of(true); // bypass save if form value not updated
 
     // Only save if the data is valid
     if (this.isValid()) {

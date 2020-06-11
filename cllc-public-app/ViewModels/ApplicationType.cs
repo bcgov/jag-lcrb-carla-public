@@ -62,9 +62,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public FormControlState? ProofofZoning { get; set; }
 
-
         [JsonConverter(typeof(StringEnumConverter))]
         public FormControlState? PublicCooler { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public FormControlState? LGandPoliceSelectors { get; set; }
 
         public bool? ShowLiquorDeclarations { get; set; }
         

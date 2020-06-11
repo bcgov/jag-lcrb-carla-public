@@ -40,6 +40,7 @@ export class ApplicationType {
   publicCooler: FormControlState;
   showLiquorSitePlan: FormControlState;
   proofofZoning: FormControlState;
+  lGandPoliceSelectors: FormControlState;
   isFree: boolean;
 
   dynamicsForm: DynamicsForm;

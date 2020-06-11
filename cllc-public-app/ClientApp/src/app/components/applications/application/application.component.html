@@ -203,6 +203,31 @@
               <p>&nbsp;</p>
             </div>
 
+            <!-- Local Government and Police Durisdiction -->
+            <section *ngIf="showFormControl(application?.applicationType?.lGandPoliceSelectors)" appRemoveIfFeatureOff="LGApprovals">
+              <app-field label="Local Government/Indigenous Nation" [required]="false"
+                [valid]="isValidOrNotTouched('lgAutoCompleteInput')" errorMessage="Please select value">
+                <input type="text" class="form-control" style="width: 500px;" placeholder=""
+                  formControlName="lgAutoCompleteInput" [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger>
+                <mat-autocomplete #lgAutoCompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
+                  <mat-option *ngFor="let item of autocompleteLocalGovernmemts" [value]="item">
+                    {{item.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </app-field>
+
+              <app-field label="Police Durisdiction" [required]="false"
+                [valid]="isValidOrNotTouched('pdAutoCompleteInput')" errorMessage="Please select value">
+                <input type="text" class="form-control" style="width: 500px;" placeholder=""
+                  formControlName="pdAutoCompleteInput" [matAutocomplete]="pdAutocompleteBox" #pdAutoComplete>
+                <mat-autocomplete #pdAutocompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
+                  <mat-option *ngFor="let item of autocompletePoliceDurisdictions" [value]="item">
+                    {{item.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </app-field>
+            </section>
+
             <!-- Store Contact Info -->
             <section *ngIf="showFormControl(application?.applicationType?.storeContactInfo)">
               <h3 class="blue-header">Establishment Contact Details</h3>
@@ -1659,8 +1684,9 @@
           </div>
         </section>
 
-        <section class="ngtest-opened-by-lg" *ngIf="isOpenedByLG">
-          <app-lg-in-confirmation-of-receipt *ngIf="application" [application]="application"></app-lg-in-confirmation-of-receipt>
+        <section appRemoveIfFeatureOff="LGApprovals" class="ngtest-opened-by-lg" *ngIf="isOpenedByLG">
+          <app-lg-in-confirmation-of-receipt *ngIf="application" [application]="application">
+          </app-lg-in-confirmation-of-receipt>
         </section>
 
 
@@ -1892,8 +1918,9 @@
         </app-field>
       </div>
     </section>
-    <app-associate-content *ngIf="account?.businessType !== 'LocalGovernment'" [account]="account" [showBothContents]="false"
-      [isIndigenousNation]="form.get('applyAsIndigenousNation').value"></app-associate-content>
+    <app-associate-content *ngIf="account?.businessType !== 'LocalGovernment'" [account]="account"
+      [showBothContents]="false" [isIndigenousNation]="form.get('applyAsIndigenousNation').value">
+    </app-associate-content>
   </ng-template>
 
   <div class="dashboard-spacing" style="position: relative" appRemoveIfFeatureOff="IndigenousNation">
