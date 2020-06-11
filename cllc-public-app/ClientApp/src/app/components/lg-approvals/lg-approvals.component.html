@@ -1,3 +1,87 @@
-<div class="form-wrapper">
-    <h1>{{account?.name}} Liquor Application Dashboard</h1>
+<div class="form-wrapper position-relative">
+    <div [ngBusy]="busy"></div>
+
+    <ng-container *ngIf="account && dataLoaded">
+        <ng-container *ngIf="applicationsDecisionNotMade && applicationsDecisionNotMade.length > 0">
+            <h1>Applications Awaiting Review</h1>
+            <table>
+                <tr>
+                    <th></th>
+                    <th style="width:250px;">Application</th>
+                    <th style="width:250px;">Applying Business</th>
+                    <th style="width:250px;">Establishment</th>
+                    <th style="width:300px;">Review Application</th>
+                </tr>
+
+                <tr *ngFor="let item of applicationsDecisionNotMade; let i = index;" style="border: 1px solid #ccc; ">
+                    <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
+                        <span>{{i+1}}</span>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div>{{item?.applicationType?.name}}</div>
+                        <div>Job Number: {{item?.jobNumber}}</div>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div>{{item?.applicant?.name}} </div>
+                        <div>{{item?.applicant?.businessType}} </div>
+                        <!-- <div>{{item?.}} </div> -->
+                    </td>
+                    <td>
+                        <div>{{item?.establishmentAddressStreet}} </div>
+                        <div>{{item?.establishmentAddressCity}} </div>
+                        <div>{{item?.establishmentAddressPostalCode}}</div>
+                    </td>
+                    <td>
+                        <a routerLink="/application/{{item?.id}}">Review Application</a>
+                    </td>
+                </tr>
+            </table>
+        </ng-container>
+
+        <ng-container *ngIf="applicationsDecisionMadeButNoDocs && applicationsDecisionMadeButNoDocs.length > 0">
+            <h1>Applications Awaiting Resolution</h1>
+            <table>
+                <tr>
+                    <th></th>
+                    <th style="width:250px;">Application</th>
+                    <th style="width:250px;">Applying Business</th>
+                    <th style="width:250px;">Establishment</th>
+                    <th style="width:300px;">Provide Resolution</th>
+                    <th style="width:300px;">90 Day Counter</th>
+                </tr>
+
+                <tr *ngFor="let item of applicationsDecisionMadeButNoDocs; let i = index;"
+                    style="border: 1px solid #ccc; ">
+                    <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
+                        <span>{{i+1}}</span>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div>{{item?.applicationType?.name}}</div>
+                        <div>Job Number: {{item?.jobNumber}}</div>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div>{{item?.applicant?.name}} </div>
+                        <div>{{item?.applicant?.businessType}} </div>
+                        <!-- <div>{{item?.}} </div> -->
+                    </td>
+                    <td>
+                        <div>{{item?.establishmentAddressStreet}} </div>
+                        <div>{{item?.establishmentAddressCity}} </div>
+                        <div>{{item?.establishmentAddressPostalCode}}</div>
+                    </td>
+                    <td>
+                        <a routerLink="/application/{{item?.id}}">Provide Resolution</a>
+                    </td>
+                    <td>
+                        <span> {{get90dayCount(item?.lGDecisionSubmissionDate)}}  days left</span>
+                    </td>
+                </tr>
+            </table>
+        </ng-container>
+
+        <section *ngIf="applicationsDecisionNotMade?.length === 0 && applicationsDecisionMadeButNoDocs?.length === 0">
+            No applications awaiting approval.
+        </section>
+
+    </ng-container>
 </div>

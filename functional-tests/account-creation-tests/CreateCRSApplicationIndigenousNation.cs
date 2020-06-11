@@ -38,85 +38,18 @@ namespace bdd_tests
     [FeatureFile("./Create_CRSApplication_indigenousnation.feature")]
     public sealed class CreateCRSApplicationIndigenousNation : TestBase
     {
-
         [Given(@"I am logged in to the dashboard as an (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            //CheckFeatureFlagsCannabis();
+            CheckFeatureFlagsCannabis();
 
-            CarlaLogin(businessType);
+            CarlaLoginNoCheck();
         }
 
         [And(@"I am logged in to the dashboard as an (.*)")]
-        public void And_I_view_the_dashboard(string businessType)
+        public void And_I_view_the_dashboard_IN(string businessType)
         {
-            CarlaLogin(businessType);
-        }
-
-        [And(@"I click on the Start Application button for a Cannabis Retail Store")]
-        public void start_application()
-        {
-            /* 
-            Page Title: Welcome to Cannabis Licensing
-            */
-
-            NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
-            startApp_button.Click();
-        }
-
-        [And(@"I complete the eligibility disclosure")]
-        public void complete_eligibility_disclosure()
-        {
-            CRSEligibilityDisclosure();
-        }
-
-        [And(@"I review the account profile")]
-        public void review_account_profile()
-        {
-            ReviewAccountProfile();
-        }
-
-        [And(@"I review the organization structure")]
-        public void review_org_structure()
-        {
-            ReviewOrgStructure();
-        }
-
-        [And(@"I submit the organization structure")]
-        public void submit_org_structure()
-        {
-            SubmitOrgInfoButton();
-        }
-
-        [And(@"I complete the Cannabis Retail Store application")]
-        public void I_complete_the_application()
-        {
-            CRSApplication();
-        }
-
-        [And(@"I click on the Pay for Application button")]
-        public void click_on_pay_for_application()
-        {
-            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
-            pay_button.Click();
-        }
-
-        [And(@"I enter the payment information")]
-        public void enter_payment_info()
-        {
-            MakePayment();
-        }
-
-        [Then(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            CRSReturnToDashboard();
-        }
-
-        [And(@"the account is deleted")]
-        public void Delete_my_account()
-        {
-            this.CarlaDeleteCurrentAccount();
+            CarlaLoginWithUser(businessType);
         }
     }
 }

@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentDataService } from '@services/payment-data.service';
 import { Subscription } from 'rxjs';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { ApplicationDataService } from '../../services/application-data.service';
 
 @Component({
   selector: 'app-payment-confirmation',
@@ -29,6 +30,7 @@ export class PaymentConfirmationComponent implements OnInit {
   trnOrderNumber: string;
   invoice: string;
   isApproved = false;
+  applicationType: string;
 
   paymentTransactionTitle: string;
   paymentTransactionMessage: string;
@@ -38,7 +40,8 @@ export class PaymentConfirmationComponent implements OnInit {
   /** payment-confirmation ctor */
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private paymentDataService: PaymentDataService
+    private paymentDataService: PaymentDataService,
+    private applicationDataService: ApplicationDataService
   ) {
     this.route.queryParams.subscribe(params => {
       this.transactionId = params['trnId'];
@@ -55,6 +58,14 @@ export class PaymentConfirmationComponent implements OnInit {
 
   ngAfterViewInit() {
     this.verify_payment();
+    this.getApplicationType();
+  }
+
+  getApplicationType() {
+    this.applicationDataService.getApplicationById(this.applicationId).subscribe(
+      res => {
+        this.applicationType = res.applicationType.name;
+      });
   }
 
   /**

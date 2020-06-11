@@ -72,6 +72,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("LiquorOne");
             }
 
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_LIQUOR_TWO"]))
+            {
+                features.Add("LiquorTwo");
+            }
+
             if (!string.IsNullOrEmpty(_configuration["FEATURE_COVID_APPLICATION"]))
             {
                 features.Add("CovidApplication");
@@ -80,6 +85,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (!string.IsNullOrEmpty(_configuration["FEATURE_LG_APPROVALS"]))
             {
                 features.Add("LGApprovals");
+            }
+
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_LIQUOR_TWO"]))
+            {
+                features.Add("LiquorTwo");
             }
 
             return features;

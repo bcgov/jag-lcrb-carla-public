@@ -22,6 +22,7 @@ export class FileUploaderComponent implements OnInit {
   @Input() documentType: string;
   @Input() entityName: string;
   @Input() entityId: string;
+  @Input() disableUploads = false; // force uploads to be disabled
   @Input() multipleFiles = true;
   @Input() extensions: string[] = ['pdf'];
   @Input() uploadHeader = 'TO UPLOAD DOCUMENTS, DRAG FILES HERE OR';
@@ -196,7 +197,8 @@ export class FileUploaderComponent implements OnInit {
 
   disableFileUpload(): boolean {
     return (!this.multipleFiles && (this.files && this.files.length > 0))
-      || (this.multipleFiles && this.maxNumberOfFiles <= (this.files.length));
+      || (this.multipleFiles && this.maxNumberOfFiles <= (this.files.length))
+      || this.disableUploads;
   }
 
   public fileOver(event) {

@@ -4,7 +4,7 @@ using Hangfire;
 using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
 using System;
@@ -33,15 +33,12 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         private IOneStopRestClient _onestopRestClient;
 
-        private ILogger _logger;
-
-
-        public OneStopUtils(IConfiguration Configuration, ILogger logger)
+        public OneStopUtils(IConfiguration Configuration)
         {
             this.Configuration = Configuration;
             _dynamics = DynamicsSetupUtil.SetupDynamics(Configuration);
-            _onestopRestClient = OneStopUtils.SetupOneStopClient(Configuration, logger);
-            _logger = logger;
+
+            _onestopRestClient = OneStopUtils.SetupOneStopClient(Configuration, Log.Logger);
         }
 
         /// <summary>
@@ -80,9 +77,9 @@ namespace Gov.Lclb.Cllb.OneStopService
                     hangfireContext.WriteLine($"Exception occured. {ex.Message}");
                     hangfireContext.WriteLine($"Cancelling");
 
-                    if (_logger != null)
+                    if (Log.Logger != null)
                     {
-                        _logger.LogError(ex, $"Exception occured. {ex.Message}");
+                        Log.Logger.Error(ex, $"Exception occured. {ex.Message}");
                     }
 
                     throw;
@@ -128,9 +125,9 @@ namespace Gov.Lclb.Cllb.OneStopService
                     hangfireContext.WriteLine($"Unable to get licence {licenceGuid}.");
                 }
 
-                if (_logger != null)
+                if (Log.Logger != null)
                 {
-                    _logger.LogError($"Unable to get licence {licenceGuid}.");
+                    Log.Logger.Error($"Unable to get licence {licenceGuid}.");
                 }
             }
             else
@@ -199,10 +196,9 @@ namespace Gov.Lclb.Cllb.OneStopService
                 }
                 catch (Exception ex)
                 {
-                    if (_logger != null)
+                    if (Log.Logger != null)
                     {
-                        _logger.LogError(ex.Message);
-                        _logger.LogError(ex.StackTrace);
+                        Log.Logger.Error(ex, "Error sending request.");
                     }
 
                     if (hangfireContext != null)
@@ -252,9 +248,9 @@ namespace Gov.Lclb.Cllb.OneStopService
                     hangfireContext.WriteLine($"Unable to get licence {licenceGuid}.");
                 }
 
-                if (_logger != null)
+                if (Log.Logger != null)
                 {
-                    _logger.LogError($"Unable to get licence {licenceGuid}.");
+                    Log.Logger.Error($"Unable to get licence {licenceGuid}.");
                 }
             }
             else
@@ -377,7 +373,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 suffix = suffix.TrimStart('0');
                 if (!int.TryParse(suffix, out result))
                 {
-                    logger.LogError($"ERROR - unable to parse suffix of {suffix} in partner note {partnerNote}");
+                    logger.Error($"ERROR - unable to parse suffix of {suffix} in partner note {partnerNote}");
                 }
             }
             

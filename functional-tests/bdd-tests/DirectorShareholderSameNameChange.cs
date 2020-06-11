@@ -26,10 +26,11 @@ Scenario: Change director and shareholder same name
     And I enter the same individual as a director and a shareholder
     And I review the organization structure
     And I modify only the director record
-    And I review the organization structure
+    And I click on the Complete Organization Information button
     And the director and shareholder name are identical
-    Then the account is deleted
-*/
+    And the account is deleted
+    Then I see the login page
+ */
 
 namespace bdd_tests
 {
@@ -40,26 +41,6 @@ namespace bdd_tests
         public void Given_I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
-        }
-
-        [And(@"the account is deleted")]
-        public void Delete_my_account()
-        {
-            this.CarlaDeleteCurrentAccount();
-        }
-
-        [And(@"I am logged in to the dashboard as a (.*)")]
-        public void And_I_view_the_dashboard(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-
-        [And(@"I click on the Complete Organization Information button")]
-        public void complete_org_info()
-        {
-            // click on the complete organzation information button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'COMPLETE ORGANIZATION INFORMATION')]"));
-            orgInfoButton.Click();
         }
 
         [And(@"I enter the same individual as a director and a shareholder")]
@@ -97,11 +78,11 @@ namespace bdd_tests
             string votingShares = "100";
 
             // enter the first name 
-            NgWebElement uiSameIndividualFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+            NgWebElement uiSameIndividualFirstName = ngDriver.FindElement(By.CssSelector("input[formControlName=\"firstNameNew\"]"));
             uiSameIndividualFirstName.SendKeys(sameIndividualFirstName);
 
             // enter the last name 
-            NgWebElement uiSameIndividualLastName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+            NgWebElement uiSameIndividualLastName = ngDriver.FindElement(By.CssSelector("input[formControlName=\"lastNameNew\"]"));
             uiSameIndividualLastName.SendKeys(sameIndividualLastName);
 
             // click the Director checkbox
@@ -109,15 +90,15 @@ namespace bdd_tests
             uiSameRole.Click();
 
             // enter the title
-            NgWebElement uiSameTitle = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+            NgWebElement uiSameTitle = ngDriver.FindElement(By.CssSelector("input[formControlName=\"titleNew\"]"));
             uiSameTitle.SendKeys(sameTitle);
 
             // enter the email 
-            NgWebElement uiSameIndividualEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+            NgWebElement uiSameIndividualEmail = ngDriver.FindElement(By.CssSelector("input[formControlName=\"emailNew\"]"));
             uiSameIndividualEmail.SendKeys(sameIndividualEmail);
 
             // select the DOB
-            NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.CssSelector("input[formControlName=\"dateofBirthNew\"]"));
             openKeyPersonnelDOB.Click();
 
             SharedCalendarDate();
@@ -160,14 +141,7 @@ namespace bdd_tests
             NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
             orgInfoButton.Click();
         }
-
-        [And(@"I review the organization structure")]
-        public void review_org_structure2()
-        {
-            // click on complete org info button
-            complete_org_info();
-        }
-         
+        
         [And(@"I modify only the director record")]
         public void modify_director_record()
         {
@@ -212,12 +186,6 @@ namespace bdd_tests
 
             // check that the shareholder last name has been updated
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
-        }
-
-        [Then(@"the account is deleted")]
-        public void Delete_my_account2()
-        {
-            this.CarlaDeleteCurrentAccount();
         }
     }
 }

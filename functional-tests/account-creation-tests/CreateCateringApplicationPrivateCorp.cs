@@ -38,88 +38,12 @@ namespace bdd_tests
     [FeatureFile("./Create_CateringApplication_privatecorp.feature")]
     public sealed class CreateCateringApplicationPrivateCorp : TestBase
     {
-
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            //CheckFeatureFlagsLiquor();
+            CheckFeatureFlagsLiquor();
 
-            CarlaLogin(businessType);
-        }
-
-        [And(@"I am logged in to the dashboard as a (.*)")]
-        public void And_I_view_the_dashboard(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-
-        [And(@"I click on the Start Application button for (.*)")]
-        public void I_start_application(string application_type)
-        {
-
-            // click on the Catering Start Application button
-            NgWebElement startApp_button = ngDriver.FindElement(By.Id("startCatering"));
-            startApp_button.Click();
-
-            applicationTypeShared = application_type;
-        }
-
-        [And(@"I review the account profile")]
-        public void review_account_profile()
-        {
-            ReviewAccountProfile();
-        }
-
-        [And(@"I review the organization structure")]
-        public void I_continue_to_organization_review()
-        {
-            ReviewOrgStructure();
-        }
-
-        [And(@"I submit the organization structure")]
-        public void submit_org_structure()
-        {
-            SubmitOrgInfoButton();
-        }
-
-        [And(@"I complete the Catering application")]
-        public void I_complete_the_application()
-        {
-            CateringApplication();
-        }
-
-        [And(@"I click on the Submit button")]
-        public void click_on_submit()
-        {
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
-            submit_button.Click();
-        }
-
-        [And(@"I click on the Pay for Application button")]
-        public void click_on_pay()
-        {
-            ReviewSecurityScreening();
-
-            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
-            pay_button.Click();
-        }
-
-        [And(@"I enter the payment information")]
-        public void enter_payment_info()
-        {
-            MakePayment();
-        }
-
-        [Then(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            CateringReturnToDashboard();
-        }
-
-        [And(@"the account is deleted")]
-        public void Delete_my_account()
-        {
-            this.CarlaDeleteCurrentAccount();
+            CarlaLoginNoCheck();
         }
     }
 }
