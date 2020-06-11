@@ -13,36 +13,28 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: E2E_CRSApplication_Licence_privatecorp_name_branding_change
+Feature: RuralStore.feature
     As a logged in business user
-    I want to submit a CRS Application for a private corporation
-    And request a valid name or branding change for the approved application
+    I want to submit a rural store application for a private corporation
 
 Scenario: Start Application
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     And I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    And I click on the Start Application button for a Rural Store
     And I review the account profile
     And I review the organization structure
     And I submit the organization structure
-    And I complete the Cannabis Retail Store application
-    And I click on the Pay for Application button
-    And I enter the payment information
+    And I complete the Rural Store application
     And I return to the dashboard
-    And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
-    And I pay the licensing fee
-    And I request a valid store name or branding change for Cannabis
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./E2E_CRSApplication_Licence_privatecorp_name_branding_change.feature")]
-    public sealed class E2ECRSApplicationLicencePrivateCorpNameBrandingChange : TestBase
+    [FeatureFile("./RuralStore.feature")]
+    public sealed class RuralStore : TestBase
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
