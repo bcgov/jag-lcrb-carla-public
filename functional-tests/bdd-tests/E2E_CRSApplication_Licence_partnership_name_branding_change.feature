@@ -19,6 +19,6 @@ Scenario: Start Application
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
-    And I request a valid store name or branding change
+    And I request a valid store name or branding change for Cannabis
     And the account is deleted
     Then I see the login page
