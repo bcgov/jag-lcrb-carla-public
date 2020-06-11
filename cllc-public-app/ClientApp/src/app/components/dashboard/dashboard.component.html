@@ -79,10 +79,8 @@
         </div>
       </section>
       <p></p> -->
-      <div *ngIf="account?.businessType !== 'LocalGovernment'">
-        <app-associate-content [hasLicence]="hasLicence" [account]="account" [isIndigenousNation]="indigenousNationModeActive">
-        </app-associate-content>
-      </div>
+      <app-associate-content *ngIf="account?.businessType !== 'LocalGovernment'" [hasLicence]="hasLicence" [account]="account" [isIndigenousNation]="indigenousNationModeActive">
+      </app-associate-content>
       <p></p>
      
     </div>
