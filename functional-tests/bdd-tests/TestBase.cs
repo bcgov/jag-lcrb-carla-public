@@ -267,7 +267,7 @@ namespace bdd_tests
             string estPID = "012345678";
             string estEmail = "test@test.com";
             string estPhone = "2505555555";
-            string certNumber = "1234567";
+            string certNumber = "012";
 
             string conGiven = "Given";
             string conSurname = "Surname";
