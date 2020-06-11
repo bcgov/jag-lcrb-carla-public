@@ -17,7 +17,7 @@
     </mat-step>
 
     <mat-step *ngIf="isRAS" label="Complete Submission">      
-      <app-application *ngIf="stepper.selectedIndex === 2" class="w-100" [skipPayment]="true"
+      <app-application *ngIf="stepper.selectedIndex === 2" class="w-100"
         (saveComplete)="stepper.selectedIndex = 3">
       </app-application>      
     </mat-step>

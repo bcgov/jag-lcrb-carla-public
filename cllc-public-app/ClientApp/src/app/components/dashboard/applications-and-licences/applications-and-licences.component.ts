@@ -349,6 +349,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         const route: any[] = [`/multi-step-application/${data.id}`];
+        //const route: any[] = [`/application/${data.id}`];
 
         route.push({ useDynamicFormMode: true });
 
