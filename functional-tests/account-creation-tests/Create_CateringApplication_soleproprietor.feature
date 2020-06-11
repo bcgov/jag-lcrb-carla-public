@@ -5,6 +5,8 @@
 
 Scenario: Start Application
     Given I am logged in to the dashboard as a sole proprietorship
+    And the account is deleted
+    And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -13,4 +15,5 @@ Scenario: Start Application
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
+    And I confirm the payment receipt for a Catering application
     Then I return to the dashboard      

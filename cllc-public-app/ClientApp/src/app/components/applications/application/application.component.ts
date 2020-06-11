@@ -1,11 +1,11 @@
 
-import { filter, takeWhile, catchError, mergeMap, delay } from 'rxjs/operators';
+import { filter, takeWhile, catchError, mergeMap, delay, tap, switchMap } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { Subscription, Subject, Observable, forkJoin, of } from 'rxjs';
-import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatSnackBar, MatDialog, MatAutocompleteTrigger } from '@angular/material';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
@@ -25,9 +25,11 @@ import { ConnectionToNonMedicalStoresComponent } from '@components/account-profi
 import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AccountDataService } from '@services/account-data.service';
-import { User } from '@models/user.model';
+//import { User } from '@models/user.model';
 import { DynamicsForm } from '../../../models/dynamics-form.model';
 import { DynamicsFormDataService } from '../../../services/dynamics-form-data.service';
+import { PoliceDurisdictionDataService } from '@services/police-jurisdiction-data.service';
+import { LocalGovernmentDataService } from '@services/local-government-data.service';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -65,6 +67,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   @ViewChild('financialIntegrityDocuments', { static: false }) financialIntegrityDocuments: FileUploaderComponent;
   @ViewChild('supportingDocuments', { static: false }) supportingDocuments: FileUploaderComponent;
   @ViewChild(ConnectionToNonMedicalStoresComponent, { static: false }) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
+  @ViewChild('lgAutoCompleteTrigger', { read: MatAutocompleteTrigger, static: false }) lgAutoComplete: MatAutocompleteTrigger;
+  @ViewChild(MatAutocompleteTrigger, { read: MatAutocompleteTrigger, static: false }) pdAutoComplete: MatAutocompleteTrigger;
   form: FormGroup;
   savedFormData: any;
   applicationId: string;
@@ -95,6 +99,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedPhotosOrRenderingsDocuments: 0;
   uploadedZoningDocuments: 0;
   dynamicsForm: DynamicsForm;
+  autocompleteLocalGovernmemts: any[];
+  autocompletePoliceDurisdictions: any[];
+
+  get isOpenedByLG(): boolean {
+    let openedByLG = false;
+    if (this.account && this.application &&
+      this.account.localGovernmentId && this.application.indigenousNationId &&
+      this.account.localGovernmentId === this.application.indigenousNationId) {
+      openedByLG = true;
+    }
+    return openedByLG;
+  }
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -109,7 +125,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService,
     private accountDataService: AccountDataService,
-    private dynamicsFormDataService: DynamicsFormDataService
+    private policeJurisdictionDataService: PoliceDurisdictionDataService,
+    private localGovDataService: LocalGovernmentDataService
   ) {
     super();
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
@@ -171,7 +188,41 @@ export class ApplicationComponent extends FormBase implements OnInit {
       brewPub: ['', []],
       pipedIn: ['', []],
       neutralGrain: ['', []],
+      lgAutoCompleteInput: ['', []],
+      pdAutoCompleteInput: ['', []],
+      zoningPermitsMFG: ['', []],
+      zoningPermitsRetailSales: ['', []],
+      isALR: ['', []],
+      isOwner:['',[]],
+      hasValidInterest:['',[]],
+      willhaveValidInterest:['',[]],
+      meetsALRRequirements: ['', []],
     });
+
+
+    this.form.get('lgAutoCompleteInput').valueChanges
+      .pipe(filter(value => value && value.length >= 3),
+        tap(_ => {
+          this.autocompleteLocalGovernmemts = [];
+        }),
+        switchMap(value => this.localGovDataService.getAutocomplete(value))
+      )
+      .subscribe(data => {
+        this.autocompleteLocalGovernmemts = data;
+        this.lgAutoComplete.openPanel();
+      });
+
+    this.form.get('pdAutoCompleteInput').valueChanges
+      .pipe(filter(value => value && value.length >= 3),
+        tap(_ => {
+          this.autocompleteLocalGovernmemts = [];
+        }),
+        switchMap(value => this.policeJurisdictionDataService.getAutocomplete(value))
+      )
+      .subscribe(data => {
+        this.autocompletePoliceDurisdictions = data;
+        this.pdAutoComplete.openPanel();
+      });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((applyAsIN: boolean) => {
       if (applyAsIN && this.application.applicationType.name === this.ApplicationTypeNames.CannabisRetailStore) {
@@ -248,12 +299,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
         this.form.patchValue(noNulls);
 
-        if (data.isPaid) {
+        // make fields readonly if payment was made or the LG is viewing the application
+        if (data.isPaid || this.isOpenedByLG) {
           this.form.disable();
         }
         this.savedFormData = this.form.value;
-
-
       },
         () => {
           console.log('Error occured');
@@ -262,6 +312,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
 
 
+  }
+
+  autocompleteDisplay(item: any) {
+    return item.name;
   }
 
   private hideFormControlByType() {
@@ -314,7 +368,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     if (this.application.applicationType.name !== ApplicationTypeNames.CRSStructuralChange
       && this.application.applicationType.name !== ApplicationTypeNames.CRSEstablishmentNameChange) {
-        debugger;
       this.form.get('proposedChange').disable();
     }
 
@@ -329,6 +382,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application.applicationType.showDeclarations) {
       this.form.get('authorizedToSubmit').setValidators([this.customRequiredCheckboxValidator()]);
       this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
+    }
+
+    if (this.isRAS()) {
+
+      this.form.get('isOwner').setValidators([Validators.required]);
+      this.form.get('hasValidInterest').setValidators([Validators.required]);    
+      this.form.get('willhaveValidInterest').setValidators([Validators.required]);
+      // use description1 for the certificate number
+      this.form.get('description1').enable();
+      
+
     }
 
     // 03/01/2020 - Disabled until connected grocery store feature is ready
@@ -384,7 +448,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showSitePlan(): boolean {
     let show = this.application
       && this.application.applicationType
-      && (this.showFormControl(this.application.applicationType.sitePlan) 
+      && (this.showFormControl(this.application.applicationType.sitePlan)
         || this.showFormControl(this.application.applicationType.showLiquorSitePlan));
 
     if (this.application && this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange) {
@@ -404,12 +468,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   }
 
-  showExteriorChangeQuestion():boolean {
+  showExteriorChangeQuestion(): boolean {
     let show = this.application &&
-                (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange 
-                && this.application.licenseType === 'Cannabis Retail Store');
+      (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
+        && this.application.licenseType === 'Cannabis Retail Store');
 
-    if(show){
+    if (show) {
       this.form.get('proposedChange').setValidators([Validators.required]);
       this.form.updateValueAndValidity();
     } else {
@@ -451,21 +515,29 @@ export class ApplicationComponent extends FormBase implements OnInit {
   */
 
   hasType(): boolean {
-  return this.form.get('mfgType').value
+    // to do, set validation requirements
+  return this.form.get('mfgType').value;
   }
 
   isBrewery(): boolean {
-    return this.form.get('mfgType').value == "Brewery"
+    // to do, set validation requirements
+    return this.form.get('mfgType').value == "Brewery";
   }
   isWinery(): boolean {
-    return this.form.get('mfgType').value == "Winery"
+    // to do, set validation requirements
+    return this.form.get('mfgType').value == "Winery";
   }
   isDistillery(): boolean {
-    return this.form.get('mfgType').value == "Distillery"
+    return this.form.get('mfgType').value == "Distillery";
   }
-  
+
   isBrewPub(): boolean {
-    return this.form.get('mfgType').value == "Brewery" && this.form.get('brewPub').value == "Yes"
+    // to do, set validation requirements
+    return this.form.get('mfgType').value == "Brewery" && this.form.get('brewPub').value == "Yes";
+  }
+
+  isRAS(): boolean {
+    return this.application.licenseType === 'Rural Agency';
   }
 
 
@@ -540,14 +612,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
-            this.saveComplete.emit(true);
-            // redirect to dashboard if the applicationType is FREE
-            if (this.application.applicationType.isFree) {
-              this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-              this.router.navigateByUrl('/dashboard');
-            } else {
+            this.saveComplete.emit(true);                  
+              // Dynamics will determine whether payment is required or not.
+              // if the application is Free, it will not generate an invoice
               this.submitPayment();
-            }
+              // however we need to redirect if the application is Free
+              if (this.application.applicationType.isFree) {
+                this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+                this.router.navigateByUrl('/dashboard');
+              }
           } else if (this.application.applicationType.isFree) { // show error message the save failed and the application is free
             this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
           }
@@ -561,13 +634,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
+    
+    // skipPayment is set via the multi-step application
+    // if the application page is not the last step, we will often not want to collect payment
     if (this.skipPayment) {
       return;
     }
-
+    
     this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(jsonUrl => {
+        console.log("")
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
       }, err => {

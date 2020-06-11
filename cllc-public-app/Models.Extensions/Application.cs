@@ -134,6 +134,13 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioRenewaldui = (int?)from.RenewalDUI;
             to.AdoxioRenewalthirdparty = (int?)from.RenewalThirdParty;
 
+            //lg approval fields
+            to.AdoxioLgnameofofficial = from.LGNameOfOfficial;
+            to.AdoxioLgtitleposition = from.LGTitlePosition;
+            to.AdoxioLgcontactphone = from.LGContactPhone;
+            to.AdoxioLgcontactemail = from.LGContactEmail;
+            to.AdoxioLgdecisionsubmissiondate = from.LGDecisionSubmissionDate;
+
             // comment out this next line as it is causing all application updates to fail (moved to controller)
             //to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
 
@@ -190,8 +197,6 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             // catering fields
             to.AdoxioIsapplicationcomplete = (int?)from.IsApplicationComplete;
-
-
         }
 
         public static void CopyValuesForCovidApplication(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.CovidApplication from)
@@ -368,6 +373,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 Establishmentopeningdate = dynamicsApplication.AdoxioEstablishmentopeningdate,
                 IsReadyValidInterest = dynamicsApplication.AdoxioIsreadyvalidinterest,
 
+                // LgInName
+                LGNameOfOfficial = dynamicsApplication.AdoxioLgnameofofficial,
+                LGTitlePosition = dynamicsApplication.AdoxioLgtitleposition,
+                LGContactPhone = dynamicsApplication.AdoxioLgcontactphone,
+                LGContactEmail = dynamicsApplication.AdoxioLgcontactemail,
+                LGDecisionSubmissionDate = dynamicsApplication.AdoxioLgdecisionsubmissiondate,
+                LgInName = dynamicsApplication?.AdoxioLocalgovindigenousnationid?.AdoxioName,
+
                 // Catering fields.
 
                 PreviousApplicationDetails = dynamicsApplication.AdoxioPreviouslicenceapplicationdetails,
@@ -375,6 +388,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 LiquorIndustryConnectionsDetails = dynamicsApplication.AdoxioLiquorindustryconnectionsdetails,
 
                 OtherBusinessesDetails = dynamicsApplication.AdoxioOtherbusinesssamelocationdetails
+
             };
 
             // Catering yes / no fields

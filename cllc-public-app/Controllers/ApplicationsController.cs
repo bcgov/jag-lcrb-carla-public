@@ -18,6 +18,7 @@ using Google.Protobuf;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -26,6 +27,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Authorize(Policy = "Business-User")]
     public class ApplicationsController : ControllerBase
     {
+        private readonly IMemoryCache _cache;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
@@ -33,8 +35,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IWebHostEnvironment _env;
         private readonly FileManagerClient _fileManagerClient;
 
-        public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IWebHostEnvironment env)
+        public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IWebHostEnvironment env, IMemoryCache memoryCache)
         {
+            _cache = memoryCache;
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _dynamicsClient = dynamicsClient;
@@ -173,7 +176,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var result = 0;
             if (!string.IsNullOrEmpty(applicantId))
             {
-                var filter = $"_adoxio_applicant_value eq {applicantId} and adoxio_paymentrecieved eq true and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";                
+                var filter = $"_adoxio_applicant_value eq {applicantId} and adoxio_paymentrecieved eq true and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
@@ -223,9 +226,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(adoxioApplications);
         }
 
-        /// GET all applications in Dynamics for the current user
+        /// GET all applications of the given application type in Dynamics for the current user
         [HttpGet("current/by-type/{applicationType}")]
-        public JsonResult GetCurrentUserApplicationsByType(string applicationType)
+        public JsonResult GetCurrentUserLGApprovalApplications(string applicationType)
         {
             var results = new List<ApplicationSummary>();
             // get the current user.
@@ -233,7 +236,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             var filter = $"_adoxio_applicant_value eq {userSettings.AccountId}";
-            var appType = _dynamicsClient.GetApplicationTypeByName("Licensee Changes");
+            var appType = _dynamicsClient.GetApplicationTypeByName(applicationType);
             if (appType != null)
             {
                 filter += $" and _adoxio_applicationtypeid_value eq {appType.AdoxioApplicationtypeid} ";
@@ -259,15 +262,138 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(results);
         }
 
-        
-        /// GET all applications in Dynamics for the current user
-        [HttpGet("ongoing-licensee-application-id")]
-        public IActionResult GetOngoingLicenseeApplicationId()
+        /// GET all local government approval applications in Dynamics for the current user
+        [HttpGet("current/lg-approvals")]
+        public async Task<JsonResult> GetLGApprovalApplications()
         {
+            var results = new List<ViewModels.Application>();
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-            IActionResult result = null;
+
+            try
+            {
+                // get user account
+                var accountId = Utils.GuidUtility.SanitizeGuidString(userSettings.AccountId);
+                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(new Guid(accountId));
+
+                var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
+                filter += $" and statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";
+
+                var expand = new List<string>{
+                    "adoxio_Applicant",
+                    "adoxio_localgovindigenousnationid",
+                    "adoxio_application_SharePointDocumentLocations",
+                    "adoxio_application_adoxio_tiedhouseconnection_Application",
+                    "adoxio_AssignedLicence",
+                    "adoxio_ApplicationTypeId",
+                    "adoxio_LicenceFeeInvoice",
+                    "adoxio_Invoice",
+                    "adoxio_application_SharePointDocumentLocations"
+                };
+
+                var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.ToList();
+                if (applications != null)
+                {
+                    foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in applications)
+                    {
+                        var viewModel = await dynamicsApplication.ToViewModel(_dynamicsClient, _logger);
+                        List<ViewModels.FileSystemItem> resolutionFiles = await FileController.GetListFilesInFolder(dynamicsApplication.AdoxioApplicationid, "application", "LGIN Resolution", _dynamicsClient, _fileManagerClient, _logger);
+                        if(resolutionFiles.Count > 0)
+                        {
+                            viewModel.ResolutionDocsUploaded = true;
+                        }
+                        results.Add(viewModel);
+                    }
+                }
+
+            }
+            catch (HttpOperationException e)
+            {
+                _logger.LogError(e, "Error getting licensee applications by type");
+                throw;
+            }
+            return new JsonResult(results);
+        }
+
+
+        /// <summary>
+        /// all in one function that is used on the OrgStructure ( ApplicationLicenseeChangesComponent ) page to get the initial data.
+        /// This includes:
+        ///   The Application data for the current org structure / licenseeChanges record
+        ///   Application Changelogs for the Application record
+        ///   Count of NonTerminatedApplications
+        ///   Current Hierarachy
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("ongoing-licensee-data")]
+        public async Task<OngoingLicenseeData> GetOngoingLicenseeData()
+        {
+
+
+            OngoingLicenseeData result = new OngoingLicenseeData();
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            try
+            {
+                var application = GetCurrentLicenseeApplication(userSettings);
+
+                if (! string.IsNullOrEmpty (application._adoxioApplicationtypeidValue))
+                {
+                    application.AdoxioApplicationTypeId = await _dynamicsClient.GetApplicationTypeById(application._adoxioApplicationtypeidValue).ConfigureAwait(true); ;
+                    if (application.AdoxioApplicationTypeId != null)
+                    {
+                        var filter = $"_adoxio_applicationtype_value eq { application._adoxioApplicationtypeidValue}";
+                        try
+                        {
+                            var typeContents = _dynamicsClient.Applicationtypecontents.Get(filter: filter).Value;
+                            application.AdoxioApplicationTypeId.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType = typeContents;
+                        }
+                        catch (HttpOperationException e)
+                        {
+                            _logger.LogError(e, "Error getting type contents");
+                        }
+                    }                    
+                }
+
+                result.Application = await application.ToViewModel(_dynamicsClient, _logger).ConfigureAwait(true);
+
+
+
+                result.ChangeLogs = _dynamicsClient.GetApplicationChangeLogs(result.Application.Id, _logger);
+            }
+            catch (HttpOperationException e)
+            {
+                _logger.LogError(e, "Error getting application");
+            }
+
+
+            result.CurrentHierarchy = _dynamicsClient.GetLegalEntityTree(userSettings.AccountId,_logger, _configuration);
+            result.NonTerminatedApplications = _dynamicsClient.GetNotTerminatedCRSApplicationCount(userSettings.AccountId);
+
+            // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
+            result.Licenses = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
+            List<ApplicationLicenseSummary> transterredLicenses = _dynamicsClient.GetPaidLicensesOnTransfer(userSettings.AccountId);
+            result.Licenses.AddRange(transterredLicenses);
+
+            return result;
+        }
+
+        private MicrosoftDynamicsCRMadoxioApplication GetCurrentLicenseeApplication (UserSettings userSettings)
+        {
+            MicrosoftDynamicsCRMadoxioApplication result = null;
+            // get the current user.
+
+            string[] expand = { "adoxio_localgovindigenousnationid",
+                    "adoxio_application_SharePointDocumentLocations",
+                    "adoxio_application_adoxio_tiedhouseconnection_Application",
+                    "adoxio_AssignedLicence",
+                    "adoxio_ApplicationTypeId",
+                    "adoxio_LicenceFeeInvoice",
+                    "adoxio_Invoice",
+                    "adoxio_application_SharePointDocumentLocations"
+                };
 
             // GET all licensee change applications in Dynamics by applicant using the account Id assigned to the user logged in
             var filter = $"_adoxio_applicant_value eq {userSettings.AccountId} and adoxio_paymentrecieved ne true and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
@@ -285,8 +411,60 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                var applications = _dynamicsClient.Applications.Get(filter: filter).Value.OrderBy(app => app.Createdon);
+                var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.OrderBy(app => app.Createdon);
                 var application = applications.FirstOrDefault();
+                if (application != null)
+                {
+                    result = application;
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            catch (HttpOperationException e)
+            {
+                _logger.LogError(e, "Error getting licensee application");
+                result = null;
+            }
+            if (result == null && applicationType != null)
+            {
+                // create one.
+                var account = _dynamicsClient.GetAccountById(userSettings.AccountId);
+                result = new MicrosoftDynamicsCRMadoxioApplication()
+                {
+                    AdoxioApplicanttype = account.AdoxioBusinesstype,
+                    AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId),
+                    // set application type relationship 
+                    AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid)
+                };
+
+                try
+                {
+                    result = _dynamicsClient.Applications.Create(result);
+                    result = _dynamicsClient.GetApplicationByIdWithChildren(result.AdoxioApplicationid).GetAwaiter().GetResult();
+                    
+                }
+                catch (HttpOperationException e)
+                {
+                    _logger.LogError(e, "Error creating licensee application");
+                    result = null;
+                }
+            }
+
+            return result;
+        }
+
+        /// GET all applications in Dynamics for the current user
+        [HttpGet("ongoing-licensee-application-id")]
+        public IActionResult GetOngoingLicenseeApplicationId()
+        {
+            JsonResult result = new JsonResult(null);
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            try
+            {
+                var application = GetCurrentLicenseeApplication(userSettings);               
                 if (application != null)
                 {
                     result = new JsonResult(application.AdoxioApplicationid);
@@ -341,7 +519,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                if (!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication._adoxioApplicantValue))
+                bool allowLGAccess = await CurrentUserIsLGForApplication(dynamicsApplication);
+                if (!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication._adoxioApplicantValue)
+                    && !allowLGAccess)
                 {
                     return new NotFoundResult();
                 }
@@ -357,6 +537,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             return new JsonResult(result);
+        }
+
+        private async Task<bool> CurrentUserIsLGForApplication(MicrosoftDynamicsCRMadoxioApplication application)
+        {
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // get user account
+            var accountId = Utils.GuidUtility.SanitizeGuidString(userSettings.AccountId);
+            MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(new Guid(accountId));
+
+            // make sure the application and account have matching local government values
+            bool isLGForApplication = (application != null && application._adoxioLocalgovindigenousnationidValue == account._adoxioLginlinkidValue);
+            return isLGForApplication;
         }
 
         private string GetApplicationFolderName(MicrosoftDynamicsCRMadoxioApplication application)
@@ -650,7 +844,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Guid adoxio_applicationId = new Guid(id);
             MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationId);
 
-            if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue))
+            bool allowLGAccess = await CurrentUserIsLGForApplication(adoxioApplication);
+            if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue) && !allowLGAccess)
             {
                 return new NotFoundResult();
             }
