@@ -44,7 +44,7 @@ namespace bdd_tests
     [FeatureFile("./E2ECateringApplication_indigenous_nation_transfer_of_ownership.feature")]
     public sealed class E2ECateringApplicationLicenceIndigenousNationTransferOfOwnership : TestBase
     {
-        [Given(@"I am logged in to the dashboard as a (.*)")]
+        [Given(@"I am logged in to the dashboard as an (.*)")]
         public void Given_I_view_the_dashboard(string businessType)
         {
             CheckFeatureFlagsLiquor();
