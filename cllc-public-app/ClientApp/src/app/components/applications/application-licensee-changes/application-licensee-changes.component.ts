@@ -73,11 +73,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     featureFlagService.featureOn('SecurityScreening')
       .subscribe(featureOn => this.securityScreeningEnabled = featureOn);
 
-    this.busy = this.licenseService.getAllCurrentLicenses()
-      .subscribe(data => {
-        this.licenses = data;
-        this.licencesOnFile = (this.licenses && this.licenses.length > 0);
-      });
+    
   }
 
 
@@ -94,67 +90,48 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
 
+    this.loadData();
 
     this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(filter(account => !!account))
       .subscribe((account) => {
         this.account = account;
-        if (!this.licenseeApplicationLoaded) {
-          this.loadLicenseeApplication()
-            .pipe(filter(id => !!id))
-            .subscribe(id => {
-              this.applicationId = id;
-              this.loadData();
-            });
-        }
-        this.licenseeApplicationLoaded = true;
+        
       });
   }
 
   loadData() {
-    this.GetNotTerminatedCRSApplicationCount();
+    this.busy = this.applicationDataService.getOngoingLicenseeData()    
+      .subscribe(data => {
 
-    this.busyPromise = forkJoin(this.applicationDataService.getApplicationById(this.applicationId),
-      this.legalEntityDataService.getApplicationChangeLogs(this.applicationId),
-      this.legalEntityDataService.getCurrentHierachy())
-      .pipe(takeWhile(() => this.componentActive))
-      .toPromise()
-      .then((data: [Application, LicenseeChangeLog[], LegalEntity]) => {
-        this.application = data[0];
-        const currentChangeLogs = data[1] || [];
-        this.currentLegalEntities = data[2];
-        this.thereIsExistingOrgStructure = this.currentLegalEntities.children.length > 0;
+        this.application = data.application;
+        this.applicationId = this.application.id;
+
+        this.form.patchValue(this.application);
+
+        const currentChangeLogs = data.changeLogs || [];
+
+        this.licenses = data.licenses;
+        this.licencesOnFile = (this.licenses && this.licenses.length > 0);
+
+        this.currentLegalEntities = data.currentHierarchy;
+        this.numberOfNonTerminatedApplications = data.nonTerminatedApplications;
+        this.thereIsExistingOrgStructure = this.currentLegalEntities && this.currentLegalEntities.children && this.currentLegalEntities.children.length > 0;
         this.treeRoot = LicenseeChangeLog.processLegalEntityTree(this.currentLegalEntities);
         this.treeRoot.isRoot = true;
         this.treeRoot.applySavedChangeLogs(currentChangeLogs);
 
         this.loadedValue = this.cleanSaveData(this.treeRoot);
 
+        
+
         this.addDynamicContent();
-        this.form.patchValue(this.application);
+
+        this.licenseeApplicationLoaded = true;
       });
   }
 
-  /**
-   * Gets licensee application id. Create the application and return id if it does not exist
-   */
-  loadLicenseeApplication() {
-    return this.applicationDataService.getOngoingLicenseeChangeApplicationId()
-      .pipe(mergeMap(id => {
-        if (id) {
-          return of(id);
-        } else { // create licensee application and return its id
-          const newLicenceApplicationData = <Application>{
-            applicantType: this.account.businessType,
-            applicationType: <ApplicationType>{ name: ApplicationTypeNames.LicenseeChanges },
-            account: this.account,
-          };
-          return this.applicationDataService.createApplication(newLicenceApplicationData)
-            .pipe(switchMap(app => of(app.id)));
-        }
-      }));
-  }
 
   getSaveLabel(): string {
     let label = 'Continue to Application';
@@ -177,25 +154,6 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       disable = true;
     }
     return disable;
-  }
-
-  /**
-   * Gets the number of applications owned by the current user that are not terminated
-   */
-  private GetNotTerminatedCRSApplicationCount() {
-    this.busy =
-      this.applicationDataService.getAllCurrentApplications()
-        .pipe(takeWhile(() => this.componentActive))
-        .subscribe((applications: ApplicationSummary[]) => {
-          // filter out approved applications
-          const notTerminatedApplications =
-            applications.filter(app => {
-              const noneTerminatedCRSApplications: boolean = ['Terminated and refunded'].indexOf(app.applicationStatus) === -1
-                && app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore;
-              return noneTerminatedCRSApplications;
-            });
-          this.numberOfNonTerminatedApplications = notTerminatedApplications.length;
-        });
   }
 
 
