@@ -46,10 +46,10 @@ RUN yum -y install wget nano xorg-x11-xauth java-1.8.0-openjdk git rh-nodejs10-n
 	yum --enablerepo=rhel-7-server-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-dotnet-rpms,rhel-7-server-optional-rpms -y localinstall google-chrome-stable_current_x86_64.rpm && \
 	rm google-chrome-stable_current_x86_64.rpm && \
 	yum clean all -y && \
-    rm -rf /var/cache/yum/* 
+    rm -rf /var/cache/yum/* && \
+    scl enable rh-nodejs10 bash
 
-RUN scl enable rh-nodejs10 bash && \   
-   /opt/rh/rh-nodejs10/root/usr/lib/node_modules/npm/bin/npm install -g @angular/cli && \
+RUN /opt/rh/rh-nodejs10/root/usr/lib/node_modules/npm/bin/npm install -g @angular/cli && \
    /opt/rh/rh-nodejs10/root/usr/lib/node_modules/npm/bin/npm install -g typescript
 
 #	yum -y install firefox; yum clean all
