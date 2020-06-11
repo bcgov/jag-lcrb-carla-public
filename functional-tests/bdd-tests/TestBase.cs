@@ -253,6 +253,119 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
 
+        [And(@"I complete the Rural Agency Store application")]
+        public void CompleteRuralAgencyStoreApplication()
+        {
+            /* 
+            Page Title: Rural Agency Store Information Submission
+            */
+
+            string estName = "Point Ellis Greenhouse";
+            string estAddress = "645 Tyee Rd";
+            string estCity = "Victoria";
+            string estPostal = "V9A6X5";
+            string estPID = "012345678";
+            string estEmail = "test@test.com";
+            string estPhone = "2505555555";
+            string certNumber = "1234567";
+
+            string conGiven = "Given";
+            string conSurname = "Surname";
+            string conRole = "CEO";
+            string conPhone = "2508888888";
+            string conEmail = "contact@email.com";
+
+            System.Threading.Thread.Sleep(9000);
+
+            // enter the establishment name
+            NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
+            estabName.SendKeys(estName);
+
+            // enter the establishment address
+            NgWebElement estabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
+            estabAddress.SendKeys(estAddress);
+
+            // enter the establishment city
+            NgWebElement estabCity = ngDriver.FindElement(By.Id("establishmentAddressCity"));
+            estabCity.SendKeys(estCity);
+
+            // enter the establishment postal code
+            NgWebElement estabPostal = ngDriver.FindElement(By.Id("establishmentAddressPostalCode"));
+            estabPostal.SendKeys(estPostal);
+
+            // enter the PID
+            NgWebElement estabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
+            estabPID.SendKeys(estPID);
+
+            // enter the store email
+            NgWebElement estabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
+            estabEmail.SendKeys(estEmail);
+
+            // enter the store phone number
+            NgWebElement estabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
+            estabPhone.SendKeys(estPhone);
+
+            // enter the Rural Agency Store Certificate Number
+            NgWebElement ruralStoreCertNumber = ngDriver.FindElement(By.Id("certNumber"));
+            ruralStoreCertNumber.SendKeys(certNumber);
+
+            // select the owner checkbox
+            NgWebElement ownerCheckbox = ngDriver.FindElement(By.XPath("//mat-checkbox[@id='mat-checkbox-1']/label/div"));
+            ownerCheckbox.Click();
+
+            // select the owner's valid interest checkbox
+            NgWebElement validInterestCheckbox = ngDriver.FindElement(By.XPath("//mat-checkbox[@id='mat-checkbox-2']/label/div"));
+            validInterestCheckbox.Click();
+
+            // select the zoning checkbox
+            NgWebElement zoningCheckbox = ngDriver.FindElement(By.XPath("//mat-checkbox[@id='mat-checkbox-3']/label/div"));
+            zoningCheckbox.Click();
+
+            // find the upload test files in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload a valid interest document
+            string validInterestPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "valid_interest.pdf");
+            NgWebElement uploadValidInterest = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
+            uploadValidInterest.SendKeys(validInterestPath);
+
+            // upload a floor plan document
+            string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
+            NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+            uploadFloorplan.SendKeys(floorplanPath);
+
+            // enter the first name of the application contact
+            NgWebElement contactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
+            contactGiven.SendKeys(conGiven);
+
+            // enter the last name of the application contact
+            NgWebElement contactSurname = ngDriver.FindElement(By.Id("contactPersonLastName"));
+            contactSurname.SendKeys(conSurname);
+
+            // enter the role of the application contact
+            NgWebElement contactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
+            contactRole.SendKeys(conRole);
+
+            // enter the phone number of the application contact
+            NgWebElement contactPhone = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonPhone]"));
+            contactPhone.SendKeys(conPhone);
+
+            // enter the email of the application contact
+            NgWebElement contactEmail = ngDriver.FindElement(By.Id("contactPersonEmail"));
+            contactEmail.SendKeys(conEmail);
+
+            // click on the authorized to submit checkbox
+            NgWebElement authorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            authorizedSubmit.Click();
+
+            // click on the signature agreement checkbox
+            NgWebElement signatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
+            signatureAgree.Click();
+
+            ClickOnSubmitButton();
+        }
 
         [And(@"I complete the Cannabis Retail Store application")]
         public void CompleteCannabisApplication()
@@ -1095,14 +1208,22 @@ namespace bdd_tests
             if (applicationType == "Catering")
             {
                 // click on the Catering Start Application button
-                NgWebElement startApp_button = ngDriver.FindElement(By.Id("startCatering"));
-                startApp_button.Click();
+                NgWebElement startAppButton = ngDriver.FindElement(By.Id("startCatering"));
+                startAppButton.Click();
             }
 
             if (applicationType == "a Cannabis Retail Store")
             {
-                NgWebElement startApp_button = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
-                startApp_button.Click();
+                // click on the Cannabis Start Application button
+                NgWebElement startAppButton = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
+                startAppButton.Click();
+            }
+
+            if (applicationType == "a Rural Agency Store")
+            {
+                // click on the Rural Store Start Application button
+                NgWebElement startAppButton = ngDriver.FindElement(By.CssSelector("button[id='startRAS']"));
+                startAppButton.Click();
             }
 
             applicationTypeShared = applicationType;
