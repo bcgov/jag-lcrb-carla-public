@@ -432,6 +432,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ViewModels.ApplicationType ApplicationType { get; set; }
 
         public TiedHouseConnection TiedHouse { get; set; }
+        public ViewModels.PoliceJurisdiction PoliceJurisdiction { get; set; }
+        public ViewModels.IndigenousNation IndigenousNation { get; set; }
 
 
         [JsonConverter(typeof(StringEnumConverter))]
@@ -469,6 +471,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ValueNotChanged? RenewalSiteMap { get; set; }
 
         public string IndigenousNationId { get; set; }
+        public string PoliceJurisdictionId { get; set; }
         public string FederalProducerNames { get; set; }
         public string Description1 { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]

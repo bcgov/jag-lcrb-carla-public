@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBase } from '@shared/form-base';
+import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
@@ -14,7 +14,6 @@ import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { Account, TransferAccount } from '@models/account.model';
 import { LicenseDataService } from '@services/license-data.service';
 import { License } from '@models/license.model';
-import { ApplicationHTMLContent } from '../application/application.component';
 
 const ValidationErrorMap = {
   "proposedOwner.accountId": 'Please select the proposed transferee',
