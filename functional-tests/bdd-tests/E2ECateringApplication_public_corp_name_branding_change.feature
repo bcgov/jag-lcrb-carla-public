@@ -20,6 +20,6 @@ Scenario: Pay First Year Catering Licence and Submit Name Branding Change
     And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
     And I click on the licence download link
-    And I request a valid store name or branding change
+    And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page

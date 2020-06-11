@@ -10,6 +10,7 @@ import { AppState } from '@app/app-state/models/app-state';
 import { filter, mergeMap, takeWhile } from 'rxjs/operators';
 import { FormBase } from '@shared/form-base';
 import { Subscription } from 'rxjs';
+import { FeatureFlagService } from '@services/feature-flag.service';
 
 
 @Component({
@@ -32,10 +33,12 @@ export class BceidConfirmationComponent extends FormBase {
   busySubscription: Subscription;
   termsAccepted = false;
   account: Account;
+  lgApprovals: boolean;
 
   constructor(private dynamicsDataService: DynamicsDataService,
     private userDataService: UserDataService,
     private store: Store<AppState>,
+    public featureFlagService: FeatureFlagService,
     private accountDataService: AccountDataService) {
     super();
     // if this passes, this means the user's account exists but it's contact information has not been created.
@@ -49,6 +52,9 @@ export class BceidConfirmationComponent extends FormBase {
         }
       },
         error => { });
+
+    featureFlagService.featureOn('LGApprovals')
+      .subscribe(x => this.lgApprovals = x);
 
   }
 
