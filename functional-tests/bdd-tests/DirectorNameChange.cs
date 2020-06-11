@@ -40,7 +40,8 @@ Scenario: Change director name and pay fee
     And I submit the organization structure
     And I pay the name change fee
     And the director name is now updated
-    Then the account is deleted
+    And the account is deleted
+    Then I see the login page
 */
 
 namespace bdd_tests
@@ -49,92 +50,9 @@ namespace bdd_tests
     public sealed class DirectorNameChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
-        public void And_I_view_the_dashboard(string businessType)
+        public void I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
-        }
-
-        [And(@"the account is deleted")]
-        public void Delete_my_account()
-        {
-            this.CarlaDeleteCurrentAccount();
-        }
-
-        [And(@"I am logged in to the dashboard as a (.*)")]
-        public void And_I_view_the_dashboard2(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-
-        [And(@"I click on the Start Application button for a Cannabis Retail Store")]
-        public void I_start_application()
-        {
-            /* 
-            Page Title: Welcome to Cannabis Licensing
-            */
-
-            // click on the Start Application button
-            NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
-            startApp_button.Click();
-        }
-
-        [And(@"I complete the eligibility disclosure")]
-        public void complete_eligibility_disclosure()
-        {
-            CRSEligibilityDisclosure();
-        }
-
-        [And(@"I review the account profile")]
-        public void review_account_profile()
-        {
-            ReviewAccountProfile();
-        }
-
-        [And(@"I review the organization structure")]
-        public void I_continue_to_organization_review()
-        {
-            ReviewOrgStructure();
-        }
-
-        [And(@"I complete the Cannabis Retail Store application")]
-        public void I_complete_the_application()
-        {
-            CRSApplication();
-        }
-
-        [And(@"I click on the Pay for Application button")]
-        public void click_on_pay()
-        {
-            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
-            pay_button.Click();
-        }
-
-        [And(@"I enter the payment information")]
-        public void enter_payment_info()
-        {
-            MakePayment();
-        }
-
-        [And(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            // click on Return to Dashboard link
-            string retDash = "Return to Dashboard";
-            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
-            returnDash.Click();
-        }
-
-        [And(@"the application is approved")]
-        public void application_is_approved()
-        {
-            // navigate to api/applications/<Application ID>/process
-            ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/applications/{application_ID}/process");
-
-            // wait for the autoamted approval process to run
-            System.Threading.Thread.Sleep(20000);
-
-            // navigate back to dashboard
-            ngDriver.Navigate().GoToUrl($"{baseUri}/dashboard");
         }
 
         [And(@"I click on the Licences tab for a Cannabis Retail Store")]
@@ -194,7 +112,7 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
         }
 
-        [And(@"I review the organization structure")]
+        [And(@"I review the organization structure again")]
         public void review_org_structure()
         {
             System.Threading.Thread.Sleep(5000);
@@ -233,14 +151,6 @@ namespace bdd_tests
             uploadMarriageCert.SendKeys(marriageCertificate);
         }
 
-        [And(@"I submit the organization structure")]
-        public void submit_org_structure()
-        {
-            // click on submit org info button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
-            orgInfoButton.Click();
-        }
-
         [And(@"I pay the name change fee")]
         public void name_change_fee()
         {
@@ -253,22 +163,16 @@ namespace bdd_tests
         [And(@"the director name is now updated")]
         public void director_name_updated()
         {
-            System.Threading.Thread.Sleep(7000);
+            // click on Return to Dashboard link
+            string retDash = "Return to Dashboard";
+            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
+            returnDash.Click();
 
-            this.return_to_dashboard();
-
-            this.review_org_structure();
-
-            System.Threading.Thread.Sleep(7000);
+            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
+            orgInfoButton.Click();
 
             // check that the director name has been updated
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Updated Director')]")).Displayed);
-        }
-
-        [Then(@"the account is deleted")]
-        public void Delete_my_account2()
-        {
-            this.CarlaDeleteCurrentAccount();
         }
     }
 }

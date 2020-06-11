@@ -109,4 +109,14 @@ export class Application {
   isReadyProductNotVisibleOutside: boolean;
   establishmentopeningdate: Date;
   isApplicationComplete: string;
+
+  lGNameOfOfficial: string;
+  lGTitlePosition: string;
+  lGContactPhone: string;
+  lGContactEmail: string;
+  lGApprovalDecision: string;
+  lGDecisionSubmissionDate: Date;
+  resolutionDocsUploaded: boolean;
+
+  applicant: Account;
 }

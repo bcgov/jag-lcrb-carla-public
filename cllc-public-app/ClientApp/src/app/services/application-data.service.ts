@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { DataService } from './data.service';
 import { CovidApplication } from '@models/covid-application.model';
+import { OngoingLicenseeData } from '../models/ongoing-licensee-data';
 
 @Injectable()
 export class ApplicationDataService extends DataService {
@@ -47,10 +48,21 @@ export class ApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getLGApprovalApplications(): Observable<Application[]> {
+    return this.http.get<Application[]>(this.apiPath + 'current/lg-approvals', { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   getOngoingLicenseeChangeApplicationId(): Observable<string> {
     return this.http.get<string>(this.apiPath + 'ongoing-licensee-application-id', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
+
+  getOngoingLicenseeData(): Observable<OngoingLicenseeData> {
+    return this.http.get<OngoingLicenseeData>(this.apiPath + 'ongoing-licensee-data', { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
 
 
   /**
@@ -62,6 +74,7 @@ export class ApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  
 
   /**
    * Cancel the Dynamics Application

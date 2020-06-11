@@ -26,9 +26,10 @@ Scenario: Delete an individual who is both a director and shareholder
     And I enter the same individual as a director and a shareholder
     And I review the organization structure
     And I delete only the director record
-    And I review the organization structure
+    And I click on the Complete Organization Information button
     And only the shareholder record is displayed
-    Then the account is deleted
+    And the account is deleted
+    Then I see the login page
 */
 
 namespace bdd_tests
@@ -40,26 +41,6 @@ namespace bdd_tests
         public void Given_I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
-        }
-
-        [And(@"the account is deleted")]
-        public void Delete_my_account()
-        {
-            this.CarlaDeleteCurrentAccount();
-        }
-
-        [And(@"I am logged in to the dashboard as a (.*)")]
-        public void And_I_view_the_dashboard(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-
-        [And(@"I click on the Complete Organization Information button")]
-        public void complete_org_info()
-        {
-            // click on the complete organzation information button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'COMPLETE ORGANIZATION INFORMATION')]"));
-            orgInfoButton.Click();
         }
 
         [And(@"I enter the same individual as a director and a shareholder")]
@@ -197,13 +178,6 @@ namespace bdd_tests
             NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
             orgInfoButton.Click();
         }
-
-        [And(@"I review the organization structure")]
-        public void review_org_structure2()
-        {
-            // click on complete org info button
-            complete_org_info();
-        }
          
         [And(@"I delete only the director record")]
         public void delete_director_record()
@@ -226,12 +200,6 @@ namespace bdd_tests
             // check that the shareholder email is displayed to confirm remains
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'same@individual2.com')]")).Displayed);
 
-        }
-
-        [Then(@"the account is deleted")]
-        public void Delete_my_account2()
-        {
-            this.CarlaDeleteCurrentAccount();
         }
     }
 }

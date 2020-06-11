@@ -52,42 +52,6 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
-        [And(@"I am logged in to the dashboard as a (.*)")]
-        public void And_I_view_the_dashboard(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-
-        [And(@"I click on the Start Application button for a Cannabis Retail Store")]
-        public void I_start_application()
-        {
-            /* 
-            Page Title: Welcome to Cannabis Licensing
-            */
-
-            // click on the Start Application button
-            NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
-            startApp_button.Click();
-        }
-
-        [And(@"I complete the eligibility disclosure")]
-        public void complete_eligibility_disclosure()
-        {
-            CRSEligibilityDisclosure();
-        }
-
-        [And(@"I review the account profile")]
-        public void review_account_profile()
-        {
-            ReviewAccountProfile();
-        }
-
-        [And(@"I review the organization structure")]
-        public void I_continue_to_organization_review()
-        {
-            ReviewOrgStructure();
-        }
-
         [And(@"I add in multiple nested business shareholders")]
         public void add_multiple_business_shareholders()
         {
@@ -96,77 +60,6 @@ namespace bdd_tests
             business_shareholder_3();
             business_shareholder_4();
             business_shareholder_5();
-        }
-
-        [And(@"I submit the organization structure")]
-        public void submit_org_structure()
-        {
-            SubmitOrgInfoButton();
-        }
-
-        [And(@"I complete the Cannabis Retail Store application")]
-        public void I_complete_the_application()
-        {
-            CRSApplication();    
-        }
-
-        [And(@"I review the security screening requirements")]
-        public void review_security_screening_reqs()
-        {
-            /* 
-            Page Title: Security Screening Requirements
-            */
-
-            ReviewSecurityScreening();
-
-            /*// check for nested personnel - pending LCSD-3126
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz2First KeyPersonnelBiz2Last')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz2First IndividualShareholderBiz2Last')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz3First KeyPersonnelBiz3Last')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz3First IndividualShareholderBiz3Last')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz4First KeyPersonnelBiz4Last')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz4First IndividualShareholderBiz4Last')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz5First KeyPersonnelBiz5Last')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz5First IndividualShareholderBiz5Last')]")).Displayed);*/
-        }
-
-        [And(@"I click on the Pay for Application button")]
-        public void click_on_pay()
-        {
-            NgWebElement pay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
-            pay_button.Click();
-        }
-
-        [And(@"I enter the payment information")]
-        public void enter_payment_info()
-        {
-            MakePayment();
-        }
-
-        [And(@"I return to the dashboard")]
-        public void return_to_dashboard()
-        {
-            /* 
-            Page Title: Payment Approved
-            */
-
-            CRSReturnToDashboard();
-        }
-
-        [And(@"the account is deleted")]
-        public void Delete_my_account()
-        {
-            this.CarlaDeleteCurrentAccount();
-        }
-
-        [Then(@"I see the login page")]
-        public void I_see_login()
-        {
-            /* 
-            Page Title: Apply for a cannabis licence
-            */
-
-            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
 
         public void business_shareholder_2()
@@ -294,6 +187,7 @@ namespace bdd_tests
 
             SharedCalendarDate();
         }
+
         public void business_shareholder_3()
         {
             /********** Business Shareholder #3 **********/
