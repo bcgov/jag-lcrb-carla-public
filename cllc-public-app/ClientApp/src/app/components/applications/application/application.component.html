@@ -228,17 +228,47 @@
               </div>
               <p>&nbsp;</p>
             </section>
-            <!-- RAS Certificate Number -->
+            <!-- RAS Details -->
             <section *ngIf="application?.licenseType === 'Rural Agency'">
-              <h3 class="blue-header">Rural Agency Certificate Number</h3>
-              <div style="flex: 0 0 210px;" class="content-bottom">
-                <app-field label="Rural Agency Certificate Number:"
-                           errorMessage="Please enter a certificate number">
-                  <input type="text" class="form-control" style="width: 200px;" 
-                          id="certNumber">
+              <h3 class="blue-header">Rural Agency Store Details</h3>
+              <div class="content-bottom">
+                <p>Please provide the following details about your Rural Agency Store:</p>
+                <!-- RAS Certificate Number -->
+                <app-field label="Rural Agency Store Certificate Number:" errorMessage="Please enter a certificate number">
+                  <input type="text" class="form-control" style="width: 200px;" id="certNumber" formControlName="description1">
                 </app-field>
+              
+                <section style="width:700px;">
+                  <app-field [valid]="isValidOrNotTouched('isOwner')" [showChevrons]="false"
+                    errorMessage="Please confirm that the current zoning permits manufacturing on the manufacturing site"
+                    style="margin-left:10px; background-color: blue;">
+                    <mat-checkbox formControlName="isOwner">
+                      This information is being submited by the owner of the business in respect of which the licence is to be issued
+                      or will become<br>the owner before the licence is issued.</mat-checkbox>
+                  </app-field>
+                  <app-field [valid]="isValidOrNotTouched('hasValidInterest')" [showChevrons]="false"
+                    errorMessage="Please confirm that the current zoning permits retail sales on the manufacturing site"
+                    style="margin-left:10px;">
+                    <mat-checkbox formControlName="hasValidInterest">
+                      At the time of this information submission, the owner of the business is:
+                      <ul>
+                        <li>The owner of or has an agreement to purchase the place or premises that will form the proposed
+                          establishment, or</li>
+                        <li>The lessee or has a binding offer to lease the place or premises that will form the proposed establishment
+                        </li>
+                      </ul>
+                    </mat-checkbox>
+                  </app-field>
+                  <app-field [valid]="isValidOrNotTouched('willhaveValidInterest')" [showChevrons]="false"
+                    errorMessage="Please confirm that the current zoning permits retail sales on the manufacturing site"
+                    style="margin-left:10px;">
+                    <mat-checkbox formControlName="willhaveValidInterest">
+                      I confirm that current zoning permits retail sales on the manufacturing site.</mat-checkbox>
+                  </app-field>
+                  <p>&nbsp;</p>
+                </section>
               </div>
-              <p>&nbsp;</p>
+
             </section>
 
           </section>

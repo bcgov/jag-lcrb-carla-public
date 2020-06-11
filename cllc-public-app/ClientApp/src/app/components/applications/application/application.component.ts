@@ -184,6 +184,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
       zoningPermitsMFG: ['', []],
       zoningPermitsRetailSales: ['', []],
       isALR: ['', []],
+      isOwner:['',[]],
+      hasValidInterest:['',[]],
+      willhaveValidInterest:['',[]],
       meetsALRRequirements: ['', []],
     });
 
@@ -341,6 +344,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application.applicationType.showDeclarations) {
       this.form.get('authorizedToSubmit').setValidators([this.customRequiredCheckboxValidator()]);
       this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
+    }
+
+    if (this.isRAS()) {
+
+      this.form.get('isOwner').setValidators([Validators.required]);
+      this.form.get('hasValidInterest').setValidators([Validators.required]);    
+      this.form.get('willhaveValidInterest').setValidators([Validators.required]);
+      // use description1 for the certificate number
+      this.form.get('description1').enable();
+      
+
     }
 
     // 03/01/2020 - Disabled until connected grocery store feature is ready
@@ -560,14 +574,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
-            this.saveComplete.emit(true);
-            // redirect to dashboard if the applicationType is FREE
-            if (this.application.applicationType.isFree) {
-              this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-              this.router.navigateByUrl('/dashboard');
-            } else {
+            this.saveComplete.emit(true);                  
+              // Dynamics will determine whether payment is required or not.
+              // if the application is Free, it will not generate an invoice
               this.submitPayment();
-            }
+              // however we need to redirect if the application is Free
+              if (this.application.applicationType.isFree) {
+                this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+                this.router.navigateByUrl('/dashboard');
+              }
           } else if (this.application.applicationType.isFree) { // show error message the save failed and the application is free
             this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
           }
@@ -581,13 +596,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
+    
+    // skipPayment is set via the multi-step application
+    // if the application page is not the last step, we will often not want to collect payment
     if (this.skipPayment) {
       return;
     }
-
+    
     this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(jsonUrl => {
+        console.log("")
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
       }, err => {
