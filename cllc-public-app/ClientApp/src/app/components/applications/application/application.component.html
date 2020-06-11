@@ -206,7 +206,8 @@
             </div>
 
             <!-- Local Government and Police Durisdiction -->
-            <section *ngIf="showFormControl(application?.applicationType?.lGandPoliceSelectors)" appRemoveIfFeatureOff="LGApprovals">
+            <section class="pt-3" *ngIf="showFormControl(application?.applicationType?.lGandPoliceSelectors)" appRemoveIfFeatureOff="LGApprovals">
+              <section class="ngtest-lg-instructions" [innerHTML]="htmlContent?.lGInstructions "></section>
               <app-field label="Local Government/Indigenous Nation" [required]="false"
                 [valid]="isValidOrNotTouched('lgAutoCompleteInput')" errorMessage="Please select value">
                 <input type="text" class="form-control" style="width: 500px;" placeholder=""

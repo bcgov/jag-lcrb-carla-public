@@ -20,6 +20,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ActionText = applicationType.AdoxioActiontext,
                     Category = (ApplicationTypeCategory?)applicationType.AdoxioCategory,
                     ConnectedGroceryStore = (FormControlState?)applicationType.AdoxioConnectedgrocerystore,
+                    LGandPoliceSelectors = (FormControlState?)applicationType.AdoxioLgandpoliceselectors,
                     CurrentEstablishmentAddress = (FormControlState?)applicationType.AdoxioCurrentestablishmentaddress,
                     EstablishmentName = (FormControlState?)applicationType.AdoxioEstablishmentname,
                     EstablishmetNameIsReadOnly = applicationType.AdoxioIslockestablishmentname,
