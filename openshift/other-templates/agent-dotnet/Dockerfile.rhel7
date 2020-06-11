@@ -48,8 +48,9 @@ RUN yum -y install wget nano xorg-x11-xauth java-1.8.0-openjdk git rh-nodejs10-n
 	yum clean all -y && \
     rm -rf /var/cache/yum/* 
 
-RUN /opt/rh/rh-nodejs10/root/usr/lib/node_modules/npm/bin/npm install -g @angular/cli && \
-	/opt/rh/rh-nodejs10/root/usr/lib/node_modules/npm/bin/npm install -g typescript
+RUN scl enable rh-nodejs10 bash && \
+   npm install -g @angular/cli && \
+   npm install -g typescript
 
 #	yum -y install firefox; yum clean all
 
