@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { Application } from '@models/application.model';
-import { FormBase, CanadaPostalRegex } from '@shared/form-base';
+import { FormBase, CanadaPostalRegex, ApplicationHTMLContent } from '@shared/form-base';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { Account } from '@models/account.model';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
@@ -41,13 +41,6 @@ const ServiceHours = [
   '22:45', '23:00'
   // , '23:15', '23:30', '23:45'
 ];
-
-export class ApplicationHTMLContent {
-  title: string;
-  preamble: string;
-  beforeStarting: string;
-  nextSteps: string;
-}
 
 
 @Component({

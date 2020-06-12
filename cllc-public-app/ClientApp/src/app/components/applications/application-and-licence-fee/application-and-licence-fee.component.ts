@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBase } from '@shared/form-base';
+import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
 import { Application } from '@models/application.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription, Observable, Subject, of, forkJoin } from 'rxjs';
@@ -18,7 +18,6 @@ import * as currentApplicationActions from '@app/app-state/actions/current-appli
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { EstablishmentDataService } from '@services/establishment-data.service';
 import { Establishment } from '@models/establishment.model';
-import { ApplicationHTMLContent } from '../application/application.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 
 const ValidationErrorMap = {

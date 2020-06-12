@@ -1,6 +1,6 @@
 
 import { filter, takeWhile, catchError, mergeMap, delay, tap, switchMap } from 'rxjs/operators';
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { Application } from '@models/application.model';
-import { FormBase, CanadaPostalRegex } from '@shared/form-base';
+import { FormBase, CanadaPostalRegex, ApplicationHTMLContent } from '@shared/form-base';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { Account, TransferAccount } from '@models/account.model';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
@@ -45,12 +45,6 @@ const ServiceHours = [
 ];
 
 
-export class ApplicationHTMLContent {
-  title: string;
-  preamble: string;
-  beforeStarting: string;
-  nextSteps: string;
-}
 
 @Component({
   selector: 'app-application',
@@ -68,7 +62,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   @ViewChild('supportingDocuments', { static: false }) supportingDocuments: FileUploaderComponent;
   @ViewChild(ConnectionToNonMedicalStoresComponent, { static: false }) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
   @ViewChild('lgAutoCompleteTrigger', { read: MatAutocompleteTrigger, static: false }) lgAutoComplete: MatAutocompleteTrigger;
-  @ViewChild(MatAutocompleteTrigger, { read: MatAutocompleteTrigger, static: false }) pdAutoComplete: MatAutocompleteTrigger;
+  @ViewChild('pdAutoCompleteTrigger', { read: MatAutocompleteTrigger, static: false }) pdAutoComplete: MatAutocompleteTrigger;
   form: FormGroup;
   savedFormData: any;
   applicationId: string;
@@ -102,10 +96,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
   autocompleteLocalGovernmemts: any[];
   autocompletePoliceDurisdictions: any[];
 
-  get isOpenedByLG(): boolean {
+  get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
-    if (this.account && this.application &&
-      this.account.localGovernmentId && this.application.indigenousNationId &&
+    if (this.account && this.application && this.application.applicant &&
+      this.account.businessType === 'LocalGovernment' &&
+      this.application.applicant.id !== this.account.id && // Application was not made by the LG/IN
+      this.account.localGovernmentId && this.application.indigenousNationId && // make sure these values are not null
       this.account.localGovernmentId === this.application.indigenousNationId) {
       openedByLG = true;
     }
@@ -121,10 +117,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
     public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
+    private cd: ChangeDetectorRef,
     private tiedHouseService: TiedHouseConnectionsDataService,
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService,
-    private accountDataService: AccountDataService,
     private policeJurisdictionDataService: PoliceDurisdictionDataService,
     private localGovDataService: LocalGovernmentDataService
   ) {
@@ -188,19 +184,19 @@ export class ApplicationComponent extends FormBase implements OnInit {
       brewPub: ['', []],
       pipedIn: ['', []],
       neutralGrain: ['', []],
-      lgAutoCompleteInput: ['', []],
-      pdAutoCompleteInput: ['', []],
+      policeJurisdiction: [''],
+      indigenousNation: [''],
       zoningPermitsMFG: ['', []],
       zoningPermitsRetailSales: ['', []],
       isALR: ['', []],
-      isOwner:['',[]],
-      hasValidInterest:['',[]],
-      willhaveValidInterest:['',[]],
+      isOwner: ['', []],
+      hasValidInterest: ['', []],
+      willhaveValidInterest: ['', []],
       meetsALRRequirements: ['', []],
     });
 
 
-    this.form.get('lgAutoCompleteInput').valueChanges
+    this.form.get('indigenousNation').valueChanges
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
           this.autocompleteLocalGovernmemts = [];
@@ -209,10 +205,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       )
       .subscribe(data => {
         this.autocompleteLocalGovernmemts = data;
-        this.lgAutoComplete.openPanel();
+        this.cd.detectChanges();
       });
 
-    this.form.get('pdAutoCompleteInput').valueChanges
+    this.form.get('policeJurisdiction').valueChanges
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
           this.autocompleteLocalGovernmemts = [];
@@ -221,7 +217,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       )
       .subscribe(data => {
         this.autocompletePoliceDurisdictions = data;
-        this.pdAutoComplete.openPanel();
+        this.cd.detectChanges();
       });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((applyAsIN: boolean) => {
@@ -299,8 +295,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
         this.form.patchValue(noNulls);
 
+        if(data.indigenousNation){
+          this.form.get('indigenousNationId').patchValue(data.indigenousNation);
+        }
+
+        if(data.policeJurisdiction){
+          this.form.get('indigenousNationId').patchValue(data.policeJurisdiction);
+        }
+
         // make fields readonly if payment was made or the LG is viewing the application
-        if (data.isPaid || this.isOpenedByLG) {
+        if (data.isPaid || this.isOpenedByLGForApproval) {
           this.form.disable();
         }
         this.savedFormData = this.form.value;
@@ -315,10 +319,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   autocompleteDisplay(item: any) {
-    return item.name;
+    return item && item.name;
   }
 
   private hideFormControlByType() {
+    //add guard
+    if (!(this.application && this.application.applicationType)) {
+      return;
+    }
+
     if (!this.application.applicationType.showPropertyDetails) {
       this.form.get('establishmentAddressStreet').disable();
       this.form.get('establishmentAddressCity').disable();
@@ -384,15 +393,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
     }
 
-    if (this.isRAS()) {
+    if (this.application.applicationType.lGandPoliceSelectors) {
+      this.form.get('indigenousNation').setValidators([Validators.required]);
+      this.form.get('policeJurisdiction').setValidators([Validators.required]);
+    }
 
+    if (this.isRAS()) {
       this.form.get('isOwner').setValidators([Validators.required]);
-      this.form.get('hasValidInterest').setValidators([Validators.required]);    
+      this.form.get('hasValidInterest').setValidators([Validators.required]);
       this.form.get('willhaveValidInterest').setValidators([Validators.required]);
       // use description1 for the certificate number
       this.form.get('description1').enable();
-      
-
     }
 
     // 03/01/2020 - Disabled until connected grocery store feature is ready
@@ -516,7 +527,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   hasType(): boolean {
     // to do, set validation requirements
-  return this.form.get('mfgType').value;
+    return this.form.get('mfgType').value;
   }
 
   isBrewery(): boolean {
@@ -612,18 +623,51 @@ export class ApplicationComponent extends FormBase implements OnInit {
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
-            this.saveComplete.emit(true);                  
-              // Dynamics will determine whether payment is required or not.
-              // if the application is Free, it will not generate an invoice
-              this.submitPayment();
-              // however we need to redirect if the application is Free
-              if (this.application.applicationType.isFree) {
-                this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-                this.router.navigateByUrl('/dashboard');
-              }
+            this.saveComplete.emit(true);
+            // Dynamics will determine whether payment is required or not.
+            // if the application is Free, it will not generate an invoice
+            this.submitPayment();
+            // however we need to redirect if the application is Free
+            if (this.application.applicationType.isFree) {
+              this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+              this.router.navigateByUrl('/dashboard');
+            }
           } else if (this.application.applicationType.isFree) { // show error message the save failed and the application is free
             this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
           }
+        });
+    } else {
+      this.showValidationMessages = true;
+    }
+  }
+
+
+  submitForLGINApproval() {
+    const saveData = this.form.value;
+
+    // Only save if the data is valid
+    if (this.isValid()) {
+      this.busy = forkJoin(
+        this.applicationDataService.updateApplication({ 
+          ...this.application, 
+          ...this.form.value, 
+          indigenousNationId: this.form.value.indigenousNation && this.form.value.indigenousNation.id,
+          policeJurisdictionId: this.form.value.policeJurisdiction &&  this.form.value.policeJurisdiction.id,
+          applicationStatus: 'PendingForLGFNPFeedback' }),
+        this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
+      ).pipe(takeWhile(() => this.componentActive))
+        .pipe(catchError(() => {
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          return of(false);
+        }))
+        .pipe(mergeMap(() => {
+          this.savedFormData = saveData;
+          this.updateApplicationInStore();
+          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          return of(true);
+        })).subscribe(res => {
+          this.saveComplete.emit(true);
+          this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
         });
     } else {
       this.showValidationMessages = true;
@@ -634,13 +678,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
-    
+
     // skipPayment is set via the multi-step application
     // if the application page is not the last step, we will often not want to collect payment
     if (this.skipPayment) {
       return;
     }
-    
+
     this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(jsonUrl => {

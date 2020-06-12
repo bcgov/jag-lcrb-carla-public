@@ -41,6 +41,7 @@ export class ApplicationType {
   showLiquorSitePlan: FormControlState;
   proofofZoning: FormControlState;
   lGandPoliceSelectors: FormControlState;
+  isShowLGINApproval: boolean;
   isFree: boolean;
 
   dynamicsForm: DynamicsForm;
