@@ -37,7 +37,7 @@ namespace Watchdog
                 try
                 {
                     setup.AddWebhookNotification(name, uri,
-                        "{\r\n  \"@context\": \"http://schema.org/extensions\",\r\n  \"@type\": \"MessageCard\",\r\n  \"themeColor\": \"0072C6\",\r\n  \"title\": \"Watchdog Alert: [[LIVENESS]] has failed!\",\r\n  \"text\": \"[[FAILURE]] Click **Learn More** to go to BeatPulseUI Portal\",\r\n  \"potentialAction\": [\r\n    {\r\n      \"@type\": \"OpenUri\",\r\n      \"name\": \"Learn More\",\r\n      \"targets\": [\r\n        { \"os\": \"default\", \"uri\": \"" + watchdogUri + "\" }\r\n      ]\r\n    }\r\n  ]\r\n}",
+                        "{\r\n  \"@context\": \"http://schema.org/extensions\",\r\n  \"@type\": \"MessageCard\",\r\n  \"themeColor\": \"0072C6\",\r\n  \"title\": \"Watchdog Alert: [[LIVENESS]] has failed!\",\r\n  \"text\": \"[[FAILURE]] Click **Learn More** to go to the Watchdog Service\",\r\n  \"potentialAction\": [\r\n    {\r\n      \"@type\": \"OpenUri\",\r\n      \"name\": \"Learn More\",\r\n      \"targets\": [\r\n        { \"os\": \"default\", \"uri\": \"" + watchdogUri + "\" }\r\n      ]\r\n    }\r\n  ]\r\n}",
                         "{\"text\":\"Watchdog Alert: The HealthCheck [[LIVENESS]] is recovered. All is up and running\",\"channel\":\"#general\",\"link_names\": 1,\"username\":\"monkey-bot\",\"icon_emoji\":\":monkey_face\" }"
                         );
                     
