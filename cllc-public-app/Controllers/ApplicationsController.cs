@@ -866,6 +866,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     //remove reference
                     await _dynamicsClient.Applications.DeleteReferenceAsync(item.Id, "adoxio_localgovindigenousnationid");
                 }
+                
+                // Police Jurisdiction association
+                if (!string.IsNullOrEmpty(item.IndigenousNationId))
+                {
+                    adoxioApplication.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", item.PoliceJurisdictionId);
+                }
+                else
+                {
+                    //remove reference
+                    await _dynamicsClient.Applications.DeleteReferenceAsync(item.Id, "adoxio_policejurisdictions");
+                }
 
                 _dynamicsClient.Applications.Update(id, adoxioApplication);
             }
