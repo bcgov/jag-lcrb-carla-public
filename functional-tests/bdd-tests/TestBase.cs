@@ -2005,7 +2005,7 @@ namespace bdd_tests
                 NgWebElement uploadSpecialRightsRes = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
                 uploadSpecialRightsRes.SendKeys(specialRightsRestrictions);
 
-                /********** Key Personnel **********/
+                /********** Key Personnel #1 **********/
 
                 // create the key personnel data
                 string keyPersonnelFirstName = "KeyPersonnel1";
@@ -2013,10 +2013,10 @@ namespace bdd_tests
                 string keyPersonnelTitle = "CTO";
                 string keyPersonnelEmail = "keypersonnel1@privatecorp.com";
 
-                // open key personnel form  
+                // open key personnel #1 form  
                 if (applicationTypeShared == "Catering")
                 {
-                    // open key personnel form   
+                    // open key personnel #1 form   
                     NgWebElement openKeyPersonnelFormCat = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div[4]/section/app-associate-list/div/button"));
                     openKeyPersonnelFormCat.Click();
                 }
@@ -2026,15 +2026,15 @@ namespace bdd_tests
                     openKeyPersonnelForm.Click();
                 }
 
-                // enter key personnel first name
+                // enter key personnel #1 first name
                 NgWebElement uiKeyPersonFirst = ngDriver.FindElement(By.CssSelector("input[formControlName=\"firstNameNew\"]"));
                 uiKeyPersonFirst.SendKeys(keyPersonnelFirstName);
 
-                // enter key personnel last name
+                // enter key personnel #1 last name
                 NgWebElement uiKeyPersonLast = ngDriver.FindElement(By.CssSelector("input[formControlName=\"lastNameNew\"]"));
                 uiKeyPersonLast.SendKeys(keyPersonnelLastName);
 
-                // select key personnel role
+                // select key personnel #1 role
                 if (applicationTypeShared == "Catering")
                 {
                     NgWebElement uiKeyPersonRoleCat = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[3]"));
@@ -2046,22 +2046,22 @@ namespace bdd_tests
                     uiKeyPersonRole.Click();
                 }
 
-                // enter key personnel title
+                // enter key personnel #1 title
                 NgWebElement uiKeyPersonTitle = ngDriver.FindElement(By.CssSelector("input[formControlName=\"titleNew\"]"));
                 uiKeyPersonTitle.SendKeys(keyPersonnelTitle);
 
-                // enter key personnel email
+                // enter key personnel #1 email
                 NgWebElement uiKeyPersonEmail = ngDriver.FindElement(By.CssSelector("input[formControlName=\"emailNew\"]"));
                 uiKeyPersonEmail.SendKeys(keyPersonnelEmail);
 
-                // enter key personnel DOB
+                // enter key personnel #1 DOB
                 NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.CssSelector("input[formControlName=\"dateofBirthNew\"]"));
                 openKeyPersonnelDOB.Click();
 
                 // select the date
                 SharedCalendarDate();
 
-                /********** Individual Shareholder **********/
+                /********** Individual Shareholder #1 **********/
 
                 // create the shareholder data
                 string shareholderFirstName = "IndividualShareholder1";
@@ -2069,148 +2069,148 @@ namespace bdd_tests
                 string shareholderVotingShares = "500";
                 string shareholderEmail = "individualshareholder1@privatecorp.com";
 
-                // open shareholder form
+                // open shareholder #1 form
                 NgWebElement uiOpenShare = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div[5]/section[1]/app-associate-list/div/button"));
                 uiOpenShare.Click();
 
-                // enter shareholder first name
+                // enter shareholder #1 first name
                 NgWebElement uiShareFirst = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='IndividualShareholder'] input[formControlName=\"firstNameNew\"]"));
                 uiShareFirst.SendKeys(shareholderFirstName);
 
-                // enter shareholder last name
+                // enter shareholder #1 last name
                 NgWebElement uiShareLast = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='IndividualShareholder'] input[formControlName='lastNameNew']"));
                 uiShareLast.SendKeys(shareholderLastName);
 
-                // enter number of voting shares
+                // enter shareholder #1 number of voting shares
                 NgWebElement uiShareVotes = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='IndividualShareholder'] input[formControlName='numberofSharesNew']"));
                 uiShareVotes.SendKeys(shareholderVotingShares);
 
-                // enter shareholder email
+                // enter shareholder #1 email
                 NgWebElement uiShareEmail = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='IndividualShareholder'] input[formControlName='emailNew']"));
                 uiShareEmail.SendKeys(shareholderEmail);
 
-                // enter shareholder DOB
+                // enter shareholder #1 DOB
                 NgWebElement uiCalendarS1 = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='IndividualShareholder'] input[formControlName='dateofBirthNew']"));
                 uiCalendarS1.Click();
 
                 // select the date
                 SharedCalendarDate();
 
-                /********** Business Shareholder **********/
+                /********** Business Shareholder #1 **********/
 
                 // create the business shareholder data
                 string businessName = "Business Shareholder 1";
                 string businessVotingShares = "50";
                 string businessEmail = "business@shareholder1.com";
 
-                // open business shareholder form    
+                // open business shareholder #1 form    
                 NgWebElement uiOpenShareBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div[5]/section[2]/app-associate-list/div/button"));
                 uiOpenShareBiz.Click();
 
-                // enter business name
+                // enter business shareholder #1 name
                 NgWebElement uiShareFirstBiz = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] input[formControlName='businessNameNew']"));
                 uiShareFirstBiz.SendKeys(businessName);
 
-                // enter business voting shares
+                // enter business shareholder #1 voting shares
                 NgWebElement uiShareVotesBiz = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] input[formControlName='numberofSharesNew']"));
                 uiShareVotesBiz.SendKeys(businessVotingShares);
 
-                // select the business type
+                // select the business shareholder #1 type
                 NgWebElement uiShareBizType = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr/td[3]/app-field/section/div/section/select/option[2]"));
                 uiShareBizType.Click();
 
-                // enter business shareholder email
+                // enter business shareholder #1 email
                 NgWebElement uiShareEmailBiz = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] input[formControlName='emailNew']"));
                 uiShareEmailBiz.SendKeys(businessEmail);
 
-                // select the business shareholder confirm button
+                // select the business shareholder #1 confirm button
                 NgWebElement uiShareBizConfirmButton = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div[5]/section[2]/app-associate-list/div/table/tr/td[5]/i[1]/span"));
                 uiShareBizConfirmButton.Click();
 
-                // upload a notice of articles document for business shareholder
+                // upload a notice of articles document for business shareholder #1 
                 string noticeOfArticlesBiz = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
                 NgWebElement uploadNoticeofArticlesBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
                 uploadNoticeofArticlesBiz.SendKeys(noticeOfArticlesBiz);
 
-                // upload a central securities register document for business shareholder
+                // upload a central securities register document for business shareholder #1 
                 string centralSecuritiesRegisterBiz = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "central_securities_register.pdf");
                 NgWebElement uploadCentralSecRegBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
                 uploadCentralSecRegBiz.SendKeys(centralSecuritiesRegisterBiz);
 
-                // upload a special rights and restrictions document for business shareholder
+                // upload a special rights and restrictions document for business shareholder #1 
                 string specialRightsRestrictionsBiz = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "special_rights_restrictions.pdf");
                 NgWebElement uploadSpecialRightsResBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[18]"));
                 uploadSpecialRightsResBiz.SendKeys(specialRightsRestrictionsBiz);
 
-                /********** Business Shareholder - Key Personnel **********/
+                /********** Business Shareholder #1 - Key Personnel **********/
 
-                // create business shareholder key personnel data
+                // create business shareholder #1 key personnel data
                 string keyPersonnelFirstNameBiz = "KeyPersonnel2";
                 string keyPersonnelLastNameBiz = "BizShareholderPrivateCorp";
                 string keyPersonnelTitleBiz = "Event Planner";
                 string keyPersonnelEmailBiz = "keypersonnel2bizshareholder@privatecorp.com";
 
-                // open business shareholder > key personnel form
+                // open business shareholder #1 > key personnel form
                 NgWebElement openKeyPersonnelFormBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section/app-associate-list/div/button"));
                 openKeyPersonnelFormBiz.Click();
 
-                // enter business shareholder > key personnel first name
+                // enter business shareholder #1 > key personnel first name
                 NgWebElement uiKeyPersonFirstBiz = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] app-associate-list[changetypesuffix='Leadership'] input[formcontrolname='firstNameNew']"));
                 uiKeyPersonFirstBiz.SendKeys(keyPersonnelFirstNameBiz);
 
-                // enter business shareholder > key personnel last name
+                // enter business shareholder #1 > key personnel last name
                 NgWebElement uiKeyPersonLastBiz = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] app-associate-list[changetypesuffix='Leadership'] input[formControlName='lastNameNew']"));
                 uiKeyPersonLastBiz.SendKeys(keyPersonnelLastNameBiz);
 
-                // select business shareholder > key personnel role
+                // select business shareholder #1 > key personnel role
                 NgWebElement uiKeyPersonRoleBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[3]/app-field/section/div/section/table/tr/td[1]/input[1]"));
                 uiKeyPersonRoleBiz.Click();
 
-                // enter business shareholder > key personnel title
+                // enter business shareholder #1 > key personnel title
                 NgWebElement uiKeyPersonTitleBiz = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] app-associate-list[changetypesuffix='Leadership'] input[formControlName='titleNew']"));
                 uiKeyPersonTitleBiz.SendKeys(keyPersonnelTitleBiz);
 
-                // enter business shareholder > key personnel email 
+                // enter business shareholder #1 > key personnel email 
                 NgWebElement uiKeyPersonEmailBiz = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] app-associate-list[changetypesuffix='Leadership'] input[formControlName='emailNew']"));
                 uiKeyPersonEmailBiz.SendKeys(keyPersonnelEmailBiz);
 
-                // enter business shareholder > key personnel DOB
+                // enter business shareholder #1 > key personnel DOB
                 NgWebElement uiKeyPersonnelDOB1Biz1 = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] app-associate-list[changetypesuffix='Leadership'] input[formControlName='dateofBirthNew']"));
                 uiKeyPersonnelDOB1Biz1.Click();
 
                 // select the date
                 SharedCalendarDate();
 
-                /********** Business Shareholder - Individual Shareholder **********/
+                /********** Business Shareholder #1 - Individual Shareholder **********/
 
-                // create the business shareholder > individual shareholder data
+                // create the business shareholder #1 > individual shareholder data
                 string shareholderFirstNameBiz = "IndividualShareholder2";
                 string shareholderLastNameBiz = "BizShareholderPrivateCorp";
                 string shareholderVotingSharesBiz = "500";
                 string shareholderEmailBiz = "individualshareholder2bizshareholder@privatecorp.com";
 
-                // open business shareholder > individual shareholder form
+                // open business shareholder #1 > individual shareholder form
                 NgWebElement uiOpenIndyShareBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[5]/section[1]/app-associate-list/div/button"));
                 uiOpenIndyShareBiz.Click();
 
-                // enter business shareholder > individual shareholder first name
+                // enter business shareholder #1 > individual shareholder first name
                 NgWebElement uiIndyShareFirstBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/app-field/section/div[1]/section/input"));
                 uiIndyShareFirstBiz.SendKeys(shareholderFirstNameBiz);
 
-                // enter business shareholder > individual shareholder last name
+                // enter business shareholder #1 > individual shareholder last name
                 NgWebElement uiIndyShareLastBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/app-field/section/div[1]/section/input"));
                 uiIndyShareLastBiz.SendKeys(shareholderLastNameBiz);
 
-                // enter business shareholder > individual number of voting shares
+                // enter business shareholder #1 > individual number of voting shares
                 NgWebElement uiIndyShareVotesBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/div/input"));
                 uiIndyShareVotesBiz.SendKeys(shareholderVotingSharesBiz);
 
-                // enter business shareholder > individual shareholder email
+                // enter business shareholder #1 > individual shareholder email
                 NgWebElement uiIndyShareEmailBiz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[4]/app-field/section/div[1]/section/input"));
                 uiIndyShareEmailBiz.SendKeys(shareholderEmailBiz);
 
-                // enter business shareholder > individual shareholder DOB
-                NgWebElement uiCalendarIndyS1Biz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input"));
+                // enter business shareholder #1 > individual shareholder DOB
+                NgWebElement uiCalendarIndyS1Biz = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[5]/app-field/section/div[1]/section/input_18"));
                 uiCalendarIndyS1Biz.Click();
 
                 // select the date
