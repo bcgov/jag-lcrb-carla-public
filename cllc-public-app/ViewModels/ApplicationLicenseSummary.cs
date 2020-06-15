@@ -98,5 +98,16 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string ThirdPartyOperatorAccountName { get; set; }
         public string ThirdPartyOperatorAccountId { get; set; }
         public List<string> Endorsements { get; set; }
+
+        public string RepresentativeFullName { get; set; }
+        public string RepresentativePhoneNumber { get; set; }
+        public string RepresentativeEmail { get; set; }
+        public bool? RepresentativeCanSubmitPermanentChangeApplications { get; set; }
+        public bool? RepresentativeCanSignTemporaryChangeApplications { get; set; }
+        public bool? RepresentativeCanObtainLicenceInformation { get; set; }
+        public bool? RepresentativeCanSignGroceryStoreProofOfSale { get; set; }
+        public bool? RepresentativeCanAttendEducationSessions { get; set; }
+        public bool? RepresentativeCanAttendComplianceMeetings { get; set; }
+        public bool? RepresentativeCanRepresentAtHearings { get; set; }
     }
 }
