@@ -71,6 +71,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? ShowLiquorDeclarations { get; set; }
         
         public bool? ShowDescription1 { get; set; }
+        
+        public bool? IsShowLGINApproval { get; set; }
 
         public LicenseType LicenseType { get; set; }
 
