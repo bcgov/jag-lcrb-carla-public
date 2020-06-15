@@ -95,6 +95,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   dynamicsForm: DynamicsForm;
   autocompleteLocalGovernmemts: any[];
   autocompletePoliceDurisdictions: any[];
+  LGApprovalsFeatureIsOn: boolean;
 
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
@@ -127,6 +128,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     super();
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
     this.route.paramMap.subscribe(pmap => this.mode = pmap.get('mode'));
+
+    this.featureFlagService.featureOn('LGApprovals')
+      .subscribe(featureOn => this.LGApprovalsFeatureIsOn = featureOn);
   }
 
   ngOnInit() {
@@ -295,11 +299,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
         this.form.patchValue(noNulls);
 
-        if(data.indigenousNation){
+        if (data.indigenousNation) {
           this.form.get('indigenousNationId').patchValue(data.indigenousNation);
         }
 
-        if(data.policeJurisdiction){
+        if (data.policeJurisdiction) {
           this.form.get('indigenousNationId').patchValue(data.policeJurisdiction);
         }
 
@@ -393,7 +397,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
     }
 
-    if (this.application.applicationType.lGandPoliceSelectors) {
+    if (this.application.applicationType.lGandPoliceSelectors && this.LGApprovalsFeatureIsOn) {
       this.form.get('indigenousNation').setValidators([Validators.required]);
       this.form.get('policeJurisdiction').setValidators([Validators.required]);
     }
@@ -648,12 +652,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
     // Only save if the data is valid
     if (this.isValid()) {
       this.busy = forkJoin(
-        this.applicationDataService.updateApplication({ 
-          ...this.application, 
-          ...this.form.value, 
+        this.applicationDataService.updateApplication({
+          ...this.application,
+          ...this.form.value,
           indigenousNationId: this.form.value.indigenousNation && this.form.value.indigenousNation.id,
-          policeJurisdictionId: this.form.value.policeJurisdiction &&  this.form.value.policeJurisdiction.id,
-          applicationStatus: 'PendingForLGFNPFeedback' }),
+          policeJurisdictionId: this.form.value.policeJurisdiction && this.form.value.policeJurisdiction.id,
+          applicationStatus: 'PendingForLGFNPFeedback'
+        }),
         this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
       ).pipe(takeWhile(() => this.componentActive))
         .pipe(catchError(() => {
