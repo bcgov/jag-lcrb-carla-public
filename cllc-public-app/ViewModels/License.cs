@@ -37,18 +37,4 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public List<string> endorsements { get; set; }
     }
-
-    public class LicenseRepresentative
-    {
-        public string FullName { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Email { get; set; }
-        public bool? CanSubmitPermanentChangeApplications { get; set; }
-        public bool? CanSignTemporaryChangeApplications { get; set; }
-        public bool? CanObtainLicenceInformation { get; set; }
-        public bool? CanSignGroceryStoreProofOfSale { get; set; }
-        public bool? CanAttendEducationSessions { get; set; }
-        public bool? CanAttendComplianceMeetings { get; set; }
-        public bool? CanRepresentAtHearings { get; set; }
-    }
 }
