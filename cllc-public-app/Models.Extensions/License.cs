@@ -120,7 +120,17 @@ namespace Gov.Lclb.Cllb.Public.Models
                 AllowedActions = new List<ApplicationType>(),
                 TransferRequested = (TransferRequested?)licence.AdoxioTransferrequested,
                 ThirdPartyOperatorAccountId = licence._adoxioThirdpartyoperatoridValue,
-                TPORequested = (TPORequested?)licence.AdoxioTporequested // indicate whether a third party operator app has been requested
+                TPORequested = (TPORequested?)licence.AdoxioTporequested, // indicate whether a third party operator app has been requested
+                RepresentativeFullName = licence.AdoxioRepresentativename,
+                RepresentativeEmail = licence.AdoxioRepresentativeemail,
+                RepresentativePhoneNumber = licence.AdoxioRepresentativephone,
+                RepresentativeCanSubmitPermanentChangeApplications = licence.AdoxioCansubmitpermanentchangeapplications,
+                RepresentativeCanSignTemporaryChangeApplications = licence.AdoxioCansigntemporarychangeapplications,
+                RepresentativeCanObtainLicenceInformation = licence.AdoxioCanobtainlicenceinformation,
+                RepresentativeCanSignGroceryStoreProofOfSale = licence.AdoxioCansigngrocerystoreproofofsales,
+                RepresentativeCanAttendEducationSessions = licence.AdoxioCanattendeducationsessions,
+                RepresentativeCanAttendComplianceMeetings = licence.AdoxioCanattendcompliancemeetings,
+                RepresentativeCanRepresentAtHearings = licence.AdoxioCanrepresentathearings
             };
 
             if(licence.AdoxioThirdPartyOperatorId != null){
@@ -173,28 +183,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             
 
             return licenseSummary;
-        }
-    }
-
-    public static class LicenseRepresentativeExtensions
-    {
-        public static LicenseRepresentative ToViewModel(this MicrosoftDynamicsCRMadoxioLicences dynamicsLicense)
-        {
-            LicenseRepresentative rep = new LicenseRepresentative()
-            {
-                FullName = dynamicsLicense.AdoxioRepresentativename,
-                PhoneNumber = dynamicsLicense.AdoxioRepresentativephone,
-                Email = dynamicsLicense.AdoxioRepresentativeemail,
-                CanSubmitPermanentChangeApplications = dynamicsLicense.AdoxioCansubmitpermanentchangeapplications,
-                CanSignTemporaryChangeApplications = dynamicsLicense.AdoxioCansigntemporarychangeapplications,
-                CanObtainLicenceInformation = dynamicsLicense.AdoxioCanobtainlicenceinformation,
-                CanSignGroceryStoreProofOfSale = dynamicsLicense.AdoxioCansigntemporarychangeapplications,
-                CanAttendEducationSessions = dynamicsLicense.AdoxioCanattendeducationsessions,
-                CanAttendComplianceMeetings = dynamicsLicense.AdoxioCanattendcompliancemeetings,
-                CanRepresentAtHearings = dynamicsLicense.AdoxioCanrepresentathearings
-            };
-
-            return rep;
         }
     }
 }
