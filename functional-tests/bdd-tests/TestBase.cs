@@ -2370,7 +2370,7 @@ namespace bdd_tests
                 uploadPartnershipAgreement.SendKeys(partnershipPath);
 
                 // open partner row
-                NgWebElement uiPartnerRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div[3]/section[1]/app-associate-list/div/button"));
+                NgWebElement uiPartnerRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] button"));
                 uiPartnerRow.Click();
 
                 // enter partner first name
@@ -2397,7 +2397,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // open business partner row
-                NgWebElement openPartnerRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div[3]/section[2]/app-associate-list/div/button"));
+                NgWebElement openPartnerRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] button"));
                 openPartnerRow.Click();
 
                 // create business partner info
@@ -2431,7 +2431,7 @@ namespace bdd_tests
                 uploadPartnership2Agreement.SendKeys(partnershipPath2);
 
                 // open individual partner 2 row
-                NgWebElement openPartner2Row = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section[1]/app-associate-list/div/button"));
+                NgWebElement openPartner2Row = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] button"));
                 openPartner2Row.Click();
 
                 // create individual partner 2 info
