@@ -76,6 +76,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(licence.ToViewModel(_dynamicsClient));
         }
 
+        [HttpPut("representative/{id}")]
+        public ActionResult UpdateLicenseeRepresentative([FromBody] ViewModels.LicenseRepresentative item, string id)
+        {
+            if (id != item.id)
+            {
+                return BadRequest();
+            }
+        }
 
         [HttpPost("cancel-transfer")]
         public ActionResult CancelTransfer(LicenceTransfer item)
