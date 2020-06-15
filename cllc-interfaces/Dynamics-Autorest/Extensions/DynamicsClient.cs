@@ -98,6 +98,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                     "adoxio_ApplicationTypeId",
                     "adoxio_LicenceFeeInvoice",
                     "adoxio_Invoice",
+                    "adoxio_localgovindigenousnationid",
+                    "adoxio_PoliceJurisdictionId",
                     "adoxio_application_SharePointDocumentLocations"
                 };
 
