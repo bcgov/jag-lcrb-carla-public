@@ -29,7 +29,28 @@ namespace Watchdog
             
         }
     }
-}
+
+        public static void AddWebHookIfExists(this HealthChecks.UI.Configuration.Settings setup, string name, string uri, string watchdogUri)
+        {
+            if (!string.IsNullOrEmpty(uri))
+            {
+                try
+                {
+                    setup.AddWebhookNotification(name, uri,
+                        "{\r\n  \"@context\": \"http://schema.org/extensions\",\r\n  \"@type\": \"MessageCard\",\r\n  \"themeColor\": \"0072C6\",\r\n  \"title\": \"Watchdog Alert: [[LIVENESS]] has failed!\",\r\n  \"text\": \"[[FAILURE]] Click **Learn More** to go to the Watchdog Service\",\r\n  \"potentialAction\": [\r\n    {\r\n      \"@type\": \"OpenUri\",\r\n      \"name\": \"Learn More\",\r\n      \"targets\": [\r\n        { \"os\": \"default\", \"uri\": \"" + watchdogUri + "\" }\r\n      ]\r\n    }\r\n  ]\r\n}",
+                        "{\"text\":\"Watchdog Alert: The HealthCheck [[LIVENESS]] is recovered. All is up and running\",\"channel\":\"#general\",\"link_names\": 1,\"username\":\"monkey-bot\",\"icon_emoji\":\":monkey_face\" }"
+                        );
+                    
+                    
+                }
+                catch (Exception)
+                {
+
+                }
+
+            }
+        }
+    }
     public class Startup
     {
 
@@ -68,7 +89,7 @@ namespace Watchdog
                 setup.AddHealthCheckEndpointIfExists("Org Book", Configuration["ORG_BOOK_URI"]);
                 setup.AddHealthCheckEndpointIfExists("SPICE/CARLA Sync", Configuration["SPICE_SYNC_URI"]);
 
-                //setup.AddWebhookNotification("webhook1", uri: "http://httpbin.org/status/200?code=ax3rt56s", payload: "{...}");
+                setup.AddWebHookIfExists("Teams", Configuration["TEAMS_WEB_HOOK"], Configuration["WATCHDOG_URI"]);                
             });
 
            
