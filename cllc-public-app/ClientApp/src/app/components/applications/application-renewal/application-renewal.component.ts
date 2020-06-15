@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { Application } from '@models/application.model';
-import { FormBase } from '@shared/form-base';
+import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
 import { Account } from '@models/account.model';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
@@ -47,13 +47,6 @@ const ValidationErrorMap = {
   authorizedToSubmit: 'Please affirm that you are authorized to submit the application',
   signatureAgreement: 'Please affirm that all of the information provided for this application is true and complete',
 };
-
-class ApplicationHTMLContent {
-  title: string;
-  preamble: string;
-  beforeStarting: string;
-  nextSteps: string;
-}
 
 
 @Component({

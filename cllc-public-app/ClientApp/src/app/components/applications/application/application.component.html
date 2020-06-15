@@ -5,8 +5,8 @@
 
       <div [formGroup]="form" style="padding-left: 45px; position: relative">
         <!-- Title -->
-        <h1 class="ngtest-page-title" *ngIf="!this.openedByLG">{{ htmlContent?.title }}</h1>
-        <h1 class="ngtest-page-title" *ngIf="this.openedByLG">Provide Comment on Application</h1>
+        <h1 class="ngtest-page-title" *ngIf="!this.isOpenedByLGForApproval">{{ htmlContent?.title }}</h1>
+        <h1 class="ngtest-page-title" *ngIf="this.isOpenedByLGForApproval">Provide Comment on Application</h1>
       </div>
 
       <div [formGroup]="form" class="application-wrapper">
@@ -137,9 +137,11 @@
             </h3>
 
             <div class="ngtest-new-address content-bottom"
-                 *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
-              <p *ngIf="application?.licenseType !== 'Rural Agency'">The proposed location of the licenced establishment:</p>
-              <p *ngIf="application?.licenseType === 'Rural Agency'">Include any information necessary for finding the site (i.e. route number, mile marker, etc.).</p>
+              *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
+              <p *ngIf="application?.licenseType !== 'Rural Agency'">The proposed location of the licenced
+                establishment:</p>
+              <p *ngIf="application?.licenseType === 'Rural Agency'">Include any information necessary for finding the
+                site (i.e. route number, mile marker, etc.).</p>
               <address class="row">
                 <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
                   [valid]="isValidOrNotTouched('establishmentAddressStreet')"
@@ -206,11 +208,15 @@
             </div>
 
             <!-- Local Government and Police Durisdiction -->
-            <section *ngIf="showFormControl(application?.applicationType?.lGandPoliceSelectors)" appRemoveIfFeatureOff="LGApprovals">
+            <section class="pt-3" *ngIf="showFormControl(application?.applicationType?.lGandPoliceSelectors)"
+              appRemoveIfFeatureOff="LGApprovals">
+
+              <section class="ngtest-lg-instructions" [innerHTML]="htmlContent?.lGInstructions "></section>
+
               <app-field label="Local Government/Indigenous Nation" [required]="false"
-                [valid]="isValidOrNotTouched('lgAutoCompleteInput')" errorMessage="Please select value">
+                [valid]="isValidOrNotTouched('indigenousNation')" errorMessage="Please select value">
                 <input type="text" class="form-control" style="width: 500px;" placeholder=""
-                  formControlName="lgAutoCompleteInput" [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger>
+                  formControlName="indigenousNation" [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger>
                 <mat-autocomplete #lgAutoCompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
                   <mat-option *ngFor="let item of autocompleteLocalGovernmemts" [value]="item">
                     {{item.name}}
@@ -218,15 +224,18 @@
                 </mat-autocomplete>
               </app-field>
 
-              <app-field label="Police Durisdiction" [required]="false"
-                [valid]="isValidOrNotTouched('pdAutoCompleteInput')" errorMessage="Please select value">
+              <app-field label="Police Jurisdiction" [required]="false"
+                [valid]="isValidOrNotTouched('policeJurisdiction')" errorMessage="Please select value">
                 <input type="text" class="form-control" style="width: 500px;" placeholder=""
-                  formControlName="pdAutoCompleteInput" [matAutocomplete]="pdAutocompleteBox" #pdAutoComplete>
-                <mat-autocomplete #pdAutocompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
-                  <mat-option *ngFor="let item of autocompletePoliceDurisdictions" [value]="item">
-                    {{item.name}}
-                  </mat-option>
-                </mat-autocomplete>
+                  formControlName="policeJurisdiction" [matAutocomplete]="pdAutocompleteBox" #pdAutoCompleteTrigger>
+                <div class="position-relative">
+
+                  <mat-autocomplete #pdAutocompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
+                    <mat-option *ngFor="let item of autocompletePoliceDurisdictions" [value]="item">
+                      {{item.name}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </div>
               </app-field>
             </section>
 
@@ -244,11 +253,10 @@
               </div>
               <div style="flex: 0 0 210px;" class="content-bottom">
                 <app-field label="Store Phone" [required]="false" [valid]="isValidOrNotTouched('establishmentPhone')"
-                           errorMessage="Please enter a phone number ">
+                  errorMessage="Please enter a phone number ">
                   <input type="text" class="form-control" style="width: 200px;" mask="(000) 000-0000" autocomplete="tel"
-                         [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
-                         formControlName="establishmentPhone"
-                         id="establishmentPhone">
+                    [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
+                    formControlName="establishmentPhone" id="establishmentPhone">
                 </app-field>
               </div>
               <p>&nbsp;</p>
@@ -259,16 +267,19 @@
               <div class="content-bottom">
                 <p>Please provide the following details about your Rural Agency Store:</p>
                 <!-- RAS Certificate Number -->
-                <app-field label="Rural Agency Store Certificate Number:" errorMessage="Please enter a certificate number">
-                  <input type="text" class="form-control" style="width: 200px;" id="certNumber" formControlName="description1">
+                <app-field label="Rural Agency Store Certificate Number:"
+                  errorMessage="Please enter a certificate number">
+                  <input type="text" class="form-control" style="width: 200px;" id="certNumber"
+                    formControlName="description1">
                 </app-field>
-              
+
                 <section style="width:700px;">
                   <app-field [valid]="isValidOrNotTouched('isOwner')" [showChevrons]="false"
                     errorMessage="Please confirm that the current zoning permits manufacturing on the manufacturing site"
                     style="margin-left:10px; background-color: blue;">
                     <mat-checkbox formControlName="isOwner">
-                      This information is being submited by the owner of the business in respect of which the licence is to be issued
+                      This information is being submited by the owner of the business in respect of which the licence is
+                      to be issued
                       or will become<br>the owner before the licence is issued.</mat-checkbox>
                   </app-field>
                   <app-field [valid]="isValidOrNotTouched('hasValidInterest')" [showChevrons]="false"
@@ -277,9 +288,11 @@
                     <mat-checkbox formControlName="hasValidInterest">
                       At the time of this information submission, the owner of the business is:
                       <ul>
-                        <li>The owner of or has an agreement to purchase the place or premises that will form the proposed
+                        <li>The owner of or has an agreement to purchase the place or premises that will form the
+                          proposed
                           establishment, or</li>
-                        <li>The lessee or has a binding offer to lease the place or premises that will form the proposed establishment
+                        <li>The lessee or has a binding offer to lease the place or premises that will form the proposed
+                          establishment
                         </li>
                       </ul>
                     </mat-checkbox>
@@ -378,43 +391,44 @@
                   I confirm that current zoning permits retail sales on the manufacturing site.</mat-checkbox>
               </app-field>
               <div>
-              <table>
-                <tr>
-                  <td class="primary">
-                    <div class="question-label">
-                      Is this manufacturing site part of the Agricultural Land Reserve (ALR)?
-                    </div>
-                  </td>
-                  <td>
-                    <mat-button-toggle-group formControlName="isALR" aria-label="Font Style">
-                      <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                      <mat-button-toggle value="No">No</mat-button-toggle>
-                    </mat-button-toggle-group>
-                  </td>
-                </tr>
-              </table>
-            </div>
+                <table>
+                  <tr>
+                    <td class="primary">
+                      <div class="question-label">
+                        Is this manufacturing site part of the Agricultural Land Reserve (ALR)?
+                      </div>
+                    </td>
+                    <td>
+                      <mat-button-toggle-group formControlName="isALR" aria-label="Font Style">
+                        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                        <mat-button-toggle value="No">No</mat-button-toggle>
+                      </mat-button-toggle-group>
+                    </td>
+                  </tr>
+                </table>
+              </div>
 
 
               <app-field [valid]="isValidOrNotTouched('meetsALRRequirements')" [showChevrons]="false"
-                errorMessage="Please confirm that the site meets ALR requriements"
-                [isFullWidth]="true" style="margin-left:10px;">
+                errorMessage="Please confirm that the site meets ALR requriements" [isFullWidth]="true"
+                style="margin-left:10px;">
                 <mat-checkbox formControlName="meetsALRRequirements">
                   I confirm that the manufacturing site meets ALR requirements.</mat-checkbox>
               </app-field>
               <section>
 
               </section>
-        
+
               <hr>
               <h4>Production and Sales Forecasts</h4>
               <p>Upload financial statements outlining production (in litres) and sales forecasts for a three year
                 period: </p>
               <section>
                 <app-file-uploader *ngIf="applicationId" documentType="Financial Statement"
-                [disableUploads]="isOpenedByLG" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true"
-                entityName="application" [enableFileDeletion]="!isOpenedByLG" [useDocumentTypeForName]="true"
-                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL STATEMENTS, DRAG FILES HERE OR'">
+                  [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
+                  [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
+                  [useDocumentTypeForName]="true" [entityId]="applicationId"
+                  [uploadHeader]="'TO UPLOAD FINANCIAL STATEMENTS, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
               <hr>
@@ -424,9 +438,9 @@
                 manufacturing for others, and/or them manufacturing for you) and the manufacturer(s) involved:</p>
               <section>
                 <app-file-uploader *ngIf="applicationId" documentType="Proposed Products"
-                  [disableUploads]="isOpenedByLG" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true"
-                  entityName="application" [enableFileDeletion]="!isOpenedByLG" [useDocumentTypeForName]="true"
-                  [entityId]="applicationId"
+                  [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
+                  [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
+                  [useDocumentTypeForName]="true" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD PROPOSED PRODUCTS DESCRIPTION, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
@@ -438,14 +452,15 @@
                 be from B.C.:</p>
               <section>
                 <app-file-uploader *ngIf="applicationId" documentType="Agricultural Sources"
-                  [disableUploads]="isOpenedByLG" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true"
-                  entityName="application" [enableFileDeletion]="!isOpenedByLG" [useDocumentTypeForName]="true"
-                  [entityId]="applicationId"
+                  [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
+                  [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
+                  [useDocumentTypeForName]="true" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD AGRICULTURAL SOURCES DESCRIPTION, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
               <section class="content-bottom" style='border-top: solid #aaa 1px; margin-top:0px;'>
-                <p>Indicate the amount of grapes, fruit and honey that will be farmed at the winery site and used for the production
+                <p>Indicate the amount of grapes, fruit and honey that will be farmed at the winery site and used for
+                  the production
                   of wine:
                 </p>
                 <div class="row">
@@ -462,7 +477,7 @@
                     <input type="text" class="form-control" style="width: 100px;">
                   </app-field>
                 </div>
-              
+
               </section>
               <hr>
               <h4>Stages of Manufacturing Taking Place Onsite</h4>
@@ -478,9 +493,9 @@
                 packaging.)</p>
               <section>
                 <app-file-uploader *ngIf="applicationId" documentType="Manufacturing Stages"
-                  [disableUploads]="isOpenedByLG" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true"
-                  entityName="application" [enableFileDeletion]="!isOpenedByLG" [useDocumentTypeForName]="true"
-                  [entityId]="applicationId"
+                  [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
+                  [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
+                  [useDocumentTypeForName]="true" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD MANUFACTURING STAGES DESCRIPTION, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
@@ -513,9 +528,9 @@
                 equipment to renew your licence).:</p>
               <section>
                 <app-file-uploader *ngIf="applicationId" documentType="Manufacturer Equipment"
-                  [disableUploads]="isOpenedByLG" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true"
-                  entityName="application" [enableFileDeletion]="!isOpenedByLG" [useDocumentTypeForName]="true"
-                  [entityId]="applicationId"
+                  [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
+                  [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
+                  [useDocumentTypeForName]="true" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD MANUFACTURING EQUIPMENT LIST, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
@@ -525,9 +540,9 @@
               <p>Upload a description of where you will store packaged products:</p>
               <section>
                 <app-file-uploader *ngIf="applicationId" documentType="Agricultural Sources"
-                  [disableUploads]="isOpenedByLG" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true"
-                  entityName="application" [enableFileDeletion]="!isOpenedByLG" [useDocumentTypeForName]="true"
-                  [entityId]="applicationId"
+                  [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
+                  [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
+                  [useDocumentTypeForName]="true" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD AGRICULTURAL SOURCES DESCRIPTION, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
@@ -568,7 +583,7 @@
                         production:</p>
                       <section>
                         <app-file-uploader *ngIf="applicationId" documentType="Sample Brew Sheet"
-                          [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+                          [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                           [useDocumentTypeForName]="true" [entityId]="applicationId"
                           [uploadHeader]="'TO UPLOAD SAMPLE BREW SHEET, DRAG FILES HERE OR'">
@@ -584,7 +599,7 @@
                 <p>Upload your business insurance certificate:</p>
                 <section>
                   <app-file-uploader *ngIf="applicationId" documentType="Business Insurance Certificate"
-                    [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+                    [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
                     fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                     [useDocumentTypeForName]="true" [entityId]="applicationId"
                     [uploadHeader]="'TO UPLOAD BUSINESS INSURANCE CERTIFICATE, DRAG FILES HERE OR'">
@@ -597,7 +612,7 @@
                 <p>Upload a description of how you plan to distribute your packaged product:</p>
                 <section>
                   <app-file-uploader *ngIf="applicationId" documentType="Distribution Plan"
-                    [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+                    [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
                     fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                     [useDocumentTypeForName]="true" [entityId]="applicationId"
                     [uploadHeader]="'TO UPLOAD DISTRIBUTION PLAN, DRAG FILES HERE OR'">
@@ -772,8 +787,8 @@
             the store's signage are on file.
           </p>
           <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Signage" [disableUploads]="isOpenedByLG"
-              [enableFileDeletion]="!isOpenedByLG"
+            <app-file-uploader *ngIf="applicationId" documentType="Signage" [disableUploads]="isOpenedByLGForApproval"
+              [enableFileDeletion]="!isOpenedByLGForApproval"
               [enableFileDeletion]="application?.applicationType?.signage === FormControlState.Show"
               [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
               entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
@@ -841,7 +856,8 @@
                 <li>
                   An offer or option to purchase the property and buildings in the licensee's name (as provided to LCRB
                   ). An offer or option must show price paid, have a term and expiry date and be signed by
-                  both the licensee and property owner. If an operated store is relocating, the valid interest must be in the
+                  both the licensee and property owner. If an operated store is relocating, the valid interest must be
+                  in the
                   name of the third party operator.
                 </li>
                 <p>&nbsp;</p>
@@ -860,9 +876,9 @@
           </p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Valid Interest"
-              fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLG"
+              fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval"
               [enableFileDeletion]="application?.applicationType?.validInterest === FormControlState.Show"
-              [enableFileDeletion]="!isOpenedByLG" [multipleFiles]="false" entityName="application"
+              [enableFileDeletion]="!isOpenedByLGForApproval" [multipleFiles]="false" entityName="application"
               [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedValidInterestDocuments = $event"
               [entityId]="applicationId" [uploadHeader]="'TO UPLOAD OWNERSHIP OR LEASE DOCUMENTS, DRAG FILES HERE OR'">
             </app-file-uploader>
@@ -908,14 +924,17 @@
               <p>The floor plans of the proposed establishment, which must meet the following requirements: </p>
               <ul>
                 <li>Must be scaled, clear, legible and include room size dimensions (8.5" x 11") </li>
-                <li *ngIf="isRAS()">detail the entire premises in which the business is located, including the area where liquor will be located, entrances, exits, washrooms, storage areas, cash register area, coolers, any adjoining doors and other fixtures</li>
+                <li *ngIf="isRAS()">detail the entire premises in which the business is located, including the area
+                  where liquor will be located, entrances, exits, washrooms, storage areas, cash register area, coolers,
+                  any adjoining doors and other fixtures</li>
                 <li *ngIf="isRAS()">clearly identify any adjoining areas</li>
                 <li *ngIf="!isRAS()">Provide room size dimensions </li>
                 <li *ngIf="!isRAS()">
                   Detail entrance, exit, washrooms, storage area, cash register area, coolers, any adjoining doors and
                   other fixtures
                 </li>
-                <li *ngIf="!isRAS()">Clearly identify the area proposed for licensing and any adjoining unlicensed areas</li>
+                <li *ngIf="!isRAS()">Clearly identify the area proposed for licensing and any adjoining unlicensed areas
+                </li>
               </ul>
             </div>
           </section>
@@ -924,9 +943,9 @@
           </p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Floor Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
-              [disableUploads]="isOpenedByLG"
+              [disableUploads]="isOpenedByLGForApproval"
               [enableFileDeletion]="application?.applicationType?.floorPlan === FormControlState.Show"
-              [enableFileDeletion]="!isOpenedByLG" [multipleFiles]="true" entityName="application"
+              [enableFileDeletion]="!isOpenedByLGForApproval" [multipleFiles]="true" entityName="application"
               [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedFloorPlanDocuments = $event"
               [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FLOOR PLANS, DRAG FILES HERE OR'">
             </app-file-uploader>
@@ -1049,7 +1068,7 @@
 
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Site Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
-              [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
               [enableFileDeletion]="application?.applicationType?.sitePlan === FormControlState.Show"
               [multipleFiles]="true" entityName="application" [useDocumentTypeForName]="true"
               (numberOfUploadedFiles)="uploadedSitePlanDocuments = $event" [entityId]="applicationId"
@@ -1099,9 +1118,10 @@
 
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Exterior Photos or Renderings"
-              [enableFileDeletion]="!isOpenedByLG" [enableFileDeletion]="true" [useDocumentTypeForName]="true"
-              [disableUploads]="isOpenedByLG" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
-              entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+              [enableFileDeletion]="!isOpenedByLGForApproval" [enableFileDeletion]="true"
+              [useDocumentTypeForName]="true" [disableUploads]="isOpenedByLGForApproval"
+              fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
+              [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
               (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF THE STORE EXTERIOR, DRAG FILES HERE OR'">
             </app-file-uploader>
@@ -1159,7 +1179,7 @@
             </section>
             <section>
               <app-file-uploader *ngIf="applicationId" documentType="Grocery Declaration"
-                [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+                [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [enableFileDeletion]="true" [multipleFiles]="false"
                 entityName="application" [useDocumentTypeForName]="true"
                 (numberOfUploadedFiles)="uploadedGroceryDocuments = $event" [entityId]="applicationId"
@@ -1191,7 +1211,7 @@
           </section>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Zoning" fileTypes="FILE MUST BE IN PDF FORMAT."
-              [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
               [enableFileDeletion]="application?.applicationType?.proofofZoning === FormControlState.Show"
               [multipleFiles]="false" entityName="application" [useDocumentTypeForName]="true"
               (numberOfUploadedFiles)="uploadedZoningDocuments = $event" [entityId]="applicationId"
@@ -1388,7 +1408,7 @@
           <p>Upload the completed form below.</p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"
-              [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
               (numberOfUploadedFiles)="uploadedAssociateDocuments = $event" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
@@ -1409,7 +1429,7 @@
           <p>Upload the completed form below.</p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-              [enableFileDeletion]="!isOpenedByLG" [disableUploads]="isOpenedByLG"
+              [enableFileDeletion]="!isOpenedByLGForApproval" [disableUploads]="isOpenedByLGForApproval"
               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
               (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
@@ -1513,7 +1533,7 @@
 
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
-              [disableUploads]="isOpenedByLG" [enableFileDeletion]="!isOpenedByLG"
+              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
               (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [maxNumberOfFiles]="200"
               fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
               [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #supportingDocuments>
@@ -1535,7 +1555,8 @@
             </i>
           </p>
           <p *ngIf="isRAS()">
-            Please provide contact information for the contact that the LCRB should communicate with regarding the information submission.
+            Please provide contact information for the contact that the LCRB should communicate with regarding the
+            information submission.
           </p>
           <address class="padded-section">
 
@@ -1589,7 +1610,12 @@
                 an officer or, in some cases, a director
               </div>
               <div *ngIf="isRAS()">
-                <p>The Rural Agency Store Information Submission must only be submitted by an individual with the authority to bind the Rural Agency Store. The branch relies on the Rural Agency Store Owner to ensure that the individual who submits this information is authorized to do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually be an officer, or, in some cases, a director. Note: A lawyer or consultant may NOT submit information on behalf of the Rural Agency Store.</p>
+                <p>The Rural Agency Store Information Submission must only be submitted by an individual with the
+                  authority to bind the Rural Agency Store. The branch relies on the Rural Agency Store Owner to ensure
+                  that the individual who submits this information is authorized to do so. Typically, an appropriate
+                  individual in a corporation will be a duly authorized signatory who will usually be an officer, or, in
+                  some cases, a director. Note: A lawyer or consultant may NOT submit information on behalf of the Rural
+                  Agency Store.</p>
               </div>
               <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
                 <p *ngIf="account?.businessType === 'SoleProprietor'">
@@ -1807,22 +1833,28 @@
           </div>
         </section>
 
-        <section appRemoveIfFeatureOff="LGApprovals" class="ngtest-opened-by-lg" *ngIf="isOpenedByLG">
+        <section appRemoveIfFeatureOff="LGApprovals" class="ngtest-opened-by-lg" *ngIf="isOpenedByLGForApproval">
           <app-lg-in-confirmation-of-receipt *ngIf="application" [application]="application">
           </app-lg-in-confirmation-of-receipt>
         </section>
 
 
         <!-- button section -->
-        <section *ngIf="!isOpenedByLG" style="position: relative; margin-top: 20px;">
-          <button class="btn btn-secondary" style="margin-right:10px;" (click)="saveForLater()">
+        <section *ngIf="!isOpenedByLGForApproval" style="position: relative; margin-top: 20px;">
+          <button *ngIf="account?.businessType === 'LocalGovernment '" class="btn btn-secondary"
+            style="margin-right:10px;" (click)="saveForLater()">
             <span>
               <i class="fa fa-save"></i>
               SAVE FOR LATER
             </span>
           </button>
-          <button class="btn btn-primary" (click)="submit_application()">
+          <button *ngIf="!application?.applicationType?.isShowLGINApproval" class="btn btn-primary"
+            (click)="submit_application()">
             SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
+          </button>
+          <button *ngIf="application?.applicationType?.isShowLGINApproval" class=" btn btn-primary"
+            (click)="submitForLGINApproval()">
+            Submit For LG/IN Approval
           </button>
 
           <span style="float: right; color: #1a5a96; padding-top: 10px;">
@@ -1883,7 +1915,7 @@
           <p>Upload the completed form below.</p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"
-              [disableUploads]="isOpenedByLG" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+              [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
               entityName="application" (numberOfUploadedFiles)="uploadedAssociateDocuments = $event"
               [enableFileDeletion]="false" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
@@ -1902,7 +1934,7 @@
           <p>Upload the completed form below.</p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-              [disableUploads]="isOpenedByLG" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+              [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
               entityName="application" (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
               [enableFileDeletion]="false" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
@@ -2002,7 +2034,7 @@
         </section>
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
-            [disableUploads]="isOpenedByLG" fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT."
+            [disableUploads]="isOpenedByLGForApproval" fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT."
             entityName="application" [entityId]="applicationId" [maxNumberOfFiles]="200"
             (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
             [enableFileDeletion]="false" #supportingDocuments>
