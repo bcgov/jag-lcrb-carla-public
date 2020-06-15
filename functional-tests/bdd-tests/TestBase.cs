@@ -97,11 +97,11 @@ namespace bdd_tests
             */
 
             // select the acceptance checkbox
-            NgWebElement termsOfUseCheckbox = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            NgWebElement termsOfUseCheckbox = ngDriver.FindElement(By.CssSelector("input.terms-cb[type='checkbox']"));
             termsOfUseCheckbox.Click();
 
             // click on the Continue button
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//section[3]/button"));
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button.termsAccept"));
             continueButton.Click();
 
             /* 
@@ -109,7 +109,7 @@ namespace bdd_tests
             */
 
             // click on the Yes button
-            NgWebElement confirmationButton = ngDriver.FindElement(By.XPath("//button"));
+            NgWebElement confirmationButton = ngDriver.FindElement(By.CssSelector("button.confirmYes"));
             confirmationButton.Click();
 
             /* 
@@ -119,54 +119,55 @@ namespace bdd_tests
             // if this is a private corporation, click the radio button
             if (businessType == "private corporation")
             {
-                NgWebElement privateCorporationRadio = ngDriver.FindElement(By.XPath("(//input[@value='PrivateCorporation'])"));
+                
+                NgWebElement privateCorporationRadio = ngDriver.FindElement(By.CssSelector("input[value = 'PrivateCorporation'][type = 'radio']"));
                 privateCorporationRadio.Click();
             }
 
             // if this is a public corporation, click the radio button
             if (businessType == "public corporation")
             {
-                NgWebElement publicCorporationRadio = ngDriver.FindElement(By.XPath("(//input[@value='PublicCorporation'])"));
+                NgWebElement publicCorporationRadio = ngDriver.FindElement(By.CssSelector("[value='PublicCorporation'][type='radio']"));
                 publicCorporationRadio.Click();
             }
 
             // if this is a sole proprietorship, click the radio button
             if (businessType == "sole proprietorship")
             {
-                NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.XPath("(//input[@value='SoleProprietor'])"));
+                NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.CssSelector("[value='SoleProprietor'][type='radio']"));
                 soleProprietorshipRadio.Click();
             }
 
             // if this is a partnership, click the radio button
             if (businessType == "partnership")
             {
-                NgWebElement partnershipRadio = ngDriver.FindElement(By.XPath("(//input[@value='Partnership'])"));
+                NgWebElement partnershipRadio = ngDriver.FindElement(By.CssSelector("[value='Partnership'][type='radio']"));
                 partnershipRadio.Click();
             }
 
             // if this is a society, click the radio button
             if (businessType == "society")
             {
-                NgWebElement societyRadio = ngDriver.FindElement(By.XPath("(//input[@value='Society'])"));
+                NgWebElement societyRadio = ngDriver.FindElement(By.CssSelector("[type='radio'][value='Society']"));
                 societyRadio.Click();
             }
 
             // if this is a university, click the radio button
             if (businessType == "university")
             {
-                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@value='University'])"));
+                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.CssSelector("[type='radio'][value='University']"));
                 indigenousNationRadio.Click();
             }
 
             // if this is an indigenous nation, click the radio button
             if (businessType == "indigenous nation")
             {
-                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.XPath("(//input[@value='IndigenousNation'])"));
+                NgWebElement indigenousNationRadio = ngDriver.FindElement(By.CssSelector("[value='IndigenousNation'][type='radio']"));
                 indigenousNationRadio.Click();
             }
 
             // click on the Next button
-            NgWebElement nextButton = ngDriver.FindElement(By.XPath("//button[contains(.,'Next')]"));
+            NgWebElement nextButton = ngDriver.FindElement(By.CssSelector(".btn-primary"));
             nextButton.Click();
 
             /* 
@@ -174,7 +175,7 @@ namespace bdd_tests
             */
 
             // click on the Yes button
-            NgWebElement confirmNameButton = ngDriver.FindElement(By.XPath("//button"));
+            NgWebElement confirmNameButton = ngDriver.FindElement(By.CssSelector("app-bceid-confirmation .btn-primary"));
             confirmNameButton.Click();
             ngDriver.WaitForAngular();
         }
@@ -493,8 +494,7 @@ namespace bdd_tests
 
             applicationID = parsedURL[5];
 
-            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' Submit For LG/IN Approval ')]"));
-            submitButton.Click();
+            ClickOnSubmitButton();
         }
 
 
@@ -2222,7 +2222,7 @@ namespace bdd_tests
             if (businessTypeShared == "sole proprietorship")
             {
                 // open the leader row
-                NgWebElement openLeaderForm = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div[2]/app-associate-list/div/button"));
+                NgWebElement openLeaderForm = ngDriver.FindElement(By.CssSelector("button.btn.btn-secondary"));
                 openLeaderForm.Click();
 
                 // create the leader info
