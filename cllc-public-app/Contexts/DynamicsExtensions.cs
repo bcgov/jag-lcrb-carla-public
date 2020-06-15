@@ -215,20 +215,23 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationList)
                 {
-                    Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
-                    var adoxio_licencetype = _dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
-                    string licenseType = adoxio_licencetype.AdoxioName;
-
-                    // hide terminated applications from view.
-                    if (dynamicsApplication.Statuscode == null || (dynamicsApplication.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated
-                        && dynamicsApplication.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.Refused
-                        && dynamicsApplication.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled
-                        && dynamicsApplication.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded)
-                        && licenseType == "Cannabis Retail Store"
-                        )
+                    if (! string.IsNullOrEmpty (dynamicsApplication._adoxioLicencetypeValue))
                     {
-                        result++;
-                    }
+                        Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
+                        var adoxio_licencetype = _dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
+                        string licenseType = adoxio_licencetype.AdoxioName;
+
+                        // hide terminated applications from view.
+                        if (dynamicsApplication.Statuscode == null || (dynamicsApplication.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated
+                            && dynamicsApplication.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.Refused
+                            && dynamicsApplication.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled
+                            && dynamicsApplication.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded)
+                            && licenseType == "Cannabis Retail Store"
+                            )
+                        {
+                            result++;
+                        }
+                    }                    
                 }
             
             }
