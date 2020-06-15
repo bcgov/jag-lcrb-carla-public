@@ -334,6 +334,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IsPaid = (dynamicsApplication.AdoxioPaymentrecieved != null && (bool)dynamicsApplication.AdoxioPaymentrecieved),
 
                 IndigenousNationId = dynamicsApplication._adoxioLocalgovindigenousnationidValue,
+                PoliceJurisdictionId = dynamicsApplication._adoxioPolicejurisdictionidValue,
 
                 //get parcel id
                 EstablishmentParcelId = dynamicsApplication.AdoxioEstablishmentparcelid,
@@ -494,6 +495,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     applicationVM.TiedHouse = tiedHouse.ToViewModel();
                 }
+            }
+
+            if(dynamicsApplication.AdoxioPoliceJurisdictionId != null){
+                applicationVM.PoliceJurisdiction = dynamicsApplication.AdoxioPoliceJurisdictionId.ToViewModel();
+            }
+
+            if(dynamicsApplication.AdoxioLocalgovindigenousnationid != null){
+                applicationVM.IndigenousNation = dynamicsApplication.AdoxioLocalgovindigenousnationid.ToViewModel();
             }
 
             applicationVM.PrevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!applicationVM.IsSubmitted);
