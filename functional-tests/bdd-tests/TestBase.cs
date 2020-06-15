@@ -2321,7 +2321,6 @@ namespace bdd_tests
 
                 // open key personnel form
                 NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));
-
                 openKeyPersonnelForm.Click();
 
                 // enter key personnel first name
