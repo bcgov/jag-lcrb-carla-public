@@ -267,24 +267,17 @@
               <div class="content-bottom">
                 <p>Please provide the following details about your Rural Agency Store:</p>
                 <!-- RAS Certificate Number -->
-                <app-field label="Rural Agency Store Certificate Number:"
-                  errorMessage="Please enter a certificate number">
-                  <input type="text" class="form-control" style="width: 200px;" id="certNumber"
-                    formControlName="description1">
+                <app-field label="Rural Agency Store Certificate Number:" errorMessage="Please enter a certificate number">
+                  <input type="text" class="form-control" style="width: 200px;" id="certNumber" formControlName="description1" mask="0009">
                 </app-field>
 
                 <section style="width:700px;">
-                  <app-field [valid]="isValidOrNotTouched('isOwner')" [showChevrons]="false"
-                    errorMessage="Please confirm that the current zoning permits manufacturing on the manufacturing site"
-                    style="margin-left:10px; background-color: blue;">
+                  <div>
                     <mat-checkbox formControlName="isOwner">
-                      This information is being submited by the owner of the business in respect of which the licence is
-                      to be issued
-                      or will become<br>the owner before the licence is issued.</mat-checkbox>
-                  </app-field>
-                  <app-field [valid]="isValidOrNotTouched('hasValidInterest')" [showChevrons]="false"
-                    errorMessage="Please confirm that the current zoning permits retail sales on the manufacturing site"
-                    style="margin-left:10px;">
+                      This information is being submitted by the owner of the business in respect of which the licence is to be issued or will become the owner before the licence is issued.
+                    </mat-checkbox>
+                  </div>
+                  <div>
                     <mat-checkbox formControlName="hasValidInterest">
                       At the time of this information submission, the owner of the business is:
                       <ul>
@@ -296,13 +289,12 @@
                         </li>
                       </ul>
                     </mat-checkbox>
-                  </app-field>
-                  <app-field [valid]="isValidOrNotTouched('willhaveValidInterest')" [showChevrons]="false"
-                    errorMessage="Please confirm that the current zoning permits retail sales on the manufacturing site"
-                    style="margin-left:10px;">
+                  </div>
+                  <div>
                     <mat-checkbox formControlName="willhaveValidInterest">
-                      I confirm that current zoning permits retail sales on the manufacturing site.</mat-checkbox>
-                  </app-field>
+                      I confirm that current zoning permits retail sales on the manufacturing site.
+                    </mat-checkbox>
+                  </div>
                   <p>&nbsp;</p>
                 </section>
               </div>
@@ -1840,19 +1832,19 @@
 
 
         <!-- button section -->
-        <section *ngIf="!isOpenedByLGForApproval" style="position: relative; margin-top: 20px;">
-          <button *ngIf="account?.businessType === 'LocalGovernment '" class="btn btn-secondary"
+        <section *ngIf="!isOpenedByLGForApproval || !LGApprovalsFeatureIsOn" style="position: relative; margin-top: 20px;">
+          <button *ngIf="account?.businessType !== 'LocalGovernment '" class="btn btn-secondary"
             style="margin-right:10px;" (click)="saveForLater()">
             <span>
               <i class="fa fa-save"></i>
               SAVE FOR LATER
             </span>
           </button>
-          <button *ngIf="!application?.applicationType?.isShowLGINApproval" class="btn btn-primary"
+          <button *ngIf="!application?.applicationType?.isShowLGINApproval || !LGApprovalsFeatureIsOn" class="btn btn-primary"
             (click)="submit_application()">
             SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
           </button>
-          <button *ngIf="application?.applicationType?.isShowLGINApproval" class=" btn btn-primary"
+          <button *ngIf="application?.applicationType?.isShowLGINApproval && LGApprovalsFeatureIsOn" class=" btn btn-primary"
             (click)="submitForLGINApproval()">
             Submit For LG/IN Approval
           </button>
