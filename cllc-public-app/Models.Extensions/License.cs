@@ -175,4 +175,26 @@ namespace Gov.Lclb.Cllb.Public.Models
             return licenseSummary;
         }
     }
+
+    public static class LicenseRepresentativeExtensions
+    {
+        public static LicenseRepresentative ToViewModel(this MicrosoftDynamicsCRMadoxioLicences dynamicsLicense)
+        {
+            LicenseRepresentative rep = new LicenseRepresentative()
+            {
+                FullName = dynamicsLicense.AdoxioRepresentativename,
+                PhoneNumber = dynamicsLicense.AdoxioRepresentativephone,
+                Email = dynamicsLicense.AdoxioRepresentativeemail,
+                CanSubmitPermanentChangeApplications = dynamicsLicense.AdoxioCansubmitpermanentchangeapplications,
+                CanSignTemporaryChangeApplications = dynamicsLicense.AdoxioCansigntemporarychangeapplications,
+                CanObtainLicenceInformation = dynamicsLicense.AdoxioCanobtainlicenceinformation,
+                CanSignGroceryStoreProofOfSale = dynamicsLicense.AdoxioCansigntemporarychangeapplications,
+                CanAttendEducationSessions = dynamicsLicense.AdoxioCanattendeducationsessions,
+                CanAttendComplianceMeetings = dynamicsLicense.AdoxioCanattendcompliancemeetings,
+                CanRepresentAtHearings = dynamicsLicense.AdoxioCanrepresentathearings
+            };
+
+            return rep;
+        }
+    }
 }
