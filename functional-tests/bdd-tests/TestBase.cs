@@ -493,7 +493,10 @@ namespace bdd_tests
 
             applicationID = parsedURL[5];
 
-            ClickOnSubmitButton();
+            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' Submit For LG/IN Approval ')]"));
+            submitButton.Click();
+
+            //ClickOnSubmitButton();
         }
 
 
