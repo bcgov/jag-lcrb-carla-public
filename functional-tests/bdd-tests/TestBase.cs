@@ -1826,17 +1826,19 @@ namespace bdd_tests
             NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='emailaddress1']"));
             uiCorpContactEmail.SendKeys(corpContactEmail);
 
-            // select 'Yes' for corporate connection to a federal producer
-            NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("[formcontrolname='corpConnectionFederalProducer'][type='radio']"));
-            corpConnectionFederalProducer.Click();
+            if ((businessTypeShared == "indigenous nation"))
+            {
+                // select 'Yes' for connection to a federal producer
+                NgWebElement INConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='iNConnectionToFederalProducer']"));
+                INConnectionFederalProducer.Click();
 
-            // enter the name of the federal producer and details of the connection 
-            string nameAndDetails = "Name and details of federal producer (automated test).";
+                // enter the name of the federal producer and details of the connection 
+                string INnameAndDetails = "Name and details of federal producer (automated test) for IN.";
 
-            NgWebElement uiDetailsFederalProducer = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='corpConnectionFederalProducerDetails']"));
-            uiDetailsFederalProducer.SendKeys(nameAndDetails);
+                NgWebElement INDetailsFederalProducer = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='iNConnectionToFederalProducerDetails']"));
+                INDetailsFederalProducer.SendKeys(INnameAndDetails);
+            }
 
-            // select 'Yes' for federal producer's connection to business
             if ((businessTypeShared != "indigenous nation") && (businessTypeShared != "society"))
             {
                 // select 'Yes' for federal producer connection to corporation
