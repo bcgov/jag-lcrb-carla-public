@@ -1852,6 +1852,19 @@ namespace bdd_tests
                 uiDetailsFederalProducer2.SendKeys(nameAndDetails);
             }
 
+            if ((businessTypeShared == "partnership"))
+            {
+                // select 'Yes' for partnership connection to federal producer 
+                NgWebElement partnerConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='partnersConnectionFederalProducer']"));
+                partnerConnectionFederalProducer.Click();
+
+                // enter the name of the federal producer and details of the connection 
+                string nameAndDetails = "The name of the federal producer and details of the connection (partnership).";
+
+                NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='partnersConnectionFederalProducerDetails']"));
+                uiDetailsFederalProducer2.SendKeys(nameAndDetails);
+            }
+
             if ((businessTypeShared != "indigenous nation") && (businessTypeShared != "society"))
             {
                 // select 'Yes' for federal producer connection to corporation
