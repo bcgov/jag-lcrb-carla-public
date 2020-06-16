@@ -56,9 +56,16 @@
                     <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
                   </a>
                 </div>
-                <a href="javascript: void(0);" (click)="startRenewal(item)" appRemoveIfFeatureOff="CRS-Renewal"
-                  *ngIf="!item.isOperated && !item.isDeemed && isAboutToExpire(item.expiryDate)" class="missing"><i
-                    class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>Renew Licence</a>
+                <div>
+                  <a href="javascript: void(0);" (click)="startRenewal(item)" appRemoveIfFeatureOff="CRS-Renewal"
+                    *ngIf="!item.isOperated && !item.isDeemed && isAboutToExpire(item.expiryDate)" class="missing"><i
+                      class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>Renew Licence</a>
+                </div>
+                <div *ngIf="item.licenceTypeCategory === 'Liquor'">
+                  <a [routerLink]="[ '/licence/' + item.licenseId + '/representative']">
+                    <span>Add Licence Representative</span>
+                  </a>
+                </div>
               </td>
 
               <td style="padding: 10px;">
