@@ -2,6 +2,7 @@
     As a logged in business user
     I want to submit a Catering Application for an indigenous nation
 
+@e2e @indigenousnation
 Scenario: Start Application
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for Catering
