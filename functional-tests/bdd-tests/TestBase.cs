@@ -1839,6 +1839,19 @@ namespace bdd_tests
                 INDetailsFederalProducer.SendKeys(INnameAndDetails);
             }
 
+            if ((businessTypeShared == "private corporation"))
+            {
+                // select 'Yes' for corporation connection to federal producer 
+                NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='corpConnectionFederalProducer']"));
+                corpConnectionFederalProducer.Click();
+
+                // enter the name of the federal producer and details of the connection 
+                string nameAndDetails = "The name of the federal producer and details of the connection.";
+
+                NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='corpConnectionFederalProducerDetails']")); 
+                uiDetailsFederalProducer2.SendKeys(nameAndDetails);
+            }
+
             if ((businessTypeShared != "indigenous nation") && (businessTypeShared != "society"))
             {
                 // select 'Yes' for federal producer connection to corporation
@@ -1846,7 +1859,7 @@ namespace bdd_tests
                 corpConnectionFederalProducer2.Click();
 
                 // enter the name of the federal producer and details of the connection 
-                string nameAndDetails2 = "Name and details of federal producer (automated test) (2).";
+                string nameAndDetails2 = "Name and details of federal producer connection to corporation.";
 
                 NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='federalProducerConnectionToCorpDetails']"));
                 uiDetailsFederalProducer2.SendKeys(nameAndDetails2);
