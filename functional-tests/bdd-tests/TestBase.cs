@@ -1834,7 +1834,6 @@ namespace bdd_tests
 
                 // enter the name of the federal producer and details of the connection 
                 string INnameAndDetails = "Name and details of federal producer (automated test) for IN.";
-
                 NgWebElement INDetailsFederalProducer = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='iNConnectionToFederalProducerDetails']"));
                 INDetailsFederalProducer.SendKeys(INnameAndDetails);
             }
@@ -1847,7 +1846,6 @@ namespace bdd_tests
 
                 // enter the name of the federal producer and details of the connection 
                 string nameAndDetails = "The name of the federal producer and details of the connection.";
-
                 NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='corpConnectionFederalProducerDetails']")); 
                 uiDetailsFederalProducer2.SendKeys(nameAndDetails);
 
@@ -1857,7 +1855,6 @@ namespace bdd_tests
 
                 // enter the name of the federal producer and details of the connection 
                 string nameAndDetails2 = "Name and details of federal producer connection to corporation.";
-
                 NgWebElement uiDetailsFederalProducer3 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='federalProducerConnectionToCorpDetails']"));
                 uiDetailsFederalProducer3.SendKeys(nameAndDetails2);
             }
@@ -1870,7 +1867,6 @@ namespace bdd_tests
 
                 // enter the name of the federal producer and details of the connection 
                 string nameAndDetails = "The name of the federal producer and details of the connection (partnership).";
-
                 NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='partnersConnectionFederalProducerDetails']"));
                 uiDetailsFederalProducer2.SendKeys(nameAndDetails);
 
@@ -1880,7 +1876,6 @@ namespace bdd_tests
 
                 // enter the name of the federal producer and details of the connection 
                 string nameAndDetails2 = "Name and details of federal producer connection to corporation.";
-
                 NgWebElement uiDetailsFederalProducer3 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='federalProducerConnectionToCorpDetails']"));
                 uiDetailsFederalProducer3.SendKeys(nameAndDetails2);
             }
@@ -1893,7 +1888,6 @@ namespace bdd_tests
 
                 // enter the name of the federal producer and details of the connection 
                 string nameAndDetails = "The name of the federal producer and details of the connection.";
-
                 NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='corpConnectionFederalProducerDetails']"));
                 uiDetailsFederalProducer2.SendKeys(nameAndDetails);
 
@@ -1902,7 +1896,6 @@ namespace bdd_tests
                 shareholderConnectionConnectionToCorp.Click();
 
                 string shareholderDetails = "Details of shareholder relationship.";
-
                 NgWebElement uiShareholderDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='share20PlusConnectionProducerDetails']"));
                 uiShareholderDetails.SendKeys(shareholderDetails);
                
@@ -1910,11 +1903,43 @@ namespace bdd_tests
                 NgWebElement familyConnectionConnectionToCorp = ngDriver.FindElement(By.CssSelector("input[formcontrolname='share20PlusFamilyConnectionProducer']"));
                 familyConnectionConnectionToCorp.Click();
 
-                string familyRelationship = "Details of family relationship (automated test).";
-
                 // enter details of family connection
+                string familyRelationship = "Details of family relationship (automated test).";
                 NgWebElement familyConnectionDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='share20PlusFamilyConnectionProducerDetail']"));
                 familyConnectionDetails.SendKeys(familyRelationship);
+            }
+
+            if (businessTypeShared == "society")
+            {
+                // select 'Yes' for society connection to federal producer 
+                NgWebElement societyConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='societyConnectionFederalProducer']"));
+                societyConnectionFederalProducer.Click();
+
+                // enter details of society connection
+                string societyDetails = "Details of society/federal producer relationship.";
+                NgWebElement societyConnectionDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='societyConnectionFederalProducerDetails']"));
+                societyConnectionDetails.SendKeys(societyDetails);
+            }
+
+            if (businessTypeShared == "sole proprietorship")
+            {
+                // select 'Yes' for corporation connection to federal producer 
+                NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='corpConnectionFederalProducer']"));
+                corpConnectionFederalProducer.Click();
+
+                // enter the name of the federal producer and details of the connection 
+                string nameAndDetails = "The name of the federal producer and details of the connection.";
+                NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='corpConnectionFederalProducerDetails']"));
+                uiDetailsFederalProducer2.SendKeys(nameAndDetails);
+
+                // select 'Yes' for federal producer connection to corporation
+                NgWebElement corpConnectionFederalProducer2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='federalProducerConnectionToCorp']"));
+                corpConnectionFederalProducer2.Click();
+
+                // enter the name of the federal producer and details of the connection 
+                string nameAndDetails2 = "Name and details of federal producer connection to corporation.";
+                NgWebElement uiDetailsFederalProducer3 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='federalProducerConnectionToCorpDetails']"));
+                uiDetailsFederalProducer3.SendKeys(nameAndDetails2);
             }
 
             // click on Continue to Organization Review button
