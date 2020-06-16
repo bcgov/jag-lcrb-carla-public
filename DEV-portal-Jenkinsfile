@@ -76,13 +76,41 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
         args: '${computer.jnlpmac} ${computer.name}'
     )
 ]) {
-    stage('Sonar Scan') {
+
+    stage('Scan') {
+	  parallel('SonarQube':{
         node('master') {
             echo "Running SonarQube static code analysis..."
             sh 'oc cancel-build bc/cllc-public-sonar'
             openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
         }
-    }
+    },'Smoke Test':
+	{
+		node('agent-dotnet') {
+            //the checkout is mandatory
+            echo "checking out source"
+            echo "Build: ${BUILD_ID}"
+            checkout scm
+
+            dir('functional-tests/smoke-tests') {               
+                withEnv(["baseUri=${baseUri}","test_start=${test_start}","test_start_worker=${test_start_worker}","test_cc=${test_cc}","test_ccv=${test_ccv}","CHROME_BINARY_LOCATION=${CHROME_BINARY_LOCATION}"])
+                {
+                    try {                        
+                        sh 'dotnet test --logger "junit;LogFilePath=functionalResults.xml"'					
+                    }
+                    catch (err)
+                    {
+                        echo "Error encountered:"
+                        echo err.getMessage()
+                    }
+                    finally {
+                        junit 'functionalResults.xml'
+                    }					
+                }            
+            }
+        }
+	}
+	}
 }
 
         /*
