@@ -58,6 +58,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Liquor = 845280001
     }
 
+    public enum LicenceTypeCategory
+    {
+        Cannabis = 845280000,
+        Liquor = 845280001
+    }
+
     public class ApplicationLicenseSummary
     {
         public string LicenseId { get; set; }
@@ -99,6 +105,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string ThirdPartyOperatorAccountId { get; set; }
         public List<string> Endorsements { get; set; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
+        public LicenceTypeCategory? LicenceTypeCategory { get; set; }
         public string RepresentativeFullName { get; set; }
         public string RepresentativePhoneNumber { get; set; }
         public string RepresentativeEmail { get; set; }

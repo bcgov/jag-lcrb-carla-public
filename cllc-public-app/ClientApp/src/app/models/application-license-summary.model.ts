@@ -44,6 +44,18 @@ export class ApplicationLicenseSummary {
   thirdPartyOperatorAccountName: string;
   isOperated: boolean; // only used on the client side
   isDeemed: boolean; // only used on the client side
+
+  licenceTypeCategory: string;
+  representativeFullName: string;
+  representativePhoneNumber: string;
+  representativeEmail: string;
+  representativeCanSubmitPermanentChangeApplications: boolean;
+  representativeCanSignTemporaryChangeApplications: boolean;
+  representativeCanObtainLicenceInformation: boolean;
+  representativeCanSignGroceryStoreProofOfSale: boolean;
+  representativeCanAttendEducationSessions: boolean;
+  representativeCanAttendComplianceMeetings: boolean;
+  representativeCanRepresentAtHearings: boolean;
 }
 
 export interface LicenceActionApplication {
