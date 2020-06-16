@@ -1658,58 +1658,56 @@ namespace bdd_tests
         [And(@"I complete the eligibility disclosure")]
         public void CompleteEligibilityDisclosure()
         {
-            ngDriver.WaitForAngular();
-
             /* 
             Page Title: Cannabis Retail Store Licence Eligibility Disclosure
             */
 
             // select response: On or after March 1, 2020, did you or any of your associates own, operate, provide financial support to, or receive income from an unlicensed cannabis retail store or retailer?           
             // select Yes radio button 
-            NgWebElement yesRadio1 = ngDriver.FindElement(By.Id("mat-radio-2"));
+            NgWebElement yesRadio1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='isConnectedToUnlicencedStore'] mat-radio-button"));
             yesRadio1.Click();
 
             // complete field: Please indicate the name and location of the retailer or store 
             string nameAndLocation = "Automated test name and location of retailer";
 
-            NgWebElement uiNameAndLocation = ngDriver.FindElement(By.CssSelector("input[formControlName=\"nameLocationUnlicencedRetailer\"]"));
+            NgWebElement uiNameAndLocation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='nameLocationUnlicencedRetailer']"));
             uiNameAndLocation.SendKeys(nameAndLocation);
 
             // select response: Does the retailer or store continue to operate?
             // select Yes for Question 2 using radio button
-            NgWebElement yesRadio2 = ngDriver.FindElement(By.Id("mat-radio-5"));
+            NgWebElement yesRadio2 = ngDriver.FindElement(By.CssSelector("[formcontrolname='isRetailerStillOperating'] mat-radio-button"));
             yesRadio2.Click();
 
             // select response: On or after March 1, 2020, were you or any of your associates involved with the distribution or supply of cannabis to a licensed or unlicensed cannabis retail store or retailer?
             // select Yes using radio button
-            NgWebElement yesRadio3 = ngDriver.FindElement(By.Id("mat-radio-8"));
+            NgWebElement yesRadio3 = ngDriver.FindElement(By.CssSelector("[formcontrolname='isInvolvedIllegalDistribution'] mat-radio-button"));
             yesRadio3.Click();
 
             // complete field: Please indicate the details of your involvement
             string involvementDetails = "Automated test - details of the involvement";
 
-            NgWebElement matCheckbox = ngDriver.FindElement(By.XPath("//textarea"));
+            NgWebElement matCheckbox = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='illegalDistributionInvolvementDetails']"));
             matCheckbox.SendKeys(involvementDetails);
 
             // complete field: Please indicate the name and location of the retailer or store           
             string nameAndLocation2 = "Automated test name and location of retailer (2)";
-            NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.CssSelector("input[formControlName=\"nameLocationRetailer\"]"));
 
+            NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.CssSelector("input[formControlName='nameLocationRetailer']"));
             uiNameAndLocation2.SendKeys(nameAndLocation2);
 
             // select response: Do you continue to be involved?
             // select Yes for Question 2 using radio button
-            NgWebElement yesRadio4 = ngDriver.FindElement(By.Id("mat-radio-11"));
+            NgWebElement yesRadio4 = ngDriver.FindElement(By.CssSelector("[formcontrolname='isInvolvementContinuing'] mat-radio-button"));
             yesRadio4.Click();
 
             // select certification checkbox
-            NgWebElement uiCheckbox = ngDriver.FindElement(By.Id("mat-checkbox-1"));
+            NgWebElement uiCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isEligibilityCertified']"));
             uiCheckbox.Click();
 
             // enter the electronic signature
             string electricSignature = "Automated Test";
 
-            NgWebElement sigCheckbox = ngDriver.FindElement(By.Id("eligibilitySignature"));
+            NgWebElement sigCheckbox = ngDriver.FindElement(By.CssSelector("input[formcontrolname='eligibilitySignature']"));
             sigCheckbox.SendKeys(electricSignature);
 
             // click on the Submit button
@@ -1741,23 +1739,21 @@ namespace bdd_tests
 
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
-            string corpGiven = "CorpGiven";
-            string corpSurname = "CorpSurname";
             string corpTitle = "CEO";
             string corpContactPhone = "7781811818";
             string corpContactEmail = "automated@test.com";
 
             // enter the business number
-            NgWebElement uiBizNumber = ngDriver.FindElement(By.CssSelector("input[formControlName=\"businessNumber\"]"));
+            NgWebElement uiBizNumber = ngDriver.FindElement(By.CssSelector("input[formControlName='businessNumber']"));
             uiBizNumber.SendKeys(bizNumber);
 
             // enter the private corporation or society incorporation number
-            if (businessTypeShared == "private corporation" || businessTypeShared == "society")
+            if (businessTypeShared == "private corporation" || businessTypeShared == "society" || businessTypeShared == "public corporation")
             {
-                NgWebElement uiCorpNumber = ngDriver.FindElement(By.Id("bcIncorporationNumber"));
+                NgWebElement uiCorpNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='bcIncorporationNumber']"));
                 uiCorpNumber.SendKeys(incorporationNumber);
 
-                NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+                NgWebElement uiCalendar1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='dateOfIncorporationInBC']"));
                 uiCalendar1.Click();
 
                 NgWebElement uiCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
@@ -1765,131 +1761,164 @@ namespace bdd_tests
             }
 
             // enter the physical street address 1
-            NgWebElement uiPhysStreetAddress1 = ngDriver.FindElement(By.CssSelector("input[formControlName=\"physicalAddressStreet\"]"));
+            NgWebElement uiPhysStreetAddress1 = ngDriver.FindElement(By.CssSelector("input[formControlName='physicalAddressStreet']"));
             uiPhysStreetAddress1.SendKeys(physStreetAddress1);
 
             // enter the physical street address 2
-            NgWebElement uiPhysStreetAddress2 = ngDriver.FindElement(By.CssSelector("input[formControlName=\"physicalAddressStreet2\"]"));
+            NgWebElement uiPhysStreetAddress2 = ngDriver.FindElement(By.CssSelector("input[formControlName='physicalAddressStreet2']"));
             uiPhysStreetAddress2.SendKeys(physStreetAddress2);
 
             // enter the physical city
-            NgWebElement uiPhysCity = ngDriver.FindElement(By.CssSelector("input[formControlName=\"physicalAddressCity\"]"));
+            NgWebElement uiPhysCity = ngDriver.FindElement(By.CssSelector("input[formControlName='physicalAddressCity']"));
             uiPhysCity.SendKeys(physCity);
 
             // enter the physical postal code
-            NgWebElement uiPhysPostalCode = ngDriver.FindElement(By.CssSelector("input[formControlName=\"physicalAddressPostalCode\"]"));
+            NgWebElement uiPhysPostalCode = ngDriver.FindElement(By.CssSelector("input[formControlName='physicalAddressPostalCode']"));
             uiPhysPostalCode.SendKeys(physPostalCode);
 
-            // select and deselect same mailing address to confirm checkbox is available
-            NgWebElement uiSameAsMailingAddress = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
-            uiSameAsMailingAddress.Click();
-            uiSameAsMailingAddress.Click();
-
             // enter the mailing street address 1
-            NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressStreet\"]"));
+            NgWebElement uiMailingStreetAddress1 = ngDriver.FindElement(By.CssSelector("input[formControlName='mailingAddressStreet']"));
             uiMailingStreetAddress1.Clear();
             uiMailingStreetAddress1.SendKeys(mailStreet1);
 
             // enter the mailing street address 2
-            NgWebElement uiMailingStreetAddress2 = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressStreet2\"]"));
+            NgWebElement uiMailingStreetAddress2 = ngDriver.FindElement(By.CssSelector("input[formControlName='mailingAddressStreet2']"));
             uiMailingStreetAddress2.Clear();
             uiMailingStreetAddress2.SendKeys(mailStreet2);
 
             // enter the mailing city
-            NgWebElement uiMailingCity = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressCity\"]"));
+            NgWebElement uiMailingCity = ngDriver.FindElement(By.CssSelector("input[formControlName='mailingAddressCity']"));
             uiMailingCity.Clear();
             uiMailingCity.SendKeys(mailCity);
 
             // enter the mailing province
-            NgWebElement uiMailingProvince = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressProvince\"]"));
+            NgWebElement uiMailingProvince = ngDriver.FindElement(By.CssSelector("input[formControlName='mailingAddressProvince']"));
             uiMailingProvince.Clear();
             uiMailingProvince.SendKeys(mailProvince);
 
             // enter the mailing postal code
-            NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressPostalCode\"]"));
+            NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.CssSelector("input[formControlName='mailingAddressPostalCode']"));
             uiMailingPostalCode.Clear();
             uiMailingPostalCode.SendKeys(mailPostalCode);
 
             // enter the mailing country
-            NgWebElement uiMailingCountry = ngDriver.FindElement(By.CssSelector("input[formControlName=\"mailingAddressCountry\"]"));
+            NgWebElement uiMailingCountry = ngDriver.FindElement(By.CssSelector("input[formControlName='mailingAddressCountry']"));
             uiMailingCountry.Clear();
             uiMailingCountry.SendKeys(mailCountry);
 
             // enter the business phone number
-            NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.CssSelector("input[formControlName=\"contactPhone\"]"));
+            NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.CssSelector("input[formControlName='contactPhone']"));
             uiBizPhoneNumber.SendKeys(bizPhoneNumber);
 
             // enter the business email
-            NgWebElement uiBizEmail = ngDriver.FindElement(By.CssSelector("input[formControlName=\"contactEmail\"]"));
+            NgWebElement uiBizEmail = ngDriver.FindElement(By.CssSelector("input[formControlName='contactEmail']"));
             uiBizEmail.SendKeys(bizEmail);
 
-            // (re)enter the first name of contact           
-            NgWebElement uiCorpGiven = ngDriver.FindElement(By.CssSelector("input[formControlName=\"firstname\"]"));
-            uiCorpGiven.SendKeys(corpGiven);
-
-            // (re)enter the last name of contact           
-            NgWebElement uiCorpSurname = ngDriver.FindElement(By.CssSelector("input[formControlName=\"lastname\"]"));
-            uiCorpSurname.SendKeys(corpSurname);
-
             // enter the contact title
-            NgWebElement uiCorpTitle = ngDriver.FindElement(By.CssSelector("input[formControlName=\"jobTitle\"]"));
+            NgWebElement uiCorpTitle = ngDriver.FindElement(By.CssSelector("input[formControlName='jobTitle']"));
             uiCorpTitle.SendKeys(corpTitle);
 
             // enter the contact phone number
-            NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.CssSelector("input[formControlName=\"telephone1\"]"));
+            NgWebElement uiCorpContactPhone = ngDriver.FindElement(By.CssSelector("input[formControlName='telephone1']"));
             uiCorpContactPhone.SendKeys(corpContactPhone);
 
-            ngDriver.WaitForAngular();
-
             // enter the contact email
-            NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.CssSelector("div[formGroupName=\"primarycontact\"] input[formControlName=\"emailaddress1\"]"));
+            NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='emailaddress1']"));
             uiCorpContactEmail.SendKeys(corpContactEmail);
 
-            // select 'No' for connection to a federal producer - switched off to test text areas
-            NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[2]"));
-            corpConnectionFederalProducer.Click();
-
-            // select 'Yes' for connection to a federal producer
-            NgWebElement corpConnectionFederalProducer2 = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[1]"));
-            corpConnectionFederalProducer2.Click();
-
-            // enter the name of the federal producer and details of the connection 
-            string nameAndDetails = "Name and details of federal producer (automated test).";
-
-            NgWebElement uiDetailsFederalProducer = ngDriver.FindElement(By.XPath("//textarea"));
-            uiDetailsFederalProducer.SendKeys(nameAndDetails);
-
-            // select 'No' for federal producer's connection to business - switched off to test text areas
-            if ((businessTypeShared != "indigenous nation") && (businessTypeShared != "society"))
+            if ((businessTypeShared == "indigenous nation"))
             {
-                NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[4]"));
-                federalProducerConnectionToCorp.Click();
-            }
-
-            // select 'Yes' for federal producer's connection to business
-            if ((businessTypeShared != "indigenous nation") && (businessTypeShared != "society"))
-            {
-                NgWebElement federalProducerConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[3]"));
-                federalProducerConnectionToCorp.Click();
+                // select 'Yes' for connection to a federal producer
+                NgWebElement INConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='iNConnectionToFederalProducer']"));
+                INConnectionFederalProducer.Click();
 
                 // enter the name of the federal producer and details of the connection 
-                string nameAndDetails2 = "Name and details of federal producer (automated test) (2).";
+                string INnameAndDetails = "Name and details of federal producer (automated test) for IN.";
+                NgWebElement INDetailsFederalProducer = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='iNConnectionToFederalProducerDetails']"));
+                INDetailsFederalProducer.SendKeys(INnameAndDetails);
+            }
 
-                NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.XPath("(//textarea[@id=''])[2]"));
-                uiDetailsFederalProducer2.SendKeys(nameAndDetails2);
+            if ((businessTypeShared == "private corporation") || (businessTypeShared == "sole proprietorship"))
+            {
+                // select 'Yes' for corporation connection to federal producer 
+                NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='corpConnectionFederalProducer']"));
+                corpConnectionFederalProducer.Click();
+
+                // enter the name of the federal producer and details of the connection 
+                string nameAndDetails = "The name of the federal producer and details of the connection.";
+                NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='corpConnectionFederalProducerDetails']")); 
+                uiDetailsFederalProducer2.SendKeys(nameAndDetails);
+
+                // select 'Yes' for federal producer connection to corporation
+                NgWebElement corpConnectionFederalProducer2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='federalProducerConnectionToCorp']"));
+                corpConnectionFederalProducer2.Click();
+
+                // enter the name of the federal producer and details of the connection 
+                string nameAndDetails2 = "Name and details of federal producer connection to corporation.";
+                NgWebElement uiDetailsFederalProducer3 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='federalProducerConnectionToCorpDetails']"));
+                uiDetailsFederalProducer3.SendKeys(nameAndDetails2);
+            }
+
+            if ((businessTypeShared == "partnership"))
+            {
+                // select 'Yes' for partnership connection to federal producer 
+                NgWebElement partnerConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='partnersConnectionFederalProducer']"));
+                partnerConnectionFederalProducer.Click();
+
+                // enter the name of the federal producer and details of the connection 
+                string nameAndDetails = "The name of the federal producer and details of the connection (partnership).";
+                NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='partnersConnectionFederalProducerDetails']"));
+                uiDetailsFederalProducer2.SendKeys(nameAndDetails);
+
+                // select 'Yes' for federal producer connection to corporation
+                NgWebElement corpConnectionFederalProducer2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='federalProducerConnectionToCorp']"));
+                corpConnectionFederalProducer2.Click();
+
+                // enter the name of the federal producer and details of the connection 
+                string nameAndDetails2 = "Name and details of federal producer connection to corporation.";
+                NgWebElement uiDetailsFederalProducer3 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='federalProducerConnectionToCorpDetails']"));
+                uiDetailsFederalProducer3.SendKeys(nameAndDetails2);
             }
 
             if (businessTypeShared == "public corporation")
             {
-                string familyRelationship = "Details of family relationship (automated test).";
+                // select 'Yes' for corporation connection to federal producer 
+                NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='corpConnectionFederalProducer']"));
+                corpConnectionFederalProducer.Click();
 
+                // enter the name of the federal producer and details of the connection 
+                string nameAndDetails = "The name of the federal producer and details of the connection.";
+                NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='corpConnectionFederalProducerDetails']"));
+                uiDetailsFederalProducer2.SendKeys(nameAndDetails);
+
+                // select 'Yes' for shareholder connection
+                NgWebElement shareholderConnectionConnectionToCorp = ngDriver.FindElement(By.CssSelector("input[formcontrolname='share20PlusConnectionProducer']"));
+                shareholderConnectionConnectionToCorp.Click();
+
+                string shareholderDetails = "Details of shareholder relationship.";
+                NgWebElement uiShareholderDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='share20PlusConnectionProducerDetails']"));
+                uiShareholderDetails.SendKeys(shareholderDetails);
+               
                 // select 'Yes' for family connection
-                NgWebElement familyConnectionConnectionToCorp = ngDriver.FindElement(By.XPath("(//input[@type='radio'])[5]"));
+                NgWebElement familyConnectionConnectionToCorp = ngDriver.FindElement(By.CssSelector("input[formcontrolname='share20PlusFamilyConnectionProducer']"));
                 familyConnectionConnectionToCorp.Click();
 
                 // enter details of family connection
-                NgWebElement familyConnectionDetails = ngDriver.FindElement(By.XPath("(//textarea[@id=''])[3]"));
+                string familyRelationship = "Details of family relationship (automated test).";
+                NgWebElement familyConnectionDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='share20PlusFamilyConnectionProducerDetail']"));
                 familyConnectionDetails.SendKeys(familyRelationship);
+            }
+
+            if (businessTypeShared == "society")
+            {
+                // select 'Yes' for society connection to federal producer 
+                NgWebElement societyConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='societyConnectionFederalProducer']"));
+                societyConnectionFederalProducer.Click();
+
+                // enter details of society connection
+                string societyDetails = "Details of society/federal producer relationship.";
+                NgWebElement societyConnectionDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='societyConnectionFederalProducerDetails']"));
+                societyConnectionDetails.SendKeys(societyDetails);
             }
 
             // click on Continue to Organization Review button
