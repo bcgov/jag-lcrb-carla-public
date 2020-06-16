@@ -165,6 +165,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (licence.AdoxioLicenceType != null)
             {
                 licenseSummary.LicenceTypeName = licence.AdoxioLicenceType.AdoxioName;
+                licenseSummary.LicenceTypeCategory = (LicenceTypeCategory?)licence.AdoxioLicenceType.AdoxioCategory;
             }
 
             if (licence != null &&
