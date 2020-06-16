@@ -900,6 +900,44 @@ namespace bdd_tests
                 NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
                 uiConfirmButton.Click();
 
+                if (businessTypeShared == "partnership")
+                {
+                    // add individual partner as workaround for LCSD-3348
+
+                    // open individual partner 2 row
+                    NgWebElement openPartner2Row = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] button"));
+                    openPartner2Row.Click();
+
+                    // create individual partner 2 info
+                    string partner2FirstName = "Individual";
+                    string partner2LastName = "Partner2";
+                    string partner2Percentage = "502";
+                    string partner2Email = "individual@partner2.com";
+
+                    // enter individual partner2 first name
+                    NgWebElement uiPartner2First = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] input[formControlName='firstNameNew']"));
+                    uiPartner2First.SendKeys(partner2FirstName);
+
+                    // enter individual partner2 last name
+                    NgWebElement uiPartner2Last = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] input[formControlName='lastNameNew']"));
+                    uiPartner2Last.SendKeys(partner2LastName);
+
+                    // enter individual partner2 percentage
+                    NgWebElement uiPartner2Percentage = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] input[formControlName='interestPercentageNew']"));
+                    uiPartner2Percentage.SendKeys(partner2Percentage);
+
+                    // enter individual partner2 email
+                    NgWebElement uiPartner2Email = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] input[formControlName='emailNew']"));
+                    uiPartner2Email.SendKeys(partner2Email);
+
+                    // enter individual partner2 DOB
+                    NgWebElement openPartner2DOB = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] input[formControlName='dateofBirthNew']"));
+                    openPartner2DOB.Click();
+
+                    // select the date
+                    SharedCalendarDate();
+                }
+
                 // click on confirm org info button
                 NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' CONFIRM ORGANIZATION INFORMATION IS COMPLETE')]"));
                 orgInfoButton2.Click();
