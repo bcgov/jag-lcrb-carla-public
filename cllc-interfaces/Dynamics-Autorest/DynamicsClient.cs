@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top592 { get; set; }
+        public int? Top654 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip592 { get; set; }
+        public int? Skip654 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count592 { get; set; }
+        public bool? Count654 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter592 { get; set; }
+        public string Filter654 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search592 { get; set; }
+        public string Search654 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -94,6 +94,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IPartyidadoxioevent.
         /// </summary>
         public virtual IPartyidadoxioevent Partyidadoxioevent { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioenforcementaction.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioenforcementaction Regardingobjectidadoxioenforcementaction { get; private set; }
 
         /// <summary>
         /// Gets the IRegardingobjectidadoxioevent.
@@ -144,6 +149,51 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationbpfv3processsession.
         /// </summary>
         public virtual IApplicationbpfv3processsession Applicationbpfv3processsession { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationcrsbpfv4s.
+        /// </summary>
+        public virtual IApplicationcrsbpfv4s Applicationcrsbpfv4s { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationcrsbpfv4asyncoperations.
+        /// </summary>
+        public virtual IApplicationcrsbpfv4asyncoperations Applicationcrsbpfv4asyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationcrsbpfv4bulkdeletefailures.
+        /// </summary>
+        public virtual IApplicationcrsbpfv4bulkdeletefailures Applicationcrsbpfv4bulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationcrsbpfv4mailboxtrackingfolders.
+        /// </summary>
+        public virtual IApplicationcrsbpfv4mailboxtrackingfolders Applicationcrsbpfv4mailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationcrsbpfv4principalobjectattributeaccesses.
+        /// </summary>
+        public virtual IApplicationcrsbpfv4principalobjectattributeaccesses Applicationcrsbpfv4principalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationcrsbpfv4processsession.
+        /// </summary>
+        public virtual IApplicationcrsbpfv4processsession Applicationcrsbpfv4processsession { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationcrsbpfv4syncerrors.
+        /// </summary>
+        public virtual IApplicationcrsbpfv4syncerrors Applicationcrsbpfv4syncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationcrsbpfv4workflowlogs.
+        /// </summary>
+        public virtual IApplicationcrsbpfv4workflowlogs Applicationcrsbpfv4workflowlogs { get; private set; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioapplicationid.
+        /// </summary>
+        public virtual IBpfadoxioapplicationid Bpfadoxioapplicationid { get; private set; }
 
         /// <summary>
         /// Gets the IApplicationinvoicehistories.
@@ -204,11 +254,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationlicenseechangesv10workflowlogs.
         /// </summary>
         public virtual IApplicationlicenseechangesv10workflowlogs Applicationlicenseechangesv10workflowlogs { get; private set; }
-
-        /// <summary>
-        /// Gets the IBpfadoxioapplicationid.
-        /// </summary>
-        public virtual IBpfadoxioapplicationid Bpfadoxioapplicationid { get; private set; }
 
         /// <summary>
         /// Gets the IApplicationliquorbpfs.
@@ -354,6 +399,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationprocesssession.
         /// </summary>
         public virtual IApplicationprocesssession Applicationprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioapplicationadoxioapplicationcrsbpfv4.
+        /// </summary>
+        public virtual IBpfadoxioapplicationadoxioapplicationcrsbpfv4 Bpfadoxioapplicationadoxioapplicationcrsbpfv4 { get; private set; }
 
         /// <summary>
         /// Gets the IBpfadoxioapplicationadoxioapplicationlicenseechangesv10.
@@ -1129,6 +1179,161 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEndorsementtypesyncerrors.
         /// </summary>
         public virtual IEndorsementtypesyncerrors Endorsementtypesyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionbpfs.
+        /// </summary>
+        public virtual IEnforcementactionbpfs Enforcementactionbpfs { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionbpfasyncoperations.
+        /// </summary>
+        public virtual IEnforcementactionbpfasyncoperations Enforcementactionbpfasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionbpfbulkdeletefailures.
+        /// </summary>
+        public virtual IEnforcementactionbpfbulkdeletefailures Enforcementactionbpfbulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionbpfmailboxtrackingfolders.
+        /// </summary>
+        public virtual IEnforcementactionbpfmailboxtrackingfolders Enforcementactionbpfmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionbpfprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IEnforcementactionbpfprincipalobjectattributeaccesses Enforcementactionbpfprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionbpfprocesssession.
+        /// </summary>
+        public virtual IEnforcementactionbpfprocesssession Enforcementactionbpfprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionbpfsyncerrors.
+        /// </summary>
+        public virtual IEnforcementactionbpfsyncerrors Enforcementactionbpfsyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionbpfworkflowlogs.
+        /// </summary>
+        public virtual IEnforcementactionbpfworkflowlogs Enforcementactionbpfworkflowlogs { get; private set; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioenforcementactionid.
+        /// </summary>
+        public virtual IBpfadoxioenforcementactionid Bpfadoxioenforcementactionid { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactions.
+        /// </summary>
+        public virtual IEnforcementactions Enforcementactions { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionactivitypointers.
+        /// </summary>
+        public virtual IEnforcementactionactivitypointers Enforcementactionactivitypointers { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionannotations.
+        /// </summary>
+        public virtual IEnforcementactionannotations Enforcementactionannotations { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionappointments.
+        /// </summary>
+        public virtual IEnforcementactionappointments Enforcementactionappointments { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionasyncoperations.
+        /// </summary>
+        public virtual IEnforcementactionasyncoperations Enforcementactionasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionbulkdeletefailures.
+        /// </summary>
+        public virtual IEnforcementactionbulkdeletefailures Enforcementactionbulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionduplicatebaserecord.
+        /// </summary>
+        public virtual IEnforcementactionduplicatebaserecord Enforcementactionduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionduplicatematchingrecord.
+        /// </summary>
+        public virtual IEnforcementactionduplicatematchingrecord Enforcementactionduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionemails.
+        /// </summary>
+        public virtual IEnforcementactionemails Enforcementactionemails { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionfaxes.
+        /// </summary>
+        public virtual IEnforcementactionfaxes Enforcementactionfaxes { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionletters.
+        /// </summary>
+        public virtual IEnforcementactionletters Enforcementactionletters { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionmailboxtrackingfolders.
+        /// </summary>
+        public virtual IEnforcementactionmailboxtrackingfolders Enforcementactionmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionphonecalls.
+        /// </summary>
+        public virtual IEnforcementactionphonecalls Enforcementactionphonecalls { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IEnforcementactionprincipalobjectattributeaccesses Enforcementactionprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionprocesssession.
+        /// </summary>
+        public virtual IEnforcementactionprocesssession Enforcementactionprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionrecurringappointmentmasters.
+        /// </summary>
+        public virtual IEnforcementactionrecurringappointmentmasters Enforcementactionrecurringappointmentmasters { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionserviceappointments.
+        /// </summary>
+        public virtual IEnforcementactionserviceappointments Enforcementactionserviceappointments { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionsharepointdocumentlocations.
+        /// </summary>
+        public virtual IEnforcementactionsharepointdocumentlocations Enforcementactionsharepointdocumentlocations { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionsocialactivities.
+        /// </summary>
+        public virtual IEnforcementactionsocialactivities Enforcementactionsocialactivities { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionsyncerrors.
+        /// </summary>
+        public virtual IEnforcementactionsyncerrors Enforcementactionsyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactiontasks.
+        /// </summary>
+        public virtual IEnforcementactiontasks Enforcementactiontasks { get; private set; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioenforcementactionadoxioenforcementactionbpf.
+        /// </summary>
+        public virtual IBpfadoxioenforcementactionadoxioenforcementactionbpf Bpfadoxioenforcementactionadoxioenforcementactionbpf { get; private set; }
 
         /// <summary>
         /// Gets the IEstablishmentincidents.
@@ -2446,6 +2651,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IObjectidadoxiocontravention Objectidadoxiocontravention { get; private set; }
 
         /// <summary>
+        /// Gets the IObjectidadoxioenforcementaction.
+        /// </summary>
+        public virtual IObjectidadoxioenforcementaction Objectidadoxioenforcementaction { get; private set; }
+
+        /// <summary>
         /// Gets the IObjectidadoxioestablishment.
         /// </summary>
         public virtual IObjectidadoxioestablishment Objectidadoxioestablishment { get; private set; }
@@ -2456,9 +2666,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IObjectidadoxioevent Objectidadoxioevent { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioenforcementactionappointment.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioenforcementactionappointment Regardingobjectidadoxioenforcementactionappointment { get; private set; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioeventappointment.
         /// </summary>
         public virtual IRegardingobjectidadoxioeventappointment Regardingobjectidadoxioeventappointment { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationcrsbpfv4.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioapplicationcrsbpfv4 Regardingobjectidadoxioapplicationcrsbpfv4 { get; private set; }
 
         /// <summary>
         /// Gets the IRegardingobjectidadoxioapplicationlicenseechangesv10.
@@ -2504,6 +2724,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IRegardingobjectidadoxioendorsementtype.
         /// </summary>
         public virtual IRegardingobjectidadoxioendorsementtype Regardingobjectidadoxioendorsementtype { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioenforcementactionbpf.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioenforcementactionbpf Regardingobjectidadoxioenforcementactionbpf { get; private set; }
 
         /// <summary>
         /// Gets the IRegardingobjectidadoxioestablishmentincident.
@@ -2559,6 +2784,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBusinessunitadoxioendorsementtype.
         /// </summary>
         public virtual IBusinessunitadoxioendorsementtype Businessunitadoxioendorsementtype { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioenforcementaction.
+        /// </summary>
+        public virtual IBusinessunitadoxioenforcementaction Businessunitadoxioenforcementaction { get; private set; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxioestablishmentincident.
@@ -2631,6 +2861,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IBaserecordidadoxioendorsementtype Baserecordidadoxioendorsementtype { get; private set; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxioenforcementaction.
+        /// </summary>
+        public virtual IBaserecordidadoxioenforcementaction Baserecordidadoxioenforcementaction { get; private set; }
+
+        /// <summary>
         /// Gets the IBaserecordidadoxioevent.
         /// </summary>
         public virtual IBaserecordidadoxioevent Baserecordidadoxioevent { get; private set; }
@@ -2686,6 +2921,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IDuplicaterecordidadoxioendorsementtype Duplicaterecordidadoxioendorsementtype { get; private set; }
 
         /// <summary>
+        /// Gets the IDuplicaterecordidadoxioenforcementaction.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxioenforcementaction Duplicaterecordidadoxioenforcementaction { get; private set; }
+
+        /// <summary>
         /// Gets the IDuplicaterecordidadoxioevent.
         /// </summary>
         public virtual IDuplicaterecordidadoxioevent Duplicaterecordidadoxioevent { get; private set; }
@@ -2726,6 +2966,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IDuplicaterecordidadoxiormreview Duplicaterecordidadoxiormreview { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioenforcementactionemail.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioenforcementactionemail Regardingobjectidadoxioenforcementactionemail { get; private set; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioeventemail.
         /// </summary>
         public virtual IRegardingobjectidadoxioeventemail Regardingobjectidadoxioeventemail { get; private set; }
@@ -2734,6 +2979,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEntitydefinitions.
         /// </summary>
         public virtual IEntitydefinitions Entitydefinitions { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioenforcementactionfax.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioenforcementactionfax Regardingobjectidadoxioenforcementactionfax { get; private set; }
 
         /// <summary>
         /// Gets the IRegardingobjectidadoxioeventfax.
@@ -2756,9 +3006,24 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInvoices Invoices { get; private set; }
 
         /// <summary>
+        /// Gets the IInvoiceinvoiceoriginalinvoice.
+        /// </summary>
+        public virtual IInvoiceinvoiceoriginalinvoice Invoiceinvoiceoriginalinvoice { get; private set; }
+
+        /// <summary>
+        /// Gets the IOriginalinvoice.
+        /// </summary>
+        public virtual IOriginalinvoice Originalinvoice { get; private set; }
+
+        /// <summary>
         /// Gets the ILeads.
         /// </summary>
         public virtual ILeads Leads { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioenforcementactionletter.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioenforcementactionletter Regardingobjectidadoxioenforcementactionletter { get; private set; }
 
         /// <summary>
         /// Gets the IRegardingobjectidadoxioeventletter.
@@ -3066,6 +3331,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRegardingobjectidadoxioworkerinvoicehistory Regardingobjectidadoxioworkerinvoicehistory { get; private set; }
 
         /// <summary>
+        /// Gets the IOrganizationadoxioapplicationcrsbpfv4.
+        /// </summary>
+        public virtual IOrganizationadoxioapplicationcrsbpfv4 Organizationadoxioapplicationcrsbpfv4 { get; private set; }
+
+        /// <summary>
         /// Gets the IOrganizationadoxioapplicationlicenseechangesv10.
         /// </summary>
         public virtual IOrganizationadoxioapplicationlicenseechangesv10 Organizationadoxioapplicationlicenseechangesv10 { get; private set; }
@@ -3096,6 +3366,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IOrganizationadoxioapplicationtransferownershipv1 Organizationadoxioapplicationtransferownershipv1 { get; private set; }
 
         /// <summary>
+        /// Gets the IOrganizationadoxioenforcementactionbpf.
+        /// </summary>
+        public virtual IOrganizationadoxioenforcementactionbpf Organizationadoxioenforcementactionbpf { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioenforcementactionphonecall.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioenforcementactionphonecall Regardingobjectidadoxioenforcementactionphonecall { get; private set; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioeventphonecall.
         /// </summary>
         public virtual IRegardingobjectidadoxioeventphonecall Regardingobjectidadoxioeventphonecall { get; private set; }
@@ -3114,6 +3394,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IObjectidadoxioapplicationbpfv3.
         /// </summary>
         public virtual IObjectidadoxioapplicationbpfv3 Objectidadoxioapplicationbpfv3 { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioapplicationcrsbpfv4.
+        /// </summary>
+        public virtual IObjectidadoxioapplicationcrsbpfv4 Objectidadoxioapplicationcrsbpfv4 { get; private set; }
 
         /// <summary>
         /// Gets the IObjectidadoxioapplicationinvoicehistory.
@@ -3264,6 +3549,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IObjectidadoxioendorsementtype.
         /// </summary>
         public virtual IObjectidadoxioendorsementtype Objectidadoxioendorsementtype { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioenforcementactionbpf.
+        /// </summary>
+        public virtual IObjectidadoxioenforcementactionbpf Objectidadoxioenforcementactionbpf { get; private set; }
 
         /// <summary>
         /// Gets the IObjectidadoxioestablishmentincident.
@@ -3471,6 +3761,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IObjectidadoxioworkerinvoicehistory Objectidadoxioworkerinvoicehistory { get; private set; }
 
         /// <summary>
+        /// Gets the ILkadoxioapplicationcrsbpfv4activestageid.
+        /// </summary>
+        public virtual ILkadoxioapplicationcrsbpfv4activestageid Lkadoxioapplicationcrsbpfv4activestageid { get; private set; }
+
+        /// <summary>
         /// Gets the ILkadoxioapplicationlicenseechangesv10activestageid.
         /// </summary>
         public virtual ILkadoxioapplicationlicenseechangesv10activestageid Lkadoxioapplicationlicenseechangesv10activestageid { get; private set; }
@@ -3501,9 +3796,24 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILkadoxioapplicationtransferownershipv1activestageid Lkadoxioapplicationtransferownershipv1activestageid { get; private set; }
 
         /// <summary>
+        /// Gets the ILkadoxioenforcementactionbpfactivestageid.
+        /// </summary>
+        public virtual ILkadoxioenforcementactionbpfactivestageid Lkadoxioenforcementactionbpfactivestageid { get; private set; }
+
+        /// <summary>
+        /// Gets the IProcessstageadoxioenforcementaction.
+        /// </summary>
+        public virtual IProcessstageadoxioenforcementaction Processstageadoxioenforcementaction { get; private set; }
+
+        /// <summary>
         /// Gets the IProductadoxioapplicationtypefeeschedulefeeproduct.
         /// </summary>
         public virtual IProductadoxioapplicationtypefeeschedulefeeproduct Productadoxioapplicationtypefeeschedulefeeproduct { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioenforcementactionrecurringappointmentmaster.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioenforcementactionrecurringappointmentmaster Regardingobjectidadoxioenforcementactionrecurringappointmentmaster { get; private set; }
 
         /// <summary>
         /// Gets the IRegardingobjectidadoxioeventrecurringappointmentmaster.
@@ -3514,6 +3824,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISavedqueries.
         /// </summary>
         public virtual ISavedqueries Savedqueries { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioenforcementactionserviceappointment.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioenforcementactionserviceappointment Regardingobjectidadoxioenforcementactionserviceappointment { get; private set; }
 
         /// <summary>
         /// Gets the IRegardingobjectidadoxioeventserviceappointment.
@@ -3529,6 +3844,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISharepointsites.
         /// </summary>
         public virtual ISharepointsites Sharepointsites { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioenforcementactionsocialactivity.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioenforcementactionsocialactivity Regardingobjectidadoxioenforcementactionsocialactivity { get; private set; }
 
         /// <summary>
         /// Gets the IRegardingobjectidadoxioeventsocialactivity.
@@ -3549,6 +3869,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISystemuseradoxioeventinspector.
         /// </summary>
         public virtual ISystemuseradoxioeventinspector Systemuseradoxioeventinspector { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationcrsbpfv4createdby.
+        /// </summary>
+        public virtual ILkadoxioapplicationcrsbpfv4createdby Lkadoxioapplicationcrsbpfv4createdby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationcrsbpfv4createdonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioapplicationcrsbpfv4createdonbehalfby Lkadoxioapplicationcrsbpfv4createdonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationcrsbpfv4modifiedby.
+        /// </summary>
+        public virtual ILkadoxioapplicationcrsbpfv4modifiedby Lkadoxioapplicationcrsbpfv4modifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationcrsbpfv4modifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioapplicationcrsbpfv4modifiedonbehalfby Lkadoxioapplicationcrsbpfv4modifiedonbehalfby { get; private set; }
 
         /// <summary>
         /// Gets the ILkadoxioapplicationlicenseechangesv10createdby.
@@ -3729,6 +4069,46 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILkadoxioendorsementtypemodifiedonbehalfby.
         /// </summary>
         public virtual ILkadoxioendorsementtypemodifiedonbehalfby Lkadoxioendorsementtypemodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioenforcementactioncreatedby.
+        /// </summary>
+        public virtual ILkadoxioenforcementactioncreatedby Lkadoxioenforcementactioncreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioenforcementactioncreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioenforcementactioncreatedonbehalfby Lkadoxioenforcementactioncreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioenforcementactionmodifiedby.
+        /// </summary>
+        public virtual ILkadoxioenforcementactionmodifiedby Lkadoxioenforcementactionmodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioenforcementactionmodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioenforcementactionmodifiedonbehalfby Lkadoxioenforcementactionmodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioenforcementactionbpfcreatedby.
+        /// </summary>
+        public virtual ILkadoxioenforcementactionbpfcreatedby Lkadoxioenforcementactionbpfcreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioenforcementactionbpfcreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioenforcementactionbpfcreatedonbehalfby Lkadoxioenforcementactionbpfcreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioenforcementactionbpfmodifiedby.
+        /// </summary>
+        public virtual ILkadoxioenforcementactionbpfmodifiedby Lkadoxioenforcementactionbpfmodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioenforcementactionbpfmodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioenforcementactionbpfmodifiedonbehalfby Lkadoxioenforcementactionbpfmodifiedonbehalfby { get; private set; }
 
         /// <summary>
         /// Gets the ILkadoxioestablishmentincidentcreatedby.
@@ -3926,6 +4306,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IUseradoxioendorsementtype Useradoxioendorsementtype { get; private set; }
 
         /// <summary>
+        /// Gets the IUseradoxioenforcementaction.
+        /// </summary>
+        public virtual IUseradoxioenforcementaction Useradoxioenforcementaction { get; private set; }
+
+        /// <summary>
         /// Gets the IUseradoxioestablishmentincident.
         /// </summary>
         public virtual IUseradoxioestablishmentincident Useradoxioestablishmentincident { get; private set; }
@@ -3981,6 +4366,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILegalentitytask Legalentitytask { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioenforcementactiontask.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioenforcementactiontask Regardingobjectidadoxioenforcementactiontask { get; private set; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioeventtask.
         /// </summary>
         public virtual IRegardingobjectidadoxioeventtask Regardingobjectidadoxioeventtask { get; private set; }
@@ -3999,6 +4389,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITeamadoxioendorsementtype.
         /// </summary>
         public virtual ITeamadoxioendorsementtype Teamadoxioendorsementtype { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioenforcementaction.
+        /// </summary>
+        public virtual ITeamadoxioenforcementaction Teamadoxioenforcementaction { get; private set; }
 
         /// <summary>
         /// Gets the ITeamadoxioestablishmentincident.
@@ -4046,6 +4441,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ITeamadoxiormreview Teamadoxiormreview { get; private set; }
 
         /// <summary>
+        /// Gets the IAsyncoperationidadoxioapplicationcrsbpfv4.
+        /// </summary>
+        public virtual IAsyncoperationidadoxioapplicationcrsbpfv4 Asyncoperationidadoxioapplicationcrsbpfv4 { get; private set; }
+
+        /// <summary>
         /// Gets the IAsyncoperationidadoxioapplicationlicenseechangesv10.
         /// </summary>
         public virtual IAsyncoperationidadoxioapplicationlicenseechangesv10 Asyncoperationidadoxioapplicationlicenseechangesv10 { get; private set; }
@@ -4076,9 +4476,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAsyncoperationidadoxioapplicationtransferownershipv1 Asyncoperationidadoxioapplicationtransferownershipv1 { get; private set; }
 
         /// <summary>
+        /// Gets the IAsyncoperationidadoxioenforcementactionbpf.
+        /// </summary>
+        public virtual IAsyncoperationidadoxioenforcementactionbpf Asyncoperationidadoxioenforcementactionbpf { get; private set; }
+
+        /// <summary>
         /// Gets the IWorkflows.
         /// </summary>
         public virtual IWorkflows Workflows { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationcrsbpfv4processid.
+        /// </summary>
+        public virtual ILkadoxioapplicationcrsbpfv4processid Lkadoxioapplicationcrsbpfv4processid { get; private set; }
 
         /// <summary>
         /// Gets the ILkadoxioapplicationlicenseechangesv10processid.
@@ -4109,6 +4519,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILkadoxioapplicationtransferownershipv1processid.
         /// </summary>
         public virtual ILkadoxioapplicationtransferownershipv1processid Lkadoxioapplicationtransferownershipv1processid { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioenforcementactionbpfprocessid.
+        /// </summary>
+        public virtual ILkadoxioenforcementactionbpfprocessid Lkadoxioenforcementactionbpfprocessid { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the DynamicsClient class.
@@ -4357,6 +4772,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lginlinkid = new Lginlinkid(this);
             Thirdpartyoperatorlicences = new Thirdpartyoperatorlicences(this);
             Partyidadoxioevent = new Partyidadoxioevent(this);
+            Regardingobjectidadoxioenforcementaction = new Regardingobjectidadoxioenforcementaction(this);
             Regardingobjectidadoxioevent = new Regardingobjectidadoxioevent(this);
             Adoxiolicencetypeadoxioinvestigationset = new Adoxiolicencetypeadoxioinvestigationset(this);
             Aliases = new Aliases(this);
@@ -4367,6 +4783,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationbpfv3mailboxtrackingfolders = new Applicationbpfv3mailboxtrackingfolders(this);
             Applicationbpfv3principalobjectattributeaccesses = new Applicationbpfv3principalobjectattributeaccesses(this);
             Applicationbpfv3processsession = new Applicationbpfv3processsession(this);
+            Applicationcrsbpfv4s = new Applicationcrsbpfv4s(this);
+            Applicationcrsbpfv4asyncoperations = new Applicationcrsbpfv4asyncoperations(this);
+            Applicationcrsbpfv4bulkdeletefailures = new Applicationcrsbpfv4bulkdeletefailures(this);
+            Applicationcrsbpfv4mailboxtrackingfolders = new Applicationcrsbpfv4mailboxtrackingfolders(this);
+            Applicationcrsbpfv4principalobjectattributeaccesses = new Applicationcrsbpfv4principalobjectattributeaccesses(this);
+            Applicationcrsbpfv4processsession = new Applicationcrsbpfv4processsession(this);
+            Applicationcrsbpfv4syncerrors = new Applicationcrsbpfv4syncerrors(this);
+            Applicationcrsbpfv4workflowlogs = new Applicationcrsbpfv4workflowlogs(this);
+            Bpfadoxioapplicationid = new Bpfadoxioapplicationid(this);
             Applicationinvoicehistories = new Applicationinvoicehistories(this);
             Applicationinvoicehistorymailboxtrackingfolders = new Applicationinvoicehistorymailboxtrackingfolders(this);
             Applicationinvoicehistoryprincipalobjectattributeaccesses = new Applicationinvoicehistoryprincipalobjectattributeaccesses(this);
@@ -4379,7 +4804,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationlicenseechangesv10processsession = new Applicationlicenseechangesv10processsession(this);
             Applicationlicenseechangesv10syncerrors = new Applicationlicenseechangesv10syncerrors(this);
             Applicationlicenseechangesv10workflowlogs = new Applicationlicenseechangesv10workflowlogs(this);
-            Bpfadoxioapplicationid = new Bpfadoxioapplicationid(this);
             Applicationliquorbpfs = new Applicationliquorbpfs(this);
             Applicationliquorbpfasyncoperations = new Applicationliquorbpfasyncoperations(this);
             Applicationliquorbpfbulkdeletefailures = new Applicationliquorbpfbulkdeletefailures(this);
@@ -4409,6 +4833,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationmailboxtrackingfolders = new Applicationmailboxtrackingfolders(this);
             Applicationprincipalobjectattributeaccesses = new Applicationprincipalobjectattributeaccesses(this);
             Applicationprocesssession = new Applicationprocesssession(this);
+            Bpfadoxioapplicationadoxioapplicationcrsbpfv4 = new Bpfadoxioapplicationadoxioapplicationcrsbpfv4(this);
             Bpfadoxioapplicationadoxioapplicationlicenseechangesv10 = new Bpfadoxioapplicationadoxioapplicationlicenseechangesv10(this);
             Bpfadoxioapplicationadoxioapplicationliquorbpf = new Bpfadoxioapplicationadoxioapplicationliquorbpf(this);
             Bpfadoxioapplicationadoxioapplicationliquorbpfv2 = new Bpfadoxioapplicationadoxioapplicationliquorbpfv2(this);
@@ -4564,6 +4989,37 @@ namespace Gov.Lclb.Cllb.Interfaces
             Endorsementtypeprincipalobjectattributeaccesses = new Endorsementtypeprincipalobjectattributeaccesses(this);
             Endorsementtypeprocesssession = new Endorsementtypeprocesssession(this);
             Endorsementtypesyncerrors = new Endorsementtypesyncerrors(this);
+            Enforcementactionbpfs = new Enforcementactionbpfs(this);
+            Enforcementactionbpfasyncoperations = new Enforcementactionbpfasyncoperations(this);
+            Enforcementactionbpfbulkdeletefailures = new Enforcementactionbpfbulkdeletefailures(this);
+            Enforcementactionbpfmailboxtrackingfolders = new Enforcementactionbpfmailboxtrackingfolders(this);
+            Enforcementactionbpfprincipalobjectattributeaccesses = new Enforcementactionbpfprincipalobjectattributeaccesses(this);
+            Enforcementactionbpfprocesssession = new Enforcementactionbpfprocesssession(this);
+            Enforcementactionbpfsyncerrors = new Enforcementactionbpfsyncerrors(this);
+            Enforcementactionbpfworkflowlogs = new Enforcementactionbpfworkflowlogs(this);
+            Bpfadoxioenforcementactionid = new Bpfadoxioenforcementactionid(this);
+            Enforcementactions = new Enforcementactions(this);
+            Enforcementactionactivitypointers = new Enforcementactionactivitypointers(this);
+            Enforcementactionannotations = new Enforcementactionannotations(this);
+            Enforcementactionappointments = new Enforcementactionappointments(this);
+            Enforcementactionasyncoperations = new Enforcementactionasyncoperations(this);
+            Enforcementactionbulkdeletefailures = new Enforcementactionbulkdeletefailures(this);
+            Enforcementactionduplicatebaserecord = new Enforcementactionduplicatebaserecord(this);
+            Enforcementactionduplicatematchingrecord = new Enforcementactionduplicatematchingrecord(this);
+            Enforcementactionemails = new Enforcementactionemails(this);
+            Enforcementactionfaxes = new Enforcementactionfaxes(this);
+            Enforcementactionletters = new Enforcementactionletters(this);
+            Enforcementactionmailboxtrackingfolders = new Enforcementactionmailboxtrackingfolders(this);
+            Enforcementactionphonecalls = new Enforcementactionphonecalls(this);
+            Enforcementactionprincipalobjectattributeaccesses = new Enforcementactionprincipalobjectattributeaccesses(this);
+            Enforcementactionprocesssession = new Enforcementactionprocesssession(this);
+            Enforcementactionrecurringappointmentmasters = new Enforcementactionrecurringappointmentmasters(this);
+            Enforcementactionserviceappointments = new Enforcementactionserviceappointments(this);
+            Enforcementactionsharepointdocumentlocations = new Enforcementactionsharepointdocumentlocations(this);
+            Enforcementactionsocialactivities = new Enforcementactionsocialactivities(this);
+            Enforcementactionsyncerrors = new Enforcementactionsyncerrors(this);
+            Enforcementactiontasks = new Enforcementactiontasks(this);
+            Bpfadoxioenforcementactionadoxioenforcementactionbpf = new Bpfadoxioenforcementactionadoxioenforcementactionbpf(this);
             Establishmentincidents = new Establishmentincidents(this);
             Establishment = new Establishment(this);
             Establishmentincidentasyncoperations = new Establishmentincidentasyncoperations(this);
@@ -4827,9 +5283,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             Workerprincipalobjectattributeaccesses = new Workerprincipalobjectattributeaccesses(this);
             Workerprocesssession = new Workerprocesssession(this);
             Objectidadoxiocontravention = new Objectidadoxiocontravention(this);
+            Objectidadoxioenforcementaction = new Objectidadoxioenforcementaction(this);
             Objectidadoxioestablishment = new Objectidadoxioestablishment(this);
             Objectidadoxioevent = new Objectidadoxioevent(this);
+            Regardingobjectidadoxioenforcementactionappointment = new Regardingobjectidadoxioenforcementactionappointment(this);
             Regardingobjectidadoxioeventappointment = new Regardingobjectidadoxioeventappointment(this);
+            Regardingobjectidadoxioapplicationcrsbpfv4 = new Regardingobjectidadoxioapplicationcrsbpfv4(this);
             Regardingobjectidadoxioapplicationlicenseechangesv10 = new Regardingobjectidadoxioapplicationlicenseechangesv10(this);
             Regardingobjectidadoxioapplicationliquorbpf = new Regardingobjectidadoxioapplicationliquorbpf(this);
             Regardingobjectidadoxioapplicationliquorbpfv2 = new Regardingobjectidadoxioapplicationliquorbpfv2(this);
@@ -4839,6 +5298,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Regardingobjectidadoxioapplicationtypefeeschedule = new Regardingobjectidadoxioapplicationtypefeeschedule(this);
             Regardingobjectidadoxioendorsement = new Regardingobjectidadoxioendorsement(this);
             Regardingobjectidadoxioendorsementtype = new Regardingobjectidadoxioendorsementtype(this);
+            Regardingobjectidadoxioenforcementactionbpf = new Regardingobjectidadoxioenforcementactionbpf(this);
             Regardingobjectidadoxioestablishmentincident = new Regardingobjectidadoxioestablishmentincident(this);
             Regardingobjectidadoxioeventschedule = new Regardingobjectidadoxioeventschedule(this);
             Regardingobjectidadoxioexhibit = new Regardingobjectidadoxioexhibit(this);
@@ -4850,6 +5310,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Businessunitadoxioapplicationtypefeeschedule = new Businessunitadoxioapplicationtypefeeschedule(this);
             Businessunitadoxioendorsement = new Businessunitadoxioendorsement(this);
             Businessunitadoxioendorsementtype = new Businessunitadoxioendorsementtype(this);
+            Businessunitadoxioenforcementaction = new Businessunitadoxioenforcementaction(this);
             Businessunitadoxioestablishmentincident = new Businessunitadoxioestablishmentincident(this);
             Businessunitadoxioevent = new Businessunitadoxioevent(this);
             Businessunitadoxioeventschedule = new Businessunitadoxioeventschedule(this);
@@ -4864,6 +5325,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Baserecordidadoxioapplicationtypefeeschedule = new Baserecordidadoxioapplicationtypefeeschedule(this);
             Baserecordidadoxioendorsement = new Baserecordidadoxioendorsement(this);
             Baserecordidadoxioendorsementtype = new Baserecordidadoxioendorsementtype(this);
+            Baserecordidadoxioenforcementaction = new Baserecordidadoxioenforcementaction(this);
             Baserecordidadoxioevent = new Baserecordidadoxioevent(this);
             Baserecordidadoxioeventschedule = new Baserecordidadoxioeventschedule(this);
             Baserecordidadoxioexhibit = new Baserecordidadoxioexhibit(this);
@@ -4875,6 +5337,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Duplicaterecordidadoxioapplicationtypefeeschedule = new Duplicaterecordidadoxioapplicationtypefeeschedule(this);
             Duplicaterecordidadoxioendorsement = new Duplicaterecordidadoxioendorsement(this);
             Duplicaterecordidadoxioendorsementtype = new Duplicaterecordidadoxioendorsementtype(this);
+            Duplicaterecordidadoxioenforcementaction = new Duplicaterecordidadoxioenforcementaction(this);
             Duplicaterecordidadoxioevent = new Duplicaterecordidadoxioevent(this);
             Duplicaterecordidadoxioeventschedule = new Duplicaterecordidadoxioeventschedule(this);
             Duplicaterecordidadoxioexhibit = new Duplicaterecordidadoxioexhibit(this);
@@ -4883,13 +5346,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             Duplicaterecordidadoxioldborder = new Duplicaterecordidadoxioldborder(this);
             Duplicaterecordidadoxiolicenceldbordertotalhistory = new Duplicaterecordidadoxiolicenceldbordertotalhistory(this);
             Duplicaterecordidadoxiormreview = new Duplicaterecordidadoxiormreview(this);
+            Regardingobjectidadoxioenforcementactionemail = new Regardingobjectidadoxioenforcementactionemail(this);
             Regardingobjectidadoxioeventemail = new Regardingobjectidadoxioeventemail(this);
             Entitydefinitions = new Entitydefinitions(this);
+            Regardingobjectidadoxioenforcementactionfax = new Regardingobjectidadoxioenforcementactionfax(this);
             Regardingobjectidadoxioeventfax = new Regardingobjectidadoxioeventfax(this);
             Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
             Incidentadoxiormreviewinspection = new Incidentadoxiormreviewinspection(this);
             Invoices = new Invoices(this);
+            Invoiceinvoiceoriginalinvoice = new Invoiceinvoiceoriginalinvoice(this);
+            Originalinvoice = new Originalinvoice(this);
             Leads = new Leads(this);
+            Regardingobjectidadoxioenforcementactionletter = new Regardingobjectidadoxioenforcementactionletter(this);
             Regardingobjectidadoxioeventletter = new Regardingobjectidadoxioeventletter(this);
             Lists = new Lists(this);
             Regardingobjectidadoxioalias = new Regardingobjectidadoxioalias(this);
@@ -4951,16 +5419,20 @@ namespace Gov.Lclb.Cllb.Interfaces
             Regardingobjectidadoxiowitness = new Regardingobjectidadoxiowitness(this);
             Regardingobjectidadoxioworker = new Regardingobjectidadoxioworker(this);
             Regardingobjectidadoxioworkerinvoicehistory = new Regardingobjectidadoxioworkerinvoicehistory(this);
+            Organizationadoxioapplicationcrsbpfv4 = new Organizationadoxioapplicationcrsbpfv4(this);
             Organizationadoxioapplicationlicenseechangesv10 = new Organizationadoxioapplicationlicenseechangesv10(this);
             Organizationadoxioapplicationliquorbpf = new Organizationadoxioapplicationliquorbpf(this);
             Organizationadoxioapplicationliquorbpfv2 = new Organizationadoxioapplicationliquorbpfv2(this);
             Organizationadoxioapplicationrelocationv1 = new Organizationadoxioapplicationrelocationv1(this);
             Organizationadoxioapplicationstructurechangev1 = new Organizationadoxioapplicationstructurechangev1(this);
             Organizationadoxioapplicationtransferownershipv1 = new Organizationadoxioapplicationtransferownershipv1(this);
+            Organizationadoxioenforcementactionbpf = new Organizationadoxioenforcementactionbpf(this);
+            Regardingobjectidadoxioenforcementactionphonecall = new Regardingobjectidadoxioenforcementactionphonecall(this);
             Regardingobjectidadoxioeventphonecall = new Regardingobjectidadoxioeventphonecall(this);
             Objectidadoxioalias = new Objectidadoxioalias(this);
             Objectidadoxioapplication = new Objectidadoxioapplication(this);
             Objectidadoxioapplicationbpfv3 = new Objectidadoxioapplicationbpfv3(this);
+            Objectidadoxioapplicationcrsbpfv4 = new Objectidadoxioapplicationcrsbpfv4(this);
             Objectidadoxioapplicationinvoicehistory = new Objectidadoxioapplicationinvoicehistory(this);
             Objectidadoxioapplicationlicenseechangesv10 = new Objectidadoxioapplicationlicenseechangesv10(this);
             Objectidadoxioapplicationliquorbpf = new Objectidadoxioapplicationliquorbpf(this);
@@ -4991,6 +5463,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Objectidadoxiodocumentadmin = new Objectidadoxiodocumentadmin(this);
             Objectidadoxioendorsement = new Objectidadoxioendorsement(this);
             Objectidadoxioendorsementtype = new Objectidadoxioendorsementtype(this);
+            Objectidadoxioenforcementactionbpf = new Objectidadoxioenforcementactionbpf(this);
             Objectidadoxioestablishmentincident = new Objectidadoxioestablishmentincident(this);
             Objectidadoxioestablishmentwatchword = new Objectidadoxioestablishmentwatchword(this);
             Objectidadoxioeventschedule = new Objectidadoxioeventschedule(this);
@@ -5032,22 +5505,32 @@ namespace Gov.Lclb.Cllb.Interfaces
             Objectidadoxiowitness = new Objectidadoxiowitness(this);
             Objectidadoxioworker = new Objectidadoxioworker(this);
             Objectidadoxioworkerinvoicehistory = new Objectidadoxioworkerinvoicehistory(this);
+            Lkadoxioapplicationcrsbpfv4activestageid = new Lkadoxioapplicationcrsbpfv4activestageid(this);
             Lkadoxioapplicationlicenseechangesv10activestageid = new Lkadoxioapplicationlicenseechangesv10activestageid(this);
             Lkadoxioapplicationliquorbpfactivestageid = new Lkadoxioapplicationliquorbpfactivestageid(this);
             Lkadoxioapplicationliquorbpfv2activestageid = new Lkadoxioapplicationliquorbpfv2activestageid(this);
             Lkadoxioapplicationrelocationv1activestageid = new Lkadoxioapplicationrelocationv1activestageid(this);
             Lkadoxioapplicationstructurechangev1activestageid = new Lkadoxioapplicationstructurechangev1activestageid(this);
             Lkadoxioapplicationtransferownershipv1activestageid = new Lkadoxioapplicationtransferownershipv1activestageid(this);
+            Lkadoxioenforcementactionbpfactivestageid = new Lkadoxioenforcementactionbpfactivestageid(this);
+            Processstageadoxioenforcementaction = new Processstageadoxioenforcementaction(this);
             Productadoxioapplicationtypefeeschedulefeeproduct = new Productadoxioapplicationtypefeeschedulefeeproduct(this);
+            Regardingobjectidadoxioenforcementactionrecurringappointmentmaster = new Regardingobjectidadoxioenforcementactionrecurringappointmentmaster(this);
             Regardingobjectidadoxioeventrecurringappointmentmaster = new Regardingobjectidadoxioeventrecurringappointmentmaster(this);
             Savedqueries = new Savedqueries(this);
+            Regardingobjectidadoxioenforcementactionserviceappointment = new Regardingobjectidadoxioenforcementactionserviceappointment(this);
             Regardingobjectidadoxioeventserviceappointment = new Regardingobjectidadoxioeventserviceappointment(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
+            Regardingobjectidadoxioenforcementactionsocialactivity = new Regardingobjectidadoxioenforcementactionsocialactivity(this);
             Regardingobjectidadoxioeventsocialactivity = new Regardingobjectidadoxioeventsocialactivity(this);
             Systemforms = new Systemforms(this);
             Systemuseradoxioestablishmentincidentinspector = new Systemuseradoxioestablishmentincidentinspector(this);
             Systemuseradoxioeventinspector = new Systemuseradoxioeventinspector(this);
+            Lkadoxioapplicationcrsbpfv4createdby = new Lkadoxioapplicationcrsbpfv4createdby(this);
+            Lkadoxioapplicationcrsbpfv4createdonbehalfby = new Lkadoxioapplicationcrsbpfv4createdonbehalfby(this);
+            Lkadoxioapplicationcrsbpfv4modifiedby = new Lkadoxioapplicationcrsbpfv4modifiedby(this);
+            Lkadoxioapplicationcrsbpfv4modifiedonbehalfby = new Lkadoxioapplicationcrsbpfv4modifiedonbehalfby(this);
             Lkadoxioapplicationlicenseechangesv10createdby = new Lkadoxioapplicationlicenseechangesv10createdby(this);
             Lkadoxioapplicationlicenseechangesv10createdonbehalfby = new Lkadoxioapplicationlicenseechangesv10createdonbehalfby(this);
             Lkadoxioapplicationlicenseechangesv10modifiedby = new Lkadoxioapplicationlicenseechangesv10modifiedby(this);
@@ -5084,6 +5567,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lkadoxioendorsementtypecreatedonbehalfby = new Lkadoxioendorsementtypecreatedonbehalfby(this);
             Lkadoxioendorsementtypemodifiedby = new Lkadoxioendorsementtypemodifiedby(this);
             Lkadoxioendorsementtypemodifiedonbehalfby = new Lkadoxioendorsementtypemodifiedonbehalfby(this);
+            Lkadoxioenforcementactioncreatedby = new Lkadoxioenforcementactioncreatedby(this);
+            Lkadoxioenforcementactioncreatedonbehalfby = new Lkadoxioenforcementactioncreatedonbehalfby(this);
+            Lkadoxioenforcementactionmodifiedby = new Lkadoxioenforcementactionmodifiedby(this);
+            Lkadoxioenforcementactionmodifiedonbehalfby = new Lkadoxioenforcementactionmodifiedonbehalfby(this);
+            Lkadoxioenforcementactionbpfcreatedby = new Lkadoxioenforcementactionbpfcreatedby(this);
+            Lkadoxioenforcementactionbpfcreatedonbehalfby = new Lkadoxioenforcementactionbpfcreatedonbehalfby(this);
+            Lkadoxioenforcementactionbpfmodifiedby = new Lkadoxioenforcementactionbpfmodifiedby(this);
+            Lkadoxioenforcementactionbpfmodifiedonbehalfby = new Lkadoxioenforcementactionbpfmodifiedonbehalfby(this);
             Lkadoxioestablishmentincidentcreatedby = new Lkadoxioestablishmentincidentcreatedby(this);
             Lkadoxioestablishmentincidentcreatedonbehalfby = new Lkadoxioestablishmentincidentcreatedonbehalfby(this);
             Lkadoxioestablishmentincidentmodifiedby = new Lkadoxioestablishmentincidentmodifiedby(this);
@@ -5123,6 +5614,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Useradoxioapplicationtypefeeschedule = new Useradoxioapplicationtypefeeschedule(this);
             Useradoxioendorsement = new Useradoxioendorsement(this);
             Useradoxioendorsementtype = new Useradoxioendorsementtype(this);
+            Useradoxioenforcementaction = new Useradoxioenforcementaction(this);
             Useradoxioestablishmentincident = new Useradoxioestablishmentincident(this);
             Useradoxioevent = new Useradoxioevent(this);
             Useradoxioeventschedule = new Useradoxioeventschedule(this);
@@ -5134,10 +5626,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             Useradoxiormreview = new Useradoxiormreview(this);
             Contacttask = new Contacttask(this);
             Legalentitytask = new Legalentitytask(this);
+            Regardingobjectidadoxioenforcementactiontask = new Regardingobjectidadoxioenforcementactiontask(this);
             Regardingobjectidadoxioeventtask = new Regardingobjectidadoxioeventtask(this);
             Teamadoxioapplicationtypefeeschedule = new Teamadoxioapplicationtypefeeschedule(this);
             Teamadoxioendorsement = new Teamadoxioendorsement(this);
             Teamadoxioendorsementtype = new Teamadoxioendorsementtype(this);
+            Teamadoxioenforcementaction = new Teamadoxioenforcementaction(this);
             Teamadoxioestablishmentincident = new Teamadoxioestablishmentincident(this);
             Teamadoxioevent = new Teamadoxioevent(this);
             Teamadoxioeventschedule = new Teamadoxioeventschedule(this);
@@ -5147,19 +5641,23 @@ namespace Gov.Lclb.Cllb.Interfaces
             Teamadoxioldborder = new Teamadoxioldborder(this);
             Teamadoxiolicenceldbordertotalhistory = new Teamadoxiolicenceldbordertotalhistory(this);
             Teamadoxiormreview = new Teamadoxiormreview(this);
+            Asyncoperationidadoxioapplicationcrsbpfv4 = new Asyncoperationidadoxioapplicationcrsbpfv4(this);
             Asyncoperationidadoxioapplicationlicenseechangesv10 = new Asyncoperationidadoxioapplicationlicenseechangesv10(this);
             Asyncoperationidadoxioapplicationliquorbpf = new Asyncoperationidadoxioapplicationliquorbpf(this);
             Asyncoperationidadoxioapplicationliquorbpfv2 = new Asyncoperationidadoxioapplicationliquorbpfv2(this);
             Asyncoperationidadoxioapplicationrelocationv1 = new Asyncoperationidadoxioapplicationrelocationv1(this);
             Asyncoperationidadoxioapplicationstructurechangev1 = new Asyncoperationidadoxioapplicationstructurechangev1(this);
             Asyncoperationidadoxioapplicationtransferownershipv1 = new Asyncoperationidadoxioapplicationtransferownershipv1(this);
+            Asyncoperationidadoxioenforcementactionbpf = new Asyncoperationidadoxioenforcementactionbpf(this);
             Workflows = new Workflows(this);
+            Lkadoxioapplicationcrsbpfv4processid = new Lkadoxioapplicationcrsbpfv4processid(this);
             Lkadoxioapplicationlicenseechangesv10processid = new Lkadoxioapplicationlicenseechangesv10processid(this);
             Lkadoxioapplicationliquorbpfprocessid = new Lkadoxioapplicationliquorbpfprocessid(this);
             Lkadoxioapplicationliquorbpfv2processid = new Lkadoxioapplicationliquorbpfv2processid(this);
             Lkadoxioapplicationrelocationv1processid = new Lkadoxioapplicationrelocationv1processid(this);
             Lkadoxioapplicationstructurechangev1processid = new Lkadoxioapplicationstructurechangev1processid(this);
             Lkadoxioapplicationtransferownershipv1processid = new Lkadoxioapplicationtransferownershipv1processid(this);
+            Lkadoxioenforcementactionbpfprocessid = new Lkadoxioenforcementactionbpfprocessid(this);
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {
