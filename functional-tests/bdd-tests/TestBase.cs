@@ -1580,7 +1580,7 @@ namespace bdd_tests
             NgWebElement proposedLicensee = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
             proposedLicensee.SendKeys(licensee);
 
-            NgWebElement thirdPartyOperatorOption = ngDriver.FindElement(By.XPath("//*[@id='mat-option-1']/span"));
+            NgWebElement thirdPartyOperatorOption = ngDriver.FindElement(By.XPath("//*[@id='mat-option-0']/span"));
             thirdPartyOperatorOption.Click();
 
             // click on consent to licence transfer checkbox
