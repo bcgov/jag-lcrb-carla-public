@@ -31,103 +31,105 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMinvoice
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMinvoice(string name = default(string), string _contactidValue = default(string), int? statuscode = default(int?), decimal? totaltax = default(decimal?), int? onholdtime = default(int?), decimal? discountamountBase = default(decimal?), string entityimageid = default(string), int? pricingerrorcode = default(int?), string billtoLine1 = default(string), int? skippricecalculation = default(int?), string emailaddress = default(string), string _createdbyValue = default(string), decimal? freightamount = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string shiptoPostalcode = default(string), string shiptoLine2 = default(string), int? importsequencenumber = default(int?), string invoicenumber = default(string), string description = default(string), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string _opportunityidValue = default(string), string billtoPostalcode = default(string), string shiptoComposite = default(string), string shiptoStateorprovince = default(string), decimal? totallineitemdiscountamount = default(decimal?), string _owneridValue = default(string), string shiptoLine1 = default(string), string processid = default(string), decimal? totalamountlessfreight = default(decimal?), decimal? totalamountBase = default(decimal?), string billtoName = default(string), decimal? exchangerate = default(decimal?), int? paymenttermscode = default(int?), string _accountidValue = default(string), int? timezoneruleversionnumber = default(int?), string billtoLine2 = default(string), string _slaidValue = default(string), string billtoTelephone = default(string), string entityimageUrl = default(string), int? prioritycode = default(int?), string billtoComposite = default(string), string _salesorderidValue = default(string), decimal? freightamountBase = default(decimal?), string traversedpath = default(string), string shiptoCountry = default(string), string shiptoCity = default(string), decimal? totallineitemdiscountamountBase = default(decimal?), string _owningbusinessunitValue = default(string), string _createdonbehalfbyValue = default(string), bool? willcall = default(bool?), string _pricelevelidValue = default(string), string adoxioReturnedtransactionid = default(string), decimal? discountpercentage = default(decimal?), string _owninguserValue = default(string), string shiptoLine3 = default(string), decimal? totaldiscountamount = default(decimal?), string shiptoFax = default(string), string versionnumber = default(string), string shiptoTelephone = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? totalamount = default(decimal?), string _owningteamValue = default(string), string _transactioncurrencyidValue = default(string), string adoxioTransactionid = default(string), string adoxioStatuschangedatelongstring = default(string), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string _slainvokedidValue = default(string), string shiptoName = default(string), string billtoFax = default(string), decimal? totallineitemamountBase = default(decimal?), string stageid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string invoiceid = default(string), decimal? totallineitemamount = default(decimal?), string billtoCountry = default(string), System.DateTimeOffset? adoxioStatuschangedate = default(System.DateTimeOffset?), System.DateTimeOffset? datedelivered = default(System.DateTimeOffset?), decimal? discountamount = default(decimal?), string billtoStateorprovince = default(string), bool? ispricelocked = default(bool?), decimal? totalamountlessfreightBase = default(decimal?), byte[] entityimage = default(byte[]), System.DateTimeOffset? lastbackofficesubmit = default(System.DateTimeOffset?), string billtoCity = default(string), decimal? totaldiscountamountBase = default(decimal?), int? utcconversiontimezonecode = default(int?), int? shiptoFreighttermscode = default(int?), string _modifiedbyValue = default(string), int? shippingmethodcode = default(int?), string _customeridValue = default(string), long? entityimageTimestamp = default(long?), string billtoLine3 = default(string), decimal? totaltaxBase = default(decimal?), System.DateTimeOffset? duedate = default(System.DateTimeOffset?), IList<MicrosoftDynamicsCRMcontact> contactinvoicesAssociation = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> invoiceAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioInvoiceAdoxioApplicationInvoice = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioInvoiceAdoxioApplicationLicenceFeeInvoice = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> adoxioInvoiceAdoxioApplicationinvoicehistoryInvoice = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioWorker> adoxioInvoiceAdoxioWorkerInvoice = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> adoxioInvoiceAdoxioWorkerinvoicehistoryInvoice = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMteam> invoiceTeams = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMsla slaInvoiceSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMprocesssession> invoiceProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMappointment> invoiceAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMconnection> invoiceConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMactivityparty> invoiceActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> invoiceRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> invoiceMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMactivitypointer> invoiceActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMphonecall> invoicePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> invoiceEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMbulkdeletefailure> invoiceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMletter> invoiceLetters = default(IList<MicrosoftDynamicsCRMletter>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMtask> invoiceTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> invoiceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMconnection> invoiceConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMinvoicedetail> invoiceDetails = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMfax> invoiceFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> invoicePrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMpricelevel pricelevelid = default(MicrosoftDynamicsCRMpricelevel), IList<MicrosoftDynamicsCRMsocialactivity> invoiceSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMannotation> invoiceAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> invoiceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceInvoice = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMsla slainvokedidInvoiceSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMserviceappointment> invoiceServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMsalesorder salesorderid = default(MicrosoftDynamicsCRMsalesorder))
+        public MicrosoftDynamicsCRMinvoice(byte[] entityimage = default(byte[]), string _adoxioOriginalinvoiceValue = default(string), string billtoLine1 = default(string), bool? willcall = default(bool?), string _modifiedonbehalfbyValue = default(string), int? shippingmethodcode = default(int?), string versionnumber = default(string), decimal? discountpercentage = default(decimal?), string shiptoStateorprovince = default(string), string name = default(string), string _contactidValue = default(string), System.DateTimeOffset? adoxioStatuschangedate = default(System.DateTimeOffset?), decimal? totaldiscountamount = default(decimal?), decimal? totalamount = default(decimal?), System.DateTimeOffset? lastbackofficesubmit = default(System.DateTimeOffset?), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string billtoName = default(string), int? skippricecalculation = default(int?), string _opportunityidValue = default(string), string shiptoCountry = default(string), string _customeridValue = default(string), int? timezoneruleversionnumber = default(int?), decimal? totaltax = default(decimal?), string billtoCountry = default(string), bool? ispricelocked = default(bool?), string adoxioTransactionid = default(string), decimal? discountamount = default(decimal?), string adoxioReturnedtransactionid = default(string), string shiptoComposite = default(string), decimal? totalamountBase = default(decimal?), int? importsequencenumber = default(int?), decimal? totallineitemdiscountamount = default(decimal?), decimal? exchangerate = default(decimal?), int? utcconversiontimezonecode = default(int?), string shiptoPostalcode = default(string), string _createdonbehalfbyValue = default(string), string _transactioncurrencyidValue = default(string), string billtoFax = default(string), string adoxioStatuschangedatelongstring = default(string), string shiptoLine1 = default(string), decimal? totaldiscountamountBase = default(decimal?), string emailaddress = default(string), string billtoLine3 = default(string), int? shiptoFreighttermscode = default(int?), string shiptoLine2 = default(string), int? prioritycode = default(int?), int? statecode = default(int?), System.DateTimeOffset? duedate = default(System.DateTimeOffset?), string _salesorderidValue = default(string), string billtoTelephone = default(string), string traversedpath = default(string), System.DateTimeOffset? datedelivered = default(System.DateTimeOffset?), int? paymenttermscode = default(int?), int? onholdtime = default(int?), string billtoCity = default(string), string _slaidValue = default(string), int? statuscode = default(int?), System.DateTimeOffset? adoxioRefunddate = default(System.DateTimeOffset?), decimal? totallineitemamount = default(decimal?), decimal? totaltaxBase = default(decimal?), string _owningteamValue = default(string), decimal? totalamountlessfreight = default(decimal?), string entityimageUrl = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owninguserValue = default(string), string shiptoFax = default(string), string billtoComposite = default(string), decimal? totallineitemamountBase = default(decimal?), string description = default(string), decimal? totallineitemdiscountamountBase = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _slainvokedidValue = default(string), string billtoLine2 = default(string), string billtoPostalcode = default(string), string entityimageid = default(string), int? pricingerrorcode = default(int?), decimal? discountamountBase = default(decimal?), string invoiceid = default(string), string invoicenumber = default(string), string _accountidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), decimal? freightamount = default(decimal?), string _owningbusinessunitValue = default(string), string _pricelevelidValue = default(string), long? entityimageTimestamp = default(long?), string shiptoTelephone = default(string), string processid = default(string), string shiptoLine3 = default(string), decimal? freightamountBase = default(decimal?), string billtoStateorprovince = default(string), string _modifiedbyValue = default(string), string shiptoCity = default(string), string _owneridValue = default(string), string shiptoName = default(string), string stageid = default(string), decimal? totalamountlessfreightBase = default(decimal?), IList<MicrosoftDynamicsCRMcontact> contactinvoicesAssociation = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> invoiceAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioInvoiceAdoxioApplicationInvoice = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioInvoiceAdoxioApplicationLicenceFeeInvoice = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> adoxioInvoiceAdoxioApplicationinvoicehistoryInvoice = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioWorker> adoxioInvoiceAdoxioWorkerInvoice = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> adoxioInvoiceAdoxioWorkerinvoicehistoryInvoice = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMteam> invoiceTeams = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMsla slaInvoiceSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMprocesssession> invoiceProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMappointment> invoiceAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMconnection> invoiceConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMactivityparty> invoiceActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> invoiceRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> invoiceMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMactivitypointer> invoiceActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMphonecall> invoicePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> invoiceEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMbulkdeletefailure> invoiceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMletter> invoiceLetters = default(IList<MicrosoftDynamicsCRMletter>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMtask> invoiceTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> invoiceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMconnection> invoiceConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMinvoicedetail> invoiceDetails = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMfax> invoiceFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> invoicePrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMpricelevel pricelevelid = default(MicrosoftDynamicsCRMpricelevel), IList<MicrosoftDynamicsCRMsocialactivity> invoiceSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMannotation> invoiceAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> invoiceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceInvoice = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMsla slainvokedidInvoiceSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMserviceappointment> invoiceServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMsalesorder salesorderid = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMinvoice adoxioOriginalInvoice = default(MicrosoftDynamicsCRMinvoice), IList<MicrosoftDynamicsCRMinvoice> adoxioInvoiceInvoiceOriginalInvoice = default(IList<MicrosoftDynamicsCRMinvoice>))
         {
+            Entityimage = entityimage;
+            this._adoxioOriginalinvoiceValue = _adoxioOriginalinvoiceValue;
+            BilltoLine1 = billtoLine1;
+            Willcall = willcall;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Shippingmethodcode = shippingmethodcode;
+            Versionnumber = versionnumber;
+            Discountpercentage = discountpercentage;
+            ShiptoStateorprovince = shiptoStateorprovince;
             Name = name;
             this._contactidValue = _contactidValue;
-            Statuscode = statuscode;
+            AdoxioStatuschangedate = adoxioStatuschangedate;
+            Totaldiscountamount = totaldiscountamount;
+            Totalamount = totalamount;
+            Lastbackofficesubmit = lastbackofficesubmit;
+            Lastonholdtime = lastonholdtime;
+            BilltoName = billtoName;
+            Skippricecalculation = skippricecalculation;
+            this._opportunityidValue = _opportunityidValue;
+            ShiptoCountry = shiptoCountry;
+            this._customeridValue = _customeridValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Totaltax = totaltax;
+            BilltoCountry = billtoCountry;
+            Ispricelocked = ispricelocked;
+            AdoxioTransactionid = adoxioTransactionid;
+            Discountamount = discountamount;
+            AdoxioReturnedtransactionid = adoxioReturnedtransactionid;
+            ShiptoComposite = shiptoComposite;
+            TotalamountBase = totalamountBase;
+            Importsequencenumber = importsequencenumber;
+            Totallineitemdiscountamount = totallineitemdiscountamount;
+            Exchangerate = exchangerate;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            ShiptoPostalcode = shiptoPostalcode;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            BilltoFax = billtoFax;
+            AdoxioStatuschangedatelongstring = adoxioStatuschangedatelongstring;
+            ShiptoLine1 = shiptoLine1;
+            TotaldiscountamountBase = totaldiscountamountBase;
+            Emailaddress = emailaddress;
+            BilltoLine3 = billtoLine3;
+            ShiptoFreighttermscode = shiptoFreighttermscode;
+            ShiptoLine2 = shiptoLine2;
+            Prioritycode = prioritycode;
+            Statecode = statecode;
+            Duedate = duedate;
+            this._salesorderidValue = _salesorderidValue;
+            BilltoTelephone = billtoTelephone;
+            Traversedpath = traversedpath;
+            Datedelivered = datedelivered;
+            Paymenttermscode = paymenttermscode;
             Onholdtime = onholdtime;
-            DiscountamountBase = discountamountBase;
+            BilltoCity = billtoCity;
+            this._slaidValue = _slaidValue;
+            Statuscode = statuscode;
+            AdoxioRefunddate = adoxioRefunddate;
+            Totallineitemamount = totallineitemamount;
+            TotaltaxBase = totaltaxBase;
+            this._owningteamValue = _owningteamValue;
+            Totalamountlessfreight = totalamountlessfreight;
+            EntityimageUrl = entityimageUrl;
+            Createdon = createdon;
+            this._owninguserValue = _owninguserValue;
+            ShiptoFax = shiptoFax;
+            BilltoComposite = billtoComposite;
+            TotallineitemamountBase = totallineitemamountBase;
+            Description = description;
+            TotallineitemdiscountamountBase = totallineitemdiscountamountBase;
+            Overriddencreatedon = overriddencreatedon;
+            this._slainvokedidValue = _slainvokedidValue;
+            BilltoLine2 = billtoLine2;
+            BilltoPostalcode = billtoPostalcode;
             Entityimageid = entityimageid;
             Pricingerrorcode = pricingerrorcode;
-            BilltoLine1 = billtoLine1;
-            Skippricecalculation = skippricecalculation;
-            Emailaddress = emailaddress;
+            DiscountamountBase = discountamountBase;
+            Invoiceid = invoiceid;
+            Invoicenumber = invoicenumber;
+            this._accountidValue = _accountidValue;
+            Modifiedon = modifiedon;
             this._createdbyValue = _createdbyValue;
             Freightamount = freightamount;
-            Createdon = createdon;
-            ShiptoPostalcode = shiptoPostalcode;
-            ShiptoLine2 = shiptoLine2;
-            Importsequencenumber = importsequencenumber;
-            Invoicenumber = invoicenumber;
-            Description = description;
-            Statecode = statecode;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._opportunityidValue = _opportunityidValue;
-            BilltoPostalcode = billtoPostalcode;
-            ShiptoComposite = shiptoComposite;
-            ShiptoStateorprovince = shiptoStateorprovince;
-            Totallineitemdiscountamount = totallineitemdiscountamount;
-            this._owneridValue = _owneridValue;
-            ShiptoLine1 = shiptoLine1;
-            Processid = processid;
-            Totalamountlessfreight = totalamountlessfreight;
-            TotalamountBase = totalamountBase;
-            BilltoName = billtoName;
-            Exchangerate = exchangerate;
-            Paymenttermscode = paymenttermscode;
-            this._accountidValue = _accountidValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            BilltoLine2 = billtoLine2;
-            this._slaidValue = _slaidValue;
-            BilltoTelephone = billtoTelephone;
-            EntityimageUrl = entityimageUrl;
-            Prioritycode = prioritycode;
-            BilltoComposite = billtoComposite;
-            this._salesorderidValue = _salesorderidValue;
-            FreightamountBase = freightamountBase;
-            Traversedpath = traversedpath;
-            ShiptoCountry = shiptoCountry;
-            ShiptoCity = shiptoCity;
-            TotallineitemdiscountamountBase = totallineitemdiscountamountBase;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Willcall = willcall;
             this._pricelevelidValue = _pricelevelidValue;
-            AdoxioReturnedtransactionid = adoxioReturnedtransactionid;
-            Discountpercentage = discountpercentage;
-            this._owninguserValue = _owninguserValue;
-            ShiptoLine3 = shiptoLine3;
-            Totaldiscountamount = totaldiscountamount;
-            ShiptoFax = shiptoFax;
-            Versionnumber = versionnumber;
-            ShiptoTelephone = shiptoTelephone;
-            Modifiedon = modifiedon;
-            Totalamount = totalamount;
-            this._owningteamValue = _owningteamValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            AdoxioTransactionid = adoxioTransactionid;
-            AdoxioStatuschangedatelongstring = adoxioStatuschangedatelongstring;
-            Lastonholdtime = lastonholdtime;
-            this._slainvokedidValue = _slainvokedidValue;
-            ShiptoName = shiptoName;
-            BilltoFax = billtoFax;
-            TotallineitemamountBase = totallineitemamountBase;
-            Stageid = stageid;
-            Overriddencreatedon = overriddencreatedon;
-            Invoiceid = invoiceid;
-            Totallineitemamount = totallineitemamount;
-            BilltoCountry = billtoCountry;
-            AdoxioStatuschangedate = adoxioStatuschangedate;
-            Datedelivered = datedelivered;
-            Discountamount = discountamount;
-            BilltoStateorprovince = billtoStateorprovince;
-            Ispricelocked = ispricelocked;
-            TotalamountlessfreightBase = totalamountlessfreightBase;
-            Entityimage = entityimage;
-            Lastbackofficesubmit = lastbackofficesubmit;
-            BilltoCity = billtoCity;
-            TotaldiscountamountBase = totaldiscountamountBase;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            ShiptoFreighttermscode = shiptoFreighttermscode;
-            this._modifiedbyValue = _modifiedbyValue;
-            Shippingmethodcode = shippingmethodcode;
-            this._customeridValue = _customeridValue;
             EntityimageTimestamp = entityimageTimestamp;
-            BilltoLine3 = billtoLine3;
-            TotaltaxBase = totaltaxBase;
-            Duedate = duedate;
+            ShiptoTelephone = shiptoTelephone;
+            Processid = processid;
+            ShiptoLine3 = shiptoLine3;
+            FreightamountBase = freightamountBase;
+            BilltoStateorprovince = billtoStateorprovince;
+            this._modifiedbyValue = _modifiedbyValue;
+            ShiptoCity = shiptoCity;
+            this._owneridValue = _owneridValue;
+            ShiptoName = shiptoName;
+            Stageid = stageid;
+            TotalamountlessfreightBase = totalamountlessfreightBase;
             ContactinvoicesAssociation = contactinvoicesAssociation;
             InvoiceAbsScheduledprocessexecutions = invoiceAbsScheduledprocessexecutions;
             AdoxioInvoiceAdoxioApplicationInvoice = adoxioInvoiceAdoxioApplicationInvoice;
@@ -175,6 +177,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             SlainvokedidInvoiceSla = slainvokedidInvoiceSla;
             InvoiceServiceAppointments = invoiceServiceAppointments;
             Salesorderid = salesorderid;
+            AdoxioOriginalInvoice = adoxioOriginalInvoice;
+            AdoxioInvoiceInvoiceOriginalInvoice = adoxioInvoiceInvoiceOriginalInvoice;
             CustomInit();
         }
 
@@ -182,6 +186,52 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
+        [JsonProperty(PropertyName = "entityimage")]
+        public byte[] Entityimage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_originalinvoice_value")]
+        public string _adoxioOriginalinvoiceValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "billto_line1")]
+        public string BilltoLine1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "willcall")]
+        public bool? Willcall { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "shippingmethodcode")]
+        public int? Shippingmethodcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "discountpercentage")]
+        public decimal? Discountpercentage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "shipto_stateorprovince")]
+        public string ShiptoStateorprovince { get; set; }
 
         /// <summary>
         /// </summary>
@@ -195,8 +245,58 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_statuschangedate")]
+        public System.DateTimeOffset? AdoxioStatuschangedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "totaldiscountamount")]
+        public decimal? Totaldiscountamount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "totalamount")]
+        public decimal? Totalamount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastbackofficesubmit")]
+        public System.DateTimeOffset? Lastbackofficesubmit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastonholdtime")]
+        public System.DateTimeOffset? Lastonholdtime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "billto_name")]
+        public string BilltoName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "skippricecalculation")]
+        public int? Skippricecalculation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_opportunityid_value")]
+        public string _opportunityidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "shipto_country")]
+        public string ShiptoCountry { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_customerid_value")]
+        public string _customeridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -205,13 +305,258 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "billto_country")]
+        public string BilltoCountry { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ispricelocked")]
+        public bool? Ispricelocked { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_transactionid")]
+        public string AdoxioTransactionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "discountamount")]
+        public decimal? Discountamount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_returnedtransactionid")]
+        public string AdoxioReturnedtransactionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "shipto_composite")]
+        public string ShiptoComposite { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "totalamount_base")]
+        public decimal? TotalamountBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "totallineitemdiscountamount")]
+        public decimal? Totallineitemdiscountamount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "shipto_postalcode")]
+        public string ShiptoPostalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "billto_fax")]
+        public string BilltoFax { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_statuschangedatelongstring")]
+        public string AdoxioStatuschangedatelongstring { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "shipto_line1")]
+        public string ShiptoLine1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "totaldiscountamount_base")]
+        public decimal? TotaldiscountamountBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "emailaddress")]
+        public string Emailaddress { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "billto_line3")]
+        public string BilltoLine3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "shipto_freighttermscode")]
+        public int? ShiptoFreighttermscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "shipto_line2")]
+        public string ShiptoLine2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "prioritycode")]
+        public int? Prioritycode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "duedate")]
+        public System.DateTimeOffset? Duedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_salesorderid_value")]
+        public string _salesorderidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "billto_telephone")]
+        public string BilltoTelephone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "traversedpath")]
+        public string Traversedpath { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "datedelivered")]
+        public System.DateTimeOffset? Datedelivered { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "paymenttermscode")]
+        public int? Paymenttermscode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "onholdtime")]
         public int? Onholdtime { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "discountamount_base")]
-        public decimal? DiscountamountBase { get; set; }
+        [JsonProperty(PropertyName = "billto_city")]
+        public string BilltoCity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_slaid_value")]
+        public string _slaidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_refunddate")]
+        public System.DateTimeOffset? AdoxioRefunddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "totallineitemamount")]
+        public decimal? Totallineitemamount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "totaltax_base")]
+        public decimal? TotaltaxBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "totalamountlessfreight")]
+        public decimal? Totalamountlessfreight { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimage_url")]
+        public string EntityimageUrl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "shipto_fax")]
+        public string ShiptoFax { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "billto_composite")]
+        public string BilltoComposite { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "totallineitemamount_base")]
+        public decimal? TotallineitemamountBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "totallineitemdiscountamount_base")]
+        public decimal? TotallineitemdiscountamountBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_slainvokedid_value")]
+        public string _slainvokedidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "billto_line2")]
+        public string BilltoLine2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "billto_postalcode")]
+        public string BilltoPostalcode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -225,18 +570,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "billto_line1")]
-        public string BilltoLine1 { get; set; }
+        [JsonProperty(PropertyName = "discountamount_base")]
+        public decimal? DiscountamountBase { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "skippricecalculation")]
-        public int? Skippricecalculation { get; set; }
+        [JsonProperty(PropertyName = "invoiceid")]
+        public string Invoiceid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "emailaddress")]
-        public string Emailaddress { get; set; }
+        [JsonProperty(PropertyName = "invoicenumber")]
+        public string Invoicenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_accountid_value")]
+        public string _accountidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -250,193 +605,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "shipto_postalcode")]
-        public string ShiptoPostalcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "shipto_line2")]
-        public string ShiptoLine2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "invoicenumber")]
-        public string Invoicenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_opportunityid_value")]
-        public string _opportunityidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "billto_postalcode")]
-        public string BilltoPostalcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "shipto_composite")]
-        public string ShiptoComposite { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "shipto_stateorprovince")]
-        public string ShiptoStateorprovince { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "totallineitemdiscountamount")]
-        public decimal? Totallineitemdiscountamount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "shipto_line1")]
-        public string ShiptoLine1 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "totalamountlessfreight")]
-        public decimal? Totalamountlessfreight { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "totalamount_base")]
-        public decimal? TotalamountBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "billto_name")]
-        public string BilltoName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "paymenttermscode")]
-        public int? Paymenttermscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_accountid_value")]
-        public string _accountidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "billto_line2")]
-        public string BilltoLine2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_slaid_value")]
-        public string _slaidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "billto_telephone")]
-        public string BilltoTelephone { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimage_url")]
-        public string EntityimageUrl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "prioritycode")]
-        public int? Prioritycode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "billto_composite")]
-        public string BilltoComposite { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_salesorderid_value")]
-        public string _salesorderidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "freightamount_base")]
-        public decimal? FreightamountBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "traversedpath")]
-        public string Traversedpath { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "shipto_country")]
-        public string ShiptoCountry { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "shipto_city")]
-        public string ShiptoCity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "totallineitemdiscountamount_base")]
-        public decimal? TotallineitemdiscountamountBase { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "willcall")]
-        public bool? Willcall { get; set; }
 
         /// <summary>
         /// </summary>
@@ -445,38 +615,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_returnedtransactionid")]
-        public string AdoxioReturnedtransactionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "discountpercentage")]
-        public decimal? Discountpercentage { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "shipto_line3")]
-        public string ShiptoLine3 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "totaldiscountamount")]
-        public decimal? Totaldiscountamount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "shipto_fax")]
-        public string ShiptoFax { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "entityimage_timestamp")]
+        public long? EntityimageTimestamp { get; set; }
 
         /// <summary>
         /// </summary>
@@ -485,98 +625,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "totalamount")]
-        public decimal? Totalamount { get; set; }
+        [JsonProperty(PropertyName = "shipto_line3")]
+        public string ShiptoLine3 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_transactionid")]
-        public string AdoxioTransactionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_statuschangedatelongstring")]
-        public string AdoxioStatuschangedatelongstring { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lastonholdtime")]
-        public System.DateTimeOffset? Lastonholdtime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_slainvokedid_value")]
-        public string _slainvokedidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "shipto_name")]
-        public string ShiptoName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "billto_fax")]
-        public string BilltoFax { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "totallineitemamount_base")]
-        public decimal? TotallineitemamountBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "stageid")]
-        public string Stageid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "invoiceid")]
-        public string Invoiceid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "totallineitemamount")]
-        public decimal? Totallineitemamount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "billto_country")]
-        public string BilltoCountry { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_statuschangedate")]
-        public System.DateTimeOffset? AdoxioStatuschangedate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "datedelivered")]
-        public System.DateTimeOffset? Datedelivered { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "discountamount")]
-        public decimal? Discountamount { get; set; }
+        [JsonProperty(PropertyName = "freightamount_base")]
+        public decimal? FreightamountBase { get; set; }
 
         /// <summary>
         /// </summary>
@@ -585,79 +645,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ispricelocked")]
-        public bool? Ispricelocked { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "totalamountlessfreight_base")]
-        public decimal? TotalamountlessfreightBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonConverter(typeof(Base64UrlJsonConverter))]
-        [JsonProperty(PropertyName = "entityimage")]
-        public byte[] Entityimage { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lastbackofficesubmit")]
-        public System.DateTimeOffset? Lastbackofficesubmit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "billto_city")]
-        public string BilltoCity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "totaldiscountamount_base")]
-        public decimal? TotaldiscountamountBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "shipto_freighttermscode")]
-        public int? ShiptoFreighttermscode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "shippingmethodcode")]
-        public int? Shippingmethodcode { get; set; }
+        [JsonProperty(PropertyName = "shipto_city")]
+        public string ShiptoCity { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_customerid_value")]
-        public string _customeridValue { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "entityimage_timestamp")]
-        public long? EntityimageTimestamp { get; set; }
+        [JsonProperty(PropertyName = "shipto_name")]
+        public string ShiptoName { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "billto_line3")]
-        public string BilltoLine3 { get; set; }
+        [JsonProperty(PropertyName = "stageid")]
+        public string Stageid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "totaltax_base")]
-        public decimal? TotaltaxBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "duedate")]
-        public System.DateTimeOffset? Duedate { get; set; }
+        [JsonProperty(PropertyName = "totalamountlessfreight_base")]
+        public decimal? TotalamountlessfreightBase { get; set; }
 
         /// <summary>
         /// </summary>
@@ -893,6 +907,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "salesorderid")]
         public MicrosoftDynamicsCRMsalesorder Salesorderid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_OriginalInvoice")]
+        public MicrosoftDynamicsCRMinvoice AdoxioOriginalInvoice { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_invoice_invoice_OriginalInvoice")]
+        public IList<MicrosoftDynamicsCRMinvoice> AdoxioInvoiceInvoiceOriginalInvoice { get; set; }
 
     }
 }
