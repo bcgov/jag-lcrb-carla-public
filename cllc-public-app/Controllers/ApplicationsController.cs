@@ -854,6 +854,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             adoxioApplication.CopyValues(item);
 
+            if(item.ApplicationStatus == AdoxioApplicationStatusCodes.PendingForLGFNPFeedback){
+                adoxioApplication.Statuscode = (int?)item.ApplicationStatus;
+            }
+
             try
             {
                 // Indigenous nation association

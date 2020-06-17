@@ -48,7 +48,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
     let data = <Application>{
       ...this.application,
       ...this.form.value,
-      lGApprovalDecision: 'OptOut',
+      lgApprovalDecision: 'OptOut',
       lGDecisionSubmissionDate: new Date()
     };
 
@@ -70,7 +70,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
     let data = <Application>{
       ...this.application,
       ...this.form.value,
-      lGApprovalDecision: 'Rejected',
+      lgApprovalDecision: 'Rejected',
       lGDecisionSubmissionDate: new Date()
     };
 
@@ -92,7 +92,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
     let data = <Application>{
       ...this.application,
       ...this.form.value,
-      lGApprovalDecision: 'Approved',
+      lgApprovalDecision: 'Approved',
       lGDecisionSubmissionDate: new Date()
     };
 
