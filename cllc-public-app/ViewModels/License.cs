@@ -36,5 +36,16 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? expiryDate { get; set; }
 
         public List<string> endorsements { get; set; }
+
+        public string representativeFullName { get; set; }
+        public string representativePhoneNumber { get; set; }
+        public string representativeEmail { get; set; }
+        public bool? representativeCanSubmitPermanentChangeApplications { get; set; }
+        public bool? representativeCanSignTemporaryChangeApplications { get; set; }
+        public bool? representativeCanObtainLicenceInformation { get; set; }
+        public bool? representativeCanSignGroceryStoreProofOfSale { get; set; }
+        public bool? representativeCanAttendEducationSessions { get; set; }
+        public bool? representativeCanAttendComplianceMeetings { get; set; }
+        public bool? representativeCanRepresentAtHearings { get; set; }
     }
 }

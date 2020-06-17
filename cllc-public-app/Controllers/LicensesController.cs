@@ -77,7 +77,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPut("{licenceId}/representative")]
-        public async Task<IActionResult> UpdateLicenceRepresentative([FromBody] ViewModels.ApplicationLicenseSummary item, string licenceId)
+        public async Task<IActionResult> UpdateLicenseeRepresentative([FromBody] ViewModels.ApplicationLicenseSummary item, string licenceId)
         {
             if (item == null || string.IsNullOrEmpty(licenceId) || licenceId != item.LicenseId)
             {
