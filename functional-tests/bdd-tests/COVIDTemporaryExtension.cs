@@ -188,6 +188,10 @@ namespace bdd_tests
             uiMailingPostal.Clear();
             uiMailingPostal.SendKeys(mailingpostal);
 
+            // select the bounded status checkbox
+            NgWebElement boundedStatus = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='boundedStatus']"));
+            boundedStatus.Click();
+
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
@@ -198,26 +202,25 @@ namespace bdd_tests
             NgWebElement uploadFloorplan = ngDriver.FindElement(By.CssSelector("[documenttype='Floorplan'] input[type='file']"));
             uploadFloorplan.SendKeys(floorplanPath);
 
-            // select the bounded status checkbox
-            NgWebElement boundedStatus = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='boundedStatus']"));
-            boundedStatus.Click();
+            if (licenceType != "Food Primary licence")
+            {
+                // select LG/IN wishes to review radio button
+                NgWebElement LGINReview = ngDriver.FindElement(By.CssSelector("[formcontrolname='lgStatus'] mat-radio-button[value='option2']"));
+                LGINReview.Click();
+
+                // upload LG/IN approval document
+                string LGINPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "LG_IN_approval.pdf");
+                NgWebElement uploadLGINApproval = ngDriver.FindElement(By.CssSelector("[documenttype='LGConfirmation'] input[type='file']"));
+                uploadLGINApproval.SendKeys(LGINPath);
+            }
 
             // upload a representative notification form 
             string repNotifyPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "licensee_rep_notification.pdf");
-            NgWebElement uploadRepNotify = ngDriver.FindElement(By.CssSelector("[documenttype='LRN'] input[type='file']"));
+            NgWebElement uploadRepNotify = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
             uploadRepNotify.SendKeys(repNotifyPath);
 
-            // select LG/IN wishes to review radio button
-            NgWebElement LGINReview = ngDriver.FindElement(By.CssSelector("[formcontrolname='lgStatus'] mat-radio-button[value='option2']"));
-            LGINReview.Click();
-
-            // upload LG/IN approval document
-            string LGINPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "LG_IN_approval.pdf");
-            NgWebElement uploadLGINApproval = ngDriver.FindElement(By.CssSelector("[documenttype='LGConfirmation'] input[type='file']"));
-            uploadLGINApproval.SendKeys(LGINPath);
-
             // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement']"));
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[3]"));
             uiSignatureAgreement.Click();
         }
 
