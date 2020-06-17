@@ -56,34 +56,22 @@
     <None Update="RuralStore.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_partnership_event_authorizationx.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="CateringApplicationEventAuthorization.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_sole_proprietor_event_authorizationx.feature">
+    <None Update="E2ECateringApplication_partnership_name_branding_changex.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_society_event_authorizationx.feature">
+    <None Update="CateringApplicationNameBrandingChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_public_corp_event_authorizationx.feature">
+    <None Update="E2ECateringApplication_sole_proprietor_name_branding_changex.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_partnership_name_branding_change.feature">
+    <None Update="E2ECateringApplication_society_name_branding_changex.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_indigenous_nation_name_branding_change.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2ECateringApplication_sole_proprietor_name_branding_change.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2ECateringApplication_society_name_branding_change.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2ECateringApplication_public_corp_name_branding_change.feature">
+    <None Update="E2ECateringApplication_public_corp_name_branding_changex.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2ECateringApplication_partnership_personnel_email_change.feature">
@@ -170,9 +158,6 @@
     <None Update="E2ECateringApplication_private_corp_transfer_of_ownership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_private_corp_event_authorizationx.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="E2ECateringApplication_private_corp_personnel_name_change.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -188,7 +173,7 @@
     <None Update="CRSApplicationPersonnelEmailChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_private_corp_name_branding_change.feature">
+    <None Update="E2ECateringApplication_private_corp_name_branding_changex.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CRSApplicationPersonnelNameChange.feature">
