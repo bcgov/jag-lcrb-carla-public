@@ -53,6 +53,13 @@
                         </app-field>
                     </section>
                 </div>
+                <div class="row" *ngIf="hasRepresentativeOnFile">
+                    <div class="col-xs-12 text-right">
+                        <button class="btn btn-primary" (click)="remove()">
+                            <i class="fa fa-trash" style="color: #fff;"></i>
+                            Remove Authority</button>
+                    </div>
+                </div>
             </section>
 
             <h3 class="blue-header">SCOPE OF THE LICENSEE REPRESENTATIVE'S AUTHORITY</h3>
@@ -128,6 +135,32 @@
                         </app-field>
                     </section>
                 </div>
+            </section>
+            
+            <section class="error mt-3 p-3" *ngIf="!form.valid && form.touched">
+                <div class="pb-2" *ngIf="form.errors && form.errors['hasAtLeastOneScope']">
+                    <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
+                    <span>At least one scope of authority must be selected</span>
+                </div>
+                <div *ngIf="!validationMessages?.length">
+                    <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
+                    <span>Some required fields have not been completed</span>
+                </div>
+                <div *ngIf="validationMessages?.length">
+                    <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
+                    <span>The following fields are not valid:</span>
+                </div>
+                <ul *ngFor="let message of validationMessages">
+                    <li class="app-cancel">
+                        {{message}}
+                    </li>
+                </ul>
+            </section>
+
+            <section style="position: relative; margin-top: 20px;">
+                <button class="btn btn-primary" (click)="save()">
+                    <i class="fa fa-save" style="color: #fff;"></i>
+                    SUBMIT</button>
             </section>
         </div>
     </div>

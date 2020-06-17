@@ -119,7 +119,6 @@ export class LicencesComponent extends FormBase implements OnInit {
           })
           let combinedLicences = [...licenses, ...operatedLicences, ...proposedLicences];
           combinedLicences.forEach((licence: ApplicationLicenseSummary) => {
-            console.log(licence.licenceTypeCategory);
             this.addOrUpdateLicence(licence);
           });
         });

@@ -63,7 +63,8 @@
                 </div>
                 <div *ngIf="item.licenceTypeCategory === 'Liquor'">
                   <a [routerLink]="[ '/licence/' + item.licenseId + '/representative']">
-                    <span>Add Licence Representative</span>
+                    <span *ngIf="!item.representativeFullName">Add Licensee Representative</span>
+                    <span *ngIf="item.representativeFullName">Licence Representative: {{item.representativeFullName}}</span>
                   </a>
                 </div>
               </td>
