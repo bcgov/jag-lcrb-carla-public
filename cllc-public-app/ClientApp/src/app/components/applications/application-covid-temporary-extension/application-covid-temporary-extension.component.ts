@@ -31,6 +31,7 @@ const FormValidationErrorMap = {
 
   //receivedLGPermission: 'Local Government Permission Receipt checkbox',
   lgStatus: 'Selection of the LG Option',
+  ALR: 'Identification of Agricultural Land Reserve Usage',
   boundedStatus: 'Confirmation of perimeter bounding',
   signatureAgreement: 'Declaration checkbox',
   currentTotalCapicityIncluded: 'Current Total Capacity checkbox',
@@ -91,6 +92,7 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
 
       //receivedLGPermission: ['', [this.customRequiredCheckboxValidator()]],
       lgStatus: ['', []],
+      ALR: ['',[Validators.required]],
       boundedStatus: ['',[Validators.required]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
       // signatureAgreement: ['', [Validators.required]]
