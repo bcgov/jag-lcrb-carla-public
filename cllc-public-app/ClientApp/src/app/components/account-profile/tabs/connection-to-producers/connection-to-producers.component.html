@@ -6,6 +6,8 @@
   </span>
   <br>
   <p></p>
+
+  <!-- CORPORATIONS -->
   <div
     *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(businessType) !== -1">
     <section>
@@ -66,10 +68,12 @@
     </section>
     <p></p>
   </div>
+
+  <!---- LG or IN -->
   <div
-    *ngIf="['IndigenousNation'].indexOf(businessType) !== -1">
+    *ngIf="['IndigenousNation', 'LocalGovernment'].indexOf(businessType) !== -1">
     <section>
-      <label for="">Does the Indigenous Nation have any association, connection or financial interest in a {{licensedProducerText}} of cannabis? </label>
+      <label for="">Do you have any association, connection or financial interest in a {{licensedProducerText}} of cannabis? </label>
       <br>
       <span>This includes, but is not limited to:</span>
       <br>
@@ -97,6 +101,8 @@
     </section>
     <p></p>
   </div>
+
+  <!-- PUBLIC -->
   <div *ngIf="['PublicCorporation'].indexOf(businessType) !== -1">
     <section>
       <label for="">Does the corporation have any association, connection or financial interest in a {{licensedProducerText}} of cannabis? </label>
