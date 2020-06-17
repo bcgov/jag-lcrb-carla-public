@@ -185,25 +185,10 @@
     <None Update="CRSApplicationNameBrandingChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_IN_personnel_email_change.feature">
+    <None Update="CRSApplicationPersonnelEmailChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2ECateringApplication_private_corp_name_branding_change.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_partnership_personnel_email_change.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_soleproprietor_personnel_email_change.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_society_personnel_email_change.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_publiccorp_personnel_email_change.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_privatecorp_personnel_email_change.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2E_CRSApplication_Licence_IN_personnel_name_change.feature">
