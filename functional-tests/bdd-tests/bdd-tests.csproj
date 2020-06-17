@@ -191,22 +191,22 @@
     <None Update="E2ECateringApplication_private_corp_name_branding_change.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_IN_personnel_name_change.feature">
+    <None Update="CRSApplicationPersonnelNameChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_partnership_personnel_name_change.feature">
+    <None Update="E2E_CRSApplication_Licence_partnership_personnel_name_changex.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_soleproprietor_personnel_name_change.feature">
+    <None Update="E2E_CRSApplication_Licence_soleproprietor_personnel_name_changex.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_society_personnel_name_change.feature">
+    <None Update="E2E_CRSApplication_Licence_society_personnel_name_changex.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_publiccorp_personnel_name_change.feature">
+    <None Update="E2E_CRSApplication_Licence_publiccorp_personnel_name_changex.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_privatecorp_personnel_name_change.feature">
+    <None Update="E2E_CRSApplication_Licence_privatecorp_personnel_name_changex.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2E_CRSApplication_Licence_IN_plan_store_opening.feature">
