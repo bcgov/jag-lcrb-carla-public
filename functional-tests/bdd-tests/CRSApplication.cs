@@ -128,7 +128,7 @@ Scenario: Sole Proprietorship CRS Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplication_indigenousnation.feature")]
+    [FeatureFile("./CRSApplication.feature")]
     public sealed class CRSApplication : TestBase
     {
         [Given(@"I am logged in to the dashboard as an (.*)")]
