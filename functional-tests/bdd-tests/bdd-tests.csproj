@@ -56,19 +56,19 @@
     <None Update="RuralStore.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_partnership_event_authorization.feature">
+    <None Update="E2ECateringApplication_partnership_event_authorizationx.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_indigenous_nation_event_authorization.feature">
+    <None Update="CateringApplicationEventAuthorization.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_sole_proprietor_event_authorization.feature">
+    <None Update="E2ECateringApplication_sole_proprietor_event_authorizationx.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_society_event_authorization.feature">
+    <None Update="E2ECateringApplication_society_event_authorizationx.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_public_corp_event_authorization.feature">
+    <None Update="E2ECateringApplication_public_corp_event_authorizationx.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2ECateringApplication_partnership_name_branding_change.feature">
@@ -170,7 +170,7 @@
     <None Update="E2ECateringApplication_private_corp_transfer_of_ownership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_private_corp_event_authorization.feature">
+    <None Update="E2ECateringApplication_private_corp_event_authorizationx.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2ECateringApplication_private_corp_personnel_name_change.feature">
@@ -209,16 +209,7 @@
     <None Update="CRSApplicationTransferOwnership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_partnership_transfer_ownership.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_soleproprietor_transfer_ownership.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="E2E_CRSApplication_Licence_society_transfer_ownership.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_publiccorp_transfer_ownership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2E_CRSApplication_Licence_privatecorp_transfer_ownership.feature">
