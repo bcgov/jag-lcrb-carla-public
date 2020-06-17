@@ -70,6 +70,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   FormControlState = FormControlState;
   mode: string;
   account: Account;
+  q = 1;
 
   uploadedSupportingDocuments = 0;
   uploadedFinancialIntegrityDocuments: 0;
