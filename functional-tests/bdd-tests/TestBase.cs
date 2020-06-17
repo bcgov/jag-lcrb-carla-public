@@ -1724,8 +1724,8 @@ namespace bdd_tests
             // complete field: Please indicate the details of your involvement
             string involvementDetails = "Automated test - details of the involvement";
 
-            NgWebElement matCheckbox = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='illegalDistributionInvolvementDetails']"));
-            matCheckbox.SendKeys(involvementDetails);
+            NgWebElement uiInvolvementDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='illegalDistributionInvolvementDetails']"));
+            uiInvolvementDetails.SendKeys(involvementDetails);
 
             // complete field: Please indicate the name and location of the retailer or store           
             string nameAndLocation2 = "Automated test name and location of retailer (2)";
@@ -2643,6 +2643,77 @@ namespace bdd_tests
             // click on the Licences link
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
+        }
+
+
+        [And(@"I do not complete the catering application correctly")]
+        public void I_do_not_complete_the_application_correctly()
+        {
+            /* 
+            Page Title: Catering Licence Application
+            */
+
+            System.Threading.Thread.Sleep(9000);
+
+            // select 'Yes' for previous liquor licence
+            NgWebElement previousLicence = ngDriver.FindElement(By.Id("mat-button-toggle-1-button"));
+            previousLicence.Click();
+
+            // select 'Yes' for Rural Agency Store Appointment
+            NgWebElement ruralStore = ngDriver.FindElement(By.Id("mat-button-toggle-4-button"));
+            ruralStore.Click();
+
+            // select 'Yes' for distillery, brewery or winery connections
+            NgWebElement liquorProduction = ngDriver.FindElement(By.Id("mat-button-toggle-7-button"));
+            liquorProduction.Click();
+
+            /*
+            The following fields are intentionally left empty:
+            - the establishment name
+            - the establishment address
+            - the establishment city
+            - the establishment postal code
+            - the PID
+            - the store phone number
+            */
+
+            // select 'Yes' for other business on premises
+            //NgWebElement otherBusiness = ngDriver.FindElement(By.Id("mat-button-toggle-10-button"));
+            //otherBusiness.Click();
+
+            /*
+            The following actions are intentionally left incomplete:
+            - upload a store signage document
+            - enter the first name of the application contact
+            - enter the last name of the application contact
+            - enter the role of the application contact
+            - enter the phone number of the application contact
+            - click on the authorized to submit checkbox
+            - click on the signature agreement checkbox
+            */
+
+            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
+            submit_button.Click();
+        }
+
+
+        [Then(@"the expected error messages are displayed")]
+        public void expected_error_messages_displayed()
+        {
+            /* 
+            Page Title: Catering Licence Application
+            */
+
+            // Expected error messages:
+            // - At least one signage document is required.
+            // - Establishment name is required.
+            // - Some required fields have not been completed
+
+            // check if signage document has been uploaded
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
+
+            // check if establishment name has been provided
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment name is required.')]")).Displayed);
         }
     }
 }
