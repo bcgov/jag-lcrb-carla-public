@@ -97,7 +97,17 @@ namespace Gov.Lclb.Cllb.Public.Models
             
             
             adoxioLicenseVM.endorsements = GetEndorsements(adoxioLicenseVM.id, dynamicsClient);
-            
+
+            adoxioLicenseVM.representativeFullName = dynamicsLicense.AdoxioRepresentativename;
+            adoxioLicenseVM.representativeEmail = dynamicsLicense.AdoxioRepresentativeemail;
+            adoxioLicenseVM.representativePhoneNumber = dynamicsLicense.AdoxioRepresentativephone;
+            adoxioLicenseVM.representativeCanSubmitPermanentChangeApplications = dynamicsLicense.AdoxioCansubmitpermanentchangeapplications;
+            adoxioLicenseVM.representativeCanSignTemporaryChangeApplications = dynamicsLicense.AdoxioCansigntemporarychangeapplications;
+            adoxioLicenseVM.representativeCanObtainLicenceInformation = dynamicsLicense.AdoxioCanobtainlicenceinformation;
+            adoxioLicenseVM.representativeCanSignGroceryStoreProofOfSale = dynamicsLicense.AdoxioCansigngrocerystoreproofofsales;
+            adoxioLicenseVM.representativeCanAttendEducationSessions = dynamicsLicense.AdoxioCanattendeducationsessions;
+            adoxioLicenseVM.representativeCanAttendComplianceMeetings = dynamicsLicense.AdoxioCanattendcompliancemeetings;
+            adoxioLicenseVM.representativeCanRepresentAtHearings = dynamicsLicense.AdoxioCanrepresentathearings;
 
             return adoxioLicenseVM;
         }
