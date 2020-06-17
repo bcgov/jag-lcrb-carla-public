@@ -197,7 +197,7 @@
     <None Update="CRSApplicationPlanStoreOpening.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_IN_show_store_on_map.feature">
+    <None Update="CRSApplicationShowStoreOnMap.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2E_CRSApplication_Licence_IN_store_relocation.feature">
@@ -209,28 +209,16 @@
     <None Update="E2E_CRSApplication_Licence_IN_transfer_ownership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_partnership_plan_store_openingx.feature">
+    <None Update="E2E_CRSApplication_Licence_partnership_show_store_on_mapx.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_soleproprietor_plan_store_openingx.feature">
+    <None Update="E2E_CRSApplication_Licence_soleproprietor_show_store_on_mapx.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_society_plan_store_openingx.feature">
+    <None Update="E2E_CRSApplication_Licence_society_show_store_on_mapx.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_publiccorp_plan_store_openingx.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_partnership_show_store_on_map.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_soleproprietor_show_store_on_map.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_society_show_store_on_map.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_publiccorp_show_store_on_map.feature">
+    <None Update="E2E_CRSApplication_Licence_publiccorp_show_store_on_mapx.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2E_CRSApplication_Licence_partnership_store_relocation.feature">
@@ -272,16 +260,13 @@
     <None Update="E2E_CRSApplication_Licence_privatecorp_transfer_ownership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_privatecorp_show_store_on_map.feature">
+    <None Update="E2E_CRSApplication_Licence_privatecorp_show_store_on_mapx.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2E_CRSApplication_Licence_privatecorp_structural_change.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2E_CRSApplication_Licence_privatecorp_store_relocation.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_privatecorp_plan_store_openingx.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="MapView.feature">
