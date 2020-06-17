@@ -206,19 +206,7 @@
     <None Update="CRSApplicationStructuralChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2E_CRSApplication_Licence_IN_transfer_ownership.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_partnership_structural_changex.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_soleproprietor_structural_changex.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_society_structural_changex.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_publiccorp_structural_changex.feature">
+    <None Update="CRSApplicationTransferOwnership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2E_CRSApplication_Licence_partnership_transfer_ownership.feature">
@@ -234,9 +222,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2E_CRSApplication_Licence_privatecorp_transfer_ownership.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2E_CRSApplication_Licence_privatecorp_structural_changex.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="MapView.feature">
