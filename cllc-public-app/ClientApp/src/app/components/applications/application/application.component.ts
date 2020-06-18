@@ -180,6 +180,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       federalProducerNames: ['', Validators.required],
       applicantType: ['', Validators.required],
       description1: ['', [Validators.required]],
+      description2: ['',[]],
       proposedChange: ['', [Validators.required]],
       connectedGrocery: ['', []],
       authorizedToSubmit: [''],
@@ -555,6 +556,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return this.application.licenseType === 'Rural Agency';
   }
 
+  setValidInterest() {
+    this.form.get("description2").setValue("1 2 3");
+  }
+
 
 
   /**
@@ -562,6 +567,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * @param showProgress
    */
   save(showProgress: boolean = false): Observable<boolean> {
+    if(this.isRAS()){
+      this.setValidInterest();
+    }
     const saveData = this.form.value;
 
     // do not save if the form is in file upload mode
@@ -769,8 +777,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('At least one zoning document is required.');
     }
 
-
-
     if (this.application.applicationType.showPropertyDetails && !this.form.get('establishmentName').value) {
       valid = false;
       this.validationMessages.push('Establishment name is required.');
@@ -781,6 +787,23 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
     if (!this.isHoursOfSaleValid()) {
       this.validationMessages.push('Hours of sale are required');
+    }
+
+    if (this.isRAS()){
+      
+
+      if (!this.form.get('isOwner').value){
+        this.validationMessages.push('Only the owner of the business may submit this information');
+      }
+
+      if (!this.form.get('hasValidInterest').value){
+        this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
+      }
+
+      if (!this.form.get('willhaveValidInterest').value){
+        this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
+      }
+
     }
 
     return valid && this.form.valid;
