@@ -1853,14 +1853,14 @@
 
           <!-- show before submitting to LG. Also show if LG rejected the application -->
           <button *ngIf="application?.applicationType?.isShowLGINApproval 
-                        && (application?.applicationStatus === 'Intake' || application?.lgApprovalDecision === 'Rejected')"
+                        && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')"
             class=" btn btn-primary" (click)="submitForLGINApproval()">
             Submit For LG/IN Approval
           </button>
 
           <!-- show if the LG has approved the application -->
           <button
-            *ngIf="application?.applicationType?.isShowLGINApproval && application?.lgApprovalDecision === 'Approved'"
+            *ngIf="application?.applicationType?.isShowLGINApproval && application?.lGApprovalDecision === 'Approved'"
             class=" btn btn-primary" (click)="proceedToSecurityScreening()">
             Proceed to Security Screening
           </button>
@@ -2123,7 +2123,7 @@
 
         <ng-container>
           <section class="large-screen-only" *ngIf="account?.businessType !== 'LocalGovernment'">
-            <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">Local Goverment {{application?.applicationStatus}} -- {{application?.lgApprovalDecision}}</h3>
+            <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">Local Goverment {{application?.applicationStatus}} -- {{application?.lGApprovalDecision}}</h3>
       
             <div [formGroup]="form" class="submitted-content"
               style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
@@ -2133,7 +2133,7 @@
                 Block A
               </div>
 
-              <div *ngIf="application?.lgApprovalDecision === 'Approved'" class="mt-3">
+              <div *ngIf="application?.lGApprovalDecision === 'Approved'" class="mt-3">
                 Block B
               </div>
 
@@ -2141,7 +2141,7 @@
                 Block C
               </div>
 
-              <div *ngIf="application?.lgApprovalDecision === 'Rejected'" class="mt-3">
+              <div *ngIf="application?.lGApprovalDecision === 'Rejected'" class="mt-3">
                 Block D
               </div>
 
