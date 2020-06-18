@@ -743,7 +743,12 @@ namespace bdd_tests
 
                 if (businessTypeShared == "public corporation")
                 {
-                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
+                    NgWebElement uploadMarriageCert0 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
+                    uploadMarriageCert0.SendKeys(marriageCertificate);
+                }
+                else if (businessTypeShared == "society")
+                {
+                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-file-uploader/div/ngx-file-drop/div/div/input"));
                     uploadMarriageCert1.SendKeys(marriageCertificate);
                 }
                 else
@@ -753,7 +758,7 @@ namespace bdd_tests
                 }
 
                 // click on submit org info button
-                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
+                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION ')]"));
                 orgInfoButton2.Click();
 
                 MakePayment();
