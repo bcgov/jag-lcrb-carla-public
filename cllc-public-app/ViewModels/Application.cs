@@ -510,6 +510,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string LgInName { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
+        [JsonProperty(PropertyName = "lGApprovalDecision")]
         public LGDecision? LGApprovalDecision { get; set; }
 
         [JsonProperty(PropertyName = "lGNameOfOfficial")]

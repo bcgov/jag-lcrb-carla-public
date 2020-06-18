@@ -308,7 +308,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         }
 
         // make fields readonly if payment was made or the LG is viewing the application
-        if (data.isPaid || this.isOpenedByLGForApproval || this.application.lgApprovalDecision === 'Approved') {
+        if (data.isPaid || this.isOpenedByLGForApproval || this.application.lGApprovalDecision === 'Approved') {
           this.form.disable();
         }
         this.savedFormData = this.form.value;
