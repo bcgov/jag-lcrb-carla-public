@@ -308,7 +308,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         }
 
         // make fields readonly if payment was made or the LG is viewing the application
-        if (data.isPaid || this.isOpenedByLGForApproval) {
+        if (data.isPaid || this.isOpenedByLGForApproval || this.application.lGApprovalDecision === 'Approved') {
           this.form.disable();
         }
         this.savedFormData = this.form.value;
@@ -677,6 +677,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
     } else {
       this.showValidationMessages = true;
     }
+  }
+
+  private proceedToSecurityScreening(){
+    //send event to move to the next step of the multi-step
+    this.saveComplete.next(true);
   }
 
   /**
