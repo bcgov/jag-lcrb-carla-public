@@ -19,7 +19,7 @@ const FormValidationErrorMap = {
   establishmentName: 'Establishment name',
   establishmentAddressStreet: 'Establishmen Address Street',
   establishmentAddressCity: 'Establishment Address City',
-  establishmentAddressPostalCode: 'Establishment Address city',
+  establishmentAddressPostalCode: 'Establishment Address Postal Code',
   contactPersonPhone: 'Business Telephone',
   contactPersonEmail: 'Business Email',
   contactPersonFirstName: 'Contact First Name',
