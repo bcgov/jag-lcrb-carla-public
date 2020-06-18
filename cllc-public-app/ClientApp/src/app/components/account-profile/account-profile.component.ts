@@ -219,6 +219,9 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       case 'IndigenousNation':
         name = 'Indigenous Nation';
         break;
+      case 'LocalGovernment':
+        name = 'Local Government';
+        break;
       case 'PublicCorporation':
       case 'PrivateCorporation':
       case 'UnlimitedLiabilityCorporation':
