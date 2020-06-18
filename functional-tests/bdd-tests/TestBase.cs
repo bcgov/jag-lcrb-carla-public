@@ -752,15 +752,6 @@ namespace bdd_tests
                     uploadMarriageCert2.SendKeys(marriageCertificate);
                 }
 
-                // workaround for current bug (LCSD-3214)
-                if (businessTypeShared == "partnership")
-                {
-                    string shares = "100";
-                    NgWebElement uiPartnerShares = ngDriver.FindElement(By.XPath("//app-org-structure/div[3]/section[1]/app-associate-list/div/table/tr/td[3]/app-field/section/div[1]/section/div/input"));
-                    uiPartnerShares.Clear();
-                    uiPartnerShares.SendKeys(shares);
-                }
-
                 // click on submit org info button
                 NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
                 orgInfoButton2.Click();
@@ -768,7 +759,7 @@ namespace bdd_tests
                 MakePayment();
 
                 // check payment fee
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
 
                 System.Threading.Thread.Sleep(7000);
 
@@ -1464,6 +1455,7 @@ namespace bdd_tests
             uiLicences.Click();
         }
 
+        [And(@"I request a store relocation for Catering")]
         public void CateringRelocationRequest()
         {
             /* 

@@ -3,6 +3,8 @@ import { ApplicationDataService } from '@services/application-data.service';
 import { Application } from '@models/application.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lg-in-confirmation-of-receipt',
@@ -15,6 +17,8 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
   busy: any;
 
   constructor(private applicationDataService: ApplicationDataService,
+    private snackBar: MatSnackBar,
+    private router: Router,
     private fb: FormBuilder) {
     super();
   }
@@ -30,14 +34,14 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
     this.form.patchValue(this.application);
   }
 
-  isValid(){
+  isValid() {
     this.markConstrolsAsTouched(this.form);
     this.validationMessages = this.listControlsWithErrors(this.form);
     return this.form.valid;
   }
 
   OptOutOfComment() {
-    if(!this.isValid()){
+    if (!this.isValid()) {
       return;
     }
 
@@ -50,13 +54,16 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
 
     this.busy = this.applicationDataService.updateApplication(data)
       .subscribe(res => {
-        debugger;
+        this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+        this.router.navigateByUrl('/lg-approvals');
+      }, error => {
+        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
       });
   }
 
 
   RejectApplication() {
-    if(!this.isValid()){
+    if (!this.isValid()) {
       return;
     }
 
@@ -69,13 +76,16 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
 
     this.busy = this.applicationDataService.updateApplication(data)
       .subscribe(res => {
-        debugger;
+        this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+        this.router.navigateByUrl('/lg-approvals');
+      }, error => {
+        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
       });
   }
 
 
   ApproveApplication() {
-    if(!this.isValid()){
+    if (!this.isValid()) {
       return;
     }
 
@@ -88,10 +98,11 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
 
     this.busy = this.applicationDataService.updateApplication(data)
       .subscribe(res => {
-        debugger;
+        this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+        this.router.navigateByUrl('/lg-approvals');
+      }, error => {
+        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
       });
-
   }
-
 
 }
