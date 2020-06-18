@@ -83,4 +83,8 @@ export class LicenseDataService extends DataService {
   updateLicenceLDBOrders(licenceId: string, total: number) {
     return this.http.put<License>(this.apiPath + licenceId + '/ldbordertotals', total, { headers: this.headers });
   }
+
+  updateLicenseeRepresentative(licenceId: string, licence: ApplicationLicenseSummary): Observable<ApplicationLicenseSummary> {
+    return this.http.put<ApplicationLicenseSummary>(this.apiPath + licenceId + '/representative', licence, { headers: this.headers });
+  }
 }
