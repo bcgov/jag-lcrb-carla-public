@@ -65,13 +65,9 @@ RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
     && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome && \
     dbus-uuidgen > /var/lib/dbus/machine-id
 
+ENV DOTNET_SSL_DIRS=/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt
+
 # Run Chrome non-privileged
 USER chrome
-
-
-
-
-
-
 
 CMD [ "/bin/bash" ]

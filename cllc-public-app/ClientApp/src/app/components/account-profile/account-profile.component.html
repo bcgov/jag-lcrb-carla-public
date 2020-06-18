@@ -67,6 +67,7 @@
                 <option value="Partnership">Partnership</option>
                 <option value="LimitedPartnership">Limited Partnership</option>
                 <option value="LimitedLiabilityPartnership">Limited Liability Partnership</option>
+                <option value="LocalGovernment">Local Government</option>
                 <option value="SoleProprietor">Sole Proprietor</option>
                 <option value="Society">Society</option>
                 <option value="University">University</option>
@@ -75,14 +76,14 @@
               </select>
             </app-field>
 
+            <!-- Incorporation/ BC Registration Number Box-->
             <section
-              *ngIf="['Partnership', 'Sole Proprietor', 'University', 'Church'].indexOf(getBusinessTypeName()) == -1 && getBusinessTypeName() !== 'Indigenous Nation'">
+              *ngIf="['Partnership', 'Sole Proprietor', 'University', 'Church', 'Indigenous Nation', 'Local Government'].indexOf(getBusinessTypeName()) == -1">
               <div [ngClass]="{'has-error': false}">
                 <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" for="">Incorporation
                   Number</label>
                 <label *ngIf="getBusinessTypeName() == 'Society'" for="">B.C. Society
-                  Incorporation Number</label>
-                
+                  Incorporation Number</label>                
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" id="bcIncorporationNumber"
                   formControlName="bcIncorporationNumber">
@@ -97,8 +98,9 @@
 
             <p></p>
 
+            <!-- Incorporation Date -->
             <section
-              *ngIf="['Partnership', 'Sole Proprietor', 'University', 'Church'].indexOf(getBusinessTypeName()) == -1 && getBusinessTypeName() !== 'Indigenous Nation'">
+              *ngIf="['Partnership', 'Sole Proprietor', 'University', 'Church', 'Local Government', 'Indigenous Nation'].indexOf(getBusinessTypeName()) == -1">
               <div [ngClass]="{'has-error': false}">
                 <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1">Date
                   of Incorporation in B.C.</label>
@@ -224,7 +226,7 @@
 
           <h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">
             {{getBusinessTypeName().toLocaleUpperCase()}} CONTACT</h3>
-          <h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation'">AUTHORIZED PERSON</h3>
+          <h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation' || getBusinessTypeName() == 'Local Government'">AUTHORIZED PERSON</h3>
           <div formGroupName="primarycontact" class="padded-section content-bottom">
             <i>The name and contact information of the person LCRB should contact for ongoing communication. The contact
               must be authorized to represent the applicant and have the authority to bind the applicant. </i><br>
