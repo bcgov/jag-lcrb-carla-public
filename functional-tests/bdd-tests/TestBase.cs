@@ -758,7 +758,7 @@ namespace bdd_tests
                 }
 
                 // click on submit org info button
-                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION ')]"));
+                 NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION ')]"));
                 orgInfoButton2.Click();
 
                 MakePayment();
