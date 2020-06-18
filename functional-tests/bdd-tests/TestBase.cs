@@ -758,8 +758,17 @@ namespace bdd_tests
 
                 MakePayment();
 
-                // check payment fee
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
+                if (applicationTypeShared == "a Cannabis Retail Store")
+                {
+                    // check payment fee
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
+                }
+
+                if (applicationTypeShared == "Catering")
+                {
+                    // check payment fee
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
+                }
 
                 System.Threading.Thread.Sleep(7000);
 
@@ -2015,9 +2024,7 @@ namespace bdd_tests
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Individual')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Partner')]")).Displayed);
-
-                // switched off - pending LCSD-3126
-                //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Partner2')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Partner2')]")).Displayed);
             }
         }
 
