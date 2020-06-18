@@ -105,7 +105,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 foreach (var item in result)
                 {
                     if (item.LicenseType == "Cannabis Retail Store" && item.ApplicationStatus == AdoxioApplicationStatusCodes.Approved
-                        && item.AssignedLicence != null && item.AssignedLicence.expiryDate > DateTime.Now
+                        && item.AssignedLicence != null && item.AssignedLicence.ExpiryDate > DateTime.Now
                         )
                     {
                         // determine if there is a transfer in progress.
@@ -123,7 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             bool result = false;
             foreach (var item in applicationList)
             {
-                if (item.LicenseType == licenseType && item.AssignedLicence != null && item.AssignedLicence.id == application.AssignedLicence.id)
+                if (item.LicenseType == licenseType && item.AssignedLicence != null && item.AssignedLicence.Id == application.AssignedLicence.Id)
                 {
                     result = true;
                     break;
