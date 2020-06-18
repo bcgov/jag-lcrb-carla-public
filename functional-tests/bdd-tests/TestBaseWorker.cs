@@ -16,10 +16,9 @@ namespace bdd_tests
     public abstract class TestBaseWorker : Feature
     {
         protected RemoteWebDriver driver;
+        
         // Protractor driver
         protected NgWebDriver ngDriver;
-
-        //protected FirefoxDriverService driverService;
 
         protected IConfigurationRoot configuration;
 
@@ -34,8 +33,8 @@ namespace bdd_tests
                 .AddUserSecrets("a004e634-29c7-48b6-becc-87fe16be7538")
                 .Build();
 
-            //bool runlocal = true;
             ChromeOptions options = new ChromeOptions();
+            
             // run headless when in CI
             if (!string.IsNullOrEmpty(configuration["OPENSHIFT_BUILD_COMMIT"]) || !string.IsNullOrEmpty(configuration["Build.BuildNumber"]))
             {
@@ -49,7 +48,6 @@ namespace bdd_tests
 
             driver = new ChromeDriver(path, options);
             
-            //driver = new FirefoxDriver(FirefoxDriverService);
             driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(60);
 
             ngDriver = new NgWebDriver(driver);
@@ -70,9 +68,10 @@ namespace bdd_tests
 
         public void CarlaLoginWorker()
         {
-            // load the dashboard page
-            string test_start = configuration["test_start_worker"];
-            
+            Random random = new Random();
+
+            string test_start = "bcservice/token/AT" + DateTime.Now.Ticks.ToString() + random.Next(0, 999).ToString();
+
             ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
 
             ngDriver.WaitForAngular();

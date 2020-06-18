@@ -50,6 +50,7 @@ import { ApplicationCovidTemporaryExtensionComponent } from '@components/applica
 import { CovidConfirmationComponent } from '@components/applications/application-covid-temporary-extension/covid-confirmation/covid-confirmation.component';
 import { TerminateTPORelationshipComponent } from '@components/applications/terminate-tpo-relationship/terminate-tpo-relationship.component';
 import { LgApprovalsComponent } from '@components/lg-approvals/lg-approvals.component';
+import { LicenceRepresentativeFormComponent } from '@components/licence-representative-form/licence-representative-form.component';
 
 
 const routes: Routes = [
@@ -106,6 +107,11 @@ const routes: Routes = [
     path: 'licences',
     component: LicencesComponent,
     canActivate: [BCeidAuthGuard],
+  },
+  {
+    path: 'licence/:licenceId/representative',
+    component: LicenceRepresentativeFormComponent,
+    canActivate: [BCeidAuthGuard]
   },
   {
     path: 'licence/:licenceId/event/:eventId/security',

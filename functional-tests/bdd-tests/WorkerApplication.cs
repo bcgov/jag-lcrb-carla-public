@@ -157,11 +157,8 @@ namespace bdd_tests
             */
 
             // click on the Submit and Pay button
-            NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
-            System.Threading.Thread.Sleep(7000);
-
-            submitpay_button.Click();
-            System.Threading.Thread.Sleep(7000);
+            NgWebElement submitPayButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
+            submitPayButton.Click();
         }
 
         [And(@"I enter the payment information")]
