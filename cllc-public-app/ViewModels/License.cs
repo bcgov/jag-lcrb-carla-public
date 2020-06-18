@@ -17,24 +17,35 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
     public class License
     {
-        public string id { get; set; }
-        public string establishmentId { get; set; }
-        public string establishmentName { get; set; }
-        public string establishmentEmail { get; set; }
-        public string establishmentPhone { get; set; }
-        public string establishmentAddress { get; set; }
+        public string Id { get; set; }
+        public string EstablishmentId { get; set; }
+        public string EstablishmentName { get; set; }
+        public string EstablishmentEmail { get; set; }
+        public string EstablishmentPhone { get; set; }
+        public string EstablishmentAddress { get; set; }
 
-        public string establishmentAddressStreet { get; set; }
-        public string establishmentAddressCity { get; set; }
-        public string establishmentAddressPostalCode { get; set; }
-        public string establishmentParcelId { get; set; }
+        public string EstablishmentAddressStreet { get; set; }
+        public string EstablishmentAddressCity { get; set; }
+        public string EstablishmentAddressPostalCode { get; set; }
+        public string EstablishmentParcelId { get; set; }
 
-        public string licenseStatus { get; set; }
-        public string licenseType { get; set; }
-        public string licenseNumber { get; set; }
-        public string licenseSubCategory {get; set;}
-        public DateTimeOffset? expiryDate { get; set; }
+        public string LicenseStatus { get; set; }
+        public string LicenseType { get; set; }
+        public string LicenseNumber { get; set; }
+        public string LicenseSubCategory {get; set;}
+        public DateTimeOffset? ExpiryDate { get; set; }
 
-        public List<string> endorsements { get; set; }
+        public List<string> Endorsements { get; set; }
+
+        public string RepresentativeFullName { get; set; }
+        public string RepresentativePhoneNumber { get; set; }
+        public string RepresentativeEmail { get; set; }
+        public bool? RepresentativeCanSubmitPermanentChangeApplications { get; set; }
+        public bool? RepresentativeCanSignTemporaryChangeApplications { get; set; }
+        public bool? RepresentativeCanObtainLicenceInformation { get; set; }
+        public bool? RepresentativeCanSignGroceryStoreProofOfSale { get; set; }
+        public bool? RepresentativeCanAttendEducationSessions { get; set; }
+        public bool? RepresentativeCanAttendComplianceMeetings { get; set; }
+        public bool? RepresentativeCanRepresentAtHearings { get; set; }
     }
 }

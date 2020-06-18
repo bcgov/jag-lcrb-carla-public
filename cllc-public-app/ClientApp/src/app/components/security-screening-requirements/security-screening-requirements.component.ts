@@ -57,8 +57,8 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
 
     this.busy = this.licenseDataService.getAllCurrentLicenses()
       .subscribe(licences => {
-        this.liquorLicenceExist = licences.filter(lc => lc.applicationTypeCategory === 'Liquor').length > 0;
-        this.cannabisLicenceExist = licences.filter(lc => lc.applicationTypeCategory === 'Cannabis').length > 0;
+        this.liquorLicenceExist = licences.filter(lc => lc.licenceTypeCategory === 'Liquor').length > 0;
+        this.cannabisLicenceExist = licences.filter(lc => lc.licenceTypeCategory === 'Cannabis').length > 0;
       });
   }
 
