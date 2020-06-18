@@ -48,10 +48,18 @@ export const fieldValidationErrors = {
 
 export const formValidationErrors = {
   'closingNumberMismatch': 'Closing Inventory must be equal to (Opening Inventory + Additions - Reductions)',
-  'salesMismatch': 'Sales quantity must equal domestic reductions'
+  'salesMismatch': 'Sales quantity must equal domestic reductions',
+  'closingNumberNonZero': 'Closing quantity must be greater than 1',
+  'closingWeightNonZero': 'Closing weight must be greater than 0.001',
+  'closingValueNonZero': 'Closing value must be greater than 1',
+  'closingSeedsNonZero': 'Closing seeds must be greater than 1'
 };
 
 export const ClosingInventoryValidator: ValidatorFn = (fg: FormGroup) => {
+  const validation = {};
+  const closingWeight = fg.get('closingWeight').value;
+  const closingNumber = fg.get('closingNumber').value;
+  const closingValue = fg.get('closingValue').value;
   const additions = [
     +fg.get('openingInventory').value,
     +fg.get('domesticAdditions').value,
@@ -68,9 +76,45 @@ export const ClosingInventoryValidator: ValidatorFn = (fg: FormGroup) => {
 
   const total = additions.reduce((n, curr) => n + curr, 0) - reductions.reduce((n, curr) => n + curr, 0);
   if (total !== +fg.get('closingNumber').value) {
-    return { closingNumberMismatch: true };
+    validation['closingNumberMismatch'] = true;
+  }
+  if ((closingWeight !== 0 || closingValue !== 0) && closingNumber < 1) {
+    validation['closingNumberNonZero'] = true;
+  }
+  if (Object.keys(validation).length > 0) {
+    return validation;
   }
   return null;
+};
+
+export const ClosingValueValidator: ValidatorFn = (fg: FormGroup) => {
+  const closingWeight = fg.get('closingWeight').value;
+  const closingNumber = fg.get('closingNumber').value;
+  const closingValue = fg.get('closingValue').value;
+  if ((closingWeight === 0 && closingNumber === 0) || closingValue >= 1) {
+    return null;
+  }
+  return { 'closingValueNonZero': true };
+};
+
+export const ClosingWeightValidator: ValidatorFn = (fg: FormGroup) => {
+  const closingWeight = fg.get('closingWeight').value;
+  const closingNumber = fg.get('closingNumber').value;
+  const closingValue = fg.get('closingValue').value;
+  if ((closingValue === 0 && closingNumber === 0) || closingWeight >= 0.001) {
+    return null;
+  }
+  return { 'closingWeightNonZero': true };
+};
+
+export const ClosingSeedsTotalValidator: ValidatorFn = (fg: FormGroup) => {
+  const totalSeeds = fg.get('totalSeeds').value;
+  const closingNumber = fg.get('closingNumber').value;
+  const closingValue = fg.get('closingValue').value;
+  if ((closingValue === 0 && closingNumber === 0) || totalSeeds >= 1) {
+    return null;
+  }
+  return { 'closingSeedsNonZero': true };
 };
 
 export const SalesValidator: ValidatorFn = (fg: FormGroup) => {
