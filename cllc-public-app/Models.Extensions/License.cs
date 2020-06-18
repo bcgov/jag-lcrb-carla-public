@@ -37,10 +37,10 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             License adoxioLicenseVM = new License();
 
-            adoxioLicenseVM.id = dynamicsLicense.AdoxioLicencesid;
+            adoxioLicenseVM.Id = dynamicsLicense.AdoxioLicencesid;
             if (dynamicsLicense.AdoxioLicencesubcategory != null)
             {
-                adoxioLicenseVM.licenseSubCategory = EnumExtensions.GetEnumMemberValue((LicenseSubCategory?)dynamicsLicense.AdoxioLicencesubcategory);
+                adoxioLicenseVM.LicenseSubCategory = EnumExtensions.GetEnumMemberValue((LicenseSubCategory?)dynamicsLicense.AdoxioLicencesubcategory);
             }            
             // fetch the establishment and get name and address
             Guid? adoxioEstablishmentId = null;
@@ -51,21 +51,21 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (adoxioEstablishmentId != null)
             {
                 var establishment = dynamicsClient.Establishments.GetByKey(adoxioEstablishmentId.ToString());
-                adoxioLicenseVM.establishmentId = establishment.AdoxioEstablishmentid;
-                adoxioLicenseVM.establishmentName = establishment.AdoxioName;
-                adoxioLicenseVM.establishmentEmail = establishment.AdoxioEmail;
-                adoxioLicenseVM.establishmentPhone = establishment.AdoxioPhone;
-                adoxioLicenseVM.establishmentAddress = establishment.AdoxioAddressstreet
+                adoxioLicenseVM.EstablishmentId = establishment.AdoxioEstablishmentid;
+                adoxioLicenseVM.EstablishmentName = establishment.AdoxioName;
+                adoxioLicenseVM.EstablishmentEmail = establishment.AdoxioEmail;
+                adoxioLicenseVM.EstablishmentPhone = establishment.AdoxioPhone;
+                adoxioLicenseVM.EstablishmentAddress = establishment.AdoxioAddressstreet
                                                     + ", " + establishment.AdoxioAddresscity
                                                     + " " + establishment.AdoxioAddresspostalcode;
             }
-            adoxioLicenseVM.expiryDate = dynamicsLicense.AdoxioExpirydate;
+            adoxioLicenseVM.ExpiryDate = dynamicsLicense.AdoxioExpirydate;
 
             // fetch the licence status
             int? adoxio_licenceStatusId = dynamicsLicense.Statuscode;
             if (adoxio_licenceStatusId != null)
             {
-                adoxioLicenseVM.licenseStatus = dynamicsLicense.Statuscode.ToString();
+                adoxioLicenseVM.LicenseStatus = dynamicsLicense.Statuscode.ToString();
             }
 
             // fetch the licence type
@@ -79,35 +79,35 @@ namespace Gov.Lclb.Cllb.Public.Models
                 var adoxio_licencetype = dynamicsClient.Licencetypes.GetByKey(adoxio_licencetypeId.ToString());
                 if (adoxio_licencetype != null)
                 {
-                    adoxioLicenseVM.licenseType = adoxio_licencetype.AdoxioName;
+                    adoxioLicenseVM.LicenseType = adoxio_licencetype.AdoxioName;
                 }
             }
 
             // fetch license number
-            adoxioLicenseVM.licenseNumber = dynamicsLicense.AdoxioLicencenumber;
+            adoxioLicenseVM.LicenseNumber = dynamicsLicense.AdoxioLicencenumber;
 
-            adoxioLicenseVM.establishmentAddressCity = dynamicsLicense.AdoxioEstablishmentaddresscity;
-            adoxioLicenseVM.establishmentAddressPostalCode = dynamicsLicense.AdoxioEstablishmentaddresspostalcode;
-            adoxioLicenseVM.establishmentAddressStreet = dynamicsLicense.AdoxioEstablishmentaddressstreet;
+            adoxioLicenseVM.EstablishmentAddressCity = dynamicsLicense.AdoxioEstablishmentaddresscity;
+            adoxioLicenseVM.EstablishmentAddressPostalCode = dynamicsLicense.AdoxioEstablishmentaddresspostalcode;
+            adoxioLicenseVM.EstablishmentAddressStreet = dynamicsLicense.AdoxioEstablishmentaddressstreet;
 
             if (dynamicsLicense.AdoxioEstablishment != null)
             {
-                adoxioLicenseVM.establishmentParcelId = dynamicsLicense.AdoxioEstablishment.AdoxioParcelid;
+                adoxioLicenseVM.EstablishmentParcelId = dynamicsLicense.AdoxioEstablishment.AdoxioParcelid;
             }
             
             
-            adoxioLicenseVM.endorsements = GetEndorsements(adoxioLicenseVM.id, dynamicsClient);
+            adoxioLicenseVM.Endorsements = GetEndorsements(adoxioLicenseVM.Id, dynamicsClient);
 
-            adoxioLicenseVM.representativeFullName = dynamicsLicense.AdoxioRepresentativename;
-            adoxioLicenseVM.representativeEmail = dynamicsLicense.AdoxioRepresentativeemail;
-            adoxioLicenseVM.representativePhoneNumber = dynamicsLicense.AdoxioRepresentativephone;
-            adoxioLicenseVM.representativeCanSubmitPermanentChangeApplications = dynamicsLicense.AdoxioCansubmitpermanentchangeapplications;
-            adoxioLicenseVM.representativeCanSignTemporaryChangeApplications = dynamicsLicense.AdoxioCansigntemporarychangeapplications;
-            adoxioLicenseVM.representativeCanObtainLicenceInformation = dynamicsLicense.AdoxioCanobtainlicenceinformation;
-            adoxioLicenseVM.representativeCanSignGroceryStoreProofOfSale = dynamicsLicense.AdoxioCansigngrocerystoreproofofsales;
-            adoxioLicenseVM.representativeCanAttendEducationSessions = dynamicsLicense.AdoxioCanattendeducationsessions;
-            adoxioLicenseVM.representativeCanAttendComplianceMeetings = dynamicsLicense.AdoxioCanattendcompliancemeetings;
-            adoxioLicenseVM.representativeCanRepresentAtHearings = dynamicsLicense.AdoxioCanrepresentathearings;
+            adoxioLicenseVM.RepresentativeFullName = dynamicsLicense.AdoxioRepresentativename;
+            adoxioLicenseVM.RepresentativeEmail = dynamicsLicense.AdoxioRepresentativeemail;
+            adoxioLicenseVM.RepresentativePhoneNumber = dynamicsLicense.AdoxioRepresentativephone;
+            adoxioLicenseVM.RepresentativeCanSubmitPermanentChangeApplications = dynamicsLicense.AdoxioCansubmitpermanentchangeapplications;
+            adoxioLicenseVM.RepresentativeCanSignTemporaryChangeApplications = dynamicsLicense.AdoxioCansigntemporarychangeapplications;
+            adoxioLicenseVM.RepresentativeCanObtainLicenceInformation = dynamicsLicense.AdoxioCanobtainlicenceinformation;
+            adoxioLicenseVM.RepresentativeCanSignGroceryStoreProofOfSale = dynamicsLicense.AdoxioCansigngrocerystoreproofofsales;
+            adoxioLicenseVM.RepresentativeCanAttendEducationSessions = dynamicsLicense.AdoxioCanattendeducationsessions;
+            adoxioLicenseVM.RepresentativeCanAttendComplianceMeetings = dynamicsLicense.AdoxioCanattendcompliancemeetings;
+            adoxioLicenseVM.RepresentativeCanRepresentAtHearings = dynamicsLicense.AdoxioCanrepresentathearings;
 
             return adoxioLicenseVM;
         }
