@@ -117,7 +117,7 @@ export class Application {
   lGTitlePosition: string;
   lGContactPhone: string;
   lGContactEmail: string;
-  lgApprovalDecision: string;
+  lGApprovalDecision: string;
   lGDecisionSubmissionDate: Date;
   resolutionDocsUploaded: boolean;
 
