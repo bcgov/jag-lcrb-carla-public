@@ -1,0 +1,11 @@
+::ng-deep * {
+    .mat-checkbox-inner-container {
+        margin-top: 4px !important;
+    }
+    .mat-checkbox-layout {
+        white-space: normal !important;
+    }
+    .multiline-tooltip {
+        white-space: pre-line;
+    }
+}

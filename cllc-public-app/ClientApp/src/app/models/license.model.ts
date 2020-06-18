@@ -16,4 +16,15 @@ export class License {
   endorsements: string[];
 
   expiryDate: Date;
+
+  representativeFullName: string;
+  representativePhoneNumber: string;
+  representativeEmail: string;
+  representativeCanSubmitPermanentChangeApplications: boolean;
+  representativeCanSignTemporaryChangeApplications: boolean;
+  representativeCanObtainLicenceInformation: boolean;
+  representativeCanSignGroceryStoreProofOfSale: boolean;
+  representativeCanAttendEducationSessions: boolean;
+  representativeCanAttendComplianceMeetings: boolean;
+  representativeCanRepresentAtHearings: boolean;
 }
