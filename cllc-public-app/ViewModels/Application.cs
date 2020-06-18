@@ -332,6 +332,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         No = 845280001
     }
 
+    public enum LGDecision
+    {
+        Approved = 845280000,
+        OptOut = 845280001,
+        Rejected = 845280002
+    }
+
     public class Application
     {
         public string Id { get; set; } //adoxio_applicationid
@@ -502,12 +509,16 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string LgInName { get; set; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonProperty(PropertyName = "lGApprovalDecision")]
+        public LGDecision? LGApprovalDecision { get; set; }
+
         [JsonProperty(PropertyName = "lGNameOfOfficial")]
         public string LGNameOfOfficial { get; set; }
 
         [JsonProperty(PropertyName = "lGTitlePosition")]
         public string LGTitlePosition { get; set; }
-        
+
         [JsonProperty(PropertyName = "lGContactPhone")]
         public string LGContactPhone { get; set; }
 
