@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, ValidatorFn } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LicenseDataService } from '@services/license-data.service';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Subscription, forkJoin, of, Observable } from 'rxjs';
