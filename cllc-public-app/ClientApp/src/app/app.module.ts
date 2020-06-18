@@ -202,6 +202,7 @@ import { TerminateTPORelationshipComponent } from '@components/applications/term
 import { LgApprovalsComponent } from './components/lg-approvals/lg-approvals.component';
 import { LiquorApprovalsCalloutComponent } from './components/liquor-approvals-callout/liquor-approvals-callout.component';
 import { LgInConfirmationOfReceiptComponent } from './components/applications/application/tabs/lg-in-confirmation-of-receipt/lg-in-confirmation-of-receipt.component';
+import { LicenceRepresentativeFormComponent } from '@components/licence-representative-form/licence-representative-form.component';
 
 
 @NgModule({
@@ -235,6 +236,7 @@ import { LgInConfirmationOfReceiptComponent } from './components/applications/ap
     InsertComponent,
     KeyPersonnelComponent,
     LicenceFeePaymentConfirmationComponent,
+    LicenceRepresentativeFormComponent,
     EventFormComponent,
     EventSecurityFormComponent,
     TemporaryOffsiteComponent,

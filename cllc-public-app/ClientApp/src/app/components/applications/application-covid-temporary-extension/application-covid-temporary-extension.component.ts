@@ -19,7 +19,7 @@ const FormValidationErrorMap = {
   establishmentName: 'Establishment name',
   establishmentAddressStreet: 'Establishmen Address Street',
   establishmentAddressCity: 'Establishment Address City',
-  establishmentAddressPostalCode: 'Establishment Address city',
+  establishmentAddressPostalCode: 'Establishment Address Postal Code',
   contactPersonPhone: 'Business Telephone',
   contactPersonEmail: 'Business Email',
   contactPersonFirstName: 'Contact First Name',
@@ -31,6 +31,7 @@ const FormValidationErrorMap = {
 
   //receivedLGPermission: 'Local Government Permission Receipt checkbox',
   lgStatus: 'Selection of the LG Option',
+  ALR: 'Identification of Agricultural Land Reserve Usage',
   boundedStatus: 'Confirmation of perimeter bounding',
   signatureAgreement: 'Declaration checkbox',
   currentTotalCapicityIncluded: 'Current Total Capacity checkbox',
@@ -91,6 +92,7 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
 
       //receivedLGPermission: ['', [this.customRequiredCheckboxValidator()]],
       lgStatus: ['', []],
+      ALR: ['',[Validators.required]],
       boundedStatus: ['',[Validators.required]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
       // signatureAgreement: ['', [Validators.required]]

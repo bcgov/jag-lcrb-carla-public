@@ -140,6 +140,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioLgcontactphone = from.LGContactPhone;
             to.AdoxioLgcontactemail = from.LGContactEmail;
             to.AdoxioLgdecisionsubmissiondate = from.LGDecisionSubmissionDate;
+            to.AdoxioLgapprovaldecision = (int?)from.LGApprovalDecision;
 
             // comment out this next line as it is causing all application updates to fail (moved to controller)
             //to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
@@ -381,6 +382,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 LGContactEmail = dynamicsApplication.AdoxioLgcontactemail,
                 LGDecisionSubmissionDate = dynamicsApplication.AdoxioLgdecisionsubmissiondate,
                 LgInName = dynamicsApplication?.AdoxioLocalgovindigenousnationid?.AdoxioName,
+                LGApprovalDecision = (LGDecision?)dynamicsApplication.AdoxioLgapprovaldecision,
 
                 // Catering fields.
 
