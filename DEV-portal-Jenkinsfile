@@ -109,7 +109,7 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
                 }            
             }
         }
-	}
+	})
 	}
 }
 
