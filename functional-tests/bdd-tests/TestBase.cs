@@ -2929,5 +2929,13 @@ namespace bdd_tests
             // check that the shareholder last name has been updated
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
         }
+
+
+        [And(@"I request a licensee representative")]
+        public void RequestLicenseeRepresentative()
+        { 
+        
+        
+        }
     }
 }
