@@ -1,6 +1,6 @@
 <div [ngBusy]="busy"></div>
 <div style="max-width: 800px;" [formGroup]="form">
-  <!-- <h1 style="margin-top: 0;">Connections to Producers</h1> --> 
+  <!-- <h1 style="margin-top: 0;">Connections to Producers</h1> -->
   <span *ngIf="federalProducerText === 'federal producer'">A "
     <strong>{{federalProducerText}}</strong>" is a {{licensedProducerText}} of cannabis
   </span>
@@ -11,13 +11,15 @@
   <div
     *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(businessType) !== -1">
     <section>
-      <label for="">Does the corporation have any association, connection or financial interest in a {{licensedProducerText}} of cannabis? </label>
+      <label for="">Does the corporation have any association, connection or financial interest in a
+        {{licensedProducerText}} of cannabis? </label>
       <br>
       <span>This includes, but is not limited to:</span>
       <br>
       <ul>
         <li>Directly holding voting shares in a {{federalProducerText}}.</li>
-        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding
+          voting
           shares in a company that holds voting shares in a {{federalProducerText}}.</li>
         <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li> A contractual business arrangement of any sort</li>
@@ -31,7 +33,8 @@
     <p></p>
 
     <section *ngIf="form.get('corpConnectionFederalProducer').value == '1'">
-      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of
+        shares
         held).</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="corpConnectionFederalProducerDetails"
@@ -60,7 +63,8 @@
     <p></p>
 
     <section *ngIf="form.get('federalProducerConnectionToCorp').value == '1'">
-      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of
+        shares
         held).</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="federalProducerConnectionToCorpDetails"
@@ -70,16 +74,17 @@
   </div>
 
   <!---- LG or IN -->
-  <div
-    *ngIf="['IndigenousNation', 'LocalGovernment'].indexOf(businessType) !== -1">
+  <div *ngIf="['IndigenousNation', 'LocalGovernment'].indexOf(businessType) !== -1">
     <section>
-      <label for="">Do you have any association, connection or financial interest in a {{licensedProducerText}} of cannabis? </label>
+      <label for="">Do you have any association, connection or financial interest in a {{licensedProducerText}} of
+        cannabis? </label>
       <br>
       <span>This includes, but is not limited to:</span>
       <br>
       <ul>
         <li>Directly holding voting shares in a {{federalProducerText}}.</li>
-        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding
+          voting
           shares in a company that holds voting shares in a {{federalProducerText}}.</li>
         <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li> A contractual business arrangement of any sort</li>
@@ -93,7 +98,8 @@
     <p></p>
 
     <section *ngIf="form.get('iNConnectionToFederalProducer').value == 'Yes'">
-      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of
+        shares
         held).</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="iNConnectionToFederalProducerDetails"
@@ -105,13 +111,15 @@
   <!-- PUBLIC -->
   <div *ngIf="['PublicCorporation'].indexOf(businessType) !== -1">
     <section>
-      <label for="">Does the corporation have any association, connection or financial interest in a {{licensedProducerText}} of cannabis? </label>
+      <label for="">Does the corporation have any association, connection or financial interest in a
+        {{licensedProducerText}} of cannabis? </label>
       <br>
       <span>This includes, but is not limited to:</span>
       <br>
       <ul>
         <li>Directly holding voting shares in a {{federalProducerText}}.</li>
-        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding
+          voting
           shares in a company that holds voting shares in a {{federalProducerText}}.</li>
         <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li> A contractual business arrangement of any sort</li>
@@ -125,7 +133,8 @@
     <p></p>
 
     <section *ngIf="form.get('corpConnectionFederalProducer').value == '1'">
-      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of
+        shares
         held).</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="corpConnectionFederalProducerDetails"
@@ -152,7 +161,8 @@
       <span>This includes, but is not limited to:</span>
       <ul>
         <li>Directly holding voting shares in a {{federalProducerText}}.</li>
-        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding
+          voting
           shares in a company that holds voting shares in a {{federalProducerText}}.</li>
         <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li>A contractual business arrangement of any sort.</li>
@@ -166,7 +176,8 @@
     <p></p>
 
     <section *ngIf="form.get('share20PlusConnectionProducer').value == '1'">
-      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares held).</span>
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of
+        shares held).</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="share20PlusConnectionProducerDetails"
         rows="5"></textarea>
@@ -174,17 +185,19 @@
     <p></p>
 
     <section>
-      <label for="">Does any shareholder with 20% or more of voting shares have any immediate family members with any connection to a {{licensedProducerText}} of cannabis?
+      <label for="">Does any shareholder with 20% or more of voting shares have any immediate family members with any
+        connection to a {{licensedProducerText}} of cannabis?
       </label>
       <br>
       <span>This includes, but is not limited to:</span>
       <ul>
-          <li>Directly holding voting shares in a {{federalProducerText}}.</li>
-          <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting shares in a company that holds voting shares in a {{federalProducerText}}.</li>
-          <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
-          <li>A contractual business arrangement of any sort.</li>
-        </ul>
-        <i>Immediate family members include spouses, parents, siblings, children, sons-in-law and daughters-in-law</i><br>
+        <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding
+          voting shares in a company that holds voting shares in a {{federalProducerText}}.</li>
+        <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
+        <li>A contractual business arrangement of any sort.</li>
+      </ul>
+      <i>Immediate family members include spouses, parents, siblings, children, sons-in-law and daughters-in-law</i><br>
       <br>
       <input type="radio" group="share20PlusFamilyConnectionProducer" [value]='1'
         formControlName="share20PlusFamilyConnectionProducer"> Yes
@@ -213,7 +226,8 @@
       <br>
       <ul>
         <li>Directly holding voting shares in a {{federalProducerText}}.</li>
-        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding
+          voting
           shares in a company that holds voting shares in a {{federalProducerText}}.</li>
         <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li>A contractual business arrangement of any sort.</li>
@@ -227,7 +241,8 @@
     <p></p>
 
     <section *ngIf="form.get('corpConnectionFederalProducer').value == '1'">
-      <span> Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+      <span> Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of
+        shares
         held).</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="corpConnectionFederalProducerDetails"
@@ -236,12 +251,14 @@
     <p></p>
 
     <section>
-      <label for="">Does the {{businessType}} have an immediate family member that has any interest in a {{federalProducerText}}?</label>
+      <label for="">Does the {{businessType}} have an immediate family member that has any interest in a
+        {{federalProducerText}}?</label>
       <br>
       <span>This includes, but is not limited to:</span>
       <ul>
         <li>Directly holding voting shares in a {{federalProducerText}}.</li>
-        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding
+          voting
           shares in a company that holds voting shares in a {{federalProducerText}}.</li>
         <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li>A contractual business arrangement of any sort.</li>
@@ -257,7 +274,8 @@
     <p></p>
 
     <section *ngIf="form.get('federalProducerConnectionToCorp').value == '1'">
-      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of
+        shares
         held).s</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="federalProducerConnectionToCorpDetails"
@@ -268,13 +286,15 @@
   <div
     *ngIf="[ 'Partnership', 'GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
     <section>
-      <label for="">Does the partnership have any association, connection or financial interest in a {{licensedProducerText}} of cannabis?</label>
+      <label for="">Does the partnership have any association, connection or financial interest in a
+        {{licensedProducerText}} of cannabis?</label>
       <br>
       <span>This includes, but is not limited to:</span>
       <br>
       <ul>
         <li>Directly holding voting shares in a {{federalProducerText}}.</li>
-        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding
+          voting
           shares in a company that holds voting shares in a federal
           producer.</li>
         <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
@@ -287,7 +307,8 @@
     <p></p>
 
     <section *ngIf="form.get('partnersConnectionFederalProducer').value == '1'">
-      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of
+        shares
         held).</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="partnersConnectionFederalProducerDetails"
@@ -316,7 +337,8 @@
     <p></p>
 
     <section *ngIf="form.get('federalProducerConnectionToCorp').value == '1'">
-      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of
+        shares
         held)</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="federalProducerConnectionToCorpDetails"
@@ -326,13 +348,15 @@
   </div>
   <div *ngIf="['Society'].indexOf(businessType) !== -1">
     <section>
-      <label for="">Does the society have any association, connection or financial interest in a {{licensedProducerText}} of cannabis?</label>
+      <label for="">Does the society have any association, connection or financial interest in a
+        {{licensedProducerText}} of cannabis?</label>
       <br>
       <span>This includes, but is not limited to:</span>
       <br>
       <ul>
         <li>Directly holding voting shares in a {{federalProducerText}}.</li>
-        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding
+          voting
           shares in a company that holds voting shares in a {{federalProducerText}}.</li>
         <li>Having a benefi cial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li>A contractual business arrangement of any sort.</li>
@@ -344,11 +368,36 @@
     <p></p>
 
     <section *ngIf="form.get('societyConnectionFederalProducer').value == '1'">
-      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of
+        shares
         held)</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="societyConnectionFederalProducerDetails"
         rows="5"></textarea>
+    </section>
+    <p></p>
+  </div>
+
+  <!-- Liquor Financial Interest -->
+  <div>
+    <section>
+      <label for="">
+        Do you or any of your shareholders have any amount of ownership interest in another B.C. liquor licence, or any
+        association with a third party operator for another licence, or have an immediate family member (spouse, parent,
+        sibling or child) with any amount of ownership interest in another licence?
+      </label>
+
+      <input type="radio" group="moreThanAYear" [value]='1' formControlName="liquorFinancialInterest"> Yes
+      <br>
+      <input type="radio" group="moreThanAYear" [value]='0' formControlName="liquorFinancialInterest"> No
+    </section>
+    <p></p>
+
+    <section *ngIf="form.get('liquorFinancialInterest').value == '1'">
+      <span>Indentify the licence(s), the individual(s) involved in the association, the nature of the association, and
+        (where applicable) the percentage of ownership.</span>
+      <br>
+      <textarea name="" id="" class="form-control" formControlName="liquorFinancialInterestDetails" rows="5"></textarea>
     </section>
     <p></p>
   </div>
