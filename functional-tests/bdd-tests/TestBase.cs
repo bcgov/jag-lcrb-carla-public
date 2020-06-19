@@ -18,7 +18,7 @@ using Newtonsoft.Json;
 namespace bdd_tests
 {
     public abstract class TestBase : Feature, IDisposable
-    {       
+    {
         // Protractor driver
         protected NgWebDriver ngDriver;
 
@@ -55,7 +55,7 @@ namespace bdd_tests
             }
             else
             {
-                options.AddArguments("start-maximized");                                
+                options.AddArguments("start-maximized");
             }
 
             var driver = new ChromeDriver(path, options);
@@ -67,7 +67,7 @@ namespace bdd_tests
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
 
             ngDriver = new NgWebDriver(driver);
-          
+
             ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
             ngDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(timeout);
             ngDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(timeout);
@@ -76,7 +76,7 @@ namespace bdd_tests
         }
 
         public void CarlaHome()
-        { 
+        {
             ngDriver.Navigate().GoToUrl($"{baseUri}");
             ngDriver.WaitForAngular();
         }
@@ -184,7 +184,7 @@ namespace bdd_tests
             businessTypeShared = businessType;
 
             Random random = new Random();
-            
+
             // load the dashboard page
             string test_start = "login/token/AT" + DateTime.Now.Ticks.ToString() + random.Next(0, 999).ToString();
             ngDriver.IgnoreSynchronization = true;
@@ -685,12 +685,12 @@ namespace bdd_tests
 
         public void CheckFeatureFlagsCOVIDTempExtension()
         {
-            CheckFeatureFlag("CovidApplication");          
+            CheckFeatureFlag("CovidApplication");
         }
 
         public void CheckFeatureFlagsLiquor()
         {
-            CheckFeatureFlag("LiquorOne");        
+            CheckFeatureFlag("LiquorOne");
         }
 
         public void CheckFeatureFlagsMaps()
@@ -758,7 +758,7 @@ namespace bdd_tests
                 }
 
                 // click on submit org info button
-                 NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION ')]"));
+                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION ')]"));
                 orgInfoButton2.Click();
 
                 MakePayment();
@@ -1026,7 +1026,7 @@ namespace bdd_tests
 
         [And(@"I request an event authorization")]
         public void RequestEventAuthorization()
-        {       
+        {
             /* 
             Page Title: Licences
             Subtitle:   Catering Licences
@@ -1167,7 +1167,7 @@ namespace bdd_tests
 
         [And(@"I plan the store opening")]
         public void PlanStoreOpening()
-        { 
+        {
             /* 
             Page Title: Licences
             Subtitle:   Cannabis Retail Store Licences
@@ -1890,7 +1890,7 @@ namespace bdd_tests
 
                 // enter the name of the federal producer and details of the connection 
                 string nameAndDetails = "The name of the federal producer and details of the connection.";
-                NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='corpConnectionFederalProducerDetails']")); 
+                NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='corpConnectionFederalProducerDetails']"));
                 uiDetailsFederalProducer2.SendKeys(nameAndDetails);
 
                 // select 'Yes' for federal producer connection to corporation
@@ -1942,7 +1942,7 @@ namespace bdd_tests
                 string shareholderDetails = "Details of shareholder relationship.";
                 NgWebElement uiShareholderDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='share20PlusConnectionProducerDetails']"));
                 uiShareholderDetails.SendKeys(shareholderDetails);
-               
+
                 // select 'Yes' for family connection
                 NgWebElement familyConnectionConnectionToCorp = ngDriver.FindElement(By.CssSelector("input[formcontrolname='share20PlusFamilyConnectionProducer']"));
                 familyConnectionConnectionToCorp.Click();
@@ -1991,7 +1991,7 @@ namespace bdd_tests
             /* 
             Page Title: Security Screening Requirements
             */
-            
+
             // confirm that private corporation personnel are present
             if (businessTypeShared == "private corporation")
             {
@@ -2040,7 +2040,7 @@ namespace bdd_tests
             MakePayment();
         }
 
-        
+
         [And(@"I am logged in to the dashboard as a (.*)")]
         public void ViewDashboard(string businessType)
         {
@@ -2629,7 +2629,7 @@ namespace bdd_tests
 
             // click on the Dashboard link
             NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
-            uiDashboard.Click(); 
+            uiDashboard.Click();
         }
 
 
@@ -2989,6 +2989,24 @@ namespace bdd_tests
             signatureAgree.Click();
 
             ClickOnSubmitButton();
+        }
+
+
+        [And(@"the organization structure page is displayed")]
+        public void OrgStructureDisplays()
+        {
+            // confirm that the page loads
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Detailed Organization Information')]")).Displayed);
+        }
+
+        [And(@"I click on the Dashboard link")]
+        public void ClickOnDashboard()
+        {
+            string dashboard = "Dashboard";
+
+            // click on the Dashboard link
+            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
+            uiDashboard.Click();
         }
     }
 }
