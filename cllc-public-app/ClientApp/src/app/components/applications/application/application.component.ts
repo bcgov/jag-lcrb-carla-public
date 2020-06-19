@@ -553,12 +553,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return this.application.licenseType === 'Rural Agency';
   }
 
-  setValidInterest() {
-    this.form.get("description2").setValue("1 2 3");
-  }
-
-
-
   /**
    * Save form data
    * @param showProgress
