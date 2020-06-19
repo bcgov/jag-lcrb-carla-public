@@ -1072,82 +1072,82 @@ namespace bdd_tests
             string physicalAddPostalCode = "V8V4Y3";
 
             // enter event contact name
-            NgWebElement uiEventContactName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+            NgWebElement uiEventContactName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactName']"));
             uiEventContactName.SendKeys(eventContactName);
 
             // enter event contact phone
-            NgWebElement uiEventContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+            NgWebElement uiEventContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPhone']"));
             uiEventContactPhone.SendKeys(eventContactPhone);
 
             // select event type
-            NgWebElement uiEventType = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-event-form/div/form/div[6]/div[1]/app-field/section/div/section/select/option[2]"));
+            NgWebElement uiEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventType'] option[value='2: 845280002']"));
             uiEventType.Click();
 
             // enter event description
-            NgWebElement uiEventDescription = ngDriver.FindElement(By.XPath("//textarea"));
+            NgWebElement uiEventDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='eventTypeDescription']"));
             uiEventDescription.SendKeys(eventDescription);
 
             // enter event client or host name
-            NgWebElement uiEventClientOrHostName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+            NgWebElement uiEventClientOrHostName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='clientHostname']"));
             uiEventClientOrHostName.SendKeys(eventClientOrHostName);
 
             // enter maximum attendance
-            NgWebElement uiMaxAttendance = ngDriver.FindElement(By.XPath("//input[@type='number']"));
+            NgWebElement uiMaxAttendance = ngDriver.FindElement(By.CssSelector("input[formcontrolname='maxAttendance']"));
             uiMaxAttendance.SendKeys(maximumAttendance);
 
             // enter maximum staff attendance
-            NgWebElement uiMaxStaffAttendance = ngDriver.FindElement(By.XPath("(//input[@type='number'])[2]"));
+            NgWebElement uiMaxStaffAttendance = ngDriver.FindElement(By.CssSelector("input[formcontrolname='maxStaffAttendance']"));
             uiMaxStaffAttendance.SendKeys(maximumStaffAttendance);
 
             // select whether minors are attending - yes
-            NgWebElement uiMinorsAttending = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-event-form/div/form/div[6]/div[6]/app-field/section/div[1]/section/select/option[1]"));
+            NgWebElement uiMinorsAttending = ngDriver.FindElement(By.CssSelector("[formcontrolname='minorsAttending'] option[value='true']"));
             uiMinorsAttending.Click();
 
-            // select type of food service provided - Full Service Meal
-            NgWebElement uiFoodServiceProvided = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-event-form/div/form/div[6]/div[7]/app-field/section/div[1]/section/select/option[3]"));
+            // select type of food service provided
+            NgWebElement uiFoodServiceProvided = ngDriver.FindElement(By.CssSelector("[formcontrolname='foodService'] option[value='0: 845280000']"));
             uiFoodServiceProvided.Click();
 
-            // select type of entertainment provided - Live Entertainment
-            NgWebElement uiEntertainmentProvided = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-event-form/div/form/div[6]/div[8]/app-field/section/div[1]/section/select/option[4]"));
+            // select type of entertainment provided
+            NgWebElement uiEntertainmentProvided = ngDriver.FindElement(By.CssSelector("[formcontrolname='entertainment'] option[value='1: 845280001']"));
             uiEntertainmentProvided.Click();
 
             // enter venue name description
-            NgWebElement uiVenueNameDescription = ngDriver.FindElement(By.XPath("//div[7]/div/app-field/section/div/section/textarea"));
+            NgWebElement uiVenueNameDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='venueDescription']"));
             uiVenueNameDescription.SendKeys(venueNameDescription);
 
-            // select venue location - both (indoors/outdoors)
-            NgWebElement uiVenueLocation = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-event-form/div/form/div[7]/div[2]/app-field/section/div[1]/section/select/option[3]"));
+            // select venue location
+            NgWebElement uiVenueLocation = ngDriver.FindElement(By.CssSelector("[formcontrolname='specificLocation'] option[value='2: 845280002']"));
             uiVenueLocation.Click();
 
             // enter venue additional info
-            NgWebElement uiVenueAdditionalInfo = ngDriver.FindElement(By.XPath("//div[3]/app-field/section/div/section/textarea"));
+            NgWebElement uiVenueAdditionalInfo = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
             uiVenueAdditionalInfo.SendKeys(venueAdditionalInfo);
 
             // enter physical address - street address 1
-            NgWebElement uiPhysicalAddStreetAddress1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            NgWebElement uiPhysicalAddStreetAddress1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='street1']"));
             uiPhysicalAddStreetAddress1.SendKeys(physicalAddStreetAddress1);
 
             // enter physical address - street address 2 
-            NgWebElement uiPhysicalAddStreetAddress2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
+            NgWebElement uiPhysicalAddStreetAddress2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='street2']"));
             uiPhysicalAddStreetAddress2.SendKeys(physicalAddStreetAddress2);
 
             // enter physical address - city
-            NgWebElement uiPhysicalAddCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
+            NgWebElement uiPhysicalAddCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='city']"));
             uiPhysicalAddCity.SendKeys(physicalAddCity);
 
             // enter physical address - postal code
-            NgWebElement uiPhysicalAddPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
+            NgWebElement uiPhysicalAddPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='postalCode']"));
             uiPhysicalAddPostalCode.SendKeys(physicalAddPostalCode);
 
             // select start date
-            NgWebElement uiVenueStartDate1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+            NgWebElement uiVenueStartDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='startDate']"));
             uiVenueStartDate1.Click();
 
             NgWebElement uiVenueStartDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
             uiVenueStartDate2.Click();
 
             // select end date
-            NgWebElement uiVenueEndDate1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
+            NgWebElement uiVenueEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='endDate']"));
             uiVenueEndDate1.Click();
 
             NgWebElement uiVenueEndDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
@@ -1158,7 +1158,7 @@ namespace bdd_tests
             uiEventLiquorServiceTimesDifferent.Click();
 
             // select terms and conditions checkbox
-            NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-event-form/div/form/div[9]/div/mat-checkbox"));
+            NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiTermsAndConditions.Click();
 
             // click on the submit button
