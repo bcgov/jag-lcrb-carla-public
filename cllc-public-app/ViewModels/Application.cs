@@ -481,6 +481,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string PoliceJurisdictionId { get; set; }
         public string FederalProducerNames { get; set; }
         public string Description1 { get; set; }
+        public string Description2 { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public ValueNotChanged? RenewalDUI { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
