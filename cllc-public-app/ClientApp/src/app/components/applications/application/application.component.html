@@ -211,6 +211,10 @@
             <section class="pt-3" *ngIf="showFormControl(application?.applicationType?.lGandPoliceSelectors)"
               appRemoveIfFeatureOff="LGApprovals">
 
+              <h3 class="blue-header">Local Government/Indigenous Nation and Police Jurisdiction </h3>
+              <div class="content-bottom">
+              <p>Enter the local government (or indigenous nation) and police jurisdiction where the establishment will be located. Suggestions will be provided after you type the first three characters of the name.</p>
+
               <section class="ngtest-lg-instructions" [innerHTML]="htmlContent?.lGInstructions "></section>
 
               <app-field label="Local Government/Indigenous Nation" [required]="false"
@@ -237,6 +241,7 @@
                   </mat-autocomplete>
                 </div>
               </app-field>
+            </div>
             </section>
 
             <!-- Store Contact Info -->
@@ -2127,26 +2132,30 @@
 
         <ng-container>
           <section class="large-screen-only" *ngIf="account?.businessType !== 'LocalGovernment'">
-            <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">Local Goverment {{application?.applicationStatus}} -- {{application?.lGApprovalDecision}}</h3>
+            <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">Local Goverment / Indigenous Nation Review: {{application?.lGApprovalDecision}}</h3>
       
             <div [formGroup]="form" class="submitted-content"
               style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
              
       
               <div *ngIf="application?.applicationStatus === 'Intake'" class="mt-3">
-                Block A
+                <p>Local Government or Indigenous Nation Approval is required for this application. You can specify the local
+                government or indigenous nation where your establishment will reside in the form below.</p> 
+                <p>On completion of this form, it
+                will be submitted to that local government for their review. Once they have made their decision you will be able to
+                provide your personnel's security screening information, and submit and pay for this application.</p>
               </div>
 
               <div *ngIf="application?.lGApprovalDecision === 'Approved'" class="mt-3">
-                Block B
+                {{application?.indigenousNation}} has approved this application. You may proceed to the next step.
               </div>
 
               <div *ngIf="application?.applicationStatus === 'PendingForLGFNPFeedback'" class="mt-3">
-                Block C
+                {{application?.indigenousNation}} has approved this application, but will provide comment at a later date. You may proceed to the next step.
               </div>
 
               <div *ngIf="application?.lGApprovalDecision === 'Rejected'" class="mt-3">
-                Block D
+                {{application?.indigenousNation}} has rejected this application. You may proceed to the next step.
               </div>
 
             </div>
