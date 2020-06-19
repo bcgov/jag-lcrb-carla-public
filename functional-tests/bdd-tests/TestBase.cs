@@ -566,53 +566,65 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(9000);
 
             // enter the establishment name
+            //input[formcontrolname='establishmentName']
             NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
             uiEstabName.SendKeys(estName);
 
             // enter the establishment address
+            //input[formcontrolname='establishmentAddressStreet']
             NgWebElement uiEstabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
             uiEstabAddress.SendKeys(estAddress);
 
             // enter the establishment city
+            //input[formcontrolname='establishmentAddressCity']
             NgWebElement uiEstabCity = ngDriver.FindElement(By.Id("establishmentAddressCity"));
             uiEstabCity.SendKeys(estCity);
 
             // enter the establishment postal code
+            //input[formcontrolname='establishmentAddressPostalCode']
             NgWebElement uiEstabPostal = ngDriver.FindElement(By.Id("establishmentAddressPostalCode"));
             uiEstabPostal.SendKeys(estPostal);
 
             // enter the PID
+            //input[formcontrolname='establishmentParcelId']
             NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
             // enter the store email
+            //input[formcontrolname='establishmentEmail']
             NgWebElement uiEstabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
             uiEstabEmail.SendKeys(estEmail);
 
             // enter the store phone number
+            //input[formcontrolname='establishmentPhone']
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
             // select 'Yes'
-            // Do you or any of your shareholders currently hold, have held, or have previously applied for a British Columbia liquor licence ?
+            // Do you or any of your shareholders currently hold, have held, or have previously applied for a British Columbia liquor licence?
+            //#previousApplication button#mat-button-toggle-1-button
             NgWebElement uiPreviousLicenceYes = ngDriver.FindElement(By.Id("mat-button-toggle-1-button"));
             uiPreviousLicenceYes.Click();
 
             // enter the previous application details
+            //textarea#previousApplicationDetails
             NgWebElement uiPreviousApplicationDetails = ngDriver.FindElement(By.Id("previousApplicationDetails"));
             uiPreviousApplicationDetails.SendKeys(prevAppDetails);
 
             // select 'Yes'
             // Do you hold a Rural Agency Store Appointment?
+            //#ruralAgencyStoreAppointment button#mat-button-toggle-4-button
             NgWebElement uiRuralAgencyStore = ngDriver.FindElement(By.Id("mat-button-toggle-4-button"));
             uiRuralAgencyStore.Click();
 
             // select 'Yes'
             // Do you, or any of your shareholders, have any connection, financial or otherwise, direct or indirect, with a distillery, brewery or winery?
+            //#liquorIndustryConnections button#mat-button-toggle-7-button
             NgWebElement uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-7-button"));
             uiOtherBusinessYes.Click();
 
             // enter the connection details
+            //textarea#liquorIndustryConnectionsDetails
             NgWebElement uiLiqIndConnection = ngDriver.FindElement(By.Id("liquorIndustryConnectionsDetails"));
             uiLiqIndConnection.SendKeys(liqConnectionDetails);
 
@@ -627,30 +639,37 @@ namespace bdd_tests
             uploadSignage.SendKeys(signagePath);
 
             // enter the first name of the application contact
+            //input[formcontrolname='contactPersonFirstName']
             NgWebElement uiContactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
             uiContactGiven.SendKeys(conGiven);
 
             // enter the last name of the application contact
+            //input[formcontrolname='contactPersonLastName']
             NgWebElement uiContactSurname = ngDriver.FindElement(By.Id("contactPersonLastName"));
             uiContactSurname.SendKeys(conSurname);
 
             // enter the role of the application contact
-            NgWebElement uiContactRole = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+            //NgWebElement uiContactRole = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
+            NgWebElement uiContactRole = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
             uiContactRole.SendKeys(conRole);
 
             // enter the phone number of the application contact
-            NgWebElement uiContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
+            //NgWebElement uiContactPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
+            NgWebElement uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
             uiContactPhone.SendKeys(conPhone);
 
             // enter the email of the application contact
+            //input[formcontrolname='contactPersonEmail']
             NgWebElement uiContactEmail = ngDriver.FindElement(By.Id("contactPersonEmail"));
             uiContactEmail.SendKeys(conEmail);
 
             // click on the authorized to submit checkbox
+            //input[formcontrolname='authorizedToSubmit']
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
             uiAuthorizedToSubmit.Click();
 
             // click on the signature agreement checkbox
+            //input[formcontrolname='signatureAgreement']
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSignatureAgreement.Click();
 
