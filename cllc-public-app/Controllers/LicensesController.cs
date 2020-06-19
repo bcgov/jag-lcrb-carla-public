@@ -464,8 +464,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
                 application.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
 
-                // set license type relationship 
-                application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicense.AdoxioLicenceType.AdoxioLicencetypeid);
+                if (adoxioLicense.AdoxioLicenceType != null)
+                {
+                    // set license type relationship 
+                    application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicense.AdoxioLicenceType.AdoxioLicencetypeid);
+                }
+                
                 application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
 
                 application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
