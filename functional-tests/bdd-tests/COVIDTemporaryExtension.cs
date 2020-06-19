@@ -209,14 +209,17 @@ namespace bdd_tests
 
                 // upload LG/IN approval document
                 string LGINPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "LG_IN_approval.pdf");
-                NgWebElement uploadLGINApproval = ngDriver.FindElement(By.CssSelector("[documenttype='LGConfirmation'] input[type='file']"));
+                NgWebElement uploadLGINApproval = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
                 uploadLGINApproval.SendKeys(LGINPath);
             }
 
-            // upload a representative notification form 
-            string repNotifyPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "licensee_rep_notification.pdf");
-            NgWebElement uploadRepNotify = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
-            uploadRepNotify.SendKeys(repNotifyPath);
+            if (licenceType == "Food Primary licence")
+            {
+                // upload a representative notification form 
+                string repNotifyPathFP = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "licensee_rep_notification.pdf");
+                NgWebElement uploadRepNotifyFP = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+                uploadRepNotifyFP.SendKeys(repNotifyPathFP);
+            }
 
             // click on the signature agreement checkbox
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[3]"));
