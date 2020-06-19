@@ -2,6 +2,7 @@
     As a logged in business user
     I want to confirm that the organization structure page displays
 
+@validation @privatecorporation
 Scenario: Check Organization Structure
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
