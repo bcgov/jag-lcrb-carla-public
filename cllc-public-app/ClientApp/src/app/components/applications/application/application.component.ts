@@ -564,9 +564,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * @param showProgress
    */
   save(showProgress: boolean = false): Observable<boolean> {
-    if(this.isRAS()){
-      this.setValidInterest();
-    }
     const saveData = this.form.value;
     let description2 = '';
 
