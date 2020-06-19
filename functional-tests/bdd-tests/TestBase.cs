@@ -119,7 +119,7 @@ namespace bdd_tests
             // if this is a private corporation, click the radio button
             if (businessType == "private corporation")
             {
-                NgWebElement privateCorporationRadio = ngDriver.FindElement(By.CssSelector("input[value = 'PrivateCorporation'][type = 'radio']"));
+                NgWebElement privateCorporationRadio = ngDriver.FindElement(By.CssSelector("input[value='PrivateCorporation'][type = 'radio']"));
                 privateCorporationRadio.Click();
             }
 
@@ -2933,9 +2933,62 @@ namespace bdd_tests
 
         [And(@"I request a licensee representative")]
         public void RequestLicenseeRepresentative()
-        { 
-        
-        
+        {
+            // click on the Licensee Representative link
+            string addLicensee = "Add Licensee Representative";
+            NgWebElement uiAddLicensee = ngDriver.FindElement(By.LinkText(addLicensee));
+            uiAddLicensee.Click();
+
+            // create test data
+            string representativeName = "Automated Test";
+            string telephone = "2005081818";
+            string email = "automated@test.com";
+
+            // enter the representative name
+            NgWebElement uiFullName = ngDriver.FindElement(By.CssSelector("input[formControlName='representativeFullName']"));
+            uiFullName.SendKeys(representativeName);
+
+            // enter the representative telephone number
+            NgWebElement uiPhoneNumber = ngDriver.FindElement(By.CssSelector("input[formControlName='representativePhoneNumber']"));
+            uiPhoneNumber.SendKeys(telephone);
+
+            // enter the representative email address
+            NgWebElement uiEmail = ngDriver.FindElement(By.CssSelector("input[formControlName='representativeEmail']"));
+            uiEmail.SendKeys(email);
+
+            // click on the submit permanent change applications checkbox
+            NgWebElement uiCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSubmitPermanentChangeApplications']"));
+            uiCheckbox.Click();
+
+            // click on the sign temporary change applications checkbox
+            NgWebElement uiCheckbox1 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSignTemporaryChangeApplications']"));
+            uiCheckbox1.Click();
+
+            // click on the obtain licence info from branch checkbox
+            NgWebElement uiCheckbox2 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanObtainLicenceInformation']"));
+            uiCheckbox2.Click();
+
+            // click on sign grocery annual proof of sales revenue checkbox
+            NgWebElement uiCheckbox3 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSignGroceryStoreProofOfSale']"));
+            uiCheckbox3.Click();
+
+            // click on attend education sessions checkbox
+            NgWebElement uiCheckbox4 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanAttendEducationSessions']"));
+            uiCheckbox4.Click();
+
+            // click on attend compliance meetings checkbox
+            NgWebElement uiCheckbox5 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanAttendComplianceMeetings']"));
+            uiCheckbox5.Click();
+
+            // click on represent licensee at enforcement hearings checkbox
+            NgWebElement uiCheckbox6 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanRepresentAtHearings']"));
+            uiCheckbox6.Click();
+
+            // click on the signature agreement checkbox
+            NgWebElement signatureAgree = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement'"));
+            signatureAgree.Click();
+
+            ClickOnSubmitButton();
         }
     }
 }
