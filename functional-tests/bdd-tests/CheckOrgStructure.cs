@@ -22,7 +22,10 @@ Scenario: Check Organization Structure
     And the account is deleted
     And I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
-    Then the organization structure page is displayed
+    And the organization structure page is displayed
+    And I click on the Dashboard link
+    And the account is deleted
+    Then I see the login page
 */
 
 namespace bdd_tests

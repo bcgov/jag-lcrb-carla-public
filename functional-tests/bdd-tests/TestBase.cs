@@ -704,10 +704,7 @@ namespace bdd_tests
         {
             if (businessTypeShared != "indigenous nation")
             {
-                // click on Dashboard link
-                string dash = "Dashboard";
-                NgWebElement returnDash = ngDriver.FindElement(By.LinkText(dash));
-                returnDash.Click();
+                ClickOnDashboard();
 
                 // click on the review organization information button
                 NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
@@ -778,8 +775,7 @@ namespace bdd_tests
                 System.Threading.Thread.Sleep(7000);
 
                 // click on Dashboard link
-                NgWebElement returnDash2 = ngDriver.FindElement(By.LinkText(dash));
-                returnDash2.Click();
+                ClickOnDashboard();
 
                 // click on the review organzation information button
                 NgWebElement orgInfoButton3 = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
@@ -882,9 +878,7 @@ namespace bdd_tests
             if (businessTypeShared != "indigenous nation")
             {
                 // click on Dashboard link
-                string dash = "Dashboard";
-                NgWebElement returnDash = ngDriver.FindElement(By.LinkText(dash));
-                returnDash.Click();
+                ClickOnDashboard();
 
                 // click on the review organization information button
                 NgWebElement orgInfoButton3 = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
@@ -1387,11 +1381,7 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(7000);
 
-            string dashboard = "Dashboard";
-
-            // click on the Dashboard link
-            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
-            uiDashboard.Click();
+            ClickOnDashboard();
 
             // confirm that relocation request is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Relocation Request')]")).Displayed);
@@ -1660,11 +1650,7 @@ namespace bdd_tests
             Subtitle:   Catering Licences
             */
 
-            string dashboard = "Dashboard";
-
-            // click on the Dashboard link
-            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
-            uiDashboard.Click();
+            ClickOnDashboard();
 
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
@@ -2625,11 +2611,7 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(7000);
 
-            string dashboard = "Dashboard";
-
-            // click on the Dashboard link
-            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
-            uiDashboard.Click();
+            ClickOnDashboard();
         }
 
 
