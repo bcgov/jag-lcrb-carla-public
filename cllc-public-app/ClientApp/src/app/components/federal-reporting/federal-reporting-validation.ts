@@ -49,6 +49,8 @@ export const fieldValidationErrors = {
 export const formValidationErrors = {
   'closingNumberMismatch': 'Closing Inventory must be equal to (Opening Inventory + Additions - Reductions)',
   'salesMismatch': 'Sales quantity must equal domestic reductions',
+  'salesNumberNonZero': 'Sales quantity must be greater than 1',
+  'salesValueNonZero': 'Sales value must be greater than 1',
   'closingNumberNonZero': 'Closing quantity must be greater than 1',
   'closingWeightNonZero': 'Closing weight must be greater than 0.001',
   'closingValueNonZero': 'Closing value must be greater than 1',
@@ -57,9 +59,9 @@ export const formValidationErrors = {
 
 export const ClosingInventoryValidator: ValidatorFn = (fg: FormGroup) => {
   const validation = {};
-  const closingWeight = fg.get('closingWeight').value;
-  const closingNumber = fg.get('closingNumber').value;
-  const closingValue = fg.get('closingValue').value;
+  const closingWeight = +fg.get('closingWeight').value;
+  const closingNumber = +fg.get('closingNumber').value;
+  const closingValue = +fg.get('closingValue').value;
   const additions = [
     +fg.get('openingInventory').value,
     +fg.get('domesticAdditions').value,
@@ -88,9 +90,9 @@ export const ClosingInventoryValidator: ValidatorFn = (fg: FormGroup) => {
 };
 
 export const ClosingValueValidator: ValidatorFn = (fg: FormGroup) => {
-  const closingWeight = fg.get('closingWeight').value;
-  const closingNumber = fg.get('closingNumber').value;
-  const closingValue = fg.get('closingValue').value;
+  const closingWeight = +fg.get('closingWeight').value;
+  const closingNumber = +fg.get('closingNumber').value;
+  const closingValue = +fg.get('closingValue').value;
   if ((closingWeight === 0 && closingNumber === 0) || closingValue >= 1) {
     return null;
   }
@@ -98,9 +100,9 @@ export const ClosingValueValidator: ValidatorFn = (fg: FormGroup) => {
 };
 
 export const ClosingWeightValidator: ValidatorFn = (fg: FormGroup) => {
-  const closingWeight = fg.get('closingWeight').value;
-  const closingNumber = fg.get('closingNumber').value;
-  const closingValue = fg.get('closingValue').value;
+  const closingWeight = +fg.get('closingWeight').value;
+  const closingNumber = +fg.get('closingNumber').value;
+  const closingValue = +fg.get('closingValue').value;
   if ((closingValue === 0 && closingNumber === 0) || closingWeight >= 0.001) {
     return null;
   }
@@ -108,9 +110,9 @@ export const ClosingWeightValidator: ValidatorFn = (fg: FormGroup) => {
 };
 
 export const ClosingSeedsTotalValidator: ValidatorFn = (fg: FormGroup) => {
-  const totalSeeds = fg.get('totalSeeds').value;
-  const closingNumber = fg.get('closingNumber').value;
-  const closingValue = fg.get('closingValue').value;
+  const totalSeeds = +fg.get('totalSeeds').value;
+  const closingNumber = +fg.get('closingNumber').value;
+  const closingValue = +fg.get('closingValue').value;
   if ((closingValue === 0 && closingNumber === 0) || totalSeeds >= 1) {
     return null;
   }
@@ -118,8 +120,20 @@ export const ClosingSeedsTotalValidator: ValidatorFn = (fg: FormGroup) => {
 };
 
 export const SalesValidator: ValidatorFn = (fg: FormGroup) => {
-  if (+fg.get('totalSalesToConsumerQty').value !== +fg.get('domesticReductions').value) {
-    return { salesMismatch: true };
+  const validation = {};
+  const totalSalesToConsumerQty = +fg.get('totalSalesToConsumerQty').value;
+  const totalSalesToConsumerValue = +fg.get('totalSalesToConsumerValue').value;
+  if (totalSalesToConsumerQty > 0 && totalSalesToConsumerValue < 1) {
+    validation['salesValueNonZero'] = true;
+  }
+  if (totalSalesToConsumerValue > 0 && totalSalesToConsumerQty < 1) {
+    validation['salesNumberNonZero'] = true;
+  }
+  if (totalSalesToConsumerQty !== +fg.get('domesticReductions').value) {
+    validation['salesMismatch'] = true;
+  }
+  if (Object.keys(validation).length > 0) {
+    return validation;
   }
   return null;
 };
