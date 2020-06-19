@@ -74,19 +74,10 @@
     <None Update="CateringApplicationThirdPartyOperator.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_partnership_transfer_of_ownership.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="CateringApplicationTransferOfOwnership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="E2ECateringApplication_sole_proprietor_transfer_of_ownership.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="E2ECateringApplication_society_transfer_of_ownership.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="E2ECateringApplication_public_corp_transfer_of_ownership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2ECateringApplication_private_corp_transfer_of_ownership.feature">
