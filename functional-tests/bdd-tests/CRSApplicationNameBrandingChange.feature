@@ -3,6 +3,7 @@
     I want to submit a CRS Application for different business types
     And request a valid name or branding change for the approved application
 
+@e2e @cannabis @indigenousnation
 Scenario: Indigenous Nation CRS Name Branding Change
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -23,6 +24,7 @@ Scenario: Indigenous Nation CRS Name Branding Change
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @partnership
 Scenario: Partnership CRS Name Branding Change
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -43,6 +45,7 @@ Scenario: Partnership CRS Name Branding Change
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @privatecorporation
 Scenario: Private Corporation CRS Name Branding Change
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -63,6 +66,7 @@ Scenario: Private Corporation CRS Name Branding Change
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @publiccorporation
 Scenario: Public Corporation CRS Name Branding Change
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -83,6 +87,7 @@ Scenario: Public Corporation CRS Name Branding Change
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @society
 Scenario: Society CRS Name Branding Change
     Given I am logged in to the dashboard as a society
     And the account is deleted
@@ -103,6 +108,7 @@ Scenario: Society CRS Name Branding Change
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @soleproprietorship
 Scenario: Sole Proprietorship CRS Name Branding Change
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted

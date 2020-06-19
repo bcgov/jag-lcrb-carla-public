@@ -3,6 +3,7 @@
     I want to pay the first year catering licence fee
     And submit a licensee representative request 
 
+ @e2e @catering @privatecorporation 
  Scenario: Private Corporation Licensee Representative Request
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
