@@ -105,7 +105,7 @@
                 </app-field>
                 <hr>
 
-                <app-field label="Is your establishment located on the Agricultural Land Reserve?" [valid]="isValidOrNotTouched('ALR')" [showChevrons]="false"
+                <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?" [valid]="isValidOrNotTouched('ALR')" [showChevrons]="false"
                 errorMessage="Specify ALR status" [isFullWidth]="true">
                 <mat-radio-group formControlName="ALR">
                     <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
@@ -115,7 +115,8 @@
                 <div *ngIf="this.form.get('ALR').value == 'Yes'">
                     <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
                     <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
-                    <strong>Please note that the <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019" target="_blank">Agricultural Land Reserve (ALR) Use Regulation</a> permits a food and beverage service lounge if the area is no more than 125 m<sup>2</sup> indoors and 125 m<sup>2</sup> outdoors. By submitting this application to LCRB, you are confirming that your areas will not exceed the size restrictions set in the ALR Use Regulation.</strong>
+                    <strong>Please note that the <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019" target="_blank">Agricultural Land Reserve (ALR) Use Regulation</a> permits a food and beverage service lounge if the area is no more than 125 m<sup>2</sup> indoors and 125 m<sup>2</sup> outdoors.</p>
+                        <p>By submitting this application to LCRB, you are confirming that your areas will not exceed the size restrictions set in the ALR Use Regulation or your specific approval from the Commission.</strong>
                     </div>
                 </div>
 
