@@ -82,7 +82,7 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
         node('master') {
             echo "Running SonarQube static code analysis..."
             sh 'oc cancel-build bc/cllc-public-sonar'
-            openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true', waitTime: 1800000
+            openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true', waitTime: 3600000
         }
     },'Smoke Test':
 	{
