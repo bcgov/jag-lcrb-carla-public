@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, ValidationErrors } from '@angular/forms';
-import { fieldValidationErrors, formValidationErrors, ClosingInventoryValidator, SalesValidator } from '../federal-reporting-validation';
+import { fieldValidationErrors, formValidationErrors, ClosingInventoryValidator,
+         SalesValidator, ClosingValueValidator, ClosingWeightValidator, ClosingSeedsTotalValidator } from '../federal-reporting-validation';
 
 @Component({
   selector: 'app-product-inventory-sales-report',
@@ -14,7 +15,11 @@ export class ProductInventorySalesReportComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.productForm.setValidators([ClosingInventoryValidator, SalesValidator]);
+    if (this.productForm.get('product').value === 'Seeds') {
+      this.productForm.setValidators([ClosingInventoryValidator, ClosingValueValidator, ClosingSeedsTotalValidator, SalesValidator]);
+    } else {
+      this.productForm.setValidators([ClosingInventoryValidator, ClosingValueValidator, ClosingWeightValidator, SalesValidator]);
+    }
   }
 
   getFieldValidationErrors() {
