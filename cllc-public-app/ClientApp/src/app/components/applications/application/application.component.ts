@@ -180,6 +180,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       federalProducerNames: ['', Validators.required],
       applicantType: ['', Validators.required],
       description1: ['', [Validators.required]],
+      description2: ['',[]],
       proposedChange: ['', [Validators.required]],
       connectedGrocery: ['', []],
       authorizedToSubmit: [''],
@@ -403,9 +404,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (this.isRAS()) {
-      this.form.get('isOwner').setValidators([Validators.required]);
-      this.form.get('hasValidInterest').setValidators([Validators.required]);
-      this.form.get('willhaveValidInterest').setValidators([Validators.required]);
       // use description1 for the certificate number
       this.form.get('description1').enable();
     }
@@ -536,26 +534,24 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   isBrewery(): boolean {
     // to do, set validation requirements
-    return this.form.get('mfgType').value == "Brewery";
+    return this.form.get('mfgType').value === "Brewery";
   }
   isWinery(): boolean {
     // to do, set validation requirements
-    return this.form.get('mfgType').value == "Winery";
+    return this.form.get('mfgType').value === "Winery";
   }
   isDistillery(): boolean {
-    return this.form.get('mfgType').value == "Distillery";
+    return this.form.get('mfgType').value === "Distillery";
   }
 
   isBrewPub(): boolean {
     // to do, set validation requirements
-    return this.form.get('mfgType').value == "Brewery" && this.form.get('brewPub').value == "Yes";
+    return this.form.get('mfgType').value === "Brewery" && this.form.get('brewPub').value === "Yes";
   }
 
   isRAS(): boolean {
     return this.application.licenseType === 'Rural Agency';
   }
-
-
 
   /**
    * Save form data
@@ -563,6 +559,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
    */
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
+    let description2 = '';
+
+    if (this.isRAS()) {
+      description2 += this.form.get('isOwner').value ? 'Is owner = Yes' : 'Is owner = No';
+      description2 += '\n';
+      description2 += this.form.get('hasValidInterest').value ? 'Has valid interest = Yes' : 'Has valid interest = No';
+      description2 += '\n';
+      description2 += this.form.get('willhaveValidInterest').value ? 'Will have valid interest = Yes' : 'Will have valid interest = No';
+    }
 
     // do not save if the form is in file upload mode
     if (this.mode === UPLOAD_FILES_MODE) {
@@ -570,7 +575,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       return of(true).pipe(delay(10));
     }
     return forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, description2: description2 }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
@@ -774,8 +779,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('At least one zoning document is required.');
     }
 
-
-
     if (this.application.applicationType.showPropertyDetails && !this.form.get('establishmentName').value) {
       valid = false;
       this.validationMessages.push('Establishment name is required.');
@@ -786,6 +789,23 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
     if (!this.isHoursOfSaleValid()) {
       this.validationMessages.push('Hours of sale are required');
+    }
+
+    if (this.isRAS()){
+      
+
+      if (!this.form.get('isOwner').value){
+        this.validationMessages.push('Only the owner of the business may submit this information');
+      }
+
+      if (!this.form.get('hasValidInterest').value){
+        this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
+      }
+
+      if (!this.form.get('willhaveValidInterest').value){
+        this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
+      }
+
     }
 
     return valid && this.form.valid;

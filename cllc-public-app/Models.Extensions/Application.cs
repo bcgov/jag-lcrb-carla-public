@@ -98,6 +98,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioRenewalsitemap = (int?)from.RenewalSiteMap;
             to.AdoxioRenewaltiedhousefederalinterest = (int?)from.TiedhouseFederalInterest;
             to.AdoxioDescription1 = from.Description1;
+            to.AdoxioDescription2 = from.Description2;
 
             //store opening
             to.AdoxioIsreadyworkers = from.IsReadyWorkers;
@@ -346,6 +347,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 PaymentReceivedDate = dynamicsApplication.AdoxioPaymentreceiveddate,
                 Description1 = dynamicsApplication.AdoxioDescription1,
+                Description2 = dynamicsApplication.AdoxioDescription2,
 
                 //get contact details
                 ContactPersonFirstName = dynamicsApplication.AdoxioContactpersonfirstname,
