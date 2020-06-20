@@ -41,8 +41,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() redirectToDashboardOnSave = true;
 
-  editedTree: LicenseeChangeLog;
   LicenseeChangeLog = LicenseeChangeLog;
+  editedTree: LicenseeChangeLog;
   busy: any;
   busySave: any;
   numberOfNonTerminatedApplications: number;
@@ -110,7 +110,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
         this.form.patchValue(this.application);
 
-        const currentChangeLogs = data.changeLogs || [];
+        const currentChangeLogs: LicenseeChangeLog[] = data.changeLogs || [];
 
         this.licenses = data.licenses;
         this.licencesOnFile = (this.licenses && this.licenses.length > 0);
@@ -118,13 +118,19 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.currentLegalEntities = data.currentHierarchy;
         this.numberOfNonTerminatedApplications = data.nonTerminatedApplications;
         this.thereIsExistingOrgStructure = this.currentLegalEntities && this.currentLegalEntities.children && this.currentLegalEntities.children.length > 0;
-        this.treeRoot = LicenseeChangeLog.processLegalEntityTree(this.currentLegalEntities);
-        this.treeRoot.isRoot = true;
-        this.treeRoot.applySavedChangeLogs(currentChangeLogs);
 
+        this.treeRoot = new LicenseeChangeLog(data.treeRoot); 
+        // apply some formatting to the treeRoot.
+        
+        this.treeRoot.fileUploads = {}; // This is only used on the client side
+
+        this.treeRoot.isRoot = true;
+
+
+        this.treeRoot.applySavedChangeLogs(currentChangeLogs);
+        this.treeRoot.fixChildren();
         this.loadedValue = this.cleanSaveData(this.treeRoot);
 
-        
 
         this.addDynamicContent();
 
@@ -215,9 +221,11 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         if (this.validationErrors.length === 0) {
           // set value to cause invoice generationP
           this.busyPromise = this.prepareSaveRequest({ invoicetrigger: 1 })
+
             .pipe(mergeMap(results => {
               console.log(results);
               const saveOverrideValue = { invoicetrigger: 1 };
+
               return this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue })
                 .pipe(takeWhile(() => this.componentActive))
                 .toPromise()

@@ -54,8 +54,9 @@ export class DashboardComponent extends FormBase implements OnInit {
 
       this.legalEntityDataService.getCurrentHierachy()
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: LegalEntity) => {
-        this.tree = LicenseeChangeLog.processLegalEntityTree(data);
+        .subscribe((data: LegalEntity) => {
+          this.tree = LicenseeChangeLog.CreateFromLegalEntity(data);
+          //this.tree.processLegalEntityTree(data);
         this.tree.isRoot = true;
       },
         () => {
