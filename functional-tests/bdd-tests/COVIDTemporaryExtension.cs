@@ -144,6 +144,10 @@ namespace bdd_tests
             NgWebElement uiEstPostal = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressPostalCode']"));
             uiEstPostal.SendKeys(estpostal);
 
+            // select 'Yes' for ALR location
+            NgWebElement uiIsALR = ngDriver.FindElement(By.CssSelector("[formcontrolname='ALR'] mat-radio-button[value='Yes']"));
+            uiIsALR.Click();
+
             // enter the licencee name
             NgWebElement uiLicenceeName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='nameOfApplicant']"));
             uiLicenceeName.SendKeys(licenceename);
@@ -167,11 +171,6 @@ namespace bdd_tests
             // enter the contact email
             NgWebElement uiContactEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonEmail']"));
             uiContactEmail.SendKeys(contactemail);
-
-            // select mailing address 'Same as above' checkbox (and then deselect) to confirm checkbox is visible and clickable
-            NgWebElement uiSameAsAbove = ngDriver.FindElement(By.CssSelector("input[formcontrolname='sameAddresses']"));
-            uiSameAsAbove.Click();
-            uiSameAsAbove.Click();
 
             // enter the mailing street
             NgWebElement uiMailingStreet = ngDriver.FindElement(By.CssSelector("input[formcontrolname='addressStreet']"));
@@ -199,9 +198,9 @@ namespace bdd_tests
 
             // upload a floor plan document
             string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
-            NgWebElement uploadFloorplan = ngDriver.FindElement(By.CssSelector("[documenttype='Floorplan'] input[type='file']"));
+            NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
             uploadFloorplan.SendKeys(floorplanPath);
-
+            
             if (licenceType != "Food Primary licence")
             {
                 // select LG/IN wishes to review radio button
@@ -210,14 +209,17 @@ namespace bdd_tests
 
                 // upload LG/IN approval document
                 string LGINPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "LG_IN_approval.pdf");
-                NgWebElement uploadLGINApproval = ngDriver.FindElement(By.CssSelector("[documenttype='LGConfirmation'] input[type='file']"));
+                NgWebElement uploadLGINApproval = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
                 uploadLGINApproval.SendKeys(LGINPath);
             }
 
-            // upload a representative notification form 
-            string repNotifyPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "licensee_rep_notification.pdf");
-            NgWebElement uploadRepNotify = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
-            uploadRepNotify.SendKeys(repNotifyPath);
+            if (licenceType == "Food Primary licence")
+            {
+                // upload a representative notification form 
+                string repNotifyPathFP = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "licensee_rep_notification.pdf");
+                NgWebElement uploadRepNotifyFP = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+                uploadRepNotifyFP.SendKeys(repNotifyPathFP);
+            }
 
             // click on the signature agreement checkbox
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[3]"));
