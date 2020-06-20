@@ -168,7 +168,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   * Performs a Depth First Traversal and transforms the LegalEntity tree to change objects
   */
   processLegalEntityTree(node: LegalEntity): LicenseeChangeLog {
-    const newNode = new LicenseeChangeLog(node);
+    const newNode = LicenseeChangeLog.CreateFromLegalEntity(node);
     if (node.children && node.children.length) {
       newNode.children = [];
       node.children.forEach(child => {
