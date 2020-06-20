@@ -566,18 +566,18 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(9000);
 
             // enter the establishment name
-            //input[formcontrolname='establishmentName']
-            NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
+            //NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
+            NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
             uiEstabName.SendKeys(estName);
 
             // enter the establishment address
-            //input[formcontrolname='establishmentAddressStreet']
-            NgWebElement uiEstabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
+            //NgWebElement uiEstabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
+            NgWebElement uiEstabAddress = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
             uiEstabAddress.SendKeys(estAddress);
 
             // enter the establishment city
-            //input[formcontrolname='establishmentAddressCity']
-            NgWebElement uiEstabCity = ngDriver.FindElement(By.Id("establishmentAddressCity"));
+            //NgWebElement uiEstabCity = ngDriver.FindElement(By.Id("establishmentAddressCity"));
+            NgWebElement uiEstabCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressCity']"));
             uiEstabCity.SendKeys(estCity);
 
             // enter the establishment postal code
@@ -1630,22 +1630,22 @@ namespace bdd_tests
             string licensee = "GunderCorp TestBusiness";
 
             // search for the proposed licensee
-            NgWebElement proposedLicensee = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+            NgWebElement proposedLicensee = ngDriver.FindElement(By.CssSelector("input[formcontrolname='autocompleteInput']"));
             proposedLicensee.SendKeys(licensee);
 
-            NgWebElement thirdPartyOperatorOption = ngDriver.FindElement(By.XPath("//*[@id='mat-option-0']/span"));
+            NgWebElement thirdPartyOperatorOption = ngDriver.FindElement(By.CssSelector("mat-option[role='option'] span"));
             thirdPartyOperatorOption.Click();
 
             // click on consent to licence transfer checkbox
-            NgWebElement consentToTransfer = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            NgWebElement consentToTransfer = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'transferConsent']"));
             consentToTransfer.Click();
 
             // click on authorize signature checkbox
-            NgWebElement authorizeSignature = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
+            NgWebElement authorizeSignature = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit']"));
             authorizeSignature.Click();
 
             // click on signature agreement checkbox
-            NgWebElement signatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[3]"));
+            NgWebElement signatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
             signatureAgreement.Click();
 
             // click on submit transfer button
