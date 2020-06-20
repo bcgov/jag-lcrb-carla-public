@@ -182,7 +182,6 @@ export class LicenseeChangeLog {
   public get keyPersonnelChildren(): LicenseeChangeLog[] {
     const leaders = (this.children || []).filter(item => item.isIndividual &&
       (item.isDirectorNew || item.isManagerNew || item.isOfficerNew || item.isTrusteeNew || item.isOwnerNew));
-    debugger;
     return leaders;
   }
 
@@ -485,6 +484,17 @@ export class LicenseeChangeLog {
     return changed;
   }
 
+  fixChildren() {
+    const fixedChildren = [];
+    this.children.forEach(child => {
+      const fixedChild: LicenseeChangeLog = new LicenseeChangeLog(child);
+      if (fixedChild.children) {
+        fixedChild.fixChildren;
+      }
+      fixedChildren.push(fixedChild);
+    });
+    this.children = fixedChildren;
+  }
 
   applySavedChangeLogs(currentChangeLogs: LicenseeChangeLog[]) {
     const changesWithLegalEntityId = currentChangeLogs.filter(item => !!item.legalEntityId);
@@ -503,6 +513,7 @@ export class LicenseeChangeLog {
 
         change.isIndividual = change.isIndividualFromChangeType();
         change.children = node.children; //do not overide
+
         change.isRoot = node.isRoot; //do not overide
         change.parentLinceseeChangeLog = node.parentLinceseeChangeLog; // do not overide
         Object.assign(node, change);
