@@ -485,15 +485,18 @@ export class LicenseeChangeLog {
   }
 
   fixChildren() {
-    const fixedChildren = [];
-    this.children.forEach(child => {
-      const fixedChild: LicenseeChangeLog = new LicenseeChangeLog(child);
-      if (fixedChild.children) {
-        fixedChild.fixChildren;
-      }
-      fixedChildren.push(fixedChild);
-    });
-    this.children = fixedChildren;
+    if (this.children) {
+      const fixedChildren = [];
+      this.children.forEach(child => {
+        const fixedChild: LicenseeChangeLog = new LicenseeChangeLog(child);
+        if (fixedChild.children) {
+          fixedChild.fixChildren;
+        }
+        fixedChildren.push(fixedChild);
+      });
+      this.children = fixedChildren;
+    }
+    
   }
 
   applySavedChangeLogs(currentChangeLogs: LicenseeChangeLog[]) {
