@@ -765,17 +765,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
             }
-            else
-            {
-                parentLegalEntityId = node.LegalEntityId;
-                parentChangeLogId = node.Id;
-            }
+          
 
             if (node.Children != null)
             {
                 foreach (var item in node.Children)
                 {
-                    SaveChangeObjects(item, applicationId, parentLegalEntityId, parentChangeLogId);
+                    SaveChangeObjects(item, applicationId, node.LegalEntityId, node.Id);
                 }
             }
         }
@@ -875,17 +871,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
             }
-            else
-            {
-                parentLegalEntityId = node.LegalEntityId;
-                parentChangeLogId = node.Id;
-            }
 
             if (node.Children != null)
             {
                 foreach (var item in node.Children)
                 {
-                    SaveAccountChangeObjects(item, node.ParentBusinessAccountId, parentLegalEntityId, parentChangeLogId);
+                    SaveAccountChangeObjects(item, node.ParentBusinessAccountId, node.LegalEntityId, node.Id);
                 }
             }
         }

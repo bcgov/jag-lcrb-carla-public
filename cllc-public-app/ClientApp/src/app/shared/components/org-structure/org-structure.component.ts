@@ -45,6 +45,7 @@ export class OrgStructureComponent implements OnInit {
       totalShares = this.node.totalSharesOld;
     }
 
+
     this.form = this.fb.group({
       numberOfMembers: [numberOfMembers, [Validators.required]],
       annualMembershipFee: [annualMembershipFee, [Validators.required]],
@@ -72,19 +73,13 @@ export class OrgStructureComponent implements OnInit {
   }
 
   updateChildren(children: LicenseeChangeLog[], changeType: string) {
-  
+   
     children = children || [];
     this.node.children = this.node.children || [];
-    if (changeType === 'Leadership') {
-      if (this.node.individualShareholderChildren) {
+    if (changeType === 'Leadership') {      
         this.node.children = [...children,
-        ...this.node.individualShareholderChildren];
-      }
-      if (this.node.businessShareholderChildren) {
-        this.node.children = [...this.node.children,
-        ...this.node.businessShareholderChildren];
-      }
-       
+        ...this.node.individualShareholderChildren,
+        ...this.node.businessShareholderChildren];          
     } else if (changeType === 'IndividualShareholder') {
       this.node.children = [...children,
       ...this.node.keyPersonnelChildren,
@@ -96,6 +91,7 @@ export class OrgStructureComponent implements OnInit {
       ...this.node.keyPersonnelChildren
       ];
     }
+    
   }
 
 

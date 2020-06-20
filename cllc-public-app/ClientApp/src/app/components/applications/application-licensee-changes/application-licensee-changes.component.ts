@@ -126,10 +126,9 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
         this.treeRoot.isRoot = true;
 
-        
 
-        this.treeRoot.applySavedChangeLogs( currentChangeLogs);
-
+        this.treeRoot.applySavedChangeLogs(currentChangeLogs);
+        this.treeRoot.fixChildren();
         this.loadedValue = this.cleanSaveData(this.treeRoot);
 
 
