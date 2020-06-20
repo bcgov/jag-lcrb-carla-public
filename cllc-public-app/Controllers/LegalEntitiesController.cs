@@ -680,8 +680,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // bind to application
                     if (!string.IsNullOrEmpty(node.ApplicationId))
                     {
-                        patchEntity.ApplicationOdataBind = _dynamicsClient.GetEntityURI("adoxio_applications", node.ApplicationId);
-                        parentLegalEntityId = node.LegalEntityId;
+                        patchEntity.ApplicationOdataBind = _dynamicsClient.GetEntityURI("adoxio_applications", node.ApplicationId);                        
                     }
 
                     // bind to parent account
@@ -751,8 +750,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     try
                     {
                         _dynamicsClient.Licenseechangelogs.Update(node.Id, patchEntity);
-                        var result = _dynamicsClient.Licenseechangelogs.GetByKey(node.Id);
-                        parentChangeLogId = result.AdoxioLicenseechangelogid;
+                        parentChangeLogId = node.Id;
                         parentLegalEntityId = node.LegalEntityId;
                     }
                     catch (HttpOperationException httpOperationException)
@@ -765,13 +763,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
             }
-          
+            else
+            {
+                parentChangeLogId = node.Id;
+            }
+
 
             if (node.Children != null)
             {
                 foreach (var item in node.Children)
                 {
-                    SaveChangeObjects(item, applicationId, node.LegalEntityId, node.Id);
+                    SaveChangeObjects(item, applicationId, node.LegalEntityId, parentChangeLogId);
                 }
             }
         }
@@ -871,12 +873,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
             }
+            else
+            {               
+                parentChangeLogId = node.Id;
+            }
 
             if (node.Children != null)
             {
                 foreach (var item in node.Children)
                 {
-                    SaveAccountChangeObjects(item, node.ParentBusinessAccountId, node.LegalEntityId, node.Id);
+                    SaveAccountChangeObjects(item, node.ParentBusinessAccountId, node.LegalEntityId, parentChangeLogId);
                 }
             }
         }
