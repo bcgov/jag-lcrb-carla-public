@@ -9,4 +9,7 @@ export class OngoingLicenseeData {
   nonTerminatedApplications: number;
   currentHierarchy: LegalEntity;
   licenses: ApplicationLicenseSummary[];
+  treeRoot: LicenseeChangeLog;
 }
+
+

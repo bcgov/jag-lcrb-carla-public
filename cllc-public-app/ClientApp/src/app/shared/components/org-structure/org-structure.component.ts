@@ -13,7 +13,7 @@ import { mergeMap } from 'rxjs/operators';
 })
 export class OrgStructureComponent implements OnInit {
   private _node: LicenseeChangeLog;
-  @Input() set node(value) {
+  @Input() set node(value: LicenseeChangeLog) {
     this._node = value;
     if (this.form) {
       this.form.patchValue(value);
@@ -65,6 +65,9 @@ export class OrgStructureComponent implements OnInit {
   asLicenseeChangeLog(val): LicenseeChangeLog { return val; }
 
   updateNumberOfFiles(numberOfFiles: number, docType: string) {
+    if (!this.node.fileUploads) {
+      this.node.fileUploads = {};
+    }
     this.node.fileUploads[docType] = numberOfFiles;
   }
 
@@ -73,10 +76,15 @@ export class OrgStructureComponent implements OnInit {
     children = children || [];
     this.node.children = this.node.children || [];
     if (changeType === 'Leadership') {
-      this.node.children = [...children,
-      ...this.node.individualShareholderChildren,
-      ...this.node.businessShareholderChildren
-      ];
+      if (this.node.individualShareholderChildren) {
+        this.node.children = [...children,
+        ...this.node.individualShareholderChildren];
+      }
+      if (this.node.businessShareholderChildren) {
+        this.node.children = [...this.node.children,
+        ...this.node.businessShareholderChildren];
+      }
+       
     } else if (changeType === 'IndividualShareholder') {
       this.node.children = [...children,
       ...this.node.keyPersonnelChildren,
