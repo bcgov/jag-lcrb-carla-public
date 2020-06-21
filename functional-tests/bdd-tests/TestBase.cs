@@ -2091,18 +2091,9 @@ namespace bdd_tests
                 string keyPersonnelEmail = "keypersonnel1@privatecorp.com";
 
                 // open key personnel #1 form  
-                if (applicationTypeShared == "Catering")
-                {
-                    // open key personnel #1 form   
-                    NgWebElement openKeyPersonnelFormCat = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div[4]/section/app-associate-list/div/button"));
-                    openKeyPersonnelFormCat.Click();
-                }
-                else
-                {
-                    NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Key Personnel'][changetypesuffix='Leadership'] button"));
-                    openKeyPersonnelForm.Click();
-                }
-
+                NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Key Personnel'][changetypesuffix='Leadership'] button"));
+                openKeyPersonnelForm.Click();
+                
                 // enter key personnel #1 first name
                 NgWebElement uiKeyPersonFirst = ngDriver.FindElement(By.CssSelector("input[formControlName=\"firstNameNew\"]"));
                 uiKeyPersonFirst.SendKeys(keyPersonnelFirstName);
