@@ -2340,7 +2340,7 @@ namespace bdd_tests
                 uiMemberNumber.SendKeys(membershipNumber);
 
                 // open the director row 
-                NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div[3]/section/app-associate-list/div/button"));
+                NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'][changetypesuffix='Leadership'] button"));
                 openKeyPersonnelForm.Click();
 
                 // create the director info
