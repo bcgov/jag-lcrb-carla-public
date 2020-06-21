@@ -71,7 +71,7 @@ namespace bdd_tests
             string businessVotingShares2 = "100";
             string businessEmail2 = "businessshareholder2@email.com";
 
-            // open business shareholder form - GardaWorld
+            // open business shareholder form
             NgWebElement uiOpenShareBiz2 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[5]/section[2]/app-associate-list/div/button"));
             uiOpenShareBiz2.Click();
 
