@@ -45,11 +45,11 @@ export class LicenseeChangeLog {
   applicationType: string;
   legalEntityId: string;
   parentLegalEntityId: string;
-  parentLinceseeChangeLogId: string;
+  parentLicenseeChangeLogId: string;
   parentBusinessAccountId: string;
   businessAccountId: string;
   children: LicenseeChangeLog[];
-  parentLinceseeChangeLog: LicenseeChangeLog;
+  parentLicenseeChangeLog: LicenseeChangeLog;
   interestPercentageNew: number;
   interestPercentageOld: number;
   phsLink: string;
@@ -62,6 +62,8 @@ export class LicenseeChangeLog {
   refObject: LicenseeChangeLog; // This is only used on the client side
   saved: boolean; // This is only used on the client side
   fileUploads: any = {}; // This is only used on the client side
+
+
 
 
   /**
@@ -131,7 +133,7 @@ export class LicenseeChangeLog {
       newNode.children = [];
       node.children.forEach(child => {
         const childNode = this.processLegalEntityTree(child);
-        childNode.parentLinceseeChangeLog = newNode;
+        childNode.parentLicenseeChangeLog = newNode;
 
         //split the change log if it is both a shareholder and key-personnel
         if (childNode.isIndividual && (childNode.isDirectorNew || childNode.isManagerNew || childNode.isOfficerNew || childNode.isTrusteeNew)) {
@@ -314,7 +316,12 @@ export class LicenseeChangeLog {
    * Create from LegalEntity
    */
   constructor(data: LicenseeChangeLog = null) {
+    this.CopyValues(data);
+  }
+
+  public CopyValues(data: LicenseeChangeLog) {
     if (data) {
+      this.id = data.id;
       this.legalEntityId = data.legalEntityId;
       this.businessAccountId = data.businessAccountId;
       this.businessType = data.businessType;
@@ -333,10 +340,11 @@ export class LicenseeChangeLog {
       this.isShareholderOld = data.isShareholderOld;
       this.isTrusteeNew = data.isTrusteeNew;
       this.isTrusteeOld = data.isTrusteeOld;
-      
+
       this.parentBusinessAccountId = data.parentBusinessAccountId;
       this.businessAccountId = data.businessAccountId;
-      
+      this.parentLicenseeChangeLogId = data.parentLicenseeChangeLogId;
+
       this.numberofSharesNew = data.numberofSharesNew;
       this.numberofSharesOld = data.numberofSharesOld;
       this.emailNew = data.emailNew;
@@ -484,6 +492,22 @@ export class LicenseeChangeLog {
     return changed;
   }
 
+  public static FixLicenseeChangeLogArray(data: LicenseeChangeLog[]): LicenseeChangeLog[] {
+    const fixedChildren = [];
+    if (data) {
+      
+      data.forEach(child => {
+        const fixedChild: LicenseeChangeLog = new LicenseeChangeLog(child);
+        if (fixedChild.children) {
+          fixedChild.fixChildren;
+        }
+        fixedChildren.push(fixedChild);
+      });
+      
+    }
+    return fixedChildren;
+  }
+
   fixChildren() {
     if (this.children) {
       const fixedChildren = [];
@@ -500,11 +524,11 @@ export class LicenseeChangeLog {
   }
 
   applySavedChangeLogs(currentChangeLogs: LicenseeChangeLog[]) {
+    debugger;
     const changesWithLegalEntityId = currentChangeLogs.filter(item => !!item.legalEntityId);
     const changesWithParentLegalEntityId = currentChangeLogs.filter(item => !item.legalEntityId && !!item.parentLegalEntityId);
     const changesWithParentChangeLogId =
-      currentChangeLogs.filter(item => !item.legalEntityId && !item.parentLegalEntityId && !!item.parentLinceseeChangeLogId);
-
+      currentChangeLogs.filter(item => !item.legalEntityId && !item.parentLegalEntityId && !!item.parentLicenseeChangeLogId);    
     changesWithLegalEntityId.forEach(change => {
 
       change = Object.assign(new LicenseeChangeLog(), change);
@@ -518,7 +542,7 @@ export class LicenseeChangeLog {
         change.children = node.children; //do not overide
 
         change.isRoot = node.isRoot; //do not overide
-        change.parentLinceseeChangeLog = node.parentLinceseeChangeLog; // do not overide
+        change.parentLicenseeChangeLog = node.parentLicenseeChangeLog; // do not overide
         Object.assign(node, change);
       }
     });
@@ -536,13 +560,28 @@ export class LicenseeChangeLog {
         if (newNode.isIndividualFromChangeType()) {
           newNode.isIndividual = true;
         }
-        newNode.parentLinceseeChangeLog = node;
-        node.children.push(newNode);
+        newNode.parentLicenseeChangeLog = node;
+        // check to see if the node is already there.
+        let notfound = true;
+
+        for (const child of node.children) {
+          if (child.id === newNode.id) {
+            notfound = false;
+
+            child.CopyValues(node);
+
+            break;
+          }
+        }
+        if (notfound) {
+          node.children.push(newNode);
+        }
+        
       }
     });
 
     changesWithParentChangeLogId.forEach(change => {
-      const node = LicenseeChangeLog.findNodeInTree(this, (node) => node.id === change.parentLinceseeChangeLogId);
+      const node = LicenseeChangeLog.findNodeInTree(this, (node) => node.id === change.parentLicenseeChangeLogId);
       if (node) {
         node.children = node.children || [];
         const newNode = Object.assign(new LicenseeChangeLog(), change);
@@ -554,8 +593,22 @@ export class LicenseeChangeLog {
         if (newNode.isIndividualFromChangeType()) {
           newNode.isIndividual = true;
         }
-        newNode.parentLinceseeChangeLog = node;
-        node.children.push(newNode);
+        newNode.parentLicenseeChangeLog = node;
+        // check to see if the node is already there.
+        let notfound = true;
+
+        for (const child of node.children) {
+          if (child.id === newNode.id) {
+            notfound = false;
+
+            child.CopyValues(node);
+
+            break;
+          }
+        }
+        if (notfound) {
+          node.children.push(newNode);
+        }
       }
     });
   }
