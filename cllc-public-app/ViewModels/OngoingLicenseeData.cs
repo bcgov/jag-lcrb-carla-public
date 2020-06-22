@@ -13,5 +13,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int NonTerminatedApplications { get; set; }
         public LegalEntity CurrentHierarchy { get; set; }
         public List<ApplicationLicenseSummary> Licenses { get; set; }
+        public LicenseeChangeLog TreeRoot { get; set; }
     }
 }

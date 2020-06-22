@@ -648,14 +648,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 MicrosoftDynamicsCRMadoxioLicenseechangelog patchEntity = new MicrosoftDynamicsCRMadoxioLicenseechangelog();
                 patchEntity.CopyValues(node);
-                node.ApplicationId = applicationId;
                 if (parentLegalEntityId != null)
                 {
                     node.ParentLegalEntityId = parentLegalEntityId;
                 }
                 if (parentChangeLogId != null)
                 {
-                    node.ParentLinceseeChangeLogId = parentChangeLogId;
+                    node.ParentLicenseeChangeLogId = parentChangeLogId;
                 }
 
                 if (string.IsNullOrEmpty(node.Id)) // create
@@ -672,16 +671,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     // bind to parent licensee change log
-                    if (!string.IsNullOrEmpty(node.ParentLinceseeChangeLogId))
+                    if (!string.IsNullOrEmpty(node.ParentLicenseeChangeLogId))
                     {
-                        patchEntity.ParentLinceseeChangeLogOdataBind = _dynamicsClient.GetEntityURI("adoxio_licenseechangelogs", node.ParentLinceseeChangeLogId);
+                        patchEntity.ParentLinceseeChangeLogOdataBind = _dynamicsClient.GetEntityURI("adoxio_licenseechangelogs", node.ParentLicenseeChangeLogId);
                     }
 
                     // bind to application
-                    if (!string.IsNullOrEmpty(node.ApplicationId))
+                    if (!string.IsNullOrEmpty(applicationId))
                     {
-                        patchEntity.ApplicationOdataBind = _dynamicsClient.GetEntityURI("adoxio_applications", node.ApplicationId);
-                        parentLegalEntityId = node.LegalEntityId;
+                        patchEntity.ApplicationOdataBind = _dynamicsClient.GetEntityURI("adoxio_applications", applicationId);                        
                     }
 
                     // bind to parent account
@@ -730,11 +728,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 else // update
                 {
-                    // bind to application
-                    if (!string.IsNullOrEmpty(node.ApplicationId))
-                    {
-                        patchEntity.ApplicationOdataBind = _dynamicsClient.GetEntityURI("adoxio_applications", node.ApplicationId);
-                    }
+                    
 
                     // bind to parent account
                     if (!string.IsNullOrEmpty(node.ParentBusinessAccountId))
@@ -742,7 +736,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         patchEntity.ParentBusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.ParentBusinessAccountId);
                     }
 
-                    // bind to parent account
+                    // bind to account
                     if (!string.IsNullOrEmpty(node.BusinessAccountId))
                     {
                         patchEntity.BusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.BusinessAccountId);
@@ -751,8 +745,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     try
                     {
                         _dynamicsClient.Licenseechangelogs.Update(node.Id, patchEntity);
-                        var result = _dynamicsClient.Licenseechangelogs.GetByKey(node.Id);
-                        parentChangeLogId = result.AdoxioLicenseechangelogid;
+                        parentChangeLogId = node.Id;
                         parentLegalEntityId = node.LegalEntityId;
                     }
                     catch (HttpOperationException httpOperationException)
@@ -767,15 +760,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                parentLegalEntityId = node.LegalEntityId;
                 parentChangeLogId = node.Id;
             }
+
 
             if (node.Children != null)
             {
                 foreach (var item in node.Children)
                 {
-                    SaveChangeObjects(item, applicationId, parentLegalEntityId, parentChangeLogId);
+                    SaveChangeObjects(item, applicationId, node.LegalEntityId, parentChangeLogId);
                 }
             }
         }
@@ -793,7 +786,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 if (parentChangeLogId != null)
                 {
-                    node.ParentLinceseeChangeLogId = parentChangeLogId;
+                    node.ParentLicenseeChangeLogId = parentChangeLogId;
                 }
 
                 if (string.IsNullOrEmpty(node.Id)) // create
@@ -811,9 +804,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     // bind to parent licensee change log
-                    if (!string.IsNullOrEmpty(node.ParentLinceseeChangeLogId))
+                    if (!string.IsNullOrEmpty(node.ParentLicenseeChangeLogId))
                     {
-                        patchEntity.ParentLinceseeChangeLogOdataBind = _dynamicsClient.GetEntityURI("adoxio_licenseechangelogs", node.ParentLinceseeChangeLogId);
+                        patchEntity.ParentLinceseeChangeLogOdataBind = _dynamicsClient.GetEntityURI("adoxio_licenseechangelogs", node.ParentLicenseeChangeLogId);
                     }
 
 
@@ -876,8 +869,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
             else
-            {
-                parentLegalEntityId = node.LegalEntityId;
+            {               
                 parentChangeLogId = node.Id;
             }
 
@@ -885,7 +877,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 foreach (var item in node.Children)
                 {
-                    SaveAccountChangeObjects(item, node.ParentBusinessAccountId, parentLegalEntityId, parentChangeLogId);
+                    SaveAccountChangeObjects(item, node.ParentBusinessAccountId, node.LegalEntityId, parentChangeLogId);
                 }
             }
         }

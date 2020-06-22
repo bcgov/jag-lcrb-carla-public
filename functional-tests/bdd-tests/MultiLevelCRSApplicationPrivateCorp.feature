@@ -3,7 +3,8 @@
     I want to submit a CRS Application for a private corporation
     With multiple nested business shareholders
 
-Scenario: Start Application
+@e2e @cannabis @privatecorporation @validation
+Scenario: Multiple Nested Shareholders
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     And I am logged in to the dashboard as a private corporation

@@ -3,6 +3,7 @@
     I want to submit a CRS Application for different business types
     And transfer ownership for the approved application
 
+@e2e @cannabis @indigenousnation
 Scenario: Indigenous Nation Transfer Ownership
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -23,6 +24,7 @@ Scenario: Indigenous Nation Transfer Ownership
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @partnership
 Scenario: Partnership Transfer Ownership
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -43,6 +45,7 @@ Scenario: Partnership Transfer Ownership
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @privatecorporation
 Scenario: Private Corporation Transfer Ownership
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -63,6 +66,7 @@ Scenario: Private Corporation Transfer Ownership
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @publiccorporation
 Scenario: Public Corporation Transfer Ownership
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -83,6 +87,7 @@ Scenario: Public Corporation Transfer Ownership
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @society
 Scenario: Society Transfer Ownership
     Given I am logged in to the dashboard as a society
     And the account is deleted
@@ -103,6 +108,7 @@ Scenario: Society Transfer Ownership
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @soleproprietorship
 Scenario: Sole Proprietorship Transfer Ownership
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted

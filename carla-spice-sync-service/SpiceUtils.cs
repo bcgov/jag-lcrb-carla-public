@@ -535,7 +535,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 /* Add establishment */
                 if (application.AdoxioEstablishment != null)
                 {
-                    screeningRequest.Establishment = new Establishment()
+                    screeningRequest.Establishment = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Establishment()
                     {
                         Name = application.AdoxioEstablishmentpropsedname,
                         PrimaryPhone = application.AdoxioEstablishmentphone,
