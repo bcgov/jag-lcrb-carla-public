@@ -310,15 +310,15 @@ namespace bdd_tests
             ruralStoreCertNumber.SendKeys(certNumber);
 
             // select the owner checkbox
-            NgWebElement ownerCheckbox = ngDriver.FindElement(By.XPath("//mat-checkbox[@id='mat-checkbox-1']/label/div"));
+            NgWebElement ownerCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isOwner']"));
             ownerCheckbox.Click();
 
             // select the owner's valid interest checkbox
-            NgWebElement validInterestCheckbox = ngDriver.FindElement(By.XPath("//mat-checkbox[@id='mat-checkbox-2']/label/div"));
+            NgWebElement validInterestCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='hasValidInterest']"));
             validInterestCheckbox.Click();
 
             // select the zoning checkbox
-            NgWebElement zoningCheckbox = ngDriver.FindElement(By.XPath("//mat-checkbox[@id='mat-checkbox-3']/label/div"));
+            NgWebElement zoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willhaveValidInterest']"));
             zoningCheckbox.Click();
 
             // find the upload test files in the bdd-tests\upload_files folder
