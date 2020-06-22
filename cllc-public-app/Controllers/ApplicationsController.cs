@@ -372,7 +372,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             result.CurrentHierarchy = _dynamicsClient.GetLegalEntityTree(userSettings.AccountId,_logger, _configuration);
 
-            result.TreeRoot = ProcessLegalEntityTree(result.CurrentHierarchy);
+            result.TreeRoot = ProcessLegalEntityTree(result.CurrentHierarchy, result.ChangeLogs);
 
             result.NonTerminatedApplications = _dynamicsClient.GetNotTerminatedCRSApplicationCount(userSettings.AccountId);
 
@@ -384,20 +384,46 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
+        private string FindChangeLogId(List<LicenseeChangeLog> changelogs, string legalEntityId)
+        {
+            string result = null;
+            foreach (var item in changelogs)
+            {
+                if (item.LegalEntityId == legalEntityId)
+                {
+                    result = item.Id;
+                }
+                else
+                {
+                    if (item.Children != null)
+                    {
+                        result = FindChangeLogId((List<LicenseeChangeLog>)item.Children, legalEntityId);
+                    }                    
+                }
+                if (result != null)
+                {
+                    break;
+                }
+            }
+            return result;
+        }
+
         /*
 * Performs a Depth First Traversal and transforms the LegalEntity tree to change objects
 */
-        private LicenseeChangeLog ProcessLegalEntityTree(LegalEntity node)   
+        private LicenseeChangeLog ProcessLegalEntityTree(LegalEntity node, List<LicenseeChangeLog> currentChangeLogs)   
         {
             var newNode = new LicenseeChangeLog(node);
+            //match up the id.  This may be required but is currently disabled for testing.
+            //newNode.Id = FindChangeLogId(currentChangeLogs, newNode.LegalEntityId);
 
             if (node != null && node.children != null && node.children.Count > 0)
             {
                 var children = new List<LicenseeChangeLog>();
                 foreach (var child in node.children)
                 {
-                    var childNode = ProcessLegalEntityTree(child);
-                    childNode.ParentLinceseeChangeLog = newNode;
+                    var childNode = ProcessLegalEntityTree(child, currentChangeLogs);
+                    childNode.ParentLicenseeChangeLog = newNode;
 
                     //split the change log if it is both a shareholder and key-personnel
                     if (childNode.IsIndividual.GetValueOrDefault(false) && (childNode.IsDirectorNew.GetValueOrDefault(false) || childNode.IsManagerNew.GetValueOrDefault(false) || childNode.IsOfficerNew.GetValueOrDefault(false) || childNode.IsTrusteeNew.GetValueOrDefault(false)))
