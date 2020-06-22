@@ -524,7 +524,6 @@ export class LicenseeChangeLog {
   }
 
   applySavedChangeLogs(currentChangeLogs: LicenseeChangeLog[]) {
-    debugger;
     const changesWithLegalEntityId = currentChangeLogs.filter(item => !!item.legalEntityId);
     const changesWithParentLegalEntityId = currentChangeLogs.filter(item => !item.legalEntityId && !!item.parentLegalEntityId);
     const changesWithParentChangeLogId =
