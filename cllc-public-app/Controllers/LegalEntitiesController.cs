@@ -655,7 +655,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 if (parentChangeLogId != null)
                 {
-                    node.ParentLinceseeChangeLogId = parentChangeLogId;
+                    node.ParentLicenseeChangeLogId = parentChangeLogId;
                 }
 
                 if (string.IsNullOrEmpty(node.Id)) // create
@@ -672,9 +672,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     // bind to parent licensee change log
-                    if (!string.IsNullOrEmpty(node.ParentLinceseeChangeLogId))
+                    if (!string.IsNullOrEmpty(node.ParentLicenseeChangeLogId))
                     {
-                        patchEntity.ParentLinceseeChangeLogOdataBind = _dynamicsClient.GetEntityURI("adoxio_licenseechangelogs", node.ParentLinceseeChangeLogId);
+                        patchEntity.ParentLinceseeChangeLogOdataBind = _dynamicsClient.GetEntityURI("adoxio_licenseechangelogs", node.ParentLicenseeChangeLogId);
                     }
 
                     // bind to application
@@ -791,7 +791,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 if (parentChangeLogId != null)
                 {
-                    node.ParentLinceseeChangeLogId = parentChangeLogId;
+                    node.ParentLicenseeChangeLogId = parentChangeLogId;
                 }
 
                 if (string.IsNullOrEmpty(node.Id)) // create
@@ -809,9 +809,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     // bind to parent licensee change log
-                    if (!string.IsNullOrEmpty(node.ParentLinceseeChangeLogId))
+                    if (!string.IsNullOrEmpty(node.ParentLicenseeChangeLogId))
                     {
-                        patchEntity.ParentLinceseeChangeLogOdataBind = _dynamicsClient.GetEntityURI("adoxio_licenseechangelogs", node.ParentLinceseeChangeLogId);
+                        patchEntity.ParentLinceseeChangeLogOdataBind = _dynamicsClient.GetEntityURI("adoxio_licenseechangelogs", node.ParentLicenseeChangeLogId);
                     }
 
 

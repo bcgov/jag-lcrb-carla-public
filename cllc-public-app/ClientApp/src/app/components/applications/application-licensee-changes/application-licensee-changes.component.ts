@@ -110,8 +110,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
         this.form.patchValue(this.application);
 
-        const currentChangeLogs: LicenseeChangeLog[] = data.changeLogs || [];
-
+        const currentChangeLogs: LicenseeChangeLog[] = LicenseeChangeLog.FixLicenseeChangeLogArray(data.changeLogs || []);
+        
         this.licenses = data.licenses;
         this.licencesOnFile = (this.licenses && this.licenses.length > 0);
 
@@ -125,10 +125,10 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.treeRoot.fileUploads = {}; // This is only used on the client side
 
         this.treeRoot.isRoot = true;
-
+        this.treeRoot.fixChildren();
 
         this.treeRoot.applySavedChangeLogs(currentChangeLogs);
-        this.treeRoot.fixChildren();
+        
         this.loadedValue = this.cleanSaveData(this.treeRoot);
 
 
@@ -276,7 +276,6 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
     saveOverrideValue = saveOverrideValue || {};
     const data = this.cleanSaveData(this.treeRoot);
-    
     return forkJoin(this.legalEntityDataService.updateLegalEntity({ ...this.currentLegalEntities, numberOfMembers: this.treeRoot.numberOfMembers, annualMembershipFee: this.treeRoot.annualMembershipFee }, this.currentLegalEntities.id),
       this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId));
   }
@@ -337,11 +336,11 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
   removeParentReferences(node: LicenseeChangeLog) {
     //Form the parent account relationship
-    if (node.parentLinceseeChangeLog && node.parentLinceseeChangeLog.businessAccountId) {
-      node.parentBusinessAccountId = node.parentLinceseeChangeLog.businessAccountId;
+    if (node.parentLicenseeChangeLog && node.parentLicenseeChangeLog.businessAccountId) {
+      node.parentBusinessAccountId = node.parentLicenseeChangeLog.businessAccountId;
     }
     // remove parent reference
-    node.parentLinceseeChangeLog = undefined;
+    node.parentLicenseeChangeLog = undefined;
     node.refObject = undefined;
 
     if (node.children && node.children.length) {
