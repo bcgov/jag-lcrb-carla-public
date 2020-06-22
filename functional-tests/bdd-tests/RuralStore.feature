@@ -2,6 +2,7 @@
     As a logged in business user
     I want to submit a rural store application for a private corporation
 
+@privatecorporation
 Scenario: Start Application
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted

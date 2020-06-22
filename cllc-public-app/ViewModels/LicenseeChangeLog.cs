@@ -39,6 +39,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsShareholderOld { get; set; }
         public bool? IsTrusteeNew { get; set; }
         public bool? IsTrusteeOld { get; set; }
+        public bool? IsIndividual { get; set; }
         public int? NumberofSharesNew { get; set; }
         public int? NumberofSharesOld { get; set; }
         public int? TotalSharesNew { get; set; }
@@ -75,5 +76,124 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public decimal? InterestPercentageOld { get; set; }
         public decimal? InterestPercentageNew { get; set; }
+
+        public string NameOld { get; set; }
+
+        public string PhsLink { get; set; }
+
+
+        public LicenseeChangeLog ParentLinceseeChangeLog { get; set; }
+
+        public LicenseeChangeLog()
+        {
+
+        }
+
+        public LicenseeChangeLog (LicenseeChangeLog copy)
+        {
+            if (copy != null)
+            {
+                LegalEntityId = copy.LegalEntityId;
+                BusinessAccountId = copy.BusinessAccountId;
+                BusinessType = copy.BusinessType;
+                IsIndividual = copy.IsIndividual;
+                ParentLegalEntityId = copy.ParentLegalEntityId;
+                ChangeType = copy.ChangeType;
+                IsDirectorNew = copy.IsDirectorNew;
+                IsDirectorOld = copy.IsDirectorOld;
+                IsManagerNew = copy.IsManagerNew;
+                IsManagerOld = copy.IsManagerOld;
+                IsOfficerNew = copy.IsOfficerNew;
+                IsOfficerOld = copy.IsOfficerOld;
+                IsOwnerNew = copy.IsOwnerNew;
+                IsOwnerOld = copy.IsOwnerOld;
+                IsShareholderNew = copy.IsShareholderNew;
+                IsShareholderOld = copy.IsShareholderOld;
+                IsTrusteeNew = copy.IsTrusteeNew;
+                IsTrusteeOld = copy.IsTrusteeOld;
+                ParentBusinessAccountId = copy.ParentBusinessAccountId;
+                BusinessAccountId = copy.BusinessAccountId;
+
+                NumberofSharesNew = copy.NumberofSharesNew;
+                NumberofSharesOld = copy.NumberofSharesOld;
+                EmailNew = copy.EmailNew;
+                EmailOld = copy.EmailOld;
+                FirstNameNew = copy.FirstNameNew;
+                FirstNameOld = copy.FirstNameOld;
+                LastNameNew = copy.LastNameNew;
+                LastNameOld = copy.LastNameOld;
+                BusinessNameNew = copy.BusinessNameNew;
+                NameOld = copy.NameOld;
+                DateofBirthNew = copy.DateofBirthNew;
+                DateofBirthOld = copy.DateofBirthOld;
+                TitleNew = copy.TitleNew;
+                TitleOld = copy.TitleOld;
+                PhsLink = copy.PhsLink;
+                NumberOfMembers = copy.NumberOfMembers;
+                AnnualMembershipFee = copy.AnnualMembershipFee;
+                TotalSharesOld = copy.TotalSharesOld;
+                TotalSharesNew = copy.TotalSharesNew;
+                InterestPercentageOld = copy.InterestPercentageOld;
+                InterestPercentageNew = copy.InterestPercentageNew;
+            }
+        }
+
+        public LicenseeChangeLog(LegalEntity legalEntity)
+        {
+            if (legalEntity != null)
+            {
+                LegalEntityId = legalEntity.id;
+                BusinessAccountId = legalEntity.shareholderAccountId;
+                BusinessType = legalEntity.legalentitytype;
+                IsIndividual = legalEntity.isindividual;
+
+            
+                ParentLegalEntityId = legalEntity.parentLegalEntityId;
+                ChangeType = LicenseeChangeType.unchanged;
+                
+                IsDirectorNew = legalEntity.isDirector;
+                IsDirectorOld = legalEntity.isDirector;
+                IsManagerNew = legalEntity.isSeniorManagement;
+                IsManagerOld = legalEntity.isSeniorManagement;
+                IsOfficerNew = legalEntity.isOfficer;
+                IsOfficerOld = legalEntity.isOfficer;
+                IsOwnerNew = legalEntity.isOwner;
+                IsOwnerOld = legalEntity.isOwner;
+                IsShareholderNew = legalEntity.isShareholder;
+                IsShareholderOld = legalEntity.isShareholder;
+                IsTrusteeNew = legalEntity.IsTrustee;
+                IsTrusteeOld = legalEntity.IsTrustee;
+                if (legalEntity.isApplicant)
+                {
+                    BusinessAccountId = legalEntity.accountId;
+                }
+                else
+                {
+                    ParentBusinessAccountId = legalEntity.accountId;
+                    BusinessAccountId = legalEntity.shareholderAccountId;
+                }
+                NumberofSharesNew = legalEntity.commonvotingshares;
+                NumberofSharesOld = legalEntity.commonvotingshares;
+                EmailNew = legalEntity.email;
+                EmailOld = legalEntity.email;
+                FirstNameNew = legalEntity.firstname;
+                FirstNameOld = legalEntity.firstname;
+                LastNameNew = legalEntity.lastname;
+                LastNameOld = legalEntity.lastname;
+                BusinessNameNew = legalEntity.name;
+                NameOld = legalEntity.name;
+                DateofBirthNew = legalEntity.dateofbirth;
+                DateofBirthOld = legalEntity.dateofbirth;
+                TitleNew = legalEntity.jobTitle;
+                TitleOld = legalEntity.jobTitle;
+                PhsLink = legalEntity.PhsLink;
+                NumberOfMembers = legalEntity.NumberOfMembers;
+                AnnualMembershipFee = legalEntity.AnnualMembershipFee;
+                TotalSharesOld = legalEntity.TotalShares;
+                TotalSharesNew = legalEntity.TotalShares;
+                InterestPercentageOld = legalEntity.interestpercentage;
+                InterestPercentageNew = legalEntity.interestpercentage;
+            }
+        }
     }
 }
