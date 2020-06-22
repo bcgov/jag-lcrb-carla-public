@@ -253,10 +253,12 @@ namespace bdd_tests
             string licencenumber = " ";
 
             // enter the licence number and then clear it
-            NgWebElement uiLicenceNumber = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+            NgWebElement uiLicenceNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='description1']"));
             uiLicenceNumber.SendKeys(licencenumber);
-            NgWebElement uiBody = ngDriver.FindElement(By.XPath("//app-application-covid-temporary-extension/div/div[2]/div[2]/section[2]/app-field[1]/section/div[1]"));
+            // click on another field to generate error
+            NgWebElement uiBody = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
             uiBody.Click();
+            // confirm that error message is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licence Number is a required field')]")).Displayed);
         }
 
