@@ -43,6 +43,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioCrsconnectiontomarketerdetails = from.CrsConnectionToMarketerDetails;
             to.AdoxioMarketerconnectiontocrs = (int?)from.MarketerConnectionToCrs;
             to.AdoxioMarketerconnectiontocrsdetails = from.MarketerConnectionToCrsDetails;
+            to.AdoxioInconnectiontofederalproducer = (int?)from.INConnectionToFederalProducer;
+            to.AdoxioInconnectiontofederalproducerdetails  = from.INConnectionToFederalProducerDetails;
             to.AdoxioLiquorFinancialInterest = (int?)from.LiquorFinancialInterest;
             to.AdoxioLiquorFinancialInterestDetails = from.LiquorFinancialInterestDetails;
 
