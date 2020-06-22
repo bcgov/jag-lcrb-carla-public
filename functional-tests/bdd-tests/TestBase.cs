@@ -1643,29 +1643,6 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TRANSFER INITIATED')]")).Displayed);
         }
 
-        public void ApplicationsVisibleOnDashboard()
-        {
-            /* 
-            Page Title: Licences
-            Subtitle:   Catering Licences
-            */
-
-            ClickOnDashboard();
-
-            /* 
-            Page Title: Welcome to Liquor and Cannabis Licensing
-            */
-
-            // confirm that relocation request is displayed
-            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Relocation Request')]")).Displayed);
-
-            // confirm that a name or branding change request is displayed - TODO
-            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Name or Branding Change')]")).Displayed);
-
-            // confirm that a third party operator request is displayed
-            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third-Party Operator')]")).Displayed);
-        }
-
 
         [And(@"the application is approved")]
         public void ApplicationIsApproved()
