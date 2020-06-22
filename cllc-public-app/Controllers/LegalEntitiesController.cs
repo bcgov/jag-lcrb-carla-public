@@ -648,7 +648,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 MicrosoftDynamicsCRMadoxioLicenseechangelog patchEntity = new MicrosoftDynamicsCRMadoxioLicenseechangelog();
                 patchEntity.CopyValues(node);
-                node.ApplicationId = applicationId;
                 if (parentLegalEntityId != null)
                 {
                     node.ParentLegalEntityId = parentLegalEntityId;
@@ -678,9 +677,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     // bind to application
-                    if (!string.IsNullOrEmpty(node.ApplicationId))
+                    if (!string.IsNullOrEmpty(applicationId))
                     {
-                        patchEntity.ApplicationOdataBind = _dynamicsClient.GetEntityURI("adoxio_applications", node.ApplicationId);                        
+                        patchEntity.ApplicationOdataBind = _dynamicsClient.GetEntityURI("adoxio_applications", applicationId);                        
                     }
 
                     // bind to parent account
@@ -729,11 +728,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 else // update
                 {
-                    // bind to application
-                    if (!string.IsNullOrEmpty(node.ApplicationId))
-                    {
-                        patchEntity.ApplicationOdataBind = _dynamicsClient.GetEntityURI("adoxio_applications", node.ApplicationId);
-                    }
+                    
 
                     // bind to parent account
                     if (!string.IsNullOrEmpty(node.ParentBusinessAccountId))
@@ -741,7 +736,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         patchEntity.ParentBusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.ParentBusinessAccountId);
                     }
 
-                    // bind to parent account
+                    // bind to account
                     if (!string.IsNullOrEmpty(node.BusinessAccountId))
                     {
                         patchEntity.BusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.BusinessAccountId);
