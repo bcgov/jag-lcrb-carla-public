@@ -95,7 +95,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
       applicationType: [''],
       legalEntityId: [''],
       parentLegalEntityId: [''],
-      parentLinceseeChangeLogId: [''],
+      parentLicenseeChangeLogId: [''],
       parentBusinessAccountId: [''],
       businessAccountId: [''],
       children: [''],
@@ -181,7 +181,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
   addAssociate() {
     const associate = new LicenseeChangeLog();
     associate.changeType = `add${this.changeTypeSuffix}`;
-    associate.parentLinceseeChangeLog = this.rootNode;
+    associate.parentLicenseeChangeLog = this.rootNode;
     associate.edit = true;
     associate.collapse = true;
     associate.refObject = associate;
