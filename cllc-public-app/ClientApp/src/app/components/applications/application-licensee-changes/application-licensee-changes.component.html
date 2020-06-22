@@ -2,7 +2,7 @@
   <div [ngBusy]="[busy, busyPromise]"></div>
   <div *ngIf="licenseeApplicationLoaded">
     <section class="col-md-8">
-      <app-org-structure *ngIf="applicationId" [node]="treeRoot" [account]="account" [licencesOnFile]="licencesOnFile" #orgStructure></app-org-structure>
+      <app-org-structure *ngIf="licenseeApplicationLoaded" [node]="treeRoot" [account]="account" [licencesOnFile]="licencesOnFile" #orgStructure></app-org-structure>
       <p>&nbsp;</p>
       <section class="d-flex" *ngIf="licencesOnFile && LicenseeChangeLog.HasChanges(this.treeRoot)">
 

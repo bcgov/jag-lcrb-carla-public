@@ -3,6 +3,7 @@
     I want to change the name of a director
     And pay the associated fee
 
+@e2e @cannabis @privatecorporation @validation
 Scenario: Change director name and pay fee
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -28,6 +29,7 @@ Scenario: Change director name and pay fee
     And the account is deleted
     Then I see the login page
 
+@cannabis @privatecorporation @validation
 Scenario: Delete an individual who is both a director and shareholder
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -41,6 +43,7 @@ Scenario: Delete an individual who is both a director and shareholder
     And the account is deleted
     Then I see the login page
 
+@cannabis @privatecorporation @validation
 Scenario: Change director and shareholder same name 
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted

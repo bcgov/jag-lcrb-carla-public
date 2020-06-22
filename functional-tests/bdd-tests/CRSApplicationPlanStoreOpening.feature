@@ -3,6 +3,7 @@
     I want to submit a CRS Application for different business types
     And plan the store opening for the approved application
 
+@e2e @cannabis @indigenousnation
 Scenario: Indigenous Nation Plan Store Opening
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -24,6 +25,7 @@ Scenario: Indigenous Nation Plan Store Opening
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @partnership
 Scenario: Partnership Plan Store Opening
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -45,6 +47,7 @@ Scenario: Partnership Plan Store Opening
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @privatecorporation
 Scenario: Private Corporation Plan Store Opening
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -66,6 +69,7 @@ Scenario: Private Corporation Plan Store Opening
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @publiccorporation
 Scenario: Public Corporation Plan Store Opening
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -87,6 +91,7 @@ Scenario: Public Corporation Plan Store Opening
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @society
 Scenario: Society Plan Store Opening
     Given I am logged in to the dashboard as a society
     And the account is deleted
@@ -108,6 +113,7 @@ Scenario: Society Plan Store Opening
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @soleproprietorship
 Scenario: Sole Proprietorship Plan Store Opening
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted

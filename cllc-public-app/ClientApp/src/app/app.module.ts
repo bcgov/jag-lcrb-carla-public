@@ -94,7 +94,6 @@ import {
   DirectorAndOfficerPersonDialogComponent
 } from '@components/account-profile/tabs/directors-and-officers/directors-and-officers.component';
 import { SecurityAssessmentsComponent } from '@components/account-profile/tabs/security-assessments/security-assessments.component';
-import { OrganizationStructureComponent } from '@components/account-profile/tabs/organization-structure/organization-structure.component';
 import { BeforeYouStartComponent } from '@components/account-profile/tabs/before-you-start/before-you-start.component';
 import { FinancialInformationComponent } from '@components/account-profile/tabs/financial-information/financial-information.component';
 import { AccountProfileSummaryComponent } from '@components/account-profile/account-profile-summary/account-profile-summary.component';
@@ -179,7 +178,6 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { AssociateListComponent } from './shared/components/associate-list/associate-list.component';
 import { OrgStructureComponent } from './shared/components/org-structure/org-structure.component';
 import { DynamicApplicationComponent } from './components/applications/dynamic-application/dynamic-application.component';
-import { CateringDemoComponent } from './components/catering-demo/catering-demo.component';
 import { PersonalHistorySummaryComponent } from './components/personal-history-summary/personal-history-summary.component';
 import { CannabisAssociateScreeningComponent} from './components/cannabis-associate-screening/cannabis-associate-screening.component';
 import { AccountCompletenessComponent } from './components/account-completeness/account-completeness.component';
@@ -244,7 +242,6 @@ import { LicenceRepresentativeFormComponent } from '@components/licence-represen
     NewsletterSignupComponent,
     NotFoundComponent,
     OrganizationResultsComponent,
-    OrganizationStructureComponent,
     PaymentConfirmationComponent,
     PolicyDocumentComponent,
     PolicyDocumentSidebarComponent,
@@ -305,7 +302,6 @@ import { LicenceRepresentativeFormComponent } from '@components/licence-represen
     AssociateListComponent,
     OrgStructureComponent,
     DynamicApplicationComponent,
-    CateringDemoComponent,
     PersonalHistorySummaryComponent,
     CannabisAssociateScreeningComponent,
     AccountCompletenessComponent,
