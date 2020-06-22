@@ -41,8 +41,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() redirectToDashboardOnSave = true;
 
-  editedTree: LicenseeChangeLog;
   LicenseeChangeLog = LicenseeChangeLog;
+  editedTree: LicenseeChangeLog;
   busy: any;
   busySave: any;
   numberOfNonTerminatedApplications: number;
@@ -110,21 +110,27 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
         this.form.patchValue(this.application);
 
-        const currentChangeLogs = data.changeLogs || [];
-
+        const currentChangeLogs: LicenseeChangeLog[] = LicenseeChangeLog.FixLicenseeChangeLogArray(data.changeLogs || []);
+        
         this.licenses = data.licenses;
         this.licencesOnFile = (this.licenses && this.licenses.length > 0);
 
         this.currentLegalEntities = data.currentHierarchy;
         this.numberOfNonTerminatedApplications = data.nonTerminatedApplications;
         this.thereIsExistingOrgStructure = this.currentLegalEntities && this.currentLegalEntities.children && this.currentLegalEntities.children.length > 0;
-        this.treeRoot = LicenseeChangeLog.processLegalEntityTree(this.currentLegalEntities);
-        this.treeRoot.isRoot = true;
-        this.treeRoot.applySavedChangeLogs(currentChangeLogs);
 
+        this.treeRoot = new LicenseeChangeLog(data.treeRoot); 
+        // apply some formatting to the treeRoot.
+        
+        this.treeRoot.fileUploads = {}; // This is only used on the client side
+
+        this.treeRoot.isRoot = true;
+        this.treeRoot.fixChildren();
+
+        this.treeRoot.applySavedChangeLogs(currentChangeLogs);
+        
         this.loadedValue = this.cleanSaveData(this.treeRoot);
 
-        
 
         this.addDynamicContent();
 
@@ -214,10 +220,12 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         }
         if (this.validationErrors.length === 0) {
           // set value to cause invoice generationP
-          this.busyPromise = this.prepareSaveRequest({ invoicetrigger: 1 })
+          this.busyPromise = this.prepareSaveRequest()
+
             .pipe(mergeMap(results => {
               console.log(results);
               const saveOverrideValue = { invoicetrigger: 1 };
+
               return this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue })
                 .pipe(takeWhile(() => this.componentActive))
                 .toPromise()
@@ -263,14 +271,14 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       });
   }
 
-  private prepareSaveRequest(saveOverrideValue: Partial<Application>) {
+  private prepareSaveRequest() {
     this.validationErrors = [];
-
-    saveOverrideValue = saveOverrideValue || {};
     const data = this.cleanSaveData(this.treeRoot);
-    
-    return forkJoin(this.legalEntityDataService.updateLegalEntity({ ...this.currentLegalEntities, numberOfMembers: this.treeRoot.numberOfMembers, annualMembershipFee: this.treeRoot.annualMembershipFee }, this.currentLegalEntities.id),
-      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId));
+    return this.legalEntityDataService.updateLegalEntity({ ...this.currentLegalEntities, numberOfMembers: this.treeRoot.numberOfMembers, annualMembershipFee: this.treeRoot.annualMembershipFee }, this.currentLegalEntities.id)
+      .pipe(mergeMap(result => {
+        // do something with result
+        return this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId);
+      }));
   }
 
   saveForLater(navigateAfterSaving: boolean = true): Observable<boolean> {
@@ -283,7 +291,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
           subject.next(false);
         }
         if (this.validationErrors.length === 0) {
-          this.busyPromise = this.prepareSaveRequest({})
+          this.busyPromise = this.prepareSaveRequest()
             .toPromise()
             .then(() => {
               this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
@@ -329,11 +337,11 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
   removeParentReferences(node: LicenseeChangeLog) {
     //Form the parent account relationship
-    if (node.parentLinceseeChangeLog && node.parentLinceseeChangeLog.businessAccountId) {
-      node.parentBusinessAccountId = node.parentLinceseeChangeLog.businessAccountId;
+    if (node.parentLicenseeChangeLog && node.parentLicenseeChangeLog.businessAccountId) {
+      node.parentBusinessAccountId = node.parentLicenseeChangeLog.businessAccountId;
     }
     // remove parent reference
-    node.parentLinceseeChangeLog = undefined;
+    node.parentLicenseeChangeLog = undefined;
     node.refObject = undefined;
 
     if (node.children && node.children.length) {

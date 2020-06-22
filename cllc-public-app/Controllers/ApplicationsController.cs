@@ -19,6 +19,7 @@ using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -370,6 +371,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
             result.CurrentHierarchy = _dynamicsClient.GetLegalEntityTree(userSettings.AccountId,_logger, _configuration);
+
+            result.TreeRoot = ProcessLegalEntityTree(result.CurrentHierarchy, result.ChangeLogs);
+
             result.NonTerminatedApplications = _dynamicsClient.GetNotTerminatedCRSApplicationCount(userSettings.AccountId);
 
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
@@ -377,7 +381,91 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             List<ApplicationLicenseSummary> transterredLicenses = _dynamicsClient.GetPaidLicensesOnTransfer(userSettings.AccountId);
             result.Licenses.AddRange(transterredLicenses);
 
+             return result;
+        }
+
+        private string FindChangeLogId(List<LicenseeChangeLog> changelogs, string legalEntityId)
+        {
+            string result = null;
+            foreach (var item in changelogs)
+            {
+                if (item.LegalEntityId == legalEntityId)
+                {
+                    result = item.Id;
+                }
+                else
+                {
+                    if (item.Children != null)
+                    {
+                        result = FindChangeLogId((List<LicenseeChangeLog>)item.Children, legalEntityId);
+                    }                    
+                }
+                if (result != null)
+                {
+                    break;
+                }
+            }
             return result;
+        }
+
+        /*
+* Performs a Depth First Traversal and transforms the LegalEntity tree to change objects
+*/
+        private LicenseeChangeLog ProcessLegalEntityTree(LegalEntity node, List<LicenseeChangeLog> currentChangeLogs)   
+        {
+            var newNode = new LicenseeChangeLog(node);
+            // match up the id.  
+            newNode.Id = FindChangeLogId(currentChangeLogs, newNode.LegalEntityId);
+
+            if (node != null && node.children != null && node.children.Count > 0)
+            {
+                var children = new List<LicenseeChangeLog>();
+                foreach (var child in node.children)
+                {
+                    var childNode = ProcessLegalEntityTree(child, currentChangeLogs);
+                    childNode.ParentLicenseeChangeLog = newNode;
+
+                    //split the change log if it is both a shareholder and key-personnel
+                    if (childNode.IsIndividual.GetValueOrDefault(false) && (childNode.IsDirectorNew.GetValueOrDefault(false) || childNode.IsManagerNew.GetValueOrDefault(false) || childNode.IsOfficerNew.GetValueOrDefault(false) || childNode.IsTrusteeNew.GetValueOrDefault(false)))
+                    {
+                        var newIndividualNode = new LicenseeChangeLog(childNode);
+                        newIndividualNode.Id = null; // force it to be a new record.
+                        newIndividualNode.IsShareholderNew = false;
+                        newIndividualNode.IsShareholderOld = false;
+                        children.Add(newIndividualNode);
+
+                        childNode.IsManagerNew = false;
+                        childNode.IsOfficerNew = false;
+                        childNode.IsOwnerNew = false;
+                        childNode.IsDirectorNew = false;
+                        childNode.IsTrusteeNew = false;
+                        childNode.IsManagerOld = false;
+                        childNode.IsOfficerOld = false;
+                        childNode.IsOwnerOld = false;
+                        childNode.IsDirectorOld = false;
+                        childNode.IsTrusteeOld = false;
+                    }
+
+                    children.Add(childNode);
+                }
+
+                // sort the list by shares
+                children.Sort((a, b) =>
+                {
+                    if (a.TotalSharesNew == null || b.TotalSharesNew == null)
+                    {
+                        return 0;
+                    }
+
+                    return a.TotalSharesNew.Value.CompareTo(b.TotalSharesNew);
+
+                });
+
+
+                newNode.Children = children;
+            }
+   
+            return newNode;
         }
 
         private MicrosoftDynamicsCRMadoxioApplication GetCurrentLicenseeApplication (UserSettings userSettings)
