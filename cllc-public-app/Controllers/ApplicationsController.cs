@@ -381,7 +381,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             List<ApplicationLicenseSummary> transterredLicenses = _dynamicsClient.GetPaidLicensesOnTransfer(userSettings.AccountId);
             result.Licenses.AddRange(transterredLicenses);
 
-            return result;
+             return result;
         }
 
         private string FindChangeLogId(List<LicenseeChangeLog> changelogs, string legalEntityId)
@@ -414,8 +414,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private LicenseeChangeLog ProcessLegalEntityTree(LegalEntity node, List<LicenseeChangeLog> currentChangeLogs)   
         {
             var newNode = new LicenseeChangeLog(node);
-            //match up the id.  This may be required but is currently disabled for testing.
-            //newNode.Id = FindChangeLogId(currentChangeLogs, newNode.LegalEntityId);
+            // match up the id.  
+            newNode.Id = FindChangeLogId(currentChangeLogs, newNode.LegalEntityId);
 
             if (node != null && node.children != null && node.children.Count > 0)
             {
@@ -429,6 +429,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (childNode.IsIndividual.GetValueOrDefault(false) && (childNode.IsDirectorNew.GetValueOrDefault(false) || childNode.IsManagerNew.GetValueOrDefault(false) || childNode.IsOfficerNew.GetValueOrDefault(false) || childNode.IsTrusteeNew.GetValueOrDefault(false)))
                     {
                         var newIndividualNode = new LicenseeChangeLog(childNode);
+                        newIndividualNode.Id = null; // force it to be a new record.
                         newIndividualNode.IsShareholderNew = false;
                         newIndividualNode.IsShareholderOld = false;
                         children.Add(newIndividualNode);
