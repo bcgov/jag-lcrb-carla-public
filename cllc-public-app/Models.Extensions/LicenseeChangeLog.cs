@@ -88,7 +88,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 LegalEntityId = changeLog._adoxioLegalentityidValue,
                 ParentLegalEntityId = changeLog._adoxioParentlegalentityidValue,
-                ParentLinceseeChangeLogId = changeLog._adoxioParentlinceseechangelogidValue,
+                ParentLicenseeChangeLogId = changeLog._adoxioParentlinceseechangelogidValue, // Dynamics has a typo for this
                 NumberOfMembers = changeLog.AdoxioNumberofmembers,
                 AnnualMembershipFee = changeLog.AdoxioAnnualmembershipfee
             };
