@@ -42,8 +42,6 @@ namespace bdd_tests
     [FeatureFile("./MultiLevelCRSApplicationPrivateCorp.feature")]
     public sealed class MultiLevelCRSApplicationPrivateCorp : TestBase
     {
-        
-
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
@@ -51,6 +49,7 @@ namespace bdd_tests
             
             CarlaLogin(businessType);
         }
+
 
         [And(@"I add in multiple nested business shareholders")]
         public void add_multiple_business_shareholders()
@@ -449,27 +448,27 @@ namespace bdd_tests
             string businessVotingShares5 = "1";
             string businessEmail5 = "businessshareholder5@email.com";
 
-            // open business shareholder form
+            // open business shareholder #5 form
             NgWebElement uiOpenShareBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] button"));
             uiOpenShareBiz5.Click();
 
-            // enter business name
+            // enter business shareholder #5 business name
             NgWebElement uiShareFirstBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] input[formcontrolname='businessNameNew']"));
             uiShareFirstBiz5.SendKeys(businessName5);
 
-            // enter business voting shares
+            // enter business shareholder #5  voting shares
             NgWebElement uiShareVotesBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
             uiShareVotesBiz5.SendKeys(businessVotingShares5);
 
-            // select the business type using dropdown
+            // select business shareholder #5 business type using dropdown
             NgWebElement uiShareBizType5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='PrivateCorporation']"));
             uiShareBizType5.Click();
 
-            // enter business shareholder email
+            // enter business shareholder #5 email
             NgWebElement uiShareEmailBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] input[formcontrolname='emailNew']"));
             uiShareEmailBiz5.SendKeys(businessEmail5);
 
-            // select the business shareholder confirm button
+            // select the business shareholder #5 confirm button
             NgWebElement uiShareBizConfirmButton5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] .fa-save span"));
             uiShareBizConfirmButton5.Click();
 
@@ -495,37 +494,37 @@ namespace bdd_tests
 
             /********** Business Shareholder #5 - Key Personnel **********/
 
-            // create business shareholder key personnel data
+            // create business shareholder #5 key personnel data
             string keyPersonnelFirstNameBiz5 = "KeyPersonnelBiz5First";
             string keyPersonnelLastNameBiz5 = "KeyPersonnelBiz5Last";
             string keyPersonnelTitleBiz5 = "KeyPersonnelBiz5Title";
             string keyPersonnelEmailBiz5 = "keypersonnel@biz5.com";
 
-            // open business shareholder > key personnel form
+            // open business shareholder #5 > key personnel form
             NgWebElement openKeyPersonnelFormBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] button"));
             openKeyPersonnelFormBiz5.Click();
 
-            // enter business shareholder > key personnel first name
+            // enter business shareholder #5 > key personnel first name
             NgWebElement uiKeyPersonFirstBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='firstNameNew']"));
             uiKeyPersonFirstBiz5.SendKeys(keyPersonnelFirstNameBiz5);
 
-            // enter business shareholder > key personnel last name
+            // enter business shareholder #5 > key personnel last name
             NgWebElement uiKeyPersonLastBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='lastNameNew']"));
             uiKeyPersonLastBiz5.SendKeys(keyPersonnelLastNameBiz5);
 
-            // select business shareholder > key personnel role using checkbox
+            // select business shareholder #5 > key personnel role using checkbox
             NgWebElement uiKeyPersonRoleBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='isDirectorNew']"));
             uiKeyPersonRoleBiz5.Click();
 
-            // enter business shareholder > key personnel title
+            // enter business shareholder #5 > key personnel title
             NgWebElement uiKeyPersonTitleBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='titleNew']"));
             uiKeyPersonTitleBiz5.SendKeys(keyPersonnelTitleBiz5);
 
-            // enter business shareholder > key personnel email
+            // enter business shareholder #5 > key personnel email
             NgWebElement uiKeyPersonEmailBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='emailNew']"));
             uiKeyPersonEmailBiz5.SendKeys(keyPersonnelEmailBiz5);
 
-            // enter business shareholder > key personnel DOB
+            // enter business shareholder #5 > key personnel DOB
             NgWebElement uiKeyPersonnelDOB1Biz15 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='dateofBirthNew']"));
             uiKeyPersonnelDOB1Biz15.Click();
 
@@ -539,29 +538,29 @@ namespace bdd_tests
             string shareholderVotingSharesBiz5 = "1";
             string shareholderEmailBiz5 = "individualshareholder@biz5.com";
 
-            // open business shareholder > individual shareholder form
+            // open business shareholder #5 > individual shareholder form
             NgWebElement uiOpenIndyShareBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] button"));
             uiOpenIndyShareBiz5.Click();
 
-            // enter business shareholder > individual shareholder first name
+            // enter business shareholder #5 > individual shareholder first name
             NgWebElement uiIndyShareFirstBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] input[formcontrolname='firstNameNew']"));
             uiIndyShareFirstBiz5.SendKeys(shareholderFirstNameBiz5);
 
-            // enter business shareholder > individual shareholder last name
+            // enter business shareholder #5 > individual shareholder last name
             NgWebElement uiIndyShareLastBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] input[formcontrolname='lastNameNew']"));
             uiIndyShareLastBiz5.SendKeys(shareholderLastNameBiz5);
 
-            // enter business shareholder > individual number of voting shares
+            // enter business shareholder #5 > individual number of voting shares
             NgWebElement uiIndyShareVotesBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] input[formcontrolname='numberofSharesNew']"));
             uiIndyShareVotesBiz5.SendKeys(shareholderVotingSharesBiz5);
 
-            // enter business shareholder > individual shareholder DOB
+            // enter business shareholder #5 > individual shareholder DOB
             NgWebElement uiCalendarIndyS1Biz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] input[formcontrolname='dateofBirthNew']"));
             uiCalendarIndyS1Biz5.Click();
 
             SharedCalendarDate();
 
-            // enter business shareholder > individual shareholder email
+            // enter business shareholder #5 > individual shareholder email
             NgWebElement uiIndyShareEmailBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] input[formcontrolname='emailNew']"));
             uiIndyShareEmailBiz5.SendKeys(shareholderEmailBiz5);
         }
