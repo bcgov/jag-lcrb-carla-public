@@ -822,15 +822,15 @@ namespace bdd_tests
             string pid = "012345678";
 
             // enter the proposed street address
-            NgWebElement uiProposedAddress = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressStreet'])[2]"));
+            NgWebElement uiProposedAddress = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
             uiProposedAddress.SendKeys(proposedAddress);
 
             // enter the proposed city
-            NgWebElement uiProposedCity = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressCity'])[2]"));
+            NgWebElement uiProposedCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressCity']"));
             uiProposedCity.SendKeys(proposedCity);
 
             // enter the postal code
-            NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.XPath("(//input[@id='establishmentAddressPostalCode'])[3]"));
+            NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressPostalCode']"));
             uiProposedPostalCode.SendKeys(proposedPostalCode);
 
             // enter the PID
@@ -970,14 +970,14 @@ namespace bdd_tests
                 string reasonDay = "Automated test: Reason for opening date.";
 
                 // select the opening date
-                NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
+                NgWebElement uiCalendar1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentopeningdate']"));
                 uiCalendar1.Click();
 
                 NgWebElement uiCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
                 uiCalendar2.Click();
 
                 // enter the reason for the opening date
-                NgWebElement uiReasonDate = ngDriver.FindElement(By.XPath("//textarea"));
+                NgWebElement uiReasonDate = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='description1']"));
                 uiReasonDate.SendKeys(reasonDay);
 
                 NgWebElement paymentButton = ngDriver.FindElement(By.XPath("//button[contains(.,' PAY LICENCE FEE AND RECEIVE LICENCE')]"));
@@ -1180,46 +1180,46 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(7000);
 
             // select checkboxes to confirm store opening details
-            NgWebElement check1 = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            NgWebElement check1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyValidInterest']"));
             check1.Click();
 
-            NgWebElement check2 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
+            NgWebElement check2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyWorkers']"));
             check2.Click();
 
-            NgWebElement check3 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[3]"));
+            NgWebElement check3 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyNameBranding']"));
             check3.Click();
 
-            NgWebElement check4 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[4]"));
+            NgWebElement check4 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyDisplays']"));
             check4.Click();
 
-            NgWebElement check5 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[5]"));
+            NgWebElement check5 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyIntruderAlarm']"));
             check5.Click();
 
-            NgWebElement check6 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[6]"));
+            NgWebElement check6 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyFireAlarm']"));
             check6.Click();
 
-            NgWebElement check7 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[7]"));
+            NgWebElement check7 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyLockedCases']"));
             check7.Click();
 
-            NgWebElement check8 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[8]"));
+            NgWebElement check8 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyLockedStorage']"));
             check8.Click();
 
-            NgWebElement check9 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[9]"));
+            NgWebElement check9 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyPerimeter']"));
             check9.Click();
 
-            NgWebElement check10 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[10]"));
+            NgWebElement check10 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyRetailArea']"));
             check10.Click();
 
-            NgWebElement check11 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[11]"));
+            NgWebElement check11 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyStorage']"));
             check11.Click();
 
-            NgWebElement check12 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[12]"));
+            NgWebElement check12 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyExtranceExit']"));
             check12.Click();
 
-            NgWebElement check13 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[13]"));
+            NgWebElement check13 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadySurveillanceNotice']"));
             check13.Click();
 
-            NgWebElement check14 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[14]"));
+            NgWebElement check14 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyProductNotVisibleOutside']"));
             check14.Click();
 
             //click on the Save button
@@ -1562,18 +1562,18 @@ namespace bdd_tests
             string thirdparty = "GunderCorp TestBusiness";
 
             // search for the proposed licensee
-            NgWebElement thirdPartyOperator = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+            NgWebElement thirdPartyOperator = ngDriver.FindElement(By.CssSelector("input[formcontrolname='autocompleteInput']"));
             thirdPartyOperator.SendKeys(thirdparty);
 
-            NgWebElement thirdPartyOperatorOption = ngDriver.FindElement(By.XPath("//mat-option[@id='mat-option-0']/span"));
+            NgWebElement thirdPartyOperatorOption = ngDriver.FindElement(By.CssSelector("mat-option[role='option'] span"));
             thirdPartyOperatorOption.Click();
 
             // click on authorized to submit checkbox
-            NgWebElement authorizedToSubmit = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            NgWebElement authorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit']"));
             authorizedToSubmit.Click();
 
             // click on signature agreement checkbox
-            NgWebElement signatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
+            NgWebElement signatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement']"));
             signatureAgreement.Click();
 
             // click on submit button
