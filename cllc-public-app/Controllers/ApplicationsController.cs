@@ -429,6 +429,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (childNode.IsIndividual.GetValueOrDefault(false) && (childNode.IsDirectorNew.GetValueOrDefault(false) || childNode.IsManagerNew.GetValueOrDefault(false) || childNode.IsOfficerNew.GetValueOrDefault(false) || childNode.IsTrusteeNew.GetValueOrDefault(false)))
                     {
                         var newIndividualNode = new LicenseeChangeLog(childNode);
+                        newIndividualNode.Id = null; // force it to be a new record.
                         newIndividualNode.IsShareholderNew = false;
                         newIndividualNode.IsShareholderOld = false;
                         children.Add(newIndividualNode);
