@@ -56,3 +56,19 @@ Scenario: Change director and shareholder same name
     And the director and shareholder name are identical
     And the account is deleted
     Then I see the login page
+
+@cannabis @privatecorporation @validation
+Scenario: Confirm business shareholder org structure update
+    Given I am logged in to the dashboard as a private corporation
+    And the account is deleted
+    And I am logged in to the dashboard as a private corporation
+    And I click on the Complete Organization Information button
+    And I enter the same individual as a director and a shareholder
+    And I click on the Complete Organization Information button
+    And I add a business shareholder with the same individual as a director and a shareholder
+    And I click on the Complete Organization Information button
+    And I add a second business shareholder with the same individual as a director and a shareholder
+    And I click on the Complete Organization Information button
+    And the org structure is correct
+    And the account is deleted
+    Then I see the login page
