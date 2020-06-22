@@ -93,6 +93,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         {
             if (copy != null)
             {
+                Id = copy.Id;
+                ParentLicenseeChangeLogId = copy.ParentLicenseeChangeLogId;
                 LegalEntityId = copy.LegalEntityId;
                 BusinessAccountId = copy.BusinessAccountId;
                 BusinessType = copy.BusinessType;
