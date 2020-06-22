@@ -68,8 +68,9 @@ Scenario: Confirm business shareholder org structure update
     And I add a business shareholder with the same individual as a director and a shareholder
     And I submit the organization structure
     And I click on the Complete Organization Information button
-    #And I add a second business shareholder with the same individual as a director and a shareholder
-    #And I click on the Complete Organization Information button
-    #And the org structure is correct
-    #And the account is deleted
+    And I add a second business shareholder with the same individual as a director and a shareholder
+    And I click on the Confirm Organization Information is Complete button
+    And I click on the Complete Organization Information button
+    And the org structure is correct
+    And the account is deleted
     Then I see the login page
