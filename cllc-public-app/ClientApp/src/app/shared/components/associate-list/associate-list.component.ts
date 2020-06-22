@@ -95,7 +95,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
       applicationType: [''],
       legalEntityId: [''],
       parentLegalEntityId: [''],
-      ParentLicenseeChangeLogId: [''],
+      parentLicenseeChangeLogId: [''],
       parentBusinessAccountId: [''],
       businessAccountId: [''],
       children: [''],
