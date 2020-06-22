@@ -71,7 +71,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string BusinessAccountId { get; set; }
         public string ParentLegalEntityId { get; set; }
         public string LegalEntityId { get; set; }
-        public string ParentLinceseeChangeLogId { get; set; }
+        public string ParentLicenseeChangeLogId { get; set; }
         public IList<LicenseeChangeLog> Children { get; set; }
 
         public decimal? InterestPercentageOld { get; set; }
@@ -82,7 +82,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string PhsLink { get; set; }
 
 
-        public LicenseeChangeLog ParentLinceseeChangeLog { get; set; }
+        public LicenseeChangeLog ParentLicenseeChangeLog { get; set; }
 
         public LicenseeChangeLog()
         {
