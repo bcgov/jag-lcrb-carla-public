@@ -3185,8 +3185,8 @@ namespace bdd_tests
         public void OrgStructureCorrect()
         {
             // confirm that first individual is in correct positions
-            Assert.True(ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'Same1')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/span[contains(.,'Same1')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'Same1')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/span[contains(.,'Same1')]")).Displayed);
 
             // confirm that second individual is in correct positions
             Assert.True(ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[4]/section/app-associate-list/div/table/tr/td[1]/span[contains(.,'Same2')]")).Displayed);
@@ -3195,6 +3195,45 @@ namespace bdd_tests
             // confirm that third individual is in correct positions
             Assert.True(ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[2]/td[1]/span[contains(.,'Same3')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr[2]/td[1]/span[contains(.,'Same3')]")).Displayed);
+        }
+
+
+        [And(@"I remove the latest director and shareholder")]
+        public void RemoveLatestDirectorShareholder()
+        {
+            // delete the most recent director
+            NgWebElement uiRemoveDirector = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[2]/td[7]/i[2]/span"));
+            uiRemoveDirector.Click();
+
+            // delete the most recent shareholder
+            NgWebElement uiRemoveShareholder = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr[2]/td[6]/i[2]/span"));
+            uiRemoveShareholder.Click();
+        }
+
+
+
+        [And(@"the latest director and shareholder is removed")]
+        public void LatestDirectorShareholderRemoved()
+        {
+            // confirm that the most recent director and shareholder not present
+            Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Same3'))]")).Displayed);
+        }
+
+
+        [And(@"I remove the business shareholder")]
+        public void RemoveBusinessShareholder()
+        {
+            // delete the business shareholder
+            NgWebElement uiRemoveBizShareholder = ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section[2]/app-associate-list/div/table/tr[1]/td[5]/i[2]/span"));
+            uiRemoveBizShareholder.Click();
+        }
+
+
+        [And(@"the business shareholder is removed")]
+        public void BusinessShareholderRemoved()
+        {
+            // confirm that the business shareholder not present	
+            Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'business@shareholder.com'))]")).Displayed);
         }
     }
 }
