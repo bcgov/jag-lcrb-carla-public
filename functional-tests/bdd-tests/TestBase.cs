@@ -2812,8 +2812,8 @@ namespace bdd_tests
         [And(@"I delete only the director record")]
         public void DeleteDirectorRecord()
         {
-            // click on the delete button for key personnel 
-            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[7]/i[2]/span"));
+            // click on the delete button for key personnel > director record                                                            
+            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[1]/td[7]/i[2]/span"));
             uiEditInfoButton.Click();
 
             // click on submit org info button
