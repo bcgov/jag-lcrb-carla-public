@@ -15,7 +15,7 @@ Scenario: Multiple Nested Shareholders
     And I add in multiple nested business shareholders
     And I submit the organization structure
     And I complete the Cannabis Retail Store application
-    And I review the security screening requirements
+    And I review the security screening requirements for a multilevel business
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
