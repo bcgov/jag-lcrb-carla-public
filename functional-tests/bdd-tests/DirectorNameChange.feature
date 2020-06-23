@@ -72,5 +72,13 @@ Scenario: Confirm business shareholder org structure update
     And I click on the Confirm Organization Information is Complete button
     And I click on the Complete Organization Information button
     And the org structure is correct
+    And I remove the latest director and shareholder
+    And I submit the organization structure
+    And I click on the Complete Organization Information button
+    And the latest director and shareholder is removed
+    And I remove the business shareholder
+    And I submit the organization structure
+    And I click on the Complete Organization Information button
+    And the business shareholder is removed
     And the account is deleted
     Then I see the login page
