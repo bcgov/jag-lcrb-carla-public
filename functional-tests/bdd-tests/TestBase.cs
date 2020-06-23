@@ -1948,6 +1948,32 @@ namespace bdd_tests
         }
 
 
+        [And(@"I review the security screening requirements for a multilevel business")]
+        public void ReviewSecurityScreeningRequirementsMulti()
+        {
+            /* 
+            Page Title: Security Screening Requirements
+            */
+
+            // confirm that private corporation personnel are present
+            if (businessTypeShared == "private corporation")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder0')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel0')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel1')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz2First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz2First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz3First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz3First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz4First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz4First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz5First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz5First')]")).Displayed);
+            }
+        }
+
+
         [And(@"I review the security screening requirements")]
         public void ReviewSecurityScreeningRequirements()
         {
@@ -2812,8 +2838,8 @@ namespace bdd_tests
         [And(@"I delete only the director record")]
         public void DeleteDirectorRecord()
         {
-            // click on the delete button for key personnel 
-            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//app-org-structure/div[4]/section/app-associate-list/div/table/tr/td[7]/i[2]/span"));
+            // click on the delete button for key personnel > director record                                                            
+            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[1]/td[7]/i[2]/span"));
             uiEditInfoButton.Click();
 
             // click on submit org info button
@@ -3167,8 +3193,8 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/span[contains(.,'Same2')]")).Displayed);
 
             // confirm that third individual is in correct positions
-            Assert.True(ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[2]/td[1]/span/span[contains(.,'Same3')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr[2]/td[1]/spanspan[contains(.,'Same3')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[2]/td[1]/span[contains(.,'Same3')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr[2]/td[1]/span[contains(.,'Same3')]")).Displayed);
         }
     }
 }
