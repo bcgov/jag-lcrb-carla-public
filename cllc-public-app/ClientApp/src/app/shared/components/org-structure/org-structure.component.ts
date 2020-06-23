@@ -40,6 +40,7 @@ export class OrgStructureComponent implements OnInit {
     let annualMembershipFee: number = null;
     let totalShares: number = null;
     if (this.node) {
+      this.node.fixChildren();
       numberOfMembers = this.node.numberOfMembers;
       annualMembershipFee = this.node.annualMembershipFee;
       totalShares = this.node.totalSharesOld;
@@ -59,8 +60,7 @@ export class OrgStructureComponent implements OnInit {
           this.node.annualMembershipFee = value.annualMembershipFee;
           this.node.totalSharesNew = value.totalShares;
         }
-      });
-
+      });   
   }
 
   asLicenseeChangeLog(val): LicenseeChangeLog { return val; }
