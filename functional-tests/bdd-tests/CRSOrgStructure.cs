@@ -13,11 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: DirectorNameChange.feature
+Feature: CRSOrgStructure.feature
     As a logged in business user
     I want to change the name of a director
     And pay the associated fee
 
+@e2e @cannabis @privatecorporation @validation
 Scenario: Change director name and pay fee
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -32,10 +33,10 @@ Scenario: Change director name and pay fee
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
-    And I pay the licensing fee
+    And I click on the Licences tab
+    And I pay the licensing fee for Cannabis
     And I return to the dashboard
-    And I review the organization structure again
+    And I click on the Review Organization Information button
     And I modify the director name
     And I submit the organization structure
     And I pay the name change fee
@@ -43,6 +44,7 @@ Scenario: Change director name and pay fee
     And the account is deleted
     Then I see the login page
 
+@cannabis @privatecorporation @validation
 Scenario: Delete an individual who is both a director and shareholder
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -56,6 +58,7 @@ Scenario: Delete an individual who is both a director and shareholder
     And the account is deleted
     Then I see the login page
 
+@cannabis @privatecorporation @validation
 Scenario: Change director and shareholder same name 
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -68,84 +71,85 @@ Scenario: Change director and shareholder same name
     And the director and shareholder name are identical
     And the account is deleted
     Then I see the login page
+
+@cannabis @privatecorporation @validation
+Scenario: Confirm business shareholder org structure update
+    Given I am logged in to the dashboard as a private corporation
+    And the account is deleted
+    And I am logged in to the dashboard as a private corporation
+    And I click on the Complete Organization Information button
+    And I enter the same individual as a director and a shareholder
+    And I click on the Complete Organization Information button
+    And I add a business shareholder with the same individual as a director and a shareholder
+    And I submit the organization structure
+    And I click on the Complete Organization Information button
+    And I add a second business shareholder with the same individual as a director and a shareholder
+    And I click on the Confirm Organization Information is Complete button
+    And I click on the Complete Organization Information button
+    And the org structure is correct
+    And I remove the latest director and shareholder
+    And I submit the organization structure
+    And I click on the Complete Organization Information button
+    And the latest director and shareholder is removed
+    And I remove the business shareholder
+    And I submit the organization structure
+    And I click on the Complete Organization Information button
+    And the business shareholder is removed
+    And the account is deleted
+    Then I see the login page
+
+@cannabis @privatecorporation @validation
+Scenario: Confirm business shareholder org structure update after payment
+    Given I am logged in to the dashboard as a private corporation
+    And the account is deleted
+    And I am logged in to the dashboard as a private corporation
+    And I click on the Complete Organization Information button
+    And I enter the same individual as a director and a shareholder
+    And I click on the Complete Organization Information button
+    And I add a business shareholder with the same individual as a director and a shareholder
+    And I submit the organization structure
+    And I click on the Complete Organization Information button
+    And I add a second business shareholder with the same individual as a director and a shareholder
+    And I click on the Confirm Organization Information is Complete button
+    And I click on the Complete Organization Information button
+    And the org structure is correct
+    And I submit the organization structure
+    And I complete the Cannabis Retail Store application
+    And I click on the Pay for Application button
+    And I enter the payment information
+    And I return to the dashboard
+    And the application is approved
+    And I click on the Licences tab
+    And I pay the licensing fee for Cannabis
+    And I return to the dashboard
+    And I click on the Review Organization Information button
+    And the org structure is correct
+    And the account is deleted
+    Then I see the login page
+
+@cannabis @privatecorporation @validation
+Scenario: Save for Later feature for org structure 
+    Given I am logged in to the dashboard as a private corporation
+    And the account is deleted
+    And I am logged in to the dashboard as a private corporation
+    And I click on the Complete Organization Information button
+    #And I enter the same individual as a director and a shareholder
+    And I click on the Save for Later button
+    And I click on the Complete Organization Information button
+    And the saved org structure is present
+    And the account is deleted
+    Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./DirectorNameChange.feature")]
-    public sealed class DirectorNameChange : TestBase
+    [FeatureFile("./CRSOrgStructure.feature")]
+    public sealed class CRSOrgStructure : TestBase
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
-        }
-
-        [And(@"I click on the Licences tab for a Cannabis Retail Store")]
-        public void click_on_licences_tab()
-        {
-            /* 
-            Page Title: Welcome to Liquor and Cannabis Licensing
-            */
-
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
-        }
-
-        [And(@"I pay the licensing fee")]
-        public void pay_licence_fee()
-        {
-            /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            */
-
-            string licenceFee = "Pay Licence Fee and Plan Store Opening";
-
-            // click on the pay licence fee link
-            NgWebElement uiLicenceFee = ngDriver.FindElement(By.LinkText(licenceFee));
-            uiLicenceFee.Click();
-
-            /* 
-            Page Title: Plan Your Store Opening
-            */
-
-            string reasonDay = "Automated test: Reason for opening date.";
-
-            // select the opening date
-            NgWebElement uiCalendar1 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[3]"));
-            uiCalendar1.Click();
-
-            NgWebElement uiCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-            uiCalendar2.Click();
-
-            // enter the reason for the opening date
-            NgWebElement uiReasonDate = ngDriver.FindElement(By.XPath("//textarea"));
-            uiReasonDate.SendKeys(reasonDay);
-
-            NgWebElement paymentButton = ngDriver.FindElement(By.XPath("//button[contains(.,' PAY LICENCE FEE AND RECEIVE LICENCE')]"));
-            paymentButton.Click();
-
-            // pay the licence fee
-            MakePayment();
-
-            System.Threading.Thread.Sleep(7000);
-
-            // confirm correct payment amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
-        }
-
-        [And(@"I review the organization structure again")]
-        public void review_org_structure()
-        {
-            System.Threading.Thread.Sleep(5000);
-
-            // click on the review organization information button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
-            orgInfoButton.Click();
         }
 
         [And(@"I modify the director name")]

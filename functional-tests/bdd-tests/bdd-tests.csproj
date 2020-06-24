@@ -161,7 +161,7 @@
     <None Update="LicenceCatering_sole_proprietor.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="DirectorNameChange.feature">
+    <None Update="CRSOrgStructure.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Director_shareholder_samenamechange.feature">
