@@ -929,7 +929,7 @@ namespace bdd_tests
                     // create individual partner 2 info
                     string partner2FirstName = "Individual";
                     string partner2LastName = "Partner2";
-                    string partner2Percentage = "502";
+                    string partner2Percentage = "50";
                     string partner2Email = "individual@partner2.com";
 
                     // enter individual partner2 first name
@@ -2490,7 +2490,7 @@ namespace bdd_tests
                 uiBizPartnerPercentage.SendKeys(bizPartnerPercentage);
 
                 // select the business type using dropdown
-                NgWebElement uiShareBizType = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div[3]/section[2]/app-associate-list/div/table/tr/td[3]/app-field/section/div/section/select/option[4]"));
+                NgWebElement uiShareBizType = ngDriver.FindElement(By.XPath("//app-associate-list[@changetypesuffix='BusinessShareholder']//select/option[4]"));
                 uiShareBizType.Click();
 
                 // enter the business partner email
@@ -2498,7 +2498,7 @@ namespace bdd_tests
                 uiBizPartnerEmail.SendKeys(bizPartnerEmail);
 
                 // click on the business shareholder confirm button
-                NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div[3]/section[2]/app-associate-list/div/table/tr/td[5]/i[1]"));
+                NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//app-associate-list[@changetypesuffix='BusinessShareholder']//i[contains(concat(' ',normalize-space(@class),' '),' fa-save ')]"));
                 uiConfirmButton.Click();
 
                 // upload a second partnership agreement
@@ -2513,7 +2513,7 @@ namespace bdd_tests
                 // create individual partner 2 info
                 string partner2FirstName = "Individual";
                 string partner2LastName = "Partner2";
-                string partner2Percentage = "502";
+                string partner2Percentage = "50";
                 string partner2Email = "individual@partner2.com";
 
                 // enter individual partner2 first name
@@ -2540,7 +2540,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // click on individual partner2 confirm button
-                NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-org-structure/div[3]/section[1]/app-associate-list/div/table/tr/td[6]/i[1]"));
+                NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.XPath("//app-org-structure//app-org-structure//app-associate-list[@changetypesuffix='IndividualShareholder']//i[contains(concat(' ',normalize-space(@class),' '),' fa-save ')]"));
                 uiConfirmButton2.Click();
             }
 
