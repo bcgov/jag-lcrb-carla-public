@@ -43,6 +43,7 @@ export class ApplicationType {
   lGandPoliceSelectors: FormControlState;
   isShowLGINApproval: boolean;
   isFree: boolean;
+  isEndorsement: boolean;
 
   dynamicsForm: DynamicsForm;
 }
