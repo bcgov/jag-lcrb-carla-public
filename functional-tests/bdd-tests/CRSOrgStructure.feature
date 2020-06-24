@@ -113,12 +113,12 @@ Scenario: Confirm business shareholder org structure update after payment
     Then I see the login page
 
 @cannabis @privatecorporation @validation
-Scenario: Test Save for Later feature for org structure 
+Scenario: Save for Later feature for org structure 
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     And I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
-    And I enter the same individual as a director and a shareholder
+    #And I enter the same individual as a director and a shareholder
     And I click on the Save for Later button
     And I click on the Complete Organization Information button
     And the saved org structure is present
