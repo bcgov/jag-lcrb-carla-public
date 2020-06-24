@@ -82,3 +82,45 @@ Scenario: Confirm business shareholder org structure update
     And the business shareholder is removed
     And the account is deleted
     Then I see the login page
+
+@cannabis @privatecorporation @validation
+Scenario: Confirm business shareholder org structure update after payment
+    Given I am logged in to the dashboard as a private corporation
+    And the account is deleted
+    And I am logged in to the dashboard as a private corporation
+    And I click on the Complete Organization Information button
+    And I enter the same individual as a director and a shareholder
+    And I click on the Complete Organization Information button
+    And I add a business shareholder with the same individual as a director and a shareholder
+    And I submit the organization structure
+    And I click on the Complete Organization Information button
+    And I add a second business shareholder with the same individual as a director and a shareholder
+    And I click on the Confirm Organization Information is Complete button
+    And I click on the Complete Organization Information button
+    And the org structure is correct
+    And I submit the organization structure
+    And I complete the Cannabis Retail Store application
+    And I click on the Pay for Application button
+    And I enter the payment information
+    And I return to the dashboard
+    And the application is approved
+    And I click on the Licences tab for a Cannabis Retail Store
+    And I pay the licensing fee
+    And I return to the dashboard
+    And I review the organization structure again
+    And the org structure is correct
+    And the account is deleted
+    Then I see the login page
+
+@cannabis @privatecorporation @validation
+Scenario: Confirm business shareholder org structure update after payment
+    Given I am logged in to the dashboard as a private corporation
+    And the account is deleted
+    And I am logged in to the dashboard as a private corporation
+    And I click on the Complete Organization Information button
+    And I enter the same individual as a director and a shareholder
+    And I click on the Save for Later button
+    And I click on the Complete Organization Information button
+    And the saved org structure is present
+    And the account is deleted
+    Then I see the login page
