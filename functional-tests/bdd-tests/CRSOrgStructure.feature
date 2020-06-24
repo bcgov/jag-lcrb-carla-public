@@ -1,4 +1,4 @@
-﻿Feature: DirectorNameChange.feature
+﻿Feature: CRSOrgStructure.feature
     As a logged in business user
     I want to change the name of a director
     And pay the associated fee
@@ -113,7 +113,7 @@ Scenario: Confirm business shareholder org structure update after payment
     Then I see the login page
 
 @cannabis @privatecorporation @validation
-Scenario: Confirm business shareholder org structure update after payment
+Scenario: Test Save for Later feature for org structure 
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     And I am logged in to the dashboard as a private corporation
