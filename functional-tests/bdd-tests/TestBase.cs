@@ -2634,7 +2634,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"the expected error messages are displayed")]
+        [And(@"the expected Catering error messages are displayed")]
         public void CateringExpectedErrorMessages()
         {
             /* 
