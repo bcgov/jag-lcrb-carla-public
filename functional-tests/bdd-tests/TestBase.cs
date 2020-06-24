@@ -707,8 +707,7 @@ namespace bdd_tests
                 ClickOnDashboard();
 
                 // click on the review organization information button
-                NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
-                orgInfoButton.Click();
+                ClickReviewOrganizationInformation();
 
                 // click on the Edit button for Key Personnel
                 NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
@@ -777,9 +776,8 @@ namespace bdd_tests
                 // click on Dashboard link
                 ClickOnDashboard();
 
-                // click on the review organzation information button
-                NgWebElement orgInfoButton3 = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
-                orgInfoButton3.Click();
+                // click on the review organization information button
+                ClickReviewOrganizationInformation();
 
                 System.Threading.Thread.Sleep(7000);
 
@@ -865,10 +863,7 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
 
             // return to the Licences tab
-            string licencesLink = "Licences";
-
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
+            ClickLicencesTab();
         }
 
 
@@ -881,8 +876,7 @@ namespace bdd_tests
                 ClickOnDashboard();
 
                 // click on the review organization information button
-                NgWebElement orgInfoButton3 = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
-                orgInfoButton3.Click();
+                ClickReviewOrganizationInformation();
 
                 // click on the Edit button for Key Personnel
                 NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
@@ -1012,9 +1006,7 @@ namespace bdd_tests
 
             string licencesLink = "Licences";
 
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
+            ClickLicencesTab();
         }
 
 
@@ -1232,11 +1224,7 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(7000);
 
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
+            ClickLicencesTab();
         }
 
 
@@ -1336,12 +1324,7 @@ namespace bdd_tests
             // confirm correct payment amount
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$440.00')]")).Displayed);
 
-            // return to the Licences tab
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
+            ClickLicencesTab();
         }
 
 
@@ -1365,12 +1348,7 @@ namespace bdd_tests
 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Federal Reporting')]")).Displayed);
 
-            // return to the Licences tab
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
+            ClickLicencesTab();
         }
 
         public void RequestedApplicationsOnDashboard()
@@ -1452,11 +1430,7 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
 
             // return to the Licences tab
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
+            ClickLicencesTab();
         }
 
         [And(@"I request a store relocation for Catering")]
@@ -1539,10 +1513,7 @@ namespace bdd_tests
         public void RequestThirdPartyOperator()
         {
             // return to the Licences tab
-            string licencesLink2 = "Licences";
-
-            NgWebElement uiLicences2 = ngDriver.FindElement(By.LinkText(licencesLink2));
-            uiLicences2.Click();
+            ClickLicencesTab();
 
             /* 
             Page Title: Licences
@@ -1580,10 +1551,7 @@ namespace bdd_tests
             ClickOnSubmitButton2();
 
             // return to the Licences tab
-            string licencesLink = "Licences";
-
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
+            ClickLicencesTab();
 
             // confirm that the application has been initiated
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third Party Operator Application Initiated')]")).Displayed);
@@ -1633,11 +1601,7 @@ namespace bdd_tests
             NgWebElement submitTransferButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT TRANSFER')]"));
             submitTransferButton.Click();
 
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
+            ClickLicencesTab();
 
             // check for transfer initiated status 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TRANSFER INITIATED')]")).Displayed);
@@ -2613,17 +2577,9 @@ namespace bdd_tests
         [And(@"I click on the Licences tab for (.*)")]
         public void ClickOnLicencesTab(string applicationType)
         {
-            /* 
-            Page Title: Welcome to Liquor and Cannabis Licensing
-            */
-
             applicationTypeShared = applicationType;
 
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
+            ClickLicencesTab();
         }
 
 
@@ -3250,6 +3206,26 @@ namespace bdd_tests
         public void SaveOrgStructurePresent()
         { 
         
+        }
+
+
+        [And(@"I click on the Review Organization Information button")]
+        public void ClickReviewOrganizationInformation()
+        {
+            // click on the review organization information button
+            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
+            orgInfoButton.Click();
+        }
+
+
+        [And(@"I click on the Licences tab")]
+        public void ClickLicencesTab()
+        {
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
         }
     }
 }

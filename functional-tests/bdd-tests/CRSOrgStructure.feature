@@ -18,10 +18,10 @@ Scenario: Change director name and pay fee
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
-    And I pay the licensing fee
+    And I click on the Licences tab
+    And I pay the licensing fee for Cannabis
     And I return to the dashboard
-    And I review the organization structure again
+    And I click on the Review Organization Information button
     And I modify the director name
     And I submit the organization structure
     And I pay the name change fee
@@ -104,10 +104,10 @@ Scenario: Confirm business shareholder org structure update after payment
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
-    And I pay the licensing fee
+    And I click on the Licences tab
+    And I pay the licensing fee for Cannabis
     And I return to the dashboard
-    And I review the organization structure again
+    And I click on the Review Organization Information button
     And the org structure is correct
     And the account is deleted
     Then I see the login page
