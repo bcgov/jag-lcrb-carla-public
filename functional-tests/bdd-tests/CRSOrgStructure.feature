@@ -109,11 +109,8 @@ Scenario: Confirm business shareholder org structure update after payment
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    # And I click on the Licences tab
-    # And I pay the licensing fee for Cannabis
-    # And I return to the dashboard
     And I click on the Review Organization Information button
-    And the org structure is correct
+    And the org structure is correct after payment
     And the account is deleted
     Then I see the login page
 
