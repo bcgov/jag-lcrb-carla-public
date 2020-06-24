@@ -3239,9 +3239,17 @@ namespace bdd_tests
    
         [And(@"I click on the Save for Later button")]
         public void ClickSaveForLater()
-        { 
+        {
             // click on the Save For Later button
+            NgWebElement saveForLaterButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SAVE FOR LATER ')]"));
+            saveForLaterButton.Click();
+        }
 
+
+        [And(@"the saved org structure is present")]
+        public void SaveOrgStructurePresent()
+        { 
+        
         }
     }
 }

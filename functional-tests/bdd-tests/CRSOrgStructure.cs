@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: DirectorNameChange.feature
+Feature: CRSOrgStructure.feature
     As a logged in business user
     I want to change the name of a director
     And pay the associated fee
@@ -72,8 +72,8 @@ Scenario: Change director and shareholder same name
 
 namespace bdd_tests
 {
-    [FeatureFile("./DirectorNameChange.feature")]
-    public sealed class DirectorNameChange : TestBase
+    [FeatureFile("./CRSOrgStructure.feature")]
+    public sealed class CRSOrgStructure : TestBase
     {
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
