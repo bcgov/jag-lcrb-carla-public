@@ -26,7 +26,7 @@ export const UPLOAD_FILES_MODE = 'UploadFilesMode';
 
 
 const ACTIVE = 'Active';
-const PAYMENT_REQUIRED = 'Payment Required';
+// const PAYMENT_REQUIRED = 'Payment Required';
 const RENEWAL_DUE = 'Renewal Due';
 
 @Component({
@@ -39,7 +39,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   licensedApplications: ApplicationLicenseSummary[] = [];
 
   readonly ACTIVE = ACTIVE;
-  readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
+  // readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
   readonly RENEWAL_DUE = RENEWAL_DUE;
   // readonly TRANSFER_LICENCE_MODE = TRANSFER_LICENCE_MODE;
   // readonly CHANGE_OF_LOCATION_MODE = CHANGE_OF_LOCATION_MODE;
