@@ -13,7 +13,6 @@ import { takeWhile } from 'rxjs/operators';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { LicenceEventsService } from '@services/licence-events.service';
-import { EventStatus } from '@models/licence-event.model';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -32,7 +31,6 @@ const RENEWAL_DUE = 'Renewal Due';
 export class LicencesComponent extends FormBase implements OnInit {
   applications: ApplicationSummary[] = [];
   mainForm: FormGroup;
-  eventStatus = EventStatus;
 
   readonly ACTIVE = ACTIVE;
   readonly RENEWAL_DUE = RENEWAL_DUE;
@@ -43,7 +41,6 @@ export class LicencesComponent extends FormBase implements OnInit {
   @Output() marketerApplicationExists: EventEmitter<boolean> = new EventEmitter<boolean>();
   dataLoaded = false;
   ApplicationTypeNames = ApplicationTypeNames;
-  licenceTransferFeatureOn = false;
   licenceMappings = {};
   supportedLicenceTypes = [
     "Catering", "Wine Store", "Cannabis Retail Store", "Marketing",
@@ -59,11 +56,6 @@ export class LicencesComponent extends FormBase implements OnInit {
     private licenceEventsService: LicenceEventsService,
     public fb: FormBuilder) {
     super();
-    featureFlagService.featureOn('LicenceTransfer')
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((featureOn: boolean) => {
-        this.licenceTransferFeatureOn = featureOn;
-      });
     this.mainForm = new FormGroup({});
   }
 
@@ -105,7 +97,7 @@ export class LicencesComponent extends FormBase implements OnInit {
     licence.actionApplications = [];
     const relatedApplications = this.applications.filter(l => l.licenceId === licence.licenseId);
     relatedApplications.forEach(app => {
-      let action = {
+      const action = {
         applicationId: app.id,
         applicationTypeName: app.applicationTypeName,
         applicationStatus: app.applicationStatus,
@@ -113,7 +105,7 @@ export class LicencesComponent extends FormBase implements OnInit {
       };
       licence.actionApplications.push(action);
     });
-    if (licence.licenceTypeName === 'Catering' || licence.licenceTypeName === 'Wine Store') {
+    if (licence.licenceTypeName.indexOf('Catering') >= 0 || licence.licenceTypeName.indexOf('Wine Store') >= 0) {
       forkJoin([
         this.licenceEventsService.getLicenceEventsList(licence.licenseId, 10)
       ])
@@ -140,17 +132,6 @@ export class LicencesComponent extends FormBase implements OnInit {
   LicenceTypeSupported(licenceType: string) {
     const supported = this.supportedLicenceTypes.indexOf(licenceType) >= 0;
     return supported;
-  }
-
-  getOptionFromValue(options: any, value: number) {
-    const idx = options.findIndex(opt => opt.value === value);
-    if (idx >= 0) {
-      return options[idx];
-    }
-    return {
-      value: null,
-      label: ''
-    };
   }
 
   getSubCategory(subcategory: string) {
