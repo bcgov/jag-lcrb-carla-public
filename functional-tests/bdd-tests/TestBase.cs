@@ -2310,6 +2310,8 @@ namespace bdd_tests
 
             if (businessTypeShared == "public corporation")
             {
+                /********** Key Personnel #1 **********/
+
                 // create the key personnel data
                 string keyPersonnelFirst = "KeyPersonnel1";
                 string keyPersonnelLast = "Public Corp";
@@ -2353,6 +2355,45 @@ namespace bdd_tests
                 // select key person DOB
                 NgWebElement openKeyPersonDOB = ngDriver.FindElement(By.CssSelector("[formcontrolname='dateofBirthNew']"));
                 openKeyPersonDOB.Click();
+
+                // select the date
+                SharedCalendarDate();
+
+                /********** Key Personnel #2 **********/
+
+                // create the second key personnel data
+                string keyPersonnelFirst2 = "KeyPersonnel2";
+                string keyPersonnelLast2 = "Public Corp";
+                string keyPersonnelTitle2 = "CEO";
+                string keyPersonnelEmail2 = "keypersonnel2@publiccorp.com";
+
+                // open key personnel form
+                NgWebElement openKeyPersonnelForm2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));
+                openKeyPersonnelForm2.Click();
+
+                // enter key personnel first name
+                NgWebElement openKeyPersonnelFirst2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[1]/app-field/section/div[1]/section/input"));
+                openKeyPersonnelFirst2.SendKeys(keyPersonnelFirst2);
+
+                // enter key personnel last name
+                NgWebElement openKeyPersonnelLast2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[2]/app-field/section/div[1]/section/input"));
+                openKeyPersonnelLast2.SendKeys(keyPersonnelLast2);
+
+                // select key personnel role
+                NgWebElement openKeyPersonnelRole2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[3]/app-field/section/div/section/table/tr/td[2]/div/input"));
+                openKeyPersonnelRole2.Click();
+
+                // enter key personnel title
+                NgWebElement openKeyPersonnelTitle2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[4]/app-field/section/div/section/input"));
+                openKeyPersonnelTitle2.SendKeys(keyPersonnelTitle2);
+
+                // enter key personnel email
+                NgWebElement openKeyPersonnelEmail2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[5]/app-field/section/div[1]/section/input"));
+                openKeyPersonnelEmail2.SendKeys(keyPersonnelEmail2);
+
+                // select key person DOB
+                NgWebElement openKeyPersonDOB2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[6]/app-field/section/div[1]/section/input"));
+                openKeyPersonDOB2.Click();
 
                 // select the date
                 SharedCalendarDate();
