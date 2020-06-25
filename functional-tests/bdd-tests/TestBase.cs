@@ -2784,10 +2784,6 @@ namespace bdd_tests
             // click on the Confirm button
             NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] .fa-save span"));
             uiConfirmButton2.Click();
-
-            // click on submit org info button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
-            orgInfoButton.Click();
         }
 
 
@@ -3183,6 +3179,23 @@ namespace bdd_tests
             uiRemoveShareholder.Click();
         }
 
+
+        [And(@"I remove the latest director after saving")]
+        public void RemoveLatestDirectorAfterSave()
+        {
+            // delete the most recent director
+            NgWebElement uiRemoveDirector = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[2]/td[7]/i[2]/span"));
+            uiRemoveDirector.Click();
+        }
+
+
+        [And(@"I remove the latest shareholder after saving")]
+        public void RemoveLatestShareholderAfterSave()
+        {
+            // delete the most recent shareholder 
+            NgWebElement uiRemoveShareholder = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-3']/div/section/app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr[2]/td[6]/i[2]/span"));
+            uiRemoveShareholder.Click();
+        }
 
 
         [And(@"the latest director and shareholder is removed")]

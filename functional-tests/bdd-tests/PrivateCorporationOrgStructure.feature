@@ -37,6 +37,7 @@ Scenario: Delete an individual who is both a director and shareholder
     And I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
+    And I submit the organization structure
     And I click on the Complete Organization Information button
     And I delete only the director record
     And I click on the Complete Organization Information button
@@ -51,6 +52,7 @@ Scenario: Change director and shareholder same name
     And I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
+    And I submit the organization structure
     And I click on the Complete Organization Information button
     And I modify only the director record
     And I click on the Complete Organization Information button
@@ -65,6 +67,7 @@ Scenario: Confirm business shareholder org structure update
     And I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
+    And I submit the organization structure
     And I click on the Complete Organization Information button
     And I add a business shareholder with the same individual as a director and a shareholder
     And I submit the organization structure
@@ -91,6 +94,7 @@ Scenario: Confirm business shareholder org structure update after payment
     And I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
+    And I submit the organization structure
     And I click on the Complete Organization Information button
     And I add a business shareholder with the same individual as a director and a shareholder
     And I submit the organization structure
@@ -129,7 +133,10 @@ Scenario: Save for Later feature for org structure
     And I add a second individual as a director and a shareholder to the business shareholder
     And I click on the Save for Later button
     And I click on the Complete Organization Information button
-    And I remove the latest director and shareholder
+    And I remove the latest director after saving
+    And I click on the Save for Later button
+    And I click on the Complete Organization Information button
+    And I remove the latest shareholder after saving
     And I click on the Save for Later button
     And I click on the Complete Organization Information button
     And the latest director and shareholder is removed
