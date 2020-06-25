@@ -2227,6 +2227,8 @@ namespace bdd_tests
 
             if (businessTypeShared == "sole proprietorship")
             {
+                /********** Leader #1 **********/
+
                 // open the leader row
                 NgWebElement openLeaderForm = ngDriver.FindElement(By.CssSelector("button.btn.btn-secondary"));
                 openLeaderForm.Click();
@@ -2254,10 +2256,41 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
+
+                /********** Leader #2 **********/
+
+                // open the leader row
+                NgWebElement openLeaderForm2 = ngDriver.FindElement(By.CssSelector("button.btn.btn-secondary"));
+                openLeaderForm2.Click();
+
+                // create the leader #2 info
+                string firstName2 = "Leader2";
+                string email2 = "leader2@soleproprietor.com";
+
+                // enter the leader #2 first name
+                NgWebElement uiFirstName2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[1]/app-field/section/div[1]/section/input"));
+                uiFirstName2.SendKeys(firstName2);
+
+                // enter the leader #2 last name
+                NgWebElement uiLastName2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[2]/app-field/section/div[1]/section/input"));
+                uiLastName2.SendKeys(lastName);
+
+                // enter the leader email
+                NgWebElement uiEmail2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[3]/app-field/section/div[1]/section/input"));
+                uiEmail2.SendKeys(email2);
+
+                // select the leader DOB
+                NgWebElement openLeaderDOB2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[4]/app-field/section/div[1]/section/input"));
+                openLeaderDOB2.Click();
+
+                // select the date
+                SharedCalendarDate();
             }
 
             if (businessTypeShared == "society")
             {
+                /********** Director #1 **********/
+
                 // create society data
                 string membershipFee = "2500";
                 string membershipNumber = "200";
@@ -2270,39 +2303,76 @@ namespace bdd_tests
                 NgWebElement uiMemberNumber = ngDriver.FindElement(By.CssSelector("[formcontrolname='numberOfMembers']"));
                 uiMemberNumber.SendKeys(membershipNumber);
 
-                // open the director row 
+                // open the director #1 row 
                 NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'][changetypesuffix='Leadership'] button"));
                 openKeyPersonnelForm.Click();
 
-                // create the director info
+                // create the director #1 info
                 string firstName = "Director";
                 string lastName = "Society";
                 string title = "Chair";
                 string email = "director@society.com";
 
-                // enter the director first name
+                // enter the director #1 first name
                 NgWebElement uiFirstName = ngDriver.FindElement(By.CssSelector("[formcontrolname='firstNameNew']"));
                 uiFirstName.SendKeys(firstName);
 
-                // enter the director last name
+                // enter the director #1 last name
                 NgWebElement uiLastName = ngDriver.FindElement(By.CssSelector("[formcontrolname='lastNameNew']"));
                 uiLastName.SendKeys(lastName);
 
-                // select the director position
+                // select the director #1 position
                 NgWebElement uiPosition = ngDriver.FindElement(By.CssSelector("[formcontrolname='isDirectorNew']"));
                 uiPosition.Click();
 
-                // enter the director title
+                // enter the director #1 title
                 NgWebElement uiTitle = ngDriver.FindElement(By.CssSelector("[formcontrolname='titleNew']"));
                 uiTitle.SendKeys(title);
 
-                // enter the director email
+                // enter the director #1 email
                 NgWebElement uiEmail = ngDriver.FindElement(By.CssSelector("[formcontrolname='emailNew']"));
                 uiEmail.SendKeys(email);
 
-                // select the director DOB
+                // select the director #1 DOB
                 NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.CssSelector("[formcontrolname='dateofBirthNew']"));
                 openKeyPersonnelDOB.Click();
+
+                // select the date
+                SharedCalendarDate();
+
+                /********** Director #2 **********/
+
+                // open the director #2 row 
+                NgWebElement openKeyPersonnelForm2 = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'][changetypesuffix='Leadership'] button"));
+                openKeyPersonnelForm2.Click();
+
+                // create the director #2 info
+                string firstName2 = "Director2";
+                string email2 = "director2@society.com";
+
+                // enter the director #2 first name
+                NgWebElement uiFirstName2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[1]/app-field/section/div[1]/section/input"));
+                uiFirstName2.SendKeys(firstName2);
+
+                // enter the director #2 last name
+                NgWebElement uiLastName2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[2]/app-field/section/div[1]/section/input"));
+                uiLastName2.SendKeys(lastName);
+
+                // select the director #2 position
+                NgWebElement uiPosition2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[3]/app-field/section/div/section/table/tr/td[1]/input[2]"));
+                uiPosition2.Click();
+
+                // enter the director #2 title
+                NgWebElement uiTitle2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[4]/app-field/section/div/section/input"));
+                uiTitle2.SendKeys(title);
+
+                // enter the director #2 email
+                NgWebElement uiEmail2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[5]/app-field/section/div[1]/section/input"));
+                uiEmail2.SendKeys(email2);
+
+                // select the director #2 DOB
+                NgWebElement openKeyPersonnelDOB2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[6]/app-field/section/div[1]/section/input"));
+                openKeyPersonnelDOB2.Click();
 
                 // select the date
                 SharedCalendarDate();
