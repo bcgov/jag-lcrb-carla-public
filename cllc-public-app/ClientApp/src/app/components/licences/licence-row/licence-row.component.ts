@@ -43,6 +43,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     mainForm: FormGroup;
     busy: Subscription;
     licenceForms = {};
+    eventStatus = EventStatus;
 
     @Input() available: boolean;
     @Input() licenceType: string;
@@ -68,7 +69,6 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.licences);
         this.licences.forEach((licence) => {
             this.licenceForms[licence.licenseId] = this.fb.group({
                 phone: [licence.establishmentPhoneNumber],
@@ -141,8 +141,20 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         this.busy = this.establishmentService.upEstablishment(establishment).subscribe();
     }
 
-    licenceHasExpired(expiryDate: string) {
-        return moment(expiryDate).startOf('day') < moment(new Date()).startOf('day');
+    isExpired(licence: ApplicationLicenseSummary) {
+        return licence.status === 'Expired';
+    }
+
+    actionsVisible(licence: ApplicationLicenseSummary) {
+        let retVal = true;
+        if (licence.transferRequested && this.licenceTransferFeatureOn) {
+            if (licence.licenceTypeCategory === 'Cannabis' && licence.isDeemed) {
+                retVal = false;
+            } else if (licence.licenceTypeCategory === 'Liquor' && !licence.isDeemed) {
+                retVal = false;
+            }
+        }
+        return retVal;
     }
 
     payLicenceFee(licence: ApplicationLicenseSummary) {
@@ -196,15 +208,23 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         return diff <= 60 || expiry < now;
     }
 
-    isRecentlyExpired(expiryDate: string) {
+    isRecentlyExpired(licence: ApplicationLicenseSummary) {
         const now = moment(new Date()).startOf('day');
-        const expiry = moment(expiryDate).startOf('day');
+        const expiry = moment(licence.expiryDate).startOf('day');
         const diff = now.diff(expiry, 'days') + 1;
-        return diff <= 30;
+        return licence.status === 'Expired' && diff <= 30;
     }
 
     isActive(licence: ApplicationLicenseSummary) {
-        return licence.status === 'Active' || (licence.status === 'Expired' && this.isRecentlyExpired(licence.expiryDate.toString()));
+        let active = licence.status === 'Active';
+        if (licence.dormant || licence.suspended) {
+            active = false;
+        }
+        return active;
+    }
+
+    isActiveOrRecentlyExpired(licence: ApplicationLicenseSummary) {
+        return this.isRecentlyExpired(licence) || this.isActive(licence);
     }
 
     doAction(licence: ApplicationLicenseSummary, actionName: string) {
@@ -274,20 +294,29 @@ export class LicenceRowComponent extends FormBase implements OnInit {
             return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/cannabis-retail-store-licence-handbook.pdf';
           case 'Marketing':
             return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/marketing-handbook.pdf';
+          case 'Operated - Catering':
           case 'Catering':
           case 'Transfer in Progress - Catering':
             return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/catering-handbook.pdf';
           case 'Wine Store':
           case 'Transfer in Progress - Wine Store':
-            return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/winestore-handbook.pdf';
-          // added handling for operated wine stores
-          // TODO: refactor Operated approach so that we don't have to add a case for each operator style
           case 'Operated - Wine Store':
               return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/winestore-handbook.pdf';
           default:
             return '404';
         }
     }
+
+    getOptionFromValue(options: any, value: number) {
+        const idx = options.findIndex(opt => opt.value === value);
+        if (idx >= 0) {
+          return options[idx];
+        }
+        return {
+          value: null,
+          label: ''
+        };
+      }
 
     getLicenceStatusText(status: string) {
         switch (status) {
