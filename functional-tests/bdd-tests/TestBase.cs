@@ -2268,19 +2268,19 @@ namespace bdd_tests
                 string email2 = "leader2@soleproprietor.com";
 
                 // enter the leader #2 first name
-                NgWebElement uiFirstName2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[1]/app-field/section/div[1]/section/input"));
+                NgWebElement uiFirstName2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(1) input[formControlName='firstNameNew']"));
                 uiFirstName2.SendKeys(firstName2);
 
                 // enter the leader #2 last name
-                NgWebElement uiLastName2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[2]/app-field/section/div[1]/section/input"));
+                NgWebElement uiLastName2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(2) input[formControlName='lastNameNew']"));
                 uiLastName2.SendKeys(lastName);
 
                 // enter the leader email
-                NgWebElement uiEmail2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[3]/app-field/section/div[1]/section/input"));
+                NgWebElement uiEmail2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(3) input[formControlName='emailNew']"));
                 uiEmail2.SendKeys(email2);
 
                 // select the leader DOB
-                NgWebElement openLeaderDOB2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[4]/app-field/section/div[1]/section/input"));
+                NgWebElement openLeaderDOB2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(4) input[formControlName='dateofBirthNew']"));
                 openLeaderDOB2.Click();
 
                 // select the date
@@ -2343,7 +2343,7 @@ namespace bdd_tests
                 /********** Director #2 **********/
 
                 // open the director #2 row 
-                NgWebElement openKeyPersonnelForm2 = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'][changetypesuffix='Leadership'] button"));
+                NgWebElement openKeyPersonnelForm2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));
                 openKeyPersonnelForm2.Click();
 
                 // create the director #2 info
@@ -2351,27 +2351,27 @@ namespace bdd_tests
                 string email2 = "director2@society.com";
 
                 // enter the director #2 first name
-                NgWebElement uiFirstName2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[1]/app-field/section/div[1]/section/input"));
+                NgWebElement uiFirstName2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(1) input[formControlName='firstNameNew']"));
                 uiFirstName2.SendKeys(firstName2);
 
                 // enter the director #2 last name
-                NgWebElement uiLastName2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[2]/app-field/section/div[1]/section/input"));
+                NgWebElement uiLastName2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(2) input[formControlName='lastNameNew']"));
                 uiLastName2.SendKeys(lastName);
 
                 // select the director #2 position
-                NgWebElement uiPosition2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[3]/app-field/section/div/section/table/tr/td[1]/input[2]"));
+                NgWebElement uiPosition2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(3) input[formControlName='isDirectorNew']"));
                 uiPosition2.Click();
 
                 // enter the director #2 title
-                NgWebElement uiTitle2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[4]/app-field/section/div/section/input"));
+                NgWebElement uiTitle2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(4) input[formControlName='titleNew']"));
                 uiTitle2.SendKeys(title);
 
                 // enter the director #2 email
-                NgWebElement uiEmail2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[5]/app-field/section/div[1]/section/input"));
+                NgWebElement uiEmail2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(5) input[formControlName='emailNew']"));
                 uiEmail2.SendKeys(email2);
 
                 // select the director #2 DOB
-                NgWebElement openKeyPersonnelDOB2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[6]/app-field/section/div[1]/section/input"));
+                NgWebElement openKeyPersonnelDOB2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(6) input[formControlName='dateofBirthNew']"));
                 openKeyPersonnelDOB2.Click();
 
                 // select the date
@@ -2442,27 +2442,27 @@ namespace bdd_tests
                 openKeyPersonnelForm2.Click();
 
                 // enter key personnel first name
-                NgWebElement openKeyPersonnelFirst2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[1]/app-field/section/div[1]/section/input"));
+                NgWebElement openKeyPersonnelFirst2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(1) input[formControlName='firstNameNew']"));
                 openKeyPersonnelFirst2.SendKeys(keyPersonnelFirst2);
 
                 // enter key personnel last name
-                NgWebElement openKeyPersonnelLast2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[2]/app-field/section/div[1]/section/input"));
+                NgWebElement openKeyPersonnelLast2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(2) input[formControlName='lastNameNew']"));
                 openKeyPersonnelLast2.SendKeys(keyPersonnelLast2);
 
                 // select key personnel role
-                NgWebElement openKeyPersonnelRole2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[3]/app-field/section/div/section/table/tr/td[2]/div/input"));
+                NgWebElement openKeyPersonnelRole2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(3) input[formControlName='isDirectorNew']"));
                 openKeyPersonnelRole2.Click();
 
                 // enter key personnel title
-                NgWebElement openKeyPersonnelTitle2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[4]/app-field/section/div/section/input"));
+                NgWebElement openKeyPersonnelTitle2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(4) input[formControlName='titleNew']"));
                 openKeyPersonnelTitle2.SendKeys(keyPersonnelTitle2);
 
                 // enter key personnel email
-                NgWebElement openKeyPersonnelEmail2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[5]/app-field/section/div[1]/section/input"));
+                NgWebElement openKeyPersonnelEmail2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(5) input[formControlName='emailNew']"));
                 openKeyPersonnelEmail2.SendKeys(keyPersonnelEmail2);
 
                 // select key person DOB
-                NgWebElement openKeyPersonDOB2 = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[2]/td[6]/app-field/section/div[1]/section/input"));
+                NgWebElement openKeyPersonDOB2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(6) input[formControlName='dateofBirthNew']"));
                 openKeyPersonDOB2.Click();
 
                 // select the date
