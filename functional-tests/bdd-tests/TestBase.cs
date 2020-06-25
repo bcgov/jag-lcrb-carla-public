@@ -3067,7 +3067,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"I add a second business shareholder with the same individual as a director and a shareholder")]
+        [And(@"I add a second individual as a director and a shareholder to the business shareholder")]
         public void BusinessShareholderSameDirShare2()
         {
             // create business shareholder key personnel #2 data
