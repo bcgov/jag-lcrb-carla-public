@@ -220,7 +220,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         }
         if (this.validationErrors.length === 0) {
           // set value to cause invoice generationP
-          this.busyPromise = this.prepareSaveRequest({ invoicetrigger: 1 })
+          this.busyPromise = this.prepareSaveRequest()
 
             .pipe(mergeMap(results => {
               console.log(results);
@@ -271,13 +271,14 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       });
   }
 
-  private prepareSaveRequest(saveOverrideValue: Partial<Application>) {
+  private prepareSaveRequest() {
     this.validationErrors = [];
-
-    saveOverrideValue = saveOverrideValue || {};
     const data = this.cleanSaveData(this.treeRoot);
-    return forkJoin(this.legalEntityDataService.updateLegalEntity({ ...this.currentLegalEntities, numberOfMembers: this.treeRoot.numberOfMembers, annualMembershipFee: this.treeRoot.annualMembershipFee }, this.currentLegalEntities.id),
-      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId));
+    return this.legalEntityDataService.updateLegalEntity({ ...this.currentLegalEntities, numberOfMembers: this.treeRoot.numberOfMembers, annualMembershipFee: this.treeRoot.annualMembershipFee }, this.currentLegalEntities.id)
+      .pipe(mergeMap(result => {
+        // do something with result
+        return this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId);
+      }));
   }
 
   saveForLater(navigateAfterSaving: boolean = true): Observable<boolean> {
@@ -290,7 +291,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
           subject.next(false);
         }
         if (this.validationErrors.length === 0) {
-          this.busyPromise = this.prepareSaveRequest({})
+          this.busyPromise = this.prepareSaveRequest()
             .toPromise()
             .then(() => {
               this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
