@@ -43,7 +43,7 @@ using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 namespace Gov.Lclb.Cllb.Public
 {
     public class Startup
-    { 
+    {
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
@@ -58,7 +58,7 @@ namespace Gov.Lclb.Cllb.Public
         public IWebHostEnvironment _env { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services )
+        public void ConfigureServices(IServiceCollection services)
         {
             // add a singleton for data access.
 #if (USE_MSSQL)
@@ -79,7 +79,7 @@ namespace Gov.Lclb.Cllb.Public
                 SetupServices(services);
             }
 
-            
+
             // Add a memory cache
             services.AddMemoryCache();
 
@@ -109,10 +109,10 @@ namespace Gov.Lclb.Cllb.Public
                opts.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
                opts.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
 
-                // ReferenceLoopHandling is set to Ignore to prevent JSON parser issues with the user / roles model.
-                opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+               // ReferenceLoopHandling is set to Ignore to prevent JSON parser issues with the user / roles model.
+               opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
            })
-            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);            
+            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             // setup siteminder authentication (core 2.0)
             services.AddAuthentication(options =>
@@ -127,11 +127,26 @@ namespace Gov.Lclb.Cllb.Public
             // setup authorization
             services.AddAuthorization(options =>
             {
+                // This policy is used for existing business accounts
                 options.AddPolicy("Business-User", policy =>
-                                  policy.RequireClaim(User.UserTypeClaim, "Business"));
+                                  policy.RequireAssertion(context =>
+                                  {
+                                      var res = context.User.HasClaim(c => c.Type == User.UserTypeClaim && c.Value == "Business")
+                                      && context.User.HasClaim(c => c.Type == User.PermissionClaim && c.Value == Permission.ExistingUser);
+                                      return res;
+                                  }));
+                // This policy is used for existing business accounts and also during account registration
+                options.AddPolicy("Can-Create-Account", policy =>
+                                  policy.RequireAssertion(context =>
+                                  {
+                                      var res = context.User.HasClaim(c => c.Type == User.UserTypeClaim && c.Value == "Business")
+                                      && (context.User.HasClaim(c => c.Type == User.PermissionClaim && c.Value == Permission.ExistingUser)
+                                      || context.User.HasClaim(c => c.Type == User.PermissionClaim && c.Value == Permission.NewUserRegistration));
+                                      return res;
+                                  }));
             });
             services.RegisterPermissionHandler();
-            if (!string.IsNullOrEmpty (_configuration["KEY_RING_DIRECTORY"]))
+            if (!string.IsNullOrEmpty(_configuration["KEY_RING_DIRECTORY"]))
             {
                 // setup key ring to persist in storage.
                 services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(_configuration["KEY_RING_DIRECTORY"]));
@@ -153,11 +168,11 @@ namespace Gov.Lclb.Cllb.Public
             orgBook.ReadResponseAsString = true;
             services.AddTransient<IOrgBookClient>(_ => (IOrgBookClient)orgBook);
 
-            
 
-            
 
-            
+
+
+
             if (!string.IsNullOrEmpty(_configuration["REDIS_SERVER"]))
             {
                 string config = _configuration["REDIS_SERVER"];
@@ -167,8 +182,8 @@ namespace Gov.Lclb.Cllb.Public
                     config += $",password={redisPassword}";
                 }
                 services.AddDistributedRedisCache(o =>
-                {                    
-                    o.Configuration = config;                    
+                {
+                    o.Configuration = config;
                 });
 
                 // health checks
@@ -197,7 +212,8 @@ namespace Gov.Lclb.Cllb.Public
             }
 
             // session will automatically use redis or another distributed cache if it is available.
-            services.AddSession(x => {
+            services.AddSession(x =>
+            {
                 x.IdleTimeout = TimeSpan.FromHours(4.0);
                 x.Cookie.IsEssential = true;
             });
@@ -217,8 +233,8 @@ namespace Gov.Lclb.Cllb.Public
             string ssgPassword = _configuration["SSG_PASSWORD"];
 
             AuthenticationResult authenticationResult = null;
-            
-            
+
+
 
             services.AddCors(options =>
             {
@@ -243,7 +259,7 @@ namespace Gov.Lclb.Cllb.Public
 
                 return client;
             }));
-            
+
 
             // add BCeID Web Services
 
@@ -265,7 +281,7 @@ namespace Gov.Lclb.Cllb.Public
 
             services.AddTransient<BCEPWrapper>(_ => new BCEPWrapper(bcep_svc_url, bcep_svc_svcid, bcep_svc_hashid,
                 bcep_base_uri + bcep_base_path + bcep_conf_path));
-          
+
             // add the PDF client.
             string pdf_service_base_uri = _configuration["PDF_SERVICE_BASE_URI"];
             string bearer_token = $"Bearer {_configuration["PDF_JWT_TOKEN"]}";
@@ -282,24 +298,24 @@ namespace Gov.Lclb.Cllb.Public
             {
                 AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             }
-            if (!string.IsNullOrEmpty (fileManagerURI))
+            if (!string.IsNullOrEmpty(fileManagerURI))
             {
                 var httpClientHandler = new HttpClientHandler();
 
                 if (!_env.IsProduction()) // Ignore certificate errors in non-production modes.  
-                                         // This allows you to use OpenShift self-signed certificates for testing.
+                                          // This allows you to use OpenShift self-signed certificates for testing.
                 {
                     // Return `true` to allow certificates that are untrusted/invalid                    
                     httpClientHandler.ServerCertificateCustomValidationCallback =
                     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
                 }
-                
+
                 var httpClient = new HttpClient(httpClientHandler);
                 // set default request version to HTTP 2.  Note that Dotnet Core does not currently respect this setting for all requests.
                 httpClient.DefaultRequestVersion = HttpVersion.Version20;
-              
+
                 var initialChannel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions { HttpClient = httpClient });
-                
+
                 var initialClient = new FileManagerClient(initialChannel);
                 // call the token service to get a token.
                 var tokenRequest = new TokenRequest()
@@ -312,10 +328,10 @@ namespace Gov.Lclb.Cllb.Public
                 if (tokenReply != null && tokenReply.ResultStatus == ResultStatus.Success)
                 {
                     // Add the bearer token to the client.
-                    
+
                     httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokenReply.Token}");
 
-                    var channel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions() { HttpClient = httpClient });                   
+                    var channel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions() { HttpClient = httpClient });
 
                     services.AddTransient<FileManagerClient>(_ => new FileManagerClient(channel));
 
@@ -504,7 +520,7 @@ namespace Gov.Lclb.Cllb.Public
             {
 
                 Serilog.Sinks.Splunk.CustomFields fields = new Serilog.Sinks.Splunk.CustomFields();
-                if (!string.IsNullOrEmpty (_configuration["SPLUNK_CHANNEL"]))
+                if (!string.IsNullOrEmpty(_configuration["SPLUNK_CHANNEL"]))
                 {
                     fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", _configuration["SPLUNK_CHANNEL"]));
                 }
@@ -518,8 +534,8 @@ namespace Gov.Lclb.Cllb.Public
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
-                    .WriteTo.EventCollector( splunkHost: _configuration["SPLUNK_COLLECTOR_URL"],
-                       sourceType: "manual", eventCollectorToken: _configuration["SPLUNK_TOKEN"], 
+                    .WriteTo.EventCollector(splunkHost: _configuration["SPLUNK_COLLECTOR_URL"],
+                       sourceType: "manual", eventCollectorToken: _configuration["SPLUNK_TOKEN"],
                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
 #pragma warning disable CA2000 // Dispose objects before losing scope
                        messageHandler: new HttpClientHandler()
@@ -527,13 +543,13 @@ namespace Gov.Lclb.Cllb.Public
                            ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
                        }
 #pragma warning restore CA2000 // Dispose objects before losing scope
-                     )                    
+                     )
                     .CreateLogger();
 
                 Serilog.Debugging.SelfLog.Enable(Console.Error);
 
                 Log.Logger.Information("CARLA Portal Container Started");
-                
+
             }
             else
             {

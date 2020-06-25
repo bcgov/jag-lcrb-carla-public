@@ -19,12 +19,12 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+using System.Security.Claims;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = "Business-User")]
     public class AccountsController : ControllerBase
     {
         private readonly BCeIDBusinessQuery _bceid;
@@ -55,6 +55,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET account in Dynamics for the current user
         [HttpGet("current")]
+        [Authorize(Policy = "Business-User")]
         public async Task<IActionResult> GetCurrentAccount()
         {
             _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
@@ -97,6 +98,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET account in Dynamics for the current user
         [HttpGet("bceid")]
+        [Authorize(Policy = "Business-User")]
         public async Task<IActionResult> GetCurrentBCeIDBusiness()
         {
             _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
@@ -134,6 +136,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="name">The name to filter by using startswith</param>
         /// <returns>Dictionary of key value pairs with accountid and name as the pairs</returns>
         [HttpGet("autocomplete")]
+        [Authorize(Policy = "Business-User")]
         public IActionResult GetAutocomplete(string name)
         {
             var results = new List<TransferAccount>();
@@ -183,6 +186,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [Authorize(Policy = "Business-User")]
         public async Task<IActionResult> GetAccount(string id)
         {
             _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
@@ -236,6 +240,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpGet("business-profile/{accountId}")]
+        [Authorize(Policy = "Business-User")]
         public IActionResult GetBusinessProfile(string accountId)
         {
             _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
@@ -383,6 +388,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost()]
+        [Authorize(Policy = "Can-Create-Account")]
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
             _logger.LogDebug(LoggingEvents.HttpPost, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
@@ -673,6 +679,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 userSettings.IsNewUserRegistration = false;
 
+                // Delete the newUserClaim and add the ExistingUser claim to allow logged in user access to authorized services
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+                //
+                var newUserClaim = identity.FindFirst(Permission.NewUserRegistration);
+                if (newUserClaim != null)
+                {
+                    identity.RemoveClaim(newUserClaim); // User has complete registration, remove new user permission
+                }
+
+                //Add existing user claim
+                identity.AddClaim(new Claim("permission_claim", Permission.ExistingUser));
+                //Add the updated identity to the HttpContext
+                HttpContext.User.AddIdentity(identity);
+
                 string userSettingsString = JsonConvert.SerializeObject(userSettings);
                 _logger.LogDebug("userSettingsString --> " + userSettingsString);
 
@@ -714,6 +735,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [Authorize(Policy = "Business-User")]
         public async Task<IActionResult> UpdateDynamicsAccount([FromBody] ViewModels.Account item, string id)
         {
             _logger.LogDebug(LoggingEvents.HttpPut, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
@@ -776,6 +798,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost("{id}/delete")]
+        [Authorize(Policy = "Business-User")]
         public async Task<IActionResult> DeleteDynamicsAccount(string id)
         {
             _logger.LogDebug(LoggingEvents.HttpPost, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
@@ -795,7 +818,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");
                 return new NotFoundResult();
             }
-            
+
             if (account.AdoxioAccountAdoxioLegalentityAccount != null)
             {
                 foreach (var le in account.AdoxioAccountAdoxioLegalentityAccount)
@@ -817,7 +840,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
             }
-            
+
             if (account.AdoxioAccountAdoxioEstablishmentLicencee != null)
             {
                 // adoxio_account_adoxio_establishment_Licencee
@@ -957,7 +980,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
             }
-            
+
             if (account.ContactCustomerAccounts != null)
             {
                 foreach (var contact in account.ContactCustomerAccounts)
@@ -1079,6 +1102,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         [HttpGet("delete/current")]
+        [Authorize(Policy = "Business-User")]
         public async Task<IActionResult> DeleteCurrentAccount()
         {
             if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
@@ -1105,7 +1129,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     throw e;
                 }
-                
+
             }
             else
             {
@@ -1123,6 +1147,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name=""></param>
         /// <returns></returns>
         [HttpGet("{accountId}/tiedhouseconnection")]
+        [Authorize(Policy = "Business-User")]
         public JsonResult GetTiedHouseConnection(string accountId)
         {
             var result = new List<ViewModels.TiedHouseConnection>();
@@ -1149,6 +1174,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name=""></param>
         /// <returns></returns>
         [HttpPost("{accountId}/tiedhouseconnection")]
+        [Authorize(Policy = "Business-User")]
         public ActionResult AddTiedHouseConnection([FromBody] ViewModels.TiedHouseConnection item, string accountId)
         {
             if (item == null)
