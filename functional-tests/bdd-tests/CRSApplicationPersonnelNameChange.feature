@@ -19,7 +19,7 @@ Scenario: Indigenous Nation Personnel Name Change
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    And I pay the licensing fee for Cannabis
+    # And I pay the licensing fee for Cannabis
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -40,7 +40,7 @@ Scenario: Partnership Personnel Name Change
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    And I pay the licensing fee for Cannabis
+    # And I pay the licensing fee for Cannabis
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -61,7 +61,7 @@ Scenario: Private Corporation Personnel Name Change
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    And I pay the licensing fee for Cannabis
+    # And I pay the licensing fee for Cannabis
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -82,7 +82,7 @@ Scenario: Public Corporation Personnel Name Change
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    And I pay the licensing fee for Cannabis
+    # And I pay the licensing fee for Cannabis
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -103,7 +103,7 @@ Scenario: Society Personnel Name Change
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    And I pay the licensing fee for Cannabis
+    # And I pay the licensing fee for Cannabis
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -124,7 +124,7 @@ Scenario: Sole Proprietorship Personnel Name Change
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    And I pay the licensing fee for Cannabis
+    # And I pay the licensing fee for Cannabis
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
