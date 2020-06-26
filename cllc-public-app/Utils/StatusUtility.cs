@@ -3,7 +3,6 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Utils
 {
@@ -82,32 +81,8 @@ namespace Gov.Lclb.Cllb.Public.Utils
 
         public static string GetLicenceStatus(MicrosoftDynamicsCRMadoxioLicences licence, IList<MicrosoftDynamicsCRMadoxioApplication> applications)
         {
-            var application = applications
-                .OrderByDescending(app => app.AdoxioDatelicenceapproved)
-                .Where(app => app.Statuscode == (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved).FirstOrDefault();
-            if (application == null)
-            {
-                return null;
-            }
             LicenceStatusCodes status = (LicenceStatusCodes)licence.Statuscode;
-
-            string shownStatus = Enum.GetName(status.GetType(), status);
-
-            if (licence != null && status == LicenceStatusCodes.Active)
-            {
-                shownStatus = STATUS_ACTIVE;
-                if (DateTimeOffset.Now > licence.AdoxioExpirydate)
-                {
-                    shownStatus = STATUS_RENEWAL_DUE;
-                }
-            }
-
-            // moved first year payment logic here
-            if (licence != null && status == LicenceStatusCodes.PendingFistYearFee)
-            {
-                shownStatus = STATUS_PAYMENT_REQUIRED;
-            }
-            return shownStatus;
+            return Enum.GetName(status.GetType(), status);
         }
     }
 }
