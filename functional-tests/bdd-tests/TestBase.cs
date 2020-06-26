@@ -2075,6 +2075,10 @@ namespace bdd_tests
                 // select the date
                 SharedCalendarDate();
 
+                // click on the Confirm button
+                NgWebElement confirmButtonKeyPersonnel = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] .fa-save span"));
+                confirmButtonKeyPersonnel.Click();
+
                 /********** Individual Shareholder #0 **********/
 
                 // create the shareholder data
@@ -2109,6 +2113,10 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
+
+                // click on the Confirm button
+                NgWebElement confirmButtonIndyShareholder = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] .fa-save span"));
+                confirmButtonIndyShareholder.Click();
 
                 /********** Business Shareholder #1 **********/
 
@@ -2195,6 +2203,10 @@ namespace bdd_tests
                 // select the date
                 SharedCalendarDate();
 
+                // click on the Confirm button
+                NgWebElement confirmButtonBusKeyPersonnel = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] .fa-save span"));
+                confirmButtonBusKeyPersonnel.Click();
+
                 /********** Business Shareholder #1 - Individual Shareholder #1 **********/
 
                 // create the business shareholder #1 > individual shareholder data
@@ -2229,6 +2241,10 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
+
+                // click on the Confirm button
+                NgWebElement confirmButtonBusIndyShareholder = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] .fa-save span"));
+                confirmButtonBusIndyShareholder.Click();
             }
 
             if (businessTypeShared == "sole proprietorship")
@@ -3487,8 +3503,8 @@ namespace bdd_tests
             string sharesPublicCorp = "10";
             string emailAddressPublicCorp = "public@corporation.com";
 
-            // click on the public corporation Add Business Shareholder button
-            NgWebElement addPublicCorporationRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] button"));
+            // click on the Add Business Shareholder button
+            NgWebElement addPublicCorporationRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] button"));
             addPublicCorporationRow.Click();
 
             // add the public corporation business name
@@ -3515,7 +3531,7 @@ namespace bdd_tests
 
             // TODO: add public corporation key personnel
 
-            /********** Business Shareholder - Partnership **********/
+            /********** Business Shareholder - Partnership **********
 
             // create partnership test data
             string businessNamePartnership = "Partnership";
@@ -3546,7 +3562,7 @@ namespace bdd_tests
             NgWebElement confirmButtonPartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
             confirmButtonPartnership.Click();
 
-            /********** Business Shareholder - Sole Proprietorship **********/
+            /********** Business Shareholder - Sole Proprietorship **********
 
             // create sole proprietorship test data
             string businessNameSoleProprietorship = "Sole Proprietorship";
@@ -3577,7 +3593,7 @@ namespace bdd_tests
             NgWebElement confirmButtonSoleProprietorship = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
             confirmButtonSoleProprietorship.Click();
 
-            /********** Business Shareholder - Society **********/
+            /********** Business Shareholder - Society **********
 
             // create society test data
             string businessNameSociety = "Society";
@@ -3608,8 +3624,7 @@ namespace bdd_tests
             NgWebElement confirmButtonSociety = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
             confirmButtonSociety.Click();
 
-
-            /********** Business Shareholder - Trust **********/
+            /********** Business Shareholder - Trust **********
 
             // create trust test data
             string businessNameTrust = "Trust";
@@ -3638,7 +3653,7 @@ namespace bdd_tests
 
             // click on the trust Confirm button
             NgWebElement confirmButtonTrust = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
-            confirmButtonTrust.Click();
+            confirmButtonTrust.Click();*/
         }
 
 
