@@ -286,7 +286,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
                 {
                     adoxio_ThirdPartyOperatorIdODataBind = _dynamicsClient.GetEntityURI("accounts", item.AccountId),
-                    AdoxioTporequested = (int)TPORequested.Yes
+                    AdoxioTporequested = (int)EnumYesNo.Yes
                 };
 
                 // create application
@@ -328,7 +328,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
                 {
-                    AdoxioTporequested = (int)TPORequested.No
+                    AdoxioTporequested = (int)EnumYesNo.No
                 };
 
                 // create application
@@ -516,9 +516,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
-        
-
-
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
         [HttpGet("current")]
         public List<ApplicationLicenseSummary> GetCurrentUserLicences()
@@ -528,11 +525,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
-            List<ApplicationLicenseSummary> adoxioLicenses = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
-            List<ApplicationLicenseSummary> transterredLicenses = _dynamicsClient.GetPaidLicensesOnTransfer(userSettings.AccountId);
-            adoxioLicenses.AddRange(transterredLicenses);
+            List<ApplicationLicenseSummary> adoxioLicences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
+            List<ApplicationLicenseSummary> transferredLicences = _dynamicsClient.GetPaidLicensesOnTransfer(userSettings.AccountId);
+            adoxioLicences.AddRange(transferredLicences);
 
-            return adoxioLicenses;
+            return adoxioLicences;
         }
 
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
