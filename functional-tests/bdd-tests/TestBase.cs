@@ -1961,6 +1961,8 @@ namespace bdd_tests
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'SoleProprietor')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader2')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader3')]")).Displayed);
             }
 
             // confirm that society personnel are present
@@ -1968,6 +1970,8 @@ namespace bdd_tests
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Society')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director2')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director3')]")).Displayed);
             }
 
             // confirm that public corporation personnel are present
@@ -1975,6 +1979,8 @@ namespace bdd_tests
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel1')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Public Corp')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel2')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel3')]")).Displayed);
             }
 
             // confirm that partnership personnel are present
@@ -2227,6 +2233,8 @@ namespace bdd_tests
 
             if (businessTypeShared == "sole proprietorship")
             {
+                /********** Sole Proprietor > Leader #1 **********/
+
                 // open the leader row
                 NgWebElement openLeaderForm = ngDriver.FindElement(By.CssSelector("button.btn.btn-secondary"));
                 openLeaderForm.Click();
@@ -2254,10 +2262,70 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
+
+                /********** Sole Proprietor > Leader #2 **********/
+
+                // open the leader #2 row
+                NgWebElement openLeaderForm2 = ngDriver.FindElement(By.CssSelector("button.btn.btn-secondary"));
+                openLeaderForm2.Click();
+
+                // create the leader #2 info
+                string firstName2 = "Leader2";
+                string email2 = "leader2@soleproprietor.com";
+
+                // enter the leader #2 first name
+                NgWebElement uiFirstName2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(1) input[formControlName='firstNameNew']"));
+                uiFirstName2.SendKeys(firstName2);
+
+                // enter the leader #2 last name
+                NgWebElement uiLastName2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(2) input[formControlName='lastNameNew']"));
+                uiLastName2.SendKeys(lastName);
+
+                // enter the leader #2 email
+                NgWebElement uiEmail2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(3) input[formControlName='emailNew']"));
+                uiEmail2.SendKeys(email2);
+
+                // select the leader #2 DOB
+                NgWebElement openLeaderDOB2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(4) input[formControlName='dateofBirthNew']"));
+                openLeaderDOB2.Click();
+
+                // select the date
+                SharedCalendarDate();
+
+                /********** Sole Proprietor > Leader #3 **********/
+
+                // open the leader #3 row
+                NgWebElement openLeaderForm3 = ngDriver.FindElement(By.CssSelector("button.btn.btn-secondary"));
+                openLeaderForm3.Click();
+
+                // create the leader #2 info
+                string firstName3 = "Leader3";
+                string email3 = "leader3@soleproprietor.com";
+
+                // enter the leader #2 first name
+                NgWebElement uiFirstName3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(1) input[formControlName='firstNameNew']"));
+                uiFirstName3.SendKeys(firstName3);
+
+                // enter the leader #2 last name
+                NgWebElement uiLastName3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(2) input[formControlName='lastNameNew']"));
+                uiLastName3.SendKeys(lastName);
+
+                // enter the leader #3 email
+                NgWebElement uiEmail3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(3) input[formControlName='emailNew']"));
+                uiEmail3.SendKeys(email3);
+
+                // select the leader #3 DOB
+                NgWebElement openLeaderDOB3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(4) input[formControlName='dateofBirthNew']"));
+                openLeaderDOB3.Click();
+
+                // select the date
+                SharedCalendarDate();
             }
 
             if (businessTypeShared == "society")
             {
+                /********** Director #1 **********/
+
                 // create society data
                 string membershipFee = "2500";
                 string membershipNumber = "200";
@@ -2270,39 +2338,113 @@ namespace bdd_tests
                 NgWebElement uiMemberNumber = ngDriver.FindElement(By.CssSelector("[formcontrolname='numberOfMembers']"));
                 uiMemberNumber.SendKeys(membershipNumber);
 
-                // open the director row 
+                // open the director #1 row 
                 NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'][changetypesuffix='Leadership'] button"));
                 openKeyPersonnelForm.Click();
 
-                // create the director info
+                // create the director #1 info
                 string firstName = "Director";
                 string lastName = "Society";
                 string title = "Chair";
                 string email = "director@society.com";
 
-                // enter the director first name
+                // enter the director #1 first name
                 NgWebElement uiFirstName = ngDriver.FindElement(By.CssSelector("[formcontrolname='firstNameNew']"));
                 uiFirstName.SendKeys(firstName);
 
-                // enter the director last name
+                // enter the director #1 last name
                 NgWebElement uiLastName = ngDriver.FindElement(By.CssSelector("[formcontrolname='lastNameNew']"));
                 uiLastName.SendKeys(lastName);
 
-                // select the director position
+                // select the director #1 position
                 NgWebElement uiPosition = ngDriver.FindElement(By.CssSelector("[formcontrolname='isDirectorNew']"));
                 uiPosition.Click();
 
-                // enter the director title
+                // enter the director #1 title
                 NgWebElement uiTitle = ngDriver.FindElement(By.CssSelector("[formcontrolname='titleNew']"));
                 uiTitle.SendKeys(title);
 
-                // enter the director email
+                // enter the director #1 email
                 NgWebElement uiEmail = ngDriver.FindElement(By.CssSelector("[formcontrolname='emailNew']"));
                 uiEmail.SendKeys(email);
 
-                // select the director DOB
+                // select the director #1 DOB
                 NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.CssSelector("[formcontrolname='dateofBirthNew']"));
                 openKeyPersonnelDOB.Click();
+
+                // select the date
+                SharedCalendarDate();
+
+                /********** Director #2 **********/
+
+                // open the director #2 row 
+                NgWebElement openKeyPersonnelForm2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));
+                openKeyPersonnelForm2.Click();
+
+                // create the director #2 info
+                string firstName2 = "Director2";
+                string email2 = "director2@society.com";
+
+                // enter the director #2 first name
+                NgWebElement uiFirstName2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(1) input[formControlName='firstNameNew']"));
+                uiFirstName2.SendKeys(firstName2);
+
+                // enter the director #2 last name
+                NgWebElement uiLastName2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(2) input[formControlName='lastNameNew']"));
+                uiLastName2.SendKeys(lastName);
+
+                // select the director #2 position
+                NgWebElement uiPosition2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(3) input[formControlName='isDirectorNew']"));
+                uiPosition2.Click();
+
+                // enter the director #2 title
+                NgWebElement uiTitle2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(4) input[formControlName='titleNew']"));
+                uiTitle2.SendKeys(title);
+
+                // enter the director #2 email
+                NgWebElement uiEmail2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(5) input[formControlName='emailNew']"));
+                uiEmail2.SendKeys(email2);
+
+                // select the director #2 DOB
+                NgWebElement openKeyPersonnelDOB2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(6) input[formControlName='dateofBirthNew']"));
+                openKeyPersonnelDOB2.Click();
+
+                // select the date
+                SharedCalendarDate();
+
+                /********** Director #3 **********/
+
+                // open the director #3 row 
+                NgWebElement openKeyPersonnelForm3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));
+                openKeyPersonnelForm3.Click();
+
+                // create the director #3 info
+                string firstName3 = "Director3";
+                string email3 = "director3@society.com";
+
+                // enter the director #3 first name
+                NgWebElement uiFirstName3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(1) input[formControlName='firstNameNew']"));
+                uiFirstName3.SendKeys(firstName3);
+
+                // enter the director #3 last name
+                NgWebElement uiLastName3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(2) input[formControlName='lastNameNew']"));
+                uiLastName3.SendKeys(lastName);
+
+                // select the director #3 position
+                NgWebElement uiPosition3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(3) input[formControlName='isDirectorNew']"));
+                uiPosition3.Click();
+
+                // enter the director #3 title
+                NgWebElement uiTitle3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(4) input[formControlName='titleNew']"));
+                uiTitle3.SendKeys(title);
+
+                // enter the director #3 email
+                NgWebElement uiEmail3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(5) input[formControlName='emailNew']"));
+                uiEmail3.SendKeys(email3);
+
+                // select the director #2 DOB
+                NgWebElement openKeyPersonnelDOB3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(6) input[formControlName='dateofBirthNew']"));
+                openKeyPersonnelDOB3.Click();
 
                 // select the date
                 SharedCalendarDate();
@@ -2310,7 +2452,9 @@ namespace bdd_tests
 
             if (businessTypeShared == "public corporation")
             {
-                // create the key personnel data
+                /********** Key Personnel #1 **********/
+
+                // create the key personnel #1 data
                 string keyPersonnelFirst = "KeyPersonnel1";
                 string keyPersonnelLast = "Public Corp";
                 string keyPersonnelTitle = "CEO";
@@ -2326,33 +2470,107 @@ namespace bdd_tests
                 NgWebElement uploadNOA = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
                 uploadNOA.SendKeys(NOAPath);
 
-                // open key personnel form
+                // open key personnel #1 form
                 NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));
                 openKeyPersonnelForm.Click();
 
-                // enter key personnel first name
+                // enter key personnel #1 first name
                 NgWebElement openKeyPersonnelFirst = ngDriver.FindElement(By.CssSelector("[formcontrolname='firstNameNew']"));
                 openKeyPersonnelFirst.SendKeys(keyPersonnelFirst);
 
-                // enter key personnel last name
+                // enter key personnel #1 last name
                 NgWebElement openKeyPersonnelLast = ngDriver.FindElement(By.CssSelector("[formcontrolname='lastNameNew']"));
                 openKeyPersonnelLast.SendKeys(keyPersonnelLast);
 
-                // select key personnel role
+                // select key personnel #1 role
                 NgWebElement openKeyPersonnelRole = ngDriver.FindElement(By.CssSelector("[formcontrolname='isDirectorNew']"));
                 openKeyPersonnelRole.Click();
 
-                // enter key personnel title
+                // enter key personnel #1 title
                 NgWebElement openKeyPersonnelTitle = ngDriver.FindElement(By.CssSelector("[formcontrolname='titleNew']"));
                 openKeyPersonnelTitle.SendKeys(keyPersonnelTitle);
 
-                // enter key personnel email
+                // enter key personnel #1 email
                 NgWebElement openKeyPersonnelEmail = ngDriver.FindElement(By.CssSelector("[formcontrolname='emailNew']"));
                 openKeyPersonnelEmail.SendKeys(keyPersonnelEmail);
 
-                // select key person DOB
+                // select key person #1 DOB
                 NgWebElement openKeyPersonDOB = ngDriver.FindElement(By.CssSelector("[formcontrolname='dateofBirthNew']"));
                 openKeyPersonDOB.Click();
+
+                // select the date
+                SharedCalendarDate();
+
+                /********** Key Personnel #2 **********/
+
+                // create the second key personnel #2 data
+                string keyPersonnelFirst2 = "KeyPersonnel2";
+                string keyPersonnelEmail2 = "keypersonnel2@publiccorp.com";
+
+                // open key personnel #2 form
+                NgWebElement openKeyPersonnelForm2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));
+                openKeyPersonnelForm2.Click();
+
+                // enter key personnel #2 first name
+                NgWebElement openKeyPersonnelFirst2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(1) input[formControlName='firstNameNew']"));
+                openKeyPersonnelFirst2.SendKeys(keyPersonnelFirst2);
+
+                // enter key personnel #2 last name
+                NgWebElement openKeyPersonnelLast2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(2) input[formControlName='lastNameNew']"));
+                openKeyPersonnelLast2.SendKeys(keyPersonnelLast);
+
+                // select key personnel #2 role
+                NgWebElement openKeyPersonnelRole2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(3) input[formControlName='isDirectorNew']"));
+                openKeyPersonnelRole2.Click();
+
+                // enter key personnel #2 title
+                NgWebElement openKeyPersonnelTitle2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(4) input[formControlName='titleNew']"));
+                openKeyPersonnelTitle2.SendKeys(keyPersonnelTitle);
+
+                // enter key personnel #2 email
+                NgWebElement openKeyPersonnelEmail2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(5) input[formControlName='emailNew']"));
+                openKeyPersonnelEmail2.SendKeys(keyPersonnelEmail2);
+
+                // select key person #2 DOB
+                NgWebElement openKeyPersonDOB2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(6) input[formControlName='dateofBirthNew']"));
+                openKeyPersonDOB2.Click();
+
+                // select the date
+                SharedCalendarDate();
+
+                /********** Key Personnel #3 **********/
+
+                // create the second key personnel #3 data
+                string keyPersonnelFirst3 = "KeyPersonnel3";
+                string keyPersonnelEmail3 = "keypersonnel3@publiccorp.com";
+
+                // open key personnel #3 form
+                NgWebElement openKeyPersonnelForm3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));
+                openKeyPersonnelForm3.Click();
+
+                // enter key personnel #3 first name
+                NgWebElement openKeyPersonnelFirst3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(1) input[formControlName='firstNameNew']"));
+                openKeyPersonnelFirst3.SendKeys(keyPersonnelFirst3);
+
+                // enter key personnel #3 last name
+                NgWebElement openKeyPersonnelLast3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(2) input[formControlName='lastNameNew']"));
+                openKeyPersonnelLast3.SendKeys(keyPersonnelLast);
+
+                // select key personnel #3 role
+                NgWebElement openKeyPersonnelRole3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(3) input[formControlName='isDirectorNew']"));
+                openKeyPersonnelRole3.Click();
+
+                // enter key personnel #3 title
+                NgWebElement openKeyPersonnelTitle3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(4) input[formControlName='titleNew']"));
+                openKeyPersonnelTitle3.SendKeys(keyPersonnelTitle);
+
+                // enter key personnel #3 email
+                NgWebElement openKeyPersonnelEmail3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(5) input[formControlName='emailNew']"));
+                openKeyPersonnelEmail3.SendKeys(keyPersonnelEmail3);
+
+                // select key person #3 DOB
+                NgWebElement openKeyPersonDOB3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(6) input[formControlName='dateofBirthNew']"));
+                openKeyPersonDOB3.Click();
 
                 // select the date
                 SharedCalendarDate();
@@ -2784,10 +3002,6 @@ namespace bdd_tests
             // click on the Confirm button
             NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] .fa-save span"));
             uiConfirmButton2.Click();
-
-            // click on submit org info button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
-            orgInfoButton.Click();
         }
 
 
@@ -3067,7 +3281,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"I add a second business shareholder with the same individual as a director and a shareholder")]
+        [And(@"I add a second individual as a director and a shareholder to the business shareholder")]
         public void BusinessShareholderSameDirShare2()
         {
             // create business shareholder key personnel #2 data
@@ -3184,6 +3398,23 @@ namespace bdd_tests
         }
 
 
+        [And(@"I remove the latest director after saving")]
+        public void RemoveLatestDirectorAfterSave()
+        {
+            // delete the most recent director
+            NgWebElement uiRemoveDirector = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[2]/td[7]/i[2]/span"));
+            uiRemoveDirector.Click();
+        }
+
+
+        [And(@"I remove the latest shareholder after saving")]
+        public void RemoveLatestShareholderAfterSave()
+        {
+            // delete the most recent shareholder 
+            NgWebElement uiRemoveShareholder = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-3']/div/section/app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr[2]/td[6]/i[2]/span"));
+            uiRemoveShareholder.Click();
+        }
+
 
         [And(@"the latest director and shareholder is removed")]
         public void LatestDirectorShareholderRemoved()
@@ -3243,6 +3474,106 @@ namespace bdd_tests
             // click on the Licences link
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
+        }
+
+
+        [And(@"I add in business shareholders of different business types")]
+        public void MixedBusinessShareholders()
+        {
+            /********** Business Shareholder - Public Corporation **********/
+
+            // create public corporation test data
+            string businessNamePublicCorp = "Public Corporation";
+            string sharesPublicCorp = "10";
+            string emailAddressPublicCorp = "public@corporation.com";
+
+            // click on the public corporation Add Business Shareholder button
+            NgWebElement addPublicCorporationRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] button"));
+            addPublicCorporationRow.Click();
+
+            // add the public corporation business name
+            NgWebElement addPublicCorporationBizName = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='businessNameNew']"));
+            addPublicCorporationBizName.SendKeys(businessNamePublicCorp);
+
+            // add the public corporation number of shares
+            NgWebElement addPublicCorporationShares = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
+            addPublicCorporationShares.SendKeys(sharesPublicCorp);
+
+            // select the public corporation organization type
+            NgWebElement addOrganizationTypePublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='PublicCorporation']"));
+            addOrganizationTypePublicCorp.Click();
+
+            // add the public corporation email address
+            NgWebElement addEmailAddressPublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='emailNew']"));
+            addEmailAddressPublicCorp.SendKeys(emailAddressPublicCorp);
+
+            // click on the public corporation Confirm button
+            NgWebElement confirmButtonPublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
+            confirmButtonPublicCorp.Click();
+
+            // upload the notice of articles for public corporation
+
+            // add public corporation key personnel
+
+
+
+            /********** Business Shareholder - Partnership **********/
+
+            // create partnership test data
+            string businessNamePartnership = "Partnership";
+            string sharesPartnership = "10";
+            string emailAddressPartnership = "partnership@test.com";
+
+            // click on the partnership Add Business Shareholder button
+            NgWebElement addPartnershipRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] button"));
+            addPartnershipRow.Click();
+
+            // add the partnership business name
+            NgWebElement addPartnershipBizName = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='businessNameNew']"));
+            addPartnershipBizName.SendKeys(businessNamePartnership);
+
+            // add the partnership number of shares
+            NgWebElement addPartnershipShares = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
+            addPartnershipShares.SendKeys(sharesPartnership);
+
+            // select the partnership organization type
+            NgWebElement addOrganizationTypePartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='Partnership']"));
+            addOrganizationTypePartnership.Click();
+
+            // add the partnership email address
+            NgWebElement addEmailAddressPartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='emailNew']"));
+            addEmailAddressPartnership.SendKeys(emailAddressPartnership);
+
+            // click on the partnership Confirm button
+            NgWebElement confirmButtonPartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
+            confirmButtonPartnership.Click();
+
+
+
+            /********** Business Shareholder - Sole Proprietorship **********/
+
+
+            /********** Business Shareholder - Society **********/
+
+
+            /********** Business Shareholder - Trust **********/
+
+
+
+        }
+
+
+        [And(@"I review the security screening requirements for mixed business shareholder types")]
+        public void SecurityScreeningsMixedBusinessShareholders()
+        {
+
+        }
+
+
+        [And(@"the mixed business shareholder org structure is correct")]
+        public void ReviewMixedBusinessShareholdersOrgStructure()
+        {
+
         }
     }
 }
