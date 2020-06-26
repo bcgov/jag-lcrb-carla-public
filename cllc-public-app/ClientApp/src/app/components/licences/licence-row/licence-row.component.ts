@@ -1,14 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { forkJoin, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { ApplicationDataService } from '@app/services/application-data.service';
 import { LicenseDataService } from '@app/services/license-data.service';
 import { Router } from '@angular/router';
-import { Application } from '@models/application.model';
-import { ApplicationSummary } from '@models/application-summary.model';
 import { ApplicationTypeNames } from '@models/application-type.model';
-import { Account } from '@models/account.model';
-import { FeatureFlagService } from '@services/feature-flag.service';
 import { FormBase } from '@shared/form-base';
 import { takeWhile } from 'rxjs/operators';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
@@ -17,7 +13,7 @@ import { AppState } from '@app/app-state/models/app-state';
 import * as moment from 'moment';
 import { PaymentDataService } from '@services/payment-data.service';
 import { EstablishmentDataService } from '@services/establishment-data.service';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Establishment } from '@models/establishment.model';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { EventStatus } from '@models/licence-event.model';
@@ -39,7 +35,6 @@ const RENEWAL_DUE = 'Renewal Due';
   styleUrls: ['./licence-row.component.scss']
 })
 export class LicenceRowComponent extends FormBase implements OnInit {
-    licenceTransferFeatureOn = false;
     mainForm: FormGroup;
     busy: Subscription;
     licenceForms = {};
@@ -56,15 +51,9 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         private snackBar: MatSnackBar,
         private paymentService: PaymentDataService,
         private establishmentService: EstablishmentDataService,
-        public featureFlagService: FeatureFlagService,
         private licenceEventsService: LicenceEventsService,
         public fb: FormBuilder) {
         super();
-        featureFlagService.featureOn('LicenceTransfer')
-            .pipe(takeWhile(() => this.componentActive))
-            .subscribe((featureOn: boolean) => {
-                this.licenceTransferFeatureOn = featureOn;
-            });
         this.mainForm = new FormGroup({});
     }
 
@@ -147,7 +136,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
     actionsVisible(licence: ApplicationLicenseSummary) {
         let retVal = true;
-        if (licence.transferRequested && this.licenceTransferFeatureOn) {
+        if (licence.transferRequested) {
             if (licence.licenceTypeCategory === 'Cannabis' && licence.isDeemed) {
                 retVal = false;
             } else if (licence.licenceTypeCategory === 'Liquor' && !licence.isDeemed) {
@@ -212,7 +201,6 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         const now = moment(new Date()).startOf('day');
         const expiry = moment(licence.expiryDate).startOf('day');
         const diff = expiry.diff(now, 'days') + 1;
-        console.log(diff)
         return licence.status === 'Expired' && diff <= 30;
     }
 
