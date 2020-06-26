@@ -3527,11 +3527,57 @@ namespace bdd_tests
             NgWebElement confirmButtonPublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
             confirmButtonPublicCorp.Click();
 
-            // TODO: upload the notice of articles for public corporation
+            // find the upload test files in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
 
-            // TODO: add public corporation key personnel
+            // upload a notice of articles document
+            string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
+            NgWebElement uploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[21]"));
+            uploadSignage.SendKeys(noticeOfArticles);
 
-            /********** Business Shareholder - Partnership **********
+            // click on the Add Key Personnel button
+            NgWebElement addPublicCorporationKeyPersonnel = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] #cdk-accordion-child-1 [changetypesuffix='Leadership'] button"));
+            addPublicCorporationKeyPersonnel.Click();
+
+            // create public corp key personnel data
+            string firstName = "Key Personnel";
+            string lastName = "Public Corporation";
+            string title = "CTO";
+            string email = "keypersonnel@pubcorp.com";
+
+            // enter the key personnel first name 
+            NgWebElement uiKeyPersonnelFirstName = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='firstNameNew']"));
+            uiKeyPersonnelFirstName.SendKeys(firstName);
+
+            // enter the key personnel last name 
+            NgWebElement uiKeyPersonnelLastName = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='lastNameNew']"));
+            uiKeyPersonnelLastName.SendKeys(lastName);
+
+            // click the key personnel checkbox
+            NgWebElement uiKeyPersonnelRole = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='isOfficerNew']"));
+            uiKeyPersonnelRole.Click();
+
+            // enter the key personnel title
+            NgWebElement uiKeyPersonnelTitle = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='titleNew']"));
+            uiKeyPersonnelTitle.SendKeys(title);
+
+            // enter the key personnel email 
+            NgWebElement uiKeyPersonnelEmail = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='emailNew']"));
+            uiKeyPersonnelEmail.SendKeys(email);
+
+            // select the key personnel DOB
+            NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='dateofBirthNew']"));
+            openKeyPersonnelDOB.Click();
+
+            SharedCalendarDate();
+
+            // click on the Confirm button
+            NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] .fa-save span"));
+            uiConfirmButton.Click();
+
+            /********** Business Shareholder - Partnership **********/
 
             // create partnership test data
             string businessNamePartnership = "Partnership";
@@ -3539,7 +3585,7 @@ namespace bdd_tests
             string emailAddressPartnership = "partnership@test.com";
 
             // click on the partnership Add Business Shareholder button
-            NgWebElement addPartnershipRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] button"));
+            NgWebElement addPartnershipRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
             addPartnershipRow.Click();
 
             // add the partnership business name
