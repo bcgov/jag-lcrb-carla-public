@@ -170,6 +170,7 @@ import { VersionInfoDataService } from '@services/version-info-data.service';
 import { VersionInfoDialogComponent } from '@components/version-info/version-info-dialog.component';
 import { FederalReportingComponent } from '@components/federal-reporting/federal-reporting.component';
 import { LicencesComponent } from '@components/licences/licences.component';
+import { LicenceRowComponent } from '@components/licences/licence-row/licence-row.component';
 import { ApplicationsComponent } from '@components/applications/applications.component';
 import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
@@ -301,6 +302,7 @@ import { AdditionalPidsComponent } from './components/applications/application/t
     ApplicationLicenseeChangesComponent,
     VersionInfoDialogComponent,
     LicencesComponent,
+    LicenceRowComponent,
     ApplicationsComponent,
     AssociateListComponent,
     OrgStructureComponent,

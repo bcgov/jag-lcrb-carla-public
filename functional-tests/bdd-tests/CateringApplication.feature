@@ -124,4 +124,6 @@ Scenario: Catering Application Validation
     And I review the organization structure
     And I submit the organization structure
     And I do not complete the catering application correctly
-    Then the expected error messages are displayed
+    And the expected Catering error messages are displayed
+    And the account is deleted
+    Then I see the login page
