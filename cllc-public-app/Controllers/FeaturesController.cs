@@ -27,11 +27,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public List<string> GetFeatureList()
         {
             var features = new List<string>();
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_CRS_RENEWAL"]))
-            {
-                features.Add("CRS-Renewal");
-                features.Add("Liquor-Licence-Renewal");
-            }
 
             if (!string.IsNullOrEmpty(_configuration["FEATURE_INDIGENOUS_NATION"]))
             {
@@ -43,11 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("Maps");
             }
 
-            if (!String.IsNullOrEmpty(_configuration["FEATURE_LICENCE_TRANSFER"]))
-            {
-                features.Add("LicenceTransfer");
-            }
-            if (!String.IsNullOrEmpty(_configuration["FEATURE_LICENSEE_CHANGES"]))
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_LICENSEE_CHANGES"]))
             {
                 features.Add("LicenseeChanges");
             }
