@@ -9,6 +9,8 @@ namespace Gov.Lclb.Cllb.Public.Utils
     public static class StatusUtility
     {
         const string STATUS_ACTIVE = "Active";
+        const string STATUS_PAYMENT_REQUIRED = "Payment Required";
+        const string STATUS_RENEWAL_DUE = "Renewal Due";
 
         public static string GetTranslatedApplicationStatus(MicrosoftDynamicsCRMadoxioApplication application)
         {
@@ -19,6 +21,10 @@ namespace Gov.Lclb.Cllb.Public.Utils
             if (application.AdoxioAssignedLicence != null && shownStatus == "Approved")
             {
                 shownStatus = STATUS_ACTIVE;
+                if (application.AdoxioLicencefeeinvoicepaid != true && application.AdoxioLicenceType != null && application.AdoxioApplicationTypeId.AdoxioName == "Cannabis Retail Store")
+                {
+                    shownStatus = STATUS_PAYMENT_REQUIRED;
+                }
             }
             else
             {
