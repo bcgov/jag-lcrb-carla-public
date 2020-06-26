@@ -49,7 +49,7 @@
                             <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
                         </a>
                     </div>
-                    <div *ngIf="!item.isOperated && isActiveOrRecentlyExpired(item) && isAboutToExpire(item.expiryDate)">
+                    <div *ngIf="!item.isOperated && (isRecentlyExpired(item) || (isActive(item) && isAboutToExpire(item.expiryDate)))">
                         <a href="javascript: void(0);" (click)="startRenewal(item)" appRemoveIfFeatureOff="CRS-Renewal" class="missing">
                             <span><i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>Renew Licence</span>
                         </a>

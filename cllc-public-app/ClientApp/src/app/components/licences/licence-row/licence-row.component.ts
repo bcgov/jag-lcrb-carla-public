@@ -211,7 +211,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     isRecentlyExpired(licence: ApplicationLicenseSummary) {
         const now = moment(new Date()).startOf('day');
         const expiry = moment(licence.expiryDate).startOf('day');
-        const diff = now.diff(expiry, 'days') + 1;
+        const diff = expiry.diff(now, 'days') + 1;
+        console.log(diff)
         return licence.status === 'Expired' && diff <= 30;
     }
 
