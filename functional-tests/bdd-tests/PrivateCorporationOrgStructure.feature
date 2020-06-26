@@ -146,3 +146,25 @@ Scenario: Save for Later feature for org structure
     And the saved org structure is present
     And the account is deleted
     Then I see the login page
+
+@e2e @cannabis @privatecorporation @validation
+Scenario: CRS application with mixed business shareholder types
+    Given I am logged in to the dashboard as a private corporation
+    And the account is deleted
+    And I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
+    And I review the account profile
+    And I review the organization structure
+    And I add in business shareholders of different business types
+    And I submit the organization structure
+    And I complete the Cannabis Retail Store application
+    And I review the security screening requirements for mixed business shareholder types
+    And I click on the Pay for Application button
+    And I enter the payment information
+    And I confirm the payment receipt for a Cannabis Retail Store application
+    And I return to the dashboard
+    And I click on the Complete Organization Information button
+    And the mixed business shareholder org structure is correct
+    And the account is deleted
+    Then I see the login page
