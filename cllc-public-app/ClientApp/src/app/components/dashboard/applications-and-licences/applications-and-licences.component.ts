@@ -304,7 +304,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       data => {
         const route: any[] = [`/multi-step-application/${data.id}`];
 
-        route.push({ useDynamicFormMode: true });
+        
 
         this.router.navigate(route);
       },
@@ -325,9 +325,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
-        const route: any[] = [`/application/${data.id}`];
-
-        route.push({ useDynamicFormMode: true });
+        const route: any[] = [`/application/${data.id}`];        
 
         this.router.navigate(route);
       },
@@ -349,9 +347,6 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         const route: any[] = [`/multi-step-application/${data.id}`];
-        //const route: any[] = [`/application/${data.id}`];
-
-        route.push({ useDynamicFormMode: true });
 
         this.router.navigate(route);
       },
@@ -373,8 +368,6 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         const route: any[] = [`/application/${data.id}`];
-
-        route.push({ useDynamicFormMode: true });
 
         this.router.navigate(route);
       },
