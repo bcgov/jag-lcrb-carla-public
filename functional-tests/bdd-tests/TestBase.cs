@@ -3475,5 +3475,105 @@ namespace bdd_tests
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
         }
+
+
+        [And(@"I add in business shareholders of different business types")]
+        public void MixedBusinessShareholders()
+        {
+            /********** Business Shareholder - Public Corporation **********/
+
+            // create public corporation test data
+            string businessNamePublicCorp = "Public Corporation";
+            string sharesPublicCorp = "10";
+            string emailAddressPublicCorp = "public@corporation.com";
+
+            // click on the public corporation Add Business Shareholder button
+            NgWebElement addPublicCorporationRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] button"));
+            addPublicCorporationRow.Click();
+
+            // add the public corporation business name
+            NgWebElement addPublicCorporationBizName = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='businessNameNew']"));
+            addPublicCorporationBizName.SendKeys(businessNamePublicCorp);
+
+            // add the public corporation number of shares
+            NgWebElement addPublicCorporationShares = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
+            addPublicCorporationShares.SendKeys(sharesPublicCorp);
+
+            // select the public corporation organization type
+            NgWebElement addOrganizationTypePublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='PublicCorporation']"));
+            addOrganizationTypePublicCorp.Click();
+
+            // add the public corporation email address
+            NgWebElement addEmailAddressPublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='emailNew']"));
+            addEmailAddressPublicCorp.SendKeys(emailAddressPublicCorp);
+
+            // click on the public corporation Confirm button
+            NgWebElement confirmButtonPublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
+            confirmButtonPublicCorp.Click();
+
+            // upload the notice of articles for public corporation
+
+            // add public corporation key personnel
+
+
+
+            /********** Business Shareholder - Partnership **********/
+
+            // create partnership test data
+            string businessNamePartnership = "Partnership";
+            string sharesPartnership = "10";
+            string emailAddressPartnership = "partnership@test.com";
+
+            // click on the partnership Add Business Shareholder button
+            NgWebElement addPartnershipRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] button"));
+            addPartnershipRow.Click();
+
+            // add the partnership business name
+            NgWebElement addPartnershipBizName = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='businessNameNew']"));
+            addPartnershipBizName.SendKeys(businessNamePartnership);
+
+            // add the partnership number of shares
+            NgWebElement addPartnershipShares = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
+            addPartnershipShares.SendKeys(sharesPartnership);
+
+            // select the partnership organization type
+            NgWebElement addOrganizationTypePartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='Partnership']"));
+            addOrganizationTypePartnership.Click();
+
+            // add the partnership email address
+            NgWebElement addEmailAddressPartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='emailNew']"));
+            addEmailAddressPartnership.SendKeys(emailAddressPartnership);
+
+            // click on the partnership Confirm button
+            NgWebElement confirmButtonPartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
+            confirmButtonPartnership.Click();
+
+
+
+            /********** Business Shareholder - Sole Proprietorship **********/
+
+
+            /********** Business Shareholder - Society **********/
+
+
+            /********** Business Shareholder - Trust **********/
+
+
+
+        }
+
+
+        [And(@"I review the security screening requirements for mixed business shareholder types")]
+        public void SecurityScreeningsMixedBusinessShareholders()
+        {
+
+        }
+
+
+        [And(@"the mixed business shareholder org structure is correct")]
+        public void ReviewMixedBusinessShareholdersOrgStructure()
+        {
+
+        }
     }
 }
