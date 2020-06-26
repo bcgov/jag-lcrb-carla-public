@@ -9,10 +9,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Inactive = 2,
         Expired = 845280000,
         Cancelled = 845280001,
-        Suspended = 845280002,
-        Dormant = 845280003,
-        TransferRequested = 845280004,
-        PendingFistYearFee = 845280005,
+        PendingLicenceFee = 845280005,
+        PreInspection = 845280006
     }
 
     public class License
