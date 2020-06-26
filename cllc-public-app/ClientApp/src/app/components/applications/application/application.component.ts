@@ -185,10 +185,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       connectedGrocery: ['', []],
       authorizedToSubmit: [''],
       signatureAgreement: [''],
-      mfgType: ['', []],
-      brewPub: ['', []],
-      pipedIn: ['', []],
-      neutralGrain: ['', []],
       policeJurisdiction: [''],
       indigenousNation: [''],
       zoningPermitsMFG: ['', []],
@@ -521,33 +517,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.form.get('proposedTPO').patchValue(proposedAccount);
   }
 
-
-  /* Helper functions for the Manufactuer Licence Business Plan
-    There are a lot of conditional requirements depending on what is selected.
-    Most are self explanatory
-  */
-
-  hasType(): boolean {
-    // to do, set validation requirements
-    return this.form.get('mfgType').value;
-  }
-
-  isBrewery(): boolean {
-    // to do, set validation requirements
-    return this.form.get('mfgType').value === "Brewery";
-  }
-  isWinery(): boolean {
-    // to do, set validation requirements
-    return this.form.get('mfgType').value === "Winery";
-  }
-  isDistillery(): boolean {
-    return this.form.get('mfgType').value === "Distillery";
-  }
-
-  isBrewPub(): boolean {
-    // to do, set validation requirements
-    return this.form.get('mfgType').value === "Brewery" && this.form.get('brewPub').value === "Yes";
-  }
 
   isRAS(): boolean {
     return this.application.licenseType === 'Rural Agency';
