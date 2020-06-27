@@ -41,16 +41,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
     }
 
-    public enum TransferRequested
+    public enum EnumYesNo
     {
         Yes = 845280001,
         No = 845280000
-    }
-
-    public enum TPORequested
-    {
-        Yes = 845280001,
-        No = 845280000   
     }
 
     public enum ApplicationTypeCategory{
@@ -93,12 +87,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string Status { get; set; }
 
         public bool StoreInspected { get; set; }
+        public bool TransferRequested { get; set; }
 
-        [JsonConverter(typeof(StringEnumConverter))]
-        public TransferRequested? TransferRequested { get; set; }
-
-        [JsonConverter(typeof(StringEnumConverter))]
-        public TPORequested? TPORequested { get; set; }
+        public bool Dormant { get; set; }
+        public bool Operated { get; set; }
+        public bool Suspended { get; set; }
+        
+        
+        public bool TPORequested { get; set; }
         
 
         public string ThirdPartyOperatorAccountName { get; set; }
