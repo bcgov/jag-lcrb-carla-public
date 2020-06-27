@@ -3504,7 +3504,7 @@ namespace bdd_tests
             string emailAddressPublicCorp = "public@corporation.com";
 
             // click on the Add Business Shareholder button
-            NgWebElement addPublicCorporationRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] button"));
+            NgWebElement addPublicCorporationRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
             addPublicCorporationRow.Click();
 
             // add the public corporation business name
