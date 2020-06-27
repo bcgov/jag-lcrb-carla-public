@@ -3609,12 +3609,12 @@ namespace bdd_tests
             confirmButtonPartnership.Click();
 
             // upload partnership agreement
-            string partnershipAgreement = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-            NgWebElement uploadPartner = ngDriver.FindElement(By.XPath("(//input[@type='file'])[30]"));
+            string partnershipAgreement = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
+            NgWebElement uploadPartner = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[2]/section/app-file-uploader/div/ngx-file-drop/div/div/input"));
             uploadPartner.SendKeys(partnershipAgreement);
 
             // click on the individual partner row
-            NgWebElement addPartnerRow = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] button"));
+            NgWebElement addPartnerRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[3]/section[1]/app-associate-list/div/button"));
             addPartnerRow.Click();
 
             // create the individual partner data
@@ -3720,30 +3720,81 @@ namespace bdd_tests
             string emailAddressSociety = "society@test.com";
 
             // click on the society Add Business Shareholder button
-            NgWebElement addSocietyRow = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement addSocietyRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
             addSocietyRow.Click();
 
             // add the society business name
-            NgWebElement addSocietyBizName = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement addSocietyBizName = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] input[formcontrolname='businessNameNew']"));
             addSocietyBizName.SendKeys(businessNameSociety);
 
             // add the society number of shares
-            NgWebElement addSocietyShares = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement addSocietyShares = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
             addSocietyShares.SendKeys(sharesSociety);
 
             // select the society organization type
-            NgWebElement addOrganizationTypeSociety = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement addOrganizationTypeSociety = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='Society']"));
             addOrganizationTypeSociety.Click();
 
             // add the society email address
-            NgWebElement addEmailAddressSociety = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement addEmailAddressSociety = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] input[formcontrolname='emailNew']"));
             addEmailAddressSociety.SendKeys(emailAddressSociety);
 
             // click on the society Confirm button
-            NgWebElement confirmButtonSociety = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement confirmButtonSociety = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] .fa-save span"));
             confirmButtonSociety.Click();
 
-            /********** Business Shareholder - Trust **********
+            // create society data
+            string membershipFee = "1000";
+            string memberCount = "100";
+            string directorFirstName = "Director";
+            string directorLastName = "Society";
+            string directorTitle = "CFO";
+            string directorEmail = "cfo@society.com";
+
+            // add the society's annual membership fee
+            NgWebElement addMembershipFee = ngDriver.FindElement(By.CssSelector("input[formcontrolname='annualMembershipFee']"));
+            addMembershipFee.SendKeys(membershipFee);
+
+            // add the society's number of members
+            NgWebElement addMembershipCount = ngDriver.FindElement(By.CssSelector("input[formcontrolname='numberOfMembers']"));
+            addMembershipCount.SendKeys(memberCount);
+
+            // click on the director/officer row
+            NgWebElement openDirectorRow = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] button"));
+            openDirectorRow.Click();
+
+            // add the director first name
+            NgWebElement addDirectorFirst = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] input[formcontrolname='firstNameNew']"));
+            addDirectorFirst.SendKeys(directorFirstName);
+
+            // add the director last name
+            NgWebElement addDirectorLast = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] input[formcontrolname='lastNameNew']"));
+            addDirectorLast.SendKeys(directorLastName);
+
+            // select the director position
+            NgWebElement addDirectorPosition = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] input[formcontrolname='isOfficerNew']"));
+            addDirectorPosition.Click();
+
+            // add the director title
+            NgWebElement addDirectorTitle = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] input[formcontrolname='titleNew']"));
+            addDirectorTitle.SendKeys(directorTitle);
+
+            // add the director email
+            NgWebElement addDirectorEmail = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] input[formcontrolname='emailNew']"));
+            addDirectorEmail.SendKeys(directorEmail);
+
+            // add the director DOB
+            NgWebElement addDirectorDOB = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] input[formcontrolname='dateofBirthNew']"));
+            addDirectorDOB.Click();
+
+            SharedCalendarDate();
+
+            // click on director confirm button
+            NgWebElement confirmDirector = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] .fa-save span"));
+            confirmDirector.Click();
+
+
+            /********** Business Shareholder - Trust **********/
 
             // create trust test data
             string businessNameTrust = "Trust";
@@ -3751,7 +3802,7 @@ namespace bdd_tests
             string emailAddressTrust = "trust@test.com";
 
             // click on the trust Add Business Shareholder button
-            NgWebElement addTrustRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] button"));
+            NgWebElement addTrustRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
             addTrustRow.Click();
 
             // add the trust business name
@@ -3763,7 +3814,7 @@ namespace bdd_tests
             addTrustShares.SendKeys(sharesTrust);
 
             // select the trust organization type
-            NgWebElement addOrganizationTypeTrust = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='Partnership']"));
+            NgWebElement addOrganizationTypeTrust = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='Trust']"));
             addOrganizationTypeTrust.Click();
 
             // add the trust email address
@@ -3772,7 +3823,38 @@ namespace bdd_tests
 
             // click on the trust Confirm button
             NgWebElement confirmButtonTrust = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
-            confirmButtonTrust.Click();*/
+            confirmButtonTrust.Click();
+
+            // click on add trustee button
+            NgWebElement addTrustee = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] button"));
+            confirmButtonTrust.Click();
+
+            // create trustee test data
+            string firstNameTrustee = "Trustee";
+            string lastNameTrustee = "Trust";
+            string emailAddressTrustee = "trustee@test.com";
+
+            // add trustee first name
+            NgWebElement addTrusteeFirst = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] input[formcontrolname='firstNameNew']"));
+            addTrusteeFirst.SendKeys(firstNameTrustee);
+
+            // add trustee last name
+            NgWebElement addTrusteeLast = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] input[formcontrolname='lastNameNew']"));
+            addTrusteeLast.SendKeys(lastNameTrustee);
+
+            // add trustee email
+            NgWebElement addTrusteeEmail = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] input[formcontrolname='emailNew']"));
+            addTrusteeEmail.SendKeys(emailAddressTrustee);
+
+            // add trustee DOB
+            NgWebElement addTrusteeDOB = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] input[formcontrolname='dateofBirthNew']"));
+            addTrusteeDOB.Click();
+
+            SharedCalendarDate();
+
+            // click on trustee confirm button
+            NgWebElement confirmTrustee = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] .fa-save span"));
+            confirmTrustee.Click();
         }
 
 
