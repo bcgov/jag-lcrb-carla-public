@@ -3608,11 +3608,6 @@ namespace bdd_tests
             NgWebElement confirmButtonPartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
             confirmButtonPartnership.Click();
 
-            // upload partnership agreement
-            string partnershipAgreement = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-            NgWebElement uploadPartner = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[2]/section/app-file-uploader/div/ngx-file-drop/div/div/input"));
-            uploadPartner.SendKeys(partnershipAgreement);
-
             // click on the individual partner row
             NgWebElement addPartnerRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[3]/section[1]/app-associate-list/div/button"));
             addPartnerRow.Click();
@@ -3648,6 +3643,18 @@ namespace bdd_tests
             // click on the individual partner confirm button
             NgWebElement uiPartnerConfirm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] .fa-save span"));
             uiPartnerConfirm.Click();
+
+            // click on Save for Later button
+            //NgWebElement saveForLater = ngDriver.FindElement(By.XPath("//button[contains(.,' SAVE FOR LATER ')]"));
+            //saveForLater.Click();
+
+            // click on Complete Organization Information button
+            CompleteOrgInfo();
+
+            // upload partnership agreement
+            //string partnershipAgreement = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
+            //NgWebElement uploadPartner = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[2]/section/app-file-uploader/div/ngx-file-drop/div/div/input"));
+            //uploadPartner.SendKeys(partnershipAgreement);
 
             /********** Business Shareholder - Sole Proprietorship **********/
 
@@ -3710,7 +3717,6 @@ namespace bdd_tests
             // click on leader confirm button
             NgWebElement confirmSoleProprietorship = ngDriver.FindElement(By.CssSelector("[addlabel='Add Leader'][changetypesuffix='Leadership'] .fa-save span"));
             confirmSoleProprietorship.Click();
-
 
             /********** Business Shareholder - Society **********/
 
@@ -3792,7 +3798,6 @@ namespace bdd_tests
             // click on director confirm button
             NgWebElement confirmDirector = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] .fa-save span"));
             confirmDirector.Click();
-
 
             /********** Business Shareholder - Trust **********/
 
