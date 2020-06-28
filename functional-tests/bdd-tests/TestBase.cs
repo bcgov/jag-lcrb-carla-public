@@ -3577,84 +3577,12 @@ namespace bdd_tests
             NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] .fa-save span"));
             uiConfirmButton.Click();
 
-            /********** Business Shareholder - Partnership **********/
+            // click on Save for Later button - set up for LCSD-3455
+            //NgWebElement saveForLater = ngDriver.FindElement(By.XPath("//button[contains(.,' SAVE FOR LATER ')]"));
+            //saveForLater.Click();
 
-            // create partnership test data
-            string businessNamePartnership = "Partnership";
-            string sharesPartnership = "10";
-            string emailAddressPartnership = "partnership@test.com";
-
-            // click on the partnership Add Business Shareholder button
-            NgWebElement addPartnershipRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
-            addPartnershipRow.Click();
-
-            // add the partnership business name
-            NgWebElement addPartnershipBizName = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='businessNameNew']"));
-            addPartnershipBizName.SendKeys(businessNamePartnership);
-
-            // add the partnership number of shares
-            NgWebElement addPartnershipShares = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
-            addPartnershipShares.SendKeys(sharesPartnership);
-
-            // select the partnership organization type
-            NgWebElement addOrganizationTypePartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='Partnership']"));
-            addOrganizationTypePartnership.Click();
-
-            // add the partnership email address
-            NgWebElement addEmailAddressPartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='emailNew']"));
-            addEmailAddressPartnership.SendKeys(emailAddressPartnership);
-
-            // click on the partnership Confirm button
-            NgWebElement confirmButtonPartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
-            confirmButtonPartnership.Click();
-
-            // click on the individual partner row
-            NgWebElement addPartnerRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[3]/section[1]/app-associate-list/div/button"));
-            addPartnerRow.Click();
-
-            // create the individual partner data
-            string firstNamePartner = "Individual";
-            string lastNamePartner = "Partner";
-            string percentage = "50";
-            string emailPartner = "individual@partner.com";
-
-            // add the individual partner first name
-            NgWebElement uiFirstNamePartner = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='firstNameNew']"));
-            uiFirstNamePartner.SendKeys(firstNamePartner);
-
-            // add the individual partner last name
-            NgWebElement uiLastNamePartner = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='lastNameNew']"));
-            uiLastNamePartner.SendKeys(lastNamePartner);
-
-            // add the individual partner percentage
-            NgWebElement uiPartnerPercentage = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='interestPercentageNew']"));
-            uiPartnerPercentage.SendKeys(percentage);
-
-            // add the individual partner email address
-            NgWebElement uiEmailPartner = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='emailNew']"));
-            uiEmailPartner.SendKeys(emailPartner);
-
-            // add the individual partner DOB
-            NgWebElement uiPartnerDOB = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='dateofBirthNew']"));
-            uiPartnerDOB.Click();
-
-            SharedCalendarDate();
-
-            // click on the individual partner confirm button
-            NgWebElement uiPartnerConfirm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] .fa-save span"));
-            uiPartnerConfirm.Click();
-
-            // click on Save for Later button
-            NgWebElement saveForLater = ngDriver.FindElement(By.XPath("//button[contains(.,' SAVE FOR LATER ')]"));
-            saveForLater.Click();
-
-            // click on Complete Organization Information button
-            CompleteOrgInfo();
-
-            // upload partnership agreement
-            //string partnershipAgreement = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-            //NgWebElement uploadPartner = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[2]/section/app-file-uploader/div/ngx-file-drop/div/div/input"));
-            //uploadPartner.SendKeys(partnershipAgreement);
+            // click on Complete Organization Information button - set up for LCSD-3455
+            //CompleteOrgInfo();
 
             /********** Business Shareholder - Sole Proprietorship **********/
 
@@ -3832,7 +3760,7 @@ namespace bdd_tests
 
             // click on add trustee button
             NgWebElement addTrustee = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] button"));
-            confirmButtonTrust.Click();
+            addTrustee.Click();
 
             // create trustee test data
             string firstNameTrustee = "Trustee";
@@ -3860,6 +3788,78 @@ namespace bdd_tests
             // click on trustee confirm button
             NgWebElement confirmTrustee = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] .fa-save span"));
             confirmTrustee.Click();
+
+            /********** Business Shareholder - Partnership **********
+
+            // create partnership test data
+            string businessNamePartnership = "Partnership";
+            string sharesPartnership = "10";
+            string emailAddressPartnership = "partnership@test.com";
+
+            // click on the partnership Add Business Shareholder button
+            NgWebElement addPartnershipRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
+            addPartnershipRow.Click();
+
+            // add the partnership business name
+            NgWebElement addPartnershipBizName = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='businessNameNew']"));
+            addPartnershipBizName.SendKeys(businessNamePartnership);
+
+            // add the partnership number of shares
+            NgWebElement addPartnershipShares = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
+            addPartnershipShares.SendKeys(sharesPartnership);
+
+            // select the partnership organization type
+            NgWebElement addOrganizationTypePartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='Partnership']"));
+            addOrganizationTypePartnership.Click();
+
+            // add the partnership email address
+            NgWebElement addEmailAddressPartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='emailNew']"));
+            addEmailAddressPartnership.SendKeys(emailAddressPartnership);
+
+            // click on the partnership Confirm button
+            NgWebElement confirmButtonPartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
+            confirmButtonPartnership.Click();
+
+            // click on the individual partner row
+            NgWebElement addPartnerRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-5']/div/section/app-org-structure/div/div[3]/section[1]/app-associate-list/div/button"));
+            addPartnerRow.Click();
+
+            // create the individual partner data
+            string firstNamePartner = "Individual";
+            string lastNamePartner = "Partner";
+            string percentage = "50";
+            string emailPartner = "individual@partner.com";
+
+            // add the individual partner first name
+            NgWebElement uiFirstNamePartner = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='firstNameNew']"));
+            uiFirstNamePartner.SendKeys(firstNamePartner);
+
+            // add the individual partner last name
+            NgWebElement uiLastNamePartner = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='lastNameNew']"));
+            uiLastNamePartner.SendKeys(lastNamePartner);
+
+            // add the individual partner percentage
+            NgWebElement uiPartnerPercentage = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='interestPercentageNew']"));
+            uiPartnerPercentage.SendKeys(percentage);
+
+            // add the individual partner email address
+            NgWebElement uiEmailPartner = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='emailNew']"));
+            uiEmailPartner.SendKeys(emailPartner);
+
+            // add the individual partner DOB
+            NgWebElement uiPartnerDOB = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='dateofBirthNew']"));
+            uiPartnerDOB.Click();
+
+            SharedCalendarDate();
+
+            // click on the individual partner confirm button
+            NgWebElement uiPartnerConfirm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] .fa-save span"));
+            uiPartnerConfirm.Click();
+
+            // upload partnership agreement
+            string partnershipAgreement = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
+            NgWebElement uploadPartner = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-5']/div/section/app-org-structure/div/div[2]/section/app-file-uploader/div/ngx-file-drop/div/div/input"));
+            uploadPartner.SendKeys(partnershipAgreement);*/
         }
 
 
