@@ -183,6 +183,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       description2: ['',[]],
       proposedChange: ['', [Validators.required]],
       connectedGrocery: ['', []],
+      sitePhotos: ['',[]],
       authorizedToSubmit: [''],
       signatureAgreement: [''],
       policeJurisdiction: [''],
@@ -513,6 +514,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return show;
   }
 
+  showSitePhotos() {
+    let show = (this.application && this.showFormControl(this.application.applicationType.sitePhotos));
+    //show = show && this.form.get('connectedGrocery').value === 'Yes';
+    return show;
+  }
+
   onAccountSelect(proposedAccount: TransferAccount) {
     this.form.get('proposedTPO').patchValue(proposedAccount);
   }
@@ -646,7 +653,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
           return of(true);
         })).subscribe(res => {
           this.saveComplete.emit(true);
-          this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.snackBar.open('Application Submitted to Local Government For Approval', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.router.navigateByUrl('/dashboard');
         });
     } else {
       this.showValidationMessages = true;
