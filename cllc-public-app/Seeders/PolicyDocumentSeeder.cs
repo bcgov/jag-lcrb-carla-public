@@ -23,7 +23,14 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         protected override void Invoke(AppDbContext context)
         {
-            UpdatePolicyDocuments(_dynamicsClient);
+            try
+            {
+                UpdatePolicyDocuments(_dynamicsClient);
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, "Unable to seed policy documents.");
+            }
 
         }
 
