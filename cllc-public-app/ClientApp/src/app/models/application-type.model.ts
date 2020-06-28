@@ -37,6 +37,7 @@ export class ApplicationType {
   floorPlan: FormControlState;
   sitePlan: FormControlState;
   connectedGroceryStore: FormControlState;
+  sitePhotos: FormControlState;
   publicCooler: FormControlState;
   showLiquorSitePlan: FormControlState;
   proofofZoning: FormControlState;
