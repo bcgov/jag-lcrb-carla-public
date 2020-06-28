@@ -221,8 +221,6 @@
               <div class="content-bottom">
               <p>Enter the local government (or indigenous nation) and police jurisdiction where the establishment will be located. Suggestions will be provided after you type the first three characters of the name.</p>
 
-              <section class="ngtest-lg-instructions" [innerHTML]="htmlContent?.lGInstructions "></section>
-
               <app-field label="Local Government/Indigenous Nation" [required]="false"
                 [valid]="isValidOrNotTouched('indigenousNation')" errorMessage="Please select value">
                 <input type="text" class="form-control" style="width: 500px;" placeholder=""
@@ -324,7 +322,7 @@
 
         <!-- Business Plan for Manufacturers-->
         
-        <section *ngIf="application?.licenseType === 'Manufacturer'">
+        <section *ngIf="application?.applicationType?.name === 'Manufacturer'">
           <app-business-plan *ngIf="application" [application]="application">
           </app-business-plan>
         </section>
@@ -449,7 +447,8 @@
         </section>
 
         <section *ngIf="application?.applicationType?.showDescription1">
-          <h3 class="blue-header">DESCRIPTION OF CHANGE</h3>
+          <h3 class="blue-header">DESCRIPTION OF PROPOSED CHANGE</h3>
+          <div *ngIf="application?.applicationType?.name != 'Picnic Area Endorsement'">
           <div class="padded-section">
             <app-field label="Please briefly outline the  proposed change" [required]="true" [isFullWidth]="true"
               [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
@@ -458,6 +457,17 @@
                 id="description1"></textarea>
             </app-field>
           </div>
+        </div>
+        <div *ngIf="application?.applicationType?.name === 'Picnic Area Endorsement'">
+          <div class="padded-section">
+            <app-field label="Describe proposed change(s) such as moving, adding or changing approved picnic area(s). Including any increase in capacity." [required]="true" [isFullWidth]="true"
+              [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
+              errorMessage="Please enter a description ">
+              <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000" minlength="10"
+                id="description1"></textarea>
+            </app-field>
+          </div>
+        </div>
         </section>
 
         <!-- Photos or Renderings of Signage-->
@@ -758,7 +768,7 @@
 
           </div>
 
-          <div *ngIf="application?.licenseType != 'Cannnabis Retail Store'">
+          <div *ngIf="application?.licenseType != 'Cannnabis Retail Store' && application?.applicationType?.name != 'Picnic Area Endorsement'">
             <p>A scaled site plan must show the following: </p>
             <ul>
               <li>location of the front entrance door of the proposed establishment</li>
@@ -766,6 +776,16 @@
                 any other buildings/businesses around the proposed establishment and the entrances to those buildings
               </li>
               <li>any relevant street names</li>
+            </ul>
+          </div>
+          <div *ngIf="application?.applicationType?.name === 'Picnic Area Endorsement'">
+            <p>Please provide a site plan (8.5" x 11") of your property showing the location and size of the existing and/or proposed picnic area(s) and the following:</p>
+            <ul>
+              <li>all buildings and their uses (i.e. storage, manufacturing buildings, personal residence, garage, other businesses, etc.)</li>
+              <li>all licensed areas (other endorsements or licences approved by the Branch)</li>
+              <li>vineyards/orchards/agricultural crops</li>
+              <li>private and public roadways and parking areas</li>
+              <li>any neighbouring residences within 50 metres of the proposed picnic area(s)</li>
             </ul>
           </div>
 
@@ -778,6 +798,23 @@
               [uploadHeader]="'TO UPLOAD SITE PLAN DOCUMENTS, DRAG FILES HERE OR'">
             </app-file-uploader>
           </section>
+        </div>
+
+        <div *ngIf="showSitePhotos()">
+          
+          <hr><br>
+          <label for="">Attach a photo of the proposed picnic area(s), including the bounding (if in place):</label>
+
+          <section>
+            <app-file-uploader *ngIf="applicationId" documentType="Site Photos" fileTypes="FILE MUST BE IN PDF FORMAT."
+              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
+              [enableFileDeletion]="application?.applicationType?.showSitePhotos === FormControlState.Show"
+              [multipleFiles]="true" entityName="application" [useDocumentTypeForName]="true"
+              (numberOfUploadedFiles)="uploadedSitePhotos = $event" [entityId]="applicationId"
+              [uploadHeader]="'TO UPLOAD SITE PHOTOS DOCUMENTS, DRAG FILES HERE OR'">
+            </app-file-uploader>
+          </section>
+
         </div>
 
         <div class="ngtest-photos-renderings"
@@ -1492,7 +1529,7 @@
 
         <!-- Proceed to Pay-->
 
-        <section class="d-flex" style="margin-top:15px;" *ngIf="!isRAS()">
+        <section class="d-flex" style="margin-top:15px;" *ngIf="!isOpenedByLGForApproval && !isRAS()">
 
           <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
