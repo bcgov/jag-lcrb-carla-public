@@ -3645,8 +3645,8 @@ namespace bdd_tests
             uiPartnerConfirm.Click();
 
             // click on Save for Later button
-            //NgWebElement saveForLater = ngDriver.FindElement(By.XPath("//button[contains(.,' SAVE FOR LATER ')]"));
-            //saveForLater.Click();
+            NgWebElement saveForLater = ngDriver.FindElement(By.XPath("//button[contains(.,' SAVE FOR LATER ')]"));
+            saveForLater.Click();
 
             // click on Complete Organization Information button
             CompleteOrgInfo();
