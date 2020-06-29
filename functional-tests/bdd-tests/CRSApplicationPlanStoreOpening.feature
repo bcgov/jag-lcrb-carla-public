@@ -19,7 +19,7 @@ Scenario: Indigenous Nation Plan Store Opening
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I click on the licence download link
     And I plan the store opening
     And the account is deleted
@@ -41,7 +41,7 @@ Scenario: Partnership Plan Store Opening
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I click on the licence download link
     And I plan the store opening
     And the account is deleted
@@ -63,7 +63,7 @@ Scenario: Private Corporation Plan Store Opening
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I click on the licence download link
     And I plan the store opening
     And the account is deleted
@@ -85,7 +85,7 @@ Scenario: Public Corporation Plan Store Opening
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I click on the licence download link
     And I plan the store opening
     And the account is deleted
@@ -107,7 +107,7 @@ Scenario: Society Plan Store Opening
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I click on the licence download link
     And I plan the store opening
     And the account is deleted
@@ -129,7 +129,7 @@ Scenario: Sole Proprietorship Plan Store Opening
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I click on the licence download link
     And I plan the store opening
     And the account is deleted

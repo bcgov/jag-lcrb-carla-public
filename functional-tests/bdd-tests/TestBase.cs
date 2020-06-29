@@ -951,31 +951,11 @@ namespace bdd_tests
 
             if (feeType == "Cannabis")
             {
-                string licenceFee = "Pay Licence Fee and Plan Store Opening";
+                string licenceFee = "Pay First Year Licensing Fee";
 
                 // click on the pay licence fee link
                 NgWebElement uiLicenceFee = ngDriver.FindElement(By.LinkText(licenceFee));
                 uiLicenceFee.Click();
-
-                /* 
-                Page Title: Plan Your Store Opening
-                */
-
-                string reasonDay = "Automated test: Reason for opening date.";
-
-                // select the opening date
-                NgWebElement uiCalendar1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentopeningdate']"));
-                uiCalendar1.Click();
-
-                NgWebElement uiCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-                uiCalendar2.Click();
-
-                // enter the reason for the opening date
-                NgWebElement uiReasonDate = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='description1']"));
-                uiReasonDate.SendKeys(reasonDay);
-
-                NgWebElement paymentButton = ngDriver.FindElement(By.XPath("//button[contains(.,' PAY LICENCE FEE AND RECEIVE LICENCE')]"));
-                paymentButton.Click();
             }
 
             if (feeType == "Catering")
