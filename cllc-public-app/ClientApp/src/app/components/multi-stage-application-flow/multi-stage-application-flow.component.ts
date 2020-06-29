@@ -53,7 +53,7 @@ export class MultiStageApplicationFlowComponent implements OnInit {
         }
 
         this.isFree = data.applicationType.isFree;
-        this.isRAS = data.licenseType == 'Rural Agency';
+        this.isRAS = data.licenseType == 'Rural Agency Store';
         //this.hasLGApproval = data.applicationType.show
 
       },
