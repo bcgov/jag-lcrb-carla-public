@@ -2735,7 +2735,7 @@ namespace bdd_tests
         public void ClickSubmitOrgStructureButton()
         {
             // click on the Submit Org Info button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION ']"));
+            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
             submitOrgInfoButton.Click();
         }
 
@@ -3442,7 +3442,7 @@ namespace bdd_tests
         public void ClickSaveForLater()
         {
             // click on the Save For Later button
-            NgWebElement saveForLaterButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SAVE FOR LATER ')]"));
+            NgWebElement saveForLaterButton = ngDriver.FindElement(By.CssSelector("button.btn-secondary span"));
             saveForLaterButton.Click();
         }
 
