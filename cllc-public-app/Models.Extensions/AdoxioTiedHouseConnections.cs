@@ -45,8 +45,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMarketerconnectiontocrsdetails = from.MarketerConnectionToCrsDetails;
             to.AdoxioInconnectiontofederalproducer = (int?)from.INConnectionToFederalProducer;
             to.AdoxioInconnectiontofederalproducerdetails  = from.INConnectionToFederalProducerDetails;
-            to.AdoxioLiquorFinancialInterest = (int?)from.LiquorFinancialInterest;
-            to.AdoxioLiquorFinancialInterestDetails = from.LiquorFinancialInterestDetails;
+            to.AdoxioLiquorfinancialinterest = (int?)from.LiquorFinancialInterest;
+            to.AdoxioLiquorfinancialinterestdetails = from.LiquorFinancialInterestDetails;
 
         }
 
@@ -82,8 +82,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.ShareType = tiedHouse.AdoxioSharetype;
                 result.SocietyConnectionFederalProducer = tiedHouse.AdoxioSocietyconnectionfederalproducer;
                 result.SocietyConnectionFederalProducerDetails = tiedHouse.AdoxioSocietyconnectionfederalproducerdetails;
-                result.LiquorFinancialInterest = tiedHouse.AdoxioLiquorFinancialInterest;
-                result.LiquorFinancialInterestDetails = tiedHouse.AdoxioLiquorFinancialInterestDetails;
+                result.LiquorFinancialInterest = tiedHouse.AdoxioLiquorfinancialinterest;
+                result.LiquorFinancialInterestDetails = tiedHouse.AdoxioLiquorfinancialinterestdetails;
 
                 result.ConnectionType = (TiedHouseConnectionType?)tiedHouse.AdoxioConnectiontype;
                 result.CrsConnectionToMarketer = (MarketerYesNo?)tiedHouse.AdoxioCrsconnectiontomarketer;
