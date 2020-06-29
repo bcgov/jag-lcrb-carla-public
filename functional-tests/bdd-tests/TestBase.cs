@@ -2730,8 +2730,8 @@ namespace bdd_tests
         }
 
 
-        [And(@"I submit the organization structure")]
-        public void SubmitOrgStructure()
+        [And(@"I click on the Submit Organization Information button")]
+        public void ClickSubmitOrgStructureButton()
         {
             // click on the Submit Org Info button
             NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION ']"));
