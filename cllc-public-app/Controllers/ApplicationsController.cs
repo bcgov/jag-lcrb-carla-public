@@ -979,7 +979,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw (httpOperationException);
             }
 
-            adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationId);
+            adoxioApplication = await _dynamicsClient.GetApplicationByIdWithChildren(adoxio_applicationId);
 
             return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient, _logger));
         }
