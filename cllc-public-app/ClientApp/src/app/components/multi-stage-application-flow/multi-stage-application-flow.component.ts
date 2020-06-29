@@ -17,7 +17,6 @@ import { Application } from '@models/application.model';
 })
 export class MultiStageApplicationFlowComponent implements OnInit {
   securityScreeningEnabled: boolean;
-  useDynamicFormMode: boolean = false;
   applicationId: string;
   isRAS: boolean = false;
   isFree: boolean = false;
@@ -38,7 +37,6 @@ export class MultiStageApplicationFlowComponent implements OnInit {
       .subscribe(featureOn => this.securityScreeningEnabled = featureOn);
 
     this.route.paramMap.subscribe(params => {
-      this.useDynamicFormMode = params.get('useDynamicFormMode') === 'true';
       this.applicationId = params.get('applicationId');
     });
 
