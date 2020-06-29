@@ -951,31 +951,11 @@ namespace bdd_tests
 
             if (feeType == "Cannabis")
             {
-                string licenceFee = "Pay Licence Fee and Plan Store Opening";
+                string licenceFee = "Pay First Year Licensing Fee";
 
                 // click on the pay licence fee link
                 NgWebElement uiLicenceFee = ngDriver.FindElement(By.LinkText(licenceFee));
                 uiLicenceFee.Click();
-
-                /* 
-                Page Title: Plan Your Store Opening
-                */
-
-                string reasonDay = "Automated test: Reason for opening date.";
-
-                // select the opening date
-                NgWebElement uiCalendar1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentopeningdate']"));
-                uiCalendar1.Click();
-
-                NgWebElement uiCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-                uiCalendar2.Click();
-
-                // enter the reason for the opening date
-                NgWebElement uiReasonDate = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='description1']"));
-                uiReasonDate.SendKeys(reasonDay);
-
-                NgWebElement paymentButton = ngDriver.FindElement(By.XPath("//button[contains(.,' PAY LICENCE FEE AND RECEIVE LICENCE')]"));
-                paymentButton.Click();
             }
 
             if (feeType == "Catering")
@@ -2075,6 +2055,10 @@ namespace bdd_tests
                 // select the date
                 SharedCalendarDate();
 
+                // click on the Confirm button
+                NgWebElement confirmButtonKeyPersonnel = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] .fa-save span"));
+                confirmButtonKeyPersonnel.Click();
+
                 /********** Individual Shareholder #0 **********/
 
                 // create the shareholder data
@@ -2109,6 +2093,10 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
+
+                // click on the Confirm button
+                NgWebElement confirmButtonIndyShareholder = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] .fa-save span"));
+                confirmButtonIndyShareholder.Click();
 
                 /********** Business Shareholder #1 **********/
 
@@ -2195,6 +2183,10 @@ namespace bdd_tests
                 // select the date
                 SharedCalendarDate();
 
+                // click on the Confirm button
+                NgWebElement confirmButtonBusKeyPersonnel = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] .fa-save span"));
+                confirmButtonBusKeyPersonnel.Click();
+
                 /********** Business Shareholder #1 - Individual Shareholder #1 **********/
 
                 // create the business shareholder #1 > individual shareholder data
@@ -2229,6 +2221,10 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
+
+                // click on the Confirm button
+                NgWebElement confirmButtonBusIndyShareholder = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] .fa-save span"));
+                confirmButtonBusIndyShareholder.Click();
             }
 
             if (businessTypeShared == "sole proprietorship")
@@ -3487,8 +3483,8 @@ namespace bdd_tests
             string sharesPublicCorp = "10";
             string emailAddressPublicCorp = "public@corporation.com";
 
-            // click on the public corporation Add Business Shareholder button
-            NgWebElement addPublicCorporationRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] button"));
+            // click on the Add Business Shareholder button
+            NgWebElement addPublicCorporationRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
             addPublicCorporationRow.Click();
 
             // add the public corporation business name
@@ -3511,13 +3507,269 @@ namespace bdd_tests
             NgWebElement confirmButtonPublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
             confirmButtonPublicCorp.Click();
 
-            // upload the notice of articles for public corporation
+            // find the upload test files in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
 
-            // add public corporation key personnel
+            // upload a notice of articles document
+            string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
+            NgWebElement uploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[21]"));
+            uploadSignage.SendKeys(noticeOfArticles);
 
+            // click on the Add Key Personnel button
+            NgWebElement addPublicCorporationKeyPersonnel = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] #cdk-accordion-child-1 [changetypesuffix='Leadership'] button"));
+            addPublicCorporationKeyPersonnel.Click();
 
+            // create public corp key personnel data
+            string firstName = "KeyPersonnelPubCorp";
+            string lastName = "Public Corporation";
+            string title = "CTO";
+            string email = "keypersonnel@pubcorp.com";
 
-            /********** Business Shareholder - Partnership **********/
+            // enter the key personnel first name 
+            NgWebElement uiKeyPersonnelFirstName = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='firstNameNew']"));
+            uiKeyPersonnelFirstName.SendKeys(firstName);
+
+            // enter the key personnel last name 
+            NgWebElement uiKeyPersonnelLastName = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='lastNameNew']"));
+            uiKeyPersonnelLastName.SendKeys(lastName);
+
+            // click the key personnel checkbox
+            NgWebElement uiKeyPersonnelRole = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='isOfficerNew']"));
+            uiKeyPersonnelRole.Click();
+
+            // enter the key personnel title
+            NgWebElement uiKeyPersonnelTitle = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='titleNew']"));
+            uiKeyPersonnelTitle.SendKeys(title);
+
+            // enter the key personnel email 
+            NgWebElement uiKeyPersonnelEmail = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='emailNew']"));
+            uiKeyPersonnelEmail.SendKeys(email);
+
+            // select the key personnel DOB
+            NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='dateofBirthNew']"));
+            openKeyPersonnelDOB.Click();
+
+            SharedCalendarDate();
+
+            // click on the Confirm button
+            NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] .fa-save span"));
+            uiConfirmButton.Click();
+
+            // click on Save for Later button - set up for LCSD-3455
+            //NgWebElement saveForLater = ngDriver.FindElement(By.XPath("//button[contains(.,' SAVE FOR LATER ')]"));
+            //saveForLater.Click();
+
+            // click on Complete Organization Information button - set up for LCSD-3455
+            //CompleteOrgInfo();
+
+            /********** Business Shareholder - Sole Proprietorship **********/
+
+            // create sole proprietorship test data
+            string businessNameSoleProprietorship = "Sole Proprietorship";
+            string sharesSoleProprietorship = "10";
+            string emailAddressSoleProprietorship = "sole@proprietorship.com";
+
+            // click on the sole proprietorship Add Business Shareholder button
+            NgWebElement addSoleProprietorshipRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
+            addSoleProprietorshipRow.Click();
+
+            // add the sole proprietorship business name
+            NgWebElement addSoleProprietorshipBizName = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] input[formcontrolname='businessNameNew']"));
+            addSoleProprietorshipBizName.SendKeys(businessNameSoleProprietorship);
+
+            // add the sole proprietorship number of shares
+            NgWebElement addSoleProprietorshipShares = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
+            addSoleProprietorshipShares.SendKeys(sharesSoleProprietorship);
+
+            // select the sole proprietorship organization type
+            NgWebElement addOrganizationTypeSoleProprietorship = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='SoleProprietor']"));
+            addOrganizationTypeSoleProprietorship.Click();
+
+            // add the sole proprietorship email address
+            NgWebElement addEmailAddressSoleProprietorship = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] input[formcontrolname='emailNew']"));
+            addEmailAddressSoleProprietorship.SendKeys(emailAddressSoleProprietorship);
+
+            // click on the sole proprietorship Confirm button
+            NgWebElement confirmButtonSoleProprietorship = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] .fa-save span"));
+            confirmButtonSoleProprietorship.Click();
+
+            // open the sole proprietorship leader row
+            NgWebElement addSoleProprietorshipLeaderRow = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'][addlabel='Add Leader'] button.btn-secondary"));
+            addSoleProprietorshipLeaderRow.Click();
+
+            // create leader data
+            string firstNameLeader = "LeaderSoleProp";
+            string lastNameLeader = "LastName";
+            string leaderEmail = "leader@soleprop.com";
+
+            // add the leader first name
+            NgWebElement addSoleProprietorshipFirstName = ngDriver.FindElement(By.CssSelector("[addlabel='Add Leader'][changetypesuffix='Leadership'] input[formcontrolname='firstNameNew']"));
+            addSoleProprietorshipFirstName.SendKeys(firstNameLeader);
+
+            // add the leader last name
+            NgWebElement addSoleProprietorshipLastName = ngDriver.FindElement(By.CssSelector("[addlabel='Add Leader'][changetypesuffix='Leadership'] input[formcontrolname='lastNameNew']"));
+            addSoleProprietorshipLastName.SendKeys(lastNameLeader);
+
+            // add the leader email
+            NgWebElement addSoleProprietorshipEmail = ngDriver.FindElement(By.CssSelector("[addlabel='Add Leader'][changetypesuffix='Leadership'] input[formcontrolname='emailNew']"));
+            addSoleProprietorshipEmail.SendKeys(leaderEmail);
+
+            // add the leader DOB
+            NgWebElement addSoleProprietorshipDOB = ngDriver.FindElement(By.CssSelector("[addlabel='Add Leader'][changetypesuffix='Leadership'] input[formcontrolname='dateofBirthNew']"));
+            addSoleProprietorshipDOB.Click();
+
+            SharedCalendarDate();
+
+            // click on leader confirm button
+            NgWebElement confirmSoleProprietorship = ngDriver.FindElement(By.CssSelector("[addlabel='Add Leader'][changetypesuffix='Leadership'] .fa-save span"));
+            confirmSoleProprietorship.Click();
+
+            /********** Business Shareholder - Society **********/
+
+            // create society test data
+            string businessNameSociety = "Society";
+            string sharesSociety = "10";
+            string emailAddressSociety = "society@test.com";
+
+            // click on the society Add Business Shareholder button
+            NgWebElement addSocietyRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
+            addSocietyRow.Click();
+
+            // add the society business name
+            NgWebElement addSocietyBizName = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] input[formcontrolname='businessNameNew']"));
+            addSocietyBizName.SendKeys(businessNameSociety);
+
+            // add the society number of shares
+            NgWebElement addSocietyShares = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
+            addSocietyShares.SendKeys(sharesSociety);
+
+            // select the society organization type
+            NgWebElement addOrganizationTypeSociety = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='Society']"));
+            addOrganizationTypeSociety.Click();
+
+            // add the society email address
+            NgWebElement addEmailAddressSociety = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] input[formcontrolname='emailNew']"));
+            addEmailAddressSociety.SendKeys(emailAddressSociety);
+
+            // click on the society Confirm button
+            NgWebElement confirmButtonSociety = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] .fa-save span"));
+            confirmButtonSociety.Click();
+
+            // create society data
+            string membershipFee = "1000";
+            string memberCount = "100";
+            string directorFirstName = "DirectorSociety";
+            string directorLastName = "Society";
+            string directorTitle = "CFO";
+            string directorEmail = "cfo@society.com";
+
+            // add the society's annual membership fee
+            NgWebElement addMembershipFee = ngDriver.FindElement(By.CssSelector("input[formcontrolname='annualMembershipFee']"));
+            addMembershipFee.SendKeys(membershipFee);
+
+            // add the society's number of members
+            NgWebElement addMembershipCount = ngDriver.FindElement(By.CssSelector("input[formcontrolname='numberOfMembers']"));
+            addMembershipCount.SendKeys(memberCount);
+
+            // click on the director/officer row
+            NgWebElement openDirectorRow = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] button"));
+            openDirectorRow.Click();
+
+            // add the director first name
+            NgWebElement addDirectorFirst = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] input[formcontrolname='firstNameNew']"));
+            addDirectorFirst.SendKeys(directorFirstName);
+
+            // add the director last name
+            NgWebElement addDirectorLast = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] input[formcontrolname='lastNameNew']"));
+            addDirectorLast.SendKeys(directorLastName);
+
+            // select the director position
+            NgWebElement addDirectorPosition = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] input[formcontrolname='isOfficerNew']"));
+            addDirectorPosition.Click();
+
+            // add the director title
+            NgWebElement addDirectorTitle = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] input[formcontrolname='titleNew']"));
+            addDirectorTitle.SendKeys(directorTitle);
+
+            // add the director email
+            NgWebElement addDirectorEmail = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] input[formcontrolname='emailNew']"));
+            addDirectorEmail.SendKeys(directorEmail);
+
+            // add the director DOB
+            NgWebElement addDirectorDOB = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] input[formcontrolname='dateofBirthNew']"));
+            addDirectorDOB.Click();
+
+            SharedCalendarDate();
+
+            // click on director confirm button
+            NgWebElement confirmDirector = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'] .fa-save span"));
+            confirmDirector.Click();
+
+            /********** Business Shareholder - Trust **********/
+
+            // create trust test data
+            string businessNameTrust = "Trust";
+            string sharesTrust = "10";
+            string emailAddressTrust = "trust@test.com";
+
+            // click on the trust Add Business Shareholder button
+            NgWebElement addTrustRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
+            addTrustRow.Click();
+
+            // add the trust business name
+            NgWebElement addTrustBizName = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='businessNameNew']"));
+            addTrustBizName.SendKeys(businessNameTrust);
+
+            // add the trust number of shares
+            NgWebElement addTrustShares = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
+            addTrustShares.SendKeys(sharesTrust);
+
+            // select the trust organization type
+            NgWebElement addOrganizationTypeTrust = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='Trust']"));
+            addOrganizationTypeTrust.Click();
+
+            // add the trust email address
+            NgWebElement addEmailAddressTrust = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='emailNew']"));
+            addEmailAddressTrust.SendKeys(emailAddressTrust);
+
+            // click on the trust Confirm button
+            NgWebElement confirmButtonTrust = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
+            confirmButtonTrust.Click();
+
+            // click on add trustee button
+            NgWebElement addTrustee = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] button"));
+            addTrustee.Click();
+
+            // create trustee test data
+            string firstNameTrustee = "TrusteeTrust";
+            string lastNameTrustee = "Trust";
+            string emailAddressTrustee = "trustee@test.com";
+
+            // add trustee first name
+            NgWebElement addTrusteeFirst = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] input[formcontrolname='firstNameNew']"));
+            addTrusteeFirst.SendKeys(firstNameTrustee);
+
+            // add trustee last name
+            NgWebElement addTrusteeLast = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] input[formcontrolname='lastNameNew']"));
+            addTrusteeLast.SendKeys(lastNameTrustee);
+
+            // add trustee email
+            NgWebElement addTrusteeEmail = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] input[formcontrolname='emailNew']"));
+            addTrusteeEmail.SendKeys(emailAddressTrustee);
+
+            // add trustee DOB
+            NgWebElement addTrusteeDOB = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] input[formcontrolname='dateofBirthNew']"));
+            addTrusteeDOB.Click();
+
+            SharedCalendarDate();
+
+            // click on trustee confirm button
+            NgWebElement confirmTrustee = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] .fa-save span"));
+            confirmTrustee.Click();
+
+            /********** Business Shareholder - Partnership **********
 
             // create partnership test data
             string businessNamePartnership = "Partnership";
@@ -3525,7 +3777,7 @@ namespace bdd_tests
             string emailAddressPartnership = "partnership@test.com";
 
             // click on the partnership Add Business Shareholder button
-            NgWebElement addPartnershipRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] button"));
+            NgWebElement addPartnershipRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
             addPartnershipRow.Click();
 
             // add the partnership business name
@@ -3548,25 +3800,60 @@ namespace bdd_tests
             NgWebElement confirmButtonPartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
             confirmButtonPartnership.Click();
 
+            // click on the individual partner row
+            NgWebElement addPartnerRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-5']/div/section/app-org-structure/div/div[3]/section[1]/app-associate-list/div/button"));
+            addPartnerRow.Click();
 
+            // create the individual partner data
+            string firstNamePartner = "Individual";
+            string lastNamePartner = "Partner";
+            string percentage = "50";
+            string emailPartner = "individual@partner.com";
 
-            /********** Business Shareholder - Sole Proprietorship **********/
+            // add the individual partner first name
+            NgWebElement uiFirstNamePartner = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='firstNameNew']"));
+            uiFirstNamePartner.SendKeys(firstNamePartner);
 
+            // add the individual partner last name
+            NgWebElement uiLastNamePartner = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='lastNameNew']"));
+            uiLastNamePartner.SendKeys(lastNamePartner);
 
-            /********** Business Shareholder - Society **********/
+            // add the individual partner percentage
+            NgWebElement uiPartnerPercentage = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='interestPercentageNew']"));
+            uiPartnerPercentage.SendKeys(percentage);
 
+            // add the individual partner email address
+            NgWebElement uiEmailPartner = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='emailNew']"));
+            uiEmailPartner.SendKeys(emailPartner);
 
-            /********** Business Shareholder - Trust **********/
+            // add the individual partner DOB
+            NgWebElement uiPartnerDOB = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='dateofBirthNew']"));
+            uiPartnerDOB.Click();
 
+            SharedCalendarDate();
 
+            // click on the individual partner confirm button
+            NgWebElement uiPartnerConfirm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] .fa-save span"));
+            uiPartnerConfirm.Click();
 
+            // upload partnership agreement
+            string partnershipAgreement = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
+            NgWebElement uploadPartner = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-5']/div/section/app-org-structure/div/div[2]/section/app-file-uploader/div/ngx-file-drop/div/div/input"));
+            uploadPartner.SendKeys(partnershipAgreement);*/
         }
 
 
         [And(@"I review the security screening requirements for mixed business shareholder types")]
         public void SecurityScreeningsMixedBusinessShareholders()
         {
-
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel0')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder0')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel1')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelPubCorp')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderSoleProp')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'DirectorSociety')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TrusteeTrust')]")).Displayed);
         }
 
 

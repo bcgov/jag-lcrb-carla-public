@@ -157,7 +157,7 @@ Scenario: CRS application with mixed business shareholder types
     And I review the account profile
     And I review the organization structure
     And I add in business shareholders of different business types
-    #And I submit the organization structure
+    And I submit the organization structure
     And I complete the Cannabis Retail Store application
     And I review the security screening requirements for mixed business shareholder types
     And I click on the Pay for Application button
