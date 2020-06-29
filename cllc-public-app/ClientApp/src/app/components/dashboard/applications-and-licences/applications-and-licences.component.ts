@@ -338,7 +338,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
   startNewRASApplication() {
     const newLicenceApplicationData: Application = <Application>{
-      licenseType: 'Rural Agency',
+      licenseType: 'Rural Agency Store',
       applicantType: this.account.businessType,
       applicationType: <ApplicationType>{ name: ApplicationTypeNames.RAS },
       account: this.account,
@@ -359,7 +359,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
   startNewUBVApplication() {
     const newLicenceApplicationData: Application = <Application>{
-      licenseType: 'Rural Agency',
+      licenseType: 'Rural Agency Store',
       applicantType: this.account.businessType,
       applicationType: <ApplicationType>{ name: ApplicationTypeNames.RAS },
       account: this.account,
@@ -372,8 +372,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         this.router.navigate(route);
       },
       () => {
-        this.snackBar.open('Error starting a Rural Agency Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        console.log('Error starting a Rural Agency Application');
+        this.snackBar.open('Error starting a Rural Agency Store Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a Rural Agency Store Application');
       }
     );
   }
