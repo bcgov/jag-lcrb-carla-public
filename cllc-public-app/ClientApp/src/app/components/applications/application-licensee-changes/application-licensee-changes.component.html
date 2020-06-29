@@ -38,6 +38,11 @@
           </span>
         </button>
 
+        <button *ngIf="treeRoot" class="btn btn-secondary" style="margin-right:10px;" [disabled]="!LicenseeChangeLog.HasChanges(treeRoot)"
+                (click)="cancel()">
+          <i class="fa fa-save"></i>
+          Cancel Changes
+        </button>
 
         <button *ngIf="treeRoot" class="btn btn-primary" style="float: right;"
                 (click)="save()">
