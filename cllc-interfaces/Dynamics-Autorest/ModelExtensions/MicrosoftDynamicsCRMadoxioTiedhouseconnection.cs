@@ -10,5 +10,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_AccountId@odata.bind")]
         public string AccountODataBind { get; set; }
 
+        [JsonProperty(PropertyName = "adoxio_liquorfinancialinterest")]
+        public int? AdoxioLiquorFinancialInterest { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_liquorfinancialinterestdetails")]
+        public string AdoxioLiquorFinancialInterestDetails { get; set; }
+
     }
 }

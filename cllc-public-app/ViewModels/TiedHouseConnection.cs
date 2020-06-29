@@ -37,6 +37,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string ShareType { get; set; } //adoxio_ShareType (StringType)
         public int? SocietyConnectionFederalProducer { get; set; } //adoxio_societyconnectionfederalproducer (PicklistType)
         public string SocietyConnectionFederalProducerDetails { get; set; } //adoxio_societyconnectionfederalproducerdetails (MemoType)
+        public int? LiquorFinancialInterest { get; set; } 
+        public string LiquorFinancialInterestDetails { get; set; } 
         public string TiedHouse { get; set; } //adoxio_TiedHouse (LookupType)
         public string TiedHouseName { get; set; } //adoxio_TiedHouseName (StringType)
 
