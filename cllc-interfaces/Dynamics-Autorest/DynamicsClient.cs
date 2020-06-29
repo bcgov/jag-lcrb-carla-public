@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top654 { get; set; }
+        public int? Top667 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip654 { get; set; }
+        public int? Skip667 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count654 { get; set; }
+        public bool? Count667 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter654 { get; set; }
+        public string Filter667 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search654 { get; set; }
+        public string Search667 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -84,6 +84,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILginlinkid.
         /// </summary>
         public virtual ILginlinkid Lginlinkid { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicenseeenforcementactions.
+        /// </summary>
+        public virtual ILicenseeenforcementactions Licenseeenforcementactions { get; private set; }
 
         /// <summary>
         /// Gets the IThirdpartyoperatorlicences.
@@ -651,6 +656,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAreas Areas { get; private set; }
 
         /// <summary>
+        /// Gets the IAreaenforcementactions.
+        /// </summary>
+        public virtual IAreaenforcementactions Areaenforcementactions { get; private set; }
+
+        /// <summary>
         /// Gets the IAreaevents.
         /// </summary>
         public virtual IAreaevents Areaevents { get; private set; }
@@ -929,6 +939,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IContraventionsharepointdocumentlocations.
         /// </summary>
         public virtual IContraventionsharepointdocumentlocations Contraventionsharepointdocumentlocations { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionid.
+        /// </summary>
+        public virtual IEnforcementactionid Enforcementactionid { get; private set; }
 
         /// <summary>
         /// Gets the ICorporatehistorysummaries.
@@ -1231,6 +1246,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEnforcementactions Enforcementactions { get; private set; }
 
         /// <summary>
+        /// Gets the IAdvocateid.
+        /// </summary>
+        public virtual IAdvocateid Advocateid { get; private set; }
+
+        /// <summary>
+        /// Gets the IAreaid.
+        /// </summary>
+        public virtual IAreaid Areaid { get; private set; }
+
+        /// <summary>
+        /// Gets the IDelegategmid.
+        /// </summary>
+        public virtual IDelegategmid Delegategmid { get; private set; }
+
+        /// <summary>
         /// Gets the IEnforcementactionactivitypointers.
         /// </summary>
         public virtual IEnforcementactionactivitypointers Enforcementactionactivitypointers { get; private set; }
@@ -1256,6 +1286,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEnforcementactionbulkdeletefailures Enforcementactionbulkdeletefailures { get; private set; }
 
         /// <summary>
+        /// Gets the IEnforcementactioncontraventions.
+        /// </summary>
+        public virtual IEnforcementactioncontraventions Enforcementactioncontraventions { get; private set; }
+
+        /// <summary>
         /// Gets the IEnforcementactionduplicatebaserecord.
         /// </summary>
         public virtual IEnforcementactionduplicatebaserecord Enforcementactionduplicatebaserecord { get; private set; }
@@ -1274,6 +1309,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEnforcementactionfaxes.
         /// </summary>
         public virtual IEnforcementactionfaxes Enforcementactionfaxes { get; private set; }
+
+        /// <summary>
+        /// Gets the IEnforcementactioninspections.
+        /// </summary>
+        public virtual IEnforcementactioninspections Enforcementactioninspections { get; private set; }
 
         /// <summary>
         /// Gets the IEnforcementactionletters.
@@ -1329,6 +1369,41 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEnforcementactiontasks.
         /// </summary>
         public virtual IEnforcementactiontasks Enforcementactiontasks { get; private set; }
+
+        /// <summary>
+        /// Gets the IEstablishmentid.
+        /// </summary>
+        public virtual IEstablishmentid Establishmentid { get; private set; }
+
+        /// <summary>
+        /// Gets the IInspectorid.
+        /// </summary>
+        public virtual IInspectorid Inspectorid { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicenceid.
+        /// </summary>
+        public virtual ILicenceid Licenceid { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicenseeid.
+        /// </summary>
+        public virtual ILicenseeid Licenseeid { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegionalmanagerid.
+        /// </summary>
+        public virtual IRegionalmanagerid Regionalmanagerid { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegionid.
+        /// </summary>
+        public virtual IRegionid Regionid { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegistrarid.
+        /// </summary>
+        public virtual IRegistrarid Registrarid { get; private set; }
 
         /// <summary>
         /// Gets the IBpfadoxioenforcementactionadoxioenforcementactionbpf.
@@ -1396,6 +1471,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEstablishmentannotations Establishmentannotations { get; private set; }
 
         /// <summary>
+        /// Gets the IEstablishmentenforcementactions.
+        /// </summary>
+        public virtual IEstablishmentenforcementactions Establishmentenforcementactions { get; private set; }
+
+        /// <summary>
         /// Gets the IEstablishmentmailboxtrackingfolders.
         /// </summary>
         public virtual IEstablishmentmailboxtrackingfolders Establishmentmailboxtrackingfolders { get; private set; }
@@ -1439,11 +1519,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAccount.
         /// </summary>
         public virtual IAccount Account { get; private set; }
-
-        /// <summary>
-        /// Gets the IAreaid.
-        /// </summary>
-        public virtual IAreaid Areaid { get; private set; }
 
         /// <summary>
         /// Gets the IEventactivityparties.
@@ -1559,11 +1634,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEventtasks.
         /// </summary>
         public virtual IEventtasks Eventtasks { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegionid.
-        /// </summary>
-        public virtual IRegionid Regionid { get; private set; }
 
         /// <summary>
         /// Gets the IEventid.
@@ -1981,11 +2051,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILdbordersyncerrors Ldbordersyncerrors { get; private set; }
 
         /// <summary>
-        /// Gets the ILicenceid.
-        /// </summary>
-        public virtual ILicenceid Licenceid { get; private set; }
-
-        /// <summary>
         /// Gets the ILegalentities.
         /// </summary>
         public virtual ILegalentities Legalentities { get; private set; }
@@ -2061,6 +2126,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicenceses Licenceses { get; private set; }
 
         /// <summary>
+        /// Gets the ILicenceenforcementactions.
+        /// </summary>
+        public virtual ILicenceenforcementactions Licenceenforcementactions { get; private set; }
+
+        /// <summary>
         /// Gets the ILicencesadoxioendorsementlicence.
         /// </summary>
         public virtual ILicencesadoxioendorsementlicence Licencesadoxioendorsementlicence { get; private set; }
@@ -2124,6 +2194,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicencetypecontraventionadmin.
         /// </summary>
         public virtual ILicencetypecontraventionadmin Licencetypecontraventionadmin { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencetypeenforcementactions.
+        /// </summary>
+        public virtual ILicencetypeenforcementactions Licencetypeenforcementactions { get; private set; }
 
         /// <summary>
         /// Gets the ILicencetypemailboxtrackingfolders.
@@ -2319,6 +2394,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IRegionadoxiormreviewregion.
         /// </summary>
         public virtual IRegionadoxiormreviewregion Regionadoxiormreviewregion { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegionenforcementactions.
+        /// </summary>
+        public virtual IRegionenforcementactions Regionenforcementactions { get; private set; }
 
         /// <summary>
         /// Gets the IRegionevents.
@@ -3861,6 +3941,31 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISystemforms Systemforms { get; private set; }
 
         /// <summary>
+        /// Gets the IAdvocateenforcementactions.
+        /// </summary>
+        public virtual IAdvocateenforcementactions Advocateenforcementactions { get; private set; }
+
+        /// <summary>
+        /// Gets the IDelegategmenforcementactions.
+        /// </summary>
+        public virtual IDelegategmenforcementactions Delegategmenforcementactions { get; private set; }
+
+        /// <summary>
+        /// Gets the IInspectorenforcementactions.
+        /// </summary>
+        public virtual IInspectorenforcementactions Inspectorenforcementactions { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegionalmanagerenforcementactions.
+        /// </summary>
+        public virtual IRegionalmanagerenforcementactions Regionalmanagerenforcementactions { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegistrarenforcementactions.
+        /// </summary>
+        public virtual IRegistrarenforcementactions Registrarenforcementactions { get; private set; }
+
+        /// <summary>
         /// Gets the ISystemuseradoxioestablishmentincidentinspector.
         /// </summary>
         public virtual ISystemuseradoxioestablishmentincidentinspector Systemuseradoxioestablishmentincidentinspector { get; private set; }
@@ -4770,6 +4875,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Accountadoxioeventlicensee = new Accountadoxioeventlicensee(this);
             Accountadoxiolicencesproposedoperator = new Accountadoxiolicencesproposedoperator(this);
             Lginlinkid = new Lginlinkid(this);
+            Licenseeenforcementactions = new Licenseeenforcementactions(this);
             Thirdpartyoperatorlicences = new Thirdpartyoperatorlicences(this);
             Partyidadoxioevent = new Partyidadoxioevent(this);
             Regardingobjectidadoxioenforcementaction = new Regardingobjectidadoxioenforcementaction(this);
@@ -4883,6 +4989,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationtypeprincipalobjectattributeaccesses = new Applicationtypeprincipalobjectattributeaccesses(this);
             Applicationtypeprocesssession = new Applicationtypeprocesssession(this);
             Areas = new Areas(this);
+            Areaenforcementactions = new Areaenforcementactions(this);
             Areaevents = new Areaevents(this);
             Areamailboxtrackingfolders = new Areamailboxtrackingfolders(this);
             Areaprincipalobjectattributeaccesses = new Areaprincipalobjectattributeaccesses(this);
@@ -4939,6 +5046,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Contraventionprincipalobjectattributeaccesses = new Contraventionprincipalobjectattributeaccesses(this);
             Contraventionprocesssession = new Contraventionprocesssession(this);
             Contraventionsharepointdocumentlocations = new Contraventionsharepointdocumentlocations(this);
+            Enforcementactionid = new Enforcementactionid(this);
             Corporatehistorysummaries = new Corporatehistorysummaries(this);
             Corporatehistorysummarymailboxtrackingfolders = new Corporatehistorysummarymailboxtrackingfolders(this);
             Corporatehistorysummaryprincipalobjectattributeaccesses = new Corporatehistorysummaryprincipalobjectattributeaccesses(this);
@@ -4999,15 +5107,20 @@ namespace Gov.Lclb.Cllb.Interfaces
             Enforcementactionbpfworkflowlogs = new Enforcementactionbpfworkflowlogs(this);
             Bpfadoxioenforcementactionid = new Bpfadoxioenforcementactionid(this);
             Enforcementactions = new Enforcementactions(this);
+            Advocateid = new Advocateid(this);
+            Areaid = new Areaid(this);
+            Delegategmid = new Delegategmid(this);
             Enforcementactionactivitypointers = new Enforcementactionactivitypointers(this);
             Enforcementactionannotations = new Enforcementactionannotations(this);
             Enforcementactionappointments = new Enforcementactionappointments(this);
             Enforcementactionasyncoperations = new Enforcementactionasyncoperations(this);
             Enforcementactionbulkdeletefailures = new Enforcementactionbulkdeletefailures(this);
+            Enforcementactioncontraventions = new Enforcementactioncontraventions(this);
             Enforcementactionduplicatebaserecord = new Enforcementactionduplicatebaserecord(this);
             Enforcementactionduplicatematchingrecord = new Enforcementactionduplicatematchingrecord(this);
             Enforcementactionemails = new Enforcementactionemails(this);
             Enforcementactionfaxes = new Enforcementactionfaxes(this);
+            Enforcementactioninspections = new Enforcementactioninspections(this);
             Enforcementactionletters = new Enforcementactionletters(this);
             Enforcementactionmailboxtrackingfolders = new Enforcementactionmailboxtrackingfolders(this);
             Enforcementactionphonecalls = new Enforcementactionphonecalls(this);
@@ -5019,6 +5132,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             Enforcementactionsocialactivities = new Enforcementactionsocialactivities(this);
             Enforcementactionsyncerrors = new Enforcementactionsyncerrors(this);
             Enforcementactiontasks = new Enforcementactiontasks(this);
+            Establishmentid = new Establishmentid(this);
+            Inspectorid = new Inspectorid(this);
+            Licenceid = new Licenceid(this);
+            Licenseeid = new Licenseeid(this);
+            Regionalmanagerid = new Regionalmanagerid(this);
+            Regionid = new Regionid(this);
+            Registrarid = new Registrarid(this);
             Bpfadoxioenforcementactionadoxioenforcementactionbpf = new Bpfadoxioenforcementactionadoxioenforcementactionbpf(this);
             Establishmentincidents = new Establishmentincidents(this);
             Establishment = new Establishment(this);
@@ -5032,6 +5152,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Establishments = new Establishments(this);
             Establishmentadoxioestablishmentincidentestablishment = new Establishmentadoxioestablishmentincidentestablishment(this);
             Establishmentannotations = new Establishmentannotations(this);
+            Establishmentenforcementactions = new Establishmentenforcementactions(this);
             Establishmentmailboxtrackingfolders = new Establishmentmailboxtrackingfolders(this);
             Establishmentprincipalobjectattributeaccesses = new Establishmentprincipalobjectattributeaccesses(this);
             Establishmentprocesssession = new Establishmentprocesssession(this);
@@ -5041,7 +5162,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Establishmentwatchwordprocesssession = new Establishmentwatchwordprocesssession(this);
             Events = new Events(this);
             Account = new Account(this);
-            Areaid = new Areaid(this);
             Eventactivityparties = new Eventactivityparties(this);
             Eventactivitypointers = new Eventactivitypointers(this);
             Eventannotations = new Eventannotations(this);
@@ -5065,7 +5185,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Eventsocialactivities = new Eventsocialactivities(this);
             Eventsyncerrors = new Eventsyncerrors(this);
             Eventtasks = new Eventtasks(this);
-            Regionid = new Regionid(this);
             Eventid = new Eventid(this);
             Eventscheduleasyncoperations = new Eventscheduleasyncoperations(this);
             Eventschedulebulkdeletefailures = new Eventschedulebulkdeletefailures(this);
@@ -5149,7 +5268,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Ldborderprocesssession = new Ldborderprocesssession(this);
             Ldbordersharepointdocumentlocations = new Ldbordersharepointdocumentlocations(this);
             Ldbordersyncerrors = new Ldbordersyncerrors(this);
-            Licenceid = new Licenceid(this);
             Legalentities = new Legalentities(this);
             Legalentitymailboxtrackingfolders = new Legalentitymailboxtrackingfolders(this);
             Legalentityprincipalobjectattributeaccesses = new Legalentityprincipalobjectattributeaccesses(this);
@@ -5165,6 +5283,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Licenceldbordertotalhistoryprocesssession = new Licenceldbordertotalhistoryprocesssession(this);
             Licenceldbordertotalhistorysyncerrors = new Licenceldbordertotalhistorysyncerrors(this);
             Licenceses = new Licenceses(this);
+            Licenceenforcementactions = new Licenceenforcementactions(this);
             Licencesadoxioendorsementlicence = new Licencesadoxioendorsementlicence(this);
             Licencesadoxioeventlicence = new Licencesadoxioeventlicence(this);
             Licencesadoxioldborderlicenceid = new Licencesadoxioldborderlicenceid(this);
@@ -5178,6 +5297,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Licencetypes = new Licencetypes(this);
             Licencetypeadoxiormreviewlicencetype = new Licencetypeadoxiormreviewlicencetype(this);
             Licencetypecontraventionadmin = new Licencetypecontraventionadmin(this);
+            Licencetypeenforcementactions = new Licencetypeenforcementactions(this);
             Licencetypemailboxtrackingfolders = new Licencetypemailboxtrackingfolders(this);
             Licencetypeprincipalobjectattributeaccesses = new Licencetypeprincipalobjectattributeaccesses(this);
             Licencetypeprocesssession = new Licencetypeprocesssession(this);
@@ -5217,6 +5337,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Previousaddressprocesssession = new Previousaddressprocesssession(this);
             Regions = new Regions(this);
             Regionadoxiormreviewregion = new Regionadoxiormreviewregion(this);
+            Regionenforcementactions = new Regionenforcementactions(this);
             Regionevents = new Regionevents(this);
             Regionmailboxtrackingfolders = new Regionmailboxtrackingfolders(this);
             Regionprincipalobjectattributeaccesses = new Regionprincipalobjectattributeaccesses(this);
@@ -5525,6 +5646,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             Regardingobjectidadoxioenforcementactionsocialactivity = new Regardingobjectidadoxioenforcementactionsocialactivity(this);
             Regardingobjectidadoxioeventsocialactivity = new Regardingobjectidadoxioeventsocialactivity(this);
             Systemforms = new Systemforms(this);
+            Advocateenforcementactions = new Advocateenforcementactions(this);
+            Delegategmenforcementactions = new Delegategmenforcementactions(this);
+            Inspectorenforcementactions = new Inspectorenforcementactions(this);
+            Regionalmanagerenforcementactions = new Regionalmanagerenforcementactions(this);
+            Registrarenforcementactions = new Registrarenforcementactions(this);
             Systemuseradoxioestablishmentincidentinspector = new Systemuseradoxioestablishmentincidentinspector(this);
             Systemuseradoxioeventinspector = new Systemuseradoxioeventinspector(this);
             Lkadoxioapplicationcrsbpfv4createdby = new Lkadoxioapplicationcrsbpfv4createdby(this);

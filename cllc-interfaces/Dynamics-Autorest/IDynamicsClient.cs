@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top654 { get; set; }
+        int? Top667 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip654 { get; set; }
+        int? Skip667 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count654 { get; set; }
+        bool? Count667 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter654 { get; set; }
+        string Filter667 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search654 { get; set; }
+        string Search667 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -81,6 +81,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILginlinkid.
         /// </summary>
         ILginlinkid Lginlinkid { get; }
+
+        /// <summary>
+        /// Gets the ILicenseeenforcementactions.
+        /// </summary>
+        ILicenseeenforcementactions Licenseeenforcementactions { get; }
 
         /// <summary>
         /// Gets the IThirdpartyoperatorlicences.
@@ -648,6 +653,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAreas Areas { get; }
 
         /// <summary>
+        /// Gets the IAreaenforcementactions.
+        /// </summary>
+        IAreaenforcementactions Areaenforcementactions { get; }
+
+        /// <summary>
         /// Gets the IAreaevents.
         /// </summary>
         IAreaevents Areaevents { get; }
@@ -926,6 +936,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IContraventionsharepointdocumentlocations.
         /// </summary>
         IContraventionsharepointdocumentlocations Contraventionsharepointdocumentlocations { get; }
+
+        /// <summary>
+        /// Gets the IEnforcementactionid.
+        /// </summary>
+        IEnforcementactionid Enforcementactionid { get; }
 
         /// <summary>
         /// Gets the ICorporatehistorysummaries.
@@ -1228,6 +1243,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEnforcementactions Enforcementactions { get; }
 
         /// <summary>
+        /// Gets the IAdvocateid.
+        /// </summary>
+        IAdvocateid Advocateid { get; }
+
+        /// <summary>
+        /// Gets the IAreaid.
+        /// </summary>
+        IAreaid Areaid { get; }
+
+        /// <summary>
+        /// Gets the IDelegategmid.
+        /// </summary>
+        IDelegategmid Delegategmid { get; }
+
+        /// <summary>
         /// Gets the IEnforcementactionactivitypointers.
         /// </summary>
         IEnforcementactionactivitypointers Enforcementactionactivitypointers { get; }
@@ -1253,6 +1283,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEnforcementactionbulkdeletefailures Enforcementactionbulkdeletefailures { get; }
 
         /// <summary>
+        /// Gets the IEnforcementactioncontraventions.
+        /// </summary>
+        IEnforcementactioncontraventions Enforcementactioncontraventions { get; }
+
+        /// <summary>
         /// Gets the IEnforcementactionduplicatebaserecord.
         /// </summary>
         IEnforcementactionduplicatebaserecord Enforcementactionduplicatebaserecord { get; }
@@ -1271,6 +1306,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEnforcementactionfaxes.
         /// </summary>
         IEnforcementactionfaxes Enforcementactionfaxes { get; }
+
+        /// <summary>
+        /// Gets the IEnforcementactioninspections.
+        /// </summary>
+        IEnforcementactioninspections Enforcementactioninspections { get; }
 
         /// <summary>
         /// Gets the IEnforcementactionletters.
@@ -1326,6 +1366,41 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEnforcementactiontasks.
         /// </summary>
         IEnforcementactiontasks Enforcementactiontasks { get; }
+
+        /// <summary>
+        /// Gets the IEstablishmentid.
+        /// </summary>
+        IEstablishmentid Establishmentid { get; }
+
+        /// <summary>
+        /// Gets the IInspectorid.
+        /// </summary>
+        IInspectorid Inspectorid { get; }
+
+        /// <summary>
+        /// Gets the ILicenceid.
+        /// </summary>
+        ILicenceid Licenceid { get; }
+
+        /// <summary>
+        /// Gets the ILicenseeid.
+        /// </summary>
+        ILicenseeid Licenseeid { get; }
+
+        /// <summary>
+        /// Gets the IRegionalmanagerid.
+        /// </summary>
+        IRegionalmanagerid Regionalmanagerid { get; }
+
+        /// <summary>
+        /// Gets the IRegionid.
+        /// </summary>
+        IRegionid Regionid { get; }
+
+        /// <summary>
+        /// Gets the IRegistrarid.
+        /// </summary>
+        IRegistrarid Registrarid { get; }
 
         /// <summary>
         /// Gets the IBpfadoxioenforcementactionadoxioenforcementactionbpf.
@@ -1393,6 +1468,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEstablishmentannotations Establishmentannotations { get; }
 
         /// <summary>
+        /// Gets the IEstablishmentenforcementactions.
+        /// </summary>
+        IEstablishmentenforcementactions Establishmentenforcementactions { get; }
+
+        /// <summary>
         /// Gets the IEstablishmentmailboxtrackingfolders.
         /// </summary>
         IEstablishmentmailboxtrackingfolders Establishmentmailboxtrackingfolders { get; }
@@ -1436,11 +1516,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAccount.
         /// </summary>
         IAccount Account { get; }
-
-        /// <summary>
-        /// Gets the IAreaid.
-        /// </summary>
-        IAreaid Areaid { get; }
 
         /// <summary>
         /// Gets the IEventactivityparties.
@@ -1556,11 +1631,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEventtasks.
         /// </summary>
         IEventtasks Eventtasks { get; }
-
-        /// <summary>
-        /// Gets the IRegionid.
-        /// </summary>
-        IRegionid Regionid { get; }
 
         /// <summary>
         /// Gets the IEventid.
@@ -1978,11 +2048,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILdbordersyncerrors Ldbordersyncerrors { get; }
 
         /// <summary>
-        /// Gets the ILicenceid.
-        /// </summary>
-        ILicenceid Licenceid { get; }
-
-        /// <summary>
         /// Gets the ILegalentities.
         /// </summary>
         ILegalentities Legalentities { get; }
@@ -2058,6 +2123,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicenceses Licenceses { get; }
 
         /// <summary>
+        /// Gets the ILicenceenforcementactions.
+        /// </summary>
+        ILicenceenforcementactions Licenceenforcementactions { get; }
+
+        /// <summary>
         /// Gets the ILicencesadoxioendorsementlicence.
         /// </summary>
         ILicencesadoxioendorsementlicence Licencesadoxioendorsementlicence { get; }
@@ -2121,6 +2191,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicencetypecontraventionadmin.
         /// </summary>
         ILicencetypecontraventionadmin Licencetypecontraventionadmin { get; }
+
+        /// <summary>
+        /// Gets the ILicencetypeenforcementactions.
+        /// </summary>
+        ILicencetypeenforcementactions Licencetypeenforcementactions { get; }
 
         /// <summary>
         /// Gets the ILicencetypemailboxtrackingfolders.
@@ -2316,6 +2391,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IRegionadoxiormreviewregion.
         /// </summary>
         IRegionadoxiormreviewregion Regionadoxiormreviewregion { get; }
+
+        /// <summary>
+        /// Gets the IRegionenforcementactions.
+        /// </summary>
+        IRegionenforcementactions Regionenforcementactions { get; }
 
         /// <summary>
         /// Gets the IRegionevents.
@@ -3856,6 +3936,31 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISystemforms.
         /// </summary>
         ISystemforms Systemforms { get; }
+
+        /// <summary>
+        /// Gets the IAdvocateenforcementactions.
+        /// </summary>
+        IAdvocateenforcementactions Advocateenforcementactions { get; }
+
+        /// <summary>
+        /// Gets the IDelegategmenforcementactions.
+        /// </summary>
+        IDelegategmenforcementactions Delegategmenforcementactions { get; }
+
+        /// <summary>
+        /// Gets the IInspectorenforcementactions.
+        /// </summary>
+        IInspectorenforcementactions Inspectorenforcementactions { get; }
+
+        /// <summary>
+        /// Gets the IRegionalmanagerenforcementactions.
+        /// </summary>
+        IRegionalmanagerenforcementactions Regionalmanagerenforcementactions { get; }
+
+        /// <summary>
+        /// Gets the IRegistrarenforcementactions.
+        /// </summary>
+        IRegistrarenforcementactions Registrarenforcementactions { get; }
 
         /// <summary>
         /// Gets the ISystemuseradoxioestablishmentincidentinspector.
