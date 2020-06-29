@@ -1662,7 +1662,8 @@ namespace bdd_tests
             sigCheckbox.SendKeys(electricSignature);
 
             // click on the Submit button
-            ClickOnSubmitButton();
+            NgWebElement eligibilitySubmit = ngDriver.FindElement(By.CssSelector("app-eligibility-form button.btn-primary"));
+            eligibilitySubmit.Click();
         }
 
 
