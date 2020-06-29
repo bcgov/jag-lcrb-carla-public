@@ -6,14 +6,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     public partial class MicrosoftDynamicsCRMadoxioLicences
     {
 
-        //temp
-        [JsonProperty(PropertyName = "adoxio_dormant")]
-        public int? AdoxioDormant { get; set; }
-        [JsonProperty(PropertyName = "adoxio_operated")]
-        public int? AdoxioOperated { get; set; }
-        [JsonProperty(PropertyName = "adoxio_suspended")]
-        public int? AdoxioSuspended { get; set; }
-
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_account_adoxio_legalentity_Account@odata.bind")]
