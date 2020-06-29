@@ -81,55 +81,55 @@ namespace bdd_tests
             string postalCode = "V8V4Y3";
 
             // enter the birth city and country
-            NgWebElement uiBirthCityCountry = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+            NgWebElement uiBirthCityCountry = ngDriver.FindElement(By.CssSelector("input[formcontrolname='birthPlace']"));
             uiBirthCityCountry.SendKeys(birthCityCountry);
 
             // enter the BC driver's licence
-            NgWebElement uiBCDL = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
+            NgWebElement uiBCDL = ngDriver.FindElement(By.CssSelector("input[formcontrolname='primaryIdNumber']"));
             uiBCDL.SendKeys(BCDL);
 
             // enter the BCID
-            NgWebElement uiBCID = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
+            NgWebElement uiBCID = ngDriver.FindElement(By.CssSelector("input[formcontrolname='secondaryIdNumber']"));
             uiBCID.SendKeys(BCID);
 
             // enter the primary phone number
-            NgWebElement uiPrimaryPhone = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
+            NgWebElement uiPrimaryPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mobilePhone']"));
             uiPrimaryPhone.SendKeys(primaryPhone);
 
             // enter the email address
-            NgWebElement uiEmail = ngDriver.FindElement(By.XPath("//input[@type='email']"));
+            NgWebElement uiEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='email']"));
             uiEmail.SendKeys(email);
 
             // select the start date (Date: From) for the current address
-            NgWebElement openCalendar = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
+            NgWebElement openCalendar = ngDriver.FindElement(By.CssSelector("input[formcontrolname='fromdate']"));
             openCalendar.Click();
-
-            NgWebElement nextCalendar = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span"));
+            
+            NgWebElement nextCalendar = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span/div"));
             nextCalendar.Click();
 
             NgWebElement nextCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr[4]/td[2]/div"));
             nextCalendar2.Click();
 
-            NgWebElement nextCalendar3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-year-view/table/tbody/tr[3]/td[4]/div"));
+            NgWebElement nextCalendar3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-year-view/table/tbody/tr[3]/td[3]/div"));
             nextCalendar3.Click();
 
-            NgWebElement nextCalendar4 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[4]/td[4]/div"));
+            NgWebElement nextCalendar4 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[3]/td[6]/div"));
             nextCalendar4.Click();
 
             // enter the street of the mailing address
-            NgWebElement uiMailingStreet = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
+            NgWebElement uiMailingStreet = ngDriver.FindElement(By.CssSelector("input[formcontrolname='address2_line1']"));
             uiMailingStreet.SendKeys(mailingStreet);
 
             // enter the city of the mailing address
-            NgWebElement uiMailingCity = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
+            NgWebElement uiMailingCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='address2_city']"));
             uiMailingCity.SendKeys(mailingCity);
 
             // enter the province of the mailing address
-            NgWebElement uiMailingProvince = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
+            NgWebElement uiMailingProvince = ngDriver.FindElement(By.CssSelector("input[formcontrolname='address2_stateorprovince']"));
             uiMailingProvince.SendKeys(mailingProvince);
 
             // enter the postal code of the mailing address
-            NgWebElement uiPostalCode = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
+            NgWebElement uiPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='address2_postalcode']"));
             uiPostalCode.SendKeys(postalCode);
 
             // click on save and continue button
@@ -145,7 +145,7 @@ namespace bdd_tests
             */
 
             // select consent and disclosure checkbox
-            NgWebElement uiNoWetSignature1 = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            NgWebElement uiNoWetSignature1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='consentToCollection']"));
             uiNoWetSignature1.Click();
         }
 
