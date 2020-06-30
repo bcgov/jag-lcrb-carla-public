@@ -40,8 +40,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string EstablishmentEmail { get; set; }
         public string EstablishmentParcelId { get; set; } //adoxio_establishmentparcelid
         public string EstablishmentPhone { get; set; }
-
-        
+                
         public string LicenceType { get; set; } //_adoxio_licencetype_value		
         
         public DateTimeOffset? ModifiedOn { get; set; }
@@ -55,5 +54,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         [JsonConverter(typeof(StringEnumConverter))]
         public GeneralYesNo? IsApplicationComplete { get; set; }
+
+        public bool? ProposedEstablishmentIsAlr { get; set; }
     }
 }

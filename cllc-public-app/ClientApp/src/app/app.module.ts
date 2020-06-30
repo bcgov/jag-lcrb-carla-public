@@ -202,6 +202,9 @@ import { LgApprovalsComponent } from './components/lg-approvals/lg-approvals.com
 import { LiquorApprovalsCalloutComponent } from './components/liquor-approvals-callout/liquor-approvals-callout.component';
 import { LgInConfirmationOfReceiptComponent } from './components/applications/application/tabs/lg-in-confirmation-of-receipt/lg-in-confirmation-of-receipt.component';
 import { LicenceRepresentativeFormComponent } from '@components/licence-representative-form/licence-representative-form.component';
+import { BusinessPlanComponent } from './components/applications/application/tabs/business-plan/business-plan.component';
+import { LgInfoPanelComponent } from './components/applications/application/tabs/lg-info-panel/lg-info-panel.component';
+import { AdditionalPidsComponent } from './components/applications/application/tabs/additional-pids/additional-pids.component';
 
 
 @NgModule({
@@ -316,7 +319,10 @@ import { LicenceRepresentativeFormComponent } from '@components/licence-represen
     CovidConfirmationComponent,
     LgApprovalsComponent,
     LiquorApprovalsCalloutComponent,
-    LgInConfirmationOfReceiptComponent
+    LgInConfirmationOfReceiptComponent,
+    BusinessPlanComponent,
+    LgInfoPanelComponent,
+    AdditionalPidsComponent
   ],
   imports: [
     ChartsModule,

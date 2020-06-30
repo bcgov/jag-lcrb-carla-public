@@ -183,12 +183,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
       description2: ['',[]],
       proposedChange: ['', [Validators.required]],
       connectedGrocery: ['', []],
+      sitePhotos: ['',[]],
       authorizedToSubmit: [''],
       signatureAgreement: [''],
-      mfgType: ['', []],
-      brewPub: ['', []],
-      pipedIn: ['', []],
-      neutralGrain: ['', []],
       policeJurisdiction: [''],
       indigenousNation: [''],
       zoningPermitsMFG: ['', []],
@@ -517,37 +514,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return show;
   }
 
+  showSitePhotos() {
+    let show = (this.application && this.showFormControl(this.application.applicationType.sitePhotos));
+    //show = show && this.form.get('connectedGrocery').value === 'Yes';
+    return show;
+  }
+
   onAccountSelect(proposedAccount: TransferAccount) {
     this.form.get('proposedTPO').patchValue(proposedAccount);
   }
 
-
-  /* Helper functions for the Manufactuer Licence Business Plan
-    There are a lot of conditional requirements depending on what is selected.
-    Most are self explanatory
-  */
-
-  hasType(): boolean {
-    // to do, set validation requirements
-    return this.form.get('mfgType').value;
-  }
-
-  isBrewery(): boolean {
-    // to do, set validation requirements
-    return this.form.get('mfgType').value === "Brewery";
-  }
-  isWinery(): boolean {
-    // to do, set validation requirements
-    return this.form.get('mfgType').value === "Winery";
-  }
-  isDistillery(): boolean {
-    return this.form.get('mfgType').value === "Distillery";
-  }
-
-  isBrewPub(): boolean {
-    // to do, set validation requirements
-    return this.form.get('mfgType').value === "Brewery" && this.form.get('brewPub').value === "Yes";
-  }
 
   isRAS(): boolean {
     return this.application.licenseType === 'Rural Agency Store';
@@ -677,7 +653,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
           return of(true);
         })).subscribe(res => {
           this.saveComplete.emit(true);
-          this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.snackBar.open('Application Submitted to Local Government For Approval', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.router.navigateByUrl('/dashboard');
         });
     } else {
       this.showValidationMessages = true;

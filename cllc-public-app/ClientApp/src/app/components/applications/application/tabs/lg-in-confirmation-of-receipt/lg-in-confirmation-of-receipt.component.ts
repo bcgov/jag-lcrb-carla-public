@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ApplicationDataService } from '@services/application-data.service';
 import { Application } from '@models/application.model';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FormBase } from '@shared/form-base';
+import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
@@ -15,6 +15,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
   @Input() application: Application;
   validationMessages: string[];
   busy: any;
+  htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
 
   constructor(private applicationDataService: ApplicationDataService,
     private snackBar: MatSnackBar,
