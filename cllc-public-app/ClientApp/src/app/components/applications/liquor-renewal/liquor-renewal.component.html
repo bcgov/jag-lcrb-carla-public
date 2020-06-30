@@ -117,7 +117,7 @@
         <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
             <section class="d-flex justify-content-between w-100">
                 <div class="question-label align-self-center">
-                    5. Have you entered into an agreement allowing another person or business to use your liquor
+                    5. Have you entered into an agreement allowing another person or business to use your
                     licence within the past 12 months?
                 </div>
                 <div style="flex: 0 0 85px;">
@@ -130,6 +130,7 @@
             </section>
             <section style="padding-right: 95px;">
                 <div *ngIf="form.get('renewalThirdParty').value === 'Yes'" class="field-changed">
+                    <button routerLink="/licences" class="btn btn-missing" target="_blank"><i class="fas fa-bolt" style="margin-right: 10px;"></i>Submit a <strong>Third Party Operator</strong> application from the <strong>Licences Dashboard</strong></button>
                 </div>
             </section>
         </mat-card>
@@ -190,7 +191,7 @@
             </section>
             <section style="padding-right: 95px;">
                 <div *ngIf="form.get('renewalUnreportedSaleOfBusiness').value === 'Yes'" class="field-changed">
-                    <button routerLink="/licences" class="btn btn-missing" target="_blank"><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i><strong>Transfer Ownership</strong> of this Licence from the <strong>Licences Dashboard</strong></button>
+                    <button routerLink="/licences" class="btn btn-missing" target="_blank"><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i><strong>Transfer</strong> this Licence from the <strong>Licences Dashboard</strong></button>
                 </div>
             </section>
         </mat-card>
@@ -210,6 +211,7 @@
             </section>
             <section style="padding-right: 95px;">
                 <div *ngIf="form.get('renewalValidInterest').value === 'Yes'" class="field-changed">
+                    <button routerLink="/licences" class="btn btn-missing" target="_blank"><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i><strong>Transfer</strong> this Licence from the <strong>Licences Dashboard</strong></button>
                 </div>
             </section>
         </mat-card>

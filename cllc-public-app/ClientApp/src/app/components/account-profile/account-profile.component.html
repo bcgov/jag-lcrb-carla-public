@@ -130,16 +130,16 @@
             <h3>Physical Address</h3>
             <div class="row">
               <app-field class="col-md-6 col-xs-12" label="Street Address 1" [required]="true"
-                [valid]="form.get('businessProfile.physicalAddressStreet').valid || !form.get('businessProfile.physicalAddressStreet').touched"
-                errorMessage="Please enter the street address" [isFullWidth]="true">
+                         [valid]="form.get('businessProfile.physicalAddressStreet').valid || !form.get('businessProfile.physicalAddressStreet').touched"
+                         errorMessage="Please enter the street address" [isFullWidth]="true">
                 <input class="form-control" type="text" formControlName="physicalAddressStreet">
               </app-field>
               <app-field class="col-md-6 col-xs-12" label="Street Address 2" [isFullWidth]="true">
                 <input class="form-control" type="text" formControlName="physicalAddressStreet2">
               </app-field>
               <app-field class="col-md-6 col-xs-12" label="City" [required]="true"
-                [valid]="form.get('businessProfile.physicalAddressCity').valid || !form.get('businessProfile.physicalAddressCity').touched"
-                errorMessage="Please enter the city" [isFullWidth]="true">
+                         [valid]="form.get('businessProfile.physicalAddressCity').valid || !form.get('businessProfile.physicalAddressCity').touched"
+                         errorMessage="Please enter the city" [isFullWidth]="true">
                 <input class="form-control" type="text" formControlName="physicalAddressCity">
               </app-field>
               <section class="col-md-3 col-xs-12">
@@ -149,10 +149,10 @@
               </section>
               <section class="col-md-3 col-xs-12">
                 <app-field label="Postal Code" [required]="true"
-                  (blur)="trimValue(form.get('businessProfile.physicalAddressPostalCode'))"
-                  [valid]="form.get('businessProfile.physicalAddressPostalCode').valid || !form.get('businessProfile.physicalAddressPostalCode').touched"
-                  errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)"
-                  [isFullWidth]="true">
+                           (blur)="trimValue(form.get('businessProfile.physicalAddressPostalCode'))"
+                           [valid]="form.get('businessProfile.physicalAddressPostalCode').valid || !form.get('businessProfile.physicalAddressPostalCode').touched"
+                           errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)"
+                           [isFullWidth]="true">
                   <input class="form-control" type="text" formControlName="physicalAddressPostalCode">
                 </app-field>
               </section>
@@ -170,38 +170,38 @@
               </section>
               <div class="row">
                 <app-field class="col-md-6 col-xs-12" label="PO Box or Street Address 1"
-                  errorMessage="Please enter the street address"
-                  [valid]="form.get('businessProfile.mailingAddressStreet').valid || !form.get('businessProfile.mailingAddressStreet').touched"
-                  [required]="true" [isFullWidth]="true">
+                           errorMessage="Please enter the street address"
+                           [valid]="form.get('businessProfile.mailingAddressStreet').valid || !form.get('businessProfile.mailingAddressStreet').touched"
+                           [required]="true" [isFullWidth]="true">
                   <input type="text" formControlName="mailingAddressStreet" class="form-control">
                 </app-field>
                 <app-field class="col-md-6 col-xs-12" label="PO Box or Street Address 2" [required]="false"
-                  [isFullWidth]="true">
+                           [isFullWidth]="true">
                   <input type="text" formControlName="mailingAddressStreet2" class="form-control">
                 </app-field>
                 <app-field class="col-md-6 col-xs-12" label="City" errorMessage="Please enter the city"
-                  [valid]="form.get('businessProfile.mailingAddressCity').valid || !form.get('businessProfile.mailingAddressCity').touched"
-                  [required]="true" [isFullWidth]="true">
+                           [valid]="form.get('businessProfile.mailingAddressCity').valid || !form.get('businessProfile.mailingAddressCity').touched"
+                           [required]="true" [isFullWidth]="true">
                   <input type="text" formControlName="mailingAddressCity" class="form-control">
                 </app-field>
                 <section class="col-md-3 col-xs-12">
                   <app-field label="Province/State"
-                    [valid]="form.get('businessProfile.mailingAddressProvince').valid || !form.get('businessProfile.mailingAddressProvince').touched"
-                    [required]="true" [isFullWidth]="true">
+                             [valid]="form.get('businessProfile.mailingAddressProvince').valid || !form.get('businessProfile.mailingAddressProvince').touched"
+                             [required]="true" [isFullWidth]="true">
                     <input type="text" formControlName="mailingAddressProvince" class="form-control">
                   </app-field>
                 </section>
                 <section class="col-md-3 col-xs-12">
                   <app-field label="Postal /Zip Code" errorMessage="This is required. The postal / zip code should be in one of the following formats: X1X1X1,
                     12345, 12345-1234" (blur)="trimValue(form.get('businessProfile.mailingAddressPostalCode'))"
-                    [valid]="form.get('businessProfile.mailingAddressPostalCode').valid || !form.get('businessProfile.mailingAddressPostalCode').touched"
-                    [required]="true" [isFullWidth]="true">
+                             [valid]="form.get('businessProfile.mailingAddressPostalCode').valid || !form.get('businessProfile.mailingAddressPostalCode').touched"
+                             [required]="true" [isFullWidth]="true">
                     <input type="text" formControlName="mailingAddressPostalCode" class="form-control">
                   </app-field>
                 </section>
                 <app-field class="col-md-6 col-xs-12" label="Country" errorMessage="Please enter country"
-                  [valid]="form.get('businessProfile.mailingAddressCountry').valid || !form.get('businessProfile.mailingAddressCountry').touched"
-                  [required]="true" [isFullWidth]="true">
+                           [valid]="form.get('businessProfile.mailingAddressCountry').valid || !form.get('businessProfile.mailingAddressCountry').touched"
+                           [required]="true" [isFullWidth]="true">
                   <input type="text" formControlName="mailingAddressCountry" class="form-control">
                 </app-field>
               </div>
@@ -210,18 +210,26 @@
             <hr>
 
             <app-field label="Business Phone Number" [required]="true"
-              [valid]="form.get('businessProfile.contactPhone').valid || !form.get('businessProfile.contactPhone').touched"
-              errorMessage="Please enter the 10-digit business phone number, without including any spaces">
+                       [valid]="form.get('businessProfile.contactPhone').valid || !form.get('businessProfile.contactPhone').touched"
+                       errorMessage="Please enter the 10-digit business phone number, without including any spaces">
               <input class="form-control" style="width: 250px;" mask="(000) 000-0000"
-                type="text" formControlName="contactPhone">
+                     type="text" formControlName="contactPhone">
             </app-field>
 
             <app-field label="Business Email" [required]="true"
-              [valid]="form.get('businessProfile.contactEmail').valid || !form.get('businessProfile.contactEmail').touched"
-              errorMessage="Please enter a valid email address">
+                       [valid]="form.get('businessProfile.contactEmail').valid || !form.get('businessProfile.contactEmail').touched"
+                       errorMessage="Please enter a valid email address">
               <input class="form-control" style="width: 350px;" type="text" formControlName="contactEmail"
-                (blur)="trimValue(form.get('businessProfile.contactEmail'))">
+                     (blur)="trimValue(form.get('businessProfile.contactEmail'))">
             </app-field>
+
+            <app-field *ngIf="getBusinessTypeName() === 'Indigenous Nation' || getBusinessTypeName() == 'Local Government'" label="Liquor Policy Information Link" [required]="true"
+                       [valid]="form.get('businessProfile.websiteUrl').valid || !form.get('businessProfile.websiteUrl').touched"
+                       errorMessage="Please enter a valid website address">
+              <input class="form-control" style="width: 350px;" type="text" formControlName="websiteUrl"
+                     (blur)="trimValue(form.get('businessProfile.websiteUrl'))">
+            </app-field>
+
           </div>
 
           <h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">
