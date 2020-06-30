@@ -1,6 +1,7 @@
 <div [ngBusy]="busy"></div>
-<div style="max-width: 800px;" [formGroup]="form">
-  <!-- <h1 style="margin-top: 0;">Connections to Producers</h1> -->
+
+<h3 class="blue-header">CONNECTIONS TO FEDERAL PRODUCERS OF CANNABIS</h3>
+<div  class="padded-section content-bottom"[formGroup]="form">
   <span *ngIf="federalProducerText === 'federal producer'">A "
     <strong>{{federalProducerText}}</strong>" is a {{licensedProducerText}} of cannabis
   </span>
@@ -378,13 +379,16 @@
     <p></p>
   </div>
 
+</div>
+
   <!-- Liquor Financial Interest -->
-  <div>
+  <h3 class="blue-header">CONNECTIONS TO OTHER LIQUOR LICENCES</h3>
+  <div class="padded-section content-bottom" [formGroup]="form">
     <section>
       <label for="">
         Do you or any of your shareholders have any amount of ownership interest in another B.C. liquor licence, or any
-        association with a third party operator for another licence, or have an immediate family member (spouse, parent,
-        sibling or child) with any amount of ownership interest in another licence?
+        association with a third party operator for another liquor licence, or have an immediate family member (spouse, parent,
+        sibling or child) with any amount of ownership interest in another liquor licence?
       </label>
 
       <input type="radio" group="moreThanAYear" [value]='1' formControlName="liquorFinancialInterest"> Yes
@@ -401,4 +405,3 @@
     </section>
     <p></p>
   </div>
-</div>
