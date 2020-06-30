@@ -26,7 +26,7 @@ Scenario: Indigenous Nation Personnel Email Change
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
@@ -46,7 +46,7 @@ Scenario: Partnership Personnel Email Change
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
@@ -66,7 +66,7 @@ Scenario: Private Corporation Personnel Email Change
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
@@ -86,7 +86,7 @@ Scenario: Public Corporation Personnel Email Change
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
@@ -106,7 +106,7 @@ Scenario: Society Personnel Email Change
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
@@ -126,7 +126,7 @@ Scenario: Sole Proprietorship Personnel Email Change
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
@@ -147,8 +147,6 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as an (.*)")]
         public void I_view_the_dashboard_IN(string businessType)
         {
-            CheckFeatureFlagsCannabis();
-
             CarlaLogin(businessType);
         }
 
@@ -163,8 +161,6 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            CheckFeatureFlagsCannabis();
-
             CarlaLogin(businessType);
         }
     }

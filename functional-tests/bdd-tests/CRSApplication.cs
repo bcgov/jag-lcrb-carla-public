@@ -25,7 +25,7 @@ Scenario: Indigenous Nation CRS Application
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I review the security screening requirements
     And I click on the Pay for Application button
@@ -43,7 +43,7 @@ Scenario: Partnership CRS Application
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I review the security screening requirements
     And I click on the Pay for Application button
@@ -61,7 +61,7 @@ Scenario: Private Corporation CRS Application
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I review the security screening requirements
     And I click on the Pay for Application button
@@ -79,7 +79,7 @@ Scenario: Public Corporation CRS Application
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I review the security screening requirements
     And I click on the Pay for Application button
@@ -97,7 +97,7 @@ Scenario: Society CRS Application
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I review the security screening requirements
     And I click on the Pay for Application button
@@ -115,7 +115,7 @@ Scenario: Sole Proprietorship CRS Application
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I review the security screening requirements
     And I click on the Pay for Application button
