@@ -1875,6 +1875,17 @@ namespace bdd_tests
                 societyConnectionDetails.SendKeys(societyDetails);
             }
 
+            // click on the liquor financial interest radio button
+            //NgWebElement liquorFinInterestRadio = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-0']/app-account-profile/div/div[2]/div[1]/div/div/div[4]/app-connection-to-producers/div[3]/section[1]/input[1]"));
+
+            NgWebElement liquorFinInterestRadio = ngDriver.FindElement(By.XPath("//app-connection-to-producers/div[3]/section[1]/input[1]"));
+            liquorFinInterestRadio.Click();
+
+            // enter the details of the financial interest
+            string finDetails = "Details of the financial interest (automated test).";
+            NgWebElement liquorFinInterestTextArea = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname = 'liquorFinancialInterestDetails']"));
+            liquorFinInterestTextArea.SendKeys(finDetails);
+
             // click on Continue to Organization Review button
             NgWebElement continueAppButton = ngDriver.FindElement(By.Id("continueToApp"));
             continueAppButton.Click();
