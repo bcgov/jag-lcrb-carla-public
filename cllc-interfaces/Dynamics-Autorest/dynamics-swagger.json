@@ -133783,6 +133783,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_proposedestablishmentisalr": {
+          "type": "boolean"
+        },
         "adoxio_authorizedtosubmit": {
           "type": "boolean"
         },
@@ -138465,10 +138468,6 @@
         "adoxio_isreg": {
           "type": "boolean"
         },
-        "adoxio_minperiod": {
-          "format": "int32",
-          "type": "integer"
-        },
         "timezoneruleversionnumber": {
           "format": "int32",
           "type": "integer"
@@ -138492,9 +138491,6 @@
         "adoxio_contraventionoutcome": {
           "format": "int32",
           "type": "integer"
-        },
-        "adoxio_contraventionnumber": {
-          "type": "string"
         },
         "_modifiedonbehalfby_value": {
           "type": "string"
@@ -138555,6 +138551,10 @@
         "_adoxio_regionid_value": {
           "type": "string"
         },
+        "adoxio_iswaiverrequested": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_maxperiod": {
           "format": "int32",
           "type": "integer"
@@ -138570,6 +138570,14 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_suspensionstartdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_delegatefinaldecision": {
+          "format": "int32",
+          "type": "integer"
+        },
         "modifiedon": {
           "format": "date-time",
           "type": "string"
@@ -138577,6 +138585,10 @@
         "adoxio_recommendedmonetarypenalty": {
           "format": "decimal",
           "type": "number"
+        },
+        "adoxio_minperiod": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_isactwordtemplate": {
           "type": "string"
@@ -138589,8 +138601,9 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_iswaiver": {
-          "type": "boolean"
+        "adoxio_finalmonetarypenalty_base": {
+          "format": "decimal",
+          "type": "number"
         },
         "versionnumber": {
           "format": "int64",
@@ -138625,10 +138638,6 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_finalmonetarypenalty_base": {
-          "format": "decimal",
-          "type": "number"
-        },
         "adoxio_delegategmdecision": {
           "format": "int32",
           "type": "integer"
@@ -138647,9 +138656,8 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_numberofoffence": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_contraventionnumber": {
+          "type": "string"
         },
         "adoxio_rmapprovaldecision": {
           "format": "int32",
@@ -138679,6 +138687,10 @@
         },
         "adoxio_lpcnumber": {
           "type": "string"
+        },
+        "adoxio_numberofoffence": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_interpretation": {
           "type": "string"
@@ -138733,9 +138745,9 @@
         "_adoxio_compliantid_value": {
           "type": "string"
         },
-        "adoxio_suspensionstartdate": {
-          "format": "date-time",
-          "type": "string"
+        "adoxio_iswaiversigned": {
+          "format": "int32",
+          "type": "integer"
         },
         "createdbyname": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
@@ -140323,694 +140335,26 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_enforcementaction",
       "type": "object",
       "properties": {
-        "adoxio_checklistcourtdecisionreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_communicationdistributiondate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_distributedtolicenseedate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistdocumentsfinalizeduploaded": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_licenseeid_value": {
-          "type": "string"
-        },
-        "adoxio_checklistcourtoverturned": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_delegatephone": {
-          "type": "string"
-        },
-        "adoxio_courtdecisiondate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistnoeareportsubmitted": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_delegateassignmentdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_waivercreateddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistlicenseenotifiedofrecorequest": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_waiversentdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistnoeareportapproved": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_owninguser_value": {
-          "type": "string"
-        },
-        "adoxio_phcresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_recommendedmonetarypenalty": {
-          "format": "decimal",
-          "type": "number"
-        },
-        "_adoxio_regionid_value": {
-          "type": "string"
-        },
-        "adoxio_checklistfinancenotifiedreissue": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistnotificationsent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistpenaltylettercreated": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistcompliancehistoryposted": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistnoeareportsent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_phcoutcome": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "timezoneruleversionnumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_regionalmanagerid_value": {
-          "type": "string"
-        },
-        "adoxio_phccompletedate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_licenseerepresentative2": {
-          "type": "string"
-        },
-        "adoxio_hearingnoticesentdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistordersent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_delegategmid_value": {
-          "type": "string"
-        },
-        "adoxio_checklistenforcementactivitiescomplete": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_staylettersentdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_lgcontactemail": {
-          "type": "string"
-        },
-        "adoxio_checklisthearingscheduled": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_stayletterdecisiondate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_licenseerepresentative1": {
-          "type": "string"
-        },
-        "statuscode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_delegatefinaldecision": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistlicenseenotified": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_finalmonetarypenalty_base": {
-          "format": "decimal",
-          "type": "number"
-        },
-        "adoxio_suspensionperioddefineddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_lgcontactphone": {
-          "type": "string"
-        },
-        "adoxio_noeanumber": {
-          "type": "string"
-        },
-        "adoxio_policecontactphone": {
-          "type": "string"
-        },
-        "adoxio_checklistsuspensiondefined": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistwaiversignednoea": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_monetarypaymentdeadlinedate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistdelegateassigned": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_stayorderstayeduntildate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_dgmapproval": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistpenaltyfundsreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklisthearinginvitationsent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistpenaltyletterapproved": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistwaiversignedphc": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "modifiedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checkliststayordersent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistreconsiderationapproved": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_advocateid_value": {
-          "type": "string"
-        },
-        "adoxio_checklistphccancelled": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistdelegatedecisionreached": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_waiverapproveddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_cnissueddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_penaltylevel": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistlcrbdecisionreached": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistpenaltysignssent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "createdon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_initiallicenseeresponsedate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_stageid_value": {
-          "type": "string"
-        },
-        "statecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_licencetypeid_value": {
-          "type": "string"
-        },
-        "adoxio_checklistwrittensubmissionreviewed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_initiallicenseedecisionresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_modifiedby_value": {
-          "type": "string"
-        },
-        "adoxio_delegatedecisionsentdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistpostedlcrbwebsite": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_checklistpenaltyletterreissued": {
           "format": "int32",
           "type": "integer"
-        },
-        "adoxio_judicialhearinglocation": {
-          "type": "string"
-        },
-        "adoxio_reconsiderationlicenseedecision": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistoverduewaiverresponse": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_rolsentdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistsuspensionserved": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklisthearingdecisionsent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistappliedjudicialreview": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklisthearingresponsereceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_createdonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_phclocation": {
-          "type": "string"
-        },
-        "adoxio_delegateaddress": {
-          "type": "string"
-        },
-        "adoxio_checkliststayorderapproved": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistpartialwaiverssignedphc": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklisthearingconfirmationsent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistevidencematerialssent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_enforcementactionid": {
-          "type": "string"
-        },
-        "adoxio_delegatename": {
-          "type": "string"
-        },
-        "adoxio_courtdatetime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "utcconversiontimezonecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_monetarypenalty": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistrolsent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_recommendedmonetarypenalty_base": {
-          "format": "decimal",
-          "type": "number"
-        },
-        "adoxio_penaltyletterapproveddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistcourtdatereceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_licenceid_value": {
-          "type": "string"
-        },
-        "adoxio_checklistlcrbdecisionsent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_judicialreviewdeadlinedate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_docswitnessdisclosuredate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_ownerid_value": {
-          "type": "string"
-        },
-        "adoxio_monetarypenaltyprocesseddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistwaiverdocchangesrequired": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_hearinglocation": {
-          "type": "string"
-        },
-        "_transactioncurrencyid_value": {
-          "type": "string"
-        },
-        "adoxio_checklistrolcomplete": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "processid": {
-          "type": "string"
-        },
-        "adoxio_checklistregistrardecisionreached": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistlcrbstaffnotified": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistwaiversent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "traversedpath": {
-          "type": "string"
-        },
-        "adoxio_checklistreconsiderationapplied": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_licenseerepresentative3": {
-          "type": "string"
-        },
-        "adoxio_lgcontactname": {
-          "type": "string"
-        },
-        "adoxio_datedocsandwitnesssdisclosure": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_delegatedecisiondate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistnoeareportchangesrequired": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_orderdecisiondate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_reconsiderationapplicationduedate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistdelegateassignmentlettersent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_prehearingdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_registrarsdecision": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_createdby_value": {
-          "type": "string"
         },
         "adoxio_finalmonetarypenalty": {
           "format": "decimal",
           "type": "number"
         },
-        "adoxio_penaltylettercreateddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_staylettercompletedate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_contraventionnoticenumber": {
-          "type": "string"
-        },
-        "adoxio_iscontraventionnoticeissued": {
-          "type": "boolean"
-        },
-        "adoxio_waiversigneddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_waiversubmissionduedate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistwaiverdocsubmitted": {
+        "adoxio_checklisthearingconfirmationsent": {
           "format": "int32",
           "type": "integer"
         },
-        "importsequencenumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_courtdecisionresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_evidencematerialssentdate": {
-          "format": "date-time",
+        "adoxio_policecontactphone": {
           "type": "string"
-        },
-        "_owningbusinessunit_value": {
-          "type": "string"
-        },
-        "adoxio_reconsiderationapplicationsubmitteddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_recommendedsuspensionduration": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistreconsiderrequestfeepaid": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_establishmentid_value": {
-          "type": "string"
-        },
-        "adoxio_checklisthearingcompleted": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_penaltyviolation": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_delegateemail": {
-          "type": "string"
-        },
-        "adoxio_waiverresponsereceiveddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_modifiedonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_noeareportsubmitteddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistphccomplete": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_title": {
-          "type": "string"
-        },
-        "_owningteam_value": {
-          "type": "string"
-        },
-        "adoxio_checklistphcscheduled": {
-          "format": "int32",
-          "type": "integer"
         },
         "adoxio_noeaapprovaldate": {
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_suspensionfulfillmentdeadlinedate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_waiverreminder": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistreconsiderationrequestreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_policecontactname": {
-          "type": "string"
-        },
-        "adoxio_penaltyletterreissuedate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistjudicialreviewrequired": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_inspectorid_value": {
-          "type": "string"
-        },
         "adoxio_checklistlicenseedecisionreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_delegatedecisionresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistpartialwaiverssignednoea": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklisthearingnoticesent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_areaid_value": {
-          "type": "string"
-        },
-        "adoxio_suspensionenddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_oralhearinglocation": {
-          "type": "string"
-        },
-        "adoxio_checklistpenaltylettersentdeadline": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_oralhearingdatetime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_penaltylettersentdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistorderresponsereceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistwaiverdocapproved": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_registrarid_value": {
-          "type": "string"
-        },
-        "adoxio_noeasentdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checkliststayordercreated": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_hearingresponseresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistpenaltylettersent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_policecontactemail": {
-          "type": "string"
-        },
-        "adoxio_checklistdelegatedecisionsent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_suspensionstartdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "exchangerate": {
-          "format": "decimal",
-          "type": "number"
-        },
-        "adoxio_checklistwaiverresponsereceived": {
           "format": "int32",
           "type": "integer"
         },
@@ -141018,11 +140362,321 @@
           "format": "date-time",
           "type": "string"
         },
+        "adoxio_courtdatetime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_casenumber": {
+          "type": "string"
+        },
+        "adoxio_oralhearingdatetime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "statuscode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "traversedpath": {
+          "type": "string"
+        },
+        "adoxio_checklistdelegateassigned": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_delegateemail": {
+          "type": "string"
+        },
+        "adoxio_checklistorderresponsereceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_waiversubmissionduedate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistwaiverdocchangesrequired": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_staylettercompletedate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_courtdecisionresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_reconsiderationlicenseedecision": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_suspensionperioddefineddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_courtdecisiondate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_adoxio_regionalmanagerid_value": {
+          "type": "string"
+        },
+        "adoxio_delegateassignmentdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_orderdecision": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_waivercreateddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "importsequencenumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_licenseerepresentative2": {
+          "type": "string"
+        },
+        "adoxio_checklistnoeareportchangesrequired": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistrolsent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_penaltylettersentdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistcourtoverturned": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistlicenseenotifiedofrecorequest": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_lgcontactemail": {
+          "type": "string"
+        },
+        "adoxio_checklistoverduewaiverresponse": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_waiverresponsereceiveddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistenforcementactivitiescomplete": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistpenaltylettersentdeadline": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistpenaltyfundsreceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_rolsentdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_adoxio_establishmentid_value": {
+          "type": "string"
+        },
+        "adoxio_licenseesubmissionsdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistdelegateassignmentlettersent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistsuspensiondefined": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistevidencematerialssent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_delegatefinaldecision": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_orderdecisiondate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistdelegatedecisionsent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_areaid_value": {
+          "type": "string"
+        },
+        "adoxio_delegateaddress": {
+          "type": "string"
+        },
+        "adoxio_dgmapproval": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_judicialhearinglocation": {
+          "type": "string"
+        },
+        "_stageid_value": {
+          "type": "string"
+        },
+        "adoxio_suspensionstartdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_transactioncurrencyid_value": {
+          "type": "string"
+        },
+        "adoxio_delegatedecisionresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_hearingresponseresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_owningbusinessunit_value": {
+          "type": "string"
+        },
+        "adoxio_checklistcompliancehistoryposted": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_prehearingdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_createdonbehalfby_value": {
+          "type": "string"
+        },
+        "adoxio_checklistreconsiderationapplied": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistnoeareportapproved": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_tentativehearinglocation": {
+          "type": "string"
+        },
+        "adoxio_checkliststayorderapproved": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_hearingnoticesentdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistlcrbdecisionreached": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistordersent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistwrittensubmissionreviewed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_penaltyletterreissuedate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_reconsiderationapplicationreceiveddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_cnissueddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistwaiversignednoea": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_penaltytype": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_datedocsandwitnesssdisclosure": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_penaltylevel": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_licenseelegalrepemail": {
+          "type": "string"
+        },
+        "adoxio_lgcontactphone": {
+          "type": "string"
+        },
+        "adoxio_enforcementactionid": {
+          "type": "string"
+        },
+        "adoxio_checklistphccomplete": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_waiverreminder": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_oralhearinglocation": {
+          "type": "string"
+        },
+        "adoxio_reconsiderationapplicationsubmitteddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "timezoneruleversionnumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_recommendedmonetarypenalty": {
+          "format": "decimal",
+          "type": "number"
+        },
+        "adoxio_noeanumber": {
+          "type": "string"
+        },
+        "adoxio_checklistpenaltyletterapproved": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_licenseelegalrepphone": {
+          "type": "string"
+        },
         "adoxio_judicialhearingdate": {
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_gmdecision": {
+        "adoxio_checklistfinancenotifiedpenalty": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_regionid_value": {
+          "type": "string"
+        },
+        "adoxio_checklistsuspensionserved": {
           "format": "int32",
           "type": "integer"
         },
@@ -141030,23 +140684,424 @@
           "format": "date-time",
           "type": "string"
         },
-        "versionnumber": {
-          "format": "int64",
+        "modifiedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_owningteam_value": {
+          "type": "string"
+        },
+        "adoxio_checklisthearingresponsereceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_contraventionnoticenumber": {
+          "type": "string"
+        },
+        "adoxio_checklisthearingdecisionsent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_licenseerepresentative1": {
           "type": "string"
         },
         "adoxio_hearingdate": {
           "format": "date-time",
           "type": "string"
         },
+        "adoxio_checklistwaiverdocsubmitted": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_phcresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklisthearingnoticesent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistfinancenotifiedreissue": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_licenseelegalrepname": {
+          "type": "string"
+        },
+        "adoxio_checklistpartialwaiverssignednoea": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistappliedjudicialreview": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_monetarypenaltyprocesseddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistwaiversignedphc": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_registrarsdecision": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_judicialreviewdeadlinedate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_evidencematerialssentdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_waiverapproveddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "utcconversiontimezonecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_modifiedby_value": {
+          "type": "string"
+        },
+        "adoxio_tentativehearingdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_penaltyletterapproveddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_docswitnessdisclosuredate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_adoxio_licenceid_value": {
+          "type": "string"
+        },
+        "adoxio_phclocation": {
+          "type": "string"
+        },
+        "adoxio_checklistdocumentsfinalizeduploaded": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_iscontraventionnoticeissued": {
+          "type": "boolean"
+        },
+        "adoxio_recommendedmonetarypenalty_base": {
+          "format": "decimal",
+          "type": "number"
+        },
+        "adoxio_penaltylettercreateddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_adoxio_licencetypeid_value": {
+          "type": "string"
+        },
+        "adoxio_checklistdelegatedecisionreached": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_gmdecision": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistpenaltylettercreated": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_finalmonetarypenalty_base": {
+          "format": "decimal",
+          "type": "number"
+        },
+        "adoxio_stayorderstayeduntildate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistphccancelled": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_penaltyviolation": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistlicenseenotified": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_delegategmid_value": {
+          "type": "string"
+        },
+        "adoxio_checklistphcscheduled": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistcourtdecisionreceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "type": "string"
+        },
+        "adoxio_checklistjudicialreviewrequired": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_branchdisclosuredocsdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistnotificationsent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistpenaltysignssent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistnoeareportsent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_policecontactname": {
+          "type": "string"
+        },
+        "adoxio_communicationdistributiondate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistwaiversent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_policecontactemail": {
+          "type": "string"
+        },
+        "createdon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "exchangerate": {
+          "format": "decimal",
+          "type": "number"
+        },
+        "_adoxio_advocateid_value": {
+          "type": "string"
+        },
+        "adoxio_delegatedecisionsentdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_reconsiderationapplicationduedate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklisthearingscheduled": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checkliststayordersent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_delegatename": {
+          "type": "string"
+        },
+        "adoxio_checklistreconsiderationrequestreceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_suspensionenddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistlcrbstaffnotified": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_compliancehistoryposting": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_reconsiderationapplicationreceiveddate": {
+        "adoxio_phclettersentdate": {
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_checklistfinancenotifiedpenalty": {
+        "adoxio_stayletterdecisiondate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistreconsiderationapproved": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_licenseeid_value": {
+          "type": "string"
+        },
+        "_ownerid_value": {
+          "type": "string"
+        },
+        "adoxio_checklistregistrardecisionreached": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_title": {
+          "type": "string"
+        },
+        "statecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_noeareportsubmitteddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_adoxio_inspectorid_value": {
+          "type": "string"
+        },
+        "adoxio_waiversentdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_createdby_value": {
+          "type": "string"
+        },
+        "adoxio_staylettersentdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "processid": {
+          "type": "string"
+        },
+        "adoxio_delegatedecisiondate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_adoxio_registrarid_value": {
+          "type": "string"
+        },
+        "adoxio_checklistpenaltylettersent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_licenseerepresentative3": {
+          "type": "string"
+        },
+        "adoxio_checklistcourtdatereceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_waiversigneddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklisthearingcompleted": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_distributedtolicenseedate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checkliststayordercreated": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_phccompletedate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_delegatephone": {
+          "type": "string"
+        },
+        "adoxio_checklistwaiverdocapproved": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistlcrbdecisionsent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistnoeareportsubmitted": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_lgcontactname": {
+          "type": "string"
+        },
+        "adoxio_noeasentdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistrolcomplete": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_initiallicenseedecisionresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_phcoutcome": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_hearinglocation": {
+          "type": "string"
+        },
+        "adoxio_initiallicenseeresponsedate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklisthearinginvitationsent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_suspensionfulfillmentdeadlinedate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistpartialwaiverssignedphc": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_monetarypenalty": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistreconsiderrequestfeepaid": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string"
+        },
+        "adoxio_recommendedsuspensionduration": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_owninguser_value": {
+          "type": "string"
+        },
+        "adoxio_checklistwaiverresponsereceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistpostedlcrbwebsite": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_monetarypaymentdeadlinedate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_delegatefinding": {
           "format": "int32",
           "type": "integer"
         },
@@ -141474,6 +141529,9 @@
         },
         "_adoxio_lgin_value": {
           "type": "string"
+        },
+        "adoxio_establishmentisalr": {
+          "type": "boolean"
         },
         "utcconversiontimezonecode": {
           "format": "int32",
