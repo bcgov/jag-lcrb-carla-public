@@ -38,6 +38,8 @@ export class Account {
   tiedHouse: TiedHouseConnection;
   legalEntity: LegalEntity;
 
+  websiteUrl: string;
+
   isPartnership(): boolean {
     const isPartnership = [
       'GeneralPartnership',
