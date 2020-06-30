@@ -11,6 +11,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
         const string STATUS_ACTIVE = "Active";
         const string STATUS_PAYMENT_REQUIRED = "Payment Required";
         const string STATUS_RENEWAL_DUE = "Renewal Due";
+        const string STATUS_APPROVED_IN_PRINCIPLE = "Approved In Principle";
 
         public static string GetTranslatedApplicationStatus(MicrosoftDynamicsCRMadoxioApplication application)
         {
@@ -73,6 +74,10 @@ namespace Gov.Lclb.Cllb.Public.Utils
                 else if (shownStatus == "PendingForLGFNPFeedback")
                 {
                     shownStatus = "Pending External Review";
+                }
+                else if (shownStatus == "ApprovedInPrinciple")
+                {
+                    shownStatus = STATUS_APPROVED_IN_PRINCIPLE;
                 }
             }
 
