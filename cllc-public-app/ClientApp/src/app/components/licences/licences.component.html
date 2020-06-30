@@ -13,7 +13,9 @@
     </div>
   </section>
 
-  <!-- <section *ngFor="let mappingItem of licenceMappings | keyvalue">
-    <app-licence-row licence="mappingItem" available="false" *ngIf="!LicenceTypeSupported(mappingItem.key)"></app-licence-row>
-  </section> -->
+  <section *ngFor="let mappingItem of licenceMappings | keyvalue">
+    <div *ngIf="!LicenceTypeSupported(mappingItem.key)">
+      <app-licence-row [licenceType]="mappingItem.key" [licences]="mappingItem.value" [available]="false"></app-licence-row>
+    </div>
+  </section>
 </div>
