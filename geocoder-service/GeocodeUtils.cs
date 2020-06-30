@@ -207,7 +207,7 @@ namespace Gov.Lclb.Cllb.Geocoder
             // second pass to get BC Cannabis Stores.
 
             IList<MicrosoftDynamicsCRMadoxioEstablishment> establishments = null;
-            string establishmentFilter = "adoxio_Name eq 'BC Cannabis Store'";
+            string establishmentFilter = "adoxio_name eq 'BC Cannabis Store'";
             try
             {
                 establishments = _dynamics.Establishments.Get(filter: establishmentFilter).Value;
