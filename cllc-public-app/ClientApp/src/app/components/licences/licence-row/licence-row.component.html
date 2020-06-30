@@ -64,7 +64,7 @@
                         <br>
                         <a [routerLink]="[ '/licence/' + item.licenseId + '/representative']">
                             <span *ngIf="!item.representativeFullName">Add Licensee Representative</span>
-                            <span *ngIf="item.representativeFullName">Licensee Representative: {{item.representativeFullName}}</span>
+                            <span *ngIf="item.representativeFullName">Licensee Representative: <strong>{{item.representativeFullName}}</strong></span>
                         </a>
                     </div>
                 </td>
@@ -95,14 +95,14 @@
                 </td>
 
                 <td>
-                    <div *ngIf="item.status === 'PreInspection'" style="min-width: 10px; margin-bottom: 10px;">
+                    <!--div *ngIf="item.status === 'PreInspection'" style="min-width: 10px; margin-bottom: 10px;">
                         <a href="javascript:void(0);" (click)="planStoreOpening(item)" class="missing">
                             <span>
                                 <i class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
                                 Pre-Inspection Checklist
                             </span>
                         </a>
-                    </div>
+                    </div-->
                     <div *ngIf="item.status === 'PendingLicenceFee'" style="min-width: 10px; margin-bottom: 10px;">
                         <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
                             <span>
