@@ -27,7 +27,7 @@ Scenario: Change director name and pay fee
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
@@ -39,7 +39,7 @@ Scenario: Change director name and pay fee
     And I click on the Dashboard link
     And I click on the Review Organization Information button
     And I modify the director name
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I pay the name change fee
     And the director name is now updated
     And the account is deleted
@@ -82,18 +82,18 @@ Scenario: Confirm business shareholder org structure update
     And I enter the same individual as a director and a shareholder
     And I click on the Complete Organization Information button
     And I add a business shareholder with the same individual as a director and a shareholder
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
     And I add a second business shareholder with the same individual as a director and a shareholder
     And I click on the Confirm Organization Information is Complete button
     And I click on the Complete Organization Information button
     And the org structure is correct
     And I remove the latest director and shareholder
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
     And the latest director and shareholder is removed
     And I remove the business shareholder
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
     And the business shareholder is removed
     And the account is deleted
@@ -108,7 +108,7 @@ Scenario: Confirm business shareholder org structure update after payment
     And I enter the same individual as a director and a shareholder
     And I click on the Complete Organization Information button
     And I add a business shareholder with the same individual as a director and a shareholder
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
     And I add a second business shareholder with the same individual as a director and a shareholder
     And I click on the Confirm Organization Information is Complete button
