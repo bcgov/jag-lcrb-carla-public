@@ -205,6 +205,8 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             to.CopyValues(from);
 
+            to.AdoxioProposedestablishmentisalr = from.ProposedEstablishmentIsAlr;
+
             to.AdoxioNameofapplicant = from.NameOfApplicant;
 
             /* 2020/5/15 - Copy values has a comment that says to not copy this fields because of a dynamics workflow
@@ -394,6 +396,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 OtherBusinessesDetails = dynamicsApplication.AdoxioOtherbusinesssamelocationdetails
 
+
             };
 
             // Catering yes / no fields
@@ -563,6 +566,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 CreatedOn = dynamicsApplication.Createdon,
                 ModifiedOn = dynamicsApplication.Modifiedon,
 
+
+                ProposedEstablishmentIsAlr = dynamicsApplication.AdoxioProposedestablishmentisalr
                 //store opening 
 
                 // Catering fields.

@@ -548,8 +548,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         if (isDeveloperLogin)
                         {
                             // add generated guids
-                            userSettings.AccountId = userSettings.SiteMinderBusinessGuid;
-                            userSettings.ContactId = userSettings.SiteMinderGuid;
+                            // set to null to indicate that the user is still registering the account
+                            userSettings.AccountId = null;
+                            userSettings.ContactId = null;
                         }
                         else if (isBCSCDeveloperLogin)
                         {
