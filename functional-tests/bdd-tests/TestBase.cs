@@ -491,7 +491,9 @@ namespace bdd_tests
 
             applicationID = parsedURL[5];
 
-            ClickOnSubmitButton();
+            // click on the submit button
+            NgWebElement submitButton = ngDriver.FindElement(By.CssSelector(".application-wrapper button.btn-primary"));
+            submitButton.Click();
         }
 
 
@@ -1662,7 +1664,8 @@ namespace bdd_tests
             sigCheckbox.SendKeys(electricSignature);
 
             // click on the Submit button
-            ClickOnSubmitButton();
+            NgWebElement eligibilitySubmit = ngDriver.FindElement(By.CssSelector("app-eligibility-form button.btn-primary"));
+            eligibilitySubmit.Click();
         }
 
 
@@ -2725,16 +2728,16 @@ namespace bdd_tests
         [And(@"I click on the Pay for Application button")]
         public void ClickOnPayButton()
         {
-            NgWebElement payButton = ngDriver.FindElement(By.XPath("//button[contains(.,'Pay for Application')]"));
+            NgWebElement payButton = ngDriver.FindElement(By.CssSelector(".btn-primary+ .btn-primary"));
             payButton.Click();
         }
 
 
-        [And(@"I submit the organization structure")]
-        public void SubmitOrgStructure()
+        [And(@"I click on the Submit Organization Information button")]
+        public void ClickSubmitOrgStructureButton()
         {
             // click on the Submit Org Info button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION ']"));
+            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
             submitOrgInfoButton.Click();
         }
 
@@ -3441,7 +3444,7 @@ namespace bdd_tests
         public void ClickSaveForLater()
         {
             // click on the Save For Later button
-            NgWebElement saveForLaterButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SAVE FOR LATER ')]"));
+            NgWebElement saveForLaterButton = ngDriver.FindElement(By.CssSelector("button.btn-secondary span"));
             saveForLaterButton.Click();
         }
 
