@@ -141,6 +141,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         mailingAddressPostalCode: ['', [Validators.required, this.customZipCodeValidator('mailingAddressCountry')]],
         mailingAddressProvince: ['', Validators.required],
         mailingAddressCountry: ['Canada', Validators.required],
+        websiteUrl: [''],
       }),
       primarycontact: this.fb.group({
         id: [],

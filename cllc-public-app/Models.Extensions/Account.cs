@@ -188,6 +188,8 @@ string accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", ""
                     
             }
 
+            toDynamics.Websiteurl = fromVM.websiteUrl;
+
             // business type must be set only during creation, not in update (removed from copyValues() )
             //	toDynamics.AdoxioBusinesstype = (int)Enum.Parse(typeof(ViewModels.Adoxio_applicanttypecodes), fromVM.businessType, true);
         }
@@ -253,6 +255,8 @@ string accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", ""
                 accountVM.TermsOfUseAcceptedDate = account.AdoxioTermsofuseaccepteddate;
 
                 accountVM.LocalGovernmentId = account._adoxioLginlinkidValue;
+
+                accountVM.websiteUrl = account.Websiteurl;
 
                 if (account.Primarycontactid != null)
                 {
