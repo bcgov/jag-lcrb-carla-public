@@ -276,9 +276,7 @@
           </div>
 
 
-          <h3 class="blue-header">CONNECTIONS
-            TO FEDERAL PRODUCERS OF CANNABIS</h3>
-          <div class="padded-section content-bottom" *ngIf="saveFormData?.businessProfile?.id">
+          <div *ngIf="saveFormData?.businessProfile?.id">
             <app-connection-to-producers *ngIf="account?.tiedHouse" [tiedHouse]="account?.tiedHouse"
               [businessType]="account?.businessType" (value)="tiedHouseFormData = $event"></app-connection-to-producers>
           </div>
