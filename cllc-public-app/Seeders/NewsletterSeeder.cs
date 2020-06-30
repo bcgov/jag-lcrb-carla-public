@@ -23,8 +23,14 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         protected override void Invoke(AppDbContext context)
         {
-            UpdateNewsletters(context);
-
+            try
+            {
+                UpdateNewsletters(context);
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, "Error seeding the newsletter.");
+            }
         }
 
         private void UpdateNewsletters(AppDbContext context)

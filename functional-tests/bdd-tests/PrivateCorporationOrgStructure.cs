@@ -1,4 +1,19 @@
-﻿Feature: CRSOrgStructure.feature
+﻿using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support;
+using OpenQA.Selenium.Support.UI;
+using Protractor;
+using System;
+using Xunit.Gherkin.Quick;
+using Microsoft.Extensions.Configuration.UserSecrets;
+using System.IO;
+using Xunit;
+
+/*
+Feature: PrivateCorporationOrgStructure.feature
     As a logged in business user
     I want to change the name of a director
     And pay the associated fee
@@ -126,3 +141,70 @@ Scenario: Save for Later feature for org structure
     And the saved org structure is present
     And the account is deleted
     Then I see the login page
+*/
+
+namespace bdd_tests
+{
+    [FeatureFile("./PrivateCorporationOrgStructure.feature")]
+    public sealed class PrivateCorporationOrgStructure : TestBase
+    {
+        [Given(@"I am logged in to the dashboard as a (.*)")]
+        public void I_view_the_dashboard(string businessType)
+        {
+            CarlaLogin(businessType);
+        }
+
+        [And(@"I modify the director name")]
+        public void modify_director_name()
+        {
+            // click on the Edit button for Key Personnel
+            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
+            uiEditInfoButton.Click();
+
+            // enter a new name for the director
+            string newDirectorFirstName = "Updated Director";
+
+            NgWebElement uiNewDirectorFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+            uiNewDirectorFirstName.Clear();
+            uiNewDirectorFirstName.SendKeys(newDirectorFirstName);
+
+            // click on the Confirm button
+            NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
+            uiConfirmButton.Click();
+
+            // find the upload test file in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload a marriage certificate document
+            string marriageCertificate = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "marriage_certificate.pdf");
+            NgWebElement uploadMarriageCert = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
+            uploadMarriageCert.SendKeys(marriageCertificate);
+        }
+
+        [And(@"I pay the name change fee")]
+        public void name_change_fee()
+        {
+            MakePayment();
+
+            // check payment fee
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
+        }
+
+        [And(@"the director name is now updated")]
+        public void director_name_updated()
+        {
+            // click on Return to Dashboard link
+            string retDash = "Return to Dashboard";
+            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
+            returnDash.Click();
+
+            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
+            orgInfoButton.Click();
+
+            // check that the director name has been updated
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Updated Director')]")).Displayed);
+        }
+    }
+}

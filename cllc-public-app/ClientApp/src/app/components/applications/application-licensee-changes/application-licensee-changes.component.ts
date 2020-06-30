@@ -211,6 +211,26 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   /**
    * Sends data to dynamics
    */
+  cancel() {
+
+    // delete the application.
+    this.busy = this.applicationDataService.cancelApplication(this.applicationId) 
+        .pipe(takeWhile(() => this.componentActive))
+        .toPromise()
+        .then(app => {                  
+          this.snackBar.open('Licensee Changes has been cancelled', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+            this.router.navigateByUrl('/dashboard');
+            return of(app);
+        })
+        .catch(() => {
+          this.snackBar.open('Error cancelling Licensee Changes', 'Error', { duration: 2500, panelClass: ['red-snackbar'] });
+        });
+        
+  }
+
+  /**
+   * Sends data to dynamics
+   */
   save() {
     this.orgStructure.saveAll()
       .subscribe(result => {
