@@ -976,6 +976,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
                 }
 
+                var endorsementsText = "";
+                License licenceVM = adoxioLicense.ToViewModel(_dynamicsClient);
+                foreach (var item in licenceVM.Endorsements)
+                {
+                    endorsementsText += $"<li>{item}</li>";
+                }
+
                 var storeHours = $@"
                 <tr>
                     <td>Open</td>
@@ -1037,6 +1044,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
                         { "restrictionsText", termsAndConditions },
+                        { "endorsementsText", endorsementsText },
                         { "storeHours", storeHours }
                     };
                 }
@@ -1055,6 +1063,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
                         { "restrictionsText", termsAndConditions },
+                        { "endorsementsText", endorsementsText },
                         { "storeHours", storeHours }
                     };
                 }
@@ -1073,6 +1082,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
                         { "restrictionsText", termsAndConditions },
+                        { "endorsementsText", endorsementsText },
                         { "storeHours", storeHours }
                     };
                 }
