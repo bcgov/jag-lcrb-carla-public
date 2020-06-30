@@ -48,7 +48,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                     SitePlan = (FormControlState?)applicationType.AdoxioSiteplan,
                     StoreContactInfo = (FormControlState?)applicationType.AdoxioStorecontactinfo,
                     Title = applicationType.AdoxioTitletext,
-                    ValidInterest = (FormControlState?)applicationType.AdoxioValidinterest                    
+                    ValidInterest = (FormControlState?)applicationType.AdoxioValidinterest,
+                    IsEndorsement = applicationType.AdoxioIsendorsement        
                 };
 
                 if (applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)
@@ -72,6 +73,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                         result.IsFree = false;
                     }
                 }
+
+
+
 
                 /*
                 if (dynamicsApplicationType.AdoxioLicenceTypeId != null)

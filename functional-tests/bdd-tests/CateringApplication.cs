@@ -22,7 +22,7 @@ Scenario: Indigenous Nation Catering Application
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
     And I click on the Pay for Application button
@@ -39,7 +39,7 @@ Scenario: Partnership Catering Application
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
     And I click on the Pay for Application button
@@ -56,7 +56,7 @@ Scenario: Private Corporation Catering Application
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
     And I click on the Pay for Application button
@@ -73,7 +73,7 @@ Scenario: Public Corporation Catering Application
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
     And I click on the Pay for Application button
@@ -90,7 +90,7 @@ Scenario: Society Catering Application
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
     And I click on the Pay for Application button
@@ -107,7 +107,7 @@ Scenario: Sole Proprietorship Catering Application
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
     And I click on the Pay for Application button
@@ -124,7 +124,7 @@ Scenario: Catering Application Validation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I do not complete the catering application correctly
     Then the expected error messages are displayed
 */

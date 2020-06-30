@@ -45,7 +45,8 @@ export class LicencesComponent extends FormBase implements OnInit {
   supportedLicenceTypes = [
     "Catering", "Wine Store", "Cannabis Retail Store", "Marketing",
     "Operated - Wine Store", "Operated - Catering",
-    "Transfer in Progress - Wine Store", "Transfer in Progress - Catering"
+    "Transfer in Progress - Wine Store", "Transfer in Progress - Catering",
+    "Manufacturer"
   ];
 
   constructor(
@@ -132,43 +133,5 @@ export class LicencesComponent extends FormBase implements OnInit {
   LicenceTypeSupported(licenceType: string) {
     const supported = this.supportedLicenceTypes.indexOf(licenceType) >= 0;
     return supported;
-  }
-
-  getSubCategory(subcategory: string) {
-    let label = "";
-
-    switch (subcategory) {
-      case "GroceryStore":
-        label = "Grocery Store";
-        break;
-      case "IndependentWineStore":
-        label = "Independent Wine Store";
-        break;
-      case "OffSiteWineStore":
-        label = "Off-Site Wine Store";
-        break;
-      case "OnSiteWineStore":
-        label = "On-Site Wine Store";
-        break;
-      case "SacramentalWineStore":
-        label = "Sacramental Wine Store";
-        break;
-      case "SpecialWineStore":
-        label = "Special Wine Store";
-        break;
-      case "TouristWineStore":
-        label = "Tourist Wine Store";
-        break;
-      case "WineOnShelf":
-        label = "Wine on Shelf";
-        break;
-      case "BCVQA":
-        label = "BC VQA Store";
-        break;
-
-      default:
-        label = subcategory;
-    }
-    return label;
   }
 }
