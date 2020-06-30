@@ -809,7 +809,7 @@ namespace bdd_tests
             */
 
             // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp.btn-primary"));
             continueButton.Click();
 
             /* 
@@ -881,18 +881,18 @@ namespace bdd_tests
                 ClickReviewOrganizationInformation();
 
                 // click on the Edit button for Key Personnel
-                NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
+                NgWebElement uiEditInfoButton = ngDriver.FindElement(By.CssSelector("td:nth-child(7) .ng-star-inserted"));
                 uiEditInfoButton.Click();
 
                 // enter a new email for the director
                 string newDirectorEmail = "newemail@test.com";
 
-                NgWebElement uiNewDirectorEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+                NgWebElement uiNewDirectorEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='emailNew']"));
                 uiNewDirectorEmail.Clear();
                 uiNewDirectorEmail.SendKeys(newDirectorEmail);
 
                 // click on the Confirm button
-                NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
+                NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector(".fa-save span"));
                 uiConfirmButton.Click();
 
                 if (businessTypeShared == "partnership")
@@ -934,7 +934,7 @@ namespace bdd_tests
                 }
 
                 // click on confirm org info button
-                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' CONFIRM ORGANIZATION INFORMATION IS COMPLETE')]"));
+                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
                 orgInfoButton2.Click();
 
                 // check that dashboard is displayed (i.e. no payment has been required)
