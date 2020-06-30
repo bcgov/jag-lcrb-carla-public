@@ -12,14 +12,14 @@ Scenario: Indigenous Nation Personnel Name Change
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -33,14 +33,14 @@ Scenario: Partnership Personnel Name Change
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -54,14 +54,14 @@ Scenario: Private Corporation Personnel Name Change
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -75,14 +75,14 @@ Scenario: Public Corporation Personnel Name Change
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -96,14 +96,14 @@ Scenario: Society Personnel Name Change
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -117,14 +117,14 @@ Scenario: Sole Proprietorship Personnel Name Change
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I request a personnel name change
     And the account is deleted
     Then I see the login page

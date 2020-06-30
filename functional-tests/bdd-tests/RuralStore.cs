@@ -24,7 +24,7 @@ Scenario: Start Application
     And I click on the Start Application button for a Rural Agency Store
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     Then I complete the Rural Agency Store application
 */
 
@@ -36,8 +36,6 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            CheckFeatureFlagsCannabis();
-
             CarlaLogin(businessType);
         }
     }
