@@ -29,7 +29,7 @@ export class FormBase implements OnDestroy {
                 preamble: this.getApplicationContent('Preamble'),
                 beforeStarting: this.getApplicationContent('BeforeStarting'),
                 nextSteps: this.getApplicationContent('NextSteps'),
-                lGInstructions: this.getApplicationContent('LGInstructions'),
+                lGInstructions: this.getApplicationContent('LocalGovernmentApproval'),
             };
         }
     }

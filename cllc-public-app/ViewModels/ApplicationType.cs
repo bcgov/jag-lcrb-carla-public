@@ -80,6 +80,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public bool? IsFree { get; set; }
 
+        public bool? IsEndorsement { get; set;}
+
         public Form DynamicsForm { get; set; }
     }
 }

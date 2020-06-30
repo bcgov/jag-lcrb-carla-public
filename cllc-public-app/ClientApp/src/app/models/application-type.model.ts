@@ -37,12 +37,14 @@ export class ApplicationType {
   floorPlan: FormControlState;
   sitePlan: FormControlState;
   connectedGroceryStore: FormControlState;
+  sitePhotos: FormControlState;
   publicCooler: FormControlState;
   showLiquorSitePlan: FormControlState;
   proofofZoning: FormControlState;
   lGandPoliceSelectors: FormControlState;
   isShowLGINApproval: boolean;
   isFree: boolean;
+  isEndorsement: boolean;
 
   dynamicsForm: DynamicsForm;
 }
