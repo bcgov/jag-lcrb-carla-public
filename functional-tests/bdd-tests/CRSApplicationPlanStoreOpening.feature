@@ -12,14 +12,14 @@ Scenario: Indigenous Nation Plan Store Opening
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I click on the licence download link
     And I plan the store opening
     And the account is deleted
@@ -34,14 +34,14 @@ Scenario: Partnership Plan Store Opening
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I click on the licence download link
     And I plan the store opening
     And the account is deleted
@@ -56,14 +56,14 @@ Scenario: Private Corporation Plan Store Opening
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I click on the licence download link
     And I plan the store opening
     And the account is deleted
@@ -78,14 +78,14 @@ Scenario: Public Corporation Plan Store Opening
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I click on the licence download link
     And I plan the store opening
     And the account is deleted
@@ -100,14 +100,14 @@ Scenario: Society Plan Store Opening
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I click on the licence download link
     And I plan the store opening
     And the account is deleted
@@ -122,14 +122,14 @@ Scenario: Sole Proprietorship Plan Store Opening
     And I complete the eligibility disclosure
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
-    # And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Cannabis
     And I click on the licence download link
     And I plan the store opening
     And the account is deleted

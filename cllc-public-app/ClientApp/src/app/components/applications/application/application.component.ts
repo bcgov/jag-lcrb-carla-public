@@ -526,7 +526,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
 
   isRAS(): boolean {
-    return this.application.licenseType === 'Rural Agency';
+    return this.application.licenseType === 'Rural Agency Store';
   }
 
   /**

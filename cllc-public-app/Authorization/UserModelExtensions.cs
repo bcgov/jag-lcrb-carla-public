@@ -71,6 +71,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                     claims.AddRange(permissions);
                 }
 
+                // This is the case for registered accounts
+                if (user.AccountId != null)
+                {
+                    claims.Add(new Claim(User.PermissionClaim, Permission.ExistingUser));
+                }
+
 
                 var roles = user.GetActiveRoles().Select(r => new Claim(ClaimTypes.Role, r.Name)).ToList();
                 if (roles.Any())

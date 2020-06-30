@@ -138,9 +138,9 @@
 
             <div class="ngtest-new-address content-bottom"
               *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
-              <p *ngIf="application?.licenseType !== 'Rural Agency'">The proposed location of the licenced
+              <p *ngIf="application?.licenseType !== 'Rural Agency Store'">The proposed location of the licenced
                 establishment:</p>
-              <p *ngIf="application?.licenseType === 'Rural Agency'">Include any information necessary for finding the
+              <p *ngIf="application?.licenseType === 'Rural Agency Store'">Include any information necessary for finding the
                 site (i.e. route number, mile marker, etc.).</p>
               <address class="row">
                 <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
@@ -271,7 +271,7 @@
               <p>&nbsp;</p>
             </section>
             <!-- RAS Details -->
-            <section *ngIf="application?.licenseType === 'Rural Agency'">
+            <section *ngIf="application?.licenseType === 'Rural Agency Store'">
               <h3 class="blue-header">Rural Agency Store Details</h3>
               <div class="content-bottom">
                 <p>Please provide the following details about your Rural Agency Store:</p>

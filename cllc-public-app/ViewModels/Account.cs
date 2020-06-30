@@ -73,6 +73,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string businessType { get; set; }
 
+        public string websiteUrl { get; set; }
+
         public bool isCorporateDetailsComplete(AdoxioApplicantTypeCodes? legalentitytype, bool corporateDetailsFilesExists)
         {
             var isComplete = false;
