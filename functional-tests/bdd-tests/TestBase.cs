@@ -712,23 +712,23 @@ namespace bdd_tests
                 ClickReviewOrganizationInformation();
 
                 // click on the Edit button for Key Personnel
-                NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
+                NgWebElement uiEditInfoButton = ngDriver.FindElement(By.CssSelector("td:nth-child(7) .ng-star-inserted"));
                 uiEditInfoButton.Click();
 
                 // enter a new name for the director
                 string newDirectorFirstName = "UpdatedFirstName";
                 string newDirectorLastName = "UpdatedLastName";
 
-                NgWebElement uiNewDirectorFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+                NgWebElement uiNewDirectorFirstName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='firstNameNew']"));
                 uiNewDirectorFirstName.Clear();
                 uiNewDirectorFirstName.SendKeys(newDirectorFirstName);
 
-                NgWebElement uiNewDirectorLasttName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+                NgWebElement uiNewDirectorLasttName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lastNameNew']"));
                 uiNewDirectorLasttName.Clear();
                 uiNewDirectorLasttName.SendKeys(newDirectorLastName);
 
                 // click on the Confirm button
-                NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
+                NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector(".fa-save span"));
                 uiConfirmButton.Click();
 
                 // find the upload test file in the bdd-tests\upload_files folder
@@ -756,7 +756,7 @@ namespace bdd_tests
                 }
 
                 // click on submit org info button
-                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION ')]"));
+                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
                 orgInfoButton2.Click();
 
                 MakePayment();
@@ -1876,8 +1876,6 @@ namespace bdd_tests
             }
 
             // click on the liquor financial interest radio button
-            //NgWebElement liquorFinInterestRadio = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-0']/app-account-profile/div/div[2]/div[1]/div/div/div[4]/app-connection-to-producers/div[3]/section[1]/input[1]"));
-
             NgWebElement liquorFinInterestRadio = ngDriver.FindElement(By.XPath("//app-connection-to-producers/div[3]/section[1]/input[1]"));
             liquorFinInterestRadio.Click();
 
@@ -3471,7 +3469,7 @@ namespace bdd_tests
         public void ClickReviewOrganizationInformation()
         {
             // click on the review organization information button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
+            NgWebElement orgInfoButton = ngDriver.FindElement(By.CssSelector("button.btn-primary[routerlink='/org-structure']"));
             orgInfoButton.Click();
         }
 
