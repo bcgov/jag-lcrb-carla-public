@@ -395,10 +395,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
     }
 
-    if (this.application.applicationType.lGandPoliceSelectors && this.LGApprovalsFeatureIsOn) {
+    if (this.application.applicationType.lGandPoliceSelectors === "Yes") {
       this.form.get('indigenousNation').setValidators([Validators.required]);
       this.form.get('policeJurisdiction').setValidators([Validators.required]);
-    }
+    } 
 
     if (this.isRAS()) {
       // use description1 for the certificate number
