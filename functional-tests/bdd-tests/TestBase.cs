@@ -1179,7 +1179,7 @@ namespace bdd_tests
             */
 
             // click on continue to application button
-            NgWebElement continueToApplicationButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
+            NgWebElement continueToApplicationButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
             continueToApplicationButton.Click();
 
             /* 
@@ -1290,7 +1290,7 @@ namespace bdd_tests
             */
 
             // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
             continueButton.Click();
 
             /*
@@ -1356,7 +1356,7 @@ namespace bdd_tests
             */
 
             // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
             continueButton.Click();
 
             /* 
@@ -1465,20 +1465,11 @@ namespace bdd_tests
         [And(@"I request a transfer of ownership")]
         public void RequestOwnershipTransfer()
         {
-            /* 
-            Page Title: Licences
-            Subtitle:   Catering Licences
-            */
-
             string transferOwnership = "Transfer Ownership";
 
             // click on the Transfer Ownership link
             NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
             uiTransferOwnership.Click();
-
-            /* 
-            Page Title: Transfer Your Catering Licence
-            */
 
             string licensee = "GunderCorp TestBusiness";
 
@@ -1502,7 +1493,7 @@ namespace bdd_tests
             signatureAgreement.Click();
 
             // click on submit transfer button
-            NgWebElement submitTransferButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT TRANSFER')]"));
+            NgWebElement submitTransferButton = ngDriver.FindElement(By.CssSelector("app-application-ownership-transfer button.btn-primary"));
             submitTransferButton.Click();
 
             ClickLicencesTab();
@@ -2641,8 +2632,8 @@ namespace bdd_tests
         [And(@"I click on the Complete Organization Information button")]
         public void CompleteOrgInfo()
         {
-            // click on the complete organzation information button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'COMPLETE ORGANIZATION INFORMATION')]"));
+            // click on the complete organization information button
+            NgWebElement orgInfoButton = ngDriver.FindElement(By.CssSelector("button.btn-primary[routerlink='/org-structure']"));
             orgInfoButton.Click();
         }
 
@@ -2650,8 +2641,8 @@ namespace bdd_tests
         [And(@"I click on the Confirm Organization Information is Complete button")]
         public void ConfirmCompleteOrgInfo()
         {
-            // click on the complete organzation information button
-            NgWebElement completeButton = ngDriver.FindElement(By.XPath("//button[contains(.,' CONFIRM ORGANIZATION INFORMATION IS COMPLETE ')]"));
+            // click on the confirm organization information is complete button
+            NgWebElement completeButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
             completeButton.Click();
         }
 
