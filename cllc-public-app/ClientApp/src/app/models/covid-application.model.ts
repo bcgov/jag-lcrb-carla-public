@@ -37,4 +37,5 @@ export class CovidApplication {
   applicationType: ApplicationType;
   description1: string;
   isApplicationComplete: string;
+  proposedEstablishmentIsAlr: boolean;
 }
