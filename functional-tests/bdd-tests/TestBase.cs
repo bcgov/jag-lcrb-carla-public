@@ -452,7 +452,7 @@ namespace bdd_tests
 
             // upload a financial integrity form
             string finIntegrityPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "fin_integrity.pdf");
-            NgWebElement uploadFinIntegrity = ngDriver.FindElement(By.XPath("(//input[@type='file'])[18]"));
+            NgWebElement uploadFinIntegrity = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
             uploadFinIntegrity.SendKeys(finIntegrityPath);
 
             // enter the first name of the application contact
