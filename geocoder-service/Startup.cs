@@ -57,7 +57,7 @@ namespace Gov.Lclb.Cllb.Geocoder
                                  .Build();
                     config.Filters.Add(new AuthorizeFilter(policy));
                 }
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             // Other ConfigureServices() code...
             services.AddSwaggerGen(c =>
             {
