@@ -440,6 +440,10 @@ namespace bdd_tests
             NgWebElement uploadValidInterest = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
             uploadValidInterest.SendKeys(validInterestPath);
 
+            // select not visible from outside checkbox
+            NgWebElement visibleFromOutside = ngDriver.FindElement(By.CssSelector(".mat-checkbox-inner-container"));
+            visibleFromOutside.Click();
+
             // upload a floor plan document
             string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
             NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
@@ -712,23 +716,23 @@ namespace bdd_tests
                 ClickReviewOrganizationInformation();
 
                 // click on the Edit button for Key Personnel
-                NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
+                NgWebElement uiEditInfoButton = ngDriver.FindElement(By.CssSelector("td:nth-child(7) .ng-star-inserted"));
                 uiEditInfoButton.Click();
 
                 // enter a new name for the director
                 string newDirectorFirstName = "UpdatedFirstName";
                 string newDirectorLastName = "UpdatedLastName";
 
-                NgWebElement uiNewDirectorFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
+                NgWebElement uiNewDirectorFirstName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='firstNameNew']"));
                 uiNewDirectorFirstName.Clear();
                 uiNewDirectorFirstName.SendKeys(newDirectorFirstName);
 
-                NgWebElement uiNewDirectorLasttName = ngDriver.FindElement(By.XPath("(//input[@type='text'])[2]"));
+                NgWebElement uiNewDirectorLasttName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lastNameNew']"));
                 uiNewDirectorLasttName.Clear();
                 uiNewDirectorLasttName.SendKeys(newDirectorLastName);
 
                 // click on the Confirm button
-                NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
+                NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector(".fa-save span"));
                 uiConfirmButton.Click();
 
                 // find the upload test file in the bdd-tests\upload_files folder
@@ -756,7 +760,7 @@ namespace bdd_tests
                 }
 
                 // click on submit org info button
-                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION ')]"));
+                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
                 orgInfoButton2.Click();
 
                 MakePayment();
@@ -809,7 +813,7 @@ namespace bdd_tests
             */
 
             // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp.btn-primary"));
             continueButton.Click();
 
             /* 
@@ -881,18 +885,18 @@ namespace bdd_tests
                 ClickReviewOrganizationInformation();
 
                 // click on the Edit button for Key Personnel
-                NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
+                NgWebElement uiEditInfoButton = ngDriver.FindElement(By.CssSelector("td:nth-child(7) .ng-star-inserted"));
                 uiEditInfoButton.Click();
 
                 // enter a new email for the director
                 string newDirectorEmail = "newemail@test.com";
 
-                NgWebElement uiNewDirectorEmail = ngDriver.FindElement(By.XPath("(//input[@type='text'])[4]"));
+                NgWebElement uiNewDirectorEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='emailNew']"));
                 uiNewDirectorEmail.Clear();
                 uiNewDirectorEmail.SendKeys(newDirectorEmail);
 
                 // click on the Confirm button
-                NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
+                NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector(".fa-save span"));
                 uiConfirmButton.Click();
 
                 if (businessTypeShared == "partnership")
@@ -934,7 +938,7 @@ namespace bdd_tests
                 }
 
                 // click on confirm org info button
-                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' CONFIRM ORGANIZATION INFORMATION IS COMPLETE')]"));
+                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
                 orgInfoButton2.Click();
 
                 // check that dashboard is displayed (i.e. no payment has been required)
@@ -1132,84 +1136,6 @@ namespace bdd_tests
             // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
         }
 
-
-        [And(@"I plan the store opening")]
-        public void PlanStoreOpening()
-        {
-            /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            */
-
-            string storePlanningLink = "Store Opening Inspection Checklist";
-
-            // click on the store planning link
-            NgWebElement uiStorePlanning = ngDriver.FindElement(By.LinkText(storePlanningLink));
-            uiStorePlanning.Click();
-
-            /* 
-            Page Title: Plan Your Store Opening
-            */
-
-            System.Threading.Thread.Sleep(7000);
-
-            // select checkboxes to confirm store opening details
-            NgWebElement check1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyValidInterest']"));
-            check1.Click();
-
-            NgWebElement check2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyWorkers']"));
-            check2.Click();
-
-            NgWebElement check3 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyNameBranding']"));
-            check3.Click();
-
-            NgWebElement check4 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyDisplays']"));
-            check4.Click();
-
-            NgWebElement check5 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyIntruderAlarm']"));
-            check5.Click();
-
-            NgWebElement check6 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyFireAlarm']"));
-            check6.Click();
-
-            NgWebElement check7 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyLockedCases']"));
-            check7.Click();
-
-            NgWebElement check8 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyLockedStorage']"));
-            check8.Click();
-
-            NgWebElement check9 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyPerimeter']"));
-            check9.Click();
-
-            NgWebElement check10 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyRetailArea']"));
-            check10.Click();
-
-            NgWebElement check11 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyStorage']"));
-            check11.Click();
-
-            NgWebElement check12 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyExtranceExit']"));
-            check12.Click();
-
-            NgWebElement check13 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadySurveillanceNotice']"));
-            check13.Click();
-
-            NgWebElement check14 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isReadyProductNotVisibleOutside']"));
-            check14.Click();
-
-            //click on the Save button
-            NgWebElement saveButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SAVE')]"));
-            saveButton.Click();
-
-            /* 
-            Page Title: Welcome to Liquor and Cannabis Licensing
-            */
-
-            System.Threading.Thread.Sleep(7000);
-
-            ClickLicencesTab();
-        }
-
-
         [And(@"I click on the Start Application button for (.*)")]
         public void ClickStartApplication(string applicationType)
         {
@@ -1257,7 +1183,7 @@ namespace bdd_tests
             */
 
             // click on continue to application button
-            NgWebElement continueToApplicationButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
+            NgWebElement continueToApplicationButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
             continueToApplicationButton.Click();
 
             /* 
@@ -1368,7 +1294,7 @@ namespace bdd_tests
             */
 
             // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
             continueButton.Click();
 
             /*
@@ -1434,7 +1360,7 @@ namespace bdd_tests
             */
 
             // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'CONTINUE TO APPLICATION')]"));
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
             continueButton.Click();
 
             /* 
@@ -1543,20 +1469,11 @@ namespace bdd_tests
         [And(@"I request a transfer of ownership")]
         public void RequestOwnershipTransfer()
         {
-            /* 
-            Page Title: Licences
-            Subtitle:   Catering Licences
-            */
-
             string transferOwnership = "Transfer Ownership";
 
             // click on the Transfer Ownership link
             NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
             uiTransferOwnership.Click();
-
-            /* 
-            Page Title: Transfer Your Catering Licence
-            */
 
             string licensee = "GunderCorp TestBusiness";
 
@@ -1580,7 +1497,7 @@ namespace bdd_tests
             signatureAgreement.Click();
 
             // click on submit transfer button
-            NgWebElement submitTransferButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT TRANSFER')]"));
+            NgWebElement submitTransferButton = ngDriver.FindElement(By.CssSelector("app-application-ownership-transfer button.btn-primary"));
             submitTransferButton.Click();
 
             ClickLicencesTab();
@@ -1874,6 +1791,15 @@ namespace bdd_tests
                 NgWebElement societyConnectionDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='societyConnectionFederalProducerDetails']"));
                 societyConnectionDetails.SendKeys(societyDetails);
             }
+
+            // click on the liquor financial interest radio button
+            NgWebElement liquorFinInterestRadio = ngDriver.FindElement(By.XPath("//app-connection-to-producers/div[3]/section[1]/input[1]"));
+            liquorFinInterestRadio.Click();
+
+            // enter the details of the financial interest
+            string finDetails = "Details of the financial interest (automated test).";
+            NgWebElement liquorFinInterestTextArea = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname = 'liquorFinancialInterestDetails']"));
+            liquorFinInterestTextArea.SendKeys(finDetails);
 
             // click on Continue to Organization Review button
             NgWebElement continueAppButton = ngDriver.FindElement(By.Id("continueToApp"));
@@ -2710,8 +2636,8 @@ namespace bdd_tests
         [And(@"I click on the Complete Organization Information button")]
         public void CompleteOrgInfo()
         {
-            // click on the complete organzation information button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'COMPLETE ORGANIZATION INFORMATION')]"));
+            // click on the complete organization information button
+            NgWebElement orgInfoButton = ngDriver.FindElement(By.CssSelector("button.btn-primary[routerlink='/org-structure']"));
             orgInfoButton.Click();
         }
 
@@ -2719,8 +2645,8 @@ namespace bdd_tests
         [And(@"I click on the Confirm Organization Information is Complete button")]
         public void ConfirmCompleteOrgInfo()
         {
-            // click on the complete organzation information button
-            NgWebElement completeButton = ngDriver.FindElement(By.XPath("//button[contains(.,' CONFIRM ORGANIZATION INFORMATION IS COMPLETE ')]"));
+            // click on the confirm organization information is complete button
+            NgWebElement completeButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
             completeButton.Click();
         }
 
@@ -3460,7 +3386,7 @@ namespace bdd_tests
         public void ClickReviewOrganizationInformation()
         {
             // click on the review organization information button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
+            NgWebElement orgInfoButton = ngDriver.FindElement(By.CssSelector("button.btn-primary[routerlink='/org-structure']"));
             orgInfoButton.Click();
         }
 
