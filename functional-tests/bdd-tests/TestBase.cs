@@ -440,6 +440,10 @@ namespace bdd_tests
             NgWebElement uploadValidInterest = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
             uploadValidInterest.SendKeys(validInterestPath);
 
+            // select not visible from outside checkbox
+            NgWebElement visibleFromOutside = ngDriver.FindElement(By.CssSelector(".mat-checkbox-inner-container"));
+            visibleFromOutside.Click();
+
             // upload a floor plan document
             string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
             NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
