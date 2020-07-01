@@ -402,7 +402,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     } 
 
 
-    if (this.application.applicationType.lGandPoliceSelectors === "Yes") {
+    if (this.application.applicationType.lGandPoliceSelectors === "Yes" && this.LGApprovalsFeatureIsOn) {  
       this.form.get('indigenousNation').setValidators([Validators.required]);
       this.form.get('policeJurisdiction').setValidators([Validators.required]);
     } 
