@@ -47,7 +47,10 @@ namespace Gov.Lclb.Cllb.Public.Utils
                         shownStatus = "Not Submitted";
                     }
                 }
-                else if (shownStatus == "InProgress" || shownStatus == "Under Review" || shownStatus == "UnderReview" || (shownStatus == "Intake" && application.AdoxioPaymentrecieved == true))
+                else if (shownStatus == "InProgress" || shownStatus == "Under Review" || shownStatus == "UnderReview"
+                           || shownStatus == "Pending Final Inspection" ||shownStatus == "PendingFinalInspection"
+                           || shownStatus == "Reviewing Inspection Results" || shownStatus == "ReviewingInspectionResults"
+                           || (shownStatus == "Intake" && application.AdoxioPaymentrecieved == true))
                 {
                     if (application.AdoxioLicenceType != null && application.AdoxioLicenceType.AdoxioName == "CRS Transfer of Ownership")
                     {
@@ -73,6 +76,10 @@ namespace Gov.Lclb.Cllb.Public.Utils
                 else if (shownStatus == "PendingForLGFNPFeedback")
                 {
                     shownStatus = "Pending External Review";
+                }
+                else if (shownStatus == "PendingForLicenceFee" || shownStatus == "Pending For Licence Fee")
+                {
+                    shownStatus = "Pending Licence Fee";
                 }
             }
 

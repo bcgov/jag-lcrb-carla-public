@@ -21,11 +21,15 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Refused = 845280005,
         [EnumMember(Value = "Pending for Licence Fee")]
         PendingForLicenceFee = 845280007,
-        [EnumMember(Value = "Approved In Principle")]
-        ApprovedInPrinciple = 845280008,
+        [EnumMember(Value = "Pending Final Inspection")]
+        PendingFinalInspection = 845280008,
         Terminated = 845280009,
-        [EnumMember(Value = "Terminated and refunded")]
-        TerminatedAndRefunded = 845280010
+        [EnumMember(Value = "Terminated and Refunded")]
+        TerminatedAndRefunded = 845280010,
+        
+        Processed = 845280011,
+        [EnumMember(Value = "Reviewing Inspection Results")]
+        ReviewingInspectionResults = 845280012
     }
 
     public enum AdoxioFinalDecisionCodes
