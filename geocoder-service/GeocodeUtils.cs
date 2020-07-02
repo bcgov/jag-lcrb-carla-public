@@ -204,6 +204,46 @@ namespace Gov.Lclb.Cllb.Geocoder
                 }
             }
 
+            // second pass to get BC Cannabis Stores.
+
+            IList<MicrosoftDynamicsCRMadoxioEstablishment> establishments = null;
+            string establishmentFilter = "adoxio_name eq 'BC Cannabis Store'";
+            try
+            {
+                establishments = _dynamics.Establishments.Get(filter: establishmentFilter).Value;
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error getting establishments");
+                if (hangfireContext != null)
+                {
+                    hangfireContext.WriteLine("Error getting establishments");
+                    hangfireContext.WriteLine("Request:");
+                    hangfireContext.WriteLine(httpOperationException.Request.Content);
+                    hangfireContext.WriteLine("Response:");
+                    hangfireContext.WriteLine(httpOperationException.Response.Content);
+                }
+
+                throw new Exception("Unable to get establishments");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Unexpected error getting establishment map data.");
+            }
+            if (establishments != null)
+            {
+                foreach (var establishment in establishments)
+                {
+                    
+                    if (establishment != null && (redoGeocoded || establishment.AdoxioLatitude == null))
+                    {
+                        await GeocodeEstablishment(hangfireContext, establishment);
+                    }
+                    
+                }
+            }
+
+
             _logger.LogInformation("End of GeocodeEstablishments job.");
             if (hangfireContext != null)
             {

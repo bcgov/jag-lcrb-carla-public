@@ -28,7 +28,13 @@ namespace Gov.Lclb.Cllb.Public.Models
         public const string Admin = "Admin";
 
 
+
         public const string NewUserRegistration = "NewUserRegistration";
+
+        /// <summary>
+        /// User already created in Dynamics Permission
+        /// </summary>
+        public const string ExistingUser = "ExistingUser";
 
         /// <summary>
         /// Code Table Management Permission
@@ -55,6 +61,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 Code = NewUserRegistration,
                 Name = "New User Registration",
                 Description = "Only permission given to new users.  Removed when they complete registration."
+            },            
+            new Permission
+            {
+                Code = ExistingUser,
+                Name = "Existing User",
+                Description = "permission given to users who have completed account registration"
             },
             new Permission
             {
