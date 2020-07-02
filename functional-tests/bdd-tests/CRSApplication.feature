@@ -2,7 +2,7 @@
     As a logged in business user
     I want to submit a CRS Application for different business types
 
-@e2e @cannabis @indigenousnation
+@e2e @cannabis @indigenousnation @crsapp
 Scenario: Indigenous Nation CRS Application
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -21,7 +21,7 @@ Scenario: Indigenous Nation CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership
+@e2e @cannabis @partnership @crsapp
 Scenario: Partnership CRS Application
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -40,7 +40,7 @@ Scenario: Partnership CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation
+@e2e @cannabis @privatecorporation @crsapp
 Scenario: Private Corporation CRS Application
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -59,7 +59,7 @@ Scenario: Private Corporation CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation
+@e2e @cannabis @publiccorporation @crsapp
 Scenario: Public Corporation CRS Application
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -78,7 +78,7 @@ Scenario: Public Corporation CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society
+@e2e @cannabis @society @crsapp
 Scenario: Society CRS Application
     Given I am logged in to the dashboard as a society
     And the account is deleted
@@ -97,7 +97,7 @@ Scenario: Society CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship
+@e2e @cannabis @soleproprietorship @crsapp
 Scenario: Sole Proprietorship CRS Application
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
