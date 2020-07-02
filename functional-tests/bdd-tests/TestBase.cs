@@ -825,15 +825,15 @@ namespace bdd_tests
             string pid = "012345678";
 
             // enter the proposed street address
-            NgWebElement uiProposedAddress = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
+            NgWebElement uiProposedAddress = ngDriver.FindElement(By.CssSelector(".ngtest-new-address input[formcontrolname='establishmentAddressStreet']"));
             uiProposedAddress.SendKeys(proposedAddress);
 
             // enter the proposed city
-            NgWebElement uiProposedCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressCity']"));
+            NgWebElement uiProposedCity = ngDriver.FindElement(By.CssSelector(".ngtest-new-address input[formcontrolname='establishmentAddressCity']"));
             uiProposedCity.SendKeys(proposedCity);
 
             // enter the postal code
-            NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressPostalCode']"));
+            NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.CssSelector(".ngtest-new-address input[formcontrolname='establishmentAddressPostalCode']"));
             uiProposedPostalCode.SendKeys(proposedPostalCode);
 
             // enter the PID
