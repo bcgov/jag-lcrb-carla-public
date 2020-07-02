@@ -236,6 +236,9 @@
                 <p *ngIf="item.applicationStatus === 'Relocation Application Under Review'">
                   Your relocation application has been received and is being reviewed by the LCRB.
                 </p>
+                <p *ngIf="item.applicationStatus === 'Pending Licence Fee'">
+                  Pay the licence fee on the <a routerLink="/licences">licences</a> dashboard.
+                </p>
 
                 <p *ngIf="item.applicationStatus === 'Application Incomplete'">
                   Your application is incomplete. You must provide additional information for it to be processed.
@@ -243,10 +246,6 @@
                 <p *ngIf="item.applicationStatus === 'Pending External Review'">
                   Your application has been sent for local government, financial integrity, and security screening
                   reviews.
-                </p>
-                <p *ngIf="item.applicationStatus === 'Approved In Principle'">
-                  Your application has been approved in principle. An inspector will be contacting you to organize a
-                  final inspection.
                 </p>
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
