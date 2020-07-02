@@ -18,6 +18,7 @@ Feature: CateringApplicationPersonnelNameChange
     I want to pay the first year catering licence fee
     And submit a personnel name change for different business types
 
+@e2e @catering @indigenousnation @cateringname
 Scenario: Catering Indigenous Nation Personnel Name Change
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -38,6 +39,7 @@ Scenario: Catering Indigenous Nation Personnel Name Change
     And the account is deleted
     Then I see the login page
 
+@e2e @catering @partnership @cateringname
 Scenario: Catering Partnership Personnel Name Change
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -58,6 +60,7 @@ Scenario: Catering Partnership Personnel Name Change
     And the account is deleted
     Then I see the login page
 
+@e2e @catering @privatecorporation @cateringname
 Scenario: Catering Private Corporation Personnel Name Change
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -78,6 +81,7 @@ Scenario: Catering Private Corporation Personnel Name Change
     And the account is deleted
     Then I see the login page
 
+@e2e @catering @publiccorporation @cateringname
 Scenario: Catering Public Corporation Personnel Name Change
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -98,6 +102,7 @@ Scenario: Catering Public Corporation Personnel Name Change
     And the account is deleted
     Then I see the login page
 
+@e2e @catering @society @cateringname
 Scenario: Catering Society Personnel Name Change
     Given I am logged in to the dashboard as a society
     And the account is deleted
@@ -118,6 +123,7 @@ Scenario: Catering Society Personnel Name Change
     And the account is deleted
     Then I see the login page
 
+ @e2e @catering @soleproprietorship @cateringname
  Scenario: Catering Sole Proprietorship Personnel Name Change
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
