@@ -37,12 +37,12 @@
                     </div>
                     <strong *ngIf="item?.licenceTypeName === 'Marketing'" style="color: #1a5a96;">
                     Marketing Licence</strong>
-                    <span *ngIf="item?.licenceTypeName !== 'Marketing'">Licence Number: <i>{{item.licenseNumber}}</i></span>
+                    <span *ngIf="item?.licenceTypeName !== 'Marketing' && isActiveOrRecentlyExpired(item)">Licence Number: <i>{{item.licenseNumber}}</i></span>
 
                     <br>
-                    <span>Expiry / Renewal Date: {{item.expiryDate | date: 'MM/dd/yyyy'}}</span>
+                    <span *ngIf="isActiveOrRecentlyExpired(item)">Expiry / Renewal Date: {{item.expiryDate | date: 'MM/dd/yyyy'}}</span>
                     <br>
-                    <span>Status: {{getLicenceStatusText(item.status)}}</span>
+                    <span>Status: <strong>{{getLicenceStatusText(item.status)}}</strong></span>
                     <br>
                     <div *ngIf="!item.isOperated && isActiveOrRecentlyExpired(item) && actionsVisible(item)" style="min-width: 10px;">
                         <a [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'" download>
