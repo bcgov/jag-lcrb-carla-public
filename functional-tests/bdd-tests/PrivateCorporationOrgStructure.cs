@@ -200,8 +200,7 @@ namespace bdd_tests
             NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
             returnDash.Click();
 
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,'REVIEW ORGANIZATION INFORMATION')]"));
-            orgInfoButton.Click();
+            ClickReviewOrganizationInformation();
 
             // check that the director name has been updated
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Updated Director')]")).Displayed);
