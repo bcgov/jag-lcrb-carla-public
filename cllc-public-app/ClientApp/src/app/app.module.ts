@@ -200,7 +200,7 @@ import { CovidConfirmationComponent } from './components/applications/applicatio
 import { TerminateTPORelationshipComponent } from '@components/applications/terminate-tpo-relationship/terminate-tpo-relationship.component';
 import { LgApprovalsComponent } from './components/lg-approvals/lg-approvals.component';
 import { LiquorApprovalsCalloutComponent } from './components/liquor-approvals-callout/liquor-approvals-callout.component';
-import { LgInConfirmationOfReceiptComponent } from './components/applications/application/tabs/lg-in-confirmation-of-receipt/lg-in-confirmation-of-receipt.component';
+import { LgInConfirmationOfReceiptComponent, LGDecisionDialogComponent } from './components/applications/application/tabs/lg-in-confirmation-of-receipt/lg-in-confirmation-of-receipt.component';
 import { LicenceRepresentativeFormComponent } from '@components/licence-representative-form/licence-representative-form.component';
 import { BusinessPlanComponent } from './components/applications/application/tabs/business-plan/business-plan.component';
 import { LgInfoPanelComponent } from './components/applications/application/tabs/lg-info-panel/lg-info-panel.component';
@@ -215,6 +215,7 @@ import { AdditionalPidsComponent } from './components/applications/application/t
     ApplicationCancellationDialogComponent,
     ApplicationComponent,
     ApplicationsAndLicencesComponent,
+    LGDecisionDialogComponent,
     AssosiateWizardComponent,
     BceidConfirmationComponent,
     BeforeYouStartComponent,
@@ -475,6 +476,7 @@ import { AdditionalPidsComponent } from './components/applications/application/t
   entryComponents: [
     ApplicationCancellationDialogComponent,
     DirectorAndOfficerPersonDialogComponent,
+    LGDecisionDialogComponent,
     KeyPersonnelDialogComponent,
     WorkerHomeDialogComponent,
     ShareholderDialogComponent,
