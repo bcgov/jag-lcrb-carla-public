@@ -3,7 +3,7 @@
     I want to change the name of a director
     And pay the associated fee
 
-@e2e @cannabis @privatecorporation @validation
+@e2e @cannabis @privatecorporation @validation @orgstructure
 Scenario: Change director name and pay fee
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -30,7 +30,7 @@ Scenario: Change director name and pay fee
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation
+@cannabis @privatecorporation @validation @orgstructure
 Scenario: Delete an individual who is both a director and shareholder
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -45,7 +45,7 @@ Scenario: Delete an individual who is both a director and shareholder
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation
+@cannabis @privatecorporation @validation @orgstructure
 Scenario: Change director and shareholder same name 
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -60,7 +60,7 @@ Scenario: Change director and shareholder same name
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation
+@cannabis @privatecorporation @validation @orgstructure
 Scenario: Confirm business shareholder org structure update
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -87,7 +87,7 @@ Scenario: Confirm business shareholder org structure update
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation
+@cannabis @privatecorporation @validation @orgstructure
 Scenario: Confirm business shareholder org structure update after payment
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -118,7 +118,7 @@ Scenario: Confirm business shareholder org structure update after payment
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation
+@cannabis @privatecorporation @validation @orgstructure
 Scenario: Save for Later feature for org structure 
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -147,7 +147,7 @@ Scenario: Save for Later feature for org structure
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @validation
+@e2e @cannabis @privatecorporation @validation @orgstructure
 Scenario: CRS application with mixed business shareholder types
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
