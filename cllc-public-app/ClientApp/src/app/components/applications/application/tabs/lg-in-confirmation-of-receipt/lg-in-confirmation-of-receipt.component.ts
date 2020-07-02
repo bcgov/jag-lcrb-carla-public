@@ -16,9 +16,9 @@ import { Observable } from 'rxjs';
 })
 export class LgInConfirmationOfReceiptComponent extends FormBase implements OnInit {
   @Input() application: Application;
+  @Input() htmlContent: ApplicationHTMLContent;
   validationMessages: string[];
   busy: any;
-  htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
 
   constructor(private applicationDataService: ApplicationDataService,
     private snackBar: MatSnackBar,
