@@ -195,6 +195,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       hasValidInterest: ['', []],
       willhaveValidInterest: ['', []],
       meetsALRRequirements: ['', []],
+      IsReadyProductNotVisibleOutside: ['', []],
     });
 
 
@@ -395,7 +396,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
     }
 
-    if (this.application.applicationType.lGandPoliceSelectors === "Yes") {
+    // TG validation question for cannabis licences to confirm that product is not visible from outside
+    if (this.application.applicationType.floorPlan === FormControlState.Show && this.application.licenseType === 'Cannabis Retail Store') {
+      this.form.get('IsReadyProductNotVisibleOutside').setValidators([Validators.required]);
+    } 
+
+
+    if (this.application.applicationType.lGandPoliceSelectors === "Yes" && this.LGApprovalsFeatureIsOn) {  
       this.form.get('indigenousNation').setValidators([Validators.required]);
       this.form.get('policeJurisdiction').setValidators([Validators.required]);
     } 
@@ -818,6 +825,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       indigenousNationId: 'Please select the Indigenous nation',
       federalProducerNames: 'Please enter the name of federal producer',
       description1: 'Please enter a description',
+      IsReadyProductNotVisibleOutside: 'Please confirm that product will not be visible from the outside'
     };
 
     return errorMap;
