@@ -950,28 +950,11 @@ namespace bdd_tests
         [And(@"I pay the licensing fee for (.*)")]
         public void PayLicenceFee(string feeType)
         {
-            /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            */
+            string firstYearLicenceFee = "Pay First Year Licensing Fee";
 
-            if (feeType == "Cannabis")
-            {
-                string licenceFee = "Pay First Year Licensing Fee";
-
-                // click on the pay licence fee link
-                NgWebElement uiLicenceFee = ngDriver.FindElement(By.LinkText(licenceFee));
-                uiLicenceFee.Click();
-            }
-
-            if (feeType == "Catering")
-            {
-                string firstYearLicenceFee = "Pay First Year Licensing Fee";
-
-                // click on the pay first year licence fee link
-                NgWebElement uiFirstYearLicenceFee = ngDriver.FindElement(By.LinkText(firstYearLicenceFee));
-                uiFirstYearLicenceFee.Click();
-            }
+            // click on the pay first year licence fee link
+            NgWebElement uiFirstYearLicenceFee = ngDriver.FindElement(By.LinkText(firstYearLicenceFee));
+            uiFirstYearLicenceFee.Click();
 
             // pay the licence fee
             MakePayment();
@@ -989,8 +972,6 @@ namespace bdd_tests
                 // confirm correct payment amount for Catering
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$450.00')]")).Displayed);
             }
-
-            string licencesLink = "Licences";
 
             ClickLicencesTab();
         }
@@ -2671,7 +2652,7 @@ namespace bdd_tests
         [And(@"I click on the Submit button")]
         public void ClickOnSubmitButton()
         {
-            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
+            NgWebElement submitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
             submitButton.Click();
         }
 
