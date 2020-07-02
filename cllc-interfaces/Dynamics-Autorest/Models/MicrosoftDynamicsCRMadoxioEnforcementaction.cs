@@ -29,181 +29,213 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioEnforcementaction class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioEnforcementaction(System.DateTimeOffset? adoxioCommunicationdistributiondate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDistributedtolicenseedate = default(System.DateTimeOffset?), int? adoxioChecklistdocumentsfinalizeduploaded = default(int?), int? adoxioChecklistcourtoverturned = default(int?), string adoxioDelegatephone = default(string), System.DateTimeOffset? adoxioCourtdecisiondate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDelegateassignmentdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioWaivercreateddate = default(System.DateTimeOffset?), int? adoxioChecklistlicenseenotifiedofrecorequest = default(int?), System.DateTimeOffset? adoxioWaiversentdate = default(System.DateTimeOffset?), string versionnumber = default(string), string _owninguserValue = default(string), int? adoxioPhcresult = default(int?), int? adoxioChecklistdelegateassignmentlettersent = default(int?), int? adoxioChecklistfinancenotifiedreissue = default(int?), int? adoxioChecklistnotificationsent = default(int?), int? adoxioChecklistpenaltylettercreated = default(int?), int? adoxioChecklistcompliancehistoryposted = default(int?), int? adoxioChecklistnoeareportsent = default(int?), int? adoxioPhcoutcome = default(int?), int? timezoneruleversionnumber = default(int?), int? adoxioChecklistnoeareportapproved = default(int?), System.DateTimeOffset? adoxioPhccompletedate = default(System.DateTimeOffset?), decimal? adoxioRecommendedmonetarypenalty = default(decimal?), System.DateTimeOffset? adoxioCnissueddate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioHearingnoticesentdate = default(System.DateTimeOffset?), int? adoxioChecklistordersent = default(int?), int? adoxioChecklistfinancenotifiedpenalty = default(int?), int? adoxioChecklistenforcementactivitiescomplete = default(int?), System.DateTimeOffset? adoxioStaylettersentdate = default(System.DateTimeOffset?), string adoxioLgcontactemail = default(string), int? adoxioChecklisthearingscheduled = default(int?), System.DateTimeOffset? adoxioStayletterdecisiondate = default(System.DateTimeOffset?), string adoxioLicenseerepresentative1 = default(string), int? statuscode = default(int?), System.DateTimeOffset? adoxioSuspensionenddate = default(System.DateTimeOffset?), decimal? adoxioFinalmonetarypenaltyBase = default(decimal?), System.DateTimeOffset? adoxioSuspensionperioddefineddate = default(System.DateTimeOffset?), string adoxioLgcontactphone = default(string), string adoxioPolicecontactphone = default(string), int? adoxioChecklistsuspensiondefined = default(int?), int? adoxioChecklistwaiversignednoea = default(int?), System.DateTimeOffset? adoxioNoeaapprovaldate = default(System.DateTimeOffset?), int? adoxioChecklistdelegateassigned = default(int?), int? adoxioChecklistpenaltyfundsreceived = default(int?), int? adoxioChecklisthearinginvitationsent = default(int?), int? adoxioChecklistpenaltyletterapproved = default(int?), int? adoxioChecklistwaiversignedphc = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioCheckliststayordersent = default(int?), int? adoxioChecklistreconsiderationapproved = default(int?), int? adoxioChecklistdelegatedecisionreached = default(int?), int? adoxioChecklistlcrbdecisionreached = default(int?), int? adoxioChecklistpenaltysignssent = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioInitiallicenseeresponsedate = default(System.DateTimeOffset?), int? statecode = default(int?), int? adoxioChecklistnoeareportsubmitted = default(int?), int? adoxioInitiallicenseedecisionresult = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? adoxioDelegatedecisionsentdate = default(System.DateTimeOffset?), int? adoxioChecklistpostedlcrbwebsite = default(int?), int? adoxioChecklistpenaltyletterreissued = default(int?), string adoxioJudicialhearinglocation = default(string), int? adoxioReconsiderationlicenseedecision = default(int?), int? adoxioChecklistoverduewaiverresponse = default(int?), System.DateTimeOffset? adoxioRolsentdate = default(System.DateTimeOffset?), int? adoxioChecklistsuspensionserved = default(int?), int? adoxioChecklisthearingdecisionsent = default(int?), int? adoxioChecklistappliedjudicialreview = default(int?), int? adoxioChecklisthearingresponsereceived = default(int?), string _createdonbehalfbyValue = default(string), string adoxioDelegateaddress = default(string), int? adoxioCheckliststayorderapproved = default(int?), int? adoxioChecklistwrittensubmissionreviewed = default(int?), bool? adoxioIscontraventionnoticeissued = default(bool?), int? adoxioChecklisthearingconfirmationsent = default(int?), int? adoxioChecklistevidencematerialssent = default(int?), string adoxioEnforcementactionid = default(string), int? adoxioCourtdecisionresult = default(int?), string adoxioDelegatename = default(string), System.DateTimeOffset? adoxioCourtdatetime = default(System.DateTimeOffset?), int? adoxioChecklistwaiversignedhearing = default(int?), int? adoxioChecklistrolsent = default(int?), decimal? adoxioRecommendedmonetarypenaltyBase = default(decimal?), System.DateTimeOffset? adoxioPenaltyletterapproveddate = default(System.DateTimeOffset?), int? adoxioChecklistcourtdatereceived = default(int?), int? adoxioChecklistcourtdecisionreceived = default(int?), int? adoxioChecklistlcrbdecisionsent = default(int?), System.DateTimeOffset? adoxioJudicialreviewdeadlinedate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDocswitnessdisclosuredate = default(System.DateTimeOffset?), int? adoxioDgmdecision = default(int?), string _owneridValue = default(string), System.DateTimeOffset? adoxioMonetarypenaltyprocesseddate = default(System.DateTimeOffset?), int? adoxioChecklistwaiverdocchangesrequired = default(int?), string adoxioHearinglocation = default(string), string _transactioncurrencyidValue = default(string), int? adoxioChecklistrolcomplete = default(int?), string processid = default(string), int? adoxioChecklistregistrardecisionreached = default(int?), int? adoxioChecklistlcrbstaffnotified = default(int?), int? adoxioChecklistwaiversent = default(int?), string traversedpath = default(string), int? adoxioChecklistreconsiderationapplied = default(int?), string adoxioLicenseerepresentative3 = default(string), string adoxioLgcontactname = default(string), System.DateTimeOffset? adoxioDatedocsandwitnesssdisclosure = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDelegatedecisiondate = default(System.DateTimeOffset?), int? adoxioChecklistnoeareportchangesrequired = default(int?), System.DateTimeOffset? adoxioReconsiderationapplicationduedate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioPrehearingdate = default(System.DateTimeOffset?), int? adoxioRegistrarsdecision = default(int?), string _createdbyValue = default(string), decimal? adoxioFinalmonetarypenalty = default(decimal?), System.DateTimeOffset? adoxioPenaltylettercreateddate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioStaylettercompletedate = default(System.DateTimeOffset?), string adoxioContraventionnoticenumber = default(string), System.DateTimeOffset? adoxioWaiversigneddate = default(System.DateTimeOffset?), int? adoxioPenaltylevel = default(int?), System.DateTimeOffset? adoxioWaiversubmissionduedate = default(System.DateTimeOffset?), int? adoxioChecklistwaiverdocsubmitted = default(int?), int? importsequencenumber = default(int?), System.DateTimeOffset? adoxioOralhearingdatetime = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? adoxioReconsiderationapplicationsubmitteddate = default(System.DateTimeOffset?), int? adoxioChecklistreconsiderrequestfeepaid = default(int?), int? adoxioChecklisthearingcompleted = default(int?), int? adoxioPenaltyviolation = default(int?), string adoxioDelegateemail = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? adoxioNoeareportsubmitteddate = default(System.DateTimeOffset?), int? adoxioChecklistphccomplete = default(int?), System.DateTimeOffset? adoxioWaiverapproveddate = default(System.DateTimeOffset?), bool? adoxioIsmonetarypenalty = default(bool?), string adoxioTitle = default(string), string _owningteamValue = default(string), int? adoxioChecklistphcscheduled = default(int?), System.DateTimeOffset? adoxioWaiverreminder = default(System.DateTimeOffset?), int? adoxioChecklistreconsiderationrequestreceived = default(int?), int? adoxioChecklistlicenseenotified = default(int?), string adoxioPolicecontactname = default(string), System.DateTimeOffset? adoxioPenaltyletterreissuedate = default(System.DateTimeOffset?), int? adoxioChecklistjudicialreviewrequired = default(int?), int? adoxioChecklistlicenseedecisionreceived = default(int?), int? adoxioDelegatedecisionresult = default(int?), int? adoxioChecklisthearingnoticesent = default(int?), int? adoxioChecklistphccancelled = default(int?), int? adoxioRecommendedsuspensionduration = default(int?), System.DateTimeOffset? adoxioEvidencematerialssentdate = default(System.DateTimeOffset?), string adoxioOralhearinglocation = default(string), int? adoxioChecklistpenaltylettersentdeadline = default(int?), string adoxioLicenseerepresentative2 = default(string), System.DateTimeOffset? adoxioPenaltylettersentdate = default(System.DateTimeOffset?), int? adoxioChecklistorderresponsereceived = default(int?), int? adoxioChecklistwaiverdocapproved = default(int?), string _stageidValue = default(string), System.DateTimeOffset? adoxioNoeasentdate = default(System.DateTimeOffset?), int? adoxioCheckliststayordercreated = default(int?), System.DateTimeOffset? adoxioOrderdecisiondate = default(System.DateTimeOffset?), int? adoxioHearingresponseresult = default(int?), int? adoxioChecklistpenaltylettersent = default(int?), string adoxioPolicecontactemail = default(string), int? adoxioChecklistdelegatedecisionsent = default(int?), System.DateTimeOffset? adoxioSuspensionstartdate = default(System.DateTimeOffset?), decimal? exchangerate = default(decimal?), int? adoxioChecklistwaiverresponsereceived = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioJudicialhearingdate = default(System.DateTimeOffset?), int? adoxioGmdecision = default(int?), System.DateTimeOffset? adoxioGmreconsiderationdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioHearingdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioReconsiderationapplicationreceiveddate = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioEnforcementactionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEnforcementactionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEnforcementactionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEnforcementactionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioEnforcementactionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioEnforcementactionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEnforcementactionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioEnforcementactionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioEnforcementactionSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMprocessstage stageid = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMannotation> adoxioEnforcementactionAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMadoxioEnforcementactionbpf> bpfAdoxioEnforcementactionAdoxioEnforcementactionbpf = default(IList<MicrosoftDynamicsCRMadoxioEnforcementactionbpf>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMactivitypointer> adoxioEnforcementactionActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioEnforcementactionAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMappointment> adoxioEnforcementactionAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioEnforcementactionEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioEnforcementactionFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioEnforcementactionLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioEnforcementactionPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> adoxioEnforcementactionTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioEnforcementactionRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioEnforcementactionSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioEnforcementactionServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>))
+        public MicrosoftDynamicsCRMadoxioEnforcementaction(int? adoxioChecklistpenaltyletterreissued = default(int?), decimal? adoxioFinalmonetarypenalty = default(decimal?), int? adoxioChecklisthearingconfirmationsent = default(int?), string adoxioPolicecontactphone = default(string), System.DateTimeOffset? adoxioNoeaapprovaldate = default(System.DateTimeOffset?), int? adoxioChecklistlicenseedecisionreceived = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioCourtdatetime = default(System.DateTimeOffset?), string adoxioCasenumber = default(string), System.DateTimeOffset? adoxioOralhearingdatetime = default(System.DateTimeOffset?), int? statuscode = default(int?), string traversedpath = default(string), int? adoxioChecklistdelegateassigned = default(int?), string adoxioDelegateemail = default(string), int? adoxioChecklistorderresponsereceived = default(int?), System.DateTimeOffset? adoxioWaiversubmissionduedate = default(System.DateTimeOffset?), int? adoxioChecklistwaiverdocchangesrequired = default(int?), System.DateTimeOffset? adoxioStaylettercompletedate = default(System.DateTimeOffset?), int? adoxioCourtdecisionresult = default(int?), int? adoxioReconsiderationlicenseedecision = default(int?), System.DateTimeOffset? adoxioSuspensionperioddefineddate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioCourtdecisiondate = default(System.DateTimeOffset?), string _adoxioRegionalmanageridValue = default(string), System.DateTimeOffset? adoxioDelegateassignmentdate = default(System.DateTimeOffset?), int? adoxioOrderdecision = default(int?), System.DateTimeOffset? adoxioWaivercreateddate = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string adoxioLicenseerepresentative2 = default(string), int? adoxioChecklistnoeareportchangesrequired = default(int?), int? adoxioChecklistrolsent = default(int?), System.DateTimeOffset? adoxioPenaltylettersentdate = default(System.DateTimeOffset?), int? adoxioChecklistcourtoverturned = default(int?), int? adoxioChecklistlicenseenotifiedofrecorequest = default(int?), string adoxioLgcontactemail = default(string), int? adoxioChecklistoverduewaiverresponse = default(int?), System.DateTimeOffset? adoxioWaiverresponsereceiveddate = default(System.DateTimeOffset?), int? adoxioChecklistenforcementactivitiescomplete = default(int?), int? adoxioChecklistpenaltylettersentdeadline = default(int?), int? adoxioChecklistpenaltyfundsreceived = default(int?), System.DateTimeOffset? adoxioRolsentdate = default(System.DateTimeOffset?), string _adoxioEstablishmentidValue = default(string), System.DateTimeOffset? adoxioLicenseesubmissionsdate = default(System.DateTimeOffset?), int? adoxioChecklistdelegateassignmentlettersent = default(int?), int? adoxioChecklistsuspensiondefined = default(int?), int? adoxioChecklistevidencematerialssent = default(int?), int? adoxioDelegatefinaldecision = default(int?), System.DateTimeOffset? adoxioOrderdecisiondate = default(System.DateTimeOffset?), int? adoxioChecklistdelegatedecisionsent = default(int?), string _adoxioAreaidValue = default(string), string adoxioDelegateaddress = default(string), int? adoxioDgmapproval = default(int?), string adoxioJudicialhearinglocation = default(string), string _stageidValue = default(string), System.DateTimeOffset? adoxioSuspensionstartdate = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), int? adoxioDelegatedecisionresult = default(int?), int? adoxioHearingresponseresult = default(int?), string _owningbusinessunitValue = default(string), int? adoxioChecklistcompliancehistoryposted = default(int?), System.DateTimeOffset? adoxioPrehearingdate = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? adoxioChecklistreconsiderationapplied = default(int?), int? adoxioChecklistnoeareportapproved = default(int?), string adoxioTentativehearinglocation = default(string), int? adoxioCheckliststayorderapproved = default(int?), System.DateTimeOffset? adoxioHearingnoticesentdate = default(System.DateTimeOffset?), int? adoxioChecklistlcrbdecisionreached = default(int?), int? adoxioChecklistordersent = default(int?), int? adoxioChecklistwrittensubmissionreviewed = default(int?), System.DateTimeOffset? adoxioPenaltyletterreissuedate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioReconsiderationapplicationreceiveddate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioCnissueddate = default(System.DateTimeOffset?), int? adoxioChecklistwaiversignednoea = default(int?), int? adoxioPenaltytype = default(int?), System.DateTimeOffset? adoxioDatedocsandwitnesssdisclosure = default(System.DateTimeOffset?), int? adoxioPenaltylevel = default(int?), string adoxioLicenseelegalrepemail = default(string), string adoxioLgcontactphone = default(string), string adoxioEnforcementactionid = default(string), int? adoxioChecklistphccomplete = default(int?), System.DateTimeOffset? adoxioWaiverreminder = default(System.DateTimeOffset?), string adoxioOralhearinglocation = default(string), System.DateTimeOffset? adoxioReconsiderationapplicationsubmitteddate = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), decimal? adoxioRecommendedmonetarypenalty = default(decimal?), string adoxioNoeanumber = default(string), int? adoxioChecklistpenaltyletterapproved = default(int?), string adoxioLicenseelegalrepphone = default(string), System.DateTimeOffset? adoxioJudicialhearingdate = default(System.DateTimeOffset?), int? adoxioChecklistfinancenotifiedpenalty = default(int?), string _adoxioRegionidValue = default(string), int? adoxioChecklistsuspensionserved = default(int?), System.DateTimeOffset? adoxioGmreconsiderationdate = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), int? adoxioChecklisthearingresponsereceived = default(int?), string adoxioContraventionnoticenumber = default(string), int? adoxioChecklisthearingdecisionsent = default(int?), string adoxioLicenseerepresentative1 = default(string), System.DateTimeOffset? adoxioHearingdate = default(System.DateTimeOffset?), int? adoxioChecklistwaiverdocsubmitted = default(int?), int? adoxioPhcresult = default(int?), int? adoxioChecklisthearingnoticesent = default(int?), int? adoxioChecklistfinancenotifiedreissue = default(int?), string adoxioLicenseelegalrepname = default(string), int? adoxioChecklistpartialwaiverssignednoea = default(int?), int? adoxioChecklistappliedjudicialreview = default(int?), System.DateTimeOffset? adoxioMonetarypenaltyprocesseddate = default(System.DateTimeOffset?), int? adoxioChecklistwaiversignedphc = default(int?), int? adoxioRegistrarsdecision = default(int?), System.DateTimeOffset? adoxioJudicialreviewdeadlinedate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioEvidencematerialssentdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioWaiverapproveddate = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? adoxioTentativehearingdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioPenaltyletterapproveddate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDocswitnessdisclosuredate = default(System.DateTimeOffset?), string _adoxioLicenceidValue = default(string), string adoxioPhclocation = default(string), int? adoxioChecklistdocumentsfinalizeduploaded = default(int?), bool? adoxioIscontraventionnoticeissued = default(bool?), decimal? adoxioRecommendedmonetarypenaltyBase = default(decimal?), System.DateTimeOffset? adoxioPenaltylettercreateddate = default(System.DateTimeOffset?), string _adoxioLicencetypeidValue = default(string), int? adoxioChecklistdelegatedecisionreached = default(int?), int? adoxioGmdecision = default(int?), int? adoxioChecklistpenaltylettercreated = default(int?), decimal? adoxioFinalmonetarypenaltyBase = default(decimal?), System.DateTimeOffset? adoxioStayorderstayeduntildate = default(System.DateTimeOffset?), int? adoxioChecklistphccancelled = default(int?), int? adoxioPenaltyviolation = default(int?), int? adoxioChecklistlicenseenotified = default(int?), string _adoxioDelegategmidValue = default(string), int? adoxioChecklistphcscheduled = default(int?), int? adoxioChecklistcourtdecisionreceived = default(int?), string versionnumber = default(string), int? adoxioChecklistjudicialreviewrequired = default(int?), System.DateTimeOffset? adoxioBranchdisclosuredocsdate = default(System.DateTimeOffset?), int? adoxioChecklistnotificationsent = default(int?), int? adoxioChecklistpenaltysignssent = default(int?), int? adoxioChecklistnoeareportsent = default(int?), string adoxioPolicecontactname = default(string), System.DateTimeOffset? adoxioCommunicationdistributiondate = default(System.DateTimeOffset?), int? adoxioChecklistwaiversent = default(int?), string adoxioPolicecontactemail = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? exchangerate = default(decimal?), string _adoxioAdvocateidValue = default(string), System.DateTimeOffset? adoxioDelegatedecisionsentdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioReconsiderationapplicationduedate = default(System.DateTimeOffset?), int? adoxioChecklisthearingscheduled = default(int?), int? adoxioCheckliststayordersent = default(int?), string adoxioDelegatename = default(string), int? adoxioChecklistreconsiderationrequestreceived = default(int?), System.DateTimeOffset? adoxioSuspensionenddate = default(System.DateTimeOffset?), int? adoxioChecklistlcrbstaffnotified = default(int?), int? adoxioCompliancehistoryposting = default(int?), System.DateTimeOffset? adoxioPhclettersentdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioStayletterdecisiondate = default(System.DateTimeOffset?), int? adoxioChecklistreconsiderationapproved = default(int?), string _adoxioLicenseeidValue = default(string), string _owneridValue = default(string), int? adoxioChecklistregistrardecisionreached = default(int?), string adoxioTitle = default(string), int? statecode = default(int?), System.DateTimeOffset? adoxioNoeareportsubmitteddate = default(System.DateTimeOffset?), string _adoxioInspectoridValue = default(string), System.DateTimeOffset? adoxioWaiversentdate = default(System.DateTimeOffset?), string _createdbyValue = default(string), System.DateTimeOffset? adoxioStaylettersentdate = default(System.DateTimeOffset?), string processid = default(string), System.DateTimeOffset? adoxioDelegatedecisiondate = default(System.DateTimeOffset?), string _adoxioRegistraridValue = default(string), int? adoxioChecklistpenaltylettersent = default(int?), string adoxioLicenseerepresentative3 = default(string), int? adoxioChecklistcourtdatereceived = default(int?), System.DateTimeOffset? adoxioWaiversigneddate = default(System.DateTimeOffset?), int? adoxioChecklisthearingcompleted = default(int?), System.DateTimeOffset? adoxioDistributedtolicenseedate = default(System.DateTimeOffset?), int? adoxioCheckliststayordercreated = default(int?), System.DateTimeOffset? adoxioPhccompletedate = default(System.DateTimeOffset?), string adoxioDelegatephone = default(string), int? adoxioChecklistwaiverdocapproved = default(int?), int? adoxioChecklistlcrbdecisionsent = default(int?), int? adoxioChecklistnoeareportsubmitted = default(int?), string adoxioLgcontactname = default(string), System.DateTimeOffset? adoxioNoeasentdate = default(System.DateTimeOffset?), int? adoxioChecklistrolcomplete = default(int?), int? adoxioInitiallicenseedecisionresult = default(int?), int? adoxioPhcoutcome = default(int?), string adoxioHearinglocation = default(string), System.DateTimeOffset? adoxioInitiallicenseeresponsedate = default(System.DateTimeOffset?), int? adoxioChecklisthearinginvitationsent = default(int?), System.DateTimeOffset? adoxioSuspensionfulfillmentdeadlinedate = default(System.DateTimeOffset?), int? adoxioChecklistpartialwaiverssignedphc = default(int?), int? adoxioMonetarypenalty = default(int?), int? adoxioChecklistreconsiderrequestfeepaid = default(int?), string _modifiedonbehalfbyValue = default(string), int? adoxioRecommendedsuspensionduration = default(int?), string _owninguserValue = default(string), int? adoxioChecklistwaiverresponsereceived = default(int?), int? adoxioChecklistpostedlcrbwebsite = default(int?), System.DateTimeOffset? adoxioMonetarypaymentdeadlinedate = default(System.DateTimeOffset?), int? adoxioDelegatefinding = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioEnforcementactionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEnforcementactionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEnforcementactionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEnforcementactionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioEnforcementactionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioEnforcementactionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEnforcementactionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioEnforcementactionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioEnforcementactionSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMprocessstage stageid = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMannotation> adoxioEnforcementactionAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMadoxioEnforcementactionbpf> bpfAdoxioEnforcementactionAdoxioEnforcementactionbpf = default(IList<MicrosoftDynamicsCRMadoxioEnforcementactionbpf>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMactivitypointer> adoxioEnforcementactionActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioEnforcementactionAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMappointment> adoxioEnforcementactionAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioEnforcementactionEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioEnforcementactionFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioEnforcementactionLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioEnforcementactionPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> adoxioEnforcementactionTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioEnforcementactionRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioEnforcementactionSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioEnforcementactionServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMaccount adoxioLicenseeId = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishmentId = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioRegion adoxioRegionId = default(MicrosoftDynamicsCRMadoxioRegion), MicrosoftDynamicsCRMadoxioArea adoxioAreaId = default(MicrosoftDynamicsCRMadoxioArea), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioEnforcementactionContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), MicrosoftDynamicsCRMsystemuser adoxioAdvocateId = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser adoxioRegistrarId = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser adoxioRegionalManagerId = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser adoxioInspectorId = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser adoxioDelegateGMId = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceTypeId = default(MicrosoftDynamicsCRMadoxioLicencetype), IList<MicrosoftDynamicsCRMincident> adoxioEnforcementactionInspections = default(IList<MicrosoftDynamicsCRMincident>))
         {
-            AdoxioCommunicationdistributiondate = adoxioCommunicationdistributiondate;
-            AdoxioDistributedtolicenseedate = adoxioDistributedtolicenseedate;
-            AdoxioChecklistdocumentsfinalizeduploaded = adoxioChecklistdocumentsfinalizeduploaded;
-            AdoxioChecklistcourtoverturned = adoxioChecklistcourtoverturned;
-            AdoxioDelegatephone = adoxioDelegatephone;
-            AdoxioCourtdecisiondate = adoxioCourtdecisiondate;
-            AdoxioDelegateassignmentdate = adoxioDelegateassignmentdate;
-            AdoxioWaivercreateddate = adoxioWaivercreateddate;
-            AdoxioChecklistlicenseenotifiedofrecorequest = adoxioChecklistlicenseenotifiedofrecorequest;
-            AdoxioWaiversentdate = adoxioWaiversentdate;
-            Versionnumber = versionnumber;
-            this._owninguserValue = _owninguserValue;
-            AdoxioPhcresult = adoxioPhcresult;
-            AdoxioChecklistdelegateassignmentlettersent = adoxioChecklistdelegateassignmentlettersent;
-            AdoxioChecklistfinancenotifiedreissue = adoxioChecklistfinancenotifiedreissue;
-            AdoxioChecklistnotificationsent = adoxioChecklistnotificationsent;
-            AdoxioChecklistpenaltylettercreated = adoxioChecklistpenaltylettercreated;
-            AdoxioChecklistcompliancehistoryposted = adoxioChecklistcompliancehistoryposted;
-            AdoxioChecklistnoeareportsent = adoxioChecklistnoeareportsent;
-            AdoxioPhcoutcome = adoxioPhcoutcome;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            AdoxioChecklistnoeareportapproved = adoxioChecklistnoeareportapproved;
-            AdoxioPhccompletedate = adoxioPhccompletedate;
-            AdoxioRecommendedmonetarypenalty = adoxioRecommendedmonetarypenalty;
-            AdoxioCnissueddate = adoxioCnissueddate;
-            AdoxioHearingnoticesentdate = adoxioHearingnoticesentdate;
-            AdoxioChecklistordersent = adoxioChecklistordersent;
-            AdoxioChecklistfinancenotifiedpenalty = adoxioChecklistfinancenotifiedpenalty;
-            AdoxioChecklistenforcementactivitiescomplete = adoxioChecklistenforcementactivitiescomplete;
-            AdoxioStaylettersentdate = adoxioStaylettersentdate;
-            AdoxioLgcontactemail = adoxioLgcontactemail;
-            AdoxioChecklisthearingscheduled = adoxioChecklisthearingscheduled;
-            AdoxioStayletterdecisiondate = adoxioStayletterdecisiondate;
-            AdoxioLicenseerepresentative1 = adoxioLicenseerepresentative1;
-            Statuscode = statuscode;
-            AdoxioSuspensionenddate = adoxioSuspensionenddate;
-            AdoxioFinalmonetarypenaltyBase = adoxioFinalmonetarypenaltyBase;
-            AdoxioSuspensionperioddefineddate = adoxioSuspensionperioddefineddate;
-            AdoxioLgcontactphone = adoxioLgcontactphone;
-            AdoxioPolicecontactphone = adoxioPolicecontactphone;
-            AdoxioChecklistsuspensiondefined = adoxioChecklistsuspensiondefined;
-            AdoxioChecklistwaiversignednoea = adoxioChecklistwaiversignednoea;
-            AdoxioNoeaapprovaldate = adoxioNoeaapprovaldate;
-            AdoxioChecklistdelegateassigned = adoxioChecklistdelegateassigned;
-            AdoxioChecklistpenaltyfundsreceived = adoxioChecklistpenaltyfundsreceived;
-            AdoxioChecklisthearinginvitationsent = adoxioChecklisthearinginvitationsent;
-            AdoxioChecklistpenaltyletterapproved = adoxioChecklistpenaltyletterapproved;
-            AdoxioChecklistwaiversignedphc = adoxioChecklistwaiversignedphc;
-            Modifiedon = modifiedon;
-            AdoxioCheckliststayordersent = adoxioCheckliststayordersent;
-            AdoxioChecklistreconsiderationapproved = adoxioChecklistreconsiderationapproved;
-            AdoxioChecklistdelegatedecisionreached = adoxioChecklistdelegatedecisionreached;
-            AdoxioChecklistlcrbdecisionreached = adoxioChecklistlcrbdecisionreached;
-            AdoxioChecklistpenaltysignssent = adoxioChecklistpenaltysignssent;
-            Createdon = createdon;
-            AdoxioInitiallicenseeresponsedate = adoxioInitiallicenseeresponsedate;
-            Statecode = statecode;
-            AdoxioChecklistnoeareportsubmitted = adoxioChecklistnoeareportsubmitted;
-            AdoxioInitiallicenseedecisionresult = adoxioInitiallicenseedecisionresult;
-            this._modifiedbyValue = _modifiedbyValue;
-            AdoxioDelegatedecisionsentdate = adoxioDelegatedecisionsentdate;
-            AdoxioChecklistpostedlcrbwebsite = adoxioChecklistpostedlcrbwebsite;
             AdoxioChecklistpenaltyletterreissued = adoxioChecklistpenaltyletterreissued;
-            AdoxioJudicialhearinglocation = adoxioJudicialhearinglocation;
-            AdoxioReconsiderationlicenseedecision = adoxioReconsiderationlicenseedecision;
-            AdoxioChecklistoverduewaiverresponse = adoxioChecklistoverduewaiverresponse;
-            AdoxioRolsentdate = adoxioRolsentdate;
-            AdoxioChecklistsuspensionserved = adoxioChecklistsuspensionserved;
-            AdoxioChecklisthearingdecisionsent = adoxioChecklisthearingdecisionsent;
-            AdoxioChecklistappliedjudicialreview = adoxioChecklistappliedjudicialreview;
-            AdoxioChecklisthearingresponsereceived = adoxioChecklisthearingresponsereceived;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            AdoxioDelegateaddress = adoxioDelegateaddress;
-            AdoxioCheckliststayorderapproved = adoxioCheckliststayorderapproved;
-            AdoxioChecklistwrittensubmissionreviewed = adoxioChecklistwrittensubmissionreviewed;
-            AdoxioIscontraventionnoticeissued = adoxioIscontraventionnoticeissued;
-            AdoxioChecklisthearingconfirmationsent = adoxioChecklisthearingconfirmationsent;
-            AdoxioChecklistevidencematerialssent = adoxioChecklistevidencematerialssent;
-            AdoxioEnforcementactionid = adoxioEnforcementactionid;
-            AdoxioCourtdecisionresult = adoxioCourtdecisionresult;
-            AdoxioDelegatename = adoxioDelegatename;
-            AdoxioCourtdatetime = adoxioCourtdatetime;
-            AdoxioChecklistwaiversignedhearing = adoxioChecklistwaiversignedhearing;
-            AdoxioChecklistrolsent = adoxioChecklistrolsent;
-            AdoxioRecommendedmonetarypenaltyBase = adoxioRecommendedmonetarypenaltyBase;
-            AdoxioPenaltyletterapproveddate = adoxioPenaltyletterapproveddate;
-            AdoxioChecklistcourtdatereceived = adoxioChecklistcourtdatereceived;
-            AdoxioChecklistcourtdecisionreceived = adoxioChecklistcourtdecisionreceived;
-            AdoxioChecklistlcrbdecisionsent = adoxioChecklistlcrbdecisionsent;
-            AdoxioJudicialreviewdeadlinedate = adoxioJudicialreviewdeadlinedate;
-            AdoxioDocswitnessdisclosuredate = adoxioDocswitnessdisclosuredate;
-            AdoxioDgmdecision = adoxioDgmdecision;
-            this._owneridValue = _owneridValue;
-            AdoxioMonetarypenaltyprocesseddate = adoxioMonetarypenaltyprocesseddate;
-            AdoxioChecklistwaiverdocchangesrequired = adoxioChecklistwaiverdocchangesrequired;
-            AdoxioHearinglocation = adoxioHearinglocation;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            AdoxioChecklistrolcomplete = adoxioChecklistrolcomplete;
-            Processid = processid;
-            AdoxioChecklistregistrardecisionreached = adoxioChecklistregistrardecisionreached;
-            AdoxioChecklistlcrbstaffnotified = adoxioChecklistlcrbstaffnotified;
-            AdoxioChecklistwaiversent = adoxioChecklistwaiversent;
-            Traversedpath = traversedpath;
-            AdoxioChecklistreconsiderationapplied = adoxioChecklistreconsiderationapplied;
-            AdoxioLicenseerepresentative3 = adoxioLicenseerepresentative3;
-            AdoxioLgcontactname = adoxioLgcontactname;
-            AdoxioDatedocsandwitnesssdisclosure = adoxioDatedocsandwitnesssdisclosure;
-            AdoxioDelegatedecisiondate = adoxioDelegatedecisiondate;
-            AdoxioChecklistnoeareportchangesrequired = adoxioChecklistnoeareportchangesrequired;
-            AdoxioReconsiderationapplicationduedate = adoxioReconsiderationapplicationduedate;
-            AdoxioPrehearingdate = adoxioPrehearingdate;
-            AdoxioRegistrarsdecision = adoxioRegistrarsdecision;
-            this._createdbyValue = _createdbyValue;
             AdoxioFinalmonetarypenalty = adoxioFinalmonetarypenalty;
-            AdoxioPenaltylettercreateddate = adoxioPenaltylettercreateddate;
-            AdoxioStaylettercompletedate = adoxioStaylettercompletedate;
-            AdoxioContraventionnoticenumber = adoxioContraventionnoticenumber;
-            AdoxioWaiversigneddate = adoxioWaiversigneddate;
-            AdoxioPenaltylevel = adoxioPenaltylevel;
-            AdoxioWaiversubmissionduedate = adoxioWaiversubmissionduedate;
-            AdoxioChecklistwaiverdocsubmitted = adoxioChecklistwaiverdocsubmitted;
-            Importsequencenumber = importsequencenumber;
-            AdoxioOralhearingdatetime = adoxioOralhearingdatetime;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            AdoxioReconsiderationapplicationsubmitteddate = adoxioReconsiderationapplicationsubmitteddate;
-            AdoxioChecklistreconsiderrequestfeepaid = adoxioChecklistreconsiderrequestfeepaid;
-            AdoxioChecklisthearingcompleted = adoxioChecklisthearingcompleted;
-            AdoxioPenaltyviolation = adoxioPenaltyviolation;
-            AdoxioDelegateemail = adoxioDelegateemail;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            AdoxioNoeareportsubmitteddate = adoxioNoeareportsubmitteddate;
-            AdoxioChecklistphccomplete = adoxioChecklistphccomplete;
-            AdoxioWaiverapproveddate = adoxioWaiverapproveddate;
-            AdoxioIsmonetarypenalty = adoxioIsmonetarypenalty;
-            AdoxioTitle = adoxioTitle;
-            this._owningteamValue = _owningteamValue;
-            AdoxioChecklistphcscheduled = adoxioChecklistphcscheduled;
-            AdoxioWaiverreminder = adoxioWaiverreminder;
-            AdoxioChecklistreconsiderationrequestreceived = adoxioChecklistreconsiderationrequestreceived;
-            AdoxioChecklistlicenseenotified = adoxioChecklistlicenseenotified;
-            AdoxioPolicecontactname = adoxioPolicecontactname;
-            AdoxioPenaltyletterreissuedate = adoxioPenaltyletterreissuedate;
-            AdoxioChecklistjudicialreviewrequired = adoxioChecklistjudicialreviewrequired;
+            AdoxioChecklisthearingconfirmationsent = adoxioChecklisthearingconfirmationsent;
+            AdoxioPolicecontactphone = adoxioPolicecontactphone;
+            AdoxioNoeaapprovaldate = adoxioNoeaapprovaldate;
             AdoxioChecklistlicenseedecisionreceived = adoxioChecklistlicenseedecisionreceived;
-            AdoxioDelegatedecisionresult = adoxioDelegatedecisionresult;
-            AdoxioChecklisthearingnoticesent = adoxioChecklisthearingnoticesent;
-            AdoxioChecklistphccancelled = adoxioChecklistphccancelled;
-            AdoxioRecommendedsuspensionduration = adoxioRecommendedsuspensionduration;
-            AdoxioEvidencematerialssentdate = adoxioEvidencematerialssentdate;
-            AdoxioOralhearinglocation = adoxioOralhearinglocation;
-            AdoxioChecklistpenaltylettersentdeadline = adoxioChecklistpenaltylettersentdeadline;
-            AdoxioLicenseerepresentative2 = adoxioLicenseerepresentative2;
-            AdoxioPenaltylettersentdate = adoxioPenaltylettersentdate;
-            AdoxioChecklistorderresponsereceived = adoxioChecklistorderresponsereceived;
-            AdoxioChecklistwaiverdocapproved = adoxioChecklistwaiverdocapproved;
-            this._stageidValue = _stageidValue;
-            AdoxioNoeasentdate = adoxioNoeasentdate;
-            AdoxioCheckliststayordercreated = adoxioCheckliststayordercreated;
-            AdoxioOrderdecisiondate = adoxioOrderdecisiondate;
-            AdoxioHearingresponseresult = adoxioHearingresponseresult;
-            AdoxioChecklistpenaltylettersent = adoxioChecklistpenaltylettersent;
-            AdoxioPolicecontactemail = adoxioPolicecontactemail;
-            AdoxioChecklistdelegatedecisionsent = adoxioChecklistdelegatedecisionsent;
-            AdoxioSuspensionstartdate = adoxioSuspensionstartdate;
-            Exchangerate = exchangerate;
-            AdoxioChecklistwaiverresponsereceived = adoxioChecklistwaiverresponsereceived;
             Overriddencreatedon = overriddencreatedon;
-            AdoxioJudicialhearingdate = adoxioJudicialhearingdate;
-            AdoxioGmdecision = adoxioGmdecision;
-            AdoxioGmreconsiderationdate = adoxioGmreconsiderationdate;
-            AdoxioHearingdate = adoxioHearingdate;
+            AdoxioCourtdatetime = adoxioCourtdatetime;
+            AdoxioCasenumber = adoxioCasenumber;
+            AdoxioOralhearingdatetime = adoxioOralhearingdatetime;
+            Statuscode = statuscode;
+            Traversedpath = traversedpath;
+            AdoxioChecklistdelegateassigned = adoxioChecklistdelegateassigned;
+            AdoxioDelegateemail = adoxioDelegateemail;
+            AdoxioChecklistorderresponsereceived = adoxioChecklistorderresponsereceived;
+            AdoxioWaiversubmissionduedate = adoxioWaiversubmissionduedate;
+            AdoxioChecklistwaiverdocchangesrequired = adoxioChecklistwaiverdocchangesrequired;
+            AdoxioStaylettercompletedate = adoxioStaylettercompletedate;
+            AdoxioCourtdecisionresult = adoxioCourtdecisionresult;
+            AdoxioReconsiderationlicenseedecision = adoxioReconsiderationlicenseedecision;
+            AdoxioSuspensionperioddefineddate = adoxioSuspensionperioddefineddate;
+            AdoxioCourtdecisiondate = adoxioCourtdecisiondate;
+            this._adoxioRegionalmanageridValue = _adoxioRegionalmanageridValue;
+            AdoxioDelegateassignmentdate = adoxioDelegateassignmentdate;
+            AdoxioOrderdecision = adoxioOrderdecision;
+            AdoxioWaivercreateddate = adoxioWaivercreateddate;
+            Importsequencenumber = importsequencenumber;
+            AdoxioLicenseerepresentative2 = adoxioLicenseerepresentative2;
+            AdoxioChecklistnoeareportchangesrequired = adoxioChecklistnoeareportchangesrequired;
+            AdoxioChecklistrolsent = adoxioChecklistrolsent;
+            AdoxioPenaltylettersentdate = adoxioPenaltylettersentdate;
+            AdoxioChecklistcourtoverturned = adoxioChecklistcourtoverturned;
+            AdoxioChecklistlicenseenotifiedofrecorequest = adoxioChecklistlicenseenotifiedofrecorequest;
+            AdoxioLgcontactemail = adoxioLgcontactemail;
+            AdoxioChecklistoverduewaiverresponse = adoxioChecklistoverduewaiverresponse;
+            AdoxioWaiverresponsereceiveddate = adoxioWaiverresponsereceiveddate;
+            AdoxioChecklistenforcementactivitiescomplete = adoxioChecklistenforcementactivitiescomplete;
+            AdoxioChecklistpenaltylettersentdeadline = adoxioChecklistpenaltylettersentdeadline;
+            AdoxioChecklistpenaltyfundsreceived = adoxioChecklistpenaltyfundsreceived;
+            AdoxioRolsentdate = adoxioRolsentdate;
+            this._adoxioEstablishmentidValue = _adoxioEstablishmentidValue;
+            AdoxioLicenseesubmissionsdate = adoxioLicenseesubmissionsdate;
+            AdoxioChecklistdelegateassignmentlettersent = adoxioChecklistdelegateassignmentlettersent;
+            AdoxioChecklistsuspensiondefined = adoxioChecklistsuspensiondefined;
+            AdoxioChecklistevidencematerialssent = adoxioChecklistevidencematerialssent;
+            AdoxioDelegatefinaldecision = adoxioDelegatefinaldecision;
+            AdoxioOrderdecisiondate = adoxioOrderdecisiondate;
+            AdoxioChecklistdelegatedecisionsent = adoxioChecklistdelegatedecisionsent;
+            this._adoxioAreaidValue = _adoxioAreaidValue;
+            AdoxioDelegateaddress = adoxioDelegateaddress;
+            AdoxioDgmapproval = adoxioDgmapproval;
+            AdoxioJudicialhearinglocation = adoxioJudicialhearinglocation;
+            this._stageidValue = _stageidValue;
+            AdoxioSuspensionstartdate = adoxioSuspensionstartdate;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            AdoxioDelegatedecisionresult = adoxioDelegatedecisionresult;
+            AdoxioHearingresponseresult = adoxioHearingresponseresult;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            AdoxioChecklistcompliancehistoryposted = adoxioChecklistcompliancehistoryposted;
+            AdoxioPrehearingdate = adoxioPrehearingdate;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            AdoxioChecklistreconsiderationapplied = adoxioChecklistreconsiderationapplied;
+            AdoxioChecklistnoeareportapproved = adoxioChecklistnoeareportapproved;
+            AdoxioTentativehearinglocation = adoxioTentativehearinglocation;
+            AdoxioCheckliststayorderapproved = adoxioCheckliststayorderapproved;
+            AdoxioHearingnoticesentdate = adoxioHearingnoticesentdate;
+            AdoxioChecklistlcrbdecisionreached = adoxioChecklistlcrbdecisionreached;
+            AdoxioChecklistordersent = adoxioChecklistordersent;
+            AdoxioChecklistwrittensubmissionreviewed = adoxioChecklistwrittensubmissionreviewed;
+            AdoxioPenaltyletterreissuedate = adoxioPenaltyletterreissuedate;
             AdoxioReconsiderationapplicationreceiveddate = adoxioReconsiderationapplicationreceiveddate;
+            AdoxioCnissueddate = adoxioCnissueddate;
+            AdoxioChecklistwaiversignednoea = adoxioChecklistwaiversignednoea;
+            AdoxioPenaltytype = adoxioPenaltytype;
+            AdoxioDatedocsandwitnesssdisclosure = adoxioDatedocsandwitnesssdisclosure;
+            AdoxioPenaltylevel = adoxioPenaltylevel;
+            AdoxioLicenseelegalrepemail = adoxioLicenseelegalrepemail;
+            AdoxioLgcontactphone = adoxioLgcontactphone;
+            AdoxioEnforcementactionid = adoxioEnforcementactionid;
+            AdoxioChecklistphccomplete = adoxioChecklistphccomplete;
+            AdoxioWaiverreminder = adoxioWaiverreminder;
+            AdoxioOralhearinglocation = adoxioOralhearinglocation;
+            AdoxioReconsiderationapplicationsubmitteddate = adoxioReconsiderationapplicationsubmitteddate;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            AdoxioRecommendedmonetarypenalty = adoxioRecommendedmonetarypenalty;
+            AdoxioNoeanumber = adoxioNoeanumber;
+            AdoxioChecklistpenaltyletterapproved = adoxioChecklistpenaltyletterapproved;
+            AdoxioLicenseelegalrepphone = adoxioLicenseelegalrepphone;
+            AdoxioJudicialhearingdate = adoxioJudicialhearingdate;
+            AdoxioChecklistfinancenotifiedpenalty = adoxioChecklistfinancenotifiedpenalty;
+            this._adoxioRegionidValue = _adoxioRegionidValue;
+            AdoxioChecklistsuspensionserved = adoxioChecklistsuspensionserved;
+            AdoxioGmreconsiderationdate = adoxioGmreconsiderationdate;
+            Modifiedon = modifiedon;
+            this._owningteamValue = _owningteamValue;
+            AdoxioChecklisthearingresponsereceived = adoxioChecklisthearingresponsereceived;
+            AdoxioContraventionnoticenumber = adoxioContraventionnoticenumber;
+            AdoxioChecklisthearingdecisionsent = adoxioChecklisthearingdecisionsent;
+            AdoxioLicenseerepresentative1 = adoxioLicenseerepresentative1;
+            AdoxioHearingdate = adoxioHearingdate;
+            AdoxioChecklistwaiverdocsubmitted = adoxioChecklistwaiverdocsubmitted;
+            AdoxioPhcresult = adoxioPhcresult;
+            AdoxioChecklisthearingnoticesent = adoxioChecklisthearingnoticesent;
+            AdoxioChecklistfinancenotifiedreissue = adoxioChecklistfinancenotifiedreissue;
+            AdoxioLicenseelegalrepname = adoxioLicenseelegalrepname;
+            AdoxioChecklistpartialwaiverssignednoea = adoxioChecklistpartialwaiverssignednoea;
+            AdoxioChecklistappliedjudicialreview = adoxioChecklistappliedjudicialreview;
+            AdoxioMonetarypenaltyprocesseddate = adoxioMonetarypenaltyprocesseddate;
+            AdoxioChecklistwaiversignedphc = adoxioChecklistwaiversignedphc;
+            AdoxioRegistrarsdecision = adoxioRegistrarsdecision;
+            AdoxioJudicialreviewdeadlinedate = adoxioJudicialreviewdeadlinedate;
+            AdoxioEvidencematerialssentdate = adoxioEvidencematerialssentdate;
+            AdoxioWaiverapproveddate = adoxioWaiverapproveddate;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._modifiedbyValue = _modifiedbyValue;
+            AdoxioTentativehearingdate = adoxioTentativehearingdate;
+            AdoxioPenaltyletterapproveddate = adoxioPenaltyletterapproveddate;
+            AdoxioDocswitnessdisclosuredate = adoxioDocswitnessdisclosuredate;
+            this._adoxioLicenceidValue = _adoxioLicenceidValue;
+            AdoxioPhclocation = adoxioPhclocation;
+            AdoxioChecklistdocumentsfinalizeduploaded = adoxioChecklistdocumentsfinalizeduploaded;
+            AdoxioIscontraventionnoticeissued = adoxioIscontraventionnoticeissued;
+            AdoxioRecommendedmonetarypenaltyBase = adoxioRecommendedmonetarypenaltyBase;
+            AdoxioPenaltylettercreateddate = adoxioPenaltylettercreateddate;
+            this._adoxioLicencetypeidValue = _adoxioLicencetypeidValue;
+            AdoxioChecklistdelegatedecisionreached = adoxioChecklistdelegatedecisionreached;
+            AdoxioGmdecision = adoxioGmdecision;
+            AdoxioChecklistpenaltylettercreated = adoxioChecklistpenaltylettercreated;
+            AdoxioFinalmonetarypenaltyBase = adoxioFinalmonetarypenaltyBase;
+            AdoxioStayorderstayeduntildate = adoxioStayorderstayeduntildate;
+            AdoxioChecklistphccancelled = adoxioChecklistphccancelled;
+            AdoxioPenaltyviolation = adoxioPenaltyviolation;
+            AdoxioChecklistlicenseenotified = adoxioChecklistlicenseenotified;
+            this._adoxioDelegategmidValue = _adoxioDelegategmidValue;
+            AdoxioChecklistphcscheduled = adoxioChecklistphcscheduled;
+            AdoxioChecklistcourtdecisionreceived = adoxioChecklistcourtdecisionreceived;
+            Versionnumber = versionnumber;
+            AdoxioChecklistjudicialreviewrequired = adoxioChecklistjudicialreviewrequired;
+            AdoxioBranchdisclosuredocsdate = adoxioBranchdisclosuredocsdate;
+            AdoxioChecklistnotificationsent = adoxioChecklistnotificationsent;
+            AdoxioChecklistpenaltysignssent = adoxioChecklistpenaltysignssent;
+            AdoxioChecklistnoeareportsent = adoxioChecklistnoeareportsent;
+            AdoxioPolicecontactname = adoxioPolicecontactname;
+            AdoxioCommunicationdistributiondate = adoxioCommunicationdistributiondate;
+            AdoxioChecklistwaiversent = adoxioChecklistwaiversent;
+            AdoxioPolicecontactemail = adoxioPolicecontactemail;
+            Createdon = createdon;
+            Exchangerate = exchangerate;
+            this._adoxioAdvocateidValue = _adoxioAdvocateidValue;
+            AdoxioDelegatedecisionsentdate = adoxioDelegatedecisionsentdate;
+            AdoxioReconsiderationapplicationduedate = adoxioReconsiderationapplicationduedate;
+            AdoxioChecklisthearingscheduled = adoxioChecklisthearingscheduled;
+            AdoxioCheckliststayordersent = adoxioCheckliststayordersent;
+            AdoxioDelegatename = adoxioDelegatename;
+            AdoxioChecklistreconsiderationrequestreceived = adoxioChecklistreconsiderationrequestreceived;
+            AdoxioSuspensionenddate = adoxioSuspensionenddate;
+            AdoxioChecklistlcrbstaffnotified = adoxioChecklistlcrbstaffnotified;
+            AdoxioCompliancehistoryposting = adoxioCompliancehistoryposting;
+            AdoxioPhclettersentdate = adoxioPhclettersentdate;
+            AdoxioStayletterdecisiondate = adoxioStayletterdecisiondate;
+            AdoxioChecklistreconsiderationapproved = adoxioChecklistreconsiderationapproved;
+            this._adoxioLicenseeidValue = _adoxioLicenseeidValue;
+            this._owneridValue = _owneridValue;
+            AdoxioChecklistregistrardecisionreached = adoxioChecklistregistrardecisionreached;
+            AdoxioTitle = adoxioTitle;
+            Statecode = statecode;
+            AdoxioNoeareportsubmitteddate = adoxioNoeareportsubmitteddate;
+            this._adoxioInspectoridValue = _adoxioInspectoridValue;
+            AdoxioWaiversentdate = adoxioWaiversentdate;
+            this._createdbyValue = _createdbyValue;
+            AdoxioStaylettersentdate = adoxioStaylettersentdate;
+            Processid = processid;
+            AdoxioDelegatedecisiondate = adoxioDelegatedecisiondate;
+            this._adoxioRegistraridValue = _adoxioRegistraridValue;
+            AdoxioChecklistpenaltylettersent = adoxioChecklistpenaltylettersent;
+            AdoxioLicenseerepresentative3 = adoxioLicenseerepresentative3;
+            AdoxioChecklistcourtdatereceived = adoxioChecklistcourtdatereceived;
+            AdoxioWaiversigneddate = adoxioWaiversigneddate;
+            AdoxioChecklisthearingcompleted = adoxioChecklisthearingcompleted;
+            AdoxioDistributedtolicenseedate = adoxioDistributedtolicenseedate;
+            AdoxioCheckliststayordercreated = adoxioCheckliststayordercreated;
+            AdoxioPhccompletedate = adoxioPhccompletedate;
+            AdoxioDelegatephone = adoxioDelegatephone;
+            AdoxioChecklistwaiverdocapproved = adoxioChecklistwaiverdocapproved;
+            AdoxioChecklistlcrbdecisionsent = adoxioChecklistlcrbdecisionsent;
+            AdoxioChecklistnoeareportsubmitted = adoxioChecklistnoeareportsubmitted;
+            AdoxioLgcontactname = adoxioLgcontactname;
+            AdoxioNoeasentdate = adoxioNoeasentdate;
+            AdoxioChecklistrolcomplete = adoxioChecklistrolcomplete;
+            AdoxioInitiallicenseedecisionresult = adoxioInitiallicenseedecisionresult;
+            AdoxioPhcoutcome = adoxioPhcoutcome;
+            AdoxioHearinglocation = adoxioHearinglocation;
+            AdoxioInitiallicenseeresponsedate = adoxioInitiallicenseeresponsedate;
+            AdoxioChecklisthearinginvitationsent = adoxioChecklisthearinginvitationsent;
+            AdoxioSuspensionfulfillmentdeadlinedate = adoxioSuspensionfulfillmentdeadlinedate;
+            AdoxioChecklistpartialwaiverssignedphc = adoxioChecklistpartialwaiverssignedphc;
+            AdoxioMonetarypenalty = adoxioMonetarypenalty;
+            AdoxioChecklistreconsiderrequestfeepaid = adoxioChecklistreconsiderrequestfeepaid;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            AdoxioRecommendedsuspensionduration = adoxioRecommendedsuspensionduration;
+            this._owninguserValue = _owninguserValue;
+            AdoxioChecklistwaiverresponsereceived = adoxioChecklistwaiverresponsereceived;
+            AdoxioChecklistpostedlcrbwebsite = adoxioChecklistpostedlcrbwebsite;
+            AdoxioMonetarypaymentdeadlinedate = adoxioMonetarypaymentdeadlinedate;
+            AdoxioDelegatefinding = adoxioDelegatefinding;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -236,6 +268,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioEnforcementactionRecurringAppointmentMasters = adoxioEnforcementactionRecurringAppointmentMasters;
             AdoxioEnforcementactionSocialActivities = adoxioEnforcementactionSocialActivities;
             AdoxioEnforcementactionServiceAppointments = adoxioEnforcementactionServiceAppointments;
+            AdoxioLicenseeId = adoxioLicenseeId;
+            AdoxioLicenceId = adoxioLicenceId;
+            AdoxioEstablishmentId = adoxioEstablishmentId;
+            AdoxioRegionId = adoxioRegionId;
+            AdoxioAreaId = adoxioAreaId;
+            AdoxioEnforcementactionContraventions = adoxioEnforcementactionContraventions;
+            AdoxioAdvocateId = adoxioAdvocateId;
+            AdoxioRegistrarId = adoxioRegistrarId;
+            AdoxioRegionalManagerId = adoxioRegionalManagerId;
+            AdoxioInspectorId = adoxioInspectorId;
+            AdoxioDelegateGMId = adoxioDelegateGMId;
+            AdoxioLicenceTypeId = adoxioLicenceTypeId;
+            AdoxioEnforcementactionInspections = adoxioEnforcementactionInspections;
             CustomInit();
         }
 
@@ -246,568 +291,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_communicationdistributiondate")]
-        public System.DateTimeOffset? AdoxioCommunicationdistributiondate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_distributedtolicenseedate")]
-        public System.DateTimeOffset? AdoxioDistributedtolicenseedate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistdocumentsfinalizeduploaded")]
-        public int? AdoxioChecklistdocumentsfinalizeduploaded { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistcourtoverturned")]
-        public int? AdoxioChecklistcourtoverturned { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_delegatephone")]
-        public string AdoxioDelegatephone { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_courtdecisiondate")]
-        public System.DateTimeOffset? AdoxioCourtdecisiondate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_delegateassignmentdate")]
-        public System.DateTimeOffset? AdoxioDelegateassignmentdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_waivercreateddate")]
-        public System.DateTimeOffset? AdoxioWaivercreateddate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistlicenseenotifiedofrecorequest")]
-        public int? AdoxioChecklistlicenseenotifiedofrecorequest { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_waiversentdate")]
-        public System.DateTimeOffset? AdoxioWaiversentdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phcresult")]
-        public int? AdoxioPhcresult { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistdelegateassignmentlettersent")]
-        public int? AdoxioChecklistdelegateassignmentlettersent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistfinancenotifiedreissue")]
-        public int? AdoxioChecklistfinancenotifiedreissue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistnotificationsent")]
-        public int? AdoxioChecklistnotificationsent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistpenaltylettercreated")]
-        public int? AdoxioChecklistpenaltylettercreated { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistcompliancehistoryposted")]
-        public int? AdoxioChecklistcompliancehistoryposted { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistnoeareportsent")]
-        public int? AdoxioChecklistnoeareportsent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phcoutcome")]
-        public int? AdoxioPhcoutcome { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistnoeareportapproved")]
-        public int? AdoxioChecklistnoeareportapproved { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phccompletedate")]
-        public System.DateTimeOffset? AdoxioPhccompletedate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_recommendedmonetarypenalty")]
-        public decimal? AdoxioRecommendedmonetarypenalty { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_cnissueddate")]
-        public System.DateTimeOffset? AdoxioCnissueddate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_hearingnoticesentdate")]
-        public System.DateTimeOffset? AdoxioHearingnoticesentdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistordersent")]
-        public int? AdoxioChecklistordersent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistfinancenotifiedpenalty")]
-        public int? AdoxioChecklistfinancenotifiedpenalty { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistenforcementactivitiescomplete")]
-        public int? AdoxioChecklistenforcementactivitiescomplete { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_staylettersentdate")]
-        public System.DateTimeOffset? AdoxioStaylettersentdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_lgcontactemail")]
-        public string AdoxioLgcontactemail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklisthearingscheduled")]
-        public int? AdoxioChecklisthearingscheduled { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_stayletterdecisiondate")]
-        public System.DateTimeOffset? AdoxioStayletterdecisiondate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licenseerepresentative1")]
-        public string AdoxioLicenseerepresentative1 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_suspensionenddate")]
-        public System.DateTimeOffset? AdoxioSuspensionenddate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_finalmonetarypenalty_base")]
-        public decimal? AdoxioFinalmonetarypenaltyBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_suspensionperioddefineddate")]
-        public System.DateTimeOffset? AdoxioSuspensionperioddefineddate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_lgcontactphone")]
-        public string AdoxioLgcontactphone { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_policecontactphone")]
-        public string AdoxioPolicecontactphone { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistsuspensiondefined")]
-        public int? AdoxioChecklistsuspensiondefined { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistwaiversignednoea")]
-        public int? AdoxioChecklistwaiversignednoea { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_noeaapprovaldate")]
-        public System.DateTimeOffset? AdoxioNoeaapprovaldate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistdelegateassigned")]
-        public int? AdoxioChecklistdelegateassigned { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistpenaltyfundsreceived")]
-        public int? AdoxioChecklistpenaltyfundsreceived { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklisthearinginvitationsent")]
-        public int? AdoxioChecklisthearinginvitationsent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistpenaltyletterapproved")]
-        public int? AdoxioChecklistpenaltyletterapproved { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistwaiversignedphc")]
-        public int? AdoxioChecklistwaiversignedphc { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checkliststayordersent")]
-        public int? AdoxioCheckliststayordersent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistreconsiderationapproved")]
-        public int? AdoxioChecklistreconsiderationapproved { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistdelegatedecisionreached")]
-        public int? AdoxioChecklistdelegatedecisionreached { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistlcrbdecisionreached")]
-        public int? AdoxioChecklistlcrbdecisionreached { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistpenaltysignssent")]
-        public int? AdoxioChecklistpenaltysignssent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_initiallicenseeresponsedate")]
-        public System.DateTimeOffset? AdoxioInitiallicenseeresponsedate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistnoeareportsubmitted")]
-        public int? AdoxioChecklistnoeareportsubmitted { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_initiallicenseedecisionresult")]
-        public int? AdoxioInitiallicenseedecisionresult { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_delegatedecisionsentdate")]
-        public System.DateTimeOffset? AdoxioDelegatedecisionsentdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistpostedlcrbwebsite")]
-        public int? AdoxioChecklistpostedlcrbwebsite { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistpenaltyletterreissued")]
         public int? AdoxioChecklistpenaltyletterreissued { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_judicialhearinglocation")]
-        public string AdoxioJudicialhearinglocation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_reconsiderationlicenseedecision")]
-        public int? AdoxioReconsiderationlicenseedecision { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistoverduewaiverresponse")]
-        public int? AdoxioChecklistoverduewaiverresponse { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_rolsentdate")]
-        public System.DateTimeOffset? AdoxioRolsentdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistsuspensionserved")]
-        public int? AdoxioChecklistsuspensionserved { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklisthearingdecisionsent")]
-        public int? AdoxioChecklisthearingdecisionsent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistappliedjudicialreview")]
-        public int? AdoxioChecklistappliedjudicialreview { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklisthearingresponsereceived")]
-        public int? AdoxioChecklisthearingresponsereceived { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_delegateaddress")]
-        public string AdoxioDelegateaddress { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checkliststayorderapproved")]
-        public int? AdoxioCheckliststayorderapproved { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistwrittensubmissionreviewed")]
-        public int? AdoxioChecklistwrittensubmissionreviewed { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_iscontraventionnoticeissued")]
-        public bool? AdoxioIscontraventionnoticeissued { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklisthearingconfirmationsent")]
-        public int? AdoxioChecklisthearingconfirmationsent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistevidencematerialssent")]
-        public int? AdoxioChecklistevidencematerialssent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_enforcementactionid")]
-        public string AdoxioEnforcementactionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_courtdecisionresult")]
-        public int? AdoxioCourtdecisionresult { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_delegatename")]
-        public string AdoxioDelegatename { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_courtdatetime")]
-        public System.DateTimeOffset? AdoxioCourtdatetime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistwaiversignedhearing")]
-        public int? AdoxioChecklistwaiversignedhearing { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistrolsent")]
-        public int? AdoxioChecklistrolsent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_recommendedmonetarypenalty_base")]
-        public decimal? AdoxioRecommendedmonetarypenaltyBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_penaltyletterapproveddate")]
-        public System.DateTimeOffset? AdoxioPenaltyletterapproveddate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistcourtdatereceived")]
-        public int? AdoxioChecklistcourtdatereceived { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistcourtdecisionreceived")]
-        public int? AdoxioChecklistcourtdecisionreceived { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistlcrbdecisionsent")]
-        public int? AdoxioChecklistlcrbdecisionsent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_judicialreviewdeadlinedate")]
-        public System.DateTimeOffset? AdoxioJudicialreviewdeadlinedate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_docswitnessdisclosuredate")]
-        public System.DateTimeOffset? AdoxioDocswitnessdisclosuredate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dgmdecision")]
-        public int? AdoxioDgmdecision { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_monetarypenaltyprocesseddate")]
-        public System.DateTimeOffset? AdoxioMonetarypenaltyprocesseddate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistwaiverdocchangesrequired")]
-        public int? AdoxioChecklistwaiverdocchangesrequired { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_hearinglocation")]
-        public string AdoxioHearinglocation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistrolcomplete")]
-        public int? AdoxioChecklistrolcomplete { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistregistrardecisionreached")]
-        public int? AdoxioChecklistregistrardecisionreached { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistlcrbstaffnotified")]
-        public int? AdoxioChecklistlcrbstaffnotified { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistwaiversent")]
-        public int? AdoxioChecklistwaiversent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "traversedpath")]
-        public string Traversedpath { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistreconsiderationapplied")]
-        public int? AdoxioChecklistreconsiderationapplied { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licenseerepresentative3")]
-        public string AdoxioLicenseerepresentative3 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_lgcontactname")]
-        public string AdoxioLgcontactname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_datedocsandwitnesssdisclosure")]
-        public System.DateTimeOffset? AdoxioDatedocsandwitnesssdisclosure { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_delegatedecisiondate")]
-        public System.DateTimeOffset? AdoxioDelegatedecisiondate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistnoeareportchangesrequired")]
-        public int? AdoxioChecklistnoeareportchangesrequired { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_reconsiderationapplicationduedate")]
-        public System.DateTimeOffset? AdoxioReconsiderationapplicationduedate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_prehearingdate")]
-        public System.DateTimeOffset? AdoxioPrehearingdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_registrarsdecision")]
-        public int? AdoxioRegistrarsdecision { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -816,153 +301,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_penaltylettercreateddate")]
-        public System.DateTimeOffset? AdoxioPenaltylettercreateddate { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklisthearingconfirmationsent")]
+        public int? AdoxioChecklisthearingconfirmationsent { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_staylettercompletedate")]
-        public System.DateTimeOffset? AdoxioStaylettercompletedate { get; set; }
+        [JsonProperty(PropertyName = "adoxio_policecontactphone")]
+        public string AdoxioPolicecontactphone { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contraventionnoticenumber")]
-        public string AdoxioContraventionnoticenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_waiversigneddate")]
-        public System.DateTimeOffset? AdoxioWaiversigneddate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_penaltylevel")]
-        public int? AdoxioPenaltylevel { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_waiversubmissionduedate")]
-        public System.DateTimeOffset? AdoxioWaiversubmissionduedate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistwaiverdocsubmitted")]
-        public int? AdoxioChecklistwaiverdocsubmitted { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_oralhearingdatetime")]
-        public System.DateTimeOffset? AdoxioOralhearingdatetime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_reconsiderationapplicationsubmitteddate")]
-        public System.DateTimeOffset? AdoxioReconsiderationapplicationsubmitteddate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistreconsiderrequestfeepaid")]
-        public int? AdoxioChecklistreconsiderrequestfeepaid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklisthearingcompleted")]
-        public int? AdoxioChecklisthearingcompleted { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_penaltyviolation")]
-        public int? AdoxioPenaltyviolation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_delegateemail")]
-        public string AdoxioDelegateemail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_noeareportsubmitteddate")]
-        public System.DateTimeOffset? AdoxioNoeareportsubmitteddate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistphccomplete")]
-        public int? AdoxioChecklistphccomplete { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_waiverapproveddate")]
-        public System.DateTimeOffset? AdoxioWaiverapproveddate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ismonetarypenalty")]
-        public bool? AdoxioIsmonetarypenalty { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_title")]
-        public string AdoxioTitle { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistphcscheduled")]
-        public int? AdoxioChecklistphcscheduled { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_waiverreminder")]
-        public System.DateTimeOffset? AdoxioWaiverreminder { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistreconsiderationrequestreceived")]
-        public int? AdoxioChecklistreconsiderationrequestreceived { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistlicenseenotified")]
-        public int? AdoxioChecklistlicenseenotified { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_policecontactname")]
-        public string AdoxioPolicecontactname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_penaltyletterreissuedate")]
-        public System.DateTimeOffset? AdoxioPenaltyletterreissuedate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistjudicialreviewrequired")]
-        public int? AdoxioChecklistjudicialreviewrequired { get; set; }
+        [JsonProperty(PropertyName = "adoxio_noeaapprovaldate")]
+        public System.DateTimeOffset? AdoxioNoeaapprovaldate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -971,48 +321,43 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_delegatedecisionresult")]
-        public int? AdoxioDelegatedecisionresult { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklisthearingnoticesent")]
-        public int? AdoxioChecklisthearingnoticesent { get; set; }
+        [JsonProperty(PropertyName = "adoxio_courtdatetime")]
+        public System.DateTimeOffset? AdoxioCourtdatetime { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistphccancelled")]
-        public int? AdoxioChecklistphccancelled { get; set; }
+        [JsonProperty(PropertyName = "adoxio_casenumber")]
+        public string AdoxioCasenumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_recommendedsuspensionduration")]
-        public int? AdoxioRecommendedsuspensionduration { get; set; }
+        [JsonProperty(PropertyName = "adoxio_oralhearingdatetime")]
+        public System.DateTimeOffset? AdoxioOralhearingdatetime { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_evidencematerialssentdate")]
-        public System.DateTimeOffset? AdoxioEvidencematerialssentdate { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_oralhearinglocation")]
-        public string AdoxioOralhearinglocation { get; set; }
+        [JsonProperty(PropertyName = "traversedpath")]
+        public string Traversedpath { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistpenaltylettersentdeadline")]
-        public int? AdoxioChecklistpenaltylettersentdeadline { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistdelegateassigned")]
+        public int? AdoxioChecklistdelegateassigned { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licenseerepresentative2")]
-        public string AdoxioLicenseerepresentative2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_penaltylettersentdate")]
-        public System.DateTimeOffset? AdoxioPenaltylettersentdate { get; set; }
+        [JsonProperty(PropertyName = "adoxio_delegateemail")]
+        public string AdoxioDelegateemail { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1021,23 +366,158 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistwaiverdocapproved")]
-        public int? AdoxioChecklistwaiverdocapproved { get; set; }
+        [JsonProperty(PropertyName = "adoxio_waiversubmissionduedate")]
+        public System.DateTimeOffset? AdoxioWaiversubmissionduedate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_stageid_value")]
-        public string _stageidValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistwaiverdocchangesrequired")]
+        public int? AdoxioChecklistwaiverdocchangesrequired { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_noeasentdate")]
-        public System.DateTimeOffset? AdoxioNoeasentdate { get; set; }
+        [JsonProperty(PropertyName = "adoxio_staylettercompletedate")]
+        public System.DateTimeOffset? AdoxioStaylettercompletedate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checkliststayordercreated")]
-        public int? AdoxioCheckliststayordercreated { get; set; }
+        [JsonProperty(PropertyName = "adoxio_courtdecisionresult")]
+        public int? AdoxioCourtdecisionresult { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_reconsiderationlicenseedecision")]
+        public int? AdoxioReconsiderationlicenseedecision { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_suspensionperioddefineddate")]
+        public System.DateTimeOffset? AdoxioSuspensionperioddefineddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_courtdecisiondate")]
+        public System.DateTimeOffset? AdoxioCourtdecisiondate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_regionalmanagerid_value")]
+        public string _adoxioRegionalmanageridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_delegateassignmentdate")]
+        public System.DateTimeOffset? AdoxioDelegateassignmentdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_orderdecision")]
+        public int? AdoxioOrderdecision { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_waivercreateddate")]
+        public System.DateTimeOffset? AdoxioWaivercreateddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licenseerepresentative2")]
+        public string AdoxioLicenseerepresentative2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistnoeareportchangesrequired")]
+        public int? AdoxioChecklistnoeareportchangesrequired { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistrolsent")]
+        public int? AdoxioChecklistrolsent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_penaltylettersentdate")]
+        public System.DateTimeOffset? AdoxioPenaltylettersentdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistcourtoverturned")]
+        public int? AdoxioChecklistcourtoverturned { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistlicenseenotifiedofrecorequest")]
+        public int? AdoxioChecklistlicenseenotifiedofrecorequest { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_lgcontactemail")]
+        public string AdoxioLgcontactemail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistoverduewaiverresponse")]
+        public int? AdoxioChecklistoverduewaiverresponse { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_waiverresponsereceiveddate")]
+        public System.DateTimeOffset? AdoxioWaiverresponsereceiveddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistenforcementactivitiescomplete")]
+        public int? AdoxioChecklistenforcementactivitiescomplete { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistpenaltylettersentdeadline")]
+        public int? AdoxioChecklistpenaltylettersentdeadline { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistpenaltyfundsreceived")]
+        public int? AdoxioChecklistpenaltyfundsreceived { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_rolsentdate")]
+        public System.DateTimeOffset? AdoxioRolsentdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_establishmentid_value")]
+        public string _adoxioEstablishmentidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licenseesubmissionsdate")]
+        public System.DateTimeOffset? AdoxioLicenseesubmissionsdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistdelegateassignmentlettersent")]
+        public int? AdoxioChecklistdelegateassignmentlettersent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistsuspensiondefined")]
+        public int? AdoxioChecklistsuspensiondefined { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistevidencematerialssent")]
+        public int? AdoxioChecklistevidencematerialssent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_delegatefinaldecision")]
+        public int? AdoxioDelegatefinaldecision { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1046,23 +526,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_hearingresponseresult")]
-        public int? AdoxioHearingresponseresult { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistpenaltylettersent")]
-        public int? AdoxioChecklistpenaltylettersent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_policecontactemail")]
-        public string AdoxioPolicecontactemail { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistdelegatedecisionsent")]
         public int? AdoxioChecklistdelegatedecisionsent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_areaid_value")]
+        public string _adoxioAreaidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_delegateaddress")]
+        public string AdoxioDelegateaddress { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_dgmapproval")]
+        public int? AdoxioDgmapproval { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_judicialhearinglocation")]
+        public string AdoxioJudicialhearinglocation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_stageid_value")]
+        public string _stageidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1071,18 +561,173 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistwaiverresponsereceived")]
-        public int? AdoxioChecklistwaiverresponsereceived { get; set; }
+        [JsonProperty(PropertyName = "adoxio_delegatedecisionresult")]
+        public int? AdoxioDelegatedecisionresult { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "adoxio_hearingresponseresult")]
+        public int? AdoxioHearingresponseresult { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistcompliancehistoryposted")]
+        public int? AdoxioChecklistcompliancehistoryposted { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_prehearingdate")]
+        public System.DateTimeOffset? AdoxioPrehearingdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistreconsiderationapplied")]
+        public int? AdoxioChecklistreconsiderationapplied { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistnoeareportapproved")]
+        public int? AdoxioChecklistnoeareportapproved { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_tentativehearinglocation")]
+        public string AdoxioTentativehearinglocation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checkliststayorderapproved")]
+        public int? AdoxioCheckliststayorderapproved { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_hearingnoticesentdate")]
+        public System.DateTimeOffset? AdoxioHearingnoticesentdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistlcrbdecisionreached")]
+        public int? AdoxioChecklistlcrbdecisionreached { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistordersent")]
+        public int? AdoxioChecklistordersent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistwrittensubmissionreviewed")]
+        public int? AdoxioChecklistwrittensubmissionreviewed { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_penaltyletterreissuedate")]
+        public System.DateTimeOffset? AdoxioPenaltyletterreissuedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_reconsiderationapplicationreceiveddate")]
+        public System.DateTimeOffset? AdoxioReconsiderationapplicationreceiveddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_cnissueddate")]
+        public System.DateTimeOffset? AdoxioCnissueddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistwaiversignednoea")]
+        public int? AdoxioChecklistwaiversignednoea { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_penaltytype")]
+        public int? AdoxioPenaltytype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_datedocsandwitnesssdisclosure")]
+        public System.DateTimeOffset? AdoxioDatedocsandwitnesssdisclosure { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_penaltylevel")]
+        public int? AdoxioPenaltylevel { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licenseelegalrepemail")]
+        public string AdoxioLicenseelegalrepemail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_lgcontactphone")]
+        public string AdoxioLgcontactphone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_enforcementactionid")]
+        public string AdoxioEnforcementactionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistphccomplete")]
+        public int? AdoxioChecklistphccomplete { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_waiverreminder")]
+        public System.DateTimeOffset? AdoxioWaiverreminder { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_oralhearinglocation")]
+        public string AdoxioOralhearinglocation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_reconsiderationapplicationsubmitteddate")]
+        public System.DateTimeOffset? AdoxioReconsiderationapplicationsubmitteddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_recommendedmonetarypenalty")]
+        public decimal? AdoxioRecommendedmonetarypenalty { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_noeanumber")]
+        public string AdoxioNoeanumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistpenaltyletterapproved")]
+        public int? AdoxioChecklistpenaltyletterapproved { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licenseelegalrepphone")]
+        public string AdoxioLicenseelegalrepphone { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1091,8 +736,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_gmdecision")]
-        public int? AdoxioGmdecision { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistfinancenotifiedpenalty")]
+        public int? AdoxioChecklistfinancenotifiedpenalty { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_regionid_value")]
+        public string _adoxioRegionidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistsuspensionserved")]
+        public int? AdoxioChecklistsuspensionserved { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1101,13 +756,563 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklisthearingresponsereceived")]
+        public int? AdoxioChecklisthearingresponsereceived { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contraventionnoticenumber")]
+        public string AdoxioContraventionnoticenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklisthearingdecisionsent")]
+        public int? AdoxioChecklisthearingdecisionsent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licenseerepresentative1")]
+        public string AdoxioLicenseerepresentative1 { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_hearingdate")]
         public System.DateTimeOffset? AdoxioHearingdate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_reconsiderationapplicationreceiveddate")]
-        public System.DateTimeOffset? AdoxioReconsiderationapplicationreceiveddate { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistwaiverdocsubmitted")]
+        public int? AdoxioChecklistwaiverdocsubmitted { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phcresult")]
+        public int? AdoxioPhcresult { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklisthearingnoticesent")]
+        public int? AdoxioChecklisthearingnoticesent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistfinancenotifiedreissue")]
+        public int? AdoxioChecklistfinancenotifiedreissue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licenseelegalrepname")]
+        public string AdoxioLicenseelegalrepname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistpartialwaiverssignednoea")]
+        public int? AdoxioChecklistpartialwaiverssignednoea { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistappliedjudicialreview")]
+        public int? AdoxioChecklistappliedjudicialreview { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_monetarypenaltyprocesseddate")]
+        public System.DateTimeOffset? AdoxioMonetarypenaltyprocesseddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistwaiversignedphc")]
+        public int? AdoxioChecklistwaiversignedphc { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_registrarsdecision")]
+        public int? AdoxioRegistrarsdecision { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_judicialreviewdeadlinedate")]
+        public System.DateTimeOffset? AdoxioJudicialreviewdeadlinedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_evidencematerialssentdate")]
+        public System.DateTimeOffset? AdoxioEvidencematerialssentdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_waiverapproveddate")]
+        public System.DateTimeOffset? AdoxioWaiverapproveddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_tentativehearingdate")]
+        public System.DateTimeOffset? AdoxioTentativehearingdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_penaltyletterapproveddate")]
+        public System.DateTimeOffset? AdoxioPenaltyletterapproveddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_docswitnessdisclosuredate")]
+        public System.DateTimeOffset? AdoxioDocswitnessdisclosuredate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_licenceid_value")]
+        public string _adoxioLicenceidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phclocation")]
+        public string AdoxioPhclocation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistdocumentsfinalizeduploaded")]
+        public int? AdoxioChecklistdocumentsfinalizeduploaded { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_iscontraventionnoticeissued")]
+        public bool? AdoxioIscontraventionnoticeissued { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_recommendedmonetarypenalty_base")]
+        public decimal? AdoxioRecommendedmonetarypenaltyBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_penaltylettercreateddate")]
+        public System.DateTimeOffset? AdoxioPenaltylettercreateddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_licencetypeid_value")]
+        public string _adoxioLicencetypeidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistdelegatedecisionreached")]
+        public int? AdoxioChecklistdelegatedecisionreached { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_gmdecision")]
+        public int? AdoxioGmdecision { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistpenaltylettercreated")]
+        public int? AdoxioChecklistpenaltylettercreated { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_finalmonetarypenalty_base")]
+        public decimal? AdoxioFinalmonetarypenaltyBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_stayorderstayeduntildate")]
+        public System.DateTimeOffset? AdoxioStayorderstayeduntildate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistphccancelled")]
+        public int? AdoxioChecklistphccancelled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_penaltyviolation")]
+        public int? AdoxioPenaltyviolation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistlicenseenotified")]
+        public int? AdoxioChecklistlicenseenotified { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_delegategmid_value")]
+        public string _adoxioDelegategmidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistphcscheduled")]
+        public int? AdoxioChecklistphcscheduled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistcourtdecisionreceived")]
+        public int? AdoxioChecklistcourtdecisionreceived { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistjudicialreviewrequired")]
+        public int? AdoxioChecklistjudicialreviewrequired { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_branchdisclosuredocsdate")]
+        public System.DateTimeOffset? AdoxioBranchdisclosuredocsdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistnotificationsent")]
+        public int? AdoxioChecklistnotificationsent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistpenaltysignssent")]
+        public int? AdoxioChecklistpenaltysignssent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistnoeareportsent")]
+        public int? AdoxioChecklistnoeareportsent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policecontactname")]
+        public string AdoxioPolicecontactname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_communicationdistributiondate")]
+        public System.DateTimeOffset? AdoxioCommunicationdistributiondate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistwaiversent")]
+        public int? AdoxioChecklistwaiversent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policecontactemail")]
+        public string AdoxioPolicecontactemail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_advocateid_value")]
+        public string _adoxioAdvocateidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_delegatedecisionsentdate")]
+        public System.DateTimeOffset? AdoxioDelegatedecisionsentdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_reconsiderationapplicationduedate")]
+        public System.DateTimeOffset? AdoxioReconsiderationapplicationduedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklisthearingscheduled")]
+        public int? AdoxioChecklisthearingscheduled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checkliststayordersent")]
+        public int? AdoxioCheckliststayordersent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_delegatename")]
+        public string AdoxioDelegatename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistreconsiderationrequestreceived")]
+        public int? AdoxioChecklistreconsiderationrequestreceived { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_suspensionenddate")]
+        public System.DateTimeOffset? AdoxioSuspensionenddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistlcrbstaffnotified")]
+        public int? AdoxioChecklistlcrbstaffnotified { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_compliancehistoryposting")]
+        public int? AdoxioCompliancehistoryposting { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phclettersentdate")]
+        public System.DateTimeOffset? AdoxioPhclettersentdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_stayletterdecisiondate")]
+        public System.DateTimeOffset? AdoxioStayletterdecisiondate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistreconsiderationapproved")]
+        public int? AdoxioChecklistreconsiderationapproved { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_licenseeid_value")]
+        public string _adoxioLicenseeidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistregistrardecisionreached")]
+        public int? AdoxioChecklistregistrardecisionreached { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_title")]
+        public string AdoxioTitle { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_noeareportsubmitteddate")]
+        public System.DateTimeOffset? AdoxioNoeareportsubmitteddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_inspectorid_value")]
+        public string _adoxioInspectoridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_waiversentdate")]
+        public System.DateTimeOffset? AdoxioWaiversentdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_staylettersentdate")]
+        public System.DateTimeOffset? AdoxioStaylettersentdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_delegatedecisiondate")]
+        public System.DateTimeOffset? AdoxioDelegatedecisiondate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_registrarid_value")]
+        public string _adoxioRegistraridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistpenaltylettersent")]
+        public int? AdoxioChecklistpenaltylettersent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licenseerepresentative3")]
+        public string AdoxioLicenseerepresentative3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistcourtdatereceived")]
+        public int? AdoxioChecklistcourtdatereceived { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_waiversigneddate")]
+        public System.DateTimeOffset? AdoxioWaiversigneddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklisthearingcompleted")]
+        public int? AdoxioChecklisthearingcompleted { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_distributedtolicenseedate")]
+        public System.DateTimeOffset? AdoxioDistributedtolicenseedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checkliststayordercreated")]
+        public int? AdoxioCheckliststayordercreated { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phccompletedate")]
+        public System.DateTimeOffset? AdoxioPhccompletedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_delegatephone")]
+        public string AdoxioDelegatephone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistwaiverdocapproved")]
+        public int? AdoxioChecklistwaiverdocapproved { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistlcrbdecisionsent")]
+        public int? AdoxioChecklistlcrbdecisionsent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistnoeareportsubmitted")]
+        public int? AdoxioChecklistnoeareportsubmitted { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_lgcontactname")]
+        public string AdoxioLgcontactname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_noeasentdate")]
+        public System.DateTimeOffset? AdoxioNoeasentdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistrolcomplete")]
+        public int? AdoxioChecklistrolcomplete { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_initiallicenseedecisionresult")]
+        public int? AdoxioInitiallicenseedecisionresult { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phcoutcome")]
+        public int? AdoxioPhcoutcome { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_hearinglocation")]
+        public string AdoxioHearinglocation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_initiallicenseeresponsedate")]
+        public System.DateTimeOffset? AdoxioInitiallicenseeresponsedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklisthearinginvitationsent")]
+        public int? AdoxioChecklisthearinginvitationsent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_suspensionfulfillmentdeadlinedate")]
+        public System.DateTimeOffset? AdoxioSuspensionfulfillmentdeadlinedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistpartialwaiverssignedphc")]
+        public int? AdoxioChecklistpartialwaiverssignedphc { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_monetarypenalty")]
+        public int? AdoxioMonetarypenalty { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistreconsiderrequestfeepaid")]
+        public int? AdoxioChecklistreconsiderrequestfeepaid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_recommendedsuspensionduration")]
+        public int? AdoxioRecommendedsuspensionduration { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistwaiverresponsereceived")]
+        public int? AdoxioChecklistwaiverresponsereceived { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistpostedlcrbwebsite")]
+        public int? AdoxioChecklistpostedlcrbwebsite { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_monetarypaymentdeadlinedate")]
+        public System.DateTimeOffset? AdoxioMonetarypaymentdeadlinedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_delegatefinding")]
+        public int? AdoxioDelegatefinding { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1268,6 +1473,71 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_enforcementaction_ServiceAppointments")]
         public IList<MicrosoftDynamicsCRMserviceappointment> AdoxioEnforcementactionServiceAppointments { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_LicenseeId")]
+        public MicrosoftDynamicsCRMaccount AdoxioLicenseeId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_LicenceId")]
+        public MicrosoftDynamicsCRMadoxioLicences AdoxioLicenceId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_EstablishmentId")]
+        public MicrosoftDynamicsCRMadoxioEstablishment AdoxioEstablishmentId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_RegionId")]
+        public MicrosoftDynamicsCRMadoxioRegion AdoxioRegionId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_AreaId")]
+        public MicrosoftDynamicsCRMadoxioArea AdoxioAreaId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_enforcementaction_contraventions")]
+        public IList<MicrosoftDynamicsCRMadoxioContravention> AdoxioEnforcementactionContraventions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_AdvocateId")]
+        public MicrosoftDynamicsCRMsystemuser AdoxioAdvocateId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_RegistrarId")]
+        public MicrosoftDynamicsCRMsystemuser AdoxioRegistrarId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_RegionalManagerId")]
+        public MicrosoftDynamicsCRMsystemuser AdoxioRegionalManagerId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_InspectorId")]
+        public MicrosoftDynamicsCRMsystemuser AdoxioInspectorId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_DelegateGMId")]
+        public MicrosoftDynamicsCRMsystemuser AdoxioDelegateGMId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_LicenceTypeId")]
+        public MicrosoftDynamicsCRMadoxioLicencetype AdoxioLicenceTypeId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_enforcementaction_inspections")]
+        public IList<MicrosoftDynamicsCRMincident> AdoxioEnforcementactionInspections { get; set; }
 
     }
 }

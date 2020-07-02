@@ -128,9 +128,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 ExpiryDate = licence.AdoxioExpirydate,
                 Status = StatusUtility.GetLicenceStatus(licence, applications),
                 AllowedActions = new List<ApplicationType>(),
-                TransferRequested = (TransferRequested?)licence.AdoxioTransferrequested,
+                TransferRequested = licence.AdoxioTransferrequested.HasValue && (EnumYesNo?)licence.AdoxioTransferrequested == EnumYesNo.Yes,
+                Dormant = licence.AdoxioDormant.HasValue && (EnumYesNo?)licence.AdoxioDormant == EnumYesNo.Yes,
+                Suspended = licence.AdoxioSuspended.HasValue && (EnumYesNo?)licence.AdoxioSuspended == EnumYesNo.Yes,
+                Operated = licence.AdoxioOperated.HasValue && (EnumYesNo?)licence.AdoxioOperated == EnumYesNo.Yes,
                 ThirdPartyOperatorAccountId = licence._adoxioThirdpartyoperatoridValue,
-                TPORequested = (TPORequested?)licence.AdoxioTporequested, // indicate whether a third party operator app has been requested
+                TPORequested = licence.AdoxioTporequested.HasValue && (EnumYesNo?)licence.AdoxioTporequested == EnumYesNo.Yes, // indicate whether a third party operator app has been requested
                 RepresentativeFullName = licence.AdoxioRepresentativename,
                 RepresentativeEmail = licence.AdoxioRepresentativeemail,
                 RepresentativePhoneNumber = licence.AdoxioRepresentativephone,
