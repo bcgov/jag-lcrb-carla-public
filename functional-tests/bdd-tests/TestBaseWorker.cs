@@ -86,14 +86,14 @@ namespace bdd_tests
             NgWebElement uiCheckBox2 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
             uiCheckBox2.Click();
 
-            NgWebElement continueButton = ngDriver.FindElement(By.XPath("//button[text()='Continue']"));
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector(".buttons .btn-primary"));
             continueButton.Click();
 
             /* 
             Page Title: Please confirm the name belonging to the BC Services card you provided
             */
 
-            NgWebElement yesButton = ngDriver.FindElement(By.XPath("//div/button"));
+            NgWebElement yesButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
             yesButton.Click();
         }
 
