@@ -25,7 +25,7 @@ Scenario: Catering Indigenous Nation Personnel Email Change
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
     And I click on the Pay for Application button
@@ -45,7 +45,7 @@ Scenario: Catering Partnership Personnel Email Change
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
     And I click on the Pay for Application button
@@ -65,7 +65,7 @@ Scenario: Catering Private Corporation Personnel Email Change
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
     And I click on the Pay for Application button
@@ -85,7 +85,7 @@ Scenario: Catering Public Corporation Personnel Email Change
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
     And I click on the Pay for Application button
@@ -105,7 +105,7 @@ Scenario: Catering Society Personnel Email Change
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
     And I click on the Pay for Application button
@@ -125,7 +125,7 @@ Scenario: Catering Sole Proprietorship Personnel Email Change
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
-    And I submit the organization structure
+    And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
     And I click on the Pay for Application button

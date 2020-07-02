@@ -101,9 +101,6 @@
     <None Update="CRSApplicationPersonnelNameChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSApplicationPlanStoreOpening.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="CRSApplicationShowStoreOnMap.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -161,7 +158,7 @@
     <None Update="LicenceCatering_sole_proprietor.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="DirectorNameChange.feature">
+    <None Update="PrivateCorporationOrgStructure.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Director_shareholder_samenamechange.feature">

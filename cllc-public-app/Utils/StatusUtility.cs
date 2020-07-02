@@ -3,7 +3,6 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Utils
 {
@@ -48,7 +47,10 @@ namespace Gov.Lclb.Cllb.Public.Utils
                         shownStatus = "Not Submitted";
                     }
                 }
-                else if (shownStatus == "InProgress" || shownStatus == "Under Review" || shownStatus == "UnderReview" || (shownStatus == "Intake" && application.AdoxioPaymentrecieved == true))
+                else if (shownStatus == "InProgress" || shownStatus == "Under Review" || shownStatus == "UnderReview"
+                           || shownStatus == "Pending Final Inspection" ||shownStatus == "PendingFinalInspection"
+                           || shownStatus == "Reviewing Inspection Results" || shownStatus == "ReviewingInspectionResults"
+                           || (shownStatus == "Intake" && application.AdoxioPaymentrecieved == true))
                 {
                     if (application.AdoxioLicenceType != null && application.AdoxioLicenceType.AdoxioName == "CRS Transfer of Ownership")
                     {
@@ -75,6 +77,10 @@ namespace Gov.Lclb.Cllb.Public.Utils
                 {
                     shownStatus = "Pending External Review";
                 }
+                else if (shownStatus == "PendingForLicenceFee" || shownStatus == "Pending For Licence Fee")
+                {
+                    shownStatus = "Pending Licence Fee";
+                }
             }
 
             return shownStatus;
@@ -82,32 +88,8 @@ namespace Gov.Lclb.Cllb.Public.Utils
 
         public static string GetLicenceStatus(MicrosoftDynamicsCRMadoxioLicences licence, IList<MicrosoftDynamicsCRMadoxioApplication> applications)
         {
-            var application = applications
-                .OrderByDescending(app => app.AdoxioDatelicenceapproved)
-                .Where(app => app.Statuscode == (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved).FirstOrDefault();
-            if (application == null)
-            {
-                return null;
-            }
             LicenceStatusCodes status = (LicenceStatusCodes)licence.Statuscode;
-
-            string shownStatus = Enum.GetName(status.GetType(), status);
-
-            if (licence != null && status == LicenceStatusCodes.Active)
-            {
-                shownStatus = STATUS_ACTIVE;
-                if (DateTimeOffset.Now > licence.AdoxioExpirydate)
-                {
-                    shownStatus = STATUS_RENEWAL_DUE;
-                }
-            }
-
-            // moved first year payment logic here
-            if (licence != null && status == LicenceStatusCodes.PendingFistYearFee)
-            {
-                shownStatus = STATUS_PAYMENT_REQUIRED;
-            }
-            return shownStatus;
+            return Enum.GetName(status.GetType(), status);
         }
     }
 }
