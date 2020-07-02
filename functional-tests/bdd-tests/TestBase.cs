@@ -860,7 +860,7 @@ namespace bdd_tests
             uiSigAgreement.Click();
 
             // click on the Submit & Pay button
-            ClickOnSubmitButton2();
+            ClickOnSubmitButton();
 
             // pay for the relocation application
             MakePayment();
@@ -1178,6 +1178,10 @@ namespace bdd_tests
             NgWebElement descriptionOfChange = ngDriver.FindElement(By.Id("description1"));
             descriptionOfChange.SendKeys(description);
 
+            // select not visible from outside checkbox
+            NgWebElement visibleFromOutside = ngDriver.FindElement(By.CssSelector(".mat-checkbox-inner-container"));
+            visibleFromOutside.Click();
+
             // find the upload test file in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
@@ -1201,7 +1205,7 @@ namespace bdd_tests
             uiSignatureAgreement.Click();
 
             // click on the Submit & Pay button
-            ClickOnSubmitButton2();
+            ClickOnSubmitButton();
 
             System.Threading.Thread.Sleep(3000);
 
@@ -1308,7 +1312,7 @@ namespace bdd_tests
             uiSigAgreement.Click();
 
             // click on the Submit & Pay button
-            ClickOnSubmitButton2();
+            ClickOnSubmitButton();
 
             // pay for the branding change application
             MakePayment();
@@ -1367,7 +1371,7 @@ namespace bdd_tests
             uiSigAgreement.Click();
 
             // click on the Submit & Pay button
-            ClickOnSubmitButton2();
+            ClickOnSubmitButton();
 
             // pay for the relocation application
             MakePayment();
@@ -1437,7 +1441,7 @@ namespace bdd_tests
             signatureAgreement.Click();
 
             // click on submit button
-            ClickOnSubmitButton2();
+            ClickOnSubmitButton();
 
             // return to the Licences tab
             ClickLicencesTab();
@@ -2655,13 +2659,6 @@ namespace bdd_tests
             NgWebElement submitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
             submitButton.Click();
         }
-
-        public void ClickOnSubmitButton2()
-        {
-            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
-            submitButton.Click();
-        }
-
 
         [And(@"I click on the licence download link")]
         public void ClickLicenceDownloadLink()
