@@ -18,6 +18,7 @@ Feature: CRSApplicationShowStoreOnMap
     I want to submit a CRS Application for different business types
     And view the store on the map for the approved application
 
+@e2e @cannabis @indigenousnation @crsmap
 Scenario: Indigenous Nation Show Store On Map
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -38,6 +39,7 @@ Scenario: Indigenous Nation Show Store On Map
     And the account is deleted
     Then I see the login page
 
+@e2e @cannabis @partnership @crsmap
 Scenario: Partnership Show Store On Map
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -58,7 +60,8 @@ Scenario: Partnership Show Store On Map
     And the account is deleted
     Then I see the login page
 
-    Scenario: Private Corporation Show Store On Map
+@e2e @cannabis @privatecorporation @crsmap
+Scenario: Private Corporation Show Store On Map
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     And I am logged in to the dashboard as a private corporation
@@ -78,7 +81,8 @@ Scenario: Partnership Show Store On Map
     And the account is deleted
     Then I see the login page
 
-    Scenario: Public Corporation Show Store On Map
+@e2e @cannabis @publiccorporation @crsmap
+Scenario: Public Corporation Show Store On Map
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
     And I am logged in to the dashboard as a public corporation
@@ -98,7 +102,8 @@ Scenario: Partnership Show Store On Map
     And the account is deleted
     Then I see the login page
 
-    Scenario: Society Show Store On Map
+@e2e @cannabis @society @crsmap
+Scenario: Society Show Store On Map
     Given I am logged in to the dashboard as a society
     And the account is deleted
     And I am logged in to the dashboard as a society
@@ -118,7 +123,8 @@ Scenario: Partnership Show Store On Map
     And the account is deleted
     Then I see the login page
 
-    Scenario: Sole Proprietorship Show Store On Map
+@e2e @cannabis @soleproprietorship @crsmap
+Scenario: Sole Proprietorship Show Store On Map
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
     And I am logged in to the dashboard as a sole proprietorship
