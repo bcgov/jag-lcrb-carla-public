@@ -760,8 +760,7 @@ namespace bdd_tests
                 }
 
                 // click on submit org info button
-                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
-                orgInfoButton2.Click();
+                ClickSubmitOrgStructureButton();
 
                 MakePayment();
 
@@ -2750,8 +2749,7 @@ namespace bdd_tests
             - click on the signature agreement checkbox
             */
 
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
-            submit_button.Click();
+            ClickOnSubmitButton();
         }
 
 
@@ -2916,8 +2914,7 @@ namespace bdd_tests
             uiEditInfoButton.Click();
 
             // click on submit org info button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
-            orgInfoButton.Click();
+            ClickSubmitOrgStructureButton();
         }
 
 
@@ -2959,8 +2956,7 @@ namespace bdd_tests
             uiConfirmButton.Click();
 
             // click on submit org info button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
-            orgInfoButton.Click();
+            ClickSubmitOrgStructureButton();
         }
 
 
