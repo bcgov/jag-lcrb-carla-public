@@ -1487,7 +1487,7 @@ namespace bdd_tests
             ClickLicencesTab();
 
             // check for transfer initiated status 
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TRANSFER INITIATED')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Transfer Requested')]")).Displayed);
         }
 
 
