@@ -145,7 +145,7 @@ namespace bdd_tests
             uiEstPostal.SendKeys(estpostal);
 
             // select 'Yes' for ALR location
-            NgWebElement uiIsALR = ngDriver.FindElement(By.CssSelector("[formcontrolname='ALR'] mat-radio-button[value='Yes']"));
+            NgWebElement uiIsALR = ngDriver.FindElement(By.CssSelector("[formcontrolname='proposedEstablishmentIsAlr'] mat-radio-button[value='true']"));
             uiIsALR.Click();
 
             // enter the licencee name
