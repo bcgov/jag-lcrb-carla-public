@@ -84,7 +84,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         });
 
         this.updateEstablishment(establishment);
-        this.updateLicence(licence);
+        this.sendUpdateLicence(licence);
     }
 
     updatePhone(licenceId: string, establishmentId: string, event: any) {
@@ -107,19 +107,29 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         });
 
         this.updateEstablishment(establishment);
-        this.updateLicence(licence);
+        this.sendUpdateLicence(licence);
     }
 
-    updateLicence(licence: ApplicationLicenseSummary) {
+    sendUpdateLicence(licence: ApplicationLicenseSummary) {
         this.busy = forkJoin([
             this.licenceDataService.updateLicenceEstablishment(licence.licenseId, licence)
         ])
         .subscribe(([licenceResp]) => {
-            this.updateLicenceEstablishment(licenceResp);
+            if (licenceResp.licenceTypeName.indexOf('Catering') >= 0 || licenceResp.licenceTypeName.indexOf('Wine Store') >= 0) {
+              forkJoin([
+                this.licenceEventsService.getLicenceEventsList(licenceResp.licenseId, 10)
+              ])
+                .subscribe(data => {
+                  licenceResp.events = data[0];
+                  this.updateLicence(licenceResp);
+                });
+            } else {
+              this.updateLicence(licenceResp);
+            }
         });
     }
 
-    updateLicenceEstablishment(licence: ApplicationLicenseSummary) {
+    updateLicence(licence: ApplicationLicenseSummary) {
         const licenceIndex = this.licences.findIndex(l => l.licenseId === licence.licenseId);
         if (licenceIndex >= 0) {
           this.licences[licenceIndex] = licence;

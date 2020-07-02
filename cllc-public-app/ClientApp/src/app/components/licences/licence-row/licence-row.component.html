@@ -1,4 +1,4 @@
-<div>
+<div [ngBusy]="busy">
     <div *ngIf="available">
         <h2>{{licenceType}} Licences</h2>
         <form [formGroup]="mainForm">
