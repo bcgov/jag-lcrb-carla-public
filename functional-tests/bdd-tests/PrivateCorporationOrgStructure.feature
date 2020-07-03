@@ -1,7 +1,6 @@
 ﻿Feature: PrivateCorporationOrgStructure.feature
-    As a logged in business user
-    I want to change the name of a director
-    And pay the associated fee
+    As a logged in private corporation business user
+    I want to confirm the organization structure functionality
 
 @e2e @cannabis @privatecorporation @validation @orgstructure
 Scenario: Change director name and pay fee
