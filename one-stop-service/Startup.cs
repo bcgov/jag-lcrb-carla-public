@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -124,9 +125,17 @@ namespace Gov.Lclb.Cllb.OneStopService
                 options.AllowSynchronousIO = true;
             });
 
+            // Add a memory cache
+            services.AddMemoryCache();
+
+            // Build an intermediate service provider
+            var sp = services.BuildServiceProvider();
+
+            // Resolve the services from the service provider
+            var cache = sp.GetService<IMemoryCache>();
 
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
-            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _configuration, _env));
+            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _configuration, _env, cache));
 
 
             services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("OneStopUtils"));
@@ -191,7 +200,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory, IMemoryCache cache)
         {
 
             // enable Splunk logger using Serilog
@@ -298,7 +307,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             if (!string.IsNullOrEmpty(_configuration["ENABLE_HANGFIRE_JOBS"]))
             {
-                SetupHangfireJobs(app);
+                SetupHangfireJobs(app, cache);
             }
 
             app.UseAuthentication();
@@ -332,7 +341,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             /// </summary>
             /// <param name="app"></param>
             /// <param name="loggerFactory"></param>
-            private void SetupHangfireJobs(IApplicationBuilder app)
+            private void SetupHangfireJobs(IApplicationBuilder app, IMemoryCache cache)
         {
 
             Log.Logger.Information("Starting setup of Hangfire job ...");
@@ -344,7 +353,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                     Log.Logger.Information("Creating Hangfire jobs for License issuance check ...");
 
                     
-                    RecurringJob.AddOrUpdate(() => new OneStopUtils(_configuration).CheckForNewLicences(null), Cron.Hourly());
+                    RecurringJob.AddOrUpdate(() => new OneStopUtils(_configuration, cache).CheckForNewLicences(null), Cron.Hourly());
 
                     Log.Logger.Information("Hangfire License issuance check jobs setup.");
                 }
