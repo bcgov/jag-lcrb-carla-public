@@ -38,7 +38,10 @@ export class LgApprovalsComponent implements OnInit {
       .subscribe(applications => {
         this.applications = applications || [];
         this.applicationsDecisionNotMade = this.applications.filter(app => !app.lGDecisionSubmissionDate);
-        this.applicationsDecisionMadeButNoDocs = this.applications.filter(app => app.lGDecisionSubmissionDate && !app.resolutionDocsUploaded);
+        this.applicationsDecisionMadeButNoDocs = this.applications
+          .filter(app => app.lGDecisionSubmissionDate 
+            && !app.resolutionDocsUploaded 
+            && app.lGApprovalDecision === 'Approved');
         this.dataLoaded = true;
       },
         error => {
