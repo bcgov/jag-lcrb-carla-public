@@ -1,27 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
-using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
-
-/*
-Feature: PrivateCorporationOrgStructure.feature
-    As a logged in private corporation business user
+﻿Feature: PartnershipOrgStructure.feature
+    As a logged in partnership business user
     I want to confirm the organization structure functionality
 
-@e2e @cannabis @privatecorporation @validation @orgstructure
-Scenario: Change director name and pay fee
-    Given I am logged in to the dashboard as a private corporation
+@e2e @cannabis @partnership @validation @orgstructure
+Scenario: Change director name and pay fee - partnership
+    Given I am logged in to the dashboard as a partnership
     And the account is deleted
-    And I am logged in to the dashboard as a private corporation
+    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -44,11 +29,11 @@ Scenario: Change director name and pay fee
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @orgstructure
-Scenario: Delete an individual who is both a director and shareholder
-    Given I am logged in to the dashboard as a private corporation
+@cannabis @partnership @validation @orgstructure
+Scenario: Delete an individual who is both a director and shareholder - partnership
+    Given I am logged in to the dashboard as a partnership
     And the account is deleted
-    And I am logged in to the dashboard as a private corporation
+    And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
     And I click on the Submit Organization Information button
@@ -59,11 +44,11 @@ Scenario: Delete an individual who is both a director and shareholder
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @orgstructure
-Scenario: Change director and shareholder same name 
-    Given I am logged in to the dashboard as a private corporation
+@cannabis @partnership @validation @orgstructure
+Scenario: Change director and shareholder same name - partnership
+    Given I am logged in to the dashboard as a partnership
     And the account is deleted
-    And I am logged in to the dashboard as a private corporation
+    And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
     And I click on the Submit Organization Information button
@@ -74,11 +59,11 @@ Scenario: Change director and shareholder same name
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @orgstructure
-Scenario: Confirm business shareholder org structure update
-    Given I am logged in to the dashboard as a private corporation
+@cannabis @partnership @validation @orgstructure
+Scenario: Confirm business shareholder org structure update - partnership
+    Given I am logged in to the dashboard as a partnership
     And the account is deleted
-    And I am logged in to the dashboard as a private corporation
+    And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
     And I click on the Submit Organization Information button
@@ -101,11 +86,11 @@ Scenario: Confirm business shareholder org structure update
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @orgstructure
-Scenario: Confirm business shareholder org structure update after payment
-    Given I am logged in to the dashboard as a private corporation
+@cannabis @partnership @validation @orgstructure
+Scenario: Confirm business shareholder org structure update after payment - partnership
+    Given I am logged in to the dashboard as a partnership
     And the account is deleted
-    And I am logged in to the dashboard as a private corporation
+    And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
     And I click on the Submit Organization Information button
@@ -132,11 +117,11 @@ Scenario: Confirm business shareholder org structure update after payment
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @orgstructure
-Scenario: Save for Later feature for org structure 
-    Given I am logged in to the dashboard as a private corporation
+@cannabis @partnership @validation @orgstructure
+Scenario: Save for Later feature for org structure - partnership
+    Given I am logged in to the dashboard as a partnership
     And the account is deleted
-    And I am logged in to the dashboard as a private corporation
+    And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
     And I click on the Save for Later button
@@ -160,91 +145,3 @@ Scenario: Save for Later feature for org structure
     And the saved org structure is present
     And the account is deleted
     Then I see the login page
-
-@e2e @cannabis @privatecorporation @validation @orgstructure
-Scenario: CRS application with mixed business shareholder types
-    Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
-    And I add in business shareholders of different business types
-    And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
-    And I review the security screening requirements for mixed business shareholder types
-    And I click on the Pay for Application button
-    And I enter the payment information
-    And I confirm the payment receipt for a Cannabis Retail Store application
-    And I return to the dashboard
-    And I click on the Complete Organization Information button
-    And the mixed business shareholder org structure is correct
-    And the account is deleted
-    Then I see the login page
-*/
-
-namespace bdd_tests
-{
-    [FeatureFile("./PrivateCorporationOrgStructure.feature")]
-    public sealed class PrivateCorporationOrgStructure : TestBase
-    {
-        [Given(@"I am logged in to the dashboard as a (.*)")]
-        public void I_view_the_dashboard(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-
-        [And(@"I modify the director name")]
-        public void modify_director_name()
-        {
-            // click on the Edit button for Key Personnel
-            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
-            uiEditInfoButton.Click();
-
-            // enter a new name for the director
-            string newDirectorFirstName = "Updated Director";
-
-            NgWebElement uiNewDirectorFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
-            uiNewDirectorFirstName.Clear();
-            uiNewDirectorFirstName.SendKeys(newDirectorFirstName);
-
-            // click on the Confirm button
-            NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
-            uiConfirmButton.Click();
-
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload a marriage certificate document
-            string marriageCertificate = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "marriage_certificate.pdf");
-            NgWebElement uploadMarriageCert = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
-            uploadMarriageCert.SendKeys(marriageCertificate);
-        }
-
-        [And(@"I pay the name change fee")]
-        public void name_change_fee()
-        {
-            MakePayment();
-
-            // check payment fee
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
-        }
-
-        [And(@"the director name is now updated")]
-        public void director_name_updated()
-        {
-            // click on Return to Dashboard link
-            string retDash = "Return to Dashboard";
-            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
-            returnDash.Click();
-
-            ClickReviewOrganizationInformation();
-
-            // check that the director name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Updated Director')]")).Displayed);
-        }
-    }
-}
