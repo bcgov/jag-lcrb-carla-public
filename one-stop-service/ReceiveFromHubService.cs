@@ -162,7 +162,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 }                
                 else
                 {
-                    Log.Logger.Error($"Skipping resend of licence creation message as there have been too many tries({currentSuffix}) Partner Note is partner note {errorNotification.header.partnerNote}");         
+                    Log.Logger.Error($"Skipping resend of licence creation message as there have been too many tries({currentSuffix} - {suffixLimit}) Partner Note is partner note {errorNotification.header.partnerNote}");         
                 }
             }
             else
