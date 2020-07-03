@@ -759,10 +759,8 @@ namespace bdd_tests
                     uploadMarriageCert2.SendKeys(marriageCertificate);
                 }
 
-                // click on submit org info button 
-                NgWebElement orgInfoButton2 = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION ')]"));
-
-                orgInfoButton2.Click();
+                // click on submit org info button
+                ClickSubmitOrgStructureButton();
 
                 MakePayment();
 
@@ -861,7 +859,7 @@ namespace bdd_tests
             uiSigAgreement.Click();
 
             // click on the Submit & Pay button
-            ClickOnSubmitButton2();
+            ClickOnSubmitButton();
 
             // pay for the relocation application
             MakePayment();
@@ -951,28 +949,11 @@ namespace bdd_tests
         [And(@"I pay the licensing fee for (.*)")]
         public void PayLicenceFee(string feeType)
         {
-            /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            */
+            string firstYearLicenceFee = "Pay First Year Licensing Fee";
 
-            if (feeType == "Cannabis")
-            {
-                string licenceFee = "Pay First Year Licensing Fee";
-
-                // click on the pay licence fee link
-                NgWebElement uiLicenceFee = ngDriver.FindElement(By.LinkText(licenceFee));
-                uiLicenceFee.Click();
-            }
-
-            if (feeType == "Catering")
-            {
-                string firstYearLicenceFee = "Pay First Year Licensing Fee";
-
-                // click on the pay first year licence fee link
-                NgWebElement uiFirstYearLicenceFee = ngDriver.FindElement(By.LinkText(firstYearLicenceFee));
-                uiFirstYearLicenceFee.Click();
-            }
+            // click on the pay first year licence fee link
+            NgWebElement uiFirstYearLicenceFee = ngDriver.FindElement(By.LinkText(firstYearLicenceFee));
+            uiFirstYearLicenceFee.Click();
 
             // pay the licence fee
             MakePayment();
@@ -990,8 +971,6 @@ namespace bdd_tests
                 // confirm correct payment amount for Catering
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$450.00')]")).Displayed);
             }
-
-            string licencesLink = "Licences";
 
             ClickLicencesTab();
         }
@@ -1198,6 +1177,10 @@ namespace bdd_tests
             NgWebElement descriptionOfChange = ngDriver.FindElement(By.Id("description1"));
             descriptionOfChange.SendKeys(description);
 
+            // select not visible from outside checkbox
+            NgWebElement visibleFromOutside = ngDriver.FindElement(By.CssSelector(".mat-checkbox-inner-container"));
+            visibleFromOutside.Click();
+
             // find the upload test file in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
@@ -1221,7 +1204,7 @@ namespace bdd_tests
             uiSignatureAgreement.Click();
 
             // click on the Submit & Pay button
-            ClickOnSubmitButton2();
+            ClickOnSubmitButton();
 
             System.Threading.Thread.Sleep(3000);
 
@@ -1328,7 +1311,7 @@ namespace bdd_tests
             uiSigAgreement.Click();
 
             // click on the Submit & Pay button
-            ClickOnSubmitButton2();
+            ClickOnSubmitButton();
 
             // pay for the branding change application
             MakePayment();
@@ -1387,7 +1370,7 @@ namespace bdd_tests
             uiSigAgreement.Click();
 
             // click on the Submit & Pay button
-            ClickOnSubmitButton2();
+            ClickOnSubmitButton();
 
             // pay for the relocation application
             MakePayment();
@@ -1457,7 +1440,7 @@ namespace bdd_tests
             signatureAgreement.Click();
 
             // click on submit button
-            ClickOnSubmitButton2();
+            ClickOnSubmitButton();
 
             // return to the Licences tab
             ClickLicencesTab();
@@ -1504,7 +1487,7 @@ namespace bdd_tests
             ClickLicencesTab();
 
             // check for transfer initiated status 
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TRANSFER INITIATED')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Transfer Requested')]")).Displayed);
         }
 
 
@@ -2672,16 +2655,9 @@ namespace bdd_tests
         [And(@"I click on the Submit button")]
         public void ClickOnSubmitButton()
         {
-            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
+            NgWebElement submitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
             submitButton.Click();
         }
-
-        public void ClickOnSubmitButton2()
-        {
-            NgWebElement submitButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT')]"));
-            submitButton.Click();
-        }
-
 
         [And(@"I click on the licence download link")]
         public void ClickLicenceDownloadLink()
@@ -2773,8 +2749,7 @@ namespace bdd_tests
             - click on the signature agreement checkbox
             */
 
-            NgWebElement submit_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT')]"));
-            submit_button.Click();
+            ClickOnSubmitButton();
         }
 
 
@@ -2939,8 +2914,7 @@ namespace bdd_tests
             uiEditInfoButton.Click();
 
             // click on submit org info button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
-            orgInfoButton.Click();
+            ClickSubmitOrgStructureButton();
         }
 
 
@@ -2982,8 +2956,7 @@ namespace bdd_tests
             uiConfirmButton.Click();
 
             // click on submit org info button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.XPath("//button[contains(.,' SUBMIT ORGANIZATION INFORMATION')]"));
-            orgInfoButton.Click();
+            ClickSubmitOrgStructureButton();
         }
 
 
