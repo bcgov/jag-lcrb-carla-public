@@ -366,7 +366,11 @@ namespace Gov.Lclb.Cllb.OneStopService
                         }
                         _cache.Set(cacheKey, newNumber);
 
-                        await SendLicenceCreationMessageREST(hangfireContext, licenceId, programAccountCode);
+                        if (hangfireContext != null)
+                        {
+                            hangfireContext.WriteLine("SET key {cacheKey} to {newNumber}");
+                        }
+                            await SendLicenceCreationMessageREST(hangfireContext, licenceId, programAccountCode);
                         currentItem++;
                     }
 
