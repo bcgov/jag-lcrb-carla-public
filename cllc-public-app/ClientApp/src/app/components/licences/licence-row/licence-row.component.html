@@ -103,6 +103,13 @@
                             </span>
                         </a>
                     </div-->
+                    <ng-container *ngIf="item.endorsements.length > 0 && isActiveOrRecentlyExpired(item) && (actionsVisible(item) || item.isOperated)">
+                        <span><strong>Endorsements:</strong></span>
+                        <div *ngFor="let endorsement of item.endorsements; let i = index;">
+                            <span><i class="fas fa-certificate" style="margin-right: 10px;"></i>{{endorsement}}</span>
+                        </div>
+                        <br><br>
+                    </ng-container>
                     <div *ngIf="item.status === 'PendingLicenceFee'" style="min-width: 10px; margin-bottom: 10px;">
                         <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
                             <span>
@@ -123,14 +130,7 @@
                             </a>
                         </section>
                     </div>
-                    <!-- Indicate third party operator relationship established-->
-                    <ng-container *ngIf="item.thirdPartyOperatorAccountName">
-                        <span>Operated By: </span><strong style="color: #1a5a96;">{{item.thirdPartyOperatorAccountName}}</strong>
-                        <br>
-                    </ng-container>
-                    <a  *ngIf="item.operated && !item.isOperated" [routerLink]="[ '/terminate-third-party-operator/' + item.licenseId]">
-                        <span><i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Terminate Third Party Operator Relationship</span>
-                    </a>
+
                     <div>
                         <div *ngIf="hasEndorsement('Temporary Off-Site Endorsement', item)">
                             <a [routerLink]="[ '/licence/' + item.licenseId + '/temporary-offsite']">
@@ -149,12 +149,16 @@
                             </a>
                         </div>
                     </div>
-                    <ng-container *ngIf="item.endorsements.length > 0 && isActiveOrRecentlyExpired(item) && (actionsVisible(item) || item.isOperated)">
-                        <span><strong>Endorsements:</strong></span>
-                        <div *ngFor="let endorsement of item.endorsements; let i = index;">
-                            <span><i class="fas fa-certificate" style="margin-right: 10px;"></i>{{endorsement}}</span>
-                        </div>
+
+                    <!-- Indicate third party operator relationship established-->
+                    <ng-container *ngIf="item.thirdPartyOperatorAccountName">
+                        <br>
+                        <span>Operated By: </span><strong style="color: #1a5a96;">{{item.thirdPartyOperatorAccountName}}</strong>
+                        
                     </ng-container>
+                    <a  *ngIf="item.operated && !item.isOperated" [routerLink]="[ '/terminate-third-party-operator/' + item.licenseId]">
+                        <span><i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Terminate Third Party Operator Relationship</span>
+                    </a>
                 </td>
 
 
