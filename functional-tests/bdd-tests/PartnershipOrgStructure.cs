@@ -173,37 +173,20 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
-        [And(@"I modify the director name")]
-        public void modify_director_name()
+        [And(@"I enter the same individual as an individual partner and a business shareholder")]
+        public void SamePartnerShareholder()
         {
-            // click on the Edit button for Key Personnel
-            NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
-            uiEditInfoButton.Click();
 
-            // enter a new name for the director
-            string newDirectorFirstName = "Updated Director";
+        }
 
-            NgWebElement uiNewDirectorFirstName = ngDriver.FindElement(By.XPath("//input[@type='text']"));
-            uiNewDirectorFirstName.Clear();
-            uiNewDirectorFirstName.SendKeys(newDirectorFirstName);
+        [And(@"I modify only the individual partner record")]
+        public void ModifyIndividualRecord()
+        {
 
-            // click on the Confirm button
-            NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
-            uiConfirmButton.Click();
-
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload a marriage certificate document
-            string marriageCertificate = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "marriage_certificate.pdf");
-            NgWebElement uploadMarriageCert = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
-            uploadMarriageCert.SendKeys(marriageCertificate);
         }
 
         [And(@"I pay the name change fee")]
-        public void name_change_fee()
+        public void PayNameChangeFee()
         {
             MakePayment();
 
@@ -211,8 +194,8 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
         }
 
-        [And(@"the director name is now updated")]
-        public void director_name_updated()
+        [And(@"the individual partner and business shareholder name are identical")]
+        public void PartnerNamesIdentical()
         {
             // click on Return to Dashboard link
             string retDash = "Return to Dashboard";
@@ -222,7 +205,7 @@ namespace bdd_tests
             ClickReviewOrganizationInformation();
 
             // check that the director name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Updated Director')]")).Displayed);
+            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Updated Director')]")).Displayed);
         }
     }
 }

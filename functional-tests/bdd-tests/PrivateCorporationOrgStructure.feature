@@ -18,8 +18,8 @@ Scenario: Change director name and pay fee - private corporation
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab
-    # And I pay the licensing fee for Cannabis
-    # And I return to the dashboard
+    And I pay the licensing fee for Cannabis
+    And I return to the dashboard
     And I click on the Dashboard link
     And I click on the Review Organization Information button
     And I modify the director name
