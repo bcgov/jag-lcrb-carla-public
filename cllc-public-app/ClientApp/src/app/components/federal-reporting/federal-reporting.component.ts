@@ -363,7 +363,7 @@ export class FederalReportingComponent implements OnInit {
 
   createProductForm(report) {
     const closingWeightValidators = [Validators.min(0), Validators.max(1000), Validators.pattern('^[0-9]+(\.[0-9]{1,3})?$')];
-    if (report.product !== 'Seeds') {
+    if (report.product !== 'Seeds' && report.product !== 'Vegetative Cannabis') {
       closingWeightValidators.push(Validators.required);
     }
     const totalSeedsValidators = [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')];
