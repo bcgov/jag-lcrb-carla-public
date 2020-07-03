@@ -133,7 +133,7 @@ namespace bdd_tests
             uiPostalCode.SendKeys(postalCode);
 
             // click on save and continue button
-            NgWebElement saveAndContinueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SAVE & CONTINUE TO STEP 2')]"));
+            NgWebElement saveAndContinueButton = ngDriver.FindElement(By.CssSelector("span button.btn-primary.btn"));
             saveAndContinueButton.Click();
         }
 
@@ -157,7 +157,7 @@ namespace bdd_tests
             */
 
             // click on the Submit and Pay button
-            NgWebElement submitPayButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
+            NgWebElement submitPayButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
             submitPayButton.Click();
         }
 
