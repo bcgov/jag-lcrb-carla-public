@@ -401,7 +401,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
             bool hasAccess = CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid);
-            hasAccess |= (adoxioLicense.AdoxioThirdPartyOperatorId  != null && CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioThirdPartyOperatorId .Accountid));
+            hasAccess |= (adoxioLicense.AdoxioThirdPartyOperatorId != null && CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioThirdPartyOperatorId.Accountid));
             if (!hasAccess)
             {
                 return Forbid();
@@ -469,13 +469,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // set license type relationship 
                     application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicense.AdoxioLicenceType.AdoxioLicencetypeid);
                 }
-                
+
                 application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
 
                 application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
 
                 try
                 {
+                    var licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioLocalgovindigenousnationidValue )).FirstOrDefault();
+                    // Indigenous nation association
+                    if (!string.IsNullOrEmpty(licenceApp?._adoxioLocalgovindigenousnationidValue ))
+                    {
+                        application.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", licenceApp._adoxioLocalgovindigenousnationidValue);
+                    }
+
+                    licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioPolicejurisdictionidValue )).FirstOrDefault();
+                    // Police Jurisdiction association
+                    if (!string.IsNullOrEmpty(licenceApp?._adoxioPolicejurisdictionidValue))
+                    {
+                        application.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", licenceApp?._adoxioPolicejurisdictionidValue);
+                    }
+
                     application = _dynamicsClient.Applications.Create(application);
                 }
                 catch (HttpOperationException httpOperationException)
@@ -625,7 +639,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // get all licenses in Dynamics by Licencee Id
             var result = _dynamicsClient.GetLicensesByLicencee(_cache, licenceeId);
-            
+
 
 
             return new JsonResult(result);
