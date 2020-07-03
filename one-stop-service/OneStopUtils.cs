@@ -358,13 +358,13 @@ namespace Gov.Lclb.Cllb.OneStopService
 
                         // set the maximum code.
                         string cacheKey = "_BPAR_" + item.AdoxioLicencesid;
-                        int newNumber = 1;
+                        int newNumber = 10;
                         string suffix = programAccountCode.TrimStart('0');
                         if (int.TryParse(suffix, out newNumber))
                         {
-                            newNumber += 10; // 10 tries.
-                            _cache.Set(cacheKey, newNumber);
+                            newNumber += 10; // 10 tries.                           
                         }
+                        _cache.Set(cacheKey, newNumber);
 
                         await SendLicenceCreationMessageREST(hangfireContext, licenceId, programAccountCode);
                         currentItem++;
