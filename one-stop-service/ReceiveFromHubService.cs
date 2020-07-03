@@ -2,6 +2,7 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Hangfire;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Rest;
@@ -18,6 +19,7 @@ namespace Gov.Lclb.Cllb.OneStopService
     public class ReceiveFromHubService : IReceiveFromHubService
     {
         IDynamicsClient _dynamicsClient;
+        private IMemoryCache _cache;
 
         private readonly IConfiguration Configuration;
         private readonly IWebHostEnvironment _env;
@@ -25,8 +27,14 @@ namespace Gov.Lclb.Cllb.OneStopService
         public ReceiveFromHubService(IDynamicsClient dynamicsClient, IConfiguration configuration, IWebHostEnvironment env)
         {
             _dynamicsClient = dynamicsClient;
+            
             Configuration = configuration;
             _env = env;
+        }
+
+        public void SetCache (IMemoryCache cache)
+        {
+            _cache = cache;
         }
 
         /// <summary>
@@ -84,7 +92,8 @@ namespace Gov.Lclb.Cllb.OneStopService
                 var businessProgramAccountNumber = licenseData.body.businessProgramAccountNumber.businessProgramAccountReferenceNumber;
                 MicrosoftDynamicsCRMadoxioLicences pathLicence = new MicrosoftDynamicsCRMadoxioLicences()
                 {
-                    AdoxioBusinessprogramaccountreferencenumber = businessProgramAccountNumber
+                    AdoxioBusinessprogramaccountreferencenumber = businessProgramAccountNumber,
+                    AdoxioOnestopsent = true
                 };
                 Log.Logger.Information($"Sending update to Dynamics for BusinessProgramAccountNumber.");
                 try
@@ -100,7 +109,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 }
 
                 //Trigger the Send ProgramAccountDetailsBroadcast Message                
-                BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendProgramAccountDetailsBroadcastMessageREST(null, licence.AdoxioLicencesid));
+                BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendProgramAccountDetailsBroadcastMessageREST(null, licence.AdoxioLicencesid));
 
                 Log.Logger.Information("send program account details broadcast done.");
             }
@@ -137,17 +146,30 @@ namespace Gov.Lclb.Cllb.OneStopService
                 string licenceGuid = OneStopUtils.GetGuidFromPartnerNote(errorNotification.header.partnerNote);
                 int currentSuffix = OneStopUtils.GetSuffixFromPartnerNote(errorNotification.header.partnerNote, Log.Logger);
 
+                string cacheKey = "_BPAR_" + licenceGuid;
+                int suffixLimit = 10;
+                Log.Logger.Information($"Reading cache value for key {cacheKey}");
+
+                _cache.TryGetValue(cacheKey, out suffixLimit);               
+                
                 // sanity check
-                if (currentSuffix < 55)
+                if (currentSuffix < suffixLimit)
                 {
                     currentSuffix++;
                     Log.Logger.Information($"Starting resend of licence creation message, with new value of {currentSuffix}");
-                    BackgroundJob.Schedule(() => new OneStopUtils(Configuration).SendLicenceCreationMessageREST(null, licenceGuid, currentSuffix.ToString("D3"))// zero pad 3 digit.
+
+                    var patchRecord = new MicrosoftDynamicsCRMadoxioLicences()
+                    {
+                        AdoxioBusinessprogramaccountreferencenumber = currentSuffix.ToString()
+                    };
+                    _dynamicsClient.Licenceses.Update(licenceGuid, patchRecord);
+
+                    BackgroundJob.Schedule(() => new OneStopUtils(Configuration, _cache).SendLicenceCreationMessageREST(null, licenceGuid, currentSuffix.ToString("D3"))// zero pad 3 digit.
                     , TimeSpan.FromSeconds(30)); // Try again after 30 seconds
                 }                
                 else
                 {
-                    Log.Logger.Error($"Skipping resend of licence creation message as there have been too many tries({currentSuffix}) Partner Note is partner note {errorNotification.header.partnerNote}");         
+                    Log.Logger.Error($"Skipping resend of licence creation message as there have been too many tries({currentSuffix} - {suffixLimit}) Partner Note is partner note {errorNotification.header.partnerNote}");         
                 }
             }
             else
@@ -218,5 +240,7 @@ namespace Gov.Lclb.Cllb.OneStopService
     {
         [OperationContract]
         string receiveFromHub(string inputXML);
+
+        void SetCache(IMemoryCache cache);
     }
 }
