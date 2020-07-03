@@ -143,8 +143,10 @@ namespace Gov.Lclb.Cllb.OneStopService
 
                 string cacheKey = "_BPAR_" + licenceGuid;
                 int suffixLimit = 10;
-                _cache.TryGetValue(cacheKey, out suffixLimit);               
+                Log.Logger.Information($"Reading cache value for key {cacheKey}");
 
+                _cache.TryGetValue(cacheKey, out suffixLimit);               
+                 
                 // sanity check
                 if (currentSuffix < suffixLimit)
                 {
