@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Hangfire;
 using Gov.Lclb.Cllb.OneStopService;
 using Serilog;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace one_stop_service.Controllers
 {
@@ -15,11 +16,13 @@ namespace one_stop_service.Controllers
     public class OneStopController : Controller
     {
         IConfiguration Configuration;
+        private IMemoryCache _cache;
         private readonly ILogger _logger;
 
-        public OneStopController(IConfiguration configuration)
+        public OneStopController(IConfiguration configuration, IMemoryCache cache)
         {
             Configuration = configuration;
+            _cache = cache;
             _logger = Log.Logger;
             
             
@@ -29,7 +32,7 @@ namespace one_stop_service.Controllers
         public async Task<IActionResult> SendLicenceCreationMessage(string licenceGuid)
         {
             _logger.Information($"Reached SendLicenceCreationMessage. licenceGuid: {licenceGuid}");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendLicenceCreationMessageREST(null, licenceGuid, "001"));
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendLicenceCreationMessageREST(null, licenceGuid, "001"));
             return Ok();
         }
 
@@ -37,7 +40,7 @@ namespace one_stop_service.Controllers
         public IActionResult SendProgramAccountDetailsBroadcastMessage(string licenceGuid)
         {
             _logger.Information("Reached SendProgramAccountDetailsBroadcastMessage");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendProgramAccountDetailsBroadcastMessageREST(null, licenceGuid));
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendProgramAccountDetailsBroadcastMessageREST(null, licenceGuid));
             return Ok();
         }
 

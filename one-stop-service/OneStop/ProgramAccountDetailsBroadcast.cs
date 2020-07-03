@@ -53,7 +53,8 @@ namespace WebApplicationSoap.OneStop
             header.senderID = OneStopUtils.SENDER_ID;
             header.receiverID = OneStopUtils.RECEIVER_ID;
             //any note wanted by LCRB. Currently in liquor is: licence Id, licence number - sequence number
-            header.partnerNote = licence.AdoxioLicencenumber;
+            header.partnerNote = licence.AdoxioLicencenumber;                   
+
             header.CCRAHeader = GetCCRAHeader(licence);
 
             return header;
