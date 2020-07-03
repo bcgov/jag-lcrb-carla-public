@@ -18,6 +18,7 @@ import { Establishment } from '@models/establishment.model';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { EventStatus } from '@models/licence-event.model';
 import { License } from '@models/license.model';
+import { TermsAndConditionsDataService } from '@services/terms-and-condtions-data.service';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -52,6 +53,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         private paymentService: PaymentDataService,
         private establishmentService: EstablishmentDataService,
         private licenceEventsService: LicenceEventsService,
+        private termsAndConditionsService: TermsAndConditionsDataService,
         public fb: FormBuilder) {
         super();
         this.mainForm = new FormGroup({});
@@ -63,6 +65,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
                 phone: [licence.establishmentPhoneNumber],
                 email: [licence.establishmentEmail]
               });
+            this.termsAndConditionsService.getTermsAndCondtions(licence.licenseId)
+              .subscribe((terms) => {
+                licence.termsAndConditions = terms;
+              })
         });
     }
 
