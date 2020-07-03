@@ -281,6 +281,23 @@
                         </mat-expansion-panel>
                     </td>
                 </tr>
+                <tr *ngIf="item?.termsAndConditions !== null && item?.termsAndConditions.length > 0">
+                    <td colspan="5">
+                        <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                            Terms and Conditions
+                            </mat-panel-title>
+                            <mat-panel-description>
+                            Click to expand or collapse
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <ul style="width: 100%;">
+                            <li *ngFor="let term of item?.termsAndConditions">{{term.content}}</li>
+                        </ul>
+                        </mat-expansion-panel>
+                    </td>
+                </tr>
             </ng-container>
             </table>
 
