@@ -732,7 +732,7 @@ namespace bdd_tests
                 uiNewDirectorLasttName.SendKeys(newDirectorLastName);
 
                 // click on the Confirm button
-                NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector(".fa-save span"));
+                NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//app-org-structure//app-associate-list[@changetypesuffix='IndividualShareholder']//tr[1]//i"));
                 uiConfirmButton.Click();
 
                 // find the upload test file in the bdd-tests\upload_files folder
@@ -755,7 +755,7 @@ namespace bdd_tests
                 }
                 else
                 {
-                    NgWebElement uploadMarriageCert2 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
+                    NgWebElement uploadMarriageCert2 = ngDriver.FindElement(By.XPath("//app-org-structure//app-associate-list//tr[2]//input[@type='file']"));
                     uploadMarriageCert2.SendKeys(marriageCertificate);
                 }
 
@@ -1505,7 +1505,7 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = false;
 
             // navigate back to dashboard
-            ngDriver.Navigate().GoToUrl($"{baseUri}/dashboard");
+            ngDriver.Navigate().GoToUrl($"{baseUri}dashboard");
         }
 
 

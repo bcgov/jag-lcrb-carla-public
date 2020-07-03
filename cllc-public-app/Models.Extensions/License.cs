@@ -195,7 +195,6 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             licenseSummary.Endorsements = GetEndorsements(licenseSummary.LicenseId, dynamicsClient);
             
-
             return licenseSummary;
         }
     }

@@ -1576,9 +1576,9 @@
             </div>
           </div>
         </section>
-
+        
         <section appRemoveIfFeatureOff="LGApprovals" class="ngtest-opened-by-lg" *ngIf="isOpenedByLGForApproval">
-          <app-lg-in-confirmation-of-receipt *ngIf="application" [application]="application">
+          <app-lg-in-confirmation-of-receipt *ngIf="application" [application]="application" [htmlContent]="htmlContent">
           </app-lg-in-confirmation-of-receipt>
         </section>
 
