@@ -949,9 +949,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 // Indigenous nation association
-                if (!string.IsNullOrEmpty(item.IndigenousNationId))
+                if (!string.IsNullOrEmpty(item?.IndigenousNation?.id))
                 {
-                    adoxioApplication.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", item.IndigenousNationId);
+                    adoxioApplication.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", item.IndigenousNation.id);
                 }
                 else
                 {
@@ -960,9 +960,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 
                 // Police Jurisdiction association
-                if (!string.IsNullOrEmpty(item.PoliceJurisdictionId))
+                if (!string.IsNullOrEmpty(item?.PoliceJurisdiction?.id))
                 {
-                    adoxioApplication.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", item.PoliceJurisdictionId);
+                    adoxioApplication.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", item.PoliceJurisdiction.id);
                 }
                 else
                 {
