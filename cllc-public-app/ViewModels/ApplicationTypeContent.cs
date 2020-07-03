@@ -10,6 +10,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Preamble = 845280000,
         BeforeStarting = 845280001,
         NextSteps = 845280002,
+        LocalGovernmentApproval = 845280005
     }
     public class ApplicationTypeContent
     {
