@@ -1,6 +1,7 @@
 import { License } from './license.model';
 import { ApplicationType } from './application-type.model';
 import { LicenceEvent } from './licence-event.model';
+import { TermsAndConditions } from './terms-and-conditions.model';
 
 export class ApplicationLicenseSummary {
 
@@ -59,6 +60,8 @@ export class ApplicationLicenseSummary {
   representativeCanAttendEducationSessions: boolean;
   representativeCanAttendComplianceMeetings: boolean;
   representativeCanRepresentAtHearings: boolean;
+
+  termsAndConditions: TermsAndConditions[];
 }
 
 export interface LicenceActionApplication {

@@ -205,6 +205,7 @@ import { LicenceRepresentativeFormComponent } from '@components/licence-represen
 import { BusinessPlanComponent } from './components/applications/application/tabs/business-plan/business-plan.component';
 import { LgInfoPanelComponent } from './components/applications/application/tabs/lg-info-panel/lg-info-panel.component';
 import { AdditionalPidsComponent } from './components/applications/application/tabs/additional-pids/additional-pids.component';
+import { TermsAndConditionsDataService } from '@services/terms-and-condtions-data.service';
 
 
 @NgModule({
@@ -448,6 +449,7 @@ import { AdditionalPidsComponent } from './components/applications/application/t
     EligibilityFormDataService,
     SurveyDataService,
     TiedHouseConnectionsDataService,
+    TermsAndConditionsDataService,
     EstablishmentWatchWordsService,
     Title,
     UserDataService,
