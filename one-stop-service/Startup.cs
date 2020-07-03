@@ -126,16 +126,10 @@ namespace Gov.Lclb.Cllb.OneStopService
             });
 
             // Add a memory cache
-            services.AddMemoryCache();
-
-            // Build an intermediate service provider
-            var sp = services.BuildServiceProvider();
-
-            // Resolve the services from the service provider
-            var cache = sp.GetService<IMemoryCache>();
+            var x = services.AddMemoryCache();
 
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
-            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _configuration, _env, cache));
+            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _configuration, _env));
 
 
             services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("OneStopUtils"));
@@ -236,7 +230,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                      )
                     .CreateLogger();
 
-                
+
 
             }
             else
@@ -270,7 +264,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             });
 
-            
+
 
             // , serializer: SoapSerializer.XmlSerializer, caseInsensitivePath: true
 
@@ -327,13 +321,18 @@ namespace Gov.Lclb.Cllb.OneStopService
             // by positioning this after the health check, no need to filter out health checks from request logging.
             app.UseSerilogRequestLogging();
 
-            
-
             app.UseMvc();
 
-            
-
             app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
+
+            // tell the soap service about the cache.
+            using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+
+                var memoryCache = serviceScope.ServiceProvider.GetService<IMemoryCache>();
+                var soap = serviceScope.ServiceProvider.GetService<IReceiveFromHubService>();
+                soap.SetCache(memoryCache);
+            }
         }
 
             /// <summary>

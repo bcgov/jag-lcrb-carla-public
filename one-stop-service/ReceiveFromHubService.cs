@@ -24,12 +24,17 @@ namespace Gov.Lclb.Cllb.OneStopService
         private readonly IConfiguration Configuration;
         private readonly IWebHostEnvironment _env;
 
-        public ReceiveFromHubService(IDynamicsClient dynamicsClient, IConfiguration configuration, IWebHostEnvironment env, IMemoryCache cache)
+        public ReceiveFromHubService(IDynamicsClient dynamicsClient, IConfiguration configuration, IWebHostEnvironment env)
         {
             _dynamicsClient = dynamicsClient;
-            _cache = cache;
+            
             Configuration = configuration;
             _env = env;
+        }
+
+        public void SetCache (IMemoryCache cache)
+        {
+            _cache = cache;
         }
 
         /// <summary>
@@ -146,7 +151,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 Log.Logger.Information($"Reading cache value for key {cacheKey}");
 
                 _cache.TryGetValue(cacheKey, out suffixLimit);               
-                 
+                
                 // sanity check
                 if (currentSuffix < suffixLimit)
                 {
@@ -235,5 +240,7 @@ namespace Gov.Lclb.Cllb.OneStopService
     {
         [OperationContract]
         string receiveFromHub(string inputXML);
+
+        void SetCache(IMemoryCache cache);
     }
 }
