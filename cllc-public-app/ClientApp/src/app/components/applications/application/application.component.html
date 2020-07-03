@@ -935,34 +935,11 @@
 
         </div>
 
-        <div class="ngtest-zoning" *ngIf="showZoning()">
-          <hr>
-          <label for="">Proof of Zoning</label>
-          <br>
-          <section>
-            <p>Please provide proof from your local government that the proposed location has been:</p>
-            <ul>
-              <li>appropriately zoned to operate a {{application?.licenseType}} licence, or</li>
-              <li>is in the process of being appropriately zoned</li>
-            </ul>
-            <p>
-              You are responsible for obtaining the appropriate zoning from your local
-              government to operate a {{application?.licenseType}} licence at your proposed location.
-              Prior to issuing a licence at the new location, LCRB will require confirmation
-              from your local government that the location is zoned appropriately to operate
-              a WS licence.
-            </p>
-          </section>
-          <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Zoning" fileTypes="FILE MUST BE IN PDF FORMAT."
-              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-              [enableFileDeletion]="application?.applicationType?.proofofZoning === FormControlState.Show"
-              [multipleFiles]="false" entityName="application" [useDocumentTypeForName]="true"
-              (numberOfUploadedFiles)="uploadedZoningDocuments = $event" [entityId]="applicationId"
-              [uploadHeader]="'TO UPLOAD ZONING DOCUMENTS, DRAG FILES HERE OR'">
-            </app-file-uploader>
-          </section>
-        </div>
+        <!-- Proof of Zoning-->
+        <section *ngIf="showZoning()">
+          <app-proof-of-zoning *ngIf="application" [application]="application">
+          </app-proof-of-zoning>
+        </section>
 
         <!-- Hours of Sale -->
         <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
@@ -1521,8 +1498,6 @@
           </p>
         </section>
 
-
-
         <!-- Next Steps -->
         <h3 *ngIf="htmlContent?.nextSteps" class="blue-header">
           What happens next?
@@ -1533,7 +1508,7 @@
 
         <!-- Proceed to Pay-->
 
-        <section class="d-flex" style="margin-top:15px;" *ngIf="!isOpenedByLGForApproval && !isRAS()">
+        <section class="d-flex" style="margin-top:15px;" *ngIf="!isOpenedByLGForApproval && !isRAS() && !application?.applicationType?.isShowLGINApproval ">
 
           <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">

@@ -1,0 +1,28 @@
+<div class="ngtest-zoning" [formGroup]="form">
+    <hr>
+    <label for="">Proof of Zoning</label>
+    <br>
+    <section *ngIf="">
+      <p>Please provide proof from your local government that the proposed location has been:</p>
+      <ul>
+        <li>appropriately zoned to operate a {{application?.licenseType}} licence, or</li>
+        <li>is in the process of being appropriately zoned</li>
+      </ul>
+      <p>
+        You are responsible for obtaining the appropriate zoning from your local
+        government to operate a {{application?.licenseType}} licence at your proposed location.
+        Prior to issuing a licence at the new location, LCRB will require confirmation
+        from your local government that the location is zoned appropriately to operate
+        a WS licence.
+      </p>
+    </section>
+    <section>
+      <app-file-uploader *ngIf="application?.id" documentType="Zoning" fileTypes="FILE MUST BE IN PDF FORMAT."
+        [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
+        [enableFileDeletion]="application?.applicationType?.proofofZoning === FormControlState.Show"
+        [multipleFiles]="false" entityName="application" [useDocumentTypeForName]="true"
+        (numberOfUploadedFiles)="uploadedZoningDocuments = $event" [entityId]="application?.id"
+        [uploadHeader]="'TO UPLOAD ZONING DOCUMENTS, DRAG FILES HERE OR'">
+      </app-file-uploader>
+    </section>
+  </div>
