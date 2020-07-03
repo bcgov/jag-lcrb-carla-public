@@ -129,7 +129,8 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
       autoFocus: true,
       width: '400px',
       data: {
-        category
+        category,
+        application: this.application
       }
     };
 
@@ -150,11 +151,13 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
 export class LGDecisionDialogComponent {
 
   category: string;
+  application: Application;
 
   constructor(
     public dialogRef: MatDialogRef<LGDecisionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.category = data.category;
+    this.application = data.application;
   }
 
   accept() {
