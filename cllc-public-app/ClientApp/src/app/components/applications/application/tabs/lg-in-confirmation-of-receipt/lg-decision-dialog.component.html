@@ -1,6 +1,16 @@
-<p *ngIf="category === 'OptOut'">
-    You are opting out of providing comment on this application. LCRB will seek public comment. Do you wish to proceed?
-</p>
+<ng-container *ngIf="category === 'OptOut'">
+    <p>
+        You are opting out of providing comment on this application. LCRB will seek public comment. Do you wish to proceed?
+    </p>
+    <section>
+        <app-file-uploader *ngIf="application?.id" documentType="OptOut Reason"
+            (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [maxNumberOfFiles]="200"
+            fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="application?.id"
+            [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #OptOutDocuments>
+        </app-file-uploader>
+    </section>
+</ng-container>
+
 <p *ngIf="category === 'Reject'">
     You are about to reject this application. This process cannot be undone. Do you wish to proceed?
 </p>
