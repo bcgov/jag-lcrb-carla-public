@@ -34,6 +34,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? ExpiryDate { get; set; }
 
         public List<string> Endorsements { get; set; }
+        public List<string> TermsAndConditions { get; set; }
 
         public string RepresentativeFullName { get; set; }
         public string RepresentativePhoneNumber { get; set; }
