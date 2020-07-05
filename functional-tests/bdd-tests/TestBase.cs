@@ -275,8 +275,6 @@ namespace bdd_tests
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
 
-            System.Threading.Thread.Sleep(9000);
-
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
             estabName.SendKeys(estName);
@@ -387,8 +385,6 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
-
-            System.Threading.Thread.Sleep(9000);
 
             // enter the establishment name
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
@@ -566,8 +562,6 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "test2@automation.com";
-
-            System.Threading.Thread.Sleep(9000);
 
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
@@ -776,7 +770,7 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
                 }
 
-                System.Threading.Thread.Sleep(7000);
+                //System.Threading.Thread.Sleep(7000);
 
                 // click on Dashboard link
                 ClickOnDashboard();
@@ -784,7 +778,7 @@ namespace bdd_tests
                 // click on the review organization information button
                 ClickReviewOrganizationInformation();
 
-                System.Threading.Thread.Sleep(7000);
+                //System.Threading.Thread.Sleep(7000);
 
                 // check that the director name has been updated
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedFirstName')]")).Displayed);
@@ -919,8 +913,6 @@ namespace bdd_tests
 
             // pay the licence fee
             MakePayment();
-
-            System.Threading.Thread.Sleep(7000);
 
             if (feeType == "Cannabis")
             {
@@ -1168,12 +1160,12 @@ namespace bdd_tests
             // click on the Submit & Pay button
             ClickOnSubmitButton();
 
-            System.Threading.Thread.Sleep(3000);
+            //System.Threading.Thread.Sleep(3000);
 
             // pay for the structural change application
             MakePayment();
 
-            System.Threading.Thread.Sleep(7000);
+            //System.Threading.Thread.Sleep(7000);
 
             // confirm correct payment amount
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$440.00')]")).Displayed);
@@ -1211,7 +1203,7 @@ namespace bdd_tests
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
 
-            System.Threading.Thread.Sleep(7000);
+            //System.Threading.Thread.Sleep(7000);
 
             ClickOnDashboard();
 
@@ -1278,7 +1270,7 @@ namespace bdd_tests
             // pay for the branding change application
             MakePayment();
 
-            System.Threading.Thread.Sleep(7000);
+            //System.Threading.Thread.Sleep(7000);
 
             // confirm correct payment amount	
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
@@ -1337,7 +1329,7 @@ namespace bdd_tests
             // pay for the relocation application
             MakePayment();
 
-            System.Threading.Thread.Sleep(7000);
+            //System.Threading.Thread.Sleep(7000);
 
             // confirm correct payment amount
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
@@ -2650,7 +2642,7 @@ namespace bdd_tests
             Page Title: Apply for a cannabis licence
             */
 
-            System.Threading.Thread.Sleep(7000);
+            //System.Threading.Thread.Sleep(7000);
 
             ClickOnDashboard();
         }
@@ -2671,8 +2663,6 @@ namespace bdd_tests
             /* 
             Page Title: Catering Licence Application
             */
-
-            System.Threading.Thread.Sleep(9000);
 
             // select 'Yes' for previous liquor licence
             NgWebElement previousLicence = ngDriver.FindElement(By.Id("mat-button-toggle-1-button"));
