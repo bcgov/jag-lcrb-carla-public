@@ -185,12 +185,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (securityScreeningCategorySummarycannabisSummary.OutstandingItems == null)
                     {
                         securityScreeningCategorySummarycannabisSummary.OutstandingItems = new List<SecurityScreeningStatusItem>();
-                    }
-                    if (!addedContacts.Any(c => c == newItem.ContactId))
+                    }   
+                    if (newItem.ContactId == null)
                     {
-                        addedContacts.Add(newItem.ContactId);
                         securityScreeningCategorySummarycannabisSummary.OutstandingItems.Add(newItem);
                     }
+                    else
+                    {
+                        if (!addedContacts.Any(c => c == newItem.ContactId))
+                        {
+                            addedContacts.Add(newItem.ContactId);
+                            securityScreeningCategorySummarycannabisSummary.OutstandingItems.Add(newItem);
+                        }
+                    }                    
                 }
             }
             if (legalEntity.children != null)
