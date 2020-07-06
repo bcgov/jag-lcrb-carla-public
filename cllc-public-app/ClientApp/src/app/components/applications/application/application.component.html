@@ -229,7 +229,7 @@
 
               <h3 class="blue-header">Local Government/Indigenous Nation and Police Jurisdiction </h3>
               <div class="content-bottom">
-                <p>Enter the local government (or indigenous nation) and police jurisdiction where the establishment
+                <p>Enter the local government (or Indigenous Nation) and police jurisdiction where the establishment
                   will be located. Suggestions will be provided after you type the first three characters of the name.
                 </p>
 
@@ -243,21 +243,26 @@
                     </mat-option>
                   </mat-autocomplete>
                 </app-field>
-
-                <section *ngIf="form.get('indigenousNation').value.websiteUrl">
-                  Please review the information at
-                  <a target="blank"
-                    [href]="form.get('indigenousNation').value.websiteUrl">{{form.get('indigenousNation').value.websiteUrl}}</a>
-                  to ensure you have met the requirements of this application with your local government.
+                <section>
+                  <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+                  <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+                    <section *ngIf="form.get('indigenousNation').value.websiteUrl">
+                      <p><strong>Please review the information at
+                        <a target="blank"
+                          [href]="form.get('indigenousNation').value.websiteUrl">{{form.get('indigenousNation').value.websiteUrl}}</a>
+                        to ensure you meet the requirements of this application with your local government. You may need to contact them
+                        prior to submitting to ensure your successful submission.</strong></p>
+                    </section>
+                
+                    <section *ngIf="!form.get('indigenousNation').value.id && !form.get('indigenousNation').value.websiteUrl">
+                      <p><strong>Please ensure you have made yourself familiar with the application requirements for this local
+                          government (or Indigenous Nation) prior to submitting your application. You may need to contact them prior to submitting to ensure your 
+                          successful submission.</strong></p>
+                    </section>
+                  </div>
                 </section>
 
-                <section
-                  *ngIf="!form.get('indigenousNation').value.id && !form.get('indigenousNation').value.websiteUrl">
-                  please ensure you have made yourself familiar with the application requirements for this local
-                  government
-                </section>
-
-
+                <br><br>
                 <app-field label="Police Jurisdiction" [required]="false"
                   [valid]="isValidOrNotTouched('policeJurisdiction')" errorMessage="Please select value">
                   <input type="text" class="form-control" style="width: 500px;" placeholder=""
@@ -1525,13 +1530,34 @@
         </section>
 
         <section appRemoveIfFeatureOff="LGApprovals" class="ngtest-opened-by-lg" *ngIf="isOpenedByLGForApproval">
-          <app-lg-in-confirmation-of-receipt *ngIf="application" [application]="application"
-            [htmlContent]="htmlContent">
+          <app-lg-in-confirmation-of-receipt *ngIf="application" [application]="application" [htmlContent]="htmlContent">
           </app-lg-in-confirmation-of-receipt>
+        </section>
+        
+        <section *ngIf="application?.applicationType?.isShowLGINApproval 
+                && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')">
+          <br>
+          <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+          <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+            <section class="ngtest-preamble-content">
+              Your application will now be submitted to your local government/Indigenous Nation for their review and/or comment. Please
+              ensure
+              you have reviewed
+              their policy <span *ngIf="form.get('indigenousNation').value.websiteUrl">(<a
+                  [href]="form.get('indigenousNation').value.websiteUrl"
+                  target="_blank">{{this.form.get('indigenousNation').value.websiteUrl}}</a>)</span>
+              to ensure your successful submission.
+            </section>
+            <br>
+            <p><i class="fa fa-save" style="margin-right: 10px;"></i>If you leave this page, the information you input
+              will be saved. You can continue later from the dashboard.</p>
+          </div>
         </section>
 
 
+
         <!-- button section when  LGApprovals is enabled  when it's the applicant opening the application -->
+        
         <section appRemoveIfFeatureOff="LGApprovals" *ngIf="!isOpenedByLGForApproval"
           style="position: relative; margin-top: 20px;">
           <button *ngIf="account?.businessType !== 'LocalGovernment '" class="btn btn-secondary"
@@ -1553,7 +1579,7 @@
             *ngIf="application?.applicationType?.isShowLGINApproval 
                         && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')"
             class=" btn btn-primary" (click)="submitForLGINApproval()">
-            Submit For LG/IN Approval
+            SUBMIT FOR LG/IN REVIEW OR COMMENT
           </button>
 
           <!-- show if the LG has approved the application -->
