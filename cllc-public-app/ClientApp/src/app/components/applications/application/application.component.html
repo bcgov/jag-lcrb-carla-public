@@ -30,6 +30,15 @@
           <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
         </section>
 
+        <!-- Local Government advise -->
+        <section *ngIf="form.get('indigenousNation').value.websiteUrl && showFormControl(application?.applicationType?.lGandPoliceSelectors) && form.get('assignedLicence.id').value"
+        appRemoveIfFeatureOff="LGApprovals">
+          Please review the information at
+          <a target="blank"
+            [href]="form.get('indigenousNation').value.websiteUrl">{{form.get('indigenousNation').value.websiteUrl}}</a>
+          to ensure you have met the requirements of this application with your local government.
+        </section>
+
         <!-- Establishment Name -->
         <section class="ngtest-property-details" *ngIf="application?.applicationType?.showPropertyDetails">
           <h3 class="blue-header">ESTABLISHMENT DETAILS</h3>
@@ -140,7 +149,8 @@
               *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
               <p *ngIf="application?.licenseType !== 'Rural Agency Store'">The proposed location of the licenced
                 establishment:</p>
-              <p *ngIf="application?.licenseType === 'Rural Agency Store'">Include any information necessary for finding the
+              <p *ngIf="application?.licenseType === 'Rural Agency Store'">Include any information necessary for finding
+                the
                 site (i.e. route number, mile marker, etc.).</p>
               <address class="row">
                 <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
@@ -219,33 +229,49 @@
 
               <h3 class="blue-header">Local Government/Indigenous Nation and Police Jurisdiction </h3>
               <div class="content-bottom">
-              <p>Enter the local government (or indigenous nation) and police jurisdiction where the establishment will be located. Suggestions will be provided after you type the first three characters of the name.</p>
+                <p>Enter the local government (or indigenous nation) and police jurisdiction where the establishment
+                  will be located. Suggestions will be provided after you type the first three characters of the name.
+                </p>
 
-              <app-field label="Local Government/Indigenous Nation" [required]="false"
-                [valid]="isValidOrNotTouched('indigenousNation')" errorMessage="Please select value">
-                <input type="text" class="form-control" style="width: 500px;" placeholder=""
-                  formControlName="indigenousNation" [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger>
-                <mat-autocomplete #lgAutoCompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
-                  <mat-option *ngFor="let item of autocompleteLocalGovernmemts" [value]="item">
-                    {{item.name}}
-                  </mat-option>
-                </mat-autocomplete>
-              </app-field>
-
-              <app-field label="Police Jurisdiction" [required]="false"
-                [valid]="isValidOrNotTouched('policeJurisdiction')" errorMessage="Please select value">
-                <input type="text" class="form-control" style="width: 500px;" placeholder=""
-                  formControlName="policeJurisdiction" [matAutocomplete]="pdAutocompleteBox" #pdAutoCompleteTrigger>
-                <div class="position-relative">
-
-                  <mat-autocomplete #pdAutocompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
-                    <mat-option *ngFor="let item of autocompletePoliceDurisdictions" [value]="item">
+                <app-field label="Local Government/Indigenous Nation" [required]="false"
+                  [valid]="isValidOrNotTouched('indigenousNation')" errorMessage="Please select value">
+                  <input type="text" class="form-control" style="width: 500px;" placeholder=""
+                    formControlName="indigenousNation" [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger>
+                  <mat-autocomplete #lgAutoCompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
+                    <mat-option *ngFor="let item of autocompleteLocalGovernmemts" [value]="item">
                       {{item.name}}
                     </mat-option>
                   </mat-autocomplete>
-                </div>
-              </app-field>
-            </div>
+                </app-field>
+
+                <section *ngIf="form.get('indigenousNation').value.websiteUrl">
+                  Please review the information at
+                  <a target="blank"
+                    [href]="form.get('indigenousNation').value.websiteUrl">{{form.get('indigenousNation').value.websiteUrl}}</a>
+                  to ensure you have met the requirements of this application with your local government.
+                </section>
+
+                <section
+                  *ngIf="!form.get('indigenousNation').value.id && !form.get('indigenousNation').value.websiteUrl">
+                  please ensure you have made yourself familiar with the application requirements for this local
+                  government
+                </section>
+
+
+                <app-field label="Police Jurisdiction" [required]="false"
+                  [valid]="isValidOrNotTouched('policeJurisdiction')" errorMessage="Please select value">
+                  <input type="text" class="form-control" style="width: 500px;" placeholder=""
+                    formControlName="policeJurisdiction" [matAutocomplete]="pdAutocompleteBox" #pdAutoCompleteTrigger>
+                  <div class="position-relative">
+
+                    <mat-autocomplete #pdAutocompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
+                      <mat-option *ngFor="let item of autocompletePoliceDurisdictions" [value]="item">
+                        {{item.name}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </div>
+                </app-field>
+              </div>
             </section>
 
             <!-- Store Contact Info -->
@@ -307,7 +333,8 @@
                       At the time the licence is issued, the owner of the business will be:
                       <ul>
                         <li>The owner of the place or premises that forms the establishment, or</li>
-                        <li>The lessee of the place or premises that forms the establishment (term no less than 12 months).</li>
+                        <li>The lessee of the place or premises that forms the establishment (term no less than 12
+                          months).</li>
                       </ul>
                     </mat-checkbox>
                   </div>
@@ -321,7 +348,7 @@
         </section>
 
         <!-- Business Plan for Manufacturers-->
-        
+
         <section *ngIf="application?.applicationType?.name === 'Manufacturer'">
           <app-business-plan *ngIf="application" [application]="application">
           </app-business-plan>
@@ -394,8 +421,8 @@
                         [required]="formField.required">
                         <input type="text" style="width: 200px; background-color: #fff;"
                           [formControlName]="formField.datafieldname" [id]="formField.datafieldname"
-                          placeholder="yyyy-mm-dd" readonly class="form-control"
-                          [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
+                          placeholder="yyyy-mm-dd" readonly class="form-control" [matDatepicker]="picker"
+                          (focus)="picker.open()" (click)="picker.open()">
                         <mat-datepicker #picker></mat-datepicker>
                       </app-field>
 
@@ -449,25 +476,26 @@
         <section *ngIf="application?.applicationType?.showDescription1">
           <h3 class="blue-header">DESCRIPTION OF PROPOSED CHANGE</h3>
           <div *ngIf="application?.applicationType?.name != 'Picnic Area Endorsement'">
-          <div class="padded-section">
-            <app-field label="Please briefly outline the  proposed change" [required]="true" [isFullWidth]="true"
-              [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
-              errorMessage="Please enter a description ">
-              <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000" minlength="10"
-                id="description1"></textarea>
-            </app-field>
+            <div class="padded-section">
+              <app-field label="Please briefly outline the  proposed change" [required]="true" [isFullWidth]="true"
+                [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
+                errorMessage="Please enter a description ">
+                <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000" minlength="10"
+                  id="description1"></textarea>
+              </app-field>
+            </div>
           </div>
-        </div>
-        <div *ngIf="application?.applicationType?.name === 'Picnic Area Endorsement'">
-          <div class="padded-section">
-            <app-field label="Describe proposed change(s) such as moving, adding or changing approved picnic area(s). Including any increase in capacity." [required]="true" [isFullWidth]="true"
-              [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
-              errorMessage="Please enter a description ">
-              <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000" minlength="10"
-                id="description1"></textarea>
-            </app-field>
+          <div *ngIf="application?.applicationType?.name === 'Picnic Area Endorsement'">
+            <div class="padded-section">
+              <app-field
+                label="Describe proposed change(s) such as moving, adding or changing approved picnic area(s). Including any increase in capacity."
+                [required]="true" [isFullWidth]="true" [showChevrons]="false"
+                [valid]="isValidOrNotTouched('description1')" errorMessage="Please enter a description ">
+                <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000" minlength="10"
+                  id="description1"></textarea>
+              </app-field>
+            </div>
           </div>
-        </div>
         </section>
 
         <!-- Photos or Renderings of Signage-->
@@ -629,7 +657,8 @@
                   </ul>
                   <p><strong>Please confirm:</strong></p>
                   <mat-checkbox formControlName="IsReadyProductNotVisibleOutside">
-                    No cannabis products, accessories, packages or labelling are visible from outside the cannabis retail store
+                    No cannabis products, accessories, packages or labelling are visible from outside the cannabis
+                    retail store
                   </mat-checkbox>
                 </section>
                 <img src="assets/floor-plan-example.png" width="300" alt="Floor plan"
@@ -772,7 +801,8 @@
 
           </div>
 
-          <div *ngIf="application?.licenseType != 'Cannnabis Retail Store' && application?.applicationType?.name != 'Picnic Area Endorsement'">
+          <div
+            *ngIf="application?.licenseType != 'Cannnabis Retail Store' && application?.applicationType?.name != 'Picnic Area Endorsement'">
             <p>A scaled site plan must show the following: </p>
             <ul>
               <li>location of the front entrance door of the proposed establishment</li>
@@ -783,9 +813,11 @@
             </ul>
           </div>
           <div *ngIf="application?.applicationType?.name === 'Picnic Area Endorsement'">
-            <p>Please provide a site plan (8.5" x 11") of your property showing the location and size of the existing and/or proposed picnic area(s) and the following:</p>
+            <p>Please provide a site plan (8.5" x 11") of your property showing the location and size of the existing
+              and/or proposed picnic area(s) and the following:</p>
             <ul>
-              <li>all buildings and their uses (i.e. storage, manufacturing buildings, personal residence, garage, other businesses, etc.)</li>
+              <li>all buildings and their uses (i.e. storage, manufacturing buildings, personal residence, garage, other
+                businesses, etc.)</li>
               <li>all licensed areas (other endorsements or licences approved by the Branch)</li>
               <li>vineyards/orchards/agricultural crops</li>
               <li>private and public roadways and parking areas</li>
@@ -805,7 +837,7 @@
         </div>
 
         <div *ngIf="showSitePhotos()">
-          
+
           <hr><br>
           <label for="">Attach a photo of the proposed picnic area(s), including the bounding (if in place):</label>
 
@@ -1576,9 +1608,10 @@
             </div>
           </div>
         </section>
-        
+
         <section appRemoveIfFeatureOff="LGApprovals" class="ngtest-opened-by-lg" *ngIf="isOpenedByLGForApproval">
-          <app-lg-in-confirmation-of-receipt *ngIf="application" [application]="application" [htmlContent]="htmlContent">
+          <app-lg-in-confirmation-of-receipt *ngIf="application" [application]="application"
+            [htmlContent]="htmlContent">
           </app-lg-in-confirmation-of-receipt>
         </section>
 
@@ -1601,7 +1634,8 @@
           </button>
 
           <!-- show before submitting to LG. Also show if LG rejected the application -->
-          <button *ngIf="application?.applicationType?.isShowLGINApproval 
+          <button
+            *ngIf="application?.applicationType?.isShowLGINApproval 
                         && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')"
             class=" btn btn-primary" (click)="submitForLGINApproval()">
             Submit For LG/IN Approval
@@ -1860,14 +1894,14 @@
   <div class="dashboard-spacing" style="position: relative" appRemoveIfFeatureOff="IndigenousNation">
     <div [ngBusy]="busy"></div>
     <div class="row">
-      <div class="col-md-7 col-sm-12">        
+      <div class="col-md-7 col-sm-12">
         <ng-container *ngTemplateOutlet="applicationContent"></ng-container>
       </div>
 
       <div class="col-md-4 col-sm-12">
         <h1>&nbsp;</h1>
 
-        <ng-container  *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
+        <ng-container *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
           <ng-container *ngTemplateOutlet="indigenousContent"></ng-container>
         </ng-container>
 
@@ -1876,7 +1910,7 @@
           </app-lg-info-panel>
         </section>
 
-        </div>
+      </div>
     </div>
   </div>
 
