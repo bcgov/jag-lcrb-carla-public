@@ -949,9 +949,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 // Indigenous nation association
-                if (!string.IsNullOrEmpty(item?.IndigenousNation?.id))
+                if (!string.IsNullOrEmpty(item?.IndigenousNation?.Id))
                 {
-                    adoxioApplication.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", item.IndigenousNation.id);
+                    adoxioApplication.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", item.IndigenousNation.Id);
                 }
                 else
                 {
