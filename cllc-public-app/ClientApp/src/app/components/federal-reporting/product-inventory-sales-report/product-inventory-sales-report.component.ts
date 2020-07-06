@@ -17,6 +17,8 @@ export class ProductInventorySalesReportComponent implements OnInit {
   ngOnInit() {
     if (this.productForm.get('product').value === 'Seeds') {
       this.productForm.setValidators([ClosingInventoryValidator, ClosingValueValidator, ClosingSeedsTotalValidator, SalesValidator, ]);
+    } else if (this.productForm.get('product').value === 'Vegetative Cannabis') {
+      this.productForm.setValidators([ClosingInventoryValidator, ClosingValueValidator, SalesValidator, ]);
     } else {
       this.productForm.setValidators([ClosingInventoryValidator, ClosingValueValidator, ClosingWeightValidator, SalesValidator]);
     }
