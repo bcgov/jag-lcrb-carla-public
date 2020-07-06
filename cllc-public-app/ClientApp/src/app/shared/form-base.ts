@@ -14,6 +14,8 @@ export class ApplicationHTMLContent {
     beforeStarting: string;
     nextSteps: string;
     LocalGovernmentApproval: string;
+    floorPlan: string;
+    sitePlan: string;
 }
 
 export class FormBase implements OnDestroy {
@@ -32,6 +34,8 @@ export class FormBase implements OnDestroy {
                 beforeStarting: this.getApplicationContent('BeforeStarting'),
                 nextSteps: this.getApplicationContent('NextSteps'),
                 LocalGovernmentApproval: this.getApplicationContent('LocalGovernmentApproval'),
+                floorPlan: this.getApplicationContent('FloorPlan'),
+                sitePlan: this.getApplicationContent('SitePlan'),
             };
         }
     }
