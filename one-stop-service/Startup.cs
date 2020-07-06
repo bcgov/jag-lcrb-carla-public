@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -124,6 +125,8 @@ namespace Gov.Lclb.Cllb.OneStopService
                 options.AllowSynchronousIO = true;
             });
 
+            // Add a memory cache
+            var x = services.AddMemoryCache();
 
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
             services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _configuration, _env));
@@ -191,7 +194,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory, IMemoryCache cache)
         {
 
             // enable Splunk logger using Serilog
@@ -227,7 +230,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                      )
                     .CreateLogger();
 
-                
+
 
             }
             else
@@ -261,7 +264,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             });
 
-            
+
 
             // , serializer: SoapSerializer.XmlSerializer, caseInsensitivePath: true
 
@@ -298,7 +301,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             if (!string.IsNullOrEmpty(_configuration["ENABLE_HANGFIRE_JOBS"]))
             {
-                SetupHangfireJobs(app);
+                SetupHangfireJobs(app, cache);
             }
 
             app.UseAuthentication();
@@ -318,13 +321,18 @@ namespace Gov.Lclb.Cllb.OneStopService
             // by positioning this after the health check, no need to filter out health checks from request logging.
             app.UseSerilogRequestLogging();
 
-            
-
             app.UseMvc();
 
-            
-
             app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
+
+            // tell the soap service about the cache.
+            using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+
+                var memoryCache = serviceScope.ServiceProvider.GetService<IMemoryCache>();
+                var soap = serviceScope.ServiceProvider.GetService<IReceiveFromHubService>();
+                soap.SetCache(memoryCache);
+            }
         }
 
             /// <summary>
@@ -332,7 +340,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             /// </summary>
             /// <param name="app"></param>
             /// <param name="loggerFactory"></param>
-            private void SetupHangfireJobs(IApplicationBuilder app)
+            private void SetupHangfireJobs(IApplicationBuilder app, IMemoryCache cache)
         {
 
             Log.Logger.Information("Starting setup of Hangfire job ...");
@@ -344,7 +352,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                     Log.Logger.Information("Creating Hangfire jobs for License issuance check ...");
 
                     
-                    RecurringJob.AddOrUpdate(() => new OneStopUtils(_configuration).CheckForNewLicences(null), Cron.Hourly());
+                    RecurringJob.AddOrUpdate(() => new OneStopUtils(_configuration, cache).CheckForNewLicences(null), Cron.Hourly());
 
                     Log.Logger.Information("Hangfire License issuance check jobs setup.");
                 }
