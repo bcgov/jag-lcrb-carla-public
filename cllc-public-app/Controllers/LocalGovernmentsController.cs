@@ -38,7 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("autocomplete")]
         public ActionResult GetLocalGovernments(string name)
         {
-            var results = new List<AutoCompleteListItem>();
+            var results = new List<LGListItem>();
 
             try
             {
@@ -49,14 +49,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     name = name.Replace("'", "''");
                     filter = $"contains(adoxio_name,'{name}')";
                 }
-                
+
                 var localGovernments = _dynamicsClient.Localgovindigenousnations.Get(filter: filter).Value;
                 foreach (var lg in localGovernments)
                 {
-                    var item = new AutoCompleteListItem()
+                    var accountFilter = $"_adoxio_lginlinkid_value eq {lg.AdoxioLocalgovindigenousnationid} and websiteurl ne null";
+                    var linkedAccount = _dynamicsClient.Accounts.Get(filter: accountFilter).Value.FirstOrDefault();
+                    var item = new LGListItem()
                     {
-                       Id = lg.AdoxioLocalgovindigenousnationid,
-                        Name = lg.AdoxioName
+                        Id = lg.AdoxioLocalgovindigenousnationid,
+                        Name = lg.AdoxioName,
+                        WebsiteUrl = linkedAccount?.Websiteurl
                     };
                     results.Add(item);
                 }
@@ -73,9 +76,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
     }
 
-    public class AutoCompleteListItem
+    public class LGListItem
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public string WebsiteUrl { get; set; }
     }
 }
