@@ -27,7 +27,6 @@ export const LIQUOR_RENEWAL_LICENCE_TYPE_NAME = 'liquor';
 
 
 const ACTIVE = 'Active';
-// const PAYMENT_REQUIRED = 'Payment Required';
 const RENEWAL_DUE = 'Renewal Due';
 
 @Component({
@@ -44,11 +43,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     @Input() available: boolean;
     @Input() licenceType: string;
     @Input() licences: ApplicationLicenseSummary[];
+
     constructor(
-        private applicationDataService: ApplicationDataService,
         private licenceDataService: LicenseDataService,
         private router: Router,
-        private store: Store<AppState>,
         private snackBar: MatSnackBar,
         private paymentService: PaymentDataService,
         private establishmentService: EstablishmentDataService,
@@ -60,16 +58,17 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     }
 
     ngOnInit() {
-        this.licences.forEach((licence) => {
-            this.licenceForms[licence.licenseId] = this.fb.group({
-                phone: [licence.establishmentPhoneNumber],
-                email: [licence.establishmentEmail]
-              });
-            this.termsAndConditionsService.getTermsAndCondtions(licence.licenseId)
-              .subscribe((terms) => {
-                licence.termsAndConditions = terms;
-              })
-        });
+      this.licences.forEach((licence) => {
+          this.licenceForms[licence.licenseId] = this.fb.group({
+              phone: [licence.establishmentPhoneNumber],
+              email: [licence.establishmentEmail]
+            });
+          this.termsAndConditionsService.getTermsAndCondtions(licence.licenseId)
+            .subscribe((terms) => {
+              licence.termsAndConditions = terms;
+              licence.headerRowSpan += 1;
+            })
+      });
     }
 
     updateEmail(licenceId: string, establishmentId: string, event: any) {

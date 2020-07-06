@@ -22,7 +22,7 @@
             </tr>
             <ng-container *ngFor="let item of licences; let i = index;">
                 <tr [formGroup]="licenceForms[item.licenseId]" style="border: 1px solid #ccc; ">
-                <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
+                <td style="background-color: #E1E8F2; padding: 10px; width: 15px;" [attr.rowspan]="item.headerRowSpan"><span>{{i+1}}</span></td>
 
                 <td style="padding: 10px;">
                     <div>
@@ -70,7 +70,6 @@
                 </td>
 
                 <td style="padding: 10px;">
-                    
                     <div *ngIf="item?.licenceTypeName !== 'Marketing'">
                         {{item?.establishmentAddressStreet}} <br>
                         {{item?.establishmentAddressCity}} BC {{item?.establishmentAddressPostalCode}}<br>
@@ -156,7 +155,6 @@
                         </div>
                     </ng-container>
                 </td>
-
 
                 <td style="background-color: #E1E8F2; padding: 10px;">
                     <!-- 3rd Party Operators cannot submit  changes -->

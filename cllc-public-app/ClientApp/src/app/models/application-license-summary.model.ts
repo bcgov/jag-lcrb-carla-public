@@ -62,6 +62,8 @@ export class ApplicationLicenseSummary {
   representativeCanRepresentAtHearings: boolean;
 
   termsAndConditions: TermsAndConditions[];
+
+  headerRowSpan: number;
 }
 
 export interface LicenceActionApplication {
