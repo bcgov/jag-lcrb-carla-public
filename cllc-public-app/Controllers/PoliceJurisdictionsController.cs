@@ -72,4 +72,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(results);
         }
     }
+
+    public class AutoCompleteListItem {
+        public string Id { get; set; }
+        public string Name { get; set; }
+    }
 }
