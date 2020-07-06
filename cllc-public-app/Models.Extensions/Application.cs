@@ -509,7 +509,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
 
             if(dynamicsApplication.AdoxioLocalgovindigenousnationid != null){
+                var filter = $"_adoxio_lginlinkid_value eq {dynamicsApplication.AdoxioLocalgovindigenousnationid.AdoxioLocalgovindigenousnationid} and websiteurl ne null";
+                var linkedAccount = (await dynamicsClient.Accounts.GetAsync(filter: filter)).Value.FirstOrDefault();
                 applicationVM.IndigenousNation = dynamicsApplication.AdoxioLocalgovindigenousnationid.ToViewModel();
+
+                if(linkedAccount != null)
+                {
+                    applicationVM.IndigenousNation.WebsiteUrl = linkedAccount.Websiteurl;
+                }
             }
 
             applicationVM.PrevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!applicationVM.IsSubmitted);
