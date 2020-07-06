@@ -598,76 +598,17 @@
           </section>
         </div>
 
-        <div class="ngtest-floor-plan" *ngIf="showFormControl(application?.applicationType?.floorPlan)">
-          <hr><br>
-          <label for="">Floor Plan</label>
-          <br>
-          <section *ngIf="application?.applicationType?.floorPlan === FormControlState.Show">
+        <!-- Floor Plan-->
 
-            <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-              <span>
-                A floor plan is a document, showing a view from above, of the dimensions and relationships between
-                rooms, spaces and other physical features on each floor of a structure. The document must measure at
-                least 8.5" x 11" (standard letter size). A floor plan for each level of the establishment must be
-                submitted if the proposed establishment has more than one level. Either a hand-drawn or
-                computer-generated plan is acceptable, as long as the plan is drawn to scale and is clear and legible. A
-                floor plan must not be submitted on graph paper or paper with gridlines.
-              </span>
-              <div style="display: flex; margin-top: 10px;">
-                <section>
-                  The floor plan must be submitted at the time of application and it
-                  must identify the proposed non-medical cannabis retail area(s) plus
-                  the following interior features of the establishment:
-                  <ul>
-                    <li>Each room or area labeled with its intended use and dimensions.</li>
-                    <li>Washrooms, stairs and elevators.</li>
-                    <li>Entrances and exits (including those used by staff only).</li>
-                    <li>Cannabis storage areas.</li>
-                    <li>Sales counter and cash register locations.</li>
-                    <li>Furniture and fixture layout (e.g. shelves, display cases).</li>
-                    <li>Identify the security system and other physical security features that secure the store.</li>
-                  </ul>
-                  <p><strong>Please confirm:</strong></p>
-                  <mat-checkbox formControlName="IsReadyProductNotVisibleOutside">
-                    No cannabis products, accessories, packages or labelling will be visible from outside the cannabis retail store
-                  </mat-checkbox>
-                </section>
-                <img src="assets/floor-plan-example.png" width="300" alt="Floor plan"
-                  style="margin: auto; display: block;">
-              </div>
+        <section *ngIf="showFormControl(application?.applicationType?.floorPlan)">
+          <app-floor-plan *ngIf="application" [application]="application" [htmlContent]="htmlContent">
+          </app-floor-plan>
+        </section>
 
-            </div>
-            <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
-              <p>The floor plans of the proposed establishment, which must meet the following requirements: </p>
-              <ul>
-                <li>Must be scaled, clear, legible and include room size dimensions (8.5" x 11") </li>
-                <li *ngIf="isRAS()">detail the entire premises in which the business is located, including the area
-                  where liquor will be located, entrances, exits, washrooms, storage areas, cash register area, coolers,
-                  any adjoining doors and other fixtures</li>
-                <li *ngIf="isRAS()">clearly identify any adjoining areas</li>
-                <li *ngIf="!isRAS()">Provide room size dimensions </li>
-                <li *ngIf="!isRAS()">
-                  Detail entrance, exit, washrooms, storage area, cash register area, coolers, any adjoining doors and
-                  other fixtures
-                </li>
-                <li *ngIf="!isRAS()">Clearly identify the area proposed for licensing and any adjoining unlicensed areas
-                </li>
-              </ul>
-            </div>
-          </section>
-          <p *ngIf="application?.applicationType?.floorPlan === FormControlState.Reaonly">
-            The below floor plan is on file.
-          </p>
-          <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Floor Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
-              [disableUploads]="isOpenedByLGForApproval"
-              [enableFileDeletion]="application?.applicationType?.floorPlan === FormControlState.Show"
-              [enableFileDeletion]="!isOpenedByLGForApproval" [multipleFiles]="true" entityName="application"
-              [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedFloorPlanDocuments = $event"
-              [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FLOOR PLANS, DRAG FILES HERE OR'">
-            </app-file-uploader>
-          </section>
-        </div>
+        <!--  Proposed Change Description for Structural-->
+
+        
+
         <br>
         <hr *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSStructuralChange">
         <mat-card *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSStructuralChange"
