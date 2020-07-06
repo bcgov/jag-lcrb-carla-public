@@ -726,7 +726,7 @@ namespace bdd_tests
                 uiNewDirectorLasttName.SendKeys(newDirectorLastName);
 
                 // click on the Confirm button
-                NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//app-org-structure//app-associate-list[@changetypesuffix='IndividualShareholder']//tr[1]//i"));
+                NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector(".fa-save span"));
                 uiConfirmButton.Click();
 
                 // find the upload test file in the bdd-tests\upload_files folder
