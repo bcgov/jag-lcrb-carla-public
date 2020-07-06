@@ -133348,6 +133348,10 @@
         "adoxio_isreadylockedcases": {
           "type": "boolean"
         },
+        "adoxio_lgzoning": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_establishmentopeningdate": {
           "format": "date-time",
           "type": "string"
@@ -133879,6 +133883,10 @@
         "adoxio_checklistassociateslist": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_dateapplicantsenttolg": {
+          "format": "date-time",
+          "type": "string"
         },
         "adoxio_isreadyworkers": {
           "type": "boolean"
@@ -135283,6 +135291,9 @@
         "_modifiedby_value": {
           "type": "string"
         },
+        "adoxio_islgzoningconfirmation": {
+          "type": "boolean"
+        },
         "_modifiedonbehalfby_value": {
           "type": "string"
         },
@@ -135297,6 +135308,9 @@
         "timezoneruleversionnumber": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_defaultbpfid": {
+          "type": "string"
         },
         "adoxio_proofofzoning": {
           "format": "int32",
@@ -135315,9 +135329,6 @@
         },
         "adoxio_isdefault": {
           "type": "boolean"
-        },
-        "adoxio_defaultbpfid": {
-          "type": "string"
         },
         "adoxio_isshowfinancialintegrityformupload": {
           "type": "boolean"
@@ -138276,8 +138287,9 @@
           "format": "int32",
           "type": "integer"
         },
-        "_createdby_value": {
-          "type": "string"
+        "adoxio_licencetype": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_secondcontraventionmaxvalue": {
           "format": "decimal",
@@ -138337,6 +138349,9 @@
         "adoxio_thirdcontraventionmaxvalue_base": {
           "format": "decimal",
           "type": "number"
+        },
+        "_createdby_value": {
+          "type": "string"
         },
         "adoxio_thirdcontraventionmaxperiod": {
           "format": "int32",
@@ -138696,6 +138711,10 @@
           "type": "string"
         },
         "adoxio_iscontraventionconfirmed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_penaltytype": {
           "format": "int32",
           "type": "integer"
         },
