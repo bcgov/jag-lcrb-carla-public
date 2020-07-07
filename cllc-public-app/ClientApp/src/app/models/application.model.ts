@@ -120,6 +120,7 @@ export class Application {
   lGApprovalDecision: string;
   lGDecisionSubmissionDate: Date;
   resolutionDocsUploaded: boolean;
+  lgZoning: string;
 
   applicant: Account;
 }
