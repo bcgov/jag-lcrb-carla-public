@@ -13,6 +13,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         LocalGovernmentApproval = 845280005,
         FloorPlan = 845280006,
         SitePlan = 845280007,
+        SitePhotos = 845280008,
+        ValidInterest = 845280009,
+        LetterOfIntent = 845280010,
+        Zoning = 845280011,
+        ServiceArea = 845280012,
+        OutdoorArea = 845280013,
+        CapacityArea = 845280014,
         
     
     }
