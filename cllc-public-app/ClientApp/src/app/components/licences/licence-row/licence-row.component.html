@@ -131,7 +131,7 @@
                         <span><i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Terminate Third Party Operator Relationship</span>
                     </a>
                     <div>
-                        <div *ngIf="hasEndorsement('Temporary Off-Site Endorsement', item)">
+                        <div *ngIf="hasEndorsementByName(item, 'Temporary Off-Site Endorsement')">
                             <a [routerLink]="[ '/licence/' + item.licenseId + '/temporary-offsite']">
                                 <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Temporary Off-Site Sale
                                 Authorization
@@ -151,7 +151,7 @@
                     <ng-container *ngIf="item.endorsements.length > 0 && isActiveOrRecentlyExpired(item) && (actionsVisible(item) || item.isOperated)">
                         <span><strong>Endorsements:</strong></span>
                         <div *ngFor="let endorsement of item.endorsements; let i = index;">
-                            <span><i class="fas fa-certificate" style="margin-right: 10px;"></i>{{endorsement}}</span>
+                            <span><i class="fas fa-certificate" style="margin-right: 10px;"></i>{{endorsement.name}}</span>
                         </div>
                     </ng-container>
                 </td>
@@ -177,9 +177,11 @@
                         <ng-container
                             *ngIf="isActiveOrRecentlyExpired(item) && actionsVisible(item)">
                             <p *ngFor="let action of item.allowedActions">
-                                <a href="javascript:void(0);" (click)="doAction(item,action.name)">
-                                <span><i class="fas fa-bolt" style="margin-right: 10px;"></i>{{action?.actionText}}</span>
-                                </a>
+                                <ng-container *ngIf="actionVisible(item, action.id)">
+                                    <a href="javascript:void(0);" (click)="doAction(item,action.name)">
+                                    <span><i class="fas fa-bolt" style="margin-right: 10px;"></i>{{action?.actionText}}</span>
+                                    </a>
+                                </ng-container>
                             </p>
                         </ng-container>
                         <div *ngIf="isExpired(item)" class="licence-expired" style="text-align: center;">
