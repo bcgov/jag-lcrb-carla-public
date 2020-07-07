@@ -18,6 +18,7 @@ Feature: CateringApplicationPersonnelEmailChange
     I want to pay the first year catering licence fee
     And submit a personnel email change for different business types
 
+@e2e @catering @indigenousnation @cateringemail
 Scenario: Catering Indigenous Nation Personnel Email Change
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -38,6 +39,7 @@ Scenario: Catering Indigenous Nation Personnel Email Change
     And the account is deleted
     Then I see the login page
 
+@e2e @catering @partnership @cateringemail
 Scenario: Catering Partnership Personnel Email Change
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -58,6 +60,7 @@ Scenario: Catering Partnership Personnel Email Change
     And the account is deleted
     Then I see the login page
 
+@e2e @catering @privatecorporation @cateringemail
 Scenario: Catering Private Corporation Personnel Email Change
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -78,6 +81,7 @@ Scenario: Catering Private Corporation Personnel Email Change
     And the account is deleted
     Then I see the login page
 
+@e2e @catering @publiccorporation @cateringemail
 Scenario: Catering Public Corporation Personnel Email Change
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -98,6 +102,7 @@ Scenario: Catering Public Corporation Personnel Email Change
     And the account is deleted
     Then I see the login page
 
+@e2e @catering @society @cateringemail
 Scenario: Catering Society Personnel Email Change
     Given I am logged in to the dashboard as a society
     And the account is deleted
@@ -118,6 +123,7 @@ Scenario: Catering Society Personnel Email Change
     And the account is deleted
     Then I see the login page
 
+@e2e @catering @soleproprietorship @cateringemail
 Scenario: Catering Sole Proprietorship Personnel Email Change
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
