@@ -66,7 +66,7 @@
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @publiccorporation @cateringevent
+ @e2e @catering @publiccorporation @cateringevent2
  Scenario: Public Corporation Event Authorization Request
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -108,7 +108,7 @@
     And the account is deleted
     Then I see the login page
 
-  @e2e @catering @soleproprietorship @cateringevent2
+  @e2e @catering @soleproprietorship @cateringevent
   Scenario: Sole Proprietorship Event Authorization Request
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
