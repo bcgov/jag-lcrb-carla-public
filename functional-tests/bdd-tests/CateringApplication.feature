@@ -76,7 +76,7 @@ Scenario: Public Corporation Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @society @cateringapp2
+@e2e @catering @society @cateringapp3
 Scenario: Society Catering Application
     Given I am logged in to the dashboard as a society
     And the account is deleted
