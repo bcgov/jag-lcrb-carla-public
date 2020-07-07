@@ -106,7 +106,7 @@ namespace bdd_tests
             string testCC = configuration["test_cc"];
             string testCVD = configuration["test_ccv"];
 
-            System.Threading.Thread.Sleep(10000);
+            System.Threading.Thread.Sleep(7000);
 
             ngDriver.IgnoreSynchronization = true;
 
@@ -119,7 +119,7 @@ namespace bdd_tests
             // click on the Pay Now button
             driver.FindElementByName("submitButton").Click();
 
-            System.Threading.Thread.Sleep(10000);
+            System.Threading.Thread.Sleep(2000);
 
             ngDriver.IgnoreSynchronization = false;
         }

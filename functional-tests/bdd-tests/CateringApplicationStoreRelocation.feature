@@ -3,7 +3,7 @@
     I want to pay the first year catering licence fee
     And submit a store relocation request for different business types
 
-@e2e @catering @indigenousnation
+@e2e @catering @indigenousnation @cateringrelocation
 Scenario: Indigenous Nation Catering Store Relocation Request
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -24,7 +24,7 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @partnership
+ @e2e @catering @partnership @cateringrelocation
  Scenario: Partnership Catering Store Relocation Request
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -45,7 +45,7 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @privatecorporation
+ @e2e @catering @privatecorporation @cateringrelocation
  Scenario: Private Corporation Catering Store Relocation Request
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -66,7 +66,7 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @publiccorporation
+ @e2e @catering @publiccorporation @cateringrelocation
  Scenario: Public Corporation Catering Store Relocation Request
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -87,7 +87,7 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @society
+ @e2e @catering @society @cateringrelocation
  Scenario: Society Catering Store Relocation Request
     Given I am logged in to the dashboard as a society
     And the account is deleted
@@ -108,7 +108,7 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @soleproprietorship
+ @e2e @catering @soleproprietorship @cateringrelocation
  Scenario: Sole Proprietorship Catering Store Relocation Request
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted

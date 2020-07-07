@@ -1,3 +1,5 @@
+import { Endorsement } from './endorsement.model';
+
 export class License {
   id: string;
   licenseType: string;
@@ -13,7 +15,7 @@ export class License {
   establishmentAddressCity: string;
   establishmentAddressPostalCode: string;
   establishmentParcelId: string;
-  endorsements: string[];
+  endorsements: Endorsement[];
 
   expiryDate: Date;
 

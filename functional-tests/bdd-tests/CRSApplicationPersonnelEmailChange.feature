@@ -3,7 +3,7 @@
     I want to submit a CRS Application for different business types
     And request a personnel email change for the approved application
 
-@e2e @cannabis @indigenousnation
+@e2e @cannabis @indigenousnation @crsemail
 Scenario: Indigenous Nation Personnel Email Change 
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -24,7 +24,7 @@ Scenario: Indigenous Nation Personnel Email Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership
+@e2e @cannabis @partnership @crsemail
 Scenario: Partnership Personnel Email Change
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -45,7 +45,7 @@ Scenario: Partnership Personnel Email Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation
+@e2e @cannabis @privatecorporation @crsemail
 Scenario: Private Corporation Personnel Email Change
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -66,7 +66,7 @@ Scenario: Private Corporation Personnel Email Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation
+@e2e @cannabis @publiccorporation @crsemail
 Scenario: Public Corporation Personnel Email Change
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -87,7 +87,7 @@ Scenario: Public Corporation Personnel Email Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society
+@e2e @cannabis @society @crsemail
 Scenario: Society Personnel Email Change
     Given I am logged in to the dashboard as a society
     And the account is deleted
@@ -108,7 +108,7 @@ Scenario: Society Personnel Email Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship
+@e2e @cannabis @soleproprietorship @crsemail
 Scenario: Sole Proprietorship Personnel Email Change
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted

@@ -19,6 +19,7 @@ import { LicenceEventsService } from '@services/licence-events.service';
 import { EventStatus } from '@models/licence-event.model';
 import { License } from '@models/license.model';
 import { TermsAndConditionsDataService } from '@services/terms-and-condtions-data.service';
+import { Endorsement } from '@models/endorsement.model';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -161,6 +162,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         return retVal;
     }
 
+    actionVisible(licence: License, actionId: string) {
+      return !this.hasEndorsement(licence, actionId);
+    }
+
     payLicenceFee(licence: ApplicationLicenseSummary) {
         // locate the application associated with the issuance of this licence
         const application = licence.actionApplications.find(app => app.applicationTypeName === licence.licenceTypeName);
@@ -288,8 +293,12 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         }
       }
 
-    hasEndorsement(endorsement: string, licence: License) {
-        return licence.endorsements.indexOf(endorsement) >= 0;
+    hasEndorsement(licence: License, endorsementId: string) {
+      return typeof licence.endorsements.find(endorsement => endorsement.id === endorsementId) !== "undefined";
+    }
+
+    hasEndorsementByName(licence: License, endorsementName: string) {
+      return typeof licence.endorsements.find(endorsement => endorsement.name === endorsementName) !== "undefined";
     }
 
     getHandbookLink(licenceType: string) {
