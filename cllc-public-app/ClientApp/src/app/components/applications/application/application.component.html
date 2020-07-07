@@ -783,9 +783,13 @@
 
         <div *ngIf="showSitePhotos()">
 
-          <hr><br>
-          <label for="">Attach a photo of the proposed picnic area(s), including the bounding (if in place):</label>
+          <hr><br>  
+          <label for="">Exterior Photos</label>
 
+          <section *ngIf="htmlContent?.sitePhotos" class="padded-section content-bottom">
+            <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.sitePhotos"></div>
+          </section>
+    
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Site Photos" fileTypes="FILE MUST BE IN PDF FORMAT."
               [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
@@ -798,31 +802,7 @@
 
         </div>
 
-        <div class="ngtest-photos-renderings"
-          *ngIf="showExteriorRenderings() || (application?.licenseType != 'Cannabis Retail Store' && application?.applicationType?.sitePlan === FormControlState.Show)">
-          <hr>
-          <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-            Photos or renderings of the store's
-            proposed exterior changes
-          </label>
-          <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store'">Photographs</label>
-          <br>
-          <section>
-
-            <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-              <ul>
-                <li>Must show that cannabis is not visible from outside the store</li>
-                <li>
-                  If submitting photos, the photos must be taken specifically for the purpose of the application (not
-                  general/stock images) and must be no more than six months old
-                </li>
-                <li>
-                  If submitting renderings, renderings may be either printed or hand-drawn (as long as they are
-                  legible)
-                </li>
-              </ul>
-            </div>
-            <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
+            <!--div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
               <p>
                 <u>
                   Provide a minimum four (4) colour photographs of the proposed site, one facing each side of the
@@ -833,21 +813,7 @@
                 These photos need to be current (taken by the licensee or representative within the past 90 days).
                 Pictures from internet sites will not be accepted.
               </p>
-            </div>
-
-          </section>
-
-          <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Exterior Photos or Renderings"
-              [enableFileDeletion]="!isOpenedByLGForApproval" [enableFileDeletion]="true"
-              [useDocumentTypeForName]="true" [disableUploads]="isOpenedByLGForApproval"
-              fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
-              [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
-              (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
-              [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF THE STORE EXTERIOR, DRAG FILES HERE OR'">
-            </app-file-uploader>
-          </section>
-        </div>
+            </div-->
 
         <div class="ngtest-grocery-store" *ngIf="showGroceryQuestion()">
           <hr>
