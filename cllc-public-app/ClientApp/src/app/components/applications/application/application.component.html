@@ -31,8 +31,9 @@
         </section>
 
         <!-- Local Government advise -->
-        <section *ngIf="form.get('indigenousNation').value.websiteUrl && showFormControl(application?.applicationType?.lGandPoliceSelectors) && form.get('assignedLicence.id').value"
-        appRemoveIfFeatureOff="LGApprovals">
+        <section
+          *ngIf="form.get('indigenousNation').value.websiteUrl && showFormControl(application?.applicationType?.lGandPoliceSelectors) && form.get('assignedLicence.id').value"
+          appRemoveIfFeatureOff="LGApprovals">
           Please review the information at
           <a target="blank"
             [href]="form.get('indigenousNation').value.websiteUrl">{{form.get('indigenousNation').value.websiteUrl}}</a>
@@ -1578,8 +1579,11 @@
         </section>
 
         <section appRemoveIfFeatureOff="LGApprovals" class="ngtest-opened-by-lg" *ngIf="isOpenedByLGForApproval">
-          <app-lg-in-confirmation-of-receipt *ngIf="application" [application]="application" [htmlContent]="htmlContent">
+          <app-lg-in-confirmation-of-receipt *ngIf="application && application?.applicationType?.isShowLGINApproval"
+            [application]="application" [htmlContent]="htmlContent">
           </app-lg-in-confirmation-of-receipt>
+          <app-lg-zoning-comfirmation *ngIf="application && application?.applicationType?.isShowLGZoningConfirmation"
+            [application]="application"  ></app-lg-zoning-comfirmation>
         </section>
         
         <section *ngIf="application?.applicationType?.isShowLGINApproval 
@@ -1617,14 +1621,15 @@
           </button>
 
           <!-- show if LG approval is not required -->
-          <button *ngIf="!application?.applicationType?.isShowLGINApproval" class="btn btn-primary"
-            (click)="submit_application()">
+          <button
+            *ngIf="!application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation"
+            class="btn btn-primary" (click)="submit_application()">
             SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
           </button>
 
           <!-- show before submitting to LG. Also show if LG rejected the application -->
           <button
-            *ngIf="application?.applicationType?.isShowLGINApproval 
+            *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
                         && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')"
             class=" btn btn-primary" (click)="submitForLGINApproval()">
             SUBMIT FOR LG/IN REVIEW OR COMMENT
