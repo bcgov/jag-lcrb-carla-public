@@ -2,7 +2,7 @@
     As a logged in partnership business user
     I want to confirm the organization structure functionality
 
-@e2e @cannabis @partnership @validation @orgstructure
+@e2e @cannabis @partnership @validation @partnerorgstructure
 Scenario: Change director name and pay fee - partnership
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -29,7 +29,7 @@ Scenario: Change director name and pay fee - partnership
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @validation @orgstructure
+@cannabis @partnership @validation @partnerorgstructure
 Scenario: Delete an individual who is both a director and shareholder - partnership
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -44,7 +44,7 @@ Scenario: Delete an individual who is both a director and shareholder - partners
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @validation @orgstructure
+@cannabis @partnership @validation @partnerorgstructure
 Scenario: Change director and shareholder same name - partnership
     # under development
     Given I am logged in to the dashboard as a partnership
@@ -60,7 +60,7 @@ Scenario: Change director and shareholder same name - partnership
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @validation @orgstructure
+@cannabis @partnership @validation @partnerorgstructure
 Scenario: Confirm business shareholder org structure update - partnership
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -87,7 +87,7 @@ Scenario: Confirm business shareholder org structure update - partnership
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @validation @orgstructure
+@cannabis @partnership @validation @partnerorgstructure
 Scenario: Confirm business shareholder org structure update after payment - partnership
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -118,7 +118,7 @@ Scenario: Confirm business shareholder org structure update after payment - part
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @validation @orgstructure
+@cannabis @partnership @validation @partnerorgstructure
 Scenario: Save for Later feature for org structure - partnership
     Given I am logged in to the dashboard as a partnership
     And the account is deleted

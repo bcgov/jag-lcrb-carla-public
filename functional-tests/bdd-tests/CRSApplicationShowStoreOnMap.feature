@@ -3,7 +3,7 @@
     I want to submit a CRS Application for different business types
     And view the store on the map for the approved application
 
-@e2e @cannabis @indigenousnation @crsmap
+@e2e @cannabis @indigenousnation @crsmap2
 Scenario: Indigenous Nation Show Store On Map
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -66,7 +66,7 @@ Scenario: Private Corporation Show Store On Map
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsmap
+@e2e @cannabis @publiccorporation @crsmap2
 Scenario: Public Corporation Show Store On Map
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -87,7 +87,7 @@ Scenario: Public Corporation Show Store On Map
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsmap
+@e2e @cannabis @society @crsmap2
 Scenario: Society Show Store On Map
     Given I am logged in to the dashboard as a society
     And the account is deleted
