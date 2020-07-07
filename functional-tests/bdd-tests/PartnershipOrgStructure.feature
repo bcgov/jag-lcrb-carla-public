@@ -22,10 +22,10 @@ Scenario: Change director name and pay fee - partnership
     And I return to the dashboard
     And I click on the Dashboard link
     And I click on the Review Organization Information button
-    And I modify only the individual partner record
+    And I modify only the individual partner name
     And I click on the Submit Organization Information button
     And I pay the name change fee
-    And the individual shareholder name is now updated
+    And the individual partner name is now updated
     And the account is deleted
     Then I see the login page
 
@@ -35,23 +35,25 @@ Scenario: Delete an individual who is both a director and shareholder - partners
     And the account is deleted
     And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
-    And I enter the same individual as an individual partner and a business shareholder
+    And I enter the same person as an individual partner and an individual partner of a business partner (person 1)
+    And I enter a second person as an individual partner (person 2)
+    And I enter a third person as an individual partner of a business partner (person 3)
     And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
-    And I delete only the individual partner record
+    And I delete only the individual partner record (person 1)
     And I click on the Complete Organization Information button
-    And only the business shareholder record is displayed
+    And only the individual partner of a business partner record is displayed (person 1, 2, 3)
     And the account is deleted
     Then I see the login page
 
 @cannabis @partnership @validation @partnerorgstructure
-Scenario: Change director and shareholder same name - partnership
+Scenario: Change individual partner and business partner same name 
     # under development
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
     And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
-    And I enter the same individual as an individual partner and a business shareholder
+    And I enter the same person as an individual partner and a business shareholder
     And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
     And I modify only the individual partner record
