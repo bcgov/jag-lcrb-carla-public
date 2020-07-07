@@ -43,6 +43,7 @@ export class ApplicationType {
   proofofZoning: FormControlState;
   lGandPoliceSelectors: FormControlState;
   isShowLGINApproval: boolean;
+  isShowLGZoningConfirmation:boolean;
   isFree: boolean;
   isEndorsement: boolean;
 

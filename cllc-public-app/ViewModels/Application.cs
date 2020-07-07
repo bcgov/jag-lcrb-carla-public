@@ -335,6 +335,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Yes = 845280000,
         No = 845280001
     }
+    public enum Zoning
+    {
+        Allows = 845280000,
+        DoesNotAllow = 845280001
+    }
 
     public enum LGDecision
     {
@@ -534,6 +539,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? LGDecisionSubmissionDate { get; set; }
         public bool ResolutionDocsUploaded { get; set; }
 
-        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Zoning? LgZoning { get; set; }
+
+
     }
 }
