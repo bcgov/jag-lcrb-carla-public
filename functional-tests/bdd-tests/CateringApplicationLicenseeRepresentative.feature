@@ -19,6 +19,7 @@
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab for Catering
+    And I pay the licensing fee for Catering
     And I request a licensee representative
     And the account is deleted
     Then I see the login page
