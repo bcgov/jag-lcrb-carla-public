@@ -477,11 +477,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     var licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioLocalgovindigenousnationidValue )).FirstOrDefault();
-                    // Indigenous nation association
-                    if (!string.IsNullOrEmpty(licenceApp?._adoxioLocalgovindigenousnationidValue ))
-                    {
-                        application.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", licenceApp._adoxioLocalgovindigenousnationidValue);
+                    string lginvalue;
+                    string policevalue;
+
+
+                    if(licenceApp == null){
+                        if(adoxioLicense?._adoxioLginValue != null){
+                            lginvalue = adoxioLicense?._adoxioLginValue;
+                        } else {
+                            lginvalue = adoxioLicense?.AdoxioEstablishment._adoxioLginValue;
+                        }                        
+                    } else {
+                        lginvalue = licenceApp._adoxioLocalgovindigenousnationidValue;
+                    
                     }
+
+                    application.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", lginvalue);
 
                     licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioPolicejurisdictionidValue )).FirstOrDefault();
                     // Police Jurisdiction association
