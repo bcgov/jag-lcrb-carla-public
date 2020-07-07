@@ -3,7 +3,7 @@
     I want to pay the first year catering licence fee
     And request a transfer of ownership for different business types
 
- @e2e @catering @indigenousnation
+ @e2e @catering @indigenousnation @cateringtransfer
  Scenario: Indigenous Nation Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -24,7 +24,7 @@
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @partnership
+ @e2e @catering @partnership @cateringtransfer
  Scenario: Partnership Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -44,8 +44,8 @@
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
-
- @e2e @catering @privatecorporation
+     
+ @e2e @catering @privatecorporation @cateringtransfer
  Scenario: Private Corporation Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -66,7 +66,7 @@
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @publiccorporation
+ @e2e @catering @publiccorporation @cateringtransfer
  Scenario: Public Corporation Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -87,7 +87,7 @@
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @society
+ @e2e @catering @society @cateringtransfer
  Scenario: Society Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as a society
     And the account is deleted
@@ -108,7 +108,7 @@
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @soleproprietorship
+ @e2e @catering @soleproprietorship @cateringtransfer
  Scenario: Sole Proprietorship Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
