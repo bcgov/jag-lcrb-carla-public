@@ -7,11 +7,11 @@ import { ApplicationDataService } from '@services/application-data.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-lg-zoning-comfirmation',
-  templateUrl: './lg-zoning-comfirmation.component.html',
-  styleUrls: ['./lg-zoning-comfirmation.component.scss']
+  selector: 'app-lg-zoning-confirmation',
+  templateUrl: './lg-zoning-confirmation.component.html',
+  styleUrls: ['./lg-zoning-confirmation.component.scss']
 })
-export class LgZoningComfirmationComponent extends FormBase implements OnInit {
+export class LgZoningConfirmationComponent extends FormBase implements OnInit {
   @Input() application: Application;
   busy: any;
   validationMessages: string[];
