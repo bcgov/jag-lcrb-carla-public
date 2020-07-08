@@ -57,7 +57,7 @@ Scenario: Private Corporation Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @publiccorporation @cateringapp
+@e2e @catering @publiccorporation @cateringapp2
 Scenario: Public Corporation Catering Application
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -76,7 +76,7 @@ Scenario: Public Corporation Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @society @cateringapp3
+@e2e @catering @society @cateringapp2
 Scenario: Society Catering Application
     Given I am logged in to the dashboard as a society
     And the account is deleted
@@ -95,7 +95,7 @@ Scenario: Society Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @soleproprietorship @cateringapp2
+@e2e @catering @soleproprietorship @cateringapp
 Scenario: Sole Proprietorship Catering Application
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
@@ -114,7 +114,7 @@ Scenario: Sole Proprietorship Catering Application
     And the account is deleted
     Then I see the login page
 
-@catering @validation @cateringapp
+@catering @validation @cateringapp2
 Scenario: Catering Application Validation
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
