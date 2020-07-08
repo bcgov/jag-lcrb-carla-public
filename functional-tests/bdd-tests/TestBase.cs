@@ -450,9 +450,14 @@ namespace bdd_tests
             NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[11]"));
             uploadSitePlan.SendKeys(sitePlanPath);
 
+            // upload a proof of zoning form
+            string zoningPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "fin_integrity.pdf");
+            NgWebElement uploadZoning = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
+            uploadZoning.SendKeys(zoningPath);
+
             // upload a financial integrity form
             string finIntegrityPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "fin_integrity.pdf");
-            NgWebElement uploadFinIntegrity = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
+            NgWebElement uploadFinIntegrity = ngDriver.FindElement(By.XPath("(//input[@type='file'])[18]"));
             uploadFinIntegrity.SendKeys(finIntegrityPath);
 
             // enter the first name of the application contact
