@@ -885,8 +885,8 @@ namespace bdd_tests
                 // click on the review organization information button
                 ClickReviewOrganizationInformation();
 
-                // click on the Edit button for Key Personnel (partnership)
-                if (businessTypeShared == "partnership" || businessTypeShared == "sole proprietorship")
+                // click on the Edit button for Key Personnel (partnership, sole proprietorship, public corporation, or society)
+                if (businessTypeShared == "partnership" || businessTypeShared == "sole proprietorship" || businessTypeShared == "public corporation" || businessTypeShared == "society")
                 {
                     NgWebElement uiEditInfoButtonPartner = ngDriver.FindElement(By.CssSelector(".fas.fa-pencil-alt span"));
                     uiEditInfoButtonPartner.Click();
