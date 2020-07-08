@@ -206,7 +206,7 @@ import { BusinessPlanComponent } from './components/applications/application/tab
 import { LgInfoPanelComponent } from './components/applications/application/tabs/lg-info-panel/lg-info-panel.component';
 import { AdditionalPidsComponent } from './components/applications/application/tabs/additional-pids/additional-pids.component';
 import { TermsAndConditionsDataService } from '@services/terms-and-condtions-data.service';
-import { LgZoningComfirmationComponent } from './components/applications/application/tabs/lg-zoning-comfirmation/lg-zoning-comfirmation.component';
+import { LgZoningConfirmationComponent } from './components/applications/application/tabs/lg-zoning-confirmation/lg-zoning-confirmation.component';
 
 
 @NgModule({
@@ -326,7 +326,7 @@ import { LgZoningComfirmationComponent } from './components/applications/applica
     BusinessPlanComponent,
     LgInfoPanelComponent,
     AdditionalPidsComponent,
-    LgZoningComfirmationComponent
+    LgZoningConfirmationComponent
   ],
   imports: [
     ChartsModule,
