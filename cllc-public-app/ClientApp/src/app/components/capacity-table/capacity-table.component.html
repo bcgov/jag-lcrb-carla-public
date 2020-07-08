@@ -1,0 +1,16 @@
+<div>
+    <table mat-table [dataSource]=”myDataArray”>
+        <tr>
+            <th>Area No.</th>
+            <th>{{isIndoor ? 'Floor Level' : 'Outdoor Area'}}</th>
+            <th *ngIf="isIndoor">Indoor</th>
+            <th *ngIf="isIndoor">Patio</th>
+            <th>{{isIndoor ? 'Occupant Load' : 'Capacity'</th>
+        </tr>
+        <ng-container *ngFor="let row of rows; let i = index;">
+            <tr>
+                
+            </tr>
+        </ng-container>
+    </table>
+</div>
