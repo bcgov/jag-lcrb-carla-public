@@ -6,7 +6,8 @@
       <div [formGroup]="form" style="padding-left: 45px; position: relative">
         <!-- Title -->
         <h1 class="ngtest-page-title" *ngIf="!this.isOpenedByLGForApproval">{{ htmlContent?.title }}</h1>
-        <h1 class="ngtest-page-title" *ngIf="this.isOpenedByLGForApproval">Provide Comment on Application</h1>
+        <h1 class="ngtest-page-title" *ngIf="this.isOpenedByLGForApproval && application?.applicationType.isShowLGINApproval">Provide Comment on Application</h1>
+        <h1 class="ngtest-page-title" *ngIf="this.isOpenedByLGForApproval && application?.applicationType.isShowLGZoningConfirmation">Provide Confirmation of Zoning</h1>
       </div>
 
       <div [formGroup]="form" class="application-wrapper">
@@ -1534,7 +1535,7 @@
 
         <!-- Proceed to Pay-->
 
-        <section class="d-flex" style="margin-top:15px;" *ngIf="!isOpenedByLGForApproval && !isRAS() && !application?.applicationType?.isShowLGINApproval ">
+        <section class="d-flex" style="margin-top:15px;" *ngIf="!isOpenedByLGForApproval && !isRAS() && !application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation ">
 
           <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
@@ -1586,13 +1587,15 @@
             [application]="application"  ></app-lg-zoning-comfirmation>
         </section>
         
-        <section *ngIf="application?.applicationType?.isShowLGINApproval 
+        <section *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
                 && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')">
           <br>
           <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
             <section class="ngtest-preamble-content">
-              Your application will now be submitted to your local government/Indigenous Nation for their review and/or comment. Please
+              Your application will now be submitted to your local government/Indigenous Nation for their 
+              <span *ngIf="application?.applicationType.isShowLGINApproval">comment and assessment</span>
+              <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">confirmation of zoning</span>. Please
               ensure
               you have reviewed
               their policy <span *ngIf="form.get('indigenousNation').value.websiteUrl">(<a

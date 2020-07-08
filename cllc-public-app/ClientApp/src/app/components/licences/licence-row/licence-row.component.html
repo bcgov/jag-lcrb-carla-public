@@ -105,7 +105,7 @@
                     <ng-container *ngIf="item.endorsements.length > 0 && isActiveOrRecentlyExpired(item) && (actionsVisible(item) || item.isOperated)">
                         <span><strong>Endorsements:</strong></span>
                         <div *ngFor="let endorsement of item.endorsements; let i = index;">
-                            <span><i class="fas fa-certificate" style="margin-right: 10px;"></i>{{endorsement}}</span>
+                            <span><i class="fas fa-certificate" style="margin-right: 10px;"></i>{{endorsement.name}}</span>
                         </div>
                         <br><br>
                     </ng-container>

@@ -327,7 +327,8 @@ import { LgZoningComfirmationComponent } from './components/applications/applica
     BusinessPlanComponent,
     LgInfoPanelComponent,
     AdditionalPidsComponent,
-    ProofOfZoningComponent
+    ProofOfZoningComponent,
+    LgZoningComfirmationComponent
   ],
   imports: [
     ChartsModule,
