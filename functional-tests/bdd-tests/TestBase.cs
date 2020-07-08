@@ -885,16 +885,26 @@ namespace bdd_tests
                 // click on the review organization information button
                 ClickReviewOrganizationInformation();
 
-                // click on the Edit button for Key Personnel
-                NgWebElement uiEditInfoButton = ngDriver.FindElement(By.CssSelector("td:nth-child(7) .ng-star-inserted"));
-                uiEditInfoButton.Click();
+                // click on the Edit button for Key Personnel (partnership)
+                if (businessTypeShared == "partnership" || businessTypeShared == "sole proprietorship")
+                {
+                    NgWebElement uiEditInfoButtonPartner = ngDriver.FindElement(By.CssSelector(".fas.fa-pencil-alt span"));
+                    uiEditInfoButtonPartner.Click();
+                }
 
-                // enter a new email for the director
-                string newDirectorEmail = "newemail@test.com";
+                // click on the Edit button for Key Personnel (private corporation)
+                if (businessTypeShared == "private corporation")
+                {
+                    NgWebElement uiEditInfoButton = ngDriver.FindElement(By.CssSelector("td:nth-child(7) .ng-star-inserted"));
+                    uiEditInfoButton.Click();
+                }
 
-                NgWebElement uiNewDirectorEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='emailNew']"));
-                uiNewDirectorEmail.Clear();
-                uiNewDirectorEmail.SendKeys(newDirectorEmail);
+                // enter a new email for the key personnel
+                string newEmail = "newemail@test.com";
+
+                NgWebElement uiNewEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='emailNew']"));
+                uiNewEmail.Clear();
+                uiNewEmail.SendKeys(newEmail);
 
                 // click on the Confirm button
                 NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector(".fa-save span"));
