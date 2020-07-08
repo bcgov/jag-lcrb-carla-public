@@ -3,7 +3,7 @@
     I want to pay the first year catering licence fee
     And submit a name branding change for different business types
 
-@e2e @catering @indigenousnation @cateringbranding2
+@e2e @catering @indigenousnation @cateringbranding1
 Scenario: Catering Indigenous Nation Name Branding Change
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -25,7 +25,7 @@ Scenario: Catering Indigenous Nation Name Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @partnership @cateringbranding
+@e2e @catering @partnership @cateringbranding2
 Scenario: Catering Partnership Name Branding Change
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -47,7 +47,7 @@ Scenario: Catering Partnership Name Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @privatecorporation @cateringbranding
+@e2e @catering @privatecorporation @cateringbranding3
 Scenario: Catering Private Corporation Name Branding Change
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -69,7 +69,7 @@ Scenario: Catering Private Corporation Name Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @publiccorporation @cateringbranding2
+@e2e @catering @publiccorporation @cateringbranding4
 Scenario: Catering Public Corporation Name Branding Change
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -91,7 +91,7 @@ Scenario: Catering Public Corporation Name Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @society @cateringbranding2
+@e2e @catering @society @cateringbranding5
 Scenario: Catering Society Name Branding Change
     Given I am logged in to the dashboard as a society
     And the account is deleted
@@ -113,7 +113,7 @@ Scenario: Catering Society Name Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @soleproprietorship @cateringbranding
+@e2e @catering @soleproprietorship @cateringbranding6
 Scenario: Catering Sole Proprietorship Name Branding Change
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
