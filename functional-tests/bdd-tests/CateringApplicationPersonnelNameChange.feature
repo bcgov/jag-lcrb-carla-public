@@ -3,7 +3,7 @@
     I want to pay the first year catering licence fee
     And submit a personnel name change for different business types
 
-@e2e @catering @indigenousnation @cateringname
+@e2e @catering @indigenousnation @cateringname2
 Scenario: Catering Indigenous Nation Personnel Name Change
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -66,7 +66,7 @@ Scenario: Catering Private Corporation Personnel Name Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @publiccorporation @cateringname
+@e2e @catering @publiccorporation @cateringname2
 Scenario: Catering Public Corporation Personnel Name Change
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -87,7 +87,7 @@ Scenario: Catering Public Corporation Personnel Name Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @society @cateringname
+@e2e @catering @society @cateringname2
 Scenario: Catering Society Personnel Name Change
     Given I am logged in to the dashboard as a society
     And the account is deleted
