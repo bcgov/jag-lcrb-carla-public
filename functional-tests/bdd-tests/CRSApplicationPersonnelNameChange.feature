@@ -3,7 +3,7 @@
     I want to submit a CRS Application for different business types
     And request a personnel name change for the approved application
 
-@e2e @cannabis @indigenousnation @crsname
+@e2e @cannabis @indigenousnation @crsname2
 Scenario: Indigenous Nation Personnel Name Change
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -66,7 +66,7 @@ Scenario: Private Corporation Personnel Name Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsname
+@e2e @cannabis @publiccorporation @crsname2
 Scenario: Public Corporation Personnel Name Change
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -87,7 +87,7 @@ Scenario: Public Corporation Personnel Name Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsname
+@e2e @cannabis @society @crsname2
 Scenario: Society Personnel Name Change
     Given I am logged in to the dashboard as a society
     And the account is deleted
