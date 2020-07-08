@@ -14,6 +14,16 @@ export class ApplicationHTMLContent {
     beforeStarting: string;
     nextSteps: string;
     LocalGovernmentApproval: string;
+    floorPlan: string;
+    sitePlan: string;
+    sitePhotos: string;
+    validInterest: string;
+    letterOfIntent: string;
+    zoning: string;
+    serviceArea: string;
+    outdoorArea: string;
+    capacityArea: string;
+
 }
 
 export class FormBase implements OnDestroy {
@@ -32,6 +42,15 @@ export class FormBase implements OnDestroy {
                 beforeStarting: this.getApplicationContent('BeforeStarting'),
                 nextSteps: this.getApplicationContent('NextSteps'),
                 LocalGovernmentApproval: this.getApplicationContent('LocalGovernmentApproval'),
+                floorPlan: this.getApplicationContent('FloorPlan'),
+                sitePlan: this.getApplicationContent('SitePlan'),
+                sitePhotos: this.getApplicationContent('SitePhotos'),
+                validInterest: this.getApplicationContent('ValidInterest'),
+                letterOfIntent: this.getApplicationContent('LetterOfIntent'),
+                zoning: this.getApplicationContent('Zoning'),
+                serviceArea: this.getApplicationContent('ServiceArea'),
+                outdoorArea: this.getApplicationContent('OutdoorArea'),
+                capacityArea: this.getApplicationContent('CapacityArea')
             };
         }
     }
