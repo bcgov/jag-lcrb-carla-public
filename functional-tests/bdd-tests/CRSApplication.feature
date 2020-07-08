@@ -59,7 +59,7 @@ Scenario: Private Corporation CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsapp
+@e2e @cannabis @publiccorporation @crsapp2
 Scenario: Public Corporation CRS Application
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -97,7 +97,7 @@ Scenario: Society CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crsapp2
+@e2e @cannabis @soleproprietorship @crsapp
 Scenario: Sole Proprietorship CRS Application
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
