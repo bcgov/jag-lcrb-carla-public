@@ -714,9 +714,19 @@ namespace bdd_tests
                 // click on the review organization information button
                 ClickReviewOrganizationInformation();
 
-                // click on the Edit button for Key Personnel
-                NgWebElement uiEditInfoButton = ngDriver.FindElement(By.CssSelector("td:nth-child(7) .ng-star-inserted"));
-                uiEditInfoButton.Click();
+                // click on the Edit button for Key Personnel (partnership, sole proprietorship, private corporation, or society)
+                if (businessTypeShared == "partnership" || businessTypeShared == "sole proprietorship" || businessTypeShared == "private corporation" || businessTypeShared == "society")
+                {
+                    NgWebElement uiEditInfoButtonShared = ngDriver.FindElement(By.CssSelector(".fas.fa-pencil-alt span"));
+                    uiEditInfoButtonShared.Click();
+                }
+
+                // click on the Edit button for Key Personnel (public corporation)
+                if (businessTypeShared == "public corporation")
+                {
+                    NgWebElement uiEditInfoButton = ngDriver.FindElement(By.CssSelector("td:nth-child(7) .ng-star-inserted"));
+                    uiEditInfoButton.Click();
+                }
 
                 // enter a new name for the director
                 string newDirectorFirstName = "UpdatedFirstName";
@@ -759,10 +769,10 @@ namespace bdd_tests
                 }
 
                 // click on submit org info button
-                //ClickSubmitOrgStructureButton();
+                ClickSubmitOrgStructureButton();
 
-                NgWebElement uiSubmitOrgStructure = ngDriver.FindElement(By.XPath("//app-application-licensee-changes/div/div[2]/section[1]/section[2]/button[3]"));
-                uiSubmitOrgStructure.Click();
+                //NgWebElement uiSubmitOrgStructure = ngDriver.FindElement(By.XPath("//app-application-licensee-changes/div/div[2]/section[1]/section[2]/button[3]"));
+                //uiSubmitOrgStructure.Click();
 
                 MakePayment();
 
