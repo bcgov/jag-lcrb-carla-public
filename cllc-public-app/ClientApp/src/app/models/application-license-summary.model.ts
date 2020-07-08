@@ -2,6 +2,7 @@ import { License } from './license.model';
 import { ApplicationType } from './application-type.model';
 import { LicenceEvent } from './licence-event.model';
 import { TermsAndConditions } from './terms-and-conditions.model';
+import { ServiceArea } from './service-area.model';
 
 export class ApplicationLicenseSummary {
 
@@ -64,6 +65,7 @@ export class ApplicationLicenseSummary {
   termsAndConditions: TermsAndConditions[];
 
   headerRowSpan: number;
+  serviceAreas: ServiceArea[];
 }
 
 export interface LicenceActionApplication {
