@@ -3,7 +3,7 @@
     I want to submit a CRS Application for different business types
     And request a personnel email change for the approved application
 
-@e2e @cannabis @indigenousnation @crsemail
+@e2e @cannabis @indigenousnation @crsemail2
 Scenario: Indigenous Nation Personnel Email Change 
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -66,7 +66,7 @@ Scenario: Private Corporation Personnel Email Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsemail
+@e2e @cannabis @publiccorporation @crsemail2
 Scenario: Public Corporation Personnel Email Change
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -87,7 +87,7 @@ Scenario: Public Corporation Personnel Email Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsemail
+@e2e @cannabis @society @crsemail2
 Scenario: Society Personnel Email Change
     Given I am logged in to the dashboard as a society
     And the account is deleted
