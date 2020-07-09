@@ -766,11 +766,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('At least one floor plan document is required.');
     }
 
-    // if (this.showZoning() && ((this.uploadedZoningDocuments || 0) < 1)) {
-    //   valid = false;
-    //   this.validationMessages.push('At least one zoning document is required.');
-    // }
-
     if (this.application.applicationType.showPropertyDetails && !this.form.get('establishmentName').value) {
       valid = false;
       this.validationMessages.push('Establishment name is required.');
