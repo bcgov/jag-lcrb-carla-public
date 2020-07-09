@@ -3,7 +3,7 @@
     I want to submit a CRS Application for different business types
     And request a store relocation for the approved application
 
-@e2e @cannabis @indigenousnation @crsrelocation
+@e2e @cannabis @indigenousnation @crsrelocation2
 Scenario: Indigenous Nation Store Relocation
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -66,7 +66,7 @@ Scenario: Private Corporation Store Relocation
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsrelocation
+@e2e @cannabis @publiccorporation @crsrelocation2
 Scenario: Public Corporation Store Relocation
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -87,7 +87,7 @@ Scenario: Public Corporation Store Relocation
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsrelocation
+@e2e @cannabis @society @crsrelocation2
 Scenario: Society Store Relocation
     Given I am logged in to the dashboard as a society
     And the account is deleted
