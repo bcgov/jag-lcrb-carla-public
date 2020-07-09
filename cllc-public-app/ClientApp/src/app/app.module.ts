@@ -254,6 +254,7 @@ import { ProofOfZoningComponent } from './components/applications/application/ta
     PolicyDocumentComponent,
     PolicyDocumentSidebarComponent,
     PrePaymentComponent,
+    ProofOfZoningComponent,
     ResultComponent,
     SecurityAssessmentsComponent,
     SolePropResultsComponent,

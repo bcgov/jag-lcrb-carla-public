@@ -3,6 +3,7 @@ import { Application } from '@models/application.model';
 import { ApplicationDataService } from '@services/application-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
+import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
 
 @Component({
   selector: 'app-proof-of-zoning',
@@ -11,9 +12,10 @@ import { FormBase } from '@shared/form-base';
 })
 export class ProofOfZoningComponent extends FormBase implements OnInit {
   @Input() application: Application;
-  //@ViewChild('mainForm', { static: false }) mainForm: FileUploaderComponent;
+  @ViewChild('proofOfZoningDocs', { static: false }) mainForm: FileUploaderComponent;
   validationMessages: string[];
   form: FormGroup;
+  uploadedZoningDocuments = 0;
 
   constructor(private applicationDataService: ApplicationDataService,
     private fb: FormBuilder) { 
@@ -24,6 +26,15 @@ export class ProofOfZoningComponent extends FormBase implements OnInit {
     this.form = this.fb.group({
     });
     //this.form.patchValue(this.application);
+  }
+
+
+  getValidationErrors(): string[]{
+    let res = [];
+    if ((this.uploadedZoningDocuments || 0) < 1) {
+      res.push('At least one zoning document is required.');
+    }
+    return res;
   }
 
 }

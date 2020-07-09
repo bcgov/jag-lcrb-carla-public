@@ -30,6 +30,7 @@ import { DynamicsForm } from '../../../models/dynamics-form.model';
 import { DynamicsFormDataService } from '../../../services/dynamics-form-data.service';
 import { PoliceDurisdictionDataService } from '@services/police-jurisdiction-data.service';
 import { LocalGovernmentDataService } from '@services/local-government-data.service';
+import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.component';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -61,6 +62,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   @ViewChild('financialIntegrityDocuments', { static: false }) financialIntegrityDocuments: FileUploaderComponent;
   @ViewChild('supportingDocuments', { static: false }) supportingDocuments: FileUploaderComponent;
   @ViewChild(ConnectionToNonMedicalStoresComponent, { static: false }) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
+  @ViewChild(ProofOfZoningComponent, { static: false }) proofOfZoning: ProofOfZoningComponent;
   @ViewChild('lgAutoCompleteTrigger', { read: MatAutocompleteTrigger, static: false }) lgAutoComplete: MatAutocompleteTrigger;
   @ViewChild('pdAutoCompleteTrigger', { read: MatAutocompleteTrigger, static: false }) pdAutoComplete: MatAutocompleteTrigger;
   form: FormGroup;
@@ -707,6 +709,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
     // handle supporting documents for sole proprietor who submit marketing applications 
     let marketing_soleprop = this.application.applicationType.name === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietor";
 
+    if(this.proofOfZoning){
+      let zoningErrors = this.proofOfZoning.getValidationErrors();
+      if(zoningErrors.length > 0){
+        valid = false;
+        this.validationMessages = this.validationMessages.concat(zoningErrors);
+      }
+    }
 
     if (this.application.applicationType.showAssociatesFormUpload &&
       ((this.uploadedAssociateDocuments || 0) < 1)) {
@@ -757,11 +766,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('At least one floor plan document is required.');
     }
 
-    if (this.application.applicationType.proofofZoning === FormControlState.Show &&
-      ((this.uploadedZoningDocuments || 0) < 1)) {
-      valid = false;
-      this.validationMessages.push('At least one zoning document is required.');
-    }
+    // if (this.showZoning() && ((this.uploadedZoningDocuments || 0) < 1)) {
+    //   valid = false;
+    //   this.validationMessages.push('At least one zoning document is required.');
+    // }
 
     if (this.application.applicationType.showPropertyDetails && !this.form.get('establishmentName').value) {
       valid = false;
