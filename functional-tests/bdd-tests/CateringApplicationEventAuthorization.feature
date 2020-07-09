@@ -3,7 +3,7 @@
     I want to pay the first year catering licence fee
     And submit an event authorization request for different business types
 
- @e2e @catering @indigenousnation @cateringevent
+ @e2e @catering @indigenousnation @cateringevent2
  Scenario: Indigenous Nation Event Authorization Request
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -66,7 +66,7 @@
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @publiccorporation @cateringevent
+ @e2e @catering @publiccorporation @cateringevent2
  Scenario: Public Corporation Event Authorization Request
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -87,7 +87,7 @@
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @society @cateringevent
+ @e2e @catering @society @cateringevent2
  Scenario: Society Event Authorization Request
     Given I am logged in to the dashboard as a society
     And the account is deleted
