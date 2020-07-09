@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top667 { get; set; }
+        public int? Top686 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip667 { get; set; }
+        public int? Skip686 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count667 { get; set; }
+        public bool? Count686 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter667 { get; set; }
+        public string Filter686 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search667 { get; set; }
+        public string Search686 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -404,6 +404,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationprocesssession.
         /// </summary>
         public virtual IApplicationprocesssession Applicationprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationserviceareas.
+        /// </summary>
+        public virtual IApplicationserviceareas Applicationserviceareas { get; private set; }
 
         /// <summary>
         /// Gets the IBpfadoxioapplicationadoxioapplicationcrsbpfv4.
@@ -1491,6 +1496,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEstablishmentprocesssession Establishmentprocesssession { get; private set; }
 
         /// <summary>
+        /// Gets the IEstablishmentserviceareas.
+        /// </summary>
+        public virtual IEstablishmentserviceareas Establishmentserviceareas { get; private set; }
+
+        /// <summary>
         /// Gets the IEstablishmentwatchwords.
         /// </summary>
         public virtual IEstablishmentwatchwords Establishmentwatchwords { get; private set; }
@@ -2131,6 +2141,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicenceenforcementactions Licenceenforcementactions { get; private set; }
 
         /// <summary>
+        /// Gets the ILicenceserviceareas.
+        /// </summary>
+        public virtual ILicenceserviceareas Licenceserviceareas { get; private set; }
+
+        /// <summary>
         /// Gets the ILicencesadoxioendorsementlicence.
         /// </summary>
         public virtual ILicencesadoxioendorsementlicence Licencesadoxioendorsementlicence { get; private set; }
@@ -2506,6 +2521,56 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRmreviewsyncerrors Rmreviewsyncerrors { get; private set; }
 
         /// <summary>
+        /// Gets the IServiceareas.
+        /// </summary>
+        public virtual IServiceareas Serviceareas { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationid.
+        /// </summary>
+        public virtual IApplicationid Applicationid { get; private set; }
+
+        /// <summary>
+        /// Gets the IServiceareaasyncoperations.
+        /// </summary>
+        public virtual IServiceareaasyncoperations Serviceareaasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IServiceareabulkdeletefailures.
+        /// </summary>
+        public virtual IServiceareabulkdeletefailures Serviceareabulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IServiceareaduplicatebaserecord.
+        /// </summary>
+        public virtual IServiceareaduplicatebaserecord Serviceareaduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IServiceareaduplicatematchingrecord.
+        /// </summary>
+        public virtual IServiceareaduplicatematchingrecord Serviceareaduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IServiceareamailboxtrackingfolders.
+        /// </summary>
+        public virtual IServiceareamailboxtrackingfolders Serviceareamailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IServiceareaprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IServiceareaprincipalobjectattributeaccesses Serviceareaprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IServiceareaprocesssession.
+        /// </summary>
+        public virtual IServiceareaprocesssession Serviceareaprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the IServiceareasyncerrors.
+        /// </summary>
+        public virtual IServiceareasyncerrors Serviceareasyncerrors { get; private set; }
+
+        /// <summary>
         /// Gets the ISettings.
         /// </summary>
         public virtual ISettings Settings { get; private set; }
@@ -2851,6 +2916,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRegardingobjectidadoxiormreview Regardingobjectidadoxiormreview { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioservicearea.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioservicearea Regardingobjectidadoxioservicearea { get; private set; }
+
+        /// <summary>
         /// Gets the IBusinessunitadoxioapplicationtypefeeschedule.
         /// </summary>
         public virtual IBusinessunitadoxioapplicationtypefeeschedule Businessunitadoxioapplicationtypefeeschedule { get; private set; }
@@ -2914,6 +2984,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBusinessunitadoxiormreview.
         /// </summary>
         public virtual IBusinessunitadoxiormreview Businessunitadoxiormreview { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioservicearea.
+        /// </summary>
+        public virtual IBusinessunitadoxioservicearea Businessunitadoxioservicearea { get; private set; }
 
         /// <summary>
         /// Gets the IContacts.
@@ -2986,6 +3061,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IBaserecordidadoxiormreview Baserecordidadoxiormreview { get; private set; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxioservicearea.
+        /// </summary>
+        public virtual IBaserecordidadoxioservicearea Baserecordidadoxioservicearea { get; private set; }
+
+        /// <summary>
         /// Gets the IDuplicaterecordidadoxioapplicationtypefeeschedule.
         /// </summary>
         public virtual IDuplicaterecordidadoxioapplicationtypefeeschedule Duplicaterecordidadoxioapplicationtypefeeschedule { get; private set; }
@@ -3044,6 +3124,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IDuplicaterecordidadoxiormreview.
         /// </summary>
         public virtual IDuplicaterecordidadoxiormreview Duplicaterecordidadoxiormreview { get; private set; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioservicearea.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxioservicearea Duplicaterecordidadoxioservicearea { get; private set; }
 
         /// <summary>
         /// Gets the IRegardingobjectidadoxioenforcementactionemail.
@@ -3786,6 +3871,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IObjectidadoxiormreview Objectidadoxiormreview { get; private set; }
 
         /// <summary>
+        /// Gets the IObjectidadoxioservicearea.
+        /// </summary>
+        public virtual IObjectidadoxioservicearea Objectidadoxioservicearea { get; private set; }
+
+        /// <summary>
         /// Gets the IObjectidadoxiosetting.
         /// </summary>
         public virtual IObjectidadoxiosetting Objectidadoxiosetting { get; private set; }
@@ -4396,6 +4486,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILkadoxiormreviewmodifiedonbehalfby Lkadoxiormreviewmodifiedonbehalfby { get; private set; }
 
         /// <summary>
+        /// Gets the ILkadoxioserviceareacreatedby.
+        /// </summary>
+        public virtual ILkadoxioserviceareacreatedby Lkadoxioserviceareacreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioserviceareacreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioserviceareacreatedonbehalfby Lkadoxioserviceareacreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioserviceareamodifiedby.
+        /// </summary>
+        public virtual ILkadoxioserviceareamodifiedby Lkadoxioserviceareamodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioserviceareamodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioserviceareamodifiedonbehalfby Lkadoxioserviceareamodifiedonbehalfby { get; private set; }
+
+        /// <summary>
         /// Gets the IUseradoxioapplicationtypefeeschedule.
         /// </summary>
         public virtual IUseradoxioapplicationtypefeeschedule Useradoxioapplicationtypefeeschedule { get; private set; }
@@ -4459,6 +4569,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IUseradoxiormreview.
         /// </summary>
         public virtual IUseradoxiormreview Useradoxiormreview { get; private set; }
+
+        /// <summary>
+        /// Gets the IUseradoxioservicearea.
+        /// </summary>
+        public virtual IUseradoxioservicearea Useradoxioservicearea { get; private set; }
 
         /// <summary>
         /// Gets the IContacttask.
@@ -4544,6 +4659,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITeamadoxiormreview.
         /// </summary>
         public virtual ITeamadoxiormreview Teamadoxiormreview { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioservicearea.
+        /// </summary>
+        public virtual ITeamadoxioservicearea Teamadoxioservicearea { get; private set; }
 
         /// <summary>
         /// Gets the IAsyncoperationidadoxioapplicationcrsbpfv4.
@@ -4939,6 +5059,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationmailboxtrackingfolders = new Applicationmailboxtrackingfolders(this);
             Applicationprincipalobjectattributeaccesses = new Applicationprincipalobjectattributeaccesses(this);
             Applicationprocesssession = new Applicationprocesssession(this);
+            Applicationserviceareas = new Applicationserviceareas(this);
             Bpfadoxioapplicationadoxioapplicationcrsbpfv4 = new Bpfadoxioapplicationadoxioapplicationcrsbpfv4(this);
             Bpfadoxioapplicationadoxioapplicationlicenseechangesv10 = new Bpfadoxioapplicationadoxioapplicationlicenseechangesv10(this);
             Bpfadoxioapplicationadoxioapplicationliquorbpf = new Bpfadoxioapplicationadoxioapplicationliquorbpf(this);
@@ -5156,6 +5277,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Establishmentmailboxtrackingfolders = new Establishmentmailboxtrackingfolders(this);
             Establishmentprincipalobjectattributeaccesses = new Establishmentprincipalobjectattributeaccesses(this);
             Establishmentprocesssession = new Establishmentprocesssession(this);
+            Establishmentserviceareas = new Establishmentserviceareas(this);
             Establishmentwatchwords = new Establishmentwatchwords(this);
             Establishmentwatchwordmailboxtrackingfolders = new Establishmentwatchwordmailboxtrackingfolders(this);
             Establishmentwatchwordprincipalobjectattributeaccesses = new Establishmentwatchwordprincipalobjectattributeaccesses(this);
@@ -5284,6 +5406,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Licenceldbordertotalhistorysyncerrors = new Licenceldbordertotalhistorysyncerrors(this);
             Licenceses = new Licenceses(this);
             Licenceenforcementactions = new Licenceenforcementactions(this);
+            Licenceserviceareas = new Licenceserviceareas(this);
             Licencesadoxioendorsementlicence = new Licencesadoxioendorsementlicence(this);
             Licencesadoxioeventlicence = new Licencesadoxioeventlicence(this);
             Licencesadoxioldborderlicenceid = new Licencesadoxioldborderlicenceid(this);
@@ -5359,6 +5482,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             Rmreviewprincipalobjectattributeaccesses = new Rmreviewprincipalobjectattributeaccesses(this);
             Rmreviewprocesssession = new Rmreviewprocesssession(this);
             Rmreviewsyncerrors = new Rmreviewsyncerrors(this);
+            Serviceareas = new Serviceareas(this);
+            Applicationid = new Applicationid(this);
+            Serviceareaasyncoperations = new Serviceareaasyncoperations(this);
+            Serviceareabulkdeletefailures = new Serviceareabulkdeletefailures(this);
+            Serviceareaduplicatebaserecord = new Serviceareaduplicatebaserecord(this);
+            Serviceareaduplicatematchingrecord = new Serviceareaduplicatematchingrecord(this);
+            Serviceareamailboxtrackingfolders = new Serviceareamailboxtrackingfolders(this);
+            Serviceareaprincipalobjectattributeaccesses = new Serviceareaprincipalobjectattributeaccesses(this);
+            Serviceareaprocesssession = new Serviceareaprocesssession(this);
+            Serviceareasyncerrors = new Serviceareasyncerrors(this);
             Settings = new Settings(this);
             Settingmailboxtrackingfolders = new Settingmailboxtrackingfolders(this);
             Settingprincipalobjectattributeaccesses = new Settingprincipalobjectattributeaccesses(this);
@@ -5428,6 +5561,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Regardingobjectidadoxioldborder = new Regardingobjectidadoxioldborder(this);
             Regardingobjectidadoxiolicenceldbordertotalhistory = new Regardingobjectidadoxiolicenceldbordertotalhistory(this);
             Regardingobjectidadoxiormreview = new Regardingobjectidadoxiormreview(this);
+            Regardingobjectidadoxioservicearea = new Regardingobjectidadoxioservicearea(this);
             Businessunitadoxioapplicationtypefeeschedule = new Businessunitadoxioapplicationtypefeeschedule(this);
             Businessunitadoxioendorsement = new Businessunitadoxioendorsement(this);
             Businessunitadoxioendorsementtype = new Businessunitadoxioendorsementtype(this);
@@ -5441,6 +5575,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Businessunitadoxioldborder = new Businessunitadoxioldborder(this);
             Businessunitadoxiolicenceldbordertotalhistory = new Businessunitadoxiolicenceldbordertotalhistory(this);
             Businessunitadoxiormreview = new Businessunitadoxiormreview(this);
+            Businessunitadoxioservicearea = new Businessunitadoxioservicearea(this);
             Contacts = new Contacts(this);
             Contacttaskcontact = new Contacttaskcontact(this);
             Baserecordidadoxioapplicationtypefeeschedule = new Baserecordidadoxioapplicationtypefeeschedule(this);
@@ -5455,6 +5590,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Baserecordidadoxioldborder = new Baserecordidadoxioldborder(this);
             Baserecordidadoxiolicenceldbordertotalhistory = new Baserecordidadoxiolicenceldbordertotalhistory(this);
             Baserecordidadoxiormreview = new Baserecordidadoxiormreview(this);
+            Baserecordidadoxioservicearea = new Baserecordidadoxioservicearea(this);
             Duplicaterecordidadoxioapplicationtypefeeschedule = new Duplicaterecordidadoxioapplicationtypefeeschedule(this);
             Duplicaterecordidadoxioendorsement = new Duplicaterecordidadoxioendorsement(this);
             Duplicaterecordidadoxioendorsementtype = new Duplicaterecordidadoxioendorsementtype(this);
@@ -5467,6 +5603,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Duplicaterecordidadoxioldborder = new Duplicaterecordidadoxioldborder(this);
             Duplicaterecordidadoxiolicenceldbordertotalhistory = new Duplicaterecordidadoxiolicenceldbordertotalhistory(this);
             Duplicaterecordidadoxiormreview = new Duplicaterecordidadoxiormreview(this);
+            Duplicaterecordidadoxioservicearea = new Duplicaterecordidadoxioservicearea(this);
             Regardingobjectidadoxioenforcementactionemail = new Regardingobjectidadoxioenforcementactionemail(this);
             Regardingobjectidadoxioeventemail = new Regardingobjectidadoxioeventemail(this);
             Entitydefinitions = new Entitydefinitions(this);
@@ -5615,6 +5752,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Objectidadoxioregion = new Objectidadoxioregion(this);
             Objectidadoxiorelatedparty = new Objectidadoxiorelatedparty(this);
             Objectidadoxiormreview = new Objectidadoxiormreview(this);
+            Objectidadoxioservicearea = new Objectidadoxioservicearea(this);
             Objectidadoxiosetting = new Objectidadoxiosetting(this);
             Objectidadoxiospddatarow = new Objectidadoxiospddatarow(this);
             Objectidadoxiospdexports = new Objectidadoxiospdexports(this);
@@ -5737,6 +5875,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lkadoxiormreviewcreatedonbehalfby = new Lkadoxiormreviewcreatedonbehalfby(this);
             Lkadoxiormreviewmodifiedby = new Lkadoxiormreviewmodifiedby(this);
             Lkadoxiormreviewmodifiedonbehalfby = new Lkadoxiormreviewmodifiedonbehalfby(this);
+            Lkadoxioserviceareacreatedby = new Lkadoxioserviceareacreatedby(this);
+            Lkadoxioserviceareacreatedonbehalfby = new Lkadoxioserviceareacreatedonbehalfby(this);
+            Lkadoxioserviceareamodifiedby = new Lkadoxioserviceareamodifiedby(this);
+            Lkadoxioserviceareamodifiedonbehalfby = new Lkadoxioserviceareamodifiedonbehalfby(this);
             Useradoxioapplicationtypefeeschedule = new Useradoxioapplicationtypefeeschedule(this);
             Useradoxioendorsement = new Useradoxioendorsement(this);
             Useradoxioendorsementtype = new Useradoxioendorsementtype(this);
@@ -5750,6 +5892,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Useradoxioldborder = new Useradoxioldborder(this);
             Useradoxiolicenceldbordertotalhistory = new Useradoxiolicenceldbordertotalhistory(this);
             Useradoxiormreview = new Useradoxiormreview(this);
+            Useradoxioservicearea = new Useradoxioservicearea(this);
             Contacttask = new Contacttask(this);
             Legalentitytask = new Legalentitytask(this);
             Regardingobjectidadoxioenforcementactiontask = new Regardingobjectidadoxioenforcementactiontask(this);
@@ -5767,6 +5910,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Teamadoxioldborder = new Teamadoxioldborder(this);
             Teamadoxiolicenceldbordertotalhistory = new Teamadoxiolicenceldbordertotalhistory(this);
             Teamadoxiormreview = new Teamadoxiormreview(this);
+            Teamadoxioservicearea = new Teamadoxioservicearea(this);
             Asyncoperationidadoxioapplicationcrsbpfv4 = new Asyncoperationidadoxioapplicationcrsbpfv4(this);
             Asyncoperationidadoxioapplicationlicenseechangesv10 = new Asyncoperationidadoxioapplicationlicenseechangesv10(this);
             Asyncoperationidadoxioapplicationliquorbpf = new Asyncoperationidadoxioapplicationliquorbpf(this);
