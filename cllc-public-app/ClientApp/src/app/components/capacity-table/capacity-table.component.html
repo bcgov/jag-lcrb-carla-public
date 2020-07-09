@@ -1,16 +1,28 @@
-<div>
-    <table mat-table [dataSource]=”myDataArray”>
-        <tr>
-            <th>Area No.</th>
-            <th>{{isIndoor ? 'Floor Level' : 'Outdoor Area'}}</th>
-            <th *ngIf="isIndoor">Indoor</th>
-            <th *ngIf="isIndoor">Patio</th>
-            <th>{{isIndoor ? 'Occupant Load' : 'Capacity'</th>
+<table>
+    <thead>
+        <th style="width: 55px;">Area No.</th>
+        <th>{{isIndoor ? 'Floor Level' : 'Outdoor Area'}}</th>
+        <th *ngIf="isIndoor">Indoor</th>
+        <th *ngIf="isIndoor">Patio</th>
+        <th>{{isIndoor ? 'Occupant Load' : 'Capacity'}}</th>
+        <th style="width: 45px;"></th>
+    </thead>
+    <ng-container *ngFor="let row of rows.controls; let i = index;">
+        <tr [formGroup]="row">
+            <td><input type="text" formControlName="areaNumber" /></td>
+            <td><input type="text" formControlName="areaLocation" /></td>
+            <td *ngIf="isIndoor"><mat-checkbox formControlName="isIndoor"></mat-checkbox></td>
+            <td *ngIf="isIndoor"><mat-checkbox formControlName="isPatio"></mat-checkbox></td>
+            <td><input type="text" formControlName="capacity" mask="0*"/></td>
+            <td><button (click)="removeRow(i)" class="btn-clear"><i class="fa fa-minus-square danger"></i></button></td>
         </tr>
-        <ng-container *ngFor="let row of rows; let i = index;">
-            <tr>
-                
-            </tr>
-        </ng-container>
-    </table>
-</div>
+    </ng-container>
+    <tr>
+        <td><button (click)="addRow()" class="btn-clear" style="height: 100%;"><i class="fa fa-plus-circle" style="color: #1a5a96;"></i></button></td>
+        <td></td>
+        <td *ngIf="isIndoor"></td>
+        <td *ngIf="isIndoor"></td>
+        <td><button *ngIf="rows.dirty" class="btn-save"><i class="fa fa-floppy-o"></i> Save</button></td>
+        <td></td>
+    </tr>
+</table>
