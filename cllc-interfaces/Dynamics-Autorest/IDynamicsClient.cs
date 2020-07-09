@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top667 { get; set; }
+        int? Top686 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip667 { get; set; }
+        int? Skip686 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count667 { get; set; }
+        bool? Count686 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter667 { get; set; }
+        string Filter686 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search667 { get; set; }
+        string Search686 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -401,6 +401,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationprocesssession.
         /// </summary>
         IApplicationprocesssession Applicationprocesssession { get; }
+
+        /// <summary>
+        /// Gets the IApplicationserviceareas.
+        /// </summary>
+        IApplicationserviceareas Applicationserviceareas { get; }
 
         /// <summary>
         /// Gets the IBpfadoxioapplicationadoxioapplicationcrsbpfv4.
@@ -1488,6 +1493,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEstablishmentprocesssession Establishmentprocesssession { get; }
 
         /// <summary>
+        /// Gets the IEstablishmentserviceareas.
+        /// </summary>
+        IEstablishmentserviceareas Establishmentserviceareas { get; }
+
+        /// <summary>
         /// Gets the IEstablishmentwatchwords.
         /// </summary>
         IEstablishmentwatchwords Establishmentwatchwords { get; }
@@ -2128,6 +2138,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicenceenforcementactions Licenceenforcementactions { get; }
 
         /// <summary>
+        /// Gets the ILicenceserviceareas.
+        /// </summary>
+        ILicenceserviceareas Licenceserviceareas { get; }
+
+        /// <summary>
         /// Gets the ILicencesadoxioendorsementlicence.
         /// </summary>
         ILicencesadoxioendorsementlicence Licencesadoxioendorsementlicence { get; }
@@ -2503,6 +2518,56 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRmreviewsyncerrors Rmreviewsyncerrors { get; }
 
         /// <summary>
+        /// Gets the IServiceareas.
+        /// </summary>
+        IServiceareas Serviceareas { get; }
+
+        /// <summary>
+        /// Gets the IApplicationid.
+        /// </summary>
+        IApplicationid Applicationid { get; }
+
+        /// <summary>
+        /// Gets the IServiceareaasyncoperations.
+        /// </summary>
+        IServiceareaasyncoperations Serviceareaasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IServiceareabulkdeletefailures.
+        /// </summary>
+        IServiceareabulkdeletefailures Serviceareabulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IServiceareaduplicatebaserecord.
+        /// </summary>
+        IServiceareaduplicatebaserecord Serviceareaduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IServiceareaduplicatematchingrecord.
+        /// </summary>
+        IServiceareaduplicatematchingrecord Serviceareaduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IServiceareamailboxtrackingfolders.
+        /// </summary>
+        IServiceareamailboxtrackingfolders Serviceareamailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the IServiceareaprincipalobjectattributeaccesses.
+        /// </summary>
+        IServiceareaprincipalobjectattributeaccesses Serviceareaprincipalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the IServiceareaprocesssession.
+        /// </summary>
+        IServiceareaprocesssession Serviceareaprocesssession { get; }
+
+        /// <summary>
+        /// Gets the IServiceareasyncerrors.
+        /// </summary>
+        IServiceareasyncerrors Serviceareasyncerrors { get; }
+
+        /// <summary>
         /// Gets the ISettings.
         /// </summary>
         ISettings Settings { get; }
@@ -2848,6 +2913,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegardingobjectidadoxiormreview Regardingobjectidadoxiormreview { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioservicearea.
+        /// </summary>
+        IRegardingobjectidadoxioservicearea Regardingobjectidadoxioservicearea { get; }
+
+        /// <summary>
         /// Gets the IBusinessunitadoxioapplicationtypefeeschedule.
         /// </summary>
         IBusinessunitadoxioapplicationtypefeeschedule Businessunitadoxioapplicationtypefeeschedule { get; }
@@ -2911,6 +2981,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBusinessunitadoxiormreview.
         /// </summary>
         IBusinessunitadoxiormreview Businessunitadoxiormreview { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioservicearea.
+        /// </summary>
+        IBusinessunitadoxioservicearea Businessunitadoxioservicearea { get; }
 
         /// <summary>
         /// Gets the IContacts.
@@ -2983,6 +3058,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IBaserecordidadoxiormreview Baserecordidadoxiormreview { get; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxioservicearea.
+        /// </summary>
+        IBaserecordidadoxioservicearea Baserecordidadoxioservicearea { get; }
+
+        /// <summary>
         /// Gets the IDuplicaterecordidadoxioapplicationtypefeeschedule.
         /// </summary>
         IDuplicaterecordidadoxioapplicationtypefeeschedule Duplicaterecordidadoxioapplicationtypefeeschedule { get; }
@@ -3041,6 +3121,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IDuplicaterecordidadoxiormreview.
         /// </summary>
         IDuplicaterecordidadoxiormreview Duplicaterecordidadoxiormreview { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioservicearea.
+        /// </summary>
+        IDuplicaterecordidadoxioservicearea Duplicaterecordidadoxioservicearea { get; }
 
         /// <summary>
         /// Gets the IRegardingobjectidadoxioenforcementactionemail.
@@ -3783,6 +3868,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IObjectidadoxiormreview Objectidadoxiormreview { get; }
 
         /// <summary>
+        /// Gets the IObjectidadoxioservicearea.
+        /// </summary>
+        IObjectidadoxioservicearea Objectidadoxioservicearea { get; }
+
+        /// <summary>
         /// Gets the IObjectidadoxiosetting.
         /// </summary>
         IObjectidadoxiosetting Objectidadoxiosetting { get; }
@@ -4393,6 +4483,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILkadoxiormreviewmodifiedonbehalfby Lkadoxiormreviewmodifiedonbehalfby { get; }
 
         /// <summary>
+        /// Gets the ILkadoxioserviceareacreatedby.
+        /// </summary>
+        ILkadoxioserviceareacreatedby Lkadoxioserviceareacreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioserviceareacreatedonbehalfby.
+        /// </summary>
+        ILkadoxioserviceareacreatedonbehalfby Lkadoxioserviceareacreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioserviceareamodifiedby.
+        /// </summary>
+        ILkadoxioserviceareamodifiedby Lkadoxioserviceareamodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioserviceareamodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioserviceareamodifiedonbehalfby Lkadoxioserviceareamodifiedonbehalfby { get; }
+
+        /// <summary>
         /// Gets the IUseradoxioapplicationtypefeeschedule.
         /// </summary>
         IUseradoxioapplicationtypefeeschedule Useradoxioapplicationtypefeeschedule { get; }
@@ -4456,6 +4566,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IUseradoxiormreview.
         /// </summary>
         IUseradoxiormreview Useradoxiormreview { get; }
+
+        /// <summary>
+        /// Gets the IUseradoxioservicearea.
+        /// </summary>
+        IUseradoxioservicearea Useradoxioservicearea { get; }
 
         /// <summary>
         /// Gets the IContacttask.
@@ -4541,6 +4656,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITeamadoxiormreview.
         /// </summary>
         ITeamadoxiormreview Teamadoxiormreview { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioservicearea.
+        /// </summary>
+        ITeamadoxioservicearea Teamadoxioservicearea { get; }
 
         /// <summary>
         /// Gets the IAsyncoperationidadoxioapplicationcrsbpfv4.
