@@ -964,7 +964,7 @@
 
         <!-- Proof of Zoning-->
         <section *ngIf="showZoning()">
-          <app-proof-of-zoning *ngIf="application" [application]="application">
+          <app-proof-of-zoning *ngIf="application" [application]="application" #proofOfZoning>
           </app-proof-of-zoning>
         </section>
 
@@ -1640,7 +1640,8 @@
 
           <!-- show if the LG has approved the application -->
           <button
-            *ngIf="application?.applicationType?.isShowLGINApproval && application?.lGApprovalDecision === 'Approved'"
+            *ngIf="(application?.applicationType?.isShowLGINApproval && application?.lGApprovalDecision === 'Approved') ||
+            (application?.applicationType?.isShowLGZoningConfirmation && application?.lgZoning === 'Allows')"
             class=" btn btn-primary" (click)="proceedToSecurityScreening()">
             Proceed to Security Screening
           </button>
