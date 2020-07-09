@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LgZoningComfirmationComponent } from './lg-zoning-comfirmation.component';
+import { LgZoningConfirmationComponent } from './lg-zoning-confirmation.component';
 
 describe('LgZoningComfirmationComponent', () => {
-  let component: LgZoningComfirmationComponent;
-  let fixture: ComponentFixture<LgZoningComfirmationComponent>;
+  let component: LgZoningConfirmationComponent;
+  let fixture: ComponentFixture<LgZoningConfirmationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LgZoningComfirmationComponent ]
+      declarations: [ LgZoningConfirmationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LgZoningComfirmationComponent);
+    fixture = TestBed.createComponent(LgZoningConfirmationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
