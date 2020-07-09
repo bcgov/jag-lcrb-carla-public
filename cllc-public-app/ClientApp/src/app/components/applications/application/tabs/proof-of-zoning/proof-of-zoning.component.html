@@ -30,11 +30,9 @@
         a WS licence.
       </p>
       <app-file-uploader *ngIf="application?.id" documentType="Zoning" fileTypes="FILE MUST BE IN PDF FORMAT."
-        [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-        [enableFileDeletion]="application?.applicationType?.proofofZoning === FormControlState.Show"
         [multipleFiles]="false" entityName="application" [useDocumentTypeForName]="true"
         (numberOfUploadedFiles)="uploadedZoningDocuments = $event" [entityId]="application?.id"
-        [uploadHeader]="'TO UPLOAD ZONING DOCUMENTS, DRAG FILES HERE OR'">
+        [uploadHeader]="'TO UPLOAD ZONING DOCUMENTS, DRAG FILES HERE OR'" #proofOfZoningDocs>
       </app-file-uploader>
     </section>
   </div>

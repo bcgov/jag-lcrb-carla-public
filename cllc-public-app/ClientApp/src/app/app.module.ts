@@ -206,8 +206,8 @@ import { BusinessPlanComponent } from './components/applications/application/tab
 import { LgInfoPanelComponent } from './components/applications/application/tabs/lg-info-panel/lg-info-panel.component';
 import { AdditionalPidsComponent } from './components/applications/application/tabs/additional-pids/additional-pids.component';
 import { TermsAndConditionsDataService } from '@services/terms-and-condtions-data.service';
+import { LgZoningConfirmationComponent } from './components/applications/application/tabs/lg-zoning-confirmation/lg-zoning-confirmation.component';
 import { ProofOfZoningComponent } from './components/applications/application/tabs/proof-of-zoning/proof-of-zoning.component';
-import { LgZoningComfirmationComponent } from './components/applications/application/tabs/lg-zoning-comfirmation/lg-zoning-comfirmation.component';
 
 
 @NgModule({
@@ -254,6 +254,7 @@ import { LgZoningComfirmationComponent } from './components/applications/applica
     PolicyDocumentComponent,
     PolicyDocumentSidebarComponent,
     PrePaymentComponent,
+    ProofOfZoningComponent,
     ResultComponent,
     SecurityAssessmentsComponent,
     SolePropResultsComponent,
@@ -327,8 +328,7 @@ import { LgZoningComfirmationComponent } from './components/applications/applica
     BusinessPlanComponent,
     LgInfoPanelComponent,
     AdditionalPidsComponent,
-    ProofOfZoningComponent,
-    LgZoningComfirmationComponent
+    LgZoningConfirmationComponent
   ],
   imports: [
     ChartsModule,
