@@ -769,10 +769,7 @@ namespace bdd_tests
                 }
 
                 // click on submit org info button
-                //NgWebElement uiSubmitOrgStructure = ngDriver.FindElement(By.CssSelector("button.btn-primary[name='submit-application']"));
-                //uiSubmitOrgStructure.Click();
-
-                NgWebElement uiSubmitOrgStructure = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-licensee-changes/div/div[2]/section[1]/section[2]/button[3]"));
+                NgWebElement uiSubmitOrgStructure = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION ']"));
                 uiSubmitOrgStructure.Click();
 
                 MakePayment();
