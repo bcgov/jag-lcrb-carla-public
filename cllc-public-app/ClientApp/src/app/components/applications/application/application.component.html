@@ -2,7 +2,11 @@
 <div *ngIf="application">
   <ng-template #applicationContent>
     <div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
-
+<!-- Service Area -->
+<section *ngIf="testfun(application)">
+  <h1>test</h1>
+  <app-capacity-table [licence]="application.licence" isIndoor="true"></app-capacity-table>
+</section>
       <div [formGroup]="form" style="padding-left: 45px; position: relative">
         <!-- Title -->
         <h1 class="ngtest-page-title" *ngIf="!this.isOpenedByLGForApproval">{{ htmlContent?.title }}</h1>
@@ -363,7 +367,6 @@
         </section>
 
         <!-- Business Plan for Manufacturers-->
-
         <section *ngIf="application?.applicationType?.name === 'Manufacturer'">
           <app-business-plan *ngIf="application" [application]="application">
           </app-business-plan>
