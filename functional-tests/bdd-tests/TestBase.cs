@@ -2665,8 +2665,6 @@ namespace bdd_tests
             /* 
             Page Title: Apply for a cannabis licence
             */
-
-            ClickOnDashboard();
         }
 
 

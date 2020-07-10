@@ -13,13 +13,13 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplicationFederalReports
+Feature: CRSApplicationFederalReportsShowMap
     As a logged in business user
     I want to submit a CRS Application for different business types
     And review the federal reports for the approved application
 
-@e2e @cannabis @indigenousnation @crsfedreports
-Scenario: Indigenous Nation Federal Reports
+@e2e @cannabis @indigenousnation @crsfedreportsIN
+Scenario: Indigenous Nation Federal Reports and Show Map
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
     And I am logged in to the dashboard as an indigenous nation
@@ -35,12 +35,13 @@ Scenario: Indigenous Nation Federal Reports
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
+    And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @crsfedreports
-Scenario: Partnership Federal Reports
+@e2e @cannabis @partnership @crsfedreportspartnership
+Scenario: Partnership Federal Reports and Show Map
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
     And I am logged in to the dashboard as a partnership
@@ -56,12 +57,13 @@ Scenario: Partnership Federal Reports
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
+    And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @crsfedreports
-Scenario: Private Corporation Federal Reports
+@e2e @cannabis @privatecorporation @crsfedreportsprivcorp
+Scenario: Private Corporation Federal Reports and Show Map
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     And I am logged in to the dashboard as a private corporation
@@ -77,12 +79,13 @@ Scenario: Private Corporation Federal Reports
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
+    And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsfedreports
-Scenario: Public Corporation Federal Reports
+@e2e @cannabis @publiccorporation @crsfedreportspubcorp
+Scenario: Public Corporation Federal Reports and Show Map
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
     And I am logged in to the dashboard as a public corporation
@@ -98,12 +101,13 @@ Scenario: Public Corporation Federal Reports
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
+    And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsfedreports
-Scenario: Society Federal Reports
+@e2e @cannabis @society @crsfedreportssociety
+Scenario: Society Federal Reports and Show Map
     Given I am logged in to the dashboard as a society
     And the account is deleted
     And I am logged in to the dashboard as a society
@@ -119,12 +123,13 @@ Scenario: Society Federal Reports
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
+    And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crsfedreports
-Scenario: Sole Proprietorship Federal Reports
+@e2e @cannabis @soleproprietorship @crsfedreportssoleprop
+Scenario: Sole Proprietorship Federal Reports and Show Map
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
     And I am logged in to the dashboard as a sole proprietorship
@@ -140,6 +145,7 @@ Scenario: Sole Proprietorship Federal Reports
     And the application is approved
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
+    And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
     Then I see the login page
@@ -147,8 +153,8 @@ Scenario: Sole Proprietorship Federal Reports
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplicationFederalReports.feature")]
-    public sealed class CRSApplicationFederalReports : TestBase
+    [FeatureFile("./CRSApplicationFederalReportsShowMap.feature")]
+    public sealed class CRSApplicationFederalReportsShowMap : TestBase
     {
         [Given(@"I am logged in to the dashboard as an (.*)")]
         public void I_view_the_dashboard_IN(string businessType)
