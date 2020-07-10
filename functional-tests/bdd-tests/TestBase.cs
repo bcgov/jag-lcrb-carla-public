@@ -2658,18 +2658,13 @@ namespace bdd_tests
             Subtitle:   Cannabis Retail Store Licences
             */
 
-            string showOpenOnMap = "Show Store as Open on Map";
-
             // click on the Show Store as Open on Map checkbox
-            
-            NgWebElement uiMapCheckbox = ngDriver.FindElement(By.XPath("//*[@id='mat-checkbox-1']/label/div"));
+            NgWebElement uiMapCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox"));
             uiMapCheckbox.Click();
 
             /* 
             Page Title: Apply for a cannabis licence
             */
-
-            //System.Threading.Thread.Sleep(7000);
 
             ClickOnDashboard();
         }
