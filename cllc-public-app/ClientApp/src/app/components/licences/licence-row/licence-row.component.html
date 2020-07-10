@@ -76,7 +76,7 @@
                         <div *ngIf="item.licenceTypeName === ApplicationTypeNames.CannabisRetailStore && isActiveOrRecentlyExpired(item) && actionsVisible(item)">
                             <mat-checkbox [checked]="item.establishmentIsOpen"
                                 (click)="toggleStoreOpen(i, item?.establishmentId, !item.establishmentIsOpen);">
-                            <a href="#" style="margin-right: 10px;">Show Store as Open on Map</a></mat-checkbox>
+                            <span style="margin-right: 10px;">Show Store as Open on Map</span></mat-checkbox>
                         </div>
                         <input class="form-control" type="text" formControlName="phone" mask="(000) 000-0000"
                             placeholder="Store Phone Number" [readonly]="!actionsVisible(item) || item.isOperated"
