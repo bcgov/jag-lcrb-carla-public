@@ -1,25 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
-using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
-
-/*
-Feature: CRSApplicationShowStoreOnMap
+﻿Feature: CRSApplicationFederalReportsShowMap
     As a logged in business user
     I want to submit a CRS Application for different business types
-    And view the store on the map for the approved application
+    And review the federal reports for the approved application
 
-@e2e @cannabis @indigenousnation @crsmap
-Scenario: Indigenous Nation Show Store On Map
+@e2e @cannabis @indigenousnation @crsfedreportsIN
+Scenario: Indigenous Nation Federal Reports and Show Map
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
     And I am logged in to the dashboard as an indigenous nation
@@ -36,11 +21,12 @@ Scenario: Indigenous Nation Show Store On Map
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
+    And I review the federal reports
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @crsmap
-Scenario: Partnership Show Store On Map
+@e2e @cannabis @partnership @crsfedreportspartnership
+Scenario: Partnership Federal Reports and Show Map
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
     And I am logged in to the dashboard as a partnership
@@ -57,11 +43,12 @@ Scenario: Partnership Show Store On Map
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
+    And I review the federal reports
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @crsmap
-Scenario: Private Corporation Show Store On Map
+@e2e @cannabis @privatecorporation @crsfedreportsprivcorp
+Scenario: Private Corporation Federal Reports and Show Map
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     And I am logged in to the dashboard as a private corporation
@@ -78,11 +65,12 @@ Scenario: Private Corporation Show Store On Map
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
+    And I review the federal reports
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsmap
-Scenario: Public Corporation Show Store On Map
+@e2e @cannabis @publiccorporation @crsfedreportspubcorp
+Scenario: Public Corporation Federal Reports and Show Map
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
     And I am logged in to the dashboard as a public corporation
@@ -99,11 +87,12 @@ Scenario: Public Corporation Show Store On Map
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
+    And I review the federal reports
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsmap
-Scenario: Society Show Store On Map
+@e2e @cannabis @society @crsfedreportssociety
+Scenario: Society Federal Reports and Show Map
     Given I am logged in to the dashboard as a society
     And the account is deleted
     And I am logged in to the dashboard as a society
@@ -120,11 +109,12 @@ Scenario: Society Show Store On Map
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
+    And I review the federal reports
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crsmap
-Scenario: Sole Proprietorship Show Store On Map
+@e2e @cannabis @soleproprietorship @crsfedreportssoleprop
+Scenario: Sole Proprietorship Federal Reports and Show Map
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
     And I am logged in to the dashboard as a sole proprietorship
@@ -141,33 +131,6 @@ Scenario: Sole Proprietorship Show Store On Map
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
+    And I review the federal reports
     And the account is deleted
     Then I see the login page
-*/
-
-namespace bdd_tests
-{
-    [FeatureFile("./CRSApplicationShowStoreOnMap.feature")]
-    public sealed class CRSApplicationShowStoreOnMap : TestBase
-    {
-        [Given(@"I am logged in to the dashboard as an (.*)")]
-        public void I_view_the_dashboard_IN(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-
-
-        [And(@"I am logged in to the dashboard as an (.*)")]
-        public void And_I_view_the_dashboard_IN(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-
-
-        [Given(@"I am logged in to the dashboard as a (.*)")]
-        public void I_view_the_dashboard(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-    }
-}
