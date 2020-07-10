@@ -31,6 +31,7 @@ import { DynamicsFormDataService } from '../../../services/dynamics-form-data.se
 import { PoliceDurisdictionDataService } from '@services/police-jurisdiction-data.service';
 import { LocalGovernmentDataService } from '@services/local-government-data.service';
 import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.component';
+import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -422,7 +423,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
     //   this.form.get('connectedGrocery').setValidators([Validators.required]);
     // }
 
-
+    if (this.application.applicationType.serviceAreas) {
+      console.log(this.application.applicationType.serviceAreas);
+    }
+    if (this.application.applicationType.outsideAreas) {
+      console.log('outside area');
+    }
+    if (this.application.applicationType.capacityArea) {
+      console.log('capacity area');
+    }
   }
 
 
@@ -917,6 +926,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showFormControl(state: string): boolean {
     return [FormControlState.Show.toString(), FormControlState.Reaonly.toString()]
       .indexOf(state) !== -1;
+  }
+  testfun(application: ApplicationLicenseSummary) {
+    console.log(application)
+    return application.applicationType.serviceAreas;
   }
 
   getEstablishmentLabel(applicationTypeName: ApplicationTypeNames): string {
