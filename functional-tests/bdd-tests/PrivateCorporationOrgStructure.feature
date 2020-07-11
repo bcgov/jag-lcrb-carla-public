@@ -2,7 +2,7 @@
     As a logged in private corporation business user
     I want to confirm the organization structure functionality
 
-@e2e @cannabis @privatecorporation @validation @privatecorporgstructure1
+@e2e @cannabis @privatecorporation @validation @privatecorporgstructure
 Scenario: Change private corporation director name and pay fee
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -28,7 +28,7 @@ Scenario: Change private corporation director name and pay fee
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @privatecorporgstructure2
+@cannabis @privatecorporation @validation @privatecorporgstructure
 Scenario: Delete an individual who is both a private corporation director and shareholder
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -43,7 +43,7 @@ Scenario: Delete an individual who is both a private corporation director and sh
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @privatecorporgstructure3
+@cannabis @privatecorporation @validation @privatecorporgstructure
 Scenario: Change private corporation director and shareholder same name
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -58,7 +58,7 @@ Scenario: Change private corporation director and shareholder same name
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @privatecorporgstructure4
+@cannabis @privatecorporation @validation @privatecorporgstructure
 Scenario: Confirm private corporation business shareholder org structure update
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -85,7 +85,7 @@ Scenario: Confirm private corporation business shareholder org structure update
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @privatecorporgstructure5
+@cannabis @privatecorporation @validation @privatecorporgstructure
 Scenario: Confirm private corporation business shareholder org structure update after payment
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -116,7 +116,7 @@ Scenario: Confirm private corporation business shareholder org structure update 
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @privatecorporgstructure6
+@cannabis @privatecorporation @validation @privatecorporgstructure
 Scenario: Save for Later feature for private corporation org structure
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -145,7 +145,7 @@ Scenario: Save for Later feature for private corporation org structure
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @validation @privatecorporgstructure7
+@e2e @cannabis @privatecorporation @validation @privatecorporgstructure1
 Scenario: CRS application with mixed business shareholder types
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
