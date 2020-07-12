@@ -18,32 +18,9 @@ Feature: CateringApplicationPersonnelEmailChange
     I want to pay the first year catering licence fee
     And submit a personnel email change for different business types
 
-@e2e @catering @indigenousnation @cateringemail
-Scenario: Catering Indigenous Nation Personnel Email Change
-    Given I am logged in to the dashboard as an indigenous nation
-    And the account is deleted
-    And I am logged in to the dashboard as an indigenous nation
-    And I click on the Start Application button for Catering
-    And I review the account profile
-    And I review the organization structure
-    And I click on the Submit Organization Information button
-    And I complete the Catering application
-    And I click on the Submit button
-    And I click on the Pay for Application button
-    And I enter the payment information
-    And I return to the dashboard
-    And the application is approved
-    And I click on the Licences tab for Catering
-    And I pay the licensing fee for Catering
-    And I change a personnel email address
-    And the account is deleted
-    Then I see the login page
-
-@e2e @catering @partnership @cateringemail
+@e2e @catering @partnership @cateringemailpartner
 Scenario: Catering Partnership Personnel Email Change
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -60,11 +37,9 @@ Scenario: Catering Partnership Personnel Email Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @privatecorporation @cateringemail
+@e2e @catering @privatecorporation @cateringemailprivcorp
 Scenario: Catering Private Corporation Personnel Email Change
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -81,11 +56,9 @@ Scenario: Catering Private Corporation Personnel Email Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @publiccorporation @cateringemail
+@e2e @catering @publiccorporation @cateringemailpubcorp
 Scenario: Catering Public Corporation Personnel Email Change
     Given I am logged in to the dashboard as a public corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -102,11 +75,9 @@ Scenario: Catering Public Corporation Personnel Email Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @society @cateringemail
+@e2e @catering @society @cateringemailsociety
 Scenario: Catering Society Personnel Email Change
     Given I am logged in to the dashboard as a society
-    And the account is deleted
-    And I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -123,11 +94,9 @@ Scenario: Catering Society Personnel Email Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @soleproprietorship @cateringemail
+@e2e @catering @soleproprietorship @cateringemailsoleprop
 Scenario: Catering Sole Proprietorship Personnel Email Change
     Given I am logged in to the dashboard as a sole proprietorship
-    And the account is deleted
-    And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -148,7 +117,7 @@ Scenario: Catering Sole Proprietorship Personnel Email Change
 namespace bdd_tests
 {
     [FeatureFile("./CateringApplicationPersonnelEmailChange.feature")]
-    public sealed class CateringApplicationPersonnelEmailChange : TestBase
+    public sealed class CateringApplicationPersonnelNameChanges : TestBase
     {
         [Given(@"I am logged in to the dashboard as an (.*)")]
         public void Given_I_view_the_dashboard_IN(string businessType)
@@ -157,14 +126,6 @@ namespace bdd_tests
 
             CarlaLogin(businessType);
         }
-
-
-        [And(@"I am logged in to the dashboard as an (.*)")]
-        public void And_I_view_the_dashboard_IN(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-
 
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void Given_I_view_the_dashboard(string businessType)

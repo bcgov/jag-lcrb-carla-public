@@ -68,13 +68,10 @@
     <None Update="CateringApplicationEventAuthorization.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CateringApplicationNameBrandingChange.feature">
+    <None Update="CateringApplicationBrandingChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CateringApplicationPersonnelEmailChange.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="CateringApplicationPersonnelNameChange.feature">
+    <None Update="CateringApplicationPersonnelNameChanges.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CateringApplicationStoreRelocation.feature">
@@ -98,10 +95,7 @@
     <None Update="CRSApplicationNameBrandingChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSApplicationPersonnelEmailChange.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="CRSApplicationPersonnelNameChange.feature">
+    <None Update="CRSApplicationPersonnelNameChanges.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CRSApplicationStoreChanges.feature">
