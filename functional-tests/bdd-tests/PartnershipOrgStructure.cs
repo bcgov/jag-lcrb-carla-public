@@ -17,11 +17,9 @@ Feature: PartnershipOrgStructure.feature
     As a logged in partnership business user
     I want to confirm the organization structure functionality
 
-@e2e @cannabis @partnership @validation @orgstructure
-Scenario: Change director name and pay fee - partnership
+@e2e @cannabis @partnership @validation @partnerorgstructure1
+Scenario: Change individual partner name and pay fee
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -33,67 +31,64 @@ Scenario: Change director name and pay fee - partnership
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab
-    # And I pay the licensing fee for Cannabis
-    # And I return to the dashboard
+    And I pay the licensing fee for Cannabis
+    And I return to the dashboard
     And I click on the Dashboard link
     And I click on the Review Organization Information button
-    And I modify the director name
+    And I modify only the individual partner name
     And I click on the Submit Organization Information button
     And I pay the name change fee
-    And the director name is now updated
+    And the individual partner name is now updated
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @validation @orgstructure
-Scenario: Delete an individual who is both a director and shareholder - partnership
+@cannabis @partnership @validation @partnerorgstructure2
+Scenario: Delete an individual who is both an individual partner and individual partner of business partner
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
-    And I enter the same individual as a director and a shareholder
+    And I enter the same person as an individual partner and an individual partner of a business partner (person 1)
+    And I enter a second person as an individual partner (person 2)
+    And I enter a third person as an individual partner of a business partner (person 3)
     And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
-    And I delete only the director record
+    And I delete only the individual partner record (person 1)
     And I click on the Complete Organization Information button
-    And only the shareholder record is displayed
+    And only the individual partner of a business partner record is displayed (person 1, 2, 3)
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @validation @orgstructure
-Scenario: Change director and shareholder same name - partnership
+@cannabis @partnership @validation @partnerorgstructure3
+Scenario: Change individual partner and business partner same name 
+    # under development
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
-    And I enter the same individual as a director and a shareholder
+    And I enter the same person as an individual partner and a business shareholder
     And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
-    And I modify only the director record
+    And I modify only the individual partner record
     And I click on the Complete Organization Information button
-    And the director and shareholder name are identical
+    And the individual partner and business shareholder name are identical
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @validation @orgstructure
-Scenario: Confirm business shareholder org structure update - partnership
+@cannabis @partnership @validation @partnerorgstructure4
+Scenario: Confirm partnership business shareholder org structure update
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
-    And I enter the same individual as a director and a shareholder
+    And I enter the same individual as an individual partner and a business shareholder
     And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
-    And I add a business shareholder with the same individual as a director and a shareholder
+    And I add a business shareholder with the same individual as an individual partner and a business shareholder
     And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
-    And I add a second individual as a director and a shareholder to the business shareholder
+    And I add a second individual as an individual partner and a business shareholder 
     And I click on the Confirm Organization Information is Complete button
     And I click on the Complete Organization Information button
-    And the org structure is correct
-    And I remove the latest director and shareholder
+    And the partnership org structure is correct
+    And I remove the latest individual partner and business shareholder
     And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
-    And the latest director and shareholder is removed
+    And the latest individual partner and business shareholder is removed
     And I remove the business shareholder
     And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
@@ -101,22 +96,20 @@ Scenario: Confirm business shareholder org structure update - partnership
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @validation @orgstructure
-Scenario: Confirm business shareholder org structure update after payment - partnership
+@cannabis @partnership @validation @partnerorgstructure5
+Scenario: Confirm partnership business shareholder org structure update after payment 
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
-    And I enter the same individual as a director and a shareholder
+    And I enter the same individual as an individual partner and a business shareholder
     And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
-    And I add a business shareholder with the same individual as a director and a shareholder
+    And I add a business shareholder with the same individual as an individual partner and a business shareholder
     And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
-    And I add a second individual as a director and a shareholder to the business shareholder
+    And I add a second individual as an individual partner and a business shareholder 
     And I click on the Confirm Organization Information is Complete button
     And I click on the Complete Organization Information button
-    And the org structure is correct
+    And the partnership org structure is correct
     And I click on the Confirm Organization Information is Complete button
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -128,36 +121,34 @@ Scenario: Confirm business shareholder org structure update after payment - part
     And I return to the dashboard
     And the application is approved
     And I click on the Review Organization Information button
-    And the org structure is correct after payment
+    And the partnership org structure is correct after payment
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @validation @orgstructure
-Scenario: Save for Later feature for org structure - partnership
+@cannabis @partnership @validation @partnerorgstructure6
+Scenario: Save for Later feature for partnership org structure
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
-    And I enter the same individual as a director and a shareholder
+    And I enter the same individual as an individual partner and a business shareholder
     And I click on the Save for Later button
     And I click on the Complete Organization Information button
-    And I add a business shareholder with the same individual as a director and a shareholder
+    And I add a business shareholder with the same individual as an individual partner and a business shareholder
     And I click on the Save for Later button
     And I click on the Complete Organization Information button
-    And I add a second individual as a director and a shareholder to the business shareholder
+    And I add a second individual as an individual partner and a business shareholder
     And I click on the Save for Later button
     And I click on the Complete Organization Information button
-    And I remove the latest director after saving
+    And I remove the latest individual shareholder after saving
     And I click on the Save for Later button
     And I click on the Complete Organization Information button
-    And I remove the latest shareholder after saving
+    And I remove the latest business shareholder after saving
     And I click on the Save for Later button
     And I click on the Complete Organization Information button
     And the latest director and shareholder is removed
     And I remove the business shareholder
     And I click on the Save for Later button
     And I click on the Complete Organization Information button
-    And the saved org structure is present
+    And the saved org structure for partnership is present
     And the account is deleted
     Then I see the login page
 */
