@@ -92,7 +92,7 @@
     <None Update="CRSApplicationFederalReportsShowMap.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSApplicationNameBrandingChange.feature">
+    <None Update="CRSApplicationBrandingChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CRSApplicationPersonnelNameChanges.feature">
