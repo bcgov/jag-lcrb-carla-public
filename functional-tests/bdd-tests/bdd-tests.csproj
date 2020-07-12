@@ -104,13 +104,7 @@
     <None Update="CRSApplicationPersonnelNameChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSApplicationStoreRelocation.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="CRSApplicationStructuralChange.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="CRSApplicationTransferOwnership.feature">
+    <None Update="CRSApplicationStoreChanges.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2E_CRSApplication_Licence_society_transfer_ownership.feature">

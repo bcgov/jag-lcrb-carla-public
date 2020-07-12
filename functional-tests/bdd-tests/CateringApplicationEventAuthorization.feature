@@ -6,8 +6,6 @@
  @e2e @catering @indigenousnation @cateringevent2
  Scenario: Indigenous Nation Event Authorization Request
     Given I am logged in to the dashboard as an indigenous nation
-    And the account is deleted
-    And I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -27,8 +25,6 @@
  @e2e @catering @partnership @cateringevent
  Scenario: Partnership Event Authorization Request
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -48,8 +44,6 @@
  @e2e @catering @privatecorporation @cateringevent
  Scenario: Private Corporation Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -69,8 +63,6 @@
  @e2e @catering @publiccorporation @cateringevent2
  Scenario: Public Corporation Event Authorization Request
     Given I am logged in to the dashboard as a public corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -90,8 +82,6 @@
  @e2e @catering @society @cateringevent2
  Scenario: Society Event Authorization Request
     Given I am logged in to the dashboard as a society
-    And the account is deleted
-    And I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -111,8 +101,6 @@
   @e2e @catering @soleproprietorship @cateringevent
   Scenario: Sole Proprietorship Event Authorization Request
     Given I am logged in to the dashboard as a sole proprietorship
-    And the account is deleted
-    And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
