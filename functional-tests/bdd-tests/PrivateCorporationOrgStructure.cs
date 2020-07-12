@@ -17,11 +17,9 @@ Feature: PrivateCorporationOrgStructure.feature
     As a logged in private corporation business user
     I want to confirm the organization structure functionality
 
-@e2e @cannabis @privatecorporation @validation @orgstructure
-Scenario: Change director name and pay fee
+@e2e @cannabis @privatecorporation @validation @privatecorporgstructure
+Scenario: Change private corporation director name and pay fee
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -33,8 +31,7 @@ Scenario: Change director name and pay fee
     And I return to the dashboard
     And the application is approved
     And I click on the Licences tab
-    # And I pay the licensing fee for Cannabis
-    # And I return to the dashboard
+    And I pay the licensing fee for Cannabis
     And I click on the Dashboard link
     And I click on the Review Organization Information button
     And I modify the director name
@@ -44,11 +41,9 @@ Scenario: Change director name and pay fee
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @orgstructure
-Scenario: Delete an individual who is both a director and shareholder
+@cannabis @privatecorporation @validation @privatecorporgstructure
+Scenario: Delete an individual who is both a private corporation director and shareholder
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
     And I click on the Submit Organization Information button
@@ -59,11 +54,9 @@ Scenario: Delete an individual who is both a director and shareholder
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @orgstructure
-Scenario: Change director and shareholder same name 
+@cannabis @privatecorporation @validation @privatecorporgstructure
+Scenario: Change private corporation director and shareholder same name
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
     And I click on the Submit Organization Information button
@@ -74,11 +67,9 @@ Scenario: Change director and shareholder same name
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @orgstructure
-Scenario: Confirm business shareholder org structure update
+@cannabis @privatecorporation @validation @privatecorporgstructure
+Scenario: Confirm private corporation business shareholder org structure update
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
     And I click on the Submit Organization Information button
@@ -101,11 +92,9 @@ Scenario: Confirm business shareholder org structure update
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @orgstructure
-Scenario: Confirm business shareholder org structure update after payment
+@cannabis @privatecorporation @validation @privatecorporgstructure
+Scenario: Confirm private corporation business shareholder org structure update after payment
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
     And I click on the Submit Organization Information button
@@ -132,11 +121,9 @@ Scenario: Confirm business shareholder org structure update after payment
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @orgstructure
-Scenario: Save for Later feature for org structure 
+@cannabis @privatecorporation @validation @privatecorporgstructure
+Scenario: Save for Later feature for private corporation org structure
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
     And I click on the Save for Later button
@@ -161,11 +148,9 @@ Scenario: Save for Later feature for org structure
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @validation @orgstructure
+@e2e @cannabis @privatecorporation @validation @privatecorporgstructure1
 Scenario: CRS application with mixed business shareholder types
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile

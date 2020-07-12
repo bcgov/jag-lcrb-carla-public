@@ -1,10 +1,10 @@
-﻿Feature: CateringApplicationNameBrandingChange
+﻿Feature: CateringApplicationBrandingChange
     As a logged in business user
     I want to pay the first year catering licence fee
     And submit a name branding change for different business types
 
 @e2e @catering @indigenousnation @cateringbranding1
-Scenario: Catering Indigenous Nation Name Branding Change
+Scenario: Catering Indigenous Nation Branding Change
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for Catering
     And I review the account profile
@@ -24,7 +24,7 @@ Scenario: Catering Indigenous Nation Name Branding Change
     Then I see the login page
 
 @e2e @catering @partnership @cateringbranding2
-Scenario: Catering Partnership Name Branding Change
+Scenario: Catering Partnership Branding Change
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile
@@ -44,7 +44,7 @@ Scenario: Catering Partnership Name Branding Change
     Then I see the login page
 
 @e2e @catering @privatecorporation @cateringbranding3
-Scenario: Catering Private Corporation Name Branding Change
+Scenario: Catering Private Corporation Branding Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile
@@ -64,7 +64,7 @@ Scenario: Catering Private Corporation Name Branding Change
     Then I see the login page
 
 @e2e @catering @publiccorporation @cateringbranding4
-Scenario: Catering Public Corporation Name Branding Change
+Scenario: Catering Public Corporation Branding Change
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile
@@ -84,7 +84,7 @@ Scenario: Catering Public Corporation Name Branding Change
     Then I see the login page
 
 @e2e @catering @society @cateringbranding5
-Scenario: Catering Society Name Branding Change
+Scenario: Catering Society Branding Change
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile
@@ -104,7 +104,7 @@ Scenario: Catering Society Name Branding Change
     Then I see the login page
 
 @e2e @catering @soleproprietorship @cateringbranding6
-Scenario: Catering Sole Proprietorship Name Branding Change
+Scenario: Catering Sole Proprietorship Branding Change
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile

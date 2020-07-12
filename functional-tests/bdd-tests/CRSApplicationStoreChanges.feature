@@ -3,7 +3,7 @@
     I want to submit a CRS Application for different business types
     And request a store relocation and structural change and transfer of ownership for the approved application
 
-@e2e @cannabis @indigenousnation @crsrelocation2
+@e2e @cannabis @indigenousnation @crsstorechangesIN
 Scenario: Indigenous Nation Cannabis Store Changes
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -24,7 +24,7 @@ Scenario: Indigenous Nation Cannabis Store Changes
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @crsrelocation
+@e2e @cannabis @partnership @crsstorechangespartnership
 Scenario: Partnership Cannabis Store Changes
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
@@ -45,7 +45,7 @@ Scenario: Partnership Cannabis Store Changes
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @crsrelocationprivcorp
+@e2e @cannabis @privatecorporation @crsstorechangesprivcorp
 Scenario: Private Corporation Cannabis Store Changes
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -66,7 +66,7 @@ Scenario: Private Corporation Cannabis Store Changes
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsrelocation2
+@e2e @cannabis @publiccorporation @crsstorechangespubcorp
 Scenario: Public Corporation Cannabis Store Changes
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -87,7 +87,7 @@ Scenario: Public Corporation Cannabis Store Changes
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsrelocation2
+@e2e @cannabis @society @crsstorechangessociety
 Scenario: Society Cannabis Store Changes
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
@@ -108,7 +108,7 @@ Scenario: Society Cannabis Store Changes
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crsrelocation
+@e2e @cannabis @soleproprietorship @crsstorechangessoleprop
 Scenario: Sole Proprietorship Cannabis Store Changes
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store

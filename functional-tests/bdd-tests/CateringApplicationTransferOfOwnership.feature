@@ -6,8 +6,6 @@
  @e2e @catering @indigenousnation @cateringtransfer
  Scenario: Indigenous Nation Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as an indigenous nation
-    # And the account is deleted
-    # And I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -27,8 +25,6 @@
  @e2e @catering @partnership @cateringtransfer
  Scenario: Partnership Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as a partnership
-    # And the account is deleted
-    # And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -48,8 +44,6 @@
  @e2e @catering @privatecorporation @cateringtransfer
  Scenario: Private Corporation Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as a private corporation
-    # And the account is deleted
-    # And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -69,8 +63,6 @@
  @e2e @catering @publiccorporation @cateringtransfer2
  Scenario: Public Corporation Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as a public corporation
-    # And the account is deleted
-    # And I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -90,8 +82,6 @@
  @e2e @catering @society @cateringtransfer2
  Scenario: Society Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as a society
-    # And the account is deleted
-    # And I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -111,8 +101,6 @@
  @e2e @catering @soleproprietorship @cateringtransfer
  Scenario: Sole Proprietorship Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as a sole proprietorship
-    # And the account is deleted
-    # And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
