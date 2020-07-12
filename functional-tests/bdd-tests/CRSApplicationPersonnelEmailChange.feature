@@ -3,11 +3,11 @@
     I want to submit a CRS Application for different business types
     And request a personnel email change for the approved application
 
-@e2e @cannabis @partnership @crsemailpartnership
+@e2e @cannabis @partnership @crsemail
 Scenario: Partnership Personnel Email Change
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
+    # And the account is deleted
+    # And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -24,7 +24,7 @@ Scenario: Partnership Personnel Email Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @crsemailprivcorp
+@e2e @cannabis @privatecorporation @crsemail
 Scenario: Private Corporation Personnel Email Change
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -63,14 +63,15 @@ Scenario: Public Corporation Personnel Email Change
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I change a personnel email address
+    And I request a personnel name change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsemailsociety
+@e2e @cannabis @society @crsemail2
 Scenario: Society Personnel Email Change
     Given I am logged in to the dashboard as a society
-    And the account is deleted
-    And I am logged in to the dashboard as a society
+    # And the account is deleted
+    # And I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -87,11 +88,11 @@ Scenario: Society Personnel Email Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crsemailsoleprop
+@e2e @cannabis @soleproprietorship @crsemail
 Scenario: Sole Proprietorship Personnel Email Change
     Given I am logged in to the dashboard as a sole proprietorship
-    And the account is deleted
-    And I am logged in to the dashboard as a sole proprietorship
+    # And the account is deleted
+    # And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile

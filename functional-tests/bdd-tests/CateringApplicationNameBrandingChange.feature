@@ -6,8 +6,6 @@
 @e2e @catering @indigenousnation @cateringbranding1
 Scenario: Catering Indigenous Nation Name Branding Change
     Given I am logged in to the dashboard as an indigenous nation
-    And the account is deleted
-    And I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -28,8 +26,6 @@ Scenario: Catering Indigenous Nation Name Branding Change
 @e2e @catering @partnership @cateringbranding2
 Scenario: Catering Partnership Name Branding Change
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -50,8 +46,6 @@ Scenario: Catering Partnership Name Branding Change
 @e2e @catering @privatecorporation @cateringbranding3
 Scenario: Catering Private Corporation Name Branding Change
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -72,8 +66,6 @@ Scenario: Catering Private Corporation Name Branding Change
 @e2e @catering @publiccorporation @cateringbranding4
 Scenario: Catering Public Corporation Name Branding Change
     Given I am logged in to the dashboard as a public corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -94,8 +86,6 @@ Scenario: Catering Public Corporation Name Branding Change
 @e2e @catering @society @cateringbranding5
 Scenario: Catering Society Name Branding Change
     Given I am logged in to the dashboard as a society
-    And the account is deleted
-    And I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -116,8 +106,6 @@ Scenario: Catering Society Name Branding Change
 @e2e @catering @soleproprietorship @cateringbranding6
 Scenario: Catering Sole Proprietorship Name Branding Change
     Given I am logged in to the dashboard as a sole proprietorship
-    And the account is deleted
-    And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure

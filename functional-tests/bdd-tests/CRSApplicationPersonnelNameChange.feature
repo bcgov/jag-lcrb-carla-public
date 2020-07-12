@@ -3,11 +3,11 @@
     I want to submit a CRS Application for different business types
     And request a personnel name change for the approved application
 
-@e2e @cannabis @indigenousnation @crsnameIN
+@e2e @cannabis @indigenousnation @crsname
 Scenario: Indigenous Nation Personnel Name Change
     Given I am logged in to the dashboard as an indigenous nation
-    And the account is deleted
-    And I am logged in to the dashboard as an indigenous nation
+    # And the account is deleted
+    # And I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -24,11 +24,11 @@ Scenario: Indigenous Nation Personnel Name Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @crsnamepartnership
+@e2e @cannabis @partnership @crsname
 Scenario: Partnership Personnel Name Change
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
+    # And the account is deleted
+    # And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -45,11 +45,11 @@ Scenario: Partnership Personnel Name Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @crsnameprivcorp
+@e2e @cannabis @privatecorporation @crsname
 Scenario: Private Corporation Personnel Name Change
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
+    # And the account is deleted
+    # And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -66,11 +66,11 @@ Scenario: Private Corporation Personnel Name Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsnamepubcorp
+@e2e @cannabis @publiccorporation @crsname2
 Scenario: Public Corporation Personnel Name Change
     Given I am logged in to the dashboard as a public corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a public corporation
+    # And the account is deleted
+    # And I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -87,11 +87,11 @@ Scenario: Public Corporation Personnel Name Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsnamesociety
+@e2e @cannabis @society @crsname2
 Scenario: Society Personnel Name Change
     Given I am logged in to the dashboard as a society
-    And the account is deleted
-    And I am logged in to the dashboard as a society
+    # And the account is deleted
+    # And I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -108,11 +108,11 @@ Scenario: Society Personnel Name Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crsnamesoleprop
+@e2e @cannabis @soleproprietorship @crsname
 Scenario: Sole Proprietorship Personnel Name Change
     Given I am logged in to the dashboard as a sole proprietorship
-    And the account is deleted
-    And I am logged in to the dashboard as a sole proprietorship
+    # And the account is deleted
+    # And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile

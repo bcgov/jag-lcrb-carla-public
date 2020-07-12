@@ -6,8 +6,8 @@
 @e2e @catering @partnership @cateringemailpartner
 Scenario: Catering Partnership Personnel Email Change
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
+    # And the account is deleted
+    # And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -27,8 +27,8 @@ Scenario: Catering Partnership Personnel Email Change
 @e2e @catering @privatecorporation @cateringemailprivcorp
 Scenario: Catering Private Corporation Personnel Email Change
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
+    # And the account is deleted
+    # And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -48,8 +48,8 @@ Scenario: Catering Private Corporation Personnel Email Change
 @e2e @catering @publiccorporation @cateringemailpubcorp
 Scenario: Catering Public Corporation Personnel Email Change
     Given I am logged in to the dashboard as a public corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a public corporation
+    # And the account is deleted
+    # And I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -69,8 +69,8 @@ Scenario: Catering Public Corporation Personnel Email Change
 @e2e @catering @society @cateringemailsociety
 Scenario: Catering Society Personnel Email Change
     Given I am logged in to the dashboard as a society
-    And the account is deleted
-    And I am logged in to the dashboard as a society
+    # And the account is deleted
+    # And I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -90,8 +90,8 @@ Scenario: Catering Society Personnel Email Change
 @e2e @catering @soleproprietorship @cateringemailsoleprop
 Scenario: Catering Sole Proprietorship Personnel Email Change
     Given I am logged in to the dashboard as a sole proprietorship
-    And the account is deleted
-    And I am logged in to the dashboard as a sole proprietorship
+    # And the account is deleted
+    # And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure

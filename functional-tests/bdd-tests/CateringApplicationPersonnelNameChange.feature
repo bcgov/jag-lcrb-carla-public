@@ -6,8 +6,8 @@
 @e2e @catering @indigenousnation @cateringnameIN
 Scenario: Catering Indigenous Nation Personnel Name Change
     Given I am logged in to the dashboard as an indigenous nation
-    And the account is deleted
-    And I am logged in to the dashboard as an indigenous nation
+    # And the account is deleted
+    # And I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -27,8 +27,8 @@ Scenario: Catering Indigenous Nation Personnel Name Change
 @e2e @catering @partnership @cateringnamepartnership
 Scenario: Catering Partnership Personnel Name Change
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
+    # And the account is deleted
+    # And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -48,8 +48,8 @@ Scenario: Catering Partnership Personnel Name Change
 @e2e @catering @privatecorporation @cateringnameprivcorp
 Scenario: Catering Private Corporation Personnel Name Change
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
+    # And the account is deleted
+    # And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -69,8 +69,8 @@ Scenario: Catering Private Corporation Personnel Name Change
 @e2e @catering @publiccorporation @cateringnamepubcorp
 Scenario: Catering Public Corporation Personnel Name Change
     Given I am logged in to the dashboard as a public corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a public corporation
+    # And the account is deleted
+    # And I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -90,8 +90,8 @@ Scenario: Catering Public Corporation Personnel Name Change
 @e2e @catering @society @cateringnamesociety
 Scenario: Catering Society Personnel Name Change
     Given I am logged in to the dashboard as a society
-    And the account is deleted
-    And I am logged in to the dashboard as a society
+    # And the account is deleted
+    # And I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -111,8 +111,8 @@ Scenario: Catering Society Personnel Name Change
  @e2e @catering @soleproprietorship @cateringnamesoleprop
  Scenario: Catering Sole Proprietorship Personnel Name Change
     Given I am logged in to the dashboard as a sole proprietorship
-    And the account is deleted
-    And I am logged in to the dashboard as a sole proprietorship
+    # And the account is deleted
+    # And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure

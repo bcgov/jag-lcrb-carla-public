@@ -1,13 +1,26 @@
-﻿Feature: CRSApplicationStoreRelocation
+﻿using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support;
+using OpenQA.Selenium.Support.UI;
+using Protractor;
+using System;
+using Xunit.Gherkin.Quick;
+using Microsoft.Extensions.Configuration.UserSecrets;
+using System.IO;
+using Xunit;
+
+/*
+Feature: CRSApplicationStoreChanges
     As a logged in business user
     I want to submit a CRS Application for different business types
-    And request a store relocation for the approved application
+    And request a store relocation and structural change and transfer of ownership for the approved application
 
-@e2e @cannabis @indigenousnation @crsrelocationIN
-Scenario: Indigenous Nation Store Relocation
+@e2e @cannabis @indigenousnation @crsrelocation2
+Scenario: Indigenous Nation Cannabis Store Changes
     Given I am logged in to the dashboard as an indigenous nation
-    And the account is deleted
-    And I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -21,14 +34,14 @@ Scenario: Indigenous Nation Store Relocation
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I request a store relocation
+    And I request a structural change
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @crsrelocationpartnership
-Scenario: Partnership Store Relocation
+@e2e @cannabis @partnership @crsrelocation
+Scenario: Partnership Cannabis Store Changes
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -42,14 +55,14 @@ Scenario: Partnership Store Relocation
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I request a store relocation
+    And I request a structural change
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
 @e2e @cannabis @privatecorporation @crsrelocationprivcorp
-Scenario: Private Corporation Store Relocation
+Scenario: Private Corporation Cannabis Store Changes
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -63,14 +76,14 @@ Scenario: Private Corporation Store Relocation
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I request a store relocation
+    And I request a structural change
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsrelocationpubcorp
-Scenario: Public Corporation Store Relocation
+@e2e @cannabis @publiccorporation @crsrelocation2
+Scenario: Public Corporation Cannabis Store Changes
     Given I am logged in to the dashboard as a public corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -84,14 +97,14 @@ Scenario: Public Corporation Store Relocation
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I request a store relocation
+    And I request a structural change
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsrelocationsociety
-Scenario: Society Store Relocation
+@e2e @cannabis @society @crsrelocation2
+Scenario: Society Cannabis Store Changes
     Given I am logged in to the dashboard as a society
-    And the account is deleted
-    And I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -105,14 +118,14 @@ Scenario: Society Store Relocation
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I request a store relocation
+    And I request a structural change
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crsrelocationsoleprop
-Scenario: Sole Proprietorship Store Relocation
+@e2e @cannabis @soleproprietorship @crsrelocation
+Scenario: Sole Proprietorship Cannabis Store Changes
     Given I am logged in to the dashboard as a sole proprietorship
-    And the account is deleted
-    And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -126,5 +139,27 @@ Scenario: Sole Proprietorship Store Relocation
     And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I request a store relocation
+    And I request a structural change
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
+*/
+
+namespace bdd_tests
+{
+    [FeatureFile("./CRSApplicationStoreChanges.feature")]
+    public sealed class CRSApplicationStoreChanges : TestBase
+    {
+        [Given(@"I am logged in to the dashboard as an (.*)")]
+        public void I_view_the_dashboard_IN(string businessType)
+        {
+            CarlaLogin(businessType);
+        }
+
+        [Given(@"I am logged in to the dashboard as a (.*)")]
+        public void I_view_the_dashboard(string businessType)
+        {
+            CarlaLogin(businessType);
+        }
+    }
+}

@@ -3,11 +3,11 @@
     I want to pay the first year catering licence fee
     And request a transfer of ownership for different business types
 
- @e2e @catering @indigenousnation @cateringtransferIN
+ @e2e @catering @indigenousnation @cateringtransfer
  Scenario: Indigenous Nation Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as an indigenous nation
-    And the account is deleted
-    And I am logged in to the dashboard as an indigenous nation
+    # And the account is deleted
+    # And I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -24,11 +24,11 @@
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @partnership @cateringtransferpartnership
+ @e2e @catering @partnership @cateringtransfer
  Scenario: Partnership Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
+    # And the account is deleted
+    # And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -45,11 +45,11 @@
     And the account is deleted
     Then I see the login page
      
- @e2e @catering @privatecorporation @cateringtransferprivcorp
+ @e2e @catering @privatecorporation @cateringtransfer
  Scenario: Private Corporation Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
+    # And the account is deleted
+    # And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -66,11 +66,11 @@
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @publiccorporation @cateringtransferpubcorp
+ @e2e @catering @publiccorporation @cateringtransfer2
  Scenario: Public Corporation Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as a public corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a public corporation
+    # And the account is deleted
+    # And I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -87,11 +87,11 @@
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @society @cateringtransfersociety
+ @e2e @catering @society @cateringtransfer2
  Scenario: Society Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as a society
-    And the account is deleted
-    And I am logged in to the dashboard as a society
+    # And the account is deleted
+    # And I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -108,11 +108,11 @@
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @soleproprietorship @cateringtransfersoleprop
+ @e2e @catering @soleproprietorship @cateringtransfer
  Scenario: Sole Proprietorship Catering Request a Transfer of Ownership
     Given I am logged in to the dashboard as a sole proprietorship
-    And the account is deleted
-    And I am logged in to the dashboard as a sole proprietorship
+    # And the account is deleted
+    # And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
