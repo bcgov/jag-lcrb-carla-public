@@ -1231,8 +1231,6 @@ namespace bdd_tests
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
 
-            //System.Threading.Thread.Sleep(7000);
-
             ClickOnDashboard();
 
             // confirm that relocation request is displayed

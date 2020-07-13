@@ -13,10 +13,10 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CateringApplicationPersonnelEmailChange
+Feature: CateringApplicationPersonnelNameChanges
     As a logged in business user
     I want to pay the first year catering licence fee
-    And submit a personnel email change for different business types
+    And submit personnel name and email changes for different business types
 
 @e2e @catering @partnership @cateringemailpartner
 Scenario: Catering Partnership Personnel Email Change
@@ -31,9 +31,9 @@ Scenario: Catering Partnership Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
     And I change a personnel email address
+    And I request a personnel name change
     And the account is deleted
     Then I see the login page
 
@@ -50,9 +50,9 @@ Scenario: Catering Private Corporation Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
     And I change a personnel email address
+    And I request a personnel name change
     And the account is deleted
     Then I see the login page
 
@@ -69,9 +69,9 @@ Scenario: Catering Public Corporation Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
     And I change a personnel email address
+    And I request a personnel name change
     And the account is deleted
     Then I see the login page
 
@@ -88,9 +88,9 @@ Scenario: Catering Society Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
     And I change a personnel email address
+    And I request a personnel name change
     And the account is deleted
     Then I see the login page
 
@@ -107,16 +107,16 @@ Scenario: Catering Sole Proprietorship Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
     And I change a personnel email address
+    And I request a personnel name change
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./CateringApplicationPersonnelEmailChange.feature")]
+    [FeatureFile("./CateringApplicationPersonnelNameChanges.feature")]
     public sealed class CateringApplicationPersonnelNameChanges : TestBase
     {
         [Given(@"I am logged in to the dashboard as an (.*)")]
