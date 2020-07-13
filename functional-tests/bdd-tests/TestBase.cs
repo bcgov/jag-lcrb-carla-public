@@ -1380,7 +1380,7 @@ namespace bdd_tests
         public void RequestThirdPartyOperator()
         {
             // return to the Licences tab
-            //ClickLicencesTab();
+            ClickLicencesTab();
 
             /* 
             Page Title: Licences
