@@ -32,6 +32,7 @@ export class LgZoningConfirmationComponent extends FormBase implements OnInit {
       lGContactPhone: ['', [Validators.required]],
       lGContactEmail: ['', [Validators.required, Validators.email]],
       lgZoning: ['', [Validators.required]],
+      lGDecisionComments: [''],
     });
     this.form.patchValue(this.application);
   }
