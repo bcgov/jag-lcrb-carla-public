@@ -788,15 +788,11 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
                 }
 
-                //System.Threading.Thread.Sleep(7000);
-
                 // click on Dashboard link
                 ClickOnDashboard();
 
                 // click on the review organization information button
                 ClickReviewOrganizationInformation();
-
-                //System.Threading.Thread.Sleep(7000);
 
                 // check that the director name has been updated
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedFirstName')]")).Displayed);
@@ -1188,12 +1184,8 @@ namespace bdd_tests
             // click on the Submit & Pay button
             ClickOnSubmitButton();
 
-            //System.Threading.Thread.Sleep(3000);
-
             // pay for the structural change application
             MakePayment();
-
-            //System.Threading.Thread.Sleep(7000);
 
             // confirm correct payment amount
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$440.00')]")).Displayed);
@@ -1296,8 +1288,6 @@ namespace bdd_tests
             // pay for the branding change application
             MakePayment();
 
-            //System.Threading.Thread.Sleep(7000);
-
             // confirm correct payment amount	
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
 
@@ -1354,8 +1344,6 @@ namespace bdd_tests
 
             // pay for the relocation application
             MakePayment();
-
-            //System.Threading.Thread.Sleep(7000);
 
             // confirm correct payment amount
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
