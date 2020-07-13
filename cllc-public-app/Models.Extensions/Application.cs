@@ -122,6 +122,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             to.AdoxioApplicanttype = (int?)from.ApplicantType;
             to.AdoxioLgzoning = (int?)from.LgZoning;
+            to.AdoxioLgDecisionComments = from.LGDecisionComments;
 
             // catering fields
             to.AdoxioPreviouslicenceapplication = from.PreviousApplication;
@@ -389,6 +390,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 LgInName = dynamicsApplication?.AdoxioLocalgovindigenousnationid?.AdoxioName,
                 LGApprovalDecision = (LGDecision?)dynamicsApplication.AdoxioLgapprovaldecision,
                 LgZoning =(Zoning?)dynamicsApplication.AdoxioLgzoning,
+                LGDecisionComments = dynamicsApplication.AdoxioLgDecisionComments,
 
                 // Catering fields.
 
