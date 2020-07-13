@@ -26,6 +26,7 @@ export class MultiStageApplicationFlowComponent implements OnInit {
   @ViewChild('orgStructure', { static: false }) licenseeChangesComponent: ApplicationLicenseeChangesComponent;
   @ViewChild('mainApplication', { static: false }) applicationComponent: ApplicationComponent;
   @ViewChild('dynamicApplication', { static: false }) dynamicApplicationComponent: DynamicApplicationComponent;
+  stepType: 'after-lg-decision';
 
 
   constructor(public featureFlagService: FeatureFlagService, 
@@ -38,6 +39,9 @@ export class MultiStageApplicationFlowComponent implements OnInit {
 
     this.route.paramMap.subscribe(params => {
       this.applicationId = params.get('applicationId');
+      if (params.get('stepType') === 'after-lg-decision'){
+        this.stepType = 'after-lg-decision';
+      }
     });
 
   }

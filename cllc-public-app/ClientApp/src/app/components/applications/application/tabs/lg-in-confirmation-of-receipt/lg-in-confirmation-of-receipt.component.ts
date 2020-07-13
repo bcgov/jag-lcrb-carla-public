@@ -17,6 +17,7 @@ import { Observable } from 'rxjs';
 export class LgInConfirmationOfReceiptComponent extends FormBase implements OnInit {
   @Input() application: Application;
   @Input() htmlContent: ApplicationHTMLContent;
+  @Input() disableForm = false;
   validationMessages: string[];
   busy: any;
 
@@ -37,6 +38,10 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
       lGContactEmail: ['', [Validators.required, Validators.email]]
     });
     this.form.patchValue(this.application);
+
+    if (this.disableForm) {
+      this.form.disable();
+    }
   }
 
   isValid() {

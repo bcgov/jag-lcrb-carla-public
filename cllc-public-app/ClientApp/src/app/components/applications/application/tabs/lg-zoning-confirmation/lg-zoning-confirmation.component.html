@@ -44,7 +44,7 @@
     </section>
 </div>
 
-<section class="position-relative d-flex justify-content-between p-3">
+<section *ngIf="!disableForm" class="position-relative d-flex justify-content-between p-3">
     <div [ngBusy]="busy"></div>
 
     <button class="btn btn-secondary" (click)="saveForLater()">

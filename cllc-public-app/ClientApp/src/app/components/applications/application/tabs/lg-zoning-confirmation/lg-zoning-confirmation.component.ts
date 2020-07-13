@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class LgZoningConfirmationComponent extends FormBase implements OnInit {
   @Input() application: Application;
+  @Input() disableForm = false;
   busy: any;
   validationMessages: string[];
 
@@ -35,6 +36,10 @@ export class LgZoningConfirmationComponent extends FormBase implements OnInit {
       lGDecisionComments: [''],
     });
     this.form.patchValue(this.application);
+
+    if (this.disableForm) {
+      this.form.disable();
+    }
   }
 
   isValid() {
@@ -65,7 +70,7 @@ export class LgZoningConfirmationComponent extends FormBase implements OnInit {
 
   }
 
-  saveForLater(){
+  saveForLater() {
     let data = <Application>{
       ...this.application,
       ...this.form.value
