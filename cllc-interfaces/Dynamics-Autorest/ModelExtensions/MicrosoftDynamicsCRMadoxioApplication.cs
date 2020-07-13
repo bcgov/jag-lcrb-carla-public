@@ -15,6 +15,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     [MetadataType(typeof(MicrosoftDynamicsCRMadoxioApplicationMetadata))]
     public partial class MicrosoftDynamicsCRMadoxioApplication
     {
+        [JsonProperty(PropertyName = "adoxio_lgdecisioncomments")]
+        public string AdoxioLgDecisionComments { get; set; }
 
         /// <summary>
         /// </summary>
