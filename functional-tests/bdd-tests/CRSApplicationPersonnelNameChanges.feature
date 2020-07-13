@@ -16,7 +16,6 @@ Scenario: Partnership Personnel Name Changes
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I change a personnel email address
     And I request a personnel name change
@@ -36,7 +35,6 @@ Scenario: Private Corporation Personnel Name Changes
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I change a personnel email address
     And I request a personnel name change
@@ -56,7 +54,6 @@ Scenario: Public Corporation Personnel Name Changes
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I change a personnel email address
     And I request a personnel name change
@@ -76,7 +73,6 @@ Scenario: Society Personnel Name Changes
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I change a personnel email address
     And I request a personnel name change
@@ -96,7 +92,6 @@ Scenario: Sole Proprietorship Personnel Name Changes
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I change a personnel email address
     And I request a personnel name change

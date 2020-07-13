@@ -16,7 +16,6 @@ Scenario: Indigenous Nation Cannabis Store Changes
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I request a store relocation
     And I request a structural change
@@ -37,7 +36,6 @@ Scenario: Partnership Cannabis Store Changes
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I request a store relocation
     And I request a structural change
@@ -58,7 +56,6 @@ Scenario: Private Corporation Cannabis Store Changes
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I request a store relocation
     And I request a structural change
@@ -79,7 +76,6 @@ Scenario: Public Corporation Cannabis Store Changes
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I request a store relocation
     And I request a structural change
@@ -100,7 +96,6 @@ Scenario: Society Cannabis Store Changes
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I request a store relocation
     And I request a structural change
@@ -121,7 +116,6 @@ Scenario: Sole Proprietorship Cannabis Store Changes
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I request a store relocation
     And I request a structural change
