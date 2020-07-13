@@ -17,7 +17,7 @@ Scenario: Indigenous Nation Cannabis Store Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I request a store relocation
+    And I request a Cannabis store relocation
     And I request a structural change
     And I request a transfer of ownership
     And the account is deleted
@@ -37,7 +37,7 @@ Scenario: Partnership Cannabis Store Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I request a store relocation
+    And I request a Cannabis store relocation
     And I request a structural change
     And I request a transfer of ownership
     And the account is deleted
@@ -57,7 +57,7 @@ Scenario: Private Corporation Cannabis Store Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I request a store relocation
+    And I request a Cannabis store relocation
     And I request a structural change
     And I request a transfer of ownership
     And the account is deleted
@@ -77,7 +77,7 @@ Scenario: Public Corporation Cannabis Store Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I request a store relocation
+    And I request a Cannabis store relocation
     And I request a structural change
     And I request a transfer of ownership
     And the account is deleted
@@ -97,7 +97,7 @@ Scenario: Society Cannabis Store Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I request a store relocation
+    And I request a Cannabis store relocation
     And I request a structural change
     And I request a transfer of ownership
     And the account is deleted
@@ -117,7 +117,7 @@ Scenario: Sole Proprietorship Cannabis Store Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I request a store relocation
+    And I request a Cannabis store relocation
     And I request a structural change
     And I request a transfer of ownership
     And the account is deleted
