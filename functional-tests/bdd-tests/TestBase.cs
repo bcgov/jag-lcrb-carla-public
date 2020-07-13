@@ -872,8 +872,10 @@ namespace bdd_tests
             // pay for the relocation application
             MakePayment();
 
+            System.Threading.Thread.Sleep(4000);
+
             // confirm correct payment amount
-            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
 
             // return to the Licences tab
             ClickLicencesTab();
@@ -913,7 +915,8 @@ namespace bdd_tests
                 uiNewEmail.SendKeys(newEmail);
 
                 // click on the Confirm button
-                NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector(".fa-save span"));
+                //NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector(".fa-save span"));
+                NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//app-org-structure/div/div[4]/section/app-associate-list/div/table/tr/td[7]/i[1]/span"));
                 uiConfirmButton.Click();
 
                 // click on confirm org info button
@@ -1187,6 +1190,8 @@ namespace bdd_tests
             // pay for the structural change application
             MakePayment();
 
+            System.Threading.Thread.Sleep(4000);
+
             // confirm correct payment amount
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$440.00')]")).Displayed);
 
@@ -1345,8 +1350,10 @@ namespace bdd_tests
             // pay for the relocation application
             MakePayment();
 
+            System.Threading.Thread.Sleep(4000);
+
             // confirm correct payment amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
         }
 
         public void Dispose()
