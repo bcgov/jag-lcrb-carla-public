@@ -74,7 +74,7 @@
     <None Update="CateringApplicationPersonnelNameChanges.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CateringApplicationStoreRelocation.feature">
+    <None Update="CateringApplicationStoreRelocationThirdParty.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CateringApplicationThirdPartyOperator.feature">
