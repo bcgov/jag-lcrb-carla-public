@@ -16,7 +16,6 @@ Scenario: Catering Partnership Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
     And I change a personnel email address
     And I request a personnel name change
@@ -36,7 +35,6 @@ Scenario: Catering Private Corporation Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
     And I change a personnel email address
     And I request a personnel name change
@@ -56,7 +54,6 @@ Scenario: Catering Public Corporation Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
     And I change a personnel email address
     And I request a personnel name change
@@ -76,7 +73,6 @@ Scenario: Catering Society Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
     And I change a personnel email address
     And I request a personnel name change
@@ -96,7 +92,6 @@ Scenario: Catering Sole Proprietorship Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
     And I change a personnel email address
     And I request a personnel name change

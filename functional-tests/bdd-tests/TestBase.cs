@@ -1486,8 +1486,8 @@ namespace bdd_tests
 
             ngDriver.IgnoreSynchronization = false;
 
-            // navigate back to dashboard
-            ngDriver.Navigate().GoToUrl($"{baseUri}dashboard");
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
         }
 
 
