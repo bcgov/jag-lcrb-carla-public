@@ -801,7 +801,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"I request a store relocation")]
+        [And(@"I request a Cannabis store relocation")]
         public void RequestStoreRelocation()
         {
             /* 
@@ -1353,7 +1353,7 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(4000);
 
             // confirm correct payment amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
         }
 
         public void Dispose()
