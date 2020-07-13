@@ -13,13 +13,13 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplicationPersonnelEmailChange
+Feature: CRSApplicationPersonnelNameChanges
     As a logged in business user
     I want to submit a CRS Application for different business types
-    And request a personnel email change for the approved application
+    And request personnel email and name changes for the approved application
 
 @e2e @cannabis @partnership @crsemail
-Scenario: Partnership Personnel Email Change
+Scenario: Partnership Personnel Name Changes
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -31,14 +31,14 @@ Scenario: Partnership Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I change a personnel email address
+    And I request a personnel name change
     And the account is deleted
     Then I see the login page
 
 @e2e @cannabis @privatecorporation @crsemail
-Scenario: Private Corporation Personnel Email Change
+Scenario: Private Corporation Personnel Name Changes
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -50,14 +50,14 @@ Scenario: Private Corporation Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I change a personnel email address
+    And I request a personnel name change
     And the account is deleted
     Then I see the login page
 
 @e2e @cannabis @publiccorporation @crsemailpubcorp
-Scenario: Public Corporation Personnel Email Change
+Scenario: Public Corporation Personnel Name Changes
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -69,7 +69,6 @@ Scenario: Public Corporation Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I change a personnel email address
     And I request a personnel name change
@@ -77,7 +76,7 @@ Scenario: Public Corporation Personnel Email Change
     Then I see the login page
 
 @e2e @cannabis @society @crsemail2
-Scenario: Society Personnel Email Change
+Scenario: Society Personnel Name Changes
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -89,14 +88,14 @@ Scenario: Society Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I change a personnel email address
+    And I request a personnel name change
     And the account is deleted
     Then I see the login page
 
 @e2e @cannabis @soleproprietorship @crsemail
-Scenario: Sole Proprietorship Personnel Email Change
+Scenario: Sole Proprietorship Personnel Name Changes
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -108,16 +107,16 @@ Scenario: Sole Proprietorship Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I change a personnel email address
+    And I request a personnel name change
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplicationPersonnelEmailChange.feature")]
+    [FeatureFile("./CRSApplicationPersonnelNameChanges.feature")]
     public sealed class CRSApplicationPersonnelNameChanges : TestBase
     {
         [Given(@"I am logged in to the dashboard as an (.*)")]
