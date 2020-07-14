@@ -1,13 +1,31 @@
-﻿Feature: CateringApplicationPersonnelEmailChange
+﻿ Feature: CateringApplicationEventAuthorizationTransfer
     As a logged in business user
     I want to pay the first year catering licence fee
-    And submit a personnel email change for different business types
+    And submit an event authorization and transfer of ownership request for different business types
 
-@e2e @catering @partnership @cateringemailpartner
-Scenario: Catering Partnership Personnel Email Change
+ @e2e @catering @indigenousnation @cateringeventtransfer2
+ Scenario: Indigenous Nation Event Authorization Transfer Ownership Requests
+    Given I am logged in to the dashboard as an indigenous nation
+    And I click on the Start Application button for Catering
+    And I review the account profile
+    And I review the organization structure
+    And I click on the Submit Organization Information button
+    And I complete the Catering application
+    And I click on the Submit button
+    And I click on the Pay for Application button
+    And I enter the payment information
+    And I return to the dashboard
+    And the application is approved
+    #And I click on the Licences tab for Catering
+    And I pay the licensing fee for Catering
+    And I request an event authorization
+    And I request a transfer of ownership
+    And the account is deleted
+    Then I see the login page
+
+ @e2e @catering @partnership @cateringeventtransfer
+ Scenario: Partnership Event Authorization Transfer Ownership Requests
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -18,17 +36,15 @@ Scenario: Catering Partnership Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
-    And I change a personnel email address
+    And I request an event authorization
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @privatecorporation @cateringemailprivcorp
-Scenario: Catering Private Corporation Personnel Email Change
+ @e2e @catering @privatecorporation @cateringeventtransfer
+ Scenario: Private Corporation Event Authorization Transfer Ownership Requests
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -39,17 +55,15 @@ Scenario: Catering Private Corporation Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
-    And I change a personnel email address
+    And I request an event authorization
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @publiccorporation @cateringemailpubcorp
-Scenario: Catering Public Corporation Personnel Email Change
+ @e2e @catering @publiccorporation @cateringeventtransfer2
+ Scenario: Public Corporation Event Authorization Transfer Ownership Requests
     Given I am logged in to the dashboard as a public corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -60,17 +74,15 @@ Scenario: Catering Public Corporation Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
-    And I change a personnel email address
+    And I request an event authorization
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @society @cateringemailsociety
-Scenario: Catering Society Personnel Email Change
+ @e2e @catering @society @cateringeventtransfer2
+ Scenario: Society Event Authorization Transfer Ownership Requests
     Given I am logged in to the dashboard as a society
-    And the account is deleted
-    And I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -81,17 +93,15 @@ Scenario: Catering Society Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
-    And I change a personnel email address
+    And I request an event authorization
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @soleproprietorship @cateringemailsoleprop
-Scenario: Catering Sole Proprietorship Personnel Email Change
+  @e2e @catering @soleproprietorship @cateringeventtransfer
+  Scenario: Sole Proprietorship Event Authorization Transfer Ownership Requests
     Given I am logged in to the dashboard as a sole proprietorship
-    And the account is deleted
-    And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -102,8 +112,8 @@ Scenario: Catering Sole Proprietorship Personnel Email Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
-    And I change a personnel email address
+    And I request an event authorization
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
