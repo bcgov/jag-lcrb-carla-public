@@ -17,7 +17,7 @@ Scenario: Partnership Personnel Name Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I change a personnel email address
+    # And I change a personnel email address
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -36,7 +36,7 @@ Scenario: Private Corporation Personnel Name Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I change a personnel email address
+    # And I change a personnel email address
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -55,7 +55,7 @@ Scenario: Public Corporation Personnel Name Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I change a personnel email address
+    # And I change a personnel email address
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -74,7 +74,7 @@ Scenario: Society Personnel Name Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I change a personnel email address
+    # And I change a personnel email address
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -93,7 +93,7 @@ Scenario: Sole Proprietorship Personnel Name Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I change a personnel email address
+    # And I change a personnel email address
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
