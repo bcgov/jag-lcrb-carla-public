@@ -572,6 +572,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
     let description2 = '';
+    
 
     if (this.isRAS()) {
       description2 += this.form.get('isOwner').value ? 'Is owner = Yes' : 'Is owner = No';
