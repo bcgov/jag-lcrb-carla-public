@@ -113,7 +113,9 @@ export class LicencesComponent extends FormBase implements OnInit {
       ])
         .subscribe(data => {
           licence.events = data[0];
-          licence.headerRowSpan += 1;
+          if (licence.events.length > 0) {
+            licence.headerRowSpan += 1;
+          }
         });
     }
 

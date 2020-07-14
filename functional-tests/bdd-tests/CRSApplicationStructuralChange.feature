@@ -3,7 +3,7 @@
     I want to submit a CRS Application for different business types
     And request a structural change for the approved application
 
-@e2e @cannabis @indigenousnation @crsstructural2
+@e2e @cannabis @indigenousnation @crsstructuralIN
 Scenario: Indigenous Nation Structural Change Request
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
@@ -24,7 +24,7 @@ Scenario: Indigenous Nation Structural Change Request
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @crsstructural
+@e2e @cannabis @partnership @crsstructuralpartnership
 Scenario: Partnership Structural Change Request
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
@@ -45,7 +45,7 @@ Scenario: Partnership Structural Change Request
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @crsstructural
+@e2e @cannabis @privatecorporation @crsstructuralprivcorp
 Scenario: Private Corporation Structural Change Request
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
@@ -66,7 +66,7 @@ Scenario: Private Corporation Structural Change Request
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsstructural2
+@e2e @cannabis @publiccorporation @crsstructuralpubcorp
 Scenario: Public Corporation Structural Change Request
     Given I am logged in to the dashboard as a public corporation
     And the account is deleted
@@ -87,7 +87,7 @@ Scenario: Public Corporation Structural Change Request
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsstructural2
+@e2e @cannabis @society @crsstructuralsociety
 Scenario: Society Structural Change Request
     Given I am logged in to the dashboard as a society
     And the account is deleted
@@ -108,7 +108,7 @@ Scenario: Society Structural Change Request
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crsstructural
+@e2e @cannabis @soleproprietorship @crsstructuralsoleprop
 Scenario: Sole Proprietorship Structural Change Request
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted

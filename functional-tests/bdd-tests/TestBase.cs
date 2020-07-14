@@ -714,9 +714,19 @@ namespace bdd_tests
                 // click on the review organization information button
                 ClickReviewOrganizationInformation();
 
-                // click on the Edit button for Key Personnel
-                NgWebElement uiEditInfoButton = ngDriver.FindElement(By.CssSelector("td:nth-child(7) .ng-star-inserted"));
-                uiEditInfoButton.Click();
+                // click on the Edit button for Key Personnel (partnership, sole proprietorship, private corporation, or society)
+                if (businessTypeShared == "partnership" || businessTypeShared == "sole proprietorship" || businessTypeShared == "private corporation" || businessTypeShared == "society")
+                {
+                    NgWebElement uiEditInfoButtonShared = ngDriver.FindElement(By.CssSelector(".fas.fa-pencil-alt span"));
+                    uiEditInfoButtonShared.Click();
+                }
+
+                // click on the Edit button for Key Personnel (public corporation)
+                if (businessTypeShared == "public corporation")
+                {
+                    NgWebElement uiEditInfoButton = ngDriver.FindElement(By.CssSelector("td:nth-child(7) .ng-star-inserted"));
+                    uiEditInfoButton.Click();
+                }
 
                 // enter a new name for the director
                 string newDirectorFirstName = "UpdatedFirstName";
@@ -759,9 +769,7 @@ namespace bdd_tests
                 }
 
                 // click on submit org info button
-                //ClickSubmitOrgStructureButton();
-
-                NgWebElement uiSubmitOrgStructure = ngDriver.FindElement(By.XPath("//app-application-licensee-changes/div/div[2]/section[1]/section[2]/button[3]"));
+                NgWebElement uiSubmitOrgStructure = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION ']"));
                 uiSubmitOrgStructure.Click();
 
                 MakePayment();
@@ -885,16 +893,26 @@ namespace bdd_tests
                 // click on the review organization information button
                 ClickReviewOrganizationInformation();
 
-                // click on the Edit button for Key Personnel
-                NgWebElement uiEditInfoButton = ngDriver.FindElement(By.CssSelector("td:nth-child(7) .ng-star-inserted"));
-                uiEditInfoButton.Click();
+                // click on the Edit button for Key Personnel (partnership, sole proprietorship, public corporation, or society)
+                if (businessTypeShared == "partnership" || businessTypeShared == "sole proprietorship" || businessTypeShared == "public corporation" || businessTypeShared == "society")
+                {
+                    NgWebElement uiEditInfoButtonPartner = ngDriver.FindElement(By.CssSelector(".fas.fa-pencil-alt span"));
+                    uiEditInfoButtonPartner.Click();
+                }
 
-                // enter a new email for the director
-                string newDirectorEmail = "newemail@test.com";
+                // click on the Edit button for Key Personnel (private corporation)
+                if (businessTypeShared == "private corporation")
+                {
+                    NgWebElement uiEditInfoButton = ngDriver.FindElement(By.CssSelector("td:nth-child(7) .ng-star-inserted"));
+                    uiEditInfoButton.Click();
+                }
 
-                NgWebElement uiNewDirectorEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='emailNew']"));
-                uiNewDirectorEmail.Clear();
-                uiNewDirectorEmail.SendKeys(newDirectorEmail);
+                // enter a new email for the key personnel
+                string newEmail = "newemail@test.com";
+
+                NgWebElement uiNewEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='emailNew']"));
+                uiNewEmail.Clear();
+                uiNewEmail.SendKeys(newEmail);
 
                 // click on the Confirm button
                 NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector(".fa-save span"));
@@ -2640,19 +2658,13 @@ namespace bdd_tests
             Subtitle:   Cannabis Retail Store Licences
             */
 
-            string showOpenOnMap = "Show Store as Open on Map";
-
-            // click on the Show Store as Open on Map link
-            NgWebElement uiShowOpenOnMap = ngDriver.FindElement(By.LinkText(showOpenOnMap));
-            uiShowOpenOnMap.Click();
+            // click on the Show Store as Open on Map checkbox
+            NgWebElement uiMapCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox"));
+            uiMapCheckbox.Click();
 
             /* 
             Page Title: Apply for a cannabis licence
             */
-
-            //System.Threading.Thread.Sleep(7000);
-
-            ClickOnDashboard();
         }
 
 
