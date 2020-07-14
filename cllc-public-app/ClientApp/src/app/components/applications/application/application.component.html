@@ -511,23 +511,29 @@
           <label for="">Photos or renderings of the store's signage</label>
           <br>
           <section *ngIf="application?.applicationType?.signage === FormControlState.Show">
-
-            <p>
-              The signage submitted must show the name of the store and all words, images and symbols used in the
-              signage.
-            </p>
-
-            <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-              Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis (e.g. a
-              green cross). It must not imply an association with another business (other than another non-medical
-              cannabis
-              retail store).
-            </p>
-            <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-              <b>Note:</b> If submitting renderings, renderings may be either printed or hand-drawn (as long as they are
-              legible)
-            </p>
-
+        
+            <div *ngIf="htmlContent.signage">
+              <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.signage"></section>
+            </div>
+        
+            <div *ngIf="!htmlContent.signage">
+              <p>
+                The signage submitted must show the name of the store and all words, images and symbols used in the
+                signage.
+              </p>
+        
+              <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+                Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis (e.g. a
+                green cross). It must not imply an association with another business (other than another non-medical
+                cannabis
+                retail store).
+              </p>
+              <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+                <b>Note:</b> If submitting renderings, renderings may be either printed or hand-drawn (as long as they are
+                legible)
+              </p>
+            </div>
+        
           </section>
 
           <p *ngIf="application?.applicationType?.signage === FormControlState.Reaonly">
@@ -749,111 +755,66 @@
           <hr><br>
           <label for="">Site Plan</label>
           <br>
-          <div *ngIf="application?.applicationType?.sitePlan === FormControlState.Show">
 
-            <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-              <span>
-                A site plan is a document showing any existing and proposed building footprints, pathways of
-                travel, parking, and landscaping elements, and the surrounding area. The document must measure at least
-                8.5" x 11" (standard letter size). Either a hand-drawn or computer-generated plan is acceptable, as long
-                as the plan is drawn to scale and is clear and legible. A site plan must not be submitted on graph paper
-                or paper with gridlines.
-              </span>
-              <div class="row" style="margin-top: 10px;">
-                <div class="col-md-6">
-                  <p>
-                    The site plan must include the proposed store footprint and a representation of any interior or
-                    exterior spaces surrounding the store, including:
-                  </p>
-
-                  <ul>
-                    <li>
-                      The location of any other buildings/businesses on the same site, each building footprint, type
-                      of businesses (e.g. gas station, office building) and building names, and their entrances and
-                      exits
-                    </li>
-                    <li>A description of the type of separation proposed (for any adjoining businesses)</li>
-                    <li>Road access and exits, including any relevant street names</li>
-                    <li>Parking lots.</li>
-                  </ul>
-                  <img src="assets/site-plan-example.png" width="350" alt="Site plan"
-                    style="margin: auto; display: block;">
-                </div>
-                <div class="col-md-6">
-                  <p>
-                    If the proposed store is located inside a building with other businesses
-                    (e.g. a mall), submit two site plans:
-                  </p>
-                  <p>
-                    1) One site plan showing location of any other buildings/businesses on the same site, including:
-                  </p>
-                  <ul>
-                    <li>
-                      Each building footprint, building name and a list of businesses operating inside the building
-                    </li>
-                    <li>Road access and exits, including any relevant street names, and</li>
-                    <li>Parking lots</li>
-                  </ul>
-                  <p>
-                    2) A second site plan showing the location of the proposed store
-                    inside the building’s footprint:
-                  </p>
-                  <ul>
-                    <li>All entrances and exits for the building</li>
-                    <li>The location, name and type of businesses operating inside the building</li>
-                    <li>The store footprint with all entrances and exits for the store, and</li>
-                    <li>
-                      A description of the type of separation proposed for any business adjoining the proposed store
-                    </li>
-                  </ul>
-                  <p>
-                    Full height walls are required for separation and no connecting doors between the cannabis retail
-                    store
-                    and
-                    the neighbouring business are permitted.
-                  </p>
-                  <p>
-                    The cannabis retail store may share a vestibule with another type of business (e.g. a liquor store
-                    or
-                    grocery
-                    store) provided each business has its own controlled entrance within the vestibule. The cannabis
-                    retail
-                    store
-                    cannot share a vestibule with a business that would be contrary to public interest (i.e. business
-                    aimed
-                    at
-                    minors or a liquor consumption business).
-                  </p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div
-            *ngIf="application?.licenseType != 'Cannnabis Retail Store' && application?.applicationType?.name != 'Picnic Area Endorsement'">
+          <!-- show the configured content if there is some-->
+          <section *ngIf="htmlContent?.sitePlan">
+            <div class="ngtest-before-SitePlan-content" [innerHTML]="htmlContent.sitePlan"></div>
+          </section>
+          <!--  otherwise should a standard-ish block-->
+          <section *ngIf="!htmlContent?.sitePlan">
             <p>A scaled site plan must show the following: </p>
             <ul>
               <li>location of the front entrance door of the proposed establishment</li>
-              <li>
-                any other buildings/businesses around the proposed establishment and the entrances to those buildings
-              </li>
+              <li>any other buildings/businesses around the proposed establishment and the entrances to those buildings</li>
               <li>any relevant street names</li>
             </ul>
-          </div>
-          <div *ngIf="application?.applicationType?.name === 'Picnic Area Endorsement'">
-            <p>Please provide a site plan (8.5" x 11") of your property showing the location and size of the existing
-              and/or proposed picnic area(s) and the following:</p>
-            <ul>
-              <li>all buildings and their uses (i.e. storage, manufacturing buildings, personal residence, garage, other
-                businesses, etc.)</li>
-              <li>all licensed areas (other endorsements or licences approved by the Branch)</li>
-              <li>vineyards/orchards/agricultural crops</li>
-              <li>private and public roadways and parking areas</li>
-              <li>any neighbouring residences within 50 metres of the proposed picnic area(s)</li>
-            </ul>
-          </div>
-
+          </section>
+        
+            <!-- Cannabis Retail Store has an additional image-->
+            <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+              <img src="assets/site-plan-example.png" width="350" alt="Site plan" style="margin: auto; display: block;">
+            </div>
+            <div class="col-md-6">
+              <p>
+                If the proposed store is located inside a building with other businesses
+                (e.g. a mall), submit two site plans:
+              </p>
+              <p>
+                1) One site plan showing location of any other buildings/businesses on the same site, including:
+              </p>
+              <ul>
+                <li>
+                  Each building footprint, building name and a list of businesses operating inside the building
+                </li>
+                <li>Road access and exits, including any relevant street names, and</li>
+                <li>Parking lots</li>
+              </ul>
+              <p>
+                2) A second site plan showing the location of the proposed store
+                inside the building’s footprint:
+              </p>
+              <ul>
+                <li>All entrances and exits for the building</li>
+                <li>The location, name and type of businesses operating inside the building</li>
+                <li>The store footprint with all entrances and exits for the store, and</li>
+                <li>
+                  A description of the type of separation proposed for any business adjoining the proposed store
+                </li>
+              </ul>
+              <p>Full height walls are required for separation and no connecting doors between the cannabis retail
+                store and the neighbouring business are permitted.
+              </p>
+              <p>
+                The cannabis retail store may share a vestibule with another type of business (e.g. a liquor store
+                or grocery store) provided each business has its own controlled entrance within the vestibule. The cannabis
+                retail store
+                cannot share a vestibule with a business that would be contrary to public interest (i.e. business
+                aimed
+                at
+                minors or a liquor consumption business).
+              </p>
+            </div>
+         
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Site Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
               [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
