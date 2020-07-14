@@ -768,15 +768,23 @@ namespace bdd_tests
 
                 if (businessTypeShared == "society")
                 {
-                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath(""));
+                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
                     uploadMarriageCert1.SendKeys(marriageCertificate);
                 }
 
-                // click on submit org info button
+                if (businessTypeShared == "sole proprietorship")
+                {
+                    //NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath(""));
+                    //uploadMarriageCert1.SendKeys(marriageCertificate);
+                }
+
+                // click on Submit Organization Information button
                 NgWebElement uiSubmitOrgStructure = ngDriver.FindElement(By.CssSelector("button.btn-primary[name='submit-application']"));
                 uiSubmitOrgStructure.Click();
 
                 MakePayment();
+
+                System.Threading.Thread.Sleep(3000);
 
                 if (applicationTypeShared == "a Cannabis Retail Store")
                 {
