@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
@@ -544,5 +545,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         [JsonConverter(typeof(StringEnumConverter))]
         public Zoning? LgZoning { get; set; }
+
+        public List<CapacityArea> ServiceAreas { get; set; }
     }
 }

@@ -32,7 +32,8 @@ export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceA
   rowGroup: FormGroup;
 
   public value: ServiceArea;
-  public registerOnChange(fn: any): void { this.onChange = fn; }
+  registerOnChange(fn: any) { this.onChange = fn; }
+  registerOnTouched(fn: any) { this.onTouched = fn; }
 
   constructor(private formBuilder: FormBuilder) {
     super();
@@ -45,8 +46,8 @@ export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceA
     });
 
     this.rowGroup.valueChanges.subscribe(val => {
-      this.value = val;
       this.onChange(val);
+      this.value = val;
     });
   }
 

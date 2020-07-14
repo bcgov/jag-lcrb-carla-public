@@ -25,15 +25,7 @@
               will be saved. You can continue later from the dashboard.</p>
           </div>
         </section>
-<!-- Service Area -->
-<h3 class="blue-header">SERVICE AREA</h3>
-<section *ngIf="application.applicationType.serviceAreas" class="padded-section content-bottom">
-  <div *ngIf="htmlContent?.serviceArea" [innerHTML]="htmlContent.serviceArea"></div>
-  <app-capacity-table formControlName="serviceAreas" [isIndoor]="true"></app-capacity-table>
-  <pre>
-    {{ form.value | json }}
-  </pre>
-</section>
+
         <!-- Before Starting -->
         <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">
           BEFORE STARTING
@@ -984,7 +976,12 @@
           </app-proof-of-zoning>
         </section>
 
-        
+        <!-- Service Area -->
+        <h3 class="blue-header">SERVICE AREA</h3>
+        <section *ngIf="application.applicationType.serviceAreas" class="padded-section content-bottom">
+          <div *ngIf="htmlContent?.serviceArea" [innerHTML]="htmlContent.serviceArea"></div>
+          <app-capacity-table formControlName="serviceAreas" [isIndoor]="true"></app-capacity-table>
+        </section>
 
         <!-- Hours of Sale -->
         <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">

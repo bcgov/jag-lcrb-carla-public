@@ -1,13 +1,5 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { FormBuilder, Validators, FormArray, FormGroup, FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { SpecificLocation, FoodService, Entertainment, EventType, LicenceEvent, EventStatus } from '../../models/licence-event.model';
-import { LicenceEventsService } from '@services/licence-events.service';
-import { AppState } from '@app/app-state/models/app-state';
-import { Store } from '@ngrx/store';
-import { FormBase } from '@shared/form-base';
-import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
-import { MatTableDataSource } from '@angular/material';
+import { Component, Input, forwardRef } from '@angular/core';
+import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ServiceArea } from '@models/service-area.model';
 import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 
@@ -27,19 +19,18 @@ import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea[]> {
     @Input() isIndoor: boolean;
 
-    form: FormGroup;
-    get serviceAreasArr(): FormArray { return this.form.get('serviceAreas') as FormArray; }
+    form: FormArray;
+    registerOnChange(fn: any) { this.onChange = fn; }
+    registerOnTouched(fn: any) { this.onTouched = fn; }
 
     constructor(private fb: FormBuilder) {
         super();
 
-        this.form = fb.group({
-            serviceAreas: fb.array([])
-        });
+        this.form = fb.array([]);
 
         this.form.valueChanges.subscribe(val => {
             this.onChange(val);
-            this.value = val.serviceAreas;
+            this.value = val;
         });
     }
 
@@ -48,33 +39,16 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
             super.writeValue(serviceAreas);
             // this sucks, maybe there's a better way, just trying to
             // set the value of the array to the new value
-            while (this.serviceAreasArr.length > 0) { this.serviceAreasArr.removeAt(0); }
-            serviceAreas.forEach(area => this.serviceAreasArr.push(this.fb.control(area)));
+            this.form = this.fb.array([]);
+            serviceAreas.forEach(area => this.form.controls.push(this.fb.control(area)));
         } else {
             super.writeValue([]);
         }
     }
 
-
-    registerOnChange(fn: any) {
-        console.log(fn);
-        this.onChange = fn;
-    }
-
-    // registerOnTouched(fn: any) {
-    //     this._onTouched = fn;
-    // }
-
-    // validate({ value }: FormControl) {
-    //     console.log('validating');
-    //     return !this.rows || this.rows.valid
-    //       ? null
-    //       : { error: 'All fields are required' };
-    // }
-
     addRow() {
-        this.writeValue([...this.serviceAreasArr.value, {
-            areaNumber: this.serviceAreasArr.length + 1,
+        this.writeValue([...this.form.value, {
+            areaNumber: this.form.controls.length + 1,
             areaLocation: '',
             capacity: '',
             isIndoor: this.isIndoor,
@@ -84,15 +58,15 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
     }
 
     removeRow(index: number) {
-        if (index >= 0 && index < this.serviceAreasArr.length) {
-            this.serviceAreasArr.removeAt(index);
+        if (index >= 0 && index < this.form.length) {
+            this.form.removeAt(index);
             this.reindex();
         }
     }
 
     reindex() {
         const areas: ServiceArea[] = [];
-        this.serviceAreasArr.controls.forEach((row, index) => {
+        this.form.controls.forEach((row, index) => {
             areas.push({...row.value, areaNumber: index + 1});
         });
         this.writeValue(areas);
