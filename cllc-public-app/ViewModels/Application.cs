@@ -544,7 +544,5 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         [JsonConverter(typeof(StringEnumConverter))]
         public Zoning? LgZoning { get; set; }
-
-
     }
 }

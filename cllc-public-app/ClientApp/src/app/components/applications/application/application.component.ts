@@ -199,6 +199,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       willhaveValidInterest: ['', []],
       meetsALRRequirements: ['', []],
       IsReadyProductNotVisibleOutside: ['', []],
+      serviceAreas: ['', []]
     });
 
 
@@ -272,7 +273,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
         if (data.applicationType.formReference) {
           console.log("Getting form layout");
-          // get the application form        
+          // get the application form
           this.dynamicsForm = data.applicationType.dynamicsForm;
           this.dynamicsForm.tabs.forEach(function (tab) {
             tab.sections.forEach(function (section) {
@@ -929,7 +930,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
   testfun(application: ApplicationLicenseSummary) {
     console.log(application)
-    return application.applicationType.serviceAreas;
+    return ;
   }
 
   getEstablishmentLabel(applicationTypeName: ApplicationTypeNames): string {
