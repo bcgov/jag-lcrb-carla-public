@@ -17,7 +17,7 @@ Scenario: Catering Partnership Personnel Email Change
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
-    And I change a personnel email address
+    # And I change a personnel email address
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -36,7 +36,7 @@ Scenario: Catering Private Corporation Personnel Email Change
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
-    And I change a personnel email address
+    # And I change a personnel email address
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -55,7 +55,7 @@ Scenario: Catering Public Corporation Personnel Email Change
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
-    And I change a personnel email address
+    # And I change a personnel email address
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -74,7 +74,7 @@ Scenario: Catering Society Personnel Email Change
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
-    And I change a personnel email address
+    # And I change a personnel email address
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
@@ -93,7 +93,7 @@ Scenario: Catering Sole Proprietorship Personnel Email Change
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
-    And I change a personnel email address
+    # And I change a personnel email address
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
