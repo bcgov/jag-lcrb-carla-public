@@ -119,6 +119,7 @@ export class Application {
   lGContactEmail: string;
   lGApprovalDecision: string;
   lGDecisionSubmissionDate: Date;
+  lGDecisionComments: string;
   resolutionDocsUploaded: boolean;
   lgZoning: string;
 
