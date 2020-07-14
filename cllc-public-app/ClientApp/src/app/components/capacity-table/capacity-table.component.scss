@@ -22,22 +22,6 @@ table {
             }
         }
     }
-    td {
-        text-align: center;
-        border: 1px solid black;
-        height: 27px;
-        vertical-align: bottom;
-        &:last-child {
-            background: none !important;
-            border: none;
-        }
-        input {
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            border: none;
-        }
-    }
 
     .btn-save {
         float: right;

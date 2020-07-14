@@ -1,6 +1,6 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule, APP_INITIALIZER, forwardRef } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ChartsModule } from 'ng2-charts';
@@ -209,6 +209,7 @@ import { AdditionalPidsComponent } from './components/applications/application/t
 import { TermsAndConditionsDataService } from '@services/terms-and-condtions-data.service';
 import { LgZoningConfirmationComponent } from './components/applications/application/tabs/lg-zoning-confirmation/lg-zoning-confirmation.component';
 import { ProofOfZoningComponent } from './components/applications/application/tabs/proof-of-zoning/proof-of-zoning.component';
+import { CapacityTableRowComponent } from '@components/capacity-table/capacity-table-row.component';
 
 
 @NgModule({
@@ -229,6 +230,7 @@ import { ProofOfZoningComponent } from './components/applications/application/ta
     ConnectionToProducersComponent,
     CorporateDetailsComponent,
     DashboardComponent,
+    CapacityTableRowComponent,
     DelayedFileUploaderComponent,
     DirectorAndOfficerPersonDialogComponent,
     DirectorsAndOfficersComponent,
@@ -310,6 +312,7 @@ import { ProofOfZoningComponent } from './components/applications/application/ta
     LicencesComponent,
     LicenceRowComponent,
     CapacityTableComponent,
+    CapacityTableRowComponent,
     ApplicationsComponent,
     AssociateListComponent,
     OrgStructureComponent,
