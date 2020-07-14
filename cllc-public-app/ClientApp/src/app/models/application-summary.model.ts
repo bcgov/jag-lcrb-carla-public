@@ -11,4 +11,5 @@ export class ApplicationSummary {
   licenceId: string;
   isPaid: boolean;
   portallabel: string;
+  lgHasApproved: boolean;
 }
