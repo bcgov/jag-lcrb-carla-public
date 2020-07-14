@@ -3,11 +3,9 @@
     I want to submit a CRS Application for different business types
     And review the federal reports for the approved application
 
-@e2e @cannabis @indigenousnation @crsfedreportsIN
+@e2e @cannabis @indigenousnation @crsfedreports2
 Scenario: Indigenous Nation Federal Reports and Show Map
     Given I am logged in to the dashboard as an indigenous nation
-    And the account is deleted
-    And I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -18,18 +16,15 @@ Scenario: Indigenous Nation Federal Reports and Show Map
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @crsfedreportspartnership
+@e2e @cannabis @partnership @crsfedreports
 Scenario: Partnership Federal Reports and Show Map
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -40,18 +35,15 @@ Scenario: Partnership Federal Reports and Show Map
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @crsfedreportsprivcorp
+@e2e @cannabis @privatecorporation @crsfedreports
 Scenario: Private Corporation Federal Reports and Show Map
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -62,18 +54,15 @@ Scenario: Private Corporation Federal Reports and Show Map
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsfedreportspubcorp
+@e2e @cannabis @publiccorporation @crsfedreports2
 Scenario: Public Corporation Federal Reports and Show Map
     Given I am logged in to the dashboard as a public corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -84,18 +73,15 @@ Scenario: Public Corporation Federal Reports and Show Map
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsfedreportssociety
+@e2e @cannabis @society @crsfedreports2
 Scenario: Society Federal Reports and Show Map
     Given I am logged in to the dashboard as a society
-    And the account is deleted
-    And I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -106,18 +92,15 @@ Scenario: Society Federal Reports and Show Map
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crsfedreportssoleprop
+@e2e @cannabis @soleproprietorship @crsfedreports
 Scenario: Sole Proprietorship Federal Reports and Show Map
     Given I am logged in to the dashboard as a sole proprietorship
-    And the account is deleted
-    And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -128,7 +111,6 @@ Scenario: Sole Proprietorship Federal Reports and Show Map
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports

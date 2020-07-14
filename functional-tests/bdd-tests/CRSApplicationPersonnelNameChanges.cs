@@ -1,34 +1,26 @@
-﻿Feature: CRSApplicationPersonnelNameChange
+﻿using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support;
+using OpenQA.Selenium.Support.UI;
+using Protractor;
+using System;
+using Xunit.Gherkin.Quick;
+using Microsoft.Extensions.Configuration.UserSecrets;
+using System.IO;
+using Xunit;
+
+/*
+Feature: CRSApplicationPersonnelNameChanges
     As a logged in business user
     I want to submit a CRS Application for different business types
-    And request a personnel name change for the approved application
+    And request personnel email and name changes for the approved application
 
-@e2e @cannabis @indigenousnation @crsnameIN
-Scenario: Indigenous Nation Personnel Name Change
-    Given I am logged in to the dashboard as an indigenous nation
-    And the account is deleted
-    And I am logged in to the dashboard as an indigenous nation
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
-    And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
-    And I click on the Pay for Application button
-    And I enter the payment information
-    And I return to the dashboard
-    And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
-    And I pay the licensing fee for Cannabis
-    And I request a personnel name change
-    And the account is deleted
-    Then I see the login page
-
-@e2e @cannabis @partnership @crsnamepartnership
-Scenario: Partnership Personnel Name Change
+@e2e @cannabis @partnership @crsemail
+Scenario: Partnership Personnel Name Changes
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -39,17 +31,15 @@ Scenario: Partnership Personnel Name Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
+    And I change a personnel email address
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @crsnameprivcorp
-Scenario: Private Corporation Personnel Name Change
+@e2e @cannabis @privatecorporation @crsemail
+Scenario: Private Corporation Personnel Name Changes
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -60,17 +50,15 @@ Scenario: Private Corporation Personnel Name Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
+    And I change a personnel email address
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsnamepubcorp
-Scenario: Public Corporation Personnel Name Change
+@e2e @cannabis @publiccorporation @crsemailpubcorp
+Scenario: Public Corporation Personnel Name Changes
     Given I am logged in to the dashboard as a public corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -81,17 +69,15 @@ Scenario: Public Corporation Personnel Name Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
+    And I change a personnel email address
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsnamesociety
-Scenario: Society Personnel Name Change
+@e2e @cannabis @society @crsemail2
+Scenario: Society Personnel Name Changes
     Given I am logged in to the dashboard as a society
-    And the account is deleted
-    And I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -102,17 +88,15 @@ Scenario: Society Personnel Name Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
+    And I change a personnel email address
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crsnamesoleprop
-Scenario: Sole Proprietorship Personnel Name Change
+@e2e @cannabis @soleproprietorship @crsemail
+Scenario: Sole Proprietorship Personnel Name Changes
     Given I am logged in to the dashboard as a sole proprietorship
-    And the account is deleted
-    And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -123,8 +107,28 @@ Scenario: Sole Proprietorship Personnel Name Change
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
+    And I change a personnel email address
     And I request a personnel name change
     And the account is deleted
     Then I see the login page
+*/
+
+namespace bdd_tests
+{
+    [FeatureFile("./CRSApplicationPersonnelNameChanges.feature")]
+    public sealed class CRSApplicationPersonnelNameChanges : TestBase
+    {
+        [Given(@"I am logged in to the dashboard as an (.*)")]
+        public void I_view_the_dashboard_IN(string businessType)
+        {
+            CarlaLogin(businessType);
+        }
+
+        [Given(@"I am logged in to the dashboard as a (.*)")]
+        public void I_view_the_dashboard(string businessType)
+        {
+            CarlaLogin(businessType);
+        }
+    }
+}
