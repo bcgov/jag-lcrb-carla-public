@@ -754,24 +754,26 @@ namespace bdd_tests
                 // upload a marriage certificate document
                 string marriageCertificate = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "marriage_certificate.pdf");
 
-                if (businessTypeShared == "public corporation")
+                if (businessTypeShared == "public corporation" || businessTypeShared == "partnership")
                 {
                     NgWebElement uploadMarriageCert0 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
                     uploadMarriageCert0.SendKeys(marriageCertificate);
                 }
-                else if (businessTypeShared == "society")
+
+                if (businessTypeShared == "private corporation")
                 {
-                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-0']/div/section/app-file-uploader/div/ngx-file-drop/div/div/input"));
-                    uploadMarriageCert1.SendKeys(marriageCertificate);
+                    NgWebElement uploadMarriageCert0 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
+                    uploadMarriageCert0.SendKeys(marriageCertificate);
                 }
-                else
+
+                if (businessTypeShared == "society")
                 {
-                    NgWebElement uploadMarriageCert2 = ngDriver.FindElement(By.XPath("//app-org-structure//app-associate-list//tr[2]//input[@type='file']"));
-                    uploadMarriageCert2.SendKeys(marriageCertificate);
+                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath(""));
+                    uploadMarriageCert1.SendKeys(marriageCertificate);
                 }
 
                 // click on submit org info button
-                NgWebElement uiSubmitOrgStructure = ngDriver.FindElement(By.XPath("//button[text()=' SUBMIT ORGANIZATION INFORMATION ']"));
+                NgWebElement uiSubmitOrgStructure = ngDriver.FindElement(By.CssSelector("button.btn-primary[name='submit-application']"));
                 uiSubmitOrgStructure.Click();
 
                 MakePayment();
@@ -907,7 +909,7 @@ namespace bdd_tests
                     uiEditInfoButton.Click();
                 }
 
-                // enter a new email for the key personnel
+                // enter a new email for the associate
                 string newEmail = "newemail@test.com";
 
                 NgWebElement uiNewEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='emailNew']"));
@@ -915,11 +917,10 @@ namespace bdd_tests
                 uiNewEmail.SendKeys(newEmail);
 
                 // click on the Confirm button
-                //NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector(".fa-save span"));
-                NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//app-org-structure/div/div[4]/section/app-associate-list/div/table/tr/td[7]/i[1]/span"));
+                NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector(".fa-save span"));
                 uiConfirmButton.Click();
 
-                // click on confirm org info button
+                // click on Confirm Organization Information is Complete button
                 NgWebElement orgInfoButton2 = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
                 orgInfoButton2.Click();
 
