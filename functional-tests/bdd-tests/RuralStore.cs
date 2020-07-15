@@ -33,7 +33,7 @@ namespace bdd_tests
     [FeatureFile("./RuralStore.feature")]
     public sealed class RuralStore : TestBase
     {
-        [Given(@"I am logged in to the dashboard as a (.*)")]
+        [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
