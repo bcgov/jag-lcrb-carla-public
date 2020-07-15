@@ -25,7 +25,7 @@ Scenario: Indigenous Nation CRS Application
     And I review the account profile
     And I review the organization structure
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
+    And I complete the Cannabis Retail Store application for a indigenous nation
     And I review the security screening requirements
     And I click on the Pay for Application button
     And I enter the payment information
@@ -42,7 +42,7 @@ Scenario: Partnership CRS Application
     And I review the account profile
     And I review the organization structure
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
+    And I complete the Cannabis Retail Store application for a partnership
     And I review the security screening requirements
     And I click on the Pay for Application button
     And I enter the payment information
@@ -59,7 +59,7 @@ Scenario: Private Corporation CRS Application
     And I review the account profile
     And I review the organization structure
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
+    And I complete the Cannabis Retail Store application for a private corporation
     And I review the security screening requirements
     And I click on the Pay for Application button
     And I enter the payment information
@@ -76,7 +76,7 @@ Scenario: Public Corporation CRS Application
     And I review the account profile
     And I review the organization structure
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
+    And I complete the Cannabis Retail Store application for a public corporation
     And I review the security screening requirements
     And I click on the Pay for Application button
     And I enter the payment information
@@ -93,7 +93,7 @@ Scenario: Society CRS Application
     And I review the account profile
     And I review the organization structure
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
+    And I complete the Cannabis Retail Store application for a society
     And I review the security screening requirements
     And I click on the Pay for Application button
     And I enter the payment information
@@ -110,7 +110,7 @@ Scenario: Sole Proprietorship CRS Application
     And I review the account profile
     And I review the organization structure
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
+    And I complete the Cannabis Retail Store application for a sole proprietorship
     And I review the security screening requirements
     And I click on the Pay for Application button
     And I enter the payment information
