@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import { FormGroup, FormBuilder, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { FormGroup, FormBuilder, NG_VALUE_ACCESSOR, ControlValueAccessor, Validators, FormControl, NG_VALIDATORS } from '@angular/forms';
 import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 import { ServiceArea } from '@models/service-area.model';
 
@@ -22,6 +22,11 @@ import { ServiceArea } from '@models/service-area.model';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CapacityTableRowComponent),
       multi: true
+    },
+    {
+        provide: NG_VALIDATORS,
+        useExisting: CapacityTableRowComponent,
+        multi: true
     }
   ]
 })
@@ -38,11 +43,11 @@ export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceA
   constructor(private formBuilder: FormBuilder) {
     super();
     this.rowGroup = formBuilder.group({
-        areaNumber: [''],
-        areaLocation: [''],
+        areaNumber: ['', [Validators.required]],
+        areaLocation: ['', [Validators.required]],
         isIndoor: [''],
         isPatio: [''],
-        capacity: ['']
+        capacity: ['', [Validators.required]]
     });
 
     this.rowGroup.valueChanges.subscribe(val => {
@@ -57,5 +62,20 @@ export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceA
 
   removeRow() {
     this.onDelete(this.index);
+  }
+
+  validate({ value }: FormControl) {
+    const isNotValid = this.rowGroup.invalid;
+    const retVal = {};
+    if (this.rowGroup.get('areaNumber').invalid) {
+      retVal['areaNumber'] = true;
+    }
+    if (this.rowGroup.get('areaLocation').invalid) {
+      retVal['areaLocation'] = true;
+    }
+    if (this.rowGroup.get('capacity').invalid) {
+      retVal['capacity'] = true;
+    }
+    return isNotValid && retVal;
   }
 }
