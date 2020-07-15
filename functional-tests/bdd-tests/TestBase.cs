@@ -26,10 +26,6 @@ namespace bdd_tests
 
         protected string baseUri;
 
-        protected string businessTypeShared;
-
-        protected string applicationTypeShared;
-
         protected string applicationID;
 
         protected TestBase()
@@ -779,6 +775,7 @@ namespace bdd_tests
 
                 System.Threading.Thread.Sleep(3000);
 
+                /*
                 if (applicationTypeShared == "a Cannabis Retail Store")
                 {
                     // check payment fee
@@ -790,6 +787,7 @@ namespace bdd_tests
                     // check payment fee
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
                 }
+                */
 
                 // click on Dashboard link
                 ClickOnDashboard();
@@ -1122,8 +1120,6 @@ namespace bdd_tests
                 NgWebElement startAppButton = ngDriver.FindElement(By.CssSelector("button[id='startRAS']"));
                 startAppButton.Click();
             }
-
-            applicationTypeShared = applicationType;
         }
 
 
@@ -2665,8 +2661,6 @@ namespace bdd_tests
         [And(@"I click on the Licences tab for (.*)")]
         public void ClickOnLicencesTab(string applicationType)
         {
-            applicationTypeShared = applicationType;
-
             ClickLicencesTab();
         }
 
