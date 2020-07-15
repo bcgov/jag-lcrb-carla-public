@@ -46,6 +46,7 @@ export class ApplicationType {
   isShowLGZoningConfirmation:boolean;
   isFree: boolean;
   isEndorsement: boolean;
+  requiresSecurityScreening: boolean;
 
   dynamicsForm: DynamicsForm;
 }
