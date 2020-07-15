@@ -1,10 +1,12 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Public.Models.Extensions;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -398,9 +400,8 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 LiquorIndustryConnectionsDetails = dynamicsApplication.AdoxioLiquorindustryconnectionsdetails,
 
-                OtherBusinessesDetails = dynamicsApplication.AdoxioOtherbusinesssamelocationdetails
-
-
+                OtherBusinessesDetails = dynamicsApplication.AdoxioOtherbusinesssamelocationdetails,
+                ServiceAreas = new List<CapacityArea>()
             };
 
             // Catering yes / no fields
@@ -429,6 +430,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (dynamicsApplication.AdoxioApplicationid != null)
             {
                 applicationVM.Id = dynamicsApplication.AdoxioApplicationid.ToString();
+
+                // service areas
+                var filter = $"_adoxio_applicationid_value eq {dynamicsApplication.AdoxioApplicationid}";
+                IList<MicrosoftDynamicsCRMadoxioServicearea> areas = dynamicsClient.Serviceareas.Get(filter: filter).Value;
+                foreach (MicrosoftDynamicsCRMadoxioServicearea area in areas)
+                {
+                    applicationVM.ServiceAreas.Add(area.ToViewModel());
+                }
             }
 
             if (dynamicsApplication.Statuscode != null)
