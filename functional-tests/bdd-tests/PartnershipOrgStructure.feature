@@ -7,7 +7,7 @@ Scenario: Change individual partner name and pay fee
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
+    And I review the account profile for a partnership
     And I review the organization structure
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
@@ -98,7 +98,7 @@ Scenario: Confirm partnership business shareholder org structure update after pa
     And I click on the Confirm Organization Information is Complete button
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
+    And I review the account profile for a partnership
     And I click on the Confirm Organization Information is Complete button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
