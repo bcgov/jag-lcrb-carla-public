@@ -38,7 +38,7 @@ namespace bdd_tests
     [FeatureFile("./Create_CRSApplication_soleproprietor.feature")]
     public sealed class CreateCRSApplicationSoleProprietor : TestBase
     {
-        [Given(@"I am logged in to the dashboard as a (.*)")]
+        [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard(string businessType)
         {
             CarlaLoginNoCheck();
