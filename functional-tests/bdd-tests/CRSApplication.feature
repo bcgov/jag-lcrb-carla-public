@@ -2,7 +2,7 @@
     As a logged in business user
     I want to submit a CRS Application for different business types
 
-@e2e @cannabis @indigenousnation @crsapp2
+@e2e @cannabis @indigenousnation @crsapp
 Scenario: Indigenous Nation CRS Application
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -53,7 +53,7 @@ Scenario: Private Corporation CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsapp2
+@e2e @cannabis @publiccorporation @crsapp
 Scenario: Public Corporation CRS Application
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -70,7 +70,7 @@ Scenario: Public Corporation CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsapp2
+@e2e @cannabis @society @crsapp
 Scenario: Society CRS Application
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
