@@ -113,49 +113,49 @@ namespace bdd_tests
             */
 
             // if this is a private corporation, click the radio button
-            if (businessType == "private corporation")
+            if (businessType == " private corporation")
             {
                 NgWebElement privateCorporationRadio = ngDriver.FindElement(By.CssSelector("input[value='PrivateCorporation'][type = 'radio']"));
                 privateCorporationRadio.Click();
             }
 
             // if this is a public corporation, click the radio button
-            if (businessType == "public corporation")
+            if (businessType == " public corporation")
             {
                 NgWebElement publicCorporationRadio = ngDriver.FindElement(By.CssSelector("[value='PublicCorporation'][type='radio']"));
                 publicCorporationRadio.Click();
             }
 
             // if this is a sole proprietorship, click the radio button
-            if (businessType == "sole proprietorship")
+            if (businessType == " sole proprietorship")
             {
                 NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.CssSelector("[value='SoleProprietor'][type='radio']"));
                 soleProprietorshipRadio.Click();
             }
 
             // if this is a partnership, click the radio button
-            if (businessType == "partnership")
+            if (businessType == " partnership")
             {
                 NgWebElement partnershipRadio = ngDriver.FindElement(By.CssSelector("[value='Partnership'][type='radio']"));
                 partnershipRadio.Click();
             }
 
             // if this is a society, click the radio button
-            if (businessType == "society")
+            if (businessType == " society")
             {
                 NgWebElement societyRadio = ngDriver.FindElement(By.CssSelector("[type='radio'][value='Society']"));
                 societyRadio.Click();
             }
 
             // if this is a university, click the radio button
-            if (businessType == "university")
+            if (businessType == " university")
             {
                 NgWebElement indigenousNationRadio = ngDriver.FindElement(By.CssSelector("[type='radio'][value='University']"));
                 indigenousNationRadio.Click();
             }
 
             // if this is an indigenous nation, click the radio button
-            if (businessType == "indigenous nation")
+            if (businessType == "n indigenous nation")
             {
                 NgWebElement indigenousNationRadio = ngDriver.FindElement(By.CssSelector("[value='IndigenousNation'][type='radio']"));
                 indigenousNationRadio.Click();
