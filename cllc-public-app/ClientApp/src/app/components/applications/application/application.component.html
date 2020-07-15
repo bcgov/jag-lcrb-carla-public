@@ -542,9 +542,8 @@
             the store's signage are on file.
           </p>
           <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Signage" [disableUploads]="isOpenedByLGForApproval"
-              [enableFileDeletion]="!isOpenedByLGForApproval"
-              [enableFileDeletion]="application?.applicationType?.signage === FormControlState.Show"
+            <app-file-uploader *ngIf="applicationId" documentType="Signage" [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+              [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
               [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
               entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
               (numberOfUploadedFiles)="uploadedSignageDocuments = $event" [entityId]="applicationId"
@@ -631,9 +630,8 @@
           </p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Valid Interest"
-              fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval"
-              [enableFileDeletion]="application?.applicationType?.validInterest === FormControlState.Show"
-              [enableFileDeletion]="!isOpenedByLGForApproval" [multipleFiles]="false" entityName="application"
+              fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+              [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="false" entityName="application"
               [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedValidInterestDocuments = $event"
               [entityId]="applicationId" [uploadHeader]="'TO UPLOAD OWNERSHIP OR LEASE DOCUMENTS, DRAG FILES HERE OR'">
             </app-file-uploader>
@@ -720,9 +718,8 @@
             </p>
             <section>
               <app-file-uploader *ngIf="application?.id" documentType="Floor Plan"
-                fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval"
-                [enableFileDeletion]="application?.applicationType?.floorPlan === FormControlState.Show"
-                [enableFileDeletion]="!isOpenedByLGForApproval" [multipleFiles]="true" entityName="application"
+                fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true" entityName="application"
                 [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedFloorPlanDocuments = $event"
                 [entityId]="application?.id" [uploadHeader]="'TO UPLOAD FLOOR PLANS, DRAG FILES HERE OR'">
               </app-file-uploader>
@@ -864,8 +861,7 @@
 
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Site Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
-              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-              [enableFileDeletion]="application?.applicationType?.sitePlan === FormControlState.Show"
+              [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
               [multipleFiles]="true" entityName="application" [useDocumentTypeForName]="true"
               (numberOfUploadedFiles)="uploadedSitePlanDocuments = $event" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD SITE PLAN DOCUMENTS, DRAG FILES HERE OR'">
@@ -884,8 +880,7 @@
 
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Site Photos" fileTypes="FILE MUST BE IN PDF FORMAT."
-              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-              [enableFileDeletion]="application?.applicationType?.showSitePhotos === FormControlState.Show"
+              [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
               [multipleFiles]="true" entityName="application" [useDocumentTypeForName]="true"
               (numberOfUploadedFiles)="uploadedSitePhotos = $event" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD SITE PHOTOS DOCUMENTS, DRAG FILES HERE OR'">
@@ -958,8 +953,8 @@
             </section>
             <section>
               <app-file-uploader *ngIf="applicationId" documentType="Grocery Declaration"
-                [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-                fileTypes="FILE MUST BE IN PDF FORMAT." [enableFileDeletion]="true" [multipleFiles]="false"
+                [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
+                fileTypes="FILE MUST BE IN PDF FORMAT."  [multipleFiles]="false"
                 entityName="application" [useDocumentTypeForName]="true"
                 (numberOfUploadedFiles)="uploadedGroceryDocuments = $event" [entityId]="applicationId"
                 [uploadHeader]="'TO UPLOAD GROCERY DECLARATION, DRAG FILES HERE OR'">
@@ -1174,7 +1169,7 @@
           <p>Upload the completed form below.</p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"
-              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
+              [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
               (numberOfUploadedFiles)="uploadedAssociateDocuments = $event" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
@@ -1195,7 +1190,7 @@
           <p>Upload the completed form below.</p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-              [enableFileDeletion]="!isOpenedByLGForApproval" [disableUploads]="isOpenedByLGForApproval"
+              [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
               (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
@@ -1299,7 +1294,7 @@
 
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
-              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
+              [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
               (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [maxNumberOfFiles]="200"
               fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
               [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #supportingDocuments>
@@ -1657,16 +1652,22 @@
           <button
             *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
                         && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')"
-            class=" btn btn-primary" (click)="submitForLGINApproval()">
+            class=" btn btn-primary" (click)="submitForLGINApproval(); foLGBtn.disabled = true;" #foLGBtn>
             SUBMIT FOR LG/IN REVIEW OR COMMENT
           </button>
 
           <!-- show if the LG has approved the application -->
-          <button *ngIf="(application?.applicationType?.isShowLGINApproval && application?.lGApprovalDecision === 'Approved') ||
-            (application?.applicationType?.isShowLGZoningConfirmation && application?.lgZoning === 'Allows')"
-            class=" btn btn-primary" (click)="proceedToSecurityScreening()">
-            Proceed to Security Screening
-          </button>
+          <ng-container  *ngIf="lGHasApproved()">
+            <button *ngIf="application?.applicationType?.requiresSecurityScreening"
+              class=" btn btn-primary" (click)="proceedToSecurityScreening()">
+              Proceed to Security Screening
+            </button>
+
+            <button *ngIf="!application?.applicationType?.requiresSecurityScreening"
+              class=" btn btn-primary" (click)="submit_application()">
+              SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
+            </button>
+          </ng-container>
 
           <span style="float: right; color: #1a5a96; padding-top: 10px;">
             <span (click)="cancelApplication()">
@@ -1748,7 +1749,7 @@
           <p>Upload the completed form below.</p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"
-              [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+              [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
               entityName="application" (numberOfUploadedFiles)="uploadedAssociateDocuments = $event"
               [enableFileDeletion]="false" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
@@ -1767,7 +1768,7 @@
           <p>Upload the completed form below.</p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-              [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+              [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
               entityName="application" (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
               [enableFileDeletion]="false" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
@@ -1867,7 +1868,7 @@
         </section>
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
-            [disableUploads]="isOpenedByLGForApproval" fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT."
+            [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT."
             entityName="application" [entityId]="applicationId" [maxNumberOfFiles]="200"
             (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
             [enableFileDeletion]="false" #supportingDocuments>
