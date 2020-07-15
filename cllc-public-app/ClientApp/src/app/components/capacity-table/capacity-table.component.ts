@@ -19,36 +19,41 @@ import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea[]> {
     @Input() isIndoor: boolean;
 
-    form: FormArray;
+    formGroup: FormGroup;
+    get areasArr(): FormArray { return this.formGroup.get('areas') as FormArray; }
+
     registerOnChange(fn: any) { this.onChange = fn; }
     registerOnTouched(fn: any) { this.onTouched = fn; }
 
     constructor(private fb: FormBuilder) {
         super();
 
-        this.form = fb.array([]);
+        this.formGroup = fb.group({
+            areas: fb.array([])
+        });
 
-        this.form.valueChanges.subscribe(val => {
+        this.formGroup.valueChanges.subscribe(val => {
             this.onChange(val);
-            this.value = val;
+            this.value = val.areas;
         });
     }
 
     writeValue(serviceAreas: ServiceArea[]) {
+        console.log(serviceAreas);
         if (serviceAreas) {
             super.writeValue(serviceAreas);
             // this sucks, maybe there's a better way, just trying to
             // set the value of the array to the new value
-            this.form = this.fb.array([]);
-            serviceAreas.forEach(area => this.form.controls.push(this.fb.control(area)));
+            while (this.areasArr.length > 0) { this.areasArr.removeAt(0); }
+            serviceAreas.forEach(area => this.areasArr.push(this.fb.control(area)));
         } else {
             super.writeValue([]);
         }
     }
 
     addRow() {
-        this.writeValue([...this.form.value, {
-            areaNumber: this.form.controls.length + 1,
+        this.writeValue([...this.areasArr.value, {
+            areaNumber: this.areasArr.controls.length + 1,
             areaLocation: '',
             capacity: '',
             isIndoor: this.isIndoor,
@@ -58,15 +63,15 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
     }
 
     removeRow(index: number) {
-        if (index >= 0 && index < this.form.length) {
-            this.form.removeAt(index);
+        if (index >= 0 && index < this.areasArr.length) {
+            this.areasArr.removeAt(index);
             this.reindex();
         }
     }
 
     reindex() {
         const areas: ServiceArea[] = [];
-        this.form.controls.forEach((row, index) => {
+        this.areasArr.controls.forEach((row, index) => {
             areas.push({...row.value, areaNumber: index + 1});
         });
         this.writeValue(areas);
