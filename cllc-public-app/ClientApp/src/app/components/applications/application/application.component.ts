@@ -424,15 +424,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     //   this.form.get('connectedGrocery').setValidators([Validators.required]);
     // }
 
-    if (this.application.applicationType.serviceAreas) {
-      console.log(this.application.applicationType.serviceAreas);
-    }
-    if (this.application.applicationType.outsideAreas) {
-      console.log('outside area');
-    }
-    if (this.application.applicationType.capacityArea) {
-      console.log('capacity area');
-    }
   }
 
 
@@ -582,13 +573,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
       description2 += this.form.get('willhaveValidInterest').value ? 'Will have valid interest = Yes' : 'Will have valid interest = No';
     }
 
+    // flatten the service areas if need be
+    const serviceAreas = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
+
     // do not save if the form is in file upload mode
     if (this.mode === UPLOAD_FILES_MODE) {
       // a delay is need by the deactivate guard
       return of(true).pipe(delay(10));
     }
     return forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, description2: description2 }),
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, description2: description2, serviceAreas: serviceAreas }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
@@ -928,10 +922,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showFormControl(state: string): boolean {
     return [FormControlState.Show.toString(), FormControlState.Reaonly.toString()]
       .indexOf(state) !== -1;
-  }
-  testfun(application: ApplicationLicenseSummary) {
-    console.log(application)
-    return ;
   }
 
   getEstablishmentLabel(applicationTypeName: ApplicationTypeNames): string {
