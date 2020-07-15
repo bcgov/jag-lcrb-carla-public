@@ -7,7 +7,7 @@
 Scenario: Catering Indigenous Nation Branding Change
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for Catering
-    And I review the account profile
+    And I review the account profile for a indigenous nation
     And I review the organization structure
     And I click on the Submit Organization Information button
     And I complete the Catering application
@@ -27,7 +27,7 @@ Scenario: Catering Indigenous Nation Branding Change
 Scenario: Catering Partnership Branding Change
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
-    And I review the account profile
+    And I review the account profile for a partnership
     And I review the organization structure
     And I click on the Submit Organization Information button
     And I complete the Catering application
@@ -47,7 +47,7 @@ Scenario: Catering Partnership Branding Change
 Scenario: Catering Private Corporation Branding Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
-    And I review the account profile
+    And I review the account profile for a private corporation
     And I review the organization structure
     And I click on the Submit Organization Information button
     And I complete the Catering application
@@ -67,7 +67,7 @@ Scenario: Catering Private Corporation Branding Change
 Scenario: Catering Public Corporation Branding Change
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
-    And I review the account profile
+    And I review the account profile for a public corporation
     And I review the organization structure
     And I click on the Submit Organization Information button
     And I complete the Catering application
@@ -87,7 +87,7 @@ Scenario: Catering Public Corporation Branding Change
 Scenario: Catering Society Branding Change
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
-    And I review the account profile
+    And I review the account profile for a society
     And I review the organization structure
     And I click on the Submit Organization Information button
     And I complete the Catering application
@@ -107,7 +107,7 @@ Scenario: Catering Society Branding Change
 Scenario: Catering Sole Proprietorship Branding Change
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
-    And I review the account profile
+    And I review the account profile for a sole proprietorship
     And I review the organization structure
     And I click on the Submit Organization Information button
     And I complete the Catering application

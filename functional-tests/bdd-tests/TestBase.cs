@@ -181,8 +181,6 @@ namespace bdd_tests
 
         public void CarlaLogin(string businessType)
         {
-            businessTypeShared = businessType;
-
             Random random = new Random();
 
             // load the dashboard page
@@ -206,8 +204,6 @@ namespace bdd_tests
 
         public void CarlaLoginWithUser(string businessType)
         {
-            businessTypeShared = businessType;
-
             // load the dashboard page
             string test_start = configuration["test_start"];
             ngDriver.IgnoreSynchronization = true;
@@ -706,10 +702,10 @@ namespace bdd_tests
         }
 
 
-        [And(@"I request a personnel name change")]
-        public void RequestPersonnelNameChange()
+        [And(@"I request a personnel name change for a (.*)")]
+        public void RequestPersonnelNameChange(string businessType)
         {
-            if (businessTypeShared != "indigenous nation")
+            if (businessType != "indigenous nation")
             {
                 ClickOnDashboard();
 
@@ -717,14 +713,14 @@ namespace bdd_tests
                 ClickReviewOrganizationInformation();
 
                 // click on the Edit button for Key Personnel (partnership, sole proprietorship, private corporation, or society)
-                if (businessTypeShared == "partnership" || businessTypeShared == "sole proprietorship" || businessTypeShared == "private corporation" || businessTypeShared == "society")
+                if (businessType == "partnership" || businessType == "sole proprietorship" || businessType == "private corporation" || businessType == "society")
                 {
                     NgWebElement uiEditInfoButtonShared = ngDriver.FindElement(By.CssSelector(".fas.fa-pencil-alt span"));
                     uiEditInfoButtonShared.Click();
                 }
 
                 // click on the Edit button for Key Personnel (public corporation)
-                if (businessTypeShared == "public corporation")
+                if (businessType == "public corporation")
                 {
                     NgWebElement uiEditInfoButton = ngDriver.FindElement(By.CssSelector("td:nth-child(7) .ng-star-inserted"));
                     uiEditInfoButton.Click();
@@ -754,25 +750,25 @@ namespace bdd_tests
                 // upload a marriage certificate document
                 string marriageCertificate = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "marriage_certificate.pdf");
 
-                if (businessTypeShared == "public corporation" || businessTypeShared == "partnership")
+                if (businessType == "public corporation" || businessType == "partnership")
                 {
                     NgWebElement uploadMarriageCert0 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
                     uploadMarriageCert0.SendKeys(marriageCertificate);
                 }
 
-                if (businessTypeShared == "private corporation")
+                if (businessType == "private corporation")
                 {
                     NgWebElement uploadMarriageCert0 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
                     uploadMarriageCert0.SendKeys(marriageCertificate);
                 }
 
-                if (businessTypeShared == "society")
+                if (businessType == "society")
                 {
                     NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
                     uploadMarriageCert1.SendKeys(marriageCertificate);
                 }
 
-                if (businessTypeShared == "sole proprietorship")
+                if (businessType == "sole proprietorship")
                 {
                     //NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath(""));
                     //uploadMarriageCert1.SendKeys(marriageCertificate);
@@ -892,10 +888,10 @@ namespace bdd_tests
         }
 
 
-        [And(@"I change a personnel email address")]
-        public void RequestPersonnelEmailChange()
+        [And(@"I change a personnel email address for a (.*)")]
+        public void RequestPersonnelEmailChange(string businessType)
         {
-            if (businessTypeShared != "indigenous nation")
+            if (businessType != "indigenous nation")
             {
                 // click on Dashboard link
                 ClickOnDashboard();
@@ -904,14 +900,14 @@ namespace bdd_tests
                 ClickReviewOrganizationInformation();
 
                 // click on the Edit button for Key Personnel (partnership, sole proprietorship, public corporation, or society)
-                if (businessTypeShared == "partnership" || businessTypeShared == "sole proprietorship" || businessTypeShared == "public corporation" || businessTypeShared == "society")
+                if (businessType == "partnership" || businessType == "sole proprietorship" || businessType == "public corporation" || businessType == "society")
                 {
                     NgWebElement uiEditInfoButtonPartner = ngDriver.FindElement(By.CssSelector(".fas.fa-pencil-alt span"));
                     uiEditInfoButtonPartner.Click();
                 }
 
                 // click on the Edit button for Key Personnel (private corporation)
-                if (businessTypeShared == "private corporation")
+                if (businessType == "private corporation")
                 {
                     NgWebElement uiEditInfoButton = ngDriver.FindElement(By.CssSelector("td:nth-child(7) .ng-star-inserted"));
                     uiEditInfoButton.Click();
