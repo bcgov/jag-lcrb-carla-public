@@ -50,8 +50,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                     StoreContactInfo = (FormControlState?)applicationType.AdoxioStorecontactinfo,
                     Title = applicationType.AdoxioTitletext,
                     ValidInterest = (FormControlState?)applicationType.AdoxioValidinterest,
-                    IsEndorsement = applicationType.AdoxioIsendorsement,  
-                    RequiresSecurityScreening = applicationType.AdoxioRequiressecurityscreening
+                    RequiresSecurityScreening = applicationType.AdoxioRequiressecurityscreening,
+                    IsEndorsement = applicationType.AdoxioIsendorsement,
+                    ServiceAreas = applicationType.AdoxioServiceareas.HasValue && (bool)applicationType.AdoxioServiceareas,
+                    OutsideAreas = applicationType.AdoxioServiceareas.HasValue && (bool)applicationType.AdoxioOutsideareas,
+                    CapacityArea = applicationType.AdoxioServiceareas.HasValue && (bool)applicationType.AdoxioCapacityarea
                 };
 
                 if (applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)
