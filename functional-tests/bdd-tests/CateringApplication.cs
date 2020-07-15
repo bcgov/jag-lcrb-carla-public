@@ -21,12 +21,12 @@ Feature: CateringApplication
 Scenario: Indigenous Nation Catering Application
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for Catering
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for an indigenous nation
+    And I review the organization structure for an indigenous nation
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I review the security screening requirements
+    And I review the security screening requirements for an indigenous nation
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
@@ -38,12 +38,12 @@ Scenario: Indigenous Nation Catering Application
 Scenario: Partnership Catering Application
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a partnership
+    And I review the organization structure for a partnership
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I review the security screening requirements
+    And I review the security screening requirements for a partnership
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
@@ -55,12 +55,12 @@ Scenario: Partnership Catering Application
 Scenario: Private Corporation Catering Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I review the security screening requirements
+    And I review the security screening requirements for a private corporation
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
@@ -72,12 +72,12 @@ Scenario: Private Corporation Catering Application
 Scenario: Public Corporation Catering Application
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a public corporation
+    And I review the organization structure for a public corporation
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I review the security screening requirements
+    And I review the security screening requirements for a public corporation
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
@@ -89,12 +89,12 @@ Scenario: Public Corporation Catering Application
 Scenario: Society Catering Application
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a society
+    And I review the organization structure for a society
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I review the security screening requirements
+    And I review the security screening requirements for a society
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
@@ -106,12 +106,12 @@ Scenario: Society Catering Application
 Scenario: Sole Proprietorship Catering Application
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a sole proprietorship
+    And I review the organization structure for a sole proprietorship
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I review the security screening requirements
+    And I review the security screening requirements for a sole proprietorship
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
@@ -123,8 +123,8 @@ Scenario: Sole Proprietorship Catering Application
 Scenario: Catering Application Validation
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
     And I do not complete the catering application correctly
     And the expected Catering error messages are displayed
@@ -137,16 +137,8 @@ namespace bdd_tests
     [FeatureFile("./CateringApplication.feature")]
     public sealed class CateringApplication : TestBase
     {
-        [Given(@"I am logged in to the dashboard as an (.*)")]
+        [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard_IN(string businessType)
-        {
-            CheckFeatureFlagsLiquor();
-
-            CarlaLogin(businessType);
-        }
-
-        [Given(@"I am logged in to the dashboard as a (.*)")]
-        public void I_view_the_dashboard(string businessType)
         {
             CheckFeatureFlagsLiquor();
 

@@ -22,11 +22,11 @@ Scenario: Indigenous Nation CRS Application
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for an indigenous nation
+    And I review the organization structure for an indigenous nation
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
-    And I review the security screening requirements
+    And I complete the Cannabis Retail Store application for an indigenous nation
+    And I review the security screening requirements for an indigenous nation
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
@@ -39,11 +39,11 @@ Scenario: Partnership CRS Application
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a partnership
+    And I review the organization structure for a partnership
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
-    And I review the security screening requirements
+    And I complete the Cannabis Retail Store application for a partnership
+    And I review the security screening requirements for a partnership
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
@@ -56,11 +56,11 @@ Scenario: Private Corporation CRS Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
-    And I review the security screening requirements
+    And I complete the Cannabis Retail Store application for a private corporation
+    And I review the security screening requirements for a private corporation
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
@@ -73,11 +73,11 @@ Scenario: Public Corporation CRS Application
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a public corporation
+    And I review the organization structure for a public corporation
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
-    And I review the security screening requirements
+    And I complete the Cannabis Retail Store application for a public corporation
+    And I review the security screening requirements for a public corporation
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
@@ -90,11 +90,11 @@ Scenario: Society CRS Application
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a society
+    And I review the organization structure for a society
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
-    And I review the security screening requirements
+    And I complete the Cannabis Retail Store application for a society
+    And I review the security screening requirements for a society
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
@@ -107,11 +107,11 @@ Scenario: Sole Proprietorship CRS Application
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a sole proprietorship
+    And I review the organization structure for a sole proprietorship
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
-    And I review the security screening requirements
+    And I complete the Cannabis Retail Store application for a sole proprietorship
+    And I review the security screening requirements for a sole proprietorship
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
@@ -125,13 +125,7 @@ namespace bdd_tests
     [FeatureFile("./CRSApplication.feature")]
     public sealed class CRSApplication : TestBase
     {
-        [Given(@"I am logged in to the dashboard as an (.*)")]
-        public void I_view_the_dashboard_IN(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-
-        [Given(@"I am logged in to the dashboard as a (.*)")]
+        [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
