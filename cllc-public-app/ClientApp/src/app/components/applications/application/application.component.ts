@@ -850,7 +850,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       indigenousNationId: 'Please select the Indigenous nation',
       federalProducerNames: 'Please enter the name of federal producer',
       description1: 'Please enter a description',
-      IsReadyProductNotVisibleOutside: 'Please confirm that product will not be visible from the outside'
+      IsReadyProductNotVisibleOutside: 'Please confirm that product will not be visible from the outside',
+      serviceAreas: 'All service area rows must be complete'
     };
 
     return errorMap;

@@ -1,5 +1,5 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, ValidationErrors } from '@angular/forms';
 import { ServiceArea } from '@models/service-area.model';
 import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 
@@ -13,6 +13,11 @@ import { BaseControlValueAccessor } from './BaseControlValueAccessor';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CapacityTableComponent),
       multi: true
+    },
+    {
+        provide: NG_VALIDATORS,
+        useExisting: CapacityTableComponent,
+        multi: true
     }
   ]
 })
@@ -39,7 +44,6 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
     }
 
     writeValue(serviceAreas: ServiceArea[]) {
-        console.log(serviceAreas);
         if (serviceAreas) {
             super.writeValue(serviceAreas);
             // this sucks, maybe there's a better way, just trying to
@@ -75,5 +79,17 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
             areas.push({...row.value, areaNumber: index + 1});
         });
         this.writeValue(areas);
+    }
+
+    validate({ value }: FormControl) {
+        let isValid = true;
+        this.areasArr.controls.forEach((row, index) => {
+            if (row.invalid) {
+                isValid = false;
+            }
+        });
+        return !isValid && {
+            invalid: true
+        };
     }
 }

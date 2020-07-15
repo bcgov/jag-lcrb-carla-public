@@ -980,7 +980,10 @@
         <h3 class="blue-header">SERVICE AREA</h3>
         <section *ngIf="application.applicationType.serviceAreas" class="padded-section content-bottom">
           <div *ngIf="htmlContent?.serviceArea" [innerHTML]="htmlContent.serviceArea"></div>
-          <app-capacity-table formControlName="serviceAreas" [isIndoor]="true"></app-capacity-table>
+          <app-field [valid]="!showValidationMessages || form.get('serviceAreas').valid"
+              errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
+            <app-capacity-table formControlName="serviceAreas" [isIndoor]="true"></app-capacity-table>
+          </app-field>
         </section>
 
         <!-- Hours of Sale -->
