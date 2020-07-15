@@ -649,8 +649,9 @@
             <section>
         
                 <!-- if there is configured floor plan text, show it-->
+
                 <div *ngIf="htmlContent.floorPlan">
-                    <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.floorPlan"></section>
+                    <section class="ngtest-preamble-content" [innerHTML]="htmlContent.floorPlan"></section>
                 </div>
         
                 <!-- otherwise switch to legacy mode-->
@@ -773,46 +774,26 @@
             <!-- Cannabis Retail Store has an additional image-->
             <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
               <img src="assets/site-plan-example.png" width="350" alt="Site plan" style="margin: auto; display: block;">
-            </div>
-            <div class="col-md-6">
-              <p>
-                If the proposed store is located inside a building with other businesses
-                (e.g. a mall), submit two site plans:
-              </p>
-              <p>
-                1) One site plan showing location of any other buildings/businesses on the same site, including:
-              </p>
+              <p>If the proposed store is located inside a building with other businesses (e.g. a mall), submit two site plans:</p>
+              <p>1) One site plan showing location of any other buildings/businesses on the same site, including:</p>
               <ul>
-                <li>
-                  Each building footprint, building name and a list of businesses operating inside the building
-                </li>
+                <li>Each building footprint, building name and a list of businesses operating inside the building</li>
                 <li>Road access and exits, including any relevant street names, and</li>
                 <li>Parking lots</li>
               </ul>
-              <p>
-                2) A second site plan showing the location of the proposed store
-                inside the building’s footprint:
-              </p>
+              <p>2) A second site plan showing the location of the proposed store inside the building’s footprint:</p>
               <ul>
                 <li>All entrances and exits for the building</li>
                 <li>The location, name and type of businesses operating inside the building</li>
                 <li>The store footprint with all entrances and exits for the store, and</li>
-                <li>
-                  A description of the type of separation proposed for any business adjoining the proposed store
-                </li>
+                <li>A description of the type of separation proposed for any business adjoining the proposed store</li>
               </ul>
               <p>Full height walls are required for separation and no connecting doors between the cannabis retail
-                store and the neighbouring business are permitted.
-              </p>
-              <p>
-                The cannabis retail store may share a vestibule with another type of business (e.g. a liquor store
+                store and the neighbouring business are permitted.</p>
+              <p>The cannabis retail store may share a vestibule with another type of business (e.g. a liquor store
                 or grocery store) provided each business has its own controlled entrance within the vestibule. The cannabis
-                retail store
-                cannot share a vestibule with a business that would be contrary to public interest (i.e. business
-                aimed
-                at
-                minors or a liquor consumption business).
-              </p>
+                retail store  cannot share a vestibule with a business that would be contrary to public interest (i.e. business
+                aimed at minors or a liquor consumption business).</p>
             </div>
          
           <section>
