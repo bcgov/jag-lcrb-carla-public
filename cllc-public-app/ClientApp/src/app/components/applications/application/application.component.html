@@ -1643,7 +1643,7 @@
           <button
             *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
                         && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')"
-            class=" btn btn-primary" (click)="submitForLGINApproval()">
+            class=" btn btn-primary" (click)="submitForLGINApproval(); foLGBtn.disabled = true;" #foLGBtn>
             SUBMIT FOR LG/IN REVIEW OR COMMENT
           </button>
 
