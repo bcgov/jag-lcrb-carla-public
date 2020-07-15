@@ -1,12 +1,5 @@
 <div [formGroup]="form">
-
-    <mat-checkbox formControlName="hasMultiplePIDs">There are additional PIDs for this manufacturing site.
-    </mat-checkbox>
-
-    <p *ngIf="this.form.get('hasMultiplePIDs').value">Please enter your additional Parcel Identifiers in the field
-        below:</p>
-
-    <app-field label="Additional Parcel Identifiers" *ngIf="this.form.get('hasMultiplePIDs').value">
+    <app-field label="Additional Parcel Identifiers (if applicable)">
         <textarea style="width: 400px;" formControlName="PIDList"></textarea>
     </app-field>
 </div>
