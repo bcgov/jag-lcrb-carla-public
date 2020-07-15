@@ -5,8 +5,6 @@
 @e2e @cannabis @indigenousnation @crsapp2
 Scenario: Indigenous Nation CRS Application
     Given I am logged in to the dashboard as an indigenous nation
-    And the account is deleted
-    And I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -24,8 +22,6 @@ Scenario: Indigenous Nation CRS Application
 @e2e @cannabis @partnership @crsapp
 Scenario: Partnership CRS Application
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -43,8 +39,6 @@ Scenario: Partnership CRS Application
 @e2e @cannabis @privatecorporation @crsapp
 Scenario: Private Corporation CRS Application
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -62,8 +56,6 @@ Scenario: Private Corporation CRS Application
 @e2e @cannabis @publiccorporation @crsapp2
 Scenario: Public Corporation CRS Application
     Given I am logged in to the dashboard as a public corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -81,8 +73,6 @@ Scenario: Public Corporation CRS Application
 @e2e @cannabis @society @crsapp2
 Scenario: Society CRS Application
     Given I am logged in to the dashboard as a society
-    And the account is deleted
-    And I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -100,8 +90,6 @@ Scenario: Society CRS Application
 @e2e @cannabis @soleproprietorship @crsapp
 Scenario: Sole Proprietorship CRS Application
     Given I am logged in to the dashboard as a sole proprietorship
-    And the account is deleted
-    And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
