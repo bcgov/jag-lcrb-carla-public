@@ -23,6 +23,7 @@ import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 })
 export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea[]> {
     @Input() isIndoor: boolean;
+    total: number;
 
     formGroup: FormGroup;
     get areasArr(): FormArray { return this.formGroup.get('areas') as FormArray; }
@@ -46,13 +47,27 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
     writeValue(serviceAreas: ServiceArea[]) {
         if (serviceAreas) {
             super.writeValue(serviceAreas);
-            // this sucks, maybe there's a better way, just trying to
-            // set the value of the array to the new value
+
             while (this.areasArr.length > 0) { this.areasArr.removeAt(0); }
-            serviceAreas.forEach(area => this.areasArr.push(this.fb.control(area)));
+            serviceAreas.forEach(area => { this.areasArr.push(this.fb.control(area)); });
+            this.updateTotal();
         } else {
             super.writeValue([]);
         }
+    }
+
+    updateTotal() {
+        this.total = 0;
+        this.areasArr.value.forEach(area => {
+            if (typeof area['capacity'] === 'number') {
+                this.total += area['capacity'];
+            } else {
+                var num = parseInt(area['capacity'], 10);
+                if (num > 0) {
+                    this.total += num;
+                }
+            }
+        });
     }
 
     addRow() {
@@ -69,16 +84,15 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
     removeRow(index: number) {
         if (index >= 0 && index < this.areasArr.length) {
             this.areasArr.removeAt(index);
-            this.reindex();
+            const newArr: ServiceArea[] = this.areasArr.controls.map((control, i) => {
+                return { areaNumber: i + 1, ...control.value };
+            });
+            this.writeValue(newArr);
         }
     }
 
-    reindex() {
-        const areas: ServiceArea[] = [];
-        this.areasArr.controls.forEach((row, index) => {
-            areas.push({...row.value, areaNumber: index + 1});
-        });
-        this.writeValue(areas);
+    onRowChange(val) {
+        this.updateTotal()
     }
 
     validate({ value }: FormControl) {

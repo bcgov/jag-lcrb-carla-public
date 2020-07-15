@@ -34,6 +34,7 @@ export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceA
   @Input() isIndoor: boolean;
   @Input() index: number;
   @Input() onDelete: (index) => void;
+  @Input() onRowChange: (val) => void;
   rowGroup: FormGroup;
 
   public value: ServiceArea;
@@ -52,6 +53,7 @@ export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceA
 
     this.rowGroup.valueChanges.subscribe(val => {
       this.onChange(val);
+      this.onRowChange(val);
       this.value = val;
     });
   }
