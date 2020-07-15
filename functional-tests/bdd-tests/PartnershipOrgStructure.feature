@@ -5,8 +5,6 @@
 @e2e @cannabis @partnership @validation @partnerorgstructure1
 Scenario: Change individual partner name and pay fee
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile
@@ -32,8 +30,6 @@ Scenario: Change individual partner name and pay fee
 @cannabis @partnership @validation @partnerorgstructure2
 Scenario: Delete an individual who is both an individual partner and individual partner of business partner
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I enter the same person as an individual partner and an individual partner of a business partner (person 1)
     And I enter a second person as an individual partner (person 2)
@@ -50,8 +46,6 @@ Scenario: Delete an individual who is both an individual partner and individual 
 Scenario: Change individual partner and business partner same name 
     # under development
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I enter the same person as an individual partner and a business shareholder
     And I click on the Submit Organization Information button
@@ -65,8 +59,6 @@ Scenario: Change individual partner and business partner same name
 @cannabis @partnership @validation @partnerorgstructure4
 Scenario: Confirm partnership business shareholder org structure update
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I enter the same individual as an individual partner and a business shareholder
     And I click on the Submit Organization Information button
@@ -92,8 +84,6 @@ Scenario: Confirm partnership business shareholder org structure update
 @cannabis @partnership @validation @partnerorgstructure5
 Scenario: Confirm partnership business shareholder org structure update after payment 
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I enter the same individual as an individual partner and a business shareholder
     And I click on the Submit Organization Information button
@@ -123,8 +113,6 @@ Scenario: Confirm partnership business shareholder org structure update after pa
 @cannabis @partnership @validation @partnerorgstructure6
 Scenario: Save for Later feature for partnership org structure
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I enter the same individual as an individual partner and a business shareholder
     And I click on the Save for Later button

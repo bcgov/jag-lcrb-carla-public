@@ -6,8 +6,6 @@
  @e2e @catering @privatecorporation @licenseerep
  Scenario: Private Corporation Licensee Representative Request
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -18,7 +16,6 @@
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
     And I request a licensee representative
     And the account is deleted

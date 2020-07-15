@@ -1,13 +1,11 @@
-﻿Feature: CateringApplicationThirdPartyOperator
+﻿Feature: CateringApplicationBrandingChange
     As a logged in business user
     I want to pay the first year catering licence fee
-    And submit a third party operator application for different business types
+    And submit a name branding change for different business types
 
-@e2e @catering @indigenousnation @cateringtpo2
-Scenario: Indigenous Nation Catering Third Party Operator Application
+@e2e @catering @indigenousnation @cateringbranding1
+Scenario: Catering Indigenous Nation Branding Change
     Given I am logged in to the dashboard as an indigenous nation
-    And the account is deleted
-    And I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -20,15 +18,14 @@ Scenario: Indigenous Nation Catering Third Party Operator Application
     And the application is approved
     And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
-    And I request a third party operator
+    And I click on the licence download link
+    And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @partnership @cateringtpo
- Scenario: Partnership Catering Third Party Operator Application
+@e2e @catering @partnership @cateringbranding2
+Scenario: Catering Partnership Branding Change
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -41,15 +38,14 @@ Scenario: Indigenous Nation Catering Third Party Operator Application
     And the application is approved
     And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
-    And I request a third party operator
+    And I click on the licence download link
+    And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @privatecorporation @cateringtpo
- Scenario: Private Corporation Catering Third Party Operator Application
+@e2e @catering @privatecorporation @cateringbranding3
+Scenario: Catering Private Corporation Branding Change
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -62,15 +58,14 @@ Scenario: Indigenous Nation Catering Third Party Operator Application
     And the application is approved
     And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
-    And I request a third party operator
+    And I click on the licence download link
+    And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @publiccorporation @cateringtpo2
- Scenario: Public Corporation Catering Third Party Operator Application
+@e2e @catering @publiccorporation @cateringbranding4
+Scenario: Catering Public Corporation Branding Change
     Given I am logged in to the dashboard as a public corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -83,15 +78,14 @@ Scenario: Indigenous Nation Catering Third Party Operator Application
     And the application is approved
     And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
-    And I request a third party operator
+    And I click on the licence download link
+    And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @society @cateringtpo2
- Scenario: Society Catering Third Party Operator Application
+@e2e @catering @society @cateringbranding5
+Scenario: Catering Society Branding Change
     Given I am logged in to the dashboard as a society
-    And the account is deleted
-    And I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -104,15 +98,14 @@ Scenario: Indigenous Nation Catering Third Party Operator Application
     And the application is approved
     And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
-    And I request a third party operator
+    And I click on the licence download link
+    And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @soleproprietorship @cateringtpo
- Scenario: Sole Proprietorship Catering Third Party Operator Application
+@e2e @catering @soleproprietorship @cateringbranding6
+Scenario: Catering Sole Proprietorship Branding Change
     Given I am logged in to the dashboard as a sole proprietorship
-    And the account is deleted
-    And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -125,6 +118,7 @@ Scenario: Indigenous Nation Catering Third Party Operator Application
     And the application is approved
     And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
-    And I request a third party operator
+    And I click on the licence download link
+    And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page

@@ -26,7 +26,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Terminated = 845280009,
         [EnumMember(Value = "Terminated and Refunded")]
         TerminatedAndRefunded = 845280010,
-        
+
         Processed = 845280011,
         [EnumMember(Value = "Reviewing Inspection Results")]
         ReviewingInspectionResults = 845280012
@@ -522,6 +522,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty(PropertyName = "lGApprovalDecision")]
         public LGDecision? LGApprovalDecision { get; set; }
+
+        [JsonProperty(PropertyName = "lGDecisionComments")]
+        public string LGDecisionComments { get; set; }
 
         [JsonProperty(PropertyName = "lGNameOfOfficial")]
         public string LGNameOfOfficial { get; set; }

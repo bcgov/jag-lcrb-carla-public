@@ -304,7 +304,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       data => {
         const route: any[] = [`/multi-step-application/${data.id}`];
 
-        
+
 
         this.router.navigate(route);
       },
@@ -325,7 +325,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
-        const route: any[] = [`/application/${data.id}`];        
+        const route: any[] = [`/application/${data.id}`];
 
         this.router.navigate(route);
       },
@@ -418,14 +418,14 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     let licenceType = '';
     if (applicationType === ApplicationTypeNames.CRSRenewal) {
       licenceType = CRS_RENEWAL_LICENCE_TYPE_NAME;
-    } else if (applicationType === ApplicationTypeNames.LiquorRenewal){
+    } else if (applicationType === ApplicationTypeNames.LiquorRenewal) {
       licenceType = LIQUOR_RENEWAL_LICENCE_TYPE_NAME;
     }
     return licenceType;
   }
-  
+
   CRSElligible(): boolean {
-    switch(this.account && this.account.businessType) {
+    switch (this.account && this.account.businessType) {
       case "University":
       case "Church":
         return false;
