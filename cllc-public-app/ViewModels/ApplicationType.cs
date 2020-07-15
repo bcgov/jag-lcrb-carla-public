@@ -74,6 +74,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         
         public bool? IsShowLGINApproval { get; set; }
         public bool? IsShowLGZoningConfirmation { get; set; }
+        public bool? RequiresSecurityScreening { get; set; }
 
         public LicenseType LicenseType { get; set; }
 
