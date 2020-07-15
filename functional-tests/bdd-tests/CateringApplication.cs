@@ -37,8 +37,6 @@ Scenario: Indigenous Nation Catering Application
 @e2e @catering @partnership @cateringapp
 Scenario: Partnership Catering Application
     Given I am logged in to the dashboard as a partnership
-    And the account is deleted
-    And I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -56,8 +54,6 @@ Scenario: Partnership Catering Application
 @e2e @catering @privatecorporation @cateringapp
 Scenario: Private Corporation Catering Application
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -72,11 +68,9 @@ Scenario: Private Corporation Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @publiccorporation @cateringapp
+@e2e @catering @publiccorporation @cateringapp2
 Scenario: Public Corporation Catering Application
     Given I am logged in to the dashboard as a public corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -91,11 +85,9 @@ Scenario: Public Corporation Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @society @cateringapp3
+@e2e @catering @society @cateringapp2
 Scenario: Society Catering Application
     Given I am logged in to the dashboard as a society
-    And the account is deleted
-    And I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -110,11 +102,9 @@ Scenario: Society Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @soleproprietorship @cateringapp2
+@e2e @catering @soleproprietorship @cateringapp
 Scenario: Sole Proprietorship Catering Application
     Given I am logged in to the dashboard as a sole proprietorship
-    And the account is deleted
-    And I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -129,11 +119,9 @@ Scenario: Sole Proprietorship Catering Application
     And the account is deleted
     Then I see the login page
 
-@catering @validation @cateringapp
+@catering @validation @cateringappvalidation
 Scenario: Catering Application Validation
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile
     And I review the organization structure
@@ -157,23 +145,11 @@ namespace bdd_tests
             CarlaLogin(businessType);
         }
 
-        [And(@"I am logged in to the dashboard as an (.*)")]
-        public void And_I_view_the_dashboard_IN(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-
         [Given(@"I am logged in to the dashboard as a (.*)")]
         public void I_view_the_dashboard(string businessType)
         {
             CheckFeatureFlagsLiquor();
 
-            CarlaLogin(businessType);
-        }
-
-        [And(@"I am logged in to the dashboard as a (.*)")]
-        public void And_I_view_the_dashboard(string businessType)
-        {
             CarlaLogin(businessType);
         }
     }

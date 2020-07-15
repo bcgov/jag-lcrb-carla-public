@@ -182,10 +182,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       federalProducerNames: ['', Validators.required],
       applicantType: ['', Validators.required],
       description1: ['', [Validators.required]],
-      description2: ['',[]],
+      description2: ['', []],
       proposedChange: ['', [Validators.required]],
       connectedGrocery: ['', []],
-      sitePhotos: ['',[]],
+      sitePhotos: ['', []],
       authorizedToSubmit: [''],
       signatureAgreement: [''],
       policeJurisdiction: [''],
@@ -309,7 +309,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
         }
 
         // make fields readonly if payment was made or the LG is viewing the application
-        if (data.isPaid || this.isOpenedByLGForApproval || this.application.lGApprovalDecision === 'Approved') {
+        // disable the form if the local government has reviewed the application
+        if (data.isPaid || this.isOpenedByLGForApproval || this.application.lGDecisionSubmissionDate) {
           this.form.disable();
         }
         this.savedFormData = this.form.value;
@@ -401,13 +402,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
     // TG validation question for cannabis licences to confirm that product is not visible from outside
     if (this.application.applicationType.floorPlan === FormControlState.Show && this.application.licenseType === 'Cannabis Retail Store') {
       this.form.get('IsReadyProductNotVisibleOutside').setValidators([Validators.required]);
-    } 
+    }
 
 
-    if (this.application.applicationType.lGandPoliceSelectors === "Yes" && this.LGApprovalsFeatureIsOn) {  
+    if (this.application.applicationType.lGandPoliceSelectors === "Yes" && this.LGApprovalsFeatureIsOn) {
       this.form.get('indigenousNation').setValidators([Validators.required]);
       this.form.get('policeJurisdiction').setValidators([Validators.required]);
-    } 
+    }
 
     if (this.isRAS()) {
       // use description1 for the certificate number
@@ -442,6 +443,22 @@ export class ApplicationComponent extends FormBase implements OnInit {
         && this.form.get('serviceHoursFridayClose').valid
         && this.form.get('serviceHoursSaturdayClose').valid
       );
+  }
+
+  lgHasReviewedZoning(): boolean {
+    let hasReviewed = false;
+    if (this.application && this.application.lGDecisionSubmissionDate && this.application.lgZoning) {
+      hasReviewed = true;
+    }
+    return hasReviewed;
+  }
+
+  lgApprovalDecisionMade(): boolean {
+    let hasMadeDecision = false;
+    if (this.application && this.application.lGDecisionSubmissionDate && this.application.lGApprovalDecision) {
+      hasMadeDecision = true;
+    }
+    return hasMadeDecision;
   }
 
   canDeactivate(): Observable<boolean> {
@@ -670,7 +687,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
   }
 
-  private proceedToSecurityScreening(){
+  private proceedToSecurityScreening() {
     //send event to move to the next step of the multi-step
     this.saveComplete.next(true);
   }
@@ -709,9 +726,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     // handle supporting documents for sole proprietor who submit marketing applications 
     let marketing_soleprop = this.application.applicationType.name === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietor";
 
-    if(this.proofOfZoning){
+    if (this.proofOfZoning) {
       let zoningErrors = this.proofOfZoning.getValidationErrors();
-      if(zoningErrors.length > 0){
+      if (zoningErrors.length > 0) {
         valid = false;
         this.validationMessages = this.validationMessages.concat(zoningErrors);
       }
@@ -778,18 +795,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Hours of sale are required');
     }
 
-    if (this.isRAS()){
-      
+    if (this.isRAS()) {
 
-      if (!this.form.get('isOwner').value){
+
+      if (!this.form.get('isOwner').value) {
         this.validationMessages.push('Only the owner of the business may submit this information');
       }
 
-      if (!this.form.get('hasValidInterest').value){
+      if (!this.form.get('hasValidInterest').value) {
         this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
       }
 
-      if (!this.form.get('willhaveValidInterest').value){
+      if (!this.form.get('willhaveValidInterest').value) {
         this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
       }
 

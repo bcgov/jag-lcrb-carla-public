@@ -122,6 +122,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             to.AdoxioApplicanttype = (int?)from.ApplicantType;
             to.AdoxioLgzoning = (int?)from.LgZoning;
+            to.AdoxioLgdecisioncomments = from.LGDecisionComments;
 
             // catering fields
             to.AdoxioPreviouslicenceapplication = from.PreviousApplication;
@@ -388,7 +389,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 LGDecisionSubmissionDate = dynamicsApplication.AdoxioLgdecisionsubmissiondate,
                 LgInName = dynamicsApplication?.AdoxioLocalgovindigenousnationid?.AdoxioName,
                 LGApprovalDecision = (LGDecision?)dynamicsApplication.AdoxioLgapprovaldecision,
-                LgZoning =(Zoning?)dynamicsApplication.AdoxioLgzoning,
+                LgZoning = (Zoning?)dynamicsApplication.AdoxioLgzoning,
+                LGDecisionComments = dynamicsApplication.AdoxioLgdecisioncomments,
 
                 // Catering fields.
 
@@ -506,16 +508,18 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
             }
 
-            if(dynamicsApplication.AdoxioPoliceJurisdictionId != null){
+            if (dynamicsApplication.AdoxioPoliceJurisdictionId != null)
+            {
                 applicationVM.PoliceJurisdiction = dynamicsApplication.AdoxioPoliceJurisdictionId.ToViewModel();
             }
 
-            if(dynamicsApplication.AdoxioLocalgovindigenousnationid != null){
+            if (dynamicsApplication.AdoxioLocalgovindigenousnationid != null)
+            {
                 var filter = $"_adoxio_lginlinkid_value eq {dynamicsApplication.AdoxioLocalgovindigenousnationid.AdoxioLocalgovindigenousnationid} and websiteurl ne null";
                 var linkedAccount = (await dynamicsClient.Accounts.GetAsync(filter: filter)).Value.FirstOrDefault();
                 applicationVM.IndigenousNation = dynamicsApplication.AdoxioLocalgovindigenousnationid.ToViewModel();
 
-                if(linkedAccount != null)
+                if (linkedAccount != null)
                 {
                     applicationVM.IndigenousNation.WebsiteUrl = linkedAccount.Websiteurl;
                 }
@@ -660,6 +664,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 applicationSummary.Portallabel = dynamicsApplication.AdoxioApplicationTypeId.AdoxioPortallabel;
                 applicationSummary.ApplicationTypeCategory = (ApplicationTypeCategory?)dynamicsApplication.AdoxioApplicationTypeId.AdoxioCategory;
             }
+
+            applicationSummary.LGHasApproved = (dynamicsApplication.AdoxioLgapprovaldecision == (int?)LGDecision.Approved)
+                    || (dynamicsApplication.AdoxioLgzoning == (int?)Zoning.Allows);
 
             applicationSummary.IsIndigenousNation = (dynamicsApplication.AdoxioApplicanttype == (int)AdoxioApplicantTypeCodes.IndigenousNation);
 
