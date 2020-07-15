@@ -8,8 +8,8 @@ Scenario: Indigenous Nation Federal Reports and Show Map
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile for a indigenous nation
-    And I review the organization structure for a indigenous nation
+    And I review the account profile for an indigenous nation
+    And I review the organization structure for an indigenous nation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for an indigenous nation
     And I click on the Pay for Application button
