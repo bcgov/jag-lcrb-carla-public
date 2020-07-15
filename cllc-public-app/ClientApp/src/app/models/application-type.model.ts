@@ -43,12 +43,16 @@ export class ApplicationType {
   proofofZoning: FormControlState;
   lGandPoliceSelectors: FormControlState;
   isShowLGINApproval: boolean;
-  isShowLGZoningConfirmation:boolean;
+  isShowLGZoningConfirmation: boolean;
   isFree: boolean;
   isEndorsement: boolean;
   requiresSecurityScreening: boolean;
 
   dynamicsForm: DynamicsForm;
+
+  serviceAreas: boolean;
+  outsideAreas: boolean;
+  capacityArea: boolean;
 }
 
 export enum FormControlState {

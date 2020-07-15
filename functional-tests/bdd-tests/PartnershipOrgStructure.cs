@@ -22,10 +22,10 @@ Scenario: Change individual partner name and pay fee
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a partnership
+    And I review the organization structure for a partnership
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
+    And I complete the Cannabis Retail Store application for a partnership
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
@@ -113,9 +113,9 @@ Scenario: Confirm partnership business shareholder org structure update after pa
     And I click on the Confirm Organization Information is Complete button
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
+    And I review the account profile for a partnership
     And I click on the Confirm Organization Information is Complete button
-    And I complete the Cannabis Retail Store application
+    And I complete the Cannabis Retail Store application for a partnership
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
@@ -158,7 +158,7 @@ namespace bdd_tests
     [FeatureFile("./PartnershipOrgStructure.feature")]
     public sealed class PartnershipOrgStructure : TestBase
     {
-        [Given(@"I am logged in to the dashboard as a (.*)")]
+        [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
