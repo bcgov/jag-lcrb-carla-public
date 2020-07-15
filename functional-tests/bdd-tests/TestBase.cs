@@ -583,7 +583,6 @@ namespace bdd_tests
             uiEstabPostal.SendKeys(estPostal);
 
             // enter the PID
-            //input[formcontrolname='establishmentParcelId']
             NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
@@ -681,20 +680,18 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = false;
         }
 
-        public void CheckFeatureFlagsCannabis()
-        {
-            CheckFeatureFlag("CRS-Renewal");
-        }
 
         public void CheckFeatureFlagsCOVIDTempExtension()
         {
             CheckFeatureFlag("CovidApplication");
         }
 
+
         public void CheckFeatureFlagsLiquor()
         {
             CheckFeatureFlag("LiquorOne");
         }
+
 
         public void CheckFeatureFlagsMaps()
         {
@@ -1550,8 +1547,8 @@ namespace bdd_tests
         }
 
 
-        [And(@"I review the account profile")]
-        public void ReviewAccountProfile()
+        [And(@"I review the account profile for a (.*)")]
+        public void ReviewAccountProfile(string businessType)
         {
             /*
             Page Title: Please Review the Account Profile
@@ -1582,8 +1579,8 @@ namespace bdd_tests
             NgWebElement uiBizNumber = ngDriver.FindElement(By.CssSelector("input[formControlName='businessNumber']"));
             uiBizNumber.SendKeys(bizNumber);
 
-            // enter the private corporation or society incorporation number
-            if (businessTypeShared == "private corporation" || businessTypeShared == "society" || businessTypeShared == "public corporation")
+            // enter the private/public corporation or society incorporation number
+            if (businessType == "private corporation" || businessType == "society" || businessType == "public corporation")
             {
                 NgWebElement uiCorpNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='bcIncorporationNumber']"));
                 uiCorpNumber.SendKeys(incorporationNumber);
@@ -1661,7 +1658,7 @@ namespace bdd_tests
             NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='emailaddress1']"));
             uiCorpContactEmail.SendKeys(corpContactEmail);
 
-            if ((businessTypeShared == "indigenous nation"))
+            if ((businessType == "indigenous nation"))
             {
                 // select 'Yes' for connection to a federal producer
                 NgWebElement INConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='iNConnectionToFederalProducer']"));
@@ -1673,7 +1670,7 @@ namespace bdd_tests
                 INDetailsFederalProducer.SendKeys(INnameAndDetails);
             }
 
-            if ((businessTypeShared == "private corporation") || (businessTypeShared == "sole proprietorship"))
+            if ((businessType == "private corporation") || (businessType == "sole proprietorship"))
             {
                 // select 'Yes' for corporation connection to federal producer 
                 NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='corpConnectionFederalProducer']"));
@@ -1694,7 +1691,7 @@ namespace bdd_tests
                 uiDetailsFederalProducer3.SendKeys(nameAndDetails2);
             }
 
-            if ((businessTypeShared == "partnership"))
+            if ((businessType == "partnership"))
             {
                 // select 'Yes' for partnership connection to federal producer 
                 NgWebElement partnerConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='partnersConnectionFederalProducer']"));
@@ -1715,7 +1712,7 @@ namespace bdd_tests
                 uiDetailsFederalProducer3.SendKeys(nameAndDetails2);
             }
 
-            if (businessTypeShared == "public corporation")
+            if (businessType == "public corporation")
             {
                 // select 'Yes' for corporation connection to federal producer 
                 NgWebElement corpConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='corpConnectionFederalProducer']"));
@@ -1744,7 +1741,7 @@ namespace bdd_tests
                 familyConnectionDetails.SendKeys(familyRelationship);
             }
 
-            if (businessTypeShared == "society")
+            if (businessType == "society")
             {
                 // select 'Yes' for society connection to federal producer 
                 NgWebElement societyConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='societyConnectionFederalProducer']"));
@@ -1880,14 +1877,14 @@ namespace bdd_tests
         }
 
 
-        [And(@"I review the organization structure")]
-        public void ReviewOrganizationStructure()
+        [And(@"I review the organization structure for a (.*)")]
+        public void ReviewOrganizationStructure(string businessType)
         {
             /* 
             Page Title: [client name] Detailed Organization Information
             */
 
-            if (businessTypeShared == "private corporation")
+            if (businessType == "private corporation")
             {
                 // find the upload test files in the bdd-tests\upload_files folder
                 var environment = Environment.CurrentDirectory;
@@ -2120,7 +2117,7 @@ namespace bdd_tests
                 confirmButtonBusIndyShareholder.Click();
             }
 
-            if (businessTypeShared == "sole proprietorship")
+            if (businessType == "sole proprietorship")
             {
                 /********** Sole Proprietor > Leader #1 **********/
 
@@ -2211,7 +2208,7 @@ namespace bdd_tests
                 SharedCalendarDate();
             }
 
-            if (businessTypeShared == "society")
+            if (businessType == "society")
             {
                 /********** Director #1 **********/
 
@@ -2339,7 +2336,7 @@ namespace bdd_tests
                 SharedCalendarDate();
             }
 
-            if (businessTypeShared == "public corporation")
+            if (businessType == "public corporation")
             {
                 /********** Key Personnel #1 **********/
 
@@ -2465,7 +2462,7 @@ namespace bdd_tests
                 SharedCalendarDate();
             }
 
-            if (businessTypeShared == "partnership")
+            if (businessType == "partnership")
             {
                 // create individual partner info
                 string partnerFirstName = "Individual";
@@ -2582,7 +2579,7 @@ namespace bdd_tests
                 uiConfirmButton2.Click();
             }
 
-            if (businessTypeShared == "indigenous nation")
+            if (businessType == "indigenous nation")
             {
                 // find the upload test file in the bdd-tests\upload_files folder
                 var environment = Environment.CurrentDirectory;
