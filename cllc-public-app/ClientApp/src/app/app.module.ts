@@ -1,6 +1,6 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule, APP_INITIALIZER, forwardRef } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ChartsModule } from 'ng2-charts';
@@ -171,6 +171,7 @@ import { VersionInfoDialogComponent } from '@components/version-info/version-inf
 import { FederalReportingComponent } from '@components/federal-reporting/federal-reporting.component';
 import { LicencesComponent } from '@components/licences/licences.component';
 import { LicenceRowComponent } from '@components/licences/licence-row/licence-row.component';
+import { CapacityTableComponent } from '@components/capacity-table/capacity-table.component';
 import { ApplicationsComponent } from '@components/applications/applications.component';
 import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
@@ -208,6 +209,7 @@ import { AdditionalPidsComponent } from './components/applications/application/t
 import { TermsAndConditionsDataService } from '@services/terms-and-condtions-data.service';
 import { LgZoningConfirmationComponent } from './components/applications/application/tabs/lg-zoning-confirmation/lg-zoning-confirmation.component';
 import { ProofOfZoningComponent } from './components/applications/application/tabs/proof-of-zoning/proof-of-zoning.component';
+import { CapacityTableRowComponent } from '@components/capacity-table/capacity-table-row.component';
 
 
 @NgModule({
@@ -228,6 +230,7 @@ import { ProofOfZoningComponent } from './components/applications/application/ta
     ConnectionToProducersComponent,
     CorporateDetailsComponent,
     DashboardComponent,
+    CapacityTableRowComponent,
     DelayedFileUploaderComponent,
     DirectorAndOfficerPersonDialogComponent,
     DirectorsAndOfficersComponent,
@@ -308,6 +311,8 @@ import { ProofOfZoningComponent } from './components/applications/application/ta
     VersionInfoDialogComponent,
     LicencesComponent,
     LicenceRowComponent,
+    CapacityTableComponent,
+    CapacityTableRowComponent,
     ApplicationsComponent,
     AssociateListComponent,
     OrgStructureComponent,

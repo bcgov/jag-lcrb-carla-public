@@ -84,5 +84,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsEndorsement { get; set;}
 
         public Form DynamicsForm { get; set; }
+
+        public bool ServiceAreas { get; set; }
+        public bool OutsideAreas { get; set; }
+        public bool CapacityArea { get; set; }
     }
 }

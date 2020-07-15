@@ -744,6 +744,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // create application
                 adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
+
+                if (item.ServiceAreas.Count > 0)
+                {
+                    AddServiceAreasToApplication(item.ServiceAreas, adoxioApplication.AdoxioApplicationid);
+                }
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -970,6 +975,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     await _dynamicsClient.Applications.DeleteReferenceAsync(item.Id, "adoxio_PoliceJurisdictionId");
                 }
 
+                RemoveServiceAreasFromApplication(item.Id);
+                if (item.ServiceAreas.Count > 0)
+                {
+                    AddServiceAreasToApplication(item.ServiceAreas, item.Id);
+                }
                 _dynamicsClient.Applications.Update(id, adoxioApplication);
             }
             catch (HttpOperationException httpOperationException)
@@ -1140,6 +1150,37 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // if current user doesn't have an account they are probably not logged in
             return false;
+        }
+
+        private void RemoveServiceAreasFromApplication(string applicationId)
+        {
+            string filter = $"_adoxio_applicationid_value eq {applicationId}";
+            IList<MicrosoftDynamicsCRMadoxioServicearea> areas = _dynamicsClient.Serviceareas.Get(filter: filter).Value;
+            foreach (MicrosoftDynamicsCRMadoxioServicearea area in areas)
+            {
+                _dynamicsClient.Serviceareas.Delete(area.AdoxioServiceareaid);
+            }
+        }
+
+        private void AddServiceAreasToApplication(List<CapacityArea> areas, string applicationId)
+        {
+            string applicationUri = _dynamicsClient.GetEntityURI("adoxio_applications", applicationId);
+            foreach (CapacityArea area in areas)
+            {
+                MicrosoftDynamicsCRMadoxioServicearea serviceArea = new MicrosoftDynamicsCRMadoxioServicearea()
+                {
+                    ApplicationOdataBind = applicationUri,
+                    AdoxioArealocation = area.AreaLocation,
+                    AdoxioAreanumber = area.AreaNumber,
+                    AdoxioCapacity = area.Capacity,
+                    AdoxioIsindoor = area.IsIndoor,
+                    AdoxioIsoutdoor = area.IsOutdoor,
+                    AdoxioIspatio = area.IsPatio,
+                    AdoxioDateadded = DateTimeOffset.Now,
+                    AdoxioDateupdated = DateTimeOffset.Now
+                };
+                _dynamicsClient.Serviceareas.Create(serviceArea);
+            }
         }
     }
 }

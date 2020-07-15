@@ -23,10 +23,10 @@ Scenario: Indigenous Nation CRS Name Branding Change
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for an indigenous nation
+    And I review the organization structure for an indigenous nation
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
+    And I complete the Cannabis Retail Store application for an indigenous nation
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
@@ -42,10 +42,10 @@ Scenario: Partnership CRS Name Branding Change
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a partnership
+    And I review the organization structure for a partnership
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
+    And I complete the Cannabis Retail Store application for a partnership
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
@@ -61,10 +61,10 @@ Scenario: Private Corporation CRS Name Branding Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
+    And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
@@ -80,10 +80,10 @@ Scenario: Public Corporation CRS Name Branding Change
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a public corporation
+    And I review the organization structure for a public corporation
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
+    And I complete the Cannabis Retail Store application for a public corporation
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
@@ -99,10 +99,10 @@ Scenario: Society CRS Name Branding Change
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a society
+    And I review the organization structure for a society
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
+    And I complete the Cannabis Retail Store application for a society
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
@@ -118,10 +118,10 @@ Scenario: Sole Proprietorship CRS Name Branding Change
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a sole proprietorship
+    And I review the organization structure for a sole proprietorship
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
+    And I complete the Cannabis Retail Store application for a sole proprietorship
     And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
@@ -138,14 +138,8 @@ namespace bdd_tests
     [FeatureFile("./CRSApplicationBrandingChange.feature")]
     public sealed class CRSApplicationBrandingChange : TestBase
     {
-        [Given(@"I am logged in to the dashboard as an (.*)")]
+        [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard_IN(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-
-        [Given(@"I am logged in to the dashboard as a (.*)")]
-        public void I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
         }

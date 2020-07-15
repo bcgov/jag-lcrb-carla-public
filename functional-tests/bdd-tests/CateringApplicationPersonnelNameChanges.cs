@@ -22,8 +22,8 @@ Feature: CateringApplicationPersonnelNameChanges
 Scenario: Catering Partnership Personnel Email Change
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a partnership
+    And I review the organization structure for a partnership
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
@@ -32,8 +32,8 @@ Scenario: Catering Partnership Personnel Email Change
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
-    And I change a personnel email address
-    And I request a personnel name change
+    # And I change a personnel email address for a partnership
+    And I request a personnel name change for a partnership
     And the account is deleted
     Then I see the login page
 
@@ -41,8 +41,8 @@ Scenario: Catering Partnership Personnel Email Change
 Scenario: Catering Private Corporation Personnel Email Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
@@ -51,8 +51,8 @@ Scenario: Catering Private Corporation Personnel Email Change
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
-    And I change a personnel email address
-    And I request a personnel name change
+    # And I change a personnel email address for a private corporation
+    And I request a personnel name change for a private corporation
     And the account is deleted
     Then I see the login page
 
@@ -60,8 +60,8 @@ Scenario: Catering Private Corporation Personnel Email Change
 Scenario: Catering Public Corporation Personnel Email Change
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a public corporation
+    And I review the organization structure for a public corporation
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
@@ -70,8 +70,8 @@ Scenario: Catering Public Corporation Personnel Email Change
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
-    And I change a personnel email address
-    And I request a personnel name change
+    # And I change a personnel email address for a public corporation
+    And I request a personnel name change for a public corporation
     And the account is deleted
     Then I see the login page
 
@@ -79,8 +79,8 @@ Scenario: Catering Public Corporation Personnel Email Change
 Scenario: Catering Society Personnel Email Change
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a society
+    And I review the organization structure for a society
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
@@ -89,8 +89,8 @@ Scenario: Catering Society Personnel Email Change
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
-    And I change a personnel email address
-    And I request a personnel name change
+    # And I change a personnel email address for a society
+    And I request a personnel name change for a society
     And the account is deleted
     Then I see the login page
 
@@ -98,8 +98,8 @@ Scenario: Catering Society Personnel Email Change
 Scenario: Catering Sole Proprietorship Personnel Email Change
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a sole proprietorship
+    And I review the organization structure for a sole proprietorship
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
@@ -108,8 +108,8 @@ Scenario: Catering Sole Proprietorship Personnel Email Change
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
-    And I change a personnel email address
-    And I request a personnel name change
+    # And I change a personnel email address for a sole proprietorship
+    And I request a personnel name change for a sole proprietorship
     And the account is deleted
     Then I see the login page
 */
@@ -119,16 +119,8 @@ namespace bdd_tests
     [FeatureFile("./CateringApplicationPersonnelNameChanges.feature")]
     public sealed class CateringApplicationPersonnelNameChanges : TestBase
     {
-        [Given(@"I am logged in to the dashboard as an (.*)")]
+        [Given(@"I am logged in to the dashboard as a(.*)")]
         public void Given_I_view_the_dashboard_IN(string businessType)
-        {
-            CheckFeatureFlagsLiquor();
-
-            CarlaLogin(businessType);
-        }
-
-        [Given(@"I am logged in to the dashboard as a (.*)")]
-        public void Given_I_view_the_dashboard(string businessType)
         {
             CheckFeatureFlagsLiquor();
 
