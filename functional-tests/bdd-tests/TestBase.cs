@@ -357,7 +357,7 @@ namespace bdd_tests
             ClickOnSubmitButton();
         }
 
-        [And(@"I complete the Cannabis Retail Store application for a (.*)")]
+        [And(@"I complete the Cannabis Retail Store application for a(.*)")]
         public void CompleteCannabisApplication(string businessType)
         {
             /* 
@@ -400,7 +400,7 @@ namespace bdd_tests
             NgWebElement estabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             estabPID.SendKeys(estPID);
 
-            if (businessType == "indigenous nation")
+            if (businessType == "n indigenous nation")
             {
                 // select the IN 
                 NgWebElement uiSelectNation = ngDriver.FindElement(By.CssSelector("[formcontrolname='indigenousNationId'] option[value='236686fc-d9d3-e811-90f0-005056832371']"));
