@@ -424,6 +424,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     //   this.form.get('connectedGrocery').setValidators([Validators.required]);
     // }
 
+    if (!this.application.applicationType.serviceAreas) {
+      this.form.get('serviceAreas').disable();
+    }
   }
 
 
