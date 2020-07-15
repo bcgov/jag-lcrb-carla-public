@@ -9,7 +9,7 @@ Scenario: Indigenous Nation CRS Name Branding Change
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a indigenous nation
-    And I review the organization structure
+    And I review the organization structure for a indigenous nation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
@@ -27,7 +27,7 @@ Scenario: Partnership CRS Name Branding Change
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a partnership
-    And I review the organization structure
+    And I review the organization structure for a partnership
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
@@ -45,7 +45,7 @@ Scenario: Private Corporation CRS Name Branding Change
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
-    And I review the organization structure
+    And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
@@ -63,7 +63,7 @@ Scenario: Public Corporation CRS Name Branding Change
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a public corporation
-    And I review the organization structure
+    And I review the organization structure for a public corporation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
@@ -81,7 +81,7 @@ Scenario: Society CRS Name Branding Change
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a society
-    And I review the organization structure
+    And I review the organization structure for a society
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
@@ -99,7 +99,7 @@ Scenario: Sole Proprietorship CRS Name Branding Change
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a sole proprietorship
-    And I review the organization structure
+    And I review the organization structure for a sole proprietorship
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application
     And I click on the Pay for Application button
