@@ -31,6 +31,7 @@ import { DynamicsFormDataService } from '../../../services/dynamics-form-data.se
 import { PoliceDurisdictionDataService } from '@services/police-jurisdiction-data.service';
 import { LocalGovernmentDataService } from '@services/local-government-data.service';
 import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.component';
+import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -198,6 +199,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       willhaveValidInterest: ['', []],
       meetsALRRequirements: ['', []],
       IsReadyProductNotVisibleOutside: ['', []],
+      serviceAreas: ['', []]
     });
 
 
@@ -271,7 +273,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
         if (data.applicationType.formReference) {
           console.log("Getting form layout");
-          // get the application form        
+          // get the application form
           this.dynamicsForm = data.applicationType.dynamicsForm;
           this.dynamicsForm.tabs.forEach(function (tab) {
             tab.sections.forEach(function (section) {
@@ -422,7 +424,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     //   this.form.get('connectedGrocery').setValidators([Validators.required]);
     // }
 
-
+    if (!this.application.applicationType.serviceAreas) {
+      this.form.get('serviceAreas').disable();
+    }
   }
 
 
@@ -562,6 +566,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
     let description2 = '';
+    
 
     if (this.isRAS()) {
       description2 += this.form.get('isOwner').value ? 'Is owner = Yes' : 'Is owner = No';
@@ -571,13 +576,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
       description2 += this.form.get('willhaveValidInterest').value ? 'Will have valid interest = Yes' : 'Will have valid interest = No';
     }
 
+    // flatten the service areas if need be
+    const serviceAreas = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
+
     // do not save if the form is in file upload mode
     if (this.mode === UPLOAD_FILES_MODE) {
       // a delay is need by the deactivate guard
       return of(true).pipe(delay(10));
     }
     return forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, description2: description2 }),
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, description2: description2, serviceAreas: serviceAreas }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
@@ -845,7 +853,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       indigenousNationId: 'Please select the Indigenous nation',
       federalProducerNames: 'Please enter the name of federal producer',
       description1: 'Please enter a description',
-      IsReadyProductNotVisibleOutside: 'Please confirm that product will not be visible from the outside'
+      IsReadyProductNotVisibleOutside: 'Please confirm that product will not be visible from the outside',
+      serviceAreas: 'All service area rows must be complete'
     };
 
     return errorMap;
