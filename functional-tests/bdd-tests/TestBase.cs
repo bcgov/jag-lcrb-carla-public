@@ -1801,7 +1801,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"I review the security screening requirements for a (.*)")]
+        [And(@"I review the security screening requirements for a(.*)")]
         public void ReviewSecurityScreeningRequirements(string businessType)
         {
             /* 
@@ -1809,7 +1809,7 @@ namespace bdd_tests
             */
 
             // confirm that private corporation personnel are present
-            if (businessType == "private corporation")
+            if (businessType == " private corporation")
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel0')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'PrivateCorp')]")).Displayed);
@@ -1820,7 +1820,7 @@ namespace bdd_tests
             }
 
             // confirm that sole proprietor personnel are present
-            if (businessType == "sole proprietorship")
+            if (businessType == " sole proprietorship")
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'SoleProprietor')]")).Displayed);
@@ -1829,7 +1829,7 @@ namespace bdd_tests
             }
 
             // confirm that society personnel are present
-            if (businessType == "society")
+            if (businessType == " society")
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Society')]")).Displayed);
@@ -1838,7 +1838,7 @@ namespace bdd_tests
             }
 
             // confirm that public corporation personnel are present
-            if (businessType == "public corporation")
+            if (businessType == " public corporation")
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel1')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Public Corp')]")).Displayed);
@@ -1847,7 +1847,7 @@ namespace bdd_tests
             }
 
             // confirm that partnership personnel are present
-            if (businessType == "partnership")
+            if (businessType == " partnership")
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Individual')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Partner')]")).Displayed);

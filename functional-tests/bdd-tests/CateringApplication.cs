@@ -26,7 +26,7 @@ Scenario: Indigenous Nation Catering Application
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I review the security screening requirements for a indigenous nation
+    And I review the security screening requirements for an indigenous nation
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
