@@ -20,6 +20,6 @@
 </p>
 
 <section class="d-flex justify-content-between">
-    <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
-    <button class="btn btn-primary" (click)="accept()">OK</button>
+    <button class="btn btn-secondary" (click)="cancel(); cancelBtn.disabled = true;" #cancelBtn>Cancel</button>
+    <button class="btn btn-primary" (click)="accept(); okBtn.disabled = true;" #okBtn>OK</button>
 </section>
