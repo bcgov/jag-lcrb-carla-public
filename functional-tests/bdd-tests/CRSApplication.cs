@@ -125,13 +125,7 @@ namespace bdd_tests
     [FeatureFile("./CRSApplication.feature")]
     public sealed class CRSApplication : TestBase
     {
-        [Given(@"I am logged in to the dashboard as an (.*)")]
-        public void I_view_the_dashboard_IN(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-
-        [Given(@"I am logged in to the dashboard as a (.*)")]
+        [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);

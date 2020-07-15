@@ -137,16 +137,8 @@ namespace bdd_tests
     [FeatureFile("./CateringApplication.feature")]
     public sealed class CateringApplication : TestBase
     {
-        [Given(@"I am logged in to the dashboard as an (.*)")]
+        [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard_IN(string businessType)
-        {
-            CheckFeatureFlagsLiquor();
-
-            CarlaLogin(businessType);
-        }
-
-        [Given(@"I am logged in to the dashboard as a (.*)")]
-        public void I_view_the_dashboard(string businessType)
         {
             CheckFeatureFlagsLiquor();
 

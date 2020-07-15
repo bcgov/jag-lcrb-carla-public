@@ -144,14 +144,8 @@ namespace bdd_tests
     [FeatureFile("./CRSApplicationFederalReportsShowMap.feature")]
     public sealed class CRSApplicationFederalReportsShowMap : TestBase
     {
-        [Given(@"I am logged in to the dashboard as an (.*)")]
+        [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard_IN(string businessType)
-        {
-            CarlaLogin(businessType);
-        }
-
-        [Given(@"I am logged in to the dashboard as a (.*)")]
-        public void I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);
         }
