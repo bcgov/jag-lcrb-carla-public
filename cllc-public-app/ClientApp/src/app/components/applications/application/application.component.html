@@ -363,7 +363,6 @@
         </section>
 
         <!-- Business Plan for Manufacturers-->
-
         <section *ngIf="application?.applicationType?.name === 'Manufacturer'">
           <app-business-plan *ngIf="application" [application]="application">
           </app-business-plan>
@@ -975,6 +974,16 @@
         <section *ngIf="showZoning()">
           <app-proof-of-zoning *ngIf="application" [application]="application" #proofOfZoning>
           </app-proof-of-zoning>
+        </section>
+
+        <!-- Service Area -->
+        <h3 class="blue-header" *ngIf="application.applicationType.serviceAreas" >SERVICE AREA</h3>
+        <section *ngIf="application.applicationType.serviceAreas" class="padded-section content-bottom">
+          <div *ngIf="htmlContent?.serviceArea" [innerHTML]="htmlContent.serviceArea"></div>
+          <app-field [valid]="!showValidationMessages || form.get('serviceAreas').valid"
+              errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
+            <app-capacity-table formControlName="serviceAreas" [isIndoor]="true"></app-capacity-table>
+          </app-field>
         </section>
 
         <!-- Hours of Sale -->

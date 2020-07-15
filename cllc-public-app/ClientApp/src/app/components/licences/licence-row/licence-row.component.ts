@@ -68,7 +68,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
             .subscribe((terms) => {
               licence.termsAndConditions = terms;
               licence.headerRowSpan += 1;
-            })
+            });
       });
     }
 
