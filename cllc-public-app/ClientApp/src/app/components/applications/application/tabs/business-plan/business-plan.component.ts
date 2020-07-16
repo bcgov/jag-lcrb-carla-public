@@ -27,11 +27,7 @@ export class BusinessPlanComponent extends FormBase implements OnInit {
       mfgType: ['', []],
       brewPub: ['', []],
       pipedIn: ['', []],
-      neutralGrain: ['', []],
-      isALR: ['',[]],
-      zoningPermitsMFG: ['', []],
-      zoningPermitsRetailSales: ['', []],
-      meetsALRRequirements:['', []],
+      neutralGrain: ['', []]
     });
     this.form.patchValue(this.application);
   }

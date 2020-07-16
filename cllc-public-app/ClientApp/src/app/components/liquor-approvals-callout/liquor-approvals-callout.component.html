@@ -1,4 +1,4 @@
-<ng-container *ngIf="!account?.localGovernmentId && account?.businessType == 'LocalGovernment'">
+<ng-container *ngIf="!account?.localGovernmentId && (account?.businessType == 'LocalGovernment' || account?.businessType == 'IndigenousNation')">
     <h3 *ngIf="!terminatedApplicationExists" class="blue-header mb-0">Activate LG/IN Liquor Application Reviews</h3>
     <h3 *ngIf="terminatedApplicationExists"  class="blue-header mb-0">Liquor Approvals Unavailable</h3>
     <section class="padded submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
