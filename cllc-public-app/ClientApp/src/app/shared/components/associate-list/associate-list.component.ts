@@ -235,6 +235,8 @@ export class AssociateListComponent extends FormBase implements OnInit {
         this.associates.at(index).get('isShareholderNew').setValue(true);
       }
 
+      
+      this.associates.at(index).value.refObject = Object.assign(this.associates.at(index).value.refObject, this.associates.at(index).value);
       this.emitValue();
       saved = true;
     } else {
