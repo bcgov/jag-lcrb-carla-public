@@ -3,20 +3,19 @@
     <table>
         <thead *ngIf="areasArr.controls.length > 0">
             <th style="width: 55px;">Area No.</th>
-            <th>{{isIndoor ? 'Floor Level' : 'Outdoor Area'}}</th>
-            <th *ngIf="isIndoor">Indoor</th>
-            <th *ngIf="isIndoor">Patio</th>
-            <th>{{isIndoor ? 'Occupant Load' : 'Capacity'}}</th>
+            <th>{{isOutsideArea() ? 'Outdoor Area' : 'Floor Level'}}</th>
+            <th *ngIf="isService()">Indoor</th>
+            <th *ngIf="isService()">Patio</th>
+            <th>{{isOutsideArea() ? 'Capacity' : 'Occupant Load'}}</th>
             <th style="width: 45px;"></th>
         </thead>
         <ng-container formArrayName="areas">
-            <tr capacity-table-row *ngFor="let area of areasArr.controls; let i=index" [formControlName]="i" [isIndoor]="isIndoor" [onDelete]="removeRow.bind(this)" [index]="i" [onRowChange]="onRowChange.bind(this)"></tr>
+            <tr capacity-table-row *ngFor="let area of areasArr.controls; let i=index" [formControlName]="i" [areaCategory]="areaCategory" [onDelete]="removeRow.bind(this)" [index]="i" [onRowChange]="onRowChange.bind(this)"></tr>
         </ng-container>
         <tr>
-            <td colspan=2><button (click)="addRow()" class="btn-clear" style="height: 100%;"><i class="fa fa-plus-circle" style="color: #1a5a96;"></i> Add Area</button></td>
-            
-            <td *ngIf="isIndoor" colspan=2 style="text-align:right;"><strong>Total Occupant Load:</strong></td>
-            <td *ngIf="!isIndoor" style="text-align:right;"><strong>Total Occupant Load:</strong></td>
+            <td colspan=2><button (click)="addRow()" class="btn-clear" style="height: 100%;"><i class="fa fa-plus-circle" style="color: #1a5a96;"></i> Add Area</button></td>            
+            <td *ngIf="isService()" colspan=2 style="text-align:right;"><strong>Total Occupant Load:</strong></td>
+            <td *ngIf="!isService()" style="text-align:right;"><strong>Total Occupant Load:</strong></td>
             <td><strong>{{total}}</strong></td>
             <td></td>
         </tr>
