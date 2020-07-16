@@ -226,14 +226,22 @@
                 <app-additional-pids *ngIf="application" [application]="application">
                 </app-additional-pids>
               </section>
+              <hr>
 
-              <app-field [valid]="isValidOrNotTouched('zoningPermitsMFG')" [showChevrons]="false"
+                      <!-- Proof of Zoning-->
+              <section *ngIf="showZoning()">
+                <app-proof-of-zoning *ngIf="application" [application]="application" #proofOfZoning>
+                </app-proof-of-zoning>
+                <hr>
+              </section>
+
+              <!--app-field [valid]="isValidOrNotTouched('zoningPermitsMFG')" [showChevrons]="false"
               errorMessage="Please confirm that the current zoning permits manufacturing on the manufacturing site"
               [isFullWidth]="true" style="margin-left:10px;">
               <mat-checkbox formControlName="zoningPermitsMFG">
-                I confirm that current zoning permits manufacturing on the manufacturing site.</mat-checkbox>
+                By checking this box, I confirm that current zoning permits manufacturing on the manufacturing site.</mat-checkbox>
             </app-field>
-            <hr>
+            <hr-->
             <!--app-field [valid]="isValidOrNotTouched('zoningPermitsRetailSales')" [showChevrons]="false"
               errorMessage="Please confirm that the current zoning permits retail sales on the manufacturing site"
               [isFullWidth]="true" style="margin-left:10px;">
@@ -251,8 +259,7 @@
             <div *ngIf="this.form.get('isALR').value == 'Yes'">
                 <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
                 <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
-                    <p><strong>Please note that the <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019" target="_blank">Agricultural Land Reserve (ALR) Use Regulation</a> permits a food and beverage service lounge if the area is no more than 125 m<sup>2</sup> indoors and 125 m<sup>2</sup> outdoors.</strong></p>
-                    <p><strong>By submitting this application to LCRB, you are confirming that your areas will not exceed the size restrictions set in the ALR Use Regulation or your specific approval from the Commission.</strong></p>
+                    <p><strong>By submitting this application to LCRB, you are confirming that your licenced establishment will adhere to the requirements laid out in the <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019" target="_blank">Agriculral Land Reserve (ALR) Use Regulation</a>.</strong></p>
                 </div>
             </div>
 
@@ -341,58 +348,8 @@
               </div>
               <p>&nbsp;</p>
             </section>
-            <!-- RAS Details -->
-            <section *ngIf="application?.licenseType === 'Rural Agency Store'">
-              <h3 class="blue-header">Ownership Details</h3>
-              <div class="content-bottom">
-                <p>Please provide the following details about your Rural Agency Store:</p>
-                <!-- RAS Certificate Number -->
-                <app-field label="Rural Agency Store Certificate Number:"
-                  errorMessage="Please enter a certificate number">
-                  <input type="text" class="form-control" style="width: 200px;" id="certNumber"
-                    formControlName="description1" mask="0009">
-                </app-field>
-
-                <section style="width:700px;">
-                  <div>
-                    <mat-checkbox formControlName="isOwner">
-                      This information is being submitted by the owner of the business in respect of which the licence
-                      is to be issued or will become the owner before the licence is issued.
-                    </mat-checkbox>
-                  </div>
-                  <div>
-                    <mat-checkbox formControlName="hasValidInterest">
-                      At the time of this information submission, the owner of the business is:
-                      <ul>
-                        <li>The owner of or has an agreement to purchase the place or premises that will form the
-                          proposed
-                          establishment, or</li>
-                        <li>The lessee or has a binding offer to lease the place or premises that will form the proposed
-                          establishment
-                        </li>
-                      </ul>
-                    </mat-checkbox>
-                  </div>
-                  <div>
-                    <mat-checkbox formControlName="willhaveValidInterest">
-                      At the time the licence is issued, the owner of the business will be:
-                      <ul>
-                        <li>The owner of the place or premises that forms the establishment, or</li>
-                        <li>The lessee of the place or premises that forms the establishment (term no less than 12
-                          months).</li>
-                      </ul>
-                    </mat-checkbox>
-                  </div>
-                  <p>&nbsp;</p>
-                </section>
-              </div>
-
-            </section>
-
-          </section>
-        </section>
-
         <!-- Business Plan for Manufacturers-->
+
         <section *ngIf="application?.applicationType?.name === 'Manufacturer'">
           <app-business-plan *ngIf="application" [application]="application">
           </app-business-plan>
@@ -941,12 +898,6 @@
 
         </div>
 
-        <!-- Proof of Zoning-->
-        <section *ngIf="showZoning()">
-          <app-proof-of-zoning *ngIf="application" [application]="application" #proofOfZoning>
-          </app-proof-of-zoning>
-        </section>
-
         <!-- Service Area -->
         <h3 class="blue-header" *ngIf="application.applicationType.serviceAreas" >SERVICE AREA</h3>
         <section *ngIf="application.applicationType.serviceAreas" class="padded-section content-bottom">
@@ -956,7 +907,6 @@
             <app-capacity-table formControlName="serviceAreas" [isIndoor]="true"></app-capacity-table>
           </app-field>
         </section>
-
         <!-- Hours of Sale -->
         <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
           <h3 class="blue-header">HOURS OF SALE</h3>
@@ -1279,6 +1229,58 @@
           <br>
         </section>
 
+        </section>
+                    <!-- RAS Details -->
+            <!--section *ngIf="showFormControl(application?.applicationType.ow"-->
+            <section>
+              <h3 class="blue-header">{{this.application?.licenseType}} Ownership Details</h3>
+              <div class="content-bottom">
+                <p>Please provide the following details about your application:</p>
+
+                <!-- RAS Certificate Number -->
+                <app-field label="Rural Agency Store Certificate Number:"
+                  errorMessage="Please enter a certificate number" *ngIf="this.application?.licenseType === 'Rural Agency Store'">
+                  <input type="text" class="form-control" style="width: 200px;" id="certNumber"
+                    formControlName="description1" mask="0009">
+                </app-field>
+
+                <section>
+                  <div>
+                    <mat-checkbox formControlName="isOwner">
+                      This information is being submitted by the owner of the business in respect of which the licence
+                      is to be issued or will become the owner before the licence is issued.
+                    </mat-checkbox>
+                  </div>
+                  <div>
+                    <mat-checkbox formControlName="hasValidInterest">
+                      At the time of this submission, the owner of the business is:
+                      <ul>
+                        <li>The owner of or has an agreement to purchase the place or premises that will form the
+                          proposed
+                          establishment, or</li>
+                        <li>The lessee or has a binding offer to lease the place or premises that will form the proposed
+                          establishment
+                        </li>
+                      </ul>
+                    </mat-checkbox>
+                  </div>
+                  <div>
+                    <mat-checkbox formControlName="willhaveValidInterest">
+                      At the time the licence is issued, the owner of the business will be:
+                      <ul>
+                        <li>The owner of the place or premises that forms the establishment, or</li>
+                        <li>The lessee of the place or premises that forms the establishment (term no less than 12
+                          months).</li>
+                      </ul>
+                    </mat-checkbox>
+                  </div>
+                </section>
+              </div>
+
+            </section>
+
+          </section>
+        
 
         <!-- Contact Details -->
         <h3 class="blue-header" *ngIf="!isRAS()">APPLICATION CONTACT DETAILS</h3>
@@ -1515,7 +1517,8 @@
         </section>
 
         <!-- Next Steps -->
-        <h3 *ngIf="htmlContent?.nextSteps" class="blue-header">
+
+        <h3 *ngIf="htmlContent?." class="blue-header">
           What happens next?
         </h3>
         <section *ngIf="htmlContent?.nextSteps" class="padded-section content-bottom">
