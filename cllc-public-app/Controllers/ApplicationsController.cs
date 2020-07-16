@@ -749,6 +749,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     AddServiceAreasToApplication(item.ServiceAreas, adoxioApplication.AdoxioApplicationid);
                 }
+
+                if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
+                {
+                    AddServiceAreasToApplication(item.OutsideAreas, adoxioApplication.AdoxioApplicationid);
+                }
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -980,7 +985,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     AddServiceAreasToApplication(item.ServiceAreas, item.Id);
                 }
-                if (item.OutsideAreas.Count > 0)
+                if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
                 {
                     AddServiceAreasToApplication(item.OutsideAreas, item.Id);
                 }
