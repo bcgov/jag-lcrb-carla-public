@@ -1,15 +1,13 @@
-import { Establishment } from './establishment.model';
 
-export const AreaCategory = [
-    {
-      label: '???',
-      value: 845280000,
-    }
-];
+export enum AreaCategory {
+  Service = 845280000,
+  OutsideArea = 845280001,
+  Capacity = 845280002
+}
 
 export class ServiceArea {
     // picklist
-    // areaCategory: number;
+    areaCategory: number;
     areaNumber: number;
     areaLocation: string;
     isIndoor: boolean;

@@ -899,9 +899,20 @@
           <div *ngIf="htmlContent?.serviceArea" [innerHTML]="htmlContent.serviceArea"></div>
           <app-field [valid]="!showValidationMessages || form.get('serviceAreas').valid"
               errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
-            <app-capacity-table formControlName="serviceAreas" [isIndoor]="true"></app-capacity-table>
+            <app-capacity-table formControlName="serviceAreas" [areaCategory]="getAreaCategoryNumber('Service')"></app-capacity-table>
           </app-field>
         </section>
+
+        <!-- Outside Area -->
+        <h3 class="blue-header" *ngIf="application.applicationType.outsideAreas" >OUTSIDE AREAS</h3>
+        <section *ngIf="application.applicationType.outsideAreas" class="padded-section content-bottom">
+          <div *ngIf="htmlContent?.outsideAreas" [innerHTML]="htmlContent.outsideAreas"></div>
+          <app-field [valid]="!showValidationMessages || form.get('outsideAreas').valid"
+              errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
+            <app-capacity-table formControlName="outsideAreas" [areaCategory]="getAreaCategoryNumber('OutsideArea')"></app-capacity-table>
+          </app-field>
+        </section>
+
         <!-- Hours of Sale -->
         <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
           <h3 class="blue-header">HOURS OF SALE</h3>
