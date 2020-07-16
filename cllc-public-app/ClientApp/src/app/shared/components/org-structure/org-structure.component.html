@@ -261,14 +261,14 @@
       <h3 class="blue-header">Provide Ownership Information</h3>
       <div class="content-bottom">
         <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
-                            [account]="account" (personalHistoryItemsChange)="updateChildren($event, 'Leadership')"
+                            [account]="account" (personalHistoryItemsChange)="updateChildren($event, 'Leadership')"  [licencesOnFile]="licencesOnFile"
                             changeTypeSuffix="Leadership" addLabel="Add Leader" #associateList>
         </app-associate-list>
       </div>
     </ng-container>
 
     <ng-container *ngIf="node?.businessType === 'Trust'">
-      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"  [licencesOnFile]="licencesOnFile"
                           [account]="account" (personalHistoryItemsChange)="updateChildren($event, 'Leadership')"
                           changeTypeSuffix="Leadership" addLabel="Add Trustee" #associateList>
       </app-associate-list>
