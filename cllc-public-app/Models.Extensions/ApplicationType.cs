@@ -53,8 +53,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                     RequiresSecurityScreening = applicationType.AdoxioRequiressecurityscreening,
                     IsEndorsement = applicationType.AdoxioIsendorsement,
                     ServiceAreas = applicationType.AdoxioServiceareas.HasValue && (bool)applicationType.AdoxioServiceareas,
-                    OutsideAreas = applicationType.AdoxioServiceareas.HasValue && (bool)applicationType.AdoxioOutsideareas,
-                    CapacityArea = applicationType.AdoxioServiceareas.HasValue && (bool)applicationType.AdoxioCapacityarea
+                    OutsideAreas = applicationType.AdoxioOutsideareas.HasValue && (bool)applicationType.AdoxioOutsideareas,
+                    CapacityArea = applicationType.AdoxioCapacityarea.HasValue && (bool)applicationType.AdoxioCapacityarea
                 };
 
                 if (applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)
