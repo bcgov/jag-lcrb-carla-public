@@ -10,8 +10,8 @@ import { ServiceArea, AreaCategory } from '@models/service-area.model';
     <ng-container [formGroup]="rowGroup">
         <td><input type="text" formControlName="areaNumber" /></td>
         <td><input type="text" formControlName="areaLocation" /></td>
-        <td *ngIf="areaCategory === areaCategoryEnum.Service"><mat-checkbox formControlName="isIndoor"></mat-checkbox></td>
-        <td *ngIf="areaCategory === areaCategoryEnum.Service"><mat-checkbox formControlName="isPatio"></mat-checkbox></td>
+        <td *ngIf="isService()"><mat-checkbox formControlName="isIndoor"></mat-checkbox></td>
+        <td *ngIf="isService()"><mat-checkbox formControlName="isPatio"></mat-checkbox></td>
         <td><input type="text" formControlName="capacity" mask="0*"/></td>
         <td><button (click)="removeRow()" class="btn-clear"><i class="fa fa-minus-square danger"></i></button></td>
     </ng-container>
@@ -36,7 +36,6 @@ export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceA
   @Input() onDelete: (index) => void;
   @Input() onRowChange: (val) => void;
   rowGroup: FormGroup;
-  areaCategoryEnum = AreaCategory;
 
   public value: ServiceArea;
   registerOnChange(fn: any) { this.onChange = fn; }
@@ -81,5 +80,9 @@ export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceA
       retVal['capacity'] = true;
     }
     return isNotValid && retVal;
+  }
+
+  isService(): boolean {
+    return this.areaCategory === AreaCategory.Service;
   }
 }

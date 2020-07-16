@@ -959,10 +959,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   getAreaCategoryNumber(categoryName: string): number {
-    switch(categoryName) {
+    switch (categoryName) {
       case 'OutsideArea':
         return AreaCategory.OutsideArea;
-      case 'ServiceArea':
+      case 'Service':
         return AreaCategory.Service;
       case 'Capactiy':
         return AreaCategory.Capacity;

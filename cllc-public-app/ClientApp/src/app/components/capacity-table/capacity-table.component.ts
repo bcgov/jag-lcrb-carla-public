@@ -24,7 +24,6 @@ import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea[]> {
     @Input() areaCategory: number;
     total: number;
-    areaCategoryEnum = AreaCategory;
 
     formGroup: FormGroup;
     get areasArr(): FormArray { return this.formGroup.get('areas') as FormArray; }
@@ -87,7 +86,7 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
         if (index >= 0 && index < this.areasArr.length) {
             this.areasArr.removeAt(index);
             const newArr: ServiceArea[] = this.areasArr.controls.map((control, i) => {
-                return { areaNumber: i + 1, ...control.value };
+                return { ...control.value, areaNumber: i + 1 };
             });
             this.writeValue(newArr);
         }
@@ -107,5 +106,13 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
         return !isValid && {
             invalid: true
         };
+    }
+
+    isService(): boolean {
+        return this.areaCategory === AreaCategory.Service;
+    }
+
+    isOutsideArea(): boolean {
+        return this.areaCategory === AreaCategory.OutsideArea;
     }
 }

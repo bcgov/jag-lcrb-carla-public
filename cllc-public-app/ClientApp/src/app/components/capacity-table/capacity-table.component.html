@@ -2,10 +2,10 @@
     <table>
         <thead>
             <th style="width: 55px;">Area No.</th>
-            <th>{{areaCategory === areaCategoryEnum.OutsideArea ? 'Outdoor Area' : 'Floor Level'}}</th>
-            <th *ngIf="areaCategory === areaCategoryEnum.Service">Indoor</th>
-            <th *ngIf="areaCategory === areaCategoryEnum.Service">Patio</th>
-            <th>{{areaCategory === areaCategoryEnum.OutsideArea ? 'Capacity' : 'Occupant Load'}}</th>
+            <th>{{isOutsideArea() ? 'Outdoor Area' : 'Floor Level'}}</th>
+            <th *ngIf="isService()">Indoor</th>
+            <th *ngIf="isService()">Patio</th>
+            <th>{{isOutsideArea() ? 'Capacity' : 'Occupant Load'}}</th>
             <th style="width: 45px;"></th>
         </thead>
         <ng-container formArrayName="areas">
@@ -13,9 +13,9 @@
         </ng-container>
         <tr>
             <td><button (click)="addRow()" class="btn-clear" style="height: 100%;"><i class="fa fa-plus-circle" style="color: #1a5a96;"></i></button></td>
-            <td>{{areaCategory === areaCategoryEnum.OutsideArea ? 'Total Person Capacity for all Outdoor Areas' : 'Total Occupant Load'}}</td>
-            <td *ngIf="areaCategory === areaCategoryEnum.Service"></td>
-            <td *ngIf="areaCategory === areaCategoryEnum.Service"></td>
+            <td>{{isOutsideArea() ? 'Total Person Capacity for all Outdoor Areas' : 'Total Occupant Load'}}</td>
+            <td *ngIf="isService()"></td>
+            <td *ngIf="isService()"></td>
             <td>{{total}}</td>
             <td></td>
         </tr>
