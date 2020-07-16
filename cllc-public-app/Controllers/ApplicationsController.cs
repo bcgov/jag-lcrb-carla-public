@@ -745,7 +745,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // create application
                 adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
 
-                if (item.ServiceAreas.Count > 0)
+                if (item.ServiceAreas != null && item.ServiceAreas.Count > 0)
                 {
                     AddServiceAreasToApplication(item.ServiceAreas, adoxioApplication.AdoxioApplicationid);
                 }
@@ -976,7 +976,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 RemoveServiceAreasFromApplication(item.Id);
-                if (item.ServiceAreas.Count > 0)
+                if (item.ServiceAreas != null && item.ServiceAreas.Count > 0)
                 {
                     AddServiceAreasToApplication(item.ServiceAreas, item.Id);
                 }
