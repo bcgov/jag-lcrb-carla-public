@@ -136095,778 +136095,22 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_application",
       "type": "object",
       "properties": {
-        "adoxio_nameofapplicant": {
-          "type": "string"
-        },
-        "adoxio_addressprovince": {
-          "type": "string"
-        },
-        "adoxio_lgcontactemail": {
-          "type": "string"
-        },
-        "adoxio_checklistfinintegrityreceived": {
+        "adoxio_renewalunreportedsaleofbusiness": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_checklistdrivingrecordcomplete": {
+        "adoxio_servicehoursfridayopen": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_establishmentdeclarationoption2": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistinspectionresultsassessed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_owningbusinessunit_value": {
-          "type": "string"
-        },
-        "adoxio_servicehourstuesdayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistcriminalrecordscomplete": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_dateaiplongdatestring": {
-          "type": "string"
-        },
-        "adoxio_checklistlicencecapassessedfinal": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_lgapprovaldecision": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistfloorplanreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_inspectorsnotes": {
-          "type": "string"
-        },
-        "adoxio_checklistunreportedsaleofbusiness": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistfloorplanassess": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_localgovermentfirstnationdecision": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_areyouthemaincontactforapplication": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_datesentlgin": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_establishmentlayoutsubmitfloorplans": {
-          "type": "boolean"
-        },
-        "adoxio_otherapplicanttype": {
-          "type": "string"
-        },
-        "adoxio_pin": {
-          "type": "string"
-        },
-        "_modifiedonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_licencefeeinvoicepaid": {
-          "type": "boolean"
-        },
-        "adoxio_otherbusinesssamelocationdetails": {
-          "type": "string"
-        },
-        "adoxio_otherbusinessesatthesamelocation": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishmentlayoutapplyingforpatio": {
-          "type": "boolean"
-        },
-        "adoxio_lgdecisioncomments": {
-          "type": "string"
-        },
-        "traversedpath": {
-          "type": "string"
-        },
-        "adoxio_establishmentparcelid": {
-          "type": "string"
-        },
-        "adoxio_addresspostalcode": {
-          "type": "string"
-        },
-        "adoxio_checklistfinaldecisionlettersent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_lginresolutionresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishment": {
-          "type": "boolean"
-        },
-        "adoxio_checklistcorporatedocsreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistlginconfirmationintake": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_datelicencecapassessed": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_sharepointanchorforcommunicationtab": {
-          "type": "string"
-        },
-        "adoxio_previouslicenceapplication": {
+        "adoxio_checklistsecuritiesregisterreceived": {
           "format": "int32",
           "type": "integer"
         },
         "adoxio_lgtitleposition": {
           "type": "string"
         },
-        "adoxio_fileuploadedfromportal": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_renewalunreportedsaleofbusiness": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "statecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_securityscreeningcompleteness": {
-          "type": "string"
-        },
-        "adoxio_checklistletterofintentintake": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_inspectioncomplete": {
-          "type": "boolean"
-        },
-        "adoxio_checklistassociatesfireceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistldbnotifiedintake": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishmentaddressstreet": {
-          "type": "string"
-        },
-        "adoxio_investigationstatus": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistlicencehistorycheck": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_occupationcapacity": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistorgstructure": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_isautomatedtest": {
-          "type": "boolean"
-        },
-        "_slainvokedid_value": {
-          "type": "string"
-        },
-        "adoxio_checklistlebuilt": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "importsequencenumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_personalhistoryinstructionfield": {
-          "type": "string"
-        },
-        "adoxio_establishmentcomplytozoningregulations": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_dateaipexpiredlongdatestring": {
-          "type": "string"
-        },
-        "adoxio_renewalconcluded": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistphotosassessed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_paymentreceiveddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistotherapplicationschecked": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_isreadyretailarea": {
-          "type": "boolean"
-        },
-        "adoxio_establishmentalreadyopen": {
-          "type": "boolean"
-        },
-        "adoxio_checklistzoningaip": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishmentotherbusinessnature": {
-          "type": "string"
-        },
-        "adoxio_establishmentlocatedatfirstnationland": {
-          "type": "boolean"
-        },
-        "adoxio_phone": {
-          "type": "string"
-        },
-        "adoxio_holdsotherlicencesoptionset": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistseparationissuesassessed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_previouslicenceapplicationdetails": {
-          "type": "string"
-        },
-        "adoxio_renewalvalidinterest": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_servicehourssaturdayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_stampedfloorplanassessment": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_inspector_value": {
-          "type": "string"
-        },
-        "adoxio_isreadylockedstorage": {
-          "type": "boolean"
-        },
-        "adoxio_uploadedevidenceofvalidinterest": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_appchecklistlicencefeecollected": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistbusinessplanintake": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistcorporatedocsassessed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_servicehourspatronparticipation": {
-          "type": "boolean"
-        },
-        "versionnumber": {
-          "format": "int64",
-          "type": "string"
-        },
-        "overriddencreatedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_datesentspd": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_signaturename": {
-          "type": "string"
-        },
-        "adoxio_servicehourssaturdayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_appchecklistinspectionresults": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_uploadedimageofestablishment": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_businessnumber": {
-          "type": "string"
-        },
-        "adoxio_refusedreason": {
-          "type": "string"
-        },
-        "adoxio_establishmentemail": {
-          "type": "string"
-        },
-        "adoxio_datesecurityscreeningcompletenessassessed": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_finalcapassessmentdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_dateinspectioncomplete": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_suitabilityassessmentresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistopenapplicationsreviewed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistassociatesconsentreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishmentpropsedname": {
-          "type": "string"
-        },
-        "_adoxio_region_value": {
-          "type": "string"
-        },
-        "adoxio_checklistshareholdersbuilt": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_contactpersonname": {
-          "type": "string"
-        },
-        "adoxio_establishmentproposalneedsmailsent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistfinancialdocuments": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_addressstreet": {
-          "type": "string"
-        },
-        "adoxio_checklistorgleadershipbuilt": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_modifiedby_value": {
-          "type": "string"
-        },
-        "adoxio_licencefeeinvoicetrigger": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishmenthasstandalonepatio": {
-          "type": "boolean"
-        },
-        "adoxio_signageassessmentresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_datereceivedspd": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_hastiedhouseassociations": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistsignageassessed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistkeypersonnelbuilt": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistphotosreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_sla_value": {
-          "type": "string"
-        },
-        "adoxio_checklistinspectionchecklist": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_datesentinvestigations": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_addresscity": {
-          "type": "string"
-        },
-        "adoxio_servicehoursthursdayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_zoningstatus": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_dateaipdecisionlettersent": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_liquorindustryconnectionsdetails": {
-          "type": "string"
-        },
-        "adoxio_triggertogeneratesecurityclearance": {
-          "type": "boolean"
-        },
-        "adoxio_isreadyvalidinterest": {
-          "type": "boolean"
-        },
-        "adoxio_checklistfinalsca": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistsuitabilitylettersent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_servicehoursthursdayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_ruralagencystoreappointment": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistfinancialcheckpassed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_uploadedlegalentitystructure": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_renewaldui": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_paymentrecieved": {
-          "type": "boolean"
-        },
-        "adoxio_checklistdecisionlettersentaip": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_renewalkeypersonnel": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_sharepointanchorforpersonalhistory": {
-          "type": "string"
-        },
-        "adoxio_checklistinspectionphotosok": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishmentaddress": {
-          "type": "string"
-        },
-        "adoxio_eligibilityassessmentresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_dateappealed": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_securityclearancegenerateddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "modifiedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_renewalsitemap": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishmentotheroption1": {
-          "type": "boolean"
-        },
-        "adoxio_establishmentotheroption2": {
-          "type": "boolean"
-        },
-        "adoxio_uploadeddriversabstract": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_description1": {
-          "type": "string"
-        },
-        "adoxio_checklistverifypidpin": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistapplicationinfoassessment": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_tiedhouseassessment": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_servicehourswednesdayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistfloorplanlinedaip": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_fitandpropercomplete": {
-          "type": "boolean"
-        },
-        "_adoxio_licenceestablishment_value": {
-          "type": "string"
-        },
-        "adoxio_servicehoursstandardhours": {
-          "type": "boolean"
-        },
-        "adoxio_renewaltiedhousefederalinterest": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_tiedhouseresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_businessinfoemail": {
-          "type": "string"
-        },
-        "adoxio_initialcapassessment": {
-          "type": "string"
-        },
-        "adoxio_signatureposition": {
-          "type": "string"
-        },
-        "_adoxio_casemanagersupervisor_value": {
-          "type": "string"
-        },
-        "adoxio_suitabilityassessment": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistaipdecisionmade": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistmarketcapacity": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_occupationload": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_dateassignedtosla": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_renewaloutstandingfines": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_invoicetrigger": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_appchecklistfinaldecision": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_lgnameofofficial": {
-          "type": "string"
-        },
-        "adoxio_areyouthemaincontactafterlicensing": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_additionalpropertyinformation": {
-          "type": "string"
-        },
-        "adoxio_checklistassociateformreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistspdapproved": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklisttiedhouseassess": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "statuscode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "timezoneruleversionnumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistpersonalhistoryreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_inspectiondate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_role": {
-          "type": "string"
-        },
-        "processid": {
-          "type": "string"
-        },
-        "adoxio_servicehourstuesdayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_scadecision": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistmapupdated": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_isreadystorage": {
-          "type": "boolean"
-        },
-        "adoxio_isreadyproductnotvisibleoutside": {
-          "type": "boolean"
-        },
-        "adoxio_checklistzoningassessed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_datefirstyearpaymentreceived": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_isreadylockedcases": {
-          "type": "boolean"
-        },
-        "adoxio_lgzoning": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishmentopeningdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_contactpersonfirstname": {
-          "type": "string"
-        },
-        "adoxio_checklistvalidinterestassess": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_servicehoursmondayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistestablishmentrenderings": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_uploadedfloorplans": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_finalcapassessmenttrigger": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistvalidinterestreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_slaid_value": {
-          "type": "string"
-        },
-        "adoxio_renewalthirdparty": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_federalproducernames": {
-          "type": "string"
-        },
-        "_adoxio_policejurisdictionid_value": {
-          "type": "string"
-        },
-        "adoxio_servicehourssundayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_pidlist": {
-          "type": "string"
-        },
-        "adoxio_lgcontactphone": {
-          "type": "string"
-        },
-        "_createdby_value": {
-          "type": "string"
-        },
-        "_adoxio_invoice_value": {
-          "type": "string"
-        },
-        "_stageid_value": {
-          "type": "string"
-        },
-        "adoxio_signatureagreement": {
-          "type": "boolean"
-        },
-        "adoxio_floorplanresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_renewalbusinesstype": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistredlinedfloorplan": {
+        "adoxio_checklislginresolutionassess": {
           "format": "int32",
           "type": "integer"
         },
@@ -136874,143 +136118,94 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_name": {
+        "adoxio_otherbusinessesatthesamelocation": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_finalcapassessment": {
           "type": "string"
         },
-        "adoxio_checklistlocationassessment": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_brandingnameresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_localgovindigenousnationid_value": {
-          "type": "string"
-        },
-        "adoxio_isapplicationcomplete": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_servicehourssundayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_createdonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_appchecklistchangesapplied": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_signaturedate": {
+        "adoxio_datesentspd": {
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_progressstatus": {
+        "adoxio_establishmentcomplytoallbylaws": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_triggertogeneratesecurityclearance": {
+          "type": "boolean"
+        },
+        "adoxio_checklistletterofintentintake": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isreadyentranceexit": {
+          "type": "boolean"
+        },
+        "adoxio_suitabilityassessmentresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_datelicencecapassessed": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistvalidinterestreceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_renewaltiedhousefederalinterest": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistfinancialcheckpassed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_establishmentotherbusinessnature": {
+          "type": "string"
         },
         "adoxio_registeredestablishment": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_checklistpsalettersent": {
+        "_adoxio_casemanagersupervisor_value": {
+          "type": "string"
+        },
+        "utcconversiontimezonecode": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_checklistspdconsentreceived": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_isreadyperimeter": {
+          "type": "boolean"
         },
-        "adoxio_renewalzoning": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_datelicenceapproved": {
+        "adoxio_dateaipexpired": {
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_isreadydisplays": {
+        "adoxio_servicehoursmondayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistsecuritiesregister": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_renewalthirdparty": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_contactpersonfirstname": {
+          "type": "string"
+        },
+        "adoxio_establishmentlocatedatwinery": {
           "type": "boolean"
         },
-        "adoxio_isreadyfirealarm": {
+        "adoxio_proposedestablishmentisalr": {
           "type": "boolean"
         },
-        "adoxio_isreadyentranceexit": {
-          "type": "boolean"
-        },
-        "adoxio_checklistfinaldecisionmade": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_validinterestinitialstatus": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishmentaddresscountry": {
-          "type": "string"
-        },
-        "adoxio_establishmentdeclarationoption1": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistfloorplanapproved": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishmentotherbusinessname": {
-          "type": "string"
-        },
-        "adoxio_establishmentdeclarationoption3": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_paymentanchorfield": {
-          "type": "string"
-        },
-        "adoxio_jobnumber": {
-          "type": "string"
-        },
-        "adoxio_renewalcriminaloffencecheck": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_applicationid": {
-          "type": "string"
-        },
-        "adoxio_checkinspectionstatus": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_isreadynamebranding": {
-          "type": "boolean"
-        },
-        "adoxio_criminalrecordsresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_description3": {
-          "type": "string"
-        },
-        "lastonholdtime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_adoxio_licencefeeinvoice_value": {
-          "type": "string"
-        },
-        "_ownerid_value": {
-          "type": "string"
-        },
-        "adoxio_datelicencecapassessedfinal": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_adoxio_area_value": {
-          "type": "string"
-        },
-        "adoxio_isoninland": {
+        "adoxio_checklistestablishmentaddressassessed": {
           "format": "int32",
           "type": "integer"
         },
@@ -137018,17 +136213,1034 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_checklistphotosreceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_establishmentlayoutsubmitfloorplans": {
+          "type": "boolean"
+        },
+        "adoxio_servicehourssaturdayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistopenapplicationsreviewed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistoldlocationconfirmedinactive": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_daterefused": {
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_checklistexecutedleasereceived": {
+        "adoxio_checklistestabrenderingsassessed": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_checklisteligibilityassessed": {
+        "adoxio_checklistdecisionlettersentaip": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_isapplicationcomplete": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_datereceivedlgin": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_floorplanresultfinal": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_servicehoursmondayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_renewalbusinesstype": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistcorporatedocsreceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_appchecklistchangesapplied": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistnoticeofarcticlesreceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_applyingperson_value": {
+          "type": "string"
+        },
+        "adoxio_fileuploadedfromportal": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_tiedhousesearchdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_additionalpropertyinformation": {
+          "type": "string"
+        },
+        "adoxio_checklistlicencehistorycheck": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_phone": {
+          "type": "string"
+        },
+        "lastonholdtime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_establishmentlayoutapplyingforpatio": {
+          "type": "boolean"
+        },
+        "adoxio_finaldecision": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_pin": {
+          "type": "string"
+        },
+        "adoxio_dateaipexpiredlongdatestring": {
+          "type": "string"
+        },
+        "adoxio_zoningstatus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isreadyworkers": {
+          "type": "boolean"
+        },
+        "adoxio_checklistinspectionresultsassessed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistfinaldecisionmade": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isreadylockedstorage": {
+          "type": "boolean"
+        },
+        "adoxio_checklistlicencefeepaymentrequested": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_policedecision": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_addressprovince": {
+          "type": "string"
+        },
+        "statuscode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_initialcapassessment": {
+          "type": "string"
+        },
+        "adoxio_signageassessmentresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_dateassignedtosla": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_areyouthemaincontactafterlicensing": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_applicant_value": {
+          "type": "string"
+        },
+        "adoxio_renewalcriminaloffencecheck": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_dateapplicantsenttolg": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_paymentanchorfield": {
+          "type": "string"
+        },
+        "adoxio_servicehoursthursdayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_appchecklistinspectionreviewcomplete": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_businessnumber": {
+          "type": "string"
+        },
+        "adoxio_checklistapplicationinfoassessment": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistldbnotifiedintake": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "statecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_establishmentotheroption1": {
+          "type": "boolean"
+        },
+        "adoxio_personalhistoryinstructionfield": {
+          "type": "string"
+        },
+        "adoxio_appchecklistlicencefeecollected": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_name": {
+          "type": "string"
+        },
+        "adoxio_lgnameofofficial": {
+          "type": "string"
+        },
+        "adoxio_isownerwillhavevalidinterest": {
+          "type": "boolean"
+        },
+        "adoxio_checklistassociatesconsentreceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_invoicetrigger": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_inspectioncomplete": {
+          "type": "boolean"
+        },
+        "adoxio_uploadedfloorplans": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_appchecklistinspectionresults": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistvalidinterestassess": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_establishmentalreadyopen": {
+          "type": "boolean"
+        },
+        "adoxio_checklistmarketcapacity": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistzoningassessed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_suitabilityassessment": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_brandingnameresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_sharepointanchorforcommunicationtab": {
+          "type": "string"
+        },
+        "adoxio_uploadeddriversabstract": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_appchecklistpaymentreceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_mfgstepsecfermorcarb": {
+          "type": "boolean"
+        },
+        "adoxio_checklisttermsconditionsadded": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_inspectionchecklistdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistaipdecisionmade": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_tiedhouseresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistsecurityclearancestatus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_dateappealed": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_previouslicenceapplicationdetails": {
+          "type": "string"
+        },
+        "adoxio_otherbusinesssamelocationdetails": {
+          "type": "string"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "type": "string"
+        },
+        "adoxio_servicehourstuesdayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_hastiedhouseassociations": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistsuitabilityassessed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_inspector_value": {
+          "type": "string"
+        },
+        "adoxio_servicehoursfridayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistsuitabilitylettersent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_datefirstyearpaymentreceived": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_dateaipdecisionlettersent": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_servicehourssundayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistinspectionchecklist": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistfinalreviewcomplete": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_stampedfloorplanassessment": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistsitemapassess": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistfinalsca": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_phseligibilitycheckresults": {
+          "type": "string"
+        },
+        "onholdtime": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_datereceivedspd": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_isreadyfirealarm": {
+          "type": "boolean"
+        },
+        "adoxio_checklistzoninginprogress": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_establishmentotheroption2": {
+          "type": "boolean"
+        },
+        "adoxio_establishmentproposalneedsmailsent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_sharepointanchorforpersonalhistory": {
+          "type": "string"
+        },
+        "adoxio_contactpersonlastname": {
+          "type": "string"
+        },
+        "adoxio_signaturename": {
+          "type": "string"
+        },
+        "_adoxio_localgovindigenousnationid_value": {
+          "type": "string"
+        },
+        "adoxio_establishmentaddresspostalcode": {
+          "type": "string"
+        },
+        "adoxio_areyouthemaincontactforapplication": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_establishmentdeclarationoption3": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistpersonalhistoryreceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_servicehourssundayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_lginresolutionresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_dateaiplongdatestring": {
+          "type": "string"
+        },
+        "_adoxio_invoice_value": {
+          "type": "string"
+        },
+        "adoxio_checklistdeclarationchargescomplete": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_nameofapplicant": {
+          "type": "string"
+        },
+        "adoxio_checklistyellowpinned": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isreadyretailarea": {
+          "type": "boolean"
+        },
+        "adoxio_renewalzoning": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistestablishmentrenderings": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_region_value": {
+          "type": "string"
+        },
+        "adoxio_lginassessment": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_appchecklistfinaldecision": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistkeypersonnelbuilt": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_renewalorgleadership": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_licencefeeinvoicetrigger": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_ownerid_value": {
+          "type": "string"
+        },
+        "adoxio_datelicenceapproved": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_ruralagencystoreappointment": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_inspectorsnotes": {
+          "type": "string"
+        },
+        "adoxio_renewalvalidinterest": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_federalproducernames": {
+          "type": "string"
+        },
+        "timezoneruleversionnumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checkinspectionstatus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_signatureagreement": {
+          "type": "boolean"
+        },
+        "adoxio_checklistcriminalrecordscomplete": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_localgovermentfirstnationdecision": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistestablishmentassessed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_renewalkeypersonnel": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_lgcontactemail": {
+          "type": "string"
+        },
+        "adoxio_paymentreceiveddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_addresspostalcode": {
+          "type": "string"
+        },
+        "adoxio_investigationstatuscomment": {
+          "type": "string"
+        },
+        "adoxio_checklistfloorplanreceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_holdsotherlicencesoptionset": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_servicehourswednesdayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_establishmentdeclarationoption1": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistcriminalrecordsassessed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_authorizedtosubmit": {
+          "type": "boolean"
+        },
+        "adoxio_renewalsignage": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistsenttolgin": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isreadysurveillancenotice": {
+          "type": "boolean"
+        },
+        "adoxio_checklistpsalettersent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_servicehourspatronparticipation": {
+          "type": "boolean"
+        },
+        "_modifiedby_value": {
+          "type": "string"
+        },
+        "adoxio_establishmenthasstandalonepatio": {
+          "type": "boolean"
+        },
+        "processid": {
+          "type": "string"
+        },
+        "adoxio_paymentmethod": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_previouslicenceapplication": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isreadydisplays": {
+          "type": "boolean"
+        },
+        "adoxio_establishment": {
+          "type": "boolean"
+        },
+        "adoxio_inspectionscheduleddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_dateaip": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_renewaloutstandingfines": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isautomatedtest": {
+          "type": "boolean"
+        },
+        "adoxio_licencesubcategory": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_uploadedlegalentitystructure": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_owningbusinessunit_value": {
+          "type": "string"
+        },
+        "adoxio_datesentlgin": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_adoxio_area_value": {
+          "type": "string"
+        },
+        "adoxio_description1": {
+          "type": "string"
+        },
+        "adoxio_renewalbranding": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistnoticeofarticles": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "traversedpath": {
+          "type": "string"
+        },
+        "adoxio_isownerbusiness": {
+          "type": "boolean"
+        },
+        "adoxio_checklistverifypidpin": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_establishmentaddressstreet": {
+          "type": "string"
+        },
+        "overriddencreatedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_contactmiddlename": {
+          "type": "string"
+        },
+        "adoxio_mfgstepcrushing": {
+          "type": "boolean"
+        },
+        "adoxio_renewalestablishmentaddress": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_signaturedate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_lgdecisionsubmissiondate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistinspectionphotosok": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_inspectiondate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_paymentrecieved": {
+          "type": "boolean"
+        },
+        "adoxio_securityscreeningcompleteness": {
+          "type": "string"
+        },
+        "adoxio_role": {
+          "type": "string"
+        },
+        "adoxio_contactpersonfullname": {
+          "type": "string"
+        },
+        "adoxio_aiptype": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_jobnumber": {
+          "type": "string"
+        },
+        "adoxio_isreadyvalidinterest": {
+          "type": "boolean"
+        },
+        "adoxio_checklistlginapproval": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_createdonbehalfby_value": {
+          "type": "string"
+        },
+        "adoxio_contactpersonname": {
+          "type": "string"
+        },
+        "adoxio_progressstatus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isreadystorage": {
+          "type": "boolean"
+        },
+        "adoxio_checklistvalidestablishmentaddress": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_description3": {
+          "type": "string"
+        },
+        "_adoxio_licencetype_value": {
+          "type": "string"
+        },
+        "adoxio_addresscountry": {
+          "type": "string"
+        },
+        "adoxio_checklistfinancialdocuments": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "importsequencenumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistverifypostalcode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_renewalsitemap": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_establishmentopeningdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistfinaldecisionlettersent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_mfgmeetsproductionminimum": {
+          "type": "boolean"
+        },
+        "_adoxio_assignedlicence_value": {
+          "type": "string"
+        },
+        "adoxio_refusedreason": {
+          "type": "string"
+        },
+        "adoxio_checklistlginconfirmationintake": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_signatureposition": {
+          "type": "string"
+        },
+        "adoxio_mfgacresoffruit": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_lgcontactphone": {
+          "type": "string"
+        },
+        "adoxio_contactpersonfax": {
+          "type": "string"
+        },
+        "adoxio_servicehourssaturdayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_licencefeeinvoice_value": {
+          "type": "string"
+        },
+        "adoxio_fitandproperstatus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_lgapprovaldecision": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_mfgstepfiltering": {
+          "type": "boolean"
+        },
+        "adoxio_terminatereason": {
+          "type": "string"
+        },
+        "adoxio_checklistorgstructure": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isownerhasvalidinterest": {
+          "type": "boolean"
+        },
+        "adoxio_finalcapassessmentdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistfinintegrityreceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_applicationid": {
+          "type": "string"
+        },
+        "adoxio_sitemapresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_establishmentparcelid": {
+          "type": "string"
+        },
+        "adoxio_checklistfloorplanassess": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_corporatedocsassessmentresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isoninland": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistlgindefined": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistassociateslist": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_businessstructureinstructionfield": {
+          "type": "string"
+        },
+        "_slaid_value": {
+          "type": "string"
+        },
+        "adoxio_liquorindustryconnectionsdetails": {
+          "type": "string"
+        },
+        "adoxio_finalcapassessmenttrigger": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isreadylockedcases": {
+          "type": "boolean"
+        },
+        "adoxio_initialcapassessmentdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_investigationstatus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_datesecurityscreeningcompletenessassessed": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_phseligibilitycheckertrigger": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistfloorplanlinedaip": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistrequestlicencefee": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_eligibilityassessmentresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_lgdecisioncomments": {
+          "type": "string"
+        },
+        "adoxio_isreadyproductnotvisibleoutside": {
+          "type": "boolean"
+        },
+        "adoxio_checklistletterofintentassessment": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistsignageassessed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_servicehourswednesdayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "modifiedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_lgzoning": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistfloorplanapproved": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_licenceestablishment_value": {
+          "type": "string"
+        },
+        "adoxio_establishmentdeclarationoption2": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checkliststampedfloorplan": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistlicencefeepaid": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistsenttospd": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistmapupdated": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_renewalshareholders": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistlicencecapassessedfinal": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_fitandpropercomplete": {
+          "type": "boolean"
+        },
+        "adoxio_checklistassociateformreceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistdrivingrecordcomplete": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_validinterestfinalstatus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_establishmentcomplytozoningregulations": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistbusinessplanintake": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_description2": {
+          "type": "string"
+        },
+        "adoxio_establishmentpropsedname": {
+          "type": "string"
+        },
+        "_adoxio_policejurisdictionid_value": {
+          "type": "string"
+        },
+        "adoxio_establishmentotherbusinessname": {
+          "type": "string"
+        },
+        "adoxio_securityscreeningcompletenesstrigger": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklisthoursreviewed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_dateinspectioncomplete": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklistshareholdersbuilt": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_licenceexpiry": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_scadecision": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_fiaconclusioncomments": {
+          "type": "string"
+        },
+        "adoxio_checklistzoningaip": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_addressstreet": {
+          "type": "string"
+        },
+        "adoxio_checklistspdconsentreceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_occupationcapacity": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isreadynamebranding": {
+          "type": "boolean"
+        },
+        "adoxio_licencefeeinvoicepaid": {
+          "type": "boolean"
         },
         "adoxio_email": {
           "type": "string"
@@ -137037,271 +137249,19 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_servicehourswednesdayclose": {
+        "adoxio_validinterestinitialstatus": {
           "format": "int32",
           "type": "integer"
-        },
-        "adoxio_checklistnoticeofarcticlesreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_licencetype_value": {
-          "type": "string"
-        },
-        "adoxio_appchecklistpaymentreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_fiaconclusioncomments": {
-          "type": "string"
-        },
-        "adoxio_checklistlicencefeepaymentrequested": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_assignedlicence_value": {
-          "type": "string"
-        },
-        "adoxio_dateaip": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_isreadysurveillancenotice": {
-          "type": "boolean"
-        },
-        "adoxio_checklistrequestlicencefee": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistverifypostalcode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistsitemapassess": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishmentaddresspostalcode": {
-          "type": "string"
-        },
-        "adoxio_sitemapresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistbrandingassess": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_applicationtypeid_value": {
-          "type": "string"
-        },
-        "adoxio_phseligibilitycheckertrigger": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistfinalreviewcomplete": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_contactpersonfullname": {
-          "type": "string"
-        },
-        "adoxio_renewalshareholders": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_terminatereason": {
-          "type": "string"
-        },
-        "adoxio_corporatedocsassessmentresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistsuitabilityassessed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishmentlocatedatwinery": {
-          "type": "boolean"
-        },
-        "adoxio_servicehoursfridayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_applyingperson_value": {
-          "type": "string"
-        },
-        "adoxio_renewalbranding": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_contactpersonfax": {
-          "type": "string"
-        },
-        "adoxio_checklistsitemapreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_lginassessment": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_dateaipexpired": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_validinterestfinalstatus": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistlginapproval": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_renewalorgleadership": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_datereceivedlgin": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_securityscreeningcompletenesstrigger": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_contactmiddlename": {
-          "type": "string"
-        },
-        "adoxio_checkliststampedfloorplan": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_appchecklistinspectionreviewcomplete": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistcheckrequestedtc": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistnoticeofarticles": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_addresscountry": {
-          "type": "string"
-        },
-        "adoxio_licenceexpiry": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistdeclarationchargescomplete": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistsecurityclearancestatus": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_policedecision": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistestablishmentaddressassessed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_initialcapassessmenttrigger": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_phseligibilitycheckresults": {
-          "type": "string"
-        },
-        "adoxio_checklisttermsconditionsadded": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistlicencefeepaid": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_proposedestablishmentisalr": {
-          "type": "boolean"
-        },
-        "adoxio_authorizedtosubmit": {
-          "type": "boolean"
-        },
-        "_owningteam_value": {
-          "type": "string"
-        },
-        "adoxio_isreadyperimeter": {
-          "type": "boolean"
         },
         "adoxio_datereceivedinvestigations": {
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_establishmentphone": {
-          "type": "string"
-        },
-        "adoxio_checklistsecuritiesregister": {
+        "adoxio_checklistaipdecision": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_investigationstatuscomment": {
-          "type": "string"
-        },
-        "adoxio_separationissuesresult": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_initialcapassessmentdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_paymentmethod": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_renewaltiedhouse": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_inspectionscheduleddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistletterofintentassessment": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "createdon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_renewalsignage": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_renewalfloorplan": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "onholdtime": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklisthoursreviewed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_aiptype": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistoldlocationconfirmedinactive": {
+        "adoxio_checklistexecutedleasereceived": {
           "format": "int32",
           "type": "integer"
         },
@@ -137309,149 +137269,18 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_businessstructureinstructionfield": {
-          "type": "string"
-        },
-        "adoxio_checklistvalidinterestfinalassessed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklislginresolutionassess": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistassociateslist": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_dateapplicantsenttolg": {
+        "adoxio_datelicencecapassessedfinal": {
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_isreadyworkers": {
-          "type": "boolean"
+        "adoxio_checklistsitemapreceived": {
+          "format": "int32",
+          "type": "integer"
         },
-        "adoxio_description2": {
+        "_modifiedonbehalfby_value": {
           "type": "string"
         },
-        "adoxio_checklistcriminalrecordsassessed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_finalcapassessment": {
-          "type": "string"
-        },
-        "adoxio_inspectionchecklistdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistestabrenderingsassessed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistsenttolgin": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_isreadyintruderalarm": {
-          "type": "boolean"
-        },
-        "adoxio_renewalestablishmentaddress": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistsecuritiesregisterreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_finaldecision": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistsenttospd": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_servicehoursmondayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistaipdecision": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_servicehoursfridayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_fitandproperstatus": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_phseligibilitycheckdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_checklistlgindefined": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistvalidmailingaddress": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishmentcomplytoallbylaws": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistrequestedmenu": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_applicant_value": {
-          "type": "string"
-        },
-        "adoxio_floorplanresultfinal": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_contactpersonphone": {
-          "type": "string"
-        },
-        "adoxio_casemanagerassigned": {
-          "type": "boolean"
-        },
-        "adoxio_checklistyellowpinned": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_applicanttype": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishmentaddresscity": {
-          "type": "string"
-        },
-        "utcconversiontimezonecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_contactpersonlastname": {
-          "type": "string"
-        },
-        "adoxio_lgdecisionsubmissiondate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_tiedhousesearchdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_onlinedocumentupload": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistsignageexamples": {
+        "adoxio_checklistbrandingassess": {
           "format": "int32",
           "type": "integer"
         },
@@ -137459,18 +137288,229 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_phseligibilitycheckdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_otherapplicanttype": {
+          "type": "string"
+        },
+        "adoxio_contactpersonphone": {
+          "type": "string"
+        },
+        "adoxio_mfgstepblending": {
+          "type": "boolean"
+        },
+        "adoxio_criminalrecordsresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_establishmentphone": {
+          "type": "string"
+        },
+        "adoxio_servicehoursstandardhours": {
+          "type": "boolean"
+        },
+        "adoxio_establishmentlocatedatfirstnationland": {
+          "type": "boolean"
+        },
+        "adoxio_checklistotherapplicationschecked": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_owningteam_value": {
+          "type": "string"
+        },
+        "adoxio_renewalconcluded": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_renewalfloorplan": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_tiedhouseassessment": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistrequestedmenu": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistvalidmailingaddress": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklisttiedhouseassess": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_applicanttype": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistphotosassessed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_slainvokedid_value": {
+          "type": "string"
+        },
+        "adoxio_onlinedocumentupload": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistorgleadershipbuilt": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_renewaldui": {
+          "format": "int32",
+          "type": "integer"
+        },
         "_owninguser_value": {
           "type": "string"
         },
-        "adoxio_checklistestablishmentassessed": {
+        "adoxio_floorplanresult": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_checklistvalidestablishmentaddress": {
+        "adoxio_checklistvalidinterestfinalassessed": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_checklistzoninginprogress": {
+        "adoxio_establishmentemail": {
+          "type": "string"
+        },
+        "adoxio_establishmentaddresscountry": {
+          "type": "string"
+        },
+        "adoxio_separationissuesresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistseparationissuesassessed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_createdby_value": {
+          "type": "string"
+        },
+        "adoxio_mfgacresofgrapes": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_casemanagerassigned": {
+          "type": "boolean"
+        },
+        "adoxio_businessinfoemail": {
+          "type": "string"
+        },
+        "adoxio_pidlist": {
+          "type": "string"
+        },
+        "adoxio_checklistredlinedfloorplan": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_mfgacresofhoney": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isreadyintruderalarm": {
+          "type": "boolean"
+        },
+        "adoxio_addresscity": {
+          "type": "string"
+        },
+        "adoxio_initialcapassessmenttrigger": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "createdon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_checklisteligibilityassessed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_servicehourstuesdayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistsignageexamples": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_stageid_value": {
+          "type": "string"
+        },
+        "adoxio_checklistcheckrequestedtc": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_sla_value": {
+          "type": "string"
+        },
+        "adoxio_uploadedimageofestablishment": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistunreportedsaleofbusiness": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistspdapproved": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistassociatesfireceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_securityclearancegenerateddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_occupationload": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistlocationassessment": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_establishmentaddresscity": {
+          "type": "string"
+        },
+        "adoxio_datesentinvestigations": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_establishmentaddress": {
+          "type": "string"
+        },
+        "adoxio_servicehoursthursdayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_applicationtypeid_value": {
+          "type": "string"
+        },
+        "adoxio_checklistcorporatedocsassessed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_renewaltiedhouse": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_uploadedevidenceofvalidinterest": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistlebuilt": {
           "format": "int32",
           "type": "integer"
         },
@@ -138353,9 +138393,8 @@
           "format": "int64",
           "type": "string"
         },
-        "adoxio_category": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_ispubliccorporation": {
+          "type": "boolean"
         },
         "_modifiedonbehalfby_value": {
           "type": "string"
@@ -138372,8 +138411,9 @@
         "adoxio_isindigenousnation": {
           "type": "boolean"
         },
-        "_owningteam_value": {
-          "type": "string"
+        "adoxio_formdisplayorder": {
+          "format": "int32",
+          "type": "integer"
         },
         "overriddencreatedon": {
           "format": "date-time",
@@ -138387,14 +138427,15 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_ispubliccorporation": {
-          "type": "boolean"
+        "_owningteam_value": {
+          "type": "string"
         },
         "_owningbusinessunit_value": {
           "type": "string"
         },
-        "adoxio_iscoop": {
-          "type": "boolean"
+        "adoxio_category": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_issoleproprietorship": {
           "type": "boolean"
@@ -138403,6 +138444,9 @@
           "type": "string"
         },
         "adoxio_islimitedpartnership": {
+          "type": "boolean"
+        },
+        "adoxio_iscoop": {
           "type": "boolean"
         },
         "adoxio_islocalgovernment": {
@@ -138734,6 +138778,9 @@
         "adoxio_isshowpropertydetails": {
           "type": "boolean"
         },
+        "adoxio_actiontext": {
+          "type": "string"
+        },
         "adoxio_name": {
           "type": "string"
         },
@@ -138831,6 +138878,9 @@
         "adoxio_isshowsupportingdocuments": {
           "type": "boolean"
         },
+        "adoxio_iswineryproduction": {
+          "type": "boolean"
+        },
         "modifiedon": {
           "format": "date-time",
           "type": "string"
@@ -138848,9 +138898,6 @@
         "_modifiedby_value": {
           "type": "string"
         },
-        "adoxio_actiontext": {
-          "type": "string"
-        },
         "adoxio_isdefault": {
           "type": "boolean"
         },
@@ -138863,6 +138910,10 @@
         },
         "adoxio_showdescription2": {
           "type": "boolean"
+        },
+        "adoxio_storecontactinfo": {
+          "format": "int32",
+          "type": "integer"
         },
         "timezoneruleversionnumber": {
           "format": "int32",
@@ -138918,9 +138969,8 @@
         "_adoxio_licencetype_value": {
           "type": "string"
         },
-        "adoxio_storecontactinfo": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_isownershipconfirmation": {
+          "type": "boolean"
         },
         "createdbyname": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
@@ -144959,126 +145009,51 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_establishment",
       "type": "object",
       "properties": {
-        "adoxio_saturdayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_pidlist": {
-          "type": "string"
-        },
-        "versionnumber": {
-          "format": "int64",
-          "type": "string"
-        },
-        "adoxio_isstandalonepatio": {
+        "adoxio_mailsenttorestaurant": {
           "type": "boolean"
         },
-        "adoxio_isrural": {
+        "_adoxio_licencetypeid_value": {
+          "type": "string"
+        },
+        "adoxio_establishmentid": {
+          "type": "string"
+        },
+        "adoxio_expectedopendate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_createdonbehalfby_value": {
+          "type": "string"
+        },
+        "adoxio_longitude": {
+          "format": "decimal",
+          "type": "number"
+        },
+        "adoxio_mondayclose": {
           "format": "int32",
           "type": "integer"
-        },
-        "_adoxio_pdjurisdiction_value": {
-          "type": "string"
         },
         "adoxio_saturdayclose": {
           "format": "int32",
           "type": "integer"
         },
-        "_owningbusinessunit_value": {
+        "_adoxio_primaryinspectorid_value": {
           "type": "string"
-        },
-        "modifiedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_addressstreet": {
-          "type": "string"
-        },
-        "adoxio_hasduallicence": {
-          "type": "boolean"
-        },
-        "_adoxio_territory_value": {
-          "type": "string"
-        },
-        "adoxio_occupantcapacity": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "importsequencenumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_modifiedonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_locatedonfirstnationland": {
-          "type": "boolean"
-        },
-        "adoxio_email": {
-          "type": "string"
-        },
-        "_adoxio_lgin_value": {
-          "type": "string"
-        },
-        "adoxio_establishmentisalr": {
-          "type": "boolean"
-        },
-        "utcconversiontimezonecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "timezoneruleversionnumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_regionid_value": {
-          "type": "string"
-        },
-        "adoxio_sundayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_thursdayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_sendmailtoestablishmentuponapproval": {
-          "format": "int32",
-          "type": "integer"
         },
         "_owninguser_value": {
           "type": "string"
         },
-        "adoxio_tuesdayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_establishmentid": {
-          "type": "string"
-        },
-        "overriddencreatedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_adoxio_licencetypeid_value": {
-          "type": "string"
-        },
-        "statecode": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_standardhours": {
+          "type": "boolean"
         },
         "adoxio_isoninland": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_addresspostalcode": {
-          "type": "string"
+        "adoxio_mfgstepcrushing": {
+          "type": "boolean"
         },
-        "adoxio_fridayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_wednesdayopen": {
+        "adoxio_sendmailtoestablishmentuponapproval": {
           "format": "int32",
           "type": "integer"
         },
@@ -145089,63 +145064,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_wednesdayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_standardhours": {
-          "type": "boolean"
-        },
-        "_adoxio_licencee_value": {
-          "type": "string"
-        },
-        "adoxio_mondayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_locatedatwinery": {
-          "type": "boolean"
-        },
-        "adoxio_mailsenttorestaurant": {
-          "type": "boolean"
-        },
-        "_ownerid_value": {
-          "type": "string"
-        },
-        "_modifiedby_value": {
-          "type": "string"
-        },
-        "adoxio_thursdayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_createdby_value": {
-          "type": "string"
-        },
-        "createdon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_expectedopendate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_adoxio_area_value": {
-          "type": "string"
-        },
-        "adoxio_alreadyopen": {
-          "type": "boolean"
-        },
-        "adoxio_mondayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_createdonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_phone": {
-          "type": "string"
-        },
         "adoxio_latitude": {
           "format": "decimal",
           "type": "number"
@@ -145153,38 +145071,197 @@
         "adoxio_parcelid": {
           "type": "string"
         },
-        "adoxio_patronparticipation": {
+        "adoxio_locatedatwinery": {
           "type": "boolean"
         },
-        "adoxio_tuesdayopen": {
+        "adoxio_locatedonfirstnationland": {
+          "type": "boolean"
+        },
+        "adoxio_tuesdayclose": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_name": {
-          "type": "string"
-        },
-        "adoxio_addresscity": {
-          "type": "string"
-        },
-        "_adoxio_primaryinspectorid_value": {
-          "type": "string"
-        },
-        "adoxio_occupantload": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_longitude": {
-          "format": "decimal",
-          "type": "number"
-        },
-        "adoxio_fridayclose": {
+        "adoxio_occupantcapacity": {
           "format": "int32",
           "type": "integer"
         },
         "adoxio_isopen": {
           "type": "boolean"
         },
+        "adoxio_establishmentisalr": {
+          "type": "boolean"
+        },
+        "_owningbusinessunit_value": {
+          "type": "string"
+        },
+        "_adoxio_lgin_value": {
+          "type": "string"
+        },
+        "adoxio_fridayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_modifiedby_value": {
+          "type": "string"
+        },
+        "_adoxio_regionid_value": {
+          "type": "string"
+        },
+        "adoxio_mfgstepblending": {
+          "type": "boolean"
+        },
+        "adoxio_saturdayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "importsequencenumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_tuesdayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_mfgacresoffruit": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_mondayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_addressstreet": {
+          "type": "string"
+        },
+        "adoxio_thursdayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "overriddencreatedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_patronparticipation": {
+          "type": "boolean"
+        },
+        "_createdby_value": {
+          "type": "string"
+        },
+        "_adoxio_licencee_value": {
+          "type": "string"
+        },
+        "_adoxio_territory_value": {
+          "type": "string"
+        },
         "statuscode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_mfgacresofhoney": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_hasduallicence": {
+          "type": "boolean"
+        },
+        "createdon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_wednesdayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_addresscity": {
+          "type": "string"
+        },
+        "adoxio_name": {
+          "type": "string"
+        },
+        "adoxio_sundayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "modifiedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_adoxio_area_value": {
+          "type": "string"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "type": "string"
+        },
+        "adoxio_mfgstepfiltering": {
+          "type": "boolean"
+        },
+        "adoxio_alreadyopen": {
+          "type": "boolean"
+        },
+        "_adoxio_pdjurisdiction_value": {
+          "type": "string"
+        },
+        "adoxio_isstandalonepatio": {
+          "type": "boolean"
+        },
+        "adoxio_mfgmeetsproductionminimum": {
+          "type": "boolean"
+        },
+        "adoxio_occupantload": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string"
+        },
+        "adoxio_phone": {
+          "type": "string"
+        },
+        "adoxio_mfgacresofgrapes": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "utcconversiontimezonecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "timezoneruleversionnumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_ownerid_value": {
+          "type": "string"
+        },
+        "adoxio_email": {
+          "type": "string"
+        },
+        "statecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_thursdayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_pidlist": {
+          "type": "string"
+        },
+        "adoxio_mfgstepsecfermorcarb": {
+          "type": "boolean"
+        },
+        "adoxio_addresspostalcode": {
+          "type": "string"
+        },
+        "adoxio_wednesdayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_fridayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isrural": {
           "format": "int32",
           "type": "integer"
         },
@@ -156742,6 +156819,9 @@
         "regardingobjectid_adoxio_applicationcrsbpfv4": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationcrsbpfv4"
         },
+        "regardingobjectid_adoxio_servicearea": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+        },
         "regardingobjectid_productpricelevel": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.productpricelevel"
         },
@@ -157122,9 +157202,6 @@
         },
         "regardingobjectid_resourcegroup": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.resourcegroup"
-        },
-        "regardingobjectid_adoxio_servicearea": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
         }
       }
     },
@@ -159434,6 +159511,9 @@
         "regardingobjectid_adoxio_applicationcrsbpfv4": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationcrsbpfv4"
         },
+        "regardingobjectid_adoxio_servicearea": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+        },
         "regardingobjectid_customeraddress": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.customeraddress"
         },
@@ -159700,9 +159780,6 @@
         },
         "regardingobjectid_subject": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.subject"
-        },
-        "regardingobjectid_adoxio_servicearea": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
         }
       }
     },
@@ -161115,6 +161192,12 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_enforcementaction"
           }
         },
+        "business_unit_adoxio_servicearea": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+          }
+        },
         "BusinessUnit_SyncErrors": {
           "type": "array",
           "items": {
@@ -161617,12 +161700,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
-          }
-        },
-        "business_unit_adoxio_servicearea": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
           }
         }
       }
@@ -165606,6 +165683,9 @@
         "suffix": {
           "type": "string"
         },
+        "_slaid_value": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
@@ -165770,9 +165850,6 @@
         "telephone3": {
           "type": "string"
         },
-        "_slaid_value": {
-          "type": "string"
-        },
         "address2_telephone1": {
           "type": "string"
         },
@@ -165819,6 +165896,9 @@
         "shippingmethodcode": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_spdexpirydateflag": {
+          "type": "boolean"
         },
         "address2_line3": {
           "type": "string"
@@ -169132,6 +169212,12 @@
         "baserecordid_adoxio_enforcementaction": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_enforcementaction"
         },
+        "duplicaterecordid_adoxio_servicearea": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+        },
+        "baserecordid_adoxio_servicearea": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+        },
         "baserecordid_goalrollupquery": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.goalrollupquery"
         },
@@ -169347,12 +169433,6 @@
         },
         "baserecordid_quote": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.quote"
-        },
-        "duplicaterecordid_adoxio_servicearea": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
-        },
-        "baserecordid_adoxio_servicearea": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
         }
       }
     },
@@ -175281,10 +175361,6 @@
         "adoxio_checklistsignagenotes": {
           "type": "string"
         },
-        "timezoneruleversionnumber": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_sepchecklistsecurityplancomment": {
           "type": "string"
         },
@@ -176150,6 +176226,10 @@
         "_kbarticleid_value": {
           "type": "string"
         },
+        "timezoneruleversionnumber": {
+          "format": "int32",
+          "type": "integer"
+        },
         "firstresponseslastatus": {
           "format": "int32",
           "type": "integer"
@@ -176548,6 +176628,10 @@
         },
         "_adoxio_enforcementactionid_value": {
           "type": "string"
+        },
+        "adoxio_licencesubcategory": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_pschecklistcontrarytolicencenotes": {
           "type": "string"
@@ -182844,6 +182928,9 @@
         "regardingobjectid_adoxio_applicationcrsbpfv4": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationcrsbpfv4"
         },
+        "regardingobjectid_adoxio_servicearea": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+        },
         "regardingobjectid_incident": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
         },
@@ -182915,9 +183002,6 @@
         },
         "modifiedby": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "regardingobjectid_adoxio_servicearea": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
         }
       }
     },
@@ -189469,6 +189553,12 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_enforcementaction"
           }
         },
+        "owner_adoxio_servicearea": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+          }
+        },
         "owner_personaldocumenttemplates": {
           "type": "array",
           "items": {
@@ -189743,12 +189833,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.contract"
-          }
-        },
-        "owner_adoxio_servicearea": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
           }
         }
       }
@@ -192131,6 +192215,9 @@
         "objectid_adoxio_applicationcrsbpfv4": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationcrsbpfv4"
         },
+        "objectid_adoxio_servicearea": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+        },
         "objectid_campaign": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.campaign"
         },
@@ -192280,9 +192367,6 @@
         },
         "objectid_phonecall": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.phonecall"
-        },
-        "objectid_adoxio_servicearea": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
         }
       }
     },
@@ -192829,6 +192913,9 @@
         "regardingobjectid_adoxio_applicationcrsbpfv4": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationcrsbpfv4"
         },
+        "regardingobjectid_adoxio_servicearea": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+        },
         "regardingobjectid_invoicedetail": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoicedetail"
         },
@@ -193149,9 +193236,6 @@
         },
         "completedby": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "regardingobjectid_adoxio_servicearea": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
         }
       }
     },
@@ -208714,6 +208798,36 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_enforcementaction"
           }
         },
+        "lk_adoxio_servicearea_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+          }
+        },
+        "lk_adoxio_servicearea_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+          }
+        },
+        "lk_adoxio_servicearea_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+          }
+        },
+        "lk_adoxio_servicearea_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+          }
+        },
+        "user_adoxio_servicearea": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+          }
+        },
         "lk_slakpiinstancebase_createdonbehalfby": {
           "type": "array",
           "items": {
@@ -213435,36 +213549,6 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.opportunitysalesprocess"
           }
-        },
-        "lk_adoxio_servicearea_createdby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
-          }
-        },
-        "lk_adoxio_servicearea_createdonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
-          }
-        },
-        "lk_adoxio_servicearea_modifiedby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
-          }
-        },
-        "lk_adoxio_servicearea_modifiedonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
-          }
-        },
-        "user_adoxio_servicearea": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
-          }
         }
       }
     },
@@ -214709,6 +214793,12 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_enforcementaction"
           }
         },
+        "team_adoxio_servicearea": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+          }
+        },
         "team_DuplicateRules": {
           "type": "array",
           "items": {
@@ -215136,12 +215226,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.goal"
-          }
-        },
-        "team_adoxio_servicearea": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
           }
         }
       }

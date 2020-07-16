@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioApplicationtypecontent class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioApplicationtypecontent(bool? adoxioIstrust = default(bool?), bool? adoxioIsunlimitedliabilitycorporation = default(bool?), bool? adoxioIspartnership = default(bool?), string _owninguserValue = default(string), string adoxioName = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statuscode = default(int?), bool? adoxioIslimitedliabilitycorporation = default(bool?), string versionnumber = default(string), int? adoxioCategory = default(int?), string _modifiedonbehalfbyValue = default(string), bool? adoxioIsprivatecorporation = default(bool?), bool? adoxioIsestate = default(bool?), string _modifiedbyValue = default(string), bool? adoxioIsindigenousnation = default(bool?), string _owningteamValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? adoxioIspubliccorporation = default(bool?), string _owningbusinessunitValue = default(string), bool? adoxioIscoop = default(bool?), bool? adoxioIssoleproprietorship = default(bool?), string _owneridValue = default(string), bool? adoxioIslimitedpartnership = default(bool?), bool? adoxioIslocalgovernment = default(bool?), int? statecode = default(int?), int? timezoneruleversionnumber = default(int?), string adoxioApplicationtypecontentid = default(string), string adoxioBody = default(string), bool? adoxioIsgeneralpartnership = default(bool?), bool? adoxioIssociety = default(bool?), string _adoxioApplicationtypeValue = default(string), bool? adoxioIsuniversity = default(bool?), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), int? importsequencenumber = default(int?), bool? adoxioIslimitedliabilitypartnership = default(bool?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioApplicationtypecontentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationtypecontentDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationtypecontentDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioApplicationtypecontentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioApplicationtypecontentMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioApplicationtypecontentProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioApplicationtypecontentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioApplicationtypecontentPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationType = default(MicrosoftDynamicsCRMadoxioApplicationtype))
+        public MicrosoftDynamicsCRMadoxioApplicationtypecontent(bool? adoxioIstrust = default(bool?), bool? adoxioIsunlimitedliabilitycorporation = default(bool?), bool? adoxioIspartnership = default(bool?), string _owninguserValue = default(string), string adoxioName = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statuscode = default(int?), bool? adoxioIslimitedliabilitycorporation = default(bool?), string versionnumber = default(string), bool? adoxioIspubliccorporation = default(bool?), string _modifiedonbehalfbyValue = default(string), bool? adoxioIsprivatecorporation = default(bool?), bool? adoxioIsestate = default(bool?), string _modifiedbyValue = default(string), bool? adoxioIsindigenousnation = default(bool?), int? adoxioFormdisplayorder = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string _owningbusinessunitValue = default(string), int? adoxioCategory = default(int?), bool? adoxioIssoleproprietorship = default(bool?), string _owneridValue = default(string), bool? adoxioIslimitedpartnership = default(bool?), bool? adoxioIscoop = default(bool?), bool? adoxioIslocalgovernment = default(bool?), int? statecode = default(int?), int? timezoneruleversionnumber = default(int?), string adoxioApplicationtypecontentid = default(string), string adoxioBody = default(string), bool? adoxioIsgeneralpartnership = default(bool?), bool? adoxioIssociety = default(bool?), string _adoxioApplicationtypeValue = default(string), bool? adoxioIsuniversity = default(bool?), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), int? importsequencenumber = default(int?), bool? adoxioIslimitedliabilitypartnership = default(bool?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioApplicationtypecontentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationtypecontentDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationtypecontentDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioApplicationtypecontentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioApplicationtypecontentMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioApplicationtypecontentProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioApplicationtypecontentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioApplicationtypecontentPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationType = default(MicrosoftDynamicsCRMadoxioApplicationtype))
         {
             AdoxioIstrust = adoxioIstrust;
             AdoxioIsunlimitedliabilitycorporation = adoxioIsunlimitedliabilitycorporation;
@@ -40,22 +40,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Statuscode = statuscode;
             AdoxioIslimitedliabilitycorporation = adoxioIslimitedliabilitycorporation;
             Versionnumber = versionnumber;
-            AdoxioCategory = adoxioCategory;
+            AdoxioIspubliccorporation = adoxioIspubliccorporation;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AdoxioIsprivatecorporation = adoxioIsprivatecorporation;
             AdoxioIsestate = adoxioIsestate;
             this._modifiedbyValue = _modifiedbyValue;
             AdoxioIsindigenousnation = adoxioIsindigenousnation;
-            this._owningteamValue = _owningteamValue;
+            AdoxioFormdisplayorder = adoxioFormdisplayorder;
             Overriddencreatedon = overriddencreatedon;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Modifiedon = modifiedon;
-            AdoxioIspubliccorporation = adoxioIspubliccorporation;
+            this._owningteamValue = _owningteamValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            AdoxioIscoop = adoxioIscoop;
+            AdoxioCategory = adoxioCategory;
             AdoxioIssoleproprietorship = adoxioIssoleproprietorship;
             this._owneridValue = _owneridValue;
             AdoxioIslimitedpartnership = adoxioIslimitedpartnership;
+            AdoxioIscoop = adoxioIscoop;
             AdoxioIslocalgovernment = adoxioIslocalgovernment;
             Statecode = statecode;
             Timezoneruleversionnumber = timezoneruleversionnumber;
@@ -141,8 +142,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_category")]
-        public int? AdoxioCategory { get; set; }
+        [JsonProperty(PropertyName = "adoxio_ispubliccorporation")]
+        public bool? AdoxioIspubliccorporation { get; set; }
 
         /// <summary>
         /// </summary>
@@ -171,8 +172,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_formdisplayorder")]
+        public int? AdoxioFormdisplayorder { get; set; }
 
         /// <summary>
         /// </summary>
@@ -191,8 +192,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ispubliccorporation")]
-        public bool? AdoxioIspubliccorporation { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -201,8 +202,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_iscoop")]
-        public bool? AdoxioIscoop { get; set; }
+        [JsonProperty(PropertyName = "adoxio_category")]
+        public int? AdoxioCategory { get; set; }
 
         /// <summary>
         /// </summary>
@@ -218,6 +219,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_islimitedpartnership")]
         public bool? AdoxioIslimitedpartnership { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_iscoop")]
+        public bool? AdoxioIscoop { get; set; }
 
         /// <summary>
         /// </summary>
