@@ -250,7 +250,7 @@
             </app-field>
             <hr-->
             <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?" [valid]="isValidOrNotTouched('isALR')" [showChevrons]="false"
-            errorMessage="Specify ALR status" [isFullWidth]="true">
+            errorMessage="Specify ALR status" [isFullWidth]="true" *ngIf="application.licenseType === 'Manufacturer'">
             <mat-radio-group formControlName="isALR">
                 <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
                 <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
@@ -1227,7 +1227,7 @@
         </section>
                     <!-- RAS Details -->
             <!--section *ngIf="showFormControl(application?.applicationType.ow"-->
-            <section>
+            <section *ngIf="application.licenseType === 'Manufacturer'">
               <h3 class="blue-header">{{this.application?.licenseType}} Ownership Details</h3>
               <div class="content-bottom">
                 <p>Please provide the following details about your application:</p>
@@ -1513,7 +1513,7 @@
 
         <!-- Next Steps -->
 
-        <h3 *ngIf="htmlContent?." class="blue-header">
+        <h3 *ngIf="htmlContent?.nextSteps" class="blue-header">
           What happens next?
         </h3>
         <section *ngIf="htmlContent?.nextSteps" class="padded-section content-bottom">
