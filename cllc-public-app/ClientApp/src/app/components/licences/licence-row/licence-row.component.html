@@ -31,7 +31,7 @@
                     </div>
                     <strong *ngIf="item?.licenceTypeName !== 'Marketing'" style="color: #1a5a96;">
                         {{item.establishmentName}}</strong>
-                    <div *ngIf="item?.licenceTypeName.includes('Wine Store')">
+                    <div *ngIf="item?.licenseSubCategory">
                         <p>{{getSubCategory(item.licenseSubCategory)}}</p>
                     </div>
                     </div>
@@ -166,7 +166,7 @@
                         <div *ngIf="isActiveOrRecentlyExpired(item) && !item.transferRequested">
                             <p>
                                 <a [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
-                                <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Transfer Ownership</span>
+                                <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Transfer Licence</span>
                                 </a>
                             </p>
                         </div>
