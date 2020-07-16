@@ -50,6 +50,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     StoreContactInfo = (FormControlState?)applicationType.AdoxioStorecontactinfo,
                     Title = applicationType.AdoxioTitletext,
                     ValidInterest = (FormControlState?)applicationType.AdoxioValidinterest,
+                    RequiresSecurityScreening = applicationType.AdoxioRequiressecurityscreening,
                     IsEndorsement = applicationType.AdoxioIsendorsement,
                     ServiceAreas = applicationType.AdoxioServiceareas.HasValue && (bool)applicationType.AdoxioServiceareas,
                     OutsideAreas = applicationType.AdoxioServiceareas.HasValue && (bool)applicationType.AdoxioOutsideareas,
