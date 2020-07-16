@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Web;
 using System.Xml.Linq;
@@ -471,6 +472,31 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 result = null;
             }
+            return result;
+        }
+
+        /// <summary>
+        /// Get an Invoice by the Id
+        /// </summary>
+        /// <param name="system">Re</param>
+        /// <param name="id"></param>
+        /// <returns>The Invoice, or null if it does not exist</returns>
+        public static MicrosoftDynamicsCRMinvoice GetInvoiceByIdWithApplications(this IDynamicsClient system, Guid id)
+        {
+            MicrosoftDynamicsCRMinvoice result;
+            var expand = new List<string> { "adoxio_invoice_adoxio_application_Invoice", "adoxio_invoice_adoxio_application_LicenceFeeInvoice" };
+            try
+            {
+                // fetch from Dynamics.
+                result = system.Invoices.GetByKey(invoiceid: id.ToString(), expand: expand);
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+
+            
+
             return result;
         }
 
@@ -1430,6 +1456,18 @@ namespace Gov.Lclb.Cllb.Interfaces
                     }
                 }
             }
+            return result;
+        }
+
+        public static bool IsLiquor(this MicrosoftDynamicsCRMadoxioApplication application)
+        {
+            bool result = false;
+            // determine if the application is for liquor.
+            if (application != null && application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioName != null)
+            {
+                result = application.AdoxioApplicationTypeId.AdoxioName.ToUpper().Contains("CANNABIS");
+            }
+
             return result;
         }
     }
