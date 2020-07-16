@@ -339,6 +339,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // fail 
                         throw (httpOperationException);
                     }
+
+                    _logger.LogInformation($"Payment approved.  Liquor: {isAlternateAccount}");
+
                 }
                 // if payment failed:
                 else
@@ -376,6 +379,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // fail 
                         throw (httpOperationException);
                     }
+
+                    _logger.LogInformation($"Payment not approved.  Liquor: {isAlternateAccount}");
 
                 }
             }
@@ -479,6 +484,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         await _geocoderClient.GeocodeEstablishment(application._adoxioLicenceestablishmentValue, _logger);
                     }
 
+                    _logger.LogInformation($"Licence Fee Transaction approved.  Liquor: {isAlternateAccount}");
+
                 }
                 // if payment failed:
                 else
@@ -519,7 +526,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // fail 
                         throw (httpOperationException);
                     }
+                    _logger.LogInformation($"Licence Fee Transaction NOT approved.  Liquor: {isAlternateAccount}");
                 }
+
+
+
             }
             else
             {
