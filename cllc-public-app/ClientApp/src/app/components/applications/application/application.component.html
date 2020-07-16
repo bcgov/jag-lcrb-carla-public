@@ -894,7 +894,7 @@
         </div>
 
         <!-- Service Area -->
-        <h3 class="blue-header" *ngIf="application.applicationType.serviceAreas" >SERVICE AREA</h3>
+        <h3 class="blue-header" *ngIf="application.applicationType.serviceAreas" >SERVICE AREAS</h3>
         <section *ngIf="application.applicationType.serviceAreas" class="padded-section content-bottom">
           <div *ngIf="htmlContent?.serviceArea" [innerHTML]="htmlContent.serviceArea"></div>
           <app-field [valid]="!showValidationMessages || form.get('serviceAreas').valid"

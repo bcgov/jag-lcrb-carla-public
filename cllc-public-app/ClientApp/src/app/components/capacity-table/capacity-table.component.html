@@ -13,7 +13,7 @@
         </ng-container>
         <tr>
             <td><button (click)="addRow()" class="btn-clear" style="height: 100%;"><i class="fa fa-plus-circle" style="color: #1a5a96;"></i></button></td>
-            <td>Total Occupant Load</td>
+            <td>{{isIndoor ? 'Total Occupant Load' : 'Total Personal Capacity for all Outdoor Areas'}}</td>
             <td *ngIf="isIndoor"></td>
             <td *ngIf="isIndoor"></td>
             <td>{{total}}</td>
