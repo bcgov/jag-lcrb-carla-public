@@ -980,6 +980,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     AddServiceAreasToApplication(item.ServiceAreas, item.Id);
                 }
+                if (item.OutsideAreas.Count > 0)
+                {
+                    AddServiceAreasToApplication(item.OutsideAreas, item.Id);
+                }
+
                 _dynamicsClient.Applications.Update(id, adoxioApplication);
             }
             catch (HttpOperationException httpOperationException)
@@ -1170,6 +1175,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 MicrosoftDynamicsCRMadoxioServicearea serviceArea = new MicrosoftDynamicsCRMadoxioServicearea()
                 {
                     ApplicationOdataBind = applicationUri,
+                    AdoxioAreacategory = area.AreaCategory,
                     AdoxioArealocation = area.AreaLocation,
                     AdoxioAreanumber = area.AreaNumber,
                     AdoxioCapacity = area.Capacity,

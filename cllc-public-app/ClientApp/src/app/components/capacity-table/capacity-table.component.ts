@@ -1,6 +1,6 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, ValidationErrors } from '@angular/forms';
-import { ServiceArea } from '@models/service-area.model';
+import { ServiceArea, AreaCategory } from '@models/service-area.model';
 import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 
 
@@ -22,8 +22,9 @@ import { BaseControlValueAccessor } from './BaseControlValueAccessor';
   ]
 })
 export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea[]> {
-    @Input() isIndoor: boolean;
+    @Input() areaCategory: number;
     total: number;
+    areaCategoryEnum = AreaCategory;
 
     formGroup: FormGroup;
     get areasArr(): FormArray { return this.formGroup.get('areas') as FormArray; }
@@ -72,11 +73,12 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
 
     addRow() {
         this.writeValue([...this.areasArr.value, {
+            areaCategory: this.areaCategory,
             areaNumber: this.areasArr.controls.length + 1,
             areaLocation: '',
             capacity: '',
-            isIndoor: this.isIndoor,
-            isOutdoor: !this.isIndoor,
+            isIndoor: this.areaCategory === AreaCategory.Service,
+            isOutdoor: this.areaCategory === AreaCategory.OutsideArea,
             isPatio: false
         }]);
     }
@@ -92,7 +94,7 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
     }
 
     onRowChange(val) {
-        this.updateTotal()
+        this.updateTotal();
     }
 
     validate({ value }: FormControl) {

@@ -547,5 +547,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public Zoning? LgZoning { get; set; }
 
         public List<CapacityArea> ServiceAreas { get; set; }
+        public List<CapacityArea> OutsideAreas { get; set; }
     }
 }
