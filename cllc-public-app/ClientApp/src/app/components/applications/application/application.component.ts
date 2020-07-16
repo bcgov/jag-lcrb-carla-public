@@ -199,7 +199,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       willhaveValidInterest: ['', []],
       meetsALRRequirements: ['', []],
       IsReadyProductNotVisibleOutside: ['', []],
-      serviceAreas: ['', []]
+      serviceAreas: ['', []],
+      outsideAreas: ['', []]
     });
 
 
@@ -426,6 +427,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     if (!this.application.applicationType.serviceAreas) {
       this.form.get('serviceAreas').disable();
+    }
+    if (!this.application.applicationType.outsideAreas) {
+      this.form.get('outsideAreas').disable();
     }
   }
 
