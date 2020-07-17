@@ -37,21 +37,21 @@
                     </div>
                     <strong *ngIf="item?.licenceTypeName === 'Marketing'" style="color: #1a5a96;">
                     Marketing Licence</strong>
-                    <span *ngIf="item?.licenceTypeName !== 'Marketing' && isActiveOrRecentlyExpired(item)">Licence Number: <i>{{item.licenseNumber}}</i></span>
+                    <span *ngIf="item?.licenceTypeName !== 'Marketing' && isActive(item)">Licence Number: <i>{{item.licenseNumber}}</i></span>
 
                     <br>
-                    <span *ngIf="isActiveOrRecentlyExpired(item)">Expiry / Renewal Date: {{item.expiryDate | date: 'MM/dd/yyyy'}}</span>
+                    <span *ngIf="isActive(item)">Expiry / Renewal Date: {{item.expiryDate | date: 'MM/dd/yyyy'}}</span>
                     <br>
                     <span>Status: <strong>{{getLicenceStatusText(item.status)}}</strong></span>
                     <br>
-                    <div *ngIf="!item.isOperated && isActiveOrRecentlyExpired(item) && actionsVisible(item)" style="min-width: 10px;">
+                    <div *ngIf="!item.isOperated && isActive(item) && actionsVisible(item)" style="min-width: 10px;">
                         <a [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'" download>
                             <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
                         </a>
                     </div>
-                    <div *ngIf="!item.isOperated && (isRecentlyExpired(item) || (isActive(item) && isAboutToExpire(item.expiryDate)))">
+                    <div *ngIf="!item.isOperated && (item.status === 'Expired' || (isActive(item) && isAboutToExpire(item.expiryDate)))">
                         <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
-                            <span><i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>Renew Licence</span>
+                            <span><i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>{{isRecentlyExpired(item) ? 'Renew' : 'Reinstate'}} Licence</span>
                         </a>
                     </div>
                     <div class="flags" class="missing">
@@ -60,7 +60,7 @@
                         <p *ngIf="item.transferRequested"><i class="fas fa-flag" style="margin-right: 10px;"></i>Transfer Requested</p>
                         <p *ngIf="item.operated && !item.isOperated"><i class="fas fa-flag" style="margin-right: 10px;"></i>Licence Operated</p>
                     </div>
-                    <div *ngIf="item.licenceTypeCategory === 'Liquor' && isActiveOrRecentlyExpired(item) && actionsVisible(item) && !item.isOperated">
+                    <div *ngIf="item.licenceTypeCategory === 'Liquor' && isActive(item) && actionsVisible(item) && !item.isOperated">
                         <br>
                         <a [routerLink]="[ '/licence/' + item.licenseId + '/representative']">
                             <span *ngIf="!item.representativeFullName">Add Licensee Representative</span>
@@ -73,7 +73,7 @@
                     <div *ngIf="item?.licenceTypeName !== 'Marketing'">
                         {{item?.establishmentAddressStreet}} <br>
                         {{item?.establishmentAddressCity}} BC {{item?.establishmentAddressPostalCode}}<br>
-                        <div *ngIf="item.licenceTypeName === ApplicationTypeNames.CannabisRetailStore && isActiveOrRecentlyExpired(item) && actionsVisible(item)">
+                        <div *ngIf="item.licenceTypeName === ApplicationTypeNames.CannabisRetailStore && isActive(item) && actionsVisible(item)">
                             <mat-checkbox [checked]="item.establishmentIsOpen"
                                 (click)="toggleStoreOpen(i, item?.establishmentId, !item.establishmentIsOpen);">
                             <span style="margin-right: 10px;">Show Store as Open on Map</span></mat-checkbox>
@@ -102,7 +102,7 @@
                             </span>
                         </a>
                     </div-->
-                    <ng-container *ngIf="item.endorsements.length > 0 && isActiveOrRecentlyExpired(item) && (actionsVisible(item) || item.isOperated)">
+                    <ng-container *ngIf="item.endorsements.length > 0 && isActive(item) && (actionsVisible(item) || item.isOperated)">
                         <span><strong>Endorsements:</strong></span>
                         <div *ngFor="let endorsement of item.endorsements; let i = index;">
                             <span><i class="fas fa-certificate" style="margin-right: 10px;"></i>{{endorsement.name}}</span>
@@ -119,10 +119,10 @@
                     </div>
                     <!-- Third Party Operator Actions-->
                     <!-- Indicate application has been initiated-->
-                    <div *ngIf="isActiveOrRecentlyExpired(item) && !item.isDeemed && item.tpoRequested" class="licence-expired">
+                    <div *ngIf="isActive(item) && !item.isDeemed && item.tpoRequested" class="licence-expired">
                         <strong>Third Party Operator Application Initiated</strong> <br />
                         <section
-                            *ngIf="isActiveOrRecentlyExpired(item) && item.tpoRequested"
+                            *ngIf="isActive(item) && item.tpoRequested"
                             class="licence-expired">
                             <a [routerLink]="[ '/cancel-third-party-operator/' + item.licenseId]" class="missing">
                             <span><i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Cancel Application</span>
@@ -131,18 +131,18 @@
                     </div>
 
                     <div>
-                        <div *ngIf="hasEndorsementByName(item, 'Temporary Off-Site Endorsement')">
+                        <div *ngIf="isActive(item) && hasEndorsementByName(item, 'Temporary Off-Site Endorsement')">
                             <a [routerLink]="[ '/licence/' + item.licenseId + '/temporary-offsite']">
                                 <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Temporary Off-Site Sale
                                 Authorization
                             </a>
                         </div>
-                        <div *ngIf="item.licenceTypeName.indexOf('Catering') >= 0 && isActiveOrRecentlyExpired(item) && (actionsVisible(item) || item.isOperated)">
+                        <div *ngIf="item.licenceTypeName.indexOf('Catering') >= 0 && isActive(item) && (actionsVisible(item) || item.isOperated)">
                             <a [routerLink]="[ '/licence/' + item.licenseId + '/event']">
                                 <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Event Authorization
                             </a>
                         </div>
-                        <div *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore && isActiveOrRecentlyExpired(item) && actionsVisible(item)">
+                        <div *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore && isActive(item) && actionsVisible(item)">
                             <a [routerLink]="[ '/federal-reporting/' + item.licenseId + '/default']">
                                 <span><i class="fas fa-business-time" style="margin-right: 10px;"></i>Review Federal Reports</span>
                             </a>
@@ -163,7 +163,7 @@
                 <td style="background-color: #E1E8F2; padding: 10px;">
                     <!-- 3rd Party Operators cannot submit  changes -->
                     <div *ngIf="!item.isOperated">
-                        <div *ngIf="isActiveOrRecentlyExpired(item) && !item.transferRequested">
+                        <div *ngIf="isActive(item) && !item.transferRequested">
                             <p>
                                 <a [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
                                 <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Transfer Ownership</span>
@@ -171,7 +171,7 @@
                             </p>
                         </div>
                         <!-- if there is a third party application in progress, we don't show the ability to submit a new application-->
-                        <div *ngIf="isActiveOrRecentlyExpired(item) && !item.tpoRequested && item.licenceTypeCategory === 'Liquor'">
+                        <div *ngIf="isActive(item) && !item.tpoRequested && item.licenceTypeCategory === 'Liquor'">
                             <p>
                                 <a [routerLink]="[ '/third-party-operator/' + item.licenseId]">
                                 <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Add or Change a Third Party Operator</span>
@@ -179,7 +179,7 @@
                             </p>
                         </div>
                         <ng-container
-                            *ngIf="isActiveOrRecentlyExpired(item) && actionsVisible(item)">
+                            *ngIf="isActive(item) && actionsVisible(item)">
                             <p *ngFor="let action of item.allowedActions">
                                 <ng-container *ngIf="actionVisible(item, action.id)">
                                     <a href="javascript:void(0);" (click)="doAction(item,action.name)">
@@ -190,18 +190,17 @@
                         </ng-container>
                         <div *ngIf="isExpired(item)" class="licence-expired" style="text-align: center;">
                             <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
-                                <strong>Attention</strong>: This Licence has Expired<br>Please Renew.
+                                <strong>Attention</strong>: This Licence has Expired<br>Please {{isRecentlyExpired(item) ? 'Renew' : 'Reinstate'}}.
                             </a>
                         </div>
 
-                        <section
-                            *ngIf="isActiveOrRecentlyExpired(item) && item.transferRequested"
+                        <!-- <section
+                            *ngIf="isActive(item) && item.transferRequested"
                             class="missing">
-                            <!-- <strong>TRANSFER INITIATED</strong> <br /> -->
                             <a [routerLink]="[ '/ownership-cancel-transfer/' + item.licenseId]" class="missing">
                             <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Cancel Transfer</span>
                             </a>
-                        </section>
+                        </section> -->
                     </div>
                     <section *ngIf="item.isOperated"><i>3rd-Party Operators cannot request changes to the licence. All
                         change requests
@@ -209,21 +208,6 @@
                     </section>
                 </td>
                 </tr>
-                <!--tr>
-                    <!-- no idea why this is here...
-                    <td colspan="5">
-                        <mat-expansion-panel [expanded]="true" class="mat-elevation-z1">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                Capacity Area
-                                </mat-panel-title>
-                                <mat-panel-description>
-                                Click to expand or collapse
-                                </mat-panel-description>
-                            </mat-expansion-panel-header>
-                        </mat-expansion-panel>
-                    </td>
-                </tr-->
                 <tr *ngIf="licenceType === 'Catering' && item?.events !== undefined && item?.events.length > 0">
                     <td colspan="5">
                         <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">

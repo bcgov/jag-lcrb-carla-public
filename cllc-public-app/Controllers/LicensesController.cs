@@ -520,6 +520,37 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 }
 
+                // copy service areas from licence
+                try
+                {
+                    string filter = $"_adoxio_licenceid_value eq {licenceId}";
+                    string applicationUri = _dynamicsClient.GetEntityURI("adoxio_applications", application.AdoxioApplicationid);
+                    
+                    IList<MicrosoftDynamicsCRMadoxioServicearea> areas = _dynamicsClient.Serviceareas.Get(filter: filter).Value;
+                    foreach (MicrosoftDynamicsCRMadoxioServicearea area in areas)
+                    {
+                        MicrosoftDynamicsCRMadoxioServicearea newArea = new MicrosoftDynamicsCRMadoxioServicearea()
+                        {
+                            ApplicationOdataBind = applicationUri,
+                            AdoxioAreacategory = area.AdoxioAreacategory,
+                            AdoxioArealocation = area.AdoxioArealocation,
+                            AdoxioAreanumber = area.AdoxioAreanumber,
+                            AdoxioCapacity = area.AdoxioCapacity,
+                            AdoxioIsindoor = area.AdoxioIsindoor,
+                            AdoxioIsoutdoor = area.AdoxioIsoutdoor,
+                            AdoxioIspatio = area.AdoxioIspatio,
+                            AdoxioDateadded = DateTimeOffset.Now,
+                            AdoxioDateupdated = DateTimeOffset.Now
+                        };
+                        _dynamicsClient.Serviceareas.Create(newArea);
+                    }
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    _logger.LogError(httpOperationException, "Error adding service areas from licence to application");
+                }
+
+
                 // now bind the new application to the given licence.
 
                 var patchApplication = new MicrosoftDynamicsCRMadoxioApplication()
