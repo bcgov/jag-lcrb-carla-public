@@ -20,7 +20,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         ServiceArea = 845280012,
         OutdoorArea = 845280013,
         CapacityArea = 845280014,
-        
+        Signage = 845280015
     
     }
     public class ApplicationTypeContent

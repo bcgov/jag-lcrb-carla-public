@@ -59,12 +59,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             Guid applicationId = Guid.Parse(id);
-            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await GetDynamicsApplication(id);
-            if (adoxioApplication == null)
+            MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
+            if (application == null)
             {
                 return NotFound();
             }
-            if (adoxioApplication.AdoxioInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
+            if (application.AdoxioInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
             {
                 return NotFound("Payment already made");
             }
@@ -87,7 +87,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // fail 
                 throw (httpOperationException);
             }
-            var application = await GetDynamicsApplication(id);
+            application = await GetDynamicsApplication(id);
 
             // now load the invoice for this application to get the pricing
             string invoiceId = application._adoxioInvoiceValue;
@@ -124,7 +124,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             Dictionary<string, string> redirectUrl;
             redirectUrl = new Dictionary<string, string>();
-            redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt));
+
+            bool isAlternateAccount = application.IsLiquor(); // set to true for Liquor.
+
+            redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), isAlternateAccount);
 
             _logger.LogDebug(">>>>>" + redirectUrl["url"]);
 
@@ -235,11 +238,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // dynamics determines the amount based on the licence type of the application
             var orderamt = invoice.Totalamount;
 
+            bool isAlternateAccount = application.IsLiquor(); // set to true for Liquor.
+
             Dictionary<string, string> redirectUrl;
             redirectUrl = new Dictionary<string, string>();
 
             var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/licence-fee-payment-confirmation";
-            redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), redirectPath);
+            redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), isAlternateAccount, redirectPath);
 
             _logger.LogDebug(">>>>>" + redirectUrl["url"]);
 
@@ -272,7 +277,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
 
-            var response = await _bcep.ProcessPaymentResponse(ordernum, id);
+            bool isAlternateAccount = application.IsLiquor(); // determine if it is for liquor
+
+            var response = await _bcep.ProcessPaymentResponse(ordernum, id, isAlternateAccount);
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)
@@ -332,6 +339,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // fail 
                         throw (httpOperationException);
                     }
+
+                    _logger.LogInformation($"Payment approved.  Liquor: {isAlternateAccount}");
+
                 }
                 // if payment failed:
                 else
@@ -370,6 +380,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         throw (httpOperationException);
                     }
 
+                    _logger.LogInformation($"Payment not approved.  Liquor: {isAlternateAccount}");
+
                 }
             }
             else
@@ -392,20 +404,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("verify/licence-fee/{id}")]
         public async Task<IActionResult> VerifyLicenceFeePaymentStatus(string id)
         {
-            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await GetDynamicsApplication(id);
-            if (adoxioApplication == null)
+            MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
+            if (application == null)
             {
                 return NotFound();
             }
 
             // load the invoice for this application
-            string invoiceId = adoxioApplication._adoxioLicencefeeinvoiceValue;
+            string invoiceId = application._adoxioLicencefeeinvoiceValue;
             _logger.LogDebug("Found invoice for application = " + invoiceId);
             MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
             var ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
 
-            var response = await _bcep.ProcessPaymentResponse(ordernum, id);
+            bool isAlternateAccount = application.IsLiquor(); // set to true for Liquor.
+
+            var response = await _bcep.ProcessPaymentResponse(ordernum, id, isAlternateAccount = false);
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)
@@ -467,8 +481,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // trigger geocoding
                     if (!string.IsNullOrEmpty(_configuration["FEATURE_MAPS"]))
                     {
-                        await _geocoderClient.GeocodeEstablishment(adoxioApplication._adoxioLicenceestablishmentValue, _logger);
+                        await _geocoderClient.GeocodeEstablishment(application._adoxioLicenceestablishmentValue, _logger);
                     }
+
+                    _logger.LogInformation($"Licence Fee Transaction approved.  Liquor: {isAlternateAccount}");
 
                 }
                 // if payment failed:
@@ -510,7 +526,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // fail 
                         throw (httpOperationException);
                     }
+                    _logger.LogInformation($"Licence Fee Transaction NOT approved.  Liquor: {isAlternateAccount}");
                 }
+
+
+
             }
             else
             {
@@ -702,10 +722,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // dynamics determines the amount based on the licence type of the application
             var orderamt = invoice.Totalamount;
 
+            bool isAlternateAccount = false;  // always false for a worker.
+
             Dictionary<string, string> redirectUrl;
             redirectUrl = new Dictionary<string, string>();
             var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/worker-qualification/payment-confirmation";
-            redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, workerId, String.Format("{0:0.00}", orderamt), redirectPath);
+            redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, workerId, String.Format("{0:0.00}", orderamt), isAlternateAccount, redirectPath);
 
             _logger.LogDebug(">>>>>" + redirectUrl["url"]);
 
@@ -738,7 +760,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
 
-            var response = await _bcep.ProcessPaymentResponse(ordernum, workerId);
+            bool isAlternateAccount = false;  // in this case it is always false, as the worker process uses the Cannabis account.
+
+            var response = await _bcep.ProcessPaymentResponse(ordernum, workerId, isAlternateAccount);
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)

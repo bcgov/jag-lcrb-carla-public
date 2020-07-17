@@ -10,6 +10,7 @@ namespace Gov.Lclb.Cllb.Public.Models.Extensions
             return new CapacityArea()
             {
                 AreaNumber = (int)serviceArea.AdoxioAreanumber,
+                AreaCategory = serviceArea.AdoxioAreacategory,
                 AreaLocation = serviceArea.AdoxioArealocation,
                 IsIndoor = (bool)serviceArea.AdoxioIsindoor,
                 IsOutdoor = (bool)serviceArea.AdoxioIsoutdoor,
