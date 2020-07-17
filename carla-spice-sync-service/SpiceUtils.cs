@@ -613,50 +613,58 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
         private List<LegalEntity> CreateAssociatesForAccount(string accountId, List<string> accounts)
         {
-            List<LegalEntity> newAssociates = new List<LegalEntity>();
-            if (accounts.Contains(accountId))
+            try
             {
-                return newAssociates;
-            }
-            else
-            {
-                accounts.Add(accountId);
-            }
-            
-            if (string.IsNullOrEmpty(accountId))
-            {
-                _logger.LogError("CreateAssociatesForAccount received a null accountId");
-                return newAssociates;
-            }
-            string entityFilter = "_adoxio_account_value eq " + accountId + " and _adoxio_profilename_value ne " + accountId;
-            entityFilter += " and adoxio_isdonotsendtospd ne true";
-            string[] expand = { "adoxio_Contact", "adoxio_Account"};
-
-            var legalEntities = _dynamicsClient.Legalentities.Get(filter: entityFilter, expand: expand).Value;
-            if (legalEntities != null)
-            {
-                foreach (var legalEntity in legalEntities)
+                List<LegalEntity> newAssociates = new List<LegalEntity>();
+                if (accounts.Contains(accountId))
                 {
-                    try
+                    return newAssociates;
+                }
+                else
+                {
+                    accounts.Add(accountId);
+                }
+                
+                if (string.IsNullOrEmpty(accountId))
+                {
+                    _logger.LogError("CreateAssociatesForAccount received a null accountId");
+                    return newAssociates;
+                }
+                string entityFilter = "_adoxio_account_value eq " + accountId + " and _adoxio_profilename_value ne " + accountId;
+                entityFilter += " and adoxio_isdonotsendtospd ne true";
+                string[] expand = { "adoxio_Contact", "adoxio_Account"};
+
+                var legalEntities = _dynamicsClient.Legalentities.Get(filter: entityFilter, expand: expand).Value;
+                if (legalEntities != null)
+                {
+                    foreach (var legalEntity in legalEntities)
                     {
-                        LegalEntity associate = CreateAssociate(legalEntity);
-                        if((bool)associate.IsIndividual)
+                        try
                         {
-                            newAssociates.Add(associate);
+                            LegalEntity associate = CreateAssociate(legalEntity);
+                            if((bool)associate.IsIndividual)
+                            {
+                                newAssociates.Add(associate);
+                            }
+                            else
+                            {
+                                var moreAssociates = CreateAssociatesForAccount(associate.Account.AccountId, accounts);
+                                newAssociates.AddRange(moreAssociates);
+                            }
                         }
-                        else
+                        catch (ArgumentNullException e)
                         {
-                            var moreAssociates = CreateAssociatesForAccount(associate.Account.AccountId, accounts);
-                            newAssociates.AddRange(moreAssociates);
+                            _logger.LogError(e, $"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
                         }
-                    }
-                    catch (ArgumentNullException e)
-                    {
-                        _logger.LogError(e, $"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
                     }
                 }
+                return newAssociates;
             }
-            return newAssociates;
+            catch (System.NullReferenceException e)
+            {
+                _logger.LogError(e, $"NullReferenceException in CreateAssociatesForAccount for accountId: {accountId}");
+                throw e;
+            }
         }
 
         private LegalEntity CreateAssociate(MicrosoftDynamicsCRMadoxioLegalentity legalEntity)
