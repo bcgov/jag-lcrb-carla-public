@@ -582,8 +582,15 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 }
 
                 /* Add associates from account */
-                var moreAssociates = CreateAssociatesForAccount(application._adoxioApplicantValue, screeningRequest.Associates.Select(s => s.Account.AccountId).ToList());
-                screeningRequest.Associates = screeningRequest.Associates.Concat(moreAssociates).ToList();
+                try
+                {
+                    var moreAssociates = CreateAssociatesForAccount(application._adoxioApplicantValue, screeningRequest.Associates.Select(s => s.Account.AccountId).ToList());
+                    screeningRequest.Associates = screeningRequest.Associates.Concat(moreAssociates).ToList();
+                }
+                catch (System.NullReferenceException e)
+                {
+                    _logger.LogError(e, $"NullReferenceException calling CreateAssociatesForAccount for application id: {application.AdoxioApplicationid}");
+                }
                 /* remove duplicate associates */
                 List<string> contactIds = new List<string>{};
                 int i = 0;
