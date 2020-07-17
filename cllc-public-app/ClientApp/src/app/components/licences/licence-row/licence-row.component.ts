@@ -67,7 +67,9 @@ export class LicenceRowComponent extends FormBase implements OnInit {
           this.termsAndConditionsService.getTermsAndCondtions(licence.licenseId)
             .subscribe((terms) => {
               licence.termsAndConditions = terms;
-              licence.headerRowSpan += 1;
+              if (terms.length > 0) {
+                licence.headerRowSpan += 1;
+              }
             });
       });
     }
@@ -220,13 +222,14 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     isRecentlyExpired(licence: ApplicationLicenseSummary) {
         const now = moment(new Date()).startOf('day');
         const expiry = moment(licence.expiryDate).startOf('day');
-        const diff = expiry.diff(now, 'days') + 1;
+        const diff = now.diff(expiry, 'days') + 1;
+
         return licence.status === 'Expired' && diff <= 30;
     }
 
     isActive(licence: ApplicationLicenseSummary) {
         let active = licence.status === 'Active';
-        if (licence.dormant || licence.suspended) {
+        if (licence.suspended) {
             active = false;
         }
         return active;
