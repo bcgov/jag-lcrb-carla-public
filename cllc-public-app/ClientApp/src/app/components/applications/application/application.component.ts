@@ -100,6 +100,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   autocompleteLocalGovernmemts: any[];
   autocompletePoliceDurisdictions: any[];
   LGApprovalsFeatureIsOn: boolean;
+  disableSubmitForLGINApproval: boolean;
 
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
@@ -675,6 +676,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   submitForLGINApproval() {
     const saveData = this.form.value;
+    this.disableSubmitForLGINApproval = true;
 
     // Only save if the data is valid
     if (this.isValid()) {
@@ -704,6 +706,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         });
     } else {
       this.showValidationMessages = true;
+      this.disableSubmitForLGINApproval = false;
     }
   }
 
