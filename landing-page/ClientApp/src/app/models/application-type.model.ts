@@ -24,6 +24,7 @@ export class ApplicationType {
   showDeclarations: boolean;
   establishmetNameIsReadOnly: boolean;
   showDescription1: boolean;
+  showOwnershipDeclaration: boolean;
 
   storeContactInfo: FormControlState;
   establishmentName: FormControlState;
