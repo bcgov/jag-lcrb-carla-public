@@ -209,21 +209,6 @@
                     </section>
                 </td>
                 </tr>
-                <!--tr>
-                    <!-- no idea why this is here...
-                    <td colspan="5">
-                        <mat-expansion-panel [expanded]="true" class="mat-elevation-z1">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                Capacity Area
-                                </mat-panel-title>
-                                <mat-panel-description>
-                                Click to expand or collapse
-                                </mat-panel-description>
-                            </mat-expansion-panel-header>
-                        </mat-expansion-panel>
-                    </td>
-                </tr-->
                 <tr *ngIf="licenceType === 'Catering' && item?.events !== undefined && item?.events.length > 0">
                     <td colspan="5">
                         <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
