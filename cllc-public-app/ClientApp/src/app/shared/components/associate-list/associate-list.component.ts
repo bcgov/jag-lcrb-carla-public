@@ -240,6 +240,8 @@ export class AssociateListComponent extends FormBase implements OnInit {
       this.emitValue();
       saved = true;
     } else {
+      // put associate into edit mode to show validation errors
+      this.associates.at(index).get('edit').setValue(true);
       // mark all contols as touched to show validation rules
       const controls = (<FormGroup>(this.associates.at(index))).controls;
       for (let control in controls) {
