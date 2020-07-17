@@ -1,6 +1,6 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, ValidationErrors } from '@angular/forms';
-import { ServiceArea } from '@models/service-area.model';
+import { ServiceArea, AreaCategory } from '@models/service-area.model';
 import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 
 
@@ -22,7 +22,7 @@ import { BaseControlValueAccessor } from './BaseControlValueAccessor';
   ]
 })
 export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea[]> {
-    @Input() isIndoor: boolean;
+    @Input() areaCategory: number;
     total: number;
 
     formGroup: FormGroup;
@@ -72,11 +72,12 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
 
     addRow() {
         this.writeValue([...this.areasArr.value, {
+            areaCategory: this.areaCategory,
             areaNumber: this.areasArr.controls.length + 1,
             areaLocation: '',
             capacity: '',
-            isIndoor: this.isIndoor,
-            isOutdoor: !this.isIndoor,
+            isIndoor: this.areaCategory === AreaCategory.Service,
+            isOutdoor: this.areaCategory === AreaCategory.OutsideArea,
             isPatio: false
         }]);
     }
@@ -85,14 +86,14 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
         if (index >= 0 && index < this.areasArr.length) {
             this.areasArr.removeAt(index);
             const newArr: ServiceArea[] = this.areasArr.controls.map((control, i) => {
-                return { areaNumber: i + 1, ...control.value };
+                return { ...control.value, areaNumber: i + 1 };
             });
             this.writeValue(newArr);
         }
     }
 
     onRowChange(val) {
-        this.updateTotal()
+        this.updateTotal();
     }
 
     validate({ value }: FormControl) {
@@ -105,5 +106,13 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
         return !isValid && {
             invalid: true
         };
+    }
+
+    isService(): boolean {
+        return this.areaCategory === AreaCategory.Service;
+    }
+
+    isOutsideArea(): boolean {
+        return this.areaCategory === AreaCategory.OutsideArea;
     }
 }
