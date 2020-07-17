@@ -10,7 +10,7 @@
 
             <!-- For all corporations -->
             <section *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
-              <p>All licensees and applicants must maintain a complete and current list of key personnel and businesses associated with their organization.</p>
+              <p>All licensees and applicants must maintain a complete and current list of affiliates and businesses associated with their organization.</p>
               <p>You are required to notify the LCRB of any changes to your organization’s structure within ten business days of the change being made. These changes include:</p>
               <ul>
                 <li>Change of directors, officers, or senior managers</li>
@@ -164,8 +164,7 @@
         <h4 class="plain-header">Special Rights and Restrictions</h4>
         <section class="padded-section">
           <p>
-            If the corporation has special rights and restrictions not described within the Notice of Articles, please
-            provide them here.
+            If the Notice of Articles does not specify the voting rights of the company’s shares, please upload the company’s Special Rights and Restrictions.
           </p>
           <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} SRANDR"
                              fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
@@ -279,11 +278,11 @@
                       || node?.businessType === 'University'
                       || node?.businessType === 'Church'">
 
-      <h3 class="blue-header">List Key Personnel</h3>
+      <h3 class="blue-header">List Affiliates</h3>
       <div class="content-bottom">
         <section class="padded-section">
           <p>
-            Please add the complete list of directors, officers and senior managers for {{node?.businessNameNew}}, including
+            Please add the complete list of directors, officers and senior managers (if applicable) for {{node?.businessNameNew}}, including
             their
             full legal name, date of birth and email address. They will be reviewed by the LCRB against your Notice of
             Articles.
@@ -373,8 +372,8 @@
         <section class="padded-section">
 
           <p>
-            Please list any business shareholders including their name, type of business, number of voting shares owned, and
-            email address. Depending on the type of business shareholder, additional supporting documents will be required.
+            Please list any business shareholders (e.g. holding companies, trusts, etc.) including their name, type of legal entity, number of voting shares owned, and
+            email address. Depending on the type of legal entity, additional supporting documents will be required.
           </p>
           <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"
                               [rootNode]="node" [account]="account" [licencesOnFile]="licencesOnFile"
