@@ -15,6 +15,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplicationSoap.OneStop;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
@@ -33,12 +34,17 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         private IOneStopRestClient _onestopRestClient;
 
-        public OneStopUtils(IConfiguration Configuration)
+        private IMemoryCache _cache;
+
+        public OneStopUtils(IConfiguration Configuration, IMemoryCache cache)
         {
             this.Configuration = Configuration;
+            _cache = cache;
             _dynamics = DynamicsSetupUtil.SetupDynamics(Configuration);
 
             _onestopRestClient = OneStopUtils.SetupOneStopClient(Configuration, Log.Logger);
+
+            
         }
 
         /// <summary>
@@ -280,9 +286,42 @@ namespace Gov.Lclb.Cllb.OneStopService
                 hangfireContext.WriteLine("Starting check for new licences for onestop job.");
             }
             IList<MicrosoftDynamicsCRMadoxioLicences> result = null;
+
+            /*
             try
             {
-                string filter = $"adoxio_businessprogramaccountreferencenumber eq null and statuscode eq 1";
+                string filter = $"adoxio_businessprogramaccountreferencenumber ne null";
+                
+                result = _dynamics.Licenceses.Get(filter: filter).Value;
+            }
+            catch (HttpOperationException odee)
+            {
+                if (hangfireContext != null)
+                {
+                    hangfireContext.WriteLine("Error getting Licences");
+                    hangfireContext.WriteLine("Request:");
+                    hangfireContext.WriteLine(odee.Request.Content);
+                    hangfireContext.WriteLine("Response:");
+                    hangfireContext.WriteLine(odee.Response.Content);
+                }
+
+                // fail if we can't get results.
+                throw (odee);
+            }
+
+            foreach (var item in result)
+            {
+                var patchRecord = new MicrosoftDynamicsCRMadoxioLicences()
+                {
+                    AdoxioOnestopsent = true
+                };
+                _dynamics.Licenceses.Update(item.AdoxioLicencesid, patchRecord);
+            }
+            */
+
+                try
+            {
+                string filter = $"adoxio_onestopsent ne true and statuscode eq 1";
                 string[] expand = { "adoxio_establishment" };
                 result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value;                
             }
@@ -305,24 +344,42 @@ namespace Gov.Lclb.Cllb.OneStopService
             // now for each one process it.
             foreach (var item in result)
             {
-                // Do not attempt to send licence records that have no establishment (for example, Marketer Licence records)
-                if (item.AdoxioEstablishment != null)
+                if (item.AdoxioOnestopsent != true)
                 {
-                    string licenceId = item.AdoxioLicencesid;
-                    string programAccountCode = "001";
-                    if (item.AdoxioBusinessprogramaccountreferencenumber != null)
+                    // Do not attempt to send licence records that have no establishment (for example, Marketer Licence records)
+                    if (item.AdoxioEstablishment != null)
                     {
-                        programAccountCode = item.AdoxioBusinessprogramaccountreferencenumber;
+                        string licenceId = item.AdoxioLicencesid;
+                        string programAccountCode = "001";
+                        if (item.AdoxioBusinessprogramaccountreferencenumber != null)
+                        {
+                            programAccountCode = item.AdoxioBusinessprogramaccountreferencenumber;
+                        }
+
+                        // set the maximum code.
+                        string cacheKey = "_BPAR_" + item.AdoxioLicencesid;
+                        int newNumber = 10;
+                        string suffix = programAccountCode.TrimStart('0');
+                        if (int.TryParse(suffix, out newNumber))
+                        {
+                            newNumber += 10; // 10 tries.                           
+                        }
+                        _cache.Set(cacheKey, newNumber);
+
+                        if (hangfireContext != null)
+                        {
+                            hangfireContext.WriteLine($"SET key {cacheKey} to {newNumber}");
+                        }
+                            await SendLicenceCreationMessageREST(hangfireContext, licenceId, programAccountCode);
+                        currentItem++;
                     }
 
-                    await SendLicenceCreationMessageREST(hangfireContext, licenceId, programAccountCode);
-                    currentItem++;
+                    if (currentItem > MAX_LICENCES_PER_INTERVAL)
+                    {
+                        break; // exit foreach    
+                    }
                 }
-
-                if (currentItem > MAX_LICENCES_PER_INTERVAL)
-                {
-                    break; // exit foreach    
-                }
+                
                                 
             }
 

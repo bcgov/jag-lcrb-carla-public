@@ -18,6 +18,7 @@ Feature: COVIDTemporaryExtension.feature
     I want to submit a COVID temporary extension application
     For different licence types and complete validation
 
+@covid
 Scenario: Food Primary COVID Temp Extension Application 
     Given I am not logged in to the Liquor and Cannabis Portal
     And I click on the COVID Temporary Extension link
@@ -25,6 +26,7 @@ Scenario: Food Primary COVID Temp Extension Application
     And I click on the Submit button for the COVID application
     Then the application is submitted
 
+@covid
 Scenario: Liquor Primary COVID Temp Extension Application
     Given I am not logged in to the Liquor and Cannabis Portal
     And I click on the COVID Temporary Extension link
@@ -32,6 +34,7 @@ Scenario: Liquor Primary COVID Temp Extension Application
     And I click on the Submit button for the COVID application
     Then the application is submitted
 
+@covid
 Scenario: Liquor Primary Club COVID Temp Extension Application
     Given I am not logged in to the Liquor and Cannabis Portal
     And I click on the COVID Temporary Extension link
@@ -39,6 +42,7 @@ Scenario: Liquor Primary Club COVID Temp Extension Application
     And I click on the Submit button for the COVID application
     Then the application is submitted
 
+@covid
 Scenario: Manufacturer COVID Temp Extension Application
     Given I am not logged in to the Liquor and Cannabis Portal
     And I click on the COVID Temporary Extension link
@@ -46,6 +50,7 @@ Scenario: Manufacturer COVID Temp Extension Application
     And I click on the Submit button for the COVID application
     Then the application is submitted
 
+@covid @validation
 Scenario: Validate COVID Temp Extension Application
     Given I am not logged in to the Liquor and Cannabis Portal
     And I click on the COVID Temporary Extension link
@@ -145,7 +150,7 @@ namespace bdd_tests
             uiEstPostal.SendKeys(estpostal);
 
             // select 'Yes' for ALR location
-            NgWebElement uiIsALR = ngDriver.FindElement(By.CssSelector("[formcontrolname='ALR'] mat-radio-button[value='Yes']"));
+            NgWebElement uiIsALR = ngDriver.FindElement(By.CssSelector("[formcontrolname='proposedEstablishmentIsAlr'] mat-radio-button[value='true']"));
             uiIsALR.Click();
 
             // enter the licencee name

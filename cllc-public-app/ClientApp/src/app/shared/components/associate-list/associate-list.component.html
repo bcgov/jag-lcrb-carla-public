@@ -275,6 +275,35 @@
                                 <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span class="icon-label">Delete</span></i>
                             </td>
                         </tr>
+
+                        <tr *ngIf="showNameChangeSection(associate)" style="height:20px;">
+                            <td colspan="7">
+                                <div (click)="associate.get('collapse').value = !associate.get('collapse').value"
+                                    style="padding-left: 20px;">
+                                    <mat-expansion-panel [expanded]="true" class="mat-elevation-z1">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                {{associate.get('businessNameNew').value}} Name Change Upload
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                Click to expand or collapse
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <section style="text-align: left; padding-top: 15px;">
+                                            <p>Please provide a certificate of name change, marriage certificate, etc.: </p>
+                                            <app-file-uploader *ngIf="account" documentType="{{asLicenseeChangeLog(associate?.value).fileUploadPrefix}} Name Change Documents"
+                                                fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+                                                entityName="account"
+                                                (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Name Change Documents', associate?.value?.refObject)"
+                                                [entityId]="account.id"
+                                                [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENT, DRAG FILE HERE OR'"
+                                                #financialIntegrityDocuments>
+                                            </app-file-uploader>
+                                        </section>
+                                    </mat-expansion-panel>
+                                </div>
+                            </td>
+                        </tr>
                     </ng-container>
                 </ng-container>
             </table>
@@ -393,7 +422,7 @@
                                         </mat-panel-description>
                                     </mat-expansion-panel-header>
                                     <section style="text-align: left;">
-                                        <app-org-structure [node]="associate.value.refObject" [account]="account" #orgStructure>
+                                        <app-org-structure [node]="associate.value.refObject" [account]="account" [licencesOnFile]="licencesOnFile" #orgStructure>
                                         </app-org-structure>
                                     </section>
                                 </mat-expansion-panel>

@@ -59,28 +59,25 @@
     <None Update="COVIDTemporaryExtension.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="PartnershipOrgStructure.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="RuralStore.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CateringApplicationEventAuthorization.feature">
+    <None Update="CateringApplicationEventAuthorizationTransfer.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CateringApplicationNameBrandingChange.feature">
+    <None Update="CateringApplicationBrandingChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CateringApplicationPersonnelEmailChange.feature">
+    <None Update="CateringApplicationPersonnelNameChanges.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CateringApplicationPersonnelNameChange.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="CateringApplicationStoreRelocation.feature">
+    <None Update="CateringApplicationStoreRelocationThirdParty.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CateringApplicationThirdPartyOperator.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="CateringApplicationTransferOfOwnership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2ECateringApplication_society_transfer_of_ownership.feature">
@@ -89,28 +86,16 @@
     <None Update="E2ECateringApplication_private_corp_transfer_of_ownership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSApplicationFederalReports.feature">
+    <None Update="CRSApplicationFederalReportsShowMap.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSApplicationNameBrandingChange.feature">
+    <None Update="CRSApplicationBrandingChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSApplicationPersonnelEmailChange.feature">
+    <None Update="CRSApplicationPersonnelNameChanges.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSApplicationPersonnelNameChange.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="CRSApplicationShowStoreOnMap.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="CRSApplicationStoreRelocation.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="CRSApplicationStructuralChange.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="CRSApplicationTransferOwnership.feature">
+    <None Update="CRSApplicationStoreChanges.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2E_CRSApplication_Licence_society_transfer_ownership.feature">

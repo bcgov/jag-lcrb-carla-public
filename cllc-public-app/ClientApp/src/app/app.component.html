@@ -132,7 +132,7 @@
                       class="nav-link" routerLink="/worker-qualification/dashboard">Dashboard</a>
                     <a ppRemoveIfFeatureOff="CovidApplication" (click)="toggleButtonLoggedIn.click()"
                       class="nav-link" routerLink="/covid-temporary-extension">Covid Temporary Extension</a>
-                    <a appRemoveIfFeatureOff="LGApprovals" *ngIf="account?.businessType === 'LocalGovernment'" (click)="toggleButtonLoggedIn.click()"
+                    <a appRemoveIfFeatureOff="LGApprovals" *ngIf="account?.businessType === 'LocalGovernment' && account?.localGovernmentId" (click)="toggleButtonLoggedIn.click()"
                       class="nav-link" routerLink="/lg-approvals">Applications for Review</a>
                   </li>
                 </ul>

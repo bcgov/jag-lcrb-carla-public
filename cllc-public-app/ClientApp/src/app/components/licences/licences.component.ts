@@ -85,6 +85,7 @@ export class LicencesComponent extends FormBase implements OnInit {
           });
           const combinedLicences = [...licenses, ...operatedLicences, ...proposedLicences];
           combinedLicences.forEach((licence: ApplicationLicenseSummary) => {
+            licence.headerRowSpan = 1;
             this.addOrUpdateLicence(licence);
           });
         });
@@ -112,6 +113,9 @@ export class LicencesComponent extends FormBase implements OnInit {
       ])
         .subscribe(data => {
           licence.events = data[0];
+          if (licence.events.length > 0) {
+            licence.headerRowSpan += 1;
+          }
         });
     }
 
