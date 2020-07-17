@@ -1,20 +1,20 @@
-<ng-container *ngIf="!account?.localGovernmentId && account?.businessType == 'LocalGovernment'">
-    <h3 *ngIf="!terminatedApplicationExists" class="blue-header mb-0">Activate Liquor Approvals</h3>
-    <h3 *ngIf="terminatedApplicationExists"  class="blue-header mb-0">Liquor Approvals Unavailable</h3>
-    <section class="padded submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-        <ng-container *ngIf="!terminatedApplicationExists">
-            <div>
-                You have not yet activated your approval capabilities. Before you can review liquor applications, you must first
-                request activation from LCRB. Activation ensures that you will maintain full control of you liquor approvals.
-            </div>
-            <div class="d-flex flex-row-reverse">
-                <button *ngIf="!nonTerminatedApplicationExists" (click)="requestApprovals()" class="btn btn-primary mt-3">REQUEST ACTIVATION</button>
-                <button *ngIf="nonTerminatedApplicationExists" disabled class="btn btn-secondary mt-3">ACTIVATION REQUESTED</button>
-            </div>
-        </ng-container>
-        
-        <ng-container *ngIf="terminatedApplicationExists">
-            Liquor Approvals are unavailable for your Local Government / Indigenous Nation.
-        </ng-container>
-    </section>
+<ng-container *ngIf="!account?.localGovernmentId && (account?.businessType == 'LocalGovernment' || account?.businessType == 'IndigenousNation')">
+  <h3 *ngIf="!terminatedApplicationExists" class="blue-header mb-0">Activate Liquor Approvals</h3>
+  <h3 *ngIf="terminatedApplicationExists" class="blue-header mb-0">Liquor Approvals Unavailable</h3>
+  <section class="padded submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+    <ng-container *ngIf="!terminatedApplicationExists">
+      <div>
+        You have not yet activated your approval capabilities. Before you can review liquor applications, you must first
+        request activation from LCRB. Activation ensures that you will maintain full control of you liquor approvals.
+      </div>
+      <div class="d-flex flex-row-reverse">
+        <button *ngIf="!nonTerminatedApplicationExists" (click)="requestApprovals()" class="btn btn-primary mt-3">REQUEST ACTIVATION</button>
+        <button *ngIf="nonTerminatedApplicationExists" disabled class="btn btn-secondary mt-3">ACTIVATION REQUESTED</button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="terminatedApplicationExists">
+      Liquor Approvals are unavailable for your Local Government / Indigenous Nation.
+    </ng-container>
+  </section>
 </ng-container>
