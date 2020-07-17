@@ -1256,7 +1256,8 @@
             <!-- RAS Details -->
             <!--section *ngIf="showFormControl(application?.applicationType.ow"-->
             <!-- TO DO-->
-            <section *ngIf="application.licenseType === 'Manufacturer' && !application.applicationType?.Endorsement">
+            <!--section *ngIf="application.licenseType === 'Manufacturer' && !application.applicationType?.Endorsement"-->
+            <section *ngIf="application?.applicationType.ShowOwnershipDeclaration">
               <h3 class="blue-header">{{this.application?.licenseType}} Ownership Details</h3>
               <div class="content-bottom">
                 <p>Please provide the following details about your application:</p>
