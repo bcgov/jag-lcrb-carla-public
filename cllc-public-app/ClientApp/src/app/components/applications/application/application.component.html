@@ -226,6 +226,43 @@
                 <app-additional-pids *ngIf="application" [application]="application">
                 </app-additional-pids>
               </section>
+              <hr>
+
+                      <!-- Proof of Zoning-->
+              <section *ngIf="showZoning()">
+                <app-proof-of-zoning *ngIf="application" [application]="application" #proofOfZoning>
+                </app-proof-of-zoning>
+                <hr>
+              </section>
+
+              <!--app-field [valid]="isValidOrNotTouched('zoningPermitsMFG')" [showChevrons]="false"
+              errorMessage="Please confirm that the current zoning permits manufacturing on the manufacturing site"
+              [isFullWidth]="true" style="margin-left:10px;">
+              <mat-checkbox formControlName="zoningPermitsMFG">
+                By checking this box, I confirm that current zoning permits manufacturing on the manufacturing site.</mat-checkbox>
+            </app-field>
+            <hr-->
+            <!--app-field [valid]="isValidOrNotTouched('zoningPermitsRetailSales')" [showChevrons]="false"
+              errorMessage="Please confirm that the current zoning permits retail sales on the manufacturing site"
+              [isFullWidth]="true" style="margin-left:10px;">
+              <mat-checkbox formControlName="zoningPermitsRetailSales">
+                I confirm that current zoning permits retail sales on the manufacturing site.</mat-checkbox>
+            </app-field>
+            <hr-->
+            <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?" [valid]="isValidOrNotTouched('isALR')" [showChevrons]="false"
+            errorMessage="Specify ALR status" [isFullWidth]="true" *ngIf="application.licenseType === 'Manufacturer'">
+            <mat-radio-group formControlName="isALR">
+                <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
+                <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
+            </mat-radio-group>
+            </app-field>
+            <div *ngIf="this.form.get('isALR').value == 'Yes'">
+                <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
+                <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
+                    <p><strong>By submitting this application to LCRB, you are confirming that your licenced establishment will adhere to the requirements laid out in the <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019" target="_blank">Agriculral Land Reserve (ALR) Use Regulation</a>.</strong></p>
+                </div>
+            </div>
+
 
             </div>
 
@@ -311,58 +348,8 @@
               </div>
               <p>&nbsp;</p>
             </section>
-            <!-- RAS Details -->
-            <section *ngIf="application?.licenseType === 'Rural Agency Store'">
-              <h3 class="blue-header">Rural Agency Store Details</h3>
-              <div class="content-bottom">
-                <p>Please provide the following details about your Rural Agency Store:</p>
-                <!-- RAS Certificate Number -->
-                <app-field label="Rural Agency Store Certificate Number:"
-                  errorMessage="Please enter a certificate number">
-                  <input type="text" class="form-control" style="width: 200px;" id="certNumber"
-                    formControlName="description1" mask="0009">
-                </app-field>
-
-                <section style="width:700px;">
-                  <div>
-                    <mat-checkbox formControlName="isOwner">
-                      This information is being submitted by the owner of the business in respect of which the licence
-                      is to be issued or will become the owner before the licence is issued.
-                    </mat-checkbox>
-                  </div>
-                  <div>
-                    <mat-checkbox formControlName="hasValidInterest">
-                      At the time of this information submission, the owner of the business is:
-                      <ul>
-                        <li>The owner of or has an agreement to purchase the place or premises that will form the
-                          proposed
-                          establishment, or</li>
-                        <li>The lessee or has a binding offer to lease the place or premises that will form the proposed
-                          establishment
-                        </li>
-                      </ul>
-                    </mat-checkbox>
-                  </div>
-                  <div>
-                    <mat-checkbox formControlName="willhaveValidInterest">
-                      At the time the licence is issued, the owner of the business will be:
-                      <ul>
-                        <li>The owner of the place or premises that forms the establishment, or</li>
-                        <li>The lessee of the place or premises that forms the establishment (term no less than 12
-                          months).</li>
-                      </ul>
-                    </mat-checkbox>
-                  </div>
-                  <p>&nbsp;</p>
-                </section>
-              </div>
-
-            </section>
-
-          </section>
-        </section>
-
         <!-- Business Plan for Manufacturers-->
+
         <section *ngIf="application?.applicationType?.name === 'Manufacturer'">
           <app-business-plan *ngIf="application" [application]="application">
           </app-business-plan>
@@ -518,23 +505,29 @@
           <label for="">Photos or renderings of the store's signage</label>
           <br>
           <section *ngIf="application?.applicationType?.signage === FormControlState.Show">
-
-            <p>
-              The signage submitted must show the name of the store and all words, images and symbols used in the
-              signage.
-            </p>
-
-            <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-              Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis (e.g. a
-              green cross). It must not imply an association with another business (other than another non-medical
-              cannabis
-              retail store).
-            </p>
-            <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-              <b>Note:</b> If submitting renderings, renderings may be either printed or hand-drawn (as long as they are
-              legible)
-            </p>
-
+        
+            <div *ngIf="htmlContent.signage">
+              <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.signage"></section>
+            </div>
+        
+            <div *ngIf="!htmlContent.signage">
+              <p>
+                The signage submitted must show the name of the store and all words, images and symbols used in the
+                signage.
+              </p>
+        
+              <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+                Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis (e.g. a
+                green cross). It must not imply an association with another business (other than another non-medical
+                cannabis
+                retail store).
+              </p>
+              <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+                <b>Note:</b> If submitting renderings, renderings may be either printed or hand-drawn (as long as they are
+                legible)
+              </p>
+            </div>
+        
           </section>
 
           <p *ngIf="application?.applicationType?.signage === FormControlState.Reaonly">
@@ -754,111 +747,46 @@
           <hr><br>
           <label for="">Site Plan</label>
           <br>
-          <div *ngIf="application?.applicationType?.sitePlan === FormControlState.Show">
 
-            <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-              <span>
-                A site plan is a document showing any existing and proposed building footprints, pathways of
-                travel, parking, and landscaping elements, and the surrounding area. The document must measure at least
-                8.5" x 11" (standard letter size). Either a hand-drawn or computer-generated plan is acceptable, as long
-                as the plan is drawn to scale and is clear and legible. A site plan must not be submitted on graph paper
-                or paper with gridlines.
-              </span>
-              <div class="row" style="margin-top: 10px;">
-                <div class="col-md-6">
-                  <p>
-                    The site plan must include the proposed store footprint and a representation of any interior or
-                    exterior spaces surrounding the store, including:
-                  </p>
-
-                  <ul>
-                    <li>
-                      The location of any other buildings/businesses on the same site, each building footprint, type
-                      of businesses (e.g. gas station, office building) and building names, and their entrances and
-                      exits
-                    </li>
-                    <li>A description of the type of separation proposed (for any adjoining businesses)</li>
-                    <li>Road access and exits, including any relevant street names</li>
-                    <li>Parking lots.</li>
-                  </ul>
-                  <img src="assets/site-plan-example.png" width="350" alt="Site plan"
-                    style="margin: auto; display: block;">
-                </div>
-                <div class="col-md-6">
-                  <p>
-                    If the proposed store is located inside a building with other businesses
-                    (e.g. a mall), submit two site plans:
-                  </p>
-                  <p>
-                    1) One site plan showing location of any other buildings/businesses on the same site, including:
-                  </p>
-                  <ul>
-                    <li>
-                      Each building footprint, building name and a list of businesses operating inside the building
-                    </li>
-                    <li>Road access and exits, including any relevant street names, and</li>
-                    <li>Parking lots</li>
-                  </ul>
-                  <p>
-                    2) A second site plan showing the location of the proposed store
-                    inside the building’s footprint:
-                  </p>
-                  <ul>
-                    <li>All entrances and exits for the building</li>
-                    <li>The location, name and type of businesses operating inside the building</li>
-                    <li>The store footprint with all entrances and exits for the store, and</li>
-                    <li>
-                      A description of the type of separation proposed for any business adjoining the proposed store
-                    </li>
-                  </ul>
-                  <p>
-                    Full height walls are required for separation and no connecting doors between the cannabis retail
-                    store
-                    and
-                    the neighbouring business are permitted.
-                  </p>
-                  <p>
-                    The cannabis retail store may share a vestibule with another type of business (e.g. a liquor store
-                    or
-                    grocery
-                    store) provided each business has its own controlled entrance within the vestibule. The cannabis
-                    retail
-                    store
-                    cannot share a vestibule with a business that would be contrary to public interest (i.e. business
-                    aimed
-                    at
-                    minors or a liquor consumption business).
-                  </p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div
-            *ngIf="application?.licenseType != 'Cannnabis Retail Store' && application?.applicationType?.name != 'Picnic Area Endorsement'">
+          <!-- show the configured content if there is some-->
+          <section *ngIf="htmlContent?.sitePlan">
+            <div class="ngtest-before-SitePlan-content" [innerHTML]="htmlContent.sitePlan"></div>
+          </section>
+          <!--  otherwise should a standard-ish block-->
+          <section *ngIf="!htmlContent?.sitePlan">
             <p>A scaled site plan must show the following: </p>
             <ul>
               <li>location of the front entrance door of the proposed establishment</li>
-              <li>
-                any other buildings/businesses around the proposed establishment and the entrances to those buildings
-              </li>
+              <li>any other buildings/businesses around the proposed establishment and the entrances to those buildings</li>
               <li>any relevant street names</li>
             </ul>
-          </div>
-          <div *ngIf="application?.applicationType?.name === 'Picnic Area Endorsement'">
-            <p>Please provide a site plan (8.5" x 11") of your property showing the location and size of the existing
-              and/or proposed picnic area(s) and the following:</p>
-            <ul>
-              <li>all buildings and their uses (i.e. storage, manufacturing buildings, personal residence, garage, other
-                businesses, etc.)</li>
-              <li>all licensed areas (other endorsements or licences approved by the Branch)</li>
-              <li>vineyards/orchards/agricultural crops</li>
-              <li>private and public roadways and parking areas</li>
-              <li>any neighbouring residences within 50 metres of the proposed picnic area(s)</li>
-            </ul>
-          </div>
-
+          </section>
+        
+            <!-- Cannabis Retail Store has an additional image-->
+            <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+              <img src="assets/site-plan-example.png" width="350" alt="Site plan" style="margin: auto; display: block;">
+              <p>If the proposed store is located inside a building with other businesses (e.g. a mall), submit two site plans:</p>
+              <p>1) One site plan showing location of any other buildings/businesses on the same site, including:</p>
+              <ul>
+                <li>Each building footprint, building name and a list of businesses operating inside the building</li>
+                <li>Road access and exits, including any relevant street names, and</li>
+                <li>Parking lots</li>
+              </ul>
+              <p>2) A second site plan showing the location of the proposed store inside the building’s footprint:</p>
+              <ul>
+                <li>All entrances and exits for the building</li>
+                <li>The location, name and type of businesses operating inside the building</li>
+                <li>The store footprint with all entrances and exits for the store, and</li>
+                <li>A description of the type of separation proposed for any business adjoining the proposed store</li>
+              </ul>
+              <p>Full height walls are required for separation and no connecting doors between the cannabis retail
+                store and the neighbouring business are permitted.</p>
+              <p>The cannabis retail store may share a vestibule with another type of business (e.g. a liquor store
+                or grocery store) provided each business has its own controlled entrance within the vestibule. The cannabis
+                retail store  cannot share a vestibule with a business that would be contrary to public interest (i.e. business
+                aimed at minors or a liquor consumption business).</p>
+            </div>
+         
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Site Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
               [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
@@ -965,19 +893,23 @@
 
         </div>
 
-        <!-- Proof of Zoning-->
-        <section *ngIf="showZoning()">
-          <app-proof-of-zoning *ngIf="application" [application]="application" #proofOfZoning>
-          </app-proof-of-zoning>
-        </section>
-
         <!-- Service Area -->
-        <h3 class="blue-header" *ngIf="application.applicationType.serviceAreas" >SERVICE AREA</h3>
+        <h3 class="blue-header" *ngIf="application.applicationType.serviceAreas" >SERVICE AREAS</h3>
         <section *ngIf="application.applicationType.serviceAreas" class="padded-section content-bottom">
           <div *ngIf="htmlContent?.serviceArea" [innerHTML]="htmlContent.serviceArea"></div>
           <app-field [valid]="!showValidationMessages || form.get('serviceAreas').valid"
               errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
-            <app-capacity-table formControlName="serviceAreas" [isIndoor]="true"></app-capacity-table>
+            <app-capacity-table formControlName="serviceAreas" [areaCategory]="getAreaCategoryNumber('Service')"></app-capacity-table>
+          </app-field>
+        </section>
+
+        <!-- Outside Area -->
+        <h3 class="blue-header" *ngIf="application.applicationType.outsideAreas" >OUTSIDE AREAS</h3>
+        <section *ngIf="application.applicationType.outsideAreas" class="padded-section content-bottom">
+          <div *ngIf="htmlContent?.outsideAreas" [innerHTML]="htmlContent.outsideAreas"></div>
+          <app-field [valid]="!showValidationMessages || form.get('outsideAreas').valid"
+              errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
+            <app-capacity-table formControlName="outsideAreas" [areaCategory]="getAreaCategoryNumber('OutsideArea')"></app-capacity-table>
           </app-field>
         </section>
 
@@ -1303,6 +1235,58 @@
           <br>
         </section>
 
+        </section>
+                    <!-- RAS Details -->
+            <!--section *ngIf="showFormControl(application?.applicationType.ow"-->
+            <section *ngIf="application.licenseType === 'Manufacturer'">
+              <h3 class="blue-header">{{this.application?.licenseType}} Ownership Details</h3>
+              <div class="content-bottom">
+                <p>Please provide the following details about your application:</p>
+
+                <!-- RAS Certificate Number -->
+                <app-field label="Rural Agency Store Certificate Number:"
+                  errorMessage="Please enter a certificate number" *ngIf="this.application?.licenseType === 'Rural Agency Store'">
+                  <input type="text" class="form-control" style="width: 200px;" id="certNumber"
+                    formControlName="description1" mask="0009">
+                </app-field>
+
+                <section>
+                  <div>
+                    <mat-checkbox formControlName="isOwner">
+                      This information is being submitted by the owner of the business in respect of which the licence
+                      is to be issued or will become the owner before the licence is issued.
+                    </mat-checkbox>
+                  </div>
+                  <div>
+                    <mat-checkbox formControlName="hasValidInterest">
+                      At the time of this submission, the owner of the business is:
+                      <ul>
+                        <li>The owner of or has an agreement to purchase the place or premises that will form the
+                          proposed
+                          establishment, or</li>
+                        <li>The lessee or has a binding offer to lease the place or premises that will form the proposed
+                          establishment
+                        </li>
+                      </ul>
+                    </mat-checkbox>
+                  </div>
+                  <div>
+                    <mat-checkbox formControlName="willhaveValidInterest">
+                      At the time the licence is issued, the owner of the business will be:
+                      <ul>
+                        <li>The owner of the place or premises that forms the establishment, or</li>
+                        <li>The lessee of the place or premises that forms the establishment (term no less than 12
+                          months).</li>
+                      </ul>
+                    </mat-checkbox>
+                  </div>
+                </section>
+              </div>
+
+            </section>
+
+          </section>
+        
 
         <!-- Contact Details -->
         <h3 class="blue-header" *ngIf="!isRAS()">APPLICATION CONTACT DETAILS</h3>
@@ -1539,6 +1523,7 @@
         </section>
 
         <!-- Next Steps -->
+
         <h3 *ngIf="htmlContent?.nextSteps" class="blue-header">
           What happens next?
         </h3>
@@ -1652,7 +1637,7 @@
           <button
             *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
                         && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')"
-            class=" btn btn-primary" (click)="submitForLGINApproval(); foLGBtn.disabled = true;" #foLGBtn>
+            class=" btn btn-primary" [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval();">
             SUBMIT FOR LG/IN REVIEW OR COMMENT
           </button>
 

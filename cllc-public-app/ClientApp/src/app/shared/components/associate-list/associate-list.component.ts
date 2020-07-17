@@ -219,7 +219,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
       if (this.changeTypeSuffix === 'Leadership') {
         this.associates.at(index).get('isIndividual').setValue(true);
         // check to see if this is a sole prop.
-        if (this.account.businessType === 'SoleProprietor') {
+        if (this.rootNode.businessType === 'SoleProprietor') {
           this.associates.at(index).get('isOwnerNew').setValue(true);
         }
         // check to see if this is a trust.
@@ -235,9 +235,13 @@ export class AssociateListComponent extends FormBase implements OnInit {
         this.associates.at(index).get('isShareholderNew').setValue(true);
       }
 
+      
+      this.associates.at(index).value.refObject = Object.assign(this.associates.at(index).value.refObject, this.associates.at(index).value);
       this.emitValue();
       saved = true;
     } else {
+      // put associate into edit mode to show validation errors
+      this.associates.at(index).get('edit').setValue(true);
       // mark all contols as touched to show validation rules
       const controls = (<FormGroup>(this.associates.at(index))).controls;
       for (let control in controls) {
@@ -256,9 +260,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
   saveAll(): Observable<boolean> {
     let saveResults = [];
     this.associates.getRawValue().forEach((value, index) => {
-      if (this.associates.at(index).value.edit) {
         saveResults.push(this.saveLog(value, index));
-      }
     });
 
     // save all org structure children
