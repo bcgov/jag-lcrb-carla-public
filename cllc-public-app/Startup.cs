@@ -274,12 +274,13 @@ namespace Gov.Lclb.Cllb.Public
 
             var bcep_svc_url = _configuration["BCEP_SERVICE_URL"];
             var bcep_svc_svcid = _configuration["BCEP_MERCHANT_ID"];
+            var bcep_svc_alt_svcid = _configuration["BCEP_ALTERNATE_MERCHANT_ID"];
             var bcep_svc_hashid = _configuration["BCEP_HASH_KEY"];
             var bcep_base_uri = _configuration["BASE_URI"];
             var bcep_base_path = _configuration["BASE_PATH"];
             var bcep_conf_path = _configuration["BCEP_CONF_PATH"];
 
-            services.AddTransient<BCEPWrapper>(_ => new BCEPWrapper(bcep_svc_url, bcep_svc_svcid, bcep_svc_hashid,
+            services.AddTransient<BCEPWrapper>(_ => new BCEPWrapper(bcep_svc_url, bcep_svc_svcid, bcep_svc_alt_svcid, bcep_svc_hashid,
                 bcep_base_uri + bcep_base_path + bcep_conf_path));
 
             // add the PDF client.
