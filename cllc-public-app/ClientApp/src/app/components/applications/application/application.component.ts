@@ -32,6 +32,7 @@ import { PoliceDurisdictionDataService } from '@services/police-jurisdiction-dat
 import { LocalGovernmentDataService } from '@services/local-government-data.service';
 import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.component';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
+import { AreaCategory } from '@models/service-area.model';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -99,6 +100,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   autocompleteLocalGovernmemts: any[];
   autocompletePoliceDurisdictions: any[];
   LGApprovalsFeatureIsOn: boolean;
+  disableSubmitForLGINApproval: boolean;
 
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
@@ -199,7 +201,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       willhaveValidInterest: ['', []],
       meetsALRRequirements: ['', []],
       IsReadyProductNotVisibleOutside: ['', []],
-      serviceAreas: ['', []]
+      serviceAreas: ['', []],
+      outsideAreas: ['', []]
     });
 
 
@@ -427,6 +430,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (!this.application.applicationType.serviceAreas) {
       this.form.get('serviceAreas').disable();
     }
+    if (!this.application.applicationType.outsideAreas) {
+      this.form.get('outsideAreas').disable();
+    }
   }
 
 
@@ -578,6 +584,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     // flatten the service areas if need be
     const serviceAreas = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
+    const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
 
     // do not save if the form is in file upload mode
     if (this.mode === UPLOAD_FILES_MODE) {
@@ -585,7 +592,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
       return of(true).pipe(delay(10));
     }
     return forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, description2: description2, serviceAreas: serviceAreas }),
+      this.applicationDataService.updateApplication({
+        ...this.application,
+        ...this.form.value,
+        description2: description2,
+        serviceAreas: serviceAreas,
+        outsideAreas: outsideAreas
+      }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
@@ -663,6 +676,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   submitForLGINApproval() {
     const saveData = this.form.value;
+    this.disableSubmitForLGINApproval = true;
 
     // Only save if the data is valid
     if (this.isValid()) {
@@ -692,6 +706,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         });
     } else {
       this.showValidationMessages = true;
+      this.disableSubmitForLGINApproval = false;
     }
   }
 
@@ -944,5 +959,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
       label = 'Proposed New Name';
     }
     return label;
+  }
+
+  getAreaCategoryNumber(categoryName: string): number {
+    switch (categoryName) {
+      case 'OutsideArea':
+        return AreaCategory.OutsideArea;
+      case 'Service':
+        return AreaCategory.Service;
+      case 'Capactiy':
+        return AreaCategory.Capacity;
+    }
   }
 }

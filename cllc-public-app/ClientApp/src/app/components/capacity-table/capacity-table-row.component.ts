@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { FormGroup, FormBuilder, NG_VALUE_ACCESSOR, ControlValueAccessor, Validators, FormControl, NG_VALIDATORS } from '@angular/forms';
 import { BaseControlValueAccessor } from './BaseControlValueAccessor';
-import { ServiceArea } from '@models/service-area.model';
+import { ServiceArea, AreaCategory } from '@models/service-area.model';
 
 @Component({
   selector: '[capacity-table-row]',
@@ -10,8 +10,8 @@ import { ServiceArea } from '@models/service-area.model';
     <ng-container [formGroup]="rowGroup">
         <td><input type="text" formControlName="areaNumber" /></td>
         <td><input type="text" formControlName="areaLocation" /></td>
-        <td *ngIf="isIndoor"><mat-checkbox formControlName="isIndoor"></mat-checkbox></td>
-        <td *ngIf="isIndoor"><mat-checkbox formControlName="isPatio"></mat-checkbox></td>
+        <td *ngIf="isService()"><mat-checkbox formControlName="isIndoor"></mat-checkbox></td>
+        <td *ngIf="isService()"><mat-checkbox formControlName="isPatio"></mat-checkbox></td>
         <td><input type="text" formControlName="capacity" mask="0*"/></td>
         <td><button (click)="removeRow()" class="btn-clear"><i class="fa fa-minus-square danger"></i></button></td>
     </ng-container>
@@ -31,7 +31,7 @@ import { ServiceArea } from '@models/service-area.model';
   ]
 })
 export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceArea> implements ControlValueAccessor {
-  @Input() isIndoor: boolean;
+  @Input() areaCategory: number;
   @Input() index: number;
   @Input() onDelete: (index) => void;
   @Input() onRowChange: (val) => void;
@@ -44,6 +44,7 @@ export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceA
   constructor(private formBuilder: FormBuilder) {
     super();
     this.rowGroup = formBuilder.group({
+        areaCategory: [this.areaCategory],
         areaNumber: ['', [Validators.required]],
         areaLocation: ['', [Validators.required]],
         isIndoor: [''],
@@ -79,5 +80,9 @@ export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceA
       retVal['capacity'] = true;
     }
     return isNotValid && retVal;
+  }
+
+  isService(): boolean {
+    return this.areaCategory === AreaCategory.Service;
   }
 }

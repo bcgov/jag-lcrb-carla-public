@@ -745,9 +745,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // create application
                 adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
 
-                if (item.ServiceAreas.Count > 0)
+                if (item.ServiceAreas != null && item.ServiceAreas.Count > 0)
                 {
                     AddServiceAreasToApplication(item.ServiceAreas, adoxioApplication.AdoxioApplicationid);
+                }
+
+                if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
+                {
+                    AddServiceAreasToApplication(item.OutsideAreas, adoxioApplication.AdoxioApplicationid);
                 }
             }
             catch (HttpOperationException httpOperationException)
@@ -976,10 +981,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 RemoveServiceAreasFromApplication(item.Id);
-                if (item.ServiceAreas.Count > 0)
+                if (item.ServiceAreas != null && item.ServiceAreas.Count > 0)
                 {
                     AddServiceAreasToApplication(item.ServiceAreas, item.Id);
                 }
+                if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
+                {
+                    AddServiceAreasToApplication(item.OutsideAreas, item.Id);
+                }
+
                 _dynamicsClient.Applications.Update(id, adoxioApplication);
             }
             catch (HttpOperationException httpOperationException)
@@ -1170,6 +1180,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 MicrosoftDynamicsCRMadoxioServicearea serviceArea = new MicrosoftDynamicsCRMadoxioServicearea()
                 {
                     ApplicationOdataBind = applicationUri,
+                    AdoxioAreacategory = area.AreaCategory,
                     AdoxioArealocation = area.AreaLocation,
                     AdoxioAreanumber = area.AreaNumber,
                     AdoxioCapacity = area.Capacity,
