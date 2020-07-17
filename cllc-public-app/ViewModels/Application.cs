@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
@@ -26,7 +27,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Terminated = 845280009,
         [EnumMember(Value = "Terminated and Refunded")]
         TerminatedAndRefunded = 845280010,
-        
+
         Processed = 845280011,
         [EnumMember(Value = "Reviewing Inspection Results")]
         ReviewingInspectionResults = 845280012
@@ -335,6 +336,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Yes = 845280000,
         No = 845280001
     }
+    public enum Zoning
+    {
+        Allows = 845280000,
+        DoesNotAllow = 845280001
+    }
 
     public enum LGDecision
     {
@@ -518,6 +524,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonProperty(PropertyName = "lGApprovalDecision")]
         public LGDecision? LGApprovalDecision { get; set; }
 
+        [JsonProperty(PropertyName = "lGDecisionComments")]
+        public string LGDecisionComments { get; set; }
+
         [JsonProperty(PropertyName = "lGNameOfOfficial")]
         public string LGNameOfOfficial { get; set; }
 
@@ -534,6 +543,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? LGDecisionSubmissionDate { get; set; }
         public bool ResolutionDocsUploaded { get; set; }
 
-        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Zoning? LgZoning { get; set; }
+
+        public List<CapacityArea> ServiceAreas { get; set; }
+        public List<CapacityArea> OutsideAreas { get; set; }
     }
 }

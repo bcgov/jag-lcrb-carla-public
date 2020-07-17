@@ -744,6 +744,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // create application
                 adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
+
+                if (item.ServiceAreas != null && item.ServiceAreas.Count > 0)
+                {
+                    AddServiceAreasToApplication(item.ServiceAreas, adoxioApplication.AdoxioApplicationid);
+                }
+
+                if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
+                {
+                    AddServiceAreasToApplication(item.OutsideAreas, adoxioApplication.AdoxioApplicationid);
+                }
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -949,9 +959,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 // Indigenous nation association
-                if (!string.IsNullOrEmpty(item.IndigenousNationId))
+                if (!string.IsNullOrEmpty(item?.IndigenousNation?.Id))
                 {
-                    adoxioApplication.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", item.IndigenousNationId);
+                    adoxioApplication.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", item.IndigenousNation.Id);
                 }
                 else
                 {
@@ -960,14 +970,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 
                 // Police Jurisdiction association
-                if (!string.IsNullOrEmpty(item.PoliceJurisdictionId))
+                if (!string.IsNullOrEmpty(item?.PoliceJurisdiction?.id))
                 {
-                    adoxioApplication.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", item.PoliceJurisdictionId);
+                    adoxioApplication.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", item.PoliceJurisdiction.id);
                 }
                 else
                 {
                     //remove reference
                     await _dynamicsClient.Applications.DeleteReferenceAsync(item.Id, "adoxio_PoliceJurisdictionId");
+                }
+
+                RemoveServiceAreasFromApplication(item.Id);
+                if (item.ServiceAreas != null && item.ServiceAreas.Count > 0)
+                {
+                    AddServiceAreasToApplication(item.ServiceAreas, item.Id);
+                }
+                if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
+                {
+                    AddServiceAreasToApplication(item.OutsideAreas, item.Id);
                 }
 
                 _dynamicsClient.Applications.Update(id, adoxioApplication);
@@ -1140,6 +1160,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // if current user doesn't have an account they are probably not logged in
             return false;
+        }
+
+        private void RemoveServiceAreasFromApplication(string applicationId)
+        {
+            string filter = $"_adoxio_applicationid_value eq {applicationId}";
+            IList<MicrosoftDynamicsCRMadoxioServicearea> areas = _dynamicsClient.Serviceareas.Get(filter: filter).Value;
+            foreach (MicrosoftDynamicsCRMadoxioServicearea area in areas)
+            {
+                _dynamicsClient.Serviceareas.Delete(area.AdoxioServiceareaid);
+            }
+        }
+
+        private void AddServiceAreasToApplication(List<CapacityArea> areas, string applicationId)
+        {
+            string applicationUri = _dynamicsClient.GetEntityURI("adoxio_applications", applicationId);
+            foreach (CapacityArea area in areas)
+            {
+                MicrosoftDynamicsCRMadoxioServicearea serviceArea = new MicrosoftDynamicsCRMadoxioServicearea()
+                {
+                    ApplicationOdataBind = applicationUri,
+                    AdoxioAreacategory = area.AreaCategory,
+                    AdoxioArealocation = area.AreaLocation,
+                    AdoxioAreanumber = area.AreaNumber,
+                    AdoxioCapacity = area.Capacity,
+                    AdoxioIsindoor = area.IsIndoor,
+                    AdoxioIsoutdoor = area.IsOutdoor,
+                    AdoxioIspatio = area.IsPatio,
+                    AdoxioDateadded = DateTimeOffset.Now,
+                    AdoxioDateupdated = DateTimeOffset.Now
+                };
+                _dynamicsClient.Serviceareas.Create(serviceArea);
+            }
         }
     }
 }

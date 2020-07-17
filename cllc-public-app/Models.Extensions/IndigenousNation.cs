@@ -15,13 +15,13 @@ namespace Gov.Lclb.Cllb.Public.Models
             ViewModels.IndigenousNation result = null;
             if (item != null)
             {
-                result = new ViewModels.IndigenousNation();
-                if (item.AdoxioLocalgovindigenousnationid != null)
+                result = new ViewModels.IndigenousNation()
                 {
-                    result.id = item.AdoxioLocalgovindigenousnationid;
-                }
+                    Id = item.AdoxioLocalgovindigenousnationid,
+                    Name = item.AdoxioName
+                };
 
-                result.name = item.AdoxioName;
+
             }
             return result;
         }

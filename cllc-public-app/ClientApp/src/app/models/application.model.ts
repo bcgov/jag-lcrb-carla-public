@@ -3,6 +3,7 @@ import { License } from './license.model';
 import { Invoice } from './invoice.model';
 import { ApplicationType } from './application-type.model';
 import { TiedHouseConnection } from './tied-house-connection.model';
+import { ServiceArea } from './service-area.model';
 
 export class Application {
 
@@ -119,7 +120,11 @@ export class Application {
   lGContactEmail: string;
   lGApprovalDecision: string;
   lGDecisionSubmissionDate: Date;
+  lGDecisionComments: string;
   resolutionDocsUploaded: boolean;
+  lgZoning: string;
 
   applicant: Account;
+
+  serviceArea: ServiceArea[]
 }

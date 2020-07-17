@@ -12,8 +12,10 @@ namespace Gov.Lclb.Cllb.Interfaces
     {
         private string bcep_pay_url;
         private string bcep_merchid;
+        private string bcep_alt_merchid;
         private string bcep_hashkey;
         private string bcep_conf_url;
+       
 
         private const string SVC_VERSION = "1.0";
         private const int HASH_EXPIRY_TIME = 30;
@@ -38,10 +40,11 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         private static readonly HttpClient client = new HttpClient();
 
-        public BCEPWrapper(string pay_url, string merch_id, string hash_key, string conf_url)
+        public BCEPWrapper(string pay_url, string merch_id, string alt_merch_id, string hash_key, string conf_url)
         {
             this.bcep_pay_url = pay_url;
             this.bcep_merchid = merch_id;
+            this.bcep_alt_merchid = alt_merch_id;
             this.bcep_hashkey = hash_key;
             this.bcep_conf_url = conf_url;
         }
@@ -56,6 +59,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             this.bcep_hashkey = ut_hash_key;
         }
 
+        private string GetMerchId (bool isAlternateAccount)
+        {
+            string merchid;
+            if (isAlternateAccount)
+            {
+                merchid = this.bcep_alt_merchid;
+            }
+            else
+            {
+                merchid = this.bcep_merchid;
+            }
+            return merchid;
+        }
         /// <summary>
         /// GET a payment re-direct url for an Application
         /// </summary>
@@ -63,15 +79,17 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="applicationId">GUID of the Application to pay</param>
         /// <param name="amount">amount to pay (from invoice)</param>
         /// <returns></returns>
-        public string GeneratePaymentRedirectUrl(string orderNum, string applicationId, string amount, string confUrl = null)
+        public string GeneratePaymentRedirectUrl(string orderNum, string applicationId, string amount, bool isAlternateAccount, string confUrl = null)
         {
             if (confUrl == null)
             {
                 confUrl = bcep_conf_url;
             }
 
+            string merchid = GetMerchId(isAlternateAccount);
+
             // build the param string for the re-direct url
-            string paramString = BCEP_P_MERCH_ID + "=" + bcep_merchid +
+            string paramString = BCEP_P_MERCH_ID + "=" + merchid +
             "&" + BCEP_P_TRANS_TYPE +
             "&" + BCEP_P_ORDER_NUM + "=" + orderNum +
             "&" + BCEP_P_RESPONSE_PG + "=" + confUrl +
@@ -118,11 +136,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="orderNum">Order number (transaction id from invoice)</param>
         /// <param name="txnId">Bambora transaction id</param>
         /// <returns></returns>
-        public async Task<Dictionary<string, string>> ProcessPaymentResponse(string orderNum, string txnId)
+        public async Task<Dictionary<string, string>> ProcessPaymentResponse(string orderNum, string txnId, bool isAlternateAccount)
         {
             var txn = new BCEPTransaction();
 
-            var query_url = GetVerifyPaymentTransactionUrl(orderNum, txnId);
+            var query_url = GetVerifyPaymentTransactionUrl(orderNum, txnId, isAlternateAccount);
             Dictionary<string, string> responseDict = new Dictionary<string, string>();
             responseDict["query_url"] = query_url;
 
@@ -170,11 +188,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             return responseDict;
         }
 
-        public string GetVerifyPaymentTransactionUrl(string orderNum, string txnId)
+        public string GetVerifyPaymentTransactionUrl(string orderNum, string txnId, bool isAlternateAccount)
         {
+
+            string merchid = GetMerchId(isAlternateAccount);
+
             // build the param string for the re-direct url
             string paramString = BCEP_Q_REQUEST_TYPE +
-                "&" + BCEP_Q_MERCH_ID + "=" + bcep_merchid +
+                "&" + BCEP_Q_MERCH_ID + "=" + merchid +
                 "&" + BCEP_Q_TRANS_TYPE +
                 "&" + BCEP_Q_ORDER_NUM + "=" + orderNum;
 

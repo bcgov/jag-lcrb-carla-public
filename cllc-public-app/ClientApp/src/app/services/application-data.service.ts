@@ -74,7 +74,6 @@ export class ApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
-  
 
   /**
    * Cancel the Dynamics Application

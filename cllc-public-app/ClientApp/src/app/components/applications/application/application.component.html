@@ -6,7 +6,12 @@
       <div [formGroup]="form" style="padding-left: 45px; position: relative">
         <!-- Title -->
         <h1 class="ngtest-page-title" *ngIf="!this.isOpenedByLGForApproval">{{ htmlContent?.title }}</h1>
-        <h1 class="ngtest-page-title" *ngIf="this.isOpenedByLGForApproval">Provide Comment on Application</h1>
+        <h1 class="ngtest-page-title"
+          *ngIf="this.isOpenedByLGForApproval && application?.applicationType.isShowLGINApproval">Provide Comment on
+          Application</h1>
+        <h1 class="ngtest-page-title"
+          *ngIf="this.isOpenedByLGForApproval && application?.applicationType.isShowLGZoningConfirmation">Provide
+          Confirmation of Zoning</h1>
       </div>
 
       <div [formGroup]="form" class="application-wrapper">
@@ -28,6 +33,16 @@
         </h3>
         <section *ngIf="htmlContent?.beforeStarting" class="padded-section content-bottom">
           <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
+        </section>
+
+        <!-- Local Government advise -->
+        <section
+          *ngIf="form.get('indigenousNation').value.websiteUrl && showFormControl(application?.applicationType?.lGandPoliceSelectors) && form.get('assignedLicence.id').value"
+          appRemoveIfFeatureOff="LGApprovals">
+          Please review the information at
+          <a target="blank"
+            [href]="form.get('indigenousNation').value.websiteUrl">{{form.get('indigenousNation').value.websiteUrl}}</a>
+          to ensure you have met the requirements of this application with your local government.
         </section>
 
         <!-- Establishment Name -->
@@ -140,7 +155,8 @@
               *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
               <p *ngIf="application?.licenseType !== 'Rural Agency Store'">The proposed location of the licenced
                 establishment:</p>
-              <p *ngIf="application?.licenseType === 'Rural Agency Store'">Include any information necessary for finding the
+              <p *ngIf="application?.licenseType === 'Rural Agency Store'">Include any information necessary for finding
+                the
                 site (i.e. route number, mile marker, etc.).</p>
               <address class="row">
                 <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
@@ -210,6 +226,43 @@
                 <app-additional-pids *ngIf="application" [application]="application">
                 </app-additional-pids>
               </section>
+              <hr>
+
+                      <!-- Proof of Zoning-->
+              <section *ngIf="showZoning()">
+                <app-proof-of-zoning *ngIf="application" [application]="application" #proofOfZoning>
+                </app-proof-of-zoning>
+                <hr>
+              </section>
+
+              <!--app-field [valid]="isValidOrNotTouched('zoningPermitsMFG')" [showChevrons]="false"
+              errorMessage="Please confirm that the current zoning permits manufacturing on the manufacturing site"
+              [isFullWidth]="true" style="margin-left:10px;">
+              <mat-checkbox formControlName="zoningPermitsMFG">
+                By checking this box, I confirm that current zoning permits manufacturing on the manufacturing site.</mat-checkbox>
+            </app-field>
+            <hr-->
+            <!--app-field [valid]="isValidOrNotTouched('zoningPermitsRetailSales')" [showChevrons]="false"
+              errorMessage="Please confirm that the current zoning permits retail sales on the manufacturing site"
+              [isFullWidth]="true" style="margin-left:10px;">
+              <mat-checkbox formControlName="zoningPermitsRetailSales">
+                I confirm that current zoning permits retail sales on the manufacturing site.</mat-checkbox>
+            </app-field>
+            <hr-->
+            <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?" [valid]="isValidOrNotTouched('isALR')" [showChevrons]="false"
+            errorMessage="Specify ALR status" [isFullWidth]="true" *ngIf="application.licenseType === 'Manufacturer'">
+            <mat-radio-group formControlName="isALR">
+                <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
+                <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
+            </mat-radio-group>
+            </app-field>
+            <div *ngIf="this.form.get('isALR').value == 'Yes'">
+                <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
+                <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
+                    <p><strong>By submitting this application to LCRB, you are confirming that your licenced establishment will adhere to the requirements laid out in the <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019" target="_blank">Agriculral Land Reserve (ALR) Use Regulation</a>.</strong></p>
+                </div>
+            </div>
+
 
             </div>
 
@@ -219,33 +272,58 @@
 
               <h3 class="blue-header">Local Government/Indigenous Nation and Police Jurisdiction </h3>
               <div class="content-bottom">
-              <p>Enter the local government (or indigenous nation) and police jurisdiction where the establishment will be located. Suggestions will be provided after you type the first three characters of the name.</p>
+                <p>Enter the local government (or Indigenous Nation) and police jurisdiction where the establishment
+                  will be located. Suggestions will be provided after you type the first three characters of the name.
+                </p>
 
-              <app-field label="Local Government/Indigenous Nation" [required]="false"
-                [valid]="isValidOrNotTouched('indigenousNation')" errorMessage="Please select value">
-                <input type="text" class="form-control" style="width: 500px;" placeholder=""
-                  formControlName="indigenousNation" [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger>
-                <mat-autocomplete #lgAutoCompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
-                  <mat-option *ngFor="let item of autocompleteLocalGovernmemts" [value]="item">
-                    {{item.name}}
-                  </mat-option>
-                </mat-autocomplete>
-              </app-field>
-
-              <app-field label="Police Jurisdiction" [required]="false"
-                [valid]="isValidOrNotTouched('policeJurisdiction')" errorMessage="Please select value">
-                <input type="text" class="form-control" style="width: 500px;" placeholder=""
-                  formControlName="policeJurisdiction" [matAutocomplete]="pdAutocompleteBox" #pdAutoCompleteTrigger>
-                <div class="position-relative">
-
-                  <mat-autocomplete #pdAutocompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
-                    <mat-option *ngFor="let item of autocompletePoliceDurisdictions" [value]="item">
+                <app-field label="Local Government/Indigenous Nation" [required]="false"
+                  [valid]="isValidOrNotTouched('indigenousNation')" errorMessage="Please select value">
+                  <input type="text" class="form-control" style="width: 500px;" placeholder=""
+                    formControlName="indigenousNation" [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger>
+                  <mat-autocomplete #lgAutoCompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
+                    <mat-option *ngFor="let item of autocompleteLocalGovernmemts" [value]="item">
                       {{item.name}}
                     </mat-option>
                   </mat-autocomplete>
-                </div>
-              </app-field>
-            </div>
+                </app-field>
+                <section>
+                  <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+                  <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+                    <section *ngIf="form.get('indigenousNation').value.websiteUrl">
+                      <p><strong>Please review the information at
+                          <a target="blank"
+                            [href]="form.get('indigenousNation').value.websiteUrl">{{form.get('indigenousNation').value.websiteUrl}}</a>
+                          to ensure you meet the requirements of this application with your local government. You may
+                          need to contact them
+                          prior to submitting to ensure your successful submission.</strong></p>
+                    </section>
+
+                    <section
+                      *ngIf="!form.get('indigenousNation').value.id && !form.get('indigenousNation').value.websiteUrl">
+                      <p><strong>Please ensure you have made yourself familiar with the application requirements for
+                          this local
+                          government (or Indigenous Nation) prior to submitting your application. You may need to
+                          contact them prior to submitting to ensure your
+                          successful submission.</strong></p>
+                    </section>
+                  </div>
+                </section>
+
+                <br><br>
+                <app-field label="Police Jurisdiction" [required]="false"
+                  [valid]="isValidOrNotTouched('policeJurisdiction')" errorMessage="Please select value">
+                  <input type="text" class="form-control" style="width: 500px;" placeholder=""
+                    formControlName="policeJurisdiction" [matAutocomplete]="pdAutocompleteBox" #pdAutoCompleteTrigger>
+                  <div class="position-relative">
+
+                    <mat-autocomplete #pdAutocompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
+                      <mat-option *ngFor="let item of autocompletePoliceDurisdictions" [value]="item">
+                        {{item.name}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </div>
+                </app-field>
+              </div>
             </section>
 
             <!-- Store Contact Info -->
@@ -270,58 +348,8 @@
               </div>
               <p>&nbsp;</p>
             </section>
-            <!-- RAS Details -->
-            <section *ngIf="application?.licenseType === 'Rural Agency Store'">
-              <h3 class="blue-header">Rural Agency Store Details</h3>
-              <div class="content-bottom">
-                <p>Please provide the following details about your Rural Agency Store:</p>
-                <!-- RAS Certificate Number -->
-                <app-field label="Rural Agency Store Certificate Number:"
-                  errorMessage="Please enter a certificate number">
-                  <input type="text" class="form-control" style="width: 200px;" id="certNumber"
-                    formControlName="description1" mask="0009">
-                </app-field>
-
-                <section style="width:700px;">
-                  <div>
-                    <mat-checkbox formControlName="isOwner">
-                      This information is being submitted by the owner of the business in respect of which the licence
-                      is to be issued or will become the owner before the licence is issued.
-                    </mat-checkbox>
-                  </div>
-                  <div>
-                    <mat-checkbox formControlName="hasValidInterest">
-                      At the time of this information submission, the owner of the business is:
-                      <ul>
-                        <li>The owner of or has an agreement to purchase the place or premises that will form the
-                          proposed
-                          establishment, or</li>
-                        <li>The lessee or has a binding offer to lease the place or premises that will form the proposed
-                          establishment
-                        </li>
-                      </ul>
-                    </mat-checkbox>
-                  </div>
-                  <div>
-                    <mat-checkbox formControlName="willhaveValidInterest">
-                      At the time the licence is issued, the owner of the business will be:
-                      <ul>
-                        <li>The owner of the place or premises that forms the establishment, or</li>
-                        <li>The lessee of the place or premises that forms the establishment (term no less than 12 months).</li>
-                      </ul>
-                    </mat-checkbox>
-                  </div>
-                  <p>&nbsp;</p>
-                </section>
-              </div>
-
-            </section>
-
-          </section>
-        </section>
-
         <!-- Business Plan for Manufacturers-->
-        
+
         <section *ngIf="application?.applicationType?.name === 'Manufacturer'">
           <app-business-plan *ngIf="application" [application]="application">
           </app-business-plan>
@@ -394,8 +422,8 @@
                         [required]="formField.required">
                         <input type="text" style="width: 200px; background-color: #fff;"
                           [formControlName]="formField.datafieldname" [id]="formField.datafieldname"
-                          placeholder="yyyy-mm-dd" readonly class="form-control"
-                          [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
+                          placeholder="yyyy-mm-dd" readonly class="form-control" [matDatepicker]="picker"
+                          (focus)="picker.open()" (click)="picker.open()">
                         <mat-datepicker #picker></mat-datepicker>
                       </app-field>
 
@@ -449,25 +477,26 @@
         <section *ngIf="application?.applicationType?.showDescription1">
           <h3 class="blue-header">DESCRIPTION OF PROPOSED CHANGE</h3>
           <div *ngIf="application?.applicationType?.name != 'Picnic Area Endorsement'">
-          <div class="padded-section">
-            <app-field label="Please briefly outline the  proposed change" [required]="true" [isFullWidth]="true"
-              [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
-              errorMessage="Please enter a description ">
-              <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000" minlength="10"
-                id="description1"></textarea>
-            </app-field>
+            <div class="padded-section">
+              <app-field label="Please briefly outline the  proposed change" [required]="true" [isFullWidth]="true"
+                [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
+                errorMessage="Please enter a description ">
+                <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000" minlength="10"
+                  id="description1"></textarea>
+              </app-field>
+            </div>
           </div>
-        </div>
-        <div *ngIf="application?.applicationType?.name === 'Picnic Area Endorsement'">
-          <div class="padded-section">
-            <app-field label="Describe proposed change(s) such as moving, adding or changing approved picnic area(s). Including any increase in capacity." [required]="true" [isFullWidth]="true"
-              [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
-              errorMessage="Please enter a description ">
-              <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000" minlength="10"
-                id="description1"></textarea>
-            </app-field>
+          <div *ngIf="application?.applicationType?.name === 'Picnic Area Endorsement'">
+            <div class="padded-section">
+              <app-field
+                label="Describe proposed change(s) such as moving, adding or changing approved picnic area(s). Including any increase in capacity."
+                [required]="true" [isFullWidth]="true" [showChevrons]="false"
+                [valid]="isValidOrNotTouched('description1')" errorMessage="Please enter a description ">
+                <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000" minlength="10"
+                  id="description1"></textarea>
+              </app-field>
+            </div>
           </div>
-        </div>
         </section>
 
         <!-- Photos or Renderings of Signage-->
@@ -476,23 +505,29 @@
           <label for="">Photos or renderings of the store's signage</label>
           <br>
           <section *ngIf="application?.applicationType?.signage === FormControlState.Show">
-
-            <p>
-              The signage submitted must show the name of the store and all words, images and symbols used in the
-              signage.
-            </p>
-
-            <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-              Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis (e.g. a
-              green cross). It must not imply an association with another business (other than another non-medical
-              cannabis
-              retail store).
-            </p>
-            <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-              <b>Note:</b> If submitting renderings, renderings may be either printed or hand-drawn (as long as they are
-              legible)
-            </p>
-
+        
+            <div *ngIf="htmlContent.signage">
+              <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.signage"></section>
+            </div>
+        
+            <div *ngIf="!htmlContent.signage">
+              <p>
+                The signage submitted must show the name of the store and all words, images and symbols used in the
+                signage.
+              </p>
+        
+              <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+                Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis (e.g. a
+                green cross). It must not imply an association with another business (other than another non-medical
+                cannabis
+                retail store).
+              </p>
+              <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+                <b>Note:</b> If submitting renderings, renderings may be either printed or hand-drawn (as long as they are
+                legible)
+              </p>
+            </div>
+        
           </section>
 
           <p *ngIf="application?.applicationType?.signage === FormControlState.Reaonly">
@@ -500,9 +535,8 @@
             the store's signage are on file.
           </p>
           <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Signage" [disableUploads]="isOpenedByLGForApproval"
-              [enableFileDeletion]="!isOpenedByLGForApproval"
-              [enableFileDeletion]="application?.applicationType?.signage === FormControlState.Show"
+            <app-file-uploader *ngIf="applicationId" documentType="Signage" [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+              [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
               [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
               entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
               (numberOfUploadedFiles)="uploadedSignageDocuments = $event" [entityId]="applicationId"
@@ -589,85 +623,107 @@
           </p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Valid Interest"
-              fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval"
-              [enableFileDeletion]="application?.applicationType?.validInterest === FormControlState.Show"
-              [enableFileDeletion]="!isOpenedByLGForApproval" [multipleFiles]="false" entityName="application"
+              fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+              [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="false" entityName="application"
               [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedValidInterestDocuments = $event"
               [entityId]="applicationId" [uploadHeader]="'TO UPLOAD OWNERSHIP OR LEASE DOCUMENTS, DRAG FILES HERE OR'">
             </app-file-uploader>
           </section>
         </div>
 
-        <div class="ngtest-floor-plan" *ngIf="showFormControl(application?.applicationType?.floorPlan)">
-          <hr><br>
-          <label for="">Floor Plan</label>
-          <br>
-          <section *ngIf="application?.applicationType?.floorPlan === FormControlState.Show">
+        <!-- Floor Plan-->
 
-            <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-              <span>
-                A floor plan is a document, showing a view from above, of the dimensions and relationships between
-                rooms, spaces and other physical features on each floor of a structure. The document must measure at
-                least 8.5" x 11" (standard letter size). A floor plan for each level of the establishment must be
-                submitted if the proposed establishment has more than one level. Either a hand-drawn or
-                computer-generated plan is acceptable, as long as the plan is drawn to scale and is clear and legible. A
-                floor plan must not be submitted on graph paper or paper with gridlines.
-              </span>
-              <div style="display: flex; margin-top: 10px;">
-                <section>
-                  The floor plan must be submitted at the time of application and it
-                  must identify the proposed non-medical cannabis retail area(s) plus
-                  the following interior features of the establishment:
-                  <ul>
-                    <li>Each room or area labeled with its intended use and dimensions.</li>
-                    <li>Washrooms, stairs and elevators.</li>
-                    <li>Entrances and exits (including those used by staff only).</li>
-                    <li>Cannabis storage areas.</li>
-                    <li>Sales counter and cash register locations.</li>
-                    <li>Furniture and fixture layout (e.g. shelves, display cases).</li>
-                    <li>Identify the security system and other physical security features that secure the store.</li>
-                  </ul>
-                  <p><strong>Please confirm:</strong></p>
-                  <mat-checkbox formControlName="IsReadyProductNotVisibleOutside">
-                    No cannabis products, accessories, packages or labelling are visible from outside the cannabis retail store
-                  </mat-checkbox>
-                </section>
-                <img src="assets/floor-plan-example.png" width="300" alt="Floor plan"
-                  style="margin: auto; display: block;">
+        <section *ngIf="showFormControl(application?.applicationType?.floorPlan)">
+          <div class="ngtest-floor-plan" [formGroup]="form">
+            <hr><br>
+            <label for="">Floor Plan</label>
+            <br>
+            <section>
+
+              <!-- if there is configured floor plan text, show it-->
+              <div *ngIf="htmlContent.floorPlan">
+                <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.floorPlan"></section>
               </div>
 
-            </div>
-            <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
-              <p>The floor plans of the proposed establishment, which must meet the following requirements: </p>
-              <ul>
-                <li>Must be scaled, clear, legible and include room size dimensions (8.5" x 11") </li>
-                <li *ngIf="isRAS()">detail the entire premises in which the business is located, including the area
-                  where liquor will be located, entrances, exits, washrooms, storage areas, cash register area, coolers,
-                  any adjoining doors and other fixtures</li>
-                <li *ngIf="isRAS()">clearly identify any adjoining areas</li>
-                <li *ngIf="!isRAS()">Provide room size dimensions </li>
-                <li *ngIf="!isRAS()">
-                  Detail entrance, exit, washrooms, storage area, cash register area, coolers, any adjoining doors and
-                  other fixtures
-                </li>
-                <li *ngIf="!isRAS()">Clearly identify the area proposed for licensing and any adjoining unlicensed areas
-                </li>
-              </ul>
-            </div>
-          </section>
-          <p *ngIf="application?.applicationType?.floorPlan === FormControlState.Reaonly">
-            The below floor plan is on file.
-          </p>
-          <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Floor Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
-              [disableUploads]="isOpenedByLGForApproval"
-              [enableFileDeletion]="application?.applicationType?.floorPlan === FormControlState.Show"
-              [enableFileDeletion]="!isOpenedByLGForApproval" [multipleFiles]="true" entityName="application"
-              [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedFloorPlanDocuments = $event"
-              [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FLOOR PLANS, DRAG FILES HERE OR'">
-            </app-file-uploader>
-          </section>
-        </div>
+              <!-- otherwise switch to legacy mode-->
+              <div *ngIf="!htmlContent.floorPlan">
+                <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+                  <span>
+                    A floor plan is a document, showing a view from above, of the dimensions and relationships between
+                    rooms, spaces and other physical features on each floor of a structure. The document must measure at
+                    least 8.5" x 11" (standard letter size). A floor plan for each level of the establishment must be
+                    submitted if the proposed establishment has more than one level. Either a hand-drawn or
+                    computer-generated plan is acceptable, as long as the plan is drawn to scale and is clear and
+                    legible. A
+                    floor plan must not be submitted on graph paper or paper with gridlines.
+                  </span>
+                  <div style="display: flex; margin-top: 10px;">
+                    <section>
+                      The floor plan must be submitted at the time of application and it
+                      must identify the proposed non-medical cannabis retail area(s) plus
+                      the following interior features of the establishment:
+                      <ul>
+                        <li>Each room or area labeled with its intended use and dimensions.</li>
+                        <li>Washrooms, stairs and elevators.</li>
+                        <li>Entrances and exits (including those used by staff only).</li>
+                        <li>Cannabis storage areas.</li>
+                        <li>Sales counter and cash register locations.</li>
+                        <li>Furniture and fixture layout (e.g. shelves, display cases).</li>
+                        <li>Identify the security system and other physical security features that secure the store.
+                        </li>
+                      </ul>
+                      <p><strong>Please confirm:</strong></p>
+                      <mat-checkbox formControlName="IsReadyProductNotVisibleOutside">
+                        No cannabis products, accessories, packages or labelling will be visible from outside the
+                        cannabis retail store
+                      </mat-checkbox>
+                    </section>
+                    <img src="assets/floor-plan-example.png" width="300" alt="Floor plan"
+                      style="margin: auto; display: block;">
+                  </div>
+
+                </div>
+                <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
+                  <p>The floor plans of the proposed establishment, which must meet the following requirements: </p>
+                  <ul>
+                    <li>Must be scaled, clear, legible and include room size dimensions (8.5" x 11") </li>
+                    <li *ngIf="isRAS()">detail the entire premises in which the business is located, including the area
+                      where liquor will be located, entrances, exits, washrooms, storage areas, cash register area,
+                      coolers,
+                      any adjoining doors and other fixtures</li>
+                    <li *ngIf="isRAS()">clearly identify any adjoining areas</li>
+                    <li *ngIf="!isRAS()">Provide room size dimensions </li>
+                    <li *ngIf="!isRAS()">
+                      Detail entrance, exit, washrooms, storage area, cash register area, coolers, any adjoining doors
+                      and
+                      other fixtures
+                    </li>
+                    <li *ngIf="!isRAS()">Clearly identify the area proposed for licensing and any adjoining unlicensed
+                      areas
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+            </section>
+            <p *ngIf="application?.applicationType?.floorPlan === FormControlState.Reaonly">
+              The below floor plan is on file.
+            </p>
+            <section>
+              <app-file-uploader *ngIf="application?.id" documentType="Floor Plan"
+                fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true" entityName="application"
+                [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedFloorPlanDocuments = $event"
+                [entityId]="application?.id" [uploadHeader]="'TO UPLOAD FLOOR PLANS, DRAG FILES HERE OR'">
+              </app-file-uploader>
+            </section>
+          </div>
+        </section>
+
+        <!--  Proposed Change Description for Structural-->
+
+
+
         <br>
         <hr *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSStructuralChange">
         <mat-card *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSStructuralChange"
@@ -691,112 +747,49 @@
           <hr><br>
           <label for="">Site Plan</label>
           <br>
-          <div *ngIf="application?.applicationType?.sitePlan === FormControlState.Show">
 
-            <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-              <span>
-                A site plan is a document showing any existing and proposed building footprints, pathways of
-                travel, parking, and landscaping elements, and the surrounding area. The document must measure at least
-                8.5" x 11" (standard letter size). Either a hand-drawn or computer-generated plan is acceptable, as long
-                as the plan is drawn to scale and is clear and legible. A site plan must not be submitted on graph paper
-                or paper with gridlines.
-              </span>
-              <div class="row" style="margin-top: 10px;">
-                <div class="col-md-6">
-                  <p>
-                    The site plan must include the proposed store footprint and a representation of any interior or
-                    exterior spaces surrounding the store, including:
-                  </p>
-
-                  <ul>
-                    <li>
-                      The location of any other buildings/businesses on the same site, each building footprint, type
-                      of businesses (e.g. gas station, office building) and building names, and their entrances and
-                      exits
-                    </li>
-                    <li>A description of the type of separation proposed (for any adjoining businesses)</li>
-                    <li>Road access and exits, including any relevant street names</li>
-                    <li>Parking lots.</li>
-                  </ul>
-                  <img src="assets/site-plan-example.png" width="350" alt="Site plan"
-                    style="margin: auto; display: block;">
-                </div>
-                <div class="col-md-6">
-                  <p>
-                    If the proposed store is located inside a building with other businesses
-                    (e.g. a mall), submit two site plans:
-                  </p>
-                  <p>
-                    1) One site plan showing location of any other buildings/businesses on the same site, including:
-                  </p>
-                  <ul>
-                    <li>
-                      Each building footprint, building name and a list of businesses operating inside the building
-                    </li>
-                    <li>Road access and exits, including any relevant street names, and</li>
-                    <li>Parking lots</li>
-                  </ul>
-                  <p>
-                    2) A second site plan showing the location of the proposed store
-                    inside the building’s footprint:
-                  </p>
-                  <ul>
-                    <li>All entrances and exits for the building</li>
-                    <li>The location, name and type of businesses operating inside the building</li>
-                    <li>The store footprint with all entrances and exits for the store, and</li>
-                    <li>
-                      A description of the type of separation proposed for any business adjoining the proposed store
-                    </li>
-                  </ul>
-                  <p>
-                    Full height walls are required for separation and no connecting doors between the cannabis retail
-                    store
-                    and
-                    the neighbouring business are permitted.
-                  </p>
-                  <p>
-                    The cannabis retail store may share a vestibule with another type of business (e.g. a liquor store
-                    or
-                    grocery
-                    store) provided each business has its own controlled entrance within the vestibule. The cannabis
-                    retail
-                    store
-                    cannot share a vestibule with a business that would be contrary to public interest (i.e. business
-                    aimed
-                    at
-                    minors or a liquor consumption business).
-                  </p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div *ngIf="application?.licenseType != 'Cannnabis Retail Store' && application?.applicationType?.name != 'Picnic Area Endorsement'">
+          <!-- show the configured content if there is some-->
+          <section *ngIf="htmlContent?.sitePlan">
+            <div class="ngtest-before-SitePlan-content" [innerHTML]="htmlContent.sitePlan"></div>
+          </section>
+          <!--  otherwise should a standard-ish block-->
+          <section *ngIf="!htmlContent?.sitePlan">
             <p>A scaled site plan must show the following: </p>
             <ul>
               <li>location of the front entrance door of the proposed establishment</li>
-              <li>
-                any other buildings/businesses around the proposed establishment and the entrances to those buildings
-              </li>
+              <li>any other buildings/businesses around the proposed establishment and the entrances to those buildings</li>
               <li>any relevant street names</li>
             </ul>
-          </div>
-          <div *ngIf="application?.applicationType?.name === 'Picnic Area Endorsement'">
-            <p>Please provide a site plan (8.5" x 11") of your property showing the location and size of the existing and/or proposed picnic area(s) and the following:</p>
-            <ul>
-              <li>all buildings and their uses (i.e. storage, manufacturing buildings, personal residence, garage, other businesses, etc.)</li>
-              <li>all licensed areas (other endorsements or licences approved by the Branch)</li>
-              <li>vineyards/orchards/agricultural crops</li>
-              <li>private and public roadways and parking areas</li>
-              <li>any neighbouring residences within 50 metres of the proposed picnic area(s)</li>
-            </ul>
-          </div>
-
+          </section>
+        
+            <!-- Cannabis Retail Store has an additional image-->
+            <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+              <img src="assets/site-plan-example.png" width="350" alt="Site plan" style="margin: auto; display: block;">
+              <p>If the proposed store is located inside a building with other businesses (e.g. a mall), submit two site plans:</p>
+              <p>1) One site plan showing location of any other buildings/businesses on the same site, including:</p>
+              <ul>
+                <li>Each building footprint, building name and a list of businesses operating inside the building</li>
+                <li>Road access and exits, including any relevant street names, and</li>
+                <li>Parking lots</li>
+              </ul>
+              <p>2) A second site plan showing the location of the proposed store inside the building’s footprint:</p>
+              <ul>
+                <li>All entrances and exits for the building</li>
+                <li>The location, name and type of businesses operating inside the building</li>
+                <li>The store footprint with all entrances and exits for the store, and</li>
+                <li>A description of the type of separation proposed for any business adjoining the proposed store</li>
+              </ul>
+              <p>Full height walls are required for separation and no connecting doors between the cannabis retail
+                store and the neighbouring business are permitted.</p>
+              <p>The cannabis retail store may share a vestibule with another type of business (e.g. a liquor store
+                or grocery store) provided each business has its own controlled entrance within the vestibule. The cannabis
+                retail store  cannot share a vestibule with a business that would be contrary to public interest (i.e. business
+                aimed at minors or a liquor consumption business).</p>
+            </div>
+         
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Site Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
-              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-              [enableFileDeletion]="application?.applicationType?.sitePlan === FormControlState.Show"
+              [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
               [multipleFiles]="true" entityName="application" [useDocumentTypeForName]="true"
               (numberOfUploadedFiles)="uploadedSitePlanDocuments = $event" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD SITE PLAN DOCUMENTS, DRAG FILES HERE OR'">
@@ -805,14 +798,17 @@
         </div>
 
         <div *ngIf="showSitePhotos()">
-          
+
           <hr><br>
-          <label for="">Attach a photo of the proposed picnic area(s), including the bounding (if in place):</label>
+          <label for="">Exterior Photos</label>
+
+          <section *ngIf="htmlContent?.sitePhotos" class="padded-section content-bottom">
+            <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.sitePhotos"></div>
+          </section>
 
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Site Photos" fileTypes="FILE MUST BE IN PDF FORMAT."
-              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-              [enableFileDeletion]="application?.applicationType?.showSitePhotos === FormControlState.Show"
+              [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
               [multipleFiles]="true" entityName="application" [useDocumentTypeForName]="true"
               (numberOfUploadedFiles)="uploadedSitePhotos = $event" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD SITE PHOTOS DOCUMENTS, DRAG FILES HERE OR'">
@@ -821,31 +817,7 @@
 
         </div>
 
-        <div class="ngtest-photos-renderings"
-          *ngIf="showExteriorRenderings() || (application?.licenseType != 'Cannabis Retail Store' && application?.applicationType?.sitePlan === FormControlState.Show)">
-          <hr>
-          <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-            Photos or renderings of the store's
-            proposed exterior changes
-          </label>
-          <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store'">Photographs</label>
-          <br>
-          <section>
-
-            <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-              <ul>
-                <li>Must show that cannabis is not visible from outside the store</li>
-                <li>
-                  If submitting photos, the photos must be taken specifically for the purpose of the application (not
-                  general/stock images) and must be no more than six months old
-                </li>
-                <li>
-                  If submitting renderings, renderings may be either printed or hand-drawn (as long as they are
-                  legible)
-                </li>
-              </ul>
-            </div>
-            <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
+        <!--div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
               <p>
                 <u>
                   Provide a minimum four (4) colour photographs of the proposed site, one facing each side of the
@@ -856,21 +828,7 @@
                 These photos need to be current (taken by the licensee or representative within the past 90 days).
                 Pictures from internet sites will not be accepted.
               </p>
-            </div>
-
-          </section>
-
-          <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Exterior Photos or Renderings"
-              [enableFileDeletion]="!isOpenedByLGForApproval" [enableFileDeletion]="true"
-              [useDocumentTypeForName]="true" [disableUploads]="isOpenedByLGForApproval"
-              fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
-              [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
-              (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
-              [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF THE STORE EXTERIOR, DRAG FILES HERE OR'">
-            </app-file-uploader>
-          </section>
-        </div>
+            </div-->
 
         <div class="ngtest-grocery-store" *ngIf="showGroceryQuestion()">
           <hr>
@@ -923,8 +881,8 @@
             </section>
             <section>
               <app-file-uploader *ngIf="applicationId" documentType="Grocery Declaration"
-                [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-                fileTypes="FILE MUST BE IN PDF FORMAT." [enableFileDeletion]="true" [multipleFiles]="false"
+                [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
+                fileTypes="FILE MUST BE IN PDF FORMAT."  [multipleFiles]="false"
                 entityName="application" [useDocumentTypeForName]="true"
                 (numberOfUploadedFiles)="uploadedGroceryDocuments = $event" [entityId]="applicationId"
                 [uploadHeader]="'TO UPLOAD GROCERY DECLARATION, DRAG FILES HERE OR'">
@@ -935,34 +893,25 @@
 
         </div>
 
-        <div class="ngtest-zoning" *ngIf="showZoning()">
-          <hr>
-          <label for="">Proof of Zoning</label>
-          <br>
-          <section>
-            <p>Please provide proof from your local government that the proposed location has been:</p>
-            <ul>
-              <li>appropriately zoned to operate a {{application?.licenseType}} licence, or</li>
-              <li>is in the process of being appropriately zoned</li>
-            </ul>
-            <p>
-              You are responsible for obtaining the appropriate zoning from your local
-              government to operate a {{application?.licenseType}} licence at your proposed location.
-              Prior to issuing a licence at the new location, LCRB will require confirmation
-              from your local government that the location is zoned appropriately to operate
-              a WS licence.
-            </p>
-          </section>
-          <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Zoning" fileTypes="FILE MUST BE IN PDF FORMAT."
-              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-              [enableFileDeletion]="application?.applicationType?.proofofZoning === FormControlState.Show"
-              [multipleFiles]="false" entityName="application" [useDocumentTypeForName]="true"
-              (numberOfUploadedFiles)="uploadedZoningDocuments = $event" [entityId]="applicationId"
-              [uploadHeader]="'TO UPLOAD ZONING DOCUMENTS, DRAG FILES HERE OR'">
-            </app-file-uploader>
-          </section>
-        </div>
+        <!-- Service Area -->
+        <h3 class="blue-header" *ngIf="application.applicationType.serviceAreas" >SERVICE AREAS</h3>
+        <section *ngIf="application.applicationType.serviceAreas" class="padded-section content-bottom">
+          <div *ngIf="htmlContent?.serviceArea" [innerHTML]="htmlContent.serviceArea"></div>
+          <app-field [valid]="!showValidationMessages || form.get('serviceAreas').valid"
+              errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
+            <app-capacity-table formControlName="serviceAreas" [areaCategory]="getAreaCategoryNumber('Service')"></app-capacity-table>
+          </app-field>
+        </section>
+
+        <!-- Outside Area -->
+        <h3 class="blue-header" *ngIf="application.applicationType.outsideAreas" >OUTSIDE AREAS</h3>
+        <section *ngIf="application.applicationType.outsideAreas" class="padded-section content-bottom">
+          <div *ngIf="htmlContent?.outsideAreas" [innerHTML]="htmlContent.outsideAreas"></div>
+          <app-field [valid]="!showValidationMessages || form.get('outsideAreas').valid"
+              errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
+            <app-capacity-table formControlName="outsideAreas" [areaCategory]="getAreaCategoryNumber('OutsideArea')"></app-capacity-table>
+          </app-field>
+        </section>
 
         <!-- Hours of Sale -->
         <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
@@ -1152,7 +1101,7 @@
           <p>Upload the completed form below.</p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"
-              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
+              [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
               (numberOfUploadedFiles)="uploadedAssociateDocuments = $event" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
@@ -1173,7 +1122,7 @@
           <p>Upload the completed form below.</p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-              [enableFileDeletion]="!isOpenedByLGForApproval" [disableUploads]="isOpenedByLGForApproval"
+              [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
               (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
@@ -1277,7 +1226,7 @@
 
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
-              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
+              [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
               (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [maxNumberOfFiles]="200"
               fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
               [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #supportingDocuments>
@@ -1286,6 +1235,58 @@
           <br>
         </section>
 
+        </section>
+                    <!-- RAS Details -->
+            <!--section *ngIf="showFormControl(application?.applicationType.ow"-->
+            <section *ngIf="application.licenseType === 'Manufacturer'">
+              <h3 class="blue-header">{{this.application?.licenseType}} Ownership Details</h3>
+              <div class="content-bottom">
+                <p>Please provide the following details about your application:</p>
+
+                <!-- RAS Certificate Number -->
+                <app-field label="Rural Agency Store Certificate Number:"
+                  errorMessage="Please enter a certificate number" *ngIf="this.application?.licenseType === 'Rural Agency Store'">
+                  <input type="text" class="form-control" style="width: 200px;" id="certNumber"
+                    formControlName="description1" mask="0009">
+                </app-field>
+
+                <section>
+                  <div>
+                    <mat-checkbox formControlName="isOwner">
+                      This information is being submitted by the owner of the business in respect of which the licence
+                      is to be issued or will become the owner before the licence is issued.
+                    </mat-checkbox>
+                  </div>
+                  <div>
+                    <mat-checkbox formControlName="hasValidInterest">
+                      At the time of this submission, the owner of the business is:
+                      <ul>
+                        <li>The owner of or has an agreement to purchase the place or premises that will form the
+                          proposed
+                          establishment, or</li>
+                        <li>The lessee or has a binding offer to lease the place or premises that will form the proposed
+                          establishment
+                        </li>
+                      </ul>
+                    </mat-checkbox>
+                  </div>
+                  <div>
+                    <mat-checkbox formControlName="willhaveValidInterest">
+                      At the time the licence is issued, the owner of the business will be:
+                      <ul>
+                        <li>The owner of the place or premises that forms the establishment, or</li>
+                        <li>The lessee of the place or premises that forms the establishment (term no less than 12
+                          months).</li>
+                      </ul>
+                    </mat-checkbox>
+                  </div>
+                </section>
+              </div>
+
+            </section>
+
+          </section>
+        
 
         <!-- Contact Details -->
         <h3 class="blue-header" *ngIf="!isRAS()">APPLICATION CONTACT DETAILS</h3>
@@ -1521,9 +1522,8 @@
           </p>
         </section>
 
-
-
         <!-- Next Steps -->
+
         <h3 *ngIf="htmlContent?.nextSteps" class="blue-header">
           What happens next?
         </h3>
@@ -1533,7 +1533,8 @@
 
         <!-- Proceed to Pay-->
 
-        <section class="d-flex" style="margin-top:15px;" *ngIf="!isOpenedByLGForApproval && !isRAS()">
+        <section class="d-flex" style="margin-top:15px;"
+          *ngIf="!isOpenedByLGForApproval && !isRAS() && !application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation ">
 
           <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
@@ -1577,13 +1578,44 @@
           </div>
         </section>
 
-        <section appRemoveIfFeatureOff="LGApprovals" class="ngtest-opened-by-lg" *ngIf="isOpenedByLGForApproval">
-          <app-lg-in-confirmation-of-receipt *ngIf="application" [application]="application">
+        <section appRemoveIfFeatureOff="LGApprovals" class="ngtest-opened-by-lg"
+          *ngIf="isOpenedByLGForApproval || lgApprovalDecisionMade() || lgHasReviewedZoning()">
+          <app-lg-in-confirmation-of-receipt
+            *ngIf="application && application?.applicationType?.isShowLGINApproval  || lgApprovalDecisionMade()"
+            [application]="application" [htmlContent]="htmlContent" [disableForm]="lgApprovalDecisionMade()">
           </app-lg-in-confirmation-of-receipt>
+          <app-lg-zoning-confirmation
+            *ngIf="application?.applicationType?.isShowLGZoningConfirmation || lgHasReviewedZoning()"
+            [disableForm]="lgHasReviewedZoning()" [application]="application"></app-lg-zoning-confirmation>
+        </section>
+
+        <section *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
+                && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')">
+          <br>
+          <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+          <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+            <section class="ngtest-preamble-content">
+              Your application will now be submitted to your local government/Indigenous Nation for their
+              <span *ngIf="application?.applicationType.isShowLGINApproval">comment and assessment</span>
+              <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">confirmation of zoning</span>.
+              Please
+              ensure
+              you have reviewed
+              their policy <span *ngIf="form.get('indigenousNation').value.websiteUrl">(<a
+                  [href]="form.get('indigenousNation').value.websiteUrl"
+                  target="_blank">{{this.form.get('indigenousNation').value.websiteUrl}}</a>)</span>
+              to ensure your successful submission.
+            </section>
+            <br>
+            <p><i class="fa fa-save" style="margin-right: 10px;"></i>If you leave this page, the information you input
+              will be saved. You can continue later from the dashboard.</p>
+          </div>
         </section>
 
 
+
         <!-- button section when  LGApprovals is enabled  when it's the applicant opening the application -->
+
         <section appRemoveIfFeatureOff="LGApprovals" *ngIf="!isOpenedByLGForApproval"
           style="position: relative; margin-top: 20px;">
           <button *ngIf="account?.businessType !== 'LocalGovernment '" class="btn btn-secondary"
@@ -1595,24 +1627,32 @@
           </button>
 
           <!-- show if LG approval is not required -->
-          <button *ngIf="!application?.applicationType?.isShowLGINApproval" class="btn btn-primary"
-            (click)="submit_application()">
+          <button
+            *ngIf="!application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation"
+            class="btn btn-primary" (click)="submit_application()">
             SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
           </button>
 
           <!-- show before submitting to LG. Also show if LG rejected the application -->
-          <button *ngIf="application?.applicationType?.isShowLGINApproval 
+          <button
+            *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
                         && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')"
-            class=" btn btn-primary" (click)="submitForLGINApproval()">
-            Submit For LG/IN Approval
+            class=" btn btn-primary" [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval();">
+            SUBMIT FOR LG/IN REVIEW OR COMMENT
           </button>
 
           <!-- show if the LG has approved the application -->
-          <button
-            *ngIf="application?.applicationType?.isShowLGINApproval && application?.lGApprovalDecision === 'Approved'"
-            class=" btn btn-primary" (click)="proceedToSecurityScreening()">
-            Proceed to Security Screening
-          </button>
+          <ng-container  *ngIf="lGHasApproved()">
+            <button *ngIf="application?.applicationType?.requiresSecurityScreening"
+              class=" btn btn-primary" (click)="proceedToSecurityScreening()">
+              Proceed to Security Screening
+            </button>
+
+            <button *ngIf="!application?.applicationType?.requiresSecurityScreening"
+              class=" btn btn-primary" (click)="submit_application()">
+              SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
+            </button>
+          </ng-container>
 
           <span style="float: right; color: #1a5a96; padding-top: 10px;">
             <span (click)="cancelApplication()">
@@ -1694,7 +1734,7 @@
           <p>Upload the completed form below.</p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"
-              [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+              [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
               entityName="application" (numberOfUploadedFiles)="uploadedAssociateDocuments = $event"
               [enableFileDeletion]="false" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
@@ -1713,7 +1753,7 @@
           <p>Upload the completed form below.</p>
           <section>
             <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-              [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+              [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
               entityName="application" (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
               [enableFileDeletion]="false" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
@@ -1813,7 +1853,7 @@
         </section>
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
-            [disableUploads]="isOpenedByLGForApproval" fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT."
+            [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT."
             entityName="application" [entityId]="applicationId" [maxNumberOfFiles]="200"
             (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
             [enableFileDeletion]="false" #supportingDocuments>
@@ -1860,14 +1900,14 @@
   <div class="dashboard-spacing" style="position: relative" appRemoveIfFeatureOff="IndigenousNation">
     <div [ngBusy]="busy"></div>
     <div class="row">
-      <div class="col-md-7 col-sm-12">        
+      <div class="col-md-7 col-sm-12">
         <ng-container *ngTemplateOutlet="applicationContent"></ng-container>
       </div>
 
       <div class="col-md-4 col-sm-12">
         <h1>&nbsp;</h1>
 
-        <ng-container  *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
+        <ng-container *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
           <ng-container *ngTemplateOutlet="indigenousContent"></ng-container>
         </ng-container>
 
@@ -1876,7 +1916,7 @@
           </app-lg-info-panel>
         </section>
 
-        </div>
+      </div>
     </div>
   </div>
 

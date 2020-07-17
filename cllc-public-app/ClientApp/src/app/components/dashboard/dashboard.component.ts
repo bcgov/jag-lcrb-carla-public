@@ -33,10 +33,7 @@ export class DashboardComponent extends FormBase implements OnInit {
     private licenseDataService: LicenseDataService,
     private applicationDataService: ApplicationDataService) {
     super();
-    this.licenseDataService.getAllCurrentLicenses()
-    .subscribe(licences => {
-      this.hasLicence = licences.length > 0;
-    });
+   
   }
 
   ngOnInit(): void {
@@ -44,25 +41,39 @@ export class DashboardComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((account) => {
         this.account = account;
-      });
 
-    this.store.select((state) => state.indigenousNationState.indigenousNationModeActive)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((active) => {
-        this.indigenousNationModeActive = active;
-      });
+        if (this.account && this.account.id) {
+          this.licenseDataService.getAllCurrentLicenses()
+            .subscribe(licences => {
+              this.hasLicence = licences.length > 0;
+            });
 
-      this.legalEntityDataService.getCurrentHierachy()
-      .pipe(takeWhile(() => this.componentActive))
-        .subscribe((data: LegalEntity) => {
-          this.tree = LicenseeChangeLog.CreateFromLegalEntity(data);
-          //this.tree.processLegalEntityTree(data);
-        this.tree.isRoot = true;
-      },
-        () => {
-          console.log('Error occured');
+          this.store.select((state) => state.indigenousNationState.indigenousNationModeActive)
+            .pipe(takeWhile(() => this.componentActive))
+            .subscribe((active) => {
+              this.indigenousNationModeActive = active;
+            });
+
+          this.legalEntityDataService.getCurrentHierachy()
+            .pipe(takeWhile(() => this.componentActive))
+            .subscribe((data: LegalEntity) => {
+              this.tree = LicenseeChangeLog.CreateFromLegalEntity(data);
+              //this.tree.processLegalEntityTree(data);
+              this.tree.isRoot = true;
+            },
+              () => {
+                console.log('Error occured');
+              }
+            );
+
+
         }
-      );
+
+
+
+      });
+
+    
   }
 
   startLicenseeChangeApplication() {

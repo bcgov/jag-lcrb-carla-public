@@ -30,6 +30,9 @@ import { DynamicsForm } from '../../../models/dynamics-form.model';
 import { DynamicsFormDataService } from '../../../services/dynamics-form-data.service';
 import { PoliceDurisdictionDataService } from '@services/police-jurisdiction-data.service';
 import { LocalGovernmentDataService } from '@services/local-government-data.service';
+import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.component';
+import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
+import { AreaCategory } from '@models/service-area.model';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -61,6 +64,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   @ViewChild('financialIntegrityDocuments', { static: false }) financialIntegrityDocuments: FileUploaderComponent;
   @ViewChild('supportingDocuments', { static: false }) supportingDocuments: FileUploaderComponent;
   @ViewChild(ConnectionToNonMedicalStoresComponent, { static: false }) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
+  @ViewChild(ProofOfZoningComponent, { static: false }) proofOfZoning: ProofOfZoningComponent;
   @ViewChild('lgAutoCompleteTrigger', { read: MatAutocompleteTrigger, static: false }) lgAutoComplete: MatAutocompleteTrigger;
   @ViewChild('pdAutoCompleteTrigger', { read: MatAutocompleteTrigger, static: false }) pdAutoComplete: MatAutocompleteTrigger;
   form: FormGroup;
@@ -96,6 +100,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   autocompleteLocalGovernmemts: any[];
   autocompletePoliceDurisdictions: any[];
   LGApprovalsFeatureIsOn: boolean;
+  disableSubmitForLGINApproval: boolean;
 
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
@@ -180,10 +185,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       federalProducerNames: ['', Validators.required],
       applicantType: ['', Validators.required],
       description1: ['', [Validators.required]],
-      description2: ['',[]],
+      description2: ['', []],
       proposedChange: ['', [Validators.required]],
       connectedGrocery: ['', []],
-      sitePhotos: ['',[]],
+      sitePhotos: ['', []],
       authorizedToSubmit: [''],
       signatureAgreement: [''],
       policeJurisdiction: [''],
@@ -196,6 +201,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       willhaveValidInterest: ['', []],
       meetsALRRequirements: ['', []],
       IsReadyProductNotVisibleOutside: ['', []],
+      serviceAreas: ['', []],
+      outsideAreas: ['', []]
     });
 
 
@@ -269,7 +276,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
         if (data.applicationType.formReference) {
           console.log("Getting form layout");
-          // get the application form        
+          // get the application form
           this.dynamicsForm = data.applicationType.dynamicsForm;
           this.dynamicsForm.tabs.forEach(function (tab) {
             tab.sections.forEach(function (section) {
@@ -307,7 +314,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
         }
 
         // make fields readonly if payment was made or the LG is viewing the application
-        if (data.isPaid || this.isOpenedByLGForApproval || this.application.lGApprovalDecision === 'Approved') {
+        // disable the form if the local government has reviewed the application
+        if (data.isPaid || this.isOpenedByLGForApproval || this.application.lGDecisionSubmissionDate) {
           this.form.disable();
         }
         this.savedFormData = this.form.value;
@@ -399,13 +407,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
     // TG validation question for cannabis licences to confirm that product is not visible from outside
     if (this.application.applicationType.floorPlan === FormControlState.Show && this.application.licenseType === 'Cannabis Retail Store') {
       this.form.get('IsReadyProductNotVisibleOutside').setValidators([Validators.required]);
-    } 
+    }
 
 
-    if (this.application.applicationType.lGandPoliceSelectors === "Yes" && this.LGApprovalsFeatureIsOn) {  
+    if (this.application.applicationType.lGandPoliceSelectors === "Yes" && this.LGApprovalsFeatureIsOn) {
       this.form.get('indigenousNation').setValidators([Validators.required]);
       this.form.get('policeJurisdiction').setValidators([Validators.required]);
-    } 
+    }
 
     if (this.isRAS()) {
       // use description1 for the certificate number
@@ -419,7 +427,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
     //   this.form.get('connectedGrocery').setValidators([Validators.required]);
     // }
 
-
+    if (!this.application.applicationType.serviceAreas) {
+      this.form.get('serviceAreas').disable();
+    }
+    if (!this.application.applicationType.outsideAreas) {
+      this.form.get('outsideAreas').disable();
+    }
   }
 
 
@@ -440,6 +453,22 @@ export class ApplicationComponent extends FormBase implements OnInit {
         && this.form.get('serviceHoursFridayClose').valid
         && this.form.get('serviceHoursSaturdayClose').valid
       );
+  }
+
+  lgHasReviewedZoning(): boolean {
+    let hasReviewed = false;
+    if (this.application && this.application.lGDecisionSubmissionDate && this.application.lgZoning) {
+      hasReviewed = true;
+    }
+    return hasReviewed;
+  }
+
+  lgApprovalDecisionMade(): boolean {
+    let hasMadeDecision = false;
+    if (this.application && this.application.lGDecisionSubmissionDate && this.application.lGApprovalDecision) {
+      hasMadeDecision = true;
+    }
+    return hasMadeDecision;
   }
 
   canDeactivate(): Observable<boolean> {
@@ -543,6 +572,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
     let description2 = '';
+    
 
     if (this.isRAS()) {
       description2 += this.form.get('isOwner').value ? 'Is owner = Yes' : 'Is owner = No';
@@ -552,13 +582,23 @@ export class ApplicationComponent extends FormBase implements OnInit {
       description2 += this.form.get('willhaveValidInterest').value ? 'Will have valid interest = Yes' : 'Will have valid interest = No';
     }
 
+    // flatten the service areas if need be
+    const serviceAreas = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
+    const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
+
     // do not save if the form is in file upload mode
     if (this.mode === UPLOAD_FILES_MODE) {
       // a delay is need by the deactivate guard
       return of(true).pipe(delay(10));
     }
     return forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, description2: description2 }),
+      this.applicationDataService.updateApplication({
+        ...this.application,
+        ...this.form.value,
+        description2: description2,
+        serviceAreas: serviceAreas,
+        outsideAreas: outsideAreas
+      }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
@@ -636,6 +676,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   submitForLGINApproval() {
     const saveData = this.form.value;
+    this.disableSubmitForLGINApproval = true;
 
     // Only save if the data is valid
     if (this.isValid()) {
@@ -665,12 +706,21 @@ export class ApplicationComponent extends FormBase implements OnInit {
         });
     } else {
       this.showValidationMessages = true;
+      this.disableSubmitForLGINApproval = false;
     }
   }
 
-  private proceedToSecurityScreening(){
+  private proceedToSecurityScreening() {
     //send event to move to the next step of the multi-step
     this.saveComplete.next(true);
+  }
+
+
+  private lGHasApproved() {
+    let hasApproved = this.application && this.application.applicationType &&
+      (this.application.applicationType.isShowLGINApproval && this.application.lGApprovalDecision === 'Approved') ||
+      (this.application.applicationType.isShowLGZoningConfirmation && this.application.lgZoning === 'Allows');
+      return hasApproved;
   }
 
   /**
@@ -707,6 +757,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
     // handle supporting documents for sole proprietor who submit marketing applications 
     let marketing_soleprop = this.application.applicationType.name === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietor";
 
+    if (this.proofOfZoning) {
+      let zoningErrors = this.proofOfZoning.getValidationErrors();
+      if (zoningErrors.length > 0) {
+        valid = false;
+        this.validationMessages = this.validationMessages.concat(zoningErrors);
+      }
+    }
 
     if (this.application.applicationType.showAssociatesFormUpload &&
       ((this.uploadedAssociateDocuments || 0) < 1)) {
@@ -757,12 +814,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('At least one floor plan document is required.');
     }
 
-    if (this.application.applicationType.proofofZoning === FormControlState.Show &&
-      ((this.uploadedZoningDocuments || 0) < 1)) {
-      valid = false;
-      this.validationMessages.push('At least one zoning document is required.');
-    }
-
     if (this.application.applicationType.showPropertyDetails && !this.form.get('establishmentName').value) {
       valid = false;
       this.validationMessages.push('Establishment name is required.');
@@ -775,18 +826,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Hours of sale are required');
     }
 
-    if (this.isRAS()){
-      
+    if (this.isRAS()) {
 
-      if (!this.form.get('isOwner').value){
+
+      if (!this.form.get('isOwner').value) {
         this.validationMessages.push('Only the owner of the business may submit this information');
       }
 
-      if (!this.form.get('hasValidInterest').value){
+      if (!this.form.get('hasValidInterest').value) {
         this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
       }
 
-      if (!this.form.get('willhaveValidInterest').value){
+      if (!this.form.get('willhaveValidInterest').value) {
         this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
       }
 
@@ -825,7 +876,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       indigenousNationId: 'Please select the Indigenous nation',
       federalProducerNames: 'Please enter the name of federal producer',
       description1: 'Please enter a description',
-      IsReadyProductNotVisibleOutside: 'Please confirm that product will not be visible from the outside'
+      IsReadyProductNotVisibleOutside: 'Please confirm that product will not be visible from the outside',
+      serviceAreas: 'All service area rows must be complete'
     };
 
     return errorMap;
@@ -907,5 +959,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
       label = 'Proposed New Name';
     }
     return label;
+  }
+
+  getAreaCategoryNumber(categoryName: string): number {
+    switch (categoryName) {
+      case 'OutsideArea':
+        return AreaCategory.OutsideArea;
+      case 'Service':
+        return AreaCategory.Service;
+      case 'Capactiy':
+        return AreaCategory.Capacity;
+    }
   }
 }

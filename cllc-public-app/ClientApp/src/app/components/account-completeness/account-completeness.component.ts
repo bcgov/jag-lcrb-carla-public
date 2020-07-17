@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DocumentTypeStatus } from '@models/document-type-status.model';
 import { FileDataService } from '@services/file-data.service';
 import { FormBase } from '../../shared/form-base';
+import { Account } from '@models/account.model';
 
 @Component({
   selector: 'app-account-completeness',

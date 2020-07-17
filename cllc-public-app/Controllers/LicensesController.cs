@@ -401,7 +401,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
             bool hasAccess = CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid);
-            hasAccess |= (adoxioLicense.AdoxioThirdPartyOperatorId  != null && CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioThirdPartyOperatorId .Accountid));
+            hasAccess |= (adoxioLicense.AdoxioThirdPartyOperatorId != null && CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioThirdPartyOperatorId.Accountid));
             if (!hasAccess)
             {
                 return Forbid();
@@ -469,13 +469,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // set license type relationship 
                     application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicense.AdoxioLicenceType.AdoxioLicencetypeid);
                 }
-                
+
                 application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
 
                 application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
 
                 try
                 {
+                    var licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioLocalgovindigenousnationidValue )).FirstOrDefault();
+                    string lginvalue;
+                    string policevalue;
+
+
+                    if(licenceApp == null){
+                        if(adoxioLicense?._adoxioLginValue != null){
+                            lginvalue = adoxioLicense?._adoxioLginValue;
+                        } else {
+                            lginvalue = adoxioLicense?.AdoxioEstablishment._adoxioLginValue;
+                        }                        
+                    } else {
+                        lginvalue = licenceApp._adoxioLocalgovindigenousnationidValue;
+                    
+                    }
+
+                    application.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", lginvalue);
+
+                    licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioPolicejurisdictionidValue )).FirstOrDefault();
+                    // Police Jurisdiction association
+                    if (!string.IsNullOrEmpty(licenceApp?._adoxioPolicejurisdictionidValue))
+                    {
+                        application.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", licenceApp?._adoxioPolicejurisdictionidValue);
+                    }
+
                     application = _dynamicsClient.Applications.Create(application);
                 }
                 catch (HttpOperationException httpOperationException)
@@ -494,6 +519,37 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                 }
+
+                // copy service areas from licence
+                try
+                {
+                    string filter = $"_adoxio_licenceid_value eq {licenceId}";
+                    string applicationUri = _dynamicsClient.GetEntityURI("adoxio_applications", application.AdoxioApplicationid);
+                    
+                    IList<MicrosoftDynamicsCRMadoxioServicearea> areas = _dynamicsClient.Serviceareas.Get(filter: filter).Value;
+                    foreach (MicrosoftDynamicsCRMadoxioServicearea area in areas)
+                    {
+                        MicrosoftDynamicsCRMadoxioServicearea newArea = new MicrosoftDynamicsCRMadoxioServicearea()
+                        {
+                            ApplicationOdataBind = applicationUri,
+                            AdoxioAreacategory = area.AdoxioAreacategory,
+                            AdoxioArealocation = area.AdoxioArealocation,
+                            AdoxioAreanumber = area.AdoxioAreanumber,
+                            AdoxioCapacity = area.AdoxioCapacity,
+                            AdoxioIsindoor = area.AdoxioIsindoor,
+                            AdoxioIsoutdoor = area.AdoxioIsoutdoor,
+                            AdoxioIspatio = area.AdoxioIspatio,
+                            AdoxioDateadded = DateTimeOffset.Now,
+                            AdoxioDateupdated = DateTimeOffset.Now
+                        };
+                        _dynamicsClient.Serviceareas.Create(newArea);
+                    }
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    _logger.LogError(httpOperationException, "Error adding service areas from licence to application");
+                }
+
 
                 // now bind the new application to the given licence.
 
@@ -625,7 +681,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // get all licenses in Dynamics by Licencee Id
             var result = _dynamicsClient.GetLicensesByLicencee(_cache, licenceeId);
-            
+
 
 
             return new JsonResult(result);

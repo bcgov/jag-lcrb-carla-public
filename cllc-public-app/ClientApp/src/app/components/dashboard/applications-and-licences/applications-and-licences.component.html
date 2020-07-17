@@ -10,9 +10,11 @@
 
         <section>
           <h3>CANNABIS LICENCE APPLICATIONS</h3>
-          <div *ngIf="!(nonMarketerExists || marketerExists) && CRSElligible()"><p>
-            <i>*You cannot apply for both cannabis licences, you can apply for one or other.</i>
-          </p></div>
+          <div *ngIf="!(nonMarketerExists || marketerExists) && CRSElligible()">
+            <p>
+              <i>*You cannot apply for both cannabis licences, you can apply for one or other.</i>
+            </p>
+          </div>
 
           <table class="start-application">
             <!-- <tr>
@@ -43,7 +45,8 @@
               </td>
               <td style="width:700px;">
                 <h3>Cannabis Marketing Licence</h3>
-                <p>The Cannabis Marketing Licence allows licensees to promote non-medical cannabis to licensed cannabis retail stores and the adult public.</p>
+                <p>The Cannabis Marketing Licence allows licensees to promote non-medical cannabis to licensed cannabis
+                  retail stores and the adult public.</p>
                 <a href="https://justice.gov.bc.ca/cannabislicensing/policy-document/cannabis-marketing-licence">Learn
                   more about this licence</a>
               </td>
@@ -74,38 +77,39 @@
                 <button *ngIf="liquorOne" class="btn btn-secondary" (click)="startNewCateringApplication()"
                   id="startCatering">START
                   APPLICATION</button>
-                  <button *ngIf="!liquorOne" class="btn btn-secondary"
-                  id="startCatering" disabled>COMING SOON</button>               
+                <button *ngIf="!liquorOne" class="btn btn-secondary" id="startCatering" disabled>COMING SOON</button>
               </td>
             </tr>
             <tr *ngIf="liquorTwo">
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-                <img class="icon" src="assets/Manufacturer-icon-blue-40px.png" alt=""> 
+                <img class="icon" src="assets/Manufacturer-icon-blue-40px.png" alt="">
               </td>
               <td style="width:700px;">
                 <h3>Manufacturer Licence</h3>
-                <p>Any business making wine, cider, beer (this includes brew pubs), or spirits must have a winery, 
+                <p>Any business making wine, cider, beer (this includes brew pubs), or spirits must have a winery,
                   brewery, or distillery licence from the Liquor and Cannabis Regulation Branch.</p>
                 <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/manufacturer-liquor-licence"
                   target="_blank">Learn
                   more about this licence</a>
               </td>
               <td style='text-align: center;'>
-                <button class="btn btn-secondary" (click)="startNewMfgApplication()"
-                  id="startMfg">START
+                <button class="btn btn-secondary" (click)="startNewMfgApplication()" id="startMfg">START
                   APPLICATION</button>
               </td>
             </tr>
 
             <tr *ngIf="liquorTwo">
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-                <img class="icon" src="assets/Licensee-icon-blue-40px.png" alt=""> 
+                <img class="icon" src="assets/Licensee-icon-blue-40px.png" alt="">
               </td>
               <td style="width:700px;">
                 <h3>Licensee Retail Store</h3>
-                <p>Often referred to as private liquor stores or cold beer and wine stores, licensee retail stores (LRS) may sell beer,
-                  wine, coolers, cider, and a full range of spirits for private consumption. An LRS may also sell packaged snacks,
-                  non-alcoholic beverages, B.C. Lottery products, and liquor-related items, such as glasses, bottle openers and
+                <p>Often referred to as private liquor stores or cold beer and wine stores, licensee retail stores (LRS)
+                  may sell beer,
+                  wine, coolers, cider, and a full range of spirits for private consumption. An LRS may also sell
+                  packaged snacks,
+                  non-alcoholic beverages, B.C. Lottery products, and liquor-related items, such as glasses, bottle
+                  openers and
                   corkscrews. </p>
                 <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/licensee-private-retail-store-liquor-licence"
                   target="_blank">Learn
@@ -118,25 +122,26 @@
 
             <tr *ngIf="liquorTwo">
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-                <img class="icon" src="assets/U-Brew-icon-blue-40px.png" alt=""> 
+                <img class="icon" src="assets/U-Brew-icon-blue-40px.png" alt="">
               </td>
               <td style="width:700px;">
                 <h3>UBrew / UVin Licence</h3>
-                <p>Also known as Ferment-on-Premises, UBrews and UVins are businesses that provide their customers 
-                  with the ingredients, equipment and advice they need to make their own beer, wine, cider or coolers on-site. 
-                  Once it's made, UBrew and UVin customers must take their liquor away, for their own private consumption. 
-                  It cannot be sold to others.</p>                
+                <p>Also known as Ferment-on-Premises, UBrews and UVins are businesses that provide their customers
+                  with the ingredients, equipment and advice they need to make their own beer, wine, cider or coolers
+                  on-site.
+                  Once it's made, UBrew and UVin customers must take their liquor away, for their own private
+                  consumption.
+                  It cannot be sold to others.</p>
                 <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/ubrew-and-uvin-liquor-licence"
                   target="_blank">Learn
                   more about this licence</a>
               </td>
               <td style='text-align: center;'>
-                <button class="btn btn-secondary" (click)="startNewUBVApplication()"
-                  id="startUBV">START
+                <button class="btn btn-secondary" (click)="startNewUBVApplication()" id="startUBV">START
                   APPLICATION</button>
               </td>
             </tr>
-            
+
 
 
             <tr>
@@ -145,8 +150,11 @@
               </td>
               <td style="width:700px;">
                 <h3>Wine Retail Store Licence</h3>
-                <p>Wine Stores licences allow businesses to sell wine to retail customers. This include stores associated with a particular winery or group of wineries, independent wine stores, Vintners Quality Alliance (VQA) wine stores and tourist wine stores. They operate as a separate retail store and are not located at a winery. </p>
-                
+                <p>Wine Stores licences allow businesses to sell wine to retail customers. This include stores
+                  associated with a particular winery or group of wineries, independent wine stores, Vintners Quality
+                  Alliance (VQA) wine stores and tourist wine stores. They operate as a separate retail store and are
+                  not located at a winery. </p>
+
                 <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/wine-store-liquor-licence"
                   target="_blank">Learn
                   more about this licence</a>
@@ -163,14 +171,15 @@
               </td>
               <td style="width:700px;">
                 <h3>Rural Agency Store Information Submission</h3>
-                <p>Existing Rural Agency Stores must submit their store and business information to the LCRB in order to be issued a licence in the future. Note, you will need an existing Rural Agency Store Certificate number to complete the submission. </p>                
+                <p>Existing Rural Agency Stores must submit their store and business information to the LCRB in order to
+                  be issued a licence in the future. Note, you will need an existing Rural Agency Store Certificate
+                  number to complete the submission. </p>
                 <!--a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/wine-store-liquor-licence"
                   target="_blank">Learn
                   more about this Expression of Interest</a-->
               </td>
               <td style="text-align: center;">
-                <button class="btn btn-secondary" (click)="startNewRASApplication()"
-                id="startRAS">SUBMIT INFORMATION
+                <button class="btn btn-secondary" (click)="startNewRASApplication()" id="startRAS">SUBMIT INFORMATION
                 </button>
               </td>
             </tr>
@@ -217,7 +226,14 @@
                 </td>
               -->
               <td style="background-color: #E1E8F2; padding: 10px;">
-                <div style="text-transform: uppercase; font-weight: 600;">{{item.applicationStatus}}</div>
+                <div style="text-transform: uppercase; font-weight: 600;">
+                  <span *ngIf="!item.lgHasApproved">
+                    {{item.applicationStatus}}
+                  </span>
+                  <span *ngIf="item.lgHasApproved">
+                    Ready for Submission
+                  </span>
+                </div>
                 <p *ngIf="item.applicationStatus === 'Not Submitted'">
                   This application has not yet been submitted.
                 </p>
@@ -244,32 +260,56 @@
                   Your application is incomplete. You must provide additional information for it to be processed.
                 </p>
                 <p *ngIf="item.applicationStatus === 'Pending External Review'">
-                  Your application has been sent for local government, financial integrity, and security screening
-                  reviews.
+                  <span *ngIf="!item.lgHasApproved">
+                    Your application has been sent for local government review.
+                  </span>
+                  <span *ngIf="item.lgHasApproved">
+                    Your application has been reviewed by the local government.
+                  </span>
                 </p>
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
-                <div *ngIf="item.applicationStatus === 'Not Submitted' || item.applicationStatus ===  'Pending External Review'">
-                  <a appRemoveIfFeatureOff="LicenseeChanges"
-                     *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName !== ApplicationTypeNames.Catering && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal"
-                     routerLink="/multi-step-application/{{item.id}}" id="completeApp{{item.id}}">
-                    <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
-                    <span>Complete Application</span>
-                  </a>
-                  <a appRemoveIfFeatureOff="LicenseeChanges"
-                     *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName === ApplicationTypeNames.Catering"
-                     [routerLink]="['/multi-step-application/' + item.id]" id="completeApp{{item.id}}">
-                    <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
-                    <span>Complete Application</span>
-                  </a>
+                <div
+                  *ngIf="item.applicationStatus === 'Not Submitted' || item.applicationStatus ===  'Pending External Review'">
+                  
+                  <ng-container *ngIf="!item.lgHasApproved">
+                    <a appRemoveIfFeatureOff="LicenseeChanges"
+                      *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName !== ApplicationTypeNames.Catering && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal"
+                      routerLink="/multi-step-application/{{item.id}}" id="completeApp{{item.id}}">
+                      <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                      <span>Complete Application</span>
+                    </a>
+                    <a appRemoveIfFeatureOff="LicenseeChanges"
+                      *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName === ApplicationTypeNames.Catering"
+                      [routerLink]="['/multi-step-application/' + item.id]" id="completeApp{{item.id}}">
+                      <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                      <span>Complete Application</span>
+                    </a>
+                  </ng-container>
+                  
+                  <ng-container *ngIf="item.lgHasApproved">
+                    <a appRemoveIfFeatureOff="LicenseeChanges"
+                      *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName !== ApplicationTypeNames.Catering && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal"
+                      routerLink="/multi-step-application/post-lg-decision/{{item.id}}" id="completeApp{{item.id}}">
+                      <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                      <span>Complete Application</span>
+                    </a>
+                    <a appRemoveIfFeatureOff="LicenseeChanges"
+                      *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName === ApplicationTypeNames.Catering"
+                      [routerLink]="['/multi-step-application/post-lg-decision/' + item.id]" id="completeApp{{item.id}}">
+                      <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                      <span>Complete Application</span>
+                    </a>
+                  </ng-container>
+
                   <a appRemoveIfFeatureOn="LicenseeChanges"
-                     *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal"
-                     routerLink="/account-profile/{{item.id}}" id="completeApp{{item.id}}">
+                    *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal"
+                    routerLink="/account-profile/{{item.id}}" id="completeApp{{item.id}}">
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Complete Application</span>
                   </a>
                   <a *ngIf="item.applicationTypeName === ApplicationTypeNames.CRSRenewal || item.applicationTypeName === ApplicationTypeNames.LiquorRenewal"
-                     routerLink="/renew-licence/{{getRenewalType(item.applicationTypeName)}}/{{item.id}}">
+                    routerLink="/renew-licence/{{getRenewalType(item.applicationTypeName)}}/{{item.id}}">
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Complete Renewal</span>
                   </a>

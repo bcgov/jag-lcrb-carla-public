@@ -1,0 +1,58 @@
+<h3 class="blue-header">
+    CONFIRMATION OF ZONING
+</h3>
+<div class="padded-section content-bottom" [formGroup]="form">
+    <app-field label="LG/IN">
+        <input class="form-control" formControlName="lgInName" readonly type="text">
+    </app-field>
+
+
+    <h3 for="">Local Government Contact Details</h3>
+
+    <app-field label="Name of Official" [valid]="!isTouchedAndInvalid('lGNameOfOfficial')"
+        errorMessage="Please enter the name of the official">
+        <input class="form-control" type="text" formControlName="lGNameOfOfficial">
+    </app-field>
+    <app-field label="Title/Position" [valid]="!isTouchedAndInvalid('lGTitlePosition')"
+        errorMessage="Please enter the Title/Position">
+        <input class="form-control" type="text" formControlName="lGTitlePosition">
+    </app-field>
+    <app-field label="Phone" [valid]="!isTouchedAndInvalid('lGContactPhone')"
+        errorMessage="Please enter the phone number">
+        <input class="form-control" type="text" formControlName="lGContactPhone" mask="(000) 000-0000"
+            placeholder="(000) 000-0000">
+    </app-field>
+    <app-field label="Email" [valid]="!isTouchedAndInvalid('lGContactEmail')" errorMessage="Please enter the email">
+        <input class="form-control" type="text" formControlName="lGContactEmail">
+    </app-field>
+
+
+    <section>
+        <app-field
+            label="I confirm that zoning allows/does not all (check one below) for the operation of a picnic area, as proposed above. See attached site plan."
+            [valid]="!isTouchedAndInvalid('lgZoning')" errorMessage="Please select option">
+            <mat-radio-group formControlName="lgZoning">
+                <mat-radio-button value="Allows">Allows</mat-radio-button>
+                <br>
+                <mat-radio-button value="DoesNotAllow">Does not allow</mat-radio-button>
+            </mat-radio-group>
+        </app-field>
+
+        <app-field [isFullWidth]="true" label="Comments (optional)">
+            <textarea class="form-controls w-100" formControlName="lGDecisionComments" rows="6"></textarea>
+        </app-field>
+    </section>
+</div>
+
+<section *ngIf="!disableForm" class="position-relative d-flex justify-content-between p-3">
+    <div [ngBusy]="busy"></div>
+
+    <button class="btn btn-secondary" (click)="saveForLater()">
+        <span>Save for Later</span>
+    </button>
+
+    <button class="btn btn-primary" (click)="submit()">
+        <span>submit</span>
+    </button>
+
+</section>
