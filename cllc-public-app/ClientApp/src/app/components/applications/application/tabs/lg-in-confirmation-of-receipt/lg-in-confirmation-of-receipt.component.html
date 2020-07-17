@@ -23,8 +23,7 @@
 
 
     <section>
-        <!-- not working-->
-        <section class="ngtest-lg-instructions" [innerHTML]="htmlContent?.title"></section>
+        <section class="ngtest-lg-instructions" [innerHTML]="htmlContent?.LocalGovernmentApproval"></section>
 
         <label>Provide a Resolution/Comment and any supporting reports with comments on:</label>
         <ul>
@@ -44,7 +43,7 @@
     </section>
 </div>
 
-<section class="position-relative d-flex justify-content-between p-3">
+<section *ngIf="!disableForm" class="position-relative d-flex justify-content-between p-3">
     <div [ngBusy]="busy"></div>
 
     <button class="btn btn-secondary" (click)="OptOutOfComment()">

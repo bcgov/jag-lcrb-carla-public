@@ -14,9 +14,9 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class LicenseExtensions
     {
-        public static List<string> GetEndorsements(string licenceId, IDynamicsClient dynamicsClient)
+        public static List<Endorsement> GetEndorsements(string licenceId, IDynamicsClient dynamicsClient)
         {
-            List<string> endorsementsList = new List<string>();
+            List<Endorsement> endorsementsList = new List<Endorsement>();
             string filter = $"_adoxio_licence_value eq {licenceId}";
             string[] expand = { "adoxio_ApplicationType" };
             MicrosoftDynamicsCRMadoxioEndorsementCollection endorsementsCollection = dynamicsClient.Endorsements.Get(filter: filter, expand: expand);
@@ -25,7 +25,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 foreach (var item in endorsementsCollection.Value)
                 {
                     if (item.AdoxioApplicationType != null) {
-                        endorsementsList.Add(item.AdoxioApplicationType.AdoxioName);
+                        Endorsement endorsement = new Endorsement()
+                        {
+                            Id = item.AdoxioApplicationType.AdoxioApplicationtypeid,
+                            Name = item.AdoxioApplicationType.AdoxioName
+                        };
+                        endorsementsList.Add(endorsement);
                     }
                 }
             }
@@ -195,7 +200,6 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             licenseSummary.Endorsements = GetEndorsements(licenseSummary.LicenseId, dynamicsClient);
             
-
             return licenseSummary;
         }
     }

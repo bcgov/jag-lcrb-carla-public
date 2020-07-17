@@ -33,7 +33,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string LicenseSubCategory {get; set;}
         public DateTimeOffset? ExpiryDate { get; set; }
 
-        public List<string> Endorsements { get; set; }
+        public List<Endorsement> Endorsements { get; set; }
+        public List<string> TermsAndConditions { get; set; }
 
         public string RepresentativeFullName { get; set; }
         public string RepresentativePhoneNumber { get; set; }

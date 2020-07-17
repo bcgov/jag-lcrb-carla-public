@@ -1,0 +1,38 @@
+<div class="ngtest-zoning" [formGroup]="form">
+    <hr>
+    <label for="">Proof of Zoning</label>
+    <br>
+    
+    <section *ngIf="application?.licenseType === 'Manufacturer'">
+        <div>
+            <mat-checkbox>
+            <span>
+              By checking this box, I confirm that current zoning permits manufacturing on the manufacturing site.
+            </span>
+            <span>
+          
+            </span>
+            </mat-checkbox>
+          </div>
+    
+    </section>
+    <section *ngIf="application?.licenseType !== 'Manufacturer'"> 
+      <p>Please provide proof from your local government that the proposed location has been:</p>
+      <ul>
+        <li>appropriately zoned to operate a {{application?.licenseType}} licence, or</li>
+        <li>is in the process of being appropriately zoned</li>
+      </ul>
+      <p>
+        You are responsible for obtaining the appropriate zoning from your local
+        government to operate a {{application?.licenseType}} licence at your proposed location.
+        Prior to issuing a licence at the new location, LCRB will require confirmation
+        from your local government that the location is zoned appropriately to operate
+        a WS licence.
+      </p>
+      <app-file-uploader *ngIf="application?.id" documentType="Zoning" fileTypes="FILE MUST BE IN PDF FORMAT."
+        [multipleFiles]="false" entityName="application" [useDocumentTypeForName]="true"
+        (numberOfUploadedFiles)="uploadedZoningDocuments = $event" [entityId]="application?.id"
+        [uploadHeader]="'TO UPLOAD ZONING DOCUMENTS, DRAG FILES HERE OR'" #proofOfZoningDocs>
+      </app-file-uploader>
+    </section>
+  </div>

@@ -73,6 +73,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? ShowDescription1 { get; set; }
         
         public bool? IsShowLGINApproval { get; set; }
+        public bool? IsShowLGZoningConfirmation { get; set; }
+        public bool? RequiresSecurityScreening { get; set; }
 
         public LicenseType LicenseType { get; set; }
 
@@ -83,5 +85,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsEndorsement { get; set;}
 
         public Form DynamicsForm { get; set; }
+
+        public bool ServiceAreas { get; set; }
+        public bool OutsideAreas { get; set; }
+        public bool CapacityArea { get; set; }
     }
 }

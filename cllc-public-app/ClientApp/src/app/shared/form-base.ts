@@ -2,6 +2,7 @@ import { ValidatorFn, AbstractControl, FormControl, FormGroup, FormArray } from 
 import { OnDestroy } from '@angular/core';
 import { Application } from '@models/application.model';
 import { ApplicationTypeNames } from '@models/application-type.model';
+import { Account } from '@models/account.model';
 
 
 export const CanadaPostalRegex = '^[A-Za-z][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$';
@@ -12,39 +13,64 @@ export class ApplicationHTMLContent {
     preamble: string;
     beforeStarting: string;
     nextSteps: string;
-    lGInstructions: string;
-  }  
+    LocalGovernmentApproval: string;
+    floorPlan: string;
+    sitePlan: string;
+    sitePhotos: string;
+    validInterest: string;
+    letterOfIntent: string;
+    zoning: string;
+    serviceArea: string;
+    outdoorArea: string;
+    capacityArea: string;
+    signage: string;
+
+}
 
 export class FormBase implements OnDestroy {
     form: FormGroup;
+    account: Account;
     componentActive = true;
     application: Application;
     htmlContent: ApplicationHTMLContent;
     ApplicationTypeNames = ApplicationTypeNames;
 
-  public addDynamicContent() { 
+    public addDynamicContent() {
         if (this.application.applicationType) {
             this.htmlContent = {
                 title: this.application.applicationType.title,
                 preamble: this.getApplicationContent('Preamble'),
                 beforeStarting: this.getApplicationContent('BeforeStarting'),
                 nextSteps: this.getApplicationContent('NextSteps'),
-                lGInstructions: this.getApplicationContent('LocalGovernmentApproval'),
+                LocalGovernmentApproval: this.getApplicationContent('LocalGovernmentApproval'),
+                floorPlan: this.getApplicationContent('FloorPlan'),
+                sitePlan: this.getApplicationContent('SitePlan'),
+                sitePhotos: this.getApplicationContent('SitePhotos'),
+                validInterest: this.getApplicationContent('ValidInterest'),
+                letterOfIntent: this.getApplicationContent('LetterOfIntent'),
+                zoning: this.getApplicationContent('Zoning'),
+                serviceArea: this.getApplicationContent('ServiceArea'),
+                outdoorArea: this.getApplicationContent('OutdoorArea'),
+                capacityArea: this.getApplicationContent('CapacityArea'),
+                signage: this.getApplicationContent('Signage'),
             };
         }
     }
 
     public getApplicationContent(contentCartegory: string) {
-      let body = '';
-      if (this.application.applicationType.contentTypes) {
-        const contents =
-          this.application.applicationType.contentTypes
-            .filter(t => t.category === contentCartegory && t.businessTypes.indexOf(this.application.applicantType) !== -1);
-        if (contents.length > 0) {
-          body = contents[0].body;
+        let body = '';
+        if (this.application.applicationType.contentTypes) {
+            const contents =
+                this.application.applicationType.contentTypes
+                    .filter(t => t.category === contentCartegory
+                        && (t.businessTypes.indexOf(this.application.applicantType) !== -1
+                            || t.businessTypes.indexOf(this.account && this.account.businessType) !== -1)
+                    );
+            if (contents.length > 0) {
+                body = contents[0].body;
+            }
         }
-      }        
-      return body;
+        return body;
     }
 
     isValidOrNotTouched(field: string) {

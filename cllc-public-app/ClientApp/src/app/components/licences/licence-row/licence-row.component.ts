@@ -18,6 +18,8 @@ import { Establishment } from '@models/establishment.model';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { EventStatus } from '@models/licence-event.model';
 import { License } from '@models/license.model';
+import { TermsAndConditionsDataService } from '@services/terms-and-condtions-data.service';
+import { Endorsement } from '@models/endorsement.model';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -26,7 +28,6 @@ export const LIQUOR_RENEWAL_LICENCE_TYPE_NAME = 'liquor';
 
 
 const ACTIVE = 'Active';
-// const PAYMENT_REQUIRED = 'Payment Required';
 const RENEWAL_DUE = 'Renewal Due';
 
 @Component({
@@ -43,27 +44,34 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     @Input() available: boolean;
     @Input() licenceType: string;
     @Input() licences: ApplicationLicenseSummary[];
+
     constructor(
-        private applicationDataService: ApplicationDataService,
         private licenceDataService: LicenseDataService,
         private router: Router,
-        private store: Store<AppState>,
         private snackBar: MatSnackBar,
         private paymentService: PaymentDataService,
         private establishmentService: EstablishmentDataService,
         private licenceEventsService: LicenceEventsService,
+        private termsAndConditionsService: TermsAndConditionsDataService,
         public fb: FormBuilder) {
         super();
         this.mainForm = new FormGroup({});
     }
 
     ngOnInit() {
-        this.licences.forEach((licence) => {
-            this.licenceForms[licence.licenseId] = this.fb.group({
-                phone: [licence.establishmentPhoneNumber],
-                email: [licence.establishmentEmail]
-              });
-        });
+      this.licences.forEach((licence) => {
+          this.licenceForms[licence.licenseId] = this.fb.group({
+              phone: [licence.establishmentPhoneNumber],
+              email: [licence.establishmentEmail]
+            });
+          this.termsAndConditionsService.getTermsAndCondtions(licence.licenseId)
+            .subscribe((terms) => {
+              licence.termsAndConditions = terms;
+              if (terms.length > 0) {
+                licence.headerRowSpan += 1;
+              }
+            });
+      });
     }
 
     updateEmail(licenceId: string, establishmentId: string, event: any) {
@@ -156,6 +164,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         return retVal;
     }
 
+    actionVisible(licence: License, actionId: string) {
+      return !this.hasEndorsement(licence, actionId);
+    }
+
     payLicenceFee(licence: ApplicationLicenseSummary) {
         // locate the application associated with the issuance of this licence
         const application = licence.actionApplications.find(app => app.applicationTypeName === licence.licenceTypeName);
@@ -210,13 +222,14 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     isRecentlyExpired(licence: ApplicationLicenseSummary) {
         const now = moment(new Date()).startOf('day');
         const expiry = moment(licence.expiryDate).startOf('day');
-        const diff = expiry.diff(now, 'days') + 1;
+        const diff = now.diff(expiry, 'days') + 1;
+
         return licence.status === 'Expired' && diff <= 30;
     }
 
     isActive(licence: ApplicationLicenseSummary) {
         let active = licence.status === 'Active';
-        if (licence.dormant || licence.suspended) {
+        if (licence.suspended) {
             active = false;
         }
         return active;
@@ -283,8 +296,12 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         }
       }
 
-    hasEndorsement(endorsement: string, licence: License) {
-        return licence.endorsements.indexOf(endorsement) >= 0;
+    hasEndorsement(licence: License, endorsementId: string) {
+      return typeof licence.endorsements.find(endorsement => endorsement.id === endorsementId) !== "undefined";
+    }
+
+    hasEndorsementByName(licence: License, endorsementName: string) {
+      return typeof licence.endorsements.find(endorsement => endorsement.name === endorsementName) !== "undefined";
     }
 
     getHandbookLink(licenceType: string) {

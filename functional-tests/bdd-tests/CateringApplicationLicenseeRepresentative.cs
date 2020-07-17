@@ -18,13 +18,12 @@ using Xunit;
     I want to pay the first year catering licence fee
     And submit a licensee representative request 
 
+ @e2e @catering @privatecorporation @licenseerep
  Scenario: Private Corporation Licensee Representative Request
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
@@ -44,7 +43,7 @@ namespace bdd_tests
     [FeatureFile("./CateringApplicationLicenseeRepresentative.feature")]
     public sealed class CateringApplicationLicenseeRepresentative : TestBase
     {
-        [Given(@"I am logged in to the dashboard as a (.*)")]
+        [Given(@"I am logged in to the dashboard as a(.*)")]
         public void Given_I_view_the_dashboard(string businessType)
         {
             CheckFeatureFlagsLiquor();

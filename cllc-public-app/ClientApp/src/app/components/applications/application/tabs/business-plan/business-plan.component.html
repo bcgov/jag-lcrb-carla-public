@@ -10,6 +10,10 @@
         </mat-radio-group>
       </app-field>
 
+      <div *ngIf="!hasType()">
+        <p>In order to complete your business plan, you must select a type of manufacturer licence.</p>
+      </div>
+
       <div *ngIf="hasType()">
         <p>Your application must include a business plan that describes your proposed operations, including:</p>
         <ul>
@@ -62,39 +66,6 @@
         </p>
 
         <hr>
-        <app-field [valid]="isValidOrNotTouched('zoningPermitsMFG')" [showChevrons]="false"
-          errorMessage="Please confirm that the current zoning permits manufacturing on the manufacturing site"
-          [isFullWidth]="true" style="margin-left:10px;">
-          <mat-checkbox formControlName="zoningPermitsMFG">
-            I confirm that current zoning permits manufacturing on the manufacturing site.</mat-checkbox>
-        </app-field>
-        <hr>
-        <app-field [valid]="isValidOrNotTouched('zoningPermitsRetailSales')" [showChevrons]="false"
-          errorMessage="Please confirm that the current zoning permits retail sales on the manufacturing site"
-          [isFullWidth]="true" style="margin-left:10px;">
-          <mat-checkbox formControlName="zoningPermitsRetailSales">
-            I confirm that current zoning permits retail sales on the manufacturing site.</mat-checkbox>
-        </app-field>
-        <hr>
-        <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?" [valid]="isValidOrNotTouched('isALR')" [showChevrons]="false"
-        errorMessage="Specify ALR status" [isFullWidth]="true">
-        <mat-radio-group formControlName="isALR">
-            <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
-            <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
-        </mat-radio-group>
-        </app-field>
-        <div *ngIf="this.form.get('isALR').value == 'Yes'">
-            <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
-            <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
-                <p><strong>Please note that the <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019" target="_blank">Agricultural Land Reserve (ALR) Use Regulation</a> permits a food and beverage service lounge if the area is no more than 125 m<sup>2</sup> indoors and 125 m<sup>2</sup> outdoors.</strong></p>
-                <p><strong>By submitting this application to LCRB, you are confirming that your areas will not exceed the size restrictions set in the ALR Use Regulation or your specific approval from the Commission.</strong></p>
-            </div>
-        </div>
-        <section>
-
-        </section>
-
-        <hr>
         <h4>Production and Sales Forecasts</h4>
         <p>Upload financial statements outlining production (in litres) and sales forecasts for a three year
           period: </p>
@@ -141,21 +112,21 @@
           <div>
               <table>
                 <tr>
-                    <td style="width:200px; text-align:center;">
+                    <td style="width:150px; ">
                         <app-field label="Grapes: # of acres" errorMessage="Please enter the number of acress of production">
-                            <input type="text" class="form-control" style="width: 100px;">
+                            <input type="text" class="form-control" style="width: 125px;">
                         </app-field>
                     </td>
-                    <td style="width:200px; text-align:center;">
+                    <td style="width:150px; ">
                         <app-field  label="Fruit: # of acres"
                         errorMessage="Please enter the number of acress of production">
-                        <input type="text" class="form-control" style="width: 100px;">
+                        <input type="text" class="form-control" style="width: 125px;">
                       </app-field>
                     </td>
-                    <td style="width:200px; text-align:center;">
+                    <td style="width:150px; ">
                         <app-field  label="Honey: # of beehives"
-                        errorMessage="Please enter the number of acress of production">
-                        <input type="text" class="form-control" style="width: 100px;">
+                        errorMessage="Please enter the number of beehives">
+                        <input type="text" class="form-control" style="width: 125px;">
                       </app-field>
                     </td>
                 </tr>

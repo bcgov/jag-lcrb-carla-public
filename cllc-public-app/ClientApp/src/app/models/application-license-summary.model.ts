@@ -1,6 +1,8 @@
 import { License } from './license.model';
 import { ApplicationType } from './application-type.model';
 import { LicenceEvent } from './licence-event.model';
+import { TermsAndConditions } from './terms-and-conditions.model';
+import { ServiceArea } from './service-area.model';
 
 export class ApplicationLicenseSummary {
 
@@ -17,6 +19,7 @@ export class ApplicationLicenseSummary {
   licenseId: string;
   applicationId: string;
   licenceTypeName: string;
+  applicationType: ApplicationType;
   applicationTypeName: string;
   applicationTypeCategory: string;
   licenseNumber: string;
@@ -59,6 +62,11 @@ export class ApplicationLicenseSummary {
   representativeCanAttendEducationSessions: boolean;
   representativeCanAttendComplianceMeetings: boolean;
   representativeCanRepresentAtHearings: boolean;
+
+  termsAndConditions: TermsAndConditions[];
+
+  headerRowSpan: number;
+  serviceAreas: ServiceArea[];
 }
 
 export interface LicenceActionApplication {

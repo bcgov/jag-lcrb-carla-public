@@ -99,7 +99,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string ThirdPartyOperatorAccountName { get; set; }
         public string ThirdPartyOperatorAccountId { get; set; }
-        public List<string> Endorsements { get; set; }
+        public List<Endorsement> Endorsements { get; set; }
+        public List<string> TermsAndConditions { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public LicenceTypeCategory? LicenceTypeCategory { get; set; }

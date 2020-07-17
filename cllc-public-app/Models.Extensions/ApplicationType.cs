@@ -37,6 +37,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ShowDeclarations = applicationType.AdoxioIsshowdeclarations,
                     ShowDescription1 = applicationType.AdoxioShowdescription1,
                     IsShowLGINApproval = applicationType.AdoxioIsshowlginapproval,
+                    IsShowLGZoningConfirmation = applicationType.AdoxioIslgzoningconfirmation,
                     ShowFinancialIntegrityFormUpload = applicationType.AdoxioIsshowfinancialintegrityformupload,
                     ShowHoursOfSale = applicationType.AdoxioIsshowhoursofsale,
                     ShowLiquorDeclarations = applicationType.AdoxioIsshowliquordeclarations,
@@ -49,7 +50,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                     StoreContactInfo = (FormControlState?)applicationType.AdoxioStorecontactinfo,
                     Title = applicationType.AdoxioTitletext,
                     ValidInterest = (FormControlState?)applicationType.AdoxioValidinterest,
-                    IsEndorsement = applicationType.AdoxioIsendorsement        
+                    RequiresSecurityScreening = applicationType.AdoxioRequiressecurityscreening,
+                    IsEndorsement = applicationType.AdoxioIsendorsement,
+                    ServiceAreas = applicationType.AdoxioServiceareas.HasValue && (bool)applicationType.AdoxioServiceareas,
+                    OutsideAreas = applicationType.AdoxioOutsideareas.HasValue && (bool)applicationType.AdoxioOutsideareas,
+                    CapacityArea = applicationType.AdoxioCapacityarea.HasValue && (bool)applicationType.AdoxioCapacityarea
                 };
 
                 if (applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)

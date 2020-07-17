@@ -1,6 +1,6 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule, APP_INITIALIZER, forwardRef } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ChartsModule } from 'ng2-charts';
@@ -171,6 +171,7 @@ import { VersionInfoDialogComponent } from '@components/version-info/version-inf
 import { FederalReportingComponent } from '@components/federal-reporting/federal-reporting.component';
 import { LicencesComponent } from '@components/licences/licences.component';
 import { LicenceRowComponent } from '@components/licences/licence-row/licence-row.component';
+import { CapacityTableComponent } from '@components/capacity-table/capacity-table.component';
 import { ApplicationsComponent } from '@components/applications/applications.component';
 import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
@@ -200,11 +201,15 @@ import { CovidConfirmationComponent } from './components/applications/applicatio
 import { TerminateTPORelationshipComponent } from '@components/applications/terminate-tpo-relationship/terminate-tpo-relationship.component';
 import { LgApprovalsComponent } from './components/lg-approvals/lg-approvals.component';
 import { LiquorApprovalsCalloutComponent } from './components/liquor-approvals-callout/liquor-approvals-callout.component';
-import { LgInConfirmationOfReceiptComponent } from './components/applications/application/tabs/lg-in-confirmation-of-receipt/lg-in-confirmation-of-receipt.component';
+import { LgInConfirmationOfReceiptComponent, LGDecisionDialogComponent } from './components/applications/application/tabs/lg-in-confirmation-of-receipt/lg-in-confirmation-of-receipt.component';
 import { LicenceRepresentativeFormComponent } from '@components/licence-representative-form/licence-representative-form.component';
 import { BusinessPlanComponent } from './components/applications/application/tabs/business-plan/business-plan.component';
 import { LgInfoPanelComponent } from './components/applications/application/tabs/lg-info-panel/lg-info-panel.component';
 import { AdditionalPidsComponent } from './components/applications/application/tabs/additional-pids/additional-pids.component';
+import { TermsAndConditionsDataService } from '@services/terms-and-condtions-data.service';
+import { LgZoningConfirmationComponent } from './components/applications/application/tabs/lg-zoning-confirmation/lg-zoning-confirmation.component';
+import { ProofOfZoningComponent } from './components/applications/application/tabs/proof-of-zoning/proof-of-zoning.component';
+import { CapacityTableRowComponent } from '@components/capacity-table/capacity-table-row.component';
 
 
 @NgModule({
@@ -215,6 +220,7 @@ import { AdditionalPidsComponent } from './components/applications/application/t
     ApplicationCancellationDialogComponent,
     ApplicationComponent,
     ApplicationsAndLicencesComponent,
+    LGDecisionDialogComponent,
     AssosiateWizardComponent,
     BceidConfirmationComponent,
     BeforeYouStartComponent,
@@ -224,6 +230,7 @@ import { AdditionalPidsComponent } from './components/applications/application/t
     ConnectionToProducersComponent,
     CorporateDetailsComponent,
     DashboardComponent,
+    CapacityTableRowComponent,
     DelayedFileUploaderComponent,
     DirectorAndOfficerPersonDialogComponent,
     DirectorsAndOfficersComponent,
@@ -250,6 +257,7 @@ import { AdditionalPidsComponent } from './components/applications/application/t
     PolicyDocumentComponent,
     PolicyDocumentSidebarComponent,
     PrePaymentComponent,
+    ProofOfZoningComponent,
     ResultComponent,
     SecurityAssessmentsComponent,
     SolePropResultsComponent,
@@ -303,6 +311,8 @@ import { AdditionalPidsComponent } from './components/applications/application/t
     VersionInfoDialogComponent,
     LicencesComponent,
     LicenceRowComponent,
+    CapacityTableComponent,
+    CapacityTableRowComponent,
     ApplicationsComponent,
     AssociateListComponent,
     OrgStructureComponent,
@@ -322,7 +332,8 @@ import { AdditionalPidsComponent } from './components/applications/application/t
     LgInConfirmationOfReceiptComponent,
     BusinessPlanComponent,
     LgInfoPanelComponent,
-    AdditionalPidsComponent
+    AdditionalPidsComponent,
+    LgZoningConfirmationComponent
   ],
   imports: [
     ChartsModule,
@@ -448,6 +459,7 @@ import { AdditionalPidsComponent } from './components/applications/application/t
     EligibilityFormDataService,
     SurveyDataService,
     TiedHouseConnectionsDataService,
+    TermsAndConditionsDataService,
     EstablishmentWatchWordsService,
     Title,
     UserDataService,
@@ -475,6 +487,7 @@ import { AdditionalPidsComponent } from './components/applications/application/t
   entryComponents: [
     ApplicationCancellationDialogComponent,
     DirectorAndOfficerPersonDialogComponent,
+    LGDecisionDialogComponent,
     KeyPersonnelDialogComponent,
     WorkerHomeDialogComponent,
     ShareholderDialogComponent,

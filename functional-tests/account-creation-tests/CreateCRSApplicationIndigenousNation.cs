@@ -24,10 +24,10 @@ Scenario: Start Application
     And I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile
-    And I review the organization structure
+    And I review the account profile for an indigenous nation
+    And I review the organization structure for an indigenous nation
     And I click on the Submit Organization Information button
-    And I complete the Cannabis Retail Store application
+    And I complete the Cannabis Retail Store application for an indigenous nation
     And I click on the Pay for Application button
     And I enter the payment information
     Then I return to the dashboard   
@@ -38,7 +38,7 @@ namespace bdd_tests
     [FeatureFile("./Create_CRSApplication_indigenousnation.feature")]
     public sealed class CreateCRSApplicationIndigenousNation : TestBase
     {
-        [Given(@"I am logged in to the dashboard as an (.*)")]
+        [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard(string businessType)
         {
             CarlaLoginNoCheck();

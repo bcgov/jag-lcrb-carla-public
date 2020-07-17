@@ -17,10 +17,9 @@ Feature: CheckOrgStructure
     As a logged in business user
     I want to confirm that the organization structure page displays
 
+@validation @privatecorporation @checkorgstructure
 Scenario: Check Organization Structure
     Given I am logged in to the dashboard as a private corporation
-    And the account is deleted
-    And I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And the organization structure page is displayed
     And I click on the Dashboard link
@@ -33,7 +32,7 @@ namespace bdd_tests
     [FeatureFile("./CheckOrgStructure.feature")]
     public sealed class CheckOrgStructure : TestBase
     {
-        [Given(@"I am logged in to the dashboard as a (.*)")]
+        [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard(string businessType)
         {
             CarlaLogin(businessType);

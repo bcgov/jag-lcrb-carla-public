@@ -16,8 +16,9 @@ export class LgApprovalsComponent implements OnInit {
 
   account: Account;
   applications: Application[];
-  applicationsDecisionNotMade: Application[];
-  applicationsDecisionMadeButNoDocs: Application[];
+  applicationsDecisionNotMade: Application[] = [];
+  applicationsForZoning: Application[] = [];
+  applicationsDecisionMadeButNoDocs: Application[] = [];
   busy: any;
   dataLoaded = false; // this is set to true when all page data is loaded
 
@@ -37,8 +38,12 @@ export class LgApprovalsComponent implements OnInit {
     this.busy = this.applicationDataService.getLGApprovalApplications()
       .subscribe(applications => {
         this.applications = applications || [];
-        this.applicationsDecisionNotMade = this.applications.filter(app => !app.lGDecisionSubmissionDate);
-        this.applicationsDecisionMadeButNoDocs = this.applications.filter(app => app.lGDecisionSubmissionDate && !app.resolutionDocsUploaded);
+        this.applicationsDecisionNotMade = this.applications.filter(app => !app.lGDecisionSubmissionDate && app.applicationType && app.applicationType.isShowLGINApproval);
+        this.applicationsForZoning = this.applications.filter(app => !app.lGDecisionSubmissionDate && app.applicationType && app.applicationType.isShowLGZoningConfirmation);
+        this.applicationsDecisionMadeButNoDocs = this.applications
+          .filter(app => app.lGDecisionSubmissionDate
+            && !app.resolutionDocsUploaded
+            && app.lGApprovalDecision === 'Approved');
         this.dataLoaded = true;
       },
         error => {
@@ -55,5 +60,12 @@ export class LgApprovalsComponent implements OnInit {
     let current = moment().startOf('day');
     let count = submission.diff(current, 'days');
     return count;
+  }
+
+  noApplications(): boolean {
+    let res = this.applicationsDecisionNotMade.length === 0
+      && this.applicationsDecisionMadeButNoDocs.length === 0
+      && this.applicationsForZoning.length === 0;
+    return res;
   }
 }

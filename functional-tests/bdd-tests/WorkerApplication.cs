@@ -103,11 +103,12 @@ namespace bdd_tests
             // select the start date (Date: From) for the current address
             NgWebElement openCalendar = ngDriver.FindElement(By.CssSelector("input[formcontrolname='fromdate']"));
             openCalendar.Click();
-            
-            NgWebElement nextCalendar = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span/div"));
+
+            NgWebElement nextCalendar = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button[1]/span/div"));
             nextCalendar.Click();
 
-            NgWebElement nextCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr[4]/td[2]/div"));
+                                                                                   //*[@id="mat-datepicker-0"]/div/mat-multi-year-view/table/tbody/tr[3]/td[2]/div
+            NgWebElement nextCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr[3]/td[2]/div"));
             nextCalendar2.Click();
 
             NgWebElement nextCalendar3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-year-view/table/tbody/tr[3]/td[3]/div"));
@@ -133,7 +134,7 @@ namespace bdd_tests
             uiPostalCode.SendKeys(postalCode);
 
             // click on save and continue button
-            NgWebElement saveAndContinueButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SAVE & CONTINUE TO STEP 2')]"));
+            NgWebElement saveAndContinueButton = ngDriver.FindElement(By.CssSelector("span button.btn-primary.btn"));
             saveAndContinueButton.Click();
         }
 
@@ -157,7 +158,7 @@ namespace bdd_tests
             */
 
             // click on the Submit and Pay button
-            NgWebElement submitPayButton = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
+            NgWebElement submitPayButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
             submitPayButton.Click();
         }
 

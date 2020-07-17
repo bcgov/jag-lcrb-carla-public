@@ -5,36 +5,57 @@
       <i class="fas fa-check"></i>
     </ng-template>
 
-    <mat-step label="Review Account Profile">
-      <app-account-profile *ngIf="stepper.selectedIndex === 0" [useInStepperMode]="true" class="w-100"
-        (saveComplete)="stepper.selectedIndex = 1" #accountProfile>
-      </app-account-profile>
-    </mat-step>
+    <ng-container *ngIf="stepType !== 'post-lg-decision'">
+      <mat-step label="Review Account Profile">
+        <app-account-profile *ngIf="stepper.selectedIndex === 0" [useInStepperMode]="true" class="w-100"
+          (saveComplete)="stepper.selectedIndex = 1" #accountProfile>
+        </app-account-profile>
+      </mat-step>
 
-    <mat-step label="Review Organization Structure">
-      <app-application-licensee-changes [redirectToDashboardOnSave]="false" *ngIf="stepper.selectedIndex === 1"
-        class="w-100" (saveComplete)="stepper.selectedIndex = 2" #orgStructure></app-application-licensee-changes>
-    </mat-step>
+      <mat-step label="Review Organization Structure">
+        <app-application-licensee-changes [redirectToDashboardOnSave]="false" *ngIf="stepper.selectedIndex === 1"
+          class="w-100" (saveComplete)="stepper.selectedIndex = 2" #orgStructure></app-application-licensee-changes>
+      </mat-step>
 
-    <mat-step *ngIf="isRAS" label="Complete Submission">      
-      <app-application *ngIf="stepper.selectedIndex === 2" class="w-100"
-        (saveComplete)="stepper.selectedIndex = 3">
-      </app-application>      
-    </mat-step>
+      <mat-step *ngIf="isRAS" label="Complete Submission">
+        <app-application *ngIf="stepper.selectedIndex === 2" class="w-100" (saveComplete)="stepper.selectedIndex = 3">
+        </app-application>
+      </mat-step>
 
-    <mat-step *ngIf="!isRAS" label="Complete Application">      
-      <app-application *ngIf="stepper.selectedIndex === 2" class="w-100" [skipPayment]="true"
-        (saveComplete)="stepper.selectedIndex = 3">
-      </app-application>      
-    </mat-step>
+      <mat-step *ngIf="!isRAS" label="Complete Application">
+        <app-application *ngIf="stepper.selectedIndex === 2" class="w-100" [skipPayment]="true"
+          (saveComplete)="stepper.selectedIndex = 3">
+        </app-application>
+      </mat-step>
 
-    <mat-step *ngIf="securityScreeningEnabled && !isRAS" label="Security Screening Requirements">
-      <app-security-screening-requirements *ngIf="stepper.selectedIndex === 3" class="w-100">
-      </app-security-screening-requirements>
-    </mat-step>
+      <mat-step *ngIf="securityScreeningEnabled && !isRAS  && application?.applicationType?.requiresSecurityScreening" label="Security Screening Requirements">
+        <app-security-screening-requirements *ngIf="stepper.selectedIndex === 3" class="w-100">
+        </app-security-screening-requirements>
+      </mat-step>
 
-    <mat-step *ngIf="applicationId && !isRAS" label="Application Payment">
-    </mat-step>
+      <mat-step *ngIf="applicationId && !isRAS" label="Application Payment">
+      </mat-step>
+    </ng-container>
 
+    <ng-container *ngIf="stepType === 'post-lg-decision'">
+      <mat-step *ngIf="isRAS" label="LG/IN Review Complete">
+        <app-application *ngIf="stepper.selectedIndex === 0" class="w-100" (saveComplete)="stepper.selectedIndex = 1">
+        </app-application>
+      </mat-step>
+
+      <mat-step *ngIf="!isRAS" label="LG/IN Review Complete">
+        <app-application *ngIf="stepper.selectedIndex === 0" class="w-100" [skipPayment]="true"
+          (saveComplete)="stepper.selectedIndex = 1">
+        </app-application>
+      </mat-step>
+
+      <mat-step *ngIf="securityScreeningEnabled && !isRAS && application?.applicationType?.requiresSecurityScreening" label="Security Screening Requirements">
+        <app-security-screening-requirements *ngIf="stepper.selectedIndex === 1" class="w-100">
+        </app-security-screening-requirements>
+      </mat-step>
+
+      <mat-step *ngIf="applicationId && !isRAS" label="Application Payment">
+      </mat-step>
+    </ng-container>
   </mat-horizontal-stepper>
 </div>

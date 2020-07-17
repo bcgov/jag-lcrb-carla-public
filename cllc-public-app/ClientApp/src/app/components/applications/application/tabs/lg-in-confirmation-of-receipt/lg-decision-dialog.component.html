@@ -1,0 +1,25 @@
+<ng-container *ngIf="category === 'OptOut'">
+    <p>
+        You are opting out of providing comment on this application. LCRB will seek public comment. Do you wish to proceed?
+    </p>
+    <section>
+        <app-file-uploader *ngIf="application?.id" documentType="OptOut Reason"
+            (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [maxNumberOfFiles]="200"
+            fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="application?.id"
+            [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #OptOutDocuments>
+        </app-file-uploader>
+    </section>
+</ng-container>
+
+<p *ngIf="category === 'Reject'">
+    You are about to reject this application. This process cannot be undone. Do you wish to proceed?
+</p>
+<p *ngIf="category === 'Approve'">
+    You can conditionally approve this application, but you must provide a resolution within 90 days of doing so. Return
+    to this screen to provide the resolution when ready.
+</p>
+
+<section class="d-flex justify-content-between">
+    <button class="btn btn-secondary" (click)="cancel(); cancelBtn.disabled = true;" #cancelBtn>Cancel</button>
+    <button class="btn btn-primary" (click)="accept(); okBtn.disabled = true;" #okBtn>OK</button>
+</section>
