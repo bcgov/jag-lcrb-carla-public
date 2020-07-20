@@ -70,7 +70,7 @@
         <p>Upload financial statements outlining production (in litres) and sales forecasts for a three year
           period: </p>
         <section>
-          <app-file-uploader *ngIf="application?.id" documentType="Financial Statement"
+          <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Financial Statement"
             [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
             [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
             [useDocumentTypeForName]="true" [entityId]="application?.id"
@@ -83,7 +83,7 @@
           manufacturing (you
           manufacturing for others, and/or them manufacturing for you) and the manufacturer(s) involved:</p>
         <section>
-          <app-file-uploader *ngIf="application?.id" documentType="Proposed Products"
+          <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Proposed Products"
             [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
             [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
             [useDocumentTypeForName]="true" [entityId]="application?.id"
@@ -97,14 +97,14 @@
           will
           be from B.C.:</p>
         <section>
-          <app-file-uploader *ngIf="application?.id" documentType="Agricultural Sources"
+          <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Agricultural Sources"
             [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
             [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
             [useDocumentTypeForName]="true" [entityId]="application?.id"
             [uploadHeader]="'TO UPLOAD AGRICULTURAL SOURCES DESCRIPTION, DRAG FILES HERE OR'">
           </app-file-uploader>
         </section>
-        <section class="content-bottom" style='border-top: solid #aaa 1px; margin-top:0px;'>
+        <section class="content-bottom" style='border-top: solid #aaa 1px; margin-top:0px;' *ngIf="isWinery()">
           <p>Indicate the amount of grapes, fruit and honey that will be farmed at the winery site and used for
             the production
             of wine:
@@ -147,7 +147,7 @@
           carbonation, and
           packaging.)</p>
         <section>
-          <app-file-uploader *ngIf="application?.id" documentType="Manufacturing Stages"
+          <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Manufacturing Stages"
             [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
             [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
             [useDocumentTypeForName]="true" [entityId]="application?.id"
@@ -157,21 +157,13 @@
 
         <section>
           <hr>
-          <table>
-            <tr>
-              <td class="primary">
-                <div class="question-label">
-                  Will you be using neutral grain spirits?
-                </div>
-              </td>
-              <td>
-                <mat-button-toggle-group formControlName="neutralGrain" aria-label="Font Style">
-                  <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                  <mat-button-toggle value="No">No</mat-button-toggle>
-                </mat-button-toggle-group>
-              </td>
-            </tr>
-          </table>
+                <app-field label="Will you be using neutral grain spirits?" [valid]="isValidOrNotTouched('neutralGrain')" [showChevrons]="false"
+                errorMessage="Specify whether you will be useing neutral grain spirits" [isFullWidth]="true">
+                <mat-radio-group formControlName="neutralGrain">
+                  <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
+                  <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
+              </mat-radio-group>
+              </app-field>
         </section>
 
         <hr>
@@ -182,7 +174,7 @@
           you own or lease the equipment necessary to manufacture on-site, and you must continue to maintain that
           equipment to renew your licence).:</p>
         <section>
-          <app-file-uploader *ngIf="application?.id" documentType="Manufacturer Equipment"
+          <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Manufacturer Equipment"
             [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
             [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
             [useDocumentTypeForName]="true" [entityId]="application?.id"
@@ -194,7 +186,7 @@
         <h4>Packaged Product Storage</h4>
         <p>Upload a description of where you will store packaged products:</p>
         <section>
-          <app-file-uploader *ngIf="application?.id" documentType="Agricultural Sources"
+          <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Agricultural Sources"
             [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
             [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
             [useDocumentTypeForName]="true" [entityId]="application?.id"
@@ -205,55 +197,46 @@
         <div *ngIf="isBrewery()">
           <hr>
           <!-- Brewery Question-->
-          <table>
-            <tr>
-              <td class="primary">
-                <div class="question-label">
-                  Will your brewery operate in conjunction with a liquor primary (brewpub) at the same site?
-                </div>
-              </td>
-              <td>
-                <mat-button-toggle-group formControlName="brewPub" aria-label="Font Style">
-                  <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                  <mat-button-toggle value="No">No</mat-button-toggle>
-                </mat-button-toggle-group>
-              </td>
-            </tr>
-            <tr *ngIf="isBrewPub()">
-              <td class="sub">
-                <div class="question-label">
-                  Will product be piped in from the brewery to serve on tap?
-                </div>
-              </td>
-              <td>
-                <mat-button-toggle-group formControlName="pipedIn" aria-label="Font Style">
-                  <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                  <mat-button-toggle value="No">No</mat-button-toggle>
-                </mat-button-toggle-group>
-              </td>
-            </tr>
-            <tr *ngIf="isBrewPub()">
-              <td colspan=2 class="sub">
-                <p>Upload a document that describes a sample of the brew sheets you intend to use in your
-                  production:</p>
-                <section>
-                  <app-file-uploader *ngIf="application?.id" documentType="Sample Brew Sheet"
-                    [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                    [useDocumentTypeForName]="true" [entityId]="application?.id"
-                    [uploadHeader]="'TO UPLOAD SAMPLE BREW SHEET, DRAG FILES HERE OR'">
-                  </app-file-uploader>
-                </section>
-              </td>
-            </tr>
-          </table>
+        
+          <app-field label="Will your brewery operate in conjunction with a liquor primary (brewpub) at the same site?"
+            [valid]="isValidOrNotTouched('brewPub')" [showChevrons]="false"
+            errorMessage="Specify whether you will be useing neutral grain spirits" [isFullWidth]="true">
+            <mat-radio-group formControlName="brewPub">
+              <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
+              <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
+            </mat-radio-group>
+          </app-field>
+        
+        
+          <section *ngIf="isBrewPub()">
+        
+            <app-field label="Will product be piped in from the brewery to serve on tap?"
+              [valid]="isValidOrNotTouched('pipedIn')" [showChevrons]="false"
+              errorMessage="Specify whether you will be useing neutral grain spirits" [isFullWidth]="true">
+              <mat-radio-group formControlName="pipedIn">
+                <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
+                <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
+              </mat-radio-group>
+            </app-field>
+        
+            <p>Upload a document that describes a sample of the brew sheets you intend to use in your
+              production:</p>
+            <section>
+              <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Sample Brew Sheet"
+                [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
+                fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                [useDocumentTypeForName]="true" [entityId]="application?.id"
+                [uploadHeader]="'TO UPLOAD SAMPLE BREW SHEET, DRAG FILES HERE OR'">
+              </app-file-uploader>
+            </section>
+          </section>
         </div>
         <div *ngIf="isBrewery() || isWinery()">
           <hr>
           <h4>Business Insurance</h4>
           <p>Upload your business insurance certificate:</p>
           <section>
-            <app-file-uploader *ngIf="application?.id" documentType="Business Insurance Certificate"
+            <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Business Insurance Certificate"
               [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
               [useDocumentTypeForName]="true" [entityId]="application?.id"
@@ -266,7 +249,7 @@
           <h4>Distribution Plan</h4>
           <p>Upload a description of how you plan to distribute your packaged product:</p>
           <section>
-            <app-file-uploader *ngIf="application?.id" documentType="Distribution Plan"
+            <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Distribution Plan"
               [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
               [useDocumentTypeForName]="true" [entityId]="application?.id"
