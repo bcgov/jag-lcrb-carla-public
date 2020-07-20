@@ -18,12 +18,12 @@
       </mat-step>
 
       <mat-step *ngIf="isRAS" label="Complete Submission">
-        <app-application *ngIf="stepper.selectedIndex === 2" class="w-100" (saveComplete)="stepper.selectedIndex = 3">
+        <app-application *ngIf="stepper.selectedIndex === 2" [skipPayment]="isFree" class="w-100" (saveComplete)="stepper.selectedIndex = 3">
         </app-application>
       </mat-step>
 
       <mat-step *ngIf="!isRAS" label="Complete Application">
-        <app-application *ngIf="stepper.selectedIndex === 2" class="w-100" [skipPayment]="true"
+        <app-application *ngIf="stepper.selectedIndex === 2" class="w-100" [skipPayment]="isFree"
           (saveComplete)="stepper.selectedIndex = 3">
         </app-application>
       </mat-step>
@@ -38,13 +38,8 @@
     </ng-container>
 
     <ng-container *ngIf="stepType === 'post-lg-decision'">
-      <mat-step *ngIf="isRAS" label="LG/IN Review Complete">
-        <app-application *ngIf="stepper.selectedIndex === 0" class="w-100" (saveComplete)="stepper.selectedIndex = 1">
-        </app-application>
-      </mat-step>
-
-      <mat-step *ngIf="!isRAS" label="LG/IN Review Complete">
-        <app-application *ngIf="stepper.selectedIndex === 0" class="w-100" [skipPayment]="true"
+      <mat-step  label="LG/IN Review Complete">
+        <app-application *ngIf="stepper.selectedIndex === 0" class="w-100" [skipPayment]="isFree"
           (saveComplete)="stepper.selectedIndex = 1">
         </app-application>
       </mat-step>
