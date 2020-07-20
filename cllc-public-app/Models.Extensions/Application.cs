@@ -5,6 +5,7 @@ using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -434,17 +435,24 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 // service areas
                 var filter = $"_adoxio_applicationid_value eq {dynamicsApplication.AdoxioApplicationid}";
-                IList<MicrosoftDynamicsCRMadoxioServicearea> areas = dynamicsClient.Serviceareas.Get(filter: filter).Value;
-                foreach (MicrosoftDynamicsCRMadoxioServicearea area in areas)
+                try
                 {
-                    if (area.AdoxioAreacategory == (int?)AdoxioAreaCategories.Service)
+                    IList<MicrosoftDynamicsCRMadoxioServicearea> areas = dynamicsClient.Serviceareas.Get(filter: filter).Value;
+                    foreach (MicrosoftDynamicsCRMadoxioServicearea area in areas)
                     {
-                        applicationVM.ServiceAreas.Add(area.ToViewModel());
+                        if (area.AdoxioAreacategory == (int?)AdoxioAreaCategories.Service)
+                        {
+                            applicationVM.ServiceAreas.Add(area.ToViewModel());
+                        }
+                        else if (area.AdoxioAreacategory == (int?)AdoxioAreaCategories.OutdoorArea)
+                        {
+                            applicationVM.OutsideAreas.Add(area.ToViewModel());
+                        }
                     }
-                    else if (area.AdoxioAreacategory == (int?)AdoxioAreaCategories.OutdoorArea)
-                    {
-                        applicationVM.OutsideAreas.Add(area.ToViewModel());
-                    }
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    logger.LogError(httpOperationException, "Error getting service areas.");
                 }
             }
 
