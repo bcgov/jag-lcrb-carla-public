@@ -37,7 +37,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [EnumMember(Value = "Wine On Shelf")]
         WineOnShelf = 845280007,
         [EnumMember(Value = "BC VQA Store")]
-        BCVQAStore = 845280008
+        BCVQAStore = 845280008,
+        
+        [EnumMember(Value = "Winery")]
+        Winery = 845280009
+
 
     }
 

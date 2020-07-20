@@ -69,6 +69,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public FormControlState? LGandPoliceSelectors { get; set; }
 
         public bool? ShowLiquorDeclarations { get; set; }
+        public bool? ShowOwnershipDeclaration { get; set;}
         
         public bool? ShowDescription1 { get; set; }
         
