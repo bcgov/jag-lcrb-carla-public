@@ -228,7 +228,7 @@
               </section>
               <hr>
 
-                      <!-- Proof of Zoning-->
+              <!-- Proof of Zoning-->
               <section *ngIf="showZoning()">
                 <app-proof-of-zoning *ngIf="application" [application]="application" #proofOfZoning>
                 </app-proof-of-zoning>
@@ -324,6 +324,13 @@
                   </div>
                 </app-field>
               </div>
+            </section>
+
+            <!-- Proof of Zoning-->
+            <section *ngIf="showZoning() && !showFormControl(application?.applicationType?.newEstablishmentAddress)">
+              <app-proof-of-zoning *ngIf="application" [application]="application" #proofOfZoning>
+              </app-proof-of-zoning>
+              <hr>
             </section>
 
             <!-- Store Contact Info -->
@@ -720,6 +727,36 @@
           </div>
         </section>
 
+        <!-- Service Area -->
+        <!--h3 class="blue-header" *ngIf="application.applicationType.serviceAreas" >SERVICE AREA</h3>
+        <section *ngIf="application.applicationType.serviceAreas" class="padded-section content-bottom">
+          <div *ngIf="htmlContent?.serviceArea" [innerHTML]="htmlContent.serviceArea"></div>
+          <app-field [valid]="!showValidationMessages || form.get('serviceAreas').valid"
+              errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
+            <app-capacity-table formControlName="serviceAreas"></app-capacity-table>
+          </app-field>
+        </section-->
+
+        <!-- Service Area -->
+        <h3 class="blue-header" *ngIf="application.applicationType.serviceAreas" >SERVICE AREAS</h3>
+        <section *ngIf="application.applicationType.serviceAreas" class="padded-section content-bottom">
+          <div *ngIf="htmlContent?.serviceArea" [innerHTML]="htmlContent.serviceArea"></div>
+          <app-field [valid]="!showValidationMessages || form.get('serviceAreas').valid"
+              errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
+            <app-capacity-table formControlName="serviceAreas" [areaCategory]="getAreaCategoryNumber('Service')"></app-capacity-table>
+          </app-field>
+        </section>
+
+        <!-- Outside Area -->
+        <h3 class="blue-header" *ngIf="application.applicationType.outsideAreas" >OUTSIDE AREAS</h3>
+        <section *ngIf="application.applicationType.outsideAreas" class="padded-section content-bottom">
+          <div *ngIf="htmlContent?.outsideAreas" [innerHTML]="htmlContent.outsideAreas"></div>
+          <app-field [valid]="!showValidationMessages || form.get('outsideAreas').valid"
+              errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
+            <app-capacity-table formControlName="outsideAreas" [areaCategory]="getAreaCategoryNumber('OutsideArea')"></app-capacity-table>
+          </app-field>
+        </section>
+
         <!--  Proposed Change Description for Structural-->
 
 
@@ -892,26 +929,6 @@
           </div>
 
         </div>
-
-        <!-- Service Area -->
-        <h3 class="blue-header" *ngIf="application.applicationType.serviceAreas" >SERVICE AREAS</h3>
-        <section *ngIf="application.applicationType.serviceAreas" class="padded-section content-bottom">
-          <div *ngIf="htmlContent?.serviceArea" [innerHTML]="htmlContent.serviceArea"></div>
-          <app-field [valid]="!showValidationMessages || form.get('serviceAreas').valid"
-              errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
-            <app-capacity-table formControlName="serviceAreas" [areaCategory]="getAreaCategoryNumber('Service')"></app-capacity-table>
-          </app-field>
-        </section>
-
-        <!-- Outside Area -->
-        <h3 class="blue-header" *ngIf="application.applicationType.outsideAreas" >OUTSIDE AREAS</h3>
-        <section *ngIf="application.applicationType.outsideAreas" class="padded-section content-bottom">
-          <div *ngIf="htmlContent?.outsideAreas" [innerHTML]="htmlContent.outsideAreas"></div>
-          <app-field [valid]="!showValidationMessages || form.get('outsideAreas').valid"
-              errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
-            <app-capacity-table formControlName="outsideAreas" [areaCategory]="getAreaCategoryNumber('OutsideArea')"></app-capacity-table>
-          </app-field>
-        </section>
 
         <!-- Hours of Sale -->
         <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
@@ -1236,9 +1253,8 @@
         </section>
 
         </section>
-                    <!-- RAS Details -->
-            <!--section *ngIf="showFormControl(application?.applicationType.ow"-->
-            <section *ngIf="application.licenseType === 'Manufacturer'">
+            <!-- RAS Details -->
+            <section *ngIf="application?.applicationType.showOwnershipDeclaration">
               <h3 class="blue-header">{{this.application?.licenseType}} Ownership Details</h3>
               <div class="content-bottom">
                 <p>Please provide the following details about your application:</p>
