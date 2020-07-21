@@ -1960,6 +1960,1518 @@
         }
       }
     },
+    "/adoxio_annualvolumes": {
+      "get": {
+        "tags": [
+          "annualvolumes"
+        ],
+        "summary": "Get entities from adoxio_annualvolumes",
+        "operationId": "annualvolumes_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolumeCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "adoxio_annualvolumes.adoxio_annualvolume"
+        ],
+        "summary": "Add new entity to adoxio_annualvolumes",
+        "operationId": "annualvolumes_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Prefer",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New entity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})": {
+      "get": {
+        "tags": [
+          "annualvolumes"
+        ],
+        "summary": "Get entity from adoxio_annualvolumes by key",
+        "operationId": "annualvolumes_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "adoxio_annualvolumes.adoxio_annualvolume"
+        ],
+        "summary": "Update entity in adoxio_annualvolumes",
+        "operationId": "annualvolumes_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New property values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "adoxio_annualvolumes.adoxio_annualvolume"
+        ],
+        "summary": "Delete entity from adoxio_annualvolumes",
+        "operationId": "annualvolumes_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_AsyncOperations": {
+      "get": {
+        "tags": [
+          "annualvolume_asyncoperations"
+        ],
+        "summary": "Get adoxio_annualvolume_AsyncOperations from adoxio_annualvolumes",
+        "operationId": "annualvolumeasyncoperations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperationCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_AsyncOperations({asyncoperationid})": {
+      "get": {
+        "tags": [
+          "annualvolume_asyncoperations"
+        ],
+        "summary": "Get adoxio_annualvolume_AsyncOperations from adoxio_annualvolumes",
+        "operationId": "annualvolumeasyncoperations_Getadoxio_annualvolume_AsyncOperationsByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "asyncoperationid",
+            "description": "key: asyncoperationid of asyncoperation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_BulkDeleteFailures": {
+      "get": {
+        "tags": [
+          "annualvolume_bulkdeletefailures"
+        ],
+        "summary": "Get adoxio_annualvolume_BulkDeleteFailures from adoxio_annualvolumes",
+        "operationId": "annualvolumebulkdeletefailures_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailureCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_BulkDeleteFailures({bulkdeletefailureid})": {
+      "get": {
+        "tags": [
+          "annualvolume_bulkdeletefailures"
+        ],
+        "summary": "Get adoxio_annualvolume_BulkDeleteFailures from adoxio_annualvolumes",
+        "operationId": "annualvolumebulkdeletefailures_Getadoxio_annualvolume_BulkDeleteFailuresByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "bulkdeletefailureid",
+            "description": "key: bulkdeletefailureid of bulkdeletefailure",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_DuplicateBaseRecord": {
+      "get": {
+        "tags": [
+          "annualvolume_duplicatebaserecord"
+        ],
+        "summary": "Get adoxio_annualvolume_DuplicateBaseRecord from adoxio_annualvolumes",
+        "operationId": "annualvolumeduplicatebaserecord_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecordCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_DuplicateBaseRecord({duplicateid})": {
+      "get": {
+        "tags": [
+          "annualvolume_duplicatebaserecord"
+        ],
+        "summary": "Get adoxio_annualvolume_DuplicateBaseRecord from adoxio_annualvolumes",
+        "operationId": "annualvolumeduplicatebaserecord_Getadoxio_annualvolume_DuplicateBaseRecordByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_DuplicateMatchingRecord": {
+      "get": {
+        "tags": [
+          "annualvolume_duplicatematchingrecord"
+        ],
+        "summary": "Get adoxio_annualvolume_DuplicateMatchingRecord from adoxio_annualvolumes",
+        "operationId": "annualvolumeduplicatematchingrecord_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecordCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_DuplicateMatchingRecord({duplicateid})": {
+      "get": {
+        "tags": [
+          "annualvolume_duplicatematchingrecord"
+        ],
+        "summary": "Get adoxio_annualvolume_DuplicateMatchingRecord from adoxio_annualvolumes",
+        "operationId": "annualvolumeduplicatematchingrecord_Getadoxio_annualvolume_DuplicateMatchingRecordByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_MailboxTrackingFolders": {
+      "get": {
+        "tags": [
+          "annualvolume_mailboxtrackingfolders"
+        ],
+        "summary": "Get adoxio_annualvolume_MailboxTrackingFolders from adoxio_annualvolumes",
+        "operationId": "annualvolumemailboxtrackingfolders_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolderCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_MailboxTrackingFolders({mailboxtrackingfolderid})": {
+      "get": {
+        "tags": [
+          "annualvolume_mailboxtrackingfolders"
+        ],
+        "summary": "Get adoxio_annualvolume_MailboxTrackingFolders from adoxio_annualvolumes",
+        "operationId": "annualvolumemailboxtrackingfolders_Getadoxio_annualvolume_MailboxTrackingFoldersByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "mailboxtrackingfolderid",
+            "description": "key: mailboxtrackingfolderid of mailboxtrackingfolder",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolder"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_PrincipalObjectAttributeAccesses": {
+      "get": {
+        "tags": [
+          "annualvolume_principalobjectattributeaccesses"
+        ],
+        "summary": "Get adoxio_annualvolume_PrincipalObjectAttributeAccesses from adoxio_annualvolumes",
+        "operationId": "annualvolumeprincipalobjectattributeaccesses_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccessCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_PrincipalObjectAttributeAccesses({principalobjectattributeaccessid})": {
+      "get": {
+        "tags": [
+          "annualvolume_principalobjectattributeaccesses"
+        ],
+        "summary": "Get adoxio_annualvolume_PrincipalObjectAttributeAccesses from adoxio_annualvolumes",
+        "operationId": "annualvolumeprincipalobjectattributeaccesses_Getadoxio_annualvolume_PrincipalObjectAttributeAccessesByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "principalobjectattributeaccessid",
+            "description": "key: principalobjectattributeaccessid of principalobjectattributeaccess",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccess"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_ProcessSession": {
+      "get": {
+        "tags": [
+          "annualvolume_processsession"
+        ],
+        "summary": "Get adoxio_annualvolume_ProcessSession from adoxio_annualvolumes",
+        "operationId": "annualvolumeprocesssession_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.processsessionCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_ProcessSession({processsessionid})": {
+      "get": {
+        "tags": [
+          "annualvolume_processsession"
+        ],
+        "summary": "Get adoxio_annualvolume_ProcessSession from adoxio_annualvolumes",
+        "operationId": "annualvolumeprocesssession_Getadoxio_annualvolume_ProcessSessionByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "processsessionid",
+            "description": "key: processsessionid of processsession",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.processsession"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_SyncErrors": {
+      "get": {
+        "tags": [
+          "annualvolume_syncerrors"
+        ],
+        "summary": "Get adoxio_annualvolume_SyncErrors from adoxio_annualvolumes",
+        "operationId": "annualvolumesyncerrors_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerrorCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_annualvolume_SyncErrors({syncerrorid})": {
+      "get": {
+        "tags": [
+          "annualvolume_syncerrors"
+        ],
+        "summary": "Get adoxio_annualvolume_SyncErrors from adoxio_annualvolumes",
+        "operationId": "annualvolumesyncerrors_Getadoxio_annualvolume_SyncErrorsByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "syncerrorid",
+            "description": "key: syncerrorid of syncerror",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_Application": {
+      "get": {
+        "tags": [
+          "application"
+        ],
+        "summary": "Get adoxio_Application from adoxio_annualvolumes",
+        "operationId": "application_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_annualvolumes({adoxio_annualvolumeid})/adoxio_Licence": {
+      "get": {
+        "tags": [
+          "licence"
+        ],
+        "summary": "Get adoxio_Licence from adoxio_annualvolumes",
+        "operationId": "licence_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_applicationbpfv3s": {
       "get": {
         "tags": [
@@ -10264,6 +11776,152 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_endorsement"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_applications({adoxio_applicationid})/adoxio_application_annualvolume_Application": {
+      "get": {
+        "tags": [
+          "application_annualvolume_application"
+        ],
+        "summary": "Get adoxio_application_annualvolume_Application from adoxio_applications",
+        "operationId": "applicationannualvolumeapplication_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_applicationid",
+            "description": "key: adoxio_applicationid of adoxio_application",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolumeCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_applications({adoxio_applicationid})/adoxio_application_annualvolume_Application({adoxio_annualvolumeid})": {
+      "get": {
+        "tags": [
+          "application_annualvolume_application"
+        ],
+        "summary": "Get adoxio_application_annualvolume_Application from adoxio_applications",
+        "operationId": "applicationannualvolumeapplication_Getadoxio_application_annualvolume_ApplicationByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_applicationid",
+            "description": "key: adoxio_applicationid of adoxio_application",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
             }
           },
           "default": {
@@ -65118,6 +66776,152 @@
         }
       }
     },
+    "/adoxio_licenceses({adoxio_licencesid})/adoxio_licences_annualvolume_Licence": {
+      "get": {
+        "tags": [
+          "licences_annualvolume_licence"
+        ],
+        "summary": "Get adoxio_licences_annualvolume_Licence from adoxio_licenceses",
+        "operationId": "licencesannualvolumelicence_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_licencesid",
+            "description": "key: adoxio_licencesid of adoxio_licences",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolumeCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_licenceses({adoxio_licencesid})/adoxio_licences_annualvolume_Licence({adoxio_annualvolumeid})": {
+      "get": {
+        "tags": [
+          "licences_annualvolume_licence"
+        ],
+        "summary": "Get adoxio_licences_annualvolume_Licence from adoxio_licenceses",
+        "operationId": "licencesannualvolumelicence_Getadoxio_licences_annualvolume_LicenceByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_licencesid",
+            "description": "key: adoxio_licencesid of adoxio_licences",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_licenceses({adoxio_licencesid})/adoxio_licences_MailboxTrackingFolders": {
       "get": {
         "tags": [
@@ -85622,6 +87426,58 @@
         }
       }
     },
+    "/asyncoperations({asyncoperationid})/regardingobjectid_adoxio_annualvolume": {
+      "get": {
+        "tags": [
+          "regardingobjectid_annualvolume"
+        ],
+        "summary": "Get regardingobjectid_adoxio_annualvolume from asyncoperations",
+        "operationId": "Regardingobjectidadoxioannualvolume_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "asyncoperationid",
+            "description": "key: asyncoperationid of asyncoperation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/asyncoperations({asyncoperationid})/regardingobjectid_adoxio_applicationcrsbpfv4": {
       "get": {
         "tags": [
@@ -86766,6 +88622,58 @@
         }
       }
     },
+    "/bulkdeletefailures({bulkdeletefailureid})/regardingobjectid_adoxio_annualvolume": {
+      "get": {
+        "tags": [
+          "regardingobjectid_annualvolume"
+        ],
+        "summary": "Get regardingobjectid_adoxio_annualvolume from bulkdeletefailures",
+        "operationId": "Regardingobjectidadoxioannualvolume_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bulkdeletefailureid",
+            "description": "key: bulkdeletefailureid of bulkdeletefailure",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/bulkdeletefailures({bulkdeletefailureid})/regardingobjectid_adoxio_applicationcrsbpfv4": {
       "get": {
         "tags": [
@@ -87902,6 +89810,152 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/businessunits({businessunitid})/business_unit_adoxio_annualvolume": {
+      "get": {
+        "tags": [
+          "business_unit_annualvolume"
+        ],
+        "summary": "Get business_unit_adoxio_annualvolume from businessunits",
+        "operationId": "Businessunitadoxioannualvolume_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessunitid",
+            "description": "key: businessunitid of businessunit",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolumeCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/businessunits({businessunitid})/business_unit_adoxio_annualvolume({adoxio_annualvolumeid})": {
+      "get": {
+        "tags": [
+          "business_unit_annualvolume"
+        ],
+        "summary": "Get business_unit_adoxio_annualvolume from businessunits",
+        "operationId": "Businessunitadoxioannualvolume_Getbusiness_unit_adoxio_annualvolumeByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessunitid",
+            "description": "key: businessunitid of businessunit",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
             }
           },
           "default": {
@@ -90340,6 +92394,58 @@
         }
       }
     },
+    "/duplicaterecords({duplicateid})/baserecordid_adoxio_annualvolume": {
+      "get": {
+        "tags": [
+          "baserecordid_annualvolume"
+        ],
+        "summary": "Get baserecordid_adoxio_annualvolume from duplicaterecords",
+        "operationId": "Baserecordidadoxioannualvolume_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/duplicaterecords({duplicateid})/baserecordid_adoxio_applicationtypefeeschedule": {
       "get": {
         "tags": [
@@ -91008,6 +93114,58 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/duplicaterecords({duplicateid})/duplicaterecordid_adoxio_annualvolume": {
+      "get": {
+        "tags": [
+          "duplicaterecordid_annualvolume"
+        ],
+        "summary": "Get duplicaterecordid_adoxio_annualvolume from duplicaterecords",
+        "operationId": "Duplicaterecordidadoxioannualvolume_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
             }
           },
           "default": {
@@ -93696,6 +95854,58 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_alias"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/mailboxtrackingfolders({mailboxtrackingfolderid})/regardingobjectid_adoxio_annualvolume": {
+      "get": {
+        "tags": [
+          "regardingobjectid_annualvolume"
+        ],
+        "summary": "Get regardingobjectid_adoxio_annualvolume from mailboxtrackingfolders",
+        "operationId": "Regardingobjectidadoxioannualvolume_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "mailboxtrackingfolderid",
+            "description": "key: mailboxtrackingfolderid of mailboxtrackingfolder",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
             }
           },
           "default": {
@@ -99188,6 +101398,58 @@
         }
       }
     },
+    "/principalobjectattributeaccessset({principalobjectattributeaccessid})/objectid_adoxio_annualvolume": {
+      "get": {
+        "tags": [
+          "objectid_annualvolume"
+        ],
+        "summary": "Get objectid_adoxio_annualvolume from principalobjectattributeaccessset",
+        "operationId": "Objectidadoxioannualvolume_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "principalobjectattributeaccessid",
+            "description": "key: principalobjectattributeaccessid of principalobjectattributeaccess",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/principalobjectattributeaccessset({principalobjectattributeaccessid})/objectid_adoxio_application": {
       "get": {
         "tags": [
@@ -103392,6 +105654,58 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_alias"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/processsessions({processsessionid})/regardingobjectid_adoxio_annualvolume": {
+      "get": {
+        "tags": [
+          "regardingobjectid_annualvolume"
+        ],
+        "summary": "Get regardingobjectid_adoxio_annualvolume from processsessions",
+        "operationId": "Regardingobjectidadoxioannualvolume_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "processsessionid",
+            "description": "key: processsessionid of processsession",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
             }
           },
           "default": {
@@ -110416,6 +112730,58 @@
         }
       }
     },
+    "/syncerrors({syncerrorid})/regardingobjectid_adoxio_annualvolume": {
+      "get": {
+        "tags": [
+          "regardingobjectid_annualvolume"
+        ],
+        "summary": "Get regardingobjectid_adoxio_annualvolume from syncerrors",
+        "operationId": "Regardingobjectidadoxioannualvolume_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "syncerrorid",
+            "description": "key: syncerrorid of syncerror",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/syncerrors({syncerrorid})/regardingobjectid_adoxio_applicationcrsbpfv4": {
       "get": {
         "tags": [
@@ -112814,6 +115180,590 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_annualvolume_createdby": {
+      "get": {
+        "tags": [
+          "lk_annualvolume_createdby"
+        ],
+        "summary": "Get lk_adoxio_annualvolume_createdby from systemusers",
+        "operationId": "Lkadoxioannualvolumecreatedby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolumeCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_annualvolume_createdby({adoxio_annualvolumeid})": {
+      "get": {
+        "tags": [
+          "lk_annualvolume_createdby"
+        ],
+        "summary": "Get lk_adoxio_annualvolume_createdby from systemusers",
+        "operationId": "Lkadoxioannualvolumecreatedby_Getlk_adoxio_annualvolume_createdbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_annualvolume_createdonbehalfby": {
+      "get": {
+        "tags": [
+          "lk_annualvolume_createdonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_annualvolume_createdonbehalfby from systemusers",
+        "operationId": "Lkadoxioannualvolumecreatedonbehalfby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolumeCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_annualvolume_createdonbehalfby({adoxio_annualvolumeid})": {
+      "get": {
+        "tags": [
+          "lk_annualvolume_createdonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_annualvolume_createdonbehalfby from systemusers",
+        "operationId": "Lkadoxioannualvolumecreatedonbehalfby_Getlk_adoxio_annualvolume_createdonbehalfbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_annualvolume_modifiedby": {
+      "get": {
+        "tags": [
+          "lk_annualvolume_modifiedby"
+        ],
+        "summary": "Get lk_adoxio_annualvolume_modifiedby from systemusers",
+        "operationId": "Lkadoxioannualvolumemodifiedby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolumeCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_annualvolume_modifiedby({adoxio_annualvolumeid})": {
+      "get": {
+        "tags": [
+          "lk_annualvolume_modifiedby"
+        ],
+        "summary": "Get lk_adoxio_annualvolume_modifiedby from systemusers",
+        "operationId": "Lkadoxioannualvolumemodifiedby_Getlk_adoxio_annualvolume_modifiedbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_annualvolume_modifiedonbehalfby": {
+      "get": {
+        "tags": [
+          "lk_annualvolume_modifiedonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_annualvolume_modifiedonbehalfby from systemusers",
+        "operationId": "Lkadoxioannualvolumemodifiedonbehalfby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolumeCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_annualvolume_modifiedonbehalfby({adoxio_annualvolumeid})": {
+      "get": {
+        "tags": [
+          "lk_annualvolume_modifiedonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_annualvolume_modifiedonbehalfby from systemusers",
+        "operationId": "Lkadoxioannualvolumemodifiedonbehalfby_Getlk_adoxio_annualvolume_modifiedonbehalfbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
             }
           },
           "default": {
@@ -125670,6 +128620,152 @@
         }
       }
     },
+    "/systemusers({ownerid})/user_adoxio_annualvolume": {
+      "get": {
+        "tags": [
+          "user_annualvolume"
+        ],
+        "summary": "Get user_adoxio_annualvolume from systemusers",
+        "operationId": "Useradoxioannualvolume_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolumeCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/user_adoxio_annualvolume({adoxio_annualvolumeid})": {
+      "get": {
+        "tags": [
+          "user_annualvolume"
+        ],
+        "summary": "Get user_adoxio_annualvolume from systemusers",
+        "operationId": "Useradoxioannualvolume_Getuser_adoxio_annualvolumeByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/systemusers({ownerid})/user_adoxio_applicationtypefeeschedule": {
       "get": {
         "tags": [
@@ -127914,6 +131010,152 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/teams({ownerid})/team_adoxio_annualvolume": {
+      "get": {
+        "tags": [
+          "team_annualvolume"
+        ],
+        "summary": "Get team_adoxio_annualvolume from teams",
+        "operationId": "Teamadoxioannualvolume_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of team",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolumeCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/teams({ownerid})/team_adoxio_annualvolume({adoxio_annualvolumeid})": {
+      "get": {
+        "tags": [
+          "team_annualvolume"
+        ],
+        "summary": "Get team_adoxio_annualvolume from teams",
+        "operationId": "Teamadoxioannualvolume_Getteam_adoxio_annualvolumeByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of team",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_annualvolumeid",
+            "description": "key: adoxio_annualvolumeid of adoxio_annualvolume",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
             }
           },
           "default": {
@@ -135017,6 +138259,181 @@
         }
       }
     },
+    "Microsoft.Dynamics.CRM.adoxio_annualvolume": {
+      "description": "Microsoft.Dynamics.CRM.adoxio_annualvolume",
+      "type": "object",
+      "properties": {
+        "statecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "modifiedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_volumedestroyed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "type": "string"
+        },
+        "_createdonbehalfby_value": {
+          "type": "string"
+        },
+        "adoxio_datesubmitted": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "utcconversiontimezonecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_owningteam_value": {
+          "type": "string"
+        },
+        "timezoneruleversionnumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_modifiedby_value": {
+          "type": "string"
+        },
+        "_createdby_value": {
+          "type": "string"
+        },
+        "_owningbusinessunit_value": {
+          "type": "string"
+        },
+        "_ownerid_value": {
+          "type": "string"
+        },
+        "adoxio_volumeproduced": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string"
+        },
+        "adoxio_name": {
+          "type": "string"
+        },
+        "_owninguser_value": {
+          "type": "string"
+        },
+        "_adoxio_licence_value": {
+          "type": "string"
+        },
+        "adoxio_calendaryear": {
+          "type": "string"
+        },
+        "adoxio_annualvolumeid": {
+          "type": "string"
+        },
+        "importsequencenumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "overriddencreatedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_calendaryearint": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "statuscode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_application_value": {
+          "type": "string"
+        },
+        "createdby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "createdonbehalfby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedonbehalfby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owninguser": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owningteam": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+        },
+        "ownerid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+        },
+        "owningbusinessunit": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+        },
+        "adoxio_annualvolume_SyncErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+          }
+        },
+        "adoxio_annualvolume_DuplicateMatchingRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_annualvolume_DuplicateBaseRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_annualvolume_AsyncOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+          }
+        },
+        "adoxio_annualvolume_MailboxTrackingFolders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolder"
+          }
+        },
+        "adoxio_annualvolume_ProcessSession": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.processsession"
+          }
+        },
+        "adoxio_annualvolume_BulkDeleteFailures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+          }
+        },
+        "adoxio_annualvolume_PrincipalObjectAttributeAccesses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccess"
+          }
+        },
+        "adoxio_Application": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
+        },
+        "adoxio_Licence": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+        }
+      }
+    },
     "Microsoft.Dynamics.CRM.adoxio_applicationbpfv3": {
       "description": "Microsoft.Dynamics.CRM.adoxio_applicationbpfv3",
       "type": "object",
@@ -136166,6 +139583,10 @@
         "adoxio_establishmentotherbusinessnature": {
           "type": "string"
         },
+        "adoxio_checklistnoticeofarcticlesreceived": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_registeredestablishment": {
           "format": "int32",
           "type": "integer"
@@ -136272,10 +139693,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_checklistnoticeofarcticlesreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
         "_adoxio_applyingperson_value": {
           "type": "string"
         },
@@ -136340,8 +139757,8 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_addressprovince": {
-          "type": "string"
+        "adoxio_ispackaging": {
+          "type": "boolean"
         },
         "statuscode": {
           "format": "int32",
@@ -136487,6 +139904,10 @@
           "type": "integer"
         },
         "adoxio_tiedhouseresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_mfgbrewpubonsite": {
           "format": "int32",
           "type": "integer"
         },
@@ -136975,6 +140396,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_addressprovince": {
+          "type": "string"
+        },
         "adoxio_signatureposition": {
           "type": "string"
         },
@@ -137406,6 +140830,10 @@
         "adoxio_businessinfoemail": {
           "type": "string"
         },
+        "adoxio_dateapplicationsubmitted": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_pidlist": {
           "type": "string"
         },
@@ -137474,6 +140902,10 @@
           "type": "string"
         },
         "adoxio_occupationload": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_mfgpipedinproduct": {
           "format": "int32",
           "type": "integer"
         },
@@ -137878,6 +141310,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+          }
+        },
+        "adoxio_application_annualvolume_Application": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
           }
         }
       }
@@ -141985,139 +145423,36 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_contravention",
       "type": "object",
       "properties": {
-        "adoxio_isreg": {
-          "type": "boolean"
-        },
-        "timezoneruleversionnumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_modifiedby_value": {
-          "type": "string"
-        },
-        "_adoxio_areaid_value": {
-          "type": "string"
-        },
-        "_adoxio_licenseeid_value": {
-          "type": "string"
-        },
-        "_transactioncurrencyid_value": {
-          "type": "string"
-        },
-        "createdon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_contraventionoutcome": {
+        "adoxio_type": {
           "format": "int32",
           "type": "integer"
         },
         "_modifiedonbehalfby_value": {
           "type": "string"
         },
-        "adoxio_contraventionid": {
+        "_adoxio_licenceid_value": {
           "type": "string"
         },
-        "_createdonbehalfby_value": {
+        "_owningbusinessunit_value": {
           "type": "string"
         },
-        "adoxio_iswqr": {
-          "type": "boolean"
+        "_ownerid_value": {
+          "type": "string"
         },
-        "adoxio_incidentdatetime": {
+        "_adoxio_establishmentid_value": {
+          "type": "string"
+        },
+        "_adoxio_enforcementactionid_value": {
+          "type": "string"
+        },
+        "adoxio_penaltylettercreateddate": {
           "format": "date-time",
           "type": "string"
         },
         "adoxio_inspectorsummary": {
           "type": "string"
         },
-        "_createdby_value": {
-          "type": "string"
-        },
-        "adoxio_maxpenalty": {
-          "format": "decimal",
-          "type": "number"
-        },
-        "adoxio_actiontaken": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_policynamereference": {
-          "type": "string"
-        },
-        "_adoxio_enforcementactionid_value": {
-          "type": "string"
-        },
-        "adoxio_actiondate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_isact": {
-          "type": "boolean"
-        },
-        "_owninguser_value": {
-          "type": "string"
-        },
-        "_adoxio_investigationid_value": {
-          "type": "string"
-        },
-        "adoxio_name": {
-          "type": "string"
-        },
-        "importsequencenumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_regionid_value": {
-          "type": "string"
-        },
-        "adoxio_iswaiverrequested": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_maxperiod": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_suspensionenddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_adoxio_licenceid_value": {
-          "type": "string"
-        },
-        "adoxio_recommendedclosureperiod": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_suspensionstartdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_delegatefinaldecision": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "modifiedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_recommendedmonetarypenalty": {
-          "format": "decimal",
-          "type": "number"
-        },
-        "adoxio_minperiod": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_isactwordtemplate": {
-          "type": "string"
-        },
-        "adoxio_category": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_type": {
+        "adoxio_iscontraventionconfirmed": {
           "format": "int32",
           "type": "integer"
         },
@@ -142125,40 +145460,307 @@
           "format": "decimal",
           "type": "number"
         },
-        "versionnumber": {
-          "format": "int64",
+        "_adoxio_areaid_value": {
           "type": "string"
         },
         "adoxio_finalmonetarypenalty": {
           "format": "decimal",
           "type": "number"
         },
-        "adoxio_isregwordtemplate": {
+        "adoxio_penaltylettersentdate": {
+          "format": "date-time",
           "type": "string"
         },
-        "_adoxio_regionalmanagerid_value": {
+        "_adoxio_inspectionid_value": {
           "type": "string"
+        },
+        "adoxio_interpretation": {
+          "type": "string"
+        },
+        "adoxio_delegatefinding": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_rmapprovaldecisiondate": {
           "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_recommendedmonetarypenalty": {
+          "format": "decimal",
+          "type": "number"
+        },
+        "_adoxio_regionid_value": {
+          "type": "string"
+        },
+        "_owninguser_value": {
+          "type": "string"
+        },
+        "adoxio_iswqr": {
+          "type": "boolean"
+        },
+        "_createdonbehalfby_value": {
+          "type": "string"
+        },
+        "adoxio_minperiod": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "modifiedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_monetarypenaltypaymentdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_actiontaken": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "overriddencreatedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_delegatedecisionsentdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_delegatedecisionreceiveddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_category": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_maxpenalty": {
+          "format": "decimal",
+          "type": "number"
+        },
+        "adoxio_maxperiod": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_waiverresponseduedate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_iswaiverrequested": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_owningteam_value": {
+          "type": "string"
+        },
+        "adoxio_communicationdistributiondate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_istandcwordtemplate": {
+          "type": "string"
+        },
+        "_modifiedby_value": {
+          "type": "string"
+        },
+        "adoxio_waiversubmittedforreviewdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_suspensionstartdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_badgenumber": {
+          "type": "string"
+        },
+        "adoxio_minpenalty": {
+          "format": "decimal",
+          "type": "number"
+        },
+        "adoxio_delegatefinaldecision": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_suspensionperioddefineddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "timezoneruleversionnumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_datetime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_maxpenalty_base": {
+          "format": "decimal",
+          "type": "number"
+        },
+        "adoxio_penaltytype": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_numberofoffence": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_delegatedecisionresult": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_finalpenaltytype": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isregwordtemplate": {
+          "type": "string"
+        },
+        "adoxio_actiondate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_adoxio_investigationid_value": {
+          "type": "string"
+        },
+        "adoxio_cnissueddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_isactwordtemplate": {
+          "type": "string"
+        },
+        "adoxio_incidentdatetime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_rmsummary": {
+          "type": "string"
+        },
+        "_adoxio_licenseeid_value": {
+          "type": "string"
+        },
+        "adoxio_name": {
+          "type": "string"
+        },
+        "adoxio_delegategmdecision": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_compliantid_value": {
           "type": "string"
         },
         "statuscode": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_maxpenalty_base": {
-          "format": "decimal",
-          "type": "number"
-        },
-        "adoxio_rmsummary": {
+        "_transactioncurrencyid_value": {
           "type": "string"
         },
-        "adoxio_suspensionperioddefineddate": {
+        "adoxio_policynamereference": {
+          "type": "string"
+        },
+        "adoxio_penaltyletterapproveddate": {
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_delegategmdecision": {
+        "importsequencenumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_waiversenttolicenseedate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_contraventionid": {
+          "type": "string"
+        },
+        "adoxio_istandc": {
+          "type": "boolean"
+        },
+        "exchangerate": {
+          "format": "decimal",
+          "type": "number"
+        },
+        "adoxio_isreg": {
+          "type": "boolean"
+        },
+        "createdon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_waiverapprovedbyrmdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_contraventionoutcome": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_iswqrwordtemplate": {
+          "type": "string"
+        },
+        "adoxio_lpcnumber": {
+          "type": "string"
+        },
+        "adoxio_isact": {
+          "type": "boolean"
+        },
+        "adoxio_recommendedmonetarypenalty_base": {
+          "format": "decimal",
+          "type": "number"
+        },
+        "adoxio_minpenalty_base": {
+          "format": "decimal",
+          "type": "number"
+        },
+        "adoxio_suspensionenddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_contraventionevidencesummary": {
+          "type": "string"
+        },
+        "adoxio_suspensionfulfillmentdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "utcconversiontimezonecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_contraventionnumber": {
+          "type": "string"
+        },
+        "adoxio_ismonetarypenalty": {
+          "type": "boolean"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "type": "string"
+        },
+        "adoxio_finalsuspensionperiod": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_createdby_value": {
+          "type": "string"
+        },
+        "adoxio_recommendedclosureperiod": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_reference": {
+          "type": "string"
+        },
+        "_adoxio_contraventiontitleid_value": {
+          "type": "string"
+        },
+        "adoxio_waiversigneddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "statecode": {
           "format": "int32",
           "type": "integer"
         },
@@ -142166,110 +145768,14 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_badgenumber": {
-          "type": "string"
-        },
-        "adoxio_istandcwordtemplate": {
-          "type": "string"
-        },
-        "statecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_contraventionnumber": {
-          "type": "string"
-        },
-        "adoxio_rmapprovaldecision": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "exchangerate": {
-          "format": "decimal",
-          "type": "number"
-        },
-        "_owningbusinessunit_value": {
-          "type": "string"
-        },
-        "adoxio_minpenalty": {
-          "format": "decimal",
-          "type": "number"
-        },
-        "adoxio_cnissueddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_adoxio_inspectionid_value": {
-          "type": "string"
-        },
-        "adoxio_minpenalty_base": {
-          "format": "decimal",
-          "type": "number"
-        },
-        "adoxio_lpcnumber": {
-          "type": "string"
-        },
-        "adoxio_numberofoffence": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_interpretation": {
-          "type": "string"
-        },
-        "adoxio_iscontraventionconfirmed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_penaltytype": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "utcconversiontimezonecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_ismonetarypenalty": {
-          "type": "boolean"
-        },
-        "overriddencreatedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_reference": {
-          "type": "string"
-        },
-        "adoxio_recommendedmonetarypenalty_base": {
-          "format": "decimal",
-          "type": "number"
-        },
-        "adoxio_contraventionevidencesummary": {
-          "type": "string"
-        },
-        "adoxio_iswqrwordtemplate": {
-          "type": "string"
-        },
-        "adoxio_istandc": {
-          "type": "boolean"
-        },
-        "adoxio_datetime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_owningteam_value": {
-          "type": "string"
-        },
-        "_adoxio_contraventiontitleid_value": {
-          "type": "string"
-        },
-        "_adoxio_establishmentid_value": {
-          "type": "string"
-        },
-        "_ownerid_value": {
-          "type": "string"
-        },
-        "_adoxio_compliantid_value": {
+        "_adoxio_regionalmanagerid_value": {
           "type": "string"
         },
         "adoxio_iswaiversigned": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_rmapprovaldecision": {
           "format": "int32",
           "type": "integer"
         },
@@ -143859,6 +147365,10 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_enforcementaction",
       "type": "object",
       "properties": {
+        "adoxio_checklistmultiplesigns": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_checklistpenaltyletterreissued": {
           "format": "int32",
           "type": "integer"
@@ -143988,7 +147498,7 @@
         "adoxio_lgcontactemail": {
           "type": "string"
         },
-        "adoxio_checklistoverduewaiverresponse": {
+        "adoxio_checklistalldocsuploaded": {
           "format": "int32",
           "type": "integer"
         },
@@ -144160,6 +147670,10 @@
         "adoxio_enforcementactionid": {
           "type": "string"
         },
+        "adoxio_initiallicenseeresponsedate": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_checklistphccomplete": {
           "format": "int32",
           "type": "integer"
@@ -144199,6 +147713,10 @@
         "adoxio_judicialhearingdate": {
           "format": "date-time",
           "type": "string"
+        },
+        "adoxio_checklistoverduewaiverresponse": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_checklistfinancenotifiedpenalty": {
           "format": "int32",
@@ -144374,6 +147892,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_checklistallpenaltystepscomplete": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_judicialhearinglocation": {
           "type": "string"
         },
@@ -144513,6 +148035,10 @@
         "_createdby_value": {
           "type": "string"
         },
+        "adoxio_checklistmultiplecontraventions": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_staylettersentdate": {
           "format": "date-time",
           "type": "string"
@@ -144595,9 +148121,9 @@
         "adoxio_hearinglocation": {
           "type": "string"
         },
-        "adoxio_initiallicenseeresponsedate": {
-          "format": "date-time",
-          "type": "string"
+        "adoxio_checklistfinancenotifiedofpenalty": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_checklisthearinginvitationsent": {
           "format": "int32",
@@ -149841,6 +153367,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+          }
+        },
+        "adoxio_licences_annualvolume_Licence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
           }
         }
       }
@@ -156822,6 +160354,9 @@
         "regardingobjectid_adoxio_servicearea": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
         },
+        "regardingobjectid_adoxio_annualvolume": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+        },
         "regardingobjectid_productpricelevel": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.productpricelevel"
         },
@@ -159514,6 +163049,9 @@
         "regardingobjectid_adoxio_servicearea": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
         },
+        "regardingobjectid_adoxio_annualvolume": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+        },
         "regardingobjectid_customeraddress": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.customeraddress"
         },
@@ -161196,6 +164734,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+          }
+        },
+        "business_unit_adoxio_annualvolume": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
           }
         },
         "BusinessUnit_SyncErrors": {
@@ -169217,6 +172761,12 @@
         },
         "baserecordid_adoxio_servicearea": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+        },
+        "duplicaterecordid_adoxio_annualvolume": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+        },
+        "baserecordid_adoxio_annualvolume": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
         },
         "baserecordid_goalrollupquery": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.goalrollupquery"
@@ -182931,6 +186481,9 @@
         "regardingobjectid_adoxio_servicearea": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
         },
+        "regardingobjectid_adoxio_annualvolume": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+        },
         "regardingobjectid_incident": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
         },
@@ -189559,6 +193112,12 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
           }
         },
+        "owner_adoxio_annualvolume": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+          }
+        },
         "owner_personaldocumenttemplates": {
           "type": "array",
           "items": {
@@ -192218,6 +195777,9 @@
         "objectid_adoxio_servicearea": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
         },
+        "objectid_adoxio_annualvolume": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+        },
         "objectid_campaign": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.campaign"
         },
@@ -192915,6 +196477,9 @@
         },
         "regardingobjectid_adoxio_servicearea": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+        },
+        "regardingobjectid_adoxio_annualvolume": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
         },
         "regardingobjectid_invoicedetail": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoicedetail"
@@ -208828,6 +212393,36 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
           }
         },
+        "lk_adoxio_annualvolume_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+          }
+        },
+        "lk_adoxio_annualvolume_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+          }
+        },
+        "lk_adoxio_annualvolume_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+          }
+        },
+        "lk_adoxio_annualvolume_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+          }
+        },
+        "user_adoxio_annualvolume": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+          }
+        },
         "lk_slakpiinstancebase_createdonbehalfby": {
           "type": "array",
           "items": {
@@ -214799,6 +218394,12 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
           }
         },
+        "team_adoxio_annualvolume": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
+          }
+        },
         "team_DuplicateRules": {
           "type": "array",
           "items": {
@@ -219410,28 +223011,15 @@
         }
       }
     },
-    "Microsoft.Dynamics.CRM.adoxio_applicationbpfv3Collection": {
-      "title": "Collection of adoxio_applicationbpfv3",
-      "description": "Microsoft.Dynamics.CRM.adoxio_applicationbpfv3Collection",
+    "Microsoft.Dynamics.CRM.adoxio_annualvolumeCollection": {
+      "title": "Collection of adoxio_annualvolume",
+      "description": "Microsoft.Dynamics.CRM.adoxio_annualvolumeCollection",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfv3"
-          }
-        }
-      }
-    },
-    "Microsoft.Dynamics.CRM.adoxio_applicationcrsbpfv4Collection": {
-      "title": "Collection of adoxio_applicationcrsbpfv4",
-      "description": "Microsoft.Dynamics.CRM.adoxio_applicationcrsbpfv4Collection",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationcrsbpfv4"
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_annualvolume"
           }
         }
       }
@@ -219462,6 +223050,19 @@
         }
       }
     },
+    "Microsoft.Dynamics.CRM.duplicaterecordCollection": {
+      "title": "Collection of duplicaterecord",
+      "description": "Microsoft.Dynamics.CRM.duplicaterecordCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        }
+      }
+    },
     "Microsoft.Dynamics.CRM.syncerrorCollection": {
       "title": "Collection of syncerror",
       "description": "Microsoft.Dynamics.CRM.syncerrorCollection",
@@ -219471,6 +223072,32 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.adoxio_applicationbpfv3Collection": {
+      "title": "Collection of adoxio_applicationbpfv3",
+      "description": "Microsoft.Dynamics.CRM.adoxio_applicationbpfv3Collection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfv3"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.adoxio_applicationcrsbpfv4Collection": {
+      "title": "Collection of adoxio_applicationcrsbpfv4",
+      "description": "Microsoft.Dynamics.CRM.adoxio_applicationcrsbpfv4Collection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationcrsbpfv4"
           }
         }
       }
@@ -219653,19 +223280,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypefeeschedule"
-          }
-        }
-      }
-    },
-    "Microsoft.Dynamics.CRM.duplicaterecordCollection": {
-      "title": "Collection of duplicaterecord",
-      "description": "Microsoft.Dynamics.CRM.duplicaterecordCollection",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
           }
         }
       }
