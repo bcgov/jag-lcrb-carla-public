@@ -306,11 +306,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.form.patchValue(noNulls);
 
         if (data.indigenousNation) {
-          this.form.get('indigenousNationId').patchValue(data.indigenousNation);
+          this.form.get('indigenousNationId').patchValue(data.indigenousNation.id);
         }
 
         if (data.policeJurisdiction) {
-          this.form.get('indigenousNationId').patchValue(data.policeJurisdiction);
+          this.form.get('indigenousNationId').patchValue(data.policeJurisdiction.id);
         }
 
         // make fields readonly if payment was made or the LG is viewing the application
@@ -655,10 +655,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
-            this.saveComplete.emit(true);
             // Dynamics will determine whether payment is required or not.
             // if the application is Free, it will not generate an invoice
-            this.submitPayment();
+            this.submitPayment()
+            .subscribe(res => {
+              this.saveComplete.emit(true);
+            });
             // however we need to redirect if the application is Free
             if (this.application.applicationType.isFree) {
               this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
@@ -734,17 +736,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
       return;
     }
 
-    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
+    return this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(jsonUrl => {
+      .pipe(mergeMap(jsonUrl => {
         console.log("")
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
-      }, err => {
+      }, (err: any) => {
         if (err._body === 'Payment already made') {
           this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         }
-      });
+      }));
   }
 
   isValid(): boolean {
@@ -842,7 +844,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     }
 
-    return valid && this.form.valid;
+    return valid && (this.form.valid || this.form.disabled);
   }
 
   getValidationErrorMap() {
