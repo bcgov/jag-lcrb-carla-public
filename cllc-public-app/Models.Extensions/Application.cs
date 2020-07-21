@@ -670,6 +670,18 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
                 LicenceId = dynamicsApplication._adoxioAssignedlicenceValue,
                 IsPaid = (dynamicsApplication.AdoxioPaymentrecieved == true),
+                EstablishmentAddressStreet = dynamicsApplication.AdoxioEstablishmentaddressstreet,
+                EstablishmentAddressCity = dynamicsApplication.AdoxioEstablishmentaddresscity,
+                EstablishmentAddressPostalCode = dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
+                EstablishmentAddress = dynamicsApplication.AdoxioEstablishmentaddressstreet
+                                                    + ", " + dynamicsApplication.AdoxioEstablishmentaddresscity
+                                                    + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
+                EstablishmentPhone = dynamicsApplication.AdoxioEstablishmentphone,
+                EstablishmentEmail = dynamicsApplication.AdoxioEstablishmentemail,
+                EstablishmentParcelId = dynamicsApplication.AdoxioEstablishmentparcelid,
+                IndigenousNationId = dynamicsApplication._adoxioLocalgovindigenousnationidValue,
+                PoliceJurisdictionId = dynamicsApplication._adoxioPolicejurisdictionidValue,
+
             };
 
             // id
