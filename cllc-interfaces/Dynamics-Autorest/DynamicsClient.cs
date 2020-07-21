@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top686 { get; set; }
+        public int? Top704 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip686 { get; set; }
+        public int? Skip704 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count686 { get; set; }
+        public bool? Count704 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter686 { get; set; }
+        public string Filter704 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search686 { get; set; }
+        public string Search704 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -134,6 +134,61 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAliasprocesssession.
         /// </summary>
         public virtual IAliasprocesssession Aliasprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumes.
+        /// </summary>
+        public virtual IAnnualvolumes Annualvolumes { get; private set; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumeasyncoperations.
+        /// </summary>
+        public virtual IAnnualvolumeasyncoperations Annualvolumeasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumebulkdeletefailures.
+        /// </summary>
+        public virtual IAnnualvolumebulkdeletefailures Annualvolumebulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumeduplicatebaserecord.
+        /// </summary>
+        public virtual IAnnualvolumeduplicatebaserecord Annualvolumeduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumeduplicatematchingrecord.
+        /// </summary>
+        public virtual IAnnualvolumeduplicatematchingrecord Annualvolumeduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumemailboxtrackingfolders.
+        /// </summary>
+        public virtual IAnnualvolumemailboxtrackingfolders Annualvolumemailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumeprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IAnnualvolumeprincipalobjectattributeaccesses Annualvolumeprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumeprocesssession.
+        /// </summary>
+        public virtual IAnnualvolumeprocesssession Annualvolumeprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumesyncerrors.
+        /// </summary>
+        public virtual IAnnualvolumesyncerrors Annualvolumesyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplication.
+        /// </summary>
+        public virtual IApplication Application { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicence.
+        /// </summary>
+        public virtual ILicence Licence { get; private set; }
 
         /// <summary>
         /// Gets the IApplicationbpfv3s.
@@ -389,6 +444,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationadoxioendorsementapplication.
         /// </summary>
         public virtual IApplicationadoxioendorsementapplication Applicationadoxioendorsementapplication { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationannualvolumeapplication.
+        /// </summary>
+        public virtual IApplicationannualvolumeapplication Applicationannualvolumeapplication { get; private set; }
 
         /// <summary>
         /// Gets the IApplicationmailboxtrackingfolders.
@@ -1076,11 +1136,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEndorsements Endorsements { get; private set; }
 
         /// <summary>
-        /// Gets the IApplication.
-        /// </summary>
-        public virtual IApplication Application { get; private set; }
-
-        /// <summary>
         /// Gets the IApplicationtype.
         /// </summary>
         public virtual IApplicationtype Applicationtype { get; private set; }
@@ -1134,11 +1189,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEndorsementtype.
         /// </summary>
         public virtual IEndorsementtype Endorsementtype { get; private set; }
-
-        /// <summary>
-        /// Gets the ILicence.
-        /// </summary>
-        public virtual ILicence Licence { get; private set; }
 
         /// <summary>
         /// Gets the IEndorsementtypeadoxiolicencetypeset.
@@ -2166,6 +2216,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicencesadoxiolicenceldbordertotalhistorylicence Licencesadoxiolicenceldbordertotalhistorylicence { get; private set; }
 
         /// <summary>
+        /// Gets the ILicencesannualvolumelicence.
+        /// </summary>
+        public virtual ILicencesannualvolumelicence Licencesannualvolumelicence { get; private set; }
+
+        /// <summary>
         /// Gets the ILicencesmailboxtrackingfolders.
         /// </summary>
         public virtual ILicencesmailboxtrackingfolders Licencesmailboxtrackingfolders { get; private set; }
@@ -2821,6 +2876,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRegardingobjectidadoxioeventappointment Regardingobjectidadoxioeventappointment { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioannualvolume.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioannualvolume Regardingobjectidadoxioannualvolume { get; private set; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioapplicationcrsbpfv4.
         /// </summary>
         public virtual IRegardingobjectidadoxioapplicationcrsbpfv4 Regardingobjectidadoxioapplicationcrsbpfv4 { get; private set; }
@@ -2921,6 +2981,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRegardingobjectidadoxioservicearea Regardingobjectidadoxioservicearea { get; private set; }
 
         /// <summary>
+        /// Gets the IBusinessunitadoxioannualvolume.
+        /// </summary>
+        public virtual IBusinessunitadoxioannualvolume Businessunitadoxioannualvolume { get; private set; }
+
+        /// <summary>
         /// Gets the IBusinessunitadoxioapplicationtypefeeschedule.
         /// </summary>
         public virtual IBusinessunitadoxioapplicationtypefeeschedule Businessunitadoxioapplicationtypefeeschedule { get; private set; }
@@ -3001,6 +3066,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IContacttaskcontact Contacttaskcontact { get; private set; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxioannualvolume.
+        /// </summary>
+        public virtual IBaserecordidadoxioannualvolume Baserecordidadoxioannualvolume { get; private set; }
+
+        /// <summary>
         /// Gets the IBaserecordidadoxioapplicationtypefeeschedule.
         /// </summary>
         public virtual IBaserecordidadoxioapplicationtypefeeschedule Baserecordidadoxioapplicationtypefeeschedule { get; private set; }
@@ -3064,6 +3134,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBaserecordidadoxioservicearea.
         /// </summary>
         public virtual IBaserecordidadoxioservicearea Baserecordidadoxioservicearea { get; private set; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioannualvolume.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxioannualvolume Duplicaterecordidadoxioannualvolume { get; private set; }
 
         /// <summary>
         /// Gets the IDuplicaterecordidadoxioapplicationtypefeeschedule.
@@ -3549,6 +3624,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IObjectidadoxioalias.
         /// </summary>
         public virtual IObjectidadoxioalias Objectidadoxioalias { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioannualvolume.
+        /// </summary>
+        public virtual IObjectidadoxioannualvolume Objectidadoxioannualvolume { get; private set; }
 
         /// <summary>
         /// Gets the IObjectidadoxioapplication.
@@ -4066,6 +4146,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISystemuseradoxioeventinspector Systemuseradoxioeventinspector { get; private set; }
 
         /// <summary>
+        /// Gets the ILkadoxioannualvolumecreatedby.
+        /// </summary>
+        public virtual ILkadoxioannualvolumecreatedby Lkadoxioannualvolumecreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioannualvolumecreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioannualvolumecreatedonbehalfby Lkadoxioannualvolumecreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioannualvolumemodifiedby.
+        /// </summary>
+        public virtual ILkadoxioannualvolumemodifiedby Lkadoxioannualvolumemodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioannualvolumemodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioannualvolumemodifiedonbehalfby Lkadoxioannualvolumemodifiedonbehalfby { get; private set; }
+
+        /// <summary>
         /// Gets the ILkadoxioapplicationcrsbpfv4createdby.
         /// </summary>
         public virtual ILkadoxioapplicationcrsbpfv4createdby Lkadoxioapplicationcrsbpfv4createdby { get; private set; }
@@ -4506,6 +4606,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILkadoxioserviceareamodifiedonbehalfby Lkadoxioserviceareamodifiedonbehalfby { get; private set; }
 
         /// <summary>
+        /// Gets the IUseradoxioannualvolume.
+        /// </summary>
+        public virtual IUseradoxioannualvolume Useradoxioannualvolume { get; private set; }
+
+        /// <summary>
         /// Gets the IUseradoxioapplicationtypefeeschedule.
         /// </summary>
         public virtual IUseradoxioapplicationtypefeeschedule Useradoxioapplicationtypefeeschedule { get; private set; }
@@ -4594,6 +4699,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IRegardingobjectidadoxioeventtask.
         /// </summary>
         public virtual IRegardingobjectidadoxioeventtask Regardingobjectidadoxioeventtask { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioannualvolume.
+        /// </summary>
+        public virtual ITeamadoxioannualvolume Teamadoxioannualvolume { get; private set; }
 
         /// <summary>
         /// Gets the ITeamadoxioapplicationtypefeeschedule.
@@ -5005,6 +5115,17 @@ namespace Gov.Lclb.Cllb.Interfaces
             Aliasmailboxtrackingfolders = new Aliasmailboxtrackingfolders(this);
             Aliasprincipalobjectattributeaccesses = new Aliasprincipalobjectattributeaccesses(this);
             Aliasprocesssession = new Aliasprocesssession(this);
+            Annualvolumes = new Annualvolumes(this);
+            Annualvolumeasyncoperations = new Annualvolumeasyncoperations(this);
+            Annualvolumebulkdeletefailures = new Annualvolumebulkdeletefailures(this);
+            Annualvolumeduplicatebaserecord = new Annualvolumeduplicatebaserecord(this);
+            Annualvolumeduplicatematchingrecord = new Annualvolumeduplicatematchingrecord(this);
+            Annualvolumemailboxtrackingfolders = new Annualvolumemailboxtrackingfolders(this);
+            Annualvolumeprincipalobjectattributeaccesses = new Annualvolumeprincipalobjectattributeaccesses(this);
+            Annualvolumeprocesssession = new Annualvolumeprocesssession(this);
+            Annualvolumesyncerrors = new Annualvolumesyncerrors(this);
+            Application = new Application(this);
+            Licence = new Licence(this);
             Applicationbpfv3s = new Applicationbpfv3s(this);
             Applicationbpfv3mailboxtrackingfolders = new Applicationbpfv3mailboxtrackingfolders(this);
             Applicationbpfv3principalobjectattributeaccesses = new Applicationbpfv3principalobjectattributeaccesses(this);
@@ -5056,6 +5177,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationrelocationv1workflowlogs = new Applicationrelocationv1workflowlogs(this);
             Applications = new Applications(this);
             Applicationadoxioendorsementapplication = new Applicationadoxioendorsementapplication(this);
+            Applicationannualvolumeapplication = new Applicationannualvolumeapplication(this);
             Applicationmailboxtrackingfolders = new Applicationmailboxtrackingfolders(this);
             Applicationprincipalobjectattributeaccesses = new Applicationprincipalobjectattributeaccesses(this);
             Applicationprocesssession = new Applicationprocesssession(this);
@@ -5193,7 +5315,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Documentprincipalobjectattributeaccesses = new Documentprincipalobjectattributeaccesses(this);
             Documentprocesssession = new Documentprocesssession(this);
             Endorsements = new Endorsements(this);
-            Application = new Application(this);
             Applicationtype = new Applicationtype(this);
             Endorsementasyncoperations = new Endorsementasyncoperations(this);
             Endorsementbulkdeletefailures = new Endorsementbulkdeletefailures(this);
@@ -5205,7 +5326,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Endorsementsharepointdocumentlocations = new Endorsementsharepointdocumentlocations(this);
             Endorsementsyncerrors = new Endorsementsyncerrors(this);
             Endorsementtype = new Endorsementtype(this);
-            Licence = new Licence(this);
             Endorsementtypeadoxiolicencetypeset = new Endorsementtypeadoxiolicencetypeset(this);
             Endorsementtypes = new Endorsementtypes(this);
             Endorsementtypeadoxioendorsementendorsementtype = new Endorsementtypeadoxioendorsementendorsementtype(this);
@@ -5411,6 +5531,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Licencesadoxioeventlicence = new Licencesadoxioeventlicence(this);
             Licencesadoxioldborderlicenceid = new Licencesadoxioldborderlicenceid(this);
             Licencesadoxiolicenceldbordertotalhistorylicence = new Licencesadoxiolicenceldbordertotalhistorylicence(this);
+            Licencesannualvolumelicence = new Licencesannualvolumelicence(this);
             Licencesmailboxtrackingfolders = new Licencesmailboxtrackingfolders(this);
             Licencesprincipalobjectattributeaccesses = new Licencesprincipalobjectattributeaccesses(this);
             Licencesprocesssession = new Licencesprocesssession(this);
@@ -5542,6 +5663,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Objectidadoxioevent = new Objectidadoxioevent(this);
             Regardingobjectidadoxioenforcementactionappointment = new Regardingobjectidadoxioenforcementactionappointment(this);
             Regardingobjectidadoxioeventappointment = new Regardingobjectidadoxioeventappointment(this);
+            Regardingobjectidadoxioannualvolume = new Regardingobjectidadoxioannualvolume(this);
             Regardingobjectidadoxioapplicationcrsbpfv4 = new Regardingobjectidadoxioapplicationcrsbpfv4(this);
             Regardingobjectidadoxioapplicationlicenseechangesv10 = new Regardingobjectidadoxioapplicationlicenseechangesv10(this);
             Regardingobjectidadoxioapplicationliquorbpf = new Regardingobjectidadoxioapplicationliquorbpf(this);
@@ -5562,6 +5684,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Regardingobjectidadoxiolicenceldbordertotalhistory = new Regardingobjectidadoxiolicenceldbordertotalhistory(this);
             Regardingobjectidadoxiormreview = new Regardingobjectidadoxiormreview(this);
             Regardingobjectidadoxioservicearea = new Regardingobjectidadoxioservicearea(this);
+            Businessunitadoxioannualvolume = new Businessunitadoxioannualvolume(this);
             Businessunitadoxioapplicationtypefeeschedule = new Businessunitadoxioapplicationtypefeeschedule(this);
             Businessunitadoxioendorsement = new Businessunitadoxioendorsement(this);
             Businessunitadoxioendorsementtype = new Businessunitadoxioendorsementtype(this);
@@ -5578,6 +5701,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Businessunitadoxioservicearea = new Businessunitadoxioservicearea(this);
             Contacts = new Contacts(this);
             Contacttaskcontact = new Contacttaskcontact(this);
+            Baserecordidadoxioannualvolume = new Baserecordidadoxioannualvolume(this);
             Baserecordidadoxioapplicationtypefeeschedule = new Baserecordidadoxioapplicationtypefeeschedule(this);
             Baserecordidadoxioendorsement = new Baserecordidadoxioendorsement(this);
             Baserecordidadoxioendorsementtype = new Baserecordidadoxioendorsementtype(this);
@@ -5591,6 +5715,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Baserecordidadoxiolicenceldbordertotalhistory = new Baserecordidadoxiolicenceldbordertotalhistory(this);
             Baserecordidadoxiormreview = new Baserecordidadoxiormreview(this);
             Baserecordidadoxioservicearea = new Baserecordidadoxioservicearea(this);
+            Duplicaterecordidadoxioannualvolume = new Duplicaterecordidadoxioannualvolume(this);
             Duplicaterecordidadoxioapplicationtypefeeschedule = new Duplicaterecordidadoxioapplicationtypefeeschedule(this);
             Duplicaterecordidadoxioendorsement = new Duplicaterecordidadoxioendorsement(this);
             Duplicaterecordidadoxioendorsementtype = new Duplicaterecordidadoxioendorsementtype(this);
@@ -5688,6 +5813,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Regardingobjectidadoxioenforcementactionphonecall = new Regardingobjectidadoxioenforcementactionphonecall(this);
             Regardingobjectidadoxioeventphonecall = new Regardingobjectidadoxioeventphonecall(this);
             Objectidadoxioalias = new Objectidadoxioalias(this);
+            Objectidadoxioannualvolume = new Objectidadoxioannualvolume(this);
             Objectidadoxioapplication = new Objectidadoxioapplication(this);
             Objectidadoxioapplicationbpfv3 = new Objectidadoxioapplicationbpfv3(this);
             Objectidadoxioapplicationcrsbpfv4 = new Objectidadoxioapplicationcrsbpfv4(this);
@@ -5791,6 +5917,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             Registrarenforcementactions = new Registrarenforcementactions(this);
             Systemuseradoxioestablishmentincidentinspector = new Systemuseradoxioestablishmentincidentinspector(this);
             Systemuseradoxioeventinspector = new Systemuseradoxioeventinspector(this);
+            Lkadoxioannualvolumecreatedby = new Lkadoxioannualvolumecreatedby(this);
+            Lkadoxioannualvolumecreatedonbehalfby = new Lkadoxioannualvolumecreatedonbehalfby(this);
+            Lkadoxioannualvolumemodifiedby = new Lkadoxioannualvolumemodifiedby(this);
+            Lkadoxioannualvolumemodifiedonbehalfby = new Lkadoxioannualvolumemodifiedonbehalfby(this);
             Lkadoxioapplicationcrsbpfv4createdby = new Lkadoxioapplicationcrsbpfv4createdby(this);
             Lkadoxioapplicationcrsbpfv4createdonbehalfby = new Lkadoxioapplicationcrsbpfv4createdonbehalfby(this);
             Lkadoxioapplicationcrsbpfv4modifiedby = new Lkadoxioapplicationcrsbpfv4modifiedby(this);
@@ -5879,6 +6009,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lkadoxioserviceareacreatedonbehalfby = new Lkadoxioserviceareacreatedonbehalfby(this);
             Lkadoxioserviceareamodifiedby = new Lkadoxioserviceareamodifiedby(this);
             Lkadoxioserviceareamodifiedonbehalfby = new Lkadoxioserviceareamodifiedonbehalfby(this);
+            Useradoxioannualvolume = new Useradoxioannualvolume(this);
             Useradoxioapplicationtypefeeschedule = new Useradoxioapplicationtypefeeschedule(this);
             Useradoxioendorsement = new Useradoxioendorsement(this);
             Useradoxioendorsementtype = new Useradoxioendorsementtype(this);
@@ -5897,6 +6028,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Legalentitytask = new Legalentitytask(this);
             Regardingobjectidadoxioenforcementactiontask = new Regardingobjectidadoxioenforcementactiontask(this);
             Regardingobjectidadoxioeventtask = new Regardingobjectidadoxioeventtask(this);
+            Teamadoxioannualvolume = new Teamadoxioannualvolume(this);
             Teamadoxioapplicationtypefeeschedule = new Teamadoxioapplicationtypefeeschedule(this);
             Teamadoxioendorsement = new Teamadoxioendorsement(this);
             Teamadoxioendorsementtype = new Teamadoxioendorsementtype(this);
