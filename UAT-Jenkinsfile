@@ -14,11 +14,11 @@ node('master') {
         parallel('Angular': {
 
             if (changeset("cllc-public-app/ClientApp/*")) {
-                openshiftBuild bldCfg: 'cllc-public-angular', showBuildLogs: 'true', commitID: 'master'
+                openshiftBuild bldCfg: 'cllc-public-angular', showBuildLogs: 'true', waitTime: 1800000, commitID: 'master'
             }
         }, 'C# API': {
             if (changeset("cllc-public-app/*")) {
-                openshiftBuild bldCfg: 'cllc-public-api', showBuildLogs: 'true', commitID: 'master' 
+                openshiftBuild bldCfg: 'cllc-public-api', showBuildLogs: 'true', waitTime: 1800000, commitID: 'master' 
                 openshiftTag destStream: 'cllc-public-api', verbose: 'true', destTag: 'test', srcStream: 'cllc-public-api', srcTag: 'latest'
             }
         })
