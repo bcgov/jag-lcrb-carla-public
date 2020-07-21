@@ -17,23 +17,18 @@
           class="w-100" (saveComplete)="stepper.selectedIndex = 2" #orgStructure></app-application-licensee-changes>
       </mat-step>
 
-      <mat-step *ngIf="isRAS" label="Complete Submission">
+      <mat-step [label]="isFree ? 'Complete Submission' : 'Complete Application'">
         <app-application *ngIf="stepper.selectedIndex === 2" [skipPayment]="isFree" class="w-100" (saveComplete)="stepper.selectedIndex = 3">
         </app-application>
       </mat-step>
 
-      <mat-step *ngIf="!isRAS" label="Complete Application">
-        <app-application *ngIf="stepper.selectedIndex === 2" class="w-100" [skipPayment]="isFree"
-          (saveComplete)="stepper.selectedIndex = 3">
-        </app-application>
-      </mat-step>
 
-      <mat-step *ngIf="securityScreeningEnabled && !isRAS  && application?.applicationType?.requiresSecurityScreening" label="Security Screening Requirements">
+      <mat-step *ngIf="securityScreeningEnabled && application?.applicationType?.requiresSecurityScreening" label="Security Screening Requirements">
         <app-security-screening-requirements *ngIf="stepper.selectedIndex === 3" class="w-100">
         </app-security-screening-requirements>
       </mat-step>
 
-      <mat-step *ngIf="applicationId && !isRAS" label="Application Payment">
+      <mat-step *ngIf="applicationId && !isFree" label="Application Payment">
       </mat-step>
     </ng-container>
 
@@ -44,12 +39,12 @@
         </app-application>
       </mat-step>
 
-      <mat-step *ngIf="securityScreeningEnabled && !isRAS && application?.applicationType?.requiresSecurityScreening" label="Security Screening Requirements">
+      <mat-step *ngIf="securityScreeningEnabled && application?.applicationType?.requiresSecurityScreening" label="Security Screening Requirements">
         <app-security-screening-requirements *ngIf="stepper.selectedIndex === 1" class="w-100">
         </app-security-screening-requirements>
       </mat-step>
 
-      <mat-step *ngIf="applicationId && !isRAS" label="Application Payment">
+      <mat-step *ngIf="applicationId && !isFree" label="Application Payment">
       </mat-step>
     </ng-container>
   </mat-horizontal-stepper>
