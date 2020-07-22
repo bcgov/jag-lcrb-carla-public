@@ -349,6 +349,18 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Rejected = 845280002
     }
 
+    public enum PatioLocatedAbove
+    { 
+        Grass = 845280000,
+        Earth = 845280001,
+        Gravel = 845280002,
+        [EnumMember(Value = "Finished Flooring")]
+        FinishedFlooring = 845280003,
+        [EnumMember(Value = "Cement Sidewalk")]
+        CementSidewalk = 845280004,
+        Other = 845280005
+    }
+
     public class Application
     {
         public string Id { get; set; } //adoxio_applicationid
@@ -548,5 +560,38 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public List<CapacityArea> ServiceAreas { get; set; }
         public List<CapacityArea> OutsideAreas { get; set; }
+
+        // Manufactuer
+
+        public bool? IsPackaging { get; set; }
+
+        public int? MfgBrewPubOnSite { get; set; }
+        public int? MfgPipedInProduct { get; set; }
+
+        // these are just optional int - not picklist references.
+        public int? MfgAcresOfFruit { get; set; }
+        public int? MfgAcresOfGrapes { get; set; }
+        public int? MfgAcresOfHoney { get; set; }
+        public bool? MfgMeetsProductionMinimum { get; set; }
+        public bool? MfgStepBlending { get; set; }
+        public bool? MfgStepCrushing { get; set; }
+        public bool? MfgStepFiltering { get; set; }
+        public bool? MfgStepSecFermOrCarb { get; set; }
+
+
+        // Manufactuer Structural Change - Patio
+        public string PatioCompDescription { get; set; }
+        public string PatioLocationDescription { get; set; }
+        public string PatioAccessDescription { get; set; }
+        public bool? PatioIsLiquorCarried { get; set; }
+        public string PatioLiquorCarriedDescription { get; set; }
+        public string PatioAccessControlDescription { get; set; }
+        
+        public int? LocatedAboveDescription { get; set; }
+        public int? PatioServiceBar { get; set; }
+
+        public string PidList { get; set; }
+
+        public bool IsAlr { get; set; }
     }
 }

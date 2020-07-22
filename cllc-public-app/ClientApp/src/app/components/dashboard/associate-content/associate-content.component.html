@@ -49,9 +49,9 @@
 
 <ng-container *ngIf="!licenseeChangeFeatureOn">
   <section *ngIf="account?.businessType && (showBothContents || !isIndigenousNation) &&  account?.businessType !== 'IndigenousNation'">
-    <h3 *ngIf="account?.businessType !== 'SoleProprietor'" class="blue-header" style="margin-top: 0; margin-bottom: 0">
+    <h3 *ngIf="account?.businessType !== 'SoleProprietorship'" class="blue-header" style="margin-top: 0; margin-bottom: 0">
       ASSOCIATES</h3>
-    <h3 *ngIf="account?.businessType === 'SoleProprietor'" class="blue-header" style="margin-top: 0; margin-bottom: 0">
+    <h3 *ngIf="account?.businessType === 'SoleProprietorship'" class="blue-header" style="margin-top: 0; margin-bottom: 0">
       SECURITY SCREENING</h3>
   
     <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
@@ -201,7 +201,7 @@
           be required to submit additional documentation as part of the application process.
         </p>
       </section>
-      <section *ngIf="account?.businessType === 'SoleProprietor'">
+      <section *ngIf="account?.businessType === 'SoleProprietorship'">
         <p>An applicant that is a <i>Sole Proprietorship</i> must consent to a security screening as part of the
           application for a licence.
         </p>
