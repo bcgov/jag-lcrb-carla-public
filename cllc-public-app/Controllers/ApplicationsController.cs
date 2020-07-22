@@ -746,9 +746,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // set application type relationship 
                 var applicationType = _dynamicsClient.GetApplicationTypeByName(item.ApplicationType.Name);
+
+                // copy more data for endorsements
                 if (applicationType.AdoxioIsendorsement == true)
                 {
-                    // copy more data for endorsements
                     adoxioApplication.AdoxioEstablishmentaddress = item.EstablishmentAddress;
                     adoxioApplication.AdoxioEstablishmentaddresscity = item.EstablishmentAddressCity;
                     adoxioApplication.AdoxioEstablishmentaddressstreet = item.EstablishmentAddressStreet;
