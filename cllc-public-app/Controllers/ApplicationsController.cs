@@ -1208,10 +1208,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private void RemoveServiceAreasFromApplication(string applicationId)
         {
             string filter = $"_adoxio_applicationid_value eq {applicationId}";
-            IList<MicrosoftDynamicsCRMadoxioServicearea> areas = _dynamicsClient.Serviceareas.Get(filter: filter).Value;
-            foreach (MicrosoftDynamicsCRMadoxioServicearea area in areas)
+            try
             {
-                _dynamicsClient.Serviceareas.Delete(area.AdoxioServiceareaid);
+                IList<MicrosoftDynamicsCRMadoxioServicearea> areas = _dynamicsClient.Serviceareas.Get(filter: filter).Value;
+                foreach (MicrosoftDynamicsCRMadoxioServicearea area in areas)
+                {
+                    try
+                    {
+                        _dynamicsClient.Serviceareas.Delete(area.AdoxioServiceareaid);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Unexpected error deleting a service area.");                        
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Unexpected error deleting a service area.");
+                    }
+                }
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Unexpected error getting service areas.");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Unexpected error getting service areas.");
             }
         }
 
