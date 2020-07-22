@@ -46,7 +46,8 @@ export class LicencesComponent extends FormBase implements OnInit {
     "Catering", "Wine Store", "Cannabis Retail Store", "Marketing",
     "Operated - Wine Store", "Operated - Catering",
     "Transfer in Progress - Wine Store", "Transfer in Progress - Catering",
-    "Manufacturer"
+    "Manufacturer", "Transfer in Progress - Manufacturer", "Operated - Manufacturer",
+    "Licensee Retail Store", "Transfer in Progress - Licensee Retail Store","Operated - Licensee Retail Store"
   ];
 
   constructor(
