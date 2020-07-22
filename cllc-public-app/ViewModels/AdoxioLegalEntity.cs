@@ -23,8 +23,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [Display(Name = "Limited Liability Partnership")]
         LimitedLiabilityPartnership = 845280009,
         Society = 845280004,
-        [Display(Name = "Sole Proprietor")]
-        SoleProprietor = 845280002,
+        [Display(Name = "Sole Proprietorship")]
+        SoleProprietorship = 845280002,
         [Display(Name = "Indigenous Nation")]
         IndigenousNation = 845280010,
         [Display(Name = "Co-op")]
@@ -34,6 +34,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         LocalGovernment = 845280014,
         University = 845280016,
         Partnership = 845280005,
+        Marketer = 845280015
 
     }
     public enum AdoxioAccountTypeCodes
@@ -184,7 +185,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     isComplete = shareholderFilesExists;
                     break;
                 case AdoxioApplicantTypeCodes.Society:
-                case AdoxioApplicantTypeCodes.SoleProprietor:
+                case AdoxioApplicantTypeCodes.SoleProprietorship:
                     isComplete = true;
                     break;
                 case AdoxioApplicantTypeCodes.UnlimitedLiabilityCorporation:
@@ -264,7 +265,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                         );
                     isComplete = isComplete && directorsExist;
                     break;
-                case AdoxioApplicantTypeCodes.SoleProprietor:
+                case AdoxioApplicantTypeCodes.SoleProprietorship:
                     isComplete =
                         (
                             isindividual == true &&

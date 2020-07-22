@@ -80,7 +80,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
     adoxioLegalEntity.email = formData.email;
     adoxioLegalEntity.dateofappointment = formData.dateofappointment; // adoxio_dateofappointment
     // adoxioLegalEntity.legalentitytype = "PrivateCorporation";
-    if (this.businessType === 'SoleProprietor') {
+    if (this.businessType === 'SoleProprietorship') {
       adoxioLegalEntity.isOwner = true;
     } else {
       adoxioLegalEntity.isOfficer = formData.isOfficer;
