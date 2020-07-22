@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.Collections.Generic;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
@@ -12,7 +13,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string Name { get; set; } //adoxio_name
         public string JobNumber { get; set; } //adoxio_jobnumber
         public string ApplicationTypeName { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public ApplicationTypeCategory? ApplicationTypeCategory { get; set; }
         public bool IsIndigenousNation { get; set; }
@@ -21,5 +22,16 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string Portallabel { get; set; }
 
         public bool LGHasApproved { get; set; }
+
+        public List<string> Endorsements { get; set; }
+        public string EstablishmentAddress { get; set; }
+        public string EstablishmentAddressCity { get; set; }
+        public string EstablishmentAddressPostalCode { get; set; }
+        public string EstablishmentAddressStreet { get; set; }
+        public string EstablishmentEmail { get; set; }
+        public string EstablishmentParcelId { get; set; }
+        public string EstablishmentPhone { get; set; }
+        public string IndigenousNationId { get; set; }
+        public string PoliceJurisdictionId { get; set; }
     }
 }
