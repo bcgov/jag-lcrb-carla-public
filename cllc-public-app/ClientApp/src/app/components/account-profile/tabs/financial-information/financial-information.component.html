@@ -3,7 +3,7 @@
 
   <section>
     <label *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Has the corporation been operating for more than one year?</label>
-    <label *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">Has the business been operating for more than one year?</label>
+    <label *ngIf="['SoleProprietorship'].indexOf(businessType) !== -1">Has the business been operating for more than one year?</label>
     <label *ngIf="['Society'].indexOf(businessType) !== -1">Has the society been operating for more than one year?</label>
     <label *ngIf="['GeneralPartnership','LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">Has the partnership been operating for more than one year?</label>
     <br>
