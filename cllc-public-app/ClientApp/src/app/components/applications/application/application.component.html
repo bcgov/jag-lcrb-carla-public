@@ -266,18 +266,18 @@
                 I confirm that current zoning permits retail sales on the manufacturing site.</mat-checkbox>
             </app-field>
             <hr-->
-            <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?" [valid]="isValidOrNotTouched('isALR')" [showChevrons]="false"
+            <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?" [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false"
             errorMessage="Specify ALR status" [isFullWidth]="true" *ngIf="application.licenseType === 'Manufacturer'">
-            <mat-radio-group formControlName="isALR">
-                <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
-                <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
+            <mat-radio-group formControlName="isAlr">
+                <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
+                <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
             </mat-radio-group>
             </app-field>
-            <div *ngIf="this.form.get('isALR').value == 'Yes'">
-                <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
-                <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
-                    <p><strong>By submitting this application to LCRB, you are confirming that your licenced establishment will adhere to the requirements laid out in the <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019" target="_blank">Agriculral Land Reserve (ALR) Use Regulation</a>.</strong></p>
-                </div>
+            <div *ngIf="application.licenseType === 'Manufacturer' && this.form.get('isAlr').value === true">
+              <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
+              <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
+                <p><strong>By submitting this application to LCRB, you are confirming that your licenced establishment will adhere to the requirements laid out in the <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019" target="_blank">Agriculral Land Reserve (ALR) Use Regulation</a>.</strong></p>
+              </div>
             </div>
 
 
@@ -1116,7 +1116,7 @@
           <br>
           <i>
             Please download
-            <a *ngIf="account?.businessType === 'SoleProprietor'"
+            <a *ngIf="account?.businessType === 'SoleProprietorship'"
               href="https://www2.gov.bc.ca/assets/download/A61C46EE12464E76BE9594B674CADB93" download target="_blank"
               rel="noopener noreferrer">
               and complete
@@ -1184,7 +1184,7 @@
           <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
             Please download the
             <span *ngIf=" application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">
-              <a *ngIf="account?.businessType === 'SoleProprietor'"
+              <a *ngIf="account?.businessType === 'SoleProprietorship'"
                 href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank"
                 rel="noopener noreferrer">
                 Document Checklist
@@ -1211,7 +1211,7 @@
               </a>
             </span>
             <span *ngIf=" application?.applicationType?.name === ApplicationTypeNames.CRSTransferofOwnership">
-              <a *ngIf="account?.businessType === 'SoleProprietor'"
+              <a *ngIf="account?.businessType === 'SoleProprietorship'"
                 href="https://www2.gov.bc.ca/assets/download/300E2E17AA3F4EFE9B555F86B065BE9E" download target="_blank"
                 rel="noopener noreferrer">
                 Document Checklist
@@ -1407,7 +1407,7 @@
                   Agency Store.</p>
               </div>
               <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-                <p *ngIf="account?.businessType === 'SoleProprietor'">
+                <p *ngIf="account?.businessType === 'SoleProprietorship'">
                   This application should be submitted the sole proprietor.
                 </p>
                 <p *ngIf="account?.businessType === 'Society'">
@@ -1753,7 +1753,7 @@
           <br>
           <i>
             Please download
-            <a *ngIf="account?.businessType === 'SoleProprietor'"
+            <a *ngIf="account?.businessType === 'SoleProprietorship'"
               href="https://www2.gov.bc.ca/assets/download/A61C46EE12464E76BE9594B674CADB93" download target="_blank"
               rel="noopener noreferrer">
               and complete
@@ -1811,7 +1811,7 @@
         <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
           Please download the
           <span *ngIf=" application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">
-            <a *ngIf="account?.businessType === 'SoleProprietor'"
+            <a *ngIf="account?.businessType === 'SoleProprietorship'"
               href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank"
               rel="noopener noreferrer">
               Document Checklist
@@ -1838,7 +1838,7 @@
             </a>
           </span>
           <span *ngIf=" application?.applicationType?.name === ApplicationTypeNames.CRSTransferofOwnership">
-            <a *ngIf="account?.businessType === 'SoleProprietor'"
+            <a *ngIf="account?.businessType === 'SoleProprietorship'"
               href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank"
               rel="noopener noreferrer">
               Document Checklist
