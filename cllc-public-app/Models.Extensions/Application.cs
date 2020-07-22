@@ -150,6 +150,20 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             // Manufacturing fields
 
+            to.AdoxioIspackaging = from.IsPackaging;
+            to.AdoxioMfgpipedinproduct = from.MfgPipedInProduct;
+            to.AdoxioMfgbrewpubonsite = from.MfgBrewPubOnSite;
+            to.AdoxioMfgacresoffruit = from.MfgAcresOfFruit;
+            to.AdoxioMfgacresofgrapes = from.MfgAcresOfGrapes;
+            to.AdoxioMfgacresofhoney = from.MfgAcresOfHoney;
+            to.AdoxioMfgmeetsproductionminimum = from.MfgMeetsProductionMinimum;
+            to.AdoxioMfgstepblending = from.MfgStepBlending;
+            to.AdoxioMfgstepcrushing = from.MfgStepCrushing;
+            to.AdoxioMfgstepfiltering = from.MfgStepFiltering;
+            to.AdoxioMfgstepsecfermorcarb = from.MfgStepSecFermOrCarb;
+
+            // Manufacturing structural change fields
+
             to.AdoxioPatiocompdescription = from.PatioCompDescription;
             to.AdoxioPatiolocationdescription = from.PatioLocationDescription;
             to.AdoxioPatioaccessdescription = from.PatioAccessDescription;
@@ -423,7 +437,15 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IsPackaging = dynamicsApplication.AdoxioIspackaging,
                 MfgPipedInProduct = dynamicsApplication.AdoxioMfgpipedinproduct,
                 MfgBrewPubOnSite = dynamicsApplication.AdoxioMfgbrewpubonsite,
-               
+                MfgAcresOfFruit = dynamicsApplication.AdoxioMfgacresoffruit,
+                MfgAcresOfGrapes = dynamicsApplication.AdoxioMfgacresofgrapes,
+                MfgAcresOfHoney = dynamicsApplication.AdoxioMfgacresofhoney,
+                MfgMeetsProductionMinimum = dynamicsApplication.AdoxioMfgmeetsproductionminimum,
+                MfgStepBlending = dynamicsApplication.AdoxioMfgstepblending,
+                MfgStepCrushing = dynamicsApplication.AdoxioMfgstepcrushing,
+                MfgStepFiltering = dynamicsApplication.AdoxioMfgstepfiltering,
+                MfgStepSecFermOrCarb = dynamicsApplication.AdoxioMfgstepsecfermorcarb,
+
 
                 // Manufacturing structural change fields
 
