@@ -33,6 +33,23 @@
         </h3>
         <section *ngIf="htmlContent?.beforeStarting" class="padded-section content-bottom">
           <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
+        
+          <p
+            *ngIf="application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation">
+            <strong>
+        
+              Prior to payment, your application will be submitted to your local government/Indigenous Nation for their
+              <span *ngIf="application?.applicationType.isShowLGINApproval">comment and assessment</span>
+              <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">confirmation of zoning</span>.
+              Please
+              ensure
+              you have reviewed
+              their policy <span *ngIf="form.get('indigenousNation').value.websiteUrl">(<a
+                  [href]="form.get('indigenousNation').value.websiteUrl"
+                  target="_blank">{{this.form.get('indigenousNation').value.websiteUrl}}</a>)</span>
+              to ensure your successful submission.        
+            </strong></p>
+        
         </section>
 
         <!-- Local Government advise -->
@@ -888,7 +905,7 @@
           <div *ngIf="showGroceryStore()">
             <section>
               <p>
-                Please download and print the <a
+                Please download and print the <a target="_blank"
                   href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb090_grocery_store_declaration.pdf">
                   Grocery
                   Store Declaration
@@ -917,6 +934,17 @@
 
             </section>
             <section>
+              <app-file-uploader *ngIf="applicationId" documentType="Grocery Declaration"
+                [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
+                fileTypes="FILE MUST BE IN PDF FORMAT."  [multipleFiles]="false"
+                entityName="application" [useDocumentTypeForName]="true"
+                (numberOfUploadedFiles)="uploadedGroceryDocuments = $event" [entityId]="applicationId"
+                [uploadHeader]="'TO UPLOAD GROCERY DECLARATION, DRAG FILES HERE OR'">
+              </app-file-uploader>
+            </section>
+
+            <section>
+              <p></p>
               <app-file-uploader *ngIf="applicationId" documentType="Grocery Declaration"
                 [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
                 fileTypes="FILE MUST BE IN PDF FORMAT."  [multipleFiles]="false"
