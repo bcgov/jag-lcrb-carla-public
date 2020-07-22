@@ -195,7 +195,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       indigenousNation: [''],
       zoningPermitsMFG: ['', []],
       zoningPermitsRetailSales: ['', []],
-      isALR: ['', []],
+      isAlr: ['', []],
       isOwner: ['', []],
       hasValidInterest: ['', []],
       willhaveValidInterest: ['', []],
@@ -248,84 +248,85 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.establishmentWatchWordsService.initialize();
 
     this.store.select(state => state.currentAccountState.currentAccount)
-      .pipe(takeWhile(() => this.componentActive))
-      .pipe(filter(account => !!account))
+      .pipe(takeWhile(() => this.componentActive))      
       .subscribe((account) => {
         this.account = account;
+        console.log(account);
+        this.busy = this.applicationDataService.getApplicationById(this.applicationId)
+          .pipe(takeWhile(() => this.componentActive))
+          .subscribe((data: Application) => {
+            if (data.establishmentParcelId) {
+              data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
+            }
+            // fix for no applicant type.
+            if (!data.applicantType) {
+              data.applicantType = this.account.businessType;
+            }
+
+            if (data.applicantType === 'IndigenousNation') {
+              (<any>data).applyAsIndigenousNation = true;
+            }
+
+            this.application = data;
+
+            this.hideFormControlByType();
+
+            this.addDynamicContent();
+
+            if (data.applicationType.formReference) {
+              console.log("Getting form layout");
+              // get the application form
+              this.dynamicsForm = data.applicationType.dynamicsForm;
+              this.dynamicsForm.tabs.forEach(function (tab) {
+                tab.sections.forEach(function (section) {
+                  if (section.fields) {
+                    section.fields.forEach(function (field) {
+                      // add the field to the form.
+                      if (field.required) {
+                        this.form.addControl(field.datafieldname, new FormControl('', Validators.required));
+                      }
+                      else {
+                        this.form.addControl(field.datafieldname, new FormControl(''));
+                      }
+                    }, this);
+                  }
+
+                }, this);
+              }, this);
+            }
+
+            const noNulls = Object.keys(data)
+              .filter(e => data[e] !== null)
+              .reduce((o, e) => {
+                o[e] = data[e];
+                return o;
+              }, {});
+
+            this.form.patchValue(noNulls);
+
+            if (data.indigenousNation) {
+              this.form.get('indigenousNationId').patchValue(data.indigenousNation.id);
+            }
+
+            if (data.policeJurisdiction) {
+              this.form.get('indigenousNationId').patchValue(data.policeJurisdiction.id);
+            }
+
+            // make fields readonly if payment was made or the LG is viewing the application
+            // disable the form if the local government has reviewed the application
+            if (data.isPaid || this.isOpenedByLGForApproval || this.application.lGDecisionSubmissionDate) {
+              this.form.disable();
+            }
+            this.savedFormData = this.form.value;
+          },
+            () => {
+              console.log('Error occured');
+            }
+          );
       });
 
     this.dynamicsDataService.getRecord('indigenousnations', '')
       .subscribe(data => this.indigenousNations = data);
-
-
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: Application) => {
-        if (data.establishmentParcelId) {
-          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
-        }
-        if (data.applicantType === 'IndigenousNation') {
-          (<any>data).applyAsIndigenousNation = true;
-        }
-
-        this.application = data;
-
-        this.hideFormControlByType();
-
-        this.addDynamicContent();
-
-        if (data.applicationType.formReference) {
-          console.log("Getting form layout");
-          // get the application form
-          this.dynamicsForm = data.applicationType.dynamicsForm;
-          this.dynamicsForm.tabs.forEach(function (tab) {
-            tab.sections.forEach(function (section) {
-              if (section.fields) {
-                section.fields.forEach(function (field) {
-                  // add the field to the form.
-                  if (field.required) {
-                    this.form.addControl(field.datafieldname, new FormControl('', Validators.required));
-                  }
-                  else {
-                    this.form.addControl(field.datafieldname, new FormControl(''));
-                  }
-                }, this);
-              }
-
-            }, this);
-          }, this);
-        }
-
-        const noNulls = Object.keys(data)
-          .filter(e => data[e] !== null)
-          .reduce((o, e) => {
-            o[e] = data[e];
-            return o;
-          }, {});
-
-        this.form.patchValue(noNulls);
-
-        if (data.indigenousNation) {
-          this.form.get('indigenousNationId').patchValue(data.indigenousNation.id);
-        }
-
-        if (data.policeJurisdiction) {
-          this.form.get('indigenousNationId').patchValue(data.policeJurisdiction.id);
-        }
-
-        // make fields readonly if payment was made or the LG is viewing the application
-        // disable the form if the local government has reviewed the application
-        if (data.isPaid || this.isOpenedByLGForApproval || this.application.lGDecisionSubmissionDate) {
-          this.form.disable();
-        }
-        this.savedFormData = this.form.value;
-      },
-        () => {
-          console.log('Error occured');
-        }
-      );
-
-
 
   }
 
@@ -757,7 +758,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
 
     // handle supporting documents for sole proprietor who submit marketing applications 
-    let marketing_soleprop = this.application.applicationType.name === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietor";
+    let marketing_soleprop = this.application.applicationType.name === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietorship";
 
     if (this.proofOfZoning) {
       let zoningErrors = this.proofOfZoning.getValidationErrors();
