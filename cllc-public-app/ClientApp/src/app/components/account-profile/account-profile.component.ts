@@ -214,8 +214,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       case 'LimitedLiabilityPartnership':
         name = 'Partnership';
         break;
-      case 'SoleProprietor':
-        name = 'Sole Proprietor';
+      case 'SoleProprietorship':
+        name = 'Sole Proprietorship';
         break;
       case 'IndigenousNation':
         name = 'Indigenous Nation';

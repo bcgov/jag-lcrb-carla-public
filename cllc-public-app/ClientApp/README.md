@@ -99,7 +99,7 @@ export interface AppState {
     legalEntitiesState: LegalEntitiesState;
     applicationsState: ApplicationsState;
     currentAccountState: CurrentAccountState;
-    currentApplicaitonState: CurrentApplicationState;
+    currentApplicationState: CurrentApplicationState;
     currentLegalEntityState: CurrentLegalEntityState;
 }
 
