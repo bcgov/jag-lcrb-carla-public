@@ -162,13 +162,15 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMfgstepfiltering = from.MfgStepFiltering;
             to.AdoxioMfgstepsecfermorcarb = from.MfgStepSecFermOrCarb;
 
+            to.AdoxioPidlist = from.PidList;
+
             // Manufacturing structural change fields
 
             to.AdoxioPatiocompdescription = from.PatioCompDescription;
             to.AdoxioPatiolocationdescription = from.PatioLocationDescription;
             to.AdoxioPatioaccessdescription = from.PatioAccessDescription;
             to.AdoxioPatioisliquorcarried = from.PatioIsLiquorCarried;
-            to.AdoxioPatioisliquorcarrieddescription = from.PatioLiquorCarriedDescription;
+            to.AdoxioPatioliquorcarrieddescription = from.PatioLiquorCarriedDescription;
             to.AdoxioPatioaccesscontroldescription = from.PatioAccessControlDescription;
             to.AdoxioLocatedabovedescription = (int?) from.LocatedAboveDescription;
             to.AdoxioPatioservicebar = from.PatioServiceBar;
@@ -446,14 +448,15 @@ namespace Gov.Lclb.Cllb.Public.Models
                 MfgStepFiltering = dynamicsApplication.AdoxioMfgstepfiltering,
                 MfgStepSecFermOrCarb = dynamicsApplication.AdoxioMfgstepsecfermorcarb,
 
-
+                PidList = dynamicsApplication.AdoxioPidlist,
+                
                 // Manufacturing structural change fields
 
                 PatioCompDescription = dynamicsApplication.AdoxioPatiocompdescription,
                 PatioLocationDescription = dynamicsApplication.AdoxioPatiolocationdescription,
                 PatioAccessDescription = dynamicsApplication.AdoxioPatioaccessdescription,
                 PatioIsLiquorCarried = dynamicsApplication.AdoxioPatioisliquorcarried,
-                PatioLiquorCarriedDescription = dynamicsApplication.AdoxioPatioisliquorcarrieddescription,
+                PatioLiquorCarriedDescription = dynamicsApplication.AdoxioPatioliquorcarrieddescription,
                 PatioAccessControlDescription = dynamicsApplication.AdoxioPatioaccesscontroldescription
         };
 
