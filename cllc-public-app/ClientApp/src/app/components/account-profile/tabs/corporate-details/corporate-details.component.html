@@ -2,14 +2,14 @@
   <h1 style="margin-top: 0;" *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Corporate Details</h1>
   <h1 style="margin-top: 0;" *ngIf="businessType == 'Society'">Society Details</h1>
   <h1 style="margin-top: 0;" *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1" >Patnership Details</h1>
-  <h1 style="margin-top: 0;" *ngIf="businessType == 'SoleProprietor'">Sole Proprietor Details</h1>
+  <h1 style="margin-top: 0;" *ngIf="businessType == 'SoleProprietorship'">Sole Proprietor Details</h1>
 
   <div [ngBusy]="busy"></div>
 
   <div>
     <form [formGroup]='corporateDetailsForm' class="form-horizontal">
       <div class="">
-        <section *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'SoleProprietor'].indexOf(businessType) == -1" >
+        <section *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'SoleProprietorship'].indexOf(businessType) == -1" >
           <div [ngClass]="{'has-error': this.isFieldError('bcIncorporationNumber')}">
             <label *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1" for="">B.C. Incorporation Number</label>
             <label *ngIf="businessType == 'Society'" for="">B.C. Society Incorporation Number</label>
@@ -23,7 +23,7 @@
           </div>
         </section>
 
-        <section *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'SoleProprietor'].indexOf(businessType) == -1">
+        <section *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'SoleProprietorship'].indexOf(businessType) == -1">
           <div [ngClass]="{'has-error': this.isFieldError('dateOfIncorporationInBC')}">
             <label *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Date of Incorporation in B.C.</label>
             <label *ngIf="businessType == 'Society'">Date of Incorporation in B.C.</label>
@@ -55,7 +55,7 @@
 
 
         <p></p>
-        <section *ngIf="businessType !== 'SoleProprietor'">
+        <section *ngIf="businessType !== 'SoleProprietorship'">
           <label *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1" >Upload the following documents about the corporation:</label>
           <label *ngIf="businessType == 'Society'" >Upload the following documents about the society:</label>
           <label *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1" >Upload the partnership agreement:</label>

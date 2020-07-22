@@ -120,8 +120,8 @@ export class EditShareholdersComponent extends FormBase implements OnInit {
         case 'LimitedLiabilityPartnership':
           position = 'Limited Liability Partnership';
           break;
-        case 'SoleProprietor':
-          position = 'Sole Proprietor';
+        case 'SoleProprietorship':
+          position = 'Sole Proprietorship';
           break;
         case 'Society':
           position = 'Society';
