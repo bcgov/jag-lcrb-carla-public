@@ -74,7 +74,25 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 {"adoxio_establishmentopeningdate", "establishmentopeningdate"},
                 {"adoxio_isreadyvalidinterest", "isReadyValidInterest"},
 
-                {"adoxio_applicanttype", "applicantType"}
+                {"adoxio_applicanttype", "applicantType"},
+
+                // manufacturer fields.
+
+                { "adoxio_ispackaging", "isPackaging" },
+                { "adoxio_mfgpipedinproduct", "mfgPipedInProduct" },
+                { "adoxio_mfgbrewpubonsite", "mfgBrewPubOnSite"},
+
+                // manufacturer structural change fields
+
+                { "adoxio_patiocompdescription", "patioCompDescription" },
+                { "adoxio_patiolocationdescription", "patioLocationDescription" },
+                { "adoxio_patioaccessdescription", "patioAccessDescription" },
+                { "adoxio_patioisliquorcarried", "patioIsLiquorCarried" },
+                { "adoxio_patioliquorcarrieddescription", "patioLiquorCarriedDescription" },
+                { "adoxio_patioaccesscontroldescription", "patioAccessControlDescription" },
+                { "adoxio_locatedabovedescription", "locatedAboveDescription" },
+                { "adoxio_patioservicebar", "patioServiceBar" }
+
         };
         }
     }

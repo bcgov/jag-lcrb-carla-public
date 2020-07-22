@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top686 { get; set; }
+        int? Top704 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip686 { get; set; }
+        int? Skip704 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count686 { get; set; }
+        bool? Count704 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter686 { get; set; }
+        string Filter704 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search686 { get; set; }
+        string Search704 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -131,6 +131,61 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAliasprocesssession.
         /// </summary>
         IAliasprocesssession Aliasprocesssession { get; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumes.
+        /// </summary>
+        IAnnualvolumes Annualvolumes { get; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumeasyncoperations.
+        /// </summary>
+        IAnnualvolumeasyncoperations Annualvolumeasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumebulkdeletefailures.
+        /// </summary>
+        IAnnualvolumebulkdeletefailures Annualvolumebulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumeduplicatebaserecord.
+        /// </summary>
+        IAnnualvolumeduplicatebaserecord Annualvolumeduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumeduplicatematchingrecord.
+        /// </summary>
+        IAnnualvolumeduplicatematchingrecord Annualvolumeduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumemailboxtrackingfolders.
+        /// </summary>
+        IAnnualvolumemailboxtrackingfolders Annualvolumemailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumeprincipalobjectattributeaccesses.
+        /// </summary>
+        IAnnualvolumeprincipalobjectattributeaccesses Annualvolumeprincipalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumeprocesssession.
+        /// </summary>
+        IAnnualvolumeprocesssession Annualvolumeprocesssession { get; }
+
+        /// <summary>
+        /// Gets the IAnnualvolumesyncerrors.
+        /// </summary>
+        IAnnualvolumesyncerrors Annualvolumesyncerrors { get; }
+
+        /// <summary>
+        /// Gets the IApplication.
+        /// </summary>
+        IApplication Application { get; }
+
+        /// <summary>
+        /// Gets the ILicence.
+        /// </summary>
+        ILicence Licence { get; }
 
         /// <summary>
         /// Gets the IApplicationbpfv3s.
@@ -386,6 +441,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationadoxioendorsementapplication.
         /// </summary>
         IApplicationadoxioendorsementapplication Applicationadoxioendorsementapplication { get; }
+
+        /// <summary>
+        /// Gets the IApplicationannualvolumeapplication.
+        /// </summary>
+        IApplicationannualvolumeapplication Applicationannualvolumeapplication { get; }
 
         /// <summary>
         /// Gets the IApplicationmailboxtrackingfolders.
@@ -1073,11 +1133,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEndorsements Endorsements { get; }
 
         /// <summary>
-        /// Gets the IApplication.
-        /// </summary>
-        IApplication Application { get; }
-
-        /// <summary>
         /// Gets the IApplicationtype.
         /// </summary>
         IApplicationtype Applicationtype { get; }
@@ -1131,11 +1186,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEndorsementtype.
         /// </summary>
         IEndorsementtype Endorsementtype { get; }
-
-        /// <summary>
-        /// Gets the ILicence.
-        /// </summary>
-        ILicence Licence { get; }
 
         /// <summary>
         /// Gets the IEndorsementtypeadoxiolicencetypeset.
@@ -2163,6 +2213,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicencesadoxiolicenceldbordertotalhistorylicence Licencesadoxiolicenceldbordertotalhistorylicence { get; }
 
         /// <summary>
+        /// Gets the ILicencesannualvolumelicence.
+        /// </summary>
+        ILicencesannualvolumelicence Licencesannualvolumelicence { get; }
+
+        /// <summary>
         /// Gets the ILicencesmailboxtrackingfolders.
         /// </summary>
         ILicencesmailboxtrackingfolders Licencesmailboxtrackingfolders { get; }
@@ -2818,6 +2873,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegardingobjectidadoxioeventappointment Regardingobjectidadoxioeventappointment { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioannualvolume.
+        /// </summary>
+        IRegardingobjectidadoxioannualvolume Regardingobjectidadoxioannualvolume { get; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioapplicationcrsbpfv4.
         /// </summary>
         IRegardingobjectidadoxioapplicationcrsbpfv4 Regardingobjectidadoxioapplicationcrsbpfv4 { get; }
@@ -2918,6 +2978,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegardingobjectidadoxioservicearea Regardingobjectidadoxioservicearea { get; }
 
         /// <summary>
+        /// Gets the IBusinessunitadoxioannualvolume.
+        /// </summary>
+        IBusinessunitadoxioannualvolume Businessunitadoxioannualvolume { get; }
+
+        /// <summary>
         /// Gets the IBusinessunitadoxioapplicationtypefeeschedule.
         /// </summary>
         IBusinessunitadoxioapplicationtypefeeschedule Businessunitadoxioapplicationtypefeeschedule { get; }
@@ -2998,6 +3063,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IContacttaskcontact Contacttaskcontact { get; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxioannualvolume.
+        /// </summary>
+        IBaserecordidadoxioannualvolume Baserecordidadoxioannualvolume { get; }
+
+        /// <summary>
         /// Gets the IBaserecordidadoxioapplicationtypefeeschedule.
         /// </summary>
         IBaserecordidadoxioapplicationtypefeeschedule Baserecordidadoxioapplicationtypefeeschedule { get; }
@@ -3061,6 +3131,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBaserecordidadoxioservicearea.
         /// </summary>
         IBaserecordidadoxioservicearea Baserecordidadoxioservicearea { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioannualvolume.
+        /// </summary>
+        IDuplicaterecordidadoxioannualvolume Duplicaterecordidadoxioannualvolume { get; }
 
         /// <summary>
         /// Gets the IDuplicaterecordidadoxioapplicationtypefeeschedule.
@@ -3546,6 +3621,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IObjectidadoxioalias.
         /// </summary>
         IObjectidadoxioalias Objectidadoxioalias { get; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioannualvolume.
+        /// </summary>
+        IObjectidadoxioannualvolume Objectidadoxioannualvolume { get; }
 
         /// <summary>
         /// Gets the IObjectidadoxioapplication.
@@ -4063,6 +4143,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         ISystemuseradoxioeventinspector Systemuseradoxioeventinspector { get; }
 
         /// <summary>
+        /// Gets the ILkadoxioannualvolumecreatedby.
+        /// </summary>
+        ILkadoxioannualvolumecreatedby Lkadoxioannualvolumecreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioannualvolumecreatedonbehalfby.
+        /// </summary>
+        ILkadoxioannualvolumecreatedonbehalfby Lkadoxioannualvolumecreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioannualvolumemodifiedby.
+        /// </summary>
+        ILkadoxioannualvolumemodifiedby Lkadoxioannualvolumemodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioannualvolumemodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioannualvolumemodifiedonbehalfby Lkadoxioannualvolumemodifiedonbehalfby { get; }
+
+        /// <summary>
         /// Gets the ILkadoxioapplicationcrsbpfv4createdby.
         /// </summary>
         ILkadoxioapplicationcrsbpfv4createdby Lkadoxioapplicationcrsbpfv4createdby { get; }
@@ -4503,6 +4603,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILkadoxioserviceareamodifiedonbehalfby Lkadoxioserviceareamodifiedonbehalfby { get; }
 
         /// <summary>
+        /// Gets the IUseradoxioannualvolume.
+        /// </summary>
+        IUseradoxioannualvolume Useradoxioannualvolume { get; }
+
+        /// <summary>
         /// Gets the IUseradoxioapplicationtypefeeschedule.
         /// </summary>
         IUseradoxioapplicationtypefeeschedule Useradoxioapplicationtypefeeschedule { get; }
@@ -4591,6 +4696,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IRegardingobjectidadoxioeventtask.
         /// </summary>
         IRegardingobjectidadoxioeventtask Regardingobjectidadoxioeventtask { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioannualvolume.
+        /// </summary>
+        ITeamadoxioannualvolume Teamadoxioannualvolume { get; }
 
         /// <summary>
         /// Gets the ITeamadoxioapplicationtypefeeschedule.

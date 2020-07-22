@@ -148,6 +148,33 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioLgdecisionsubmissiondate = from.LGDecisionSubmissionDate;
             to.AdoxioLgapprovaldecision = (int?)from.LGApprovalDecision;
 
+            // Manufacturing fields
+
+            to.AdoxioIspackaging = from.IsPackaging;
+            to.AdoxioMfgpipedinproduct = from.MfgPipedInProduct;
+            to.AdoxioMfgbrewpubonsite = from.MfgBrewPubOnSite;
+            to.AdoxioMfgacresoffruit = from.MfgAcresOfFruit;
+            to.AdoxioMfgacresofgrapes = from.MfgAcresOfGrapes;
+            to.AdoxioMfgacresofhoney = from.MfgAcresOfHoney;
+            to.AdoxioMfgmeetsproductionminimum = from.MfgMeetsProductionMinimum;
+            to.AdoxioMfgstepblending = from.MfgStepBlending;
+            to.AdoxioMfgstepcrushing = from.MfgStepCrushing;
+            to.AdoxioMfgstepfiltering = from.MfgStepFiltering;
+            to.AdoxioMfgstepsecfermorcarb = from.MfgStepSecFermOrCarb;
+
+            // Manufacturing structural change fields
+
+            to.AdoxioPatiocompdescription = from.PatioCompDescription;
+            to.AdoxioPatiolocationdescription = from.PatioLocationDescription;
+            to.AdoxioPatioaccessdescription = from.PatioAccessDescription;
+            to.AdoxioPatioisliquorcarried = from.PatioIsLiquorCarried;
+            to.AdoxioPatioisliquorcarrieddescription = from.PatioLiquorCarriedDescription;
+            to.AdoxioPatioaccesscontroldescription = from.PatioAccessControlDescription;
+            to.AdoxioLocatedabovedescription = (int?) from.LocatedAboveDescription;
+            to.AdoxioPatioservicebar = from.PatioServiceBar;
+
+
+
             // comment out this next line as it is causing all application updates to fail (moved to controller)
             //to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
 
@@ -403,8 +430,42 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 OtherBusinessesDetails = dynamicsApplication.AdoxioOtherbusinesssamelocationdetails,
                 ServiceAreas = new List<CapacityArea>(),
-                OutsideAreas = new List<CapacityArea>()
-            };
+                OutsideAreas = new List<CapacityArea>(),
+
+                // Manufacturing fields
+
+                IsPackaging = dynamicsApplication.AdoxioIspackaging,
+                MfgPipedInProduct = dynamicsApplication.AdoxioMfgpipedinproduct,
+                MfgBrewPubOnSite = dynamicsApplication.AdoxioMfgbrewpubonsite,
+                MfgAcresOfFruit = dynamicsApplication.AdoxioMfgacresoffruit,
+                MfgAcresOfGrapes = dynamicsApplication.AdoxioMfgacresofgrapes,
+                MfgAcresOfHoney = dynamicsApplication.AdoxioMfgacresofhoney,
+                MfgMeetsProductionMinimum = dynamicsApplication.AdoxioMfgmeetsproductionminimum,
+                MfgStepBlending = dynamicsApplication.AdoxioMfgstepblending,
+                MfgStepCrushing = dynamicsApplication.AdoxioMfgstepcrushing,
+                MfgStepFiltering = dynamicsApplication.AdoxioMfgstepfiltering,
+                MfgStepSecFermOrCarb = dynamicsApplication.AdoxioMfgstepsecfermorcarb,
+
+
+                // Manufacturing structural change fields
+
+                PatioCompDescription = dynamicsApplication.AdoxioPatiocompdescription,
+                PatioLocationDescription = dynamicsApplication.AdoxioPatiolocationdescription,
+                PatioAccessDescription = dynamicsApplication.AdoxioPatioaccessdescription,
+                PatioIsLiquorCarried = dynamicsApplication.AdoxioPatioisliquorcarried,
+                PatioLiquorCarriedDescription = dynamicsApplication.AdoxioPatioisliquorcarrieddescription,
+                PatioAccessControlDescription = dynamicsApplication.AdoxioPatioaccesscontroldescription
+        };
+
+            if (dynamicsApplication.AdoxioLocatedabovedescription != null)
+            {
+                applicationVM.LocatedAboveDescription = dynamicsApplication.AdoxioLocatedabovedescription;
+            }
+
+            if (dynamicsApplication.AdoxioPatioservicebar != null)
+            {
+                applicationVM.PatioServiceBar = dynamicsApplication.AdoxioPatioservicebar;
+            }
 
             // Catering yes / no fields
             if (dynamicsApplication.AdoxioPreviouslicenceapplication != null)
