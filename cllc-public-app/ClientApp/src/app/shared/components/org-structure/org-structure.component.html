@@ -36,7 +36,7 @@
             </section>
 
             <!-- For Sole Proprietors -->
-            <section *ngIf="node?.businessType === 'SoleProprietor'">
+            <section *ngIf="node?.businessType === 'SoleProprietorship'">
               <p>Sole Proprietors must provide their leadership information and keep it up to date.</p>
               <p>You are required to notify the LCRB of name changes within ten business days of the change being made.</p>
               <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences dashboard.</p>
@@ -256,7 +256,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngIf="node?.businessType === 'SoleProprietor'">
+    <ng-container *ngIf="node?.businessType === 'SoleProprietorship'">
       <h3 class="blue-header">Provide Ownership Information</h3>
       <div class="content-bottom">
         <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"

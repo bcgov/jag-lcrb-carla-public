@@ -590,6 +590,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? LocatedAboveDescription { get; set; }
         public int? PatioServiceBar { get; set; }
 
+        public string PidList { get; set; }
 
+        public bool IsAlr { get; set; }
     }
 }
