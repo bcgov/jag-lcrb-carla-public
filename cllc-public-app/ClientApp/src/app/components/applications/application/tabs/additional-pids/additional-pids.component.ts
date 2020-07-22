@@ -22,7 +22,7 @@ export class AdditionalPidsComponent extends FormBase implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       hasMultiplePIDs: ['', []],
-      PIDList: ['', []]
+      pidList: ['', []]
     });
     this.form.patchValue(this.application);
   }

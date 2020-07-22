@@ -55,7 +55,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             var directorsExist = ChildEntities.Any(c => c.AdoxioLegalEntity.isDirector == true
                                                 || c.AdoxioLegalEntity.isOfficer == true
                                                 || c.AdoxioLegalEntity.isSeniorManagement == true)
-                                || businessType == AdoxioApplicantTypeCodes.SoleProprietor
+                                || businessType == AdoxioApplicantTypeCodes.SoleProprietorship
                                 || businessType == AdoxioApplicantTypeCodes.GeneralPartnership
                                 || businessType == AdoxioApplicantTypeCodes.LimitedLiabilityPartnership
                                 || businessType == AdoxioApplicantTypeCodes.LimitedPartnership;
@@ -64,7 +64,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                                     || businessType == AdoxioApplicantTypeCodes.GeneralPartnership
                                     || businessType == AdoxioApplicantTypeCodes.LimitedLiabilityPartnership
                                     || businessType == AdoxioApplicantTypeCodes.LimitedPartnership
-                                    || businessType == AdoxioApplicantTypeCodes.SoleProprietor
+                                    || businessType == AdoxioApplicantTypeCodes.SoleProprietorship
                                     || businessType == AdoxioApplicantTypeCodes.Society
                                     || businessType == AdoxioApplicantTypeCodes.PublicCorporation;
 

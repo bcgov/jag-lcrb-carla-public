@@ -126,7 +126,8 @@ export class Application {
 
   applicant: Account;
 
-  serviceArea: ServiceArea[];
+  serviceAreas: ServiceArea[];
+  outsideAreas: ServiceArea[];
 
 
   // Manufactuer
@@ -146,7 +147,8 @@ export class Application {
   mfgStepCrushing: boolean;
   mfgStepFiltering: boolean;
   mfgStepSecFermOrCarb: boolean;
-
+  isAlr: boolean;
+  pidList: string; 
 
   // Manufactuer Structural Change - Patio
   patioCompDescription: string;
@@ -156,7 +158,8 @@ export class Application {
   patioLiquorCarriedDescription: string;
   patioAccessControlDescription: string;
         
-  LocatedAboveDescription: number;
-  PatioServiceBar: number;
+  locatedAboveDescription: number;
+  patioServiceBar: number;
+
 
 }

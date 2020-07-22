@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                         (SocietyConnectionFederalProducer == 0 ||
                             (SocietyConnectionFederalProducer == 1 && !String.IsNullOrEmpty(SocietyConnectionFederalProducerDetails)));
                     break;
-                case AdoxioApplicantTypeCodes.SoleProprietor:
+                case AdoxioApplicantTypeCodes.SoleProprietorship:
                     isComplete = true;
                     break;
                 case AdoxioApplicantTypeCodes.GeneralPartnership:
