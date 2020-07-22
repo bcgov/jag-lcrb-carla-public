@@ -31,8 +31,10 @@ export class ProofOfZoningComponent extends FormBase implements OnInit {
 
   getValidationErrors(): string[]{
     let res = [];
-    if ((this.uploadedZoningDocuments || 0) < 1) {
-      res.push('At least one zoning document is required.');
+    if (this.application.licenseType != 'Manufacturer') {
+      if ((this.uploadedZoningDocuments || 0) < 1) {
+        res.push('At least one zoning document is required.');
+      }
     }
     return res;
   }
