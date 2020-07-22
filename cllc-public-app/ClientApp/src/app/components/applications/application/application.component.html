@@ -453,14 +453,14 @@
 
                       <mat-card *ngIf="formField.controltype == 'PicklistControl'" class="mat-elevation-z0"
                         style="margin-bottom: 10px;">
-                        <section style="display: flex; justify-content: space-between; width: 100%;">
-                          <div class="question-label">
+                        <section style="width: 100%;">
+                          <div class="question-label" style="margin-bottom:10px;">
                             {{formField.name}}
                           </div>
-                          <div style="flex: 0 0 85px;">
+
+                          <div>
                             <mat-button-toggle-group aria-label="Font Style" [formControlName]="formField.datafieldname"
                               [id]="formField.datafieldname">
-
                               <mat-button-toggle *ngFor="let option of formField.options" [value]="option.value">
                                 {{option.label}}</mat-button-toggle>
                             </mat-button-toggle-group>
@@ -476,11 +476,11 @@
                       <app-field *ngIf="formField.controltype == 'RadioControl'"
                         [valid]="!showValidationMessages || form.get(formField.datafieldname).valid" errorMessage=""
                         [showChevrons]="false">
-                        <section style="display: flex">
+                        <section style="display: flex; padding-left: 20px;">
                           <input type="checkbox" [formControlName]="formField.datafieldname"
                             [id]="formField.datafieldname">
                           <span class="error-states">*</span>
-                          <div style="padding-left: 10px;">
+                          <div style="padding-left: 10px;" class="question-label">
                             {{formField.name}}
                           </div>
                         </section>
