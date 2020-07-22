@@ -222,8 +222,8 @@
               </div>
               <p>&nbsp;</p>
 
-              <section *ngIf="application?.licenseType === 'Manufacturer'">
-                <app-additional-pids *ngIf="application" [application]="application">
+              <section *ngIf="application && application?.licenseType === 'Manufacturer'">
+                <app-additional-pids [application]="application" [form]="form">
                 </app-additional-pids>
               </section>
               <hr>
