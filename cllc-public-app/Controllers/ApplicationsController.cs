@@ -63,13 +63,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationList)
                 {
+                    var endorsements = new List<string>();
+                    //get endorsement application types
+                    if (dynamicsApplication.AdoxioLicenceType != null && dynamicsApplication.AdoxioPaymentrecieved == true)
+                    {
+                        var filter = $"adoxio_licencetypeid eq {dynamicsApplication._adoxioLicencetypeValue}";
+                        var expand = new List<string> { "adoxio_licencetype_adoxio_applicationtype_LicenceType" };
+                        var licenceType = _dynamicsClient.Licencetypes.GetByKey(dynamicsApplication._adoxioLicencetypeValue, expand: expand);
+                        if (licenceType?.AdoxioLicencetypeAdoxioApplicationtypeLicenceType != null)
+                        {
+                            endorsements = licenceType.AdoxioLicencetypeAdoxioApplicationtypeLicenceType
+                            .Where(type => type.AdoxioIsendorsement == true)
+                            .Select(type => type.AdoxioName)
+                            .ToList();
+                        }
+                    }
                     // hide terminated applications from view.
                     if (dynamicsApplication.Statuscode == null || (dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Terminated
                         && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Refused
                         && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Cancelled
                         && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.TerminatedAndRefunded))
                     {
-                        result.Add(dynamicsApplication.ToSummaryViewModel());
+                        var row = dynamicsApplication.ToSummaryViewModel();
+                        row.Endorsements = endorsements;
+                        result.Add(row);
                     }
                 }
 
@@ -300,7 +317,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         var viewModel = await dynamicsApplication.ToViewModel(_dynamicsClient, _logger);
                         List<ViewModels.FileSystemItem> resolutionFiles = await FileController.GetListFilesInFolder(dynamicsApplication.AdoxioApplicationid, "application", "LGIN Resolution", _dynamicsClient, _fileManagerClient, _logger);
-                        if(resolutionFiles.Count > 0)
+                        if (resolutionFiles.Count > 0)
                         {
                             viewModel.ResolutionDocsUploaded = true;
                         }
@@ -340,7 +357,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var application = GetCurrentLicenseeApplication(userSettings);
 
-                if (! string.IsNullOrEmpty (application._adoxioApplicationtypeidValue))
+                if (!string.IsNullOrEmpty(application._adoxioApplicationtypeidValue))
                 {
                     application.AdoxioApplicationTypeId = await _dynamicsClient.GetApplicationTypeById(application._adoxioApplicationtypeidValue).ConfigureAwait(true); ;
                     if (application.AdoxioApplicationTypeId != null)
@@ -355,7 +372,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         {
                             _logger.LogError(e, "Error getting type contents");
                         }
-                    }                    
+                    }
                 }
 
                 result.Application = await application.ToViewModel(_dynamicsClient, _logger).ConfigureAwait(true);
@@ -370,7 +387,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
 
-            result.CurrentHierarchy = _dynamicsClient.GetLegalEntityTree(userSettings.AccountId,_logger, _configuration);
+            result.CurrentHierarchy = _dynamicsClient.GetLegalEntityTree(userSettings.AccountId, _logger, _configuration);
 
             result.TreeRoot = ProcessLegalEntityTree(result.CurrentHierarchy, result.ChangeLogs);
 
@@ -381,7 +398,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             List<ApplicationLicenseSummary> transterredLicenses = _dynamicsClient.GetPaidLicensesOnTransfer(userSettings.AccountId);
             result.Licenses.AddRange(transterredLicenses);
 
-             return result;
+            return result;
         }
 
         private string FindChangeLogId(List<LicenseeChangeLog> changelogs, string legalEntityId)
@@ -398,7 +415,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (item.Children != null)
                     {
                         result = FindChangeLogId((List<LicenseeChangeLog>)item.Children, legalEntityId);
-                    }                    
+                    }
                 }
                 if (result != null)
                 {
@@ -411,7 +428,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /*
 * Performs a Depth First Traversal and transforms the LegalEntity tree to change objects
 */
-        private LicenseeChangeLog ProcessLegalEntityTree(LegalEntity node, List<LicenseeChangeLog> currentChangeLogs)   
+        private LicenseeChangeLog ProcessLegalEntityTree(LegalEntity node, List<LicenseeChangeLog> currentChangeLogs)
         {
             var newNode = new LicenseeChangeLog(node);
             // match up the id.  
@@ -464,11 +481,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 newNode.Children = children;
             }
-   
+
             return newNode;
         }
 
-        private MicrosoftDynamicsCRMadoxioApplication GetCurrentLicenseeApplication (UserSettings userSettings)
+        private MicrosoftDynamicsCRMadoxioApplication GetCurrentLicenseeApplication(UserSettings userSettings)
         {
             MicrosoftDynamicsCRMadoxioApplication result = null;
             // get the current user.
@@ -531,7 +548,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     result = _dynamicsClient.Applications.Create(result);
                     result = _dynamicsClient.GetApplicationByIdWithChildren(result.AdoxioApplicationid).GetAwaiter().GetResult();
-                    
+
                 }
                 catch (HttpOperationException e)
                 {
@@ -552,7 +569,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
             try
             {
-                var application = GetCurrentLicenseeApplication(userSettings);               
+                var application = GetCurrentLicenseeApplication(userSettings);
                 if (application != null)
                 {
                     result = new JsonResult(application.AdoxioApplicationid);
@@ -729,6 +746,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // set application type relationship 
                 var applicationType = _dynamicsClient.GetApplicationTypeByName(item.ApplicationType.Name);
+
+                // copy more data for endorsements
+                if (applicationType.AdoxioIsendorsement == true)
+                {
+                    adoxioApplication.AdoxioEstablishmentaddress = item.EstablishmentAddress;
+                    adoxioApplication.AdoxioEstablishmentaddresscity = item.EstablishmentAddressCity;
+                    adoxioApplication.AdoxioEstablishmentaddressstreet = item.EstablishmentAddressStreet;
+                    adoxioApplication.AdoxioEstablishmentaddresspostalcode = item.EstablishmentAddressPostalCode;
+                    adoxioApplication.AdoxioEstablishmentparcelid = item.EstablishmentParcelId;
+                    adoxioApplication.AdoxioEstablishmentemail = item.EstablishmentEmail;
+                    adoxioApplication.AdoxioEstablishmentphone = item.EstablishmentPhone;
+
+                    // Indigenous nation association
+                    if (!string.IsNullOrEmpty(item?.IndigenousNationId))
+                    {
+                        adoxioApplication.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", item.IndigenousNationId);
+                    }
+
+                    // Police Jurisdiction association
+                    if (!string.IsNullOrEmpty(item?.PoliceJurisdictionId))
+                    {
+                        adoxioApplication.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", item.PoliceJurisdictionId);
+                    }
+                }
+
                 adoxioApplication.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
 
                 if (item.ApplicationType.Name == "Marketing")
@@ -952,7 +994,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             adoxioApplication.CopyValues(item);
 
-            if(item.ApplicationStatus == AdoxioApplicationStatusCodes.PendingForLGFNPFeedback){
+            if (item.ApplicationStatus == AdoxioApplicationStatusCodes.PendingForLGFNPFeedback)
+            {
                 adoxioApplication.Statuscode = (int?)item.ApplicationStatus;
             }
 
@@ -968,7 +1011,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     //remove reference
                     await _dynamicsClient.Applications.DeleteReferenceAsync(item.Id, "adoxio_localgovindigenousnationid");
                 }
-                
+
                 // Police Jurisdiction association
                 if (!string.IsNullOrEmpty(item?.PoliceJurisdiction?.id))
                 {
