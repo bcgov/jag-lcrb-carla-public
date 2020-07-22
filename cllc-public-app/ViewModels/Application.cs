@@ -567,7 +567,17 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public int? MfgBrewPubOnSite { get; set; }
         public int? MfgPipedInProduct { get; set; }
-        
+
+        // these are just optional int - not picklist references.
+        public int? MfgAcresOfFruit { get; set; }
+        public int? MfgAcresOfGrapes { get; set; }
+        public int? MfgAcresOfHoney { get; set; }
+        public bool? MfgMeetsProductionMinimum { get; set; }
+        public bool? MfgStepBlending { get; set; }
+        public bool? MfgStepCrushing { get; set; }
+        public bool? MfgStepFiltering { get; set; }
+        public bool? MfgStepSecFermOrCarb { get; set; }
+
 
         // Manufactuer Structural Change - Patio
         public string PatioCompDescription { get; set; }
