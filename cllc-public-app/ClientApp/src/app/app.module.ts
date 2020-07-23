@@ -39,7 +39,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule,
-  MatBadgeModule,
+  MatBadgeModule
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 import { AccountDataService } from '@services/account-data.service';
