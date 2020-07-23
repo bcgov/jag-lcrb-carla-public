@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
         readonly string _schema;
         readonly string _schemaVersion;
         readonly string AGENT_URL;
-        readonly string ISSUE_URL = "lcrb/issue-credential";
+        readonly string ISSUE_URL = "issue-credential";
         public VonAgentClient(HttpClient client, ILogger logger, string schema, string schemaVersion, string agentURL)
         {
             Client = client;
