@@ -6,5 +6,6 @@
       {{item.accountName}}
     </mat-option>
   </mat-autocomplete>
-
+  <br>
+  <mat-progress-bar *ngIf="accountRequestInProgress" mode="indeterminate"></mat-progress-bar>
 </div>
