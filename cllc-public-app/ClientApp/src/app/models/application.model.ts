@@ -39,6 +39,7 @@ export class Application {
   establishmentAddressStreet: string;
   establishmentParcelId: string;
   establishmentPhone: string;
+  establishmentEmail: string;
   isLocationChangeInProgress: boolean;
   isPaid: boolean;
   isSubmitted: boolean;

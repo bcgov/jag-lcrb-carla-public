@@ -401,6 +401,36 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     }
   }
 
+  startEndorsementApplication(application: Application, endorsementType: string) {
+    const newLicenceApplicationData: Application = <Application>{
+      licenseType: application.licenseType,
+      applicantType: this.account.businessType,
+      applicationType: <ApplicationType>{ name: endorsementType },
+      establishmentAddress: application.establishmentAddress,
+      establishmentAddressCity: application.establishmentAddressCity,
+      establishmentAddressPostalCode: application.establishmentAddressPostalCode,
+      establishmentAddressStreet: application.establishmentAddressStreet,
+      establishmentParcelId: application.establishmentParcelId,
+      establishmentName: application.establishmentName,
+      establishmentPhone: application.establishmentPhone,
+      establishmentEmail: application.establishmentEmail,
+      policeJurisdictionId: application.policeJurisdictionId,
+      indigenousNationId: application.indigenousNationId,
+      account: this.account,
+    };
+    
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        const route: any[] = [`/application/${data.id}`];
+
+        this.router.navigate(route);
+      },
+      () => {
+        this.snackBar.open(`Error starting the Application`, 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+      }
+    );
+  }
+
   isAboutToExpire(expiryDate: string) {
     const now = moment(new Date()).startOf('day');
     const expiry = moment(expiryDate).startOf('day');
