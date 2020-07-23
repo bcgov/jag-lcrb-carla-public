@@ -211,6 +211,7 @@
               <!-- <th style="width: 95px">Last Updated</th> -->
               <th style="width: 235px">Status</th>
               <th>Actions</th>
+              <th>Apply for Enforsements</th>
             </tr>
             <tr *ngFor="let item of inProgressApplications; let i = index;" style="border: 1px solid #ccc; ">
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
@@ -271,7 +272,7 @@
               <td style="background-color: #E1E8F2; padding: 10px;">
                 <div
                   *ngIf="item.applicationStatus === 'Not Submitted' || item.applicationStatus ===  'Pending External Review'">
-                  
+
                   <ng-container *ngIf="!item.lgHasApproved">
                     <a appRemoveIfFeatureOff="LicenseeChanges"
                       *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName !== ApplicationTypeNames.Catering && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal"
@@ -286,7 +287,7 @@
                       <span>Complete Application</span>
                     </a>
                   </ng-container>
-                  
+
                   <ng-container *ngIf="item.lgHasApproved">
                     <a appRemoveIfFeatureOff="LicenseeChanges"
                       *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName !== ApplicationTypeNames.Catering && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal"
@@ -296,7 +297,8 @@
                     </a>
                     <a appRemoveIfFeatureOff="LicenseeChanges"
                       *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName === ApplicationTypeNames.Catering"
-                      [routerLink]="['/multi-step-application/post-lg-decision/' + item.id]" id="completeApp{{item.id}}">
+                      [routerLink]="['/multi-step-application/post-lg-decision/' + item.id]"
+                      id="completeApp{{item.id}}">
                       <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                       <span>Complete Application</span>
                     </a>
@@ -367,6 +369,17 @@
                     <span>Add Supporting Documents</span>
                   </a>
                 </div>
+              </td>
+              <td>
+                <section *ngIf="item?.endorsements?.length">
+                  <p>Third Party Operator Application</p>
+                  <ul>
+                    <li *ngFor="let appType of item.endorsements">
+                      <a href="javascript:void(0)" (click)="startEndorsementApplication(item, appType)">{{appType}}</a>
+                    </li>
+                  </ul>
+                </section>
+              </td>
             </tr>
           </table>
           <p></p>
