@@ -29,24 +29,39 @@ namespace Gov.Lclb.Cllb.OrgbookService
         {
             Credential credential = new Credential()
             {
-                attributes = new Attributes()
-                {
-                    registration_id = registrationId,
-                    licence_number = licence.AdoxioLicencenumber,
-                    establishment_name = licence.AdoxioEstablishment?.AdoxioName,
-                    issue_date = DateTime.UtcNow,
-                    effective_date = licence.AdoxioEffectivedate,
-                    expiry_date = licence.AdoxioExpirydate,
-                    civic_address = licence.AdoxioEstablishmentaddressstreet,
-                    city = licence.AdoxioEstablishmentaddresscity,
-                    province = "BC",
-                    postal_code = licence.AdoxioEstablishmentaddresspostalcode,
-                    country = "Canada",
-                },
                 schema = _schema,
                 version = _schemaVersion
             };
 
+            if (licence.AdoxioLicenceType.AdoxioName == "Marketing")
+            {
+                credential.attributes = new Attributes()
+                {
+                    registration_id = registrationId,
+                    licence_number = licence.AdoxioLicencenumber,
+                    issue_date = DateTime.UtcNow,
+                    effective_date = licence.AdoxioEffectivedate,
+                    expiry_date = licence.AdoxioExpirydate
+                };
+            }
+            else if (licence.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
+            {
+                credential.attributes = new CRSAttributes()
+                {
+                    registration_id = registrationId,
+                    licence_number = licence.AdoxioLicencenumber,
+                    issue_date = DateTime.UtcNow,
+                    effective_date = licence.AdoxioEffectivedate,
+                    expiry_date = licence.AdoxioExpirydate,
+                    establishment_name = licence.AdoxioEstablishment?.AdoxioName,
+                    civic_address = licence.AdoxioEstablishmentaddressstreet,
+                    city = licence.AdoxioEstablishmentaddresscity,
+                    province = "BC",
+                    postal_code = licence.AdoxioEstablishmentaddresspostalcode,
+                    country = "Canada"
+                };
+            }
+            
             try
             {
                 // can't use PostAsJson in dotnet core
