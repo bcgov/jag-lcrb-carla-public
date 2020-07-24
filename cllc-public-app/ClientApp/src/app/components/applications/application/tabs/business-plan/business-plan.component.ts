@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Application } from '@models/application.model';
 import { ApplicationDataService } from '@services/application-data.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
 //import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
 //import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
@@ -15,7 +15,7 @@ export class BusinessPlanComponent extends FormBase implements OnInit {
   @Input() application: Application;
   //@ViewChild('mainForm', { static: false }) mainForm: FileUploaderComponent;
   validationMessages: string[];
-  form: FormGroup;
+  @Input() form: FormGroup;
 
   constructor(private applicationDataService: ApplicationDataService,
     private fb: FormBuilder) {
@@ -23,12 +23,14 @@ export class BusinessPlanComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
-    this.form = this.fb.group({
-      mfgType: ['', []],
-      brewPub: ['', []],
-      pipedIn: ['', []],
-      neutralGrain: ['', []]
-    });
+    this.form.addControl('mfgType', new FormControl(''));
+    this.form.addControl('brewPub', new FormControl(''));
+    this.form.addControl('pipedIn', new FormControl(''));
+    this.form.addControl('neutralGrain', new FormControl(''));
+    this.form.addControl('mfgAcresOfGrapes', new FormControl(''));
+    this.form.addControl('mfgAcresOfFruit', new FormControl(''));
+    this.form.addControl('mfgAcresOfHoney', new FormControl(''));
+    
     this.form.patchValue(this.application);
   }
 
