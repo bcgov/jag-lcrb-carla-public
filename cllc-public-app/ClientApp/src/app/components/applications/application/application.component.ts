@@ -101,6 +101,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   autocompletePoliceDurisdictions: any[];
   LGApprovalsFeatureIsOn: boolean;
   disableSubmitForLGINApproval: boolean;
+  INRequestInProgress: boolean;
+  policeJurisdictionReqInProgress: boolean;
 
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
@@ -210,24 +212,36 @@ export class ApplicationComponent extends FormBase implements OnInit {
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
           this.autocompleteLocalGovernmemts = [];
+          this.INRequestInProgress = true;
         }),
         switchMap(value => this.localGovDataService.getAutocomplete(value))
       )
       .subscribe(data => {
         this.autocompleteLocalGovernmemts = data;
+        this.INRequestInProgress = false;
+        
         this.cd.detectChanges();
+        if(data && data.length  == 0){
+          this.snackBar.open('No match found', '', { duration: 2500, panelClass: ['green-snackbar'] });
+        }
       });
 
     this.form.get('policeJurisdiction').valueChanges
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
           this.autocompleteLocalGovernmemts = [];
+          this.policeJurisdictionReqInProgress = true;
         }),
         switchMap(value => this.policeJurisdictionDataService.getAutocomplete(value))
       )
       .subscribe(data => {
         this.autocompletePoliceDurisdictions = data;
+        this.policeJurisdictionReqInProgress = false;
+
         this.cd.detectChanges();
+        if(data && data.length  == 0){
+          this.snackBar.open('No match found', '', { duration: 2500, panelClass: ['green-snackbar'] });
+        }
       });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((applyAsIN: boolean) => {
