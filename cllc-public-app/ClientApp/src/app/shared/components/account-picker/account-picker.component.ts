@@ -15,6 +15,7 @@ export class AccountPickerComponent implements OnInit {
   @Output() valueSelected: EventEmitter<string> = new EventEmitter<string>();
   form: FormGroup;
   autocompleteAccounts: any[];
+  accountRequestInProgress: boolean;
   constructor(private accountDataService: AccountDataService,
     private fb: FormBuilder) { }
 
@@ -27,6 +28,7 @@ export class AccountPickerComponent implements OnInit {
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
           this.autocompleteAccounts = [];
+          this.accountRequestInProgress = true;
         }),
         switchMap(value => this.accountDataService.getAutocomplete(value))
         )
@@ -37,6 +39,7 @@ export class AccountPickerComponent implements OnInit {
           item.businessType = account.getBusinessTypeName();
         });
         this.autocompleteAccounts = data;
+        this.accountRequestInProgress = false;
         this.inputAutoComplit.openPanel();
       });
   }
