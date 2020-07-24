@@ -23,15 +23,20 @@ export class BusinessPlanComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
-    this.form.addControl('mfgType', new FormControl(''));
-    this.form.addControl('brewPub', new FormControl(''));
-    this.form.addControl('pipedIn', new FormControl(''));
+    this.form.addControl('licenceSubCategory', new FormControl(''));
+    this.form.addControl('mfgBrewPubOnSite', new FormControl(''));
+    this.form.addControl('mfgPipedInProduct', new FormControl(''));
     this.form.addControl('neutralGrain', new FormControl(''));
     this.form.addControl('mfgAcresOfGrapes', new FormControl(''));
     this.form.addControl('mfgAcresOfFruit', new FormControl(''));
     this.form.addControl('mfgAcresOfHoney', new FormControl(''));
     
-    this.form.patchValue(this.application);
+    this.form.get('licenceSubCategory').patchValue(this.application.licenceSubCategory);
+    this.form.get('mfgBrewPubOnSite').patchValue(this.application.mfgBrewPubOnSite);
+    this.form.get('mfgPipedInProduct').patchValue(this.application.mfgPipedInProduct);
+    this.form.get('mfgAcresOfGrapes').patchValue(this.application.mfgAcresOfGrapes);
+    this.form.get('mfgAcresOfFruit').patchValue(this.application.mfgAcresOfHoney);
+    this.form.get('mfgAcresOfHoney').patchValue(this.application.mfgAcresOfHoney);
   }
 
     /* Helper functions for the Manufactuer Licence Business Plan
@@ -41,24 +46,24 @@ export class BusinessPlanComponent extends FormBase implements OnInit {
 
  hasType(): boolean {
   // to do, set validation requirements
-  return this.form.get('mfgType').value;
+   return this.form.get('licenceSubCategory').value;
 }
 
 isBrewery(): boolean {
   // to do, set validation requirements
-  return this.form.get('mfgType').value === "Brewery";
+  return this.form.get('licenceSubCategory').value === "Brewery";
 }
 isWinery(): boolean {
   // to do, set validation requirements
-  return this.form.get('mfgType').value === "Winery";
+  return this.form.get('licenceSubCategory').value === "Winery";
 }
 isDistillery(): boolean {
-  return this.form.get('mfgType').value === "Distillery";
+  return this.form.get('licenceSubCategory').value === "Distillery";
 }
 
 isBrewPub(): boolean {
   // to do, set validation requirements
-  return this.form.get('mfgType').value === "Brewery" && this.form.get('brewPub').value === "Yes";
+  return this.form.get('licenceSubCategory').value === "Brewery" && this.form.get('mfgBrewPubOnSite').value === "Yes";
 }
 
 }
