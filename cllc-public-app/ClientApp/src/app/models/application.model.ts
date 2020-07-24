@@ -132,11 +132,11 @@ export class Application {
 
 
   // Manufactuer
-
+  licenceSubCategory: string;
   isPackaging: boolean;
 
-  mfgBrewPubOnSite: number;
-  mfgPipedInProduct: number;
+  mfgBrewPubOnSite: string;
+  mfgPipedInProduct: string;
 
   // these are just optional int - not picklist references.
   mfgAcresOfFruit: number;
