@@ -357,8 +357,8 @@
             </section>
         <!-- Business Plan for Manufacturers-->
 
-        <section *ngIf="application?.applicationType?.name === 'Manufacturer'">
-          <app-business-plan *ngIf="application" [application]="application">
+        <section *ngIf="application && application?.applicationType?.name === 'Manufacturer'">
+          <app-business-plan *ngIf="application" [application]="application" [form]="form">
           </app-business-plan>
         </section>
 
