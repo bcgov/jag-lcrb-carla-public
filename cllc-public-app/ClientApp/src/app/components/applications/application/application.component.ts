@@ -167,20 +167,20 @@ export class ApplicationComponent extends FormBase implements OnInit {
       establishmentAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
       establishmentEmail: ['', Validators.email],
       establishmentPhone: [''],
-      serviceHoursSundayOpen: ['', Validators.required],
-      serviceHoursMondayOpen: ['', Validators.required],
-      serviceHoursTuesdayOpen: ['', Validators.required],
-      serviceHoursWednesdayOpen: ['', Validators.required],
-      serviceHoursThursdayOpen: ['', Validators.required],
-      serviceHoursFridayOpen: ['', Validators.required],
-      serviceHoursSaturdayOpen: ['', Validators.required],
-      serviceHoursSundayClose: ['', Validators.required],
-      serviceHoursMondayClose: ['', Validators.required],
-      serviceHoursTuesdayClose: ['', Validators.required],
-      serviceHoursWednesdayClose: ['', Validators.required],
-      serviceHoursThursdayClose: ['', Validators.required],
-      serviceHoursFridayClose: ['', Validators.required],
-      serviceHoursSaturdayClose: ['', Validators.required],
+      serviceHoursSundayOpen: [''],
+      serviceHoursMondayOpen: [''],
+      serviceHoursTuesdayOpen: [''],
+      serviceHoursWednesdayOpen: [''],
+      serviceHoursThursdayOpen: [''],
+      serviceHoursFridayOpen: [''],
+      serviceHoursSaturdayOpen: [''],
+      serviceHoursSundayClose: [''],
+      serviceHoursMondayClose: [''],
+      serviceHoursTuesdayClose: [''],
+      serviceHoursWednesdayClose: [''],
+      serviceHoursThursdayClose: [''],
+      serviceHoursFridayClose: [''],
+      serviceHoursSaturdayClose: [''],
       liquorDeclarationCheck: [''],
       applyAsIndigenousNation: [false],
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
@@ -342,6 +342,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.dynamicsDataService.getRecord('indigenousnations', '')
       .subscribe(data => this.indigenousNations = data);
 
+  }
+
+  hoursChanged() {
+    console.log('')
   }
 
   autocompleteDisplay(item: any) {
