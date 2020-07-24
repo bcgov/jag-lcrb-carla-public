@@ -344,10 +344,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   }
 
-  hoursChanged() {
-    console.log('')
-  }
-
   autocompleteDisplay(item: any) {
     return item && item.name;
   }
