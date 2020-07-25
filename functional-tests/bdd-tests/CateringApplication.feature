@@ -11,8 +11,8 @@ Scenario: Indigenous Nation Catering Application
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I review the security screening requirements for an indigenous nation
-    And I click on the Pay for Application button
+    # And I review the security screening requirements for an indigenous nation
+    # And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And I return to the dashboard
@@ -28,8 +28,8 @@ Scenario: Partnership Catering Application
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I review the security screening requirements for a partnership
-    And I click on the Pay for Application button
+    # And I review the security screening requirements for a partnership
+    # And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And I return to the dashboard
@@ -45,8 +45,8 @@ Scenario: Private Corporation Catering Application
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I review the security screening requirements for a private corporation
-    And I click on the Pay for Application button
+    # And I review the security screening requirements for a private corporation
+    # And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And I return to the dashboard
@@ -62,8 +62,8 @@ Scenario: Public Corporation Catering Application
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I review the security screening requirements for a public corporation
-    And I click on the Pay for Application button
+    # And I review the security screening requirements for a public corporation
+    # And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And I return to the dashboard
@@ -79,8 +79,8 @@ Scenario: Society Catering Application
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I review the security screening requirements for a society
-    And I click on the Pay for Application button
+    # And I review the security screening requirements for a society
+    # And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And I return to the dashboard
@@ -96,8 +96,8 @@ Scenario: Sole Proprietorship Catering Application
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I review the security screening requirements for a sole proprietorship
-    And I click on the Pay for Application button
+    # And I review the security screening requirements for a sole proprietorship
+    # And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And I return to the dashboard
