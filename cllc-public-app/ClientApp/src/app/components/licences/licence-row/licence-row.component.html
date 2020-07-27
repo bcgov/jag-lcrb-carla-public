@@ -26,12 +26,9 @@
 
                 <td style="padding: 10px;">
                     <div>
-                    <div *ngIf="item?.isDeemed">
-                        <strong>DEEMED</strong>
-                    </div>
                     <strong *ngIf="item?.licenceTypeName !== 'Marketing'" style="color: #1a5a96;">
                         {{item.establishmentName}}</strong>
-                    <div *ngIf="item?.licenceTypeName.includes('Wine Store')">
+                    <div *ngIf="item?.licenseSubCategory">
                         <p>{{getSubCategory(item.licenseSubCategory)}}</p>
                     </div>
                     </div>
@@ -119,7 +116,7 @@
                     </div>
                     <!-- Third Party Operator Actions-->
                     <!-- Indicate application has been initiated-->
-                    <div *ngIf="isActive(item) && !item.isDeemed && item.tpoRequested" class="licence-expired">
+                    <div *ngIf="isActive(item) && item.tpoRequested" class="licence-expired">
                         <strong>Third Party Operator Application Initiated</strong> <br />
                         <section
                             *ngIf="isActive(item) && item.tpoRequested"
@@ -163,15 +160,15 @@
                 <td style="background-color: #E1E8F2; padding: 10px;">
                     <!-- 3rd Party Operators cannot submit  changes -->
                     <div *ngIf="!item.isOperated">
-                        <div *ngIf="isActive(item) && !item.transferRequested">
+                        <div *ngIf="isActive(item) && actionsVisible(item) && !item.transferRequested">
                             <p>
                                 <a [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
-                                <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Transfer Ownership</span>
+                                <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Transfer Licence</span>
                                 </a>
                             </p>
                         </div>
                         <!-- if there is a third party application in progress, we don't show the ability to submit a new application-->
-                        <div *ngIf="isActive(item) && !item.tpoRequested && item.licenceTypeCategory === 'Liquor'">
+                        <div *ngIf="isActive(item) && actionsVisible(item) && !item.tpoRequested && item.licenceTypeCategory === 'Liquor'">
                             <p>
                                 <a [routerLink]="[ '/third-party-operator/' + item.licenseId]">
                                 <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Add or Change a Third Party Operator</span>

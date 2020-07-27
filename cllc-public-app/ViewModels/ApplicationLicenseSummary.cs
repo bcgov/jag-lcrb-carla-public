@@ -37,8 +37,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [EnumMember(Value = "Wine On Shelf")]
         WineOnShelf = 845280007,
         [EnumMember(Value = "BC VQA Store")]
-        BCVQAStore = 845280008
-
+        BCVQAStore = 845280008,
+        [EnumMember(Value = "Winery")]
+        Winery = 845280009,
+        [EnumMember(Value = "Brewery")]
+        Brewery = 845280010,
+        [EnumMember(Value = "Distillery")]
+        Distillery = 845280011
     }
 
     public enum EnumYesNo

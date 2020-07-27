@@ -18,7 +18,6 @@ import { Application } from '@models/application.model';
 export class MultiStageApplicationFlowComponent implements OnInit {
   securityScreeningEnabled: boolean;
   applicationId: string;
-  isRAS: boolean = false;
   isFree: boolean = false;
   hasLGApproval: boolean = false;
 
@@ -48,20 +47,13 @@ export class MultiStageApplicationFlowComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.isRAS = this.applicationComponent.isRAS();    
-    //this.applicationDataService.getApplicationById(this.applicationId).Subscribe( ... 
-
     this.applicationDataService.getApplicationById(this.applicationId)
       .subscribe((data: Application) => {
         this.application = data;
         if (data.applicantType === 'IndigenousNation') {
           (<any>data).applyAsIndigenousNation = true;
         }
-
         this.isFree = data.applicationType.isFree;
-        this.isRAS = data.licenseType == 'Rural Agency Store';
-        //this.hasLGApproval = data.applicationType.show
-
       },
       () => {
         console.log('Error occured');

@@ -39,6 +39,7 @@ export class Application {
   establishmentAddressStreet: string;
   establishmentParcelId: string;
   establishmentPhone: string;
+  establishmentEmail: string;
   isLocationChangeInProgress: boolean;
   isPaid: boolean;
   isSubmitted: boolean;
@@ -126,5 +127,40 @@ export class Application {
 
   applicant: Account;
 
-  serviceArea: ServiceArea[]
+  serviceAreas: ServiceArea[];
+  outsideAreas: ServiceArea[];
+
+
+  // Manufactuer
+  licenceSubCategory: string;
+  isPackaging: boolean;
+
+  mfgBrewPubOnSite: string;
+  mfgPipedInProduct: string;
+
+  // these are just optional int - not picklist references.
+  mfgAcresOfFruit: number;
+  mfgAcresOfGrapes: number;
+  mfgAcresOfHoney: number;
+
+  mfgMeetsProductionMinimum: boolean;
+  mfgStepBlending: boolean;
+  mfgStepCrushing: boolean;
+  mfgStepFiltering: boolean;
+  mfgStepSecFermOrCarb: boolean;
+  isAlr: boolean;
+  pidList: string; 
+
+  // Manufactuer Structural Change - Patio
+  patioCompDescription: string;
+  patioLocationDescription: string; 
+  patioAccessDescription: string;
+  patioIsLiquorCarried: boolean;
+  patioLiquorCarriedDescription: string;
+  patioAccessControlDescription: string;
+        
+  locatedAboveDescription: number;
+  patioServiceBar: number;
+
+
 }

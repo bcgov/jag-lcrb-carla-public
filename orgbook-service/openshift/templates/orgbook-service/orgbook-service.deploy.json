@@ -93,8 +93,8 @@
                       "value": "${JWT_TOKEN_KEY}"
                     },
                     {
-                      "name": "SHAREPOINT_ODATA_URI",
-                      "value": ""
+                      "name": "ORGBOOK_URL",
+                      "value": "${ORGBOOK_URL}"
                     },
                     {
                       "name": "DOTNET_SSL_DIRS",

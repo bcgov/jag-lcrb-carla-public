@@ -41,6 +41,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ShowFinancialIntegrityFormUpload = applicationType.AdoxioIsshowfinancialintegrityformupload,
                     ShowHoursOfSale = applicationType.AdoxioIsshowhoursofsale,
                     ShowLiquorDeclarations = applicationType.AdoxioIsshowliquordeclarations,
+                    ShowOwnershipDeclaration = applicationType.AdoxioIsownershipconfirmation,
                     ShowLiquorSitePlan = (FormControlState?)applicationType.AdoxioLiquorsiteplan,
                     ShowPropertyDetails = applicationType.AdoxioIsshowpropertydetails,
                     ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments,
