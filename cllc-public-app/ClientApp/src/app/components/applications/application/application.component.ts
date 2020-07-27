@@ -1,5 +1,5 @@
 
-import { filter, takeWhile, catchError, mergeMap, delay, tap, switchMap } from 'rxjs/operators';
+import { filter, takeWhile, catchError, mergeMap, delay, tap, switchMap, distinctUntilChanged } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -207,6 +207,49 @@ export class ApplicationComponent extends FormBase implements OnInit {
       outsideAreas: ['', []]
     });
 
+    this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursSundayClose');
+    });
+    this.form.get('serviceHoursSundayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursSundayOpen');
+    });
+    this.form.get('serviceHoursMondayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursMondayClose');
+    });
+    this.form.get('serviceHoursMondayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursMondayOpen');
+    });
+    this.form.get('serviceHoursTuesdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursTuesdayClose');
+    });
+    this.form.get('serviceHoursTuesdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursTuesdayOpen');
+    });
+    this.form.get('serviceHoursWednesdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursWednesdayClose');
+    });
+    this.form.get('serviceHoursWednesdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursWednesdayOpen');
+    });
+    this.form.get('serviceHoursThursdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursThursdayClose');
+    });
+    this.form.get('serviceHoursThursdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursThursdayOpen');
+    });
+    this.form.get('serviceHoursFridayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursFridayClose');
+    });
+    this.form.get('serviceHoursFridayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursFridayOpen');
+    });
+    this.form.get('serviceHoursSaturdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursSaturdayClose');
+    });
+    this.form.get('serviceHoursSaturdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursSaturdayOpen');
+    });
+
 
     this.form.get('indigenousNation').valueChanges
       .pipe(filter(value => value && value.length >= 3),
@@ -265,7 +308,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))      
       .subscribe((account) => {
         this.account = account;
-        console.log(account);
         this.busy = this.applicationDataService.getApplicationById(this.applicationId)
           .pipe(takeWhile(() => this.componentActive))
           .subscribe((data: Application) => {
@@ -342,6 +384,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.dynamicsDataService.getRecord('indigenousnations', '')
       .subscribe(data => this.indigenousNations = data);
 
+  }
+  
+  updateHoursValidator(val, controlName) {
+    if (val === '') {
+      this.form.get(controlName).setValidators([]);
+    } else {
+      this.form.get(controlName).setValidators(Validators.required);
+    }
+    this.form.get(controlName).updateValueAndValidity();
   }
 
   autocompleteDisplay(item: any) {
