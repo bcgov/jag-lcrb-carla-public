@@ -150,7 +150,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     filter = $"contains(name,'{name}')";
                 }
                 var expand = new List<string> { "primarycontactid" };
-                var accounts = _dynamicsClient.Accounts.Get(filter: filter, expand: expand).Value;
+                var accounts = _dynamicsClient.Accounts.Get(filter: filter, expand: expand, top: 10).Value;
                 foreach (var account in accounts)
                 {
                     var transferAccount = new TransferAccount()
