@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Grpc.Core;
 using System.Collections.Generic;
 using Microsoft.Rest;
+using System.Linq;
 
 namespace Gov.Lclb.Cllb.OrgbookService
 {
@@ -90,6 +91,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
                 var expand = new List<string> { "adoxio_Licencee", "adoxio_LicenceType" };
                 string filter = $"adoxio_orgbookcredentialresult eq null and statuscode eq 1";
                 result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value;
+                result = result.Where(l => l.AdoxioLicencee?.AdoxioOrgbookorganizationlink != null).ToList();
             }
             catch (HttpOperationException odee)
             {
@@ -201,7 +203,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
             try
             {
                 var select = new List<string> {"adoxio_bcincorporationnumber", "accountid"};
-                string filter = $"adoxio_orgbookorganizationlink eq null and adoxio_businessregistrationnumber eq null and adoxio_bcincorporationnumber ne null";
+                string filter = $"adoxio_orgbookorganizationlink eq null and adoxio_businessregistrationnumber eq null and adoxio_bcincorporationnumber ne null and adoxio_bcincorporationnumber ne 'BC1234567'";
                 result = _dynamics.Accounts.Get(filter: filter, select: select).Value;
             }
             catch (HttpOperationException odee)
@@ -225,7 +227,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
 
                 if (orgbookTopicId != null)
                 {
-                    string orgbookLink = _orgbookClient.ORGBOOK_BASE_URL + "/en/organization/" + item.AdoxioBcincorporationnumber;
+                    string orgbookLink = _orgbookClient.ORGBOOK_BASE_URL + "/en/organization/registration.registries.ca/" + item.AdoxioBcincorporationnumber;
                     _dynamics.Accounts.Update(accountId, new MicrosoftDynamicsCRMaccount()
                     {
                         AdoxioOrgbookorganizationlink = orgbookLink,
