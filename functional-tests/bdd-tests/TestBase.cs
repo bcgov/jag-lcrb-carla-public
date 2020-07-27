@@ -129,7 +129,7 @@ namespace bdd_tests
             // if this is a sole proprietorship, click the radio button
             if (businessType == " sole proprietorship")
             {
-                NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.CssSelector("[value='SoleProprietor'][type='radio']"));
+                NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.CssSelector("[value='SoleProprietorship'][type='radio']"));
                 soleProprietorshipRadio.Click();
             }
 
