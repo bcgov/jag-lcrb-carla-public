@@ -1426,7 +1426,7 @@ namespace bdd_tests
         [And(@"I request a transfer of ownership")]
         public void RequestOwnershipTransfer()
         {
-            string transferOwnership = "Transfer Ownership";
+            string transferOwnership = "Transfer Licence";
 
             // click on the Transfer Ownership link
             NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
