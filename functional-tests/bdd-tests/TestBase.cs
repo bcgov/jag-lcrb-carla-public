@@ -129,7 +129,7 @@ namespace bdd_tests
             // if this is a sole proprietorship, click the radio button
             if (businessType == " sole proprietorship")
             {
-                NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.CssSelector("[value='SoleProprietor'][type='radio']"));
+                NgWebElement soleProprietorshipRadio = ngDriver.FindElement(By.CssSelector("[value='SoleProprietorship'][type='radio']"));
                 soleProprietorshipRadio.Click();
             }
 
@@ -1242,9 +1242,9 @@ namespace bdd_tests
         [And(@"I request a valid store name or branding change for (.*)")]
         public void RequestNameBrandingChange(string changeType)
         {
-            string nameBrandingLink = "Request Store Name or Branding Change";
+            string nameBrandingLink = "Establishment Name Change Application";
 
-            // click on the Request Store Name or Branding Change link
+            // click on the Establishment Name Change Application link
             NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLink));
             uiRequestChange.Click();
 
@@ -1426,7 +1426,7 @@ namespace bdd_tests
         [And(@"I request a transfer of ownership")]
         public void RequestOwnershipTransfer()
         {
-            string transferOwnership = "Transfer Ownership";
+            string transferOwnership = "Transfer Licence";
 
             // click on the Transfer Ownership link
             NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
