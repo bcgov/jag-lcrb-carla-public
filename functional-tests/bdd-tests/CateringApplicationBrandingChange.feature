@@ -12,7 +12,7 @@ Scenario: Catering Indigenous Nation Branding Change
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    # And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
@@ -32,7 +32,7 @@ Scenario: Catering Partnership Branding Change
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    # And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
@@ -52,7 +52,7 @@ Scenario: Catering Private Corporation Branding Change
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    # And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
@@ -72,7 +72,7 @@ Scenario: Catering Public Corporation Branding Change
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    # And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
@@ -92,7 +92,7 @@ Scenario: Catering Society Branding Change
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    # And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
@@ -112,7 +112,7 @@ Scenario: Catering Sole Proprietorship Branding Change
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    # And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
