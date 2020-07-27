@@ -20,9 +20,9 @@ export class AdditionalPidsComponent extends FormBase implements OnInit {
      }
 
   ngOnInit() {
-    this.form.addControl('hasMultiplePIDs', new FormControl(''));
+    //this.form.addControl('hasMultiplePIDs', new FormControl(''));
     this.form.addControl('pidList', new FormControl(''));
-    this.form.patchValue(this.application);
+    this.form.get('pidList').patchValue(this.application.pidList);
 }
 
 }
