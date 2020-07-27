@@ -361,6 +361,23 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Other = 845280005
     }
 
+    public enum LicenceSubCategory
+    {
+        Winery = 845280000,
+        Brewery = 845280001,
+        Distillery = 845280002,
+        [EnumMember(Value = "Co-Packer")]
+        CoPacker = 845280003
+    }
+
+    public enum YesNoNotApplicable
+    {
+        Yes = 845280000,
+        No = 845280001,
+        [EnumMember(Value = "N/A")]
+        NotApplicable = 845280002
+    }
+
     public class Application
     {
         public string Id { get; set; } //adoxio_applicationid
@@ -565,8 +582,15 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public bool? IsPackaging { get; set; }
 
-        public int? MfgBrewPubOnSite { get; set; }
-        public int? MfgPipedInProduct { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public YesNoNotApplicable? MfgBrewPubOnSite { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public YesNoNotApplicable? MfgPipedInProduct { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public YesNoNotApplicable? MfgNeutralGrainSpirits { get; set; }
+
 
         // these are just optional int - not picklist references.
         public int? MfgAcresOfFruit { get; set; }
@@ -589,6 +613,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         
         public int? LocatedAboveDescription { get; set; }
         public int? PatioServiceBar { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public LicenceSubCategory LicenceSubCategory { get; set; }
 
         public string PidList { get; set; }
 
