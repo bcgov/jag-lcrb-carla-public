@@ -1242,9 +1242,9 @@ namespace bdd_tests
         [And(@"I request a valid store name or branding change for (.*)")]
         public void RequestNameBrandingChange(string changeType)
         {
-            string nameBrandingLink = "Request Store Name or Branding Change";
+            string nameBrandingLink = "Establishment Name Change Application";
 
-            // click on the Request Store Name or Branding Change link
+            // click on the Establishment Name Change Application link
             NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLink));
             uiRequestChange.Click();
 
