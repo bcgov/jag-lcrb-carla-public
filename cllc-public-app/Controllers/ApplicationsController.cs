@@ -1032,6 +1032,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     AddServiceAreasToApplication(item.OutsideAreas, item.Id);
                 }
+                // fix for an invalid licence sub category
+                if (adoxioApplication.AdoxioLicencesubcategory == 0)
+                {
+                    adoxioApplication.AdoxioLicencesubcategory = null;
+                }
 
                 _dynamicsClient.Applications.Update(id, adoxioApplication);
             }
