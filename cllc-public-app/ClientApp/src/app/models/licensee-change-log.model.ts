@@ -281,7 +281,7 @@ export class LicenseeChangeLog {
         validationResult.push(`${node.businessNameNew} needs to have one or more shareholders`);
       }
 
-      if (node.businessType === 'SoleProprietor' && node.keyPersonnelChildrenNoRemoves.length === 0) {
+      if (node.businessType === 'SoleProprietorship' && node.keyPersonnelChildrenNoRemoves.length === 0) {
         validationResult.push(`${node.businessNameNew} needs to have a leader`);
       }
     }

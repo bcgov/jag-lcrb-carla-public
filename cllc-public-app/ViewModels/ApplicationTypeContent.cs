@@ -106,7 +106,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                 }
                 if (IsSoleProprietorship == true)
                 {
-                    businessTypes.Add(AdoxioApplicantTypeCodes.SoleProprietor.ToString());
+                    businessTypes.Add(AdoxioApplicantTypeCodes.SoleProprietorship.ToString());
                 }
                 if (IsTrust == true)
                 {

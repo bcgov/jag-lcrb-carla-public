@@ -118,7 +118,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
       group.get('emailNew').setValidators([Validators.required, Validators.email]);
       group.get('dateofBirthNew').setValidators([Validators.required]);
       // these validators are not required for SoleProps because they're always owners
-      if(this.rootNode.businessType !== 'SoleProprietor') {
+      if(this.rootNode.businessType !== 'SoleProprietorship') {
         group.get('isDirectorNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
         group.get('isOfficerNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
         group.get('isManagerNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
@@ -219,7 +219,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
       if (this.changeTypeSuffix === 'Leadership') {
         this.associates.at(index).get('isIndividual').setValue(true);
         // check to see if this is a sole prop.
-        if (this.rootNode.businessType === 'SoleProprietor') {
+        if (this.rootNode.businessType === 'SoleProprietorship') {
           this.associates.at(index).get('isOwnerNew').setValue(true);
         }
         // check to see if this is a trust.
@@ -240,6 +240,8 @@ export class AssociateListComponent extends FormBase implements OnInit {
       this.emitValue();
       saved = true;
     } else {
+      // put associate into edit mode to show validation errors
+      this.associates.at(index).get('edit').setValue(true);
       // mark all contols as touched to show validation rules
       const controls = (<FormGroup>(this.associates.at(index))).controls;
       for (let control in controls) {
@@ -340,8 +342,8 @@ export class AssociateListComponent extends FormBase implements OnInit {
       case 'PublicCorporation':
         typeName = 'Public Corporation';
         break;
-      case 'SoleProprietor':
-        typeName = 'Sole Proprietor';
+      case 'SoleProprietorship':
+        typeName = 'Sole Proprietorship';
         break;
       default:
         typeName = typeValue;
