@@ -222,7 +222,7 @@
               </div>
               <p>&nbsp;</p>
 
-              <section *ngIf="application && application?.licenseType === 'Manufacturer'">
+              <section *ngIf="application && form && application?.licenseType === 'Manufacturer'">
                 <app-additional-pids [application]="application" [form]="form">
                 </app-additional-pids>
               </section>
@@ -397,8 +397,8 @@
             </section>
             <!-- Business Plan for Manufacturers-->
 
-            <section *ngIf="application?.applicationType?.name === 'Manufacturer'">
-              <app-business-plan *ngIf="application" [application]="application">
+            <section *ngIf="application && form && application?.applicationType?.name === 'Manufacturer'">              
+              <app-business-plan *ngIf="application" [application]="application" [form]="form">
               </app-business-plan>
             </section>
 
