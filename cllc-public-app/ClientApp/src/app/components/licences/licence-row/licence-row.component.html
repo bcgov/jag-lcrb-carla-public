@@ -26,9 +26,6 @@
 
                 <td style="padding: 10px;">
                     <div>
-                    <div *ngIf="item?.isDeemed">
-                        <strong>DEEMED</strong>
-                    </div>
                     <strong *ngIf="item?.licenceTypeName !== 'Marketing'" style="color: #1a5a96;">
                         {{item.establishmentName}}</strong>
                     <div *ngIf="item?.licenseSubCategory">
@@ -119,7 +116,7 @@
                     </div>
                     <!-- Third Party Operator Actions-->
                     <!-- Indicate application has been initiated-->
-                    <div *ngIf="isActive(item) && !item.isDeemed && item.tpoRequested" class="licence-expired">
+                    <div *ngIf="isActive(item) && item.tpoRequested" class="licence-expired">
                         <strong>Third Party Operator Application Initiated</strong> <br />
                         <section
                             *ngIf="isActive(item) && item.tpoRequested"
