@@ -2808,9 +2808,45 @@ namespace bdd_tests
 
             /***** Key Personnel #2 *****/
 
+            // click on the Add Key Personnel button
+            NgWebElement uiAddKeyPersonnel2 = ngDriver.FindElement(By.CssSelector(".padded-section:nth-child(1) .btn-secondary"));
+            uiAddKeyPersonnel2.Click();
+
+            // enter the key personnel first name 
+            NgWebElement uiSameIndividualFirstName2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='firstNameNew']"));
+            uiSameIndividualFirstName2.SendKeys(sameIndividualFirstName);
+
+            // enter the key personnel last name 
+            NgWebElement uiSameIndividualLastName2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lastNameNew']"));
+            uiSameIndividualLastName2.SendKeys(sameIndividualLastName);
+
+            // click the key personnel checkbox
+            NgWebElement uiSameRole2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='isDirectorNew']"));
+            uiSameRole2.Click();
+
+            // enter the key personnel title
+            NgWebElement uiSameTitle2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='titleNew']"));
+            uiSameTitle2.SendKeys(sameTitle);
+
+            // enter the key personnel email 
+            NgWebElement uiSameIndividualEmail2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='emailNew']"));
+            uiSameIndividualEmail2.SendKeys(sameIndividualEmail);
+
+            // select the key personnel DOB
+            NgWebElement openKeyPersonnelDOB2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='dateofBirthNew']"));
+            openKeyPersonnelDOB2.Click();
+
+            SharedCalendarDate();
+
+            // click on the Confirm button
+            NgWebElement uiConfirmButton1a = ngDriver.FindElement(By.CssSelector(".fa-save span"));
+            uiConfirmButton1a.Click();
+
+            /***** Key Personnel #3 *****/
+
             // click on the add key personnel button for spare
             NgWebElement uiAddKeyPersonnel3 = ngDriver.FindElement(By.CssSelector(".ng-touched .btn-secondary"));
-            uiAddKeyPersonnel3.Click();
+            uiAddKeyPersonnel2.Click();
 
             // enter the spare key personnel first name
             NgWebElement uiSpareFirstName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='firstNameNew']"));
@@ -2842,7 +2878,7 @@ namespace bdd_tests
             NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.CssSelector(".fa-save span"));
             uiConfirmButton2.Click();
 
-            // delete the first same individual
+            // delete the first same individual - DO NOT REMOVE
             NgWebElement uiDeleteButton = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[1]/td[7]/i[2]/span"));
             uiDeleteButton.Click();
 
