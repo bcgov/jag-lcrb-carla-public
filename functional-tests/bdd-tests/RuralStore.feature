@@ -9,4 +9,6 @@ Scenario: Start Application
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    Then I complete the Rural Agency Store application
+    And I complete the Rural Agency Store application
+    And the account is deleted
+    Then I see the login page

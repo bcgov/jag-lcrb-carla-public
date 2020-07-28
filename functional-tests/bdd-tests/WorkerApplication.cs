@@ -181,6 +181,8 @@ namespace bdd_tests
 
             string retDash = "Return to Dashboard";
 
+            System.Threading.Thread.Sleep(3000);
+
             // confirm that payment receipt is for $100.00
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$100.00')]")).Displayed);
 

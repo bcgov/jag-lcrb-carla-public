@@ -14,12 +14,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Extension methods for Eventschedules.
+    /// Extension methods for Licencesubcategories.
     /// </summary>
-    public static partial class EventschedulesExtensions
+    public static partial class LicencesubcategoriesExtensions
     {
             /// <summary>
-            /// Get entities from adoxio_eventschedules
+            /// Get entities from adoxio_licencesubcategories
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -43,13 +43,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioEventscheduleCollection Get(this IEventschedules operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioLicencesubcategoryCollection Get(this ILicencesubcategories operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
                 return operations.GetAsync(top, skip, search, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get entities from adoxio_eventschedules
+            /// Get entities from adoxio_licencesubcategories
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -76,7 +76,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioEventscheduleCollection> GetAsync(this IEventschedules operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioLicencesubcategoryCollection> GetAsync(this ILicencesubcategories operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -85,7 +85,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Get entities from adoxio_eventschedules
+            /// Get entities from adoxio_licencesubcategories
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -112,13 +112,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioEventscheduleCollection> GetWithHttpMessages(this IEventschedules operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencesubcategoryCollection> GetWithHttpMessages(this ILicencesubcategories operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
                 return operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Add new entity to adoxio_eventschedules
+            /// Add new entity to adoxio_licencesubcategories
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -130,13 +130,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// Required in order for the service to return a JSON representation of the
             /// object.
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioEventschedule Create(this IEventschedules operations, MicrosoftDynamicsCRMadoxioEventschedule body, string prefer = "return=representation")
+            public static MicrosoftDynamicsCRMadoxioLicencesubcategory Create(this ILicencesubcategories operations, MicrosoftDynamicsCRMadoxioLicencesubcategory body, string prefer = "return=representation")
             {
                 return operations.CreateAsync(body, prefer).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Add new entity to adoxio_eventschedules
+            /// Add new entity to adoxio_licencesubcategories
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -151,7 +151,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioEventschedule> CreateAsync(this IEventschedules operations, MicrosoftDynamicsCRMadoxioEventschedule body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioLicencesubcategory> CreateAsync(this ILicencesubcategories operations, MicrosoftDynamicsCRMadoxioLicencesubcategory body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateWithHttpMessagesAsync(body, prefer, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -160,7 +160,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Add new entity to adoxio_eventschedules
+            /// Add new entity to adoxio_licencesubcategories
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -175,19 +175,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioEventschedule> CreateWithHttpMessages(this IEventschedules operations, MicrosoftDynamicsCRMadoxioEventschedule body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencesubcategory> CreateWithHttpMessages(this ILicencesubcategories operations, MicrosoftDynamicsCRMadoxioLicencesubcategory body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null)
             {
                 return operations.CreateWithHttpMessagesAsync(body, prefer, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get entity from adoxio_eventschedules by key
+            /// Get entity from adoxio_licencesubcategories by key
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioEventscheduleid'>
-            /// key: adoxio_eventscheduleid of adoxio_eventschedule
+            /// <param name='adoxioLicencesubcategoryid'>
+            /// key: adoxio_licencesubcategoryid of adoxio_licencesubcategory
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -195,19 +195,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioEventschedule GetByKey(this IEventschedules operations, string adoxioEventscheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioLicencesubcategory GetByKey(this ILicencesubcategories operations, string adoxioLicencesubcategoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetByKeyAsync(adoxioEventscheduleid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioLicencesubcategoryid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get entity from adoxio_eventschedules by key
+            /// Get entity from adoxio_licencesubcategories by key
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioEventscheduleid'>
-            /// key: adoxio_eventscheduleid of adoxio_eventschedule
+            /// <param name='adoxioLicencesubcategoryid'>
+            /// key: adoxio_licencesubcategoryid of adoxio_licencesubcategory
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -218,22 +218,22 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioEventschedule> GetByKeyAsync(this IEventschedules operations, string adoxioEventscheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioLicencesubcategory> GetByKeyAsync(this ILicencesubcategories operations, string adoxioLicencesubcategoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioEventscheduleid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioLicencesubcategoryid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Get entity from adoxio_eventschedules by key
+            /// Get entity from adoxio_licencesubcategories by key
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioEventscheduleid'>
-            /// key: adoxio_eventscheduleid of adoxio_eventschedule
+            /// <param name='adoxioLicencesubcategoryid'>
+            /// key: adoxio_licencesubcategoryid of adoxio_licencesubcategory
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -244,36 +244,36 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioEventschedule> GetByKeyWithHttpMessages(this IEventschedules operations, string adoxioEventscheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencesubcategory> GetByKeyWithHttpMessages(this ILicencesubcategories operations, string adoxioLicencesubcategoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetByKeyWithHttpMessagesAsync(adoxioEventscheduleid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(adoxioLicencesubcategoryid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Update entity in adoxio_eventschedules
+            /// Update entity in adoxio_licencesubcategories
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioEventscheduleid'>
-            /// key: adoxio_eventscheduleid of adoxio_eventschedule
+            /// <param name='adoxioLicencesubcategoryid'>
+            /// key: adoxio_licencesubcategoryid of adoxio_licencesubcategory
             /// </param>
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void Update(this IEventschedules operations, string adoxioEventscheduleid, MicrosoftDynamicsCRMadoxioEventschedule body)
+            public static void Update(this ILicencesubcategories operations, string adoxioLicencesubcategoryid, MicrosoftDynamicsCRMadoxioLicencesubcategory body)
             {
-                operations.UpdateAsync(adoxioEventscheduleid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioLicencesubcategoryid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Update entity in adoxio_eventschedules
+            /// Update entity in adoxio_licencesubcategories
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioEventscheduleid'>
-            /// key: adoxio_eventscheduleid of adoxio_eventschedule
+            /// <param name='adoxioLicencesubcategoryid'>
+            /// key: adoxio_licencesubcategoryid of adoxio_licencesubcategory
             /// </param>
             /// <param name='body'>
             /// New property values
@@ -281,19 +281,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdateAsync(this IEventschedules operations, string adoxioEventscheduleid, MicrosoftDynamicsCRMadoxioEventschedule body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this ILicencesubcategories operations, string adoxioLicencesubcategoryid, MicrosoftDynamicsCRMadoxioLicencesubcategory body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.UpdateWithHttpMessagesAsync(adoxioEventscheduleid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioLicencesubcategoryid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
-            /// Update entity in adoxio_eventschedules
+            /// Update entity in adoxio_licencesubcategories
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioEventscheduleid'>
-            /// key: adoxio_eventscheduleid of adoxio_eventschedule
+            /// <param name='adoxioLicencesubcategoryid'>
+            /// key: adoxio_licencesubcategoryid of adoxio_licencesubcategory
             /// </param>
             /// <param name='body'>
             /// New property values
@@ -301,36 +301,36 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse UpdateWithHttpMessages(this IEventschedules operations, string adoxioEventscheduleid, MicrosoftDynamicsCRMadoxioEventschedule body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this ILicencesubcategories operations, string adoxioLicencesubcategoryid, MicrosoftDynamicsCRMadoxioLicencesubcategory body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.UpdateWithHttpMessagesAsync(adoxioEventscheduleid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(adoxioLicencesubcategoryid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Delete entity from adoxio_eventschedules
+            /// Delete entity from adoxio_licencesubcategories
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioEventscheduleid'>
-            /// key: adoxio_eventscheduleid of adoxio_eventschedule
+            /// <param name='adoxioLicencesubcategoryid'>
+            /// key: adoxio_licencesubcategoryid of adoxio_licencesubcategory
             /// </param>
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void Delete(this IEventschedules operations, string adoxioEventscheduleid, string ifMatch = default(string))
+            public static void Delete(this ILicencesubcategories operations, string adoxioLicencesubcategoryid, string ifMatch = default(string))
             {
-                operations.DeleteAsync(adoxioEventscheduleid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioLicencesubcategoryid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Delete entity from adoxio_eventschedules
+            /// Delete entity from adoxio_licencesubcategories
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioEventscheduleid'>
-            /// key: adoxio_eventscheduleid of adoxio_eventschedule
+            /// <param name='adoxioLicencesubcategoryid'>
+            /// key: adoxio_licencesubcategoryid of adoxio_licencesubcategory
             /// </param>
             /// <param name='ifMatch'>
             /// ETag
@@ -338,19 +338,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeleteAsync(this IEventschedules operations, string adoxioEventscheduleid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this ILicencesubcategories operations, string adoxioLicencesubcategoryid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.DeleteWithHttpMessagesAsync(adoxioEventscheduleid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioLicencesubcategoryid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
-            /// Delete entity from adoxio_eventschedules
+            /// Delete entity from adoxio_licencesubcategories
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioEventscheduleid'>
-            /// key: adoxio_eventscheduleid of adoxio_eventschedule
+            /// <param name='adoxioLicencesubcategoryid'>
+            /// key: adoxio_licencesubcategoryid of adoxio_licencesubcategory
             /// </param>
             /// <param name='ifMatch'>
             /// ETag
@@ -358,9 +358,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse DeleteWithHttpMessages(this IEventschedules operations, string adoxioEventscheduleid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this ILicencesubcategories operations, string adoxioLicencesubcategoryid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.DeleteWithHttpMessagesAsync(adoxioEventscheduleid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(adoxioLicencesubcategoryid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }
