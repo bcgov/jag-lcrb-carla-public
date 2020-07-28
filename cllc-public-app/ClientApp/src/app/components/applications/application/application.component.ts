@@ -205,7 +205,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       IsReadyProductNotVisibleOutside: ['', []],
       serviceAreas: ['', []],
       outsideAreas: ['', []],
-      capacityArea: ['', []]
+      capacityArea: this.fb.group({
+        areaCategory: [AreaCategory.Capacity],
+        areaNumber: [1],
+        areaLocation: [''],
+        capacity: ['', Validators.required]
+      })
     });
 
     this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
@@ -263,9 +268,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
       .subscribe(data => {
         this.autocompleteLocalGovernmemts = data;
         this.INRequestInProgress = false;
-        
+
         this.cd.detectChanges();
-        if(data && data.length  == 0){
+        if (data && data.length  === 0){
           this.snackBar.open('No match found', '', { duration: 2500, panelClass: ['green-snackbar'] });
         }
       });
@@ -283,7 +288,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.policeJurisdictionReqInProgress = false;
 
         this.cd.detectChanges();
-        if(data && data.length  == 0){
+        if (data && data.length  === 0){
           this.snackBar.open('No match found', '', { duration: 2500, panelClass: ['green-snackbar'] });
         }
       });
@@ -306,7 +311,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.establishmentWatchWordsService.initialize();
 
     this.store.select(state => state.currentAccountState.currentAccount)
-      .pipe(takeWhile(() => this.componentActive))      
+      .pipe(takeWhile(() => this.componentActive))
       .subscribe((account) => {
         this.account = account;
         this.busy = this.applicationDataService.getApplicationById(this.applicationId)
@@ -368,6 +373,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
             if (data.policeJurisdiction) {
               this.form.get('indigenousNationId').patchValue(data.policeJurisdiction.id);
             }
+            if (this.application.capacityArea.length > 0) {
+              this.form.get('capacityArea').patchValue({...this.application.capacityArea[0]});
+            } else {
+              this.form.get('capacityArea.areaLocation').patchValue(data.applicationType.name);
+            }
 
             // make fields readonly if payment was made or the LG is viewing the application
             // disable the form if the local government has reviewed the application
@@ -386,7 +396,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       .subscribe(data => this.indigenousNations = data);
 
   }
-  
+
   updateHoursValidator(val, controlName) {
     if (val === '') {
       this.form.get(controlName).setValidators([]);
@@ -499,6 +509,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
     if (!this.application.applicationType.outsideAreas) {
       this.form.get('outsideAreas').disable();
+    }
+    if (!this.application.applicationType.capacityArea) {
+      this.form.get('capacityArea').disable();
     }
   }
 
@@ -652,6 +665,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     // flatten the service areas if need be
     const serviceAreas = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
     const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
+    const capacityArea = [this.form.get('capacityArea').value];
 
     // do not save if the form is in file upload mode
     if (this.mode === UPLOAD_FILES_MODE) {
@@ -664,7 +678,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
         ...this.form.value,
         description2: description2,
         serviceAreas: serviceAreas,
-        outsideAreas: outsideAreas
+        outsideAreas: outsideAreas,
+        capacityArea: capacityArea
       }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
