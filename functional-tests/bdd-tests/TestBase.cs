@@ -2936,7 +2936,6 @@ namespace bdd_tests
 
             // check that the shareholder email is displayed to confirm remains
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'same@individual2.com')]")).Displayed);
-
         }
 
 
