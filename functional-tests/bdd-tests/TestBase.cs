@@ -1242,11 +1242,22 @@ namespace bdd_tests
         [And(@"I request a valid store name or branding change for (.*)")]
         public void RequestNameBrandingChange(string changeType)
         {
-            string nameBrandingLink = "Request Store Name or Branding Change";
+            string nameBrandingLinkCannabis = "Request Store Name or Branding Change";
+            string nameBrandingLinkCatering = "Establishment Name Change Application";
 
-            // click on the Request Store Name or Branding Change link
-            NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLink));
-            uiRequestChange.Click();
+            if (changeType == "Catering")
+            {
+                // click on the **** link
+                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCatering));
+                uiRequestChange.Click();
+            }
+
+            if (changeType == "Cannabis")
+            {
+                // click on the Request Store Name or Branding Change link
+                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCannabis));
+                uiRequestChange.Click();
+            }
 
             /* 
             Page Title: Please Review the Account Profile
