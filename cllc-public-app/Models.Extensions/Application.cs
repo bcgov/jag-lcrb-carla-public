@@ -433,6 +433,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 OtherBusinessesDetails = dynamicsApplication.AdoxioOtherbusinesssamelocationdetails,
                 ServiceAreas = new List<CapacityArea>(),
                 OutsideAreas = new List<CapacityArea>(),
+                CapacityArea = new List<CapacityArea>(),
 
                 // Manufacturing fields
 
@@ -518,6 +519,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                         else if (area.AdoxioAreacategory == (int?)AdoxioAreaCategories.OutdoorArea)
                         {
                             applicationVM.OutsideAreas.Add(area.ToViewModel());
+                        }
+                        else if (area.AdoxioAreacategory == (int?)AdoxioAreaCategories.Capacity)
+                        {
+                            applicationVM.CapacityArea.Add(area.ToViewModel());
                         }
                     }
                 }
