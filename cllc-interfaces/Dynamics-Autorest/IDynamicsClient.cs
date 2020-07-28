@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top704 { get; set; }
+        int? Top98 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip704 { get; set; }
+        int? Skip98 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count704 { get; set; }
+        bool? Count98 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter704 { get; set; }
+        string Filter98 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search704 { get; set; }
+        string Search98 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -68,46 +68,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAccounts Accounts { get; }
 
         /// <summary>
-        /// Gets the IAccountadoxioeventlicensee.
-        /// </summary>
-        IAccountadoxioeventlicensee Accountadoxioeventlicensee { get; }
-
-        /// <summary>
-        /// Gets the IAccountadoxiolicencesproposedoperator.
-        /// </summary>
-        IAccountadoxiolicencesproposedoperator Accountadoxiolicencesproposedoperator { get; }
-
-        /// <summary>
-        /// Gets the ILginlinkid.
-        /// </summary>
-        ILginlinkid Lginlinkid { get; }
-
-        /// <summary>
-        /// Gets the ILicenseeenforcementactions.
-        /// </summary>
-        ILicenseeenforcementactions Licenseeenforcementactions { get; }
-
-        /// <summary>
-        /// Gets the IThirdpartyoperatorlicences.
-        /// </summary>
-        IThirdpartyoperatorlicences Thirdpartyoperatorlicences { get; }
-
-        /// <summary>
-        /// Gets the IPartyidadoxioevent.
-        /// </summary>
-        IPartyidadoxioevent Partyidadoxioevent { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioenforcementaction.
-        /// </summary>
-        IRegardingobjectidadoxioenforcementaction Regardingobjectidadoxioenforcementaction { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioevent.
-        /// </summary>
-        IRegardingobjectidadoxioevent Regardingobjectidadoxioevent { get; }
-
-        /// <summary>
         /// Gets the IAdoxiolicencetypeadoxioinvestigationset.
         /// </summary>
         IAdoxiolicencetypeadoxioinvestigationset Adoxiolicencetypeadoxioinvestigationset { get; }
@@ -118,74 +78,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAliases Aliases { get; }
 
         /// <summary>
-        /// Gets the IAliasmailboxtrackingfolders.
-        /// </summary>
-        IAliasmailboxtrackingfolders Aliasmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IAliasprincipalobjectattributeaccesses.
-        /// </summary>
-        IAliasprincipalobjectattributeaccesses Aliasprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IAliasprocesssession.
-        /// </summary>
-        IAliasprocesssession Aliasprocesssession { get; }
-
-        /// <summary>
         /// Gets the IAnnualvolumes.
         /// </summary>
         IAnnualvolumes Annualvolumes { get; }
-
-        /// <summary>
-        /// Gets the IAnnualvolumeasyncoperations.
-        /// </summary>
-        IAnnualvolumeasyncoperations Annualvolumeasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IAnnualvolumebulkdeletefailures.
-        /// </summary>
-        IAnnualvolumebulkdeletefailures Annualvolumebulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IAnnualvolumeduplicatebaserecord.
-        /// </summary>
-        IAnnualvolumeduplicatebaserecord Annualvolumeduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the IAnnualvolumeduplicatematchingrecord.
-        /// </summary>
-        IAnnualvolumeduplicatematchingrecord Annualvolumeduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the IAnnualvolumemailboxtrackingfolders.
-        /// </summary>
-        IAnnualvolumemailboxtrackingfolders Annualvolumemailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IAnnualvolumeprincipalobjectattributeaccesses.
-        /// </summary>
-        IAnnualvolumeprincipalobjectattributeaccesses Annualvolumeprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IAnnualvolumeprocesssession.
-        /// </summary>
-        IAnnualvolumeprocesssession Annualvolumeprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IAnnualvolumesyncerrors.
-        /// </summary>
-        IAnnualvolumesyncerrors Annualvolumesyncerrors { get; }
-
-        /// <summary>
-        /// Gets the IApplication.
-        /// </summary>
-        IApplication Application { get; }
-
-        /// <summary>
-        /// Gets the ILicence.
-        /// </summary>
-        ILicence Licence { get; }
 
         /// <summary>
         /// Gets the IApplicationbpfv3s.
@@ -193,64 +88,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationbpfv3s Applicationbpfv3s { get; }
 
         /// <summary>
-        /// Gets the IApplicationbpfv3mailboxtrackingfolders.
-        /// </summary>
-        IApplicationbpfv3mailboxtrackingfolders Applicationbpfv3mailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IApplicationbpfv3principalobjectattributeaccesses.
-        /// </summary>
-        IApplicationbpfv3principalobjectattributeaccesses Applicationbpfv3principalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IApplicationbpfv3processsession.
-        /// </summary>
-        IApplicationbpfv3processsession Applicationbpfv3processsession { get; }
-
-        /// <summary>
         /// Gets the IApplicationcrsbpfv4s.
         /// </summary>
         IApplicationcrsbpfv4s Applicationcrsbpfv4s { get; }
-
-        /// <summary>
-        /// Gets the IApplicationcrsbpfv4asyncoperations.
-        /// </summary>
-        IApplicationcrsbpfv4asyncoperations Applicationcrsbpfv4asyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IApplicationcrsbpfv4bulkdeletefailures.
-        /// </summary>
-        IApplicationcrsbpfv4bulkdeletefailures Applicationcrsbpfv4bulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IApplicationcrsbpfv4mailboxtrackingfolders.
-        /// </summary>
-        IApplicationcrsbpfv4mailboxtrackingfolders Applicationcrsbpfv4mailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IApplicationcrsbpfv4principalobjectattributeaccesses.
-        /// </summary>
-        IApplicationcrsbpfv4principalobjectattributeaccesses Applicationcrsbpfv4principalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IApplicationcrsbpfv4processsession.
-        /// </summary>
-        IApplicationcrsbpfv4processsession Applicationcrsbpfv4processsession { get; }
-
-        /// <summary>
-        /// Gets the IApplicationcrsbpfv4syncerrors.
-        /// </summary>
-        IApplicationcrsbpfv4syncerrors Applicationcrsbpfv4syncerrors { get; }
-
-        /// <summary>
-        /// Gets the IApplicationcrsbpfv4workflowlogs.
-        /// </summary>
-        IApplicationcrsbpfv4workflowlogs Applicationcrsbpfv4workflowlogs { get; }
-
-        /// <summary>
-        /// Gets the IBpfadoxioapplicationid.
-        /// </summary>
-        IBpfadoxioapplicationid Bpfadoxioapplicationid { get; }
 
         /// <summary>
         /// Gets the IApplicationinvoicehistories.
@@ -258,59 +98,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationinvoicehistories Applicationinvoicehistories { get; }
 
         /// <summary>
-        /// Gets the IApplicationinvoicehistorymailboxtrackingfolders.
-        /// </summary>
-        IApplicationinvoicehistorymailboxtrackingfolders Applicationinvoicehistorymailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IApplicationinvoicehistoryprincipalobjectattributeaccesses.
-        /// </summary>
-        IApplicationinvoicehistoryprincipalobjectattributeaccesses Applicationinvoicehistoryprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IApplicationinvoicehistoryprocesssession.
-        /// </summary>
-        IApplicationinvoicehistoryprocesssession Applicationinvoicehistoryprocesssession { get; }
-
-        /// <summary>
         /// Gets the IApplicationlicenseechangesv10s.
         /// </summary>
         IApplicationlicenseechangesv10s Applicationlicenseechangesv10s { get; }
-
-        /// <summary>
-        /// Gets the IApplicationlicenseechangesv10asyncoperations.
-        /// </summary>
-        IApplicationlicenseechangesv10asyncoperations Applicationlicenseechangesv10asyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IApplicationlicenseechangesv10bulkdeletefailures.
-        /// </summary>
-        IApplicationlicenseechangesv10bulkdeletefailures Applicationlicenseechangesv10bulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IApplicationlicenseechangesv10mailboxtrackingfolders.
-        /// </summary>
-        IApplicationlicenseechangesv10mailboxtrackingfolders Applicationlicenseechangesv10mailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IApplicationlicenseechangesv10principalobjectattributeaccesses.
-        /// </summary>
-        IApplicationlicenseechangesv10principalobjectattributeaccesses Applicationlicenseechangesv10principalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IApplicationlicenseechangesv10processsession.
-        /// </summary>
-        IApplicationlicenseechangesv10processsession Applicationlicenseechangesv10processsession { get; }
-
-        /// <summary>
-        /// Gets the IApplicationlicenseechangesv10syncerrors.
-        /// </summary>
-        IApplicationlicenseechangesv10syncerrors Applicationlicenseechangesv10syncerrors { get; }
-
-        /// <summary>
-        /// Gets the IApplicationlicenseechangesv10workflowlogs.
-        /// </summary>
-        IApplicationlicenseechangesv10workflowlogs Applicationlicenseechangesv10workflowlogs { get; }
 
         /// <summary>
         /// Gets the IApplicationliquorbpfs.
@@ -318,79 +108,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationliquorbpfs Applicationliquorbpfs { get; }
 
         /// <summary>
-        /// Gets the IApplicationliquorbpfasyncoperations.
-        /// </summary>
-        IApplicationliquorbpfasyncoperations Applicationliquorbpfasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IApplicationliquorbpfbulkdeletefailures.
-        /// </summary>
-        IApplicationliquorbpfbulkdeletefailures Applicationliquorbpfbulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IApplicationliquorbpfmailboxtrackingfolders.
-        /// </summary>
-        IApplicationliquorbpfmailboxtrackingfolders Applicationliquorbpfmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IApplicationliquorbpfprincipalobjectattributeaccesses.
-        /// </summary>
-        IApplicationliquorbpfprincipalobjectattributeaccesses Applicationliquorbpfprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IApplicationliquorbpfprocesssession.
-        /// </summary>
-        IApplicationliquorbpfprocesssession Applicationliquorbpfprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IApplicationliquorbpfsyncerrors.
-        /// </summary>
-        IApplicationliquorbpfsyncerrors Applicationliquorbpfsyncerrors { get; }
-
-        /// <summary>
-        /// Gets the IApplicationliquorbpfworkflowlogs.
-        /// </summary>
-        IApplicationliquorbpfworkflowlogs Applicationliquorbpfworkflowlogs { get; }
-
-        /// <summary>
         /// Gets the IApplicationliquorbpfv2s.
         /// </summary>
         IApplicationliquorbpfv2s Applicationliquorbpfv2s { get; }
-
-        /// <summary>
-        /// Gets the IApplicationliquorbpfv2asyncoperations.
-        /// </summary>
-        IApplicationliquorbpfv2asyncoperations Applicationliquorbpfv2asyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IApplicationliquorbpfv2bulkdeletefailures.
-        /// </summary>
-        IApplicationliquorbpfv2bulkdeletefailures Applicationliquorbpfv2bulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IApplicationliquorbpfv2mailboxtrackingfolders.
-        /// </summary>
-        IApplicationliquorbpfv2mailboxtrackingfolders Applicationliquorbpfv2mailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IApplicationliquorbpfv2principalobjectattributeaccesses.
-        /// </summary>
-        IApplicationliquorbpfv2principalobjectattributeaccesses Applicationliquorbpfv2principalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IApplicationliquorbpfv2processsession.
-        /// </summary>
-        IApplicationliquorbpfv2processsession Applicationliquorbpfv2processsession { get; }
-
-        /// <summary>
-        /// Gets the IApplicationliquorbpfv2syncerrors.
-        /// </summary>
-        IApplicationliquorbpfv2syncerrors Applicationliquorbpfv2syncerrors { get; }
-
-        /// <summary>
-        /// Gets the IApplicationliquorbpfv2workflowlogs.
-        /// </summary>
-        IApplicationliquorbpfv2workflowlogs Applicationliquorbpfv2workflowlogs { get; }
 
         /// <summary>
         /// Gets the IApplicationrelocationv1s.
@@ -398,109 +118,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationrelocationv1s Applicationrelocationv1s { get; }
 
         /// <summary>
-        /// Gets the IApplicationrelocationv1asyncoperations.
-        /// </summary>
-        IApplicationrelocationv1asyncoperations Applicationrelocationv1asyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IApplicationrelocationv1bulkdeletefailures.
-        /// </summary>
-        IApplicationrelocationv1bulkdeletefailures Applicationrelocationv1bulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IApplicationrelocationv1mailboxtrackingfolders.
-        /// </summary>
-        IApplicationrelocationv1mailboxtrackingfolders Applicationrelocationv1mailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IApplicationrelocationv1principalobjectattributeaccesses.
-        /// </summary>
-        IApplicationrelocationv1principalobjectattributeaccesses Applicationrelocationv1principalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IApplicationrelocationv1processsession.
-        /// </summary>
-        IApplicationrelocationv1processsession Applicationrelocationv1processsession { get; }
-
-        /// <summary>
-        /// Gets the IApplicationrelocationv1syncerrors.
-        /// </summary>
-        IApplicationrelocationv1syncerrors Applicationrelocationv1syncerrors { get; }
-
-        /// <summary>
-        /// Gets the IApplicationrelocationv1workflowlogs.
-        /// </summary>
-        IApplicationrelocationv1workflowlogs Applicationrelocationv1workflowlogs { get; }
-
-        /// <summary>
         /// Gets the IApplications.
         /// </summary>
         IApplications Applications { get; }
-
-        /// <summary>
-        /// Gets the IApplicationadoxioendorsementapplication.
-        /// </summary>
-        IApplicationadoxioendorsementapplication Applicationadoxioendorsementapplication { get; }
-
-        /// <summary>
-        /// Gets the IApplicationannualvolumeapplication.
-        /// </summary>
-        IApplicationannualvolumeapplication Applicationannualvolumeapplication { get; }
-
-        /// <summary>
-        /// Gets the IApplicationmailboxtrackingfolders.
-        /// </summary>
-        IApplicationmailboxtrackingfolders Applicationmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IApplicationprincipalobjectattributeaccesses.
-        /// </summary>
-        IApplicationprincipalobjectattributeaccesses Applicationprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IApplicationprocesssession.
-        /// </summary>
-        IApplicationprocesssession Applicationprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IApplicationserviceareas.
-        /// </summary>
-        IApplicationserviceareas Applicationserviceareas { get; }
-
-        /// <summary>
-        /// Gets the IBpfadoxioapplicationadoxioapplicationcrsbpfv4.
-        /// </summary>
-        IBpfadoxioapplicationadoxioapplicationcrsbpfv4 Bpfadoxioapplicationadoxioapplicationcrsbpfv4 { get; }
-
-        /// <summary>
-        /// Gets the IBpfadoxioapplicationadoxioapplicationlicenseechangesv10.
-        /// </summary>
-        IBpfadoxioapplicationadoxioapplicationlicenseechangesv10 Bpfadoxioapplicationadoxioapplicationlicenseechangesv10 { get; }
-
-        /// <summary>
-        /// Gets the IBpfadoxioapplicationadoxioapplicationliquorbpf.
-        /// </summary>
-        IBpfadoxioapplicationadoxioapplicationliquorbpf Bpfadoxioapplicationadoxioapplicationliquorbpf { get; }
-
-        /// <summary>
-        /// Gets the IBpfadoxioapplicationadoxioapplicationliquorbpfv2.
-        /// </summary>
-        IBpfadoxioapplicationadoxioapplicationliquorbpfv2 Bpfadoxioapplicationadoxioapplicationliquorbpfv2 { get; }
-
-        /// <summary>
-        /// Gets the IBpfadoxioapplicationadoxioapplicationrelocationv1.
-        /// </summary>
-        IBpfadoxioapplicationadoxioapplicationrelocationv1 Bpfadoxioapplicationadoxioapplicationrelocationv1 { get; }
-
-        /// <summary>
-        /// Gets the IBpfadoxioapplicationadoxioapplicationstructurechangev1.
-        /// </summary>
-        IBpfadoxioapplicationadoxioapplicationstructurechangev1 Bpfadoxioapplicationadoxioapplicationstructurechangev1 { get; }
-
-        /// <summary>
-        /// Gets the IBpfadoxioapplicationadoxioapplicationtransferownershipv1.
-        /// </summary>
-        IBpfadoxioapplicationadoxioapplicationtransferownershipv1 Bpfadoxioapplicationadoxioapplicationtransferownershipv1 { get; }
 
         /// <summary>
         /// Gets the IApplicationstructurechangev1s.
@@ -508,59 +128,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationstructurechangev1s Applicationstructurechangev1s { get; }
 
         /// <summary>
-        /// Gets the IApplicationstructurechangev1asyncoperations.
-        /// </summary>
-        IApplicationstructurechangev1asyncoperations Applicationstructurechangev1asyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IApplicationstructurechangev1bulkdeletefailures.
-        /// </summary>
-        IApplicationstructurechangev1bulkdeletefailures Applicationstructurechangev1bulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IApplicationstructurechangev1mailboxtrackingfolders.
-        /// </summary>
-        IApplicationstructurechangev1mailboxtrackingfolders Applicationstructurechangev1mailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IApplicationstructurechangev1principalobjectattributeaccesses.
-        /// </summary>
-        IApplicationstructurechangev1principalobjectattributeaccesses Applicationstructurechangev1principalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IApplicationstructurechangev1processsession.
-        /// </summary>
-        IApplicationstructurechangev1processsession Applicationstructurechangev1processsession { get; }
-
-        /// <summary>
-        /// Gets the IApplicationstructurechangev1syncerrors.
-        /// </summary>
-        IApplicationstructurechangev1syncerrors Applicationstructurechangev1syncerrors { get; }
-
-        /// <summary>
-        /// Gets the IApplicationstructurechangev1workflowlogs.
-        /// </summary>
-        IApplicationstructurechangev1workflowlogs Applicationstructurechangev1workflowlogs { get; }
-
-        /// <summary>
         /// Gets the IApplicationtermsconditionslimitations.
         /// </summary>
         IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtermsconditionslimitationmailboxtrackingfolders.
-        /// </summary>
-        IApplicationtermsconditionslimitationmailboxtrackingfolders Applicationtermsconditionslimitationmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtermsconditionslimitationprincipalobjectattributeaccesses.
-        /// </summary>
-        IApplicationtermsconditionslimitationprincipalobjectattributeaccesses Applicationtermsconditionslimitationprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtermsconditionslimitationprocesssession.
-        /// </summary>
-        IApplicationtermsconditionslimitationprocesssession Applicationtermsconditionslimitationprocesssession { get; }
 
         /// <summary>
         /// Gets the IApplicationtransferownershipv1s.
@@ -568,59 +138,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationtransferownershipv1s Applicationtransferownershipv1s { get; }
 
         /// <summary>
-        /// Gets the IApplicationtransferownershipv1asyncoperations.
-        /// </summary>
-        IApplicationtransferownershipv1asyncoperations Applicationtransferownershipv1asyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtransferownershipv1bulkdeletefailures.
-        /// </summary>
-        IApplicationtransferownershipv1bulkdeletefailures Applicationtransferownershipv1bulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtransferownershipv1mailboxtrackingfolders.
-        /// </summary>
-        IApplicationtransferownershipv1mailboxtrackingfolders Applicationtransferownershipv1mailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtransferownershipv1principalobjectattributeaccesses.
-        /// </summary>
-        IApplicationtransferownershipv1principalobjectattributeaccesses Applicationtransferownershipv1principalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtransferownershipv1processsession.
-        /// </summary>
-        IApplicationtransferownershipv1processsession Applicationtransferownershipv1processsession { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtransferownershipv1syncerrors.
-        /// </summary>
-        IApplicationtransferownershipv1syncerrors Applicationtransferownershipv1syncerrors { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtransferownershipv1workflowlogs.
-        /// </summary>
-        IApplicationtransferownershipv1workflowlogs Applicationtransferownershipv1workflowlogs { get; }
-
-        /// <summary>
         /// Gets the IApplicationtypecontents.
         /// </summary>
         IApplicationtypecontents Applicationtypecontents { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypecontentmailboxtrackingfolders.
-        /// </summary>
-        IApplicationtypecontentmailboxtrackingfolders Applicationtypecontentmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypecontentprincipalobjectattributeaccesses.
-        /// </summary>
-        IApplicationtypecontentprincipalobjectattributeaccesses Applicationtypecontentprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypecontentprocesssession.
-        /// </summary>
-        IApplicationtypecontentprocesssession Applicationtypecontentprocesssession { get; }
 
         /// <summary>
         /// Gets the IApplicationtypefeeschedules.
@@ -628,89 +148,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationtypefeeschedules Applicationtypefeeschedules { get; }
 
         /// <summary>
-        /// Gets the IApplicationtypefeescheduleasyncoperations.
-        /// </summary>
-        IApplicationtypefeescheduleasyncoperations Applicationtypefeescheduleasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypefeeschedulebulkdeletefailures.
-        /// </summary>
-        IApplicationtypefeeschedulebulkdeletefailures Applicationtypefeeschedulebulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypefeescheduleduplicatebaserecord.
-        /// </summary>
-        IApplicationtypefeescheduleduplicatebaserecord Applicationtypefeescheduleduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypefeescheduleduplicatematchingrecord.
-        /// </summary>
-        IApplicationtypefeescheduleduplicatematchingrecord Applicationtypefeescheduleduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypefeeschedulemailboxtrackingfolders.
-        /// </summary>
-        IApplicationtypefeeschedulemailboxtrackingfolders Applicationtypefeeschedulemailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypefeescheduleprincipalobjectattributeaccesses.
-        /// </summary>
-        IApplicationtypefeescheduleprincipalobjectattributeaccesses Applicationtypefeescheduleprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypefeescheduleprocesssession.
-        /// </summary>
-        IApplicationtypefeescheduleprocesssession Applicationtypefeescheduleprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypefeeschedulesyncerrors.
-        /// </summary>
-        IApplicationtypefeeschedulesyncerrors Applicationtypefeeschedulesyncerrors { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypeid.
-        /// </summary>
-        IApplicationtypeid Applicationtypeid { get; }
-
-        /// <summary>
-        /// Gets the IFeeproduct.
-        /// </summary>
-        IFeeproduct Feeproduct { get; }
-
-        /// <summary>
         /// Gets the IApplicationtypes.
         /// </summary>
         IApplicationtypes Applicationtypes { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypeadoxioapplicationtypefeescheduleapplicationtypeid.
-        /// </summary>
-        IApplicationtypeadoxioapplicationtypefeescheduleapplicationtypeid Applicationtypeadoxioapplicationtypefeescheduleapplicationtypeid { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypeadoxioendorsementapplicationtype.
-        /// </summary>
-        IApplicationtypeadoxioendorsementapplicationtype Applicationtypeadoxioendorsementapplicationtype { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypeformelementuploadfields.
-        /// </summary>
-        IApplicationtypeformelementuploadfields Applicationtypeformelementuploadfields { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypemailboxtrackingfolders.
-        /// </summary>
-        IApplicationtypemailboxtrackingfolders Applicationtypemailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypeprincipalobjectattributeaccesses.
-        /// </summary>
-        IApplicationtypeprincipalobjectattributeaccesses Applicationtypeprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtypeprocesssession.
-        /// </summary>
-        IApplicationtypeprocesssession Applicationtypeprocesssession { get; }
 
         /// <summary>
         /// Gets the IAreas.
@@ -718,49 +158,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAreas Areas { get; }
 
         /// <summary>
-        /// Gets the IAreaenforcementactions.
-        /// </summary>
-        IAreaenforcementactions Areaenforcementactions { get; }
-
-        /// <summary>
-        /// Gets the IAreaevents.
-        /// </summary>
-        IAreaevents Areaevents { get; }
-
-        /// <summary>
-        /// Gets the IAreamailboxtrackingfolders.
-        /// </summary>
-        IAreamailboxtrackingfolders Areamailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IAreaprincipalobjectattributeaccesses.
-        /// </summary>
-        IAreaprincipalobjectattributeaccesses Areaprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IAreaprocesssession.
-        /// </summary>
-        IAreaprocesssession Areaprocesssession { get; }
-
-        /// <summary>
         /// Gets the IAuditlogrequests.
         /// </summary>
         IAuditlogrequests Auditlogrequests { get; }
-
-        /// <summary>
-        /// Gets the IAuditlogrequestmailboxtrackingfolders.
-        /// </summary>
-        IAuditlogrequestmailboxtrackingfolders Auditlogrequestmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IAuditlogrequestprincipalobjectattributeaccesses.
-        /// </summary>
-        IAuditlogrequestprincipalobjectattributeaccesses Auditlogrequestprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IAuditlogrequestprocesssession.
-        /// </summary>
-        IAuditlogrequestprocesssession Auditlogrequestprocesssession { get; }
 
         /// <summary>
         /// Gets the IBusinessaccounts.
@@ -768,39 +168,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IBusinessaccounts Businessaccounts { get; }
 
         /// <summary>
-        /// Gets the IBusinessaccountmailboxtrackingfolders.
-        /// </summary>
-        IBusinessaccountmailboxtrackingfolders Businessaccountmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IBusinessaccountprincipalobjectattributeaccesses.
-        /// </summary>
-        IBusinessaccountprincipalobjectattributeaccesses Businessaccountprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IBusinessaccountprocesssession.
-        /// </summary>
-        IBusinessaccountprocesssession Businessaccountprocesssession { get; }
-
-        /// <summary>
         /// Gets the ICannabisinventoryreports.
         /// </summary>
         ICannabisinventoryreports Cannabisinventoryreports { get; }
-
-        /// <summary>
-        /// Gets the ICannabisinventoryreportmailboxtrackingfolders.
-        /// </summary>
-        ICannabisinventoryreportmailboxtrackingfolders Cannabisinventoryreportmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ICannabisinventoryreportprincipalobjectattributeaccesses.
-        /// </summary>
-        ICannabisinventoryreportprincipalobjectattributeaccesses Cannabisinventoryreportprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ICannabisinventoryreportprocesssession.
-        /// </summary>
-        ICannabisinventoryreportprocesssession Cannabisinventoryreportprocesssession { get; }
 
         /// <summary>
         /// Gets the ICannabismonthlyreports.
@@ -808,44 +178,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         ICannabismonthlyreports Cannabismonthlyreports { get; }
 
         /// <summary>
-        /// Gets the ICannabismonthlyreportmailboxtrackingfolders.
-        /// </summary>
-        ICannabismonthlyreportmailboxtrackingfolders Cannabismonthlyreportmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ICannabismonthlyreportprincipalobjectattributeaccesses.
-        /// </summary>
-        ICannabismonthlyreportprincipalobjectattributeaccesses Cannabismonthlyreportprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ICannabismonthlyreportprocesssession.
-        /// </summary>
-        ICannabismonthlyreportprocesssession Cannabismonthlyreportprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IFederalreportexportid.
-        /// </summary>
-        IFederalreportexportid Federalreportexportid { get; }
-
-        /// <summary>
         /// Gets the ICannabisproductadmins.
         /// </summary>
         ICannabisproductadmins Cannabisproductadmins { get; }
-
-        /// <summary>
-        /// Gets the ICannabisproductadminmailboxtrackingfolders.
-        /// </summary>
-        ICannabisproductadminmailboxtrackingfolders Cannabisproductadminmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ICannabisproductadminprincipalobjectattributeaccesses.
-        /// </summary>
-        ICannabisproductadminprincipalobjectattributeaccesses Cannabisproductadminprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ICannabisproductadminprocesssession.
-        /// </summary>
-        ICannabisproductadminprocesssession Cannabisproductadminprocesssession { get; }
 
         /// <summary>
         /// Gets the ICitydistricts.
@@ -853,39 +188,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         ICitydistricts Citydistricts { get; }
 
         /// <summary>
-        /// Gets the ICitydistrictmailboxtrackingfolders.
-        /// </summary>
-        ICitydistrictmailboxtrackingfolders Citydistrictmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ICitydistrictprincipalobjectattributeaccesses.
-        /// </summary>
-        ICitydistrictprincipalobjectattributeaccesses Citydistrictprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ICitydistrictprocesssession.
-        /// </summary>
-        ICitydistrictprocesssession Citydistrictprocesssession { get; }
-
-        /// <summary>
         /// Gets the IComplaints.
         /// </summary>
         IComplaints Complaints { get; }
-
-        /// <summary>
-        /// Gets the IComplaintmailboxtrackingfolders.
-        /// </summary>
-        IComplaintmailboxtrackingfolders Complaintmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IComplaintprincipalobjectattributeaccesses.
-        /// </summary>
-        IComplaintprincipalobjectattributeaccesses Complaintprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IComplaintprocesssession.
-        /// </summary>
-        IComplaintprocesssession Complaintprocesssession { get; }
 
         /// <summary>
         /// Gets the IComplianceinvestigations.
@@ -893,54 +198,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IComplianceinvestigations Complianceinvestigations { get; }
 
         /// <summary>
-        /// Gets the IComplianceinvestigationmailboxtrackingfolders.
-        /// </summary>
-        IComplianceinvestigationmailboxtrackingfolders Complianceinvestigationmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IComplianceinvestigationprincipalobjectattributeaccesses.
-        /// </summary>
-        IComplianceinvestigationprincipalobjectattributeaccesses Complianceinvestigationprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IComplianceinvestigationprocesssession.
-        /// </summary>
-        IComplianceinvestigationprocesssession Complianceinvestigationprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IInvestigationexhibits.
-        /// </summary>
-        IInvestigationexhibits Investigationexhibits { get; }
-
-        /// <summary>
         /// Gets the ICompliancemeetings.
         /// </summary>
         ICompliancemeetings Compliancemeetings { get; }
-
-        /// <summary>
-        /// Gets the ICompliancemeetingmailboxtrackingfolders.
-        /// </summary>
-        ICompliancemeetingmailboxtrackingfolders Compliancemeetingmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ICompliancemeetingprincipalobjectattributeaccesses.
-        /// </summary>
-        ICompliancemeetingprincipalobjectattributeaccesses Compliancemeetingprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ICompliancemeetingprocesssession.
-        /// </summary>
-        ICompliancemeetingprocesssession Compliancemeetingprocesssession { get; }
-
-        /// <summary>
-        /// Gets the ICompliancemeetingrelatedparties.
-        /// </summary>
-        ICompliancemeetingrelatedparties Compliancemeetingrelatedparties { get; }
-
-        /// <summary>
-        /// Gets the IContraventionid.
-        /// </summary>
-        IContraventionid Contraventionid { get; }
 
         /// <summary>
         /// Gets the IContraventionadmins.
@@ -948,64 +208,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IContraventionadmins Contraventionadmins { get; }
 
         /// <summary>
-        /// Gets the IContraventionadminmailboxtrackingfolders.
-        /// </summary>
-        IContraventionadminmailboxtrackingfolders Contraventionadminmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IContraventionadminprincipalobjectattributeaccesses.
-        /// </summary>
-        IContraventionadminprincipalobjectattributeaccesses Contraventionadminprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IContraventionadminprocesssession.
-        /// </summary>
-        IContraventionadminprocesssession Contraventionadminprocesssession { get; }
-
-        /// <summary>
-        /// Gets the ILicencetypeid.
-        /// </summary>
-        ILicencetypeid Licencetypeid { get; }
-
-        /// <summary>
         /// Gets the IContraventions.
         /// </summary>
         IContraventions Contraventions { get; }
-
-        /// <summary>
-        /// Gets the IContraventionannotations.
-        /// </summary>
-        IContraventionannotations Contraventionannotations { get; }
-
-        /// <summary>
-        /// Gets the IContraventioncompliancemeetings.
-        /// </summary>
-        IContraventioncompliancemeetings Contraventioncompliancemeetings { get; }
-
-        /// <summary>
-        /// Gets the IContraventionmailboxtrackingfolders.
-        /// </summary>
-        IContraventionmailboxtrackingfolders Contraventionmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IContraventionprincipalobjectattributeaccesses.
-        /// </summary>
-        IContraventionprincipalobjectattributeaccesses Contraventionprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IContraventionprocesssession.
-        /// </summary>
-        IContraventionprocesssession Contraventionprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IContraventionsharepointdocumentlocations.
-        /// </summary>
-        IContraventionsharepointdocumentlocations Contraventionsharepointdocumentlocations { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionid.
-        /// </summary>
-        IEnforcementactionid Enforcementactionid { get; }
 
         /// <summary>
         /// Gets the ICorporatehistorysummaries.
@@ -1013,39 +218,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         ICorporatehistorysummaries Corporatehistorysummaries { get; }
 
         /// <summary>
-        /// Gets the ICorporatehistorysummarymailboxtrackingfolders.
-        /// </summary>
-        ICorporatehistorysummarymailboxtrackingfolders Corporatehistorysummarymailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ICorporatehistorysummaryprincipalobjectattributeaccesses.
-        /// </summary>
-        ICorporatehistorysummaryprincipalobjectattributeaccesses Corporatehistorysummaryprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ICorporatehistorysummaryprocesssession.
-        /// </summary>
-        ICorporatehistorysummaryprocesssession Corporatehistorysummaryprocesssession { get; }
-
-        /// <summary>
         /// Gets the ICorporateroles.
         /// </summary>
         ICorporateroles Corporateroles { get; }
-
-        /// <summary>
-        /// Gets the ICorporaterolemailboxtrackingfolders.
-        /// </summary>
-        ICorporaterolemailboxtrackingfolders Corporaterolemailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ICorporateroleprincipalobjectattributeaccesses.
-        /// </summary>
-        ICorporateroleprincipalobjectattributeaccesses Corporateroleprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ICorporateroleprocesssession.
-        /// </summary>
-        ICorporateroleprocesssession Corporateroleprocesssession { get; }
 
         /// <summary>
         /// Gets the ICustomautonumberdefinitions.
@@ -1053,39 +228,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         ICustomautonumberdefinitions Customautonumberdefinitions { get; }
 
         /// <summary>
-        /// Gets the ICustomautonumberdefinitionmailboxtrackingfolders.
-        /// </summary>
-        ICustomautonumberdefinitionmailboxtrackingfolders Customautonumberdefinitionmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ICustomautonumberdefinitionprincipalobjectattributeaccesses.
-        /// </summary>
-        ICustomautonumberdefinitionprincipalobjectattributeaccesses Customautonumberdefinitionprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ICustomautonumberdefinitionprocesssession.
-        /// </summary>
-        ICustomautonumberdefinitionprocesssession Customautonumberdefinitionprocesssession { get; }
-
-        /// <summary>
         /// Gets the ICustomautonumberrequests.
         /// </summary>
         ICustomautonumberrequests Customautonumberrequests { get; }
-
-        /// <summary>
-        /// Gets the ICustomautonumberrequestmailboxtrackingfolders.
-        /// </summary>
-        ICustomautonumberrequestmailboxtrackingfolders Customautonumberrequestmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ICustomautonumberrequestprincipalobjectattributeaccesses.
-        /// </summary>
-        ICustomautonumberrequestprincipalobjectattributeaccesses Customautonumberrequestprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ICustomautonumberrequestprocesssession.
-        /// </summary>
-        ICustomautonumberrequestprocesssession Customautonumberrequestprocesssession { get; }
 
         /// <summary>
         /// Gets the IDocumentadmins.
@@ -1093,39 +238,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IDocumentadmins Documentadmins { get; }
 
         /// <summary>
-        /// Gets the IDocumentadminmailboxtrackingfolders.
-        /// </summary>
-        IDocumentadminmailboxtrackingfolders Documentadminmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IDocumentadminprincipalobjectattributeaccesses.
-        /// </summary>
-        IDocumentadminprincipalobjectattributeaccesses Documentadminprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IDocumentadminprocesssession.
-        /// </summary>
-        IDocumentadminprocesssession Documentadminprocesssession { get; }
-
-        /// <summary>
         /// Gets the IDocuments.
         /// </summary>
         IDocuments Documents { get; }
-
-        /// <summary>
-        /// Gets the IDocumentmailboxtrackingfolders.
-        /// </summary>
-        IDocumentmailboxtrackingfolders Documentmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IDocumentprincipalobjectattributeaccesses.
-        /// </summary>
-        IDocumentprincipalobjectattributeaccesses Documentprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IDocumentprocesssession.
-        /// </summary>
-        IDocumentprocesssession Documentprocesssession { get; }
 
         /// <summary>
         /// Gets the IEndorsements.
@@ -1133,164 +248,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEndorsements Endorsements { get; }
 
         /// <summary>
-        /// Gets the IApplicationtype.
-        /// </summary>
-        IApplicationtype Applicationtype { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementasyncoperations.
-        /// </summary>
-        IEndorsementasyncoperations Endorsementasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementbulkdeletefailures.
-        /// </summary>
-        IEndorsementbulkdeletefailures Endorsementbulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementduplicatebaserecord.
-        /// </summary>
-        IEndorsementduplicatebaserecord Endorsementduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementduplicatematchingrecord.
-        /// </summary>
-        IEndorsementduplicatematchingrecord Endorsementduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementmailboxtrackingfolders.
-        /// </summary>
-        IEndorsementmailboxtrackingfolders Endorsementmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementprincipalobjectattributeaccesses.
-        /// </summary>
-        IEndorsementprincipalobjectattributeaccesses Endorsementprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementprocesssession.
-        /// </summary>
-        IEndorsementprocesssession Endorsementprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementsharepointdocumentlocations.
-        /// </summary>
-        IEndorsementsharepointdocumentlocations Endorsementsharepointdocumentlocations { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementsyncerrors.
-        /// </summary>
-        IEndorsementsyncerrors Endorsementsyncerrors { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementtype.
-        /// </summary>
-        IEndorsementtype Endorsementtype { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementtypeadoxiolicencetypeset.
-        /// </summary>
-        IEndorsementtypeadoxiolicencetypeset Endorsementtypeadoxiolicencetypeset { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementtypes.
-        /// </summary>
-        IEndorsementtypes Endorsementtypes { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementtypeadoxioendorsementendorsementtype.
-        /// </summary>
-        IEndorsementtypeadoxioendorsementendorsementtype Endorsementtypeadoxioendorsementendorsementtype { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementtypeadoxiolicencetype.
-        /// </summary>
-        IEndorsementtypeadoxiolicencetype Endorsementtypeadoxiolicencetype { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementtypeasyncoperations.
-        /// </summary>
-        IEndorsementtypeasyncoperations Endorsementtypeasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementtypebulkdeletefailures.
-        /// </summary>
-        IEndorsementtypebulkdeletefailures Endorsementtypebulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementtypeduplicatebaserecord.
-        /// </summary>
-        IEndorsementtypeduplicatebaserecord Endorsementtypeduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementtypeduplicatematchingrecord.
-        /// </summary>
-        IEndorsementtypeduplicatematchingrecord Endorsementtypeduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementtypemailboxtrackingfolders.
-        /// </summary>
-        IEndorsementtypemailboxtrackingfolders Endorsementtypemailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementtypeprincipalobjectattributeaccesses.
-        /// </summary>
-        IEndorsementtypeprincipalobjectattributeaccesses Endorsementtypeprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementtypeprocesssession.
-        /// </summary>
-        IEndorsementtypeprocesssession Endorsementtypeprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IEndorsementtypesyncerrors.
-        /// </summary>
-        IEndorsementtypesyncerrors Endorsementtypesyncerrors { get; }
-
-        /// <summary>
         /// Gets the IEnforcementactionbpfs.
         /// </summary>
         IEnforcementactionbpfs Enforcementactionbpfs { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionbpfasyncoperations.
-        /// </summary>
-        IEnforcementactionbpfasyncoperations Enforcementactionbpfasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionbpfbulkdeletefailures.
-        /// </summary>
-        IEnforcementactionbpfbulkdeletefailures Enforcementactionbpfbulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionbpfmailboxtrackingfolders.
-        /// </summary>
-        IEnforcementactionbpfmailboxtrackingfolders Enforcementactionbpfmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionbpfprincipalobjectattributeaccesses.
-        /// </summary>
-        IEnforcementactionbpfprincipalobjectattributeaccesses Enforcementactionbpfprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionbpfprocesssession.
-        /// </summary>
-        IEnforcementactionbpfprocesssession Enforcementactionbpfprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionbpfsyncerrors.
-        /// </summary>
-        IEnforcementactionbpfsyncerrors Enforcementactionbpfsyncerrors { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionbpfworkflowlogs.
-        /// </summary>
-        IEnforcementactionbpfworkflowlogs Enforcementactionbpfworkflowlogs { get; }
-
-        /// <summary>
-        /// Gets the IBpfadoxioenforcementactionid.
-        /// </summary>
-        IBpfadoxioenforcementactionid Bpfadoxioenforcementactionid { get; }
 
         /// <summary>
         /// Gets the IEnforcementactions.
@@ -1298,214 +258,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEnforcementactions Enforcementactions { get; }
 
         /// <summary>
-        /// Gets the IAdvocateid.
-        /// </summary>
-        IAdvocateid Advocateid { get; }
-
-        /// <summary>
-        /// Gets the IAreaid.
-        /// </summary>
-        IAreaid Areaid { get; }
-
-        /// <summary>
-        /// Gets the IDelegategmid.
-        /// </summary>
-        IDelegategmid Delegategmid { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionactivitypointers.
-        /// </summary>
-        IEnforcementactionactivitypointers Enforcementactionactivitypointers { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionannotations.
-        /// </summary>
-        IEnforcementactionannotations Enforcementactionannotations { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionappointments.
-        /// </summary>
-        IEnforcementactionappointments Enforcementactionappointments { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionasyncoperations.
-        /// </summary>
-        IEnforcementactionasyncoperations Enforcementactionasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionbulkdeletefailures.
-        /// </summary>
-        IEnforcementactionbulkdeletefailures Enforcementactionbulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactioncontraventions.
-        /// </summary>
-        IEnforcementactioncontraventions Enforcementactioncontraventions { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionduplicatebaserecord.
-        /// </summary>
-        IEnforcementactionduplicatebaserecord Enforcementactionduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionduplicatematchingrecord.
-        /// </summary>
-        IEnforcementactionduplicatematchingrecord Enforcementactionduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionemails.
-        /// </summary>
-        IEnforcementactionemails Enforcementactionemails { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionfaxes.
-        /// </summary>
-        IEnforcementactionfaxes Enforcementactionfaxes { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactioninspections.
-        /// </summary>
-        IEnforcementactioninspections Enforcementactioninspections { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionletters.
-        /// </summary>
-        IEnforcementactionletters Enforcementactionletters { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionmailboxtrackingfolders.
-        /// </summary>
-        IEnforcementactionmailboxtrackingfolders Enforcementactionmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionphonecalls.
-        /// </summary>
-        IEnforcementactionphonecalls Enforcementactionphonecalls { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionprincipalobjectattributeaccesses.
-        /// </summary>
-        IEnforcementactionprincipalobjectattributeaccesses Enforcementactionprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionprocesssession.
-        /// </summary>
-        IEnforcementactionprocesssession Enforcementactionprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionrecurringappointmentmasters.
-        /// </summary>
-        IEnforcementactionrecurringappointmentmasters Enforcementactionrecurringappointmentmasters { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionserviceappointments.
-        /// </summary>
-        IEnforcementactionserviceappointments Enforcementactionserviceappointments { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionsharepointdocumentlocations.
-        /// </summary>
-        IEnforcementactionsharepointdocumentlocations Enforcementactionsharepointdocumentlocations { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionsocialactivities.
-        /// </summary>
-        IEnforcementactionsocialactivities Enforcementactionsocialactivities { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactionsyncerrors.
-        /// </summary>
-        IEnforcementactionsyncerrors Enforcementactionsyncerrors { get; }
-
-        /// <summary>
-        /// Gets the IEnforcementactiontasks.
-        /// </summary>
-        IEnforcementactiontasks Enforcementactiontasks { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentid.
-        /// </summary>
-        IEstablishmentid Establishmentid { get; }
-
-        /// <summary>
-        /// Gets the IInspectorid.
-        /// </summary>
-        IInspectorid Inspectorid { get; }
-
-        /// <summary>
-        /// Gets the ILicenceid.
-        /// </summary>
-        ILicenceid Licenceid { get; }
-
-        /// <summary>
-        /// Gets the ILicenseeid.
-        /// </summary>
-        ILicenseeid Licenseeid { get; }
-
-        /// <summary>
-        /// Gets the IRegionalmanagerid.
-        /// </summary>
-        IRegionalmanagerid Regionalmanagerid { get; }
-
-        /// <summary>
-        /// Gets the IRegionid.
-        /// </summary>
-        IRegionid Regionid { get; }
-
-        /// <summary>
-        /// Gets the IRegistrarid.
-        /// </summary>
-        IRegistrarid Registrarid { get; }
-
-        /// <summary>
-        /// Gets the IBpfadoxioenforcementactionadoxioenforcementactionbpf.
-        /// </summary>
-        IBpfadoxioenforcementactionadoxioenforcementactionbpf Bpfadoxioenforcementactionadoxioenforcementactionbpf { get; }
-
-        /// <summary>
         /// Gets the IEstablishmentincidents.
         /// </summary>
         IEstablishmentincidents Establishmentincidents { get; }
-
-        /// <summary>
-        /// Gets the IEstablishment.
-        /// </summary>
-        IEstablishment Establishment { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentincidentasyncoperations.
-        /// </summary>
-        IEstablishmentincidentasyncoperations Establishmentincidentasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentincidentbulkdeletefailures.
-        /// </summary>
-        IEstablishmentincidentbulkdeletefailures Establishmentincidentbulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentincidentmailboxtrackingfolders.
-        /// </summary>
-        IEstablishmentincidentmailboxtrackingfolders Establishmentincidentmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentincidentprincipalobjectattributeaccesses.
-        /// </summary>
-        IEstablishmentincidentprincipalobjectattributeaccesses Establishmentincidentprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentincidentprocesssession.
-        /// </summary>
-        IEstablishmentincidentprocesssession Establishmentincidentprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentincidentsyncerrors.
-        /// </summary>
-        IEstablishmentincidentsyncerrors Establishmentincidentsyncerrors { get; }
-
-        /// <summary>
-        /// Gets the IInspector.
-        /// </summary>
-        IInspector Inspector { get; }
 
         /// <summary>
         /// Gets the IEstablishments.
@@ -1513,59 +268,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEstablishments Establishments { get; }
 
         /// <summary>
-        /// Gets the IEstablishmentadoxioestablishmentincidentestablishment.
-        /// </summary>
-        IEstablishmentadoxioestablishmentincidentestablishment Establishmentadoxioestablishmentincidentestablishment { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentannotations.
-        /// </summary>
-        IEstablishmentannotations Establishmentannotations { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentenforcementactions.
-        /// </summary>
-        IEstablishmentenforcementactions Establishmentenforcementactions { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentmailboxtrackingfolders.
-        /// </summary>
-        IEstablishmentmailboxtrackingfolders Establishmentmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentprincipalobjectattributeaccesses.
-        /// </summary>
-        IEstablishmentprincipalobjectattributeaccesses Establishmentprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentprocesssession.
-        /// </summary>
-        IEstablishmentprocesssession Establishmentprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentserviceareas.
-        /// </summary>
-        IEstablishmentserviceareas Establishmentserviceareas { get; }
-
-        /// <summary>
         /// Gets the IEstablishmentwatchwords.
         /// </summary>
         IEstablishmentwatchwords Establishmentwatchwords { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentwatchwordmailboxtrackingfolders.
-        /// </summary>
-        IEstablishmentwatchwordmailboxtrackingfolders Establishmentwatchwordmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentwatchwordprincipalobjectattributeaccesses.
-        /// </summary>
-        IEstablishmentwatchwordprincipalobjectattributeaccesses Establishmentwatchwordprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IEstablishmentwatchwordprocesssession.
-        /// </summary>
-        IEstablishmentwatchwordprocesssession Establishmentwatchwordprocesssession { get; }
 
         /// <summary>
         /// Gets the IEvents.
@@ -1573,169 +278,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEvents Events { get; }
 
         /// <summary>
-        /// Gets the IAccount.
-        /// </summary>
-        IAccount Account { get; }
-
-        /// <summary>
-        /// Gets the IEventactivityparties.
-        /// </summary>
-        IEventactivityparties Eventactivityparties { get; }
-
-        /// <summary>
-        /// Gets the IEventactivitypointers.
-        /// </summary>
-        IEventactivitypointers Eventactivitypointers { get; }
-
-        /// <summary>
-        /// Gets the IEventannotations.
-        /// </summary>
-        IEventannotations Eventannotations { get; }
-
-        /// <summary>
-        /// Gets the IEventappointments.
-        /// </summary>
-        IEventappointments Eventappointments { get; }
-
-        /// <summary>
-        /// Gets the IEventasyncoperations.
-        /// </summary>
-        IEventasyncoperations Eventasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IEventbulkdeletefailures.
-        /// </summary>
-        IEventbulkdeletefailures Eventbulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IEventduplicatebaserecord.
-        /// </summary>
-        IEventduplicatebaserecord Eventduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the IEventduplicatematchingrecord.
-        /// </summary>
-        IEventduplicatematchingrecord Eventduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the IEventemails.
-        /// </summary>
-        IEventemails Eventemails { get; }
-
-        /// <summary>
-        /// Gets the IEventfaxes.
-        /// </summary>
-        IEventfaxes Eventfaxes { get; }
-
-        /// <summary>
-        /// Gets the IEventinspections.
-        /// </summary>
-        IEventinspections Eventinspections { get; }
-
-        /// <summary>
-        /// Gets the IEventletters.
-        /// </summary>
-        IEventletters Eventletters { get; }
-
-        /// <summary>
-        /// Gets the IEventmailboxtrackingfolders.
-        /// </summary>
-        IEventmailboxtrackingfolders Eventmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IEventphonecalls.
-        /// </summary>
-        IEventphonecalls Eventphonecalls { get; }
-
-        /// <summary>
-        /// Gets the IEventprincipalobjectattributeaccesses.
-        /// </summary>
-        IEventprincipalobjectattributeaccesses Eventprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IEventprocesssession.
-        /// </summary>
-        IEventprocesssession Eventprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IEventrecurringappointmentmasters.
-        /// </summary>
-        IEventrecurringappointmentmasters Eventrecurringappointmentmasters { get; }
-
-        /// <summary>
         /// Gets the IEventschedules.
         /// </summary>
         IEventschedules Eventschedules { get; }
-
-        /// <summary>
-        /// Gets the IEventserviceappointments.
-        /// </summary>
-        IEventserviceappointments Eventserviceappointments { get; }
-
-        /// <summary>
-        /// Gets the IEventsharepointdocumentlocations.
-        /// </summary>
-        IEventsharepointdocumentlocations Eventsharepointdocumentlocations { get; }
-
-        /// <summary>
-        /// Gets the IEventsocialactivities.
-        /// </summary>
-        IEventsocialactivities Eventsocialactivities { get; }
-
-        /// <summary>
-        /// Gets the IEventsyncerrors.
-        /// </summary>
-        IEventsyncerrors Eventsyncerrors { get; }
-
-        /// <summary>
-        /// Gets the IEventtasks.
-        /// </summary>
-        IEventtasks Eventtasks { get; }
-
-        /// <summary>
-        /// Gets the IEventid.
-        /// </summary>
-        IEventid Eventid { get; }
-
-        /// <summary>
-        /// Gets the IEventscheduleasyncoperations.
-        /// </summary>
-        IEventscheduleasyncoperations Eventscheduleasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IEventschedulebulkdeletefailures.
-        /// </summary>
-        IEventschedulebulkdeletefailures Eventschedulebulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IEventscheduleduplicatebaserecord.
-        /// </summary>
-        IEventscheduleduplicatebaserecord Eventscheduleduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the IEventscheduleduplicatematchingrecord.
-        /// </summary>
-        IEventscheduleduplicatematchingrecord Eventscheduleduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the IEventschedulemailboxtrackingfolders.
-        /// </summary>
-        IEventschedulemailboxtrackingfolders Eventschedulemailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IEventscheduleprincipalobjectattributeaccesses.
-        /// </summary>
-        IEventscheduleprincipalobjectattributeaccesses Eventscheduleprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IEventscheduleprocesssession.
-        /// </summary>
-        IEventscheduleprocesssession Eventscheduleprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IEventschedulesyncerrors.
-        /// </summary>
-        IEventschedulesyncerrors Eventschedulesyncerrors { get; }
 
         /// <summary>
         /// Gets the IExhibits.
@@ -1743,104 +288,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IExhibits Exhibits { get; }
 
         /// <summary>
-        /// Gets the IExhibitasyncoperations.
-        /// </summary>
-        IExhibitasyncoperations Exhibitasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IExhibitbulkdeletefailures.
-        /// </summary>
-        IExhibitbulkdeletefailures Exhibitbulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IExhibitduplicatebaserecord.
-        /// </summary>
-        IExhibitduplicatebaserecord Exhibitduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the IExhibitduplicatematchingrecord.
-        /// </summary>
-        IExhibitduplicatematchingrecord Exhibitduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the IExhibitmailboxtrackingfolders.
-        /// </summary>
-        IExhibitmailboxtrackingfolders Exhibitmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IExhibitprincipalobjectattributeaccesses.
-        /// </summary>
-        IExhibitprincipalobjectattributeaccesses Exhibitprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IExhibitprocesssession.
-        /// </summary>
-        IExhibitprocesssession Exhibitprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IExhibitsyncerrors.
-        /// </summary>
-        IExhibitsyncerrors Exhibitsyncerrors { get; }
-
-        /// <summary>
-        /// Gets the IInvestigationid.
-        /// </summary>
-        IInvestigationid Investigationid { get; }
-
-        /// <summary>
         /// Gets the IFederalreportexports.
         /// </summary>
         IFederalreportexports Federalreportexports { get; }
-
-        /// <summary>
-        /// Gets the IFederalreportexportadoxiocannabismonthlyreportfederalreportexportid.
-        /// </summary>
-        IFederalreportexportadoxiocannabismonthlyreportfederalreportexportid Federalreportexportadoxiocannabismonthlyreportfederalreportexportid { get; }
-
-        /// <summary>
-        /// Gets the IFederalreportexportasyncoperations.
-        /// </summary>
-        IFederalreportexportasyncoperations Federalreportexportasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IFederalreportexportbulkdeletefailures.
-        /// </summary>
-        IFederalreportexportbulkdeletefailures Federalreportexportbulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IFederalreportexportduplicatebaserecord.
-        /// </summary>
-        IFederalreportexportduplicatebaserecord Federalreportexportduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the IFederalreportexportduplicatematchingrecord.
-        /// </summary>
-        IFederalreportexportduplicatematchingrecord Federalreportexportduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the IFederalreportexportmailboxtrackingfolders.
-        /// </summary>
-        IFederalreportexportmailboxtrackingfolders Federalreportexportmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IFederalreportexportprincipalobjectattributeaccesses.
-        /// </summary>
-        IFederalreportexportprincipalobjectattributeaccesses Federalreportexportprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IFederalreportexportprocesssession.
-        /// </summary>
-        IFederalreportexportprocesssession Federalreportexportprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IFederalreportexportsharepointdocumentlocations.
-        /// </summary>
-        IFederalreportexportsharepointdocumentlocations Federalreportexportsharepointdocumentlocations { get; }
-
-        /// <summary>
-        /// Gets the IFederalreportexportsyncerrors.
-        /// </summary>
-        IFederalreportexportsyncerrors Federalreportexportsyncerrors { get; }
 
         /// <summary>
         /// Gets the IFiainvestigationlogs.
@@ -1848,84 +298,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         IFiainvestigationlogs Fiainvestigationlogs { get; }
 
         /// <summary>
-        /// Gets the IFiainvestigationlogmailboxtrackingfolders.
-        /// </summary>
-        IFiainvestigationlogmailboxtrackingfolders Fiainvestigationlogmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IFiainvestigationlogprincipalobjectattributeaccesses.
-        /// </summary>
-        IFiainvestigationlogprincipalobjectattributeaccesses Fiainvestigationlogprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IFiainvestigationlogprocesssession.
-        /// </summary>
-        IFiainvestigationlogprocesssession Fiainvestigationlogprocesssession { get; }
-
-        /// <summary>
         /// Gets the IFormelementuploadfields.
         /// </summary>
         IFormelementuploadfields Formelementuploadfields { get; }
 
         /// <summary>
-        /// Gets the IFormelementuploadfieldasyncoperations.
-        /// </summary>
-        IFormelementuploadfieldasyncoperations Formelementuploadfieldasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IFormelementuploadfieldbulkdeletefailures.
-        /// </summary>
-        IFormelementuploadfieldbulkdeletefailures Formelementuploadfieldbulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IFormelementuploadfieldduplicatebaserecord.
-        /// </summary>
-        IFormelementuploadfieldduplicatebaserecord Formelementuploadfieldduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the IFormelementuploadfieldduplicatematchingrecord.
-        /// </summary>
-        IFormelementuploadfieldduplicatematchingrecord Formelementuploadfieldduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the IFormelementuploadfieldmailboxtrackingfolders.
-        /// </summary>
-        IFormelementuploadfieldmailboxtrackingfolders Formelementuploadfieldmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IFormelementuploadfieldprincipalobjectattributeaccesses.
-        /// </summary>
-        IFormelementuploadfieldprincipalobjectattributeaccesses Formelementuploadfieldprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IFormelementuploadfieldprocesssession.
-        /// </summary>
-        IFormelementuploadfieldprocesssession Formelementuploadfieldprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IFormelementuploadfieldsyncerrors.
-        /// </summary>
-        IFormelementuploadfieldsyncerrors Formelementuploadfieldsyncerrors { get; }
-
-        /// <summary>
         /// Gets the IFundingsources.
         /// </summary>
         IFundingsources Fundingsources { get; }
-
-        /// <summary>
-        /// Gets the IFundingsourcemailboxtrackingfolders.
-        /// </summary>
-        IFundingsourcemailboxtrackingfolders Fundingsourcemailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IFundingsourceprincipalobjectattributeaccesses.
-        /// </summary>
-        IFundingsourceprincipalobjectattributeaccesses Fundingsourceprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IFundingsourceprocesssession.
-        /// </summary>
-        IFundingsourceprocesssession Fundingsourceprocesssession { get; }
 
         /// <summary>
         /// Gets the IIncidentadoxiolicencetypeset.
@@ -1943,39 +323,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IInspectionreactivationhistories Inspectionreactivationhistories { get; }
 
         /// <summary>
-        /// Gets the IInspectionreactivationhistorymailboxtrackingfolders.
-        /// </summary>
-        IInspectionreactivationhistorymailboxtrackingfolders Inspectionreactivationhistorymailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IInspectionreactivationhistoryprincipalobjectattributeaccesses.
-        /// </summary>
-        IInspectionreactivationhistoryprincipalobjectattributeaccesses Inspectionreactivationhistoryprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IInspectionreactivationhistoryprocesssession.
-        /// </summary>
-        IInspectionreactivationhistoryprocesssession Inspectionreactivationhistoryprocesssession { get; }
-
-        /// <summary>
         /// Gets the IInspectorcommentsrollups.
         /// </summary>
         IInspectorcommentsrollups Inspectorcommentsrollups { get; }
-
-        /// <summary>
-        /// Gets the IInspectorcommentsrollupmailboxtrackingfolders.
-        /// </summary>
-        IInspectorcommentsrollupmailboxtrackingfolders Inspectorcommentsrollupmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IInspectorcommentsrollupprincipalobjectattributeaccesses.
-        /// </summary>
-        IInspectorcommentsrollupprincipalobjectattributeaccesses Inspectorcommentsrollupprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IInspectorcommentsrollupprocesssession.
-        /// </summary>
-        IInspectorcommentsrollupprocesssession Inspectorcommentsrollupprocesssession { get; }
 
         /// <summary>
         /// Gets the IInterests.
@@ -1983,39 +333,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IInterests Interests { get; }
 
         /// <summary>
-        /// Gets the IInterestmailboxtrackingfolders.
-        /// </summary>
-        IInterestmailboxtrackingfolders Interestmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IInterestprincipalobjectattributeaccesses.
-        /// </summary>
-        IInterestprincipalobjectattributeaccesses Interestprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IInterestprocesssession.
-        /// </summary>
-        IInterestprocesssession Interestprocesssession { get; }
-
-        /// <summary>
         /// Gets the IInvestigationactivities.
         /// </summary>
         IInvestigationactivities Investigationactivities { get; }
-
-        /// <summary>
-        /// Gets the IInvestigationactivitymailboxtrackingfolders.
-        /// </summary>
-        IInvestigationactivitymailboxtrackingfolders Investigationactivitymailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IInvestigationactivityprincipalobjectattributeaccesses.
-        /// </summary>
-        IInvestigationactivityprincipalobjectattributeaccesses Investigationactivityprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IInvestigationactivityprocesssession.
-        /// </summary>
-        IInvestigationactivityprocesssession Investigationactivityprocesssession { get; }
 
         /// <summary>
         /// Gets the IInvestigationreactivationhistories.
@@ -2023,39 +343,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IInvestigationreactivationhistories Investigationreactivationhistories { get; }
 
         /// <summary>
-        /// Gets the IInvestigationreactivationhistorymailboxtrackingfolders.
-        /// </summary>
-        IInvestigationreactivationhistorymailboxtrackingfolders Investigationreactivationhistorymailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IInvestigationreactivationhistoryprincipalobjectattributeaccesses.
-        /// </summary>
-        IInvestigationreactivationhistoryprincipalobjectattributeaccesses Investigationreactivationhistoryprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IInvestigationreactivationhistoryprocesssession.
-        /// </summary>
-        IInvestigationreactivationhistoryprocesssession Investigationreactivationhistoryprocesssession { get; }
-
-        /// <summary>
         /// Gets the IInvestigations.
         /// </summary>
         IInvestigations Investigations { get; }
-
-        /// <summary>
-        /// Gets the IInvestigationmailboxtrackingfolders.
-        /// </summary>
-        IInvestigationmailboxtrackingfolders Investigationmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IInvestigationprincipalobjectattributeaccesses.
-        /// </summary>
-        IInvestigationprincipalobjectattributeaccesses Investigationprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IInvestigationprocesssession.
-        /// </summary>
-        IInvestigationprocesssession Investigationprocesssession { get; }
 
         /// <summary>
         /// Gets the ILdborders.
@@ -2063,74 +353,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILdborders Ldborders { get; }
 
         /// <summary>
-        /// Gets the ILdborderasyncoperations.
-        /// </summary>
-        ILdborderasyncoperations Ldborderasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the ILdborderbulkdeletefailures.
-        /// </summary>
-        ILdborderbulkdeletefailures Ldborderbulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the ILdborderduplicatebaserecord.
-        /// </summary>
-        ILdborderduplicatebaserecord Ldborderduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the ILdborderduplicatematchingrecord.
-        /// </summary>
-        ILdborderduplicatematchingrecord Ldborderduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the ILdbordermailboxtrackingfolders.
-        /// </summary>
-        ILdbordermailboxtrackingfolders Ldbordermailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ILdborderprincipalobjectattributeaccesses.
-        /// </summary>
-        ILdborderprincipalobjectattributeaccesses Ldborderprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ILdborderprocesssession.
-        /// </summary>
-        ILdborderprocesssession Ldborderprocesssession { get; }
-
-        /// <summary>
-        /// Gets the ILdbordersharepointdocumentlocations.
-        /// </summary>
-        ILdbordersharepointdocumentlocations Ldbordersharepointdocumentlocations { get; }
-
-        /// <summary>
-        /// Gets the ILdbordersyncerrors.
-        /// </summary>
-        ILdbordersyncerrors Ldbordersyncerrors { get; }
-
-        /// <summary>
         /// Gets the ILegalentities.
         /// </summary>
         ILegalentities Legalentities { get; }
-
-        /// <summary>
-        /// Gets the ILegalentitymailboxtrackingfolders.
-        /// </summary>
-        ILegalentitymailboxtrackingfolders Legalentitymailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ILegalentityprincipalobjectattributeaccesses.
-        /// </summary>
-        ILegalentityprincipalobjectattributeaccesses Legalentityprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ILegalentityprocesssession.
-        /// </summary>
-        ILegalentityprocesssession Legalentityprocesssession { get; }
-
-        /// <summary>
-        /// Gets the ILegalentitytasklegalentity.
-        /// </summary>
-        ILegalentitytasklegalentity Legalentitytasklegalentity { get; }
 
         /// <summary>
         /// Gets the ILicenceldbordertotalhistories.
@@ -2138,149 +363,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicenceldbordertotalhistories Licenceldbordertotalhistories { get; }
 
         /// <summary>
-        /// Gets the ILicenceldbordertotalhistoryasyncoperations.
-        /// </summary>
-        ILicenceldbordertotalhistoryasyncoperations Licenceldbordertotalhistoryasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the ILicenceldbordertotalhistorybulkdeletefailures.
-        /// </summary>
-        ILicenceldbordertotalhistorybulkdeletefailures Licenceldbordertotalhistorybulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the ILicenceldbordertotalhistoryduplicatebaserecord.
-        /// </summary>
-        ILicenceldbordertotalhistoryduplicatebaserecord Licenceldbordertotalhistoryduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the ILicenceldbordertotalhistoryduplicatematchingrecord.
-        /// </summary>
-        ILicenceldbordertotalhistoryduplicatematchingrecord Licenceldbordertotalhistoryduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the ILicenceldbordertotalhistorymailboxtrackingfolders.
-        /// </summary>
-        ILicenceldbordertotalhistorymailboxtrackingfolders Licenceldbordertotalhistorymailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ILicenceldbordertotalhistoryprincipalobjectattributeaccesses.
-        /// </summary>
-        ILicenceldbordertotalhistoryprincipalobjectattributeaccesses Licenceldbordertotalhistoryprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ILicenceldbordertotalhistoryprocesssession.
-        /// </summary>
-        ILicenceldbordertotalhistoryprocesssession Licenceldbordertotalhistoryprocesssession { get; }
-
-        /// <summary>
-        /// Gets the ILicenceldbordertotalhistorysyncerrors.
-        /// </summary>
-        ILicenceldbordertotalhistorysyncerrors Licenceldbordertotalhistorysyncerrors { get; }
-
-        /// <summary>
         /// Gets the ILicenceses.
         /// </summary>
         ILicenceses Licenceses { get; }
 
         /// <summary>
-        /// Gets the ILicenceenforcementactions.
+        /// Gets the ILicencesubcategories.
         /// </summary>
-        ILicenceenforcementactions Licenceenforcementactions { get; }
-
-        /// <summary>
-        /// Gets the ILicenceserviceareas.
-        /// </summary>
-        ILicenceserviceareas Licenceserviceareas { get; }
-
-        /// <summary>
-        /// Gets the ILicencesadoxioendorsementlicence.
-        /// </summary>
-        ILicencesadoxioendorsementlicence Licencesadoxioendorsementlicence { get; }
-
-        /// <summary>
-        /// Gets the ILicencesadoxioeventlicence.
-        /// </summary>
-        ILicencesadoxioeventlicence Licencesadoxioeventlicence { get; }
-
-        /// <summary>
-        /// Gets the ILicencesadoxioldborderlicenceid.
-        /// </summary>
-        ILicencesadoxioldborderlicenceid Licencesadoxioldborderlicenceid { get; }
-
-        /// <summary>
-        /// Gets the ILicencesadoxiolicenceldbordertotalhistorylicence.
-        /// </summary>
-        ILicencesadoxiolicenceldbordertotalhistorylicence Licencesadoxiolicenceldbordertotalhistorylicence { get; }
-
-        /// <summary>
-        /// Gets the ILicencesannualvolumelicence.
-        /// </summary>
-        ILicencesannualvolumelicence Licencesannualvolumelicence { get; }
-
-        /// <summary>
-        /// Gets the ILicencesmailboxtrackingfolders.
-        /// </summary>
-        ILicencesmailboxtrackingfolders Licencesmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ILicencesprincipalobjectattributeaccesses.
-        /// </summary>
-        ILicencesprincipalobjectattributeaccesses Licencesprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ILicencesprocesssession.
-        /// </summary>
-        ILicencesprocesssession Licencesprocesssession { get; }
-
-        /// <summary>
-        /// Gets the ILicencessharepointdocumentlocations.
-        /// </summary>
-        ILicencessharepointdocumentlocations Licencessharepointdocumentlocations { get; }
-
-        /// <summary>
-        /// Gets the IProposedoperator.
-        /// </summary>
-        IProposedoperator Proposedoperator { get; }
-
-        /// <summary>
-        /// Gets the IThirdpartyoperatorid.
-        /// </summary>
-        IThirdpartyoperatorid Thirdpartyoperatorid { get; }
+        ILicencesubcategories Licencesubcategories { get; }
 
         /// <summary>
         /// Gets the ILicencetypes.
         /// </summary>
         ILicencetypes Licencetypes { get; }
-
-        /// <summary>
-        /// Gets the ILicencetypeadoxiormreviewlicencetype.
-        /// </summary>
-        ILicencetypeadoxiormreviewlicencetype Licencetypeadoxiormreviewlicencetype { get; }
-
-        /// <summary>
-        /// Gets the ILicencetypecontraventionadmin.
-        /// </summary>
-        ILicencetypecontraventionadmin Licencetypecontraventionadmin { get; }
-
-        /// <summary>
-        /// Gets the ILicencetypeenforcementactions.
-        /// </summary>
-        ILicencetypeenforcementactions Licencetypeenforcementactions { get; }
-
-        /// <summary>
-        /// Gets the ILicencetypemailboxtrackingfolders.
-        /// </summary>
-        ILicencetypemailboxtrackingfolders Licencetypemailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ILicencetypeprincipalobjectattributeaccesses.
-        /// </summary>
-        ILicencetypeprincipalobjectattributeaccesses Licencetypeprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ILicencetypeprocesssession.
-        /// </summary>
-        ILicencetypeprocesssession Licencetypeprocesssession { get; }
 
         /// <summary>
         /// Gets the ILicencetypesapplicationtypesset.
@@ -2293,39 +388,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicenseechangelogs Licenseechangelogs { get; }
 
         /// <summary>
-        /// Gets the ILicenseechangelogmailboxtrackingfolders.
-        /// </summary>
-        ILicenseechangelogmailboxtrackingfolders Licenseechangelogmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ILicenseechangelogprincipalobjectattributeaccesses.
-        /// </summary>
-        ILicenseechangelogprincipalobjectattributeaccesses Licenseechangelogprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ILicenseechangelogprocesssession.
-        /// </summary>
-        ILicenseechangelogprocesssession Licenseechangelogprocesssession { get; }
-
-        /// <summary>
         /// Gets the ILoans.
         /// </summary>
         ILoans Loans { get; }
-
-        /// <summary>
-        /// Gets the ILoanmailboxtrackingfolders.
-        /// </summary>
-        ILoanmailboxtrackingfolders Loanmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ILoanprincipalobjectattributeaccesses.
-        /// </summary>
-        ILoanprincipalobjectattributeaccesses Loanprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ILoanprocesssession.
-        /// </summary>
-        ILoanprocesssession Loanprocesssession { get; }
 
         /// <summary>
         /// Gets the ILocalgovindigenousnations.
@@ -2333,44 +398,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILocalgovindigenousnations Localgovindigenousnations { get; }
 
         /// <summary>
-        /// Gets the ILginaccounts.
-        /// </summary>
-        ILginaccounts Lginaccounts { get; }
-
-        /// <summary>
-        /// Gets the ILocalgovindigenousnationmailboxtrackingfolders.
-        /// </summary>
-        ILocalgovindigenousnationmailboxtrackingfolders Localgovindigenousnationmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ILocalgovindigenousnationprincipalobjectattributeaccesses.
-        /// </summary>
-        ILocalgovindigenousnationprincipalobjectattributeaccesses Localgovindigenousnationprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ILocalgovindigenousnationprocesssession.
-        /// </summary>
-        ILocalgovindigenousnationprocesssession Localgovindigenousnationprocesssession { get; }
-
-        /// <summary>
         /// Gets the IPersonalhistorysummaries.
         /// </summary>
         IPersonalhistorysummaries Personalhistorysummaries { get; }
-
-        /// <summary>
-        /// Gets the IPersonalhistorysummarymailboxtrackingfolders.
-        /// </summary>
-        IPersonalhistorysummarymailboxtrackingfolders Personalhistorysummarymailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IPersonalhistorysummaryprincipalobjectattributeaccesses.
-        /// </summary>
-        IPersonalhistorysummaryprincipalobjectattributeaccesses Personalhistorysummaryprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IPersonalhistorysummaryprocesssession.
-        /// </summary>
-        IPersonalhistorysummaryprocesssession Personalhistorysummaryprocesssession { get; }
 
         /// <summary>
         /// Gets the IPolicejurisdictions.
@@ -2378,39 +408,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IPolicejurisdictions Policejurisdictions { get; }
 
         /// <summary>
-        /// Gets the IPolicejurisdictionmailboxtrackingfolders.
-        /// </summary>
-        IPolicejurisdictionmailboxtrackingfolders Policejurisdictionmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IPolicejurisdictionprincipalobjectattributeaccesses.
-        /// </summary>
-        IPolicejurisdictionprincipalobjectattributeaccesses Policejurisdictionprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IPolicejurisdictionprocesssession.
-        /// </summary>
-        IPolicejurisdictionprocesssession Policejurisdictionprocesssession { get; }
-
-        /// <summary>
         /// Gets the IPolicydocuments.
         /// </summary>
         IPolicydocuments Policydocuments { get; }
-
-        /// <summary>
-        /// Gets the IPolicydocumentmailboxtrackingfolders.
-        /// </summary>
-        IPolicydocumentmailboxtrackingfolders Policydocumentmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IPolicydocumentprincipalobjectattributeaccesses.
-        /// </summary>
-        IPolicydocumentprincipalobjectattributeaccesses Policydocumentprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IPolicydocumentprocesssession.
-        /// </summary>
-        IPolicydocumentprocesssession Policydocumentprocesssession { get; }
 
         /// <summary>
         /// Gets the IPostalcodes.
@@ -2418,39 +418,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IPostalcodes Postalcodes { get; }
 
         /// <summary>
-        /// Gets the IPostalcodemailboxtrackingfolders.
-        /// </summary>
-        IPostalcodemailboxtrackingfolders Postalcodemailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IPostalcodeprincipalobjectattributeaccesses.
-        /// </summary>
-        IPostalcodeprincipalobjectattributeaccesses Postalcodeprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IPostalcodeprocesssession.
-        /// </summary>
-        IPostalcodeprocesssession Postalcodeprocesssession { get; }
-
-        /// <summary>
         /// Gets the IPreviousaddresses.
         /// </summary>
         IPreviousaddresses Previousaddresses { get; }
-
-        /// <summary>
-        /// Gets the IPreviousaddressmailboxtrackingfolders.
-        /// </summary>
-        IPreviousaddressmailboxtrackingfolders Previousaddressmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IPreviousaddressprincipalobjectattributeaccesses.
-        /// </summary>
-        IPreviousaddressprincipalobjectattributeaccesses Previousaddressprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IPreviousaddressprocesssession.
-        /// </summary>
-        IPreviousaddressprocesssession Previousaddressprocesssession { get; }
 
         /// <summary>
         /// Gets the IRegions.
@@ -2458,59 +428,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegions Regions { get; }
 
         /// <summary>
-        /// Gets the IRegionadoxiormreviewregion.
-        /// </summary>
-        IRegionadoxiormreviewregion Regionadoxiormreviewregion { get; }
-
-        /// <summary>
-        /// Gets the IRegionenforcementactions.
-        /// </summary>
-        IRegionenforcementactions Regionenforcementactions { get; }
-
-        /// <summary>
-        /// Gets the IRegionevents.
-        /// </summary>
-        IRegionevents Regionevents { get; }
-
-        /// <summary>
-        /// Gets the IRegionmailboxtrackingfolders.
-        /// </summary>
-        IRegionmailboxtrackingfolders Regionmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IRegionprincipalobjectattributeaccesses.
-        /// </summary>
-        IRegionprincipalobjectattributeaccesses Regionprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IRegionprocesssession.
-        /// </summary>
-        IRegionprocesssession Regionprocesssession { get; }
-
-        /// <summary>
         /// Gets the IRelatedparties.
         /// </summary>
         IRelatedparties Relatedparties { get; }
-
-        /// <summary>
-        /// Gets the ICompliancemeetingid.
-        /// </summary>
-        ICompliancemeetingid Compliancemeetingid { get; }
-
-        /// <summary>
-        /// Gets the IRelatedpartymailboxtrackingfolders.
-        /// </summary>
-        IRelatedpartymailboxtrackingfolders Relatedpartymailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IRelatedpartyprincipalobjectattributeaccesses.
-        /// </summary>
-        IRelatedpartyprincipalobjectattributeaccesses Relatedpartyprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IRelatedpartyprocesssession.
-        /// </summary>
-        IRelatedpartyprocesssession Relatedpartyprocesssession { get; }
 
         /// <summary>
         /// Gets the IRmreviews.
@@ -2518,109 +438,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRmreviews Rmreviews { get; }
 
         /// <summary>
-        /// Gets the IInspection.
-        /// </summary>
-        IInspection Inspection { get; }
-
-        /// <summary>
-        /// Gets the ILicencetype.
-        /// </summary>
-        ILicencetype Licencetype { get; }
-
-        /// <summary>
-        /// Gets the IRegion.
-        /// </summary>
-        IRegion Region { get; }
-
-        /// <summary>
-        /// Gets the IRmreviewasyncoperations.
-        /// </summary>
-        IRmreviewasyncoperations Rmreviewasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IRmreviewbulkdeletefailures.
-        /// </summary>
-        IRmreviewbulkdeletefailures Rmreviewbulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IRmreviewduplicatebaserecord.
-        /// </summary>
-        IRmreviewduplicatebaserecord Rmreviewduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the IRmreviewduplicatematchingrecord.
-        /// </summary>
-        IRmreviewduplicatematchingrecord Rmreviewduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the IRmreviewmailboxtrackingfolders.
-        /// </summary>
-        IRmreviewmailboxtrackingfolders Rmreviewmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IRmreviewprincipalobjectattributeaccesses.
-        /// </summary>
-        IRmreviewprincipalobjectattributeaccesses Rmreviewprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IRmreviewprocesssession.
-        /// </summary>
-        IRmreviewprocesssession Rmreviewprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IRmreviewsyncerrors.
-        /// </summary>
-        IRmreviewsyncerrors Rmreviewsyncerrors { get; }
-
-        /// <summary>
         /// Gets the IServiceareas.
         /// </summary>
         IServiceareas Serviceareas { get; }
-
-        /// <summary>
-        /// Gets the IApplicationid.
-        /// </summary>
-        IApplicationid Applicationid { get; }
-
-        /// <summary>
-        /// Gets the IServiceareaasyncoperations.
-        /// </summary>
-        IServiceareaasyncoperations Serviceareaasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IServiceareabulkdeletefailures.
-        /// </summary>
-        IServiceareabulkdeletefailures Serviceareabulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IServiceareaduplicatebaserecord.
-        /// </summary>
-        IServiceareaduplicatebaserecord Serviceareaduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the IServiceareaduplicatematchingrecord.
-        /// </summary>
-        IServiceareaduplicatematchingrecord Serviceareaduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the IServiceareamailboxtrackingfolders.
-        /// </summary>
-        IServiceareamailboxtrackingfolders Serviceareamailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IServiceareaprincipalobjectattributeaccesses.
-        /// </summary>
-        IServiceareaprincipalobjectattributeaccesses Serviceareaprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IServiceareaprocesssession.
-        /// </summary>
-        IServiceareaprocesssession Serviceareaprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IServiceareasyncerrors.
-        /// </summary>
-        IServiceareasyncerrors Serviceareasyncerrors { get; }
 
         /// <summary>
         /// Gets the ISettings.
@@ -2628,39 +448,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         ISettings Settings { get; }
 
         /// <summary>
-        /// Gets the ISettingmailboxtrackingfolders.
-        /// </summary>
-        ISettingmailboxtrackingfolders Settingmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ISettingprincipalobjectattributeaccesses.
-        /// </summary>
-        ISettingprincipalobjectattributeaccesses Settingprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ISettingprocesssession.
-        /// </summary>
-        ISettingprocesssession Settingprocesssession { get; }
-
-        /// <summary>
         /// Gets the ISpddatarows.
         /// </summary>
         ISpddatarows Spddatarows { get; }
-
-        /// <summary>
-        /// Gets the ISpddatarowmailboxtrackingfolders.
-        /// </summary>
-        ISpddatarowmailboxtrackingfolders Spddatarowmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ISpddatarowprincipalobjectattributeaccesses.
-        /// </summary>
-        ISpddatarowprincipalobjectattributeaccesses Spddatarowprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ISpddatarowprocesssession.
-        /// </summary>
-        ISpddatarowprocesssession Spddatarowprocesssession { get; }
 
         /// <summary>
         /// Gets the ISpdexportses.
@@ -2668,39 +458,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         ISpdexportses Spdexportses { get; }
 
         /// <summary>
-        /// Gets the ISpdexportsmailboxtrackingfolders.
-        /// </summary>
-        ISpdexportsmailboxtrackingfolders Spdexportsmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ISpdexportsprincipalobjectattributeaccesses.
-        /// </summary>
-        ISpdexportsprincipalobjectattributeaccesses Spdexportsprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ISpdexportsprocesssession.
-        /// </summary>
-        ISpdexportsprocesssession Spdexportsprocesssession { get; }
-
-        /// <summary>
         /// Gets the ITaxandaccountings.
         /// </summary>
         ITaxandaccountings Taxandaccountings { get; }
-
-        /// <summary>
-        /// Gets the ITaxandaccountingmailboxtrackingfolders.
-        /// </summary>
-        ITaxandaccountingmailboxtrackingfolders Taxandaccountingmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ITaxandaccountingprincipalobjectattributeaccesses.
-        /// </summary>
-        ITaxandaccountingprincipalobjectattributeaccesses Taxandaccountingprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ITaxandaccountingprocesssession.
-        /// </summary>
-        ITaxandaccountingprocesssession Taxandaccountingprocesssession { get; }
 
         /// <summary>
         /// Gets the ITermsconditionslimitationspresets.
@@ -2708,39 +468,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         ITermsconditionslimitationspresets Termsconditionslimitationspresets { get; }
 
         /// <summary>
-        /// Gets the ITermsconditionslimitationspresetmailboxtrackingfolders.
-        /// </summary>
-        ITermsconditionslimitationspresetmailboxtrackingfolders Termsconditionslimitationspresetmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ITermsconditionslimitationspresetprincipalobjectattributeaccesses.
-        /// </summary>
-        ITermsconditionslimitationspresetprincipalobjectattributeaccesses Termsconditionslimitationspresetprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ITermsconditionslimitationspresetprocesssession.
-        /// </summary>
-        ITermsconditionslimitationspresetprocesssession Termsconditionslimitationspresetprocesssession { get; }
-
-        /// <summary>
         /// Gets the ITerritories.
         /// </summary>
         ITerritories Territories { get; }
-
-        /// <summary>
-        /// Gets the ITerritorymailboxtrackingfolders.
-        /// </summary>
-        ITerritorymailboxtrackingfolders Territorymailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ITerritoryprincipalobjectattributeaccesses.
-        /// </summary>
-        ITerritoryprincipalobjectattributeaccesses Territoryprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ITerritoryprocesssession.
-        /// </summary>
-        ITerritoryprocesssession Territoryprocesssession { get; }
 
         /// <summary>
         /// Gets the ITiedhouseassociations.
@@ -2748,39 +478,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         ITiedhouseassociations Tiedhouseassociations { get; }
 
         /// <summary>
-        /// Gets the ITiedhouseassociationmailboxtrackingfolders.
-        /// </summary>
-        ITiedhouseassociationmailboxtrackingfolders Tiedhouseassociationmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ITiedhouseassociationprincipalobjectattributeaccesses.
-        /// </summary>
-        ITiedhouseassociationprincipalobjectattributeaccesses Tiedhouseassociationprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ITiedhouseassociationprocesssession.
-        /// </summary>
-        ITiedhouseassociationprocesssession Tiedhouseassociationprocesssession { get; }
-
-        /// <summary>
         /// Gets the ITiedhouseconnections.
         /// </summary>
         ITiedhouseconnections Tiedhouseconnections { get; }
-
-        /// <summary>
-        /// Gets the ITiedhouseconnectionmailboxtrackingfolders.
-        /// </summary>
-        ITiedhouseconnectionmailboxtrackingfolders Tiedhouseconnectionmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the ITiedhouseconnectionprincipalobjectattributeaccesses.
-        /// </summary>
-        ITiedhouseconnectionprincipalobjectattributeaccesses Tiedhouseconnectionprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the ITiedhouseconnectionprocesssession.
-        /// </summary>
-        ITiedhouseconnectionprocesssession Tiedhouseconnectionprocesssession { get; }
 
         /// <summary>
         /// Gets the IWitnesses.
@@ -2788,39 +488,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IWitnesses Witnesses { get; }
 
         /// <summary>
-        /// Gets the IWitnessmailboxtrackingfolders.
-        /// </summary>
-        IWitnessmailboxtrackingfolders Witnessmailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IWitnessprincipalobjectattributeaccesses.
-        /// </summary>
-        IWitnessprincipalobjectattributeaccesses Witnessprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IWitnessprocesssession.
-        /// </summary>
-        IWitnessprocesssession Witnessprocesssession { get; }
-
-        /// <summary>
         /// Gets the IWorkerinvoicehistories.
         /// </summary>
         IWorkerinvoicehistories Workerinvoicehistories { get; }
-
-        /// <summary>
-        /// Gets the IWorkerinvoicehistorymailboxtrackingfolders.
-        /// </summary>
-        IWorkerinvoicehistorymailboxtrackingfolders Workerinvoicehistorymailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IWorkerinvoicehistoryprincipalobjectattributeaccesses.
-        /// </summary>
-        IWorkerinvoicehistoryprincipalobjectattributeaccesses Workerinvoicehistoryprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IWorkerinvoicehistoryprocesssession.
-        /// </summary>
-        IWorkerinvoicehistoryprocesssession Workerinvoicehistoryprocesssession { get; }
 
         /// <summary>
         /// Gets the IWorkers.
@@ -2828,389 +498,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IWorkers Workers { get; }
 
         /// <summary>
-        /// Gets the IWorkermailboxtrackingfolders.
-        /// </summary>
-        IWorkermailboxtrackingfolders Workermailboxtrackingfolders { get; }
-
-        /// <summary>
-        /// Gets the IWorkerprincipalobjectattributeaccesses.
-        /// </summary>
-        IWorkerprincipalobjectattributeaccesses Workerprincipalobjectattributeaccesses { get; }
-
-        /// <summary>
-        /// Gets the IWorkerprocesssession.
-        /// </summary>
-        IWorkerprocesssession Workerprocesssession { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiocontravention.
-        /// </summary>
-        IObjectidadoxiocontravention Objectidadoxiocontravention { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioenforcementaction.
-        /// </summary>
-        IObjectidadoxioenforcementaction Objectidadoxioenforcementaction { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioestablishment.
-        /// </summary>
-        IObjectidadoxioestablishment Objectidadoxioestablishment { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioevent.
-        /// </summary>
-        IObjectidadoxioevent Objectidadoxioevent { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioenforcementactionappointment.
-        /// </summary>
-        IRegardingobjectidadoxioenforcementactionappointment Regardingobjectidadoxioenforcementactionappointment { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioeventappointment.
-        /// </summary>
-        IRegardingobjectidadoxioeventappointment Regardingobjectidadoxioeventappointment { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioannualvolume.
-        /// </summary>
-        IRegardingobjectidadoxioannualvolume Regardingobjectidadoxioannualvolume { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioapplicationcrsbpfv4.
-        /// </summary>
-        IRegardingobjectidadoxioapplicationcrsbpfv4 Regardingobjectidadoxioapplicationcrsbpfv4 { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioapplicationlicenseechangesv10.
-        /// </summary>
-        IRegardingobjectidadoxioapplicationlicenseechangesv10 Regardingobjectidadoxioapplicationlicenseechangesv10 { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioapplicationliquorbpf.
-        /// </summary>
-        IRegardingobjectidadoxioapplicationliquorbpf Regardingobjectidadoxioapplicationliquorbpf { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioapplicationliquorbpfv2.
-        /// </summary>
-        IRegardingobjectidadoxioapplicationliquorbpfv2 Regardingobjectidadoxioapplicationliquorbpfv2 { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioapplicationrelocationv1.
-        /// </summary>
-        IRegardingobjectidadoxioapplicationrelocationv1 Regardingobjectidadoxioapplicationrelocationv1 { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioapplicationstructurechangev1.
-        /// </summary>
-        IRegardingobjectidadoxioapplicationstructurechangev1 Regardingobjectidadoxioapplicationstructurechangev1 { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioapplicationtransferownershipv1.
-        /// </summary>
-        IRegardingobjectidadoxioapplicationtransferownershipv1 Regardingobjectidadoxioapplicationtransferownershipv1 { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioapplicationtypefeeschedule.
-        /// </summary>
-        IRegardingobjectidadoxioapplicationtypefeeschedule Regardingobjectidadoxioapplicationtypefeeschedule { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioendorsement.
-        /// </summary>
-        IRegardingobjectidadoxioendorsement Regardingobjectidadoxioendorsement { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioendorsementtype.
-        /// </summary>
-        IRegardingobjectidadoxioendorsementtype Regardingobjectidadoxioendorsementtype { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioenforcementactionbpf.
-        /// </summary>
-        IRegardingobjectidadoxioenforcementactionbpf Regardingobjectidadoxioenforcementactionbpf { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioestablishmentincident.
-        /// </summary>
-        IRegardingobjectidadoxioestablishmentincident Regardingobjectidadoxioestablishmentincident { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioeventschedule.
-        /// </summary>
-        IRegardingobjectidadoxioeventschedule Regardingobjectidadoxioeventschedule { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioexhibit.
-        /// </summary>
-        IRegardingobjectidadoxioexhibit Regardingobjectidadoxioexhibit { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiofederalreportexport.
-        /// </summary>
-        IRegardingobjectidadoxiofederalreportexport Regardingobjectidadoxiofederalreportexport { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioformelementuploadfield.
-        /// </summary>
-        IRegardingobjectidadoxioformelementuploadfield Regardingobjectidadoxioformelementuploadfield { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioldborder.
-        /// </summary>
-        IRegardingobjectidadoxioldborder Regardingobjectidadoxioldborder { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiolicenceldbordertotalhistory.
-        /// </summary>
-        IRegardingobjectidadoxiolicenceldbordertotalhistory Regardingobjectidadoxiolicenceldbordertotalhistory { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiormreview.
-        /// </summary>
-        IRegardingobjectidadoxiormreview Regardingobjectidadoxiormreview { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioservicearea.
-        /// </summary>
-        IRegardingobjectidadoxioservicearea Regardingobjectidadoxioservicearea { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioannualvolume.
-        /// </summary>
-        IBusinessunitadoxioannualvolume Businessunitadoxioannualvolume { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioapplicationtypefeeschedule.
-        /// </summary>
-        IBusinessunitadoxioapplicationtypefeeschedule Businessunitadoxioapplicationtypefeeschedule { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioendorsement.
-        /// </summary>
-        IBusinessunitadoxioendorsement Businessunitadoxioendorsement { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioendorsementtype.
-        /// </summary>
-        IBusinessunitadoxioendorsementtype Businessunitadoxioendorsementtype { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioenforcementaction.
-        /// </summary>
-        IBusinessunitadoxioenforcementaction Businessunitadoxioenforcementaction { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioestablishmentincident.
-        /// </summary>
-        IBusinessunitadoxioestablishmentincident Businessunitadoxioestablishmentincident { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioevent.
-        /// </summary>
-        IBusinessunitadoxioevent Businessunitadoxioevent { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioeventschedule.
-        /// </summary>
-        IBusinessunitadoxioeventschedule Businessunitadoxioeventschedule { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioexhibit.
-        /// </summary>
-        IBusinessunitadoxioexhibit Businessunitadoxioexhibit { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxiofederalreportexport.
-        /// </summary>
-        IBusinessunitadoxiofederalreportexport Businessunitadoxiofederalreportexport { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioformelementuploadfield.
-        /// </summary>
-        IBusinessunitadoxioformelementuploadfield Businessunitadoxioformelementuploadfield { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioldborder.
-        /// </summary>
-        IBusinessunitadoxioldborder Businessunitadoxioldborder { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxiolicenceldbordertotalhistory.
-        /// </summary>
-        IBusinessunitadoxiolicenceldbordertotalhistory Businessunitadoxiolicenceldbordertotalhistory { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxiormreview.
-        /// </summary>
-        IBusinessunitadoxiormreview Businessunitadoxiormreview { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioservicearea.
-        /// </summary>
-        IBusinessunitadoxioservicearea Businessunitadoxioservicearea { get; }
-
-        /// <summary>
         /// Gets the IContacts.
         /// </summary>
         IContacts Contacts { get; }
-
-        /// <summary>
-        /// Gets the IContacttaskcontact.
-        /// </summary>
-        IContacttaskcontact Contacttaskcontact { get; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioannualvolume.
-        /// </summary>
-        IBaserecordidadoxioannualvolume Baserecordidadoxioannualvolume { get; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioapplicationtypefeeschedule.
-        /// </summary>
-        IBaserecordidadoxioapplicationtypefeeschedule Baserecordidadoxioapplicationtypefeeschedule { get; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioendorsement.
-        /// </summary>
-        IBaserecordidadoxioendorsement Baserecordidadoxioendorsement { get; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioendorsementtype.
-        /// </summary>
-        IBaserecordidadoxioendorsementtype Baserecordidadoxioendorsementtype { get; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioenforcementaction.
-        /// </summary>
-        IBaserecordidadoxioenforcementaction Baserecordidadoxioenforcementaction { get; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioevent.
-        /// </summary>
-        IBaserecordidadoxioevent Baserecordidadoxioevent { get; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioeventschedule.
-        /// </summary>
-        IBaserecordidadoxioeventschedule Baserecordidadoxioeventschedule { get; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioexhibit.
-        /// </summary>
-        IBaserecordidadoxioexhibit Baserecordidadoxioexhibit { get; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxiofederalreportexport.
-        /// </summary>
-        IBaserecordidadoxiofederalreportexport Baserecordidadoxiofederalreportexport { get; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioformelementuploadfield.
-        /// </summary>
-        IBaserecordidadoxioformelementuploadfield Baserecordidadoxioformelementuploadfield { get; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioldborder.
-        /// </summary>
-        IBaserecordidadoxioldborder Baserecordidadoxioldborder { get; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxiolicenceldbordertotalhistory.
-        /// </summary>
-        IBaserecordidadoxiolicenceldbordertotalhistory Baserecordidadoxiolicenceldbordertotalhistory { get; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxiormreview.
-        /// </summary>
-        IBaserecordidadoxiormreview Baserecordidadoxiormreview { get; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioservicearea.
-        /// </summary>
-        IBaserecordidadoxioservicearea Baserecordidadoxioservicearea { get; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioannualvolume.
-        /// </summary>
-        IDuplicaterecordidadoxioannualvolume Duplicaterecordidadoxioannualvolume { get; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioapplicationtypefeeschedule.
-        /// </summary>
-        IDuplicaterecordidadoxioapplicationtypefeeschedule Duplicaterecordidadoxioapplicationtypefeeschedule { get; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioendorsement.
-        /// </summary>
-        IDuplicaterecordidadoxioendorsement Duplicaterecordidadoxioendorsement { get; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioendorsementtype.
-        /// </summary>
-        IDuplicaterecordidadoxioendorsementtype Duplicaterecordidadoxioendorsementtype { get; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioenforcementaction.
-        /// </summary>
-        IDuplicaterecordidadoxioenforcementaction Duplicaterecordidadoxioenforcementaction { get; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioevent.
-        /// </summary>
-        IDuplicaterecordidadoxioevent Duplicaterecordidadoxioevent { get; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioeventschedule.
-        /// </summary>
-        IDuplicaterecordidadoxioeventschedule Duplicaterecordidadoxioeventschedule { get; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioexhibit.
-        /// </summary>
-        IDuplicaterecordidadoxioexhibit Duplicaterecordidadoxioexhibit { get; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxiofederalreportexport.
-        /// </summary>
-        IDuplicaterecordidadoxiofederalreportexport Duplicaterecordidadoxiofederalreportexport { get; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioformelementuploadfield.
-        /// </summary>
-        IDuplicaterecordidadoxioformelementuploadfield Duplicaterecordidadoxioformelementuploadfield { get; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioldborder.
-        /// </summary>
-        IDuplicaterecordidadoxioldborder Duplicaterecordidadoxioldborder { get; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxiolicenceldbordertotalhistory.
-        /// </summary>
-        IDuplicaterecordidadoxiolicenceldbordertotalhistory Duplicaterecordidadoxiolicenceldbordertotalhistory { get; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxiormreview.
-        /// </summary>
-        IDuplicaterecordidadoxiormreview Duplicaterecordidadoxiormreview { get; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioservicearea.
-        /// </summary>
-        IDuplicaterecordidadoxioservicearea Duplicaterecordidadoxioservicearea { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioenforcementactionemail.
-        /// </summary>
-        IRegardingobjectidadoxioenforcementactionemail Regardingobjectidadoxioenforcementactionemail { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioeventemail.
-        /// </summary>
-        IRegardingobjectidadoxioeventemail Regardingobjectidadoxioeventemail { get; }
 
         /// <summary>
         /// Gets the IEntitydefinitions.
@@ -3218,24 +508,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEntitydefinitions Entitydefinitions { get; }
 
         /// <summary>
-        /// Gets the IRegardingobjectidadoxioenforcementactionfax.
-        /// </summary>
-        IRegardingobjectidadoxioenforcementactionfax Regardingobjectidadoxioenforcementactionfax { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioeventfax.
-        /// </summary>
-        IRegardingobjectidadoxioeventfax Regardingobjectidadoxioeventfax { get; }
-
-        /// <summary>
         /// Gets the IGlobaloptionsetdefinitions.
         /// </summary>
         IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; }
-
-        /// <summary>
-        /// Gets the IIncidentadoxiormreviewinspection.
-        /// </summary>
-        IIncidentadoxiormreviewinspection Incidentadoxiormreviewinspection { get; }
 
         /// <summary>
         /// Gets the IInvoices.
@@ -3243,29 +518,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IInvoices Invoices { get; }
 
         /// <summary>
-        /// Gets the IInvoiceinvoiceoriginalinvoice.
-        /// </summary>
-        IInvoiceinvoiceoriginalinvoice Invoiceinvoiceoriginalinvoice { get; }
-
-        /// <summary>
-        /// Gets the IOriginalinvoice.
-        /// </summary>
-        IOriginalinvoice Originalinvoice { get; }
-
-        /// <summary>
         /// Gets the ILeads.
         /// </summary>
         ILeads Leads { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioenforcementactionletter.
-        /// </summary>
-        IRegardingobjectidadoxioenforcementactionletter Regardingobjectidadoxioenforcementactionletter { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioeventletter.
-        /// </summary>
-        IRegardingobjectidadoxioeventletter Regardingobjectidadoxioeventletter { get; }
 
         /// <summary>
         /// Gets the ILists.
@@ -3273,814 +528,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILists Lists { get; }
 
         /// <summary>
-        /// Gets the IRegardingobjectidadoxioalias.
-        /// </summary>
-        IRegardingobjectidadoxioalias Regardingobjectidadoxioalias { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioapplication.
-        /// </summary>
-        IRegardingobjectidadoxioapplication Regardingobjectidadoxioapplication { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioapplicationbpfv3.
-        /// </summary>
-        IRegardingobjectidadoxioapplicationbpfv3 Regardingobjectidadoxioapplicationbpfv3 { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioapplicationinvoicehistory.
-        /// </summary>
-        IRegardingobjectidadoxioapplicationinvoicehistory Regardingobjectidadoxioapplicationinvoicehistory { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioapplicationtermsconditionslimitation.
-        /// </summary>
-        IRegardingobjectidadoxioapplicationtermsconditionslimitation Regardingobjectidadoxioapplicationtermsconditionslimitation { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioapplicationtype.
-        /// </summary>
-        IRegardingobjectidadoxioapplicationtype Regardingobjectidadoxioapplicationtype { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioapplicationtypecontent.
-        /// </summary>
-        IRegardingobjectidadoxioapplicationtypecontent Regardingobjectidadoxioapplicationtypecontent { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioarea.
-        /// </summary>
-        IRegardingobjectidadoxioarea Regardingobjectidadoxioarea { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioauditlogrequest.
-        /// </summary>
-        IRegardingobjectidadoxioauditlogrequest Regardingobjectidadoxioauditlogrequest { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiobusinessaccount.
-        /// </summary>
-        IRegardingobjectidadoxiobusinessaccount Regardingobjectidadoxiobusinessaccount { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiocannabisinventoryreport.
-        /// </summary>
-        IRegardingobjectidadoxiocannabisinventoryreport Regardingobjectidadoxiocannabisinventoryreport { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiocannabismonthlyreport.
-        /// </summary>
-        IRegardingobjectidadoxiocannabismonthlyreport Regardingobjectidadoxiocannabismonthlyreport { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiocannabisproductadmin.
-        /// </summary>
-        IRegardingobjectidadoxiocannabisproductadmin Regardingobjectidadoxiocannabisproductadmin { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiocitydistrict.
-        /// </summary>
-        IRegardingobjectidadoxiocitydistrict Regardingobjectidadoxiocitydistrict { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiocomplaint.
-        /// </summary>
-        IRegardingobjectidadoxiocomplaint Regardingobjectidadoxiocomplaint { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiocomplianceinvestigation.
-        /// </summary>
-        IRegardingobjectidadoxiocomplianceinvestigation Regardingobjectidadoxiocomplianceinvestigation { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiocompliancemeeting.
-        /// </summary>
-        IRegardingobjectidadoxiocompliancemeeting Regardingobjectidadoxiocompliancemeeting { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiocontravention.
-        /// </summary>
-        IRegardingobjectidadoxiocontravention Regardingobjectidadoxiocontravention { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiocontraventionadmin.
-        /// </summary>
-        IRegardingobjectidadoxiocontraventionadmin Regardingobjectidadoxiocontraventionadmin { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiocorporatehistorysummary.
-        /// </summary>
-        IRegardingobjectidadoxiocorporatehistorysummary Regardingobjectidadoxiocorporatehistorysummary { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiocorporaterole.
-        /// </summary>
-        IRegardingobjectidadoxiocorporaterole Regardingobjectidadoxiocorporaterole { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiocustomautonumberdefinition.
-        /// </summary>
-        IRegardingobjectidadoxiocustomautonumberdefinition Regardingobjectidadoxiocustomautonumberdefinition { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiocustomautonumberrequest.
-        /// </summary>
-        IRegardingobjectidadoxiocustomautonumberrequest Regardingobjectidadoxiocustomautonumberrequest { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiodocument.
-        /// </summary>
-        IRegardingobjectidadoxiodocument Regardingobjectidadoxiodocument { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiodocumentadmin.
-        /// </summary>
-        IRegardingobjectidadoxiodocumentadmin Regardingobjectidadoxiodocumentadmin { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioestablishment.
-        /// </summary>
-        IRegardingobjectidadoxioestablishment Regardingobjectidadoxioestablishment { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioestablishmentwatchword.
-        /// </summary>
-        IRegardingobjectidadoxioestablishmentwatchword Regardingobjectidadoxioestablishmentwatchword { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiofiainvestigationlog.
-        /// </summary>
-        IRegardingobjectidadoxiofiainvestigationlog Regardingobjectidadoxiofiainvestigationlog { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiofundingsource.
-        /// </summary>
-        IRegardingobjectidadoxiofundingsource Regardingobjectidadoxiofundingsource { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioinspectionreactivationhistory.
-        /// </summary>
-        IRegardingobjectidadoxioinspectionreactivationhistory Regardingobjectidadoxioinspectionreactivationhistory { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioinspectorcommentsrollup.
-        /// </summary>
-        IRegardingobjectidadoxioinspectorcommentsrollup Regardingobjectidadoxioinspectorcommentsrollup { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiointerest.
-        /// </summary>
-        IRegardingobjectidadoxiointerest Regardingobjectidadoxiointerest { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioinvestigation.
-        /// </summary>
-        IRegardingobjectidadoxioinvestigation Regardingobjectidadoxioinvestigation { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioinvestigationactivity.
-        /// </summary>
-        IRegardingobjectidadoxioinvestigationactivity Regardingobjectidadoxioinvestigationactivity { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioinvestigationreactivationhistory.
-        /// </summary>
-        IRegardingobjectidadoxioinvestigationreactivationhistory Regardingobjectidadoxioinvestigationreactivationhistory { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiolegalentity.
-        /// </summary>
-        IRegardingobjectidadoxiolegalentity Regardingobjectidadoxiolegalentity { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiolicences.
-        /// </summary>
-        IRegardingobjectidadoxiolicences Regardingobjectidadoxiolicences { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiolicencetype.
-        /// </summary>
-        IRegardingobjectidadoxiolicencetype Regardingobjectidadoxiolicencetype { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiolicenseechangelog.
-        /// </summary>
-        IRegardingobjectidadoxiolicenseechangelog Regardingobjectidadoxiolicenseechangelog { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioloan.
-        /// </summary>
-        IRegardingobjectidadoxioloan Regardingobjectidadoxioloan { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiolocalgovindigenousnation.
-        /// </summary>
-        IRegardingobjectidadoxiolocalgovindigenousnation Regardingobjectidadoxiolocalgovindigenousnation { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiopersonalhistorysummary.
-        /// </summary>
-        IRegardingobjectidadoxiopersonalhistorysummary Regardingobjectidadoxiopersonalhistorysummary { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiopolicejurisdiction.
-        /// </summary>
-        IRegardingobjectidadoxiopolicejurisdiction Regardingobjectidadoxiopolicejurisdiction { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiopolicydocument.
-        /// </summary>
-        IRegardingobjectidadoxiopolicydocument Regardingobjectidadoxiopolicydocument { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiopostalcode.
-        /// </summary>
-        IRegardingobjectidadoxiopostalcode Regardingobjectidadoxiopostalcode { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiopreviousaddress.
-        /// </summary>
-        IRegardingobjectidadoxiopreviousaddress Regardingobjectidadoxiopreviousaddress { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioregion.
-        /// </summary>
-        IRegardingobjectidadoxioregion Regardingobjectidadoxioregion { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiorelatedparty.
-        /// </summary>
-        IRegardingobjectidadoxiorelatedparty Regardingobjectidadoxiorelatedparty { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiosetting.
-        /// </summary>
-        IRegardingobjectidadoxiosetting Regardingobjectidadoxiosetting { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiospddatarow.
-        /// </summary>
-        IRegardingobjectidadoxiospddatarow Regardingobjectidadoxiospddatarow { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiospdexports.
-        /// </summary>
-        IRegardingobjectidadoxiospdexports Regardingobjectidadoxiospdexports { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiotaxandaccounting.
-        /// </summary>
-        IRegardingobjectidadoxiotaxandaccounting Regardingobjectidadoxiotaxandaccounting { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiotermsconditionslimitationspreset.
-        /// </summary>
-        IRegardingobjectidadoxiotermsconditionslimitationspreset Regardingobjectidadoxiotermsconditionslimitationspreset { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioterritory.
-        /// </summary>
-        IRegardingobjectidadoxioterritory Regardingobjectidadoxioterritory { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiotiedhouseassociation.
-        /// </summary>
-        IRegardingobjectidadoxiotiedhouseassociation Regardingobjectidadoxiotiedhouseassociation { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiotiedhouseconnection.
-        /// </summary>
-        IRegardingobjectidadoxiotiedhouseconnection Regardingobjectidadoxiotiedhouseconnection { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiowitness.
-        /// </summary>
-        IRegardingobjectidadoxiowitness Regardingobjectidadoxiowitness { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioworker.
-        /// </summary>
-        IRegardingobjectidadoxioworker Regardingobjectidadoxioworker { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioworkerinvoicehistory.
-        /// </summary>
-        IRegardingobjectidadoxioworkerinvoicehistory Regardingobjectidadoxioworkerinvoicehistory { get; }
-
-        /// <summary>
-        /// Gets the IOrganizationadoxioapplicationcrsbpfv4.
-        /// </summary>
-        IOrganizationadoxioapplicationcrsbpfv4 Organizationadoxioapplicationcrsbpfv4 { get; }
-
-        /// <summary>
-        /// Gets the IOrganizationadoxioapplicationlicenseechangesv10.
-        /// </summary>
-        IOrganizationadoxioapplicationlicenseechangesv10 Organizationadoxioapplicationlicenseechangesv10 { get; }
-
-        /// <summary>
-        /// Gets the IOrganizationadoxioapplicationliquorbpf.
-        /// </summary>
-        IOrganizationadoxioapplicationliquorbpf Organizationadoxioapplicationliquorbpf { get; }
-
-        /// <summary>
-        /// Gets the IOrganizationadoxioapplicationliquorbpfv2.
-        /// </summary>
-        IOrganizationadoxioapplicationliquorbpfv2 Organizationadoxioapplicationliquorbpfv2 { get; }
-
-        /// <summary>
-        /// Gets the IOrganizationadoxioapplicationrelocationv1.
-        /// </summary>
-        IOrganizationadoxioapplicationrelocationv1 Organizationadoxioapplicationrelocationv1 { get; }
-
-        /// <summary>
-        /// Gets the IOrganizationadoxioapplicationstructurechangev1.
-        /// </summary>
-        IOrganizationadoxioapplicationstructurechangev1 Organizationadoxioapplicationstructurechangev1 { get; }
-
-        /// <summary>
-        /// Gets the IOrganizationadoxioapplicationtransferownershipv1.
-        /// </summary>
-        IOrganizationadoxioapplicationtransferownershipv1 Organizationadoxioapplicationtransferownershipv1 { get; }
-
-        /// <summary>
-        /// Gets the IOrganizationadoxioenforcementactionbpf.
-        /// </summary>
-        IOrganizationadoxioenforcementactionbpf Organizationadoxioenforcementactionbpf { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioenforcementactionphonecall.
-        /// </summary>
-        IRegardingobjectidadoxioenforcementactionphonecall Regardingobjectidadoxioenforcementactionphonecall { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioeventphonecall.
-        /// </summary>
-        IRegardingobjectidadoxioeventphonecall Regardingobjectidadoxioeventphonecall { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioalias.
-        /// </summary>
-        IObjectidadoxioalias Objectidadoxioalias { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioannualvolume.
-        /// </summary>
-        IObjectidadoxioannualvolume Objectidadoxioannualvolume { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioapplication.
-        /// </summary>
-        IObjectidadoxioapplication Objectidadoxioapplication { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioapplicationbpfv3.
-        /// </summary>
-        IObjectidadoxioapplicationbpfv3 Objectidadoxioapplicationbpfv3 { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioapplicationcrsbpfv4.
-        /// </summary>
-        IObjectidadoxioapplicationcrsbpfv4 Objectidadoxioapplicationcrsbpfv4 { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioapplicationinvoicehistory.
-        /// </summary>
-        IObjectidadoxioapplicationinvoicehistory Objectidadoxioapplicationinvoicehistory { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioapplicationlicenseechangesv10.
-        /// </summary>
-        IObjectidadoxioapplicationlicenseechangesv10 Objectidadoxioapplicationlicenseechangesv10 { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioapplicationliquorbpf.
-        /// </summary>
-        IObjectidadoxioapplicationliquorbpf Objectidadoxioapplicationliquorbpf { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioapplicationliquorbpfv2.
-        /// </summary>
-        IObjectidadoxioapplicationliquorbpfv2 Objectidadoxioapplicationliquorbpfv2 { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioapplicationrelocationv1.
-        /// </summary>
-        IObjectidadoxioapplicationrelocationv1 Objectidadoxioapplicationrelocationv1 { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioapplicationstructurechangev1.
-        /// </summary>
-        IObjectidadoxioapplicationstructurechangev1 Objectidadoxioapplicationstructurechangev1 { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioapplicationtermsconditionslimitation.
-        /// </summary>
-        IObjectidadoxioapplicationtermsconditionslimitation Objectidadoxioapplicationtermsconditionslimitation { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioapplicationtransferownershipv1.
-        /// </summary>
-        IObjectidadoxioapplicationtransferownershipv1 Objectidadoxioapplicationtransferownershipv1 { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioapplicationtype.
-        /// </summary>
-        IObjectidadoxioapplicationtype Objectidadoxioapplicationtype { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioapplicationtypecontent.
-        /// </summary>
-        IObjectidadoxioapplicationtypecontent Objectidadoxioapplicationtypecontent { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioapplicationtypefeeschedule.
-        /// </summary>
-        IObjectidadoxioapplicationtypefeeschedule Objectidadoxioapplicationtypefeeschedule { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioarea.
-        /// </summary>
-        IObjectidadoxioarea Objectidadoxioarea { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioauditlogrequest.
-        /// </summary>
-        IObjectidadoxioauditlogrequest Objectidadoxioauditlogrequest { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiobusinessaccount.
-        /// </summary>
-        IObjectidadoxiobusinessaccount Objectidadoxiobusinessaccount { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiocannabisinventoryreport.
-        /// </summary>
-        IObjectidadoxiocannabisinventoryreport Objectidadoxiocannabisinventoryreport { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiocannabismonthlyreport.
-        /// </summary>
-        IObjectidadoxiocannabismonthlyreport Objectidadoxiocannabismonthlyreport { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiocannabisproductadmin.
-        /// </summary>
-        IObjectidadoxiocannabisproductadmin Objectidadoxiocannabisproductadmin { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiocitydistrict.
-        /// </summary>
-        IObjectidadoxiocitydistrict Objectidadoxiocitydistrict { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiocomplaint.
-        /// </summary>
-        IObjectidadoxiocomplaint Objectidadoxiocomplaint { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiocomplianceinvestigation.
-        /// </summary>
-        IObjectidadoxiocomplianceinvestigation Objectidadoxiocomplianceinvestigation { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiocompliancemeeting.
-        /// </summary>
-        IObjectidadoxiocompliancemeeting Objectidadoxiocompliancemeeting { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiocontraventionadmin.
-        /// </summary>
-        IObjectidadoxiocontraventionadmin Objectidadoxiocontraventionadmin { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiocorporatehistorysummary.
-        /// </summary>
-        IObjectidadoxiocorporatehistorysummary Objectidadoxiocorporatehistorysummary { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiocorporaterole.
-        /// </summary>
-        IObjectidadoxiocorporaterole Objectidadoxiocorporaterole { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiocustomautonumberdefinition.
-        /// </summary>
-        IObjectidadoxiocustomautonumberdefinition Objectidadoxiocustomautonumberdefinition { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiocustomautonumberrequest.
-        /// </summary>
-        IObjectidadoxiocustomautonumberrequest Objectidadoxiocustomautonumberrequest { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiodocument.
-        /// </summary>
-        IObjectidadoxiodocument Objectidadoxiodocument { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiodocumentadmin.
-        /// </summary>
-        IObjectidadoxiodocumentadmin Objectidadoxiodocumentadmin { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioendorsement.
-        /// </summary>
-        IObjectidadoxioendorsement Objectidadoxioendorsement { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioendorsementtype.
-        /// </summary>
-        IObjectidadoxioendorsementtype Objectidadoxioendorsementtype { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioenforcementactionbpf.
-        /// </summary>
-        IObjectidadoxioenforcementactionbpf Objectidadoxioenforcementactionbpf { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioestablishmentincident.
-        /// </summary>
-        IObjectidadoxioestablishmentincident Objectidadoxioestablishmentincident { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioestablishmentwatchword.
-        /// </summary>
-        IObjectidadoxioestablishmentwatchword Objectidadoxioestablishmentwatchword { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioeventschedule.
-        /// </summary>
-        IObjectidadoxioeventschedule Objectidadoxioeventschedule { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioexhibit.
-        /// </summary>
-        IObjectidadoxioexhibit Objectidadoxioexhibit { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiofederalreportexport.
-        /// </summary>
-        IObjectidadoxiofederalreportexport Objectidadoxiofederalreportexport { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiofiainvestigationlog.
-        /// </summary>
-        IObjectidadoxiofiainvestigationlog Objectidadoxiofiainvestigationlog { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioformelementuploadfield.
-        /// </summary>
-        IObjectidadoxioformelementuploadfield Objectidadoxioformelementuploadfield { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiofundingsource.
-        /// </summary>
-        IObjectidadoxiofundingsource Objectidadoxiofundingsource { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioinspectionreactivationhistory.
-        /// </summary>
-        IObjectidadoxioinspectionreactivationhistory Objectidadoxioinspectionreactivationhistory { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioinspectorcommentsrollup.
-        /// </summary>
-        IObjectidadoxioinspectorcommentsrollup Objectidadoxioinspectorcommentsrollup { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiointerest.
-        /// </summary>
-        IObjectidadoxiointerest Objectidadoxiointerest { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioinvestigation.
-        /// </summary>
-        IObjectidadoxioinvestigation Objectidadoxioinvestigation { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioinvestigationactivity.
-        /// </summary>
-        IObjectidadoxioinvestigationactivity Objectidadoxioinvestigationactivity { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioinvestigationreactivationhistory.
-        /// </summary>
-        IObjectidadoxioinvestigationreactivationhistory Objectidadoxioinvestigationreactivationhistory { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioldborder.
-        /// </summary>
-        IObjectidadoxioldborder Objectidadoxioldborder { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiolegalentity.
-        /// </summary>
-        IObjectidadoxiolegalentity Objectidadoxiolegalentity { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiolicenceldbordertotalhistory.
-        /// </summary>
-        IObjectidadoxiolicenceldbordertotalhistory Objectidadoxiolicenceldbordertotalhistory { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiolicences.
-        /// </summary>
-        IObjectidadoxiolicences Objectidadoxiolicences { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiolicencetype.
-        /// </summary>
-        IObjectidadoxiolicencetype Objectidadoxiolicencetype { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiolicenseechangelog.
-        /// </summary>
-        IObjectidadoxiolicenseechangelog Objectidadoxiolicenseechangelog { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioloan.
-        /// </summary>
-        IObjectidadoxioloan Objectidadoxioloan { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiolocalgovindigenousnation.
-        /// </summary>
-        IObjectidadoxiolocalgovindigenousnation Objectidadoxiolocalgovindigenousnation { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiopersonalhistorysummary.
-        /// </summary>
-        IObjectidadoxiopersonalhistorysummary Objectidadoxiopersonalhistorysummary { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiopolicejurisdiction.
-        /// </summary>
-        IObjectidadoxiopolicejurisdiction Objectidadoxiopolicejurisdiction { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiopolicydocument.
-        /// </summary>
-        IObjectidadoxiopolicydocument Objectidadoxiopolicydocument { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiopostalcode.
-        /// </summary>
-        IObjectidadoxiopostalcode Objectidadoxiopostalcode { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiopreviousaddress.
-        /// </summary>
-        IObjectidadoxiopreviousaddress Objectidadoxiopreviousaddress { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioregion.
-        /// </summary>
-        IObjectidadoxioregion Objectidadoxioregion { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiorelatedparty.
-        /// </summary>
-        IObjectidadoxiorelatedparty Objectidadoxiorelatedparty { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiormreview.
-        /// </summary>
-        IObjectidadoxiormreview Objectidadoxiormreview { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioservicearea.
-        /// </summary>
-        IObjectidadoxioservicearea Objectidadoxioservicearea { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiosetting.
-        /// </summary>
-        IObjectidadoxiosetting Objectidadoxiosetting { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiospddatarow.
-        /// </summary>
-        IObjectidadoxiospddatarow Objectidadoxiospddatarow { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiospdexports.
-        /// </summary>
-        IObjectidadoxiospdexports Objectidadoxiospdexports { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiotaxandaccounting.
-        /// </summary>
-        IObjectidadoxiotaxandaccounting Objectidadoxiotaxandaccounting { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiotermsconditionslimitationspreset.
-        /// </summary>
-        IObjectidadoxiotermsconditionslimitationspreset Objectidadoxiotermsconditionslimitationspreset { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioterritory.
-        /// </summary>
-        IObjectidadoxioterritory Objectidadoxioterritory { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiotiedhouseassociation.
-        /// </summary>
-        IObjectidadoxiotiedhouseassociation Objectidadoxiotiedhouseassociation { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiotiedhouseconnection.
-        /// </summary>
-        IObjectidadoxiotiedhouseconnection Objectidadoxiotiedhouseconnection { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiowitness.
-        /// </summary>
-        IObjectidadoxiowitness Objectidadoxiowitness { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioworker.
-        /// </summary>
-        IObjectidadoxioworker Objectidadoxioworker { get; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioworkerinvoicehistory.
-        /// </summary>
-        IObjectidadoxioworkerinvoicehistory Objectidadoxioworkerinvoicehistory { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationcrsbpfv4activestageid.
-        /// </summary>
-        ILkadoxioapplicationcrsbpfv4activestageid Lkadoxioapplicationcrsbpfv4activestageid { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationlicenseechangesv10activestageid.
-        /// </summary>
-        ILkadoxioapplicationlicenseechangesv10activestageid Lkadoxioapplicationlicenseechangesv10activestageid { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationliquorbpfactivestageid.
-        /// </summary>
-        ILkadoxioapplicationliquorbpfactivestageid Lkadoxioapplicationliquorbpfactivestageid { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationliquorbpfv2activestageid.
-        /// </summary>
-        ILkadoxioapplicationliquorbpfv2activestageid Lkadoxioapplicationliquorbpfv2activestageid { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationrelocationv1activestageid.
-        /// </summary>
-        ILkadoxioapplicationrelocationv1activestageid Lkadoxioapplicationrelocationv1activestageid { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationstructurechangev1activestageid.
-        /// </summary>
-        ILkadoxioapplicationstructurechangev1activestageid Lkadoxioapplicationstructurechangev1activestageid { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationtransferownershipv1activestageid.
-        /// </summary>
-        ILkadoxioapplicationtransferownershipv1activestageid Lkadoxioapplicationtransferownershipv1activestageid { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioenforcementactionbpfactivestageid.
-        /// </summary>
-        ILkadoxioenforcementactionbpfactivestageid Lkadoxioenforcementactionbpfactivestageid { get; }
-
-        /// <summary>
-        /// Gets the IProcessstageadoxioenforcementaction.
-        /// </summary>
-        IProcessstageadoxioenforcementaction Processstageadoxioenforcementaction { get; }
-
-        /// <summary>
-        /// Gets the IProductadoxioapplicationtypefeeschedulefeeproduct.
-        /// </summary>
-        IProductadoxioapplicationtypefeeschedulefeeproduct Productadoxioapplicationtypefeeschedulefeeproduct { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioenforcementactionrecurringappointmentmaster.
-        /// </summary>
-        IRegardingobjectidadoxioenforcementactionrecurringappointmentmaster Regardingobjectidadoxioenforcementactionrecurringappointmentmaster { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioeventrecurringappointmentmaster.
-        /// </summary>
-        IRegardingobjectidadoxioeventrecurringappointmentmaster Regardingobjectidadoxioeventrecurringappointmentmaster { get; }
-
-        /// <summary>
         /// Gets the ISavedqueries.
         /// </summary>
         ISavedqueries Savedqueries { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioenforcementactionserviceappointment.
-        /// </summary>
-        IRegardingobjectidadoxioenforcementactionserviceappointment Regardingobjectidadoxioenforcementactionserviceappointment { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioeventserviceappointment.
-        /// </summary>
-        IRegardingobjectidadoxioeventserviceappointment Regardingobjectidadoxioeventserviceappointment { get; }
 
         /// <summary>
         /// Gets the ISharepointdocumentlocations.
@@ -4093,769 +543,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         ISharepointsites Sharepointsites { get; }
 
         /// <summary>
-        /// Gets the IRegardingobjectidadoxioenforcementactionsocialactivity.
-        /// </summary>
-        IRegardingobjectidadoxioenforcementactionsocialactivity Regardingobjectidadoxioenforcementactionsocialactivity { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioeventsocialactivity.
-        /// </summary>
-        IRegardingobjectidadoxioeventsocialactivity Regardingobjectidadoxioeventsocialactivity { get; }
-
-        /// <summary>
         /// Gets the ISystemforms.
         /// </summary>
         ISystemforms Systemforms { get; }
 
         /// <summary>
-        /// Gets the IAdvocateenforcementactions.
-        /// </summary>
-        IAdvocateenforcementactions Advocateenforcementactions { get; }
-
-        /// <summary>
-        /// Gets the IDelegategmenforcementactions.
-        /// </summary>
-        IDelegategmenforcementactions Delegategmenforcementactions { get; }
-
-        /// <summary>
-        /// Gets the IInspectorenforcementactions.
-        /// </summary>
-        IInspectorenforcementactions Inspectorenforcementactions { get; }
-
-        /// <summary>
-        /// Gets the IRegionalmanagerenforcementactions.
-        /// </summary>
-        IRegionalmanagerenforcementactions Regionalmanagerenforcementactions { get; }
-
-        /// <summary>
-        /// Gets the IRegistrarenforcementactions.
-        /// </summary>
-        IRegistrarenforcementactions Registrarenforcementactions { get; }
-
-        /// <summary>
-        /// Gets the ISystemuseradoxioestablishmentincidentinspector.
-        /// </summary>
-        ISystemuseradoxioestablishmentincidentinspector Systemuseradoxioestablishmentincidentinspector { get; }
-
-        /// <summary>
-        /// Gets the ISystemuseradoxioeventinspector.
-        /// </summary>
-        ISystemuseradoxioeventinspector Systemuseradoxioeventinspector { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioannualvolumecreatedby.
-        /// </summary>
-        ILkadoxioannualvolumecreatedby Lkadoxioannualvolumecreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioannualvolumecreatedonbehalfby.
-        /// </summary>
-        ILkadoxioannualvolumecreatedonbehalfby Lkadoxioannualvolumecreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioannualvolumemodifiedby.
-        /// </summary>
-        ILkadoxioannualvolumemodifiedby Lkadoxioannualvolumemodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioannualvolumemodifiedonbehalfby.
-        /// </summary>
-        ILkadoxioannualvolumemodifiedonbehalfby Lkadoxioannualvolumemodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationcrsbpfv4createdby.
-        /// </summary>
-        ILkadoxioapplicationcrsbpfv4createdby Lkadoxioapplicationcrsbpfv4createdby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationcrsbpfv4createdonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationcrsbpfv4createdonbehalfby Lkadoxioapplicationcrsbpfv4createdonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationcrsbpfv4modifiedby.
-        /// </summary>
-        ILkadoxioapplicationcrsbpfv4modifiedby Lkadoxioapplicationcrsbpfv4modifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationcrsbpfv4modifiedonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationcrsbpfv4modifiedonbehalfby Lkadoxioapplicationcrsbpfv4modifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationlicenseechangesv10createdby.
-        /// </summary>
-        ILkadoxioapplicationlicenseechangesv10createdby Lkadoxioapplicationlicenseechangesv10createdby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationlicenseechangesv10createdonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationlicenseechangesv10createdonbehalfby Lkadoxioapplicationlicenseechangesv10createdonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationlicenseechangesv10modifiedby.
-        /// </summary>
-        ILkadoxioapplicationlicenseechangesv10modifiedby Lkadoxioapplicationlicenseechangesv10modifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationlicenseechangesv10modifiedonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationlicenseechangesv10modifiedonbehalfby Lkadoxioapplicationlicenseechangesv10modifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationliquorbpfcreatedby.
-        /// </summary>
-        ILkadoxioapplicationliquorbpfcreatedby Lkadoxioapplicationliquorbpfcreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationliquorbpfcreatedonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationliquorbpfcreatedonbehalfby Lkadoxioapplicationliquorbpfcreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationliquorbpfmodifiedby.
-        /// </summary>
-        ILkadoxioapplicationliquorbpfmodifiedby Lkadoxioapplicationliquorbpfmodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationliquorbpfmodifiedonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationliquorbpfmodifiedonbehalfby Lkadoxioapplicationliquorbpfmodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationliquorbpfv2createdby.
-        /// </summary>
-        ILkadoxioapplicationliquorbpfv2createdby Lkadoxioapplicationliquorbpfv2createdby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationliquorbpfv2createdonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationliquorbpfv2createdonbehalfby Lkadoxioapplicationliquorbpfv2createdonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationliquorbpfv2modifiedby.
-        /// </summary>
-        ILkadoxioapplicationliquorbpfv2modifiedby Lkadoxioapplicationliquorbpfv2modifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationliquorbpfv2modifiedonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationliquorbpfv2modifiedonbehalfby Lkadoxioapplicationliquorbpfv2modifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationrelocationv1createdby.
-        /// </summary>
-        ILkadoxioapplicationrelocationv1createdby Lkadoxioapplicationrelocationv1createdby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationrelocationv1createdonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationrelocationv1createdonbehalfby Lkadoxioapplicationrelocationv1createdonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationrelocationv1modifiedby.
-        /// </summary>
-        ILkadoxioapplicationrelocationv1modifiedby Lkadoxioapplicationrelocationv1modifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationrelocationv1modifiedonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationrelocationv1modifiedonbehalfby Lkadoxioapplicationrelocationv1modifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationstructurechangev1createdby.
-        /// </summary>
-        ILkadoxioapplicationstructurechangev1createdby Lkadoxioapplicationstructurechangev1createdby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationstructurechangev1createdonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationstructurechangev1createdonbehalfby Lkadoxioapplicationstructurechangev1createdonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationstructurechangev1modifiedby.
-        /// </summary>
-        ILkadoxioapplicationstructurechangev1modifiedby Lkadoxioapplicationstructurechangev1modifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationstructurechangev1modifiedonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationstructurechangev1modifiedonbehalfby Lkadoxioapplicationstructurechangev1modifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationtransferownershipv1createdby.
-        /// </summary>
-        ILkadoxioapplicationtransferownershipv1createdby Lkadoxioapplicationtransferownershipv1createdby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationtransferownershipv1createdonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationtransferownershipv1createdonbehalfby Lkadoxioapplicationtransferownershipv1createdonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationtransferownershipv1modifiedby.
-        /// </summary>
-        ILkadoxioapplicationtransferownershipv1modifiedby Lkadoxioapplicationtransferownershipv1modifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationtransferownershipv1modifiedonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationtransferownershipv1modifiedonbehalfby Lkadoxioapplicationtransferownershipv1modifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationtypefeeschedulecreatedby.
-        /// </summary>
-        ILkadoxioapplicationtypefeeschedulecreatedby Lkadoxioapplicationtypefeeschedulecreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationtypefeeschedulecreatedonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationtypefeeschedulecreatedonbehalfby Lkadoxioapplicationtypefeeschedulecreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationtypefeeschedulemodifiedby.
-        /// </summary>
-        ILkadoxioapplicationtypefeeschedulemodifiedby Lkadoxioapplicationtypefeeschedulemodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationtypefeeschedulemodifiedonbehalfby.
-        /// </summary>
-        ILkadoxioapplicationtypefeeschedulemodifiedonbehalfby Lkadoxioapplicationtypefeeschedulemodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioendorsementcreatedby.
-        /// </summary>
-        ILkadoxioendorsementcreatedby Lkadoxioendorsementcreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioendorsementcreatedonbehalfby.
-        /// </summary>
-        ILkadoxioendorsementcreatedonbehalfby Lkadoxioendorsementcreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioendorsementmodifiedby.
-        /// </summary>
-        ILkadoxioendorsementmodifiedby Lkadoxioendorsementmodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioendorsementmodifiedonbehalfby.
-        /// </summary>
-        ILkadoxioendorsementmodifiedonbehalfby Lkadoxioendorsementmodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioendorsementtypecreatedby.
-        /// </summary>
-        ILkadoxioendorsementtypecreatedby Lkadoxioendorsementtypecreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioendorsementtypecreatedonbehalfby.
-        /// </summary>
-        ILkadoxioendorsementtypecreatedonbehalfby Lkadoxioendorsementtypecreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioendorsementtypemodifiedby.
-        /// </summary>
-        ILkadoxioendorsementtypemodifiedby Lkadoxioendorsementtypemodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioendorsementtypemodifiedonbehalfby.
-        /// </summary>
-        ILkadoxioendorsementtypemodifiedonbehalfby Lkadoxioendorsementtypemodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioenforcementactioncreatedby.
-        /// </summary>
-        ILkadoxioenforcementactioncreatedby Lkadoxioenforcementactioncreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioenforcementactioncreatedonbehalfby.
-        /// </summary>
-        ILkadoxioenforcementactioncreatedonbehalfby Lkadoxioenforcementactioncreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioenforcementactionmodifiedby.
-        /// </summary>
-        ILkadoxioenforcementactionmodifiedby Lkadoxioenforcementactionmodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioenforcementactionmodifiedonbehalfby.
-        /// </summary>
-        ILkadoxioenforcementactionmodifiedonbehalfby Lkadoxioenforcementactionmodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioenforcementactionbpfcreatedby.
-        /// </summary>
-        ILkadoxioenforcementactionbpfcreatedby Lkadoxioenforcementactionbpfcreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioenforcementactionbpfcreatedonbehalfby.
-        /// </summary>
-        ILkadoxioenforcementactionbpfcreatedonbehalfby Lkadoxioenforcementactionbpfcreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioenforcementactionbpfmodifiedby.
-        /// </summary>
-        ILkadoxioenforcementactionbpfmodifiedby Lkadoxioenforcementactionbpfmodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioenforcementactionbpfmodifiedonbehalfby.
-        /// </summary>
-        ILkadoxioenforcementactionbpfmodifiedonbehalfby Lkadoxioenforcementactionbpfmodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioestablishmentincidentcreatedby.
-        /// </summary>
-        ILkadoxioestablishmentincidentcreatedby Lkadoxioestablishmentincidentcreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioestablishmentincidentcreatedonbehalfby.
-        /// </summary>
-        ILkadoxioestablishmentincidentcreatedonbehalfby Lkadoxioestablishmentincidentcreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioestablishmentincidentmodifiedby.
-        /// </summary>
-        ILkadoxioestablishmentincidentmodifiedby Lkadoxioestablishmentincidentmodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioestablishmentincidentmodifiedonbehalfby.
-        /// </summary>
-        ILkadoxioestablishmentincidentmodifiedonbehalfby Lkadoxioestablishmentincidentmodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioeventcreatedby.
-        /// </summary>
-        ILkadoxioeventcreatedby Lkadoxioeventcreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioeventcreatedonbehalfby.
-        /// </summary>
-        ILkadoxioeventcreatedonbehalfby Lkadoxioeventcreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioeventmodifiedby.
-        /// </summary>
-        ILkadoxioeventmodifiedby Lkadoxioeventmodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioeventmodifiedonbehalfby.
-        /// </summary>
-        ILkadoxioeventmodifiedonbehalfby Lkadoxioeventmodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioeventschedulecreatedby.
-        /// </summary>
-        ILkadoxioeventschedulecreatedby Lkadoxioeventschedulecreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioeventschedulecreatedonbehalfby.
-        /// </summary>
-        ILkadoxioeventschedulecreatedonbehalfby Lkadoxioeventschedulecreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioeventschedulemodifiedby.
-        /// </summary>
-        ILkadoxioeventschedulemodifiedby Lkadoxioeventschedulemodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioeventschedulemodifiedonbehalfby.
-        /// </summary>
-        ILkadoxioeventschedulemodifiedonbehalfby Lkadoxioeventschedulemodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioexhibitcreatedby.
-        /// </summary>
-        ILkadoxioexhibitcreatedby Lkadoxioexhibitcreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioexhibitcreatedonbehalfby.
-        /// </summary>
-        ILkadoxioexhibitcreatedonbehalfby Lkadoxioexhibitcreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioexhibitmodifiedby.
-        /// </summary>
-        ILkadoxioexhibitmodifiedby Lkadoxioexhibitmodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioexhibitmodifiedonbehalfby.
-        /// </summary>
-        ILkadoxioexhibitmodifiedonbehalfby Lkadoxioexhibitmodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxiofederalreportexportcreatedby.
-        /// </summary>
-        ILkadoxiofederalreportexportcreatedby Lkadoxiofederalreportexportcreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxiofederalreportexportcreatedonbehalfby.
-        /// </summary>
-        ILkadoxiofederalreportexportcreatedonbehalfby Lkadoxiofederalreportexportcreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxiofederalreportexportmodifiedby.
-        /// </summary>
-        ILkadoxiofederalreportexportmodifiedby Lkadoxiofederalreportexportmodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxiofederalreportexportmodifiedonbehalfby.
-        /// </summary>
-        ILkadoxiofederalreportexportmodifiedonbehalfby Lkadoxiofederalreportexportmodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioformelementuploadfieldcreatedby.
-        /// </summary>
-        ILkadoxioformelementuploadfieldcreatedby Lkadoxioformelementuploadfieldcreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioformelementuploadfieldcreatedonbehalfby.
-        /// </summary>
-        ILkadoxioformelementuploadfieldcreatedonbehalfby Lkadoxioformelementuploadfieldcreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioformelementuploadfieldmodifiedby.
-        /// </summary>
-        ILkadoxioformelementuploadfieldmodifiedby Lkadoxioformelementuploadfieldmodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioformelementuploadfieldmodifiedonbehalfby.
-        /// </summary>
-        ILkadoxioformelementuploadfieldmodifiedonbehalfby Lkadoxioformelementuploadfieldmodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioldbordercreatedby.
-        /// </summary>
-        ILkadoxioldbordercreatedby Lkadoxioldbordercreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioldbordercreatedonbehalfby.
-        /// </summary>
-        ILkadoxioldbordercreatedonbehalfby Lkadoxioldbordercreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioldbordermodifiedby.
-        /// </summary>
-        ILkadoxioldbordermodifiedby Lkadoxioldbordermodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioldbordermodifiedonbehalfby.
-        /// </summary>
-        ILkadoxioldbordermodifiedonbehalfby Lkadoxioldbordermodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxiolicenceldbordertotalhistorycreatedby.
-        /// </summary>
-        ILkadoxiolicenceldbordertotalhistorycreatedby Lkadoxiolicenceldbordertotalhistorycreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxiolicenceldbordertotalhistorycreatedonbehalfby.
-        /// </summary>
-        ILkadoxiolicenceldbordertotalhistorycreatedonbehalfby Lkadoxiolicenceldbordertotalhistorycreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxiolicenceldbordertotalhistorymodifiedby.
-        /// </summary>
-        ILkadoxiolicenceldbordertotalhistorymodifiedby Lkadoxiolicenceldbordertotalhistorymodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxiolicenceldbordertotalhistorymodifiedonbehalfby.
-        /// </summary>
-        ILkadoxiolicenceldbordertotalhistorymodifiedonbehalfby Lkadoxiolicenceldbordertotalhistorymodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxiormreviewcreatedby.
-        /// </summary>
-        ILkadoxiormreviewcreatedby Lkadoxiormreviewcreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxiormreviewcreatedonbehalfby.
-        /// </summary>
-        ILkadoxiormreviewcreatedonbehalfby Lkadoxiormreviewcreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxiormreviewmodifiedby.
-        /// </summary>
-        ILkadoxiormreviewmodifiedby Lkadoxiormreviewmodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxiormreviewmodifiedonbehalfby.
-        /// </summary>
-        ILkadoxiormreviewmodifiedonbehalfby Lkadoxiormreviewmodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioserviceareacreatedby.
-        /// </summary>
-        ILkadoxioserviceareacreatedby Lkadoxioserviceareacreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioserviceareacreatedonbehalfby.
-        /// </summary>
-        ILkadoxioserviceareacreatedonbehalfby Lkadoxioserviceareacreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioserviceareamodifiedby.
-        /// </summary>
-        ILkadoxioserviceareamodifiedby Lkadoxioserviceareamodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioserviceareamodifiedonbehalfby.
-        /// </summary>
-        ILkadoxioserviceareamodifiedonbehalfby Lkadoxioserviceareamodifiedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxioannualvolume.
-        /// </summary>
-        IUseradoxioannualvolume Useradoxioannualvolume { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxioapplicationtypefeeschedule.
-        /// </summary>
-        IUseradoxioapplicationtypefeeschedule Useradoxioapplicationtypefeeschedule { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxioendorsement.
-        /// </summary>
-        IUseradoxioendorsement Useradoxioendorsement { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxioendorsementtype.
-        /// </summary>
-        IUseradoxioendorsementtype Useradoxioendorsementtype { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxioenforcementaction.
-        /// </summary>
-        IUseradoxioenforcementaction Useradoxioenforcementaction { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxioestablishmentincident.
-        /// </summary>
-        IUseradoxioestablishmentincident Useradoxioestablishmentincident { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxioevent.
-        /// </summary>
-        IUseradoxioevent Useradoxioevent { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxioeventschedule.
-        /// </summary>
-        IUseradoxioeventschedule Useradoxioeventschedule { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxioexhibit.
-        /// </summary>
-        IUseradoxioexhibit Useradoxioexhibit { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxiofederalreportexport.
-        /// </summary>
-        IUseradoxiofederalreportexport Useradoxiofederalreportexport { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxioformelementuploadfield.
-        /// </summary>
-        IUseradoxioformelementuploadfield Useradoxioformelementuploadfield { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxioldborder.
-        /// </summary>
-        IUseradoxioldborder Useradoxioldborder { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxiolicenceldbordertotalhistory.
-        /// </summary>
-        IUseradoxiolicenceldbordertotalhistory Useradoxiolicenceldbordertotalhistory { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxiormreview.
-        /// </summary>
-        IUseradoxiormreview Useradoxiormreview { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxioservicearea.
-        /// </summary>
-        IUseradoxioservicearea Useradoxioservicearea { get; }
-
-        /// <summary>
-        /// Gets the IContacttask.
-        /// </summary>
-        IContacttask Contacttask { get; }
-
-        /// <summary>
-        /// Gets the ILegalentitytask.
-        /// </summary>
-        ILegalentitytask Legalentitytask { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioenforcementactiontask.
-        /// </summary>
-        IRegardingobjectidadoxioenforcementactiontask Regardingobjectidadoxioenforcementactiontask { get; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioeventtask.
-        /// </summary>
-        IRegardingobjectidadoxioeventtask Regardingobjectidadoxioeventtask { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioannualvolume.
-        /// </summary>
-        ITeamadoxioannualvolume Teamadoxioannualvolume { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioapplicationtypefeeschedule.
-        /// </summary>
-        ITeamadoxioapplicationtypefeeschedule Teamadoxioapplicationtypefeeschedule { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioendorsement.
-        /// </summary>
-        ITeamadoxioendorsement Teamadoxioendorsement { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioendorsementtype.
-        /// </summary>
-        ITeamadoxioendorsementtype Teamadoxioendorsementtype { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioenforcementaction.
-        /// </summary>
-        ITeamadoxioenforcementaction Teamadoxioenforcementaction { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioestablishmentincident.
-        /// </summary>
-        ITeamadoxioestablishmentincident Teamadoxioestablishmentincident { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioevent.
-        /// </summary>
-        ITeamadoxioevent Teamadoxioevent { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioeventschedule.
-        /// </summary>
-        ITeamadoxioeventschedule Teamadoxioeventschedule { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioexhibit.
-        /// </summary>
-        ITeamadoxioexhibit Teamadoxioexhibit { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxiofederalreportexport.
-        /// </summary>
-        ITeamadoxiofederalreportexport Teamadoxiofederalreportexport { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioformelementuploadfield.
-        /// </summary>
-        ITeamadoxioformelementuploadfield Teamadoxioformelementuploadfield { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioldborder.
-        /// </summary>
-        ITeamadoxioldborder Teamadoxioldborder { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxiolicenceldbordertotalhistory.
-        /// </summary>
-        ITeamadoxiolicenceldbordertotalhistory Teamadoxiolicenceldbordertotalhistory { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxiormreview.
-        /// </summary>
-        ITeamadoxiormreview Teamadoxiormreview { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioservicearea.
-        /// </summary>
-        ITeamadoxioservicearea Teamadoxioservicearea { get; }
-
-        /// <summary>
-        /// Gets the IAsyncoperationidadoxioapplicationcrsbpfv4.
-        /// </summary>
-        IAsyncoperationidadoxioapplicationcrsbpfv4 Asyncoperationidadoxioapplicationcrsbpfv4 { get; }
-
-        /// <summary>
-        /// Gets the IAsyncoperationidadoxioapplicationlicenseechangesv10.
-        /// </summary>
-        IAsyncoperationidadoxioapplicationlicenseechangesv10 Asyncoperationidadoxioapplicationlicenseechangesv10 { get; }
-
-        /// <summary>
-        /// Gets the IAsyncoperationidadoxioapplicationliquorbpf.
-        /// </summary>
-        IAsyncoperationidadoxioapplicationliquorbpf Asyncoperationidadoxioapplicationliquorbpf { get; }
-
-        /// <summary>
-        /// Gets the IAsyncoperationidadoxioapplicationliquorbpfv2.
-        /// </summary>
-        IAsyncoperationidadoxioapplicationliquorbpfv2 Asyncoperationidadoxioapplicationliquorbpfv2 { get; }
-
-        /// <summary>
-        /// Gets the IAsyncoperationidadoxioapplicationrelocationv1.
-        /// </summary>
-        IAsyncoperationidadoxioapplicationrelocationv1 Asyncoperationidadoxioapplicationrelocationv1 { get; }
-
-        /// <summary>
-        /// Gets the IAsyncoperationidadoxioapplicationstructurechangev1.
-        /// </summary>
-        IAsyncoperationidadoxioapplicationstructurechangev1 Asyncoperationidadoxioapplicationstructurechangev1 { get; }
-
-        /// <summary>
-        /// Gets the IAsyncoperationidadoxioapplicationtransferownershipv1.
-        /// </summary>
-        IAsyncoperationidadoxioapplicationtransferownershipv1 Asyncoperationidadoxioapplicationtransferownershipv1 { get; }
-
-        /// <summary>
-        /// Gets the IAsyncoperationidadoxioenforcementactionbpf.
-        /// </summary>
-        IAsyncoperationidadoxioenforcementactionbpf Asyncoperationidadoxioenforcementactionbpf { get; }
-
-        /// <summary>
         /// Gets the IWorkflows.
         /// </summary>
         IWorkflows Workflows { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationcrsbpfv4processid.
-        /// </summary>
-        ILkadoxioapplicationcrsbpfv4processid Lkadoxioapplicationcrsbpfv4processid { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationlicenseechangesv10processid.
-        /// </summary>
-        ILkadoxioapplicationlicenseechangesv10processid Lkadoxioapplicationlicenseechangesv10processid { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationliquorbpfprocessid.
-        /// </summary>
-        ILkadoxioapplicationliquorbpfprocessid Lkadoxioapplicationliquorbpfprocessid { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationliquorbpfv2processid.
-        /// </summary>
-        ILkadoxioapplicationliquorbpfv2processid Lkadoxioapplicationliquorbpfv2processid { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationrelocationv1processid.
-        /// </summary>
-        ILkadoxioapplicationrelocationv1processid Lkadoxioapplicationrelocationv1processid { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationstructurechangev1processid.
-        /// </summary>
-        ILkadoxioapplicationstructurechangev1processid Lkadoxioapplicationstructurechangev1processid { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioapplicationtransferownershipv1processid.
-        /// </summary>
-        ILkadoxioapplicationtransferownershipv1processid Lkadoxioapplicationtransferownershipv1processid { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioenforcementactionbpfprocessid.
-        /// </summary>
-        ILkadoxioenforcementactionbpfprocessid Lkadoxioenforcementactionbpfprocessid { get; }
 
     }
 }
