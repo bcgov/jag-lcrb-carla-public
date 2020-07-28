@@ -21,8 +21,9 @@ import { BaseControlValueAccessor } from './BaseControlValueAccessor';
     }
   ]
 })
-export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea[]> {
+export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea[]> implements OnInit {
     @Input() areaCategory: number;
+    @Input() applicationTypeName: string;
     total: number;
 
     formGroup: FormGroup;
@@ -42,9 +43,18 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
             this.onChange(val);
             this.value = val.areas;
         });
+        
+    }
+
+    ngOnInit() {
+        if (this.isCapacityArea()) {
+            this.addRow();
+        }
     }
 
     writeValue(serviceAreas: ServiceArea[]) {
+        console.log('writing valu')
+        console.log(serviceAreas);
         if (serviceAreas) {
             super.writeValue(serviceAreas);
 
@@ -73,10 +83,11 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
     }
 
     addRow() {
+        console.log('adding row');
         this.writeValue([...this.areasArr.value, {
             areaCategory: this.areaCategory,
             areaNumber: this.areasArr.controls.length + 1,
-            areaLocation: '',
+            areaLocation: this.areaCategory !== AreaCategory.Capacity ? '' : this.applicationTypeName,
             capacity: '',
             isIndoor: this.areaCategory === AreaCategory.Service,
             isOutdoor: this.areaCategory === AreaCategory.OutsideArea,
@@ -100,7 +111,9 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
 
     validate({ value }: FormControl) {
         let isValid = true;
+        console.log('validating')
         this.areasArr.controls.forEach((row, index) => {
+            console.log(row);
             if (row.invalid) {
                 isValid = false;
             }
@@ -116,5 +129,9 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
 
     isOutsideArea(): boolean {
         return this.areaCategory === AreaCategory.OutsideArea;
+    }
+
+    isCapacityArea(): boolean {
+        return this.areaCategory === AreaCategory.Capacity;
     }
 }
