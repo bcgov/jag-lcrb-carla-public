@@ -102,7 +102,6 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
     validate({ value }: FormControl) {
         let isValid = true;
         this.areasArr.controls.forEach((row, index) => {
-            console.log(row);
             if (row.invalid) {
                 isValid = false;
             }
