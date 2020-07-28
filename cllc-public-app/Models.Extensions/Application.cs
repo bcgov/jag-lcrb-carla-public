@@ -151,8 +151,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             // Manufacturing fields
 
             to.AdoxioIspackaging = from.IsPackaging;
-            to.AdoxioMfgpipedinproduct = from.MfgPipedInProduct;
-            to.AdoxioMfgbrewpubonsite = from.MfgBrewPubOnSite;
+            to.AdoxioMfgpipedinproduct = (int?) from.MfgPipedInProduct;
+            to.AdoxioMfgbrewpubonsite = (int?) from.MfgBrewPubOnSite;
             to.AdoxioMfgacresoffruit = from.MfgAcresOfFruit;
             to.AdoxioMfgacresofgrapes = from.MfgAcresOfGrapes;
             to.AdoxioMfgacresofhoney = from.MfgAcresOfHoney;
@@ -175,7 +175,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioLocatedabovedescription = (int?) from.LocatedAboveDescription;
             to.AdoxioPatioservicebar = from.PatioServiceBar;
 
-
+            to.AdoxioLicencesubcategory = (int?)from.LicenceSubCategory;
 
             // comment out this next line as it is causing all application updates to fail (moved to controller)
             //to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
@@ -437,8 +437,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 // Manufacturing fields
 
                 IsPackaging = dynamicsApplication.AdoxioIspackaging,
-                MfgPipedInProduct = dynamicsApplication.AdoxioMfgpipedinproduct,
-                MfgBrewPubOnSite = dynamicsApplication.AdoxioMfgbrewpubonsite,
+                MfgPipedInProduct = (YesNoNotApplicable?) dynamicsApplication.AdoxioMfgpipedinproduct,
+                MfgBrewPubOnSite = (YesNoNotApplicable?) dynamicsApplication.AdoxioMfgbrewpubonsite,
+                //MfgNeutralGrainSpirits = (YesNoNotApplicable) dynamicsApplication.adoxiomfg
                 MfgAcresOfFruit = dynamicsApplication.AdoxioMfgacresoffruit,
                 MfgAcresOfGrapes = dynamicsApplication.AdoxioMfgacresofgrapes,
                 MfgAcresOfHoney = dynamicsApplication.AdoxioMfgacresofhoney,
@@ -447,8 +448,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 MfgStepCrushing = dynamicsApplication.AdoxioMfgstepcrushing,
                 MfgStepFiltering = dynamicsApplication.AdoxioMfgstepfiltering,
                 MfgStepSecFermOrCarb = dynamicsApplication.AdoxioMfgstepsecfermorcarb,
+                
 
-                PidList = dynamicsApplication.AdoxioPidlist,
+            PidList = dynamicsApplication.AdoxioPidlist,
                 
                 // Manufacturing structural change fields
 
@@ -459,6 +461,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 PatioLiquorCarriedDescription = dynamicsApplication.AdoxioPatioliquorcarrieddescription,
                 PatioAccessControlDescription = dynamicsApplication.AdoxioPatioaccesscontroldescription
         };
+
+            if (dynamicsApplication.AdoxioLicencesubcategory != null)
+            {
+                applicationVM.LicenceSubCategory = (LicenceSubCategory)dynamicsApplication.AdoxioLicencesubcategory; 
+            }
 
             if (dynamicsApplication.AdoxioLocatedabovedescription != null)
             {

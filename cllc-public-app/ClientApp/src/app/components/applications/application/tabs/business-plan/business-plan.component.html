@@ -1,18 +1,20 @@
-    <h3 class="blue-header">Manufacturer Business Plan</h3>
-    <div class="content-bottom" [formGroup]="form">
-      <p>Please select the type of application you are submitting:</p>
-      <app-field [showChevrons]="false" errorMessage="Please select a licence type" [isFullWidth]="true">
-        <mat-radio-group formControlName="mfgType">
-          <mat-radio-button class="mr-5" value="Winery">Winery</mat-radio-button>
-          <mat-radio-button class="mr-5" value="Distillery">Distillery</mat-radio-button>
-          <mat-radio-button class="mr-5" value="Brewery">Brewery</mat-radio-button>
-          <mat-radio-button class="mr-5" value="Co-packer">Co-packer</mat-radio-button>
-        </mat-radio-group>
-      </app-field>
+    
+  <h3 class="blue-header">Manufacturer Business Plan</h3>
+  <div class="content-bottom" [formGroup]="form">
+  
+    <p>Please select the type of application you are submitting:</p>
+    <app-field [showChevrons]="false" errorMessage="Please select a licence type" [isFullWidth]="true">
+      <mat-radio-group formControlName="licenceSubCategory">
+        <mat-radio-button class="mr-5" [value]="'Winery'">Winery</mat-radio-button>
+        <mat-radio-button class="mr-5" [value]="'Distillery'">Distillery</mat-radio-button>
+        <mat-radio-button class="mr-5" [value]="'Brewery'">Brewery</mat-radio-button>
+        <mat-radio-button class="mr-5" [value]="'Co-packer'">Co-packer</mat-radio-button>
+      </mat-radio-group>
+    </app-field>
 
-      <div *ngIf="!hasType()">
-        <p>In order to complete your business plan, you must select a type of manufacturer licence.</p>
-      </div>
+    <div *ngIf="!hasType()">
+      <p>In order to complete your business plan, you must select a type of manufacturer licence.</p>
+    </div>
 
       <div *ngIf="hasType()">
         <p>Your application must include a business plan that describes your proposed operations, including:</p>
@@ -76,8 +78,6 @@
             [uploadHeader]="'TO UPLOAD FINANCIAL STATEMENTS, DRAG FILES HERE OR'">
           </app-file-uploader>
         </section>
-        <hr>
-
         
         <hr>
         <h4>Production and Sales Forecasts</h4>
@@ -135,18 +135,7 @@
           carbonation, and
           packaging.</p>
         <section>
-          <app-field label="Identify which production stages will be taking place at your manufacturing site:">
-            <table><tr>
-              <td>
-            <mat-checkbox [disabled]="true" [checked]="true">Fermenting (mandatory)</mat-checkbox><br>
-            <mat-checkbox>Blending</mat-checkbox></td><td>
-            <mat-checkbox>Crushing</mat-checkbox><br>
-            <mat-checkbox>Filtering</mat-checkbox></td><td>
-            <mat-checkbox>Aging, for at least 3 months</mat-checkbox><br>
-            <mat-checkbox>Secondary fermentation or carbonation</mat-checkbox></td><td>
-            <mat-checkbox>Packaging</mat-checkbox></td>
-            </tr></table>
-          </app-field>  
+          <app-production-stages [application]=application></app-production-stages>  
         </section>
       </section>
         <section>
@@ -159,22 +148,8 @@
               </mat-radio-group>
               </app-field>
         </section>
+      </div>
 
-        <hr>
-        <h4>Manufacturing Equipment</h4>
-        <p>Upload a list of all manufacturing equipment including equipment costs (to be eligible for a licence,
-          you must
-          demonstrate that
-          you own or lease the equipment necessary to manufacture on-site, and you must continue to maintain that
-          equipment to renew your licence).:</p>
-        <section>
-          <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Manufacturer Equipment"
-            [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
-            [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
-            [useDocumentTypeForName]="true" [entityId]="application?.id"
-            [uploadHeader]="'TO UPLOAD MANUFACTURING EQUIPMENT LIST, DRAG FILES HERE OR'">
-          </app-file-uploader>
-        </section>
 
 
         <div *ngIf="isBrewery()">
@@ -182,9 +157,9 @@
           <!-- Brewery Question-->
         
           <app-field label="Will your brewery operate in conjunction with a liquor primary (brewpub) at the same site?"
-            [valid]="isValidOrNotTouched('brewPub')" [showChevrons]="false"
-            errorMessage="Specify whether you will be useing neutral grain spirits" [isFullWidth]="true">
-            <mat-radio-group formControlName="brewPub">
+            [valid]="isValidOrNotTouched('mfgBrewPubOnSite')" [showChevrons]="false"
+            errorMessage="Specify whether you will be operating in conjunction with a brewpub" [isFullWidth]="true">
+            <mat-radio-group formControlName="mfgBrewPubOnSite">
               <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
               <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
             </mat-radio-group>
@@ -194,15 +169,15 @@
           <section *ngIf="isBrewPub()">
         
             <app-field label="Will product be piped in from the brewery to serve on tap?"
-              [valid]="isValidOrNotTouched('pipedIn')" [showChevrons]="false"
-              errorMessage="Specify whether you will be useing neutral grain spirits" [isFullWidth]="true">
-              <mat-radio-group formControlName="pipedIn">
+              [valid]="isValidOrNotTouched('mfgPipedInProduct')" [showChevrons]="false"
+              errorMessage="Specify whether you will be using piped in products" [isFullWidth]="true">
+              <mat-radio-group formControlName="mfgPipedInProduct">
                 <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
                 <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
               </mat-radio-group>
             </app-field>
         
-            <p>Upload a document that describes a sample of the brew sheets you intend to use in your
+            <p>Upload a sample of the brew sheets you intend to use in your
               production:</p>
             <section>
               <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Sample Brew Sheet"
@@ -213,20 +188,7 @@
               </app-file-uploader>
             </section>
           </section>
-        </div>
-        <div *ngIf="isBrewery() || isWinery()">
-          <hr>
-          <h4>Business Insurance</h4>
-          <p>Upload your business insurance certificate:</p>
-          <section>
-            <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Business Insurance Certificate"
-              [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-              fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-              [useDocumentTypeForName]="true" [entityId]="application?.id" 
-              [uploadHeader]="'TO UPLOAD BUSINESS INSURANCE CERTIFICATE, DRAG FILES HERE OR'">
-            </app-file-uploader>
-          </section>
-        </div>
+   
         <div *ngIf="isDistillery()">
           <hr>
           <h4>Distribution Plan</h4>
@@ -241,8 +203,22 @@
           </section>
         </div>
 
+        <div *ngIf="isBrewery() || isWinery()">
+          <hr>
+          <h4>Business Insurance</h4>
+          <p>Upload your business insurance certificate:</p>
+          <section>
+            <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Business Insurance Certificate"
+                               [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
+                               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                               [useDocumentTypeForName]="true" [entityId]="application?.id"
+                               [uploadHeader]="'TO UPLOAD BUSINESS INSURANCE CERTIFICATE, DRAG FILES HERE OR'">
+            </app-file-uploader>
+          </section>
+        </div>
+
         <!-- TO DO wineries questions-->
 
-      </div>
     </div>
+  </div>
 
