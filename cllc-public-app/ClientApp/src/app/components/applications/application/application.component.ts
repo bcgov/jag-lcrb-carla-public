@@ -204,7 +204,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       meetsALRRequirements: ['', []],
       IsReadyProductNotVisibleOutside: ['', []],
       serviceAreas: ['', []],
-      outsideAreas: ['', []]
+      outsideAreas: ['', []],
+      capacityArea: ['', []]
     });
 
     this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
@@ -1034,7 +1035,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         return AreaCategory.OutsideArea;
       case 'Service':
         return AreaCategory.Service;
-      case 'Capactiy':
+      case 'Capacity':
         return AreaCategory.Capacity;
     }
   }
