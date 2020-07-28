@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
     {
         private readonly HttpClient Client;
         public readonly string ORGBOOK_BASE_URL;
-        public readonly string ORGBOOK_API_REGISTRATION_ENDPOINT = "/api/v2/topic/ident/registration/";
+        public readonly string ORGBOOK_API_REGISTRATION_ENDPOINT = "/api/v2/topic/ident/registration.registries.ca/";
         public readonly string ORGBOOK_API_SCHEMA_ENDPOINT = "/api/v2/schema";
         public readonly string ORGBOOK_API_CREDENTIAL_ENDPOINT = "/api/v2/search/credential/topic";
         public readonly string ORGBOOK_API_AUTOCOMPLETE_ENDPOINT = "/api/v2/search/autocomplete";

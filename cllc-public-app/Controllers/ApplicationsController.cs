@@ -732,6 +732,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // copy received values to Dynamics Application
             adoxioApplication.CopyValues(item);
             adoxioApplication.AdoxioApplicanttype = (int?)item.ApplicantType;
+
+            // fix for an invalid licence sub category
+            if (adoxioApplication.AdoxioLicencesubcategory == 0)
+            {
+                adoxioApplication.AdoxioLicencesubcategory = null;
+            }
+
             try
             {
                 // set license type relationship 
@@ -1031,6 +1038,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
                 {
                     AddServiceAreasToApplication(item.OutsideAreas, item.Id);
+                }
+                // fix for an invalid licence sub category
+                if (adoxioApplication.AdoxioLicencesubcategory == 0)
+                {
+                    adoxioApplication.AdoxioLicencesubcategory = null;
                 }
 
                 _dynamicsClient.Applications.Update(id, adoxioApplication);
