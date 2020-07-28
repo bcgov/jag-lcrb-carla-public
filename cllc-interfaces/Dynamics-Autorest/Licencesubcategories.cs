@@ -19,12 +19,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Eventschedules operations.
+    /// Licencesubcategories operations.
     /// </summary>
-    public partial class Eventschedules : IServiceOperations<DynamicsClient>, IEventschedules
+    public partial class Licencesubcategories : IServiceOperations<DynamicsClient>, ILicencesubcategories
     {
         /// <summary>
-        /// Initializes a new instance of the Eventschedules class.
+        /// Initializes a new instance of the Licencesubcategories class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public Eventschedules(DynamicsClient client)
+        public Licencesubcategories(DynamicsClient client)
         {
             if (client == null)
             {
@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public DynamicsClient Client { get; private set; }
 
         /// <summary>
-        /// Get entities from adoxio_eventschedules
+        /// Get entities from adoxio_licencesubcategories
         /// </summary>
         /// <param name='top'>
         /// </param>
@@ -83,7 +83,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEventscheduleCollection>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencesubcategoryCollection>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -105,7 +105,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_eventschedules").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_licencesubcategories").ToString();
             List<string> _queryParameters = new List<string>();
             if (top != null)
             {
@@ -208,7 +208,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioEventscheduleCollection>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencesubcategoryCollection>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -217,7 +217,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioEventscheduleCollection>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioLicencesubcategoryCollection>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -237,7 +237,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Add new entity to adoxio_eventschedules
+        /// Add new entity to adoxio_licencesubcategories
         /// </summary>
         /// <param name='body'>
         /// New entity
@@ -267,7 +267,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEventschedule>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioEventschedule body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencesubcategory>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioLicencesubcategory body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (body == null)
             {
@@ -287,7 +287,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_eventschedules").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_licencesubcategories").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -367,7 +367,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioEventschedule>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencesubcategory>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -376,7 +376,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioEventschedule>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioLicencesubcategory>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -396,10 +396,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Get entity from adoxio_eventschedules by key
+        /// Get entity from adoxio_licencesubcategories by key
         /// </summary>
-        /// <param name='adoxioEventscheduleid'>
-        /// key: adoxio_eventscheduleid of adoxio_eventschedule
+        /// <param name='adoxioLicencesubcategoryid'>
+        /// key: adoxio_licencesubcategoryid of adoxio_licencesubcategory
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -428,11 +428,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEventschedule>> GetByKeyWithHttpMessagesAsync(string adoxioEventscheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencesubcategory>> GetByKeyWithHttpMessagesAsync(string adoxioLicencesubcategoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioEventscheduleid == null)
+            if (adoxioLicencesubcategoryid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioEventscheduleid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioLicencesubcategoryid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -441,7 +441,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioEventscheduleid", adoxioEventscheduleid);
+                tracingParameters.Add("adoxioLicencesubcategoryid", adoxioLicencesubcategoryid);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
@@ -449,8 +449,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_eventschedules({adoxio_eventscheduleid})").ToString();
-            _url = _url.Replace("{adoxio_eventscheduleid}", System.Uri.EscapeDataString(adoxioEventscheduleid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_licencesubcategories({adoxio_licencesubcategoryid})").ToString();
+            _url = _url.Replace("{adoxio_licencesubcategoryid}", System.Uri.EscapeDataString(adoxioLicencesubcategoryid));
             List<string> _queryParameters = new List<string>();
             if (select != null)
             {
@@ -529,7 +529,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioEventschedule>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencesubcategory>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -538,7 +538,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioEventschedule>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioLicencesubcategory>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -558,10 +558,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Update entity in adoxio_eventschedules
+        /// Update entity in adoxio_licencesubcategories
         /// </summary>
-        /// <param name='adoxioEventscheduleid'>
-        /// key: adoxio_eventscheduleid of adoxio_eventschedule
+        /// <param name='adoxioLicencesubcategoryid'>
+        /// key: adoxio_licencesubcategoryid of adoxio_licencesubcategory
         /// </param>
         /// <param name='body'>
         /// New property values
@@ -584,11 +584,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioEventscheduleid, MicrosoftDynamicsCRMadoxioEventschedule body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioLicencesubcategoryid, MicrosoftDynamicsCRMadoxioLicencesubcategory body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioEventscheduleid == null)
+            if (adoxioLicencesubcategoryid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioEventscheduleid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioLicencesubcategoryid");
             }
             if (body == null)
             {
@@ -601,15 +601,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioEventscheduleid", adoxioEventscheduleid);
+                tracingParameters.Add("adoxioLicencesubcategoryid", adoxioLicencesubcategoryid);
                 tracingParameters.Add("body", body);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Update", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_eventschedules({adoxio_eventscheduleid})").ToString();
-            _url = _url.Replace("{adoxio_eventscheduleid}", System.Uri.EscapeDataString(adoxioEventscheduleid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_licencesubcategories({adoxio_licencesubcategoryid})").ToString();
+            _url = _url.Replace("{adoxio_licencesubcategoryid}", System.Uri.EscapeDataString(adoxioLicencesubcategoryid));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -692,10 +692,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Delete entity from adoxio_eventschedules
+        /// Delete entity from adoxio_licencesubcategories
         /// </summary>
-        /// <param name='adoxioEventscheduleid'>
-        /// key: adoxio_eventscheduleid of adoxio_eventschedule
+        /// <param name='adoxioLicencesubcategoryid'>
+        /// key: adoxio_licencesubcategoryid of adoxio_licencesubcategory
         /// </param>
         /// <param name='ifMatch'>
         /// ETag
@@ -718,11 +718,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioEventscheduleid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioLicencesubcategoryid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioEventscheduleid == null)
+            if (adoxioLicencesubcategoryid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioEventscheduleid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioLicencesubcategoryid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -731,15 +731,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioEventscheduleid", adoxioEventscheduleid);
+                tracingParameters.Add("adoxioLicencesubcategoryid", adoxioLicencesubcategoryid);
                 tracingParameters.Add("ifMatch", ifMatch);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Delete", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_eventschedules({adoxio_eventscheduleid})").ToString();
-            _url = _url.Replace("{adoxio_eventscheduleid}", System.Uri.EscapeDataString(adoxioEventscheduleid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_licencesubcategories({adoxio_licencesubcategoryid})").ToString();
+            _url = _url.Replace("{adoxio_licencesubcategoryid}", System.Uri.EscapeDataString(adoxioLicencesubcategoryid));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
