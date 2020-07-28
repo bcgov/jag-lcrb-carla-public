@@ -8,12 +8,12 @@ import { ServiceArea, AreaCategory } from '@models/service-area.model';
   styleUrls: ['./capacity-table-row.component.scss'],
   template: `
     <ng-container [formGroup]="rowGroup">
-        <td *ngIf="!isCapacityArea()"><input type="text" formControlName="areaNumber" /></td>
-        <td *ngIf="!isCapacityArea()"><input type="text" formControlName="areaLocation" placeholder="Enter Area Description" /></td>
-        <td *ngIf="isService() && !isCapacityArea()"><mat-checkbox formControlName="isIndoor"></mat-checkbox></td>
-        <td *ngIf="isService() && !isCapacityArea()"><mat-checkbox formControlName="isPatio"></mat-checkbox></td>
+        <td><input type="text" formControlName="areaNumber" /></td>
+        <td><input type="text" formControlName="areaLocation" placeholder="Enter Area Description" /></td>
+        <td *ngIf="isService()"><mat-checkbox formControlName="isIndoor"></mat-checkbox></td>
+        <td *ngIf="isService()"><mat-checkbox formControlName="isPatio"></mat-checkbox></td>
         <td><input type="text" formControlName="capacity" placeholder="Enter Occupant Load" mask="0*" /></td>
-        <td *ngIf="!isCapacityArea()"><button (click)="removeRow()" class="btn-clear"><i class="fas fa-trash-alt"></i></button></td>
+        <td><button (click)="removeRow()" class="btn-clear"><i class="fas fa-trash-alt"></i></button></td>
     </ng-container>
   `,
   styles: [``],
@@ -61,8 +61,6 @@ export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceA
   }
 
   writeValue(val: object) {
-    console.log('writing val from row');
-    console.log(val);
     this.rowGroup.patchValue(val);
   }
 
@@ -87,9 +85,5 @@ export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceA
 
   isService(): boolean {
     return this.areaCategory === AreaCategory.Service;
-  }
-  
-  isCapacityArea(): boolean {
-    return this.areaCategory === AreaCategory.Capacity;
   }
 }
