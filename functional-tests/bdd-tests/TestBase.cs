@@ -2807,6 +2807,7 @@ namespace bdd_tests
             uiConfirmButton.Click();
 
             /***** Key Personnel #2 *****/
+            /* This extra person is added because the calendar selection is unreliable via SharedCalendarDate(). DO NOT REMOVE. */
 
             // click on the Add Key Personnel button
             NgWebElement uiAddKeyPersonnel2 = ngDriver.FindElement(By.CssSelector(".padded-section:nth-child(1) .btn-secondary"));

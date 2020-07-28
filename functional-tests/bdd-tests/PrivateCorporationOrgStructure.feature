@@ -34,7 +34,7 @@ Scenario: Delete an individual who is both a private corporation director and sh
     And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
     And I delete only the director record
-    # And I click on the Complete Organization Information button
+    And I click on the Complete Organization Information button
     And only the shareholder record is displayed
     And the account is deleted
     Then I see the login page
