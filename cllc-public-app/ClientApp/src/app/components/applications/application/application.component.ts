@@ -396,15 +396,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       .subscribe(data => this.indigenousNations = data);
 
   }
-  
-  updateHoursValidator(val, controlName) {
-    if (val === '') {
-      this.form.get(controlName).setValidators([]);
-    } else {
-      this.form.get(controlName).setValidators(Validators.required);
-    }
-    this.form.get(controlName).updateValueAndValidity();
-  }
 
   updateHoursValidator(val, controlName) {
     if (val === '') {
