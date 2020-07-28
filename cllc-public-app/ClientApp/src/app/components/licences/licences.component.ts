@@ -72,19 +72,15 @@ export class LicencesComponent extends FormBase implements OnInit {
     this.busy =
       forkJoin(this.applicationDataService.getAllCurrentApplications(),
         this.licenceDataService.getAllCurrentLicenses(),
-        this.licenceDataService.getAllOperatedLicenses(),
-        this.licenceDataService.getAllProposedLicenses()
+        this.licenceDataService.getAllOperatedLicenses()
       ).pipe(takeWhile(() => this.componentActive))
-        .subscribe(([applications, licenses, operatedLicences, proposedLicences]) => {
+        .subscribe(([applications, licenses, operatedLicences]) => {
           this.applications = applications;
           operatedLicences.forEach(licence => {
             licence.isOperated = true;
             licence.licenceTypeName = 'Operated - ' + licence.licenceTypeName;
           });
-          proposedLicences.forEach(licence => {
-            licence.isDeemed = true;
-          });
-          const combinedLicences = [...licenses, ...operatedLicences, ...proposedLicences];
+          const combinedLicences = [...licenses, ...operatedLicences];
           combinedLicences.forEach((licence: ApplicationLicenseSummary) => {
             licence.headerRowSpan = 1;
             this.addOrUpdateLicence(licence);
