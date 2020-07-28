@@ -210,6 +210,7 @@ import { TermsAndConditionsDataService } from '@services/terms-and-condtions-dat
 import { LgZoningConfirmationComponent } from './components/applications/application/tabs/lg-zoning-confirmation/lg-zoning-confirmation.component';
 import { ProofOfZoningComponent } from './components/applications/application/tabs/proof-of-zoning/proof-of-zoning.component';
 import { CapacityTableRowComponent } from '@components/capacity-table/capacity-table-row.component';
+import { ProductionStagesComponent } from './components/applications/application/tabs/business-plan/production-stages/production-stages.component';
 
 
 @NgModule({
@@ -333,7 +334,8 @@ import { CapacityTableRowComponent } from '@components/capacity-table/capacity-t
     BusinessPlanComponent,
     LgInfoPanelComponent,
     AdditionalPidsComponent,
-    LgZoningConfirmationComponent
+    LgZoningConfirmationComponent,
+    ProductionStagesComponent
   ],
   imports: [
     ChartsModule,
