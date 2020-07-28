@@ -14,12 +14,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Eventschedules operations.
+    /// Licencesubcategories operations.
     /// </summary>
-    public partial interface IEventschedules
+    public partial interface ILicencesubcategories
     {
         /// <summary>
-        /// Get entities from adoxio_eventschedules
+        /// Get entities from adoxio_licencesubcategories
         /// </summary>
         /// <param name='top'>
         /// </param>
@@ -52,9 +52,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEventscheduleCollection>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencesubcategoryCollection>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Add new entity to adoxio_eventschedules
+        /// Add new entity to adoxio_licencesubcategories
         /// </summary>
         /// <param name='body'>
         /// New entity
@@ -78,12 +78,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEventschedule>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioEventschedule body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencesubcategory>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioLicencesubcategory body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get entity from adoxio_eventschedules by key
+        /// Get entity from adoxio_licencesubcategories by key
         /// </summary>
-        /// <param name='adoxioEventscheduleid'>
-        /// key: adoxio_eventscheduleid of adoxio_eventschedule
+        /// <param name='adoxioLicencesubcategoryid'>
+        /// key: adoxio_licencesubcategoryid of adoxio_licencesubcategory
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -106,12 +106,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEventschedule>> GetByKeyWithHttpMessagesAsync(string adoxioEventscheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencesubcategory>> GetByKeyWithHttpMessagesAsync(string adoxioLicencesubcategoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Update entity in adoxio_eventschedules
+        /// Update entity in adoxio_licencesubcategories
         /// </summary>
-        /// <param name='adoxioEventscheduleid'>
-        /// key: adoxio_eventscheduleid of adoxio_eventschedule
+        /// <param name='adoxioLicencesubcategoryid'>
+        /// key: adoxio_licencesubcategoryid of adoxio_licencesubcategory
         /// </param>
         /// <param name='body'>
         /// New property values
@@ -128,12 +128,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioEventscheduleid, MicrosoftDynamicsCRMadoxioEventschedule body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioLicencesubcategoryid, MicrosoftDynamicsCRMadoxioLicencesubcategory body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Delete entity from adoxio_eventschedules
+        /// Delete entity from adoxio_licencesubcategories
         /// </summary>
-        /// <param name='adoxioEventscheduleid'>
-        /// key: adoxio_eventscheduleid of adoxio_eventschedule
+        /// <param name='adoxioLicencesubcategoryid'>
+        /// key: adoxio_licencesubcategoryid of adoxio_licencesubcategory
         /// </param>
         /// <param name='ifMatch'>
         /// ETag
@@ -150,6 +150,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioEventscheduleid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioLicencesubcategoryid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

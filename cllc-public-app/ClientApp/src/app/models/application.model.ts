@@ -129,6 +129,7 @@ export class Application {
 
   serviceAreas: ServiceArea[];
   outsideAreas: ServiceArea[];
+  capacityArea: ServiceArea[];
 
 
   // Manufactuer
