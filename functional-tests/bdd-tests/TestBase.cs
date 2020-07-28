@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration.UserSecrets;
 using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Runtime.CompilerServices;
 
 namespace bdd_tests
 {
@@ -538,6 +539,232 @@ namespace bdd_tests
             returnDash.Click();
         }
 
+        [And(@"I complete the Manufacturer application for a (.*)")]
+        public void CompleteManufacturerApplication(string manufacturerType)
+        {
+            // create test data
+            string estName = "Manufacturer's Establishment";
+            string streetLocation = "123 Innovation Street";
+            string city = "Victoria";
+            string postal = "V5R2X4";
+            string pid = "111111111";
+            string additionalPid = "999999999";
+            string storeEmail = "store@email.com";
+            string storePhone = "250-012-3456";
+            string contactTitle = "Sommelier";
+
+            // enter the establishment name
+            NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
+            uiEstabName.SendKeys(estName);
+
+            // enter the establishment street address
+            NgWebElement uiEstabStreetAddress = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
+            uiEstabStreetAddress.SendKeys(streetLocation);
+
+            // enter the establishment city
+            NgWebElement uiEstabCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressCity']"));
+            uiEstabCity.SendKeys(city);
+
+            // enter the establishment postal code
+            NgWebElement uiEstabPostal = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressPostalCode']"));
+            uiEstabPostal.SendKeys(postal);
+
+            // enter the PID
+            NgWebElement uiEstabPID = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentParcelId']"));
+            uiEstabPID.SendKeys(pid);
+
+            // enter the additional PID
+            NgWebElement uiAdditionalEstabPID = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='pidList']"));
+            uiAdditionalEstabPID.SendKeys(additionalPid);
+
+            // select the proof of zoning checkbox
+            NgWebElement uiProofOfZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox.mat-checkbox [for='mat-checkbox-13-input']"));
+            uiProofOfZoning.Click();
+
+            // select 'yes' for ALR inclusion
+            NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] .mat-radio-checked .mat-radio-inner-circle"));
+            uiALRInclusion.Click();
+
+            // enter the store email
+            NgWebElement uiEstabEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentEmail']"));
+            uiEstabEmail.SendKeys(storeEmail);
+
+            // enter the store phone number
+            NgWebElement uiEstabPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentPhone']"));
+            uiEstabPhone.SendKeys(storePhone);
+
+            if (manufacturerType == "winery")
+            {
+                // select winery radio button
+                NgWebElement uiWinery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] #mat-radio-21"));
+                uiWinery.Click();
+
+                // find the upload test files in the bdd-tests\upload_files folder
+                var environment = Environment.CurrentDirectory;
+                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+                // upload the production sales forecast
+
+                // upload the proposed products
+
+                // upload the proposed agricultural sources
+
+                // create test data
+                string grapesAcres = "100";
+                string fruitAcres = "5";
+                string honeyBeehives = "7";
+
+                // enter the grapes acreage
+
+                // enter the fruit acreage
+
+                // enter the number of beehives
+
+                // upload the manufacturing stages
+
+                // select 'yes' for neutral grain spirits
+
+                // upload the manufacturing equipment
+
+                // upload the packaged product storage
+
+                // upload the business insurance certificate
+
+                // upload the store signage
+
+                // upload the floor plan 
+
+                // upload the site plan
+
+            }
+
+            if (manufacturerType == "distillery")
+            {
+                // select distillery radio button
+                NgWebElement uiDistillery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] #mat-radio-22"));
+                uiDistillery.Click();
+
+                // find the upload test files in the bdd-tests\upload_files folder
+                var environment = Environment.CurrentDirectory;
+                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+                // upload the production sales forecast
+
+                // upload the proposed products
+
+                // upload the proposed agricultural sources
+
+                // upload the manufacturing stages
+
+                // select 'yes' for neutral grain spirits
+
+                // upload the manufacturing equipment
+
+                // upload the packaged product storage
+
+                // upload the distribution plan
+
+                // upload the store signage
+
+                // upload the floor plan 
+
+                // upload the site plan
+
+            }
+
+            if (manufacturerType == "brewery")
+            {
+                // select brewery radio button
+                NgWebElement uiBrewery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] #mat-radio-23"));
+                uiBrewery.Click();
+
+                // find the upload test files in the bdd-tests\upload_files folder
+                var environment = Environment.CurrentDirectory;
+                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+                // upload the production sales forecast
+
+                // upload the proposed products
+
+                // upload the proposed agricultural sources
+
+                // upload the manufacturing stages
+
+                // select 'yes' for neutral grain spirits
+
+                // upload the manufacturing equipment
+
+                // upload the packaged product storage
+
+                // select 'yes' for the brewery operating with brew pub on site
+
+                // select 'yes' for piping from brewery
+
+                // upload brew sheets sample
+
+                // upload the business insurance
+
+                // upload the distribution plan
+
+                // upload the store signage
+
+                // upload the floor plan 
+
+                // upload the site plan
+
+            }
+
+            if (manufacturerType == "co-packer")
+            {
+                // select co-packer radio button
+                NgWebElement uiCoPacker = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] #mat-radio-24"));
+                uiCoPacker.Click();
+
+                // find the upload test files in the bdd-tests\upload_files folder
+                var environment = Environment.CurrentDirectory;
+                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+                // upload the production sales forecast
+
+                // upload the proposed products
+
+                // upload the proposed agricultural sources
+
+                // upload the manufacturing stages
+
+                // select 'yes' for neutral grain spirits
+
+                // upload the manufacturing equipment
+
+                // upload the packaged product storage
+
+                // upload the store signage
+
+                // upload the floor plan 
+
+                // upload the site plan
+
+            }
+
+            // select the owner checkbox
+
+            // select the valid interest checkbox
+
+            // select the will have valid interest checkbox
+
+            // enter the contact title
+
+            // select the authorized to submit checkbox
+
+            // select the signature agreement checkbox
+
+            // click on the Submit & Pay button
+
+        }
 
         [And(@"I complete the Catering application")]
         public void CompleteCateringApplication()
@@ -1118,6 +1345,13 @@ namespace bdd_tests
             {
                 // click on the Rural Store Start Application button
                 NgWebElement startAppButton = ngDriver.FindElement(By.CssSelector("button[id='startRAS']"));
+                startAppButton.Click();
+            }
+
+            if (applicationType == "a Manufacturer Licence")
+            {
+                // click on the Rural Store Start Application button
+                NgWebElement startAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
                 startAppButton.Click();
             }
         }
