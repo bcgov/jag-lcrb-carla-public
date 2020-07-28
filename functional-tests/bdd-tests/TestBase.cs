@@ -598,18 +598,68 @@ namespace bdd_tests
                 // select winery radio button
                 NgWebElement uiWinery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] #mat-radio-21"));
                 uiWinery.Click();
+            }
 
-                // find the upload test files in the bdd-tests\upload_files folder
-                var environment = Environment.CurrentDirectory;
-                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+            if (manufacturerType == "distillery")
+            {
+                // select distillery radio button
+                NgWebElement uiDistillery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] #mat-radio-22"));
+                uiDistillery.Click();
+            }
 
-                // upload the production sales forecast
+            if (manufacturerType == "brewery")
+            {
+                // select brewery radio button
+                NgWebElement uiBrewery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] #mat-radio-23"));
+                uiBrewery.Click();
+            }
 
-                // upload the proposed products
+            if (manufacturerType == "co-packer")
+            {
+                // select co-packer radio button
+                NgWebElement uiCoPacker = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] #mat-radio-24"));
+                uiCoPacker.Click();
+            }
 
-                // upload the proposed agricultural sources
+            // find the upload test files in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
 
+            // upload the production sales forecast
+            string productionSalesPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "production_sales_forecast.pdf");
+            NgWebElement uploadProductionSales = ngDriver.FindElement(By.XPath(""));
+            uploadProductionSales.SendKeys(productionSalesPath);
+
+            // upload the proposed products
+            string proposedProductsPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "proposed_products.pdf");
+            NgWebElement uploadProposedProducts = ngDriver.FindElement(By.XPath(""));
+            uploadProposedProducts.SendKeys(proposedProductsPath);
+
+            // upload the proposed agricultural sources
+            string proposedSourcesPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "proposed_agricultural_sources.pdf");
+            NgWebElement uploadSources = ngDriver.FindElement(By.XPath(""));
+            uploadSources.SendKeys(proposedSourcesPath);
+            
+            // upload the manufacturing stages
+            string stagesPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "manufacturing_stages.pdf");
+            NgWebElement uploadStages = ngDriver.FindElement(By.XPath(""));
+
+            // upload the manufacturing equipment
+            string equipmentPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "manufacturing_equipment.pdf");
+            NgWebElement uploadEquipment = ngDriver.FindElement(By.XPath(""));
+            uploadEquipment.SendKeys(equipmentPath);
+            uploadStages.SendKeys(stagesPath);
+
+            // upload the packaged product storage
+            string storagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "packaged_product_storage.pdf");
+            NgWebElement uploadStorage = ngDriver.FindElement(By.XPath(""));
+            uploadStorage.SendKeys(storagePath);
+
+            // select 'yes' for neutral grain spirits
+
+            if (manufacturerType == "winery")
+            {
                 // create test data
                 string grapesAcres = "100";
                 string fruitAcres = "5";
@@ -621,134 +671,56 @@ namespace bdd_tests
 
                 // enter the number of beehives
 
-                // upload the manufacturing stages
-
-                // select 'yes' for neutral grain spirits
-
-                // upload the manufacturing equipment
-
-                // upload the packaged product storage
-
                 // upload the business insurance certificate
-
-                // upload the store signage
-
-                // upload the floor plan 
-
-                // upload the site plan
-
+                string insurancePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "business_insurance.pdf");
+                NgWebElement uploadInsurance = ngDriver.FindElement(By.XPath(""));
+                uploadInsurance.SendKeys(insurancePath);
             }
 
             if (manufacturerType == "distillery")
             {
-                // select distillery radio button
-                NgWebElement uiDistillery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] #mat-radio-22"));
-                uiDistillery.Click();
-
-                // find the upload test files in the bdd-tests\upload_files folder
-                var environment = Environment.CurrentDirectory;
-                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-                // upload the production sales forecast
-
-                // upload the proposed products
-
-                // upload the proposed agricultural sources
-
-                // upload the manufacturing stages
-
-                // select 'yes' for neutral grain spirits
-
-                // upload the manufacturing equipment
-
-                // upload the packaged product storage
-
                 // upload the distribution plan
-
-                // upload the store signage
-
-                // upload the floor plan 
-
-                // upload the site plan
-
+                string distributionPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "distribution_plan.pdf");
+                NgWebElement uploadDistribution = ngDriver.FindElement(By.XPath(""));
+                uploadDistribution.SendKeys(distributionPath);
             }
 
             if (manufacturerType == "brewery")
             {
-                // select brewery radio button
-                NgWebElement uiBrewery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] #mat-radio-23"));
-                uiBrewery.Click();
-
-                // find the upload test files in the bdd-tests\upload_files folder
-                var environment = Environment.CurrentDirectory;
-                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-                // upload the production sales forecast
-
-                // upload the proposed products
-
-                // upload the proposed agricultural sources
-
-                // upload the manufacturing stages
-
-                // select 'yes' for neutral grain spirits
-
-                // upload the manufacturing equipment
-
-                // upload the packaged product storage
-
                 // select 'yes' for the brewery operating with brew pub on site
 
                 // select 'yes' for piping from brewery
 
                 // upload brew sheets sample
+                string brewSheetsPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "brew_sheets.pdf");
+                NgWebElement uploadBrewSheets = ngDriver.FindElement(By.XPath(""));
+                uploadBrewSheets.SendKeys(brewSheetsPath);
 
                 // upload the business insurance
+                string insurancePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "business_insurance.pdf");
+                NgWebElement uploadInsurance = ngDriver.FindElement(By.XPath(""));
+                uploadInsurance.SendKeys(insurancePath);
 
                 // upload the distribution plan
-
-                // upload the store signage
-
-                // upload the floor plan 
-
-                // upload the site plan
-
+                string distributionPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "distribution_plan.pdf");
+                NgWebElement uploadDistribution = ngDriver.FindElement(By.XPath(""));
+                uploadDistribution.SendKeys(distributionPath);
             }
 
-            if (manufacturerType == "co-packer")
-            {
-                // select co-packer radio button
-                NgWebElement uiCoPacker = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] #mat-radio-24"));
-                uiCoPacker.Click();
+            // upload the store signage
+            string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+            NgWebElement uploadSignage = ngDriver.FindElement(By.XPath(""));
+            uploadSignage.SendKeys(signagePath);
 
-                // find the upload test files in the bdd-tests\upload_files folder
-                var environment = Environment.CurrentDirectory;
-                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+            // upload the floor plan 
+            string floorPlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
+            NgWebElement uploadFloorPlan = ngDriver.FindElement(By.XPath(""));
+            uploadFloorPlan.SendKeys(floorPlanPath);
 
-                // upload the production sales forecast
-
-                // upload the proposed products
-
-                // upload the proposed agricultural sources
-
-                // upload the manufacturing stages
-
-                // select 'yes' for neutral grain spirits
-
-                // upload the manufacturing equipment
-
-                // upload the packaged product storage
-
-                // upload the store signage
-
-                // upload the floor plan 
-
-                // upload the site plan
-
-            }
+            // upload the site plan
+            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
+            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath(""));
+            uploadSitePlan.SendKeys(sitePlanPath);
 
             // select the owner checkbox
 
@@ -763,7 +735,7 @@ namespace bdd_tests
             // select the signature agreement checkbox
 
             // click on the Submit & Pay button
-
+     
         }
 
         [And(@"I complete the Catering application")]
