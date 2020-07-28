@@ -1,5 +1,5 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, ValidationErrors } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS } from '@angular/forms';
 import { ServiceArea, AreaCategory } from '@models/service-area.model';
 import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 
@@ -23,6 +23,7 @@ import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 })
 export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea[]> {
     @Input() areaCategory: number;
+    @Input() applicationTypeName: string;
     total: number;
 
     formGroup: FormGroup;
@@ -49,8 +50,10 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
             super.writeValue(serviceAreas);
 
             while (this.areasArr.length > 0) { this.areasArr.removeAt(0); }
-            serviceAreas.forEach(area => { this.areasArr.push(this.fb.control(area)); });
-            this.updateTotal();
+            if (serviceAreas.length > 0) {
+                serviceAreas.forEach(area => { this.areasArr.push(this.fb.control(area)); });
+                this.updateTotal();
+            }
         } else {
             super.writeValue([]);
         }
