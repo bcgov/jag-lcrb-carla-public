@@ -48,6 +48,7 @@ export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceA
         areaNumber: ['', [Validators.required]],
         areaLocation: ['', [Validators.required]],
         isIndoor: [''],
+        isOutdoor: [''],
         isPatio: [''],
         capacity: ['', [Validators.required]]
     });
