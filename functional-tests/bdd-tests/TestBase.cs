@@ -245,7 +245,7 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
 
-        [Then(@"I complete the Rural Agency Store application")]
+        [And(@"I complete the Rural Agency Store application")]
         public void CompleteRuralAgencyStoreApplication()
         {
             /* 
@@ -1242,11 +1242,22 @@ namespace bdd_tests
         [And(@"I request a valid store name or branding change for (.*)")]
         public void RequestNameBrandingChange(string changeType)
         {
-            string nameBrandingLink = "Establishment Name Change Application";
+            string nameBrandingLinkCannabis = "Request Store Name or Branding Change";
+            string nameBrandingLinkCatering = "Establishment Name Change Application";
 
-            // click on the Establishment Name Change Application link
-            NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLink));
-            uiRequestChange.Click();
+            if (changeType == "Catering")
+            {
+                // click on the **** link
+                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCatering));
+                uiRequestChange.Click();
+            }
+
+            if (changeType == "Cannabis")
+            {
+                // click on the Request Store Name or Branding Change link
+                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCannabis));
+                uiRequestChange.Click();
+            }
 
             /* 
             Page Title: Please Review the Account Profile
@@ -2807,6 +2818,7 @@ namespace bdd_tests
             uiConfirmButton.Click();
 
             /***** Key Personnel #2 *****/
+            /* This extra person is added because the calendar selection is unreliable via SharedCalendarDate(). DO NOT REMOVE. */
 
             // click on the Add Key Personnel button
             NgWebElement uiAddKeyPersonnel2 = ngDriver.FindElement(By.CssSelector(".padded-section:nth-child(1) .btn-secondary"));
@@ -2878,7 +2890,7 @@ namespace bdd_tests
             NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.CssSelector(".fa-save span"));
             uiConfirmButton2.Click();
 
-            // delete the first same individual
+            // delete the first same individual - DO NOT REMOVE
             NgWebElement uiDeleteButton = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[1]/td[7]/i[2]/span"));
             uiDeleteButton.Click();
 
@@ -2919,7 +2931,7 @@ namespace bdd_tests
         [And(@"I delete only the director record")]
         public void DeleteDirectorRecord()
         {
-            // click on the delete button for key personnel > director record                                                            
+            // click on the delete button for key personnel > director record    
             NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[1]/td[7]/i[2]/span"));
             uiEditInfoButton.Click();
 
@@ -2936,7 +2948,6 @@ namespace bdd_tests
 
             // check that the shareholder email is displayed to confirm remains
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'same@individual2.com')]")).Displayed);
-
         }
 
 
@@ -3497,7 +3508,7 @@ namespace bdd_tests
             addSoleProprietorshipShares.SendKeys(sharesSoleProprietorship);
 
             // select the sole proprietorship organization type
-            NgWebElement addOrganizationTypeSoleProprietorship = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='SoleProprietor']"));
+            NgWebElement addOrganizationTypeSoleProprietorship = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='SoleProprietorship']"));
             addOrganizationTypeSoleProprietorship.Click();
 
             // add the sole proprietorship email address

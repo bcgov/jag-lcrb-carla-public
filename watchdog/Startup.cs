@@ -89,7 +89,10 @@ namespace Watchdog
                 setup.AddHealthCheckEndpointIfExists("Org Book", Configuration["ORG_BOOK_URI"]);
                 setup.AddHealthCheckEndpointIfExists("SPICE/CARLA Sync", Configuration["SPICE_SYNC_URI"]);
 
-                setup.AddWebHookIfExists("Teams", Configuration["TEAMS_WEB_HOOK"], Configuration["WATCHDOG_URI"]);                
+                setup.AddWebHookIfExists("Teams", Configuration["TEAMS_WEB_HOOK"], Configuration["WATCHDOG_URI"]);
+
+                setup.SetMinimumSecondsBetweenFailureNotifications(60 * 60); // re-notify every hour.
+
             });
 
            

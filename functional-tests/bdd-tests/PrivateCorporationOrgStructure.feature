@@ -11,7 +11,7 @@ Scenario: Change private corporation director name and pay fee
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a private corporation
-    And I click on the Pay for Application button
+    # And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
@@ -97,7 +97,7 @@ Scenario: Confirm private corporation business shareholder org structure update 
     And I review the account profile for a private corporation
     And I click on the Confirm Organization Information is Complete button
     And I complete the Cannabis Retail Store application for a private corporation
-    And I click on the Pay for Application button
+    # And I click on the Pay for Application button
     And I enter the payment information
     And I return to the dashboard
     And the application is approved
@@ -143,8 +143,8 @@ Scenario: CRS application with mixed business shareholder types
     And I add in business shareholders of different business types
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a private corporation
-    And I review the mixed business shareholder types security screening requirements
-    And I click on the Pay for Application button
+    # And I review the mixed business shareholder types security screening requirements
+    # And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And I return to the dashboard
