@@ -1124,12 +1124,11 @@ namespace bdd_tests
         }
 
 
-        [And(@"I request a Cannabis store relocation")]
-        public void RequestStoreRelocation()
+        [And(@"I request a store relocation for (.*)")]
+        public void RequestStoreRelocation(string applicationType)
         {
             /* 
             Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
             */
 
             string requestRelocationLink = "Request Relocation";
@@ -1150,26 +1149,30 @@ namespace bdd_tests
             Page Title: Submit a Licence Relocation Application
             */
 
-            string proposedAddress = "Automated Test Street";
-            string proposedCity = "Automated City";
-            string proposedPostalCode = "A1A 1A1";
-            string pid = "012345678";
+            if (applicationType == "Cannabis")
+            {
 
-            // enter the proposed street address
-            NgWebElement uiProposedAddress = ngDriver.FindElement(By.CssSelector(".ngtest-new-address input[formcontrolname='establishmentAddressStreet']"));
-            uiProposedAddress.SendKeys(proposedAddress);
+                string proposedAddress = "Automated Test Street";
+                string proposedCity = "Automated City";
+                string proposedPostalCode = "A1A 1A1";
+                string pid = "012345678";
 
-            // enter the proposed city
-            NgWebElement uiProposedCity = ngDriver.FindElement(By.CssSelector(".ngtest-new-address input[formcontrolname='establishmentAddressCity']"));
-            uiProposedCity.SendKeys(proposedCity);
+                // enter the proposed street address
+                NgWebElement uiProposedAddress = ngDriver.FindElement(By.CssSelector(".ngtest-new-address input[formcontrolname='establishmentAddressStreet']"));
+                uiProposedAddress.SendKeys(proposedAddress);
 
-            // enter the postal code
-            NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.CssSelector(".ngtest-new-address input[formcontrolname='establishmentAddressPostalCode']"));
-            uiProposedPostalCode.SendKeys(proposedPostalCode);
+                // enter the proposed city
+                NgWebElement uiProposedCity = ngDriver.FindElement(By.CssSelector(".ngtest-new-address input[formcontrolname='establishmentAddressCity']"));
+                uiProposedCity.SendKeys(proposedCity);
 
-            // enter the PID
-            NgWebElement uiProposedPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
-            uiProposedPID.SendKeys(pid);
+                // enter the postal code
+                NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.CssSelector(".ngtest-new-address input[formcontrolname='establishmentAddressPostalCode']"));
+                uiProposedPostalCode.SendKeys(proposedPostalCode);
+
+                // enter the PID
+                NgWebElement uiProposedPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
+                uiProposedPID.SendKeys(pid);
+            }
 
             // find the upload test file in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
@@ -1197,11 +1200,28 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(4000);
 
-            // confirm correct payment amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
+            if (applicationType == "Cannabis")
+            {
+                /* 	
+                Page Title: Payment Approved	
+                */
 
-            // return to the Licences tab
-            ClickLicencesTab();
+                // confirm correct payment amount
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
+
+                // return to the Licences tab
+                ClickLicencesTab();
+            }
+
+            if (applicationType == "Catering")
+            {
+                /* 	
+                Page Title: Payment Approved	
+                */
+
+                // confirm correct payment amount	
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
+            }
         }
 
 
@@ -1578,19 +1598,42 @@ namespace bdd_tests
         }
 
 
-        public void RequestedApplicationsOnDashboard()
+        [And(@"I confirm the relocation request is displayed on the dashboard")]
+        public void RequestedRelocationOnDashboard()
         {
+            ClickOnDashboard();
+
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
 
-            ClickOnDashboard();
-
             // confirm that relocation request is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Relocation Request')]")).Displayed);
+        }
+
+
+        [And(@"I confirm the name or branding change is displayed on the dashboard")]
+        public void RequestedNameChangeOnDashboard()
+        {
+            ClickOnDashboard();
+
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
 
             // confirm that a name or branding change request is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Name or Branding Change')]")).Displayed);
+        }
+
+
+        [And(@"I confirm the structural change request is displayed on the dashboard")]
+        public void RequestedStructuralChangeOnDashboard()
+        {
+            ClickOnDashboard();
+
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
 
             // confirm that a structural change request is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Structural Change')]")).Displayed);
@@ -1673,67 +1716,6 @@ namespace bdd_tests
 
             // return to the Licences tab
             ClickLicencesTab();
-        }
-
-
-        [And(@"I request a store relocation for Catering")]
-        public void CateringRelocationRequest()
-        {
-            /* 
-            Page Title: Licences
-            Subtitle: Catering Licences
-            */
-
-            string requestRelocationLink = "Request Relocation";
-
-            // click on the request location link
-            NgWebElement uiRequestRelocation = ngDriver.FindElement(By.LinkText(requestRelocationLink));
-            uiRequestRelocation.Click();
-
-            /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
-
-            /* 
-            Page Title: Submit a Licence Relocation Application
-            */
-
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload a supporting document
-            string supportingDocument = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "checklist.pdf");
-            NgWebElement uploadSupportingDoc = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uploadSupportingDoc.SendKeys(supportingDocument);
-
-            // select the authorized to submit checkbox
-            NgWebElement uiAuthToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
-            uiAuthToSubmit.Click();
-
-            // select the signature agreement checkbox
-            NgWebElement uiSigAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
-            uiSigAgreement.Click();
-
-            // click on the Submit & Pay button
-            ClickOnSubmitButton();
-
-            // pay for the relocation application
-            MakePayment();
-
-            System.Threading.Thread.Sleep(4000);
-
-            /* 
-            Page Title: Payment Approved
-            */
-
-            // confirm correct payment amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
         }
 
 
