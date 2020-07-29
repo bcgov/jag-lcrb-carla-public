@@ -698,11 +698,11 @@ namespace bdd_tests
             if (manufacturerType == "brewery")
             {
                 // select 'yes' for the brewery operating with brew pub on site
-                NgWebElement uiPubOnSite = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-127"));
+                NgWebElement uiPubOnSite = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-21"));
                 uiPubOnSite.Click();
 
                 // select 'yes' for piping from brewery
-                NgWebElement uiPiping = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-136"));
+                NgWebElement uiPiping = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-30"));
                 uiPiping.Click();
 
                 // upload brew sheets sample
@@ -736,6 +736,23 @@ namespace bdd_tests
                 // upload the site plan
                 string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
                 NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[26]"));
+                uploadSitePlan.SendKeys(sitePlanPath);
+            }
+            else if (manufacturerType == "brewery")
+            {
+                // upload the store signage
+                string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+                NgWebElement uploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[29]"));
+                uploadSignage.SendKeys(signagePath);
+
+                // upload the floor plan 
+                string floorPlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
+                NgWebElement uploadFloorPlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[32]"));
+                uploadFloorPlan.SendKeys(floorPlanPath);
+
+                // upload the site plan
+                string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
+                NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[35]"));
                 uploadSitePlan.SendKeys(sitePlanPath);
             }
             else
