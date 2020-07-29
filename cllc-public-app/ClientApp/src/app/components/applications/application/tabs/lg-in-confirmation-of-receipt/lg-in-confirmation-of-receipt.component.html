@@ -46,18 +46,25 @@
 </div>
 
 <section *ngIf="!disableForm" class="position-relative d-flex justify-content-between p-3">
-    <div [ngBusy]="busy"></div>
+    <span>
+        <button class="btn btn-secondary" [disabled]="optingOutOfComment" (click)="OptOutOfComment()">
+            <span>Opt Out of Comment</span>
+        </button>
+        <mat-progress-bar *ngIf="optingOutOfComment" mode="indeterminate"></mat-progress-bar>
+    </span>
 
-    <button class="btn btn-secondary" (click)="OptOutOfComment()">
-        <span>Opt Out of Comment</span>
-    </button>
+    <span>
+        <button class="btn btn-secondary" [disabled]="rejectingApp" (click)="RejectApplication()">
+            <span>Reject Application</span>
+        </button>
+        <mat-progress-bar *ngIf="rejectingApp" mode="indeterminate"></mat-progress-bar>
+    </span>
 
-    <button class="btn btn-secondary" (click)="RejectApplication()">
-        <span>Reject Application</span>
-    </button>
-
-    <button class="btn btn-primary" (click)="ApproveApplication()">
-        <span>Accept Application</span>
-    </button>
+    <span>
+        <button class="btn btn-primary" [disabled]="approvingApplication" (click)="ApproveApplication()">
+            <span>Accept Application</span>
+        </button>
+        <mat-progress-bar *ngIf="approvingApplication" mode="indeterminate"></mat-progress-bar>
+    </span>
 
 </section>
