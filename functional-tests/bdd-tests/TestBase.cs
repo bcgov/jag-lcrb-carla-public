@@ -519,7 +519,7 @@ namespace bdd_tests
             if (applicationType == "Manufacturer Licence application")
             {
                 // confirm that payment receipt is for $550.00
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$555.00')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$550.00')]")).Displayed);
             }
         }
 
