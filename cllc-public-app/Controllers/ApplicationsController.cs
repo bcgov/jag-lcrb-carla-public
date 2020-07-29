@@ -1039,6 +1039,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     AddServiceAreasToApplication(item.OutsideAreas, item.Id);
                 }
+                if (item.CapacityArea != null && item.CapacityArea.Count > 0)
+                {
+                    AddServiceAreasToApplication(item.CapacityArea, item.Id);
+                }
                 // fix for an invalid licence sub category
                 if (adoxioApplication.AdoxioLicencesubcategory == 0)
                 {
