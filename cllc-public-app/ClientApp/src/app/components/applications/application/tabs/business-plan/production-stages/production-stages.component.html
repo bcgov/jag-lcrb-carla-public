@@ -1,0 +1,16 @@
+<div class="form-group" [formGroup]="form">
+    <label for="options">Identify which production stages will be taking place at your manufacturing site:</label>
+    <input type="hidden" formControlName="description2" [value]="application.description2" />
+    <div *ngFor="let option of options">
+        <label>
+            <mat-checkbox 
+                   name="{{option.name}}-prd-stage-chk"
+                   value="{{option.name}}"
+                   [checked]="option.checked"
+                   [disabled]="option.readonly"
+                   (change)="updateOptions(option)"
+                   >
+                    {{option.name}}</mat-checkbox>
+        </label>
+    </div>
+</div>

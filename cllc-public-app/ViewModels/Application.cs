@@ -577,6 +577,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public List<CapacityArea> ServiceAreas { get; set; }
         public List<CapacityArea> OutsideAreas { get; set; }
+        public List<CapacityArea> CapacityArea { get; set; }
 
         // Manufactuer
 
@@ -589,7 +590,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public YesNoNotApplicable? MfgPipedInProduct { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public YesNoNotApplicable? MfgNeutralGrainSpirits { get; set; }
+        public YesNoNotApplicable? MfgUsesNeutralGrainSpirits { get; set; }
 
 
         // these are just optional int - not picklist references.

@@ -242,8 +242,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
           // set value to cause invoice generationP
           this.busyPromise = this.prepareSaveRequest()
 
-            .pipe(mergeMap(results => {
-              console.log(results);
+            .pipe(mergeMap(results => {              
               const saveOverrideValue = { invoicetrigger: 1 };
 
               return this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue })
