@@ -1,5 +1,5 @@
 
-import { filter, takeWhile, catchError, mergeMap, delay, tap, switchMap } from 'rxjs/operators';
+import { filter, takeWhile, catchError, mergeMap, delay, tap, switchMap, distinctUntilChanged } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -187,7 +187,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       federalProducerNames: ['', Validators.required],
       applicantType: ['', Validators.required],
       description1: ['', [Validators.required]],
-      description2: ['', []],
       proposedChange: ['', [Validators.required]],
       connectedGrocery: ['', []],
       sitePhotos: ['', []],
@@ -204,7 +203,56 @@ export class ApplicationComponent extends FormBase implements OnInit {
       meetsALRRequirements: ['', []],
       IsReadyProductNotVisibleOutside: ['', []],
       serviceAreas: ['', []],
-      outsideAreas: ['', []]
+      outsideAreas: ['', []],
+      capacityArea: this.fb.group({
+        areaCategory: [AreaCategory.Capacity],
+        areaNumber: [1],
+        areaLocation: [''],
+        capacity: ['', Validators.required]
+      })
+    });
+
+    this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursSundayClose');
+    });
+    this.form.get('serviceHoursSundayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursSundayOpen');
+    });
+    this.form.get('serviceHoursMondayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursMondayClose');
+    });
+    this.form.get('serviceHoursMondayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursMondayOpen');
+    });
+    this.form.get('serviceHoursTuesdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursTuesdayClose');
+    });
+    this.form.get('serviceHoursTuesdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursTuesdayOpen');
+    });
+    this.form.get('serviceHoursWednesdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursWednesdayClose');
+    });
+    this.form.get('serviceHoursWednesdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursWednesdayOpen');
+    });
+    this.form.get('serviceHoursThursdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursThursdayClose');
+    });
+    this.form.get('serviceHoursThursdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursThursdayOpen');
+    });
+    this.form.get('serviceHoursFridayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursFridayClose');
+    });
+    this.form.get('serviceHoursFridayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursFridayOpen');
+    });
+    this.form.get('serviceHoursSaturdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursSaturdayClose');
+    });
+    this.form.get('serviceHoursSaturdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursSaturdayOpen');
     });
 
 
@@ -219,9 +267,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
       .subscribe(data => {
         this.autocompleteLocalGovernmemts = data;
         this.INRequestInProgress = false;
-        
+
         this.cd.detectChanges();
-        if(data && data.length  == 0){
+        if (data && data.length  === 0){
           this.snackBar.open('No match found', '', { duration: 2500, panelClass: ['green-snackbar'] });
         }
       });
@@ -239,7 +287,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.policeJurisdictionReqInProgress = false;
 
         this.cd.detectChanges();
-        if(data && data.length  == 0){
+        if (data && data.length  === 0){
           this.snackBar.open('No match found', '', { duration: 2500, panelClass: ['green-snackbar'] });
         }
       });
@@ -262,10 +310,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.establishmentWatchWordsService.initialize();
 
     this.store.select(state => state.currentAccountState.currentAccount)
-      .pipe(takeWhile(() => this.componentActive))      
+      .pipe(takeWhile(() => this.componentActive))
       .subscribe((account) => {
         this.account = account;
-        console.log(account);
         this.busy = this.applicationDataService.getApplicationById(this.applicationId)
           .pipe(takeWhile(() => this.componentActive))
           .subscribe((data: Application) => {
@@ -325,6 +372,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
             if (data.policeJurisdiction) {
               this.form.get('indigenousNationId').patchValue(data.policeJurisdiction.id);
             }
+            if (this.application.capacityArea.length > 0) {
+              this.form.get('capacityArea').patchValue({...this.application.capacityArea[0]});
+            } else {
+              this.form.get('capacityArea.areaLocation').patchValue(data.applicationType.name);
+            }
 
             // make fields readonly if payment was made or the LG is viewing the application
             // disable the form if the local government has reviewed the application
@@ -342,6 +394,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.dynamicsDataService.getRecord('indigenousnations', '')
       .subscribe(data => this.indigenousNations = data);
 
+  }
+
+  updateHoursValidator(val, controlName) {
+    if (val === '') {
+      this.form.get(controlName).setValidators([]);
+    } else {
+      this.form.get(controlName).setValidators(Validators.required);
+    }
+    this.form.get(controlName).updateValueAndValidity();
   }
 
   autocompleteDisplay(item: any) {
@@ -447,6 +508,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
     if (!this.application.applicationType.outsideAreas) {
       this.form.get('outsideAreas').disable();
+    }
+    if (!this.application.applicationType.capacityArea) {
+      this.form.get('capacityArea').disable();
     }
   }
 
@@ -587,7 +651,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
     let description2 = '';
-    
 
     if (this.isRAS()) {
       description2 += this.form.get('isOwner').value ? 'Is owner = Yes' : 'Is owner = No';
@@ -596,10 +659,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
       description2 += '\n';
       description2 += this.form.get('willhaveValidInterest').value ? 'Will have valid interest = Yes' : 'Will have valid interest = No';
     }
+    else {
+      description2 += this.application.description2;
+    }
 
     // flatten the service areas if need be
     const serviceAreas = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
     const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
+    const capacityArea = [this.form.get('capacityArea').value];
 
     // do not save if the form is in file upload mode
     if (this.mode === UPLOAD_FILES_MODE) {
@@ -612,7 +679,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
         ...this.form.value,
         description2: description2,
         serviceAreas: serviceAreas,
-        outsideAreas: outsideAreas
+        outsideAreas: outsideAreas,
+        capacityArea: capacityArea
       }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
@@ -753,8 +821,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     return this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
-      .pipe(mergeMap(jsonUrl => {
-        console.log("")
+      .pipe(mergeMap(jsonUrl => {       
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
       }, (err: any) => {
@@ -983,7 +1050,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         return AreaCategory.OutsideArea;
       case 'Service':
         return AreaCategory.Service;
-      case 'Capactiy':
+      case 'Capacity':
         return AreaCategory.Capacity;
     }
   }
