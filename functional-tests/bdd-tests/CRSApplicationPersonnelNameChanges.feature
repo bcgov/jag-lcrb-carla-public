@@ -38,7 +38,7 @@ Scenario: Private Corporation CRS Personnel Name Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I change a personnel email address for a private corporation
+    # And I change a personnel email address for a private corporation
     And I request a personnel name change for a private corporation
     And I confirm the correct personnel name change fee for a Cannabis licence
     And I confirm that the director name has been updated
