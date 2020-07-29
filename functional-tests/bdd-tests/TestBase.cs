@@ -675,14 +675,14 @@ namespace bdd_tests
             NgWebElement uploadEquipment = ngDriver.FindElement(By.XPath("(//input[@type='file'])[14]"));
             uploadEquipment.SendKeys(equipmentPath);
 
+            // select 'yes' for neutral grain spirits            
+            NgWebElement uiNeutralGrains = ngDriver.FindElement(By.CssSelector("[formcontrolname='neutralGrain'] mat-radio-button[value='Yes']"));
+            uiNeutralGrains.Click();
+
             // upload the packaged product storage
             string storagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "packaged_product_storage.pdf");
             NgWebElement uploadStorage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[17]"));
             uploadStorage.SendKeys(storagePath);
-
-            // select 'yes' for neutral grain spirits            
-            NgWebElement uiNeutralGrains = ngDriver.FindElement(By.CssSelector("[formcontrolname='neutralGrain'] mat-radio-button[value='Yes']"));
-            uiNeutralGrains.Click();
 
             if (manufacturerType == "winery")
             {
