@@ -592,6 +592,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNoNotApplicable? MfgNeutralGrainSpirits { get; set; }
 
+        public int? ZoningStatus { get; set; }
+        public bool? IsOwnerBusiness { get; set; }      
+        public bool? HasValidInterest { get; set; }
+        public bool? WillHaveValidInterest { get; set; }
+        //public YesNoNotApplicable? InGroceryStore { get; set; }
+
 
         // these are just optional int - not picklist references.
         public int? MfgAcresOfFruit { get; set; }
@@ -602,6 +608,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? MfgStepCrushing { get; set; }
         public bool? MfgStepFiltering { get; set; }
         public bool? MfgStepSecFermOrCarb { get; set; }
+
+
+
 
 
         // Manufactuer Structural Change - Patio

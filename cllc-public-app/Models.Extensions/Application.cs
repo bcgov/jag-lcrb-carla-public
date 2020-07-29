@@ -164,6 +164,8 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             to.AdoxioPidlist = from.PidList;
 
+            // here
+
             // Manufacturing structural change fields
 
             to.AdoxioPatiocompdescription = from.PatioCompDescription;
@@ -449,6 +451,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 MfgStepCrushing = dynamicsApplication.AdoxioMfgstepcrushing,
                 MfgStepFiltering = dynamicsApplication.AdoxioMfgstepfiltering,
                 MfgStepSecFermOrCarb = dynamicsApplication.AdoxioMfgstepsecfermorcarb,
+                IsOwnerBusiness = dynamicsApplication.AdoxioIsownerbusiness,
+                HasValidInterest = dynamicsApplication.AdoxioIsownerhasvalidinterest,
+                WillHaveValidInterest = dynamicsApplication.AdoxioIsownerwillhavevalidinterest,
+                ZoningStatus = dynamicsApplication.AdoxioZoningstatus,
                 
 
             PidList = dynamicsApplication.AdoxioPidlist,
