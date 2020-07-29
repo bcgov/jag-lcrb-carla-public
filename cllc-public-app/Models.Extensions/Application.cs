@@ -161,7 +161,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMfgstepcrushing = from.MfgStepCrushing;
             to.AdoxioMfgstepfiltering = from.MfgStepFiltering;
             to.AdoxioMfgstepsecfermorcarb = from.MfgStepSecFermOrCarb;
-
+            to.AdoxioMfgusesneutralgrainspirits = (int?) from.MfgUsesNeutralGrainSpirits;
             to.AdoxioPidlist = from.PidList;
 
             // here
@@ -440,9 +440,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 // Manufacturing fields
 
                 IsPackaging = dynamicsApplication.AdoxioIspackaging,
-                MfgPipedInProduct = (YesNoNotApplicable?) dynamicsApplication.AdoxioMfgpipedinproduct,
-                MfgBrewPubOnSite = (YesNoNotApplicable?) dynamicsApplication.AdoxioMfgbrewpubonsite,
-                //MfgNeutralGrainSpirits = (YesNoNotApplicable) dynamicsApplication.adoxiomfg
+                
                 MfgAcresOfFruit = dynamicsApplication.AdoxioMfgacresoffruit,
                 MfgAcresOfGrapes = dynamicsApplication.AdoxioMfgacresofgrapes,
                 MfgAcresOfHoney = dynamicsApplication.AdoxioMfgacresofhoney,
@@ -469,10 +467,26 @@ namespace Gov.Lclb.Cllb.Public.Models
                 PatioAccessControlDescription = dynamicsApplication.AdoxioPatioaccesscontroldescription
         };
 
+
+            // mfg fields
+
             if (dynamicsApplication.AdoxioLicencesubcategory != null)
             {
                 applicationVM.LicenceSubCategory = (LicenceSubCategory)dynamicsApplication.AdoxioLicencesubcategory; 
             }
+            if (dynamicsApplication.AdoxioMfgpipedinproduct != null)
+            {
+                applicationVM.MfgPipedInProduct = (YesNoNotApplicable?)dynamicsApplication.AdoxioMfgpipedinproduct;
+            }
+            if (dynamicsApplication.AdoxioMfgbrewpubonsite != null)
+            {
+                applicationVM.MfgBrewPubOnSite = (YesNoNotApplicable?)dynamicsApplication.AdoxioMfgbrewpubonsite;
+            }
+            if (dynamicsApplication.AdoxioMfgusesneutralgrainspirits != null)
+            {
+                applicationVM.MfgUsesNeutralGrainSpirits = (YesNoNotApplicable)dynamicsApplication.AdoxioMfgusesneutralgrainspirits;
+            }
+             
 
             if (dynamicsApplication.AdoxioLocatedabovedescription != null)
             {
