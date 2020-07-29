@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top98 { get; set; }
+        int? Top100 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip98 { get; set; }
+        int? Skip100 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count98 { get; set; }
+        bool? Count100 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter98 { get; set; }
+        string Filter100 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search98 { get; set; }
+        string Search100 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -66,6 +66,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAccounts.
         /// </summary>
         IAccounts Accounts { get; }
+
+        /// <summary>
+        /// Gets the IPartyidadoxiolocalgovindigenousnation.
+        /// </summary>
+        IPartyidadoxiolocalgovindigenousnation Partyidadoxiolocalgovindigenousnation { get; }
 
         /// <summary>
         /// Gets the IAdoxiolicencetypeadoxioinvestigationset.
@@ -396,6 +401,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILocalgovindigenousnations.
         /// </summary>
         ILocalgovindigenousnations Localgovindigenousnations { get; }
+
+        /// <summary>
+        /// Gets the ILocalgovindigenousnationactivityparties.
+        /// </summary>
+        ILocalgovindigenousnationactivityparties Localgovindigenousnationactivityparties { get; }
 
         /// <summary>
         /// Gets the IPersonalhistorysummaries.
