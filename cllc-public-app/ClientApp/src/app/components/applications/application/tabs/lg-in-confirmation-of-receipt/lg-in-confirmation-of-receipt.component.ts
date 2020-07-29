@@ -16,6 +16,7 @@ import { Observable } from 'rxjs';
 })
 export class LgInConfirmationOfReceiptComponent extends FormBase implements OnInit {
   @Input() application: Application;
+  @Input() isOpenedByLGForApproval: boolean;
   @Input() htmlContent: ApplicationHTMLContent;
   @Input() disableForm = false;
   validationMessages: string[];
