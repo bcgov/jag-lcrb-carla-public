@@ -152,6 +152,12 @@ export class Application {
   isAlr: boolean;
   pidList: string; 
 
+  zoningStatus: boolean;
+  isOwnerBusiness: boolean;
+  hasValidInterest: boolean;
+  willHaveValidInterest: boolean;
+  //inGroceryStore: string;
+
   // Manufactuer Structural Change - Patio
   patioCompDescription: string;
   patioLocationDescription: string; 
