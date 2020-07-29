@@ -161,7 +161,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMfgstepcrushing = from.MfgStepCrushing;
             to.AdoxioMfgstepfiltering = from.MfgStepFiltering;
             to.AdoxioMfgstepsecfermorcarb = from.MfgStepSecFermOrCarb;
-
+            to.AdoxioMfgusesneutralgrainspirits = (int?) from.MfgUsesNeutralGrainSpirits;
             to.AdoxioPidlist = from.PidList;
 
             // Manufacturing structural change fields
@@ -433,13 +433,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 OtherBusinessesDetails = dynamicsApplication.AdoxioOtherbusinesssamelocationdetails,
                 ServiceAreas = new List<CapacityArea>(),
                 OutsideAreas = new List<CapacityArea>(),
+                CapacityArea = new List<CapacityArea>(),
 
                 // Manufacturing fields
 
                 IsPackaging = dynamicsApplication.AdoxioIspackaging,
                 MfgPipedInProduct = (YesNoNotApplicable?) dynamicsApplication.AdoxioMfgpipedinproduct,
                 MfgBrewPubOnSite = (YesNoNotApplicable?) dynamicsApplication.AdoxioMfgbrewpubonsite,
-                //MfgNeutralGrainSpirits = (YesNoNotApplicable) dynamicsApplication.adoxiomfg
+                MfgUsesNeutralGrainSpirits = (YesNoNotApplicable) dynamicsApplication.AdoxioMfgusesneutralgrainspirits,
                 MfgAcresOfFruit = dynamicsApplication.AdoxioMfgacresoffruit,
                 MfgAcresOfGrapes = dynamicsApplication.AdoxioMfgacresofgrapes,
                 MfgAcresOfHoney = dynamicsApplication.AdoxioMfgacresofhoney,
@@ -518,6 +519,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                         else if (area.AdoxioAreacategory == (int?)AdoxioAreaCategories.OutdoorArea)
                         {
                             applicationVM.OutsideAreas.Add(area.ToViewModel());
+                        }
+                        else if (area.AdoxioAreacategory == (int?)AdoxioAreaCategories.Capacity)
+                        {
+                            applicationVM.CapacityArea.Add(area.ToViewModel());
                         }
                     }
                 }

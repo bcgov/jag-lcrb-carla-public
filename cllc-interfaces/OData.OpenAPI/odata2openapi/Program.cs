@@ -355,7 +355,10 @@ namespace odata2openapi
                             firstTagLower.Equals("entitydefinitions") ||
                             firstTagLower.Equals("globaloptionsetdefinitions") ||
                             firstTagLower.Equals("systemforms") ||
-                            firstTagLower.Equals("workflows")
+                            firstTagLower.Equals("workflows") ||
+                            firstTagLower.Equals("eventschedules") ||
+                            firstTagLower.Equals("inspector")
+
 
                             )
                         {
@@ -860,35 +863,27 @@ namespace odata2openapi
                     {
                         definition.Value.Example = null;
                     }
-                    /*
-                    if (definition.Value.Title != null)
-                    {
-                        definition.Value.Title = null;
-                    }
-
-                    if (definition.Value.Enum != null)
-                    {
-                        definition.Value.Enum.Clear();
-                    }
-                    */
+                    
 
                     if (definition.Value != null && definition.Value.Properties != null)
                     {
                         foreach (var property in definition.Value.Properties)
                         {
+                            
+                            if (property.Value.Type == null)
+                            {
+                                Console.WriteLine($"Property has no type, forcing to string. {property.Key} - format - {property.Value.Format}");
+                                property.Value.Type = "string";
+                            }
                             // convert all dates to datetimeoffset.
                             // special handling of the Dynamics "DATE (YYYY-MM-DD)" fields will need to be done with extensions.
-                            if (property.Value.Format != null && property.Value.Format == "date")
+                            if (property.Value != null && property.Value.Format != null && property.Value.Format == "date")
                             {
                                 property.Value.Format = "date-time";
                             }
-                            if (property.Value.Type == null)
-                            {
-                                property.Value.Type = "string";
-                            }
 
                             // fix for doubles
-                            if (property.Value != null && property.Value.Format != null && property.Value.Format.Equals("double"))
+                            else if (property.Value != null && property.Value.Format != null && property.Value.Format.Equals("double"))
                             {
                                 property.Value.Format = "decimal";
                                 property.Value.Type = "number";
