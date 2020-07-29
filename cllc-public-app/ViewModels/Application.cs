@@ -382,6 +382,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     {
         public string Id { get; set; } //adoxio_applicationid
 
+        public string ParentApplicationId { get; set; }
+
         [JsonConverter(typeof(StringEnumConverter))]
         public AdoxioApplicationStatusCodes ApplicationStatus { get; set; } //statuscode
 
