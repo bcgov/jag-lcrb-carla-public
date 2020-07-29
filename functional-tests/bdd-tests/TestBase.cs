@@ -561,7 +561,7 @@ namespace bdd_tests
         public void CompleteManufacturerApplication(string manufacturerType)
         {
             /* 
-            Page Title: 
+            Page Title: Manufacturer (Winery, Brewery, Distillery or Co-Packer) Licence Application
             */
 
             // create test data
@@ -650,39 +650,42 @@ namespace bdd_tests
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
             string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
 
+            // upload the business plan
+            // winery = 2
+            string businessPlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "production_sales_forecast.pdf");
+            NgWebElement uploadBusinessPlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+            uploadBusinessPlan.SendKeys(businessPlanPath);
+
             // upload the production sales forecast
+            // winery = 5
             string productionSalesPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "production_sales_forecast.pdf");
-            NgWebElement uploadProductionSales = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+            NgWebElement uploadProductionSales = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
             uploadProductionSales.SendKeys(productionSalesPath);
 
             // upload the proposed products
-            string proposedProductsPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "proposed_products.pdf");
-            NgWebElement uploadProposedProducts = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
-            uploadProposedProducts.SendKeys(proposedProductsPath);
+            //string proposedProductsPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "proposed_products.pdf");
+            //NgWebElement uploadProposedProducts = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+            //uploadProposedProducts.SendKeys(proposedProductsPath);
 
             // upload the proposed agricultural sources
-            string proposedSourcesPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "proposed_agricultural_sources.pdf");
-            NgWebElement uploadSources = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
-            uploadSources.SendKeys(proposedSourcesPath);
+            //string proposedSourcesPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "proposed_agricultural_sources.pdf");
+            //NgWebElement uploadSources = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
+            //uploadSources.SendKeys(proposedSourcesPath);
             
             // upload the manufacturing stages
-            string stagesPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "manufacturing_stages.pdf");
-            NgWebElement uploadStages = ngDriver.FindElement(By.XPath("(//input[@type='file'])[11]"));
-            uploadStages.SendKeys(stagesPath);
+            //string stagesPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "manufacturing_stages.pdf");
+            //NgWebElement uploadStages = ngDriver.FindElement(By.XPath("(//input[@type='file'])[11]"));
+            //uploadStages.SendKeys(stagesPath);
 
             // upload the manufacturing equipment
-            string equipmentPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "manufacturing_equipment.pdf");
-            NgWebElement uploadEquipment = ngDriver.FindElement(By.XPath("(//input[@type='file'])[14]"));
-            uploadEquipment.SendKeys(equipmentPath);
-
-            // select 'yes' for neutral grain spirits            
-            NgWebElement uiNeutralGrains = ngDriver.FindElement(By.CssSelector("[formcontrolname='neutralGrain'] mat-radio-button[value='Yes']"));
-            uiNeutralGrains.Click();
+            //string equipmentPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "manufacturing_equipment.pdf");
+            //NgWebElement uploadEquipment = ngDriver.FindElement(By.XPath("(//input[@type='file'])[14]"));
+            //uploadEquipment.SendKeys(equipmentPath);
 
             // upload the packaged product storage
-            string storagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "packaged_product_storage.pdf");
-            NgWebElement uploadStorage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[17]"));
-            uploadStorage.SendKeys(storagePath);
+            //string storagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "packaged_product_storage.pdf");
+            //NgWebElement uploadStorage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[17]"));
+            //uploadStorage.SendKeys(storagePath);
 
             if (manufacturerType == "winery")
             {
@@ -703,10 +706,34 @@ namespace bdd_tests
                 NgWebElement uiHoney = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mfgAcresOfHoney']"));
                 uiHoney.SendKeys(honeyBeehives);
 
+                // select the blending checkbox
+                NgWebElement uiBlending = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-52"));
+                uiBlending.Click();
+
+                // select the crushing checkbox
+                NgWebElement uiCrushing = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-53"));
+                uiCrushing.Click();
+
+                // select the filtering checkbox
+                NgWebElement uiFiltering = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-54"));
+                uiFiltering.Click();
+
+                // select the aging, for at least 3 months checkbox
+                NgWebElement uiAging = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-55"));
+                uiAging.Click();
+
+                // select the secondary fermentation or carbonation checkbox
+                NgWebElement uiSecondaryFermentation = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-56"));
+                uiSecondaryFermentation.Click();
+
+                // select the packaging checkbox
+                NgWebElement uiPackaging = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-57"));
+                uiSecondaryFermentation.Click();
+
                 // upload the business insurance certificate
-                string insurancePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "business_insurance.pdf");
-                NgWebElement uploadInsurance = ngDriver.FindElement(By.XPath("(//input[@type='file'])[20]"));
-                uploadInsurance.SendKeys(insurancePath);
+                //string insurancePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "business_insurance.pdf");
+                //NgWebElement uploadInsurance = ngDriver.FindElement(By.XPath("(//input[@type='file'])[20]"));
+                //uploadInsurance.SendKeys(insurancePath);
             }
 
             if (manufacturerType == "distillery")
@@ -794,6 +821,10 @@ namespace bdd_tests
                 NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[29]"));
                 uploadSitePlan.SendKeys(sitePlanPath);
             }
+
+            // select 'yes' for neutral grain spirits            
+            NgWebElement uiNeutralGrains = ngDriver.FindElement(By.CssSelector("[formcontrolname='neutralGrain'] mat-radio-button[value='Yes']"));
+            uiNeutralGrains.Click();
 
             // select the owner checkbox
             NgWebElement uiOwner = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='isOwner']"));
