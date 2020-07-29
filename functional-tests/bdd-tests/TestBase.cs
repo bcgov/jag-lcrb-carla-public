@@ -4131,7 +4131,7 @@ namespace bdd_tests
             NgWebElement confirmTrustee = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] .fa-save span"));
             confirmTrustee.Click();
 
-            /********** Business Shareholder - Partnership **********
+            /********** Business Shareholder - Partnership **********/
 
             // create partnership test data
             string businessNamePartnership = "Partnership";
@@ -4201,7 +4201,7 @@ namespace bdd_tests
             // upload partnership agreement
             string partnershipAgreement = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
             NgWebElement uploadPartner = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-5']/div/section/app-org-structure/div/div[2]/section/app-file-uploader/div/ngx-file-drop/div/div/input"));
-            uploadPartner.SendKeys(partnershipAgreement);*/
+            uploadPartner.SendKeys(partnershipAgreement);
         }
 
 
