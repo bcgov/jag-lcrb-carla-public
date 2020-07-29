@@ -97,6 +97,7 @@ export class Application {
   renewalThirdParty: string;
 
   description1: string;
+  description2: string;
 
   isReadyValidInterest: boolean;
   isReadyWorkers: boolean;
@@ -149,6 +150,7 @@ export class Application {
   mfgStepCrushing: boolean;
   mfgStepFiltering: boolean;
   mfgStepSecFermOrCarb: boolean;
+  mfgUsesNeutralGrainSpirits: string;
   isAlr: boolean;
   pidList: string; 
 
