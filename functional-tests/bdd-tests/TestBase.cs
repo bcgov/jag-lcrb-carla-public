@@ -1004,7 +1004,7 @@ namespace bdd_tests
                 ClickReviewOrganizationInformation();
 
                 /* 
-                Page Title: 
+                Page Title: [client name] Detailed Organization Information
                 */
 
                 // click on the Edit button for Key Personnel (partnership, sole proprietorship, private corporation, or society)
@@ -1084,7 +1084,7 @@ namespace bdd_tests
         public void PersonnelNameChangeFee(string applicationType)
         {
             /* 
-            Page Title: 
+            Page Title: Payment Approved
             */
 
             if (applicationType == "Cannabis licence")
@@ -1104,10 +1104,6 @@ namespace bdd_tests
         [And(@"I confirm that the director name has been updated")]
         public void DirectorNameUpdated()
         {
-            /* 
-            Page Title: 
-            */
-
             // click on Dashboard link
             ClickOnDashboard();
 
@@ -1119,7 +1115,7 @@ namespace bdd_tests
             ClickReviewOrganizationInformation();
 
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // check that the director name has been updated
@@ -1225,7 +1221,7 @@ namespace bdd_tests
                 ClickReviewOrganizationInformation();
 
                 /* 
-                Page Title: 
+                Page Title: [client name] Detailed Organization Information
                 */
 
                 // click on the Edit button for Key Personnel (partnership, sole proprietorship, public corporation, or society)
@@ -1284,7 +1280,7 @@ namespace bdd_tests
             MakePayment();
 
             /* 
-            Page Title: 
+            Page Title: Payment Approved
             */
 
             if (feeType == "Cannabis")
@@ -1548,7 +1544,7 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(4000);
 
             /* 
-            Page Title: 
+            Page Title: Payment Approved
             */
 
             // confirm correct payment amount
@@ -1669,7 +1665,7 @@ namespace bdd_tests
             MakePayment();
 
             /* 
-            Page Title: 
+            Page Title: Payment Approved
             */
 
             // confirm correct payment amount	
@@ -1733,7 +1729,7 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(4000);
 
             /* 
-            Page Title: 
+            Page Title: Payment Approved
             */
 
             // confirm correct payment amount
@@ -3125,7 +3121,7 @@ namespace bdd_tests
         public void SameDirectorShareholder()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // find the upload test files in the bdd-tests\upload_files folder
@@ -3313,7 +3309,7 @@ namespace bdd_tests
         public void DeleteDirectorRecord()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // click on the delete button for key personnel > director record    
@@ -3329,7 +3325,7 @@ namespace bdd_tests
         public void ShareholderRecordDisplayed()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // check that the director email is not displayed to confirm deletion
@@ -3344,7 +3340,7 @@ namespace bdd_tests
         public void ModifyOnlyDirectorRecord()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // create new name for same individual
@@ -3378,7 +3374,7 @@ namespace bdd_tests
         public void DirectorShareholderNameIdentical()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // check that the director first name has been updated
@@ -3464,7 +3460,7 @@ namespace bdd_tests
         public void OrgStructureDisplays()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // confirm that the page loads
@@ -3487,7 +3483,7 @@ namespace bdd_tests
         public void BusinessShareholderSameDirShare()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // create the business shareholder data
@@ -3614,7 +3610,7 @@ namespace bdd_tests
         public void BusinessShareholderSameDirShare2()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // create business shareholder key personnel #2 data
@@ -3688,7 +3684,7 @@ namespace bdd_tests
         public void OrgStructureCorrect()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // confirm that first individual is in correct positions
@@ -3709,7 +3705,7 @@ namespace bdd_tests
         public void OrgStructureCorrectPayment()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // confirm that first individual is in correct positions
@@ -3730,7 +3726,7 @@ namespace bdd_tests
         public void RemoveLatestDirectorShareholder()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // delete the most recent director
@@ -3747,7 +3743,7 @@ namespace bdd_tests
         public void RemoveLatestDirectorAfterSave()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // delete the most recent director
@@ -3760,7 +3756,7 @@ namespace bdd_tests
         public void RemoveLatestShareholderAfterSave()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // delete the most recent shareholder 
@@ -3773,7 +3769,7 @@ namespace bdd_tests
         public void LatestDirectorShareholderRemoved()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // confirm that the most recent director and shareholder not present
@@ -3785,7 +3781,7 @@ namespace bdd_tests
         public void RemoveBusinessShareholder()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // delete the business shareholder
@@ -3798,7 +3794,7 @@ namespace bdd_tests
         public void BusinessShareholderRemoved()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // confirm that the business shareholder not present	
@@ -3846,7 +3842,7 @@ namespace bdd_tests
         public void MixedBusinessShareholders()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             /********** Business Shareholder - Public Corporation **********/
@@ -4213,7 +4209,7 @@ namespace bdd_tests
         public void SecurityScreeningsMixedBusinessShareholders()
         {
             /* 
-            Page Title: 
+            Page Title: Security Screening Requirements
             */
 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel0')]")).Displayed);
@@ -4231,7 +4227,7 @@ namespace bdd_tests
         public void ReviewMixedBusinessShareholdersOrgStructure()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             //TODO
@@ -4242,7 +4238,7 @@ namespace bdd_tests
         public void SaveForLaterMixedBusinessShareholders()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             /********** Business Shareholder - Public Corporation **********/
@@ -4332,7 +4328,7 @@ namespace bdd_tests
         public void SaveForLaterMixedBusinessShareholdersCorrectOrgStructure()
         {
             /* 
-            Page Title: 
+            Page Title: [client name] Detailed Organization Information
             */
 
             // confirm that expected personnel and businesses are present
