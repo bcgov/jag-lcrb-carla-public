@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject, ChangeDetectorRef } from '@angular/core';
 import { ApplicationDataService } from '@services/application-data.service';
 import { Application } from '@models/application.model';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -21,11 +21,15 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
   @Input() disableForm = false;
   validationMessages: string[];
   busy: any;
+  approvingApplication: boolean;
+  rejectingApp: boolean;
+  optingOutOfComment: boolean;
 
   constructor(private applicationDataService: ApplicationDataService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private router: Router,
+    private cd: ChangeDetectorRef,
     private fb: FormBuilder) {
     super();
   }
@@ -55,8 +59,12 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
     if (!this.isValid()) {
       return;
     }
+
     this.showComfirmation('OptOut').subscribe(result => {
       if (result === 'OK') {
+        this.optingOutOfComment = true;
+        this.cd.detectChanges();
+
         let data = <Application>{
           ...this.application,
           ...this.form.value,
@@ -68,8 +76,12 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
           .subscribe(res => {
             this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
             this.router.navigateByUrl('/lg-approvals');
+            this.optingOutOfComment = false;
+            this.cd.detectChanges();
           }, error => {
             this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+            this.optingOutOfComment = false;
+            this.cd.detectChanges();
           });
       }
     });
@@ -83,6 +95,9 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
 
     this.showComfirmation('Reject').subscribe(result => {
       if (result === 'OK') {
+        this.rejectingApp = true;
+        this.cd.detectChanges();
+
         let data = <Application>{
           ...this.application,
           ...this.form.value,
@@ -94,8 +109,12 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
           .subscribe(res => {
             this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
             this.router.navigateByUrl('/lg-approvals');
+            this.rejectingApp = false;
+            this.cd.detectChanges();
           }, error => {
             this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+            this.rejectingApp = false;
+            this.cd.detectChanges();
           });
       }
     })
@@ -108,8 +127,12 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
     if (!this.isValid()) {
       return;
     }
+
     this.showComfirmation('Approve').subscribe(result => {
       if (result === 'OK') {
+        this.approvingApplication = true;
+        this.cd.detectChanges();
+
         let data = <Application>{
           ...this.application,
           ...this.form.value,
@@ -121,8 +144,12 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
           .subscribe(res => {
             this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
             this.router.navigateByUrl('/lg-approvals');
+            this.approvingApplication = false;
+            this.cd.detectChanges();
           }, error => {
             this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+            this.approvingApplication = false;
+            this.cd.detectChanges();
           });
       }
     });
