@@ -29,6 +29,7 @@ namespace bdd_tests
 
         protected string applicationID;
 
+
         protected TestBase()
         {
             string path = Directory.GetCurrentDirectory();
@@ -72,6 +73,7 @@ namespace bdd_tests
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
 
+
         public void CarlaHome()
         {
             ngDriver.Navigate().GoToUrl($"{baseUri}");
@@ -84,6 +86,7 @@ namespace bdd_tests
         {
             CarlaHome();
         }
+
 
         private void DoLogin(string businessType)
         {
@@ -176,6 +179,7 @@ namespace bdd_tests
             ngDriver.WaitForAngular();
         }
 
+
         public void CarlaLogin(string businessType)
         {
             Random random = new Random();
@@ -189,6 +193,7 @@ namespace bdd_tests
             DoLogin(businessType);
         }
 
+
         public void CarlaLoginNoCheck()
         {
             // load the dashboard page
@@ -198,6 +203,7 @@ namespace bdd_tests
 
             ngDriver.WaitForAngular();
         }
+
 
         public void CarlaLoginWithUser(string businessType)
         {
@@ -209,6 +215,7 @@ namespace bdd_tests
 
             DoLogin(businessType);
         }
+
 
         public void MakePayment()
         {
@@ -234,6 +241,7 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = false;
         }
 
+
         public void CarlaDeleteCurrentAccount()
         {
             ngDriver.IgnoreSynchronization = true;
@@ -245,6 +253,7 @@ namespace bdd_tests
 
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
+
 
         [And(@"I complete the Rural Agency Store application")]
         public void CompleteRuralAgencyStoreApplication()
@@ -357,6 +366,7 @@ namespace bdd_tests
 
             ClickOnSubmitButton();
         }
+
 
         [And(@"I complete the Cannabis Retail Store application for a(.*)")]
         public void CompleteCannabisApplication(string businessType)
@@ -537,6 +547,7 @@ namespace bdd_tests
             ReturnToDashboard();
         }
 
+
         public void ReturnToDashboard()
         {
             // click on Return to Dashboard link
@@ -545,16 +556,21 @@ namespace bdd_tests
             returnDash.Click();
         }
 
+
         [And(@"I complete the Manufacturer application for a (.*)")]
         public void CompleteManufacturerApplication(string manufacturerType)
         {
+            /* 
+            Page Title: 
+            */
+
             // create test data
             string estName = "Manufacturer's Establishment";
             string streetLocation = "123 Innovation Street";
             string city = "Victoria";
             string postal = "V5R2X4";
-            string pid = "111111111";
-            string additionalPid = "999999999";
+            string PID = "111111111";
+            string additionalPIDs = "999999999, 000000000, 181818181";
             string storeEmail = "store@email.com";
             string storePhone = "250-012-3456";
             string contactTitle = "Sommelier";
@@ -579,11 +595,11 @@ namespace bdd_tests
 
             // enter the PID
             NgWebElement uiEstabPID = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentParcelId']"));
-            uiEstabPID.SendKeys(pid);
+            uiEstabPID.SendKeys(PID);
 
-            // enter the additional PID
+            // enter additional PIDs
             NgWebElement uiAdditionalEstabPID = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='pidList']"));
-            uiAdditionalEstabPID.SendKeys(additionalPid);
+            uiAdditionalEstabPID.SendKeys(additionalPIDs);
 
             // select the proof of zoning checkbox
             NgWebElement uiProofOfZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-4"));
@@ -670,7 +686,7 @@ namespace bdd_tests
 
             if (manufacturerType == "winery")
             {
-                // create test data
+                // create winery test data
                 string grapesAcres = "100";
                 string fruitAcres = "5";
                 string honeyBeehives = "7";
@@ -816,6 +832,7 @@ namespace bdd_tests
             uiSubmitAndPay.Click();
         }
 
+
         [And(@"I complete the Catering application")]
         public void CompleteCateringApplication()
         {
@@ -887,7 +904,6 @@ namespace bdd_tests
             uiOtherBusinessYes.Click();
 
             // enter the connection details
-            //textarea#liquorIndustryConnectionsDetails
             NgWebElement uiLiqIndConnection = ngDriver.FindElement(By.Id("liquorIndustryConnectionsDetails"));
             uiLiqIndConnection.SendKeys(liqConnectionDetails);
 
@@ -940,6 +956,7 @@ namespace bdd_tests
             applicationID = tempFix[0];
         }
 
+
         public void CheckFeatureFlag(string flag)
         {
             ngDriver.IgnoreSynchronization = true;
@@ -947,7 +964,7 @@ namespace bdd_tests
             // navigate to the feature flags page
             ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/features");
 
-            // confirm that the CRS-Renewal flag is enabled during this test
+            // confirm that the correct flag is enabled during this test
             Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'{flag}')]")).Displayed);
 
             ngDriver.IgnoreSynchronization = false;
@@ -979,8 +996,16 @@ namespace bdd_tests
             {
                 ClickOnDashboard();
 
+                /* 
+                Page Title: Welcome to Liquor and Cannabis Licensing
+                */
+
                 // click on the review organization information button
                 ClickReviewOrganizationInformation();
+
+                /* 
+                Page Title: 
+                */
 
                 // click on the Edit button for Key Personnel (partnership, sole proprietorship, private corporation, or society)
                 if (businessType == "partnership" || businessType == "sole proprietorship" || businessType == "private corporation" || businessType == "society")
@@ -1051,31 +1076,55 @@ namespace bdd_tests
                 MakePayment();
 
                 System.Threading.Thread.Sleep(3000);
-
-                /*
-                if (applicationTypeShared == "a Cannabis Retail Store")
-                {
-                    // check payment fee
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
-                }
-
-                if (applicationTypeShared == "Catering")
-                {
-                    // check payment fee
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
-                }
-                */
-
-                // click on Dashboard link
-                ClickOnDashboard();
-
-                // click on the review organization information button
-                ClickReviewOrganizationInformation();
-
-                // check that the director name has been updated
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedFirstName')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedLastName')]")).Displayed);
             }
+        }
+
+
+        [And(@"I confirm the correct personnel name change fee for a (.*)")]
+        public void PersonnelNameChangeFee(string applicationType)
+        {
+            /* 
+            Page Title: 
+            */
+
+            if (applicationType == "Cannabis licence")
+            {
+                // check Cannabis name change fee
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
+            }
+
+            if (applicationType == "Catering licence")
+            {
+                // check Catering name change fee
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
+            }
+        }
+
+
+        [And(@"I confirm that the director name has been updated")]
+        public void DirectorNameUpdated()
+        {
+            /* 
+            Page Title: 
+            */
+
+            // click on Dashboard link
+            ClickOnDashboard();
+
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
+
+            // click on the review organization information button
+            ClickReviewOrganizationInformation();
+
+            /* 
+            Page Title: 
+            */
+
+            // check that the director name has been updated
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedFirstName')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedLastName')]")).Displayed);
         }
 
 
@@ -1084,7 +1133,7 @@ namespace bdd_tests
         {
             /* 
             Page Title: Licences
-            Subtitle: Cannabis Retail Store Licences
+            Subtitle:   Cannabis Retail Store Licences
             */
 
             string requestRelocationLink = "Request Relocation";
@@ -1168,8 +1217,16 @@ namespace bdd_tests
                 // click on Dashboard link
                 ClickOnDashboard();
 
+                /* 
+                Page Title: Welcome to Liquor and Cannabis Licensing
+                */
+
                 // click on the review organization information button
                 ClickReviewOrganizationInformation();
+
+                /* 
+                Page Title: 
+                */
 
                 // click on the Edit button for Key Personnel (partnership, sole proprietorship, public corporation, or society)
                 if (businessType == "partnership" || businessType == "sole proprietorship" || businessType == "public corporation" || businessType == "society")
@@ -1200,6 +1257,10 @@ namespace bdd_tests
                 NgWebElement orgInfoButton2 = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
                 orgInfoButton2.Click();
 
+                /* 
+                Page Title: Welcome to Liquor and Cannabis Licensing
+                */
+
                 // check that dashboard is displayed (i.e. no payment has been required)
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Welcome to Liquor and Cannabis Licensing')]")).Displayed);
             }
@@ -1209,6 +1270,10 @@ namespace bdd_tests
         [And(@"I pay the licensing fee for (.*)")]
         public void PayLicenceFee(string feeType)
         {
+            /* 
+            Page Title: Licences
+            */
+
             string firstYearLicenceFee = "Pay First Year Licensing Fee";
 
             // click on the pay first year licence fee link
@@ -1217,6 +1282,10 @@ namespace bdd_tests
 
             // pay the licence fee
             MakePayment();
+
+            /* 
+            Page Title: 
+            */
 
             if (feeType == "Cannabis")
             {
@@ -1377,6 +1446,10 @@ namespace bdd_tests
         [And(@"I click on the Start Application button for (.*)")]
         public void ClickStartApplication(string applicationType)
         {
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
+
             if (applicationType == "Catering")
             {
                 // click on the Catering Start Application button
@@ -1400,7 +1473,7 @@ namespace bdd_tests
 
             if (applicationType == "a Manufacturer Licence")
             {
-                // click on the Rural Store Start Application button
+                // click on the Manufacturer Licence Start Application button
                 NgWebElement startAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
                 startAppButton.Click();
             }
@@ -1410,7 +1483,7 @@ namespace bdd_tests
         [And(@"I request a structural change")]
         public void RequestStructuralChange()
         {
-            /* 
+           /* 
            Page Title: Licences
            Subtitle:   Cannabis Retail Store Licences
            */
@@ -1474,6 +1547,10 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(4000);
 
+            /* 
+            Page Title: 
+            */
+
             // confirm correct payment amount
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$440.00')]")).Displayed);
 
@@ -1504,6 +1581,7 @@ namespace bdd_tests
             ClickLicencesTab();
         }
 
+
         public void RequestedApplicationsOnDashboard()
         {
             /* 
@@ -1526,6 +1604,10 @@ namespace bdd_tests
         [And(@"I request a valid store name or branding change for (.*)")]
         public void RequestNameBrandingChange(string changeType)
         {
+            /* 
+            Page Title: Licences
+            */
+
             string nameBrandingLinkCannabis = "Request Store Name or Branding Change";
             string nameBrandingLinkCatering = "Establishment Name Change Application";
 
@@ -1586,12 +1668,17 @@ namespace bdd_tests
             // pay for the branding change application
             MakePayment();
 
+            /* 
+            Page Title: 
+            */
+
             // confirm correct payment amount	
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
 
             // return to the Licences tab
             ClickLicencesTab();
         }
+
 
         [And(@"I request a store relocation for Catering")]
         public void CateringRelocationRequest()
@@ -1645,9 +1732,14 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(4000);
 
+            /* 
+            Page Title: 
+            */
+
             // confirm correct payment amount
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
         }
+
 
         public void Dispose()
         {
@@ -1656,6 +1748,7 @@ namespace bdd_tests
             // Suppress finalization.
             GC.SuppressFinalize(this);
         }
+
 
         public void SharedCalendarDate()
         {
@@ -1713,6 +1806,10 @@ namespace bdd_tests
             // return to the Licences tab
             ClickLicencesTab();
 
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
+
             // confirm that the application has been initiated
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third Party Operator Application Initiated')]")).Displayed);
         }
@@ -1721,6 +1818,10 @@ namespace bdd_tests
         [And(@"I request a transfer of ownership")]
         public void RequestOwnershipTransfer()
         {
+            /* 
+            Page Title: Licences
+            */
+
             string transferOwnership = "Transfer Licence";
 
             // click on the Transfer Ownership link
@@ -1753,6 +1854,10 @@ namespace bdd_tests
             submitTransferButton.Click();
 
             ClickLicencesTab();
+
+            /* 
+            Page Title: Licences
+            */
 
             // check for transfer initiated status 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Transfer Requested')]")).Displayed);
@@ -2946,10 +3051,6 @@ namespace bdd_tests
             // click on the Show Store as Open on Map checkbox
             NgWebElement uiMapCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox"));
             uiMapCheckbox.Click();
-
-            /* 
-            Page Title: Apply for a cannabis licence
-            */
         }
 
 
@@ -2987,14 +3088,6 @@ namespace bdd_tests
             - the establishment postal code
             - the PID
             - the store phone number
-            */
-
-            // select 'Yes' for other business on premises
-            //NgWebElement otherBusiness = ngDriver.FindElement(By.Id("mat-button-toggle-10-button"));
-            //otherBusiness.Click();
-
-            /*
-            The following actions are intentionally left incomplete:
             - upload a store signage document
             - enter the first name of the application contact
             - enter the last name of the application contact
@@ -3031,6 +3124,10 @@ namespace bdd_tests
         [And(@"I enter the same individual as a director and a shareholder")]
         public void SameDirectorShareholder()
         {
+            /* 
+            Page Title: 
+            */
+
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
@@ -3102,7 +3199,7 @@ namespace bdd_tests
             uiConfirmButton.Click();
 
             /***** Key Personnel #2 *****/
-            /* This extra person is added because the calendar selection is unreliable via SharedCalendarDate(). DO NOT REMOVE. */
+            /* This extra person has been added because the calendar selection is unreliable via SharedCalendarDate(). DO NOT REMOVE. */
 
             // click on the Add Key Personnel button
             NgWebElement uiAddKeyPersonnel2 = ngDriver.FindElement(By.CssSelector(".padded-section:nth-child(1) .btn-secondary"));
@@ -3215,6 +3312,10 @@ namespace bdd_tests
         [And(@"I delete only the director record")]
         public void DeleteDirectorRecord()
         {
+            /* 
+            Page Title: 
+            */
+
             // click on the delete button for key personnel > director record    
             NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[1]/td[7]/i[2]/span"));
             uiEditInfoButton.Click();
@@ -3227,6 +3328,10 @@ namespace bdd_tests
         [And(@"only the shareholder record is displayed")]
         public void ShareholderRecordDisplayed()
         {
+            /* 
+            Page Title: 
+            */
+
             // check that the director email is not displayed to confirm deletion
             Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'same@individual.com'))]")).Displayed);
 
@@ -3238,6 +3343,10 @@ namespace bdd_tests
         [And(@"I modify only the director record")]
         public void ModifyOnlyDirectorRecord()
         {
+            /* 
+            Page Title: 
+            */
+
             // create new name for same individual
             string newFirstName = "NewFirstName";
             string newLastName = "NewLastName";
@@ -3268,6 +3377,10 @@ namespace bdd_tests
         [And(@"the director and shareholder name are identical")]
         public void DirectorShareholderNameIdentical()
         {
+            /* 
+            Page Title: 
+            */
+
             // check that the director first name has been updated
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
 
@@ -3285,6 +3398,10 @@ namespace bdd_tests
         [And(@"I request a licensee representative")]
         public void RequestLicenseeRepresentative()
         {
+            /* 
+            Page Title: 
+            */
+
             // click on the Licensee Representative link
             string addLicensee = "Add Licensee Representative";
             NgWebElement uiAddLicensee = ngDriver.FindElement(By.LinkText(addLicensee));
@@ -3346,6 +3463,10 @@ namespace bdd_tests
         [And(@"the organization structure page is displayed")]
         public void OrgStructureDisplays()
         {
+            /* 
+            Page Title: 
+            */
+
             // confirm that the page loads
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Detailed Organization Information')]")).Displayed);
         }
@@ -3365,6 +3486,10 @@ namespace bdd_tests
         [And(@"I add a business shareholder with the same individual as a director and a shareholder")]
         public void BusinessShareholderSameDirShare()
         {
+            /* 
+            Page Title: 
+            */
+
             // create the business shareholder data
             string businessName = "Business Shareholder";
             string businessVotingShares = "50";
@@ -3488,6 +3613,10 @@ namespace bdd_tests
         [And(@"I add a second individual as a director and a shareholder to the business shareholder")]
         public void BusinessShareholderSameDirShare2()
         {
+            /* 
+            Page Title: 
+            */
+
             // create business shareholder key personnel #2 data
             string keyPersonnelFirstNameBiz = "Same3";
             string keyPersonnelLastNameBiz = "Individual3";
@@ -3558,6 +3687,10 @@ namespace bdd_tests
         [And(@"the org structure is correct")]
         public void OrgStructureCorrect()
         {
+            /* 
+            Page Title: 
+            */
+
             // confirm that first individual is in correct positions
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'Same1')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/span[contains(.,'Same1')]")).Displayed);
@@ -3575,6 +3708,10 @@ namespace bdd_tests
         [And(@"the org structure is correct after payment")]
         public void OrgStructureCorrectPayment()
         {
+            /* 
+            Page Title: 
+            */
+
             // confirm that first individual is in correct positions
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'Same1')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/span[contains(.,'Same1')]")).Displayed);
@@ -3592,6 +3729,10 @@ namespace bdd_tests
         [And(@"I remove the latest director and shareholder")]
         public void RemoveLatestDirectorShareholder()
         {
+            /* 
+            Page Title: 
+            */
+
             // delete the most recent director
             NgWebElement uiRemoveDirector = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[2]/td[7]/i[2]/span"));
             uiRemoveDirector.Click();
@@ -3605,6 +3746,10 @@ namespace bdd_tests
         [And(@"I remove the latest director after saving")]
         public void RemoveLatestDirectorAfterSave()
         {
+            /* 
+            Page Title: 
+            */
+
             // delete the most recent director
             NgWebElement uiRemoveDirector = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[2]/td[7]/i[2]/span"));
             uiRemoveDirector.Click();
@@ -3614,6 +3759,10 @@ namespace bdd_tests
         [And(@"I remove the latest shareholder after saving")]
         public void RemoveLatestShareholderAfterSave()
         {
+            /* 
+            Page Title: 
+            */
+
             // delete the most recent shareholder 
             NgWebElement uiRemoveShareholder = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-3']/div/section/app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr[2]/td[6]/i[2]/span"));
             uiRemoveShareholder.Click();
@@ -3623,6 +3772,10 @@ namespace bdd_tests
         [And(@"the latest director and shareholder is removed")]
         public void LatestDirectorShareholderRemoved()
         {
+            /* 
+            Page Title: 
+            */
+
             // confirm that the most recent director and shareholder not present
             Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Same3'))]")).Displayed);
         }
@@ -3631,6 +3784,10 @@ namespace bdd_tests
         [And(@"I remove the business shareholder")]
         public void RemoveBusinessShareholder()
         {
+            /* 
+            Page Title: 
+            */
+
             // delete the business shareholder
             NgWebElement uiRemoveBizShareholder = ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section[2]/app-associate-list/div/table/tr[1]/td[5]/i[2]/span"));
             uiRemoveBizShareholder.Click();
@@ -3640,6 +3797,10 @@ namespace bdd_tests
         [And(@"the business shareholder is removed")]
         public void BusinessShareholderRemoved()
         {
+            /* 
+            Page Title: 
+            */
+
             // confirm that the business shareholder not present	
             Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'business@shareholder.com'))]")).Displayed);
         }
@@ -3657,7 +3818,7 @@ namespace bdd_tests
         [And(@"the saved org structure is present")]
         public void SaveOrgStructurePresent()
         { 
-        
+            // TODO
         }
 
 
@@ -3684,6 +3845,10 @@ namespace bdd_tests
         [And(@"I add in business shareholders of different business types")]
         public void MixedBusinessShareholders()
         {
+            /* 
+            Page Title: 
+            */
+
             /********** Business Shareholder - Public Corporation **********/
 
             // create public corporation test data
@@ -3764,13 +3929,6 @@ namespace bdd_tests
             // click on the Confirm button
             NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] .fa-save span"));
             uiConfirmButton.Click();
-
-            // click on Save for Later button - set up for LCSD-3455
-            //NgWebElement saveForLater = ngDriver.FindElement(By.XPath("//button[contains(.,' SAVE FOR LATER ')]"));
-            //saveForLater.Click();
-
-            // click on Complete Organization Information button - set up for LCSD-3455
-            //CompleteOrgInfo();
 
             /********** Business Shareholder - Sole Proprietorship **********/
 
@@ -4054,6 +4212,10 @@ namespace bdd_tests
         [And(@"I review the mixed business shareholder types security screening requirements")]
         public void SecurityScreeningsMixedBusinessShareholders()
         {
+            /* 
+            Page Title: 
+            */
+
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel0')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder0')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel1')]")).Displayed);
@@ -4068,13 +4230,21 @@ namespace bdd_tests
         [And(@"the mixed business shareholder org structure is correct")]
         public void ReviewMixedBusinessShareholdersOrgStructure()
         {
+            /* 
+            Page Title: 
+            */
 
+            //TODO
         }
 
 
         [And(@"I enter business shareholders of different business types to be saved for later")]
         public void SaveForLaterMixedBusinessShareholders()
         {
+            /* 
+            Page Title: 
+            */
+
             /********** Business Shareholder - Public Corporation **********/
 
             // create public corporation test data
@@ -4161,6 +4331,10 @@ namespace bdd_tests
         [And(@"the saved for later mixed business shareholder org structure is correct")]
         public void SaveForLaterMixedBusinessShareholdersCorrectOrgStructure()
         {
+            /* 
+            Page Title: 
+            */
+
             // confirm that expected personnel and businesses are present
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel0')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder0')]")).Displayed);
