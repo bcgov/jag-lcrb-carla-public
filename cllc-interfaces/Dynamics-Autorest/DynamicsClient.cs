@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top98 { get; set; }
+        public int? Top100 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip98 { get; set; }
+        public int? Skip100 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count98 { get; set; }
+        public bool? Count100 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter98 { get; set; }
+        public string Filter100 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search98 { get; set; }
+        public string Search100 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -69,6 +69,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAccounts.
         /// </summary>
         public virtual IAccounts Accounts { get; private set; }
+
+        /// <summary>
+        /// Gets the IPartyidadoxiolocalgovindigenousnation.
+        /// </summary>
+        public virtual IPartyidadoxiolocalgovindigenousnation Partyidadoxiolocalgovindigenousnation { get; private set; }
 
         /// <summary>
         /// Gets the IAdoxiolicencetypeadoxioinvestigationset.
@@ -399,6 +404,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILocalgovindigenousnations.
         /// </summary>
         public virtual ILocalgovindigenousnations Localgovindigenousnations { get; private set; }
+
+        /// <summary>
+        /// Gets the ILocalgovindigenousnationactivityparties.
+        /// </summary>
+        public virtual ILocalgovindigenousnationactivityparties Localgovindigenousnationactivityparties { get; private set; }
 
         /// <summary>
         /// Gets the IPersonalhistorysummaries.
@@ -797,6 +807,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         private void Initialize()
         {
             Accounts = new Accounts(this);
+            Partyidadoxiolocalgovindigenousnation = new Partyidadoxiolocalgovindigenousnation(this);
             Adoxiolicencetypeadoxioinvestigationset = new Adoxiolicencetypeadoxioinvestigationset(this);
             Aliases = new Aliases(this);
             Annualvolumes = new Annualvolumes(this);
@@ -863,6 +874,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Licenseechangelogs = new Licenseechangelogs(this);
             Loans = new Loans(this);
             Localgovindigenousnations = new Localgovindigenousnations(this);
+            Localgovindigenousnationactivityparties = new Localgovindigenousnationactivityparties(this);
             Personalhistorysummaries = new Personalhistorysummaries(this);
             Policejurisdictions = new Policejurisdictions(this);
             Policydocuments = new Policydocuments(this);

@@ -187,7 +187,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       federalProducerNames: ['', Validators.required],
       applicantType: ['', Validators.required],
       description1: ['', [Validators.required]],
-      description2: ['', []],
       proposedChange: ['', [Validators.required]],
       connectedGrocery: ['', []],
       sitePhotos: ['', []],
@@ -652,7 +651,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
     let description2 = '';
-    
 
     if (this.isRAS()) {
       description2 += this.form.get('isOwner').value ? 'Is owner = Yes' : 'Is owner = No';
@@ -660,6 +658,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
       description2 += this.form.get('hasValidInterest').value ? 'Has valid interest = Yes' : 'Has valid interest = No';
       description2 += '\n';
       description2 += this.form.get('willhaveValidInterest').value ? 'Will have valid interest = Yes' : 'Will have valid interest = No';
+    }
+    else {
+      description2 += this.application.description2;
     }
 
     // flatten the service areas if need be
@@ -820,8 +821,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     return this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
-      .pipe(mergeMap(jsonUrl => {
-        console.log("")
+      .pipe(mergeMap(jsonUrl => {       
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
       }, (err: any) => {

@@ -590,7 +590,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public YesNoNotApplicable? MfgPipedInProduct { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public YesNoNotApplicable? MfgNeutralGrainSpirits { get; set; }
+        public YesNoNotApplicable? MfgUsesNeutralGrainSpirits { get; set; }
 
         public int? ZoningStatus { get; set; }
         public bool? IsOwnerBusiness { get; set; }      
