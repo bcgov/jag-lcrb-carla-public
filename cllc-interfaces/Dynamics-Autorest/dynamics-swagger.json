@@ -250,6 +250,58 @@
         }
       }
     },
+    "/activityparties({activitypartyid})/partyid_adoxio_localgovindigenousnation": {
+      "get": {
+        "tags": [
+          "partyid_localgovindigenousnation"
+        ],
+        "summary": "Get partyid_adoxio_localgovindigenousnation from activityparties",
+        "operationId": "Partyidadoxiolocalgovindigenousnation_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activitypartyid",
+            "description": "key: activitypartyid of activityparty",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_localgovindigenousnation"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_adoxio_licencetype_adoxio_investigationset": {
       "get": {
         "tags": [
@@ -10330,6 +10382,93 @@
         }
       }
     },
+    "/adoxio_events({adoxio_eventid})/adoxio_event_schedules": {
+      "get": {
+        "tags": [
+          "event_schedules"
+        ],
+        "summary": "Get adoxio_event_schedules from adoxio_events",
+        "operationId": "eventschedules_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventid",
+            "description": "key: adoxio_eventid of adoxio_event",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventscheduleCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_eventschedules": {
       "get": {
         "tags": [
@@ -16083,6 +16222,152 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_localgovindigenousnations({adoxio_localgovindigenousnationid})/adoxio_localgovindigenousnation_ActivityParties": {
+      "get": {
+        "tags": [
+          "localgovindigenousnation_activityparties"
+        ],
+        "summary": "Get adoxio_localgovindigenousnation_ActivityParties from adoxio_localgovindigenousnations",
+        "operationId": "localgovindigenousnationactivityparties_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_localgovindigenousnationid",
+            "description": "key: adoxio_localgovindigenousnationid of adoxio_localgovindigenousnation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.activitypartyCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_localgovindigenousnations({adoxio_localgovindigenousnationid})/adoxio_localgovindigenousnation_ActivityParties({activitypartyid})": {
+      "get": {
+        "tags": [
+          "localgovindigenousnation_activityparties"
+        ],
+        "summary": "Get adoxio_localgovindigenousnation_ActivityParties from adoxio_localgovindigenousnations",
+        "operationId": "localgovindigenousnationactivityparties_Getadoxio_localgovindigenousnation_ActivityPartiesByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_localgovindigenousnationid",
+            "description": "key: adoxio_localgovindigenousnationid of adoxio_localgovindigenousnation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "activitypartyid",
+            "description": "key: activitypartyid of activityparty",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.activityparty"
+            }
           },
           "default": {
             "description": "OData Error"
@@ -26063,6 +26348,9 @@
         },
         "partyid_contact": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.contact"
+        },
+        "partyid_adoxio_localgovindigenousnation": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_localgovindigenousnation"
         }
       }
     },
@@ -30844,9 +31132,8 @@
         "adoxio_isshowdeclarations": {
           "type": "boolean"
         },
-        "importsequencenumber": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_code": {
+          "type": "string"
         },
         "adoxio_outsideareas": {
           "type": "boolean"
@@ -30860,6 +31147,10 @@
         },
         "adoxio_isshowlginapproval": {
           "type": "boolean"
+        },
+        "importsequencenumber": {
+          "format": "int32",
+          "type": "integer"
         },
         "_createdby_value": {
           "type": "string"
@@ -30973,8 +31264,9 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_code": {
-          "type": "string"
+        "adoxio_routineinspectionoccurrence": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_siteplan": {
           "format": "int32",
@@ -43032,6 +43324,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
+          }
+        },
+        "adoxio_localgovindigenousnation_ActivityParties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.activityparty"
           }
         }
       }
@@ -112404,6 +112702,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_localgovindigenousnation"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.activitypartyCollection": {
+      "title": "Collection of activityparty",
+      "description": "Microsoft.Dynamics.CRM.activitypartyCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.activityparty"
           }
         }
       }
