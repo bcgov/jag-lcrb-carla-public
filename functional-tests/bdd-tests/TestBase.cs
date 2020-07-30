@@ -4297,17 +4297,74 @@ namespace bdd_tests
         [And(@"I confirm that no duplicates are shown in the org structure")]
         public void CheckOrgStructureDuplicates()
         {
-            int count = 0;
+            // check that KeyPersonnel0 only displays once
+            int keyPersonnel0Count = 0;
 
             while (ngDriver.FindElement(By.XPath("//body[contains(.,'keypersonnel0@privatecorp.com')]")).Displayed)
             {
-                count++;
+                keyPersonnel0Count++;
 
-                if (count > 1)
+                if (keyPersonnel0Count > 1)
                     break;
             }
 
-            Assert.True(count <= 1);
+            Assert.True(keyPersonnel0Count <= 1);
+
+
+            // check that IndividualShareholder0 only displays once
+            int individualShareholder0Count = 0;
+
+            while (ngDriver.FindElement(By.XPath("//body[contains(.,'individualshareholder0@privatecorp.com')]")).Displayed)
+            {
+                individualShareholder0Count++;
+
+                if (individualShareholder0Count > 1)
+                    break;
+            }
+
+            Assert.True(individualShareholder0Count <= 1);
+
+
+            // check that Business Shareholder 1 only displays once
+            int businessShareholder1Count = 0;
+
+            while (ngDriver.FindElement(By.XPath("//body[contains(.,'business@shareholder1.com')]")).Displayed)
+            {
+                businessShareholder1Count++;
+
+                if (businessShareholder1Count > 1)
+                    break;
+            }
+
+            Assert.True(businessShareholder1Count <= 1);
+
+
+            // check that KeyPersonnel1 only displays once
+            int keyPersonnel1Count = 0;
+
+            while (ngDriver.FindElement(By.XPath("//body[contains(.,'keypersonnel1bizshareholder@privatecorp.com')]")).Displayed)
+            {
+                keyPersonnel1Count++;
+
+                if (keyPersonnel1Count > 1)
+                    break;
+            }
+
+            Assert.True(keyPersonnel1Count <= 1);
+
+
+            // check that IndividualShareholder1 only displays once
+            int individualShareholder1Count = 0;
+
+            while (ngDriver.FindElement(By.XPath("//body[contains(.,'individualshareholder1bizshareholder@privatecorp.com')]")).Displayed)
+            {
+                individualShareholder1Count++;
+
+                if (individualShareholder1Count > 1)
+                    break;
+            }
+
+            Assert.True(individualShareholder1Count <= 1);
         }
     }
 }
