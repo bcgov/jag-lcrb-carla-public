@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration.UserSecrets;
 using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Runtime.CompilerServices;
 
 namespace bdd_tests
 {
@@ -27,6 +28,7 @@ namespace bdd_tests
         protected string baseUri;
 
         protected string applicationID;
+
 
         protected TestBase()
         {
@@ -71,6 +73,7 @@ namespace bdd_tests
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
         }
 
+
         public void CarlaHome()
         {
             ngDriver.Navigate().GoToUrl($"{baseUri}");
@@ -83,6 +86,7 @@ namespace bdd_tests
         {
             CarlaHome();
         }
+
 
         private void DoLogin(string businessType)
         {
@@ -175,6 +179,7 @@ namespace bdd_tests
             ngDriver.WaitForAngular();
         }
 
+
         public void CarlaLogin(string businessType)
         {
             Random random = new Random();
@@ -188,6 +193,7 @@ namespace bdd_tests
             DoLogin(businessType);
         }
 
+
         public void CarlaLoginNoCheck()
         {
             // load the dashboard page
@@ -197,6 +203,7 @@ namespace bdd_tests
 
             ngDriver.WaitForAngular();
         }
+
 
         public void CarlaLoginWithUser(string businessType)
         {
@@ -208,6 +215,7 @@ namespace bdd_tests
 
             DoLogin(businessType);
         }
+
 
         public void MakePayment()
         {
@@ -233,6 +241,7 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = false;
         }
 
+
         public void CarlaDeleteCurrentAccount()
         {
             ngDriver.IgnoreSynchronization = true;
@@ -244,6 +253,7 @@ namespace bdd_tests
 
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
+
 
         [And(@"I complete the Rural Agency Store application")]
         public void CompleteRuralAgencyStoreApplication()
@@ -356,6 +366,7 @@ namespace bdd_tests
 
             ClickOnSubmitButton();
         }
+
 
         [And(@"I complete the Cannabis Retail Store application for a(.*)")]
         public void CompleteCannabisApplication(string businessType)
@@ -511,8 +522,14 @@ namespace bdd_tests
 
             if (applicationType == "Catering application")
             {
-                // confirm that payment receipt is for $7,500.00
+                // confirm that payment receipt is for $475.00
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$475.00')]")).Displayed);
+            }
+
+            if (applicationType == "Manufacturer Licence application")
+            {
+                // confirm that payment receipt is for $550.00
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$550.00')]")).Displayed);
             }
         }
 
@@ -530,12 +547,268 @@ namespace bdd_tests
             ReturnToDashboard();
         }
 
+
         public void ReturnToDashboard()
         {
             // click on Return to Dashboard link
             string retDash = "Return to Dashboard";
             NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
             returnDash.Click();
+        }
+
+
+        [And(@"I complete the Manufacturer application for a (.*)")]
+        public void CompleteManufacturerApplication(string manufacturerType)
+        {
+            /* 
+            Page Title: Manufacturer (Winery, Brewery, Distillery or Co-Packer) Licence Application
+            */
+
+            // create test data
+            string estName = "Manufacturer's Establishment";
+            string streetLocation = "123 Innovation Street";
+            string city = "Victoria";
+            string postal = "V5R2X4";
+            string PID = "111111111";
+            string additionalPIDs = "999999999, 000000000, 181818181";
+            string storeEmail = "store@email.com";
+            string storePhone = "250-012-3456";
+            string contactTitle = "Sommelier";
+            string contactPhone = "778-181-1818";
+            string contactEmail = "contact@email.com";
+
+            // enter the establishment name
+            NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
+            uiEstabName.SendKeys(estName);
+
+            // enter the establishment street address
+            NgWebElement uiEstabStreetAddress = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
+            uiEstabStreetAddress.SendKeys(streetLocation);
+
+            // enter the establishment city
+            NgWebElement uiEstabCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressCity']"));
+            uiEstabCity.SendKeys(city);
+
+            // enter the establishment postal code
+            NgWebElement uiEstabPostal = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressPostalCode']"));
+            uiEstabPostal.SendKeys(postal);
+
+            // enter the PID
+            NgWebElement uiEstabPID = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentParcelId']"));
+            uiEstabPID.SendKeys(PID);
+
+            // enter additional PIDs
+            NgWebElement uiAdditionalEstabPID = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='pidList']"));
+            uiAdditionalEstabPID.SendKeys(additionalPIDs);
+
+            // select the proof of zoning checkbox
+            NgWebElement uiProofOfZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-4"));
+            uiProofOfZoning.Click();
+
+            // select 'yes' for ALR inclusion
+            NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
+            uiALRInclusion.Click();
+
+            // enter the store email
+            NgWebElement uiEstabEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentEmail']"));
+            uiEstabEmail.SendKeys(storeEmail);
+
+            // enter the store phone number
+            NgWebElement uiEstabPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentPhone']"));
+            uiEstabPhone.SendKeys(storePhone);
+
+            if (manufacturerType == "winery")
+            {
+                // select winery radio button
+                NgWebElement uiWinery = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-5"));
+                uiWinery.Click();
+            }
+
+            if (manufacturerType == "distillery")
+            {
+                // select distillery radio button
+                NgWebElement uiDistillery = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-6"));
+                uiDistillery.Click();
+            }
+
+            if (manufacturerType == "brewery")
+            {
+                // select brewery radio button
+                NgWebElement uiBrewery = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-7"));
+                uiBrewery.Click();
+            }
+
+            if (manufacturerType == "co-packer")
+            {
+                // select co-packer radio button
+                NgWebElement uiCoPacker = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-8"));
+                uiCoPacker.Click();
+            }
+
+            // find the upload test files in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload the business plan
+            string businessPlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "production_sales_forecast.pdf");
+            NgWebElement uploadBusinessPlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+            uploadBusinessPlan.SendKeys(businessPlanPath);
+
+            // upload the production sales forecast
+            string productionSalesPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "production_sales_forecast.pdf");
+            NgWebElement uploadProductionSales = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+            uploadProductionSales.SendKeys(productionSalesPath);
+
+            if (manufacturerType == "winery")
+            {
+                // create winery test data
+                string grapesAcres = "100";
+                string fruitAcres = "5";
+                string honeyBeehives = "7";
+
+                // enter the grapes acreage 
+                NgWebElement uiGrapes = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mfgAcresOfGrapes']"));
+                uiGrapes.SendKeys(grapesAcres);
+
+                // enter the fruit acreage
+                NgWebElement uiFruit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mfgAcresOfFruit']"));
+                uiFruit.SendKeys(fruitAcres);
+                
+                // enter the number of beehives
+                NgWebElement uiHoney = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mfgAcresOfHoney']"));
+                uiHoney.SendKeys(honeyBeehives);
+
+                /* TODO
+                // select the blending checkbox
+                NgWebElement uiBlending = ngDriver.FindElement(By.CssSelector(""));
+                uiBlending.Click();
+
+                // select the crushing checkbox
+                NgWebElement uiCrushing = ngDriver.FindElement(By.CssSelector(""));
+                uiCrushing.Click();
+
+                // select the filtering checkbox
+                NgWebElement uiFiltering = ngDriver.FindElement(By.CssSelector(""));
+                uiFiltering.Click();
+
+                // select the aging, for at least 3 months checkbox
+                NgWebElement uiAging = ngDriver.FindElement(By.CssSelector(""));
+                uiAging.Click();
+
+                // select the secondary fermentation or carbonation checkbox
+                NgWebElement uiSecondaryFermentation = ngDriver.FindElement(By.CssSelector(""));
+                uiSecondaryFermentation.Click();
+
+                // select the packaging checkbox
+                NgWebElement uiPackaging = ngDriver.FindElement(By.CssSelector(""));
+                uiSecondaryFermentation.Click();
+                */
+            }
+
+            // select 'yes' for neutral grain spirits            
+            NgWebElement uiNeutralGrains = ngDriver.FindElement(By.CssSelector("[formcontrolname='mfgUsesNeutralGrainSpirits'] mat-radio-button[value='Yes']"));
+            uiNeutralGrains.Click();
+
+            if (manufacturerType == "brewery")
+            {
+                // select 'Yes' for the brewery operating with brew pub on site
+                NgWebElement uiPubOnSite = ngDriver.FindElement(By.CssSelector("[formcontrolname='mfgBrewPubOnSite'] mat-radio-button[value='Yes']"));
+                uiPubOnSite.Click();
+
+                // select 'Yes' for piping from brewery
+                NgWebElement uiPiping = ngDriver.FindElement(By.CssSelector("[formcontrolname='mfgPipedInProduct'] mat-radio-button[value='Yes']"));
+                uiPiping.Click();
+
+                // upload brew sheets sample
+                string brewSheetsPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "brew_sheets.pdf");
+                NgWebElement uploadBrewSheets = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
+                uploadBrewSheets.SendKeys(brewSheetsPath);
+
+                // upload the business insurance
+                string insurancePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "business_insurance.pdf");
+                NgWebElement uploadInsurance = ngDriver.FindElement(By.XPath("(//input[@type='file'])[11]"));
+                uploadInsurance.SendKeys(insurancePath);
+            }
+
+            if (manufacturerType == "brewery")
+            {
+                // upload the store signage
+                string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+                NgWebElement uploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[14]"));
+                uploadSignage.SendKeys(signagePath);
+
+                // upload the floor plan 
+                string floorPlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
+                NgWebElement uploadFloorPlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[17]"));
+                uploadFloorPlan.SendKeys(floorPlanPath);
+
+                // upload the site plan
+                string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
+                NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[20]"));
+                uploadSitePlan.SendKeys(sitePlanPath);
+            }
+            else
+            {
+                // upload the store signage
+                string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+                NgWebElement uploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
+                uploadSignage.SendKeys(signagePath);
+
+                // upload the floor plan 
+                string floorPlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
+                NgWebElement uploadFloorPlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[11]"));
+                uploadFloorPlan.SendKeys(floorPlanPath);
+
+                // upload the site plan 
+                string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
+                NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[14]"));
+                uploadSitePlan.SendKeys(sitePlanPath);
+            }
+
+            // select the owner checkbox
+            NgWebElement uiOwner = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='isOwner']"));
+            uiOwner.Click();
+
+            // select the valid interest checkbox
+            NgWebElement uiValidInterest = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='hasValidInterest']"));
+            uiValidInterest.Click();
+
+            // select the future valid interest checkbox
+            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='willhaveValidInterest']"));
+            uiFutureValidInterest.Click();
+
+            // enter the contact title
+            NgWebElement uiContactTitle = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
+            uiContactTitle.SendKeys(contactTitle);
+
+            // enter the contact phone number
+            NgWebElement uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
+            uiContactPhone.SendKeys(contactPhone);
+
+            // enter the contact email address
+            NgWebElement uiContactEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonEmail']"));
+            uiContactEmail.SendKeys(contactEmail);
+
+            // select the authorized to submit checkbox
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
+            uiAuthorizedToSubmit.Click();
+
+            // select the signature agreement checkbox
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
+            uiSignatureAgreement.Click();
+
+            // retrieve the current URL to get the application ID (needed downstream)
+            string URL = ngDriver.Url;
+
+            // retrieve the application ID
+            string[] parsedURL = URL.Split('/');
+
+            applicationID = parsedURL[5];
+
+            // click on the Submit & Pay button
+            NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+            uiSubmitAndPay.Click();
         }
 
 
@@ -610,7 +883,6 @@ namespace bdd_tests
             uiOtherBusinessYes.Click();
 
             // enter the connection details
-            //textarea#liquorIndustryConnectionsDetails
             NgWebElement uiLiqIndConnection = ngDriver.FindElement(By.Id("liquorIndustryConnectionsDetails"));
             uiLiqIndConnection.SendKeys(liqConnectionDetails);
 
@@ -663,6 +935,7 @@ namespace bdd_tests
             applicationID = tempFix[0];
         }
 
+
         public void CheckFeatureFlag(string flag)
         {
             ngDriver.IgnoreSynchronization = true;
@@ -670,7 +943,7 @@ namespace bdd_tests
             // navigate to the feature flags page
             ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/features");
 
-            // confirm that the CRS-Renewal flag is enabled during this test
+            // confirm that the correct flag is enabled during this test
             Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'{flag}')]")).Displayed);
 
             ngDriver.IgnoreSynchronization = false;
@@ -702,8 +975,16 @@ namespace bdd_tests
             {
                 ClickOnDashboard();
 
+                /* 
+                Page Title: Welcome to Liquor and Cannabis Licensing
+                */
+
                 // click on the review organization information button
                 ClickReviewOrganizationInformation();
+
+                /* 
+                Page Title: [client name] Detailed Organization Information
+                */
 
                 // click on the Edit button for Key Personnel (partnership, sole proprietorship, private corporation, or society)
                 if (businessType == "partnership" || businessType == "sole proprietorship" || businessType == "private corporation" || businessType == "society")
@@ -763,8 +1044,8 @@ namespace bdd_tests
 
                 if (businessType == "sole proprietorship")
                 {
-                    //NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath(""));
-                    //uploadMarriageCert1.SendKeys(marriageCertificate);
+                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
+                    uploadMarriageCert1.SendKeys(marriageCertificate);
                 }
 
                 // click on Submit Organization Information button
@@ -774,40 +1055,59 @@ namespace bdd_tests
                 MakePayment();
 
                 System.Threading.Thread.Sleep(3000);
-
-                /*
-                if (applicationTypeShared == "a Cannabis Retail Store")
-                {
-                    // check payment fee
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
-                }
-
-                if (applicationTypeShared == "Catering")
-                {
-                    // check payment fee
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
-                }
-                */
-
-                // click on Dashboard link
-                ClickOnDashboard();
-
-                // click on the review organization information button
-                ClickReviewOrganizationInformation();
-
-                // check that the director name has been updated
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedFirstName')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedLastName')]")).Displayed);
             }
         }
 
 
-        [And(@"I request a Cannabis store relocation")]
-        public void RequestStoreRelocation()
+        [And(@"I confirm the correct personnel name change fee for a (.*)")]
+        public void PersonnelNameChangeFee(string applicationType)
+        {
+            /* 
+            Page Title: Payment Approved
+            */
+
+            if (applicationType == "Cannabis licence")
+            {
+                // check Cannabis name change fee
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
+            }
+
+            if (applicationType == "Catering licence")
+            {
+                // check Catering name change fee
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
+            }
+        }
+
+
+        [And(@"I confirm that the director name has been updated")]
+        public void DirectorNameUpdated()
+        {
+            // click on Dashboard link
+            ClickOnDashboard();
+
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
+
+            // click on the review organization information button
+            ClickReviewOrganizationInformation();
+
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
+            // check that the director name has been updated
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedFirstName')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'UpdatedLastName')]")).Displayed);
+        }
+
+
+        [And(@"I request a store relocation for (.*)")]
+        public void RequestStoreRelocation(string applicationType)
         {
             /* 
             Page Title: Licences
-            Subtitle: Cannabis Retail Store Licences
             */
 
             string requestRelocationLink = "Request Relocation";
@@ -828,26 +1128,30 @@ namespace bdd_tests
             Page Title: Submit a Licence Relocation Application
             */
 
-            string proposedAddress = "Automated Test Street";
-            string proposedCity = "Automated City";
-            string proposedPostalCode = "A1A 1A1";
-            string pid = "012345678";
+            if (applicationType == "Cannabis")
+            {
 
-            // enter the proposed street address
-            NgWebElement uiProposedAddress = ngDriver.FindElement(By.CssSelector(".ngtest-new-address input[formcontrolname='establishmentAddressStreet']"));
-            uiProposedAddress.SendKeys(proposedAddress);
+                string proposedAddress = "Automated Test Street";
+                string proposedCity = "Automated City";
+                string proposedPostalCode = "A1A 1A1";
+                string pid = "012345678";
 
-            // enter the proposed city
-            NgWebElement uiProposedCity = ngDriver.FindElement(By.CssSelector(".ngtest-new-address input[formcontrolname='establishmentAddressCity']"));
-            uiProposedCity.SendKeys(proposedCity);
+                // enter the proposed street address
+                NgWebElement uiProposedAddress = ngDriver.FindElement(By.CssSelector(".ngtest-new-address input[formcontrolname='establishmentAddressStreet']"));
+                uiProposedAddress.SendKeys(proposedAddress);
 
-            // enter the postal code
-            NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.CssSelector(".ngtest-new-address input[formcontrolname='establishmentAddressPostalCode']"));
-            uiProposedPostalCode.SendKeys(proposedPostalCode);
+                // enter the proposed city
+                NgWebElement uiProposedCity = ngDriver.FindElement(By.CssSelector(".ngtest-new-address input[formcontrolname='establishmentAddressCity']"));
+                uiProposedCity.SendKeys(proposedCity);
 
-            // enter the PID
-            NgWebElement uiProposedPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
-            uiProposedPID.SendKeys(pid);
+                // enter the postal code
+                NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.CssSelector(".ngtest-new-address input[formcontrolname='establishmentAddressPostalCode']"));
+                uiProposedPostalCode.SendKeys(proposedPostalCode);
+
+                // enter the PID
+                NgWebElement uiProposedPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
+                uiProposedPID.SendKeys(pid);
+            }
 
             // find the upload test file in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
@@ -875,11 +1179,28 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(4000);
 
-            // confirm correct payment amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
+            if (applicationType == "Cannabis")
+            {
+                /* 	
+                Page Title: Payment Approved	
+                */
 
-            // return to the Licences tab
-            ClickLicencesTab();
+                // confirm correct payment amount
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
+
+                // return to the Licences tab
+                ClickLicencesTab();
+            }
+
+            if (applicationType == "Catering")
+            {
+                /* 	
+                Page Title: Payment Approved	
+                */
+
+                // confirm correct payment amount	
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
+            }
         }
 
 
@@ -891,8 +1212,16 @@ namespace bdd_tests
                 // click on Dashboard link
                 ClickOnDashboard();
 
+                /* 
+                Page Title: Welcome to Liquor and Cannabis Licensing
+                */
+
                 // click on the review organization information button
                 ClickReviewOrganizationInformation();
+
+                /* 
+                Page Title: [client name] Detailed Organization Information
+                */
 
                 // click on the Edit button for Key Personnel (partnership, sole proprietorship, public corporation, or society)
                 if (businessType == "partnership" || businessType == "sole proprietorship" || businessType == "public corporation" || businessType == "society")
@@ -923,6 +1252,10 @@ namespace bdd_tests
                 NgWebElement orgInfoButton2 = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
                 orgInfoButton2.Click();
 
+                /* 
+                Page Title: Welcome to Liquor and Cannabis Licensing
+                */
+
                 // check that dashboard is displayed (i.e. no payment has been required)
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Welcome to Liquor and Cannabis Licensing')]")).Displayed);
             }
@@ -932,6 +1265,10 @@ namespace bdd_tests
         [And(@"I pay the licensing fee for (.*)")]
         public void PayLicenceFee(string feeType)
         {
+            /* 
+            Page Title: Licences
+            */
+
             string firstYearLicenceFee = "Pay First Year Licensing Fee";
 
             // click on the pay first year licence fee link
@@ -940,6 +1277,10 @@ namespace bdd_tests
 
             // pay the licence fee
             MakePayment();
+
+            /* 
+            Page Title: Payment Approved
+            */
 
             if (feeType == "Cannabis")
             {
@@ -1100,6 +1441,10 @@ namespace bdd_tests
         [And(@"I click on the Start Application button for (.*)")]
         public void ClickStartApplication(string applicationType)
         {
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
+
             if (applicationType == "Catering")
             {
                 // click on the Catering Start Application button
@@ -1120,13 +1465,20 @@ namespace bdd_tests
                 NgWebElement startAppButton = ngDriver.FindElement(By.CssSelector("button[id='startRAS']"));
                 startAppButton.Click();
             }
+
+            if (applicationType == "a Manufacturer Licence")
+            {
+                // click on the Manufacturer Licence Start Application button
+                NgWebElement startAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
+                startAppButton.Click();
+            }
         }
 
 
         [And(@"I request a structural change")]
         public void RequestStructuralChange()
         {
-            /* 
+           /* 
            Page Title: Licences
            Subtitle:   Cannabis Retail Store Licences
            */
@@ -1190,6 +1542,10 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(4000);
 
+            /* 
+            Page Title: Payment Approved
+            */
+
             // confirm correct payment amount
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$440.00')]")).Displayed);
 
@@ -1220,19 +1576,43 @@ namespace bdd_tests
             ClickLicencesTab();
         }
 
-        public void RequestedApplicationsOnDashboard()
+
+        [And(@"I confirm the relocation request is displayed on the dashboard")]
+        public void RequestedRelocationOnDashboard()
         {
+            ClickOnDashboard();
+
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
 
-            ClickOnDashboard();
-
             // confirm that relocation request is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Relocation Request')]")).Displayed);
+        }
+
+
+        [And(@"I confirm the name or branding change is displayed on the dashboard")]
+        public void RequestedNameChangeOnDashboard()
+        {
+            ClickOnDashboard();
+
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
 
             // confirm that a name or branding change request is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Name or Branding Change')]")).Displayed);
+        }
+
+
+        [And(@"I confirm the structural change request is displayed on the dashboard")]
+        public void RequestedStructuralChangeOnDashboard()
+        {
+            ClickOnDashboard();
+
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
 
             // confirm that a structural change request is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Structural Change')]")).Displayed);
@@ -1242,6 +1622,10 @@ namespace bdd_tests
         [And(@"I request a valid store name or branding change for (.*)")]
         public void RequestNameBrandingChange(string changeType)
         {
+            /* 
+            Page Title: Licences
+            */
+
             string nameBrandingLinkCannabis = "Request Store Name or Branding Change";
             string nameBrandingLinkCatering = "Establishment Name Change Application";
 
@@ -1302,6 +1686,10 @@ namespace bdd_tests
             // pay for the branding change application
             MakePayment();
 
+            /* 
+            Page Title: Payment Approved
+            */
+
             // confirm correct payment amount	
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
 
@@ -1309,61 +1697,6 @@ namespace bdd_tests
             ClickLicencesTab();
         }
 
-        [And(@"I request a store relocation for Catering")]
-        public void CateringRelocationRequest()
-        {
-            /* 
-            Page Title: Licences
-            Subtitle: Catering Licences
-            */
-
-            string requestRelocationLink = "Request Relocation";
-
-            // click on the request location link
-            NgWebElement uiRequestRelocation = ngDriver.FindElement(By.LinkText(requestRelocationLink));
-            uiRequestRelocation.Click();
-
-            /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
-
-            /* 
-            Page Title: Submit a Licence Relocation Application
-            */
-
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            // upload a supporting document
-            string supportingDocument = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "checklist.pdf");
-            NgWebElement uploadSupportingDoc = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uploadSupportingDoc.SendKeys(supportingDocument);
-
-            // select the authorized to submit checkbox
-            NgWebElement uiAuthToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
-            uiAuthToSubmit.Click();
-
-            // select the signature agreement checkbox
-            NgWebElement uiSigAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
-            uiSigAgreement.Click();
-
-            // click on the Submit & Pay button
-            ClickOnSubmitButton();
-
-            // pay for the relocation application
-            MakePayment();
-
-            System.Threading.Thread.Sleep(4000);
-
-            // confirm correct payment amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
-        }
 
         public void Dispose()
         {
@@ -1372,6 +1705,7 @@ namespace bdd_tests
             // Suppress finalization.
             GC.SuppressFinalize(this);
         }
+
 
         public void SharedCalendarDate()
         {
@@ -1429,6 +1763,10 @@ namespace bdd_tests
             // return to the Licences tab
             ClickLicencesTab();
 
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
+
             // confirm that the application has been initiated
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third Party Operator Application Initiated')]")).Displayed);
         }
@@ -1437,6 +1775,10 @@ namespace bdd_tests
         [And(@"I request a transfer of ownership")]
         public void RequestOwnershipTransfer()
         {
+            /* 
+            Page Title: Licences
+            */
+
             string transferOwnership = "Transfer Licence";
 
             // click on the Transfer Ownership link
@@ -1469,6 +1811,10 @@ namespace bdd_tests
             submitTransferButton.Click();
 
             ClickLicencesTab();
+
+            /* 
+            Page Title: Licences
+            */
 
             // check for transfer initiated status 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Transfer Requested')]")).Displayed);
@@ -2662,10 +3008,6 @@ namespace bdd_tests
             // click on the Show Store as Open on Map checkbox
             NgWebElement uiMapCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox"));
             uiMapCheckbox.Click();
-
-            /* 
-            Page Title: Apply for a cannabis licence
-            */
         }
 
 
@@ -2703,14 +3045,6 @@ namespace bdd_tests
             - the establishment postal code
             - the PID
             - the store phone number
-            */
-
-            // select 'Yes' for other business on premises
-            //NgWebElement otherBusiness = ngDriver.FindElement(By.Id("mat-button-toggle-10-button"));
-            //otherBusiness.Click();
-
-            /*
-            The following actions are intentionally left incomplete:
             - upload a store signage document
             - enter the first name of the application contact
             - enter the last name of the application contact
@@ -2747,6 +3081,10 @@ namespace bdd_tests
         [And(@"I enter the same individual as a director and a shareholder")]
         public void SameDirectorShareholder()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
@@ -2818,7 +3156,7 @@ namespace bdd_tests
             uiConfirmButton.Click();
 
             /***** Key Personnel #2 *****/
-            /* This extra person is added because the calendar selection is unreliable via SharedCalendarDate(). DO NOT REMOVE. */
+            /* This extra person has been added because the calendar selection is unreliable via SharedCalendarDate(). DO NOT REMOVE. */
 
             // click on the Add Key Personnel button
             NgWebElement uiAddKeyPersonnel2 = ngDriver.FindElement(By.CssSelector(".padded-section:nth-child(1) .btn-secondary"));
@@ -2931,6 +3269,10 @@ namespace bdd_tests
         [And(@"I delete only the director record")]
         public void DeleteDirectorRecord()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // click on the delete button for key personnel > director record    
             NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[1]/td[7]/i[2]/span"));
             uiEditInfoButton.Click();
@@ -2943,6 +3285,10 @@ namespace bdd_tests
         [And(@"only the shareholder record is displayed")]
         public void ShareholderRecordDisplayed()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // check that the director email is not displayed to confirm deletion
             Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'same@individual.com'))]")).Displayed);
 
@@ -2954,6 +3300,10 @@ namespace bdd_tests
         [And(@"I modify only the director record")]
         public void ModifyOnlyDirectorRecord()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // create new name for same individual
             string newFirstName = "NewFirstName";
             string newLastName = "NewLastName";
@@ -2984,6 +3334,10 @@ namespace bdd_tests
         [And(@"the director and shareholder name are identical")]
         public void DirectorShareholderNameIdentical()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // check that the director first name has been updated
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
 
@@ -3001,6 +3355,10 @@ namespace bdd_tests
         [And(@"I request a licensee representative")]
         public void RequestLicenseeRepresentative()
         {
+            /* 
+            Page Title: 
+            */
+
             // click on the Licensee Representative link
             string addLicensee = "Add Licensee Representative";
             NgWebElement uiAddLicensee = ngDriver.FindElement(By.LinkText(addLicensee));
@@ -3062,6 +3420,10 @@ namespace bdd_tests
         [And(@"the organization structure page is displayed")]
         public void OrgStructureDisplays()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // confirm that the page loads
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Detailed Organization Information')]")).Displayed);
         }
@@ -3081,6 +3443,10 @@ namespace bdd_tests
         [And(@"I add a business shareholder with the same individual as a director and a shareholder")]
         public void BusinessShareholderSameDirShare()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // create the business shareholder data
             string businessName = "Business Shareholder";
             string businessVotingShares = "50";
@@ -3204,6 +3570,10 @@ namespace bdd_tests
         [And(@"I add a second individual as a director and a shareholder to the business shareholder")]
         public void BusinessShareholderSameDirShare2()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // create business shareholder key personnel #2 data
             string keyPersonnelFirstNameBiz = "Same3";
             string keyPersonnelLastNameBiz = "Individual3";
@@ -3274,6 +3644,10 @@ namespace bdd_tests
         [And(@"the org structure is correct")]
         public void OrgStructureCorrect()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // confirm that first individual is in correct positions
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'Same1')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/span[contains(.,'Same1')]")).Displayed);
@@ -3291,6 +3665,10 @@ namespace bdd_tests
         [And(@"the org structure is correct after payment")]
         public void OrgStructureCorrectPayment()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // confirm that first individual is in correct positions
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'Same1')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/span[contains(.,'Same1')]")).Displayed);
@@ -3308,6 +3686,10 @@ namespace bdd_tests
         [And(@"I remove the latest director and shareholder")]
         public void RemoveLatestDirectorShareholder()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // delete the most recent director
             NgWebElement uiRemoveDirector = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[2]/td[7]/i[2]/span"));
             uiRemoveDirector.Click();
@@ -3321,6 +3703,10 @@ namespace bdd_tests
         [And(@"I remove the latest director after saving")]
         public void RemoveLatestDirectorAfterSave()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // delete the most recent director
             NgWebElement uiRemoveDirector = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[2]/td[7]/i[2]/span"));
             uiRemoveDirector.Click();
@@ -3330,6 +3716,10 @@ namespace bdd_tests
         [And(@"I remove the latest shareholder after saving")]
         public void RemoveLatestShareholderAfterSave()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // delete the most recent shareholder 
             NgWebElement uiRemoveShareholder = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-3']/div/section/app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr[2]/td[6]/i[2]/span"));
             uiRemoveShareholder.Click();
@@ -3339,6 +3729,10 @@ namespace bdd_tests
         [And(@"the latest director and shareholder is removed")]
         public void LatestDirectorShareholderRemoved()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // confirm that the most recent director and shareholder not present
             Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Same3'))]")).Displayed);
         }
@@ -3347,6 +3741,10 @@ namespace bdd_tests
         [And(@"I remove the business shareholder")]
         public void RemoveBusinessShareholder()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // delete the business shareholder
             NgWebElement uiRemoveBizShareholder = ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section[2]/app-associate-list/div/table/tr[1]/td[5]/i[2]/span"));
             uiRemoveBizShareholder.Click();
@@ -3356,6 +3754,10 @@ namespace bdd_tests
         [And(@"the business shareholder is removed")]
         public void BusinessShareholderRemoved()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // confirm that the business shareholder not present	
             Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'business@shareholder.com'))]")).Displayed);
         }
@@ -3373,7 +3775,7 @@ namespace bdd_tests
         [And(@"the saved org structure is present")]
         public void SaveOrgStructurePresent()
         { 
-        
+            // TODO
         }
 
 
@@ -3400,6 +3802,10 @@ namespace bdd_tests
         [And(@"I add in business shareholders of different business types")]
         public void MixedBusinessShareholders()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             /********** Business Shareholder - Public Corporation **********/
 
             // create public corporation test data
@@ -3480,13 +3886,6 @@ namespace bdd_tests
             // click on the Confirm button
             NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] .fa-save span"));
             uiConfirmButton.Click();
-
-            // click on Save for Later button - set up for LCSD-3455
-            //NgWebElement saveForLater = ngDriver.FindElement(By.XPath("//button[contains(.,' SAVE FOR LATER ')]"));
-            //saveForLater.Click();
-
-            // click on Complete Organization Information button - set up for LCSD-3455
-            //CompleteOrgInfo();
 
             /********** Business Shareholder - Sole Proprietorship **********/
 
@@ -3693,7 +4092,7 @@ namespace bdd_tests
             NgWebElement confirmTrustee = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] .fa-save span"));
             confirmTrustee.Click();
 
-            /********** Business Shareholder - Partnership **********
+            /********** Business Shareholder - Partnership **********/
 
             // create partnership test data
             string businessNamePartnership = "Partnership";
@@ -3763,13 +4162,17 @@ namespace bdd_tests
             // upload partnership agreement
             string partnershipAgreement = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
             NgWebElement uploadPartner = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-5']/div/section/app-org-structure/div/div[2]/section/app-file-uploader/div/ngx-file-drop/div/div/input"));
-            uploadPartner.SendKeys(partnershipAgreement);*/
+            uploadPartner.SendKeys(partnershipAgreement);
         }
 
 
         [And(@"I review the mixed business shareholder types security screening requirements")]
         public void SecurityScreeningsMixedBusinessShareholders()
         {
+            /* 
+            Page Title: Security Screening Requirements
+            */
+
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel0')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder0')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel1')]")).Displayed);
@@ -3784,13 +4187,21 @@ namespace bdd_tests
         [And(@"the mixed business shareholder org structure is correct")]
         public void ReviewMixedBusinessShareholdersOrgStructure()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
 
+            //TODO
         }
 
 
         [And(@"I enter business shareholders of different business types to be saved for later")]
         public void SaveForLaterMixedBusinessShareholders()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             /********** Business Shareholder - Public Corporation **********/
 
             // create public corporation test data
@@ -3877,6 +4288,10 @@ namespace bdd_tests
         [And(@"the saved for later mixed business shareholder org structure is correct")]
         public void SaveForLaterMixedBusinessShareholdersCorrectOrgStructure()
         {
+            /* 
+            Page Title: [client name] Detailed Organization Information
+            */
+
             // confirm that expected personnel and businesses are present
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel0')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder0')]")).Displayed);
@@ -3885,6 +4300,31 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Public Corporation')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelPubCorp')]")).Displayed);
-        }        
+        }
+
+
+        [And(@"I confirm that no duplicates are shown in the org structure")]
+        public void CheckOrgStructureDuplicates()
+        {
+            // check that KeyPersonnel0 only displays once
+            var keyPerson0Elements = ngDriver.FindElements(By.XPath("//body[contains(.,'keypersonnel0@privatecorp.com')]")).Count;
+            Assert.True(keyPerson0Elements == 1);
+
+            // check that IndividualShareholder0 only displays once
+            var indyShareholder0Elements = ngDriver.FindElements(By.XPath("//body[contains(.,'individualshareholder0@privatecorp.com')]")).Count;
+            Assert.True(indyShareholder0Elements == 1);
+
+            // check that Business Shareholder 1 only displays once
+            var bizShareholder1Elements = ngDriver.FindElements(By.XPath("//body[contains(.,'business@shareholder1.com')]")).Count;
+            Assert.True(bizShareholder1Elements == 1);
+
+            // check that KeyPersonnel1 only displays once
+            var keyPersonnel1Elements = ngDriver.FindElements(By.XPath("//body[contains(.,'keypersonnel1bizshareholder@privatecorp.com')]")).Count;
+            Assert.True(keyPersonnel1Elements == 1);
+
+            // check that IndividualShareholder1 only displays once
+            var indyShareholder1elements = ngDriver.FindElements(By.XPath("//body[contains(.,'individualshareholder1bizshareholder@privatecorp.com')]")).Count;
+            Assert.True(indyShareholder1elements == 1);
+        }
     }
 }
