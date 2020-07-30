@@ -4323,8 +4323,8 @@ namespace bdd_tests
             Assert.True(keyPersonnel1Elements == 1);
 
             // check that IndividualShareholder1 only displays once
-            var indyShareholder1elements = ngDriver.FindElements(By.XPath("//body[contains(.,'individualshareholder1bizshareholder@privatecorp.com')]")).Count;
-            Assert.True(indyShareholder1elements == 1);
+            var indyShareholder1Elements = ngDriver.FindElements(By.XPath("//body[contains(.,'individualshareholder1bizshareholder@privatecorp.com')]")).Count;
+            Assert.True(indyShareholder1Elements == 1);
         }
     }
 }
