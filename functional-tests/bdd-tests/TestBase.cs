@@ -4292,6 +4292,22 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Public Corporation')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelPubCorp')]")).Displayed);
-        }        
+        }
+
+        [And(@"I confirm that no duplicates are shown in the org structure")]
+        public void CheckOrgStructureDuplicates()
+        {
+            int count = 0;
+
+            while (ngDriver.FindElement(By.XPath("//body[contains(.,'keypersonnel0@privatecorp.com')]")).Displayed)
+            {
+                count++;
+
+                if (count > 1)
+                    break;
+            }
+
+            Assert.True(count <= 1);
+        }
     }
 }
