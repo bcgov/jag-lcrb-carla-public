@@ -2,18 +2,18 @@
     <p>Complete the following based on  your establishment floor plan and occupant load:</p>
     <table>
         <thead *ngIf="areasArr.controls.length > 0">
-            <th *ngIf="!isCapacityArea()" style="width: 55px;">Area No.</th>
-            <th *ngIf="!isCapacityArea()">{{isOutsideArea() ? 'Outdoor Area' : 'Floor Level'}}</th>
-            <th *ngIf="isService() && !isCapacityArea()">Indoor</th>
-            <th *ngIf="isService() && !isCapacityArea()">Patio</th>
-            <th>{{isOutsideArea() || isCapacityArea() ? 'Capacity' : 'Occupant Load'}}</th>
-            <th *ngIf="!isCapacityArea()" style="width: 45px;"></th>
+            <th style="width: 55px;">Area No.</th>
+            <th>{{isOutsideArea() ? 'Outdoor Area' : 'Floor Level'}}</th>
+            <th *ngIf="isService()">Indoor</th>
+            <th *ngIf="isService()">Patio</th>
+            <th>{{isOutsideArea() ? 'Capacity' : 'Occupant Load'}}</th>
+            <th style="width: 45px;"></th>
         </thead>
         <ng-container formArrayName="areas">
             <tr capacity-table-row *ngFor="let area of areasArr.controls; let i=index" [formControlName]="i"
                 [areaCategory]="areaCategory" [onDelete]="removeRow.bind(this)" [index]="i" [onRowChange]="onRowChange.bind(this)"></tr>
         </ng-container>
-        <tr *ngIf="!isCapacityArea()">
+        <tr>
             <td *ngIf="isService()" colspan=2><button (click)="addRow()" class="btn-clear" style="height: 100%;"><i class="fa fa-plus-circle" style="color: #1a5a96;"></i> Add Area</button></td>            
             <td *ngIf="!isService()"><button (click)="addRow()" class="btn-clear" style="height: 100%;"><i class="fa fa-plus-circle" style="color: #1a5a96;"></i> Add Area</button></td>            
             <td *ngIf="isService()" colspan=2 style="text-align:right;"><strong>Total Occupant Load:</strong></td>
