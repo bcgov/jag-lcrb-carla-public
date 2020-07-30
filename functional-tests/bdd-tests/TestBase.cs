@@ -4323,8 +4323,48 @@ namespace bdd_tests
             Assert.True(keyPersonnel1Elements == 1);
 
             // check that IndividualShareholder1 only displays once
-            var indyShareholder1elements = ngDriver.FindElements(By.XPath("//body[contains(.,'individualshareholder1bizshareholder@privatecorp.com')]")).Count;
-            Assert.True(indyShareholder1elements == 1);
+            var indyShareholder1Elements = ngDriver.FindElements(By.XPath("//body[contains(.,'individualshareholder1bizshareholder@privatecorp.com')]")).Count;
+            Assert.True(indyShareholder1Elements == 1);
         }
+
+
+        [And(@"I request a picnic area endorsement")]
+        public void PicnicAreaEndorsement()
+        { }
+
+
+        [And(@"I request an on-site store endorsement")]
+        public void OnSiteStoreEndorsement()
+        { }
+
+
+        [And(@"I request a lounge area endorsement")]
+        public void LoungeAreaEndorsement()
+        { }
+
+
+        [And(@"I request an establishment name change")]
+        public void EstablishmentNameChange()
+        { }
+
+
+        [And(@"I request a facility structural change")]
+        public void FacilityStructuralChange()
+        { }
+
+
+        [And(@"I request a location change")]
+        public void LocationChange()
+        { }
+
+
+        [And(@"I request a special event area endorsement")]
+        public void SpecialEventAreaEndorsement()
+        { }
+
+
+        [And(@"I request a new outdoor patio endorsement")]
+        public void NewOutdoorPatioEndorsement()
+        { }
     }
 }
