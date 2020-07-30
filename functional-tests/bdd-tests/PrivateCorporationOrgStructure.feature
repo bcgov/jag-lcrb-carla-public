@@ -168,7 +168,7 @@ Scenario: Complex Save for Later mixed business shareholders
     Then I see the login page
 
 @e2e @cannabis @privatecorporation @validation @privatecorporgstructure1
-Scenario: Confirm org structure record not duplicated
+Scenario: Confirm org structure records not duplicated
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
