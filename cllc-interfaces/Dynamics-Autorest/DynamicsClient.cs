@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top100 { get; set; }
+        public int? Top101 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip100 { get; set; }
+        public int? Skip101 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count100 { get; set; }
+        public bool? Count101 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter100 { get; set; }
+        public string Filter101 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search100 { get; set; }
+        public string Search101 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -159,6 +159,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtypes.
         /// </summary>
         public virtual IApplicationtypes Applicationtypes { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtypeadoxiotermsconditionslimitationspresetapplicationtype.
+        /// </summary>
+        public virtual IApplicationtypeadoxiotermsconditionslimitationspresetapplicationtype Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype { get; private set; }
 
         /// <summary>
         /// Gets the IAreas.
@@ -479,6 +484,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITermsconditionslimitationspresets.
         /// </summary>
         public virtual ITermsconditionslimitationspresets Termsconditionslimitationspresets { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtype.
+        /// </summary>
+        public virtual IApplicationtype Applicationtype { get; private set; }
 
         /// <summary>
         /// Gets the ITerritories.
@@ -825,6 +835,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationtypecontents = new Applicationtypecontents(this);
             Applicationtypefeeschedules = new Applicationtypefeeschedules(this);
             Applicationtypes = new Applicationtypes(this);
+            Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype = new Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype(this);
             Areas = new Areas(this);
             Auditlogrequests = new Auditlogrequests(this);
             Businessaccounts = new Businessaccounts(this);
@@ -889,6 +900,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Spdexportses = new Spdexportses(this);
             Taxandaccountings = new Taxandaccountings(this);
             Termsconditionslimitationspresets = new Termsconditionslimitationspresets(this);
+            Applicationtype = new Applicationtype(this);
             Territories = new Territories(this);
             Tiedhouseassociations = new Tiedhouseassociations(this);
             Tiedhouseconnections = new Tiedhouseconnections(this);
