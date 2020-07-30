@@ -15,7 +15,6 @@ Scenario: Indigenous Nation CRS Application
     # And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -32,7 +31,6 @@ Scenario: Partnership CRS Application
     # And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -49,7 +47,6 @@ Scenario: Private Corporation CRS Application
     # And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -66,7 +63,6 @@ Scenario: Public Corporation CRS Application
     # And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -83,7 +79,6 @@ Scenario: Society CRS Application
     # And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -100,6 +95,5 @@ Scenario: Sole Proprietorship CRS Application
     # And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
