@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top100 { get; set; }
+        int? Top101 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip100 { get; set; }
+        int? Skip101 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count100 { get; set; }
+        bool? Count101 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter100 { get; set; }
+        string Filter101 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search100 { get; set; }
+        string Search101 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -156,6 +156,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtypes.
         /// </summary>
         IApplicationtypes Applicationtypes { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtypeadoxiotermsconditionslimitationspresetapplicationtype.
+        /// </summary>
+        IApplicationtypeadoxiotermsconditionslimitationspresetapplicationtype Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype { get; }
 
         /// <summary>
         /// Gets the IAreas.
@@ -476,6 +481,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITermsconditionslimitationspresets.
         /// </summary>
         ITermsconditionslimitationspresets Termsconditionslimitationspresets { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtype.
+        /// </summary>
+        IApplicationtype Applicationtype { get; }
 
         /// <summary>
         /// Gets the ITerritories.
