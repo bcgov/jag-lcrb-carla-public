@@ -19,13 +19,14 @@ namespace Gov.Lclb.Cllb.Interfaces
     public static partial class ApplicationtypeExtensions
     {
             /// <summary>
-            /// Get adoxio_ApplicationType from adoxio_endorsements
+            /// Get adoxio_ApplicationType from adoxio_termsconditionslimitationspresets
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioEndorsementid'>
-            /// key: adoxio_endorsementid of adoxio_endorsement
+            /// <param name='adoxioTermsconditionslimitationspresetid'>
+            /// key: adoxio_termsconditionslimitationspresetid of
+            /// adoxio_termsconditionslimitationspreset
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -33,19 +34,20 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioApplicationtype Get(this IApplicationtype operations, string adoxioEndorsementid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioApplicationtype Get(this IApplicationtype operations, string adoxioTermsconditionslimitationspresetid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(adoxioEndorsementid, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(adoxioTermsconditionslimitationspresetid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get adoxio_ApplicationType from adoxio_endorsements
+            /// Get adoxio_ApplicationType from adoxio_termsconditionslimitationspresets
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioEndorsementid'>
-            /// key: adoxio_endorsementid of adoxio_endorsement
+            /// <param name='adoxioTermsconditionslimitationspresetid'>
+            /// key: adoxio_termsconditionslimitationspresetid of
+            /// adoxio_termsconditionslimitationspreset
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -56,22 +58,23 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioApplicationtype> GetAsync(this IApplicationtype operations, string adoxioEndorsementid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioApplicationtype> GetAsync(this IApplicationtype operations, string adoxioTermsconditionslimitationspresetid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioEndorsementid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioTermsconditionslimitationspresetid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Get adoxio_ApplicationType from adoxio_endorsements
+            /// Get adoxio_ApplicationType from adoxio_termsconditionslimitationspresets
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioEndorsementid'>
-            /// key: adoxio_endorsementid of adoxio_endorsement
+            /// <param name='adoxioTermsconditionslimitationspresetid'>
+            /// key: adoxio_termsconditionslimitationspresetid of
+            /// adoxio_termsconditionslimitationspreset
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -82,9 +85,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationtype> GetWithHttpMessages(this IApplicationtype operations, string adoxioEndorsementid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationtype> GetWithHttpMessages(this IApplicationtype operations, string adoxioTermsconditionslimitationspresetid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(adoxioEndorsementid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(adoxioTermsconditionslimitationspresetid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }
