@@ -767,7 +767,7 @@ namespace bdd_tests
             }
 
             // select the owner checkbox
-            NgWebElement uiOwner = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='isOwner']"));
+            NgWebElement uiOwner = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='isOwnerBusiness']"));
             uiOwner.Click();
 
             // select the valid interest checkbox
@@ -1277,6 +1277,8 @@ namespace bdd_tests
 
             // pay the licence fee
             MakePayment();
+
+            System.Threading.Thread.Sleep(3000);
 
             /* 
             Page Title: Payment Approved
