@@ -126,7 +126,7 @@ export class LicenseeChangeLog {
   /*
   * Performs a Depth First Traversal and transforms the LegalEntity tree to change objects
   */
-  public  processLegalEntityTree(node: LegalEntity): LicenseeChangeLog {
+  public processLegalEntityTree(node: LegalEntity): LicenseeChangeLog {
     const newNode = LicenseeChangeLog.CreateFromLegalEntity(node);
 
     if (node && node.children && node.children.length) {
@@ -380,11 +380,32 @@ export class LicenseeChangeLog {
       changeLog.isShareholderNew === changeLog.isShareholderOld &&
       changeLog.isTrusteeNew === changeLog.isTrusteeOld &&
       changeLog.numberofSharesNew === changeLog.numberofSharesOld &&
+      changeLog.interestPercentageNew == changeLog.interestPercentageOld &&
       changeLog.firstNameNew === changeLog.firstNameOld &&
       changeLog.lastNameNew === changeLog.lastNameOld &&
       changeLog.dateofBirthNew === changeLog.dateofBirthOld &&
       changeLog.titleNew === changeLog.titleOld) {
       result = true
+    }
+    return result;
+  }
+
+  public someFieldsHaveChanged(): boolean {
+    let result = false;
+    if (this.emailNew !== this.emailOld ||
+      this.isDirectorNew !== this.isDirectorOld ||
+      this.isManagerNew !== this.isManagerOld ||
+      this.isOfficerNew !== this.isOfficerOld ||
+      this.isOwnerNew !== this.isOwnerOld ||
+      this.interestPercentageNew !== this.interestPercentageOld ||
+      this.isShareholderNew !== this.isShareholderOld ||
+      this.isTrusteeNew !== this.isTrusteeOld ||
+      this.numberofSharesNew !== this.numberofSharesOld ||
+      this.firstNameNew !== this.firstNameOld ||
+      this.lastNameNew !== this.lastNameOld ||
+      this.dateofBirthNew !== this.dateofBirthOld ||
+      this.titleNew !== this.titleOld) {
+      result = true;
     }
     return result;
   }
@@ -495,7 +516,7 @@ export class LicenseeChangeLog {
   public static FixLicenseeChangeLogArray(data: LicenseeChangeLog[]): LicenseeChangeLog[] {
     const fixedChildren = [];
     if (data) {
-      
+
       data.forEach(child => {
         const fixedChild: LicenseeChangeLog = new LicenseeChangeLog(child);
         if (fixedChild.children) {
@@ -503,7 +524,7 @@ export class LicenseeChangeLog {
         }
         fixedChildren.push(fixedChild);
       });
-      
+
     }
     return fixedChildren;
   }
@@ -520,14 +541,14 @@ export class LicenseeChangeLog {
       });
       this.children = fixedChildren;
     }
-    
+
   }
 
   applySavedChangeLogs(currentChangeLogs: LicenseeChangeLog[]) {
     const changesWithLegalEntityId = currentChangeLogs.filter(item => !!item.legalEntityId);
     const changesWithParentLegalEntityId = currentChangeLogs.filter(item => !item.legalEntityId && !!item.parentLegalEntityId);
     const changesWithParentChangeLogId =
-      currentChangeLogs.filter(item => !item.legalEntityId && !item.parentLegalEntityId && !!item.parentLicenseeChangeLogId);    
+      currentChangeLogs.filter(item => !item.legalEntityId && !item.parentLegalEntityId && !!item.parentLicenseeChangeLogId);
     changesWithLegalEntityId.forEach(change => {
 
       change = Object.assign(new LicenseeChangeLog(), change);
@@ -575,7 +596,7 @@ export class LicenseeChangeLog {
         if (notfound) {
           node.children.push(newNode);
         }
-        
+
       }
     });
 
