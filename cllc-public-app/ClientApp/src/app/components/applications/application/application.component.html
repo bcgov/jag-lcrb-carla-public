@@ -114,18 +114,20 @@
               </div>
               <!-- Non Cannabis Establishment Name input-->
               <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
+                <label for="">Establishment Name</label>
                 <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)" [required]="true">
                   <input class="form-control" style="width: 500px;" type="text"
                     [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
                     formControlName="establishmentName" id="establishmentName">
                 </app-field>
+                <p *ngIf="application?.applicationType?.establishmentName !== FormControlState.Reaonly">Establishment names are subject to approval by LCRB</p>
               </div>
 
 
             </div>
             <div formGroupName="assignedLicence"
               *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
-              <h3 class="blue-header">CURRENT ADDRESS</h3>
+              <h3 class="blue-header">{{application?.licenseType}} LOCATION ADDRESS</h3>
               <div class="content-bottom">
                 <p>The licenced establishment is currently located at the following address:</p>
                 <address class="row">
@@ -251,24 +253,10 @@
                 </app-proof-of-zoning>
                 <hr>
               </section>
-
-              <!--app-field [valid]="isValidOrNotTouched('zoningPermitsMFG')" [showChevrons]="false"
-              errorMessage="Please confirm that the current zoning permits manufacturing on the manufacturing site"
-              [isFullWidth]="true" style="margin-left:10px;">
-              <mat-checkbox formControlName="zoningPermitsMFG">
-                By checking this box, I confirm that current zoning permits manufacturing on the manufacturing site.</mat-checkbox>
-            </app-field>
-            <hr-->
-              <!--app-field [valid]="isValidOrNotTouched('zoningPermitsRetailSales')" [showChevrons]="false"
-              errorMessage="Please confirm that the current zoning permits retail sales on the manufacturing site"
-              [isFullWidth]="true" style="margin-left:10px;">
-              <mat-checkbox formControlName="zoningPermitsRetailSales">
-                I confirm that current zoning permits retail sales on the manufacturing site.</mat-checkbox>
-            </app-field>
-            <hr-->
+              <section>
               <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
                 [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false" errorMessage="Specify ALR status"
-                [isFullWidth]="true" *ngIf="application.licenseType === 'Manufacturer'">
+                [isFullWidth]="true">
                 <mat-radio-group formControlName="isAlr">
                   <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
                   <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
@@ -283,7 +271,29 @@
                         target="_blank">Agricultural Land Reserve (ALR) Use Regulation</a>.</strong></p>
                 </div>
               </div>
+            </section>
 
+
+              <!-- Letter of Intent -->
+              <section *ngIf="application?.applicationType.name === 'Special Event Area Endorsement'">
+                <h3 class="blue-header">Letter of Intent</h3>
+                <section class="content-bottom">
+                <div *ngIf="htmlContent.letterOfIntent">
+                  <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.letterOfIntent"></section>
+                </div>
+
+                <section>
+                  <app-file-uploader *ngIf="applicationId" documentType="letterOfIntent"
+                    [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                    [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [useDocumentTypeForName]="true"
+                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                    [extensions]="['pdf']"
+                    (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event" [entityId]="applicationId"
+                    [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
+                  </app-file-uploader>
+                </section>
+              </section>
+              </section>
 
             </div>
           </section>
@@ -390,6 +400,49 @@
               <app-proof-of-zoning *ngIf="application" [application]="application" #proofOfZoning>
               </app-proof-of-zoning>
               <hr>
+      
+                            <section>
+                            <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
+                              [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false" errorMessage="Specify ALR status"
+                              [isFullWidth]="true">
+                              <mat-radio-group formControlName="isAlr">
+                                <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
+                                <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
+                              </mat-radio-group>
+                            </app-field>
+                            <div *ngIf="application.licenseType === 'Manufacturer' && this.form.get('isAlr').value === true">
+                              <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
+                              <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
+                                <p><strong>By submitting this application to LCRB, you are confirming that your licenced establishment
+                                    will adhere to the requirements laid out in the <a
+                                      href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019"
+                                      target="_blank">Agriculral Land Reserve (ALR) Use Regulation</a>.</strong></p>
+                              </div>
+                            </div>
+                          </section>
+              
+              
+                            <!-- Letter of Intent -->
+                            <section *ngIf="application?.applicationType.name === 'Special Event Area Endorsement'">
+                              <h3 class="blue-header">Letter of Intent</h3>
+                              <section class="content-bottom">
+                              <div *ngIf="htmlContent.letterOfIntent">
+                                <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.letterOfIntent"></section>
+                              </div>
+              
+                              <section>
+                                <app-file-uploader *ngIf="applicationId" documentType="letterOfIntent"
+                                  [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [useDocumentTypeForName]="true"
+                                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                                  [extensions]="['pdf']"
+                                  (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event" [entityId]="applicationId"
+                                  [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
+                                </app-file-uploader>
+                              </section>
+                            </section>
+                            </section>
+              
             </section>
 
             <!-- Store Contact Info -->
@@ -600,83 +653,7 @@
               </section>
             </mat-card>
 
-            <div class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest)">
-              <hr>
-              <br>
-              <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-                Offer or Proof of Ownership, Lease or
-                Sub-Lease
-              </label>
-              <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store'">Proof of Valid Interest</label>
-              <br>
-              <section *ngIf="application?.applicationType?.validInterest === FormControlState.Show">
-                <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-                  <p>
-                    If the applicant currently owns or leases the proposed store location, submit <b>Option 1</b>. If
-                    the
-                    applicant doesn't currently own or lease the proposed store location, submit <b>Option 2</b>.
-                  </p>
-                  <p>
-                    Leases or other arrangements must not expire for at least 12 months from the date the licence is
-                    issued.
-                    Option 1 will be required before the licence is issued.
-                  </p>
-                  <p>
-                    <b>Option 1</b>: Submit a copy of the lease, sub-lease, or proof of ownership of the proposed store
-                    location.
-                  </p>
-                  <p>
-                    <b>Option 2</b>: Submit a copy of the offer to purchase, lease, or sub-lease the proposed store
-                    location.
-                    Note,
-                  </p>
 
-                </div>
-                <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
-                  <p>Any one of the following documents can be used to show valid interest in the property:</p>
-                  <ul>
-                    <li>Certificate of Title in the licensee's name (as stated on the liquor licence).</li>
-                    <li>
-                      A fully executed lease, an assignment or an offer of lease, which does not expire for at least 12
-                      months. The tenant on the lease document must be the licensee (name the liquor licence is issued
-                      to).
-                      The lease or offer to lease must show rent paid, have a term and an expiry date, and be signed by
-                      the
-                      licensee and the landlord or property owner.
-                    </li>
-                    <li>
-                      An offer or option to purchase the property and buildings in the licensee's name (as provided to
-                      LCRB
-                      ). An offer or option must show price paid, have a term and expiry date and be signed by
-                      both the licensee and property owner. If an operated store is relocating, the valid interest must
-                      be
-                      in the
-                      name of the third party operator.
-                    </li>
-                    <p>&nbsp;</p>
-                  </ul>
-                  <p *ngIf="!isRAS()">
-                    <strong>Note:</strong> Valid interest must be maintained at the current and proposed site until the
-                    relocation is finalized. LCRB may request a copy of valid interest at the current site during the
-                    relocation application process.
-                  </p>
-                </div>
-
-              </section>
-
-              <p *ngIf="application?.applicationType?.validInterest === FormControlState.Reaonly">
-                The below offer or proof of ownership, lease or sub-lease is on file.
-              </p>
-              <section>
-                <app-file-uploader *ngIf="applicationId" documentType="Valid Interest"
-                  fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="false"
-                  entityName="application" [useDocumentTypeForName]="true"
-                  (numberOfUploadedFiles)="uploadedValidInterestDocuments = $event" [entityId]="applicationId"
-                  [uploadHeader]="'TO UPLOAD OWNERSHIP OR LEASE DOCUMENTS, DRAG FILES HERE OR'">
-                </app-file-uploader>
-              </section>
-            </div>
 
             <!-- Floor Plan-->
 
@@ -895,7 +872,7 @@
               <hr><br>
               <label for="">Exterior Photos</label>
 
-              <section *ngIf="htmlContent?.sitePhotos" class="padded-section content-bottom">
+              <section *ngIf="htmlContent?.sitePhotos" class="padded-section">
                 <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.sitePhotos"></div>
               </section>
 
@@ -924,15 +901,21 @@
               </p>
             </div-->
 
-            <div class="ngtest-grocery-store" *ngIf="showGroceryQuestion()">
-              <hr>
+            <h3 class="blue-header" *ngIf="showGroceryQuestion()">Grocery Declaration</h3>
+            <div class="ngtest-grocery-store" *ngIf="showGroceryQuestion()" class="content-bottom">
+
               <mat-card class="mat-elevation-z0" style="margin-bottom: 10px;">
                 <section style="display: flex; justify-content: space-between; width: 100%;">
-                  <div class="question-label">
+                  <!--div class="question-label" *ngIf="!htmlContent.Grocery">
                     Will the proposed structural alteration involve removing a wall between the
                     {{application?.licenseType}}
                     and an eligible grocery store?
+                  </div-->
+                  <div class="question-label" *ngIf="!htmlContent.Grocery">
+                    Is the proposed location inside a grocery store?
                   </div>
+                  <div class="question-label" *ngIf="htmlContent.Grocery" [innerHTML]="htmlContent.Grocery"></div>
+
 
                   <div style="flex: 0 0 85px;">
                     <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('connectedGrocery')}"
@@ -991,48 +974,6 @@
               </div>
 
             </div>
-  
-          <div *ngIf="showGroceryStore()">
-            <section>
-              <p>
-                Please download and print the <a target="_blank"
-                  href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb090_grocery_store_declaration.pdf">
-                  Grocery
-                  Store Declaration
-                </a> and have it be completed by
-                the owner of an eligible grocery store.
-              </p>
-              <p>An eligible grocery store is defined as:</p>
-              <ul>
-                <li>
-                  primarily engaged in retailing a general line of foods, including canned, dry and frozen food, fresh
-                  fruits and vegetables, fresh and prepared meats, fish and poultry, dairy products, baked products and
-                  snack foods, and non-liquor beverages, intended for human consumption, and
-                </li>
-                <li>having an area of at least 10,000 square feet, including storage.</li>
-              </ul>
-              <p>
-                To maintain eligibility, the conditions above must continue to be met, and the sales revenue from food
-                and non-liquor liquor beverages must:
-              </p>
-              <ul>
-                <li>total at least 70% of the total sales revenue of non-liquor products, and </li>
-                <li>
-                  total more than 50% of the total sales revenue of liquor and non-liquor products in the grocery store.
-                </li>
-              </ul>
-              <section>
-                <p></p>
-                <app-file-uploader *ngIf="applicationId" documentType="Grocery Declaration"
-                  [disableUploads]="isOpenedByLGForApproval || lGHasApproved()" [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
-                  fileTypes="FILE MUST BE IN PDF FORMAT."  [multipleFiles]="false"
-                  entityName="application" [useDocumentTypeForName]="true"
-                  (numberOfUploadedFiles)="uploadedGroceryDocuments = $event" [entityId]="applicationId"
-                  [uploadHeader]="'TO UPLOAD GROCERY DECLARATION, DRAG FILES HERE OR'">
-                </app-file-uploader>
-              </section>
-            </section>
-          </div>
 
                         <!-- Hours of Sale -->
           <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
@@ -1049,7 +990,7 @@
               </p>
               <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CannabisRetailStore">
                 Indicate the
-                store's proposed hours of sales below.
+                proposed hours of sales below.
               </p>
               <table class="store-hours">
                 <tr>
@@ -1363,9 +1304,10 @@
 
 
           <!-- RAS Details -->
-          <section *ngIf="application?.applicationType.showOwnershipDeclaration">
+          <section *ngIf="application?.applicationType.showOwnershipDeclaration || showFormControl(application?.applicationType?.validInterest)">
             <h3 class="blue-header">{{this.application?.licenseType}} Ownership Details</h3>
             <div class="content-bottom">
+              <section *ngIf="application?.applicationType.showOwnershipDeclaration">
               <p>Please provide the following details about your application:</p>
 
               <!-- RAS Certificate Number -->
@@ -1377,7 +1319,7 @@
 
               <section>
                 <div>
-                  <mat-checkbox formControlName="isOwner">
+                  <mat-checkbox formControlName="isOwnerBusiness">
                     This information is being submitted by the owner of the business in respect of which the licence
                     is to be issued or will become the owner before the licence is issued.
                   </mat-checkbox>
@@ -1406,11 +1348,85 @@
                   </mat-checkbox>
                 </div>
               </section>
-            </div>
-
           </section>
 
+          <section class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest)">
+            <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+              Offer or Proof of Ownership, Lease or
+              Sub-Lease
+            </label>
+            <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store'">Proof of Valid Interest</label>
+            <br>
+            <section *ngIf="application?.applicationType?.validInterest === FormControlState.Show">
+              <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+                <p>
+                  If the applicant currently owns or leases the proposed store location, submit <b>Option 1</b>. If
+                  the
+                  applicant doesn't currently own or lease the proposed store location, submit <b>Option 2</b>.
+                </p>
+                <p>
+                  Leases or other arrangements must not expire for at least 12 months from the date the licence is
+                  issued.
+                  Option 1 will be required before the licence is issued.
+                </p>
+                <p>
+                  <b>Option 1</b>: Submit a copy of the lease, sub-lease, or proof of ownership of the proposed store
+                  location.
+                </p>
+                <p>
+                  <b>Option 2</b>: Submit a copy of the offer to purchase, lease, or sub-lease the proposed store
+                  location.
+                  Note,
+                </p>
 
+              </div>
+              <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
+                <p>Any one of the following documents can be used to show valid interest in the property:</p>
+                <ul>
+                  <li>Certificate of Title in the licensee's name (as stated on the liquor licence).</li>
+                  <li>
+                    A fully executed lease, an assignment or an offer of lease, which does not expire for at least 12
+                    months. The tenant on the lease document must be the licensee (name the liquor licence is issued
+                    to).
+                    The lease or offer to lease must show rent paid, have a term and an expiry date, and be signed by
+                    the
+                    licensee and the landlord or property owner.
+                  </li>
+                  <li>
+                    An offer or option to purchase the property and buildings in the licensee's name (as provided to
+                    LCRB
+                    ). An offer or option must show price paid, have a term and expiry date and be signed by
+                    both the licensee and property owner. If an operated store is relocating, the valid interest must
+                    be
+                    in the
+                    name of the third party operator.
+                  </li>
+                  <p>&nbsp;</p>
+                </ul>
+                <p *ngIf="!isRAS()">
+                  <strong>Note:</strong> Valid interest must be maintained at the current and proposed site until the
+                  relocation is finalized. LCRB may request a copy of valid interest at the current site during the
+                  relocation application process.
+                </p>
+              </div>
+
+            </section>
+
+            <p *ngIf="application?.applicationType?.validInterest === FormControlState.Reaonly">
+              The below offer or proof of ownership, lease or sub-lease is on file.
+            </p>
+            <section>
+              <app-file-uploader *ngIf="applicationId" documentType="Valid Interest"
+                fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="false"
+                entityName="application" [useDocumentTypeForName]="true"
+                (numberOfUploadedFiles)="uploadedValidInterestDocuments = $event" [entityId]="applicationId"
+                [uploadHeader]="'TO UPLOAD OWNERSHIP OR LEASE DOCUMENTS, DRAG FILES HERE OR'">
+              </app-file-uploader>
+            </section>
+            </section>
+          </div>
+          </section>
 
 
         <!-- Contact Details -->
