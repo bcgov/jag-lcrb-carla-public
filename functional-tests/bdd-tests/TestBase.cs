@@ -1278,6 +1278,8 @@ namespace bdd_tests
             // pay the licence fee
             MakePayment();
 
+            System.Threading.Thread.Sleep(3000);
+
             /* 
             Page Title: Payment Approved
             */
