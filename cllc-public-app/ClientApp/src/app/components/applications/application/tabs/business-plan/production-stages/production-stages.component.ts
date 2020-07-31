@@ -12,7 +12,7 @@ export class ProductionStagesComponent implements OnInit {
   @Input() form: FormGroup;
   readOnly = false;
   options = [
-    {name:'Fermenting', checked:false, readonly:true},
+    {name:'Fermenting', checked:true, readonly:true},
     {name:'Blending', checked:false, readonly: false},
     {name:'Crushing', checked:false, readonly: false} ,
     {name:'Filtering',  checked:false, readonly: false},
@@ -22,32 +22,24 @@ export class ProductionStagesComponent implements OnInit {
   ]
 
 
-  constructor() {
-    
-  }
 
   ngOnInit() {
     this.form.addControl('description2', new FormControl(''));
     this.setOptions(this.application.description2);
-
+    this.application.description2 = this.getSelectedOptions();
   }
 
   // update the combined string from the checkbox options.
   updateOptions(option) {
-    let result = "";
-    option.checked = !option.checked;
-    this.options.forEach(function (value) {
-      if (value.checked) {
-        if (result !== "") {
-          result += "\n";
-        }
-        result += value.name;
-      }
-    }, this);
     
-    this.application.description2 = result;
-    this.form.get('description2').patchValue(result);
+    option.checked = !option.checked;
+
+    
+    this.application.description2 = this.getSelectedOptions();;
+    this.form.get('description2').patchValue(this.application.description2);
   }
+
+
 
   // Set the checkbox status from the given string
   setOptions(data) {
@@ -72,10 +64,18 @@ export class ProductionStagesComponent implements OnInit {
 
   }
 
-  get selectedOptions() { 
-  return this.options
-            .filter(opt => opt.checked)
-            .map(opt => opt.name)
+  getSelectedOptions() { 
+    let result = "";
+    
+    this.options.forEach(function (value) {
+      if (value.checked) {
+        if (result !== "") {
+          result += "\n";
+        }
+        result += value.name;
+      }
+    }, this);
+    return result;
 }
 
 }
