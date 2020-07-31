@@ -94,6 +94,24 @@ export class LicenceEvent {
   externalId: string;
   importSequenceNumber: number;
   notifyEventInspector: boolean;
+
+  // market
+  isNoPreventingSaleofLiquor: boolean;
+  isMarketManagedorCarried: boolean;
+  isMarketOnlyVendors: boolean;
+  isNoImportedGoods: boolean;
+  isMarketHostsSixVendors: boolean;
+  isMarketMaxAmountorDuration: boolean;
+  mktOrganizerContactName: string;
+  mktOrganizerContactPhone: string;
+  registrationNumber: string;
+  marketName: string;
+  marketWebsite: string;
+  marketDuration: number;
+  isAllStaffServingitRight: boolean;
+  isSalesAreaAvailandDefined: boolean;
+  isSampleSizeCompliant: boolean;
+  eventCategory: number;
 }
 
 export const EventStatus = [
@@ -223,5 +241,31 @@ export const EventType = [
   {
     label: 'Personal',
     value: 845280004
+  }
+];
+
+export const MarketDuration = [
+  {
+    label: 'Annual',
+    value: 845280000
+  },
+  {
+    label: 'Continuous',
+    value: 845280001
+  }
+];
+
+export const EventCategory = [
+  {
+    label: 'Catering',
+    value: 845280000
+  },
+  {
+    label: 'Market',
+    value: 845280001
+  },
+  {
+    label: 'Temporary Off-Site Sale',
+    value: 845280002
   }
 ];

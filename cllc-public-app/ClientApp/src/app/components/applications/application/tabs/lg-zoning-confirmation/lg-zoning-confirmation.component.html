@@ -29,7 +29,7 @@
 
     <section>
         <app-field
-            label="I confirm that zoning allows/does not all (check one below) for the operation of a picnic area, as proposed above. See attached site plan."
+            label="I confirm that zoning allows/does not allow (check one below) for the proposed {{application?.applicationType?.name}}, as proposed above."
             [valid]="!isTouchedAndInvalid('lgZoning')" errorMessage="Please select option">
             <mat-radio-group formControlName="lgZoning">
                 <mat-radio-button value="Allows">Allows</mat-radio-button>

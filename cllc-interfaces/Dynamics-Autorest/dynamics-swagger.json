@@ -4382,6 +4382,152 @@
         }
       }
     },
+    "/adoxio_applicationtypes({adoxio_applicationtypeid})/adoxio_applicationtype_adoxio_termsconditionslimitationspreset_ApplicationType": {
+      "get": {
+        "tags": [
+          "applicationtype_termsconditionslimitationspreset_applicationtype"
+        ],
+        "summary": "Get adoxio_applicationtype_adoxio_termsconditionslimitationspreset_ApplicationType from adoxio_applicationtypes",
+        "operationId": "applicationtypeadoxiotermsconditionslimitationspresetapplicationtype_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_applicationtypeid",
+            "description": "key: adoxio_applicationtypeid of adoxio_applicationtype",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_termsconditionslimitationspresetCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_applicationtypes({adoxio_applicationtypeid})/adoxio_applicationtype_adoxio_termsconditionslimitationspreset_ApplicationType({adoxio_termsconditionslimitationspresetid})": {
+      "get": {
+        "tags": [
+          "applicationtype_termsconditionslimitationspreset_applicationtype"
+        ],
+        "summary": "Get adoxio_applicationtype_adoxio_termsconditionslimitationspreset_ApplicationType from adoxio_applicationtypes",
+        "operationId": "applicationtypeadoxiotermsconditionslimitationspresetapplicationtype_Getadoxio_applicationtype_adoxio_termsconditionslimitationspreset_ApplicationTypeByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_applicationtypeid",
+            "description": "key: adoxio_applicationtypeid of adoxio_applicationtype",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_termsconditionslimitationspresetid",
+            "description": "key: adoxio_termsconditionslimitationspresetid of adoxio_termsconditionslimitationspreset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_termsconditionslimitationspreset"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_areas": {
       "get": {
         "tags": [
@@ -19735,6 +19881,58 @@
         }
       }
     },
+    "/adoxio_termsconditionslimitationspresets({adoxio_termsconditionslimitationspresetid})/adoxio_ApplicationType": {
+      "get": {
+        "tags": [
+          "applicationtype"
+        ],
+        "summary": "Get adoxio_ApplicationType from adoxio_termsconditionslimitationspresets",
+        "operationId": "applicationtype_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_termsconditionslimitationspresetid",
+            "description": "key: adoxio_termsconditionslimitationspresetid of adoxio_termsconditionslimitationspreset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_territories": {
       "get": {
         "tags": [
@@ -26244,6 +26442,9 @@
         "partyid_adoxio_event": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
         },
+        "partyid_adoxio_localgovindigenousnation": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_localgovindigenousnation"
+        },
         "partyid_campaignactivity": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.campaignactivity"
         },
@@ -26348,9 +26549,6 @@
         },
         "partyid_contact": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.contact"
-        },
-        "partyid_adoxio_localgovindigenousnation": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_localgovindigenousnation"
         }
       }
     },
@@ -28428,7 +28626,7 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_establishmentlayoutsubmitfloorplans": {
+        "adoxio_islocatedingrocerystore": {
           "type": "boolean"
         },
         "adoxio_servicehourssaturdayopen": {
@@ -28762,6 +28960,9 @@
         "adoxio_checklistsuitabilitylettersent": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_establishmentlayoutsubmitfloorplans": {
+          "type": "boolean"
         },
         "adoxio_datefirstyearpaymentreceived": {
           "format": "date-time",
@@ -31444,6 +31645,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_endorsement"
+          }
+        },
+        "adoxio_applicationtype_adoxio_termsconditionslimitationspreset_ApplicationType": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_termsconditionslimitationspreset"
           }
         }
       }
@@ -34328,10 +34535,18 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_communicationdistributiondate": {
+          "format": "date-time",
+          "type": "string"
+        },
         "_modifiedonbehalfby_value": {
           "type": "string"
         },
         "_adoxio_licenceid_value": {
+          "type": "string"
+        },
+        "adoxio_staylettersentdate": {
+          "format": "date-time",
           "type": "string"
         },
         "_owningbusinessunit_value": {
@@ -34340,10 +34555,11 @@
         "_ownerid_value": {
           "type": "string"
         },
-        "_adoxio_establishmentid_value": {
+        "adoxio_courtdatetime": {
+          "format": "date-time",
           "type": "string"
         },
-        "_adoxio_enforcementactionid_value": {
+        "_adoxio_establishmentid_value": {
           "type": "string"
         },
         "adoxio_penaltylettercreateddate": {
@@ -34357,6 +34573,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_courthearinglocation": {
+          "type": "string"
+        },
         "adoxio_finalmonetarypenalty_base": {
           "format": "decimal",
           "type": "number"
@@ -34368,7 +34587,14 @@
           "format": "decimal",
           "type": "number"
         },
+        "_adoxio_licenseeid_value": {
+          "type": "string"
+        },
         "adoxio_penaltylettersentdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_petitionreceiveddate": {
           "format": "date-time",
           "type": "string"
         },
@@ -34386,7 +34612,7 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_rmapprovaldecisiondate": {
+        "adoxio_staylettercompletedate": {
           "format": "date-time",
           "type": "string"
         },
@@ -34400,10 +34626,17 @@
         "_owninguser_value": {
           "type": "string"
         },
+        "adoxio_judicialreviewdeadlinedate": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_iswqr": {
           "type": "boolean"
         },
         "_createdonbehalfby_value": {
+          "type": "string"
+        },
+        "_adoxio_enforcementactionid_value": {
           "type": "string"
         },
         "adoxio_minperiod": {
@@ -34418,6 +34651,10 @@
           "format": "date-time",
           "type": "string"
         },
+        "adoxio_courtdecisionresult": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_actiontaken": {
           "format": "int32",
           "type": "integer"
@@ -34426,11 +34663,19 @@
           "format": "date-time",
           "type": "string"
         },
+        "adoxio_rmapprovaldecisiondate": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_delegatedecisionsentdate": {
           "format": "date-time",
           "type": "string"
         },
         "adoxio_delegatedecisionreceiveddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_reconsiderationapplicationdate": {
           "format": "date-time",
           "type": "string"
         },
@@ -34446,8 +34691,9 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_ispaymentconfirmedbyfinance": {
-          "type": "boolean"
+        "adoxio_reconsiderationapplicationduedate": {
+          "format": "date-time",
+          "type": "string"
         },
         "adoxio_iswaiverrequested": {
           "format": "int32",
@@ -34456,9 +34702,13 @@
         "_owningteam_value": {
           "type": "string"
         },
-        "adoxio_communicationdistributiondate": {
-          "format": "date-time",
-          "type": "string"
+        "adoxio_reconsiderationdelegatefinding": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_registrarsreconsiderationdecision": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_istandcwordtemplate": {
           "type": "string"
@@ -34474,7 +34724,14 @@
           "format": "date-time",
           "type": "string"
         },
+        "adoxio_ispaymentconfirmedbyfinance": {
+          "type": "boolean"
+        },
         "adoxio_badgenumber": {
+          "type": "string"
+        },
+        "adoxio_orderstayeduntildate": {
+          "format": "date-time",
           "type": "string"
         },
         "adoxio_minpenalty": {
@@ -34541,10 +34798,11 @@
         "adoxio_rmsummary": {
           "type": "string"
         },
-        "_adoxio_licenseeid_value": {
+        "adoxio_name": {
           "type": "string"
         },
-        "adoxio_name": {
+        "adoxio_courtdecisiondate": {
+          "format": "date-time",
           "type": "string"
         },
         "adoxio_delegategmdecision": {
@@ -34601,14 +34859,23 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_isunderreconsideration": {
+          "type": "boolean"
+        },
         "adoxio_iswqrwordtemplate": {
           "type": "string"
+        },
+        "adoxio_isreconsiderationapplicationpaid": {
+          "type": "boolean"
         },
         "adoxio_lpcnumber": {
           "type": "string"
         },
         "adoxio_isact": {
           "type": "boolean"
+        },
+        "adoxio_reconsiderationdelegatename": {
+          "type": "string"
         },
         "adoxio_recommendedmonetarypenalty_base": {
           "format": "decimal",
@@ -36332,10 +36599,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_checklistnoeareportapproved": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_tentativehearinglocation": {
           "type": "string"
         },
@@ -36397,6 +36660,10 @@
         "adoxio_lgcontactphone": {
           "type": "string"
         },
+        "adoxio_checklistnoeareportapproved": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_enforcementactionid": {
           "type": "string"
         },
@@ -36412,8 +36679,9 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_oralhearinglocation": {
-          "type": "string"
+        "adoxio_checklistpetitionreceived": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_reconsiderationapplicationsubmitteddate": {
           "format": "date-time",
@@ -36797,6 +37065,9 @@
         "adoxio_checklistcourtdatereceived": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_oralhearinglocation": {
+          "type": "string"
         },
         "adoxio_waiversigneddate": {
           "format": "date-time",
@@ -37846,6 +38117,120 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_event",
       "type": "object",
       "properties": {
+        "statuscode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_issignstwodrinkmax": {
+          "type": "boolean"
+        },
+        "adoxio_issamplesizecompliant": {
+          "type": "boolean"
+        },
+        "_adoxio_account_value": {
+          "type": "string"
+        },
+        "adoxio_mktorganizercontactname": {
+          "type": "string"
+        },
+        "adoxio_isotherdisturbance": {
+          "type": "boolean"
+        },
+        "_createdby_value": {
+          "type": "string"
+        },
+        "adoxio_ismarketonlyvendors": {
+          "type": "boolean"
+        },
+        "adoxio_communityapproval": {
+          "type": "boolean"
+        },
+        "adoxio_registrationnumber": {
+          "type": "string"
+        },
+        "adoxio_marketduration": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_securitycompanycontactname": {
+          "type": "string"
+        },
+        "_owninguser_value": {
+          "type": "string"
+        },
+        "adoxio_notifyeventinspector": {
+          "type": "boolean"
+        },
+        "adoxio_eventstaffingbartenders": {
+          "type": "string"
+        },
+        "adoxio_enddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_numberdailyeventattendees": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_seplicencenumber": {
+          "type": "string"
+        },
+        "adoxio_serviceareaentrancesupervisiondetails": {
+          "type": "string"
+        },
+        "_adoxio_licence_value": {
+          "type": "string"
+        },
+        "adoxio_eventliquorcontainment": {
+          "type": "string"
+        },
+        "createdon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_iseventloadavailable": {
+          "type": "boolean"
+        },
+        "_modifiedby_value": {
+          "type": "string"
+        },
+        "adoxio_issignsadvisingminors": {
+          "type": "boolean"
+        },
+        "adoxio_isservicearealoadavailable": {
+          "type": "boolean"
+        },
+        "adoxio_eventliquorlayout": {
+          "type": "string"
+        },
+        "adoxio_contactphonenumber": {
+          "type": "string"
+        },
+        "adoxio_street1": {
+          "type": "string"
+        },
+        "adoxio_securitycompanycontactphone": {
+          "type": "string"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "type": "string"
+        },
+        "adoxio_securitycompanyprovince": {
+          "type": "string"
+        },
+        "adoxio_securitycompanyname": {
+          "type": "string"
+        },
+        "adoxio_isminorsattending": {
+          "type": "boolean"
+        },
+        "adoxio_eventoccupantloadservicearea": {
+          "type": "string"
+        },
+        "adoxio_istwopiecesidrequired": {
+          "type": "boolean"
+        },
         "adoxio_securitypersonnelnumberhired": {
           "format": "int32",
           "type": "integer"
@@ -37853,289 +38238,280 @@
         "_owningbusinessunit_value": {
           "type": "string"
         },
-        "overriddencreatedon": {
+        "adoxio_liquorserviceenddate": {
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_eventstaffingmanagers": {
-          "type": "string"
-        },
-        "adoxio_eventtype": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_issignsadvisingminors": {
-          "type": "boolean"
-        },
-        "adoxio_externalid": {
-          "type": "string"
-        },
-        "adoxio_isotherminorssafetydetails": {
-          "type": "string"
-        },
-        "statecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_contactphonenumber": {
-          "type": "string"
-        },
-        "adoxio_isdeclarationaccurate": {
-          "type": "boolean"
-        },
-        "adoxio_sepcontactphonenumber": {
-          "type": "string"
-        },
-        "adoxio_eventdescription": {
-          "type": "string"
-        },
-        "_adoxio_licence_value": {
-          "type": "string"
-        },
-        "adoxio_seplicencenumber": {
-          "type": "string"
-        },
-        "adoxio_isotherconsumptionsafety": {
-          "type": "boolean"
-        },
-        "adoxio_securitycompanycontactfax": {
-          "type": "string"
-        },
-        "adoxio_contactname": {
-          "type": "string"
-        },
-        "adoxio_createinspection": {
-          "type": "boolean"
-        },
-        "adoxio_startdate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_adoxio_areaid_value": {
-          "type": "string"
-        },
-        "adoxio_policeofficersummary": {
-          "type": "string"
-        },
-        "adoxio_isminorsattending": {
-          "type": "boolean"
-        },
-        "adoxio_isotherdisturbancedetails": {
-          "type": "string"
-        },
-        "adoxio_contactphone": {
-          "type": "string"
-        },
-        "utcconversiontimezonecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_isotherminorssafety": {
-          "type": "boolean"
-        },
-        "adoxio_clienthostname": {
-          "type": "string"
-        },
-        "_modifiedby_value": {
-          "type": "string"
-        },
-        "adoxio_province": {
-          "type": "string"
-        },
-        "adoxio_eventid": {
-          "type": "string"
-        },
-        "adoxio_os_session_pk": {
-          "type": "string"
-        },
-        "_createdby_value": {
-          "type": "string"
-        },
-        "adoxio_isservicearealoadavailable": {
-          "type": "boolean"
-        },
-        "adoxio_additionallocationinfo": {
-          "type": "string"
-        },
-        "adoxio_specificlocation": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_postalcode": {
-          "type": "string"
-        },
-        "adoxio_name": {
+        "adoxio_securitycompanypostal": {
           "type": "string"
         },
         "adoxio_liquorservicestartdate": {
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_notifyeventinspector": {
-          "type": "boolean"
-        },
-        "adoxio_foodservice": {
+        "adoxio_maxattendance": {
           "format": "int32",
           "type": "integer"
-        },
-        "adoxio_dateoutcomed": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "statuscode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_eventoccupantloadservicearea": {
-          "type": "string"
-        },
-        "_ownerid_value": {
-          "type": "string"
-        },
-        "adoxio_eventliquorcontainment": {
-          "type": "string"
-        },
-        "adoxio_eventliquorlayout": {
-          "type": "string"
-        },
-        "adoxio_isotherdisturbance": {
-          "type": "boolean"
-        },
-        "_adoxio_account_value": {
-          "type": "string"
-        },
-        "adoxio_street1": {
-          "type": "string"
-        },
-        "adoxio_issignsintoxicatedpersons": {
-          "type": "boolean"
-        },
-        "_adoxio_inspector_value": {
-          "type": "string"
-        },
-        "adoxio_maxstaffattendance": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_venuenamedescription": {
-          "type": "string"
-        },
-        "adoxio_numberdailyeventattendees": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_isdisturbanceappendix2": {
-          "type": "boolean"
-        },
-        "adoxio_contactemail": {
-          "type": "string"
-        },
-        "adoxio_isliquorareacontrolled": {
-          "type": "boolean"
-        },
-        "_owninguser_value": {
-          "type": "string"
-        },
-        "versionnumber": {
-          "format": "int64",
-          "type": "string"
-        },
-        "adoxio_sepcontactname": {
-          "type": "string"
-        },
-        "_adoxio_regionid_value": {
-          "type": "string"
-        },
-        "adoxio_eventstaffingbartenders": {
-          "type": "string"
-        },
-        "adoxio_safetysecuritychangesrequired": {
-          "type": "boolean"
-        },
-        "adoxio_securitycompanyname": {
-          "type": "string"
-        },
-        "adoxio_additionlocationinfo": {
-          "type": "string"
-        },
-        "_modifiedonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_entertainment": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_liquorareacontrolleddetails": {
-          "type": "string"
-        },
-        "timezoneruleversionnumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_securitycompanycontactname": {
-          "type": "string"
-        },
-        "adoxio_additionallocationinformation": {
-          "type": "string"
         },
         "adoxio_securitycompanystreet": {
           "type": "string"
         },
-        "adoxio_eventtypedescription": {
-          "type": "string"
-        },
-        "adoxio_foodservicedescription": {
-          "type": "string"
-        },
-        "adoxio_eventnumber": {
-          "type": "string"
-        },
-        "adoxio_securitycompanycity": {
-          "type": "string"
-        },
-        "adoxio_securitycompanycontactphone": {
-          "type": "string"
-        },
-        "_createdonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_eventoccupantloadservicesarea": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_entertainmentdetails": {
-          "type": "string"
-        },
-        "adoxio_venuedescription": {
-          "type": "string"
-        },
-        "adoxio_issignstwodrinkmax": {
+        "adoxio_safetysecurityplanchangessubmitted": {
           "type": "boolean"
         },
-        "adoxio_eventoccupantload": {
+        "adoxio_city": {
+          "type": "string"
+        },
+        "adoxio_safetysecuritychangesrequireddetails": {
+          "type": "string"
+        },
+        "statecode": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_safetysecuritychangesrequireddetails": {
+        "adoxio_isotherdisturbancedetails": {
           "type": "string"
         },
         "adoxio_class": {
           "format": "int32",
           "type": "integer"
         },
+        "_ownerid_value": {
+          "type": "string"
+        },
+        "adoxio_ismarketmaxamountorduration": {
+          "type": "boolean"
+        },
+        "adoxio_policeofficersummary": {
+          "type": "string"
+        },
+        "adoxio_eventtypedescription": {
+          "type": "string"
+        },
+        "adoxio_eventoccupantload": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "timezoneruleversionnumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_maxstaffattendance": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_ismarkethostssixvendors": {
+          "type": "boolean"
+        },
+        "adoxio_eventnumber": {
+          "type": "string"
+        },
+        "adoxio_mktorganizercontactphone": {
+          "type": "string"
+        },
+        "adoxio_numberdailyminorattendees": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_inspector_value": {
+          "type": "string"
+        },
+        "adoxio_startdate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_isliquorareacontrolled": {
+          "type": "boolean"
+        },
+        "adoxio_os_session_pk": {
+          "type": "string"
+        },
+        "overriddencreatedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_issignsintoxicatedpersons": {
+          "type": "boolean"
+        },
+        "adoxio_eventtype": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_eventdescription": {
+          "type": "string"
+        },
+        "adoxio_additionallocationinformation": {
+          "type": "string"
+        },
+        "adoxio_additionlocationinfo": {
+          "type": "string"
+        },
+        "adoxio_isotherminorssafety": {
+          "type": "boolean"
+        },
+        "importsequencenumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_specificlocation": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_name": {
+          "type": "string"
+        },
+        "adoxio_contactname": {
+          "type": "string"
+        },
+        "adoxio_isdisturbanceappendix2": {
+          "type": "boolean"
+        },
+        "adoxio_liquorareacontrolleddetails": {
+          "type": "string"
+        },
+        "adoxio_securitycompanycity": {
+          "type": "string"
+        },
+        "adoxio_entertainmentdescription": {
+          "type": "string"
+        },
+        "_createdonbehalfby_value": {
+          "type": "string"
+        },
+        "adoxio_eventid": {
+          "type": "string"
+        },
+        "adoxio_isnoimportedgoods": {
+          "type": "boolean"
+        },
+        "adoxio_entertainment": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_requestsafetysecurityplan": {
+          "type": "boolean"
+        },
+        "utcconversiontimezonecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_eventoccupantloadservicesarea": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_clienthostname": {
+          "type": "string"
+        },
+        "adoxio_eventstaffingservers": {
+          "type": "string"
+        },
+        "adoxio_contactphone": {
+          "type": "string"
+        },
+        "adoxio_isallstaffservingitright": {
+          "type": "boolean"
+        },
+        "adoxio_eventstaffingmanagers": {
+          "type": "string"
+        },
+        "_adoxio_areaid_value": {
+          "type": "string"
+        },
         "adoxio_seplicensee": {
           "type": "string"
         },
-        "adoxio_serviceareaentrancesupervisiondetails": {
+        "adoxio_isotherconsumptionsafety": {
+          "type": "boolean"
+        },
+        "adoxio_additionallocationinfo": {
           "type": "string"
         },
-        "adoxio_iseventloadavailable": {
+        "adoxio_foodservicedescription": {
+          "type": "string"
+        },
+        "adoxio_isnopreventingsaleofliquor": {
           "type": "boolean"
+        },
+        "adoxio_marketname": {
+          "type": "string"
+        },
+        "adoxio_isotherminorssafetydetails": {
+          "type": "string"
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string"
+        },
+        "adoxio_attendanceminors": {
+          "type": "boolean"
+        },
+        "adoxio_venuedescription": {
+          "type": "string"
+        },
+        "adoxio_securitycompanycontactemail": {
+          "type": "string"
+        },
+        "adoxio_isdeclarationaccurate": {
+          "type": "boolean"
+        },
+        "adoxio_additionalsafetydetails": {
+          "type": "string"
+        },
+        "adoxio_postalcode": {
+          "type": "string"
+        },
+        "adoxio_province": {
+          "type": "string"
+        },
+        "adoxio_ismarketmanagedorcarried": {
+          "type": "boolean"
+        },
+        "adoxio_address": {
+          "type": "string"
         },
         "adoxio_securitycompanysummary": {
           "type": "string"
         },
-        "adoxio_eventstaffingservers": {
+        "adoxio_isotherconsumptionsafetydetails": {
+          "type": "string"
+        },
+        "adoxio_sepcontactphonenumber": {
+          "type": "string"
+        },
+        "_owningteam_value": {
+          "type": "string"
+        },
+        "adoxio_entertainmentdetails": {
+          "type": "string"
+        },
+        "adoxio_safetysecuritychangesrequired": {
+          "type": "boolean"
+        },
+        "adoxio_createinspection": {
+          "type": "boolean"
+        },
+        "adoxio_securitycompanycontactfax": {
+          "type": "string"
+        },
+        "adoxio_contactemail": {
+          "type": "string"
+        },
+        "adoxio_sepcontactname": {
+          "type": "string"
+        },
+        "adoxio_dateoutcomed": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_issalesareaavailanddefined": {
+          "type": "boolean"
+        },
+        "adoxio_venuenamedescription": {
+          "type": "string"
+        },
+        "adoxio_externalid": {
+          "type": "string"
+        },
+        "_adoxio_regionid_value": {
           "type": "string"
         },
         "adoxio_street2": {
@@ -38145,70 +38521,15 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_numberdailyminorattendees": {
+        "adoxio_foodservice": {
           "format": "int32",
           "type": "integer"
         },
-        "importsequencenumber": {
+        "adoxio_eventcategory": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_entertainmentdescription": {
-          "type": "string"
-        },
-        "adoxio_enddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "createdon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_additionalsafetydetails": {
-          "type": "string"
-        },
-        "adoxio_safetysecurityplanchangessubmitted": {
-          "type": "boolean"
-        },
-        "adoxio_isotherconsumptionsafetydetails": {
-          "type": "string"
-        },
-        "adoxio_liquorserviceenddate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_attendanceminors": {
-          "type": "boolean"
-        },
-        "adoxio_securitycompanyprovince": {
-          "type": "string"
-        },
-        "adoxio_securitycompanypostal": {
-          "type": "string"
-        },
-        "adoxio_address": {
-          "type": "string"
-        },
-        "adoxio_securitycompanycontactemail": {
-          "type": "string"
-        },
-        "adoxio_city": {
-          "type": "string"
-        },
-        "adoxio_maxattendance": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_requestsafetysecurityplan": {
-          "type": "boolean"
-        },
-        "adoxio_communityapproval": {
-          "type": "boolean"
-        },
-        "adoxio_istwopiecesidrequired": {
-          "type": "boolean"
-        },
-        "_owningteam_value": {
+        "adoxio_marketwebsite": {
           "type": "string"
         },
         "createdby": {
@@ -41629,10 +41950,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_operated": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_representativename": {
           "type": "string"
         },
@@ -41644,6 +41961,9 @@
           "type": "string"
         },
         "adoxio_establishmentnametemp": {
+          "type": "string"
+        },
+        "adoxio_licencesid": {
           "type": "string"
         },
         "adoxio_externalid": {
@@ -41720,6 +42040,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_breweryequipmentlist": {
+          "type": "string"
+        },
         "_ownerid_value": {
           "type": "string"
         },
@@ -41743,8 +42066,9 @@
         "adoxio_expirymonthname": {
           "type": "string"
         },
-        "adoxio_licencesid": {
-          "type": "string"
+        "adoxio_operated": {
+          "format": "int32",
+          "type": "integer"
         },
         "_adoxio_territory_value": {
           "type": "string"
@@ -41753,6 +42077,9 @@
           "type": "string"
         },
         "adoxio_orgbookcredentialid": {
+          "type": "string"
+        },
+        "adoxio_distilleryequipmentlist": {
           "type": "string"
         },
         "adoxio_licencenumber": {
@@ -45936,57 +46263,53 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_termsconditionslimitationspreset",
       "type": "object",
       "properties": {
-        "_owninguser_value": {
-          "type": "string"
-        },
-        "_owningteam_value": {
-          "type": "string"
-        },
         "_adoxio_licencetype_value": {
           "type": "string"
         },
-        "modifiedon": {
-          "format": "date-time",
+        "adoxio_termsconditionslimitationspresetid": {
           "type": "string"
         },
-        "_ownerid_value": {
+        "_owningbusinessunit_value": {
+          "type": "string"
+        },
+        "adoxio_name": {
           "type": "string"
         },
         "versionnumber": {
           "format": "int64",
           "type": "string"
         },
-        "statuscode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_contents": {
+        "_createdby_value": {
           "type": "string"
         },
         "adoxio_isdefault": {
           "type": "boolean"
         },
-        "statecode": {
+        "adoxio_displayorder": {
           "format": "int32",
           "type": "integer"
         },
-        "_adoxio_licencesubcategory_value": {
+        "utcconversiontimezonecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_owninguser_value": {
+          "type": "string"
+        },
+        "statuscode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "modifiedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_modifiedonbehalfby_value": {
           "type": "string"
         },
         "importsequencenumber": {
           "format": "int32",
           "type": "integer"
-        },
-        "overriddencreatedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_displayorder": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_modifiedby_value": {
-          "type": "string"
         },
         "createdon": {
           "format": "date-time",
@@ -45996,26 +46319,33 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_name": {
+        "overriddencreatedon": {
+          "format": "date-time",
           "type": "string"
         },
-        "utcconversiontimezonecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_createdby_value": {
+        "_ownerid_value": {
           "type": "string"
         },
         "_createdonbehalfby_value": {
           "type": "string"
         },
-        "_modifiedonbehalfby_value": {
+        "adoxio_contents": {
           "type": "string"
         },
-        "_owningbusinessunit_value": {
+        "_owningteam_value": {
           "type": "string"
         },
-        "adoxio_termsconditionslimitationspresetid": {
+        "_adoxio_licencesubcategory_value": {
+          "type": "string"
+        },
+        "_adoxio_applicationtype_value": {
+          "type": "string"
+        },
+        "statecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_modifiedby_value": {
           "type": "string"
         },
         "createdbyname": {
@@ -46101,6 +46431,9 @@
         },
         "adoxio_LicenceSubCategory": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencesubcategory"
+        },
+        "adoxio_ApplicationType": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
         }
       }
     },
@@ -68700,6 +69033,9 @@
         "adoxio_routinechecklistcontractmanufacturingnote": {
           "type": "string"
         },
+        "adoxio_distilleryequipmentlist": {
+          "type": "string"
+        },
         "adoxio_inspchecklistsmelljarsnotes": {
           "type": "string"
         },
@@ -68731,6 +69067,9 @@
         "adoxio_pschecklistotherobservations": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_breweryequipmentlist": {
+          "type": "string"
         },
         "adoxio_pschecklistunlawfulcannabisnotes": {
           "type": "string"
@@ -112069,6 +112408,19 @@
         }
       }
     },
+    "Microsoft.Dynamics.CRM.adoxio_termsconditionslimitationspresetCollection": {
+      "title": "Collection of adoxio_termsconditionslimitationspreset",
+      "description": "Microsoft.Dynamics.CRM.adoxio_termsconditionslimitationspresetCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_termsconditionslimitationspreset"
+          }
+        }
+      }
+    },
     "Microsoft.Dynamics.CRM.adoxio_areaCollection": {
       "title": "Collection of adoxio_area",
       "description": "Microsoft.Dynamics.CRM.adoxio_areaCollection",
@@ -112884,19 +113236,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_taxandaccounting"
-          }
-        }
-      }
-    },
-    "Microsoft.Dynamics.CRM.adoxio_termsconditionslimitationspresetCollection": {
-      "title": "Collection of adoxio_termsconditionslimitationspreset",
-      "description": "Microsoft.Dynamics.CRM.adoxio_termsconditionslimitationspresetCollection",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_termsconditionslimitationspreset"
           }
         }
       }

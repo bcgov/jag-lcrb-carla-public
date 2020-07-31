@@ -85,6 +85,24 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Other = 845280006
     }
 
+    public enum MarketDuration
+    {
+        [EnumMember(Value = "Annual")]
+        Annual = 845280000,
+        [EnumMember(Value = "Continuous")]
+        Continuous = 845280001
+    }
+
+    public enum EventCategory
+    {
+        [EnumMember(Value = "Catering")]
+        Catering = 845280000,
+        [EnumMember(Value = "Market")]
+        Market = 845280001,
+        [EnumMember(Value = "Temporary Off-Site Sale")]
+        TemporaryOffSiteSale = 845280002,
+    }
+
     public class LicenceEvent
     {
         // string form of the guid.
@@ -184,5 +202,25 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         // security agreement
         public bool? DeclarationIsAccurate { get; set; }
+
+        // market events
+        public bool? IsNoPreventingSaleofLiquor { get; set; }
+        public bool? IsMarketManagedorCarried { get; set; }
+        public bool? IsMarketOnlyVendors { get; set; }
+        public bool? IsNoImportedGoods { get; set; }
+        public bool? IsMarketHostsSixVendors { get; set; }
+        public bool? IsMarketMaxAmountorDuration { get; set; }
+        public string MKTOrganizerContactName { get; set; }
+        public string MKTOrganizerContactPhone { get; set; }
+        public string RegistrationNumber { get; set; }
+        public string MarketName { get; set; }
+        public string MarketWebsite { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public MarketDuration? MarketDuration { get; set; }
+        public bool? IsAllStaffServingitRight { get; set; }
+        public bool? IsSalesAreaAvailandDefined { get; set; }
+        public bool? IsSampleSizeCompliant { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public EventCategory? EventCategory { get; set; }
     }
 }

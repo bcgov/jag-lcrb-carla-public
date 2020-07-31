@@ -24,6 +24,7 @@ export class ProofOfZoningComponent extends FormBase implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
+
     });
     //this.form.patchValue(this.application);
   }
