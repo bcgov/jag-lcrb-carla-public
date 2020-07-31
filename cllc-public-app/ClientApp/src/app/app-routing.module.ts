@@ -51,6 +51,7 @@ import { CovidConfirmationComponent } from '@components/applications/application
 import { TerminateTPORelationshipComponent } from '@components/applications/terminate-tpo-relationship/terminate-tpo-relationship.component';
 import { LgApprovalsComponent } from '@components/lg-approvals/lg-approvals.component';
 import { LicenceRepresentativeFormComponent } from '@components/licence-representative-form/licence-representative-form.component';
+import { MarketEventComponent } from '@components/market-event/market-event.component';
 
 
 const routes: Routes = [
@@ -136,6 +137,16 @@ const routes: Routes = [
   {
     path: 'licence/:licenceId/temporary-offsite/:eventId',
     component: TemporaryOffsiteComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'licence/:licenceId/market-event',
+    component: MarketEventComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'licence/:licenceId/market-event/:eventId',
+    component: MarketEventComponent,
     canActivate: [BCeidAuthGuard]
   },
   {
