@@ -3009,8 +3009,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_ParentApplicationID")]
-        public MicrosoftDynamicsCRMadoxioApplication AdoxioParentApplicationID { get; set; }
 
+        public MicrosoftDynamicsCRMadoxioApplication AdoxioParentApplicationID { get; set; }
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_application_applications")]
