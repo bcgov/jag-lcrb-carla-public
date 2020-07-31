@@ -626,8 +626,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? LocatedAboveDescription { get; set; }
         public int? PatioServiceBar { get; set; }
 
-        [JsonConverter(typeof(StringEnumConverter))]
-        public LicenceSubCategory LicenceSubCategory { get; set; }
+        public string LicenceSubCategory { get; set; }
 
         public string PidList { get; set; }
 
