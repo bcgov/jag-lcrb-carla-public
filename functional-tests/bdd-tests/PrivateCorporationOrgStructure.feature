@@ -166,3 +166,14 @@ Scenario: Complex Save for Later mixed business shareholders
     And the saved for later mixed business shareholder org structure is correct
     And the account is deleted
     Then I see the login page
+
+@e2e @cannabis @privatecorporation @validation @privatecorporgstructure1
+Scenario: Confirm org structure records not duplicated
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I confirm that no duplicates are shown in the org structure
+    And the account is deleted
+    Then I see the login page

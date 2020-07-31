@@ -17,6 +17,7 @@ export class Application {
   invoicetrigger: number;
 
   id: string;
+  parentApplicationId: string;
   adoxioInvoiceId: string;
   account: Account;
   additionalPropertyInformation: string;
@@ -153,6 +154,12 @@ export class Application {
   mfgUsesNeutralGrainSpirits: string;
   isAlr: boolean;
   pidList: string; 
+
+  zoningStatus: boolean;
+  isOwnerBusiness: boolean;
+  hasValidInterest: boolean;
+  willHaveValidInterest: boolean;
+  //inGroceryStore: string;
 
   // Manufactuer Structural Change - Patio
   patioCompDescription: string;

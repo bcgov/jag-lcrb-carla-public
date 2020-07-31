@@ -382,6 +382,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     {
         public string Id { get; set; } //adoxio_applicationid
 
+        public string ParentApplicationId { get; set; }
+
         [JsonConverter(typeof(StringEnumConverter))]
         public AdoxioApplicationStatusCodes ApplicationStatus { get; set; } //statuscode
 
@@ -592,6 +594,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNoNotApplicable? MfgUsesNeutralGrainSpirits { get; set; }
 
+        public int? ZoningStatus { get; set; }
+        public bool? IsOwnerBusiness { get; set; }      
+        public bool? HasValidInterest { get; set; }
+        public bool? WillHaveValidInterest { get; set; }
+        //public YesNoNotApplicable? InGroceryStore { get; set; }
+
 
         // these are just optional int - not picklist references.
         public int? MfgAcresOfFruit { get; set; }
@@ -602,6 +610,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? MfgStepCrushing { get; set; }
         public bool? MfgStepFiltering { get; set; }
         public bool? MfgStepSecFermOrCarb { get; set; }
+
+
+
 
 
         // Manufactuer Structural Change - Patio

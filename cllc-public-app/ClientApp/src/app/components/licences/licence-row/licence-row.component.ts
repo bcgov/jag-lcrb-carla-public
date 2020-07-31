@@ -16,7 +16,7 @@ import { EstablishmentDataService } from '@services/establishment-data.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Establishment } from '@models/establishment.model';
 import { LicenceEventsService } from '@services/licence-events.service';
-import { EventStatus } from '@models/licence-event.model';
+import { EventStatus, LicenceEvent, EventCategory } from '@models/licence-event.model';
 import { License } from '@models/license.model';
 import { TermsAndConditionsDataService } from '@services/terms-and-condtions-data.service';
 import { Endorsement } from '@models/endorsement.model';
@@ -40,6 +40,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     busy: Subscription;
     licenceForms = {};
     eventStatus = EventStatus;
+    eventCategory = EventCategory;
 
     @Input() available: boolean;
     @Input() licenceType: string;
@@ -380,5 +381,36 @@ export class LicenceRowComponent extends FormBase implements OnInit {
             default:
                 return status;
         }
+    }
+
+    getEventName(event) {
+      if (event.name !== null) {
+        return event.name;
+      } else if (event.clientHostname !== null) {
+        return event.clientHostname;
+      }
+      return null;
+    }
+
+    getEventPath(event: LicenceEvent) {
+      if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, 'Catering').value) {
+        return '/event/';
+      } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, 'Temporary Off-Site Sale').value) {
+        return '/temporary-offsite/';
+      } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, 'Market').value) {
+        return '/market-event/';
+      }
+      return '/event/';
+    }
+
+    getOptionFromLabel(options: any, label: string) {
+      const idx = options.findIndex(opt => opt.label === label);
+      if (idx >= 0) {
+        return options[idx];
+      }
+      return {
+        value: null,
+        label: ''
+      };
     }
 }

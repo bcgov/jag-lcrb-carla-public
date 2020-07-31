@@ -1,0 +1,34 @@
+::ng-deep .ngb-tp-input-container input {
+    padding: 0;
+  }
+  
+  ::ng-deep .ngb-tp-meridian button {
+    color: #38598A;
+    &:hover {
+      background-color: #38598A;
+    }
+  }
+  
+  .time-picker-title {
+    margin: auto 0;
+    h4 {
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+  
+  .button-row {
+    display: flex;
+    button:last-child {
+      margin-left: auto;
+    }
+  }
+  
+.attention-section {
+  background-color: #E1E8F2;
+  border-bottom: 4px solid #E4E4E4;
+}
+
+.checkbox-label {
+  padding-left: 5px;
+}

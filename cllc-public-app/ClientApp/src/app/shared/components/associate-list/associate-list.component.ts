@@ -207,9 +207,10 @@ export class AssociateListComponent extends FormBase implements OnInit {
   saveLog(item: LicenseeChangeLog, index: number): Observable<boolean> {
     const valid = this.associates.at(index).valid;
     let saved = false;
+
     if (valid) {
       item = Object.assign(new LicenseeChangeLog(), item || {}) as LicenseeChangeLog;
-      if (!item.isAddChangeType()) {
+      if (!item.isAddChangeType() && item.someFieldsHaveChanged()) {
         item.changeType = `update${this.changeTypeSuffix}`;
         this.associates.at(index).get('changeType').setValue(item.changeType);
       }

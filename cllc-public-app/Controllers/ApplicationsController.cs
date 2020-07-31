@@ -776,6 +776,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         adoxioApplication.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", item.PoliceJurisdictionId);
                     }
+
+                    if (!string.IsNullOrEmpty(item?.ParentApplicationId))
+                    {
+                        adoxioApplication.AdoxioParentApplicationIDODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", item.ParentApplicationId);
+                    }
                 }
 
                 adoxioApplication.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
@@ -1235,7 +1240,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Unexpected error deleting a service area.");                        
+                        _logger.LogError(httpOperationException, "Unexpected error deleting a service area.");
                     }
                     catch (Exception e)
                     {
