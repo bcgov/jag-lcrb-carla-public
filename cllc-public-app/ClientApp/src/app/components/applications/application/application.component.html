@@ -114,6 +114,7 @@
               </div>
               <!-- Non Cannabis Establishment Name input-->
               <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
+                <label for="">Establishment Name</label>
                 <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)" [required]="true">
                   <input class="form-control" style="width: 500px;" type="text"
                     [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
@@ -126,7 +127,7 @@
             </div>
             <div formGroupName="assignedLicence"
               *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
-              <h3 class="blue-header">CURRENT ADDRESS</h3>
+              <h3 class="blue-header">{{application?.licenseType}} LOCATION ADDRESS</h3>
               <div class="content-bottom">
                 <p>The licenced establishment is currently located at the following address:</p>
                 <address class="row">
@@ -252,24 +253,10 @@
                 </app-proof-of-zoning>
                 <hr>
               </section>
-
-              <!--app-field [valid]="isValidOrNotTouched('zoningPermitsMFG')" [showChevrons]="false"
-              errorMessage="Please confirm that the current zoning permits manufacturing on the manufacturing site"
-              [isFullWidth]="true" style="margin-left:10px;">
-              <mat-checkbox formControlName="zoningPermitsMFG">
-                By checking this box, I confirm that current zoning permits manufacturing on the manufacturing site.</mat-checkbox>
-            </app-field>
-            <hr-->
-              <!--app-field [valid]="isValidOrNotTouched('zoningPermitsRetailSales')" [showChevrons]="false"
-              errorMessage="Please confirm that the current zoning permits retail sales on the manufacturing site"
-              [isFullWidth]="true" style="margin-left:10px;">
-              <mat-checkbox formControlName="zoningPermitsRetailSales">
-                I confirm that current zoning permits retail sales on the manufacturing site.</mat-checkbox>
-            </app-field>
-            <hr-->
+              <section>
               <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
                 [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false" errorMessage="Specify ALR status"
-                [isFullWidth]="true" *ngIf="application.licenseType === 'Manufacturer'">
+                [isFullWidth]="true">
                 <mat-radio-group formControlName="isAlr">
                   <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
                   <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
@@ -284,7 +271,29 @@
                         target="_blank">Agriculral Land Reserve (ALR) Use Regulation</a>.</strong></p>
                 </div>
               </div>
+            </section>
 
+
+              <!-- Letter of Intent -->
+              <section *ngIf="application?.applicationType.name === 'Special Event Area Endorsement'">
+                <h3 class="blue-header">Letter of Intent</h3>
+                <section class="content-bottom">
+                <div *ngIf="htmlContent.letterOfIntent">
+                  <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.letterOfIntent"></section>
+                </div>
+
+                <section>
+                  <app-file-uploader *ngIf="applicationId" documentType="letterOfIntent"
+                    [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                    [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [useDocumentTypeForName]="true"
+                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                    [extensions]="['pdf']"
+                    (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event" [entityId]="applicationId"
+                    [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
+                  </app-file-uploader>
+                </section>
+              </section>
+              </section>
 
             </div>
           </section>
@@ -391,6 +400,49 @@
               <app-proof-of-zoning *ngIf="application" [application]="application" #proofOfZoning>
               </app-proof-of-zoning>
               <hr>
+      
+                            <section>
+                            <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
+                              [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false" errorMessage="Specify ALR status"
+                              [isFullWidth]="true">
+                              <mat-radio-group formControlName="isAlr">
+                                <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
+                                <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
+                              </mat-radio-group>
+                            </app-field>
+                            <div *ngIf="application.licenseType === 'Manufacturer' && this.form.get('isAlr').value === true">
+                              <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
+                              <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
+                                <p><strong>By submitting this application to LCRB, you are confirming that your licenced establishment
+                                    will adhere to the requirements laid out in the <a
+                                      href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019"
+                                      target="_blank">Agriculral Land Reserve (ALR) Use Regulation</a>.</strong></p>
+                              </div>
+                            </div>
+                          </section>
+              
+              
+                            <!-- Letter of Intent -->
+                            <section *ngIf="application?.applicationType.name === 'Special Event Area Endorsement'">
+                              <h3 class="blue-header">Letter of Intent</h3>
+                              <section class="content-bottom">
+                              <div *ngIf="htmlContent.letterOfIntent">
+                                <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.letterOfIntent"></section>
+                              </div>
+              
+                              <section>
+                                <app-file-uploader *ngIf="applicationId" documentType="letterOfIntent"
+                                  [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [useDocumentTypeForName]="true"
+                                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                                  [extensions]="['pdf']"
+                                  (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event" [entityId]="applicationId"
+                                  [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
+                                </app-file-uploader>
+                              </section>
+                            </section>
+                            </section>
+              
             </section>
 
             <!-- Store Contact Info -->
@@ -938,7 +990,7 @@
               </p>
               <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CannabisRetailStore">
                 Indicate the
-                store's proposed hours of sales below.
+                proposed hours of sales below.
               </p>
               <table class="store-hours">
                 <tr>
