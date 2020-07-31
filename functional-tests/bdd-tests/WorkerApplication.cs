@@ -100,21 +100,24 @@ namespace bdd_tests
             NgWebElement uiEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='email']"));
             uiEmail.SendKeys(email);
 
-            // select the start date (Date: From) for the current address
+            // select the start date textbox (Date: From) for the current address
             NgWebElement openCalendar = ngDriver.FindElement(By.CssSelector("input[formcontrolname='fromdate']"));
             openCalendar.Click();
 
-            NgWebElement nextCalendar = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button[1]/span/div"));
+            // select the calendar period button                                                                    
+            NgWebElement nextCalendar = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/mat-calendar-header/div/div/button/span"));
             nextCalendar.Click();
 
-                                                                                   //*[@id="mat-datepicker-0"]/div/mat-multi-year-view/table/tbody/tr[3]/td[2]/div
+            // select the year
             NgWebElement nextCalendar2 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-multi-year-view/table/tbody/tr[3]/td[2]/div"));
             nextCalendar2.Click();
 
+            // select the month
             NgWebElement nextCalendar3 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-year-view/table/tbody/tr[3]/td[3]/div"));
             nextCalendar3.Click();
 
-            NgWebElement nextCalendar4 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[3]/td[6]/div"));
+            // select the day
+            NgWebElement nextCalendar4 = ngDriver.FindElement(By.XPath("//mat-calendar[@id='mat-datepicker-0']/div/mat-month-view/table/tbody/tr[4]/td[3]/div"));
             nextCalendar4.Click();
 
             // enter the street of the mailing address

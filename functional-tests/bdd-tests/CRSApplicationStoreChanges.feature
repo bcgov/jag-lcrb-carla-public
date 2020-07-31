@@ -17,9 +17,11 @@ Scenario: Indigenous Nation Cannabis Store Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I request a Cannabis store relocation
+    And I request a store relocation for Cannabis
     And I request a structural change
     And I request a transfer of ownership
+    And I confirm the relocation request is displayed on the dashboard
+    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -37,9 +39,11 @@ Scenario: Partnership Cannabis Store Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I request a Cannabis store relocation
+    And I request a store relocation for Cannabis
     And I request a structural change
     And I request a transfer of ownership
+    And I confirm the relocation request is displayed on the dashboard
+    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -57,9 +61,11 @@ Scenario: Private Corporation Cannabis Store Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I request a Cannabis store relocation
+    And I request a store relocation for Cannabis
     And I request a structural change
     And I request a transfer of ownership
+    And I confirm the relocation request is displayed on the dashboard
+    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -77,9 +83,11 @@ Scenario: Public Corporation Cannabis Store Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I request a Cannabis store relocation
+    And I request a store relocation for Cannabis
     And I request a structural change
     And I request a transfer of ownership
+    And I confirm the relocation request is displayed on the dashboard
+    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -97,9 +105,11 @@ Scenario: Society Cannabis Store Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I request a Cannabis store relocation
+    And I request a store relocation for Cannabis
     And I request a structural change
     And I request a transfer of ownership
+    And I confirm the relocation request is displayed on the dashboard
+    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -117,8 +127,10 @@ Scenario: Sole Proprietorship Cannabis Store Changes
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I request a Cannabis store relocation
+    And I request a store relocation for Cannabis
     And I request a structural change
     And I request a transfer of ownership
+    And I confirm the relocation request is displayed on the dashboard
+    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
