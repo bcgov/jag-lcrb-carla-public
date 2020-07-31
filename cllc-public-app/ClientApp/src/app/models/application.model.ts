@@ -17,6 +17,7 @@ export class Application {
   invoicetrigger: number;
 
   id: string;
+  parentApplicationId: string;
   adoxioInvoiceId: string;
   account: Account;
   additionalPropertyInformation: string;
