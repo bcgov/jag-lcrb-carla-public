@@ -1,0 +1,291 @@
+<div class="form-wrapper" style="position: relative;">
+    <div [ngBusy]="[busy]"></div>
+    <form [formGroup]="eventForm">
+      <div class="padded-section">
+        <h1>Market Authorization Request</h1>
+      </div>
+  
+      <div class="p-3 padded-section attention-section">
+        <p>On Apr. 16, 2020, the Provincial Health Officer ordered that vendors, who are liquor manufacturers with an on-site retail endorsement and are selling at markets (also known as "farmers markets" or "community markets"), must comply with the following conditions:</p>
+        <ul>
+          <li>You must not provide samples of your products for tasting at a market.</li>
+          <li>You must sell your products at a market in sealed retail containers, such as bottles, cartons, boxes and cans.</li>
+        </ul>
+      </div>
+  
+      <div class="padded-section">
+        <p>If you plan to sell liquor manufactured under your licence at a famers/artisan/annual market, you must fill out the below fields to submit a request for a market authorization.
+          Your licence must include an on-site store endorsement to be able to submit this request. You must submit a new request for each market location you wish to attend.</p>
+      </div>
+  
+      <div class="padded-section">
+        <h2>Status <b>{{getOptionFromValue(eventStatus, eventForm.get('status').value) === null ? '' : getOptionFromValue(eventStatus, eventForm.get('status').value).label}}</b></h2>
+      </div>
+
+      <h3 class="blue-header">MARKET ELIGIBILITY CONSENT</h3>
+      <div class="padded-section">
+        <p style="font-style: italic;">As per Liquor Manufacturing Terms and Conditions it is your responsibility as a liquor manufacturer to ensure that the market you are intending on selling the product manufactured under your licence is eligible.
+          Your Regional Manufacturing inspector can conduct an inspection at the market site to check for the compliance to the Liquor Manufacturing Terms and Conditions.</p>
+        <p>I hereby consent that:</p>
+        <mat-checkbox formControlName="agreement"></mat-checkbox><span>There is no local rule preventing the sale of packaged liquor at a market.</span><br/>
+        <mat-checkbox formControlName="agreement"></mat-checkbox><span>The market is managed or carried on....</span><br/>
+        <mat-checkbox formControlName="agreement"></mat-checkbox><span>The market will be comprised entirely of vendors (excluding liquor manufacturers who hold market authorizations) that sell artisanal goods entirely of their own making or agricultural goods they produce, grow or raise themselves.</span><br/>
+        <mat-checkbox formControlName="agreement"></mat-checkbox><span>The market doesn’t sell used or imported goods (for example, flea markets and commercial markets would not be considered eligible).</span><br/>
+        <mat-checkbox formControlName="agreement"></mat-checkbox><span>The market hosts at least six vendors that don’t sell or serve liquor. The sale of liquor must not be the focus of the market.</span><br/>
+        <mat-checkbox formControlName="agreement"></mat-checkbox><span>The market occurs a maximum of three times a week. Annual markets can occur once a year and may be open for up to 35 consecutive days.</span><br/>
+      </div>
+      
+  
+      <h3 class="blue-header">LICENSEE STAFF RESPONSIBLE CONTACT INFORMATION</h3>
+      <div class="padded-section clearfix">
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Name" [required]="true"
+            [valid]="eventForm.get('contactName').valid || !eventForm.get('contactName').touched"
+            errorMessage="Please enter the contact name" [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="contactName">
+          </app-field>
+          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
+          matTooltip="The name of the contact person for the event." ></i>
+        </div>
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Phone" [required]="true"
+            [valid]="eventForm.get('contactPhone').valid || !eventForm.get('contactPhone').touched"
+            errorMessage="Please enter the contact phone number" [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="contactPhone" mask="(000) 000-0000">
+          </app-field>
+        </div>
+      </div>
+
+      <h3 class="blue-header">MARKET ORGANIZER CONTACT INFORMATION</h3>
+      <div class="padded-section clearfix">
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Name" [required]="true"
+            [valid]="eventForm.get('contactName').valid || !eventForm.get('contactName').touched"
+            errorMessage="Please enter the contact name" [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="contactName">
+          </app-field>
+          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
+          matTooltip="The name of the contact person for the event." ></i>
+        </div>
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Phone" [required]="true"
+            [valid]="eventForm.get('contactPhone').valid || !eventForm.get('contactPhone').touched"
+            errorMessage="Please enter the contact phone number" [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="contactPhone" mask="(000) 000-0000">
+          </app-field>
+        </div>
+      </div>
+
+      <h3 class="blue-header">Registration number??????</h3>
+  
+      <h3 class="blue-header">NOTIFICATIONS</h3>
+      <div class="padded-section">
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Email"
+            [valid]="eventForm.get('contactEmail').valid || !eventForm.get('contactEmail').touched"
+            [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="contactEmail" readonly>
+          </app-field>
+        </div>
+        <p>To update this email address, please see your Account Profile</p>
+      </div>
+  
+      <h3 class="blue-header">MARKET DETAILS</h3> 
+      <div class="padded-section clearfix">
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Market Name" [required]="true"
+            [valid]="eventForm.get('marketName').valid || !eventForm.get('marketName').touched"
+            errorMessage="Please enter the Market Name" [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="marketName">
+          </app-field>
+        </div>
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Market Website" [required]="true"
+            [valid]="eventForm.get('marketWebsite').valid || !eventForm.get('marketWebsite').touched"
+            errorMessage="Please enter the Market Website" [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="marketWebsite">
+          </app-field>
+        </div>
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Duration" [required]="true"
+            [valid]="eventForm.get('minorsAttending').valid || !eventForm.get('minorsAttending').touched"
+            errorMessage="Please indicate if minors are attending" [isFullWidth]="true">
+            <select class="form-control" formControlName="minorsAttending">
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </app-field>
+        </div>
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Type" [required]="true"
+            [valid]="eventForm.get('eventType').valid || !eventForm.get('eventType').touched"
+            errorMessage="Please enter the type of event" [isFullWidth]="true">
+            <select class="form-control" formControlName="eventType">
+              <option *ngFor="let item of eventType" [ngValue]="item.value">{{item.label}}</option>
+            </select>
+          </app-field>
+          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
+          matTooltip="Select the type of event that you are catering." ></i>
+        </div>
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Description" [required]="true"
+            [valid]="eventForm.get('eventTypeDescription').valid || !eventForm.get('eventTypeDescription').touched"
+            errorMessage="Please enter a description of the event" [isFullWidth]="true">
+            <textarea class="form-control" formControlName="eventTypeDescription"></textarea>
+          </app-field>
+          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
+          matTooltip="Briefly describe the event." ></i>
+  
+        </div>
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Client or Host Name" [required]="true"
+            [valid]="eventForm.get('clientHostname').valid || !eventForm.get('clientHostname').touched"
+            errorMessage="Please enter the client or host name" [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="clientHostname">
+          </app-field>
+        </div>
+      </div>
+
+      <h3 class="blue-header">MARKET LOCATION</h3>
+    <div class="padded-section clearfix">
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Venue Name/Description" [required]="true"
+          [valid]="eventForm.get('venueDescription').valid || !eventForm.get('venueDescription').touched"
+          errorMessage="Please enter the name and a description of the venue" [isFullWidth]="true">
+          <textarea class="form-control" formControlName="venueDescription"></textarea>
+        </app-field>
+        <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
+        matTooltip="Provide the name of and briefly describe the venue." ></i>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Location" [required]="true"
+          [valid]="eventForm.get('specificLocation').valid || !eventForm.get('specificLocation').touched"
+          errorMessage="Please enter the location" [isFullWidth]="true">
+          <select class="form-control" formControlName="specificLocation" [compareWith]="compareFn">
+            <option *ngFor="let item of specificLocation" [ngValue]="item.value">{{item.label}}</option>
+          </select>
+        </app-field>
+        <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
+        matTooltip="Select whether the event is being held indoors, outdoors, or both." ></i>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Additional Information"
+          [valid]="eventForm.get('additionalLocationInformation').valid || !eventForm.get('additionalLocationInformation').touched"
+          [isFullWidth]="true">
+          <textarea class="form-control" formControlName="additionalLocationInformation"></textarea>
+        </app-field>
+      </div>
+
+      <h3>Physical Address of Venue</h3>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Address 1" [required]="true"
+          [valid]="eventForm.get('street1').valid || !eventForm.get('street1').touched"
+          errorMessage="Please enter the address line 1" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="street1">
+        </app-field>
+        <app-field class="col-md-4 col-xs-12" label="Address 2"
+          [valid]="eventForm.get('street2').valid || !eventForm.get('street2').touched"
+          [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="street2">
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="City" [required]="true"
+          [valid]="eventForm.get('city').valid || !eventForm.get('city').touched"
+          errorMessage="Please enter the city" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="city">
+        </app-field>
+        <app-field class="col-md-4 col-xs-12" label="Postal Code" [required]="true"
+          [valid]="eventForm.get('postalCode').valid || !eventForm.get('postalCode').touched"
+          errorMessage="Please enter the postal code" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="postalCode">
+        </app-field>
+      </div>
+    </div>
+  
+      <h3 class="blue-header">TIME AND DATE OF EVENT</h3>
+      <div class="padded-section clearfix">
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Start Date" [required]="true"
+            [valid]="eventForm.get('startDate').valid || !eventForm.get('startDate').touched"
+            [isFullWidth]="false">
+            <input type="text" formControlName='startDate'
+              style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" class="form-control"
+              [min]="startDateMinimum" [matDatepicker]="startPicker" (focus)="startPicker.open()" (click)="startPicker.open()"
+              (dateChange)="startDateChanged()">
+            <mat-datepicker #startPicker></mat-datepicker>
+          </app-field>
+          <app-field class="col-md-4 col-xs-12" label="End Date" [required]="true"
+            [valid]="eventForm.get('endDate').valid || !eventForm.get('endDate').touched"
+            [isFullWidth]="false">
+            <input type="text" formControlName='endDate'
+              style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" class="form-control"
+              [min]="endDateMinimum" [matDatepicker]="endPicker" (focus)="endPicker.open()" (click)="endPicker.open()"
+              [max]="endDateMaximum" (dateChange)="endDateChanged()">
+            <mat-datepicker #endPicker></mat-datepicker>
+          </app-field>
+        </div>
+        <div *ngFor="let form of timeForms.controls" class="row mr-0 mt-3" style="background-color: #E1E8F2; border-bottom: 4px solid #E4E4E4">
+          <form [formGroup]="form" class="col-md-12">
+            <div class="row mt-3">
+              <div class="col-md-2 offset-md-2"><label>Event Start</label></div>
+              <div class="col-md-2"><label>Event End</label></div>
+              <div class="col-md-2"><label>Liquor Service Start</label></div>
+              <div class="col-md-2"><label>Liquor Service End</label></div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 time-picker-title">
+                <h4>{{form.get('dateTitle').value === null ? 'Default Times' : form.get('dateTitle').value}}</h4>
+              </div>
+              <div class="col-md-2">
+                <ngb-timepicker [meridian]="true" formControlName="startTime"></ngb-timepicker>
+              </div>
+              <div class="col-md-2">
+                <ngb-timepicker [meridian]="true" formControlName="endTime"></ngb-timepicker>
+              </div>
+              <div class="col-md-2">
+                <ngb-timepicker [meridian]="true" formControlName="liquorStartTime"></ngb-timepicker>
+              </div>
+              <div class="col-md-2">
+                <ngb-timepicker [meridian]="true" formControlName="liquorEndTime"></ngb-timepicker>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <app-field class="col-xs-12">
+            <mat-checkbox [checked]="scheduleIsInconsistent" (change)="toggleScheduleConsistency()" [disabled]="eventForm.controls['startDate'].invalid || eventForm.controls['endDate'].invalid || isReadOnly">The event and liquor service times are different on specific dates.</mat-checkbox>
+          </app-field>
+        </div>
+      </div>
+  
+      <h3 class="blue-header">AGREEMENT</h3>
+      <div class="padded-section">
+        <p>A person commits an offence if the person provides false or misleading information in the following circumstances: (i) when making an application referred to in section 12; (ii) when making a report or when required and as specified by the general manager under section 59. - Liquor Control and Licensing Act, Section 57(1)(c).</p>
+        <div>
+          <mat-checkbox formControlName="agreement">I understand and affirm that all of the information provided is true and complete.</mat-checkbox>
+        </div>
+      </div>
+  
+      <div class="p-3 attention-section">
+        <p>The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Section 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act and will be used for the purpose of liquor licensing and compliance and enforcement matters in accordance with the Liquor Control and Licensing Act. Should you have any questions about the collection, use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.</p>
+      </div>
+  
+      <div class="p-4 button-row">
+        <button class="btn btn-primary" style="margin-right:10px;" (click)="save(false);" *ngIf="!isReadOnly">
+          <span>
+            <i class="fa fa-save" style="color: #fff;"></i>
+            SAVE FOR LATER
+          </span>
+        </button>
+        <button class="btn btn-primary" style="margin-right:10px;" (click)="cancel();">
+          <span>
+            <i class="fa fa-trash" style="color: #fff;"></i>
+            CANCEL
+          </span>
+        </button>
+        <button class="btn btn-primary" (click)="save(true)" [disabled]="isFormValid()" *ngIf="!isReadOnly">SUBMIT</button>
+      </div>
+    </form>
+  </div>
+  

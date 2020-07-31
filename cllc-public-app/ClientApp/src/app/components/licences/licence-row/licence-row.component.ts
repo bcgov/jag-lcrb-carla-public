@@ -381,4 +381,22 @@ export class LicenceRowComponent extends FormBase implements OnInit {
                 return status;
         }
     }
+
+    getEventName(event) {
+      if (event.name !== null) {
+        return event.name;
+      } else if (event.clientHostname !== null) {
+        return event.clientHostname;
+      }
+      return null;
+    }
+
+    getEventPath(item: ApplicationLicenseSummary) {
+      if (item.licenceTypeName.indexOf('Catering') >= 0) {
+        return '/event/';
+      } else if (item.licenceTypeName.indexOf('Wine Store') >= 0) {
+        return '/temporary-offsite/';
+      }
+      return '/event/';
+    }
 }
