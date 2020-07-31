@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SpecificLocation, FoodService, Entertainment, EventType, LicenceEvent, EventStatus } from '../../models/licence-event.model';
+import { LicenceEvent, EventStatus, MarketDuration, EventType, SpecificLocation, EventCategory } from '../../models/licence-event.model';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { takeWhile, switchMap } from 'rxjs/operators';
 import { AppState } from '@app/app-state/models/app-state';
@@ -32,6 +32,10 @@ export class MarketEventComponent extends FormBase implements OnInit {
 
   busy: Subscription;
   eventStatus = EventStatus;
+  eventType = EventType;
+  marketDuration = MarketDuration;
+  specificLocation = SpecificLocation;
+  eventCategory = EventCategory;
   startDateMinimum: Date;
   endDateMinimum: Date;
   endDateMaximum: Date;
@@ -41,21 +45,42 @@ export class MarketEventComponent extends FormBase implements OnInit {
   eventForm = this.fb.group({
     status: ['', [Validators.required]],
     id: ['', []],
+    isNoPreventingSaleofLiquor: [false, [Validators.required]],
+    isMarketManagedorCarried: [false, [Validators.required]],
+    isMarketOnlyVendors: [false, [Validators.required]],
+    isNoImportedGoods: [false, [Validators.required]],
+    isMarketHostsSixVendors: [false, [Validators.required]],
+    isMarketMaxAmountorDuration: [false, [Validators.required]],
+    isAllStaffServingitRight: [false, [Validators.required]],
+    isSalesAreaAvailandDefined: [false, [Validators.required]],
+    isSampleSizeCompliant: [false, [Validators.required]],
     name: ['', []],
     licenceId: ['', []],
     accountId: ['', []],
     contactName: ['', [Validators.required]],
     contactPhone: ['', [Validators.required]],
     contactEmail: ['', [Validators.required]],
+    eventType: ['', [Validators.required]],
+    eventTypeDescription: ['', [Validators.required]],
+    mktOrganizerContactName: ['', [Validators.required]],
+    mktOrganizerContactPhone: ['', [Validators.required]],
+    registrationNumber: ['', [Validators.required]],
+    marketName: ['', [Validators.required]],
+    marketWebsite: ['', [Validators.required]],
+    marketDuration: ['', [Validators.required]],
     clientHostname: ['', [Validators.required]],
-    street1: ['', [Validators.required]],
+    venueDescription: ['', [Validators.required]],
+    specificLocation: ['', [Validators.required]],
+    additionalLocationInformation: ['', []],
+    street1: ['', []],
     street2: ['', []],
     city: ['', [Validators.required]],
     province: ['BC', [Validators.required]],
     postalCode: ['', [Validators.required]],
     startDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]],
-    agreement: [false, [Validators.required]]
+    agreement: [false, [Validators.required]],
+    eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Market').value, []]
   });
 
   constructor(
@@ -112,10 +137,6 @@ export class MarketEventComponent extends FormBase implements OnInit {
       contactName: licenceEvent.contactName,
       contactPhone: licenceEvent.contactPhone,
       contactEmail: licenceEvent.contactEmail,
-      sepLicenceNumber: licenceEvent.sepLicenceNumber,
-      sepLicensee: licenceEvent.sepLicensee,
-      sepContactName: licenceEvent.sepContactName,
-      sepContactPhoneNumber: licenceEvent.sepContactPhoneNumber,
       street1: licenceEvent.street1,
       street2: licenceEvent.street2,
       city: licenceEvent.city,
@@ -123,9 +144,31 @@ export class MarketEventComponent extends FormBase implements OnInit {
       postalCode: licenceEvent.postalCode,
       startDate: new Date(licenceEvent.startDate),
       endDate: new Date(licenceEvent.endDate),
-      agreement: false
+      agreement: false,
+      eventCategory: licenceEvent.eventCategory,
+      isNoPreventingSaleofLiquor: licenceEvent.isNoPreventingSaleofLiquor,
+      isMarketManagedorCarried: licenceEvent.isMarketManagedorCarried,
+      isMarketOnlyVendors: licenceEvent.isMarketOnlyVendors,
+      isNoImportedGoods: licenceEvent.isNoImportedGoods,
+      isMarketHostsSixVendors: licenceEvent.isMarketHostsSixVendors,
+      isMarketMaxAmountorDuration: licenceEvent.isMarketMaxAmountorDuration,
+      isAllStaffServingitRight: licenceEvent.isAllStaffServingitRight,
+      isSalesAreaAvailandDefined: licenceEvent.isSalesAreaAvailandDefined,
+      isSampleSizeCompliant: licenceEvent.isSampleSizeCompliant,
+      venueDescription: licenceEvent.venueDescription,
+      specificLocation: licenceEvent.specificLocation,
+      additionalLocationInformation: licenceEvent.additionalLocationInformation,
+      marketName: licenceEvent.marketName,
+      marketWebsite: licenceEvent.marketWebsite,
+      marketDuration: licenceEvent.marketDuration,
+      eventType: licenceEvent.eventType,
+      eventTypeDescription: licenceEvent.eventTypeDescription,
+      mktOrganizerContactName: licenceEvent.mktOrganizerContactName,
+      mktOrganizerContactPhone: licenceEvent.mktOrganizerContactPhone,
+      registrationNumber: licenceEvent.registrationNumber,
+      clientHostname: licenceEvent.clientHostname
     });
-    
+
     if (this.isReadOnly) {
       this.eventForm.disable();
     }
