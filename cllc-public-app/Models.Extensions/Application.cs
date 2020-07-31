@@ -140,6 +140,11 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioRenewaldui = (int?)from.RenewalDUI;
             to.AdoxioRenewalthirdparty = (int?)from.RenewalThirdParty;
 
+            to.AdoxioIsownerbusiness = from.IsOwnerBusiness;
+            to.AdoxioIsownerhasvalidinterest = from.HasValidInterest;
+            to.AdoxioIsownerwillhavevalidinterest = from.WillHaveValidInterest;
+            to.AdoxioZoningstatus = (int?)from.ZoningStatus;
+
             //lg approval fields
             to.AdoxioLgnameofofficial = from.LGNameOfOfficial;
             to.AdoxioLgtitleposition = from.LGTitlePosition;
