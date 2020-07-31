@@ -198,6 +198,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       zoningPermitsRetailSales: ['', []],
       isAlr: ['', []],
       isOwner: ['', []],
+      isOwnerBusiness: ['', []],
       hasValidInterest: ['', []],
       willhaveValidInterest: ['', []],
       meetsALRRequirements: ['', []],
