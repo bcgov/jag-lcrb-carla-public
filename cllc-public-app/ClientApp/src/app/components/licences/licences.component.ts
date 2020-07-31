@@ -104,7 +104,7 @@ export class LicencesComponent extends FormBase implements OnInit {
       };
       licence.actionApplications.push(action);
     });
-    if (licence.licenceTypeName.indexOf('Catering') >= 0 || licence.licenceTypeName.indexOf('Wine Store') >= 0) {
+    if (this.licenceTypeHasEvents(licence.licenceTypeName)) {
       forkJoin([
         this.licenceEventsService.getLicenceEventsList(licence.licenseId, 10)
       ])
@@ -125,6 +125,10 @@ export class LicencesComponent extends FormBase implements OnInit {
     } else {
       this.licenceMappings[licence.licenceTypeName].push(licence);
     }
+  }
+
+  licenceTypeHasEvents(licenceType: string) {
+    return licenceType.indexOf('Catering') >= 0 || licenceType.indexOf('Wine Store') >= 0 || licenceType.indexOf('Manufacturer') >= 0;
   }
 
   getNumberOfLicences() {

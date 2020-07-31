@@ -139,6 +139,11 @@
                                 <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Event Authorization
                             </a>
                         </div>
+                        <div *ngIf="isActive(item) && actionsVisible(item) && hasEndorsementByName(item, 'On-Site Store Endorsement')">
+                            <a [routerLink]="[ '/licence/' + item.licenseId + '/market-event']">
+                                <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Market Event Authorization
+                            </a>
+                        </div>
                         <div *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore && isActive(item) && actionsVisible(item)">
                             <a [routerLink]="[ '/federal-reporting/' + item.licenseId + '/default']">
                                 <span><i class="fas fa-business-time" style="margin-right: 10px;"></i>Review Federal Reports</span>
@@ -205,7 +210,7 @@
                     </section>
                 </td>
                 </tr>
-                <tr *ngIf="licenceType === 'Catering' && item?.events !== undefined && item?.events.length > 0">
+                <tr *ngIf="item?.events !== undefined && item?.events.length > 0">
                     <td colspan="5">
                         <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
                             <mat-expansion-panel-header>
@@ -219,16 +224,16 @@
                             <table style="width: 100%; text-align: center;">
                                 <thead>
                                     <th>Event Status</th>
-                                    <th>Client or Host Name</th>
+                                    <th>Name</th>
                                     <th>Date Submitted</th>
                                     <th></th>
                                     <th>Authorization</th>
                                 </thead>
                                 <tr *ngFor="let event of item?.events">
                                     <td><a
-                                        [routerLink]="[ '/licence/' + item.licenseId + '/event/' + event.id]">{{getOptionFromValue(eventStatus, event.status).label}}</a>
+                                        [routerLink]="[ '/licence/' + item.licenseId + getEventPath(event) + event.id]">{{getOptionFromValue(eventStatus, event.status).label}}</a>
                                     </td>
-                                    <td>{{event.clientHostname === null ? null : event.clientHostname}}</td>
+                                    <td>{{getEventName(event)}}</td>
                                     <td>{{event.modifiedOn | date:'mediumDate'}}</td>
                                     <td><a [routerLink]="[ '/licence/' + item.licenseId + '/event/' + event.id + '/security']"
                                         *ngIf="event.securityPlanRequested">Security Plan</a></td>
@@ -236,13 +241,15 @@
                                         [href]="'api/licenceevents/' + event.id + '/authorization.pdf'" download>
                                         <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Authorization</span>
                                         </a></td>
-                                    <ng-template #empty_td><td></td></ng-template>
+                                    <ng-template #empty_td>
+                                        <td></td>
+                                    </ng-template>
                                 </tr>
                             </table>
                         </mat-expansion-panel>
                     </td>
                 </tr>
-                <tr *ngIf="licenceType === 'Wine Store' && item?.events !== undefined && item?.events.length > 0">
+                <!-- <tr *ngIf="item?.events !== undefined && item?.events.length > 0">
                     <td colspan="5">
                         <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
                         <mat-expansion-panel-header>
@@ -255,11 +262,11 @@
                         </mat-expansion-panel-header>
                         <table style="width: 100%; text-align: center;">
                             <thead>
-                            <th>Event Status</th>
-                            <th>Event Name</th>
-                            <th>Date Submitted</th>
-                            <th></th>
-                            <th>Authorization</th>
+                                <th>Event Status</th>
+                                <th>Event Name</th>
+                                <th>Date Submitted</th>
+                                <th></th>
+                                <th>Authorization</th>
                             </thead>
                             <tr *ngFor="let event of item?.events">
                             <td><a
@@ -279,7 +286,7 @@
                         </table>
                         </mat-expansion-panel>
                     </td>
-                </tr>
+                </tr> -->
                 <tr *ngIf="item?.termsAndConditions !== null && item?.termsAndConditions.length > 0">
                     <td colspan="5">
                         <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">

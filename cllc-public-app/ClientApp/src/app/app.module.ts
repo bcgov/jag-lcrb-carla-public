@@ -193,6 +193,7 @@ import { EligibilityFormComponent } from './components/eligibility-form/eligibil
 import { EligibilityFormDataService } from '@services/eligibility-data.service';
 import { LiquorRenewalComponent } from './components/applications/liquor-renewal/liquor-renewal.component';
 import { TemporaryOffsiteComponent } from '@components/temporary-offsite/temporary-offsite.component';
+import { MarketEventComponent } from '@components/market-event/market-event.component';
 import { ApplicationThirdPartyOperatorComponent } from '@components/applications/application-third-party-operator/application-third-party-operator.component';
 import { CancelThirdPartyOperatorComponent } from '@components/applications/cancel-third-party-operator/cancel-third-party-operator.component';
 import { FeatureFlagService } from './services/feature-flag.service';
@@ -250,6 +251,7 @@ import { ProductionStagesComponent } from './components/applications/application
     EventFormComponent,
     EventSecurityFormComponent,
     TemporaryOffsiteComponent,
+    MarketEventComponent,
     NewsletterConfirmationComponent,
     NewsletterSignupComponent,
     NotFoundComponent,
