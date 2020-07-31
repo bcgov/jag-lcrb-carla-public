@@ -48,7 +48,7 @@
                     </div>
                     <div *ngIf="!item.isOperated && (item.status === 'Expired' || (isActive(item) && isAboutToExpire(item.expiryDate)))">
                         <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
-                            <span><i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>{{isRecentlyExpired(item) ? 'Renew' : 'Reinstate'}} Licence</span>
+                            <span><i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>{{isRecentlyExpired(item) ? 'Reinstate' : 'Renew'}} Licence</span>
                         </a>
                     </div>
                     <div class="flags" class="missing">
