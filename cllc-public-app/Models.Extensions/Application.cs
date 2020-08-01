@@ -182,7 +182,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioLocatedabovedescription = (int?) from.LocatedAboveDescription;
             to.AdoxioPatioservicebar = from.PatioServiceBar;
 
-            to.AdoxioLicencesubcategory = (int?)from.LicenceSubCategory;
+            
 
             // comment out this next line as it is causing all application updates to fail (moved to controller)
             //to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
@@ -474,11 +474,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 
             // mfg fields
-
-            if (dynamicsApplication.AdoxioLicencesubcategory != null)
-            {
-                applicationVM.LicenceSubCategory = (LicenceSubCategory)dynamicsApplication.AdoxioLicencesubcategory; 
-            }
+            
             if (dynamicsApplication.AdoxioMfgpipedinproduct != null)
             {
                 applicationVM.MfgPipedInProduct = (YesNoNotApplicable?)dynamicsApplication.AdoxioMfgpipedinproduct;
@@ -587,6 +583,22 @@ namespace Gov.Lclb.Cllb.Public.Models
                 Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
                 var adoxio_licencetype = dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
                 applicationVM.LicenseType = adoxio_licencetype.AdoxioName;
+            }
+
+            // get the license sub type.
+
+            if (dynamicsApplication._adoxioLicencesubcategoryidValue != null)
+            {
+                try
+                {
+                    var adoxioLicencesubcategory = dynamicsClient.Licencesubcategories.GetByKey(dynamicsApplication._adoxioLicencesubcategoryidValue);
+                    applicationVM.LicenseType = adoxioLicencesubcategory.AdoxioName;
+                    applicationVM.LicenceSubCategory = adoxioLicencesubcategory.AdoxioName;
+                }
+                catch (Exception e)
+                {
+                    logger.LogError(e, $"Problem getting licence sub category {dynamicsApplication._adoxioLicencesubcategoryidValue}");
+                }               
             }
 
             if (dynamicsApplication.AdoxioAppchecklistfinaldecision != null)
