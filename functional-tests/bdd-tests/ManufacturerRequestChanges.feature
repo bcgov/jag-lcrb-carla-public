@@ -100,7 +100,7 @@ Scenario: Winery Establishment Name Change Application
     And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And I request an establishment name change 
+    And I request a valid store name or branding change for Manufacturing
     And the account is deleted
     Then I see the login page
 
