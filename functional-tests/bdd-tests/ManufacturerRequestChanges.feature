@@ -6,9 +6,9 @@
 Scenario: Winery Transfer Licence
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
-    # And I review the account profile for a private corporation
-    # And I review the organization structure for a private corporation
-    # And I click on the Submit Organization Information button
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -23,9 +23,9 @@ Scenario: Winery Transfer Licence
 Scenario: Winery Third Party Operator
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
-    # And I review the account profile for a private corporation
-    # And I review the organization structure for a private corporation
-    # And I click on the Submit Organization Information button
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -40,9 +40,9 @@ Scenario: Winery Third Party Operator
 Scenario: Winery Picnic Area Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
-    # And I review the account profile for a private corporation
-    # And I review the organization structure for a private corporation
-    # And I click on the Submit Organization Information button
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -57,9 +57,9 @@ Scenario: Winery Picnic Area Endorsement Application
 Scenario: Winery On-Site Store Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
-    # And I review the account profile for a private corporation
-    # And I review the organization structure for a private corporation
-    # And I click on the Submit Organization Information button
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -74,9 +74,9 @@ Scenario: Winery On-Site Store Endorsement Application
 Scenario: Winery Lounge Area Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
-    # And I review the account profile for a private corporation
-    # And I review the organization structure for a private corporation
-    # And I click on the Submit Organization Information button
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -91,9 +91,9 @@ Scenario: Winery Lounge Area Endorsement Application
 Scenario: Winery Establishment Name Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
-    # And I review the account profile for a private corporation
-    # And I review the organization structure for a private corporation
-    # And I click on the Submit Organization Information button
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -108,9 +108,9 @@ Scenario: Winery Establishment Name Change Application
 Scenario: Winery Facility Structural Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
-    # And I review the account profile for a private corporation
-    # And I review the organization structure for a private corporation
-    # And I click on the Submit Organization Information button
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -125,9 +125,9 @@ Scenario: Winery Facility Structural Change Application
 Scenario: Winery Location Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
-    # And I review the account profile for a private corporation
-    # And I review the organization structure for a private corporation
-    # And I click on the Submit Organization Information button
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -142,9 +142,9 @@ Scenario: Winery Location Change Application
 Scenario: Winery Special Event Area Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
-    # And I review the account profile for a private corporation
-    # And I review the organization structure for a private corporation
-    # And I click on the Submit Organization Information button
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -159,9 +159,9 @@ Scenario: Winery Special Event Area Endorsement Application
 Scenario: Winery New Outdoor Patio Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
-    # And I review the account profile for a private corporation
-    # And I review the organization structure for a private corporation
-    # And I click on the Submit Organization Information button
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
