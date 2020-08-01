@@ -1629,12 +1629,12 @@ namespace bdd_tests
             */
 
             string nameBrandingLinkCannabis = "Request Store Name or Branding Change";
-            string nameBrandingLinkCatering = "Establishment Name Change Application";
+            string nameBrandingLinkCateringMfg = "Establishment Name Change Application";
 
-            if (changeType == "Catering")
+            if ((changeType == "Catering") || (changeType == "Manufacturing"))
             {
-                // click on the **** link
-                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCatering));
+                // click on the Establishment Name Change Application link
+                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCateringMfg));
                 uiRequestChange.Click();
             }
 
@@ -4332,41 +4332,260 @@ namespace bdd_tests
 
         [And(@"I request a picnic area endorsement")]
         public void PicnicAreaEndorsement()
-        { }
+        {
+            /* 
+            Page Title: Licences
+            */
+
+            string picnicAreaEndorsement = "Picnic Area Endorsement Application";
+
+            // click on the Picnic Area Endorsement Application link
+            NgWebElement uiPicnicAreaEndorsement = ngDriver.FindElement(By.LinkText(picnicAreaEndorsement));
+            uiPicnicAreaEndorsement.Click();
+
+            /* 
+            Page Title: Please Review the Account Profile
+            */
+
+            // click on the Continue to Application button
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+            continueButton.Click();
+
+            /* 
+            Page Title: Manufacturer Picnic Area Endorsement Application
+            */
+
+            // create test data
+            string proposedChange = "Description of proposed change(s) such as moving, adding or changing approved picnic area(s)";
+            string capacity = "100";
+
+            // enter the description of the proposed change in the text area
+
+            // enter the capacity
+
+            // find the upload test files in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload the site plan
+            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
+            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath(""));
+            uploadSitePlan.SendKeys(sitePlanPath);
+
+            // upload the exterior photos
+            string exteriorPhotosPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "exterior_photos.pdf");
+            NgWebElement uploadExteriorPhotos = ngDriver.FindElement(By.XPath(""));
+            uploadExteriorPhotos.SendKeys(exteriorPhotosPath);
+
+            // select the authorized to submit checkbox
+
+            // select the signature agreement checkbox
+
+            // click on the Submit & Pay button
+        }
 
 
         [And(@"I request an on-site store endorsement")]
         public void OnSiteStoreEndorsement()
-        { }
+        {
+            /* 
+            Page Title: Licences
+            */
+
+            string onSiteStoreEndorsement = "On-Site Store Endorsement Application";
+
+            // click on the On-Site Store Endorsement Application link
+            NgWebElement uiOnSiteStoreEndorsement = ngDriver.FindElement(By.LinkText(onSiteStoreEndorsement));
+            uiOnSiteStoreEndorsement.Click();
+
+            /* 
+            Page Title: Please Review the Account Profile
+            */
+
+            // click on the Continue to Application button
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+            continueButton.Click();
+
+            /* 
+            Page Title: Manufacturer On-Site Store Endorsement Application
+            */
+
+            // select the zoning checkbox
+
+            //  select 'Yes' for ALR zoning
+
+            // find the upload test files in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload the floor plan
+            string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
+            NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath(""));
+            uploadFloorplan.SendKeys(floorplanPath);
+
+            // upload the site plan
+            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
+            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath(""));
+            uploadSitePlan.SendKeys(sitePlanPath);
+
+            // select the owner checkbox
+
+            // select the valid interest checkbox
+
+            // select the future valid interest checkbox
+
+            // select the authorized to submit checkbox
+
+            // select the signature agreement checkbox
+
+            // click on the Submit & Pay button
+        }
 
 
         [And(@"I request a lounge area endorsement")]
         public void LoungeAreaEndorsement()
-        { }
+        {
+            /* 
+            Page Title: Licences
+            */
 
+            string loungeAreaEndorsement = "Lounge Area Endorsement Application";
 
-        [And(@"I request an establishment name change")]
-        public void EstablishmentNameChange()
-        { }
+            // click on the Lounge Area Endorsement Application link
+            NgWebElement uiLoungeAreaEndorsement = ngDriver.FindElement(By.LinkText(loungeAreaEndorsement));
+            uiLoungeAreaEndorsement.Click();
+        }
 
 
         [And(@"I request a facility structural change")]
         public void FacilityStructuralChange()
-        { }
+        {
+            /* 
+            Page Title: Licences
+            */
+
+            string facilityStructuralChange = "Facility Structural Change Application";
+
+            // click on the Facility Structural Change Application link
+            NgWebElement uiFacilityStructuralChange = ngDriver.FindElement(By.LinkText(facilityStructuralChange));
+            uiFacilityStructuralChange.Click();
+
+            /* 
+            Page Title: Please Review the Account Profile
+            */
+
+            // click on the Continue to Application button
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+            continueButton.Click();
+
+            /* 
+            Page Title: Manufacturing Facility Structural Change Application
+            */
+
+            // create test data
+            string patioPerimeter = "Sample height and composition of the patio perimeter";
+            string patioLocation = "Sample location of the patio";
+            string patronAccess = "Sample description of how patrons will access the patio.";
+            string carryLiquor = "Sample description of how servers have to carry liquor through any unlicensed area to get to the patio.";
+            string patioManagement = "Sample description of how staff will manage and control the patio from the interior service area.";
+
+            // enter the patio perimeter info into the text area
+
+            // enter the patio location info into the text area
+
+            // enter the patron access info into the text area
+
+            // select the carry liquor checkbox
+
+            // enter the carry liquor description into the text area
+
+            // enter the patron management description into the text area
+
+            // select 'Grass' for patio location
+
+            // select 'Earth' for patio location
+
+            // select 'Gravel' for patio location
+
+            // select 'Finished Flooring' for patio location
+
+            // select 'Cement Sidewalk' for patio location
+
+            // select 'Other' for patio location
+
+            // select 'Fixed Patio' for bar
+
+            // select 'Portable' for bar
+
+            // select 'Interior' for bar
+
+            // find the upload test files in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload the floor plan
+            string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
+            NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath(""));
+            uploadFloorplan.SendKeys(floorplanPath);
+
+            // upload the site plan
+            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
+            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath(""));
+            uploadSitePlan.SendKeys(sitePlanPath);
+
+            // select the authorized to submit checkbox
+
+            // select the signature agreement checkbox
+
+            // click on the Submit & Pay button
+        }
 
 
         [And(@"I request a location change")]
         public void LocationChange()
-        { }
+        {
+            /* 
+            Page Title: Licences
+            */
+
+            string locationChange = "Location Change Application";
+
+            // click on the Location Change Application link
+            NgWebElement uiLocationChange = ngDriver.FindElement(By.LinkText(locationChange));
+            uiLocationChange.Click();
+        }
 
 
         [And(@"I request a special event area endorsement")]
         public void SpecialEventAreaEndorsement()
-        { }
+        {
+            /* 
+            Page Title: Licences
+            */
+
+            string specialEventAreaEndorsement = "Special Event Area Endorsement Application";
+
+            // click on the Special Event Area Endorsement Application link
+            NgWebElement uiSpecialEventAreaEndorsement = ngDriver.FindElement(By.LinkText(specialEventAreaEndorsement));
+            uiSpecialEventAreaEndorsement.Click();
+        }
 
 
         [And(@"I request a new outdoor patio endorsement")]
         public void NewOutdoorPatioEndorsement()
-        { }
+        {
+            /* 
+            Page Title: Licences
+            */
+
+            string newOutdoorPatioEndorsement = "New Outdoor Patio Endorsement Application";
+
+            // click on the New Outdoor Patio Endorsement Application link
+            NgWebElement uiNewOutdoorPatioEndorsement = ngDriver.FindElement(By.LinkText(newOutdoorPatioEndorsement));
+            uiNewOutdoorPatioEndorsement.Click();
+        }
     }
 }
