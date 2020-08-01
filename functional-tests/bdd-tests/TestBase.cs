@@ -602,7 +602,7 @@ namespace bdd_tests
             uiAdditionalEstabPID.SendKeys(additionalPIDs);
 
             // select the proof of zoning checkbox
-            NgWebElement uiProofOfZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-4"));
+            NgWebElement uiProofOfZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
             uiProofOfZoning.Click();
 
             // select 'yes' for ALR inclusion
@@ -775,7 +775,7 @@ namespace bdd_tests
             uiValidInterest.Click();
 
             // select the future valid interest checkbox
-            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='willhaveValidInterest']"));
+            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-4[formcontrolname='willhaveValidInterest']"));
             uiFutureValidInterest.Click();
 
             // enter the contact title
