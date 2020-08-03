@@ -4422,7 +4422,7 @@ namespace bdd_tests
             NgWebElement zoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
             zoningCheckbox.Click();
             
-            //  select 'Yes' for ALR zoning           
+            // select 'Yes' for ALR zoning           
             NgWebElement yesALRZoning = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
             yesALRZoning.Click();
 
@@ -4583,6 +4583,66 @@ namespace bdd_tests
             // click on the Location Change Application link
             NgWebElement uiLocationChange = ngDriver.FindElement(By.LinkText(locationChange));
             uiLocationChange.Click();
+
+            // click on the Continue to Application button
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+            continueButton.Click();
+
+            // create test data
+            string additionalPIDs = "012345678, 343434344";
+            string proposedChanges = "Details of proposed changes.";
+
+            // enter additional PIDs
+            NgWebElement uiAdditionalPIDs = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='pidList']"));
+            uiAdditionalPIDs.SendKeys(additionalPIDs);
+
+            // select the zoning checkbox
+            NgWebElement zoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
+            zoningCheckbox.Click();
+
+            // select 'Yes' for ALR zoning           
+            NgWebElement yesALRZoning = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
+            yesALRZoning.Click();
+
+            // enter the proposed changes
+            NgWebElement uiProposedChanges = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='description1']"));
+            uiProposedChanges.SendKeys(proposedChanges);
+
+            // find the upload test files in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload the signage document
+            string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+            NgWebElement uploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+            uploadSignage.SendKeys(signagePath);
+
+            // upload the floor plan
+            string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
+            NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+            uploadFloorplan.SendKeys(floorplanPath);
+
+            // upload the site plan
+            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
+            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
+            uploadSitePlan.SendKeys(sitePlanPath);
+
+            // upload the exterior photos
+            string exteriorPhotosPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "exterior_photos.pdf");
+            NgWebElement uploadExteriorPhotos = ngDriver.FindElement(By.XPath("(//input[@type='file'])[11]"));
+            uploadExteriorPhotos.SendKeys(exteriorPhotosPath);
+
+            // select the authorized to submit checkbox
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
+            uiAuthorizedToSubmit.Click();
+
+            // select the signature agreement checkbox
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
+            uiSignatureAgreement.Click();
+
+            // click on the Submit & Pay button
+            ClickOnSubmitButton();
         }
 
 
