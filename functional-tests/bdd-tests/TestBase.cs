@@ -4623,6 +4623,7 @@ namespace bdd_tests
             NgWebElement uiPatioMgmt = ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
             uiPatioMgmt.SendKeys(patioManagement);
 
+            /*
             // select 'Grass' for patio location
             NgWebElement uiGrass = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-155-button.mat-button-toggle-button"));
             uiGrass.Click();
@@ -4658,6 +4659,7 @@ namespace bdd_tests
             // select 'Interior' for bar
             NgWebElement uiInterior = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-164-button.mat-button-toggle-button"));
             uiInterior.Click();
+            */
 
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
