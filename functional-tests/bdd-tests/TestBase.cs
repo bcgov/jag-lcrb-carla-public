@@ -4478,6 +4478,92 @@ namespace bdd_tests
             // click on the Lounge Area Endorsement Application link
             NgWebElement uiLoungeAreaEndorsement = ngDriver.FindElement(By.LinkText(loungeAreaEndorsement));
             uiLoungeAreaEndorsement.Click();
+
+            // click on the Continue to Application button
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+            continueButton.Click();
+
+            /* 
+            Page Title: Lounge Area Endorsement Application
+            */
+
+            // select the zoning checkbox
+            NgWebElement zoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
+            zoningCheckbox.Click();
+
+            // select 'Yes' for ALR zoning           
+            NgWebElement yesALRZoning = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
+            yesALRZoning.Click();
+
+            // find the upload test files in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload the floor plan
+            string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
+            NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+            uploadFloorplan.SendKeys(floorplanPath);
+
+            // add a service area
+            NgWebElement serviceArea = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceAreas'] button"));
+            serviceArea.Click();
+
+            // creeate test data
+            string areaDescription = "Area description";
+            string occupantLoad = "100";
+
+            // enter the area description
+            NgWebElement uiAreaDescription = ngDriver.FindElement(By.CssSelector("input[formcontrolname='areaLocation']"));
+            uiAreaDescription.SendKeys(areaDescription);
+
+            // enter the occupant load
+            NgWebElement uiOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
+            uiOccupantLoad.SendKeys(occupantLoad);
+
+            // upload the site plan
+            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
+            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+            uploadSitePlan.SendKeys(sitePlanPath);
+
+            // select the Sunday opening time
+
+            // select the Sunday closing time
+
+            // select the Monday opening time
+
+            // select the Monday closing time
+
+            // select the Tuesday opening time
+
+            // select the Tuesday closing time
+
+            // select the Wednesday opening time
+
+            // select the Wednesday closing time
+
+            // select the Thursday opening time
+
+            // select the Thursday closing time
+
+            // select the Friday opening time
+
+            // select the Friday closing time
+
+            // select the Saturday opening time
+
+            // select the Saturday closing time
+
+            // select the authorized to submit checkbox
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
+            uiAuthorizedToSubmit.Click();
+
+            // select the signature agreement checkbox
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
+            uiSignatureAgreement.Click();
+
+            // click on the Submit & Pay button
+            ClickOnSubmitButton();
         }
 
 
