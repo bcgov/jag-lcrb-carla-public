@@ -4600,34 +4600,64 @@ namespace bdd_tests
             string patioManagement = "Sample description of how staff will manage and control the patio from the interior service area.";
 
             // enter the patio perimeter info into the text area
+            NgWebElement uiPatioPerimeter = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
+            uiPatioPerimeter.SendKeys(patioPerimeter);
 
             // enter the patio location info into the text area
+            NgWebElement uiPatioLocation = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
+            uiPatioLocation.SendKeys(patioLocation);
 
             // enter the patron access info into the text area
+            NgWebElement uiPatronAccess = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
+            uiPatronAccess.SendKeys(patronAccess);
 
             // select the carry liquor checkbox
+            NgWebElement uiCarryLiquorCheckbox = ngDriver.FindElement(By.CssSelector("input#patioIsLiquorCarried[type='checkbox']"));
+            uiCarryLiquorCheckbox.Click();
 
             // enter the carry liquor description into the text area
+            NgWebElement uiCarryLiquorTextArea = ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
+            uiCarryLiquorTextArea.SendKeys(carryLiquor);
 
             // enter the patron management description into the text area
+            NgWebElement uiPatioMgmt = ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
+            uiPatioMgmt.SendKeys(patioManagement);
 
             // select 'Grass' for patio location
+            NgWebElement uiGrass = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-155-button.mat-button-toggle-button"));
+            uiGrass.Click();
 
             // select 'Earth' for patio location
-
+            NgWebElement uiEarth = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-156-button.mat-button-toggle-button"));
+            uiEarth.Click();
+            
             // select 'Gravel' for patio location
-
+            NgWebElement uiGravel = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-157-button.mat-button-toggle-button"));
+            uiGravel.Click();
+            
             // select 'Finished Flooring' for patio location
+            NgWebElement uiFinishedFlooring = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-158-button.mat-button-toggle-button"));
+            uiFinishedFlooring.Click();
 
             // select 'Cement Sidewalk' for patio location
-
+            NgWebElement uiCementSidewalk = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-159-button.mat-button-toggle-button"));
+            uiCementSidewalk.Click();
+            
             // select 'Other' for patio location
-
+            NgWebElement uiOther = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-160-button.mat-button-toggle-button"));
+            uiOther.Click();
+            
             // select 'Fixed Patio' for bar
-
+            NgWebElement uiFixedPatio = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-162-button.mat-button-toggle-button"));
+            uiFixedPatio.Click();
+            
             // select 'Portable' for bar
-
+            NgWebElement uiPortable = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-163-button.mat-button-toggle-button"));
+            uiPortable.Click();
+            
             // select 'Interior' for bar
+            NgWebElement uiInterior = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-164-button.mat-button-toggle-button"));
+            uiInterior.Click();
 
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
@@ -4641,7 +4671,7 @@ namespace bdd_tests
 
             // upload the site plan
             string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
-            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
             uploadSitePlan.SendKeys(sitePlanPath);
 
             // select the authorized to submit checkbox
