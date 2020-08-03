@@ -1278,7 +1278,7 @@ namespace bdd_tests
             // pay the licence fee
             MakePayment();
 
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(4000);
 
             /* 
             Page Title: Payment Approved
@@ -4360,8 +4360,12 @@ namespace bdd_tests
             string capacity = "100";
 
             // enter the description of the proposed change in the text area
+            NgWebElement uiProposedChange = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='description1']"));
+            uiProposedChange.SendKeys(proposedChange);
 
             // enter the capacity
+            NgWebElement uiCapacity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
+            uiCapacity.SendKeys(capacity);
 
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
@@ -4370,19 +4374,23 @@ namespace bdd_tests
 
             // upload the site plan
             string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
-            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
             uploadSitePlan.SendKeys(sitePlanPath);
 
             // upload the exterior photos
             string exteriorPhotosPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "exterior_photos.pdf");
-            NgWebElement uploadExteriorPhotos = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uploadExteriorPhotos = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
             uploadExteriorPhotos.SendKeys(exteriorPhotosPath);
 
-            // select the authorized to submit checkbox
+            // click on the authorized to submit checkbox
+            NgWebElement authorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            authorizedSubmit.Click();
 
-            // select the signature agreement checkbox
+            // click on the signature agreement checkbox
+            NgWebElement signatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
+            signatureAgree.Click();
 
-            // click on the Submit & Pay button
+            ClickOnSubmitButton();
         }
 
 
@@ -4422,12 +4430,12 @@ namespace bdd_tests
 
             // upload the floor plan
             string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
-            NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[]"));
             uploadFloorplan.SendKeys(floorplanPath);
 
             // upload the site plan
             string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
-            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[]"));
             uploadSitePlan.SendKeys(sitePlanPath);
 
             // select the owner checkbox
@@ -4528,12 +4536,12 @@ namespace bdd_tests
 
             // upload the floor plan
             string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
-            NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
             uploadFloorplan.SendKeys(floorplanPath);
 
             // upload the site plan
             string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
-            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
             uploadSitePlan.SendKeys(sitePlanPath);
 
             // select the authorized to submit checkbox
