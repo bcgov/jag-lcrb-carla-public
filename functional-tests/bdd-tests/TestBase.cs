@@ -4390,6 +4390,16 @@ namespace bdd_tests
             signatureAgree.Click();
 
             ClickOnSubmitButton();
+
+            MakePayment();
+
+            System.Threading.Thread.Sleep(3000);
+
+            // click on Licences tab
+            ClickLicencesTab();
+
+            // confirm that 'Picnic Area Endorsement' is displayed
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Picnic Area Endorsement')]")).Displayed);
         }
 
 
@@ -4463,6 +4473,10 @@ namespace bdd_tests
 
             // click on the Submit & Pay button
             ClickOnSubmitButton();
+
+            MakePayment();
+
+            System.Threading.Thread.Sleep(3000);
         }
 
 
@@ -4592,6 +4606,10 @@ namespace bdd_tests
 
             // click on the Submit & Pay button
             ClickOnSubmitButton();
+
+            MakePayment();
+
+            System.Threading.Thread.Sleep(3000);
         }
 
 
@@ -4714,6 +4732,10 @@ namespace bdd_tests
 
             // click on the Submit & Pay button
             ClickOnSubmitButton();
+
+            MakePayment();
+
+            System.Threading.Thread.Sleep(3000);
         }
 
 
@@ -4789,6 +4811,10 @@ namespace bdd_tests
 
             // click on the Submit & Pay button
             ClickOnSubmitButton();
+
+            MakePayment();
+
+            System.Threading.Thread.Sleep(3000);
         }
 
 
@@ -4942,6 +4968,10 @@ namespace bdd_tests
 
             // click on the Submit & Pay button
             ClickOnSubmitButton();
+
+            MakePayment();
+
+            System.Threading.Thread.Sleep(3000);
         }
 
 
@@ -5054,8 +5084,11 @@ namespace bdd_tests
             uiSignatureAgreement.Click();
 
             // click on the Submit & Pay button
-            //ClickOnSubmitButton();
+            ClickOnSubmitButton();
 
+            MakePayment();
+
+            System.Threading.Thread.Sleep(3000);
         }
     }
 }
