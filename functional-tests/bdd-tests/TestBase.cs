@@ -4667,43 +4667,41 @@ namespace bdd_tests
             NgWebElement uiPatioMgmt = ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
             uiPatioMgmt.SendKeys(patioManagement);
 
-            /*
             // select 'Grass' for patio location
-            NgWebElement uiGrass = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-155-button.mat-button-toggle-button"));
+            NgWebElement uiGrass = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-67-button .mat-button-toggle-label-content"));
             uiGrass.Click();
-
+            
             // select 'Earth' for patio location
-            NgWebElement uiEarth = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-156-button.mat-button-toggle-button"));
+            NgWebElement uiEarth = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-68-button .mat-button-toggle-label-content"));
             uiEarth.Click();
             
             // select 'Gravel' for patio location
-            NgWebElement uiGravel = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-157-button.mat-button-toggle-button"));
+            NgWebElement uiGravel = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-69-button .mat-button-toggle-label-content"));
             uiGravel.Click();
             
             // select 'Finished Flooring' for patio location
-            NgWebElement uiFinishedFlooring = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-158-button.mat-button-toggle-button"));
+            NgWebElement uiFinishedFlooring = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-70-button .mat-button-toggle-label-content"));
             uiFinishedFlooring.Click();
 
             // select 'Cement Sidewalk' for patio location
-            NgWebElement uiCementSidewalk = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-159-button.mat-button-toggle-button"));
+            NgWebElement uiCementSidewalk = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-71-button .mat-button-toggle-label-content"));
             uiCementSidewalk.Click();
             
             // select 'Other' for patio location
-            NgWebElement uiOther = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-160-button.mat-button-toggle-button"));
+            NgWebElement uiOther = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-72-button .mat-button-toggle-label-content"));
             uiOther.Click();
             
             // select 'Fixed Patio' for bar
-            NgWebElement uiFixedPatio = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-162-button.mat-button-toggle-button"));
+            NgWebElement uiFixedPatio = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-74-button .mat-button-toggle-label-content"));
             uiFixedPatio.Click();
             
             // select 'Portable' for bar
-            NgWebElement uiPortable = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-163-button.mat-button-toggle-button"));
+            NgWebElement uiPortable = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-75-button .mat-button-toggle-label-content"));
             uiPortable.Click();
             
             // select 'Interior' for bar
-            NgWebElement uiInterior = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-164-button.mat-button-toggle-button"));
+            NgWebElement uiInterior = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-76-button .mat-button-toggle-label-content"));
             uiInterior.Click();
-            */
 
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
@@ -5027,7 +5025,7 @@ namespace bdd_tests
 
             /*
             // select 'Grass' for patio location
-            NgWebElement uiGrass = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-89-button.mat-button-toggle-button[name='mat-button-toggle-group-88'][type='button']"));
+            NgWebElement uiGrass = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-67-button .mat-button-toggle-label-content"));
             uiGrass.Click();
 
             // select 'Earth' for patio location
