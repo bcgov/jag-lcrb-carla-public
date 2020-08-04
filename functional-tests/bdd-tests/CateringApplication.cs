@@ -30,7 +30,6 @@ Scenario: Indigenous Nation Catering Application
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -47,7 +46,6 @@ Scenario: Partnership Catering Application
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -64,7 +62,6 @@ Scenario: Private Corporation Catering Application
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -81,7 +78,6 @@ Scenario: Public Corporation Catering Application
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -98,7 +94,6 @@ Scenario: Society Catering Application
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -115,7 +110,6 @@ Scenario: Sole Proprietorship Catering Application
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 

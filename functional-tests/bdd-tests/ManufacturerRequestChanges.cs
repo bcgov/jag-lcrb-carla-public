@@ -24,7 +24,6 @@ Scenario: Winery Transfer Licence
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a transfer of ownership
@@ -38,7 +37,6 @@ Scenario: Winery Third Party Operator
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a third party operator
@@ -52,7 +50,6 @@ Scenario: Winery Picnic Area Endorsement Application
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a picnic area endorsement
@@ -66,7 +63,6 @@ Scenario: Winery On-Site Store Endorsement Application
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
@@ -80,7 +76,6 @@ Scenario: Winery Lounge Area Endorsement Application
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a lounge area endorsement
@@ -94,7 +89,6 @@ Scenario: Winery Establishment Name Change Application
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request an establishment name change 
@@ -108,7 +102,6 @@ Scenario: Winery Facility Structural Change Application
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a facility structural change
@@ -122,7 +115,6 @@ Scenario: Winery Location Change Application
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a location change
@@ -136,7 +128,6 @@ Scenario: Winery Special Event Area Endorsement Application
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a special event area endorsement
@@ -150,7 +141,6 @@ Scenario: Winery New Outdoor Patio Endorsement Application
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a new outdoor patio endorsement
