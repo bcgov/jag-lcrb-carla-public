@@ -22,7 +22,7 @@ Scenario: Start Application
     Given I am logged in to the dashboard as a society
     And the account is deleted
     And I am logged in to the dashboard as a society
-    And I click on the Start Application button for Catering
+    And I click on the Start Application button for Catering    
     And I review the account profile for a society
     And I review the organization structure for a society
     And I click on the Submit Organization Information button
@@ -30,7 +30,7 @@ Scenario: Start Application
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    Then I return to the dashboard   
+    Then I confirm the payment receipt for a Catering application 
 */
 
 namespace bdd_tests
