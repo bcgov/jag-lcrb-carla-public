@@ -529,13 +529,13 @@ Scenario: Distillery New Outdoor Patio Endorsement Application
 #------------------------
 
 @e2e @privatecorporation @manufacturer @copacker
-Scenario: Copacker Transfer Licence
+Scenario: Co-packer Transfer Licence
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I complete the Manufacturer application for a copacker
+    And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And I return to the dashboard
@@ -546,13 +546,13 @@ Scenario: Copacker Transfer Licence
     Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
-Scenario: Copacker Third Party Operator
+Scenario: Co-packer Third Party Operator
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I complete the Manufacturer application for a copacker
+    And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And I return to the dashboard
@@ -563,13 +563,13 @@ Scenario: Copacker Third Party Operator
     Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
-Scenario: Copacker Picnic Area Endorsement Application
+Scenario: Co-packer Picnic Area Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I complete the Manufacturer application for a copacker
+    And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And I return to the dashboard
@@ -580,13 +580,13 @@ Scenario: Copacker Picnic Area Endorsement Application
     Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
-Scenario: Copacker On-Site Store Endorsement Application
+Scenario: Co-packer On-Site Store Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I complete the Manufacturer application for a copacker
+    And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And I return to the dashboard
@@ -597,13 +597,13 @@ Scenario: Copacker On-Site Store Endorsement Application
     Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
-Scenario: Copacker Lounge Area Endorsement Application
+Scenario: Co-packer Lounge Area Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I complete the Manufacturer application for a copacker
+    And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And I return to the dashboard
@@ -614,13 +614,13 @@ Scenario: Copacker Lounge Area Endorsement Application
     Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
-Scenario: Copacker Establishment Name Change Application
+Scenario: Co-packer Establishment Name Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I complete the Manufacturer application for a copacker
+    And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And I return to the dashboard
@@ -631,13 +631,13 @@ Scenario: Copacker Establishment Name Change Application
     Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
-Scenario: Copacker Facility Structural Change Application
+Scenario: Co-packer Facility Structural Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I complete the Manufacturer application for a copacker
+    And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And I return to the dashboard
@@ -648,13 +648,13 @@ Scenario: Copacker Facility Structural Change Application
     Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
-Scenario: Copacker Location Change Application
+Scenario: Co-packer Location Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I complete the Manufacturer application for a copacker
+    And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And I return to the dashboard
@@ -665,13 +665,13 @@ Scenario: Copacker Location Change Application
     Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
-Scenario: Copacker Special Event Area Endorsement Application
+Scenario: Co-packer Special Event Area Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I complete the Manufacturer application for a copacker
+    And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And I return to the dashboard
@@ -682,13 +682,13 @@ Scenario: Copacker Special Event Area Endorsement Application
     Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
-Scenario: Copacker New Outdoor Patio Endorsement Application
+Scenario: Co-packer New Outdoor Patio Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I complete the Manufacturer application for a copacker
+    And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And I return to the dashboard
