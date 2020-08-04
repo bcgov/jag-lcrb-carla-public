@@ -24,7 +24,6 @@ Scenario: Private Corporation Winery Manufacturer Application
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -35,7 +34,6 @@ Scenario: Private Corporation Distillery Manufacturer Application
     And I complete the Manufacturer application for a distillery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -46,7 +44,6 @@ Scenario: Private Corporation Brewery Manufacturer Application
     And I complete the Manufacturer application for a brewery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -57,7 +54,6 @@ Scenario: Private Corporation Co-packer Manufacturer Application
     And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 */
