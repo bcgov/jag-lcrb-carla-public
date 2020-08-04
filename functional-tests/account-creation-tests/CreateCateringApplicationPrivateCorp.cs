@@ -30,7 +30,7 @@ Scenario: Start Application
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    Then I return to the dashboard   
+    Then I confirm the payment receipt for a Catering application
 */
 
 namespace bdd_tests
