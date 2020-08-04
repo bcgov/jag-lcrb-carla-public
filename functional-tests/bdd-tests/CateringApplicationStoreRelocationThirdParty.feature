@@ -14,7 +14,6 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And I click on the Submit button
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request a store relocation for Catering
@@ -33,7 +32,6 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And I click on the Submit button
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request a store relocation for Catering
@@ -52,7 +50,6 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And I click on the Submit button
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request a store relocation for Catering
@@ -71,7 +68,6 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And I click on the Submit button
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request a store relocation for Catering
@@ -90,7 +86,6 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And I click on the Submit button
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request a store relocation for Catering
@@ -109,7 +104,6 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And I click on the Submit button
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request a store relocation for Catering

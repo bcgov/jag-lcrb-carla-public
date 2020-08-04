@@ -24,7 +24,7 @@ Scenario: Start Application
     And I complete the Cannabis Retail Store application for a partnership
     And I click on the Pay for Application button
     And I enter the payment information
-    Then I return to the dashboard   
+    Then I confirm the payment receipt for a Cannabis Retail Store application
 */
 
 namespace bdd_tests

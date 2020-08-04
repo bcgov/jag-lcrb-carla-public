@@ -534,6 +534,13 @@ namespace bdd_tests
         }
 
 
+        [Then(@"I confirm the payment receipt for a (.*)")]
+        public void ThenConfirmPaymentReceipt(string applicationType)
+        {
+            ConfirmPaymentReceipt(applicationType);
+        }
+
+
         [And(@"I return to the dashboard")]
         public void AndReturnToDashboard()
         {

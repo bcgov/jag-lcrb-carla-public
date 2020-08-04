@@ -28,7 +28,6 @@ Scenario: Change private corporation director name and pay fee
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Cannabis
@@ -114,7 +113,6 @@ Scenario: Confirm private corporation business shareholder org structure update 
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I click on the Review Organization Information button
     And the org structure is correct after payment
