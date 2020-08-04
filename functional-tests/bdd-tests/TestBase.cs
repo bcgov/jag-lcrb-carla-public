@@ -701,7 +701,7 @@ namespace bdd_tests
 
                 // select the packaging checkbox
                 NgWebElement uiPackaging = ngDriver.FindElement(By.CssSelector("#mat-checkbox-15 .mat-checkbox-inner-container"));
-                uiSecondaryFermentation.Click();
+                uiPackaging.Click();
             }
 
             // select 'yes' for neutral grain spirits            
