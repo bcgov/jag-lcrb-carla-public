@@ -4527,32 +4527,60 @@ namespace bdd_tests
             uploadSitePlan.SendKeys(sitePlanPath);
 
             // select the Sunday opening time
+            NgWebElement uiSundayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursSundayOpen'] option[value='10:00']"));
+            uiSundayOpen.Click();
 
             // select the Sunday closing time
+            NgWebElement uiSundayClose = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursSundayClose'] option[value='16:00']"));
+            uiSundayClose.Click();
 
             // select the Monday opening time
+            NgWebElement uiMondayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursMondayOpen'] option[value='09:00']"));
+            uiMondayOpen.Click();
 
             // select the Monday closing time
+            NgWebElement uiMondayClose = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursMondayClose'] option[value='23:00']"));
+            uiMondayClose.Click();
 
             // select the Tuesday opening time
+            NgWebElement uiTuesdayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursTuesdayOpen'] option[value='09:15']"));
+            uiTuesdayOpen.Click();
 
             // select the Tuesday closing time
+            NgWebElement uiTuesdayClose = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursTuesdayClose'] option[value='22:45']"));
+            uiTuesdayClose.Click();
 
             // select the Wednesday opening time
+            NgWebElement uiWednesdayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursWednesdayOpen'] option[value='09:30']"));
+            uiWednesdayOpen.Click();
 
             // select the Wednesday closing time
+            NgWebElement uiWednesdayClose = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursWednesdayClose'] option[value='12:00']"));
+            uiWednesdayClose.Click();
 
             // select the Thursday opening time
+            NgWebElement uiThursdayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursThursdayOpen'] option[value='13:00']"));
+            uiThursdayOpen.Click();
 
             // select the Thursday closing time
+            NgWebElement uiThursdayClose = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursThursdayClose'] option[value='14:00']"));
+            uiThursdayClose.Click();
 
             // select the Friday opening time
+            NgWebElement uiFridayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursFridayOpen'] option[value='12:15']"));
+            uiFridayOpen.Click();
 
             // select the Friday closing time
+            NgWebElement uiFridayClose = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursFridayClose'] option[value='21:15']"));
+            uiFridayClose.Click();
 
             // select the Saturday opening time
+            NgWebElement uiSaturdayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursSaturdayOpen'] option[value='10:00']"));
+            uiSaturdayOpen.Click();
 
             // select the Saturday closing time
+            NgWebElement uiSaturdayClose = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursSaturdayClose'] option[value='22:00']"));
+            uiSaturdayClose.Click();
 
             // select the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
@@ -4776,6 +4804,144 @@ namespace bdd_tests
             // click on the Special Event Area Endorsement Application link
             NgWebElement uiSpecialEventAreaEndorsement = ngDriver.FindElement(By.LinkText(specialEventAreaEndorsement));
             uiSpecialEventAreaEndorsement.Click();
+
+            // click on the Continue to Application button
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+            continueButton.Click();
+
+            /* 
+            Page Title: Special Event Area Endorsement Application
+            */
+
+            // creeate test data
+            string serviceAreaDescription = "Service area description";
+            string serviceAreaOccupantLoad = "100";
+            string outdoorAreaDescription = "Outdoor area description";
+            string outdoorAreaCapacity = "50";
+            string contactTitle = "Operations Manager";
+
+            // select the zoning checkbox
+            NgWebElement zoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
+            zoningCheckbox.Click();
+
+            // select 'Yes' for ALR zoning           
+            NgWebElement yesALRZoning = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
+            yesALRZoning.Click();
+
+            // find the upload test files in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload the letter of intent
+            string letterOfIntentPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "letter_of_intent.pdf");
+            NgWebElement uploadLetterOfIntent = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+            uploadLetterOfIntent.SendKeys(letterOfIntentPath);
+
+            // upload the floor plan
+            string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
+            NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+            uploadFloorplan.SendKeys(floorplanPath);
+
+            // add a service area
+            NgWebElement uiServiceArea = ngDriver.FindElement(By.CssSelector(".ng-star-inserted:nth-child(7) .btn-clear"));
+            uiServiceArea.Click();
+
+            // enter the service area description
+            NgWebElement uiServiceAreaDescription = ngDriver.FindElement(By.CssSelector("input[formcontrolname='areaLocation']"));
+            uiServiceAreaDescription.SendKeys(serviceAreaDescription);
+
+            // enter the service area occupant load
+            NgWebElement uiServiceAreaOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
+            uiServiceAreaOccupantLoad.SendKeys(serviceAreaOccupantLoad);
+
+            // add outside area
+            NgWebElement uiOutdoorArea = ngDriver.FindElement(By.CssSelector(".content-bottom~ .ng-star-inserted .btn-clear"));
+            uiOutdoorArea.Click();
+
+            // enter the outdooor area description
+            NgWebElement uiOutdoorAreaDescription = ngDriver.FindElement(By.CssSelector("input[formcontrolname='areaLocation']"));
+            uiOutdoorAreaDescription.SendKeys(outdoorAreaDescription);
+
+            // enter the outdoor area occupant load
+            NgWebElement uiOutdoorAreaOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
+            uiOutdoorAreaOccupantLoad.SendKeys(outdoorAreaCapacity);
+
+            // upload the site plan
+            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
+            NgWebElement uploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
+            uploadSitePlan.SendKeys(sitePlanPath);
+
+            // select the Sunday opening time
+            NgWebElement uiSundayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursSundayOpen'] option[value='10:00']"));
+            uiSundayOpen.Click();
+
+            // select the Sunday closing time
+            NgWebElement uiSundayClose = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursSundayClose'] option[value='16:00']"));
+            uiSundayClose.Click();
+
+            // select the Monday opening time
+            NgWebElement uiMondayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursMondayOpen'] option[value='09:00']"));
+            uiMondayOpen.Click();
+            
+            // select the Monday closing time
+            NgWebElement uiMondayClose = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursMondayClose'] option[value='23:00']"));
+            uiMondayClose.Click();
+            
+            // select the Tuesday opening time
+            NgWebElement uiTuesdayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursTuesdayOpen'] option[value='09:15']"));
+            uiTuesdayOpen.Click();
+            
+            // select the Tuesday closing time
+            NgWebElement uiTuesdayClose = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursTuesdayClose'] option[value='22:45']"));
+            uiTuesdayClose.Click();
+            
+            // select the Wednesday opening time
+            NgWebElement uiWednesdayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursWednesdayOpen'] option[value='09:30']"));
+            uiWednesdayOpen.Click();
+            
+            // select the Wednesday closing time
+            NgWebElement uiWednesdayClose = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursWednesdayClose'] option[value='12:00']"));
+            uiWednesdayClose.Click();
+            
+            // select the Thursday opening time
+            NgWebElement uiThursdayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursThursdayOpen'] option[value='13:00']"));
+            uiThursdayOpen.Click();
+            
+            // select the Thursday closing time
+            NgWebElement uiThursdayClose = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursThursdayClose'] option[value='14:00']"));
+            uiThursdayClose.Click();
+            
+            // select the Friday opening time
+            NgWebElement uiFridayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursFridayOpen'] option[value='12:15']"));
+            uiFridayOpen.Click();
+            
+            // select the Friday closing time
+            NgWebElement uiFridayClose = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursFridayClose'] option[value='21:15']"));
+            uiFridayClose.Click();
+            
+            // select the Saturday opening time
+            NgWebElement uiSaturdayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursSaturdayOpen'] option[value='10:00']"));
+            uiSaturdayOpen.Click();
+            
+            // select the Saturday closing time
+            NgWebElement uiSaturdayClose = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursSaturdayClose'] option[value='22:00']"));
+            uiSaturdayClose.Click();
+            
+            // enter the contact title
+            NgWebElement uiContactTitle = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
+            uiContactTitle.SendKeys(contactTitle);
+
+            // select the authorized to submit checkbox
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
+            uiAuthorizedToSubmit.Click();
+
+            // select the signature agreement checkbox
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
+            uiSignatureAgreement.Click();
+
+            // click on the Submit & Pay button
+            ClickOnSubmitButton();
         }
 
 
