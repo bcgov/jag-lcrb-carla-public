@@ -679,31 +679,29 @@ namespace bdd_tests
                 NgWebElement uiHoney = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mfgAcresOfHoney']"));
                 uiHoney.SendKeys(honeyBeehives);
 
-                /* TODO
                 // select the blending checkbox
-                NgWebElement uiBlending = ngDriver.FindElement(By.CssSelector(""));
+                NgWebElement uiBlending = ngDriver.FindElement(By.CssSelector("#mat-checkbox-10 .mat-checkbox-inner-container"));
                 uiBlending.Click();
-
+                
                 // select the crushing checkbox
-                NgWebElement uiCrushing = ngDriver.FindElement(By.CssSelector(""));
+                NgWebElement uiCrushing = ngDriver.FindElement(By.CssSelector("#mat-checkbox-11 .mat-checkbox-inner-container"));
                 uiCrushing.Click();
 
                 // select the filtering checkbox
-                NgWebElement uiFiltering = ngDriver.FindElement(By.CssSelector(""));
+                NgWebElement uiFiltering = ngDriver.FindElement(By.CssSelector("#mat-checkbox-12 .mat-checkbox-inner-container"));
                 uiFiltering.Click();
 
                 // select the aging, for at least 3 months checkbox
-                NgWebElement uiAging = ngDriver.FindElement(By.CssSelector(""));
+                NgWebElement uiAging = ngDriver.FindElement(By.CssSelector("#mat-checkbox-13 .mat-checkbox-inner-container"));
                 uiAging.Click();
 
                 // select the secondary fermentation or carbonation checkbox
-                NgWebElement uiSecondaryFermentation = ngDriver.FindElement(By.CssSelector(""));
+                NgWebElement uiSecondaryFermentation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-14 .mat-checkbox-inner-container"));
                 uiSecondaryFermentation.Click();
 
                 // select the packaging checkbox
-                NgWebElement uiPackaging = ngDriver.FindElement(By.CssSelector(""));
+                NgWebElement uiPackaging = ngDriver.FindElement(By.CssSelector("#mat-checkbox-15 .mat-checkbox-inner-container"));
                 uiSecondaryFermentation.Click();
-                */
             }
 
             // select 'yes' for neutral grain spirits            
