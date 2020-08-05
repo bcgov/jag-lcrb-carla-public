@@ -1304,6 +1304,22 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the event authorization link")]
+        public void ClickOnEventAuthorizationLink()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
+
+            string requestEventAuthorization = "Request Event Authorization";
+
+            // click on the request event authorization link
+            NgWebElement uiRequestEventAuthorization = ngDriver.FindElement(By.LinkText(requestEventAuthorization));
+            uiRequestEventAuthorization.Click();
+        }
+
+
         [And(@"I request an event authorization")]
         public void RequestEventAuthorization()
         {
@@ -1803,6 +1819,15 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third Party Operator Application Initiated')]")).Displayed);
         }
 
+        [And(@"I click on the transfer of ownership link")]
+        public void ClickOnTransferOfOwnershipLink()
+        {
+            string transferOwnership = "Transfer Licence";
+
+            // click on the Transfer Ownership link
+            NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
+            uiTransferOwnership.Click();
+        }
 
         [And(@"I request a transfer of ownership")]
         public void RequestOwnershipTransfer()
@@ -3052,7 +3077,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"the expected validation errors are thrown for a (.*)")]
+        [And(@"the expected validation errors are thrown for a(.*)")]
         public void ValidationErrorMessages(string applicationType)
         {
             // check missing authorized to submit error is thrown
@@ -3064,7 +3089,7 @@ namespace bdd_tests
             // check missing signage document error is thrown
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
 
-            if ((applicationType == "Manufacturing application") || (applicationType == "Cannabis application") || (applicationType == "Catering application"))
+            if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application"))
             {
                 // check missing street address error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the street address')]")).Displayed);
@@ -3091,7 +3116,7 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is required')]")).Displayed);
             }
 
-            if ((applicationType == "Manufacturing application") || (applicationType == "Cannabis application"))
+            if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application"))
             {
                 // check missing site plan document error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
@@ -3100,7 +3125,7 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
             }
 
-            if (applicationType == "Cannabis application")
+            if (applicationType == " Cannabis application")
             {
                 // check that the missing product not visible from outside error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please confirm that product will not be visible from the outside')]")).Displayed);
@@ -3113,6 +3138,16 @@ namespace bdd_tests
 
                 // check that the missing supporting document error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one supporting document is required.')]")).Displayed);
+            }
+
+            if (applicationType == "n event authorization")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'239423jr3jrmmj.')]")).Displayed);
+            }
+
+            if (applicationType == " transfer of ownership")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'239423jr3jrmmj.')]")).Displayed);
             }
         }
 
