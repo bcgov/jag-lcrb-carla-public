@@ -61,7 +61,7 @@ Scenario: Manufacturer Application Validation
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I do not complete the Manufacturer application correctly
-    And the correct Manufacturing validation errors are thrown
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for a Manufacturing application
     And the account is deleted
     Then I see the login page
