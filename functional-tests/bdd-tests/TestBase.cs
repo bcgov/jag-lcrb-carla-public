@@ -310,7 +310,7 @@ namespace bdd_tests
             ruralStoreCertNumber.SendKeys(certNumber);
 
             // select the owner checkbox
-            NgWebElement ownerCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isOwner']"));
+            NgWebElement ownerCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isOwnerBusiness']"));
             ownerCheckbox.Click();
 
             // select the owner's valid interest checkbox
@@ -3086,10 +3086,7 @@ namespace bdd_tests
             // check missing signature agreement error is thrown
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that all of the information provided for this application is true and complete.')]")).Displayed);
 
-            // check missing signage document error is thrown
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
-
-            if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application"))
+            if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application") || (applicationType == " Branding Change application"))
             {
                 // check missing street address error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the street address')]")).Displayed);
@@ -3114,6 +3111,9 @@ namespace bdd_tests
 
                 // check missing establishment name error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is required')]")).Displayed);
+
+                // check missing signage document error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
             }
 
             if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application"))
@@ -3147,7 +3147,11 @@ namespace bdd_tests
 
             if (applicationType == " transfer of ownership")
             {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'239423jr3jrmmj.')]")).Displayed);
+                // check that a missing value error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select a value')]")).Displayed);
+
+                // check that a missing transfer consent error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please consent to the transfer')]")).Displayed); 
             }
         }
 
