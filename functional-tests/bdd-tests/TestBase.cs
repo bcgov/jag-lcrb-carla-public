@@ -3082,6 +3082,63 @@ namespace bdd_tests
             // check if establishment name has been provided
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment name is required.')]")).Displayed);
         }
+        
+
+        [And(@"I do not complete the Manufacturer application correctly")]
+        public void CompleteManufacturingApplicationIncorrectly()
+        {
+            /* 
+            Page Title: Manufacturer (Winery, Brewery, Distillery or Co-Packer) Licence Application
+            */
+
+            // click on Submit & Pay button without completing any fields
+            ClickOnSubmitButton();
+        }
+
+
+        [And(@"the correct Manufacturing validation errors are thrown")]
+        public void ManufacturingExpectedErrorMessages()
+        {
+            /* 
+            Page Title: Manufacturer (Winery, Brewery, Distillery or Co-Packer) Licence Application
+            */
+
+            // check missing street address error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the street address')]")).Displayed);
+
+            // check missing city error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the city')]")).Displayed);
+
+            // check missing postal code error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the postal code')]")).Displayed);
+
+            // check missing PID error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the Parcel Identifier (format: 9 digits)')]")).Displayed);
+
+            // check missing business contact phone number error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the business contact's 10-digit phone number')]")).Displayed);
+
+            // check missing business contact email error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the business contact's email address')]")).Displayed);
+
+            // check missing authorized to submit error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that you are authorized to submit the application.')]")).Displayed);
+
+            // check missing signature agreement error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that all of the information provided for this application is true and complete.')]")).Displayed);
+
+            // check missing establishment name error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is required')]")).Displayed);
+
+            // check missing signage document error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
+
+            // check missing site plan document error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
+
+            // check missing floor plan document error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
+        }
 
 
         [And(@"I enter the same individual as a director and a shareholder")]
