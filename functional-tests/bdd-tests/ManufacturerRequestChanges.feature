@@ -657,3 +657,21 @@ Scenario: Co-packer New Outdoor Patio Endorsement Application
     And I request a new outdoor patio endorsement
     And the account is deleted
     Then I see the login page
+
+@e2e @privatecorporation @manufacturer @validation
+Scenario: Manufacturer Establishment Name Change Validation
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
+    And I complete the Manufacturer application for a winery
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee for a Manufacturer application
+    And I click on the branding change link for Manufacturing
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for a Branding Change application
+    And the account is deleted
+    Then I see the login page
