@@ -67,12 +67,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     //get endorsement application types
                     if (dynamicsApplication.AdoxioLicenceType != null && dynamicsApplication.AdoxioPaymentrecieved == true)
                     {
-                        var filter = $"adoxio_licencetypeid eq {dynamicsApplication._adoxioLicencetypeValue}";
-                        var expand = new List<string> { "adoxio_licencetype_adoxio_applicationtype_LicenceType" };
+                        var name = dynamicsApplication.AdoxioLicenceType.AdoxioName;
+                        var filter = $"adoxio_licencetypeid eq {dynamicsApplication.AdoxioLicenceType.AdoxioLicencetypeid}";
+                        var expand = new List<string> { "adoxio_licencetypes_applicationtypes" };
                         var licenceType = _dynamicsClient.Licencetypes.GetByKey(dynamicsApplication._adoxioLicencetypeValue, expand: expand);
-                        if (licenceType?.AdoxioLicencetypeAdoxioApplicationtypeLicenceType != null)
+                        if (licenceType?.AdoxioLicencetypesApplicationtypes != null)
                         {
-                            endorsements = licenceType.AdoxioLicencetypeAdoxioApplicationtypeLicenceType
+                            endorsements = licenceType.AdoxioLicencetypesApplicationtypes
                             .Where(type => type.AdoxioIsendorsement == true)
                             .Select(type => type.AdoxioName)
                             .ToList();

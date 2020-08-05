@@ -102,7 +102,7 @@
                   [valid]="isValidOrNotTouched('establishmentName')"
                   errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
                   <input class="form-control" style="width: 500px;" type="text"
-                    [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
+                    [readonly]="application?.applicationType?.establishmentName === FormControlState.ReadOnly"
                     (change)="checkPossibleProblematicWords()" formControlName="establishmentName"
                     id="establishmentName">
                 </app-field>
@@ -114,13 +114,13 @@
               </div>
               <!-- Non Cannabis Establishment Name input-->
               <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
-                <label for="">Establishment Name</label>
+                <!-- <label for="">Establishment Name</label> -->
                 <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)" [required]="true">
                   <input class="form-control" style="width: 500px;" type="text"
-                    [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
+                    [readonly]="application?.applicationType?.establishmentName === FormControlState.ReadOnly"
                     formControlName="establishmentName" id="establishmentName">
                 </app-field>
-                <p *ngIf="application?.applicationType?.establishmentName !== FormControlState.Reaonly">Establishment names are subject to approval by LCRB</p>
+                <p *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly">Establishment names are subject to approval by LCRB</p>
               </div>
 
 
@@ -453,7 +453,7 @@
                 <app-field label="Store Email" [required]="false" [valid]="isValidOrNotTouched('establishmentEmail')"
                   errorMessage="Please enter an email address">
                   <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
-                    [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
+                    [readonly]="application?.applicationType?.storeContactInfo === FormControlState.ReadOnly"
                     formControlName="establishmentEmail" id="establishmentEmail">
                 </app-field>
               </div>
@@ -461,7 +461,7 @@
                 <app-field label="Store Phone" [required]="false" [valid]="isValidOrNotTouched('establishmentPhone')"
                   errorMessage="Please enter a phone number ">
                   <input type="text" class="form-control" style="width: 200px;" mask="(000) 000-0000" autocomplete="tel"
-                    [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
+                    [readonly]="application?.applicationType?.storeContactInfo === FormControlState.ReadOnly"
                     formControlName="establishmentPhone" id="establishmentPhone">
                 </app-field>
               </div>
@@ -622,7 +622,7 @@
 
               </section>
 
-              <p *ngIf="application?.applicationType?.signage === FormControlState.Reaonly">
+              <p *ngIf="application?.applicationType?.signage === FormControlState.ReadOnly">
                 The below photos or renderings of
                 the store's signage are on file.
               </p>
@@ -736,7 +736,7 @@
                   </div>
 
                 </section>
-                <p *ngIf="application?.applicationType?.floorPlan === FormControlState.Reaonly">
+                <p *ngIf="application?.applicationType?.floorPlan === FormControlState.ReadOnly">
                   The below floor plan is on file.
                 </p>
                 <section>
@@ -1412,7 +1412,7 @@
 
             </section>
 
-            <p *ngIf="application?.applicationType?.validInterest === FormControlState.Reaonly">
+            <p *ngIf="application?.applicationType?.validInterest === FormControlState.ReadOnly">
               The below offer or proof of ownership, lease or sub-lease is on file.
             </p>
             <section>
