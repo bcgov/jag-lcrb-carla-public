@@ -3043,12 +3043,6 @@ namespace bdd_tests
         }
 
 
-        [And(@"I click on the Licences tab for (.*)")]
-        public void ClickOnLicencesTab(string applicationType)
-        {
-            ClickLicencesTab();
-        }
-
         [And(@"I do not complete the application correctly")]
         public void CompleteApplicationIncorrectly()
         {
