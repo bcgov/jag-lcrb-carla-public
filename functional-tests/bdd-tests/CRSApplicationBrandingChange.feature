@@ -109,11 +109,11 @@ Scenario: Sole Proprietorship CRS Name Branding Change
 Scenario: CRS Branding Change Validation
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I complete the Catering application
-    And I click on the Submit button
+    And I complete the Cannabis Retail Store application for a private corporation
     # And I click on the Pay for Application button
     And I enter the payment information
     And the application is approved
