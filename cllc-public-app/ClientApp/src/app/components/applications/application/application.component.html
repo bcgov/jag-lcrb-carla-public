@@ -114,7 +114,7 @@
               </div>
               <!-- Non Cannabis Establishment Name input-->
               <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
-                <label for="">Establishment Name</label>
+                <!-- <label for="">Establishment Name</label> -->
                 <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)" [required]="true">
                   <input class="form-control" style="width: 500px;" type="text"
                     [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
