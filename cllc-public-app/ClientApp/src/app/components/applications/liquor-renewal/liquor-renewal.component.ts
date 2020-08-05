@@ -360,7 +360,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   }
 
   showFormControl(state: string): boolean {
-    return [FormControlState.Show.toString(), FormControlState.Reaonly.toString()]
+    return [FormControlState.Show.toString(), FormControlState.ReadOnly.toString()]
       .indexOf(state) !== -1;
   }
 

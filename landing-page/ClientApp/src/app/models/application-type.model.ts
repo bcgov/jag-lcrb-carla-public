@@ -45,7 +45,7 @@ export class ApplicationType {
 export enum FormControlState {
   Show = 'Yes',
   Hide = 'No',
-  Reaonly = 'Readonly'
+  ReadOnly = 'Readonly'
 }
 
 export enum ApplicationTypeNames {
