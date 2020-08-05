@@ -3061,6 +3061,15 @@ namespace bdd_tests
         [And(@"the expected validation errors are thrown for a (.*)")]
         public void ValidationErrorMessages(string applicationType)
         {
+            // check missing authorized to submit error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that you are authorized to submit the application.')]")).Displayed);
+
+            // check missing signature agreement error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that all of the information provided for this application is true and complete.')]")).Displayed);
+
+            // check missing signage document error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
+
             if ((applicationType == "Manufacturing application") || (applicationType == "Cannabis application") || (applicationType == "Catering application"))
             {
                 // check missing street address error is thrown
@@ -3084,17 +3093,8 @@ namespace bdd_tests
                 // check missing business contact email error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'s email address')]")).Displayed);
 
-                // check missing authorized to submit error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that you are authorized to submit the application.')]")).Displayed);
-
-                // check missing signature agreement error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that all of the information provided for this application is true and complete.')]")).Displayed);
-
                 // check missing establishment name error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is required')]")).Displayed);
-
-                // check missing signage document error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
             }
 
             if ((applicationType == "Manufacturing application") || (applicationType == "Cannabis application"))
@@ -3119,18 +3119,6 @@ namespace bdd_tests
 
                 // check that the missing supporting document error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one supporting document is required.')]")).Displayed);
-            }
-
-            if (applicationType == "Branding Change application")
-            {
-                // check missing authorized to submit error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that you are authorized to submit the application.')]")).Displayed);
-
-                // check missing signature agreement error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that all of the information provided for this application is true and complete.')]")).Displayed);
-
-                // check missing signage document error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
             }
         }
 
