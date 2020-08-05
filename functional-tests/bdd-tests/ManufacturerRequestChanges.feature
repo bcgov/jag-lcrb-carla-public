@@ -670,7 +670,7 @@ Scenario: Manufacturer Establishment Name Change Validation
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And I click on the branding change link for Manufacturer
+    And I click on the branding change link for Manufacturing
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Branding Change application
     And the account is deleted
