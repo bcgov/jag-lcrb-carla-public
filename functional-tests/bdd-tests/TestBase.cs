@@ -3093,6 +3093,8 @@ namespace bdd_tests
 
             // click on Submit & Pay button without completing any fields
             ClickOnSubmitButton();
+
+            System.Threading.Thread.Sleep(5000);
         }
 
 
@@ -3116,10 +3118,13 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the Parcel Identifier (format: 9 digits)')]")).Displayed);
 
             // check missing business contact phone number error is thrown
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the business contact's 10-digit phone number')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the business contact')]")).Displayed);
+
+            // check missing business contact phone number error is thrown
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'s 10-digit phone number')]")).Displayed);
 
             // check missing business contact email error is thrown
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the business contact's email address')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'s email address')]")).Displayed);
 
             // check missing authorized to submit error is thrown
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that you are authorized to submit the application.')]")).Displayed);
