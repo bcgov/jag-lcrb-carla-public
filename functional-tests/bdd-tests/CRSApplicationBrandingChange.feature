@@ -108,7 +108,7 @@ Scenario: Sole Proprietorship CRS Name Branding Change
 @e2e @cannabis @privatecorporation @validation
 Scenario: CRS Branding Change Validation
     Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for Cannabis Retail Store
+    And I click on the Start Application button for a Cannabis Retail Store
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
@@ -117,7 +117,7 @@ Scenario: CRS Branding Change Validation
     # And I click on the Pay for Application button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab for Cannabis
+    And I click on the Licences tab
     And I pay the licensing fee for Cannabis
     And I click on the branding change link for Cannabis
     And I do not complete the application correctly
