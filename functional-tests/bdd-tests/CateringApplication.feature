@@ -105,7 +105,7 @@ Scenario: Catering Application Validation
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I do not complete the catering application correctly
-    And the expected Catering error messages are displayed
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for a Catering application
     And the account is deleted
     Then I see the login page
