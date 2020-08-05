@@ -55,7 +55,7 @@ Scenario: Private Corporation Co-packer Manufacturer Application
     Then I see the login page
 
 @e2e @privatecorporation @manufacturerapp @validation
-Scenario: Private Corporation Manufacturer Application Validation
+Scenario: Manufacturer Application Validation
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
