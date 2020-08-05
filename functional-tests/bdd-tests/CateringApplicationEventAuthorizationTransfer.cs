@@ -30,7 +30,6 @@ using Xunit;
     And I click on the Pay for Application button
     And I enter the payment information
     And the application is approved
-    #And I click on the Licences tab
     And I pay the licensing fee for Catering
     And I request an event authorization
     And I request a transfer of ownership
