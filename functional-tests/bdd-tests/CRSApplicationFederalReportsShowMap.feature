@@ -14,7 +14,6 @@ Scenario: Indigenous Nation Federal Reports and Show Map
     And I complete the Cannabis Retail Store application for an indigenous nation
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
@@ -33,7 +32,6 @@ Scenario: Partnership Federal Reports and Show Map
     And I complete the Cannabis Retail Store application for a partnership
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
@@ -52,7 +50,6 @@ Scenario: Private Corporation Federal Reports and Show Map
     And I complete the Cannabis Retail Store application for a private corporation
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
@@ -71,7 +68,6 @@ Scenario: Public Corporation Federal Reports and Show Map
     And I complete the Cannabis Retail Store application for a public corporation
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
@@ -90,7 +86,6 @@ Scenario: Society Federal Reports and Show Map
     And I complete the Cannabis Retail Store application for a society
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
@@ -109,7 +104,6 @@ Scenario: Sole Proprietorship Federal Reports and Show Map
     And I complete the Cannabis Retail Store application for a sole proprietorship
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map

@@ -29,9 +29,7 @@ using Xunit;
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
-    #And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
     And I request an event authorization
     And I request a transfer of ownership
@@ -49,7 +47,6 @@ using Xunit;
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
@@ -68,7 +65,6 @@ using Xunit;
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
@@ -87,7 +83,6 @@ using Xunit;
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
@@ -106,7 +101,6 @@ using Xunit;
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
@@ -125,7 +119,6 @@ using Xunit;
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
