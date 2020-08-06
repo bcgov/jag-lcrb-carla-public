@@ -659,7 +659,7 @@ Scenario: Co-packer New Outdoor Patio Endorsement Application
     Then I see the login page
 
 @e2e @privatecorporation @manufacturer @validation
-Scenario: Manufacturer Establishment Name Change Validation
+Scenario: Validation for Manufacturer Establishment Name Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -671,6 +671,7 @@ Scenario: Manufacturer Establishment Name Change Validation
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I click on the branding change link for Manufacturing
+    And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Branding Change application
     And the account is deleted
