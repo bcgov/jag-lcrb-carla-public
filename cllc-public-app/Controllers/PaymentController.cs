@@ -97,11 +97,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // should happen immediately, but ...
                 // pause and try again - in case Dynamics is slow ...
                 retries++;
-                _logger.LogDebug("No invoice found, retry = " + retries);
+                _logger.LogError($"No application {id} invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(1000);
                 application = await GetDynamicsApplication(id);
                 invoiceId = application._adoxioInvoiceValue;
             }
+
             _logger.LogDebug("Created invoice for application = " + invoiceId);
 
             /*
@@ -116,7 +117,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
              *  - We will deal with the history later (i.e. there can be multiple "Cancelled" Invoices - we need to keep them for reconciliation but we don't need them for MVP
              */
 
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
+            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(invoiceId);
             // dynamics creates a unique transaction id per invoice, used as the "order number" for payment
             var ordernum = invoice.AdoxioTransactionid;
             // dynamics determines the amount based on the licence type of the application
@@ -340,7 +341,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         throw (httpOperationException);
                     }
 
-                    _logger.LogInformation($"Payment approved.  Liquor: {isAlternateAccount}");
+                    _logger.LogInformation($"Payment approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
 
                 }
                 // if payment failed:
@@ -380,7 +381,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         throw (httpOperationException);
                     }
 
-                    _logger.LogInformation($"Payment not approved.  Liquor: {isAlternateAccount}");
+                    _logger.LogInformation($"Payment not approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
 
                 }
             }
@@ -484,7 +485,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         await _geocoderClient.GeocodeEstablishment(application._adoxioLicenceestablishmentValue, _logger);
                     }
 
-                    _logger.LogInformation($"Licence Fee Transaction approved.  Liquor: {isAlternateAccount}");
+                    _logger.LogInformation($"Licence Fee Transaction approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
 
                 }
                 // if payment failed:
@@ -526,7 +527,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // fail 
                         throw (httpOperationException);
                     }
-                    _logger.LogInformation($"Licence Fee Transaction NOT approved.  Liquor: {isAlternateAccount}");
+                    _logger.LogInformation($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
                 }
 
 
