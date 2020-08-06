@@ -103,36 +103,46 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 invoiceId = application._adoxioInvoiceValue;
             }
 
-            _logger.LogDebug("Created invoice for application = " + invoiceId);
+            if (!string.IsNullOrEmpty(invoiceId))
+            {
 
-            /*
-             * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
-             *  - we will then re-query the Application to get the Invoice number,
-             *  - and then query the Invoice to get the amount
-             *  - the Invoice will also contain a Transaction Id (starting at 0500000000)
-             *  - the Invoice status will be New
-             * Notes:
-             *  - If there is already an invoice with Status New, don't need to create a new Invoice
-             *  - If there is already an invoice with Status Complete, it is an error (can't pay twice)
-             *  - We will deal with the history later (i.e. there can be multiple "Cancelled" Invoices - we need to keep them for reconciliation but we don't need them for MVP
-             */
 
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(invoiceId);
-            // dynamics creates a unique transaction id per invoice, used as the "order number" for payment
-            var ordernum = invoice.AdoxioTransactionid;
-            // dynamics determines the amount based on the licence type of the application
-            var orderamt = invoice.Totalamount;
+                _logger.LogDebug("Created invoice for application = " + invoiceId);
 
-            Dictionary<string, string> redirectUrl;
-            redirectUrl = new Dictionary<string, string>();
+                /*
+                 * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
+                 *  - we will then re-query the Application to get the Invoice number,
+                 *  - and then query the Invoice to get the amount
+                 *  - the Invoice will also contain a Transaction Id (starting at 0500000000)
+                 *  - the Invoice status will be New
+                 * Notes:
+                 *  - If there is already an invoice with Status New, don't need to create a new Invoice
+                 *  - If there is already an invoice with Status Complete, it is an error (can't pay twice)
+                 *  - We will deal with the history later (i.e. there can be multiple "Cancelled" Invoices - we need to keep them for reconciliation but we don't need them for MVP
+                 */
 
-            bool isAlternateAccount = application.IsLiquor(); // set to true for Liquor.
+                MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(invoiceId);
+                // dynamics creates a unique transaction id per invoice, used as the "order number" for payment
+                var ordernum = invoice.AdoxioTransactionid;
+                // dynamics determines the amount based on the licence type of the application
+                var orderamt = invoice.Totalamount;
 
-            redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), isAlternateAccount);
+                Dictionary<string, string> redirectUrl;
+                redirectUrl = new Dictionary<string, string>();
 
-            _logger.LogDebug(">>>>>" + redirectUrl["url"]);
+                bool isAlternateAccount = application.IsLiquor(); // set to true for Liquor.
 
-            return new JsonResult(redirectUrl);
+                redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), isAlternateAccount);
+
+                _logger.LogDebug(">>>>>" + redirectUrl["url"]);
+
+                return new JsonResult(redirectUrl);
+            }
+            else
+            {
+                _logger.LogError("GetPaymentUrl failed - Unable to get invoice for application {id}");
+                return NotFound();
+            }
         }
 
         /// <summary>
@@ -219,37 +229,46 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 application = await GetDynamicsApplication(id);
                 invoiceId = application._adoxioInvoiceValue;
             }
-            _logger.LogDebug("Created invoice for application = " + invoiceId);
 
-            /*
-             * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
-             *  - we will then re-query the Application to get the Invoice number,
-             *  - and then query the Invoice to get the amount
-             *  - the Invoice will also contain a Transaction Id (starting at 0500000000)
-             *  - the Invoice status will be New
-             * Notes:
-             *  - If there is already an invoice with Status New, don't need to create a new Invoice
-             *  - If there is already an invoice with Status Complete, it is an error (can't pay twice)
-             *  - We will deal with the history later (i.e. there can be multiple "Cancelled" Invoices - we need to keep them for reconciliation but we don't need them for MVP
-             */
+            if (!string.IsNullOrEmpty(invoiceId))
+            {
+                _logger.LogDebug("Created invoice for application = " + invoiceId);
 
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
-            // dynamics creates a unique transaction id per invoice, used as the "order number" for payment
-            var ordernum = invoice.AdoxioTransactionid;
-            // dynamics determines the amount based on the licence type of the application
-            var orderamt = invoice.Totalamount;
+                /*
+                 * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
+                 *  - we will then re-query the Application to get the Invoice number,
+                 *  - and then query the Invoice to get the amount
+                 *  - the Invoice will also contain a Transaction Id (starting at 0500000000)
+                 *  - the Invoice status will be New
+                 * Notes:
+                 *  - If there is already an invoice with Status New, don't need to create a new Invoice
+                 *  - If there is already an invoice with Status Complete, it is an error (can't pay twice)
+                 *  - We will deal with the history later (i.e. there can be multiple "Cancelled" Invoices - we need to keep them for reconciliation but we don't need them for MVP
+                 */
 
-            bool isAlternateAccount = application.IsLiquor(); // set to true for Liquor.
+                MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
+                // dynamics creates a unique transaction id per invoice, used as the "order number" for payment
+                var ordernum = invoice.AdoxioTransactionid;
+                // dynamics determines the amount based on the licence type of the application
+                var orderamt = invoice.Totalamount;
 
-            Dictionary<string, string> redirectUrl;
-            redirectUrl = new Dictionary<string, string>();
+                bool isAlternateAccount = application.IsLiquor(); // set to true for Liquor.
 
-            var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/licence-fee-payment-confirmation";
-            redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), isAlternateAccount, redirectPath);
+                Dictionary<string, string> redirectUrl;
+                redirectUrl = new Dictionary<string, string>();
 
-            _logger.LogDebug(">>>>>" + redirectUrl["url"]);
+                var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/licence-fee-payment-confirmation";
+                redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), isAlternateAccount, redirectPath);
 
-            return new JsonResult(redirectUrl);
+                _logger.LogDebug(">>>>>" + redirectUrl["url"]);
+
+                return new JsonResult(redirectUrl);
+            }
+            else
+            {
+                _logger.LogError($"No invoice found for application {id}");
+                return NotFound();
+            }
         }
 
         /// <summary>
