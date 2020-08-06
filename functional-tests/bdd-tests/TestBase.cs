@@ -1124,9 +1124,7 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp.btn-primary"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Submit a Licence Relocation Application
@@ -1515,9 +1513,7 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
-            // click on continue to application button
-            NgWebElement continueToApplicationButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueToApplicationButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Submit the Cannabis Retail Store Structural Change Application
@@ -1695,9 +1691,7 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /*
             Page Title: Submit a Name or Branding Change Application
@@ -3071,7 +3065,12 @@ namespace bdd_tests
         [And(@"I do not complete the application correctly")]
         public void CompleteApplicationIncorrectly()
         {
-            ClickOnSubmitButton();
+            //ClickOnSubmitButton();
+
+            
+
+            NgWebElement uiMapCheckbox = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div[2]/div/div[2]/div[1]/div[1]/div[2]/section[4]/button[2]"));
+            uiMapCheckbox.Click();
 
             System.Threading.Thread.Sleep(5000);
         }
@@ -4406,6 +4405,15 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the Continue to Application button")]
+        public void ContinueToApplicationButton()
+        {
+            // click on the Continue to Application button
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+            continueButton.Click();
+        }
+
+
         [And(@"I request a picnic area endorsement")]
         public void PicnicAreaEndorsement()
         {
@@ -4423,9 +4431,7 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Manufacturer Picnic Area Endorsement Application
@@ -4497,9 +4503,7 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Manufacturer On-Site Store Endorsement Application
@@ -4570,9 +4574,7 @@ namespace bdd_tests
             NgWebElement uiLoungeAreaEndorsement = ngDriver.FindElement(By.LinkText(loungeAreaEndorsement));
             uiLoungeAreaEndorsement.Click();
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Lounge Area Endorsement Application
@@ -4707,9 +4709,7 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Manufacturing Facility Structural Change Application
@@ -4827,9 +4827,7 @@ namespace bdd_tests
             NgWebElement uiLocationChange = ngDriver.FindElement(By.LinkText(locationChange));
             uiLocationChange.Click();
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             // create test data
             string additionalPIDs = "012345678, 343434344";
@@ -4906,9 +4904,7 @@ namespace bdd_tests
             NgWebElement uiSpecialEventAreaEndorsement = ngDriver.FindElement(By.LinkText(specialEventAreaEndorsement));
             uiSpecialEventAreaEndorsement.Click();
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Special Event Area Endorsement Application
@@ -5063,9 +5059,7 @@ namespace bdd_tests
             NgWebElement uiNewOutdoorPatioEndorsement = ngDriver.FindElement(By.LinkText(newOutdoorPatioEndorsement));
             uiNewOutdoorPatioEndorsement.Click();
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Manufacturing Facility New Outdoor Patio Application
