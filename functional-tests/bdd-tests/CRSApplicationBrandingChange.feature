@@ -122,6 +122,6 @@ Scenario: Validation for CRS Branding Change
     And I click on the branding change link for Cannabis
     And I click on the Continue to Application button
     And I do not complete the application correctly
-    And the expected validation errors are thrown for a Branding Change application
+    And the expected validation errors are thrown for a CRS Branding Change application
     And the account is deleted
     Then I see the login page

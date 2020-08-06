@@ -3148,7 +3148,7 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please consent to the transfer')]")).Displayed); 
             }
 
-            if (applicationType == " Branding Change application")
+            if (applicationType == " CRS Branding Change application")
             {
                 // check that a missing proposed change error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'proposedChange is not valid')]")).Displayed);
@@ -3157,7 +3157,7 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
             }
 
-            if (applicationType == " Catering Branding Change application")
+            if (applicationType == " Branding Change application")
             {
                 // check missing signage document error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
