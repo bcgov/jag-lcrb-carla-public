@@ -14,9 +14,8 @@ Scenario: Catering Indigenous Nation Branding Change
     And I click on the Submit button
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
+    And I click on the Licences tab
     And I pay the licensing fee for Catering
     And I click on the licence download link
     And I request a valid store name or branding change for Catering
@@ -34,9 +33,8 @@ Scenario: Catering Partnership Branding Change
     And I click on the Submit button
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
+    And I click on the Licences tab
     And I pay the licensing fee for Catering
     And I click on the licence download link
     And I request a valid store name or branding change for Catering
@@ -54,9 +52,8 @@ Scenario: Catering Private Corporation Branding Change
     And I click on the Submit button
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
+    And I click on the Licences tab
     And I pay the licensing fee for Catering
     And I click on the licence download link
     And I request a valid store name or branding change for Catering
@@ -74,9 +71,8 @@ Scenario: Catering Public Corporation Branding Change
     And I click on the Submit button
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
+    And I click on the Licences tab
     And I pay the licensing fee for Catering
     And I click on the licence download link
     And I request a valid store name or branding change for Catering
@@ -94,9 +90,8 @@ Scenario: Catering Society Branding Change
     And I click on the Submit button
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
+    And I click on the Licences tab
     And I pay the licensing fee for Catering
     And I click on the licence download link
     And I request a valid store name or branding change for Catering
@@ -114,11 +109,30 @@ Scenario: Catering Sole Proprietorship Branding Change
     And I click on the Submit button
     # And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for Catering
+    And I click on the Licences tab
     And I pay the licensing fee for Catering
     And I click on the licence download link
     And I request a valid store name or branding change for Catering
+    And the account is deleted
+    Then I see the login page
+
+@e2e @catering @privatecorporation @validation
+Scenario: Catering Branding Change Validation
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for Catering
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
+    And I complete the Catering application
+    And I click on the Submit button
+    # And I click on the Pay for Application button
+    And I enter the payment information
+    And the application is approved
+    And I click on the Licences tab
+    And I pay the licensing fee for Catering
+    And I click on the branding change link for Catering
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for a Branding Change application
     And the account is deleted
     Then I see the login page
