@@ -1318,6 +1318,22 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the relocation application link")]
+        public void ClickOnRelocationApplicationLink()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
+
+            string requestRelocation = "Request Relocation";
+
+            // click on the relocation application link
+            NgWebElement uiRelocationApplication = ngDriver.FindElement(By.LinkText(requestRelocation));
+            uiRelocationApplication.Click();
+        }
+
+
         [And(@"I request an event authorization")]
         public void RequestEventAuthorization()
         {
@@ -3137,6 +3153,8 @@ namespace bdd_tests
             if (applicationType == "n event authorization")
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TO BE COMPLETED')]")).Displayed);
+
+                // waiting for bug fix: LCSD-3663
             }
 
             if (applicationType == " transfer of ownership")
@@ -3170,6 +3188,18 @@ namespace bdd_tests
             {
                 // check missing signage document error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
+            }
+
+            if (applicationType == " store relocation application")
+            {
+                // check missing street address error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the street address')]")).Displayed);
+
+                // check missing city error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the city')]")).Displayed);
+
+                // check missing postal code error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the postal code')]")).Displayed);
             }
         }
 
