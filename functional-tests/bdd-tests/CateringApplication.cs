@@ -123,7 +123,8 @@ Scenario: Validation for Catering Application
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Catering application
     And the account is deleted
-    Then I see the login page*/
+    Then I see the login page
+*/
 
 namespace bdd_tests
 {
