@@ -1511,6 +1511,22 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the structural change link")]
+        public void ClickOnStructuralChangeLink()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Cannabis Retail Store Licences
+            */
+
+            string structuralChange = "Request a Structural Change";
+
+            // click on the request structural change link
+            NgWebElement uiStructuralChange = ngDriver.FindElement(By.LinkText(structuralChange));
+            uiStructuralChange.Click();
+        }
+
+
         [And(@"I request a structural change")]
         public void RequestStructuralChange()
         {
@@ -3200,6 +3216,18 @@ namespace bdd_tests
 
                 // check missing postal code error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the postal code')]")).Displayed);
+            }
+
+            if (applicationType == " structural change application")
+            {
+                // check missing description error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter a description')]")).Displayed);
+
+                // check that the missing product not visible from outside error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please confirm that product will not be visible from the outside')]")).Displayed);
+
+                // check missing floor plan document error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
             }
         }
 
