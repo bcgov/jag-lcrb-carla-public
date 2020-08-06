@@ -3033,11 +3033,8 @@ namespace bdd_tests
         [And(@"I click on the Submit button")]
         public void ClickOnSubmitButton()
         {
-            NgWebElement submitButton = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-ownership-transfer/div/div[2]/div[2]/section[7]/button"));
+            NgWebElement submitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
             submitButton.Click();
-
-            //NgWebElement submitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
-            //submitButton.Click();
         }
 
         [And(@"I click on the licence download link")]
