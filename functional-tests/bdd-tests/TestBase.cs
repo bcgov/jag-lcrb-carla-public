@@ -3033,8 +3033,11 @@ namespace bdd_tests
         [And(@"I click on the Submit button")]
         public void ClickOnSubmitButton()
         {
-            NgWebElement submitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+            NgWebElement submitButton = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application-ownership-transfer/div/div[2]/div[2]/section[7]/button"));
             submitButton.Click();
+
+            //NgWebElement submitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+            //submitButton.Click();
         }
 
         [And(@"I click on the licence download link")]
@@ -3148,7 +3151,7 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please consent to the transfer')]")).Displayed);
             }
 
-            if (applicationType == " Catering transfer of ownership")
+            if ((applicationType == " Catering transfer of ownership") || (applicationType == " CRS transfer of ownership"))
             {
                  // check that a missing proposed transferee error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select the proposed transferee')]")).Displayed);
