@@ -1793,6 +1793,22 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the third party operator link")]
+        public void ClickOnThirdPartyOperatorLink()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
+
+            string addOrChangeThirdParty = "Add or Change a Third Party Operator";
+
+            // click on the Add or Change a Third Party Operator Link
+            NgWebElement uiAddOrChangeThirdPartyOp = ngDriver.FindElement(By.LinkText(addOrChangeThirdParty));
+            uiAddOrChangeThirdPartyOp.Click();
+        }
+
+
         [And(@"I request a third party operator")]
         public void RequestThirdPartyOperator()
         {
@@ -3256,6 +3272,15 @@ namespace bdd_tests
 
                     // check missing floor plan document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
+                }
+
+                if (applicationType == " third party application")
+                {
+                    // check missing value error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select a value')]")).Displayed);
+
+                    // check missing business name error is thrown
+                    //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select the business name to be a third party operator of your licence')]")).Displayed);
                 }
             }
         }
