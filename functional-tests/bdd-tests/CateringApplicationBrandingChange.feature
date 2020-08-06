@@ -118,7 +118,7 @@ Scenario: Catering Sole Proprietorship Branding Change
     Then I see the login page
 
 @e2e @catering @privatecorporation @validation
-Scenario: Catering Branding Change Validation
+Scenario: Validation for Catering Branding Change 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation

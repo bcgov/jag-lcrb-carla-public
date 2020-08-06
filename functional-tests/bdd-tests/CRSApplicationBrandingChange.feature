@@ -106,7 +106,7 @@ Scenario: Sole Proprietorship CRS Name Branding Change
     Then I see the login page
 
 @e2e @cannabis @privatecorporation @validation
-Scenario: CRS Branding Change Validation
+Scenario: Validation for CRS Branding Change 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -120,6 +120,7 @@ Scenario: CRS Branding Change Validation
     And I click on the Licences tab
     And I pay the licensing fee for Cannabis
     And I click on the branding change link for Cannabis
+    And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Branding Change application
     And the account is deleted
