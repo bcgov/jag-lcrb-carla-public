@@ -3145,7 +3145,16 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select a value')]")).Displayed);
 
                 // check that a missing transfer consent error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please consent to the transfer')]")).Displayed); 
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please consent to the transfer')]")).Displayed);
+            }
+
+            if (applicationType == " Catering transfer of ownership")
+            {
+                 // check that a missing proposed transferee error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select the proposed transferee')]")).Displayed);
+
+                // check that a missing transfer consent error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please consent to the transfer')]")).Displayed);
             }
 
             if (applicationType == " CRS Branding Change application")
