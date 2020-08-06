@@ -3156,6 +3156,12 @@ namespace bdd_tests
                 // check missing signage document error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
             }
+
+            if (applicationType == " Catering Branding Change application")
+            {
+                // check missing signage document error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
+            }
         }
 
 

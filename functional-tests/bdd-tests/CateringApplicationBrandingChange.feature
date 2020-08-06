@@ -132,7 +132,8 @@ Scenario: Validation for Catering Branding Change
     And I click on the Licences tab
     And I pay the licensing fee for Catering
     And I click on the branding change link for Catering
+    And I click on the Continue to Application button
     And I do not complete the application correctly
-    And the expected validation errors are thrown for a Branding Change application
+    And the expected validation errors are thrown for a Catering Branding Change application
     And the account is deleted
     Then I see the login page
