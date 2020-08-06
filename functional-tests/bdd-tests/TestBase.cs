@@ -3065,12 +3065,7 @@ namespace bdd_tests
         [And(@"I do not complete the application correctly")]
         public void CompleteApplicationIncorrectly()
         {
-            //ClickOnSubmitButton();
-
-            
-
-            NgWebElement uiMapCheckbox = ngDriver.FindElement(By.XPath("/html/body/app-root/div/div/div/main/div/app-application/div[2]/div/div[2]/div[1]/div[1]/div[2]/section[4]/button[2]"));
-            uiMapCheckbox.Click();
+            ClickOnSubmitButton();
 
             System.Threading.Thread.Sleep(5000);
         }
@@ -3085,7 +3080,7 @@ namespace bdd_tests
             // check missing signature agreement error is thrown
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that all of the information provided for this application is true and complete.')]")).Displayed);
 
-            if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application") || (applicationType == " Branding Change application"))
+            if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application"))
             {
                 // check missing street address error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the street address')]")).Displayed);
@@ -3141,7 +3136,7 @@ namespace bdd_tests
 
             if (applicationType == "n event authorization")
             {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'239423jr3jrmmj.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TO BE COMPLETED')]")).Displayed);
             }
 
             if (applicationType == " transfer of ownership")
@@ -3151,6 +3146,15 @@ namespace bdd_tests
 
                 // check that a missing transfer consent error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please consent to the transfer')]")).Displayed); 
+            }
+
+            if (applicationType == " Branding Change application")
+            {
+                // check that a missing proposed change error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'proposedChange is not valid')]")).Displayed);
+
+                // check missing signage document error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
             }
         }
 
