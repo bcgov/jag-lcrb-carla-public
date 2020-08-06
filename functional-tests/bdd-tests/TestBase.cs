@@ -3240,6 +3240,12 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the postal code')]")).Displayed);
                 }
 
+                if (applicationType == " Catering store relocation application")
+                {
+                    // check missing signage document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
+                }
+
                 if (applicationType == " structural change application")
                 {
                     // check missing description error is thrown
