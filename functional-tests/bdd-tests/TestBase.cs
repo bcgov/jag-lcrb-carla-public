@@ -272,7 +272,7 @@ namespace bdd_tests
             string estName = "Point Ellis Greenhouse";
             string estAddress = "645 Tyee Rd";
             string estCity = "Victoria";
-            string estPostal = "V9A6X5";
+            string estPostal = "V9A 6X5";
             string estPID = "012345678";
             string estEmail = "test@test.com";
             string estPhone = "2505555555";
@@ -386,7 +386,7 @@ namespace bdd_tests
             string estName = "Point Ellis Greenhouse";
             string estAddress = "645 Tyee Rd";
             string estCity = "Victoria";
-            string estPostal = "V9A6X5";
+            string estPostal = "V9A 6X5";
             string estPID = "012345678";
             string estEmail = "test@test.com";
             string estPhone = "2505555555";
@@ -596,7 +596,7 @@ namespace bdd_tests
             string estName = "Manufacturer's Establishment";
             string streetLocation = "123 Innovation Street";
             string city = "Victoria";
-            string postal = "V5R2X4";
+            string postal = "V9A 6X5";
             string PID = "111111111";
             string additionalPIDs = "999999999, 000000000, 181818181";
             string storeEmail = "store@email.com";
@@ -860,7 +860,7 @@ namespace bdd_tests
             string estName = "Point Ellis Greenhouse";
             string estAddress = "645 Tyee Rd";
             string estCity = "Victoria";
-            string estPostal = "V9A6X5";
+            string estPostal = "V9A 6X5";
             string estPID = "012345678";
             string estPhone = "2505555555";
             string estEmail = "test@automation.com";
@@ -1186,8 +1186,8 @@ namespace bdd_tests
             {
 
                 string proposedAddress = "Automated Test Street";
-                string proposedCity = "Automated City";
-                string proposedPostalCode = "A1A 1A1";
+                string proposedCity = "Victoria";
+                string proposedPostalCode = "V9A 6X5";
                 string pid = "012345678";
 
                 // enter the proposed street address
@@ -1417,8 +1417,8 @@ namespace bdd_tests
             string venueAdditionalInfo = "Automated test additional venue information added here.";
             string physicalAddStreetAddress1 = "Automated test street address 1";
             string physicalAddStreetAddress2 = "Automated test street address 2";
-            string physicalAddCity = "Automated test city";
-            string physicalAddPostalCode = "V8V4Y3";
+            string physicalAddCity = "Victoria";
+            string physicalAddPostalCode = "V9A 6X5";
 
             // enter event contact name
             NgWebElement uiEventContactName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactName']"));
@@ -2064,13 +2064,13 @@ namespace bdd_tests
             string physStreetAddress1 = "645 Tyee Road";
             string physStreetAddress2 = "West of Victoria";
             string physCity = "Victoria";
-            string physPostalCode = "V8V4Y3";
+            string physPostalCode = "V9A 6X5";
 
             string mailStreet1 = "P.O. Box 123";
             string mailStreet2 = "303 Prideaux St.";
-            string mailCity = "Nanaimo";
+            string mailCity = "Victoria";
             string mailProvince = "B.C.";
-            string mailPostalCode = "V9R2N3";
+            string mailPostalCode = "V9A 6X5";
             string mailCountry = "Canada";
 
             string bizPhoneNumber = "2501811818";
