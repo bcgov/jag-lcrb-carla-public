@@ -255,6 +255,13 @@ namespace bdd_tests
         }
 
 
+        [And(@"I do not complete the Rural Agency Store application")]
+        public void DoNotCompleteRuralStoreApplication()
+        {
+            ClickOnSubmitButton();
+        }
+
+
         [And(@"I complete the Rural Agency Store application")]
         public void CompleteRuralAgencyStoreApplication()
         {
@@ -3150,7 +3157,7 @@ namespace bdd_tests
                 // check missing signature agreement error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that all of the information provided for this application is true and complete.')]")).Displayed);
 
-                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application"))
+                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application") || (applicationType == " Rural Store application"))
                 {
                     // check missing street address error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the street address')]")).Displayed);
@@ -3175,7 +3182,10 @@ namespace bdd_tests
 
                     // check missing establishment name error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is required')]")).Displayed);
+                }
 
+                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application"))
+                { 
                     // check missing signage document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
                 }
@@ -3264,11 +3274,14 @@ namespace bdd_tests
 
                 if (applicationType == " structural change application")
                 {
-                    // check missing description error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter a description')]")).Displayed);
-
                     // check that the missing product not visible from outside error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please confirm that product will not be visible from the outside')]")).Displayed);
+                }
+
+                if ((applicationType == " structural change application") || (applicationType == " Rural Store application"))
+                {
+                    // check missing description error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter a description')]")).Displayed);
 
                     // check missing floor plan document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
