@@ -118,7 +118,7 @@ Scenario: Catering Sole Proprietorship Branding Change
     Then I see the login page
 
 @e2e @catering @privatecorporation @validation
-Scenario: Catering Branding Change Validation
+Scenario: Validation for Catering Branding Change 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -132,6 +132,7 @@ Scenario: Catering Branding Change Validation
     And I click on the Licences tab
     And I pay the licensing fee for Catering
     And I click on the branding change link for Catering
+    And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Branding Change application
     And the account is deleted
