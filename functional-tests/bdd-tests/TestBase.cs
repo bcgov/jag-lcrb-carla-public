@@ -428,7 +428,7 @@ namespace bdd_tests
             }
 
             // select 'yes' for ALR inclusion
-            //NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-36"));
+            //NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("#mat-radio-36 .mat-radio-outer-circle"));
             //uiALRInclusion.Click();
 
             // search for and select the indigenous nation
