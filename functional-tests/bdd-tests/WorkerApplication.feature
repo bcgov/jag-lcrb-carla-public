@@ -16,7 +16,7 @@ Scenario: Worker Application
     And the account is deleted
     Then I see the login page
 
-Scenario: Worker Application Validation
+Scenario: Validation for Worker Application
     Given I login with no terms
     And the account is deleted
     And I am logged in to the dashboard
