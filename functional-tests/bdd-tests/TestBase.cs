@@ -590,6 +590,8 @@ namespace bdd_tests
             string contactTitle = "Sommelier";
             string contactPhone = "778-181-1818";
             string contactEmail = "contact@email.com";
+            string indigenousNation = "Cowichan Tribes";
+            string policeJurisdiction = "RCMP Shawnigan Lake";
 
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
@@ -622,6 +624,14 @@ namespace bdd_tests
             // select 'yes' for ALR inclusion
             NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
             uiALRInclusion.Click();
+
+            // search for and select the indigenous nation
+            NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
+            uiIndigenousNation.SendKeys(indigenousNation);
+
+            // search for and select the  police jurisdiction
+            NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
+            uiPoliceJurisdiction.SendKeys(policeJurisdiction);
 
             // enter the store email
             NgWebElement uiEstabEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentEmail']"));
