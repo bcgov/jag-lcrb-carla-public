@@ -3184,13 +3184,13 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is required')]")).Displayed);
                 }
 
-                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application"))
+                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application") || (applicationType == " location change application"))
                 { 
                     // check missing signage document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
                 }
 
-                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " facility structural change application"))
+                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " facility structural change application") || (applicationType == " location change application"))
                 {
                     // check missing site plan document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
@@ -3248,13 +3248,13 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
                 }
 
-                if (applicationType == " Branding Change application")
+                if ((applicationType == " Branding Change application") || (applicationType == " location change application"))
                 {
                     // check missing signage document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
                 }
 
-                if (applicationType == " store relocation application")
+                if ((applicationType == " store relocation application") || (applicationType == " Catering store relocation application"))
                 {
                     // check missing street address error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the street address')]")).Displayed);
@@ -3264,12 +3264,6 @@ namespace bdd_tests
 
                     // check missing postal code error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the postal code')]")).Displayed);
-                }
-
-                if (applicationType == " Catering store relocation application")
-                {
-                    // check missing signage document error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
                 }
 
                 if (applicationType == " structural change application")
@@ -3291,6 +3285,15 @@ namespace bdd_tests
                 {
                     // check missing value error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select a value')]")).Displayed);
+                }
+
+                if (applicationType == " location change application")
+                {
+                    // check missing description error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter a description')]")).Displayed);
+
+                    // check that the missing supporting document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one supporting document is required.')]")).Displayed);
                 }
             }
         }
@@ -4983,6 +4986,20 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(3000);
         }
 
+        [And(@"I click on the location change link")]
+        public void ClickOnLocationChangeLink()
+        {
+            /* 
+            Page Title: Licences
+            */
+
+            string locationChange = "Location Change Application";
+
+            // click on the Location Change Application link
+            NgWebElement uiLocationChange = ngDriver.FindElement(By.LinkText(locationChange));
+            uiLocationChange.Click();
+
+        }
 
         [And(@"I request a location change")]
         public void LocationChange()
