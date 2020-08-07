@@ -590,6 +590,8 @@ namespace bdd_tests
             string contactTitle = "Sommelier";
             string contactPhone = "778-181-1818";
             string contactEmail = "contact@email.com";
+            string indigenousNation = "Cowichan Tribes";
+            string policeJurisdiction = "RCMP Shawnigan Lake";
 
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
@@ -622,6 +624,14 @@ namespace bdd_tests
             // select 'yes' for ALR inclusion
             NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
             uiALRInclusion.Click();
+
+            // search for and select the indigenous nation
+            NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
+            uiIndigenousNation.SendKeys(indigenousNation);
+
+            // search for and select the  police jurisdiction
+            NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
+            uiPoliceJurisdiction.SendKeys(policeJurisdiction);
 
             // enter the store email
             NgWebElement uiEstabEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentEmail']"));
@@ -845,6 +855,8 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "test2@automation.com";
+            string indigenousNation = "Cowichan Tribes";
+            string policeJurisdiction = "RCMP Shawnigan Lake";
 
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
@@ -865,6 +877,19 @@ namespace bdd_tests
             // enter the PID
             NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
+
+            // select 'Yes'
+            // Is your establishment located on the Agricultural Land Reserve (ALR)?
+            NgWebElement yesALRZoning = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
+            yesALRZoning.Click();
+
+            // search for and select the indigenous nation
+            NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
+            uiIndigenousNation.SendKeys(indigenousNation);
+
+            // search for and select the  police jurisdiction
+            NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
+            uiPoliceJurisdiction.SendKeys(policeJurisdiction);
 
             // enter the store email
             NgWebElement uiEstabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
