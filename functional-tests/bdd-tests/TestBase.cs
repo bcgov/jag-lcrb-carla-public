@@ -3274,13 +3274,10 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
                 }
 
-                if (applicationType == " third party application")
+                if (applicationType == " Catering third party application")
                 {
                     // check missing value error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select a value')]")).Displayed);
-
-                    // check missing business name error is thrown
-                    //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select the business name to be a third party operator of your licence')]")).Displayed);
                 }
             }
         }
