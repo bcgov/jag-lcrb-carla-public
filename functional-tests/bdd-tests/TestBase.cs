@@ -3195,7 +3195,7 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Declaration Checkbox')]")).Displayed);
             }
             else
-            { 
+            {
                 // check missing authorized to submit error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that you are authorized to submit the application.')]")).Displayed);
 
@@ -3227,7 +3227,10 @@ namespace bdd_tests
 
                     // check missing establishment name error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is required')]")).Displayed);
+                }
 
+                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application"))
+                { 
                     // check missing police jurisdiction error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'policeJurisdiction is not valid')]")).Displayed);
 
