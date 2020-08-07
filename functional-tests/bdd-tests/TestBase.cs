@@ -3190,7 +3190,7 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
                 }
 
-                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application"))
+                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " facility structural change application"))
                 {
                     // check missing site plan document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
@@ -4844,6 +4844,21 @@ namespace bdd_tests
             MakePayment();
 
             System.Threading.Thread.Sleep(3000);
+        }
+
+
+        [And(@"I click on the facility structural change link")]
+        public void ClickOnFacilityStructuralLink()
+        {
+            /* 
+            Page Title: Licences
+            */
+
+            string facilityStructuralChange = "Facility Structural Change Application";
+
+            // click on the Facility Structural Change Application link
+            NgWebElement uiFacilityStructuralChange = ngDriver.FindElement(By.LinkText(facilityStructuralChange));
+            uiFacilityStructuralChange.Click();
         }
 
 
