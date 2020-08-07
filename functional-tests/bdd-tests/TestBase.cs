@@ -395,6 +395,8 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
+            string indigenousNation = "Cowichan Tribes";
+            string policeJurisdiction = "RCMP Shawnigan Lake";
 
             System.Threading.Thread.Sleep(3000);
 
@@ -424,6 +426,18 @@ namespace bdd_tests
                 NgWebElement uiSelectNation = ngDriver.FindElement(By.CssSelector("[formcontrolname='indigenousNationId'] option[value='236686fc-d9d3-e811-90f0-005056832371']"));
                 uiSelectNation.Click();
             }
+
+            // select 'yes' for ALR inclusion
+            //NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-36"));
+            //uiALRInclusion.Click();
+
+            // search for and select the indigenous nation
+            NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
+            uiIndigenousNation.SendKeys(indigenousNation);
+
+            // search for and select the  police jurisdiction
+            NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
+            uiPoliceJurisdiction.SendKeys(policeJurisdiction);
 
             // enter the store email
             NgWebElement estabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
