@@ -979,6 +979,12 @@ namespace bdd_tests
         }
 
 
+        public void CheckFeatureFlagsLGIN()
+        {
+            CheckFeatureFlag("LGApprovals");
+        }
+
+
         [And(@"I request a personnel name change for a (.*)")]
         public void RequestPersonnelNameChange(string businessType)
         {
