@@ -3227,6 +3227,12 @@ namespace bdd_tests
 
                     // check missing establishment name error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is required')]")).Displayed);
+
+                    // check missing police jurisdiction error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'policeJurisdiction is not valid')]")).Displayed);
+
+                    // check missing indigenous nation error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'indigenousNation is not valid')]")).Displayed);
                 }
 
                 if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application") || (applicationType == " location change application"))
