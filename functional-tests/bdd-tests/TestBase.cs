@@ -1124,9 +1124,7 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp.btn-primary"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Submit a Licence Relocation Application
@@ -1320,6 +1318,22 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the relocation application link")]
+        public void ClickOnRelocationApplicationLink()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
+
+            string requestRelocation = "Request Relocation";
+
+            // click on the relocation application link
+            NgWebElement uiRelocationApplication = ngDriver.FindElement(By.LinkText(requestRelocation));
+            uiRelocationApplication.Click();
+        }
+
+
         [And(@"I request an event authorization")]
         public void RequestEventAuthorization()
         {
@@ -1497,6 +1511,22 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the structural change link")]
+        public void ClickOnStructuralChangeLink()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Cannabis Retail Store Licences
+            */
+
+            string structuralChange = "Request a Structural Change";
+
+            // click on the request structural change link
+            NgWebElement uiStructuralChange = ngDriver.FindElement(By.LinkText(structuralChange));
+            uiStructuralChange.Click();
+        }
+
+
         [And(@"I request a structural change")]
         public void RequestStructuralChange()
         {
@@ -1515,9 +1545,7 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
-            // click on continue to application button
-            NgWebElement continueToApplicationButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueToApplicationButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Submit the Cannabis Retail Store Structural Change Application
@@ -1695,9 +1723,7 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /*
             Page Title: Submit a Name or Branding Change Application
@@ -1764,6 +1790,22 @@ namespace bdd_tests
             // click on the first day
             NgWebElement openCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
             openCalendarYear.Click();
+        }
+
+
+        [And(@"I click on the third party operator link")]
+        public void ClickOnThirdPartyOperatorLink()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
+
+            string addOrChangeThirdParty = "Add or Change a Third Party Operator";
+
+            // click on the Add or Change a Third Party Operator Link
+            NgWebElement uiAddOrChangeThirdPartyOp = ngDriver.FindElement(By.LinkText(addOrChangeThirdParty));
+            uiAddOrChangeThirdPartyOp.Click();
         }
 
 
@@ -3080,78 +3122,166 @@ namespace bdd_tests
         [And(@"the expected validation errors are thrown for a(.*)")]
         public void ValidationErrorMessages(string applicationType)
         {
-            // check missing authorized to submit error is thrown
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that you are authorized to submit the application.')]")).Displayed);
-
-            // check missing signature agreement error is thrown
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that all of the information provided for this application is true and complete.')]")).Displayed);
-
-            if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application") || (applicationType == " Branding Change application"))
+            if (applicationType == " licensee representative")
             {
-                // check missing street address error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the street address')]")).Displayed);
+                // check that missing representative name error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Representative Name is a required field')]")).Displayed);
 
-                // check missing city error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the city')]")).Displayed);
+                // check that missing telephone error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Telephone is a required field')]")).Displayed);
 
-                // check missing postal code error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the postal code')]")).Displayed);
+                // check that missing email error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'E-mail Address is a required field')]")).Displayed);
 
-                // check missing PID error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the Parcel Identifier (format: 9 digits)')]")).Displayed);
+                // check missing signature agreement error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that all of the information provided for this application is true and complete.')]")).Displayed);
 
-                // check missing business contact error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the business contact')]")).Displayed);
+                // check that missing scope of authority error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one scope of authority must be selected')]")).Displayed);
 
-                // check missing business contact phone number error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'s 10-digit phone number')]")).Displayed);
-
-                // check missing business contact email error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'s email address')]")).Displayed);
-
-                // check missing establishment name error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is required')]")).Displayed);
-
-                // check missing signage document error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
+                // check that missing declaration checkbox error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Declaration Checkbox')]")).Displayed);
             }
+            else
+            { 
+                // check missing authorized to submit error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that you are authorized to submit the application.')]")).Displayed);
 
-            if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application"))
-            {
-                // check missing site plan document error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
+                // check missing signature agreement error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that all of the information provided for this application is true and complete.')]")).Displayed);
 
-                // check missing floor plan document error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
-            }
+                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application"))
+                {
+                    // check missing street address error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the street address')]")).Displayed);
 
-            if (applicationType == " Cannabis application")
-            {
-                // check that the missing product not visible from outside error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please confirm that product will not be visible from the outside')]")).Displayed);
+                    // check missing city error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the city')]")).Displayed);
 
-                // check that the missing zoning document error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one zoning document is required.')]")).Displayed);
+                    // check missing postal code error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the postal code')]")).Displayed);
 
-                // check that the missing Financial Integrity document error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Financial Integrity form is required.')]")).Displayed);
+                    // check missing PID error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the Parcel Identifier (format: 9 digits)')]")).Displayed);
 
-                // check that the missing supporting document error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one supporting document is required.')]")).Displayed);
-            }
+                    // check missing business contact error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the business contact')]")).Displayed);
 
-            if (applicationType == "n event authorization")
-            {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'239423jr3jrmmj.')]")).Displayed);
-            }
+                    // check missing business contact phone number error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'s 10-digit phone number')]")).Displayed);
 
-            if (applicationType == " transfer of ownership")
-            {
-                // check that a missing value error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select a value')]")).Displayed);
+                    // check missing business contact email error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'s email address')]")).Displayed);
 
-                // check that a missing transfer consent error is thrown
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please consent to the transfer')]")).Displayed); 
+                    // check missing establishment name error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is required')]")).Displayed);
+
+                    // check missing signage document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
+                }
+
+                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application"))
+                {
+                    // check missing site plan document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
+
+                    // check missing floor plan document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
+                }
+
+                if (applicationType == " Cannabis application")
+                {
+                    // check that the missing product not visible from outside error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please confirm that product will not be visible from the outside')]")).Displayed);
+
+                    // check that the missing zoning document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one zoning document is required.')]")).Displayed);
+
+                    // check that the missing Financial Integrity document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Financial Integrity form is required.')]")).Displayed);
+
+                    // check that the missing supporting document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one supporting document is required.')]")).Displayed);
+                }
+
+                if (applicationType == "n event authorization")
+                {
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TO BE COMPLETED')]")).Displayed);
+
+                    // waiting for bug fix: LCSD-3663
+                }
+
+                if (applicationType == " transfer of ownership")
+                {
+                    // check that a missing value error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select a value')]")).Displayed);
+
+                    // check that a missing transfer consent error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please consent to the transfer')]")).Displayed);
+                }
+
+                if ((applicationType == " Catering transfer of ownership") || (applicationType == " CRS transfer of ownership"))
+                {
+                     // check that a missing proposed transferee error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select the proposed transferee')]")).Displayed);
+
+                    // check that a missing transfer consent error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please consent to the transfer')]")).Displayed);
+                }
+
+                if (applicationType == " CRS Branding Change application")
+                {
+                    // check that a missing proposed change error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'proposedChange is not valid')]")).Displayed);
+
+                    // check missing signage document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
+                }
+
+                if (applicationType == " Branding Change application")
+                {
+                    // check missing signage document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
+                }
+
+                if (applicationType == " store relocation application")
+                {
+                    // check missing street address error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the street address')]")).Displayed);
+
+                    // check missing city error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the city')]")).Displayed);
+
+                    // check missing postal code error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the postal code')]")).Displayed);
+                }
+
+                if (applicationType == " Catering store relocation application")
+                {
+                    // check missing signage document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
+                }
+
+                if (applicationType == " structural change application")
+                {
+                    // check missing description error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter a description')]")).Displayed);
+
+                    // check that the missing product not visible from outside error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please confirm that product will not be visible from the outside')]")).Displayed);
+
+                    // check missing floor plan document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
+                }
+
+                if (applicationType == " third party application")
+                {
+                    // check missing value error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select a value')]")).Displayed);
+
+                    // check missing business name error is thrown
+                    //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select the business name to be a third party operator of your licence')]")).Displayed);
+                }
             }
         }
 
@@ -3430,11 +3560,25 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the licensee representative link")]
+        public void ClickOnLicenseeRepresentative()
+        {
+            /* 
+            Page Title: Licences
+            */
+
+            // click on the Licensee Representative link
+            string addLicensee = "Add Licensee Representative";
+            NgWebElement uiAddLicensee = ngDriver.FindElement(By.LinkText(addLicensee));
+            uiAddLicensee.Click();
+        }
+
+
         [And(@"I request a licensee representative")]
         public void RequestLicenseeRepresentative()
         {
             /* 
-            Page Title: 
+            Page Title: Licences
             */
 
             // click on the Licensee Representative link
@@ -4406,6 +4550,15 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the Continue to Application button")]
+        public void ContinueToApplicationButton()
+        {
+            // click on the Continue to Application button
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+            continueButton.Click();
+        }
+
+
         [And(@"I request a picnic area endorsement")]
         public void PicnicAreaEndorsement()
         {
@@ -4423,9 +4576,7 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Manufacturer Picnic Area Endorsement Application
@@ -4497,9 +4648,7 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Manufacturer On-Site Store Endorsement Application
@@ -4570,9 +4719,7 @@ namespace bdd_tests
             NgWebElement uiLoungeAreaEndorsement = ngDriver.FindElement(By.LinkText(loungeAreaEndorsement));
             uiLoungeAreaEndorsement.Click();
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Lounge Area Endorsement Application
@@ -4707,9 +4854,7 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Manufacturing Facility Structural Change Application
@@ -4827,9 +4972,7 @@ namespace bdd_tests
             NgWebElement uiLocationChange = ngDriver.FindElement(By.LinkText(locationChange));
             uiLocationChange.Click();
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             // create test data
             string additionalPIDs = "012345678, 343434344";
@@ -4906,9 +5049,7 @@ namespace bdd_tests
             NgWebElement uiSpecialEventAreaEndorsement = ngDriver.FindElement(By.LinkText(specialEventAreaEndorsement));
             uiSpecialEventAreaEndorsement.Click();
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Special Event Area Endorsement Application
@@ -5063,9 +5204,7 @@ namespace bdd_tests
             NgWebElement uiNewOutdoorPatioEndorsement = ngDriver.FindElement(By.LinkText(newOutdoorPatioEndorsement));
             uiNewOutdoorPatioEndorsement.Click();
 
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
+            ContinueToApplicationButton();
 
             /* 
             Page Title: Manufacturing Facility New Outdoor Patio Application
