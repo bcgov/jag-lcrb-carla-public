@@ -17,7 +17,7 @@ Feature: CRSApplication.feature
     As a logged in business user
     I want to submit a CRS Application for different business types
 
-@e2e @cannabis @indigenousnation @crsapp2
+@e2e @cannabis @indigenousnation @crsapp
 Scenario: Indigenous Nation CRS Application
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -65,7 +65,7 @@ Scenario: Private Corporation CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsapp2
+@e2e @cannabis @publiccorporation @crsapp
 Scenario: Public Corporation CRS Application
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -81,7 +81,7 @@ Scenario: Public Corporation CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsapp2
+@e2e @cannabis @society @crsapp
 Scenario: Society CRS Application
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
@@ -112,6 +112,19 @@ Scenario: Sole Proprietorship CRS Application
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the account is deleted
     Then I see the login page
+
+@crsapp @validation 
+Scenario: Validation for CRS Application
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for a Cannabis application
+    And the account is deleted
+    Then I see the login page
 */
 
 namespace bdd_tests
@@ -122,6 +135,8 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard(string businessType)
         {
+            CheckFeatureFlagsLGIN();
+
             CarlaLogin(businessType);
         }
     }

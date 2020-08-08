@@ -11,8 +11,8 @@ Scenario: Indigenous Nation CRS Application
     And I review the organization structure for an indigenous nation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for an indigenous nation
-    # And I review the security screening requirements for an indigenous nation
-    # And I click on the Pay for Application button
+    And I review the security screening requirements for an indigenous nation
+    And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the account is deleted
@@ -27,8 +27,8 @@ Scenario: Partnership CRS Application
     And I review the organization structure for a partnership
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a partnership
-    # And I review the security screening requirements for a partnership
-    # And I click on the Pay for Application button
+    And I review the security screening requirements for a partnership
+    And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the account is deleted
@@ -43,8 +43,8 @@ Scenario: Private Corporation CRS Application
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a private corporation
-    # And I review the security screening requirements for a private corporation
-    # And I click on the Pay for Application button
+    And I review the security screening requirements for a private corporation
+    And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the account is deleted
@@ -59,8 +59,8 @@ Scenario: Public Corporation CRS Application
     And I review the organization structure for a public corporation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a public corporation
-    # And I review the security screening requirements for a public corporation
-    # And I click on the Pay for Application button
+    And I review the security screening requirements for a public corporation
+    And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the account is deleted
@@ -75,8 +75,8 @@ Scenario: Society CRS Application
     And I review the organization structure for a society
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a society
-    # And I review the security screening requirements for a society
-    # And I click on the Pay for Application button
+    And I review the security screening requirements for a society
+    And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the account is deleted
@@ -91,15 +91,15 @@ Scenario: Sole Proprietorship CRS Application
     And I review the organization structure for a sole proprietorship
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a sole proprietorship
-    # And I review the security screening requirements for a sole proprietorship
-    # And I click on the Pay for Application button
+    And I review the security screening requirements for a sole proprietorship
+    And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the account is deleted
     Then I see the login page
 
 @crsapp @validation 
-Scenario: CRS Application Validation
+Scenario: Validation for CRS Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
