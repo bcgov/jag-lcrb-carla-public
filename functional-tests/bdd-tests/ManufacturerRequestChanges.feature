@@ -658,8 +658,12 @@ Scenario: Co-packer New Outdoor Patio Endorsement Application
     And the account is deleted
     Then I see the login page
 
+#-------------------------------
+# Manufacturing Validation Tests
+#-------------------------------
+
 @e2e @privatecorporation @manufacturer @validation
-Scenario: Manufacturer Establishment Name Change Validation
+Scenario: Validation for Manufacturer Establishment Name Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -670,8 +674,69 @@ Scenario: Manufacturer Establishment Name Change Validation
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
+    And I click on the Licences tab
     And I click on the branding change link for Manufacturing
+    And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Branding Change application
+    And the account is deleted
+    Then I see the login page
+
+@e2e @privatecorporation @manufacturer @validation
+Scenario: Validation for Manufacturer Transfer of Ownership
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
+    And I complete the Manufacturer application for a winery
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee for a Manufacturer application
+    And I click on the Licences tab
+    And I click on the transfer of ownership link
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for a transfer of ownership
+    And the account is deleted
+    Then I see the login page
+
+@e2e @privatecorporation @manufacturer @validation
+Scenario: Validation for Manufacturer Facility Structural Change Application
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
+    And I complete the Manufacturer application for a winery
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee for a Manufacturer application
+    And I click on the Licences tab
+    And I click on the facility structural change link
+    And I click on the Continue to Application button
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for a facility structural change application
+    And the account is deleted
+    Then I see the login page
+
+@e2e @privatecorporation @manufacturer @validation
+Scenario: Validation for Manufacturer Location Change Application
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
+    And I complete the Manufacturer application for a winery
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee for a Manufacturer application
+    And I click on the Licences tab
+    And I click on the location change link
+    And I click on the Continue to Application button
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for a location change application
     And the account is deleted
     Then I see the login page
