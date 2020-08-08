@@ -232,14 +232,6 @@ namespace bdd_tests
         }
 
 
-        [And(@"I click on the Submit button for the COVID application")]
-        public void submit_button()
-        {
-            NgWebElement submitButton = ngDriver.FindElement(By.CssSelector("app-application-covid-temporary-extension button.btn-primary"));
-            submitButton.Click();
-        }
-
-
         [Then(@"the application is submitted")]
         public void application_submitted()
         {
@@ -260,9 +252,11 @@ namespace bdd_tests
             // enter the licence number and then clear it
             NgWebElement uiLicenceNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='description1']"));
             uiLicenceNumber.SendKeys(licencenumber);
+
             // click on another field to generate error
             NgWebElement uiBody = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
             uiBody.Click();
+
             // confirm that error message is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licence Number is a required field')]")).Displayed);
         }
