@@ -140,7 +140,7 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I click on the Licences tab
-    And I click on the event authorization link
+    And I click on the link for event authorization
     And I do not complete the application correctly
     And the expected validation errors are thrown for an event authorization
     And the account is deleted
@@ -160,7 +160,7 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I click on the Licences tab
-    And I click on the transfer of ownership link
+    And I click on the link for transfer of ownership
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Catering transfer of ownership
     And the account is deleted

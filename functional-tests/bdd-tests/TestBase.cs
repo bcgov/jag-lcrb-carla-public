@@ -1347,35 +1347,89 @@ namespace bdd_tests
         }
 
 
-        [And(@"I click on the event authorization link")]
-        public void ClickOnEventAuthorizationLink()
+        [And(@"I click on the link for (.*)")]
+        public void ClickOnLink(string specificLink)
         {
-            /* 
-            Page Title: Licences
-            Subtitle:   Catering Licences
-            */
+            if (specificLink == "event authorization")
+            {
+                string requestEventAuthorization = "Request Event Authorization";
 
-            string requestEventAuthorization = "Request Event Authorization";
+                // click on the request event authorization link
+                NgWebElement uiRequestEventAuthorization = ngDriver.FindElement(By.LinkText(requestEventAuthorization));
+                uiRequestEventAuthorization.Click();
+            }
 
-            // click on the request event authorization link
-            NgWebElement uiRequestEventAuthorization = ngDriver.FindElement(By.LinkText(requestEventAuthorization));
-            uiRequestEventAuthorization.Click();
-        }
+            if (specificLink == "relocation application")
+            {
+                string requestRelocation = "Request Relocation";
 
+                // click on the relocation application link
+                NgWebElement uiRelocationApplication = ngDriver.FindElement(By.LinkText(requestRelocation));
+                uiRelocationApplication.Click();
+            }
 
-        [And(@"I click on the relocation application link")]
-        public void ClickOnRelocationApplicationLink()
-        {
-            /* 
-            Page Title: Licences
-            Subtitle:   Catering Licences
-            */
+            if (specificLink == "structural change")
+            {
+                string structuralChange = "Request a Structural Change";
 
-            string requestRelocation = "Request Relocation";
+                // click on the request structural change link
+                NgWebElement uiStructuralChange = ngDriver.FindElement(By.LinkText(structuralChange));
+                uiStructuralChange.Click();
+            }
 
-            // click on the relocation application link
-            NgWebElement uiRelocationApplication = ngDriver.FindElement(By.LinkText(requestRelocation));
-            uiRelocationApplication.Click();
+            if (specificLink == "third party operator")
+            {
+                string addOrChangeThirdParty = "Add or Change a Third Party Operator";
+
+                // click on the Add or Change a Third Party Operator Link
+                NgWebElement uiAddOrChangeThirdPartyOp = ngDriver.FindElement(By.LinkText(addOrChangeThirdParty));
+                uiAddOrChangeThirdPartyOp.Click();
+            }
+
+            if (specificLink == "transfer of ownership")
+            {
+                string transferOwnership = "Transfer Licence";
+
+                // click on the Transfer Ownership link
+                NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
+                uiTransferOwnership.Click();
+            }
+
+            if (specificLink == "licence download")
+            {
+                string downloadLink = "Download Licence";
+
+                // click on the Licences link
+                NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
+                uiDownloadLicence.Click();
+            }
+
+            if (specificLink == "licensee representative")
+            {
+                string addLicensee = "Add Licensee Representative";
+
+                // click on the Licensee Representative link
+                NgWebElement uiAddLicensee = ngDriver.FindElement(By.LinkText(addLicensee));
+                uiAddLicensee.Click();
+            }
+
+            if (specificLink == "facility structural change")
+            {
+                string facilityStructuralChange = "Facility Structural Change Application";
+
+                // click on the Facility Structural Change Application link
+                NgWebElement uiFacilityStructuralChange = ngDriver.FindElement(By.LinkText(facilityStructuralChange));
+                uiFacilityStructuralChange.Click();
+            }
+
+            if (specificLink == "location change")
+            {
+                string locationChange = "Location Change Application";
+
+                // click on the Location Change Application link
+                NgWebElement uiLocationChange = ngDriver.FindElement(By.LinkText(locationChange));
+                uiLocationChange.Click();
+            }
         }
 
 
@@ -1519,6 +1573,7 @@ namespace bdd_tests
             // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
         }
 
+
         [And(@"I click on the Start Application button for (.*)")]
         public void ClickStartApplication(string applicationType)
         {
@@ -1553,22 +1608,6 @@ namespace bdd_tests
                 NgWebElement startAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
                 startAppButton.Click();
             }
-        }
-
-
-        [And(@"I click on the structural change link")]
-        public void ClickOnStructuralChangeLink()
-        {
-            /* 
-            Page Title: Licences
-            Subtitle:   Cannabis Retail Store Licences
-            */
-
-            string structuralChange = "Request a Structural Change";
-
-            // click on the request structural change link
-            NgWebElement uiStructuralChange = ngDriver.FindElement(By.LinkText(structuralChange));
-            uiStructuralChange.Click();
         }
 
 
@@ -1838,22 +1877,6 @@ namespace bdd_tests
         }
 
 
-        [And(@"I click on the third party operator link")]
-        public void ClickOnThirdPartyOperatorLink()
-        {
-            /* 
-            Page Title: Licences
-            Subtitle:   Catering Licences
-            */
-
-            string addOrChangeThirdParty = "Add or Change a Third Party Operator";
-
-            // click on the Add or Change a Third Party Operator Link
-            NgWebElement uiAddOrChangeThirdPartyOp = ngDriver.FindElement(By.LinkText(addOrChangeThirdParty));
-            uiAddOrChangeThirdPartyOp.Click();
-        }
-
-
         [And(@"I request a third party operator")]
         public void RequestThirdPartyOperator()
         {
@@ -1905,16 +1928,7 @@ namespace bdd_tests
             // confirm that the application has been initiated
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third Party Operator Application Initiated')]")).Displayed);
         }
-
-        [And(@"I click on the transfer of ownership link")]
-        public void ClickOnTransferOfOwnershipLink()
-        {
-            string transferOwnership = "Transfer Licence";
-
-            // click on the Transfer Ownership link
-            NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
-            uiTransferOwnership.Click();
-        }
+        
 
         [And(@"I request a transfer of ownership")]
         public void RequestOwnershipTransfer()
@@ -3130,16 +3144,6 @@ namespace bdd_tests
             submitButton.Click();
         }
 
-        [And(@"I click on the licence download link")]
-        public void ClickLicenceDownloadLink()
-        {
-            string downloadLink = "Download Licence";
-
-            // click on the Licences link
-            NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
-            uiDownloadLicence.Click();
-        }
-
 
         [And(@"I show the store as open on the map")]
         public void ShowStoreOpenOnMap()
@@ -3623,20 +3627,6 @@ namespace bdd_tests
 
             // check that the shareholder last name has been updated
             Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
-        }
-
-
-        [And(@"I click on the licensee representative link")]
-        public void ClickOnLicenseeRepresentative()
-        {
-            /* 
-            Page Title: Licences
-            */
-
-            // click on the Licensee Representative link
-            string addLicensee = "Add Licensee Representative";
-            NgWebElement uiAddLicensee = ngDriver.FindElement(By.LinkText(addLicensee));
-            uiAddLicensee.Click();
         }
 
 
@@ -4903,21 +4893,6 @@ namespace bdd_tests
         }
 
 
-        [And(@"I click on the facility structural change link")]
-        public void ClickOnFacilityStructuralLink()
-        {
-            /* 
-            Page Title: Licences
-            */
-
-            string facilityStructuralChange = "Facility Structural Change Application";
-
-            // click on the Facility Structural Change Application link
-            NgWebElement uiFacilityStructuralChange = ngDriver.FindElement(By.LinkText(facilityStructuralChange));
-            uiFacilityStructuralChange.Click();
-        }
-
-
         [And(@"I request a facility structural change")]
         public void FacilityStructuralChange()
         {
@@ -5039,20 +5014,6 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(3000);
         }
 
-        [And(@"I click on the location change link")]
-        public void ClickOnLocationChangeLink()
-        {
-            /* 
-            Page Title: Licences
-            */
-
-            string locationChange = "Location Change Application";
-
-            // click on the Location Change Application link
-            NgWebElement uiLocationChange = ngDriver.FindElement(By.LinkText(locationChange));
-            uiLocationChange.Click();
-
-        }
 
         [And(@"I request a location change")]
         public void LocationChange()
