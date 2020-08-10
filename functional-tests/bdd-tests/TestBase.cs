@@ -255,13 +255,6 @@ namespace bdd_tests
         }
 
 
-        [And(@"I do not complete the Rural Agency Store application")]
-        public void DoNotCompleteRuralStoreApplication()
-        {
-            ClickOnSubmitButton();
-        }
-
-
         [And(@"I complete the Rural Agency Store application")]
         public void CompleteRuralAgencyStoreApplication()
         {
@@ -428,8 +421,8 @@ namespace bdd_tests
             }
 
             // select 'yes' for ALR inclusion
-            //NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-36"));
-            //uiALRInclusion.Click();
+            NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-14"));
+            uiALRInclusion.Click();
 
             // search for and select the indigenous nation
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
