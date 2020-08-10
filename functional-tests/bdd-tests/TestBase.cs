@@ -217,6 +217,36 @@ namespace bdd_tests
         }
 
 
+        [And(@"I am logged in to the dashboard as a (.*)")]
+        public void ViewDashboard(string businessType)
+        {
+            CarlaLogin(businessType);
+        }
+
+
+        [Then(@"I see the login page")]
+        public void SeeLogin()
+        {
+            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
+        }
+
+
+        public void Dispose()
+        {
+            ngDriver.Quit();
+
+            // Suppress finalization.
+            GC.SuppressFinalize(this);
+        }
+
+
+        [And(@"the account is deleted")]
+        public void DeleteMyAccount()
+        {
+            this.CarlaDeleteCurrentAccount();
+        }
+
+
         public void NavigateToFeatures()
         {
             ngDriver.IgnoreSynchronization = true;
@@ -311,6 +341,51 @@ namespace bdd_tests
         }
 
 
+        [And(@"I enter the payment information")]
+        public void EnterPaymentInfo()
+        {
+            MakePayment();
+        }
+
+
+        [And(@"I pay the licensing fee for (.*)")]
+        public void PayLicenceFee(string feeType)
+        {
+            /* 
+            Page Title: Licences
+            */
+
+            string firstYearLicenceFee = "Pay First Year Licensing Fee";
+
+            // click on the pay first year licence fee link
+            NgWebElement uiFirstYearLicenceFee = ngDriver.FindElement(By.LinkText(firstYearLicenceFee));
+            uiFirstYearLicenceFee.Click();
+
+            // pay the licence fee
+            MakePayment();
+
+            System.Threading.Thread.Sleep(4000);
+
+            /* 
+            Page Title: Payment Approved
+            */
+
+            if (feeType == "Cannabis")
+            {
+                // confirm correct payment amount for CRS
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
+            }
+
+            if (feeType == "Catering")
+            {
+                // confirm correct payment amount for Catering
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$450.00')]")).Displayed);
+            }
+
+            ClickLicencesTab();
+        }
+
+
         [And(@"I confirm the payment receipt for a (.*)")]
         public void ConfirmPaymentReceipt(string applicationType)
         {
@@ -379,6 +454,251 @@ namespace bdd_tests
             NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
             returnDash.Click();
         }
+
+
+        [And(@"I click on the link for (.*)")]
+        public void ClickOnLink(string specificLink)
+        {
+            if (specificLink == "event authorization")
+            {
+                string requestEventAuthorization = "Request Event Authorization";
+
+                // click on the request event authorization link
+                NgWebElement uiRequestEventAuthorization = ngDriver.FindElement(By.LinkText(requestEventAuthorization));
+                uiRequestEventAuthorization.Click();
+            }
+
+            if (specificLink == "relocation application")
+            {
+                string requestRelocation = "Request Relocation";
+
+                // click on the relocation application link
+                NgWebElement uiRelocationApplication = ngDriver.FindElement(By.LinkText(requestRelocation));
+                uiRelocationApplication.Click();
+            }
+
+            if (specificLink == "structural change")
+            {
+                string structuralChange = "Request a Structural Change";
+
+                // click on the request structural change link
+                NgWebElement uiStructuralChange = ngDriver.FindElement(By.LinkText(structuralChange));
+                uiStructuralChange.Click();
+            }
+
+            if (specificLink == "third party operator")
+            {
+                string addOrChangeThirdParty = "Add or Change a Third Party Operator";
+
+                // click on the Add or Change a Third Party Operator Link
+                NgWebElement uiAddOrChangeThirdPartyOp = ngDriver.FindElement(By.LinkText(addOrChangeThirdParty));
+                uiAddOrChangeThirdPartyOp.Click();
+            }
+
+            if (specificLink == "transfer of ownership")
+            {
+                string transferOwnership = "Transfer Licence";
+
+                // click on the Transfer Ownership link
+                NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
+                uiTransferOwnership.Click();
+            }
+
+            if (specificLink == "licence download")
+            {
+                string downloadLink = "Download Licence";
+
+                // click on the Licences link
+                NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
+                uiDownloadLicence.Click();
+            }
+
+            if (specificLink == "licensee representative")
+            {
+                string addLicensee = "Add Licensee Representative";
+
+                // click on the Licensee Representative link
+                NgWebElement uiAddLicensee = ngDriver.FindElement(By.LinkText(addLicensee));
+                uiAddLicensee.Click();
+            }
+
+            if (specificLink == "facility structural change")
+            {
+                string facilityStructuralChange = "Facility Structural Change Application";
+
+                // click on the Facility Structural Change Application link
+                NgWebElement uiFacilityStructuralChange = ngDriver.FindElement(By.LinkText(facilityStructuralChange));
+                uiFacilityStructuralChange.Click();
+            }
+
+            if (specificLink == "location change")
+            {
+                string locationChange = "Location Change Application";
+
+                // click on the Location Change Application link
+                NgWebElement uiLocationChange = ngDriver.FindElement(By.LinkText(locationChange));
+                uiLocationChange.Click();
+            }
+        }
+
+
+        [And(@"I click on the Licences tab")]
+        public void ClickLicencesTab()
+        {
+            string licencesLink = "Licences";
+
+            // click on the Licences link
+            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
+            uiLicences.Click();
+        }
+
+
+        [And(@"I click on the branding change link for (.*)")]
+        public void ClickOnBrandingChangeLink(string changeType)
+        {
+            /* 
+            Page Title: Licences
+            */
+
+            string nameBrandingLinkCannabis = "Request Store Name or Branding Change";
+            string nameBrandingLinkCateringMfg = "Establishment Name Change Application";
+
+            if ((changeType == "Catering") || (changeType == "Manufacturing"))
+            {
+                // click on the Establishment Name Change Application link
+                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCateringMfg));
+                uiRequestChange.Click();
+            }
+
+            if (changeType == "Cannabis")
+            {
+                // click on the Request Store Name or Branding Change link
+                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCannabis));
+                uiRequestChange.Click();
+            }
+        }
+
+
+        [And(@"I click on the Confirm Organization Information is Complete button")]
+        public void ConfirmCompleteOrgInfo()
+        {
+            // click on the confirm organization information is complete button
+            NgWebElement completeButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
+            completeButton.Click();
+        }
+
+
+        [And(@"I click on the Pay for Application button")]
+        public void ClickOnPayButton()
+        {
+            NgWebElement payButton = ngDriver.FindElement(By.CssSelector(".btn-primary+ .btn-primary"));
+            payButton.Click();
+        }
+
+
+        [And(@"I click on the Submit Organization Information button")]
+        public void ClickSubmitOrgStructureButton()
+        {
+            // click on the Submit Org Info button
+            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
+            submitOrgInfoButton.Click();
+        }
+
+
+        [And(@"I click on the Submit button")]
+        public void ClickOnSubmitButton()
+        {
+            NgWebElement submitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+            submitButton.Click();
+        }
+
+
+        [And(@"I click on the Dashboard link")]
+        public void ClickOnDashboard()
+        {
+            string dashboard = "Dashboard";
+
+            // click on the Dashboard link
+            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
+            uiDashboard.Click();
+        }
+
+
+        [And(@"I click on the Save for Later button")]
+        public void ClickSaveForLater()
+        {
+            // click on the Save For Later button
+            NgWebElement saveForLaterButton = ngDriver.FindElement(By.CssSelector("button.btn-secondary span"));
+            saveForLaterButton.Click();
+        }
+
+
+        public void SharedCalendarDate()
+        {
+            // click on the previous button
+            NgWebElement openCalendarPrevious = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-previous-button"));
+            openCalendarPrevious.Click();
+
+            // click on the first day
+            NgWebElement openCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
+            openCalendarYear.Click();
+        }
+
+
+        [And(@"I click on the Continue to Application button")]
+        public void ContinueToApplicationButton()
+        {
+            // click on the Continue to Application button
+            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+            continueButton.Click();
+        }
+
+
+        [And(@"I click on the Review Organization Information button")]
+        public void ClickReviewOrganizationInformation()
+        {
+            // click on the review organization information button
+            NgWebElement orgInfoButton = ngDriver.FindElement(By.CssSelector("button.btn-primary[routerlink='/org-structure']"));
+            orgInfoButton.Click();
+        }
+
+
+        [And(@"I click on the Start Application button for (.*)")]
+        public void ClickStartApplication(string applicationType)
+        {
+            /* 
+            Page Title: Welcome to Liquor and Cannabis Licensing
+            */
+
+            if (applicationType == "Catering")
+            {
+                // click on the Catering Start Application button
+                NgWebElement startAppButton = ngDriver.FindElement(By.Id("startCatering"));
+                startAppButton.Click();
+            }
+
+            if (applicationType == "a Cannabis Retail Store")
+            {
+                // click on the Cannabis Start Application button
+                NgWebElement startAppButton = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
+                startAppButton.Click();
+            }
+
+            if (applicationType == "a Rural Agency Store")
+            {
+                // click on the Rural Store Start Application button
+                NgWebElement startAppButton = ngDriver.FindElement(By.CssSelector("button[id='startRAS']"));
+                startAppButton.Click();
+            }
+
+            if (applicationType == "a Manufacturer Licence")
+            {
+                // click on the Manufacturer Licence Start Application button
+                NgWebElement startAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
+                startAppButton.Click();
+            }
+        }
+
 
         [And(@"I complete the Rural Agency Store application")]
         public void CompleteRuralAgencyStoreApplication()
@@ -1339,130 +1659,6 @@ namespace bdd_tests
         }
 
 
-        [And(@"I pay the licensing fee for (.*)")]
-        public void PayLicenceFee(string feeType)
-        {
-            /* 
-            Page Title: Licences
-            */
-
-            string firstYearLicenceFee = "Pay First Year Licensing Fee";
-
-            // click on the pay first year licence fee link
-            NgWebElement uiFirstYearLicenceFee = ngDriver.FindElement(By.LinkText(firstYearLicenceFee));
-            uiFirstYearLicenceFee.Click();
-
-            // pay the licence fee
-            MakePayment();
-
-            System.Threading.Thread.Sleep(4000);
-
-            /* 
-            Page Title: Payment Approved
-            */
-
-            if (feeType == "Cannabis")
-            {
-                // confirm correct payment amount for CRS
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
-            }
-
-            if (feeType == "Catering")
-            {
-                // confirm correct payment amount for Catering
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$450.00')]")).Displayed);
-            }
-
-            ClickLicencesTab();
-        }
-
-
-        [And(@"I click on the link for (.*)")]
-        public void ClickOnLink(string specificLink)
-        {
-            if (specificLink == "event authorization")
-            {
-                string requestEventAuthorization = "Request Event Authorization";
-
-                // click on the request event authorization link
-                NgWebElement uiRequestEventAuthorization = ngDriver.FindElement(By.LinkText(requestEventAuthorization));
-                uiRequestEventAuthorization.Click();
-            }
-
-            if (specificLink == "relocation application")
-            {
-                string requestRelocation = "Request Relocation";
-
-                // click on the relocation application link
-                NgWebElement uiRelocationApplication = ngDriver.FindElement(By.LinkText(requestRelocation));
-                uiRelocationApplication.Click();
-            }
-
-            if (specificLink == "structural change")
-            {
-                string structuralChange = "Request a Structural Change";
-
-                // click on the request structural change link
-                NgWebElement uiStructuralChange = ngDriver.FindElement(By.LinkText(structuralChange));
-                uiStructuralChange.Click();
-            }
-
-            if (specificLink == "third party operator")
-            {
-                string addOrChangeThirdParty = "Add or Change a Third Party Operator";
-
-                // click on the Add or Change a Third Party Operator Link
-                NgWebElement uiAddOrChangeThirdPartyOp = ngDriver.FindElement(By.LinkText(addOrChangeThirdParty));
-                uiAddOrChangeThirdPartyOp.Click();
-            }
-
-            if (specificLink == "transfer of ownership")
-            {
-                string transferOwnership = "Transfer Licence";
-
-                // click on the Transfer Ownership link
-                NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
-                uiTransferOwnership.Click();
-            }
-
-            if (specificLink == "licence download")
-            {
-                string downloadLink = "Download Licence";
-
-                // click on the Licences link
-                NgWebElement uiDownloadLicence = ngDriver.FindElement(By.LinkText(downloadLink));
-                uiDownloadLicence.Click();
-            }
-
-            if (specificLink == "licensee representative")
-            {
-                string addLicensee = "Add Licensee Representative";
-
-                // click on the Licensee Representative link
-                NgWebElement uiAddLicensee = ngDriver.FindElement(By.LinkText(addLicensee));
-                uiAddLicensee.Click();
-            }
-
-            if (specificLink == "facility structural change")
-            {
-                string facilityStructuralChange = "Facility Structural Change Application";
-
-                // click on the Facility Structural Change Application link
-                NgWebElement uiFacilityStructuralChange = ngDriver.FindElement(By.LinkText(facilityStructuralChange));
-                uiFacilityStructuralChange.Click();
-            }
-
-            if (specificLink == "location change")
-            {
-                string locationChange = "Location Change Application";
-
-                // click on the Location Change Application link
-                NgWebElement uiLocationChange = ngDriver.FindElement(By.LinkText(locationChange));
-                uiLocationChange.Click();
-            }
-        }
-
-
         [And(@"I request an event authorization")]
         public void RequestEventAuthorization()
         {
@@ -1601,43 +1797,6 @@ namespace bdd_tests
 
             // confirm that the Event Status = In Review and the Client or Host Name is present - TODO
             // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
-        }
-
-
-        [And(@"I click on the Start Application button for (.*)")]
-        public void ClickStartApplication(string applicationType)
-        {
-            /* 
-            Page Title: Welcome to Liquor and Cannabis Licensing
-            */
-
-            if (applicationType == "Catering")
-            {
-                // click on the Catering Start Application button
-                NgWebElement startAppButton = ngDriver.FindElement(By.Id("startCatering"));
-                startAppButton.Click();
-            }
-
-            if (applicationType == "a Cannabis Retail Store")
-            {
-                // click on the Cannabis Start Application button
-                NgWebElement startAppButton = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
-                startAppButton.Click();
-            }
-
-            if (applicationType == "a Rural Agency Store")
-            {
-                // click on the Rural Store Start Application button
-                NgWebElement startAppButton = ngDriver.FindElement(By.CssSelector("button[id='startRAS']"));
-                startAppButton.Click();
-            }
-
-            if (applicationType == "a Manufacturer Licence")
-            {
-                // click on the Manufacturer Licence Start Application button
-                NgWebElement startAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
-                startAppButton.Click();
-            }
         }
 
 
@@ -1783,32 +1942,6 @@ namespace bdd_tests
         }
 
 
-        [And(@"I click on the branding change link for (.*)")]
-        public void ClickOnBrandingChangeLink(string changeType)
-        {
-            /* 
-            Page Title: Licences
-            */
-
-            string nameBrandingLinkCannabis = "Request Store Name or Branding Change";
-            string nameBrandingLinkCateringMfg = "Establishment Name Change Application";
-
-            if ((changeType == "Catering") || (changeType == "Manufacturing"))
-            {
-                // click on the Establishment Name Change Application link
-                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCateringMfg));
-                uiRequestChange.Click();
-            }
-
-            if (changeType == "Cannabis")
-            {
-                // click on the Request Store Name or Branding Change link
-                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCannabis));
-                uiRequestChange.Click();
-            }
-        }
-
-
         [And(@"I request a valid store name or branding change for (.*)")]
         public void RequestNameBrandingChange(string changeType)
         {
@@ -1883,27 +2016,6 @@ namespace bdd_tests
 
             // return to the Licences tab
             ClickLicencesTab();
-        }
-
-
-        public void Dispose()
-        {
-            ngDriver.Quit();
-
-            // Suppress finalization.
-            GC.SuppressFinalize(this);
-        }
-
-
-        public void SharedCalendarDate()
-        {
-            // click on the previous button
-            NgWebElement openCalendarPrevious = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-previous-button"));
-            openCalendarPrevious.Click();
-
-            // click on the first day
-            NgWebElement openCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
-            openCalendarYear.Click();
         }
 
 
@@ -2309,20 +2421,6 @@ namespace bdd_tests
         }
 
 
-        [And(@"the account is deleted")]
-        public void DeleteMyAccount()
-        {
-            this.CarlaDeleteCurrentAccount();
-        }
-
-
-        [Then(@"I see the login page")]
-        public void SeeLogin()
-        {
-            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
-        }
-
-
         [And(@"I review the security screening requirements for a multilevel business")]
         public void ReviewSecurityScreeningRequirementsMulti()
         {
@@ -2398,20 +2496,6 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Partner')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Partner2')]")).Displayed);
             }
-        }
-
-
-        [And(@"I enter the payment information")]
-        public void EnterPaymentInfo()
-        {
-            MakePayment();
-        }
-
-
-        [And(@"I am logged in to the dashboard as a (.*)")]
-        public void ViewDashboard(string businessType)
-        {
-            CarlaLogin(businessType);
         }
 
 
@@ -3141,40 +3225,6 @@ namespace bdd_tests
         }
 
 
-        [And(@"I click on the Confirm Organization Information is Complete button")]
-        public void ConfirmCompleteOrgInfo()
-        {
-            // click on the confirm organization information is complete button
-            NgWebElement completeButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
-            completeButton.Click();
-        }
-
-
-        [And(@"I click on the Pay for Application button")]
-        public void ClickOnPayButton()
-        {
-            NgWebElement payButton = ngDriver.FindElement(By.CssSelector(".btn-primary+ .btn-primary"));
-            payButton.Click();
-        }
-
-
-        [And(@"I click on the Submit Organization Information button")]
-        public void ClickSubmitOrgStructureButton()
-        {
-            // click on the Submit Org Info button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
-            submitOrgInfoButton.Click();
-        }
-
-
-        [And(@"I click on the Submit button")]
-        public void ClickOnSubmitButton()
-        {
-            NgWebElement submitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
-            submitButton.Click();
-        }
-
-
         [And(@"I show the store as open on the map")]
         public void ShowStoreOpenOnMap()
         {
@@ -3736,18 +3786,7 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Detailed Organization Information')]")).Displayed);
         }
 
-
-        [And(@"I click on the Dashboard link")]
-        public void ClickOnDashboard()
-        {
-            string dashboard = "Dashboard";
-
-            // click on the Dashboard link
-            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
-            uiDashboard.Click();
-        }
-
-        
+      
         [And(@"I add a business shareholder with the same individual as a director and a shareholder")]
         public void BusinessShareholderSameDirShare()
         {
@@ -4071,39 +4110,10 @@ namespace bdd_tests
         }
 
    
-        [And(@"I click on the Save for Later button")]
-        public void ClickSaveForLater()
-        {
-            // click on the Save For Later button
-            NgWebElement saveForLaterButton = ngDriver.FindElement(By.CssSelector("button.btn-secondary span"));
-            saveForLaterButton.Click();
-        }
-
-
         [And(@"the saved org structure is present")]
         public void SaveOrgStructurePresent()
         { 
             // TODO
-        }
-
-
-        [And(@"I click on the Review Organization Information button")]
-        public void ClickReviewOrganizationInformation()
-        {
-            // click on the review organization information button
-            NgWebElement orgInfoButton = ngDriver.FindElement(By.CssSelector("button.btn-primary[routerlink='/org-structure']"));
-            orgInfoButton.Click();
-        }
-
-
-        [And(@"I click on the Licences tab")]
-        public void ClickLicencesTab()
-        {
-            string licencesLink = "Licences";
-
-            // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
         }
 
 
@@ -4633,15 +4643,6 @@ namespace bdd_tests
             // check that IndividualShareholder1 only displays once
             var indyShareholder1Elements = ngDriver.FindElements(By.XPath("//body[contains(.,'individualshareholder1bizshareholder@privatecorp.com')]")).Count;
             Assert.True(indyShareholder1Elements == 1);
-        }
-
-
-        [And(@"I click on the Continue to Application button")]
-        public void ContinueToApplicationButton()
-        {
-            // click on the Continue to Application button
-            NgWebElement continueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            continueButton.Click();
         }
 
 
