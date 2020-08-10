@@ -194,14 +194,15 @@ namespace bdd_tests
         }
 
 
-        public void CarlaLoginNoCheck()
+        public void CarlaLoginNoCheck(string businessType)
         {
             // load the dashboard page
             string test_start = configuration["test_start"];
-
+            ngDriver.IgnoreSynchronization = true;
             ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
+            ngDriver.IgnoreSynchronization = false;
 
-            ngDriver.WaitForAngular();
+            DoLogin(businessType);
         }
 
 
