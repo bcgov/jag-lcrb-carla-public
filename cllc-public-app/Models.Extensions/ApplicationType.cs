@@ -28,7 +28,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     FormReference = applicationType.AdoxioFormreference,
                     Id = applicationType.AdoxioApplicationtypeid,
 
-                    LetterOfIntent = applicationType.AdoxioLetterofintent,
+                    LetterOfIntent = (FormControlState?)applicationType.AdoxioLetterofintent,
                     Name = applicationType.AdoxioName,
                     NewEstablishmentAddress = (FormControlState?)applicationType.AdoxioNewestablishmentaddress,
                     ProofofZoning = (FormControlState?)applicationType.AdoxioProofofzoning,
