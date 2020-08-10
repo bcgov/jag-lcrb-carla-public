@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top118 { get; set; }
+        int? Top120 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip118 { get; set; }
+        int? Skip120 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count118 { get; set; }
+        bool? Count120 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter118 { get; set; }
+        string Filter120 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search118 { get; set; }
+        string Search120 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -156,6 +156,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtypes.
         /// </summary>
         IApplicationtypes Applicationtypes { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtypeadoxioproratedlicencefeescheduleapplicationtype.
+        /// </summary>
+        IApplicationtypeadoxioproratedlicencefeescheduleapplicationtype Applicationtypeadoxioproratedlicencefeescheduleapplicationtype { get; }
 
         /// <summary>
         /// Gets the IApplicationtypeadoxiotermsconditionslimitationspresetapplicationtype.
@@ -393,6 +398,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicencefeeproduct Licencefeeproduct { get; }
 
         /// <summary>
+        /// Gets the ILicencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory.
+        /// </summary>
+        ILicencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory Licencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory { get; }
+
+        /// <summary>
         /// Gets the ILicencetypes.
         /// </summary>
         ILicencetypes Licencetypes { get; }
@@ -451,6 +461,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IProratedlicencefeeschedules.
         /// </summary>
         IProratedlicencefeeschedules Proratedlicencefeeschedules { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtype.
+        /// </summary>
+        IApplicationtype Applicationtype { get; }
+
+        /// <summary>
+        /// Gets the ILicencesubcategory.
+        /// </summary>
+        ILicencesubcategory Licencesubcategory { get; }
 
         /// <summary>
         /// Gets the IProratedlicencefeescheduleasyncoperations.
@@ -526,11 +546,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITermsconditionslimitationspresets.
         /// </summary>
         ITermsconditionslimitationspresets Termsconditionslimitationspresets { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtype.
-        /// </summary>
-        IApplicationtype Applicationtype { get; }
 
         /// <summary>
         /// Gets the ITerritories.

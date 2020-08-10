@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top118 { get; set; }
+        public int? Top120 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip118 { get; set; }
+        public int? Skip120 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count118 { get; set; }
+        public bool? Count120 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter118 { get; set; }
+        public string Filter120 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search118 { get; set; }
+        public string Search120 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -159,6 +159,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtypes.
         /// </summary>
         public virtual IApplicationtypes Applicationtypes { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtypeadoxioproratedlicencefeescheduleapplicationtype.
+        /// </summary>
+        public virtual IApplicationtypeadoxioproratedlicencefeescheduleapplicationtype Applicationtypeadoxioproratedlicencefeescheduleapplicationtype { get; private set; }
 
         /// <summary>
         /// Gets the IApplicationtypeadoxiotermsconditionslimitationspresetapplicationtype.
@@ -396,6 +401,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicencefeeproduct Licencefeeproduct { get; private set; }
 
         /// <summary>
+        /// Gets the ILicencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory.
+        /// </summary>
+        public virtual ILicencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory Licencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory { get; private set; }
+
+        /// <summary>
         /// Gets the ILicencetypes.
         /// </summary>
         public virtual ILicencetypes Licencetypes { get; private set; }
@@ -454,6 +464,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IProratedlicencefeeschedules.
         /// </summary>
         public virtual IProratedlicencefeeschedules Proratedlicencefeeschedules { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtype.
+        /// </summary>
+        public virtual IApplicationtype Applicationtype { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencesubcategory.
+        /// </summary>
+        public virtual ILicencesubcategory Licencesubcategory { get; private set; }
 
         /// <summary>
         /// Gets the IProratedlicencefeescheduleasyncoperations.
@@ -529,11 +549,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITermsconditionslimitationspresets.
         /// </summary>
         public virtual ITermsconditionslimitationspresets Termsconditionslimitationspresets { get; private set; }
-
-        /// <summary>
-        /// Gets the IApplicationtype.
-        /// </summary>
-        public virtual IApplicationtype Applicationtype { get; private set; }
 
         /// <summary>
         /// Gets the ITerritories.
@@ -940,6 +955,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationtypecontents = new Applicationtypecontents(this);
             Applicationtypefeeschedules = new Applicationtypefeeschedules(this);
             Applicationtypes = new Applicationtypes(this);
+            Applicationtypeadoxioproratedlicencefeescheduleapplicationtype = new Applicationtypeadoxioproratedlicencefeescheduleapplicationtype(this);
             Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype = new Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype(this);
             Fylicencefeeproduct = new Fylicencefeeproduct(this);
             Areas = new Areas(this);
@@ -987,6 +1003,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Licenceses = new Licenceses(this);
             Licencesubcategories = new Licencesubcategories(this);
             Licencefeeproduct = new Licencefeeproduct(this);
+            Licencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory = new Licencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory(this);
             Licencetypes = new Licencetypes(this);
             Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
             Licenseechangelogs = new Licenseechangelogs(this);
@@ -999,6 +1016,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Postalcodes = new Postalcodes(this);
             Previousaddresses = new Previousaddresses(this);
             Proratedlicencefeeschedules = new Proratedlicencefeeschedules(this);
+            Applicationtype = new Applicationtype(this);
+            Licencesubcategory = new Licencesubcategory(this);
             Proratedlicencefeescheduleasyncoperations = new Proratedlicencefeescheduleasyncoperations(this);
             Proratedlicencefeeschedulebulkdeletefailures = new Proratedlicencefeeschedulebulkdeletefailures(this);
             Proratedlicencefeeschedulemailboxtrackingfolders = new Proratedlicencefeeschedulemailboxtrackingfolders(this);
@@ -1014,7 +1033,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Spdexportses = new Spdexportses(this);
             Taxandaccountings = new Taxandaccountings(this);
             Termsconditionslimitationspresets = new Termsconditionslimitationspresets(this);
-            Applicationtype = new Applicationtype(this);
             Territories = new Territories(this);
             Tiedhouseassociations = new Tiedhouseassociations(this);
             Tiedhouseconnections = new Tiedhouseconnections(this);
