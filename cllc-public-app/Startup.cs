@@ -499,20 +499,8 @@ namespace Gov.Lclb.Cllb.Public
                     template: "{controller}/{action=Index}/{id?}");
             });
 
-
-            app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
-                spa.Options.SourcePath = "ClientApp";
-
-                // Only run the angular CLI Server in Development mode (not staging or test.)
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
-            });
+            
+            
 
             // enable Splunk logger using Serilog
             if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]) &&
@@ -559,6 +547,27 @@ namespace Gov.Lclb.Cllb.Public
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
                     .CreateLogger();
+            }
+
+            if (env.IsDevelopment())
+            {
+                app.UseSpa(spa =>
+                {
+                    // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                    // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                    spa.Options.SourcePath = "ClientApp";
+
+                    // Only run the angular CLI Server in Development mode (not staging or test.)
+                    if (env.IsDevelopment())
+                    {
+                        spa.UseAngularCliServer(npmScript: "start");
+                    }
+                });
+            }
+            else
+            {
+                Log.Logger.Information("Not enabling single page application hosting from Dotnet - using externally hosted static content.");
             }
 
         }

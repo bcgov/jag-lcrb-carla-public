@@ -12,4 +12,5 @@ export class ApplicationSummary {
   isPaid: boolean;
   portallabel: string;
   lgHasApproved: boolean;
+  endorsements: string[];
 }

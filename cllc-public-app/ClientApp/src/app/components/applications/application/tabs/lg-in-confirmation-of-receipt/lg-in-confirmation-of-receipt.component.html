@@ -1,5 +1,5 @@
 <h3 class="blue-header">
-    LOCAL GOVERNMENT/INDIGENOUS NATION CONFIRMATIN OF RECEIPT OF APPLICATION
+    LOCAL GOVERNMENT/INDIGENOUS NATION CONFIRMATION OF RECEIPT OF APPLICATION
 </h3>
 <div class="padded-section content-bottom" [formGroup]="form">
     <app-field label="LG/IN">
@@ -15,7 +15,8 @@
     </app-field>
     <app-field label="Phone" [valid]="!isTouchedAndInvalid('lGContactPhone')"
         errorMessage="Please enter the phone number">
-        <input class="form-control" type="text" formControlName="lGContactPhone" mask="(000) 000-0000" placeholder="(000) 000-0000">
+        <input class="form-control" type="text" formControlName="lGContactPhone" mask="(000) 000-0000"
+            placeholder="(000) 000-0000">
     </app-field>
     <app-field label="Email" [valid]="!isTouchedAndInvalid('lGContactEmail')" errorMessage="Please enter the email">
         <input class="form-control" type="text" formControlName="lGContactEmail">
@@ -35,6 +36,7 @@
         </ul>
 
         <app-file-uploader *ngIf="application?.id" documentType="LGIN Resolution"
+            [disableUploads]="!isOpenedByLGForApproval" [enableFileDeletion]="isOpenedByLGForApproval"
             (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [maxNumberOfFiles]="200"
             fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="application?.id"
             [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #LGINResolutionDocuments>
@@ -44,18 +46,25 @@
 </div>
 
 <section *ngIf="!disableForm" class="position-relative d-flex justify-content-between p-3">
-    <div [ngBusy]="busy"></div>
+    <span>
+        <button class="btn btn-secondary" [disabled]="optingOutOfComment" (click)="OptOutOfComment()">
+            <span>Opt Out of Comment</span>
+        </button>
+        <mat-progress-bar *ngIf="optingOutOfComment" mode="indeterminate"></mat-progress-bar>
+    </span>
 
-    <button class="btn btn-secondary" (click)="OptOutOfComment()">
-        <span>Opt Out of Comment</span>
-    </button>
+    <span>
+        <button class="btn btn-secondary" [disabled]="rejectingApp" (click)="RejectApplication()">
+            <span>Reject Application</span>
+        </button>
+        <mat-progress-bar *ngIf="rejectingApp" mode="indeterminate"></mat-progress-bar>
+    </span>
 
-    <button class="btn btn-secondary" (click)="RejectApplication()">
-        <span>Reject Application</span>
-    </button>
-
-    <button class="btn btn-primary" (click)="ApproveApplication()">
-        <span>Accept Application</span>
-    </button>
+    <span>
+        <button class="btn btn-primary" [disabled]="approvingApplication" (click)="ApproveApplication()">
+            <span>Accept Application</span>
+        </button>
+        <mat-progress-bar *ngIf="approvingApplication" mode="indeterminate"></mat-progress-bar>
+    </span>
 
 </section>

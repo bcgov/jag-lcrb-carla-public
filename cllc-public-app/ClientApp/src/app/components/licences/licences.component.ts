@@ -46,7 +46,8 @@ export class LicencesComponent extends FormBase implements OnInit {
     "Catering", "Wine Store", "Cannabis Retail Store", "Marketing",
     "Operated - Wine Store", "Operated - Catering",
     "Transfer in Progress - Wine Store", "Transfer in Progress - Catering",
-    "Manufacturer"
+    "Manufacturer", "Transfer in Progress - Manufacturer", "Operated - Manufacturer",
+    "Licensee Retail Store", "Transfer in Progress - Licensee Retail Store","Operated - Licensee Retail Store"
   ];
 
   constructor(
@@ -71,19 +72,15 @@ export class LicencesComponent extends FormBase implements OnInit {
     this.busy =
       forkJoin(this.applicationDataService.getAllCurrentApplications(),
         this.licenceDataService.getAllCurrentLicenses(),
-        this.licenceDataService.getAllOperatedLicenses(),
-        this.licenceDataService.getAllProposedLicenses()
+        this.licenceDataService.getAllOperatedLicenses()
       ).pipe(takeWhile(() => this.componentActive))
-        .subscribe(([applications, licenses, operatedLicences, proposedLicences]) => {
+        .subscribe(([applications, licenses, operatedLicences]) => {
           this.applications = applications;
           operatedLicences.forEach(licence => {
             licence.isOperated = true;
             licence.licenceTypeName = 'Operated - ' + licence.licenceTypeName;
           });
-          proposedLicences.forEach(licence => {
-            licence.isDeemed = true;
-          });
-          const combinedLicences = [...licenses, ...operatedLicences, ...proposedLicences];
+          const combinedLicences = [...licenses, ...operatedLicences];
           combinedLicences.forEach((licence: ApplicationLicenseSummary) => {
             licence.headerRowSpan = 1;
             this.addOrUpdateLicence(licence);
@@ -107,7 +104,7 @@ export class LicencesComponent extends FormBase implements OnInit {
       };
       licence.actionApplications.push(action);
     });
-    if (licence.licenceTypeName.indexOf('Catering') >= 0 || licence.licenceTypeName.indexOf('Wine Store') >= 0) {
+    if (this.licenceTypeHasEvents(licence.licenceTypeName)) {
       forkJoin([
         this.licenceEventsService.getLicenceEventsList(licence.licenseId, 10)
       ])
@@ -128,6 +125,10 @@ export class LicencesComponent extends FormBase implements OnInit {
     } else {
       this.licenceMappings[licence.licenceTypeName].push(licence);
     }
+  }
+
+  licenceTypeHasEvents(licenceType: string) {
+    return licenceType.indexOf('Catering') >= 0 || licenceType.indexOf('Wine Store') >= 0 || licenceType.indexOf('Manufacturer') >= 0;
   }
 
   getNumberOfLicences() {

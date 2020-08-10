@@ -20,7 +20,7 @@ export const reducers: ActionReducerMap<AppState> = {
     currentLegalEntityState: currentLegalEnityReducer.reducer,
     currentAccountState: currentAccountReducer.reducer,
     indigenousNationState:  applicationsStateReducer.reducer,
-    currentApplicaitonState: currentApplicationStateReducer.reducer,
+    currentApplicationState: currentApplicationStateReducer.reducer,
     currentUserState: currentUserStateReducer.reducer,
     onGoingLicenseeChangesApplicationIdState: ongoingLicenseeApplicationIdStateReducer.reducer,
     fileUploadsState: fileUploadsReducer.reducer

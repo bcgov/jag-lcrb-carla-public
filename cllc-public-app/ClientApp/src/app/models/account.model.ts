@@ -77,8 +77,8 @@ export class Account {
       case 'LimitedLiabilityPartnership':
         name = 'Partnership';
         break;
-      case 'SoleProprietor':
-        name = 'Sole Proprietor';
+      case 'SoleProprietorship':
+        name = 'Sole Proprietorship';
         break;
       case 'IndigenousNation':
         name = 'Indigenous Nation';

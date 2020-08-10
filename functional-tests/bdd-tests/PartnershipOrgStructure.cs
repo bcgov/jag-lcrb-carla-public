@@ -28,11 +28,9 @@ Scenario: Change individual partner name and pay fee
     And I complete the Cannabis Retail Store application for a partnership
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Cannabis
-    And I return to the dashboard
     And I click on the Dashboard link
     And I click on the Review Organization Information button
     And I modify only the individual partner name
@@ -118,7 +116,6 @@ Scenario: Confirm partnership business shareholder org structure update after pa
     And I complete the Cannabis Retail Store application for a partnership
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I click on the Review Organization Information button
     And the partnership org structure is correct after payment
@@ -161,6 +158,16 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard(string businessType)
         {
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLGIN();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
+            IgnoreSynchronization();
+
             CarlaLogin(businessType);
         }
 

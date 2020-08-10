@@ -193,6 +193,7 @@ import { EligibilityFormComponent } from './components/eligibility-form/eligibil
 import { EligibilityFormDataService } from '@services/eligibility-data.service';
 import { LiquorRenewalComponent } from './components/applications/liquor-renewal/liquor-renewal.component';
 import { TemporaryOffsiteComponent } from '@components/temporary-offsite/temporary-offsite.component';
+import { MarketEventComponent } from '@components/market-event/market-event.component';
 import { ApplicationThirdPartyOperatorComponent } from '@components/applications/application-third-party-operator/application-third-party-operator.component';
 import { CancelThirdPartyOperatorComponent } from '@components/applications/cancel-third-party-operator/cancel-third-party-operator.component';
 import { FeatureFlagService } from './services/feature-flag.service';
@@ -210,6 +211,7 @@ import { TermsAndConditionsDataService } from '@services/terms-and-condtions-dat
 import { LgZoningConfirmationComponent } from './components/applications/application/tabs/lg-zoning-confirmation/lg-zoning-confirmation.component';
 import { ProofOfZoningComponent } from './components/applications/application/tabs/proof-of-zoning/proof-of-zoning.component';
 import { CapacityTableRowComponent } from '@components/capacity-table/capacity-table-row.component';
+import { ProductionStagesComponent } from './components/applications/application/tabs/business-plan/production-stages/production-stages.component';
 
 
 @NgModule({
@@ -249,6 +251,7 @@ import { CapacityTableRowComponent } from '@components/capacity-table/capacity-t
     EventFormComponent,
     EventSecurityFormComponent,
     TemporaryOffsiteComponent,
+    MarketEventComponent,
     NewsletterConfirmationComponent,
     NewsletterSignupComponent,
     NotFoundComponent,
@@ -333,7 +336,8 @@ import { CapacityTableRowComponent } from '@components/capacity-table/capacity-t
     BusinessPlanComponent,
     LgInfoPanelComponent,
     AdditionalPidsComponent,
-    LgZoningConfirmationComponent
+    LgZoningConfirmationComponent,
+    ProductionStagesComponent
   ],
   imports: [
     ChartsModule,

@@ -325,7 +325,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
-        const route: any[] = [`/application/${data.id}`];
+        const route: any[] = [`/multi-step-application/${data.id}`];
 
         this.router.navigate(route);
       },
@@ -399,6 +399,37 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           }
         );
     }
+  }
+
+  startEndorsementApplication(application: Application, endorsementType: string) {
+    const newLicenceApplicationData: Application = <Application>{
+      parentApplicationId: application.id,
+      licenseType: application.licenseType,
+      applicantType: this.account.businessType,
+      applicationType: <ApplicationType>{ name: endorsementType },
+      establishmentAddress: application.establishmentAddress,
+      establishmentAddressCity: application.establishmentAddressCity,
+      establishmentAddressPostalCode: application.establishmentAddressPostalCode,
+      establishmentAddressStreet: application.establishmentAddressStreet,
+      establishmentParcelId: application.establishmentParcelId,
+      establishmentName: application.establishmentName,
+      establishmentPhone: application.establishmentPhone,
+      establishmentEmail: application.establishmentEmail,
+      policeJurisdictionId: application.policeJurisdictionId,
+      indigenousNationId: application.indigenousNationId,
+      account: this.account,
+    };
+    
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        const route: any[] = [`/application/${data.id}`];
+
+        this.router.navigate(route);
+      },
+      () => {
+        this.snackBar.open(`Error starting the Application`, 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+      }
+    );
   }
 
   isAboutToExpire(expiryDate: string) {

@@ -361,9 +361,28 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Other = 845280005
     }
 
+    public enum LicenceSubCategory
+    {
+        Winery = 845280000,
+        Brewery = 845280001,
+        Distillery = 845280002,
+        [EnumMember(Value = "Co-Packer")]
+        CoPacker = 845280003
+    }
+
+    public enum YesNoNotApplicable
+    {
+        Yes = 845280000,
+        No = 845280001,
+        [EnumMember(Value = "N/A")]
+        NotApplicable = 845280002
+    }
+
     public class Application
     {
         public string Id { get; set; } //adoxio_applicationid
+
+        public string ParentApplicationId { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public AdoxioApplicationStatusCodes ApplicationStatus { get; set; } //statuscode
@@ -560,14 +579,41 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public List<CapacityArea> ServiceAreas { get; set; }
         public List<CapacityArea> OutsideAreas { get; set; }
+        public List<CapacityArea> CapacityArea { get; set; }
 
         // Manufactuer
 
         public bool? IsPackaging { get; set; }
 
-        public int? MfgBrewPubOnSite { get; set; }
-        public int? MfgPipedInProduct { get; set; }
-        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public YesNoNotApplicable? MfgBrewPubOnSite { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public YesNoNotApplicable? MfgPipedInProduct { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public YesNoNotApplicable? MfgUsesNeutralGrainSpirits { get; set; }
+
+        public int? ZoningStatus { get; set; }
+        public bool? IsOwnerBusiness { get; set; }      
+        public bool? HasValidInterest { get; set; }
+        public bool? WillHaveValidInterest { get; set; }
+        //public YesNoNotApplicable? InGroceryStore { get; set; }
+
+
+        // these are just optional int - not picklist references.
+        public int? MfgAcresOfFruit { get; set; }
+        public int? MfgAcresOfGrapes { get; set; }
+        public int? MfgAcresOfHoney { get; set; }
+        public bool? MfgMeetsProductionMinimum { get; set; }
+        public bool? MfgStepBlending { get; set; }
+        public bool? MfgStepCrushing { get; set; }
+        public bool? MfgStepFiltering { get; set; }
+        public bool? MfgStepSecFermOrCarb { get; set; }
+
+
+
+
 
         // Manufactuer Structural Change - Patio
         public string PatioCompDescription { get; set; }
@@ -580,6 +626,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? LocatedAboveDescription { get; set; }
         public int? PatioServiceBar { get; set; }
 
+        public string LicenceSubCategory { get; set; }
 
+        public string PidList { get; set; }
+
+        public bool IsAlr { get; set; }
     }
 }

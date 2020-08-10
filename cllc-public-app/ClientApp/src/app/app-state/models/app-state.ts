@@ -8,7 +8,7 @@ export interface AppState {
     legalEntitiesState: LegalEntitiesState;
     indigenousNationState: IndigenousNationState;
     currentAccountState: CurrentAccountState;
-    currentApplicaitonState: CurrentApplicationState;
+    currentApplicationState: CurrentApplicationState;
     currentLegalEntityState: CurrentLegalEntityState;
     currentUserState: CurrentUserState;
     onGoingLicenseeChangesApplicationIdState: OnGoingLicenseeChangesApplicationIdState;

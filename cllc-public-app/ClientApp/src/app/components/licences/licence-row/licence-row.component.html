@@ -26,9 +26,6 @@
 
                 <td style="padding: 10px;">
                     <div>
-                    <div *ngIf="item?.isDeemed">
-                        <strong>DEEMED</strong>
-                    </div>
                     <strong *ngIf="item?.licenceTypeName !== 'Marketing'" style="color: #1a5a96;">
                         {{item.establishmentName}}</strong>
                     <div *ngIf="item?.licenseSubCategory">
@@ -51,7 +48,7 @@
                     </div>
                     <div *ngIf="!item.isOperated && (item.status === 'Expired' || (isActive(item) && isAboutToExpire(item.expiryDate)))">
                         <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
-                            <span><i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>{{isRecentlyExpired(item) ? 'Renew' : 'Reinstate'}} Licence</span>
+                            <span><i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>{{isRecentlyExpired(item) ? 'Reinstate' : 'Renew'}} Licence</span>
                         </a>
                     </div>
                     <div class="flags" class="missing">
@@ -119,7 +116,7 @@
                     </div>
                     <!-- Third Party Operator Actions-->
                     <!-- Indicate application has been initiated-->
-                    <div *ngIf="isActive(item) && !item.isDeemed && item.tpoRequested" class="licence-expired">
+                    <div *ngIf="isActive(item) && item.tpoRequested" class="licence-expired">
                         <strong>Third Party Operator Application Initiated</strong> <br />
                         <section
                             *ngIf="isActive(item) && item.tpoRequested"
@@ -140,6 +137,11 @@
                         <div *ngIf="item.licenceTypeName.indexOf('Catering') >= 0 && isActive(item) && (actionsVisible(item) || item.isOperated)">
                             <a [routerLink]="[ '/licence/' + item.licenseId + '/event']">
                                 <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Event Authorization
+                            </a>
+                        </div>
+                        <div *ngIf="isActive(item) && actionsVisible(item) && hasEndorsementByName(item, 'On-Site Store Endorsement')">
+                            <a [routerLink]="[ '/licence/' + item.licenseId + '/market-event']">
+                                <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Market Event Authorization
                             </a>
                         </div>
                         <div *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore && isActive(item) && actionsVisible(item)">
@@ -163,7 +165,7 @@
                 <td style="background-color: #E1E8F2; padding: 10px;">
                     <!-- 3rd Party Operators cannot submit  changes -->
                     <div *ngIf="!item.isOperated">
-                        <div *ngIf="isActive(item) && !item.transferRequested">
+                        <div *ngIf="isActive(item) && actionsVisible(item) && !item.transferRequested">
                             <p>
                                 <a [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
                                 <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Transfer Licence</span>
@@ -171,7 +173,7 @@
                             </p>
                         </div>
                         <!-- if there is a third party application in progress, we don't show the ability to submit a new application-->
-                        <div *ngIf="isActive(item) && !item.tpoRequested && item.licenceTypeCategory === 'Liquor'">
+                        <div *ngIf="isActive(item) && actionsVisible(item) && !item.tpoRequested && item.licenceTypeCategory === 'Liquor'">
                             <p>
                                 <a [routerLink]="[ '/third-party-operator/' + item.licenseId]">
                                 <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Add or Change a Third Party Operator</span>
@@ -208,7 +210,7 @@
                     </section>
                 </td>
                 </tr>
-                <tr *ngIf="licenceType === 'Catering' && item?.events !== undefined && item?.events.length > 0">
+                <tr *ngIf="item?.events !== undefined && item?.events.length > 0">
                     <td colspan="5">
                         <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
                             <mat-expansion-panel-header>
@@ -222,16 +224,16 @@
                             <table style="width: 100%; text-align: center;">
                                 <thead>
                                     <th>Event Status</th>
-                                    <th>Client or Host Name</th>
+                                    <th>Name</th>
                                     <th>Date Submitted</th>
                                     <th></th>
                                     <th>Authorization</th>
                                 </thead>
                                 <tr *ngFor="let event of item?.events">
                                     <td><a
-                                        [routerLink]="[ '/licence/' + item.licenseId + '/event/' + event.id]">{{getOptionFromValue(eventStatus, event.status).label}}</a>
+                                        [routerLink]="[ '/licence/' + item.licenseId + getEventPath(event) + event.id]">{{getOptionFromValue(eventStatus, event.status).label}}</a>
                                     </td>
-                                    <td>{{event.clientHostname === null ? null : event.clientHostname}}</td>
+                                    <td>{{getEventName(event)}}</td>
                                     <td>{{event.modifiedOn | date:'mediumDate'}}</td>
                                     <td><a [routerLink]="[ '/licence/' + item.licenseId + '/event/' + event.id + '/security']"
                                         *ngIf="event.securityPlanRequested">Security Plan</a></td>
@@ -239,13 +241,15 @@
                                         [href]="'api/licenceevents/' + event.id + '/authorization.pdf'" download>
                                         <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Authorization</span>
                                         </a></td>
-                                    <ng-template #empty_td><td></td></ng-template>
+                                    <ng-template #empty_td>
+                                        <td></td>
+                                    </ng-template>
                                 </tr>
                             </table>
                         </mat-expansion-panel>
                     </td>
                 </tr>
-                <tr *ngIf="licenceType === 'Wine Store' && item?.events !== undefined && item?.events.length > 0">
+                <!-- <tr *ngIf="item?.events !== undefined && item?.events.length > 0">
                     <td colspan="5">
                         <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
                         <mat-expansion-panel-header>
@@ -258,11 +262,11 @@
                         </mat-expansion-panel-header>
                         <table style="width: 100%; text-align: center;">
                             <thead>
-                            <th>Event Status</th>
-                            <th>Event Name</th>
-                            <th>Date Submitted</th>
-                            <th></th>
-                            <th>Authorization</th>
+                                <th>Event Status</th>
+                                <th>Event Name</th>
+                                <th>Date Submitted</th>
+                                <th></th>
+                                <th>Authorization</th>
                             </thead>
                             <tr *ngFor="let event of item?.events">
                             <td><a
@@ -282,7 +286,7 @@
                         </table>
                         </mat-expansion-panel>
                     </td>
-                </tr>
+                </tr> -->
                 <tr *ngIf="item?.termsAndConditions !== null && item?.termsAndConditions.length > 0">
                     <td colspan="5">
                         <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">

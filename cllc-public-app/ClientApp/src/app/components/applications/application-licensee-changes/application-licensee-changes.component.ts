@@ -73,7 +73,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     featureFlagService.featureOn('SecurityScreening')
       .subscribe(featureOn => this.securityScreeningEnabled = featureOn);
 
-    
+
   }
 
 
@@ -97,12 +97,12 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       .pipe(filter(account => !!account))
       .subscribe((account) => {
         this.account = account;
-        
+
       });
   }
 
   loadData() {
-    this.busy = this.applicationDataService.getOngoingLicenseeData()    
+    this.busy = this.applicationDataService.getOngoingLicenseeData()
       .subscribe(data => {
 
         this.application = data.application;
@@ -111,7 +111,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.form.patchValue(this.application);
 
         const currentChangeLogs: LicenseeChangeLog[] = LicenseeChangeLog.FixLicenseeChangeLogArray(data.changeLogs || []);
-        
+
         this.licenses = data.licenses;
         this.licencesOnFile = (this.licenses && this.licenses.length > 0);
 
@@ -119,16 +119,16 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.numberOfNonTerminatedApplications = data.nonTerminatedApplications;
         this.thereIsExistingOrgStructure = this.currentLegalEntities && this.currentLegalEntities.children && this.currentLegalEntities.children.length > 0;
 
-        this.treeRoot = new LicenseeChangeLog(data.treeRoot); 
+        this.treeRoot = new LicenseeChangeLog(data.treeRoot);
         // apply some formatting to the treeRoot.
-        
+
         this.treeRoot.fileUploads = {}; // This is only used on the client side
 
         this.treeRoot.isRoot = true;
         this.treeRoot.fixChildren();
 
         this.treeRoot.applySavedChangeLogs(currentChangeLogs);
-        
+
         this.loadedValue = this.cleanSaveData(this.treeRoot);
 
 
@@ -149,7 +149,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     // if Organization Information on File  AND no changes
     else if (this.thereIsExistingOrgStructure && this.treeRoot && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
       label = 'Confirm Organization Information Is Complete';
-    }    
+    }
     return label.toUpperCase();
   }
 
@@ -185,7 +185,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     node = Object.assign(new LicenseeChangeLog(), node);
 
     errors = errors.concat(node.getFileUploadValidationErrors());
-    
+
     node.children = node.children || [];
     node.children.forEach(child => {
       errors = errors.concat(this.validateFileUploads(child));
@@ -214,18 +214,18 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   cancel() {
 
     // delete the application.
-    this.busy = this.applicationDataService.cancelApplication(this.applicationId) 
-        .pipe(takeWhile(() => this.componentActive))
-        .toPromise()
-        .then(app => {                  
-          this.snackBar.open('Licensee Changes has been cancelled', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-            this.router.navigateByUrl('/dashboard');
-            return of(app);
-        })
-        .catch(() => {
-          this.snackBar.open('Error cancelling Licensee Changes', 'Error', { duration: 2500, panelClass: ['red-snackbar'] });
-        });
-        
+    this.busy = this.applicationDataService.cancelApplication(this.applicationId)
+      .pipe(takeWhile(() => this.componentActive))
+      .toPromise()
+      .then(app => {
+        this.snackBar.open('Licensee Changes has been cancelled', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+        this.router.navigateByUrl('/dashboard');
+        return of(app);
+      })
+      .catch(() => {
+        this.snackBar.open('Error cancelling Licensee Changes', 'Error', { duration: 2500, panelClass: ['red-snackbar'] });
+      });
+
   }
 
   /**
@@ -243,7 +243,6 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
           this.busyPromise = this.prepareSaveRequest()
 
             .pipe(mergeMap(results => {
-              console.log(results);
               const saveOverrideValue = { invoicetrigger: 1 };
 
               return this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue })
@@ -254,11 +253,15 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
                   if (app && app.adoxioInvoiceId) {
                     this.submitPayment();
                   } else if (app) { // go to the application page
-                    this.loadedValue = this.cleanSaveData(this.treeRoot);  // Update loadedValue to prevent double saving
-                    this.saveComplete.emit(true);
-                    if (this.redirectToDashboardOnSave) {
-                      this.router.navigateByUrl('/dashboard');
-                    }
+                    // mark application as complete
+                    this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, isApplicationComplete: 'Yes' })
+                      .subscribe(res => {
+                        this.loadedValue = this.cleanSaveData(this.treeRoot);  // Update loadedValue to prevent double saving
+                        this.saveComplete.emit(true);
+                        if (this.redirectToDashboardOnSave) {
+                          this.router.navigateByUrl('/dashboard');
+                        }
+                      });
                   }
                   return of(app);
                 });
@@ -302,7 +305,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
   saveForLater(navigateAfterSaving: boolean = true): Observable<boolean> {
-    let subject  = new Subject<boolean>();
+    let subject = new Subject<boolean>();
     this.orgStructure.saveAll()
       .subscribe(result => {
         this.validationErrors = [];
@@ -316,14 +319,14 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
             .then(() => {
               this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
               this.loadedValue = this.cleanSaveData(this.treeRoot);  // Update loadedValue to prevent double saving
-              if(navigateAfterSaving){
+              if (navigateAfterSaving) {
                 this.router.navigateByUrl('/dashboard');
               }
               subject.next(true);
             });
         }
       });
-      return subject;
+    return subject;
   }
 
   addCancelledChange(change: LicenseeChangeLog) {
@@ -335,7 +338,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
   canDeactivate(): Observable<boolean> {
     const data = this.cleanSaveData(this.treeRoot);
-    if(JSON.stringify(data) === JSON.stringify(this.loadedValue)){ //no change made. Skip save
+    if (JSON.stringify(data) === JSON.stringify(this.loadedValue)) { //no change made. Skip save
       return of(true);
     }
     return this.saveForLater(false);

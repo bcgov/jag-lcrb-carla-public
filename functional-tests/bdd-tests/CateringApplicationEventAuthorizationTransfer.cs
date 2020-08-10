@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-  Feature: CateringApplicationEventAuthorizationTransfer
+   Feature: CateringApplicationEventAuthorizationTransfer
     As a logged in business user
     I want to pay the first year catering licence fee
     And submit an event authorization and transfer of ownership request for different business types
@@ -29,9 +29,7 @@ using Xunit;
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
-    #And I click on the Licences tab for Catering
     And I pay the licensing fee for Catering
     And I request an event authorization
     And I request a transfer of ownership
@@ -49,7 +47,6 @@ using Xunit;
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
@@ -68,7 +65,6 @@ using Xunit;
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
@@ -87,7 +83,6 @@ using Xunit;
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
@@ -106,7 +101,6 @@ using Xunit;
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
@@ -125,11 +119,50 @@ using Xunit;
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
     And I request a transfer of ownership
+    And the account is deleted
+    Then I see the login page
+
+ @e2e @catering @privatecorporation @validation
+ Scenario: Validation for Event Authorization 
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for Catering
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
+    And I complete the Catering application
+    And I click on the Submit button
+    And I click on the Pay for Application button
+    And I enter the payment information
+    And the application is approved
+    And I pay the licensing fee for Catering
+    And I click on the Licences tab
+    And I click on the link for event authorization
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for an event authorization
+    And the account is deleted
+    Then I see the login page
+
+ @e2e @catering @privatecorporation @validation
+ Scenario: Validation for Catering Transfer of Ownership
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for Catering
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
+    And I complete the Catering application
+    And I click on the Submit button
+    And I click on the Pay for Application button
+    And I enter the payment information
+    And the application is approved
+    And I pay the licensing fee for Catering
+    And I click on the Licences tab
+    And I click on the link for transfer of ownership
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for a Catering transfer of ownership
     And the account is deleted
     Then I see the login page
 */
@@ -142,7 +175,19 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void Given_I_view_the_dashboard_IN(string businessType)
         {
-            CheckFeatureFlagsLiquor();
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLiquorOne();
+
+            CheckFeatureFlagsLGIN();
+
+            CheckFeatureFlagsIN();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
+            IgnoreSynchronization();
 
             CarlaLogin(businessType);
         }

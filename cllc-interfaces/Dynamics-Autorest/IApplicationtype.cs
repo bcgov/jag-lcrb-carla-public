@@ -19,10 +19,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     public partial interface IApplicationtype
     {
         /// <summary>
-        /// Get adoxio_ApplicationType from adoxio_endorsements
+        /// Get adoxio_ApplicationType from
+        /// adoxio_termsconditionslimitationspresets
         /// </summary>
-        /// <param name='adoxioEndorsementid'>
-        /// key: adoxio_endorsementid of adoxio_endorsement
+        /// <param name='adoxioTermsconditionslimitationspresetid'>
+        /// key: adoxio_termsconditionslimitationspresetid of
+        /// adoxio_termsconditionslimitationspreset
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -45,6 +47,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationtype>> GetWithHttpMessagesAsync(string adoxioEndorsementid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationtype>> GetWithHttpMessagesAsync(string adoxioTermsconditionslimitationspresetid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

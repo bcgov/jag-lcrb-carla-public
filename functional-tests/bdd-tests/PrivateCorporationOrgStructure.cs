@@ -28,7 +28,6 @@ Scenario: Change private corporation director name and pay fee
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Cannabis
@@ -114,7 +113,6 @@ Scenario: Confirm private corporation business shareholder org structure update 
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I click on the Review Organization Information button
     And the org structure is correct after payment
@@ -167,6 +165,31 @@ Scenario: CRS application with mixed business shareholder types
     And the mixed business shareholder org structure is correct
     And the account is deleted
     Then I see the login page
+
+@e2e @cannabis @privatecorporation @validation @privatecorporgstructure1
+Scenario: Complex Save for Later mixed business shareholders
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I enter business shareholders of different business types to be saved for later
+    And I click on the Save for Later button
+    And I click on the Complete Organization Information button
+    And the saved for later mixed business shareholder org structure is correct
+    And the account is deleted
+    Then I see the login page
+
+@e2e @cannabis @privatecorporation @validation @privatecorporgstructure1
+Scenario: Confirm org structure records not duplicated
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I confirm that no duplicates are shown in the org structure
+    And the account is deleted
+    Then I see the login page
 */
 
 namespace bdd_tests
@@ -177,6 +200,16 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard(string businessType)
         {
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLGIN();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
+            IgnoreSynchronization();
+
             CarlaLogin(businessType);
         }
 

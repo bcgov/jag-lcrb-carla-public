@@ -32,7 +32,6 @@ Scenario: Multiple Nested Shareholders
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 */
@@ -44,7 +43,17 @@ namespace bdd_tests
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard(string businessType)
-        {          
+        {
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLGIN();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
+            IgnoreSynchronization();
+
             CarlaLogin(businessType);
         }
 

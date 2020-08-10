@@ -100,7 +100,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                         corporateDetailsFilesExists;
 
                     break;
-                case AdoxioApplicantTypeCodes.SoleProprietor:
+                case AdoxioApplicantTypeCodes.SoleProprietorship:
                     isComplete = !string.IsNullOrEmpty(businessNumber) &&
                         !string.IsNullOrEmpty(contactEmail) &&
                         !string.IsNullOrEmpty(contactPhone) &&
