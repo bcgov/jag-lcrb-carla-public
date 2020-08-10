@@ -177,6 +177,16 @@ namespace bdd_tests
         {
             CheckFeatureFlagsLiquorOne();
 
+            CheckFeatureFlagsLiquorTwo();
+
+            CheckFeatureFlagsLGIN();
+
+            CheckFeatureFlagsIN();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
             CarlaLogin(businessType);
         }
     }
