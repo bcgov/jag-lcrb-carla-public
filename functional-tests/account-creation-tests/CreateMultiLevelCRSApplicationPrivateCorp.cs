@@ -49,7 +49,7 @@ namespace bdd_tests
 
             IgnoreSynchronization();
 
-            CarlaLoginNoCheck();
+            CarlaLoginNoCheck(businessType);
         }
 
         [And(@"I add in multiple nested business shareholders")]
