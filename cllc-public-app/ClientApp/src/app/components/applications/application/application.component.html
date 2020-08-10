@@ -1777,12 +1777,14 @@
                         Security Screening Required    -- > Proceed to Security Screening
                 
                 -->
-        <!-- LG Approval Required -->
+        <!-- LG Approval Required --> 
         <button
           *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
-                                    && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')"
+                                    && application?.lGApprovalDecision !== 'Approved' 
+                                    && application?.lGApprovalDecision !== 'OptOut' 
+                                    && application?.applicationStatus === 'Intake'"
           class=" btn btn-primary" [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval();">
-          <i class="fa fa-university"></i>SUBMIT FOR LG/IN REVIEW OR COMMENT
+          <i class="fa fa-university mr-1"></i>SUBMIT FOR LG/IN REVIEW OR COMMENT
         </button>
         
         <!-- NO LG Approval Required OR LG Already Approved -->
@@ -1796,7 +1798,7 @@
           </button>
           <button *ngIf="application?.applicationType?.requiresSecurityScreening" class="btn btn-primary"
             (click)="proceedToSecurityScreening()">
-            <i class="fa fa-id-card"></i>PROCEED TO SECURITY SCREENING
+            <i class="fa fa-id-card mr-1"></i>PROCEED TO SECURITY SCREENING
           </button>
         </ng-container>
 
