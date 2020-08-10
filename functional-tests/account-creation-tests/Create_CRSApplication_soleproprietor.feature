@@ -3,7 +3,7 @@
     I want to submit a CRS Application for a sole proprietorship
     To be used as test data
 
-Scenario: Start Application
+Scenario: Create CRS Application Sole Proprietorship
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
     And I am logged in to the dashboard as a sole proprietorship
