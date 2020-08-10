@@ -355,6 +355,7 @@ namespace odata2openapi
                             firstTagLower.Equals("entitydefinitions") ||
                             firstTagLower.Equals("globaloptionsetdefinitions") ||
                             firstTagLower.Equals("systemforms") ||
+                            firstTagLower.Equals("systemusers") ||
                             firstTagLower.Equals("workflows") ||
                             firstTagLower.Equals("eventschedules") ||
                             firstTagLower.Equals("inspector")
