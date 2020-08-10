@@ -45,8 +45,6 @@ namespace bdd_tests
 
             CheckFeatureFlagsLiquorOne();
 
-            CheckFeatureFlagsLiquorTwo();
-
             CheckFeatureFlagsLicenseeChanges();
 
             IgnoreSynchronization();
