@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top101 { get; set; }
+        public int? Top102 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip101 { get; set; }
+        public int? Skip102 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count101 { get; set; }
+        public bool? Count102 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter101 { get; set; }
+        public string Filter102 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search101 { get; set; }
+        public string Search102 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -386,6 +386,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicencesubcategories Licencesubcategories { get; private set; }
 
         /// <summary>
+        /// Gets the ILicencefeeproduct.
+        /// </summary>
+        public virtual ILicencefeeproduct Licencefeeproduct { get; private set; }
+
+        /// <summary>
         /// Gets the ILicencetypes.
         /// </summary>
         public virtual ILicencetypes Licencetypes { get; private set; }
@@ -549,6 +554,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILists.
         /// </summary>
         public virtual ILists Lists { get; private set; }
+
+        /// <summary>
+        /// Gets the IProductadoxiolicencesubcategorylicencefeeproduct.
+        /// </summary>
+        public virtual IProductadoxiolicencesubcategorylicencefeeproduct Productadoxiolicencesubcategorylicencefeeproduct { get; private set; }
 
         /// <summary>
         /// Gets the ISavedqueries.
@@ -880,6 +890,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Licenceldbordertotalhistories = new Licenceldbordertotalhistories(this);
             Licenceses = new Licenceses(this);
             Licencesubcategories = new Licencesubcategories(this);
+            Licencefeeproduct = new Licencefeeproduct(this);
             Licencetypes = new Licencetypes(this);
             Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
             Licenseechangelogs = new Licenseechangelogs(this);
@@ -913,6 +924,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Invoices = new Invoices(this);
             Leads = new Leads(this);
             Lists = new Lists(this);
+            Productadoxiolicencesubcategorylicencefeeproduct = new Productadoxiolicencesubcategorylicencefeeproduct(this);
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
