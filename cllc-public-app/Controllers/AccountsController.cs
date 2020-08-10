@@ -150,7 +150,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     filter = $"contains(name,'{name}')";
                 }
                 var expand = new List<string> { "primarycontactid" };
-                var accounts = _dynamicsClient.Accounts.Get(filter: filter, expand: expand).Value;
+                var accounts = _dynamicsClient.Accounts.Get(filter: filter, expand: expand, top: 10).Value;
                 foreach (var account in accounts)
                 {
                     var transferAccount = new TransferAccount()
@@ -736,7 +736,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         [HttpPut("{id}")]
         [Authorize(Policy = "Business-User")]
-        public async Task<IActionResult> UpdateDynamicsAccount([FromBody] ViewModels.Account item, string id)
+        public async Task<IActionResult> UpdateAccount([FromBody] ViewModels.Account item, string id)
         {
             _logger.LogDebug(LoggingEvents.HttpPut, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.HttpPut, "Account parameter: " + JsonConvert.SerializeObject(item));
@@ -753,7 +753,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (!DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
             {
-                _logger.LogWarning(LoggingEvents.NotFound, "Current user has NO access to the account.");
+                _logger.LogError(LoggingEvents.BadRequest, "Current user has NO access to the account.");
                 return NotFound();
             }
 

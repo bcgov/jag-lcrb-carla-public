@@ -24,6 +24,7 @@ export class ProofOfZoningComponent extends FormBase implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
+
     });
     //this.form.patchValue(this.application);
   }
@@ -31,7 +32,7 @@ export class ProofOfZoningComponent extends FormBase implements OnInit {
 
   getValidationErrors(): string[]{
     let res = [];
-    if ((this.uploadedZoningDocuments || 0) < 1) {
+    if (this.application && this.application.licenseType !== 'Manufacturer' && (this.uploadedZoningDocuments || 0) < 1) {
       res.push('At least one zoning document is required.');
     }
     return res;

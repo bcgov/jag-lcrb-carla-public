@@ -1,5 +1,5 @@
 
-import { filter, takeWhile, catchError, mergeMap, delay, tap, switchMap } from 'rxjs/operators';
+import { filter, takeWhile, catchError, mergeMap, delay, tap, switchMap, distinctUntilChanged } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -101,6 +101,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   autocompletePoliceDurisdictions: any[];
   LGApprovalsFeatureIsOn: boolean;
   disableSubmitForLGINApproval: boolean;
+  INRequestInProgress: boolean;
+  policeJurisdictionReqInProgress: boolean;
 
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
@@ -165,27 +167,26 @@ export class ApplicationComponent extends FormBase implements OnInit {
       establishmentAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
       establishmentEmail: ['', Validators.email],
       establishmentPhone: [''],
-      serviceHoursSundayOpen: ['', Validators.required],
-      serviceHoursMondayOpen: ['', Validators.required],
-      serviceHoursTuesdayOpen: ['', Validators.required],
-      serviceHoursWednesdayOpen: ['', Validators.required],
-      serviceHoursThursdayOpen: ['', Validators.required],
-      serviceHoursFridayOpen: ['', Validators.required],
-      serviceHoursSaturdayOpen: ['', Validators.required],
-      serviceHoursSundayClose: ['', Validators.required],
-      serviceHoursMondayClose: ['', Validators.required],
-      serviceHoursTuesdayClose: ['', Validators.required],
-      serviceHoursWednesdayClose: ['', Validators.required],
-      serviceHoursThursdayClose: ['', Validators.required],
-      serviceHoursFridayClose: ['', Validators.required],
-      serviceHoursSaturdayClose: ['', Validators.required],
+      serviceHoursSundayOpen: [''],
+      serviceHoursMondayOpen: [''],
+      serviceHoursTuesdayOpen: [''],
+      serviceHoursWednesdayOpen: [''],
+      serviceHoursThursdayOpen: [''],
+      serviceHoursFridayOpen: [''],
+      serviceHoursSaturdayOpen: [''],
+      serviceHoursSundayClose: [''],
+      serviceHoursMondayClose: [''],
+      serviceHoursTuesdayClose: [''],
+      serviceHoursWednesdayClose: [''],
+      serviceHoursThursdayClose: [''],
+      serviceHoursFridayClose: [''],
+      serviceHoursSaturdayClose: [''],
       liquorDeclarationCheck: [''],
       applyAsIndigenousNation: [false],
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
       federalProducerNames: ['', Validators.required],
       applicantType: ['', Validators.required],
       description1: ['', [Validators.required]],
-      description2: ['', []],
       proposedChange: ['', [Validators.required]],
       connectedGrocery: ['', []],
       sitePhotos: ['', []],
@@ -195,14 +196,64 @@ export class ApplicationComponent extends FormBase implements OnInit {
       indigenousNation: [''],
       zoningPermitsMFG: ['', []],
       zoningPermitsRetailSales: ['', []],
-      isALR: ['', []],
+      isAlr: ['', []],
       isOwner: ['', []],
+      isOwnerBusiness: ['', []],
       hasValidInterest: ['', []],
       willhaveValidInterest: ['', []],
       meetsALRRequirements: ['', []],
       IsReadyProductNotVisibleOutside: ['', []],
       serviceAreas: ['', []],
-      outsideAreas: ['', []]
+      outsideAreas: ['', []],
+      capacityArea: this.fb.group({
+        areaCategory: [AreaCategory.Capacity],
+        areaNumber: [1],
+        areaLocation: [''],
+        capacity: ['', Validators.required]
+      })
+    });
+
+    this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursSundayClose');
+    });
+    this.form.get('serviceHoursSundayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursSundayOpen');
+    });
+    this.form.get('serviceHoursMondayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursMondayClose');
+    });
+    this.form.get('serviceHoursMondayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursMondayOpen');
+    });
+    this.form.get('serviceHoursTuesdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursTuesdayClose');
+    });
+    this.form.get('serviceHoursTuesdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursTuesdayOpen');
+    });
+    this.form.get('serviceHoursWednesdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursWednesdayClose');
+    });
+    this.form.get('serviceHoursWednesdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursWednesdayOpen');
+    });
+    this.form.get('serviceHoursThursdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursThursdayClose');
+    });
+    this.form.get('serviceHoursThursdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursThursdayOpen');
+    });
+    this.form.get('serviceHoursFridayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursFridayClose');
+    });
+    this.form.get('serviceHoursFridayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursFridayOpen');
+    });
+    this.form.get('serviceHoursSaturdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursSaturdayClose');
+    });
+    this.form.get('serviceHoursSaturdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateHoursValidator(val, 'serviceHoursSaturdayOpen');
     });
 
 
@@ -210,24 +261,36 @@ export class ApplicationComponent extends FormBase implements OnInit {
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
           this.autocompleteLocalGovernmemts = [];
+          this.INRequestInProgress = true;
         }),
         switchMap(value => this.localGovDataService.getAutocomplete(value))
       )
       .subscribe(data => {
         this.autocompleteLocalGovernmemts = data;
+        this.INRequestInProgress = false;
+
         this.cd.detectChanges();
+        if (data && data.length  === 0){
+          this.snackBar.open('No match found', '', { duration: 2500, panelClass: ['green-snackbar'] });
+        }
       });
 
     this.form.get('policeJurisdiction').valueChanges
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
           this.autocompleteLocalGovernmemts = [];
+          this.policeJurisdictionReqInProgress = true;
         }),
         switchMap(value => this.policeJurisdictionDataService.getAutocomplete(value))
       )
       .subscribe(data => {
         this.autocompletePoliceDurisdictions = data;
+        this.policeJurisdictionReqInProgress = false;
+
         this.cd.detectChanges();
+        if (data && data.length  === 0){
+          this.snackBar.open('No match found', '', { duration: 2500, panelClass: ['green-snackbar'] });
+        }
       });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((applyAsIN: boolean) => {
@@ -249,84 +312,98 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
-      .pipe(filter(account => !!account))
       .subscribe((account) => {
         this.account = account;
+        this.busy = this.applicationDataService.getApplicationById(this.applicationId)
+          .pipe(takeWhile(() => this.componentActive))
+          .subscribe((data: Application) => {
+            if (data.establishmentParcelId) {
+              data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
+            }
+            // fix for no applicant type.
+            if (!data.applicantType) {
+              data.applicantType = this.account.businessType;
+            }
+
+            if (data.applicantType === 'IndigenousNation') {
+              (<any>data).applyAsIndigenousNation = true;
+            }
+
+            this.application = data;
+
+            this.hideFormControlByType();
+
+            this.addDynamicContent();
+
+            if (data.applicationType.formReference) {
+              console.log("Getting form layout");
+              // get the application form
+              this.dynamicsForm = data.applicationType.dynamicsForm;
+              this.dynamicsForm.tabs.forEach(function (tab) {
+                tab.sections.forEach(function (section) {
+                  if (section.fields) {
+                    section.fields.forEach(function (field) {
+                      // add the field to the form.
+                      if (field.required) {
+                        this.form.addControl(field.datafieldname, new FormControl('', Validators.required));
+                      }
+                      else {
+                        this.form.addControl(field.datafieldname, new FormControl(''));
+                      }
+                    }, this);
+                  }
+
+                }, this);
+              }, this);
+            }
+
+            const noNulls = Object.keys(data)
+              .filter(e => data[e] !== null)
+              .reduce((o, e) => {
+                o[e] = data[e];
+                return o;
+              }, {});
+
+            this.form.patchValue(noNulls);
+
+            if (data.indigenousNation) {
+              this.form.get('indigenousNationId').patchValue(data.indigenousNation.id);
+            }
+
+            if (data.policeJurisdiction) {
+              this.form.get('indigenousNationId').patchValue(data.policeJurisdiction.id);
+            }
+            if (this.application.capacityArea.length > 0) {
+              this.form.get('capacityArea').patchValue({...this.application.capacityArea[0]});
+            } else {
+              this.form.get('capacityArea.areaLocation').patchValue(data.applicationType.name);
+            }
+
+            // make fields readonly if payment was made or the LG is viewing the application
+            // disable the form if the local government has reviewed the application
+            if (data.isPaid || this.isOpenedByLGForApproval || this.application.lGDecisionSubmissionDate) {
+              this.form.disable();
+            }
+            this.savedFormData = this.form.value;
+          },
+            () => {
+              console.log('Error occured');
+            }
+          );
       });
 
     this.dynamicsDataService.getRecord('indigenousnations', '')
       .subscribe(data => this.indigenousNations = data);
 
+  }
 
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: Application) => {
-        if (data.establishmentParcelId) {
-          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
-        }
-        if (data.applicantType === 'IndigenousNation') {
-          (<any>data).applyAsIndigenousNation = true;
-        }
-
-        this.application = data;
-
-        this.hideFormControlByType();
-
-        this.addDynamicContent();
-
-        if (data.applicationType.formReference) {
-          console.log("Getting form layout");
-          // get the application form
-          this.dynamicsForm = data.applicationType.dynamicsForm;
-          this.dynamicsForm.tabs.forEach(function (tab) {
-            tab.sections.forEach(function (section) {
-              if (section.fields) {
-                section.fields.forEach(function (field) {
-                  // add the field to the form.
-                  if (field.required) {
-                    this.form.addControl(field.datafieldname, new FormControl('', Validators.required));
-                  }
-                  else {
-                    this.form.addControl(field.datafieldname, new FormControl(''));
-                  }
-                }, this);
-              }
-
-            }, this);
-          }, this);
-        }
-
-        const noNulls = Object.keys(data)
-          .filter(e => data[e] !== null)
-          .reduce((o, e) => {
-            o[e] = data[e];
-            return o;
-          }, {});
-
-        this.form.patchValue(noNulls);
-
-        if (data.indigenousNation) {
-          this.form.get('indigenousNationId').patchValue(data.indigenousNation.id);
-        }
-
-        if (data.policeJurisdiction) {
-          this.form.get('indigenousNationId').patchValue(data.policeJurisdiction.id);
-        }
-
-        // make fields readonly if payment was made or the LG is viewing the application
-        // disable the form if the local government has reviewed the application
-        if (data.isPaid || this.isOpenedByLGForApproval || this.application.lGDecisionSubmissionDate) {
-          this.form.disable();
-        }
-        this.savedFormData = this.form.value;
-      },
-        () => {
-          console.log('Error occured');
-        }
-      );
-
-
-
+  updateHoursValidator(val, controlName) {
+    if (val === '') {
+      this.form.get(controlName).setValidators([]);
+    } else {
+      this.form.get(controlName).setValidators(Validators.required);
+    }
+    this.form.get(controlName).updateValueAndValidity();
   }
 
   autocompleteDisplay(item: any) {
@@ -432,6 +509,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
     if (!this.application.applicationType.outsideAreas) {
       this.form.get('outsideAreas').disable();
+    }
+    if (!this.application.applicationType.capacityArea) {
+      this.form.get('capacityArea').disable();
     }
   }
 
@@ -572,7 +652,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
     let description2 = '';
-    
 
     if (this.isRAS()) {
       description2 += this.form.get('isOwner').value ? 'Is owner = Yes' : 'Is owner = No';
@@ -581,10 +660,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
       description2 += '\n';
       description2 += this.form.get('willhaveValidInterest').value ? 'Will have valid interest = Yes' : 'Will have valid interest = No';
     }
+    else {
+      description2 += this.application.description2;
+    }
 
     // flatten the service areas if need be
     const serviceAreas = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
     const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
+    const capacityArea = [this.form.get('capacityArea').value];
 
     // do not save if the form is in file upload mode
     if (this.mode === UPLOAD_FILES_MODE) {
@@ -597,7 +680,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
         ...this.form.value,
         description2: description2,
         serviceAreas: serviceAreas,
-        outsideAreas: outsideAreas
+        outsideAreas: outsideAreas,
+        capacityArea: capacityArea
       }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
@@ -738,8 +822,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     return this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
-      .pipe(mergeMap(jsonUrl => {
-        console.log("")
+      .pipe(mergeMap(jsonUrl => {       
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
       }, (err: any) => {
@@ -757,7 +840,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
 
     // handle supporting documents for sole proprietor who submit marketing applications 
-    let marketing_soleprop = this.application.applicationType.name === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietor";
+    let marketing_soleprop = this.application.applicationType.name === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietorship";
 
     if (this.proofOfZoning) {
       let zoningErrors = this.proofOfZoning.getValidationErrors();
@@ -834,13 +917,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.validationMessages.push('Only the owner of the business may submit this information');
       }
 
-      if (!this.form.get('hasValidInterest').value) {
-        this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
-      }
+      //if (!this.form.get('hasValidInterest').value) {
+      //  this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
+     // }
 
-      if (!this.form.get('willhaveValidInterest').value) {
-        this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
-      }
+      //if (!this.form.get('willhaveValidInterest').value) {
+      //  this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
+     // }
 
     }
 
@@ -948,7 +1031,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   showFormControl(state: string): boolean {
-    return [FormControlState.Show.toString(), FormControlState.Reaonly.toString()]
+    return [FormControlState.Show.toString(), FormControlState.ReadOnly.toString()]
       .indexOf(state) !== -1;
   }
 
@@ -968,7 +1051,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         return AreaCategory.OutsideArea;
       case 'Service':
         return AreaCategory.Service;
-      case 'Capactiy':
+      case 'Capacity':
         return AreaCategory.Capacity;
     }
   }

@@ -28,6 +28,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_LicenceType@odata.bind")]
         public string AdoxioLicenceTypeODataBind { get; set; }
 
+        [JsonProperty(PropertyName = "adoxio_LicenceSubCategoryId@odata.bind")]
+        public string AdoxioLicenceSubCategoryODataBind { get; set; }
+
         [JsonProperty(PropertyName = "adoxio_ApplicationTypeId@odata.bind")]
         public string AdoxioApplicationTypeIdODataBind { get; set; }
 
@@ -39,6 +42,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         [JsonProperty(PropertyName = "adoxio_AssignedLicence@odata.bind")]
         public string AdoxioAssignedLicenceODataBind { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_ParentApplicationID@odata.bind")]
+        public string AdoxioParentApplicationIDODataBind { get; set; }
 
         [JsonProperty(PropertyName = "adoxio_application_SharePointDocumentLocations@odata.bind")]
         public string[] AdoxioApplicationSharePointDocumentLocationsODataBind { get; set; }
@@ -52,29 +58,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_PoliceJurisdictionId@odata.bind")]
         public string AdoxioPoliceJurisdictionIdODataBind { get; set; }
 
-        [JsonProperty(PropertyName = "adoxio_patiocompdescription")]
-        public string AdoxioPatiocompdescription { get; set; }
 
-        [JsonProperty(PropertyName = "adoxio_patiolocationdescription")]
-        public string AdoxioPatiolocationdescription { get; set; }
+        //[JsonProperty(PropertyName = "adoxio_patioliquorcarrieddescription")]
+        //public string AdoxioPatioisliquorcarrieddescription { get; set; }
 
-        [JsonProperty(PropertyName = "adoxio_patioaccessdescription")]
-        public string AdoxioPatioaccessdescription { get; set; }
 
-        [JsonProperty(PropertyName = "adoxio_patioisliquorcarried")]
-        public bool? AdoxioPatioisliquorcarried { get; set; }
-
-        [JsonProperty(PropertyName = "adoxio_patioliquorcarrieddescription")]
-        public string AdoxioPatioisliquorcarrieddescription { get; set; }
-
-        [JsonProperty(PropertyName = "adoxio_patioaccesscontroldescription")]
-        public string AdoxioPatioaccesscontroldescription { get; set; }
-
-        [JsonProperty(PropertyName = "adoxio_locatedabovedescription")]
-        public int? AdoxioLocatedabovedescription { get; set; }
-
-        [JsonProperty(PropertyName = "adoxio_patioservicebar")]
-        public int? AdoxioPatioservicebar { get; set; }
 
 
 

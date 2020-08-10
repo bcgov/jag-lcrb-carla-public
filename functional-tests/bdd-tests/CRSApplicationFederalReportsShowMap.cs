@@ -29,9 +29,7 @@ Scenario: Indigenous Nation Federal Reports and Show Map
     And I complete the Cannabis Retail Store application for an indigenous nation
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
@@ -49,9 +47,7 @@ Scenario: Partnership Federal Reports and Show Map
     And I complete the Cannabis Retail Store application for a partnership
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
@@ -69,9 +65,7 @@ Scenario: Private Corporation Federal Reports and Show Map
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
@@ -89,9 +83,7 @@ Scenario: Public Corporation Federal Reports and Show Map
     And I complete the Cannabis Retail Store application for a public corporation
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
@@ -109,9 +101,7 @@ Scenario: Society Federal Reports and Show Map
     And I complete the Cannabis Retail Store application for a society
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
@@ -129,9 +119,7 @@ Scenario: Sole Proprietorship Federal Reports and Show Map
     And I complete the Cannabis Retail Store application for a sole proprietorship
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
-    And I click on the Licences tab for a Cannabis Retail Store
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
@@ -147,6 +135,20 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard_IN(string businessType)
         {
+            NavigateToFeatures();
+
+            CheckFeatureFlagsMaps();
+
+            CheckFeatureFlagsLGIN();
+
+            CheckFeatureFlagsIN();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
+            IgnoreSynchronization();
+
             CarlaLogin(businessType);
         }
     }

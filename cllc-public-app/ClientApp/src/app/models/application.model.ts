@@ -17,6 +17,7 @@ export class Application {
   invoicetrigger: number;
 
   id: string;
+  parentApplicationId: string;
   adoxioInvoiceId: string;
   account: Account;
   additionalPropertyInformation: string;
@@ -39,6 +40,7 @@ export class Application {
   establishmentAddressStreet: string;
   establishmentParcelId: string;
   establishmentPhone: string;
+  establishmentEmail: string;
   isLocationChangeInProgress: boolean;
   isPaid: boolean;
   isSubmitted: boolean;
@@ -96,6 +98,7 @@ export class Application {
   renewalThirdParty: string;
 
   description1: string;
+  description2: string;
 
   isReadyValidInterest: boolean;
   isReadyWorkers: boolean;
@@ -126,5 +129,48 @@ export class Application {
 
   applicant: Account;
 
-  serviceArea: ServiceArea[]
+  serviceAreas: ServiceArea[];
+  outsideAreas: ServiceArea[];
+  capacityArea: ServiceArea[];
+
+
+  // Manufactuer
+  licenceSubCategory: string;
+  isPackaging: boolean;
+
+  mfgBrewPubOnSite: string;
+  mfgPipedInProduct: string;
+
+  // these are just optional int - not picklist references.
+  mfgAcresOfFruit: number;
+  mfgAcresOfGrapes: number;
+  mfgAcresOfHoney: number;
+
+  mfgMeetsProductionMinimum: boolean;
+  mfgStepBlending: boolean;
+  mfgStepCrushing: boolean;
+  mfgStepFiltering: boolean;
+  mfgStepSecFermOrCarb: boolean;
+  mfgUsesNeutralGrainSpirits: string;
+  isAlr: boolean;
+  pidList: string; 
+
+  zoningStatus: boolean;
+  isOwnerBusiness: boolean;
+  hasValidInterest: boolean;
+  willHaveValidInterest: boolean;
+  //inGroceryStore: string;
+
+  // Manufactuer Structural Change - Patio
+  patioCompDescription: string;
+  patioLocationDescription: string; 
+  patioAccessDescription: string;
+  patioIsLiquorCarried: boolean;
+  patioLiquorCarriedDescription: string;
+  patioAccessControlDescription: string;
+        
+  locatedAboveDescription: number;
+  patioServiceBar: number;
+
+
 }

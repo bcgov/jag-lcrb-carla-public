@@ -30,7 +30,6 @@ Scenario: Indigenous Nation Catering Application
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -47,7 +46,6 @@ Scenario: Partnership Catering Application
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -64,7 +62,6 @@ Scenario: Private Corporation Catering Application
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -81,7 +78,6 @@ Scenario: Public Corporation Catering Application
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -98,7 +94,6 @@ Scenario: Society Catering Application
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -115,19 +110,18 @@ Scenario: Sole Proprietorship Catering Application
     And I click on the Pay for Application button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 
-@catering @validation @cateringappvalidation
-Scenario: Catering Application Validation
+@catering @validation @validation
+Scenario: Validation for Catering Application 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
-    And I do not complete the catering application correctly
-    And the expected Catering error messages are displayed
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for a Catering application
     And the account is deleted
     Then I see the login page
 */
@@ -140,7 +134,19 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard_IN(string businessType)
         {
-            CheckFeatureFlagsLiquor();
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLiquorOne();
+
+            CheckFeatureFlagsLGIN();
+
+            CheckFeatureFlagsIN();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
+            IgnoreSynchronization();
 
             CarlaLogin(businessType);
         }

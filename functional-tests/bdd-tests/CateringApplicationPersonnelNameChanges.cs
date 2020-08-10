@@ -29,11 +29,12 @@ Scenario: Catering Partnership Personnel Email Change
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
-    # And I change a personnel email address for a partnership
     And I request a personnel name change for a partnership
+    And I confirm the correct personnel name change fee for a Catering licence
+    And I confirm that the director name has been updated
+    And I change a personnel email address for a partnership
     And the account is deleted
     Then I see the login page
 
@@ -48,11 +49,12 @@ Scenario: Catering Private Corporation Personnel Email Change
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
-    # And I change a personnel email address for a private corporation
     And I request a personnel name change for a private corporation
+    And I confirm the correct personnel name change fee for a Catering licence
+    And I confirm that the director name has been updated
+    And I change a personnel email address for a private corporation
     And the account is deleted
     Then I see the login page
 
@@ -67,11 +69,12 @@ Scenario: Catering Public Corporation Personnel Email Change
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
-    # And I change a personnel email address for a public corporation
     And I request a personnel name change for a public corporation
+    And I confirm the correct personnel name change fee for a Catering licence
+    And I confirm that the director name has been updated
+    And I change a personnel email address for a public corporation
     And the account is deleted
     Then I see the login page
 
@@ -86,11 +89,12 @@ Scenario: Catering Society Personnel Email Change
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
-    # And I change a personnel email address for a society
     And I request a personnel name change for a society
+    And I confirm the correct personnel name change fee for a Catering licence
+    And I confirm that the director name has been updated
+    And I change a personnel email address for a society
     And the account is deleted
     Then I see the login page
 
@@ -105,11 +109,12 @@ Scenario: Catering Sole Proprietorship Personnel Email Change
     And I click on the Submit button
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Catering
-    # And I change a personnel email address for a sole proprietorship
     And I request a personnel name change for a sole proprietorship
+    And I confirm the correct personnel name change fee for a Catering licence
+    And I confirm that the director name has been updated
+    And I change a personnel email address for a sole proprietorship
     And the account is deleted
     Then I see the login page
 */
@@ -122,7 +127,17 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void Given_I_view_the_dashboard_IN(string businessType)
         {
-            CheckFeatureFlagsLiquor();
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLiquorOne();
+
+            CheckFeatureFlagsLGIN();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
+            IgnoreSynchronization();
 
             CarlaLogin(businessType);
         }
