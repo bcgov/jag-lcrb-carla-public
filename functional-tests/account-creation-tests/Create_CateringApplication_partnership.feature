@@ -3,7 +3,7 @@
     I want to submit a Catering Application for a partnership
     To be used as test data
 
-Scenario: Start Application
+Scenario: Create Catering Application Partnership
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
     And I am logged in to the dashboard as a partnership
