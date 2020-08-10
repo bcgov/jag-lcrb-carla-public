@@ -134,9 +134,9 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard_IN(string businessType)
         {
-            CheckFeatureFlagsLiquorOne();
+            NavigateToFeatures();
 
-            CheckFeatureFlagsLiquorTwo();
+            CheckFeatureFlagsLiquorOne();
 
             CheckFeatureFlagsLGIN();
 
@@ -145,6 +145,8 @@ namespace bdd_tests
             CheckFeatureFlagsLicenseeChanges();
 
             CheckFeatureFlagsSecurityScreening();
+
+            IgnoreSynchronization();
 
             CarlaLogin(businessType);
         }

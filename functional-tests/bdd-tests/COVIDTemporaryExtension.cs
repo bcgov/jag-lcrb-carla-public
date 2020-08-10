@@ -67,7 +67,11 @@ namespace bdd_tests
         [Given(@"I am not logged in to the Liquor and Cannabis Portal")]
         public void not_logged_in()
         {
+            NavigateToFeatures();
+
             CheckFeatureFlagsCOVIDTempExtension();
+
+            IgnoreSynchronization();
         }
 
 

@@ -44,11 +44,15 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard(string businessType)
         {
+            NavigateToFeatures();
+
             CheckFeatureFlagsLGIN();
 
             CheckFeatureFlagsLicenseeChanges();
 
             CheckFeatureFlagsSecurityScreening();
+
+            IgnoreSynchronization();
 
             CarlaLogin(businessType);
         }
