@@ -18,7 +18,7 @@ Feature: CRSApplication_privatecorp
     I want to submit a CRS Application for a private corporation
 
 @smoketest
-Scenario: Start Application
+Scenario: Private Corporation CRS Application Smoke Test
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure

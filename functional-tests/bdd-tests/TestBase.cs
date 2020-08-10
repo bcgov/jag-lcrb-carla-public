@@ -999,9 +999,15 @@ namespace bdd_tests
         }
 
 
-        public void CheckFeatureFlagsLiquor()
+        public void CheckFeatureFlagsLiquorOne()
         {
             CheckFeatureFlag("LiquorOne");
+        }
+
+
+        public void CheckFeatureFlagsLiquorTwo()
+        {
+            CheckFeatureFlag("LiquorTwo");
         }
 
 
@@ -1016,6 +1022,23 @@ namespace bdd_tests
             CheckFeatureFlag("LGApprovals");
         }
 
+
+        public void CheckFeatureFlagsIN()
+        {
+            CheckFeatureFlag("IndigenousNation");
+        }
+
+
+        public void CheckFeatureFlagsLicenseeChanges()
+        {
+            CheckFeatureFlag("LicenseeChanges");
+        }
+
+
+        public void CheckFeatureFlagsSecurityScreening()
+        {
+            CheckFeatureFlag("SecurityScreening");
+        }
 
         [And(@"I request a personnel name change for a (.*)")]
         public void RequestPersonnelNameChange(string businessType)
