@@ -15175,6 +15175,58 @@
         }
       }
     },
+    "/adoxio_licencesubcategories({adoxio_licencesubcategoryid})/adoxio_LicenceFeeProduct": {
+      "get": {
+        "tags": [
+          "licencefeeproduct"
+        ],
+        "summary": "Get adoxio_LicenceFeeProduct from adoxio_licencesubcategories",
+        "operationId": "licencefeeproduct_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_licencesubcategoryid",
+            "description": "key: adoxio_licencesubcategoryid of adoxio_licencesubcategory",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.product"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_licencetypes": {
       "get": {
         "tags": [
@@ -22813,6 +22865,152 @@
         }
       }
     },
+    "/products({productid})/adoxio_product_adoxio_licencesubcategory_LicenceFeeProduct": {
+      "get": {
+        "tags": [
+          "product_licencesubcategory_licencefeeproduct"
+        ],
+        "summary": "Get adoxio_product_adoxio_licencesubcategory_LicenceFeeProduct from products",
+        "operationId": "productadoxiolicencesubcategorylicencefeeproduct_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productid",
+            "description": "key: productid of product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencesubcategoryCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/products({productid})/adoxio_product_adoxio_licencesubcategory_LicenceFeeProduct({adoxio_licencesubcategoryid})": {
+      "get": {
+        "tags": [
+          "product_licencesubcategory_licencefeeproduct"
+        ],
+        "summary": "Get adoxio_product_adoxio_licencesubcategory_LicenceFeeProduct from products",
+        "operationId": "productadoxiolicencesubcategorylicencefeeproduct_Getadoxio_product_adoxio_licencesubcategory_LicenceFeeProductByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productid",
+            "description": "key: productid of product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_licencesubcategoryid",
+            "description": "key: adoxio_licencesubcategoryid of adoxio_licencesubcategory",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencesubcategory"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/savedqueries": {
       "get": {
         "tags": [
@@ -28665,9 +28863,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_isserviceareaenabled": {
-          "type": "boolean"
-        },
         "adoxio_renewalbusinesstype": {
           "format": "int32",
           "type": "integer"
@@ -28771,6 +28966,10 @@
           "type": "integer"
         },
         "_adoxio_applicant_value": {
+          "type": "string"
+        },
+        "adoxio_datefileuploadfromportalnotified": {
+          "format": "date-time",
           "type": "string"
         },
         "adoxio_renewalcriminaloffencecheck": {
@@ -29175,6 +29374,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_checklistvioletpinned": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_establishmentdeclarationoption1": {
           "format": "int32",
           "type": "integer"
@@ -29304,6 +29507,10 @@
         "adoxio_signaturedate": {
           "format": "date-time",
           "type": "string"
+        },
+        "adoxio_checklistbluepinned": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_lgdecisionsubmissiondate": {
           "format": "date-time",
@@ -29738,10 +29945,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_datefileuploadfromportalnotified": {
-          "format": "date-time",
-          "type": "string"
-        },
         "adoxio_datelicencecapassessedfinal": {
           "format": "date-time",
           "type": "string"
@@ -29858,6 +30061,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_isserviceareaenabled": {
+          "type": "boolean"
+        },
         "adoxio_establishmentemail": {
           "type": "string"
         },
@@ -29955,6 +30161,10 @@
           "type": "integer"
         },
         "adoxio_checklistassociatesfireceived": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_1kmassessmentresult": {
           "format": "int32",
           "type": "integer"
         },
@@ -42102,6 +42312,10 @@
         "adoxio_wineryequipmentlist": {
           "type": "string"
         },
+        "adoxio_suspensionreasons": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_ownershiptransferinprogress": {
           "format": "int32",
           "type": "integer"
@@ -42448,45 +42662,85 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_licencesubcategory",
       "type": "object",
       "properties": {
-        "_adoxio_licencetype_value": {
-          "type": "string"
-        },
-        "importsequencenumber": {
+        "adoxio_finalinspectiontimeunit": {
           "format": "int32",
           "type": "integer"
         },
-        "overriddencreatedon": {
+        "adoxio_proratedbydaymonth": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_routineinspectionoccurrence": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_licencesubcategoryid": {
+          "type": "string"
+        },
+        "_adoxio_licencefeeproduct_value": {
+          "type": "string"
+        },
+        "modifiedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_finalinspectiontime": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "createdon": {
           "format": "date-time",
           "type": "string"
         },
         "_modifiedonbehalfby_value": {
           "type": "string"
         },
+        "utcconversiontimezonecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_createdonbehalfby_value": {
+          "type": "string"
+        },
         "_modifiedby_value": {
+          "type": "string"
+        },
+        "overriddencreatedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_islicencefeeprorated": {
+          "type": "boolean"
+        },
+        "statuscode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_owningteam_value": {
+          "type": "string"
+        },
+        "_owninguser_value": {
+          "type": "string"
+        },
+        "adoxio_proratedendingmonth": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_name": {
+          "type": "string"
+        },
+        "_createdby_value": {
           "type": "string"
         },
         "statecode": {
           "format": "int32",
           "type": "integer"
         },
-        "versionnumber": {
-          "format": "int64",
-          "type": "string"
-        },
-        "adoxio_name": {
-          "type": "string"
-        },
-        "adoxio_licencesubcategoryid": {
-          "type": "string"
-        },
-        "adoxio_routineinspectionoccurrence": {
+        "importsequencenumber": {
           "format": "int32",
           "type": "integer"
         },
-        "_createdby_value": {
-          "type": "string"
-        },
-        "utcconversiontimezonecode": {
+        "adoxio_proratedendingday": {
           "format": "int32",
           "type": "integer"
         },
@@ -42494,39 +42748,17 @@
           "format": "int32",
           "type": "integer"
         },
-        "_owningteam_value": {
-          "type": "string"
-        },
-        "createdon": {
-          "format": "date-time",
+        "_adoxio_licencetype_value": {
           "type": "string"
         },
         "_ownerid_value": {
           "type": "string"
         },
+        "versionnumber": {
+          "format": "int64",
+          "type": "string"
+        },
         "_owningbusinessunit_value": {
-          "type": "string"
-        },
-        "_owninguser_value": {
-          "type": "string"
-        },
-        "adoxio_finalinspectiontimeunit": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_finalinspectiontime": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "statuscode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_createdonbehalfby_value": {
-          "type": "string"
-        },
-        "modifiedon": {
-          "format": "date-time",
           "type": "string"
         },
         "createdby": {
@@ -42621,6 +42853,9 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtermsconditionslimitation"
           }
+        },
+        "adoxio_LicenceFeeProduct": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.product"
         }
       }
     },
@@ -87183,6 +87418,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypefeeschedule"
+          }
+        },
+        "adoxio_product_adoxio_licencesubcategory_LicenceFeeProduct": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencesubcategory"
           }
         },
         "opportunity_products": {
