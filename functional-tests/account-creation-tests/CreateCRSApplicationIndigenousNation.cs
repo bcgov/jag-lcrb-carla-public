@@ -47,13 +47,7 @@ namespace bdd_tests
 
             IgnoreSynchronization();
 
-            CarlaLoginNoCheck();
-        }
-
-        [And(@"I am logged in to the dashboard as an (.*)")]
-        public void And_I_view_the_dashboard_IN(string businessType)
-        {
-            CarlaLoginWithUser(businessType);
+            CarlaLoginNoCheck(businessType);
         }
     }
 }
