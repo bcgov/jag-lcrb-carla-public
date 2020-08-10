@@ -150,6 +150,23 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.SEPContactName = item.AdoxioSepcontactname;
                 result.SEPContactPhoneNumber = item.AdoxioSepcontactphonenumber;
                 
+                //market events
+                result.IsNoPreventingSaleofLiquor = item.AdoxioIsnopreventingsaleofliquor;
+                result.IsMarketManagedorCarried = item.AdoxioIsmarketmanagedorcarried;
+                result.IsMarketOnlyVendors = item.AdoxioIsmarketonlyvendors;
+                result.IsNoImportedGoods = item.AdoxioIsnoimportedgoods;
+                result.IsMarketHostsSixVendors = item.AdoxioIsmarkethostssixvendors;
+                result.IsMarketMaxAmountorDuration = item.AdoxioIsmarketmaxamountorduration;
+                result.MKTOrganizerContactName = item.AdoxioMktorganizercontactname;
+                result.MKTOrganizerContactPhone = item.AdoxioMktorganizercontactphone;
+                result.RegistrationNumber = item.AdoxioRegistrationnumber;
+                result.MarketName = item.AdoxioMarketname;
+                result.MarketWebsite = item.AdoxioMarketwebsite;
+                result.MarketDuration = (MarketDuration?)item.AdoxioMarketduration;
+                result.IsAllStaffServingitRight = item.AdoxioIsallstaffservingitright;
+                result.IsSalesAreaAvailandDefined = item.AdoxioIssalesareaavailanddefined;
+                result.IsSampleSizeCompliant = item.AdoxioIssamplesizecompliant;
+                result.EventCategory = (EventCategory?)item.AdoxioEventcategory;
             }
 
             MicrosoftDynamicsCRMadoxioEventscheduleCollection eventSchedules = dynamicsClient.GetEventSchedulesByEventId(result.Id);
@@ -168,8 +185,18 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEventid = from.Id;
             to.AdoxioName = from.Name;
             to.Statuscode = (int?)from.Status;
-            to.AdoxioStartdate = from.StartDate;
-            to.AdoxioEnddate = from.EndDate;
+            if (from.StartDate.HasValue)
+            {
+                DateTimeOffset oldStart = (DateTimeOffset)from.StartDate;
+                DateTimeOffset startDate = new DateTimeOffset(oldStart.Year, oldStart.Month, oldStart.Day, 0, 0, 0, new TimeSpan(-8, 0, 0));
+                to.AdoxioStartdate = startDate;
+            }
+            if (from.EndDate.HasValue)
+            {
+                DateTimeOffset oldEnd = (DateTimeOffset)from.EndDate;
+                DateTimeOffset endDate = new DateTimeOffset(oldEnd.Year, oldEnd.Month, oldEnd.Day, 0, 0, 0, new TimeSpan(-8, 0, 0));
+                to.AdoxioEnddate = endDate;
+            }
             to.AdoxioVenuenamedescription = from.VenueDescription;
             to.AdoxioAdditionallocationinfo = from.AdditionalLocationInformation;
             to.AdoxioFoodservice = (int?)from.FoodService;
@@ -245,6 +272,24 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSeplicensee = from.SEPLicensee;
 
             to.AdoxioSafetysecurityplanchangessubmitted = from.SecurityPlanSubmitted;
+
+            // market events
+            to.AdoxioIsnopreventingsaleofliquor = from.IsNoPreventingSaleofLiquor;
+            to.AdoxioIsmarketmanagedorcarried = from.IsMarketManagedorCarried;
+            to.AdoxioIsmarketonlyvendors = from.IsMarketOnlyVendors;
+            to.AdoxioIsnoimportedgoods = from.IsNoImportedGoods;
+            to.AdoxioIsmarkethostssixvendors = from.IsMarketHostsSixVendors;
+            to.AdoxioIsmarketmaxamountorduration = from.IsMarketMaxAmountorDuration;
+            to.AdoxioMktorganizercontactname = from.MKTOrganizerContactName;
+            to.AdoxioMktorganizercontactphone = from.MKTOrganizerContactPhone;
+            to.AdoxioRegistrationnumber = from.RegistrationNumber;
+            to.AdoxioMarketname = from.MarketName;
+            to.AdoxioMarketwebsite = from.MarketWebsite;
+            to.AdoxioMarketduration = (int?)from.MarketDuration;
+            to.AdoxioIsallstaffservingitright = from.IsAllStaffServingitRight;
+            to.AdoxioIssalesareaavailanddefined = from.IsSalesAreaAvailandDefined;
+            to.AdoxioIssamplesizecompliant = from.IsSampleSizeCompliant;
+            to.AdoxioEventcategory = (int?)from.EventCategory;
         }
     }
 }

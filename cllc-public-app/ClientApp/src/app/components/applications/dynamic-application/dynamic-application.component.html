@@ -234,7 +234,7 @@
         <br>
         <i>
           Please download
-          <a *ngIf="account?.businessType === 'SoleProprietor'"
+          <a *ngIf="account?.businessType === 'SoleProprietorship'"
              href="https://www2.gov.bc.ca/assets/download/A61C46EE12464E76BE9594B674CADB93" download target="_blank" rel="noopener noreferrer">
             and complete
           </a>
@@ -287,7 +287,7 @@
       <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
         Please download the
         <span *ngIf=" application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">
-          <a *ngIf="account?.businessType === 'SoleProprietor'"
+          <a *ngIf="account?.businessType === 'SoleProprietorship'"
              href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank" rel="noopener noreferrer">
             Document Checklist
           </a>
@@ -309,7 +309,7 @@
           </a>
         </span>
         <span *ngIf=" application?.applicationType?.name === ApplicationTypeNames.CRSTransferofOwnership">
-          <a *ngIf="account?.businessType === 'SoleProprietor'"
+          <a *ngIf="account?.businessType === 'SoleProprietorship'"
              href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank" rel="noopener noreferrer">
             Document Checklist
           </a>

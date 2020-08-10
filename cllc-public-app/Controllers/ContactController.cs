@@ -103,10 +103,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Guid contactId = Guid.Parse(id);
 
             MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(contactId);
-            if (contact == null)
+            if (contact == null || string.IsNullOrEmpty (contact._parentcustomeridValue))
             {
                 return new NotFoundResult();
             }
+
+            // get the related account
+            Guid accountId = new Guid(contact._parentcustomeridValue);
+
+            if (!DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
+            {
+                _logger.LogError(LoggingEvents.BadRequest, "Current user has NO access to the contact account.");
+                return NotFound();
+            }
+
             MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
             patchContact.CopyValues(item);
             try

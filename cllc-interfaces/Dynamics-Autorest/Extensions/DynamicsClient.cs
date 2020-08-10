@@ -479,7 +479,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMadoxioEventscheduleCollection results;
             try
             {
-                results = this.Eventschedules.Get(id);
+                results = this.Events.GetEventscheduleByEvent(id);
             }
             catch (HttpOperationException)
             {
@@ -488,5 +488,9 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             return results;
         }
+
+        public virtual IInspector Inspector { get; private set; }
+
+   
     }
 }

@@ -140,6 +140,11 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioRenewaldui = (int?)from.RenewalDUI;
             to.AdoxioRenewalthirdparty = (int?)from.RenewalThirdParty;
 
+            to.AdoxioIsownerbusiness = from.IsOwnerBusiness;
+            to.AdoxioIsownerhasvalidinterest = from.HasValidInterest;
+            to.AdoxioIsownerwillhavevalidinterest = from.WillHaveValidInterest;
+            to.AdoxioZoningstatus = (int?)from.ZoningStatus;
+
             //lg approval fields
             to.AdoxioLgnameofofficial = from.LGNameOfOfficial;
             to.AdoxioLgtitleposition = from.LGTitlePosition;
@@ -150,16 +155,34 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             // Manufacturing fields
 
+            to.AdoxioIspackaging = from.IsPackaging;
+            to.AdoxioMfgpipedinproduct = (int?) from.MfgPipedInProduct;
+            to.AdoxioMfgbrewpubonsite = (int?) from.MfgBrewPubOnSite;
+            to.AdoxioMfgacresoffruit = from.MfgAcresOfFruit;
+            to.AdoxioMfgacresofgrapes = from.MfgAcresOfGrapes;
+            to.AdoxioMfgacresofhoney = from.MfgAcresOfHoney;
+            to.AdoxioMfgmeetsproductionminimum = from.MfgMeetsProductionMinimum;
+            to.AdoxioMfgstepblending = from.MfgStepBlending;
+            to.AdoxioMfgstepcrushing = from.MfgStepCrushing;
+            to.AdoxioMfgstepfiltering = from.MfgStepFiltering;
+            to.AdoxioMfgstepsecfermorcarb = from.MfgStepSecFermOrCarb;
+            to.AdoxioMfgusesneutralgrainspirits = (int?) from.MfgUsesNeutralGrainSpirits;
+            to.AdoxioPidlist = from.PidList;
+
+            // here
+
+            // Manufacturing structural change fields
+
             to.AdoxioPatiocompdescription = from.PatioCompDescription;
             to.AdoxioPatiolocationdescription = from.PatioLocationDescription;
             to.AdoxioPatioaccessdescription = from.PatioAccessDescription;
             to.AdoxioPatioisliquorcarried = from.PatioIsLiquorCarried;
-            to.AdoxioPatioisliquorcarrieddescription = from.PatioLiquorCarriedDescription;
+            to.AdoxioPatioliquorcarrieddescription = from.PatioLiquorCarriedDescription;
             to.AdoxioPatioaccesscontroldescription = from.PatioAccessControlDescription;
             to.AdoxioLocatedabovedescription = (int?) from.LocatedAboveDescription;
             to.AdoxioPatioservicebar = from.PatioServiceBar;
 
-
+            
 
             // comment out this next line as it is causing all application updates to fail (moved to controller)
             //to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
@@ -417,23 +440,54 @@ namespace Gov.Lclb.Cllb.Public.Models
                 OtherBusinessesDetails = dynamicsApplication.AdoxioOtherbusinesssamelocationdetails,
                 ServiceAreas = new List<CapacityArea>(),
                 OutsideAreas = new List<CapacityArea>(),
+                CapacityArea = new List<CapacityArea>(),
 
                 // Manufacturing fields
 
                 IsPackaging = dynamicsApplication.AdoxioIspackaging,
-                MfgPipedInProduct = dynamicsApplication.AdoxioMfgpipedinproduct,
-                MfgBrewPubOnSite = dynamicsApplication.AdoxioMfgbrewpubonsite,
-               
+                
+                MfgAcresOfFruit = dynamicsApplication.AdoxioMfgacresoffruit,
+                MfgAcresOfGrapes = dynamicsApplication.AdoxioMfgacresofgrapes,
+                MfgAcresOfHoney = dynamicsApplication.AdoxioMfgacresofhoney,
+                MfgMeetsProductionMinimum = dynamicsApplication.AdoxioMfgmeetsproductionminimum,
+                MfgStepBlending = dynamicsApplication.AdoxioMfgstepblending,
+                MfgStepCrushing = dynamicsApplication.AdoxioMfgstepcrushing,
+                MfgStepFiltering = dynamicsApplication.AdoxioMfgstepfiltering,
+                MfgStepSecFermOrCarb = dynamicsApplication.AdoxioMfgstepsecfermorcarb,
+                IsOwnerBusiness = dynamicsApplication.AdoxioIsownerbusiness,
+                HasValidInterest = dynamicsApplication.AdoxioIsownerhasvalidinterest,
+                WillHaveValidInterest = dynamicsApplication.AdoxioIsownerwillhavevalidinterest,
+                ZoningStatus = dynamicsApplication.AdoxioZoningstatus,
+                
 
+            PidList = dynamicsApplication.AdoxioPidlist,
+                
                 // Manufacturing structural change fields
 
                 PatioCompDescription = dynamicsApplication.AdoxioPatiocompdescription,
                 PatioLocationDescription = dynamicsApplication.AdoxioPatiolocationdescription,
                 PatioAccessDescription = dynamicsApplication.AdoxioPatioaccessdescription,
                 PatioIsLiquorCarried = dynamicsApplication.AdoxioPatioisliquorcarried,
-                PatioLiquorCarriedDescription = dynamicsApplication.AdoxioPatioisliquorcarrieddescription,
+                PatioLiquorCarriedDescription = dynamicsApplication.AdoxioPatioliquorcarrieddescription,
                 PatioAccessControlDescription = dynamicsApplication.AdoxioPatioaccesscontroldescription
         };
+
+
+            // mfg fields
+            
+            if (dynamicsApplication.AdoxioMfgpipedinproduct != null)
+            {
+                applicationVM.MfgPipedInProduct = (YesNoNotApplicable?)dynamicsApplication.AdoxioMfgpipedinproduct;
+            }
+            if (dynamicsApplication.AdoxioMfgbrewpubonsite != null)
+            {
+                applicationVM.MfgBrewPubOnSite = (YesNoNotApplicable?)dynamicsApplication.AdoxioMfgbrewpubonsite;
+            }
+            if (dynamicsApplication.AdoxioMfgusesneutralgrainspirits != null)
+            {
+                applicationVM.MfgUsesNeutralGrainSpirits = (YesNoNotApplicable)dynamicsApplication.AdoxioMfgusesneutralgrainspirits;
+            }
+             
 
             if (dynamicsApplication.AdoxioLocatedabovedescription != null)
             {
@@ -487,6 +541,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                         {
                             applicationVM.OutsideAreas.Add(area.ToViewModel());
                         }
+                        else if (area.AdoxioAreacategory == (int?)AdoxioAreaCategories.Capacity)
+                        {
+                            applicationVM.CapacityArea.Add(area.ToViewModel());
+                        }
                     }
                 }
                 catch (HttpOperationException httpOperationException)
@@ -525,6 +583,22 @@ namespace Gov.Lclb.Cllb.Public.Models
                 Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
                 var adoxio_licencetype = dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
                 applicationVM.LicenseType = adoxio_licencetype.AdoxioName;
+            }
+
+            // get the license sub type.
+
+            if (dynamicsApplication._adoxioLicencesubcategoryidValue != null)
+            {
+                try
+                {
+                    var adoxioLicencesubcategory = dynamicsClient.Licencesubcategories.GetByKey(dynamicsApplication._adoxioLicencesubcategoryidValue);
+                    applicationVM.LicenseType = adoxioLicencesubcategory.AdoxioName;
+                    applicationVM.LicenceSubCategory = adoxioLicencesubcategory.AdoxioName;
+                }
+                catch (Exception e)
+                {
+                    logger.LogError(e, $"Problem getting licence sub category {dynamicsApplication._adoxioLicencesubcategoryidValue}");
+                }               
             }
 
             if (dynamicsApplication.AdoxioAppchecklistfinaldecision != null)
@@ -709,6 +783,18 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
                 LicenceId = dynamicsApplication._adoxioAssignedlicenceValue,
                 IsPaid = (dynamicsApplication.AdoxioPaymentrecieved == true),
+                EstablishmentAddressStreet = dynamicsApplication.AdoxioEstablishmentaddressstreet,
+                EstablishmentAddressCity = dynamicsApplication.AdoxioEstablishmentaddresscity,
+                EstablishmentAddressPostalCode = dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
+                EstablishmentAddress = dynamicsApplication.AdoxioEstablishmentaddressstreet
+                                                    + ", " + dynamicsApplication.AdoxioEstablishmentaddresscity
+                                                    + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
+                EstablishmentPhone = dynamicsApplication.AdoxioEstablishmentphone,
+                EstablishmentEmail = dynamicsApplication.AdoxioEstablishmentemail,
+                EstablishmentParcelId = dynamicsApplication.AdoxioEstablishmentparcelid,
+                IndigenousNationId = dynamicsApplication._adoxioLocalgovindigenousnationidValue,
+                PoliceJurisdictionId = dynamicsApplication._adoxioPolicejurisdictionidValue,
+
             };
 
             // id

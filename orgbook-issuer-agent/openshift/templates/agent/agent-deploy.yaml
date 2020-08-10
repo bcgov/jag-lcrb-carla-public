@@ -424,12 +424,12 @@ parameters:
     displayName: Minimum Replicas
     description: The minimum number of pods to have running.
     required: true
-    value: "2"
+    value: "1"
   - name: MAX_REPLICAS
     displayName: Maximum Replicas
     description: The maximum number of pods to have running.
     required: true
-    value: "21"
+    value: "1"
   # ===============================================================================
   - name: CPU_REQUEST
     displayName: Resources CPU Request
@@ -451,3 +451,4 @@ parameters:
     description: The resources Memory limit (in Mi, Gi, etc) for this build.
     required: true
     value: 512Mi
+

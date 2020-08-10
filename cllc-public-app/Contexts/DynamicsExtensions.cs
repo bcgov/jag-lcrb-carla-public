@@ -462,11 +462,22 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns>The Invoice, or null if it does not exist</returns>
         public static async Task<MicrosoftDynamicsCRMinvoice> GetInvoiceById(this IDynamicsClient system, Guid id)
         {
+            return await system.GetInvoiceById(id.ToString());
+        }
+
+        /// <summary>
+        /// Get an Invoice by the Id
+        /// </summary>
+        /// <param name="system">Re</param>
+        /// <param name="id"></param>
+        /// <returns>The Invoice, or null if it does not exist</returns>
+        public static async Task<MicrosoftDynamicsCRMinvoice> GetInvoiceById(this IDynamicsClient system, string id)
+        {
             MicrosoftDynamicsCRMinvoice result;
             try
             {
                 // fetch from Dynamics.
-                result = await system.Invoices.GetByKeyAsync(id.ToString());
+                result = await system.Invoices.GetByKeyAsync(id);
             }
             catch (HttpOperationException)
             {
@@ -926,6 +937,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             string typeFilter = "adoxio_name eq '" + name + "'";
 
             IEnumerable<MicrosoftDynamicsCRMadoxioLicencetype> licenceTypes = _dynamicsClient.Licencetypes.Get(filter: typeFilter).Value;
+
+            result = licenceTypes.FirstOrDefault();
+
+            return result;
+        }
+
+        public static MicrosoftDynamicsCRMadoxioLicencesubcategory GetAdoxioSubLicencetypeByName(this IDynamicsClient _dynamicsClient, string name)
+        {
+            MicrosoftDynamicsCRMadoxioLicencesubcategory result = null;
+            string typeFilter = "adoxio_name eq '" + name + "'";
+
+            IEnumerable<MicrosoftDynamicsCRMadoxioLicencesubcategory> licenceTypes = _dynamicsClient.Licencesubcategories.Get(filter: typeFilter).Value;
 
             result = licenceTypes.FirstOrDefault();
 

@@ -20,7 +20,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         ServiceArea = 845280012,
         OutdoorArea = 845280013,
         CapacityArea = 845280014,
-        Signage = 845280015
+        Signage = 845280015,
+        Grocery = 845280016,
     
     }
     public class ApplicationTypeContent
@@ -106,7 +107,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                 }
                 if (IsSoleProprietorship == true)
                 {
-                    businessTypes.Add(AdoxioApplicantTypeCodes.SoleProprietor.ToString());
+                    businessTypes.Add(AdoxioApplicantTypeCodes.SoleProprietorship.ToString());
                 }
                 if (IsTrust == true)
                 {

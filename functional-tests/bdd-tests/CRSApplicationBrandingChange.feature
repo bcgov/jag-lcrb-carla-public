@@ -14,7 +14,6 @@ Scenario: Indigenous Nation CRS Name Branding Change
     And I complete the Cannabis Retail Store application for an indigenous nation
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
     And I request a valid store name or branding change for Cannabis
@@ -32,7 +31,6 @@ Scenario: Partnership CRS Name Branding Change
     And I complete the Cannabis Retail Store application for a partnership
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
     And I request a valid store name or branding change for Cannabis
@@ -50,7 +48,6 @@ Scenario: Private Corporation CRS Name Branding Change
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
     And I request a valid store name or branding change for Cannabis
@@ -68,7 +65,6 @@ Scenario: Public Corporation CRS Name Branding Change
     And I complete the Cannabis Retail Store application for a public corporation
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
     And I request a valid store name or branding change for Cannabis
@@ -86,7 +82,6 @@ Scenario: Society CRS Name Branding Change
     And I complete the Cannabis Retail Store application for a society
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
     And I request a valid store name or branding change for Cannabis
@@ -104,9 +99,29 @@ Scenario: Sole Proprietorship CRS Name Branding Change
     And I complete the Cannabis Retail Store application for a sole proprietorship
     And I click on the Pay for Application button
     And I enter the payment information
-    And I return to the dashboard
     And the application is approved
     And I pay the licensing fee for Cannabis
     And I request a valid store name or branding change for Cannabis
+    And the account is deleted
+    Then I see the login page
+
+@e2e @cannabis @privatecorporation @validation
+Scenario: Validation for CRS Branding Change 
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the Submit Organization Information button
+    And I complete the Cannabis Retail Store application for a private corporation
+    And I click on the Pay for Application button
+    And I enter the payment information
+    And the application is approved
+    And I click on the Licences tab
+    And I pay the licensing fee for Cannabis
+    And I click on the branding change link for Cannabis
+    And I click on the Continue to Application button
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for a CRS Branding Change application
     And the account is deleted
     Then I see the login page
