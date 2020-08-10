@@ -272,7 +272,7 @@ namespace bdd_tests
             string estName = "Point Ellis Greenhouse";
             string estAddress = "645 Tyee Rd";
             string estCity = "Victoria";
-            string estPostal = "V9A6X5";
+            string estPostal = "V9A 6X5";
             string estPID = "012345678";
             string estEmail = "test@test.com";
             string estPhone = "2505555555";
@@ -386,7 +386,7 @@ namespace bdd_tests
             string estName = "Point Ellis Greenhouse";
             string estAddress = "645 Tyee Rd";
             string estCity = "Victoria";
-            string estPostal = "V9A6X5";
+            string estPostal = "V9A 6X5";
             string estPID = "012345678";
             string estEmail = "test@test.com";
             string estPhone = "2505555555";
@@ -395,6 +395,8 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
+            string indigenousNation = "Cowichan Tribes";
+            string policeJurisdiction = "RCMP Shawnigan Lake";
 
             System.Threading.Thread.Sleep(3000);
 
@@ -424,6 +426,18 @@ namespace bdd_tests
                 NgWebElement uiSelectNation = ngDriver.FindElement(By.CssSelector("[formcontrolname='indigenousNationId'] option[value='236686fc-d9d3-e811-90f0-005056832371']"));
                 uiSelectNation.Click();
             }
+
+            // select 'yes' for ALR inclusion
+            //NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-36"));
+            //uiALRInclusion.Click();
+
+            // search for and select the indigenous nation
+            NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
+            uiIndigenousNation.SendKeys(indigenousNation);
+
+            // search for and select the  police jurisdiction
+            NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
+            uiPoliceJurisdiction.SendKeys(policeJurisdiction);
 
             // enter the store email
             NgWebElement estabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
@@ -582,7 +596,7 @@ namespace bdd_tests
             string estName = "Manufacturer's Establishment";
             string streetLocation = "123 Innovation Street";
             string city = "Victoria";
-            string postal = "V5R2X4";
+            string postal = "V9A 6X5";
             string PID = "111111111";
             string additionalPIDs = "999999999, 000000000, 181818181";
             string storeEmail = "store@email.com";
@@ -846,7 +860,7 @@ namespace bdd_tests
             string estName = "Point Ellis Greenhouse";
             string estAddress = "645 Tyee Rd";
             string estCity = "Victoria";
-            string estPostal = "V9A6X5";
+            string estPostal = "V9A 6X5";
             string estPID = "012345678";
             string estPhone = "2505555555";
             string estEmail = "test@automation.com";
@@ -1172,8 +1186,8 @@ namespace bdd_tests
             {
 
                 string proposedAddress = "Automated Test Street";
-                string proposedCity = "Automated City";
-                string proposedPostalCode = "A1A 1A1";
+                string proposedCity = "Victoria";
+                string proposedPostalCode = "V9A 6X5";
                 string pid = "012345678";
 
                 // enter the proposed street address
@@ -1403,8 +1417,8 @@ namespace bdd_tests
             string venueAdditionalInfo = "Automated test additional venue information added here.";
             string physicalAddStreetAddress1 = "Automated test street address 1";
             string physicalAddStreetAddress2 = "Automated test street address 2";
-            string physicalAddCity = "Automated test city";
-            string physicalAddPostalCode = "V8V4Y3";
+            string physicalAddCity = "Victoria";
+            string physicalAddPostalCode = "V9A 6X5";
 
             // enter event contact name
             NgWebElement uiEventContactName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactName']"));
@@ -2050,13 +2064,13 @@ namespace bdd_tests
             string physStreetAddress1 = "645 Tyee Road";
             string physStreetAddress2 = "West of Victoria";
             string physCity = "Victoria";
-            string physPostalCode = "V8V4Y3";
+            string physPostalCode = "V9A 6X5";
 
             string mailStreet1 = "P.O. Box 123";
             string mailStreet2 = "303 Prideaux St.";
-            string mailCity = "Nanaimo";
+            string mailCity = "Victoria";
             string mailProvince = "B.C.";
-            string mailPostalCode = "V9R2N3";
+            string mailPostalCode = "V9A 6X5";
             string mailCountry = "Canada";
 
             string bizPhoneNumber = "2501811818";
@@ -3181,7 +3195,7 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Declaration Checkbox')]")).Displayed);
             }
             else
-            { 
+            {
                 // check missing authorized to submit error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that you are authorized to submit the application.')]")).Displayed);
 
@@ -3213,6 +3227,15 @@ namespace bdd_tests
 
                     // check missing establishment name error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is required')]")).Displayed);
+                }
+
+                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application"))
+                { 
+                    // check missing police jurisdiction error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'policeJurisdiction is not valid')]")).Displayed);
+
+                    // check missing indigenous nation error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'indigenousNation is not valid')]")).Displayed);
                 }
 
                 if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application") || (applicationType == " location change application"))
