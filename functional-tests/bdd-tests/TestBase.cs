@@ -217,6 +217,75 @@ namespace bdd_tests
         }
 
 
+        public void NavigateToFeatures()
+        {
+            ngDriver.IgnoreSynchronization = true;
+            // navigate to the feature flags page
+            ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/features");
+        }
+
+
+        public void IgnoreSynchronization()
+        {
+            ngDriver.IgnoreSynchronization = false;
+        }
+
+
+        public void CheckFeatureFlag(string flag)
+        {
+            // confirm that the correct flag is enabled during this test
+            Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'{flag}')]")).Displayed);
+        }
+
+
+        public void CheckFeatureFlagsCOVIDTempExtension()
+        {
+            CheckFeatureFlag("CovidApplication");
+        }
+
+
+        public void CheckFeatureFlagsLiquorOne()
+        {
+            CheckFeatureFlag("LiquorOne");
+        }
+
+
+        public void CheckFeatureFlagsLiquorTwo()
+        {
+            CheckFeatureFlag("LiquorTwo");
+        }
+
+
+        public void CheckFeatureFlagsMaps()
+        {
+            CheckFeatureFlag("Maps");
+        }
+
+
+        public void CheckFeatureFlagsLGIN()
+        {
+            CheckFeatureFlag("LGApprovals");
+        }
+
+
+        public void CheckFeatureFlagsIN()
+        {
+            CheckFeatureFlag("IndigenousNation");
+        }
+
+
+        public void CheckFeatureFlagsLicenseeChanges()
+        {
+            CheckFeatureFlag("LicenseeChanges");
+        }
+
+
+        public void CheckFeatureFlagsSecurityScreening()
+        {
+            CheckFeatureFlag("SecurityScreening");
+        }
+
+
         public void MakePayment()
         {
             string testCC = configuration["test_cc"];
@@ -242,6 +311,40 @@ namespace bdd_tests
         }
 
 
+        [And(@"I confirm the payment receipt for a (.*)")]
+        public void ConfirmPaymentReceipt(string applicationType)
+        {
+            /* 
+            Page Title: Payment Approved
+            */
+
+            if (applicationType == "Cannabis Retail Store application")
+            {
+                // confirm that payment receipt is for $7,500.00
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$7,500.00')]")).Displayed);
+            }
+
+            if (applicationType == "Catering application")
+            {
+                // confirm that payment receipt is for $475.00
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$475.00')]")).Displayed);
+            }
+
+            if (applicationType == "Manufacturer Licence application")
+            {
+                // confirm that payment receipt is for $550.00
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$550.00')]")).Displayed);
+            }
+        }
+
+
+        [Then(@"I confirm the payment receipt for a (.*)")]
+        public void ThenConfirmPaymentReceipt(string applicationType)
+        {
+            ConfirmPaymentReceipt(applicationType);
+        }
+
+
         public void CarlaDeleteCurrentAccount()
         {
             ngDriver.IgnoreSynchronization = true;
@@ -254,6 +357,28 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
         }
 
+
+        [And(@"I return to the dashboard")]
+        public void AndReturnToDashboard()
+        {
+            ReturnToDashboard();
+        }
+
+
+        [Then(@"I return to the dashboard")]
+        public void ThenReturnToDashboard()
+        {
+            ReturnToDashboard();
+        }
+
+
+        public void ReturnToDashboard()
+        {
+            // click on Return to Dashboard link
+            string retDash = "Return to Dashboard";
+            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
+            returnDash.Click();
+        }
 
         [And(@"I complete the Rural Agency Store application")]
         public void CompleteRuralAgencyStoreApplication()
@@ -518,63 +643,6 @@ namespace bdd_tests
             // click on the submit button
             NgWebElement submitButton = ngDriver.FindElement(By.CssSelector(".application-wrapper button.btn-primary"));
             submitButton.Click();
-        }
-
-
-        [And(@"I confirm the payment receipt for a (.*)")]
-        public void ConfirmPaymentReceipt(string applicationType)
-        {
-            /* 
-            Page Title: Payment Approved
-            */
-
-            if (applicationType == "Cannabis Retail Store application")
-            {
-                // confirm that payment receipt is for $7,500.00
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$7,500.00')]")).Displayed);
-            }
-
-            if (applicationType == "Catering application")
-            {
-                // confirm that payment receipt is for $475.00
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$475.00')]")).Displayed);
-            }
-
-            if (applicationType == "Manufacturer Licence application")
-            {
-                // confirm that payment receipt is for $550.00
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$550.00')]")).Displayed);
-            }
-        }
-
-
-        [Then(@"I confirm the payment receipt for a (.*)")]
-        public void ThenConfirmPaymentReceipt(string applicationType)
-        {
-            ConfirmPaymentReceipt(applicationType);
-        }
-
-
-        [And(@"I return to the dashboard")]
-        public void AndReturnToDashboard()
-        {
-            ReturnToDashboard();
-        }
-
-
-        [Then(@"I return to the dashboard")]
-        public void ThenReturnToDashboard()
-        {
-            ReturnToDashboard();
-        }
-
-
-        public void ReturnToDashboard()
-        {
-            // click on Return to Dashboard link
-            string retDash = "Return to Dashboard";
-            NgWebElement returnDash = ngDriver.FindElement(By.LinkText(retDash));
-            returnDash.Click();
         }
 
 
@@ -978,67 +1046,6 @@ namespace bdd_tests
             applicationID = tempFix[0];
         }
 
-
-        public void CheckFeatureFlag(string flag)
-        {
-            ngDriver.IgnoreSynchronization = true;
-
-            // navigate to the feature flags page
-            ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/features");
-
-            // confirm that the correct flag is enabled during this test
-            Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'{flag}')]")).Displayed);
-
-            ngDriver.IgnoreSynchronization = false;
-        }
-
-
-        public void CheckFeatureFlagsCOVIDTempExtension()
-        {
-            CheckFeatureFlag("CovidApplication");
-        }
-
-
-        public void CheckFeatureFlagsLiquorOne()
-        {
-            CheckFeatureFlag("LiquorOne");
-        }
-
-
-        public void CheckFeatureFlagsLiquorTwo()
-        {
-            CheckFeatureFlag("LiquorTwo");
-        }
-
-
-        public void CheckFeatureFlagsMaps()
-        {
-            CheckFeatureFlag("Maps");
-        }
-
-
-        public void CheckFeatureFlagsLGIN()
-        {
-            CheckFeatureFlag("LGApprovals");
-        }
-
-
-        public void CheckFeatureFlagsIN()
-        {
-            CheckFeatureFlag("IndigenousNation");
-        }
-
-
-        public void CheckFeatureFlagsLicenseeChanges()
-        {
-            CheckFeatureFlag("LicenseeChanges");
-        }
-
-
-        public void CheckFeatureFlagsSecurityScreening()
-        {
-            CheckFeatureFlag("SecurityScreening");
-        }
 
         [And(@"I request a personnel name change for a (.*)")]
         public void RequestPersonnelNameChange(string businessType)
