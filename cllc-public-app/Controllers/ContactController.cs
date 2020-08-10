@@ -107,6 +107,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
+
+            // get the legal entity.
+            Guid accountId = new Guid(contact._parentcontactidValue);
+
+            if (!DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
+            {
+                _logger.LogError(LoggingEvents.BadRequest, "Current user has NO access to the contact account.");
+                return NotFound();
+            }
+
             MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
             patchContact.CopyValues(item);
             try
