@@ -140,7 +140,7 @@ Scenario: Validation for Catering Store Relocation
     And the application is approved
     And I pay the licensing fee for Catering
     And I click on the Licences tab
-    And I click on the relocation application link
+    And I click on the link for relocation application
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Catering store relocation application
@@ -161,7 +161,7 @@ Scenario: Validation for Catering Third Party Operator
     And the application is approved
     And I pay the licensing fee for Catering
     And I click on the Licences tab
-    And I click on the third party operator link
+    And I click on the link for third party operator
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Catering third party application
     And the account is deleted
@@ -176,7 +176,19 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void Given_I_view_the_dashboard_IN(string businessType)
         {
-            CheckFeatureFlagsLiquor();
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLiquorOne();
+
+            CheckFeatureFlagsLGIN();
+
+            CheckFeatureFlagsIN();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
+            IgnoreSynchronization();
 
             CarlaLogin(businessType);
         }

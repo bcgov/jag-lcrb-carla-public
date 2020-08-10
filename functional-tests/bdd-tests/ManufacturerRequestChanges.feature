@@ -695,7 +695,7 @@ Scenario: Validation for Manufacturer Transfer of Ownership
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I click on the Licences tab
-    And I click on the transfer of ownership link
+    And I click on the link for transfer of ownership
     And I do not complete the application correctly
     And the expected validation errors are thrown for a transfer of ownership
     And the account is deleted
@@ -714,7 +714,7 @@ Scenario: Validation for Manufacturer Facility Structural Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I click on the Licences tab
-    And I click on the facility structural change link
+    And I click on the link for facility structural change
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a facility structural change application
@@ -734,7 +734,7 @@ Scenario: Validation for Manufacturer Location Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I click on the Licences tab
-    And I click on the location change link
+    And I click on the link for location change
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a location change application
