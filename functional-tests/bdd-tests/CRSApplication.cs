@@ -137,6 +137,12 @@ namespace bdd_tests
         {
             CheckFeatureFlagsLGIN();
 
+            CheckFeatureFlagsIN();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
             CarlaLogin(businessType);
         }
     }

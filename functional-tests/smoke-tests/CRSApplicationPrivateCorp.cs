@@ -44,6 +44,10 @@ namespace bdd_tests
         {
             CheckFeatureFlagsLGIN();
 
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
             CarlaLogin(businessType);
         }
     }
