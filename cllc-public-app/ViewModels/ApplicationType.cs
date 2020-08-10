@@ -90,5 +90,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool ServiceAreas { get; set; }
         public bool OutsideAreas { get; set; }
         public bool CapacityArea { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public FormControlState? LetterOfIntent { get; set; }
     }
 }
