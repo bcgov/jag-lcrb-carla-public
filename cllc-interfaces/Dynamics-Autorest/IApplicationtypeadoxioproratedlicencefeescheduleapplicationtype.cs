@@ -14,13 +14,61 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Applicationtype operations.
+    /// Applicationtypeadoxioproratedlicencefeescheduleapplicationtype operations.
     /// </summary>
-    public partial interface IApplicationtype
+    public partial interface IApplicationtypeadoxioproratedlicencefeescheduleapplicationtype
     {
         /// <summary>
-        /// Get adoxio_ApplicationType from adoxio_proratedlicencefeeschedules
+        /// Get
+        /// adoxio_applicationtype_adoxio_proratedlicencefeeschedule_ApplicationType
+        /// from adoxio_applicationtypes
         /// </summary>
+        /// <param name='adoxioApplicationtypeid'>
+        /// key: adoxio_applicationtypeid of adoxio_applicationtype
+        /// </param>
+        /// <param name='top'>
+        /// </param>
+        /// <param name='skip'>
+        /// </param>
+        /// <param name='search'>
+        /// </param>
+        /// <param name='filter'>
+        /// </param>
+        /// <param name='count'>
+        /// </param>
+        /// <param name='orderby'>
+        /// Order items by property values
+        /// </param>
+        /// <param name='select'>
+        /// Select properties to be returned
+        /// </param>
+        /// <param name='expand'>
+        /// Expand related entities
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioProratedlicencefeescheduleCollection>> GetWithHttpMessagesAsync(string adoxioApplicationtypeid, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get
+        /// adoxio_applicationtype_adoxio_proratedlicencefeeschedule_ApplicationType
+        /// from adoxio_applicationtypes
+        /// </summary>
+        /// <param name='adoxioApplicationtypeid'>
+        /// key: adoxio_applicationtypeid of adoxio_applicationtype
+        /// </param>
         /// <param name='adoxioProratedlicencefeescheduleid'>
         /// key: adoxio_proratedlicencefeescheduleid of
         /// adoxio_proratedlicencefeeschedule
@@ -46,36 +94,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationtype>> GetWithHttpMessagesAsync(string adoxioProratedlicencefeescheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get adoxio_ApplicationType from
-        /// adoxio_termsconditionslimitationspresets
-        /// </summary>
-        /// <param name='adoxioTermsconditionslimitationspresetid'>
-        /// key: adoxio_termsconditionslimitationspresetid of
-        /// adoxio_termsconditionslimitationspreset
-        /// </param>
-        /// <param name='select'>
-        /// Select properties to be returned
-        /// </param>
-        /// <param name='expand'>
-        /// Expand related entities
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
-        /// Thrown when unable to deserialize the response
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationtype>> Get1WithHttpMessagesAsync(string adoxioTermsconditionslimitationspresetid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioProratedlicencefeeschedule>> ApplicationTypeByKeyWithHttpMessagesAsync(string adoxioApplicationtypeid, string adoxioProratedlicencefeescheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
