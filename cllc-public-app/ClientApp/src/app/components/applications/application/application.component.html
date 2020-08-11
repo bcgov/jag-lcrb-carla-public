@@ -759,7 +759,8 @@
               <app-field [valid]="!showValidationMessages || form.get('serviceAreas').valid"
                 errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
                 <app-capacity-table formControlName="serviceAreas"
-                  [areaCategory]="getAreaCategoryNumber('Service')">
+                  [areaCategory]="getAreaCategoryNumber('Service')"
+                  [enabled]="!isOpenedByLGForApproval && !lGHasApproved()">
                 </app-capacity-table>
               </app-field>
             </section>
@@ -771,7 +772,8 @@
               <app-field [valid]="!showValidationMessages || form.get('outsideAreas').valid"
                 errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
                 <app-capacity-table formControlName="outsideAreas"
-                  [areaCategory]="getAreaCategoryNumber('OutsideArea')"></app-capacity-table>
+                  [areaCategory]="getAreaCategoryNumber('OutsideArea')"
+                  [enabled]="!isOpenedByLGForApproval && !lGHasApproved()"></app-capacity-table>
               </app-field>
             </section>
 
@@ -781,7 +783,7 @@
               <div *ngIf="htmlContent?.capacityArea" [innerHTML]="htmlContent.capacityArea"></div>
               <app-field label="Capacity" [required]="true" [valid]="!showValidationMessages || form.get('capacityArea').valid"
                 errorMessage="Capacity is required." [showChevrons]="false" [isFullWidth]="false">
-                <input formControlName="capacity" placeholder="Enter Capacity" mask="0*"/>
+                <input formControlName="capacity" placeholder="Enter Capacity" mask="0*" [readonly]="isOpenedByLGForApproval || lGHasApproved()"/>
               </app-field>
             </section>
 
