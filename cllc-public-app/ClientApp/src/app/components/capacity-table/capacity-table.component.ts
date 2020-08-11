@@ -24,6 +24,7 @@ import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea[]> {
     @Input() areaCategory: number;
     @Input() applicationTypeName: string;
+    @Input() enabled: boolean = true;
     total: number;
 
     formGroup: FormGroup;
