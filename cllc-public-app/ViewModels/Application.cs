@@ -544,6 +544,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsReadyExtranceExit { get; set; }
         public bool? IsReadySurveillanceNotice { get; set; }
         public bool? IsReadyProductNotVisibleOutside { get; set; }
+        public bool? IsLocatedInGroceryStore { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public GeneralYesNo? IsApplicationComplete { get; set; }
