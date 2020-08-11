@@ -8,12 +8,12 @@ import { ServiceArea, AreaCategory } from '@models/service-area.model';
   styleUrls: ['./capacity-table-row.component.scss'],
   template: `
     <ng-container [formGroup]="rowGroup">
-        <td><input type="text" formControlName="areaNumber" /></td>
-        <td><input type="text" formControlName="areaLocation" placeholder="Enter Area Description" /></td>
-        <td *ngIf="isService()"><mat-checkbox formControlName="isIndoor"></mat-checkbox></td>
-        <td *ngIf="isService()"><mat-checkbox formControlName="isPatio"></mat-checkbox></td>
-        <td><input type="text" formControlName="capacity" placeholder="Enter Occupant Load" mask="0*" /></td>
-        <td><button (click)="removeRow()" class="btn-clear"><i class="fas fa-trash-alt"></i></button></td>
+        <td><input type="text" formControlName="areaNumber" [readonly]="!enabled"/></td>
+        <td><input type="text" formControlName="areaLocation" placeholder="Enter Area Description" [readonly]="!enabled"/></td>
+        <td *ngIf="isService()"><mat-checkbox formControlName="isIndoor" [disabled]="!enabled"></mat-checkbox></td>
+        <td *ngIf="isService()"><mat-checkbox formControlName="isPatio" [disabled]="!enabled"></mat-checkbox></td>
+        <td><input type="text" formControlName="capacity" placeholder="Enter Occupant Load" mask="0*" [readonly]="!enabled"/></td>
+        <td><button (click)="removeRow()" class="btn-clear" *ngIf="enabled"><i class="fas fa-trash-alt"></i></button></td>
     </ng-container>
   `,
   styles: [``],
@@ -35,6 +35,7 @@ export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceA
   @Input() index: number;
   @Input() onDelete: (index) => void;
   @Input() onRowChange: (val) => void;
+  @Input() enabled: boolean = true;
   rowGroup: FormGroup;
 
   public value: ServiceArea;
