@@ -102,14 +102,14 @@
       "displayName": "Git Repo URL",
       "description": "The URL to your GIT repo.",
       "required": true,
-      "value": "https://github.com/brianorwhatever/jag-lcrb-carla-public.git"
+      "value": "https://github.com/bcgov/jag-lcrb-carla-public.git"
     },
     {
       "name": "GIT_REF",
       "displayName": "Git Reference",
       "description": "The git reference or branch.",
       "required": true,
-      "value": "indy-cat-orgbook"
+      "value": "develop"
     },
     {
       "name": "SOURCE_CONTEXT_DIR",
