@@ -3,7 +3,7 @@
     I want to submit a Catering Application for an indigenous nation
     To be used as test data
 
-Scenario: Start Application
+Scenario: Create Catering Application Indigenous Nation
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
     And I am logged in to the dashboard as an indigenous nation

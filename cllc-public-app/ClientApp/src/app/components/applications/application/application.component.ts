@@ -645,14 +645,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return this.application.licenseType === 'Rural Agency Store';
   }
 
-  /**
-   * Save form data
-   * @param showProgress
-   */
-  save(showProgress: boolean = false): Observable<boolean> {
-    const saveData = this.form.value;
+  normalizeFormData() {
     let description2 = '';
-
     if (this.isRAS()) {
       description2 += this.form.get('isOwner').value ? 'Is owner = Yes' : 'Is owner = No';
       description2 += '\n';
@@ -669,6 +663,24 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
     const capacityArea = [this.form.get('capacityArea').value];
 
+    return {
+      ...this.form.value,
+      description2,
+      serviceAreas,
+      outsideAreas,
+      capacityArea,
+      indigenousNationId: this.form.value.indigenousNation && this.form.value.indigenousNation.id,
+      policeJurisdictionId: this.form.value.policeJurisdiction && this.form.value.policeJurisdiction.id,
+    }
+  }
+
+  /**
+   * Save form data
+   * @param showProgress
+   */
+  save(showProgress: boolean = false): Observable<boolean> {
+    const saveData = this.form.value;
+
     // do not save if the form is in file upload mode
     if (this.mode === UPLOAD_FILES_MODE) {
       // a delay is need by the deactivate guard
@@ -677,11 +689,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return forkJoin(
       this.applicationDataService.updateApplication({
         ...this.application,
-        ...this.form.value,
-        description2: description2,
-        serviceAreas: serviceAreas,
-        outsideAreas: outsideAreas,
-        capacityArea: capacityArea
+        ...this.normalizeFormData()
       }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
@@ -769,9 +777,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.busy = forkJoin(
         this.applicationDataService.updateApplication({
           ...this.application,
-          ...this.form.value,
-          indigenousNationId: this.form.value.indigenousNation && this.form.value.indigenousNation.id,
-          policeJurisdictionId: this.form.value.policeJurisdiction && this.form.value.policeJurisdiction.id,
+          ...this.normalizeFormData(),
           applicationStatus: 'PendingForLGFNPFeedback'
         }),
         this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)

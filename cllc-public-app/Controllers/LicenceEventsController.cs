@@ -336,9 +336,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             LicenceEvent licenceEventVM;
             MicrosoftDynamicsCRMadoxioLicences licence;
             MicrosoftDynamicsCRMaccount account;
-            string inspectorName;
-            string inspectorEmail;
-            string inspectorPhone;
 
             try
             {
@@ -350,20 +347,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (HttpOperationException)
             {
                 return new NotFoundResult();
-            }
-
-            try
-            {
-                MicrosoftDynamicsCRMsystemuser inspector = _dynamicsClient.Inspector.Get(eventId);
-                inspectorName = inspector.Fullname;
-                inspectorPhone = inspector.Address1Telephone1;
-                inspectorEmail = inspector.Internalemailaddress;
-            }
-            catch (HttpOperationException)
-            {
-                inspectorName = "";
-                inspectorPhone = "";
-                inspectorEmail = "";
             }
 
             if (!CurrentUserHasAccessToEventOwnedBy(licence._adoxioLicenceeValue))
@@ -403,9 +386,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "addressLine1", licenceEventVM.Street1 },
                 { "addressLine2", licenceEventVM.Street2 },
                 { "addressLine3", $"{licenceEventVM.City}, BC {licenceEventVM.PostalCode}" },
-                { "inspectorName", inspectorName },
-                { "inspectorPhone", inspectorPhone },
-                { "inspectorEmail", inspectorEmail },
+                { "inspectorName", licenceEvent.AdoxioEventinspectorname },
+                { "inspectorPhone", licenceEvent.AdoxioEventinspectorphone },
+                { "inspectorEmail", licenceEvent.AdoxioEventinspectoremail },
                 { "date", DateTime.Now.ToString("MMMM dd, yyyy") }
             };
 

@@ -35,7 +35,11 @@ namespace bdd_tests
         [Given(@"I am not logged in to the portal")]
         public void not_logged_in_public()
         {
+            NavigateToFeatures();
+
             CheckFeatureFlagsMaps();
+
+            IgnoreSynchronization();
         }
 
         [And(@"the Map of Cannabis Stores Header Text is displayed")]

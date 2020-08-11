@@ -32,7 +32,7 @@ Scenario: Catering Indigenous Nation Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
-    And I click on the licence download link
+    And I click on the link for licence download
     And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page
@@ -51,7 +51,7 @@ Scenario: Catering Partnership Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
-    And I click on the licence download link
+    And I click on the link for licence download
     And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page
@@ -70,7 +70,7 @@ Scenario: Catering Private Corporation Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
-    And I click on the licence download link
+    And I click on the link for licence download
     And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page
@@ -89,7 +89,7 @@ Scenario: Catering Public Corporation Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
-    And I click on the licence download link
+    And I click on the link for licence download
     And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page
@@ -108,7 +108,7 @@ Scenario: Catering Society Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
-    And I click on the licence download link
+    And I click on the link for licence download
     And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page
@@ -127,7 +127,7 @@ Scenario: Catering Sole Proprietorship Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
-    And I click on the licence download link
+    And I click on the link for licence download
     And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page
@@ -162,7 +162,19 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void Given_I_view_the_dashboard_IN(string businessType)
         {
-            CheckFeatureFlagsLiquor();
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLiquorOne();
+
+            CheckFeatureFlagsLGIN();
+
+            CheckFeatureFlagsIN();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
+            IgnoreSynchronization();
 
             CarlaLogin(businessType);
         }
