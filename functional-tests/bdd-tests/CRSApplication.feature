@@ -98,8 +98,8 @@ Scenario: Sole Proprietorship CRS Application
     And the account is deleted
     Then I see the login page
 
-@crsapp @validation 
-Scenario: Validation for CRS Application
+@crsapp @validation @privatecorporation
+Scenario: Validation for Private Corporation CRS Application 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -108,5 +108,18 @@ Scenario: Validation for CRS Application
     And I click on the Submit Organization Information button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Cannabis application
+    And the account is deleted
+    Then I see the login page
+
+@crsapp @validation indigenousnation
+Scenario: Validation for IN CRS Application
+    Given I am logged in to the dashboard as an indigenous nation
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
+    And I review the account profile for an indigenous nation
+    And I review the organization structure for an indigenous nation
+    And I click on the Submit Organization Information button
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for an indigenous nation Cannabis application
     And the account is deleted
     Then I see the login page

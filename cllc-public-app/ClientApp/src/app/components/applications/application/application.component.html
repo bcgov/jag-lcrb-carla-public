@@ -275,7 +275,7 @@
 
 
               <!-- Letter of Intent -->
-              <section *ngIf="application?.applicationType.name === 'Special Event Area Endorsement'">
+              <section *ngIf="showFormControl(application?.applicationType?.letterOfIntent)">
                 <h3 class="blue-header">Letter of Intent</h3>
                 <section class="content-bottom">
                 <div *ngIf="htmlContent.letterOfIntent">
@@ -755,7 +755,7 @@
             <!-- Service Area -->
             <h3 class="blue-header" *ngIf="application.applicationType.serviceAreas">SERVICE AREAS</h3>
             <section *ngIf="application.applicationType.serviceAreas" class="padded-section content-bottom">
-              <div *ngIf="htmlContent?.serviceArea" [innerHTML]="htmlContent.serviceArea"></div>
+              <div *ngIf="htmlContent?.serviceAreas" [innerHTML]="htmlContent.serviceAreas"></div>
               <app-field [valid]="!showValidationMessages || form.get('serviceAreas').valid"
                 errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
                 <app-capacity-table formControlName="serviceAreas"
@@ -767,7 +767,7 @@
             <!-- Outside Area -->
             <h3 class="blue-header" *ngIf="application.applicationType.outsideAreas">OUTSIDE AREAS</h3>
             <section *ngIf="application.applicationType.outsideAreas" class="padded-section content-bottom">
-              <div *ngIf="htmlContent?.outsideAreas" [innerHTML]="htmlContent.outsideAreas"></div>
+              <div *ngIf="htmlContent?.outdoorAreas" [innerHTML]="htmlContent.outdoorAreas"></div>
               <app-field [valid]="!showValidationMessages || form.get('outsideAreas').valid"
                 errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
                 <app-capacity-table formControlName="outsideAreas"
@@ -1777,12 +1777,14 @@
                         Security Screening Required    -- > Proceed to Security Screening
                 
                 -->
-        <!-- LG Approval Required -->
+        <!-- LG Approval Required --> 
         <button
           *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
-                                    && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')"
+                                    && application?.lGApprovalDecision !== 'Approved' 
+                                    && application?.lGApprovalDecision !== 'OptOut' 
+                                    && application?.applicationStatus === 'Intake'"
           class=" btn btn-primary" [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval();">
-          <i class="fa fa-university"></i>SUBMIT FOR LG/IN REVIEW OR COMMENT
+          <i class="fa fa-university mr-1"></i>SUBMIT FOR LG/IN REVIEW OR COMMENT
         </button>
         
         <!-- NO LG Approval Required OR LG Already Approved -->
@@ -1796,7 +1798,7 @@
           </button>
           <button *ngIf="application?.applicationType?.requiresSecurityScreening" class="btn btn-primary"
             (click)="proceedToSecurityScreening()">
-            <i class="fa fa-id-card"></i>PROCEED TO SECURITY SCREENING
+            <i class="fa fa-id-card mr-1"></i>PROCEED TO SECURITY SCREENING
           </button>
         </ng-container>
 
