@@ -804,11 +804,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   private proceedToSecurityScreening() {
     //send event to move to the next step of the multi-step
-    this.busyPromise = this.save(true)
-      .toPromise()
-      .then(() => {
-        this.saveComplete.next(true);
-      });
+    if (this.isValid()) { // Only proceed if the data is valid
+      this.busyPromise = this.save(true)
+        .toPromise()
+        .then(() => {
+          this.saveComplete.next(true);
+        });
+    } else {
+      this.showValidationMessages = true;
+    }
   }
 
 
