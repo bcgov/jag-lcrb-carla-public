@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top102 { get; set; }
+        public int? Top120 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip102 { get; set; }
+        public int? Skip120 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count102 { get; set; }
+        public bool? Count120 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter102 { get; set; }
+        public string Filter120 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search102 { get; set; }
+        public string Search120 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -161,9 +161,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationtypes Applicationtypes { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationtypeadoxioproratedlicencefeescheduleapplicationtype.
+        /// </summary>
+        public virtual IApplicationtypeadoxioproratedlicencefeescheduleapplicationtype Applicationtypeadoxioproratedlicencefeescheduleapplicationtype { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationtypeadoxiotermsconditionslimitationspresetapplicationtype.
         /// </summary>
         public virtual IApplicationtypeadoxiotermsconditionslimitationspresetapplicationtype Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype { get; private set; }
+
+        /// <summary>
+        /// Gets the IFylicencefeeproduct.
+        /// </summary>
+        public virtual IFylicencefeeproduct Fylicencefeeproduct { get; private set; }
 
         /// <summary>
         /// Gets the IAreas.
@@ -391,6 +401,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicencefeeproduct Licencefeeproduct { get; private set; }
 
         /// <summary>
+        /// Gets the ILicencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory.
+        /// </summary>
+        public virtual ILicencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory Licencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory { get; private set; }
+
+        /// <summary>
         /// Gets the ILicencetypes.
         /// </summary>
         public virtual ILicencetypes Licencetypes { get; private set; }
@@ -446,6 +461,51 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IPreviousaddresses Previousaddresses { get; private set; }
 
         /// <summary>
+        /// Gets the IProratedlicencefeeschedules.
+        /// </summary>
+        public virtual IProratedlicencefeeschedules Proratedlicencefeeschedules { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtype.
+        /// </summary>
+        public virtual IApplicationtype Applicationtype { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencesubcategory.
+        /// </summary>
+        public virtual ILicencesubcategory Licencesubcategory { get; private set; }
+
+        /// <summary>
+        /// Gets the IProratedlicencefeescheduleasyncoperations.
+        /// </summary>
+        public virtual IProratedlicencefeescheduleasyncoperations Proratedlicencefeescheduleasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IProratedlicencefeeschedulebulkdeletefailures.
+        /// </summary>
+        public virtual IProratedlicencefeeschedulebulkdeletefailures Proratedlicencefeeschedulebulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IProratedlicencefeeschedulemailboxtrackingfolders.
+        /// </summary>
+        public virtual IProratedlicencefeeschedulemailboxtrackingfolders Proratedlicencefeeschedulemailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IProratedlicencefeescheduleprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IProratedlicencefeescheduleprincipalobjectattributeaccesses Proratedlicencefeescheduleprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IProratedlicencefeescheduleprocesssession.
+        /// </summary>
+        public virtual IProratedlicencefeescheduleprocesssession Proratedlicencefeescheduleprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the IProratedlicencefeeschedulesyncerrors.
+        /// </summary>
+        public virtual IProratedlicencefeeschedulesyncerrors Proratedlicencefeeschedulesyncerrors { get; private set; }
+
+        /// <summary>
         /// Gets the IRegions.
         /// </summary>
         public virtual IRegions Regions { get; private set; }
@@ -491,11 +551,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ITermsconditionslimitationspresets Termsconditionslimitationspresets { get; private set; }
 
         /// <summary>
-        /// Gets the IApplicationtype.
-        /// </summary>
-        public virtual IApplicationtype Applicationtype { get; private set; }
-
-        /// <summary>
         /// Gets the ITerritories.
         /// </summary>
         public virtual ITerritories Territories { get; private set; }
@@ -524,6 +579,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IWorkers.
         /// </summary>
         public virtual IWorkers Workers { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioproratedlicencefeeschedule.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioproratedlicencefeeschedule Regardingobjectidadoxioproratedlicencefeeschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioproratedlicencefeeschedule.
+        /// </summary>
+        public virtual IBusinessunitadoxioproratedlicencefeeschedule Businessunitadoxioproratedlicencefeeschedule { get; private set; }
 
         /// <summary>
         /// Gets the IContacts.
@@ -556,6 +621,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILists Lists { get; private set; }
 
         /// <summary>
+        /// Gets the IObjectidadoxioproratedlicencefeeschedule.
+        /// </summary>
+        public virtual IObjectidadoxioproratedlicencefeeschedule Objectidadoxioproratedlicencefeeschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the IProductadoxioapplicationtypefylicencefeeproduct.
+        /// </summary>
+        public virtual IProductadoxioapplicationtypefylicencefeeproduct Productadoxioapplicationtypefylicencefeeproduct { get; private set; }
+
+        /// <summary>
         /// Gets the IProductadoxiolicencesubcategorylicencefeeproduct.
         /// </summary>
         public virtual IProductadoxiolicencesubcategorylicencefeeproduct Productadoxiolicencesubcategorylicencefeeproduct { get; private set; }
@@ -579,6 +654,41 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISystemforms.
         /// </summary>
         public virtual ISystemforms Systemforms { get; private set; }
+
+        /// <summary>
+        /// Gets the ISystemusers.
+        /// </summary>
+        public virtual ISystemusers Systemusers { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioproratedlicencefeeschedulecreatedby.
+        /// </summary>
+        public virtual ILkadoxioproratedlicencefeeschedulecreatedby Lkadoxioproratedlicencefeeschedulecreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioproratedlicencefeeschedulecreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioproratedlicencefeeschedulecreatedonbehalfby Lkadoxioproratedlicencefeeschedulecreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioproratedlicencefeeschedulemodifiedby.
+        /// </summary>
+        public virtual ILkadoxioproratedlicencefeeschedulemodifiedby Lkadoxioproratedlicencefeeschedulemodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioproratedlicencefeeschedulemodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioproratedlicencefeeschedulemodifiedonbehalfby Lkadoxioproratedlicencefeeschedulemodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the IUseradoxioproratedlicencefeeschedule.
+        /// </summary>
+        public virtual IUseradoxioproratedlicencefeeschedule Useradoxioproratedlicencefeeschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioproratedlicencefeeschedule.
+        /// </summary>
+        public virtual ITeamadoxioproratedlicencefeeschedule Teamadoxioproratedlicencefeeschedule { get; private set; }
 
         /// <summary>
         /// Gets the IWorkflows.
@@ -845,7 +955,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationtypecontents = new Applicationtypecontents(this);
             Applicationtypefeeschedules = new Applicationtypefeeschedules(this);
             Applicationtypes = new Applicationtypes(this);
+            Applicationtypeadoxioproratedlicencefeescheduleapplicationtype = new Applicationtypeadoxioproratedlicencefeescheduleapplicationtype(this);
             Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype = new Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype(this);
+            Fylicencefeeproduct = new Fylicencefeeproduct(this);
             Areas = new Areas(this);
             Auditlogrequests = new Auditlogrequests(this);
             Businessaccounts = new Businessaccounts(this);
@@ -891,6 +1003,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Licenceses = new Licenceses(this);
             Licencesubcategories = new Licencesubcategories(this);
             Licencefeeproduct = new Licencefeeproduct(this);
+            Licencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory = new Licencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory(this);
             Licencetypes = new Licencetypes(this);
             Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
             Licenseechangelogs = new Licenseechangelogs(this);
@@ -902,6 +1015,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             Policydocuments = new Policydocuments(this);
             Postalcodes = new Postalcodes(this);
             Previousaddresses = new Previousaddresses(this);
+            Proratedlicencefeeschedules = new Proratedlicencefeeschedules(this);
+            Applicationtype = new Applicationtype(this);
+            Licencesubcategory = new Licencesubcategory(this);
+            Proratedlicencefeescheduleasyncoperations = new Proratedlicencefeescheduleasyncoperations(this);
+            Proratedlicencefeeschedulebulkdeletefailures = new Proratedlicencefeeschedulebulkdeletefailures(this);
+            Proratedlicencefeeschedulemailboxtrackingfolders = new Proratedlicencefeeschedulemailboxtrackingfolders(this);
+            Proratedlicencefeescheduleprincipalobjectattributeaccesses = new Proratedlicencefeescheduleprincipalobjectattributeaccesses(this);
+            Proratedlicencefeescheduleprocesssession = new Proratedlicencefeescheduleprocesssession(this);
+            Proratedlicencefeeschedulesyncerrors = new Proratedlicencefeeschedulesyncerrors(this);
             Regions = new Regions(this);
             Relatedparties = new Relatedparties(this);
             Rmreviews = new Rmreviews(this);
@@ -911,24 +1033,34 @@ namespace Gov.Lclb.Cllb.Interfaces
             Spdexportses = new Spdexportses(this);
             Taxandaccountings = new Taxandaccountings(this);
             Termsconditionslimitationspresets = new Termsconditionslimitationspresets(this);
-            Applicationtype = new Applicationtype(this);
             Territories = new Territories(this);
             Tiedhouseassociations = new Tiedhouseassociations(this);
             Tiedhouseconnections = new Tiedhouseconnections(this);
             Witnesses = new Witnesses(this);
             Workerinvoicehistories = new Workerinvoicehistories(this);
             Workers = new Workers(this);
+            Regardingobjectidadoxioproratedlicencefeeschedule = new Regardingobjectidadoxioproratedlicencefeeschedule(this);
+            Businessunitadoxioproratedlicencefeeschedule = new Businessunitadoxioproratedlicencefeeschedule(this);
             Contacts = new Contacts(this);
             Entitydefinitions = new Entitydefinitions(this);
             Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
             Invoices = new Invoices(this);
             Leads = new Leads(this);
             Lists = new Lists(this);
+            Objectidadoxioproratedlicencefeeschedule = new Objectidadoxioproratedlicencefeeschedule(this);
+            Productadoxioapplicationtypefylicencefeeproduct = new Productadoxioapplicationtypefylicencefeeproduct(this);
             Productadoxiolicencesubcategorylicencefeeproduct = new Productadoxiolicencesubcategorylicencefeeproduct(this);
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
             Systemforms = new Systemforms(this);
+            Systemusers = new Systemusers(this);
+            Lkadoxioproratedlicencefeeschedulecreatedby = new Lkadoxioproratedlicencefeeschedulecreatedby(this);
+            Lkadoxioproratedlicencefeeschedulecreatedonbehalfby = new Lkadoxioproratedlicencefeeschedulecreatedonbehalfby(this);
+            Lkadoxioproratedlicencefeeschedulemodifiedby = new Lkadoxioproratedlicencefeeschedulemodifiedby(this);
+            Lkadoxioproratedlicencefeeschedulemodifiedonbehalfby = new Lkadoxioproratedlicencefeeschedulemodifiedonbehalfby(this);
+            Useradoxioproratedlicencefeeschedule = new Useradoxioproratedlicencefeeschedule(this);
+            Teamadoxioproratedlicencefeeschedule = new Teamadoxioproratedlicencefeeschedule(this);
             Workflows = new Workflows(this);
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
