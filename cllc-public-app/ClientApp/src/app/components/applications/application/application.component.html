@@ -275,7 +275,7 @@
 
 
               <!-- Letter of Intent -->
-              <section *ngIf="application?.applicationType.name === 'Special Event Area Endorsement'">
+              <section *ngIf="showFormControl(application?.applicationType?.letterOfIntent)">
                 <h3 class="blue-header">Letter of Intent</h3>
                 <section class="content-bottom">
                 <div *ngIf="htmlContent.letterOfIntent">
