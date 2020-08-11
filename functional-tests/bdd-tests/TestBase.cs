@@ -1280,12 +1280,12 @@ namespace bdd_tests
             yesALRZoning.Click();
 
             // search for and select the indigenous nation
-            NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
-            uiIndigenousNation.SendKeys(indigenousNation);
+            //NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
+            //uiIndigenousNation.SendKeys(indigenousNation);
 
-            // search for and select the  police jurisdiction
-            NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
-            uiPoliceJurisdiction.SendKeys(policeJurisdiction);
+            // search for and select the police jurisdiction
+            //NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
+            //uiPoliceJurisdiction.SendKeys(policeJurisdiction);
 
             // enter the store email
             NgWebElement uiEstabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
