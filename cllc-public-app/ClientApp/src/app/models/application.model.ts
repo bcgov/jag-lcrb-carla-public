@@ -114,6 +114,7 @@ export class Application {
   isReadyExtranceExit: boolean;
   isReadySurveillanceNotice: boolean;
   isReadyProductNotVisibleOutside: boolean;
+  isLocatedInGroceryStore: boolean;
   establishmentopeningdate: Date;
   isApplicationComplete: string;
 

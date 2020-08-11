@@ -48,7 +48,7 @@ export class ApplicationType {
   isFree: boolean;
   isEndorsement: boolean;
   requiresSecurityScreening: boolean;
-
+  letterOfIntent: string;
   dynamicsForm: DynamicsForm;
 
   serviceAreas: boolean;

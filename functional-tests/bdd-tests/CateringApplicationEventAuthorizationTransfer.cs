@@ -140,7 +140,7 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I click on the Licences tab
-    And I click on the event authorization link
+    And I click on the link for event authorization
     And I do not complete the application correctly
     And the expected validation errors are thrown for an event authorization
     And the account is deleted
@@ -160,7 +160,7 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I click on the Licences tab
-    And I click on the transfer of ownership link
+    And I click on the link for transfer of ownership
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Catering transfer of ownership
     And the account is deleted
@@ -175,7 +175,19 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void Given_I_view_the_dashboard_IN(string businessType)
         {
-            CheckFeatureFlagsLiquor();
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLiquorOne();
+
+            CheckFeatureFlagsLGIN();
+
+            CheckFeatureFlagsIN();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
+            IgnoreSynchronization();
 
             CarlaLogin(businessType);
         }

@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top101 { get; set; }
+        int? Top120 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip101 { get; set; }
+        int? Skip120 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count101 { get; set; }
+        bool? Count120 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter101 { get; set; }
+        string Filter120 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search101 { get; set; }
+        string Search120 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -158,9 +158,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationtypes Applicationtypes { get; }
 
         /// <summary>
+        /// Gets the IApplicationtypeadoxioproratedlicencefeescheduleapplicationtype.
+        /// </summary>
+        IApplicationtypeadoxioproratedlicencefeescheduleapplicationtype Applicationtypeadoxioproratedlicencefeescheduleapplicationtype { get; }
+
+        /// <summary>
         /// Gets the IApplicationtypeadoxiotermsconditionslimitationspresetapplicationtype.
         /// </summary>
         IApplicationtypeadoxiotermsconditionslimitationspresetapplicationtype Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype { get; }
+
+        /// <summary>
+        /// Gets the IFylicencefeeproduct.
+        /// </summary>
+        IFylicencefeeproduct Fylicencefeeproduct { get; }
 
         /// <summary>
         /// Gets the IAreas.
@@ -383,6 +393,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicencesubcategories Licencesubcategories { get; }
 
         /// <summary>
+        /// Gets the ILicencefeeproduct.
+        /// </summary>
+        ILicencefeeproduct Licencefeeproduct { get; }
+
+        /// <summary>
+        /// Gets the ILicencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory.
+        /// </summary>
+        ILicencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory Licencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory { get; }
+
+        /// <summary>
         /// Gets the ILicencetypes.
         /// </summary>
         ILicencetypes Licencetypes { get; }
@@ -438,6 +458,51 @@ namespace Gov.Lclb.Cllb.Interfaces
         IPreviousaddresses Previousaddresses { get; }
 
         /// <summary>
+        /// Gets the IProratedlicencefeeschedules.
+        /// </summary>
+        IProratedlicencefeeschedules Proratedlicencefeeschedules { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtype.
+        /// </summary>
+        IApplicationtype Applicationtype { get; }
+
+        /// <summary>
+        /// Gets the ILicencesubcategory.
+        /// </summary>
+        ILicencesubcategory Licencesubcategory { get; }
+
+        /// <summary>
+        /// Gets the IProratedlicencefeescheduleasyncoperations.
+        /// </summary>
+        IProratedlicencefeescheduleasyncoperations Proratedlicencefeescheduleasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IProratedlicencefeeschedulebulkdeletefailures.
+        /// </summary>
+        IProratedlicencefeeschedulebulkdeletefailures Proratedlicencefeeschedulebulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IProratedlicencefeeschedulemailboxtrackingfolders.
+        /// </summary>
+        IProratedlicencefeeschedulemailboxtrackingfolders Proratedlicencefeeschedulemailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the IProratedlicencefeescheduleprincipalobjectattributeaccesses.
+        /// </summary>
+        IProratedlicencefeescheduleprincipalobjectattributeaccesses Proratedlicencefeescheduleprincipalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the IProratedlicencefeescheduleprocesssession.
+        /// </summary>
+        IProratedlicencefeescheduleprocesssession Proratedlicencefeescheduleprocesssession { get; }
+
+        /// <summary>
+        /// Gets the IProratedlicencefeeschedulesyncerrors.
+        /// </summary>
+        IProratedlicencefeeschedulesyncerrors Proratedlicencefeeschedulesyncerrors { get; }
+
+        /// <summary>
         /// Gets the IRegions.
         /// </summary>
         IRegions Regions { get; }
@@ -483,11 +548,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         ITermsconditionslimitationspresets Termsconditionslimitationspresets { get; }
 
         /// <summary>
-        /// Gets the IApplicationtype.
-        /// </summary>
-        IApplicationtype Applicationtype { get; }
-
-        /// <summary>
         /// Gets the ITerritories.
         /// </summary>
         ITerritories Territories { get; }
@@ -516,6 +576,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IWorkers.
         /// </summary>
         IWorkers Workers { get; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioproratedlicencefeeschedule.
+        /// </summary>
+        IRegardingobjectidadoxioproratedlicencefeeschedule Regardingobjectidadoxioproratedlicencefeeschedule { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioproratedlicencefeeschedule.
+        /// </summary>
+        IBusinessunitadoxioproratedlicencefeeschedule Businessunitadoxioproratedlicencefeeschedule { get; }
 
         /// <summary>
         /// Gets the IContacts.
@@ -548,6 +618,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILists Lists { get; }
 
         /// <summary>
+        /// Gets the IObjectidadoxioproratedlicencefeeschedule.
+        /// </summary>
+        IObjectidadoxioproratedlicencefeeschedule Objectidadoxioproratedlicencefeeschedule { get; }
+
+        /// <summary>
+        /// Gets the IProductadoxioapplicationtypefylicencefeeproduct.
+        /// </summary>
+        IProductadoxioapplicationtypefylicencefeeproduct Productadoxioapplicationtypefylicencefeeproduct { get; }
+
+        /// <summary>
+        /// Gets the IProductadoxiolicencesubcategorylicencefeeproduct.
+        /// </summary>
+        IProductadoxiolicencesubcategorylicencefeeproduct Productadoxiolicencesubcategorylicencefeeproduct { get; }
+
+        /// <summary>
         /// Gets the ISavedqueries.
         /// </summary>
         ISavedqueries Savedqueries { get; }
@@ -566,6 +651,41 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISystemforms.
         /// </summary>
         ISystemforms Systemforms { get; }
+
+        /// <summary>
+        /// Gets the ISystemusers.
+        /// </summary>
+        ISystemusers Systemusers { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioproratedlicencefeeschedulecreatedby.
+        /// </summary>
+        ILkadoxioproratedlicencefeeschedulecreatedby Lkadoxioproratedlicencefeeschedulecreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioproratedlicencefeeschedulecreatedonbehalfby.
+        /// </summary>
+        ILkadoxioproratedlicencefeeschedulecreatedonbehalfby Lkadoxioproratedlicencefeeschedulecreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioproratedlicencefeeschedulemodifiedby.
+        /// </summary>
+        ILkadoxioproratedlicencefeeschedulemodifiedby Lkadoxioproratedlicencefeeschedulemodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioproratedlicencefeeschedulemodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioproratedlicencefeeschedulemodifiedonbehalfby Lkadoxioproratedlicencefeeschedulemodifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the IUseradoxioproratedlicencefeeschedule.
+        /// </summary>
+        IUseradoxioproratedlicencefeeschedule Useradoxioproratedlicencefeeschedule { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioproratedlicencefeeschedule.
+        /// </summary>
+        ITeamadoxioproratedlicencefeeschedule Teamadoxioproratedlicencefeeschedule { get; }
 
         /// <summary>
         /// Gets the IWorkflows.

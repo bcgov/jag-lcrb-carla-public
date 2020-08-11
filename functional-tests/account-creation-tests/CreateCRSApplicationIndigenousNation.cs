@@ -41,13 +41,13 @@ namespace bdd_tests
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void I_view_the_dashboard(string businessType)
         {
-            CarlaLoginNoCheck();
-        }
+            NavigateToFeatures();
 
-        [And(@"I am logged in to the dashboard as an (.*)")]
-        public void And_I_view_the_dashboard_IN(string businessType)
-        {
-            CarlaLoginWithUser(businessType);
+            CheckFeatureFlagsLicenseeChanges();
+
+            IgnoreSynchronization();
+
+            CarlaLoginNoCheck(businessType);
         }
     }
 }
