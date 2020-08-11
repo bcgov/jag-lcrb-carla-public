@@ -102,7 +102,7 @@
         "displayName": "Git Repo URL",
         "description": "The URL to your GIT repo.",
         "required": true,
-        "value": "https://github.com/brianorwhatever/aries-vcr.git"
+        "value": "https://github.com/bcgov/aries-vcr.git"
       },
       {
         "name": "GIT_REF",
