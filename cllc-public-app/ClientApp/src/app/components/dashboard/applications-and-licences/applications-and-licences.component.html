@@ -228,12 +228,14 @@
               -->
               <td style="background-color: #E1E8F2; padding: 10px;">
                 <div style="text-transform: uppercase; font-weight: 600;">
-                  <span *ngIf="!item.lgHasApproved">
+                  <span *ngIf="!item.lgHasApproved || item.isPaid">
                     {{item.applicationStatus}}
                   </span>
-                  <span *ngIf="item.lgHasApproved">
+ 
+                  <span *ngIf="item.lgHasApproved && !item.isPaid">
                     Ready for Submission
                   </span>
+ 
                 </div>
                 <p *ngIf="item.applicationStatus === 'Not Submitted'">
                   This application has not yet been submitted.
@@ -372,7 +374,7 @@
               </td>
               <td>
                 <section *ngIf="item?.endorsements?.length">
-                  <p>Third Party Operator Application</p>
+                  <!--p>Third Party Operator Application</p-->
                   <ul>
                     <li *ngFor="let appType of item.endorsements">
                       <a href="javascript:void(0)" (click)="startEndorsementApplication(item, appType)">{{appType}}</a>
