@@ -90,9 +90,12 @@ namespace Gov.Lclb.Cllb.OneStopService
                 Log.Logger.Information($"Licence record retrieved from Dynamics.");
                 //save the program account number to dynamics
                 var businessProgramAccountNumber = licenseData.body.businessProgramAccountNumber.businessProgramAccountReferenceNumber;
+                int tempBpan = int.Parse(businessProgramAccountNumber);
+                string sanitizedBpan = tempBpan.ToString();
+
                 MicrosoftDynamicsCRMadoxioLicences pathLicence = new MicrosoftDynamicsCRMadoxioLicences()
                 {
-                    AdoxioBusinessprogramaccountreferencenumber = businessProgramAccountNumber,
+                    AdoxioBusinessprogramaccountreferencenumber = sanitizedBpan,
                     AdoxioOnestopsent = true
                 };
                 Log.Logger.Information($"Sending update to Dynamics for BusinessProgramAccountNumber.");
