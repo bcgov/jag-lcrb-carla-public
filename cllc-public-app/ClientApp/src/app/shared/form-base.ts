@@ -20,8 +20,8 @@ export class ApplicationHTMLContent {
     validInterest: string;
     letterOfIntent: string;
     zoning: string;
-    serviceArea: string;
-    outdoorArea: string;
+    serviceAreas: string;
+    outdoorAreas: string;
     capacityArea: string;
     signage: string;
     grocery: string;
@@ -50,8 +50,8 @@ export class FormBase implements OnDestroy {
                 validInterest: this.getApplicationContent('ValidInterest'),
                 letterOfIntent: this.getApplicationContent('LetterOfIntent'),
                 zoning: this.getApplicationContent('Zoning'),
-                serviceArea: this.getApplicationContent('ServiceAreas'),
-                outdoorArea: this.getApplicationContent('OutdoorAreas'),
+                serviceAreas: this.getApplicationContent('ServiceArea'),
+                outdoorAreas: this.getApplicationContent('OutdoorArea'),
                 capacityArea: this.getApplicationContent('CapacityArea'),
                 signage: this.getApplicationContent('Signage'),
                 grocery: this.getApplicationContent('Grocery'),
