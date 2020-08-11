@@ -3,7 +3,7 @@
     I want to submit a CRS Application for an indigenous nation
     To be used as test data
 
-Scenario: Start Application
+Scenario: Create CRS Application Indigenous Nation
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
     And I am logged in to the dashboard as an indigenous nation
