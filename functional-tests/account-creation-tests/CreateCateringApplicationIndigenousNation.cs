@@ -49,7 +49,7 @@ namespace bdd_tests
 
             IgnoreSynchronization();
 
-            CarlaLoginNoCheck();
+            CarlaLoginNoCheck(businessType);
         }
 
         [And(@"I am logged in to the dashboard as an (.*)")]
