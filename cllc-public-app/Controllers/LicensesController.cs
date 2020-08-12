@@ -492,7 +492,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     
                     }
 
-                    application.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", lginvalue);
+                    if (!string.IsNullOrEmpty(lginvalue))
+                    {
+                        application.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", lginvalue);
+                    }
 
                     licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioPolicejurisdictionidValue )).FirstOrDefault();
                     // Police Jurisdiction association
