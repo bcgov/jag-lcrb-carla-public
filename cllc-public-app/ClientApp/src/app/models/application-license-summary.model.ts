@@ -49,7 +49,6 @@ export class ApplicationLicenseSummary {
 
   thirdPartyOperatorAccountName: string;
   isOperated: boolean; // only used on the client side
-  isDeemed: boolean; // only used on the client side
 
   licenceTypeCategory: string;
   representativeFullName: string;

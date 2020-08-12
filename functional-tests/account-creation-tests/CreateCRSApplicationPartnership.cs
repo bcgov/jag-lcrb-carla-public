@@ -7,12 +7,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: Create_CRSApplication_partnership
+Feature: CreateCRSApplicationPartnership
     As a logged in business user
     I want to submit a CRS Application for a partnership
     To be used as test data
 
-Scenario: Start Application
+Scenario: Create CRS Application Partnership
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
     And I am logged in to the dashboard as a partnership
@@ -29,11 +29,11 @@ Scenario: Start Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./Create_CRSApplication_partnership.feature")]
+    [FeatureFile("./CreateCRSApplicationPartnership.feature")]
     public sealed class CreateCRSApplicationPartnership : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
-        public void I_view_the_dashboard(string businessType)
+        public void LogInToDashboard(string businessType)
         {
             NavigateToFeatures();
 

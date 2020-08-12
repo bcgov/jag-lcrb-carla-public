@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: Create_CRSApplication_indigenousnation
+Feature: CreateCRSApplicationIndigenousNation
     As a logged in business user
     I want to submit a CRS Application for an indigenous nation
     To be used as test data
 
-Scenario: Start Application
+Scenario: Create CRS Application Indigenous Nation
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
     And I am logged in to the dashboard as an indigenous nation
@@ -35,11 +35,11 @@ Scenario: Start Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./Create_CRSApplication_indigenousnation.feature")]
+    [FeatureFile("./CreateCRSApplicationIndigenousNation.feature")]
     public sealed class CreateCRSApplicationIndigenousNation : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
-        public void I_view_the_dashboard(string businessType)
+        public void LogInToDashboard(string businessType)
         {
             NavigateToFeatures();
 

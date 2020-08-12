@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: Create_CateringApplication_society
+Feature: CreateCateringApplicationSociety
     As a logged in business user
     I want to submit a Catering Application for a society
     To be used as test data
 
-Scenario: Start Application
+Scenario: Create Catering Application Society
     Given I am logged in to the dashboard as a society
     And the account is deleted
     And I am logged in to the dashboard as a society
@@ -35,11 +35,11 @@ Scenario: Start Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./Create_CateringApplication_society.feature")]
+    [FeatureFile("./CreateCateringApplicationSociety.feature")]
     public sealed class CreateCateringApplicationSociety : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
-        public void I_view_the_dashboard(string businessType)
+        public void LogInToDashboard(string businessType)
         {
             NavigateToFeatures();
 

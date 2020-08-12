@@ -1,4 +1,4 @@
-﻿Feature: Create_CRSApplication_indigenousnation
+﻿Feature: CreateCRSApplicationIndigenousNation
     As a logged in business user
     I want to submit a CRS Application for an indigenous nation
     To be used as test data
