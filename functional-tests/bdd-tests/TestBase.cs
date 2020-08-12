@@ -599,7 +599,7 @@ namespace bdd_tests
         [And(@"I click on the Pay for Application button")]
         public void ClickOnPayButton()
         {
-            NgWebElement payButton = ngDriver.FindElement(By.CssSelector(".btn-primary+ .btn-primary"));
+            NgWebElement payButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
             payButton.Click();
         }
 
