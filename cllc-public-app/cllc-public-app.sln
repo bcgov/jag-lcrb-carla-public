@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneStopRestClient", "..\cll
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrgBookClient", "..\cllc-interfaces\OrgBookClient\OrgBookClient.csproj", "{6253E255-252F-4E2E-A7BF-9D4B48DCA0CD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeocoderClient", "..\cllc-interfaces\GeocoderClient\GeocoderClient.csproj", "{5473F05F-9B5B-42D8-BEBD-CE7D106031D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geocoder", "..\cllc-interfaces\GeocoderClient\Geocoder.csproj", "{5473F05F-9B5B-42D8-BEBD-CE7D106031D0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cllc-public-app", "cllc-public-app.csproj", "{8FE0A3D0-B466-41E3-91A9-3AB6207C15E5}"
 EndProject

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         HealthCheckContext context,
         CancellationToken cancellationToken = default(CancellationToken))
         {
-            GeocoderClient geocoder = new GeocoderClient(_configuration);
+            GeocoderService geocoder = new GeocoderService(new HttpClient(), _configuration);
             // Try and get the Account document library
             bool healthCheckResultHealthy;
             try

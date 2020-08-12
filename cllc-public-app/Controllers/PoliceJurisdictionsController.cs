@@ -20,11 +20,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IMemoryCache _cache;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly PdfClient _pdfClient;
+        private readonly IPdfService _pdfClient;
         private readonly ILogger _logger;
 
         public PoliceJurisdictionsController(IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor,
-            PdfClient pdfClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache)
+            IPdfService pdfClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache)
         {
             _cache = memoryCache;
             _dynamicsClient = dynamicsClient;
