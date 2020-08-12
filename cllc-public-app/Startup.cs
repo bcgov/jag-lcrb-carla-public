@@ -30,6 +30,8 @@ using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using NWebsec.AspNetCore.Mvc;
 using NWebsec.AspNetCore.Mvc.Csp;
+using Polly;
+using Polly.Extensions.Http;
 using Serilog;
 using Serilog.Exceptions;
 using System;
@@ -114,7 +116,7 @@ namespace Gov.Lclb.Cllb.Public
            })
             .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            // setup siteminder authentication (core 2.0)
+            // setup siteminder authentication 
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = SiteMinderAuthOptions.AuthenticationSchemeName;
@@ -170,9 +172,6 @@ namespace Gov.Lclb.Cllb.Public
 
 
 
-
-
-
             if (!string.IsNullOrEmpty(_configuration["REDIS_SERVER"]))
             {
                 string config = _configuration["REDIS_SERVER"];
@@ -208,7 +207,7 @@ namespace Gov.Lclb.Cllb.Public
                 .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
 #endif
                 .AddCheck<DynamicsHealthCheck>("Dynamics")
-                    .AddCheck<GeocoderHealthCheck>("Geocoder");
+                .AddCheck<GeocoderHealthCheck>("Geocoder");
             }
 
             // session will automatically use redis or another distributed cache if it is available.
@@ -218,6 +217,23 @@ namespace Gov.Lclb.Cllb.Public
                 x.Cookie.IsEssential = true;
             });
 
+        }
+
+        /// <summary>
+        /// Shared Http Retry Policy - with Jitter and exponential back-off.
+        /// </summary>
+        /// <returns></returns>
+        static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
+        {
+            Random jitterer = new Random();
+            var retryWithJitterPolicy = HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .OrResult(msg => msg.StatusCode == System.Net.HttpStatusCode.GatewayTimeout || msg.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+                .WaitAndRetryAsync(6,    // exponential back-off plus some jitter
+                    retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))
+                                  + TimeSpan.FromMilliseconds(jitterer.Next(0, 100))
+                );
+            return retryWithJitterPolicy;
         }
 
         private void SetupServices(IServiceCollection services)
@@ -270,28 +286,17 @@ namespace Gov.Lclb.Cllb.Public
 
             services.AddTransient<BCeIDBusinessQuery>(_ => new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl));
 
-            // add BCEP services
-
-            var bcep_svc_url = _configuration["BCEP_SERVICE_URL"];
-            var bcep_svc_svcid = _configuration["BCEP_MERCHANT_ID"];
-            var bcep_svc_alt_svcid = _configuration["BCEP_ALTERNATE_MERCHANT_ID"];
-            var bcep_svc_hashid = _configuration["BCEP_HASH_KEY"];
-            var bcep_base_uri = _configuration["BASE_URI"];
-            var bcep_base_path = _configuration["BASE_PATH"];
-            var bcep_conf_path = _configuration["BCEP_CONF_PATH"];
-
-            services.AddTransient<BCEPWrapper>(_ => new BCEPWrapper(bcep_svc_url, bcep_svc_svcid, bcep_svc_alt_svcid, bcep_svc_hashid,
-                bcep_base_uri + bcep_base_path + bcep_conf_path));
+            // add BC Express Pay (Bambora) service
+            services.AddHttpClient<IBCEPService, BCEPService>()
+                .AddPolicyHandler(GetRetryPolicy());
 
             // add the PDF client.
-            string pdf_service_base_uri = _configuration["PDF_SERVICE_BASE_URI"];
-            string bearer_token = $"Bearer {_configuration["PDF_JWT_TOKEN"]}";
-
-            services.AddTransient<PdfClient>(_ => new PdfClient(pdf_service_base_uri, bearer_token));
+            services.AddHttpClient<IPdfService, PdfService>()
+                .AddPolicyHandler(GetRetryPolicy());
 
             // add the GeoCoder Client.
-
-            services.AddTransient<GeocoderClient>(_ => new GeocoderClient(_configuration));
+            services.AddHttpClient<IGeocoderService, GeocoderService>()                
+                .AddPolicyHandler(GetRetryPolicy()); 
 
             // add the file manager.
             string fileManagerURI = _configuration["FILE_MANAGER_URI"];
