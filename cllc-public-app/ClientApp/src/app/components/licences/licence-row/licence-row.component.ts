@@ -154,15 +154,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     }
 
     actionsVisible(licence: ApplicationLicenseSummary) {
-        let retVal = true;
-        if (licence.transferRequested) {
-            if (licence.licenceTypeCategory === 'Cannabis' && licence.isDeemed) {
-                retVal = false;
-            } else if (licence.licenceTypeCategory === 'Liquor' && !licence.isDeemed) {
-                retVal = false;
-            }
+        if (licence.transferRequested && licence.licenceTypeCategory === 'Liquor') {
+          return false;
         }
-        return retVal;
+        return true;
     }
 
     actionVisible(licence: License, actionId: string) {
