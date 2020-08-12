@@ -488,8 +488,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
 
     if (this.application.applicationType.lGandPoliceSelectors === "Yes" && this.LGApprovalsFeatureIsOn) {
-      this.form.get('indigenousNation').setValidators([Validators.required]);
-      this.form.get('policeJurisdiction').setValidators([Validators.required]);
+      this.form.get('indigenousNation').setValidators([this.requiredAutoCompleteId]);
+      this.form.get('policeJurisdiction').setValidators([this.requiredAutoCompleteId]);
     }
 
     if (this.isRAS()) {
@@ -711,8 +711,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
   saveForLater() {
     this.busyPromise = this.save(true)
       .toPromise()
-      .then(() => {
-        this.router.navigateByUrl('/dashboard');
+      .then((saveSucceeded: boolean) => {
+        if (saveSucceeded) {
+          this.router.navigateByUrl('/dashboard');
+        } else {
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        }
       });
   }
 
@@ -807,8 +811,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.isValid()) { // Only proceed if the data is valid
       this.busyPromise = this.save(true)
         .toPromise()
-        .then(() => {
-          this.saveComplete.next(true);
+        .then((saveSucceeded: boolean) => {
+          if (saveSucceeded) {
+            this.saveComplete.next(true);
+          } else {
+            this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          }
         });
     } else {
       this.showValidationMessages = true;
