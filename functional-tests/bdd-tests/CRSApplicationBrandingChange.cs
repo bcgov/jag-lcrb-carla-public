@@ -148,7 +148,7 @@ namespace bdd_tests
     public sealed class CRSApplicationBrandingChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
-        public void I_view_the_dashboard_IN(string businessType)
+        public void LogInToDashboard(string businessType)
         {
             NavigateToFeatures();
 
