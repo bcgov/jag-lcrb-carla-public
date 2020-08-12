@@ -359,15 +359,15 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
   startNewUBVApplication() {
     const newLicenceApplicationData: Application = <Application>{
-      licenseType: 'Rural Agency Store',
+      licenseType: 'UBrew and UVin',
       applicantType: this.account.businessType,
-      applicationType: <ApplicationType>{ name: ApplicationTypeNames.RAS },
+      applicationType: <ApplicationType>{ name: ApplicationTypeNames.UBV },
       account: this.account,
     };
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
-        const route: any[] = [`/application/${data.id}`];
+        const route: any[] = [`/multi-step-application/${data.id}`];
 
         this.router.navigate(route);
       },

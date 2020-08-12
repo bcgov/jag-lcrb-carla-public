@@ -1457,6 +1457,25 @@ namespace Gov.Lclb.Cllb.Interfaces
             return false;
         }
 
+        /// <summary>
+        /// Verify whether currently logged in user has access to this account id
+        /// </summary>
+        /// <returns>boolean</returns>
+        public static bool CurrentUserIsContact(string contactId, IHttpContextAccessor _httpContextAccessor)
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            if (userSettings.ContactId != null && userSettings.ContactId.Length > 0)
+            {
+                return userSettings.ContactId == contactId;
+            }
+
+            // if current user doesn't have an account they are probably not logged in
+            return false;
+        }
+
         private static bool IsChildAccount(String parentAccountId, String childAccountId, IDynamicsClient _dynamicsClient)
         {
             var filter = $"_adoxio_account_value eq {parentAccountId}";
