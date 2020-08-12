@@ -18,14 +18,32 @@ Feature: WorkerApplication
     I want to submit a cannabis worker application
 
 Scenario: Worker Application
-    Given I am logged in to the dashboard
+    Given I login with no terms
+    And the account is deleted
+    And I am logged in to the dashboard
     And I click on my name
     And I complete Step 1 of the application
     And I complete Step 2 of the application
     And I click on the Submit & Pay button
     And I enter the payment information
     And I return to the dashboard
-    Then the dashboard has a new status
+    And the dashboard has a new status
+    And the account is deleted
+    Then I see the login page
+
+Scenario: Validation for Worker Application
+    Given I login with no terms
+    And the account is deleted
+    And I am logged in to the dashboard
+    And I click on my name
+    And I do not complete Step 1 of the application
+    And the Step 1 error messages are displayed
+    And I complete Step 1 of the application
+    And I do not complete Step 2 of the application
+    And I click on the Submit & Pay button
+    And the Step 2 error messages are displayed
+    And the account is deleted
+    Then I see the login page
 */
 
 namespace bdd_tests
@@ -35,25 +53,25 @@ namespace bdd_tests
     {
 
         [Given(@"I login with no terms")]
-        public void I_login_no_terms()
+        public void LoginNoTerms()
         {
             CarlaLoginWorkerNoTerms();
         }
 
         [Given(@"I am logged in to the dashboard")]
-        public void I_view_the_dashboard()
+        public void ViewDashboard()
         {
             CarlaLoginWorker();
         }
 
         [And(@"I am logged in to the dashboard")]
-        public void And_I_view_the_dashboard()
+        public void ViewDashboard2()
         {
             CarlaLoginWorker();
         }
 
         [And(@"I click on my name")]
-        public void I_click_on_my_name()
+        public void ClickOnMyName()
         {
             /* 
             Page Title: Worker Dashboard
@@ -64,7 +82,7 @@ namespace bdd_tests
         }
 
         [And(@"I complete Step 1 of the application")]
-        public void I_complete_step_1_of_the_application()
+        public void CompleteStep1OfApplication()
         {
             /* 
             Page Title: Worker Security Verification Application - Step 1
@@ -142,7 +160,7 @@ namespace bdd_tests
         }
 
         [And(@"I complete Step 2 of the application")]
-        public void I_complete_step_2_of_the_application()
+        public void CompleteStep2OfApplication()
         {
             /* 
             Page Title: Consent for Cannabis Security Screening - Step 2
@@ -154,7 +172,7 @@ namespace bdd_tests
         }
 
         [And(@"I click on the Submit & Pay button")]
-        public void click_on_submit_and_pay()
+        public void ClickOnSubmitAndPay()
         {
             /* 
             Page Title: Consent for Cannabis Security Screening - Step 2
@@ -166,7 +184,7 @@ namespace bdd_tests
         }
 
         [And(@"I enter the payment information")]
-        public void enter_payment_info()
+        public void EnterPaymentInfo()
         {
             /* 
             Page Title: Internet Payments Program (Bambora)
