@@ -881,9 +881,15 @@ namespace bdd_tests
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
             uiIndigenousNation.SendKeys(indigenousNation);
 
+            NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
+            uiIndigenousNation2.Click();
+
             // search for and select the  police jurisdiction
             NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
             uiPoliceJurisdiction.SendKeys(policeJurisdiction);
+
+            NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
+            uiPoliceJurisdiction2.Click();
 
             // enter the store email
             NgWebElement estabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
