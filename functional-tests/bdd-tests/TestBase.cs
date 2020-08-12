@@ -218,10 +218,10 @@ namespace bdd_tests
         }
 
 
-        [And(@"I am logged in to the dashboard as a (.*)")]
+        [And(@"I am logged in to the dashboard as a(.*)")]
         public void ViewDashboard(string businessType)
         {
-            CarlaLogin(businessType);
+            CarlaLoginNoCheck(businessType);
         }
 
 
