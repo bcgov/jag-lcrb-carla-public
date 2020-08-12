@@ -7,29 +7,28 @@ using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
-    public class GeocoderClient
+    public class GeocoderService : IGeocoderService
     {
         public string BaseUri { get; set; }
 
-        private readonly HttpClient client;
+        private readonly HttpClient _client;
         private readonly IConfiguration _configuration;
 
 
-        public GeocoderClient(IConfiguration configuration)
+        public GeocoderService(HttpClient httpClient, IConfiguration configuration)
         {
 
             _configuration = configuration;
+            // create the HttpClient that is used for our direct REST calls.
+            _client = httpClient;
 
             if (!string.IsNullOrEmpty(_configuration["GEOCODER_SERVICE_BASE_URI"]) && !string.IsNullOrEmpty(_configuration["GEOCODER_JWT_TOKEN"]))
             {
                 BaseUri = _configuration["GEOCODER_SERVICE_BASE_URI"];
                 string bearer_token = $"Bearer {_configuration["GEOCODER_JWT_TOKEN"]}";
 
-                // create the HttpClient that is used for our direct REST calls.
-                client = new HttpClient();
-
-                client.DefaultRequestHeaders.Add("Accept", "application/json");
-                client.DefaultRequestHeaders.Add("Authorization", bearer_token);
+                _client.DefaultRequestHeaders.Add("Accept", "application/json");
+                _client.DefaultRequestHeaders.Add("Authorization", bearer_token);
             }
 
         }
@@ -52,7 +51,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 new HttpRequestMessage(HttpMethod.Get, BaseUri + "/api/geocoder/GeocodeEstablishment/" + establishmentId);
 
                 // make the request.
-                var response = await client.SendAsync(endpointRequest);
+                var response = await _client.SendAsync(endpointRequest);
                 HttpStatusCode _statusCode = response.StatusCode;
 
                 if (_statusCode == HttpStatusCode.OK)
@@ -83,7 +82,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             // make the request.
             try
             {
-                var response = await client.SendAsync(endpointRequest);
+                var response = await _client.SendAsync(endpointRequest);
                 HttpStatusCode _statusCode = response.StatusCode;
 
                 if (_statusCode == HttpStatusCode.OK)

@@ -1,4 +1,4 @@
-﻿Feature: Create_CRSApplication_partnership
+﻿Feature: CreateCRSApplicationPartnership
     As a logged in business user
     I want to submit a CRS Application for a partnership
     To be used as test data

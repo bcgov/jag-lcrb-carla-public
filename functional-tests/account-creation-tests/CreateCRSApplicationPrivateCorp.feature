@@ -1,4 +1,4 @@
-﻿Feature: Create_CRSApplication_privatecorp
+﻿Feature: CreateCRSApplicationPrivateCorp
     As a logged in business user
     I want to submit a CRS Application for a private corporation
     To be used as test data

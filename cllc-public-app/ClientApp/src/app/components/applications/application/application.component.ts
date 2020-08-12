@@ -270,7 +270,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.INRequestInProgress = false;
 
         this.cd.detectChanges();
-        if (data && data.length  === 0){
+        if (data && data.length === 0) {
           this.snackBar.open('No match found', '', { duration: 2500, panelClass: ['green-snackbar'] });
         }
       });
@@ -288,7 +288,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.policeJurisdictionReqInProgress = false;
 
         this.cd.detectChanges();
-        if (data && data.length  === 0){
+        if (data && data.length === 0) {
           this.snackBar.open('No match found', '', { duration: 2500, panelClass: ['green-snackbar'] });
         }
       });
@@ -374,7 +374,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
               this.form.get('indigenousNationId').patchValue(data.policeJurisdiction.id);
             }
             if (this.application.capacityArea.length > 0) {
-              this.form.get('capacityArea').patchValue({...this.application.capacityArea[0]});
+              this.form.get('capacityArea').patchValue({ ...this.application.capacityArea[0] });
             } else {
               this.form.get('capacityArea.areaLocation').patchValue(data.applicationType.name);
             }
@@ -488,8 +488,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
 
     if (this.application.applicationType.lGandPoliceSelectors === "Yes" && this.LGApprovalsFeatureIsOn) {
-      this.form.get('indigenousNation').setValidators([Validators.required]);
-      this.form.get('policeJurisdiction').setValidators([Validators.required]);
+      this.form.get('indigenousNation').setValidators([this.requiredAutoCompleteId]);
+      this.form.get('policeJurisdiction').setValidators([this.requiredAutoCompleteId]);
     }
 
     if (this.isRAS()) {
@@ -711,8 +711,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
   saveForLater() {
     this.busyPromise = this.save(true)
       .toPromise()
-      .then(() => {
-        this.router.navigateByUrl('/dashboard');
+      .then((saveSucceeded: boolean) => {
+        if (saveSucceeded) {
+          this.router.navigateByUrl('/dashboard');
+        } else {
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        }
       });
   }
 
@@ -750,9 +754,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
             // Dynamics will determine whether payment is required or not.
             // if the application is Free, it will not generate an invoice
             this.submitPayment()
-            .subscribe(res => {
-              this.saveComplete.emit(true);
-            });
+              .subscribe(res => {
+                this.saveComplete.emit(true);
+              });
             // however we need to redirect if the application is Free
             if (this.application.applicationType.isFree) {
               this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
@@ -804,7 +808,19 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   private proceedToSecurityScreening() {
     //send event to move to the next step of the multi-step
-    this.saveComplete.next(true);
+    if (this.isValid()) { // Only proceed if the data is valid
+      this.busyPromise = this.save(true)
+        .toPromise()
+        .then((saveSucceeded: boolean) => {
+          if (saveSucceeded) {
+            this.saveComplete.next(true);
+          } else {
+            this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          }
+        });
+    } else {
+      this.showValidationMessages = true;
+    }
   }
 
 
@@ -812,7 +828,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     let hasApproved = this.application && this.application.applicationType &&
       (this.application.applicationType.isShowLGINApproval && this.application.lGApprovalDecision === 'Approved') ||
       (this.application.applicationType.isShowLGZoningConfirmation && this.application.lgZoning === 'Allows');
-      return hasApproved;
+    return hasApproved;
   }
 
   /**
@@ -828,7 +844,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     return this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
-      .pipe(mergeMap(jsonUrl => {       
+      .pipe(mergeMap(jsonUrl => {
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
       }, (err: any) => {
@@ -925,11 +941,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
       //if (!this.form.get('hasValidInterest').value) {
       //  this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
-     // }
+      // }
 
       //if (!this.form.get('willhaveValidInterest').value) {
       //  this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
-     // }
+      // }
 
     }
 
