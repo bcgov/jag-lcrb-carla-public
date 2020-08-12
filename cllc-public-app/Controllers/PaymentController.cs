@@ -23,9 +23,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         private static Random random = new Random();
 
-        private readonly BCEPWrapper _bcep;
+        private readonly IBCEPService _bcep;
 
-        private readonly GeocoderClient _geocoderClient;
+        private readonly IGeocoderService _geocoderClient;
 
         private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
@@ -35,7 +35,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         public PaymentController(IConfiguration configuration,
                                  IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory,
-                                 IDynamicsClient dynamicsClient, BCEPWrapper bcep, GeocoderClient geocoderClient)
+                                 IDynamicsClient dynamicsClient, IBCEPService bcep, IGeocoderService geocoderClient)
         {
             _configuration = configuration;
             _bcep = bcep;
