@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: Create_CateringApplication_indigenousnation
+Feature: CreateCateringApplicationIndigenousNation
     As a logged in business user
     I want to submit a Catering Application for an indigenous nation
     To be used as test data
 
-Scenario: Start Application
+Scenario: Create Catering Application Indigenous Nation
     Given I am logged in to the dashboard as an indigenous nation
     And the account is deleted
     And I am logged in to the dashboard as an indigenous nation
@@ -35,7 +35,7 @@ Scenario: Start Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./Create_CateringApplication_indigenousnation.feature")]
+    [FeatureFile("./CreateCateringApplicationIndigenousNation.feature")]
     public sealed class CreateCateringApplicationIndigenousNation : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
