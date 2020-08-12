@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: Create_CRSApplication_soleproprietor
+Feature: CreateCRSApplicationSoleProprietor
     As a logged in business user
     I want to submit a CRS Application for a sole proprietorship
     To be used as test data
@@ -35,7 +35,7 @@ Scenario: Start Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./Create_CRSApplication_soleproprietor.feature")]
+    [FeatureFile("./CreateCRSApplicationSoleProprietor.feature")]
     public sealed class CreateCRSApplicationSoleProprietor : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
