@@ -19,7 +19,7 @@ Feature: CreateMultiLevelCRSApplicationPrivateCorp
     With multiple nested business shareholders
     To be used as test data
 
-Scenario: Start Application
+Scenario: Create Multi Level CRS Application Private Corporation
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     And I am logged in to the dashboard as a private corporation
