@@ -98,6 +98,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return BadRequest();
             }
+            bool accessGranted = false;
 
             // get the contact
             Guid contactId = Guid.Parse(id);
@@ -108,12 +109,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            // get the related account
-            Guid accountId = new Guid(contact._parentcustomeridValue);
-
-            if (!DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
+            // Allow access if the current user is the contact - for scenarios such as a worker update.
+            if (DynamicsExtensions.CurrentUserIsContact(id, _httpContextAccessor))
             {
-                _logger.LogError(LoggingEvents.BadRequest, "Current user has NO access to the contact account.");
+                accessGranted = true;
+            }
+            else
+            {
+                // get the related account and determine if the current user is allowed access
+                if (!string.IsNullOrEmpty(contact._parentcustomeridValue))
+                {
+                    Guid accountId = Guid.Parse(contact._parentcustomeridValue);
+                    accessGranted = DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient);
+                }
+            }
+            
+            if (! accessGranted)
+            {
+                _logger.LogError(LoggingEvents.BadRequest, $"Current user has NO access to the contact record. {id} ");
                 return NotFound();
             }
 
