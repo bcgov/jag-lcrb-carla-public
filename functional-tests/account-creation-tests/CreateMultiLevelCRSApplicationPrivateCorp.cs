@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: Create_MultiLevel_CRSApplication_PrivateCorp
+Feature: CreateMultiLevelCRSApplicationPrivateCorp
     As a logged in business user
     I want to submit a CRS Application for a private corporation
     With multiple nested business shareholders
@@ -37,7 +37,7 @@ Scenario: Start Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./Create_MultiLevel_CRSApplication_PrivateCorp.feature")]
+    [FeatureFile("./CreateMultiLevelCRSApplicationPrivateCorp.feature")]
     public sealed class CreateMultiLevelCRSApplicationPrivateCorp : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

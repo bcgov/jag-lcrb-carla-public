@@ -1,4 +1,4 @@
-﻿Feature: Create_MultiLevel_CRSApplication_PrivateCorp
+﻿Feature: CreateMultiLevelCRSApplicationPrivateCorp
     As a logged in business user
     I want to submit a CRS Application for a private corporation
     With multiple nested business shareholders
@@ -6,8 +6,8 @@
 
 Scenario: Create Multi Level CRS Application Private Corporation
     Given I am logged in to the dashboard as a private corporation
-    # And the account is deleted
-    # And I am logged in to the dashboard as a private corporation
+    And the account is deleted
+    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation

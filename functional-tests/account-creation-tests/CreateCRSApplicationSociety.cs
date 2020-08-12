@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: Create_CRSApplication_society
+Feature: CreateCRSApplicationSociety
     As a logged in business user
     I want to submit a CRS Application for a society
     To be used as test data
@@ -35,7 +35,7 @@ Scenario: Start Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./Create_CRSApplication_society.feature")]
+    [FeatureFile("./CreateCRSApplicationSociety.feature")]
     public sealed class CreateCRSApplicationSociety : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

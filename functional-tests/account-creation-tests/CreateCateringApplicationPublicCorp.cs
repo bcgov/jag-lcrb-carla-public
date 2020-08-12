@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: Create_CateringApplication_pubcorp
+Feature: CreateCateringApplicationPublicCorp
     As a logged in business user
     I want to submit a Catering Application for a public corporation
     To be used as test data
@@ -35,7 +35,7 @@ Scenario: Start Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./Create_CateringApplication_pubcorp.feature")]
+    [FeatureFile("./CreateCateringApplicationPublicCorp.feature")]
     public sealed class CreateCateringApplicationPublicCorp : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

@@ -1251,8 +1251,8 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "test2@automation.com";
-            string indigenousNation = "Cowichan Tribes";
-            string policeJurisdiction = "RCMP Shawnigan Lake";
+            //string indigenousNation = "Cowichan Tribes";
+            //string policeJurisdiction = "RCMP Shawnigan Lake";
 
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
