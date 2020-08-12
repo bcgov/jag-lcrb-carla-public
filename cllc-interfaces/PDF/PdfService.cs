@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -9,23 +10,24 @@ using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
-    public class PdfClient
+    public class PdfService : IPdfService
     {
 
         public string BaseUri { get; set; }
 
-        private HttpClient client;
+        private HttpClient _client;
 
-        public PdfClient(string baseUri, string Authorization)
+        public PdfService(HttpClient httpClient, IConfiguration configuration)
         {
-            BaseUri = baseUri;
+            string pdf_service_base_uri = configuration["PDF_SERVICE_BASE_URI"];
+            string bearer_token = $"Bearer {configuration["PDF_JWT_TOKEN"]}";
 
-            // create the HttpClient that is used for our direct REST calls.
-            client = new HttpClient();
+            BaseUri = pdf_service_base_uri;
 
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-            client.DefaultRequestHeaders.Add("Authorization", Authorization);
-
+            // configure the HttpClient that is used for our direct REST calls.
+            _client = httpClient;
+            _client.DefaultRequestHeaders.Add("Accept", "application/json");
+            _client.DefaultRequestHeaders.Add("Authorization", bearer_token);
         }
 
 
@@ -50,7 +52,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             endpointRequest.Content = strContent;
 
             // make the request.
-            var response = await client.SendAsync(endpointRequest);
+            var response = await _client.SendAsync(endpointRequest);
             HttpStatusCode _statusCode = response.StatusCode;
 
             if (_statusCode == HttpStatusCode.OK)
