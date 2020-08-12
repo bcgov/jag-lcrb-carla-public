@@ -104,11 +104,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Guid contactId = Guid.Parse(id);
 
             MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(contactId);
-            if (contact == null || string.IsNullOrEmpty (contact._parentcustomeridValue))
-            {
-                return new NotFoundResult();
-            }
-
+            
             // Allow access if the current user is the contact - for scenarios such as a worker update.
             if (DynamicsExtensions.CurrentUserIsContact(id, _httpContextAccessor))
             {
