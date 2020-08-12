@@ -18,7 +18,7 @@ Feature: CreateCRSApplicationSociety
     I want to submit a CRS Application for a society
     To be used as test data
 
-Scenario: Start Application
+Scenario: Create CRS Application Society
     Given I am logged in to the dashboard as a society
     And the account is deleted
     And I am logged in to the dashboard as a society

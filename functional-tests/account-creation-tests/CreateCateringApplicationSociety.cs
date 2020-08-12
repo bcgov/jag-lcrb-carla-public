@@ -18,7 +18,7 @@ Feature: CreateCateringApplicationSociety
     I want to submit a Catering Application for a society
     To be used as test data
 
-Scenario: Start Application
+Scenario: Create Catering Application Society
     Given I am logged in to the dashboard as a society
     And the account is deleted
     And I am logged in to the dashboard as a society

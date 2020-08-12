@@ -18,7 +18,7 @@ Feature: CreateCateringApplicationSoleProprietor
     I want to submit a Catering Application for a sole proprietor
     To be used as test data
 
-Scenario: Start Application
+Scenario: Create Catering Application Sole Proprietor
     Given I am logged in to the dashboard as a sole proprietorship
     And the account is deleted
     And I am logged in to the dashboard as a sole proprietorship

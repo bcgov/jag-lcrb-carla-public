@@ -12,7 +12,7 @@ Feature: CreateCRSApplicationPartnership
     I want to submit a CRS Application for a partnership
     To be used as test data
 
-Scenario: Start Application
+Scenario: Create CRS Application Partnership
     Given I am logged in to the dashboard as a partnership
     And the account is deleted
     And I am logged in to the dashboard as a partnership
