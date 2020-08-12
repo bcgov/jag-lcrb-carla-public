@@ -160,7 +160,7 @@ namespace bdd_tests
     public sealed class CateringApplicationBrandingChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
-        public void Given_I_view_the_dashboard_IN(string businessType)
+        public void LogInToDashboard(string businessType)
         {
             NavigateToFeatures();
 
