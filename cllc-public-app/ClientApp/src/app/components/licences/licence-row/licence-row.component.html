@@ -42,9 +42,9 @@
                     <span>Status: <strong>{{getLicenceStatusText(item.status)}}</strong></span>
                     <br>
                     <div *ngIf="!item.isOperated && isActive(item) && actionsVisible(item)" style="min-width: 10px;">
-                        <a [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'" download>
+                        <!--a [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'" download>
                             <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
-                        </a>
+                        </a-->
                     </div>
                     <div *ngIf="!item.isOperated && (item.status === 'Expired' || (isActive(item) && isAboutToExpire(item.expiryDate)))">
                         <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
