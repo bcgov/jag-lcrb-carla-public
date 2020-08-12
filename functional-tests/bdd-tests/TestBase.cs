@@ -554,6 +554,13 @@ namespace bdd_tests
         }
 
 
+        [And(@"I renew the licence")]
+        public void RenewLicence()
+        {
+        // TODO
+        }
+
+
         [And(@"I click on the branding change link for (.*)")]
         public void ClickOnBrandingChangeLink(string changeType)
         {
