@@ -194,7 +194,7 @@ namespace bdd_tests
         }
 
         [And(@"I return to the dashboard")]
-        public void return_to_dashboard()
+        public void ReturnToDashboard()
         {
             /* 
             Page Title: Payment Approved
@@ -213,7 +213,7 @@ namespace bdd_tests
         }
 
         [And(@"the dashboard has a new status")]
-        public void dashboard_has_new_status()
+        public void DashboardHasNewStatus()
         {
             /* 
             Page Title: Worker Dashboard
@@ -234,7 +234,7 @@ namespace bdd_tests
         }
 
         [Then(@"I sign out")]
-        public void sign_out()
+        public void SignOut()
         {
             CarlaDeleteCurrentAccount();
         }

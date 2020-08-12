@@ -3562,7 +3562,7 @@ namespace bdd_tests
 
             // click on the add key personnel button for spare
             NgWebElement uiAddKeyPersonnel3 = ngDriver.FindElement(By.CssSelector(".ng-touched .btn-secondary"));
-            uiAddKeyPersonnel2.Click();
+            uiAddKeyPersonnel3.Click();
 
             // enter the spare key personnel first name
             NgWebElement uiSpareFirstName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='firstNameNew']"));
@@ -5400,16 +5400,16 @@ namespace bdd_tests
 
 
         [And(@"I add in multiple nested business shareholders")]
-        public void add_multiple_business_shareholders()
+        public void AddMultipleBusinessShareholders()
         {
             // add in an additional four nested business shareholders
-            business_shareholder_2();
-            business_shareholder_3();
-            business_shareholder_4();
-            business_shareholder_5();
+            BusinessShareholder2();
+            BusinessShareholder3();
+            BusinessShareholder4();
+            BusinessShareholder5();
         }
 
-        public void business_shareholder_2()
+        public void BusinessShareholder2()
         {
             /********** Business Shareholder #2 **********/
 
@@ -5535,7 +5535,7 @@ namespace bdd_tests
             SharedCalendarDate();
         }
 
-        public void business_shareholder_3()
+        public void BusinessShareholder3()
         {
             /********** Business Shareholder #3 **********/
 
@@ -5661,7 +5661,7 @@ namespace bdd_tests
             SharedCalendarDate();
         }
 
-        public void business_shareholder_4()
+        public void BusinessShareholder4()
         {
             /********** Business Shareholder #4 **********/
 
@@ -5787,7 +5787,7 @@ namespace bdd_tests
             SharedCalendarDate();
         }
 
-        public void business_shareholder_5()
+        public void BusinessShareholder5()
         {
             /********** Business Shareholder #5 **********/
 

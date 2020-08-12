@@ -214,7 +214,7 @@ namespace bdd_tests
         }
 
         [And(@"I modify the director name")]
-        public void modify_director_name()
+        public void ModifyDirectorName()
         {
             // click on the Edit button for Key Personnel
             NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
@@ -243,7 +243,7 @@ namespace bdd_tests
         }
 
         [And(@"I pay the name change fee")]
-        public void name_change_fee()
+        public void NameChangeFee()
         {
             MakePayment();
 
@@ -252,7 +252,7 @@ namespace bdd_tests
         }
 
         [And(@"the director name is now updated")]
-        public void director_name_updated()
+        public void DirectorNameUpdated()
         {
             // click on Return to Dashboard link
             string retDash = "Return to Dashboard";
