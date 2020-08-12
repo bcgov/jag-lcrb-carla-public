@@ -27,9 +27,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
-        private readonly PdfClient _pdfClient;
+        private readonly IPdfService _pdfClient;
 
-        public LicenceEventsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, PdfClient pdfClient)
+        public LicenceEventsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, IPdfService pdfClient)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;

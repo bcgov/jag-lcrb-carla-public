@@ -1127,7 +1127,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (Exception e)
                 {
-                    throw e;
+                    return StatusCode(500, "ERROR executing workflow. ");
+                    _logger.LogError(e, "Error executing delete account workflow.");
                 }
 
             }
