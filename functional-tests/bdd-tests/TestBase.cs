@@ -2130,6 +2130,14 @@ namespace bdd_tests
             Page Title: Submit a Name or Branding Change Application
             */
 
+            // click on the authorized to submit checkbox
+            NgWebElement uiAuthSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            uiAuthSubmit.Click();
+
+            // click on the signature agreement checkbox
+            NgWebElement uiSigAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
+            uiSigAgreement.Click();
+
             // find the upload test file in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
@@ -2146,14 +2154,6 @@ namespace bdd_tests
                 NgWebElement uiStoreExterior = ngDriver.FindElement(By.Id("mat-button-toggle-2-button"));
                 uiStoreExterior.Click();
             }
-
-            // click on the authorized to submit checkbox
-            NgWebElement uiAuthSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
-            uiAuthSubmit.Click();
-
-            // click on the signature agreement checkbox
-            NgWebElement uiSigAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
-            uiSigAgreement.Click();
 
             // click on the Submit & Pay button
             ClickOnSubmitButton();
