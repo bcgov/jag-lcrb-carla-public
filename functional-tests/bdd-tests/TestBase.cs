@@ -733,6 +733,14 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the Pay for Application button for an indigenous nation")]
+        public void ClickOnPayButtonIN()
+        {
+            NgWebElement payButton = ngDriver.FindElement(By.CssSelector(".justify-content-between button.btn-primary"));
+            payButton.Click();
+        }
+
+
         [And(@"I click on the Submit Organization Information button")]
         public void ClickSubmitOrgStructureButton()
         {
