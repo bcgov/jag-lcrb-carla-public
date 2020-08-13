@@ -380,7 +380,7 @@ namespace bdd_tests
             if (feeType == "Catering")
             {
                 // confirm correct payment amount for Catering
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$450.00')]")).Displayed);
+                //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$450.00')]")).Displayed);
             }
 
             ClickLicencesTab();
@@ -546,16 +546,28 @@ namespace bdd_tests
         [And(@"I click on the button for (.*)")]
         public void ClickOnButton(string specificButton)
         {
-            if (specificButton == "terms and conditions")
+            if (specificButton == "CRS terms and conditions")
             {
                 // click on the Terms and Conditions button
                 NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-expansion-panel mat-expansion-panel-header[role='button']"));
                 uiTermsAndConditions.Click();
 
-                // check that the correct text is displayed - to be moved in the future
+                // check that the correct text is displayed for CRS - to be moved in the future
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'This licence is subject to the terms and conditions specified in the restriction or approval letter(s) and those contained in the Cannabis Retail Store Handbook, which may be amended from time to time.')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Packaged cannabis may only be sold within the service area outlined in blue on the LCRB approved floor plan, unless otherwise endorsed or approved by the LCRB.')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'The establishment may be open anytime between the hours of 9 a.m. and 11 p.m., subject to further restriction by the local government or Indigenous nation.')]")).Displayed);
+            }
+
+            if (specificButton == "Catering terms and conditions")
+            {
+                // click on the Terms and Conditions button
+                NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-expansion-panel mat-expansion-panel-header[role='button']"));
+                uiTermsAndConditions.Click();
+
+                // check that the correct text is displayed for Catering - to be moved in the future
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'For sale and service of liquor at another person's event where food service is catered by the licensee, unless otherwise permitted.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'The terms and conditions to which this licence is subject include the terms and conditions contained in the licensee Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website. The Terms and Conditions Handbook is amended from time to time.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licensee may only serve liquor at a catered event for which LCRB has issued a catering authorization.')]")).Displayed);
             }
         }
 
