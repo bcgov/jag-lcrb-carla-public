@@ -543,6 +543,23 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the button for (.*)")]
+        public void ClickOnButton(string specificButton)
+        {
+            if (specificButton == "terms and conditions")
+            {
+                // click on the Terms and Conditions button
+                NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-expansion-panel mat-expansion-panel-header[role='button']"));
+                uiTermsAndConditions.Click();
+
+                // check that the correct text is displayed - to be moved in the future
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'This licence is subject to the terms and conditions specified in the restriction or approval letter(s) and those contained in the Cannabis Retail Store Handbook, which may be amended from time to time.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Packaged cannabis may only be sold within the service area outlined in blue on the LCRB approved floor plan, unless otherwise endorsed or approved by the LCRB.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'The establishment may be open anytime between the hours of 9 a.m. and 11 p.m., subject to further restriction by the local government or Indigenous nation.')]")).Displayed);
+            }
+        }
+
+
         [And(@"I click on the Licences tab")]
         public void ClickLicencesTab()
         {
