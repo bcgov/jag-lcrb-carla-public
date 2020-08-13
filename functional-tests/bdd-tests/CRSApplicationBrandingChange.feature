@@ -16,6 +16,7 @@ Scenario: Indigenous Nation CRS Name Branding Change
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the button for CRS terms and conditions
     And I request a valid store name or branding change for Cannabis
     And the account is deleted
     Then I see the login page
@@ -33,6 +34,7 @@ Scenario: Partnership CRS Name Branding Change
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the button for CRS terms and conditions
     And I request a valid store name or branding change for Cannabis
     And the account is deleted
     Then I see the login page
@@ -50,6 +52,7 @@ Scenario: Private Corporation CRS Name Branding Change
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the button for CRS terms and conditions
     And I request a valid store name or branding change for Cannabis
     And the account is deleted
     Then I see the login page
@@ -67,6 +70,7 @@ Scenario: Public Corporation CRS Name Branding Change
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the button for CRS terms and conditions
     And I request a valid store name or branding change for Cannabis
     And the account is deleted
     Then I see the login page
@@ -84,6 +88,7 @@ Scenario: Society CRS Name Branding Change
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the button for CRS terms and conditions
     And I request a valid store name or branding change for Cannabis
     And the account is deleted
     Then I see the login page
@@ -101,6 +106,7 @@ Scenario: Sole Proprietorship CRS Name Branding Change
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the button for CRS terms and conditions
     And I request a valid store name or branding change for Cannabis
     And the account is deleted
     Then I see the login page
