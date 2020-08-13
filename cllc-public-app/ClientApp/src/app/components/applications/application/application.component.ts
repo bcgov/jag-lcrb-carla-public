@@ -932,7 +932,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Hours of sale are required');
     }
 
-    if (this.application.applicationType.ShowOwnershipDeclaration) {
+    if (this.application.applicationType.showOwnershipDeclaration) {
 
       if (!this.form.get('isOwner').value) {
         this.validationMessages.push('Only the owner of the business may submit this information');
