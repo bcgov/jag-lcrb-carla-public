@@ -576,8 +576,8 @@ namespace bdd_tests
         {
             ngDriver.IgnoreSynchronization = true;
 
-            // navigate to api/applications/<Application ID>/setexpiry
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{applicationID}/setexpiry");
+            // navigate to api/licences/<Application ID>/setexpiry
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/licences/{applicationID}/setexpiry");
 
             // wait for the automated expiry process to run
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
@@ -1401,8 +1401,6 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "test2@automation.com";
-            //string indigenousNation = "Cowichan Tribes";
-            //string policeJurisdiction = "RCMP Shawnigan Lake";
 
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
@@ -1428,14 +1426,6 @@ namespace bdd_tests
             // Is your establishment located on the Agricultural Land Reserve (ALR)?
             NgWebElement yesALRZoning = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
             yesALRZoning.Click();
-
-            // search for and select the indigenous nation
-            //NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
-            //uiIndigenousNation.SendKeys(indigenousNation);
-
-            // search for and select the police jurisdiction
-            //NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
-            //uiPoliceJurisdiction.SendKeys(policeJurisdiction);
 
             // enter the store email
             NgWebElement uiEstabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
@@ -3457,7 +3447,7 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is required')]")).Displayed);
                 }
 
-                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application") || (applicationType == "n indigenous nation Cannabis application"))
+                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == "n indigenous nation Cannabis application"))
                 { 
                     // check missing police jurisdiction error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'policeJurisdiction is not valid')]")).Displayed);
