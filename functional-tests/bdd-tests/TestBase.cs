@@ -554,10 +554,28 @@ namespace bdd_tests
         }
 
 
+        [And(@"the expiry date is changed to today")]
+        public void ExpiryDateToday()
+        {
+            ngDriver.IgnoreSynchronization = true;
+
+            // navigate to api/applications/<Application ID>/setexpiry
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{applicationID}/setexpiry");
+
+            // wait for the automated expiry process to run
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+
+            ngDriver.IgnoreSynchronization = false;
+
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+        }
+
+
         [And(@"I renew the licence")]
         public void RenewLicence()
         {
-        // TODO
+            //TODO
         }
 
 
@@ -2143,7 +2161,7 @@ namespace bdd_tests
             // navigate to api/applications/<Application ID>/process
             ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{applicationID}/process");
 
-            // wait for the autoamted approval process to run
+            // wait for the automated approval process to run
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
 
             ngDriver.IgnoreSynchronization = false;
