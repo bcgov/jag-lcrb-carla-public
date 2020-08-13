@@ -103,6 +103,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
   disableSubmitForLGINApproval: boolean;
   INRequestInProgress: boolean;
   policeJurisdictionReqInProgress: boolean;
+  saveForLaterInProgress: boolean;
+  submitApplicationInProgress: boolean;
+  proceedToSecurityScreeningInProgress: boolean;
 
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
@@ -188,7 +191,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       applicantType: ['', Validators.required],
       description1: ['', [Validators.required]],
       proposedChange: ['', [Validators.required]],
-      connectedGrocery: ['', []],
+      isLocatedInGroceryStore: [null, []],
       sitePhotos: ['', []],
       authorizedToSubmit: [''],
       signatureAgreement: [''],
@@ -499,9 +502,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     // 03/01/2020 - Disabled until connected grocery store feature is ready
     // if (this.application.applicationType.connectedGroceryStore !== FormControlState.Show) {
-    //   this.form.get('connectedGrocery').clearValidators();
+    //   this.form.get('isLocatedInGroceryStore').clearValidators();
     // } else {
-    //   this.form.get('connectedGrocery').setValidators([Validators.required]);
+    //   this.form.get('isLocatedInGroceryStore').setValidators([Validators.required]);
     // }
 
     if (!this.application.applicationType.serviceAreas) {
@@ -626,13 +629,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   showGroceryStore() {
     let show = (this.application && this.showFormControl(this.application.applicationType.connectedGroceryStore));
-    show = show && this.form.get('connectedGrocery').value === 'Yes';
+    // show = show && this.form.get('isLocatedInGroceryStore').value === 'Yes';
     return show;
   }
 
   showSitePhotos() {
     let show = (this.application && this.showFormControl(this.application.applicationType.sitePhotos));
-    //show = show && this.form.get('connectedGrocery').value === 'Yes';
     return show;
   }
 
@@ -709,6 +711,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
 
   saveForLater() {
+    this.saveForLaterInProgress = true;
     this.busyPromise = this.save(true)
       .toPromise()
       .then((saveSucceeded: boolean) => {
@@ -717,6 +720,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         } else {
           this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         }
+        this.saveForLaterInProgress = false;
       });
   }
 
@@ -747,6 +751,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     // Only save if the data is valid
     if (this.isValid()) {
+      this.submitApplicationInProgress = true;
       this.busy = save
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
@@ -756,6 +761,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
             this.submitPayment()
               .subscribe(res => {
                 this.saveComplete.emit(true);
+                this.submitApplicationInProgress = false;
               });
             // however we need to redirect if the application is Free
             if (this.application.applicationType.isFree) {
@@ -764,6 +770,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
             }
           } else if (this.application.applicationType.isFree) { // show error message the save failed and the application is free
             this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+            this.submitApplicationInProgress = false;
           }
         });
     } else {
@@ -809,9 +816,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
   private proceedToSecurityScreening() {
     //send event to move to the next step of the multi-step
     if (this.isValid()) { // Only proceed if the data is valid
+      this.proceedToSecurityScreeningInProgress = true;
       this.busyPromise = this.save(true)
         .toPromise()
         .then((saveSucceeded: boolean) => {
+          this.proceedToSecurityScreeningInProgress = false;
           if (saveSucceeded) {
             this.saveComplete.next(true);
           } else {
@@ -933,7 +942,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Hours of sale are required');
     }
 
-    if (this.application.applicationType.ShowOwnershipDeclaration) {
+    if (this.application.applicationType.showOwnershipDeclaration) {
 
       if (!this.form.get('isOwner').value) {
         this.validationMessages.push('Only the owner of the business may submit this information');
