@@ -103,6 +103,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
   disableSubmitForLGINApproval: boolean;
   INRequestInProgress: boolean;
   policeJurisdictionReqInProgress: boolean;
+  saveForLaterInProgress: boolean;
+  submitApplicationInProgress: boolean;
+  proceedToSecurityScreeningInProgress: boolean;
 
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
@@ -708,6 +711,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
 
   saveForLater() {
+    this.saveForLaterInProgress = true;
     this.busyPromise = this.save(true)
       .toPromise()
       .then((saveSucceeded: boolean) => {
@@ -716,6 +720,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         } else {
           this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         }
+        this.saveForLaterInProgress = false;
       });
   }
 
@@ -746,6 +751,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     // Only save if the data is valid
     if (this.isValid()) {
+      this.submitApplicationInProgress = true;
       this.busy = save
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
@@ -755,6 +761,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
             this.submitPayment()
               .subscribe(res => {
                 this.saveComplete.emit(true);
+                this.submitApplicationInProgress = false;
               });
             // however we need to redirect if the application is Free
             if (this.application.applicationType.isFree) {
@@ -763,6 +770,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
             }
           } else if (this.application.applicationType.isFree) { // show error message the save failed and the application is free
             this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+            this.submitApplicationInProgress = false;
           }
         });
     } else {
@@ -808,9 +816,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
   private proceedToSecurityScreening() {
     //send event to move to the next step of the multi-step
     if (this.isValid()) { // Only proceed if the data is valid
+      this.proceedToSecurityScreeningInProgress = true;
       this.busyPromise = this.save(true)
         .toPromise()
         .then((saveSucceeded: boolean) => {
+          this.proceedToSecurityScreeningInProgress = false;
           if (saveSucceeded) {
             this.saveComplete.next(true);
           } else {
