@@ -188,7 +188,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       applicantType: ['', Validators.required],
       description1: ['', [Validators.required]],
       proposedChange: ['', [Validators.required]],
-      connectedGrocery: ['', []],
+      isLocatedInGroceryStore: [null, []],
       sitePhotos: ['', []],
       authorizedToSubmit: [''],
       signatureAgreement: [''],
@@ -499,9 +499,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     // 03/01/2020 - Disabled until connected grocery store feature is ready
     // if (this.application.applicationType.connectedGroceryStore !== FormControlState.Show) {
-    //   this.form.get('connectedGrocery').clearValidators();
+    //   this.form.get('isLocatedInGroceryStore').clearValidators();
     // } else {
-    //   this.form.get('connectedGrocery').setValidators([Validators.required]);
+    //   this.form.get('isLocatedInGroceryStore').setValidators([Validators.required]);
     // }
 
     if (!this.application.applicationType.serviceAreas) {
@@ -626,13 +626,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   showGroceryStore() {
     let show = (this.application && this.showFormControl(this.application.applicationType.connectedGroceryStore));
-    show = show && this.form.get('connectedGrocery').value === 'Yes';
+    // show = show && this.form.get('isLocatedInGroceryStore').value === 'Yes';
     return show;
   }
 
   showSitePhotos() {
     let show = (this.application && this.showFormControl(this.application.applicationType.sitePhotos));
-    //show = show && this.form.get('connectedGrocery').value === 'Yes';
     return show;
   }
 

@@ -913,17 +913,17 @@
                     {{application?.licenseType}}
                     and an eligible grocery store?
                   </div-->
-                  <div class="question-label" *ngIf="!htmlContent.Grocery">
+                  <div class="question-label" *ngIf="!htmlContent.grocery">
                     Is the proposed location inside a grocery store?
                   </div>
-                  <div class="question-label" *ngIf="htmlContent.Grocery" [innerHTML]="htmlContent.Grocery"></div>
+                  <div class="question-label" *ngIf="htmlContent.grocery" [innerHTML]="htmlContent.grocery"></div>
 
 
                   <div style="flex: 0 0 85px;">
-                    <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('connectedGrocery')}"
-                      formControlName="connectedGrocery" aria-label="Font Style">
-                      <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                      <mat-button-toggle value="No">No</mat-button-toggle>
+                    <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('isLocatedInGroceryStore')}"
+                      formControlName="isLocatedInGroceryStore" aria-label="Font Style">
+                      <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                      <mat-button-toggle [value]="false">No</mat-button-toggle>
                     </mat-button-toggle-group>
                   </div>
                 </section>
