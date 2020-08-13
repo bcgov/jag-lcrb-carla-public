@@ -12,7 +12,7 @@ Scenario: Indigenous Nation CRS Application
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for an indigenous nation
     And I review the security screening requirements for an indigenous nation
-    And I click on the Pay for Application button
+    And I click on the Pay for Application button for an indigenous nation
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the account is deleted
