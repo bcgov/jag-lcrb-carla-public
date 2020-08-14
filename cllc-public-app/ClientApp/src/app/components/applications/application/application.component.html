@@ -1102,6 +1102,27 @@
             </div>
           </section>
 
+          <!-- Hours of Sale -->
+          <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
+            <h3 class="blue-header">HOURS OF SALE v2</h3>
+            <div class="padded-section content-bottom">
+              <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
+                Indicate the
+                store's proposed hours for cannabis sales below. Proposed
+                hours must fall between 9 a.m. and 11
+                p.m. Cannabis stores must not be open outside of their licensed hours. However, they may choose to be
+                closed
+                at
+                times they are licensed to be open.
+              </p>
+              <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CannabisRetailStore">
+                Indicate the
+                proposed hours of sales below.
+              </p>
+              <app-hours-of-sale-table></app-hours-of-sale-table>
+            </div>
+          </section>
+
             <!-- Licensed Producer -->
             <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
               <h3 class="blue-header">INFORMATION ABOUT THE LICENSED PRODUCER</h3>
