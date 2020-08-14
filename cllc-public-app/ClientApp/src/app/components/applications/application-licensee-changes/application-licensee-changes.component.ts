@@ -254,7 +254,12 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
                     this.submitPayment();
                   } else if (app) { // go to the application page
                     // mark application as complete
-                    this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, isApplicationComplete: 'Yes' })
+                    let saveData = { ...this.application, ...this.form.value };
+                    if (LicenseeChangeLog.HasChanges(this.treeRoot)) {
+                      saveData.isApplicationComplete = 'Yes';
+                    }
+
+                    this.applicationDataService.updateApplication(saveData)
                       .subscribe(res => {
                         this.loadedValue = this.cleanSaveData(this.treeRoot);  // Update loadedValue to prevent double saving
                         this.saveComplete.emit(true);
