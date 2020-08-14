@@ -743,32 +743,24 @@ namespace bdd_tests
             if (specificButton == "Confirm Organization Information is Complete")
             {
                 // click on the Confirm Organization Information is Complete button
-                NgWebElement completeButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
-                completeButton.Click();
+                NgWebElement uiCompleteButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
+                uiCompleteButton.Click();
             }
-        }
+
+            if (specificButton == "Pay for Application")
+            {
+                // click on the Pay for Application button
+                NgWebElement uiPayButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+                uiPayButton.Click();
+            }
 
 
-        [And(@"I click on the Confirm Organization Information is Complete button")]
-        public void ConfirmCompleteOrgInfo()
-        {
-
-        }
-
-
-        [And(@"I click on the Pay for Application button")]
-        public void ClickOnPayButton()
-        {
-            NgWebElement payButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
-            payButton.Click();
-        }
-
-
-        [And(@"I click on the Pay for Application button for an indigenous nation")]
-        public void ClickOnPayButtonIN()
-        {
-            NgWebElement payButton = ngDriver.FindElement(By.CssSelector(".justify-content-between button.btn-primary"));
-            payButton.Click();
+            if (specificButton == "Pay for Application for an indigenous nation")
+            {
+                // click on the Pay for Application button
+                NgWebElement uiPayButton = ngDriver.FindElement(By.CssSelector(".justify-content-between button.btn-primary"));
+                uiPayButton.Click();
+            }
         }
 
 
@@ -776,16 +768,16 @@ namespace bdd_tests
         public void ClickSubmitOrgStructureButton()
         {
             // click on the Submit Org Info button
-            NgWebElement submitOrgInfoButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
-            submitOrgInfoButton.Click();
+            NgWebElement uiSubmitOrgInfoButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
+            uiSubmitOrgInfoButton.Click();
         }
 
 
         [And(@"I click on the Submit button")]
         public void ClickOnSubmitButton()
         {
-            NgWebElement submitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
-            submitButton.Click();
+            NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+            uiSubmitButton.Click();
         }
 
 

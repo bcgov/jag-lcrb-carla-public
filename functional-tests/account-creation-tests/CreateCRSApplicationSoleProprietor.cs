@@ -26,7 +26,7 @@ Scenario: Create CRS Application Sole Proprietorship
     And I complete the eligibility disclosure
     And I review the account profile for a sole proprietorship
     And I review the organization structure for a sole proprietorship
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a sole proprietorship
     And I click on the button for Pay for Application
     And I enter the payment information

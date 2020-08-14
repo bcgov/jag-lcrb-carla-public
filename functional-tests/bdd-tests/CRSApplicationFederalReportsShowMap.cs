@@ -25,7 +25,7 @@ Scenario: Indigenous Nation Federal Reports and Show Map
     And I complete the eligibility disclosure
     And I review the account profile for an indigenous nation
     And I review the organization structure for an indigenous nation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for an indigenous nation
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -43,7 +43,7 @@ Scenario: Partnership Federal Reports and Show Map
     And I complete the eligibility disclosure
     And I review the account profile for a partnership
     And I review the organization structure for a partnership
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a partnership
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -61,7 +61,7 @@ Scenario: Private Corporation Federal Reports and Show Map
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -79,7 +79,7 @@ Scenario: Public Corporation Federal Reports and Show Map
     And I complete the eligibility disclosure
     And I review the account profile for a public corporation
     And I review the organization structure for a public corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a public corporation
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -97,7 +97,7 @@ Scenario: Society Federal Reports and Show Map
     And I complete the eligibility disclosure
     And I review the account profile for a society
     And I review the organization structure for a society
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a society
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -115,7 +115,7 @@ Scenario: Sole Proprietorship Federal Reports and Show Map
     And I complete the eligibility disclosure
     And I review the account profile for a sole proprietorship
     And I review the organization structure for a sole proprietorship
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a sole proprietorship
     And I click on the button for Pay for Application
     And I enter the payment information

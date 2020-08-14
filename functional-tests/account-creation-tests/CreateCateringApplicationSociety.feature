@@ -10,7 +10,7 @@ Scenario: Create Catering Application Society
     And I click on the Start Application button for Catering    
     And I review the account profile for a society
     And I review the organization structure for a society
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
     And I click on the button for Pay for Application

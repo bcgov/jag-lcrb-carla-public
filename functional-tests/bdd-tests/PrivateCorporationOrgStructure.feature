@@ -9,7 +9,7 @@ Scenario: Change private corporation director name and pay fee
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -19,7 +19,7 @@ Scenario: Change private corporation director name and pay fee
     And I click on the Dashboard link
     And I click on the Review Organization Information button
     And I modify the director name
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I pay the name change fee
     And the director name is now updated
     And the account is deleted
@@ -30,7 +30,7 @@ Scenario: Delete an individual who is both a private corporation director and sh
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I delete only the director record
     And I click on the Complete Organization Information button
@@ -43,7 +43,7 @@ Scenario: Change private corporation director and shareholder same name
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I modify only the director record
     And I click on the Complete Organization Information button
@@ -56,21 +56,21 @@ Scenario: Confirm private corporation business shareholder org structure update
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I add a business shareholder with the same individual as a director and a shareholder
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I add a second individual as a director and a shareholder to the business shareholder
     And I click on the button for Confirm Organization Information is Complete
     And I click on the Complete Organization Information button
     And the org structure is correct
     And I remove the latest director and shareholder
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And the latest director and shareholder is removed
     And I remove the business shareholder
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And the business shareholder is removed
     And the account is deleted
@@ -81,10 +81,10 @@ Scenario: Confirm private corporation business shareholder org structure update 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I add a business shareholder with the same individual as a director and a shareholder
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I add a second individual as a director and a shareholder to the business shareholder
     And I click on the button for Confirm Organization Information is Complete
@@ -139,7 +139,7 @@ Scenario: CRS application with mixed business shareholder types
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I add in business shareholders of different business types
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a private corporation
     And I review the mixed business shareholder types security screening requirements
     And I click on the button for Pay for Application
