@@ -12,12 +12,13 @@ Scenario: Catering Indigenous Nation Branding Change
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button for an indigenous nation
+    And I click on the button for Pay for Application for an indigenous nation
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
     And I click on the button for Catering terms and conditions
+    And the correct terms and conditions are displayed for Catering
     # And I click on the link for licence download
     And I request a valid store name or branding change for Catering
     And the account is deleted
@@ -32,12 +33,13 @@ Scenario: Catering Partnership Branding Change
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
     And I click on the button for Catering terms and conditions
+    And the correct terms and conditions are displayed for Catering
     # And I click on the link for licence download
     And I request a valid store name or branding change for Catering
     And the account is deleted
@@ -52,12 +54,13 @@ Scenario: Catering Private Corporation Branding Change
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
     And I click on the button for Catering terms and conditions
+    And the correct terms and conditions are displayed for Catering
     # And I click on the link for licence download
     And I request a valid store name or branding change for Catering
     And the account is deleted
@@ -72,12 +75,13 @@ Scenario: Catering Public Corporation Branding Change
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
     And I click on the button for Catering terms and conditions
+    And the correct terms and conditions are displayed for Catering
     # And I click on the link for licence download
     And I request a valid store name or branding change for Catering
     And the account is deleted
@@ -92,12 +96,13 @@ Scenario: Catering Society Branding Change
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
     And I click on the button for Catering terms and conditions
+    And the correct terms and conditions are displayed for Catering
     # And I click on the link for licence download
     And I request a valid store name or branding change for Catering
     And the account is deleted
@@ -112,12 +117,13 @@ Scenario: Catering Sole Proprietorship Branding Change
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
     And I click on the button for Catering terms and conditions
+    And the correct terms and conditions are displayed for Catering
     # And I click on the link for licence download
     And I request a valid store name or branding change for Catering
     And the account is deleted
@@ -132,7 +138,7 @@ Scenario: Validation for Catering Branding Change
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab

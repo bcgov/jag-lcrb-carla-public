@@ -13,6 +13,6 @@ Scenario: Create CRS Application Sole Proprietorship
     And I review the organization structure for a sole proprietorship
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a sole proprietorship
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     Then I confirm the payment receipt for a Cannabis Retail Store application

@@ -26,7 +26,7 @@ Scenario: Change private corporation director name and pay fee
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a private corporation
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
@@ -77,7 +77,7 @@ Scenario: Confirm private corporation business shareholder org structure update
     And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
     And I add a second individual as a director and a shareholder to the business shareholder
-    And I click on the Confirm Organization Information is Complete button
+    And I click on the button for Confirm Organization Information is Complete
     And I click on the Complete Organization Information button
     And the org structure is correct
     And I remove the latest director and shareholder
@@ -102,16 +102,16 @@ Scenario: Confirm private corporation business shareholder org structure update 
     And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
     And I add a second individual as a director and a shareholder to the business shareholder
-    And I click on the Confirm Organization Information is Complete button
+    And I click on the button for Confirm Organization Information is Complete
     And I click on the Complete Organization Information button
     And the org structure is correct
-    And I click on the Confirm Organization Information is Complete button
+    And I click on the button for Confirm Organization Information is Complete
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
-    And I click on the Confirm Organization Information is Complete button
+    And I click on the button for Confirm Organization Information is Complete
     And I complete the Cannabis Retail Store application for a private corporation
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I click on the Review Organization Information button
@@ -157,7 +157,7 @@ Scenario: CRS application with mixed business shareholder types
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a private corporation
     And I review the mixed business shareholder types security screening requirements
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And I return to the dashboard
@@ -208,7 +208,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsSecurityScreening();
 
-            IgnoreSynchronization();
+            IgnoreSynchronizationFalse();
 
             CarlaLogin(businessType);
         }
