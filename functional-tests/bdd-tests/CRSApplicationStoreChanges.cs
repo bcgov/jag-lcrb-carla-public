@@ -27,7 +27,7 @@ Scenario: Indigenous Nation Cannabis Store Changes
     And I review the organization structure for an indigenous nation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for an indigenous nation
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
@@ -48,7 +48,7 @@ Scenario: Partnership Cannabis Store Changes
     And I review the organization structure for a partnership
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a partnership
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
@@ -69,7 +69,7 @@ Scenario: Private Corporation Cannabis Store Changes
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a private corporation
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
@@ -90,7 +90,7 @@ Scenario: Public Corporation Cannabis Store Changes
     And I review the organization structure for a public corporation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a public corporation
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
@@ -111,7 +111,7 @@ Scenario: Society Cannabis Store Changes
     And I review the organization structure for a society
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a society
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
@@ -132,7 +132,7 @@ Scenario: Sole Proprietorship Cannabis Store Changes
     And I review the organization structure for a sole proprietorship
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a sole proprietorship
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
@@ -153,7 +153,7 @@ Scenario: Validation for CRS Store Relocation
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a private corporation
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
@@ -174,7 +174,7 @@ Scenario: Validation for CRS Structural Change
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a private corporation
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
@@ -195,7 +195,7 @@ Scenario: Validation for CRS Transfer of Ownership
     And I review the organization structure for a private corporation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for a private corporation
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
@@ -225,7 +225,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsSecurityScreening();
 
-            IgnoreSynchronization();
+            IgnoreSynchronizationFalse();
 
             CarlaLogin(businessType);
         }

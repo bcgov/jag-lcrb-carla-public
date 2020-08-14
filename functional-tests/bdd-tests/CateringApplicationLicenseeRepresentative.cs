@@ -27,7 +27,7 @@ using Xunit;
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
@@ -44,7 +44,7 @@ using Xunit;
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
@@ -74,7 +74,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsSecurityScreening();
 
-            IgnoreSynchronization();
+            IgnoreSynchronizationFalse();
 
             CarlaLogin(businessType);
         }
