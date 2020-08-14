@@ -749,6 +749,8 @@ namespace bdd_tests
 
             if (specificButton == "Pay for Application")
             {
+                System.Threading.Thread.Sleep(3000);
+
                 // click on the Pay for Application button
                 NgWebElement uiPayButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
                 uiPayButton.Click();
@@ -2615,10 +2617,10 @@ namespace bdd_tests
             // confirm that private corporation personnel are present
             if (businessType == " private corporation")
             {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel0')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader0')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'PrivateCorp')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder0')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel1')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader1')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'BizShareholderPrivateCorp')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1')]")).Displayed);
             }
