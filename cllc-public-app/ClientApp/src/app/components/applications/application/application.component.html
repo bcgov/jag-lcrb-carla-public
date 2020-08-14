@@ -1732,12 +1732,15 @@
             [disableForm]="lgHasReviewedZoning()" [application]="application"></app-lg-zoning-confirmation>
         </section>
 
+
         <section *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
-                && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')">
+                && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')
+                && !lgApprovalDecisionMade()">
           <br>
           <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
             <section class="ngtest-preamble-content">
+              <h3>Submit for LG/IN Review</h3>
               Your application will now be submitted to your local government/Indigenous Nation for their
               <span *ngIf="application?.applicationType.isShowLGINApproval">comment and assessment</span>
               <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">confirmation of zoning</span>.
@@ -1755,10 +1758,46 @@
           </div>
         </section>
 
+        <section *ngIf="lGHasApproved()">
+          <br>
+          <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+          <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+            <section class="ngtest-preamble-content">
+              <h3>LG/IN Review Complete</h3>
+              Your application has been reviewed by your local government/Indigenous Nation and they have 
+              <span *ngIf="application?.applicationType.isShowLGINApproval">
+                  <span *ngIf="this.application.lGApprovalDecision !== 'OptOut'">accepted it for submission.</span>
+                  <span *ngIf="this.application.lGApprovalDecision === 'OptOut'">decided to Opt-Out of the community assessment process. In their place, LCRB will complete the site community assessment.</span>
+                </span>
+              <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">provided confirmation of zoning as required.</span>
+              You may now submit your application.
+            </section>
+            <br>
+            <p><i class="fa fa-save" style="margin-right: 10px;"></i>If you leave this page, the information you input
+              will be saved. You can continue later from the dashboard.</p>
+          </div>
+        </section>
+
+        <section *ngIf="lgApprovalDecisionMade() && !lGHasApproved()">
+          <br>
+          <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+          <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+            <section class="ngtest-preamble-content">
+              <h3>LG/IN Review Complete </h3>
+              Your application has been reviewed by your local government/Indigenous Nation and they have 
+              <span *ngIf="application?.applicationType.isShowLGINApproval"><strong>rejected</strong> it.</span>
+              <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">specified that zoning <strong>does not</strong> permit a {{application?.applicationType?.name}}.</span>
+              You may contact the individual listed above for more information. If you intend to revise your application, you must submit a new one.
+            </section>
+            <br>
+          </div>
+        </section>
+
+
 
         <!-- button section when  LGApprovals is enabled  when it's the applicant opening the application -->
 
-        <section appRemoveIfFeatureOff="LGApprovals" *ngIf="!isOpenedByLGForApproval"
+        <section appRemoveIfFeatureOff="LGApprovals" *ngIf="!isOpenedByLGForApproval && !lGHasRejected()"
           style="position: relative; margin-top: 20px;">
             <button *ngIf="account?.businessType !== 'LocalGovernment '" class="btn btn-secondary" style="margin-right:10px;"
               (click)="saveForLater()" [disabled]="saveForLaterInProgress">
@@ -1781,19 +1820,18 @@
                 
                 -->
         <!-- LG Approval Required --> 
-          <button *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
-                            && application?.lGApprovalDecision !== 'Approved' 
-                            && application?.lGApprovalDecision !== 'OptOut' 
-                            && application?.applicationStatus === 'Intake'" class=" btn btn-primary"
-            [disabled]="disableSubmitForLGINApproval " (click)="submitForLGINApproval();">
-            <span>
-              <i class="fa fa-university mr-1"></i>SUBMIT FOR LG/IN REVIEW OR COMMENT
-            </span>
-            <mat-progress-bar *ngIf="disableSubmitForLGINApproval" mode="indeterminate"></mat-progress-bar>
-          </button>
+        <button
+          *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
+                                    && !lGHasApproved()
+                                    && !lGHasRejected()
+                                    && application?.applicationStatus === 'Intake'"
+          class=" btn btn-primary" [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval();">
+          <span><i class="fa fa-university mr-1"></i>SUBMIT FOR LG/IN REVIEW OR COMMENT</span>
+          <mat-progress-bar *ngIf="disableSubmitForLGINApproval" mode="indeterminate"></mat-progress-bar>
+        </button>
         
         <!-- NO LG Approval Required OR LG Already Approved -->
-        
+   
         <!-- LG Approved OR NO LG Approvals Required -->
         <ng-container
           *ngIf="lGHasApproved() || !application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation">

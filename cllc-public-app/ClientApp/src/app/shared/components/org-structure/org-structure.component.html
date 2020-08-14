@@ -10,7 +10,7 @@
 
             <!-- For all corporations -->
             <section *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
-              <p>All licensees and applicants must maintain a complete and current list of affiliates and businesses associated with their organization.</p>
+              <p>All licensees and applicants must maintain a complete and current list of leadership and businesses associated with their organization.</p>
               <p>You are required to notify the LCRB of any changes to your organization’s structure within ten business days of the change being made. These changes include:</p>
               <ul>
                 <li>Change of directors, officers, or senior managers</li>
@@ -174,6 +174,8 @@
           </app-file-uploader>
         </section>
 
+
+
         <!--h3 class="plain-header">Total Number of Voting Shares</h3>
         <section class="padded-section">
         <p>Please enter the total number of voting shares in your corporation.</p>
@@ -256,6 +258,22 @@
       </div>
     </ng-container>
 
+    <ng-container [formGroup]="form">
+      <h3 class="blue-header">Additional Supporting Documents</h3>
+      <div class="content-bottom">
+      <section class="padded-section">
+        <p>
+          If requested by LCRB, please upload additional supporting documents here.
+        </p>
+        <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} ADDT"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="account"
+          (numberOfUploadedFiles)="updateNumberOfFiles($event, 'ADDT')" [useDocumentTypeForName]="false"
+          [entityId]="account?.id" [uploadHeader]="'TO UPLOAD ADDITIONAL SUPPORTING DOCUMENTS, DRAG FILE HERE OR'">
+        </app-file-uploader>
+      </section>
+    </div>
+    </ng-container>
+
     <ng-container *ngIf="node?.businessType === 'SoleProprietorship'">
       <h3 class="blue-header">Provide Ownership Information</h3>
       <div class="content-bottom">
@@ -278,7 +296,7 @@
                       || node?.businessType === 'University'
                       || node?.businessType === 'Church'">
 
-      <h3 class="blue-header">List Affiliates</h3>
+      <h3 class="blue-header">List Leadership</h3>
       <div class="content-bottom">
         <section class="padded-section">
           <p>
@@ -292,7 +310,7 @@
           </p>
           <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
                               [account]="account" (personalHistoryItemsChange)="updateChildren($event, 'Leadership')" [licencesOnFile]="licencesOnFile"
-                              changeTypeSuffix="Leadership" addLabel="Add Key Personnel" #associateList></app-associate-list>
+                              changeTypeSuffix="Leadership" addLabel="Add Leadership" #associateList></app-associate-list>
         </section>
       </div>
     </ng-container>
