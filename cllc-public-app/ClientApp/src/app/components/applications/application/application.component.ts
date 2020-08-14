@@ -835,10 +835,24 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   private lGHasApproved() {
     let hasApproved = this.application && this.application.applicationType &&
-      (this.application.applicationType.isShowLGINApproval && this.application.lGApprovalDecision === 'Approved') ||
+      (this.application.applicationType.isShowLGINApproval && 
+          (this.application.lGApprovalDecision === 'Approved' || 
+          this.application.lGApprovalDecision === 'OptOut' ||
+          this.application.lGApprovalDecision === 'Pending'
+          )
+          ) ||
       (this.application.applicationType.isShowLGZoningConfirmation && this.application.lgZoning === 'Allows');
     return hasApproved;
   }
+
+  private lGHasRejected() {
+    let hasApproved = this.application && this.application.applicationType &&
+      (this.application.applicationType.isShowLGINApproval && 
+          (this.application.lGApprovalDecision === 'Rejected')) ||
+      (this.application.applicationType.isShowLGZoningConfirmation && this.application.lgZoning === 'DoesNotAllow');
+    return hasApproved;
+  }
+
 
   /**
    * Redirect to payment processing page (Express Pay / Bambora service)
