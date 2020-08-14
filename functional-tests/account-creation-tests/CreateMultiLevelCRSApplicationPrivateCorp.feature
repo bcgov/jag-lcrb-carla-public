@@ -1,4 +1,4 @@
-﻿Feature: Create_MultiLevel_CRSApplication_PrivateCorp
+﻿Feature: CreateMultiLevelCRSApplicationPrivateCorp
     As a logged in business user
     I want to submit a CRS Application for a private corporation
     With multiple nested business shareholders

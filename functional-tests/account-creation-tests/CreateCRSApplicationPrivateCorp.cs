@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: Create_CRSApplication_privatecorp
+Feature: CreateCRSApplicationPrivateCorp
     As a logged in business user
     I want to submit a CRS Application for a private corporation
     To be used as test data
 
-Scenario: Start Application
+Scenario: Create CRS Application Private Corporation
     Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     And I am logged in to the dashboard as a private corporation
@@ -35,11 +35,11 @@ Scenario: Start Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./Create_CRSApplication_privatecorp.feature")]
+    [FeatureFile("./CreateCRSApplicationPrivateCorp.feature")]
     public sealed class CreateCRSApplicationPrivateCorp : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
-        public void I_view_the_dashboard(string businessType)
+        public void LogInToDashboard(string businessType)
         {
             NavigateToFeatures();
 

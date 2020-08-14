@@ -24,7 +24,7 @@ export class ApplicationType {
   showSupportingDocuments: boolean;
   showDeclarations: boolean;
   showLiquorDeclarations: boolean;
-  ShowOwnershipDeclaration: boolean;
+  showOwnershipDeclaration: boolean;
   establishmetNameIsReadOnly: boolean;
   formReference: string;
   showDescription1: boolean;

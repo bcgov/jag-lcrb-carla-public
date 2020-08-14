@@ -65,7 +65,7 @@ namespace bdd_tests
     public sealed class COVIDTemporaryExtension : TestBase
     {
         [Given(@"I am not logged in to the Liquor and Cannabis Portal")]
-        public void not_logged_in()
+        public void NotLoggedIn()
         {
             NavigateToFeatures();
 
@@ -76,14 +76,14 @@ namespace bdd_tests
 
 
         [And(@"I click on the COVID Temporary Extension link")]
-        public void click_on_covid_temp()
+        public void ClickOnCovidTemp()
         {
             ngDriver.Navigate().GoToUrl($"{baseUri}covid-temporary-extension");
         }
 
 
         [And(@"I complete the temporary extension application for a (.*)")]
-        public void complete_application(string licenceType)
+        public void CompleteApplication(string licenceType)
         {
             /* 
             Page Title: Covid Temporary Extension Application
@@ -237,14 +237,14 @@ namespace bdd_tests
 
 
         [Then(@"the application is submitted")]
-        public void application_submitted()
+        public void ApplicationSubmitted()
         {
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Thank you for your submission.')]")).Displayed);
         }
 
 
         [And(@"I do not complete the temporary extension application")]
-        public void do_not_complete_application()
+        public void DoNotCompleteApplication()
         {
             /* 
             Page Title: Covid Temporary Extension Application
@@ -267,7 +267,7 @@ namespace bdd_tests
 
 
         [Then(@"the required field messages are displayed")]
-        public void required_field_messages_displayed()
+        public void RequiredFieldMessagesDisplayed()
         {
             // confirm that error messages are displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licence Number is a required field and must contain 6 digits')]")).Displayed);
