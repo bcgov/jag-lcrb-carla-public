@@ -24,9 +24,9 @@ Scenario: Change individual partner name and pay fee
     And I complete the eligibility disclosure
     And I review the account profile for a partnership
     And I review the organization structure for a partnership
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a partnership
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
@@ -34,7 +34,7 @@ Scenario: Change individual partner name and pay fee
     And I click on the Dashboard link
     And I click on the Review Organization Information button
     And I modify only the individual partner name
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I pay the name change fee
     And the individual partner name is now updated
     And the account is deleted
@@ -47,7 +47,7 @@ Scenario: Delete an individual who is both an individual partner and individual 
     And I enter the same person as an individual partner and an individual partner of a business partner (person 1)
     And I enter a second person as an individual partner (person 2)
     And I enter a third person as an individual partner of a business partner (person 3)
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I delete only the individual partner record (person 1)
     And I click on the Complete Organization Information button
@@ -61,7 +61,7 @@ Scenario: Change individual partner and business partner same name
     Given I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I enter the same person as an individual partner and a business shareholder
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I modify only the individual partner record
     And I click on the Complete Organization Information button
@@ -74,21 +74,21 @@ Scenario: Confirm partnership business shareholder org structure update
     Given I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I enter the same individual as an individual partner and a business shareholder
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I add a business shareholder with the same individual as an individual partner and a business shareholder
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I add a second individual as an individual partner and a business shareholder 
-    And I click on the Confirm Organization Information is Complete button
+    And I click on the button for Confirm Organization Information is Complete
     And I click on the Complete Organization Information button
     And the partnership org structure is correct
     And I remove the latest individual partner and business shareholder
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And the latest individual partner and business shareholder is removed
     And I remove the business shareholder
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And the business shareholder is removed
     And the account is deleted
@@ -99,22 +99,22 @@ Scenario: Confirm partnership business shareholder org structure update after pa
     Given I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I enter the same individual as an individual partner and a business shareholder
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I add a business shareholder with the same individual as an individual partner and a business shareholder
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I add a second individual as an individual partner and a business shareholder 
-    And I click on the Confirm Organization Information is Complete button
+    And I click on the button for Confirm Organization Information is Complete
     And I click on the Complete Organization Information button
     And the partnership org structure is correct
-    And I click on the Confirm Organization Information is Complete button
+    And I click on the button for Confirm Organization Information is Complete
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a partnership
-    And I click on the Confirm Organization Information is Complete button
+    And I click on the button for Confirm Organization Information is Complete
     And I complete the Cannabis Retail Store application for a partnership
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I click on the Review Organization Information button
@@ -166,7 +166,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsSecurityScreening();
 
-            IgnoreSynchronization();
+            IgnoreSynchronizationFalse();
 
             CarlaLogin(businessType);
         }
