@@ -25,10 +25,10 @@ Scenario: Create Catering Application Private Corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     Then I confirm the payment receipt for a Catering application
 */
@@ -47,7 +47,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsLicenseeChanges();
 
-            IgnoreSynchronization();
+            IgnoreSynchronizationFalse();
 
             CarlaLoginNoCheck(businessType);
         }

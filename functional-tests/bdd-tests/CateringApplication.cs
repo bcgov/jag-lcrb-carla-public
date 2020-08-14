@@ -23,11 +23,11 @@ Scenario: Indigenous Nation Catering Application
     And I click on the Start Application button for Catering
     And I review the account profile for an indigenous nation
     And I review the organization structure for an indigenous nation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
     And I review the security screening requirements for an indigenous nation
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And the account is deleted
@@ -39,11 +39,11 @@ Scenario: Partnership Catering Application
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
     And I review the organization structure for a partnership
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
     And I review the security screening requirements for a partnership
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And the account is deleted
@@ -55,11 +55,11 @@ Scenario: Private Corporation Catering Application
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
     And I review the security screening requirements for a private corporation
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And the account is deleted
@@ -71,11 +71,11 @@ Scenario: Public Corporation Catering Application
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
     And I review the organization structure for a public corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
     And I review the security screening requirements for a public corporation
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And the account is deleted
@@ -87,11 +87,11 @@ Scenario: Society Catering Application
     And I click on the Start Application button for Catering
     And I review the account profile for a society
     And I review the organization structure for a society
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
     And I review the security screening requirements for a society
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And the account is deleted
@@ -103,11 +103,11 @@ Scenario: Sole Proprietorship Catering Application
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
     And I review the organization structure for a sole proprietorship
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
     And I review the security screening requirements for a sole proprietorship
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And the account is deleted
@@ -119,7 +119,7 @@ Scenario: Validation for Catering Application
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Catering application
     And the account is deleted
@@ -146,7 +146,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsSecurityScreening();
 
-            IgnoreSynchronization();
+            IgnoreSynchronizationFalse();
 
             CarlaLogin(businessType);
         }

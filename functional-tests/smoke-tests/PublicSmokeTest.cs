@@ -13,10 +13,11 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: Public_smoke_test
+Feature: PublicSmokeTest
     As a business user who is not logged in
     I want to confirm that I can view the publicly available content
 
+@smoketest
 Scenario: View Public Content
     Given I am not logged in to the portal
     And I click on Home page
@@ -29,45 +30,45 @@ Scenario: View Public Content
 
 namespace bdd_tests
 {
-    [FeatureFile("./Public_smoke_test.feature")]
+    [FeatureFile("./PublicSmokeTest.feature")]
     public sealed class PublicSmokeTest : TestBase
     {
         [Given(@"I am not logged in to the portal")]
-        public void not_logged_in_public()
+        public void NotLoggedIn()
         {
             NavigateToFeatures();
 
             CheckFeatureFlagsMaps();
 
-            IgnoreSynchronization();
+            IgnoreSynchronizationFalse();
         }
 
         [And(@"the Map of Cannabis Stores Header Text is displayed")]
-        public void cannabis_maps_displayed()
+        public void CannabisMapsDisplayed()
         {
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Map of Cannabis Stores')]")).Displayed);
         }
 
         [And(@"I click on the Licence Types page")]
-        public void click_on_licence_types()
+        public void ClickOnLicenceTypes()
         {
             ngDriver.Navigate().GoToUrl($"{baseUri}policy-document/cannabis-retail-licence");
         }
 
         [And(@"the Cannabis Retail Store Licence is displayed")]
-        public void CRS_licence_displayed()
+        public void LicenceDisplayed()
         {
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Cannabis Retail Store Licence')]")).Displayed);
         }
 
         [And(@"I click on the Worker Information page")]
-        public void click_on_worker_info()
+        public void ClickOnWorkerInfo()
         {
             ngDriver.Navigate().GoToUrl($"{baseUri}policy-document/worker-qualification-training");
         }
 
         [Then(@"the Cannabis Worker Information is displayed")]
-        public void worker_info_displayed()
+        public void WorkerInfoDisplayed()
         {
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Cannabis Retail Store Licence: Worker Information')]")).Displayed);
         }

@@ -27,7 +27,7 @@ Scenario: Winery Transfer Licence
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -43,7 +43,7 @@ Scenario: Winery Third Party Operator
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -59,7 +59,7 @@ Scenario: Winery Picnic Area Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -75,7 +75,7 @@ Scenario: Winery On-Site Store Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -91,7 +91,7 @@ Scenario: Winery Lounge Area Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -107,7 +107,7 @@ Scenario: Winery Establishment Name Change Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -123,7 +123,7 @@ Scenario: Winery Facility Structural Change Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -139,7 +139,7 @@ Scenario: Winery Location Change Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -155,7 +155,7 @@ Scenario: Winery Special Event Area Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -171,7 +171,7 @@ Scenario: Winery New Outdoor Patio Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -191,7 +191,7 @@ Scenario: Brewery Transfer Licence
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -207,7 +207,7 @@ Scenario: Brewery Third Party Operator
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -223,7 +223,7 @@ Scenario: Brewery Picnic Area Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -239,7 +239,7 @@ Scenario: Brewery On-Site Store Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -255,7 +255,7 @@ Scenario: Brewery Lounge Area Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -271,7 +271,7 @@ Scenario: Brewery Establishment Name Change Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -287,7 +287,7 @@ Scenario: Brewery Facility Structural Change Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -303,7 +303,7 @@ Scenario: Brewery Location Change Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -319,7 +319,7 @@ Scenario: Brewery Special Event Area Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -335,7 +335,7 @@ Scenario: Brewery New Outdoor Patio Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -355,7 +355,7 @@ Scenario: Distillery Transfer Licence
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -371,7 +371,7 @@ Scenario: Distillery Third Party Operator
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -387,7 +387,7 @@ Scenario: Distillery Picnic Area Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -403,7 +403,7 @@ Scenario: Distillery On-Site Store Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -419,7 +419,7 @@ Scenario: Distillery Lounge Area Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -435,7 +435,7 @@ Scenario: Distillery Establishment Name Change Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -451,7 +451,7 @@ Scenario: Distillery Facility Structural Change Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -467,7 +467,7 @@ Scenario: Distillery Location Change Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -483,7 +483,7 @@ Scenario: Distillery Special Event Area Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -499,7 +499,7 @@ Scenario: Distillery New Outdoor Patio Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -519,7 +519,7 @@ Scenario: Co-packer Transfer Licence
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -535,7 +535,7 @@ Scenario: Co-packer Third Party Operator
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -551,7 +551,7 @@ Scenario: Co-packer Picnic Area Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -567,7 +567,7 @@ Scenario: Co-packer On-Site Store Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -583,7 +583,7 @@ Scenario: Co-packer Lounge Area Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -599,7 +599,7 @@ Scenario: Co-packer Establishment Name Change Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -615,7 +615,7 @@ Scenario: Co-packer Facility Structural Change Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -631,7 +631,7 @@ Scenario: Co-packer Location Change Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -647,7 +647,7 @@ Scenario: Co-packer Special Event Area Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -663,7 +663,7 @@ Scenario: Co-packer New Outdoor Patio Endorsement Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -683,7 +683,7 @@ Scenario: Validation for Manufacturer Establishment Name Change
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -703,7 +703,7 @@ Scenario: Validation for Manufacturer Transfer of Ownership
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -722,7 +722,7 @@ Scenario: Validation for Manufacturer Facility Structural Change Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -742,7 +742,7 @@ Scenario: Validation for Manufacturer Location Change Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -773,7 +773,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsSecurityScreening();
 
-            IgnoreSynchronization();
+            IgnoreSynchronizationFalse();
 
             CarlaLogin(businessType);
         }
