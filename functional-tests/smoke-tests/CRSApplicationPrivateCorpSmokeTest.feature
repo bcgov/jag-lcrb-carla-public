@@ -1,4 +1,4 @@
-﻿Feature: CRSApplicationPrivateCorp
+﻿Feature: CRSApplicationPrivateCorpSmokeTest
     As a logged in business user
     I want to submit a CRS Application for a private corporation
 

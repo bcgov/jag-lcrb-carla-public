@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplicationPrivateCorp
+Feature: CRSApplicationPrivateCorpSmokeTest
     As a logged in business user
     I want to submit a CRS Application for a private corporation
 
@@ -36,8 +36,8 @@ Scenario: Smoke Test Private Corporation CRS Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplication_privatecorp.feature")]
-    public sealed class CRSApplicationPrivateCorp : TestBase
+    [FeatureFile("./CRSApplicationPrivateCorpSmokeTest.feature")]
+    public sealed class CRSApplicationPrivateCorpSmokeTest : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
