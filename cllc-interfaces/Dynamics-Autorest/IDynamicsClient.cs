@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top120 { get; set; }
+        int? Top140 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip120 { get; set; }
+        int? Skip140 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count120 { get; set; }
+        bool? Count140 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter120 { get; set; }
+        string Filter140 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search120 { get; set; }
+        string Search140 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -128,6 +128,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplications Applications { get; }
 
         /// <summary>
+        /// Gets the IApplicationadoxiohoursofserviceapplication.
+        /// </summary>
+        IApplicationadoxiohoursofserviceapplication Applicationadoxiohoursofserviceapplication { get; }
+
+        /// <summary>
         /// Gets the IApplicationstructurechangev1s.
         /// </summary>
         IApplicationstructurechangev1s Applicationstructurechangev1s { get; }
@@ -156,6 +161,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtypes.
         /// </summary>
         IApplicationtypes Applicationtypes { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtypeadoxiohoursofserviceapplicationtype.
+        /// </summary>
+        IApplicationtypeadoxiohoursofserviceapplicationtype Applicationtypeadoxiohoursofserviceapplicationtype { get; }
 
         /// <summary>
         /// Gets the IApplicationtypeadoxioproratedlicencefeescheduleapplicationtype.
@@ -288,6 +298,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEstablishments Establishments { get; }
 
         /// <summary>
+        /// Gets the IEstablishmentadoxiohoursofserviceestablishment.
+        /// </summary>
+        IEstablishmentadoxiohoursofserviceestablishment Establishmentadoxiohoursofserviceestablishment { get; }
+
+        /// <summary>
         /// Gets the IEstablishmentwatchwords.
         /// </summary>
         IEstablishmentwatchwords Establishmentwatchwords { get; }
@@ -326,6 +341,71 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IFundingsources.
         /// </summary>
         IFundingsources Fundingsources { get; }
+
+        /// <summary>
+        /// Gets the IHoursofservices.
+        /// </summary>
+        IHoursofservices Hoursofservices { get; }
+
+        /// <summary>
+        /// Gets the IApplication.
+        /// </summary>
+        IApplication Application { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtype.
+        /// </summary>
+        IApplicationtype Applicationtype { get; }
+
+        /// <summary>
+        /// Gets the IEstablishment.
+        /// </summary>
+        IEstablishment Establishment { get; }
+
+        /// <summary>
+        /// Gets the IHoursofserviceasyncoperations.
+        /// </summary>
+        IHoursofserviceasyncoperations Hoursofserviceasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IHoursofservicebulkdeletefailures.
+        /// </summary>
+        IHoursofservicebulkdeletefailures Hoursofservicebulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IHoursofserviceduplicatebaserecord.
+        /// </summary>
+        IHoursofserviceduplicatebaserecord Hoursofserviceduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IHoursofserviceduplicatematchingrecord.
+        /// </summary>
+        IHoursofserviceduplicatematchingrecord Hoursofserviceduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IHoursofservicemailboxtrackingfolders.
+        /// </summary>
+        IHoursofservicemailboxtrackingfolders Hoursofservicemailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the IHoursofserviceprincipalobjectattributeaccesses.
+        /// </summary>
+        IHoursofserviceprincipalobjectattributeaccesses Hoursofserviceprincipalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the IHoursofserviceprocesssession.
+        /// </summary>
+        IHoursofserviceprocesssession Hoursofserviceprocesssession { get; }
+
+        /// <summary>
+        /// Gets the IHoursofservicesyncerrors.
+        /// </summary>
+        IHoursofservicesyncerrors Hoursofservicesyncerrors { get; }
+
+        /// <summary>
+        /// Gets the ILicence.
+        /// </summary>
+        ILicence Licence { get; }
 
         /// <summary>
         /// Gets the IIncidentadoxiolicencetypeset.
@@ -386,6 +466,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicenceses.
         /// </summary>
         ILicenceses Licenceses { get; }
+
+        /// <summary>
+        /// Gets the ILicencesadoxiohoursofservicelicence.
+        /// </summary>
+        ILicencesadoxiohoursofservicelicence Licencesadoxiohoursofservicelicence { get; }
 
         /// <summary>
         /// Gets the ILicencesubcategories.
@@ -461,11 +546,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IProratedlicencefeeschedules.
         /// </summary>
         IProratedlicencefeeschedules Proratedlicencefeeschedules { get; }
-
-        /// <summary>
-        /// Gets the IApplicationtype.
-        /// </summary>
-        IApplicationtype Applicationtype { get; }
 
         /// <summary>
         /// Gets the ILicencesubcategory.
@@ -578,9 +658,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         IWorkers Workers { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxiohoursofservice.
+        /// </summary>
+        IRegardingobjectidadoxiohoursofservice Regardingobjectidadoxiohoursofservice { get; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioproratedlicencefeeschedule.
         /// </summary>
         IRegardingobjectidadoxioproratedlicencefeeschedule Regardingobjectidadoxioproratedlicencefeeschedule { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxiohoursofservice.
+        /// </summary>
+        IBusinessunitadoxiohoursofservice Businessunitadoxiohoursofservice { get; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxioproratedlicencefeeschedule.
@@ -591,6 +681,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IContacts.
         /// </summary>
         IContacts Contacts { get; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxiohoursofservice.
+        /// </summary>
+        IBaserecordidadoxiohoursofservice Baserecordidadoxiohoursofservice { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxiohoursofservice.
+        /// </summary>
+        IDuplicaterecordidadoxiohoursofservice Duplicaterecordidadoxiohoursofservice { get; }
 
         /// <summary>
         /// Gets the IEntitydefinitions.
@@ -616,6 +716,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILists.
         /// </summary>
         ILists Lists { get; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiohoursofservice.
+        /// </summary>
+        IObjectidadoxiohoursofservice Objectidadoxiohoursofservice { get; }
 
         /// <summary>
         /// Gets the IObjectidadoxioproratedlicencefeeschedule.
@@ -658,6 +763,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         ISystemusers Systemusers { get; }
 
         /// <summary>
+        /// Gets the ILkadoxiohoursofservicecreatedby.
+        /// </summary>
+        ILkadoxiohoursofservicecreatedby Lkadoxiohoursofservicecreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiohoursofservicecreatedonbehalfby.
+        /// </summary>
+        ILkadoxiohoursofservicecreatedonbehalfby Lkadoxiohoursofservicecreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiohoursofservicemodifiedby.
+        /// </summary>
+        ILkadoxiohoursofservicemodifiedby Lkadoxiohoursofservicemodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiohoursofservicemodifiedonbehalfby.
+        /// </summary>
+        ILkadoxiohoursofservicemodifiedonbehalfby Lkadoxiohoursofservicemodifiedonbehalfby { get; }
+
+        /// <summary>
         /// Gets the ILkadoxioproratedlicencefeeschedulecreatedby.
         /// </summary>
         ILkadoxioproratedlicencefeeschedulecreatedby Lkadoxioproratedlicencefeeschedulecreatedby { get; }
@@ -678,9 +803,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILkadoxioproratedlicencefeeschedulemodifiedonbehalfby Lkadoxioproratedlicencefeeschedulemodifiedonbehalfby { get; }
 
         /// <summary>
+        /// Gets the IUseradoxiohoursofservice.
+        /// </summary>
+        IUseradoxiohoursofservice Useradoxiohoursofservice { get; }
+
+        /// <summary>
         /// Gets the IUseradoxioproratedlicencefeeschedule.
         /// </summary>
         IUseradoxioproratedlicencefeeschedule Useradoxioproratedlicencefeeschedule { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxiohoursofservice.
+        /// </summary>
+        ITeamadoxiohoursofservice Teamadoxiohoursofservice { get; }
 
         /// <summary>
         /// Gets the ITeamadoxioproratedlicencefeeschedule.
