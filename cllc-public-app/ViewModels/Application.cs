@@ -346,7 +346,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     {
         Approved = 845280000,
         OptOut = 845280001,
-        Rejected = 845280002
+        Rejected = 845280002,
+        Pending = 845280003
     }
 
     public enum PatioLocatedAbove
