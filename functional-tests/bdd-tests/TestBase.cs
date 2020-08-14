@@ -2690,48 +2690,53 @@ namespace bdd_tests
                 NgWebElement uploadSpecialRightsRes = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
                 uploadSpecialRightsRes.SendKeys(specialRightsRestrictions);
 
-                /********** Key Personnel #0 **********/
+                // upload an additional supporting document
+                string additionalSupportingDocument = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
+                NgWebElement uploadAdditionalSupportingDocument = ngDriver.FindElement(By.XPath("(//input[@type='file'])[11]"));
+                uploadAdditionalSupportingDocument.SendKeys(additionalSupportingDocument);
 
-                // create the key personnel data
-                string keyPersonnelFirstName = "KeyPersonnel0";
-                string keyPersonnelLastName = "PrivateCorp";
-                string keyPersonnelTitle = "CTO";
-                string keyPersonnelEmail = "keypersonnel0@privatecorp.com";
+                /********** Leader #0 **********/
 
-                // open key personnel #0 form  
-                NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Key Personnel'][changetypesuffix='Leadership'] button"));
-                openKeyPersonnelForm.Click();
+                // create the leader data
+                string leaderFirstName = "Leader0";
+                string leaderLastName = "PrivateCorp";
+                string leaderTitle = "CTO";
+                string leaderEmail = "leader0@privatecorp.com";
+
+                // open leader #0 form  
+                NgWebElement openLeaderForm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Leadership'][changetypesuffix='Leadership'] button"));
+                openLeaderForm.Click();
                 
-                // enter key personnel #0 first name
-                NgWebElement uiKeyPersonFirst = ngDriver.FindElement(By.CssSelector("input[formControlName=\"firstNameNew\"]"));
-                uiKeyPersonFirst.SendKeys(keyPersonnelFirstName);
+                // enter leader #0 first name
+                NgWebElement uiLeaderFirst = ngDriver.FindElement(By.CssSelector("input[formControlName='firstNameNew']"));
+                uiLeaderFirst.SendKeys(leaderFirstName);
 
-                // enter key personnel #0 last name
-                NgWebElement uiKeyPersonLast = ngDriver.FindElement(By.CssSelector("input[formControlName=\"lastNameNew\"]"));
-                uiKeyPersonLast.SendKeys(keyPersonnelLastName);
+                // enter leader #0 last name
+                NgWebElement uiLeaderLast = ngDriver.FindElement(By.CssSelector("input[formControlName='lastNameNew']"));
+                uiLeaderLast.SendKeys(leaderLastName);
 
-                // select key personnel #0 role
-                NgWebElement uiKeyPersonRoleCat = ngDriver.FindElement(By.CssSelector("[addlabel='Add Key Personnel'][changetypesuffix='Leadership'] input[formcontrolname='isDirectorNew']"));
-                uiKeyPersonRoleCat.Click();
+                // select leader #0 role
+                NgWebElement uiLeaderRole = ngDriver.FindElement(By.CssSelector("[addlabel='Add Leadership'][changetypesuffix='Leadership'] input[formcontrolname='isDirectorNew']"));
+                uiLeaderRole.Click();
 
-                // enter key personnel #0 title
-                NgWebElement uiKeyPersonTitle = ngDriver.FindElement(By.CssSelector("input[formControlName=\"titleNew\"]"));
-                uiKeyPersonTitle.SendKeys(keyPersonnelTitle);
+                // enter leader #0 title
+                NgWebElement uiLeaderTitle = ngDriver.FindElement(By.CssSelector("input[formControlName='titleNew']"));
+                uiLeaderTitle.SendKeys(leaderTitle);
 
-                // enter key personnel #0 email
-                NgWebElement uiKeyPersonEmail = ngDriver.FindElement(By.CssSelector("input[formControlName=\"emailNew\"]"));
-                uiKeyPersonEmail.SendKeys(keyPersonnelEmail);
+                // enter leader #0 email
+                NgWebElement uiLeaderEmail = ngDriver.FindElement(By.CssSelector("input[formControlName='emailNew']"));
+                uiLeaderEmail.SendKeys(leaderEmail);
 
-                // enter key personnel #0 DOB
-                NgWebElement openKeyPersonnelDOB = ngDriver.FindElement(By.CssSelector("input[formControlName=\"dateofBirthNew\"]"));
-                openKeyPersonnelDOB.Click();
+                // enter leader #0 DOB
+                NgWebElement openLeaderDOB = ngDriver.FindElement(By.CssSelector("input[formControlName='dateofBirthNew']"));
+                openLeaderDOB.Click();
 
                 // select the date
                 SharedCalendarDate();
 
                 // click on the Confirm button
-                NgWebElement confirmButtonKeyPersonnel = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] .fa-save span"));
-                confirmButtonKeyPersonnel.Click();
+                NgWebElement confirmButtonLeader = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] .fa-save span"));
+                confirmButtonLeader.Click();
 
                 /********** Individual Shareholder #0 **********/
 
