@@ -11,7 +11,7 @@ Scenario: Multiple Nested Shareholders
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I add in multiple nested business shareholders
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a private corporation
     And I review the security screening requirements for a multilevel business
     And I click on the button for Pay for Application
