@@ -761,15 +761,13 @@ namespace bdd_tests
                 NgWebElement uiPayButton = ngDriver.FindElement(By.CssSelector(".justify-content-between button.btn-primary"));
                 uiPayButton.Click();
             }
-        }
 
-
-        [And(@"I click on the Submit Organization Information button")]
-        public void ClickSubmitOrgStructureButton()
-        {
-            // click on the Submit Org Info button
-            NgWebElement uiSubmitOrgInfoButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
-            uiSubmitOrgInfoButton.Click();
+            if (specificButton == "Submit Organization Information")
+            {
+                // click on the Submit Org Info button
+                NgWebElement uiSubmitOrgInfoButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
+                uiSubmitOrgInfoButton.Click();
+            }
         }
 
 
@@ -3819,8 +3817,9 @@ namespace bdd_tests
             NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr[1]/td[7]/i[2]/span"));
             uiEditInfoButton.Click();
 
-            // click on submit org info button
-            ClickSubmitOrgStructureButton();
+            // click on the Submit Org Info button
+            NgWebElement uiSubmitOrgInfoButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
+            uiSubmitOrgInfoButton.Click();
         }
 
 
@@ -3868,8 +3867,9 @@ namespace bdd_tests
             NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
             uiConfirmButton.Click();
 
-            // click on submit org info button
-            ClickSubmitOrgStructureButton();
+            // click on the Submit Org Info button
+            NgWebElement uiSubmitOrgInfoButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
+            uiSubmitOrgInfoButton.Click();
         }
 
 

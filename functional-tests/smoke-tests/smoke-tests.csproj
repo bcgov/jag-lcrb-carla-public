@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="CRSApplicationPrivateCorp.feature">
+    <None Update="CRSApplicationPrivateCorpSmokeTest.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="PublicSmokeTest.feature">
