@@ -43,43 +43,43 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Create_CateringApplication_indigenousnation.feature">
+    <None Update="CreateCateringApplicationIndigenousNation.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Create_CateringApplication_partnership.feature">
+    <None Update="CreateCateringApplicationPartnership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Create_CateringApplication_privatecorp.feature">
+    <None Update="CreateCateringApplicationPrivateCorp.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Create_CateringApplication_pubcorp.feature">
+    <None Update="CreateCateringApplicationPublicCorp.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Create_CateringApplication_society.feature">
+    <None Update="CreateCateringApplicationSociety.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Create_CateringApplication_soleproprietor.feature">
+    <None Update="CreateCateringApplicationSoleProprietor.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Create_CRSApplication_indigenousnation.feature">
+    <None Update="CreateCRSApplicationIndigenousNation.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Create_CRSApplication_partnership.feature">
+    <None Update="CreateCRSApplicationPartnership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Create_CRSApplication_privatecorp.feature">
+    <None Update="CreateCRSApplicationPrivateCorp.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Create_CRSApplication_pubcorp.feature">
+    <None Update="CreateCRSApplicationPublicCorp.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Create_CRSApplication_society.feature">
+    <None Update="CreateCRSApplicationSociety.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Create_CRSApplication_soleproprietor.feature">
+    <None Update="CreateCRSApplicationSoleProprietor.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Create_MultiLevel_CRSApplication_PrivateCorp.feature">
+    <None Update="CreateMultiLevelCRSApplicationPrivateCorp.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

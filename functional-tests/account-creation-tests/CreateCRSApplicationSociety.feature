@@ -1,4 +1,4 @@
-﻿Feature: Create_CRSApplication_society
+﻿Feature: CreateCRSApplicationSociety
     As a logged in business user
     I want to submit a CRS Application for a society
     To be used as test data

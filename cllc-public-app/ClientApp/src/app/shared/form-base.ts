@@ -143,6 +143,14 @@ export class FormBase implements OnDestroy {
         };
     }
 
+    public requiredAutoCompleteId(control: AbstractControl): { [key: string]: any } | null {
+        let result = { 'required': { value: control.value } }; // invalid by default
+        if (control.value && control.value.id) {
+            result = null; // valid
+        }
+        return result;
+    }
+
 
     public requiredSelectChildValidator(selectField: string, conditionalValue: any[]): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } | null => {

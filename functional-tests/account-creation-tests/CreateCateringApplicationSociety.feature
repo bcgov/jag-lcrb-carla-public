@@ -1,4 +1,4 @@
-﻿Feature: Create_CateringApplication_society
+﻿Feature: CreateCateringApplicationSociety
     As a logged in business user
     I want to submit a Catering Application for a society
     To be used as test data
