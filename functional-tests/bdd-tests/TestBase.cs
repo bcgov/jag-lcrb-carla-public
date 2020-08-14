@@ -749,8 +749,6 @@ namespace bdd_tests
 
             if (specificButton == "Pay for Application")
             {
-                System.Threading.Thread.Sleep(3000);
-
                 // click on the Pay for Application button
                 NgWebElement uiPayButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
                 uiPayButton.Click();
