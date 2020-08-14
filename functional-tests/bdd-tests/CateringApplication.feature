@@ -12,7 +12,7 @@ Scenario: Indigenous Nation Catering Application
     And I complete the Catering application
     And I click on the Submit button
     And I review the security screening requirements for an indigenous nation
-    And I click on the Pay for Application button
+    And I click on the Pay for Application button for an indigenous nation
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And the account is deleted
