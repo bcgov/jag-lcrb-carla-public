@@ -5,6 +5,8 @@ using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -29,17 +31,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IPdfService _pdfClient;
+        private readonly IWebHostEnvironment _env;
         private readonly ILogger _logger;
 
         public LicensesController(IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor,
-            IPdfService pdfClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache)
+            IPdfService pdfClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache, IWebHostEnvironment env)
         {
             _cache = memoryCache;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _pdfClient = pdfClient;
             _logger = loggerFactory.CreateLogger(typeof(LicensesController));
-
+            _env = env;
         }
 
         /// GET licence by id
@@ -258,6 +261,50 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw (httpOperationException);
             }
             return Ok();
+        }
+
+        /// <summary>
+        /// Set expiry for a given licence to today.  Only useful for automated testing.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}/setexpiry")]
+        public async Task<IActionResult> SetExpiry(string id)
+        {
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
+
+
+            // get the current user.
+            string sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
+
+
+            // query the Dynamics system to get the account record.
+            if (userSettings.AccountId != null && !userSettings.IsNewUserRegistration && userSettings.AccountId.Length > 0)
+            {
+
+                // call the bpf to process the application.
+                try
+                {
+                    // this needs to be the guid for the published workflow.
+                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync("26e7e116-dace-426a-a798-e9134d913f19", id);
+                    return Ok("OK");
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    string error = httpOperationException.Response.Content;
+                    return BadRequest(error);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
+            }
+            else
+            {
+                return BadRequest("This API is not available to an unregistered user.");
+            }
         }
 
         [HttpPost("set-third-party-operator")]
@@ -492,7 +539,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     
                     }
 
-                    application.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", lginvalue);
+                    if (!string.IsNullOrEmpty(lginvalue))
+                    {
+                        application.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", lginvalue);
+                    }
 
                     licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioPolicejurisdictionidValue )).FirstOrDefault();
                     // Police Jurisdiction association

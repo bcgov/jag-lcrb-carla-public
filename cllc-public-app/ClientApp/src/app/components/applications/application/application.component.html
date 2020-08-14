@@ -364,7 +364,7 @@
                 </section>
 
                 <br><br>
-                <app-field label="Police Jurisdiction {{policeJurisdictionReqInProgress}}" [required]="false"
+                <app-field label="Police Jurisdiction" [required]="false"
                   [valid]="isValidOrNotTouched('policeJurisdiction')" errorMessage="Please select a value">
                   <input type="text" class="form-control" style="width: 500px;"
                     placeholder="Type to search and then select a value" formControlName="policeJurisdiction"
@@ -913,17 +913,17 @@
                     {{application?.licenseType}}
                     and an eligible grocery store?
                   </div-->
-                  <div class="question-label" *ngIf="!htmlContent.Grocery">
+                  <div class="question-label" *ngIf="!htmlContent.grocery">
                     Is the proposed location inside a grocery store?
                   </div>
-                  <div class="question-label" *ngIf="htmlContent.Grocery" [innerHTML]="htmlContent.Grocery"></div>
+                  <div class="question-label" *ngIf="htmlContent.grocery" [innerHTML]="htmlContent.grocery"></div>
 
 
                   <div style="flex: 0 0 85px;">
-                    <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('connectedGrocery')}"
-                      formControlName="connectedGrocery" aria-label="Font Style">
-                      <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                      <mat-button-toggle value="No">No</mat-button-toggle>
+                    <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('isLocatedInGroceryStore')}"
+                      formControlName="isLocatedInGroceryStore" aria-label="Font Style">
+                      <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                      <mat-button-toggle [value]="false">No</mat-button-toggle>
                     </mat-button-toggle-group>
                   </div>
                 </section>
@@ -1799,13 +1799,14 @@
 
         <section appRemoveIfFeatureOff="LGApprovals" *ngIf="!isOpenedByLGForApproval && !lGHasRejected()"
           style="position: relative; margin-top: 20px;">
-          <button *ngIf="account?.businessType !== 'LocalGovernment '" class="btn btn-secondary"
-            style="margin-right:10px;" (click)="saveForLater()">
-            <span>
-              <i class="fa fa-save"></i>
-              SAVE FOR LATER
-            </span>
-          </button>
+            <button *ngIf="account?.businessType !== 'LocalGovernment '" class="btn btn-secondary" style="margin-right:10px;"
+              (click)="saveForLater()" [disabled]="saveForLaterInProgress">
+              <span>
+                <i class="fa fa-save"></i>
+                SAVE FOR LATER
+              </span>
+              <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
+            </button>
 
         <!-- NEXT STEP BUTTONS               
                       LG Approval Required -- > Submit to LG For Approval
@@ -1825,7 +1826,8 @@
                                     && !lGHasRejected()
                                     && application?.applicationStatus === 'Intake'"
           class=" btn btn-primary" [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval();">
-          <i class="fa fa-university mr-1"></i>SUBMIT FOR LG/IN REVIEW OR COMMENT
+          <span><i class="fa fa-university mr-1"></i>SUBMIT FOR LG/IN REVIEW OR COMMENT</span>
+          <mat-progress-bar *ngIf="disableSubmitForLGINApproval" mode="indeterminate"></mat-progress-bar>
         </button>
         
         <!-- NO LG Approval Required OR LG Already Approved -->
@@ -1833,13 +1835,19 @@
         <!-- LG Approved OR NO LG Approvals Required -->
         <ng-container
           *ngIf="lGHasApproved() || !application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation">
-          <button *ngIf="!application?.applicationType?.requiresSecurityScreening" class="btn btn-primary"
-            (click)="submit_application()">
-            SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
-          </button>
+
+            <button *ngIf="!application?.applicationType?.requiresSecurityScreening" class="btn btn-primary"
+              (click)="submit_application()" [disabled]="submitApplicationInProgress">
+              SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
+              <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
+            </button>
+
           <button *ngIf="application?.applicationType?.requiresSecurityScreening" class="btn btn-primary"
-            (click)="proceedToSecurityScreening()">
-            <i class="fa fa-id-card mr-1"></i>PROCEED TO SECURITY SCREENING
+            (click)="proceedToSecurityScreening()" [disabled]="proceedToSecurityScreeningInProgress">
+            <span>
+              <i class="fa fa-id-card mr-1"></i>PROCEED TO SECURITY SCREENING
+            </span>
+            <mat-progress-bar *ngIf="proceedToSecurityScreeningInProgress" mode="indeterminate"></mat-progress-bar>
           </button>
         </ng-container>
 
@@ -1862,9 +1870,13 @@
               <i class="fa fa-save"></i>
               SAVE FOR LATER
             </span>
+            <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
           </button>
           <button class="btn btn-primary" (click)="submit_application()">
-            <i class="fa fa-credit-card" *ngIf="!skipPayment"></i>SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
+            <span>
+              <i class="fa fa-credit-card" *ngIf="!skipPayment"></i>SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
+            </span>
+            <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
           </button>
 
           <span style="float: right; color: #1a5a96; padding-top: 10px;">
