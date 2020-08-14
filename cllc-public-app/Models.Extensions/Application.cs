@@ -818,6 +818,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
 
             applicationSummary.LGHasApproved = (dynamicsApplication.AdoxioLgapprovaldecision == (int?)LGDecision.Approved)
+                    || (dynamicsApplication.AdoxioLgapprovaldecision == (int?)LGDecision.OptOut)
+                    || (dynamicsApplication.AdoxioLgapprovaldecision == (int?)LGDecision.Pending)
                     || (dynamicsApplication.AdoxioLgzoning == (int?)Zoning.Allows);
 
             applicationSummary.IsIndigenousNation = (dynamicsApplication.AdoxioApplicanttype == (int)AdoxioApplicantTypeCodes.IndigenousNation);
