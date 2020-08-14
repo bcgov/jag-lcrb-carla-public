@@ -380,7 +380,7 @@ namespace bdd_tests
             if (feeType == "Catering")
             {
                 // confirm correct payment amount for Catering
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$450.00')]")).Displayed);
+                //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$450.00')]")).Displayed);
             }
 
             ClickLicencesTab();
@@ -543,6 +543,36 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the button for (.*)")]
+        public void ClickOnButton(string specificButton)
+        {
+            if (specificButton == "CRS terms and conditions")
+            {
+                // click on the Terms and Conditions button
+                NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-expansion-panel mat-expansion-panel-header[role='button']"));
+                uiTermsAndConditions.Click();
+
+                // check that the correct text is displayed for CRS - to be moved in the future
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'This licence is subject to the terms and conditions specified in the restriction or approval letter(s) and those contained in the Cannabis Retail Store Handbook, which may be amended from time to time.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Packaged cannabis may only be sold within the service area outlined in blue on the LCRB approved floor plan, unless otherwise endorsed or approved by the LCRB.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'The establishment may be open anytime between the hours of 9 a.m. and 11 p.m., subject to further restriction by the local government or Indigenous nation.')]")).Displayed);
+            }
+
+            if (specificButton == "Catering terms and conditions")
+            {
+                // click on the Terms and Conditions button
+                NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-expansion-panel mat-expansion-panel-header[role='button']"));
+                uiTermsAndConditions.Click();
+
+                // check that the correct text is displayed for Catering - to be moved in the future
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'For sale and service of liquor at another person')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'s event where food service is catered by the licensee, unless otherwise permitted.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'The terms and conditions to which this licence is subject include the terms and conditions contained in the licensee Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website. The Terms and Conditions Handbook is amended from time to time.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licensee may only serve liquor at a catered event for which LCRB has issued a catering authorization.')]")).Displayed);
+            }
+        }
+
+
         [And(@"I click on the Licences tab")]
         public void ClickLicencesTab()
         {
@@ -554,10 +584,122 @@ namespace bdd_tests
         }
 
 
+        [And(@"the expiry date is changed to today")]
+        public void ExpiryDateToday()
+        {
+            ngDriver.IgnoreSynchronization = true;
+
+            // navigate to api/licences/<Application ID>/setexpiry
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/licences/{applicationID}/setexpiry");
+
+            // wait for the automated expiry process to run
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+
+            ngDriver.IgnoreSynchronization = false;
+
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+        }
+
+
         [And(@"I renew the licence")]
         public void RenewLicence()
         {
-        // TODO
+            string renewLicenceLink = "Renew Licence";
+
+            // click on the Renew Licence link
+            NgWebElement uiRenewLicence = ngDriver.FindElement(By.LinkText(renewLicenceLink));
+            uiRenewLicence.Click();
+
+            // select 'No'
+            // 1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
+            NgWebElement uiCriminalOffence = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalCriminalOffenceCheck'] button#mat-button-toggle-16-button"));
+            uiCriminalOffence.Click();
+
+            // select 'No'
+            // 2. Has there been an unreported sale of the business associated with the licence within the past 12 months? 
+            NgWebElement uiUnreportedSale = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalUnreportedSaleOfBusiness'] button#mat-button-toggle-18-button"));
+            uiUnreportedSale.Click();
+
+            // select 'No'
+            // 3. Our records show that this establishment is licensed as a Private Corporation. Has this changed? 
+            NgWebElement uiBusinessType = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalBusinessType'] button#mat-button-toggle-20-button"));
+            uiBusinessType.Click();
+
+            // select 'No'
+            // 4. Have you, any partner, shareholder, director, officer, or an immediate family member of any of the aforementioned associates acquired a new interest or expanded an existing interest - financial or otherwise - in a federal producer of cannabis within the past 12 months? 
+            NgWebElement uiTiedHouse = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalTiedhouse'] button#mat-button-toggle-22-button"));
+            uiTiedHouse.Click();
+
+            // select 'No'
+            // 5. Has a federal produce of cannabis acquired a new interest or expanded an existing interest - financial or otherwise - in the licensee Private Corporation within the past 12 months? 
+            NgWebElement uiTiedHouseFederalInterest = ngDriver.FindElement(By.CssSelector("[formcontrolname='tiedhouseFederalInterest'] button#mat-button-toggle-24-button"));
+            uiTiedHouseFederalInterest.Click();
+
+            // select 'No'
+            // 6. Have you made any unreported changes to your organizational leadership within the past 12 months?
+            NgWebElement uiOrgLeadership = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalOrgLeadership'] button#mat-button-toggle-26-button"));
+            uiOrgLeadership.Click();
+
+            // select 'No'
+            // 7. Have you made any unreported changes to your key personnel within the past 12 months?
+            NgWebElement uiKeyPersonnel = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalkeypersonnel'] button#mat-button-toggle-28-button"));
+            uiKeyPersonnel.Click();
+
+            // select 'No'
+            // 8. Have you made any unreported changes to your share structure within the past 12 months? 
+            NgWebElement uiShareholderStructure = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalShareholders'] button#mat-button-toggle-30-button"));
+            uiShareholderStructure.Click();
+
+            // select 'No'
+            // 9. Do you have an outstanding payable fine under the Offence Act or outstanding payable monetary penalty under the Cannabis Control and Licensing Act that has not yet been paid?
+            NgWebElement uiOutstandingFine = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalOutstandingFines'] button#mat-button-toggle-32-button"));
+            uiOutstandingFine.Click();
+
+            // select 'No'
+            // 10. Have you made an unreported change to your store’s name in the past 12 months?
+            NgWebElement uiBrandingChange = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalBranding'] button#mat-button-toggle-34-button"));
+            uiBrandingChange.Click();
+
+            // select 'No'
+            // 11. Have you updated the store’s signage or branding in the past 12 months?
+            NgWebElement uiSignageChange = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalSignage'] button#mat-button-toggle-36-button"));
+            uiSignageChange.Click();
+
+            // select 'No'
+            // 12. Have you made an unreported change of location of your establishment within the past 12 months? (This includes any changes to the Parcel Identification Number where your establishment is located, even if the physical location has not changed).
+            NgWebElement uiEstablishmentAddress = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalEstablishmentAddress'] button#mat-button-toggle-38-button"));
+            uiEstablishmentAddress.Click();
+
+            // select 'No'
+            // 13. Have you sold the property or transferred the lease associated with this cannabis retail store licence within the past 12 months?
+            NgWebElement uiValidInterest = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalValidInterest'] button#mat-button-toggle-40-button"));
+            uiValidInterest.Click();
+
+            // select 'No'
+            // 14. Are you aware of any local government or Indigenous nation zoning changes with respect to your establishment location?
+            NgWebElement uiZoning = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalZoning'] button#mat-button-toggle-42-button"));
+            uiZoning.Click();
+
+            // select 'No'
+            // 15. Have you made any unreported changes to the store’s floor plan within the past 12 months? 
+            NgWebElement uiFloorPlan = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalFloorPlan'] button#mat-button-toggle-44-button"));
+            uiFloorPlan.Click();
+
+            // click on the authorized to submit checkbox
+            NgWebElement authorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            authorizedSubmit.Click();
+
+            // click on the signature agreement checkbox
+            NgWebElement signatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
+            signatureAgree.Click();
+
+            ClickOnSubmitButton();
+
+            MakePayment();
+
+            // confirm renewal amount
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1500.00')]")).Displayed);
         }
 
 
@@ -600,6 +742,14 @@ namespace bdd_tests
         public void ClickOnPayButton()
         {
             NgWebElement payButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+            payButton.Click();
+        }
+
+
+        [And(@"I click on the Pay for Application button for an indigenous nation")]
+        public void ClickOnPayButtonIN()
+        {
+            NgWebElement payButton = ngDriver.FindElement(By.CssSelector(".justify-content-between button.btn-primary"));
             payButton.Click();
         }
 
@@ -1264,8 +1414,6 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "test2@automation.com";
-            //string indigenousNation = "Cowichan Tribes";
-            //string policeJurisdiction = "RCMP Shawnigan Lake";
 
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
@@ -1291,14 +1439,6 @@ namespace bdd_tests
             // Is your establishment located on the Agricultural Land Reserve (ALR)?
             NgWebElement yesALRZoning = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
             yesALRZoning.Click();
-
-            // search for and select the indigenous nation
-            //NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
-            //uiIndigenousNation.SendKeys(indigenousNation);
-
-            // search for and select the police jurisdiction
-            //NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
-            //uiPoliceJurisdiction.SendKeys(policeJurisdiction);
 
             // enter the store email
             NgWebElement uiEstabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
@@ -1990,6 +2130,14 @@ namespace bdd_tests
             Page Title: Submit a Name or Branding Change Application
             */
 
+            // click on the authorized to submit checkbox
+            NgWebElement uiAuthSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            uiAuthSubmit.Click();
+
+            // click on the signature agreement checkbox
+            NgWebElement uiSigAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
+            uiSigAgreement.Click();
+
             // find the upload test file in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
@@ -2006,14 +2154,6 @@ namespace bdd_tests
                 NgWebElement uiStoreExterior = ngDriver.FindElement(By.Id("mat-button-toggle-2-button"));
                 uiStoreExterior.Click();
             }
-
-            // click on the authorized to submit checkbox
-            NgWebElement uiAuthSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
-            uiAuthSubmit.Click();
-
-            // click on the signature agreement checkbox
-            NgWebElement uiSigAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
-            uiSigAgreement.Click();
 
             // click on the Submit & Pay button
             ClickOnSubmitButton();
@@ -2143,7 +2283,7 @@ namespace bdd_tests
             // navigate to api/applications/<Application ID>/process
             ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{applicationID}/process");
 
-            // wait for the autoamted approval process to run
+            // wait for the automated approval process to run
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
 
             ngDriver.IgnoreSynchronization = false;
@@ -3320,7 +3460,7 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is required')]")).Displayed);
                 }
 
-                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application") || (applicationType == "n indigenous nation Cannabis application"))
+                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == "n indigenous nation Cannabis application"))
                 { 
                     // check missing police jurisdiction error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'policeJurisdiction is not valid')]")).Displayed);
@@ -3445,6 +3585,26 @@ namespace bdd_tests
                 {
                     // check missing IN error is shown
                     // waiting for bug fix: LCSD-3671
+                }
+
+                if (applicationType == " licence renewal application")
+                {
+                    // check for missing error messages
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 1')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 2')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 3')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 4')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 5')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 6')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 7')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 8')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 9')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 10')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 11')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 12')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 13')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 14')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 15')]")).Displayed);
                 }
             }
         }

@@ -12,7 +12,7 @@ Scenario: Indigenous Nation Federal Reports and Show Map
     And I review the organization structure for an indigenous nation
     And I click on the Submit Organization Information button
     And I complete the Cannabis Retail Store application for an indigenous nation
-    And I click on the Pay for Application button
+    And I click on the Pay for Application button for an indigenous nation
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
