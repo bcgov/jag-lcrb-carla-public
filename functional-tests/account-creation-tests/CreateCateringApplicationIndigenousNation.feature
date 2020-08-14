@@ -13,6 +13,6 @@ Scenario: Create Catering Application Indigenous Nation
     And I click on the Submit Organization Information button
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     Then I confirm the payment receipt for a Catering application

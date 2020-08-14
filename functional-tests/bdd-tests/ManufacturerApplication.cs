@@ -72,7 +72,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsLicenseeChanges();
 
-            IgnoreSynchronization();
+            IgnoreSynchronizationFalse();
 
             CarlaLogin(businessType);
         }

@@ -71,7 +71,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsCOVIDTempExtension();
 
-            IgnoreSynchronization();
+            IgnoreSynchronizationFalse();
         }
 
 

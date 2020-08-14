@@ -80,7 +80,7 @@ Scenario: Confirm partnership business shareholder org structure update
     And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
     And I add a second individual as an individual partner and a business shareholder 
-    And I click on the Confirm Organization Information is Complete button
+    And I click on the button for Confirm Organization Information is Complete
     And I click on the Complete Organization Information button
     And the partnership org structure is correct
     And I remove the latest individual partner and business shareholder
@@ -105,14 +105,14 @@ Scenario: Confirm partnership business shareholder org structure update after pa
     And I click on the Submit Organization Information button
     And I click on the Complete Organization Information button
     And I add a second individual as an individual partner and a business shareholder 
-    And I click on the Confirm Organization Information is Complete button
+    And I click on the button for Confirm Organization Information is Complete
     And I click on the Complete Organization Information button
     And the partnership org structure is correct
-    And I click on the Confirm Organization Information is Complete button
+    And I click on the button for Confirm Organization Information is Complete
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a partnership
-    And I click on the Confirm Organization Information is Complete button
+    And I click on the button for Confirm Organization Information is Complete
     And I complete the Cannabis Retail Store application for a partnership
     And I click on the Pay for Application button
     And I enter the payment information
@@ -166,7 +166,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsSecurityScreening();
 
-            IgnoreSynchronization();
+            IgnoreSynchronizationFalse();
 
             CarlaLogin(businessType);
         }
