@@ -173,7 +173,6 @@ import { LicencesComponent } from '@components/licences/licences.component';
 import { LicenceRowComponent } from '@components/licences/licence-row/licence-row.component';
 import { CapacityTableComponent } from '@components/tables/capacity-table.component';
 import { CapacityTableRowComponent } from '@components/tables/capacity-table-row.component';
-import { HoursOfSaleTableComponent } from '@components/tables/hours-of-sale-table.component';
 import { ApplicationsComponent } from '@components/applications/applications.component';
 import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
@@ -316,7 +315,6 @@ import { ProductionStagesComponent } from './components/applications/application
     LicenceRowComponent,
     CapacityTableComponent,
     CapacityTableRowComponent,
-    HoursOfSaleTableComponent,
     ApplicationsComponent,
     AssociateListComponent,
     OrgStructureComponent,

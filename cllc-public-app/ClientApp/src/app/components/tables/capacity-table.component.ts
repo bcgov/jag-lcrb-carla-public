@@ -7,7 +7,7 @@ import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 @Component({
   selector: 'app-capacity-table',
   templateUrl: './capacity-table.component.html',
-  styleUrls: ['./tables.component.scss'],
+  styleUrls: ['./capacity-table.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
