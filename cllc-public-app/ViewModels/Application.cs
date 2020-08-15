@@ -329,7 +329,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         sh2330 = 845280094,
 
         [EnumMember(Value = "23:45")]
-        sh2345 = 845280095
+        sh2345 = 845280095,
+        [EnumMember(Value = "Closed")]
+        closed = 845280096
     }
     public enum ValueNotChanged
     {
@@ -445,6 +447,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool PrevPaymentFailed { get; set; }
 
         public GeneralYesNo RegisteredEstablishment { get; set; } //adoxio_registeredestablishment
+        public string ServiceHoursId { get; set; }
 
         public bool? ServicehHoursStandardHours { get; set; }
         public bool? SignatureAgreement { get; set; } //adoxio_signatureagreement  
@@ -483,6 +486,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public TiedHouseConnection TiedHouse { get; set; }
         public ViewModels.PoliceJurisdiction PoliceJurisdiction { get; set; }
         public ViewModels.IndigenousNation IndigenousNation { get; set; }
+        public ViewModels.ServiceHours ServiceHours { get; set; }
 
 
         [JsonConverter(typeof(StringEnumConverter))]

@@ -1,10 +1,16 @@
 export class ServiceHour {
-    // // picklist
-    // areaCategory: number;
-    // areaNumber: number;
-    // areaLocation: string;
-    // isIndoor: boolean;
-    // isOutdoor: boolean;
-    // isPatio: boolean;
-    // capacity: string;
+  serviceHoursSundayOpen: string;
+  serviceHoursSundayClose: string;
+  serviceHoursMondayOpen: string;
+  serviceHoursMondayClose: string;
+  serviceHoursTuesdayOpen: string;
+  serviceHoursTuesdayClose: string;
+  serviceHoursWednesdayOpen: string;
+  serviceHoursWednesdayClose: string;
+  serviceHoursThursdayOpen: string;
+  serviceHoursThursdayClose: string;
+  serviceHoursFridayOpen: string;
+  serviceHoursFridayClose: string;
+  serviceHoursSaturdayOpen: string;
+  serviceHoursSaturdayClose: string;
 }
