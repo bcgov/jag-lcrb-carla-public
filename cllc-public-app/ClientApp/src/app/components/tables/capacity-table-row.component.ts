@@ -5,9 +5,8 @@ import { ServiceArea, AreaCategory } from '@models/service-area.model';
 
 @Component({
   selector: '[capacity-table-row]',
-  styleUrls: ['./tables.component.scss'],
+  styleUrls: ['./capacity-table-row.component.scss'],
   templateUrl: './capacity-table-row.component.html',
-  styles: [``],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
