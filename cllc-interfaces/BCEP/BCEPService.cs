@@ -223,8 +223,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             // replace spaces with "%20" (do not do a full url encoding; does not work with BeanStream)
             paramString = paramString.Replace(" ", "%20");
 
+            string hashkey = GetHashKey(isAlternateAccount);
+
             // add hash key at the end of params
-            string paramStringWithHash = paramString + bcep_hashkey;
+            string paramStringWithHash = paramString + hashkey;
 
             // Calculate the MD5 value using the Hash Key set on the Order Settings page (Within Beanstream account).
             // How:
