@@ -13,6 +13,10 @@ ADMIN_REQUEST_HEADERS = {"Content-Type": "application/json"}
 if AGENT_ADMIN_API_KEY is not None and 0 < len(AGENT_ADMIN_API_KEY):
     ADMIN_REQUEST_HEADERS["x-api-key"] = AGENT_ADMIN_API_KEY
 
+TRACE_EVENTS = os.getenv("TRACE_EVENTS", "True").lower() == "true"
+if TRACE_EVENTS and TRACE_TARGET == TRACE_LOG_TARGET:
+    LOGGER.setLevel(logging.INFO)
+
 TOB_ADMIN_API_KEY = os.environ.get("TOB_ADMIN_API_KEY")
 TOB_REQUEST_HEADERS = {}
 if TOB_ADMIN_API_KEY is not None and 0 < len(TOB_ADMIN_API_KEY):
@@ -672,6 +676,9 @@ def handle_send_credential(cred_input):
             # "comment": "string",
             "schema_id": schema_id,
         }
+
+        if TRACE_EVENTS:
+            cred_offer["trace"] = True
 
         thread = SendCredentialThread(
             credential_definition_id,
