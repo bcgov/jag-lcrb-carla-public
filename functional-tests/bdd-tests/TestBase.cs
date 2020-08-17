@@ -3265,8 +3265,13 @@ namespace bdd_tests
 
                 // upload the partnership agreement
                 string partnershipPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-                NgWebElement uploadPartnershipAgreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+                NgWebElement uploadPartnershipAgreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
                 uploadPartnershipAgreement.SendKeys(partnershipPath);
+
+                // upload the additional supporting document
+                string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
+                NgWebElement uploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+                uploadAdditionalSupporting.SendKeys(additionalSupportingPath);
 
                 // open partner row
                 NgWebElement uiPartnerRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] button"));
@@ -3326,7 +3331,7 @@ namespace bdd_tests
 
                 // upload a second partnership agreement
                 string partnershipPath2 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-                NgWebElement uploadPartnership2Agreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
+                NgWebElement uploadPartnership2Agreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
                 uploadPartnership2Agreement.SendKeys(partnershipPath2);
 
                 // open individual partner 2 row
