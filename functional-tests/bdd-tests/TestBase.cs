@@ -583,8 +583,8 @@ namespace bdd_tests
         {
             ngDriver.IgnoreSynchronization = true;
 
-            // navigate to api/licences/<Application ID>/setexpiry
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/licences/{applicationID}/setexpiry");
+            // navigate to api/Licenses/<Application ID>/setexpiry
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{applicationID}/setexpiry");
 
             // wait for the automated expiry process to run
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
@@ -2591,9 +2591,9 @@ namespace bdd_tests
 
             // confirm that private corporation personnel are present
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder0')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel0')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader0')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnel1')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader1')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz2First')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz2First')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz3First')]")).Displayed);
