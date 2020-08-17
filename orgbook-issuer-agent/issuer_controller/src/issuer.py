@@ -682,7 +682,7 @@ def handle_send_credential(cred_input):
         }
 
         if TRACE_EVENTS:
-            cred_offer["trace"] = True
+            cred_req["trace"] = True
 
         thread = SendCredentialThread(
             credential_definition_id,
