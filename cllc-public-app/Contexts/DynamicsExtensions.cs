@@ -45,6 +45,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
 
+
+
         public static List<Public.ViewModels.ApplicationLicenseSummary> GetPaidLicensesOnTransfer(this IDynamicsClient _dynamicsClient, string licenceeId)
         {
             var applicationFilter = $"_adoxio_applicant_value eq {licenceeId} and adoxio_paymentrecieved eq true ";
@@ -1501,13 +1503,56 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-        public static bool IsLiquor(this MicrosoftDynamicsCRMadoxioApplication application)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns>True if the given account mostly has liquor licences.</returns>
+        public static bool IsMostlyLiquor(this MicrosoftDynamicsCRMaccount account, IDynamicsClient dynamicsClient)
+        {
+            bool result = false;
+            // get the licences for the given account.
+
+            var licences = dynamicsClient.GetAllLicensesByLicencee(null, account.Accountid).ToList();
+            int liquorCount = 0;
+            foreach (var licence in licences)
+            {
+                if (licence.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence != null)
+                {
+                    var applicationId = licence.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence.FirstOrDefault().AdoxioApplicationid;
+                    var application = dynamicsClient.GetApplicationByIdWithChildren(applicationId).GetAwaiter().GetResult();
+                    if (application.AdoxioApplicationTypeId != null &&
+                        application.AdoxioApplicationTypeId.AdoxioCategory != null &&
+                        (Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory)application.AdoxioApplicationTypeId.AdoxioCategory == Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory.Liquor)
+                    {
+                        liquorCount++;
+                    }
+                }
+            }
+
+            if (licences.Count > 0 && liquorCount >= licences.Count / 2)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
+        public static bool IsLiquor(this MicrosoftDynamicsCRMadoxioApplication application, IDynamicsClient dynamicsClient)
         {
             bool result = false;
             // determine if the application is for liquor.
             if (application != null && application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioCategory != null)
             {
-                result = (Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory)application.AdoxioApplicationTypeId.AdoxioCategory == Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory.Liquor;
+                if (application.AdoxioApplicationTypeId.AdoxioName != null && application.AdoxioApplicationTypeId.AdoxioName == "Licensee Changes" && application.AdoxioApplicant != null)
+                {
+                    result = application.AdoxioApplicant.IsMostlyLiquor(dynamicsClient);
+                }
+                else
+                {
+                    result = (Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory)application.AdoxioApplicationTypeId.AdoxioCategory == Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory.Liquor;
+                }
+                
             }
 
             // TODO - if this is a licencee changes application then check the account's licences.  
