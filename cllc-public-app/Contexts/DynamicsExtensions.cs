@@ -1507,7 +1507,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             // determine if the application is for liquor.
             if (application != null && application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioName != null)
             {
-                result = application.AdoxioApplicationTypeId.AdoxioName.ToUpper().Contains("CANNABIS");
+                result = ! (application.AdoxioApplicationTypeId.AdoxioName.ToUpper().Contains("CANNABIS"));
             }
 
             return result;
