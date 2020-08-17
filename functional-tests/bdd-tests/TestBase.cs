@@ -3141,8 +3141,13 @@ namespace bdd_tests
 
                 // upload NOA form
                 string NOAPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-                NgWebElement uploadNOA = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+                NgWebElement uploadNOA = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
                 uploadNOA.SendKeys(NOAPath);
+
+                // upload additional supporting document
+                string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+                NgWebElement uploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+                uploadAdditionalSupporting.SendKeys(additionalSupportingPath);
 
                 // open key personnel #1 form
                 NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));
