@@ -9,13 +9,13 @@ from flask import jsonify
 import config
 
 AGENT_ADMIN_API_KEY = os.environ.get("AGENT_ADMIN_API_KEY")
-ADMIN_REQUEST_HEADERS = {}
-if AGENT_ADMIN_API_KEY is not None:
-    ADMIN_REQUEST_HEADERS = {"x-api-key": AGENT_ADMIN_API_KEY}
+ADMIN_REQUEST_HEADERS = {"Content-Type": "application/json"}
+if AGENT_ADMIN_API_KEY is not None and 0 < len(AGENT_ADMIN_API_KEY):
+    ADMIN_REQUEST_HEADERS["x-api-key"] = AGENT_ADMIN_API_KEY
 
 TOB_ADMIN_API_KEY = os.environ.get("TOB_ADMIN_API_KEY")
 TOB_REQUEST_HEADERS = {}
-if TOB_ADMIN_API_KEY is not None:
+if TOB_ADMIN_API_KEY is not None and 0 < len(TOB_ADMIN_API_KEY):
     TOB_REQUEST_HEADERS = {"x-api-key": TOB_ADMIN_API_KEY}
 
 # list of cred defs per schema name/version
@@ -452,7 +452,7 @@ TOPIC_PRESENTATIONS = "presentations"
 TOPIC_GET_ACTIVE_MENU = "get-active-menu"
 TOPIC_PERFORM_MENU_ACTION = "perform-menu-action"
 TOPIC_ISSUER_REGISTRATION = "issuer_registration"
-TOPIC_PROBLEM_REPORT = "problem-report"
+TOPIC_PROBLEM_REPORT = "problem_report"
 
 # max 15 second wait for a credential response (prevents blocking forever)
 MAX_CRED_RESPONSE_TIMEOUT = 45
