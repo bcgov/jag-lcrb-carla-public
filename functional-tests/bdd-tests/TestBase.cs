@@ -362,6 +362,9 @@ namespace bdd_tests
             Page Title: Licences
             */
 
+            // find the licence ID - TODO
+            NgWebElement uiLicenceID = ngDriver.FindElement(By.XPath("//a/span"));
+
             string firstYearLicenceFee = "Pay First Year Licensing Fee";
 
             // click on the pay first year licence fee link
