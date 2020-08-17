@@ -2,6 +2,8 @@ import json
 import os
 import threading
 import time
+import logging
+
 
 import requests
 from flask import jsonify
@@ -13,6 +15,8 @@ ADMIN_REQUEST_HEADERS = {"Content-Type": "application/json"}
 if AGENT_ADMIN_API_KEY is not None and 0 < len(AGENT_ADMIN_API_KEY):
     ADMIN_REQUEST_HEADERS["x-api-key"] = AGENT_ADMIN_API_KEY
 
+LOG_LEVEL = os.environ.get('LOG_LEVEL', 'WARNING').upper()
+LOGGER = logging.getLogger(__name__)
 TRACE_EVENTS = os.getenv("TRACE_EVENTS", "True").lower() == "true"
 if TRACE_EVENTS:
     LOGGER.setLevel(logging.INFO)
