@@ -1505,10 +1505,13 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             bool result = false;
             // determine if the application is for liquor.
-            if (application != null && application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioName != null)
+            if (application != null && application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioCategory != null)
             {
-                result = ! (application.AdoxioApplicationTypeId.AdoxioName.ToUpper().Contains("CANNABIS"));
+                result = (Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory)application.AdoxioApplicationTypeId.AdoxioCategory == Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory.Liquor;
             }
+
+            // TODO - if this is a licencee changes application then check the account's licences.  
+            // If the account has more liquor licences then use liquor.
 
             return result;
         }
