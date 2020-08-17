@@ -1586,25 +1586,25 @@ namespace bdd_tests
 
                 if (businessType == "public corporation" || businessType == "partnership")
                 {
-                    NgWebElement uploadMarriageCert0 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
+                    NgWebElement uploadMarriageCert0 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
                     uploadMarriageCert0.SendKeys(marriageCertificate);
                 }
 
                 if (businessType == "private corporation")
                 {
-                    NgWebElement uploadMarriageCert0 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
+                    NgWebElement uploadMarriageCert0 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
                     uploadMarriageCert0.SendKeys(marriageCertificate);
                 }
 
                 if (businessType == "society")
                 {
-                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
+                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
                     uploadMarriageCert1.SendKeys(marriageCertificate);
                 }
 
                 if (businessType == "sole proprietorship")
                 {
-                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
+                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
                     uploadMarriageCert1.SendKeys(marriageCertificate);
                 }
 
@@ -2907,6 +2907,16 @@ namespace bdd_tests
 
             if (businessType == " sole proprietorship")
             {
+                // find the upload test files in the bdd-tests\upload_files folder
+                var environment = Environment.CurrentDirectory;
+                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+                // upload an additional supporting document
+                string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
+                NgWebElement uploadadditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+                uploadadditionalSupporting.SendKeys(additionalSupportingPath);
+
                 /********** Sole Proprietor > Leader #1 **********/
 
                 // open the leader row
@@ -3011,6 +3021,16 @@ namespace bdd_tests
                 // enter Number of Members
                 NgWebElement uiMemberNumber = ngDriver.FindElement(By.CssSelector("[formcontrolname='numberOfMembers']"));
                 uiMemberNumber.SendKeys(membershipNumber);
+
+                // find the upload test files in the bdd-tests\upload_files folder
+                var environment = Environment.CurrentDirectory;
+                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+                // upload an additional supporting document
+                string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
+                NgWebElement uploadadditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+                uploadadditionalSupporting.SendKeys(additionalSupportingPath);
 
                 // open the director #1 row 
                 NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'][changetypesuffix='Leadership'] button"));
@@ -3141,8 +3161,13 @@ namespace bdd_tests
 
                 // upload NOA form
                 string NOAPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-                NgWebElement uploadNOA = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+                NgWebElement uploadNOA = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
                 uploadNOA.SendKeys(NOAPath);
+
+                // upload additional supporting document
+                string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+                NgWebElement uploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+                uploadAdditionalSupporting.SendKeys(additionalSupportingPath);
 
                 // open key personnel #1 form
                 NgWebElement openKeyPersonnelForm = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));
@@ -3265,8 +3290,13 @@ namespace bdd_tests
 
                 // upload the partnership agreement
                 string partnershipPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-                NgWebElement uploadPartnershipAgreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+                NgWebElement uploadPartnershipAgreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
                 uploadPartnershipAgreement.SendKeys(partnershipPath);
+
+                // upload the additional supporting document
+                string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
+                NgWebElement uploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+                uploadAdditionalSupporting.SendKeys(additionalSupportingPath);
 
                 // open partner row
                 NgWebElement uiPartnerRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] button"));
@@ -3326,7 +3356,7 @@ namespace bdd_tests
 
                 // upload a second partnership agreement
                 string partnershipPath2 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-                NgWebElement uploadPartnership2Agreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
+                NgWebElement uploadPartnership2Agreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
                 uploadPartnership2Agreement.SendKeys(partnershipPath2);
 
                 // open individual partner 2 row
@@ -3378,6 +3408,11 @@ namespace bdd_tests
                 string associatesPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
                 NgWebElement uploadAssociates = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
                 uploadAssociates.SendKeys(associatesPath);
+
+                // upload the additional supporting document
+                string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
+                NgWebElement uploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+                uploadAdditionalSupporting.SendKeys(additionalSupportingPath);
             }
         }
 
