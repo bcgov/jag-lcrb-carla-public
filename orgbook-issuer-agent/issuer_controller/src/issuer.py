@@ -14,7 +14,7 @@ if AGENT_ADMIN_API_KEY is not None and 0 < len(AGENT_ADMIN_API_KEY):
     ADMIN_REQUEST_HEADERS["x-api-key"] = AGENT_ADMIN_API_KEY
 
 TRACE_EVENTS = os.getenv("TRACE_EVENTS", "True").lower() == "true"
-if TRACE_EVENTS and TRACE_TARGET == TRACE_LOG_TARGET:
+if TRACE_EVENTS:
     LOGGER.setLevel(logging.INFO)
 
 TOB_ADMIN_API_KEY = os.environ.get("TOB_ADMIN_API_KEY")
