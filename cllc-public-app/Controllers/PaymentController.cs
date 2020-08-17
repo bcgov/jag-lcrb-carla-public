@@ -439,7 +439,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             bool isAlternateAccount = application.IsLiquor(); // set to true for Liquor.
 
-            var response = await _bcep.ProcessPaymentResponse(ordernum, id, isAlternateAccount = false);
+            var response = await _bcep.ProcessPaymentResponse(ordernum, id, isAlternateAccount);
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)
