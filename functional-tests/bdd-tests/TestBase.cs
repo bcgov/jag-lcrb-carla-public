@@ -1586,7 +1586,7 @@ namespace bdd_tests
 
                 if (businessType == "public corporation" || businessType == "partnership")
                 {
-                    NgWebElement uploadMarriageCert0 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
+                    NgWebElement uploadMarriageCert0 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
                     uploadMarriageCert0.SendKeys(marriageCertificate);
                 }
 
@@ -1598,7 +1598,7 @@ namespace bdd_tests
 
                 if (businessType == "society")
                 {
-                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
+                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
                     uploadMarriageCert1.SendKeys(marriageCertificate);
                 }
 
