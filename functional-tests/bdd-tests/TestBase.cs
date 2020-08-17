@@ -1604,7 +1604,7 @@ namespace bdd_tests
 
                 if (businessType == "sole proprietorship")
                 {
-                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
+                    NgWebElement uploadMarriageCert1 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
                     uploadMarriageCert1.SendKeys(marriageCertificate);
                 }
 
