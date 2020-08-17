@@ -1592,7 +1592,7 @@ namespace bdd_tests
 
                 if (businessType == "private corporation")
                 {
-                    NgWebElement uploadMarriageCert0 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
+                    NgWebElement uploadMarriageCert0 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
                     uploadMarriageCert0.SendKeys(marriageCertificate);
                 }
 
