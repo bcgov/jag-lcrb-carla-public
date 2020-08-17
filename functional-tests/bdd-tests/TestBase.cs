@@ -2822,11 +2822,6 @@ namespace bdd_tests
                 NgWebElement uploadSpecialRightsResBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[21]"));
                 uploadSpecialRightsResBiz.SendKeys(specialRightsRestrictionsBiz);
 
-                // upload an additional supporting document
-                string additionalSupportingDocumentBiz = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
-                NgWebElement uploadAdditionalSupportingDocumentBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[23]"));
-                uploadAdditionalSupportingDocumentBiz.SendKeys(additionalSupportingDocumentBiz);
-
                 /********** Business Shareholder #1 - Leader #1 **********/
 
                 // create business shareholder #1 leader data
