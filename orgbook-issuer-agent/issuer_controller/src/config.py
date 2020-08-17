@@ -253,12 +253,15 @@ def assemble_issuer_spec(config: dict) -> dict:
         "url": urls[deflang],
         "endpoint": config.get("endpoint"),
     }
+    spec["abbreviations"] = {}
     for k, v in abbrevs.items():
-        spec["abbreviation_{}".format(k)] = v
+        spec["abbreviations"][k] = v
+    spec["labels"] = {}
     for k, v in labels.items():
-        spec["label_{}".format(k)] = v
+        spec["labels"][k] = v
+    spec["urls"] = {}
     for k, v in urls.items():
-        spec["url_{}".format(k)] = v
+        spec["urls"][k] = v
 
     return spec
 
@@ -305,17 +308,32 @@ def assemble_credential_type_spec(config: dict, schema_attrs: dict) -> dict:
         "credential_def_id": config.get("credential_def_id"),
         "name": labels[deflang],
         "endpoint": urls[deflang],
-        "topic": (config["topic"] if isinstance(config["topic"], list) else [config["topic"],]),
+        "topic": [],
         "logo_b64": logo_b64,
     }
+    topics = (config["topic"] if isinstance(config["topic"], list) else [config["topic"],])
+    for config_topic in topics:
+        cred_topic = {}
+        has_label = False
+        for k, v in config_topic.items():
+            if not k.startswith("label"):
+                cred_topic[k] = v
+            else:
+                has_label = True
+        if has_label:
+            cred_topic["labels"] = extract_translated(config_topic, "label", None, deflang)
+        ctype["topic"].append(cred_topic)
+    ctype["labels"] = {}
     for k in labels:
-        ctype["label_{}".format(k)] = labels[k]
+        ctype["labels"][k] = labels[k]
+    ctype["endpoints"] = {}
     for k in urls:
-        ctype["endpoint_{}".format(k)] = urls[k]
+        ctype["endpoints"][k] = urls[k]
     for k in CRED_TYPE_PARAMETERS:
         if k != "details" and k in config and k not in ctype:
             ctype[k] = config[k]
+
     ctype["claim_labels"] = claim_labels
     ctype["claim_descriptions"] = claim_descriptions
-    
+
     return ctype
