@@ -5337,32 +5337,32 @@ namespace bdd_tests
 
             // enter the patio composition description
             // Provide height and composition of the patio perimeter or bounding that is designed to control patron entry/exit. (i.e., railing, fencing, planters, hedging, etc.)
-            NgWebElement uiPatioCompositionDescription = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiPatioCompositionDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
             uiPatioCompositionDescription.SendKeys(patioCompositionDescription);
 
             // enter the patio location description
             // Describe the location of the patio in relationship to the interior service area.
-            NgWebElement uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
             uiPatioLocationDescription.SendKeys(patioLocationDescription);
 
             // enter the patio access description
             // Describe how patrons will access the patio (ie. from interior).
-            NgWebElement uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
             uiPatioAccessDescription.SendKeys(patioAccessDescription);
 
             // select the patio is liquor carried checkbox
             // Servers have to carry liquor through any unlicensed area to get to the patio
-            NgWebElement uiPatioLiquorCarried = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiPatioLiquorCarried = ngDriver.FindElement(By.CssSelector("input#patioIsLiquorCarried"));
             uiPatioLiquorCarried.Click();
 
             // enter the patio liquor carried description
             // If checked, please explain:
-            NgWebElement uiPatioLiquorCarriedDescription = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiPatioLiquorCarriedDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
             uiPatioLiquorCarriedDescription.SendKeys(patioLiquorCarriedDescription);
 
             // enter the patio access control description
             // Describe how staff will manage and control the patio from the interior service area.
-            NgWebElement uiPatioAccessControlDescription = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiPatioAccessControlDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
             uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
 
             // select 'Grass' for patio location
@@ -5407,7 +5407,7 @@ namespace bdd_tests
             uploadFloorplan.SendKeys(floorplanPath);
 
             // add a service area
-            NgWebElement uiServiceArea = ngDriver.FindElement(By.CssSelector(".ng-star-inserted:nth-child(7) .btn-clear"));
+            NgWebElement uiServiceArea = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceAreas'] button"));
             uiServiceArea.Click();
 
             // enter the service area description
@@ -5419,7 +5419,7 @@ namespace bdd_tests
             uiServiceAreaOccupantLoad.SendKeys(serviceAreaOccupantLoad);
 
             // add outside area
-            NgWebElement uiOutdoorArea = ngDriver.FindElement(By.CssSelector(".content-bottom~ .ng-star-inserted .btn-clear"));
+            NgWebElement uiOutdoorArea = ngDriver.FindElement(By.CssSelector("[formcontrolname='outsideAreas'] button"));
             uiOutdoorArea.Click();
 
             // enter the outdooor area description
