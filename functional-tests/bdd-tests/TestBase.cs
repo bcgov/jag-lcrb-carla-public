@@ -5411,11 +5411,11 @@ namespace bdd_tests
             uiServiceArea.Click();
 
             // enter the service area description
-            NgWebElement uiServiceAreaDescription = ngDriver.FindElement(By.CssSelector("input[formcontrolname='areaLocation']"));
+            NgWebElement uiServiceAreaDescription = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceAreas'] input[formcontrolname='areaLocation']"));
             uiServiceAreaDescription.SendKeys(serviceAreaDescription);
 
             // enter the service area occupant load
-            NgWebElement uiServiceAreaOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
+            NgWebElement uiServiceAreaOccupantLoad = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceAreas'] input[formcontrolname='capacity']"));
             uiServiceAreaOccupantLoad.SendKeys(serviceAreaOccupantLoad);
 
             // add outside area
@@ -5423,11 +5423,11 @@ namespace bdd_tests
             uiOutdoorArea.Click();
 
             // enter the outdooor area description
-            NgWebElement uiOutdoorAreaDescription = ngDriver.FindElement(By.CssSelector("input[formcontrolname='areaLocation']"));
+            NgWebElement uiOutdoorAreaDescription = ngDriver.FindElement(By.CssSelector("[formcontrolname='outsideAreas'] input[formcontrolname='areaLocation']"));
             uiOutdoorAreaDescription.SendKeys(outdoorAreaDescription);
 
             // enter the outdoor area occupant load
-            NgWebElement uiOutdoorAreaOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
+            NgWebElement uiOutdoorAreaOccupantLoad = ngDriver.FindElement(By.CssSelector("[formcontrolname='outsideAreas'] input[formcontrolname='capacity']"));
             uiOutdoorAreaOccupantLoad.SendKeys(outdoorAreaCapacity);
 
             // upload the site plan
