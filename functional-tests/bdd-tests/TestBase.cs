@@ -2463,6 +2463,15 @@ namespace bdd_tests
             NgWebElement uiBizEmail = ngDriver.FindElement(By.CssSelector("input[formControlName='contactEmail']"));
             uiBizEmail.SendKeys(bizEmail);
 
+            if ((businessType == "n indigenous nation"))
+            {
+                string liquorPolicyLink = "https://www.liquorpolicy.org";
+
+                // enter the liquor policy information link
+                NgWebElement uiLiquorPolicyLink = ngDriver.FindElement(By.CssSelector("input[formcontrolname='websiteUrl']"));
+                uiLiquorPolicyLink.SendKeys(liquorPolicyLink);
+            }
+
             // enter the contact title
             NgWebElement uiCorpTitle = ngDriver.FindElement(By.CssSelector("input[formControlName='jobTitle']"));
             uiCorpTitle.SendKeys(corpTitle);
