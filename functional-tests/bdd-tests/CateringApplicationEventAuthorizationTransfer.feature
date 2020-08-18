@@ -125,7 +125,7 @@
     And the application is approved
     And I pay the licensing fee for Catering
     And I click on the Licences tab
-    And I click on the link for event authorization
+    And I click on the link for Request Event Authorization
     And I do not complete the application correctly
     And the expected validation errors are thrown for an event authorization
     And the account is deleted
@@ -145,7 +145,7 @@
     And the application is approved
     And I pay the licensing fee for Catering
     And I click on the Licences tab
-    And I click on the link for transfer of ownership
+    And I click on the link for Transfer Licence
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Catering transfer of ownership
     And the account is deleted
