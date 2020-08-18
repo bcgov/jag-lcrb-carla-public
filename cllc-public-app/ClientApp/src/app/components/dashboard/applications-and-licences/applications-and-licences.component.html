@@ -228,11 +228,11 @@
               -->
               <td style="background-color: #E1E8F2; padding: 10px;">
                 <div style="text-transform: uppercase; font-weight: 600;">
-                  <span *ngIf="!item.lgHasApproved || item.isPaid">
+                  <span *ngIf="!isApprovedByLGAndNotSubmitted(item)">
                     {{item.applicationStatus}}
                   </span>
  
-                  <span *ngIf="item.lgHasApproved && !item.isPaid">
+                  <span *ngIf="isApprovedByLGAndNotSubmitted(item)">
                     Ready for Submission
                   </span>
  
