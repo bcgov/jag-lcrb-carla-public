@@ -17,7 +17,7 @@ if AGENT_ADMIN_API_KEY is not None and 0 < len(AGENT_ADMIN_API_KEY):
 
 LOG_LEVEL = os.environ.get('LOG_LEVEL', 'WARNING').upper()
 LOGGER = logging.getLogger(__name__)
-TRACE_EVENTS = os.getenv("TRACE_EVENTS", "True").lower() == "true"
+TRACE_EVENTS = os.getenv("TRACE_EVENTS", "False").lower() == "true"
 if TRACE_EVENTS:
     LOGGER.setLevel(logging.INFO)
 
