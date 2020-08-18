@@ -5306,11 +5306,16 @@ namespace bdd_tests
             */
 
             // creeate test data
+            string patioCompositionDescription = "Patio composition description";
+            string patioLocationDescription = "Patio location description";
+            string patioAccessDescription = "Patio access description";
+            string patioLiquorCarriedDescription = "Patio liquor carried description";
+            string patioAccessControlDescription = "Patio access control description";
             string serviceAreaDescription = "Service area description";
             string serviceAreaOccupantLoad = "100";
             string outdoorAreaDescription = "Outdoor area description";
-            string outdoorAreaCapacity = "50";
-            string contactTitle = "Operations Manager";
+            string outdoorAreaCapacity = "150";
+            string contactTitle = "Tester";
 
             // select the zoning checkbox
             NgWebElement zoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
@@ -5329,6 +5334,72 @@ namespace bdd_tests
             string letterOfIntentPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "letter_of_intent.pdf");
             NgWebElement uploadLetterOfIntent = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
             uploadLetterOfIntent.SendKeys(letterOfIntentPath);
+
+            // enter the patio composition description
+            // Provide height and composition of the patio perimeter or bounding that is designed to control patron entry/exit. (i.e., railing, fencing, planters, hedging, etc.)
+            NgWebElement uiPatioCompositionDescription = ngDriver.FindElement(By.CssSelector(""));
+            uiPatioCompositionDescription.SendKeys(patioCompositionDescription);
+
+            // enter the patio location description
+            // Describe the location of the patio in relationship to the interior service area.
+            NgWebElement uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector(""));
+            uiPatioLocationDescription.SendKeys(patioLocationDescription);
+
+            // enter the patio access description
+            // Describe how patrons will access the patio (ie. from interior).
+            NgWebElement uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector(""));
+            uiPatioAccessDescription.SendKeys(patioAccessDescription);
+
+            // select the patio is liquor carried checkbox
+            // Servers have to carry liquor through any unlicensed area to get to the patio
+            NgWebElement uiPatioLiquorCarried = ngDriver.FindElement(By.CssSelector(""));
+            uiPatioLiquorCarried.Click();
+
+            // enter the patio liquor carried description
+            // If checked, please explain:
+            NgWebElement uiPatioLiquorCarriedDescription = ngDriver.FindElement(By.CssSelector(""));
+            uiPatioLiquorCarriedDescription.SendKeys(patioLiquorCarriedDescription);
+
+            // enter the patio access control description
+            // Describe how staff will manage and control the patio from the interior service area.
+            NgWebElement uiPatioAccessControlDescription = ngDriver.FindElement(By.CssSelector(""));
+            uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
+
+            // select 'Grass' for patio location
+            NgWebElement uiGrass = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-67-button .mat-button-toggle-label-content"));
+            uiGrass.Click();
+
+            // select 'Earth' for patio location
+            NgWebElement uiEarth = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-68-button .mat-button-toggle-label-content"));
+            uiEarth.Click();
+
+            // select 'Gravel' for patio location
+            NgWebElement uiGravel = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-69-button .mat-button-toggle-label-content"));
+            uiGravel.Click();
+
+            // select 'Finished Flooring' for patio location
+            NgWebElement uiFinishedFlooring = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-70-button .mat-button-toggle-label-content"));
+            uiFinishedFlooring.Click();
+
+            // select 'Cement Sidewalk' for patio location
+            NgWebElement uiCementSidewalk = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-71-button .mat-button-toggle-label-content"));
+            uiCementSidewalk.Click();
+
+            // select 'Other' for patio location
+            NgWebElement uiOther = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-72-button .mat-button-toggle-label-content"));
+            uiOther.Click();
+
+            // select 'Fixed Patio' for bar
+            NgWebElement uiFixedPatio = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-74-button .mat-button-toggle-label-content"));
+            uiFixedPatio.Click();
+
+            // select 'Portable' for bar
+            NgWebElement uiPortable = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-75-button .mat-button-toggle-label-content"));
+            uiPortable.Click();
+
+            // select 'Interior' for bar
+            NgWebElement uiInterior = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-76-button .mat-button-toggle-label-content"));
+            uiInterior.Click();
 
             // upload the floor plan
             string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
