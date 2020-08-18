@@ -127,7 +127,7 @@ class StartupProcessingThread(threading.Thread):
 
         # determine pre-registered schemas and cred defs
         existing_schemas = agent_schemas_cred_defs(agent_admin_url)
-        LOGGER.info("Existing schemas:", json.dumps(existing_schemas))
+        print("Existing schemas:", json.dumps(existing_schemas))
 
         # register schemas and credential definitions
         for schema in config_schemas:
