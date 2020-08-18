@@ -2529,13 +2529,13 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader1')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz2First')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz2First')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderBiz2First')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz3First')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz3First')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderBiz3First')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz4First')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz4First')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderBiz4First')]")).Displayed);
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz5First')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'KeyPersonnelBiz5First')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderBiz5First')]")).Displayed);
         }
 
 
@@ -5611,41 +5611,41 @@ namespace bdd_tests
             NgWebElement uploadSpecialRightsResBiz2 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[27]"));
             uploadSpecialRightsResBiz2.SendKeys(specialRightsRestrictionsBiz2);
 
-            /********** Business Shareholder #2 - Key Personnel **********/
+            /********** Business Shareholder #2 - Leader **********/
 
             // create business shareholder #2 key personnel data
-            string keyPersonnelFirstNameBiz2 = "KeyPersonnelBiz2First";
-            string keyPersonnelLastNameBiz2 = "KeyPersonnelBiz2Last";
-            string keyPersonnelTitleBiz2 = "KeyPersonnelBiz2Title";
-            string keyPersonnelEmailBiz2 = "keypersonnel@biz2.com";
+            string leaderFirstNameBiz2 = "LeaderBiz2First";
+            string leaderLastNameBiz2 = "LeaderBiz2Last";
+            string leaderTitleBiz2 = "LeaderBiz2Title";
+            string leaderEmailBiz2 = "leader@biz2.com";
 
-            // open business shareholder #2 > key personnel form 
-            NgWebElement openKeyPersonnelFormBiz2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] button"));
-            openKeyPersonnelFormBiz2.Click();
+            // open business shareholder #2 > leader form 
+            NgWebElement openLeaderFormBiz2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] button"));
+            openLeaderFormBiz2.Click();
 
-            // enter business shareholder #2 > key personnel first name
-            NgWebElement uiKeyPersonFirstBiz2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='firstNameNew']"));
-            uiKeyPersonFirstBiz2.SendKeys(keyPersonnelFirstNameBiz2);
+            // enter business shareholder #2 > leader first name
+            NgWebElement uiLeaderFirstBiz2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='firstNameNew']"));
+            uiLeaderFirstBiz2.SendKeys(leaderFirstNameBiz2);
 
-            // enter business shareholder #2 > key personnel last name
-            NgWebElement uiKeyPersonLastBiz2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='lastNameNew']"));
-            uiKeyPersonLastBiz2.SendKeys(keyPersonnelLastNameBiz2);
+            // enter business shareholder #2 > leader last name
+            NgWebElement uiLeaderLastBiz2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='lastNameNew']"));
+            uiLeaderLastBiz2.SendKeys(leaderLastNameBiz2);
 
-            // select business shareholder #2 > key personnel role using checkbox
-            NgWebElement uiKeyPersonRoleBiz2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='isDirectorNew']"));
-            uiKeyPersonRoleBiz2.Click();
+            // select business shareholder #2 > leader role using checkbox
+            NgWebElement uiLeaderRoleBiz2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='isDirectorNew']"));
+            uiLeaderRoleBiz2.Click();
 
-            // enter business shareholder #2 > key personnel title
-            NgWebElement uiKeyPersonTitleBiz2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='titleNew']"));
-            uiKeyPersonTitleBiz2.SendKeys(keyPersonnelTitleBiz2);
+            // enter business shareholder #2 > leader title
+            NgWebElement uiLeaderTitleBiz2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='titleNew']"));
+            uiLeaderTitleBiz2.SendKeys(leaderTitleBiz2);
 
-            // enter business shareholder #2 > key personnel email
-            NgWebElement uiKeyPersonEmailBiz2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='emailNew']"));
-            uiKeyPersonEmailBiz2.SendKeys(keyPersonnelEmailBiz2);
+            // enter business shareholder #2 > leader email
+            NgWebElement uiLeaderEmailBiz2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='emailNew']"));
+            uiLeaderEmailBiz2.SendKeys(leaderEmailBiz2);
 
-            // enter business shareholder #2 > key personnel DOB
-            NgWebElement uiKeyPersonnelDOB1Biz12 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='dateofBirthNew']"));
-            uiKeyPersonnelDOB1Biz12.Click();
+            // enter business shareholder #2 > leader DOB
+            NgWebElement uiLeaderDOB1Biz12 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='dateofBirthNew']"));
+            uiLeaderDOB1Biz12.Click();
 
             SharedCalendarDate();
 
@@ -5737,41 +5737,41 @@ namespace bdd_tests
             NgWebElement uploadSpecialRightsResBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[36]"));
             uploadSpecialRightsResBiz3.SendKeys(specialRightsRestrictionsBiz3);
 
-            /********** Business Shareholder #3 - Key Personnel **********/
+            /********** Business Shareholder #3 - Leader **********/
 
-            // create business shareholder key personnel data
-            string keyPersonnelFirstNameBiz3 = "KeyPersonnelBiz3First";
-            string keyPersonnelLastNameBiz3 = "KeyPersonnelBiz3Last";
-            string keyPersonnelTitleBiz3 = "KeyPersonnelBiz3Title";
-            string keyPersonnelEmailBiz3 = "keypersonnel@biz3.com";
+            // create business shareholder leader data
+            string leaderFirstNameBiz3 = "LeaderBiz3First";
+            string leaderLastNameBiz3 = "LeaderBiz3Last";
+            string leaderTitleBiz3 = "LeaderBiz3Title";
+            string leaderEmailBiz3 = "leader@biz3.com";
 
-            // open business shareholder #3 > key personnel form
-            NgWebElement openKeyPersonnelFormBiz3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] button"));
-            openKeyPersonnelFormBiz3.Click();
+            // open business shareholder #3 > leader form
+            NgWebElement openLeaderFormBiz3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] button"));
+            openLeaderFormBiz3.Click();
 
-            // enter business shareholder #3 > key personnel first name
-            NgWebElement uiKeyPersonFirstBiz3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='firstNameNew']"));
-            uiKeyPersonFirstBiz3.SendKeys(keyPersonnelFirstNameBiz3);
+            // enter business shareholder #3 > leader first name
+            NgWebElement uiLeaderFirstBiz3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='firstNameNew']"));
+            uiLeaderFirstBiz3.SendKeys(leaderFirstNameBiz3);
 
-            // enter business shareholder #3 > key personnel last name
-            NgWebElement uiKeyPersonLastBiz3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='lastNameNew']"));
-            uiKeyPersonLastBiz3.SendKeys(keyPersonnelLastNameBiz3);
+            // enter business shareholder #3 > leader last name
+            NgWebElement uiLeaderLastBiz3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='lastNameNew']"));
+            uiLeaderLastBiz3.SendKeys(leaderLastNameBiz3);
 
-            // select business shareholder #3 > key personnel role using checkbox
-            NgWebElement uiKeyPersonRoleBiz3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='isDirectorNew']"));
-            uiKeyPersonRoleBiz3.Click();
+            // select business shareholder #3 > leader role using checkbox
+            NgWebElement uiLeaderRoleBiz3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='isDirectorNew']"));
+            uiLeaderRoleBiz3.Click();
 
-            // enter business shareholder #3 > key personnel title
-            NgWebElement uiKeyPersonTitleBiz3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='titleNew']"));
-            uiKeyPersonTitleBiz3.SendKeys(keyPersonnelTitleBiz3);
+            // enter business shareholder #3 > leader title
+            NgWebElement uiLeaderTitleBiz3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='titleNew']"));
+            uiLeaderTitleBiz3.SendKeys(leaderTitleBiz3);
 
-            // enter business shareholder #3 > key personnel email
-            NgWebElement uiKeyPersonEmailBiz3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='emailNew']"));
-            uiKeyPersonEmailBiz3.SendKeys(keyPersonnelEmailBiz3);
+            // enter business shareholder #3 > leader email
+            NgWebElement uiLeaderEmailBiz3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='emailNew']"));
+            uiLeaderEmailBiz3.SendKeys(leaderEmailBiz3);
 
-            // enter business shareholder #3 > key personnel DOB
-            NgWebElement uiKeyPersonnelDOB1Biz13 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='dateofBirthNew']"));
-            uiKeyPersonnelDOB1Biz13.Click();
+            // enter business shareholder #3 > leader DOB
+            NgWebElement uiLeaderDOB1Biz13 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='dateofBirthNew']"));
+            uiLeaderDOB1Biz13.Click();
 
             SharedCalendarDate();
 
@@ -5863,41 +5863,41 @@ namespace bdd_tests
             NgWebElement uploadSpecialRightsResBiz4 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[45]"));
             uploadSpecialRightsResBiz4.SendKeys(specialRightsRestrictionsBiz4);
 
-            /********** Business Shareholder #4 - Key Personnel **********/
+            /********** Business Shareholder #4 - Leader **********/
 
-            // create business shareholder key personnel data
-            string keyPersonnelFirstNameBiz4 = "KeyPersonnelBiz4First";
-            string keyPersonnelLastNameBiz4 = "KeyPersonnelBiz4Last";
-            string keyPersonnelTitleBiz4 = "KeyPersonnelBiz4Title";
-            string keyPersonnelEmailBiz4 = "keypersonnel@biz4.com";
+            // create business shareholder leader data
+            string leaderFirstNameBiz4 = "LeaderBiz4First";
+            string leaderLastNameBiz4 = "LeaderBiz4Last";
+            string leaderTitleBiz4 = "LeaderBiz4Title";
+            string leaderEmailBiz4 = "leader@biz4.com";
 
-            // open business shareholder #4 > key personnel form
-            NgWebElement openKeyPersonnelFormBiz4 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] button"));
-            openKeyPersonnelFormBiz4.Click();
+            // open business shareholder #4 > leader form
+            NgWebElement openLeaderFormBiz4 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] button"));
+            openLeaderFormBiz4.Click();
 
-            // enter business shareholder #4 > key personnel first name
-            NgWebElement uiKeyPersonFirstBiz4 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='firstNameNew']"));
-            uiKeyPersonFirstBiz4.SendKeys(keyPersonnelFirstNameBiz4);
+            // enter business shareholder #4 > leader first name
+            NgWebElement uiLeaderFirstBiz4 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='firstNameNew']"));
+            uiLeaderFirstBiz4.SendKeys(leaderFirstNameBiz4);
 
-            // enter business shareholder #4 > key personnel last name
-            NgWebElement uiKeyPersonLastBiz4 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='lastNameNew']"));
-            uiKeyPersonLastBiz4.SendKeys(keyPersonnelLastNameBiz4);
+            // enter business shareholder #4 > leader last name
+            NgWebElement uiLeaderLastBiz4 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='lastNameNew']"));
+            uiLeaderLastBiz4.SendKeys(leaderLastNameBiz4);
 
-            // select business shareholder #4 > key personnel role using checkbox
-            NgWebElement uiKeyPersonRoleBiz4 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='isDirectorNew']"));
-            uiKeyPersonRoleBiz4.Click();
+            // select business shareholder #4 > leader role using checkbox
+            NgWebElement uiLeaderRoleBiz4 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='isDirectorNew']"));
+            uiLeaderRoleBiz4.Click();
 
-            // enter business shareholder #4 > key personnel title
-            NgWebElement uiKeyPersonTitleBiz4 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='titleNew']"));
-            uiKeyPersonTitleBiz4.SendKeys(keyPersonnelTitleBiz4);
+            // enter business shareholder #4 > leader title
+            NgWebElement uiLeaderTitleBiz4 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='titleNew']"));
+            uiLeaderTitleBiz4.SendKeys(leaderTitleBiz4);
 
-            // enter business shareholder #4 > key personnel email
-            NgWebElement uiKeyPersonEmailBiz4 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='emailNew']"));
-            uiKeyPersonEmailBiz4.SendKeys(keyPersonnelEmailBiz4);
+            // enter business shareholder #4 > leader email
+            NgWebElement uiLeaderEmailBiz4 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='emailNew']"));
+            uiLeaderEmailBiz4.SendKeys(leaderEmailBiz4);
 
-            // enter business shareholder #4 > key personnel DOB
-            NgWebElement uiKeyPersonnelDOB1Biz14 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='dateofBirthNew']"));
-            uiKeyPersonnelDOB1Biz14.Click();
+            // enter business shareholder #4 > leader DOB
+            NgWebElement uiLeaderDOB1Biz14 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='dateofBirthNew']"));
+            uiLeaderDOB1Biz14.Click();
 
             SharedCalendarDate();
 
@@ -5989,41 +5989,41 @@ namespace bdd_tests
             NgWebElement uploadSpecialRightsResBiz5 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[54]"));
             uploadSpecialRightsResBiz5.SendKeys(specialRightsRestrictionsBiz5);
 
-            /********** Business Shareholder #5 - Key Personnel **********/
+            /********** Business Shareholder #5 - Leader **********/
 
-            // create business shareholder #5 key personnel data
-            string keyPersonnelFirstNameBiz5 = "KeyPersonnelBiz5First";
-            string keyPersonnelLastNameBiz5 = "KeyPersonnelBiz5Last";
-            string keyPersonnelTitleBiz5 = "KeyPersonnelBiz5Title";
-            string keyPersonnelEmailBiz5 = "keypersonnel@biz5.com";
+            // create business shareholder #5 leader data
+            string leaderFirstNameBiz5 = "LeaderBiz5First";
+            string leaderLastNameBiz5 = "LeaderBiz5Last";
+            string leaderTitleBiz5 = "LeaderBiz5Title";
+            string leaderEmailBiz5 = "leader@biz5.com";
 
-            // open business shareholder #5 > key personnel form
-            NgWebElement openKeyPersonnelFormBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] button"));
-            openKeyPersonnelFormBiz5.Click();
+            // open business shareholder #5 > leader form
+            NgWebElement openLeaderFormBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] button"));
+            openLeaderFormBiz5.Click();
 
-            // enter business shareholder #5 > key personnel first name
-            NgWebElement uiKeyPersonFirstBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='firstNameNew']"));
-            uiKeyPersonFirstBiz5.SendKeys(keyPersonnelFirstNameBiz5);
+            // enter business shareholder #5 > leader first name
+            NgWebElement uiLeaderFirstBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='firstNameNew']"));
+            uiLeaderFirstBiz5.SendKeys(leaderFirstNameBiz5);
 
-            // enter business shareholder #5 > key personnel last name
-            NgWebElement uiKeyPersonLastBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='lastNameNew']"));
-            uiKeyPersonLastBiz5.SendKeys(keyPersonnelLastNameBiz5);
+            // enter business shareholder #5 > leader last name
+            NgWebElement uiLeaderLastBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='lastNameNew']"));
+            uiLeaderLastBiz5.SendKeys(leaderLastNameBiz5);
 
-            // select business shareholder #5 > key personnel role using checkbox
-            NgWebElement uiKeyPersonRoleBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='isDirectorNew']"));
-            uiKeyPersonRoleBiz5.Click();
+            // select business shareholder #5 > leader role using checkbox
+            NgWebElement uiLeaderRoleBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='isDirectorNew']"));
+            uiLeaderRoleBiz5.Click();
 
-            // enter business shareholder #5 > key personnel title
-            NgWebElement uiKeyPersonTitleBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='titleNew']"));
-            uiKeyPersonTitleBiz5.SendKeys(keyPersonnelTitleBiz5);
+            // enter business shareholder #5 > leader title
+            NgWebElement uiLeaderTitleBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='titleNew']"));
+            uiLeaderTitleBiz5.SendKeys(leaderTitleBiz5);
 
-            // enter business shareholder #5 > key personnel email
-            NgWebElement uiKeyPersonEmailBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='emailNew']"));
-            uiKeyPersonEmailBiz5.SendKeys(keyPersonnelEmailBiz5);
+            // enter business shareholder #5 > leader email
+            NgWebElement uiLeaderEmailBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='emailNew']"));
+            uiLeaderEmailBiz5.SendKeys(leaderEmailBiz5);
 
-            // enter business shareholder #5 > key personnel DOB
-            NgWebElement uiKeyPersonnelDOB1Biz15 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='dateofBirthNew']"));
-            uiKeyPersonnelDOB1Biz15.Click();
+            // enter business shareholder #5 > leader DOB
+            NgWebElement uiLeaderDOB1Biz15 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] input[formcontrolname='dateofBirthNew']"));
+            uiLeaderDOB1Biz15.Click();
 
             SharedCalendarDate();
 
