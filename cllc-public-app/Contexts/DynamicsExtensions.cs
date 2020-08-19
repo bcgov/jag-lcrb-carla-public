@@ -1511,28 +1511,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static bool IsMostlyLiquor(this MicrosoftDynamicsCRMaccount account, IDynamicsClient dynamicsClient)
         {
             bool result = false;
-            // get the licences for the given account.
 
-            var licences = dynamicsClient.GetAllLicensesByLicencee(null, account.Accountid).ToList();
-            int liquorCount = 0;
-            foreach (var licence in licences)
+            if (account != null)
             {
-                if (licence.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence != null)
+                // get the licences for the given account.
+
+                var licences = dynamicsClient.GetAllLicensesByLicencee(null, account.Accountid).ToList();
+                int liquorCount = 0;
+                // check the licence type's category field to determine how many licences are liquor related
+                foreach (var licence in licences)
                 {
-                    var applicationId = licence.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence.FirstOrDefault().AdoxioApplicationid;
-                    var application = dynamicsClient.GetApplicationByIdWithChildren(applicationId).GetAwaiter().GetResult();
-                    if (application.AdoxioApplicationTypeId != null &&
-                        application.AdoxioApplicationTypeId.AdoxioCategory != null &&
-                        (Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory)application.AdoxioApplicationTypeId.AdoxioCategory == Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory.Liquor)
+                    if (licence.AdoxioLicenceType != null && licence.AdoxioLicenceType.AdoxioCategory != null &&
+                        (Public.ViewModels.ApplicationTypeCategory)licence.AdoxioLicenceType.AdoxioCategory == Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory.Liquor)
                     {
                         liquorCount++;
                     }
                 }
-            }
 
-            if (licences.Count > 0 && liquorCount >= licences.Count / 2)
-            {
-                result = true;
+                if (licences.Count > 0 && liquorCount >= licences.Count / 2)
+                {
+                    result = true;
+                }
             }
 
             return result;
