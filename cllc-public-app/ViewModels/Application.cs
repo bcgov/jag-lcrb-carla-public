@@ -405,7 +405,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string OtherBusinessesDetails { get; set; }
 
 
-        public GeneralYesNo InvoiceTrigger { get; set; } //adoxio_invoicetrigger
+        public GeneralYesNo? InvoiceTrigger { get; set; } //adoxio_invoicetrigger
         public ViewModels.Account Applicant { get; set; }
         public ViewModels.License AssignedLicence { get; set; }
         public string AdditionalPropertyInformation { get; set; } //adoxio_additionalpropertyinformation

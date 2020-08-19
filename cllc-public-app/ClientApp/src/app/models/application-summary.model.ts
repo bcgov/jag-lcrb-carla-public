@@ -10,6 +10,7 @@ export class ApplicationSummary {
   isIndigenousNation: boolean;
   licenceId: string;
   isPaid: boolean;
+  isApplicationComplete: string;
   portallabel: string;
   lgHasApproved: boolean;
   endorsements: string[];
