@@ -206,38 +206,39 @@ export class AssociateListComponent extends FormBase implements OnInit {
 
   saveLog(index: number): Observable<boolean> {
     const valid = this.associates.at(index).valid;
-    let item = this.associates.at(index).value;
+    const patchValue = <LicenseeChangeLog>{};
+    let value = this.associates.at(index).value;
     let saved = false;
 
     if (valid) {
-      item = Object.assign(new LicenseeChangeLog(), item || {}) as LicenseeChangeLog;
-      if (!item.isAddChangeType() && item.someFieldsHaveChanged()) {
-        item.changeType = `update${this.changeTypeSuffix}`;;
+      value = Object.assign(new LicenseeChangeLog(), value || {}) as LicenseeChangeLog;
+      if (!value.isAddChangeType() && value.someFieldsHaveChanged()) {
+        patchValue.changeType = `update${this.changeTypeSuffix}`;;
       }
-      item.edit = false;
-      item.saved = true;
+      patchValue.edit = false;
+      patchValue.saved = true;
 
       if (this.changeTypeSuffix === 'Leadership') {
-        item.isIndividual = true;
+        patchValue.isIndividual = true;
         // check to see if this is a sole prop.
         if (this.rootNode.businessType === 'SoleProprietorship') {
-          item.isOwnerNew = true;
+          patchValue.isOwnerNew = true;
         }
         // check to see if this is a trust.
         if (this.rootNode.businessType === 'Trust') {
-          item.isTrusteeNew = true;
+          patchValue.isTrusteeNew = true;
         }
         
       } else if (this.changeTypeSuffix === 'IndividualShareholder') {
-        item.isIndividual = true;
-        item.isShareholderNew = true;
+        patchValue.isIndividual = true;
+        patchValue.isShareholderNew = true;
       } else if (this.changeTypeSuffix === 'BusinessShareholder') {
-        item.isIndividual = false;
-        item.isShareholderNew = true;
+        patchValue.isIndividual = false;
+        patchValue.isShareholderNew = true;
       }
 
       
-      this.associates.at(index).patchValue(item);
+      this.associates.at(index).patchValue(patchValue);
       this.associates.at(index).value.refObject = Object.assign(this.associates.at(index).value.refObject, this.associates.at(index).value);
      this.emitValue();
       saved = true;
