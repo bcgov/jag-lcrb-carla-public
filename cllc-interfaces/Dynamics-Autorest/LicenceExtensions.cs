@@ -19,13 +19,13 @@ namespace Gov.Lclb.Cllb.Interfaces
     public static partial class LicenceExtensions
     {
             /// <summary>
-            /// Get adoxio_Licence from adoxio_annualvolumes
+            /// Get adoxio_Licence from adoxio_hoursofservices
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioAnnualvolumeid'>
-            /// key: adoxio_annualvolumeid of adoxio_annualvolume
+            /// <param name='adoxioHoursofserviceid'>
+            /// key: adoxio_hoursofserviceid of adoxio_hoursofservice
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -33,19 +33,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioLicences Get(this ILicence operations, string adoxioAnnualvolumeid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioLicences Get(this ILicence operations, string adoxioHoursofserviceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(adoxioAnnualvolumeid, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(adoxioHoursofserviceid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get adoxio_Licence from adoxio_annualvolumes
+            /// Get adoxio_Licence from adoxio_hoursofservices
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioAnnualvolumeid'>
-            /// key: adoxio_annualvolumeid of adoxio_annualvolume
+            /// <param name='adoxioHoursofserviceid'>
+            /// key: adoxio_hoursofserviceid of adoxio_hoursofservice
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -56,22 +56,22 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioLicences> GetAsync(this ILicence operations, string adoxioAnnualvolumeid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioLicences> GetAsync(this ILicence operations, string adoxioHoursofserviceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioAnnualvolumeid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioHoursofserviceid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Get adoxio_Licence from adoxio_annualvolumes
+            /// Get adoxio_Licence from adoxio_hoursofservices
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioAnnualvolumeid'>
-            /// key: adoxio_annualvolumeid of adoxio_annualvolume
+            /// <param name='adoxioHoursofserviceid'>
+            /// key: adoxio_hoursofserviceid of adoxio_hoursofservice
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -82,219 +82,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicences> GetWithHttpMessages(this ILicence operations, string adoxioAnnualvolumeid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicences> GetWithHttpMessages(this ILicence operations, string adoxioHoursofserviceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(adoxioAnnualvolumeid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get adoxio_Licence from adoxio_endorsements
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioEndorsementid'>
-            /// key: adoxio_endorsementid of adoxio_endorsement
-            /// </param>
-            /// <param name='select'>
-            /// Select properties to be returned
-            /// </param>
-            /// <param name='expand'>
-            /// Expand related entities
-            /// </param>
-            public static MicrosoftDynamicsCRMadoxioLicences Get1(this ILicence operations, string adoxioEndorsementid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
-            {
-                return operations.Get1Async(adoxioEndorsementid, select, expand).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get adoxio_Licence from adoxio_endorsements
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioEndorsementid'>
-            /// key: adoxio_endorsementid of adoxio_endorsement
-            /// </param>
-            /// <param name='select'>
-            /// Select properties to be returned
-            /// </param>
-            /// <param name='expand'>
-            /// Expand related entities
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioLicences> Get1Async(this ILicence operations, string adoxioEndorsementid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.Get1WithHttpMessagesAsync(adoxioEndorsementid, select, expand, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Get adoxio_Licence from adoxio_endorsements
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioEndorsementid'>
-            /// key: adoxio_endorsementid of adoxio_endorsement
-            /// </param>
-            /// <param name='select'>
-            /// Select properties to be returned
-            /// </param>
-            /// <param name='expand'>
-            /// Expand related entities
-            /// </param>
-            /// <param name='customHeaders'>
-            /// Headers that will be added to request.
-            /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicences> Get1WithHttpMessages(this ILicence operations, string adoxioEndorsementid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
-            {
-                return operations.Get1WithHttpMessagesAsync(adoxioEndorsementid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get adoxio_Licence from adoxio_events
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioEventid'>
-            /// key: adoxio_eventid of adoxio_event
-            /// </param>
-            /// <param name='select'>
-            /// Select properties to be returned
-            /// </param>
-            /// <param name='expand'>
-            /// Expand related entities
-            /// </param>
-            public static MicrosoftDynamicsCRMadoxioLicences Get2(this ILicence operations, string adoxioEventid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
-            {
-                return operations.Get2Async(adoxioEventid, select, expand).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get adoxio_Licence from adoxio_events
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioEventid'>
-            /// key: adoxio_eventid of adoxio_event
-            /// </param>
-            /// <param name='select'>
-            /// Select properties to be returned
-            /// </param>
-            /// <param name='expand'>
-            /// Expand related entities
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioLicences> Get2Async(this ILicence operations, string adoxioEventid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.Get2WithHttpMessagesAsync(adoxioEventid, select, expand, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Get adoxio_Licence from adoxio_events
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioEventid'>
-            /// key: adoxio_eventid of adoxio_event
-            /// </param>
-            /// <param name='select'>
-            /// Select properties to be returned
-            /// </param>
-            /// <param name='expand'>
-            /// Expand related entities
-            /// </param>
-            /// <param name='customHeaders'>
-            /// Headers that will be added to request.
-            /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicences> Get2WithHttpMessages(this ILicence operations, string adoxioEventid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
-            {
-                return operations.Get2WithHttpMessagesAsync(adoxioEventid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get adoxio_Licence from adoxio_licenceldbordertotalhistories
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioLicenceldbordertotalhistoryid'>
-            /// key: adoxio_licenceldbordertotalhistoryid of
-            /// adoxio_licenceldbordertotalhistory
-            /// </param>
-            /// <param name='select'>
-            /// Select properties to be returned
-            /// </param>
-            /// <param name='expand'>
-            /// Expand related entities
-            /// </param>
-            public static MicrosoftDynamicsCRMadoxioLicences Get3(this ILicence operations, string adoxioLicenceldbordertotalhistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
-            {
-                return operations.Get3Async(adoxioLicenceldbordertotalhistoryid, select, expand).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get adoxio_Licence from adoxio_licenceldbordertotalhistories
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioLicenceldbordertotalhistoryid'>
-            /// key: adoxio_licenceldbordertotalhistoryid of
-            /// adoxio_licenceldbordertotalhistory
-            /// </param>
-            /// <param name='select'>
-            /// Select properties to be returned
-            /// </param>
-            /// <param name='expand'>
-            /// Expand related entities
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioLicences> Get3Async(this ILicence operations, string adoxioLicenceldbordertotalhistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.Get3WithHttpMessagesAsync(adoxioLicenceldbordertotalhistoryid, select, expand, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Get adoxio_Licence from adoxio_licenceldbordertotalhistories
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioLicenceldbordertotalhistoryid'>
-            /// key: adoxio_licenceldbordertotalhistoryid of
-            /// adoxio_licenceldbordertotalhistory
-            /// </param>
-            /// <param name='select'>
-            /// Select properties to be returned
-            /// </param>
-            /// <param name='expand'>
-            /// Expand related entities
-            /// </param>
-            /// <param name='customHeaders'>
-            /// Headers that will be added to request.
-            /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicences> Get3WithHttpMessages(this ILicence operations, string adoxioLicenceldbordertotalhistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
-            {
-                return operations.Get3WithHttpMessagesAsync(adoxioLicenceldbordertotalhistoryid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(adoxioHoursofserviceid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }
