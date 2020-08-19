@@ -386,12 +386,6 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
             }
 
-            if (feeType == "Catering")
-            {
-                // confirm correct payment amount for Catering
-                //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$450.00')]")).Displayed);
-            }
-
             ClickLicencesTab();
         }
 
@@ -5506,7 +5500,7 @@ namespace bdd_tests
             // click on the Submit & Pay button
             ClickOnSubmitButton();
 
-            MakePayment();
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Pending external review')]")).Displayed);
 
             System.Threading.Thread.Sleep(3000);
         }
