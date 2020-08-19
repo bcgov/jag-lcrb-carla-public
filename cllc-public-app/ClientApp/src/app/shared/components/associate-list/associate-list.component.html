@@ -124,7 +124,7 @@
                                     (click)="associate.get('edit').value = true;" class="fas fa-pencil-alt"
                                     style="margin-right: 10px;"><span class="icon-label">Edit</span></i>
                                 <i class="fas fa-save save" *ngIf="associate.get('edit').value"
-                                    (click)="saveLog(associate.value, i)" style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
+                                    (click)="saveLog(i)" style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
                                 <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span class="icon-label">Delete</span></i>
                             </td>
                         </tr>
@@ -271,7 +271,7 @@
                                     (click)="associate.get('edit').value = true;" class="fas fa-pencil-alt"
                                     style="margin-right: 10px;"><span class="icon-label">Edit</span></i>
                                 <i class="fas fa-save" *ngIf="associate.get('edit').value"
-                                    (click)="saveLog(associate.value, i)" style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
+                                    (click)="saveLog(i)" style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
                                 <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span class="icon-label">Delete</span></i>
                             </td>
                         </tr>
@@ -403,7 +403,7 @@
                                     (click)="associate.get('edit').value = true; associate.get('collapse').value = true;"
                                     class="fas fa-pencil-alt" style="margin-right: 10px;"><span class="icon-label">Edit</span></i>
                                 <i class="fas fa-save" *ngIf="associate.get('edit').value"
-                                    (click)="saveLog(associate.value, i); associate.get('collapse').value = false;"
+                                    (click)="saveLog(i); associate.get('collapse').value = false;"
                                     style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
                                 <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span class="icon-label">Delete</span></i>
                             </td>
