@@ -42,46 +42,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioAdditionalpropertyinformation = from.AdditionalPropertyInformation;
             to.AdoxioFederalproducernames = from.FederalProducerNames;
 
-            // standard service hours are 9 to 11, 7 days a week.
-            if (
-                from.ServiceHoursSundayOpen != ServiceHours.sh0900 ||
-                from.ServiceHoursSundayClose != ServiceHours.sh2300 ||
-                from.ServiceHoursMondayOpen != ServiceHours.sh0900 ||
-                from.ServiceHoursMondayClose != ServiceHours.sh2300 ||
-                from.ServiceHoursTuesdayOpen != ServiceHours.sh0900 ||
-                from.ServiceHoursTuesdayClose != ServiceHours.sh2300 ||
-                from.ServiceHoursWednesdayOpen != ServiceHours.sh0900 ||
-                from.ServiceHoursWednesdayClose != ServiceHours.sh2300 ||
-                from.ServiceHoursThursdayOpen != ServiceHours.sh0900 ||
-                from.ServiceHoursThursdayClose != ServiceHours.sh2300 ||
-                from.ServiceHoursFridayOpen != ServiceHours.sh0900 ||
-                from.ServiceHoursFridayClose != ServiceHours.sh2300 ||
-                from.ServiceHoursSaturdayOpen != ServiceHours.sh0900 ||
-                from.ServiceHoursSaturdayClose != ServiceHours.sh2300
-
-                )
-            {
-                to.AdoxioServicehoursstandardhours = false;
-            }
-            else
-            {
-                to.AdoxioServicehoursstandardhours = true;
-            }
-
-            to.AdoxioServicehoursmondayopen = (int?)from.ServiceHoursMondayOpen;
-            to.AdoxioServicehoursmondayclose = (int?)from.ServiceHoursMondayClose;
-            to.AdoxioServicehourstuesdayopen = (int?)from.ServiceHoursTuesdayOpen;
-            to.AdoxioServicehourstuesdayclose = (int?)from.ServiceHoursTuesdayClose;
-            to.AdoxioServicehourswednesdayopen = (int?)from.ServiceHoursWednesdayOpen;
-            to.AdoxioServicehourswednesdayclose = (int?)from.ServiceHoursWednesdayClose;
-            to.AdoxioServicehoursthursdayopen = (int?)from.ServiceHoursThursdayOpen;
-            to.AdoxioServicehoursthursdayclose = (int?)from.ServiceHoursThursdayClose;
-            to.AdoxioServicehoursfridayopen = (int?)from.ServiceHoursFridayOpen;
-            to.AdoxioServicehoursfridayclose = (int?)from.ServiceHoursFridayClose;
-            to.AdoxioServicehourssaturdayopen = (int?)from.ServiceHoursSaturdayOpen;
-            to.AdoxioServicehourssaturdayclose = (int?)from.ServiceHoursSaturdayClose;
-            to.AdoxioServicehourssundayopen = (int?)from.ServiceHoursSundayOpen;
-            to.AdoxioServicehourssundayclose = (int?)from.ServiceHoursSundayClose;
             to.AdoxioInvoicetrigger = (int?)from.InvoiceTrigger;
 
             to.AdoxioRenewalcriminaloffencecheck = (int?)from.RenewalCriminalOffenceCheck;
@@ -331,22 +291,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                 FederalProducerNames = dynamicsApplication.AdoxioFederalproducernames,
                 IsApplicationComplete = (GeneralYesNo?)dynamicsApplication.AdoxioIsapplicationcomplete,
 
-                ServicehHoursStandardHours = dynamicsApplication.AdoxioServicehoursstandardhours,
-                ServiceHoursSundayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourssundayopen,
-                ServiceHoursSundayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourssundayclose,
-                ServiceHoursMondayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehoursmondayopen,
-                ServiceHoursMondayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehoursmondayclose,
-                ServiceHoursTuesdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourstuesdayopen,
-                ServiceHoursTuesdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourstuesdayclose,
-                ServiceHoursWednesdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourswednesdayopen,
-                ServiceHoursWednesdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourswednesdayclose,
-                ServiceHoursThursdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehoursthursdayopen,
-                ServiceHoursThursdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehoursthursdayclose,
-                ServiceHoursFridayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehoursfridayopen,
-                ServiceHoursFridayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehoursfridayclose,
-                ServiceHoursSaturdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourssaturdayopen,
-                ServiceHoursSaturdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourssaturdayclose,
-
                 RenewalCriminalOffenceCheck = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalcriminaloffencecheck,
                 RenewalUnreportedSaleOfBusiness = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalunreportedsaleofbusiness,
                 RenewalBusinessType = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalbusinesstype,
@@ -547,6 +491,35 @@ namespace Gov.Lclb.Cllb.Public.Models
                 catch (HttpOperationException httpOperationException)
                 {
                     logger.LogError(httpOperationException, "Error getting service areas.");
+                }
+
+                // service hours
+                try
+                {
+                    var appFilter = $"_adoxio_application_value eq {dynamicsApplication.AdoxioApplicationid}";
+                    IList<MicrosoftDynamicsCRMadoxioHoursofservice> hours = dynamicsClient.Hoursofservices.Get(filter: appFilter).Value;
+                    if (hours.Count > 0)
+                    {
+                        MicrosoftDynamicsCRMadoxioHoursofservice hourEntity = hours[0];
+                        applicationVM.ServiceHoursSundayOpen = (ServiceHours?)hourEntity.AdoxioSundayopen;
+                        applicationVM.ServiceHoursSundayClose = (ServiceHours?)hourEntity.AdoxioSundayclose;
+                        applicationVM.ServiceHoursMondayOpen = (ServiceHours?)hourEntity.AdoxioMondayopen;
+                        applicationVM.ServiceHoursMondayClose = (ServiceHours?)hourEntity.AdoxioMondayclose;
+                        applicationVM.ServiceHoursTuesdayOpen = (ServiceHours?)hourEntity.AdoxioTuesdayopen;
+                        applicationVM.ServiceHoursTuesdayClose = (ServiceHours?)hourEntity.AdoxioTuesdayclose;
+                        applicationVM.ServiceHoursWednesdayOpen = (ServiceHours?)hourEntity.AdoxioWednesdayopen;
+                        applicationVM.ServiceHoursWednesdayClose = (ServiceHours?)hourEntity.AdoxioWednesdayclose;
+                        applicationVM.ServiceHoursThursdayOpen = (ServiceHours?)hourEntity.AdoxioThursdayopen;
+                        applicationVM.ServiceHoursThursdayClose = (ServiceHours?)hourEntity.AdoxioThursdayclose;
+                        applicationVM.ServiceHoursFridayOpen = (ServiceHours?)hourEntity.AdoxioFridayopen;
+                        applicationVM.ServiceHoursFridayClose = (ServiceHours?)hourEntity.AdoxioFridayclose;
+                        applicationVM.ServiceHoursSaturdayOpen = (ServiceHours?)hourEntity.AdoxioSaturdayopen;
+                        applicationVM.ServiceHoursSaturdayClose = (ServiceHours?)hourEntity.AdoxioSaturdayclose;
+                    }
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    logger.LogError(httpOperationException, "Error getting service hours.");
                 }
             }
 
