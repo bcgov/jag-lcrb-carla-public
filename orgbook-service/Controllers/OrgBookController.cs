@@ -113,8 +113,17 @@ namespace Gov.Lclb.Cllb.OrgbookService
                 string registrationId = item.AdoxioLicencee?.AdoxioBcincorporationnumber;
                 string licenceId = item.AdoxioLicencesid;
                 string licenceType = item.AdoxioLicenceType?.AdoxioName;
-                if (string.IsNullOrEmpty(registrationId) || string.IsNullOrEmpty(licenceId) || string.IsNullOrEmpty(licenceType)) {
-                    _logger.LogError($"Not issuing licence credential to {licenceId}");
+                if (string.IsNullOrEmpty(registrationId))
+                {
+                    _logger.LogError($"No registration id (incorporation number), Not issuing licence credential to {licenceId}");
+                }
+                else if (string.IsNullOrEmpty(licenceId))
+                {
+                    _logger.LogError($"No licenceId, Not issuing licence credential to {licenceId}");
+                }
+                else if (string.IsNullOrEmpty(licenceType))
+                {
+                    _logger.LogError($"No licence type, Not issuing licence credential to {licenceId}");
                 }
                 else
                 {
