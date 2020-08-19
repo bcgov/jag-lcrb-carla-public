@@ -2,6 +2,8 @@ import json
 import os
 import threading
 import time
+import logging
+
 
 import requests
 from flask import jsonify
@@ -9,13 +11,19 @@ from flask import jsonify
 import config
 
 AGENT_ADMIN_API_KEY = os.environ.get("AGENT_ADMIN_API_KEY")
-ADMIN_REQUEST_HEADERS = {}
-if AGENT_ADMIN_API_KEY is not None:
-    ADMIN_REQUEST_HEADERS = {"x-api-key": AGENT_ADMIN_API_KEY}
+ADMIN_REQUEST_HEADERS = {"Content-Type": "application/json"}
+if AGENT_ADMIN_API_KEY is not None and 0 < len(AGENT_ADMIN_API_KEY):
+    ADMIN_REQUEST_HEADERS["x-api-key"] = AGENT_ADMIN_API_KEY
+
+LOG_LEVEL = os.environ.get('LOG_LEVEL', 'WARNING').upper()
+LOGGER = logging.getLogger(__name__)
+TRACE_EVENTS = os.getenv("TRACE_EVENTS", "False").lower() == "true"
+if TRACE_EVENTS:
+    LOGGER.setLevel(logging.INFO)
 
 TOB_ADMIN_API_KEY = os.environ.get("TOB_ADMIN_API_KEY")
 TOB_REQUEST_HEADERS = {}
-if TOB_ADMIN_API_KEY is not None:
+if TOB_ADMIN_API_KEY is not None and 0 < len(TOB_ADMIN_API_KEY):
     TOB_REQUEST_HEADERS = {"x-api-key": TOB_ADMIN_API_KEY}
 
 # list of cred defs per schema name/version
@@ -119,7 +127,7 @@ class StartupProcessingThread(threading.Thread):
 
         # determine pre-registered schemas and cred defs
         existing_schemas = agent_schemas_cred_defs(agent_admin_url)
-        # print("Existing schemas:", json.dumps(existing_schemas))
+        print("Existing schemas:", json.dumps(existing_schemas))
 
         # register schemas and credential definitions
         for schema in config_schemas:
@@ -452,7 +460,7 @@ TOPIC_PRESENTATIONS = "presentations"
 TOPIC_GET_ACTIVE_MENU = "get-active-menu"
 TOPIC_PERFORM_MENU_ACTION = "perform-menu-action"
 TOPIC_ISSUER_REGISTRATION = "issuer_registration"
-TOPIC_PROBLEM_REPORT = "problem-report"
+TOPIC_PROBLEM_REPORT = "problem_report"
 
 # max 15 second wait for a credential response (prevents blocking forever)
 MAX_CRED_RESPONSE_TIMEOUT = 45
@@ -672,6 +680,9 @@ def handle_send_credential(cred_input):
             # "comment": "string",
             "schema_id": schema_id,
         }
+
+        if TRACE_EVENTS:
+            cred_req["trace"] = True
 
         thread = SendCredentialThread(
             credential_definition_id,
