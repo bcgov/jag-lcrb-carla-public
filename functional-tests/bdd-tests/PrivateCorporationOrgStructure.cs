@@ -216,7 +216,7 @@ namespace bdd_tests
         [And(@"I modify the director name")]
         public void ModifyDirectorName()
         {
-            // click on the Edit button for Key Personnel
+            // click on the Edit button for Leader
             NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
             uiEditInfoButton.Click();
 
