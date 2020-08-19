@@ -5075,7 +5075,7 @@ namespace bdd_tests
             // click on the Submit & Pay button
             ClickOnSubmitButton();
 
-            MakePayment();
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Pending external review')]")).Displayed);
 
             System.Threading.Thread.Sleep(3000);
         }
