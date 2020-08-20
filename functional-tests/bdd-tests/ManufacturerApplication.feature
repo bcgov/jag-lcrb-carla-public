@@ -8,7 +8,7 @@ Scenario: Private Corporation Winery Manufacturer Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -21,7 +21,7 @@ Scenario: Private Corporation Distillery Manufacturer Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -34,7 +34,7 @@ Scenario: Private Corporation Brewery Manufacturer Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -47,7 +47,7 @@ Scenario: Private Corporation Co-packer Manufacturer Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -60,7 +60,7 @@ Scenario: Validation for Manufacturer Application
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Manufacturing application
     And the account is deleted
