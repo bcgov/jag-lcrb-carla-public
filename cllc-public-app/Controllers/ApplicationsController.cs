@@ -841,7 +841,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         AdoxioSaturdayopen = defaultHours.AdoxioSaturdayopen
                     };
                     _dynamicsClient.Hoursofservices.Create(newHours);
-                        
+
                 }
             }
             catch (HttpOperationException httpOperationException)
@@ -1097,7 +1097,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // get entityid
                     string filter = $"_adoxio_application_value eq {id}";
                     int count = _dynamicsClient.Hoursofservices.Get(filter: filter).Value.Count();
-                    MicrosoftDynamicsCRMadoxioHoursofservice hoursEntity = _dynamicsClient.Hoursofservices.Get(filter: filter).Value.First();
+                    MicrosoftDynamicsCRMadoxioHoursofservice hoursEntity = _dynamicsClient.Hoursofservices.Get(filter: filter).Value.FirstOrDefault();
                     MicrosoftDynamicsCRMadoxioHoursofservice patchHoursEntity = new MicrosoftDynamicsCRMadoxioHoursofservice()
                     {
                         AdoxioSundayclose = (int?)item.ServiceHoursSundayClose,
@@ -1115,10 +1115,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         AdoxioSaturdayclose = (int?)item.ServiceHoursSaturdayClose,
                         AdoxioSaturdayopen = (int?)item.ServiceHoursSaturdayOpen
                     };
-                    
-                    _dynamicsClient.Hoursofservices.Update(hoursEntity.AdoxioHoursofserviceid, patchHoursEntity);
+
+                    if (hoursEntity != null)
+                    {
+                        _dynamicsClient.Hoursofservices.Update(hoursEntity.AdoxioHoursofserviceid, patchHoursEntity);
+                    }
+                    else
+                    {
+                        // Create hours of service
+                        string applicationUri = _dynamicsClient.GetEntityURI("adoxio_applications", id);
+                        patchHoursEntity.ApplicationODataBind = applicationUri;
+                        var serviceHours = _dynamicsClient.Hoursofservices.Create(patchHoursEntity);
+
+                    }
                 }
-                
+
 
                 _dynamicsClient.Applications.Update(id, adoxioApplication);
             }
