@@ -3270,12 +3270,48 @@ namespace bdd_tests
             */
 
             // create test data
-            string proposedChange = "Description of proposed change(s) such as moving, adding or changing approved picnic area(s)";
+            //string proposedChange = "Description of proposed change(s) such as moving, adding or changing approved picnic area(s)";
+            string otherBizDetails = "Description of other business details";
+            string patioCompositionDescription = "Description of patio composition";
             string capacity = "100";
 
-            // enter the description of the proposed change in the text area
-            NgWebElement uiProposedChange = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='description1']"));
-            uiProposedChange.SendKeys(proposedChange);
+            // enter the description of the proposed change in the text area - waiting for LCSD-3793
+            //NgWebElement uiProposedChange = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='description1']"));
+            //uiProposedChange.SendKeys(proposedChange);
+
+            // enter the other business details
+            NgWebElement uiOtherBizDetails = ngDriver.FindElement(By.CssSelector("textarea#otherBusinessesDetails"));
+            uiOtherBizDetails.SendKeys(otherBizDetails);
+
+            // enter the patio composition description
+            NgWebElement uiPatioCompDesc = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
+            uiPatioCompDesc.SendKeys(patioCompositionDescription);
+
+            /*
+            // select 'Grass' for patio location
+            NgWebElement uiGrass = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-71-button.mat-button-toggle-button"));
+            uiGrass.Click();
+
+            // select 'Earth' for patio location
+            NgWebElement uiEarth = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-72-button"));
+            uiEarth.Click();
+
+            // select 'Gravel' for patio location
+            NgWebElement uiGravel = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-73-button"));
+            uiGravel.Click();
+
+            // select 'Finished Flooring' for patio location
+            NgWebElement uiFinishedFlooring = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-74-button"));
+            uiFinishedFlooring.Click();
+
+            // select 'Cement Sidewalk' for patio location
+            NgWebElement uiCementSidewalk = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-75-button"));
+            uiCementSidewalk.Click();
+
+            // select 'Other' for patio location
+            NgWebElement uiOther = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-76-button"));
+            uiOther.Click();
+            */
 
             // enter the capacity
             NgWebElement uiCapacity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
@@ -3306,15 +3342,7 @@ namespace bdd_tests
 
             ClickOnSubmitButton();
 
-            //MakePayment();
-
             System.Threading.Thread.Sleep(3000);
-
-            // click on Licences tab
-            ClickLicencesTab();
-
-            // confirm that 'Picnic Area Endorsement' is displayed
-            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Picnic Area Endorsement')]")).Displayed);
         }
 
 
