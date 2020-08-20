@@ -19,10 +19,10 @@ namespace Gov.Lclb.Cllb.Interfaces
     public partial interface IEstablishment
     {
         /// <summary>
-        /// Get adoxio_Establishment from adoxio_establishmentincidents
+        /// Get adoxio_Establishment from adoxio_hoursofservices
         /// </summary>
-        /// <param name='adoxioEstablishmentincidentid'>
-        /// key: adoxio_establishmentincidentid of adoxio_establishmentincident
+        /// <param name='adoxioHoursofserviceid'>
+        /// key: adoxio_hoursofserviceid of adoxio_hoursofservice
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -45,6 +45,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishment>> GetWithHttpMessagesAsync(string adoxioEstablishmentincidentid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishment>> GetWithHttpMessagesAsync(string adoxioHoursofserviceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

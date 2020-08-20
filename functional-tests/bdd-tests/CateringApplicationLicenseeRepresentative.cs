@@ -24,10 +24,10 @@ using Xunit;
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
@@ -41,15 +41,15 @@ using Xunit;
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
     And I click on the Licences tab
-    And I click on the link for licensee representative
+    And I click on the link for Add Licensee Representative
     And I do not complete the application correctly
     And the expected validation errors are thrown for a licensee representative
     And the account is deleted
@@ -74,7 +74,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsSecurityScreening();
 
-            IgnoreSynchronization();
+            IgnoreSynchronizationFalse();
 
             CarlaLogin(businessType);
         }

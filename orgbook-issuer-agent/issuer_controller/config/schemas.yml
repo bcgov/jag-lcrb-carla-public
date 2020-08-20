@@ -1,7 +1,7 @@
 # Documentation: https://github.com/bcgov/von-agent-template/tree/master/von-x-agent/config
 
 - name: cannabis-retail-store-licence.lcrb
-  version: '1.1.1'
+  version: '1.0.23'
   description: Cannabis Retail Store Licence Issued by Liquor and Cannabis Regulation Branch
   path: /cannabis-retail-store-licence
   cardinality:
@@ -62,7 +62,7 @@
       data_type: text
       required: false
 - name: cannabis-marketing-licence.lcrb
-  version: '1.1.1'
+  version: '1.0.8'
   description: Cannabis Marketing Licence Issued by Liquor and Cannabis Regulation Branch
   path: /cannabis-marketing-licence
   cardinality:

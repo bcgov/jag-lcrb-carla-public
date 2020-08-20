@@ -1,4 +1,4 @@
-﻿Feature: Public_smoke_test
+﻿Feature: PublicSmokeTest
     As a business user who is not logged in
     I want to confirm that I can view the publicly available content
 

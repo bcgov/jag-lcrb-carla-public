@@ -14,7 +14,7 @@ export class Application {
   liquorIndustryConnectionsDetails: string;
   otherBusinesses: number;
   otherBusinessesDetails: string;
-  invoicetrigger: number;
+  invoiceTrigger: number;
 
   id: string;
   parentApplicationId: string;

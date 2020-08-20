@@ -24,10 +24,10 @@ Scenario: Catering Partnership Personnel Email Change
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
     And I review the organization structure for a partnership
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
@@ -44,10 +44,10 @@ Scenario: Catering Private Corporation Personnel Email Change
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
@@ -64,10 +64,10 @@ Scenario: Catering Public Corporation Personnel Email Change
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
     And I review the organization structure for a public corporation
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
@@ -84,10 +84,10 @@ Scenario: Catering Society Personnel Email Change
     And I click on the Start Application button for Catering
     And I review the account profile for a society
     And I review the organization structure for a society
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
@@ -104,10 +104,10 @@ Scenario: Catering Sole Proprietorship Personnel Email Change
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
     And I review the organization structure for a sole proprietorship
-    And I click on the Submit Organization Information button
+    And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the Pay for Application button
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
@@ -137,7 +137,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsSecurityScreening();
 
-            IgnoreSynchronization();
+            IgnoreSynchronizationFalse();
 
             CarlaLogin(businessType);
         }
