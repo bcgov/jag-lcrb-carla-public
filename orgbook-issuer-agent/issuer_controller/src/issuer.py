@@ -254,7 +254,7 @@ class StartupProcessingThread(threading.Thread):
                 schema_info = app_config["schemas"]["SCHEMA_" + schema_name]
                 ctype_config = {
                     "schema_name": schema_name,
-                    "schema_version": schema_version,
+                    "schema_version": schema_info["version"],
                     "issuer_url": issuer_config["url"],
                     "config_root": config_root,
                     "credential_def_id": app_config["schemas"][
