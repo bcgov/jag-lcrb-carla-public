@@ -15,6 +15,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         private string bcep_merchid;
         private string bcep_alt_merchid;
         private string bcep_hashkey;
+        private string bcep_alt_hashkey;
         private string bcep_conf_url;
        
 
@@ -49,6 +50,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             this.bcep_merchid = configuration["BCEP_MERCHANT_ID"]; 
             this.bcep_alt_merchid = configuration["BCEP_ALTERNATE_MERCHANT_ID"];
             this.bcep_hashkey = configuration["BCEP_HASH_KEY"];
+            this.bcep_alt_hashkey = configuration["BCEP_ALTERNATE_HASH_KEY"];
             this.bcep_conf_url = configuration["BASE_URI"] + configuration["BASE_PATH"] + configuration["BCEP_CONF_PATH"];
         }
 
@@ -74,6 +76,20 @@ namespace Gov.Lclb.Cllb.Interfaces
                 merchid = this.bcep_merchid;
             }
             return merchid;
+        }
+
+        private string GetHashKey(bool isAlternateAccount)
+        {
+            string hashKey;
+            if (isAlternateAccount)
+            {
+                hashKey = this.bcep_alt_hashkey;
+            }
+            else
+            {
+                hashKey = this.bcep_hashkey;
+            }
+            return hashKey;
         }
         /// <summary>
         /// GET a payment re-direct url for an Application
@@ -109,8 +125,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             // replace spaces with "%20" (do not do a full url encoding; does not work with BeanStream)
             paramString = paramString.Replace(" ", "%20");
 
+            string hashkey = GetHashKey(isAlternateAccount);
+
             // add hash key at the end of params
-            string paramStringWithHash = paramString + bcep_hashkey;
+            string paramStringWithHash = paramString + hashkey;
 
             // Calculate the MD5 value using the Hash Key set on the Order Settings page (Within Beanstream account).
             // How:
@@ -205,8 +223,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             // replace spaces with "%20" (do not do a full url encoding; does not work with BeanStream)
             paramString = paramString.Replace(" ", "%20");
 
+            string hashkey = GetHashKey(isAlternateAccount);
+
             // add hash key at the end of params
-            string paramStringWithHash = paramString + bcep_hashkey;
+            string paramStringWithHash = paramString + hashkey;
 
             // Calculate the MD5 value using the Hash Key set on the Order Settings page (Within Beanstream account).
             // How:

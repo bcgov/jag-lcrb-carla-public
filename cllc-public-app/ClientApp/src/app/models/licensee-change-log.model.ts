@@ -71,7 +71,7 @@ export class LicenseeChangeLog {
    */
   public static CreateFromLegalEntity(legalEntity: LegalEntity = null) {
     let newItem: LicenseeChangeLog = null;
-
+    
     if (legalEntity) {
       newItem = new LicenseeChangeLog();
       newItem.legalEntityId = legalEntity.id;

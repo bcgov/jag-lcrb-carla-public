@@ -98,6 +98,14 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       .subscribe(value => this.submittedApplications = value);
   }
 
+  isApprovedByLGAndNotSubmitted(item: ApplicationSummary): boolean {
+    let result = item
+      && item.lgHasApproved
+      && !item.isPaid
+      && item.isApplicationComplete !== 'Yes';
+    return result;
+  }
+
   /**
    *
    * */
@@ -419,7 +427,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       indigenousNationId: application.indigenousNationId,
       account: this.account,
     };
-    
+
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         const route: any[] = [`/application/${data.id}`];

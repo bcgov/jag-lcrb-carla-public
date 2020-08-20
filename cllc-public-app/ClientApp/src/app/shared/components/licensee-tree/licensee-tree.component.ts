@@ -305,7 +305,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     if (node.id) {
       this.cancelledChanges.emit(node);
     }
-
+    
     if (!node.isRoot) {
       if (!node.legalEntityId) {
         const index = node.parentLicenseeChangeLog.children.indexOf(node);
