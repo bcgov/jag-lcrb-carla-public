@@ -3650,6 +3650,11 @@ namespace bdd_tests
             NgWebElement uiUploadExteriorPhotos = ngDriver.FindElement(By.XPath("(//input[@type='file'])[11]"));
             uiUploadExteriorPhotos.SendKeys(exteriorPhotosPath);
 
+            // upload the ownership details
+            string ownershipDetailsPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "exterior_photos.pdf");
+            NgWebElement uiownershipDetails = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
+            uiownershipDetails.SendKeys(ownershipDetailsPath);
+
             // select the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
             uiAuthorizedToSubmit.Click();
