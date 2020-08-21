@@ -31,6 +31,7 @@ export class PaymentConfirmationComponent implements OnInit {
   invoice: string;
   isApproved = false;
   applicationType: string;
+  retryCount = 0;
 
   paymentTransactionTitle: string;
   paymentTransactionMessage: string;
@@ -72,6 +73,8 @@ export class PaymentConfirmationComponent implements OnInit {
    * Payment verification
    * */
   verify_payment() {
+    this.retryCount++;
+
     this.busy = this.paymentDataService.verifyPaymentSubmission(this.applicationId).subscribe(
       res => {
         const verifyPayResponse = <any>res;
@@ -127,7 +130,17 @@ export class PaymentConfirmationComponent implements OnInit {
         this.loaded = true;
       },
       err => {
-        console.log('Error occured');
+        if (err === "503") {
+          
+          if (this.retryCount < 30) {
+            this.verify_payment();
+          }
+        }
+        else {
+          console.log('Unknown Error occured:');
+          console.log(err);
+        }
+        
       }
     );
   }

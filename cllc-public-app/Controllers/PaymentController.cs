@@ -300,6 +300,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             bool isAlternateAccount = application.IsLiquor(); // determine if it is for liquor
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, id, isAlternateAccount);
+
+            if (! string.IsNullOrEmpty (response["error"]))
+            {
+                // handle error.
+                _logger.LogError($"PAYMENT VERIFICATION ERROR - {response["message"]} for application {id}");
+                return StatusCode(503); // client will retry.
+            }
+
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)
