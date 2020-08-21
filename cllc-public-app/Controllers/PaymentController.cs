@@ -803,7 +803,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (response.ContainsKey("error"))
             {
                 // handle error.
-                _logger.LogError($"PAYMENT VERIFICATION ERROR - {response["message"]} for application {workerId}");
+                _logger.LogError($"PAYMENT VERIFICATION ERROR - {response["message"]} for worker {workerId}");
                 return StatusCode(503); // client will retry.
             }
 
