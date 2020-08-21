@@ -243,7 +243,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
           this.busyPromise = this.prepareSaveRequest()
 
             .pipe(mergeMap(results => {
-              const saveOverrideValue = { invoicetrigger: 1 };
+              const saveOverrideValue = { invoiceTrigger: 1 };
 
               return this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue })
                 .pipe(takeWhile(() => this.componentActive))

@@ -112,23 +112,23 @@ Scenario: Save for Later feature for partnership org structure
     Given I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I enter the same individual as an individual partner and a business shareholder
-    And I click on the Save for Later button
+    And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And I add a business shareholder with the same individual as an individual partner and a business shareholder
-    And I click on the Save for Later button
+    And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And I add a second individual as an individual partner and a business shareholder
-    And I click on the Save for Later button
+    And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And I remove the latest individual shareholder after saving
-    And I click on the Save for Later button
+    And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And I remove the latest business shareholder after saving
-    And I click on the Save for Later button
+    And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And the latest director and shareholder is removed
     And I remove the business shareholder
-    And I click on the Save for Later button
+    And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And the saved org structure for partnership is present
     And the account is deleted

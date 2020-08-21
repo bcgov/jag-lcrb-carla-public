@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top120 { get; set; }
+        public int? Top140 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip120 { get; set; }
+        public int? Skip140 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count120 { get; set; }
+        public bool? Count140 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter120 { get; set; }
+        public string Filter140 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search120 { get; set; }
+        public string Search140 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -131,6 +131,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplications Applications { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationadoxiohoursofserviceapplication.
+        /// </summary>
+        public virtual IApplicationadoxiohoursofserviceapplication Applicationadoxiohoursofserviceapplication { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationstructurechangev1s.
         /// </summary>
         public virtual IApplicationstructurechangev1s Applicationstructurechangev1s { get; private set; }
@@ -159,6 +164,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtypes.
         /// </summary>
         public virtual IApplicationtypes Applicationtypes { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtypeadoxiohoursofserviceapplicationtype.
+        /// </summary>
+        public virtual IApplicationtypeadoxiohoursofserviceapplicationtype Applicationtypeadoxiohoursofserviceapplicationtype { get; private set; }
 
         /// <summary>
         /// Gets the IApplicationtypeadoxioproratedlicencefeescheduleapplicationtype.
@@ -291,6 +301,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEstablishments Establishments { get; private set; }
 
         /// <summary>
+        /// Gets the IEstablishmentadoxiohoursofserviceestablishment.
+        /// </summary>
+        public virtual IEstablishmentadoxiohoursofserviceestablishment Establishmentadoxiohoursofserviceestablishment { get; private set; }
+
+        /// <summary>
         /// Gets the IEstablishmentwatchwords.
         /// </summary>
         public virtual IEstablishmentwatchwords Establishmentwatchwords { get; private set; }
@@ -329,6 +344,71 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IFundingsources.
         /// </summary>
         public virtual IFundingsources Fundingsources { get; private set; }
+
+        /// <summary>
+        /// Gets the IHoursofservices.
+        /// </summary>
+        public virtual IHoursofservices Hoursofservices { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplication.
+        /// </summary>
+        public virtual IApplication Application { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtype.
+        /// </summary>
+        public virtual IApplicationtype Applicationtype { get; private set; }
+
+        /// <summary>
+        /// Gets the IEstablishment.
+        /// </summary>
+        public virtual IEstablishment Establishment { get; private set; }
+
+        /// <summary>
+        /// Gets the IHoursofserviceasyncoperations.
+        /// </summary>
+        public virtual IHoursofserviceasyncoperations Hoursofserviceasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IHoursofservicebulkdeletefailures.
+        /// </summary>
+        public virtual IHoursofservicebulkdeletefailures Hoursofservicebulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IHoursofserviceduplicatebaserecord.
+        /// </summary>
+        public virtual IHoursofserviceduplicatebaserecord Hoursofserviceduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IHoursofserviceduplicatematchingrecord.
+        /// </summary>
+        public virtual IHoursofserviceduplicatematchingrecord Hoursofserviceduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IHoursofservicemailboxtrackingfolders.
+        /// </summary>
+        public virtual IHoursofservicemailboxtrackingfolders Hoursofservicemailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IHoursofserviceprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IHoursofserviceprincipalobjectattributeaccesses Hoursofserviceprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IHoursofserviceprocesssession.
+        /// </summary>
+        public virtual IHoursofserviceprocesssession Hoursofserviceprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the IHoursofservicesyncerrors.
+        /// </summary>
+        public virtual IHoursofservicesyncerrors Hoursofservicesyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicence.
+        /// </summary>
+        public virtual ILicence Licence { get; private set; }
 
         /// <summary>
         /// Gets the IIncidentadoxiolicencetypeset.
@@ -389,6 +469,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicenceses.
         /// </summary>
         public virtual ILicenceses Licenceses { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencesadoxiohoursofservicelicence.
+        /// </summary>
+        public virtual ILicencesadoxiohoursofservicelicence Licencesadoxiohoursofservicelicence { get; private set; }
 
         /// <summary>
         /// Gets the ILicencesubcategories.
@@ -464,11 +549,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IProratedlicencefeeschedules.
         /// </summary>
         public virtual IProratedlicencefeeschedules Proratedlicencefeeschedules { get; private set; }
-
-        /// <summary>
-        /// Gets the IApplicationtype.
-        /// </summary>
-        public virtual IApplicationtype Applicationtype { get; private set; }
 
         /// <summary>
         /// Gets the ILicencesubcategory.
@@ -581,9 +661,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IWorkers Workers { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxiohoursofservice.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiohoursofservice Regardingobjectidadoxiohoursofservice { get; private set; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioproratedlicencefeeschedule.
         /// </summary>
         public virtual IRegardingobjectidadoxioproratedlicencefeeschedule Regardingobjectidadoxioproratedlicencefeeschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxiohoursofservice.
+        /// </summary>
+        public virtual IBusinessunitadoxiohoursofservice Businessunitadoxiohoursofservice { get; private set; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxioproratedlicencefeeschedule.
@@ -594,6 +684,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IContacts.
         /// </summary>
         public virtual IContacts Contacts { get; private set; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxiohoursofservice.
+        /// </summary>
+        public virtual IBaserecordidadoxiohoursofservice Baserecordidadoxiohoursofservice { get; private set; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxiohoursofservice.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxiohoursofservice Duplicaterecordidadoxiohoursofservice { get; private set; }
 
         /// <summary>
         /// Gets the IEntitydefinitions.
@@ -619,6 +719,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILists.
         /// </summary>
         public virtual ILists Lists { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiohoursofservice.
+        /// </summary>
+        public virtual IObjectidadoxiohoursofservice Objectidadoxiohoursofservice { get; private set; }
 
         /// <summary>
         /// Gets the IObjectidadoxioproratedlicencefeeschedule.
@@ -661,6 +766,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISystemusers Systemusers { get; private set; }
 
         /// <summary>
+        /// Gets the ILkadoxiohoursofservicecreatedby.
+        /// </summary>
+        public virtual ILkadoxiohoursofservicecreatedby Lkadoxiohoursofservicecreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiohoursofservicecreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiohoursofservicecreatedonbehalfby Lkadoxiohoursofservicecreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiohoursofservicemodifiedby.
+        /// </summary>
+        public virtual ILkadoxiohoursofservicemodifiedby Lkadoxiohoursofservicemodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiohoursofservicemodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiohoursofservicemodifiedonbehalfby Lkadoxiohoursofservicemodifiedonbehalfby { get; private set; }
+
+        /// <summary>
         /// Gets the ILkadoxioproratedlicencefeeschedulecreatedby.
         /// </summary>
         public virtual ILkadoxioproratedlicencefeeschedulecreatedby Lkadoxioproratedlicencefeeschedulecreatedby { get; private set; }
@@ -681,9 +806,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILkadoxioproratedlicencefeeschedulemodifiedonbehalfby Lkadoxioproratedlicencefeeschedulemodifiedonbehalfby { get; private set; }
 
         /// <summary>
+        /// Gets the IUseradoxiohoursofservice.
+        /// </summary>
+        public virtual IUseradoxiohoursofservice Useradoxiohoursofservice { get; private set; }
+
+        /// <summary>
         /// Gets the IUseradoxioproratedlicencefeeschedule.
         /// </summary>
         public virtual IUseradoxioproratedlicencefeeschedule Useradoxioproratedlicencefeeschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxiohoursofservice.
+        /// </summary>
+        public virtual ITeamadoxiohoursofservice Teamadoxiohoursofservice { get; private set; }
 
         /// <summary>
         /// Gets the ITeamadoxioproratedlicencefeeschedule.
@@ -949,12 +1084,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationliquorbpfv2s = new Applicationliquorbpfv2s(this);
             Applicationrelocationv1s = new Applicationrelocationv1s(this);
             Applications = new Applications(this);
+            Applicationadoxiohoursofserviceapplication = new Applicationadoxiohoursofserviceapplication(this);
             Applicationstructurechangev1s = new Applicationstructurechangev1s(this);
             Applicationtermsconditionslimitations = new Applicationtermsconditionslimitations(this);
             Applicationtransferownershipv1s = new Applicationtransferownershipv1s(this);
             Applicationtypecontents = new Applicationtypecontents(this);
             Applicationtypefeeschedules = new Applicationtypefeeschedules(this);
             Applicationtypes = new Applicationtypes(this);
+            Applicationtypeadoxiohoursofserviceapplicationtype = new Applicationtypeadoxiohoursofserviceapplicationtype(this);
             Applicationtypeadoxioproratedlicencefeescheduleapplicationtype = new Applicationtypeadoxioproratedlicencefeescheduleapplicationtype(this);
             Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype = new Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype(this);
             Fylicencefeeproduct = new Fylicencefeeproduct(this);
@@ -981,6 +1118,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Enforcementactions = new Enforcementactions(this);
             Establishmentincidents = new Establishmentincidents(this);
             Establishments = new Establishments(this);
+            Establishmentadoxiohoursofserviceestablishment = new Establishmentadoxiohoursofserviceestablishment(this);
             Establishmentwatchwords = new Establishmentwatchwords(this);
             Events = new Events(this);
             Eventschedules = new Eventschedules(this);
@@ -989,6 +1127,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             Fiainvestigationlogs = new Fiainvestigationlogs(this);
             Formelementuploadfields = new Formelementuploadfields(this);
             Fundingsources = new Fundingsources(this);
+            Hoursofservices = new Hoursofservices(this);
+            Application = new Application(this);
+            Applicationtype = new Applicationtype(this);
+            Establishment = new Establishment(this);
+            Hoursofserviceasyncoperations = new Hoursofserviceasyncoperations(this);
+            Hoursofservicebulkdeletefailures = new Hoursofservicebulkdeletefailures(this);
+            Hoursofserviceduplicatebaserecord = new Hoursofserviceduplicatebaserecord(this);
+            Hoursofserviceduplicatematchingrecord = new Hoursofserviceduplicatematchingrecord(this);
+            Hoursofservicemailboxtrackingfolders = new Hoursofservicemailboxtrackingfolders(this);
+            Hoursofserviceprincipalobjectattributeaccesses = new Hoursofserviceprincipalobjectattributeaccesses(this);
+            Hoursofserviceprocesssession = new Hoursofserviceprocesssession(this);
+            Hoursofservicesyncerrors = new Hoursofservicesyncerrors(this);
+            Licence = new Licence(this);
             Incidentadoxiolicencetypeset = new Incidentadoxiolicencetypeset(this);
             Inspectioninspectorsset = new Inspectioninspectorsset(this);
             Inspectionreactivationhistories = new Inspectionreactivationhistories(this);
@@ -1001,6 +1152,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Legalentities = new Legalentities(this);
             Licenceldbordertotalhistories = new Licenceldbordertotalhistories(this);
             Licenceses = new Licenceses(this);
+            Licencesadoxiohoursofservicelicence = new Licencesadoxiohoursofservicelicence(this);
             Licencesubcategories = new Licencesubcategories(this);
             Licencefeeproduct = new Licencefeeproduct(this);
             Licencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory = new Licencesubcategoryadoxioproratedlicencefeeschedulelicencesubcategory(this);
@@ -1016,7 +1168,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Postalcodes = new Postalcodes(this);
             Previousaddresses = new Previousaddresses(this);
             Proratedlicencefeeschedules = new Proratedlicencefeeschedules(this);
-            Applicationtype = new Applicationtype(this);
             Licencesubcategory = new Licencesubcategory(this);
             Proratedlicencefeescheduleasyncoperations = new Proratedlicencefeescheduleasyncoperations(this);
             Proratedlicencefeeschedulebulkdeletefailures = new Proratedlicencefeeschedulebulkdeletefailures(this);
@@ -1039,14 +1190,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             Witnesses = new Witnesses(this);
             Workerinvoicehistories = new Workerinvoicehistories(this);
             Workers = new Workers(this);
+            Regardingobjectidadoxiohoursofservice = new Regardingobjectidadoxiohoursofservice(this);
             Regardingobjectidadoxioproratedlicencefeeschedule = new Regardingobjectidadoxioproratedlicencefeeschedule(this);
+            Businessunitadoxiohoursofservice = new Businessunitadoxiohoursofservice(this);
             Businessunitadoxioproratedlicencefeeschedule = new Businessunitadoxioproratedlicencefeeschedule(this);
             Contacts = new Contacts(this);
+            Baserecordidadoxiohoursofservice = new Baserecordidadoxiohoursofservice(this);
+            Duplicaterecordidadoxiohoursofservice = new Duplicaterecordidadoxiohoursofservice(this);
             Entitydefinitions = new Entitydefinitions(this);
             Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
             Invoices = new Invoices(this);
             Leads = new Leads(this);
             Lists = new Lists(this);
+            Objectidadoxiohoursofservice = new Objectidadoxiohoursofservice(this);
             Objectidadoxioproratedlicencefeeschedule = new Objectidadoxioproratedlicencefeeschedule(this);
             Productadoxioapplicationtypefylicencefeeproduct = new Productadoxioapplicationtypefylicencefeeproduct(this);
             Productadoxiolicencesubcategorylicencefeeproduct = new Productadoxiolicencesubcategorylicencefeeproduct(this);
@@ -1055,11 +1211,17 @@ namespace Gov.Lclb.Cllb.Interfaces
             Sharepointsites = new Sharepointsites(this);
             Systemforms = new Systemforms(this);
             Systemusers = new Systemusers(this);
+            Lkadoxiohoursofservicecreatedby = new Lkadoxiohoursofservicecreatedby(this);
+            Lkadoxiohoursofservicecreatedonbehalfby = new Lkadoxiohoursofservicecreatedonbehalfby(this);
+            Lkadoxiohoursofservicemodifiedby = new Lkadoxiohoursofservicemodifiedby(this);
+            Lkadoxiohoursofservicemodifiedonbehalfby = new Lkadoxiohoursofservicemodifiedonbehalfby(this);
             Lkadoxioproratedlicencefeeschedulecreatedby = new Lkadoxioproratedlicencefeeschedulecreatedby(this);
             Lkadoxioproratedlicencefeeschedulecreatedonbehalfby = new Lkadoxioproratedlicencefeeschedulecreatedonbehalfby(this);
             Lkadoxioproratedlicencefeeschedulemodifiedby = new Lkadoxioproratedlicencefeeschedulemodifiedby(this);
             Lkadoxioproratedlicencefeeschedulemodifiedonbehalfby = new Lkadoxioproratedlicencefeeschedulemodifiedonbehalfby(this);
+            Useradoxiohoursofservice = new Useradoxiohoursofservice(this);
             Useradoxioproratedlicencefeeschedule = new Useradoxioproratedlicencefeeschedule(this);
+            Teamadoxiohoursofservice = new Teamadoxiohoursofservice(this);
             Teamadoxioproratedlicencefeeschedule = new Teamadoxioproratedlicencefeeschedule(this);
             Workflows = new Workflows(this);
             BaseUri = new System.Uri("http://localhost");

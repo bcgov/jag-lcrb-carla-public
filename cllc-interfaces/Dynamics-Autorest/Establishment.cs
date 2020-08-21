@@ -47,10 +47,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         public DynamicsClient Client { get; private set; }
 
         /// <summary>
-        /// Get adoxio_Establishment from adoxio_establishmentincidents
+        /// Get adoxio_Establishment from adoxio_hoursofservices
         /// </summary>
-        /// <param name='adoxioEstablishmentincidentid'>
-        /// key: adoxio_establishmentincidentid of adoxio_establishmentincident
+        /// <param name='adoxioHoursofserviceid'>
+        /// key: adoxio_hoursofserviceid of adoxio_hoursofservice
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -79,11 +79,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishment>> GetWithHttpMessagesAsync(string adoxioEstablishmentincidentid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishment>> GetWithHttpMessagesAsync(string adoxioHoursofserviceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioEstablishmentincidentid == null)
+            if (adoxioHoursofserviceid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioEstablishmentincidentid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioHoursofserviceid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioEstablishmentincidentid", adoxioEstablishmentincidentid);
+                tracingParameters.Add("adoxioHoursofserviceid", adoxioHoursofserviceid);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
@@ -100,8 +100,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_establishmentincidents({adoxio_establishmentincidentid})/adoxio_Establishment").ToString();
-            _url = _url.Replace("{adoxio_establishmentincidentid}", System.Uri.EscapeDataString(adoxioEstablishmentincidentid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_hoursofservices({adoxio_hoursofserviceid})/adoxio_Establishment").ToString();
+            _url = _url.Replace("{adoxio_hoursofserviceid}", System.Uri.EscapeDataString(adoxioHoursofserviceid));
             List<string> _queryParameters = new List<string>();
             if (select != null)
             {

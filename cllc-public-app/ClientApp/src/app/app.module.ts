@@ -171,7 +171,8 @@ import { VersionInfoDialogComponent } from '@components/version-info/version-inf
 import { FederalReportingComponent } from '@components/federal-reporting/federal-reporting.component';
 import { LicencesComponent } from '@components/licences/licences.component';
 import { LicenceRowComponent } from '@components/licences/licence-row/licence-row.component';
-import { CapacityTableComponent } from '@components/capacity-table/capacity-table.component';
+import { CapacityTableComponent } from '@components/tables/capacity-table.component';
+import { CapacityTableRowComponent } from '@components/tables/capacity-table-row.component';
 import { ApplicationsComponent } from '@components/applications/applications.component';
 import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
@@ -210,7 +211,6 @@ import { AdditionalPidsComponent } from './components/applications/application/t
 import { TermsAndConditionsDataService } from '@services/terms-and-condtions-data.service';
 import { LgZoningConfirmationComponent } from './components/applications/application/tabs/lg-zoning-confirmation/lg-zoning-confirmation.component';
 import { ProofOfZoningComponent } from './components/applications/application/tabs/proof-of-zoning/proof-of-zoning.component';
-import { CapacityTableRowComponent } from '@components/capacity-table/capacity-table-row.component';
 import { ProductionStagesComponent } from './components/applications/application/tabs/business-plan/production-stages/production-stages.component';
 
 
@@ -232,7 +232,6 @@ import { ProductionStagesComponent } from './components/applications/application
     ConnectionToProducersComponent,
     CorporateDetailsComponent,
     DashboardComponent,
-    CapacityTableRowComponent,
     DelayedFileUploaderComponent,
     DirectorAndOfficerPersonDialogComponent,
     DirectorsAndOfficersComponent,
