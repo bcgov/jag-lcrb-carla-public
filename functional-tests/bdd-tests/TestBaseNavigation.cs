@@ -180,6 +180,15 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the Complete Organization Information button")]
+        public void CompleteOrgInfo()
+        {
+            // click on the complete organization information button
+            NgWebElement uiOrgInfoButton = ngDriver.FindElement(By.CssSelector("button.btn-primary[routerlink='/org-structure']"));
+            uiOrgInfoButton.Click();
+        }
+
+
         [And(@"I click on the Start Application button for (.*)")]
         public void ClickStartApplication(string applicationType)
         {
@@ -226,6 +235,51 @@ namespace bdd_tests
             // click on the first day
             NgWebElement uiOpenCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
             uiOpenCalendarYear.Click();
+        }
+
+
+        [And(@"the application is approved")]
+        public void ApplicationIsApproved()
+        {
+            ngDriver.IgnoreSynchronization = true;
+
+            // navigate to api/applications/<Application ID>/process
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{applicationID}/process");
+
+            // wait for the automated approval process to run
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+
+            ngDriver.IgnoreSynchronization = false;
+
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+        }
+
+
+        [And(@"I do not complete the application correctly")]
+        public void CompleteApplicationIncorrectly()
+        {
+            ClickOnSubmitButton();
+
+            System.Threading.Thread.Sleep(5000);
+        }
+
+
+        [And(@"the expiry date is changed to today")]
+        public void ExpiryDateToday()
+        {
+            ngDriver.IgnoreSynchronization = true;
+
+            // navigate to api/Licenses/<Application ID>/setexpiry
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{applicationID}/setexpiry");
+
+            // wait for the automated expiry process to run
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+
+            ngDriver.IgnoreSynchronization = false;
+
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
         }
     }
 }
