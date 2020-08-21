@@ -603,6 +603,13 @@ namespace bdd_tests
                 NgWebElement uiSaveForLaterButton = ngDriver.FindElement(By.CssSelector("button.btn-secondary span"));
                 uiSaveForLaterButton.Click();
             }
+
+            if (specificButton == "Continue to Organization Review")
+            {
+                // click on the Continue to Organization Review button
+                NgWebElement uiSaveForLaterButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+                uiSaveForLaterButton.Click();
+            }
         }
 
 
