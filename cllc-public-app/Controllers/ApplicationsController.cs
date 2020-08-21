@@ -817,6 +817,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     AddServiceAreasToApplication(item.OutsideAreas, adoxioApplication.AdoxioApplicationid);
                 }
+
+                if ((bool)applicationType.AdoxioIsshowhoursofsale && false)
+                {
+                    string filter = $"_adoxio_applicationtype_value eq {applicationType.AdoxioApplicationtypeid}";
+                    MicrosoftDynamicsCRMadoxioHoursofservice defaultHours = _dynamicsClient.Hoursofservices.Get(filter: filter).Value.First();
+                    MicrosoftDynamicsCRMadoxioHoursofservice newHours = new MicrosoftDynamicsCRMadoxioHoursofservice()
+                    {
+                        ApplicationODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", adoxioApplication.AdoxioApplicationid),
+                        AdoxioSundayclose = defaultHours.AdoxioSundayclose,
+                        AdoxioSundayopen = defaultHours.AdoxioSundayopen,
+                        AdoxioMondayclose = defaultHours.AdoxioMondayclose,
+                        AdoxioMondayopen = defaultHours.AdoxioMondayopen,
+                        AdoxioTuesdayclose = defaultHours.AdoxioTuesdayclose,
+                        AdoxioTuesdayopen = defaultHours.AdoxioTuesdayopen,
+                        AdoxioWednesdayclose = defaultHours.AdoxioWednesdayclose,
+                        AdoxioWednesdayopen = defaultHours.AdoxioWednesdayopen,
+                        AdoxioThursdayclose = defaultHours.AdoxioThursdayclose,
+                        AdoxioThursdayopen = defaultHours.AdoxioThursdayopen,
+                        AdoxioFridayclose = defaultHours.AdoxioFridayclose,
+                        AdoxioFridayopen = defaultHours.AdoxioFridayopen,
+                        AdoxioSaturdayclose = defaultHours.AdoxioSaturdayclose,
+                        AdoxioSaturdayopen = defaultHours.AdoxioSaturdayopen
+                    };
+                    _dynamicsClient.Hoursofservices.Create(newHours);
+
+                }
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -1065,7 +1091,52 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     AddServiceAreasToApplication(item.CapacityArea, item.Id);
                 }
-                
+
+                if ((bool)item.ApplicationType?.ShowHoursOfSale)
+                {
+                    try
+                    {
+                        // get entityid
+                        string filter = $"_adoxio_application_value eq {id}";
+                        int count = _dynamicsClient.Hoursofservices.Get(filter: filter).Value.Count();
+                        MicrosoftDynamicsCRMadoxioHoursofservice hoursEntity = _dynamicsClient.Hoursofservices.Get(filter: filter).Value.FirstOrDefault();
+                        MicrosoftDynamicsCRMadoxioHoursofservice patchHoursEntity = new MicrosoftDynamicsCRMadoxioHoursofservice()
+                        {
+                            AdoxioSundayclose = (int?)item.ServiceHoursSundayClose,
+                            AdoxioSundayopen = (int?)item.ServiceHoursSundayOpen,
+                            AdoxioMondayclose = (int?)item.ServiceHoursMondayClose,
+                            AdoxioMondayopen = (int?)item.ServiceHoursMondayOpen,
+                            AdoxioTuesdayclose = (int?)item.ServiceHoursTuesdayClose,
+                            AdoxioTuesdayopen = (int?)item.ServiceHoursTuesdayOpen,
+                            AdoxioWednesdayclose = (int?)item.ServiceHoursWednesdayClose,
+                            AdoxioWednesdayopen = (int?)item.ServiceHoursWednesdayOpen,
+                            AdoxioThursdayclose = (int?)item.ServiceHoursThursdayClose,
+                            AdoxioThursdayopen = (int?)item.ServiceHoursThursdayOpen,
+                            AdoxioFridayclose = (int?)item.ServiceHoursFridayClose,
+                            AdoxioFridayopen = (int?)item.ServiceHoursFridayOpen,
+                            AdoxioSaturdayclose = (int?)item.ServiceHoursSaturdayClose,
+                            AdoxioSaturdayopen = (int?)item.ServiceHoursSaturdayOpen
+                        };
+
+                        if (hoursEntity != null)
+                        {
+                            _dynamicsClient.Hoursofservices.Update(hoursEntity.AdoxioHoursofserviceid, patchHoursEntity);
+                        }
+                        else
+                        {
+                            // Create hours of service
+                            string applicationUri = _dynamicsClient.GetEntityURI("adoxio_applications", id);
+                            patchHoursEntity.ApplicationODataBind = applicationUri;
+                            var serviceHours = _dynamicsClient.Hoursofservices.Create(patchHoursEntity);
+
+                        }
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error updating/creating application hours of service");
+                        throw;
+                    }
+                }
 
                 _dynamicsClient.Applications.Update(id, adoxioApplication);
             }

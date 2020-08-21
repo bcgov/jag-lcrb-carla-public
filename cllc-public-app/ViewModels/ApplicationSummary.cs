@@ -22,6 +22,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string Portallabel { get; set; }
 
         public bool LGHasApproved { get; set; }
+        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public GeneralYesNo? IsApplicationComplete { get; set; }
 
         public List<string> Endorsements { get; set; }
         public string EstablishmentAddress { get; set; }

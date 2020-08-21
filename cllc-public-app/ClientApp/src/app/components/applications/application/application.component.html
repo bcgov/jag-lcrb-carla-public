@@ -1825,7 +1825,7 @@
                                     && !lGHasApproved()
                                     && !lGHasRejected()
                                     && application?.applicationStatus === 'Intake'"
-          class=" btn btn-primary" [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval();">
+          class=" btn btn-primary ng-test-submit-for-lg-review" [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval();">
           <span><i class="fa fa-university mr-1"></i>SUBMIT FOR LG/IN REVIEW OR COMMENT</span>
           <mat-progress-bar *ngIf="disableSubmitForLGINApproval" mode="indeterminate"></mat-progress-bar>
         </button>
