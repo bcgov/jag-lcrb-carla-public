@@ -30,9 +30,8 @@ Scenario: Payments for CRS and Catering Applications
     And I enter the payment information
     And I return to the dashboard
     And I click on the Start Application button for Catering
-    And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
+    And I click on the button for Continue to Organization Review
+    And I click on the button for Confirm Organization Information is Complete
     And I complete the Catering application
     And I click on the Submit button
     And I click on the button for Pay for Application
