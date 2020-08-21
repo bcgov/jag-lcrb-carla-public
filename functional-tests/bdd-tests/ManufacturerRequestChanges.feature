@@ -162,7 +162,7 @@ Scenario: Winery Structural Alterations to an Approved Lounge or Special Events 
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And I request a structural alterations to an approved lounge or special events area
+    And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page
 
@@ -326,7 +326,7 @@ Scenario: Brewery Structural Alterations to an Approved Lounge or Special Events
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And I request a structural alterations to an approved lounge or special events area
+    And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page
 
@@ -490,7 +490,7 @@ Scenario: Distillery Structural Alterations to an Approved Lounge or Special Eve
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And I request a structural alterations to an approved lounge or special events area
+    And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page
 
@@ -654,7 +654,7 @@ Scenario: Co-packer Structural Alterations to an Approved Lounge or Special Even
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And I request a structural alterations to an approved lounge or special events area
+    And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page
 
