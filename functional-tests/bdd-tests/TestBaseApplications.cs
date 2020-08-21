@@ -3498,9 +3498,7 @@ namespace bdd_tests
 
             ClickOnSubmitButton();
 
-            System.Threading.Thread.Sleep(2000);
-
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'PENDING EXTERNAL REVIEW')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Pending External Review ')]")).Displayed);
         }
 
 
