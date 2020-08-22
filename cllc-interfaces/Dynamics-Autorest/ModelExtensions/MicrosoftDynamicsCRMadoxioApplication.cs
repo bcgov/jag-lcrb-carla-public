@@ -58,6 +58,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_PoliceJurisdictionId@odata.bind")]
         public string AdoxioPoliceJurisdictionIdODataBind { get; set; }
 
+        [JsonProperty(PropertyName = "adoxio_IsHasPatio")]
+        public bool? AdoxioIsHasPatio { get; set; }
 
         //[JsonProperty(PropertyName = "adoxio_patioliquorcarrieddescription")]
         //public string AdoxioPatioisliquorcarrieddescription { get; set; }
