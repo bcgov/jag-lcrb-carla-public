@@ -603,6 +603,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? ZoningStatus { get; set; }
         public bool? IsOwnerBusiness { get; set; }      
         public bool? HasValidInterest { get; set; }
+        public bool? IsHasPatio { get; set; }
         public bool? WillHaveValidInterest { get; set; }
         //public YesNoNotApplicable? InGroceryStore { get; set; }
 

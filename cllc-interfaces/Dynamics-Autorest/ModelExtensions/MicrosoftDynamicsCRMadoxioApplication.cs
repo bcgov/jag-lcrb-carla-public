@@ -53,13 +53,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioLocalgovindigenousnationidODataBind { get; set; }
 
         [JsonProperty(PropertyName = "adoxio_LicenceEstablishment@odata.bind")]
-        public string AdoxioLicenceEstablishmentODataBind { get; set; }
+        public string AdoxioLicenceEstablishmentODataBind { get; set; } 
 
         [JsonProperty(PropertyName = "adoxio_PoliceJurisdictionId@odata.bind")]
         public string AdoxioPoliceJurisdictionIdODataBind { get; set; }
-
-        [JsonProperty(PropertyName = "adoxio_IsHasPatio")]
-        public bool? AdoxioIsHasPatio { get; set; }
 
         //[JsonProperty(PropertyName = "adoxio_patioliquorcarrieddescription")]
         //public string AdoxioPatioisliquorcarrieddescription { get; set; }

@@ -202,6 +202,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       isAlr: ['', []],
       isOwner: ['', []],
       isOwnerBusiness: ['', []],
+      isHasPatio: ['', []],
       hasValidInterest: ['', []],
       willhaveValidInterest: ['', []],
       meetsALRRequirements: ['', []],
@@ -417,6 +418,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
     //add guard
     if (!(this.application && this.application.applicationType)) {
       return;
+    }
+
+    if (this.application.applicationType.name !== ApplicationTypeNames.SpecialEventsAreasEndorsement
+        && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) {
+      this.form.get('isHasPatio').disable();
     }
 
     if (!this.application.applicationType.showPropertyDetails) {
@@ -1082,6 +1088,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showFormControl(state: string): boolean {
     return [FormControlState.Show.toString(), FormControlState.ReadOnly.toString()]
       .indexOf(state) !== -1;
+  }
+
+  isFormControlDisabled(fieldName: string): boolean {
+    console.log(this.form.controls[fieldName].disabled)
+    return this.form.controls[fieldName].disabled;
   }
 
   getEstablishmentLabel(applicationTypeName: ApplicationTypeNames): string {
