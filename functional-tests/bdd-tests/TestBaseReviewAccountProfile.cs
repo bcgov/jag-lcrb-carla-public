@@ -119,7 +119,7 @@ namespace bdd_tests
             NgWebElement uiBizEmail = ngDriver.FindElement(By.CssSelector("input[formControlName='contactEmail']"));
             uiBizEmail.SendKeys(bizEmail);
 
-            if ((businessType == "n indigenous nation"))
+            if ((businessType == "n indigenous nation") || (businessType == " local government"))
             {
                 string liquorPolicyLink = "https://www.liquorpolicy.org";
 
