@@ -281,5 +281,19 @@ namespace bdd_tests
             // navigate back to Licenses tab
             ngDriver.Navigate().GoToUrl($"{baseUri}licences");
         }
+
+
+        [And(@"I show the store as open on the map")]
+        public void ShowStoreOpenOnMap()
+        {
+            /* 
+            Page Title: Licences
+            Subtitle:   Cannabis Retail Store Licences
+            */
+
+            // click on the Show Store as Open on Map checkbox
+            NgWebElement uiMapCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox"));
+            uiMapCheckbox.Click();
+        }
     }
 }
