@@ -124,7 +124,7 @@ namespace bdd_tests
                 uiPayButton.Click();
             }
 
-            if (specificButton == "Pay for Application for an indigenous nation")
+            if ((specificButton == "Pay for Application for an indigenous nation") || (specificButton == "Pay for Application for a local government"))
             {
                 // click on the Pay for Application button
                 NgWebElement uiPayButton = ngDriver.FindElement(By.CssSelector(".justify-content-between button.btn-primary"));
