@@ -93,7 +93,7 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);
                 }
 
-                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " facility structural change application") || (applicationType == " location change application") || (applicationType == "n indigenous nation Cannabis application"))
+                if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " facility structural change application") || (applicationType == " location change application") || (applicationType == "n indigenous nation Cannabis application") || (applicationType == "n on-site store endorsement"))
                 {
                     // check missing site plan document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
@@ -223,6 +223,45 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 13')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 14')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 15')]")).Displayed);
+                }
+
+                if (applicationType == " structural alterations request")
+                {
+                    // check that missing capacity error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'capacityArea.capacity is not valid')]")).Displayed);
+
+                    // check missing floor plan document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
+                }
+
+                if ((applicationType == " special event area endorsement") || (applicationType == " lounge area endorsement"))
+                {
+                    // check that service hours error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'serviceHoursWednesdayOpen is not valid')]")).Displayed);
+
+                    // check missing site plan document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
+
+                    // check missing floor plan document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
+
+                    // check that missing hours of sale error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Hours of sale are required')]")).Displayed);
+                }
+
+                if (applicationType == " third party operator")
+                {
+                    // check that the third party operator error is shown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select the business name to be a third party operator of your licence')]")).Displayed);
+                }
+
+                if (applicationType == " picnic area endorsement")
+                {
+                    // check that missing capacity error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'capacityArea.capacity is not valid')]")).Displayed);
+
+                    // check missing site plan document error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
                 }
             }
         }
