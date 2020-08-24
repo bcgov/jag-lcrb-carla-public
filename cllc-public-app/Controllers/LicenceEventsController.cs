@@ -15,6 +15,7 @@ using Microsoft.Rest;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Gov.Lclb.Cllb.Public.Extensions;
 using System.Linq;
+using System.Globalization;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -355,11 +356,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             string eventTimings = "";
+            TimeZoneInfo hwZone;
+            try
+            {
+                hwZone = TimeZoneInfo.FindSystemTimeZoneById("America/Vancouver");
+            }
+            catch (System.TimeZoneNotFoundException)
+            {
+                hwZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+            }
+
             foreach (var schedule in licenceEventVM.Schedules)
             {
+                string startTime = (schedule.EventStartDateTime.HasValue) ? TimeZoneInfo.ConvertTimeFromUtc(schedule.EventStartDateTime.Value.DateTime, hwZone).ToString("h:mm tt") : "";
+                string endTime = (schedule.EventEndDateTime.HasValue) ? TimeZoneInfo.ConvertTimeFromUtc(schedule.EventEndDateTime.Value.DateTime, hwZone).ToString("h:mm tt") : "";
+                string liquorStartTime = (schedule.ServiceStartDateTime.HasValue) ? TimeZoneInfo.ConvertTimeFromUtc(schedule.ServiceStartDateTime.Value.DateTime, hwZone).ToString("h:mm tt") : "";
+                string liquorEndTime = (schedule.ServiceEndDateTime.HasValue) ? TimeZoneInfo.ConvertTimeFromUtc(schedule.ServiceEndDateTime.Value.DateTime, hwZone).ToString("h:mm tt") : "";
                 eventTimings += $@"<tr class='hide-border'>
-                        <td style='width: 50%; text-align: left;'>{schedule.EventStartDateTime?.ToString("MMMM dd, yyyy")} - Event Hours: {schedule.EventStartDateTime?.ToString("h:mm tt")} to {schedule.EventEndDateTime?.ToString("h:mm tt")}</td>
-                        <td style='width: 50%; text-align: left;'>Service Hours: {schedule.ServiceStartDateTime?.ToString("h:mm tt")} to {schedule.ServiceEndDateTime?.ToString("h:mm tt")}</td>
+                        <td style='width: 50%; text-align: left;'>{schedule.EventStartDateTime?.ToString("MMMM dd, yyyy")} - Event Hours: {startTime} to {endTime}</td>
+                        <td style='width: 50%; text-align: left;'>Service Hours: {liquorStartTime} to {liquorEndTime}</td>
                     </tr>";
             }
             Dictionary<string, string> parameters;
