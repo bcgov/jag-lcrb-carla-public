@@ -482,7 +482,7 @@
             </section>
 
             <!-- Dynamic form details-->
-            <section *ngIf="application?.applicationType?.formReference && dynamicsForm?.tabs">
+            <section *ngIf="showDynamicForm(application?.applicationType?.formReference, dynamicsForm?.tabs)">
               <h3 class="blue-header">Application Details</h3>
               <!-- for each formTab on the linked form-->
               <div *ngFor="let formTab of dynamicsForm.tabs" class='content'>
