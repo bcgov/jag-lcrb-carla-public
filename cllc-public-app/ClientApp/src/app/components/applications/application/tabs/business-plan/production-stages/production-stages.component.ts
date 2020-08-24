@@ -58,7 +58,10 @@ export class ProductionStagesComponent implements OnInit {
           }
         }, this);
       }
-
+      // Fermenting is always selected, and is read only.
+      if (value.name === 'Fermenting') {
+        found = true;
+      }
       value.checked = found;
     }, this);
 

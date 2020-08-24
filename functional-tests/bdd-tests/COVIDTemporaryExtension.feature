@@ -41,4 +41,4 @@ Scenario: Validate COVID Temp Extension Application
     And I click on the COVID Temporary Extension link
     And I do not complete the temporary extension application
     And I click on the Submit button
-    Then the required field messages are displayed
+    Then the COVID validation messages are displayed
