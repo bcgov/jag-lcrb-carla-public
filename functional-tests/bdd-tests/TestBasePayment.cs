@@ -15,6 +15,8 @@ using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Runtime.CompilerServices;
+using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
 
 namespace bdd_tests
 {
@@ -59,10 +61,17 @@ namespace bdd_tests
             Page Title: Licences
             */
 
-            // find the licence ID - TODO
-            NgWebElement uiLicenceID = ngDriver.FindElement(By.XPath("//a/span"));
-
+            string addLicenseeRepresentative = "Add Licensee Representative";
             string firstYearLicenceFee = "Pay First Year Licensing Fee";
+            
+            // find the Add Licensee Representative link
+            NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(addLicenseeRepresentative));
+            string URL = uiLicenceID.GetAttribute("href");
+
+            // retrieve the licence ID
+            string[] parsedURL = URL.Split('/');
+
+            licenceID = parsedURL[5];
 
             // click on the pay first year licence fee link
             NgWebElement uiFirstYearLicenceFee = ngDriver.FindElement(By.LinkText(firstYearLicenceFee));
