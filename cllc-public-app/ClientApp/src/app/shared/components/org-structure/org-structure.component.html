@@ -1,6 +1,9 @@
 <div *ngIf="node">
   <div *ngIf="node?.isRoot">
-    <h1>Detailed Organization Information</h1>
+    <h1>Detailed Organization Information <span *ngIf="isReadOnly">( Under Review )</span> </h1>
+
+    <button *ngIf="isReadOnly" class="btn btn-primary mb-2" (click)="reportAdditionalChanges.next(true)">Report Additional Changes</button>
+
     <div class=row>
       <div class="col-md-12">
 
@@ -10,8 +13,10 @@
 
             <!-- For all corporations -->
             <section *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
-              <p>All licensees and applicants must maintain a complete and current list of leadership and businesses associated with their organization.</p>
-              <p>You are required to notify the LCRB of any changes to your organization’s structure within ten business days of the change being made. These changes include:</p>
+              <p>All licensees and applicants must maintain a complete and current list of leadership and businesses
+                associated with their organization.</p>
+              <p>You are required to notify the LCRB of any changes to your organization’s structure within ten business
+                days of the change being made. These changes include:</p>
               <ul>
                 <li>Change of directors, officers, or senior managers</li>
                 <li>Name changes</li>
@@ -19,40 +24,50 @@
                 <li *ngIf="node?.businessType === 'PrivateCorporation'">Internal transfer of shares</li>
                 <li *ngIf="node?.businessType === 'PrivateCorporation'">External transfer of shares</li>
               </ul>
-              <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences dashboard.</p>
+              <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences
+                dashboard.</p>
             </section>
 
             <!-- For Partnerships -->
             <section *ngIf="node?.businessType === 'Partnership'">
-              <p>All licensees and applicants must maintain a complete and current list of individual and businesses partners associated with their organization.</p>
-              <p>You are required to notify the LCRB of any changes to your organization’s structure within ten business days of the change being made. These changes include:</p>
+              <p>All licensees and applicants must maintain a complete and current list of individual and businesses
+                partners associated with their organization.</p>
+              <p>You are required to notify the LCRB of any changes to your organization’s structure within ten business
+                days of the change being made. These changes include:</p>
               <ul>
                 <li>Change of partners</li>
                 <li>Name changes</li>
                 <li>Internal transfer of shares for partner businesses</li>
                 <li>External transfer of shares for partner businesses</li>
               </ul>
-              <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences dashboard.</p>
+              <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences
+                dashboard.</p>
             </section>
 
             <!-- For Sole Proprietors -->
             <section *ngIf="node?.businessType === 'SoleProprietorship'">
               <p>Sole Proprietors must provide their leadership information and keep it up to date.</p>
-              <p>You are required to notify the LCRB of name changes within ten business days of the change being made.</p>
-              <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences dashboard.</p>
+              <p>You are required to notify the LCRB of name changes within ten business days of the change being made.
+              </p>
+              <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences
+                dashboard.</p>
             </section>
 
             <!-- For Societies, Universities and Churches-->
             <section *ngIf="['Society', 'University', 'Church'].indexOf(node?.businessType) !== -1">
-              <p>{{node?.businessType}} applicants and licensees must provide their leadership information and keep it up to date.</p>
-              <p>You are required to notify the LCRB of name changes within ten business days of the change being made.</p>
-              <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences dashboard.</p>
+              <p>{{node?.businessType}} applicants and licensees must provide their leadership information and keep it
+                up to date.</p>
+              <p>You are required to notify the LCRB of name changes within ten business days of the change being made.
+              </p>
+              <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences
+                dashboard.</p>
             </section>
 
             <!-- For Indigenous Nations -->
             <section *ngIf="node?.businessType === 'IndigenousNation'">
               <p>
-                An applicant that is an <i>Indigenous Nation</i> may have associates that are required to consent to security
+                An applicant that is an <i>Indigenous Nation</i> may have associates that are required to consent to
+                security
                 screening
                 and financial integrity assessments as part of the application for a non-medical cannabis retail store
                 licence.
@@ -73,7 +88,8 @@
               <p>
                 Applicants should direct associates to the
                 <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-                   target="_blank" rel="noopener noreferrer">LCRB non-medical cannabis webpage</a> to download required forms and instructions
+                  target="_blank" rel="noopener noreferrer">LCRB non-medical cannabis webpage</a> to download required
+                forms and instructions
                 for submitting documentation.
               </p>
 
@@ -85,14 +101,16 @@
                 integrity
                 form. It is the applicant's responsibility to direct all associates to the
                 <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-                   target="_blank" rel="noopener noreferrer">link provided</a>.
+                  target="_blank" rel="noopener noreferrer">link provided</a>.
               </p>
               <p>
-                Associates for Indigenous Nations applications include all persons who are authorized to act on behalf of the
+                Associates for Indigenous Nations applications include all persons who are authorized to act on behalf
+                of the
                 nation.
               </p>
               <p>
-                If you require more information please email <a href="mailto:lcrbcannabis@gov.bc.ca?Subject=Indigenous Nations">lcrbcannabis@gov.bc.ca</a>.
+                If you require more information please email <a
+                  href="mailto:lcrbcannabis@gov.bc.ca?Subject=Indigenous Nations">lcrbcannabis@gov.bc.ca</a>.
               </p>
 
               <p>
@@ -104,10 +122,16 @@
             </section>
 
             <section *ngIf="node?.businessType !=='IndigenousNation'">
-              <p>Fees are calculated based on the type of change reported and the number of licences impacted. If no changes are made, or no licences are held, you will not be charged a fee for submitting this information.</p>
+              <p>Fees are calculated based on the type of change reported and the number of licences impacted. If no
+                changes are made, or no licences are held, you will not be charged a fee for submitting this
+                information.</p>
               <ul>
-                <li>Applicable fees for cannabis licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1" target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.</li>
-                <li>Applicable fees for liquor licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1" target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
+                <li>Applicable fees for cannabis licensees are listed in <a
+                    href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1"
+                    target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.</li>
+                <li>Applicable fees for liquor licensees are listed in <a
+                    href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
+                    target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
               </ul>
             </section>
 
@@ -137,10 +161,9 @@
           <p>Please upload the {{node?.businessNameNew}} Corporation Notice of Articles.</p>
           <section>
             <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} NOA"
-                               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
-                               [useDocumentTypeForName]="true"
-                               (numberOfUploadedFiles)="updateNumberOfFiles($event, 'NOA')"
-                               [entityId]="account?.id" [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILE HERE OR'">
+              fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+              [useDocumentTypeForName]="true" (numberOfUploadedFiles)="updateNumberOfFiles($event, 'NOA')"
+              [entityId]="account?.id" [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILE HERE OR'">
             </app-file-uploader>
           </section>
         </section>
@@ -154,23 +177,24 @@
         <section class="padded-section">
           <p>Please upload the {{node?.businessNameNew}} Central Securities Register.</p>
           <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} SECREG"
-                             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
-                             (numberOfUploadedFiles)="updateNumberOfFiles($event, 'SECREG')"
-                             [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
-                             [entityId]="account?.id" [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILE HERE OR'">
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+            (numberOfUploadedFiles)="updateNumberOfFiles($event, 'SECREG')" [useDocumentTypeForName]="true"
+            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
+            [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILE HERE OR'">
           </app-file-uploader>
         </section>
 
         <h4 class="plain-header">Special Rights and Restrictions</h4>
         <section class="padded-section">
           <p>
-            If the Notice of Articles does not specify the voting rights of the company’s shares, please upload the company’s Special Rights and Restrictions.
+            If the Notice of Articles does not specify the voting rights of the company’s shares, please upload the
+            company’s Special Rights and Restrictions.
           </p>
           <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} SRANDR"
-                             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
-                             (numberOfUploadedFiles)="updateNumberOfFiles($event, 'SRANDR')"
-                             [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
-                             [entityId]="account?.id" [uploadHeader]="'TO UPLOAD SPECIAL RIGHTS AND RESTRICTIONS, DRAG FILE HERE OR'">
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+            (numberOfUploadedFiles)="updateNumberOfFiles($event, 'SRANDR')" [useDocumentTypeForName]="true"
+            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
+            [uploadHeader]="'TO UPLOAD SPECIAL RIGHTS AND RESTRICTIONS, DRAG FILE HERE OR'">
           </app-file-uploader>
         </section>
 
@@ -194,11 +218,10 @@
         <section class="padded-section">
           <p>Associate forms for {{node?.businessNameNew}}.</p>
           <app-file-uploader *ngIf="account?.id"
-                             documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} Associate Forms"
-                             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="account"
-                             (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Associate Forms')"
-                             [useDocumentTypeForName]="true"
-                             [entityId]="account?.id" [uploadHeader]="'TO UPLOAD ASSOCIATE FORMS, DRAG FILE HERE OR'">
+            documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} Associate Forms"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="account"
+            (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Associate Forms')" [useDocumentTypeForName]="true"
+            [entityId]="account?.id" [uploadHeader]="'TO UPLOAD ASSOCIATE FORMS, DRAG FILE HERE OR'">
           </app-file-uploader>
         </section>
       </div>
@@ -213,11 +236,11 @@
         <section class="padded-section">
           <p>Partnership Agreement for {{node?.businessNameNew}}.</p>
           <app-file-uploader *ngIf="account?.id"
-                             documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} Partnership Agreement"
-                             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
-                             (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Partnership Agreement')"
-                             [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
-                             [entityId]="account?.id" [uploadHeader]="'TO UPLOAD SPECIAL PARTNERSHIP AGREEMENT, DRAG FILE HERE OR'">
+            documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} Partnership Agreement"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+            (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Partnership Agreement')"
+            [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
+            [entityId]="account?.id" [uploadHeader]="'TO UPLOAD SPECIAL PARTNERSHIP AGREEMENT, DRAG FILE HERE OR'">
           </app-file-uploader>
         </section>
       </div>
@@ -231,11 +254,10 @@
         <section class="padded-section">
           <p>Official operating documents for {{node?.businessNameNew}} that support your organization structure.</p>
           <app-file-uploader *ngIf="account?.id"
-                             documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} Official Documents"
-                             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
-                             (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Official Documents')"
-                             [useDocumentTypeForName]="true"
-                             [entityId]="account?.id" [uploadHeader]="'TO UPLOAD OFFICIAL DOCUMENTS, DRAG FILE HERE OR'">
+            documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} Official Documents"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+            (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Official Documents')" [useDocumentTypeForName]="true"
+            [entityId]="account?.id" [uploadHeader]="'TO UPLOAD OFFICIAL DOCUMENTS, DRAG FILE HERE OR'">
           </app-file-uploader>
         </section>
       </div>
@@ -247,11 +269,12 @@
       <div class="content-bottom">
         <section class="padded-section">
           <app-field label="Annual Membership Fee" errorMessage="Please enter value"
-                     [valid]="!form.get('annualMembershipFee').touched || form.get('annualMembershipFee').touched">
-            <input type="text" formControlName="annualMembershipFee" class="form-control" prefix="$" thousandSeparator="," mask="separator">
+            [valid]="!form.get('annualMembershipFee').touched || form.get('annualMembershipFee').touched">
+            <input type="text" formControlName="annualMembershipFee" class="form-control" prefix="$"
+              thousandSeparator="," mask="separator">
           </app-field>
           <app-field label="Number of Members" errorMessage="Please enter value"
-                     [valid]="!form.get('numberOfMembers').touched || form.get('numberOfMembers').touched">
+            [valid]="!form.get('numberOfMembers').touched || form.get('numberOfMembers').touched">
             <input type="number" formControlName="numberOfMembers" re class="form-control">
           </app-field>
         </section>
@@ -261,33 +284,35 @@
     <ng-container [formGroup]="form" *ngIf="node?.isRoot">
       <h3 class="blue-header">Additional Supporting Documents</h3>
       <div class="content-bottom">
-      <section class="padded-section">
-        <p>
-          If requested by LCRB, please upload additional supporting documents here.
-        </p>
-        <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} ADDT"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="account"
-          (numberOfUploadedFiles)="updateNumberOfFiles($event, 'ADDT')" [useDocumentTypeForName]="false"
-          [entityId]="account?.id" [uploadHeader]="'TO UPLOAD ADDITIONAL SUPPORTING DOCUMENTS, DRAG FILE HERE OR'">
-        </app-file-uploader>
-      </section>
-    </div>
+        <section class="padded-section">
+          <p>
+            If requested by LCRB, please upload additional supporting documents here.
+          </p>
+          <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} ADDT"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="account"
+            (numberOfUploadedFiles)="updateNumberOfFiles($event, 'ADDT')" [useDocumentTypeForName]="false"
+            [entityId]="account?.id" [uploadHeader]="'TO UPLOAD ADDITIONAL SUPPORTING DOCUMENTS, DRAG FILE HERE OR'">
+          </app-file-uploader>
+        </section>
+      </div>
     </ng-container>
 
     <ng-container *ngIf="node?.businessType === 'SoleProprietorship'">
       <h3 class="blue-header">Provide Ownership Information</h3>
       <div class="content-bottom">
         <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
-                            [account]="account" (personalHistoryItemsChange)="updateChildren($event, 'Leadership')"  [licencesOnFile]="licencesOnFile"
-                            changeTypeSuffix="Leadership" addLabel="Add Leader" #associateList>
+          [isReadOnly]="isReadOnly" [account]="account"
+          (personalHistoryItemsChange)="updateChildren($event, 'Leadership')" [licencesOnFile]="licencesOnFile"
+          changeTypeSuffix="Leadership" addLabel="Add Leader" #associateList>
         </app-associate-list>
       </div>
     </ng-container>
 
     <ng-container *ngIf="node?.businessType === 'Trust'">
-      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"  [licencesOnFile]="licencesOnFile"
-                          [account]="account" (personalHistoryItemsChange)="updateChildren($event, 'Leadership')"
-                          changeTypeSuffix="Leadership" addLabel="Add Trustee" #associateList>
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
+        [licencesOnFile]="licencesOnFile" [account]="account"
+        (personalHistoryItemsChange)="updateChildren($event, 'Leadership')" [isReadOnly]="isReadOnly"
+        changeTypeSuffix="Leadership" addLabel="Add Trustee" #associateList>
       </app-associate-list>
     </ng-container>
 
@@ -300,7 +325,8 @@
       <div class="content-bottom">
         <section class="padded-section">
           <p>
-            Please add the complete list of directors, officers and senior managers (if applicable) for {{node?.businessNameNew}}, including
+            Please add the complete list of directors, officers and senior managers (if applicable) for
+            {{node?.businessNameNew}}, including
             their
             full legal name, date of birth and email address. They will be reviewed by the LCRB against your Notice of
             Articles.
@@ -309,8 +335,9 @@
             related information.
           </p>
           <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
-                              [account]="account" (personalHistoryItemsChange)="updateChildren($event, 'Leadership')" [licencesOnFile]="licencesOnFile"
-                              changeTypeSuffix="Leadership" addLabel="Add Leadership" #associateList></app-associate-list>
+            [isReadOnly]="isReadOnly" [account]="account"
+            (personalHistoryItemsChange)="updateChildren($event, 'Leadership')" [licencesOnFile]="licencesOnFile"
+            changeTypeSuffix="Leadership" addLabel="Add Leadership" #associateList></app-associate-list>
         </section>
       </div>
     </ng-container>
@@ -321,13 +348,15 @@
         <section class="padded-section">
           <p>
             Please add the complete list of directors and officers for {{node?.businessNameNew}}, including their
-            full legal name, date of birth and email address. In order to complete an application for a liquor or cannabis
+            full legal name, date of birth and email address. In order to complete an application for a liquor or
+            cannabis
             licence, they will each be
             required to provide security screening related information.
           </p>
-          <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [licencesOnFile]="licencesOnFile"
-                              (personalHistoryItemsChange)="updateChildren($event, 'Leadership')" [rootNode]="node" [account]="account"
-                              changeTypeSuffix="Leadership" addLabel="Add Director or Officer" #associateList></app-associate-list>
+          <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"
+            [licencesOnFile]="licencesOnFile" (personalHistoryItemsChange)="updateChildren($event, 'Leadership')"
+            [rootNode]="node" [account]="account" [isReadOnly]="isReadOnly" changeTypeSuffix="Leadership"
+            addLabel="Add Director or Officer" #associateList></app-associate-list>
         </section>
       </div>
     </ng-container>
@@ -339,15 +368,18 @@
         <section class="padded-section">
           <p>
             Please add the complete list of partners for {{node?.businessNameNew}}, including their
-            full legal name, date of birth, email address and percentage of ownership. They will be checked by LCRB against
+            full legal name, date of birth, email address and percentage of ownership. They will be checked by LCRB
+            against
             the partnership agreement provided.
             In order to complete an application for a liquor or cannabis licence, they will each be required to provide
             security screening
             related information.
           </p>
-          <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren" [licencesOnFile]="licencesOnFile"
-                              (personalHistoryItemsChange)="updateChildren( $event, 'IndividualShareholder')" [rootNode]="node" [account]="account"
-                              changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Partner" #associateList></app-associate-list>
+          <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"
+            [licencesOnFile]="licencesOnFile"
+            (personalHistoryItemsChange)="updateChildren( $event, 'IndividualShareholder')" [rootNode]="node"
+            [account]="account" [isReadOnly]="isReadOnly" changeTypeSuffix="IndividualShareholder"
+            addLabel="Add Individual Partner" #associateList></app-associate-list>
         </section>
 
         <h4 class="plain-header">Business Partners</h4>
@@ -358,9 +390,9 @@
             the type of business partner, additional supporting documents will be required.
           </p>
           <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"
-                              [rootNode]="node" [account]="account" [licencesOnFile]="licencesOnFile"
-                              (personalHistoryItemsChange)="updateChildren($event, 'BusinessShareholder')"
-                              changeTypeSuffix="BusinessShareholder" addLabel="Add Business Partner" #associateList></app-associate-list>
+            [rootNode]="node" [account]="account" [licencesOnFile]="licencesOnFile" [isReadOnly]="isReadOnly"
+            (personalHistoryItemsChange)="updateChildren($event, 'BusinessShareholder')"
+            changeTypeSuffix="BusinessShareholder" addLabel="Add Business Partner" #associateList></app-associate-list>
         </section>
       </div>
     </ng-container>
@@ -377,12 +409,14 @@
         <h4 class="plain-header">Individual Shareholders</h4>
         <section class="padded-section">
           <p>
-            Please list any individual shareholders including their full legal name, date of birth, number of voting shares
+            Please list any individual shareholders including their full legal name, date of birth, number of voting
+            shares
             owned, and email address.
           </p>
           <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"
-                              (personalHistoryItemsChange)="updateChildren($event, 'IndividualShareholder')" [rootNode]="node" [licencesOnFile]="licencesOnFile"
-                              [account]="account" changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Shareholder" #associateList>
+            [isReadOnly]="isReadOnly" (personalHistoryItemsChange)="updateChildren($event, 'IndividualShareholder')"
+            [rootNode]="node" [licencesOnFile]="licencesOnFile" [account]="account"
+            changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Shareholder" #associateList>
           </app-associate-list>
         </section>
         <p>&nbsp;</p>
@@ -390,13 +424,15 @@
         <section class="padded-section">
 
           <p>
-            Please list any business shareholders (e.g. holding companies, trusts, etc.) including their name, type of legal entity, number of voting shares owned, and
+            Please list any business shareholders (e.g. holding companies, trusts, etc.) including their name, type of
+            legal entity, number of voting shares owned, and
             email address. Depending on the type of legal entity, additional supporting documents will be required.
           </p>
           <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"
-                              [rootNode]="node" [account]="account" [licencesOnFile]="licencesOnFile"
-                              (personalHistoryItemsChange)="updateChildren($event, 'BusinessShareholder')"
-                              changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder" #associateList></app-associate-list>
+            [rootNode]="node" [account]="account" [licencesOnFile]="licencesOnFile" [isReadOnly]="isReadOnly"
+            (personalHistoryItemsChange)="updateChildren($event, 'BusinessShareholder')"
+            changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder" #associateList>
+          </app-associate-list>
           <p>&nbsp;</p>
         </section>
       </div>

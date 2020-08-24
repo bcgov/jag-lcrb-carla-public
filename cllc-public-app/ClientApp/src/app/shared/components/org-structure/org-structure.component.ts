@@ -5,11 +5,15 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AssociateListComponent } from '../associate-list/associate-list.component';
 import { forkJoin, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
+import { Application } from '@models/application.model';
+import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
+import { ApplicationDataService } from '@services/application-data.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-org-structure',
   templateUrl: './org-structure.component.html',
-  styleUrls: [ './org-structure.component.scss' ]
+  styleUrls: ['./org-structure.component.scss']
 })
 export class OrgStructureComponent implements OnInit {
   private _node: LicenseeChangeLog;
@@ -26,14 +30,18 @@ export class OrgStructureComponent implements OnInit {
 
   @Input() account: Account;
   @Input() licencesOnFile: boolean;
+  @Input() isReadOnly: boolean;
   @Output() deletedChanges: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();
+  @Output()   reportAdditionalChanges  : EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @ViewChildren('associateList') associateList: QueryList<AssociateListComponent>;
 
   Account = Account;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private  snackBar: MatSnackBar,
+    private applicationDataService: ApplicationDataService) { }
 
   ngOnInit() {
     let numberOfMembers: number = null;
@@ -60,7 +68,7 @@ export class OrgStructureComponent implements OnInit {
           this.node.annualMembershipFee = value.annualMembershipFee;
           this.node.totalSharesNew = value.totalShares;
         }
-      });   
+      });
   }
 
   asLicenseeChangeLog(val): LicenseeChangeLog { return val; }
@@ -73,13 +81,13 @@ export class OrgStructureComponent implements OnInit {
   }
 
   updateChildren(children: LicenseeChangeLog[], changeType: string) {
-   
+
     children = children || [];
     this.node.children = this.node.children || [];
-    if (changeType === 'Leadership') {      
-        this.node.children = [...children,
-        ...this.node.individualShareholderChildren,
-        ...this.node.businessShareholderChildren];          
+    if (changeType === 'Leadership') {
+      this.node.children = [...children,
+      ...this.node.individualShareholderChildren,
+      ...this.node.businessShareholderChildren];
     } else if (changeType === 'IndividualShareholder') {
       this.node.children = [...children,
       ...this.node.keyPersonnelChildren,
@@ -91,30 +99,29 @@ export class OrgStructureComponent implements OnInit {
       ...this.node.keyPersonnelChildren
       ];
     }
-    
+
   }
 
+/**
+* saves all open associate list items
+* returns an Observable<boolean>. False means there is validation errors
+*/
+saveAll() {
+  const saveResults = [];
 
-    /**
-   * saves all open associate list items
-   * returns an Observable<boolean>. False means there is validation errors
-   */
-  saveAll() {
-    const saveResults = [];
+  // save all open associate list
+  this.associateList.forEach(org => {
+    saveResults.push(org.saveAll());
+  });
 
-    // save all open associate list
-    this.associateList.forEach(org => {
-      saveResults.push(org.saveAll());
-    });
-
-    if (saveResults.length > 0) {
-      return forkJoin(...saveResults)
-        .pipe(mergeMap(results => {
-          return of(results.indexOf(false) === -1);
-        }));
-    } else {
-      // return true if there is nothing to save
-      return of(true);
-    }
+  if (saveResults.length > 0) {
+    return forkJoin(...saveResults)
+      .pipe(mergeMap(results => {
+        return of(results.indexOf(false) === -1);
+      }));
+  } else {
+    // return true if there is nothing to save
+    return of(true);
   }
+}
 }
