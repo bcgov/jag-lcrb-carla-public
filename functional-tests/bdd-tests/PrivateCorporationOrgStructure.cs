@@ -156,7 +156,7 @@ Scenario: CRS application with mixed business shareholder types
     And I add in business shareholders of different business types
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a private corporation
-    And I review the mixed business shareholder types security screening requirements
+    And I review the security screening requirements for mixed business shareholders
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
@@ -176,7 +176,7 @@ Scenario: Complex Save for Later mixed business shareholders
     And I enter business shareholders of different business types to be saved for later
     And I click on the button for Save for Later
     And I click on the Complete Organization Information button
-    And the saved for later mixed business shareholder org structure is correct
+    And I review the security screening requirements for saved for later mixed business shareholder
     And the account is deleted
     Then I see the login page
 
