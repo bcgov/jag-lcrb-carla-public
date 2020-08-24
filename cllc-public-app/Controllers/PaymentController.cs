@@ -300,6 +300,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             bool isAlternateAccount = application.IsLiquor(_dynamicsClient); // determine if it is for liquor
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, id, isAlternateAccount);
+
+            if (response.ContainsKey ("error"))
+            {
+                // handle error.
+                _logger.LogError($"PAYMENT VERIFICATION ERROR - {response["message"]} for application {id}");
+                return StatusCode(503); // client will retry.
+            }
+
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)
@@ -440,6 +448,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             bool isAlternateAccount = application.IsLiquor(_dynamicsClient); // set to true for Liquor.
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, id, isAlternateAccount);
+
+            if (response.ContainsKey("error"))
+            {
+                // handle error.
+                _logger.LogError($"PAYMENT VERIFICATION ERROR - {response["message"]} for application {id}");
+                return StatusCode(503); // client will retry.
+            }
+
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)
@@ -783,6 +799,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             bool isAlternateAccount = false;  // in this case it is always false, as the worker process uses the Cannabis account.
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, workerId, isAlternateAccount);
+
+            if (response.ContainsKey("error"))
+            {
+                // handle error.
+                _logger.LogError($"PAYMENT VERIFICATION ERROR - {response["message"]} for worker {workerId}");
+                return StatusCode(503); // client will retry.
+            }
+
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)

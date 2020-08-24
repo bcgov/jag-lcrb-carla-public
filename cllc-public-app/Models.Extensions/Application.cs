@@ -106,6 +106,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIsownerwillhavevalidinterest = from.WillHaveValidInterest;
             to.AdoxioZoningstatus = (int?)from.ZoningStatus;
 
+            to.AdoxioIshaspatio = from.IsHasPatio;
+
             //lg approval fields
             to.AdoxioLgnameofofficial = from.LGNameOfOfficial;
             to.AdoxioLgtitleposition = from.LGTitlePosition;
@@ -360,6 +362,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IsLocatedInGroceryStore = dynamicsApplication.AdoxioIslocatedingrocerystore,
                 Establishmentopeningdate = dynamicsApplication.AdoxioEstablishmentopeningdate,
                 IsReadyValidInterest = dynamicsApplication.AdoxioIsreadyvalidinterest,
+
+                IsHasPatio = dynamicsApplication.AdoxioIshaspatio,
 
                 // LgInName
                 LGNameOfOfficial = dynamicsApplication.AdoxioLgnameofofficial,
