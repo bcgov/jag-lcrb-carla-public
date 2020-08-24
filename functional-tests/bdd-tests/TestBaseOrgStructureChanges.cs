@@ -1029,24 +1029,6 @@ namespace bdd_tests
         }
 
 
-        [And(@"I review the mixed business shareholder types security screening requirements")]
-        public void SecurityScreeningsMixedBusinessShareholders()
-        {
-            /* 
-            Page Title: Security Screening Requirements
-            */
-
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader0')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder0')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader1')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderPubCorp')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderSoleProp')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'DirectorSociety')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TrusteeTrust')]")).Displayed);
-        }
-
-
         [And(@"the mixed business shareholder org structure is correct")]
         public void ReviewMixedBusinessShareholdersOrgStructure()
         {
@@ -1145,24 +1127,6 @@ namespace bdd_tests
             // click on the Confirm button
             NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] .fa-save span"));
             uiConfirmButton.Click();
-        }
-
-
-        [And(@"the saved for later mixed business shareholder org structure is correct")]
-        public void SaveForLaterMixedBusinessShareholdersCorrectOrgStructure()
-        {
-            /* 
-            Page Title: [client name] Detailed Organization Information
-            */
-
-            // confirm that expected personnel and businesses are present
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader0')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder0')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Business Shareholder 1')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader1')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Public Corporation')]")).Displayed);
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderPubCorp')]")).Displayed);
         }
 
 
