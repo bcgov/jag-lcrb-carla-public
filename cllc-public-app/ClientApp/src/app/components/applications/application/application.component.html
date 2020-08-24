@@ -887,9 +887,9 @@
 
               <section>
                 <app-file-uploader *ngIf="applicationId" documentType="Site Photos"
-                  fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                  fileTypes="FILE MUST BE IN PDF, JPG, JPEG OR PNG FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
                   [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
-                  entityName="application" [useDocumentTypeForName]="true"
+                  entityName="application" [useDocumentTypeForName]="true" [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
                   (numberOfUploadedFiles)="uploadedSitePhotos = $event" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD SITE PHOTOS DOCUMENTS, DRAG FILES HERE OR'">
                 </app-file-uploader>
