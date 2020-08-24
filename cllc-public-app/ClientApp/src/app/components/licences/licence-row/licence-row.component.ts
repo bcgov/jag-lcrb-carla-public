@@ -1,15 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { forkJoin, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
-import { ApplicationDataService } from '@app/services/application-data.service';
 import { LicenseDataService } from '@app/services/license-data.service';
 import { Router } from '@angular/router';
 import { ApplicationTypeNames } from '@models/application-type.model';
 import { FormBase } from '@shared/form-base';
 import { takeWhile } from 'rxjs/operators';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app-state/models/app-state';
 import * as moment from 'moment';
 import { PaymentDataService } from '@services/payment-data.service';
 import { EstablishmentDataService } from '@services/establishment-data.service';
@@ -19,7 +16,6 @@ import { LicenceEventsService } from '@services/licence-events.service';
 import { EventStatus, LicenceEvent, EventCategory } from '@models/licence-event.model';
 import { License } from '@models/license.model';
 import { TermsAndConditionsDataService } from '@services/terms-and-condtions-data.service';
-import { Endorsement } from '@models/endorsement.model';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -379,10 +375,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     }
 
     getEventName(event) {
-      if (event.name !== null) {
-        return event.name;
-      } else if (event.clientHostname !== null) {
+      if (event.clientHostname !== null) {
         return event.clientHostname;
+      } else if (event.name !== null) {
+        return event.name;
       }
       return null;
     }

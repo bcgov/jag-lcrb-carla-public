@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top140 { get; set; }
+        public int? Top160 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip140 { get; set; }
+        public int? Skip160 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count140 { get; set; }
+        public bool? Count160 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter140 { get; set; }
+        public string Filter160 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search140 { get; set; }
+        public string Search160 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -189,6 +189,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAreas.
         /// </summary>
         public virtual IAreas Areas { get; private set; }
+
+        /// <summary>
+        /// Gets the IPmuareaid.
+        /// </summary>
+        public virtual IPmuareaid Pmuareaid { get; private set; }
 
         /// <summary>
         /// Gets the IAuditlogrequests.
@@ -406,6 +411,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IHoursofservicesyncerrors Hoursofservicesyncerrors { get; private set; }
 
         /// <summary>
+        /// Gets the IInspectionid.
+        /// </summary>
+        public virtual IInspectionid Inspectionid { get; private set; }
+
+        /// <summary>
         /// Gets the ILicence.
         /// </summary>
         public virtual ILicence Licence { get; private set; }
@@ -524,6 +534,66 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IPersonalhistorysummaries.
         /// </summary>
         public virtual IPersonalhistorysummaries Personalhistorysummaries { get; private set; }
+
+        /// <summary>
+        /// Gets the IPmuareas.
+        /// </summary>
+        public virtual IPmuareas Pmuareas { get; private set; }
+
+        /// <summary>
+        /// Gets the IManufacturinginspectorid.
+        /// </summary>
+        public virtual IManufacturinginspectorid Manufacturinginspectorid { get; private set; }
+
+        /// <summary>
+        /// Gets the IPmuareaareas.
+        /// </summary>
+        public virtual IPmuareaareas Pmuareaareas { get; private set; }
+
+        /// <summary>
+        /// Gets the IPmuareaasyncoperations.
+        /// </summary>
+        public virtual IPmuareaasyncoperations Pmuareaasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IPmuareabulkdeletefailures.
+        /// </summary>
+        public virtual IPmuareabulkdeletefailures Pmuareabulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IPmuareaduplicatebaserecord.
+        /// </summary>
+        public virtual IPmuareaduplicatebaserecord Pmuareaduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IPmuareaduplicatematchingrecord.
+        /// </summary>
+        public virtual IPmuareaduplicatematchingrecord Pmuareaduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IPmuareamailboxtrackingfolders.
+        /// </summary>
+        public virtual IPmuareamailboxtrackingfolders Pmuareamailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IPmuareamarketevents.
+        /// </summary>
+        public virtual IPmuareamarketevents Pmuareamarketevents { get; private set; }
+
+        /// <summary>
+        /// Gets the IPmuareaprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IPmuareaprincipalobjectattributeaccesses Pmuareaprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IPmuareaprocesssession.
+        /// </summary>
+        public virtual IPmuareaprocesssession Pmuareaprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the IPmuareasyncerrors.
+        /// </summary>
+        public virtual IPmuareasyncerrors Pmuareasyncerrors { get; private set; }
 
         /// <summary>
         /// Gets the IPolicejurisdictions.
@@ -666,6 +736,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRegardingobjectidadoxiohoursofservice Regardingobjectidadoxiohoursofservice { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxiopmuarea.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiopmuarea Regardingobjectidadoxiopmuarea { get; private set; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioproratedlicencefeeschedule.
         /// </summary>
         public virtual IRegardingobjectidadoxioproratedlicencefeeschedule Regardingobjectidadoxioproratedlicencefeeschedule { get; private set; }
@@ -674,6 +749,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBusinessunitadoxiohoursofservice.
         /// </summary>
         public virtual IBusinessunitadoxiohoursofservice Businessunitadoxiohoursofservice { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxiopmuarea.
+        /// </summary>
+        public virtual IBusinessunitadoxiopmuarea Businessunitadoxiopmuarea { get; private set; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxioproratedlicencefeeschedule.
@@ -691,9 +771,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IBaserecordidadoxiohoursofservice Baserecordidadoxiohoursofservice { get; private set; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxiopmuarea.
+        /// </summary>
+        public virtual IBaserecordidadoxiopmuarea Baserecordidadoxiopmuarea { get; private set; }
+
+        /// <summary>
         /// Gets the IDuplicaterecordidadoxiohoursofservice.
         /// </summary>
         public virtual IDuplicaterecordidadoxiohoursofservice Duplicaterecordidadoxiohoursofservice { get; private set; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxiopmuarea.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxiopmuarea Duplicaterecordidadoxiopmuarea { get; private set; }
 
         /// <summary>
         /// Gets the IEntitydefinitions.
@@ -704,6 +794,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IGlobaloptionsetdefinitions.
         /// </summary>
         public virtual IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; private set; }
+
+        /// <summary>
+        /// Gets the IInspectionhoursofservice.
+        /// </summary>
+        public virtual IInspectionhoursofservice Inspectionhoursofservice { get; private set; }
 
         /// <summary>
         /// Gets the IInvoices.
@@ -724,6 +819,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IObjectidadoxiohoursofservice.
         /// </summary>
         public virtual IObjectidadoxiohoursofservice Objectidadoxiohoursofservice { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiopmuarea.
+        /// </summary>
+        public virtual IObjectidadoxiopmuarea Objectidadoxiopmuarea { get; private set; }
 
         /// <summary>
         /// Gets the IObjectidadoxioproratedlicencefeeschedule.
@@ -766,6 +866,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISystemusers Systemusers { get; private set; }
 
         /// <summary>
+        /// Gets the IMfginspectorpmuareas.
+        /// </summary>
+        public virtual IMfginspectorpmuareas Mfginspectorpmuareas { get; private set; }
+
+        /// <summary>
         /// Gets the ILkadoxiohoursofservicecreatedby.
         /// </summary>
         public virtual ILkadoxiohoursofservicecreatedby Lkadoxiohoursofservicecreatedby { get; private set; }
@@ -784,6 +889,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILkadoxiohoursofservicemodifiedonbehalfby.
         /// </summary>
         public virtual ILkadoxiohoursofservicemodifiedonbehalfby Lkadoxiohoursofservicemodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiopmuareacreatedby.
+        /// </summary>
+        public virtual ILkadoxiopmuareacreatedby Lkadoxiopmuareacreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiopmuareacreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiopmuareacreatedonbehalfby Lkadoxiopmuareacreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiopmuareamodifiedby.
+        /// </summary>
+        public virtual ILkadoxiopmuareamodifiedby Lkadoxiopmuareamodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiopmuareamodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiopmuareamodifiedonbehalfby Lkadoxiopmuareamodifiedonbehalfby { get; private set; }
 
         /// <summary>
         /// Gets the ILkadoxioproratedlicencefeeschedulecreatedby.
@@ -811,6 +936,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IUseradoxiohoursofservice Useradoxiohoursofservice { get; private set; }
 
         /// <summary>
+        /// Gets the IUseradoxiopmuarea.
+        /// </summary>
+        public virtual IUseradoxiopmuarea Useradoxiopmuarea { get; private set; }
+
+        /// <summary>
         /// Gets the IUseradoxioproratedlicencefeeschedule.
         /// </summary>
         public virtual IUseradoxioproratedlicencefeeschedule Useradoxioproratedlicencefeeschedule { get; private set; }
@@ -819,6 +949,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITeamadoxiohoursofservice.
         /// </summary>
         public virtual ITeamadoxiohoursofservice Teamadoxiohoursofservice { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxiopmuarea.
+        /// </summary>
+        public virtual ITeamadoxiopmuarea Teamadoxiopmuarea { get; private set; }
 
         /// <summary>
         /// Gets the ITeamadoxioproratedlicencefeeschedule.
@@ -1096,6 +1231,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype = new Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype(this);
             Fylicencefeeproduct = new Fylicencefeeproduct(this);
             Areas = new Areas(this);
+            Pmuareaid = new Pmuareaid(this);
             Auditlogrequests = new Auditlogrequests(this);
             Businessaccounts = new Businessaccounts(this);
             Cannabisinventoryreports = new Cannabisinventoryreports(this);
@@ -1139,6 +1275,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Hoursofserviceprincipalobjectattributeaccesses = new Hoursofserviceprincipalobjectattributeaccesses(this);
             Hoursofserviceprocesssession = new Hoursofserviceprocesssession(this);
             Hoursofservicesyncerrors = new Hoursofservicesyncerrors(this);
+            Inspectionid = new Inspectionid(this);
             Licence = new Licence(this);
             Incidentadoxiolicencetypeset = new Incidentadoxiolicencetypeset(this);
             Inspectioninspectorsset = new Inspectioninspectorsset(this);
@@ -1163,6 +1300,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             Localgovindigenousnations = new Localgovindigenousnations(this);
             Localgovindigenousnationactivityparties = new Localgovindigenousnationactivityparties(this);
             Personalhistorysummaries = new Personalhistorysummaries(this);
+            Pmuareas = new Pmuareas(this);
+            Manufacturinginspectorid = new Manufacturinginspectorid(this);
+            Pmuareaareas = new Pmuareaareas(this);
+            Pmuareaasyncoperations = new Pmuareaasyncoperations(this);
+            Pmuareabulkdeletefailures = new Pmuareabulkdeletefailures(this);
+            Pmuareaduplicatebaserecord = new Pmuareaduplicatebaserecord(this);
+            Pmuareaduplicatematchingrecord = new Pmuareaduplicatematchingrecord(this);
+            Pmuareamailboxtrackingfolders = new Pmuareamailboxtrackingfolders(this);
+            Pmuareamarketevents = new Pmuareamarketevents(this);
+            Pmuareaprincipalobjectattributeaccesses = new Pmuareaprincipalobjectattributeaccesses(this);
+            Pmuareaprocesssession = new Pmuareaprocesssession(this);
+            Pmuareasyncerrors = new Pmuareasyncerrors(this);
             Policejurisdictions = new Policejurisdictions(this);
             Policydocuments = new Policydocuments(this);
             Postalcodes = new Postalcodes(this);
@@ -1191,18 +1340,24 @@ namespace Gov.Lclb.Cllb.Interfaces
             Workerinvoicehistories = new Workerinvoicehistories(this);
             Workers = new Workers(this);
             Regardingobjectidadoxiohoursofservice = new Regardingobjectidadoxiohoursofservice(this);
+            Regardingobjectidadoxiopmuarea = new Regardingobjectidadoxiopmuarea(this);
             Regardingobjectidadoxioproratedlicencefeeschedule = new Regardingobjectidadoxioproratedlicencefeeschedule(this);
             Businessunitadoxiohoursofservice = new Businessunitadoxiohoursofservice(this);
+            Businessunitadoxiopmuarea = new Businessunitadoxiopmuarea(this);
             Businessunitadoxioproratedlicencefeeschedule = new Businessunitadoxioproratedlicencefeeschedule(this);
             Contacts = new Contacts(this);
             Baserecordidadoxiohoursofservice = new Baserecordidadoxiohoursofservice(this);
+            Baserecordidadoxiopmuarea = new Baserecordidadoxiopmuarea(this);
             Duplicaterecordidadoxiohoursofservice = new Duplicaterecordidadoxiohoursofservice(this);
+            Duplicaterecordidadoxiopmuarea = new Duplicaterecordidadoxiopmuarea(this);
             Entitydefinitions = new Entitydefinitions(this);
             Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
+            Inspectionhoursofservice = new Inspectionhoursofservice(this);
             Invoices = new Invoices(this);
             Leads = new Leads(this);
             Lists = new Lists(this);
             Objectidadoxiohoursofservice = new Objectidadoxiohoursofservice(this);
+            Objectidadoxiopmuarea = new Objectidadoxiopmuarea(this);
             Objectidadoxioproratedlicencefeeschedule = new Objectidadoxioproratedlicencefeeschedule(this);
             Productadoxioapplicationtypefylicencefeeproduct = new Productadoxioapplicationtypefylicencefeeproduct(this);
             Productadoxiolicencesubcategorylicencefeeproduct = new Productadoxiolicencesubcategorylicencefeeproduct(this);
@@ -1211,17 +1366,24 @@ namespace Gov.Lclb.Cllb.Interfaces
             Sharepointsites = new Sharepointsites(this);
             Systemforms = new Systemforms(this);
             Systemusers = new Systemusers(this);
+            Mfginspectorpmuareas = new Mfginspectorpmuareas(this);
             Lkadoxiohoursofservicecreatedby = new Lkadoxiohoursofservicecreatedby(this);
             Lkadoxiohoursofservicecreatedonbehalfby = new Lkadoxiohoursofservicecreatedonbehalfby(this);
             Lkadoxiohoursofservicemodifiedby = new Lkadoxiohoursofservicemodifiedby(this);
             Lkadoxiohoursofservicemodifiedonbehalfby = new Lkadoxiohoursofservicemodifiedonbehalfby(this);
+            Lkadoxiopmuareacreatedby = new Lkadoxiopmuareacreatedby(this);
+            Lkadoxiopmuareacreatedonbehalfby = new Lkadoxiopmuareacreatedonbehalfby(this);
+            Lkadoxiopmuareamodifiedby = new Lkadoxiopmuareamodifiedby(this);
+            Lkadoxiopmuareamodifiedonbehalfby = new Lkadoxiopmuareamodifiedonbehalfby(this);
             Lkadoxioproratedlicencefeeschedulecreatedby = new Lkadoxioproratedlicencefeeschedulecreatedby(this);
             Lkadoxioproratedlicencefeeschedulecreatedonbehalfby = new Lkadoxioproratedlicencefeeschedulecreatedonbehalfby(this);
             Lkadoxioproratedlicencefeeschedulemodifiedby = new Lkadoxioproratedlicencefeeschedulemodifiedby(this);
             Lkadoxioproratedlicencefeeschedulemodifiedonbehalfby = new Lkadoxioproratedlicencefeeschedulemodifiedonbehalfby(this);
             Useradoxiohoursofservice = new Useradoxiohoursofservice(this);
+            Useradoxiopmuarea = new Useradoxiopmuarea(this);
             Useradoxioproratedlicencefeeschedule = new Useradoxioproratedlicencefeeschedule(this);
             Teamadoxiohoursofservice = new Teamadoxiohoursofservice(this);
+            Teamadoxiopmuarea = new Teamadoxiopmuarea(this);
             Teamadoxioproratedlicencefeeschedule = new Teamadoxioproratedlicencefeeschedule(this);
             Workflows = new Workflows(this);
             BaseUri = new System.Uri("http://localhost");

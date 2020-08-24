@@ -196,6 +196,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
                 else
                 {
+                    responseDict["error"] = "1";
+                    responseDict["message"] = $"Status code - {response.StatusCode.ToString()} - is not success. {response.ReasonPhrase}";
                     // if the request fails, record the response status
                     responseDict["response_code"] = response.StatusCode.ToString();
                     responseDict["response_phrase"] = response.ReasonPhrase;
@@ -203,7 +205,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             catch (Exception e)
             {
-                // ignore errors and just return null
+                responseDict["error"] = "1";
                 responseDict["message"] = e.Message;
             }
             return responseDict;
