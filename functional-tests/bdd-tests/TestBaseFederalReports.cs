@@ -39,8 +39,6 @@ namespace bdd_tests
             */
 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Federal Reporting')]")).Displayed);
-
-            ClickLicencesTab();
         }
     }
 }

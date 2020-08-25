@@ -252,7 +252,7 @@ namespace bdd_tests
                 if (applicationType == " third party operator")
                 {
                     // check that the third party operator error is shown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select the business name to be a third party operator of your licence')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please select the business name to be a third party operator of  your licence ')]")).Displayed);
                 }
 
                 if (applicationType == " picnic area endorsement")
