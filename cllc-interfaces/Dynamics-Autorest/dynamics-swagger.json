@@ -39506,9 +39506,8 @@
         "adoxio_ispackaging": {
           "type": "boolean"
         },
-        "statuscode": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_hascooleraccess": {
+          "type": "boolean"
         },
         "adoxio_initialcapassessment": {
           "type": "string"
@@ -39727,6 +39726,9 @@
           "format": "date-time",
           "type": "string"
         },
+        "_adoxio_policejurisdictionid_value": {
+          "type": "string"
+        },
         "adoxio_dateaipdecisionlettersent": {
           "format": "date-time",
           "type": "string"
@@ -39925,6 +39927,9 @@
         "adoxio_checklistfloorplanreceived": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_ispermittedinzoning": {
+          "type": "boolean"
         },
         "adoxio_holdsotherlicencesoptionset": {
           "format": "int32",
@@ -40428,8 +40433,9 @@
         "adoxio_establishmentpropsedname": {
           "type": "string"
         },
-        "_adoxio_policejurisdictionid_value": {
-          "type": "string"
+        "statuscode": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_establishmentotherbusinessname": {
           "type": "string"
@@ -42078,6 +42084,9 @@
         "adoxio_isshowliquordeclarations": {
           "type": "boolean"
         },
+        "_adoxio_applicationfeeproduct_value": {
+          "type": "string"
+        },
         "importsequencenumber": {
           "format": "int32",
           "type": "integer"
@@ -42096,10 +42105,7 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_portallabel": {
-          "type": "string"
-        },
-        "_adoxio_applicationfeeproduct_value": {
+        "adoxio_actiontext": {
           "type": "string"
         },
         "adoxio_iswineryproduction": {
@@ -42180,7 +42186,7 @@
         "adoxio_showdescription1": {
           "type": "boolean"
         },
-        "adoxio_actiontext": {
+        "adoxio_portallabel": {
           "type": "string"
         },
         "adoxio_requiressecurityscreening": {
@@ -42265,6 +42271,9 @@
         "adoxio_newestablishmentaddress": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_hasalrquestion": {
+          "type": "boolean"
         },
         "_adoxio_licencetype_value": {
           "type": "string"

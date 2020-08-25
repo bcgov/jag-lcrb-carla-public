@@ -1,21 +1,18 @@
-<div class="ngtest-zoning" [formGroup]="form">
+<div class="ngtest-zoning" [formGroup]="formGroup">
     <hr>
     <label for="">Zoning</label>
     <br>
     
     <section *ngIf="application?.licenseType === 'Manufacturer'">
-        <div>
-            <mat-checkbox>
+      <div>
+          <mat-checkbox formControlName="isPermittedInZoning">
             <span>
               By checking this box, I confirm that current zoning permits a {{application?.applicationType?.name}} on the manufacturing site.
             </span>
-            <span>
-          
-            </span>
-            </mat-checkbox>
-          </div>
-    
+          </mat-checkbox>
+      </div>
     </section>
+  
     <section *ngIf="application?.licenseType !== 'Manufacturer'"> 
       <p>Please provide proof from your local government that the proposed location has been:</p>
       <ul>

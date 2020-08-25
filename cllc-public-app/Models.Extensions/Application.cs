@@ -131,6 +131,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMfgstepsecfermorcarb = from.MfgStepSecFermOrCarb;
             to.AdoxioMfgusesneutralgrainspirits = (int?)from.MfgUsesNeutralGrainSpirits;
             to.AdoxioPidlist = from.PidList;
+            to.AdoxioIspermittedinzoning = from.IsPermittedInZoning;
 
             // here
 
@@ -242,14 +243,18 @@ namespace Gov.Lclb.Cllb.Public.Models
         public static MicrosoftDynamicsCRMadoxioLicencetype GetCachedLicenceType(string id, IDynamicsClient dynamicsClient, IMemoryCache memoryCache)
         {
             string cacheKey = CacheKeys.LicenceTypePrefix + id;
-            if (!memoryCache.TryGetValue(cacheKey, out MicrosoftDynamicsCRMadoxioLicencetype result))
+            if (memoryCache == null || !memoryCache.TryGetValue(cacheKey, out MicrosoftDynamicsCRMadoxioLicencetype result))
             {
                 // Key not in cache, so get data.
                 result = dynamicsClient.GetAdoxioLicencetypeById(id);
-                var cacheEntryOptions = new MemoryCacheEntryOptions()
+
+                if (memoryCache != null)
+                {
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
                 .SetSlidingExpiration(TimeSpan.FromDays(365));
-                // Save data in cache.
-                memoryCache.Set(cacheKey, result, cacheEntryOptions);
+                    // Save data in cache.
+                    memoryCache.Set(cacheKey, result, cacheEntryOptions);
+                }                
             }
 
             return result;
@@ -406,6 +411,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 
                 PidList = dynamicsApplication.AdoxioPidlist,
+                IsPermittedInZoning = dynamicsApplication.AdoxioIspermittedinzoning,
 
                 // Manufacturing structural change fields
 
