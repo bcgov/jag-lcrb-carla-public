@@ -161,7 +161,7 @@
         </div>
       </section> -->
 
-      <section class="submit-container mt-5" _ngcontent-ekk-c6="" style="background-color:#38598A; border-bottom: solid 4px #FFCC00; color: #fff; margin-bottom: 20px; padding: 30px; padding-top:20px;">
+      <section class="submit-container mt-5" _ngcontent-ekk-c6="" style="background-color:#38598A; border-bottom: solid 4px #FFCC00; color: #fff; margin-bottom: 20px; padding: 30px; padding-top:20px;" *ngIf="!application?.isPaid">
         <table>
           <tr>
             <td><h2 class="round-icon-wrapper"><i class="fas fa-info-circle" _ngcontent-jyo-c6="" style="color:#fff;"></i></h2></td>
@@ -169,7 +169,7 @@
           </tr>
         </table>
 
-        <div class="submit-content">
+        <div class="submit-content"> 
           <p>
             If your details are complete, you can click confirm at the bottom of the page to continue.
             Otherwise, update the information by providing the required documents and use the controls
