@@ -3,12 +3,12 @@
   <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;">APPLICATIONS</h3>
   <section style="border: 1px solid #ccc; padding: 10px;  border-bottom: 4px solid #FFCC00;">
     <section>
-      <div *ngIf="submittedApplications < 300  && !marketerExists">
+      <div *ngIf="submittedApplications < 300">
         <p>
           Use the list below to find the application type you are looking for:
         </p>
 
-        <section>
+        <section *ngIf="!marketerExists">
           <h3>CANNABIS LICENCE APPLICATIONS</h3>
           <div *ngIf="!(nonMarketerExists || marketerExists) && CRSElligible()">
             <p>
@@ -228,11 +228,11 @@
               -->
               <td style="background-color: #E1E8F2; padding: 10px;">
                 <div style="text-transform: uppercase; font-weight: 600;">
-                  <span *ngIf="!item.lgHasApproved || item.isPaid">
+                  <span *ngIf="!isApprovedByLGAndNotSubmitted(item)">
                     {{item.applicationStatus}}
                   </span>
  
-                  <span *ngIf="item.lgHasApproved && !item.isPaid">
+                  <span *ngIf="isApprovedByLGAndNotSubmitted(item)">
                     Ready for Submission
                   </span>
  

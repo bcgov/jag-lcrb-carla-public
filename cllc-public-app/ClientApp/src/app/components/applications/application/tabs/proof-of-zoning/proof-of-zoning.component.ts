@@ -12,9 +12,10 @@ import { FileUploaderComponent } from '@shared/components/file-uploader/file-upl
 })
 export class ProofOfZoningComponent extends FormBase implements OnInit {
   @Input() application: Application;
+  @Input() formGroup: FormGroup;
   @ViewChild('proofOfZoningDocs', { static: false }) mainForm: FileUploaderComponent;
   validationMessages: string[];
-  form: FormGroup;
+  // form: FormGroup;
   uploadedZoningDocuments = 0;
 
   constructor(private applicationDataService: ApplicationDataService,
@@ -23,9 +24,9 @@ export class ProofOfZoningComponent extends FormBase implements OnInit {
     }
 
   ngOnInit() {
-    this.form = this.fb.group({
+    // this.form = this.fb.group({
 
-    });
+    // });
     //this.form.patchValue(this.application);
   }
 

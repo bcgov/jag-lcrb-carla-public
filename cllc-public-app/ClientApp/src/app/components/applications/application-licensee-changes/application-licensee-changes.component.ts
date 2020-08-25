@@ -51,6 +51,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   thereIsExistingOrgStructure: boolean;
   busyPromise: Promise<any>;
   licenses: ApplicationLicenseSummary[];
+  numberOfCannabisLicences: number;
+  numberOfLiquorLicences: number;
   licencesOnFile: boolean;
   securityScreeningEnabled: boolean;
   licenseeApplicationLoaded: boolean;
@@ -90,7 +92,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
 
-    this.loadData();
+    this.loadData('on-going');
 
     this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
@@ -101,8 +103,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       });
   }
 
-  loadData() {
-    this.busy = this.applicationDataService.getOngoingLicenseeData()
+  loadData(type: 'on-going' | 'create') {
+    this.busy = this.applicationDataService.getOngoingLicenseeData(type)
       .subscribe(data => {
 
         this.application = data.application;
@@ -112,8 +114,13 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
         const currentChangeLogs: LicenseeChangeLog[] = LicenseeChangeLog.FixLicenseeChangeLogArray(data.changeLogs || []);
 
-        this.licenses = data.licenses;
-        this.licencesOnFile = (this.licenses && this.licenses.length > 0);
+        this.licenses = data.licenses || [];
+        // to do: cannabis licences & liquor licences
+        this.licencesOnFile = this.licenses.length > 0;
+
+        this.numberOfCannabisLicences = this.licenses.filter(lic => lic.licenceTypeCategory == "Cannabis" && lic.status == 'Active').length;
+        this.numberOfLiquorLicences = this.licenses.filter(lic => lic.licenceTypeCategory == "Liquor" && lic.status == 'Active').length;
+
 
         this.currentLegalEntities = data.currentHierarchy;
         this.numberOfNonTerminatedApplications = data.nonTerminatedApplications;
@@ -137,6 +144,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.licenseeApplicationLoaded = true;
       });
   }
+
 
 
   getSaveLabel(): string {
@@ -228,6 +236,13 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
   }
 
+  saveReadOnly(){
+    this.saveComplete.emit(true);
+    if (this.redirectToDashboardOnSave) {
+      this.router.navigateByUrl('/dashboard');
+    }
+  }
+
   /**
    * Sends data to dynamics
    */
@@ -243,7 +258,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
           this.busyPromise = this.prepareSaveRequest()
 
             .pipe(mergeMap(results => {
-              const saveOverrideValue = { invoicetrigger: 1 };
+              const saveOverrideValue = { invoiceTrigger: 1 };
 
               return this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue })
                 .pipe(takeWhile(() => this.componentActive))
@@ -347,6 +362,14 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       return of(true);
     }
     return this.saveForLater(false);
+  }
+  
+  calculateSubTotal(can, liq): string {
+
+      const cannabis = can * this.numberOfCannabisLicences;
+      const liquor = liq * this.numberOfLiquorLicences;
+      const total = cannabis + liquor;
+      return total.toString();
   }
 
   /**

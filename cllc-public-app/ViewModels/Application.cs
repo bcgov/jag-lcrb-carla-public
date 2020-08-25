@@ -329,7 +329,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         sh2330 = 845280094,
 
         [EnumMember(Value = "23:45")]
-        sh2345 = 845280095
+        sh2345 = 845280095,
+        [EnumMember(Value = "Closed")]
+        closed = 845280096
     }
     public enum ValueNotChanged
     {
@@ -403,7 +405,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string OtherBusinessesDetails { get; set; }
 
 
-        public GeneralYesNo InvoiceTrigger { get; set; } //adoxio_invoicetrigger
+        public GeneralYesNo? InvoiceTrigger { get; set; } //adoxio_invoicetrigger
         public ViewModels.Account Applicant { get; set; }
         public ViewModels.License AssignedLicence { get; set; }
         public string AdditionalPropertyInformation { get; set; } //adoxio_additionalpropertyinformation
@@ -445,6 +447,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool PrevPaymentFailed { get; set; }
 
         public GeneralYesNo RegisteredEstablishment { get; set; } //adoxio_registeredestablishment
+        public string ServiceHoursId { get; set; }
 
         public bool? ServicehHoursStandardHours { get; set; }
         public bool? SignatureAgreement { get; set; } //adoxio_signatureagreement  
@@ -483,6 +486,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public TiedHouseConnection TiedHouse { get; set; }
         public ViewModels.PoliceJurisdiction PoliceJurisdiction { get; set; }
         public ViewModels.IndigenousNation IndigenousNation { get; set; }
+        public ViewModels.ServiceHours ServiceHours { get; set; }
 
 
         [JsonConverter(typeof(StringEnumConverter))]
@@ -586,6 +590,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         // Manufactuer
 
         public bool? IsPackaging { get; set; }
+        public bool? IsPermittedInZoning { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNoNotApplicable? MfgBrewPubOnSite { get; set; }
@@ -599,6 +604,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? ZoningStatus { get; set; }
         public bool? IsOwnerBusiness { get; set; }      
         public bool? HasValidInterest { get; set; }
+        public bool? IsHasPatio { get; set; }
         public bool? WillHaveValidInterest { get; set; }
         //public YesNoNotApplicable? InGroceryStore { get; set; }
 
