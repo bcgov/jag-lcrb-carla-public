@@ -862,7 +862,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     // skipPayment is set via the multi-step application
     // if the application page is not the last step, we will often not want to collect payment
     if (this.skipPayment) {
-      return;
+      return of(true);
     }
 
     return this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
