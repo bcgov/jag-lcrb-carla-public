@@ -12,7 +12,7 @@
                         <th style="width: 150px;">Date of Birth</th>
                         <!-- <th *ngIf="showPHSLevel1()">Level 1 Personal History Summary </th>
                                 <th *ngIf="false">Level 2 Personal History Summary </th> -->
-                        <th style="background-color: transparent; width: 50px;">Action</th>
+                        <th *ngIf="!isReadOnly" style="background-color: transparent; width: 50px;">Action</th>
                     </tr>
                 </thead>
                 <ng-container *ngFor="let associate of associates.controls; let i = index;">
@@ -64,8 +64,8 @@
                                                             type="checkbox" style="margin-right: 5px;"
                                                             formControlName="isManagerNew"> <label
                                                             style="padding-right: 10px; font-size:10px;" for="">Senior
-                                                            Manager</label> 
-                                                            <!-- <br>
+                                                            Manager</label>
+                                                        <!-- <br>
                                                             <input
                                                             type="checkbox" style="margin-right: 5px;"
                                                             formControlName="isOwnerNew"> <label
@@ -119,13 +119,14 @@
                                 Link</button>
                         </td>
                         <td *ngIf="false"></td> -->
-                            <td style='text-align:left;'> 
-                                <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
+                            <td *ngIf="!isReadOnly" style='text-align:left;'>
+                                <i *ngIf="!associate.get('edit').value && !isReadOnly" class="btn btn-primary"
                                     (click)="associate.get('edit').value = true;" class="fas fa-pencil-alt"
                                     style="margin-right: 10px;"><span class="icon-label">Edit</span></i>
-                                <i class="fas fa-save save" *ngIf="associate.get('edit').value"
-                                    (click)="saveLog(i)" style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
-                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span class="icon-label">Delete</span></i>
+                                <i class="fas fa-save save" *ngIf="associate.get('edit').value " (click)="saveLog(i)"
+                                    style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
+                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span
+                                        class="icon-label">Delete</span></i>
                             </td>
                         </tr>
 
@@ -143,8 +144,10 @@
                                             </mat-panel-description>
                                         </mat-expansion-panel-header>
                                         <section style="text-align: left; padding-top: 15px;">
-                                            <p>Please provide a certificate of name change, marriage certificate, etc.: </p>
-                                            <app-file-uploader *ngIf="account" documentType="{{asLicenseeChangeLog(associate?.value).fileUploadPrefix}} Name Change Documents"
+                                            <p>Please provide a certificate of name change, marriage certificate, etc.:
+                                            </p>
+                                            <app-file-uploader *ngIf="account"
+                                                documentType="{{asLicenseeChangeLog(associate?.value).fileUploadPrefix}} Name Change Documents"
                                                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
                                                 entityName="account"
                                                 (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Name Change Documents', associate?.value?.refObject)"
@@ -178,7 +181,7 @@
                         <th style="width: 150px;">Date of Birth</th>
                         <!-- <th *ngIf="false">Liquor Associate Status </th>
                                 <th *ngIf="false">Cannabis Associate Status </th> -->
-                        <th style="background-color: transparent; width: 50px;">Action</th>
+                        <th *ngIf="!isReadOnly" style="background-color: transparent; width: 50px;">Action</th>
                     </tr>
                 </thead>
                 <ng-container *ngFor="let associate of associates.controls; let i = index;">
@@ -233,8 +236,9 @@
                                         [valid]="!associate.get('numberofSharesNew').touched || associate.get('numberofSharesNew').valid"
                                         errorMessage="Please enter Shares">
                                         <div class="d-flex">
-                                            <input class="form-control" type="text" (keydown)="rejectIfNotDigitOrBackSpace($event)"
-                                             formControlName="numberofSharesNew">
+                                            <input class="form-control" type="text"
+                                                (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                                                formControlName="numberofSharesNew">
                                         </div>
                                     </app-field>
                                 </ng-container>
@@ -266,13 +270,14 @@
                             </td>
                             <!-- <td *ngIf="false"></td>
                         <td *ngIf="false"></td> -->
-                        <td style='text-align:left;'>
+                            <td *ngIf="!isReadOnly" style='text-align:left;'>
                                 <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
                                     (click)="associate.get('edit').value = true;" class="fas fa-pencil-alt"
                                     style="margin-right: 10px;"><span class="icon-label">Edit</span></i>
-                                <i class="fas fa-save" *ngIf="associate.get('edit').value"
-                                    (click)="saveLog(i)" style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
-                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span class="icon-label">Delete</span></i>
+                                <i class="fas fa-save" *ngIf="associate.get('edit').value" (click)="saveLog(i)"
+                                    style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
+                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span
+                                        class="icon-label">Delete</span></i>
                             </td>
                         </tr>
 
@@ -290,8 +295,10 @@
                                             </mat-panel-description>
                                         </mat-expansion-panel-header>
                                         <section style="text-align: left; padding-top: 15px;">
-                                            <p>Please provide a certificate of name change, marriage certificate, etc.: </p>
-                                            <app-file-uploader *ngIf="account" documentType="{{asLicenseeChangeLog(associate?.value).fileUploadPrefix}} Name Change Documents"
+                                            <p>Please provide a certificate of name change, marriage certificate, etc.:
+                                            </p>
+                                            <app-file-uploader *ngIf="account"
+                                                documentType="{{asLicenseeChangeLog(associate?.value).fileUploadPrefix}} Name Change Documents"
                                                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
                                                 entityName="account"
                                                 (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Name Change Documents', associate?.value?.refObject)"
@@ -324,7 +331,7 @@
                         <th style="width: 200px;">Email</th>
                         <!-- <th *ngIf="false">Liquor Associate Status </th>
                                 <th *ngIf="false">Cannabis Associate Status </th> -->
-                        <th style="background-color: transparent; width: 50px;">Action</th>
+                        <th *ngIf="!isReadOnly" style="background-color: transparent; width: 50px;">Action</th>
                     </tr>
                 </thead>
                 <ng-container *ngFor="let associate of associates.controls; let i = index;">
@@ -362,8 +369,9 @@
                                         [isFullWidth]="true"
                                         [valid]="!associate.get('numberofSharesNew').touched || associate.get('numberofSharesNew').valid"
                                         errorMessage="Please enter Shares">
-                                        <input class="form-control" type="text" (keydown)="rejectIfNotDigitOrBackSpace($event)"
-                                        formControlName="numberofSharesNew">
+                                        <input class="form-control" type="text"
+                                            (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                                            formControlName="numberofSharesNew">
                                     </app-field>
                                 </ng-container>
                             </td>
@@ -398,14 +406,16 @@
                             </td>
                             <!-- <td *ngIf="false"></td>
                         <td *ngIf="false"></td> -->
-                        <td style='text-align:left;'>
+                            <td *ngIf="!isReadOnly" style='text-align:left;'>
                                 <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
                                     (click)="associate.get('edit').value = true; associate.get('collapse').value = true;"
-                                    class="fas fa-pencil-alt" style="margin-right: 10px;"><span class="icon-label">Edit</span></i>
+                                    class="fas fa-pencil-alt" style="margin-right: 10px;"><span
+                                        class="icon-label">Edit</span></i>
                                 <i class="fas fa-save" *ngIf="associate.get('edit').value"
                                     (click)="saveLog(i); associate.get('collapse').value = false;"
                                     style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
-                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span class="icon-label">Delete</span></i>
+                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span
+                                        class="icon-label">Delete</span></i>
                             </td>
 
                         </tr>
@@ -422,7 +432,8 @@
                                         </mat-panel-description>
                                     </mat-expansion-panel-header>
                                     <section style="text-align: left;">
-                                        <app-org-structure [node]="associate.value.refObject" [account]="account" [licencesOnFile]="licencesOnFile" #orgStructure>
+                                        <app-org-structure [node]="associate.value.refObject" [isReadOnly]="isReadOnly"
+                                            [account]="account" [licencesOnFile]="licencesOnFile" #orgStructure>
                                         </app-org-structure>
                                     </section>
                                 </mat-expansion-panel>
@@ -436,7 +447,7 @@
 
 
     <br>
-    <button class="btn btn-secondary" (click)="addAssociate()" style="text-transform: uppercase;">
+    <button *ngIf="!isReadOnly" class="btn btn-secondary" (click)="addAssociate()" style="text-transform: uppercase;">
         <i class="fas fa-plus"></i>
         {{addLabel}}</button>
 </div>

@@ -92,7 +92,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
 
-    this.loadData();
+    this.loadData('on-going');
 
     this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
@@ -103,8 +103,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       });
   }
 
-  loadData() {
-    this.busy = this.applicationDataService.getOngoingLicenseeData()
+  loadData(type: 'on-going' | 'create') {
+    this.busy = this.applicationDataService.getOngoingLicenseeData(type)
       .subscribe(data => {
 
         this.application = data.application;
@@ -234,6 +234,13 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.snackBar.open('Error cancelling Licensee Changes', 'Error', { duration: 2500, panelClass: ['red-snackbar'] });
       });
 
+  }
+
+  saveReadOnly(){
+    this.saveComplete.emit(true);
+    if (this.redirectToDashboardOnSave) {
+      this.router.navigateByUrl('/dashboard');
+    }
   }
 
   /**
