@@ -61,17 +61,7 @@ namespace bdd_tests
             Page Title: Licences
             */
 
-            string addLicenseeRepresentative = "Add Licensee Representative";
             string firstYearLicenceFee = "Pay First Year Licensing Fee";
-            
-            // find the Add Licensee Representative link
-            NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(addLicenseeRepresentative));
-            string URL = uiLicenceID.GetAttribute("href");
-
-            // retrieve the licence ID
-            string[] parsedURL = URL.Split('/');
-
-            licenceID = parsedURL[5];
 
             // click on the pay first year licence fee link
             NgWebElement uiFirstYearLicenceFee = ngDriver.FindElement(By.LinkText(firstYearLicenceFee));
