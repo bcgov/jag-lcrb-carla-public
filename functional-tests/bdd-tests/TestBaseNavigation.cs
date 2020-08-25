@@ -20,13 +20,6 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [Then(@"I return to the dashboard")]
-        public void ThenReturnToDashboard()
-        {
-            ReturnToDashboard();
-        }
-
-
         [And(@"I return to the dashboard")]
         public void ReturnToDashboard()
         {
