@@ -117,9 +117,6 @@ namespace bdd_tests
             uiSubmitAndPay.Click();
 
             MakePayment();
-
-            // confirm renewal amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1500.00')]")).Displayed);
         }
     }
 }
