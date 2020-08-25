@@ -100,6 +100,5 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(3000);
         }
-
     }
 }
