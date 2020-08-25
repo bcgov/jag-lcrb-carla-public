@@ -249,7 +249,7 @@
 
               <!-- Proof of Zoning-->
               <section *ngIf="showZoning()">
-                <app-proof-of-zoning *ngIf="application" [application]="application" #proofOfZoning>
+                <app-proof-of-zoning *ngIf="application" [application]="application" [formGroup]="form" #proofOfZoning>
                 </app-proof-of-zoning>
                 <hr>
               </section>
@@ -404,7 +404,7 @@
 
             <!-- Proof of Zoning-->
             <section *ngIf="showZoning() && !showFormControl(application?.applicationType?.newEstablishmentAddress)">
-              <app-proof-of-zoning *ngIf="application" [application]="application" #proofOfZoning>
+              <app-proof-of-zoning *ngIf="application" [application]="application" [formGroup]="form" #proofOfZoning>
               </app-proof-of-zoning>
               <hr>
       
