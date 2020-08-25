@@ -147,6 +147,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioPatioservicebar = from.PatioServiceBar;
 
             to.AdoxioProposedestablishmentisalr = from.IsAlr;
+            to.AdoxioHascooleraccess = from.HasCoolerAccess;
 
 
 
@@ -423,7 +424,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 PatioIsLiquorCarried = dynamicsApplication.AdoxioPatioisliquorcarried,
                 PatioLiquorCarriedDescription = dynamicsApplication.AdoxioPatioliquorcarrieddescription,
                 PatioAccessControlDescription = dynamicsApplication.AdoxioPatioaccesscontroldescription,
-                IsAlr = dynamicsApplication.AdoxioProposedestablishmentisalr.HasValue && (bool)dynamicsApplication.AdoxioProposedestablishmentisalr
+                IsAlr = dynamicsApplication.AdoxioProposedestablishmentisalr.HasValue && (bool)dynamicsApplication.AdoxioProposedestablishmentisalr,
+                HasCoolerAccess = dynamicsApplication.AdoxioHascooleraccess.HasValue && (bool)dynamicsApplication.AdoxioHascooleraccess
             };
 
 
