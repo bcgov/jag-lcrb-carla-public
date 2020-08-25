@@ -758,11 +758,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
           if (result) {
             // Dynamics will determine whether payment is required or not.
             // if the application is Free, it will not generate an invoice
-            this.submitPayment()
-              .subscribe(res => {
-                this.saveComplete.emit(true);
-                this.submitApplicationInProgress = false;
-              });
+            if (!this.skipPayment) {
+              this.submitPayment()
+                .subscribe(res => {
+                  this.saveComplete.emit(true);
+                  this.submitApplicationInProgress = false;
+                }, err => {
+                  this.snackBar.open('Error checking payment status', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+                }
+                );
+            }
+            
             // however we need to redirect if the application is Free
             if (this.application.applicationType.isFree) {
               this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
@@ -861,9 +867,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     // skipPayment is set via the multi-step application
     // if the application page is not the last step, we will often not want to collect payment
-    if (this.skipPayment) {
-      return of(true);
-    }
+
 
     return this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
