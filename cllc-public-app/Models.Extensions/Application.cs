@@ -146,6 +146,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioLocatedabovedescription = (int?)from.LocatedAboveDescription;
             to.AdoxioPatioservicebar = from.PatioServiceBar;
 
+            to.AdoxioProposedestablishmentisalr = from.IsAlr;
+
 
 
             // comment out this next line as it is causing all application updates to fail (moved to controller)
@@ -420,7 +422,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 PatioAccessDescription = dynamicsApplication.AdoxioPatioaccessdescription,
                 PatioIsLiquorCarried = dynamicsApplication.AdoxioPatioisliquorcarried,
                 PatioLiquorCarriedDescription = dynamicsApplication.AdoxioPatioliquorcarrieddescription,
-                PatioAccessControlDescription = dynamicsApplication.AdoxioPatioaccesscontroldescription
+                PatioAccessControlDescription = dynamicsApplication.AdoxioPatioaccesscontroldescription,
+                IsAlr = dynamicsApplication.AdoxioProposedestablishmentisalr.HasValue && (bool)dynamicsApplication.AdoxioProposedestablishmentisalr
             };
 
 
