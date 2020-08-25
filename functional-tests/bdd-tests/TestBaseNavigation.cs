@@ -239,11 +239,22 @@ namespace bdd_tests
 
         [And(@"the expiry date is changed to today")]
         public void ExpiryDateToday()
-        {
+        {            
+            string addLicenseeRepresentative = "Add Licensee Representative";
+
+            // find the Add Licensee Representative link
+            NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(addLicenseeRepresentative));
+            string URL = uiLicenceID.GetAttribute("href");
+
+            // retrieve the licence ID
+            string[] parsedURL = URL.Split('/');
+
+            licenceID = parsedURL[5];
+
             ngDriver.IgnoreSynchronization = true;
 
-            // navigate to api/Licenses/<Application ID>/setexpiry
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{applicationID}/setexpiry");
+            // navigate to api/Licenses/<Licence ID>/setexpiry
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry");
 
             // wait for the automated expiry process to run
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
