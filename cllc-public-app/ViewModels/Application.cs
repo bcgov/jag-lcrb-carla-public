@@ -639,5 +639,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string PidList { get; set; }
 
         public bool IsAlr { get; set; }
+        public bool HasCoolerAccess { get; set; }
     }
 }
