@@ -20,24 +20,6 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [Then(@"I return to the dashboard")]
-        public void ThenReturnToDashboard()
-        {
-            ReturnToDashboard();
-        }
-
-
-        [And(@"I return to the dashboard")]
-        public void ReturnToDashboard()
-        {
-            string retDash = "Return to Dashboard";
-
-            // click on Return to Dashboard link
-            NgWebElement uiReturnDash = ngDriver.FindElement(By.LinkText(retDash));
-            uiReturnDash.Click();
-        }
-
-
         [And(@"I click on the link for (.*)")]
         public void ClickOnLink(string specificLink)
         {
@@ -72,17 +54,6 @@ namespace bdd_tests
         }
 
 
-        [And(@"I click on the Dashboard link")]
-        public void ClickOnDashboard()
-        {
-            string dashboard = "Dashboard";
-
-            // click on the Dashboard link
-            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
-            uiDashboard.Click();
-        }
-
-
         [And(@"I click on the Licences tab")]
         public void ClickLicencesTab()
         {
@@ -92,6 +63,7 @@ namespace bdd_tests
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
         }
+
 
         [And(@"I click on the button for (.*)")]
         public void ClickOnButton(string specificButton)
@@ -267,11 +239,22 @@ namespace bdd_tests
 
         [And(@"the expiry date is changed to today")]
         public void ExpiryDateToday()
-        {
+        {            
+            string addLicenseeRepresentative = "Add Licensee Representative";
+
+            // find the Add Licensee Representative link
+            NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(addLicenseeRepresentative));
+            string URL = uiLicenceID.GetAttribute("href");
+
+            // retrieve the licence ID
+            string[] parsedURL = URL.Split('/');
+
+            licenceID = parsedURL[5];
+
             ngDriver.IgnoreSynchronization = true;
 
-            // navigate to api/Licenses/<Application ID>/setexpiry
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{applicationID}/setexpiry");
+            // navigate to api/Licenses/<Licence ID>/setexpiry
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry");
 
             // wait for the automated expiry process to run
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);

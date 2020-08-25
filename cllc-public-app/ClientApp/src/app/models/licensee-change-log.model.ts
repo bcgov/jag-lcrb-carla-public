@@ -239,6 +239,23 @@ export class LicenseeChangeLog {
     return keyPersonnnelChanged || individualShareholderChanged || businessShareholderChanged;
   }
 
+  public static HasLeadershipChanges(changeLog: LicenseeChangeLog): Boolean {
+    return this.GetKeyPersonnelDecendents(changeLog).length > 0;
+
+    // if a key personnel is also a shareholder, changing a shareholder amount (including shares) will return true
+  }
+
+  public static HasExternalShareholderChanges(changeLog: LicenseeChangeLog): Boolean {
+    return (this.GetIndividualShareholderDecendents(changeLog).filter(log => log.isAddChangeType()).length +
+            this.GetBusinessShareholderDecendents(changeLog).filter(log => log.isAddChangeType()).length) > 0;
+  }
+
+  public static HasInternalShareholderChanges(changeLog: LicenseeChangeLog): Boolean {
+
+    return (this.GetIndividualShareholderDecendents(changeLog).filter(log => !log.isAddChangeType()).length +
+            this.GetBusinessShareholderDecendents(changeLog).filter(log => !log.isAddChangeType()).length) > 0;
+  }
+
   public static GetIndividualShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
     let children = (changeLog && changeLog.children) || [];
     let shareholders = children.filter(item => item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
