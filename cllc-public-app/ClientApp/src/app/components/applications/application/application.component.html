@@ -296,12 +296,6 @@
               </section>
 
             </div>
-
-            <div *ngIf="!isFormControlDisabled('isHasPatio')">
-              <mat-checkbox formControlName="isHasPatio">
-                Will the {{application?.applicationType?.name}} have a patio?
-              </mat-checkbox>
-            </div>
           </section>
         </section>
         
@@ -480,6 +474,12 @@
               <app-business-plan *ngIf="application" [application]="application" [form]="form">
               </app-business-plan>
             </section>
+
+            <div *ngIf="!isFormControlDisabled('isHasPatio')">
+              <mat-checkbox formControlName="isHasPatio">
+                Will the {{application?.applicationType?.name}} have a patio?
+              </mat-checkbox>
+            </div>
 
             <!-- Dynamic form details-->
             <section *ngIf="showDynamicForm(application?.applicationType?.formReference, dynamicsForm?.tabs)">
