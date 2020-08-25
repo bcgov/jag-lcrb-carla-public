@@ -112,7 +112,9 @@ namespace bdd_tests
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
             uiSignatureAgreement.Click();
 
-            ClickOnSubmitButton();
+            // click on the Submit & Pay button
+            NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector(".btn-primary+ .btn-primary"));
+            uiSubmitAndPay.Click();
 
             MakePayment();
 
