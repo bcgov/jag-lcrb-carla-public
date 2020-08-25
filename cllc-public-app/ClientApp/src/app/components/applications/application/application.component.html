@@ -5,7 +5,9 @@
 
       <div [formGroup]="form" style="padding-left: 45px; position: relative">
         <!-- Title -->
-        <h1 class="ngtest-page-title" *ngIf="!this.isOpenedByLGForApproval">{{ htmlContent?.title }}</h1>
+        <h1 class="ngtest-page-title" *ngIf="!this.isOpenedByLGForApproval">{{ htmlContent?.title }}
+          <span *ngIf="application?.applicationStatus === 'Pending for LG/FN/Police Feedback'">(Sent to LG/IN)</span>
+        </h1>
         <h1 class="ngtest-page-title"
           *ngIf="this.isOpenedByLGForApproval && application?.applicationType.isShowLGINApproval">Provide Comment on
           Application</h1>
