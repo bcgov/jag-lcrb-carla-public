@@ -214,7 +214,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
         areaNumber: [1],
         areaLocation: [''],
         capacity: ['', Validators.required]
-      })
+      }),
+      isPermittedInZoning: ['', []]
     });
 
     this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
@@ -575,7 +576,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   checkPossibleProblematicWords() {
-    console.log(this.form.get('establishmentName').errors);
     this.possibleProblematicNameWarning =
       this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get('establishmentName').value);
   }
@@ -1091,7 +1091,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   isFormControlDisabled(fieldName: string): boolean {
-    console.log(this.form.controls[fieldName].disabled)
     return this.form.controls[fieldName].disabled;
   }
 
@@ -1114,5 +1113,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       case 'Capacity':
         return AreaCategory.Capacity;
     }
+  }
+
+  showDynamicForm(formReference, tabs) {
+    if (this.form.get('isHasPatio').enabled) {
+      return this.form.get('isHasPatio').value && formReference && tabs;
+    }
+    return formReference && tabs;
   }
 }
