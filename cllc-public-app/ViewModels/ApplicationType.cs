@@ -93,5 +93,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         [JsonConverter(typeof(StringEnumConverter))]
         public FormControlState? LetterOfIntent { get; set; }
+        public bool HasALRQuestion { get; set; }
     }
 }
