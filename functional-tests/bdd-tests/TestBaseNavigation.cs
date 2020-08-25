@@ -72,17 +72,6 @@ namespace bdd_tests
         }
 
 
-        [And(@"I click on the Dashboard link")]
-        public void ClickOnDashboard()
-        {
-            string dashboard = "Dashboard";
-
-            // click on the Dashboard link
-            NgWebElement uiDashboard = ngDriver.FindElement(By.LinkText(dashboard));
-            uiDashboard.Click();
-        }
-
-
         [And(@"I click on the Licences tab")]
         public void ClickLicencesTab()
         {
@@ -92,6 +81,7 @@ namespace bdd_tests
             NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
             uiLicences.Click();
         }
+
 
         [And(@"I click on the button for (.*)")]
         public void ClickOnButton(string specificButton)

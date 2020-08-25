@@ -31,9 +31,12 @@ Scenario: Partnership CRS Personnel Name Changes
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the link for Dashboard
     And I request a personnel name change for a partnership
     And I confirm the correct personnel name change fee for a Cannabis licence
+    And I click on the link for Dashboard
     And I confirm that the director name has been updated
+    And I click on the link for Dashboard
     And I change a personnel email address for a partnership
     And the account is deleted
     Then I see the login page
@@ -51,9 +54,12 @@ Scenario: Private Corporation CRS Personnel Name Changes
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the link for Dashboard
     And I request a personnel name change for a private corporation
     And I confirm the correct personnel name change fee for a Cannabis licence
+    And I click on the link for Dashboard
     And I confirm that the director name has been updated
+    And I click on the link for Dashboard
     And I change a personnel email address for a private corporation
     And the account is deleted
     Then I see the login page
@@ -73,7 +79,9 @@ Scenario: Public Corporation CRS Personnel Name Changes
     And I pay the licensing fee for Cannabis
     And I request a personnel name change for a public corporation
     And I confirm the correct personnel name change fee for a Cannabis licence
+    And I click on the link for Dashboard
     And I confirm that the director name has been updated
+    And I click on the link for Dashboard
     And I change a personnel email address for a public corporation
     And the account is deleted
     Then I see the login page
@@ -91,9 +99,12 @@ Scenario: Society CRS Personnel Name Changes
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the link for Dashboard
     And I request a personnel name change for a society
     And I confirm the correct personnel name change fee for a Cannabis licence
+    And I click on the link for Dashboard
     And I confirm that the director name has been updated
+    And I click on the link for Dashboard
     And I change a personnel email address for a society
     And the account is deleted
     Then I see the login page
@@ -111,9 +122,12 @@ Scenario: Sole Proprietorship CRS Personnel Name Changes
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the link for Dashboard
     And I request a personnel name change for a sole proprietorship
     And I confirm the correct personnel name change fee for a Cannabis licence
+    And I click on the link for Dashboard
     And I confirm that the director name has been updated
+    And I click on the link for Dashboard
     And I change a personnel email address for a sole proprietorship
     And the account is deleted
     Then I see the login page
