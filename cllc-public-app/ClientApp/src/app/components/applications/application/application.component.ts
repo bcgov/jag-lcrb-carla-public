@@ -421,8 +421,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       return;
     }
 
-    if (this.application.applicationType.name !== ApplicationTypeNames.SpecialEventsAreasEndorsement
-      && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) {
+    if (this.application.applicationType.name !== ApplicationTypeNames.SpecialEventAreaEndorsement
+        && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) {
       this.form.get('isHasPatio').disable();
     }
 
@@ -1117,6 +1117,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   showDynamicForm(formReference, tabs) {
     if (this.form.get('isHasPatio').enabled) {
+      console.log(this.form.get('isHasPatio').value);
+      console.log(formReference);
+      console.log(tabs);
       return this.form.get('isHasPatio').value && formReference && tabs;
     }
     return formReference && tabs;
