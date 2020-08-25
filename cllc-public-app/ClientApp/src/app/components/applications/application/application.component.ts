@@ -422,7 +422,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (this.application.applicationType.name !== ApplicationTypeNames.SpecialEventsAreasEndorsement
-        && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) {
+      && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) {
       this.form.get('isHasPatio').disable();
     }
 
@@ -766,21 +766,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
         .subscribe(([saveSucceeded, app]) => {
           if (saveSucceeded) {
             // payment is required
-            if (!this.skipPayment && app && app.adoxioInvoiceId) {
+            if (app && app.adoxioInvoiceId) {
               this.submitPayment()
                 .subscribe(res => {
                   this.saveComplete.emit(true);
                   this.submitApplicationInProgress = false;
-                }, err => {
-                  this.snackBar.open('Error checking payment status', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-                }
-                );
-            }
-            
-            // however we need to redirect if the application is Free
-            if (this.application.applicationType.isFree) {
-              this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-              this.router.navigateByUrl('/dashboard');
                 });
             } else if (app) {
               // mark application as complete
@@ -885,10 +875,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
-
-
-    // skipPayment is set via the multi-step application
-    // if the application page is not the last step, we will often not want to collect payment
     return this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(mergeMap(jsonUrl => {
