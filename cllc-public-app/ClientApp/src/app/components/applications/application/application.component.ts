@@ -422,7 +422,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (this.application.applicationType.name !== ApplicationTypeNames.SpecialEventsAreasEndorsement
-        && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) {
+      && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) {
       this.form.get('isHasPatio').disable();
     }
 
