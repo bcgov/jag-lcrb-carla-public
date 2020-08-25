@@ -252,7 +252,7 @@ namespace bdd_tests
         }
 
         [And(@"the director name is now updated")]
-        public void DirectorNameUpdated()
+        public void DirectorNameNowUpdated()
         {
             // click on Return to Dashboard link
             string retDash = "Return to Dashboard";
