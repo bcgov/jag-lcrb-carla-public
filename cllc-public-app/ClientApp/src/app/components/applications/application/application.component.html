@@ -583,9 +583,9 @@
               <h3 class="blue-header">DESCRIPTION OF PROPOSED CHANGE</h3>
               <div *ngIf="application?.applicationType?.name != 'Picnic Area Endorsement'">
                 <div class="padded-section">
-                  <app-field label="Please briefly outline the  proposed change" [required]="true" [isFullWidth]="true"
+                  <app-field label="Please briefly outline the proposed change" [required]="true" [isFullWidth]="true"
                     [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
-                    errorMessage="Please enter a description ">
+                    errorMessage="Please enter a description">
                     <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000"
                       minlength="10" id="description1"></textarea>
                   </app-field>
@@ -603,6 +603,22 @@
                 </div>
               </div>
             </section>
+
+            <!-- Cooler access -->
+            <mat-card *ngIf="!isFormControlDisabled('hasCoolerAccess')" class="mat-elevation-z0" style="margin-bottom: 10px;">
+              <section style="display: flex; justify-content: space-between; width: 100%;">
+                <div class="question-label">
+                  Is the public permitted to walk into the cooler space?
+                </div>
+                <div style="flex: 0 0 85px;">
+                  <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('hasCoolerAccess')}"
+                    formControlName="hasCoolerAccess" aria-label="Font Style">
+                    <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                    <mat-button-toggle [value]="false">No</mat-button-toggle>
+                  </mat-button-toggle-group>
+                </div>
+              </section>
+            </mat-card>
 
             <!-- Photos or Renderings of Signage-->
             <div class="ngtest-photo-signage" *ngIf="showFormControl(application?.applicationType?.signage)">
@@ -669,9 +685,7 @@
             </mat-card>
 
 
-
             <!-- Floor Plan-->
-
             <section *ngIf="showFormControl(application?.applicationType?.floorPlan)">
               <div class="ngtest-floor-plan" [formGroup]="form">
                 <hr><br>
