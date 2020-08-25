@@ -160,7 +160,7 @@ Scenario: CRS application with mixed business shareholder types
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I return to the dashboard
+    And I click on the link for Return to Dashboard
     And I click on the Complete Organization Information button
     And the mixed business shareholder org structure is correct
     And the account is deleted

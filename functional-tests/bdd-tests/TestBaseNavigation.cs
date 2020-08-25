@@ -20,17 +20,6 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I return to the dashboard")]
-        public void ReturnToDashboard()
-        {
-            string retDash = "Return to Dashboard";
-
-            // click on Return to Dashboard link
-            NgWebElement uiReturnDash = ngDriver.FindElement(By.LinkText(retDash));
-            uiReturnDash.Click();
-        }
-
-
         [And(@"I click on the link for (.*)")]
         public void ClickOnLink(string specificLink)
         {

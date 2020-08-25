@@ -28,7 +28,7 @@ Scenario: Payments for CRS and Catering Applications
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I return to the dashboard
+    And I click on the link for Return to Dashboard
     And I click on the Start Application button for Catering
     And I click on the button for Continue to Organization Review
     And I click on the button for Confirm Organization Information is Complete
@@ -36,7 +36,6 @@ Scenario: Payments for CRS and Catering Applications
     And I click on the Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I return to the dashboard
     And the account is deleted
     Then I see the login page
 */
