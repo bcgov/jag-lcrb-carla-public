@@ -138,6 +138,7 @@ export class Application {
   // Manufactuer
   licenceSubCategory: string;
   isPackaging: boolean;
+  isPermittedInZoning: boolean;
 
   mfgBrewPubOnSite: string;
   mfgPipedInProduct: string;
