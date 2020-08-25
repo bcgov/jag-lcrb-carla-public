@@ -202,6 +202,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       isAlr: ['', []],
       isOwner: ['', []],
       isOwnerBusiness: ['', []],
+      isHasPatio: ['', []],
       hasValidInterest: ['', []],
       willhaveValidInterest: ['', []],
       meetsALRRequirements: ['', []],
@@ -213,7 +214,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
         areaNumber: [1],
         areaLocation: [''],
         capacity: ['', Validators.required]
-      })
+      }),
+      isPermittedInZoning: ['', []]
     });
 
     this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
@@ -419,6 +421,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       return;
     }
 
+    if (this.application.applicationType.name !== ApplicationTypeNames.SpecialEventsAreasEndorsement
+        && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) {
+      this.form.get('isHasPatio').disable();
+    }
+
     if (!this.application.applicationType.showPropertyDetails) {
       this.form.get('establishmentAddressStreet').disable();
       this.form.get('establishmentAddressCity').disable();
@@ -561,7 +568,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       return of(true);
     } else {
       const subj = new Subject<boolean>();
-      this.busy = this.save(true).subscribe(res => {
+      this.busy = this.save(true).subscribe(([res, app]) => {
         subj.next(res);
       });
       return subj;
@@ -569,7 +576,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   checkPossibleProblematicWords() {
-    console.log(this.form.get('establishmentName').errors);
     this.possibleProblematicNameWarning =
       this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get('establishmentName').value);
   }
@@ -680,32 +686,37 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * Save form data
    * @param showProgress
    */
-  save(showProgress: boolean = false): Observable<boolean> {
+  save(showProgress: boolean = false, appData: Application = <Application>{}): Observable<[boolean, Application]> {
     const saveData = this.form.value;
 
     // do not save if the form is in file upload mode
     if (this.mode === UPLOAD_FILES_MODE) {
       // a delay is need by the deactivate guard
-      return of(true).pipe(delay(10));
+      const res: [boolean, Application] = [true, null];
+      return of(res).pipe(delay(10));
     }
     return forkJoin(
       this.applicationDataService.updateApplication({
         ...this.application,
-        ...this.normalizeFormData()
+        ...this.normalizeFormData(),
+        ...appData
       }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        return of(false);
+        const res: [boolean, Application] = [false, null];
+        return of(res);
       }))
-      .pipe(mergeMap(() => {
+      .pipe(mergeMap((data) => {
         this.savedFormData = saveData;
+        let application = data[0];
         this.updateApplicationInStore();
         if (showProgress === true) {
           this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
         }
-        return of(true);
+        const res: [boolean, Application] = [true, <Application>application];
+        return of(res);
       }));
   }
 
@@ -714,7 +725,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.saveForLaterInProgress = true;
     this.busyPromise = this.save(true)
       .toPromise()
-      .then((saveSucceeded: boolean) => {
+      .then(([saveSucceeded, app]) => {
         if (saveSucceeded) {
           this.router.navigateByUrl('/dashboard');
         } else {
@@ -746,19 +757,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * Submit the application for payment
    * */
   submit_application() {
-    const formChanged: boolean = (JSON.stringify(this.savedFormData) !== JSON.stringify(this.form.value)); // has the data been updated?
-    const save: Observable<boolean> = formChanged ? this.save(!this.application.applicationType.isFree) : of(true); // bypass save if form value not updated
 
     // Only save if the data is valid
     if (this.isValid()) {
       this.submitApplicationInProgress = true;
-      this.busy = save
+      this.busy = this.save(!this.application.applicationType.isFree, <Application>{ invoiceTrigger: 1 }) // trigger invoice generation when saving
         .pipe(takeWhile(() => this.componentActive))
-        .subscribe((result: boolean) => {
-          if (result) {
-            // Dynamics will determine whether payment is required or not.
-            // if the application is Free, it will not generate an invoice
-            if (!this.skipPayment) {
+        .subscribe(([saveSucceeded, app]) => {
+          if (saveSucceeded) {
+            // payment is required
+            if (!this.skipPayment && app && app.adoxioInvoiceId) {
               this.submitPayment()
                 .subscribe(res => {
                   this.saveComplete.emit(true);
@@ -773,6 +781,19 @@ export class ApplicationComponent extends FormBase implements OnInit {
             if (this.application.applicationType.isFree) {
               this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
               this.router.navigateByUrl('/dashboard');
+                });
+            } else if (app) {
+              // mark application as complete
+              this.save(!this.application.applicationType.isFree, <Application>{ isApplicationComplete: 'Yes' })
+                .subscribe(res => {
+                  debugger;
+                  this.saveComplete.emit(true);
+                  // however we need to redirect if the application is Free
+                  if (this.application.applicationType.isFree) {
+                    this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+                    this.router.navigateByUrl('/dashboard');
+                  }
+                });
             }
           } else if (this.application.applicationType.isFree) { // show error message the save failed and the application is free
             this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
@@ -825,7 +846,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.proceedToSecurityScreeningInProgress = true;
       this.busyPromise = this.save(true)
         .toPromise()
-        .then((saveSucceeded: boolean) => {
+        .then(([saveSucceeded, app]) => {
           this.proceedToSecurityScreeningInProgress = false;
           if (saveSucceeded) {
             this.saveComplete.next(true);
@@ -841,20 +862,20 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   private lGHasApproved() {
     let hasApproved = this.application && this.application.applicationType &&
-      (this.application.applicationType.isShowLGINApproval && 
-          (this.application.lGApprovalDecision === 'Approved' || 
+      (this.application.applicationType.isShowLGINApproval &&
+        (this.application.lGApprovalDecision === 'Approved' ||
           this.application.lGApprovalDecision === 'OptOut' ||
           this.application.lGApprovalDecision === 'Pending'
-          )
-          ) ||
+        )
+      ) ||
       (this.application.applicationType.isShowLGZoningConfirmation && this.application.lgZoning === 'Allows');
     return hasApproved;
   }
 
   private lGHasRejected() {
     let hasApproved = this.application && this.application.applicationType &&
-      (this.application.applicationType.isShowLGINApproval && 
-          (this.application.lGApprovalDecision === 'Rejected')) ||
+      (this.application.applicationType.isShowLGINApproval &&
+        (this.application.lGApprovalDecision === 'Rejected')) ||
       (this.application.applicationType.isShowLGZoningConfirmation && this.application.lgZoning === 'DoesNotAllow');
     return hasApproved;
   }
@@ -865,10 +886,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * */
   private submitPayment() {
 
+
     // skipPayment is set via the multi-step application
     // if the application page is not the last step, we will often not want to collect payment
-
-
     return this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(mergeMap(jsonUrl => {
@@ -1084,6 +1104,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       .indexOf(state) !== -1;
   }
 
+  isFormControlDisabled(fieldName: string): boolean {
+    return this.form.controls[fieldName].disabled;
+  }
+
   getEstablishmentLabel(applicationTypeName: ApplicationTypeNames): string {
     let label = 'Establishment Name';
     if ([ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(applicationTypeName) !== -1) {
@@ -1103,5 +1127,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       case 'Capacity':
         return AreaCategory.Capacity;
     }
+  }
+
+  showDynamicForm(formReference, tabs) {
+    if (this.form.get('isHasPatio').enabled) {
+      return this.form.get('isHasPatio').value && formReference && tabs;
+    }
+    return formReference && tabs;
   }
 }

@@ -14,7 +14,7 @@ export class Application {
   liquorIndustryConnectionsDetails: string;
   otherBusinesses: number;
   otherBusinessesDetails: string;
-  invoicetrigger: number;
+  invoiceTrigger: number;
 
   id: string;
   parentApplicationId: string;
@@ -138,6 +138,7 @@ export class Application {
   // Manufactuer
   licenceSubCategory: string;
   isPackaging: boolean;
+  isPermittedInZoning: boolean;
 
   mfgBrewPubOnSite: string;
   mfgPipedInProduct: string;

@@ -32,17 +32,17 @@ export class PaymentDataService extends DataService {
 
   verifyPaymentSubmission(id: string) {
     return this.http.get(this.apiPath + this.verifyPath + id, { headers: this.headers })
-    .pipe(catchError(this.handleError));
+    .pipe(catchError(this.handleErrorWith503));
   }
 
   verifyLicenceFeePaymentSubmission(id: string) {
     return this.http.get(this.apiPath + this.verifyPath + 'licence-fee/' + id, { headers: this.headers })
-    .pipe(catchError(this.handleError));
+    .pipe(catchError(this.handleErrorWith503));
   }
 
   verifyWorkerPaymentSubmission(id: string) {
     return this.http.get(`${this.apiPath}${this.verifyPath}worker/${id}`, { headers: this.headers })
-    .pipe(catchError(this.handleError));
+    .pipe(catchError(this.handleErrorWith503));
   }
 
 }

@@ -80,5 +80,7 @@ export enum ApplicationTypeNames {
   WineStore = 'Wine Store',
   RAS = "Rural Agency Store",
   MFG = "Manufacturer",
-  UBV = "UBrew and UVin"
+  UBV = "UBrew and UVin",
+  LoungeAreaEndorsment = "Lounge Area Endorsement",
+  SpecialEventsAreasEndorsement = "Special Event Area Endorsement"
 }

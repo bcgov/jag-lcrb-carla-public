@@ -58,8 +58,8 @@ export class ApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
-  getOngoingLicenseeData(): Observable<OngoingLicenseeData> {
-    return this.http.get<OngoingLicenseeData>(this.apiPath + 'ongoing-licensee-data', { headers: this.headers })
+  getOngoingLicenseeData(type: 'on-going'| 'create'): Observable<OngoingLicenseeData> {
+    return this.http.get<OngoingLicenseeData>(`${this.apiPath}licensee-data/${type}`, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
