@@ -240,10 +240,10 @@ namespace bdd_tests
         [And(@"the expiry date is changed to today")]
         public void ExpiryDateToday()
         {            
-            string addLicenseeRepresentative = "Add Licensee Representative";
+            string transferLicence = "Transfer Licence";
 
-            // find the Add Licensee Representative link
-            NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(addLicenseeRepresentative));
+            // find the Transfer Licence link
+            NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(transferLicence));
             string URL = uiLicenceID.GetAttribute("href");
 
             // retrieve the licence ID
