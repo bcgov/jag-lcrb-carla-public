@@ -214,7 +214,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
         areaNumber: [1],
         areaLocation: [''],
         capacity: ['', Validators.required]
-      })
+      }),
+      isPermittedInZoning: ['', []]
     });
 
     this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
