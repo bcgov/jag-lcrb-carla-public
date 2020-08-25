@@ -54,6 +54,8 @@ export class ApplicationType {
   serviceAreas: boolean;
   outsideAreas: boolean;
   capacityArea: boolean;
+
+  hasALRQuestion: boolean;
 }
 
 export enum FormControlState {
@@ -82,5 +84,5 @@ export enum ApplicationTypeNames {
   MFG = "Manufacturer",
   UBV = "UBrew and UVin",
   LoungeAreaEndorsment = "Lounge Area Endorsement",
-  SpecialEventsAreasEndorsement = "Special Events Areas Endorsement"
+  SpecialEventAreaEndorsement = "Special Event Area Endorsement"
 }

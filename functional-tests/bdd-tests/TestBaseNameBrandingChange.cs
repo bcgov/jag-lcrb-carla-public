@@ -20,6 +20,7 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
+        /*
         [And(@"I confirm the name or branding change is displayed on the dashboard")]
         public void RequestedNameChangeOnDashboard()
         {
@@ -27,11 +28,12 @@ namespace bdd_tests
 
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
-            */
+            
 
             // confirm that a name or branding change request is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Name or Branding Change')]")).Displayed);
         }
+        */
 
 
         [And(@"I request a valid store name or branding change for (.*)")]
@@ -105,9 +107,6 @@ namespace bdd_tests
 
             // confirm correct payment amount	
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
-
-            // return to the Licences tab
-            ClickLicencesTab();
         }
     }
 }

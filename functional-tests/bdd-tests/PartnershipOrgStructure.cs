@@ -31,7 +31,7 @@ Scenario: Change individual partner name and pay fee
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Cannabis
-    And I click on the Dashboard link
+    And I click on the link for Dashboard
     And I click on the Review Organization Information button
     And I modify only the individual partner name
     And I click on the button for Submit Organization Information
