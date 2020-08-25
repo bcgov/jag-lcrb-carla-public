@@ -17,6 +17,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
   @Input() rootNode: LicenseeChangeLog;
   @Input() account: Account;
   @Input() licencesOnFile: boolean;
+  @Input() isReadOnly: boolean;
   @Input() changeTypeSuffix: string;
   @Input() addLabel: string = 'Add Associate';
   @Output() childAdded = new EventEmitter<LicenseeChangeLog>();

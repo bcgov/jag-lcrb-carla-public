@@ -3,9 +3,9 @@
 
   <div *ngIf="licenseeApplicationLoaded">
     <section class="col-md-8">
-      <app-org-structure *ngIf="licenseeApplicationLoaded" [node]="treeRoot" [account]="account" [licencesOnFile]="licencesOnFile" #orgStructure></app-org-structure>
+      <app-org-structure *ngIf="licenseeApplicationLoaded" [isReadOnly]="application?.isPaid" (reportAdditionalChanges)="loadData('create')" [node]="treeRoot" [account]="account" [licencesOnFile]="licencesOnFile" #orgStructure></app-org-structure>
       <p>&nbsp;</p>
-      <section class="d-flex" *ngIf="licencesOnFile && LicenseeChangeLog.HasChanges(this.treeRoot)">
+      <section class="d-flex" *ngIf="!application?.isPaid && licencesOnFile && LicenseeChangeLog.HasChanges(this.treeRoot)">
 
         <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
         <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
@@ -51,7 +51,7 @@
         </div>
       </section>
 
-      <section class="error mt-3" *ngIf="validationErrors?.length">
+      <section class="error mt-3" *ngIf="validationErrors?.length && !application?.isPaid">
         <p *ngFor="let message of validationErrors">
           <span class="app-cancel">
             <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
@@ -60,7 +60,7 @@
         </p>
       </section>
 
-      <section class="mt-5" style="position: relative;">
+      <section *ngIf="!application?.isPaid" class="mt-5" style="position: relative;">
         <button *ngIf="treeRoot" class="btn btn-secondary" style="margin-right:10px;" (click)="saveForLater()">
           <span>
             <i class="fa fa-save"></i>
@@ -78,6 +78,14 @@
                 (click)="save()">
           <i class="fa fa-save" style="color: #fff;"></i>
           {{getSaveLabel()}}
+        </button>
+      </section>
+
+      <section *ngIf="application?.isPaid" class="mt-5" style="position: relative;">
+        <button *ngIf="treeRoot" class="btn btn-primary" name="submit-application" style="float: right;"
+                (click)="saveReadOnly()">
+          <i class="fa fa-save" style="color: #fff;"></i>
+          Confirm Organization Information Is Complete
         </button>
       </section>
     </section>
