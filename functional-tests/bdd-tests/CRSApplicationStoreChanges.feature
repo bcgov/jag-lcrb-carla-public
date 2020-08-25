@@ -19,6 +19,7 @@ Scenario: Indigenous Nation Cannabis Store Changes
     And I request a store relocation for Cannabis
     And I request a structural change
     And I request a transfer of ownership
+    And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
@@ -40,6 +41,7 @@ Scenario: Partnership Cannabis Store Changes
     And I request a store relocation for Cannabis
     And I request a structural change
     And I request a transfer of ownership
+    And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
@@ -61,6 +63,7 @@ Scenario: Private Corporation Cannabis Store Changes
     And I request a store relocation for Cannabis
     And I request a structural change
     And I request a transfer of ownership
+    And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
@@ -82,6 +85,7 @@ Scenario: Public Corporation Cannabis Store Changes
     And I request a store relocation for Cannabis
     And I request a structural change
     And I request a transfer of ownership
+    And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
@@ -103,6 +107,7 @@ Scenario: Society Cannabis Store Changes
     And I request a store relocation for Cannabis
     And I request a structural change
     And I request a transfer of ownership
+    And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
@@ -124,6 +129,7 @@ Scenario: Sole Proprietorship Cannabis Store Changes
     And I request a store relocation for Cannabis
     And I request a structural change
     And I request a transfer of ownership
+    And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And I confirm the structural change request is displayed on the dashboard
     And the account is deleted

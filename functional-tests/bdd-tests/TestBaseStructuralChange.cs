@@ -99,8 +99,6 @@ namespace bdd_tests
         [And(@"I confirm the structural change request is displayed on the dashboard")]
         public void RequestedStructuralChangeOnDashboard()
         {
-            ClickOnDashboard();
-
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
